@@ -2,40 +2,103 @@ Instructions for Claude Code when working on this project.
 
 ## Project Purpose
 
-This is a research experiment exploring whether LLM-assisted fact-checking can reliably support Wikidata contributions. The goal is to understand the practical constraints—not to maximize edit volume, but to understand what “correct” looks like.
+This is a research experiment exploring whether LLM-assisted fact-checking can reliably support Wikidata contributions. The goal is to understand the practical constraints—not to maximize edit volume, but to understand what "correct" looks like.
 
 ## Core Principles
 
 ### 1. No edits to production Wikidata
 
-All pywikibot operations target `test.wikidata.org` only. The config enforces this, but double-check before any edit operation. If you’re uncertain whether something targets test or production, stop and verify.
+All pywikibot operations target `test.wikidata.org` only. The config enforces this, but double-check before any edit operation. If you're uncertain whether something targets test or production, stop and verify.
 
 ### 2. Every claim needs a verifiable reference
 
-Wikidata’s standard: claims should be verifiable from reliable published sources. This means:
+Wikidata's standard: claims should be verifiable from reliable published sources. This means:
 
 - Primary sources (official websites, government records) are preferred
 - Secondary sources (news, encyclopedias) are acceptable with appropriate caution
-- No claim should rely solely on LLM “knowledge”—always fetch and cite an actual source
+- No claim should rely solely on LLM "knowledge"—always fetch and cite an actual source
 
-### 3. Log everything
+### 3. Log everything in machine-readable format
 
-Before making any edit, log:
+All fact-checking output should be logged in structured YAML format (see `prompts/wikidata-fact-check.md` for schema). Write logs to `logs/` with timestamps. This provenance chain is the main research output.
 
-- The proposed claim (item, property, value)
-- Sources consulted and their URLs
-- Confidence assessment
-- Any ambiguity or uncertainty encountered
-
-Write logs to `logs/` with timestamps. This provenance chain is the main research output.
-
-### 4. Respect Wikidata’s data model
+### 4. Respect Wikidata's data model
 
 When adding claims, include:
 
 - **References**: At minimum, `stated in` (P248) or `reference URL` (P854) with `retrieved` (P813)
-- **Precision**: Dates need appropriate precision (year vs. day). Don’t claim false precision.
+- **Precision**: Dates need appropriate precision (year vs. day). Don't claim false precision.
 - **Qualifiers**: Use when relevant (e.g., `start time`, `end time` for things that change)
+
+## Session Management with Chainlink
+
+This project uses [chainlink](https://github.com/dollspace-gay/chainlink) to track fact-checking sessions and preserve context across conversations.
+
+### When to Create Issues
+
+Create chainlink issues:
+
+1. **At session start**: When beginning a fact-checking task
+   ```bash
+   chainlink new "Verify: [Item Label] - [what you're checking]"
+   ```
+
+2. **When discovering new work**: During fact-checking, you may discover:
+   - Organizations, awards, or other entities that need Wikidata items
+   - Related claims that need separate verification
+   - Conflicts with existing data that need investigation
+
+   Create subissues or new issues for these:
+   ```bash
+   chainlink new "Create item: [Entity Name]" --parent [parent-issue-id]
+   ```
+
+### Session Workflow
+
+```bash
+# Start session - see previous handoff notes
+chainlink session start
+
+# Set current working issue
+chainlink set [issue-id]
+
+# Log progress as you work
+chainlink comment "Found primary source: [url]"
+chainlink comment "Verified birth date with high confidence"
+
+# End session with handoff notes
+chainlink session end --notes "Verified X, Y. Blocked on Z - need [specific source]"
+```
+
+### Issue Structure
+
+```
+Main issue: "Verify: Douglas Adams biographical claims"
+├── Subissue: "Verify birth date"
+├── Subissue: "Verify nationality"
+├── Subissue: "Create item: The Hitchhiker's Guide (if missing)"
+└── Subissue: "Resolve conflict: death date precision"
+```
+
+## Fact-Checking Protocol
+
+The full fact-checking methodology is in `prompts/wikidata-fact-check.md`. Key principles:
+
+### SIFT Framework
+- **Stop** - Don't accept claims at face value
+- **Investigate the source** - Who published this? What's their authority?
+- **Find better coverage** - What do other reliable sources say?
+- **Trace claims** - Find the original/primary source
+
+### Evidence Types
+See `prompts/wikidata-fact-check.md` for the full evidence type taxonomy and how each maps to Wikidata reference properties.
+
+### Wikidata-Specific Checks
+Before proposing any claim:
+1. Does this property exist? Is it the right one for this claim?
+2. How do similar items model this relationship?
+3. Are there existing claims that conflict?
+4. What precision is actually supported by the source?
 
 ## Working with pywikibot
 
@@ -75,23 +138,6 @@ query = '''SELECT ?item WHERE { ?item wdt:P31 wd:Q5 . } LIMIT 10'''
 generator = pagegenerators.WikidataSPARQLPageGenerator(query, site=site)
 ```
 
-## Fact-Checking Protocol
-
-Adapt from the CheckPlease methodology:
-
-1. **Identify the atomic claim** — break complex statements into individual verifiable facts
-1. **Search for authoritative sources** — prefer primary sources, official records
-1. **Verify the specific fact** — not just “this source talks about the topic” but “this source confirms this specific claim”
-1. **Assess source reliability** — is this source authoritative for this type of claim?
-1. **Note any caveats** — temporal limitations, geographic scope, definitional ambiguity
-1. **Record confidence level** — high/medium/low with reasoning
-
-For Wikidata specifically, also consider:
-
-- Does this property exist? Is it the right property for this claim?
-- What’s the conventional way to model this in Wikidata? (Check similar items)
-- Are there existing claims that conflict?
-
 ## Useful Commands
 
 ```bash
@@ -100,6 +146,11 @@ python -c "import pywikibot; print(pywikibot.Site('test', 'wikidata'))"
 
 # Run a script with throttling (pywikibot handles this, but be aware)
 python -m pywikibot.scripts.login  # interactive login if needed
+
+# Chainlink basics
+chainlink list              # see all issues
+chainlink show [id]         # see issue details
+chainlink session status    # see current session state
 ```
 
 ## What Success Looks Like
@@ -109,7 +160,7 @@ The research output is understanding, not volume. Success is:
 - Clear documentation of what fact-checking steps are necessary
 - Realistic estimates of time/effort per claim
 - Identified failure modes (where does LLM fact-checking fall short?)
-- A refined prompt methodology tuned for Wikidata’s norms
+- A refined prompt methodology tuned for Wikidata's norms
 - Enough logged examples to analyze patterns
 
 ## Questions to Explore
@@ -118,6 +169,6 @@ As you work, note observations about:
 
 - Which types of claims are easy vs. hard to verify?
 - Where do source quality judgments get tricky?
-- What’s the gap between “LLM thinks this is true” and “verifiable from cited source”?
+- What's the gap between "LLM thinks this is true" and "verifiable from cited source"?
 - How often do you find conflicting information?
 - What would a sustainable human-in-the-loop workflow look like?
