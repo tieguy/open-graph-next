@@ -104,8 +104,10 @@ chainlink comment [parent_id] "Properties to verify: [list]"
 
 Pick the first open subissue (property) to work on:
 ```bash
-chainlink list --parent [parent_id]
+chainlink tree
 ```
+
+This shows the issue hierarchy. Select the first open subissue under the parent.
 
 Set it as current work:
 ```bash
