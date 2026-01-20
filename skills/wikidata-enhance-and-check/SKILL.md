@@ -426,3 +426,137 @@ When resuming a session (no item ID provided):
 
 4. If no pending execution, continue with next unverified property
 
+## Claim Execution
+
+### Executing Approved Claims
+
+When resuming a session, check for approved-but-not-executed claims:
+
+1. Parse the previous handoff notes for "Status: APPROVED, awaiting execution"
+2. Read the referenced log file to get claim details
+3. Execute the claim via pywikibot
+
+### Pre-Execution Safety Check
+
+**CRITICAL: Verify target is test.wikidata.org before ANY write operation.**
+
+```python
+import pywikibot
+
+# MUST use 'test' - this targets test.wikidata.org
+site = pywikibot.Site('test', 'wikidata')
+repo = site.data_repository()
+
+# Double-check we're on test
+assert 'test' in str(site), "SAFETY CHECK FAILED: Not on test.wikidata.org!"
+```
+
+If the safety check fails, STOP immediately and alert the user.
+
+### Execution by Value Type
+
+**For item values (Q-numbers):**
+
+```python
+import pywikibot
+
+site = pywikibot.Site('test', 'wikidata')
+repo = site.data_repository()
+
+# Get the item to modify
+item = pywikibot.ItemPage(repo, '[ITEM_ID]')  # e.g., 'Q42'
+item.get()
+
+# Create the claim
+claim = pywikibot.Claim(repo, '[PROPERTY_ID]')  # e.g., 'P31'
+target = pywikibot.ItemPage(repo, '[VALUE_ITEM_ID]')  # e.g., 'Q5'
+claim.setTarget(target)
+
+# Add reference
+ref_url = pywikibot.Claim(repo, 'P854')  # reference URL
+ref_url.setTarget('[SOURCE_URL]')
+
+retrieved = pywikibot.Claim(repo, 'P813')  # retrieved date
+retrieved.setTarget(pywikibot.WbTime(year=[YEAR], month=[MONTH], day=[DAY]))
+
+claim.addSources([ref_url, retrieved])
+
+# Add the claim to the item
+item.addClaim(claim, summary='Adding [property label] with reference (via wikidata-enhance-and-check)')
+
+print(f"Successfully added claim to {item.id}")
+```
+
+**For date values:**
+
+```python
+# Create date with appropriate precision
+# precision: 9 = year, 10 = month, 11 = day
+date_value = pywikibot.WbTime(
+    year=[YEAR],
+    month=[MONTH],  # optional, omit for year precision
+    day=[DAY],       # optional, omit for month precision
+    precision=[PRECISION]
+)
+claim.setTarget(date_value)
+```
+
+**For string values:**
+
+```python
+claim.setTarget('[STRING_VALUE]')
+```
+
+**For quantity values:**
+
+```python
+quantity = pywikibot.WbQuantity(
+    amount=[AMOUNT],
+    unit='http://www.wikidata.org/entity/[UNIT_ITEM]'  # e.g., Q11573 for meters
+)
+claim.setTarget(quantity)
+```
+
+### Post-Execution Updates
+
+After successful execution:
+
+1. **Update the YAML log file:**
+   - Set `executed: true`
+   - Add `execution_date: [YYYY-MM-DD]`
+
+2. **Update chainlink:**
+   ```bash
+   chainlink comment [subissue_id] "EXECUTED: Claim added to test.wikidata.org"
+   chainlink close [subissue_id]
+   ```
+
+3. **Announce to user:**
+   ```
+   Executed claim: [Property Label] = [Value]
+   Item: [Item Label] ([Q-id]) on test.wikidata.org
+
+   Continuing with next property...
+   ```
+
+### Handling Execution Errors
+
+If pywikibot execution fails:
+
+1. Log the error:
+   ```bash
+   chainlink comment [subissue_id] "EXECUTION FAILED: [error message]"
+   ```
+
+2. Ask user how to proceed:
+   ```
+   AskUserQuestion:
+     Question: "Claim execution failed. How should we proceed?"
+     Header: "Error"
+     Options:
+       - "Retry execution" (Try again)
+       - "Skip and continue" (Move to next property)
+       - "End session" (Stop and investigate manually)
+   ```
+
+3. If skipping, do NOT mark subissue as closed - leave it for later retry
