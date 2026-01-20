@@ -382,11 +382,49 @@ chainlink comment [subissue_id] "Logged to: logs/wikidata-enhance/[filename].yam
 For fact-checking methodology (SIFT framework, evidence types, source reliability), see:
 `docs/wikidata-methodology.md`
 
-## Next Steps
+## Session End
 
-After SIFT verification and confidence assessment, proceed to claim creation and human approval (not yet implemented in this scaffold).
+### Step 14: End Session with Handoff
 
-End the session with handoff notes:
+After logging an approved claim, end the session:
+
+**Update the "Next Steps" section to remove the scaffold placeholder and add:**
+
 ```bash
-chainlink session end --notes "Item: [Q-id]. Properties verified: [list]. Confidence assessments logged. Next: implement claim creation phase."
+chainlink session end --notes "Item: [Q-id] ([Item Label])
+Approved: P[xxx] ([Property Label]) = [value]
+Status: APPROVED, awaiting execution
+Log file: logs/wikidata-enhance/[filename].yaml
+Next session: Execute approved claim, then continue to next property
+Remaining properties: [list of unverified properties]"
 ```
+
+Announce to user:
+
+```
+Session complete.
+
+**Approved claim:** [Property Label] = [Value]
+**Confidence:** [level]
+**Log file:** logs/wikidata-enhance/[filename].yaml
+
+Next session will execute this claim to test.wikidata.org and continue with remaining properties.
+
+To resume: `/wikidata-enhance-and-check`
+```
+
+## Session Resume
+
+When resuming a session (no item ID provided):
+
+1. Check chainlink session status:
+   ```bash
+   chainlink session start
+   ```
+
+2. Look for approved-but-not-executed claims in recent handoff notes
+
+3. If found, proceed to claim execution (Phase 5)
+
+4. If no pending execution, continue with next unverified property
+
