@@ -1,5 +1,7 @@
 Instructions for Claude Code when working on this project.
 
+Last updated: 2026-01-19
+
 ## Project Purpose
 
 This is a research experiment exploring whether LLM-assisted fact-checking can reliably support Wikidata contributions. The goal is to understand the practical constraints—not to maximize edit volume, but to understand what "correct" looks like.
@@ -20,7 +22,7 @@ Wikidata's standard: claims should be verifiable from reliable published sources
 
 ### 3. Log everything in machine-readable format
 
-All fact-checking output should be logged in structured YAML format (see `prompts/wikidata-fact-check.md` for schema). Write logs to `logs/` with timestamps. This provenance chain is the main research output.
+All fact-checking output should be logged in structured YAML format (see `skills/wikidata-enhance-and-check/SKILL.md` for the schema in Step 13). Write logs to `logs/wikidata-enhance/` with timestamps. This provenance chain is the main research output.
 
 ### 4. Respect Wikidata's data model
 
@@ -82,7 +84,7 @@ Main issue: "Verify: Douglas Adams biographical claims"
 
 ## Fact-Checking Protocol
 
-The full fact-checking methodology is in `prompts/wikidata-fact-check.md`. Key principles:
+The full fact-checking methodology is in `docs/wikidata-methodology.md`. Key principles:
 
 ### SIFT Framework
 - **Stop** - Don't accept claims at face value
@@ -91,7 +93,7 @@ The full fact-checking methodology is in `prompts/wikidata-fact-check.md`. Key p
 - **Trace claims** - Find the original/primary source
 
 ### Evidence Types
-See `prompts/wikidata-fact-check.md` for the full evidence type taxonomy and how each maps to Wikidata reference properties.
+See `docs/wikidata-methodology.md` for the full evidence type taxonomy and how each maps to Wikidata reference properties.
 
 ### Wikidata-Specific Checks
 Before proposing any claim:
@@ -99,6 +101,12 @@ Before proposing any claim:
 2. How do similar items model this relationship?
 3. Are there existing claims that conflict?
 4. What precision is actually supported by the source?
+
+## Skills
+
+This project includes Claude Code skills for structured workflows:
+
+- **wikidata-enhance-and-check** (`skills/wikidata-enhance-and-check/SKILL.md`): Systematically verify and add claims to Wikidata test items with SIFT methodology, human approval gates, and chainlink session tracking. Invoke with `/wikidata-enhance-and-check Q42` or just `/wikidata-enhance-and-check` to resume.
 
 ## Working with pywikibot
 
