@@ -304,6 +304,79 @@ AskUserQuestion:
    ```
 3. End session with notes about what's needed
 
+## Logging
+
+### Step 13: Log Approved Claim to YAML
+
+When a claim is approved, create a YAML log file:
+
+**File path:** `logs/wikidata-enhance/[date]-[item_id]-[property_id].yaml`
+
+Example: `logs/wikidata-enhance/2026-01-19-Q42-P569.yaml`
+
+**Create the logs directory if it doesn't exist:**
+```bash
+mkdir -p logs/wikidata-enhance
+```
+
+**YAML format:**
+
+```yaml
+session_date: [YYYY-MM-DD]
+item: [Q-id]
+item_label: [Item Label]
+property: [P-id]
+property_label: [Property Label]
+chainlink_issue: [issue_id]
+chainlink_subissue: [subissue_id]
+
+sources_consulted:
+  - url: "[source URL]"
+    name: "[source name]"
+    type: [primary|secondary|official|news|academic]
+    reliability: [1-5]
+    useful_for: "[what claims this supports]"
+  # ... additional sources
+
+verification:
+  sift_steps:
+    stop: "[what you questioned before accepting]"
+    investigate: "[source assessment]"
+    find_better: "[cross-reference findings]"
+    trace: "[primary source status]"
+  evidence_type: [documentation|reporting|analysis|statistics|testimony]
+  confidence: [high|medium|low]
+  confidence_reasoning: "[why this confidence level]"
+
+result:
+  status: verified
+  value: "[the value to add]"
+  value_type: [item|string|time|quantity]
+  precision: [year|month|day]  # for dates
+  references:
+    - reference_url: "[primary source URL]"
+      retrieved: [YYYY-MM-DD]
+    - stated_in: [Q-id]  # if applicable
+      page: "[page number]"  # if applicable
+
+human_approval: true
+approved_by: human
+approval_date: [YYYY-MM-DD]
+executed: false
+```
+
+**Write the file using the Write tool or bash:**
+```bash
+cat > logs/wikidata-enhance/[filename].yaml << 'EOF'
+[YAML content]
+EOF
+```
+
+Log the file creation to chainlink:
+```bash
+chainlink comment [subissue_id] "Logged to: logs/wikidata-enhance/[filename].yaml"
+```
+
 ## Methodology Reference
 
 For fact-checking methodology (SIFT framework, evidence types, source reliability), see:
