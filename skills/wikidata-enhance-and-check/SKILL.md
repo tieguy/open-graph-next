@@ -388,8 +388,6 @@ For fact-checking methodology (SIFT framework, evidence types, source reliabilit
 
 After logging an approved claim, end the session:
 
-**Update the "Next Steps" section to remove the scaffold placeholder and add:**
-
 ```bash
 chainlink session end --notes "Item: [Q-id] ([Item Label])
 Approved: P[xxx] ([Property Label]) = [value]
