@@ -413,18 +413,56 @@ To resume: `/wikidata-enhance-and-check`
 
 ## Session Resume
 
-When resuming a session (no item ID provided):
+When invoked without an item ID (`/wikidata-enhance-and-check`):
 
-1. Check chainlink session status:
+### Step 1: Start Session and Check History
+
+```bash
+chainlink session start
+```
+
+Check for recent sessions with pending work. Look at the last session's handoff notes.
+
+### Step 2: Check for Pending Execution
+
+Parse the handoff notes. If they contain "Status: APPROVED, awaiting execution":
+
+1. Extract the log file path from handoff notes
+2. Read the log file to get claim details:
    ```bash
-   chainlink session start
+   cat logs/wikidata-enhance/[filename].yaml
+   ```
+3. Proceed to Claim Execution section
+
+### Step 3: Continue with Verification
+
+If no pending execution:
+
+1. Find the parent issue for the current item
+2. List open subissues (unverified properties):
+   ```bash
+   chainlink list --parent [parent_id] --status open
+   ```
+3. If open subissues exist, select the first one and continue from Step 6 (Source Discovery)
+4. If all subissues closed, the item is complete:
+   ```bash
+   chainlink close [parent_id]
+   chainlink session end --notes "Item [Q-id] enhancement complete. All properties verified."
    ```
 
-2. Look for approved-but-not-executed claims in recent handoff notes
+### Step 4: No Active Work
 
-3. If found, proceed to claim execution (Phase 5)
+If no chainlink session history or no open work:
 
-4. If no pending execution, continue with next unverified property
+Ask user what to do:
+```
+AskUserQuestion:
+  Question: "No active enhancement session found. What would you like to do?"
+  Header: "Start"
+  Options:
+    - "Start new item" (Provide a Q-id to enhance)
+    - "List recent issues" (Show chainlink issues to resume)
+```
 
 ## Claim Execution
 
