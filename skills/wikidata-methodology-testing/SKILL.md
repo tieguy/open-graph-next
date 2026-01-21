@@ -86,6 +86,33 @@ For each selected property, follow the full SIFT methodology from `docs/wikidata
 4. **Find:** Cross-reference multiple sources
 5. **Trace:** Locate primary sources
 
+### Step 4b: Check for Redundancy
+
+**BEFORE proposing any claim, check if the information already exists:**
+
+```bash
+python scripts/check_redundancy.py Q42 P512
+```
+
+**Output if redundant (exit code 2):**
+```
+⚠ REDUNDANT: P512 already exists on Douglas Adams (Q42)
+
+  • Qualifier on P69 (St John's College): P512 = Bachelor of Arts
+```
+
+**Output if not redundant (exit code 0):**
+```
+✓ OK: P512 not found on Douglas Adams (Q42)
+  Property can be added as a new claim.
+```
+
+**If redundant:**
+- Set `claim_status: redundant` in the log
+- Set `quickstatements: null`
+- Add comment explaining where the data already exists (copy from script output)
+- Skip to next property
+
 ### Step 5: Propose Claim (No Execution)
 
 For each verified property, create a proposed claim.
@@ -147,7 +174,7 @@ entity_type: [human|organization|creative_work]
 property: [P-id]
 property_label: [label]
 property_selected_by: system
-claim_status: [existing|new]  # Is this verifying an existing claim or proposing a new one?
+claim_status: [existing|new|redundant]  # existing=verifying, new=proposing, redundant=info exists elsewhere (e.g., as qualifier)
 
 sources_consulted:
   - source_name: "[human-readable name]"
