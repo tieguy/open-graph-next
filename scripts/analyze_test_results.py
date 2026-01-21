@@ -5,7 +5,6 @@ Analyze SIFT methodology test results from YAML logs.
 Usage: python scripts/analyze_test_results.py
 """
 
-import os
 import yaml
 from pathlib import Path
 from collections import Counter, defaultdict
