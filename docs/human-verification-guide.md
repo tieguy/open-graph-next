@@ -60,6 +60,7 @@ When `sift_correct: false` or `proposed_value_correct: false`, classify the fail
 | Failure Mode | Description | Example |
 |--------------|-------------|---------|
 | `hallucinated_source` | Source URL doesn't exist or returns 404 | LLM cited a URL that was never real |
+| `hallucinated_qid` | Q-id doesn't exist or refers to wrong item | LLM generated Q4917336 for "Bachelor of Arts" but it's actually a city in Rajasthan |
 | `wrong_source` | Source exists but is about different entity/topic | Cited a page about a different person with same name |
 | `misread_source` | Source exists but doesn't support the claim | Source mentions entity but not this property |
 | `incorrect_value` | Source supports a claim but with different value | Source says 1952, LLM proposed 1953 |

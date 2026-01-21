@@ -88,7 +88,35 @@ For each selected property, follow the full SIFT methodology from `docs/wikidata
 
 ### Step 5: Propose Claim (No Execution)
 
-For each verified property, create a proposed claim:
+For each verified property, create a proposed claim.
+
+**CRITICAL: Verify ALL Q-ids via lookup.** LLMs hallucinate plausible-looking Q-ids. Never trust a Q-id from memory.
+
+**For every Q-id in your claim (values, qualifiers, references), you MUST verify using:**
+
+```bash
+# Verify a Q-id matches expected label
+python scripts/verify_qid.py Q1765120 "Bachelor of Arts"
+# Output: ✓ MATCH or ✗ MISMATCH
+
+# Search for the correct Q-id by label
+python scripts/verify_qid.py --search "Bachelor of Arts"
+# Output: List of matching Q-ids with descriptions
+
+# Just check what a Q-id is
+python scripts/verify_qid.py Q4917336
+# Output: Q4917336: Bishangarh (City in Rajasthan, India)
+```
+
+**Example of catching a hallucinated Q-id:**
+```
+$ python scripts/verify_qid.py Q4917336 "Bachelor of Arts"
+Q4917336: Bishangarh
+  Description: City in Rajasthan, India
+  ✗ MISMATCH: Expected 'Bachelor of Arts', got 'Bishangarh'
+```
+
+**Proposed claim format:**
 
 ```yaml
 proposed_claim:
@@ -170,7 +198,7 @@ human_verification:
   sift_correct: null  # true/false - Was the SIFT methodology correctly applied?
   proposed_value_correct: null  # true/false - Is the proposed value accurate?
   actual_value: null  # if different from proposed
-  failure_mode: null  # hallucinated_source|misread_source|wrong_property|incorrect_value|insufficient_precision|other
+  failure_mode: null  # hallucinated_source|hallucinated_qid|misread_source|wrong_property|incorrect_value|insufficient_precision|other
   notes: null
 ```
 
