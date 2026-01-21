@@ -69,7 +69,7 @@ sift_verification:
 proposed_claim:
   value: "Bachelor of Arts"
   value_type: item
-  value_qid: Q4917336
+  value_qid: Q1765120
   precision: null
   qualifiers:
     P812: "English literature"    # academic major
