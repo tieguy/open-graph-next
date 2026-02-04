@@ -4,7 +4,7 @@ Last verified: 2026-02-03
 
 ## Purpose
 
-Speculative design prototype demonstrating what cooperative knowledge infrastructure could feel like. A D3.js force-directed graph that connects Apollo 11 resources across Internet Archive, Wikipedia, Wikimedia Commons, OpenLibrary, and Smithsonian.
+Speculative design prototype demonstrating what cooperative knowledge infrastructure could feel like. A D3.js force-directed graph that connects Apollo 11 resources across Internet Archive, Wikipedia, Wikimedia Commons, OpenLibrary, Smithsonian, OpenStreetMap, iNaturalist, and GBIF.
 
 ## Tech Stack
 
@@ -33,7 +33,7 @@ All data is pre-cached JSON. No live API calls.
 ```
 {id, source, title, description, thumbnail?, url, potential?}
 ```
-- `source`: `internet_archive | wikipedia | wikimedia_commons | openlibrary | smithsonian | dpla | arxiv | met_museum`
+- `source`: `internet_archive | wikipedia | wikimedia_commons | openlibrary | smithsonian | dpla | arxiv | met_museum | openstreetmap | inaturalist | gbif`
 - `potential`: Object with source-keyed counts plus `total` (for leaf nodes)
 
 **Connections** (`data/{topic}/connections.json`):
@@ -58,6 +58,6 @@ All data is pre-cached JSON. No live API calls.
 
 ## Gotchas
 
-- Source icons use emoji (not SVGs) for simplicity
+- Source icons use official favicons loaded from source domains
 - Graph accumulates - no way to collapse/remove nodes
 - Potential counts are fictional/estimated, not real API queries

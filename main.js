@@ -1,46 +1,61 @@
 import * as d3 from 'https://cdn.jsdelivr.net/npm/d3@7/+esm';
 
-// Source configuration with colors and icons
+// Source configuration with colors and favicons
 const SOURCES = {
   internet_archive: {
     color: '#428bca',
     name: 'Internet Archive',
-    icon: '🏛️'
+    favicon: 'https://archive.org/favicon.ico'
   },
   wikipedia: {
     color: '#636466',
     name: 'Wikipedia',
-    icon: 'W'
+    favicon: 'https://en.wikipedia.org/favicon.ico'
   },
   wikimedia_commons: {
     color: '#006699',
     name: 'Wikimedia Commons',
-    icon: '🖼️'
+    favicon: 'https://commons.wikimedia.org/favicon.ico'
   },
   dpla: {
     color: '#0066cc',
     name: 'DPLA',
-    icon: '📚'
+    favicon: 'https://dp.la/favicon.ico'
   },
   openlibrary: {
     color: '#e47911',
     name: 'OpenLibrary',
-    icon: '📖'
+    favicon: 'https://openlibrary.org/favicon.ico'
   },
   arxiv: {
     color: '#b31b1b',
     name: 'arXiv',
-    icon: '📄'
+    favicon: 'https://arxiv.org/favicon.ico'
   },
   met_museum: {
     color: '#e4002b',
     name: 'Met Museum',
-    icon: '🏺'
+    favicon: 'https://www.metmuseum.org/favicon.ico'
   },
   smithsonian: {
     color: '#5b9bd5',
     name: 'Smithsonian',
-    icon: '🦋'
+    favicon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/32px-Smithsonian_sun_logo_no_text.svg.png'
+  },
+  openstreetmap: {
+    color: '#7ebc6f',
+    name: 'OpenStreetMap',
+    favicon: 'https://www.openstreetmap.org/favicon.ico'
+  },
+  inaturalist: {
+    color: '#74ac00',
+    name: 'iNaturalist',
+    favicon: 'https://www.inaturalist.org/favicon.ico'
+  },
+  gbif: {
+    color: '#4e9a47',
+    name: 'GBIF',
+    favicon: 'https://www.gbif.org/favicon.ico'
   }
 };
 
@@ -48,8 +63,8 @@ function getSourceColor(source) {
   return SOURCES[source]?.color || '#238636';
 }
 
-function getSourceIcon(source) {
-  return SOURCES[source]?.icon || '?';
+function getSourceFavicon(source) {
+  return SOURCES[source]?.favicon || null;
 }
 
 function getSourceName(source) {
@@ -97,6 +112,9 @@ function formatPotentialCount(count) {
 }
 
 function showTooltip(event, d) {
+  // Cancel any pending hide
+  cancelHideTooltip();
+
   const tooltip = document.getElementById('tooltip');
   const expanded = expandedNodes.has(d.id);
 
@@ -157,7 +175,25 @@ function showTooltip(event, d) {
   tooltip.classList.remove('hidden');
 }
 
-function hideTooltip() {
+let hideTooltipTimeout = null;
+
+function scheduleHideTooltip() {
+  // Delay hiding to allow mouse to move to tooltip
+  hideTooltipTimeout = setTimeout(() => {
+    const tooltip = document.getElementById('tooltip');
+    tooltip.classList.add('hidden');
+  }, 1000);
+}
+
+function cancelHideTooltip() {
+  if (hideTooltipTimeout) {
+    clearTimeout(hideTooltipTimeout);
+    hideTooltipTimeout = null;
+  }
+}
+
+function hideTooltipNow() {
+  cancelHideTooltip();
   const tooltip = document.getElementById('tooltip');
   tooltip.classList.add('hidden');
 }
@@ -211,6 +247,14 @@ function setupLegend() {
   });
 }
 
+function setupTooltip() {
+  const tooltip = document.getElementById('tooltip');
+
+  // Keep tooltip visible when hovering over it
+  tooltip.addEventListener('mouseenter', cancelHideTooltip);
+  tooltip.addEventListener('mouseleave', hideTooltipNow);
+}
+
 // Item cache - stores loaded items by ID
 const itemCache = new Map();
 
@@ -247,7 +291,7 @@ async function loadConnections() {
   }
 
   try {
-    const response = await fetch('data/apollo-11/connections.json');
+    const response = await fetch(`data/apollo-11/connections.json?v=${Date.now()}`);
     if (!response.ok) {
       throw new Error(`Failed to load connections: ${response.status}`);
     }
@@ -355,6 +399,7 @@ async function init() {
 
     setupSvg();
     setupSimulation();
+    setupTooltip();
     render();
     setupLegend();
 
@@ -372,6 +417,17 @@ function setupSvg() {
   svg = d3.select('#graph')
     .attr('width', width)
     .attr('height', height);
+
+  // Create defs for clip paths
+  const defs = svg.append('defs');
+
+  // Circular clip path for thumbnails
+  defs.append('clipPath')
+    .attr('id', 'thumbnail-clip')
+    .append('circle')
+    .attr('r', 24)
+    .attr('cx', 0)
+    .attr('cy', 0);
 
   // Create zoomable container
   g = svg.append('g');
@@ -508,8 +564,7 @@ function render() {
           simulation.alpha(0.3).restart();
         })
         .on('mouseenter', showTooltip)
-        .on('mousemove', showTooltip)
-        .on('mouseleave', hideTooltip)
+        .on('mouseleave', scheduleHideTooltip)
         .call(enter => enter.transition()
           .duration(300)
           .style('opacity', 1)),
@@ -556,18 +611,36 @@ function render() {
       exit => exit.remove()
     );
 
-  // Add source badge
-  nodeGroups.selectAll('text.source-badge')
+  // Add thumbnail image (only for nodes with thumbnails)
+  nodeGroups.selectAll('image.node-thumbnail')
+    .data(d => d.thumbnail ? [d] : [])
+    .join(
+      enter => enter.append('image')
+        .attr('class', 'node-thumbnail')
+        .attr('href', d => d.thumbnail)
+        .attr('x', -24)
+        .attr('y', -24)
+        .attr('width', 48)
+        .attr('height', 48)
+        .attr('clip-path', 'url(#thumbnail-clip)')
+        .attr('preserveAspectRatio', 'xMidYMid slice')
+        .attr('pointer-events', 'none'),
+      update => update
+        .attr('href', d => d.thumbnail),
+      exit => exit.remove()
+    );
+
+  // Add source favicon (smaller, positioned in corner when thumbnail exists)
+  nodeGroups.selectAll('image.source-favicon')
     .data(d => [d])
-    .join('text')
-    .attr('class', 'source-badge')
-    .attr('text-anchor', 'middle')
-    .attr('dy', '0.35em')
-    .attr('fill', '#fff')
-    .attr('font-size', '14px')
-    .attr('font-weight', 'bold')
-    .attr('pointer-events', 'none')
-    .text(d => getSourceIcon(d.source));
+    .join('image')
+    .attr('class', 'source-favicon')
+    .attr('href', d => getSourceFavicon(d.source))
+    .attr('x', d => d.thumbnail ? 8 : -12)
+    .attr('y', d => d.thumbnail ? 8 : -12)
+    .attr('width', d => d.thumbnail ? 16 : 24)
+    .attr('height', d => d.thumbnail ? 16 : 24)
+    .attr('pointer-events', 'none');
 
   // Add expand indicator for non-expanded, non-leaf nodes
   nodeGroups.selectAll('circle.expand-indicator')
@@ -610,7 +683,7 @@ function render() {
       enter => {
         const badge = enter.append('g')
           .attr('class', 'potential-badge')
-          .attr('transform', 'translate(-18, -18)');
+          .attr('transform', 'translate(-50, -30)');
 
         // Badge background
         badge.append('rect')

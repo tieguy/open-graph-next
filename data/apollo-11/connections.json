@@ -1,5 +1,5 @@
 {
-  "ia-apollo11-mission": [
+  "wiki-apollo-11": [
     {
       "targetId": "wiki-neil-armstrong",
       "type": "person",
@@ -36,14 +36,19 @@
       "label": "spacecraft"
     },
     {
-      "targetId": "ol-carrying-fire",
-      "type": "creator",
-      "label": "memoir by crew"
-    },
-    {
       "targetId": "wiki-apollo-program",
       "type": "subject",
       "label": "part of program"
+    },
+    {
+      "targetId": "wiki-ksc",
+      "type": "location",
+      "label": "launched from"
+    },
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launch pad"
     }
   ],
   "wiki-neil-armstrong": [
@@ -85,6 +90,11 @@
       "targetId": "commons-apollo11-launch",
       "type": "subject",
       "label": "launch photo"
+    },
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launched from"
     }
   ],
   "wiki-apollo-program": [
@@ -97,6 +107,11 @@
       "targetId": "wiki-moon-landing",
       "type": "subject",
       "label": "achieved goal"
+    },
+    {
+      "targetId": "wiki-ksc",
+      "type": "location",
+      "label": "launched from"
     }
   ],
   "commons-earthrise": [
@@ -104,6 +119,59 @@
       "targetId": "wiki-apollo-program",
       "type": "subject",
       "label": "taken during"
+    }
+  ],
+  "smithsonian-command-module": [
+    {
+      "targetId": "smithsonian-crew-hatch",
+      "type": "subject",
+      "label": "component"
+    },
+    {
+      "targetId": "smithsonian-3d-collection",
+      "type": "subject",
+      "label": "3D scan available"
+    }
+  ],
+  "wiki-ksc": [
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launch facility"
+    },
+    {
+      "targetId": "osm-ksc-visitor-complex",
+      "type": "location",
+      "label": "visitor center"
+    },
+    {
+      "targetId": "wiki-jfk",
+      "type": "person",
+      "label": "named after"
+    },
+    {
+      "targetId": "wiki-merritt-island-refuge",
+      "type": "location",
+      "label": "shares boundary"
+    }
+  ],
+  "wiki-merritt-island-refuge": [
+    {
+      "targetId": "inat-merritt-island",
+      "type": "subject",
+      "label": "wildlife observations"
+    },
+    {
+      "targetId": "gbif-merritt-island",
+      "type": "subject",
+      "label": "biodiversity data"
+    }
+  ],
+  "osm-launch-complex-39a": [
+    {
+      "targetId": "osm-ksc-visitor-complex",
+      "type": "location",
+      "label": "nearby"
     }
   ]
 }

@@ -1,0 +1,12 @@
+{
+  "id": "inat-merritt-island",
+  "source": "inaturalist",
+  "title": "Merritt Island Wildlife Observations",
+  "description": "Community-contributed wildlife observations from Merritt Island National Wildlife Refuge, which shares boundaries with Kennedy Space Center. Over 330 bird species, manatees, sea turtles, and Florida scrub-jays documented.",
+  "url": "https://www.inaturalist.org/observations?place_id=119468",
+  "potential": {
+    "inaturalist": 50000,
+    "gbif": 2137776,
+    "total": 2187776
+  }
+}

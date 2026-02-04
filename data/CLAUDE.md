@@ -33,4 +33,4 @@ data/{topic}/
 
 - Node IDs must be unique across entire dataset
 - ID format: `{source-abbrev}-{slug}` (e.g., `wiki-neil-armstrong`)
-- Source abbreviations: `ia`, `wiki`, `commons`, `ol`, `smithsonian`, `dpla`, `arxiv`, `met`
+- Source abbreviations: `ia`, `wiki`, `commons`, `ol`, `smithsonian`, `dpla`, `arxiv`, `met`, `osm`, `inat`, `gbif`
