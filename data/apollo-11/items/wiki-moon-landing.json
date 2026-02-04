@@ -1,0 +1,16 @@
+{
+  "id": "wiki-moon-landing",
+  "source": "wikipedia",
+  "title": "Moon Landing",
+  "description": "A Moon landing is the arrival of a spacecraft on the surface of the Moon. The first human Moon landing was Apollo 11 on July 20, 1969.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Aldrin_Apollo_11.jpg/200px-Aldrin_Apollo_11.jpg",
+  "url": "https://en.wikipedia.org/wiki/Moon_landing",
+  "connections": [],
+  "potential": {
+    "internet_archive": 3456,
+    "wikipedia": 567,
+    "wikimedia_commons": 2345,
+    "dpla": 123,
+    "total": 6491
+  }
+}
