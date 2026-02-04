@@ -78,3 +78,12 @@ footer {
   background: #30363d;
   border-color: #8b949e;
 }
+
+/* Node animations */
+.node {
+  transition: opacity 0.3s ease;
+}
+
+.node-circle {
+  transition: r 0.4s ease-out, fill 0.2s ease;
+}

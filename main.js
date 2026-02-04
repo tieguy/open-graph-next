@@ -282,8 +282,19 @@ function render() {
   // Render link groups (line + label)
   const linkGroups = g.selectAll('.link-group')
     .data(links, d => `${d.source.id || d.source}-${d.target.id || d.target}`)
-    .join('g')
-    .attr('class', 'link-group');
+    .join(
+      enter => enter.append('g')
+        .attr('class', 'link-group')
+        .style('opacity', 0)
+        .call(enter => enter.transition()
+          .duration(300)
+          .style('opacity', 1)),
+      update => update,
+      exit => exit.transition()
+        .duration(300)
+        .style('opacity', 0)
+        .remove()
+    );
 
   // Link lines
   linkGroups.selectAll('line')
@@ -339,13 +350,23 @@ function render() {
   // Add circles to new nodes with source-specific colors
   nodeGroups.selectAll('circle.node-circle')
     .data(d => [d])
-    .join('circle')
-    .attr('class', 'node-circle')
-    .attr('r', 24)
-    .attr('fill', d => getSourceColor(d.source))
-    .attr('stroke', '#fff')
-    .attr('stroke-width', 2)
-    .attr('opacity', 0.9);
+    .join(
+      enter => enter.append('circle')
+        .attr('class', 'node-circle')
+        .attr('r', 0)
+        .attr('fill', d => getSourceColor(d.source))
+        .attr('stroke', '#fff')
+        .attr('stroke-width', 2)
+        .attr('opacity', 0.9)
+        .call(enter => enter.transition()
+          .duration(400)
+          .ease(d3.easeCubicOut)
+          .attr('r', 24)),
+      update => update
+        .attr('r', 24)
+        .attr('fill', d => getSourceColor(d.source)),
+      exit => exit.remove()
+    );
 
   // Add source badge
   nodeGroups.selectAll('text.source-badge')
@@ -371,10 +392,10 @@ function render() {
     .attr('font-size', '12px')
     .text(d => d.title);
 
-  // Restart simulation
+  // Restart simulation with gentler reheat
   simulation.nodes(nodes);
   simulation.force('link').links(links);
-  simulation.alpha(1).restart();
+  simulation.alpha(0.5).restart();  // Reduced from 1 to 0.5 for gentler animation
 }
 
 function drag(simulation) {
