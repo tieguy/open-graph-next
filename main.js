@@ -56,6 +56,54 @@ function getSourceName(source) {
   return SOURCES[source]?.name || source;
 }
 
+// Item cache - stores loaded items by ID
+const itemCache = new Map();
+
+async function loadItem(itemId) {
+  // Return from cache if already loaded
+  if (itemCache.has(itemId)) {
+    return itemCache.get(itemId);
+  }
+
+  // Determine file path based on ID
+  const filePath = `data/apollo-11/items/${itemId}.json`;
+
+  try {
+    const response = await fetch(filePath);
+    if (!response.ok) {
+      console.warn(`Item not found: ${itemId}`);
+      return null;
+    }
+    const item = await response.json();
+    itemCache.set(itemId, item);
+    return item;
+  } catch (error) {
+    console.error(`Failed to load item ${itemId}:`, error);
+    return null;
+  }
+}
+
+// Connections cache
+let connectionsData = null;
+
+async function loadConnections() {
+  if (connectionsData) {
+    return connectionsData;
+  }
+
+  try {
+    const response = await fetch('data/apollo-11/connections.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load connections: ${response.status}`);
+    }
+    connectionsData = await response.json();
+    return connectionsData;
+  } catch (error) {
+    console.error('Failed to load connections:', error);
+    return {};
+  }
+}
+
 // Graph state
 let nodes = [];
 let links = [];
