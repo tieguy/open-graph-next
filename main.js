@@ -168,24 +168,63 @@ function setupSimulation() {
 }
 
 function ticked() {
-  g.selectAll('.link')
-    .attr('x1', d => d.source.x)
-    .attr('y1', d => d.source.y)
-    .attr('x2', d => d.target.x)
-    .attr('y2', d => d.target.y);
+  // Update link positions
+  g.selectAll('.link-group').each(function(d) {
+    const group = d3.select(this);
 
+    group.select('line')
+      .attr('x1', d.source.x)
+      .attr('y1', d.source.y)
+      .attr('x2', d.target.x)
+      .attr('y2', d.target.y);
+
+    group.select('text')
+      .attr('x', (d.source.x + d.target.x) / 2)
+      .attr('y', (d.source.y + d.target.y) / 2);
+  });
+
+  // Update node positions
   g.selectAll('.node')
     .attr('transform', d => `translate(${d.x},${d.y})`);
 }
 
 function render() {
-  // Render links
-  g.selectAll('.link')
+  // Render link groups (line + label)
+  const linkGroups = g.selectAll('.link-group')
     .data(links, d => `${d.source.id || d.source}-${d.target.id || d.target}`)
+    .join('g')
+    .attr('class', 'link-group');
+
+  // Link lines
+  linkGroups.selectAll('line')
+    .data(d => [d])
     .join('line')
     .attr('class', 'link')
     .attr('stroke', '#30363d')
     .attr('stroke-width', 2);
+
+  // Link labels (hidden by default, shown on hover)
+  linkGroups.selectAll('text')
+    .data(d => [d])
+    .join('text')
+    .attr('class', 'link-label')
+    .attr('text-anchor', 'middle')
+    .attr('fill', '#8b949e')
+    .attr('font-size', '10px')
+    .attr('dy', -5)
+    .attr('opacity', 0)
+    .text(d => d.label || '');
+
+  // Add hover behavior for link labels
+  linkGroups
+    .on('mouseenter', function() {
+      d3.select(this).select('.link-label').attr('opacity', 1);
+      d3.select(this).select('.link').attr('stroke', '#58a6ff').attr('stroke-width', 3);
+    })
+    .on('mouseleave', function() {
+      d3.select(this).select('.link-label').attr('opacity', 0);
+      d3.select(this).select('.link').attr('stroke', '#30363d').attr('stroke-width', 2);
+    });
 
   // Render nodes
   const nodeGroups = g.selectAll('.node')
