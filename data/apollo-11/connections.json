@@ -14,6 +14,31 @@
       "targetId": "wiki-michael-collins",
       "type": "person",
       "label": "crew member"
+    },
+    {
+      "targetId": "ia-apollo11-footage",
+      "type": "subject",
+      "label": "mission footage"
+    },
+    {
+      "targetId": "commons-apollo11-launch",
+      "type": "subject",
+      "label": "launch photo"
+    },
+    {
+      "targetId": "wiki-saturn-v",
+      "type": "subject",
+      "label": "launch vehicle"
+    },
+    {
+      "targetId": "smithsonian-command-module",
+      "type": "subject",
+      "label": "spacecraft"
+    },
+    {
+      "targetId": "ol-carrying-fire",
+      "type": "creator",
+      "label": "memoir by crew"
     }
   ]
 }
