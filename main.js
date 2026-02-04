@@ -99,6 +99,11 @@ function getConnectionColor(type) {
   return CONNECTION_TYPES[type]?.color || '#30363d';
 }
 
+function truncateTitle(title, maxLength = 22) {
+  if (title.length <= maxLength) return title;
+  return title.slice(0, maxLength - 1).trim() + '…';
+}
+
 function isLeafNode(node) {
   // A leaf node has potential counts and no connections in our cache
   return node.potential && node.potential.total > 0;
@@ -463,8 +468,14 @@ function setupSimulation() {
   const height = +svg.attr('height');
 
   simulation = d3.forceSimulation(nodes)
-    .force('link', d3.forceLink(links).id(d => d.id).distance(100))
-    .force('charge', d3.forceManyBody().strength(-300))
+    .force('link', d3.forceLink(links).id(d => d.id).distance(d => {
+      // Vary distance based on target label length
+      const target = typeof d.target === 'object' ? d.target : nodes.find(n => n.id === d.target);
+      const labelLen = target?.title?.length || 15;
+      return 80 + Math.min(labelLen * 2, 60);
+    }))
+    .force('charge', d3.forceManyBody().strength(-400))
+    .force('collision', d3.forceCollide().radius(50))
     .force('center', d3.forceCenter(width / 2, height / 2))
     .on('tick', ticked);
 }
@@ -719,16 +730,29 @@ function render() {
       exit => exit.remove()
     );
 
+  // Add title background for readability
+  nodeGroups.selectAll('rect.node-title-bg')
+    .data(d => [d])
+    .join('rect')
+    .attr('class', 'node-title-bg')
+    .attr('fill', 'rgba(13, 17, 23, 0.85)')
+    .attr('rx', 3)
+    .attr('ry', 3)
+    .attr('y', 30)
+    .attr('height', 18)
+    .attr('x', d => -Math.min(truncateTitle(d.title).length * 3.5 + 6, 80))
+    .attr('width', d => Math.min(truncateTitle(d.title).length * 7 + 12, 160));
+
   // Add title text to new nodes
   nodeGroups.selectAll('text.node-title')
     .data(d => [d])
     .join('text')
     .attr('class', 'node-title')
-    .attr('dy', 40)
+    .attr('dy', 44)
     .attr('text-anchor', 'middle')
     .attr('fill', '#c9d1d9')
-    .attr('font-size', '12px')
-    .text(d => d.title);
+    .attr('font-size', '11px')
+    .text(d => truncateTitle(d.title));
 
   // Restart simulation with gentler reheat
   simulation.nodes(nodes);
