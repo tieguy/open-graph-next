@@ -56,6 +56,31 @@ All data is pre-cached JSON. No live API calls.
 - Every node has at minimum: id, source, title
 - Connections reference only IDs that exist in items/
 
+## Chainlink Usage
+
+This project uses `chainlink` for issue tracking. Common workflows:
+
+**Session start:**
+```
+chainlink session start
+chainlink session last-handoff  # See what previous session left off
+chainlink next                   # Get suggested issue to work on
+```
+
+**Session end:**
+```
+chainlink session end -n "Handoff notes describing progress and next steps"
+```
+
+**Creating issues:**
+```
+chainlink create "Issue title"
+chainlink create -d "Description" -p high "Issue title"
+chainlink create -t bug "Bug description"      # Templates: bug, feature, refactor, research
+```
+
+**Never use:** `chainlink timer`, `chainlink start`, `chainlink stop` - the timer feature is unreliable and adds no value.
+
 ## Gotchas
 
 - Source icons use official favicons loaded from source domains
