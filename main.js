@@ -569,9 +569,9 @@ function render() {
     .attr('pointer-events', 'none')
     .text(d => getSourceIcon(d.source));
 
-  // Add expand indicator for non-expanded nodes with connections
+  // Add expand indicator for non-expanded, non-leaf nodes
   nodeGroups.selectAll('circle.expand-indicator')
-    .data(d => expandedNodes.has(d.id) ? [] : [d])
+    .data(d => (expandedNodes.has(d.id) || isLeafNode(d)) ? [] : [d])
     .join(
       enter => enter.append('circle')
         .attr('class', 'expand-indicator')
@@ -586,7 +586,7 @@ function render() {
     );
 
   nodeGroups.selectAll('text.expand-plus')
-    .data(d => expandedNodes.has(d.id) ? [] : [d])
+    .data(d => (expandedNodes.has(d.id) || isLeafNode(d)) ? [] : [d])
     .join(
       enter => enter.append('text')
         .attr('class', 'expand-plus')
