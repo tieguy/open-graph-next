@@ -137,10 +137,16 @@
   ],
   "commons-earthrise": [
     {
-      "targetId": "wiki-apollo-program",
+      "targetId": "wiki-apollo-8",
       "type": "subject",
       "label": "taken during",
-      "linkedVia": ["manual"]
+      "linkedVia": ["wikidata", "manual"]
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "part of program",
+      "linkedVia": ["wikidata"]
     }
   ],
   "smithsonian-command-module": [
@@ -203,6 +209,62 @@
       "type": "location",
       "label": "nearby",
       "linkedVia": ["coordinates"]
+    }
+  ],
+  "wiki-buzz-aldrin": [
+    {
+      "targetId": "ol-return-to-earth",
+      "type": "creator",
+      "label": "wrote memoir",
+      "linkedVia": ["viaf", "lc", "isbn"]
+    },
+    {
+      "targetId": "commons-aldrin-moon",
+      "type": "subject",
+      "label": "iconic photo",
+      "linkedVia": ["wikidata", "manual"]
+    }
+  ],
+  "wiki-jfk": [
+    {
+      "targetId": "ia-jfk-moon-speech",
+      "type": "subject",
+      "label": "moon speech",
+      "linkedVia": ["viaf", "lc"]
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "initiated program",
+      "linkedVia": ["wikidata", "lc-subject"]
+    }
+  ],
+  "wiki-wernher-von-braun": [
+    {
+      "targetId": "wiki-v2-rocket",
+      "type": "subject",
+      "label": "developed",
+      "linkedVia": ["viaf", "lc", "wikidata"]
+    },
+    {
+      "targetId": "smithsonian-v2",
+      "type": "subject",
+      "label": "artifact",
+      "linkedVia": ["smithsonian-id"]
+    }
+  ],
+  "wiki-moon-landing": [
+    {
+      "targetId": "wiki-sea-of-tranquility",
+      "type": "location",
+      "label": "landing site",
+      "linkedVia": ["wikidata", "coordinates"]
+    },
+    {
+      "targetId": "wiki-lunar-plaque",
+      "type": "subject",
+      "label": "left on Moon",
+      "linkedVia": ["wikidata"]
     }
   ]
 }

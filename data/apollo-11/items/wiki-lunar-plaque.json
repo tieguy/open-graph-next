@@ -1,0 +1,16 @@
+{
+  "id": "wiki-lunar-plaque",
+  "source": "wikipedia",
+  "title": "Lunar Plaque",
+  "description": "A stainless steel plaque attached to the Apollo 11 lunar module descent stage, left on the Moon. It reads: 'Here men from the planet Earth first set foot upon the Moon July 1969, A.D. We came in peace for all mankind.'",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Apollo_11_plaque_closeup_on_Moon.jpg/220px-Apollo_11_plaque_closeup_on_Moon.jpg",
+  "url": "https://en.wikipedia.org/wiki/Lunar_plaque",
+  "identifiers": {
+    "wikidata": "Q1872030"
+  },
+  "potential": {
+    "wikimedia_commons": 12,
+    "smithsonian": 3,
+    "total": 15
+  }
+}

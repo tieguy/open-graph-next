@@ -151,8 +151,9 @@ function truncateTitle(title, maxLength = 22) {
 }
 
 function isLeafNode(node) {
-  // A leaf node has potential counts and no connections in our cache
-  return node.potential && node.potential.total > 0;
+  // A leaf node has potential counts but NO connections in our cache
+  // (nodes with both potential AND connections are expandable, not leaves)
+  return node.potential && node.potential.total > 0 && !hasConnections(node.id);
 }
 
 function formatPotentialCount(count) {
@@ -340,6 +341,13 @@ async function loadConnections() {
   }
 }
 
+// Check if a node has outgoing connections (can be expanded)
+function hasConnections(nodeId) {
+  if (!connectionsData) return false;
+  const conns = connectionsData[nodeId];
+  return conns && conns.length > 0;
+}
+
 async function expandNode(event, d) {
   // Prevent event bubbling to zoom
   event.stopPropagation();
@@ -457,6 +465,9 @@ async function init() {
 
     nodes = [seed];
     links = [];
+
+    // Preload connections so we know which nodes are expandable
+    await loadConnections();
 
     setupSvg();
     setupSimulation();
@@ -731,16 +742,16 @@ function render() {
     .attr('height', d => d.thumbnail ? 16 : 24)
     .attr('pointer-events', 'none');
 
-  // Add expand indicator for non-expanded, non-leaf nodes
+  // Add expand indicator for nodes with connections that haven't been expanded
   nodeGroups.selectAll('circle.expand-indicator')
-    .data(d => (expandedNodes.has(d.id) || isLeafNode(d)) ? [] : [d])
+    .data(d => (expandedNodes.has(d.id) || isLeafNode(d) || !hasConnections(d.id)) ? [] : [d])
     .join(
       enter => enter.append('circle')
         .attr('class', 'expand-indicator')
         .attr('cx', 18)
         .attr('cy', -18)
         .attr('r', 8)
-        .attr('fill', '#2e7d32')
+        .attr('fill', '#1a5490')
         .attr('stroke', '#faf8f5')
         .attr('stroke-width', 1),
       update => update,
@@ -748,7 +759,7 @@ function render() {
     );
 
   nodeGroups.selectAll('text.expand-plus')
-    .data(d => (expandedNodes.has(d.id) || isLeafNode(d)) ? [] : [d])
+    .data(d => (expandedNodes.has(d.id) || isLeafNode(d) || !hasConnections(d.id)) ? [] : [d])
     .join(
       enter => enter.append('text')
         .attr('class', 'expand-plus')
@@ -757,10 +768,10 @@ function render() {
         .attr('text-anchor', 'middle')
         .attr('dy', '0.35em')
         .attr('fill', '#fff')
-        .attr('font-size', '12px')
+        .attr('font-size', '10px')
         .attr('font-weight', 'bold')
         .attr('pointer-events', 'none')
-        .text('+'),
+        .text('⋯'),
       update => update,
       exit => exit.remove()
     );

@@ -163,7 +163,7 @@ body {
 /* Zoom controls */
 #controls {
   position: fixed;
-  top: 1rem;
+  bottom: 1rem;
   right: 1rem;
   display: flex;
   flex-direction: column;

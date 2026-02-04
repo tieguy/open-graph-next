@@ -1,0 +1,18 @@
+{
+  "id": "wiki-v2-rocket",
+  "source": "wikipedia",
+  "title": "V-2 Rocket",
+  "description": "The world's first long-range guided ballistic missile, developed in Nazi Germany. After WWII, Wernher von Braun and other German engineers brought V-2 technology to the US, forming the foundation of American rocketry.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/10/V-2_Rocket_On_Meillerwagen.jpg/220px-V-2_Rocket_On_Meillerwagen.jpg",
+  "url": "https://en.wikipedia.org/wiki/V-2_rocket",
+  "identifiers": {
+    "wikidata": "Q188906",
+    "lc-subject": "sh85141691"
+  },
+  "potential": {
+    "wikipedia": 89,
+    "smithsonian": 34,
+    "internet_archive": 156,
+    "total": 279
+  }
+}
