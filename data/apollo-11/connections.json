@@ -1,0 +1,19 @@
+{
+  "ia-apollo11-mission": [
+    {
+      "targetId": "wiki-neil-armstrong",
+      "type": "person",
+      "label": "crew member"
+    },
+    {
+      "targetId": "wiki-buzz-aldrin",
+      "type": "person",
+      "label": "crew member"
+    },
+    {
+      "targetId": "wiki-michael-collins",
+      "type": "person",
+      "label": "crew member"
+    }
+  ]
+}
