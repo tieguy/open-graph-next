@@ -106,8 +106,8 @@ function showTooltip(event, d) {
 
   // Keep tooltip on screen
   const rect = tooltip.getBoundingClientRect();
-  const maxX = window.innerWidth - 320;
-  const maxY = window.innerHeight - 180;
+  const maxX = window.innerWidth - rect.width;
+  const maxY = window.innerHeight - rect.height;
 
   tooltip.style.left = `${Math.min(x, maxX)}px`;
   tooltip.style.top = `${Math.min(y, maxY)}px`;
@@ -135,11 +135,23 @@ function updateLegend() {
   for (const [source, count] of sourceCounts) {
     const div = document.createElement('div');
     div.className = 'legend-source';
-    div.innerHTML = `
-      <span class="legend-source-dot" style="background: ${getSourceColor(source)}"></span>
-      <span class="legend-source-name">${getSourceName(source)}</span>
-      <span class="legend-source-count">${count}</span>
-    `;
+
+    const dot = document.createElement('span');
+    dot.className = 'legend-source-dot';
+    dot.style.background = getSourceColor(source);
+
+    const name = document.createElement('span');
+    name.className = 'legend-source-name';
+    name.textContent = getSourceName(source);
+
+    const countSpan = document.createElement('span');
+    countSpan.className = 'legend-source-count';
+    countSpan.textContent = count;
+
+    div.appendChild(dot);
+    div.appendChild(name);
+    div.appendChild(countSpan);
+
     legendSources.appendChild(div);
   }
 
@@ -422,13 +434,13 @@ function render() {
 
   // Add hover behavior for link labels
   linkGroups
-    .on('mouseenter', function(event, d) {
+    .on('mouseenter', function(_event, _d) {
       d3.select(this).select('.link-label').attr('opacity', 1);
       d3.select(this).select('.link')
         .attr('stroke-opacity', 1)
         .attr('stroke-width', 3);
     })
-    .on('mouseleave', function(event, d) {
+    .on('mouseleave', function(_event, _d) {
       d3.select(this).select('.link-label').attr('opacity', 0);
       d3.select(this).select('.link')
         .attr('stroke-opacity', 0.6)
