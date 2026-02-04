@@ -291,54 +291,6 @@ function updateSidebar(d) {
       : 'Click again to explore connections';
 }
 
-function updateLegend() {
-  // Count nodes by source
-  const sourceCounts = new Map();
-  for (const node of nodes) {
-    const count = sourceCounts.get(node.source) || 0;
-    sourceCounts.set(node.source, count + 1);
-  }
-
-  // Build legend HTML
-  const legendSources = document.getElementById('legend-sources');
-  legendSources.innerHTML = '';
-
-  for (const [source, count] of sourceCounts) {
-    const div = document.createElement('div');
-    div.className = 'legend-source';
-
-    const dot = document.createElement('span');
-    dot.className = 'legend-source-dot';
-    dot.style.background = getSourceColor(source);
-
-    const name = document.createElement('span');
-    name.className = 'legend-source-name';
-    name.textContent = getSourceName(source);
-
-    const countSpan = document.createElement('span');
-    countSpan.className = 'legend-source-count';
-    countSpan.textContent = count;
-
-    div.appendChild(dot);
-    div.appendChild(name);
-    div.appendChild(countSpan);
-
-    legendSources.appendChild(div);
-  }
-
-  // Update totals
-  document.getElementById('legend-node-count').textContent = nodes.length;
-  document.getElementById('legend-source-count').textContent = sourceCounts.size;
-}
-
-function setupLegend() {
-  const legend = document.getElementById('legend');
-  const toggle = document.getElementById('legend-toggle');
-
-  toggle.addEventListener('click', () => {
-    legend.classList.toggle('collapsed');
-  });
-}
 
 // Item cache - stores loaded items by ID
 const itemCache = new Map();
@@ -509,7 +461,6 @@ async function init() {
     setupSvg();
     setupSimulation();
     render();
-    setupLegend();
 
     console.log('Knowledge Commons Consortium Browser initialized with seed:', seed.title);
   } catch (error) {
@@ -886,9 +837,6 @@ function render() {
   simulation.nodes(nodes);
   simulation.force('link').links(links);
   simulation.alpha(0.5).restart();  // Reduced from 1 to 0.5 for gentler animation
-
-  // Update legend
-  updateLegend();
 }
 
 function drag(simulation) {

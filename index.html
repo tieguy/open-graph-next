@@ -8,10 +8,28 @@
 </head>
 <body>
   <div id="app">
-    <header>
-      <h1>Knowledge Commons Consortium Browser</h1>
-      <p class="subtitle">Exploring the Internet Library Consortium</p>
-    </header>
+    <div id="left-panel" class="left-panel">
+      <div class="left-panel-header">
+        <h1>Knowledge Commons Consortium Browser</h1>
+        <p class="left-panel-subtitle">A speculative design prototype exploring cooperative knowledge infrastructure</p>
+      </div>
+      <div class="left-panel-section">
+        <div class="left-panel-section-header">Data Sources</div>
+        <div class="left-panel-sources">
+          <a href="https://archive.org" target="_blank" rel="noopener"><img src="https://archive.org/favicon.ico" alt="" class="source-favicon">Internet Archive</a>
+          <a href="https://wikipedia.org" target="_blank" rel="noopener"><img src="https://en.wikipedia.org/favicon.ico" alt="" class="source-favicon">Wikipedia</a>
+          <a href="https://commons.wikimedia.org" target="_blank" rel="noopener"><img src="https://commons.wikimedia.org/favicon.ico" alt="" class="source-favicon">Wikimedia Commons</a>
+          <a href="https://openlibrary.org" target="_blank" rel="noopener"><img src="https://openlibrary.org/favicon.ico" alt="" class="source-favicon">OpenLibrary</a>
+          <a href="https://dp.la" target="_blank" rel="noopener"><img src="https://dp.la/favicon.ico" alt="" class="source-favicon">DPLA</a>
+          <a href="https://arxiv.org" target="_blank" rel="noopener"><img src="https://info.arxiv.org/favicon.ico" alt="" class="source-favicon">arXiv</a>
+          <a href="https://www.si.edu" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/32px-Smithsonian_sun_logo_no_text.svg.png" alt="" class="source-favicon">Smithsonian</a>
+          <a href="https://www.metmuseum.org" target="_blank" rel="noopener"><img src="https://www.metmuseum.org/favicon.ico" alt="" class="source-favicon">Met Museum</a>
+          <a href="https://www.openstreetmap.org" target="_blank" rel="noopener"><img src="https://www.openstreetmap.org/favicon.ico" alt="" class="source-favicon">OpenStreetMap</a>
+          <a href="https://www.inaturalist.org" target="_blank" rel="noopener"><img src="https://www.inaturalist.org/favicon.ico" alt="" class="source-favicon">iNaturalist</a>
+          <a href="https://www.gbif.org" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gbif-full-green-logo.svg/32px-Gbif-full-green-logo.svg.png" alt="" class="source-favicon">GBIF</a>
+        </div>
+      </div>
+    </div>
     <div id="sidebar" class="sidebar">
       <div id="sidebar-empty" class="sidebar-empty">
         <p>Click a node to see details</p>
@@ -64,41 +82,6 @@
       <button id="zoom-reset" title="Reset View">⟲</button>
     </div>
     <svg id="graph"></svg>
-    <div id="legend" class="legend collapsed">
-      <button id="legend-toggle" class="legend-toggle">
-        <span class="legend-toggle-icon">◀</span>
-        <span class="legend-toggle-text">Sources</span>
-      </button>
-      <div class="legend-content">
-        <h3>Sources in Graph</h3>
-        <div id="legend-sources" class="legend-sources"></div>
-        <div class="legend-total">
-          <span id="legend-node-count">0</span> items from
-          <span id="legend-source-count">0</span> sources
-        </div>
-      </div>
-    </div>
-    <footer>
-      <div class="footer-content">
-        <p class="footer-tagline">Imagining a unified library</p>
-        <p class="footer-sources">
-          Data from
-          <a href="https://archive.org" target="_blank" rel="noopener"><img src="https://archive.org/favicon.ico" alt="" class="footer-favicon">Internet Archive</a>,
-          <a href="https://wikipedia.org" target="_blank" rel="noopener"><img src="https://en.wikipedia.org/favicon.ico" alt="" class="footer-favicon">Wikipedia</a>,
-          <a href="https://dp.la" target="_blank" rel="noopener"><img src="https://dp.la/favicon.ico" alt="" class="footer-favicon">DPLA</a>,
-          <a href="https://openlibrary.org" target="_blank" rel="noopener"><img src="https://openlibrary.org/favicon.ico" alt="" class="footer-favicon">OpenLibrary</a>,
-          <a href="https://arxiv.org" target="_blank" rel="noopener"><img src="https://arxiv.org/favicon.ico" alt="" class="footer-favicon">arXiv</a>,
-          <a href="https://www.si.edu" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/32px-Smithsonian_sun_logo_no_text.svg.png" alt="" class="footer-favicon">Smithsonian</a>,
-          <a href="https://www.metmuseum.org" target="_blank" rel="noopener"><img src="https://www.metmuseum.org/favicon.ico" alt="" class="footer-favicon">Met Museum</a>,
-          <a href="https://www.openstreetmap.org" target="_blank" rel="noopener"><img src="https://www.openstreetmap.org/favicon.ico" alt="" class="footer-favicon">OpenStreetMap</a>,
-          <a href="https://www.inaturalist.org" target="_blank" rel="noopener"><img src="https://www.inaturalist.org/favicon.ico" alt="" class="footer-favicon">iNaturalist</a>,
-          <a href="https://www.gbif.org" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gbif-full-green-logo.svg/32px-Gbif-full-green-logo.svg.png" alt="" class="footer-favicon">GBIF</a>
-        </p>
-        <p class="footer-credit">
-          A speculative design prototype exploring cooperative knowledge infrastructure
-        </p>
-      </div>
-    </footer>
   </div>
   <script type="module" src="main.js"></script>
 </body>
