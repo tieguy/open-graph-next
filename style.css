@@ -25,11 +25,46 @@ body {
 }
 
 footer {
-  padding: 1rem;
+  padding: 1rem 2rem;
   text-align: center;
-  font-size: 0.875rem;
-  color: #8b949e;
   border-top: 1px solid #21262d;
+  background: linear-gradient(to top, #0d1117 0%, transparent 100%);
+}
+
+.footer-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.footer-tagline {
+  font-size: 1rem;
+  color: #c9d1d9;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.footer-sources {
+  font-size: 0.75rem;
+  color: #8b949e;
+  margin-bottom: 0.5rem;
+  line-height: 1.6;
+}
+
+.footer-sources a {
+  color: #58a6ff;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-sources a:hover {
+  color: #79c0ff;
+  text-decoration: underline;
+}
+
+.footer-credit {
+  font-size: 0.6875rem;
+  color: #6e7681;
+  font-style: italic;
 }
 
 /* Edge styles */
