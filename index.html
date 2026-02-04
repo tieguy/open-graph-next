@@ -12,24 +12,29 @@
       <h1>Rabbit Hole Browser</h1>
       <p class="subtitle">Exploring the Internet Library Consortium</p>
     </header>
-    <div id="tooltip" class="tooltip hidden">
-      <div class="tooltip-title"></div>
-      <div class="tooltip-description"></div>
-      <div class="tooltip-source"></div>
-      <div id="tooltip-potential" class="tooltip-potential hidden">
-        <div class="tooltip-potential-header">
-          <span class="sparkle">✨</span>
-          <span id="tooltip-potential-total">0</span> more items available
-        </div>
-        <div id="tooltip-potential-breakdown" class="tooltip-potential-breakdown"></div>
-        <div class="tooltip-potential-message">
-          We only showed you a tiny slice. The ocean is right there.
-        </div>
+    <div id="sidebar" class="sidebar">
+      <div id="sidebar-empty" class="sidebar-empty">
+        <p>Click a node to see details</p>
       </div>
-      <a id="tooltip-link" class="tooltip-link" href="#" target="_blank" rel="noopener">
-        View original ↗
-      </a>
-      <div class="tooltip-action">Click node to explore connections</div>
+      <div id="sidebar-content" class="sidebar-content hidden">
+        <div class="sidebar-title"></div>
+        <div class="sidebar-description"></div>
+        <div class="sidebar-source"></div>
+        <div id="sidebar-potential" class="sidebar-potential hidden">
+          <div class="sidebar-potential-header">
+            <span class="sparkle">✨</span>
+            <span id="sidebar-potential-total">0</span> more items available
+          </div>
+          <div id="sidebar-potential-breakdown" class="sidebar-potential-breakdown"></div>
+          <div class="sidebar-potential-message">
+            We only showed you a tiny slice. The ocean is right there.
+          </div>
+        </div>
+        <a id="sidebar-link" class="sidebar-link" href="#" target="_blank" rel="noopener">
+          View original ↗
+        </a>
+        <div class="sidebar-status"></div>
+      </div>
     </div>
     <div id="controls">
       <button id="zoom-in" title="Zoom In">+</button>

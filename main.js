@@ -116,30 +116,33 @@ function formatPotentialCount(count) {
   return count.toString();
 }
 
-function showTooltip(event, d) {
-  // Cancel any pending hide
-  cancelHideTooltip();
-
-  const tooltip = document.getElementById('tooltip');
+function updateSidebar(d) {
+  const sidebar = document.getElementById('sidebar');
+  const empty = document.getElementById('sidebar-empty');
+  const content = document.getElementById('sidebar-content');
   const expanded = expandedNodes.has(d.id);
 
-  tooltip.querySelector('.tooltip-title').textContent = d.title;
-  tooltip.querySelector('.tooltip-description').textContent = d.description || '';
-  tooltip.querySelector('.tooltip-source').textContent = `Source: ${getSourceName(d.source)}`;
+  // Show content, hide empty state
+  empty.classList.add('hidden');
+  content.classList.remove('hidden');
 
-  const linkElement = document.getElementById('tooltip-link');
+  sidebar.querySelector('.sidebar-title').textContent = d.title;
+  sidebar.querySelector('.sidebar-description').textContent = d.description || '';
+  sidebar.querySelector('.sidebar-source').textContent = `Source: ${getSourceName(d.source)}`;
+
+  const linkElement = document.getElementById('sidebar-link');
   linkElement.href = d.url;
   linkElement.style.display = d.url ? 'inline-block' : 'none';
 
   // Handle potential counts for leaf nodes
-  const potentialSection = document.getElementById('tooltip-potential');
+  const potentialSection = document.getElementById('sidebar-potential');
   if (d.potential && d.potential.total > 0) {
     potentialSection.classList.remove('hidden');
-    document.getElementById('tooltip-potential-total').textContent =
+    document.getElementById('sidebar-potential-total').textContent =
       d.potential.total.toLocaleString();
 
     // Build breakdown
-    const breakdownContainer = document.getElementById('tooltip-potential-breakdown');
+    const breakdownContainer = document.getElementById('sidebar-potential-breakdown');
     breakdownContainer.innerHTML = '';
 
     // Sort sources by count descending
@@ -149,7 +152,7 @@ function showTooltip(event, d) {
 
     for (const [source, count] of sources) {
       const item = document.createElement('div');
-      item.className = 'tooltip-potential-item';
+      item.className = 'sidebar-potential-item';
       item.innerHTML = `
         <span class="source-name">${getSourceName(source)}</span>
         <span class="count">${count.toLocaleString()}</span>
@@ -160,47 +163,11 @@ function showTooltip(event, d) {
     potentialSection.classList.add('hidden');
   }
 
-  tooltip.querySelector('.tooltip-action').textContent = expanded
-    ? 'Already explored'
+  sidebar.querySelector('.sidebar-status').textContent = expanded
+    ? 'Connections explored'
     : d.potential && d.potential.total > 0
-      ? 'This is a leaf node - no cached connections'
-      : 'Click to explore connections';
-
-  // Position tooltip near cursor but not overlapping
-  const x = event.pageX + 15;
-  const y = event.pageY + 15;
-
-  // Keep tooltip on screen - account for larger tooltip with potential
-  const maxX = window.innerWidth - 340;
-  const maxY = window.innerHeight - 280;
-
-  tooltip.style.left = `${Math.min(x, maxX)}px`;
-  tooltip.style.top = `${Math.min(y, maxY)}px`;
-
-  tooltip.classList.remove('hidden');
-}
-
-let hideTooltipTimeout = null;
-
-function scheduleHideTooltip() {
-  // Delay hiding to allow mouse to move to tooltip
-  hideTooltipTimeout = setTimeout(() => {
-    const tooltip = document.getElementById('tooltip');
-    tooltip.classList.add('hidden');
-  }, 1000);
-}
-
-function cancelHideTooltip() {
-  if (hideTooltipTimeout) {
-    clearTimeout(hideTooltipTimeout);
-    hideTooltipTimeout = null;
-  }
-}
-
-function hideTooltipNow() {
-  cancelHideTooltip();
-  const tooltip = document.getElementById('tooltip');
-  tooltip.classList.add('hidden');
+      ? 'Leaf node - no cached connections'
+      : 'Click again to explore connections';
 }
 
 function updateLegend() {
@@ -250,14 +217,6 @@ function setupLegend() {
   toggle.addEventListener('click', () => {
     legend.classList.toggle('collapsed');
   });
-}
-
-function setupTooltip() {
-  const tooltip = document.getElementById('tooltip');
-
-  // Keep tooltip visible when hovering over it
-  tooltip.addEventListener('mouseenter', cancelHideTooltip);
-  tooltip.addEventListener('mouseleave', hideTooltipNow);
 }
 
 // Item cache - stores loaded items by ID
@@ -404,7 +363,6 @@ async function init() {
 
     setupSvg();
     setupSimulation();
-    setupTooltip();
     render();
     setupLegend();
 
@@ -565,7 +523,10 @@ function render() {
         .style('cursor', 'pointer')
         .style('opacity', 0)
         .call(drag(simulation))
-        .on('click', expandNode)
+        .on('click', (event, d) => {
+          updateSidebar(d);
+          expandNode(event, d);
+        })
         .on('dblclick', (event, d) => {
           event.stopPropagation();
           // Unpin the node
@@ -574,8 +535,6 @@ function render() {
           d3.select(event.currentTarget).classed('pinned', false);
           simulation.alpha(0.3).restart();
         })
-        .on('mouseenter', showTooltip)
-        .on('mouseleave', scheduleHideTooltip)
         .call(enter => enter.transition()
           .duration(300)
           .style('opacity', 1)),
