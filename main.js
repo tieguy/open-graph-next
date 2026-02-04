@@ -769,7 +769,8 @@ function render() {
         .attr('height', 48)
         .attr('clip-path', 'url(#thumbnail-clip)')
         .attr('preserveAspectRatio', 'xMidYMid slice')
-        .attr('pointer-events', 'none'),
+        .attr('pointer-events', 'none')
+        .attr('crossorigin', 'anonymous'),
       update => update
         .attr('href', d => d.thumbnail),
       exit => exit.remove()
