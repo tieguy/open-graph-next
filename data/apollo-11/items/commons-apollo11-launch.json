@@ -1,0 +1,14 @@
+{
+  "id": "commons-apollo11-launch",
+  "source": "wikimedia_commons",
+  "title": "Apollo 11 Launch",
+  "description": "Photograph of the Saturn V rocket carrying Apollo 11 lifting off from Kennedy Space Center Launch Complex 39A on July 16, 1969.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/200px-Aldrin_Apollo_11_original.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Apollo_11_Launch_-_GPN-2000-000630.jpg",
+  "connections": [],
+  "potential": {
+    "wikimedia_commons": 4567,
+    "internet_archive": 234,
+    "total": 4801
+  }
+}
