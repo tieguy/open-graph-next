@@ -47,3 +47,34 @@ footer {
 .link-group {
   cursor: pointer;
 }
+
+/* Zoom controls */
+#controls {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 100;
+}
+
+#controls button {
+  width: 36px;
+  height: 36px;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  background: #21262d;
+  color: #c9d1d9;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+#controls button:hover {
+  background: #30363d;
+  border-color: #8b949e;
+}

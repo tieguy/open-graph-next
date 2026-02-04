@@ -110,6 +110,7 @@ let links = [];
 let simulation = null;
 let svg = null;
 let g = null;
+let zoomBehavior = null;
 
 // Initialize the graph
 async function init() {
@@ -147,13 +148,29 @@ function setupSvg() {
   g = svg.append('g');
 
   // Setup zoom behavior
-  const zoom = d3.zoom()
+  zoomBehavior = d3.zoom()
     .scaleExtent([0.1, 4])
     .on('zoom', (event) => {
       g.attr('transform', event.transform);
     });
 
-  svg.call(zoom);
+  svg.call(zoomBehavior);
+
+  // Setup zoom controls
+  d3.select('#zoom-in').on('click', () => {
+    svg.transition().duration(300).call(zoomBehavior.scaleBy, 1.3);
+  });
+
+  d3.select('#zoom-out').on('click', () => {
+    svg.transition().duration(300).call(zoomBehavior.scaleBy, 0.7);
+  });
+
+  d3.select('#zoom-reset').on('click', () => {
+    svg.transition().duration(300).call(
+      zoomBehavior.transform,
+      d3.zoomIdentity.translate(width / 2, height / 2).scale(1)
+    );
+  });
 }
 
 function setupSimulation() {
