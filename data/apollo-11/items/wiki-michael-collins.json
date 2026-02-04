@@ -5,5 +5,16 @@
   "description": "Michael Collins was an American astronaut who flew the Apollo 11 command module Columbia while his crewmates walked on the Moon.",
   "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Michael_Collins_%28S69-31742%2C_restoration%29.jpg/220px-Michael_Collins_%28S69-31742%2C_restoration%29.jpg",
   "url": "https://en.wikipedia.org/wiki/Michael_Collins_(astronaut)",
-  "connections": []
+  "connections": [],
+  "potential": {
+    "internet_archive": 412,
+    "wikipedia": 98,
+    "wikimedia_commons": 178,
+    "dpla": 34,
+    "openlibrary": 19,
+    "arxiv": 5,
+    "met_museum": 0,
+    "smithsonian": 52,
+    "total": 798
+  }
 }

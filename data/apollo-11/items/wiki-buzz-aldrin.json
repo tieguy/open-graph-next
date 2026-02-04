@@ -5,5 +5,16 @@
   "description": "Buzz Aldrin is an American former astronaut, fighter pilot and engineer. He was the lunar module pilot on Apollo 11.",
   "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Buzz_Aldrin.jpg/220px-Buzz_Aldrin.jpg",
   "url": "https://en.wikipedia.org/wiki/Buzz_Aldrin",
-  "connections": []
+  "connections": [],
+  "potential": {
+    "internet_archive": 623,
+    "wikipedia": 134,
+    "wikimedia_commons": 245,
+    "dpla": 56,
+    "openlibrary": 28,
+    "arxiv": 8,
+    "met_museum": 1,
+    "smithsonian": 45,
+    "total": 1140
+  }
 }
