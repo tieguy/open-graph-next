@@ -55,7 +55,7 @@ const SOURCES = {
   gbif: {
     color: '#4e9a47',
     name: 'GBIF',
-    favicon: 'https://www.gbif.org/favicon.ico'
+    favicon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gbif-full-green-logo.svg/32px-Gbif-full-green-logo.svg.png'
   }
 };
 
