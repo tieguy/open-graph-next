@@ -362,3 +362,18 @@ header .subtitle {
   padding-top: 8px;
   border-top: 1px solid #30363d;
 }
+
+/* Potential badge for leaf nodes */
+.potential-badge {
+  pointer-events: none;
+  opacity: 0.95;
+  transition: opacity 0.2s;
+}
+
+.node:hover .potential-badge {
+  opacity: 1;
+}
+
+.potential-sparkle {
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.5));
+}

@@ -84,6 +84,18 @@ function getConnectionColor(type) {
   return CONNECTION_TYPES[type]?.color || '#30363d';
 }
 
+function isLeafNode(node) {
+  // A leaf node has potential counts and no connections in our cache
+  return node.potential && node.potential.total > 0;
+}
+
+function formatPotentialCount(count) {
+  if (count >= 1000) {
+    return `${(count / 1000).toFixed(1)}k`;
+  }
+  return count.toString();
+}
+
 function showTooltip(event, d) {
   const tooltip = document.getElementById('tooltip');
   const expanded = expandedNodes.has(d.id);
@@ -544,6 +556,49 @@ function render() {
         .attr('pointer-events', 'none')
         .text('+'),
       update => update,
+      exit => exit.remove()
+    );
+
+  // Add potential indicator for leaf nodes (sparkle badge)
+  nodeGroups.selectAll('g.potential-badge')
+    .data(d => isLeafNode(d) ? [d] : [])
+    .join(
+      enter => {
+        const badge = enter.append('g')
+          .attr('class', 'potential-badge')
+          .attr('transform', 'translate(-18, -18)');
+
+        // Badge background
+        badge.append('rect')
+          .attr('rx', 10)
+          .attr('ry', 10)
+          .attr('width', 50)
+          .attr('height', 20)
+          .attr('fill', '#238636')
+          .attr('opacity', 0.9);
+
+        // Sparkle icon
+        badge.append('text')
+          .attr('class', 'potential-sparkle')
+          .attr('x', 8)
+          .attr('y', 14)
+          .attr('font-size', '10px')
+          .text('✨');
+
+        // Count text
+        badge.append('text')
+          .attr('class', 'potential-count')
+          .attr('x', 20)
+          .attr('y', 14)
+          .attr('fill', '#fff')
+          .attr('font-size', '11px')
+          .attr('font-weight', '600')
+          .text(d => `+${formatPotentialCount(d.potential.total)}`);
+
+        return badge;
+      },
+      update => update.select('.potential-count')
+        .text(d => `+${formatPotentialCount(d.potential.total)}`),
       exit => exit.remove()
     );
 
