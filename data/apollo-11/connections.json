@@ -39,6 +39,71 @@
       "targetId": "ol-carrying-fire",
       "type": "creator",
       "label": "memoir by crew"
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "part of program"
+    }
+  ],
+  "wiki-neil-armstrong": [
+    {
+      "targetId": "ol-first-man",
+      "type": "subject",
+      "label": "biography"
+    },
+    {
+      "targetId": "smithsonian-space-suit",
+      "type": "subject",
+      "label": "wore this suit"
+    },
+    {
+      "targetId": "commons-footprint",
+      "type": "subject",
+      "label": "first footprint"
+    }
+  ],
+  "wiki-michael-collins": [
+    {
+      "targetId": "ol-carrying-fire",
+      "type": "creator",
+      "label": "wrote memoir"
+    },
+    {
+      "targetId": "smithsonian-command-module",
+      "type": "subject",
+      "label": "piloted spacecraft"
+    }
+  ],
+  "wiki-saturn-v": [
+    {
+      "targetId": "wiki-wernher-von-braun",
+      "type": "creator",
+      "label": "chief architect"
+    },
+    {
+      "targetId": "commons-apollo11-launch",
+      "type": "subject",
+      "label": "launch photo"
+    }
+  ],
+  "wiki-apollo-program": [
+    {
+      "targetId": "wiki-jfk",
+      "type": "person",
+      "label": "initiated by"
+    },
+    {
+      "targetId": "wiki-moon-landing",
+      "type": "subject",
+      "label": "achieved goal"
+    }
+  ],
+  "commons-earthrise": [
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "taken during"
     }
   ]
 }
