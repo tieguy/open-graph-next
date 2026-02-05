@@ -4,6 +4,8 @@
 import { fetchByOlid } from './openlibrary.js';
 import { fetchItem as fetchIAItem, searchItems as searchIA } from './internet-archive.js';
 import { fetchRecord as fetchViafRecord } from './viaf.js';
+import { fetchRecord as fetchGndRecord } from './gnd.js';
+import { fetchRecord as fetchLccnRecord } from './lccn.js';
 import { fetchSpecies as fetchGbifSpecies, searchSpecies as searchGbif } from './gbif.js';
 import { fetchTaxon as fetchInatTaxon, searchTaxa as searchInat } from './inaturalist.js';
 import { searchItems as searchDpla } from './dpla.js';
@@ -15,6 +17,8 @@ const IDENTIFIER_FETCHERS = {
   openlibrary: fetchByOlid,
   internet_archive: fetchIAItem,
   viaf: fetchViafRecord,
+  gnd: fetchGndRecord,
+  lccn: fetchLccnRecord,
   gbif: fetchGbifSpecies,
   inaturalist: fetchInatTaxon
 };
@@ -45,6 +49,16 @@ export const SOURCE_CONFIG = {
     name: 'VIAF',
     color: '#8b6b4e',
     icon: null  // VIAF changed their site, old icon URL no longer works
+  },
+  gnd: {
+    name: 'GND',
+    color: '#003366',
+    icon: 'https://d-nb.info/favicon.ico'
+  },
+  lccn: {
+    name: 'Library of Congress',
+    color: '#003153',
+    icon: 'https://id.loc.gov/static/images/Fav.ico'
   },
   gbif: {
     name: 'GBIF',

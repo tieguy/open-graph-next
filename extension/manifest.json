@@ -22,7 +22,9 @@
     "https://api.si.edu/*",
     "https://collectionapi.metmuseum.org/*",
     "https://api.gbif.org/*",
-    "https://api.inaturalist.org/*"
+    "https://api.inaturalist.org/*",
+    "https://d-nb.info/*",
+    "https://id.loc.gov/*"
   ],
   "side_panel": {
     "default_path": "sidebar/panel.html"
