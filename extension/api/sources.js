@@ -29,47 +29,67 @@ const SEARCH_FUNCTIONS = {
   wikimedia_commons: searchCommons
 };
 
-// Source display configuration
+// Source display configuration with fallback colors
 export const SOURCE_CONFIG = {
   openlibrary: {
     name: 'OpenLibrary',
     color: '#418541',
-    icon: 'https://openlibrary.org/favicon.ico'
+    icon: 'https://openlibrary.org/static/images/openlibrary-logo-tighter.svg',
+    fallbackIcon: null
   },
   internet_archive: {
     name: 'Internet Archive',
     color: '#6b8cae',
-    icon: 'https://archive.org/favicon.ico'
+    icon: 'https://archive.org/images/glogo.png',
+    fallbackIcon: null
   },
   viaf: {
     name: 'VIAF',
     color: '#8b6b4e',
-    icon: 'https://viaf.org/viaf/images/viaf.ico'
+    icon: 'https://viaf.org/viaf/images/viaf.ico',
+    fallbackIcon: null
   },
   gbif: {
     name: 'GBIF',
     color: '#4e9a47',
-    icon: 'https://www.gbif.org/favicon.ico'
+    icon: 'https://www.gbif.org/favicon-16x16.png',
+    fallbackIcon: null
   },
   inaturalist: {
     name: 'iNaturalist',
     color: '#74ac00',
-    icon: 'https://www.inaturalist.org/favicon.ico'
+    icon: 'https://static.inaturalist.org/sites/1-favicon.ico',
+    fallbackIcon: null
   },
   dpla: {
     name: 'DPLA',
     color: '#0068a6',
-    icon: 'https://dp.la/favicon.ico'
+    icon: 'https://dp.la/static/images/dpla-icons/dpla-icon.png',
+    fallbackIcon: null
   },
   arxiv: {
     name: 'arXiv',
     color: '#b31b1b',
-    icon: 'https://arxiv.org/favicon.ico'
+    icon: 'https://arxiv.org/favicon.ico',
+    fallbackIcon: null
   },
   wikimedia_commons: {
     name: 'Wikimedia Commons',
     color: '#006699',
-    icon: 'https://commons.wikimedia.org/favicon.ico'
+    icon: 'https://commons.wikimedia.org/static/favicon/commons.ico',
+    fallbackIcon: null
+  },
+  wikidata: {
+    name: 'Wikidata',
+    color: '#006699',
+    icon: 'https://www.wikidata.org/static/favicon/wikidata.ico',
+    fallbackIcon: null
+  },
+  wikipedia: {
+    name: 'Wikipedia',
+    color: '#000000',
+    icon: 'https://en.wikipedia.org/static/favicon/wikipedia.ico',
+    fallbackIcon: null
   }
 };
 

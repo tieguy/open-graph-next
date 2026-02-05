@@ -28,8 +28,36 @@ const errorMessageEl = document.getElementById('error-message');
 let currentPage = null;
 let currentEntity = null;
 let tier2SourcesLoaded = [];
+let tier2Errors = {};
 let tier3Loaded = false;
 let dataQualityIssues = [];
+let isOnline = navigator.onLine;
+
+// Online/offline detection
+window.addEventListener('online', () => {
+  isOnline = true;
+  updateOfflineNotice();
+});
+
+window.addEventListener('offline', () => {
+  isOnline = false;
+  updateOfflineNotice();
+});
+
+function updateOfflineNotice() {
+  const existing = document.querySelector('.offline-notice');
+  if (!isOnline && !existing) {
+    const notice = document.createElement('div');
+    notice.className = 'offline-notice';
+    notice.innerHTML = `
+      <span class="offline-notice-icon">📡</span>
+      <span class="offline-notice-text">You're offline. Showing cached results only.</span>
+    `;
+    document.querySelector('.content').prepend(notice);
+  } else if (isOnline && existing) {
+    existing.remove();
+  }
+}
 
 function hideAllSections() {
   wikidataSectionEl.classList.add('hidden');
@@ -51,6 +79,7 @@ function showLoading(message) {
 function updatePageInfo(page) {
   currentPage = page;
   tier2SourcesLoaded = [];
+  tier2Errors = {};
   tier3Loaded = false;
   dataQualityIssues = [];
 
@@ -69,6 +98,8 @@ function updatePageInfo(page) {
     hideAllSections();
     noWikidataEl.classList.remove('hidden');
   }
+
+  updateOfflineNotice();
 }
 
 function displayWikidataEntity(entity) {
@@ -116,12 +147,53 @@ function displayTier2Results(results) {
 
   const successfulSources = Object.entries(results.successful);
   tier2SourcesLoaded = successfulSources.map(([type]) => type);
+  tier2Errors = results.failed || {};
 
+  // Show successful results
   if (successfulSources.length > 0) {
     sameEntitySectionEl.classList.remove('hidden');
     sameEntityListEl.innerHTML = successfulSources.map(([sourceType, data]) =>
       renderResultCard(data, false)
     ).join('');
+  }
+
+  // Show errors with retry buttons (only for network errors, not 404s)
+  const retryableErrors = Object.entries(tier2Errors).filter(
+    ([, msg]) => !msg.includes('Not found') && !msg.includes('404')
+  );
+
+  if (retryableErrors.length > 0) {
+    const errorHtml = retryableErrors.map(([source, message]) => `
+      <div class="source-error" data-source="${escapeHtml(source)}">
+        <div class="source-error-info">
+          <span class="source-error-text">
+            <span class="source-error-name">${escapeHtml(source)}</span>: Failed to load
+          </span>
+        </div>
+        <button class="retry-btn" data-source="${escapeHtml(source)}" data-tier="2">
+          Retry
+        </button>
+      </div>
+    `).join('');
+
+    // Append errors after results
+    if (successfulSources.length > 0) {
+      sameEntityListEl.innerHTML += errorHtml;
+    } else {
+      sameEntitySectionEl.classList.remove('hidden');
+      sameEntityListEl.innerHTML = errorHtml;
+    }
+  }
+
+  // Show empty state if nothing found and no errors
+  if (successfulSources.length === 0 && retryableErrors.length === 0) {
+    // Check if all results were 404s (not found is okay, not an error)
+    const all404 = Object.values(tier2Errors).every(
+      msg => msg.includes('Not found') || msg.includes('404')
+    );
+    if (!all404 && Object.keys(tier2Errors).length > 0) {
+      // Some errors occurred
+    }
   }
 
   if (!tier3Loaded) {
@@ -135,7 +207,18 @@ function displayTier3Results(results) {
   tier3Loaded = true;
 
   const successfulSources = Object.entries(results.successful);
-  if (successfulSources.length === 0) return;
+
+  if (successfulSources.length === 0) {
+    // Show empty state
+    relatedTopicsSectionEl.classList.remove('hidden');
+    relatedTopicsListEl.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <div class="empty-state-text">No related resources found</div>
+      </div>
+    `;
+    return;
+  }
 
   relatedTopicsSectionEl.classList.remove('hidden');
   relatedTopicsListEl.innerHTML = successfulSources.map(([sourceType, items]) => {
@@ -153,10 +236,26 @@ function displayTier3Results(results) {
       </div>
     `;
   }).join('');
+
+  // Show any Tier 3 errors
+  const tier3Errors = Object.entries(results.failed || {});
+  if (tier3Errors.length > 0) {
+    relatedTopicsListEl.innerHTML += tier3Errors.map(([source, message]) => `
+      <div class="source-error" data-source="${escapeHtml(source)}">
+        <div class="source-error-info">
+          <span class="source-error-text">
+            <span class="source-error-name">${escapeHtml(source)}</span>: Failed to search
+          </span>
+        </div>
+        <button class="retry-btn" data-source="${escapeHtml(source)}" data-tier="3">
+          Retry
+        </button>
+      </div>
+    `).join('');
+  }
 }
 
 function displayDataQualityIssues(issues) {
-  // Merge with existing issues, avoiding duplicates
   for (const issue of issues) {
     const exists = dataQualityIssues.some(
       i => i.type === issue.type && i.source === issue.source
@@ -213,9 +312,9 @@ function renderResultCard(data, compact) {
   return `
     <a href="${escapeHtml(data.url)}" target="_blank" rel="noopener" class="${cardClass}">
       ${data.thumbnail
-        ? `<img src="${escapeHtml(data.thumbnail)}" alt="" class="result-thumbnail" loading="lazy">`
+        ? `<img src="${escapeHtml(data.thumbnail)}" alt="" class="result-thumbnail" loading="lazy" onerror="this.style.display='none'">`
         : `<div class="result-thumbnail-placeholder">
-            ${config.icon ? `<img src="${escapeHtml(config.icon)}" alt="">` : ''}
+            ${config.icon ? `<img src="${escapeHtml(config.icon)}" alt="" onerror="this.style.display='none'">` : ''}
           </div>`
       }
       <div class="result-content">
@@ -223,7 +322,7 @@ function renderResultCard(data, compact) {
         ${data.description ? `<div class="result-description">${escapeHtml(data.description)}</div>` : ''}
         ${!compact ? `
           <div class="result-source">
-            ${config.icon ? `<img src="${escapeHtml(config.icon)}" alt="" class="result-source-icon">` : ''}
+            ${config.icon ? `<img src="${escapeHtml(config.icon)}" alt="" class="result-source-icon" onerror="this.style.display='none'">` : ''}
             <span class="result-source-name">${escapeHtml(config.name)}</span>
           </div>
         ` : ''}
@@ -249,6 +348,7 @@ async function performTier3Search() {
   if (!currentPage) return;
 
   showLoading('Searching more sources...');
+  searchMoreBtn.disabled = true;
 
   try {
     const response = await browser.runtime.sendMessage({
@@ -263,9 +363,49 @@ async function performTier3Search() {
     }
   } catch (error) {
     console.error('Tier 3 search error:', error);
-    displayError('Search failed');
+    displayError('Search failed. Please try again.');
+  } finally {
+    searchMoreBtn.disabled = false;
   }
 }
+
+// Event delegation for retry buttons
+document.addEventListener('click', async (e) => {
+  if (e.target.classList.contains('retry-btn')) {
+    const source = e.target.dataset.source;
+    const tier = e.target.dataset.tier;
+
+    e.target.disabled = true;
+    e.target.textContent = 'Retrying...';
+
+    try {
+      if (tier === '2' && currentEntity) {
+        const response = await browser.runtime.sendMessage({
+          type: 'GET_TIER2_RESULTS',
+          identifiers: currentEntity.identifiers
+        });
+        if (response.results) {
+          displayTier2Results(response.results);
+        }
+      } else if (tier === '3' && currentPage) {
+        const response = await browser.runtime.sendMessage({
+          type: 'SEARCH_TIER3',
+          query: currentPage.title
+        });
+        if (response.results) {
+          displayTier3Results(response.results);
+        }
+      }
+    } catch (error) {
+      console.error('Retry failed:', error);
+      e.target.textContent = 'Failed';
+      setTimeout(() => {
+        e.target.textContent = 'Retry';
+        e.target.disabled = false;
+      }, 2000);
+    }
+  }
+});
 
 searchMoreBtn.addEventListener('click', performTier3Search);
 searchNoWikidataBtn.addEventListener('click', performTier3Search);
@@ -293,7 +433,6 @@ async function loadCurrentPage() {
       }
     }
 
-    // Get any existing data quality issues
     const issuesResponse = await browser.runtime.sendMessage({ type: 'GET_DATA_QUALITY_ISSUES' });
     if (issuesResponse.issues?.length > 0) {
       displayDataQualityIssues(issuesResponse.issues);
