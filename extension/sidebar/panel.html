@@ -20,16 +20,24 @@
     </section>
 
     <section id="wikidata-section" class="section hidden">
-      <h2 class="section-title">Wikidata</h2>
+      <h2 class="section-title">Wikidata Entity</h2>
       <div id="wikidata-info" class="wikidata-info">
-        <!-- Wikidata info will be populated here -->
+        <div id="entity-header" class="entity-header"></div>
+        <div id="entity-description" class="entity-description"></div>
       </div>
     </section>
 
-    <section id="results" class="section hidden">
-      <h2 class="section-title">Related Resources</h2>
-      <div id="results-list" class="results-list">
-        <!-- Results will be populated here -->
+    <section id="identifiers-section" class="section hidden">
+      <h2 class="section-title">Known Identifiers</h2>
+      <div id="identifiers-list" class="identifiers-list">
+        <!-- Identifiers will be populated here -->
+      </div>
+    </section>
+
+    <section id="loading-section" class="section hidden">
+      <div class="loading">
+        <span class="loading-spinner"></span>
+        <span class="loading-text">Loading Wikidata...</span>
       </div>
     </section>
 
@@ -37,6 +45,12 @@
       <div class="notice notice-warning">
         <p>This article is not linked to Wikidata.</p>
         <p class="notice-subtext">Related resources will be found via keyword search.</p>
+      </div>
+    </section>
+
+    <section id="error-section" class="section hidden">
+      <div class="notice notice-error">
+        <p id="error-message">An error occurred.</p>
       </div>
     </section>
   </main>
