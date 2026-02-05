@@ -38,6 +38,19 @@
       <div id="same-entity-list" class="results-list"></div>
     </section>
 
+    <section id="related-topics-section" class="section hidden">
+      <h2 class="section-title">Related Topics</h2>
+      <p class="section-subtitle">Found via keyword search</p>
+      <div id="related-topics-list" class="results-list"></div>
+    </section>
+
+    <section id="search-more-section" class="section hidden">
+      <button id="search-more-btn" class="search-more-btn">
+        <span class="search-icon">🔍</span>
+        Search more sources
+      </button>
+    </section>
+
     <section id="loading-section" class="section hidden">
       <div class="loading">
         <span class="loading-spinner"></span>
@@ -48,8 +61,12 @@
     <section id="no-wikidata" class="section hidden">
       <div class="notice notice-warning">
         <p>This article is not linked to Wikidata.</p>
-        <p class="notice-subtext">Related resources will be found via keyword search.</p>
+        <p class="notice-subtext">Click below to search for related content.</p>
       </div>
+      <button id="search-no-wikidata-btn" class="search-more-btn">
+        <span class="search-icon">🔍</span>
+        Search all sources
+      </button>
     </section>
 
     <section id="error-section" class="section hidden">
