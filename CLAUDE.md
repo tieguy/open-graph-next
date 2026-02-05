@@ -14,14 +14,16 @@ Speculative design prototype demonstrating what cooperative knowledge infrastruc
 
 ## Commands
 
-- `python -m http.server 8000` - Serve locally (or any static server)
+- `python -m http.server 8000 -d web-demo` - Serve locally (or any static server)
 
 ## Project Structure
 
-- `index.html` - Single page shell
-- `main.js` - Graph visualization logic
-- `style.css` - Dark theme styles
-- `data/apollo-11/` - Curated dataset (see Data Contracts below)
+- `web-demo/` - D3.js force-directed graph demo
+  - `index.html` - Single page shell
+  - `main.js` - Graph visualization logic
+  - `style.css` - Dark theme styles
+  - `data/apollo-11/` - Curated dataset (see Data Contracts below)
+- `extension/` - Firefox browser extension
 - `docs/design-plans/` - Design documentation
 - `docs/implementation-plans/` - Implementation tracking
 
@@ -29,21 +31,21 @@ Speculative design prototype demonstrating what cooperative knowledge infrastruc
 
 All data is pre-cached JSON. No live API calls.
 
-**Node schema** (`data/{topic}/items/*.json`):
+**Node schema** (`web-demo/data/{topic}/items/*.json`):
 ```
 {id, source, title, description, thumbnail?, url, potential?}
 ```
 - `source`: `internet_archive | wikipedia | wikimedia_commons | openlibrary | smithsonian | dpla | arxiv | met_museum | openstreetmap | inaturalist | gbif`
 - `potential`: Object with source-keyed counts plus `total` (for leaf nodes)
 
-**Connections** (`data/{topic}/connections.json`):
+**Connections** (`web-demo/data/{topic}/connections.json`):
 ```
 {[nodeId]: [{targetId, type, label, linkedVia?}]}
 ```
 - `type`: `person | subject | location | time | creator`
 - `linkedVia`: Array of authority system IDs that enable this link (e.g., `["viaf", "lc", "wikidata"]`). Line thickness derived from array length.
 
-**Seed** (`data/{topic}/seed.json`): Starting node for the graph.
+**Seed** (`web-demo/data/{topic}/seed.json`): Starting node for the graph.
 
 ## Key Decisions
 
