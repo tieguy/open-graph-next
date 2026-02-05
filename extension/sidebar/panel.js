@@ -55,7 +55,7 @@ function displayWikidataEntity(entity) {
   const wikidataUrl = `https://www.wikidata.org/wiki/${entity.id}`;
   entityHeaderEl.innerHTML = `
     <span class="entity-label">${escapeHtml(entity.label)}</span>
-    <a href="${wikidataUrl}" target="_blank" rel="noopener" class="qid-badge">${entity.id}</a>
+    <a href="${wikidataUrl}" target="_blank" rel="noopener" class="qid-badge">${escapeHtml(entity.id)}</a>
   `;
 
   if (entity.description) {
