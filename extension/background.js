@@ -4,17 +4,20 @@
 import { fetchEntity, getIdentifierUrl } from './api/wikidata.js';
 import { querySourcesByIdentifiers, searchSourcesByKeyword, getSourceConfig } from './api/sources.js';
 import { getCached, setCache } from './utils/cache.js';
+import { getAllIssues, detectBrokenLinks, detectMissingIdentifiers } from './utils/data-quality.js';
 
 console.log('Jenifesto background script loaded');
 
 // Cache TTLs
-const WIKIDATA_CACHE_TTL = 24 * 60 * 60 * 1000; // 24 hours
-const SOURCE_CACHE_TTL = 1 * 60 * 60 * 1000; // 1 hour
-const SEARCH_CACHE_TTL = 1 * 60 * 60 * 1000; // 1 hour
+const WIKIDATA_CACHE_TTL = 24 * 60 * 60 * 1000;
+const SOURCE_CACHE_TTL = 1 * 60 * 60 * 1000;
+const SEARCH_CACHE_TTL = 1 * 60 * 60 * 1000;
 
-// Current page state
+// Current state
 let currentPage = null;
-let currentTier2Sources = []; // Track which sources have Tier 2 results
+let currentEntity = null;
+let currentTier2Results = null;
+let currentTier3Results = null;
 
 // Listen for messages
 browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
@@ -56,11 +59,17 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
         sendResponse({ error: 'No query provided' });
         return;
       }
-      performTier3Search(message.query, currentTier2Sources).then(
+      const excludeSources = Object.keys(currentTier2Results?.successful || {});
+      performTier3Search(message.query, excludeSources).then(
         results => sendResponse({ results }),
         error => sendResponse({ error: error.message })
       );
       return true;
+
+    case 'GET_DATA_QUALITY_ISSUES':
+      const issues = computeDataQualityIssues();
+      sendResponse({ issues });
+      return;
   }
 });
 
@@ -68,13 +77,16 @@ browser.runtime.onMessage.addListener((message, sender, sendResponse) => {
  * Handle page loaded message from content script
  */
 async function handlePageLoaded(message) {
+  // Reset state
   currentPage = {
     title: message.title,
     url: message.url,
     qid: message.qid,
     timestamp: Date.now()
   };
-  currentTier2Sources = [];
+  currentEntity = null;
+  currentTier2Results = null;
+  currentTier3Results = null;
 
   await browser.storage.local.set({ currentPage });
   broadcastMessage({ type: 'PAGE_UPDATED', page: currentPage });
@@ -82,24 +94,41 @@ async function handlePageLoaded(message) {
   if (currentPage.qid) {
     try {
       // Tier 1: Fetch Wikidata
-      const wikidataEntity = await fetchWikidataForPage(currentPage.qid);
-      broadcastMessage({ type: 'WIKIDATA_LOADED', entity: wikidataEntity });
+      currentEntity = await fetchWikidataForPage(currentPage.qid);
+      broadcastMessage({ type: 'WIKIDATA_LOADED', entity: currentEntity });
 
       // Tier 2: Query sources with identifiers
-      if (Object.keys(wikidataEntity.identifiers).length > 0) {
+      if (Object.keys(currentEntity.identifiers).length > 0) {
         broadcastMessage({ type: 'TIER2_LOADING' });
 
-        const tier2Results = await fetchTier2Results(currentPage.qid, wikidataEntity.identifiers);
+        currentTier2Results = await fetchTier2Results(currentPage.qid, currentEntity.identifiers);
+        broadcastMessage({ type: 'TIER2_LOADED', results: currentTier2Results });
 
-        // Track which sources returned Tier 2 results
-        currentTier2Sources = Object.keys(tier2Results.successful);
-
-        broadcastMessage({ type: 'TIER2_LOADED', results: tier2Results });
+        // Check for broken links immediately
+        const brokenLinkIssues = detectBrokenLinks(
+          currentTier2Results,
+          currentEntity.identifiers,
+          currentPage.qid
+        );
+        if (brokenLinkIssues.length > 0) {
+          broadcastMessage({ type: 'DATA_QUALITY_ISSUES', issues: brokenLinkIssues });
+        }
       }
     } catch (error) {
       console.error('Failed to fetch data:', error);
       broadcastMessage({ type: 'LOAD_ERROR', error: error.message });
     }
+  } else {
+    // No Wikidata - broadcast that as an issue
+    broadcastMessage({
+      type: 'DATA_QUALITY_ISSUES',
+      issues: [{
+        type: 'no_wikidata',
+        message: 'This Wikipedia article is not linked to Wikidata',
+        editUrl: `https://www.wikidata.org/wiki/Special:NewItem?site=enwiki&page=${encodeURIComponent(currentPage.title)}`,
+        articleTitle: currentPage.title
+      }]
+    });
   }
 
   return { success: true };
@@ -160,13 +189,14 @@ async function performTier3Search(query, excludeSources) {
 
   if (cached) {
     console.log('Tier 3 cache hit:', query);
+    currentTier3Results = cached;
+    checkForMissingIdentifiers();
     return cached;
   }
 
   console.log('Tier 3 cache miss, searching:', query);
   const results = await searchSourcesByKeyword(query, excludeSources, 5);
 
-  // Add source config to results
   for (const [type, items] of Object.entries(results.successful)) {
     const config = getSourceConfig(type);
     for (const item of items) {
@@ -175,7 +205,43 @@ async function performTier3Search(query, excludeSources) {
   }
 
   await setCache(cacheKey, results, SEARCH_CACHE_TTL);
+  currentTier3Results = results;
+
+  // Check for missing identifiers after Tier 3 completes
+  checkForMissingIdentifiers();
+
   return results;
+}
+
+/**
+ * Check for missing identifiers after Tier 3 search
+ */
+function checkForMissingIdentifiers() {
+  if (!currentTier3Results || !currentPage?.qid) return;
+
+  const missingIdIssues = detectMissingIdentifiers(
+    currentTier2Results,
+    currentTier3Results,
+    currentPage.qid
+  );
+
+  if (missingIdIssues.length > 0) {
+    broadcastMessage({ type: 'DATA_QUALITY_ISSUES', issues: missingIdIssues });
+  }
+}
+
+/**
+ * Compute all current data quality issues
+ */
+function computeDataQualityIssues() {
+  return getAllIssues({
+    qid: currentPage?.qid,
+    articleTitle: currentPage?.title,
+    articleUrl: currentPage?.url,
+    identifiers: currentEntity?.identifiers || {},
+    tier2Results: currentTier2Results,
+    tier3Results: currentTier3Results
+  });
 }
 
 /**
