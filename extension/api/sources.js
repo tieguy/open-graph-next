@@ -34,62 +34,52 @@ export const SOURCE_CONFIG = {
   openlibrary: {
     name: 'OpenLibrary',
     color: '#418541',
-    icon: 'https://openlibrary.org/static/images/openlibrary-logo-tighter.svg',
-    fallbackIcon: null
+    icon: 'https://openlibrary.org/static/images/openlibrary-logo-tighter.svg'
   },
   internet_archive: {
     name: 'Internet Archive',
     color: '#6b8cae',
-    icon: 'https://archive.org/images/glogo.png',
-    fallbackIcon: null
+    icon: 'https://archive.org/images/glogo.png'
   },
   viaf: {
     name: 'VIAF',
     color: '#8b6b4e',
-    icon: 'https://viaf.org/viaf/images/viaf.ico',
-    fallbackIcon: null
+    icon: 'https://viaf.org/viaf/images/viaf.ico'
   },
   gbif: {
     name: 'GBIF',
     color: '#4e9a47',
-    icon: 'https://www.gbif.org/favicon-16x16.png',
-    fallbackIcon: null
+    icon: 'https://www.gbif.org/favicon-16x16.png'
   },
   inaturalist: {
     name: 'iNaturalist',
     color: '#74ac00',
-    icon: 'https://static.inaturalist.org/sites/1-favicon.ico',
-    fallbackIcon: null
+    icon: 'https://static.inaturalist.org/sites/1-favicon.ico'
   },
   dpla: {
     name: 'DPLA',
     color: '#0068a6',
-    icon: 'https://dp.la/static/images/dpla-icons/dpla-icon.png',
-    fallbackIcon: null
+    icon: 'https://dp.la/static/images/dpla-icons/dpla-icon.png'
   },
   arxiv: {
     name: 'arXiv',
     color: '#b31b1b',
-    icon: 'https://arxiv.org/favicon.ico',
-    fallbackIcon: null
+    icon: 'https://arxiv.org/favicon.ico'
   },
   wikimedia_commons: {
     name: 'Wikimedia Commons',
     color: '#006699',
-    icon: 'https://commons.wikimedia.org/static/favicon/commons.ico',
-    fallbackIcon: null
+    icon: 'https://commons.wikimedia.org/static/favicon/commons.ico'
   },
   wikidata: {
     name: 'Wikidata',
     color: '#006699',
-    icon: 'https://www.wikidata.org/static/favicon/wikidata.ico',
-    fallbackIcon: null
+    icon: 'https://www.wikidata.org/static/favicon/wikidata.ico'
   },
   wikipedia: {
     name: 'Wikipedia',
     color: '#000000',
-    icon: 'https://en.wikipedia.org/static/favicon/wikipedia.ico',
-    fallbackIcon: null
+    icon: 'https://en.wikipedia.org/static/favicon/wikipedia.ico'
   }
 };
 

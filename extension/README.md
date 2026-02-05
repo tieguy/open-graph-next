@@ -8,7 +8,7 @@ A Firefox browser extension that surfaces related resources from cultural herita
   - Tier 1: Wikidata entity and identifiers
   - Tier 2: Same-entity matches via linked identifiers
   - Tier 3: Related topics via keyword search
-- **11 Source APIs**: OpenLibrary, Internet Archive, VIAF, GBIF, iNaturalist, DPLA, arXiv, Wikimedia Commons, and more
+- **10 Source APIs**: OpenLibrary, Internet Archive, VIAF, GBIF, iNaturalist, DPLA, arXiv, Wikimedia Commons, Wikidata, and Wikipedia
 - **Data Quality Surface**: Highlights missing Wikidata identifiers and broken links with edit suggestions
 
 ## Installation

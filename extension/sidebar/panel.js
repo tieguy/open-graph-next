@@ -185,17 +185,6 @@ function displayTier2Results(results) {
     }
   }
 
-  // Show empty state if nothing found and no errors
-  if (successfulSources.length === 0 && retryableErrors.length === 0) {
-    // Check if all results were 404s (not found is okay, not an error)
-    const all404 = Object.values(tier2Errors).every(
-      msg => msg.includes('Not found') || msg.includes('404')
-    );
-    if (!all404 && Object.keys(tier2Errors).length > 0) {
-      // Some errors occurred
-    }
-  }
-
   if (!tier3Loaded) {
     searchMoreSectionEl.classList.remove('hidden');
   }
@@ -379,6 +368,8 @@ document.addEventListener('click', async (e) => {
     e.target.textContent = 'Retrying...';
 
     try {
+      // Note: On retry, we re-fetch all sources (not just the failed one).
+      // This refreshes all data and ensures consistency across the UI.
       if (tier === '2' && currentEntity) {
         const response = await browser.runtime.sendMessage({
           type: 'GET_TIER2_RESULTS',
