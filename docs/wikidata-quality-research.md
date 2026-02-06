@@ -137,6 +137,10 @@ The workflow: load tabular data → reconcile columns against Wikidata via fuzzy
 
 **Budget and staffing:** Tiny. Fiscally sponsored by [Code for Science and Society](https://www.codeforsociety.org/fsp/projects/openrefine) (CS&S, a 501(c)(3); 15% overhead on donations). As of early 2025, the project has **two paid contributors** — and the lead developer (Antonin Delpeuch) retired from the project in March 2025, leaving one. Developer budget is $7,500/month. Primary funding is a [$50k/year Wikimedia Foundation grant](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/General_Support_Fund/Maintenance_of_OpenRefine_and_its_Wikimedia-related_extensions.) (renewed annually). They were rejected for $100k from the Data Empowerment Fund, $400k from CZI, and $50k from Mozilla. They received two NLNet grants (~EUR 50k each) for 2026 work on reconciliation improvements. They are actively [fundraising for sustainability](https://openrefine.org/2025-fundraising).
 
+**Team:** Advisory Committee: Jan Ainali, Julie Faure-Lacroix, Esther Jackson. Core Developers: Tom Morris, Albin Larsson. Release Manager / Dev Engagement: Rory Sawyer. Project Manager: Martin Magdinier. [Governance](https://github.com/OpenRefine/OpenRefine/blob/master/GOVERNANCE.md).
+
+**Personal connection:** Jan Ainali is a direct contact — potential outreach channel for collaboration.
+
 **2025-2026 roadmap** ([priorities](https://openrefine.org/blog/2025/01/24/Looking-Forward-2025), [development roadmap](https://openrefine.org/docs/technical-reference/development-roadmap)):
 - AI/Hugging Face integration — "community exploration of integration with an AI platform like Hugging Face for more seamless data wrangling"
 - ML-enhanced reconciliation scoring — replacing opaque fuzzy-matching with learned models trained on user annotations
@@ -263,3 +267,108 @@ The landscape is:
 - **Nobody** is occupying the space of systematically expanding the set of facts that meet high quality standards
 
 An LLM-based approach could work in this gap: starting from YAGO's quality-filtered base (or similar standards), identify facts currently excluded due to missing references, type violations, or constraint failures, and use LLM verification to bring them up to standard — producing a larger, high-quality knowledge graph without requiring direct edits to Wikidata itself.
+
+---
+
+## Wikidata–Wikipedia Integration: State of Play
+
+### Infobox migration — a split story
+
+The initial wave of migrating Wikipedia infobox data to Wikidata has not led to wholesale adoption.
+
+**Smaller Wikipedias** are adopting eagerly. The [Databox Lua module](https://www.wikidata.org/wiki/Module:Databox) auto-generates infoboxes from Wikidata with zero per-template configuration. The Wikidata team is actively improving it through 2025.
+
+**English Wikipedia** is essentially stalled since the [2018 Infobox RfC](https://en.wikipedia.org/wiki/Wikipedia:Wikidata/2018_Infobox_RfC). The community reached a guarded consensus: Wikidata can fill empty infobox fields, but isn't trusted for wholesale replacement. The core concern is data quality — the canonical example being a Wikidata bot copying a Holocaust-denialist genre classification from Italian Wikipedia into English Wikipedia, overwriting a deliberate editorial choice. The [current policy](https://en.wikipedia.org/wiki/Wikipedia:Use_of_Wikidata_in_Wikipedia) reflects this caution.
+
+### Wikidata Bridge — on hiatus
+
+[Wikidata Bridge](https://www.mediawiki.org/wiki/Wikidata_Bridge) was supposed to close the trust gap by letting editors fix Wikidata values directly from Wikipedia infoboxes. On hiatus since February 2025. Without it, the friction of cross-wiki editing remains a barrier.
+
+### 2025–2028 development plan
+
+The [Wikidata 2025–2028 plan](https://www.wikidata.org/wiki/Wikidata:Development_plan/Wikidata_2025-2028) continues to list infobox integration as a priority. The pattern: small Wikipedias adopt eagerly, English Wikipedia resists on data quality grounds, and the tooling to bridge the gap has stalled.
+
+---
+
+## Prior Art: Wikipedia-Augmenting Browser Extensions
+
+### Closest competitors
+
+**[Entity Explosion](https://github.com/fuddl/wd)** — Chrome/Firefox extension matching URLs to Wikidata items, displays data + links in sidebar. Closest existing project to Jenifesto, but stops at showing Wikidata properties — doesn't query downstream sources. Active.
+
+**[Wikibase for Web](https://addons.mozilla.org/en-US/firefox/addon/wikidata/)** (Wikidata for Firefox) — Sidebar showing Wikidata data for sites you visit. If an ID isn't linked yet, offers to search/create the Wikidata entry — gap-filling from the browser. Active.
+
+**[wd-olid](https://github.com/hornc/wd-olid)** (Open Library–Wikidata Linker) — Chrome extension linking Open Library pages to Wikidata, highlights editions missing work records. Narrow scope but directly in the "identifier gap" space. Active (Charles Horn, 2017–2023).
+
+### Other relevant extensions
+
+- **[Wikidata OCI](https://github.com/Jk40git/Wikidata-OCI-Extension)** — Multilingual extension for quick Wikidata lookups while browsing
+- **[Forward to Libraries](https://en.wikipedia.org/wiki/Wikipedia:Forward_to_Libraries)** — Links Wikipedia article subjects to local library catalog searches (search-based, not identifier-based)
+- **Wikiwand** — Commercial Wikipedia reader with enhanced UI. Relies heavily on non-open/non-public data sources. Not a model for open infrastructure.
+- **LibX** (Historical) — Browser extension for searching library catalogs via context menu. Discontinued, but established the pattern.
+- **[Periphoscape](https://link.springer.com/chapter/10.1007/978-981-96-0579-8_25)** (WISE 2024) — Enhances Wikipedia browsing by surfacing "diverse aspects of topics" using incoming links and subtopic similarities. Academic.
+
+---
+
+## Wikidata Gap-Filling Tools (Beyond OpenRefine)
+
+**[Mix'n'match](https://meta.wikimedia.org/wiki/Mix'n'match/Manual)** — Crowdsources matching external catalog entries to Wikidata items. 2,500+ catalogs. UI for "does this unmatched entry correspond to this Wikidata item?" The matching UX is worth studying. ([Tutorial](https://thinking.is.ed.ac.uk/wikidata-workshop/practical-the-mix-n-match-tool/))
+
+**[QuickStatements v3](https://quickstatements.toolforge.org/)** — Batch editing Wikidata with simple text/CSV commands. Pipeline: SPARQL finds missing links → QuickStatements adds them. Active (Wikimedia Brasil). ([Docs](https://meta.wikimedia.org/wiki/QuickStatements_3.0/Documentation_user_guide))
+
+**SPARQL-based gap detection** — Federated SPARQL queries identify missing authority control IDs across knowledge bases. [ZBW Labs](http://zbw.eu/labs/en/blog/wikidata-as-authority-linking-hub-connecting-repec-and-gnd-researcher-identifiers) documented adding 12,000 missing GND IDs to Wikidata via VIAF cross-referencing.
+
+**[WikiProject Authority Control](https://www.wikidata.org/wiki/Wikidata:WikiProject_Authority_control)** — Coordinates authority identifier curation across 30+ systems (GND, LCCN, VIAF, ORCID, etc.). Active.
+
+---
+
+## Visualization & Linked Data Browsers
+
+**[Phuzzy.link](https://github.com/blake-regalia/phuzzy.link)** — Client-side linked data browser hopping between RDF graph nodes via hyperlinks. Geographic plugin renders spatial data alongside entity views — worth borrowing for entities with coordinates. ([Paper](https://ceur-ws.org/Vol-1947/paper04.pdf), VOILA@ISWC 2017)
+
+**[Wikidata Query Service](https://query.wikidata.org/)** — Built-in visualization: graph, map, timeline, image grid, bubble chart, treemap. Multi-view approach (same data, different lenses) is compelling. ([Docs](https://www.wikidata.org/wiki/Wikidata:SPARQL_query_service/Wikidata_Query_Help/Result_Views))
+
+**[Open Semantic Visual Graph Explorer](https://github.com/opensemanticsearch/open-semantic-visual-graph-explorer)** — Django app using Cytoscape.js for entity co-occurrence visualization. Shows thesaurus/ontology relationships alongside document context.
+
+**[Graph Explorer](https://github.com/zazuko/graph-explorer)** (Zazuko) — JavaScript app for visualizing/navigating RDF knowledge graphs across SPARQL endpoints.
+
+**[LodLive](https://en.lodlive.it/)** — RDF viewer, IRI dereferencer, SPARQL navigator.
+
+**[Research Rabbit](https://pmc.ncbi.nlm.nih.gov/articles/PMC10403115/)** — Scholarly publication discovery with AI, visualization maps, discovery pathways. "Rabbit hole" exploratory browsing for academic literature.
+
+---
+
+## GLAM & Digital Humanities
+
+**[Wikidata GLAM Ecosystem](https://www.wikidata.org/wiki/Wikidata:GLAM)** — 50,000+ GLAMs recorded in Wikidata. ([GLAM datasets](https://meta.wikimedia.org/wiki/FindingGLAMs/GLAM_datasets))
+
+**[WikiProject Biodiversity](https://www.wikidata.org/wiki/Wikidata:WikiProject_Biodiversity)** — Connects iNaturalist, GBIF, Wikimedia Commons. iNaturalist has become the dominant GBIF contributor since 2020.
+
+### Academic papers
+
+- Systematic review of Wikidata in DH: [Oxford Academic 2023](https://academic.oup.com/dsh/article/38/2/852/6964525)
+- Wikidata visualization for cultural heritage: [Sage 2026](https://journals.sagepub.com/doi/10.1177/22104968251395606)
+- KIF framework for integrating heterogeneous sources: [arXiv 2024](https://arxiv.org/abs/2403.10304)
+- Beyond VIAF (Wikidata for authority control): [ITAL](https://ital.corejournals.org/index.php/ital/article/view/12959)
+- Ontology-driven workflows: [JOHD](https://openhumanitiesdata.metajnl.com/articles/10.5334/johd.439)
+
+---
+
+## Jenifesto's Position in This Landscape
+
+Jenifesto (the browser extension) sidesteps the infobox trust problem entirely. It uses Wikidata's **identifier network** (VIAF, GND, LCCN, GBIF, etc.) without requiring Wikipedia editors to trust Wikidata's *content claims*. Identifiers are either correct links or they're not — there's no editorial judgment at stake.
+
+### What makes it different
+
+1. **Live querying of downstream sources** — Entity Explosion and Wikibase for Web stop at Wikidata; Jenifesto follows identifiers to actual archives
+2. **Real-time gap detection** — Mix'n'match and SPARQL do this in batch; doing it as someone browses Wikipedia is novel
+3. **Real-time identifier validation** — Tier 2 fetchers are effectively live validators for identifier claims. When Wikidata says an entity has GND ID X and the GND API returns a 404, that's a constraint violation detected in real time without SPARQL or batch reports
+4. **Tiered progressive loading** — Most tools load everything at once or require explicit queries
+5. **Open sources only** — Unlike Wikiwand, everything flows through public APIs and open data
+
+### Potential synergy with OpenRefine
+
+- OpenRefine's Wikidata reconciliation service is the standard tool for bulk identifier matching
+- Jenifesto does real-time gap detection (Tier 3 search finds results but no Tier 2 identifier exists)
+- Potential synergy: Jenifesto surfaces gaps while browsing, OpenRefine provides the bulk-fix pipeline
+- Could the extension's data quality findings feed into OpenRefine workflows or Mix'n'match?

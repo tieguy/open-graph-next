@@ -11,6 +11,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- Add GND and LCCN identifier fetchers (#17)
+- Implement Wikipedia browser extension (#16)
+- complete rename and put in github (#19)
+- Publish to GitHub and remove 'jenifesto' references (#18)
 - Switch to light library-style theme (#15)
 - Multi-source knowledge panel sidebar (#10)
 - Rename to Knowledge Commons Consortium Browser (#14)
