@@ -129,6 +129,22 @@ YAGO is read-only and produces periodic static snapshots. Suchanek's group treat
 
 **Traditional bots** — ~307 bots with bot flag, responsible for the majority of edits. But these are creating the quality problem, not fixing it. They add data at scale with inadequate sourcing.
 
+**[OpenRefine](https://openrefine.org/)** — The primary pathway for structured bulk imports into Wikidata, especially from GLAM institutions (galleries, libraries, archives, museums). Originally Google Refine (acquired from Metaweb/Freebase), it became community-driven in 2012 and added Wikidata support in 2018 (v3.0). Won the [WikidataCon Award 2019](https://openrefine.org/blog/2019/11/02/wikidatacon-award).
+
+The workflow: load tabular data → reconcile columns against Wikidata via fuzzy string matching → build a schema mapping to Wikidata properties → preview and fix → upload at ~60 edits/minute, or export to QuickStatements. Every batch is tracked via [EditGroups](https://editgroups.toolforge.org/?tool=OR).
+
+**Scale:** Over 1,900 editors have used OpenRefine to make **more than 10 million Wikidata edits** and upload hundreds of thousands of files to Wikimedia Commons. Per the [2024 user survey](https://openrefine.org/blog/2025/01/24/Looking-Forward-2025), 76% of users are in research/academic (38%), librarian (33%), GLAM (30%), or Wikimedian (27%) communities.
+
+**Budget and staffing:** Tiny. Fiscally sponsored by [Code for Science and Society](https://www.codeforsociety.org/fsp/projects/openrefine) (CS&S, a 501(c)(3); 15% overhead on donations). As of early 2025, the project has **two paid contributors** — and the lead developer (Antonin Delpeuch) retired from the project in March 2025, leaving one. Developer budget is $7,500/month. Primary funding is a [$50k/year Wikimedia Foundation grant](https://meta.wikimedia.org/wiki/Grants:Programs/Wikimedia_Community_Fund/General_Support_Fund/Maintenance_of_OpenRefine_and_its_Wikimedia-related_extensions.) (renewed annually). They were rejected for $100k from the Data Empowerment Fund, $400k from CZI, and $50k from Mozilla. They received two NLNet grants (~EUR 50k each) for 2026 work on reconciliation improvements. They are actively [fundraising for sustainability](https://openrefine.org/2025-fundraising).
+
+**2025-2026 roadmap** ([priorities](https://openrefine.org/blog/2025/01/24/Looking-Forward-2025), [development roadmap](https://openrefine.org/docs/technical-reference/development-roadmap)):
+- AI/Hugging Face integration — "community exploration of integration with an AI platform like Hugging Face for more seamless data wrangling"
+- ML-enhanced reconciliation scoring — replacing opaque fuzzy-matching with learned models trained on user annotations
+- Native in-app reconciliation of local datasets (NLNet grant, Jan-Aug 2026)
+- Hosted/collaborative instances — removing the desktop-only barrier
+
+**What OpenRefine doesn't do:** It's an import tool, not a validation tool. It helps get data *into* Wikidata cleanly but doesn't check whether what's already there is correct. No reference verification, no backlog processing, no autonomous operation. Reconciliation is fuzzy string matching, not semantic. The conceptual model (reconcile entities across datasets) is relevant to verification, and the ML/AI roadmap items suggest they see the opportunity, but they're building a better workbench for humans, not a system that works through the backlog.
+
 ### Tools that are deployed but barely used
 
 **[Mismatch Finder](https://www.wikidata.org/wiki/Wikidata:Mismatch_Finder)** — Official Wikimedia Deutschland tool. Accepts bulk uploads of discrepancies between Wikidata and external databases, presents them for human review. The community itself says "the current version is **not widely used**." As of January 2025 the tool was broken (returning server errors). No published statistics on resolved mismatches. They ran a Purdue University student project in 2024 just to get more mismatches uploaded.
