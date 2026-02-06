@@ -76,19 +76,48 @@ It does not add data. It only subtracts. The value proposition is "Wikidata minu
 
 YAGO 4 was criticized for being too aggressive — reducing 2.4M classes to the few hundred in Schema.org lost expressiveness (can't represent "train ferry route" or "financial regulatory agency"). YAGO 4.5 restored more of Wikidata's taxonomy while maintaining logical consistency, but got pickier about entities (64M → 49M).
 
-### Suchanek's current direction
+### Suchanek's current direction: KB-LM (Knowledge-Based Language Models)
 
-Suchanek's [November 2025 seminar talk](http://files.inria.fr/almanach/files/seminars/ALMAnaCH-seminar-2025-11-21-fabian-suchanek.pdf) "On Language Models and Knowledge Bases" argues that "the fundamental problem is that language models are probabilistic, while truth is not." His [2023 paper](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1) argues KBs and LLMs are complementary — KBs provide ground truth, LLMs provide natural language understanding.
+Suchanek's group is **not focused on improving Wikidata or YAGO's data quality**. Their research program goes in a different direction: using KBs to fix LLMs, not using LLMs to fix KBs.
 
-Active work includes:
-- **YAGO-QA**: benchmark dataset (19,137 questions) for testing LLMs against structured knowledge
-- **Retrieval-Constrained Decoding**: restricting LLM outputs to match known KB entities
-- A new version of YAGO (in development)
-- KB alignment work (best paper at ISWC 2025)
+Their project, **"Knowledge-Based Language Models" (KB-LM)**, is funded by the French Ministry of Armed Forces. The [white paper](https://suchanek.name/work/research/kb-lm/kb-lm-white-paper.pdf) (Suchanek & Holzenberger) and [project page](https://suchanek.name/work/research/kb-lm/index.html) lay out three goals:
+
+1. **LLMs stop hallucinating** — by outsourcing factual knowledge to a structured KB rather than relying on parametric memory
+2. **LLM knowledge becomes auditable and updatable** — trace where a fact came from and correct it
+3. **LLMs become smaller** — by not needing to memorize facts, they focus on language/reasoning
+
+The proposed architecture: **LLM does the reasoning, KB provides the facts, KB verifies the output.** The insight is that it's easier to verify an argument than to generate one. The LLM generates reasoning chains; the KG checks whether the factual claims in those chains are correct.
+
+Suchanek's [November 2025 seminar talk](http://files.inria.fr/almanach/files/seminars/ALMAnaCH-seminar-2025-11-21-fabian-suchanek.pdf) "On Language Models and Knowledge Bases" argues that "the fundamental problem is that language models are probabilistic, while truth is not." His [2023 paper](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1) frames KBs and LLMs as complementary paradigms — KBs provide ground truth, LLMs provide natural language understanding.
+
+#### Recent papers from the group
+
+- **[Retrieval-Constrained Decoding](https://arxiv.org/abs/2509.23417)** (Sept 2025) — Uses YAGO as ground truth to show LLMs know more facts than standard evaluation suggests. The problem is surface form variation: the LLM says "NYC" when the benchmark expects "New York City." Their YAGO-QA dataset (19,137 questions) uses YAGO's canonical entity forms to resolve this. Finding: Llama-3.1-70B's F1 jumps from 32.3% to 46.0% when you account for aliases.
+
+- **[Reconfidencing LLMs](https://aclanthology.org/2024.findings-emnlp.85/)** (EMNLP 2024) — Uses YAGO entities to show LLM confidence scores are systematically biased by demographics. LLMs are more overconfident about facts involving certain nationalities. Proposes per-subgroup calibration.
+
+- **[Factuality in the Legal Domain](https://dl.acm.org/doi/10.1145/3627508.3638350)** (CIKM 2024) — Tests LLMs as knowledge bases for legal facts, using Wikidata as ground truth. Letting models abstain when uncertain + domain pre-training gets precision from 63% to 81%.
+
+- **[FLORA: KB Alignment](https://link.springer.com/chapter/10.1007/978-3-031-77850-6_2)** (ISWC 2025, best paper) — Unsupervised knowledge graph alignment using fuzzy logic. About connecting different KBs to each other, not data quality within one.
+
+- **YAGO 4.5** ([SIGIR 2024](https://dl.acm.org/doi/10.1145/3626772.3657876)) — The latest YAGO version itself.
+
+- A new version of YAGO is in development.
+
+#### What Suchanek's group is NOT doing
+
+Notably absent from their agenda:
+
+- **No work on improving Wikidata or YAGO's data quality.** They treat YAGO as a finished artifact — a source of ground truth for evaluating LLMs, not something to be expanded.
+- **No reference verification or fact-checking pipeline.** ProVe-style "does this reference support this claim" work isn't in their portfolio.
+- **No constraint violation remediation.** They're not trying to fix the 132M facts they threw away.
+- **No work on expanding YAGO's coverage.** They accept the 28% loss as the cost of consistency.
+
+The idea of using an LLM to *improve* the KB is almost the inverse of Suchanek's research program.
 
 ### Implication
 
-YAGO is read-only and produces periodic static snapshots. Nobody is occupying the space of systematically expanding the set of Wikidata facts that could pass YAGO-level quality thresholds.
+YAGO is read-only and produces periodic static snapshots. Suchanek's group treats it as a finished ground-truth artifact for LLM evaluation, not as something to be expanded. They would likely be interested consumers of a larger quality-verified dataset (it would make YAGO-QA and their benchmarks richer), but they are not going to build it themselves. Their KB-LM architecture — LLM reasoning + KB verification — could potentially be applied in reverse: instead of using the KB to check the LLM, use the LLM to check facts that currently fail KB constraints and see if they can be repaired. Nobody is occupying this space.
 
 ---
 
