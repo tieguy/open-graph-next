@@ -1,0 +1,220 @@
+# LLM-Assisted Knowledge Graph Quality: Research and Opportunity
+
+Last updated: 2026-02-06
+
+## Purpose
+
+Wikidata is the world's largest open knowledge graph (~120M items, ~1.65B statements), but its data quality is structurally degraded: import is easy and highly automated (~200k bot edits/day), while validation remains overwhelmingly manual (~36k active human editors total). Roughly a third of all statements lack any reference, and rigorous constraint enforcement (as demonstrated by YAGO) would discard 28% of all facts.
+
+No existing tool is systematically working through this backlog. The few deployed quality tools are either academic prototypes that never crossed the deployment gap, defensive-only (catching vandalism on ingress but not fixing existing problems), or deployed but barely used.
+
+This project explores using LLMs to **increase the volume of Wikidata facts that meet high quality standards** — not necessarily by editing Wikidata in place (the community may be too resistant to automated edits at scale), but potentially by starting from a curated base like YAGO and expanding the set of data points that can meet YAGO-level quality thresholds, or similar standards adjusted to match what LLM-based verification can reliably assess.
+
+---
+
+## The Problem
+
+### Scale of the quality deficit
+
+| Metric | Value | Source |
+|--------|-------|--------|
+| Total items | ~120.3M | [Wikidata:Statistics](https://www.wikidata.org/wiki/Wikidata:Statistics) |
+| Total statements | ~1.65B | [Wikidata:Statistics](https://www.wikidata.org/wiki/Wikidata:Statistics) |
+| Statements with no reference | ~32-33% (~500M+) | [Wikidata:Automated finding references](https://www.wikidata.org/wiki/Wikidata:Automated_finding_references_input); Beghaeiraveri et al. 2021 |
+| Statements referenced only with "imported from Wikipedia" (circular) | Largest single reference category | [Help:Sources](https://www.wikidata.org/wiki/Help:Sources) |
+| Facts failing basic type constraints (YAGO4 analysis) | 132M (28% of all facts) | [YAGO 4: A Reason-able Knowledge Base (ESWC 2020)](https://link.springer.com/chapter/10.1007/978-3-030-49461-2_34) |
+| Deprecated statements | ~10M | Shenoy et al. 2022 |
+| Disjointness violation "culprit" items | ~14,480 | [Dogan & Patel-Schneider 2024](https://arxiv.org/abs/2410.13707) |
+| Automated edits per day | ~200k | [Wikidata:Statistics](https://www.wikidata.org/wiki/Wikidata:Statistics) |
+| Active human editors | ~36k | [Wikidata:Statistics](https://www.wikidata.org/wiki/Wikidata:Statistics) |
+
+### The "imported from Wikipedia" problem
+
+Wikidata's own Help:Sources page does not consider statements sourced only via P143 ("imported from Wikimedia project") to be properly referenced. These are circular references created by bots that scraped data from Wikipedia. More statements in Wikidata cite Wikipedia than all other sources combined. Filtering out P143-only references would push the true "unsourced" percentage well above 33%.
+
+### The constraint system's limitations
+
+Wikidata defines 30 types of property constraints (covering 98% of properties), but these are **advisory only** — nothing prevents adding logically impossible statements. Violations are listed in reports that a bot maintains at [Wikidata:Database reports/Constraint violations](https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations), but:
+
+- Nobody monitors them systematically
+- Bot operators ignore their own violations despite policy requiring them to monitor
+- The constraint exception system is breaking down (some constraints have 2,000+ exceptions; the software can't even load them)
+- The constraint check API times out for large items
+- The violation summary page was last updated September 2024
+
+The [RFC on Data Quality Framework](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Data_quality_framework_for_Wikidata) captures community frustration: "We neither have to waste the time of our contributors reviewing and cleaning every violation report every single day, nor allow adding mistakes and vandalisms in the cases that we know by hand that they are mistakes and vandalisms. This is currently a nonsense."
+
+---
+
+## YAGO: The Curated Downstream Alternative
+
+[YAGO](https://yago-knowledge.org/) (Max Planck Institute / Telecom Paris, led by Fabian Suchanek) is the most significant effort to produce a clean, logically consistent knowledge base from Wikidata. It is not a fork in the governance sense but a periodic clean-room rebuild.
+
+### Version history
+
+| Version | Year | Sources | Entities | Facts | Key innovation |
+|---------|------|---------|----------|-------|----------------|
+| YAGO 1 | 2007 | Wikipedia + WordNet | ~2M | ~20M | First Wikipedia-derived KB |
+| YAGO 2 | 2010 | Wikipedia + WordNet + GeoNames | 9.8M | 447M | Spatio-temporal anchoring |
+| YAGO 3 | 2015 | 10 Wikipedias + WordNet + GeoNames + Wikidata | 17M | 150M | Multilingual support |
+| YAGO 4 | 2020 | Wikidata + Schema.org | 64M | 2B triples | Logical consistency, OWL reasoning |
+| YAGO 4.5 | 2024 | Wikidata + Schema.org (more taxonomy) | 49M | 109M facts | Restored Wikidata taxonomy classes |
+
+### What YAGO does
+
+YAGO 4+ is essentially a **filter pipeline** over Wikidata:
+
+1. Take Wikidata's 2.4M classes, keep only ~10k that are logically consistent (99.6% reduction)
+2. Map properties onto Schema.org's cleaner definitions
+3. Apply SHACL constraints (disjointness, cardinality, domain/range)
+4. Discard everything that violates the constraints (11M instances / 14% of entities; 132M facts / 28%)
+5. Output a static snapshot
+
+It does not add data. It only subtracts. The value proposition is "Wikidata minus the mess."
+
+### YAGO 4 → 4.5 tension
+
+YAGO 4 was criticized for being too aggressive — reducing 2.4M classes to the few hundred in Schema.org lost expressiveness (can't represent "train ferry route" or "financial regulatory agency"). YAGO 4.5 restored more of Wikidata's taxonomy while maintaining logical consistency, but got pickier about entities (64M → 49M).
+
+### Suchanek's current direction
+
+Suchanek's [November 2025 seminar talk](http://files.inria.fr/almanach/files/seminars/ALMAnaCH-seminar-2025-11-21-fabian-suchanek.pdf) "On Language Models and Knowledge Bases" argues that "the fundamental problem is that language models are probabilistic, while truth is not." His [2023 paper](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1) argues KBs and LLMs are complementary — KBs provide ground truth, LLMs provide natural language understanding.
+
+Active work includes:
+- **YAGO-QA**: benchmark dataset (19,137 questions) for testing LLMs against structured knowledge
+- **Retrieval-Constrained Decoding**: restricting LLM outputs to match known KB entities
+- A new version of YAGO (in development)
+- KB alignment work (best paper at ISWC 2025)
+
+### Implication
+
+YAGO is read-only and produces periodic static snapshots. Nobody is occupying the space of systematically expanding the set of Wikidata facts that could pass YAGO-level quality thresholds.
+
+---
+
+## Existing Tools and Their Actual Status
+
+### Tools that are actually in production
+
+**ORES / Graph2Text vandalism detection** — The only thing working at scale. The original ORES catches 89% of vandalism while reducing patroller workload by 98%. The newer [Graph2Text system](https://arxiv.org/html/2505.18136v1) (Wikimedia Research, ACL 2025) has been productionized. But this is purely **defensive** — it flags bad edits on ingress. It does not touch the existing backlog.
+
+**Traditional bots** — ~307 bots with bot flag, responsible for the majority of edits. But these are creating the quality problem, not fixing it. They add data at scale with inadequate sourcing.
+
+### Tools that are deployed but barely used
+
+**[Mismatch Finder](https://www.wikidata.org/wiki/Wikidata:Mismatch_Finder)** — Official Wikimedia Deutschland tool. Accepts bulk uploads of discrepancies between Wikidata and external databases, presents them for human review. The community itself says "the current version is **not widely used**." As of January 2025 the tool was broken (returning server errors). No published statistics on resolved mismatches. They ran a Purdue University student project in 2024 just to get more mismatches uploaded.
+
+### Tools that haven't crossed the deployment gap
+
+**[ProVe](https://www.wikidata.org/wiki/Wikidata:ProVe)** (King's College London) — Three-model pipeline (T5 + 2x BERT) that verbalizes Wikidata claims, finds relevant sentences in referenced URLs, and classifies whether they support the claim. Functional as a user script but **not an official gadget** — blocked because the backend runs on a university VM, not Wikimedia infrastructure. Even if deployed, it's a display tool — it shows verification scores but doesn't produce edits.
+
+**[Wikidata Embedding Project](https://www.wikidata.org/wiki/Wikidata:Embedding_Project)** — Launched October 2025 by Wikimedia Deutschland + Jina.AI + DataStax. Makes Wikidata searchable via vector embeddings, supports MCP. Infrastructure, not a validation tool. Lists fact-checking as a use case but doesn't do it.
+
+### Stalled proposals
+
+**[RFC: AI-Assisted Wikidata Quality Control](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Pilot_Project_for_AI-Assisted_Wikidata_Onboarding_%26_Quality_Control)** — Posted August 2025, proposing open-weight LLMs on Wikimedia infrastructure for external identifier verification. Community response was "entirely unclear what exactly is suggested or being built." One commenter pointed out Mismatch Finder already covers the proposed scope. No follow-up, no implementation. Effectively dead.
+
+### Constraint violation reports
+
+Reports exist (maintained by a bot), but **nobody acts on them systematically**. They are advisory wiki pages with no triage workflow. The [summary page](https://www.wikidata.org/wiki/Wikidata:Database_reports/Constraint_violations/Summary) was last updated September 2024.
+
+---
+
+## Academic Literature
+
+### Comprehensive quality studies
+
+- **"A Study of the Quality of Wikidata"** (Shenoy et al., [Journal of Web Semantics 2022](https://www.sciencedirect.com/science/article/abs/pii/S1570826821000536), also [Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_8029.pdf)) — Most comprehensive treatment. Proposes three quality indicators: community consensus, deprecated statements, constraint violations. Key finding: simple validators catch syntactic errors but semantic validation is the hard problem.
+
+- **"Disjointness Violations in Wikidata"** (Dogan & Patel-Schneider, [December 2024](https://arxiv.org/abs/2410.13707)) — ~14,480 "culprit" items each causing hundreds of cascading violations. Largest source: gene items caught between "abstract entity" and "concrete object."
+
+- **"Formalizing Repairs for Wikidata Constraint Violations"** ([ISWC 2025](https://link.springer.com/chapter/10.1007/978-3-032-09527-5_20)) — Taxonomy of repair strategies. Found 52% of type violations fixed by adding missing type statements; 85% of requires-statement violations fixed by adding the required statements. T-box repairs (changing class hierarchy) can fix many violations simultaneously.
+
+### Referencing quality
+
+- **RQSS Framework** (Beghaeiraveri et al., [Semantic Web Journal 2024](https://journals.sagepub.com/doi/full/10.3233/SW-243695)) — 40 reference-specific quality metrics across 21 dimensions. All Wikidata subsets scored low on completeness, verifiability, objectivity, and versatility. Average score: 0.58/1.0.
+
+- **"Towards Automated Technologies in the Referencing Quality of Wikidata"** ([Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_2049.pdf)) — Proposes automated pipelines for verifying whether triples are supported by documented sources.
+
+### LLM-specific
+
+- **KGValidator** ([2024](https://arxiv.org/html/2404.15923v1)) — LLMs for automatic validation of knowledge graph completion. Notes the challenge of relying on manual verification at Wikidata's scale.
+
+- **IBM LLM Store** ([ISWC 2024](https://research.ibm.com/publications/llm-store-a-kif-plugin-for-wikidata-based-knowledge-base-completion-via-llms)) — KIF plugin using LLMs for Wikidata KB completion. Achieved F1 of 90.83% on the LM-KBC Challenge.
+
+- **"Using Language Models for Wikidata Vandalism Detection"** ([ACL 2025](https://arxiv.org/pdf/2505.18136)) — Binary classification using LM features. Companion [dataset on Zenodo](https://zenodo.org/records/15492678) (6.85 GB).
+
+- **"Scholarly Wikidata"** ([2024](https://arxiv.org/html/2411.08696v1)) — LLMs to populate Wikidata with conference metadata, using human-in-the-loop validation.
+
+- **Suchanek: "Knowledge Bases and Language Models: Complementing Forces"** ([RuleML+RR 2023](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1)) — Argues structured KBs and LLMs are complementary paradigms that will co-exist.
+
+---
+
+## Domain-Specific Backlog Characteristics
+
+### Taxonomic / biological data — worst for constraint violations
+~10,753 disjointness violations from gene items alone. Ontological confusion between abstract and concrete entities. The Gene Wiki WikiProject has high reference quality scores (active bots) but severe typing problems.
+
+### Biographical data
+Inconsistent ontology and property usage. Active cleanup of unreferenced P106 (occupation) values. Date consistency (birth before death, etc.) is highly structured and amenable to automated checking.
+
+### Geographic data
+No geographic or temporal precision constraints are implemented despite community proposals. Essentially unmonitored at the constraint level.
+
+### Music
+Lowest referencing quality score among topical subsets in the RQSS framework.
+
+### Statements amenable to LLM verification
+
+Several large, systematic categories seem particularly tractable:
+
+1. **External identifier verification** — Check whether IDs (VIAF, ISNI, Library of Congress, etc.) resolve and point to the same entity. Well-defined, low-ambiguity.
+
+2. **"Imported from Wikipedia" reference replacement** — For the hundreds of millions of P143-only statements: read the Wikipedia article the claim was imported from, find the actual cited source, propose a proper reference.
+
+3. **Type constraint violations** — 52% fixable by adding a missing `instance of` or `subclass of`. An LLM reading the item's description and properties could propose the missing type.
+
+4. **Biographical consistency** — Date ordering, occupation-matches-description, nationality-matches-birthplace. Highly structured checks cross-referenceable against Wikipedia articles.
+
+5. **Disjointness violations in biological data** — Ontological confusion amenable to specialized prompts understanding biological taxonomy.
+
+---
+
+## Community Landscape
+
+### Communication channels (all bridged together)
+
+- **IRC**: `#wikidata` on Libera Chat, bridged to Matrix — [Wikidata:IRC](https://www.wikidata.org/wiki/Wikidata:IRC)
+- **Telegram**: Bridged to IRC; WikiProject-specific groups exist
+- **Discord**: `#wikidata` on Wikimedia community server — [Wikidata:Discord](https://www.wikidata.org/wiki/Wikidata:Discord)
+- **Wikimedia Chat (Mattermost)**: chat.wmcloud.org (messages expire after 90 days)
+- **On-wiki**: [Wikidata:Project chat](https://www.wikidata.org/wiki/Wikidata:Project_chat) — where governance and policy discussions happen
+
+### Community stance on AI/LLM editing
+
+The community is cautious but not closed:
+- Bot permission requests involving LLMs face scrutiny on [Wikidata:Requests for permissions/Bot](https://www.wikidata.org/wiki/Wikidata:Requests_for_permissions/Bot)
+- The Wikidata Workshop 2025 explicitly invited research on "Automated Fact-Checking and Bias Reduction" using LLMs
+- Community members distinguish between **internal consistency work** (seen as promising — "internal tidying can be based on Q and P numbers with no understanding") and **external matching** (seen as risky — "so much scope for damage")
+- Strong preference for **human-in-the-loop**: AI proposes, humans decide
+- English Wikipedia's [2018 State of Affairs on Wikidata](https://en.wikipedia.org/wiki/Wikipedia:Wikidata/2018_State_of_affairs) documents concerns about circular sourcing and false authority
+
+### The Wikibase ecosystem
+
+The underlying Wikibase software is open source. Dozens of organizations run independent instances: EU Knowledge Graph, German National Library, French National Library, British Library, Rhizome, FactGrid, and others. Each defines its own ontology and quality standards. The [Wikibase ecosystem](https://professional.wiki/en/wikibase-wikidata-and-knowledge-graphs) vision is eventual federation, but today they are mostly islands.
+
+### Nobody has proposed a community fork
+
+No "let's leave and build our own Wikidata" proposal exists. YAGO is the closest thing — a curated downstream rebuild that implicitly says "the data quality problems are severe enough that serious users would rather re-derive the whole thing than work with it directly."
+
+---
+
+## The Gap
+
+The landscape is:
+- **Wikidata** is the only place where data gets added at scale, but it's too messy for rigorous use
+- **YAGO** makes it clean but read-only and static, and only subtracts — it doesn't expand what qualifies
+- **Existing tools** are either academic prototypes, barely used, or defensive-only
+- **Nobody** is occupying the space of systematically expanding the set of facts that meet high quality standards
+
+An LLM-based approach could work in this gap: starting from YAGO's quality-filtered base (or similar standards), identify facts currently excluded due to missing references, type violations, or constraint failures, and use LLM verification to bring them up to standard — producing a larger, high-quality knowledge graph without requiring direct edits to Wikidata itself.
