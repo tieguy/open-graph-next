@@ -212,3 +212,6 @@ user-password.py
 throttle.ctrl
 apicache/
 *.lwp
+
+# Track chainlink issue database
+!.chainlink/issues.db
