@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-02-16
+Last updated: 2026-02-17
 
 ## Project Purpose
 
@@ -118,9 +118,13 @@ This project includes Claude Code skills for structured workflows:
 
 ### SIFT-Patrol Experiment (in progress)
 
-Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skills above, this evaluates individual unpatrolled edits ("is this specific change correct?"). Design plan: `docs/design-plans/2026-02-16-sift-patrol-experiment.md`. Infrastructure built so far:
+Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skills above, this evaluates individual unpatrolled edits ("is this specific change correct?"). Design plan: `docs/design-plans/2026-02-16-sift-patrol-experiment.md`. Enriched snapshots design: `docs/implementation-plans/2026-02-16-sift-patrol-enriched-snapshots/`. Infrastructure built so far:
 
-- `scripts/fetch_patrol_edits.py` -- Fetches unpatrolled and control statement edits from production Wikidata via RecentChanges API. Saves YAML snapshots to `logs/wikidata-patrol-experiment/snapshot/`.
+- `scripts/fetch_patrol_edits.py` -- Fetches unpatrolled and control statement edits from production Wikidata via RecentChanges API. Saves YAML snapshots to `logs/wikidata-patrol-experiment/snapshot/`. Key capabilities:
+  - `--enrich` flag adds item context (labels, descriptions, all serialized claims), parsed edit summaries, resolved property/value labels, and removed claim data for removal edits
+  - Uses `requests` + `Special:EntityData` for revision-specific entity fetching (pywikibot only fetches latest)
+  - `LabelCache` resolves Q-ids and P-ids to English labels with in-memory caching
+  - Enriched snapshots include `parsed_edit`, `item`, and `removed_claim` keys per edit
 - Skill for edit-centric SIFT verification is planned for Phase 3.
 
 ## Working with pywikibot
@@ -173,6 +177,12 @@ python -m pywikibot.scripts.login  # interactive login if needed
 # Fetch patrol edits (read-only from production)
 python scripts/fetch_patrol_edits.py --dry-run          # preview without saving
 python scripts/fetch_patrol_edits.py -u 10 -c 10       # 10 unpatrolled + 10 control
+python scripts/fetch_patrol_edits.py -u 5 -c 5 --enrich  # with enrichment
+
+# Run tests (uses uv for dependency management)
+uv run pytest                    # all tests
+uv run pytest tests/test_enrichment.py  # specific test file
+uv run pytest -k "test_name"     # specific test by name
 
 # Chainlink basics
 chainlink list              # see all issues
