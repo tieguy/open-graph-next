@@ -22,6 +22,7 @@ Usage:
 """
 
 import argparse
+import re
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
@@ -48,6 +49,16 @@ STATEMENT_SUMMARY_PATTERNS = [
 
 SNAPSHOT_DIR = Path("logs/wikidata-patrol-experiment/snapshot")
 CONTROL_DIR = Path("logs/wikidata-patrol-experiment/control")
+
+EDIT_SUMMARY_RE = re.compile(
+    r"/\*\s*(wb[a-z]+(?:-[a-z]+)?)"  # operation (e.g., wbsetclaim-update)
+    r"[^*]*"                          # flags (e.g., :2||1)
+    r"\*/"                            # end comment marker
+    r"\s*\[\[Property:(P\d+)\]\]"     # property ID
+    r"(?::\s*(.+))?"                  # optional value after colon
+)
+
+QID_IN_VALUE_RE = re.compile(r"\[\[(Q\d+)\]\]")
 
 
 def get_production_site():
@@ -132,6 +143,37 @@ def normalize_change(change):
         "timestamp": change.get("timestamp"),
         "comment": change.get("comment", ""),
         "tags": change.get("tags", []),
+    }
+
+
+def parse_edit_summary(comment):
+    """Parse a Wikibase edit summary into operation, property, and value.
+
+    Wikibase generates standardized edit summaries like:
+        /* wbsetclaim-update:2||1 */ [[Property:P106]]: [[Q117321337]]
+
+    Returns:
+        dict with 'operation', 'property', 'value_raw' keys, or None if
+        the comment doesn't match a known Wikibase edit summary format.
+    """
+    match = EDIT_SUMMARY_RE.search(comment)
+    if not match:
+        return None
+
+    operation = match.group(1)
+    prop = match.group(2)
+    raw_value = match.group(3)
+
+    if raw_value:
+        raw_value = raw_value.strip()
+        qid_match = QID_IN_VALUE_RE.search(raw_value)
+        if qid_match:
+            raw_value = qid_match.group(1)
+
+    return {
+        "operation": operation,
+        "property": prop,
+        "value_raw": raw_value,
     }
 
 
