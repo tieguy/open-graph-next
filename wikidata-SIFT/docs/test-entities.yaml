@@ -1,0 +1,264 @@
+# Test entities for SIFT methodology validation
+# 60 total: 20 humans, 20 organizations, 20 creative works
+# Difficulty levels: easy (well-documented), medium (moderate coverage), hard (limited sources)
+
+humans:
+  # Well-documented (easy)
+  - id: Q42
+    label: Douglas Adams
+    difficulty: easy
+    notes: Famous author, extensive Wikipedia coverage
+  - id: Q5879
+    label: Johann Wolfgang von Goethe
+    difficulty: easy
+    notes: Historical figure, well-documented
+  - id: Q937
+    label: Albert Einstein
+    difficulty: easy
+    notes: Famous scientist, extensive sources
+  - id: Q7186
+    label: Marie Curie
+    difficulty: easy
+    notes: Famous scientist, well-documented
+  - id: Q1339
+    label: Johann Sebastian Bach
+    difficulty: easy
+    notes: Famous composer, extensive historical records
+  - id: Q76
+    label: Barack Obama
+    difficulty: easy
+    notes: Former US president, extensive coverage
+  - id: Q317521
+    label: Elon Musk
+    difficulty: easy
+    notes: Tech CEO, extensive coverage
+
+  # Moderately documented (medium)
+  - id: Q6701196
+    label: Luis Villa
+    difficulty: medium
+    notes: Software/legal figure, moderate coverage
+  - id: Q313590
+    label: Mitchell Baker
+    difficulty: medium
+    notes: Tech executive, moderate coverage
+  - id: Q2845707
+    label: Karen Sandler
+    difficulty: medium
+    notes: Tech/nonprofit figure, moderate coverage
+  - id: Q7296746
+    label: Raph Levien
+    difficulty: medium
+    notes: Software developer, limited mainstream coverage
+  - id: Q4039475
+    label: Bradley Kuhn
+    difficulty: medium
+    notes: Software freedom advocate, niche coverage
+  - id: Q36215
+    label: Tim Berners-Lee
+    difficulty: medium
+    notes: Web inventor, good but technical coverage
+  - id: Q92743
+    label: Vint Cerf
+    difficulty: medium
+    notes: Internet pioneer, moderate coverage
+  - id: Q2387325
+    label: Moxie Marlinspike
+    difficulty: medium
+    notes: Privacy technologist, moderate coverage
+  - id: Q17174219
+    label: Limor Fried
+    difficulty: medium
+    notes: Hardware hacker, moderate coverage
+  - id: Q553790
+    label: Aaron Swartz
+    difficulty: medium
+    notes: Internet activist, moderate coverage
+
+  # Less documented (hard)
+  - id: Q21540213
+    label: Deb Nicholson
+    difficulty: hard
+    notes: Nonprofit tech, limited sources
+  - id: Q4723060
+    label: Allison Randal
+    difficulty: hard
+    notes: Open source leader, limited mainstream coverage
+  - id: Q16195460
+    label: Asheesh Laroia
+    difficulty: hard
+    notes: Open source contributor, very limited coverage
+
+organizations:
+  # Well-documented (easy)
+  - id: Q312
+    label: Apple Inc.
+    difficulty: easy
+    notes: Major corporation, extensive coverage
+  - id: Q95
+    label: Google
+    difficulty: easy
+    notes: Major corporation, extensive coverage
+  - id: Q380
+    label: Meta Platforms
+    difficulty: easy
+    notes: Major corporation, extensive coverage
+  - id: Q9531
+    label: BBC
+    difficulty: easy
+    notes: Major media org, well-documented
+  - id: Q8525
+    label: Mozilla Foundation
+    difficulty: easy
+    notes: Major nonprofit, good coverage
+  - id: Q170877
+    label: Wikimedia Foundation
+    difficulty: easy
+    notes: Wikipedia parent org, well-documented
+  - id: Q737
+    label: NASA
+    difficulty: easy
+    notes: Space agency, extensive coverage
+  - id: Q5396743
+    label: Electronic Frontier Foundation
+    difficulty: easy
+    notes: Digital rights nonprofit, good coverage
+
+  # Moderately documented (medium)
+  - id: Q1093914
+    label: Open Source Initiative
+    difficulty: medium
+    notes: Nonprofit, moderate coverage
+  - id: Q671779
+    label: Free Software Foundation
+    difficulty: medium
+    notes: Nonprofit, moderate coverage
+  - id: Q99658699
+    label: Tidelift
+    difficulty: medium
+    notes: Startup, limited but verifiable coverage
+  - id: Q55597695
+    label: Software Freedom Conservancy
+    difficulty: medium
+    notes: Nonprofit, moderate coverage
+  - id: Q40561
+    label: Linux Foundation
+    difficulty: medium
+    notes: Tech nonprofit, moderate coverage
+  - id: Q7414033
+    label: GNOME Foundation
+    difficulty: medium
+    notes: Software foundation, moderate coverage
+  - id: Q193489
+    label: Creative Commons
+    difficulty: medium
+    notes: Licensing nonprofit, moderate coverage
+
+  # Less documented (hard)
+  - id: Q7071698
+    label: Open Invention Network
+    difficulty: hard
+    notes: Patent consortium, limited coverage
+  - id: Q30089773
+    label: OpenSSF
+    difficulty: hard
+    notes: Security foundation, limited coverage
+  - id: Q7097920
+    label: Open Rights Group
+    difficulty: hard
+    notes: UK digital rights, limited coverage
+  - id: Q5193377
+    label: Courage Foundation
+    difficulty: hard
+    notes: Whistleblower support, limited coverage
+  - id: Q105576557
+    label: Open Source Security Foundation
+    difficulty: hard
+    notes: Security initiative, very limited coverage
+
+creative_works:
+  # Well-documented (easy)
+  - id: Q25338
+    label: The Hitchhiker's Guide to the Galaxy
+    difficulty: easy
+    notes: Famous book, extensive coverage
+  - id: Q47209
+    label: 1984 (novel)
+    difficulty: easy
+    notes: Classic novel, well-documented
+  - id: Q208460
+    label: The Lord of the Rings
+    difficulty: easy
+    notes: Famous book series
+  - id: Q184843
+    label: The Catcher in the Rye
+    difficulty: easy
+    notes: Classic novel
+  - id: Q170583
+    label: Star Wars
+    difficulty: easy
+    notes: Major franchise
+  - id: Q388
+    label: Linux
+    difficulty: easy
+    notes: Major software project
+  - id: Q82580
+    label: Firefox
+    difficulty: easy
+    notes: Major software
+  - id: Q11015
+    label: Python (programming language)
+    difficulty: easy
+    notes: Major language
+  - id: Q2005
+    label: Wikipedia
+    difficulty: easy
+    notes: Well-documented project
+
+  # Software/tech works (medium)
+  - id: Q131339
+    label: Git
+    difficulty: medium
+    notes: Software, technical sources
+  - id: Q14813
+    label: GIMP
+    difficulty: medium
+    notes: Graphics software, moderate coverage
+  - id: Q188893
+    label: Blender (software)
+    difficulty: medium
+    notes: 3D software, moderate coverage
+  - id: Q846045
+    label: LibreOffice
+    difficulty: medium
+    notes: Office suite, moderate coverage
+  - id: Q10287
+    label: GNU Emacs
+    difficulty: medium
+    notes: Text editor, technical coverage
+  - id: Q15206305
+    label: Signal (software)
+    difficulty: medium
+    notes: Messaging app, moderate coverage
+  - id: Q125977
+    label: GNU General Public License
+    difficulty: medium
+    notes: Software license, moderate coverage
+
+  # Less documented (hard)
+  - id: Q17061486
+    label: Debian Free Software Guidelines
+    difficulty: hard
+    notes: Policy document, limited coverage
+  - id: Q854449
+    label: Open Source Definition
+    difficulty: hard
+    notes: Definition document, limited coverage
+  - id: Q341
+    label: The Cathedral and the Bazaar
+    difficulty: hard
+    notes: Essay, limited mainstream coverage
+  - id: Q1630105
+    label: Revolution OS
+    difficulty: hard
+    notes: Documentary, limited coverage

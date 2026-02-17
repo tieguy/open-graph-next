@@ -1,0 +1,84 @@
+test_date: 2026-01-20
+entity: Q42
+entity_label: Douglas Adams
+entity_type: human
+
+property: P27
+property_label: country of citizenship
+property_selected_by: system
+claim_status: existing
+
+sources_consulted:
+  - source_name: "Encyclopedia Britannica"
+    source_type: encyclopedia
+    reliability: 5
+    useful_for: "Describes him as 'British comic writer'"
+    wikidata_ref:
+      P248: Q5375741      # stated in: Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+  - source_name: "Official Douglas Adams website"
+    source_type: official_website
+    reliability: 5
+    useful_for: "Official biography confirms English nationality"
+    wikidata_ref:
+      P854: "https://douglasadams.com/dna/bio.html"
+      P813: 2026-01-20
+      P1476: "DNA/Biography"
+    human_readable:
+      stated_in: null
+      url: "https://douglasadams.com/dna/bio.html"
+      retrieved: 2026-01-20
+
+  - source_name: "Citizendium"
+    source_type: encyclopedia
+    reliability: 3
+    useful_for: "Cross-reference for nationality"
+    wikidata_ref:
+      P854: "https://en.citizendium.org/wiki/Douglas_Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: null
+      url: "https://en.citizendium.org/wiki/Douglas_Adams"
+      retrieved: 2026-01-20
+
+sift_verification:
+  stop: "Was Douglas Adams actually a British citizen? Did he become American after moving to California?"
+  investigate: "Born in Cambridge, England. Lived in UK until 1999, then moved to California. No sources indicate he changed citizenship."
+  find_better: "All sources consistently describe him as English/British author. Official website confirms English nationality."
+  trace: "Birth certificate (Cambridge, UK) establishes British citizenship. No evidence of naturalization elsewhere."
+
+proposed_claim:
+  value: "United Kingdom"
+  value_type: item
+  value_qid: Q145
+  precision: null
+  qualifiers: null
+  confidence: high
+  confidence_reasoning: "Born in Cambridge, England. Consistently described as British/English in all sources. No evidence of citizenship change despite moving to California in 1999."
+  primary_reference:
+    wikidata_ref:
+      P248: Q5375741      # Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+# QuickStatements: N/A - existing claim (verification only, not adding new data)
+quickstatements: null
+
+human_verification:
+  reviewed_by: null
+  review_date: null
+  sift_correct: null
+  proposed_value_correct: null
+  actual_value: null
+  failure_mode: null
+  notes: null

@@ -1,0 +1,130 @@
+# wikidata-factcheck-experiment
+
+An experiment by [Luis Villa](https://meta.wikimedia.org/wiki/User:LuisVilla) exploring LLM-assisted fact-checking for Wikidata contributions. I do not expect anyone other than myself will use this, but I provide it here in the interests of transparency.
+
+## Research Questions
+
+1. **Throughput**: If every claim is rigorously fact-checked before submission, what's a realistic rate for creating/updating Wikidata claims?
+1. **Validation requirements**: What level of source verification is necessary to meet Wikidata's community standards? Where do LLM confidence levels map to Wikidata's reference requirements?
+1. **Prompt engineering**: How should fact-checking prompts (like [CheckPlease](https://checkplease.neocities.org)) be adapted for Wikidata's specific data model and sourcing norms?
+1. **Next-generation ideation**: If there is going to be a [Gas Town](https://steveklabnik.com/writing/how-to-think-about-gas-town/) for "a world in which every single human being can freely share in the sum of all knowledge", what could/would/should that look like?
+
+## Approach
+
+This project uses Claude Code as a research agent that:
+
+- Applies structured fact-checking (SIFT framework) before any edit
+- Records the full provenance chain (sources consulted, confidence levels, verification steps)
+- Submits edits via pywikibot with proper references
+- Evaluates unpatrolled Wikidata edits for correctness
+
+All **write** operations target **test.wikidata.org** only. Read-only access to production Wikidata is used for fetching items, recent changes, and revision diffs.
+
+## Experiments
+
+### SIFT-Patrol Experiment (active)
+
+Evaluates whether LLM-assisted SIFT verification can reliably assess unpatrolled Wikidata edits. Fetches recent statement edits, enriches them with full item context and resolved labels, then applies fact-checking methodology.
+
+- **Design**: `docs/design-plans/2026-02-16-sift-patrol-experiment.md`
+- **Script**: `scripts/fetch_patrol_edits.py` -- fetches unpatrolled + control edits with optional `--enrich` flag
+- **Logs**: `logs/wikidata-patrol-experiment/`
+
+### Methodology Testing
+
+Tests SIFT methodology accuracy against known Wikidata entities. READ-ONLY (never writes).
+
+- **Design**: `docs/design-plans/2026-01-20-wikidata-methodology-testing.md`
+- **Skill**: `skills/wikidata-methodology-testing/SKILL.md`
+- **Logs**: `logs/wikidata-methodology-testing/`
+
+### Item Enhancement
+
+Systematically verifies and adds claims to Wikidata test items with SIFT methodology and human approval gates.
+
+- **Design**: `docs/design-plans/2026-01-19-wikidata-enhance-and-check.md`
+- **Skill**: `skills/wikidata-enhance-and-check/SKILL.md`
+- **Logs**: `logs/wikidata-enhance/`
+
+## Setup
+
+### Prerequisites
+
+- Python 3.13+
+- [uv](https://docs.astral.sh/uv/) for dependency management
+- A Wikidata test instance account (create at https://test.wikidata.org)
+
+### Installation
+
+```bash
+uv sync --dev
+```
+
+### Configuration
+
+1. Create `user-config.py` in the project root:
+
+```python
+family = 'wikidata'
+mylang = 'test'
+usernames['wikidata']['test'] = 'YourTestUsername'
+```
+
+2. Generate bot credentials at https://test.wikidata.org/wiki/Special:BotPasswords
+   - Grant permissions: Edit existing pages, Create/edit/move pages, High-volume editing
+   - Save the credentials securely
+
+3. Create `user-password.py` (gitignored):
+
+```python
+('YourTestUsername', BotPassword('YourBotName', 'YourBotPassword'))
+```
+
+4. Test the connection:
+
+```bash
+uv run python -c "import pywikibot; site = pywikibot.Site('test', 'wikidata'); print(site.logged_in())"
+```
+
+## Usage
+
+```bash
+# Fetch patrol edits (read-only from production)
+uv run python scripts/fetch_patrol_edits.py --dry-run          # preview without saving
+uv run python scripts/fetch_patrol_edits.py -u 10 -c 10       # 10 unpatrolled + 10 control
+uv run python scripts/fetch_patrol_edits.py -u 5 -c 5 --enrich  # with item enrichment
+
+# Run tests
+uv run pytest                           # all tests (41)
+uv run pytest tests/test_enrichment.py  # specific test file
+uv run pytest -k "test_name"            # specific test by name
+```
+
+## Project Structure
+
+```
+├── README.md
+├── CLAUDE.md                # Instructions for Claude Code
+├── pyproject.toml           # Project config, dependencies, pytest settings
+├── user-config.py           # pywikibot site configuration
+├── user-password.py         # credentials (gitignored)
+├── scripts/
+│   ├── fetch_patrol_edits.py    # Patrol edit fetcher with enrichment pipeline
+│   ├── verify_qid.py           # Single-item verification
+│   ├── analyze_test_results.py  # Test result analysis
+│   ├── next_test_entity.py      # Test entity selector
+│   └── check_redundancy.py      # Redundancy checker
+├── tests/                   # pytest test suite (41 tests)
+├── skills/                  # Claude Code skill definitions
+├── docs/                    # Methodology, design plans, implementation plans
+├── logs/                    # Experiment logs (YAML snapshots)
+└── prompts/                 # Prompt templates
+```
+
+## Status
+
+Active research -- methodology testing and patrol edit analysis in progress.
+
+## License
+
+CC0

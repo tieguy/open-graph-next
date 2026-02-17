@@ -1,0 +1,103 @@
+test_date: 2026-01-20
+entity: Q42
+entity_label: Douglas Adams
+entity_type: human
+
+property: P512
+property_label: academic degree
+property_selected_by: system
+claim_status: redundant  # REDUNDANT: P512 already exists as qualifier on P69 (educated at)
+
+sources_consulted:
+  - source_name: "Official Douglas Adams website"
+    source_type: official_website
+    reliability: 5
+    useful_for: "Official biography states BA (and later MA) in English literature from St John's College, Cambridge, 1974"
+    wikidata_ref:
+      P854: "https://douglasadams.com/dna/bio.html"
+      P813: 2026-01-20
+      P1476: "DNA/Biography"
+    human_readable:
+      stated_in: null
+      url: "https://douglasadams.com/dna/bio.html"
+      retrieved: 2026-01-20
+
+  - source_name: "Encyclopedia Britannica"
+    source_type: encyclopedia
+    reliability: 5
+    useful_for: "Confirms Cambridge education"
+    wikidata_ref:
+      P248: Q5375741      # stated in: Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+  - source_name: "Encyclopedia.com"
+    source_type: encyclopedia
+    reliability: 4
+    useful_for: "States he obtained BA in 1974 from St John's College, Cambridge"
+    wikidata_ref:
+      P248: Q17153793     # stated in: Encyclopedia.com
+      P854: "https://www.encyclopedia.com/arts/encyclopedias-almanacs-transcripts-and-maps/adams-douglas"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia.com"
+      url: "https://www.encyclopedia.com/arts/encyclopedias-almanacs-transcripts-and-maps/adams-douglas"
+      retrieved: 2026-01-20
+
+  - source_name: "Citizendium"
+    source_type: encyclopedia
+    reliability: 3
+    useful_for: "Cross-reference confirming graduation with 2:2 in English literature"
+    wikidata_ref:
+      P854: "https://en.citizendium.org/wiki/Douglas_Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: null
+      url: "https://en.citizendium.org/wiki/Douglas_Adams"
+      retrieved: 2026-01-20
+
+sift_verification:
+  stop: "Did Douglas Adams actually receive formal academic degrees? Are these claims verifiable beyond Wikipedia?"
+  investigate: "Official Douglas Adams website (maintained by estate) confirms BA and MA. Britannica and Encyclopedia.com corroborate. Multiple sources mention specific details: St John's College, 1974, English literature, 2:2 grade."
+  find_better: "Found 4+ independent sources all agreeing on the same details. The official website serves as near-primary source."
+  trace: "Primary source would be Cambridge University degree records. The official estate website and multiple encyclopedias provide strong secondary evidence."
+
+proposed_claim:
+  value: "Bachelor of Arts"
+  value_type: item
+  value_qid: Q1765120
+  precision: null
+  qualifiers:
+    P812: "English literature"    # academic major
+    P580: "1971"                  # start time (entered university)
+    P582: "1974"                  # end time (graduated)
+    P69: Q691283                  # educated at: St John's College, Cambridge
+  confidence: high
+  confidence_reasoning: "Multiple independent reliable sources (official website, Britannica, Encyclopedia.com) all confirm BA in English literature from St John's College, Cambridge, graduating in 1974. One source specifies 2:2 grade. Cambridge MA typically awarded automatically years after BA."
+  primary_reference:
+    wikidata_ref:
+      P854: "https://douglasadams.com/dna/bio.html"
+      P813: 2026-01-20
+      P1476: "DNA/Biography"
+    human_readable:
+      stated_in: null
+      url: "https://douglasadams.com/dna/bio.html"
+      retrieved: 2026-01-20
+
+# QuickStatements: DO NOT SUBMIT - this is redundant
+# P512 already exists as a qualifier on P69 (educated at) = St John's College
+# See chainlink issue #10
+quickstatements: null  # REDUNDANT - do not submit
+
+human_verification:
+  reviewed_by: null
+  review_date: null
+  sift_correct: null
+  proposed_value_correct: null
+  actual_value: null
+  failure_mode: null
+  notes: null

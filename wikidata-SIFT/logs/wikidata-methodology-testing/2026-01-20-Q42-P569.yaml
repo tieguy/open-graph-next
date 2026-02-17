@@ -1,0 +1,85 @@
+test_date: 2026-01-20
+entity: Q42
+entity_label: Douglas Adams
+entity_type: human
+
+property: P569
+property_label: date of birth
+property_selected_by: system
+claim_status: existing
+
+sources_consulted:
+  - source_name: "Encyclopedia Britannica"
+    source_type: encyclopedia
+    reliability: 5
+    useful_for: "Confirms birth date as March 11, 1952 in Cambridge, England"
+    wikidata_ref:
+      P248: Q5375741      # stated in: Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+  - source_name: "IMDb Biography"
+    source_type: database
+    reliability: 4
+    useful_for: "Cross-reference for biographical dates"
+    wikidata_ref:
+      P248: Q37312        # stated in: IMDb
+      P854: "https://www.imdb.com/name/nm0010930/bio/"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "IMDb"
+      url: "https://www.imdb.com/name/nm0010930/bio/"
+      retrieved: 2026-01-20
+
+  - source_name: "SFWA Obituary"
+    source_type: other
+    reliability: 4
+    useful_for: "Contemporary source confirming dates (published day after death)"
+    wikidata_ref:
+      P854: "https://www.sfwa.org/2001/05/12/rip-douglas-adams-1952-2001/"
+      P813: 2026-01-20
+      P1476: "RIP: Douglas Adams (1952-2001)"
+    human_readable:
+      stated_in: null
+      url: "https://www.sfwa.org/2001/05/12/rip-douglas-adams-1952-2001/"
+      retrieved: 2026-01-20
+
+sift_verification:
+  stop: "Is the specific date March 11, 1952 actually verifiable from reliable sources?"
+  investigate: "Britannica is a highly reliable encyclopedia source, updated December 2025. IMDb and SFWA provide additional confirmation."
+  find_better: "Multiple independent sources (Britannica, IMDb, SFWA, Famous Birthdays, BFI) all agree on March 11, 1952"
+  trace: "Primary source would be Cambridge birth records. Britannica and multiple secondary sources consistently report this date."
+
+proposed_claim:
+  value: "1952-03-11"
+  value_type: time
+  value_qid: null
+  precision: day
+  qualifiers: null
+  confidence: high
+  confidence_reasoning: "Multiple independent reliable sources unanimously agree on March 11, 1952. No conflicting information found."
+  primary_reference:
+    wikidata_ref:
+      P248: Q5375741      # Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+# QuickStatements: N/A - existing claim (verification only, not adding new data)
+quickstatements: null
+
+human_verification:
+  reviewed_by: null
+  review_date: null
+  sift_correct: null
+  proposed_value_correct: null
+  actual_value: null
+  failure_mode: null
+  notes: null

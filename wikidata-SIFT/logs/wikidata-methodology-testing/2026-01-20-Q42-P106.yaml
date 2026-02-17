@@ -1,0 +1,84 @@
+test_date: 2026-01-20
+entity: Q42
+entity_label: Douglas Adams
+entity_type: human
+
+property: P106
+property_label: occupation
+property_selected_by: system
+claim_status: existing
+
+sources_consulted:
+  - source_name: "Encyclopedia Britannica"
+    source_type: encyclopedia
+    reliability: 5
+    useful_for: "Describes him as 'British comic writer'"
+    wikidata_ref:
+      P248: Q5375741      # stated in: Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+  - source_name: "IMDb"
+    source_type: database
+    reliability: 4
+    useful_for: "Lists roles as Writer, Script and Continuity Department, Actor"
+    wikidata_ref:
+      P248: Q37312        # stated in: IMDb
+      P854: "https://www.imdb.com/name/nm0010930/"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "IMDb"
+      url: "https://www.imdb.com/name/nm0010930/"
+      retrieved: 2026-01-20
+
+  - source_name: "Encyclopedia MDPI"
+    source_type: encyclopedia
+    reliability: 3
+    useful_for: "Describes him as 'author, scriptwriter, essayist, humorist, satirist and dramatist'"
+    wikidata_ref:
+      P854: "https://encyclopedia.pub/entry/37057"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: null
+      url: "https://encyclopedia.pub/entry/37057"
+      retrieved: 2026-01-20
+
+sift_verification:
+  stop: "Are all the Wikidata occupations (playwright, screenwriter, novelist, children's writer, science fiction writer, comedian, writer, musician) accurate?"
+  investigate: "Multiple sources confirm writer/author, screenwriter, humorist. IMDb and other sources confirm radio dramatist. Sources mention he played guitar for Pink Floyd."
+  find_better: "Core occupations well-supported. Some edge cases: 'playwright' less clear (primarily radio/TV), 'children's writer' weak evidence."
+  trace: "His published works serve as primary evidence for writer/novelist/screenwriter. Doctor Who scripts prove screenwriting. Radio Academy Hall of Fame confirms radio work."
+
+proposed_claim:
+  value: "Multiple: writer, novelist, screenwriter, science fiction writer, humorist, musician"
+  value_type: item
+  value_qid: "Q36180 (writer), Q6625963 (novelist), Q28389 (screenwriter), Q18844224 (science fiction writer), Q3282637 (humorist), Q639669 (musician)"
+  precision: null
+  qualifiers: null
+  confidence: medium
+  confidence_reasoning: "Core occupations (writer, novelist, screenwriter, science fiction writer, humorist, musician) strongly supported. 'Playwright' and 'children's writer' have weaker evidence. Adams himself said he was 'more a screenwriter than a novelist'."
+  primary_reference:
+    wikidata_ref:
+      P248: Q5375741      # Encyclopedia Britannica Online
+      P854: "https://www.britannica.com/biography/Douglas-Adams"
+      P813: 2026-01-20
+    human_readable:
+      stated_in: "Encyclopedia Britannica Online"
+      url: "https://www.britannica.com/biography/Douglas-Adams"
+      retrieved: 2026-01-20
+
+# QuickStatements: N/A - existing claim (verification only, not adding new data)
+quickstatements: null
+
+human_verification:
+  reviewed_by: null
+  review_date: null
+  sift_correct: null
+  proposed_value_correct: null
+  actual_value: null
+  failure_mode: null
+  notes: null

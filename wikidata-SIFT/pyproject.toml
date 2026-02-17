@@ -1,0 +1,17 @@
+[project]
+name = "wikidata-llm-experiment"
+version = "0.1.0"
+requires-python = ">=3.13"
+dependencies = [
+    "pywikibot>=10.7",
+    "pyyaml",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["scripts"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+]

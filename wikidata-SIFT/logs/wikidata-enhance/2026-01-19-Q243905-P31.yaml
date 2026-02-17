@@ -1,0 +1,45 @@
+session_date: 2026-01-19
+item: Q243905
+item_label: Luis Villa
+property: P31
+property_label: instance of
+chainlink_issue: 3
+chainlink_subissue: 4
+
+sources_consulted:
+  - url: "https://en.wikipedia.org/wiki/Luis_Villa"
+    name: "Wikipedia - Luis Villa"
+    type: secondary
+    reliability: 3
+    useful_for: "Confirms subject is a person with biographical details"
+  - url: "https://tidelift.com/about/luis-villa"
+    name: "Tidelift - Luis Villa bio"
+    type: primary
+    reliability: 4
+    useful_for: "Official employer bio confirming identity"
+
+verification:
+  sift_steps:
+    stop: "Verified claim matches what sources actually state"
+    investigate: "Wikipedia secondary source + Tidelift primary source (employer)"
+    find_better: "Multiple independent sources confirm: Wikipedia, Tidelift, LinkedIn, Berkman Center"
+    trace: "Primary sources: Tidelift (employer), Berkman Center (academic affiliation)"
+  evidence_type: documentation
+  confidence: high
+  confidence_reasoning: "Multiple reliable sources including primary employer bio confirm subject is a human being"
+
+result:
+  status: verified
+  value: "Q243906"
+  value_label: "human"
+  value_type: item
+  references:
+    - reference_url: "https://tidelift.com/about/luis-villa"
+      retrieved: 2026-01-19
+
+human_approval: true
+approved_by: human
+approval_date: 2026-01-19
+executed: true
+execution_date: 2026-01-19
+execution_notes: "Used P82 (instance of on test.wikidata.org) instead of P31. Created Q243906 (human) as target item."
