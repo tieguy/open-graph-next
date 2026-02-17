@@ -347,6 +347,94 @@ def fetch_entity_at_revision(qid, revid):
     return data["entities"][qid]
 
 
+def find_removed_claims(old_entity, new_entity, property_id):
+    """Find claims present in old entity but missing from new entity.
+
+    Compares statement IDs to identify which specific claims were removed.
+
+    Args:
+        old_entity: Entity JSON dict at the old revision.
+        new_entity: Entity JSON dict at the current revision.
+        property_id: Property to compare (e.g., "P21").
+
+    Returns:
+        List of raw claim JSON dicts that were removed.
+    """
+    old_claims = old_entity.get("claims", {}).get(property_id, [])
+    new_claims = new_entity.get("claims", {}).get(property_id, [])
+    new_ids = {c["id"] for c in new_claims}
+    return [c for c in old_claims if c["id"] not in new_ids]
+
+
+def enrich_edit(edit, label_cache):
+    """Add item context, parsed edit summary, and resolved labels to an edit.
+
+    Fetches the item at the edit's revision, serializes all claims with
+    resolved labels, parses the edit summary, and for removal edits fetches
+    the old revision to capture the removed claim.
+
+    Modifies the edit dict in place and returns it.
+
+    Args:
+        edit: Edit metadata dict (from normalize_change).
+        label_cache: LabelCache for resolving entity IDs.
+
+    Returns:
+        The edit dict with added parsed_edit, item, and removed_claim keys.
+    """
+    # Parse edit summary
+    parsed = parse_edit_summary(edit["comment"])
+    if parsed:
+        parsed["property_label"] = label_cache.resolve(parsed["property"])
+        if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
+            parsed["value_label"] = label_cache.resolve(parsed["value_raw"])
+        else:
+            parsed["value_label"] = None
+    edit["parsed_edit"] = parsed
+
+    # Fetch item at current revision
+    qid = edit["title"]
+    try:
+        entity_data = fetch_entity_at_revision(qid, edit["revid"])
+    except Exception as e:
+        edit["item"] = {"error": str(e)}
+        edit["removed_claim"] = None
+        return edit
+
+    edit["item"] = {
+        "label_en": (
+            entity_data.get("labels", {}).get("en", {}).get("value")
+        ),
+        "description_en": (
+            entity_data.get("descriptions", {}).get("en", {}).get("value")
+        ),
+        "claims": serialize_claims(
+            entity_data.get("claims", {}), label_cache
+        ),
+    }
+
+    # Handle removals: fetch old revision to find what was deleted
+    is_removal = parsed and "remove" in parsed["operation"]
+    if is_removal:
+        try:
+            old_entity = fetch_entity_at_revision(qid, edit["old_revid"])
+            removed = find_removed_claims(
+                old_entity, entity_data, parsed["property"]
+            )
+            if removed:
+                edit["removed_claim"] = serialize_statement(
+                    removed[0], label_cache
+                )
+            else:
+                edit["removed_claim"] = None
+        except Exception as e:
+            edit["removed_claim"] = {"error": str(e)}
+    else:
+        edit["removed_claim"] = None
+
+    return edit
+
+
 def save_snapshot(edits, label, snapshot_dir):
     """Save a list of edits as a timestamped YAML snapshot.
 
@@ -412,14 +500,34 @@ def main():
         default=str(SNAPSHOT_DIR),
         help=f"Output directory for snapshots (default: {SNAPSHOT_DIR})",
     )
+    parser.add_argument(
+        "--enrich",
+        action="store_true",
+        help="Enrich edits with item data, resolved labels, and parsed edit summaries",
+    )
     args = parser.parse_args()
 
     site = get_production_site()
+    label_cache = LabelCache(site) if args.enrich else None
 
     # Fetch unpatrolled edits
     print(f"Fetching {args.unpatrolled} unpatrolled statement edits...")
     unpatrolled = list(fetch_unpatrolled_edits(site, tag=args.tag, total=args.unpatrolled))
     print(f"  Found {len(unpatrolled)} edits")
+
+    if args.enrich:
+        print(f"  Enriching {len(unpatrolled)} edits with item data...")
+        for i, edit in enumerate(unpatrolled):
+            print(
+                f"    [{i + 1}/{len(unpatrolled)}] {edit['title']}...",
+                end="",
+                flush=True,
+            )
+            try:
+                enrich_edit(edit, label_cache)
+                print(" done")
+            except Exception as e:
+                print(f" ERROR: {e}")
 
     if args.dry_run:
         for edit in unpatrolled:
@@ -440,6 +548,20 @@ def main():
                 f"  WARNING: requested {args.control} control edits but only "
                 f"{len(control)} found — overfetch pool may be too small"
             )
+
+        if args.enrich:
+            print(f"  Enriching {len(control)} control edits with item data...")
+            for i, edit in enumerate(control):
+                print(
+                    f"    [{i + 1}/{len(control)}] {edit['title']}...",
+                    end="",
+                    flush=True,
+                )
+                try:
+                    enrich_edit(edit, label_cache)
+                    print(" done")
+                except Exception as e:
+                    print(f" ERROR: {e}")
 
         if args.dry_run:
             for edit in control:
