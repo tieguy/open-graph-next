@@ -47,6 +47,7 @@ STATEMENT_SUMMARY_PATTERNS = [
 ]
 
 SNAPSHOT_DIR = Path("logs/wikidata-patrol-experiment/snapshot")
+CONTROL_DIR = Path("logs/wikidata-patrol-experiment/control")
 
 
 def get_production_site():
@@ -148,12 +149,13 @@ def save_snapshot(edits, label, snapshot_dir):
     snapshot_dir = Path(snapshot_dir)
     snapshot_dir.mkdir(parents=True, exist_ok=True)
 
-    timestamp = datetime.now(timezone.utc).strftime("%Y-%m-%d-%H%M%S")
+    now = datetime.now(timezone.utc)
+    timestamp = now.strftime("%Y-%m-%d-%H%M%S")
     filename = f"{timestamp}-{label}.yaml"
     filepath = snapshot_dir / filename
 
     snapshot = {
-        "fetch_date": datetime.now(timezone.utc).isoformat(),
+        "fetch_date": now.isoformat(),
         "label": label,
         "count": len(edits),
         "edits": edits,
@@ -221,13 +223,18 @@ def main():
         print(f"Fetching {args.control} control (autopatrolled) statement edits...")
         control = list(fetch_control_edits(site, total=args.control))
         print(f"  Found {len(control)} edits")
+        if len(control) < args.control:
+            print(
+                f"  WARNING: requested {args.control} control edits but only "
+                f"{len(control)} found — overfetch pool may be too small"
+            )
 
         if args.dry_run:
             for edit in control:
                 print(f"  {edit['title']} by {edit['user']} at {edit['timestamp']}")
                 print(f"    comment: {edit['comment']}")
         else:
-            path = save_snapshot(control, "control", args.output_dir)
+            path = save_snapshot(control, "control", CONTROL_DIR)
             print(f"  Saved to {path}")
 
     print("Done.")
