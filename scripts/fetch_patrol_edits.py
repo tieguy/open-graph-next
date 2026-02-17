@@ -24,6 +24,8 @@ Usage:
 import argparse
 import re
 import sys
+
+import requests
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -316,6 +318,33 @@ def serialize_claims(raw_claims, label_cache):
             "statements": statements,
         }
     return result
+
+
+def fetch_entity_at_revision(qid, revid):
+    """Fetch Wikidata entity JSON at a specific revision.
+
+    Uses Special:EntityData which supports revision-specific fetching.
+    pywikibot's ItemPage.get() only fetches the latest revision, so we
+    use a direct HTTP request instead.
+
+    Args:
+        qid: Entity ID (e.g., "Q42").
+        revid: Revision ID to fetch.
+
+    Returns:
+        dict with entity data (labels, descriptions, claims, etc.).
+
+    Raises:
+        Exception: If the HTTP request fails (404, timeout, etc.).
+    """
+    url = (
+        f"https://www.wikidata.org/wiki/Special:EntityData/"
+        f"{qid}.json?revision={revid}"
+    )
+    resp = requests.get(url, timeout=30)
+    resp.raise_for_status()
+    data = resp.json()
+    return data["entities"][qid]
 
 
 def save_snapshot(edits, label, snapshot_dir):
