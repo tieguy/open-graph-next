@@ -219,6 +219,105 @@ class LabelCache:
         self._cache[entity_id] = label
 
 
+def extract_snak_value(snak, label_cache):
+    """Extract value and optional label from a Wikibase snak.
+
+    A snak is the atomic data structure in Wikibase (property + value).
+    Raw JSON format comes from the wbgetentities API / Special:EntityData.
+
+    Returns:
+        Tuple of (value_string, label_or_none).
+    """
+    snaktype = snak.get("snaktype", "value")
+    if snaktype != "value":
+        return snaktype, None
+
+    datavalue = snak.get("datavalue", {})
+    dtype = datavalue.get("type")
+    val = datavalue.get("value")
+
+    if dtype == "wikibase-entityid":
+        entity_id = val["id"]
+        return entity_id, label_cache.resolve(entity_id)
+    elif dtype == "time":
+        return val["time"], None
+    elif dtype == "quantity":
+        return val["amount"], None
+    elif dtype == "string":
+        return val, None
+    elif dtype == "globecoordinate":
+        return f"{val['latitude']},{val['longitude']}", None
+    elif dtype == "monolingualtext":
+        return val["text"], None
+    else:
+        return str(val), None
+
+
+def serialize_statement(claim_json, label_cache):
+    """Convert a raw Wikibase claim JSON to a YAML-friendly dict.
+
+    Args:
+        claim_json: A single claim dict from the wbgetentities response.
+        label_cache: LabelCache for resolving entity IDs to labels.
+
+    Returns:
+        dict with value, value_label, rank, references, qualifiers.
+    """
+    mainsnak = claim_json["mainsnak"]
+    value, value_label = extract_snak_value(mainsnak, label_cache)
+
+    refs = []
+    for ref_block in claim_json.get("references", []):
+        ref_dict = {}
+        for ref_pid, snaks in ref_block.get("snaks", {}).items():
+            snak = snaks[0]
+            ref_value, ref_value_label = extract_snak_value(snak, label_cache)
+            ref_dict[ref_pid] = {
+                "property_label": label_cache.resolve(ref_pid),
+                "value": ref_value,
+                "value_label": ref_value_label,
+            }
+        refs.append(ref_dict)
+
+    quals = {}
+    for qual_pid, qual_snaks in claim_json.get("qualifiers", {}).items():
+        snak = qual_snaks[0]
+        qual_value, qual_value_label = extract_snak_value(snak, label_cache)
+        quals[qual_pid] = {
+            "property_label": label_cache.resolve(qual_pid),
+            "value": qual_value,
+            "value_label": qual_value_label,
+        }
+
+    return {
+        "value": value,
+        "value_label": value_label,
+        "rank": claim_json.get("rank", "normal"),
+        "references": refs,
+        "qualifiers": quals,
+    }
+
+
+def serialize_claims(raw_claims, label_cache):
+    """Convert all claims from raw entity JSON to YAML-friendly dict.
+
+    Args:
+        raw_claims: The "claims" dict from a wbgetentities response.
+        label_cache: LabelCache for resolving entity IDs to labels.
+
+    Returns:
+        dict mapping property IDs to {property_label, statements}.
+    """
+    result = {}
+    for pid, claim_list in raw_claims.items():
+        statements = [serialize_statement(c, label_cache) for c in claim_list]
+        result[pid] = {
+            "property_label": label_cache.resolve(pid),
+            "statements": statements,
+        }
+    return result
+
+
 def save_snapshot(edits, label, snapshot_dir):
     """Save a list of edits as a timestamped YAML snapshot.
 
