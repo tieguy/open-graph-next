@@ -1,0 +1,19 @@
+{
+  "id": "wiki-apollo-8",
+  "source": "wikipedia",
+  "title": "Apollo 8",
+  "description": "The first crewed spacecraft to leave low Earth orbit, reach the Moon, orbit it, and return. The mission's Earthrise photograph became one of the most influential environmental images ever taken.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d4/Apollo_8_Crewmembers_-_GPN-2000-001125.jpg/220px-Apollo_8_Crewmembers_-_GPN-2000-001125.jpg",
+  "url": "https://en.wikipedia.org/wiki/Apollo_8",
+  "identifiers": {
+    "wikidata": "Q182252",
+    "lc-subject": "sh85005386"
+  },
+  "potential": {
+    "internet_archive": 234,
+    "wikipedia": 67,
+    "wikimedia_commons": 189,
+    "smithsonian": 23,
+    "total": 513
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "id": "commons-aldrin-moon",
+  "source": "wikimedia_commons",
+  "title": "Buzz Aldrin on the Moon",
+  "description": "Iconic photograph of Buzz Aldrin standing on the lunar surface, taken by Neil Armstrong. The reflection in Aldrin's visor shows Armstrong and the lunar module.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/220px-Aldrin_Apollo_11_original.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:Aldrin_Apollo_11_original.jpg",
+  "identifiers": {
+    "commons": "Aldrin_Apollo_11_original.jpg"
+  },
+  "potential": {
+    "wikimedia_commons": 156,
+    "total": 156
+  }
+}

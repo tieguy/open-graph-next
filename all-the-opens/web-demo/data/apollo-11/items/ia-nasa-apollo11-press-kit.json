@@ -1,0 +1,15 @@
+{
+  "id": "ia-nasa-apollo11-press-kit",
+  "source": "internet_archive",
+  "title": "NASA Apollo 11 Press Kit",
+  "description": "Official NASA press kit for the Apollo 11 mission, containing mission timeline, spacecraft specifications, crew biographies, and technical details.",
+  "thumbnail": "https://archive.org/services/img/nasa_apollo11_press_kit",
+  "url": "https://archive.org/details/nasa_apollo11_press_kit",
+  "connections": [],
+  "potential": {
+    "internet_archive": 567,
+    "dpla": 89,
+    "smithsonian": 12,
+    "total": 668
+  }
+}

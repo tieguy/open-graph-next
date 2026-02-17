@@ -1,0 +1,21 @@
+{
+  "id": "smithsonian-space-suit",
+  "source": "smithsonian",
+  "title": "Neil Armstrong's Apollo 11 Spacesuit",
+  "description": "The A7-L spacesuit worn by Neil Armstrong during the Apollo 11 mission, including the historic first moonwalk. Recently restored and on display.",
+  "thumbnail": "https://ids.si.edu/ids/deliveryService?id=NASM-NASM2019-01866",
+  "url": "https://airandspace.si.edu/collection-objects/pressure-suit-a7-l-armstrong-apollo-11-flown/nasm_A19710155000",
+  "connections": [
+    {
+      "targetId": "wiki-neil-armstrong",
+      "type": "person",
+      "label": "worn by"
+    }
+  ],
+  "potential": {
+    "smithsonian": 156,
+    "internet_archive": 234,
+    "wikimedia_commons": 78,
+    "total": 468
+  }
+}

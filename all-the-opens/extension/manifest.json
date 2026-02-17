@@ -1,0 +1,55 @@
+{
+  "manifest_version": 3,
+  "name": "Open Web Knowledge Graph",
+  "version": "0.1.0",
+  "description": "Discover related resources across cultural heritage archives when browsing Wikipedia",
+  "permissions": [
+    "storage",
+    "activeTab",
+    "sidePanel",
+    "tabs",
+    "scripting"
+  ],
+  "host_permissions": [
+    "*://*.wikipedia.org/*",
+    "*://*.wikidata.org/*",
+    "https://openlibrary.org/*",
+    "https://archive.org/*",
+    "https://viaf.org/*",
+    "https://api.dp.la/*",
+    "https://export.arxiv.org/*",
+    "https://commons.wikimedia.org/*",
+    "https://api.si.edu/*",
+    "https://collectionapi.metmuseum.org/*",
+    "https://api.gbif.org/*",
+    "https://api.inaturalist.org/*",
+    "https://d-nb.info/*",
+    "https://id.loc.gov/*"
+  ],
+  "side_panel": {
+    "default_path": "sidebar/panel.html"
+  },
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.wikipedia.org/wiki/*"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "icons": {
+    "16": "icons/icon-16.png",
+    "48": "icons/icon-48.png",
+    "96": "icons/icon-96.png"
+  },
+  "action": {
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    },
+    "default_title": "Open Knowledge Graph"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "id": "ol-return-to-earth",
+  "source": "openlibrary",
+  "title": "Return to Earth",
+  "description": "Buzz Aldrin's autobiography describing his experiences as an astronaut and his struggles with depression and alcoholism after returning from the Moon.",
+  "thumbnail": "https://covers.openlibrary.org/b/id/240726-M.jpg",
+  "url": "https://openlibrary.org/works/OL1854638W",
+  "identifiers": {
+    "openlibrary": "OL1854638W",
+    "isbn": "0394410866"
+  },
+  "potential": {
+    "internet_archive": 5,
+    "openlibrary": 8,
+    "total": 13
+  }
+}

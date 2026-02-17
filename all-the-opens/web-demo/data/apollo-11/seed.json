@@ -1,0 +1,33 @@
+{
+  "id": "wiki-apollo-11",
+  "source": "wikipedia",
+  "title": "Apollo 11",
+  "description": "The Apollo 11 mission was the first crewed mission to land on the Moon. Commander Neil Armstrong and lunar module pilot Buzz Aldrin landed the Apollo Lunar Module Eagle on July 20, 1969.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/200px-Aldrin_Apollo_11_original.jpg",
+  "url": "https://en.wikipedia.org/wiki/Apollo_11",
+  "identifiers": {
+    "wikidata": "Q43653",
+    "lc-subject": "sh85005389",
+    "fast": "806988"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "ia-apollo11-footage",
+        "relationship": "mission footage",
+        "reason": "Internet Archive lacks LC subject link"
+      },
+      {
+        "id": "commons-apollo11-launch",
+        "relationship": "launch photograph",
+        "reason": "Commons lacks structured subject link"
+      },
+      {
+        "id": "smithsonian-command-module",
+        "relationship": "mission spacecraft",
+        "reason": "Smithsonian catalog lacks FAST/LC subject link"
+      }
+    ]
+  }
+}

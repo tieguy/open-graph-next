@@ -1,0 +1,27 @@
+{
+  "id": "wiki-ksc",
+  "source": "wikipedia",
+  "title": "Kennedy Space Center",
+  "description": "NASA's primary launch center since 1968, located on Merritt Island, Florida. Site of all crewed Apollo launches and Space Shuttle missions. Named after President John F. Kennedy.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/VAB_and_SLS.jpg/220px-VAB_and_SLS.jpg",
+  "url": "https://en.wikipedia.org/wiki/Kennedy_Space_Center",
+  "identifiers": {
+    "wikidata": "Q208371",
+    "geonames": "4158918"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "osm-launch-complex-39a",
+        "relationship": "facility within",
+        "reason": "OSM lacks Wikidata/GeoNames link"
+      },
+      {
+        "id": "osm-ksc-visitor-complex",
+        "relationship": "facility within",
+        "reason": "OSM lacks Wikidata/GeoNames link"
+      }
+    ]
+  }
+}

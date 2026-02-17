@@ -1,0 +1,35 @@
+{
+  "id": "wiki-jfk",
+  "source": "wikipedia",
+  "title": "John F. Kennedy",
+  "description": "35th President of the United States who announced the goal of landing a man on the Moon before the end of the 1960s in his famous 1961 speech to Congress.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/John_F._Kennedy%2C_White_House_color_photo_portrait.jpg/200px-John_F._Kennedy%2C_White_House_color_photo_portrait.jpg",
+  "url": "https://en.wikipedia.org/wiki/John_F._Kennedy",
+  "identifiers": {
+    "wikidata": "Q9696",
+    "viaf": "68910251",
+    "isni": "0000000121268338",
+    "lc": "n79055297"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "wiki-ksc",
+        "relationship": "namesake of",
+        "reason": "Wikipedia lacks structured 'named after' link with authority"
+      }
+    ]
+  },
+  "connections": [],
+  "potential": {
+    "wikipedia": 2345,
+    "internet_archive": 8901,
+    "wikimedia_commons": 3456,
+    "dpla": 1234,
+    "openlibrary": 567,
+    "met_museum": 23,
+    "smithsonian": 456,
+    "total": 16982
+  }
+}

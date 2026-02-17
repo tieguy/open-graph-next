@@ -1,0 +1,15 @@
+{
+  "id": "commons-earthrise",
+  "source": "wikimedia_commons",
+  "title": "Earthrise (Apollo 11)",
+  "description": "Earth rising over the lunar horizon as seen from Apollo 11. One of the most iconic images of the space age.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a8/NASA-Apollo8-Dec24-Earthrise.jpg/200px-NASA-Apollo8-Dec24-Earthrise.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:NASA-Apollo8-Dec24-Earthrise.jpg",
+  "connections": [],
+  "potential": {
+    "wikimedia_commons": 1234,
+    "internet_archive": 89,
+    "met_museum": 5,
+    "total": 1328
+  }
+}

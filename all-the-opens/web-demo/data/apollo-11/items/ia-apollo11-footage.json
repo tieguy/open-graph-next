@@ -1,0 +1,16 @@
+{
+  "id": "ia-apollo11-footage",
+  "source": "internet_archive",
+  "title": "Apollo 11 Mission Footage",
+  "description": "Complete television transmission of the Apollo 11 mission, including the historic first moonwalk by Neil Armstrong and Buzz Aldrin on July 20, 1969.",
+  "thumbnail": "https://archive.org/services/img/Apollo11MoonwalkonNASATVJuly201969",
+  "url": "https://archive.org/details/Apollo11MoonwalkonNASATVJuly201969",
+  "connections": [],
+  "potential": {
+    "internet_archive": 2341,
+    "wikipedia": 45,
+    "wikimedia_commons": 156,
+    "dpla": 23,
+    "total": 2565
+  }
+}

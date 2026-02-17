@@ -1,0 +1,35 @@
+{
+  "id": "wiki-buzz-aldrin",
+  "source": "wikipedia",
+  "title": "Buzz Aldrin",
+  "description": "Buzz Aldrin is an American former astronaut, fighter pilot and engineer. He was the lunar module pilot on Apollo 11.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Buzz_Aldrin.jpg/220px-Buzz_Aldrin.jpg",
+  "url": "https://en.wikipedia.org/wiki/Buzz_Aldrin",
+  "identifiers": {
+    "wikidata": "Q2252",
+    "viaf": "110368892",
+    "isni": "0000000110826680"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "commons-footprint",
+        "relationship": "astronaut's bootprint",
+        "reason": "Commons file lacks structured person link"
+      }
+    ]
+  },
+  "connections": [],
+  "potential": {
+    "internet_archive": 623,
+    "wikipedia": 134,
+    "wikimedia_commons": 245,
+    "dpla": 56,
+    "openlibrary": 28,
+    "arxiv": 8,
+    "met_museum": 1,
+    "smithsonian": 45,
+    "total": 1140
+  }
+}

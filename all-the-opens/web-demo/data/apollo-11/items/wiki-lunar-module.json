@@ -1,0 +1,16 @@
+{
+  "id": "wiki-lunar-module",
+  "source": "wikipedia",
+  "title": "Apollo Lunar Module",
+  "description": "The Apollo Lunar Module (LM) was the lunar lander spacecraft that was flown between lunar orbit and the Moon's surface during the Apollo program.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/Apollo_11_Lunar_Module_Eagle_in_landing_configuration_in_lunar_orbit_from_the_Command_and_Service_Module_Columbia.jpg/220px-Apollo_11_Lunar_Module_Eagle_in_landing_configuration_in_lunar_orbit_from_the_Command_and_Service_Module_Columbia.jpg",
+  "url": "https://en.wikipedia.org/wiki/Apollo_Lunar_Module",
+  "connections": [],
+  "potential": {
+    "internet_archive": 178,
+    "wikipedia": 67,
+    "wikimedia_commons": 234,
+    "smithsonian": 45,
+    "total": 524
+  }
+}

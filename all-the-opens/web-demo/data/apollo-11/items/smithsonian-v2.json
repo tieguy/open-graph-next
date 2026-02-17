@@ -1,0 +1,15 @@
+{
+  "id": "smithsonian-v2",
+  "source": "smithsonian",
+  "title": "V-2 Missile",
+  "description": "A complete V-2 missile on display at the National Air and Space Museum. This artifact represents the technological foundation that led to the Saturn V rocket and the Apollo program.",
+  "thumbnail": "https://ids.si.edu/ids/deliveryService?id=NASM-A19600324000-NASM2020-02636",
+  "url": "https://airandspace.si.edu/collection-objects/missile-v-2-a-4",
+  "identifiers": {
+    "smithsonian-id": "A19600324000"
+  },
+  "potential": {
+    "smithsonian": 45,
+    "total": 45
+  }
+}

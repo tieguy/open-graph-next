@@ -1,0 +1,15 @@
+{
+  "id": "commons-footprint",
+  "source": "wikimedia_commons",
+  "title": "Bootprint on the Moon",
+  "description": "Buzz Aldrin's bootprint on the lunar surface, one of the first steps taken on the Moon. This photograph has become an iconic image of human space exploration.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/89/Apollo_11_bootprint.jpg/200px-Apollo_11_bootprint.jpg",
+  "url": "https://commons.wikimedia.org/wiki/File:AS11-40-5877_-_Apollo_11_Mission_image_-_Astronaut_bootprint_on_the_lunar_surface_-_NARA_-_16685058.jpg",
+  "connections": [],
+  "potential": {
+    "wikimedia_commons": 567,
+    "internet_archive": 123,
+    "smithsonian": 8,
+    "total": 698
+  }
+}

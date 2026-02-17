@@ -1,0 +1,21 @@
+{
+  "id": "smithsonian-command-module",
+  "source": "smithsonian",
+  "title": "Apollo 11 Command Module Columbia",
+  "description": "The actual spacecraft that carried astronauts Armstrong, Aldrin, and Collins to the Moon and back. On display at the National Air and Space Museum in Washington, D.C.",
+  "thumbnail": "https://ids.si.edu/ids/deliveryService?id=NASM-A19700102000-NASM2018-02925",
+  "url": "https://airandspace.si.edu/collection-objects/command-module-apollo-11/nasm_A19700102000",
+  "connections": [
+    {
+      "targetId": "wiki-michael-collins",
+      "type": "person",
+      "label": "piloted by"
+    }
+  ],
+  "potential": {
+    "smithsonian": 234,
+    "internet_archive": 456,
+    "wikimedia_commons": 89,
+    "total": 779
+  }
+}

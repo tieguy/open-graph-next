@@ -1,0 +1,270 @@
+{
+  "wiki-apollo-11": [
+    {
+      "targetId": "wiki-neil-armstrong",
+      "type": "person",
+      "label": "crew member",
+      "linkedVia": ["viaf", "lc", "isni", "wikidata"]
+    },
+    {
+      "targetId": "wiki-buzz-aldrin",
+      "type": "person",
+      "label": "crew member",
+      "linkedVia": ["viaf", "lc", "isni", "wikidata"]
+    },
+    {
+      "targetId": "wiki-michael-collins",
+      "type": "person",
+      "label": "crew member",
+      "linkedVia": ["viaf", "lc", "isni", "wikidata"]
+    },
+    {
+      "targetId": "ia-apollo11-footage",
+      "type": "subject",
+      "label": "mission footage",
+      "linkedVia": ["manual"]
+    },
+    {
+      "targetId": "commons-apollo11-launch",
+      "type": "subject",
+      "label": "launch photo",
+      "linkedVia": ["manual"]
+    },
+    {
+      "targetId": "wiki-saturn-v",
+      "type": "subject",
+      "label": "launch vehicle",
+      "linkedVia": ["wikidata", "lc-subject"]
+    },
+    {
+      "targetId": "smithsonian-command-module",
+      "type": "subject",
+      "label": "spacecraft",
+      "linkedVia": ["smithsonian-id", "wikidata"]
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "part of program",
+      "linkedVia": ["wikidata", "lc-subject", "fast"]
+    },
+    {
+      "targetId": "wiki-ksc",
+      "type": "location",
+      "label": "launched from",
+      "linkedVia": ["geonames", "wikidata"]
+    },
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launch pad",
+      "linkedVia": ["coordinates"]
+    }
+  ],
+  "wiki-neil-armstrong": [
+    {
+      "targetId": "ol-first-man",
+      "type": "subject",
+      "label": "biography",
+      "linkedVia": ["viaf", "lc", "isbn"]
+    },
+    {
+      "targetId": "smithsonian-space-suit",
+      "type": "subject",
+      "label": "wore this suit",
+      "linkedVia": ["smithsonian-id", "wikidata"]
+    },
+    {
+      "targetId": "commons-footprint",
+      "type": "subject",
+      "label": "first footprint",
+      "linkedVia": ["manual"]
+    }
+  ],
+  "wiki-michael-collins": [
+    {
+      "targetId": "ol-carrying-fire",
+      "type": "creator",
+      "label": "wrote memoir",
+      "linkedVia": ["viaf", "lc", "isbn"]
+    },
+    {
+      "targetId": "smithsonian-command-module",
+      "type": "subject",
+      "label": "piloted spacecraft",
+      "linkedVia": ["wikidata"]
+    }
+  ],
+  "wiki-saturn-v": [
+    {
+      "targetId": "wiki-wernher-von-braun",
+      "type": "creator",
+      "label": "chief architect",
+      "linkedVia": ["viaf", "lc", "wikidata"]
+    },
+    {
+      "targetId": "commons-apollo11-launch",
+      "type": "subject",
+      "label": "launch photo",
+      "linkedVia": ["manual"]
+    },
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launched from",
+      "linkedVia": ["coordinates"]
+    }
+  ],
+  "wiki-apollo-program": [
+    {
+      "targetId": "wiki-jfk",
+      "type": "person",
+      "label": "initiated by",
+      "linkedVia": ["viaf", "lc", "isni", "wikidata"]
+    },
+    {
+      "targetId": "wiki-moon-landing",
+      "type": "subject",
+      "label": "achieved goal",
+      "linkedVia": ["wikidata", "lc-subject"]
+    },
+    {
+      "targetId": "wiki-ksc",
+      "type": "location",
+      "label": "launched from",
+      "linkedVia": ["geonames", "wikidata"]
+    }
+  ],
+  "commons-earthrise": [
+    {
+      "targetId": "wiki-apollo-8",
+      "type": "subject",
+      "label": "taken during",
+      "linkedVia": ["wikidata", "manual"]
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "part of program",
+      "linkedVia": ["wikidata"]
+    }
+  ],
+  "smithsonian-command-module": [
+    {
+      "targetId": "smithsonian-crew-hatch",
+      "type": "subject",
+      "label": "component",
+      "linkedVia": ["smithsonian-id"]
+    },
+    {
+      "targetId": "smithsonian-3d-collection",
+      "type": "subject",
+      "label": "3D scan available",
+      "linkedVia": ["smithsonian-id"]
+    }
+  ],
+  "wiki-ksc": [
+    {
+      "targetId": "osm-launch-complex-39a",
+      "type": "location",
+      "label": "launch facility",
+      "linkedVia": ["geonames", "coordinates"]
+    },
+    {
+      "targetId": "osm-ksc-visitor-complex",
+      "type": "location",
+      "label": "visitor center",
+      "linkedVia": ["coordinates"]
+    },
+    {
+      "targetId": "wiki-jfk",
+      "type": "person",
+      "label": "named after",
+      "linkedVia": ["viaf", "lc", "wikidata"]
+    },
+    {
+      "targetId": "wiki-merritt-island-refuge",
+      "type": "location",
+      "label": "shares boundary",
+      "linkedVia": ["geonames", "coordinates"]
+    }
+  ],
+  "wiki-merritt-island-refuge": [
+    {
+      "targetId": "inat-merritt-island",
+      "type": "subject",
+      "label": "wildlife observations",
+      "linkedVia": ["coordinates"]
+    },
+    {
+      "targetId": "gbif-merritt-island",
+      "type": "subject",
+      "label": "biodiversity data",
+      "linkedVia": ["coordinates"]
+    }
+  ],
+  "osm-launch-complex-39a": [
+    {
+      "targetId": "osm-ksc-visitor-complex",
+      "type": "location",
+      "label": "nearby",
+      "linkedVia": ["coordinates"]
+    }
+  ],
+  "wiki-buzz-aldrin": [
+    {
+      "targetId": "ol-return-to-earth",
+      "type": "creator",
+      "label": "wrote memoir",
+      "linkedVia": ["viaf", "lc", "isbn"]
+    },
+    {
+      "targetId": "commons-aldrin-moon",
+      "type": "subject",
+      "label": "iconic photo",
+      "linkedVia": ["wikidata", "manual"]
+    }
+  ],
+  "wiki-jfk": [
+    {
+      "targetId": "ia-jfk-moon-speech",
+      "type": "subject",
+      "label": "moon speech",
+      "linkedVia": ["viaf", "lc"]
+    },
+    {
+      "targetId": "wiki-apollo-program",
+      "type": "subject",
+      "label": "initiated program",
+      "linkedVia": ["wikidata", "lc-subject"]
+    }
+  ],
+  "wiki-wernher-von-braun": [
+    {
+      "targetId": "wiki-v2-rocket",
+      "type": "subject",
+      "label": "developed",
+      "linkedVia": ["viaf", "lc", "wikidata"]
+    },
+    {
+      "targetId": "smithsonian-v2",
+      "type": "subject",
+      "label": "artifact",
+      "linkedVia": ["smithsonian-id"]
+    }
+  ],
+  "wiki-moon-landing": [
+    {
+      "targetId": "wiki-sea-of-tranquility",
+      "type": "location",
+      "label": "landing site",
+      "linkedVia": ["wikidata", "coordinates"]
+    },
+    {
+      "targetId": "wiki-lunar-plaque",
+      "type": "subject",
+      "label": "left on Moon",
+      "linkedVia": ["wikidata"]
+    }
+  ]
+}

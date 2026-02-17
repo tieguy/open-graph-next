@@ -1,0 +1,16 @@
+{
+  "id": "wiki-sea-of-tranquility",
+  "source": "wikipedia",
+  "title": "Sea of Tranquility",
+  "description": "Mare Tranquillitatis is a lunar mare located within the Tranquillitatis basin on the Moon. It is the site of the Apollo 11 landing, where humans first walked on another world.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e1/Mare_Tranquillitatis.jpg/220px-Mare_Tranquillitatis.jpg",
+  "url": "https://en.wikipedia.org/wiki/Mare_Tranquillitatis",
+  "identifiers": {
+    "wikidata": "Q37699"
+  },
+  "potential": {
+    "wikipedia": 45,
+    "wikimedia_commons": 89,
+    "total": 134
+  }
+}

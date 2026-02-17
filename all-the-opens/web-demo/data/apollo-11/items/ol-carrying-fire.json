@@ -1,0 +1,21 @@
+{
+  "id": "ol-carrying-fire",
+  "source": "openlibrary",
+  "title": "Carrying the Fire",
+  "description": "An Astronaut's Journeys by Michael Collins. A memoir of the Apollo 11 command module pilot's experiences, widely considered one of the best astronaut autobiographies ever written.",
+  "thumbnail": "https://covers.openlibrary.org/b/id/240726-M.jpg",
+  "url": "https://openlibrary.org/works/OL1126865W/Carrying_the_Fire",
+  "connections": [
+    {
+      "targetId": "wiki-michael-collins",
+      "type": "creator",
+      "label": "written by"
+    }
+  ],
+  "potential": {
+    "openlibrary": 345,
+    "internet_archive": 567,
+    "dpla": 23,
+    "total": 935
+  }
+}

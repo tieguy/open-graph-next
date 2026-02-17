@@ -1,0 +1,15 @@
+{
+  "id": "ia-apollo11-audio",
+  "source": "internet_archive",
+  "title": "Apollo 11 Mission Audio",
+  "description": "Air-to-ground voice transmissions and onboard recordings from the Apollo 11 mission, including 'The Eagle has landed' and 'One small step' moments.",
+  "thumbnail": "https://archive.org/services/img/Apollo11Audio",
+  "url": "https://archive.org/details/Apollo11Audio",
+  "connections": [],
+  "potential": {
+    "internet_archive": 892,
+    "wikipedia": 12,
+    "arxiv": 3,
+    "total": 907
+  }
+}

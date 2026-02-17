@@ -1,0 +1,41 @@
+{
+  "id": "wiki-neil-armstrong",
+  "source": "wikipedia",
+  "title": "Neil Armstrong",
+  "description": "Neil Alden Armstrong was an American astronaut and aeronautical engineer who became the first person to walk on the Moon.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Neil_Armstrong_pose.jpg/220px-Neil_Armstrong_pose.jpg",
+  "url": "https://en.wikipedia.org/wiki/Neil_Armstrong",
+  "identifiers": {
+    "wikidata": "Q1615",
+    "viaf": "111826406",
+    "isni": "000000012147959X",
+    "lc": "n80008815"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "ol-first-man",
+        "relationship": "biography of",
+        "reason": "OpenLibrary lacks VIAF subject link"
+      },
+      {
+        "id": "smithsonian-space-suit",
+        "relationship": "worn by",
+        "reason": "Smithsonian catalog lacks Wikidata/VIAF link"
+      }
+    ]
+  },
+  "connections": [],
+  "potential": {
+    "internet_archive": 847,
+    "wikipedia": 156,
+    "wikimedia_commons": 312,
+    "dpla": 89,
+    "openlibrary": 34,
+    "arxiv": 12,
+    "met_museum": 3,
+    "smithsonian": 67,
+    "total": 1520
+  }
+}

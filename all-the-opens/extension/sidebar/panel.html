@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Open Web Knowledge Graph</title>
+  <link rel="stylesheet" href="panel.css">
+</head>
+<body>
+
+  <main class="content">
+    <section id="wikidata-section" class="section hidden">
+      <h2 class="section-title">Wikidata Entity</h2>
+      <div id="wikidata-info" class="wikidata-info">
+        <div id="entity-header" class="entity-header"></div>
+        <div id="entity-description" class="entity-description"></div>
+      </div>
+    </section>
+
+    <section id="identifiers-section" class="section hidden">
+      <h2 class="section-title">Known Identifiers</h2>
+      <div id="identifiers-list" class="identifiers-list"></div>
+    </section>
+
+    <section id="same-entity-section" class="section hidden">
+      <h2 class="section-title">Same Entity</h2>
+      <p class="section-subtitle">Found via linked identifiers</p>
+      <div id="same-entity-list" class="results-list"></div>
+    </section>
+
+    <section id="related-topics-section" class="section hidden">
+      <h2 class="section-title">Related Topics</h2>
+      <p class="section-subtitle">Found via keyword search</p>
+      <div id="related-topics-list" class="results-list"></div>
+    </section>
+
+    <section id="search-more-section" class="section hidden">
+      <button id="search-more-btn" class="search-more-btn">
+        <span class="search-icon">🔍</span>
+        Search more sources
+      </button>
+    </section>
+
+    <section id="data-quality-section" class="section hidden">
+      <h2 class="section-title">Improve This Data</h2>
+      <p class="section-subtitle">Help connect the knowledge graph</p>
+      <div id="data-quality-list" class="data-quality-list"></div>
+    </section>
+
+    <section id="loading-section" class="section hidden">
+      <div class="loading">
+        <span class="loading-spinner"></span>
+        <span id="loading-text" class="loading-text">Loading...</span>
+      </div>
+    </section>
+
+    <section id="no-wikidata" class="section hidden">
+      <div class="notice notice-warning">
+        <p>This article is not linked to Wikidata.</p>
+        <p class="notice-subtext">Click below to search for related content.</p>
+      </div>
+      <button id="search-no-wikidata-btn" class="search-more-btn">
+        <span class="search-icon">🔍</span>
+        Search all sources
+      </button>
+    </section>
+
+    <section id="error-section" class="section hidden">
+      <div class="notice notice-error">
+        <p id="error-message">An error occurred.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer-text">Discovering connections across open knowledge</p>
+  </footer>
+
+  <script src="panel.js"></script>
+</body>
+</html>

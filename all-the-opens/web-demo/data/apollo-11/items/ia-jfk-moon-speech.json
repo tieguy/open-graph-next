@@ -1,0 +1,16 @@
+{
+  "id": "ia-jfk-moon-speech",
+  "source": "internet_archive",
+  "title": "JFK Moon Speech (Rice University)",
+  "description": "President John F. Kennedy's address at Rice University on September 12, 1962, where he declared 'We choose to go to the Moon' and galvanized American support for the Apollo program.",
+  "thumbnail": "https://archive.org/services/img/jfk_rice_moon_speech",
+  "url": "https://archive.org/details/jfk_rice_moon_speech",
+  "identifiers": {
+    "archive-id": "jfk_rice_moon_speech"
+  },
+  "potential": {
+    "internet_archive": 234,
+    "wikipedia": 12,
+    "total": 246
+  }
+}

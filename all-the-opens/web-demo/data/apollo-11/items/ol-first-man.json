@@ -1,0 +1,21 @@
+{
+  "id": "ol-first-man",
+  "source": "openlibrary",
+  "title": "First Man: The Life of Neil A. Armstrong",
+  "description": "Biography by James R. Hansen, the only authorized biography of Neil Armstrong. Basis for the 2018 film starring Ryan Gosling.",
+  "thumbnail": "https://covers.openlibrary.org/b/id/8234571-M.jpg",
+  "url": "https://openlibrary.org/works/OL17354773W/First_Man",
+  "connections": [
+    {
+      "targetId": "wiki-neil-armstrong",
+      "type": "subject",
+      "label": "biography of"
+    }
+  ],
+  "potential": {
+    "openlibrary": 234,
+    "internet_archive": 89,
+    "dpla": 12,
+    "total": 335
+  }
+}

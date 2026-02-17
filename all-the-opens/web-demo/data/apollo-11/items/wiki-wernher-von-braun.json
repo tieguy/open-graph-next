@@ -1,0 +1,32 @@
+{
+  "id": "wiki-wernher-von-braun",
+  "source": "wikipedia",
+  "title": "Wernher von Braun",
+  "description": "German-American aerospace engineer who led development of the Saturn V rocket. Known as the 'father of space travel' and central figure in NASA's Apollo program.",
+  "thumbnail": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Wernher_von_Braun_1960.jpg/200px-Wernher_von_Braun_1960.jpg",
+  "url": "https://en.wikipedia.org/wiki/Wernher_von_Braun",
+  "identifiers": {
+    "wikidata": "Q57384",
+    "viaf": "51769292",
+    "isni": "000000012132837X",
+    "lc": "n79114065"
+  },
+  "relatedContent": {
+    "verified": [],
+    "needsCuration": [
+      {
+        "id": "wiki-saturn-v",
+        "relationship": "chief architect of",
+        "reason": "Wikipedia lacks structured creator link with authority"
+      }
+    ]
+  },
+  "connections": [],
+  "potential": {
+    "wikipedia": 234,
+    "internet_archive": 1234,
+    "wikimedia_commons": 567,
+    "openlibrary": 89,
+    "total": 2124
+  }
+}

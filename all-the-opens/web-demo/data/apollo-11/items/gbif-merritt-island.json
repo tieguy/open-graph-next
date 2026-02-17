@@ -1,0 +1,11 @@
+{
+  "id": "gbif-merritt-island",
+  "source": "gbif",
+  "title": "Merritt Island Biodiversity Data",
+  "description": "Over 2 million species occurrence records from the Kennedy Space Center / Merritt Island area. The 140,000-acre refuge hosts 1,500+ species including 21 federally endangered species.",
+  "url": "https://www.gbif.org/occurrence/map?geometry=POLYGON((-80.9%2028.4,-80.5%2028.4,-80.5%2028.8,-80.9%2028.8,-80.9%2028.4))",
+  "potential": {
+    "gbif": 2137776,
+    "total": 2137776
+  }
+}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="referrer" content="no-referrer">
+  <title>Knowledge Commons Consortium Browser - Internet Library Consortium Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="app">
+    <div id="left-panel" class="left-panel">
+      <div class="left-panel-header">
+        <h1>Knowledge Commons Consortium Browser</h1>
+        <p class="left-panel-subtitle">A speculative design prototype exploring cooperative knowledge infrastructure</p>
+      </div>
+      <div class="left-panel-section">
+        <div class="left-panel-section-header">Data Sources</div>
+        <div class="left-panel-sources">
+          <a href="https://archive.org" target="_blank" rel="noopener"><img src="https://archive.org/favicon.ico" alt="" class="source-favicon">Internet Archive</a>
+          <a href="https://wikipedia.org" target="_blank" rel="noopener"><img src="https://en.wikipedia.org/favicon.ico" alt="" class="source-favicon">Wikipedia</a>
+          <a href="https://commons.wikimedia.org" target="_blank" rel="noopener"><img src="https://commons.wikimedia.org/favicon.ico" alt="" class="source-favicon">Wikimedia Commons</a>
+          <a href="https://openlibrary.org" target="_blank" rel="noopener"><img src="https://openlibrary.org/favicon.ico" alt="" class="source-favicon">OpenLibrary</a>
+          <a href="https://dp.la" target="_blank" rel="noopener"><img src="https://dp.la/favicon.ico" alt="" class="source-favicon">DPLA</a>
+          <a href="https://arxiv.org" target="_blank" rel="noopener"><img src="https://info.arxiv.org/favicon.ico" alt="" class="source-favicon">arXiv</a>
+          <a href="https://www.si.edu" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/32px-Smithsonian_sun_logo_no_text.svg.png" alt="" class="source-favicon">Smithsonian</a>
+          <a href="https://www.metmuseum.org" target="_blank" rel="noopener"><img src="https://www.metmuseum.org/favicon.ico" alt="" class="source-favicon">Met Museum</a>
+          <a href="https://www.openstreetmap.org" target="_blank" rel="noopener"><img src="https://www.openstreetmap.org/favicon.ico" alt="" class="source-favicon">OpenStreetMap</a>
+          <a href="https://www.inaturalist.org" target="_blank" rel="noopener"><img src="https://www.inaturalist.org/favicon.ico" alt="" class="source-favicon">iNaturalist</a>
+          <a href="https://www.gbif.org" target="_blank" rel="noopener"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Gbif-full-green-logo.svg/32px-Gbif-full-green-logo.svg.png" alt="" class="source-favicon">GBIF</a>
+        </div>
+      </div>
+    </div>
+    <div id="sidebar" class="sidebar">
+      <div id="sidebar-empty" class="sidebar-empty">
+        <p>Click a node to see details</p>
+      </div>
+      <div id="sidebar-content" class="sidebar-content hidden">
+        <div class="sidebar-title"></div>
+        <div class="sidebar-description"></div>
+        <div class="sidebar-source"></div>
+
+        <div id="sidebar-identifiers" class="sidebar-section hidden">
+          <div class="sidebar-section-header">
+            <span class="section-icon">🔗</span> Authority Identifiers
+          </div>
+          <div id="sidebar-identifiers-list" class="sidebar-identifiers-list"></div>
+        </div>
+
+        <div id="sidebar-related-verified" class="sidebar-section hidden">
+          <div class="sidebar-section-header verified">
+            <span class="section-icon">✓</span> Verified Links
+          </div>
+          <div id="sidebar-related-verified-list" class="sidebar-related-list"></div>
+        </div>
+
+        <div id="sidebar-related-curation" class="sidebar-section hidden">
+          <div class="sidebar-section-header needs-curation">
+            <span class="section-icon">⚠</span> Needs Curation
+          </div>
+          <div id="sidebar-related-curation-list" class="sidebar-related-list"></div>
+        </div>
+
+        <div id="sidebar-potential" class="sidebar-potential hidden">
+          <div class="sidebar-potential-header">
+            <span class="sparkle">✨</span>
+            <span id="sidebar-potential-total">0</span> more items available
+          </div>
+          <div id="sidebar-potential-breakdown" class="sidebar-potential-breakdown"></div>
+          <div class="sidebar-potential-message">
+            We only showed you a tiny slice. The ocean is right there.
+          </div>
+        </div>
+        <a id="sidebar-link" class="sidebar-link" href="#" target="_blank" rel="noopener">
+          View original ↗
+        </a>
+        <div id="sidebar-mobile-summary" class="sidebar-mobile-summary hidden">
+          <span id="mobile-identifiers" class="mobile-badge identifiers" title="Authority identifiers"></span>
+          <span id="mobile-verified" class="mobile-badge verified" title="Verified links"></span>
+          <span id="mobile-curation" class="mobile-badge curation" title="Needs curation"></span>
+        </div>
+        <div class="sidebar-status"></div>
+      </div>
+    </div>
+    <div id="controls">
+      <button id="zoom-in" title="Zoom In">+</button>
+      <button id="zoom-out" title="Zoom Out">−</button>
+      <button id="zoom-reset" title="Reset View">⟲</button>
+    </div>
+    <svg id="graph"></svg>
+  </div>
+  <script type="module" src="main.js"></script>
+</body>
+</html>
