@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-01-20
+Last updated: 2026-02-16
 
 ## Project Purpose
 
@@ -8,9 +8,11 @@ This is a research experiment exploring whether LLM-assisted fact-checking can r
 
 ## Core Principles
 
-### 1. No edits to production Wikidata
+### 1. No writes to production Wikidata
 
-All pywikibot operations target `test.wikidata.org` only. The config enforces this, but double-check before any edit operation. If you're uncertain whether something targets test or production, stop and verify.
+All pywikibot **write** operations target `test.wikidata.org` only. The config enforces this, but double-check before any edit operation. If you're uncertain whether something targets test or production, stop and verify.
+
+**Read-only access to production is expected.** The methodology-testing skill and the SIFT-Patrol experiment both read from production Wikidata (fetching items, recent changes, revision diffs). This is safe and intentional. The constraint is on writes only.
 
 ### 2. Every claim needs a verifiable reference
 
@@ -22,7 +24,11 @@ Wikidata's standard: claims should be verifiable from reliable published sources
 
 ### 3. Log everything in machine-readable format
 
-All fact-checking output should be logged in structured YAML format (see `skills/wikidata-enhance-and-check/SKILL.md` for the schema in Step 13). Write logs to `logs/wikidata-enhance/` with timestamps. This provenance chain is the main research output.
+All fact-checking output should be logged in structured YAML format with timestamps. This provenance chain is the main research output. Log directories by experiment:
+
+- `logs/wikidata-enhance/` -- Item enhancement logs (see `skills/wikidata-enhance-and-check/SKILL.md` Step 13 for schema)
+- `logs/wikidata-methodology-testing/` -- SIFT methodology test results
+- `logs/wikidata-patrol-experiment/` -- SIFT-Patrol experiment (snapshots in `snapshot/`, control group in `control/`)
 
 ### 4. Respect Wikidata's data model
 
@@ -110,6 +116,13 @@ This project includes Claude Code skills for structured workflows:
 
 - **wikidata-methodology-testing** (`skills/wikidata-methodology-testing/SKILL.md`): Test SIFT methodology accuracy by reading production Wikidata entities, running full verification pipelines, and logging proposed claims for human verification. This is READ-ONLY (never writes to Wikidata). Uses test entities from `docs/test-entities.yaml`. Results logged to `logs/wikidata-methodology-testing/`. Invoke with `/wikidata-methodology-testing Q42`.
 
+### SIFT-Patrol Experiment (in progress)
+
+Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skills above, this evaluates individual unpatrolled edits ("is this specific change correct?"). Design plan: `docs/design-plans/2026-02-16-sift-patrol-experiment.md`. Infrastructure built so far:
+
+- `scripts/fetch_patrol_edits.py` -- Fetches unpatrolled and control statement edits from production Wikidata via RecentChanges API. Saves YAML snapshots to `logs/wikidata-patrol-experiment/snapshot/`.
+- Skill for edit-centric SIFT verification is planned for Phase 3.
+
 ## Working with pywikibot
 
 ### Reading an item
@@ -156,6 +169,10 @@ python -c "import pywikibot; print(pywikibot.Site('test', 'wikidata'))"
 
 # Run a script with throttling (pywikibot handles this, but be aware)
 python -m pywikibot.scripts.login  # interactive login if needed
+
+# Fetch patrol edits (read-only from production)
+python scripts/fetch_patrol_edits.py --dry-run          # preview without saving
+python scripts/fetch_patrol_edits.py -u 10 -c 10       # 10 unpatrolled + 10 control
 
 # Chainlink basics
 chainlink list              # see all issues
