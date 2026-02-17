@@ -177,6 +177,48 @@ def parse_edit_summary(comment):
     }
 
 
+class LabelCache:
+    """In-memory cache for resolving Wikidata entity IDs to English labels.
+
+    Resolves Q-ids via ItemPage and P-ids via PropertyPage. Caches results
+    so repeated lookups for the same entity avoid duplicate API calls.
+    """
+
+    def __init__(self, site):
+        self._repo = site.data_repository()
+        self._cache = {}
+
+    def resolve(self, entity_id):
+        """Resolve an entity ID to its English label.
+
+        Args:
+            entity_id: A Q-id (e.g., "Q5") or P-id (e.g., "P106").
+
+        Returns:
+            The English label string, or the entity_id itself if no
+            English label is available or the lookup fails.
+        """
+        if entity_id in self._cache:
+            return self._cache[entity_id]
+
+        try:
+            if entity_id.startswith("P"):
+                page = pywikibot.PropertyPage(self._repo, entity_id)
+            else:
+                page = pywikibot.ItemPage(self._repo, entity_id)
+            page.get()
+            label = page.labels.get("en", entity_id)
+        except Exception:
+            label = entity_id
+
+        self._cache[entity_id] = label
+        return label
+
+    def prime(self, entity_id, label):
+        """Pre-populate the cache with a known label."""
+        self._cache[entity_id] = label
+
+
 def save_snapshot(edits, label, snapshot_dir):
     """Save a list of edits as a timestamped YAML snapshot.
 
