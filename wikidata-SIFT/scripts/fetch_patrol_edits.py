@@ -239,7 +239,11 @@ def extract_snak_value(snak, label_cache):
     val = datavalue.get("value")
 
     if dtype == "wikibase-entityid":
-        entity_id = val["id"]
+        if "id" in val:
+            entity_id = val["id"]
+        else:
+            prefix = "P" if val.get("entity-type") == "property" else "Q"
+            entity_id = f"{prefix}{val['numeric-id']}"
         return entity_id, label_cache.resolve(entity_id)
     elif dtype == "time":
         return val["time"], None
@@ -300,18 +304,26 @@ def serialize_statement(claim_json, label_cache):
     }
 
 
-def serialize_claims(raw_claims, label_cache):
+def serialize_claims(raw_claims, label_cache, skip_external_ids=True):
     """Convert all claims from raw entity JSON to YAML-friendly dict.
 
     Args:
         raw_claims: The "claims" dict from a wbgetentities response.
         label_cache: LabelCache for resolving entity IDs to labels.
+        skip_external_ids: If True, skip properties with datatype
+            "external-id" to reduce snapshot size. These are identifiers
+            in external databases (VIAF, GND, etc.) that aren't useful
+            for SIFT verification yet. See chainlink #12.
 
     Returns:
         dict mapping property IDs to {property_label, statements}.
     """
     result = {}
     for pid, claim_list in raw_claims.items():
+        if skip_external_ids and claim_list:
+            datatype = claim_list[0].get("mainsnak", {}).get("datatype")
+            if datatype == "external-id":
+                continue
         statements = [serialize_statement(c, label_cache) for c in claim_list]
         result[pid] = {
             "property_label": label_cache.resolve(pid),
@@ -392,45 +404,26 @@ def enrich_edit(edit, label_cache):
             parsed["value_label"] = None
     edit["parsed_edit"] = parsed
 
-    # Fetch item at current revision
+    # Fetch item via pywikibot (latest revision, not revision-exact)
     qid = edit["title"]
     try:
-        entity_data = fetch_entity_at_revision(qid, edit["revid"])
+        repo = label_cache._repo
+        item = pywikibot.ItemPage(repo, qid)
+        item.get()
+        raw_claims = item.toJSON().get("claims", {})
     except Exception as e:
         edit["item"] = {"error": str(e)}
         edit["removed_claim"] = None
         return edit
 
     edit["item"] = {
-        "label_en": (
-            entity_data.get("labels", {}).get("en", {}).get("value")
-        ),
-        "description_en": (
-            entity_data.get("descriptions", {}).get("en", {}).get("value")
-        ),
-        "claims": serialize_claims(
-            entity_data.get("claims", {}), label_cache
-        ),
+        "label_en": item.labels.get("en"),
+        "description_en": item.descriptions.get("en"),
+        "claims": serialize_claims(raw_claims, label_cache),
     }
 
-    # Handle removals: fetch old revision to find what was deleted
-    is_removal = parsed and "remove" in parsed["operation"]
-    if is_removal:
-        try:
-            old_entity = fetch_entity_at_revision(qid, edit["old_revid"])
-            removed = find_removed_claims(
-                old_entity, entity_data, parsed["property"]
-            )
-            if removed:
-                edit["removed_claim"] = serialize_statement(
-                    removed[0], label_cache
-                )
-            else:
-                edit["removed_claim"] = None
-        except Exception as e:
-            edit["removed_claim"] = {"error": str(e)}
-    else:
-        edit["removed_claim"] = None
+    # TODO: handle removal edits by diffing old vs new revision
+    edit["removed_claim"] = None
 
     return edit
 

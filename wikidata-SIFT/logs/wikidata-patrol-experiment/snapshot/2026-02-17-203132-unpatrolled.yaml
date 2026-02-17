@@ -1,0 +1,84 @@
+count: 5
+edits:
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P108]]: [[Q124375837]]'
+  old_revid: 2464237910
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P108
+    property_label: employer
+    value_label: State Biotechnological University
+    value_raw: Q124375837
+  rcid: 2540426022
+  revid: 2464238434
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:27Z'
+  title: Q138332576
+  user: Serhey0211994
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P31]]: [[Q3305213]]'
+  old_revid: 2464238274
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P31
+    property_label: instance of
+    value_label: painting
+    value_raw: Q3305213
+  rcid: 2540426007
+  revid: 2464238419
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:25Z'
+  title: Q13571594
+  user: ~2026-10673-79
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P170]]: [[Q5599]]'
+  old_revid: 2464237746
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P170
+    property_label: creator
+    value_label: Peter Paul Rubens
+    value_raw: Q5599
+  rcid: 2540425861
+  revid: 2464238274
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:02Z'
+  title: Q13571594
+  user: ~2026-10673-79
+- comment: '/* wbsetclaim-update:2||1 */ [[Property:P509]]: [[Q61037771]]'
+  old_revid: 2419642966
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P509
+    property_label: cause of death
+    value_label: car collision
+    value_raw: Q61037771
+  rcid: 2540425825
+  revid: 2464238237
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:30:56Z'
+  title: Q544202
+  user: ~2026-10613-88
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P108]]: [[Q124375837]]'
+  old_revid: 2464237816
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P108
+    property_label: employer
+    value_label: State Biotechnological University
+    value_raw: Q124375837
+  rcid: 2540425497
+  revid: 2464237910
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:29:53Z'
+  title: Q138332576
+  user: Serhey0211994
+fetch_date: '2026-02-17T20:31:32.635457+00:00'
+label: unpatrolled

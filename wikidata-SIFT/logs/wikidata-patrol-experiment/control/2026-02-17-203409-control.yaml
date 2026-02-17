@@ -1,0 +1,828 @@
+count: 5
+edits:
+- comment: '/* wbsetreference-add:2| */ [[Property:P8921]]: 20209349, #quickstatements;
+    #temporary_batch_1771360099881'
+  item:
+    claims:
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q11424
+          value_label: film
+      P364:
+        property_label: original language of film or TV show
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q9176
+          value_label: Korean
+      P3704:
+        property_label: KMDb film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q17985
+              value_label: Korean Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://ko.wikipedia.org/w/index.php?title=나를_죽여줘&oldid=36444471
+              value_label: null
+          value: '26587'
+          value_label: null
+      P4947:
+        property_label: TMDB movie ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '766371'
+          value_label: null
+      P495:
+        property_label: country of origin
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q884
+          value_label: South Korea
+      P577:
+        property_label: publication date
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: +00000002022-10-19T00:00:00Z
+          value_label: null
+      P8920:
+        property_label: Movist film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q17985
+              value_label: Korean Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://ko.wikipedia.org/w/index.php?title=나를_죽여줘&oldid=36444471
+              value_label: null
+          value: '55590'
+          value_label: null
+      P8921:
+        property_label: KOBIS film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://www.kobis.or.kr/kobis/business/mast/mvie/searchMovieDtl.do?movieCd=20209349
+              value_label: null
+          value: '20209349'
+          value_label: null
+    description_en: null
+    label_en: Kill Me Now
+  old_revid: 2464238991
+  parsed_edit:
+    operation: wbsetreference-add
+    property: P8921
+    property_label: KOBIS film ID
+    value_label: null
+    value_raw: '20209349, #quickstatements; #temporary_batch_1771360099881'
+  rcid: 2540426630
+  removed_claim: null
+  revid: 2464238997
+  tags:
+  - 'OAuth CID: 1776'
+  timestamp: '2026-02-17T20:33:20Z'
+  title: Q130597918
+  user: ならちゃん
+- comment: '/* wbsetclaim-create:1||1 */ [[Property:P2048]]: 190 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])'
+  item:
+    claims:
+      P106:
+        property_label: occupation
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q937857
+          value_label: association football player
+      P12302:
+        property_label: Sofascore player ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '1507314'
+          value_label: null
+      P1412:
+        property_label: languages spoken, written or signed
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q1321
+          value_label: Spanish
+      P19:
+        property_label: place of birth
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q2378103
+          value_label: Acapulco de Juárez Municipality
+      P2020:
+        property_label: WorldFootball.net person ID (old)
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q328
+              value_label: English Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://en.wikipedia.org/w/index.php?title=Rodrigo_Pachuca&oldid=1321561132
+              value_label: null
+          value: jose-pachuca
+          value_label: null
+      P2048:
+        property_label: height
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q11920
+              value_label: Italian Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://it.wikipedia.org/w/index.php?title=José_Pachuca&oldid=149359775
+              value_label: null
+          value: '+190'
+          value_label: null
+      P21:
+        property_label: sex or gender
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q8449
+              value_label: Spanish Wikipedia
+          value: Q6581097
+          value_label: male
+      P2369:
+        property_label: Scorebar / Soccerway person ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '913622'
+          value_label: null
+      P2446:
+        property_label: Transfermarkt player ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '1150567'
+          value_label: null
+      P27:
+        property_label: country of citizenship
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q96
+          value_label: Mexico
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q5
+          value_label: human
+      P3537:
+        property_label: FootballDatabase.eu person ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '529626'
+          value_label: null
+      P569:
+        property_label: date of birth
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: +00000002005-07-24T00:00:00Z
+          value_label: null
+      P641:
+        property_label: sport
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q2736
+          value_label: association football
+      P734:
+        property_label: family name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q37540102
+          value_label: Pachuca
+      P735:
+        property_label: given name
+        statements:
+        - qualifiers:
+            P1545:
+              property_label: series ordinal
+              value: '1'
+              value_label: null
+          rank: normal
+          references: []
+          value: Q2190619
+          value_label: José
+        - qualifiers:
+            P1545:
+              property_label: series ordinal
+              value: '2'
+              value_label: null
+          rank: normal
+          references: []
+          value: Q4927979
+          value_label: Rodrigo
+      P8259:
+        property_label: Flashscore player ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q328
+              value_label: English Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://en.wikipedia.org/w/index.php?title=Rodrigo_Pachuca&oldid=1316537348
+              value_label: null
+          value: pachuca-jose/zguOSkWr
+          value_label: null
+    description_en: Mexican footballer
+    label_en: Rodrigo Pachuca
+  old_revid: 2431400230
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P2048
+    property_label: height
+    value_label: null
+    value_raw: 190 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])
+  rcid: 2540426628
+  removed_claim: null
+  revid: 2464238993
+  tags:
+  - 'OAuth CID: 1739'
+  timestamp: '2026-02-17T20:33:19Z'
+  title: Q129262743
+  user: Laurentius
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P496]]: 0000-0002-7638-4229'
+  item:
+    claims:
+      P101:
+        property_label: field of work
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q3719890
+          value_label: multicultural education
+      P106:
+        property_label: occupation
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q1622272
+          value_label: university teacher
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q1650915
+          value_label: researcher
+      P108:
+        property_label: employer
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q672436
+          value_label: National Pedagogic University
+      P1412:
+        property_label: languages spoken, written or signed
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q1321
+          value_label: Spanish
+      P21:
+        property_label: sex or gender
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P887:
+              property_label: based on heuristic
+              value: Q69652498
+              value_label: inferred from person's given name
+          value: Q6581072
+          value_label: female
+      P214:
+        property_label: VIAF cluster ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+          value: '108109869'
+          value_label: null
+      P244:
+        property_label: Library of Congress authority ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q13219454
+              value_label: Library of Congress Authorities
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+          value: no2010050519
+          value_label: null
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q5
+          value_label: human
+      P463:
+        property_label: member of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q6129671
+          value_label: Sistema Nacional de Investigadores
+      P496:
+        property_label: ORCID iD
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: 0000-0002-7638-4229
+          value_label: null
+      P512:
+        property_label: academic degree
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q849697
+          value_label: doctorate
+      P69:
+        property_label: educated at
+        statements:
+        - qualifiers:
+            P512:
+              property_label: academic degree
+              value: Q849697
+              value_label: doctorate
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://area2.upnvirtual.edu.mx/index.php/cuerpos-academicos/dce/97-dra-gabriela-victoria-czarny-krischkautzky
+              value_label: null
+          value: Q5011793
+          value_label: Center for Research and Advanced Studies of the National Polytechnic
+            Institute
+      P735:
+        property_label: given name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q11971424
+          value_label: Gabriela
+    description_en: Mexican academic
+    label_en: Gabriela Victoria Czarny Krischkautzky
+  old_revid: 2464238710
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P496
+    property_label: ORCID iD
+    value_label: null
+    value_raw: 0000-0002-7638-4229
+  rcid: 2540426627
+  removed_claim: null
+  revid: 2464238995
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T20:33:19Z'
+  title: Q138332500
+  user: Víctor Ruiz10
+- comment: '/* wbcreateclaim-create:1| */ [[Property:P8921]]: 20209349, #quickstatements;
+    #temporary_batch_1771360099881'
+  item:
+    claims:
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q11424
+          value_label: film
+      P364:
+        property_label: original language of film or TV show
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q9176
+          value_label: Korean
+      P3704:
+        property_label: KMDb film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q17985
+              value_label: Korean Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://ko.wikipedia.org/w/index.php?title=나를_죽여줘&oldid=36444471
+              value_label: null
+          value: '26587'
+          value_label: null
+      P4947:
+        property_label: TMDB movie ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '766371'
+          value_label: null
+      P495:
+        property_label: country of origin
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q884
+          value_label: South Korea
+      P577:
+        property_label: publication date
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: +00000002022-10-19T00:00:00Z
+          value_label: null
+      P8920:
+        property_label: Movist film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q17985
+              value_label: Korean Wikipedia
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://ko.wikipedia.org/w/index.php?title=나를_죽여줘&oldid=36444471
+              value_label: null
+          value: '55590'
+          value_label: null
+      P8921:
+        property_label: KOBIS film ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://www.kobis.or.kr/kobis/business/mast/mvie/searchMovieDtl.do?movieCd=20209349
+              value_label: null
+          value: '20209349'
+          value_label: null
+    description_en: null
+    label_en: Kill Me Now
+  old_revid: 2463244085
+  parsed_edit:
+    operation: wbcreateclaim-create
+    property: P8921
+    property_label: KOBIS film ID
+    value_label: null
+    value_raw: '20209349, #quickstatements; #temporary_batch_1771360099881'
+  rcid: 2540426624
+  removed_claim: null
+  revid: 2464238991
+  tags:
+  - 'OAuth CID: 1776'
+  timestamp: '2026-02-17T20:33:19Z'
+  title: Q130597918
+  user: ならちゃん
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P641]]: [[Q1734]]'
+  item:
+    claims:
+      P1449:
+        property_label: nickname
+        statements:
+        - qualifiers:
+            P3831:
+              property_label: object of statement has role
+              value: Q4813767
+              value_label: athletic nickname
+          rank: normal
+          references: []
+          value: Eagles
+          value_label: null
+      P154:
+        property_label: logo image
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Boston College Eagles wordmark.svg
+          value_label: null
+      P159:
+        property_label: headquarters location
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q108097664
+              value_label: Volleybox
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P9823:
+              property_label: Volleybox ID
+              value: t6686
+              value_label: null
+          value: Q100
+          value_label: Boston
+      P17:
+        property_label: country
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q108097664
+              value_label: Volleybox
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P9823:
+              property_label: Volleybox ID
+              value: t6686
+              value_label: null
+          value: Q30
+          value_label: United States
+      P2094:
+        property_label: competition class
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q108097664
+              value_label: Volleybox
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P9823:
+              property_label: Volleybox ID
+              value: t6686
+              value_label: null
+          value: Q20892731
+          value_label: women's volleyball
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q137901542
+          value_label: NCAA volleyball team
+      P571:
+        property_label: inception
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q108097664
+              value_label: Volleybox
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P9823:
+              property_label: Volleybox ID
+              value: t6686
+              value_label: null
+          value: +00000001990-00-00T00:00:00Z
+          value_label: null
+      P6112:
+        property_label: category for members of a team
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q60803115
+          value_label: Category:Boston College Eagles women's volleyball players
+      P641:
+        property_label: sport
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q108097664
+              value_label: Volleybox
+            P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P9823:
+              property_label: Volleybox ID
+              value: t6686
+              value_label: null
+          value: Q1734
+          value_label: volleyball
+      P749:
+        property_label: parent organization or unit
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q3046352
+          value_label: Boston College Eagles
+      P831:
+        property_label: parent club
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q3046352
+          value_label: Boston College Eagles
+      P910:
+        property_label: topic's main category
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q65746321
+          value_label: Category:Boston College Eagles women's volleyball
+      P973:
+        property_label: described at URL
+        statements:
+        - qualifiers:
+            P98:
+              property_label: editor
+              value: Q3046352
+              value_label: Boston College Eagles
+          rank: normal
+          references: []
+          value: https://bceagles.com/sports/womens-volleyball
+          value_label: null
+      P9823:
+        property_label: Volleybox ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: t6686
+          value_label: null
+    description_en: women's volleyball team of the Boston College
+    label_en: Boston College Eagles women's volleyball
+  old_revid: 2464238982
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P641
+    property_label: sport
+    value_label: volleyball
+    value_raw: Q1734
+  rcid: 2540426622
+  removed_claim: null
+  revid: 2464238990
+  tags: []
+  timestamp: '2026-02-17T20:33:19Z'
+  title: Q107882224
+  user: Gymnicus
+fetch_date: '2026-02-17T20:34:09.845430+00:00'
+label: control

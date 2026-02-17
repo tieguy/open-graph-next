@@ -1,0 +1,96 @@
+count: 5
+edits:
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q43845]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q105453719.json?revision=2464202798'
+  old_revid: 2464202772
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P106
+    property_label: occupation
+    value_label: businessperson
+    value_raw: Q43845
+  rcid: 2540388906
+  removed_claim: null
+  revid: 2464202798
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T17:25:24Z'
+  title: Q105453719
+  user: GilPe
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P569]]: 16 February 1890'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q138330877.json?revision=2464202787'
+  old_revid: 2464202722
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P569
+    property_label: date of birth
+    value_label: null
+    value_raw: 16 February 1890
+  rcid: 2540388892
+  removed_claim: null
+  revid: 2464202787
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T17:25:21Z'
+  title: Q138330877
+  user: Labola
+- comment: '/* wbsetclaim-create:1||1 */ [[Property:P648]]: OL8535210A, add P648 claim:
+    OL8535210A'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q4892987.json?revision=2464202784'
+  old_revid: 2464196504
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P648
+    property_label: Open Library ID
+    value_label: null
+    value_raw: 'OL8535210A, add P648 claim: OL8535210A'
+  rcid: 2540388889
+  removed_claim: null
+  revid: 2464202784
+  tags:
+  - 'OAuth CID: 859'
+  - WikibaseJS-edit
+  timestamp: '2026-02-17T17:25:21Z'
+  title: Q4892987
+  user: Harmonia Amanda
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P1442]]: Jbarsstombstone.jpg'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q4078502.json?revision=2464202781'
+  old_revid: 2464043605
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P1442
+    property_label: image of grave
+    value_label: null
+    value_raw: Jbarsstombstone.jpg
+  rcid: 2540388886
+  removed_claim: null
+  revid: 2464202781
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T17:25:19Z'
+  title: Q4078502
+  user: MediaKyle
+- comment: '/* wbsetclaim-create:1||1 */ [[Property:P2048]]: 191 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q21067148.json?revision=2464202778'
+  old_revid: 2449428393
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P2048
+    property_label: height
+    value_label: null
+    value_raw: 191 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])
+  rcid: 2540388883
+  removed_claim: null
+  revid: 2464202778
+  tags:
+  - 'OAuth CID: 1739'
+  timestamp: '2026-02-17T17:25:18Z'
+  title: Q21067148
+  user: Laurentius
+fetch_date: '2026-02-17T17:25:26.570020+00:00'
+label: control

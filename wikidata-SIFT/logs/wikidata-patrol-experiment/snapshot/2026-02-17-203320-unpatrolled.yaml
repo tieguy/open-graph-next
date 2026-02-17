@@ -1,0 +1,2036 @@
+count: 5
+edits:
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P108]]: [[Q124375837]]'
+  item:
+    claims:
+      P106:
+        property_label: occupation
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: http://athra.btu.kharkiv.ua/browse?value=%D0%A0%D0%84%D0%97%D0%9D%D0%86%D0%9A%20%D0%A1%D0%95%D0%A0%D0%93%D0%86%D0%99%20%D0%92%D0%90%D0%94%D0%98%D0%9C%D0%9E%D0%92%D0%98%D0%A7
+              value_label: null
+          value: Q901
+          value_label: scientist
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://biotechuniv.edu.ua/person/ryeznik-sergij-vadymovych-2/
+              value_label: null
+          value: Q1622272
+          value_label: university teacher
+      P108:
+        property_label: employer
+        statements:
+        - qualifiers:
+            P580:
+              property_label: start time
+              value: +00000002023-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://biotechuniv.edu.ua/person/ryeznik-sergij-vadymovych-2/
+              value_label: null
+          value: Q124375837
+          value_label: State Biotechnological University
+      P21:
+        property_label: sex or gender
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q6581097
+          value_label: male
+      P27:
+        property_label: country of citizenship
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q212
+          value_label: Ukraine
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q5
+          value_label: human
+    description_en: Ukrainian soil scientist
+    label_en: Serhii Rieznik
+  old_revid: 2464237910
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P108
+    property_label: employer
+    value_label: State Biotechnological University
+    value_raw: Q124375837
+  rcid: 2540426022
+  removed_claim: null
+  revid: 2464238434
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:27Z'
+  title: Q138332576
+  user: Serhey0211994
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P31]]: [[Q3305213]]'
+  item:
+    claims:
+      P11807:
+        property_label: WGA work ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q565
+              value_label: Wikimedia Commons
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://commons.wikimedia.org/wiki/File:Peter_Paul_Rubens_-_The_Rape_of_Europa_-_WGA20308.jpg
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002025-04-30T00:00:00Z
+              value_label: null
+          value: r/rubens/23mythol/41mythol
+          value_label: null
+      P127:
+        property_label: owned by
+        statements:
+        - qualifiers:
+            P585:
+              property_label: point in time
+              value: +00000001814-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q59676414
+              value_label: Inv. Fernando VII, Palacio Nuevo, 1814-1818
+          value: Q186256
+          value_label: Ferdinand VII of Spain
+      P136:
+        property_label: genre
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q3374376
+          value_label: mythological painting
+      P144:
+        property_label: based on
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q18002417
+          value_label: The Rape of Europa
+      P1476:
+        property_label: title
+        statements:
+        - qualifiers: {}
+          rank: preferred
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: El rapto de Europa
+          value_label: null
+      P170:
+        property_label: creator
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q5599
+          value_label: Peter Paul Rubens
+      P18:
+        property_label: image
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Rubens - El rapto de Europa.jpg
+          value_label: null
+      P180:
+        property_label: depicts
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q16943283
+          value_label: Rape of Europa
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q165170
+          value_label: Europa
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q693690
+          value_label: bull
+      P186:
+        property_label: made from material
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q296955
+          value_label: oil paint
+        - qualifiers:
+            P518:
+              property_label: applies to part
+              value: Q861259
+              value_label: painting support
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q12321255
+          value_label: canvas
+      P195:
+        property_label: collection
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q160112
+          value_label: Museo del Prado
+      P2048:
+        property_label: height
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '+182.5'
+          value_label: null
+      P2049:
+        property_label: width
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '+201.5'
+          value_label: null
+      P217:
+        property_label: inventory number
+        statements:
+        - qualifiers:
+            P195:
+              property_label: collection
+              value: Q160112
+              value_label: Museo del Prado
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-08T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: P001693
+          value_label: null
+      P2581:
+        property_label: BabelNet ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q4837690
+              value_label: BabelNet
+          value: 10419000n
+          value_label: null
+      P276:
+        property_label: location
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q160112
+          value_label: Museo del Prado
+        - qualifiers:
+            P585:
+              property_label: point in time
+              value: +00000001814-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q59676414
+              value_label: Inv. Fernando VII, Palacio Nuevo, 1814-1818
+          value: Q171517
+          value_label: Royal Palace of Madrid
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q3305213
+          value_label: painting
+      P350:
+        property_label: RKDimages ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '309761'
+          value_label: null
+      P373:
+        property_label: Commons category
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: The Rape of Europa by Peter Paul Rubens (P001693)
+          value_label: null
+      P528:
+        property_label: catalog code
+        statements:
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q60062912
+              value_label: Inv. Felipe IV. El Pardo. 1674
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '61'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59716705
+              value_label: Inv. Testamentaría Carlos II. El Pardo. 1701-1703
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: s.n.
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59716840
+              value_label: Inv. Felipe V. El Pardo. 1747
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '119'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59680588
+              value_label: Inv. Carlos III, Palacio Nuevo, 1772
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '935'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59712610
+              value_label: Museo Real de Pinturas a la muerte de Fernando VII. 1834
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '202'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59645732
+              value_label: Inv. Real Museo, 1857
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '1588'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q54618599
+              value_label: Catalog Museo del Prado, 1873-1907
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '1614'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q109302049
+              value_label: Alle tot nu toe bekende schilderijen van Rubens (Vol. 2)
+          rank: normal
+          references: []
+          value: '766'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q108811271
+              value_label: A catalogue raisonné of the works of the most eminent Dutch,
+                Flemish, and French painters (Part the Second - Rubens)
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://archive.org/details/catalogueraisonn02smituoft/page/137/mode/1up
+              value_label: null
+          value: '486'
+          value_label: null
+      P571:
+        property_label: inception
+        statements:
+        - qualifiers:
+            P1319:
+              property_label: earliest date
+              value: +00000001628-01-01T00:00:00Z
+              value_label: null
+            P1326:
+              property_label: latest date
+              value: +00000001629-01-01T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002020-02-26T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: +00000001628-01-01T00:00:00Z
+          value_label: null
+      P6216:
+        property_label: copyright status
+        statements:
+        - qualifiers:
+            P1001:
+              property_label: applies to jurisdiction
+              value: Q60332278
+              value_label: countries with 100 years pma or shorter
+            P459:
+              property_label: determination method or standard
+              value: Q29940705
+              value_label: 100 years or more after author(s) death
+          rank: normal
+          references: []
+          value: Q19652
+          value_label: public domain
+      P646:
+        property_label: Freebase ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: /m/012r21fb
+          value_label: null
+      P8905:
+        property_label: Museo del Prado artwork ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+          value_label: null
+      P921:
+        property_label: main subject
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q16943283
+          value_label: Rape of Europa
+    description_en: painting by Peter Paul Rubens after Titian
+    label_en: The Rape of Europa
+  old_revid: 2464238274
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P31
+    property_label: instance of
+    value_label: painting
+    value_raw: Q3305213
+  rcid: 2540426007
+  removed_claim: null
+  revid: 2464238419
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:25Z'
+  title: Q13571594
+  user: ~2026-10673-79
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P170]]: [[Q5599]]'
+  item:
+    claims:
+      P11807:
+        property_label: WGA work ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q565
+              value_label: Wikimedia Commons
+            P4656:
+              property_label: Wikimedia import URL
+              value: https://commons.wikimedia.org/wiki/File:Peter_Paul_Rubens_-_The_Rape_of_Europa_-_WGA20308.jpg
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002025-04-30T00:00:00Z
+              value_label: null
+          value: r/rubens/23mythol/41mythol
+          value_label: null
+      P127:
+        property_label: owned by
+        statements:
+        - qualifiers:
+            P585:
+              property_label: point in time
+              value: +00000001814-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q59676414
+              value_label: Inv. Fernando VII, Palacio Nuevo, 1814-1818
+          value: Q186256
+          value_label: Ferdinand VII of Spain
+      P136:
+        property_label: genre
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q3374376
+          value_label: mythological painting
+      P144:
+        property_label: based on
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q18002417
+          value_label: The Rape of Europa
+      P1476:
+        property_label: title
+        statements:
+        - qualifiers: {}
+          rank: preferred
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: El rapto de Europa
+          value_label: null
+      P170:
+        property_label: creator
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q5599
+          value_label: Peter Paul Rubens
+      P18:
+        property_label: image
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Rubens - El rapto de Europa.jpg
+          value_label: null
+      P180:
+        property_label: depicts
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q16943283
+          value_label: Rape of Europa
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q165170
+          value_label: Europa
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q693690
+          value_label: bull
+      P186:
+        property_label: made from material
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q296955
+          value_label: oil paint
+        - qualifiers:
+            P518:
+              property_label: applies to part
+              value: Q861259
+              value_label: painting support
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q12321255
+          value_label: canvas
+      P195:
+        property_label: collection
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q160112
+          value_label: Museo del Prado
+      P2048:
+        property_label: height
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '+182.5'
+          value_label: null
+      P2049:
+        property_label: width
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '+201.5'
+          value_label: null
+      P217:
+        property_label: inventory number
+        statements:
+        - qualifiers:
+            P195:
+              property_label: collection
+              value: Q160112
+              value_label: Museo del Prado
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-08T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: P001693
+          value_label: null
+      P2581:
+        property_label: BabelNet ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q4837690
+              value_label: BabelNet
+          value: 10419000n
+          value_label: null
+      P276:
+        property_label: location
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002016-11-05T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q160112
+          value_label: Museo del Prado
+        - qualifiers:
+            P585:
+              property_label: point in time
+              value: +00000001814-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q59676414
+              value_label: Inv. Fernando VII, Palacio Nuevo, 1814-1818
+          value: Q171517
+          value_label: Royal Palace of Madrid
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002026-02-17T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/coleccion/obra-de-arte/wd/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: Q3305213
+          value_label: painting
+      P350:
+        property_label: RKDimages ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '309761'
+          value_label: null
+      P373:
+        property_label: Commons category
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: The Rape of Europa by Peter Paul Rubens (P001693)
+          value_label: null
+      P528:
+        property_label: catalog code
+        statements:
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q60062912
+              value_label: Inv. Felipe IV. El Pardo. 1674
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '61'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59716705
+              value_label: Inv. Testamentaría Carlos II. El Pardo. 1701-1703
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: s.n.
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59716840
+              value_label: Inv. Felipe V. El Pardo. 1747
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '119'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59680588
+              value_label: Inv. Carlos III, Palacio Nuevo, 1772
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '935'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59712610
+              value_label: Museo Real de Pinturas a la muerte de Fernando VII. 1834
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '202'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q59645732
+              value_label: Inv. Real Museo, 1857
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '1588'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q54618599
+              value_label: Catalog Museo del Prado, 1873-1907
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002018-12-24T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: '1614'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q109302049
+              value_label: Alle tot nu toe bekende schilderijen van Rubens (Vol. 2)
+          rank: normal
+          references: []
+          value: '766'
+          value_label: null
+        - qualifiers:
+            P972:
+              property_label: catalog
+              value: Q108811271
+              value_label: A catalogue raisonné of the works of the most eminent Dutch,
+                Flemish, and French painters (Part the Second - Rubens)
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://archive.org/details/catalogueraisonn02smituoft/page/137/mode/1up
+              value_label: null
+          value: '486'
+          value_label: null
+      P571:
+        property_label: inception
+        statements:
+        - qualifiers:
+            P1319:
+              property_label: earliest date
+              value: +00000001628-01-01T00:00:00Z
+              value_label: null
+            P1326:
+              property_label: latest date
+              value: +00000001629-01-01T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002020-02-26T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: https://www.museodelprado.es/en/the-collection/art-work/the-rape-of-europe/a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+              value_label: null
+          value: +00000001628-01-01T00:00:00Z
+          value_label: null
+      P6216:
+        property_label: copyright status
+        statements:
+        - qualifiers:
+            P1001:
+              property_label: applies to jurisdiction
+              value: Q60332278
+              value_label: countries with 100 years pma or shorter
+            P459:
+              property_label: determination method or standard
+              value: Q29940705
+              value_label: 100 years or more after author(s) death
+          rank: normal
+          references: []
+          value: Q19652
+          value_label: public domain
+      P646:
+        property_label: Freebase ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: /m/012r21fb
+          value_label: null
+      P8905:
+        property_label: Museo del Prado artwork ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: a136a9c4-3a2f-44bd-ab8a-97fd47c30d7e
+          value_label: null
+      P921:
+        property_label: main subject
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q16943283
+          value_label: Rape of Europa
+    description_en: painting by Peter Paul Rubens after Titian
+    label_en: The Rape of Europa
+  old_revid: 2464237746
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P170
+    property_label: creator
+    value_label: Peter Paul Rubens
+    value_raw: Q5599
+  rcid: 2540425861
+  removed_claim: null
+  revid: 2464238274
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:02Z'
+  title: Q13571594
+  user: ~2026-10673-79
+- comment: '/* wbsetclaim-update:2||1 */ [[Property:P509]]: [[Q61037771]]'
+  item:
+    claims:
+      P1005:
+        property_label: Portuguese National Library author ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002019-12-03T00:00:00Z
+              value_label: null
+          value: '946466'
+          value_label: null
+      P1006:
+        property_label: Nationale Thesaurus voor Auteursnamen ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002018-08-27T00:00:00Z
+              value_label: null
+          value: '151318328'
+          value_label: null
+      P10069:
+        property_label: Tabakalera ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '57664'
+          value_label: null
+      P1015:
+        property_label: BIBSYS ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002025-03-30T00:00:00Z
+              value_label: null
+          value: '90121035'
+          value_label: null
+      P102:
+        property_label: member of political party
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q478811
+          value_label: Communist Party of Spain
+      P1038:
+        property_label: relative
+        statements:
+        - qualifiers:
+            P1039:
+              property_label: kinship to subject
+              value: Q12158205
+              value_label: father's brother
+          rank: normal
+          references: []
+          value: Q22962554
+          value_label: César de la Mora
+      P106:
+        property_label: occupation
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q105802405
+              value_label: Dictionary of Women Worldwide
+          value: Q82955
+          value_label: politician
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q36180
+          value_label: writer
+      P10832:
+        property_label: WorldCat Entities ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P11797:
+              property_label: matched by identifier from
+              value: Q13219454
+              value_label: Library of Congress Authorities
+            P244:
+              property_label: Library of Congress authority ID
+              value: no96048092
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002024-04-20T00:00:00Z
+              value_label: null
+          value: E39PBJbCHC7TJGJT7pbTwCV6Kd
+          value_label: null
+      P11496:
+        property_label: CiNii Research ID
+        statements:
+        - qualifiers:
+            P1810:
+              property_label: subject named as
+              value: Mora, Constancia de la
+              value_label: null
+          rank: normal
+          references:
+          - P11797:
+              property_label: matched by identifier from
+              value: Q117190864
+              value_label: NACSIS-CAT author ID
+            P271:
+              property_label: NACSIS-CAT author ID
+              value: DA1145338X
+              value_label: null
+          value: '1140845216740401152'
+          value_label: null
+      P11686:
+        property_label: University of Barcelona authority ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '981058507934406706'
+          value_label: null
+      P1185:
+        property_label: Rodovid ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '1037434'
+          value_label: null
+      P1207:
+        property_label: NUKAT ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002020-09-02T00:00:00Z
+              value_label: null
+          value: n2004097958
+          value_label: null
+      P1273:
+        property_label: CANTIC ID (former scheme)
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+          value: a11797320
+          value_label: null
+      P13049:
+        property_label: DDB person (GND) ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '118583913'
+          value_label: null
+      P13371:
+        property_label: Historia Hispánica ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: biografias/30911
+          value_label: null
+      P1343:
+        property_label: described by source
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q105802405
+          value_label: Dictionary of Women Worldwide
+      P13591:
+        property_label: ‎Yale LUX ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: person/0ecda3d5-a333-47e7-9825-7ec4f1c4d541
+          value_label: null
+      P1412:
+        property_label: languages spoken, written or signed
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P268:
+              property_label: Bibliothèque nationale de France ID
+              value: 12969123b
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-10T00:00:00Z
+              value_label: null
+          value: Q1321
+          value_label: Spanish
+      P1477:
+        property_label: birth name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Constancia de la Mora Maura
+          value_label: null
+      P1580:
+        property_label: University of Barcelona authority ID (former scheme)
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q89570027
+              value_label: Autoritats UB
+            P813:
+              property_label: retrieved
+              value: +00000002020-04-01T00:00:00Z
+              value_label: null
+          value: a1332077
+          value_label: null
+      P18:
+        property_label: image
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Constancia de la Mora.jpg
+          value_label: null
+      P19:
+        property_label: place of birth
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q48183
+              value_label: German Wikipedia
+          value: Q2807
+          value_label: Madrid
+      P1950:
+        property_label: second family name in Spanish name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q29404894
+          value_label: Maura
+      P20:
+        property_label: place of death
+        statements:
+        - qualifiers:
+            P276:
+              property_label: location
+              value: Q271839
+              value_label: Carretera Panamericana
+          rank: normal
+          references: []
+          value: Q774
+          value_label: Guatemala
+      P21:
+        property_label: sex or gender
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P268:
+              property_label: Bibliothèque nationale de France ID
+              value: 12969123b
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-10T00:00:00Z
+              value_label: null
+          value: Q6581072
+          value_label: female
+      P213:
+        property_label: ISNI
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P813:
+              property_label: retrieved
+              value: +00000002015-07-13T00:00:00Z
+              value_label: null
+          value: 0000000109384846
+          value_label: null
+      P214:
+        property_label: VIAF cluster ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '116113837'
+          value_label: null
+      P2163:
+        property_label: FAST ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '380812'
+          value_label: null
+      P22:
+        property_label: father
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q30136115
+          value_label: Germán de la Mora y Abarca
+      P227:
+        property_label: GND ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q48183
+              value_label: German Wikipedia
+          value: '118583913'
+          value_label: null
+      P244:
+        property_label: Library of Congress authority ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q48183
+              value_label: German Wikipedia
+          value: no96048092
+          value_label: null
+      P25:
+        property_label: mother
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q21296904
+          value_label: Constancia Maura Gamazo
+      P26:
+        property_label: spouse
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q276943
+          value_label: Ignacio Hidalgo de Cisneros
+      P2600:
+        property_label: Geni.com profile ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '6000000016543090512'
+          value_label: null
+      P268:
+        property_label: Bibliothèque nationale de France ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002018-10-07T00:00:00Z
+              value_label: null
+          value: 12969123b
+          value_label: null
+      P269:
+        property_label: IdRef ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002018-10-07T00:00:00Z
+              value_label: null
+          value: 084354585
+          value_label: null
+      P27:
+        property_label: country of citizenship
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P143:
+              property_label: imported from Wikimedia project
+              value: Q48183
+              value_label: German Wikipedia
+          value: Q29
+          value_label: Spain
+      P271:
+        property_label: NACSIS-CAT author ID
+        statements:
+        - qualifiers:
+            P1810:
+              property_label: subject named as
+              value: Mora, Constancia de la
+              value_label: null
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002025-03-30T00:00:00Z
+              value_label: null
+          - P11496:
+              property_label: CiNii Research ID
+              value: '1140845216740401152'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q115920372
+              value_label: CiNii Research
+            P813:
+              property_label: retrieved
+              value: +00000002025-04-05T00:00:00Z
+              value_label: null
+          value: DA1145338X
+          value_label: null
+      P2799:
+        property_label: BVMC person ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '70803'
+          value_label: null
+      P2963:
+        property_label: Goodreads author ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '2856466'
+          value_label: null
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P268:
+              property_label: Bibliothèque nationale de France ID
+              value: 12969123b
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-10T00:00:00Z
+              value_label: null
+          value: Q5
+          value_label: human
+      P349:
+        property_label: NDL Authority ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002025-03-30T00:00:00Z
+              value_label: null
+          value: '00524546'
+          value_label: null
+      P373:
+        property_label: Commons category
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Constancia de la Mora
+          value_label: null
+      P3987:
+        property_label: SHARE Catalogue author ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '468526'
+          value_label: null
+      P4459:
+        property_label: Spanish Biographical Dictionary ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: 37574/constancia-de-la-mora-maura
+          value_label: null
+      P509:
+        property_label: cause of death
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P813:
+              property_label: retrieved
+              value: +00000002019-05-04T00:00:00Z
+              value_label: null
+            P854:
+              property_label: reference URL
+              value: http://www.elotropais.com/index.php?option=com_content&task=view&id=406&Itemid=37
+              value_label: null
+          value: Q61037771
+          value_label: car collision
+      P569:
+        property_label: date of birth
+        statements:
+        - qualifiers:
+            P7452:
+              property_label: reason for preferred rank
+              value: Q71536040
+              value_label: most precise value
+          rank: preferred
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P268:
+              property_label: Bibliothèque nationale de France ID
+              value: 12969123b
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-10T00:00:00Z
+              value_label: null
+          - P227:
+              property_label: GND ID
+              value: '118583913'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q36578
+              value_label: Integrated Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-17T00:00:00Z
+              value_label: null
+          value: +00000001906-01-28T00:00:00Z
+          value_label: null
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q105802405
+              value_label: Dictionary of Women Worldwide
+          value: +00000001906-01-01T00:00:00Z
+          value_label: null
+      P570:
+        property_label: date of death
+        statements:
+        - qualifiers:
+            P7452:
+              property_label: reason for preferred rank
+              value: Q71536040
+              value_label: most precise value
+          rank: preferred
+          references:
+          - P248:
+              property_label: stated in
+              value: Q19938912
+              value_label: BnF authorities
+            P268:
+              property_label: Bibliothèque nationale de France ID
+              value: 12969123b
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-10T00:00:00Z
+              value_label: null
+          - P227:
+              property_label: GND ID
+              value: '118583913'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q36578
+              value_label: Integrated Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002015-10-17T00:00:00Z
+              value_label: null
+          - P1810:
+              property_label: subject named as
+              value: Constancia de la Mora Maura
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q41705771
+              value_label: Spanish Biographical Dictionary
+            P4459:
+              property_label: Spanish Biographical Dictionary ID
+              value: 37574/constancia-de-la-mora-maura
+              value_label: null
+            P813:
+              property_label: retrieved
+              value: +00000002017-10-09T00:00:00Z
+              value_label: null
+          value: +00000001950-01-26T00:00:00Z
+          value_label: null
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P248:
+              property_label: stated in
+              value: Q105802405
+              value_label: Dictionary of Women Worldwide
+          value: +00000001950-01-01T00:00:00Z
+          value_label: null
+      P646:
+        property_label: Freebase ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: /m/0c5cr6j
+          value_label: null
+      P648:
+        property_label: Open Library ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: OL122676A
+          value_label: null
+      P691:
+        property_label: NL CR AUT ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P214:
+              property_label: VIAF cluster ID
+              value: '116113837'
+              value_label: null
+            P248:
+              property_label: stated in
+              value: Q54919
+              value_label: Virtual International Authority File
+            P813:
+              property_label: retrieved
+              value: +00000002018-12-06T00:00:00Z
+              value_label: null
+          value: xx0010930
+          value_label: null
+      P7293:
+        property_label: National Library of Poland MMS ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '9810558153005606'
+          value_label: null
+      P734:
+        property_label: family name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q56292752
+          value_label: de la Mora
+      P735:
+        property_label: given name
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q21147619
+          value_label: Constancia
+      P7578:
+        property_label: DUC ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: constancia-mora
+          value_label: null
+      P800:
+        property_label: notable work
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q124536052
+          value_label: In Place of Splendor
+      P8189:
+        property_label: National Library of Israel J9U ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '987007590188805171'
+          value_label: null
+      P8849:
+        property_label: CONOR.BG ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '50868069'
+          value_label: null
+      P950:
+        property_label: National Library of Spain SpMaBN ID (BNE v1.0)
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: XX1134435
+          value_label: null
+      P9984:
+        property_label: CANTIC ID
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: '981058507934406706'
+          value_label: null
+    description_en: politician (1906-1950)
+    label_en: Constancia de la Mora
+  old_revid: 2419642966
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P509
+    property_label: cause of death
+    value_label: car collision
+    value_raw: Q61037771
+  rcid: 2540425825
+  removed_claim: null
+  revid: 2464238237
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:30:56Z'
+  title: Q544202
+  user: ~2026-10613-88
+- comment: '/* wbsetclaim-update:2||1|1 */ [[Property:P108]]: [[Q124375837]]'
+  item:
+    claims:
+      P106:
+        property_label: occupation
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: http://athra.btu.kharkiv.ua/browse?value=%D0%A0%D0%84%D0%97%D0%9D%D0%86%D0%9A%20%D0%A1%D0%95%D0%A0%D0%93%D0%86%D0%99%20%D0%92%D0%90%D0%94%D0%98%D0%9C%D0%9E%D0%92%D0%98%D0%A7
+              value_label: null
+          value: Q901
+          value_label: scientist
+        - qualifiers: {}
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://biotechuniv.edu.ua/person/ryeznik-sergij-vadymovych-2/
+              value_label: null
+          value: Q1622272
+          value_label: university teacher
+      P108:
+        property_label: employer
+        statements:
+        - qualifiers:
+            P580:
+              property_label: start time
+              value: +00000002023-00-00T00:00:00Z
+              value_label: null
+          rank: normal
+          references:
+          - P854:
+              property_label: reference URL
+              value: https://biotechuniv.edu.ua/person/ryeznik-sergij-vadymovych-2/
+              value_label: null
+          value: Q124375837
+          value_label: State Biotechnological University
+      P21:
+        property_label: sex or gender
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q6581097
+          value_label: male
+      P27:
+        property_label: country of citizenship
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q212
+          value_label: Ukraine
+      P31:
+        property_label: instance of
+        statements:
+        - qualifiers: {}
+          rank: normal
+          references: []
+          value: Q5
+          value_label: human
+    description_en: Ukrainian soil scientist
+    label_en: Serhii Rieznik
+  old_revid: 2464237816
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P108
+    property_label: employer
+    value_label: State Biotechnological University
+    value_raw: Q124375837
+  rcid: 2540425497
+  removed_claim: null
+  revid: 2464237910
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T20:29:53Z'
+  title: Q138332576
+  user: Serhey0211994
+fetch_date: '2026-02-17T20:33:20.916627+00:00'
+label: unpatrolled

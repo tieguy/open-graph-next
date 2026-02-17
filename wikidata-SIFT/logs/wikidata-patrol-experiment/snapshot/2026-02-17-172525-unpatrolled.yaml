@@ -1,0 +1,98 @@
+count: 5
+edits:
+- comment: '/* wbsetclaim-update:2||1|2 */ [[Property:P31]]: [[Q64100970]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q138227815.json?revision=2464202767'
+  old_revid: 2464199110
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P31
+    property_label: instance of
+    value_label: animated music video
+    value_raw: Q64100970
+  rcid: 2540388873
+  removed_claim: null
+  revid: 2464202767
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T17:25:15Z'
+  title: Q138227815
+  user: Faginjosh234
+- comment: '/* wbsetclaim-update:2||1 */ [[Property:P31]]: [[Q27032254]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q108311539.json?revision=2464202681'
+  old_revid: 2464202598
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P31
+    property_label: instance of
+    value_label: art archive
+    value_raw: Q27032254
+  rcid: 2540388771
+  removed_claim: null
+  revid: 2464202681
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T17:24:34Z'
+  title: Q108311539
+  user: ~2026-10727-68
+- comment: '/* wbsetclaim-update:2||1|6 */ [[Property:P800]]: [[Q138227815]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q16730218.json?revision=2464202556'
+  old_revid: 2464202542
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P800
+    property_label: notable work
+    value_label: Spirit Jumper (Music Video)
+    value_raw: Q138227815
+  rcid: 2540388643
+  removed_claim: null
+  revid: 2464202556
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T17:23:40Z'
+  title: Q16730218
+  user: Faginjosh234
+- comment: '/* wbsetclaim-update:2||1|4 */ [[Property:P800]]: [[Q138227815]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q16730218.json?revision=2464202542'
+  old_revid: 2464202514
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P800
+    property_label: notable work
+    value_label: Spirit Jumper (Music Video)
+    value_raw: Q138227815
+  rcid: 2540388627
+  removed_claim: null
+  revid: 2464202542
+  tags:
+  - new editor changing statement
+  timestamp: '2026-02-17T17:23:35Z'
+  title: Q16730218
+  user: Faginjosh234
+- comment: '/* wbsetclaim-update:2||1|4 */ [[Property:P106]]: [[Q183945]]'
+  item:
+    error: '403 Client Error: Forbidden for url: https://www.wikidata.org/wiki/Special:EntityData/Q16730218.json?revision=2464202514'
+  old_revid: 2464202494
+  parsed_edit:
+    operation: wbsetclaim-update
+    property: P106
+    property_label: occupation
+    value_label: record producer
+    value_raw: Q183945
+  rcid: 2540388602
+  removed_claim: null
+  revid: 2464202514
+  tags:
+  - new editor changing statement
+  - wikidata-ui
+  timestamp: '2026-02-17T17:23:20Z'
+  title: Q16730218
+  user: Faginjosh234
+fetch_date: '2026-02-17T17:25:25.487048+00:00'
+label: unpatrolled

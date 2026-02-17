@@ -1,0 +1,81 @@
+count: 5
+edits:
+- comment: '/* wbsetclaim-create:1||1 */ [[Property:P2048]]: 175 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])'
+  old_revid: 2431307988
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P2048
+    property_label: height
+    value_label: null
+    value_raw: 175 centimetre, ([[:toollabs:editgroups/b/harvesttemplates/6da11ea62c94|details]])
+  rcid: 2540426053
+  revid: 2464238462
+  tags:
+  - 'OAuth CID: 1739'
+  timestamp: '2026-02-17T20:31:32Z'
+  title: Q122460666
+  user: Laurentius
+- comment: '/* wbcreateclaim-create:1| */ [[Property:P8921]]: 20217009, #quickstatements;
+    #temporary_batch_1771360099881'
+  old_revid: 2463243833
+  parsed_edit:
+    operation: wbcreateclaim-create
+    property: P8921
+    property_label: KOBIS film ID
+    value_label: null
+    value_raw: '20217009, #quickstatements; #temporary_batch_1771360099881'
+  rcid: 2540426049
+  revid: 2464238460
+  tags:
+  - 'OAuth CID: 1776'
+  timestamp: '2026-02-17T20:31:31Z'
+  title: Q130598099
+  user: ならちゃん
+- comment: '/* wbsetreference-add:2| */ [[Property:P8921]]: 20226897, #quickstatements;
+    #temporary_batch_1771360099881'
+  old_revid: 2464238444
+  parsed_edit:
+    operation: wbsetreference-add
+    property: P8921
+    property_label: KOBIS film ID
+    value_label: null
+    value_raw: '20226897, #quickstatements; #temporary_batch_1771360099881'
+  rcid: 2540426040
+  revid: 2464238452
+  tags:
+  - 'OAuth CID: 1776'
+  timestamp: '2026-02-17T20:31:30Z'
+  title: Q130598102
+  user: ならちゃん
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P735]]: [[Q2624417]]'
+  old_revid: 2464238409
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P735
+    property_label: given name
+    value_label: René
+    value_raw: Q2624417
+  rcid: 2540426039
+  revid: 2464238450
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:30Z'
+  title: Q138332726
+  user: Ben Skála
+- comment: '/* wbsetclaim-create:2||1 */ [[Property:P27]]: [[Q902]]'
+  old_revid: 2464238385
+  parsed_edit:
+    operation: wbsetclaim-create
+    property: P27
+    property_label: country of citizenship
+    value_label: Bangladesh
+    value_raw: Q902
+  rcid: 2540426036
+  revid: 2464238447
+  tags:
+  - wikidata-ui
+  timestamp: '2026-02-17T20:31:30Z'
+  title: Q138332723
+  user: মোহাম্মদ জনি হোসেন
+fetch_date: '2026-02-17T20:31:35.121347+00:00'
+label: control
