@@ -232,11 +232,12 @@ class LabelCache:
 
     Resolves Q-ids via ItemPage and P-ids via PropertyPage. Caches results
     so repeated lookups for the same entity avoid duplicate API calls.
+    Also stores descriptions alongside labels for use in edit verification.
     """
 
     def __init__(self, site):
         self._repo = site.data_repository()
-        self._cache = {}
+        self._cache = {}  # {entity_id: (label, description)}
 
     def resolve(self, entity_id):
         """Resolve an entity ID to its English label.
@@ -249,7 +250,7 @@ class LabelCache:
             English label is available or the lookup fails.
         """
         if entity_id in self._cache:
-            return self._cache[entity_id]
+            return self._cache[entity_id][0]
 
         try:
             if entity_id.startswith("P"):
@@ -258,18 +259,33 @@ class LabelCache:
                 page = pywikibot.ItemPage(self._repo, entity_id)
             page.get()
             label = page.labels.get("en", entity_id)
+            desc = page.descriptions.get("en")
         except Exception:
             label = entity_id
+            desc = None
 
-        self._cache[entity_id] = label
+        self._cache[entity_id] = (label, desc)
         return label
+
+    def resolve_description(self, entity_id):
+        """Resolve an entity ID to its English description.
+
+        Args:
+            entity_id: A Q-id (e.g., "Q5") or P-id (e.g., "P106").
+
+        Returns:
+            The English description string, or None if unavailable.
+        """
+        if entity_id not in self._cache:
+            self.resolve(entity_id)
+        return self._cache[entity_id][1]
 
     def resolve_batch(self, entity_ids):
         """Resolve multiple entity IDs in batched API calls (max 50 per call).
 
-        Uses wbgetentities with props=labels&languages=en to fetch labels
-        for many entities at once, dramatically reducing API calls compared
-        to individual resolve() calls.
+        Uses wbgetentities with props=labels|descriptions&languages=en to
+        fetch labels and descriptions for many entities at once, dramatically
+        reducing API calls compared to individual resolve() calls.
 
         Args:
             entity_ids: Iterable of entity ID strings (Q-ids and P-ids).
@@ -280,31 +296,48 @@ class LabelCache:
             return
 
         # Batch in chunks of 50 (Wikidata API limit)
+        # Uses requests directly to avoid pywikibot's throttling on
+        # _simple_request, which can stall for minutes on rate limits.
+        api_url = "https://www.wikidata.org/w/api.php"
         for i in range(0, len(needed), 50):
             if i > 0:
                 time.sleep(0.5)
             chunk = needed[i:i + 50]
             try:
-                req = self._repo._simple_request(
-                    action="wbgetentities",
-                    ids="|".join(chunk),
-                    props="labels",
-                    languages="en",
+                resp = requests.get(
+                    api_url,
+                    params={
+                        "action": "wbgetentities",
+                        "ids": "|".join(chunk),
+                        "props": "labels|descriptions",
+                        "languages": "en",
+                        "format": "json",
+                    },
+                    headers={
+                        "User-Agent": (
+                            "wikidata-SIFT/0.1 "
+                            "(https://github.com/louispotok/open-graph-next)"
+                        ),
+                    },
+                    timeout=30,
                 )
-                data = req.submit()
+                resp.raise_for_status()
+                data = resp.json()
                 for eid, entity_data in data.get("entities", {}).items():
                     labels = entity_data.get("labels", {})
                     en_label = labels.get("en", {}).get("value", eid)
-                    self._cache[eid] = en_label
+                    descs = entity_data.get("descriptions", {})
+                    en_desc = descs.get("en", {}).get("value")
+                    self._cache[eid] = (en_label, en_desc)
             except Exception:
                 # Fall back to storing IDs as their own labels
                 for eid in chunk:
                     if eid not in self._cache:
-                        self._cache[eid] = eid
+                        self._cache[eid] = (eid, None)
 
-    def prime(self, entity_id, label):
-        """Pre-populate the cache with a known label."""
-        self._cache[entity_id] = label
+    def prime(self, entity_id, label, description=None):
+        """Pre-populate the cache with a known label and optional description."""
+        self._cache[entity_id] = (label, description)
 
 
 def extract_snak_value(snak, label_cache):
@@ -483,6 +516,50 @@ OPERATION_TO_DIFF_TYPE = {
 }
 
 
+def _refine_diff_type(old_stmt, new_stmt):
+    """Determine what actually changed between two serialized statements.
+
+    wbsetclaim-update fires for any claim modification. By comparing the
+    serialized old and new statements, we can distinguish value changes
+    from reference/qualifier/rank-only changes.
+
+    Args:
+        old_stmt: Serialized statement dict (value, references, qualifiers, rank).
+        new_stmt: Serialized statement dict.
+
+    Returns:
+        Refined diff type string.
+    """
+    value_changed = old_stmt.get("value") != new_stmt.get("value")
+    rank_changed = old_stmt.get("rank") != new_stmt.get("rank")
+    refs_changed = old_stmt.get("references") != new_stmt.get("references")
+    quals_changed = old_stmt.get("qualifiers") != new_stmt.get("qualifiers")
+
+    if value_changed:
+        return "value_changed"
+    if refs_changed and not quals_changed and not rank_changed:
+        # Determine if references were added, removed, or modified
+        old_refs = old_stmt.get("references", [])
+        new_refs = new_stmt.get("references", [])
+        if not old_refs and new_refs:
+            return "reference_added"
+        if old_refs and not new_refs:
+            return "reference_removed"
+        return "reference_changed"
+    if quals_changed and not refs_changed and not rank_changed:
+        old_quals = old_stmt.get("qualifiers", {})
+        new_quals = new_stmt.get("qualifiers", {})
+        if not old_quals and new_quals:
+            return "qualifier_added"
+        if old_quals and not new_quals:
+            return "qualifier_removed"
+        return "qualifier_changed"
+    if rank_changed and not refs_changed and not quals_changed:
+        return "rank_changed"
+    # Multiple things changed at once — keep the generic type
+    return "value_changed"
+
+
 def compute_edit_diff(old_entity, new_entity, parsed_edit, label_cache):
     """Compare old and new entity revisions for the edited property.
 
@@ -539,6 +616,13 @@ def compute_edit_diff(old_entity, new_entity, parsed_edit, label_cache):
                 next(iter(new_by_id.values())), label_cache
             )
 
+    # Refine diff_type for wbsetclaim-update by comparing old and new
+    # statements. The Wikibase operation "wbsetclaim-update" fires for ANY
+    # change to an existing claim (value, references, qualifiers, rank).
+    # Compare the serialized statements to determine what actually changed.
+    if diff_type == "value_changed" and old_value and new_value:
+        diff_type = _refine_diff_type(old_value, new_value)
+
     return {
         "type": diff_type,
         "property": prop,
@@ -577,8 +661,12 @@ def enrich_edit(edit, label_cache):
             parsed["property_label"] = label_cache.resolve(parsed["property"])
             if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
                 parsed["value_label"] = label_cache.resolve(parsed["value_raw"])
+                parsed["value_description"] = label_cache.resolve_description(
+                    parsed["value_raw"]
+                )
             else:
                 parsed["value_label"] = None
+                parsed["value_description"] = None
         edit["parsed_edit"] = parsed
         edit["item"] = {"error": str(e)}
         edit["removed_claim"] = None
@@ -613,8 +701,12 @@ def enrich_edit(edit, label_cache):
         parsed["property_label"] = label_cache.resolve(parsed["property"])
         if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
             parsed["value_label"] = label_cache.resolve(parsed["value_raw"])
+            parsed["value_description"] = label_cache.resolve_description(
+                parsed["value_raw"]
+            )
         else:
             parsed["value_label"] = None
+            parsed["value_description"] = None
     edit["parsed_edit"] = parsed
 
     labels = new_entity.get("labels", {})
@@ -768,8 +860,12 @@ def enrich_edit_group(group, label_cache):
                 parsed["value_label"] = label_cache.resolve(
                     parsed["value_raw"]
                 )
+                parsed["value_description"] = (
+                    label_cache.resolve_description(parsed["value_raw"])
+                )
             else:
                 parsed["value_label"] = None
+                parsed["value_description"] = None
         edit["parsed_edit"] = parsed
 
         new_entity = rev_cache.get(edit["revid"], {})

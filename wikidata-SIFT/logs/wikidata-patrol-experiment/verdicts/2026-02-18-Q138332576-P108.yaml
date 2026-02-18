@@ -1,0 +1,54 @@
+---
+skill: sift-patrol
+date: 2026-02-18
+edit_rcid: 2540426022
+edit_revid: 2464238434
+model: claude-opus-4-6
+---
+edit:
+  qid: Q138332576
+  property: P108
+  property_label: employer
+  value: Q124375837
+  value_label: State Biotechnological University
+  diff_type: value_changed
+
+verification_question: >
+  Is "State Biotechnological University" a correct updated employer
+  for Serhii Rieznik?
+
+sources:
+  - url: https://biotechuniv.edu.ua/person/ryeznik-sergij-vadymovych-2/
+    provenance: verified
+    source_type: primary
+    supports_claim: true
+    summary: >
+      Official university staff page lists Rieznik as lecturer in the
+      Department of Soil Science, Faculty of Agronomy and Plant Protection.
+      Career timeline shows senior lab assistant 2022-2023, assistant 2023,
+      lecturer 2025. PhD defended 2023.
+  - citation: "Dehtiar'ov Y, Havva D, Kovalzhy N, Rieznik S (2021). Transformation of Physical Indicators of Soil Fertility in Typical Chernozem. Springer."
+    provenance: reported
+    source_type: secondary
+    supports_claim: unknown
+    summary: >
+      Academic publication confirms Rieznik as a soil scientist based in
+      Kharkiv, previously affiliated with Kharkiv National Agrarian University.
+      Consistent with the career timeline on the university staff page showing
+      he moved to DBTU, but does not directly confirm current employment.
+
+verdict: verified-high
+rationale: >
+  The primary source (official university staff page) directly confirms
+  Rieznik's employment at State Biotechnological University as a lecturer
+  in soil science. The reference URL cited in the edit is this same staff
+  page and is accessible. Independent academic publications corroborate
+  his identity as a soil scientist in the Kharkiv region. The start time
+  qualifier of 2023 is consistent with the career timeline on the staff page.
+
+trace_triggered: false
+
+improvements:
+  - "P580 (start time) qualifier shows 2023 which matches the staff page -- already present, no change needed"
+  - "Consider adding P512 (academic degree) = PhD, with start time 2023, citing the same staff page"
+  - "Consider adding P101 (field of work) = soil science (Q207700)"
