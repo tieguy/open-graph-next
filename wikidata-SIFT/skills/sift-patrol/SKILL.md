@@ -104,9 +104,9 @@ Synthesize all evidence gathered above. Do NOT use any web tools in this step.
 | `verified-high` | Strong evidence supports the claim (primary source or multiple independent sources) |
 | `verified-low` | Some evidence supports, but sources are weak or indirect |
 | `plausible` | Claim is consistent with available information but no direct confirmation found |
-| `unverifiable` | Cannot find sufficient evidence to confirm or deny |
+| `unverifiable` | Cannot find sufficient evidence to confirm or deny. Use this when a cited source cannot be located or accessed — failing to find a source is not the same as the source not existing. |
 | `suspect` | Evidence suggests the claim may be incorrect |
-| `incorrect` | Clear evidence contradicts the claim |
+| `incorrect` | Clear evidence **directly contradicts** the claim. Do not use this merely because a cited source could not be found — that is `unverifiable`, not `incorrect`. |
 
 **For removal edits**, the question is whether the removal was justified:
 
