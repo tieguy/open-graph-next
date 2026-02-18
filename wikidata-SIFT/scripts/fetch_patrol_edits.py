@@ -7,6 +7,17 @@ Unpatrolled edits are identified by "new editor" tags (these edits are from
 non-autoconfirmed users whose edits require patrol review). Control edits are
 statement edits by established users (autopatrolled by definition).
 
+HTTP Architecture
+-----------------
+All Wikidata API requests go through pywikibot, inheriting its authenticated
+session, User-Agent (from ``user-config.py``), and retry/backoff logic.
+
+``fetch_entity_at_revision`` uses ``pwb_http.fetch`` (pywikibot's HTTP layer)
+because ``Special:EntityData`` is a page URL, not an API action.  pywikibot's
+API layer (``_simple_request`` / ``Request``) doesn't support revision-specific
+entity fetching.  ``pwb_http.fetch`` still benefits from pywikibot's
+authenticated session and User-Agent string.
+
 Usage:
     # Fetch 10 unpatrolled statement edits (default)
     python scripts/fetch_patrol_edits.py
@@ -28,7 +39,6 @@ import time
 
 import json
 
-import requests
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -283,9 +293,11 @@ class LabelCache:
     def resolve_batch(self, entity_ids):
         """Resolve multiple entity IDs in batched API calls (max 50 per call).
 
-        Uses wbgetentities with props=labels|descriptions&languages=en to
-        fetch labels and descriptions for many entities at once, dramatically
-        reducing API calls compared to individual resolve() calls.
+        Uses pywikibot's ``_simple_request`` to call ``wbgetentities`` with
+        ``props=labels|descriptions&languages=en``, fetching labels and
+        descriptions for many entities at once.  This benefits from
+        pywikibot's authenticated session (higher rate limits when logged
+        in) and its retry/backoff logic for maxlag throttling.
 
         Args:
             entity_ids: Iterable of entity ID strings (Q-ids and P-ids).
@@ -296,33 +308,16 @@ class LabelCache:
             return
 
         # Batch in chunks of 50 (Wikidata API limit)
-        # Uses requests directly to avoid pywikibot's throttling on
-        # _simple_request, which can stall for minutes on rate limits.
-        api_url = "https://www.wikidata.org/w/api.php"
         for i in range(0, len(needed), 50):
-            if i > 0:
-                time.sleep(0.5)
             chunk = needed[i:i + 50]
             try:
-                resp = requests.get(
-                    api_url,
-                    params={
-                        "action": "wbgetentities",
-                        "ids": "|".join(chunk),
-                        "props": "labels|descriptions",
-                        "languages": "en",
-                        "format": "json",
-                    },
-                    headers={
-                        "User-Agent": (
-                            "wikidata-SIFT/0.1 "
-                            "(https://github.com/louispotok/open-graph-next)"
-                        ),
-                    },
-                    timeout=30,
+                req = self._repo._simple_request(
+                    action="wbgetentities",
+                    ids="|".join(chunk),
+                    props="labels|descriptions",
+                    languages="en",
                 )
-                resp.raise_for_status()
-                data = resp.json()
+                data = req.submit()
                 for eid, entity_data in data.get("entities", {}).items():
                     labels = entity_data.get("labels", {})
                     en_label = labels.get("en", {}).get("value", eid)
@@ -454,9 +449,16 @@ def serialize_claims(raw_claims, label_cache, skip_external_ids=True):
 def fetch_entity_at_revision(qid, revid):
     """Fetch Wikidata entity JSON at a specific revision.
 
-    Uses Special:EntityData which supports revision-specific fetching,
-    via pywikibot's HTTP session (which provides proper User-Agent and
-    authentication to avoid 403 errors from Wikimedia).
+    Uses ``Special:EntityData`` via ``pwb_http.fetch`` (pywikibot's HTTP
+    layer).  This is *not* the same as the ``resolve_batch`` bypass --
+    ``pwb_http.fetch`` inherits pywikibot's authenticated session and
+    User-Agent from ``user-config.py``, so it benefits from logged-in
+    rate limits.
+
+    We use ``pwb_http.fetch`` instead of pywikibot's API layer because
+    ``Special:EntityData`` is a page URL (not an API action), and the
+    ``wbgetentities`` API does not support a ``revision`` parameter for
+    fetching entity state at a specific revision.
 
     Args:
         qid: Entity ID (e.g., "Q42").

@@ -734,66 +734,62 @@ class TestCollectEntityIds:
 
 
 class TestResolveBatch:
-    @patch("fetch_patrol_edits.requests.get")
-    def test_primes_cache_from_api(self, mock_get, mock_site):
-        cache = LabelCache(mock_site)
+    def _setup_repo_response(self, mock_site, response_data):
+        """Configure mock_site's repo to return response_data from _simple_request().submit()."""
+        mock_req = MagicMock()
+        mock_req.submit.return_value = response_data
+        repo = mock_site.data_repository()
+        repo._simple_request.return_value = mock_req
+        return repo
 
-        # Mock the API response
-        mock_resp = MagicMock()
-        mock_resp.json.return_value = {
+    def test_primes_cache_from_api(self, mock_site):
+        repo = self._setup_repo_response(mock_site, {
             "entities": {
                 "Q5": {"labels": {"en": {"value": "human"}}},
                 "P31": {"labels": {"en": {"value": "instance of"}}},
             }
-        }
-        mock_get.return_value = mock_resp
+        })
 
+        cache = LabelCache(mock_site)
         cache.resolve_batch(["Q5", "P31"])
 
         assert cache.resolve("Q5") == "human"
         assert cache.resolve("P31") == "instance of"
-        mock_get.assert_called_once()
-        call_kwargs = mock_get.call_args
-        assert call_kwargs.kwargs["params"]["ids"] == "Q5|P31"
-        assert call_kwargs.kwargs["params"]["props"] == "labels|descriptions"
+        repo._simple_request.assert_called_once()
+        call_kwargs = repo._simple_request.call_args
+        assert call_kwargs.kwargs["ids"] == "Q5|P31"
+        assert call_kwargs.kwargs["props"] == "labels|descriptions"
 
-    @patch("fetch_patrol_edits.requests.get")
-    def test_skips_already_cached(self, mock_get, mock_site):
-        cache = LabelCache(mock_site)
-
-        cache.prime("Q5", "human")
-
-        mock_resp = MagicMock()
-        mock_resp.json.return_value = {
+    def test_skips_already_cached(self, mock_site):
+        repo = self._setup_repo_response(mock_site, {
             "entities": {
                 "P31": {"labels": {"en": {"value": "instance of"}}},
             }
-        }
-        mock_get.return_value = mock_resp
+        })
 
+        cache = LabelCache(mock_site)
+        cache.prime("Q5", "human")
         cache.resolve_batch(["Q5", "P31"])
 
         # Only P31 should be requested (Q5 already cached)
-        mock_get.assert_called_once()
-        call_kwargs = mock_get.call_args
-        assert "Q5" not in call_kwargs.kwargs["params"]["ids"]
+        repo._simple_request.assert_called_once()
+        call_kwargs = repo._simple_request.call_args
+        assert "Q5" not in call_kwargs.kwargs["ids"]
 
     def test_all_cached_no_api_call(self, mock_site):
+        repo = mock_site.data_repository()
         cache = LabelCache(mock_site)
-
         cache.prime("Q5", "human")
         cache.prime("P31", "instance of")
 
-        with patch("fetch_patrol_edits.requests.get") as mock_get:
-            cache.resolve_batch(["Q5", "P31"])
-            mock_get.assert_not_called()
+        cache.resolve_batch(["Q5", "P31"])
+        repo._simple_request.assert_not_called()
 
-    @patch("fetch_patrol_edits.requests.get")
-    def test_handles_api_error(self, mock_get, mock_site):
+    def test_handles_api_error(self, mock_site):
+        repo = mock_site.data_repository()
+        repo._simple_request.side_effect = Exception("API error")
+
         cache = LabelCache(mock_site)
-
-        mock_get.side_effect = Exception("API error")
-
         cache.resolve_batch(["Q5", "P31"])
 
         # Falls back to entity ID as its own label
@@ -801,67 +797,66 @@ class TestResolveBatch:
         assert cache.resolve("P31") == "P31"
 
     def test_empty_input(self, mock_site):
+        repo = mock_site.data_repository()
         cache = LabelCache(mock_site)
 
-        with patch("fetch_patrol_edits.requests.get") as mock_get:
-            cache.resolve_batch([])
-            mock_get.assert_not_called()
+        cache.resolve_batch([])
+        repo._simple_request.assert_not_called()
 
 
 class TestEnrichmentUsesBatch:
-    @patch("fetch_patrol_edits.requests.get")
+    def _setup_repo_response(self, mock_site, response_data):
+        """Configure mock_site's repo to return response_data from _simple_request().submit()."""
+        mock_req = MagicMock()
+        mock_req.submit.return_value = response_data
+        repo = mock_site.data_repository()
+        repo._simple_request.return_value = mock_req
+        return repo
+
     @patch("fetch_patrol_edits.fetch_entity_at_revision")
     def test_enrich_edit_pre_resolves_labels(
-        self, mock_fetch, mock_get, sample_edit, sample_entity_json, mock_site
+        self, mock_fetch, sample_edit, sample_entity_json, mock_site
     ):
         """enrich_edit should batch-resolve labels before serialization."""
         mock_fetch.return_value = sample_entity_json
 
-        cache = LabelCache(mock_site)
-
-        # Mock the batch API response with all needed labels
-        mock_resp = MagicMock()
-        mock_resp.json.return_value = {
+        repo = self._setup_repo_response(mock_site, {
             "entities": {
                 "P31": {"labels": {"en": {"value": "instance of"}}},
                 "P106": {"labels": {"en": {"value": "occupation"}}},
                 "Q5": {"labels": {"en": {"value": "human"}}},
                 "Q117321337": {"labels": {"en": {"value": "singer-songwriter"}}},
             }
-        }
-        mock_get.return_value = mock_resp
+        })
 
+        cache = LabelCache(mock_site)
         result = enrich_edit(sample_edit, cache)
 
         # Batch resolve was called
-        mock_get.assert_called()
+        repo._simple_request.assert_called()
 
         # Labels were resolved correctly
         assert result["parsed_edit"]["property_label"] == "occupation"
         assert result["parsed_edit"]["value_label"] == "singer-songwriter"
         assert result["item"]["claims"]["P31"]["property_label"] == "instance of"
 
-    @patch("fetch_patrol_edits.requests.get")
     @patch("fetch_patrol_edits.fetch_entity_at_revision")
     def test_enrich_edit_primes_entity_label(
-        self, mock_fetch, mock_get, sample_edit, sample_entity_json, mock_site
+        self, mock_fetch, sample_edit, sample_entity_json, mock_site
     ):
         """enrich_edit should prime cache with the entity's own label."""
         mock_fetch.return_value = sample_entity_json
 
-        cache = LabelCache(mock_site)
-
-        mock_resp = MagicMock()
-        mock_resp.json.return_value = {
+        self._setup_repo_response(mock_site, {
             "entities": {
                 "P31": {"labels": {"en": {"value": "instance of"}}},
                 "P106": {"labels": {"en": {"value": "occupation"}}},
                 "Q5": {"labels": {"en": {"value": "human"}}},
                 "Q117321337": {"labels": {"en": {"value": "singer-songwriter"}}},
             }
-        }
-        mock_get.return_value = mock_resp
+        })
 
+        cache = LabelCache(mock_site)
         enrich_edit(sample_edit, cache)
 
         # Entity's own QID should be primed with its label

@@ -122,7 +122,7 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 
 - `scripts/fetch_patrol_edits.py` -- Fetches unpatrolled and control statement edits from production Wikidata via RecentChanges API. Saves YAML snapshots to `logs/wikidata-patrol-experiment/snapshot/`. Key capabilities:
   - `--enrich` flag adds item context (labels, descriptions, all serialized claims), parsed edit summaries, resolved property/value labels, and removed claim data for removal edits
-  - Uses `requests` + `Special:EntityData` for revision-specific entity fetching (pywikibot only fetches latest)
+  - Uses `pwb_http.fetch` + `Special:EntityData` for revision-specific entity fetching (pywikibot's API layer doesn't support revision-specific fetches)
   - `LabelCache` resolves Q-ids and P-ids to English labels with in-memory caching
   - Enriched snapshots include `parsed_edit`, `item`, and `removed_claim` keys per edit
 - Skill for edit-centric SIFT verification is planned for Phase 3.

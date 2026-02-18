@@ -62,17 +62,22 @@ uv sync --dev
 
 ### Configuration
 
-1. Create `user-config.py` in the project root:
+1. Create `user-config.py` in the project root (gitignored):
 
 ```python
 family = 'wikidata'
 mylang = 'test'
 usernames['wikidata']['test'] = 'YourTestUsername'
+usernames['wikidata']['wikidata'] = 'YourWikidataUsername'
+user_agent_description = 'wikidata-SIFT/0.1 (https://github.com/louispotok/open-graph-next)'
 ```
+
+The `usernames['wikidata']['wikidata']` line configures your production Wikidata account for read access. Logging in gives roughly 10x the anonymous rate limit for API reads -- no separate bot account is needed for read-only work. The `user_agent_description` is injected into the User-Agent header for all pywikibot requests, per [Wikimedia's UA policy](https://meta.wikimedia.org/wiki/User-Agent_policy).
 
 2. Generate bot credentials at https://test.wikidata.org/wiki/Special:BotPasswords
    - Grant permissions: Edit existing pages, Create/edit/move pages, High-volume editing
    - Save the credentials securely
+   - These are only needed for **write** operations on test.wikidata.org
 
 3. Create `user-password.py` (gitignored):
 
