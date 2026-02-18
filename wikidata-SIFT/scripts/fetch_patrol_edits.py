@@ -24,12 +24,16 @@ Usage:
 import argparse
 import re
 import sys
+import time
+
+import json
 
 import requests
 from datetime import datetime, timezone
 from pathlib import Path
 
 import pywikibot
+from pywikibot.comms import http as pwb_http
 import yaml
 
 
@@ -179,6 +183,50 @@ def parse_edit_summary(comment):
     }
 
 
+def collect_entity_ids(raw_claims):
+    """Return set of all entity IDs (P-ids, Q-ids) referenced in claims.
+
+    Walks properties, mainsnaks, references, and qualifiers to find every
+    entity ID that will need label resolution during serialization.
+
+    Args:
+        raw_claims: The "claims" dict from a wbgetentities response.
+
+    Returns:
+        Set of entity ID strings (e.g., {"P31", "Q5", "P106", "Q42"}).
+    """
+    ids = set()
+    for pid, claim_list in raw_claims.items():
+        ids.add(pid)
+        for claim in claim_list:
+            # Mainsnak value
+            _collect_snak_ids(claim.get("mainsnak", {}), ids)
+            # References
+            for ref_block in claim.get("references", []):
+                for ref_pid, snaks in ref_block.get("snaks", {}).items():
+                    ids.add(ref_pid)
+                    for snak in snaks:
+                        _collect_snak_ids(snak, ids)
+            # Qualifiers
+            for qual_pid, qual_snaks in claim.get("qualifiers", {}).items():
+                ids.add(qual_pid)
+                for snak in qual_snaks:
+                    _collect_snak_ids(snak, ids)
+    return ids
+
+
+def _collect_snak_ids(snak, ids):
+    """Extract entity ID from a snak's datavalue if it's a wikibase-entityid."""
+    datavalue = snak.get("datavalue", {})
+    if datavalue.get("type") == "wikibase-entityid":
+        val = datavalue.get("value", {})
+        if "id" in val:
+            ids.add(val["id"])
+        elif "numeric-id" in val:
+            prefix = "P" if val.get("entity-type") == "property" else "Q"
+            ids.add(f"{prefix}{val['numeric-id']}")
+
+
 class LabelCache:
     """In-memory cache for resolving Wikidata entity IDs to English labels.
 
@@ -215,6 +263,44 @@ class LabelCache:
 
         self._cache[entity_id] = label
         return label
+
+    def resolve_batch(self, entity_ids):
+        """Resolve multiple entity IDs in batched API calls (max 50 per call).
+
+        Uses wbgetentities with props=labels&languages=en to fetch labels
+        for many entities at once, dramatically reducing API calls compared
+        to individual resolve() calls.
+
+        Args:
+            entity_ids: Iterable of entity ID strings (Q-ids and P-ids).
+        """
+        # Filter out already-cached IDs
+        needed = [eid for eid in entity_ids if eid not in self._cache]
+        if not needed:
+            return
+
+        # Batch in chunks of 50 (Wikidata API limit)
+        for i in range(0, len(needed), 50):
+            if i > 0:
+                time.sleep(0.5)
+            chunk = needed[i:i + 50]
+            try:
+                req = self._repo._simple_request(
+                    action="wbgetentities",
+                    ids="|".join(chunk),
+                    props="labels",
+                    languages="en",
+                )
+                data = req.submit()
+                for eid, entity_data in data.get("entities", {}).items():
+                    labels = entity_data.get("labels", {})
+                    en_label = labels.get("en", {}).get("value", eid)
+                    self._cache[eid] = en_label
+            except Exception:
+                # Fall back to storing IDs as their own labels
+                for eid in chunk:
+                    if eid not in self._cache:
+                        self._cache[eid] = eid
 
     def prime(self, entity_id, label):
         """Pre-populate the cache with a known label."""
@@ -335,9 +421,9 @@ def serialize_claims(raw_claims, label_cache, skip_external_ids=True):
 def fetch_entity_at_revision(qid, revid):
     """Fetch Wikidata entity JSON at a specific revision.
 
-    Uses Special:EntityData which supports revision-specific fetching.
-    pywikibot's ItemPage.get() only fetches the latest revision, so we
-    use a direct HTTP request instead.
+    Uses Special:EntityData which supports revision-specific fetching,
+    via pywikibot's HTTP session (which provides proper User-Agent and
+    authentication to avoid 403 errors from Wikimedia).
 
     Args:
         qid: Entity ID (e.g., "Q42").
@@ -353,9 +439,12 @@ def fetch_entity_at_revision(qid, revid):
         f"https://www.wikidata.org/wiki/Special:EntityData/"
         f"{qid}.json?revision={revid}"
     )
-    resp = requests.get(url, timeout=30)
-    resp.raise_for_status()
-    data = resp.json()
+    resp = pwb_http.fetch(url)
+    if resp.status_code != 200:
+        raise Exception(
+            f"{resp.status_code} for {url}"
+        )
+    data = json.loads(resp.text)
     return data["entities"][qid]
 
 
@@ -378,6 +467,87 @@ def find_removed_claims(old_entity, new_entity, property_id):
     return [c for c in old_claims if c["id"] not in new_ids]
 
 
+# Map Wikibase operation names to diff types
+OPERATION_TO_DIFF_TYPE = {
+    "wbsetclaim-create": "statement_added",
+    "wbcreateclaim-create": "statement_added",
+    "wbremoveclaims-remove": "statement_removed",
+    "wbsetclaim-update": "value_changed",
+    "wbsetclaimvalue": "value_changed",
+    "wbsetreference-add": "reference_added",
+    "wbsetreference-set": "reference_changed",
+    "wbremovereferences-remove": "reference_removed",
+    "wbsetqualifier-add": "qualifier_added",
+    "wbsetqualifier-update": "qualifier_changed",
+    "wbremovequalifiers-remove": "qualifier_removed",
+}
+
+
+def compute_edit_diff(old_entity, new_entity, parsed_edit, label_cache):
+    """Compare old and new entity revisions for the edited property.
+
+    Args:
+        old_entity: Entity JSON at the old revision.
+        new_entity: Entity JSON at the new revision.
+        parsed_edit: Parsed edit summary dict (from parse_edit_summary).
+        label_cache: LabelCache for resolving entity IDs.
+
+    Returns:
+        dict with type, property, property_label, old_value, new_value.
+        Returns None if parsed_edit is None.
+    """
+    if not parsed_edit:
+        return None
+
+    prop = parsed_edit["property"]
+    operation = parsed_edit["operation"]
+    diff_type = OPERATION_TO_DIFF_TYPE.get(operation, "unknown")
+
+    old_claims = old_entity.get("claims", {}).get(prop, [])
+    new_claims = new_entity.get("claims", {}).get(prop, [])
+
+    old_by_id = {c["id"]: c for c in old_claims}
+    new_by_id = {c["id"]: c for c in new_claims}
+
+    old_value = None
+    new_value = None
+
+    if diff_type == "statement_added":
+        # New statements are those with IDs not in old
+        added_ids = set(new_by_id) - set(old_by_id)
+        if added_ids:
+            new_value = serialize_statement(
+                new_by_id[next(iter(added_ids))], label_cache
+            )
+    elif diff_type == "statement_removed":
+        removed_ids = set(old_by_id) - set(new_by_id)
+        if removed_ids:
+            old_value = serialize_statement(
+                old_by_id[next(iter(removed_ids))], label_cache
+            )
+    else:
+        # For updates/changes, find matching statement IDs
+        common_ids = set(old_by_id) & set(new_by_id)
+        if common_ids:
+            # Pick the first common ID (usually there's only one changed)
+            stmt_id = next(iter(common_ids))
+            old_value = serialize_statement(old_by_id[stmt_id], label_cache)
+            new_value = serialize_statement(new_by_id[stmt_id], label_cache)
+        elif new_by_id:
+            # No common IDs — just show the new state
+            new_value = serialize_statement(
+                next(iter(new_by_id.values())), label_cache
+            )
+
+    return {
+        "type": diff_type,
+        "property": prop,
+        "property_label": label_cache.resolve(prop),
+        "old_value": old_value,
+        "new_value": new_value,
+    }
+
+
 def enrich_edit(edit, label_cache):
     """Add item context, parsed edit summary, and resolved labels to an edit.
 
@@ -394,8 +564,51 @@ def enrich_edit(edit, label_cache):
     Returns:
         The edit dict with added parsed_edit, item, and removed_claim keys.
     """
-    # Parse edit summary
+    # Parse edit summary (resolve labels after batch)
     parsed = parse_edit_summary(edit["comment"])
+
+    # Fetch entity at the edit's revision (new state)
+    qid = edit["title"]
+    try:
+        new_entity = fetch_entity_at_revision(qid, edit["revid"])
+    except Exception as e:
+        # Still resolve parsed labels individually on fetch failure
+        if parsed:
+            parsed["property_label"] = label_cache.resolve(parsed["property"])
+            if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
+                parsed["value_label"] = label_cache.resolve(parsed["value_raw"])
+            else:
+                parsed["value_label"] = None
+        edit["parsed_edit"] = parsed
+        edit["item"] = {"error": str(e)}
+        edit["removed_claim"] = None
+        edit["edit_diff"] = {"error": str(e)}
+        return edit
+
+    # Prime cache with the entity's own label (free — already fetched)
+    en_label = new_entity.get("labels", {}).get("en", {}).get("value")
+    if en_label:
+        label_cache.prime(qid, en_label)
+
+    # Fetch old revision for diff and removal detection
+    old_entity = None
+    old_fetch_error = None
+    try:
+        old_entity = fetch_entity_at_revision(qid, edit["old_revid"])
+    except Exception as e:
+        old_fetch_error = str(e)
+
+    # Batch-resolve all entity IDs before serialization
+    all_ids = collect_entity_ids(new_entity.get("claims", {}))
+    if old_entity is not None:
+        all_ids |= collect_entity_ids(old_entity.get("claims", {}))
+    if parsed:
+        all_ids.add(parsed["property"])
+        if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
+            all_ids.add(parsed["value_raw"])
+    label_cache.resolve_batch(all_ids)
+
+    # Now resolve parsed edit labels (will hit cache from batch)
     if parsed:
         parsed["property_label"] = label_cache.resolve(parsed["property"])
         if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
@@ -404,28 +617,197 @@ def enrich_edit(edit, label_cache):
             parsed["value_label"] = None
     edit["parsed_edit"] = parsed
 
-    # Fetch item via pywikibot (latest revision, not revision-exact)
-    qid = edit["title"]
-    try:
-        repo = label_cache._repo
-        item = pywikibot.ItemPage(repo, qid)
-        item.get()
-        raw_claims = item.toJSON().get("claims", {})
-    except Exception as e:
-        edit["item"] = {"error": str(e)}
-        edit["removed_claim"] = None
-        return edit
+    labels = new_entity.get("labels", {})
+    descriptions = new_entity.get("descriptions", {})
+    raw_claims = new_entity.get("claims", {})
 
     edit["item"] = {
-        "label_en": item.labels.get("en"),
-        "description_en": item.descriptions.get("en"),
+        "label_en": labels.get("en", {}).get("value"),
+        "description_en": descriptions.get("en", {}).get("value"),
         "claims": serialize_claims(raw_claims, label_cache),
     }
 
-    # TODO: handle removal edits by diffing old vs new revision
+    # Compute edit diff
+    if old_entity is not None:
+        edit["edit_diff"] = compute_edit_diff(
+            old_entity, new_entity, parsed, label_cache
+        )
+    else:
+        edit["edit_diff"] = {"error": old_fetch_error, "partial": True}
+
+    # For removal edits, populate removed_claim from diff or direct lookup
     edit["removed_claim"] = None
+    if parsed and "remove" in parsed["operation"]:
+        if old_entity is not None:
+            removed = find_removed_claims(
+                old_entity, new_entity, parsed["property"]
+            )
+            if removed:
+                edit["removed_claim"] = serialize_statement(
+                    removed[0], label_cache
+                )
+        elif old_fetch_error:
+            edit["removed_claim"] = {"error": old_fetch_error}
 
     return edit
+
+
+def group_edits(edits):
+    """Group consecutive edits by (title, user).
+
+    Sequential edits by the same user on the same item are grouped together
+    to avoid redundant API calls during enrichment.
+
+    Args:
+        edits: List of edit dicts.
+
+    Returns:
+        List of lists, where each inner list is a group of related edits.
+        Each edit gets group_id, group_seq, and group_size fields added.
+    """
+    if not edits:
+        return []
+
+    groups = []
+    current_group = [edits[0]]
+    current_key = (edits[0]["title"], edits[0]["user"])
+
+    for edit in edits[1:]:
+        key = (edit["title"], edit["user"])
+        if key == current_key:
+            current_group.append(edit)
+        else:
+            groups.append(current_group)
+            current_group = [edit]
+            current_key = key
+    groups.append(current_group)
+
+    # Annotate each edit with group metadata
+    for group_id, group in enumerate(groups):
+        for seq, edit in enumerate(group):
+            edit["group_id"] = group_id
+            edit["group_seq"] = seq
+            edit["group_size"] = len(group)
+
+    return groups
+
+
+def enrich_edit_group(group, label_cache):
+    """Enrich a group of edits, caching revision fetches.
+
+    For a group of edits on the same item by the same user, fetches each
+    unique revision only once and shares item context across the group.
+
+    Args:
+        group: List of edit dicts (same title and user).
+        label_cache: LabelCache for resolving entity IDs.
+    """
+    if not group:
+        return
+
+    qid = group[0]["title"]
+
+    # Collect all unique revisions needed
+    revids = set()
+    for edit in group:
+        revids.add(edit["revid"])
+        revids.add(edit["old_revid"])
+
+    # Fetch each revision once, with rate limiting
+    rev_cache = {}
+    for i, revid in enumerate(sorted(revids)):
+        if i > 0:
+            time.sleep(0.5)
+        try:
+            rev_cache[revid] = fetch_entity_at_revision(qid, revid)
+        except Exception as e:
+            rev_cache[revid] = {"_error": str(e)}
+
+    # Prime cache with entity labels from fetched revisions
+    for entity_data in rev_cache.values():
+        if "_error" not in entity_data:
+            en_label = entity_data.get("labels", {}).get("en", {}).get("value")
+            if en_label:
+                label_cache.prime(qid, en_label)
+
+    # Batch-resolve all entity IDs across all revisions + parsed edits
+    all_ids = set()
+    for entity_data in rev_cache.values():
+        if "_error" not in entity_data:
+            all_ids |= collect_entity_ids(entity_data.get("claims", {}))
+    for edit in group:
+        parsed = parse_edit_summary(edit["comment"])
+        if parsed:
+            all_ids.add(parsed["property"])
+            if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
+                all_ids.add(parsed["value_raw"])
+    label_cache.resolve_batch(all_ids)
+
+    # Use the latest revision (highest revid) for shared item context
+    latest_revid = max(edit["revid"] for edit in group)
+    latest_entity = rev_cache.get(latest_revid, {})
+
+    if "_error" in latest_entity:
+        shared_item = {"error": latest_entity["_error"]}
+    else:
+        labels = latest_entity.get("labels", {})
+        descriptions = latest_entity.get("descriptions", {})
+        raw_claims = latest_entity.get("claims", {})
+        shared_item = {
+            "label_en": labels.get("en", {}).get("value"),
+            "description_en": descriptions.get("en", {}).get("value"),
+            "claims": serialize_claims(raw_claims, label_cache),
+        }
+
+    # Enrich each edit using cached revisions
+    for edit in group:
+        parsed = parse_edit_summary(edit["comment"])
+        if parsed:
+            parsed["property_label"] = label_cache.resolve(parsed["property"])
+            if parsed["value_raw"] and parsed["value_raw"].startswith("Q"):
+                parsed["value_label"] = label_cache.resolve(
+                    parsed["value_raw"]
+                )
+            else:
+                parsed["value_label"] = None
+        edit["parsed_edit"] = parsed
+
+        new_entity = rev_cache.get(edit["revid"], {})
+        old_entity = rev_cache.get(edit["old_revid"], {})
+
+        # Item context: use shared if this edit's revision is fine,
+        # otherwise derive from this edit's new entity
+        if "_error" in new_entity:
+            edit["item"] = {"error": new_entity["_error"]}
+            edit["edit_diff"] = {"error": new_entity["_error"]}
+            edit["removed_claim"] = None
+            continue
+
+        edit["item"] = shared_item
+
+        # Compute diff
+        if "_error" not in old_entity:
+            edit["edit_diff"] = compute_edit_diff(
+                old_entity, new_entity, parsed, label_cache
+            )
+        else:
+            edit["edit_diff"] = {
+                "error": old_entity.get("_error"), "partial": True
+            }
+
+        # Removal detection
+        edit["removed_claim"] = None
+        if parsed and "remove" in parsed["operation"]:
+            if "_error" not in old_entity:
+                removed = find_removed_claims(
+                    old_entity, new_entity, parsed["property"]
+                )
+                if removed:
+                    edit["removed_claim"] = serialize_statement(
+                        removed[0], label_cache
+                    )
+            else:
+                edit["removed_claim"] = {"error": old_entity["_error"]}
 
 
 def save_snapshot(edits, label, snapshot_dir):
@@ -509,15 +891,20 @@ def main():
     print(f"  Found {len(unpatrolled)} edits")
 
     if args.enrich:
-        print(f"  Enriching {len(unpatrolled)} edits with item data...")
-        for i, edit in enumerate(unpatrolled):
+        groups = group_edits(unpatrolled)
+        print(
+            f"  Enriching {len(unpatrolled)} edits "
+            f"({len(groups)} groups) with item data..."
+        )
+        for gi, group in enumerate(groups):
             print(
-                f"    [{i + 1}/{len(unpatrolled)}] {edit['title']}...",
+                f"    [group {gi + 1}/{len(groups)}, "
+                f"{len(group)} edit(s)] {group[0]['title']}...",
                 end="",
                 flush=True,
             )
             try:
-                enrich_edit(edit, label_cache)
+                enrich_edit_group(group, label_cache)
                 print(" done")
             except Exception as e:
                 print(f" ERROR: {e}")
@@ -527,6 +914,8 @@ def main():
             print(f"  {edit['title']} by {edit['user']} at {edit['timestamp']}")
             print(f"    comment: {edit['comment']}")
             print(f"    tags: {edit['tags']}")
+            if edit.get("edit_diff") and "error" not in edit["edit_diff"]:
+                print(f"    diff: {edit['edit_diff']['type']}")
     else:
         path = save_snapshot(unpatrolled, "unpatrolled", args.output_dir)
         print(f"  Saved to {path}")
@@ -543,15 +932,20 @@ def main():
             )
 
         if args.enrich:
-            print(f"  Enriching {len(control)} control edits with item data...")
-            for i, edit in enumerate(control):
+            groups = group_edits(control)
+            print(
+                f"  Enriching {len(control)} control edits "
+                f"({len(groups)} groups) with item data..."
+            )
+            for gi, group in enumerate(groups):
                 print(
-                    f"    [{i + 1}/{len(control)}] {edit['title']}...",
+                    f"    [group {gi + 1}/{len(groups)}, "
+                    f"{len(group)} edit(s)] {group[0]['title']}...",
                     end="",
                     flush=True,
                 )
                 try:
-                    enrich_edit(edit, label_cache)
+                    enrich_edit_group(group, label_cache)
                     print(" done")
                 except Exception as e:
                     print(f" ERROR: {e}")

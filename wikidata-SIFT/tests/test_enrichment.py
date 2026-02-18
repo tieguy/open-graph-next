@@ -3,7 +3,17 @@
 import pytest
 from unittest.mock import patch
 
-from fetch_patrol_edits import enrich_edit, find_removed_claims, LabelCache
+from unittest.mock import call, MagicMock
+
+from fetch_patrol_edits import (
+    collect_entity_ids,
+    compute_edit_diff,
+    enrich_edit,
+    enrich_edit_group,
+    find_removed_claims,
+    group_edits,
+    LabelCache,
+)
 
 
 @pytest.fixture
@@ -129,8 +139,10 @@ class TestEnrichEdit:
         # Not a removal
         assert result["removed_claim"] is None
 
-        # Entity fetched at correct revision
-        mock_fetch.assert_called_once_with("Q136291923", 2464102037)
+        # Entity fetched at correct revisions (new + old)
+        assert mock_fetch.call_count == 2
+        mock_fetch.assert_any_call("Q136291923", 2464102037)
+        mock_fetch.assert_any_call("Q136291923", 2464100657)
 
     @patch("fetch_patrol_edits.fetch_entity_at_revision")
     def test_enriches_removal_edit(self, mock_fetch, mock_site):
@@ -278,3 +290,498 @@ class TestEnrichEdit:
         assert result["parsed_edit"] is None
         assert result["item"]["label_en"] == "Test"
         assert result["removed_claim"] is None
+
+
+def _make_claim(stmt_id, prop, qid):
+    """Helper to build a minimal claim JSON for diff tests."""
+    return {
+        "id": stmt_id,
+        "mainsnak": {
+            "snaktype": "value",
+            "property": prop,
+            "datavalue": {
+                "type": "wikibase-entityid",
+                "value": {"entity-type": "item", "id": qid, "numeric-id": int(qid[1:])},
+            },
+        },
+        "rank": "normal",
+        "references": [],
+        "qualifiers": {},
+    }
+
+
+class TestComputeEditDiff:
+    def test_statement_added(self, mock_site):
+        old_entity = {"claims": {}}
+        new_entity = {"claims": {"P106": [_make_claim("s1", "P106", "Q42")]}}
+        parsed = {"operation": "wbsetclaim-create", "property": "P106",
+                  "value_raw": "Q42"}
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+
+        diff = compute_edit_diff(old_entity, new_entity, parsed, cache)
+
+        assert diff["type"] == "statement_added"
+        assert diff["property"] == "P106"
+        assert diff["property_label"] == "occupation"
+        assert diff["old_value"] is None
+        assert diff["new_value"] is not None
+        assert diff["new_value"]["value"] == "Q42"
+
+    def test_statement_removed(self, mock_site):
+        old_entity = {"claims": {"P21": [_make_claim("s1", "P21", "Q6581097")]}}
+        new_entity = {"claims": {}}
+        parsed = {"operation": "wbremoveclaims-remove", "property": "P21",
+                  "value_raw": "Q6581097"}
+
+        cache = LabelCache(mock_site)
+        cache.prime("P21", "sex or gender")
+        cache.prime("Q6581097", "male")
+
+        diff = compute_edit_diff(old_entity, new_entity, parsed, cache)
+
+        assert diff["type"] == "statement_removed"
+        assert diff["old_value"] is not None
+        assert diff["old_value"]["value"] == "Q6581097"
+        assert diff["new_value"] is None
+
+    def test_value_changed(self, mock_site):
+        old_entity = {"claims": {"P106": [_make_claim("s1", "P106", "Q42")]}}
+        new_entity = {"claims": {"P106": [_make_claim("s1", "P106", "Q5")]}}
+        parsed = {"operation": "wbsetclaim-update", "property": "P106",
+                  "value_raw": "Q5"}
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+        cache.prime("Q5", "human")
+
+        diff = compute_edit_diff(old_entity, new_entity, parsed, cache)
+
+        assert diff["type"] == "value_changed"
+        assert diff["old_value"]["value"] == "Q42"
+        assert diff["new_value"]["value"] == "Q5"
+
+    def test_reference_added(self, mock_site):
+        old_claim = _make_claim("s1", "P106", "Q42")
+        new_claim = _make_claim("s1", "P106", "Q42")
+        new_claim["references"] = [{"snaks": {"P854": [
+            {"snaktype": "value", "datavalue": {"type": "string", "value": "http://example.com"}}
+        ]}}]
+
+        old_entity = {"claims": {"P106": [old_claim]}}
+        new_entity = {"claims": {"P106": [new_claim]}}
+        parsed = {"operation": "wbsetreference-add", "property": "P106",
+                  "value_raw": None}
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+        cache.prime("P854", "reference URL")
+
+        diff = compute_edit_diff(old_entity, new_entity, parsed, cache)
+
+        assert diff["type"] == "reference_added"
+        assert diff["old_value"] is not None
+        assert diff["new_value"] is not None
+        # New has reference, old doesn't
+        assert len(diff["new_value"]["references"]) == 1
+        assert len(diff["old_value"]["references"]) == 0
+
+    def test_no_parsed_edit_returns_none(self, mock_site):
+        cache = LabelCache(mock_site)
+        diff = compute_edit_diff({}, {}, None, cache)
+        assert diff is None
+
+
+class TestGroupEdits:
+    def test_consecutive_same_item_user_grouped(self):
+        edits = [
+            {"title": "Q42", "user": "Alice", "revid": 1, "old_revid": 0},
+            {"title": "Q42", "user": "Alice", "revid": 2, "old_revid": 1},
+            {"title": "Q42", "user": "Alice", "revid": 3, "old_revid": 2},
+        ]
+        groups = group_edits(edits)
+        assert len(groups) == 1
+        assert len(groups[0]) == 3
+
+    def test_splits_on_different_item(self):
+        edits = [
+            {"title": "Q42", "user": "Alice", "revid": 1, "old_revid": 0},
+            {"title": "Q100", "user": "Alice", "revid": 2, "old_revid": 1},
+        ]
+        groups = group_edits(edits)
+        assert len(groups) == 2
+
+    def test_splits_on_different_user(self):
+        edits = [
+            {"title": "Q42", "user": "Alice", "revid": 1, "old_revid": 0},
+            {"title": "Q42", "user": "Bob", "revid": 2, "old_revid": 1},
+        ]
+        groups = group_edits(edits)
+        assert len(groups) == 2
+
+    def test_non_consecutive_same_pair_stays_separate(self):
+        edits = [
+            {"title": "Q42", "user": "Alice", "revid": 1, "old_revid": 0},
+            {"title": "Q100", "user": "Bob", "revid": 2, "old_revid": 1},
+            {"title": "Q42", "user": "Alice", "revid": 3, "old_revid": 2},
+        ]
+        groups = group_edits(edits)
+        assert len(groups) == 3
+
+    def test_group_fields_added(self):
+        edits = [
+            {"title": "Q42", "user": "Alice", "revid": 1, "old_revid": 0},
+            {"title": "Q42", "user": "Alice", "revid": 2, "old_revid": 1},
+        ]
+        groups = group_edits(edits)
+        assert edits[0]["group_id"] == 0
+        assert edits[0]["group_seq"] == 0
+        assert edits[0]["group_size"] == 2
+        assert edits[1]["group_seq"] == 1
+
+    def test_empty_edits(self):
+        assert group_edits([]) == []
+
+
+class TestEnrichEditGroup:
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    @patch("fetch_patrol_edits.time")
+    def test_caches_shared_revisions(self, mock_time, mock_fetch, mock_site):
+        """Two edits sharing a revision should only fetch it once."""
+        entity_v0 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {},
+        }
+        entity_v1 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {"P106": [_make_claim("s1", "P106", "Q42")]},
+        }
+        entity_v2 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {"P106": [_make_claim("s1", "P106", "Q5")]},
+        }
+
+        # Revisions 100, 200, 300 — sorted, so fetch order is 100, 200, 300
+        def fetch_side_effect(qid, revid):
+            return {100: entity_v0, 200: entity_v1, 300: entity_v2}[revid]
+
+        mock_fetch.side_effect = fetch_side_effect
+
+        group = [
+            {
+                "title": "Q42", "user": "Alice",
+                "revid": 200, "old_revid": 100,
+                "comment": "/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q42]]",
+                "tags": [],
+            },
+            {
+                "title": "Q42", "user": "Alice",
+                "revid": 300, "old_revid": 200,
+                "comment": "/* wbsetclaim-update:2||1 */ [[Property:P106]]: [[Q5]]",
+                "tags": [],
+            },
+        ]
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+        cache.prime("Q5", "human")
+
+        enrich_edit_group(group, cache)
+
+        # 3 unique revisions (100, 200, 300), so 3 fetch calls
+        assert mock_fetch.call_count == 3
+        # Both edits share the same item context (from latest revision 300)
+        assert group[0]["item"] is group[1]["item"]
+        # Both have edit_diff
+        assert group[0]["edit_diff"]["type"] == "statement_added"
+        assert group[1]["edit_diff"]["type"] == "value_changed"
+
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    @patch("fetch_patrol_edits.time")
+    def test_handles_partial_failure(self, mock_time, mock_fetch, mock_site):
+        """When one revision fails, other edits still get enriched."""
+        entity_v1 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {},
+        }
+
+        def fetch_side_effect(qid, revid):
+            if revid == 100:
+                raise Exception("Deleted revision")
+            return entity_v1
+
+        mock_fetch.side_effect = fetch_side_effect
+
+        group = [
+            {
+                "title": "Q42", "user": "Alice",
+                "revid": 200, "old_revid": 100,
+                "comment": "/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q42]]",
+                "tags": [],
+            },
+        ]
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+
+        enrich_edit_group(group, cache)
+
+        # Item context still populated from new revision
+        assert group[0]["item"]["label_en"] == "Test"
+        # Diff has partial error
+        assert group[0]["edit_diff"]["partial"] is True
+        assert "error" in group[0]["edit_diff"]
+
+
+class TestCollectEntityIds:
+    def test_finds_property_ids(self):
+        claims = {
+            "P31": [{"mainsnak": {"snaktype": "value"}}],
+            "P106": [{"mainsnak": {"snaktype": "value"}}],
+        }
+        ids = collect_entity_ids(claims)
+        assert "P31" in ids
+        assert "P106" in ids
+
+    def test_finds_qids_in_mainsnaks(self):
+        claims = {
+            "P31": [
+                {
+                    "mainsnak": {
+                        "snaktype": "value",
+                        "datavalue": {
+                            "type": "wikibase-entityid",
+                            "value": {"entity-type": "item", "id": "Q5"},
+                        },
+                    },
+                }
+            ],
+        }
+        ids = collect_entity_ids(claims)
+        assert "Q5" in ids
+        assert "P31" in ids
+
+    def test_finds_ids_in_references(self):
+        claims = {
+            "P106": [
+                {
+                    "mainsnak": {"snaktype": "value"},
+                    "references": [
+                        {
+                            "snaks": {
+                                "P248": [
+                                    {
+                                        "snaktype": "value",
+                                        "datavalue": {
+                                            "type": "wikibase-entityid",
+                                            "value": {"entity-type": "item", "id": "Q36578"},
+                                        },
+                                    }
+                                ],
+                                "P854": [
+                                    {
+                                        "snaktype": "value",
+                                        "datavalue": {"type": "string", "value": "http://example.com"},
+                                    }
+                                ],
+                            }
+                        }
+                    ],
+                }
+            ],
+        }
+        ids = collect_entity_ids(claims)
+        assert "P248" in ids
+        assert "Q36578" in ids
+        assert "P854" in ids
+
+    def test_finds_ids_in_qualifiers(self):
+        claims = {
+            "P106": [
+                {
+                    "mainsnak": {"snaktype": "value"},
+                    "qualifiers": {
+                        "P580": [
+                            {
+                                "snaktype": "value",
+                                "datavalue": {"type": "time", "value": {"time": "+2020-01-01T00:00:00Z"}},
+                            }
+                        ],
+                        "P582": [
+                            {
+                                "snaktype": "value",
+                                "datavalue": {
+                                    "type": "wikibase-entityid",
+                                    "value": {"entity-type": "item", "id": "Q100"},
+                                },
+                            }
+                        ],
+                    },
+                }
+            ],
+        }
+        ids = collect_entity_ids(claims)
+        assert "P580" in ids
+        assert "P582" in ids
+        assert "Q100" in ids
+
+    def test_handles_numeric_id_format(self):
+        claims = {
+            "P31": [
+                {
+                    "mainsnak": {
+                        "snaktype": "value",
+                        "datavalue": {
+                            "type": "wikibase-entityid",
+                            "value": {"entity-type": "item", "numeric-id": 5},
+                        },
+                    },
+                }
+            ],
+        }
+        ids = collect_entity_ids(claims)
+        assert "Q5" in ids
+
+    def test_empty_claims(self):
+        assert collect_entity_ids({}) == set()
+
+
+class TestResolveBatch:
+    def test_primes_cache_from_api(self, mock_site):
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        # Mock the API response
+        repo._simple_request.return_value.submit.return_value = {
+            "entities": {
+                "Q5": {"labels": {"en": {"value": "human"}}},
+                "P31": {"labels": {"en": {"value": "instance of"}}},
+            }
+        }
+
+        cache.resolve_batch(["Q5", "P31"])
+
+        assert cache.resolve("Q5") == "human"
+        assert cache.resolve("P31") == "instance of"
+        repo._simple_request.assert_called_once_with(
+            action="wbgetentities",
+            ids="Q5|P31",
+            props="labels",
+            languages="en",
+        )
+
+    def test_skips_already_cached(self, mock_site):
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        cache.prime("Q5", "human")
+
+        repo._simple_request.return_value.submit.return_value = {
+            "entities": {
+                "P31": {"labels": {"en": {"value": "instance of"}}},
+            }
+        }
+
+        cache.resolve_batch(["Q5", "P31"])
+
+        # Only P31 should be requested (Q5 already cached)
+        repo._simple_request.assert_called_once()
+        call_args = repo._simple_request.call_args
+        assert "Q5" not in call_args.kwargs.get("ids", call_args[1].get("ids", ""))
+
+    def test_all_cached_no_api_call(self, mock_site):
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        cache.prime("Q5", "human")
+        cache.prime("P31", "instance of")
+
+        cache.resolve_batch(["Q5", "P31"])
+
+        repo._simple_request.assert_not_called()
+
+    def test_handles_api_error(self, mock_site):
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        repo._simple_request.return_value.submit.side_effect = Exception("API error")
+
+        cache.resolve_batch(["Q5", "P31"])
+
+        # Falls back to entity ID as its own label
+        assert cache.resolve("Q5") == "Q5"
+        assert cache.resolve("P31") == "P31"
+
+    def test_empty_input(self, mock_site):
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        cache.resolve_batch([])
+
+        repo._simple_request.assert_not_called()
+
+
+class TestEnrichmentUsesBatch:
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    def test_enrich_edit_pre_resolves_labels(
+        self, mock_fetch, sample_edit, sample_entity_json, mock_site
+    ):
+        """enrich_edit should batch-resolve labels before serialization."""
+        mock_fetch.return_value = sample_entity_json
+
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        # Mock the batch API response with all needed labels
+        repo._simple_request.return_value.submit.return_value = {
+            "entities": {
+                "P31": {"labels": {"en": {"value": "instance of"}}},
+                "P106": {"labels": {"en": {"value": "occupation"}}},
+                "Q5": {"labels": {"en": {"value": "human"}}},
+                "Q117321337": {"labels": {"en": {"value": "singer-songwriter"}}},
+            }
+        }
+
+        result = enrich_edit(sample_edit, cache)
+
+        # Batch resolve was called
+        repo._simple_request.assert_called()
+
+        # Labels were resolved correctly
+        assert result["parsed_edit"]["property_label"] == "occupation"
+        assert result["parsed_edit"]["value_label"] == "singer-songwriter"
+        assert result["item"]["claims"]["P31"]["property_label"] == "instance of"
+
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    def test_enrich_edit_primes_entity_label(
+        self, mock_fetch, sample_edit, sample_entity_json, mock_site
+    ):
+        """enrich_edit should prime cache with the entity's own label."""
+        mock_fetch.return_value = sample_entity_json
+
+        cache = LabelCache(mock_site)
+        repo = mock_site.data_repository()
+
+        repo._simple_request.return_value.submit.return_value = {
+            "entities": {
+                "P31": {"labels": {"en": {"value": "instance of"}}},
+                "P106": {"labels": {"en": {"value": "occupation"}}},
+                "Q5": {"labels": {"en": {"value": "human"}}},
+                "Q117321337": {"labels": {"en": {"value": "singer-songwriter"}}},
+            }
+        }
+
+        enrich_edit(sample_edit, cache)
+
+        # Entity's own QID should be primed with its label
+        assert cache.resolve("Q136291923") == "Some Person"

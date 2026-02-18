@@ -1,5 +1,7 @@
 """Tests for revision-specific entity fetching via Special:EntityData."""
 
+import json
+
 import pytest
 from unittest.mock import MagicMock, patch
 
@@ -7,10 +9,9 @@ from fetch_patrol_edits import fetch_entity_at_revision
 
 
 class TestFetchEntityAtRevision:
-    @patch("fetch_patrol_edits.requests.get")
-    def test_fetches_entity_at_specific_revision(self, mock_get):
-        mock_response = MagicMock()
-        mock_response.json.return_value = {
+    @patch("fetch_patrol_edits.pwb_http.fetch")
+    def test_fetches_entity_at_specific_revision(self, mock_fetch):
+        entity_data = {
             "entities": {
                 "Q42": {
                     "labels": {
@@ -23,31 +24,31 @@ class TestFetchEntityAtRevision:
                 }
             }
         }
-        mock_response.raise_for_status = MagicMock()
-        mock_get.return_value = mock_response
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(entity_data)
+        mock_fetch.return_value = mock_response
 
         result = fetch_entity_at_revision("Q42", 12345)
 
         assert result["labels"]["en"]["value"] == "Douglas Adams"
         assert result["descriptions"]["en"]["value"] == "English author"
-        mock_get.assert_called_once_with(
+        mock_fetch.assert_called_once_with(
             "https://www.wikidata.org/wiki/Special:EntityData/Q42.json?revision=12345",
-            timeout=30,
         )
 
-    @patch("fetch_patrol_edits.requests.get")
-    def test_raises_on_http_error(self, mock_get):
+    @patch("fetch_patrol_edits.pwb_http.fetch")
+    def test_raises_on_http_error(self, mock_fetch):
         mock_response = MagicMock()
-        mock_response.raise_for_status.side_effect = Exception("404 Not Found")
-        mock_get.return_value = mock_response
+        mock_response.status_code = 404
+        mock_fetch.return_value = mock_response
 
         with pytest.raises(Exception, match="404"):
             fetch_entity_at_revision("Q99999", 12345)
 
-    @patch("fetch_patrol_edits.requests.get")
-    def test_returns_claims_from_entity(self, mock_get):
-        mock_response = MagicMock()
-        mock_response.json.return_value = {
+    @patch("fetch_patrol_edits.pwb_http.fetch")
+    def test_returns_claims_from_entity(self, mock_fetch):
+        entity_data = {
             "entities": {
                 "Q42": {
                     "labels": {},
@@ -74,8 +75,10 @@ class TestFetchEntityAtRevision:
                 }
             }
         }
-        mock_response.raise_for_status = MagicMock()
-        mock_get.return_value = mock_response
+        mock_response = MagicMock()
+        mock_response.status_code = 200
+        mock_response.text = json.dumps(entity_data)
+        mock_fetch.return_value = mock_response
 
         result = fetch_entity_at_revision("Q42", 12345)
 
