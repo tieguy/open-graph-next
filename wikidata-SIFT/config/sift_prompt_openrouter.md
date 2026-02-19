@@ -147,7 +147,7 @@ Synthesize all evidence gathered above. Do NOT use any web tools in this step.
 
 ### Step 6: Output
 
-After completing the investigation, you will be asked to provide a structured JSON verdict. The runner handles file I/O and YAML serialization — your role is to produce accurate evidence and a defensible verdict based on the sources you consulted.
+After completing the investigation, you will be asked to provide a structured YAML verdict. The runner handles file I/O and YAML serialization — your role is to produce accurate evidence and a defensible verdict based on the sources you consulted.
 
 When prompted for the verdict, produce the following YAML block:
 
