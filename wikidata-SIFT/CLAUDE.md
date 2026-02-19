@@ -48,7 +48,7 @@ Create chainlink issues:
 
 1. **At session start**: When beginning a fact-checking task
    ```bash
-   chainlink new "Verify: [Item Label] - [what you're checking]"
+   chainlink create "Verify: [Item Label] - [what you're checking]"
    ```
 
 2. **When discovering new work**: During fact-checking, you may discover:
@@ -58,7 +58,7 @@ Create chainlink issues:
 
    Create subissues or new issues for these:
    ```bash
-   chainlink new "Create item: [Entity Name]" --parent [parent-issue-id]
+   chainlink subissue [parent-issue-id] "Create item: [Entity Name]"
    ```
 
 ### Session Workflow
@@ -68,7 +68,7 @@ Create chainlink issues:
 chainlink session start
 
 # Set current working issue
-chainlink set [issue-id]
+chainlink start [issue-id]
 
 # Log progress as you work
 chainlink comment "Found primary source: [url]"
@@ -136,7 +136,7 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 - `config/sift_prompt_openrouter.md` -- Model-agnostic SIFT prompt for the verdict fanout (no Claude-specific features)
 - `docker-compose.yml` -- SearXNG + Valkey containers for local web search (SearXNG on `localhost:8080`, config in `config/searxng/`)
 - Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
-- Skill for edit-centric SIFT verification is planned for Phase 3.
+- Single-model edit-centric SIFT verification: `skills/sift-patrol/SKILL.md` (used for the 50-edit Sonnet 4.6 run)
 
 ## Working with pywikibot
 

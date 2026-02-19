@@ -7,6 +7,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
+- Multi-model verdict fanout via OpenRouter (#23)
+  - `scripts/run_verdict_fanout.py` — two-phase execution (investigation + structured verdict) across 4 models
+  - `scripts/tool_executor.py` — `web_search()` via SearXNG and `web_fetch()` via httpx/trafilatura
+  - `config/sift_prompt_openrouter.md` — model-agnostic SIFT prompt
+  - `docker-compose.yml` — self-hosted SearXNG + Valkey for web search
+  - Checkpoint/resume via `fanout-state.yaml`, per-verdict 180s timeout, interleaved execution order
+  - Cost tracking via OpenRouter generation endpoint
+  - 76 new tests (26 tool executor + 50 verdict runner), 220 total
 - Capture token cost per SIFT-Patrol verdict (#21)
 
 ### Fixed

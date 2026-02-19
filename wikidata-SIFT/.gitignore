@@ -219,5 +219,8 @@ config/searxng/settings.yml
 # Container volumes
 valkey-data/
 
+# Git worktrees
+.worktrees/
+
 # Track chainlink issue database
 !.chainlink/issues.db
