@@ -89,6 +89,15 @@ Search: "[item_label] [property_label] [value_label]"
    - **supports_claim**: `true`, `false`, or `unknown`
    - Brief summary of what the source says
 
+**External identifier edits** (P2930 INSPIRE-HEP, P496 ORCID, P345 IMDb, P213 ISNI, etc.):
+When the edit changes or adds an external identifier value, check the target service's API or lookup endpoint directly (e.g. `inspirehep.net/api/authors/...`, `orcid.org/...`). But confirming the ID exists is **necessary but not sufficient** — you must also cross-reference the API response against the Wikidata item's other claims to verify it's the same entity. Match on at least two independent facts (e.g. employer + dates, affiliation + advisor, birth year + nationality). A name match alone does not confirm identity.
+
+**Source provenance rules:**
+- Only mark a source as `provenance: verified` if you directly fetched and read it with WebFetch or it was in `prefetched_references`
+- If source A mentions source B but you did not fetch source B, mark B as `provenance: reported` — do NOT treat B's claimed content as verified evidence
+- Never propose a reference URL you haven't actually fetched and confirmed. Citing a URL from a secondary source's bibliography without reading it is citation laundering.
+- If you can only find reported sources, say so in the rationale — this limits the verdict to `verified-low` at best
+
 ### Step 4: Trace (SIFT: Trace) -- Conditional
 
 **Run this step only if:**

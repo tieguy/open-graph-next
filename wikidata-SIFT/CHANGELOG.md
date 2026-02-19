@@ -12,6 +12,12 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- Precheck: flag ontological property mismatches (P31/P279 sanity checks) (#32)
+- SIFT prompt must distinguish between sources actually fetched/read vs sources mentioned by other sources. Don't propose references the tool hasn't verified. Laundering citations through secondary sources is a failure mode. (#16)
+- External ID verification must cross-reference identity against item claims (#30)
+- Fix API access: proper User-Agent on all requests + logged-in session (#27)
+- Resume 50-edit Sonnet 4.6 run (36 remaining) (#29)
+- LabelCache: fall back to non-English labels when English missing (#31)
 - Consider two-stage-fanout model for SIFT-Patrol validation (#20)
 - Execute methodology testing phases 1-2 (#9)
 - Verify P106 (occupation) (#8)

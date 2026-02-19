@@ -1,6 +1,6 @@
 """Tests for SIFT-Patrol Phase 1 pre-processing."""
 
-from sift_precheck import make_verification_question
+from sift_precheck import check_ontological_consistency, make_verification_question
 
 
 def _make_edit(operation, property_label, value_label, item_label=None,
@@ -231,3 +231,123 @@ class TestMakeVerificationQuestion:
             'Is "State Biotechnological University" a correct updated '
             'employer for Serhii Rieznik?'
         )
+
+
+def _make_ontological_edit(prop, value_raw, value_label=None,
+                           existing_p31=None, existing_p279=None):
+    """Build an enriched edit for ontological consistency testing."""
+    claims = {}
+    if existing_p31:
+        claims["P31"] = {
+            "statements": [{"value": qid} for qid in existing_p31]
+        }
+    if existing_p279:
+        claims["P279"] = {
+            "statements": [{"value": qid} for qid in existing_p279]
+        }
+    return {
+        "title": "Q12345",
+        "parsed_edit": {
+            "operation": "wbsetclaim-create",
+            "property": prop,
+            "property_label": "instance of" if prop == "P31" else "subclass of",
+            "value_raw": value_raw,
+            "value_label": value_label or value_raw,
+        },
+        "item": {
+            "label_en": "Test Item",
+            "claims": claims,
+        },
+    }
+
+
+class TestCheckOntologicalConsistency:
+    """Tests for check_ontological_consistency()."""
+
+    def test_no_warnings_for_normal_p31(self):
+        edit = _make_ontological_edit("P31", "Q5", "human")
+        assert check_ontological_consistency(edit) == []
+
+    def test_no_warnings_for_non_ontological_property(self):
+        edit = _make_edit("wbsetclaim-create", "employer", "Acme Corp",
+                          "Some Person")
+        assert check_ontological_consistency(edit) == []
+
+    def test_warns_known_bad_p31_value(self):
+        # Person item getting P31 = external identifier
+        edit = _make_ontological_edit(
+            "P31", "Q19847637", "Wikidata property type for external identifier",
+            existing_p31=["Q5"],
+        )
+        warnings = check_ontological_consistency(edit)
+        assert len(warnings) == 1
+        assert "internal type" in warnings[0]
+
+    def test_warns_p279_on_person_instance(self):
+        # P279 (subclass of) used on a human instance
+        edit = _make_ontological_edit(
+            "P279", "Q515", "city",
+            existing_p31=["Q5"],
+        )
+        warnings = check_ontological_consistency(edit)
+        assert len(warnings) == 1
+        assert "P279" in warnings[0]
+        assert "classes, not instances" in warnings[0]
+
+    def test_warns_p31_human_on_class_item(self):
+        # Setting P31=human on an item that already has P279 (is a class)
+        edit = _make_ontological_edit(
+            "P31", "Q5", "human",
+            existing_p279=["Q7397"],  # software
+        )
+        warnings = check_ontological_consistency(edit)
+        assert len(warnings) == 1
+        assert "class" in warnings[0]
+
+    def test_no_warning_for_p279_on_non_person(self):
+        # P279 on a class item (no P31=Q5) is fine
+        edit = _make_ontological_edit(
+            "P279", "Q7397", "software",
+            existing_p31=["Q35120"],  # entity
+        )
+        warnings = check_ontological_consistency(edit)
+        assert warnings == []
+
+    def test_multiple_warnings(self):
+        # Known-bad value + P279 on person = two warnings
+        edit = _make_ontological_edit(
+            "P279", "Q19847637", "external identifier",
+            existing_p31=["Q5"],
+        )
+        warnings = check_ontological_consistency(edit)
+        assert len(warnings) == 2
+
+    def test_warnings_appended_to_verification_question(self):
+        edit = _make_ontological_edit(
+            "P31", "Q19847637", "external identifier",
+            existing_p31=["Q5"],
+        )
+        question = make_verification_question(edit)
+        assert "WARNING" in question
+        assert 'Is "external identifier"' in question
+
+    def test_no_item_claims_no_crash(self):
+        # Minimal edit with no item claims should not crash
+        edit = _make_ontological_edit("P31", "Q5", "human")
+        edit["item"]["claims"] = {}
+        assert check_ontological_consistency(edit) == []
+
+    def test_no_item_no_crash(self):
+        edit = {
+            "title": "Q12345",
+            "parsed_edit": {
+                "operation": "wbsetclaim-create",
+                "property": "P31",
+                "property_label": "instance of",
+                "value_raw": "Q19847637",
+                "value_label": "external identifier",
+            },
+        }
+        warnings = check_ontological_consistency(edit)
+        # Should still warn about known-bad value even without item context
+        assert len(warnings) == 1
