@@ -12,6 +12,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ### Fixed
 
 ### Changed
+- SIFT verdicts should always include concrete proposed additions when modeling improvements are found, even for verified edits. Not just 'note this' but 'add P1877 (after a work by) → Q47551 (Titian)'. Any classification can carry draft fixes. (#15)
 - Precheck: flag ontological property mismatches (P31/P279 sanity checks) (#32)
 - SIFT prompt must distinguish between sources actually fetched/read vs sources mentioned by other sources. Don't propose references the tool hasn't verified. Laundering citations through secondary sources is a failure mode. (#16)
 - External ID verification must cross-reference identity against item claims (#30)
