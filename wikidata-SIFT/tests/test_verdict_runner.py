@@ -8,16 +8,22 @@ from unittest.mock import MagicMock, patch
 import pytest
 import yaml
 
+import time
+
 from run_verdict_fanout import (
     MAX_TURNS,
     build_edit_context,
+    build_execution_order,
     dispatch_tool_call,
     fetch_generation_cost,
+    load_checkpoint,
     main,
     model_slug,
     run_investigation_phase,
     run_single_verdict,
     run_verdict_phase,
+    run_with_timeout,
+    save_checkpoint,
     save_verdict,
 )
 
@@ -784,3 +790,151 @@ class TestMain:
         captured = capsys.readouterr()
         # Should report 2 edits, not 5
         assert "2 edits" in captured.out or "2" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# TestCheckpoint
+# ---------------------------------------------------------------------------
+
+
+class TestCheckpoint:
+    def test_load_checkpoint_returns_completed_pairs(self, tmp_path):
+        """AC3.1: load_checkpoint returns the set of completed (rcid, model) pairs."""
+        state_path = tmp_path / "fanout-state.yaml"
+        completed = {(12345, "deepseek/deepseek-v3.2"), (67890, "allenai/olmo-3.1-32b-instruct")}
+        save_checkpoint(completed, state_path=state_path)
+
+        loaded = load_checkpoint(state_path=state_path)
+
+        assert loaded == completed
+
+    def test_load_checkpoint_skips_completed_pairs(self, tmp_path):
+        """AC3.1: main() logic skips (rcid, model) pairs that are already completed."""
+        state_path = tmp_path / "fanout-state.yaml"
+        completed = {(12345, "deepseek/deepseek-v3.2")}
+        save_checkpoint(completed, state_path=state_path)
+
+        loaded = load_checkpoint(state_path=state_path)
+
+        # Simulate the skip logic from main()
+        pairs_to_process = [
+            (12345, "deepseek/deepseek-v3.2"),  # already done
+            (12345, "allenai/olmo-3.1-32b-instruct"),  # not done
+        ]
+        remaining = [(rcid, model) for rcid, model in pairs_to_process if (rcid, model) not in loaded]
+        assert remaining == [(12345, "allenai/olmo-3.1-32b-instruct")]
+
+    def test_save_checkpoint_persists_pairs_incrementally(self, tmp_path):
+        """AC3.2: save_checkpoint writes the pair; adding a second pair yields both."""
+        state_path = tmp_path / "fanout-state.yaml"
+
+        # Save one pair
+        completed = {(11111, "deepseek/deepseek-v3.2")}
+        save_checkpoint(completed, state_path=state_path)
+
+        with open(state_path) as f:
+            data = yaml.safe_load(f)
+        assert len(data["completed"]) == 1
+        assert data["completed"][0]["rcid"] == 11111
+
+        # Add a second pair
+        completed.add((22222, "allenai/olmo-3.1-32b-instruct"))
+        save_checkpoint(completed, state_path=state_path)
+
+        with open(state_path) as f:
+            data = yaml.safe_load(f)
+        rcids = {entry["rcid"] for entry in data["completed"]}
+        assert rcids == {11111, 22222}
+
+    def test_load_checkpoint_missing_file_returns_empty_set(self, tmp_path):
+        """load_checkpoint on a nonexistent path returns an empty set."""
+        state_path = tmp_path / "does-not-exist.yaml"
+        result = load_checkpoint(state_path=state_path)
+        assert result == set()
+
+    def test_load_checkpoint_empty_file_returns_empty_set(self, tmp_path):
+        """load_checkpoint on an empty YAML file returns an empty set."""
+        state_path = tmp_path / "empty.yaml"
+        state_path.write_text("")
+        result = load_checkpoint(state_path=state_path)
+        assert result == set()
+
+
+# ---------------------------------------------------------------------------
+# TestTimeout
+# ---------------------------------------------------------------------------
+
+
+class TestTimeout:
+    def test_function_exceeding_timeout_returns_timed_out_true(self):
+        """AC3.3: A function that sleeps longer than timeout_secs returns timed_out=True."""
+        def slow_func():
+            time.sleep(5)
+            return "done"
+
+        result, timed_out = run_with_timeout(slow_func, args=(), timeout_secs=1)
+
+        assert timed_out is True
+        assert result is None
+
+    def test_function_within_timeout_returns_timed_out_false(self):
+        """Function that returns quickly has timed_out=False and correct result."""
+        def fast_func(x, y):
+            return x + y
+
+        result, timed_out = run_with_timeout(fast_func, args=(3, 4), timeout_secs=5)
+
+        assert timed_out is False
+        assert result == 7
+
+    def test_exception_from_function_is_reraised(self):
+        """Exception raised inside the function is re-raised by run_with_timeout."""
+        def failing_func():
+            raise ValueError("something went wrong")
+
+        with pytest.raises(ValueError, match="something went wrong"):
+            run_with_timeout(failing_func, args=(), timeout_secs=5)
+
+
+# ---------------------------------------------------------------------------
+# TestBuildExecutionOrder
+# ---------------------------------------------------------------------------
+
+
+class TestBuildExecutionOrder:
+    def test_interleaved_order_with_two_edits_and_three_models(self):
+        """AC3.4: build_execution_order returns edit-interleaved pairs."""
+        edit1 = {"rcid": 1, "title": "Q1"}
+        edit2 = {"rcid": 2, "title": "Q2"}
+        model_a = "vendor/model-a"
+        model_b = "vendor/model-b"
+        model_c = "vendor/model-c"
+
+        result = build_execution_order([edit1, edit2], [model_a, model_b, model_c])
+
+        expected = [
+            (edit1, model_a),
+            (edit1, model_b),
+            (edit1, model_c),
+            (edit2, model_a),
+            (edit2, model_b),
+            (edit2, model_c),
+        ]
+        assert result == expected
+
+    def test_empty_edits_returns_empty_list(self):
+        """build_execution_order with no edits returns empty list."""
+        result = build_execution_order([], ["vendor/model-a"])
+        assert result == []
+
+    def test_empty_models_returns_empty_list(self):
+        """build_execution_order with no models returns empty list."""
+        result = build_execution_order([{"rcid": 1}], [])
+        assert result == []
+
+    def test_single_edit_single_model(self):
+        """Single edit and single model returns one pair."""
+        edit = {"rcid": 99}
+        model = "vendor/only-model"
+        result = build_execution_order([edit], [model])
+        assert result == [(edit, model)]

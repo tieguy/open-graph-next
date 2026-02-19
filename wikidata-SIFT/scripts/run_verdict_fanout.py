@@ -4,6 +4,7 @@
 import argparse
 import json
 import os
+import threading
 import time
 from datetime import datetime, timezone
 from pathlib import Path
@@ -66,6 +67,7 @@ TOOL_DEFINITIONS = [
 MAX_TURNS = 15
 VERDICT_DIR = Path("logs/wikidata-patrol-experiment/verdicts-fanout")
 PROMPT_PATH = Path("config/sift_prompt_openrouter.md")
+STATE_PATH = Path("logs/wikidata-patrol-experiment/fanout-state.yaml")
 
 VERDICT_SCHEMA = {
     "type": "object",
@@ -509,6 +511,86 @@ def save_verdict(verdict, edit, model, verdict_dir=None):
     return out_path
 
 
+def load_checkpoint(state_path=None):
+    """Load checkpoint state from YAML.
+
+    Returns:
+        set of (edit_rcid, model) tuples that have been completed.
+    """
+    path = state_path or STATE_PATH
+    if not path.exists():
+        return set()
+    with open(path) as f:
+        data = yaml.safe_load(f)
+    if not data or "completed" not in data:
+        return set()
+    return {(entry["rcid"], entry["model"]) for entry in data["completed"]}
+
+
+def save_checkpoint(completed, state_path=None):
+    """Save checkpoint state to YAML.
+
+    Args:
+        completed: set of (edit_rcid, model) tuples.
+    """
+    path = state_path or STATE_PATH
+    path.parent.mkdir(parents=True, exist_ok=True)
+    entries = [{"rcid": rcid, "model": model} for rcid, model in sorted(completed)]
+    with open(path, "w") as f:
+        yaml.safe_dump({"completed": entries}, f, default_flow_style=False)
+
+
+def run_with_timeout(func, args, timeout_secs=180):
+    """Run func(*args) with a wall-clock timeout.
+
+    Returns:
+        (result, timed_out) tuple. If timed out, result is None.
+    """
+    result = [None]
+    exception = [None]
+
+    def target():
+        try:
+            result[0] = func(*args)
+        except Exception as e:
+            exception[0] = e
+
+    thread = threading.Thread(target=target)
+    thread.daemon = True
+    thread.start()
+    thread.join(timeout=timeout_secs)
+
+    if thread.is_alive():
+        # Thread still running — timed out.
+        # NOTE: The daemon thread continues running in the background
+        # (making API calls, consuming tokens) until it completes naturally
+        # or the process exits. This is a "move on" mechanism, not a
+        # cancellation mechanism. For long investigation loops, multiple
+        # timed-out threads could run in parallel. A more robust approach
+        # would check a threading.Event flag between turns in the
+        # investigation loop, but the simple approach is sufficient for
+        # the initial experiment.
+        return None, True
+
+    if exception[0]:
+        raise exception[0]
+
+    return result[0], False
+
+
+def build_execution_order(edits, models):
+    """Build interleaved (edit, model) pairs for comparable model coverage.
+
+    Returns list of (edit, model) tuples ordered as:
+    (edit_1, model_A), (edit_1, model_B), ..., (edit_2, model_A), ...
+    """
+    pairs = []
+    for edit in edits:
+        for model in models:
+            pairs.append((edit, model))
+    return pairs
+
+
 def main():
     """CLI entry point for verdict fanout."""
     parser = argparse.ArgumentParser(
@@ -560,21 +642,67 @@ def main():
         timeout=120.0,
     )
 
-    # Process each edit x model pair
-    for edit in edits:
-        title = edit.get("title", "?")
-        parsed = edit.get("parsed_edit") or {}
-        prop = parsed.get("property", "?")
-        print(f"\nProcessing {title} {prop}...")
+    # Load checkpoint
+    completed = load_checkpoint()
 
-        for model in models_to_use:
-            print(f"  Model: {model}")
-            try:
-                verdict = run_single_verdict(client, model, edit, blocked_domains, api_key)
-                out_path = save_verdict(verdict, edit, model)
-                print(f"  Saved: {out_path} (verdict={verdict.get('verdict')})")
-            except Exception as e:
-                print(f"  ERROR for {model}: {e}")
+    # Build interleaved execution order
+    pairs = build_execution_order(edits, models_to_use)
+    total = len(pairs)
+
+    skipped_count = 0
+    timeout_count = 0
+    error_count = 0
+    completed_count = 0
+
+    for i, (edit, model) in enumerate(pairs):
+        rcid = edit.get("rcid")
+
+        # Skip already-completed pairs
+        if (rcid, model) in completed:
+            skipped_count += 1
+            continue
+
+        title = edit.get("title", "?")
+        print(f"[{i+1}/{total}] {title} {model_slug(model)}... ", end="", flush=True)
+
+        try:
+            verdict, timed_out = run_with_timeout(
+                run_single_verdict,
+                (client, model, edit, blocked_domains, api_key),
+                timeout_secs=180,
+            )
+
+            if timed_out:
+                timeout_count += 1
+                print("TIMEOUT")
+                # Create a minimal timeout verdict
+                verdict = {
+                    "timestamp": datetime.now(timezone.utc).isoformat(),
+                    "model": model,
+                    "rcid": rcid,
+                    "revid": edit.get("revid"),
+                    "title": title,
+                    "timeout": True,
+                    "verdict": None,
+                    "rationale": None,
+                    "sources": [],
+                }
+            else:
+                completed_count += 1
+                print(verdict.get("verdict") or "no verdict")
+
+            save_verdict(verdict, edit, model)
+            completed.add((rcid, model))
+            save_checkpoint(completed)
+
+        except Exception as e:
+            error_count += 1
+            print(f"ERROR: {e}")
+
+    print(
+        f"\nDone. completed={completed_count}, skipped={skipped_count}, "
+        f"timeout={timeout_count}, errors={error_count}"
+    )
 
 
 if __name__ == "__main__":
