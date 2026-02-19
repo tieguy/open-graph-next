@@ -22,13 +22,21 @@ from tool_executor import web_search, web_fetch, load_blocked_domains
 # Context window limits per model (for monitoring/warnings)
 CONTEXT_LIMITS = {
     "nvidia/nemotron-3-nano-30b-a3b": 262_000,
+    "mistralai/mistral-small-3.2-24b-instruct": 131_000,
     "allenai/olmo-3.1-32b-instruct": 65_000,
     "deepseek/deepseek-v3.2": 164_000,
     "anthropic/claude-4.5-haiku-20251001": 200_000,
 }
 
+# Per-model verdict timeout overrides (seconds). Models not listed use DEFAULT_TIMEOUT.
+MODEL_TIMEOUTS = {
+    "nvidia/nemotron-3-nano-30b-a3b": 300,
+}
+DEFAULT_TIMEOUT = 180
+
 MODELS = [
     "nvidia/nemotron-3-nano-30b-a3b",
+    "mistralai/mistral-small-3.2-24b-instruct",
     "allenai/olmo-3.1-32b-instruct",
     "deepseek/deepseek-v3.2",
     "anthropic/claude-4.5-haiku-20251001",
@@ -246,11 +254,14 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
             print(f"WARNING: {model} investigation cancelled by timeout event after {turn} turns")
             return messages, total_prompt_tokens, total_completion_tokens, response_ids, "cancelled", turn, total_cost
 
+        # Force tool use on the first turn so models actually investigate
+        # rather than answering from parametric knowledge alone.
+        tc = "required" if turn == 0 else "auto"
         response = client.chat.completions.create(
             model=model,
             messages=messages,
             tools=TOOL_DEFINITIONS,
-            tool_choice="auto",
+            tool_choice=tc,
         )
 
         # Track usage and inline cost
@@ -354,8 +365,9 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    # Some providers (e.g. DeepInfra for Nemotron) don't support json_object
-    # response format; fall back to prompt-only JSON extraction for those models.
+    # Some providers don't support json_object response format; fall back to
+    # prompt-only JSON extraction for those models.
+    # DeepInfra doesn't support json_object for Nemotron's Mamba2 architecture
     SKIP_JSON_FORMAT = {"nvidia/nemotron-3-nano-30b-a3b"}
     create_kwargs = dict(model=model, messages=messages)
     if model not in SKIP_JSON_FORMAT:
@@ -689,10 +701,11 @@ def main():
         print(f"[{i+1}/{total}] {title} {model_slug(model)}... ", end="", flush=True)
 
         try:
+            timeout = MODEL_TIMEOUTS.get(model, DEFAULT_TIMEOUT)
             verdict, timed_out = run_with_timeout(
                 run_single_verdict,
                 (client, model, edit, blocked_domains, api_key),
-                timeout_secs=180,
+                timeout_secs=timeout,
             )
 
             if timed_out:
