@@ -2,13 +2,12 @@
 
 import json
 import sys
+import time
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import pytest
 import yaml
-
-import time
 
 from run_verdict_fanout import (
     MAX_TURNS,
