@@ -1,0 +1,42 @@
+# Domains that are blocked (403 Anthropic infrastructure) or unsuitable
+# as Wikidata reference sources.
+#
+# Used by fetch_patrol_edits.py --enrich to skip prefetching these URLs
+# and by the SIFT-Patrol skill to avoid wasting tokens on unreachable sites.
+
+domains:
+  - domain: wikipedia.org
+    reason: circular
+    note: Wikipedia cites Wikidata; using it as a Wikidata source is circular
+
+  - domain: britannica.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: museodelprado.es
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: imdb.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: linkedin.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: facebook.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: instagram.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: twitter.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure
+
+  - domain: x.com
+    reason: blocked
+    note: Returns 403 to Anthropic infrastructure

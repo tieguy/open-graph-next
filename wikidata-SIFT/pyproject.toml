@@ -5,6 +5,7 @@ requires-python = ">=3.13"
 dependencies = [
     "pywikibot>=10.7",
     "pyyaml",
+    "trafilatura>=2.0",
 ]
 
 [tool.pytest.ini_options]

@@ -26,6 +26,7 @@ The edit record contains:
 - `removed_claim`: for removal edits, the deleted claim
 - `user`, `tags`, `timestamp`: editor context (for situational awareness only)
 - `group_id`, `group_seq`, `group_size`: edit session context
+- `prefetched_references`: pre-fetched reference URL content (dict mapping URL to `{status, extracted_text, error, fetch_date}`). Present when enrichment ran with prefetching enabled.
 
 ## Workflow
 
@@ -44,12 +45,20 @@ Formulate your understanding in one sentence before proceeding.
 Check whether the edit's claim has cited references. Look in `item.claims.[property].statements[].references` for the relevant statement.
 
 **If references exist on the claim:**
-1. Use WebFetch to read each reference URL
+1. Check `prefetched_references` first. For each reference URL:
+   - If `prefetched_references[url].extracted_text` exists, use it directly instead of WebFetch
+   - If `prefetched_references[url].error` is `"blocked_domain"`, do NOT attempt WebFetch — record as "unreachable (blocked domain)" and move on
+   - If `prefetched_references[url].status` is an HTTP error (403, 404, etc.), do NOT retry with WebFetch
+   - Only use WebFetch for URLs not present in `prefetched_references`
 2. For each reference, determine:
    - Is the URL reachable?
    - Does the content actually support the specific claim being made?
    - Is the source authoritative for this type of claim?
 3. Record your assessment for each reference
+
+**Sources to avoid:**
+- **Wikipedia** (`*.wikipedia.org`): NEVER use as a Wikidata reference source. Wikipedia cites Wikidata, so using it as a source is circular. If a claim's only reference is a Wikipedia URL, treat it as "no reference."
+- **Known blocked domains**: Sites that block automated access (Britannica, IMDb, LinkedIn, social media). If a reference points to a blocked domain, record as "unreachable (blocked domain)" and do not waste time retrying.
 
 **If no references exist:**
 - Note the gap: "No references cited for this claim"
