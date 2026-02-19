@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-02-17
+Last updated: 2026-02-19
 
 ## Project Purpose
 
@@ -28,7 +28,7 @@ All fact-checking output should be logged in structured YAML format with timesta
 
 - `logs/wikidata-enhance/` -- Item enhancement logs (see `skills/wikidata-enhance-and-check/SKILL.md` Step 13 for schema)
 - `logs/wikidata-methodology-testing/` -- SIFT methodology test results
-- `logs/wikidata-patrol-experiment/` -- SIFT-Patrol experiment (snapshots in `snapshot/`, control group in `control/`)
+- `logs/wikidata-patrol-experiment/` -- SIFT-Patrol experiment (snapshots in `snapshot/`, control group in `control/`, multi-model verdicts in `verdicts-fanout/`)
 
 ### 4. Respect Wikidata's data model
 
@@ -125,6 +125,17 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
   - Uses `pwb_http.fetch` + `Special:EntityData` for revision-specific entity fetching (pywikibot's API layer doesn't support revision-specific fetches)
   - `LabelCache` resolves Q-ids and P-ids to English labels with in-memory caching
   - Enriched snapshots include `parsed_edit`, `item`, and `removed_claim` keys per edit
+- `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches, truncates pages to 15k chars.
+- `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
+  - Runs edits from enriched snapshots across configurable model list (default: Nemotron, OLMo, DeepSeek, Claude Haiku)
+  - Interleaved execution order (all models per edit before moving to next edit)
+  - Checkpoint/resume via `logs/wikidata-patrol-experiment/fanout-state.yaml`
+  - Per-verdict 180s wall-clock timeout
+  - Cost tracking via OpenRouter generation endpoint
+  - Verdicts saved to `logs/wikidata-patrol-experiment/verdicts-fanout/`
+- `config/sift_prompt_openrouter.md` -- Model-agnostic SIFT prompt for the verdict fanout (no Claude-specific features)
+- `docker-compose.yml` -- SearXNG + Valkey containers for local web search (SearXNG on `localhost:8080`, config in `config/searxng/`)
+- Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
 - Skill for edit-centric SIFT verification is planned for Phase 3.
 
 ## Working with pywikibot
@@ -183,6 +194,15 @@ python scripts/fetch_patrol_edits.py -u 5 -c 5 --enrich  # with enrichment
 uv run pytest                    # all tests
 uv run pytest tests/test_enrichment.py  # specific test file
 uv run pytest -k "test_name"     # specific test by name
+
+# Start SearXNG for verdict fanout web search
+docker compose up -d                # start SearXNG + Valkey
+docker compose down                 # stop containers
+
+# Run verdict fanout (requires OPENROUTER_API_KEY and SearXNG running)
+python scripts/run_verdict_fanout.py --snapshot logs/wikidata-patrol-experiment/snapshot/SNAPSHOT.yaml --dry-run
+python scripts/run_verdict_fanout.py --snapshot SNAPSHOT.yaml --limit 3  # first 3 edits
+python scripts/run_verdict_fanout.py --snapshot SNAPSHOT.yaml --models deepseek/deepseek-v3.2  # single model
 
 # Chainlink basics
 chainlink list              # see all issues
