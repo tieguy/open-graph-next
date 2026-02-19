@@ -2,6 +2,7 @@
 
 import json
 import sys
+import threading
 import time
 from pathlib import Path
 from unittest.mock import MagicMock, patch
@@ -289,6 +290,30 @@ class TestRunInvestigationPhase:
         assert prompt_tokens == 100
         assert completion_tokens == 50
         assert turns == 1
+
+    def test_pre_set_cancel_event_returns_cancelled_status(self):
+        """A pre-set cancel_event causes immediate exit with 'cancelled' status."""
+        client = MagicMock()
+        cancel_event = threading.Event()
+        cancel_event.set()  # Pre-set before the call
+
+        initial_messages = [
+            {"role": "system", "content": "You are SIFT."},
+            {"role": "user", "content": "Check this edit."},
+        ]
+
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
+            run_investigation_phase(
+                client, "deepseek/deepseek-v3.2", initial_messages,
+                cancel_event=cancel_event
+            )
+
+        assert status == "cancelled"
+        # No API calls made — cancelled before first turn
+        assert client.chat.completions.create.call_count == 0
+        assert turns == 0
+        assert prompt_tokens == 0
+        assert completion_tokens == 0
 
 
 # ---------------------------------------------------------------------------
@@ -902,6 +927,26 @@ class TestTimeout:
 
         with pytest.raises(ValueError, match="something went wrong"):
             run_with_timeout(failing_func, args=(), timeout_secs=5)
+
+    def test_cancel_event_is_set_after_timeout_for_accepting_func(self):
+        """After timeout, cancel_event is set so a cooperative func can stop gracefully."""
+        captured_event = []
+
+        def accepting_func(cancel_event=None):
+            # Capture the event, then block until it's set (simulating cooperative loop)
+            captured_event.append(cancel_event)
+            # Block long enough to trigger timeout
+            time.sleep(10)
+            return "done"
+
+        result, timed_out = run_with_timeout(accepting_func, args=(), timeout_secs=1)
+
+        assert timed_out is True
+        assert result is None
+        # The cancel_event should have been passed to the function and then set on timeout
+        assert len(captured_event) == 1
+        assert captured_event[0] is not None
+        assert captured_event[0].is_set()
 
 
 # ---------------------------------------------------------------------------
