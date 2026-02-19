@@ -53,13 +53,26 @@ class TestLabelCache:
 
         assert mock_pwb.ItemPage.call_count == 1
 
-    def test_fallback_to_entity_id_when_no_english_label(self, mock_site):
+    def test_fallback_to_non_english_label(self, mock_site):
         cache = LabelCache(mock_site)
 
         with patch("fetch_patrol_edits.pywikibot") as mock_pwb:
             mock_item = MagicMock()
             mock_item.labels = {"de": "Mensch"}  # German only
             mock_item.descriptions = {"de": "Bezeichnung"}
+            mock_pwb.ItemPage.return_value = mock_item
+
+            label = cache.resolve("Q5")
+
+        assert label == "Mensch [de]"
+
+    def test_fallback_to_entity_id_when_no_known_language(self, mock_site):
+        cache = LabelCache(mock_site)
+
+        with patch("fetch_patrol_edits.pywikibot") as mock_pwb:
+            mock_item = MagicMock()
+            mock_item.labels = {"xz": "something"}  # unknown language
+            mock_item.descriptions = {}
             mock_pwb.ItemPage.return_value = mock_item
 
             label = cache.resolve("Q5")

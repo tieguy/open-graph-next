@@ -11,9 +11,14 @@ from fetch_patrol_edits import (
     compute_edit_diff,
     enrich_edit,
     enrich_edit_group,
+    extract_reference_urls,
     find_removed_claims,
     group_edits,
+    is_blocked_domain,
     LabelCache,
+    load_blocked_domains,
+    prefetch_edit_references,
+    prefetch_reference_url,
 )
 
 
@@ -803,6 +808,38 @@ class TestResolveBatch:
         cache.resolve_batch([])
         repo.simple_request.assert_not_called()
 
+    def test_fallback_to_non_english_label(self, mock_site):
+        repo = self._setup_repo_response(mock_site, {
+            "entities": {
+                "Q1283344": {
+                    "labels": {"de": {"value": "Edelreis"}},
+                    "descriptions": {},
+                },
+                "Q5": {
+                    "labels": {"en": {"value": "human"}},
+                    "descriptions": {"en": {"value": "common name"}},
+                },
+            }
+        })
+
+        cache = LabelCache(mock_site)
+        cache.resolve_batch(["Q1283344", "Q5"])
+
+        assert cache.resolve("Q1283344") == "Edelreis [de]"
+        assert cache.resolve("Q5") == "human"
+
+    def test_fallback_to_entity_id_when_no_labels(self, mock_site):
+        repo = self._setup_repo_response(mock_site, {
+            "entities": {
+                "Q999": {"labels": {}, "descriptions": {}},
+            }
+        })
+
+        cache = LabelCache(mock_site)
+        cache.resolve_batch(["Q999"])
+
+        assert cache.resolve("Q999") == "Q999"
+
 
 class TestEnrichmentUsesBatch:
     def _setup_repo_response(self, mock_site, response_data):
@@ -861,3 +898,471 @@ class TestEnrichmentUsesBatch:
 
         # Entity's own QID should be primed with its label
         assert cache.resolve("Q136291923") == "Some Person"
+
+
+def _make_ref_block(url):
+    """Helper to build a reference block with a P854 URL."""
+    return {
+        "P854": {
+            "property_label": "reference URL",
+            "value": url,
+            "value_label": None,
+        }
+    }
+
+
+class TestExtractReferenceUrls:
+    def test_extracts_p854_from_new_value(self):
+        edit_diff = {
+            "type": "statement_added",
+            "new_value": {
+                "references": [_make_ref_block("https://example.com/source")],
+            },
+            "old_value": None,
+        }
+        urls = extract_reference_urls(edit_diff)
+        assert urls == {"https://example.com/source"}
+
+    def test_extracts_p854_from_old_value(self):
+        edit_diff = {
+            "type": "statement_removed",
+            "old_value": {
+                "references": [_make_ref_block("https://example.com/old")],
+            },
+            "new_value": None,
+        }
+        urls = extract_reference_urls(edit_diff)
+        assert urls == {"https://example.com/old"}
+
+    def test_extracts_from_both_values(self):
+        edit_diff = {
+            "type": "reference_changed",
+            "old_value": {
+                "references": [_make_ref_block("https://example.com/old")],
+            },
+            "new_value": {
+                "references": [_make_ref_block("https://example.com/new")],
+            },
+        }
+        urls = extract_reference_urls(edit_diff)
+        assert urls == {"https://example.com/old", "https://example.com/new"}
+
+    def test_no_references(self):
+        edit_diff = {
+            "type": "statement_added",
+            "new_value": {"references": []},
+            "old_value": None,
+        }
+        urls = extract_reference_urls(edit_diff)
+        assert urls == set()
+
+    def test_non_p854_refs_ignored(self):
+        edit_diff = {
+            "type": "statement_added",
+            "new_value": {
+                "references": [{
+                    "P248": {
+                        "property_label": "stated in",
+                        "value": "Q36578",
+                        "value_label": "GND",
+                    }
+                }],
+            },
+            "old_value": None,
+        }
+        urls = extract_reference_urls(edit_diff)
+        assert urls == set()
+
+    def test_error_edit_diff(self):
+        edit_diff = {"error": "Deleted revision"}
+        urls = extract_reference_urls(edit_diff)
+        assert urls == set()
+
+    def test_none_edit_diff(self):
+        urls = extract_reference_urls(None)
+        assert urls == set()
+
+
+class TestIsBlockedDomain:
+    def test_exact_match(self):
+        blocked = {"wikipedia.org", "imdb.com"}
+        assert is_blocked_domain("https://wikipedia.org/wiki/Test", blocked)
+
+    def test_subdomain_match(self):
+        blocked = {"wikipedia.org"}
+        assert is_blocked_domain("https://en.wikipedia.org/wiki/Test", blocked)
+
+    def test_no_match(self):
+        blocked = {"wikipedia.org", "imdb.com"}
+        assert not is_blocked_domain("https://example.com/page", blocked)
+
+    def test_empty_blocked_set(self):
+        assert not is_blocked_domain("https://wikipedia.org/wiki/Test", set())
+
+    def test_invalid_url(self):
+        blocked = {"wikipedia.org"}
+        assert not is_blocked_domain("not-a-url", blocked)
+
+    def test_partial_domain_no_match(self):
+        """fakewikipedia.org should NOT match wikipedia.org."""
+        blocked = {"wikipedia.org"}
+        assert not is_blocked_domain("https://fakewikipedia.org/page", blocked)
+
+
+class TestPrefetchReferenceUrl:
+    @patch("fetch_patrol_edits.pwb_http")
+    @patch("fetch_patrol_edits.trafilatura")
+    def test_success(self, mock_traf, mock_http):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.text = "<html><body>Article text here</body></html>"
+        mock_http.fetch.return_value = mock_resp
+        mock_traf.extract.return_value = "Article text here"
+
+        result = prefetch_reference_url("https://example.com/article")
+
+        assert result["status"] == 200
+        assert result["extracted_text"] == "Article text here"
+        assert result["error"] is None
+        assert result["url"] == "https://example.com/article"
+
+    @patch("fetch_patrol_edits.pwb_http")
+    @patch("fetch_patrol_edits.trafilatura")
+    def test_403_error(self, mock_traf, mock_http):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 403
+        mock_http.fetch.return_value = mock_resp
+
+        result = prefetch_reference_url("https://blocked.com/page")
+
+        assert result["status"] == 403
+        assert result["extracted_text"] is None
+        assert result["error"] == "HTTP 403"
+
+    @patch("fetch_patrol_edits.pwb_http")
+    @patch("fetch_patrol_edits.trafilatura")
+    def test_timeout(self, mock_traf, mock_http):
+        mock_http.fetch.side_effect = Exception("Connection timed out")
+
+        result = prefetch_reference_url("https://slow.com/page")
+
+        assert result["status"] is None
+        assert result["extracted_text"] is None
+        assert "timed out" in result["error"]
+
+    @patch("fetch_patrol_edits.pwb_http")
+    @patch("fetch_patrol_edits.trafilatura")
+    def test_empty_extraction(self, mock_traf, mock_http):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.text = "<html><body></body></html>"
+        mock_http.fetch.return_value = mock_resp
+        mock_traf.extract.return_value = None
+
+        result = prefetch_reference_url("https://example.com/empty")
+
+        assert result["status"] == 200
+        assert result["extracted_text"] is None
+        assert result["error"] == "extraction_empty"
+
+    @patch("fetch_patrol_edits.pwb_http")
+    @patch("fetch_patrol_edits.trafilatura")
+    def test_long_text_preserved(self, mock_traf, mock_http):
+        mock_resp = MagicMock()
+        mock_resp.status_code = 200
+        mock_resp.text = "<html><body>Long text</body></html>"
+        mock_http.fetch.return_value = mock_resp
+        mock_traf.extract.return_value = "x" * 10000
+
+        result = prefetch_reference_url("https://example.com/long")
+
+        assert len(result["extracted_text"]) == 10000
+        assert result["error"] is None
+
+
+class TestPrefetchEditReferences:
+    @patch("fetch_patrol_edits.prefetch_reference_url")
+    def test_blocked_domain_skipped(self, mock_prefetch):
+        edit = {
+            "edit_diff": {
+                "type": "statement_added",
+                "new_value": {
+                    "references": [_make_ref_block("https://en.wikipedia.org/wiki/Test")],
+                },
+                "old_value": None,
+            }
+        }
+        blocked = {"wikipedia.org"}
+        results = prefetch_edit_references(edit, blocked)
+
+        assert "https://en.wikipedia.org/wiki/Test" in results
+        assert results["https://en.wikipedia.org/wiki/Test"]["error"] == "blocked_domain"
+        mock_prefetch.assert_not_called()
+
+    @patch("fetch_patrol_edits.prefetch_reference_url")
+    @patch("fetch_patrol_edits.time")
+    def test_mixed_urls(self, mock_time, mock_prefetch):
+        mock_prefetch.return_value = {
+            "url": "https://example.com/source",
+            "status": 200,
+            "extracted_text": "Some text",
+            "error": None,
+            "fetch_date": "2026-02-19T00:00:00+00:00",
+        }
+        edit = {
+            "edit_diff": {
+                "type": "reference_changed",
+                "new_value": {
+                    "references": [_make_ref_block("https://example.com/source")],
+                },
+                "old_value": {
+                    "references": [_make_ref_block("https://en.wikipedia.org/wiki/Old")],
+                },
+            }
+        }
+        blocked = {"wikipedia.org"}
+        results = prefetch_edit_references(edit, blocked)
+
+        assert results["https://en.wikipedia.org/wiki/Old"]["error"] == "blocked_domain"
+        assert results["https://example.com/source"]["status"] == 200
+        mock_prefetch.assert_called_once_with("https://example.com/source")
+
+    def test_no_edit_diff(self):
+        edit = {"edit_diff": None}
+        results = prefetch_edit_references(edit, set())
+        assert results == {}
+
+    def test_error_edit_diff(self):
+        edit = {"edit_diff": {"error": "fetch failed"}}
+        results = prefetch_edit_references(edit, set())
+        assert results == {}
+
+
+class TestLoadBlockedDomains:
+    def test_loads_valid_file(self, tmp_path):
+        config = tmp_path / "blocked.yaml"
+        config.write_text(
+            "domains:\n"
+            "  - domain: wikipedia.org\n"
+            "    reason: circular\n"
+            "  - domain: imdb.com\n"
+            "    reason: blocked\n"
+        )
+        domains = load_blocked_domains(config)
+        assert domains == {"wikipedia.org", "imdb.com"}
+
+    def test_missing_file(self, tmp_path):
+        domains = load_blocked_domains(tmp_path / "nonexistent.yaml")
+        assert domains == set()
+
+    def test_empty_domains(self, tmp_path):
+        config = tmp_path / "blocked.yaml"
+        config.write_text("domains: []\n")
+        domains = load_blocked_domains(config)
+        assert domains == set()
+
+    def test_default_config_path(self):
+        """Default path should resolve to config/blocked_domains.yaml."""
+        domains = load_blocked_domains()
+        # Should load without error; actual content depends on the config file
+        assert isinstance(domains, set)
+        assert "wikipedia.org" in domains
+
+
+class TestEnrichEditGroupPrefetch:
+    @patch("fetch_patrol_edits.prefetch_reference_url")
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    @patch("fetch_patrol_edits.time")
+    def test_prefetch_adds_references(
+        self, mock_time, mock_fetch, mock_prefetch, mock_site
+    ):
+        old_entity = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {},
+        }
+        new_entity = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {
+                "P106": [{
+                    "id": "s1",
+                    "mainsnak": {
+                        "snaktype": "value",
+                        "property": "P106",
+                        "datavalue": {
+                            "type": "wikibase-entityid",
+                            "value": {"entity-type": "item", "id": "Q42", "numeric-id": 42},
+                        },
+                    },
+                    "rank": "normal",
+                    "references": [{
+                        "snaks": {
+                            "P854": [{
+                                "snaktype": "value",
+                                "datavalue": {"type": "string", "value": "https://example.com/ref"},
+                            }]
+                        }
+                    }],
+                    "qualifiers": {},
+                }],
+            },
+        }
+
+        def fetch_side_effect(qid, revid):
+            return {100: old_entity, 200: new_entity}[revid]
+
+        mock_fetch.side_effect = fetch_side_effect
+        mock_prefetch.return_value = {
+            "url": "https://example.com/ref",
+            "status": 200,
+            "extracted_text": "Relevant text",
+            "error": None,
+            "fetch_date": "2026-02-19T00:00:00+00:00",
+        }
+
+        group = [{
+            "title": "Q42", "user": "Alice",
+            "revid": 200, "old_revid": 100,
+            "comment": "/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q42]]",
+            "tags": [],
+        }]
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+        cache.prime("P854", "reference URL")
+
+        enrich_edit_group(group, cache, prefetch=True, blocked_domains=set())
+
+        assert "prefetched_references" in group[0]
+        refs = group[0]["prefetched_references"]
+        assert "https://example.com/ref" in refs
+        assert refs["https://example.com/ref"]["extracted_text"] == "Relevant text"
+
+    @patch("fetch_patrol_edits.prefetch_reference_url")
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    @patch("fetch_patrol_edits.time")
+    def test_prefetch_false_skips(
+        self, mock_time, mock_fetch, mock_prefetch, mock_site
+    ):
+        entity = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {},
+        }
+        mock_fetch.return_value = entity
+
+        group = [{
+            "title": "Q42", "user": "Alice",
+            "revid": 200, "old_revid": 100,
+            "comment": "/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q42]]",
+            "tags": [],
+        }]
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+
+        enrich_edit_group(group, cache, prefetch=False)
+
+        assert "prefetched_references" not in group[0]
+        mock_prefetch.assert_not_called()
+
+    @patch("fetch_patrol_edits.prefetch_reference_url")
+    @patch("fetch_patrol_edits.fetch_entity_at_revision")
+    @patch("fetch_patrol_edits.time")
+    def test_deduplication_across_group(
+        self, mock_time, mock_fetch, mock_prefetch, mock_site
+    ):
+        """Same URL in two edits should only be fetched once."""
+        ref_claim = {
+            "id": "s1",
+            "mainsnak": {
+                "snaktype": "value",
+                "property": "P106",
+                "datavalue": {
+                    "type": "wikibase-entityid",
+                    "value": {"entity-type": "item", "id": "Q42", "numeric-id": 42},
+                },
+            },
+            "rank": "normal",
+            "references": [{
+                "snaks": {
+                    "P854": [{
+                        "snaktype": "value",
+                        "datavalue": {"type": "string", "value": "https://example.com/shared"},
+                    }]
+                }
+            }],
+            "qualifiers": {},
+        }
+
+        entity_v0 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {},
+        }
+        entity_v1 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {"P106": [ref_claim]},
+        }
+        entity_v2 = {
+            "labels": {"en": {"language": "en", "value": "Test"}},
+            "descriptions": {},
+            "claims": {"P106": [{
+                **ref_claim,
+                "mainsnak": {
+                    "snaktype": "value",
+                    "property": "P106",
+                    "datavalue": {
+                        "type": "wikibase-entityid",
+                        "value": {"entity-type": "item", "id": "Q5", "numeric-id": 5},
+                    },
+                },
+            }]},
+        }
+
+        def fetch_side_effect(qid, revid):
+            return {100: entity_v0, 200: entity_v1, 300: entity_v2}[revid]
+
+        mock_fetch.side_effect = fetch_side_effect
+        mock_prefetch.return_value = {
+            "url": "https://example.com/shared",
+            "status": 200,
+            "extracted_text": "Shared text",
+            "error": None,
+            "fetch_date": "2026-02-19T00:00:00+00:00",
+        }
+
+        group = [
+            {
+                "title": "Q42", "user": "Alice",
+                "revid": 200, "old_revid": 100,
+                "comment": "/* wbsetclaim-create:2||1 */ [[Property:P106]]: [[Q42]]",
+                "tags": [],
+            },
+            {
+                "title": "Q42", "user": "Alice",
+                "revid": 300, "old_revid": 200,
+                "comment": "/* wbsetclaim-update:2||1 */ [[Property:P106]]: [[Q42]]",
+                "tags": [],
+            },
+        ]
+
+        cache = LabelCache(mock_site)
+        cache.prime("P106", "occupation")
+        cache.prime("Q42", "Douglas Adams")
+        cache.prime("Q5", "human")
+        cache.prime("P854", "reference URL")
+
+        enrich_edit_group(group, cache, prefetch=True, blocked_domains=set())
+
+        # prefetch_reference_url should only be called once for the shared URL
+        assert mock_prefetch.call_count == 1
+
+        # Both edits should have the prefetched reference
+        assert "prefetched_references" in group[0]
+        assert "prefetched_references" in group[1]
+        assert group[0]["prefetched_references"]["https://example.com/shared"]["status"] == 200

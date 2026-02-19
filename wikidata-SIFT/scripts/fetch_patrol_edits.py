@@ -41,9 +41,11 @@ import json
 
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 import pywikibot
 from pywikibot.comms import http as pwb_http
+import trafilatura
 import yaml
 
 
@@ -238,26 +240,45 @@ def _collect_snak_ids(snak, ids):
 
 
 class LabelCache:
-    """In-memory cache for resolving Wikidata entity IDs to English labels.
+    """In-memory cache for resolving Wikidata entity IDs to labels.
 
-    Resolves Q-ids via ItemPage and P-ids via PropertyPage. Caches results
-    so repeated lookups for the same entity avoid duplicate API calls.
+    Prefers English labels. When no English label exists, falls back to
+    other languages (annotated with ``[lang]`` suffix, e.g. ``"Edelreis [de]"``).
+    Caches results so repeated lookups avoid duplicate API calls.
     Also stores descriptions alongside labels for use in edit verification.
     """
+
+    # Fallback language chain when English is unavailable.
+    FALLBACK_LANGUAGES = ("de", "fr", "es", "pt", "it", "nl", "ja", "zh", "ru")
 
     def __init__(self, site):
         self._repo = site.data_repository()
         self._cache = {}  # {entity_id: (label, description)}
 
+    @staticmethod
+    def _pick_label(labels, entity_id):
+        """Pick the best label from a language-keyed dict.
+
+        Returns the English label if available, otherwise the first
+        available fallback language annotated with ``[lang]``, or the
+        raw *entity_id* if no label exists in any fallback language.
+        """
+        if "en" in labels:
+            return labels["en"]
+        for lang in LabelCache.FALLBACK_LANGUAGES:
+            if lang in labels:
+                return f"{labels[lang]} [{lang}]"
+        return entity_id
+
     def resolve(self, entity_id):
-        """Resolve an entity ID to its English label.
+        """Resolve an entity ID to its label (English preferred).
 
         Args:
             entity_id: A Q-id (e.g., "Q5") or P-id (e.g., "P106").
 
         Returns:
-            The English label string, or the entity_id itself if no
-            English label is available or the lookup fails.
+            The English label, a fallback-language label annotated with
+            ``[lang]``, or the entity_id itself if the lookup fails.
         """
         if entity_id in self._cache:
             return self._cache[entity_id][0]
@@ -268,7 +289,7 @@ class LabelCache:
             else:
                 page = pywikibot.ItemPage(self._repo, entity_id)
             page.get()
-            label = page.labels.get("en", entity_id)
+            label = self._pick_label(page.labels, entity_id)
             desc = page.descriptions.get("en")
         except Exception:
             label = entity_id
@@ -293,11 +314,9 @@ class LabelCache:
     def resolve_batch(self, entity_ids):
         """Resolve multiple entity IDs in batched API calls (max 50 per call).
 
-        Uses pywikibot's ``_simple_request`` to call ``wbgetentities`` with
-        ``props=labels|descriptions&languages=en``, fetching labels and
-        descriptions for many entities at once.  This benefits from
-        pywikibot's authenticated session (higher rate limits when logged
-        in) and its retry/backoff logic for maxlag throttling.
+        Uses pywikibot's ``simple_request`` to call ``wbgetentities`` with
+        ``props=labels|descriptions`` and a language fallback chain so that
+        entities without English labels still get a human-readable name.
 
         Args:
             entity_ids: Iterable of entity ID strings (Q-ids and P-ids).
@@ -307,6 +326,8 @@ class LabelCache:
         if not needed:
             return
 
+        lang_param = "|".join(("en",) + self.FALLBACK_LANGUAGES)
+
         # Batch in chunks of 50 (Wikidata API limit)
         for i in range(0, len(needed), 50):
             chunk = needed[i:i + 50]
@@ -315,15 +336,20 @@ class LabelCache:
                     action="wbgetentities",
                     ids="|".join(chunk),
                     props="labels|descriptions",
-                    languages="en",
+                    languages=lang_param,
                 )
                 data = req.submit()
                 for eid, entity_data in data.get("entities", {}).items():
-                    labels = entity_data.get("labels", {})
-                    en_label = labels.get("en", {}).get("value", eid)
+                    raw_labels = entity_data.get("labels", {})
+                    # Build {lang: value} dict from API response
+                    labels = {
+                        lang: info.get("value", "")
+                        for lang, info in raw_labels.items()
+                    }
+                    label = self._pick_label(labels, eid)
                     descs = entity_data.get("descriptions", {})
                     en_desc = descs.get("en", {}).get("value")
-                    self._cache[eid] = (en_label, en_desc)
+                    self._cache[eid] = (label, en_desc)
             except Exception:
                 # Fall back to storing IDs as their own labels
                 for eid in chunk:
@@ -634,7 +660,7 @@ def compute_edit_diff(old_entity, new_entity, parsed_edit, label_cache):
     }
 
 
-def enrich_edit(edit, label_cache):
+def enrich_edit(edit, label_cache, prefetch=True, blocked_domains=None):
     """Add item context, parsed edit summary, and resolved labels to an edit.
 
     Fetches the item at the edit's revision, serializes all claims with
@@ -646,6 +672,8 @@ def enrich_edit(edit, label_cache):
     Args:
         edit: Edit metadata dict (from normalize_change).
         label_cache: LabelCache for resolving entity IDs.
+        prefetch: If True, prefetch reference URLs after enrichment.
+        blocked_domains: Set of blocked domain strings (for prefetch).
 
     Returns:
         The edit dict with added parsed_edit, item, and removed_claim keys.
@@ -743,6 +771,12 @@ def enrich_edit(edit, label_cache):
         elif old_fetch_error:
             edit["removed_claim"] = {"error": old_fetch_error}
 
+    # Prefetch reference URLs
+    if prefetch:
+        edit["prefetched_references"] = prefetch_edit_references(
+            edit, blocked_domains or set()
+        )
+
     return edit
 
 
@@ -786,7 +820,7 @@ def group_edits(edits):
     return groups
 
 
-def enrich_edit_group(group, label_cache):
+def enrich_edit_group(group, label_cache, prefetch=True, blocked_domains=None):
     """Enrich a group of edits, caching revision fetches.
 
     For a group of edits on the same item by the same user, fetches each
@@ -795,6 +829,8 @@ def enrich_edit_group(group, label_cache):
     Args:
         group: List of edit dicts (same title and user).
         label_cache: LabelCache for resolving entity IDs.
+        prefetch: If True, prefetch reference URLs after enrichment.
+        blocked_domains: Set of blocked domain strings (for prefetch).
     """
     if not group:
         return
@@ -907,6 +943,38 @@ def enrich_edit_group(group, label_cache):
             else:
                 edit["removed_claim"] = {"error": old_entity["_error"]}
 
+    # Prefetch reference URLs
+    if prefetch:
+        if blocked_domains is None:
+            blocked_domains = set()
+        fetched_urls = {}  # URL -> result, for deduplication across group
+        for edit in group:
+            edit_diff = edit.get("edit_diff")
+            urls = extract_reference_urls(edit_diff)
+            if not urls:
+                edit["prefetched_references"] = {}
+                continue
+            edit_results = {}
+            for url in sorted(urls):
+                if url in fetched_urls:
+                    edit_results[url] = fetched_urls[url]
+                elif is_blocked_domain(url, blocked_domains):
+                    result = {
+                        "url": url,
+                        "status": None,
+                        "extracted_text": None,
+                        "error": "blocked_domain",
+                        "fetch_date": datetime.now(timezone.utc).isoformat(),
+                    }
+                    edit_results[url] = result
+                    fetched_urls[url] = result
+                else:
+                    result = prefetch_reference_url(url)
+                    edit_results[url] = result
+                    fetched_urls[url] = result
+                    time.sleep(0.5)
+            edit["prefetched_references"] = edit_results
+
 
 def save_snapshot(edits, label, snapshot_dir):
     """Save a list of edits as a timestamped YAML snapshot.
@@ -938,6 +1006,166 @@ def save_snapshot(edits, label, snapshot_dir):
         yaml.safe_dump(snapshot, f, default_flow_style=False, allow_unicode=True)
 
     return filepath
+
+
+def load_blocked_domains(config_path=None):
+    """Load blocked domain list from YAML config.
+
+    Args:
+        config_path: Path to blocked_domains.yaml. Defaults to
+            config/blocked_domains.yaml relative to project root.
+
+    Returns:
+        Set of domain strings (e.g., {"wikipedia.org", "imdb.com"}).
+    """
+    if config_path is None:
+        config_path = Path(__file__).resolve().parent.parent / "config" / "blocked_domains.yaml"
+    else:
+        config_path = Path(config_path)
+
+    if not config_path.exists():
+        return set()
+
+    with open(config_path) as f:
+        data = yaml.safe_load(f)
+
+    if not data or "domains" not in data:
+        return set()
+
+    return {entry["domain"] for entry in data["domains"] if "domain" in entry}
+
+
+def extract_reference_urls(edit_diff):
+    """Extract P854 (reference URL) values from an edit diff's references.
+
+    Looks in both new_value.references and old_value.references for P854
+    entries, returning all unique URLs found.
+
+    Args:
+        edit_diff: The edit_diff dict from enrichment (with old_value, new_value).
+
+    Returns:
+        Set of URL strings.
+    """
+    if not edit_diff or "error" in edit_diff:
+        return set()
+
+    urls = set()
+    for side in ("new_value", "old_value"):
+        value = edit_diff.get(side)
+        if not value or not isinstance(value, dict):
+            continue
+        for ref_block in value.get("references", []):
+            p854 = ref_block.get("P854")
+            if p854 and isinstance(p854, dict):
+                url = p854.get("value")
+                if url and isinstance(url, str) and url.startswith("http"):
+                    urls.add(url)
+    return urls
+
+
+def is_blocked_domain(url, blocked_domains):
+    """Check if a URL's hostname matches any blocked domain.
+
+    Matches exact domain and subdomains (e.g., "en.wikipedia.org" matches
+    "wikipedia.org").
+
+    Args:
+        url: URL string.
+        blocked_domains: Set of blocked domain strings.
+
+    Returns:
+        True if the URL's host matches a blocked domain.
+    """
+    if not blocked_domains:
+        return False
+
+    try:
+        hostname = urlparse(url).hostname
+    except Exception:
+        return False
+
+    if not hostname:
+        return False
+
+    hostname = hostname.lower()
+    for domain in blocked_domains:
+        if hostname == domain or hostname.endswith("." + domain):
+            return True
+    return False
+
+
+def prefetch_reference_url(url, timeout=15):
+    """Fetch a reference URL and extract article text via trafilatura.
+
+    Uses pwb_http.fetch (pywikibot's HTTP layer) for the request and
+    trafilatura for text extraction from HTML.
+
+    Args:
+        url: URL to fetch.
+        timeout: Request timeout in seconds.
+
+    Returns:
+        Dict with url, status, extracted_text, error, fetch_date.
+    """
+    result = {
+        "url": url,
+        "status": None,
+        "extracted_text": None,
+        "error": None,
+        "fetch_date": datetime.now(timezone.utc).isoformat(),
+    }
+
+    try:
+        resp = pwb_http.fetch(url, timeout=timeout)
+        result["status"] = resp.status_code
+
+        if resp.status_code != 200:
+            result["error"] = f"HTTP {resp.status_code}"
+            return result
+
+        text = trafilatura.extract(resp.text)
+        if text:
+            result["extracted_text"] = text
+        else:
+            result["error"] = "extraction_empty"
+
+    except Exception as e:
+        result["error"] = str(e)
+
+    return result
+
+
+def prefetch_edit_references(edit, blocked_domains):
+    """Prefetch reference URLs for an edit, skipping blocked domains.
+
+    Args:
+        edit: Enriched edit dict (must have edit_diff).
+        blocked_domains: Set of blocked domain strings.
+
+    Returns:
+        Dict mapping URL -> prefetch result dict.
+    """
+    edit_diff = edit.get("edit_diff")
+    urls = extract_reference_urls(edit_diff)
+    if not urls:
+        return {}
+
+    results = {}
+    for url in sorted(urls):
+        if is_blocked_domain(url, blocked_domains):
+            results[url] = {
+                "url": url,
+                "status": None,
+                "extracted_text": None,
+                "error": "blocked_domain",
+                "fetch_date": datetime.now(timezone.utc).isoformat(),
+            }
+        else:
+            results[url] = prefetch_reference_url(url)
+            time.sleep(0.5)
+
+    return results
 
 
 def main():
@@ -978,10 +1206,17 @@ def main():
         action="store_true",
         help="Enrich edits with item data, resolved labels, and parsed edit summaries",
     )
+    parser.add_argument(
+        "--no-prefetch",
+        action="store_true",
+        help="Skip reference URL prefetching during enrichment",
+    )
     args = parser.parse_args()
 
     site = get_production_site()
     label_cache = LabelCache(site) if args.enrich else None
+    do_prefetch = args.enrich and not args.no_prefetch
+    blocked_domains = load_blocked_domains() if do_prefetch else None
 
     # Fetch unpatrolled edits
     print(f"Fetching {args.unpatrolled} unpatrolled statement edits...")
@@ -1002,7 +1237,11 @@ def main():
                 flush=True,
             )
             try:
-                enrich_edit_group(group, label_cache)
+                enrich_edit_group(
+                    group, label_cache,
+                    prefetch=do_prefetch,
+                    blocked_domains=blocked_domains,
+                )
                 print(" done")
             except Exception as e:
                 print(f" ERROR: {e}")
@@ -1043,7 +1282,11 @@ def main():
                     flush=True,
                 )
                 try:
-                    enrich_edit_group(group, label_cache)
+                    enrich_edit_group(
+                        group, label_cache,
+                        prefetch=do_prefetch,
+                        blocked_domains=blocked_domains,
+                    )
                     print(" done")
                 except Exception as e:
                     print(f" ERROR: {e}")
