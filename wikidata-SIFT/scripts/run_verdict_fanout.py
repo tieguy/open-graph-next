@@ -226,15 +226,17 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
 
     Returns:
         tuple: (updated_messages, total_prompt_tokens, total_completion_tokens,
-                response_ids, finish_status, turns)
+                response_ids, finish_status, turns, total_cost)
         finish_status is one of: 'stop', 'length', 'max_turns', 'cancelled'
         turns is the number of API calls made during investigation.
+        total_cost is the sum of inline usage.cost from all responses (float or None).
     """
     if blocked_domains is None:
         blocked_domains = set()
 
     total_prompt_tokens = 0
     total_completion_tokens = 0
+    total_cost = None
     response_ids = []
     context_limit = CONTEXT_LIMITS.get(model, 100_000)
 
@@ -242,7 +244,7 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
         # Cooperative cancellation: check cancel event between turns
         if cancel_event is not None and cancel_event.is_set():
             print(f"WARNING: {model} investigation cancelled by timeout event after {turn} turns")
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "cancelled", turn
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "cancelled", turn, total_cost
 
         response = client.chat.completions.create(
             model=model,
@@ -251,11 +253,14 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
             tool_choice="auto",
         )
 
-        # Track usage
+        # Track usage and inline cost
         usage = response.usage
         if usage:
             total_prompt_tokens += usage.prompt_tokens or 0
             total_completion_tokens += usage.completion_tokens or 0
+            inline_cost = getattr(usage, "cost", None)
+            if inline_cost is not None:
+                total_cost = (total_cost or 0) + inline_cost
 
         # Track response ID for cost fetching
         if response.id:
@@ -276,13 +281,13 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
         if finish_reason == "stop":
             # Investigation complete
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1, total_cost
 
         elif finish_reason == "length":
             # Context length exceeded — log as incomplete
             print(f"WARNING: {model} hit length limit (finish_reason=length), verdict may be incomplete")
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "length", turn + 1
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "length", turn + 1, total_cost
 
         elif finish_reason == "tool_calls":
             # Process tool calls
@@ -320,11 +325,11 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
             # Unexpected finish reason — treat as stop
             print(f"WARNING: Unexpected finish_reason '{finish_reason}' from {model}")
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1, total_cost
 
     # Exceeded MAX_TURNS
     print(f"WARNING: {model} hit MAX_TURNS ({MAX_TURNS}) without completing investigation")
-    return messages, total_prompt_tokens, total_completion_tokens, response_ids, "max_turns", MAX_TURNS
+    return messages, total_prompt_tokens, total_completion_tokens, response_ids, "max_turns", MAX_TURNS, total_cost
 
 
 def run_verdict_phase(client, model, messages):
@@ -339,7 +344,7 @@ def run_verdict_phase(client, model, messages):
         messages: Messages list from Phase A.
 
     Returns:
-        tuple: (verdict_dict_or_None, prompt_tokens, completion_tokens, response_id)
+        tuple: (verdict_dict_or_None, prompt_tokens, completion_tokens, response_id, cost)
     """
     verdict_request = (
         "Based on your investigation, please provide your final verdict as JSON. "
@@ -349,28 +354,43 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    response = client.chat.completions.create(
-        model=model,
-        messages=messages,
-        response_format={"type": "json_object"},
-    )
+    # Some providers (e.g. DeepInfra for Nemotron) don't support json_object
+    # response format; fall back to prompt-only JSON extraction for those models.
+    SKIP_JSON_FORMAT = {"nvidia/nemotron-3-nano-30b-a3b"}
+    create_kwargs = dict(model=model, messages=messages)
+    if model not in SKIP_JSON_FORMAT:
+        create_kwargs["response_format"] = {"type": "json_object"}
+
+    response = client.chat.completions.create(**create_kwargs)
 
     usage = response.usage
     prompt_tokens = usage.prompt_tokens if usage else 0
     completion_tokens = usage.completion_tokens if usage else 0
+    cost = getattr(usage, "cost", None) if usage else None
     response_id = response.id
 
     content = response.choices[0].message.content
     if not content:
-        return None, prompt_tokens, completion_tokens, response_id
+        return None, prompt_tokens, completion_tokens, response_id, cost
+
+    # Strip markdown code fences that some models wrap around JSON
+    stripped = content.strip()
+    if stripped.startswith("```"):
+        lines = stripped.split("\n")
+        # Remove first line (```json or ```) and last line (```)
+        if lines[-1].strip() == "```":
+            lines = lines[1:-1]
+        else:
+            lines = lines[1:]
+        stripped = "\n".join(lines).strip()
 
     try:
-        verdict_dict = json.loads(content)
-        return verdict_dict, prompt_tokens, completion_tokens, response_id
+        verdict_dict = json.loads(stripped)
+        return verdict_dict, prompt_tokens, completion_tokens, response_id, cost
     except json.JSONDecodeError:
         print(f"WARNING: {model} returned invalid JSON in verdict phase. Raw: {content[:200]}")
         # Return raw content as a signal of failure
-        return None, prompt_tokens, completion_tokens, response_id
+        return None, prompt_tokens, completion_tokens, response_id, cost
 
 
 def fetch_generation_cost(generation_id, api_key):
@@ -415,45 +435,24 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
     ]
 
     # Phase A: investigation
-    messages, inv_prompt_tokens, inv_completion_tokens, response_ids, finish_status, turns = \
+    messages, inv_prompt_tokens, inv_completion_tokens, response_ids, finish_status, turns, inv_cost = \
         run_investigation_phase(client, model, initial_messages, blocked_domains, cancel_event=cancel_event)
 
     # Phase B: verdict extraction
-    verdict_dict, vrd_prompt_tokens, vrd_completion_tokens, verdict_response_id = \
+    verdict_dict, vrd_prompt_tokens, vrd_completion_tokens, verdict_response_id, vrd_cost = \
         run_verdict_phase(client, model, messages)
 
     if verdict_response_id:
         response_ids.append(verdict_response_id)
 
-    # Fetch cost data from OpenRouter generation endpoint
+    # Sum inline costs from both phases
     total_cost_usd = None
-    total_prompt_tokens_authoritative = None
-    total_completion_tokens_authoritative = None
+    if inv_cost is not None or vrd_cost is not None:
+        total_cost_usd = (inv_cost or 0) + (vrd_cost or 0)
 
-    for gen_id in response_ids:
-        cost_data = fetch_generation_cost(gen_id, api_key)
-        if cost_data:
-            if cost_data.get("cost_usd") is not None:
-                total_cost_usd = (total_cost_usd or 0) + cost_data["cost_usd"]
-            if cost_data.get("prompt_tokens") is not None:
-                total_prompt_tokens_authoritative = (
-                    (total_prompt_tokens_authoritative or 0) + cost_data["prompt_tokens"]
-                )
-            if cost_data.get("completion_tokens") is not None:
-                total_completion_tokens_authoritative = (
-                    (total_completion_tokens_authoritative or 0)
-                    + cost_data["completion_tokens"]
-                )
-
-    # Fall back to SDK-reported tokens if generation endpoint returned nothing
-    total_prompt_tokens = (
-        total_prompt_tokens_authoritative
-        or (inv_prompt_tokens + vrd_prompt_tokens)
-    )
-    total_completion_tokens = (
-        total_completion_tokens_authoritative
-        or (inv_completion_tokens + vrd_completion_tokens)
-    )
+    # Token totals from SDK-reported usage
+    total_prompt_tokens = inv_prompt_tokens + vrd_prompt_tokens
+    total_completion_tokens = inv_completion_tokens + vrd_completion_tokens
 
     # Build verdict record
     parsed_edit = edit.get("parsed_edit") or {}

@@ -90,6 +90,7 @@ def _make_chat_response(finish_reason, content=None, tool_calls=None, response_i
     usage = MagicMock()
     usage.prompt_tokens = 100
     usage.completion_tokens = 50
+    usage.cost = None
     response.usage = usage
 
     return response
@@ -217,7 +218,7 @@ class TestRunInvestigationPhase:
         ]
 
         with patch("run_verdict_fanout.web_search", return_value=[{"title": "T", "url": "http://x.com", "snippet": "s"}]):
-            messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
+            messages, prompt_tokens, completion_tokens, response_ids, status, turns, cost = \
                 run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "stop"
@@ -243,7 +244,7 @@ class TestRunInvestigationPhase:
             {"role": "user", "content": "Check this edit."},
         ]
 
-        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns, cost = \
             run_investigation_phase(client, "allenai/olmo-3.1-32b-instruct", initial_messages)
 
         assert status == "length"
@@ -267,7 +268,7 @@ class TestRunInvestigationPhase:
         ]
 
         with patch("run_verdict_fanout.web_search", return_value=[]):
-            messages, _, _, _, status, turns = \
+            messages, _, _, _, status, turns, _ = \
                 run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "max_turns"
@@ -282,7 +283,7 @@ class TestRunInvestigationPhase:
 
         initial_messages = [{"role": "user", "content": "test"}]
 
-        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns, cost = \
             run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "stop"
@@ -302,7 +303,7 @@ class TestRunInvestigationPhase:
             {"role": "user", "content": "Check this edit."},
         ]
 
-        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns, cost = \
             run_investigation_phase(
                 client, "deepseek/deepseek-v3.2", initial_messages,
                 cancel_event=cancel_event
@@ -344,7 +345,7 @@ class TestRunVerdictPhase:
             {"role": "assistant", "content": "investigation done"},
         ]
 
-        verdict_dict, prompt_tokens, completion_tokens, response_id = \
+        verdict_dict, prompt_tokens, completion_tokens, response_id, cost = \
             run_verdict_phase(client, "deepseek/deepseek-v3.2", messages)
 
         assert verdict_dict is not None
@@ -361,7 +362,7 @@ class TestRunVerdictPhase:
 
         messages = [{"role": "user", "content": "test"}]
 
-        verdict_dict, _, _, _ = run_verdict_phase(client, "deepseek/deepseek-v3.2", messages)
+        verdict_dict, _, _, _, _ = run_verdict_phase(client, "deepseek/deepseek-v3.2", messages)
 
         assert verdict_dict is None
 
@@ -403,7 +404,7 @@ class TestRunVerdictPhase:
 
         messages = [{"role": "user", "content": "test"}]
 
-        _, prompt_tokens, completion_tokens, response_id = \
+        _, prompt_tokens, completion_tokens, response_id, _ = \
             run_verdict_phase(client, "deepseek/deepseek-v3.2", messages)
 
         assert prompt_tokens == 200
@@ -643,10 +644,9 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value=sift_prompt), \
              patch("run_verdict_fanout.build_edit_context", return_value=edit_context), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=(investigation_messages, 100, 50, ["gen_inv_1"], "stop", 3)), \
+                   return_value=(investigation_messages, 100, 50, ["gen_inv_1"], "stop", 3, 0.00145)), \
              patch("run_verdict_fanout.run_verdict_phase",
-                   return_value=(verdict_data, 200, 75, "gen_vrd_1")), \
-             patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_data):
+                   return_value=(verdict_data, 200, 75, "gen_vrd_1", 0.001)):
             result = run_single_verdict(
                 client, "deepseek/deepseek-v3.2", edit, set(), "test-api-key"
             )
@@ -685,45 +685,39 @@ class TestRunSingleVerdict:
         edit = _make_enriched_edit()
         client = self._make_client()
 
-        cost_per_gen = {"prompt_tokens": 500, "completion_tokens": 100, "cost_usd": 0.001}
-
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 100, 50, ["gen_1", "gen_2"], "stop", 2)), \
+                   return_value=([], 100, 50, ["gen_1", "gen_2"], "stop", 2, 0.002)), \
              patch("run_verdict_fanout.run_verdict_phase",
-                   return_value=({"verdict": "plausible", "rationale": ".", "sources": []}, 80, 30, "gen_3")), \
-             patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_per_gen) as mock_cost:
+                   return_value=({"verdict": "plausible", "rationale": ".", "sources": []}, 80, 30, "gen_3", 0.001)):
             result = run_single_verdict(
                 client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
             )
 
-        # fetch_generation_cost called for gen_1, gen_2, and gen_3 (3 total)
-        assert mock_cost.call_count == 3
-        # Cost summed: 0.001 * 3
+        # Cost summed from inline costs: 0.002 (investigation) + 0.001 (verdict)
         assert result["cost_usd"] == pytest.approx(0.003)
-        # Tokens summed: 500 * 3 and 100 * 3
-        assert result["prompt_tokens"] == 1500
-        assert result["completion_tokens"] == 300
+        # Tokens summed from SDK usage: inv + verdict
+        assert result["prompt_tokens"] == 180  # 100 + 80
+        assert result["completion_tokens"] == 80  # 50 + 30
 
-    def test_sdk_token_fallback_when_generation_cost_returns_none(self):
-        """Falls back to SDK-reported tokens when fetch_generation_cost returns None."""
+    def test_sdk_token_fallback_when_inline_cost_is_none(self):
+        """Token totals use SDK-reported values; cost is None when inline cost unavailable."""
         edit = _make_enriched_edit()
         client = self._make_client()
 
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 150, 60, ["gen_inv"], "stop", 5)), \
+                   return_value=([], 150, 60, ["gen_inv"], "stop", 5, None)), \
              patch("run_verdict_fanout.run_verdict_phase",
-                   return_value=({"verdict": "suspect", "rationale": ".", "sources": []}, 90, 40, "gen_vrd")), \
-             patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
+                   return_value=({"verdict": "suspect", "rationale": ".", "sources": []}, 90, 40, "gen_vrd", None)):
             result = run_single_verdict(
                 client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
             )
 
-        # When generation cost returns None for all IDs, fall back to SDK totals
-        assert result["prompt_tokens"] == 150 + 90  # inv + verdict SDK tokens
+        # SDK token totals from both phases
+        assert result["prompt_tokens"] == 150 + 90
         assert result["completion_tokens"] == 60 + 40
         assert result["cost_usd"] is None
 
@@ -735,10 +729,9 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 100, 50, ["gen_inv"], "stop", 4)), \
+                   return_value=([], 100, 50, ["gen_inv"], "stop", 4, None)), \
              patch("run_verdict_fanout.run_verdict_phase",
-                   return_value=(None, 80, 30, "gen_vrd")), \
-             patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
+                   return_value=(None, 80, 30, "gen_vrd", None)):
             result = run_single_verdict(
                 client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
             )
