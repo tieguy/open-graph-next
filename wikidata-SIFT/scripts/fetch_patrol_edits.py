@@ -311,7 +311,7 @@ class LabelCache:
         for i in range(0, len(needed), 50):
             chunk = needed[i:i + 50]
             try:
-                req = self._repo._simple_request(
+                req = self._repo.simple_request(
                     action="wbgetentities",
                     ids="|".join(chunk),
                     props="labels|descriptions",

@@ -735,11 +735,11 @@ class TestCollectEntityIds:
 
 class TestResolveBatch:
     def _setup_repo_response(self, mock_site, response_data):
-        """Configure mock_site's repo to return response_data from _simple_request().submit()."""
+        """Configure mock_site's repo to return response_data from simple_request().submit()."""
         mock_req = MagicMock()
         mock_req.submit.return_value = response_data
         repo = mock_site.data_repository()
-        repo._simple_request.return_value = mock_req
+        repo.simple_request.return_value = mock_req
         return repo
 
     def test_primes_cache_from_api(self, mock_site):
@@ -755,8 +755,8 @@ class TestResolveBatch:
 
         assert cache.resolve("Q5") == "human"
         assert cache.resolve("P31") == "instance of"
-        repo._simple_request.assert_called_once()
-        call_kwargs = repo._simple_request.call_args
+        repo.simple_request.assert_called_once()
+        call_kwargs = repo.simple_request.call_args
         assert call_kwargs.kwargs["ids"] == "Q5|P31"
         assert call_kwargs.kwargs["props"] == "labels|descriptions"
 
@@ -772,8 +772,8 @@ class TestResolveBatch:
         cache.resolve_batch(["Q5", "P31"])
 
         # Only P31 should be requested (Q5 already cached)
-        repo._simple_request.assert_called_once()
-        call_kwargs = repo._simple_request.call_args
+        repo.simple_request.assert_called_once()
+        call_kwargs = repo.simple_request.call_args
         assert "Q5" not in call_kwargs.kwargs["ids"]
 
     def test_all_cached_no_api_call(self, mock_site):
@@ -783,11 +783,11 @@ class TestResolveBatch:
         cache.prime("P31", "instance of")
 
         cache.resolve_batch(["Q5", "P31"])
-        repo._simple_request.assert_not_called()
+        repo.simple_request.assert_not_called()
 
     def test_handles_api_error(self, mock_site):
         repo = mock_site.data_repository()
-        repo._simple_request.side_effect = Exception("API error")
+        repo.simple_request.side_effect = Exception("API error")
 
         cache = LabelCache(mock_site)
         cache.resolve_batch(["Q5", "P31"])
@@ -801,16 +801,16 @@ class TestResolveBatch:
         cache = LabelCache(mock_site)
 
         cache.resolve_batch([])
-        repo._simple_request.assert_not_called()
+        repo.simple_request.assert_not_called()
 
 
 class TestEnrichmentUsesBatch:
     def _setup_repo_response(self, mock_site, response_data):
-        """Configure mock_site's repo to return response_data from _simple_request().submit()."""
+        """Configure mock_site's repo to return response_data from simple_request().submit()."""
         mock_req = MagicMock()
         mock_req.submit.return_value = response_data
         repo = mock_site.data_repository()
-        repo._simple_request.return_value = mock_req
+        repo.simple_request.return_value = mock_req
         return repo
 
     @patch("fetch_patrol_edits.fetch_entity_at_revision")
@@ -833,7 +833,7 @@ class TestEnrichmentUsesBatch:
         result = enrich_edit(sample_edit, cache)
 
         # Batch resolve was called
-        repo._simple_request.assert_called()
+        repo.simple_request.assert_called()
 
         # Labels were resolved correctly
         assert result["parsed_edit"]["property_label"] == "occupation"
