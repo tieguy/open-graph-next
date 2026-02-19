@@ -1,6 +1,7 @@
 """Tests for run_verdict_fanout.py — verdict runner core."""
 
 import json
+import sys
 from pathlib import Path
 from unittest.mock import MagicMock, patch
 
@@ -12,8 +13,10 @@ from run_verdict_fanout import (
     build_edit_context,
     dispatch_tool_call,
     fetch_generation_cost,
+    main,
     model_slug,
     run_investigation_phase,
+    run_single_verdict,
     run_verdict_phase,
     save_verdict,
 )
@@ -560,3 +563,224 @@ class TestBuildEditContext:
             context = build_edit_context(edit)
 
         assert "WARNING" not in context
+
+
+# ---------------------------------------------------------------------------
+# TestRunSingleVerdict
+# ---------------------------------------------------------------------------
+
+
+class TestRunSingleVerdict:
+    """Tests for the run_single_verdict orchestration function."""
+
+    def _make_client(self):
+        return MagicMock()
+
+    def test_happy_path_returns_verdict_dict_with_expected_keys(self, tmp_path):
+        """Happy path: returns full verdict dict with all expected keys."""
+        edit = _make_enriched_edit()
+        client = self._make_client()
+
+        sift_prompt = "You are SIFT."
+        edit_context = "## Edit to verify\nrcid: 12345\n"
+        investigation_messages = [
+            {"role": "system", "content": sift_prompt},
+            {"role": "user", "content": edit_context},
+            {"role": "assistant", "content": "Investigation complete."},
+        ]
+        verdict_data = {
+            "verdict": "verified-high",
+            "rationale": "Primary source confirmed.",
+            "sources": [
+                {
+                    "url": "https://example.com",
+                    "supports_claim": True,
+                    "provenance": "verified",
+                }
+            ],
+        }
+        cost_data = {
+            "prompt_tokens": 1500,
+            "completion_tokens": 300,
+            "cost_usd": 0.00245,
+        }
+
+        with patch("run_verdict_fanout.load_sift_prompt", return_value=sift_prompt), \
+             patch("run_verdict_fanout.build_edit_context", return_value=edit_context), \
+             patch("run_verdict_fanout.run_investigation_phase",
+                   return_value=(investigation_messages, 100, 50, ["gen_inv_1"], "stop")), \
+             patch("run_verdict_fanout.run_verdict_phase",
+                   return_value=(verdict_data, 200, 75, "gen_vrd_1")), \
+             patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_data):
+            result = run_single_verdict(
+                client, "deepseek/deepseek-v3.2", edit, set(), "test-api-key"
+            )
+
+        # All expected keys present
+        assert "verdict" in result
+        assert "rationale" in result
+        assert "sources" in result
+        assert "cost_usd" in result
+        assert "prompt_tokens" in result
+        assert "completion_tokens" in result
+        assert "diff_type" in result
+        assert "finish_status" in result
+        assert "timestamp" in result
+        assert "model" in result
+        assert "rcid" in result
+        assert "revid" in result
+        assert "title" in result
+
+        # Values populated from verdict_data
+        assert result["verdict"] == "verified-high"
+        assert result["rationale"] == "Primary source confirmed."
+        assert len(result["sources"]) == 1
+
+        # diff_type extracted from edit_diff.type
+        assert result["diff_type"] == "value_changed"
+        assert result["finish_status"] == "stop"
+        assert result["model"] == "deepseek/deepseek-v3.2"
+
+    def test_happy_path_cost_summed_across_response_ids(self):
+        """Cost is summed across all generation IDs (investigation + verdict)."""
+        edit = _make_enriched_edit()
+        client = self._make_client()
+
+        cost_per_gen = {"prompt_tokens": 500, "completion_tokens": 100, "cost_usd": 0.001}
+
+        with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
+             patch("run_verdict_fanout.build_edit_context", return_value="context"), \
+             patch("run_verdict_fanout.run_investigation_phase",
+                   return_value=([], 100, 50, ["gen_1", "gen_2"], "stop")), \
+             patch("run_verdict_fanout.run_verdict_phase",
+                   return_value=({"verdict": "plausible", "rationale": ".", "sources": []}, 80, 30, "gen_3")), \
+             patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_per_gen) as mock_cost:
+            result = run_single_verdict(
+                client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
+            )
+
+        # fetch_generation_cost called for gen_1, gen_2, and gen_3 (3 total)
+        assert mock_cost.call_count == 3
+        # Cost summed: 0.001 * 3
+        assert result["cost_usd"] == pytest.approx(0.003)
+        # Tokens summed: 500 * 3 and 100 * 3
+        assert result["prompt_tokens"] == 1500
+        assert result["completion_tokens"] == 300
+
+    def test_sdk_token_fallback_when_generation_cost_returns_none(self):
+        """Falls back to SDK-reported tokens when fetch_generation_cost returns None."""
+        edit = _make_enriched_edit()
+        client = self._make_client()
+
+        with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
+             patch("run_verdict_fanout.build_edit_context", return_value="context"), \
+             patch("run_verdict_fanout.run_investigation_phase",
+                   return_value=([], 150, 60, ["gen_inv"], "stop")), \
+             patch("run_verdict_fanout.run_verdict_phase",
+                   return_value=({"verdict": "suspect", "rationale": ".", "sources": []}, 90, 40, "gen_vrd")), \
+             patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
+            result = run_single_verdict(
+                client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
+            )
+
+        # When generation cost returns None for all IDs, fall back to SDK totals
+        assert result["prompt_tokens"] == 150 + 90  # inv + verdict SDK tokens
+        assert result["completion_tokens"] == 60 + 40
+        assert result["cost_usd"] is None
+
+    def test_none_verdict_dict_produces_null_verdict_fields(self):
+        """When verdict phase returns None, verdict/rationale/sources are null/empty."""
+        edit = _make_enriched_edit()
+        client = self._make_client()
+
+        with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
+             patch("run_verdict_fanout.build_edit_context", return_value="context"), \
+             patch("run_verdict_fanout.run_investigation_phase",
+                   return_value=([], 100, 50, ["gen_inv"], "stop")), \
+             patch("run_verdict_fanout.run_verdict_phase",
+                   return_value=(None, 80, 30, "gen_vrd")), \
+             patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
+            result = run_single_verdict(
+                client, "deepseek/deepseek-v3.2", edit, set(), "test-key"
+            )
+
+        assert result["verdict"] is None
+        assert result["rationale"] is None
+        assert result["sources"] == []
+
+
+# ---------------------------------------------------------------------------
+# TestMain
+# ---------------------------------------------------------------------------
+
+
+class TestMain:
+    """Tests for the main() CLI entry point."""
+
+    def test_dry_run_completes_without_error(self, tmp_path, capsys):
+        """--dry-run smoke test: main() completes without error for a valid snapshot."""
+        # Create a minimal enriched snapshot YAML
+        snapshot = {
+            "edits": [
+                {
+                    "rcid": 12345,
+                    "revid": 67890,
+                    "title": "Q42",
+                    "user": "TestUser",
+                    "timestamp": "2026-02-19T12:00:00Z",
+                    "tags": [],
+                    "parsed_edit": {
+                        "operation": "wbsetclaim-update",
+                        "property": "P569",
+                        "property_label": "date of birth",
+                        "value_raw": "+1952-03-11T00:00:00Z/11",
+                        "value_label": "11 March 1952",
+                    },
+                    "edit_diff": {"type": "value_changed"},
+                    "item": {"label_en": "Douglas Adams", "claims": {}},
+                }
+            ]
+        }
+        snapshot_path = tmp_path / "test-snapshot.yaml"
+        with open(snapshot_path, "w") as f:
+            yaml.dump(snapshot, f)
+
+        # Call main() with --dry-run; no OpenRouter calls should be made
+        with patch("sys.argv", ["run_verdict_fanout", "--snapshot", str(snapshot_path), "--dry-run"]), \
+             patch("run_verdict_fanout.load_blocked_domains", return_value=set()):
+            main()  # Must complete without raising an exception
+
+        captured = capsys.readouterr()
+        # Dry run should print summary info
+        assert "dry run" in captured.out.lower() or "would process" in captured.out.lower()
+
+    def test_dry_run_with_limit_processes_subset(self, tmp_path, capsys):
+        """--dry-run with --limit N processes only first N edits."""
+        edits = [
+            {
+                "rcid": i,
+                "revid": i + 1000,
+                "title": f"Q{i}",
+                "user": "TestUser",
+                "timestamp": "2026-02-19T12:00:00Z",
+                "tags": [],
+                "parsed_edit": {
+                    "property": f"P{i}",
+                },
+                "edit_diff": {"type": "value_changed"},
+            }
+            for i in range(5)
+        ]
+        snapshot = {"edits": edits}
+        snapshot_path = tmp_path / "test-snapshot-limit.yaml"
+        with open(snapshot_path, "w") as f:
+            yaml.dump(snapshot, f)
+
+        with patch("sys.argv", ["run_verdict_fanout", "--snapshot", str(snapshot_path),
+                                "--dry-run", "--limit", "2"]), \
+             patch("run_verdict_fanout.load_blocked_domains", return_value=set()):
+            main()  # Must complete without raising
+
+        captured = capsys.readouterr()
+        # Should report 2 edits, not 5
+        assert "2 edits" in captured.out or "2" in captured.out

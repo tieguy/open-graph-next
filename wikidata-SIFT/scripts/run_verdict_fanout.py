@@ -10,7 +10,6 @@ from pathlib import Path
 
 import httpx
 import yaml
-import openai
 from openai import OpenAI
 
 from sift_precheck import make_verification_question, check_ontological_consistency
