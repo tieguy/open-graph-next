@@ -2,6 +2,7 @@
 """Run verdict fanout: evaluate Wikidata edits across multiple models via OpenRouter."""
 
 import argparse
+import inspect
 import json
 import os
 import threading
@@ -208,22 +209,26 @@ def dispatch_tool_call(tool_call, blocked_domains=None):
         return f"error: Tool execution failed: {e}"
 
 
-def run_investigation_phase(client, model, messages, blocked_domains=None):
+def run_investigation_phase(client, model, messages, blocked_domains=None, cancel_event=None):
     """Run Phase A: the investigation loop.
 
     Sends messages to OpenRouter with tool-calling, dispatches tool calls,
-    and loops until finish_reason is 'stop' or 'length', or MAX_TURNS exceeded.
+    and loops until finish_reason is 'stop' or 'length', MAX_TURNS exceeded,
+    or cancel_event is set.
 
     Args:
         client: OpenAI client configured for OpenRouter.
         model: Model ID string.
         messages: Initial messages list (system + user).
         blocked_domains: Set of blocked domains.
+        cancel_event: Optional threading.Event. If set, the loop exits early
+            at the next turn boundary (cooperative cancellation).
 
     Returns:
         tuple: (updated_messages, total_prompt_tokens, total_completion_tokens,
-                response_ids, finish_status)
-        finish_status is one of: 'stop', 'length', 'max_turns'
+                response_ids, finish_status, turns)
+        finish_status is one of: 'stop', 'length', 'max_turns', 'cancelled'
+        turns is the number of API calls made during investigation.
     """
     if blocked_domains is None:
         blocked_domains = set()
@@ -234,6 +239,11 @@ def run_investigation_phase(client, model, messages, blocked_domains=None):
     context_limit = CONTEXT_LIMITS.get(model, 100_000)
 
     for turn in range(MAX_TURNS):
+        # Cooperative cancellation: check cancel event between turns
+        if cancel_event is not None and cancel_event.is_set():
+            print(f"WARNING: {model} investigation cancelled by timeout event after {turn} turns")
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "cancelled", turn
+
         response = client.chat.completions.create(
             model=model,
             messages=messages,
@@ -266,13 +276,13 @@ def run_investigation_phase(client, model, messages, blocked_domains=None):
         if finish_reason == "stop":
             # Investigation complete
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop"
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1
 
         elif finish_reason == "length":
             # Context length exceeded — log as incomplete
             print(f"WARNING: {model} hit length limit (finish_reason=length), verdict may be incomplete")
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "length"
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "length", turn + 1
 
         elif finish_reason == "tool_calls":
             # Process tool calls
@@ -310,11 +320,11 @@ def run_investigation_phase(client, model, messages, blocked_domains=None):
             # Unexpected finish reason — treat as stop
             print(f"WARNING: Unexpected finish_reason '{finish_reason}' from {model}")
             messages = messages + [{"role": "assistant", "content": assistant_message.content}]
-            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop"
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "stop", turn + 1
 
     # Exceeded MAX_TURNS
     print(f"WARNING: {model} hit MAX_TURNS ({MAX_TURNS}) without completing investigation")
-    return messages, total_prompt_tokens, total_completion_tokens, response_ids, "max_turns"
+    return messages, total_prompt_tokens, total_completion_tokens, response_ids, "max_turns", MAX_TURNS
 
 
 def run_verdict_phase(client, model, messages):
@@ -381,7 +391,7 @@ def fetch_generation_cost(generation_id, api_key):
     }
 
 
-def run_single_verdict(client, model, edit, blocked_domains, api_key):
+def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_event=None):
     """Orchestrate a full verdict for one (edit, model) pair.
 
     Args:
@@ -390,6 +400,8 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key):
         edit: Enriched edit dict.
         blocked_domains: Set of blocked domain strings.
         api_key: OpenRouter API key for cost fetching.
+        cancel_event: Optional threading.Event for cooperative cancellation.
+            Passed through to run_investigation_phase.
 
     Returns:
         dict: Full verdict including metadata, verdict data, and cost info.
@@ -403,8 +415,8 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key):
     ]
 
     # Phase A: investigation
-    messages, inv_prompt_tokens, inv_completion_tokens, response_ids, finish_status = \
-        run_investigation_phase(client, model, initial_messages, blocked_domains)
+    messages, inv_prompt_tokens, inv_completion_tokens, response_ids, finish_status, turns = \
+        run_investigation_phase(client, model, initial_messages, blocked_domains, cancel_event=cancel_event)
 
     # Phase B: verdict extraction
     verdict_dict, vrd_prompt_tokens, vrd_completion_tokens, verdict_response_id = \
@@ -458,6 +470,7 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key):
         "value_label": parsed_edit.get("value_label"),
         "diff_type": diff_type,
         "finish_status": finish_status,
+        "turns": turns,
         "prompt_tokens": total_prompt_tokens,
         "completion_tokens": total_completion_tokens,
         "cost_usd": total_cost_usd,
@@ -541,17 +554,33 @@ def save_checkpoint(completed, state_path=None):
 
 
 def run_with_timeout(func, args, timeout_secs=180):
-    """Run func(*args) with a wall-clock timeout.
+    """Run func(*args, cancel_event=cancel_event) with a wall-clock timeout.
+
+    Creates a threading.Event cancellation flag and passes it as a keyword
+    argument to func. When the timeout fires, the event is set so the function
+    can exit cooperatively at its next turn boundary rather than running
+    indefinitely in the background.
 
     Returns:
         (result, timed_out) tuple. If timed out, result is None.
     """
     result = [None]
     exception = [None]
+    cancel_event = threading.Event()
+
+    # Determine whether func accepts a cancel_event keyword argument
+    try:
+        sig = inspect.signature(func)
+        _accepts_cancel = "cancel_event" in sig.parameters
+    except (ValueError, TypeError):
+        _accepts_cancel = False
 
     def target():
         try:
-            result[0] = func(*args)
+            if _accepts_cancel:
+                result[0] = func(*args, cancel_event=cancel_event)
+            else:
+                result[0] = func(*args)
         except Exception as e:
             exception[0] = e
 
@@ -561,15 +590,10 @@ def run_with_timeout(func, args, timeout_secs=180):
     thread.join(timeout=timeout_secs)
 
     if thread.is_alive():
-        # Thread still running — timed out.
-        # NOTE: The daemon thread continues running in the background
-        # (making API calls, consuming tokens) until it completes naturally
-        # or the process exits. This is a "move on" mechanism, not a
-        # cancellation mechanism. For long investigation loops, multiple
-        # timed-out threads could run in parallel. A more robust approach
-        # would check a threading.Event flag between turns in the
-        # investigation loop, but the simple approach is sufficient for
-        # the initial experiment.
+        # Thread still running — timed out. Signal cooperative cancellation
+        # so the investigation loop exits at the next turn boundary instead
+        # of continuing to make API calls in the background indefinitely.
+        cancel_event.set()
         return None, True
 
     if exception[0]:

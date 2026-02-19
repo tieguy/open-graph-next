@@ -195,6 +195,10 @@ uv run pytest                    # all tests
 uv run pytest tests/test_enrichment.py  # specific test file
 uv run pytest -k "test_name"     # specific test by name
 
+# First-time SearXNG setup (generate settings with secret key)
+cp config/searxng/settings.yml.template config/searxng/settings.yml
+sed -i "s/GENERATE_AND_REPLACE.*/$(openssl rand -hex 32)/" config/searxng/settings.yml
+
 # Start SearXNG for verdict fanout web search
 docker compose up -d                # start SearXNG + Valkey
 docker compose down                 # stop containers

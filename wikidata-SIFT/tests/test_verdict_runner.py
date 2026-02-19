@@ -216,7 +216,7 @@ class TestRunInvestigationPhase:
         ]
 
         with patch("run_verdict_fanout.web_search", return_value=[{"title": "T", "url": "http://x.com", "snippet": "s"}]):
-            messages, prompt_tokens, completion_tokens, response_ids, status = \
+            messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
                 run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "stop"
@@ -228,6 +228,8 @@ class TestRunInvestigationPhase:
         # Token counts should be cumulative
         assert prompt_tokens == 200  # 100 + 100
         assert completion_tokens == 100  # 50 + 50
+        # Turn count should reflect API calls made
+        assert turns == 2
 
     def test_finish_reason_length_returns_incomplete_status(self):
         """AC2.6: finish_reason=length logs as incomplete, returns with status."""
@@ -240,11 +242,12 @@ class TestRunInvestigationPhase:
             {"role": "user", "content": "Check this edit."},
         ]
 
-        messages, prompt_tokens, completion_tokens, response_ids, status = \
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
             run_investigation_phase(client, "allenai/olmo-3.1-32b-instruct", initial_messages)
 
         assert status == "length"
         assert client.chat.completions.create.call_count == 1
+        assert turns == 1
 
     def test_max_turns_enforcement(self):
         """Loop stops after MAX_TURNS iterations even with repeated tool_calls."""
@@ -263,11 +266,12 @@ class TestRunInvestigationPhase:
         ]
 
         with patch("run_verdict_fanout.web_search", return_value=[]):
-            messages, _, _, _, status = \
+            messages, _, _, _, status, turns = \
                 run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "max_turns"
         assert client.chat.completions.create.call_count == MAX_TURNS
+        assert turns == MAX_TURNS
 
     def test_stop_immediately_returns_stop(self):
         """Single stop response completes investigation immediately."""
@@ -277,13 +281,14 @@ class TestRunInvestigationPhase:
 
         initial_messages = [{"role": "user", "content": "test"}]
 
-        messages, prompt_tokens, completion_tokens, response_ids, status = \
+        messages, prompt_tokens, completion_tokens, response_ids, status, turns = \
             run_investigation_phase(client, "deepseek/deepseek-v3.2", initial_messages)
 
         assert status == "stop"
         assert client.chat.completions.create.call_count == 1
         assert prompt_tokens == 100
         assert completion_tokens == 50
+        assert turns == 1
 
 
 # ---------------------------------------------------------------------------
@@ -613,7 +618,7 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value=sift_prompt), \
              patch("run_verdict_fanout.build_edit_context", return_value=edit_context), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=(investigation_messages, 100, 50, ["gen_inv_1"], "stop")), \
+                   return_value=(investigation_messages, 100, 50, ["gen_inv_1"], "stop", 3)), \
              patch("run_verdict_fanout.run_verdict_phase",
                    return_value=(verdict_data, 200, 75, "gen_vrd_1")), \
              patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_data):
@@ -646,6 +651,10 @@ class TestRunSingleVerdict:
         assert result["finish_status"] == "stop"
         assert result["model"] == "deepseek/deepseek-v3.2"
 
+        # turns field populated from investigation phase
+        assert "turns" in result
+        assert result["turns"] == 3
+
     def test_happy_path_cost_summed_across_response_ids(self):
         """Cost is summed across all generation IDs (investigation + verdict)."""
         edit = _make_enriched_edit()
@@ -656,7 +665,7 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 100, 50, ["gen_1", "gen_2"], "stop")), \
+                   return_value=([], 100, 50, ["gen_1", "gen_2"], "stop", 2)), \
              patch("run_verdict_fanout.run_verdict_phase",
                    return_value=({"verdict": "plausible", "rationale": ".", "sources": []}, 80, 30, "gen_3")), \
              patch("run_verdict_fanout.fetch_generation_cost", return_value=cost_per_gen) as mock_cost:
@@ -680,7 +689,7 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 150, 60, ["gen_inv"], "stop")), \
+                   return_value=([], 150, 60, ["gen_inv"], "stop", 5)), \
              patch("run_verdict_fanout.run_verdict_phase",
                    return_value=({"verdict": "suspect", "rationale": ".", "sources": []}, 90, 40, "gen_vrd")), \
              patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
@@ -701,7 +710,7 @@ class TestRunSingleVerdict:
         with patch("run_verdict_fanout.load_sift_prompt", return_value="prompt"), \
              patch("run_verdict_fanout.build_edit_context", return_value="context"), \
              patch("run_verdict_fanout.run_investigation_phase",
-                   return_value=([], 100, 50, ["gen_inv"], "stop")), \
+                   return_value=([], 100, 50, ["gen_inv"], "stop", 4)), \
              patch("run_verdict_fanout.run_verdict_phase",
                    return_value=(None, 80, 30, "gen_vrd")), \
              patch("run_verdict_fanout.fetch_generation_cost", return_value=None):
