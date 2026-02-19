@@ -213,5 +213,11 @@ throttle.ctrl
 apicache/
 *.lwp
 
+# SearXNG secret key (generated per-instance)
+config/searxng/settings.yml
+
+# Container volumes
+valkey-data/
+
 # Track chainlink issue database
 !.chainlink/issues.db
