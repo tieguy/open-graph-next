@@ -1,14 +1,9 @@
 """Tests for tool_executor.py — web_search and web_fetch functions."""
 
-import textwrap
-from pathlib import Path
 from unittest.mock import MagicMock, patch
 
 import httpx
 import pytest
-
-import sys
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "scripts"))
 
 from tool_executor import (
     is_blocked_domain,
@@ -16,6 +11,16 @@ from tool_executor import (
     web_fetch,
     web_search,
 )
+
+
+# ---------------------------------------------------------------------------
+# Fixtures
+# ---------------------------------------------------------------------------
+
+
+@pytest.fixture(autouse=True)
+def _skip_rate_limit(monkeypatch):
+    monkeypatch.setattr("tool_executor._rate_limit", lambda: None)
 
 
 # ---------------------------------------------------------------------------
