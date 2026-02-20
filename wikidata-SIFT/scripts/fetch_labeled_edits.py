@@ -313,6 +313,93 @@ class RecentChangesSource:
         return results
 
 
+def filter_self_reverts(edits):
+    """Remove edits where the reverter is the same user as the original editor.
+
+    Self-reverts don't represent quality failures — they're corrections
+    by the original editor.
+
+    Args:
+        edits: List of edit dicts with ground_truth keys.
+
+    Returns:
+        Filtered list with self-reverts removed.
+    """
+    filtered = []
+    for edit in edits:
+        gt = edit.get("ground_truth", {})
+        reverter = gt.get("reverter_user")
+        if reverter and reverter == edit.get("user"):
+            continue
+        filtered.append(edit)
+    return filtered
+
+
+def filter_edit_wars(edits):
+    """Remove edits caught in mutual revert chains.
+
+    An edit war is detected when the reverting edit was itself reverted.
+    Both the original edit and the reverting edit are removed.
+
+    Args:
+        edits: List of edit dicts with ground_truth keys.
+
+    Returns:
+        Filtered list with edit-war participants removed.
+    """
+    # Build set of revids that were reverted (these are the revert_revids)
+    revert_revids = set()
+    for edit in edits:
+        gt = edit.get("ground_truth", {})
+        rr = gt.get("revert_revid")
+        if rr:
+            revert_revids.add(rr)
+
+    # Build set of revids whose revert_revid is itself a reverted edit
+    # i.e., the reverter was also reverted -> edit war
+    war_revids = set()
+    reverted_revids_in_dataset = {
+        e["revid"] for e in edits
+        if e.get("ground_truth", {}).get("label") == "reverted"
+    }
+    for edit in edits:
+        gt = edit.get("ground_truth", {})
+        rr = gt.get("revert_revid")
+        # If this edit's reverter (revert_revid) also appears as a revid
+        # in the dataset AND that reverter was itself reverted, it's a war
+        if rr and rr in reverted_revids_in_dataset:
+            war_revids.add(edit["revid"])
+            war_revids.add(rr)
+
+    return [e for e in edits if e.get("revid") not in war_revids]
+
+
+def build_labeled_snapshot(reverted, survived, target_reverted=250, target_survived=250, seed=42):
+    """Sample and combine reverted + survived pools into a labeled snapshot.
+
+    Applies random sampling if pools exceed targets. Combines into a single
+    list with ground_truth labels preserved.
+
+    Args:
+        reverted: List of reverted edit dicts.
+        survived: List of survived edit dicts.
+        target_reverted: Target number of reverted edits.
+        target_survived: Target number of survived edits.
+        seed: Random seed for reproducible sampling.
+
+    Returns:
+        Combined list of sampled edit dicts.
+    """
+    rng = random.Random(seed)
+
+    if len(reverted) > target_reverted:
+        reverted = rng.sample(reverted, target_reverted)
+    if len(survived) > target_survived:
+        survived = rng.sample(survived, target_survived)
+
+    return reverted + survived
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Fetch labeled historical edits from Wikidata for evaluation."
@@ -343,8 +430,62 @@ def main():
     )
     args = parser.parse_args()
 
-    print(f"Arguments: reverted={args.reverted}, survived={args.survived}")
-    print("Not yet implemented — see Tasks 2-8")
+    site = get_production_site()
+    source = RecentChangesSource(site)
+
+    print(f"Fetching reverted edits (target: {args.reverted})...")
+    reverted_raw = source.fetch_reverted(limit=args.reverted * 2)
+    print(f"  Found {len(reverted_raw)} candidates")
+
+    print(f"Fetching survived edits (target: {args.survived})...")
+    reverted_revids = {e["revid"] for e in reverted_raw}
+    survived_raw = source.fetch_survived(limit=args.survived * 2, exclude_revids=reverted_revids)
+    print(f"  Found {len(survived_raw)} candidates")
+
+    # Filter
+    all_edits = reverted_raw + survived_raw
+    print("Filtering self-reverts...")
+    all_edits = filter_self_reverts(all_edits)
+    print("Filtering edit wars...")
+    all_edits = filter_edit_wars(all_edits)
+
+    # Split back into pools after filtering
+    reverted = [e for e in all_edits if e["ground_truth"]["label"] == "reverted"]
+    survived = [e for e in all_edits if e["ground_truth"]["label"] == "survived"]
+    print(f"After filtering: {len(reverted)} reverted, {len(survived)} survived")
+
+    # Sample
+    edits = build_labeled_snapshot(
+        reverted, survived,
+        target_reverted=args.reverted,
+        target_survived=args.survived,
+        seed=args.seed,
+    )
+    print(
+        f"Sampled: {len([e for e in edits if e['ground_truth']['label'] == 'reverted'])} reverted, "
+        f"{len([e for e in edits if e['ground_truth']['label'] == 'survived'])} survived"
+    )
+
+    if args.dry_run:
+        for edit in edits:
+            gt = edit["ground_truth"]
+            print(f"  {edit.get('title', '?')} [{gt['label']}] ({gt.get('evidence', '?')})")
+        return
+
+    # Enrich
+    if not args.no_enrich:
+        print("Enriching edits...")
+        label_cache = LabelCache(site)
+        blocked_domains = load_blocked_domains()
+        groups = group_edits(edits)
+        for i, group in enumerate(groups):
+            print(f"  Enriching group {i + 1}/{len(groups)} ({group[0]['title']})...")
+            enrich_edit_group(group, label_cache, blocked_domains=blocked_domains)
+            time.sleep(0.5)
+
+    # Save
+    filepath = save_snapshot(edits, "labeled-eval", args.output_dir)
+    print(f"Saved {len(edits)} labeled edits to {filepath}")
 
 
 if __name__ == "__main__":

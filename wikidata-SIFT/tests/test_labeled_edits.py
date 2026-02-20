@@ -314,3 +314,172 @@ class TestFetchSurvived:
 
         assert len(results) == 1
         assert results[0]["ground_truth"]["evidence"] == "not-reverted-14d"
+
+
+class TestSelfRevertFiltering:
+    """Tests for self-revert filtering."""
+
+    def test_removes_self_reverts(self):
+        """Edits where reverter == original editor are filtered out."""
+        from fetch_labeled_edits import filter_self_reverts
+
+        edits = [
+            {
+                "user": "Alice",
+                "ground_truth": {
+                    "label": "reverted",
+                    "reverter_user": "Alice",  # self-revert
+                },
+            },
+            {
+                "user": "Bob",
+                "ground_truth": {
+                    "label": "reverted",
+                    "reverter_user": "Carol",  # not self-revert
+                },
+            },
+        ]
+
+        filtered = filter_self_reverts(edits)
+
+        assert len(filtered) == 1
+        assert filtered[0]["user"] == "Bob"
+
+    def test_passes_survived_edits_through(self):
+        """Survived edits have no reverter_user and pass through."""
+        from fetch_labeled_edits import filter_self_reverts
+
+        edits = [
+            {
+                "user": "Alice",
+                "ground_truth": {"label": "survived", "evidence": "patrolled"},
+            },
+        ]
+
+        filtered = filter_self_reverts(edits)
+
+        assert len(filtered) == 1
+
+    def test_passes_reverted_without_reverter(self):
+        """Reverted edits from Pool A (no reverter_user) pass through."""
+        from fetch_labeled_edits import filter_self_reverts
+
+        edits = [
+            {
+                "user": "Alice",
+                "ground_truth": {"label": "reverted", "evidence": "mw-reverted-tag"},
+            },
+        ]
+
+        filtered = filter_self_reverts(edits)
+
+        assert len(filtered) == 1
+
+
+class TestEditWarFiltering:
+    """Tests for edit-war filtering."""
+
+    def test_removes_edit_war_edits(self):
+        """Edits in revert chains (reverter was also reverted) are filtered."""
+        from fetch_labeled_edits import filter_edit_wars
+
+        edits = [
+            {
+                "revid": 100,
+                "ground_truth": {
+                    "label": "reverted",
+                    "revert_revid": 200,  # revision 200 reverted this
+                },
+            },
+            {
+                "revid": 200,
+                "ground_truth": {
+                    "label": "reverted",
+                    "revert_revid": 300,  # revision 200 was itself reverted
+                },
+            },
+            {
+                "revid": 500,
+                "ground_truth": {
+                    "label": "reverted",
+                    "revert_revid": 600,  # not in a chain
+                },
+            },
+        ]
+
+        filtered = filter_edit_wars(edits)
+
+        # Edit 100 was reverted by 200, and 200 was itself reverted -> edit war
+        # Edit 200 was itself reverted -> edit war participant
+        # Edit 500 is standalone revert, not part of chain
+        assert len(filtered) == 1
+        assert filtered[0]["revid"] == 500
+
+    def test_passes_survived_edits_through(self):
+        """Survived edits have no revert_revid and pass through."""
+        from fetch_labeled_edits import filter_edit_wars
+
+        edits = [
+            {
+                "revid": 100,
+                "ground_truth": {"label": "survived"},
+            },
+        ]
+
+        filtered = filter_edit_wars(edits)
+
+        assert len(filtered) == 1
+
+
+class TestBuildLabeledSnapshot:
+    """Tests for the main orchestration function."""
+
+    def test_samples_to_target_sizes(self):
+        """build_labeled_snapshot samples to requested pool sizes."""
+        from fetch_labeled_edits import build_labeled_snapshot
+
+        reverted = [
+            {"revid": i, "title": f"Q{i}", "user": f"U{i}", "comment": "",
+             "tags": [], "ground_truth": {"label": "reverted"}}
+            for i in range(10)
+        ]
+        survived = [
+            {"revid": i + 100, "title": f"Q{i + 100}", "user": f"U{i}", "comment": "",
+             "tags": [], "ground_truth": {"label": "survived"}}
+            for i in range(10)
+        ]
+
+        result = build_labeled_snapshot(reverted, survived, target_reverted=3, target_survived=3, seed=42)
+
+        reverted_count = sum(1 for e in result if e["ground_truth"]["label"] == "reverted")
+        survived_count = sum(1 for e in result if e["ground_truth"]["label"] == "survived")
+        assert reverted_count == 3
+        assert survived_count == 3
+
+    def test_deterministic_with_seed(self):
+        """Same seed produces same sample."""
+        from fetch_labeled_edits import build_labeled_snapshot
+
+        edits = [
+            {"revid": i, "title": f"Q{i}", "user": f"U{i}", "comment": "",
+             "tags": [], "ground_truth": {"label": "reverted"}}
+            for i in range(20)
+        ]
+
+        r1 = build_labeled_snapshot(edits, [], target_reverted=5, target_survived=0, seed=42)
+        r2 = build_labeled_snapshot(edits, [], target_reverted=5, target_survived=0, seed=42)
+
+        assert [e["revid"] for e in r1] == [e["revid"] for e in r2]
+
+    def test_keeps_all_if_under_target(self):
+        """If pool is smaller than target, keep all edits."""
+        from fetch_labeled_edits import build_labeled_snapshot
+
+        edits = [
+            {"revid": 1, "title": "Q1", "user": "U1", "comment": "",
+             "tags": [], "ground_truth": {"label": "reverted"}}
+        ]
+
+        result = build_labeled_snapshot(edits, [], target_reverted=5, target_survived=0, seed=42)
+
+        assert len(result) == 1
