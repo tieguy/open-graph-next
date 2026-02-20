@@ -92,8 +92,177 @@ class RecentChangesSource:
         self.rc_start = now - timedelta(days=window_end_days)
         self.rc_end = now - timedelta(days=window_start_days)
 
+    def _fetch_pool_a(self, limit):
+        """Pool A: edits tagged mw-reverted that are new-editor statement edits.
+
+        Queries for edits with the mw-reverted tag in the time window, then
+        filters to only those that also have a STATEMENT_TAGS tag.
+
+        Returns:
+            List of edit dicts with ground_truth key.
+        """
+        results = []
+        for change in self.site.recentchanges(
+            namespaces=[0],
+            bot=False,
+            tag="mw-reverted",
+            start=self.rc_start,
+            end=self.rc_end,
+            total=limit * 5,  # overfetch since we filter
+        ):
+            tags = change.get("tags", [])
+            is_new_editor_statement = any(t in tags for t in STATEMENT_TAGS)
+            if not is_new_editor_statement:
+                continue
+
+            edit = normalize_change(change)
+            edit["ground_truth"] = {
+                "label": "reverted",
+                "evidence": "mw-reverted-tag",
+            }
+            results.append(edit)
+
+            if len(results) >= limit:
+                break
+
+        return results
+
+    def _lookup_revision(self, revid):
+        """Look up revision metadata via the MediaWiki API.
+
+        Args:
+            revid: Revision ID to look up.
+
+        Returns:
+            Dict with revid, user, comment, tags, parentid, timestamp.
+            Returns None if the revision cannot be found.
+        """
+        try:
+            request = self.site.simple_request(
+                action="query",
+                prop="revisions",
+                revids=revid,
+                rvprop="ids|user|comment|tags|timestamp",
+            )
+            data = request.submit()
+            pages = data.get("query", {}).get("pages", {})
+            # pages is a dict keyed by page ID (could be negative for missing)
+            for page in pages.values() if isinstance(pages, dict) else pages:
+                revisions = page.get("revisions", [])
+                if revisions:
+                    rev = revisions[0]
+                    return {
+                        "revid": rev.get("revid"),
+                        "user": rev.get("user"),
+                        "comment": rev.get("comment", ""),
+                        "tags": rev.get("tags", []),
+                        "parentid": rev.get("parentid"),
+                        "timestamp": rev.get("timestamp"),
+                    }
+        except Exception:
+            pass
+        return None
+
+    def _fetch_pool_b(self, limit, exclude_rcids, exclude_revids=None):
+        """Pool B: trace back from mw-rollback/mw-undo to find reverted edits.
+
+        For each reverting action, looks up old_revid to find the edit that
+        was reverted. Checks if it was a new-editor statement edit.
+
+        Args:
+            limit: Maximum number of reverted edits to collect.
+            exclude_rcids: Set of rcids already found in Pool A (for dedup).
+            exclude_revids: Set of revids already found (for dedup).
+
+        Returns:
+            List of edit dicts with ground_truth key.
+        """
+        if exclude_revids is None:
+            exclude_revids = set()
+
+        results = []
+        seen_revids = set(exclude_revids)
+
+        for revert_tag in ("mw-rollback", "mw-undo"):
+            if len(results) >= limit:
+                break
+
+            for change in self.site.recentchanges(
+                namespaces=[0],
+                bot=False,
+                tag=revert_tag,
+                start=self.rc_start,
+                end=self.rc_end,
+                total=limit * 5,
+            ):
+                if len(results) >= limit:
+                    break
+
+                reverted_revid = change.get("old_revid")
+                if not reverted_revid or reverted_revid in seen_revids:
+                    continue
+
+                seen_revids.add(reverted_revid)
+
+                # Look up the reverted revision's metadata
+                rev_info = self._lookup_revision(reverted_revid)
+                if rev_info is None:
+                    continue
+
+                # Check if it's a new-editor statement edit
+                rev_tags = rev_info.get("tags", [])
+                is_new_editor_statement = any(t in rev_tags for t in STATEMENT_TAGS)
+                if not is_new_editor_statement:
+                    continue
+
+                # Build edit dict from revision info
+                edit = {
+                    "rcid": None,  # Not available from revision lookup
+                    "revid": rev_info["revid"],
+                    "old_revid": rev_info.get("parentid"),
+                    "title": change.get("title"),
+                    "user": rev_info["user"],
+                    "timestamp": rev_info.get("timestamp"),
+                    "comment": rev_info.get("comment", ""),
+                    "tags": rev_tags,
+                    "ground_truth": {
+                        "label": "reverted",
+                        "evidence": "reverter-traced",
+                        "reverter_user": change.get("user"),
+                        "revert_revid": change.get("revid"),
+                    },
+                }
+                results.append(edit)
+
+        return results
+
     def fetch_reverted(self, limit):
-        raise NotImplementedError("Implemented in Task 2-4")
+        """Fetch reverted edits via dual-query (Pool A + Pool B).
+
+        Pool A: edits tagged mw-reverted that are new-editor statement edits.
+        Pool B: trace-back from mw-rollback/mw-undo to find additional reverted edits.
+        Results are deduplicated by revid.
+
+        Args:
+            limit: Maximum total reverted edits to collect.
+
+        Returns:
+            List of edit dicts with ground_truth key.
+        """
+        pool_a = self._fetch_pool_a(limit=limit)
+        pool_a_revids = {e["revid"] for e in pool_a}
+        pool_a_rcids = {e["rcid"] for e in pool_a if e.get("rcid")}
+
+        remaining = limit - len(pool_a)
+        pool_b = []
+        if remaining > 0:
+            pool_b = self._fetch_pool_b(
+                limit=remaining,
+                exclude_rcids=pool_a_rcids,
+                exclude_revids=pool_a_revids,
+            )
+
+        return pool_a + pool_b
 
     def fetch_survived(self, limit):
         raise NotImplementedError("Implemented in Task 5")
