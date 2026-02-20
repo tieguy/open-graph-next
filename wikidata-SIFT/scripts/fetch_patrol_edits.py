@@ -1064,6 +1064,39 @@ def extract_reference_urls(edit_diff):
     return urls
 
 
+def extract_item_reference_urls(item):
+    """Extract all P854 (reference URL) values from all claims on an item.
+
+    Walks the serialized claims structure (from serialize_claims output)
+    and collects every P854 reference URL across all properties.
+
+    Args:
+        item: The item context dict (with "claims" key from enrichment).
+            The claims are in serialized format (from serialize_claims).
+
+    Returns:
+        Set of URL strings.
+    """
+    if not item:
+        return set()
+
+    claims = item.get("claims", {})
+    urls = set()
+
+    for prop_data in claims.values():
+        if not isinstance(prop_data, dict):
+            continue
+        for stmt in prop_data.get("statements", []):
+            for ref_block in stmt.get("references", []):
+                p854 = ref_block.get("P854")
+                if p854 and isinstance(p854, dict):
+                    url = p854.get("value")
+                    if url and isinstance(url, str) and url.startswith("http"):
+                        urls.add(url)
+
+    return urls
+
+
 def is_blocked_domain(url, blocked_domains):
     """Check if a URL's hostname matches any blocked domain.
 

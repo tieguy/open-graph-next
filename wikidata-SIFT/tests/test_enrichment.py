@@ -1366,3 +1366,151 @@ class TestEnrichEditGroupPrefetch:
         assert "prefetched_references" in group[0]
         assert "prefetched_references" in group[1]
         assert group[0]["prefetched_references"]["https://example.com/shared"]["status"] == 200
+
+
+class TestExtractItemReferenceUrls:
+    """Tests for item-wide citation URL extraction."""
+
+    def test_extracts_p854_from_all_claims(self):
+        """Extracts reference URLs from multiple claims across properties."""
+        from fetch_patrol_edits import extract_item_reference_urls
+
+        item = {
+            "claims": {
+                "occupation": {
+                    "property_label": "occupation",
+                    "statements": [
+                        {
+                            "value": "Q901",
+                            "value_label": "scientist",
+                            "rank": "normal",
+                            "qualifiers": {},
+                            "references": [
+                                {
+                                    "P854": {
+                                        "property_label": "reference URL",
+                                        "value": "https://example.com/source1",
+                                        "value_label": None,
+                                    }
+                                }
+                            ],
+                        }
+                    ],
+                },
+                "employer": {
+                    "property_label": "employer",
+                    "statements": [
+                        {
+                            "value": "Q42",
+                            "value_label": "Uni",
+                            "rank": "normal",
+                            "qualifiers": {},
+                            "references": [
+                                {
+                                    "P854": {
+                                        "property_label": "reference URL",
+                                        "value": "https://example.com/source2",
+                                        "value_label": None,
+                                    }
+                                }
+                            ],
+                        }
+                    ],
+                },
+            }
+        }
+
+        urls = extract_item_reference_urls(item)
+
+        assert urls == {"https://example.com/source1", "https://example.com/source2"}
+
+    def test_returns_empty_set_for_no_references(self):
+        """Returns empty set when no claims have P854 references."""
+        from fetch_patrol_edits import extract_item_reference_urls
+
+        item = {
+            "claims": {
+                "occupation": {
+                    "property_label": "occupation",
+                    "statements": [
+                        {
+                            "value": "Q901",
+                            "value_label": "scientist",
+                            "rank": "normal",
+                            "qualifiers": {},
+                            "references": [],
+                        }
+                    ],
+                }
+            }
+        }
+
+        urls = extract_item_reference_urls(item)
+
+        assert urls == set()
+
+    def test_deduplicates_urls(self):
+        """Same URL referenced by multiple claims is returned once."""
+        from fetch_patrol_edits import extract_item_reference_urls
+
+        item = {
+            "claims": {
+                "occupation": {
+                    "property_label": "occupation",
+                    "statements": [
+                        {
+                            "value": "Q901", "value_label": "scientist",
+                            "rank": "normal", "qualifiers": {},
+                            "references": [{"P854": {"property_label": "reference URL", "value": "https://example.com/dup", "value_label": None}}],
+                        }
+                    ],
+                },
+                "employer": {
+                    "property_label": "employer",
+                    "statements": [
+                        {
+                            "value": "Q42", "value_label": "Uni",
+                            "rank": "normal", "qualifiers": {},
+                            "references": [{"P854": {"property_label": "reference URL", "value": "https://example.com/dup", "value_label": None}}],
+                        }
+                    ],
+                },
+            }
+        }
+
+        urls = extract_item_reference_urls(item)
+
+        assert urls == {"https://example.com/dup"}
+
+    def test_handles_missing_item(self):
+        """Returns empty set when item is None."""
+        from fetch_patrol_edits import extract_item_reference_urls
+
+        assert extract_item_reference_urls(None) == set()
+        assert extract_item_reference_urls({}) == set()
+
+    def test_handles_multiple_ref_blocks(self):
+        """Handles statements with multiple reference blocks."""
+        from fetch_patrol_edits import extract_item_reference_urls
+
+        item = {
+            "claims": {
+                "occupation": {
+                    "property_label": "occupation",
+                    "statements": [
+                        {
+                            "value": "Q901", "value_label": "scientist",
+                            "rank": "normal", "qualifiers": {},
+                            "references": [
+                                {"P854": {"property_label": "reference URL", "value": "https://example.com/a", "value_label": None}},
+                                {"P854": {"property_label": "reference URL", "value": "https://example.com/b", "value_label": None}},
+                            ],
+                        }
+                    ],
+                }
+            }
+        }
+
+        urls = extract_item_reference_urls(item)
+
+        assert urls == {"https://example.com/a", "https://example.com/b"}
