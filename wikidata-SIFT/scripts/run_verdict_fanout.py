@@ -17,6 +17,43 @@ from openai import OpenAI
 from sift_precheck import make_verification_question, check_ontological_consistency
 from tool_executor import web_search, web_fetch, load_blocked_domains
 
+# Path to evaluation-mode blocked domains config (relative to project root).
+EVAL_BLOCKED_DOMAINS_PATH = Path("config/blocked_domains_eval.yaml")
+
+
+def load_eval_blocked_domains():
+    """Load the evaluation-mode blocked domain config.
+
+    Includes wikidata.org to prevent label leakage during evaluation.
+    Uses load_blocked_domains from tool_executor (already imported).
+
+    Returns:
+        Set of domain strings.
+    """
+    config_path = EVAL_BLOCKED_DOMAINS_PATH
+    if not config_path.is_absolute():
+        script_dir = Path(__file__).resolve().parent
+        candidate = script_dir.parent / EVAL_BLOCKED_DOMAINS_PATH
+        if candidate.exists():
+            config_path = candidate
+    return load_blocked_domains(config_path)
+
+
+def strip_ground_truth(edit):
+    """Return a copy of the edit dict with ground_truth removed.
+
+    Does NOT modify the original dict — returns a shallow copy with the
+    ground_truth key removed so models never see the labels.
+
+    Args:
+        edit: Edit dict that may contain a ground_truth key.
+
+    Returns:
+        New dict with all keys except ground_truth.
+    """
+    return {k: v for k, v in edit.items() if k != "ground_truth"}
+
+
 # --- Constants ---
 
 # Context window limits per model (for monitoring/warnings)
@@ -770,6 +807,10 @@ def main():
     parser.add_argument(
         "--dry-run", action="store_true", help="Print what would be processed without calling OpenRouter"
     )
+    parser.add_argument(
+        "--eval", action="store_true",
+        help="Evaluation mode: block wikidata.org and strip ground_truth from edits",
+    )
     args = parser.parse_args()
 
     # Load snapshot
@@ -783,7 +824,11 @@ def main():
     models_to_use = args.models or MODELS
 
     # Load blocked domains
-    blocked_domains = load_blocked_domains()
+    if args.eval:
+        blocked_domains = load_eval_blocked_domains()
+        print("Evaluation mode: wikidata.org blocked, ground_truth will be stripped")
+    else:
+        blocked_domains = load_blocked_domains()
 
     if args.dry_run:
         print(f"Dry run: would process {len(edits)} edits across {len(models_to_use)} models")
@@ -829,9 +874,10 @@ def main():
 
         try:
             timeout = MODEL_TIMEOUTS.get(model, DEFAULT_TIMEOUT)
+            verdict_edit = strip_ground_truth(edit) if args.eval else edit
             verdict, timed_out = run_with_timeout(
                 run_single_verdict,
-                (client, model, edit, blocked_domains, api_key),
+                (client, model, verdict_edit, blocked_domains, api_key),
                 timeout_secs=timeout,
             )
 

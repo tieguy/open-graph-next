@@ -1176,3 +1176,81 @@ class TestBuildExecutionOrder:
         model = "vendor/only-model"
         result = build_execution_order([edit], [model])
         assert result == [(edit, model)]
+
+
+# ---------------------------------------------------------------------------
+# TestEvalMode
+# ---------------------------------------------------------------------------
+
+
+class TestEvalMode:
+    """Tests for --eval flag behavior."""
+
+    def test_eval_loads_eval_blocked_domains(self):
+        """--eval flag loads blocked_domains_eval.yaml instead of base config."""
+        from run_verdict_fanout import load_eval_blocked_domains
+
+        domains = load_eval_blocked_domains()
+
+        assert "wikidata.org" in domains
+        assert "wikipedia.org" in domains
+
+    def test_ground_truth_stripped_before_context(self):
+        """ground_truth key is removed before building edit context."""
+        from run_verdict_fanout import strip_ground_truth, build_edit_context
+
+        edit = _make_enriched_edit()
+        edit["ground_truth"] = {
+            "label": "reverted",
+            "evidence": "mw-reverted-tag",
+        }
+
+        stripped = strip_ground_truth(edit)
+
+        assert "ground_truth" not in stripped
+        # Original edit should still have ground_truth (no in-place mutation)
+        assert "ground_truth" in edit
+
+        # Context built from stripped edit should not contain ground truth
+        context = build_edit_context(stripped)
+        assert "reverted" not in context
+        assert "ground_truth" not in context
+
+    def test_strip_preserves_other_keys(self):
+        """strip_ground_truth preserves all other edit keys."""
+        from run_verdict_fanout import strip_ground_truth
+
+        edit = _make_enriched_edit()
+        edit["ground_truth"] = {"label": "reverted"}
+
+        stripped = strip_ground_truth(edit)
+
+        assert stripped["rcid"] == edit["rcid"]
+        assert stripped["revid"] == edit["revid"]
+        assert stripped["title"] == edit["title"]
+        assert stripped["parsed_edit"] == edit["parsed_edit"]
+
+
+# ---------------------------------------------------------------------------
+# TestEvalCLI
+# ---------------------------------------------------------------------------
+
+
+class TestEvalCLI:
+    """Tests for --eval CLI flag."""
+
+    def test_eval_flag_accepted(self, capsys):
+        """--eval flag is accepted by argparse."""
+        import sys
+
+        with patch.object(sys, "argv", ["prog", "--snapshot", "test.yaml", "--dry-run", "--eval"]):
+            with patch("run_verdict_fanout.load_eval_blocked_domains", return_value={"wikidata.org"}):
+                with patch("builtins.open", MagicMock(return_value=MagicMock(
+                    __enter__=MagicMock(return_value=MagicMock(read=MagicMock(return_value="edits: []"))),
+                    __exit__=MagicMock(return_value=False),
+                ))):
+                    with patch("run_verdict_fanout.yaml.safe_load", return_value={"edits": []}):
+                        main()
+
+        captured = capsys.readouterr()
+        assert "Evaluation mode" in captured.out
