@@ -281,6 +281,7 @@ class RecentChangesSource:
             exclude_revids = set()
 
         results = []
+        seen_revids = set(exclude_revids)
 
         for tag in STATEMENT_TAGS:
             if len(results) >= limit:
@@ -298,8 +299,9 @@ class RecentChangesSource:
                     break
 
                 revid = change.get("revid")
-                if revid in exclude_revids:
+                if revid in seen_revids:
                     continue
+                seen_revids.add(revid)
 
                 edit = normalize_change(change)
 
@@ -347,14 +349,6 @@ def filter_edit_wars(edits):
     Returns:
         Filtered list with edit-war participants removed.
     """
-    # Build set of revids that were reverted (these are the revert_revids)
-    revert_revids = set()
-    for edit in edits:
-        gt = edit.get("ground_truth", {})
-        rr = gt.get("revert_revid")
-        if rr:
-            revert_revids.add(rr)
-
     # Build set of revids whose revert_revid is itself a reverted edit
     # i.e., the reverter was also reverted -> edit war
     war_revids = set()
