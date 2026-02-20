@@ -118,17 +118,23 @@ def load_sift_prompt():
         return f.read()
 
 
-def build_edit_context(edit):
+def build_edit_context(edit, context_budget=None):
     """Build the user message string for the investigation phase.
 
     Calls make_verification_question() and check_ontological_consistency()
     from sift_precheck. Returns a string with YAML-formatted item context,
     parsed edit, and the verification question with any ontological warnings.
+
+    Args:
+        edit: Enriched edit dict.
+        context_budget: Optional approximate character budget for the message.
+            If set, item context is truncated to fit. Prioritizes the edited
+            property's claims over other claims. If None, no truncation.
     """
     verification_question = make_verification_question(edit)
     warnings = check_ontological_consistency(edit)
 
-    # Build the context message
+    # Build essential sections (always included regardless of budget)
     parts = []
 
     # Include key edit metadata
@@ -149,11 +155,11 @@ def build_edit_context(edit):
         parts.append("\n## Parsed edit\n")
         parts.append(yaml.safe_dump(parsed_edit, default_flow_style=False, allow_unicode=True))
 
-    # Include item context if available
-    item = edit.get("item")
-    if item:
-        parts.append("\n## Item context\n")
-        parts.append(yaml.safe_dump(item, default_flow_style=False, allow_unicode=True))
+    # Include edit diff if available (and not an error result)
+    edit_diff = edit.get("edit_diff")
+    if edit_diff and "error" not in edit_diff:
+        parts.append("\n## Edit diff\n")
+        parts.append(yaml.safe_dump(edit_diff, default_flow_style=False, allow_unicode=True))
 
     # Include removed claim if available
     removed_claim = edit.get("removed_claim")
@@ -161,18 +167,139 @@ def build_edit_context(edit):
         parts.append("\n## Removed claim\n")
         parts.append(yaml.safe_dump(removed_claim, default_flow_style=False, allow_unicode=True))
 
-    # Add verification question
-    parts.append("\n## Verification question\n")
+    # Build verification question section (always included)
+    vq_parts = []
+    vq_parts.append("\n## Verification question\n")
     if verification_question:
-        parts.append(verification_question)
+        vq_parts.append(verification_question)
     else:
-        parts.append("(No verification question generated — parsed_edit may be missing.)")
-
-    # Append ontological warnings if any
+        vq_parts.append("(No verification question generated — parsed_edit may be missing.)")
     if warnings:
-        parts.append("\n\n" + "\n".join(warnings))
+        vq_parts.append("\n\n" + "\n".join(warnings))
+
+    # Calculate essential size to determine remaining budget for optional sections
+    essential = "\n".join(parts) + "\n".join(vq_parts)
+    essential_len = len(essential)
+
+    if context_budget is not None:
+        remaining_budget = max(0, context_budget - essential_len)
+    else:
+        remaining_budget = None
+
+    # Include item context if available (with optional truncation)
+    item = edit.get("item")
+    if item:
+        item_section = _build_item_context_section(item, parsed_edit, remaining_budget)
+        if item_section:
+            parts.append(item_section)
+            if remaining_budget is not None:
+                remaining_budget = max(0, remaining_budget - len(item_section))
+
+    # Include prefetched references if available
+    prefetched = edit.get("prefetched_references")
+    if prefetched:
+        ref_section = _build_prefetched_section(prefetched, remaining_budget)
+        if ref_section:
+            parts.append(ref_section)
+
+    # Append verification question at the end
+    parts.extend(vq_parts)
 
     return "\n".join(parts)
+
+
+def _build_item_context_section(item, parsed_edit, budget):
+    """Build the item context section with optional truncation.
+
+    Priority order:
+    1. Item label and description (always)
+    2. Claims on the edited property
+    3. Other claims (truncated if over budget)
+    """
+    claims = item.get("claims", {})
+    edited_prop_label = parsed_edit.get("property_label") if parsed_edit else None
+
+    header = "\n## Item context\n"
+    meta = {}
+    if item.get("label_en"):
+        meta["label_en"] = item["label_en"]
+    if item.get("description_en"):
+        meta["description_en"] = item["description_en"]
+
+    meta_str = yaml.safe_dump(meta, default_flow_style=False, allow_unicode=True) if meta else ""
+
+    if not claims:
+        return header + meta_str
+
+    # Split claims by priority: edited property vs others
+    edited_prop_claims = {}
+    other_claims = {}
+    for prop_key, prop_data in claims.items():
+        if edited_prop_label and prop_key == edited_prop_label:
+            edited_prop_claims[prop_key] = prop_data
+        else:
+            other_claims[prop_key] = prop_data
+
+    # Serialize priority groups
+    edited_str = yaml.safe_dump(
+        {"claims": edited_prop_claims}, default_flow_style=False, allow_unicode=True
+    ) if edited_prop_claims else ""
+    other_str = yaml.safe_dump(
+        {"claims": other_claims}, default_flow_style=False, allow_unicode=True
+    ) if other_claims else ""
+
+    if budget is None:
+        # No truncation
+        all_claims_str = yaml.safe_dump(
+            {"claims": claims}, default_flow_style=False, allow_unicode=True
+        )
+        return header + meta_str + all_claims_str
+
+    # Truncation logic
+    used = len(header) + len(meta_str)
+    result = header + meta_str
+
+    if used + len(edited_str) <= budget:
+        result += edited_str
+        used += len(edited_str)
+    elif edited_str:
+        # Truncate edited property claims
+        result += edited_str[:max(0, budget - used)] + "\n...(truncated)\n"
+        return result
+
+    if used + len(other_str) <= budget:
+        result += other_str
+    elif other_str:
+        result += other_str[:max(0, budget - used)] + "\n...(truncated)\n"
+
+    return result
+
+
+def _build_prefetched_section(prefetched, budget):
+    """Build the prefetched references section with optional truncation."""
+    if not prefetched:
+        return ""
+
+    parts = ["\n## Prefetched references\n"]
+    current_len = len(parts[0])
+
+    for url, ref_data in prefetched.items():
+        text = ref_data.get("extracted_text") if isinstance(ref_data, dict) else None
+        error = ref_data.get("error") if isinstance(ref_data, dict) else None
+
+        entry = ""
+        if text:
+            truncated_text = text[:5000]
+            entry = f"### {url}\n{truncated_text}\n"
+        elif error:
+            entry = f"### {url}\n(Fetch failed: {error})\n"
+
+        if budget is not None and current_len + len(entry) > budget:
+            break
+        parts.append(entry)
+        current_len += len(entry)
+
+    return "\n".join(parts) if len(parts) > 1 else ""
 
 
 def dispatch_tool_call(tool_call, blocked_domains=None):
@@ -435,7 +562,11 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
         dict: Full verdict including metadata, verdict data, and cost info.
     """
     sift_prompt = load_sift_prompt()
-    edit_context = build_edit_context(edit)
+    context_limit = CONTEXT_LIMITS.get(model, 100_000)
+    # Allocate ~40% of context for the prompt (system + user message)
+    # Conservative: chars ≈ tokens * 4, so budget = limit * 4 * 0.4
+    context_budget = int(context_limit * 4 * 0.4)
+    edit_context = build_edit_context(edit, context_budget=context_budget)
 
     initial_messages = [
         {"role": "system", "content": sift_prompt},

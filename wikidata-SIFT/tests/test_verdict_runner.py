@@ -61,6 +61,8 @@ def _make_enriched_edit(**overrides):
         },
         "edit_diff": {"type": "value_changed"},
         "item": {"label_en": "Douglas Adams", "claims": {}},
+        "removed_claim": None,
+        "prefetched_references": {},
     }
     edit.update(overrides)
     return edit
@@ -599,6 +601,196 @@ class TestBuildEditContext:
             context = build_edit_context(edit)
 
         assert "WARNING" not in context
+
+
+# ---------------------------------------------------------------------------
+# TestBuildEditContextEnhanced
+# ---------------------------------------------------------------------------
+
+
+class TestBuildEditContextEnhanced:
+    """Tests for edit_diff and prefetched_references in build_edit_context."""
+
+    def test_includes_edit_diff_section(self):
+        """build_edit_context includes edit_diff when present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            edit_diff={
+                "type": "value_changed",
+                "property": "P108",
+                "property_label": "employer",
+                "old_value": {"value": "Q42", "value_label": "Old Corp"},
+                "new_value": {"value": "Q99", "value_label": "New Corp"},
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "## Edit diff" in result
+        assert "value_changed" in result
+        assert "employer" in result
+
+    def test_includes_prefetched_references_section(self):
+        """build_edit_context includes prefetched_references when present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            prefetched_references={
+                "https://example.com/source": {
+                    "url": "https://example.com/source",
+                    "status": 200,
+                    "extracted_text": "This is the article content about the claim.",
+                    "error": None,
+                }
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "## Prefetched references" in result
+        assert "https://example.com/source" in result
+        assert "This is the article content about the claim." in result
+
+    def test_omits_edit_diff_when_missing(self):
+        """build_edit_context omits edit_diff section when not present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(edit_diff=None)
+
+        result = build_edit_context(edit)
+
+        assert "## Edit diff" not in result
+
+    def test_omits_prefetched_references_when_empty(self):
+        """build_edit_context omits prefetched_references when empty."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(prefetched_references={})
+
+        result = build_edit_context(edit)
+
+        assert "## Prefetched references" not in result
+
+    def test_skips_failed_prefetches(self):
+        """Prefetched references with errors are summarized, not included."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            prefetched_references={
+                "https://example.com/ok": {
+                    "url": "https://example.com/ok",
+                    "status": 200,
+                    "extracted_text": "Good content here.",
+                    "error": None,
+                },
+                "https://example.com/fail": {
+                    "url": "https://example.com/fail",
+                    "status": 403,
+                    "extracted_text": None,
+                    "error": "HTTP 403",
+                },
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "Good content here." in result
+        assert "HTTP 403" in result or "failed" in result.lower()
+
+
+# ---------------------------------------------------------------------------
+# TestContextBudget
+# ---------------------------------------------------------------------------
+
+
+class TestContextBudget:
+    """Tests for context-aware truncation in build_edit_context."""
+
+    def test_no_truncation_within_budget(self):
+        """When content fits within budget, nothing is truncated."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit()
+        result = build_edit_context(edit, context_budget=100_000)
+
+        assert "## Item context" in result
+
+    def test_truncates_item_context_when_over_budget(self):
+        """When content exceeds budget, item context is truncated."""
+        from run_verdict_fanout import build_edit_context
+
+        # Create an edit with very large item context
+        big_claims = {}
+        for i in range(50):
+            big_claims[f"prop_{i}"] = {
+                "property_label": f"property {i}",
+                "statements": [
+                    {
+                        "value": f"Q{i}",
+                        "value_label": f"value {i}" * 100,
+                        "rank": "normal",
+                        "qualifiers": {},
+                        "references": [],
+                    }
+                ],
+            }
+        edit = _make_enriched_edit(
+            item={
+                "label_en": "Test Item",
+                "description_en": "A test",
+                "claims": big_claims,
+            }
+        )
+
+        # Very tight budget
+        result = build_edit_context(edit, context_budget=2000)
+
+        # Essential sections still present
+        assert "## Edit to verify" in result
+        assert "## Verification question" in result
+        # Item context is truncated or reduced
+        assert len(result) < 20000
+
+    def test_prioritizes_edited_property_claims(self):
+        """Edited property claims are kept even with tight budget."""
+        from run_verdict_fanout import build_edit_context
+
+        claims = {
+            "instance of": {
+                "property_label": "instance of",
+                "statements": [{"value": "Q5", "value_label": "human", "rank": "normal", "qualifiers": {}, "references": []}],
+            },
+            "occupation": {
+                "property_label": "occupation",
+                "statements": [{"value": "Q1", "value_label": "writer " * 200, "rank": "normal", "qualifiers": {}, "references": []}],
+            },
+        }
+        edit = _make_enriched_edit(
+            parsed_edit={
+                "operation": "wbsetclaim-update",
+                "property": "P31",
+                "property_label": "instance of",
+                "value_raw": "Q5",
+                "value_label": "human",
+            },
+            item={"label_en": "Test", "description_en": "Test", "claims": claims},
+        )
+
+        result = build_edit_context(edit, context_budget=3000)
+
+        # The edited property (instance of) should be present
+        assert "instance of" in result
+
+    def test_default_budget_is_none(self):
+        """When context_budget is None, no truncation occurs."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit()
+        result_default = build_edit_context(edit)
+        result_none = build_edit_context(edit, context_budget=None)
+
+        assert result_default == result_none
 
 
 # ---------------------------------------------------------------------------
