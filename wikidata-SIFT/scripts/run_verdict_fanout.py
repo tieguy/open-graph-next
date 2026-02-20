@@ -21,7 +21,6 @@ from tool_executor import web_search, web_fetch, load_blocked_domains
 
 # Context window limits per model (for monitoring/warnings)
 CONTEXT_LIMITS = {
-    "nvidia/nemotron-3-nano-30b-a3b": 262_000,
     "mistralai/mistral-small-3.2-24b-instruct": 131_000,
     "allenai/olmo-3.1-32b-instruct": 65_000,
     "deepseek/deepseek-v3.2": 164_000,
@@ -29,13 +28,10 @@ CONTEXT_LIMITS = {
 }
 
 # Per-model verdict timeout overrides (seconds). Models not listed use DEFAULT_TIMEOUT.
-MODEL_TIMEOUTS = {
-    "nvidia/nemotron-3-nano-30b-a3b": 300,
-}
+MODEL_TIMEOUTS = {}
 DEFAULT_TIMEOUT = 180
 
 MODELS = [
-    "nvidia/nemotron-3-nano-30b-a3b",
     "mistralai/mistral-small-3.2-24b-instruct",
     "allenai/olmo-3.1-32b-instruct",
     "deepseek/deepseek-v3.2",
@@ -368,13 +364,10 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    # Some providers don't support json_object response format; fall back to
-    # prompt-only JSON extraction for those models.
-    # DeepInfra doesn't support json_object for Nemotron's Mamba2 architecture
-    SKIP_JSON_FORMAT = {"nvidia/nemotron-3-nano-30b-a3b"}
-    create_kwargs = dict(model=model, messages=messages)
-    if model not in SKIP_JSON_FORMAT:
-        create_kwargs["response_format"] = {"type": "json_object"}
+    create_kwargs = dict(
+        model=model, messages=messages,
+        response_format={"type": "json_object"},
+    )
 
     response = client.chat.completions.create(**create_kwargs)
 
