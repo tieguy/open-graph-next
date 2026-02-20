@@ -361,7 +361,10 @@ def run_verdict_phase(client, model, messages):
         "Based on your investigation, please provide your final verdict as JSON. "
         "Use this exact schema:\n\n"
         + json.dumps(VERDICT_SCHEMA, indent=2)
-        + "\n\nRespond with only valid JSON matching the schema."
+        + "\n\nThe sources array MUST contain at least one entry with "
+        "provenance: \"verified\". If you did not fetch any source during "
+        "your investigation, your verdict must be \"unverifiable\"."
+        "\n\nRespond with only valid JSON matching the schema."
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 

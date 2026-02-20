@@ -207,7 +207,7 @@ marimo/_lsp/
 __marimo__/
 
 # pywikibot credentials and cache (never commit these!)
-user-config.py
+# user-config.py is committed in config/pywikibot/ (symlinked from ~/.pywikibot/)
 user-password.py
 throttle.ctrl
 apicache/
