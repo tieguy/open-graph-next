@@ -233,3 +233,84 @@ class TestFetchReverted:
             exclude_revids = call_kwargs.kwargs.get("exclude_revids") or (call_kwargs.args[2] if len(call_kwargs.args) > 2 else None)
             assert exclude_revids is not None
             assert 200 in exclude_revids
+
+
+class TestFetchSurvived:
+    """Tests for Pool C: survived edits."""
+
+    def test_fetches_survived_edits(self):
+        """fetch_survived returns edits not in the reverted pool."""
+        from fetch_labeled_edits import RecentChangesSource
+
+        site = MagicMock()
+        source = RecentChangesSource(site)
+
+        change = _make_rc_change(
+            rcid=500, revid=600, old_revid=599,
+            title="Q99", user="NewUser2",
+            tags=["new editor changing statement"],
+        )
+        site.recentchanges.return_value = iter([change])
+
+        results = source.fetch_survived(limit=10, exclude_revids=set())
+
+        assert len(results) == 1
+        assert results[0]["ground_truth"]["label"] == "survived"
+
+    def test_excludes_reverted_edits(self):
+        """fetch_survived skips edits whose revid is in the exclude set."""
+        from fetch_labeled_edits import RecentChangesSource
+
+        site = MagicMock()
+        source = RecentChangesSource(site)
+
+        change = _make_rc_change(
+            rcid=500, revid=600, old_revid=599,
+            title="Q99", user="NewUser2",
+            tags=["new editor changing statement"],
+        )
+        site.recentchanges.return_value = iter([change])
+
+        results = source.fetch_survived(limit=10, exclude_revids={600})
+
+        assert len(results) == 0
+
+    def test_patrolled_evidence(self):
+        """Patrolled edits get evidence='patrolled'."""
+        from fetch_labeled_edits import RecentChangesSource
+
+        site = MagicMock()
+        source = RecentChangesSource(site)
+
+        change = _make_rc_change(
+            rcid=500, revid=600, old_revid=599,
+            title="Q99", user="NewUser2",
+            tags=["new editor changing statement"],
+        )
+        change["patrolled"] = True
+        site.recentchanges.return_value = iter([change])
+
+        results = source.fetch_survived(limit=10, exclude_revids=set())
+
+        assert len(results) == 1
+        assert results[0]["ground_truth"]["evidence"] == "patrolled"
+
+    def test_unpatrolled_evidence(self):
+        """Unpatrolled survived edits get evidence='not-reverted-14d'."""
+        from fetch_labeled_edits import RecentChangesSource
+
+        site = MagicMock()
+        source = RecentChangesSource(site)
+
+        change = _make_rc_change(
+            rcid=500, revid=600, old_revid=599,
+            title="Q99", user="NewUser2",
+            tags=["new editor changing statement"],
+        )
+        # No patrolled key or patrolled=False
+        site.recentchanges.return_value = iter([change])
+
+        results = source.fetch_survived(limit=10, exclude_revids=set())
+
+        assert len(results) == 1
+        assert results[0]["ground_truth"]["evidence"] == "not-reverted-14d"

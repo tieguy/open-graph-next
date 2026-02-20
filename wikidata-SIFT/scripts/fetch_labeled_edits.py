@@ -264,8 +264,53 @@ class RecentChangesSource:
 
         return pool_a + pool_b
 
-    def fetch_survived(self, limit):
-        raise NotImplementedError("Implemented in Task 5")
+    def fetch_survived(self, limit, exclude_revids=None):
+        """Pool C: edits that survived 14+ days without revert.
+
+        Queries for new-editor statement edits in the time window, excluding
+        any that appear in the reverted pools. Splits by patrol status.
+
+        Args:
+            limit: Maximum number of survived edits to collect.
+            exclude_revids: Set of revids from reverted pools (for exclusion).
+
+        Returns:
+            List of edit dicts with ground_truth key.
+        """
+        if exclude_revids is None:
+            exclude_revids = set()
+
+        results = []
+
+        for tag in STATEMENT_TAGS:
+            if len(results) >= limit:
+                break
+
+            for change in self.site.recentchanges(
+                namespaces=[0],
+                bot=False,
+                tag=tag,
+                start=self.rc_start,
+                end=self.rc_end,
+                total=limit * 3,
+            ):
+                if len(results) >= limit:
+                    break
+
+                revid = change.get("revid")
+                if revid in exclude_revids:
+                    continue
+
+                edit = normalize_change(change)
+
+                is_patrolled = change.get("patrolled", False)
+                edit["ground_truth"] = {
+                    "label": "survived",
+                    "evidence": "patrolled" if is_patrolled else "not-reverted-14d",
+                }
+                results.append(edit)
+
+        return results
 
 
 def main():
