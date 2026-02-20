@@ -1368,6 +1368,39 @@ class TestEnrichEditGroupPrefetch:
         assert group[0]["prefetched_references"]["https://example.com/shared"]["status"] == 200
 
 
+class TestBlockedDomainsEval:
+    """Tests for evaluation-mode blocked domain config."""
+
+    def test_eval_config_includes_wikidata(self):
+        """Eval config blocks wikidata.org in addition to base domains."""
+        from fetch_patrol_edits import load_blocked_domains
+        from pathlib import Path
+
+        config_path = Path(__file__).resolve().parent.parent / "config" / "blocked_domains_eval.yaml"
+        domains = load_blocked_domains(config_path)
+
+        assert "wikidata.org" in domains
+
+    def test_eval_config_includes_base_domains(self):
+        """Eval config still blocks all base domains."""
+        from fetch_patrol_edits import load_blocked_domains
+        from pathlib import Path
+
+        config_path = Path(__file__).resolve().parent.parent / "config" / "blocked_domains_eval.yaml"
+        domains = load_blocked_domains(config_path)
+
+        assert "wikipedia.org" in domains
+
+    def test_wikidata_subdomain_blocked(self):
+        """www.wikidata.org is blocked by wikidata.org entry."""
+        from fetch_patrol_edits import is_blocked_domain
+
+        domains = {"wikidata.org"}
+
+        assert is_blocked_domain("https://www.wikidata.org/wiki/Q42", domains)
+        assert is_blocked_domain("https://wikidata.org/wiki/Q42", domains)
+
+
 class TestExtractItemReferenceUrls:
     """Tests for item-wide citation URL extraction."""
 
