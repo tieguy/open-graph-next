@@ -16,6 +16,7 @@ Usage:
 """
 
 import argparse
+import logging
 import random
 import sys
 import time
@@ -32,10 +33,12 @@ from fetch_patrol_edits import (
     LabelCache,
     load_blocked_domains,
     normalize_change,
-    parse_edit_summary,
     save_snapshot,
     STATEMENT_TAGS,
 )
+
+
+logger = logging.getLogger(__name__)
 
 
 SNAPSHOT_DIR = "logs/wikidata-patrol-experiment/labeled"
@@ -159,11 +162,11 @@ class RecentChangesSource:
                         "parentid": rev.get("parentid"),
                         "timestamp": rev.get("timestamp"),
                     }
-        except Exception:
-            pass
+        except Exception as e:
+            logger.debug("Failed to look up revision %s: %s", revid, e)
         return None
 
-    def _fetch_pool_b(self, limit, exclude_rcids, exclude_revids=None):
+    def _fetch_pool_b(self, limit, exclude_revids=None):
         """Pool B: trace back from mw-rollback/mw-undo to find reverted edits.
 
         For each reverting action, looks up old_revid to find the edit that
@@ -171,7 +174,6 @@ class RecentChangesSource:
 
         Args:
             limit: Maximum number of reverted edits to collect.
-            exclude_rcids: Set of rcids already found in Pool A (for dedup).
             exclude_revids: Set of revids already found (for dedup).
 
         Returns:
@@ -251,14 +253,12 @@ class RecentChangesSource:
         """
         pool_a = self._fetch_pool_a(limit=limit)
         pool_a_revids = {e["revid"] for e in pool_a}
-        pool_a_rcids = {e["rcid"] for e in pool_a if e.get("rcid")}
 
         remaining = limit - len(pool_a)
         pool_b = []
         if remaining > 0:
             pool_b = self._fetch_pool_b(
                 limit=remaining,
-                exclude_rcids=pool_a_rcids,
                 exclude_revids=pool_a_revids,
             )
 

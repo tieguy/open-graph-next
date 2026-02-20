@@ -1,8 +1,8 @@
 """Tests for the labeled evaluation dataset fetcher."""
 
 import pytest
-from datetime import datetime, timedelta, timezone
-from unittest.mock import MagicMock, patch, call
+from datetime import datetime, timezone
+from unittest.mock import MagicMock, patch
 
 
 def _make_rc_change(rcid, revid, old_revid, title, user, tags, comment="/* wbsetclaim-update:2||1 */ [[Property:P108]]: [[Q42]]", timestamp=None):
@@ -120,7 +120,7 @@ class TestPoolB:
             })
         )
 
-        results = source._fetch_pool_b(limit=10, exclude_rcids=set())
+        results = source._fetch_pool_b(limit=10)
 
         assert len(results) == 1
         assert results[0]["revid"] == 200
@@ -159,12 +159,12 @@ class TestPoolB:
             })
         )
 
-        results = source._fetch_pool_b(limit=10, exclude_rcids=set())
+        results = source._fetch_pool_b(limit=10)
 
         assert len(results) == 0
 
-    def test_excludes_already_found_rcids(self):
-        """Pool B deduplicates against Pool A results."""
+    def test_excludes_already_found_revids(self):
+        """Pool B deduplicates against Pool A results by revid."""
         from fetch_labeled_edits import RecentChangesSource
 
         site = MagicMock()
@@ -194,7 +194,7 @@ class TestPoolB:
         )
 
         # Exclude revid 200 (already found)
-        results = source._fetch_pool_b(limit=10, exclude_rcids=set(), exclude_revids={200})
+        results = source._fetch_pool_b(limit=10, exclude_revids={200})
 
         assert len(results) == 0
 
