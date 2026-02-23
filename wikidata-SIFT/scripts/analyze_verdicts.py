@@ -136,6 +136,53 @@ def verdict_to_score(verdict_value):
     return VERDICT_ORDINAL.get(verdict_value, 2)
 
 
+def compute_per_model_metrics(joined):
+    """Compute confusion matrix and basic metrics for one model.
+
+    Args:
+        joined: List of (verdict_dict, ground_truth_dict) tuples,
+            all for the same model.
+
+    Returns:
+        Dict with confusion_matrix, precision_accept, recall_reject,
+        cost_per_verdict, and sample_count.
+    """
+    # Confusion matrix: rows = ground truth label, cols = decision
+    cm = {
+        "reverted": {"accept": 0, "reject": 0, "abstain": 0},
+        "survived": {"accept": 0, "reject": 0, "abstain": 0},
+    }
+
+    costs = []
+    for verdict, gt in joined:
+        decision = verdict_to_binary(verdict.get("verdict"))
+        label = gt["label"]
+        if label in cm:
+            cm[label][decision] += 1
+        cost = verdict.get("cost_usd")
+        if cost is not None:
+            costs.append(cost)
+
+    # Precision on accept = survived_accepted / total_accepted
+    total_accepted = cm["reverted"]["accept"] + cm["survived"]["accept"]
+    precision_accept = cm["survived"]["accept"] / total_accepted if total_accepted > 0 else 0.0
+
+    # Recall on reject = reverted_rejected / total_reverted
+    total_reverted = cm["reverted"]["accept"] + cm["reverted"]["reject"] + cm["reverted"]["abstain"]
+    recall_reject = cm["reverted"]["reject"] / total_reverted if total_reverted > 0 else 0.0
+
+    # Cost per verdict
+    cost_per_verdict = sum(costs) / len(costs) if costs else None
+
+    return {
+        "confusion_matrix": cm,
+        "precision_accept": precision_accept,
+        "recall_reject": recall_reject,
+        "cost_per_verdict": cost_per_verdict,
+        "sample_count": len(joined),
+    }
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Analyze verdict fanout results against ground truth."
