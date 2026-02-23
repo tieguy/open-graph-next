@@ -1,0 +1,38 @@
+# Blocked domains for evaluation mode.
+# Extends the base blocked_domains.yaml with wikidata.org to prevent
+# label leakage during model evaluation runs.
+domains:
+  - domain: wikidata.org
+    reason: label-leakage
+    note: >
+      Blocked during evaluation to prevent models from reading Wikidata
+      directly and discovering whether an edit was reverted or accepted.
+  - domain: wikipedia.org
+    reason: circular
+    note: >
+      Wikipedia is a mirror/sister of Wikidata. Information flows both ways,
+      making it circular as a verification source.
+  - domain: britannica.com
+    reason: blocked
+    note: Blocks automated access (403/captcha).
+  - domain: museodelprado.es
+    reason: blocked
+    note: Blocks automated access.
+  - domain: imdb.com
+    reason: blocked
+    note: Blocks automated access (requires JavaScript).
+  - domain: linkedin.com
+    reason: blocked
+    note: Requires login for most content.
+  - domain: facebook.com
+    reason: blocked
+    note: Requires login for most content.
+  - domain: instagram.com
+    reason: blocked
+    note: Requires login for most content.
+  - domain: twitter.com
+    reason: blocked
+    note: Blocks automated access.
+  - domain: x.com
+    reason: blocked
+    note: Blocks automated access.

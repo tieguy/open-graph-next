@@ -61,6 +61,8 @@ def _make_enriched_edit(**overrides):
         },
         "edit_diff": {"type": "value_changed"},
         "item": {"label_en": "Douglas Adams", "claims": {}},
+        "removed_claim": None,
+        "prefetched_references": {},
     }
     edit.update(overrides)
     return edit
@@ -602,6 +604,196 @@ class TestBuildEditContext:
 
 
 # ---------------------------------------------------------------------------
+# TestBuildEditContextEnhanced
+# ---------------------------------------------------------------------------
+
+
+class TestBuildEditContextEnhanced:
+    """Tests for edit_diff and prefetched_references in build_edit_context."""
+
+    def test_includes_edit_diff_section(self):
+        """build_edit_context includes edit_diff when present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            edit_diff={
+                "type": "value_changed",
+                "property": "P108",
+                "property_label": "employer",
+                "old_value": {"value": "Q42", "value_label": "Old Corp"},
+                "new_value": {"value": "Q99", "value_label": "New Corp"},
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "## Edit diff" in result
+        assert "value_changed" in result
+        assert "employer" in result
+
+    def test_includes_prefetched_references_section(self):
+        """build_edit_context includes prefetched_references when present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            prefetched_references={
+                "https://example.com/source": {
+                    "url": "https://example.com/source",
+                    "status": 200,
+                    "extracted_text": "This is the article content about the claim.",
+                    "error": None,
+                }
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "## Prefetched references" in result
+        assert "https://example.com/source" in result
+        assert "This is the article content about the claim." in result
+
+    def test_omits_edit_diff_when_missing(self):
+        """build_edit_context omits edit_diff section when not present."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(edit_diff=None)
+
+        result = build_edit_context(edit)
+
+        assert "## Edit diff" not in result
+
+    def test_omits_prefetched_references_when_empty(self):
+        """build_edit_context omits prefetched_references when empty."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(prefetched_references={})
+
+        result = build_edit_context(edit)
+
+        assert "## Prefetched references" not in result
+
+    def test_skips_failed_prefetches(self):
+        """Prefetched references with errors are summarized, not included."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit(
+            prefetched_references={
+                "https://example.com/ok": {
+                    "url": "https://example.com/ok",
+                    "status": 200,
+                    "extracted_text": "Good content here.",
+                    "error": None,
+                },
+                "https://example.com/fail": {
+                    "url": "https://example.com/fail",
+                    "status": 403,
+                    "extracted_text": None,
+                    "error": "HTTP 403",
+                },
+            }
+        )
+
+        result = build_edit_context(edit)
+
+        assert "Good content here." in result
+        assert "HTTP 403" in result or "failed" in result.lower()
+
+
+# ---------------------------------------------------------------------------
+# TestContextBudget
+# ---------------------------------------------------------------------------
+
+
+class TestContextBudget:
+    """Tests for context-aware truncation in build_edit_context."""
+
+    def test_no_truncation_within_budget(self):
+        """When content fits within budget, nothing is truncated."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit()
+        result = build_edit_context(edit, context_budget=100_000)
+
+        assert "## Item context" in result
+
+    def test_truncates_item_context_when_over_budget(self):
+        """When content exceeds budget, item context is truncated."""
+        from run_verdict_fanout import build_edit_context
+
+        # Create an edit with very large item context
+        big_claims = {}
+        for i in range(50):
+            big_claims[f"prop_{i}"] = {
+                "property_label": f"property {i}",
+                "statements": [
+                    {
+                        "value": f"Q{i}",
+                        "value_label": f"value {i}" * 100,
+                        "rank": "normal",
+                        "qualifiers": {},
+                        "references": [],
+                    }
+                ],
+            }
+        edit = _make_enriched_edit(
+            item={
+                "label_en": "Test Item",
+                "description_en": "A test",
+                "claims": big_claims,
+            }
+        )
+
+        # Very tight budget
+        result = build_edit_context(edit, context_budget=2000)
+
+        # Essential sections still present
+        assert "## Edit to verify" in result
+        assert "## Verification question" in result
+        # Item context is truncated or reduced
+        assert len(result) < 20000
+
+    def test_prioritizes_edited_property_claims(self):
+        """Edited property claims are kept even with tight budget."""
+        from run_verdict_fanout import build_edit_context
+
+        claims = {
+            "instance of": {
+                "property_label": "instance of",
+                "statements": [{"value": "Q5", "value_label": "human", "rank": "normal", "qualifiers": {}, "references": []}],
+            },
+            "occupation": {
+                "property_label": "occupation",
+                "statements": [{"value": "Q1", "value_label": "writer " * 200, "rank": "normal", "qualifiers": {}, "references": []}],
+            },
+        }
+        edit = _make_enriched_edit(
+            parsed_edit={
+                "operation": "wbsetclaim-update",
+                "property": "P31",
+                "property_label": "instance of",
+                "value_raw": "Q5",
+                "value_label": "human",
+            },
+            item={"label_en": "Test", "description_en": "Test", "claims": claims},
+        )
+
+        result = build_edit_context(edit, context_budget=3000)
+
+        # The edited property (instance of) should be present
+        assert "instance of" in result
+
+    def test_default_budget_is_none(self):
+        """When context_budget is None, no truncation occurs."""
+        from run_verdict_fanout import build_edit_context
+
+        edit = _make_enriched_edit()
+        result_default = build_edit_context(edit)
+        result_none = build_edit_context(edit, context_budget=None)
+
+        assert result_default == result_none
+
+
+# ---------------------------------------------------------------------------
 # TestRunSingleVerdict
 # ---------------------------------------------------------------------------
 
@@ -984,3 +1176,81 @@ class TestBuildExecutionOrder:
         model = "vendor/only-model"
         result = build_execution_order([edit], [model])
         assert result == [(edit, model)]
+
+
+# ---------------------------------------------------------------------------
+# TestEvalMode
+# ---------------------------------------------------------------------------
+
+
+class TestEvalMode:
+    """Tests for --eval flag behavior."""
+
+    def test_eval_loads_eval_blocked_domains(self):
+        """--eval flag loads blocked_domains_eval.yaml instead of base config."""
+        from run_verdict_fanout import load_eval_blocked_domains
+
+        domains = load_eval_blocked_domains()
+
+        assert "wikidata.org" in domains
+        assert "wikipedia.org" in domains
+
+    def test_ground_truth_stripped_before_context(self):
+        """ground_truth key is removed before building edit context."""
+        from run_verdict_fanout import strip_ground_truth, build_edit_context
+
+        edit = _make_enriched_edit()
+        edit["ground_truth"] = {
+            "label": "reverted",
+            "evidence": "mw-reverted-tag",
+        }
+
+        stripped = strip_ground_truth(edit)
+
+        assert "ground_truth" not in stripped
+        # Original edit should still have ground_truth (no in-place mutation)
+        assert "ground_truth" in edit
+
+        # Context built from stripped edit should not contain ground truth
+        context = build_edit_context(stripped)
+        assert "reverted" not in context
+        assert "ground_truth" not in context
+
+    def test_strip_preserves_other_keys(self):
+        """strip_ground_truth preserves all other edit keys."""
+        from run_verdict_fanout import strip_ground_truth
+
+        edit = _make_enriched_edit()
+        edit["ground_truth"] = {"label": "reverted"}
+
+        stripped = strip_ground_truth(edit)
+
+        assert stripped["rcid"] == edit["rcid"]
+        assert stripped["revid"] == edit["revid"]
+        assert stripped["title"] == edit["title"]
+        assert stripped["parsed_edit"] == edit["parsed_edit"]
+
+
+# ---------------------------------------------------------------------------
+# TestEvalCLI
+# ---------------------------------------------------------------------------
+
+
+class TestEvalCLI:
+    """Tests for --eval CLI flag."""
+
+    def test_eval_flag_accepted(self, capsys):
+        """--eval flag is accepted by argparse."""
+        import sys
+
+        with patch.object(sys, "argv", ["prog", "--snapshot", "test.yaml", "--dry-run", "--eval"]):
+            with patch("run_verdict_fanout.load_eval_blocked_domains", return_value={"wikidata.org"}):
+                with patch("builtins.open", MagicMock(return_value=MagicMock(
+                    __enter__=MagicMock(return_value=MagicMock(read=MagicMock(return_value="edits: []"))),
+                    __exit__=MagicMock(return_value=False),
+                ))):
+                    with patch("run_verdict_fanout.yaml.safe_load", return_value={"edits": []}):
+                        main()
+
+        captured = capsys.readouterr()
+        assert "Evaluation mode" in captured.out

@@ -8,6 +8,8 @@ dependencies = [
     "trafilatura>=2.0",
     "httpx>=0.27",
     "openai>=1.40",
+    "scikit-learn>=1.6",
+    "numpy>=1.26",
 ]
 
 [tool.pytest.ini_options]
@@ -17,4 +19,7 @@ pythonpath = ["scripts"]
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "jupyter>=1.0",
 ]
