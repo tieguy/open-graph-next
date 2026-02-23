@@ -19,4 +19,7 @@ pythonpath = ["scripts"]
 [dependency-groups]
 dev = [
     "pytest>=9.0.2",
+    "matplotlib>=3.8",
+    "seaborn>=0.13",
+    "jupyter>=1.0",
 ]
