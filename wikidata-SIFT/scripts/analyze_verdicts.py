@@ -17,7 +17,6 @@ import numpy as np
 import yaml
 from sklearn.metrics import (
     average_precision_score,
-    confusion_matrix,
     precision_recall_curve,
 )
 
@@ -362,7 +361,7 @@ def run_analysis(joined):
 
         try:
             metrics["pr_auc"] = compute_pr_auc(y_true, y_score)
-        except Exception:
+        except (ValueError, ZeroDivisionError):
             metrics["pr_auc"] = None
 
         for target, key in [(0.99, "fr_at_99"), (0.90, "fr_at_90")]:
