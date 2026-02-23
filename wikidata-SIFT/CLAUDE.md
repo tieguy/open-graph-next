@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-02-19
+Last updated: 2026-02-22
 
 ## Project Purpose
 
@@ -28,7 +28,7 @@ All fact-checking output should be logged in structured YAML format with timesta
 
 - `logs/wikidata-enhance/` -- Item enhancement logs (see `skills/wikidata-enhance-and-check/SKILL.md` Step 13 for schema)
 - `logs/wikidata-methodology-testing/` -- SIFT methodology test results
-- `logs/wikidata-patrol-experiment/` -- SIFT-Patrol experiment (snapshots in `snapshot/`, control group in `control/`, multi-model verdicts in `verdicts-fanout/`)
+- `logs/wikidata-patrol-experiment/` -- SIFT-Patrol experiment (snapshots in `snapshot/`, control group in `control/`, multi-model verdicts in `verdicts-fanout/`, labeled evaluation dataset in `labeled/`, analysis output in `analysis/`)
 
 ### 4. Respect Wikidata's data model
 
@@ -124,18 +124,41 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
   - `--enrich` flag adds item context (labels, descriptions, all serialized claims), parsed edit summaries, resolved property/value labels, and removed claim data for removal edits
   - Uses `pwb_http.fetch` + `Special:EntityData` for revision-specific entity fetching (pywikibot's API layer doesn't support revision-specific fetches)
   - `LabelCache` resolves Q-ids and P-ids to English labels with in-memory caching
+  - `extract_item_reference_urls(item)` extracts all P854 reference URLs from serialized item claims
   - Enriched snapshots include `parsed_edit`, `item`, and `removed_claim` keys per edit
+- `scripts/fetch_labeled_edits.py` -- Historical edit fetcher for labeled evaluation datasets. Builds ground-truth-labeled snapshots by querying Wikidata's RecentChanges API. Key capabilities:
+  - `EditSource` protocol for pluggable data sources (currently: `RecentChangesSource`)
+  - Dual-query strategy for reverted edits: Pool A (mw-reverted tag) + Pool B (trace-back from mw-rollback/mw-undo)
+  - Survived pool: edits with 14+ day survival window, split by patrol status
+  - Self-revert and edit-war filtering to remove ambiguous labels
+  - Reuses `fetch_patrol_edits.py` enrichment pipeline (enrich_edit_group, LabelCache, etc.)
+  - Output: enriched snapshot YAML with `ground_truth` key per edit (label: "reverted"/"survived", evidence type)
+  - Saves to `logs/wikidata-patrol-experiment/labeled/`
 - `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches, truncates pages to 15k chars.
 - `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
-  - Runs edits from enriched snapshots across configurable model list (default: Nemotron, OLMo, DeepSeek, Claude Haiku)
+  - Runs edits from enriched snapshots across configurable model list (default: OLMo, DeepSeek, Claude Haiku)
   - Interleaved execution order (all models per edit before moving to next edit)
   - Checkpoint/resume via `logs/wikidata-patrol-experiment/fanout-state.yaml`
   - Per-verdict 180s wall-clock timeout
   - Cost tracking via OpenRouter generation endpoint
   - Verdicts saved to `logs/wikidata-patrol-experiment/verdicts-fanout/`
+  - `--eval` flag: evaluation mode that strips `ground_truth` from edits before sending to models, and uses `config/blocked_domains_eval.yaml` (blocks wikidata.org to prevent label leakage)
+  - `build_edit_context` supports `context_budget` parameter for truncation, includes `edit_diff` and `prefetched_references` sections, prioritizes edited property claims when truncating item context
+- `scripts/analyze_verdicts.py` -- Metrics computation for labeled evaluation. Joins verdict YAML files with ground-truth snapshot, computes per-model and ensemble metrics. Features:
+  - Verdict-to-binary mapping: accept (verified-high/low, plausible), reject (incorrect, suspect), abstain (unverifiable)
+  - Per-model confusion matrix, precision on accept, recall on reject
+  - PR-AUC via ordinal verdict scale (0-5)
+  - Filter Rate at Recall (FR@99%, FR@90%): what fraction of edits can be auto-accepted while catching N% of bad edits
+  - Ensemble strategies: majority vote and unanimous accept
+  - Open-model-only ensemble variant (excludes Claude/Anthropic models)
+  - Breakdowns by evidence type, diff type, and Wikidata property
+  - Output: YAML analysis file to `logs/wikidata-patrol-experiment/analysis/`
+- `notebooks/verdict_analysis.ipynb` -- Jupyter notebook for visualizing analysis results with matplotlib/seaborn (confusion matrices, PR curves, model comparisons)
 - `config/sift_prompt_openrouter.md` -- Model-agnostic SIFT prompt for the verdict fanout (no Claude-specific features)
+- `config/blocked_domains_eval.yaml` -- Extended blocked domains for evaluation mode (adds wikidata.org to prevent label leakage)
 - `docker-compose.yml` -- SearXNG + Valkey containers for local web search (SearXNG on `localhost:8080`, config in `config/searxng/`)
 - Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
+- Requires `scikit-learn` and `numpy` for analyze_verdicts.py; `matplotlib`, `seaborn`, and `jupyter` as dev dependencies
 - Single-model edit-centric SIFT verification: `skills/sift-patrol/SKILL.md` (used for the 50-edit Sonnet 4.6 run)
 
 ## Working with pywikibot
@@ -203,10 +226,20 @@ sed -i "s/GENERATE_AND_REPLACE.*/$(openssl rand -hex 32)/" config/searxng/settin
 docker compose up -d                # start SearXNG + Valkey
 docker compose down                 # stop containers
 
+# Fetch labeled evaluation dataset
+python scripts/fetch_labeled_edits.py --dry-run                         # preview without saving
+python scripts/fetch_labeled_edits.py --reverted 250 --survived 250     # default sizes
+python scripts/fetch_labeled_edits.py --reverted 250 --survived 250 --no-enrich  # skip enrichment
+
 # Run verdict fanout (requires OPENROUTER_API_KEY and SearXNG running)
 python scripts/run_verdict_fanout.py --snapshot logs/wikidata-patrol-experiment/snapshot/SNAPSHOT.yaml --dry-run
 python scripts/run_verdict_fanout.py --snapshot SNAPSHOT.yaml --limit 3  # first 3 edits
 python scripts/run_verdict_fanout.py --snapshot SNAPSHOT.yaml --models deepseek/deepseek-v3.2  # single model
+python scripts/run_verdict_fanout.py --snapshot LABELED.yaml --eval      # evaluation mode (blocks wikidata.org, strips ground truth)
+
+# Analyze verdicts against ground truth
+python scripts/analyze_verdicts.py --verdicts-dir logs/.../verdicts-fanout/ --ground-truth logs/.../labeled/snapshot.yaml
+python scripts/analyze_verdicts.py --verdicts-dir DIR --ground-truth FILE --output analysis.yaml
 
 # Chainlink basics
 chainlink list              # see all issues
