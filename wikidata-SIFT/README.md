@@ -8,7 +8,7 @@ An experiment by [Luis Villa](https://meta.wikimedia.org/wiki/User:LuisVilla) ex
 1. **Validation requirements**: What level of source verification is necessary to meet Wikidata's community standards? Where do LLM confidence levels map to Wikidata's reference requirements?
 1. **Prompt engineering**: How should fact-checking prompts (like [CheckPlease](https://checkplease.neocities.org)) be adapted for Wikidata's specific data model and sourcing norms?
 1. **Model comparison**: Do different LLMs produce meaningfully different verdicts on the same edits? How do cost, speed, and accuracy trade off?
-1. **Next-generation ideation**: If there is going to be a [Gas Town](https://steveklabnik.com/writing/how-to-think-about-gas-town/) for "a world in which every single human being can freely share in the sum of all knowledge", what could/would/should that look like?
+1. **Next-generation ideation**: If there is going to be a [Gas Town](https://maggieappleton.com/gastown) for "a world in which every single human being can freely share in the sum of all knowledge", what could/would/should that look like?
 
 ## Approach
 

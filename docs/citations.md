@@ -21,8 +21,8 @@ Last updated: 2026-02-24
 - **Mike Caulfield.** [SIFT Toolbox / CheckPlease.](https://checkplease.neocities.org) Neocities.
   A lengthy instruction prompt and human-in-the-loop methodology that outperforms unmodified LLMs at fact-checking and contextualization, modeling a "research assistant" approach rather than a chatbot approach. The SIFT method (Stop, Investigate the source, Find better coverage, Trace claims) is foundational to this project's approach.
 
-- **Steve Klabnik.** ["How to Think About Gas Town."](https://steveklabnik.com/writing/how-to-think-about-gas-town/) Blog post.
-  Uses the metaphor of infrastructure transition to think about what comes after the current paradigm — framing the question of what a "world in which every single human being can freely share in the sum of all knowledge" looks like in an LLM-changed landscape.
+- **Maggie Appleton.** ["Gas Town."](https://maggieappleton.com/gastown) maggieappleton.com.
+  A speculative design fiction exploring what comes after the current paradigm — framing the question of what a "world in which every single human being can freely share in the sum of all knowledge" looks like in an LLM-changed landscape.
 
 ## Wikidata Quality: The Scale of the Problem
 
