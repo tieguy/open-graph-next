@@ -24,25 +24,25 @@ Last updated: 2026-02-24
 - **Maggie Appleton.** ["Gas Town."](https://maggieappleton.com/gastown) maggieappleton.com.
   A speculative design fiction exploring what comes after the current paradigm — framing the question of what a "world in which every single human being can freely share in the sum of all knowledge" looks like in an LLM-changed landscape.
 
-## Wikidata Quality: The Scale of the Problem
+## Wikidata Quality: Opportunities for LLM-Assisted Improvement
 
 - **Shenoy, K. et al.** ["A Study of the Quality of Wikidata."](https://www.sciencedirect.com/science/article/abs/pii/S1570826821000536) *Journal of Web Semantics*, 2022. Also at [Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_8029.pdf).
-  The most comprehensive treatment of Wikidata quality. Proposes three quality indicators (community consensus, deprecated statements, constraint violations) and finds that simple validators catch syntactic errors but semantic validation is the hard, unsolved problem.
+  The most comprehensive treatment of Wikidata quality. Identifies semantic validation — the kind of judgment LLMs are well-suited for — as the key unsolved problem, since simple validators already handle syntactic errors. Proposes three quality indicators (community consensus, deprecated statements, constraint violations) that could serve as training signals or benchmarks for LLM-assisted tools.
 
 - **Piscopo, A. & Simperl, E.** ["A Study of the Quality of Wikidata."](https://arxiv.org/pdf/2107.00156) arXiv, 2021.
-  Surveys approaches to assessing Wikidata quality; found that when constraint violations appear, 63% of active editors said the data "often" needs correction.
+  Surveys approaches to assessing Wikidata quality and documents strong community appetite for better tooling: 63% of active editors said constraint-flagged data "often" needs correction, suggesting automated repair suggestions would find a receptive audience.
 
 - **Dogan, G. & Patel-Schneider, P.** ["Disjointness Violations in Wikidata."](https://arxiv.org/abs/2410.13707) arXiv, December 2024.
-  Identifies ~14,480 "culprit" items in Wikidata that each cause hundreds of cascading constraint violations, with the largest source being gene items caught between "abstract entity" and "concrete object" classifications.
+  Maps the leverage points: ~14,480 "culprit" items each cause hundreds of cascading constraint violations, meaning targeted fixes to a small number of items could resolve violations at scale. The largest cluster involves gene items caught between "abstract entity" and "concrete object" classifications — a taxonomy ambiguity well-suited to LLM-assisted resolution.
 
 - **Beghaeiraveri, S. et al.** ["RQSS: A Framework for Evaluating the Referencing Quality of Wikidata."](https://journals.sagepub.com/doi/full/10.3233/SW-243695) *Semantic Web Journal*, 2024.
-  Proposes 40 reference-specific quality metrics across 21 dimensions. All Wikidata subsets studied scored low on completeness, verifiability, objectivity, and versatility, with an average score of 0.58 out of 1.0.
+  Provides a detailed, measurable framework (40 metrics across 21 dimensions) for tracking referencing quality improvements over time. Current Wikidata subsets average 0.58/1.0, with the largest gaps in completeness, verifiability, and versatility — dimensions where LLM-assisted source discovery and verification could move the needle.
 
 - **Ferranti, N. et al.** ["Formalizing Repairs for Wikidata Constraint Violations: A Taxonomy and Empirical Analysis."](https://link.springer.com/chapter/10.1007/978-3-032-09527-5_20) *ISWC 2025*. [PDF](https://aic.ai.wu.ac.at/~polleres/publications/ferr-etal-2025ISWC.pdf).
-  Formalizes a taxonomy of repair strategies for Wikidata constraint violations, finding that 52% of type violations can be fixed by adding missing type statements and that T-box repairs (changing the class hierarchy) can fix many violations simultaneously.
+  Demonstrates that many Wikidata constraint violations have straightforward, automatable repairs: 52% of type violations can be fixed simply by adding missing type statements, and T-box repairs (adjusting the class hierarchy) can resolve many violations simultaneously — a clear roadmap for LLM-assisted batch repair.
 
 - **Ferranti, N. et al.** ["Formalizing and Validating Wikidata's Property Constraints using SHACL and SPARQL."](https://www.semantic-web-journal.net/content/formalizing-and-validating-wikidatas-property-constraints-using-shaclsparql) *Semantic Web Journal*, 2024.
-  Provides complete SPARQL formulations for all 30+ Wikidata constraint types, enabling programmatic constraint checking outside of Wikidata's own infrastructure.
+  Unlocks programmatic constraint checking outside Wikidata's own infrastructure by providing complete SPARQL formulations for all 30+ constraint types — making it possible to build external LLM-assisted validation pipelines that detect and propose repairs independently.
 
 ## YAGO and Knowledge Base Curation
 
