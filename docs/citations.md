@@ -26,22 +26,22 @@ Last updated: 2026-02-24
 
 ## Wikidata Quality: Opportunities for LLM-Assisted Improvement
 
-- **Shenoy, K. et al.** ["A Study of the Quality of Wikidata."](https://www.sciencedirect.com/science/article/abs/pii/S1570826821000536) *Journal of Web Semantics*, 2022. Also at [Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_8029.pdf).
+- **Shenoy, K. et al.** ["A Study of the Quality of Wikidata."](https://www.sciencedirect.com/science/article/abs/pii/S1570826821000536) *Journal of Web Semantics*, 2022. Also at [Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_8029.pdf). Community: [Data quality framework RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Data_quality_framework_for_Wikidata), [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2024/November).
   The most comprehensive treatment of Wikidata quality. Identifies semantic validation — the kind of judgment LLMs are well-suited for — as the key unsolved problem, since simple validators already handle syntactic errors. Proposes three quality indicators (community consensus, deprecated statements, constraint violations) that could serve as training signals or benchmarks for LLM-assisted tools.
 
-- **Piscopo, A. & Simperl, E.** ["A Study of the Quality of Wikidata."](https://arxiv.org/pdf/2107.00156) arXiv, 2021.
+- **Piscopo, A. & Simperl, E.** ["A Study of the Quality of Wikidata."](https://arxiv.org/pdf/2107.00156) arXiv, 2021. Community: [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2019/September), [Wikimania 2019 session](https://wikimania.wikimedia.org/wiki/2019:Quality/Data_Quality_in_Wikidata).
   Surveys approaches to assessing Wikidata quality and documents strong community appetite for better tooling: 63% of active editors said constraint-flagged data "often" needs correction, suggesting automated repair suggestions would find a receptive audience.
 
-- **Dogan, G. & Patel-Schneider, P.** ["Disjointness Violations in Wikidata."](https://arxiv.org/abs/2410.13707) arXiv, December 2024.
-  Maps the leverage points: ~14,480 "culprit" items each cause hundreds of cascading constraint violations, meaning targeted fixes to a small number of items could resolve violations at scale. The largest cluster involves gene items caught between "abstract entity" and "concrete object" classifications — a taxonomy ambiguity well-suited to LLM-assisted resolution.
+- **Dogan, G. & Patel-Schneider, P.** ["Disjointness Violations in Wikidata."](https://arxiv.org/abs/2410.13707) arXiv, December 2024. Community: [Cleaning Task Force](https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Cleaning_Task_Force), [Changes log](https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Cleaning_Task_Force/Changes), [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2024/November), [mailing list](https://www.mail-archive.com/wikidata@lists.wikimedia.org/msg09746.html).
+  Maps the leverage points: ~14,480 "culprit" items each cause hundreds of cascading constraint violations, meaning targeted fixes to a small number of items could resolve violations at scale. The largest cluster involves gene items caught between "abstract entity" and "concrete object" classifications — a taxonomy ambiguity well-suited to LLM-assisted resolution. The authors are active members of the WikiProject Ontology Cleaning Task Force and have applied manual fixes directly to Wikidata, making this the rare paper in the list where research crossed the gap into practice.
 
-- **Beghaeiraveri, S. et al.** ["RQSS: A Framework for Evaluating the Referencing Quality of Wikidata."](https://journals.sagepub.com/doi/full/10.3233/SW-243695) *Semantic Web Journal*, 2024.
+- **Beghaeiraveri, S. et al.** ["RQSS: A Framework for Evaluating the Referencing Quality of Wikidata."](https://journals.sagepub.com/doi/full/10.3233/SW-243695) *Semantic Web Journal*, 2024. Community: [WikiProject Reference Verification](https://www.wikidata.org/wiki/Wikidata:WikiProject_Reference_Verification), [sourcing requirements RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Sourcing_requirements_for_bots).
   Provides a detailed, measurable framework (40 metrics across 21 dimensions) for tracking referencing quality improvements over time. Current Wikidata subsets average 0.58/1.0, with the largest gaps in completeness, verifiability, and versatility — dimensions where LLM-assisted source discovery and verification could move the needle.
 
-- **Ferranti, N. et al.** ["Formalizing Repairs for Wikidata Constraint Violations: A Taxonomy and Empirical Analysis."](https://link.springer.com/chapter/10.1007/978-3-032-09527-5_20) *ISWC 2025*. [PDF](https://aic.ai.wu.ac.at/~polleres/publications/ferr-etal-2025ISWC.pdf).
+- **Ferranti, N. et al.** ["Formalizing Repairs for Wikidata Constraint Violations: A Taxonomy and Empirical Analysis."](https://link.springer.com/chapter/10.1007/978-3-032-09527-5_20) *ISWC 2025*. [PDF](https://aic.ai.wu.ac.at/~polleres/publications/ferr-etal-2025ISWC.pdf). Community: [2020 Property constraints report](https://www.wikidata.org/wiki/Wikidata:2020_report_on_Property_constraints), [constraint violation technical bases RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Constraint_violation_technical_bases).
   Demonstrates that many Wikidata constraint violations have straightforward, automatable repairs: 52% of type violations can be fixed simply by adding missing type statements, and T-box repairs (adjusting the class hierarchy) can resolve many violations simultaneously — a clear roadmap for LLM-assisted batch repair.
 
-- **Ferranti, N. et al.** ["Formalizing and Validating Wikidata's Property Constraints using SHACL and SPARQL."](https://www.semantic-web-journal.net/content/formalizing-and-validating-wikidatas-property-constraints-using-shaclsparql) *Semantic Web Journal*, 2024.
+- **Ferranti, N. et al.** ["Formalizing and Validating Wikidata's Property Constraints using SHACL and SPARQL."](https://www.semantic-web-journal.net/content/formalizing-and-validating-wikidatas-property-constraints-using-shaclsparql) *Semantic Web Journal*, 2024. [GitHub](https://github.com/nicolasferranti/wikidata-constraints-formalization). Community: [Data Modelling Days 2023](https://www.wikidata.org/wiki/Wikidata:Events/Data_Modelling_Days_2023/IntroSchemas), [Data Quality Days 2022 talk](https://www.wikidata.org/wiki/Wikidata_talk:Events/Data_Quality_Days_2022).
   Unlocks programmatic constraint checking outside Wikidata's own infrastructure by providing complete SPARQL formulations for all 30+ constraint types — making it possible to build external LLM-assisted validation pipelines that detect and propose repairs independently.
 
 ## YAGO and Knowledge Base Curation
@@ -55,8 +55,8 @@ Last updated: 2026-02-24
 - **Tanon, T.P. & Suchanek, F.** ["Neural Knowledge Base Repairs."](https://suchanek.name/work/publications/eswc-2021.pdf) *ESWC 2021*.
   Uses ML trained on historical Wikidata edit patterns to suggest fixes for constraint violations; found 1 million domain violations and 4.4 million single-value violations as of March 2020.
 
-- **Peng, Y., Bonald, T. & Alam, M.** ["Refining Wikidata Taxonomy using Large Language Models (WiKC)."](https://arxiv.org/abs/2409.04056) *CIKM 2024*. [GitHub](https://github.com/peng-yiwen/WiKC).
-  Applies LLMs to clean Wikidata's taxonomy, improving entity typing accuracy from 43% (raw Wikidata) to 70% (cleaned).
+- **Peng, Y., Bonald, T. & Alam, M.** ["Refining Wikidata Taxonomy using Large Language Models (WiKC)."](https://arxiv.org/abs/2409.04056) *CIKM 2024*. [GitHub](https://github.com/peng-yiwen/WiKC). Community: [Weekly Summary #646](https://www.wikidata.org/wiki/Wikidata:Status_updates/2024_09_23), [mailing list discussion](https://www.mail-archive.com/wikidata@lists.wikimedia.org/msg09668.html).
+  Applies LLMs to clean Wikidata's taxonomy, improving entity typing accuracy from 43% (raw Wikidata) to 70% (cleaned). Community reception was skeptical — editors noted the LLM removed links that "actually provided value."
 
 - **Suchanek, F.** ["Knowledge Bases and Language Models: Complementing Forces."](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1) *RuleML+RR 2023*.
   Argues that structured knowledge bases and LLMs are complementary paradigms: KBs provide ground truth, LLMs provide natural language understanding, and both will co-exist.
@@ -110,7 +110,7 @@ Last updated: 2026-02-24
 - **The Decoder.** ["Here's How to Spot AI Writing, According to Wikipedia Editors."](https://the-decoder.com/heres-how-to-spot-ai-writing-according-to-wikipedia-editors/) 2025.
   Covers the same Wikipedia AI detection guide with additional context on the specific linguistic and formatting patterns that flag AI-generated text.
 
-- **Sarabadani, A. et al.** ["Building Automated Vandalism Detection Tools for Wikidata."](https://wikiworkshop.org/2017/papers/p1647-sarabadani.pdf) *Wiki Workshop*, 2017.
+- **Sarabadani, A. et al.** ["Building Automated Vandalism Detection Tools for Wikidata."](https://wikiworkshop.org/2017/papers/p1647-sarabadani.pdf) *Wiki Workshop*, 2017. Community: [Research:Building automated vandalism detection tool](https://meta.wikimedia.org/wiki/Research:Building_automated_vandalism_detection_tool_for_Wikidata).
   Early work on automated vandalism detection for Wikidata, providing the foundation for the ORES system that now catches 89% of vandalism while reducing patroller workload by 98%.
 
 ## Digital Humanities and Open Knowledge Infrastructure
@@ -123,5 +123,5 @@ Last updated: 2026-02-24
 
 ## Referencing Quality
 
-- **"Towards Automated Technologies in the Referencing Quality of Wikidata."** [Wikidata Workshop, 2022.](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_2049.pdf)
+- **"Towards Automated Technologies in the Referencing Quality of Wikidata."** [Wikidata Workshop, 2022.](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_2049.pdf) Community: [ProVe tool page](https://www.wikidata.org/wiki/Wikidata:ProVe), [automated reference finding](https://www.wikidata.org/wiki/Wikidata:Automated_finding_references_input).
   Proposes automated pipelines for verifying whether Wikidata triples are supported by their documented sources — directly relevant to the "imported from Wikipedia" circular reference problem.
