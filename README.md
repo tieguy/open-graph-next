@@ -10,7 +10,7 @@ This repo is a working space for exploring what that adaptation might look like:
 
 ## Sub-projects
 
-- **accords/** — Reusable orientation documents ("accords") that give humans and LLM agents common language and expectations for working together on specific domains. Currently includes citation practices for Wikipedia and Wikidata.
+- **accords/** — Reusable orientation documents ("accords") that give humans and LLM agents common language and expectations for working together on specific domains, based on the [Accord Exchange](https://accord.exchange/). Currently includes citation practices for Wikipedia and Wikidata.
 - **all-the-opens/** — Rabbit Hole Browser: a D3.js force-directed graph prototype exploring what cooperative knowledge infrastructure could feel like, connecting resources across Internet Archive, Wikipedia, Wikimedia Commons, OpenLibrary, Smithsonian, and more.
 - **wikidata-SIFT/** — LLM-assisted Wikidata methodology testing and enrichment: using LLMs to systematically find and verify missing claims in Wikidata.
 
