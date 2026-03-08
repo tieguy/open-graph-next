@@ -16,7 +16,7 @@ presentation:
 
 This is an *accord*: an orientation document that gives humans and LLM agents common language and expectations for achieving goals together. Accords are packaged as Agent Skills for agents, and quick-reference HTML guides for humans.
 
-This accord covers three domains essential to citation work on Wikimedia projects. It draws terminology directly from Wikipedia's policies, guidelines, and essays, rather than imposing external frameworks. Where possible, references to specific Wikipedia pages are provided; because Wikipedia's bot-detection may block automated retrieval of these pages, citations should be verified manually.
+This accord covers three domains essential to citation work on Wikimedia projects. It draws terminology directly from Wikipedia's policies, guidelines, and essays, rather than imposing external frameworks. Where possible, references to specific Wikipedia pages are provided; because Wikipedia's bot-detection may block automated retrieval of these pages, citations should be verified manually. A retrieval failure (403, timeout, or any other access error) is never an excuse for skipping verification — the agent must find another way to read the actual source document before citing it.
 
 ## Verifiability and reliable sources
 
