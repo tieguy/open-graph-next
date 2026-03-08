@@ -1,0 +1,5 @@
+{
+  "name": "wikipedia-citation-practices",
+  "description": "An accord for adding and evaluating citations on Wikipedia and Wikidata. Establishes shared vocabulary grounded in Wikipedia's own policies, guidelines, and community norms. Use when contributing references, evaluating source quality, or assisting with citation-related tasks on Wikimedia projects.",
+  "version": "1.0.0"
+}
