@@ -10,6 +10,8 @@ presentation:
     - verifiability-and-reliable-sources
     - citing-sources-on-wikipedia
     - wikidata-references
+    - after-the-citation-wikipedia
+    - after-the-citation-wikidata
 ---
 
 This is an *accord*: an orientation document that gives humans and LLM agents common language and expectations for achieving goals together. Accords are packaged as Agent Skills for agents, and quick-reference HTML guides for humans.
@@ -47,3 +49,27 @@ Wikidata is a structured knowledge base where claims carry machine-readable refe
 - **Circular reference avoidance**: Wikipedia should not be cited as a reference on Wikidata, and vice versa, since they share a content ecosystem.
 
 See [Wikidata references](references/wikidata-references.md).
+
+## After the citation: Wikipedia
+
+Adding a citation to Wikipedia is not the end of the process. Both human reviewers and automated systems act on edits after they are saved:
+
+- **Recent changes patrol**: editors monitor the live feed of edits to catch vandalism, policy violations, and sourcing problems. Most citation edits are reviewed through watchlists rather than a formal patrol queue.
+- **Pending changes**: on protected articles, edits by new or unregistered users wait in a review queue until a reviewer accepts them.
+- **Citation bots**: automated tools like Citation bot (expands partial citations via DOIs and ISBNs), InternetArchiveBot (saves linked URLs to the Wayback Machine and rescues dead links), and OAbot (adds open-access links) act on citations after they are placed.
+- **BLP enforcement**: biographies of living persons have the strictest sourcing standards. Edit filters automatically flag potential violations, and unsourced contentious material must be removed immediately.
+- **Citation needed removal**: when a citation satisfies an existing `{{citation needed}}` tag, the editor removes the tag manually. There is no automated process for this.
+
+See [After the citation: Wikipedia](references/after-the-citation-wikipedia.md).
+
+## After the citation: Wikidata
+
+Wikidata's post-citation processes reflect its structured data model and differ substantially from Wikipedia's prose-based workflows:
+
+- **Wikidata patrol**: patrollers review edits via the Recent Changes feed, assisted by ORES machine-learning scores that flag suspicious edits. Autopatrolled users' edits are marked automatically.
+- **Constraint violations**: Wikidata has machine-readable property constraints (type, value, cardinality) with automated violation reports. Bot operators are expected to monitor violations their bots generate.
+- **Reference hygiene bots**: automated tools clean up redundant references (e.g., removing "imported from Wikimedia project" when a proper "stated in" reference exists) and adjust statement ranks.
+- **Cross-project impact**: a Wikidata edit affects every Wikipedia that consumes it via infoboxes and queries, making each edit higher-stakes but harder to patrol comprehensively.
+- **Bot sourcing requirements**: bots that add statements must also add references (unless the claim qualifies as common knowledge). Bot approval requires community-reviewed test runs.
+
+See [After the citation: Wikidata](references/after-the-citation-wikidata.md).
