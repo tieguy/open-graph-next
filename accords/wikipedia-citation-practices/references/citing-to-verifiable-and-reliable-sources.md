@@ -14,7 +14,8 @@ Wikipedia's content is determined by published information rather than editors' 
 
 The policy has several practical consequences:
 
-- **Material must be attributable.** A fact or claim is "verifiable" if a reliable source that supports it *could* be cited, even if no citation currently appears. But four types of information must be accompanied by inline citations to reliable sources that directly support the material: (1) direct quotations, (2) material whose verifiability has been challenged, (3) material whose verifiability is likely to be challenged, and (4) contentious material about living and recently deceased persons.
+- **Material must be attributable.** A fact or claim is "verifiable" if a reliable source that supports it *could* be cited, even if no citation currently appears.
+- **Some material must always be attributed.** Four types of information must be accompanied by inline citations to reliable sources that directly support the material: (1) direct quotations, (2) material whose verifiability has been challenged, (3) material whose verifiability is likely to be challenged, and (4) contentious material about living and recently deceased persons.
 - **The burden of evidence lies with the editor.** The person adding or restoring material is responsible for providing an inline citation to a reliable source that directly supports the contribution. Other editors are not obligated to search for sources on their behalf.
 - **Unsourced material may be removed.** Any editor may remove unsourced or poorly sourced material at any time, especially in biographies of living persons (WP:BLP), where contentious material must be removed immediately — not tagged, not moved to the talk page, but removed.
 - **"Verifiable" does not mean "verified."** Wikipedia does not require that every editor personally verify every source. But it must be *possible* for any reader to do so.
@@ -83,6 +84,8 @@ For these claims, multiple high-quality, independent sources are expected. A sin
 
 Sources should not be rejected just because they are difficult or costly to access. Some reliable sources are behind paywalls, available only in print, or held in special collections. Non-English sources are also acceptable — English-language sources are preferred when available and of equal quality, but a citation to a non-English reliable source is valid. When quoting non-English material, a translation into English should accompany the quote, with professionally published translations preferred over editor translations, which in turn are preferred over machine translations.
 
+Note particularly when doing research with LLMs that LLMs may hallucinate or reconstruct sources that are not accessible, so special care must be taken to ensure that the actual source has been accessed and read.
+
 See: [Wikipedia:Reliable sources](https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources)
 
 ## No original research (WP:NOR)
@@ -93,7 +96,7 @@ Wikipedia articles must not contain *original research*: material for which no r
 - **Unpublished facts or data.** Personal observations, experiments, interviews, or surveys conducted by editors cannot be cited.
 - **Novel interpretations.** Applying a published theory to a new situation, even if the application seems logical, constitutes original research if no source has published that application.
 
-The boundary between legitimate editorial judgment (selecting and organizing material from sources) and original research (drawing conclusions beyond what sources state) is one of Wikipedia's most frequent editorial disputes.
+The boundary between legitimate editorial judgment (selecting and organizing material from sources) and original research (drawing conclusions beyond what sources state) is one of Wikipedia's most frequent editorial disputes. LLM users should be careful that their tools have not conducted original research on their behalf.
 
 See: [Wikipedia:No original research](https://en.wikipedia.org/wiki/Wikipedia:No_original_research)
 
