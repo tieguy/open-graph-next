@@ -1,8 +1,8 @@
 ---
-title: Verifiability and reliable sources
+title: Citing to verifiable, reliable sources
 ---
 
-Wikipedia's content policies form a hierarchy that determines what material belongs in the encyclopedia. For citation work, three policies are foundational: *verifiability*, *no original research*, and *neutral point of view*. This document focuses on the first two and on the sourcing standards that support them.
+English Wikipedia's content policies determine what material belongs in the encyclopedia. For citation work, three policies are foundational: *verifiability* (including *reliability*), *no original research*, and *neutral point of view*. This document focuses on the first two and on the sourcing standards that support them.
 
 ## Verifiability (WP:V)
 
@@ -17,7 +17,9 @@ The policy has several practical consequences:
 
 The verifiability policy interacts with Wikipedia's other content policies. A claim may be verifiable but still excluded if it violates *neutral point of view* (WP:NPOV) or constitutes original research.
 
-See: https://en.wikipedia.org/wiki/Wikipedia:Verifiability
+See: [https://en.wikipedia.org/wiki/Wikipedia:Verifiability](Wikipedia:Verifiability)
+
+See also: [https://en.wikipedia.org/wiki/Wikipedia:Verifiability,_not_truth](Wikipedia:Truth)
 
 ## Reliable sources (WP:RS)
 
