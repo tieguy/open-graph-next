@@ -39,12 +39,23 @@ See also: [Wikipedia:Verifiability, not truth](https://en.wikipedia.org/wiki/Wik
 
 ## Reliable sources (WP:RS)
 
-Not all published sources are considered reliable. Wikipedia evaluates sources based on their editorial processes, not on their conclusions. The key factors are:
+Not all published sources are considered reliable. Source reliability is not binary — it falls on a spectrum, and no source is "always reliable" or "always unreliable" for everything. Wikipedia evaluates sources based on their editorial processes, not on their conclusions. The key factors are:
 
 - **Editorial oversight.** Sources with robust editorial processes — fact-checking, editorial review, corrections policies — are preferred. Academic peer-reviewed journals, major newspapers, and established reference works generally qualify.
-- **Reputation for accuracy.** A publication's track record matters. Sources with a history of fabrication, errors, or extreme bias are not reliable regardless of their editorial structure.
+- **Reputation for accuracy.** A publication's track record matters. Sources with a history of fabrication, errors, or extreme bias are not reliable regardless of their editorial structure. How other reliable sources treat a given source provides evidence for or against its reliability (WP:USEBYOTHERS).
 - **Independence from the subject.** Sources should be *independent* or *third-party* (WP:THIRDPARTY) — meaning they have no financial, personal, or organizational relationship to the subject of the claim. A company's own press release about its founding date may be a useful primary source but is not independent.
-- **Context matters.** A source may be reliable for some claims but not others. A tabloid newspaper might reliably report a public figure's attendance at an event but would not be reliable for medical claims.
+- **Context matters** (WP:RSCONTEXT)**.** A source may be reliable for some claims but not others. A tabloid newspaper might reliably report a public figure's attendance at an event but would not be reliable for medical claims. Sources should directly support the information as presented; information provided in passing may not be reliable even from an otherwise reliable source.
+
+### Reliability falls on a spectrum
+
+The guideline's core framing is that editors must use judgment to draw the line between usable and inappropriate sources *for each statement*. A source's reliability depends on the specific claim it is being used to support, who wrote the material, who published it, and the broader context.
+
+### Age of sources (WP:AGEMATTER)
+
+Source age affects reliability in both directions:
+
+- **Older sources may be outdated.** In scientific, academic, political, and legal fields, newer information may supersede older claims. In medicine, newer sources are generally preferred. Editors should check that older sources have not been superseded.
+- **Newer sources may be premature.** Breaking news reports often contain serious inaccuracies — initial reports should be replaced with better-researched sources as they become available. Primary sources that purport to debunk long-standing consensus or introduce new discoveries may benefit from waiting for replication or review.
 
 ### Source type hierarchy
 
@@ -56,17 +67,49 @@ Wikipedia distinguishes three types of sources:
 
 The preference ordering is: secondary sources over primary sources over tertiary sources, with significant context-dependence.
 
+### Scholarship (WP:SCHOLARSHIP)
+
+Academic and peer-reviewed publications, scholarly monographs, and textbooks are usually the most reliable sources. Key considerations:
+
+- **Prefer secondary sources.** Review articles, monographs, and textbooks are generally better than primary research papers. Editors should never interpret primary sources for themselves.
+- **Dissertations** can be used with care — they are often partly primary sources. Prefer dissertations that have been cited in the literature or later published as monographs or peer-reviewed articles.
+- **Isolated studies** are usually tentative and may change in light of further research. Secondary sources like meta-analyses and review articles are preferred when available.
+- **Predatory journals** (WP:QUESTIONABLEJOURNAL) have only token peer review, if any, and publish whatever is submitted for a fee. Some mimic the names of established journals. Articles in predatory journals should at best be treated as self-published sources.
+- **Preprints** (WP:PREPRINT) — repositories like arXiv, medRxiv, bioRxiv, and Zenodo host non-peer-reviewed self-published sources. These are seldom reliable and are not permitted for medical content, though they sometimes meet the criteria for acceptable self-published sources.
+
+### News organizations (WP:NEWSORG)
+
+News reporting from well-established outlets is generally reliable for statements of fact, though even reputable reporting sometimes contains errors. Less-established outlets are generally less reliable.
+
+- **Wire services** (Reuters, AP, AFP, etc.) are responsible for accuracy; cite the agency in addition to the newspaper that reprinted it.
+- **Editorial and opinion content** (WP:NEWSOPED) — editorials, op-eds, and letters to the editor are reliable primary sources for statements attributed to that author, but rarely reliable for statements of fact.
+- **News aggregators** (WP:NEWSAGG) — sites like MSN or Yahoo News that reprint items from other sources. Reliability should be judged based on the original source, and direct links to the original are preferred.
+- **Breaking news** (WP:RSBREAKING) — initial reports often contain serious inaccuracies. It is better to wait for verified reporting than to help spread potentially false information. All breaking news stories are primary sources.
+- **Headlines** (WP:RSHEADLINES) — headlines are not reliable sources. They may be overstated, lack context, or contain sensationalized claims. If information is supported by the body of the article, cite it from the body.
+- **Sponsored content** (WP:SPONSOR) — paid advertisements formatted to look like articles. These are non-independent and should be treated as self-published primary sources.
+
 ### Questionable and self-published sources
 
 Certain categories of sources are generally not reliable:
 
-- **Questionable sources** have a poor reputation for checking facts, lack meaningful editorial oversight, or have an apparent conflict of interest. These include websites and publications expressing views widely considered promotional or extremist, or that rely heavily on unsubstantiated gossip, rumor, or personal opinion. Predatory open-access journals are also questionable due to absent quality control in peer review. Questionable sources should be used only as sources for material about *themselves*.
-- **Self-published sources** — personal websites, open wikis, blogs, content farms, podcasts, social media posts, forum postings — are largely not acceptable. Anyone can create a personal web page or self-publish a book. Self-published sources *may* be considered reliable when published by an established subject-matter expert whose work in the relevant field has previously been published by reliable, independent publications. But even then, caution applies: if the information is suitable for inclusion, someone else will likely have published it in an independent source. Self-published sources must never be used as third-party sources about living people.
+- **Questionable sources** (WP:QUESTIONABLE) have a poor reputation for checking facts, lack meaningful editorial oversight, or have an apparent conflict of interest. These include content farms, websites and publications expressing views widely considered promotional or extremist, or that rely heavily on unsubstantiated gossip, rumor, or personal opinion. Predatory open-access journals are also questionable due to absent quality control in peer review. Questionable sources should be used only as sources for material about *themselves*.
+- **Self-published sources** (WP:RSSELF) — personal websites, open wikis, blogs, content farms, podcasts, social media posts, forum postings — are largely not acceptable. Anyone can create a personal web page or self-publish a book. Self-published sources *may* be considered reliable when published by an established subject-matter expert whose work in the relevant field has previously been published by reliable, independent publications. But even then, caution applies: if the information is suitable for inclusion, someone else will likely have published it in an independent source. Self-published sources must never be used as third-party sources about living people.
+- **User-generated content** (WP:UGC) — websites whose content is largely user-generated are generally unacceptable. This includes social media (Facebook, X/Twitter, Instagram, TikTok, Reddit), wikis, fan sites, video and image hosting services, forums, and collaboratively created websites. Specific examples Wikipedia calls out as unacceptable include IMDb, Discogs, Find a Grave, Goodreads, Know Your Meme, TV Tropes, and WordPress, as well as any Wikimedia project (which would be circular self-referencing). Review aggregator user ratings (e.g., Rotten Tomatoes audience scores) are also not reliable.
 - **Self-published or questionable sources about themselves** may be used in articles about themselves or their activities, provided the material is not unduly self-serving, does not involve claims about third parties or unrelated events, and there is no reasonable doubt about its authenticity. This applies to social media as well.
+
+### Biased or opinionated sources (WP:BIASED)
+
+Wikipedia articles must present a neutral point of view, but reliable sources are not required to be neutral. Sometimes non-neutral sources are the best sources for information about different viewpoints. When using a potentially biased source, consider whether it still meets the normal requirements for reliability (editorial control, fact-checking, independence). Bias may make in-text attribution appropriate: "According to [source]..."
+
+### Sources produced by machine learning (WP:RSML)
+
+Wikipedia's own reliable sources guideline addresses LLM-generated content directly. Content produced by LLMs such as AI chatbots is **generally unreliable**. LLMs are trained on web-scraped data including Wikipedia itself and suffer from many of the same problems as self-published and user-generated content. The guideline specifically warns that LLMs hallucinate false information, including source citations that look as if they are from reputable publications but do not actually exist. Such spurious material may be reproduced by writers, reporters, scientists, and others using chatbots to help produce their work.
+
+See [LLM risks for citation work](llm-risks-for-citation-work.md) for a detailed treatment of how these failure modes map to Wikipedia's content policies.
 
 ### Circular sourcing: Wikipedia and its mirrors
 
-Wikipedia must not be used as a source for Wikipedia. User-generated content cannot validate itself. This prohibition extends to websites that mirror Wikipedia content and to publications that rely on material from Wikipedia. If a claim in a Wikipedia article is cited to another Wikipedia article, editors should find the underlying reliable source and cite it directly.
+Wikipedia must not be used as a source for Wikipedia. User-generated content cannot validate itself. This prohibition extends to websites that mirror Wikipedia content and to publications that rely on material from Wikipedia. If a claim in a Wikipedia article is cited to another Wikipedia article, editors should find the underlying reliable source and cite it directly. Some news organizations have also used Wikipedia articles as sources, so editors should be alert to circular sourcing through intermediaries.
 
 ### Exceptional claims require exceptional sources (WP:REDFLAG)
 
@@ -79,6 +122,12 @@ Certain types of claims trigger heightened sourcing requirements:
 - Claims promoted primarily by the subject of the article (self-serving sources)
 
 For these claims, multiple high-quality, independent sources are expected. A single source, no matter how reliable, may not be sufficient.
+
+### Deprecated sources (WP:RSDEPRECATED)
+
+Some sources have been formally deprecated by community consensus, meaning they should not be used unless there is specific consensus to do so. Deprecation is reserved for sources with a substantial history of fabrication or other serious factual accuracy issues. Deprecated sources should not be used to support factual claims. Some sources are blacklisted entirely and cannot be used at all — this is generally reserved for sources added abusively, such as state-sponsored disinformation sites.
+
+See: [Wikipedia:Deprecated sources](https://en.wikipedia.org/wiki/Wikipedia:Deprecated_sources)
 
 ### Accessibility of sources
 

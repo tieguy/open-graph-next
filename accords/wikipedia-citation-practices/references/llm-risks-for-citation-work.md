@@ -4,6 +4,8 @@ title: LLM risks for citation work
 
 Large language models introduce specific failure modes into citation work on Wikimedia projects. Each failure mode maps to a Wikipedia policy or guideline that it risks violating. Understanding these mappings helps human-agent teams catch problems before they reach the encyclopedia.
 
+Wikipedia's own reliable sources guideline now addresses this directly: content produced by LLMs is **generally unreliable** (WP:RSML), suffering from many of the same problems as self-published and user-generated content. The guideline specifically warns about hallucinated citations and the propagation of spurious material through writers and researchers who use chatbots without verification. The failure modes below elaborate on the specific risks and how they map to Wikipedia's content policies.
+
 ## Hallucinated sources
 
 LLMs can generate plausible-looking citations — complete with authors, titles, publication dates, and DOIs — for sources that do not exist. A hallucinated source violates **verifiability (WP:V)** at the most basic level: the reader cannot check the claim because the cited work is not real.
