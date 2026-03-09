@@ -4,7 +4,7 @@ title: Wikipedia citation practices
 description: An accord for adding and evaluating citations on Wikipedia and Wikidata. Establishes shared vocabulary grounded in Wikipedia's own policies, guidelines, and community norms. Use when contributing references, evaluating source quality, or assisting with citation-related tasks on Wikimedia projects.
 presentation:
   order:
-    - verifiability-and-reliable-sources
+    - citing-to-verifiable-and-reliable-sources
     - citing-sources-on-wikipedia
     - wikidata-references
     - after-the-citation-wikipedia
@@ -24,7 +24,7 @@ Wikipedia's core content policies determine what belongs in the encyclopedia and
 - **No original research** (WP:NOR): Wikipedia reports what reliable sources say. Editors must not synthesize sources to advance a position that none of them individually state.
 - **Burden of evidence**: the editor who adds or restores material bears responsibility for providing a citation. Unsourced material may be challenged and removed.
 
-See [Verifiability and reliable sources](references/verifiability-and-reliable-sources.md).
+See [Citing to verifiable, reliable sources](references/citing-to-verifiable-and-reliable-sources.md).
 
 ## Citing sources on Wikipedia
 
