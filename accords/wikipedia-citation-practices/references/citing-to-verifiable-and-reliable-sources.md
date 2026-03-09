@@ -84,8 +84,6 @@ For these claims, multiple high-quality, independent sources are expected. A sin
 
 Sources should not be rejected just because they are difficult or costly to access. Some reliable sources are behind paywalls, available only in print, or held in special collections. Non-English sources are also acceptable — English-language sources are preferred when available and of equal quality, but a citation to a non-English reliable source is valid. When quoting non-English material, a translation into English should accompany the quote, with professionally published translations preferred over editor translations, which in turn are preferred over machine translations.
 
-Note particularly when doing research with LLMs that LLMs may hallucinate or reconstruct sources that are not accessible, so special care must be taken to ensure that the actual source has been accessed and read.
-
 See: [Wikipedia:Reliable sources](https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources)
 
 ## No original research (WP:NOR)
@@ -96,7 +94,7 @@ Wikipedia articles must not contain *original research*: material for which no r
 - **Unpublished facts or data.** Personal observations, experiments, interviews, or surveys conducted by editors cannot be cited.
 - **Novel interpretations.** Applying a published theory to a new situation, even if the application seems logical, constitutes original research if no source has published that application.
 
-The boundary between legitimate editorial judgment (selecting and organizing material from sources) and original research (drawing conclusions beyond what sources state) is one of Wikipedia's most frequent editorial disputes. LLM users should be careful that their tools have not conducted original research on their behalf.
+The boundary between legitimate editorial judgment (selecting and organizing material from sources) and original research (drawing conclusions beyond what sources state) is one of Wikipedia's most frequent editorial disputes.
 
 See: [Wikipedia:No original research](https://en.wikipedia.org/wiki/Wikipedia:No_original_research)
 

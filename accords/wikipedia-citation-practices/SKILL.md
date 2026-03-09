@@ -5,6 +5,7 @@ description: An accord for adding and evaluating citations on Wikipedia and Wiki
 presentation:
   order:
     - citing-to-verifiable-and-reliable-sources
+    - llm-risks-for-citation-work
     - citing-sources-on-wikipedia
     - wikidata-references
     - after-the-citation-wikipedia
@@ -25,6 +26,19 @@ Wikipedia's core content policies determine what belongs in the encyclopedia and
 - **Burden of evidence**: the editor who adds or restores material bears responsibility for providing a citation. Unsourced material may be challenged and removed.
 
 See [Citing to verifiable, reliable sources](references/citing-to-verifiable-and-reliable-sources.md).
+
+## LLM risks for citation work
+
+Large language models introduce failure modes specific to citation work. Each maps to a Wikipedia policy it risks violating:
+
+- **Hallucinated sources**: LLMs can generate plausible citations for sources that do not exist, violating verifiability (WP:V) at the most basic level.
+- **Source reconstruction**: even when a source is real, the model may misrepresent its contents — the source must be read, not just confirmed to exist.
+- **Inadvertent synthesis**: LLMs combine information across their context and may construct arguments no single source makes, violating no original research (WP:NOR).
+- **Reliability assessment failures**: LLMs cannot reliably evaluate whether a source meets Wikipedia's reliable sources (WP:RS) standards.
+- **Training data as circular source**: LLMs are trained on data that includes Wikipedia itself, creating circular sourcing risks.
+- **BLP sensitivity**: LLM-generated content about living people carries compounded risk under Wikipedia's strictest sourcing policy (WP:BLP).
+
+See [LLM risks for citation work](references/llm-risks-for-citation-work.md).
 
 ## Citing sources on Wikipedia
 
