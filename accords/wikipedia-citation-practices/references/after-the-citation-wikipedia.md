@@ -1,8 +1,5 @@
 ---
 title: "After the citation: Wikipedia"
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 ---
 
 Adding a citation to a Wikipedia article is not the final step. Every edit enters an ecosystem of human review processes and automated systems that may modify, validate, challenge, or build upon the citation. This document describes what happens after a citation is saved.

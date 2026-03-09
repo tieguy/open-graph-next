@@ -1,8 +1,5 @@
 ---
 title: Verifiability and reliable sources
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 ---
 
 Wikipedia's content policies form a hierarchy that determines what material belongs in the encyclopedia. For citation work, three policies are foundational: *verifiability*, *no original research*, and *neutral point of view*. This document focuses on the first two and on the sourcing standards that support them.
