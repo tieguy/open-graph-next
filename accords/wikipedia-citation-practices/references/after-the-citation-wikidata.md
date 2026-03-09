@@ -1,8 +1,5 @@
 ---
 title: "After the citation: Wikidata"
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 ---
 
 Wikidata's post-citation processes reflect its structured data model. Because Wikidata stores atomic property-value pairs rather than prose, the review systems, automated tools, and community processes differ substantially from Wikipedia's. This document describes what happens after a reference is added to a Wikidata statement.

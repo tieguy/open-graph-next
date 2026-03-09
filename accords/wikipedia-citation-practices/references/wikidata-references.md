@@ -1,8 +1,5 @@
 ---
 title: Wikidata references
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 ---
 
 Wikidata is a structured knowledge base where statements carry machine-readable references. Unlike Wikipedia's prose-based citations, Wikidata references are built from *property-value pairs* attached to individual statements. This document covers how references work on Wikidata, what properties are used, and how sourcing standards differ from Wikipedia.

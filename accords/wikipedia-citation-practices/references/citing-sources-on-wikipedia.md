@@ -1,8 +1,5 @@
 ---
 title: Citing sources on Wikipedia
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 ---
 
 Wikipedia has developed a sophisticated citation system through years of community practice. This document covers the mechanics: how citations are formatted, where they are placed, when they are required, and what tools support them.

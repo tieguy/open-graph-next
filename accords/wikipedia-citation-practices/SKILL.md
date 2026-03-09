@@ -2,9 +2,6 @@
 name: wikipedia-citation-practices
 title: Wikipedia citation practices
 description: An accord for adding and evaluating citations on Wikipedia and Wikidata. Establishes shared vocabulary grounded in Wikipedia's own policies, guidelines, and community norms. Use when contributing references, evaluating source quality, or assisting with citation-related tasks on Wikimedia projects.
-license: CC0 1.0 (https://creativecommons.org/publicdomain/zero/1.0/)
-metadata:
-  author: Mike Tiegerman
 presentation:
   order:
     - verifiability-and-reliable-sources
