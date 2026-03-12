@@ -32,6 +32,7 @@ MODELS = [
     "allenai/olmo-3.1-32b-instruct",
     "deepseek/deepseek-v3.2",
     "anthropic/claude-4.5-haiku-20251001",
+    "nvidia/nemotron-3-super-120b-a12b:free",
 ]
 
 TOOL_DEFINITIONS = [
