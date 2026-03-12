@@ -25,6 +25,7 @@ CONTEXT_LIMITS = {
     "allenai/olmo-3.1-32b-instruct": 65_000,
     "deepseek/deepseek-v3.2": 164_000,
     "anthropic/claude-4.5-haiku-20251001": 200_000,
+    "nvidia/nemotron-3-super-120b-a12b:free": 262_144,
 }
 
 MODELS = [
