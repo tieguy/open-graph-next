@@ -127,7 +127,7 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
   - Enriched snapshots include `parsed_edit`, `item`, and `removed_claim` keys per edit
 - `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches, truncates pages to 15k chars.
 - `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
-  - Runs edits from enriched snapshots across configurable model list (default: Nemotron, OLMo, DeepSeek, Claude Haiku)
+  - Runs edits from enriched snapshots across configurable model list (default: Nemotron Nano, OLMo, DeepSeek, Claude Haiku, Nemotron Super)
   - Interleaved execution order (all models per edit before moving to next edit)
   - Checkpoint/resume via `logs/wikidata-patrol-experiment/fanout-state.yaml`
   - Per-verdict 180s wall-clock timeout
