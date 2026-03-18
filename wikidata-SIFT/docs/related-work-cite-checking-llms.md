@@ -14,6 +14,8 @@ T399642 is part of the Wikimedia Edit Checks initiative within VisualEditor. The
 
 ## Related Phabricator Tasks
 
+- [T276857: Surface Reference Reliability signal within VE](https://phabricator.wikimedia.org/T276857) — Meta-task for equipping editors with tools to assess source reliability when adding or encountering citations in VisualEditor. Tags: VisualEditor, EditCheck, Community-Wishlist-Survey-2023, Editing-team. Key research findings referenced: percentage of English Wikipedia sentences missing a citation dropped 20% in the last decade; non-authoritative sources stayed below 1%; experienced editors make better reference quality changes; new editors who co-edit with experienced editors are more likely to avoid risky references in future edits; untrustworthy sources in one language persist across other language versions.
+- [T352134: Build reference reliability check MVP](https://phabricator.wikimedia.org/T352134) — Implementation of reference reliability checking in VisualEditor. First step: warn when editors cite domains a project has deemed spam. Future vision: use consensus stored in [WP:RSP](https://en.wikipedia.org/wiki/Wikipedia:Reliable_sources/Perennial_sources) (Reliable Sources Perennial list) to offer real-time feedback about source reliability. Part of the broader [EditCheck system](https://www.mediawiki.org/wiki/Edit_check/Status/2023) that went live Oct 11, 2023.
 - [T414816: Exploration of automated verifiability checks](https://phabricator.wikimedia.org/T414816) — Wikimedia Research initiative (FY2025-26, Jan–Mar) exploring automated verifiability. Assigned to Isaac.
 - [T360489: Generate and present edit suggestions at scale](https://phabricator.wikimedia.org/T360489) — Broader edit suggestions infrastructure.
 
