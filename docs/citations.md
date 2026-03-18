@@ -1,0 +1,127 @@
+# Citation List
+
+References relevant to the open-graph-next project: using LLMs to improve the open, human-readable knowledge graph.
+
+> **Note:** Unless otherwise attributed, summaries are by Claude (Anthropic), not by Luis Villa.
+
+Last updated: 2026-02-24
+
+---
+
+## Truth, Free Speech, and Open Knowledge
+
+- **Michael C. Dorf.** ["Supporting and Implementing Truth as a Free Speech Value."](https://knightcolumbia.org/blog/supporting-and-implementing-truth-as-a-free-speech-value) Knight First Amendment Institute at Columbia University, February 2026.
+  Argues that truth plays a surprisingly minor role in modern First Amendment doctrine, and proposes empowering truth-gathering and truth-verifying entities — including standalone nonprofit news organizations like ProPublica and crowdsourced knowledge hubs like Wikipedia — as an institutional counterweight to the spread of falsehood.
+
+- **Jessica Hullman.** ["Living the Metascience Dream or Nightmare."](https://jessicahullman.substack.com/p/living-the-metascience-dream-or-nightmare) Substack, 2026.
+  *(Article too new to summarize at time of writing.)*
+
+## Methodology Foundations
+
+- **Mike Caulfield.** [SIFT Toolbox / CheckPlease.](https://checkplease.neocities.org) Neocities.
+  A lengthy instruction prompt and human-in-the-loop methodology that outperforms unmodified LLMs at fact-checking and contextualization, modeling a "research assistant" approach rather than a chatbot approach. The SIFT method (Stop, Investigate the source, Find better coverage, Trace claims) is foundational to this project's approach.
+
+- **Maggie Appleton.** ["Gas Town."](https://maggieappleton.com/gastown) maggieappleton.com.
+  A speculative design fiction exploring what comes after the current paradigm — framing the question of what a "world in which every single human being can freely share in the sum of all knowledge" looks like in an LLM-changed landscape.
+
+## Wikidata Quality: Opportunities for LLM-Assisted Improvement
+
+- **Shenoy, K. et al.** ["A Study of the Quality of Wikidata."](https://www.sciencedirect.com/science/article/abs/pii/S1570826821000536) *Journal of Web Semantics*, 2022. Also at [Wikidata Workshop 2022](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_8029.pdf). Community: [Data quality framework RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Data_quality_framework_for_Wikidata), [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2024/November).
+  The most comprehensive treatment of Wikidata quality. Identifies semantic validation — the kind of judgment LLMs are well-suited for — as the key unsolved problem, since simple validators already handle syntactic errors. Proposes three quality indicators (community consensus, deprecated statements, constraint violations) that could serve as training signals or benchmarks for LLM-assisted tools.
+
+- **Piscopo, A. & Simperl, E.** ["A Study of the Quality of Wikidata."](https://arxiv.org/pdf/2107.00156) arXiv, 2021. Community: [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2019/September), [Wikimania 2019 session](https://wikimania.wikimedia.org/wiki/2019:Quality/Data_Quality_in_Wikidata).
+  Surveys approaches to assessing Wikidata quality and documents strong community appetite for better tooling: 63% of active editors said constraint-flagged data "often" needs correction, suggesting automated repair suggestions would find a receptive audience.
+
+- **Dogan, G. & Patel-Schneider, P.** ["Disjointness Violations in Wikidata."](https://arxiv.org/abs/2410.13707) arXiv, December 2024. Community: [Cleaning Task Force](https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Cleaning_Task_Force), [Changes log](https://www.wikidata.org/wiki/Wikidata:WikiProject_Ontology/Cleaning_Task_Force/Changes), [Research Newsletter](https://meta.wikimedia.org/wiki/Research:Newsletter/2024/November), [mailing list](https://www.mail-archive.com/wikidata@lists.wikimedia.org/msg09746.html).
+  Maps the leverage points: ~14,480 "culprit" items each cause hundreds of cascading constraint violations, meaning targeted fixes to a small number of items could resolve violations at scale. The largest cluster involves gene items caught between "abstract entity" and "concrete object" classifications — a taxonomy ambiguity well-suited to LLM-assisted resolution. The authors are active members of the WikiProject Ontology Cleaning Task Force and have applied manual fixes directly to Wikidata, making this the rare paper in the list where research crossed the gap into practice.
+
+- **Beghaeiraveri, S. et al.** ["RQSS: A Framework for Evaluating the Referencing Quality of Wikidata."](https://journals.sagepub.com/doi/full/10.3233/SW-243695) *Semantic Web Journal*, 2024. Community: [WikiProject Reference Verification](https://www.wikidata.org/wiki/Wikidata:WikiProject_Reference_Verification), [sourcing requirements RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Sourcing_requirements_for_bots).
+  Provides a detailed, measurable framework (40 metrics across 21 dimensions) for tracking referencing quality improvements over time. Current Wikidata subsets average 0.58/1.0, with the largest gaps in completeness, verifiability, and versatility — dimensions where LLM-assisted source discovery and verification could move the needle.
+
+- **Ferranti, N. et al.** ["Formalizing Repairs for Wikidata Constraint Violations: A Taxonomy and Empirical Analysis."](https://link.springer.com/chapter/10.1007/978-3-032-09527-5_20) *ISWC 2025*. [PDF](https://aic.ai.wu.ac.at/~polleres/publications/ferr-etal-2025ISWC.pdf). Community: [2020 Property constraints report](https://www.wikidata.org/wiki/Wikidata:2020_report_on_Property_constraints), [constraint violation technical bases RFC](https://www.wikidata.org/wiki/Wikidata:Requests_for_comment/Constraint_violation_technical_bases), [Lydia Pintscher on constraint violations](https://www.mail-archive.com/wikidata-l@lists.wikimedia.org/msg04701.html), [constraint violations via Query Service](https://lists.wikimedia.org/hyperkitty/list/wikidata@lists.wikimedia.org/message/UGH464NNPEZ2CZ45MHIYQBMVWVBL4ZGV/).
+  Demonstrates that many Wikidata constraint violations have straightforward, automatable repairs: 52% of type violations can be fixed simply by adding missing type statements, and T-box repairs (adjusting the class hierarchy) can resolve many violations simultaneously — a clear roadmap for LLM-assisted batch repair.
+
+- **Ferranti, N. et al.** ["Formalizing and Validating Wikidata's Property Constraints using SHACL and SPARQL."](https://www.semantic-web-journal.net/content/formalizing-and-validating-wikidatas-property-constraints-using-shaclsparql) *Semantic Web Journal*, 2024. [GitHub](https://github.com/nicolasferranti/wikidata-constraints-formalization). Community: [Data Modelling Days 2023](https://www.wikidata.org/wiki/Wikidata:Events/Data_Modelling_Days_2023/IntroSchemas), [Data Quality Days 2022 talk](https://www.wikidata.org/wiki/Wikidata_talk:Events/Data_Quality_Days_2022).
+  Unlocks programmatic constraint checking outside Wikidata's own infrastructure by providing complete SPARQL formulations for all 30+ constraint types — making it possible to build external LLM-assisted validation pipelines that detect and propose repairs independently.
+
+## YAGO and Knowledge Base Curation
+
+- **Tanon, T.P., Weikum, G. & Suchanek, F.** ["YAGO 4: A Reason-able Knowledge Base."](https://link.springer.com/chapter/10.1007/978-3-030-49461-2_34) *ESWC 2020*. [PDF](https://suchanek.name/work/publications/eswc-2020-yago.pdf).
+  Core paper on YAGO 4, which filters Wikidata through strict OWL 2 DL constraints (domain, range, disjointness, cardinality), discarding 28% of all facts (132 million) to produce a logically consistent knowledge base.
+
+- **Suchanek, F. et al.** ["YAGO 4.5: A Large and Clean Knowledge Base with a Rich Taxonomy."](https://dl.acm.org/doi/10.1145/3626772.3657876) *SIGIR 2024*. [arXiv](https://arxiv.org/html/2308.11884v2).
+  Restores more of Wikidata's taxonomy (10,124 of ~2.4 million classes) while maintaining logical consistency, though with pickier entity filtering (64M → 49M entities).
+
+- **Tanon, T.P. & Suchanek, F.** ["Neural Knowledge Base Repairs."](https://suchanek.name/work/publications/eswc-2021.pdf) *ESWC 2021*.
+  Uses ML trained on historical Wikidata edit patterns to suggest fixes for constraint violations; found 1 million domain violations and 4.4 million single-value violations as of March 2020.
+
+- **Peng, Y., Bonald, T. & Alam, M.** ["Refining Wikidata Taxonomy using Large Language Models (WiKC)."](https://arxiv.org/abs/2409.04056) *CIKM 2024*. [GitHub](https://github.com/peng-yiwen/WiKC). Community: [Weekly Summary #646](https://www.wikidata.org/wiki/Wikidata:Status_updates/2024_09_23), [mailing list discussion](https://www.mail-archive.com/wikidata@lists.wikimedia.org/msg09668.html).
+  Applies LLMs to clean Wikidata's taxonomy, improving entity typing accuracy from 43% (raw Wikidata) to 70% (cleaned). Community reception was skeptical — editors noted the LLM removed links that "actually provided value."
+
+- **Suchanek, F.** ["Knowledge Bases and Language Models: Complementing Forces."](https://link.springer.com/chapter/10.1007/978-3-031-45072-3_1) *RuleML+RR 2023*.
+  Argues that structured knowledge bases and LLMs are complementary paradigms: KBs provide ground truth, LLMs provide natural language understanding, and both will co-exist.
+
+- **Suchanek, F. & Holzenberger, N.** ["Knowledge-Based Language Models" (KB-LM).](https://suchanek.name/work/research/kb-lm/kb-lm-white-paper.pdf) White paper. [Project page](https://suchanek.name/work/research/kb-lm/index.html).
+  Proposes an architecture where LLMs handle reasoning while KBs provide and verify facts, with the goal of making LLMs stop hallucinating, become auditable, and become smaller by not needing to memorize facts.
+
+- **Suchanek, F.** ["On Language Models and Knowledge Bases."](http://files.inria.fr/almanach/files/seminars/ALMAnaCH-seminar-2025-11-21-fabian-suchanek.pdf) ALMAnaCH Seminar, November 2025.
+  Argues that "the fundamental problem is that language models are probabilistic, while truth is not" and that the KB-LM architecture — LLM reasoning verified by structured knowledge — can address this.
+
+## LLMs and Knowledge Graphs
+
+- **Wikimedia Research.** ["Using Language Models for Wikidata Vandalism Detection."](https://arxiv.org/pdf/2505.18136) *ACL 2025*. [Dataset](https://zenodo.org/records/15492678).
+  Binary classification using language model features for detecting vandalism in Wikidata edits; the productionized Graph2Text system is the only LLM-based quality tool currently working at scale on Wikidata.
+
+- **KGValidator.** ["LLMs for Automatic Validation of Knowledge Graph Completion."](https://arxiv.org/html/2404.15923v1) arXiv, 2024.
+  Explores using LLMs for automatic validation of knowledge graph completion, noting the challenge of relying on manual verification at Wikidata's scale.
+
+- **IBM Research.** ["LLM Store: A KIF Plugin for Wikidata-based Knowledge Base Completion via LLMs."](https://research.ibm.com/publications/llm-store-a-kif-plugin-for-wikidata-based-knowledge-base-completion-via-llms) *ISWC 2024*.
+  KIF plugin using LLMs for Wikidata knowledge base completion, achieving an F1 score of 90.83% on the LM-KBC Challenge.
+
+- **"Scholarly Wikidata."** [arXiv, 2024.](https://arxiv.org/html/2411.08696v1)
+  Uses LLMs to populate Wikidata with conference metadata through a human-in-the-loop validation approach.
+
+- **Suchanek, F. et al.** ["Retrieval-Constrained Decoding."](https://arxiv.org/abs/2509.23417) arXiv, September 2025.
+  Shows LLMs know more facts than standard evaluation suggests — the problem is surface form variation ("NYC" vs. "New York City"). Using YAGO as ground truth with a 19,137-question dataset, Llama-3.1-70B's F1 jumps from 32.3% to 46.0% when aliases are accounted for.
+
+- **Delétang, G. et al.** ["Reconfidencing LLMs from the Grouping Loss Perspective."](https://aclanthology.org/2024.findings-emnlp.85/) *EMNLP 2024 Findings*.
+  Uses YAGO entities to demonstrate that LLM confidence scores are systematically biased by demographics — models are more overconfident about facts involving certain nationalities. Proposes per-subgroup calibration.
+
+## Wikipedia, AI, and Information Integrity
+
+- **Wagner, C.** ["Death by AI: Will large language models diminish Wikipedia?"](https://asistdl.onlinelibrary.wiley.com/doi/10.1002/asi.24975) *Journal of the Association for Information Science and Technology*, 2025.
+  Analyzes the existential threat LLMs pose to Wikipedia's contributor ecosystem and the downstream implications for knowledge production.
+
+- **Dergacheva, I. et al.** ["An Endangered Species: How LLMs Threaten Wikipedia's Sustainability."](https://link.springer.com/article/10.1007/s00146-025-02199-9) *AI & Society*, 2025.
+  Documents how volunteer editors risk burnout as knowledge-sharing becomes "an increasingly investigative and adversarial process" of verifying machine-produced content.
+
+- **"Wikipedia in the Era of LLMs: Evolution and Risks."** [arXiv, 2025.](https://arxiv.org/html/2503.02879v1)
+  Surveys how LLMs are changing Wikipedia's knowledge production processes and the risks they introduce.
+
+- **"Machines in the Margins: A Systematic Review of Automated Content Generation for Wikipedia."** [arXiv, 2025.](https://arxiv.org/html/2509.22443)
+  Systematic review of automated content generation approaches for Wikipedia, covering both historical bot systems and emerging LLM methods.
+
+- **Wikimedia Foundation.** ["The 3 Building Blocks of Trustworthy Information: Lessons from Wikipedia."](https://wikimediafoundation.org/news/2025/10/02/the-3-building-blocks-of-trustworthy-information-lessons-from-wikipedia/) October 2025.
+  Distills Wikipedia's approach to trustworthy information into three pillars; institutional perspective on maintaining knowledge quality.
+
+- **NPR.** ["Wikipedia Editors Publish New Guide to Help Readers Detect Entries Written by AI."](https://www.npr.org/2025/09/04/nx-s1-5519267/wikipedia-editors-publish-new-guide-to-help-readers-detect-entries-written-by-ai) September 2025.
+  Reports on the Wikipedia community's efforts to help readers identify AI-generated content, reflecting the growing scale of the problem.
+
+- **The Decoder.** ["Here's How to Spot AI Writing, According to Wikipedia Editors."](https://the-decoder.com/heres-how-to-spot-ai-writing-according-to-wikipedia-editors/) 2025.
+  Covers the same Wikipedia AI detection guide with additional context on the specific linguistic and formatting patterns that flag AI-generated text.
+
+- **Sarabadani, A. et al.** ["Building Automated Vandalism Detection Tools for Wikidata."](https://wikiworkshop.org/2017/papers/p1647-sarabadani.pdf) *Wiki Workshop*, 2017. Community: [Research:Building automated vandalism detection tool](https://meta.wikimedia.org/wiki/Research:Building_automated_vandalism_detection_tool_for_Wikidata).
+  Early work on automated vandalism detection for Wikidata, providing the foundation for the ORES system that now catches 89% of vandalism while reducing patroller workload by 98%.
+
+## Digital Humanities and Open Knowledge Infrastructure
+
+- **Rossenova, L. et al.** [Systematic Review of Wikidata in Digital Humanities.](https://academic.oup.com/dsh/article/38/2/852/6964525) *Digital Scholarship in the Humanities*, Oxford Academic, 2023.
+  Systematic review of how Wikidata is used across digital humanities projects, documenting adoption patterns and challenges.
+
+- **Halperin, J.R.** [Cooperative knowledge infrastructure.](https://jennierosehalperin.me)
+  Inspiration for the "Rabbit Hole Browser" sub-project's approach to cooperative knowledge infrastructure connecting open sources.
+
+## Referencing Quality
+
+- **"Towards Automated Technologies in the Referencing Quality of Wikidata."** [Wikidata Workshop, 2022.](https://wikidataworkshop.github.io/2022/papers/Wikidata_Workshop_2022_paper_2049.pdf) Community: [ProVe tool page](https://www.wikidata.org/wiki/Wikidata:ProVe), [automated reference finding](https://www.wikidata.org/wiki/Wikidata:Automated_finding_references_input).
+  Proposes automated pipelines for verifying whether Wikidata triples are supported by their documented sources — directly relevant to the "imported from Wikipedia" circular reference problem.
