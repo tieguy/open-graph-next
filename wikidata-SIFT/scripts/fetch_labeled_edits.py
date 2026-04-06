@@ -88,12 +88,25 @@ class RecentChangesSource:
         window_end_days: How many days ago the time window ends (default 14).
     """
 
-    def __init__(self, site, window_start_days=30, window_end_days=14):
+    def __init__(self, site, window_start_days=30, window_end_days=14, max_qid=None):
         self.site = site
+        self.max_qid = max_qid
         now = datetime.now(timezone.utc)
         # start = newer boundary, end = older boundary (pywikibot convention)
         self.rc_start = now - timedelta(days=window_end_days)
         self.rc_end = now - timedelta(days=window_start_days)
+
+    def _passes_qid_filter(self, change):
+        """Check if an edit's item Q-id is within the allowed range."""
+        if self.max_qid is None:
+            return True
+        title = change.get("title", "")
+        if title.startswith("Q"):
+            try:
+                return int(title[1:]) <= self.max_qid
+            except ValueError:
+                pass
+        return True
 
     def _fetch_pool_a(self, limit):
         """Pool A: edits tagged mw-reverted that are new-editor statement edits.
@@ -116,6 +129,8 @@ class RecentChangesSource:
             tags = change.get("tags", [])
             is_new_editor_statement = any(t in tags for t in STATEMENT_TAGS)
             if not is_new_editor_statement:
+                continue
+            if not self._passes_qid_filter(change):
                 continue
 
             edit = normalize_change(change)
@@ -216,6 +231,8 @@ class RecentChangesSource:
                 is_new_editor_statement = any(t in rev_tags for t in STATEMENT_TAGS)
                 if not is_new_editor_statement:
                     continue
+                if not self._passes_qid_filter(change):
+                    continue
 
                 # Build edit dict from revision info
                 edit = {
@@ -300,6 +317,8 @@ class RecentChangesSource:
 
                 revid = change.get("revid")
                 if revid in seen_revids:
+                    continue
+                if not self._passes_qid_filter(change):
                     continue
                 seen_revids.add(revid)
 
@@ -422,10 +441,14 @@ def main():
         "--seed", type=int, default=42,
         help="Random seed for sampling (default: 42)",
     )
+    parser.add_argument(
+        "--max-qid", type=int, default=None,
+        help="Exclude items with Q-id above this number (e.g., 130000000)",
+    )
     args = parser.parse_args()
 
     site = get_production_site()
-    source = RecentChangesSource(site)
+    source = RecentChangesSource(site, max_qid=args.max_qid)
 
     print(f"Fetching reverted edits (target: {args.reverted})...")
     reverted_raw = source.fetch_reverted(limit=args.reverted * 2)

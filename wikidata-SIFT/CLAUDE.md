@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-02-22
+Last updated: 2026-04-05
 
 ## Project Purpose
 
@@ -136,12 +136,14 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
   - Saves to `logs/wikidata-patrol-experiment/labeled/`
 - `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches, truncates pages to 15k chars.
 - `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
-  - Runs edits from enriched snapshots across configurable model list (default: OLMo, DeepSeek, Claude Haiku)
+  - Runs edits from enriched snapshots across configurable model list (default: Mistral Small, OLMo, DeepSeek v3.2, Claude Haiku)
   - Interleaved execution order (all models per edit before moving to next edit)
   - Checkpoint/resume via `logs/wikidata-patrol-experiment/fanout-state.yaml`
   - Per-verdict 180s wall-clock timeout
   - Cost tracking via OpenRouter generation endpoint
   - Verdicts saved to `logs/wikidata-patrol-experiment/verdicts-fanout/`
+  - 500-edit run completed 2026-02-22: 1,854 verdicts, 29 timeouts, 3 errors, $39.27 total cost. Retroactively labeled 2026-04-05 (see `docs/preliminary-results-2026-04.md`)
+  - Default model lineup updated 2026-04-05: Mistral Small 3.2, OLMo 3.1, Nemotron 3 Nano 30B, Gemma 3 4B. Claude Haiku and DeepSeek dropped (76% of cost, no ensemble improvement)
   - `--eval` flag: evaluation mode that strips `ground_truth` from edits before sending to models, and uses `config/blocked_domains_eval.yaml` (blocks wikidata.org to prevent label leakage)
   - `build_edit_context` supports `context_budget` parameter for truncation, includes `edit_diff` and `prefetched_references` sections, prioritizes edited property claims when truncating item context
 - `scripts/analyze_verdicts.py` -- Metrics computation for labeled evaluation. Joins verdict YAML files with ground-truth snapshot, computes per-model and ensemble metrics. Features:
@@ -159,7 +161,20 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 - `docker-compose.yml` -- SearXNG + Valkey containers for local web search (SearXNG on `localhost:8080`, config in `config/searxng/`)
 - Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
 - Requires `scikit-learn` and `numpy` for analyze_verdicts.py; `matplotlib`, `seaborn`, and `jupyter` as dev dependencies
+- `docs/hard-patrol-problems.md` -- Analysis of 72 split-decision edits from the 500-edit fanout where models genuinely disagree. Categorizes 10 types of hard patrol problems (disambiguation, ontological modeling, source hierarchy disputes, etc.)
+- `docs/preliminary-results-2026-04.md` -- Full preliminary results report with ground-truth evaluation, ensemble metrics, cost analysis, and planned 2000-edit re-run
+- `scripts/label_existing_edits.py` -- Retroactive ground truth labeling: queries Wikidata API to check if revisions were reverted (mw-reverted tag) or deleted. Outputs labeled snapshot YAML.
 - Single-model edit-centric SIFT verification: `skills/sift-patrol/SKILL.md` (used for the 50-edit Sonnet 4.6 run)
+
+### Next: Codifying Patrol Knowledge (chainlink #42)
+
+Meta-issue for building deterministic pre-filters from fanout findings. Key sub-issues:
+- #41: Typological vandalism detection — value type mismatches, temporal impossibility, absurd numerics
+- #43: Pre-LLM reference fetch — verify cited source mentions claim terms before invoking LLM
+- #44: Property format validation — regex/constraint checks derived from fanout data
+- #45: Edit spree detection — if any edit in a batch fails type-checking, flag the whole batch
+- #46: New vs established items risk disparity (brainstorm)
+- #47: Research Wikidata best practices for Wikipedia-as-source references
 
 ## Working with pywikibot
 
@@ -222,14 +237,21 @@ uv run pytest -k "test_name"     # specific test by name
 cp config/searxng/settings.yml.template config/searxng/settings.yml
 sed -i "s/GENERATE_AND_REPLACE.*/$(openssl rand -hex 32)/" config/searxng/settings.yml
 
-# Start SearXNG for verdict fanout web search
-docker compose up -d                # start SearXNG + Valkey
-docker compose down                 # stop containers
+# Start SearXNG for verdict fanout web search (uses podman, not docker)
+podman compose up -d                # start SearXNG + Valkey
+podman compose down                 # stop containers
 
 # Fetch labeled evaluation dataset
-python scripts/fetch_labeled_edits.py --dry-run                         # preview without saving
-python scripts/fetch_labeled_edits.py --reverted 250 --survived 250     # default sizes
-python scripts/fetch_labeled_edits.py --reverted 250 --survived 250 --no-enrich  # skip enrichment
+python scripts/fetch_labeled_edits.py --dry-run                                          # preview without saving
+python scripts/fetch_labeled_edits.py --reverted 250 --survived 250                      # default sizes
+python scripts/fetch_labeled_edits.py --reverted 1000 --survived 1000 --max-qid 130000000 --enrich  # large run, no new items
+
+# Retroactively label an existing snapshot
+python scripts/label_existing_edits.py --snapshot logs/.../snapshot/SNAPSHOT.yaml --dry-run
+python scripts/label_existing_edits.py --snapshot logs/.../snapshot/SNAPSHOT.yaml
+
+# Load API key from .env (gitignored)
+export $(cat .env | xargs)
 
 # Run verdict fanout (requires OPENROUTER_API_KEY and SearXNG running)
 python scripts/run_verdict_fanout.py --snapshot logs/wikidata-patrol-experiment/snapshot/SNAPSHOT.yaml --dry-run

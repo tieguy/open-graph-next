@@ -84,7 +84,7 @@ def get_production_site():
     return pywikibot.Site("wikidata", "wikidata")
 
 
-def fetch_unpatrolled_edits(site, tag=None, total=10):
+def fetch_unpatrolled_edits(site, tag=None, total=10, max_qid=None):
     """Fetch statement edits by new editors from production Wikidata.
 
     New editor edits are identified by tags like "new editor changing
@@ -96,6 +96,9 @@ def fetch_unpatrolled_edits(site, tag=None, total=10):
         tag: Optional single tag to filter by. If None, queries all
             STATEMENT_TAGS.
         total: Maximum number of edits to return.
+        max_qid: If set, skip items with Q-id number above this threshold.
+            E.g., max_qid=130000000 excludes Q130000001 and higher (newly
+            created items that are likely promotional/non-notable).
 
     Yields:
         dict with edit metadata for each unpatrolled edit.
@@ -110,8 +113,17 @@ def fetch_unpatrolled_edits(site, tag=None, total=10):
             namespaces=[0],
             bot=False,
             tag=query_tag,
-            total=total - count,
+            total=(total - count) * 3 if max_qid else total - count,
         ):
+            if max_qid:
+                title = change.get("title", "")
+                if title.startswith("Q"):
+                    try:
+                        qnum = int(title[1:])
+                        if qnum > max_qid:
+                            continue
+                    except ValueError:
+                        pass
             yield normalize_change(change)
             count += 1
             if count >= total:
@@ -1244,6 +1256,12 @@ def main():
         action="store_true",
         help="Skip reference URL prefetching during enrichment",
     )
+    parser.add_argument(
+        "--max-qid",
+        type=int,
+        default=None,
+        help="Exclude items with Q-id above this number (e.g., 130000000 to skip newly created items)",
+    )
     args = parser.parse_args()
 
     site = get_production_site()
@@ -1252,8 +1270,11 @@ def main():
     blocked_domains = load_blocked_domains() if do_prefetch else None
 
     # Fetch unpatrolled edits
-    print(f"Fetching {args.unpatrolled} unpatrolled statement edits...")
-    unpatrolled = list(fetch_unpatrolled_edits(site, tag=args.tag, total=args.unpatrolled))
+    if args.max_qid:
+        print(f"Fetching {args.unpatrolled} unpatrolled statement edits (max Q-id: Q{args.max_qid})...")
+    else:
+        print(f"Fetching {args.unpatrolled} unpatrolled statement edits...")
+    unpatrolled = list(fetch_unpatrolled_edits(site, tag=args.tag, total=args.unpatrolled, max_qid=args.max_qid))
     print(f"  Found {len(unpatrolled)} edits")
 
     if args.enrich:

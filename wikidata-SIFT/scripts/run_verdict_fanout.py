@@ -63,6 +63,8 @@ CONTEXT_LIMITS = {
     "deepseek/deepseek-v3.2": 164_000,
     "anthropic/claude-4.5-haiku-20251001": 200_000,
     "nvidia/nemotron-3-super-120b-a12b:free": 262_144,
+    "nvidia/nemotron-3-nano-30b-a3b": 262_144,
+    "google/gemma-3-4b-it": 131_072,
 }
 
 # Per-model verdict timeout overrides (seconds). Models not listed use DEFAULT_TIMEOUT.
@@ -72,9 +74,8 @@ DEFAULT_TIMEOUT = 180
 MODELS = [
     "mistralai/mistral-small-3.2-24b-instruct",
     "allenai/olmo-3.1-32b-instruct",
-    "deepseek/deepseek-v3.2",
-    "anthropic/claude-4.5-haiku-20251001",
-    "nvidia/nemotron-3-super-120b-a12b:free",
+    "nvidia/nemotron-3-nano-30b-a3b",
+    "google/gemma-3-4b-it",
 ]
 
 TOOL_DEFINITIONS = [
