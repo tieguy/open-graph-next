@@ -129,6 +129,25 @@ def _build_question(edit, parsed):
         )
 
     if diff_type == "value_changed":
+        old_value = edit_diff.get("old_value", {})
+        old_label = old_value.get("value_label") or old_value.get("value", "")
+        if old_label:
+            old_had_refs = bool(old_value.get("references"))
+            ref_note = ""
+            if old_had_refs:
+                new_value = edit_diff.get("new_value", {})
+                new_has_refs = bool(new_value.get("references"))
+                if not new_has_refs:
+                    ref_note = (
+                        " Note: the old value had citation references "
+                        "that the new value does not."
+                    )
+            return (
+                f'Was it correct to change {prop_label} from '
+                f'"{old_label}" to "{value_label}" for {item_label}? '
+                f'You must investigate BOTH the old and new values.'
+                f'{ref_note}'
+            )
         return (
             f'Is "{value_label}" a correct updated {prop_label} '
             f"for {item_label}?"

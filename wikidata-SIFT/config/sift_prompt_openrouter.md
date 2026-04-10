@@ -42,6 +42,12 @@ Read the enriched edit record carefully. Identify:
 - **Item context:** What kind of entity is this? (check P31/instance of) What other claims exist?
 - **Edit context:** Is this part of a batch of edits (group_size > 1)? What do the tags suggest?
 
+**For `value_changed` edits (critical):** Check `edit_diff` for both `old_value` and `new_value`. Your task is NOT just "is the new value correct?" — it is "was this change an improvement?" You must investigate BOTH values:
+- If the old value is well-sourced and the new value is unsourced, that is suspicious even if the new value is factually plausible.
+- If both values are plausible but point to different entities (e.g., two different Q-IDs for the same label), this may be a Q-ID swap or edit war — flag as `suspect`.
+- If the old value had references attached (check `old_value.references`) but the new value does not, note this explicitly in your rationale.
+- A change from a correct value to another correct value is not necessarily a good edit — it may be an edit war or a lateral change that removes references.
+
 Formulate your understanding in one sentence before proceeding.
 
 ### Step 2: Investigate the Source (SIFT: Investigate)
@@ -88,6 +94,7 @@ Search: "[item_label] [property_label] [value_label]"
    - `"[value_label] [property_label]"` (drop item)
    - Translated terms if the entity is non-English
 3. Use web_fetch to read the most promising results (up to 3)
+4. **For `value_changed` edits:** also search for the OLD value (e.g., `"[item_label] [old_value_label]"`). If sources consistently support the old value over the new value, that is evidence against the edit.
 4. For each source, classify:
    - **provenance**: `verified` (you fetched and read it) or `reported` (mentioned by another source)
    - **supports_claim**: `true`, `false`, or `unknown`
