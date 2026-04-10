@@ -101,6 +101,31 @@ MODEL_EXTRA_BODY = {
     },
 }
 
+# Per-model provider routing. Models not listed default to OpenRouter.
+# Keys are the canonical model IDs used in MODELS, checkpoints, and verdict
+# records. The model_id field is the provider-native ID for API calls.
+MODEL_PROVIDERS = {
+    "nvidia/nemotron-3-nano-30b-a3b": {
+        "base_url": "https://api.deepinfra.com/v1/openai",
+        "api_key_env": "DEEPINFRA_API_KEY",
+        "model_id": "nvidia/Nemotron-3-Nano-30B-A3B-v1",
+    },
+}
+
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
+def resolve_api_model_id(model):
+    """Return the provider-specific model ID for API calls.
+
+    Models in MODEL_PROVIDERS may use a different ID on their native provider
+    than the OpenRouter-style ID used as the config key.
+    """
+    provider = MODEL_PROVIDERS.get(model)
+    if provider:
+        return provider.get("model_id", model)
+    return model
+
 TOOL_DEFINITIONS = [
     {
         "type": "function",
