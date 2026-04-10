@@ -1282,3 +1282,57 @@ class TestResolveApiModelId:
     def test_unknown_model_returns_same_id(self):
         result = resolve_api_model_id("some/unknown-model")
         assert result == "some/unknown-model"
+
+
+class TestBuildClients:
+    """Tests for build_clients() and get_client()."""
+
+    @patch.dict(os.environ, {
+        "OPENROUTER_API_KEY": "or-test-key",
+        "DEEPINFRA_API_KEY": "di-test-key",
+    })
+    @patch("run_verdict_fanout.OpenAI")
+    def test_creates_separate_clients_per_provider(self, mock_openai_cls):
+        mock_openai_cls.side_effect = lambda **kwargs: MagicMock(base_url=kwargs["base_url"])
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "nvidia/nemotron-3-nano-30b-a3b",
+        ])
+
+        assert len(clients) == 2
+        assert OPENROUTER_BASE_URL in clients
+        assert "https://api.deepinfra.com/v1/openai" in clients
+        assert mock_openai_cls.call_count == 2
+
+    @patch.dict(os.environ, {"OPENROUTER_API_KEY": "or-test-key"})
+    @patch("run_verdict_fanout.OpenAI")
+    def test_deduplicates_same_provider(self, mock_openai_cls):
+        mock_openai_cls.return_value = MagicMock()
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "allenai/olmo-3.1-32b-instruct",
+        ])
+
+        # Both are OpenRouter models — should create only one client
+        assert len(clients) == 1
+        assert mock_openai_cls.call_count == 1
+
+    @patch.dict(os.environ, {
+        "OPENROUTER_API_KEY": "or-test-key",
+        "DEEPINFRA_API_KEY": "di-test-key",
+    })
+    @patch("run_verdict_fanout.OpenAI")
+    def test_get_client_returns_correct_provider(self, mock_openai_cls):
+        or_client = MagicMock(name="openrouter")
+        di_client = MagicMock(name="deepinfra")
+        mock_openai_cls.side_effect = [or_client, di_client]
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "nvidia/nemotron-3-nano-30b-a3b",
+        ])
+
+        assert get_client("mistralai/mistral-small-3.2-24b-instruct", clients) is or_client
+        assert get_client("nvidia/nemotron-3-nano-30b-a3b", clients) is di_client
