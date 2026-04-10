@@ -1336,3 +1336,24 @@ class TestBuildClients:
 
         assert get_client("mistralai/mistral-small-3.2-24b-instruct", clients) is or_client
         assert get_client("nvidia/nemotron-3-nano-30b-a3b", clients) is di_client
+
+
+class TestComputeTokenCost:
+    """Tests for compute_token_cost()."""
+
+    def test_deepinfra_model_computes_cost(self):
+        cost = compute_token_cost("nvidia/nemotron-3-nano-30b-a3b", 1_000_000, 500_000)
+        # 1M input * $0.13/M + 500k output * $0.20/M = $0.13 + $0.10 = $0.23
+        assert cost == pytest.approx(0.23)
+
+    def test_zero_tokens_returns_zero(self):
+        cost = compute_token_cost("nvidia/nemotron-3-nano-30b-a3b", 0, 0)
+        assert cost == 0.0
+
+    def test_openrouter_model_returns_none(self):
+        cost = compute_token_cost("mistralai/mistral-small-3.2-24b-instruct", 1000, 500)
+        assert cost is None
+
+    def test_unknown_model_returns_none(self):
+        cost = compute_token_cost("some/unknown-model", 1000, 500)
+        assert cost is None
