@@ -781,14 +781,21 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
     if verdict_response_id:
         response_ids.append(verdict_response_id)
 
+    # Token totals from SDK-reported usage
+    total_prompt_tokens = inv_prompt_tokens + vrd_prompt_tokens
+    total_completion_tokens = inv_completion_tokens + vrd_completion_tokens
+
     # Sum inline costs from both phases
     total_cost_usd = None
     if inv_cost is not None or vrd_cost is not None:
         total_cost_usd = (inv_cost or 0) + (vrd_cost or 0)
 
-    # Token totals from SDK-reported usage
-    total_prompt_tokens = inv_prompt_tokens + vrd_prompt_tokens
-    total_completion_tokens = inv_completion_tokens + vrd_completion_tokens
+    # Fallback: compute cost from token counts for providers that don't
+    # return inline usage.cost (e.g. DeepInfra).
+    if total_cost_usd is None:
+        total_cost_usd = compute_token_cost(
+            model, total_prompt_tokens, total_completion_tokens
+        )
 
     # Build verdict record
     parsed_edit = edit.get("parsed_edit") or {}
