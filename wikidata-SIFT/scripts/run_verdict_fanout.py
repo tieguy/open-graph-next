@@ -169,6 +169,20 @@ def get_client(model, clients):
     return clients[base_url]
 
 
+def compute_token_cost(model, prompt_tokens, completion_tokens):
+    """Compute dollar cost from token counts using DEEPINFRA_PRICING.
+
+    Returns:
+        float or None: Cost in USD, or None if model has no pricing entry.
+    """
+    pricing = DEEPINFRA_PRICING.get(model)
+    if not pricing:
+        return None
+    input_cost = (prompt_tokens / 1_000_000) * pricing["input_per_mtok"]
+    output_cost = (completion_tokens / 1_000_000) * pricing["output_per_mtok"]
+    return input_cost + output_cost
+
+
 TOOL_DEFINITIONS = [
     {
         "type": "function",
