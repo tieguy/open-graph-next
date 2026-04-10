@@ -10,8 +10,8 @@ Extracted from [Phabricator T399642: \[Signal\] Identify cases where reference d
 
 - **ORES checks the _style_ of an edit**: Does it _look like_ vandalism? Character ratios, byte counts, bad-word detectors, boolean property flags. Fast, cheap, no understanding of truth.
 - **SIFT checks the _content_ of an edit**: Is the claim _actually correct_? Reads cited sources, searches for corroboration, reasons about whether evidence supports the specific claim. Slow, expensive, understands meaning.
-- **ORES features are hand-engineered statistics**: 50+ numeric/boolean features fed to a gradient-boosted classifier. No access to external sources. No semantic understanding.
-- **SIFT features are a mix of structured data and LLM reasoning over live sources**: The model receives the full item context and edit diff, then actively investigates via web search and page fetching. The prompt directs a specific verification workflow (SIFT: Stop, Investigate, Find, Trace).
+- **ORES features are ~67 hand-engineered statistics**: Numeric/boolean features fed to a gradient-boosted classifier (700 estimators, 0.985 ROC-AUC). No access to external sources. No semantic understanding.
+- **SIFT features are ~15 structured inputs + unbounded LLM reasoning over live sources**: The model receives the full item context and edit diff, then actively investigates via web search and page fetching. The prompt directs a specific verification workflow (SIFT: Stop, Investigate, Find, Trace).
 - **They're complementary, not competing**: ORES is a cheap first-pass filter (catches obvious vandalism patterns). SIFT is a deep second-pass verifier (catches plausible-but-wrong edits that sail through ORES). Neither alone is sufficient.
 
 ### Full-detail comparison
@@ -20,18 +20,24 @@ The table below distinguishes between information the LLM _has access to_ (prese
 
 #### ORES (Wikidata `editquality` models)
 
-All features are **fixed inputs to a gradient-boosted classifier** (GradientBoosting, 500 estimators). There is no "available but unused" category — every feature is engineered and weighted by the model.
+All features are **fixed inputs to a gradient-boosted classifier** (GradientBoosting, 700 estimators, learning rate 0.01, max depth 7). Trained on 16,135 labeled revisions. ~95.4% accuracy, 0.985 ROC-AUC. There is no "available but unused" category — every feature is engineered and weighted by the model.
+
+Sources: [`editquality/feature_lists/wikidatawiki.py`](https://github.com/wikimedia/editquality/blob/master/editquality/feature_lists/wikidatawiki.py), Sarabadani, Halfaker & Taraborelli (2017) "[Building automated vandalism detection tools for Wikidata](https://arxiv.org/abs/1703.03861)", Halfaker & Geiger (2020) "[ORES: Lowering Barriers with Participatory Machine Learning in Wikipedia](https://arxiv.org/abs/1909.05189)".
 
 | Category | Features | What it captures |
 |---|---|---|
-| **Edit type flags** | `is_revert`, `is_restore`, `is_item_creation`, `is_merge_into`, `is_merge_from`, `is_client_move`, `is_client_delete` | Structural edit classification |
-| **User signals** | `user_is_bot`, user rights, protected user status | Editor identity/trust (SIFT deliberately excludes this) |
-| **Comment vandalism heuristics** | `comment_longest_repeated_char`, `comment_uppercase_ratio`, `comment_numbers_ratio`, `comment_whitespace_ratio`, `comment_longest_repeated_uppercase_char`, `comment_has_url`, `comment_english_bad_words`, `comment_english_informals`, `comment_has_first_person_pronouns_en`, `comment_has_second_person_pronouns_en`, `comment_has_do_or_dont_en` | Whether the edit summary _looks_ suspicious |
-| **Entity structure diff (counts)** | Sitelinks added/removed/changed, labels added/removed/changed, aliases added/removed/changed, descriptions added/removed/changed, properties added/removed/changed, statements added/removed/changed, sources added/removed, qualifiers added/removed, badges added/removed/changed, identifiers changed | Volume and shape of the edit (not its correctness) |
-| **Proportional features** | `proportion_of_qid_added`, `proportion_of_language_added`, `proportion_of_links_added` | Edit composition ratios |
-| **Targeted property flags** | P21 (sex/gender), P27 (citizenship), P54 (sports team), P569 (DOB), P18 (image), P109 (signature), P373 (Commons category), P856 (official website) changed; `en_label_changed` | High-vandalism-risk properties as booleans |
-| **Entity type flags** | `is_human` (Q5), `is_blp` (has birth date) | Entity sensitivity classification |
+| **Edit type flags** (7) | `is_revert`, `is_restore`, `is_item_creation`, `is_merge_into`, `is_merge_from`, `is_client_move`, `is_client_delete` | Structural edit classification |
+| **User signals** (8) | `user_is_anon`, `is_bot`, `is_admin`, `has_advanced_rights`, `is_trusted`, `is_patroller`, `is_curator`, `log(seconds_since_registration + 1)` | Editor identity/trust (SIFT deliberately excludes this) |
+| **Parent revision state** (9, log-transformed) | `log(parent.claims + 1)`, `log(parent.properties + 1)`, `log(parent.aliases + 1)`, `log(parent.sources + 1)`, `log(parent.qualifiers + 1)`, `log(parent.badges + 1)`, `log(parent.labels + 1)`, `log(parent.sitelinks + 1)`, `log(parent.descriptions + 1)` | How developed was the item before this edit |
+| **Comment vandalism heuristics** (11) | `comment_longest_repeated_char`, `comment_uppercase_ratio`, `comment_numbers_ratio`, `comment_whitespace_ratio`, `comment_longest_repeated_uppercase_char`, `comment_has_url`, `comment_english_bad_words`, `comment_english_informals`, `comment_has_first_person_pronouns_en`, `comment_has_second_person_pronouns_en`, `comment_has_do_or_dont_en` | Whether the edit summary _looks_ suspicious |
+| **Comment structure** (2) | `has_section_comment`, `has_wikilink_comment` | Structural patterns in edit summary |
+| **Entity structure diff** (27 counts) | Sitelinks added/removed/changed, labels added/removed/changed, descriptions added/removed/changed, aliases added/removed, properties added/removed/changed, claims added/removed/changed, sources added/removed, qualifiers added/removed, badges added/removed/changed, identifiers changed | Volume and shape of the edit (not its correctness) |
+| **Proportional features** (3) | `proportion_of_qid_added`, `proportion_of_language_added`, `proportion_of_links_added` | Edit composition ratios |
+| **Targeted property flags** (9) | P21 (sex/gender), P27 (citizenship), P54 (sports team), P569 (DOB), P18 (image), P109 (signature), P373 (Commons category), P856 (official website) changed; `en_label_changed` | High-vandalism-risk properties as booleans |
+| **Entity type flags** (2) | `is_human` (Q5), `is_blp` (has birth date, no death date) | Entity sensitivity classification |
 | **NOT available to ORES** | Actual claim values, reference content, external source verification, semantic correctness, ontological consistency, whether the source supports the claim | ORES cannot assess truth, only pattern |
+
+Note: The related **WDVD system** (Heindorf, Potthast, Stein & Engels, [CIKM 2016](https://dl.acm.org/doi/10.1145/2983323.2983740)) used 47 features including user geolocation (city, country, timezone) and session context (position within editing session). The later **FAIR-S** debiased variant ([WWW 2019](https://dl.acm.org/doi/10.1145/3308558.3313507)) reduced to 14 features by removing user-identifying features to reduce bias against anonymous editors. ORES is now deprecated in favor of **Lift Wing**, which runs the same revscoring models on updated infrastructure.
 
 #### SIFT-Patrol (LLM-based verification)
 
@@ -72,7 +78,7 @@ All features are **fixed inputs to a gradient-boosted classifier** (GradientBoos
 | Dimension | ORES | SIFT-Patrol |
 |---|---|---|
 | **Architecture** | Gradient-boosted trees (fixed features) | LLM with tool use (open-ended reasoning) |
-| **Feature count** | ~50 hand-engineered | ~15 structured inputs + unbounded reasoning |
+| **Feature count** | ~67 hand-engineered (700 estimators, 0.985 ROC-AUC) | ~15 structured inputs + unbounded reasoning |
 | **External access** | None | Web search + page fetch (live) |
 | **Reads source content** | No | Yes (and is required to) |
 | **Understands claim semantics** | No | Yes |
