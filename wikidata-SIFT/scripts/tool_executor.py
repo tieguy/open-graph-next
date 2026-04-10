@@ -5,6 +5,8 @@ Provides web_search() and web_fetch() functions that can be called
 by any model via the verdict runner's tool-calling loop.
 """
 
+import os
+import threading
 import time
 from pathlib import Path
 from urllib.parse import urlparse
@@ -12,8 +14,6 @@ from urllib.parse import urlparse
 import httpx
 import trafilatura
 import yaml
-
-import os
 
 BRAVE_SEARCH_URL = "https://api.search.brave.com/res/v1/web/search"
 FETCH_TIMEOUT = 15.0
@@ -23,6 +23,8 @@ SEARCH_DELAY = 1.0  # Brave API free tier: 1 req/sec
 USER_AGENT = "wikidata-sift-tool-executor/1.0"
 
 _last_search_time = 0.0
+_search_lock = threading.Lock()
+_fetch_lock = threading.Lock()
 
 _last_fetch_time = 0.0
 
@@ -76,23 +78,25 @@ def is_blocked_domain(url, blocked_domains):
 
 
 def _rate_limit():
-    """Enforce minimum delay between fetches."""
+    """Enforce minimum delay between fetches (thread-safe)."""
     global _last_fetch_time
-    now = time.monotonic()
-    elapsed = now - _last_fetch_time
-    if elapsed < FETCH_DELAY:
-        time.sleep(FETCH_DELAY - elapsed)
-    _last_fetch_time = time.monotonic()
+    with _fetch_lock:
+        now = time.monotonic()
+        elapsed = now - _last_fetch_time
+        if elapsed < FETCH_DELAY:
+            time.sleep(FETCH_DELAY - elapsed)
+        _last_fetch_time = time.monotonic()
 
 
 def _search_rate_limit():
-    """Enforce minimum delay between search API calls."""
+    """Enforce minimum delay between search API calls (thread-safe)."""
     global _last_search_time
-    now = time.monotonic()
-    elapsed = now - _last_search_time
-    if elapsed < SEARCH_DELAY:
-        time.sleep(SEARCH_DELAY - elapsed)
-    _last_search_time = time.monotonic()
+    with _search_lock:
+        now = time.monotonic()
+        elapsed = now - _last_search_time
+        if elapsed < SEARCH_DELAY:
+            time.sleep(SEARCH_DELAY - elapsed)
+        _last_search_time = time.monotonic()
 
 
 def web_search(query, blocked_domains=None, api_key=None):

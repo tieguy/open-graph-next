@@ -2,6 +2,7 @@
 """Run verdict fanout: evaluate Wikidata edits across multiple models via OpenRouter."""
 
 import argparse
+import concurrent.futures
 import inspect
 import json
 import os
@@ -932,28 +933,26 @@ def main():
 
     # Load checkpoint
     completed = load_checkpoint()
+    checkpoint_lock = threading.Lock()
 
-    # Build interleaved execution order
-    pairs = build_execution_order(edits, models_to_use)
-    total = len(pairs)
+    total_edits = len(edits)
+    num_models = len(models_to_use)
 
     skipped_count = 0
     timeout_count = 0
     error_count = 0
     completed_count = 0
 
-    for i, (edit, model) in enumerate(pairs):
+    def run_one(edit, model, edit_idx):
+        """Run a single (edit, model) verdict. Returns (state_key, result_str, verdict_or_none)."""
         rcid = edit.get("rcid")
         state_key = edit.get("revid") or rcid
 
-        # Skip already-completed pairs
-        if (state_key, model) in completed:
-            skipped_count += 1
-            continue
+        with checkpoint_lock:
+            if (state_key, model) in completed:
+                return state_key, "skip", None
 
         title = edit.get("title", "?")
-        print(f"[{i+1}/{total}] {title} {model_slug(model)}... ", end="", flush=True)
-
         try:
             timeout = MODEL_TIMEOUTS.get(model, DEFAULT_TIMEOUT)
             verdict_edit = strip_ground_truth(edit) if args.eval else edit
@@ -964,9 +963,6 @@ def main():
             )
 
             if timed_out:
-                timeout_count += 1
-                print("TIMEOUT")
-                # Create a minimal timeout verdict
                 verdict = {
                     "timestamp": datetime.now(timezone.utc).isoformat(),
                     "model": model,
@@ -978,19 +974,51 @@ def main():
                     "rationale": None,
                     "sources": [],
                 }
+                save_verdict(verdict, edit, model)
+                with checkpoint_lock:
+                    completed.add((state_key, model))
+                    save_checkpoint(completed)
+                return state_key, "timeout", verdict
             else:
-                completed_count += 1
-                print(verdict.get("verdict") or "no verdict")
-
-            save_verdict(verdict, edit, model)
-            completed.add((state_key, model))
-            save_checkpoint(completed)
+                save_verdict(verdict, edit, model)
+                with checkpoint_lock:
+                    completed.add((state_key, model))
+                    save_checkpoint(completed)
+                return state_key, verdict.get("verdict") or "no verdict", verdict
 
         except Exception as e:
-            error_count += 1
             import traceback
-            print(f"ERROR: {e}")
             traceback.print_exc()
+            return state_key, f"error: {e}", None
+
+    for edit_idx, edit in enumerate(edits):
+        title = edit.get("title", "?")
+        parsed = edit.get("parsed_edit") or {}
+        prop = parsed.get("property", "?")
+        print(f"\n[{edit_idx+1}/{total_edits}] {title} {prop}")
+
+        # Run all models for this edit in parallel
+        with concurrent.futures.ThreadPoolExecutor(max_workers=num_models) as executor:
+            futures = {
+                executor.submit(run_one, edit, model, edit_idx): model
+                for model in models_to_use
+            }
+            for future in concurrent.futures.as_completed(futures):
+                model = futures[future]
+                state_key, result_str, verdict = future.result()
+                slug = model_slug(model)
+                if result_str == "skip":
+                    skipped_count += 1
+                    print(f"  {slug}: skip")
+                elif result_str == "timeout":
+                    timeout_count += 1
+                    print(f"  {slug}: TIMEOUT")
+                elif result_str.startswith("error:"):
+                    error_count += 1
+                    print(f"  {slug}: {result_str}")
+                else:
+                    completed_count += 1
+                    print(f"  {slug}: {result_str}")
 
     print(
         f"\nDone. completed={completed_count}, skipped={skipped_count}, "
