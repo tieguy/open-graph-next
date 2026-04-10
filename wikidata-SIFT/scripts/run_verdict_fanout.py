@@ -158,6 +158,7 @@ def get_client(model, clients):
     base_url = provider["base_url"] if provider else OPENROUTER_BASE_URL
     return clients[base_url]
 
+
 TOOL_DEFINITIONS = [
     {
         "type": "function",
