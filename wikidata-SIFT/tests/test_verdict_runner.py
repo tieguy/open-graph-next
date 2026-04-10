@@ -1357,3 +1357,64 @@ class TestComputeTokenCost:
     def test_unknown_model_returns_none(self):
         cost = compute_token_cost("some/unknown-model", 1000, 500)
         assert cost is None
+
+
+class TestProviderRouting:
+    """Tests that API calls use the resolved model ID."""
+
+    def test_investigation_phase_uses_resolved_model_id(self):
+        """Verify chat.completions.create receives the provider-native model ID."""
+        client = MagicMock()
+        response = _make_chat_response("stop", content="Investigation complete.")
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_investigation_phase(
+            client, "nvidia/nemotron-3-nano-30b-a3b", messages
+        )
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "nvidia/Nemotron-3-Nano-30B-A3B-v1"
+
+    def test_verdict_phase_uses_resolved_model_id(self):
+        """Verify verdict phase chat.completions.create receives the provider-native model ID."""
+        client = MagicMock()
+        verdict_json = json.dumps({
+            "verdict": "plausible",
+            "rationale": "test",
+            "sources": [{"url": "http://example.com", "supports_claim": True, "provenance": "verified"}],
+        })
+        response = _make_chat_response("stop", content=verdict_json)
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_verdict_phase(client, "nvidia/nemotron-3-nano-30b-a3b", messages)
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "nvidia/Nemotron-3-Nano-30B-A3B-v1"
+
+    def test_openrouter_model_passes_original_id(self):
+        """OpenRouter models should pass through unchanged."""
+        client = MagicMock()
+        response = _make_chat_response("stop", content="Done.")
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_investigation_phase(
+            client, "mistralai/mistral-small-3.2-24b-instruct", messages
+        )
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "mistralai/mistral-small-3.2-24b-instruct"
