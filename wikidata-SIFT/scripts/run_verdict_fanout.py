@@ -108,7 +108,7 @@ MODEL_PROVIDERS = {
     "nvidia/nemotron-3-nano-30b-a3b": {
         "base_url": "https://api.deepinfra.com/v1/openai",
         "api_key_env": "DEEPINFRA_API_KEY",
-        "model_id": "nvidia/Nemotron-3-Nano-30B-A3B-v1",
+        "model_id": "nvidia/Nemotron-3-Nano-30B-A3B",
     },
 }
 
