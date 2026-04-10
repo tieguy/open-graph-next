@@ -112,6 +112,16 @@ MODEL_PROVIDERS = {
     },
 }
 
+# Token-based pricing for DeepInfra models ($/M tokens).
+# Used when inline usage.cost is not available (DeepInfra doesn't provide it).
+# Prices from https://deepinfra.com/pricing as of 2026-04-09.
+DEEPINFRA_PRICING = {
+    "nvidia/nemotron-3-nano-30b-a3b": {
+        "input_per_mtok": 0.13,
+        "output_per_mtok": 0.20,
+    },
+}
+
 OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
 
 
