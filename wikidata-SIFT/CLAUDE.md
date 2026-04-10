@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-04-08
+Last updated: 2026-04-09
 
 ## Project Purpose
 
@@ -137,16 +137,18 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 - `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches.
   - **Query-aware `web_fetch(url, query=None)`** (added 2026-04-08): when a query is passed, returns the page lead (first 2500 chars) plus paragraphs containing query terms, capped at ~9000 chars. Without a query, falls back to a 5000-char head-of-page snapshot. The query lets the model retrieve the relevant part of a long page (e.g. "Belgium" for a place-of-birth claim) instead of blind-truncating Wikipedia's intro.
   - `_extract_query_matches()` supports comma-separated multi-term queries; does whole-word match for single tokens and substring match for phrases.
-- `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
+- `scripts/run_verdict_fanout.py` -- Multi-model verdict runner with per-model provider routing. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
   - Runs edits from enriched snapshots across configurable model list
   - Interleaved execution order (all models per edit before moving to next edit)
   - **Checkpoint key is `revid`, not `rcid`** (changed 2026-04-08): rcid is None for ~21% of labeled-eval edits (all Pool B trace-back reverts fetched via revision-history API rather than RecentChanges). Keying state on rcid caused silent deduplication. `load_checkpoint` still accepts old rcid-keyed entries via fallback.
   - Per-verdict 180s wall-clock timeout
-  - Cost tracking via OpenRouter generation endpoint
+  - **Per-model provider routing** (added 2026-04-09): `MODEL_PROVIDERS` dict maps canonical model IDs to provider-specific config (`base_url`, `api_key_env`, `model_id`). Models not listed default to OpenRouter. `build_clients(models)` creates one OpenAI client per unique provider; `get_client(model, clients)` returns the right one. `resolve_api_model_id(model)` translates canonical IDs to provider-native IDs for API calls. Currently routes Nemotron 3 Nano to DeepInfra directly.
+  - **Token-based cost fallback** (added 2026-04-09): `DEEPINFRA_PRICING` dict holds per-model $/M token rates. `compute_token_cost(model, prompt_tokens, completion_tokens)` is used as fallback when inline `usage.cost` is not returned (DeepInfra does not provide it). Falls through to None for models without pricing entries.
+  - Cost tracking via OpenRouter generation endpoint (or token-based fallback for direct-API providers)
   - Verdicts saved to `logs/wikidata-patrol-experiment/verdicts-fanout/`
   - 500-edit run completed 2026-02-22: 1,854 verdicts, 29 timeouts, 3 errors, $39.27 total cost. Retroactively labeled 2026-04-05 (see `docs/preliminary-results-2026-04.md`)
   - **Current default model lineup (as of 2026-04-08):** Mistral Small 3.2, OLMo 3.1, Nemotron 3 Nano (note: Nemotron is weak at scale; see caveat below). Gemma 3 4B was dropped — no Gemma 3 variant on OpenRouter supports tool calling. The Sarabadani/Halfaker-comparable "Cheap-3" ensemble is Mistral Small + OLMo + DeepSeek V3.2 (the lineup from the 500-edit run).
-  - **`MODELS_NO_RESPONSE_FORMAT` set** (2026-04-08): Nemotron's only OpenRouter provider (DeepInfra) rejects `response_format=json_object` at runtime despite advertising support. Phase B omits response_format for these models and relies on prompt + fence-stripping JSON parsing.
+  - **`MODELS_NO_RESPONSE_FORMAT` set** (2026-04-08): Nemotron's OpenRouter provider (DeepInfra) rejects `response_format=json_object` at runtime despite advertising support. Phase B omits response_format for these models and relies on prompt + fence-stripping JSON parsing. Still applies when routing Nemotron directly to DeepInfra.
   - **`MODEL_EXTRA_BODY` map** (2026-04-08): per-model `extra_body` passed on every chat.completions call. Used to disable reasoning on hybrid-thinking models via `{"reasoning":{"enabled":false}}` (Nemotron 3 Nano, Gemma 4 31B are both hybrid-thinking and produce empty `content` with reasoning enabled). For Gemma 4, also sets `{"provider":{"require_parameters":true}}` to steer routing.
   - **Item context budget reduced to 15% of context window** (was 40%, 2026-04-08): item context YAML was blowing past Mistral's 131k context limit on edits with large item claim sets. Essential sections (diff, parsed_edit, removed_claim) are always included separately.
   - **Defensive handling of `response.choices = None`** (2026-04-08): some OpenRouter providers (notably Novita for Gemma 4) return a response with choices=None mid-investigation. The investigation loop now exits cleanly with `finish_status="empty_response"` rather than crashing.
@@ -166,7 +168,7 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 - `config/sift_prompt_openrouter.md` -- Model-agnostic SIFT prompt for the verdict fanout (no Claude-specific features)
 - `config/blocked_domains_eval.yaml` -- Extended blocked domains for evaluation mode (adds wikidata.org to prevent label leakage)
 - `docker-compose.yml` -- SearXNG + Valkey containers for local web search (SearXNG on `localhost:8080`, config in `config/searxng/`)
-- Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
+- Requires `OPENROUTER_API_KEY` env var for verdict fanout runs. Models routed via `MODEL_PROVIDERS` require their own key (e.g. `DEEPINFRA_API_KEY` for Nemotron); the script validates required keys at startup.
 - Requires `scikit-learn` and `numpy` for analyze_verdicts.py; `matplotlib`, `seaborn`, and `jupyter` as dev dependencies
 - `docs/hard-patrol-problems.md` -- Analysis of 72 split-decision edits from the 500-edit fanout where models genuinely disagree. Categorizes 10 types of hard patrol problems (disambiguation, ontological modeling, source hierarchy disputes, etc.)
 - `docs/preliminary-results-2026-04.md` -- Full preliminary results report with ground-truth evaluation, ensemble metrics, cost analysis, and planned 2000-edit re-run. **Updated 2026-04-08** with PR-AUC/ROC-AUC numbers and head-to-head comparison with Sarabadani et al. 2017.
@@ -259,7 +261,7 @@ python scripts/fetch_labeled_edits.py --reverted 1000 --survived 1000 --max-qid 
 python scripts/label_existing_edits.py --snapshot logs/.../snapshot/SNAPSHOT.yaml --dry-run
 python scripts/label_existing_edits.py --snapshot logs/.../snapshot/SNAPSHOT.yaml
 
-# Load API key from .env (gitignored)
+# Load API keys from .env (gitignored; contains OPENROUTER_API_KEY and DEEPINFRA_API_KEY)
 export $(cat .env | xargs)
 
 # Run verdict fanout (requires OPENROUTER_API_KEY and SearXNG running)
