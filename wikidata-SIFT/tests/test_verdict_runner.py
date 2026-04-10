@@ -1,6 +1,7 @@
 """Tests for run_verdict_fanout.py — verdict runner core."""
 
 import json
+import os
 import sys
 import threading
 import time
@@ -12,13 +13,19 @@ import yaml
 
 from run_verdict_fanout import (
     MAX_TURNS,
+    MODEL_PROVIDERS,
+    OPENROUTER_BASE_URL,
+    build_clients,
     build_edit_context,
     build_execution_order,
+    compute_token_cost,
     dispatch_tool_call,
     fetch_generation_cost,
+    get_client,
     load_checkpoint,
     main,
     model_slug,
+    resolve_api_model_id,
     run_investigation_phase,
     run_single_verdict,
     run_verdict_phase,
@@ -1254,3 +1261,160 @@ class TestEvalCLI:
 
         captured = capsys.readouterr()
         assert "Evaluation mode" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# Provider routing tests
+# ---------------------------------------------------------------------------
+
+
+class TestResolveApiModelId:
+    """Tests for resolve_api_model_id()."""
+
+    def test_deepinfra_model_returns_provider_model_id(self):
+        result = resolve_api_model_id("nvidia/nemotron-3-nano-30b-a3b")
+        assert result == "nvidia/Nemotron-3-Nano-30B-A3B"
+
+    def test_openrouter_model_returns_same_id(self):
+        result = resolve_api_model_id("mistralai/mistral-small-3.2-24b-instruct")
+        assert result == "mistralai/mistral-small-3.2-24b-instruct"
+
+    def test_unknown_model_returns_same_id(self):
+        result = resolve_api_model_id("some/unknown-model")
+        assert result == "some/unknown-model"
+
+
+class TestBuildClients:
+    """Tests for build_clients() and get_client()."""
+
+    @patch.dict(os.environ, {
+        "OPENROUTER_API_KEY": "or-test-key",
+        "DEEPINFRA_API_KEY": "di-test-key",
+    })
+    @patch("run_verdict_fanout.OpenAI")
+    def test_creates_separate_clients_per_provider(self, mock_openai_cls):
+        mock_openai_cls.side_effect = lambda **kwargs: MagicMock(base_url=kwargs["base_url"])
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "nvidia/nemotron-3-nano-30b-a3b",
+        ])
+
+        assert len(clients) == 2
+        assert OPENROUTER_BASE_URL in clients
+        assert "https://api.deepinfra.com/v1/openai" in clients
+        assert mock_openai_cls.call_count == 2
+
+    @patch.dict(os.environ, {"OPENROUTER_API_KEY": "or-test-key"})
+    @patch("run_verdict_fanout.OpenAI")
+    def test_deduplicates_same_provider(self, mock_openai_cls):
+        mock_openai_cls.return_value = MagicMock()
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "allenai/olmo-3.1-32b-instruct",
+        ])
+
+        # Both are OpenRouter models — should create only one client
+        assert len(clients) == 1
+        assert mock_openai_cls.call_count == 1
+
+    @patch.dict(os.environ, {
+        "OPENROUTER_API_KEY": "or-test-key",
+        "DEEPINFRA_API_KEY": "di-test-key",
+    })
+    @patch("run_verdict_fanout.OpenAI")
+    def test_get_client_returns_correct_provider(self, mock_openai_cls):
+        or_client = MagicMock(name="openrouter")
+        di_client = MagicMock(name="deepinfra")
+        mock_openai_cls.side_effect = [or_client, di_client]
+
+        clients = build_clients([
+            "mistralai/mistral-small-3.2-24b-instruct",
+            "nvidia/nemotron-3-nano-30b-a3b",
+        ])
+
+        assert get_client("mistralai/mistral-small-3.2-24b-instruct", clients) is or_client
+        assert get_client("nvidia/nemotron-3-nano-30b-a3b", clients) is di_client
+
+
+class TestComputeTokenCost:
+    """Tests for compute_token_cost()."""
+
+    def test_deepinfra_model_computes_cost(self):
+        cost = compute_token_cost("nvidia/nemotron-3-nano-30b-a3b", 1_000_000, 500_000)
+        # 1M input * $0.13/M + 500k output * $0.20/M = $0.13 + $0.10 = $0.23
+        assert cost == pytest.approx(0.23)
+
+    def test_zero_tokens_returns_zero(self):
+        cost = compute_token_cost("nvidia/nemotron-3-nano-30b-a3b", 0, 0)
+        assert cost == 0.0
+
+    def test_openrouter_model_returns_none(self):
+        cost = compute_token_cost("mistralai/mistral-small-3.2-24b-instruct", 1000, 500)
+        assert cost is None
+
+    def test_unknown_model_returns_none(self):
+        cost = compute_token_cost("some/unknown-model", 1000, 500)
+        assert cost is None
+
+
+class TestProviderRouting:
+    """Tests that API calls use the resolved model ID."""
+
+    def test_investigation_phase_uses_resolved_model_id(self):
+        """Verify chat.completions.create receives the provider-native model ID."""
+        client = MagicMock()
+        response = _make_chat_response("stop", content="Investigation complete.")
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_investigation_phase(
+            client, "nvidia/nemotron-3-nano-30b-a3b", messages
+        )
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "nvidia/Nemotron-3-Nano-30B-A3B"
+
+    def test_verdict_phase_uses_resolved_model_id(self):
+        """Verify verdict phase chat.completions.create receives the provider-native model ID."""
+        client = MagicMock()
+        verdict_json = json.dumps({
+            "verdict": "plausible",
+            "rationale": "test",
+            "sources": [{"url": "http://example.com", "supports_claim": True, "provenance": "verified"}],
+        })
+        response = _make_chat_response("stop", content=verdict_json)
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_verdict_phase(client, "nvidia/nemotron-3-nano-30b-a3b", messages)
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "nvidia/Nemotron-3-Nano-30B-A3B"
+
+    def test_openrouter_model_passes_original_id(self):
+        """OpenRouter models should pass through unchanged."""
+        client = MagicMock()
+        response = _make_chat_response("stop", content="Done.")
+        client.chat.completions.create.return_value = response
+
+        messages = [
+            {"role": "system", "content": "test"},
+            {"role": "user", "content": "test"},
+        ]
+
+        run_investigation_phase(
+            client, "mistralai/mistral-small-3.2-24b-instruct", messages
+        )
+
+        call_kwargs = client.chat.completions.create.call_args[1]
+        assert call_kwargs["model"] == "mistralai/mistral-small-3.2-24b-instruct"

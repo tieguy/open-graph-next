@@ -92,7 +92,9 @@ MODELS_NO_RESPONSE_FORMAT = {
 # and cause silent Phase B parse failures), and to keep wall-clock time below
 # the per-verdict timeout.
 MODEL_EXTRA_BODY = {
-    "nvidia/nemotron-3-nano-30b-a3b": {"reasoning": {"enabled": False}},
+    # Nemotron reasoning left ENABLED: disabling it causes infinite tool-calling
+    # loops (model loses convergence signal). See block/goose#6461, HF discussions.
+    # "nvidia/nemotron-3-nano-30b-a3b": {"reasoning": {"enabled": False}},
     # Gemma 4 is hybrid-thinking; reasoning must be disabled so content isn't
     # routed to a separate field. require_parameters=true steers routing to
     # providers that actually support tools + tool_choice + response_format.
@@ -101,6 +103,88 @@ MODEL_EXTRA_BODY = {
         "provider": {"require_parameters": True},
     },
 }
+
+# Per-model provider routing. Models not listed default to OpenRouter.
+# Keys are the canonical model IDs used in MODELS, checkpoints, and verdict
+# records. The model_id field is the provider-native ID for API calls.
+MODEL_PROVIDERS = {
+    "nvidia/nemotron-3-nano-30b-a3b": {
+        "base_url": "https://api.deepinfra.com/v1/openai",
+        "api_key_env": "DEEPINFRA_API_KEY",
+        "model_id": "nvidia/Nemotron-3-Nano-30B-A3B",
+    },
+}
+
+# Token-based pricing for DeepInfra models ($/M tokens).
+# Used when inline usage.cost is not available (DeepInfra doesn't provide it).
+# Prices from https://deepinfra.com/pricing as of 2026-04-09.
+DEEPINFRA_PRICING = {
+    "nvidia/nemotron-3-nano-30b-a3b": {
+        "input_per_mtok": 0.13,
+        "output_per_mtok": 0.20,
+    },
+}
+
+OPENROUTER_BASE_URL = "https://openrouter.ai/api/v1"
+
+
+def resolve_api_model_id(model):
+    """Return the provider-specific model ID for API calls.
+
+    Models in MODEL_PROVIDERS may use a different ID on their native provider
+    than the OpenRouter-style ID used as the config key.
+    """
+    provider = MODEL_PROVIDERS.get(model)
+    if provider:
+        return provider.get("model_id", model)
+    return model
+
+
+def build_clients(models):
+    """Create one OpenAI client per unique provider needed by the model list.
+
+    Returns:
+        dict mapping base_url string to OpenAI client instance.
+    """
+    clients = {}
+    for model in models:
+        provider = MODEL_PROVIDERS.get(model)
+        if provider:
+            base_url = provider["base_url"]
+            api_key = os.environ[provider["api_key_env"]]
+        else:
+            base_url = OPENROUTER_BASE_URL
+            api_key = os.environ["OPENROUTER_API_KEY"]
+        if base_url not in clients:
+            clients[base_url] = OpenAI(
+                base_url=base_url,
+                api_key=api_key,
+                max_retries=3,
+                timeout=120.0,
+            )
+    return clients
+
+
+def get_client(model, clients):
+    """Return the OpenAI client for the given model from the clients dict."""
+    provider = MODEL_PROVIDERS.get(model)
+    base_url = provider["base_url"] if provider else OPENROUTER_BASE_URL
+    return clients[base_url]
+
+
+def compute_token_cost(model, prompt_tokens, completion_tokens):
+    """Compute dollar cost from token counts using DEEPINFRA_PRICING.
+
+    Returns:
+        float or None: Cost in USD, or None if model has no pricing entry.
+    """
+    pricing = DEEPINFRA_PRICING.get(model)
+    if not pricing:
+        return None
+    input_cost = (prompt_tokens / 1_000_000) * pricing["input_per_mtok"]
+    output_cost = (completion_tokens / 1_000_000) * pricing["output_per_mtok"]
+    return input_cost + output_cost
+
 
 TOOL_DEFINITIONS = [
     {
@@ -473,7 +557,7 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
         else:
             tc = "auto"
         phase_a_kwargs = dict(
-            model=model,
+            model=resolve_api_model_id(model),
             messages=messages,
             tools=TOOL_DEFINITIONS,
             tool_choice=tc,
@@ -597,7 +681,7 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    create_kwargs = dict(model=model, messages=messages)
+    create_kwargs = dict(model=resolve_api_model_id(model), messages=messages)
     if model not in MODELS_NO_RESPONSE_FORMAT:
         create_kwargs["response_format"] = {"type": "json_object"}
     if model in MODEL_EXTRA_BODY:
@@ -700,14 +784,21 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
     if verdict_response_id:
         response_ids.append(verdict_response_id)
 
+    # Token totals from SDK-reported usage
+    total_prompt_tokens = inv_prompt_tokens + vrd_prompt_tokens
+    total_completion_tokens = inv_completion_tokens + vrd_completion_tokens
+
     # Sum inline costs from both phases
     total_cost_usd = None
     if inv_cost is not None or vrd_cost is not None:
         total_cost_usd = (inv_cost or 0) + (vrd_cost or 0)
 
-    # Token totals from SDK-reported usage
-    total_prompt_tokens = inv_prompt_tokens + vrd_prompt_tokens
-    total_completion_tokens = inv_completion_tokens + vrd_completion_tokens
+    # Fallback: compute cost from token counts for providers that don't
+    # return inline usage.cost (e.g. DeepInfra).
+    if total_cost_usd is None:
+        total_cost_usd = compute_token_cost(
+            model, total_prompt_tokens, total_completion_tokens
+        )
 
     # Build verdict record
     parsed_edit = edit.get("parsed_edit") or {}
@@ -924,12 +1015,19 @@ def main():
 
     api_key = os.environ["OPENROUTER_API_KEY"]
 
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-        max_retries=3,
-        timeout=120.0,
-    )
+    # Validate that required provider API keys are set
+    needed_key_envs = {
+        provider["api_key_env"]
+        for m in models_to_use
+        if (provider := MODEL_PROVIDERS.get(m))
+    }
+    for key_env in needed_key_envs:
+        if key_env not in os.environ:
+            print(f"ERROR: {key_env} not set but required by model lineup. "
+                  f"Add it to .env and re-export.")
+            return
+
+    clients = build_clients(models_to_use)
 
     # Load checkpoint
     completed = load_checkpoint()
@@ -958,7 +1056,7 @@ def main():
             verdict_edit = strip_ground_truth(edit) if args.eval else edit
             verdict, timed_out = run_with_timeout(
                 run_single_verdict,
-                (client, model, verdict_edit, blocked_domains, api_key),
+                (get_client(model, clients), model, verdict_edit, blocked_domains, api_key),
                 timeout_secs=timeout,
             )
 
