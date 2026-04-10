@@ -7,7 +7,25 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 ## [Unreleased]
 
 ### Added
-- Multi-model verdict fanout via OpenRouter (#23)
+- **Query-aware `web_fetch(url, query)`** in `scripts/tool_executor.py` — returns page lead + paragraphs matching query terms instead of blind truncation. Reduces per-fetch token cost while preserving buried facts (e.g. "Belgium" somewhere past the intro of a Wikipedia article). Configured via `FETCH_LEAD_CHARS`, `FETCH_MATCH_WINDOW`, `FETCH_MAX_MATCHES`, `FETCH_MAX_TOTAL_CHARS`, `FETCH_FALLBACK_CHARS` constants.
+- **`scripts/prefetch_search_refs.py`** — eager pre-enrichment script that runs one web_search + top-3 web_fetch per edit and populates `prefetched_references` before the fanout runs. Intended to reduce per-edit turn counts across the ensemble. Not yet validated at scale.
+- **`MODELS_NO_RESPONSE_FORMAT` set and `MODEL_EXTRA_BODY` map** in `scripts/run_verdict_fanout.py` — per-model workarounds for OpenRouter provider quirks (DeepInfra Nemotron rejects json_object, Nemotron/Gemma 4 are hybrid-thinking and need reasoning disabled).
+- **Defensive guard on `response.choices = None`** in investigation loop — some providers (e.g. Novita for Gemma 4) return empty-choices responses mid-investigation. Loop now exits with `finish_status="empty_response"` instead of crashing.
+- **`docs/wikicredcon-lightning-talk-2026.md`** — 3-slide lightning talk (Marp) for WikiCredCon 2026.
+- **`docs/wikicredcon-lightning-talk-companion.md`** — Companion web page with all numbers, tables, false positive/negative analysis, Sarabadani 2017 head-to-head, prompt design notes, reproducibility instructions.
+- **PR-AUC / ROC-AUC analysis and Sarabadani 2017 comparison** in `docs/preliminary-results-2026-04.md` — computed 2026-04-08 on the clean subset. Ensemble PR-AUC 0.510, ROC-AUC 0.826. Sarabadani content-only ROC-AUC 0.813.
+
+### Fixed
+- **Fanout state key changed from `rcid` to `revid`** in `scripts/run_verdict_fanout.py`. Pool B reverter-traced edits (fetched via revision-history API) have no rcid — 21% of the 2000-edit labeled snapshot. Keying state on rcid caused silent deduplication, which would have lost 42% of the reverted class from the re-run. `load_checkpoint` still reads old rcid-keyed entries via fallback.
+- **None-safe sort in `save_checkpoint`** — previously crashed with `TypeError` when any state entry had a None key.
+- **Item context budget reduced from 40% to 15% of context window** in `build_edit_context`. Mistral Small 3.2 was hitting >100% of its 131k context limit on edits with large item claim sets.
+
+### Changed
+- **Dropped Gemma 3 4B from the fanout lineup.** No Gemma 3 variant on OpenRouter supports tool calling; the April 5 plan to include it was infeasible.
+- **Nemotron 3 Nano demoted to experimental.** Config-fixable via MODELS_NO_RESPONSE_FORMAT + reasoning-disable, but produces 78% MAX_TURNS and 89% unverifiable at scale — minimal ensemble signal. Kept in the script for experimentation but not recommended for production runs.
+- **Recommended production lineup is back to the original Cheap-3**: Mistral Small 3.2 + OLMo 3.1 + DeepSeek V3.2. Verified in the 500-edit run, no runtime quirks.
+- Updated `web_fetch` tool description in `config/sift_prompt_openrouter.md` to tell models to pass a focused query with every fetch.
+- Remove Nemotron from verdict fanout model lineup (#36)
   - `scripts/run_verdict_fanout.py` — two-phase execution (investigation + structured verdict) across 4 models
   - `scripts/tool_executor.py` — `web_search()` via SearXNG and `web_fetch()` via httpx/trafilatura
   - `config/sift_prompt_openrouter.md` — model-agnostic SIFT prompt

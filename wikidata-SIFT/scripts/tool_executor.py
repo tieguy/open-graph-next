@@ -13,11 +13,16 @@ import httpx
 import trafilatura
 import yaml
 
-SEARXNG_URL = "http://localhost:8080/search"
+import os
+
+BRAVE_SEARCH_URL = "https://api.search.brave.com/res/v1/web/search"
 FETCH_TIMEOUT = 15.0
 SEARCH_TIMEOUT = 10.0
 FETCH_DELAY = 0.5  # seconds between fetches, matching existing codebase pattern
+SEARCH_DELAY = 1.0  # Brave API free tier: 1 req/sec
 USER_AGENT = "wikidata-sift-tool-executor/1.0"
+
+_last_search_time = 0.0
 
 _last_fetch_time = 0.0
 
@@ -80,67 +85,157 @@ def _rate_limit():
     _last_fetch_time = time.monotonic()
 
 
-def web_search(query, blocked_domains=None, searxng_url=None):
-    """Search the web via SearXNG.
+def _search_rate_limit():
+    """Enforce minimum delay between search API calls."""
+    global _last_search_time
+    now = time.monotonic()
+    elapsed = now - _last_search_time
+    if elapsed < SEARCH_DELAY:
+        time.sleep(SEARCH_DELAY - elapsed)
+    _last_search_time = time.monotonic()
+
+
+def web_search(query, blocked_domains=None, api_key=None):
+    """Search the web via Brave Search API.
 
     Args:
         query: Search query string.
         blocked_domains: Set of blocked domain strings (optional).
-        searxng_url: Override SearXNG URL (for testing).
+        api_key: Brave Search API key. Falls back to BRAVE_API_KEY env var.
 
     Returns:
         list[dict]: Each dict has keys: title, url, snippet.
         On error, returns a list with a single dict containing an "error" key.
     """
-    url = searxng_url or SEARXNG_URL
+    key = api_key or os.environ.get("BRAVE_API_KEY", "")
+    if not key:
+        return [{"error": "BRAVE_API_KEY not set"}]
+
     if blocked_domains is None:
         blocked_domains = set()
 
     try:
-        _rate_limit()
+        _search_rate_limit()
         resp = httpx.get(
-            url,
-            params={"q": query, "format": "json"},
-            headers={"User-Agent": USER_AGENT},
+            BRAVE_SEARCH_URL,
+            params={"q": query},
+            headers={
+                "Accept": "application/json",
+                "Accept-Encoding": "gzip",
+                "X-Subscription-Token": key,
+            },
             timeout=SEARCH_TIMEOUT,
         )
         resp.raise_for_status()
     except httpx.TimeoutException:
-        return [{"error": "SearXNG request timed out"}]
-    except httpx.ConnectError:
-        return [{"error": "SearXNG is unreachable at " + url}]
+        return [{"error": "Brave Search request timed out"}]
     except httpx.HTTPError as exc:
-        return [{"error": f"SearXNG error: {exc}"}]
+        return [{"error": f"Brave Search error: {exc}"}]
 
     try:
         data = resp.json()
     except Exception:
-        return [{"error": "SearXNG returned invalid JSON"}]
+        return [{"error": "Brave Search returned invalid JSON"}]
 
     results = []
-    for item in data.get("results", []):
+    for item in data.get("web", {}).get("results", []):
         item_url = item.get("url", "")
         if is_blocked_domain(item_url, blocked_domains):
             continue
         results.append({
             "title": item.get("title", ""),
             "url": item_url,
-            "snippet": item.get("content", ""),
+            "snippet": item.get("description", ""),
         })
 
     return results[:10]
 
 
-def web_fetch(url, blocked_domains=None):
+# Query-aware extraction tuning constants.
+FETCH_LEAD_CHARS = 2500      # always-included lead/intro
+FETCH_MATCH_WINDOW = 600     # chars around each query match
+FETCH_MAX_MATCHES = 8        # cap distinct matches returned
+FETCH_MAX_TOTAL_CHARS = 9000 # hard cap on total returned text
+FETCH_FALLBACK_CHARS = 5000  # when no query or no matches, return head of page
+
+
+def _extract_query_matches(text, query):
+    """Find paragraphs containing any of the query terms.
+
+    Splits on double-newline boundaries (trafilatura output) so we return
+    coherent paragraphs rather than mid-sentence windows. For terms that are
+    a single token, does whole-word match to avoid "US" hitting "plus".
+    For multi-word phrases, does a substring match.
+
+    Args:
+        text: Full page text (after trafilatura extraction).
+        query: Search string. May contain multiple comma-separated terms.
+
+    Returns:
+        list of (match_term, paragraph_text) tuples, up to FETCH_MAX_MATCHES.
+    """
+    import re
+
+    terms = [t.strip() for t in query.split(",") if t.strip()]
+    if not terms:
+        return []
+
+    # Build case-insensitive patterns: whole-word for single tokens,
+    # substring for multi-word phrases.
+    patterns = []
+    for term in terms:
+        if " " in term:
+            patterns.append((term, re.compile(re.escape(term), re.IGNORECASE)))
+        else:
+            patterns.append((term, re.compile(r"\b" + re.escape(term) + r"\b", re.IGNORECASE)))
+
+    paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+    matches = []
+    seen_paragraph_starts = set()
+
+    for para in paragraphs:
+        for term, pat in patterns:
+            if pat.search(para):
+                # Dedupe by first 60 chars of paragraph so we don't return
+                # the same para twice if it matches multiple terms.
+                key = para[:60]
+                if key in seen_paragraph_starts:
+                    break
+                seen_paragraph_starts.add(key)
+
+                # Truncate very long paragraphs to a window around the first match
+                if len(para) > FETCH_MATCH_WINDOW * 2:
+                    m = pat.search(para)
+                    start = max(0, m.start() - FETCH_MATCH_WINDOW)
+                    end = min(len(para), m.end() + FETCH_MATCH_WINDOW)
+                    excerpt = ("..." if start > 0 else "") + para[start:end] + ("..." if end < len(para) else "")
+                else:
+                    excerpt = para
+                matches.append((term, excerpt))
+                break  # one term hit is enough; move to next paragraph
+
+        if len(matches) >= FETCH_MAX_MATCHES:
+            break
+
+    return matches
+
+
+def web_fetch(url, query=None, blocked_domains=None):
     """Fetch and extract text from a web page.
+
+    When `query` is provided, returns the page lead (first FETCH_LEAD_CHARS)
+    plus paragraphs containing any of the query terms. When `query` is None
+    or empty, returns the first FETCH_FALLBACK_CHARS of extracted text.
 
     Args:
         url: URL to fetch.
+        query: Optional string of comma-separated terms to locate in the page.
+            Typically the claim value being verified.
         blocked_domains: Set of blocked domain strings (optional).
 
     Returns:
-        str: Extracted text on success, or an error string prefixed
-        with "error:" on failure.
+        str: Extracted text (lead + relevant excerpts) on success, or an
+        error string prefixed with "error:" on failure.
     """
     if blocked_domains is None:
         blocked_domains = set()
@@ -172,8 +267,52 @@ def web_fetch(url, blocked_domains=None):
     if not text:
         return "error: extraction_empty"
 
-    # Truncate very long pages to avoid blowing up model context
-    if len(text) > 15000:
-        text = text[:15000] + "\n\n[Truncated — full page was longer]"
+    full_length = len(text)
 
-    return text
+    # Always include the lead / first part of the page (infobox + intro live here
+    # for most Wikipedia-style sources)
+    lead = text[:FETCH_LEAD_CHARS]
+    lead_truncated = full_length > FETCH_LEAD_CHARS
+
+    if not query:
+        # No query provided: fall back to a generic head-of-page snapshot
+        if full_length <= FETCH_FALLBACK_CHARS:
+            return text
+        return (
+            text[:FETCH_FALLBACK_CHARS]
+            + f"\n\n[Truncated — full page was {full_length} chars; "
+              "re-fetch with a query parameter to get targeted excerpts]"
+        )
+
+    # Query provided: return lead + matches from the rest of the page
+    rest_of_page = text[FETCH_LEAD_CHARS:]
+    matches = _extract_query_matches(rest_of_page, query)
+
+    parts = []
+    parts.append("## Page lead\n" + lead)
+    if lead_truncated and not matches:
+        parts.append(
+            f"\n[Note: full page was {full_length} chars. No matches found "
+            f"for query terms: {query!r}. The fact you are looking for may "
+            "not be in this source.]"
+        )
+    elif matches:
+        parts.append(f"\n## Excerpts matching query: {query!r}\n")
+        for term, excerpt in matches:
+            parts.append(f"### [match: {term!r}]\n{excerpt}\n")
+        if len(matches) >= FETCH_MAX_MATCHES:
+            parts.append(
+                f"\n[Additional matches may exist in the full {full_length}-char "
+                "page; narrow your query for more targeted results]"
+            )
+    elif lead_truncated:
+        parts.append(
+            f"\n[Note: full page was {full_length} chars. No query matches found "
+            "beyond the lead section shown above.]"
+        )
+
+    result = "\n".join(parts)
+    # Hard safety cap
+    if len(result) > FETCH_MAX_TOTAL_CHARS:
+        result = result[:FETCH_MAX_TOTAL_CHARS] + "\n\n[Truncated — hit total output cap]"
+    return result

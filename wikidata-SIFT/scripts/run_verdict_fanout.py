@@ -65,6 +65,7 @@ CONTEXT_LIMITS = {
     "nvidia/nemotron-3-super-120b-a12b:free": 262_144,
     "nvidia/nemotron-3-nano-30b-a3b": 262_144,
     "google/gemma-3-4b-it": 131_072,
+    "google/gemma-4-31b-it": 262_144,
 }
 
 # Per-model verdict timeout overrides (seconds). Models not listed use DEFAULT_TIMEOUT.
@@ -74,9 +75,31 @@ DEFAULT_TIMEOUT = 180
 MODELS = [
     "mistralai/mistral-small-3.2-24b-instruct",
     "allenai/olmo-3.1-32b-instruct",
-    "nvidia/nemotron-3-nano-30b-a3b",
-    "google/gemma-3-4b-it",
+    "mistralai/ministral-8b-2512",
 ]
+
+# Models whose only OpenRouter provider rejects response_format=json_object at
+# runtime despite advertising support. For these, Phase B falls back to
+# prompt-only JSON (the existing fence-stripping parser handles it).
+MODELS_NO_RESPONSE_FORMAT = {
+    "nvidia/nemotron-3-nano-30b-a3b",
+}
+
+# Per-model extra_body params passed on every chat.completions call.
+# Used to disable reasoning on hybrid-thinking models so completion content
+# isn't routed to a separate reasoning field (which would leave content empty
+# and cause silent Phase B parse failures), and to keep wall-clock time below
+# the per-verdict timeout.
+MODEL_EXTRA_BODY = {
+    "nvidia/nemotron-3-nano-30b-a3b": {"reasoning": {"enabled": False}},
+    # Gemma 4 is hybrid-thinking; reasoning must be disabled so content isn't
+    # routed to a separate field. require_parameters=true steers routing to
+    # providers that actually support tools + tool_choice + response_format.
+    "google/gemma-4-31b-it": {
+        "reasoning": {"enabled": False},
+        "provider": {"require_parameters": True},
+    },
+}
 
 TOOL_DEFINITIONS = [
     {
@@ -97,11 +120,30 @@ TOOL_DEFINITIONS = [
         "type": "function",
         "function": {
             "name": "web_fetch",
-            "description": "Fetch and read the text content of a web page.",
+            "description": (
+                "Fetch and read the text content of a web page. Always returns "
+                "the lead/intro of the page, plus paragraphs containing the "
+                "query terms (e.g. the specific value or phrase you are trying "
+                "to verify). Providing a focused query is strongly encouraged "
+                "for long pages like Wikipedia articles, where the fact you "
+                "need may be buried later in the page."
+            ),
             "parameters": {
                 "type": "object",
                 "properties": {
-                    "url": {"type": "string", "description": "URL to fetch"}
+                    "url": {"type": "string", "description": "URL to fetch"},
+                    "query": {
+                        "type": "string",
+                        "description": (
+                            "Specific term, value, or short phrase you are "
+                            "looking for on this page — typically the claim "
+                            "value you are trying to verify (e.g. 'Belgium', "
+                            "'Pulitzer Prize', 'born 1972'). Paragraphs "
+                            "containing this query will be extracted in "
+                            "addition to the page lead. Leave blank only if "
+                            "you want a generic snapshot of the page."
+                        ),
+                    },
                 },
                 "required": ["url"],
             },
@@ -369,7 +411,11 @@ def dispatch_tool_call(tool_call, blocked_domains=None):
             result = web_search(args.get("query", ""), blocked_domains=blocked_domains)
             return json.dumps(result)
         elif tool_name == "web_fetch":
-            result = web_fetch(args.get("url", ""), blocked_domains=blocked_domains)
+            result = web_fetch(
+                args.get("url", ""),
+                query=args.get("query") or None,
+                blocked_domains=blocked_domains,
+            )
             return result
         else:
             return (
@@ -380,7 +426,7 @@ def dispatch_tool_call(tool_call, blocked_domains=None):
         return f"error: Tool execution failed: {e}"
 
 
-def run_investigation_phase(client, model, messages, blocked_domains=None, cancel_event=None):
+def run_investigation_phase(client, model, messages, blocked_domains=None, cancel_event=None, has_prefetched_refs=False):
     """Run Phase A: the investigation loop.
 
     Sends messages to OpenRouter with tool-calling, dispatches tool calls,
@@ -417,15 +463,34 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
             print(f"WARNING: {model} investigation cancelled by timeout event after {turn} turns")
             return messages, total_prompt_tokens, total_completion_tokens, response_ids, "cancelled", turn, total_cost
 
-        # Force tool use on the first turn so models actually investigate
-        # rather than answering from parametric knowledge alone.
-        tc = "required" if turn == 0 else "auto"
-        response = client.chat.completions.create(
+        # Force tool use on the first turn so models investigate rather
+        # than answering from parametric knowledge alone — unless prefetched
+        # references are already in context, in which case let the model
+        # decide whether it needs to search.
+        if turn == 0 and not has_prefetched_refs:
+            tc = "required"
+        else:
+            tc = "auto"
+        phase_a_kwargs = dict(
             model=model,
             messages=messages,
             tools=TOOL_DEFINITIONS,
             tool_choice=tc,
         )
+        if model in MODEL_EXTRA_BODY:
+            phase_a_kwargs["extra_body"] = MODEL_EXTRA_BODY[model]
+        response = client.chat.completions.create(**phase_a_kwargs)
+
+        # Defensive: OpenRouter can return a response with choices=None if the
+        # upstream provider errored. Dump the raw response so we can diagnose,
+        # and bail out of this investigation cleanly rather than crashing.
+        if not getattr(response, "choices", None):
+            try:
+                raw = response.model_dump() if hasattr(response, "model_dump") else dict(response)
+            except Exception:
+                raw = str(response)
+            print(f"WARNING: {model} returned no choices; raw response: {raw}")
+            return messages, total_prompt_tokens, total_completion_tokens, response_ids, "empty_response", turn, total_cost
 
         # Track usage and inline cost
         usage = response.usage
@@ -531,10 +596,11 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    create_kwargs = dict(
-        model=model, messages=messages,
-        response_format={"type": "json_object"},
-    )
+    create_kwargs = dict(model=model, messages=messages)
+    if model not in MODELS_NO_RESPONSE_FORMAT:
+        create_kwargs["response_format"] = {"type": "json_object"}
+    if model in MODEL_EXTRA_BODY:
+        create_kwargs["extra_body"] = MODEL_EXTRA_BODY[model]
 
     response = client.chat.completions.create(**create_kwargs)
 
@@ -561,6 +627,12 @@ def run_verdict_phase(client, model, messages):
 
     try:
         verdict_dict = json.loads(stripped)
+        # Some models return a JSON array instead of object — unwrap first element
+        if isinstance(verdict_dict, list):
+            verdict_dict = verdict_dict[0] if verdict_dict else None
+        if not isinstance(verdict_dict, dict):
+            print(f"WARNING: {model} returned non-object JSON in verdict phase: {type(verdict_dict)}")
+            return None, prompt_tokens, completion_tokens, response_id, cost
         return verdict_dict, prompt_tokens, completion_tokens, response_id, cost
     except json.JSONDecodeError:
         print(f"WARNING: {model} returned invalid JSON in verdict phase. Raw: {content[:200]}")
@@ -603,9 +675,11 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
     """
     sift_prompt = load_sift_prompt()
     context_limit = CONTEXT_LIMITS.get(model, 100_000)
-    # Allocate ~40% of context for the prompt (system + user message)
-    # Conservative: chars ≈ tokens * 4, so budget = limit * 4 * 0.4
-    context_budget = int(context_limit * 4 * 0.4)
+    # Budget for item-context bulk (essential sections like diff/parsed_edit are
+    # always included separately). 15% of context_limit * 4 chars ≈ 15% of tokens.
+    # Leaves ~50% headroom for 15 turns of ~1.25k-token tool results + assistant
+    # replies before hitting the window.
+    context_budget = int(context_limit * 4 * 0.15)
     edit_context = build_edit_context(edit, context_budget=context_budget)
 
     initial_messages = [
@@ -614,8 +688,9 @@ def run_single_verdict(client, model, edit, blocked_domains, api_key, cancel_eve
     ]
 
     # Phase A: investigation
+    has_prefetched = bool(edit.get("prefetched_references"))
     messages, inv_prompt_tokens, inv_completion_tokens, response_ids, finish_status, turns, inv_cost = \
-        run_investigation_phase(client, model, initial_messages, blocked_domains, cancel_event=cancel_event)
+        run_investigation_phase(client, model, initial_messages, blocked_domains, cancel_event=cancel_event, has_prefetched_refs=has_prefetched)
 
     # Phase B: verdict extraction
     verdict_dict, vrd_prompt_tokens, vrd_completion_tokens, verdict_response_id, vrd_cost = \
@@ -715,7 +790,7 @@ def load_checkpoint(state_path=None):
         data = yaml.safe_load(f)
     if not data or "completed" not in data:
         return set()
-    return {(entry["rcid"], entry["model"]) for entry in data["completed"]}
+    return {(entry.get("revid") or entry.get("rcid"), entry["model"]) for entry in data["completed"]}
 
 
 def save_checkpoint(completed, state_path=None):
@@ -726,7 +801,10 @@ def save_checkpoint(completed, state_path=None):
     """
     path = state_path or STATE_PATH
     path.parent.mkdir(parents=True, exist_ok=True)
-    entries = [{"rcid": rcid, "model": model} for rcid, model in sorted(completed)]
+    entries = [
+        {"revid": revid, "model": model}
+        for revid, model in sorted(completed, key=lambda p: (p[0] is None, p[0] or 0, p[1]))
+    ]
     with open(path, "w") as f:
         yaml.safe_dump({"completed": entries}, f, default_flow_style=False)
 
@@ -866,9 +944,10 @@ def main():
 
     for i, (edit, model) in enumerate(pairs):
         rcid = edit.get("rcid")
+        state_key = edit.get("revid") or rcid
 
         # Skip already-completed pairs
-        if (rcid, model) in completed:
+        if (state_key, model) in completed:
             skipped_count += 1
             continue
 
@@ -904,12 +983,14 @@ def main():
                 print(verdict.get("verdict") or "no verdict")
 
             save_verdict(verdict, edit, model)
-            completed.add((rcid, model))
+            completed.add((state_key, model))
             save_checkpoint(completed)
 
         except Exception as e:
             error_count += 1
+            import traceback
             print(f"ERROR: {e}")
+            traceback.print_exc()
 
     print(
         f"\nDone. completed={completed_count}, skipped={skipped_count}, "

@@ -1,6 +1,6 @@
 Instructions for Claude Code when working on this project.
 
-Last updated: 2026-04-05
+Last updated: 2026-04-08
 
 ## Project Purpose
 
@@ -134,18 +134,25 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
   - Reuses `fetch_patrol_edits.py` enrichment pipeline (enrich_edit_group, LabelCache, etc.)
   - Output: enriched snapshot YAML with `ground_truth` key per edit (label: "reverted"/"survived", evidence type)
   - Saves to `logs/wikidata-patrol-experiment/labeled/`
-- `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches, truncates pages to 15k chars.
+- `scripts/tool_executor.py` -- Provides `web_search()` (via local SearXNG) and `web_fetch()` (via httpx + trafilatura) for model-agnostic tool calling. Respects `config/blocked_domains.yaml`, rate-limits fetches.
+  - **Query-aware `web_fetch(url, query=None)`** (added 2026-04-08): when a query is passed, returns the page lead (first 2500 chars) plus paragraphs containing query terms, capped at ~9000 chars. Without a query, falls back to a 5000-char head-of-page snapshot. The query lets the model retrieve the relevant part of a long page (e.g. "Belgium" for a place-of-birth claim) instead of blind-truncating Wikipedia's intro.
+  - `_extract_query_matches()` supports comma-separated multi-term queries; does whole-word match for single tokens and substring match for phrases.
 - `scripts/run_verdict_fanout.py` -- Multi-model verdict runner via OpenRouter. Two-phase execution per edit: Phase A (investigation with tool-calling loop, max 15 turns) then Phase B (structured JSON verdict extraction). Features:
-  - Runs edits from enriched snapshots across configurable model list (default: Mistral Small, OLMo, DeepSeek v3.2, Claude Haiku)
+  - Runs edits from enriched snapshots across configurable model list
   - Interleaved execution order (all models per edit before moving to next edit)
-  - Checkpoint/resume via `logs/wikidata-patrol-experiment/fanout-state.yaml`
+  - **Checkpoint key is `revid`, not `rcid`** (changed 2026-04-08): rcid is None for ~21% of labeled-eval edits (all Pool B trace-back reverts fetched via revision-history API rather than RecentChanges). Keying state on rcid caused silent deduplication. `load_checkpoint` still accepts old rcid-keyed entries via fallback.
   - Per-verdict 180s wall-clock timeout
   - Cost tracking via OpenRouter generation endpoint
   - Verdicts saved to `logs/wikidata-patrol-experiment/verdicts-fanout/`
   - 500-edit run completed 2026-02-22: 1,854 verdicts, 29 timeouts, 3 errors, $39.27 total cost. Retroactively labeled 2026-04-05 (see `docs/preliminary-results-2026-04.md`)
-  - Default model lineup updated 2026-04-05: Mistral Small 3.2, OLMo 3.1, Nemotron 3 Nano 30B, Gemma 3 4B. Claude Haiku and DeepSeek dropped (76% of cost, no ensemble improvement)
+  - **Current default model lineup (as of 2026-04-08):** Mistral Small 3.2, OLMo 3.1, Nemotron 3 Nano (note: Nemotron is weak at scale; see caveat below). Gemma 3 4B was dropped — no Gemma 3 variant on OpenRouter supports tool calling. The Sarabadani/Halfaker-comparable "Cheap-3" ensemble is Mistral Small + OLMo + DeepSeek V3.2 (the lineup from the 500-edit run).
+  - **`MODELS_NO_RESPONSE_FORMAT` set** (2026-04-08): Nemotron's only OpenRouter provider (DeepInfra) rejects `response_format=json_object` at runtime despite advertising support. Phase B omits response_format for these models and relies on prompt + fence-stripping JSON parsing.
+  - **`MODEL_EXTRA_BODY` map** (2026-04-08): per-model `extra_body` passed on every chat.completions call. Used to disable reasoning on hybrid-thinking models via `{"reasoning":{"enabled":false}}` (Nemotron 3 Nano, Gemma 4 31B are both hybrid-thinking and produce empty `content` with reasoning enabled). For Gemma 4, also sets `{"provider":{"require_parameters":true}}` to steer routing.
+  - **Item context budget reduced to 15% of context window** (was 40%, 2026-04-08): item context YAML was blowing past Mistral's 131k context limit on edits with large item claim sets. Essential sections (diff, parsed_edit, removed_claim) are always included separately.
+  - **Defensive handling of `response.choices = None`** (2026-04-08): some OpenRouter providers (notably Novita for Gemma 4) return a response with choices=None mid-investigation. The investigation loop now exits cleanly with `finish_status="empty_response"` rather than crashing.
   - `--eval` flag: evaluation mode that strips `ground_truth` from edits before sending to models, and uses `config/blocked_domains_eval.yaml` (blocks wikidata.org to prevent label leakage)
   - `build_edit_context` supports `context_budget` parameter for truncation, includes `edit_diff` and `prefetched_references` sections, prioritizes edited property claims when truncating item context
+- `scripts/prefetch_search_refs.py` (added 2026-04-08) -- Eager pre-enrichment script that runs `web_search` + `web_fetch` per edit and populates `prefetched_references` before the fanout runs. Intended to reduce per-edit turn counts by front-loading the common investigation work across all models in the ensemble. **Not yet validated at scale**: the 10-edit test run returned zero results because SearXNG's upstream engines (Brave, DuckDuckGo, Google) were all rate-limit-suspended after heavy testing.
 - `scripts/analyze_verdicts.py` -- Metrics computation for labeled evaluation. Joins verdict YAML files with ground-truth snapshot, computes per-model and ensemble metrics. Features:
   - Verdict-to-binary mapping: accept (verified-high/low, plausible), reject (incorrect, suspect), abstain (unverifiable)
   - Per-model confusion matrix, precision on accept, recall on reject
@@ -162,7 +169,9 @@ Edit-centric SIFT verification for Wikidata patrol. Unlike the item-centric skil
 - Requires `OPENROUTER_API_KEY` env var for verdict fanout runs
 - Requires `scikit-learn` and `numpy` for analyze_verdicts.py; `matplotlib`, `seaborn`, and `jupyter` as dev dependencies
 - `docs/hard-patrol-problems.md` -- Analysis of 72 split-decision edits from the 500-edit fanout where models genuinely disagree. Categorizes 10 types of hard patrol problems (disambiguation, ontological modeling, source hierarchy disputes, etc.)
-- `docs/preliminary-results-2026-04.md` -- Full preliminary results report with ground-truth evaluation, ensemble metrics, cost analysis, and planned 2000-edit re-run
+- `docs/preliminary-results-2026-04.md` -- Full preliminary results report with ground-truth evaluation, ensemble metrics, cost analysis, and planned 2000-edit re-run. **Updated 2026-04-08** with PR-AUC/ROC-AUC numbers and head-to-head comparison with Sarabadani et al. 2017.
+- `docs/wikicredcon-lightning-talk-2026.md` -- 3-slide lightning talk for WikiCredCon 2026, Marp format. Visually sparse slides; speaker notes carry the detail.
+- `docs/wikicredcon-lightning-talk-companion.md` -- Companion web page for the lightning talk with all numbers, tables, false positive / false negative analysis, Sarabadani comparison, prompt design notes, and reproducibility instructions.
 - `scripts/label_existing_edits.py` -- Retroactive ground truth labeling: queries Wikidata API to check if revisions were reverted (mw-reverted tag) or deleted. Outputs labeled snapshot YAML.
 - Single-model edit-centric SIFT verification: `skills/sift-patrol/SKILL.md` (used for the 50-edit Sonnet 4.6 run)
 

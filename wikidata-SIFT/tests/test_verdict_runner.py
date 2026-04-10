@@ -164,7 +164,7 @@ class TestDispatchToolCall:
         with patch("run_verdict_fanout.web_fetch", return_value=mock_text) as mock_wf:
             result = dispatch_tool_call(tc)
 
-        mock_wf.assert_called_once_with("https://example.com/page", blocked_domains=set())
+        mock_wf.assert_called_once_with("https://example.com/page", query=None, blocked_domains=set())
         assert result == mock_text
 
     def test_tool_exception_returns_error_string(self):
@@ -195,7 +195,7 @@ class TestDispatchToolCall:
         with patch("run_verdict_fanout.web_fetch", return_value="text") as mock_wf:
             dispatch_tool_call(tc, blocked_domains=blocked)
 
-        mock_wf.assert_called_once_with("https://example.com", blocked_domains=blocked)
+        mock_wf.assert_called_once_with("https://example.com", query=None, blocked_domains=blocked)
 
 
 # ---------------------------------------------------------------------------
@@ -1053,7 +1053,7 @@ class TestCheckpoint:
         with open(state_path) as f:
             data = yaml.safe_load(f)
         assert len(data["completed"]) == 1
-        assert data["completed"][0]["rcid"] == 11111
+        assert data["completed"][0]["revid"] == 11111
 
         # Add a second pair
         completed.add((22222, "allenai/olmo-3.1-32b-instruct"))
@@ -1061,8 +1061,8 @@ class TestCheckpoint:
 
         with open(state_path) as f:
             data = yaml.safe_load(f)
-        rcids = {entry["rcid"] for entry in data["completed"]}
-        assert rcids == {11111, 22222}
+        revids = {entry["revid"] for entry in data["completed"]}
+        assert revids == {11111, 22222}
 
     def test_load_checkpoint_missing_file_returns_empty_set(self, tmp_path):
         """load_checkpoint on a nonexistent path returns an empty set."""

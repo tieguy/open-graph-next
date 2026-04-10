@@ -32,7 +32,9 @@ Runs the same enriched Wikidata edits through multiple LLMs via OpenRouter to co
 - **Runner**: `scripts/run_verdict_fanout.py` -- checkpoint/resume, per-verdict timeout, interleaved execution
 - **Tools**: `scripts/tool_executor.py` -- `web_search()` via SearXNG, `web_fetch()` via httpx/trafilatura
 - **Prompt**: `config/sift_prompt_openrouter.md` -- model-agnostic SIFT prompt
-- **Models**: Nemotron, OLMo, DeepSeek V3.2, Claude 4.5 Haiku
+- **Models**: Mistral Small 3.2, OLMo 3.1, DeepSeek V3.2 (the "Cheap-3" ensemble)
+- **Results**: `docs/preliminary-results-2026-04.md` — 500-edit evaluation, includes PR-AUC/ROC-AUC and head-to-head with Sarabadani et al. 2017
+- **Lightning talk**: `docs/wikicredcon-lightning-talk-2026.md` + `docs/wikicredcon-lightning-talk-companion.md`
 - **Logs**: `logs/wikidata-patrol-experiment/verdicts-fanout/`
 
 ### SIFT-Patrol Experiment

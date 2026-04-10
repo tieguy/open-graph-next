@@ -1,6 +1,6 @@
 # LLM-Assisted Wikidata Patrol: Preliminary Results
 
-April 2026
+April 2026 · updated 2026-04-08 with PR-AUC/ROC-AUC analysis and Sarabadani 2017 head-to-head
 
 ## Summary
 
@@ -122,42 +122,135 @@ Of 31 reverted edits (excluding deleted):
 - **No cost optimization**: Models received full item context. Truncating context for simple edits could reduce cost significantly.
 - **SearXNG dependency**: Web search quality depends on the local SearXNG instance's configuration and upstream search engine availability.
 
-## Planned: larger re-run (April 2026)
+## Addendum 2026-04-08: PR-AUC / ROC-AUC analysis
 
-A second run is prepared to address sample size and model selection:
+Computed from the 500-edit run, cleaned subset of 139 edits with complete 3-model verdicts (Q138* deleted/promotional items excluded via title-prefix proxy, positive class rate 20.1%).
 
-- **2,000 edits** (up from 500) to tighten confidence intervals on precision/recall
-- **Exclude newly-created items** via `--max-qid 130000000` at fetch time
-- **Drop expensive models**: no Claude Haiku ($0.10/verdict, 76% of prior cost), no DeepSeek ($0.02/verdict)
-- **New lineup** (4 cheap models, all under $0.01/verdict):
-  - Mistral Small 3.2 24B (~$0.006/verdict)
-  - OLMo 3.1 32B (~$0.006/verdict)
-  - Nemotron 3 Nano 30B (~$0.005/verdict)
-  - Gemma 3 4B (~$0.003/verdict, stress test — is 4B sufficient?)
-- **Pre-labeled historical edits**: uses `fetch_labeled_edits.py` to collect edits 14-30 days old with ground truth already attached (reverted vs survived). No waiting period needed after fanout.
-- **Eval mode**: `--eval` flag strips ground truth before sending to models and blocks wikidata.org to prevent label leakage.
-- **Estimated cost**: ~$0.02/edit, ~$40 total for 2,000 edits
-- **Estimated runtime**: ~52 hours
+PR-AUC is computed over the six-class verdict ordinal (verified-high=0, verified-low=1, plausible=2, unverifiable=3, suspect=4, incorrect=5) normalized to [0,1] as "P(bad)". The ensemble score is the sum of per-model ordinals (16 discrete levels).
 
-Commands to execute:
+### Per-model fitness
+
+| Model | PR-AUC | ROC-AUC |
+|---|---|---|
+| Mistral Small 3.2 | 0.381 | 0.739 |
+| DeepSeek v3.2 | 0.458 | 0.809 |
+| OLMo 3.1 32B | 0.478 | 0.814 |
+| **Ensemble (sum of ordinals)** | **0.510** | **0.826** |
+
+### Head-to-head with Sarabadani et al. 2017
+
+[Sarabadani, Halfaker & Taraborelli, *Building Automated Vandalism Detection Tools for Wikidata*, WWW Companion 2017](https://wikiworkshop.org/2017/papers/p1647-sarabadani.pdf) is the canonical Wikidata-specific vandalism detection baseline. Their Random Forest classifier's reported fitness by feature subset (from their Table 3, test set: 99,222 revisions, positive class rate ~2.77%):
+
+| Feature set | ROC-AUC | PR-AUC |
+|---|---|---|
+| general only | 0.777 | 0.010 |
+| general + context | 0.803 | 0.013 |
+| general + type + context *(content-only)* | **0.813** | **0.014** |
+| general + user | 0.927 | 0.387 |
+| all (with user features) | **0.941** | **0.403** |
+
+The most striking finding in Sarabadani is the collapse of PR-AUC from 0.403 → 0.014 when user-status features (anonymous? account age? advanced rights group? bot?) are removed. The paper's conclusion explicitly acknowledges this:
+
+> *"Our classification model is strongly weighted against edits by anonymous and new contributors to Wikidata, regardless of the quality of their work. While this may be an effective way to reduce patrollers' workload, it is likely not fair to these users that their edits be so carefully scrutinized."*
+> — Sarabadani et al. 2017, §8 Conclusion
+
+### The fair single-number comparison: ROC-AUC on content-only signal
+
+PR-AUC is sensitive to class balance (our 20.1% positive vs Sarabadani's 2.77%) and quantization (our 6-class ordinal vs their continuous RF probabilities), so raw PR-AUC comparison is misleading. **ROC-AUC is much less sensitive to base rate** and is the right single-number comparison.
+
+| System | Signal used | ROC-AUC |
+|---|---|---|
+| Sarabadani 2017, all features (user profiling) | content + user status | **0.941** |
+| Sarabadani 2017, content-only | content only | **0.813** |
+| **SIFT-Patrol Cheap-3 ensemble** | **content only** | **0.826** |
+
+On content-only signal — no editor profiling — the Cheap-3 ensemble slightly edges the 2017 Wikidata vandalism RF (0.826 vs 0.813). With user-status features added, the 2017 model jumps to 0.941. We pay compute (~$0.02 per edit, ~30 seconds of tool-calling) to match the content-only baseline **without ever seeing who made the edit**.
+
+### Label-noise context (from the same paper)
+
+Sarabadani's §3.1 reports label reliability for Wikidata revert-based ground truth:
+
+- **86% of rollback-reverted edits** are actually vandalism (14% label noise)
+- **62% of restore-reverted edits** are actually vandalism (38% label noise)
+
+A more recent finding from the Graph2Text 2025 paper (arXiv:2505.18136): **42.3% of initially-reverted edits are actually clean** once you filter out self-reverts, edit wars, and reverted reverts.
+
+Our 96.6% precision is measured against a label set that is itself only ~60–90% reliable depending on filtering. A perfect classifier cannot achieve 100% precision against this kind of ground truth. Sarabadani's own §7 manual validation on a 10k-edit random sample found 99% filter rate at 100% recall against clean human labels — substantially better than their 89% recall against revert labels — and attributes the gap entirely to label noise.
+
+**The ceiling of this research direction isn't model capability, it's label quality.**
+
+---
+
+## 2000-edit re-run: in progress, with lessons (updated 2026-04-08)
+
+A larger replication is prepared and partially executed. Status and lessons:
+
+### Dataset: `logs/wikidata-patrol-experiment/labeled/2026-04-06-071054-labeled-eval.yaml`
+
+- 2000 labeled edits (1000 reverted, 1000 survived), `--max-qid 130000000` to exclude newly-created items.
+- Fetched via `fetch_labeled_edits.py` with dual-query strategy: Pool A (mw-reverted tag) + Pool B (trace-back from mw-rollback/mw-undo).
+- **Gotcha**: 421 edits (21%) have `rcid=None` — all from Pool B. Pool B fetches via revision-history API, not RecentChanges, so there's no rcid. The fanout script now keys state on `revid` (always populated) instead.
+
+### Model-selection journey and the final lineup
+
+The April 5 plan was to drop Claude Haiku + DeepSeek (too expensive for the reliability they added) and replace them with Nemotron 3 Nano + Gemma 3 4B as "cheaper, newer open models." **Both replacements failed under load testing:**
+
+- **Gemma 3 4B**: No Gemma 3 variant on OpenRouter supports tool calling at all. Unusable for this two-phase protocol. Dropped.
+- **Nemotron 3 Nano**: Multiple problems stacked. (1) DeepInfra (the only provider) rejects `response_format=json_object` at runtime despite advertising it — worked around by skipping response_format for Nemotron in Phase B. (2) It's a hybrid-thinking model — Phase A returns empty `content` unless `reasoning:{enabled:false}` is set in extra_body. (3) Even with both fixes, at scale Nemotron produces **78% MAX_TURNS exhaustion and 89% unverifiable verdicts** — essentially no ensemble signal. Unclear whether reasoning-disabled mode gives the model enough direction to converge within 15 turns. Kept in the script for experimentation but **not recommended for production runs.**
+- **Qwen small-variants tested** (2.5 7B, 3 8B, 3.5 9B): all either broke on `tool_choice="required"` routing, are hybrid-thinking and fail Phase B silently, or require workarounds comparable to Nemotron's.
+- **Llama 3.1 8B**: hallucinates sources, ignores `tool_choice="required"` — unsafe.
+- **Gemma 4 31B** (released 2026-04-02): technically supports tool calling, but the Novita provider returns `choices=None` mid-investigation on longer tool loops. Worked in isolated smoke tests, failed 4/5 in the fanout. Not yet usable.
+
+**Recommended lineup: Mistral Small 3.2 + OLMo 3.1 + DeepSeek V3.2** — the original Cheap-3 from the 500-edit run. Known-good, analyzed in the main body of this report, no runtime quirks.
+
+### Script improvements that landed during the re-run work
+
+All in `scripts/run_verdict_fanout.py` and `scripts/tool_executor.py`:
+
+1. **State key change: `rcid` → `revid`** (fixes 21% silent dedup on Pool B edits).
+2. **Query-aware `web_fetch(url, query)`**: returns page lead + paragraphs matching query terms (e.g. "Belgium" for a place-of-birth verification). Replaces the blind 15000-char truncation with 2500-char lead + up to ~6500 chars of relevant excerpts, capped at ~9000 chars total. Reduces per-fetch token cost while preserving buried facts.
+3. **Item context budget: 40% → 15%** of context window. Mistral was hitting >100% of its 131k window on edits with large item claim sets.
+4. **`MODELS_NO_RESPONSE_FORMAT` set**: Phase B skips `response_format=json_object` for providers that reject it at runtime.
+5. **`MODEL_EXTRA_BODY` map**: per-model extra_body for reasoning-disable and provider routing. Currently configured for Nemotron and Gemma 4.
+6. **Defensive guard on empty `response.choices`**: cleanly exits investigation loop with `finish_status="empty_response"` instead of crashing. Mitigates Novita provider flakiness.
+7. **None-safe sort in `save_checkpoint`**: handles None state keys gracefully.
+
+### New script: `prefetch_search_refs.py`
+
+Eager pre-enrichment: runs one `web_search` + top-3 `web_fetch` per edit to populate `prefetched_references` before the fanout. Intended to reduce per-edit turn counts (average 7.4 turns on Mistral, with 14% MAX_TURNS rate) by front-loading the work that every model otherwise repeats. **Not yet validated at scale** — the initial 10-edit test returned zero results because SearXNG's upstream engines (Brave, DuckDuckGo, Google) were all rate-limit-suspended after heavy debugging. Worth retrying when SearXNG is fresh.
+
+### Process lesson: validation gate before long runs
+
+One failed launch of this re-run produced ~628 Nemotron verdicts before the signal-quality problem was caught. The mistake: after fixing Nemotron's config errors, a 3-edit smoke test was used to validate ("reasoning disabled, returns valid JSON, no crashes"). That sample was too small to notice the 2/3 MAX_TURNS rate that became the 78% MAX_TURNS rate at scale. **Treat the first 20-50 edits of any multi-model batch run as a mandatory inspection window**: look at per-model verdict distributions, MAX_TURNS rate, null-result rate, rationale quality on a few samples. Only launch the long run after explicitly confirming "this looks like signal," not just "no errors thrown."
+
+### Commands to execute (updated for current recommended lineup)
 
 ```bash
-# 1. Fetch pre-labeled historical edits (14-30 days old, with ground truth)
-#    Excludes newly-created items. Enriches with item context.
-WITH_EXTENSION=0 uv run python scripts/fetch_labeled_edits.py \
-  --reverted 1000 --survived 1000 --enrich --max-qid 130000000
+# 1. Fetch pre-labeled historical edits (already done; snapshot committed)
+# WITH_EXTENSION=0 uv run python scripts/fetch_labeled_edits.py \
+#   --reverted 1000 --survived 1000 --enrich --max-qid 130000000
 
-# 2. Run verdict fanout in eval mode (blocks wikidata.org, strips ground truth)
-export $(cat .env | xargs)
+# 2. Start SearXNG (podman, not docker)
 podman compose up -d
+# Verify engines are responsive: curl -s 'http://127.0.0.1:8080/search?q=test&format=json' | jq .unresponsive_engines
+# If engines are suspended, wait or restart containers.
+
+# 3. Run verdict fanout in eval mode with the Cheap-3 lineup
+export $(cat .env | xargs)
 nohup WITH_EXTENSION=0 uv run python scripts/run_verdict_fanout.py \
-  --snapshot logs/wikidata-patrol-experiment/labeled/SNAPSHOT.yaml \
+  --snapshot logs/wikidata-patrol-experiment/labeled/2026-04-06-071054-labeled-eval.yaml \
+  --models mistralai/mistral-small-3.2-24b-instruct allenai/olmo-3.1-32b-instruct deepseek/deepseek-v3.2 \
   --eval > fanout-run-2.log 2>&1 &
 
-# 3. Analyze immediately after fanout completes (ground truth already in snapshot)
+# 4. Inspect the first ~50 verdicts before trusting the long run
+tail -f fanout-run-2.log
+# Check per-model distribution and MAX_TURNS rate:
+# python3 -c "..." (see memory: feedback_validation_gate_before_long_runs.md for the pattern)
+
+# 5. Analyze against ground truth (labels already in snapshot)
 WITH_EXTENSION=0 uv run python scripts/analyze_verdicts.py \
   --verdicts-dir logs/wikidata-patrol-experiment/verdicts-fanout/ \
-  --ground-truth logs/wikidata-patrol-experiment/labeled/SNAPSHOT.yaml
+  --ground-truth logs/wikidata-patrol-experiment/labeled/2026-04-06-071054-labeled-eval.yaml
 ```
 
 ## Other next steps

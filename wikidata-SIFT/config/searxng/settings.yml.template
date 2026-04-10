@@ -4,6 +4,8 @@ use_default_settings:
       - google
       - duckduckgo
       - brave
+      - bing
+      - qwant
 
 general:
   debug: false
@@ -42,5 +44,13 @@ engines:
     weight: 1
 
   - name: brave
+    disabled: false
+    weight: 1
+
+  - name: bing
+    disabled: false
+    weight: 1
+
+  - name: qwant
     disabled: false
     weight: 1
