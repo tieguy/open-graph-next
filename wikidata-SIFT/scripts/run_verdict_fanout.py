@@ -981,12 +981,19 @@ def main():
 
     api_key = os.environ["OPENROUTER_API_KEY"]
 
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-        max_retries=3,
-        timeout=120.0,
-    )
+    # Validate that required provider API keys are set
+    needed_key_envs = {
+        provider["api_key_env"]
+        for m in models_to_use
+        if (provider := MODEL_PROVIDERS.get(m))
+    }
+    for key_env in needed_key_envs:
+        if key_env not in os.environ:
+            print(f"ERROR: {key_env} not set but required by model lineup. "
+                  f"Add it to .env and re-export.")
+            return
+
+    clients = build_clients(models_to_use)
 
     # Load checkpoint
     completed = load_checkpoint()
@@ -1017,7 +1024,7 @@ def main():
             verdict_edit = strip_ground_truth(edit) if args.eval else edit
             verdict, timed_out = run_with_timeout(
                 run_single_verdict,
-                (client, model, verdict_edit, blocked_domains, api_key),
+                (get_client(model, clients), model, verdict_edit, blocked_domains, api_key),
                 timeout_secs=timeout,
             )
 
