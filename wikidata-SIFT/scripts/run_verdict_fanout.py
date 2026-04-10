@@ -91,7 +91,9 @@ MODELS_NO_RESPONSE_FORMAT = {
 # and cause silent Phase B parse failures), and to keep wall-clock time below
 # the per-verdict timeout.
 MODEL_EXTRA_BODY = {
-    "nvidia/nemotron-3-nano-30b-a3b": {"reasoning": {"enabled": False}},
+    # Nemotron reasoning left ENABLED: disabling it causes infinite tool-calling
+    # loops (model loses convergence signal). See block/goose#6461, HF discussions.
+    # "nvidia/nemotron-3-nano-30b-a3b": {"reasoning": {"enabled": False}},
     # Gemma 4 is hybrid-thinking; reasoning must be disabled so content isn't
     # routed to a separate field. require_parameters=true steers routing to
     # providers that actually support tools + tool_choice + response_format.
