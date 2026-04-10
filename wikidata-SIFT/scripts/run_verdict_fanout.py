@@ -530,7 +530,7 @@ def run_investigation_phase(client, model, messages, blocked_domains=None, cance
         else:
             tc = "auto"
         phase_a_kwargs = dict(
-            model=model,
+            model=resolve_api_model_id(model),
             messages=messages,
             tools=TOOL_DEFINITIONS,
             tool_choice=tc,
@@ -654,7 +654,7 @@ def run_verdict_phase(client, model, messages):
     )
     messages = messages + [{"role": "user", "content": verdict_request}]
 
-    create_kwargs = dict(model=model, messages=messages)
+    create_kwargs = dict(model=resolve_api_model_id(model), messages=messages)
     if model not in MODELS_NO_RESPONSE_FORMAT:
         create_kwargs["response_format"] = {"type": "json_object"}
     if model in MODEL_EXTRA_BODY:
