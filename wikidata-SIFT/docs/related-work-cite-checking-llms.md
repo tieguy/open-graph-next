@@ -2,6 +2,90 @@
 
 Extracted from [Phabricator T399642: \[Signal\] Identify cases where reference does not support published claim](https://phabricator.wikimedia.org/T399642) and related resources. This task tracks Wikimedia's own exploration of using LLMs to verify that citations actually support the claims they're attached to.
 
+---
+
+## ORES vs. SIFT-Patrol: Style vs. Content
+
+### Slide version
+
+- **ORES checks the _style_ of an edit**: Does it _look like_ vandalism? Character ratios, byte counts, bad-word detectors, boolean property flags. Fast, cheap, no understanding of truth.
+- **SIFT checks the _content_ of an edit**: Is the claim _actually correct_? Reads cited sources, searches for corroboration, reasons about whether evidence supports the specific claim. Slow, expensive, understands meaning.
+- **ORES features are hand-engineered statistics**: 50+ numeric/boolean features fed to a gradient-boosted classifier. No access to external sources. No semantic understanding.
+- **SIFT features are a mix of structured data and LLM reasoning over live sources**: The model receives the full item context and edit diff, then actively investigates via web search and page fetching. The prompt directs a specific verification workflow (SIFT: Stop, Investigate, Find, Trace).
+- **They're complementary, not competing**: ORES is a cheap first-pass filter (catches obvious vandalism patterns). SIFT is a deep second-pass verifier (catches plausible-but-wrong edits that sail through ORES). Neither alone is sufficient.
+
+### Full-detail comparison
+
+The table below distinguishes between information the LLM _has access to_ (present in the input context) and information the prompt _specifically directs_ it to use (explicit instructions in the SIFT workflow). ORES has no such distinction — its features are fixed inputs to a statistical classifier.
+
+#### ORES (Wikidata `editquality` models)
+
+All features are **fixed inputs to a gradient-boosted classifier** (GradientBoosting, 500 estimators). There is no "available but unused" category — every feature is engineered and weighted by the model.
+
+| Category | Features | What it captures |
+|---|---|---|
+| **Edit type flags** | `is_revert`, `is_restore`, `is_item_creation`, `is_merge_into`, `is_merge_from`, `is_client_move`, `is_client_delete` | Structural edit classification |
+| **User signals** | `user_is_bot`, user rights, protected user status | Editor identity/trust (SIFT deliberately excludes this) |
+| **Comment vandalism heuristics** | `comment_longest_repeated_char`, `comment_uppercase_ratio`, `comment_numbers_ratio`, `comment_whitespace_ratio`, `comment_longest_repeated_uppercase_char`, `comment_has_url`, `comment_english_bad_words`, `comment_english_informals`, `comment_has_first_person_pronouns_en`, `comment_has_second_person_pronouns_en`, `comment_has_do_or_dont_en` | Whether the edit summary _looks_ suspicious |
+| **Entity structure diff (counts)** | Sitelinks added/removed/changed, labels added/removed/changed, aliases added/removed/changed, descriptions added/removed/changed, properties added/removed/changed, statements added/removed/changed, sources added/removed, qualifiers added/removed, badges added/removed/changed, identifiers changed | Volume and shape of the edit (not its correctness) |
+| **Proportional features** | `proportion_of_qid_added`, `proportion_of_language_added`, `proportion_of_links_added` | Edit composition ratios |
+| **Targeted property flags** | P21 (sex/gender), P27 (citizenship), P54 (sports team), P569 (DOB), P18 (image), P109 (signature), P373 (Commons category), P856 (official website) changed; `en_label_changed` | High-vandalism-risk properties as booleans |
+| **Entity type flags** | `is_human` (Q5), `is_blp` (has birth date) | Entity sensitivity classification |
+| **NOT available to ORES** | Actual claim values, reference content, external source verification, semantic correctness, ontological consistency, whether the source supports the claim | ORES cannot assess truth, only pattern |
+
+#### SIFT-Patrol (LLM-based verification)
+
+| Category | Feature / Signal | Available | Prompted | Notes |
+|---|---|---|---|---|
+| **Edit metadata** | Revision IDs (old/new), timestamp | Yes | No | Present in input, not called out in workflow |
+| | User name | Yes | Explicitly deprioritized | Prompt: "for situational awareness only"; Design notes: "No editor identity signals — we assess the edit on its merits, not the editor's reputation" |
+| | Edit comment (raw Wikibase summary) | Yes | No | Available but SIFT never directs the model to analyze comment text patterns |
+| | Tags (e.g., "new editor changing statement") | Yes | Yes (Step 1) | Prompt: "What do the tags suggest?" |
+| | Parsed operation type | Yes | Yes (Step 1) | Part of understanding "what changed" |
+| **Edit diff** | Diff type (statement_added, value_changed, reference_added, etc.) | Yes | Yes (Step 1) | Core to understanding the edit |
+| | Full old_value / new_value structures (value, rank, references, qualifiers with resolved labels) | Yes | Yes (Step 2) | Prompt directs checking references in the statement structure |
+| | Property label and value label/description (human-readable) | Yes | Yes (Steps 1-3) | Used throughout — search queries built from labels |
+| **Full item context** | Entity label, description | Yes | Yes (Step 1) | Prompt: "What kind of entity is this?" |
+| | All current claims with resolved labels (entire item state) | Yes | Yes (Steps 1-2) | Prompt: "What other claims exist?"; used to locate references and detect conflicts |
+| | P31/instance of (entity type) | Yes | Yes (Step 1) | Explicitly called out: "check P31/instance of" |
+| **Edit session context** | group_id, group_seq, group_size | Yes | Yes (Step 1) | Prompt: "Is this part of a batch of edits (group_size > 1)?" |
+| **Removed claim data** | Full serialized deleted statement (for removal edits) | Yes | Yes (Steps 2-3) | Needed to verify whether removal was justified |
+| **Prefetched reference content** | HTTP status, extracted text, error category, fetch date per reference URL | Yes | Yes (Step 2) | Prompt gives detailed instructions: check prefetched first, respect blocked domains, don't retry errors |
+| **Live web search** | Independent source discovery via SearXNG | Tool | Yes (Step 3) | Prompt: "MUST call these tools during Steps 2-4. Do not skip investigation." Default query template provided. |
+| | Search query variations | Tool | Yes (Step 3) | Prompt specifies fallback strategies: drop property, drop item, translate |
+| **Live page fetching** | Full text extraction from web pages | Tool | Yes (Steps 2-3) | Up to 3 pages per edit; used to verify cited and independent sources |
+| **Source provenance tracking** | `verified` vs. `reported` per source | Output | Yes (Step 3) | Mandatory in prompt: "Source provenance is mandatory. Every source must be marked." Mismarking "invalidates the verdict." |
+| **Source type classification** | primary / secondary / tertiary | Output | Yes (Step 3) | Required per source in verdict output |
+| **Claim-source entailment** | Does the reference actually support the specific claim? | Reasoning | Yes (Step 2) | Prompt: "Does the content actually support the specific claim being made?" |
+| **Source authority assessment** | Is the source authoritative for this type of claim? | Reasoning | Yes (Step 2) | Prompt: "Is the source authoritative for this type of claim?" |
+| **Circular reference detection** | Wikipedia citing Wikidata | Reasoning | Yes (Step 2) | Prompt: "NEVER use [Wikipedia] as a Wikidata reference source. Wikipedia cites Wikidata, so using it as a source is circular." |
+| **External identifier cross-referencing** | API lookup + 2-fact entity matching | Reasoning | Yes (Step 3) | Prompt: "confirming the ID exists is necessary but not sufficient — you must also cross-reference... Match on at least two independent facts" |
+| **Direct quote extraction** | Verbatim quotes from fetched sources | Output | Yes (Step 3) | Prompt: "including a direct quote from the fetched content... This proves you read the actual page" |
+| **Contradiction resolution** | Trace to primary/authoritative source | Reasoning | Yes (Step 4) | Conditional step, triggered "only if Step 2 and Step 3 produced contradictory evidence" |
+| **Ontological reasoning** | Is P31/P279 classification sensible? Are required qualifiers present? | Reasoning | Implicit | Not explicitly prompted but emerges from item context + LLM knowledge of Wikidata conventions |
+| **Data model correctness** | Right property for this claim type? Appropriate date precision? | Reasoning | Yes (Step 5) | Prompt directs proposing improvements: "Missing qualifiers... Precision improvements (e.g., year -> day for dates)" |
+| **Confidence calibration** | Verdict maps to evidence strength | Output | Yes (Step 5) | Six-level verdict scale with precise definitions (e.g., "verified-high" requires "primary source or multiple independent sources") |
+| **LLM training data** | General world knowledge | Yes | Explicitly restricted | Prompt: "never render a verdict based solely on your training data. Every claim must be checked against live web sources" |
+
+#### Key structural differences
+
+| Dimension | ORES | SIFT-Patrol |
+|---|---|---|
+| **Architecture** | Gradient-boosted trees (fixed features) | LLM with tool use (open-ended reasoning) |
+| **Feature count** | ~50 hand-engineered | ~15 structured inputs + unbounded reasoning |
+| **External access** | None | Web search + page fetch (live) |
+| **Reads source content** | No | Yes (and is required to) |
+| **Understands claim semantics** | No | Yes |
+| **Editor identity** | Used (user_is_bot, user rights) | Deliberately excluded |
+| **Comment analysis** | Vandalism heuristics (char ratios, bad words) | Available but not directed |
+| **Verdict type** | Binary probability (damaging / good-faith) | Six-level ordinal (verified-high → incorrect) |
+| **Latency** | Milliseconds | Minutes (web search + multi-page fetch) |
+| **Cost per edit** | Negligible | $0.01–0.10 per model per edit |
+| **What it catches** | Obvious vandalism, bot edits, edit-war patterns | Plausible-but-wrong facts, unsupported claims, subtle errors |
+| **What it misses** | Any edit that _looks normal_ but is factually wrong | Nothing structural — but limited by source availability and LLM accuracy (~75% ceiling) |
+
+---
+
 ## Context
 
 T399642 is part of the Wikimedia Edit Checks initiative within VisualEditor. The goal: when a new sentence is added with a citation, or when reviewing existing content, automatically flag cases where the reference doesn't support the published claim. This is directly analogous to our SIFT-Patrol work, but operating on Wikipedia article text rather than Wikidata structured claims.
