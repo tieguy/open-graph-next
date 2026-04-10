@@ -1,6 +1,7 @@
 """Tests for run_verdict_fanout.py — verdict runner core."""
 
 import json
+import os
 import sys
 import threading
 import time
@@ -12,13 +13,19 @@ import yaml
 
 from run_verdict_fanout import (
     MAX_TURNS,
+    MODEL_PROVIDERS,
+    OPENROUTER_BASE_URL,
+    build_clients,
     build_edit_context,
     build_execution_order,
+    compute_token_cost,
     dispatch_tool_call,
     fetch_generation_cost,
+    get_client,
     load_checkpoint,
     main,
     model_slug,
+    resolve_api_model_id,
     run_investigation_phase,
     run_single_verdict,
     run_verdict_phase,
@@ -1254,3 +1261,24 @@ class TestEvalCLI:
 
         captured = capsys.readouterr()
         assert "Evaluation mode" in captured.out
+
+
+# ---------------------------------------------------------------------------
+# Provider routing tests
+# ---------------------------------------------------------------------------
+
+
+class TestResolveApiModelId:
+    """Tests for resolve_api_model_id()."""
+
+    def test_deepinfra_model_returns_provider_model_id(self):
+        result = resolve_api_model_id("nvidia/nemotron-3-nano-30b-a3b")
+        assert result == "nvidia/Nemotron-3-Nano-30B-A3B-v1"
+
+    def test_openrouter_model_returns_same_id(self):
+        result = resolve_api_model_id("mistralai/mistral-small-3.2-24b-instruct")
+        assert result == "mistralai/mistral-small-3.2-24b-instruct"
+
+    def test_unknown_model_returns_same_id(self):
+        result = resolve_api_model_id("some/unknown-model")
+        assert result == "some/unknown-model"
