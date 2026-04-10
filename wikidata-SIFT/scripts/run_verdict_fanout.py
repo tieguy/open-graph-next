@@ -126,6 +126,38 @@ def resolve_api_model_id(model):
         return provider.get("model_id", model)
     return model
 
+
+def build_clients(models):
+    """Create one OpenAI client per unique provider needed by the model list.
+
+    Returns:
+        dict mapping base_url string to OpenAI client instance.
+    """
+    clients = {}
+    for model in models:
+        provider = MODEL_PROVIDERS.get(model)
+        if provider:
+            base_url = provider["base_url"]
+            api_key = os.environ[provider["api_key_env"]]
+        else:
+            base_url = OPENROUTER_BASE_URL
+            api_key = os.environ["OPENROUTER_API_KEY"]
+        if base_url not in clients:
+            clients[base_url] = OpenAI(
+                base_url=base_url,
+                api_key=api_key,
+                max_retries=3,
+                timeout=120.0,
+            )
+    return clients
+
+
+def get_client(model, clients):
+    """Return the OpenAI client for the given model from the clients dict."""
+    provider = MODEL_PROVIDERS.get(model)
+    base_url = provider["base_url"] if provider else OPENROUTER_BASE_URL
+    return clients[base_url]
+
 TOOL_DEFINITIONS = [
     {
         "type": "function",
