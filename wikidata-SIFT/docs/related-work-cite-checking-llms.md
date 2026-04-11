@@ -237,6 +237,28 @@ T399642 is part of the Wikimedia Edit Checks initiative within VisualEditor. The
 - **Key results**: For the top 10% most likely unverifiable citations, humans preferred SIDE's suggested alternative 70% of the time. Wikipedia editors preferred SIDE's first recommendation twice as often as the existing citation.
 - **Relevance to our work**: SIDE goes beyond detection to recommendation — not just "this citation is bad" but "here's a better one." Our SIFT approach currently stops at verdict (accept/reject/suspect); SIDE's recommendation step is a potential future extension. Their fine-tuned BERT verifier is a different architecture from our LLM-based approach.
 
+### 10. Google Cloud Check Grounding API (Vertex AI Search)
+
+- **Links**: [Check grounding with RAG](https://cloud.google.com/generative-ai-app-builder/docs/check-grounding) · [Discovery Engine REST reference](https://cloud.google.com/generative-ai-app-builder/docs/reference/rest) · [LangChain wrapper](https://python.langchain.com/api_reference/google_community/vertex_check_grounding/langchain_google_community.vertex_check_grounding.VertexAICheckGroundingWrapper.html)
+- **What it does**: A commercial managed API that takes an `answer_candidate` (any piece of text, human- or machine-generated) and a set of `facts` (reference text chunks), and returns a grounding assessment. Designed primarily to validate LLM-generated RAG responses against retrieved context, but the API is general enough to check any text against any reference corpus.
+- **Inputs**:
+  - `answer_candidate` — the text whose grounding is being checked
+  - `facts[]` — a list of text segments to check against
+- **Outputs**:
+  - `support_score` (0.0–1.0) — "loosely approximates the fraction of claims in the answer candidate that were found to be grounded in one or more of the given facts"
+  - `cited_chunks[]` — the specific fact segments that support the answer
+  - `claims[]` — the answer candidate segmented into claims (typically sentence-level), each demarcated by UTF-8 byte start/end positions, with references to the `cited_chunks` that support it
+- **Grounding definition**: Binary per claim — "perfect grounding requires that every claim in the answer candidate must be supported by one or more of the given facts — in other words, the claim is wholly entailed by the facts. If the claim is only partially entailed, it is not considered grounded."
+- **Performance**: <500ms latency target, designed to be called in-line during RAG inference without significant slowdown.
+- **Key architectural difference from LLM-based verification**: Check Grounding is a _closed-world_ entailment check — it only checks whether the answer is entailed by the facts _you provide_. It does not search the web, judge source reliability, or reason about whether the facts themselves are authoritative. You must handle retrieval and source curation separately.
+- **Relevance to our work**: This is the closest commercial/productized analog to the "Step 2: Investigate the Source" portion of our SIFT workflow. If we wanted to offload the claim-vs-source entailment check to a managed service, this is what that looks like. Notable differences:
+  - **Scope**: Google's API assumes you've already retrieved the relevant facts; SIFT does the retrieval as part of the verification (Steps 2–4 of the SIFT methodology fetch references and search the web).
+  - **Source judgment**: Google's API is source-agnostic — it treats every provided fact as authoritative. SIFT explicitly reasons about source reliability, provenance (`verified` vs. `reported`), and source type (primary/secondary/tertiary).
+  - **Output shape**: A single 0-1 score vs. SIFT's six-level ordinal verdict (`verified-high` → `incorrect`) with rationale and proposed improvements.
+  - **Claim segmentation**: Google segments the answer into sentence-level claims with byte offsets. SIFT operates on already-atomic Wikidata S-P-V triples — no segmentation needed.
+  - **Pricing model**: Pay-per-call managed service, vs. our self-hosted multi-model fanout (OpenRouter pay-per-token).
+  - A real production system might combine the two: use Check Grounding (or an equivalent) as the entailment primitive within a SIFT-style investigation loop, instead of asking the LLM to do entailment reasoning in one pass.
+
 ## Comparison with Our SIFT-Patrol Approach
 
 | Dimension | T399642 / Papers | Community Tools | Our SIFT-Patrol |
