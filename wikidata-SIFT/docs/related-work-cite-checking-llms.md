@@ -8,11 +8,19 @@ Extracted from [Phabricator T399642: \[Signal\] Identify cases where reference d
 
 ### Slide version
 
-- **ORES checks the _style_ of an edit**: Does it _look like_ vandalism? Character ratios, byte counts, bad-word detectors, boolean property flags. Fast, cheap, no understanding of truth.
-- **SIFT checks the _content_ of an edit**: Is the claim _actually correct_? Reads cited sources, searches for corroboration, reasons about whether evidence supports the specific claim. Slow, expensive, understands meaning.
-- **ORES features are ~67 hand-engineered statistics**: Numeric/boolean features fed to a gradient-boosted classifier (700 estimators, 0.985 ROC-AUC). No access to external sources. No semantic understanding.
-- **SIFT features are ~15 structured inputs + unbounded LLM reasoning over live sources**: The model receives the full item context and edit diff, then actively investigates via web search and page fetching. The prompt directs a specific verification workflow (SIFT: Stop, Investigate, Find, Trace).
-- **They're complementary, not competing**: ORES is a cheap first-pass filter (catches obvious vandalism patterns). SIFT is a deep second-pass verifier (catches plausible-but-wrong edits that sail through ORES). Neither alone is sufficient.
+**ORES checks the _style_ of an edit** (does it _look like_ vandalism?). **SIFT checks the _content_ of an edit** (is the claim _actually correct_?). Representative signals from each:
+
+| ORES (style) | SIFT (content) |
+|---|---|
+| Is the editor anonymous? How old is their account? | Does the cited reference actually support the specific claim? |
+| Does the edit comment have lots of uppercase, repeated chars, or bad words? | What do independent web sources say about this claim? |
+| Was a high-risk property changed? (sex/gender, date of birth, citizenship, image) | Was each consulted source directly fetched (`verified`) or only mentioned secondhand (`reported`)? |
+| Is this a biography of a living person? | Is the source primary, secondary, or tertiary — and authoritative for this claim type? |
+| How many claims, sitelinks, sources were added/removed/changed? | For external IDs (ORCID, INSPIRE-HEP): does the API response match ≥2 independent facts on the item? |
+| Did this edit touch a frequently-vandalized property (P21, P569, P18...)? | Does the proposed change conflict with other claims already on the item? |
+| Is the user a bot, admin, patroller, or trusted user? | Is the citation circular (e.g., Wikipedia citing Wikidata)? |
+
+The two are complementary, not competing: ORES is a fast pattern filter, SIFT is a deep semantic verifier. Neither alone is sufficient.
 
 ### Full-detail comparison
 
