@@ -52,6 +52,7 @@ something more specific:
 | `short` | (no message; whole page sent) |
 | `fallback` | ⚠ Source is long; the model only saw the first ~12,000 characters. |
 | `lead+matches` | ✓ Showing claim-relevant excerpts from a long source. |
+| `lead+head+tail` | ⚠ Source is long; claim terms didn't match, showing intro + head + tail. |
 | `lead-only` | ⚠ Source is long and the claim's terms didn't appear past the intro. |
 
 Not in `main.js.patch` so the patch stays narrowly scoped; ship it as a

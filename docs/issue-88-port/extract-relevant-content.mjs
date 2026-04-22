@@ -94,15 +94,6 @@ function tokenizeClaim(claim) {
 function extractQueryMatches(text, terms, opts) {
     if (!terms.length) return [];
 
-    const patterns = terms.map(term => {
-        if (term.includes(' ')) {
-            // Multi-word phrase: substring match, case-insensitive
-            return { term, re: new RegExp(escapeRegExp(term), 'i') };
-        }
-        // Single token: whole-word match, case-insensitive
-        return { term, re: new RegExp('\\b' + escapeRegExp(term) + '\\b', 'i') };
-    });
-
     // Split on blank-line paragraph boundaries first; if the source has no
     // double-newlines (which happens when the upstream extractor squeezed
     // them out), fall back to single-newline lines, and then to sentences.
@@ -116,33 +107,97 @@ function extractQueryMatches(text, terms, opts) {
         paragraphs = text.split(/(?<=[.!?])\s+(?=[A-Z0-9"'(\[])/).filter(Boolean);
     }
 
+    if (paragraphs.length === 0) return [];
+
+    // Build per-term metadata: regex, document frequency (paragraph count that
+    // contains the term), and a weight combining rarity + information boost.
+    //
+    // Weight rationale:
+    //   rarity = log(N / df)  — classic IDF over paragraphs. Tokens in every
+    //     paragraph score 0 (they discriminate nothing); tokens in one
+    //     paragraph score log(N) (strongly discriminating).
+    //   boost  = 2 for capitalized or purely-numeric tokens. These are
+    //     proper nouns and years/numbers, which tend to be the highest-
+    //     information tokens in Wikipedia-prose claims.
+    //   weight = rarity * boost, with a floor of rarity so that rare
+    //     lowercase tokens still score above 0.
+    //
+    // Terms that match zero paragraphs get weight 0 and are dropped (they
+    // can't contribute). Terms that match every paragraph also get weight 0
+    // (they carry no signal) but are kept for the fallback-message path so
+    // we can report what we looked for.
+    const N = paragraphs.length;
+    const termInfo = terms.map(term => {
+        const re = term.includes(' ')
+            ? new RegExp(escapeRegExp(term), 'i')
+            : new RegExp('\\b' + escapeRegExp(term) + '\\b', 'i');
+        let df = 0;
+        for (const para of paragraphs) {
+            if (re.test(para)) df += 1;
+        }
+        const isCapitalized = /^[A-Z]/.test(term);
+        const isNumeric = /^\d+$/.test(term);
+        const boost = isCapitalized || isNumeric ? 2 : 1;
+        const rarity = df === 0 || df === N ? 0 : Math.log(N / df);
+        const weight = rarity * boost;
+        return { term, re, df, weight };
+    });
+
+    const scoring = termInfo.filter(t => t.weight > 0);
+    if (scoring.length === 0) return [];
+
+    // Score each paragraph: sum of weights of matching terms. Tie-break by
+    // match count (denser evidence beats thinly-weighted single hits).
+    const scored = [];
+    for (const para of paragraphs) {
+        let score = 0;
+        const hitTerms = [];
+        for (const info of scoring) {
+            if (info.re.test(para)) {
+                score += info.weight;
+                hitTerms.push(info);
+            }
+        }
+        if (score > 0) {
+            scored.push({ para, score, hitTerms });
+        }
+    }
+
+    if (scored.length === 0) return [];
+
+    // Highest-scoring paragraphs first; break ties by number of distinct
+    // term hits, then by length (prefer fuller context) .
+    scored.sort((a, b) => {
+        if (b.score !== a.score) return b.score - a.score;
+        if (b.hitTerms.length !== a.hitTerms.length) return b.hitTerms.length - a.hitTerms.length;
+        return b.para.length - a.para.length;
+    });
+
     const matches = [];
     const seenStarts = new Set();
 
-    for (const para of paragraphs) {
-        for (const { term, re } of patterns) {
-            const m = re.exec(para);
-            if (!m) continue;
-
-            // Dedupe by first 60 chars of paragraph so the same para doesn't
-            // come back twice if it matched multiple terms.
-            const key = para.slice(0, 60);
-            if (seenStarts.has(key)) break;
-            seenStarts.add(key);
-
-            // Truncate very long paragraphs to a window around the first match
-            let excerpt;
-            if (para.length > opts.matchWindow * 2) {
-                const start = Math.max(0, m.index - opts.matchWindow);
-                const end = Math.min(para.length, m.index + m[0].length + opts.matchWindow);
-                excerpt = (start > 0 ? '...' : '') + para.slice(start, end) + (end < para.length ? '...' : '');
-            } else {
-                excerpt = para;
-            }
-            matches.push({ term, excerpt });
-            break; // one term hit is enough; move to next paragraph
-        }
+    for (const { para, hitTerms } of scored) {
         if (matches.length >= opts.maxMatches) break;
+
+        // Dedupe by prefix so near-duplicate paragraphs don't crowd out
+        // other matches.
+        const key = para.slice(0, 60);
+        if (seenStarts.has(key)) continue;
+        seenStarts.add(key);
+
+        // Pick the highest-weight hit term to center the excerpt window on.
+        const primary = hitTerms.reduce((a, b) => (b.weight > a.weight ? b : a));
+        const m = primary.re.exec(para);
+
+        let excerpt;
+        if (para.length > opts.matchWindow * 2 && m) {
+            const start = Math.max(0, m.index - opts.matchWindow);
+            const end = Math.min(para.length, m.index + m[0].length + opts.matchWindow);
+            excerpt = (start > 0 ? '...' : '') + para.slice(start, end) + (end < para.length ? '...' : '');
+        } else {
+            excerpt = para;
+        }
+        matches.push({ term: primary.term, excerpt });
     }
 
     return matches;
@@ -160,7 +215,7 @@ function extractQueryMatches(text, terms, opts) {
  *             truncated: boolean,
  *             matches: number,
  *             fullLength: number,
- *             strategy: 'short'|'fallback'|'lead-only'|'lead+matches' }}
+ *             strategy: 'short'|'fallback'|'lead-only'|'lead+matches'|'lead+head+tail' }}
  */
 function extractRelevantContent(text, query, options) {
     const opts = Object.assign({}, DEFAULTS, options || {});
@@ -225,12 +280,49 @@ function extractRelevantContent(text, query, options) {
             );
         }
     } else if (leadTruncated) {
-        strategy = 'lead-only';
-        parts.push(
-            `\n[Note: full page was ${fullLength} chars. No matches found ` +
-            `for claim terms (${terms.slice(0, 6).join(', ')}). The fact you are ` +
-            'looking for may not appear in this source.]'
-        );
+        // Zero-match fallback: split the remaining budget between the head
+        // and tail of the rest of the page. Abstracts and thesis statements
+        // tend to be at the front; conclusions and summaries tend to be at
+        // the end; the middle is where topic drift lives. Strictly better
+        // than lead-only when token-matching fails on paraphrase or
+        // synonym-heavy claims.
+        // Budget for section headers + the explanatory note. Upper-bounded
+        // by a worst-case measurement: the note includes up to 6 query
+        // terms plus the full-length string, and section headers run ~150
+        // chars total. 600 gives comfortable margin without wasting budget.
+        const headerReserve = 600;
+        const remaining = Math.max(0, opts.maxTotalChars - lead.length - headerReserve);
+        if (remaining >= 1000 && restOfPage.length > 0) {
+            strategy = 'lead+head+tail';
+            const halfBudget = Math.floor(remaining / 2);
+            const headEnd = Math.min(restOfPage.length, halfBudget);
+            const tailStart = Math.max(headEnd, restOfPage.length - halfBudget);
+            const head = restOfPage.slice(0, headEnd);
+            const tail = restOfPage.slice(tailStart);
+            const shownTerms = terms.slice(0, 6).map(t => `"${t}"`).join(', ');
+
+            parts.push(
+                `\n## Remainder of page — fallback view\n` +
+                `[Note: full page was ${fullLength} chars. The claim's specific ` +
+                `terms (${shownTerms}) did not match any paragraph past the lead, ` +
+                `so we fell back to showing the head and tail of the remainder.]\n`
+            );
+            parts.push(`### Head of remainder (${head.length} chars)\n${head}`);
+            // Only include tail if it's not already contained in head.
+            if (tailStart > headEnd) {
+                parts.push(
+                    `\n### Tail of remainder (${tail.length} chars, ` +
+                    `from char ${opts.leadChars + tailStart} onward)\n${tail}`
+                );
+            }
+        } else {
+            strategy = 'lead-only';
+            parts.push(
+                `\n[Note: full page was ${fullLength} chars. No matches found ` +
+                `for claim terms (${terms.slice(0, 6).join(', ')}). The fact you are ` +
+                'looking for may not appear in this source.]'
+            );
+        }
     } else {
         strategy = 'lead-only';
     }

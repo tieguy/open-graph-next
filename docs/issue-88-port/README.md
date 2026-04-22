@@ -10,7 +10,7 @@ Worker imports and a self-contained test for the post-patch pipeline.
 | File | Purpose |
 |---|---|
 | `extract-relevant-content.mjs` | Pure ESM port of `_extract_query_matches` + the lead/excerpts logic from `wikidata-SIFT/scripts/tool_executor.py:web_fetch`. No runtime dependencies. Goes into `src/` of the Worker repo. |
-| `sanity-test.mjs` | 25 unit-style checks for the algorithm in isolation. Run with `node sanity-test.mjs`. |
+| `sanity-test.mjs` | 40 unit-style checks for the algorithm in isolation, covering the 'short', 'fallback', 'lead+matches', 'lead+head+tail', and 'lead-only' strategies, plus IDF weighting, proper-noun/numeric boost, and multi-hit scoring. Run with `node sanity-test.mjs`. |
 | `main.js.patch` | Three-hunk diff against [`alex-o-748/citation-checker-script`](https://github.com/alex-o-748/citation-checker-script)'s `main.js`. Adds an optional `claim` arg to `fetchSourceContent`, forwards it to the proxy as `&query=…`. Apply with `git apply main.js.patch` from the repo root. |
 | `index.js.patch` | Diff against [`alex-o-748/public-ai-proxy`](https://github.com/alex-o-748/public-ai-proxy)'s `src/index.js`. Reads the new `query` param, preserves paragraph breaks through extraction, routes both HTML and PDF paths through `extractRelevantContent`. Apply with `git apply index.js.patch` from that repo's root after copying `extract-relevant-content.mjs` into `src/`. |
 | `worker-changes.md` | What `index.js.patch` does, hunk-by-hunk, plus a backward-compatibility matrix and a UI follow-up sketch. |
@@ -95,7 +95,7 @@ This is the same algorithm we run today in
 cd docs/issue-88-port
 
 # Algorithm unit checks
-node sanity-test.mjs              # 25 checks
+node sanity-test.mjs              # 40 checks
 
 # End-to-end pipeline check (post-patch HTML + relevance extractor)
 node worker-pipeline-test.mjs     # 16 checks
