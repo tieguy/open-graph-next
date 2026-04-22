@@ -1,10 +1,10 @@
-// Quick sanity test for extract-relevant-content.js.
-// Run with: node sanity-test.js
+// Quick sanity test for extract-relevant-content.mjs.
+// Run with: node sanity-test.mjs
 //
 // Not a real test suite — just a few representative inputs to confirm the
 // algorithm picks the right paragraphs and respects the caps.
 
-const { extractRelevantContent, tokenizeClaim } = require('./extract-relevant-content.js');
+import { extractRelevantContent, tokenizeClaim } from './extract-relevant-content.mjs';
 
 let failures = 0;
 function check(name, cond, info) {

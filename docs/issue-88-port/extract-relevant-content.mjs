@@ -1,8 +1,9 @@
-// extract-relevant-content.js
+// extract-relevant-content.mjs
 //
 // Query-aware extraction of relevant snippets from a long source document.
-// Pure ES6, no DOM, no Node-only APIs — runs in a browser, in a Cloudflare
-// Worker, or under Node.
+// Pure ES module, no DOM, no Node-only APIs — runs in a Cloudflare Worker
+// or under Node 14+. The companion sanity test (sanity-test.mjs) imports
+// from this file directly.
 //
 // Ported from wikidata-SIFT/scripts/tool_executor.py (`_extract_query_matches`
 // + the lead/excerpts logic in `web_fetch`). Designed for issue
@@ -250,14 +251,4 @@ function extractRelevantContent(text, query, options) {
     };
 }
 
-// UMD-style export. We avoid the ESM `export` keyword on purpose: the
-// Wikipedia user script loads main.js as a classic browser script, not a
-// module, and a top-level `export` would syntax-error there. For the
-// Cloudflare Worker, wrap with `export { extractRelevantContent }` in the
-// Worker file itself, or `import` from a small ESM shim.
-const __exports = { extractRelevantContent, tokenizeClaim, extractQueryMatches, DEFAULTS };
-if (typeof module !== 'undefined' && module.exports) {
-    module.exports = __exports;
-} else if (typeof globalThis !== 'undefined') {
-    globalThis.CitationCheckerExtract = __exports;
-}
+export { extractRelevantContent, tokenizeClaim, extractQueryMatches, DEFAULTS };
