@@ -4,6 +4,9 @@
 # Claude Code
 .claude
 
+# Tapestry rendering experiment — vendored viewer + generated .tapestry/.html build outputs
+/tapestry/
+
 # Chainlink issue tracker
 .chainlink
 

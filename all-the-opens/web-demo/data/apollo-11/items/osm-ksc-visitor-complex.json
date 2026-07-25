@@ -3,5 +3,6 @@
   "source": "openstreetmap",
   "title": "Kennedy Space Center Visitor Complex",
   "description": "The visitor center at Kennedy Space Center featuring exhibits, IMAX theaters, and historic spacecraft including the Saturn V rocket and Space Shuttle Atlantis.",
+  "thumbnail": "https://maps.wikimedia.org/img/osm-intl,15,28.5243,-80.6819,420x260@2x.png",
   "url": "https://www.openstreetmap.org/way/166133965"
 }

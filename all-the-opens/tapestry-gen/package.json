@@ -1,0 +1,10 @@
+{
+  "name": "tapestry-gen",
+  "private": true,
+  "type": "module",
+  "description": "Generates a Tapestry canvas from the Apollo 11 dataset",
+  "scripts": {
+    "generate": "node generate.js",
+    "test": "node --test 'test/*.test.js'"
+  }
+}
