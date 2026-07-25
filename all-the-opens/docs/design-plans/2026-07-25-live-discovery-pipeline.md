@@ -158,6 +158,7 @@ All property IDs and query shapes below were verified live on 2026-07-25.
 
 | Pivot | Input | Query | Strength |
 | --- | --- | --- | --- |
+| `freelaw-by-citation` | reporter citation (`P1031`, or the infobox row) | CourtListener `/c/{reporter}/{vol}/{page}/` | identifier |
 | `ia-by-identifier` | ISBN / OCLC / LCCN / OL work key | `advancedsearch.php` | identifier |
 | `ia-by-archive-url` | `archive-url` on a citation | direct item resolution | identifier |
 | `ol-by-isbn` | ISBN | OL by bibliographic key | identifier |
@@ -168,9 +169,21 @@ All property IDs and query shapes below were verified live on 2026-07-25.
 | `collection-creator` | creator name + dates | `collection:<c> AND creator:"…"` | corroborated |
 | `unreachable` | `P7851`, `P9473`, `P625` | none — renders a tile | n/a |
 
-The first three consume identifiers the article states outright, with no entity
+The first four consume identifiers the article states outright, with no entity
 resolution step in front of them. They are the highest-yield pivots and the
 cheapest.
+
+**The primary source outranks writing about it.** Brown v. Board is in the fixture
+set to reach the *opinion*, not books about the case. `Q875738` carries `P1031`
+"legal citation of this text" → `347 U.S. 483` (plus three parallel reporters), the
+same string the article's infobox displays, and
+`courtlistener.com/c/U.S./347/483/` resolves it to
+`/opinion/105221/brown-v-board-of-education/`. Free Law Project is keyless and
+sends CORS reflecting the requesting origin, so a static page can call it.
+
+This generalises past case law: where an article's subject *is* a document, the
+open ecosystem's best offering is that document. A citation identifier reaching a
+primary source should rank above any secondary work the same pipeline finds.
 
 Verified property labels: `P921` main subject, `P212` ISBN-13, `P957` ISBN-10,
 `P648` Open Library ID, `P724` Internet Archive ID, `P747` has edition or
@@ -347,16 +360,19 @@ citation-derived and an entity-derived ISBN without special-casing.
 **Goal:** The highest-yield route, and the one needing no entity resolution.
 
 **Components:** `src/pivots/archive.js` — `isbn:`, `lccn:`,
-`external-identifier:"urn:oclc:record:…"`, `openlibrary_work:`, plus direct
-resolution of `archive-url` citations that already point at archive.org.
-`src/pivots/openlibrary.js` — lookup by bibliographic key; covers via
-`covers.openlibrary.org`.
+`external-identifier:"urn:oclc:record:…"`, `openlibrary_work:`, each constrained
+with `AND mediatype:texts` in the query, plus direct resolution of `archive-url`
+citations that already point at archive.org. `src/pivots/openlibrary.js` — lookup
+by bibliographic key; covers via `covers.openlibrary.org`.
+`src/pivots/freelaw.js` — reporter citation → CourtListener opinion.
 
 **Dependencies:** Phase 2.
 
 **Done when:** Apollo 11's cited books resolve to Internet Archive copies placed in
-the sections that cite them; covers load with no additional API call; OL keys
-harvested out of IA responses are used for display only.
+the sections that cite them; Brown v. Board resolves `347 U.S. 483` to the opinion
+and ranks it above secondary works; covers load with no additional API call; OL
+keys harvested out of IA responses are used for display only; no donation pallet
+manifest appears in any result.
 
 ### Phase 4: Entity pivots
 
@@ -449,6 +465,73 @@ coverage report per article in the style of the current tier table.
 each coverage report is committed as the baseline.
 
 ## Additional Considerations
+
+**Constrain `mediatype` inside the Internet Archive query.** `isbn:` is a genuine
+Solr field, but it is multi-valued and book-dealer donation manifests are indexed
+with every ISBN on the pallet — `bwb_daily_pallets_2021-03-19` carries 8,142. They
+are therefore *true* field matches that outrank the book. They are `mediatype:
+data`, so `isbn:<n> AND mediatype:texts` removes them at the source; on a test ISBN
+this took the result set from a pallet manifest at rank 1 to `numFound: 1`, the
+correct book. Filtering after the fact instead wastes every requested row on
+records that can never qualify.
+
+**Anchor specificity is disclosed, not suppressed.** Verified across all three
+fixtures in the spike: the entity→Commons route succeeds on specific anchors
+(Neil Armstrong, Charles Duke, Walter Huxman → correct portraits and photographs)
+and fails on broad ones. *Soviet Union* on Apollo 11's Background returned a MiG-25,
+Brezhnev, Soviet advisors in Angola and a pocket calculator; *Freising* and
+*Göttingen* on Prandtl returned cathedral frescoes and a 1917 banknote; *Supreme
+Court of the United States* on Brown returned an unrelated Elena Kagan opinion.
+Every one is a correct `P180` match — the anchor is simply too broad for four files
+to mean anything.
+
+**Depiction count does not predict quality — entity class does.** An earlier draft
+proposed thresholding on `totalhits` (available at no extra request, but only if
+`gsrinfo=totalhits` is passed; `generator=search` omits `searchinfo` otherwise).
+Measured against the fixtures, that signal is wrong:
+
+| Anchor | Depictions | Result |
+| --- | --- | --- |
+| Neil Armstrong | 221 | excellent — crew photography |
+| Jim Lovell | 286 | excellent |
+| Soviet Union | 1,212 | MiG-25, Brezhnev, a pocket calculator |
+| Freising | 176 | cathedral frescoes, unrelated to the subject |
+| Charles Duke | 3 | excellent |
+| Walter A. Huxman | 2 | excellent |
+
+A person's depictions are all *of that person*, so any four are fine however many
+exist and Commons' relevance ranking does real work. A country's or city's
+depictions are of everything merely located there, so four are four random objects.
+The predictor is `P31` class — humans, spacecraft, buildings and works are
+depiction-homogeneous; countries, settlements, institutions, periods and abstract
+concepts are not. Count is worth **disclosing** but must not be used to gate.
+
+**The arbitrariness is disclosed, not filtered.** A band whose media came from a
+broad anchor is labelled with the anchor and its depiction count — *"anchored on
+Nazi Germany · 4 of 3,412 depictions, arbitrarily selected"*. This is provenance,
+the same thing every other part of the design states: how the item got here.
+Without it a reader cannot tell a representative selection from a coin flip.
+
+Filtering broad anchors out instead would make the prototype look better and show
+nothing. The selection rule failing visibly is the useful output of a design
+exploration, and the fix — specificity thresholds, entity-class restrictions,
+editorial review — is the conversation the prototype exists to start.
+
+Note that this applies uniformly. The Göttingen banknotes, the MiG-25 under Apollo's
+Background, and the Hitler portraits under Prandtl's "Third Reich" section are one
+failure mode, not two; the last is simply where an arbitrary draw is most
+conspicuous.
+
+**Anchors must come from prose, not `prop=links`.** That list includes everything
+inside `<ref>` tags, so unranked, a section's first anchors are its first
+footnotes. In the spike this made *ISBN* and *Wayback Machine* into anchors, whose
+Commons depictions are barcode diagrams. Strip `ol.references`, `sup`, and tables
+before extracting, and exclude citation apparatus by name.
+
+**Repeat attestation thickens, it does not duplicate.** A work cited in several
+sections is currently emitted once per section — *Simple Justice* appears in two
+bands, *The Memoirs of Earl Warren* in two. First placement wins and subsequent
+attestations add to `linkedVia`; the renderer must not show the item twice.
 
 **Open Library keys are not canonical.** Wikidata holds `OL5332088W` for *Carrying
 the Fire*; Internet Archive's record for the same book says `OL15882823W`. Open

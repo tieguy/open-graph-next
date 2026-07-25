@@ -19,6 +19,7 @@ const SOURCE = {
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/120px-Smithsonian_sun_logo_no_text.svg.png',
   },
   openstreetmap: { name: 'OpenStreetMap', icon: 'https://www.openstreetmap.org/favicon.ico' },
+  free_law: { name: 'Free Law Project', icon: 'https://www.courtlistener.com/favicon.ico' },
   inaturalist: { name: 'iNaturalist', icon: 'https://www.inaturalist.org/favicon.ico' },
   gbif: { name: 'GBIF', icon: 'https://www.gbif.org/favicon.ico' },
 }
@@ -116,7 +117,13 @@ function band(b, eyebrow, inline) {
         .map((c) => citation(c, inline))
         .join('')}</ul></div>`
     : ''
-  const rail = media || sources ? `<aside class="rail">${media}${sources}</aside>` : ''
+  // An optional line stating how this band's media was selected. Used when the
+  // anchor that produced it is broad enough that the selection is arbitrary —
+  // the prototype discloses that rather than filtering it out of sight.
+  const disclosure = b.disclosure
+    ? `<p class="disclosure">${escapeHtml(b.disclosure)}</p>`
+    : ''
+  const rail = media || sources ? `<aside class="rail">${disclosure}${media}${sources}</aside>` : ''
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}">` +
     `<header class="band-head"><span class="eyebrow">${escapeHtml(eyebrow)}</span><h2>${escapeHtml(b.title)}</h2></header>` +
@@ -247,6 +254,8 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
 .card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
 
+.disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
+  margin:0 0 14px;padding:7px 9px;background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
 .sources{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule)}
 .rail-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);margin:0 0 14px}
