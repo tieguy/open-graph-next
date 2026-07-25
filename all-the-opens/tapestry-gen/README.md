@@ -1,23 +1,39 @@
 # tapestry-gen
 
-Generates `tapestry/apollo-11.tapestry` from the Apollo 11 dataset in
-`web-demo/data/apollo-11/`. Design: `docs/design-plans/2026-07-23-article-tapestry.md`.
+Renders the Apollo 11 dataset in `web-demo/data/apollo-11/` as *"the article,
+enriched."* Two outputs from one run: **`demo/apollo-11.html`** (the primary,
+self-contained render) and `../tapestry/apollo-11.tapestry` (the Internet Archive
+Tapestry format — retained but secondary; its viewer/artifacts are gitignored).
+Design: `docs/design-plans/2026-07-23-article-tapestry.md`. Intent and contracts:
+`CLAUDE.md`.
 
 Zero dependencies. Node 22+ (uses `zlib.crc32` and built-in `fetch`).
 
 ```
-npm run generate    # writes ../tapestry/apollo-11.tapestry
-npm test            # 37 tests, no network
+npm run generate    # writes demo/apollo-11.html and ../tapestry/apollo-11.tapestry
+npm test            # no network
 ```
 
-Then view it:
+Then just open `demo/apollo-11.html` in a browser — it is self-contained. (To
+view the `.tapestry` instead: `python -m http.server 8000 -d ../tapestry` and open
+`viewer/?source=../apollo-11.tapestry`.)
 
-```
-python -m http.server 8000 -d tapestry
-# http://localhost:8000/viewer/?source=../apollo-11.tapestry
-```
+## HTML render
 
-## Status: phase 3 of 5
+The primary output. A single scrolling page: a two-column reading spine (article
+left; the ecosystem's media and cited sources in a right rail), media grouped into
+per-source horizontal carousels labelled with each source's own favicon, and the
+section's **selected sources** ranked by reachability — a borrowable/readable book
+first, then an archived page, then a DOI, then a bare live link. Cited books link
+to their Internet Archive copy; OpenLibrary covers are inlined as data URIs (they
+redirect through archive.org, so a live link would break when IA is down); OSM
+place items get keyless `maps.wikimedia.org` map thumbnails. Built by
+`src/emit-html.js` over the same model the Tapestry emitter uses.
+
+## Status: phases 1–3 (spine + media + citations); rendered to HTML
+
+The sections below narrate how the Tapestry render was built phase by phase; the
+pipeline they describe is unchanged and feeds the HTML render too.
 
 The spine carries the article's full prose, and every dataset item renders as a figure —
 picture plus a caption stating why it landed where it did. Making the placement rule

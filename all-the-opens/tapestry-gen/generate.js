@@ -37,8 +37,10 @@ import { parseRootJson, ROOT_FILE } from './vendor/parse-root.mjs'
 const HERE = dirname(fileURLToPath(import.meta.url))
 const DATA_DIR = join(HERE, '..', 'web-demo', 'data', 'apollo-11')
 const CACHE_DIR = join(HERE, '.cache')
+// The HTML render is the committed demo; the .tapestry goes to the gitignored
+// tapestry/ dir (the vendored viewer's home), so the two live apart.
 const OUT = join(HERE, '..', 'tapestry', 'apollo-11.tapestry')
-const HTML_OUT = join(HERE, '..', 'tapestry', 'apollo-11.html')
+const HTML_OUT = join(HERE, 'demo', 'apollo-11.html')
 const PAGE = 'Apollo 11'
 // Fixed so output is byte-reproducible across runs.
 const GENERATED_AT = '2026-07-23T00:00:00.000Z'
@@ -391,6 +393,7 @@ async function main() {
 
   // Second rendering: the same bands as a single scrolling HTML page, where the
   // prose reflows around the media instead of leaving a fixed lane empty.
+  await mkdir(dirname(HTML_OUT), { recursive: true })
   await writeFile(
     HTML_OUT,
     buildHtml({
