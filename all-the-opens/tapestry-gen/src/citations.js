@@ -44,6 +44,16 @@ export function templateParams(text) {
   return params
 }
 
+/** A template's positional arguments (the parts with no `key=`), trimmed. */
+function positionalArgs(text) {
+  const inner = text.replace(/^\s*\{\{/, '').replace(/\}\}\s*$/, '')
+  return splitTopLevel(inner, '|')
+    .slice(1) // the template name
+    .filter((part) => part.indexOf('=') < 0)
+    .map((part) => part.trim())
+    .filter(Boolean)
+}
+
 /** The first balanced `{{…}}` template in a string, braces included, or null. */
 function extractTemplate(text) {
   const start = text.indexOf('{{')
@@ -89,6 +99,15 @@ function normalizeIsbn(value) {
 }
 
 /**
+ * An ISBN only if it is one. A malformed value costs a catalogue lookup and
+ * returns nothing, so it is dropped here rather than searched for.
+ */
+function validIsbn(value) {
+  const isbn = normalizeIsbn(value)
+  return isbn && (isbn.length === 10 || isbn.length === 13) ? isbn : null
+}
+
+/**
  * A single citation template → a structured citation, or null when the ref holds
  * no `{{cite …}}`/`{{citation}}` template (a bare explanatory note, say).
  */
@@ -125,6 +144,109 @@ export function sectionCitations(wikitext) {
     if (c) cites.push(c)
   }
   return cites
+}
+
+// --- shortened footnotes ----------------------------------------------------
+//
+// The extraction above assumes each <ref> carries its own identifiers. Mature
+// articles routinely do not: they cite with {{sfn|Last|Year|p=N}} pointers into
+// one pooled bibliography, so the sections hold the attribution and a section
+// called "Sources" holds every ISBN. Apollo 11 keeps 19 of its 22 ISBNs that
+// way — read as ordinary refs it yields nothing at all.
+//
+// Recovering those is a join, not a heuristic: parse the bibliography into
+// (surname, year) → identifiers, parse each section's pointers, and attribute
+// the result to the section holding the pointer. The article still decides
+// placement; in this style it does so with two hops instead of one.
+
+/** A publication year as short citations write it — 1994, or 1969a when disambiguated. */
+const YEAR = /^\d{4}[a-z]?$/i
+
+/** The join key a surname and year make. Case is not significant in either. */
+const harvardKey = (surname, year) => `${surname.toLowerCase()}|${year.toLowerCase()}`
+
+/**
+ * The short-citation pointers in a section's wikitext, in document order and
+ * including repeats — a work cited five times is five pointers here, and the
+ * caller decides whether that means anything.
+ *
+ * A pointer with no year cannot be joined against a bibliography, so it is not
+ * a pointer for our purposes.
+ */
+export function shortCitePointers(wikitext) {
+  const out = []
+  const re = /\{\{\s*(?:sfnp?|sfnm|harvnb|harvtxt|harv)\s*\|([^{}]*)\}\}/gi
+  let m
+  while ((m = re.exec(wikitext ?? ''))) {
+    const args = positionalArgs(`{{x|${m[1]}}}`)
+    const yearAt = args.findLastIndex((a) => YEAR.test(a))
+    if (yearAt < 1) continue // no year, or no surname in front of it
+    const surnames = args.slice(0, yearAt).map((s) => s.toLowerCase())
+    out.push({ surnames, year: args[yearAt], key: harvardKey(surnames[0], args[yearAt]) })
+  }
+  return out
+}
+
+/**
+ * A bibliography section's full citations, keyed the way its article's short
+ * citations point at them. Entries carrying no identifier are left out — they
+ * name a source but open no path to it, which is all this map is for.
+ *
+ * @returns {Map<string, {title: string|null, isbn: string|null, oclc: string|null, lccn: string|null}>}
+ */
+export function bibliographyIdentifiers(wikitext) {
+  const bib = new Map()
+  // Footnote bodies are not bibliography entries; a Notes section can hold both.
+  const text = (wikitext ?? '').replace(/<ref\b[^>]*>[\s\S]*?<\/ref>/gi, '')
+  const re = /\{\{\s*(?:cite[ _][a-z]+|citation)\b/gi
+  let m
+  while ((m = re.exec(text))) {
+    const tpl = extractTemplate(text.slice(m.index))
+    if (!tpl) continue
+    const p = templateParams(tpl)
+
+    const surname = stripMarkup(p.get('last') ?? p.get('last1') ?? p.get('author') ?? p.get('author1'))
+    const stated = p.get('year')?.trim()
+    const year = stated && YEAR.test(stated) ? stated : /\b(\d{4})\b/.exec(p.get('date') ?? '')?.[1]
+    if (!surname || !year) continue
+
+    const entry = {
+      title: stripMarkup(p.get('title')),
+      isbn: validIsbn(p.get('isbn')),
+      oclc: p.get('oclc')?.trim() || null,
+      lccn: p.get('lccn')?.trim() || null,
+    }
+    if (!entry.isbn && !entry.oclc && !entry.lccn) continue
+
+    // An explicit {{sfnref|Name|Year}} overrides the surname the entry states —
+    // it exists precisely because the two disagree.
+    const custom = /\{\{\s*sfnref\s*\|([^{}]*)\}\}/i.exec(p.get('ref') ?? '')
+    if (custom) {
+      const args = positionalArgs(`{{x|${custom[1]}}}`)
+      if (args.length >= 2) bib.set(harvardKey(args[0], args[args.length - 1]), entry)
+    }
+    const key = harvardKey(surname, year)
+    if (!bib.has(key)) bib.set(key, entry) // first entry wins, as the article lists it
+  }
+  return bib
+}
+
+/**
+ * A section's short citations resolved through a bibliography — the identifiers
+ * it cites, in the order it cites them, each work once. Pointers with no
+ * matching entry resolve to nothing: a dangling {{sfn}} is a flaw in the
+ * article, and inventing a target for it would be worse than dropping it.
+ */
+export function resolveShortCites(wikitext, bibliography) {
+  const seen = new Set()
+  const out = []
+  for (const pointer of shortCitePointers(wikitext)) {
+    if (seen.has(pointer.key)) continue
+    seen.add(pointer.key)
+    const entry = bibliography.get(pointer.key)
+    if (entry) out.push(entry)
+  }
+  return out
 }
 
 /**

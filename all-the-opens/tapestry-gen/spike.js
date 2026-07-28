@@ -28,7 +28,13 @@ import {
   fetchSections,
   fetchSectionWikitext,
 } from './src/wikipedia.js'
-import { prioritizeCitations, sectionCitations, templateParams } from './src/citations.js'
+import {
+  bibliographyIdentifiers,
+  prioritizeCitations,
+  resolveShortCites,
+  sectionCitations,
+  templateParams,
+} from './src/citations.js'
 import { buildHtml } from './src/emit-html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -46,6 +52,11 @@ const BROAD_ANCHOR = Number(process.env.BROAD_ANCHOR ?? 40)
 
 const SKIP =
   /^(see also|references|notes|citations|sources|bibliography|further reading|external links|works cited|primary sources)$/i
+
+// Apparatus sections that hold full citations rather than only footnote bodies.
+// "External links" and "See also" never do; "References" sometimes does, when
+// the article puts its bibliography there instead of a {{reflist}}.
+const BIBLIOGRAPHY = /^(sources|bibliography|works cited|primary sources|references|notes|citations)$/i
 
 /**
  * Every network call is disk-cached, so reruns are offline and reproducible.
@@ -105,6 +116,20 @@ function citationIdentifiers(wikitext) {
     if (entry.isbn || entry.oclc || entry.lccn) out.push(entry)
   }
   return out
+}
+
+/**
+ * One entry per work. A section that cites a book directly and again through
+ * the bibliography would otherwise spend two of its three slots on one book.
+ */
+function dedupeIdentifiers(entries) {
+  const seen = new Set()
+  return entries.filter((e) => {
+    const key = e.isbn ?? e.oclc ?? e.lccn ?? e.title
+    if (!key || seen.has(key)) return false
+    seen.add(key)
+    return true
+  })
 }
 
 const stop = new Set(['the', 'a', 'an', 'of', 'and', 'in', 'to', 'its', 'on', 'for'])
@@ -286,6 +311,20 @@ async function main() {
   const sections = all.filter((s) => !SKIP.test(s.title)).slice(0, MAX_SECTIONS)
   const dropped = all.filter((s) => !SKIP.test(s.title)).length - sections.length
 
+  // The apparatus sections are not rendered, but on an {{sfn}}-style article
+  // they hold every identifier the body points at. Read them once, up front.
+  const bibliography = new Map()
+  for (const s of all.filter((s) => BIBLIOGRAPHY.test(s.title))) {
+    try {
+      for (const [k, v] of bibliographyIdentifiers(await fetchSectionWikitext(CACHE, page, s.index))) {
+        if (!bibliography.has(k)) bibliography.set(k, v)
+      }
+    } catch (e) {
+      console.error(`  bibliography section "${s.title}" failed: ${e.message}`)
+    }
+  }
+  if (bibliography.size) console.error(`bibliography: ${bibliography.size} identified works`)
+
   // The article's own subject, for identifiers that describe the whole page
   // rather than one section (a case citation, coordinates, a Smithsonian ID).
   const subjectQid = (await fetchQids(CACHE, [page])).get(page)
@@ -308,7 +347,7 @@ async function main() {
   const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
 
   const bands = []
-  const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, sections: 0 }
+  const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, viaShortCite: 0, sections: 0 }
 
   // Lede first, then body sections, each carrying its own anchors.
   process.stderr.write(`fetching ${sections.length + 1} sections`)
@@ -327,8 +366,16 @@ async function main() {
 
     const wikitext = await fetchSectionWikitext(CACHE, page, unit.index)
     const cites = prioritizeCitations(sectionCitations(wikitext), CITES_PER_SECTION)
-    const identified = citationIdentifiers(wikitext).slice(0, CITES_PER_SECTION)
+    // Both citation styles, in that order: identifiers the section states
+    // outright, then the ones it points at through the bibliography. Direct
+    // refs come first only because they cost no join to trust.
+    const shortCites = resolveShortCites(wikitext, bibliography)
+    const identified = dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]).slice(
+      0,
+      CITES_PER_SECTION,
+    )
     stats.anchorsCite += identified.length
+    stats.viaShortCite += identified.filter((c) => shortCites.includes(c)).length
 
     const entries = []
 
@@ -409,7 +456,8 @@ async function main() {
   await writeFile(out, html)
 
   console.error(
-    `\n${page}: ${stats.sections} sections, ${stats.anchorsCite} citation anchors, ` +
+    `\n${page}: ${stats.sections} sections, ${stats.anchorsCite} citation anchors ` +
+      `(${stats.viaShortCite} via the bibliography), ` +
       `${stats.anchorsQid} entity anchors -> ${stats.ia} IA + ${stats.commons} Commons items` +
       (opinion ? ' + 1 Free Law opinion' : '') +
       (dropped > 0 ? ` (${dropped} sections dropped by MAX_SECTIONS)` : ''),
