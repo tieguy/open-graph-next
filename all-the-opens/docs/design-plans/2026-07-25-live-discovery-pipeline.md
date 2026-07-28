@@ -117,7 +117,26 @@ the placement, and supplies the identifier.
 
 `citations.js` already extracts per-section `{{cite}}` templates, but only reads
 `isbn`, `doi` and `archive-url`. Widening it to `oclc`, `lccn`, `issn` and
-`bibcode` is most of the work.
+`bibcode` is part of the work.
+
+**Two citation styles, and only one is direct.** Measured on the fixtures:
+
+| Style | Identifiers live | Section attribution | Spike result |
+| --- | --- | --- | --- |
+| Inline `{{cite}}` inside `<ref>` (Brown v. Board) | in each `<ref>` | by construction | 10 IA items |
+| `{{sfn}}` + a Sources section (Apollo 11) | pooled in one apparatus section | in the `{{sfn}}` pointers | **0 IA items** |
+
+Apollo 11 carries 169 `{{sfn}}` references and keeps 19 of its 22 ISBNs in a
+section called "Sources", which is skipped as apparatus. Reading only `<ref>`
+contents therefore finds almost nothing on it — and shortened footnotes are
+standard on mature and featured articles, so this style of extraction fails
+hardest on the **best-sourced** articles.
+
+Handling it is a join, not a compromise: parse the bibliography section into
+`(last, year) → identifiers`, parse each body section's `{{sfn|Last|Year}}`, and
+attribute the resulting anchor to the section holding the pointer. The article
+still decides placement; in this style it does so with two hops instead of one.
+Both styles must be supported before any coverage number is meaningful.
 
 **Wikilinks.** Parsoid HTML gives `<section data-mw-section-id="N">` wrappers
 containing `<a rel="mw:WikiLink">`, so each link carries its section. A single
@@ -336,9 +355,11 @@ widened from `isbn`/`doi`/`archive-url` to also read `oclc`, `lccn`, `issn` and
 **Dependencies:** none.
 
 **Done when:** Apollo 11, Brown v. Board and the Leiden author each yield a ranked
-anchor list with correct section attribution; Apollo 11's citation anchors surface
-the measured identifier counts (22 ISBN, 24 OCLC, 6 LCCN, 149 archive-url); tests
-cover lede/body precedence and the Parsoid duplicate-occurrence case.
+anchor list with correct section attribution; **both citation styles resolve** —
+Brown's inline `{{cite}}` refs and Apollo 11's `{{sfn}}` → Sources join, the latter
+surfacing the 19 ISBNs currently unreachable; tests cover lede/body precedence, the
+Parsoid duplicate-occurrence case, and an `{{sfn}}` whose target is missing from
+the bibliography.
 
 ### Phase 2: Pivot registry and scheduler
 

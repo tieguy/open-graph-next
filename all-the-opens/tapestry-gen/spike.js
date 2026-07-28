@@ -44,7 +44,8 @@ const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
 // Above this many depictions, showing four of them is an arbitrary draw.
 const BROAD_ANCHOR = Number(process.env.BROAD_ANCHOR ?? 40)
 
-const SKIP = /^(see also|references|notes|citations|sources|bibliography|further reading|external links)$/i
+const SKIP =
+  /^(see also|references|notes|citations|sources|bibliography|further reading|external links|works cited|primary sources)$/i
 
 /**
  * Every network call is disk-cached, so reruns are offline and reproducible.
@@ -227,13 +228,19 @@ async function commonsDepicting(qid) {
 /** Labels of the entities we anchored on, for the disclosure line. */
 async function entityLabels(qids) {
   if (!qids.length) return new Map()
-  const url =
-    'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-    `&ids=${qids.join('|')}&props=labels&languages=en`
-  const body = await getJson(url)
-  return new Map(
-    Object.entries(body.entities ?? {}).map(([q, e]) => [q, e.labels?.en?.value ?? q]),
-  )
+  try {
+    const url =
+      'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
+      `&ids=${qids.join('|')}&props=labels&languages=en`
+    const body = await getJson(url)
+    return new Map(
+      Object.entries(body.entities ?? {}).map(([q, e]) => [q, e.labels?.en?.value ?? q]),
+    )
+  } catch (e) {
+    // Cosmetic: the disclosure falls back to bare QIDs rather than failing.
+    console.error(`  label lookup failed: ${e.message}`)
+    return new Map()
+  }
 }
 
 // Citation apparatus that `prop=links` reports as ordinary wikilinks. These are
@@ -284,11 +291,16 @@ async function main() {
   const subjectQid = (await fetchQids(CACHE, [page])).get(page)
   let subjectClaims = {}
   if (subjectQid) {
-    const body = await getJson(
-      'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-        `&ids=${subjectQid}&props=claims`,
-    )
-    subjectClaims = body.entities?.[subjectQid]?.claims ?? {}
+    try {
+      const body = await getJson(
+        'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
+          `&ids=${subjectQid}&props=claims`,
+      )
+      subjectClaims = body.entities?.[subjectQid]?.claims ?? {}
+    } catch (e) {
+      // Cosmetic: the whole-page identifiers are optional enrichment.
+      console.error(`  subject claims failed: ${e.message}`)
+    }
   }
   const reporterCites = (subjectClaims.P1031 ?? [])
     .map((c) => c.mainsnak?.datavalue?.value)
