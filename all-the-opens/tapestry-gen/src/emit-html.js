@@ -169,6 +169,16 @@ export function buildHtml({ title, description, bands, inline = new Map() }) {
     .map((m) => `<span class="key"><img class="fav" src="${m.icon}" alt="" loading="lazy">${escapeHtml(m.name)}</span>`)
     .join('')
 
+  // Explain the one visual distinction that carries an argument, and only when
+  // the page actually uses it — a key to a style nothing on the page has is
+  // noise, and worse, implies a rigour this render did not exercise.
+  const hasCorroborated = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
+  const evidenceKey = hasCorroborated
+    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card was matched on a described object — ` +
+      `an author, a date and an institution that agree — not on an identifier the two sources share. ` +
+      `The agreeing values are printed on the card.</p>`
+    : ''
+
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -188,6 +198,7 @@ ${STYLE}
     <b>wikilinks</b>, resolved through <b>Wikidata</b> identifiers, put it — the article on the
     left, the open ecosystem’s media and the sources it cites in the margin beside it.</p>
   <div class="legend">${legend}</div>
+  ${evidenceKey}
 </header>
 <main>
 ${body}
@@ -276,6 +287,8 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
+.evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
+.evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
 .coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}
 /* Corroborated edges read differently on purpose: a dashed rule and a stated
    reason, so a described-object match is never mistaken for a shared identifier. */

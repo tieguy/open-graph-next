@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-07-25
+Last verified: 2026-07-28
 
 ## Purpose
 
@@ -20,6 +20,34 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
   `../tapestry/apollo-11.tapestry` (gitignored).
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
+
+## Two entry points
+
+- **`generate.js`** — the original, dataset-bound: renders Apollo 11 from the
+  curated `web-demo/data/apollo-11/`. Unchanged in intent.
+- **`spike.js`** — the **live discovery** path and where current work happens:
+  `node spike.js "Any Article Title"` builds an enriched page for an arbitrary
+  English Wikipedia article with no dataset and no per-article code. Items are
+  discovered at read time by pivoting from the article's own anchors. Writes
+  `demo/spike-<slug>.html`. Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
+  current state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
+
+Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
+inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
+
+## Evidence classes (spike)
+
+An edge is one of three things, and the render distinguishes them because
+conflating them would overstate what the page knows:
+
+- **identifier** — a shared authority ID (ISBN/OCLC/LCCN → Internet Archive).
+- **statement** — a Wikidata claim (`P180 depicts` → Commons).
+- **corroborated** — no shared identifier at all; the candidate satisfies an
+  object Wikidata *describes* (`P1026` → author + year + institution). Rendered
+  with a dashed card that prints the agreeing values, plus a legend entry that
+  appears only on pages that use it. `src/corroborate.js` decides these; all
+  three signals are required, because the same collection holds theses by Ludwig,
+  Hans and Antonius Prandtl.
 
 ## Pipeline (output-agnostic core → renderer)
 
@@ -52,6 +80,13 @@ Tapestry `layout`/`emit`/`zip`).
 
 ## Gotchas
 
+- **Sandboxed runs need `NODE_USE_ENV_PROXY=1`.** The sandbox routes egress
+  through an HTTP proxy; `curl` honours `HTTP_PROXY` automatically but Node's
+  `fetch` does not, so every request fails with `EAI_AGAIN` without it. Set in
+  `../../.claude/settings.local.json` along with the host allowlist (Wikipedia,
+  Wikidata, Commons, archive.org, OpenLibrary, CourtListener, upload/maps
+  wikimedia). Verifying reachability with `curl` does **not** prove the
+  generator can reach a host.
 - First run needs network (fills `.cache`); reruns are offline.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
   backoff.
@@ -66,3 +101,10 @@ Tapestry `layout`/`emit`/`zip`).
   reachability ranking, OpenLibrary access. `src/resolve.js` — media resolvers.
 - `src/emit-html.js` — the HTML render. `src/emit.js` / `layout.js` / `zip.js` —
   the Tapestry emitter.
+- `spike.js` — the live-discovery entry point (see Two entry points).
+  `src/corroborate.js` — described-object matching for the `corroborated` class.
+- `src/citations.js` also handles Wikipedia's **second** citation style:
+  `{{sfn|Last|Year}}` pointers into a pooled bibliography, joined on
+  `(surname, year)`. Mature and featured articles use it heavily — Apollo 11 keeps
+  19 of its 22 ISBNs there — so reading `<ref>` contents alone misses most of the
+  books on exactly the best-sourced pages.

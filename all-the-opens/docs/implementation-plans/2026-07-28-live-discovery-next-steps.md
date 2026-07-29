@@ -58,12 +58,30 @@ dissertation that motivated including him as a fixture is still not found. He is
 the fixture that tests the honest-failure requirement, and right now the page
 neither finds his thesis nor says that it can't.
 
+## Status, 2026-07-28 evening
+
+Steps 1–4 below are **done**. What the pages do now that they did not that
+morning:
+
+- The whole article renders, not its first eight sections.
+- Cited books say how far you can open them — read, borrow, catalogued-only —
+  with covers, from both citation styles.
+- Every section states what it cites and how much of it the open ecosystem
+  holds, so a section of dead ends no longer looks like a section with few
+  sources.
+- Prandtl's dissertation is found, by matching the object Wikidata describes
+  rather than any shared identifier, and the card says so and prints the three
+  agreeing values.
+
+Remaining, in the order they now matter: the deferred items below (registry,
+streaming, infobox anchors), and the open questions in "Known small defects".
+
 ## Plan
 
 Ordered by what each move buys against the goals. Each is small enough to do in
 one sitting and to measure the same way the table above was measured.
 
-### 1. Render the whole article (small)
+### 1. Render the whole article (small) — DONE
 
 `MAX_SECTIONS=8` shows 8 of Apollo 11's 36 body sections — 22% of the article,
 with the footer honestly reporting 28 dropped. The spine is cheap; only the
@@ -71,7 +89,7 @@ pivots cost anything. Raise or remove the section cap and keep the budget on
 *pivots per section* instead, so the page is the article rather than its first
 fifth. **Measure:** sections rendered, wall-clock, total requests.
 
-### 2. Add OpenLibrary as a second citation pivot (medium)
+### 2. Add OpenLibrary as a second citation pivot (medium) — DONE
 
 The highest-yield move available. Of the 44 unique identifiers across the three
 fixtures, 36 reach no IA record — but OpenLibrary catalogues far more than IA
@@ -82,7 +100,7 @@ not scanned" for most of that 36. **Measure:** the same table, with an
 OpenLibrary column. **Watch:** the 1 req/sec budget — 44 identifiers is 44
 seconds if serialised naively.
 
-### 3. Make failure visible (small, and it is a goal not a nicety)
+### 3. Make failure visible (small, and it is a goal not a nicety) — DONE
 
 Goal 3 says the page must state what it could not connect. It currently doesn't:
 a section whose citations reach nothing simply shows fewer items, which reads as
@@ -90,7 +108,7 @@ a thinner section rather than a gap in the ecosystem. Give each section a line
 in the same register as the existing anchor disclosure — *3 works cited, 1
 reachable* — and it becomes the coverage argument instead of an absence.
 
-### 4. The Prandtl collection pivot (larger — design plan Phase 6)
+### 4. The Prandtl collection pivot (larger — design plan Phase 6) — DONE
 
 The one fixture-specific gap, and the only remaining piece the design plan
 specifies in real detail (`P1026` described-object match, four corroborating
@@ -109,6 +127,22 @@ evidence class exists at all.
 - **Phase 5 infobox anchors.** The design plan already flags this as unproven.
   Citation and wikilink anchors are not yet exhausted; this is the least
   certain yield per unit of work.
+
+## Open decision: labelling the thesis on Wikidata
+
+`Q72419729` — Prandtl's dissertation — has **no label in any language**. It is a
+bare structural item: `P50` author, `P577` date, `P4101` institution, `P31`
+doctoral thesis, and no name. The pivot therefore takes its display title from
+the Internet Archive record (*Kipp-Erscheinungen*), which is correct and needs no
+edit.
+
+Adding an English and German label upstream would be a genuine improvement to
+Wikidata and would let the pivot name the work from either side. It is
+deliberately *not* done here: editing a public knowledge base to make a demo
+render better is a habit worth not forming, and the fallback is the right
+behaviour regardless — most described objects this pivot meets will be unlabelled,
+and the code must not depend on a label existing. If the label is added, nothing
+in the pipeline needs to change.
 
 ## Known small defects
 

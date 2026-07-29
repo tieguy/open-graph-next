@@ -429,7 +429,11 @@ so row→property matching is unproven. If it proves unreliable across the three
 fixtures, fall back to identifier rows and coordinates only, and record the
 finding.
 
-### Phase 6: Corroborated collection pivot
+### Phase 6: Corroborated collection pivot — IMPLEMENTED in the spike (2026-07-28)
+
+*Implemented as `src/corroborate.js` plus the pivot in `spike.js`. The described-object
+path works on Prandtl and rejects the two same-surname theses the collection also
+holds. The person-level fallback is not built — no fixture needed it yet.*
 
 **Goal:** The Leiden case, honestly marked. Fixture: **Ludwig Prandtl** (`Q76683`)
 and his 1899 dissertation *Kipp-Erscheinungen*, scanned at
