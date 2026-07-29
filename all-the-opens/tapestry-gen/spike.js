@@ -43,7 +43,12 @@ const UA = 'all-the-opens-tapestry-gen/0.1 (https://github.com/tieguy/open-graph
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
 // caps and says what it dropped rather than pretending it covered everything.
-const MAX_SECTIONS = Number(process.env.MAX_SECTIONS ?? 8)
+//
+// Sections are no longer among the caps. The spine is cheap — one cached fetch
+// per section — while the pivots are what cost, and those are budgeted per
+// section below. Truncating at eight showed 22% of Apollo 11 and called it the
+// article. Set MAX_SECTIONS to restore a cap for a quick run.
+const MAX_SECTIONS = Number(process.env.MAX_SECTIONS ?? Infinity)
 const QIDS_PER_SECTION = Number(process.env.QIDS_PER_SECTION ?? 2)
 const COMMONS_PER_ANCHOR = 4
 const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
