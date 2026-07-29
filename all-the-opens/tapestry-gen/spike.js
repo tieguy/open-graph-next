@@ -38,6 +38,7 @@ import {
   sectionCitations,
   templateParams,
 } from './src/citations.js'
+import { corroborate } from './src/corroborate.js'
 import { buildHtml } from './src/emit-html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -129,6 +130,75 @@ function citationIdentifiers(wikitext) {
 }
 
 /**
+ * The document a person's Wikidata entry *describes* but never identifies:
+ * P1026 (doctoral thesis) points at an entity carrying the thesis's author, year
+ * and awarding university, and archival scans of theses carry exactly those three
+ * fields and no identifier at all. So the two can be joined on the description.
+ *
+ * Returns an entry marked `corroborated` rather than `identifier`, with the
+ * agreeing signals attached — the page shows the reasoning, because a matched
+ * description is a weaker claim than a shared ISBN and must not read like one.
+ */
+async function collectionByDescribedThesis(subjectClaims, personName) {
+  const thesisQid = subjectClaims.P1026?.[0]?.mainsnak?.datavalue?.value?.id
+  if (!thesisQid || !personName) return null
+
+  const body = await getJson(
+    'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
+      `&ids=${thesisQid}&props=claims`,
+  )
+  const claims = body.entities?.[thesisQid]?.claims ?? {}
+  const year = claims.P577?.[0]?.mainsnak?.datavalue?.value?.time
+  const uniQid = claims.P4101?.[0]?.mainsnak?.datavalue?.value?.id
+  if (!year || !uniQid) return null
+  const institution = (await entityLabels([uniQid])).get(uniQid)
+  if (!institution) return null
+
+  // The surname is the only part of the description that can be searched; the
+  // rest is what decides among the results. This collection alone answers three
+  // different Prandtls.
+  const surname = personName.trim().split(/\s+/).pop()
+  const search =
+    'https://archive.org/advancedsearch.php?q=' +
+    encodeURIComponent(`collection:(theses-and-dissertations) AND creator:("${surname}")`) +
+    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=date&rows=20&output=json'
+  const docs = (await getJson(search)).response?.docs ?? []
+
+  for (const doc of docs.slice(0, 8)) {
+    // `institution` is not in the search index, so it costs one metadata read
+    // per candidate — bounded by the surname search, which is small.
+    let meta = {}
+    try {
+      meta = (await getJson(`https://archive.org/metadata/${doc.identifier}`)).metadata ?? {}
+    } catch (e) {
+      console.error(`  metadata read failed (${doc.identifier}): ${e.message}`)
+      continue
+    }
+    const candidate = { ...doc, institution: meta.institution ?? null }
+    const { matched, corroboratedBy } = corroborate(candidate, { personName, year, institution })
+    if (!matched) continue
+    return {
+      source: 'internet_archive',
+      title: meta.title ?? doc.title,
+      description: [meta.type_of_work ?? 'Thesis', meta.institution, yearText(doc.date)]
+        .filter(Boolean)
+        .join(' · '),
+      imageUrl: `https://archive.org/services/img/${doc.identifier}`,
+      attribution: {
+        author: `archive.org/details/${doc.identifier}`,
+        license: 'corroborated, not identified',
+      },
+      evidence: 'corroborated',
+      corroboratedBy,
+      _via: 'P1026',
+    }
+  }
+  return null
+}
+
+const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null) : null)
+
+/**
  * OpenLibrary's holdings for an ISBN. Catalogued is not the same as scanned:
  * most cited books have no Internet Archive copy, and for those this is the
  * difference between the rail saying nothing and the rail saying where the book
@@ -195,7 +265,35 @@ async function railCitations(candidates) {
       cover: coverUrl && (await coverDataUri(coverUrl)) ? coverUrl : null,
     })
   }
-  return built
+
+  // What the section cites versus what a reader can actually open. Only a few
+  // sources fit in the rail, so without this the difference between a section
+  // whose sources are all reachable and one whose sources are all dead ends is
+  // invisible — both just show three entries.
+  const open = candidates.filter(
+    (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
+  ).length
+  const catalogued = candidates.filter((c) => c.access?.availability === 'catalog').length
+  const linked = candidates.filter((c) => !c.access && (c.archiveUrl || c.doi || c.url)).length
+  return {
+    shown: built,
+    coverage: { total: candidates.length, open, catalogued, linked },
+  }
+}
+
+/**
+ * The coverage line, phrased so an absence reads as a fact about the ecosystem
+ * rather than as a thin section. Says nothing when there is nothing to say.
+ */
+function coverageText({ total, open, catalogued, linked }) {
+  if (!total) return null
+  const parts = [`${total} work${total === 1 ? '' : 's'} cited here`]
+  if (open) parts.push(`${open} readable or borrowable`)
+  if (catalogued) parts.push(`${catalogued} catalogued but not scanned`)
+  if (linked) parts.push(`${linked} linked only`)
+  const unreached = total - open - catalogued - linked
+  if (unreached > 0) parts.push(`${unreached} the open ecosystem does not hold`)
+  return parts.join(' · ')
 }
 
 /**
@@ -426,6 +524,16 @@ async function main() {
     .filter((v) => typeof v === 'string')
   const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
 
+  // Where the subject is a person who wrote a thesis, the thesis itself is the
+  // one thing the ecosystem holds that no identifier will reach.
+  let thesis = null
+  try {
+    thesis = await collectionByDescribedThesis(subjectClaims, page)
+  } catch (e) {
+    console.error(`  thesis pivot failed: ${e.message}`)
+  }
+  if (thesis) console.error(`thesis: ${thesis.title} (${thesis.corroboratedBy.length} signals agree)`)
+
   const bands = []
   const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, viaShortCite: 0, sections: 0 }
 
@@ -453,7 +561,7 @@ async function main() {
     // <ref> cites — news and web sources — so the panel was never empty, but
     // the books it points at through the bibliography were missing from it,
     // and those are the reachable ones.
-    const cites = await railCitations([
+    const { shown: cites, coverage } = await railCitations([
       ...sectionCitations(wikitext),
       ...shortCites.map((w) => ({ kind: 'book', ...w })),
     ])
@@ -466,8 +574,9 @@ async function main() {
 
     const entries = []
 
-    // The primary source first, where the subject IS a document.
+    // The primary source first, where the subject IS a document — or wrote one.
     if (opinion && unit.index === '0') entries.push(opinion)
+    if (thesis && unit.index === '0') entries.push(thesis)
 
     // Citation anchors -> Internet Archive. No entity resolution in front.
     for (const cite of identified) {
@@ -526,6 +635,7 @@ async function main() {
       blocks,
       entries,
       citations: cites,
+      coverage: coverageText(coverage),
       disclosure,
     })
     console.error(`§ ${unit.title} — ${entries.length} items`)

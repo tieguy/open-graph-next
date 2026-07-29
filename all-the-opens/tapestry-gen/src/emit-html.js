@@ -58,10 +58,27 @@ function card(entry, inline) {
   const credit = entry.attribution
     ? `<p class="credit">${escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))}</p>`
     : ''
+  // An edge made by matching a description is a weaker claim than one made by a
+  // shared identifier, and must not look the same. The card says so and shows
+  // the agreeing signals, so a reader can judge the match rather than trust it.
+  const evidence =
+    entry.evidence === 'corroborated'
+      ? `<p class="evidence">corroborated — no shared identifier</p>` +
+        `<ul class="signals">${(entry.corroboratedBy ?? [])
+          .map(
+            (s) =>
+              `<li><span class="sig-field">${escapeHtml(s.field)}</span>` +
+              `<span class="sig-pair">${escapeHtml(String(s.holding))}</span>` +
+              `<span class="sig-vs">matches</span>` +
+              `<span class="sig-pair">${escapeHtml(String(s.claimed))}</span></li>`,
+          )
+          .join('')}</ul>`
+      : ''
   return (
-    `<figure class="card">${visual}<figcaption>` +
+    `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     `<h4>${escapeHtml(entry.title)}</h4>` +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
+    evidence +
     credit +
     `</figcaption></figure>`
   )
@@ -112,11 +129,18 @@ function band(b, eyebrow, inline) {
     bySource.get(e.source).push(e)
   }
   const media = [...bySource].map(([source, items]) => carousel(source, items, inline)).join('')
+  // The coverage line goes with the sources, not the media: it is a statement
+  // about what this section cites and how much of it the open ecosystem holds.
+  // A section whose sources are all dead ends must not look like a section with
+  // few sources — the rail shows three either way.
+  const coverage = b.coverage ? `<p class="coverage">${escapeHtml(b.coverage)}</p>` : ''
   const sources = (b.citations ?? []).length
     ? `<div class="sources"><p class="rail-label">Selected sources from this section</p><ul>${b.citations
         .map((c) => citation(c, inline))
-        .join('')}</ul></div>`
-    : ''
+        .join('')}</ul>${coverage}</div>`
+    : coverage
+      ? `<div class="sources">${coverage}</div>`
+      : ''
   // An optional line stating how this band's media was selected. Used when the
   // anchor that produced it is broad enough that the selection is arbitrary —
   // the prototype discloses that rather than filtering it out of sight.
@@ -252,6 +276,16 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
+.coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}
+/* Corroborated edges read differently on purpose: a dashed rule and a stated
+   reason, so a described-object match is never mistaken for a shared identifier. */
+.card.corroborated{border:1px dashed #c9a227;border-radius:4px;padding:6px;background:#fffdf5}
+.card .evidence{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
+.card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.66rem;line-height:1.45;color:#6b6f75}
+.card .signals li{display:block;margin-bottom:3px}
+.card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#a0a4a9}
+.card .sig-pair{color:#4a4f55}
+.card .sig-vs{color:#a0a4a9;margin:0 4px}
 .card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
 
 .disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
