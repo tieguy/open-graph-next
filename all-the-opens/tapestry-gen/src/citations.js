@@ -212,6 +212,7 @@ export function bibliographyIdentifiers(wikitext) {
 
     const entry = {
       title: stripMarkup(p.get('title')),
+      publisher: stripMarkup(p.get('publisher') ?? p.get('work')),
       isbn: validIsbn(p.get('isbn')),
       oclc: p.get('oclc')?.trim() || null,
       lccn: p.get('lccn')?.trim() || null,

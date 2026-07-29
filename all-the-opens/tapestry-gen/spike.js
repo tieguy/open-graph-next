@@ -30,6 +30,9 @@ import {
 } from './src/wikipedia.js'
 import {
   bibliographyIdentifiers,
+  citationCoverUrl,
+  citationHref,
+  openLibraryAccess,
   prioritizeCitations,
   resolveShortCites,
   sectionCitations,
@@ -70,7 +73,7 @@ const BIBLIOGRAPHY = /^(sources|bibliography|works cited|primary sources|referen
  * archive.org connection hung an entire run indefinitely. A source that goes
  * quiet must cost one slot, not the whole page.
  */
-async function getJson(url, { timeoutMs = 15000, tries = 2 } = {}) {
+async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {}) {
   const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
   const path = join(CACHE, `spike-${key}.json`)
   try {
@@ -80,6 +83,8 @@ async function getJson(url, { timeoutMs = 15000, tries = 2 } = {}) {
   }
   let lastError
   for (let attempt = 1; attempt <= tries; attempt++) {
+    // Only ever paid on a cache miss, and only by sources that ask for it.
+    if (throttleMs) await new Promise((r) => setTimeout(r, throttleMs))
     const control = new AbortController()
     const timer = setTimeout(() => control.abort(), timeoutMs)
     try {
@@ -121,6 +126,76 @@ function citationIdentifiers(wikitext) {
     if (entry.isbn || entry.oclc || entry.lccn) out.push(entry)
   }
   return out
+}
+
+/**
+ * OpenLibrary's holdings for an ISBN. Catalogued is not the same as scanned:
+ * most cited books have no Internet Archive copy, and for those this is the
+ * difference between the rail saying nothing and the rail saying where the book
+ * is. Rate-limited politely — OpenLibrary asks for one request at a time.
+ */
+async function openLibraryVolume(isbn) {
+  return getJson(`https://openlibrary.org/api/volumes/brief/isbn/${isbn}.json`, { throttleMs: 1100 })
+}
+
+/**
+ * A cover fetched and base64'd, so the page does not depend on the archive.org
+ * redirect OpenLibrary covers resolve through. Null when there is no cover —
+ * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and
+ * a broken image in the rail is worse than no image.
+ */
+async function coverDataUri(url) {
+  const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
+  const path = join(CACHE, `datauri-${key}.txt`)
+  try {
+    const cached = await readFile(path, 'utf8')
+    return cached || null
+  } catch {
+    /* not fetched yet */
+  }
+  try {
+    const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
+    if (!res.ok) return null
+    const bytes = Buffer.from(await res.arrayBuffer())
+    // A placeholder, not a cover.
+    const uri = bytes.length < 1024 ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
+    await mkdir(CACHE, { recursive: true })
+    await writeFile(path, uri)
+    return uri || null
+  } catch {
+    return null
+  }
+}
+
+/**
+ * A section's cited works as the rail shows them: ranked by how openly a reader
+ * can reach each one, then given a cover and a link that says what opening it
+ * will get you. Both citation styles arrive here — an inline {{cite}} and a
+ * work resolved through the bibliography are the same kind of thing once found.
+ */
+async function railCitations(candidates) {
+  for (const cite of candidates) {
+    if (!cite.isbn) continue
+    try {
+      cite.access = openLibraryAccess(await openLibraryVolume(cite.isbn))
+    } catch (e) {
+      console.error(`  openlibrary lookup failed (${cite.isbn}): ${e.message}`)
+    }
+  }
+  const chosen = prioritizeCitations(candidates, CITES_PER_SECTION)
+  const built = []
+  for (const cite of chosen) {
+    const coverUrl = citationCoverUrl(cite)
+    built.push({
+      kind: cite.kind ?? 'book',
+      title: cite.title || 'Untitled source',
+      publisher: cite.publisher ?? null,
+      href: cite.access ? cite.access.url : citationHref(cite),
+      linkLabel: cite.access ? cite.access.label : null,
+      cover: coverUrl && (await coverDataUri(coverUrl)) ? coverUrl : null,
+    })
+  }
+  return built
 }
 
 /**
@@ -370,11 +445,18 @@ async function main() {
     stats.sections++
 
     const wikitext = await fetchSectionWikitext(CACHE, page, unit.index)
-    const cites = prioritizeCitations(sectionCitations(wikitext), CITES_PER_SECTION)
     // Both citation styles, in that order: identifiers the section states
     // outright, then the ones it points at through the bibliography. Direct
     // refs come first only because they cost no join to trust.
     const shortCites = resolveShortCites(wikitext, bibliography)
+    // The rail takes both styles too. An {{sfn}} article still has ordinary
+    // <ref> cites — news and web sources — so the panel was never empty, but
+    // the books it points at through the bibliography were missing from it,
+    // and those are the reachable ones.
+    const cites = await railCitations([
+      ...sectionCitations(wikitext),
+      ...shortCites.map((w) => ({ kind: 'book', ...w })),
+    ])
     const identified = dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]).slice(
       0,
       CITES_PER_SECTION,
@@ -449,6 +531,18 @@ async function main() {
     console.error(`§ ${unit.title} — ${entries.length} items`)
   }
 
+  // Covers travel with the page. They are the only images here that resolve
+  // through the archive.org redirect, so a live dependency would blank the rail
+  // whenever the Internet Archive is down.
+  const inline = new Map()
+  for (const b of bands) {
+    for (const c of b.citations ?? []) {
+      if (!c.cover || inline.has(c.cover)) continue
+      const uri = await coverDataUri(c.cover)
+      if (uri) inline.set(c.cover, uri)
+    }
+  }
+
   const html = buildHtml({
     title: page,
     description:
@@ -456,6 +550,7 @@ async function main() {
       "by an identifier the article states: a citation's ISBN, OCLC or LCCN, or a " +
       "wikilink's Wikidata QID. Each item sits in the section of the anchor that found it.",
     bands,
+    inline,
   })
   await mkdir(dirname(out), { recursive: true })
   await writeFile(out, html)

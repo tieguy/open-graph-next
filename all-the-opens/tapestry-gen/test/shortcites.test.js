@@ -75,6 +75,18 @@ test('an lccn entry resolves like the others', () => {
   assert.equal(bibliographyIdentifiers(SOURCES).get('cortright|1975').lccn, '75-600071')
 })
 
+test('a bibliography entry carries the publisher the rail displays', () => {
+  const bib = bibliographyIdentifiers(
+    '* {{cite book |last=Chaikin |title=A Man on the Moon |year=1994 |isbn=0-670-81446-6 |publisher=[[Viking Press|Viking]]}}',
+  )
+  assert.equal(bib.get('chaikin|1994').publisher, 'Viking')
+})
+
+test('a bibliography entry with no publisher says so rather than inventing one', () => {
+  const bib = bibliographyIdentifiers('* {{cite book |last=X |title=T |year=2000 |isbn=0670814466}}')
+  assert.equal(bib.get('x|2000').publisher, null)
+})
+
 test('a bibliography entry with no identifier at all is not registered', () => {
   const bib = bibliographyIdentifiers('* {{cite book |last=Nobody |title=Untraceable |year=1900}}')
   assert.equal(bib.size, 0)
