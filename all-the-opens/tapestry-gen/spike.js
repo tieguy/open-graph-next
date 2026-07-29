@@ -39,6 +39,7 @@ import {
   templateParams,
 } from './src/citations.js'
 import { corroborate } from './src/corroborate.js'
+import { authorWorkEntries } from './src/works.js'
 import { buildHtml } from './src/emit-html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -58,6 +59,10 @@ const COMMONS_PER_ANCHOR = 4
 const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
 // Above this many depictions, showing four of them is an arbitrary draw.
 const BROAD_ANCHOR = Number(process.env.BROAD_ANCHOR ?? 40)
+// Subject-level pivots answer "what does the ecosystem hold about this subject?"
+// rather than "what did this section cite?", so they land in the lede.
+const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
+const CATEGORY_FILES = Number(process.env.CATEGORY_FILES ?? 6)
 
 const SKIP =
   /^(see also|references|notes|citations|sources|bibliography|further reading|external links|works cited|primary sources)$/i
@@ -428,6 +433,47 @@ async function commonsDepicting(qid) {
   return { files, totalhits }
 }
 
+/**
+ * Media from the subject's own Commons category. `P180 depicts` finds only what
+ * somebody thought to tag; a category is curated, so on a well-kept subject it
+ * reaches further and is better selected than an arbitrary draw from a large
+ * depiction set.
+ */
+async function commonsCategoryFiles(category, limit) {
+  const url =
+    'https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2' +
+    '&generator=categorymembers&gcmtitle=' +
+    encodeURIComponent(`Category:${category}`) +
+    `&gcmtype=file&gcmlimit=${limit}` +
+    '&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640'
+  const body = await getJson(url)
+  return (body.query?.pages ?? [])
+    .map((p) => {
+      const info = p.imageinfo?.[0]
+      if (!info) return null
+      const meta = info.extmetadata ?? {}
+      const plain = (v) => v?.value?.replace(/<[^>]+>/g, '').trim() || null
+      return {
+        source: 'wikimedia_commons',
+        title: p.title.replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
+        imageUrl: info.thumburl ?? info.url,
+        attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
+        _via: 'P373',
+      }
+    })
+    .filter(Boolean)
+}
+
+/** The subject's own works, via the OpenLibrary author identifier P648. */
+async function subjectAuthorWorks(subjectClaims) {
+  const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
+  if (typeof olid !== 'string' || !/^OL\d+A$/.test(olid)) return { entries: [], total: 0 }
+  const body = await getJson(`https://openlibrary.org/authors/${olid}/works.json?limit=40`, {
+    throttleMs: 1100,
+  })
+  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT })
+}
+
 /** Labels of the entities we anchored on, for the disclosure line. */
 async function entityLabels(qids) {
   if (!qids.length) return new Map()
@@ -534,6 +580,28 @@ async function main() {
   }
   if (thesis) console.error(`thesis: ${thesis.title} (${thesis.corroboratedBy.length} signals agree)`)
 
+  // Subject-level pivots: what the ecosystem holds *about the subject*, as
+  // opposed to what any one section cited. Both are keyed on a claim the subject
+  // states outright, so neither is a name search.
+  let works = { entries: [], total: 0 }
+  try {
+    works = await subjectAuthorWorks(subjectClaims)
+  } catch (e) {
+    console.error(`  author works failed: ${e.message}`)
+  }
+  if (works.entries.length) console.error(`works by subject: ${works.entries.length} of ${works.total}`)
+
+  const categoryName = subjectClaims.P373?.[0]?.mainsnak?.datavalue?.value
+  let categoryFiles = []
+  if (typeof categoryName === 'string') {
+    try {
+      categoryFiles = await commonsCategoryFiles(categoryName, CATEGORY_FILES)
+    } catch (e) {
+      console.error(`  commons category failed: ${e.message}`)
+    }
+  }
+  if (categoryFiles.length) console.error(`commons category: ${categoryFiles.length} files`)
+
   const bands = []
   const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, viaShortCite: 0, sections: 0 }
 
@@ -577,6 +645,7 @@ async function main() {
     // The primary source first, where the subject IS a document — or wrote one.
     if (opinion && unit.index === '0') entries.push(opinion)
     if (thesis && unit.index === '0') entries.push(thesis)
+    if (unit.index === '0') entries.push(...works.entries, ...categoryFiles)
 
     // Citation anchors -> Internet Archive. No entity resolution in front.
     for (const cite of identified) {
@@ -616,6 +685,16 @@ async function main() {
     // Disclose how each anchor's media was drawn. Above the threshold the four
     // shown are arbitrary, and saying so is the honest rendering.
     const labels = await entityLabels(breadth.map((b) => b.qid))
+    // The lede also carries the subject-level pivots, which were not anchored on
+    // any wikilink and so need their own sentence.
+    const subjectNotes = []
+    if (unit.index === '0' && works.entries.length)
+      subjectNotes.push(
+        `${works.entries.length} of ${works.total} work${works.total === 1 ? '' : 's'} by the subject, ` +
+          'via its OpenLibrary author identifier',
+      )
+    if (unit.index === '0' && categoryFiles.length)
+      subjectNotes.push(`${categoryFiles.length} files from the subject's own Commons category`)
     const disclosure = breadth.length
       ? 'Media anchored on ' +
         breadth
@@ -628,6 +707,7 @@ async function main() {
           )
           .join('; ')
       : null
+    const fullDisclosure = [disclosure, ...subjectNotes].filter(Boolean).join('. ') || null
 
     bands.push({
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,
@@ -636,7 +716,7 @@ async function main() {
       entries,
       citations: cites,
       coverage: coverageText(coverage),
-      disclosure,
+      disclosure: fullDisclosure,
     })
     console.error(`§ ${unit.title} — ${entries.length} items`)
   }
@@ -650,6 +730,12 @@ async function main() {
       if (!c.cover || inline.has(c.cover)) continue
       const uri = await coverDataUri(c.cover)
       if (uri) inline.set(c.cover, uri)
+    }
+    // Works by the subject carry OpenLibrary covers on the entry itself.
+    for (const e of b.entries ?? []) {
+      if (!e.imageUrl?.includes('covers.openlibrary.org') || inline.has(e.imageUrl)) continue
+      const uri = await coverDataUri(e.imageUrl)
+      if (uri) inline.set(e.imageUrl, uri)
     }
   }
 
