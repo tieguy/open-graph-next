@@ -39,12 +39,15 @@ import {
   templateParams,
 } from './src/citations.js'
 import { corroborate } from './src/corroborate.js'
+import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
 import { buildHtml } from './src/emit-html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const CACHE = join(HERE, '.cache')
-const UA = 'all-the-opens-tapestry-gen/0.1 (https://github.com/tieguy/open-graph-next)'
+// Defined once for the whole repo, and refuses to build without a contact —
+// see src/wmf.js. Set WIKIMEDIA_UA_CONTACT to your own address.
+const UA = userAgent('tapestry-gen')
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
 // caps and says what it dropped rather than pretending it covered everything.
@@ -94,14 +97,25 @@ async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {
     const control = new AbortController()
     const timer = setTimeout(() => control.abort(), timeoutMs)
     try {
-      const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: control.signal })
-      if (!res.ok) throw new Error(`${res.status} ${res.statusText}`)
+      const res = await fetch(withMaxlag(url), {
+        headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip' },
+        signal: control.signal,
+      })
+      if (!res.ok) {
+        // A 404 is our bad identifier, not the server's bad day: retrying it
+        // spends someone else's capacity to get the same answer twice.
+        if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
+        const wait = retryAfterMs(res.headers)
+        if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
+        throw new Error(`${res.status} ${res.statusText}`)
+      }
       const body = await res.json()
       await mkdir(CACHE, { recursive: true })
       await writeFile(path, JSON.stringify(body))
       return body
     } catch (e) {
       lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
+      if (e.permanent) break
     } finally {
       clearTimeout(timer)
     }

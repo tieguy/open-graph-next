@@ -3,6 +3,31 @@
 
 const WIKIDATA_API = 'https://www.wikidata.org/w/api.php';
 
+// Wikimedia requires a User-Agent naming someone reachable about the traffic.
+// Two things make this different from the Node side of this repo:
+//
+//   1. Browsers forbid scripts from setting `User-Agent`, so that header is
+//      silently dropped. Wikimedia accepts `Api-User-Agent` instead.
+//   2. Whoever installs this extension generates the traffic, so the contact
+//      cannot be baked in here — a hardcoded address would attribute their
+//      requests to someone who never ran it.
+//
+// So the contact comes from extension storage, set in the extension's options,
+// and requests do not go out until it is configured.
+// Policy: https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy
+const PROJECT = 'https://github.com/tieguy/open-graph-next';
+
+async function apiUserAgent() {
+  const { wikimediaContact } = await browser.storage.local.get('wikimediaContact');
+  if (!wikimediaContact) {
+    throw new Error(
+      'Set a contact address in this extension\'s options before it can query ' +
+      'Wikidata. Wikimedia requires requests to identify who is making them.'
+    );
+  }
+  return `jenifesto-extension/0.1 (${PROJECT}; ${wikimediaContact}) browser`;
+}
+
 // Map of Wikidata property IDs to identifier names
 const IDENTIFIER_PROPERTIES = {
   P214: { name: 'viaf', label: 'VIAF' },
@@ -36,7 +61,7 @@ export async function fetchEntity(qid) {
 
   const response = await fetch(`${WIKIDATA_API}?${params}`, {
     headers: {
-      'User-Agent': 'Jenifesto/0.1 (browser extension)'
+      'Api-User-Agent': await apiUserAgent()
     }
   });
 

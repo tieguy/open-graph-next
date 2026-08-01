@@ -2,8 +2,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import { join } from 'node:path'
 
+import { retryAfterMs, isRetryable, userAgent, withMaxlag } from './wmf.js'
+
 const API = 'https://en.wikipedia.org/w/api.php'
-const UA = 'all-the-opens-tapestry-gen/0.1 (https://github.com/tieguy/open-graph-next)'
 
 /**
  * Every network call goes through here. Reruns are offline and byte-reproducible,
@@ -20,8 +21,20 @@ async function cachedGet(cacheDir, params) {
     // not cached yet
   }
 
-  const response = await fetch(url, { headers: { 'User-Agent': UA } })
-  if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`)
+  // Serial by construction — every caller awaits this — and polite: maxlag lets
+  // Wikimedia shed this batch traffic when replication is behind, and a 429/503
+  // is waited out for as long as the server asks rather than retried immediately.
+  let response
+  for (let attempt = 1; ; attempt++) {
+    response = await fetch(withMaxlag(url), {
+      headers: { 'User-Agent': userAgent('tapestry-gen'), 'Accept-Encoding': 'gzip' },
+    })
+    if (response.ok) break
+    if (!isRetryable(response.status) || attempt >= 3) {
+      throw new Error(`${response.status} ${response.statusText} for ${url}`)
+    }
+    await new Promise((r) => setTimeout(r, retryAfterMs(response.headers) ?? 1000 * 2 ** attempt))
+  }
   const body = await response.json()
 
   await mkdir(cacheDir, { recursive: true })

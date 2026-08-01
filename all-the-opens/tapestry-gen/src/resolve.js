@@ -7,8 +7,9 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
 import { join } from 'node:path'
 
+import { userAgent } from './wmf.js'
+
 const IA_METADATA = 'https://archive.org/metadata/'
-const UA = 'all-the-opens-tapestry-gen/0.1 (https://github.com/tieguy/open-graph-next)'
 
 /** The Internet Archive identifier in an `archive.org/details/{id}` URL. */
 export function iaIdFromUrl(url) {
@@ -32,7 +33,7 @@ export async function fetchIaMetadata(cacheDir, id) {
     // not cached yet
   }
 
-  const response = await fetch(url, { headers: { 'User-Agent': UA } })
+  const response = await fetch(url, { headers: { 'User-Agent': userAgent('tapestry-gen'), 'Accept-Encoding': 'gzip' } })
   if (!response.ok) throw new Error(`${response.status} ${response.statusText} for ${url}`)
   const body = await response.json()
 

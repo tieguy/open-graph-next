@@ -5,6 +5,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { buildAdjacency, loadDataset } from './src/dataset.js'
+import { userAgent } from './src/wmf.js'
 import { bundleImages, needsBundling } from './src/bundle.js'
 import {
   articleBlocks,
@@ -472,7 +473,7 @@ async function fetchOpenLibraryVolume(cacheDir, isbn) {
   for (let attempt = 0; attempt < 3; attempt++) {
     try {
       const response = await fetch(url, {
-        headers: { 'User-Agent': 'all-the-opens-tapestry-gen/0.1 (https://github.com/tieguy/open-graph-next)' },
+        headers: { 'User-Agent': userAgent('tapestry-gen'), 'Accept-Encoding': 'gzip' },
       })
       if (response.ok) {
         const body = await response.json()

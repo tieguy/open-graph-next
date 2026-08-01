@@ -78,6 +78,29 @@ Tapestry `layout`/`emit`/`zip`).
   format-specific layer.
 - Every rendered image is sized from real dimensions (API or header), not a guess.
 
+## Wikimedia compliance (required)
+
+Wikimedia runs on donations and blocks non-compliant clients without notice; the
+block lands on whoever ran the code. `src/wmf.js` is the **single** definition
+for the whole repo — never write a User-Agent string anywhere else.
+
+- **`WIKIMEDIA_UA_CONTACT` must be set** or `userAgent()` throws at startup. There
+  is no default on purpose: anyone can clone this, and a baked-in address would
+  attribute their traffic to someone who never ran it. Set it to *your own*
+  address.
+- `withMaxlag()` adds `maxlag=5` to Action API URLs only — nothing here is a human
+  waiting on a response, so this batch traffic yields to interactive users.
+- 429/503 honour `Retry-After` (capped at 60s); other 4xx are **never** retried —
+  a 404 is our bad identifier, not the server's bad day.
+- Requests are serial by construction. Never introduce `Promise.all` against a
+  Wikimedia host; batch with `titles=A|B|C` instead.
+- The browser extension must use **`Api-User-Agent`** — browsers silently drop a
+  script-set `User-Agent` — and takes its contact from extension storage, since
+  the installer is the operator.
+
+Policy: <https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy>
+Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
+
 ## Gotchas
 
 - **Sandboxed runs need `NODE_USE_ENV_PROXY=1`.** The sandbox routes egress
