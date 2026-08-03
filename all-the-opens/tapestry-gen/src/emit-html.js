@@ -372,6 +372,8 @@ function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
+window.addEventListener("load",function(){if(!window.__tapdone){
+document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream was interrupted before every section finished — what you see is real but incomplete. <a href="javascript:location.reload()">Reload</a> to run it again.</div>')}})
 </script>`
 
 /**
@@ -438,9 +440,13 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '' } = {}) 
   )
 }
 
-/** The close of the stream: footer and document end. */
+/** The close of the stream: footer and document end. The flag tells the
+ * shell's load listener the stream finished on purpose — without it, a page
+ * whose connection died mid-stream would look merely sparse, and a reader
+ * cannot tell honest absence from a cut wire. */
 export function streamClose({ provenance = '' } = {}) {
-  return `</main>
+  return `<script>window.__tapdone=1</script>
+</main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
   media under their own licences, shown on each item.</p>
@@ -570,6 +576,12 @@ sup.ref a:hover{text-decoration:underline}
 .fn-access{white-space:nowrap;font-weight:600}
 .fn-more summary{font-family:var(--sans);font-size:.7rem;color:var(--muted);cursor:pointer;margin:2px 0 10px}
 .fn-more summary:hover{color:var(--link)}
+
+/* Shown only when a streamed page's connection died before streamClose. */
+.stream-cut{position:fixed;left:0;right:0;bottom:0;z-index:9;background:#fff3cd;color:#5c4a03;
+  border-top:1px solid #e2ce7f;font-family:var(--sans);font-size:.8rem;line-height:1.5;
+  padding:10px 20px;text-align:center}
+.stream-cut a{color:#5c4a03;font-weight:600}
 
 .foot{max-width:1180px;margin:0 auto;padding:40px;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:.8rem;color:var(--muted)}

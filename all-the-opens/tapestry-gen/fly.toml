@@ -7,6 +7,9 @@
 
 app = "help-from-our-friends"
 primary_region = "sjc"
+# Give the drain handler in serve.js time to finish in-flight streams before
+# the platform kills the machine — a deploy must not cut a page mid-render.
+kill_timeout = "45s"
 
 [http_service]
   internal_port = 8080

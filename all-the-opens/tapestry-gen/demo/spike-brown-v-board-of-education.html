@@ -126,6 +126,12 @@ sup.ref a:hover{text-decoration:underline}
 .fn-more summary{font-family:var(--sans);font-size:.7rem;color:var(--muted);cursor:pointer;margin:2px 0 10px}
 .fn-more summary:hover{color:var(--link)}
 
+/* Shown only when a streamed page's connection died before streamClose. */
+.stream-cut{position:fixed;left:0;right:0;bottom:0;z-index:9;background:#fff3cd;color:#5c4a03;
+  border-top:1px solid #e2ce7f;font-family:var(--sans);font-size:.8rem;line-height:1.5;
+  padding:10px 20px;text-align:center}
+.stream-cut a{color:#5c4a03;font-weight:600}
+
 .foot{max-width:1180px;margin:0 auto;padding:40px;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:.8rem;color:var(--muted)}
 .foot code{background:var(--faint);padding:1px 5px;border-radius:3px}

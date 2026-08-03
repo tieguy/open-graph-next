@@ -65,8 +65,16 @@ test('streamOpen carries the whole spine with band ids, no numbering, and no rai
   assert.doesNotMatch(open, /<aside class="rail">/)
   // The relocation helpers precede any fragment that will call them.
   assert.match(open, /function __thb/)
+  // The shell can tell a finished stream from a cut one: the load listener
+  // announces an interruption unless streamClose set the flag.
+  assert.match(open, /__tapdone/)
+  assert.match(open, /stream-cut/)
   // The document is deliberately unfinished: the stream continues.
   assert.doesNotMatch(open, /<\/html>/)
+})
+
+test('streamClose marks the stream as complete on purpose', () => {
+  assert.match(streamClose({}), /window\.__tapdone=1/)
 })
 
 test('a card says which anchor brought it here', () => {

@@ -66,7 +66,7 @@ const INDEX = frontPage({ inline: icons })
 const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
 let inFlight = 0
 
-createServer(async (req, res) => {
+const server = createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost')
   if (url.pathname === '/' || url.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
@@ -166,6 +166,24 @@ createServer(async (req, res) => {
   } finally {
     inFlight--
   }
-}).listen(PORT, '0.0.0.0', () => {
+})
+
+server.listen(PORT, '0.0.0.0', () => {
   console.error(`live discovery on http://localhost:${PORT}/ — try /wiki/Ludwig_Prandtl`)
 })
+
+// A deploy or scale-down stops this machine with a signal. A streamed page
+// cut mid-response looks like a broken render to the person watching it, so
+// drain instead: refuse new connections, let in-flight discoveries finish,
+// and only then exit. fly.toml's kill_timeout is set above this bound.
+let draining = false
+for (const sig of ['SIGINT', 'SIGTERM']) {
+  process.on(sig, () => {
+    if (draining) process.exit(1)
+    draining = true
+    console.error(`${sig}: draining ${inFlight} in-flight ${inFlight === 1 ? 'discovery' : 'discoveries'}`)
+    server.close(() => process.exit(0))
+    server.closeIdleConnections()
+    setTimeout(() => process.exit(0), 40_000).unref()
+  })
+}
