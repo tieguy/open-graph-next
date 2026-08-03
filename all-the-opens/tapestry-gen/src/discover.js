@@ -291,6 +291,7 @@ function iaEntry(doc, cite, via) {
       .join(' · '),
     imageUrl: `https://archive.org/services/img/${doc.identifier}`,
     attribution: { author: `archive.org/details/${doc.identifier}`, license: `via ${via}` },
+    why: `Cited in this section — matched by ${via.toUpperCase()}`,
     _via: via,
   }
 }
@@ -433,6 +434,7 @@ async function commonsCategoryFiles(category, limit) {
         title: p.title.replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
         imageUrl: info.thumburl ?? info.url,
         attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
+        why: 'From the subject’s own Commons category',
         _via: 'P373',
       }
     })
@@ -687,6 +689,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
           })
         : Promise.resolve({ entries: [], total: 0 }),
     ])
+    // The shelves of the subject's own output say whose output and which
+    // identifier vouches for that — the band's disclosure states the counts,
+    // the card states the claim.
+    for (const e of works.entries) e.why = `By ${page} — from their OpenLibrary author record`
+    for (const e of scholarship.entries) e.why = `By ${page} — from their ORCID publication record`
     if (thesis)
       console.error(
         `thesis: ${thesis.title} (` +
@@ -710,6 +717,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
     for (const qid of (await pickedPromise).get(unit)) {
       try {
         const { files, totalhits } = await commonsDepicting(qid)
+        // Remember which anchor asked: the card will say why it is here,
+        // once the anchor's label arrives.
+        for (const f of files) f._qid = qid
         commonsEntries.push(...files)
         stats.commons += files.length
         if (files.length) breadth.push({ qid, shown: files.length, totalhits })
@@ -776,12 +786,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
       if (statementsLeft <= 0) break
       const stmts = statements.get(qid)
       if (!stmts) continue
-      const label =
-        unit.index === '0' && qid === extras?.subjectQid ? unit.title : (labels.get(qid) ?? null)
-      const found = (await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0 })).slice(
-        0,
-        statementsLeft,
-      )
+      const isSubject = unit.index === '0' && qid === extras?.subjectQid
+      const label = isSubject ? unit.title : (labels.get(qid) ?? null)
+      const found = (
+        await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0, subject: isSubject })
+      ).slice(0, statementsLeft)
       if (found.some((e) => e.source === 'openstreetmap')) mapsLeft--
       statementsLeft -= found.length
       entries.push(...found)
@@ -791,6 +800,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Wikilink anchors -> QID -> Commons — deliberately LAST. The demo's
     // point is the breadth of the ecosystem's partners; Wikimedia's own
     // media should not outrank the museum's record of its own painting.
+    // Each card says which anchor asked for it: a Valencia opera house in
+    // the Golden Gate Bridge article is baffling until the card admits it
+    // arrived through the section's link to Santiago Calatrava.
+    for (const e of commonsEntries)
+      e.why = labels.get(e._qid) ? `Depicts ${labels.get(e._qid)}, a link in this section` : null
     entries.push(...commonsEntries)
     if (extras) entries.push(...extras.categoryFiles)
 

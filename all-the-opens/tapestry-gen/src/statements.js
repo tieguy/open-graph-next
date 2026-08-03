@@ -216,7 +216,7 @@ export function mapEntry(coord, label, osm = null) {
  * still has room for one (`withMap`) — a map per anchor per section reads as
  * wallpaper, not discovery.
  */
-export async function statementEntries(qid, statements, { label, withMap }) {
+export async function statementEntries(qid, statements, { label, withMap, subject = false }) {
   const out = []
   const jobs = [
     statements.met && metEntry(statements.met),
@@ -232,7 +232,17 @@ export async function statementEntries(qid, statements, { label, withMap }) {
       console.error(`  statement pivot failed (${qid}): ${e.message}`)
     }
   }
+  // Each card names the anchor whose Wikidata entry stated the connection —
+  // a Met painting beside a section is a non sequitur until the card says
+  // which linked thing it is the museum's record of.
+  for (const e of out)
+    e.why = label
+      ? subject
+        ? `Stated by Wikidata’s entry for ${label}`
+        : `Stated by Wikidata for ${label}, a link in this section`
+      : 'Stated by Wikidata'
   const coord = withMap ? parseEarthPoint(statements.coord) : null
+  // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
   return out
 }

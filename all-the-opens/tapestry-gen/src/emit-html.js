@@ -151,12 +151,17 @@ function card(entry, inline) {
   const heading = entry.href
     ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
     : `<h4>${escapeHtml(entry.title)}</h4>`
+  // Why this item is in THIS article: the anchor that asked for it. A
+  // Valencia opera house in the Golden Gate Bridge article reads as a
+  // mistake until the card says which link brought it here.
+  const why = entry.why ? `<p class="why">${escapeHtml(entry.why)}</p>` : ''
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
     credit +
+    why +
     `</figcaption></figure>`
   )
 }

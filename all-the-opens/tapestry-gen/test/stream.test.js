@@ -34,6 +34,7 @@ const BAND = {
       title: 'A photo',
       imageUrl: 'https://example.test/x.jpg',
       attribution: { author: 'Someone', license: 'CC0' },
+      why: 'Depicts Santiago Calatrava, a link in this section',
     },
   ],
   footnotes: [
@@ -66,6 +67,11 @@ test('streamOpen carries the whole spine with band ids, no numbering, and no rai
   assert.match(open, /function __thb/)
   // The document is deliberately unfinished: the stream continues.
   assert.doesNotMatch(open, /<\/html>/)
+})
+
+test('a card says which anchor brought it here', () => {
+  const rail = bandRail(BAND)
+  assert.match(rail, /<p class="why">Depicts Santiago Calatrava, a link in this section<\/p>/)
 })
 
 test('the rail shows the actual footnotes, numbered as the prose numbers them', () => {

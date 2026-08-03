@@ -76,6 +76,7 @@ export function openAlexEntry(work, via) {
       .join(' · '),
     href: oa.oa_url,
     attribution: { author: `open access · ${oa.oa_status ?? 'oa'}`, license: `via ${via}` },
+    why: `Cited in this section — matched by ${via.toUpperCase()}`,
     _via: via,
   }
 }
@@ -88,6 +89,7 @@ export function arxivEntry(cite) {
     description: `arXiv:${cite.arxiv}`,
     href: `https://arxiv.org/abs/${cite.arxiv}`,
     attribution: { author: 'open access · arXiv', license: 'via arXiv id' },
+    why: 'Cited in this section — matched by arXiv ID',
     _via: 'arxiv',
   }
 }
