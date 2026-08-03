@@ -1,7 +1,13 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { corroborate, matchesName, sameYear, sameInstitution } from '../src/corroborate.js'
+import {
+  corroborate,
+  describedThesisArchiveId,
+  matchesName,
+  sameYear,
+  sameInstitution,
+} from '../src/corroborate.js'
 
 // --- institutions -----------------------------------------------------------
 
@@ -104,4 +110,28 @@ test('each corroborating signal names both sides, so the page can show its work'
   const signal = corroborate(REAL, THESIS).corroboratedBy.find((s) => s.field === 'institution')
   assert.match(signal.holding, /Ludwigs-Maximilians/)
   assert.match(signal.claimed, /Ludwig-Maximilians/)
+})
+
+// --- when the gap gets fixed upstream ---------------------------------------
+
+// Corroboration exists because Wikidata does not say which scan a thesis is.
+// When someone writes that fact down (P724), the guess is no longer needed, and
+// keeping it would be the tool ignoring an answer it was handed.
+
+test('a stated Internet Archive id is preferred over corroborating a guess', () => {
+  const claims = { P724: [{ mainsnak: { datavalue: { value: 'IA41548318_0126' } } }] }
+  assert.equal(describedThesisArchiveId(claims), 'IA41548318_0126')
+})
+
+test('no stated id leaves the corroborated path to do its job', () => {
+  assert.equal(describedThesisArchiveId({ P577: [] }), null)
+  assert.equal(describedThesisArchiveId({}), null)
+  assert.equal(describedThesisArchiveId(undefined), null)
+})
+
+test('an empty or malformed id is not an identifier', () => {
+  // A blank string would send the pivot to archive.org/metadata/ and 404 there,
+  // losing an item the corroborated path would have found.
+  assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: { datavalue: { value: '  ' } } }] }), null)
+  assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: {} }] }), null)
 })

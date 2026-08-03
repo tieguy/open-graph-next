@@ -130,6 +130,13 @@ evidence class exists at all.
 
 ## Open decision: labelling the thesis on Wikidata
 
+> **Superseded 2026-08-02.** The claim below is out of date: the item now carries a
+> Catalan label and description (it may have had them all along — this was not
+> re-checked in July). It still has no English or German label, and still no
+> `P724` pointing at the scan. The decision below was also revisited: see
+> `../2026-08-02-q72419729-proposed-edits.md`, which reframes the edit as fixing a
+> gap the render *surfaced* rather than dressing up the demo, and drafts it.
+
 `Q72419729` — Prandtl's dissertation — has **no label in any language**. It is a
 bare structural item: `P50` author, `P577` date, `P4101` institution, `P31`
 doctoral thesis, and no name. The pivot therefore takes its display title from

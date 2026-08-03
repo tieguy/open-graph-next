@@ -38,7 +38,7 @@ import {
   sectionCitations,
   templateParams,
 } from './src/citations.js'
-import { corroborate } from './src/corroborate.js'
+import { corroborate, describedThesisArchiveId } from './src/corroborate.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
 import { buildHtml } from './src/emit-html.js'
@@ -168,6 +168,29 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
       `&ids=${thesisQid}&props=claims`,
   )
   const claims = body.entities?.[thesisQid]?.claims ?? {}
+
+  // If Wikidata now says which scan this is, take it and stop. Corroboration is
+  // what you do when nobody has written the identifier down; continuing to guess
+  // after they have would be the tool preferring its own inference to a stated
+  // fact — and it costs nine requests to reach the same item.
+  const statedId = describedThesisArchiveId(claims)
+  if (statedId) {
+    const meta = (await getJson(`https://archive.org/metadata/${statedId}`)).metadata ?? {}
+    if (meta.title) {
+      return {
+        source: 'internet_archive',
+        title: meta.title,
+        description: [meta.type_of_work ?? 'Thesis', meta.institution, yearText(meta.date)]
+          .filter(Boolean)
+          .join(' · '),
+        imageUrl: `https://archive.org/services/img/${statedId}`,
+        attribution: { author: `archive.org/details/${statedId}`, license: 'stated by Wikidata' },
+        evidence: 'identifier',
+        _via: 'P1026 → P724',
+      }
+    }
+  }
+
   const year = claims.P577?.[0]?.mainsnak?.datavalue?.value?.time
   const uniQid = claims.P4101?.[0]?.mainsnak?.datavalue?.value?.id
   if (!year || !uniQid) return null
@@ -593,7 +616,14 @@ async function main() {
   } catch (e) {
     console.error(`  thesis pivot failed: ${e.message}`)
   }
-  if (thesis) console.error(`thesis: ${thesis.title} (${thesis.corroboratedBy.length} signals agree)`)
+  if (thesis)
+    console.error(
+      `thesis: ${thesis.title} (` +
+        (thesis.corroboratedBy
+          ? `${thesis.corroboratedBy.length} signals agree`
+          : 'identified by the P724 Wikidata states') +
+        ')',
+    )
 
   // Subject-level pivots: what the ecosystem holds *about the subject*, as
   // opposed to what any one section cited. Both are keyed on a claim the subject

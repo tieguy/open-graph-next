@@ -26,12 +26,17 @@ const FILES = [
   ['tapestry-gen/demo/spike-apollo-11.html', 'apollo-11.html'],
   ['tapestry-gen/demo/spike-brown-v-board-of-education.html', 'brown-v-board-of-education.html'],
   ['tapestry-gen/demo/spike-ludwig-prandtl.html', 'ludwig-prandtl.html'],
-  ['tapestry-gen/demo/apollo-11.html', 'curated-apollo-11.html'],
 ]
 
-// The D3 demo is copied whole: it loads `data/apollo-11/**` at runtime by
-// relative path, so it only works with its data sitting beside it.
-const DIRS = [['web-demo', 'graph']]
+// The earlier curated-dataset renders — `demo/apollo-11.html` and the D3 graph
+// in `web-demo/` — are deliberately not published. They demonstrate the same
+// idea from hand-curated data, which is the opposite of the claim the live pages
+// make, and an unlinked page on a demo site is just a loose end. Both still
+// build and run locally; re-add them here if they earn a place again.
+//
+// (A directory would be copied whole — the D3 demo loads `data/apollo-11/**` at
+// runtime by relative path, so it only works with its data beside it.)
+const DIRS = []
 
 async function main() {
   await rm(OUT, { recursive: true, force: true })
@@ -54,7 +59,7 @@ async function main() {
     console.log(`${(to + '/').padEnd(34)}     — copied`)
   }
 
-  console.log(`\n_site/ built — ${Math.round(bytes / 1024)} KB of renders plus the graph demo.`)
+  console.log(`\n_site/ built — ${Math.round(bytes / 1024)} KB across ${FILES.length} files.`)
   console.log('Preview: python3 -m http.server 8000 -d _site')
 }
 

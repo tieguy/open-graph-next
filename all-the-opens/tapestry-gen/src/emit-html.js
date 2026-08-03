@@ -174,9 +174,11 @@ export function buildHtml({ title, description, bands, inline = new Map(), prove
   // noise, and worse, implies a rigour this render did not exercise.
   const hasCorroborated = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
   const evidenceKey = hasCorroborated
-    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card was matched on a described object — ` +
-      `an author, a date and an institution that agree — not on an identifier the two sources share. ` +
-      `The agreeing values are printed on the card.</p>`
+    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
+      `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
+      `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
+      `values are printed on the card, because a description that agrees is a weaker claim than an ` +
+      `identifier that matches, and must not be read as one.</p>`
     : ''
 
   return `<!doctype html>

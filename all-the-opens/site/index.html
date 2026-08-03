@@ -76,11 +76,16 @@ section > p{max-width:60ch}
 .ledger b{color:#4a4f55;font-weight:600}
 
 .note{font-family:var(--sans);font-size:.86rem;line-height:1.65;color:var(--muted);max-width:62ch}
-.limits{font-family:var(--sans);font-size:.92rem;line-height:1.7;color:var(--muted);
-  max-width:64ch;margin:20px 0 0;padding:0;list-style:none}
-.limits li{padding:0 0 14px 20px;position:relative}
-.limits li::before{content:"—";position:absolute;left:0;color:#a0a4a9}
-.limits b{color:var(--ink);font-weight:600}
+.note b,section > p b{color:var(--ink);font-weight:600}
+
+/* Each hurdle is a named problem, not an item in a list — the heading carries
+   the point and the prose explains it. */
+.hurdle{margin:36px 0 0;padding-top:28px;border-top:1px dotted var(--rule);max-width:64ch}
+.hurdle > h3{font-family:var(--serif);font-size:1.35rem;line-height:1.25;letter-spacing:-.01em;
+  margin:0 0 12px;color:var(--head);font-weight:600}
+.hurdle p{margin:0 0 1em}
+.hurdle .join{max-width:none}
+.hurdle .join h3{font-size:1.15rem;margin:0 0 4px}
 
 footer{padding:44px 0 72px;border-top:1px solid var(--rule);margin-top:56px;
   font-family:var(--sans);font-size:.8rem;line-height:1.7;color:var(--muted)}
@@ -104,110 +109,161 @@ footer{padding:44px 0 72px;border-top:1px solid var(--rule);margin-top:56px;
   <p class="lede">The open knowledge ecosystem is already connected. Almost nothing shows you the connections.</p>
   <p class="thesis">These pages take an English Wikipedia article and render it with the open
     ecosystem's media and cited sources placed beside the prose — Internet Archive scans,
-    Commons files, OpenLibrary editions, court opinions. <b>Nothing is placed by hand.</b>
+    Commons files, OpenLibrary editions, court opinions. <b>Nothing is sourced or placed by hand.</b>
     Every item was found by an identifier the article itself states: a citation's ISBN, OCLC or
     LCCN, or a wikilink's Wikidata QID. There is no per-article code and, on the three pages
     below, no curated dataset.</p>
 </header>
 
 <section>
-  <span class="eyebrow">The hard case</span>
-  <h2>An edge with no identifier on either side</h2>
-  <p>Ludwig Prandtl's 1899 dissertation is scanned and public at the Internet Archive. It carries no
-    ISBN, no OCLC, no LCCN. Wikidata knows of it only as <span class="id">Q72419729</span> — an item
-    with an author, a date and an institution, and <b>no label in any language</b>. Nothing is shared
-    between the two records to join on.</p>
-  <p>So the match is made on the object Wikidata <em>describes</em> (<span class="id">P1026</span>),
-    and the page shows its work:</p>
-
-  <div class="join">
-    <p class="join-kind">Corroborated — no shared identifier</p>
-    <h3>Kipp-Erscheinungen</h3>
-    <p class="sub">archive.org/details/<span class="id">IA41548318_0126</span></p>
-    <dl>
-      <dt>creator</dt>
-      <dd>Prandtl, Ludwig <span class="agrees">agrees with</span> Ludwig Prandtl</dd>
-      <dt>date</dt>
-      <dd>14 November 1899 <span class="agrees">agrees with</span> 1899</dd>
-      <dt>institution</dt>
-      <dd>Ludwigs-Maximilians-Universität zu München <span class="agrees">agrees with</span> Ludwig-Maximilians-Universität München</dd>
-    </dl>
-    <p class="why">All three signals are required, because the same collection holds theses by
-      Ludwig, Hans and Antonius Prandtl. The card is dashed and says <em>corroborated, not
-      identified</em>, because a description that agrees is a weaker claim than an identifier that
-      matches, and it must not be allowed to read like one.</p>
-  </div>
-</section>
-
-<section>
   <span class="eyebrow">Generated live · no dataset</span>
   <h2>Three articles</h2>
-  <p>Each was chosen to break the pipeline in a different way. The counts are from the run that
-    produced the linked page.</p>
+  <p>Luis chose three articles to demonstrate different types of knowledge — a technological event,
+    a socio-legal event, and a biography — and how we can see the links in each of them. Item
+    counts are from a processing run that produced the page.</p>
 
   <ul class="renders">
     <li><a class="render" href="./apollo-11.html">
       <span class="name">Apollo 11</span>
-      <span class="tests">An event, media-rich, and the citation style that hides the books:
-        57 of its 65 citation anchors are <span class="id">{{sfn}}</span> pointers into a
-        bibliography, invisible to anything that reads footnotes alone.</span>
+      <span class="tests">A moment of shared public memory, and one of the best-sourced articles
+        on Wikipedia — film, photography, audio and transcripts held across half a dozen
+        institutions, alongside the books its editors actually cite.</span>
       <span class="ledger"><b>36</b> sections<br><b>130</b> anchors<br><b>17</b> IA · <b>191</b> Commons</span>
     </a></li>
     <li><a class="render" href="./brown-v-board-of-education.html">
       <span class="name">Brown v. Board of Education</span>
-      <span class="tests">A legal document, cited inline, where the primary source is neither a
-        book nor a picture — the full opinion comes from the Free Law Project.</span>
+      <span class="tests">An important social moment that no single institution holds. The law
+        itself comes from the Free Law Project — the full opinion, not a summary of it — while the
+        context around it, the people, the schools, the photographs, comes from everywhere
+        else.</span>
       <span class="ledger"><b>17</b> sections<br><b>54</b> anchors<br><b>10</b> IA · <b>55</b> Commons · <b>1</b> opinion</span>
     </a></li>
     <li><a class="render" href="./ludwig-prandtl.html">
       <span class="name">Ludwig Prandtl</span>
-      <span class="tests">A person with a thin article, no bibliography, and the dissertation
-        above — reachable only by description. The page that proves the corroborated class exists.</span>
+      <span class="tests">One of the 319,341 items in the Internet Archive's scanned
+        dissertations collection — Prandtl's 1899 doctorate among them. Here it surfaces inside the
+        encyclopedia article about its author, beside the paragraph about the work it became,
+        rather than waiting in a search box for someone who already knows to look.</span>
       <span class="ledger"><b>5</b> sections<br><b>18</b> anchors<br><b>2</b> IA · <b>38</b> Commons</span>
     </a></li>
   </ul>
+</section>
+
+<section>
+  <span class="eyebrow">Technical approach</span>
+  <h2>How the pages are built</h2>
+  <p>Each page starts from the article's own wikitext. Two kinds of anchor come out of it: the
+    <b>identifiers in its citations</b> — ISBN, OCLC, LCCN — and the <b>Wikidata QIDs behind its
+    wikilinks</b>. Each anchor is looked up in the open ecosystem, and whatever comes back is
+    placed in the section whose anchor found it. That rule is the whole design, and it is why
+    there is no per-article code.</p>
   <p class="note">Each page is one self-contained HTML file, generated ahead of time — Apollo 11 is
     905&nbsp;KB and takes a few minutes to build, most of it spent waiting politely on other
-    people's servers.</p>
+    people's servers. That patience is not incidental. Nominally-open APIs are getting harder to
+    use as institutions raise defences against scrapers and AI crawlers: rate limits tighten,
+    blocks land without notice, and a well-behaved client now has to identify itself, throttle
+    itself, and yield to human traffic to stay welcome. A cooperative ecosystem that is open in
+    licence but closing in practice is its own kind of problem.</p>
 </section>
 
 <section>
-  <span class="eyebrow">Earlier · one curated dataset</span>
-  <h2>Two renderings of Apollo 11</h2>
-  <p>Before the live pipeline, the same argument ran on a hand-curated Apollo 11 dataset spanning
-    eight sources. Both of these read from that dataset, not from Wikipedia.</p>
-  <ul class="renders">
-    <li><a class="render" href="./curated-apollo-11.html">
-      <span class="name">Apollo 11, from the dataset</span>
-      <span class="tests">The same enriched-article render, fed by curated items instead of
-        discovery. The layout the live pages inherited.</span>
-    </a></li>
-    <li><a class="render" href="./graph/">
-      <span class="name">The connection graph</span>
-      <span class="tests">The first prototype: a force-directed graph of the same items, where
-        edge thickness is how many authority systems back the connection.</span>
-    </a></li>
-  </ul>
-</section>
+  <span class="eyebrow">Where it gets hard</span>
+  <h2>Four hard problems</h2>
 
-<section>
-  <span class="eyebrow">Honesty</span>
-  <h2>What this does not do</h2>
-  <ul class="limits">
-    <li><b>You can't type an article in.</b> These four pages are pre-generated. Making it live
-      needs streaming and a server, and that decision hasn't been made.</li>
-    <li><b>Coverage is the real bottleneck, not extraction.</b> Of the unique identifiers cited
-      across these articles, most reach no Internet Archive record at all. The query is right; the
-      answer is genuinely nothing. That is a fact about the ecosystem, not a bug in the pipeline —
-      so each section states how many of its sources you can actually open, and a section of dead
-      ends says so rather than just looking thin.</li>
-    <li><b>Where an article states no identifier, nothing appears.</b> There is no fuzzy title
-      search filling the gaps, because a guess presented beside a verified match would poison
-      every match on the page.</li>
-  </ul>
+  <div class="hurdle">
+    <h3>Laying out data you have never seen</h3>
+    <p>This one comes before any of the linking, and it is easy to underestimate. An arbitrary
+      article gives you arbitrary shape: one section carries forty images and the next carries
+      none, a cited book has a cover or it doesn't, and the article's own images arrive at whatever
+      dimensions someone uploaded. A layout that only looks good on the article you designed it
+      against is a demo, not a pipeline.</p>
+    <p>Two decisions do most of the work here. The page lets <b>CSS reflow the prose around the
+      media</b> rather than computing positions, so a sparse section simply closes up instead of
+      leaving a hole where a fixed column would have been. And <b>every image is sized from its
+      real dimensions</b>, read out of the JPEG or PNG header when the API won't say, so nothing is
+      ever squashed into a guessed aspect ratio.</p>
+  </div>
+
+  <div class="hurdle">
+    <h3>The citations that hide the books</h3>
+    <p>Wikipedia has two citation styles, and the better-sourced the article, the more likely it
+      uses the harder one. Apollo 11 keeps 57 of its 65 citation anchors as
+      <span class="id">{{sfn}}</span> pointers into a pooled bibliography rather than in the
+      footnotes themselves — so anything that reads footnotes alone misses most of the books on
+      exactly the pages that cite the most books. They have to be joined back on surname and year.</p>
+  </div>
+
+  <div class="hurdle">
+    <h3>The works with no identifier anywhere</h3>
+    <p>Prandtl's 1899 dissertation is scanned and public at the Internet Archive. It carries no
+      ISBN, no OCLC, no LCCN. Until this week Wikidata knew it as <span class="id">Q72419729</span>
+      — an item with an author, a date and an institution, a label in Catalan and in no other
+      language, and <b>no pointer to the scan</b>. Nothing was shared between the two records to
+      join on, which is the normal condition for a newly-scanned collection rather than an exotic
+      one.</p>
+    <p>So the match was made on the object Wikidata <em>describes</em>
+      (<span class="id">P1026</span>), and the page showed its work:</p>
+
+    <div class="join">
+      <p class="join-kind">Corroborated — no shared identifier</p>
+      <h3>Kipp-Erscheinungen</h3>
+      <p class="sub">archive.org/details/<span class="id">IA41548318_0126</span></p>
+      <dl>
+        <dt>creator</dt>
+        <dd>Prandtl, Ludwig <span class="agrees">agrees with</span> Ludwig Prandtl</dd>
+        <dt>date</dt>
+        <dd>14 November 1899 <span class="agrees">agrees with</span> 1899</dd>
+        <dt>institution</dt>
+        <dd>Ludwigs-Maximilians-Universität zu München <span class="agrees">agrees with</span> Ludwig-Maximilians-Universität München</dd>
+      </dl>
+      <p class="why">All three signals are required, because the same collection holds theses by
+        Ludwig, Hans and Antonius Prandtl. The card is dashed and says <em>corroborated, not
+        identified</em>, because a description that agrees is a weaker claim than an identifier that
+        matches, and it must not be allowed to read like one.</p>
+    </div>
+    <p>But the more interesting move was upstream, and on <b>2 August 2026</b> we made it. Nothing
+      about the gap was permanent: what made the thesis hard to find was a handful of facts nobody
+      had written down, and writing them down is an edit anyone can make. Trying to
+      <em>display</em> the collection is what surfaced it — you don't notice a missing identifier
+      until something tries to follow it. <b>Read the graph to find what's missing, then go fix
+      it.</b></p>
+    <p>So <span class="id">Q72419729</span> now carries English and German labels, and — the one
+      that matters — <span class="id">P724</span>, the Internet Archive identifier, pointing
+      straight at the scan. The title came off the scan's own title page: the Internet Archive's
+      <i>Kipp-Erscheinungen</i> is the short form, dropping the subtitle <i>ein Fall von instabilem
+      elastischem Gleichgewicht</i>.</p>
+    <p><b>The Prandtl page above no longer shows a dashed card.</b> The pivot checks for a stated
+      identifier before it corroborates anything, so the thesis is now found the ordinary way — one
+      request instead of nine — and the corroborated legend has disappeared from that page because
+      nothing on it is corroborated any more. Every other tool that joins these two collections
+      gets the same benefit, without knowing this page exists.</p>
+    <p><b>The expensive half of this work is already done.</b> Turning 319,341 dissertations into
+      public scans took money and years, and it is the part that cannot be automated. What remains
+      is the cheap half, and it is mostly not done: connecting each scan to the records that
+      already describe its author, its subject and its institution. We connected one. Each
+      connection is a single claim added to a record that already exists.</p>
+    <p>Which is what this page is really a proof of concept for. Not one thesis — the state of the
+      collection once that linking work is done, where a scan appears next to the paragraph it
+      belongs to, in whatever article, in whatever language, without anybody curating a page for
+      it. The corroboration code stays because that state doesn't arrive all at once: for as long
+      as most of the collection is unlinked, something has to be able to find a scan by what it is
+      rather than by what it is called.</p>
+  </div>
+
+  <div class="hurdle">
+    <h3>The ecosystem's own coverage</h3>
+    <p>This is the real ceiling, and it is not a software problem. Of the unique identifiers cited
+      across these three articles, most reach no Internet Archive record at all — the query is
+      right and the answer is genuinely nothing. So each section states how many of its sources you
+      can actually open, and a section of dead ends says so rather than just looking thin.</p>
+    <p>Nothing fills those gaps with a fuzzy title search. A guess sitting beside a verified match
+      would poison every match on the page. And you can't yet type your own article in: these pages
+      are pre-generated, and going live needs streaming and a server.</p>
+  </div>
 </section>
 
 <footer>
+  <p>Inspired by Tapestry, from the Internet Archive.</p>
   <p>Source: <a href="https://github.com/tieguy/open-graph-next">github.com/tieguy/open-graph-next</a>
   · Code CC0. Article text CC BY-SA 4.0; media under their own licences, shown on each item.</p>
   <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>

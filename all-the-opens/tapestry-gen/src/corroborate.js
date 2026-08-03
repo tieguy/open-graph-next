@@ -138,3 +138,22 @@ export function corroborate(candidate, described) {
     corroboratedBy.push({ field: 'institution', holding: candidate.institution, claimed: described.institution })
   return { matched: corroboratedBy.length === 3, corroboratedBy }
 }
+
+/**
+ * The Internet Archive identifier the thesis entity states, if it states one.
+ *
+ * Corroboration is a fallback for a gap in the data, not a preference. Once
+ * someone records `P724` on the thesis, the scan is *identified* and guessing
+ * would mean ignoring an answer we were handed — so callers must check here
+ * first and only corroborate when this returns null. That is also the cheaper
+ * path by an order of magnitude: one metadata read instead of a surname search
+ * plus a metadata read per candidate.
+ *
+ * This gap is worth fixing upstream when you meet it. `P724` on Prandtl's
+ * dissertation (Q72419729) was added on 2026-08-02 for exactly this reason,
+ * after the render made its absence visible.
+ */
+export function describedThesisArchiveId(claims) {
+  const id = claims?.P724?.[0]?.mainsnak?.datavalue?.value
+  return typeof id === 'string' && id.trim() ? id.trim() : null
+}
