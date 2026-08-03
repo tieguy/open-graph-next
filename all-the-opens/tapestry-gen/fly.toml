@@ -5,7 +5,7 @@
 # set their own (`fly secrets set WIKIMEDIA_UA_CONTACT=you@example.com`) —
 # the server refuses to start without it, which is the point.
 
-app = "article-tapestry"
+app = "help-from-our-friends"
 primary_region = "sjc"
 
 [http_service]

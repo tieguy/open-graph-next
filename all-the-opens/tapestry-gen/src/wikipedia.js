@@ -371,10 +371,19 @@ const STRIP_BLOCKS = [
  * A section's body as an ordered list of plain-text paragraphs and subheadings,
  * ready to be re-styled for the canvas. Wikipedia's HTML is far richer than a
  * Tapestry text frame can render, so it is reduced rather than passed through.
+ *
+ * With `notePrefix` set, each block also carries `html`: the same content kept
+ * as sanitized inline HTML — intra-wiki links and the article's own footnote
+ * markers survive, re-anchored under the prefix so a marker and its gutter
+ * note meet on this page the way they do on Wikipedia. The plain `text` stays
+ * exactly what it always was; the Tapestry canvas keeps reading it.
  */
-export function articleBlocks(html) {
+export function articleBlocks(html, { notePrefix = null } = {}) {
   let cleaned = html
-  for (const pattern of STRIP_BLOCKS) cleaned = cleaned.replace(pattern, ' ')
+  const strip = notePrefix
+    ? STRIP_BLOCKS.filter((p) => !p.source.startsWith('<sup'))
+    : STRIP_BLOCKS
+  for (const pattern of strip) cleaned = cleaned.replace(pattern, ' ')
 
   const blocks = []
   const pattern = /<(p|h3|h4)\b[^>]*>([\s\S]*?)<\/\1>/gi
@@ -382,9 +391,117 @@ export function articleBlocks(html) {
   while ((match = pattern.exec(cleaned))) {
     const text = decodeEntities(match[2].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim()
     if (text.length < 2) continue
-    blocks.push({ kind: match[1].toLowerCase() === 'p' ? 'p' : 'h', text })
+    const block = { kind: match[1].toLowerCase() === 'p' ? 'p' : 'h', text }
+    if (notePrefix)
+      block.html = sanitizeFragment(match[2], { notePrefix })
+        .replace(/&#91;/g, '[')
+        .replace(/&#93;/g, ']')
+        .replace(/\s+/g, ' ')
+        .trim()
+    blocks.push(block)
   }
   return blocks
+}
+
+/**
+ * A fragment of Wikipedia's rendered HTML, reduced to what this page can
+ * honestly re-serve. Kept: intra-wiki links (they stay `/wiki/…`, so on this
+ * server they resolve to more of these renders — the renderer may re-base
+ * them), footnote markers re-anchored under `notePrefix`, external links, and
+ * inline emphasis. Everything else is unwrapped to its text. Anchors whose
+ * target this page cannot honour — namespace links, `#CITEREF` biblio jumps —
+ * are unwrapped rather than left to 404.
+ */
+export function sanitizeFragment(html, { notePrefix = null } = {}) {
+  let aKept = false
+  // Elements whose CONTENT must go too: MediaWiki injects the CS1 stylesheet
+  // inline into the first styled citation on a page, and stripping only the
+  // tags would print the stylesheet as prose.
+  const cleaned = html.replace(/<(style|script)[\s\S]*?<\/\1>/gi, '')
+  return cleaned.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (tag, rawName) => {
+    const name = rawName.toLowerCase()
+    const closing = tag.startsWith('</')
+    if (name === 'a') {
+      if (closing) {
+        const kept = aKept
+        aKept = false
+        return kept ? '</a>' : ''
+      }
+      const href = /\shref="([^"]*)"/i.exec(tag)?.[1] ?? ''
+      const wiki = /^\/wiki\/([^"#]+)/.exec(href)
+      if (wiki && !decodeEntities(wiki[1]).includes(':')) {
+        aKept = true
+        return `<a class="wl" href="${href}">`
+      }
+      const note = notePrefix && /^#cite_note-(.+)$/.exec(href)
+      if (note) {
+        aKept = true
+        return `<a href="#${notePrefix}-note-${note[1]}">`
+      }
+      if (/^https?:\/\//.test(href)) {
+        aKept = true
+        return `<a class="ext" href="${href}" target="_blank" rel="noopener">`
+      }
+      aKept = false
+      return ''
+    }
+    if (name === 'sup') {
+      if (closing) return '</sup>'
+      return /class="[^"]*\breference\b/.test(tag) ? '<sup class="ref">' : '<sup>'
+    }
+    if (name === 'b' || name === 'i' || name === 'cite' || name === 'sub')
+      return closing ? `</${name}>` : `<${name}>`
+    return ''
+  })
+}
+
+/**
+ * Every footnote body on the page: note name → the `reference-text` inner
+ * HTML, exactly as Wikipedia rendered it. The parse HTML entity-escapes the
+ * `id` attributes (`cite&#95;note-…`) but not the markers' hrefs, so names
+ * are decoded before keying — that is where the two sides meet.
+ */
+export function referenceNotes(html) {
+  const notes = new Map()
+  const li = /<li id="(cite[^"]*?note-[^"]+)">([\s\S]*?)<\/li>/gi
+  let m
+  while ((m = li.exec(html))) {
+    const name = decodeEntities(m[1]).replace(/^cite_note-/, '')
+    const text = /<span class="reference-text">([\s\S]*)$/.exec(m[2])?.[1]
+    if (text != null && !notes.has(name)) notes.set(name, text.replace(/<\/span>\s*$/, ''))
+  }
+  return notes
+}
+
+/**
+ * The footnotes a band's prose actually points at, in first-marker order —
+ * Wikipedia's own citations, renumbered by nothing: `num` is the number the
+ * marker prints, so the gutter agrees with the text. Each carries the ISBN
+ * its `Special:BookSources` link states, when one does, so the renderer can
+ * append what the open ecosystem holds of it.
+ */
+export function footnotesFor(blocks, notes, notePrefix) {
+  const out = []
+  const seen = new Set()
+  const marker = new RegExp(`<a href="#${notePrefix}-note-([^"]+)">\\[([^\\]<]+)\\]`, 'g')
+  for (const b of blocks) {
+    let m
+    while ((m = marker.exec(b.html ?? ''))) {
+      const name = m[1]
+      if (seen.has(name)) continue
+      seen.add(name)
+      const body = notes.get(decodeEntities(name))
+      if (body == null) continue
+      const rawIsbn = /Special:BookSources\/([0-9Xx-]+)/.exec(body)?.[1]?.replace(/[^0-9Xx]/g, '')
+      out.push({
+        id: `${notePrefix}-note-${name}`,
+        num: m[2],
+        isbn: rawIsbn && (rawIsbn.length === 10 || rawIsbn.length === 13) ? rawIsbn : null,
+        html: sanitizeFragment(body, { notePrefix }),
+      })
+    }
+  }
+  return out
 }
 
 function decodeEntities(value) {

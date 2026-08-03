@@ -49,9 +49,11 @@ tail is the Commons queue, serial by etiquette.
 
 ## Deployed demo
 
-`serve.js` runs publicly at **https://article-tapestry.fly.dev/** (Fly.io app
-`article-tapestry`, personal org, sjc, scale-to-zero; `Dockerfile` +
-`fly.toml` here). Deploy with `flyctl deploy --remote-only` from this
+`serve.js` runs publicly at **https://help-from-our-friends.fly.dev/**
+(Fly.io app `help-from-our-friends` — renamed from `article-tapestry`
+2026-08-03; personal org, sjc, scale-to-zero; `Dockerfile` + `fly.toml`
+here). The public name is *"Help From Our Friends: An Open Knowledge Web
+Experiment"*. Deploy with `flyctl deploy --remote-only` from this
 directory. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
 never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
@@ -127,10 +129,16 @@ Tapestry `layout`/`emit`/`zip`).
   geometry could not (dead whitespace, squashed images, non-responsive). Only
   `layout.js`/`emit.js`/`zip.js`/`vendor/parse-root.mjs` are Tapestry-specific;
   everything else is output-agnostic and reused by the HTML render.
-- **Reachability-ranked citations.** A section's shown sources prefer what a
-  reader can open: borrowable/readable book > archived page > DOI > catalog-only
-  book > bare live link. Cited books link to their Internet Archive copy via
-  OpenLibrary.
+- **The gutter shows Wikipedia's own footnotes** (2026-08-03, replacing the
+  earlier curated three-source shortlist): each band's rail renders the
+  actual `reference-text` bodies the section's markers point at, numbered as
+  the prose numbers them, folded past the first eight. Where a note cites a
+  book OpenLibrary says is readable/borrowable, the access link rides on the
+  note. Prose keeps its wikilinks — rewritten to `/wiki/…` on this site, so
+  readers click through to more enriched renders — and its footnote markers.
+  No section numbering: Wikipedia doesn't number, so neither do we.
+  `sanitizeFragment` in `src/wikipedia.js` is the only thing that lets
+  article HTML through; everything else is still escaped.
 - **True image dimensions** are read from JPEG/PNG headers (`imagesize`) so covers
   and photos are never squashed by a guessed aspect.
 - **OpenLibrary covers are inlined** as data URIs — they redirect through

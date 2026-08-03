@@ -21,16 +21,15 @@ import {
   fetchArticle,
   fetchQids,
   fetchSectionWikitext,
+  footnotesFor,
+  referenceNotes,
   sectionOutline,
   sliceSectionHtml,
   sliceSectionWikitext,
 } from './wikipedia.js'
 import {
   bibliographyIdentifiers,
-  citationCoverUrl,
-  citationHref,
   openLibraryAccess,
-  prioritizeCitations,
   resolveShortCites,
   sectionCitations,
   templateParams,
@@ -38,7 +37,7 @@ import {
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
-import { CACHE, coverDataUri, getJson } from './http.js'
+import { CACHE, getJson } from './http.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import { entityStatements, statementEntries } from './statements.js'
@@ -232,53 +231,25 @@ async function openLibraryVolumes(isbns) {
 
 
 /**
- * A section's cited works as the rail shows them: ranked by how openly a reader
- * can reach each one, then given a cover and a link that says what opening it
- * will get you. Both citation styles arrive here — an inline {{cite}} and a
- * work resolved through the bibliography are the same kind of thing once found.
- * Holdings arrive pre-fetched (one batched request for the whole article).
+ * What the section cites versus what a reader can actually open. The gutter
+ * now shows the article's own footnotes rather than a curated shortlist, so
+ * this is the summary line under them: without it the difference between a
+ * section whose sources are all reachable and one whose sources are all dead
+ * ends is invisible. Holdings arrive pre-fetched (one batched request for
+ * the whole article); access lands on the candidates as a side effect, which
+ * is also what lets footnotes borrow it by ISBN.
  */
-async function railCitations(candidates, volumes) {
+function citationCoverage(candidates, volumes) {
   for (const cite of candidates) {
     if (!cite.isbn) continue
     cite.access = openLibraryAccess(volumes.get(cite.isbn))
   }
-  const chosen = prioritizeCitations(candidates, CITES_PER_SECTION)
-  const built = []
-  for (const cite of chosen) {
-    const coverUrl = citationCoverUrl(cite)
-    built.push({
-      kind: cite.kind ?? 'book',
-      // The ISBN travels so a band can notice its media cards duplicating
-      // what the rail already shows.
-      isbn: cite.isbn ?? null,
-      title: cite.title || 'Untitled source',
-      author: cite.author ?? null,
-      date: cite.date ?? null,
-      publisher: cite.publisher ?? null,
-      href: cite.access ? cite.access.url : citationHref(cite),
-      linkLabel: cite.access ? cite.access.label : null,
-      // The archived copy is its own link, not a silent replacement for the
-      // stated URL — with the date it was taken, when the template says.
-      archiveUrl: cite.archiveUrl ?? null,
-      archiveDate: cite.archiveDate ?? null,
-      cover: coverUrl && (await coverDataUri(coverUrl)) ? coverUrl : null,
-    })
-  }
-
-  // What the section cites versus what a reader can actually open. Only a few
-  // sources fit in the rail, so without this the difference between a section
-  // whose sources are all reachable and one whose sources are all dead ends is
-  // invisible — both just show three entries.
   const open = candidates.filter(
     (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
   ).length
   const catalogued = candidates.filter((c) => c.access?.availability === 'catalog').length
   const linked = candidates.filter((c) => !c.access && (c.archiveUrl || c.doi || c.url)).length
-  return {
-    shown: built,
-    coverage: { total: candidates.length, open, catalogued, linked },
-  }
+  return { total: candidates.length, open, catalogued, linked }
 }
 
 /**
@@ -576,10 +547,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
     viaShortCite: 0,
     sections: 0,
   }
+  // The footnote bodies, once for the whole page: each band's gutter shows
+  // the notes its own prose points at, joined here by note name.
+  const noteMap = referenceNotes(article.html)
+
   const units = []
   for (const s of [{ index: '0', title: page }, ...sections]) {
     const html = sliceSectionHtml(article.html, article.sections, s.index) ?? ''
-    const blocks = articleBlocks(html)
+    const bandId = s.index === '0' ? 'slede' : `s${s.index}`
+    const blocks = articleBlocks(html, { notePrefix: bandId })
     if (!blocks.length) continue
     stats.sections++
     const wikitext = await sectionWikitext(s.index)
@@ -607,6 +583,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       index: s.index,
       title: s.title,
       blocks,
+      footnotes: footnotesFor(blocks, noteMap, bandId),
       railCandidates,
       identified,
       scholarly,
@@ -754,9 +731,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
-    // The rail first: what it shows decides which media cards would be
-    // redundant copies of it.
-    const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
+    const coverage = citationCoverage(unit.railCandidates, volumes)
+    // The gutter shows Wikipedia's own footnotes; where one cites a book the
+    // open ecosystem holds, the access link rides along on the note itself.
+    const accessByIsbn = new Map(
+      unit.railCandidates.filter((c) => c.isbn && c.access).map((c) => [c.isbn, c.access]),
+    )
+    const footnotes = unit.footnotes.map((f) => ({
+      ...f,
+      access: (f.isbn && accessByIsbn.get(f.isbn)) || null,
+    }))
 
     const entries = []
     // The primary source first, where the subject IS a document — or wrote one.
@@ -764,9 +748,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
     if (extras?.thesis) entries.push(extras.thesis)
     if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries)
 
-    // Citation anchors -> Internet Archive — minus the works the rail
-    // already offers, which would be the same book twice in one band.
-    for (const hit of dedupedIaEntries(unit.identified, iaHits, cites)) {
+    // Citation anchors -> Internet Archive. The gutter's footnotes are text;
+    // a cover card is the complementary visual, so cards no longer yield to
+    // them — only two citations resolving to one scan still collapse.
+    for (const hit of dedupedIaEntries(unit.identified, iaHits, [])) {
       entries.push(hit)
       stats.ia++
     }
@@ -842,7 +827,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       title: unit.title,
       blocks: unit.blocks,
       entries,
-      citations: cites,
+      footnotes,
       coverage: coverageText(coverage),
       disclosure: fullDisclosure,
       // Set when any anchor here drew from more than BROAD_ANCHOR candidates.

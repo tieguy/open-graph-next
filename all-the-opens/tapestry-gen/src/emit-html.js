@@ -33,12 +33,6 @@ const SOURCE = {
   artic: { name: 'Art Institute of Chicago', icon: 'https://www.artic.edu/favicon.ico' },
 }
 
-const CITATION_KIND = {
-  web: 'web source', news: 'news', book: 'book', journal: 'journal article',
-  magazine: 'magazine', press: 'press release', av: 'audio / video',
-  arxiv: 'preprint', generic: 'source',
-}
-
 const iaEmbed = (source) => {
   const m = /archive\.org\/(?:details|embed)\/([^/?#]+)/.exec(source ?? '')
   return m ? `https://archive.org/embed/${m[1]}` : null
@@ -76,9 +70,10 @@ function sourceTag(source, inline = new Map()) {
   return `<span class="src">${favicon(source, inline)}${escapeHtml(meta.name)}</span>`
 }
 
-// A citation is a link, not an item, so it carries no source slug — but a page
-// that sends the reader to OpenLibrary twenty times is using OpenLibrary, and a
-// legend that omits it is describing the carousels rather than the page.
+// A footnote is a link, not an item, so it carries no source slug — but a page
+// whose references borrow through OpenLibrary twenty times is using
+// OpenLibrary, and a legend that omits it is describing the carousels rather
+// than the page.
 const CITED_HOST = [
   [/(^|\.)openlibrary\.org/, 'openlibrary'],
   [/(^|\.)archive\.org/, 'internet_archive'],
@@ -88,15 +83,15 @@ const CITED_HOST = [
 /** The source slugs this page actually shows, in the order SOURCE declares them. */
 export function sourcesUsed(bands) {
   const seen = new Set()
+  const noteHost = (url) => {
+    const host = URL.canParse?.(url) ? new URL(url).hostname : null
+    if (host) for (const [re, slug] of CITED_HOST) if (re.test(host)) seen.add(slug)
+  }
   for (const b of bands ?? []) {
     for (const e of b.entries ?? []) if (e.source) seen.add(e.source)
-    for (const c of b.citations ?? []) {
-      if (c.source) seen.add(c.source)
-      for (const url of [c.href, c.cover]) {
-        if (!url) continue
-        const host = URL.canParse?.(url) ? new URL(url).hostname : null
-        if (host) for (const [re, slug] of CITED_HOST) if (re.test(host)) seen.add(slug)
-      }
+    for (const f of b.footnotes ?? []) {
+      if (f.access?.url) noteHost(f.access.url)
+      for (const m of (f.html ?? '').matchAll(/href="(https?:[^"]+)"/g)) noteHost(m[1])
     }
   }
   return Object.keys(SOURCE).filter((s) => seen.has(s))
@@ -178,33 +173,44 @@ function carousel(source, items, inline) {
   )
 }
 
-function citation(cite, inline) {
-  const kind = CITATION_KIND[cite.kind] ?? 'source'
-  const cover = cite.cover
-    ? `<img class="cover" src="${escapeHtml(inline.get(cite.cover) ?? cite.cover)}" loading="lazy" alt="${escapeHtml(cite.title)}">`
+/**
+ * Prose and footnote HTML keeps its links as `/wiki/…`; on the streaming
+ * server that IS the right href — the reader clicks from Apollo 11 to JFK and
+ * gets this render of JFK. A batch file opened anywhere else re-bases them on
+ * the deployed demo so the same journey still works.
+ */
+const relink = (html, wikiBase) =>
+  wikiBase && wikiBase !== '/wiki/' ? html.replaceAll('href="/wiki/', `href="${wikiBase}`) : html
+
+/**
+ * One footnote, as Wikipedia rendered it — author, date, work, links, the
+ * article's own citation — plus, when the note cites a book the open
+ * ecosystem holds, the access link on the end. The id is what the prose
+ * marker points at.
+ */
+function footnote(fn, wikiBase) {
+  const access = fn.access
+    ? ` <a class="fn-access" href="${escapeHtml(fn.access.url)}" target="_blank" rel="noopener">${escapeHtml(fn.access.label)} ↗</a>`
     : ''
-  // The byline the template states — who wrote it, when — because a source a
-  // reader can weigh is worth more than a bare title.
-  const byline = [cite.author, cite.date].filter(Boolean).join(' · ')
-  const link = cite.href
-    ? `<a class="cite-link${cite.linkLabel ? ' access' : ''}" href="${escapeHtml(cite.href)}" ` +
-      `target="_blank" rel="noopener">${escapeHtml(cite.linkLabel ?? 'view source')} ↗</a>`
-    : ''
-  // The archived copy stands beside the live link, dated when the template
-  // dates it — shown only when it is not already the primary link.
-  const archive =
-    cite.archiveUrl && cite.href !== cite.archiveUrl
-      ? `<a class="cite-arch" href="${escapeHtml(cite.archiveUrl)}" target="_blank" rel="noopener">` +
-        `archived${cite.archiveDate ? ` ${escapeHtml(cite.archiveDate)}` : ''} ↗</a>`
-      : ''
   return (
-    `<li class="cite">${cover}<span class="cite-kind">${escapeHtml(kind)}</span>` +
-    `<span class="cite-title">${escapeHtml(cite.title)}</span>` +
-    (byline ? `<span class="cite-by">${escapeHtml(byline)}</span>` : '') +
-    (cite.publisher ? `<span class="cite-pub">${escapeHtml(cite.publisher)}</span>` : '') +
-    link +
-    archive +
-    `</li>`
+    `<li class="fn" id="${escapeHtml(fn.id)}"><span class="fn-num">${escapeHtml(fn.num)}.</span>` +
+    `<span class="fn-text">${relink(fn.html, wikiBase)}${access}</span></li>`
+  )
+}
+
+/**
+ * The band's references, folded past the first eight: a lede can carry fifty
+ * markers, and the gutter is a margin, not a page of its own. Fragment
+ * navigation into the folded part still works — browsers auto-expand a
+ * <details> whose anchor target is inside it.
+ */
+function footnoteList(fns, wikiBase) {
+  const items = fns.map((f) => footnote(f, wikiBase))
+  if (items.length <= 10) return `<ol class="fnlist">${items.join('')}</ol>`
+  return (
+    `<ol class="fnlist">${items.slice(0, 8).join('')}</ol>` +
+    `<details class="fn-more"><summary>${items.length - 8} more references</summary>` +
+    `<ol class="fnlist">${items.slice(8).join('')}</ol></details>`
   )
 }
 
@@ -213,7 +219,7 @@ function citation(cite, inline) {
  * own fragment, because the streaming renderer sends it separately from the
  * spine it belongs to. Empty string when the band has nothing to show.
  */
-export function bandRail(b, inline = new Map()) {
+export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
   // Group the band's media by source, in first-appearance order, one carousel each.
   const bySource = new Map()
   for (const e of b.entries ?? []) {
@@ -221,17 +227,15 @@ export function bandRail(b, inline = new Map()) {
     bySource.get(e.source).push(e)
   }
   const media = [...bySource].map(([source, items]) => carousel(source, items, inline)).join('')
-  // The coverage line goes with the sources, not the media: it is a statement
-  // about what this section cites and how much of it the open ecosystem holds.
-  // A section whose sources are all dead ends must not look like a section with
-  // few sources — the rail shows three either way.
+  // The references go with their coverage line: the notes are what this
+  // section cites, in Wikipedia's own words; the line beneath is how much of
+  // that the open ecosystem holds.
   const coverage = b.coverage ? `<p class="coverage">${escapeHtml(b.coverage)}</p>` : ''
-  const sources = (b.citations ?? []).length
-    ? `<div class="sources"><p class="rail-label">Selected sources from this section</p><ul>${b.citations
-        .map((c) => citation(c, inline))
-        .join('')}</ul>${coverage}</div>`
+  const sources = (b.footnotes ?? []).length
+    ? `<div class="refs"><p class="rail-label">References in this section</p>` +
+      `${footnoteList(b.footnotes, wikiBase)}${coverage}</div>`
     : coverage
-      ? `<div class="sources">${coverage}</div>`
+      ? `<div class="refs">${coverage}</div>`
       : ''
   // An optional line stating how this band's media was selected. Used when the
   // anchor that produced it is broad enough that the selection is arbitrary —
@@ -242,53 +246,73 @@ export function bandRail(b, inline = new Map()) {
   return media || sources ? `<aside class="rail">${disclosure}${media}${sources}</aside>` : ''
 }
 
-function band(b, eyebrow, inline) {
+function band(b, inline, wikiBase = '/wiki/') {
+  // The prose keeps the article's own inline apparatus — wikilinks (which on
+  // this site lead to more of these renders) and footnote markers pointing at
+  // the gutter. No section numbering: Wikipedia doesn't number, so neither
+  // does the enriched version of it.
   const prose = b.blocks
-    ? b.blocks.map((x) => (x.kind === 'h' ? `<h3>${escapeHtml(x.text)}</h3>` : `<p>${escapeHtml(x.text)}</p>`)).join('')
+    ? b.blocks
+        .map((x) => {
+          const inner = x.html ? relink(x.html, wikiBase) : escapeHtml(x.text)
+          return x.kind === 'h' ? `<h3>${inner}</h3>` : `<p>${inner}</p>`
+        })
+        .join('')
     : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
   // Two columns: the article on the left, and a single right rail carrying the
-  // ecosystem's media with the section's cited sources beneath it. The rail
+  // ecosystem's media with the section's references beneath it. The rail
   // floats, so the prose wraps around it and reclaims full width below — no
   // reserved empty column.
-  const rail = bandRail(b, inline)
+  const rail = bandRail(b, inline, wikiBase)
   const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
-    `<header class="band-head"><span class="eyebrow">${escapeHtml(eyebrow)}</span><h2>${escapeHtml(b.title)}</h2></header>` +
+    `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>` +
     `<div class="band-body">${rail}<div class="prose">${prose}</div></div>` +
     `</section>`
   )
 }
 
+/**
+ * The masthead, deliberately short: the project's name (linked to the
+ * explainer when the page knows where it lives), the article's, and one
+ * sentence that hands the credit to the sources — then the article. The
+ * verbiage about how it all works lives on the main page, not here.
+ */
+function hero({ title, home, legend, extras = '' }) {
+  const name = 'Help From Our Friends: An Open Knowledge Web Experiment'
+  const kicker = home
+    ? `<a href="${escapeHtml(home)}">${name}</a>`
+    : name
+  const note = home
+    ? `<p class="hero-note">This is an experiment — for more detail, including the hard problems,
+  see <a href="${escapeHtml(home)}">the main page</a>.</p>`
+    : ''
+  return `<header class="hero">
+  <p class="kicker">${kicker}</p>
+  <h1>${escapeHtml(title)}</h1>
+  <p class="thesis">Using openly-licensed knowledge to enhance a Wikipedia article,
+    with API-driven help from our friends at:</p>
+  <div class="legend">${legend}</div>
+  ${note}
+  ${extras}
+</header>`
+}
+
 // `inline` maps a fragile image URL (OpenLibrary covers, which redirect through
 // archive.org) to a pre-fetched data: URI, so those covers render without a live
 // dependency on the Internet Archive being up.
-export function buildHtml({ title, description, bands, inline = new Map(), provenance = '', home = '' }) {
-  let n = 0
-  const body = bands
-    .map((b) => (b.blocks ? band(b, b.id === 'slede' ? 'lede' : `§${++n}`, inline) : band(b, 'aside', inline)))
-    .join('\n')
+export function buildHtml({ title, bands, inline = new Map(), provenance = '', home = '' }) {
+  // Intra-wiki links in a batch file re-base onto the deployed demo (or
+  // whatever `home` names), so clicking through to another article still
+  // lands on an enriched render rather than a broken relative path.
+  const wikiBase = home ? `${home.replace(/\/$/, '')}/wiki/` : 'https://en.wikipedia.org/wiki/'
+  const body = bands.map((b) => band(b, inline, wikiBase)).join('\n')
 
   const used = sourcesUsed(bands)
   const legend = used
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
-
-  // Where a rail draws four files out of hundreds, the four are arbitrary and the
-  // page used to say so on every single anchor — eight times on a five-section
-  // article, which reads as hedging rather than as disclosure. The ratio already
-  // carries it; the rule is stated once here instead.
-  // The note states the rule; the argument about it lives on the index, and is
-  // only linked when a caller says where that index is. A page opened straight
-  // off disk has no site around it, so an unconditional link would dangle.
-  const discussion = home
-    ? ` Challenges to layout and selection are discussed on the
-       <a href="${escapeHtml(home)}#hard-problems">main page</a>.`
-    : ''
-  const drawNote = bands.some((b) => b.broad)
-    ? `<p class="draw-note">Where a rail shows <i>4 of 182</i>, the four are an arbitrary draw from
-       the whole set.${discussion}</p>`
-    : ''
 
   // Explain the one visual distinction that carries an argument, and only when
   // the page actually uses it — a key to a style nothing on the page has is
@@ -313,16 +337,7 @@ ${STYLE}${faviconStyle(used, inline)}
 </style>
 </head>
 <body>
-<header class="hero">
-  <p class="kicker">Rabbit Hole Browser · a rendering experiment</p>
-  <h1>${escapeHtml(title)}</h1>
-  <p class="lede">${escapeHtml(description)}</p>
-  <p class="thesis">The article runs down the left; the open ecosystem’s media and the sources it
-    cites sit in the margin beside it. <b>Nothing here is placed by hand.</b></p>
-  <div class="legend">${legend}</div>
-  ${drawNote}
-  ${evidenceKey}
-</header>
+${hero({ title, home, legend, extras: evidenceKey })}
 <main>
 ${body}
 </main>
@@ -360,15 +375,10 @@ if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
  * styles for ALL sources are emitted up front — a streaming page cannot know
  * yet which it will use, and the unused rules cost bytes, not correctness.
  */
-export function streamOpen({ title, description, units, inline = new Map() }) {
-  let n = 0
+export function streamOpen({ title, units, inline = new Map(), home = '/' }) {
   const spine = units
     .map((u) =>
-      band(
-        { id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks },
-        u.index === '0' ? 'lede' : `§${++n}`,
-        inline,
-      ),
+      band({ id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks }, inline),
     )
     .join('\n')
   return `<!doctype html>
@@ -383,14 +393,7 @@ ${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
 ${RELOCATE_JS}
 </head>
 <body>
-<header class="hero">
-  <p class="kicker">Rabbit Hole Browser · a rendering experiment · streaming</p>
-  <h1>${escapeHtml(title)}</h1>
-  <p class="lede">${escapeHtml(description)}</p>
-  <p class="thesis">The article runs down the left; the open ecosystem’s media and the sources it
-    cites sit in the margin beside it. <b>Nothing here is placed by hand.</b></p>
-  <div class="legend"></div>
-</header>
+${hero({ title, home, legend: '' })}
 <main>
 ${spine}
 `
@@ -417,22 +420,13 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '' } = {}) 
   const legend = used
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
-  const discussion = home
-    ? ` Challenges to layout and selection are discussed on the
-       <a href="${escapeHtml(home)}#hard-problems">main page</a>.`
+  const notes = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
+    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
+      `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
+      `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
+      `values are printed on the card, because a description that agrees is a weaker claim than an ` +
+      `identifier that matches, and must not be read as one.</p>`
     : ''
-  const notes =
-    (bands.some((b) => b.broad)
-      ? `<p class="draw-note">Where a rail shows <i>4 of 182</i>, the four are an arbitrary draw from
-       the whole set.${discussion}</p>`
-      : '') +
-    (bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
-      ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
-        `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
-        `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
-        `values are printed on the card, because a description that agrees is a weaker claim than an ` +
-        `identifier that matches, and must not be read as one.</p>`
-      : '')
   return (
     `<template id="tpl-legend">${legend}</template><script>__fill("tpl-legend",".legend")</script>\n` +
     (notes ? `<template id="tpl-notes">${notes}</template><script>__append("tpl-notes",".hero")</script>\n` : '')
@@ -465,27 +459,36 @@ body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
 a{color:var(--link)}
 img{max-width:100%;display:block}
 
-.hero{max-width:1180px;margin:0 auto;padding:96px 40px 56px}
+.hero{max-width:1180px;margin:0 auto;padding:40px 40px 30px;border-bottom:1px solid var(--rule)}
 .kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 28px}
-.hero h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
-  margin:0 0 24px;color:var(--head);font-weight:600}
-.hero .lede{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.5;max-width:40ch;margin:0 0 20px;color:#333}
-.hero .thesis{font-family:var(--sans);font-size:1rem;line-height:1.65;max-width:60ch;color:var(--muted);margin:0 0 36px}
-.hero .thesis b{color:var(--ink);font-weight:600}
+  color:var(--muted);margin:0 0 18px}
+.kicker a{color:inherit;text-decoration:none}
+.kicker a:hover{color:var(--link)}
+.hero h1{font-size:clamp(2.1rem,4.5vw,3.4rem);line-height:1.05;letter-spacing:-.02em;
+  margin:0 0 14px;color:var(--head);font-weight:600}
+.hero .thesis{font-family:var(--sans);font-size:.95rem;line-height:1.6;max-width:70ch;color:var(--muted);margin:0 0 12px}
 .legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--muted);
-  border-top:1px solid var(--rule);padding-top:22px}
+  min-height:16px;margin:0 0 12px}
+.hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
 .key{display:inline-flex;align-items:center;gap:8px}
 .fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;background-size:contain;display:inline-block}
 
 main{max-width:1180px;margin:0 auto;padding:0 40px}
-.band{padding:52px 0;border-top:1px solid var(--rule)}
-.band-head{margin:0 0 26px}
-.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);display:block;margin-bottom:8px}
-.band-head h2{font-size:clamp(1.7rem,3vw,2.5rem);line-height:1.1;letter-spacing:-.01em;
+.band{padding:40px 0}
+.band+.band{border-top:1px solid var(--rule)}
+.band:first-child{padding-top:28px}
+.band-head{margin:0 0 22px}
+.band-head h2{font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1;letter-spacing:-.01em;
   margin:0;color:var(--head);font-weight:600}
 .note .band-head h2{font-style:italic}
+
+/* Wikipedian inline apparatus: quiet blue links, superscript footnote markers. */
+.prose a{color:var(--link);text-decoration:none}
+.prose a:hover{text-decoration:underline}
+.prose a.ext::after{content:"\\2197";font-size:.7em;margin-left:2px;color:#8a8f95}
+sup.ref{font-size:.72em;line-height:0}
+sup.ref a{color:var(--link);text-decoration:none}
+sup.ref a:hover{text-decoration:underline}
 
 /* The load-bearing layout choice: the body is a flow-root, media and citations
    float to the rails, and the prose reflows around and below them — no reserved
@@ -528,8 +531,6 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
-.draw-note{font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
-.draw-note i{color:var(--ink);font-style:normal;font-weight:600}
 .evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
 .evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
 .coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}
@@ -546,35 +547,33 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 
 .disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
   margin:0 0 14px;padding:7px 9px;background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
-.sources{margin-top:28px;padding-top:22px;border-top:1px solid var(--rule)}
+/* The right-gutter references: Wikipedia's own footnotes, marginal instead of
+   bottom-of-page. Small, hanging-numbered, with the marker's number so the
+   prose and the gutter agree. */
+.refs{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
 .rail-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 14px}
-.sources ul{list-style:none;margin:0;padding:0}
-.cite{font-family:var(--sans);border-left:2px solid var(--rule);padding:1px 0 1px 12px;margin:0 0 16px}
-.cite .cover{width:78px;border-radius:3px;margin:0 0 8px;box-shadow:0 1px 2px rgba(0,0,0,.18)}
-.cite-kind{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#8a8f95;margin-bottom:3px}
-.cite-title{display:block;font-size:.84rem;line-height:1.3;font-weight:600;color:var(--ink)}
-.cite-by{display:block;font-size:.73rem;color:#6b6f75;margin-top:3px}
-.cite-pub{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
-.cite-link{display:inline-block;font-size:.72rem;margin-top:6px;text-decoration:none}
-.cite-link:hover{text-decoration:underline}
-/* The archived copy: present, dated, and deliberately quiet next to the live link. */
-.cite-arch{display:inline-block;font-size:.66rem;margin:6px 0 0 12px;color:#8a8f95;text-decoration:none}
-.cite-arch:hover{color:var(--link);text-decoration:underline}
-/* A book you can actually borrow or read gets a stronger, pill-shaped call. */
-.cite-link.access{margin-top:8px;padding:3px 9px;border:1px solid var(--link);border-radius:999px;font-weight:600}
-.cite-link.access:hover{background:var(--link);color:#fff;text-decoration:none}
+  color:var(--muted);margin:0 0 12px}
+.fnlist{list-style:none;margin:0;padding:0;font-family:var(--sans)}
+.fn{display:flex;gap:7px;font-size:.73rem;line-height:1.5;color:#54595d;margin:0 0 9px}
+.fn:target{background:#eaf3ff;outline:4px solid #eaf3ff;border-radius:2px}
+.fn-num{flex:none;min-width:1.7em;text-align:right;color:#8a8f95}
+.fn-text{min-width:0;overflow-wrap:break-word}
+.fn-text a{color:var(--link);text-decoration:none}
+.fn-text a:hover{text-decoration:underline}
+.fn-text cite{font-style:italic}
+/* A book you can actually borrow or read gets a quiet but firm call. */
+.fn-access{white-space:nowrap;font-weight:600}
+.fn-more summary{font-family:var(--sans);font-size:.7rem;color:var(--muted);cursor:pointer;margin:2px 0 10px}
+.fn-more summary:hover{color:var(--link)}
 
 .foot{max-width:1180px;margin:0 auto;padding:40px;border-top:1px solid var(--rule);
   font-family:var(--sans);font-size:.8rem;color:var(--muted)}
 .foot code{background:var(--faint);padding:1px 5px;border-radius:3px}
 
-@media(max-width:900px){main{padding:0 26px}.hero{padding:72px 26px 44px}}
+@media(max-width:900px){main{padding:0 26px}.hero{padding:32px 26px 24px}}
 @media(max-width:640px){
-  .hero{padding:52px 20px 34px}
+  .hero{padding:26px 20px 20px}
   main{padding:0 20px}
   .rail{float:none;width:auto;margin:26px 0}
-  .sources ul{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:16px}
-  .cite{margin:0}
 }
 `

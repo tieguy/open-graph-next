@@ -35,19 +35,13 @@ async function main() {
 
   const { bands, stats, dropped, opinion } = await discover(page)
 
-  // Covers travel with the page. They are the only images here that resolve
-  // through the archive.org redirect, so a live dependency would blank the rail
-  // whenever the Internet Archive is down.
+  // Images that must travel with the page: works by the subject carry
+  // OpenLibrary covers on the entry itself (they resolve through the
+  // archive.org redirect, so a live dependency would blank the rail whenever
+  // the Internet Archive is down); OSM map tiles must not be hotlinked from
+  // readers' browsers (tile policy).
   const inline = new Map()
   for (const b of bands) {
-    for (const c of b.citations ?? []) {
-      if (!c.cover || inline.has(c.cover)) continue
-      const uri = await coverDataUri(c.cover)
-      if (uri) inline.set(c.cover, uri)
-    }
-    // Works by the subject carry OpenLibrary covers on the entry itself;
-    // OSM map tiles must not be hotlinked from readers' browsers (tile
-    // policy), so both travel with the page.
     for (const e of b.entries ?? []) {
       if (!/covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(e.imageUrl ?? '')) continue
       if (inline.has(e.imageUrl)) continue
@@ -69,10 +63,6 @@ async function main() {
 
   const html = buildHtml({
     title: page,
-    description:
-      'Generated live from the article itself — no curated dataset. Every item was found ' +
-      "by an identifier the article states: a citation's ISBN, OCLC or LCCN, or a " +
-      "wikilink's Wikidata QID. Each item sits in the section of the anchor that found it.",
     bands,
     inline,
     // The page opens by saying it used no curated dataset; the footer has to
@@ -81,7 +71,7 @@ async function main() {
     // Where the index that discusses these trade-offs is published. Overridable
     // because anyone can run this; unset it and the page simply states the rule
     // without pointing anywhere, which is right for a file opened off disk.
-    home: process.env.SITE_HOME ?? 'https://article-tapestry.fly.dev/',
+    home: process.env.SITE_HOME ?? 'https://help-from-our-friends.fly.dev/',
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.replace(/ /g, '_'))}">` +

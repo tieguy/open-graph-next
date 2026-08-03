@@ -752,14 +752,22 @@ test('a source with no fetchable icon still gets a legend entry, without a broke
   assert.doesNotMatch(html, /courtlistener\.com\/favicon/, 'no live hotlink that 403s')
 })
 
-test('a source reached only through citation links still makes the legend', () => {
-  // Citations carry no source slug — they are links. Apollo 11 points at
-  // OpenLibrary twenty times and would otherwise vanish from its own legend.
+test('a source reached only through footnote links still makes the legend', () => {
+  // Footnotes carry no source slug — they are links. Apollo 11's references
+  // borrow through OpenLibrary and the Archive twenty times, and both would
+  // otherwise vanish from the page's own legend.
   const bands = [
     {
       id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }],
-      citations: [{ title: 'Book', kind: 'book', href: 'https://openlibrary.org/books/OL1M' }],
+      footnotes: [
+        {
+          id: 'a-note-1',
+          num: '1',
+          html: 'A book. <a class="ext" href="https://openlibrary.org/books/OL1M">OL1M</a>.',
+          access: { url: 'https://archive.org/details/x', label: 'Borrow' },
+        },
+      ],
     },
   ]
-  assert.deepEqual(sourcesUsed(bands), ['openlibrary'])
+  assert.deepEqual(sourcesUsed(bands), ['internet_archive', 'openlibrary'])
 })

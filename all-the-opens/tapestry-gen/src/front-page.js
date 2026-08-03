@@ -63,7 +63,7 @@ export function frontPage({ inline = new Map() } = {}) {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All the Opens — the article, enriched, live</title>
+<title>Help From Our Friends — an open knowledge web experiment</title>
 <style>
 :root{
   --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#0b0d0f; --muted:#54595d;
@@ -146,7 +146,7 @@ ${legend.style}
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <p class="kicker">All the Opens · Rabbit Hole Browser · a rendering experiment</p>
+  <p class="kicker">Help From Our Friends · an open knowledge web experiment</p>
   <h1>The article, enriched — while you watch.</h1>
   <p class="lede">Pick any English Wikipedia article. The article streams in first; then ten open
     collections — libraries, archives, museums, science databases, maps — assemble around it.

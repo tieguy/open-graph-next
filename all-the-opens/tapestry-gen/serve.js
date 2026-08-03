@@ -41,14 +41,9 @@ for (const url of iconUrls()) {
   if (uri) icons.set(url, uri)
 }
 
-/** The covers one band needs, inlined — cache hits, since railCitations already fetched them. */
+/** The images one band must carry inline, resolved from disk cache. */
 async function bandInline(b) {
   const inline = new Map(icons)
-  for (const c of b.citations ?? []) {
-    if (!c.cover || inline.has(c.cover)) continue
-    const uri = await coverDataUri(c.cover)
-    if (uri) inline.set(c.cover, uri)
-  }
   for (const e of b.entries ?? []) {
     // OpenLibrary covers redirect through archive.org; OSM tiles must not be
     // hotlinked from readers' browsers (tile policy) — both travel inline.
@@ -116,12 +111,9 @@ createServer(async (req, res) => {
           res.write(
             streamOpen({
               title: page,
-              description:
-                'Discovered live, while you watch — no curated dataset. Every item is found ' +
-                "by an identifier the article states: a citation's ISBN, OCLC or LCCN, or a " +
-                "wikilink's Wikidata QID. Each item lands in the section of the anchor that found it.",
               units: data.units,
               inline: icons,
+              home: process.env.SITE_HOME ?? '/',
             }),
           )
           streaming = true
