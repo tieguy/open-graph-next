@@ -17,9 +17,27 @@ function cachedGet(cacheDir, params) {
  * frame usefully. The article already divides itself sensibly — Launch, Lunar
  * descent, Landing — so the canvas follows that division.
  */
+/**
+ * `prop=tocdata` sections, renamed to the fields the rest of this module has
+ * always used. The API renamed `byteoffset` to `codepointOffset` in the move —
+ * confirming empirically-discovered behaviour: it was never bytes. (It counts
+ * code points; JS slicing counts UTF-16 units, which diverge only on astral
+ * characters — accepted, as before.)
+ */
+function fromTocdata(sections) {
+  return (sections ?? []).map((s) => ({
+    index: s.index,
+    toclevel: s.tocLevel,
+    line: s.line,
+    number: s.number,
+    anchor: s.anchor,
+    byteoffset: s.codepointOffset ?? null,
+  }))
+}
+
 export async function fetchSections(cacheDir, page) {
-  const body = await cachedGet(cacheDir, { action: 'parse', page, prop: 'sections' })
-  return sectionOutline(body.parse.sections)
+  const body = await cachedGet(cacheDir, { action: 'parse', page, prop: 'tocdata' })
+  return sectionOutline(fromTocdata(body.parse.tocdata?.sections))
 }
 
 /** The same outline, derived from an already-fetched section list. */
@@ -81,11 +99,15 @@ export async function fetchArticle(cacheDir, page) {
   const body = await cachedGet(cacheDir, {
     action: 'parse',
     page,
-    prop: 'sections|text|wikitext',
+    prop: 'tocdata|text|wikitext',
     disableeditsection: '1',
     disabletoc: '1',
   })
-  return { sections: body.parse.sections, html: body.parse.text, wikitext: body.parse.wikitext }
+  return {
+    sections: fromTocdata(body.parse.tocdata?.sections),
+    html: body.parse.text,
+    wikitext: body.parse.wikitext,
+  }
 }
 
 /**

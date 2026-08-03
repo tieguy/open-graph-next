@@ -1,0 +1,22 @@
+# Fly.io config for the streaming live-discovery demo.
+#
+# WIKIMEDIA_UA_CONTACT is deliberately NOT set here: it names the operator,
+# and it is set as a Fly secret on the deployed app. Anyone forking this must
+# set their own (`fly secrets set WIKIMEDIA_UA_CONTACT=you@example.com`) —
+# the server refuses to start without it, which is the point.
+
+app = "article-tapestry"
+primary_region = "sjc"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  # Scale to zero when idle: a demo should cost nothing while nobody looks at
+  # it. The first visitor after a quiet spell pays a cold start, not a bill.
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"

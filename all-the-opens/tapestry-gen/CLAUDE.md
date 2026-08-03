@@ -47,6 +47,17 @@ events, streaming writes fragments from them. Cold-article profile (Barbara
 McClintock, 2026-08-03): spine at 0.9s, first rail 4.5s, complete ~9s; the
 tail is the Commons queue, serial by etiquette.
 
+## Deployed demo
+
+`serve.js` runs publicly at **https://article-tapestry.fly.dev/** (Fly.io app
+`article-tapestry`, personal org, sjc, scale-to-zero; `Dockerfile` +
+`fly.toml` here). Deploy with `flyctl deploy --remote-only` from this
+directory. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
+never in `fly.toml` — a fork must set its own. Guards for public exposure:
+`MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
+`/wiki/`, and the per-host queues already bounding upstream traffic globally.
+The container cache is ephemeral by design.
+
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 

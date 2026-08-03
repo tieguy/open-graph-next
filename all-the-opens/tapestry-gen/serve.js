@@ -68,11 +68,24 @@ follows as each source answers.</p>
  · <a href="/wiki/Ludwig_Prandtl">Ludwig Prandtl</a></p>
 </body></html>`
 
+// Each discovery fans out dozens of upstream requests (politely — the
+// per-host queues serialize them globally), so inbound load must be capped
+// where it arrives: a few pages at a time is a demo, an unbounded queue of
+// them is someone else's traffic problem.
+const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
+let inFlight = 0
+
 createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost')
   if (url.pathname === '/' || url.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
     res.end(INDEX)
+    return
+  }
+  if (url.pathname === '/robots.txt') {
+    // Every /wiki/ visit spends upstream API capacity; crawlers must not.
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.end('User-agent: *\nDisallow: /wiki/\n')
     return
   }
   const m = /^\/wiki\/(.+)$/.exec(url.pathname)
@@ -81,6 +94,16 @@ createServer(async (req, res) => {
     res.end('not found\n')
     return
   }
+  if (inFlight >= MAX_CONCURRENT) {
+    res.writeHead(503, { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '15' })
+    res.end(
+      '<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">' +
+        'The demo is busy discovering other pages right now — it fetches politely, a few at a time. ' +
+        'Try again in a moment.</p>\n',
+    )
+    return
+  }
+  inFlight++
   const page = decodeURIComponent(m[1]).replace(/_/g, ' ')
   const started = Date.now()
   let streaming = false
@@ -150,7 +173,9 @@ createServer(async (req, res) => {
       )
       res.end()
     }
+  } finally {
+    inFlight--
   }
-}).listen(PORT, () => {
+}).listen(PORT, '0.0.0.0', () => {
   console.error(`live discovery on http://localhost:${PORT}/ — try /wiki/Ludwig_Prandtl`)
 })
