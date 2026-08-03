@@ -12,9 +12,10 @@ This repo is a working space for exploring what that adaptation might look like.
 
 ## Sub-projects
 
-- **accords/** — Reusable orientation documents ("accords") that give humans and LLM agents common language and expectations for working together on specific domains, based on the [Accord Exchange](https://accord.exchange/). Currently includes citation practices for Wikipedia and Wikidata.
-- **all-the-opens/** — Rabbit Hole Browser: a D3.js force-directed graph prototype exploring what cooperative knowledge infrastructure could feel like, connecting resources across Internet Archive, Wikipedia, Wikimedia Commons, OpenLibrary, Smithsonian, and more.
-- **wikidata-SIFT/** — LLM-assisted Wikidata methodology testing and enrichment: using LLMs to systematically find and verify missing claims in Wikidata.
+- **all-the-opens/tapestry-gen/** — the active project. *"The article, enriched"*: takes an English Wikipedia article and renders it with the open ecosystem's media and cited sources placed beside the prose, every item found by an identifier the article itself states.
+- **attic/** — retired experiments, kept for the record: the accords orientation documents, the D3.js Rabbit Hole Browser (web-demo), a Firefox extension, and early legal-graph notes. See `attic/README.md`.
+
+wikidata-SIFT — LLM-assisted Wikidata patrol/enrichment — now lives in its own repo (`../wikidata-SIFT`); its history through 2026-08-03 is preserved here.
 
 ## License
 

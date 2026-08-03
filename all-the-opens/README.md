@@ -2,20 +2,20 @@
 
 Exploring what it would look like if open knowledge institutions worked together at internet speed.
 
-Three prototypes:
+One active prototype:
 
 - **tapestry-gen/** - *"The article, enriched."* Takes an English Wikipedia article and renders it with the open ecosystem's media and cited sources placed beside the prose. Nothing is placed by hand: every item is found by an identifier the article itself states — a citation's ISBN, OCLC or LCCN, or a wikilink's Wikidata QID. `spike.js` does this for any article, with no curated dataset and no per-article code.
-- **web-demo/** - A D3.js force-directed graph connecting Apollo 11 resources across Internet Archive, Wikipedia, Wikimedia Commons, OpenLibrary, Smithsonian, and more
-- **extension/** - A Chrome extension that surfaces related open knowledge resources while browsing Wikipedia
+
+Two earlier prototypes — a D3.js force-directed graph of the Apollo 11 dataset (`web-demo/`) and a browser extension — were retired to the repo-root `attic/` in August 2026, along with the Netlify site build.
 
 ## Seeing it
 
-```
-node site/build.js                      # assemble _site/ from the committed renders
-python3 -m http.server 8000 -d _site    # open http://localhost:8000
-```
+Open `tapestry-gen/demo/apollo-11.html` (self-contained) in a browser, or generate a fresh page:
 
-`site/index.html` is the index: three live-generated articles (Apollo 11, Brown v. Board of Education, Ludwig Prandtl), the earlier curated Apollo 11 render, and the graph demo.
+```
+cd tapestry-gen
+WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Any Article Title"
+```
 
 ## Inspiration
 
@@ -27,8 +27,8 @@ All code in this repository is dedicated to the public domain under [CC0 1.0](ht
 
 **Not covered by this license:**
 
-- **Extension icons** (`extension/icons/`) and source favicons referenced in the web demo are the property of their respective owners.
-- **Cached data** (`web-demo/data/`) contains metadata derived from the following sources, each with their own licenses and terms:
+- **Source favicons** referenced in the renders are the property of their respective owners.
+- **Cached data** (`tapestry-gen/data/`) contains metadata derived from the following sources, each with their own licenses and terms:
   - [Wikipedia](https://en.wikipedia.org) / [Wikidata](https://www.wikidata.org) — [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/)
   - [Wikimedia Commons](https://commons.wikimedia.org) — various licenses per file
   - [Internet Archive](https://archive.org) — various licenses per item
