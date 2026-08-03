@@ -1,0 +1,5 @@
+{
+  "name": "wikied-checker",
+  "description": "A citation and sourcing checker for Wikipedia student editors. Reviews edits for verifiability, source reliability, close paraphrasing, and policy compliance. Designed for the Wiki Education Foundation's student editing program.",
+  "version": "0.1.0"
+}
