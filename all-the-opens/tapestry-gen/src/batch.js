@@ -62,6 +62,31 @@ export function matchIaDoc(cite, docs) {
 }
 
 /**
+ * Internet Archive cards for a band, minus the ones its rail already covers.
+ * A card exists to offer what the rail does not: when the same work is
+ * already among the shown sources — same ISBN, or a link to the same scan —
+ * the card yields to the richer rail entry (byline, publisher, access
+ * label). Two citations resolving to one scan also collapse to one card.
+ */
+export function dedupedIaEntries(identified, iaHits, railCites) {
+  const railIsbns = new Set(railCites.map((c) => c.isbn).filter(Boolean))
+  const railHrefs = railCites.map((c) => c.href).filter(Boolean)
+  const seen = new Set()
+  const out = []
+  for (const cite of identified) {
+    const hit = iaHits.get(cite)
+    if (!hit) continue
+    const iaId = /\/(?:services\/img|details)\/([^/?#]+)/.exec(hit.imageUrl ?? '')?.[1] ?? null
+    if (iaId && seen.has(iaId)) continue
+    if (cite.isbn && railIsbns.has(cite.isbn)) continue
+    if (iaId && railHrefs.some((h) => h.includes(`/details/${iaId}`))) continue
+    if (iaId) seen.add(iaId)
+    out.push(hit)
+  }
+  return out
+}
+
+/**
  * One Books API request for a run of ISBNs, keyed `ISBN:x` in the response.
  * This is the *fast* batch endpoint: volumes/brief also accepts many keys
  * (`|`-separated) but answers them serially server-side — 25 keys took 27s

@@ -35,7 +35,7 @@ import {
   sectionCitations,
   templateParams,
 } from './citations.js'
-import { chunk, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
+import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, coverDataUri, getJson } from './http.js'
@@ -249,6 +249,9 @@ async function railCitations(candidates, volumes) {
     const coverUrl = citationCoverUrl(cite)
     built.push({
       kind: cite.kind ?? 'book',
+      // The ISBN travels so a band can notice its media cards duplicating
+      // what the rail already shows.
+      isbn: cite.isbn ?? null,
       title: cite.title || 'Untitled source',
       author: cite.author ?? null,
       date: cite.date ?? null,
@@ -751,19 +754,21 @@ export async function discover(page, { emit = async () => {} } = {}) {
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
+    // The rail first: what it shows decides which media cards would be
+    // redundant copies of it.
+    const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
+
     const entries = []
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
     if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries)
 
-    // Citation anchors -> Internet Archive. No entity resolution in front.
-    for (const cite of unit.identified) {
-      const hit = iaHits.get(cite)
-      if (hit) {
-        entries.push(hit)
-        stats.ia++
-      }
+    // Citation anchors -> Internet Archive — minus the works the rail
+    // already offers, which would be the same book twice in one band.
+    for (const hit of dedupedIaEntries(unit.identified, iaHits, cites)) {
+      entries.push(hit)
+      stats.ia++
     }
 
     // Citation anchors -> open-access scholarship (OpenAlex / arXiv).
@@ -803,8 +808,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // media should not outrank the museum's record of its own painting.
     entries.push(...commonsEntries)
     if (extras) entries.push(...extras.categoryFiles)
-
-    const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
 
     // Disclose how each anchor's media was drawn. Above the threshold the four
     // shown are arbitrary, and saying so is the honest rendering.

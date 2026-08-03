@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { enqueue } from '../src/mw.js'
 import { sectionOutline, sliceSectionHtml, sliceSectionWikitext } from '../src/wikipedia.js'
-import { chunk, iaSearchUrl, matchIaDoc, olBooksUrl } from '../src/batch.js'
+import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from '../src/batch.js'
 
 // ---- per-host queue ---------------------------------------------------------
 
@@ -163,4 +163,32 @@ test('matchIaDoc requires a shared isbn AND title overlap', () => {
 test('olBooksUrl asks the fast batch endpoint for exactly the access fields', () => {
   const url = olBooksUrl(['111', '222'])
   assert.equal(url, 'https://openlibrary.org/api/books?bibkeys=ISBN:111,ISBN:222&format=json&jscmd=data')
+})
+
+test('an IA card yields when the rail already shows the same work', () => {
+  const biel = { isbn: '111', title: 'American Gothic: A Life' }
+  const dave = { isbn: '222', title: 'Geography of the Imagination' }
+  const other = { isbn: '333', title: 'Unrelated Book' }
+  const hit = (id) => ({ imageUrl: `https://archive.org/services/img/${id}` })
+  const iaHits = new Map([
+    [biel, hit('americangothicli00biel')],
+    [dave, hit('geographyofimagi00dave')],
+    [other, hit('unrelated00book')],
+  ])
+  const rail = [
+    // Same work, linked by its scan URL (no isbn on the rail entry).
+    { isbn: null, href: 'https://archive.org/details/americangothicli00biel' },
+    // Same work by ISBN, even though the rail links a different edition's scan.
+    { isbn: '222', href: 'https://archive.org/details/geographyofimagi00daverich' },
+  ]
+  const kept = dedupedIaEntries([biel, dave, other], iaHits, rail)
+  assert.deepEqual(kept, [hit('unrelated00book')])
+})
+
+test('two citations resolving to one scan collapse to one card', () => {
+  const a = { isbn: '111', title: 'Hardcover' }
+  const b = { isbn: '999', title: 'Paperback' }
+  const hit = { imageUrl: 'https://archive.org/services/img/samescan00' }
+  const kept = dedupedIaEntries([a, b], new Map([[a, hit], [b, { ...hit }]]), [])
+  assert.equal(kept.length, 1)
 })
