@@ -749,7 +749,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
-    if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries, ...extras.categoryFiles)
+    if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries)
 
     // Citation anchors -> Internet Archive. No entity resolution in front.
     for (const cite of unit.identified) {
@@ -768,9 +768,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
         stats.scholar++
       }
     }
-
-    // Wikilink anchors -> QID -> Commons.
-    entries.push(...commonsEntries)
 
     // Anchored entities' partner statements: museum objects, taxa,
     // occurrence maps, place maps. The subject's own statements belong to the
@@ -794,6 +791,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
       entries.push(...found)
       stats.statements += found.length
     }
+
+    // Wikilink anchors -> QID -> Commons — deliberately LAST. The demo's
+    // point is the breadth of the ecosystem's partners; Wikimedia's own
+    // media should not outrank the museum's record of its own painting.
+    entries.push(...commonsEntries)
+    if (extras) entries.push(...extras.categoryFiles)
 
     const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
 

@@ -24,7 +24,12 @@ const SOURCE = {
   gbif: { name: 'GBIF', icon: 'https://www.gbif.org/favicon.ico' },
   openalex: { name: 'OpenAlex', icon: 'https://openalex.org/favicon.ico' },
   arxiv: { name: 'arXiv', icon: 'https://arxiv.org/favicon.ico' },
-  met: { name: 'The Met', icon: 'https://www.metmuseum.org/favicon.ico' },
+  met: {
+    name: 'The Met',
+    // The museum's own favicon answers 429 to non-browser fetches; the logo
+    // hosted on Commons serves at an allowlisted thumb width instead.
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/The_Metropolitan_Museum_of_Art_Logo.svg/120px-The_Metropolitan_Museum_of_Art_Logo.svg.png',
+  },
   artic: { name: 'Art Institute of Chicago', icon: 'https://www.artic.edu/favicon.ico' },
 }
 
@@ -99,6 +104,19 @@ export function sourcesUsed(bands) {
 
 /** Every icon URL a page will need, so the generator can prefetch them. */
 export const iconUrls = () => Object.values(SOURCE).map((m) => m.icon).filter(Boolean)
+
+/**
+ * The full source legend — every partner this pipeline can reach — with the
+ * same inlined icons the article pages use. For pages ABOUT the system (the
+ * front page), where the legend describes capability rather than one page's
+ * findings; article pages keep building theirs from `sourcesUsed`.
+ */
+export function sourceLegend(inline = new Map()) {
+  const keys = Object.keys(SOURCE)
+    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
+    .join('')
+  return { html: keys, style: faviconStyle(Object.keys(SOURCE), inline) }
+}
 
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.

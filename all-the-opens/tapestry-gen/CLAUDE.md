@@ -102,7 +102,12 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   (P4610), iNaturalist taxa (P3151), GBIF occurrence maps (P846), and P625
   coordinates → OpenStreetMap map cards (one per section max; non-Earth
   globes are refused — Tranquility Base gets no map of the Atlantic). The
-  subject's own statements enrich the lede.
+  subject's own statements enrich the lede. Map images are single OSM tiles
+  fetched server-side and inlined as data URIs — **never**
+  `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
+  and never browser-hotlinked (OSMF tile policy). Ordering is deliberate:
+  Commons carousels come LAST in every band — the demo's point is the
+  breadth of non-Wikimedia partners.
 
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a

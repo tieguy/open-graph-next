@@ -16,6 +16,7 @@
 import { createServer } from 'node:http'
 
 import { discover } from './src/discover.js'
+import { frontPage } from './src/front-page.js'
 import { coverDataUri } from './src/http.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -49,26 +50,19 @@ async function bandInline(b) {
     if (uri) inline.set(c.cover, uri)
   }
   for (const e of b.entries ?? []) {
-    if (!e.imageUrl?.includes('covers.openlibrary.org') || inline.has(e.imageUrl)) continue
+    // OpenLibrary covers redirect through archive.org; OSM tiles must not be
+    // hotlinked from readers' browsers (tile policy) — both travel inline.
+    if (!/covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(e.imageUrl ?? '')) continue
+    if (inline.has(e.imageUrl)) continue
     const uri = await coverDataUri(e.imageUrl)
     if (uri) inline.set(e.imageUrl, uri)
   }
   return inline
 }
 
-const INDEX = `<!doctype html><html lang="en"><head><meta charset="utf-8">
-<title>Rabbit Hole Browser — live</title>
-<style>body{font-family:system-ui;max-width:44rem;margin:15vh auto;padding:0 1rem;line-height:1.6}
-input{font-size:1.1rem;padding:.5rem .75rem;width:100%;box-sizing:border-box}</style></head><body>
-<h1>The article, enriched — live</h1>
-<p>Any English Wikipedia article. The spine streams first; the open ecosystem
-follows as each source answers.</p>
-<form onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
-<input name="q" placeholder="Article title, e.g. Ludwig Prandtl" autofocus></form>
-<p><a href="/wiki/Apollo_11">Apollo 11</a> · <a href="/wiki/Brown_v._Board_of_Education">Brown v. Board</a>
- · <a href="/wiki/Ludwig_Prandtl">Ludwig Prandtl</a> · <a href="/wiki/Monarch_butterfly">Monarch butterfly</a>
- · <a href="/wiki/American_Gothic">American Gothic</a> · <a href="/wiki/CRISPR_gene_editing">CRISPR</a></p>
-</body></html>`
+// The front page: rendered once at startup, with the same inlined source
+// icons the article pages carry.
+const INDEX = frontPage({ inline: icons })
 
 // Each discovery fans out dozens of upstream requests (politely — the
 // per-host queues serialize them globally), so inbound load must be capped
@@ -142,7 +136,9 @@ createServer(async (req, res) => {
     })
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of await bandInline(b)) inline.set(k, v)
-    res.write(streamHeroExtras(bands, { inline, home: process.env.SITE_HOME ?? '' }))
+    // The front page IS the home now; the draw-note's discussion link points
+    // at its #hard-problems section on this same host.
+    res.write(streamHeroExtras(bands, { inline, home: process.env.SITE_HOME ?? '/' }))
     res.write(
       streamClose({
         provenance:

@@ -45,9 +45,12 @@ async function main() {
       const uri = await coverDataUri(c.cover)
       if (uri) inline.set(c.cover, uri)
     }
-    // Works by the subject carry OpenLibrary covers on the entry itself.
+    // Works by the subject carry OpenLibrary covers on the entry itself;
+    // OSM map tiles must not be hotlinked from readers' browsers (tile
+    // policy), so both travel with the page.
     for (const e of b.entries ?? []) {
-      if (!e.imageUrl?.includes('covers.openlibrary.org') || inline.has(e.imageUrl)) continue
+      if (!/covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(e.imageUrl ?? '')) continue
+      if (inline.has(e.imageUrl)) continue
       const uri = await coverDataUri(e.imageUrl)
       if (uri) inline.set(e.imageUrl, uri)
     }
@@ -78,7 +81,7 @@ async function main() {
     // Where the index that discusses these trade-offs is published. Overridable
     // because anyone can run this; unset it and the page simply states the rule
     // without pointing anywhere, which is right for a file opened off disk.
-    home: process.env.SITE_HOME ?? 'https://all-the-opens.netlify.app/',
+    home: process.env.SITE_HOME ?? 'https://article-tapestry.fly.dev/',
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.replace(/ /g, '_'))}">` +

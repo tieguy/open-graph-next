@@ -152,18 +152,33 @@ export async function gbifEntry(id) {
   return gbifEntryFrom(await getJson(`https://api.gbif.org/v1/species/${id}`), id)
 }
 
+/** Standard slippy-map tile arithmetic: the z/x/y tile containing a point. */
+export function tileFor(lat, lon, z = 8) {
+  const n = 2 ** z
+  const x = Math.floor(((lon + 180) / 360) * n)
+  const latR = (lat * Math.PI) / 180
+  const y = Math.floor(((1 - Math.log(Math.tan(latR) + 1 / Math.cos(latR)) / Math.PI) / 2) * n)
+  return { z, x: Math.min(Math.max(x, 0), n - 1), y: Math.min(Math.max(y, 0), n - 1) }
+}
+
 /**
- * A place as a map card: a keyless Wikimedia static render of OpenStreetMap
- * data, linked to the OSM view. Needs no fetch — the tile URL is the image.
+ * A place as a map card: the single OSM tile containing the point, linked to
+ * the full OSM view. maps.wikimedia.org is NOT used — it is a
+ * Wikimedia-projects-only service and refuses outside referrers. The OSM
+ * tile is fetched server-side under our User-Agent and inlined as a data URI
+ * (see the entry points' inline logic), which is both the polite, cacheable
+ * form of the OSMF tile policy's light use and the only rendering that never
+ * asks the reader's browser to hotlink anyone.
  */
 export function mapEntry(coord, label) {
   const lat = coord.lat.toFixed(4)
   const lon = coord.lon.toFixed(4)
+  const { z, x, y } = tileFor(coord.lat, coord.lon)
   return {
     source: 'openstreetmap',
     title: label ? `Map: ${label}` : 'Map',
     description: `${lat}, ${lon}`,
-    imageUrl: `https://maps.wikimedia.org/img/osm-intl,8,${lat},${lon},400x260.png`,
+    imageUrl: `https://tile.openstreetmap.org/${z}/${x}/${y}.png`,
     href: `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=10/${lat}/${lon}`,
     attribution: { author: '© OpenStreetMap contributors', license: 'via P625 coordinates' },
     _via: 'P625',

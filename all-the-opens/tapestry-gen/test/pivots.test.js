@@ -112,7 +112,9 @@ test('partner entries carry image, link, and the property that made them', () =>
   assert.match(gbif.title, /Where Danaus plexippus has been recorded/)
 
   const map = mapEntry({ lat: 28.5729, lon: -80.649 }, 'Kennedy Space Center')
-  assert.match(map.imageUrl, /osm-intl,8,28\.5729,-80\.6490/)
+  // A single OSM tile, never maps.wikimedia.org (Wikimedia-projects-only,
+  // refuses outside referrers) — and the tile is inlined by the entry points.
+  assert.match(map.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/8\/\d+\/\d+\.png$/)
   assert.match(map.href, /openstreetmap\.org/)
   assert.equal(map.title, 'Map: Kennedy Space Center')
 })
