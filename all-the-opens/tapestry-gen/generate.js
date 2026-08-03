@@ -36,7 +36,7 @@ import { makeZip } from './src/zip.js'
 import { parseRootJson, ROOT_FILE } from './vendor/parse-root.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const DATA_DIR = join(HERE, '..', 'web-demo', 'data', 'apollo-11')
+const DATA_DIR = join(HERE, 'data', 'apollo-11')
 const CACHE_DIR = join(HERE, '.cache')
 // The HTML render is the committed demo; the .tapestry goes to the gitignored
 // tapestry/ dir (the vendored viewer's home), so the two live apart.
@@ -404,7 +404,7 @@ async function main() {
         'resolved through Wikidata identifiers, with the open ecosystem’s media in place.',
       bands,
       inline,
-      provenance: 'Generated from <code>web-demo/data/apollo-11/</code>.',
+      provenance: 'Generated from <code>data/apollo-11/</code>.',
     }),
   )
   console.log(`wrote ${HTML_OUT}`)

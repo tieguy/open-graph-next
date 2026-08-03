@@ -2,8 +2,8 @@ import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
 /**
- * Loads the Apollo 11 dataset shared with the D3 demo. Read-only: the generator
- * never mutates web-demo/data.
+ * Loads the Apollo 11 dataset. Read-only: the generator never mutates
+ * data/apollo-11.
  */
 export async function loadDataset(dataDir) {
   const itemsDir = join(dataDir, 'items')

@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Renders the Apollo 11 dataset in `web-demo/data/apollo-11/` as *"the article,
+Renders the Apollo 11 dataset in `data/apollo-11/` as *"the article,
 enriched."* Two outputs from one run: **`demo/apollo-11.html`** (the primary,
 self-contained render) and `../tapestry/apollo-11.tapestry` (the Internet Archive
 Tapestry format — retained but secondary; its viewer/artifacts are gitignored).
@@ -155,7 +155,8 @@ longer work (verified 2026-07-23):
 Wikimedia now restricts thumbnail rendering to an allowlist of widths, answering anything
 else with `400 Use thumbnail sizes listed on https://w.wiki/GHai`. Every `200px-` and
 `220px-` URL in the dataset is therefore broken — **including in the D3 demo, which renders
-the same URLs.** Fixing `web-demo/data/apollo-11/` would fix both.
+the same URLs.** Fixing the dataset (now `data/apollo-11/`; the D3 demo read the
+same files before it moved to the attic) would fix both.
 
 **Pictures come from each article's own lead image** (`prop=pageimages`) rather than the
 dataset's thumbnail, because the dataset's are not reliably distinct — several items point

@@ -14,8 +14,9 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 
 ## Contracts
 
-- **Reads** `../web-demo/data/apollo-11/` — the single source of truth shared with
-  the D3 demo. Read-only, except deliberate dataset re-curation.
+- **Reads** `data/apollo-11/` — the curated dataset (formerly shared with the D3
+  demo, which now lives in `../../attic/`). Read-only, except deliberate dataset
+  re-curation.
 - **Writes** `demo/apollo-11.html` (the committed demo) and
   `../tapestry/apollo-11.tapestry` (gitignored).
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
@@ -24,7 +25,7 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 ## Two entry points
 
 - **`generate.js`** — the original, dataset-bound: renders Apollo 11 from the
-  curated `web-demo/data/apollo-11/`. Unchanged in intent.
+  curated `data/apollo-11/`. Unchanged in intent.
 - **`spike.js`** — the **live discovery** path and where current work happens:
   `node spike.js "Any Article Title"` builds an enriched page for an arbitrary
   English Wikipedia article with no dataset and no per-article code. Items are
