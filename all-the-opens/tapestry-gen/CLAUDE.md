@@ -22,16 +22,30 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
 
-## Two entry points
+## Three entry points
 
 - **`generate.js`** — the original, dataset-bound: renders Apollo 11 from the
   curated `data/apollo-11/`. Unchanged in intent.
-- **`spike.js`** — the **live discovery** path and where current work happens:
-  `node spike.js "Any Article Title"` builds an enriched page for an arbitrary
-  English Wikipedia article with no dataset and no per-article code. Items are
-  discovered at read time by pivoting from the article's own anchors. Writes
-  `demo/spike-<slug>.html`. Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
-  current state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
+- **`spike.js`** — batch live discovery: `node spike.js "Any Article Title"`
+  builds a self-contained enriched page for an arbitrary English Wikipedia
+  article with no dataset and no per-article code, byte-reproducible off its
+  cache. Writes `demo/spike-<slug>.html`. Thin wrapper over `src/discover.js`.
+  Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
+  state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
+- **`serve.js`** — **streaming** live discovery (design-plan Phase 7, added
+  2026-08-03): `npm run serve` then visit `/wiki/<Article_Title>`. One chunked
+  HTML response: the article spine renders in ~1s (one parse call), and each
+  band's rail follows as a `<template>` + one-line mount script the moment its
+  own pivots answer. No client framework; the stream is the page. Same
+  pipeline, budgets, cache and politeness as batch — only the byte timing
+  differs. Byte-reproducibility is a batch-only invariant; streamed pages are
+  expected to vary with live data.
+
+Both discovery entry points share `src/discover.js`, which reports progress
+through an async `emit('spine'|'band', …)` callback — batch ignores the
+events, streaming writes fragments from them. Cold-article profile (Barbara
+McClintock, 2026-08-03): spine at 0.9s, first rail 4.5s, complete ~9s; the
+tail is the Commons queue, serial by etiquette.
 
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).

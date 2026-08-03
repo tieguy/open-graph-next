@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { enqueue } from '../src/mw.js'
 import { sectionOutline, sliceSectionHtml, sliceSectionWikitext } from '../src/wikipedia.js'
-import { chunk, iaSearchUrl, matchIaDoc, olVolumesUrl } from '../src/batch.js'
+import { chunk, iaSearchUrl, matchIaDoc, olBooksUrl } from '../src/batch.js'
 
 // ---- per-host queue ---------------------------------------------------------
 
@@ -160,7 +160,7 @@ test('matchIaDoc requires a shared isbn AND title overlap', () => {
   assert.equal(matchIaDoc({ title: 'Carrying the Fire', isbn: '444' }, docs), null)
 })
 
-test('olVolumesUrl separates independent queries with |, not ;', () => {
-  const url = olVolumesUrl(['111', '222'])
-  assert.equal(url, 'https://openlibrary.org/api/volumes/brief/json/isbn:111%7Cisbn:222')
+test('olBooksUrl asks the fast batch endpoint for exactly the access fields', () => {
+  const url = olBooksUrl(['111', '222'])
+  assert.equal(url, 'https://openlibrary.org/api/books?bibkeys=ISBN:111,ISBN:222&format=json&jscmd=data')
 })

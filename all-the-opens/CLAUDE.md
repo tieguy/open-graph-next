@@ -28,6 +28,9 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 - `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Article Title"` —
   build a live-discovery render for any article.
 - `cd tapestry-gen && npm test` — run the generator's test suite.
+- `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com npm run serve` —
+  streaming server: `http://localhost:8787/wiki/<Article_Title>` renders the
+  spine in ~1s and streams enrichment in behind it.
 - Open `tapestry-gen/demo/apollo-11.html` in a browser (self-contained).
 
 ## Project Structure

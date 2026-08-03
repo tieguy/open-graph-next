@@ -5,6 +5,7 @@
   "description": "Generates a Tapestry canvas from the Apollo 11 dataset",
   "scripts": {
     "generate": "node generate.js",
+    "serve": "node serve.js",
     "test": "node --test 'test/*.test.js'"
   },
   "dependencies": {

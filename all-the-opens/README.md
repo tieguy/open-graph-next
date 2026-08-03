@@ -17,6 +17,12 @@ cd tapestry-gen
 WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Any Article Title"
 ```
 
+Or watch it happen live — the article streams in first, the ecosystem follows as each source answers:
+
+```
+WIKIMEDIA_UA_CONTACT=you@example.com npm run serve   # then /wiki/Any_Article_Title
+```
+
 ## Inspiration
 
 This project is inspired by conversations with [Jennie Rose Halperin](https://jennierosehalperin.me) about cooperative knowledge infrastructure and the future of libraries.

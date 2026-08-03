@@ -121,9 +121,17 @@ evidence class exists at all.
 
 - **Phase 2's registry and scheduler.** Three pivots do not need an extension
   point. Build it when adding the fourth is what hurts, not before.
-- **Phase 7 streaming.** A one-second spine matters for the live browser
+  *(2026-08-03: the scheduler half exists after all — the per-host serial
+  queue in `src/mw.js`, built for the Tier-1 batching work. The registry half
+  remains unbuilt and unneeded.)*
+- **Phase 7 streaming.** ~~A one-second spine matters for the live browser
   target; the pre-baked render doesn't care. It should follow a decision to go
-  live in-browser, not precede it.
+  live in-browser, not precede it.~~ **Done 2026-08-03** — the decision was
+  made and `serve.js` streams: spine at ~1s, rails as each band's own pivots
+  settle, complete in ~9s on a cold biography. The pipeline moved to
+  `src/discover.js` (shared with `spike.js`, whose output stayed
+  byte-identical); OpenLibrary access moved from volumes/brief to the Books
+  API after the 25-key brief request measured 27s against the Books API's 2s.
 - **Phase 5 infobox anchors.** The design plan already flags this as unproven.
   Citation and wikilink anchors are not yet exhausted; this is the least
   certain yield per unit of work.

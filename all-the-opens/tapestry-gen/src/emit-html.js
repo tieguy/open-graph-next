@@ -169,14 +169,12 @@ function citation(cite, inline) {
   )
 }
 
-function band(b, eyebrow, inline) {
-  const prose = b.blocks
-    ? b.blocks.map((x) => (x.kind === 'h' ? `<h3>${escapeHtml(x.text)}</h3>` : `<p>${escapeHtml(x.text)}</p>`)).join('')
-    : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
-  // Two columns: the article on the left, and a single right rail carrying the
-  // ecosystem's media with the section's cited sources beneath it. The rail
-  // floats, so the prose wraps around it and reclaims full width below — no
-  // reserved empty column.
+/**
+ * A band's right rail — media carousels, cited sources, disclosure — as its
+ * own fragment, because the streaming renderer sends it separately from the
+ * spine it belongs to. Empty string when the band has nothing to show.
+ */
+export function bandRail(b, inline = new Map()) {
   // Group the band's media by source, in first-appearance order, one carousel each.
   const bySource = new Map()
   for (const e of b.entries ?? []) {
@@ -202,9 +200,21 @@ function band(b, eyebrow, inline) {
   const disclosure = b.disclosure
     ? `<p class="disclosure">${escapeHtml(b.disclosure)}</p>`
     : ''
-  const rail = media || sources ? `<aside class="rail">${disclosure}${media}${sources}</aside>` : ''
+  return media || sources ? `<aside class="rail">${disclosure}${media}${sources}</aside>` : ''
+}
+
+function band(b, eyebrow, inline) {
+  const prose = b.blocks
+    ? b.blocks.map((x) => (x.kind === 'h' ? `<h3>${escapeHtml(x.text)}</h3>` : `<p>${escapeHtml(x.text)}</p>`)).join('')
+    : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
+  // Two columns: the article on the left, and a single right rail carrying the
+  // ecosystem's media with the section's cited sources beneath it. The rail
+  // floats, so the prose wraps around it and reclaims full width below — no
+  // reserved empty column.
+  const rail = bandRail(b, inline)
+  const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
   return (
-    `<section class="band ${b.blocks ? 'section' : 'note'}">` +
+    `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
     `<header class="band-head"><span class="eyebrow">${escapeHtml(eyebrow)}</span><h2>${escapeHtml(b.title)}</h2></header>` +
     `<div class="band-body">${rail}<div class="prose">${prose}</div></div>` +
     `</section>`
@@ -277,6 +287,122 @@ ${STYLE}${faviconStyle(used, inline)}
 <main>
 ${body}
 </main>
+<footer class="foot">
+  <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
+  media under their own licences, shown on each item.</p>
+</footer>
+</body>
+</html>
+`
+}
+
+// ---------------------------------------------------------------------------
+// Streaming (Phase 7): the same page, delivered as one chunked response. The
+// shell and full spine go out first — the article renders before any pivot
+// answers — and each band's rail follows as a <template> plus a one-line
+// script that moves it into place as the browser parses it. No framework, no
+// client round-trips: the stream IS the page.
+
+// The relocation helpers, inlined into the head so they exist before the
+// first fragment arrives. `__thb` mounts a band's rail; `__fill`/`__append`
+// place the hero's legend and notes once the page knows its sources.
+const RELOCATE_JS = `<script>
+function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
+if(p&&s){var e=p.content.firstElementChild;if(e)s.querySelector(".band-body").insertBefore(e,s.querySelector(".prose"));p.remove()}}
+function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
+function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
+</script>`
+
+/**
+ * Everything up to and including the spine: head, hero (with an empty legend
+ * the stream fills later), and every band with its prose but no rail. Icon
+ * styles for ALL sources are emitted up front — a streaming page cannot know
+ * yet which it will use, and the unused rules cost bytes, not correctness.
+ */
+export function streamOpen({ title, description, units, inline = new Map() }) {
+  let n = 0
+  const spine = units
+    .map((u) =>
+      band(
+        { id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks },
+        u.index === '0' ? 'lede' : `§${++n}`,
+        inline,
+      ),
+    )
+    .join('\n')
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>${escapeHtml(title)}</title>
+<style>
+${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
+</style>
+${RELOCATE_JS}
+</head>
+<body>
+<header class="hero">
+  <p class="kicker">Rabbit Hole Browser · a rendering experiment · streaming</p>
+  <h1>${escapeHtml(title)}</h1>
+  <p class="lede">${escapeHtml(description)}</p>
+  <p class="thesis">The article runs down the left; the open ecosystem’s media and the sources it
+    cites sit in the margin beside it. <b>Nothing here is placed by hand.</b></p>
+  <div class="legend"></div>
+</header>
+<main>
+${spine}
+`
+}
+
+/**
+ * One band's enrichment as a stream fragment: the rail in a template, and the
+ * instruction to mount it. Empty string when the band has nothing to add —
+ * a band with no findings needs no bytes, and its absence IS the finding.
+ */
+export function streamBand(b, inline = new Map()) {
+  const rail = bandRail(b, inline)
+  if (!rail) return ''
+  return `<template id="tpl-${escapeHtml(b.id)}">${rail}</template><script>__thb("tpl-${escapeHtml(b.id)}","${escapeHtml(b.id)}")</script>\n`
+}
+
+/**
+ * The hero's legend and per-page notes, streamed once every band has landed —
+ * only then does the page know which sources it used and whether any anchor
+ * drew arbitrarily.
+ */
+export function streamHeroExtras(bands, { inline = new Map(), home = '' } = {}) {
+  const used = sourcesUsed(bands)
+  const legend = used
+    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
+    .join('')
+  const discussion = home
+    ? ` Challenges to layout and selection are discussed on the
+       <a href="${escapeHtml(home)}#hard-problems">main page</a>.`
+    : ''
+  const notes =
+    (bands.some((b) => b.broad)
+      ? `<p class="draw-note">Where a rail shows <i>4 of 182</i>, the four are an arbitrary draw from
+       the whole set.${discussion}</p>`
+      : '') +
+    (bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
+      ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
+        `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
+        `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
+        `values are printed on the card, because a description that agrees is a weaker claim than an ` +
+        `identifier that matches, and must not be read as one.</p>`
+      : '')
+  return (
+    `<template id="tpl-legend">${legend}</template><script>__fill("tpl-legend",".legend")</script>\n` +
+    (notes ? `<template id="tpl-notes">${notes}</template><script>__append("tpl-notes",".hero")</script>\n` : '')
+  )
+}
+
+/** The close of the stream: footer and document end. */
+export function streamClose({ provenance = '' } = {}) {
+  return `</main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
   media under their own licences, shown on each item.</p>

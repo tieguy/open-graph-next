@@ -62,13 +62,16 @@ export function matchIaDoc(cite, docs) {
 }
 
 /**
- * One volumes/brief request for a run of ISBNs. `|` separates independent
- * queries (`;` would declare them editions of one book); the response is keyed
- * by each `isbn:x` sub-request.
+ * One Books API request for a run of ISBNs, keyed `ISBN:x` in the response.
+ * This is the *fast* batch endpoint: volumes/brief also accepts many keys
+ * (`|`-separated) but answers them serially server-side — 25 keys took 27s
+ * against the Books API's 2s. `jscmd=data` carries exactly what access
+ * resolution reads: the catalog `url` and the `ebooks` availability list.
  */
-export function olVolumesUrl(isbns) {
+export function olBooksUrl(isbns) {
   return (
-    'https://openlibrary.org/api/volumes/brief/json/' +
-    isbns.map((i) => `isbn:${i}`).join('%7C')
+    'https://openlibrary.org/api/books?bibkeys=' +
+    isbns.map((i) => `ISBN:${i}`).join(',') +
+    '&format=json&jscmd=data'
   )
 }
