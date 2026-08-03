@@ -792,7 +792,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         0,
         statementsLeft,
       )
-      if (found.some((e) => e._via === 'P625')) mapsLeft--
+      if (found.some((e) => e.source === 'openstreetmap')) mapsLeft--
       statementsLeft -= found.length
       entries.push(...found)
       stats.statements += found.length

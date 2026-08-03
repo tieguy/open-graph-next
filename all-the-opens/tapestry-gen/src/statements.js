@@ -12,16 +12,30 @@ import { chunk } from './batch.js'
 import { getJson } from './http.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'gbif', 'inat', 'coord']
+const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?gbif ?inat ?coord WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
-    'OPTIONAL { ?item wdt:P625 ?coord } }'
+    'OPTIONAL { ?item wdt:P625 ?coord } ' +
+    'OPTIONAL { ?item wdt:P402 ?osmr } OPTIONAL { ?item wdt:P10689 ?osmw } ' +
+    'OPTIONAL { ?item wdt:P11693 ?osmn } }'
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * The OSM feature an entity's statements name, most specific first: a way or
+ * node outlines the thing itself (a building, a monument), a relation may be
+ * anything from a campus to a country. Null when only coordinates exist.
+ */
+export function osmFeature(statements) {
+  if (statements.osmw) return { kind: 'way', id: statements.osmw, via: 'P10689', zoom: 15 }
+  if (statements.osmn) return { kind: 'node', id: statements.osmn, via: 'P11693', zoom: 16 }
+  if (statements.osmr) return { kind: 'relation', id: statements.osmr, via: 'P402', zoom: 11 }
+  return null
 }
 
 /**
@@ -170,18 +184,29 @@ export function tileFor(lat, lon, z = 8) {
  * form of the OSMF tile policy's light use and the only rendering that never
  * asks the reader's browser to hotlink anyone.
  */
-export function mapEntry(coord, label) {
+export function mapEntry(coord, label, osm = null) {
   const lat = coord.lat.toFixed(4)
   const lon = coord.lon.toFixed(4)
-  const { z, x, y } = tileFor(coord.lat, coord.lon)
+  // Zoom follows what is known: a mapped way or node is a thing with an
+  // outline (street scale); a relation could be a campus or a county
+  // (district scale); bare coordinates get regional context. A museum card
+  // showing all of Chicagoland is a map of the wrong fact.
+  const { z, x, y } = tileFor(coord.lat, coord.lon, osm?.zoom ?? 8)
   return {
     source: 'openstreetmap',
     title: label ? `Map: ${label}` : 'Map',
-    description: `${lat}, ${lon}`,
+    description: osm ? `Mapped in OpenStreetMap as ${osm.kind} ${osm.id}` : `${lat}, ${lon}`,
     imageUrl: `https://tile.openstreetmap.org/${z}/${x}/${y}.png`,
-    href: `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=10/${lat}/${lon}`,
-    attribution: { author: '© OpenStreetMap contributors', license: 'via P625 coordinates' },
-    _via: 'P625',
+    // The mapped feature itself when OSM knows the thing; a pin when it
+    // only knows the place.
+    href: osm
+      ? `https://www.openstreetmap.org/${osm.kind}/${osm.id}`
+      : `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=10/${lat}/${lon}`,
+    attribution: {
+      author: '© OpenStreetMap contributors',
+      license: osm ? `via ${osm.via} OSM ${osm.kind}` : 'via P625 coordinates',
+    },
+    _via: osm?.via ?? 'P625',
   }
 }
 
@@ -208,6 +233,6 @@ export async function statementEntries(qid, statements, { label, withMap }) {
     }
   }
   const coord = withMap ? parseEarthPoint(statements.coord) : null
-  if (coord) out.push(mapEntry(coord, label))
+  if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
   return out
 }

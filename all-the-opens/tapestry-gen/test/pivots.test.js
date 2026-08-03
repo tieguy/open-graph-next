@@ -8,6 +8,7 @@ import {
   inatEntryFrom,
   mapEntry,
   metEntryFrom,
+  osmFeature,
   parseEarthPoint,
   wdqsUrl,
 } from '../src/statements.js'
@@ -67,7 +68,8 @@ test('openAlexUrl batches values and carries the polite mailto', () => {
 
 test('wdqsUrl asks for every partner property over the anchor set', () => {
   const url = wdqsUrl(['Q1', 'Q2'])
-  for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625']) assert.ok(url.includes(p), p)
+  for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
+    assert.ok(url.includes(p), p)
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
 })
 
@@ -124,4 +126,21 @@ test('entries with no image still render as named cards (no fabricated visuals)'
   assert.equal(metEntryFrom(null), null)
   assert.equal(inatEntryFrom({ name: 'X' }).imageUrl, null)
   assert.equal(gbifEntryFrom(null, 1), null)
+})
+
+test('a mapped OSM feature beats a bare pin: link, zoom, and evidence follow it', () => {
+  // The Art Institute is relation 1870546; its building is way 388436810.
+  const feature = osmFeature({ osmr: '1870546', osmw: '388436810' })
+  assert.deepEqual(feature, { kind: 'way', id: '388436810', via: 'P10689', zoom: 15 })
+  const card = mapEntry({ lat: 41.8794, lon: -87.6239 }, 'Art Institute of Chicago', feature)
+  assert.equal(card.href, 'https://www.openstreetmap.org/way/388436810')
+  assert.match(card.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/15\//)
+  assert.match(card.description, /Mapped in OpenStreetMap as way 388436810/)
+  assert.equal(card._via, 'P10689')
+  // A relation alone still zooms to district scale, not a whole region.
+  assert.equal(osmFeature({ osmr: '1870546' }).zoom, 11)
+  // Coordinates alone keep the regional pin, credited to P625.
+  const pin = mapEntry({ lat: 41.8794, lon: -87.6239 }, 'Somewhere')
+  assert.equal(pin._via, 'P625')
+  assert.match(pin.href, /mlat=41\.8794/)
 })
