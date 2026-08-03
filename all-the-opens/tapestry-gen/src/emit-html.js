@@ -183,15 +183,27 @@ function citation(cite, inline) {
   const cover = cite.cover
     ? `<img class="cover" src="${escapeHtml(inline.get(cite.cover) ?? cite.cover)}" loading="lazy" alt="${escapeHtml(cite.title)}">`
     : ''
+  // The byline the template states — who wrote it, when — because a source a
+  // reader can weigh is worth more than a bare title.
+  const byline = [cite.author, cite.date].filter(Boolean).join(' · ')
   const link = cite.href
     ? `<a class="cite-link${cite.linkLabel ? ' access' : ''}" href="${escapeHtml(cite.href)}" ` +
       `target="_blank" rel="noopener">${escapeHtml(cite.linkLabel ?? 'view source')} ↗</a>`
     : ''
+  // The archived copy stands beside the live link, dated when the template
+  // dates it — shown only when it is not already the primary link.
+  const archive =
+    cite.archiveUrl && cite.href !== cite.archiveUrl
+      ? `<a class="cite-arch" href="${escapeHtml(cite.archiveUrl)}" target="_blank" rel="noopener">` +
+        `archived${cite.archiveDate ? ` ${escapeHtml(cite.archiveDate)}` : ''} ↗</a>`
+      : ''
   return (
     `<li class="cite">${cover}<span class="cite-kind">${escapeHtml(kind)}</span>` +
     `<span class="cite-title">${escapeHtml(cite.title)}</span>` +
+    (byline ? `<span class="cite-by">${escapeHtml(byline)}</span>` : '') +
     (cite.publisher ? `<span class="cite-pub">${escapeHtml(cite.publisher)}</span>` : '') +
     link +
+    archive +
     `</li>`
   )
 }
@@ -542,9 +554,13 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .cite .cover{width:78px;border-radius:3px;margin:0 0 8px;box-shadow:0 1px 2px rgba(0,0,0,.18)}
 .cite-kind{display:block;font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;color:#8a8f95;margin-bottom:3px}
 .cite-title{display:block;font-size:.84rem;line-height:1.3;font-weight:600;color:var(--ink)}
+.cite-by{display:block;font-size:.73rem;color:#6b6f75;margin-top:3px}
 .cite-pub{display:block;font-size:.75rem;color:var(--muted);margin-top:2px}
 .cite-link{display:inline-block;font-size:.72rem;margin-top:6px;text-decoration:none}
 .cite-link:hover{text-decoration:underline}
+/* The archived copy: present, dated, and deliberately quiet next to the live link. */
+.cite-arch{display:inline-block;font-size:.66rem;margin:6px 0 0 12px;color:#8a8f95;text-decoration:none}
+.cite-arch:hover{color:var(--link);text-decoration:underline}
 /* A book you can actually borrow or read gets a stronger, pill-shaped call. */
 .cite-link.access{margin-top:8px;padding:3px 9px;border:1px solid var(--link);border-radius:999px;font-weight:600}
 .cite-link.access:hover{background:var(--link);color:#fff;text-decoration:none}

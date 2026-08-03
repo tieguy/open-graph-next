@@ -108,8 +108,34 @@ function validIsbn(value) {
 }
 
 /**
+ * The people a citation template names, as one display string: numbered
+ * last/first pairs joined the way a byline reads, `null` when none are
+ * stated, `A, B & C et al.` past three — a rail card is a byline, not a
+ * bibliography record.
+ */
+export function citationAuthors(p) {
+  const names = []
+  for (let i = 1; i <= 4; i++) {
+    const last = stripMarkup(p.get(`last${i}`) ?? (i === 1 ? p.get('last') : null))
+    const author = stripMarkup(p.get(`author${i}`) ?? (i === 1 ? p.get('author') : null))
+    if (!last && !author) break
+    const first = last ? stripMarkup(p.get(`first${i}`) ?? (i === 1 ? p.get('first') : null)) : null
+    names.push(author ?? (first ? `${first} ${last}` : last))
+  }
+  if (!names.length) return null
+  if (names.length <= 3) {
+    return names.length === 1
+      ? names[0]
+      : `${names.slice(0, -1).join(', ')} & ${names[names.length - 1]}`
+  }
+  return `${names.slice(0, 3).join(', ')} et al.`
+}
+
+/**
  * A single citation template → a structured citation, or null when the ref holds
  * no `{{cite …}}`/`{{citation}}` template (a bare explanatory note, say).
+ * Everything the rail can show travels along: byline, stated date, and the
+ * archived copy with the date it was taken.
  */
 export function parseCitation(refInner) {
   const tpl = extractTemplate(refInner)
@@ -122,11 +148,13 @@ export function parseCitation(refInner) {
     kind: name[1] ? name[1].toLowerCase() : 'generic',
     url: p.get('url') ?? null,
     archiveUrl: p.get('archive-url') ?? p.get('archiveurl') ?? null,
+    archiveDate: stripMarkup(p.get('archive-date') ?? p.get('archivedate')),
     title: stripMarkup(p.get('title')),
     isbn: normalizeIsbn(p.get('isbn')),
     doi: p.get('doi') ?? null,
     publisher: stripMarkup(p.get('publisher') ?? p.get('work') ?? p.get('website')),
-    author: stripMarkup(p.get('last') ?? p.get('author') ?? p.get('last1') ?? p.get('author1')),
+    author: citationAuthors(p),
+    date: stripMarkup(p.get('date') ?? p.get('year')),
   }
 }
 
@@ -216,6 +244,8 @@ export function bibliographyIdentifiers(wikitext) {
       isbn: validIsbn(p.get('isbn')),
       oclc: p.get('oclc')?.trim() || null,
       lccn: p.get('lccn')?.trim() || null,
+      author: citationAuthors(p),
+      date: year,
     }
     if (!entry.isbn && !entry.oclc && !entry.lccn) continue
 
@@ -251,14 +281,16 @@ export function resolveShortCites(wikitext, bibliography) {
 }
 
 /**
- * The best link for a citation: the archived copy first (it still resolves when
- * the original has rotted — most of the article's URLs are archived), then a DOI
- * landing page, then the live URL.
+ * The best primary link for a citation: the URL the article states, then a
+ * DOI landing page, then the archived copy. The archive used to be preferred
+ * here; now that the rail shows it as its own dated link, the primary link
+ * says what the citation says, and the archive stands by in the same card
+ * for when the original has rotted.
  */
 export function citationHref(cite) {
-  if (cite.archiveUrl) return cite.archiveUrl
+  if (cite.url) return cite.url
   if (cite.doi) return `https://doi.org/${cite.doi}`
-  return cite.url ?? null
+  return cite.archiveUrl ?? null
 }
 
 /** The OpenLibrary cover for a citation's ISBN, or null when it has none. */

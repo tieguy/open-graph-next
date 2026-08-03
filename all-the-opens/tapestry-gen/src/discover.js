@@ -250,9 +250,15 @@ async function railCitations(candidates, volumes) {
     built.push({
       kind: cite.kind ?? 'book',
       title: cite.title || 'Untitled source',
+      author: cite.author ?? null,
+      date: cite.date ?? null,
       publisher: cite.publisher ?? null,
       href: cite.access ? cite.access.url : citationHref(cite),
       linkLabel: cite.access ? cite.access.label : null,
+      // The archived copy is its own link, not a silent replacement for the
+      // stated URL — with the date it was taken, when the template says.
+      archiveUrl: cite.archiveUrl ?? null,
+      archiveDate: cite.archiveDate ?? null,
       cover: coverUrl && (await coverDataUri(coverUrl)) ? coverUrl : null,
     })
   }

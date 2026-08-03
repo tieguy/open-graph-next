@@ -43,7 +43,7 @@ test('a cite book carries its ISBN and author, markup stripped from the title', 
   assert.equal(c.kind, 'book')
   assert.equal(c.isbn, '9780743257510', 'ISBN normalised to digits')
   assert.equal(c.title, 'First Man', 'wiki markup stripped')
-  assert.equal(c.author, 'Hansen')
+  assert.equal(c.author, 'James Hansen', 'byline uses the full stated name')
 })
 
 test('an archived citation exposes both the live and the archive url', () => {
@@ -89,13 +89,15 @@ test('a ref that is not a citation template is skipped', () => {
 
 // --- resolving a citation to something linkable / shown ---------------------
 
-test('a citation href prefers the archived copy, then the DOI, then the live url', () => {
+test('a citation href prefers the stated URL, then the DOI, then the archive', () => {
+  // The archive used to be primary; now it renders as its own dated link, so
+  // the primary link says what the citation says.
   assert.equal(
     citationHref({ archiveUrl: 'https://web.archive.org/x', url: 'https://x.test', doi: '10.1/y' }),
-    'https://web.archive.org/x',
+    'https://x.test',
   )
-  assert.equal(citationHref({ doi: '10.1126/science.1', url: 'https://x.test' }), 'https://doi.org/10.1126/science.1')
-  assert.equal(citationHref({ url: 'https://x.test' }), 'https://x.test')
+  assert.equal(citationHref({ doi: '10.1126/science.1', archiveUrl: 'https://web.archive.org/x' }), 'https://doi.org/10.1126/science.1')
+  assert.equal(citationHref({ archiveUrl: 'https://web.archive.org/x' }), 'https://web.archive.org/x')
   assert.equal(citationHref({}), null)
 })
 
@@ -168,4 +170,32 @@ test('a book OpenLibrary catalogs but has no scan links to the OpenLibrary page,
 test('a book OpenLibrary does not have yields no access', () => {
   assert.equal(openLibraryAccess({ records: {} }), null)
   assert.equal(openLibraryAccess(undefined), null)
+})
+
+test('citation bylines: numbered authors, first/last pairs, et al past three', () => {
+  const one = parseCitation('{{cite web |title=T |last=Doe |first=Jane |date=May 12, 2023 |url=https://x.test}}')
+  assert.equal(one.author, 'Jane Doe')
+  assert.equal(one.date, 'May 12, 2023')
+  const three = parseCitation(
+    '{{cite book |title=T |last1=A |first1=X |last2=B |last3=C |year=1998}}',
+  )
+  assert.equal(three.author, 'X A, B & C')
+  const crowd = parseCitation(
+    '{{cite journal |title=T |last1=A |last2=B |last3=C |last4=D}}',
+  )
+  assert.equal(crowd.author, 'A, B, C et al.')
+  assert.equal(parseCitation('{{cite web |title=T |url=https://x.test}}').author, null)
+})
+
+test('the archived copy travels with its date, and the live URL is primary again', () => {
+  const c = parseCitation(
+    '{{cite web |title=T |url=https://live.test/a |archive-url=https://web.archive.org/web/2023/https://live.test/a |archive-date=12 May 2023}}',
+  )
+  assert.equal(c.archiveDate, '12 May 2023')
+  assert.equal(citationHref(c), 'https://live.test/a')
+  // With no live URL, the archive is still the best door.
+  const dead = parseCitation(
+    '{{cite web |title=T |archive-url=https://web.archive.org/web/2023/x}}',
+  )
+  assert.equal(citationHref(dead), 'https://web.archive.org/web/2023/x')
 })
