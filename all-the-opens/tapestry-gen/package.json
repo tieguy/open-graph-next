@@ -6,5 +6,8 @@
   "scripts": {
     "generate": "node generate.js",
     "test": "node --test 'test/*.test.js'"
+  },
+  "dependencies": {
+    "m3api": "^1.1.0"
   }
 }

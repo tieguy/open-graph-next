@@ -10,8 +10,14 @@
  *   wikilink anchors  -> QID -> haswbstatement:P180 -> Commons
  *
  * Placement needs no algorithm: an item sits in the section of the anchor that
- * found it. This is phases 1, 3 and part of 4 only — no infobox anchors, no
- * corroborated collection pivot, no speculative tiles, no streaming.
+ * found it.
+ *
+ * The request shape is the Tier-1 performance work: the article arrives in ONE
+ * parse call (sections + HTML + wikitext, split locally), identifiers are
+ * batched per source (one Solr query for a run of ISBNs, one OpenLibrary
+ * volumes call for a run of ISBNs, QIDs and labels at the API's 50-per-request
+ * limit), and the pivots run concurrently ACROSS hosts while a per-host queue
+ * (src/mw.js) keeps every individual API serial, as etiquette asks.
  *
  *   node spike.js "Brown v. Board of Education"
  */
@@ -22,11 +28,12 @@ import { fileURLToPath } from 'node:url'
 
 import {
   articleBlocks,
-  fetchLede,
+  fetchArticle,
   fetchQids,
-  fetchSection,
-  fetchSections,
   fetchSectionWikitext,
+  sectionOutline,
+  sliceSectionHtml,
+  sliceSectionWikitext,
 } from './src/wikipedia.js'
 import {
   bibliographyIdentifiers,
@@ -38,7 +45,9 @@ import {
   sectionCitations,
   templateParams,
 } from './src/citations.js'
+import { chunk, iaSearchUrl, matchIaDoc, olVolumesUrl } from './src/batch.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './src/corroborate.js'
+import { cachedRequest, enqueue, requestTally } from './src/mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
 import { buildHtml, iconUrls } from './src/emit-html.js'
@@ -52,11 +61,6 @@ const UA = userAgent('tapestry-gen')
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
 // caps and says what it dropped rather than pretending it covered everything.
-//
-// Sections are no longer among the caps. The spine is cheap — one cached fetch
-// per section — while the pivots are what cost, and those are budgeted per
-// section below. Truncating at eight showed 22% of Apollo 11 and called it the
-// article. Set MAX_SECTIONS to restore a cap for a quick run.
 const MAX_SECTIONS = Number(process.env.MAX_SECTIONS ?? Infinity)
 const QIDS_PER_SECTION = Number(process.env.QIDS_PER_SECTION ?? 2)
 const COMMONS_PER_ANCHOR = 4
@@ -77,7 +81,9 @@ const SKIP =
 const BIBLIOGRAPHY = /^(sources|bibliography|works cited|primary sources|references|notes|citations)$/i
 
 /**
- * Every network call is disk-cached, so reruns are offline and reproducible.
+ * Every non-MediaWiki network call is disk-cached, so reruns are offline and
+ * reproducible, and rides the same per-host queue as everything else — serial
+ * at each API, concurrent across them.
  *
  * The timeout is not optional: a bare `fetch` has none, and one stalled
  * archive.org connection hung an entire run indefinitely. A source that goes
@@ -91,37 +97,49 @@ async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {
   } catch {
     /* not cached */
   }
-  let lastError
-  for (let attempt = 1; attempt <= tries; attempt++) {
-    // Only ever paid on a cache miss, and only by sources that ask for it.
-    if (throttleMs) await new Promise((r) => setTimeout(r, throttleMs))
-    const control = new AbortController()
-    const timer = setTimeout(() => control.abort(), timeoutMs)
-    try {
-      const res = await fetch(withMaxlag(url), {
-        headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip' },
-        signal: control.signal,
-      })
-      if (!res.ok) {
-        // A 404 is our bad identifier, not the server's bad day: retrying it
-        // spends someone else's capacity to get the same answer twice.
-        if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
-        const wait = retryAfterMs(res.headers)
-        if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
-        throw new Error(`${res.status} ${res.statusText}`)
+  const body = await enqueue(new URL(url).host, async () => {
+    let lastError
+    for (let attempt = 1; attempt <= tries; attempt++) {
+      // Only ever paid on a cache miss, and only by sources that ask for it.
+      if (throttleMs) await new Promise((r) => setTimeout(r, throttleMs))
+      const control = new AbortController()
+      const timer = setTimeout(() => control.abort(), timeoutMs)
+      try {
+        const res = await fetch(withMaxlag(url), {
+          headers: { 'User-Agent': UA, 'Accept-Encoding': 'gzip' },
+          signal: control.signal,
+        })
+        if (!res.ok) {
+          // A 404 is our bad identifier, not the server's bad day: retrying it
+          // spends someone else's capacity to get the same answer twice.
+          if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
+          const wait = retryAfterMs(res.headers)
+          if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
+          throw new Error(`${res.status} ${res.statusText}`)
+        }
+        return await res.json()
+      } catch (e) {
+        lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
+        if (e.permanent) break
+      } finally {
+        clearTimeout(timer)
       }
-      const body = await res.json()
-      await mkdir(CACHE, { recursive: true })
-      await writeFile(path, JSON.stringify(body))
-      return body
-    } catch (e) {
-      lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
-      if (e.permanent) break
-    } finally {
-      clearTimeout(timer)
     }
-  }
-  throw lastError
+    throw lastError
+  })
+  await mkdir(CACHE, { recursive: true })
+  await writeFile(path, JSON.stringify(body))
+  return body
+}
+
+/** A Wikidata Action API request through the shared cache and host queue. */
+function wikidata(params) {
+  return cachedRequest(CACHE, 'www.wikidata.org', params, { prefix: 'spike-' })
+}
+
+/** A Commons Action API request through the shared cache and host queue. */
+function commons(params) {
+  return cachedRequest(CACHE, 'commons.wikimedia.org', params, { prefix: 'spike-' })
 }
 
 /**
@@ -166,10 +184,11 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
   // Labels come along in the same request as the claims. They are what lets the
   // pivot name the work from the Wikidata side rather than from whatever the
   // holding archive happened to file it under.
-  const body = await getJson(
-    'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-      `&ids=${thesisQid}&props=claims|labels`,
-  )
+  const body = await wikidata({
+    action: 'wbgetentities',
+    ids: thesisQid,
+    props: 'claims|labels',
+  })
   const claims = body.entities?.[thesisQid]?.claims ?? {}
   const label = preferredLabel(body.entities?.[thesisQid]?.labels)
 
@@ -246,13 +265,29 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
 const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null) : null)
 
 /**
- * OpenLibrary's holdings for an ISBN. Catalogued is not the same as scanned:
- * most cited books have no Internet Archive copy, and for those this is the
- * difference between the rail saying nothing and the rail saying where the book
- * is. Rate-limited politely — OpenLibrary asks for one request at a time.
+ * OpenLibrary's holdings for a run of ISBNs, in one volumes request per 25 —
+ * what used to be a throttled request per ISBN. Catalogued is not the same as
+ * scanned: most cited books have no Internet Archive copy, and for those this
+ * is the difference between the rail saying nothing and the rail saying where
+ * the book is. The 1.1s throttle is still honoured per request; there are just
+ * far fewer of them.
+ *
+ * @returns {Map<string, object>} isbn → volumes/brief value (`{records, items}`)
  */
-async function openLibraryVolume(isbn) {
-  return getJson(`https://openlibrary.org/api/volumes/brief/isbn/${isbn}.json`, { throttleMs: 1100 })
+async function openLibraryVolumes(isbns) {
+  const volumes = new Map()
+  for (const group of chunk([...new Set(isbns)], 25)) {
+    try {
+      const body = await getJson(olVolumesUrl(group), { throttleMs: 1100 })
+      for (const isbn of group) {
+        const value = body[`isbn:${isbn}`]
+        if (value && Object.keys(value).length) volumes.set(isbn, value)
+      }
+    } catch (e) {
+      console.error(`  openlibrary volumes failed (${group.length} isbns): ${e.message}`)
+    }
+  }
+  return volumes
 }
 
 /**
@@ -270,19 +305,21 @@ async function coverDataUri(url, { minBytes = 1024 } = {}) {
   } catch {
     /* not fetched yet */
   }
-  try {
-    const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
-    if (!res.ok) return null
-    const bytes = Buffer.from(await res.arrayBuffer())
-    // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
-    // favicon is legitimately smaller, so callers can lower it.
-    const uri = bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
-    await mkdir(CACHE, { recursive: true })
-    await writeFile(path, uri)
-    return uri || null
-  } catch {
-    return null
-  }
+  const uri = await enqueue(new URL(url).host, async () => {
+    try {
+      const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
+      if (!res.ok) return ''
+      const bytes = Buffer.from(await res.arrayBuffer())
+      // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
+      // favicon is legitimately smaller, so callers can lower it.
+      return bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
+    } catch {
+      return ''
+    }
+  })
+  await mkdir(CACHE, { recursive: true })
+  await writeFile(path, uri)
+  return uri || null
 }
 
 /**
@@ -290,15 +327,12 @@ async function coverDataUri(url, { minBytes = 1024 } = {}) {
  * can reach each one, then given a cover and a link that says what opening it
  * will get you. Both citation styles arrive here — an inline {{cite}} and a
  * work resolved through the bibliography are the same kind of thing once found.
+ * Holdings arrive pre-fetched (one batched request for the whole article).
  */
-async function railCitations(candidates) {
+async function railCitations(candidates, volumes) {
   for (const cite of candidates) {
     if (!cite.isbn) continue
-    try {
-      cite.access = openLibraryAccess(await openLibraryVolume(cite.isbn))
-    } catch (e) {
-      console.error(`  openlibrary lookup failed (${cite.isbn}): ${e.message}`)
-    }
+    cite.access = openLibraryAccess(volumes.get(cite.isbn))
   }
   const chosen = prioritizeCitations(candidates, CITES_PER_SECTION)
   const built = []
@@ -358,50 +392,8 @@ function dedupeIdentifiers(entries) {
   })
 }
 
-const stop = new Set(['the', 'a', 'an', 'of', 'and', 'in', 'to', 'its', 'on', 'for'])
-const tokens = (s) =>
-  new Set(
-    (s ?? '')
-      .toLowerCase()
-      .split(/[^a-z0-9]+/)
-      .filter((w) => w.length > 2 && !stop.has(w)),
-  )
-
-/**
- * One Internet Archive lookup, keyed on an identifier the citation supplied.
- *
- * `isbn:` is a genuine Solr field, but the field is multi-valued and book-dealer
- * donation manifests are indexed with every ISBN on the pallet — one of them
- * carries 8,142 — so they are true matches that outrank the book itself. They are
- * `mediatype: data`, so constraining mediatype in the QUERY (not afterwards)
- * removes them without spending result rows on records that can never qualify.
- *
- * Title overlap is then a second, different guard: against a mis-keyed ISBN in
- * the citation resolving to a real but unrelated book.
- */
-async function iaByIdentifier(cite) {
-  const key = cite.isbn
-    ? `isbn:${cite.isbn}`
-    : cite.lccn
-      ? `lccn:${cite.lccn}`
-      : `external-identifier:"urn:oclc:record:${cite.oclc}"`
-  const url =
-    'https://archive.org/advancedsearch.php?q=' +
-    encodeURIComponent(`${key} AND mediatype:texts`) +
-    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=mediatype' +
-    '&rows=8&output=json'
-  const body = await getJson(url)
-  const wanted = tokens(cite.title)
-  const doc = (body.response?.docs ?? [])
-    .map((d) => {
-      const overlap = [...tokens(d.title)].filter((w) => wanted.has(w)).length
-      return { d, score: wanted.size ? overlap / wanted.size : 0 }
-    })
-    // A pallet manifest shares no words with the cited title; the book does.
-    .filter((x) => x.score >= 0.34)
-    .sort((a, b) => b.score - a.score)[0]?.d
-  if (!doc) return null
-  const via = cite.isbn ? 'isbn' : cite.lccn ? 'lccn' : 'oclc'
+/** An archive.org search row as a page entry, credited to its identifier. */
+function iaEntry(doc, cite, via) {
   return {
     source: 'internet_archive',
     title: doc.title ?? cite.title,
@@ -412,6 +404,50 @@ async function iaByIdentifier(cite) {
     attribution: { author: `archive.org/details/${doc.identifier}`, license: `via ${via}` },
     _via: via,
   }
+}
+
+const IA_ISBN_BATCH = 15
+
+/**
+ * Internet Archive lookups for every citation identifier on the page, batched:
+ * one Solr query per run of ISBNs (the common case), one query each for the
+ * rare LCCN/OCLC-only citations. Returns a Map from the citation object to its
+ * matched entry; citations the Archive does not hold are simply absent.
+ */
+async function iaLookups(cites) {
+  const hits = new Map()
+  const byIsbn = cites.filter((c) => c.isbn)
+  for (const group of chunk(byIsbn, IA_ISBN_BATCH)) {
+    let docs = []
+    try {
+      docs = (await getJson(iaSearchUrl(group.map((c) => c.isbn)))).response?.docs ?? []
+    } catch (e) {
+      console.error(`  ia batch failed (${group.length} isbns): ${e.message}`)
+      continue
+    }
+    for (const cite of group) {
+      const doc = matchIaDoc(cite, docs)
+      if (doc) hits.set(cite, iaEntry(doc, cite, 'isbn'))
+    }
+  }
+  for (const cite of cites.filter((c) => !c.isbn && (c.oclc || c.lccn))) {
+    const key = cite.lccn
+      ? `lccn:${cite.lccn}`
+      : `external-identifier:"urn:oclc:record:${cite.oclc}"`
+    const url =
+      'https://archive.org/advancedsearch.php?q=' +
+      encodeURIComponent(`${key} AND mediatype:texts`) +
+      '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn' +
+      '&rows=8&output=json'
+    try {
+      const docs = (await getJson(url)).response?.docs ?? []
+      const doc = matchIaDoc({ ...cite, isbn: null }, docs) ?? docs[0] ?? null
+      if (doc) hits.set(cite, iaEntry(doc, cite, cite.lccn ? 'lccn' : 'oclc'))
+    } catch (e) {
+      console.error(`  ia lookup failed (${cite.oclc ?? cite.lccn}): ${e.message}`)
+    }
+  }
+  return hits
 }
 
 /**
@@ -445,13 +481,17 @@ function freeLawByCitation(citations) {
 
 /** Commons files depicting an entity, via Structured Data on Commons. */
 async function commonsDepicting(qid) {
-  const url =
-    'https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2' +
-    '&generator=search&gsrsearch=' +
-    encodeURIComponent(`haswbstatement:P180=${qid}`) +
-    `&gsrnamespace=6&gsrlimit=${COMMONS_PER_ANCHOR}&gsrinfo=totalhits` +
-    '&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640'
-  const body = await getJson(url)
+  const body = await commons({
+    action: 'query',
+    generator: 'search',
+    gsrsearch: `haswbstatement:P180=${qid}`,
+    gsrnamespace: '6',
+    gsrlimit: String(COMMONS_PER_ANCHOR),
+    gsrinfo: 'totalhits',
+    prop: 'imageinfo',
+    iiprop: 'url|extmetadata',
+    iiurlwidth: '640',
+  })
   const pages = body.query?.pages ?? []
   // How many depictions exist in total. When this is large the four we show are
   // an arbitrary draw, and the page says so rather than implying a selection.
@@ -483,13 +523,16 @@ async function commonsDepicting(qid) {
  * depiction set.
  */
 async function commonsCategoryFiles(category, limit) {
-  const url =
-    'https://commons.wikimedia.org/w/api.php?action=query&format=json&formatversion=2' +
-    '&generator=categorymembers&gcmtitle=' +
-    encodeURIComponent(`Category:${category}`) +
-    `&gcmtype=file&gcmlimit=${limit}` +
-    '&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=640'
-  const body = await getJson(url)
+  const body = await commons({
+    action: 'query',
+    generator: 'categorymembers',
+    gcmtitle: `Category:${category}`,
+    gcmtype: 'file',
+    gcmlimit: String(limit),
+    prop: 'imageinfo',
+    iiprop: 'url|extmetadata',
+    iiurlwidth: '640',
+  })
   return (body.query?.pages ?? [])
     .map((p) => {
       const info = p.imageinfo?.[0]
@@ -517,22 +560,26 @@ async function subjectAuthorWorks(subjectClaims) {
   return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT })
 }
 
-/** Labels of the entities we anchored on, for the disclosure line. */
+/** Labels of the entities we anchored on, batched at the API's 50-id limit. */
 async function entityLabels(qids) {
-  if (!qids.length) return new Map()
-  try {
-    const url =
-      'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-      `&ids=${qids.join('|')}&props=labels&languages=en`
-    const body = await getJson(url)
-    return new Map(
-      Object.entries(body.entities ?? {}).map(([q, e]) => [q, e.labels?.en?.value ?? q]),
-    )
-  } catch (e) {
-    // Cosmetic: the disclosure falls back to bare QIDs rather than failing.
-    console.error(`  label lookup failed: ${e.message}`)
-    return new Map()
+  const labels = new Map()
+  for (const group of chunk([...new Set(qids)], 50)) {
+    try {
+      const body = await wikidata({
+        action: 'wbgetentities',
+        ids: group.join('|'),
+        props: 'labels',
+        languages: 'en',
+      })
+      for (const [q, e] of Object.entries(body.entities ?? {})) {
+        labels.set(q, e.labels?.en?.value ?? q)
+      }
+    } catch (e) {
+      // Cosmetic: the disclosure falls back to bare QIDs rather than failing.
+      console.error(`  label lookup failed: ${e.message}`)
+    }
   }
+  return labels
 }
 
 // Citation apparatus that `prop=links` reports as ordinary wikilinks. These are
@@ -544,8 +591,8 @@ const APPARATUS =
 /**
  * A section's anchors, in document order, taken from prose only.
  *
- * `fetchSection`'s link list includes everything inside <ref> tags, so ranking
- * cannot be skipped — unranked, the first two links of a section are usually its
+ * The rendered HTML includes everything inside <ref> tags, so ranking cannot
+ * be skipped — unranked, the first two links of a section are usually its
  * first two footnotes. Document order is a decent prominence proxy: an article
  * links its subject matter early and its apparatus late.
  */
@@ -566,6 +613,7 @@ function proseLinks(html) {
 }
 
 async function main() {
+  const started = Date.now()
   const page = process.argv[2]
   if (!page) {
     console.error('usage: node spike.js "Article title"')
@@ -574,16 +622,25 @@ async function main() {
   const slug = page.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   const out = join(HERE, 'demo', `spike-${slug}.html`)
 
-  const all = await fetchSections(CACHE, page)
-  const sections = all.filter((s) => !SKIP.test(s.title)).slice(0, MAX_SECTIONS)
-  const dropped = all.filter((s) => !SKIP.test(s.title)).length - sections.length
+  // ---- Spine: the whole article in one parse call, split locally. ----------
+  const article = await fetchArticle(CACHE, page)
+  const outline = sectionOutline(article.sections)
+  const body = outline.filter((s) => !SKIP.test(s.title))
+  const sections = body.slice(0, MAX_SECTIONS)
+  const dropped = body.length - sections.length
+
+  const sectionWikitext = async (index) =>
+    sliceSectionWikitext(article.wikitext, article.sections, index) ??
+    // A template-transcluded section has no byteoffset to slice by; fetching
+    // it individually is the rare fallback, not the rule.
+    (await fetchSectionWikitext(CACHE, page, index))
 
   // The apparatus sections are not rendered, but on an {{sfn}}-style article
-  // they hold every identifier the body points at. Read them once, up front.
+  // they hold every identifier the body points at.
   const bibliography = new Map()
-  for (const s of all.filter((s) => BIBLIOGRAPHY.test(s.title))) {
+  for (const s of outline.filter((s) => BIBLIOGRAPHY.test(s.title))) {
     try {
-      for (const [k, v] of bibliographyIdentifiers(await fetchSectionWikitext(CACHE, page, s.index))) {
+      for (const [k, v] of bibliographyIdentifiers(await sectionWikitext(s.index))) {
         if (!bibliography.has(k)) bibliography.set(k, v)
       }
     } catch (e) {
@@ -598,11 +655,8 @@ async function main() {
   let subjectClaims = {}
   if (subjectQid) {
     try {
-      const body = await getJson(
-        'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-          `&ids=${subjectQid}&props=claims`,
-      )
-      subjectClaims = body.entities?.[subjectQid]?.claims ?? {}
+      const claimsBody = await wikidata({ action: 'wbgetentities', ids: subjectQid, props: 'claims' })
+      subjectClaims = claimsBody.entities?.[subjectQid]?.claims ?? {}
     } catch (e) {
       // Cosmetic: the whole-page identifiers are optional enrichment.
       console.error(`  subject claims failed: ${e.message}`)
@@ -613,64 +667,15 @@ async function main() {
     .filter((v) => typeof v === 'string')
   const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
 
-  // Where the subject is a person who wrote a thesis, the thesis itself is the
-  // one thing the ecosystem holds that no identifier will reach.
-  let thesis = null
-  try {
-    thesis = await collectionByDescribedThesis(subjectClaims, page)
-  } catch (e) {
-    console.error(`  thesis pivot failed: ${e.message}`)
-  }
-  if (thesis)
-    console.error(
-      `thesis: ${thesis.title} (` +
-        (thesis.corroboratedBy
-          ? `${thesis.corroboratedBy.length} signals agree`
-          : 'identified by the P724 Wikidata states') +
-        ')',
-    )
-
-  // Subject-level pivots: what the ecosystem holds *about the subject*, as
-  // opposed to what any one section cited. Both are keyed on a claim the subject
-  // states outright, so neither is a name search.
-  let works = { entries: [], total: 0 }
-  try {
-    works = await subjectAuthorWorks(subjectClaims)
-  } catch (e) {
-    console.error(`  author works failed: ${e.message}`)
-  }
-  if (works.entries.length) console.error(`works by subject: ${works.entries.length} of ${works.total}`)
-
-  const categoryName = subjectClaims.P373?.[0]?.mainsnak?.datavalue?.value
-  let categoryFiles = []
-  if (typeof categoryName === 'string') {
-    try {
-      categoryFiles = await commonsCategoryFiles(categoryName, CATEGORY_FILES)
-    } catch (e) {
-      console.error(`  commons category failed: ${e.message}`)
-    }
-  }
-  if (categoryFiles.length) console.error(`commons category: ${categoryFiles.length} files`)
-
-  const bands = []
+  // ---- Everything the pivots need, extracted locally before any of them run.
   const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, viaShortCite: 0, sections: 0 }
-
-  // Lede first, then body sections, each carrying its own anchors.
-  process.stderr.write(`fetching ${sections.length + 1} sections`)
-  const lede = await fetchLede(CACHE, page)
-  const units = [{ index: '0', title: page, ...lede }]
-  for (const s of sections) {
-    process.stderr.write('.')
-    units.push({ index: s.index, title: s.title, ...(await fetchSection(CACHE, page, s.index)) })
-  }
-  process.stderr.write('\n')
-
-  for (const unit of units) {
-    const blocks = articleBlocks(unit.html)
+  const units = []
+  for (const s of [{ index: '0', title: page }, ...sections]) {
+    const html = sliceSectionHtml(article.html, article.sections, s.index) ?? ''
+    const blocks = articleBlocks(html)
     if (!blocks.length) continue
     stats.sections++
-
-    const wikitext = await fetchSectionWikitext(CACHE, page, unit.index)
+    const wikitext = await sectionWikitext(s.index)
     // Both citation styles, in that order: identifiers the section states
     // outright, then the ones it points at through the bibliography. Direct
     // refs come first only because they cost no join to trust.
@@ -679,17 +684,110 @@ async function main() {
     // <ref> cites — news and web sources — so the panel was never empty, but
     // the books it points at through the bibliography were missing from it,
     // and those are the reachable ones.
-    const { shown: cites, coverage } = await railCitations([
+    const railCandidates = [
       ...sectionCitations(wikitext),
       ...shortCites.map((w) => ({ kind: 'book', ...w })),
-    ])
+    ]
     const identified = dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]).slice(
       0,
       CITES_PER_SECTION,
     )
     stats.anchorsCite += identified.length
     stats.viaShortCite += identified.filter((c) => shortCites.includes(c)).length
+    units.push({
+      index: s.index,
+      title: s.title,
+      blocks,
+      railCandidates,
+      identified,
+      linkCandidates: proseLinks(html).slice(0, 24),
+    })
+  }
 
+  // ---- The pivots, concurrent across hosts, serial within each. -----------
+  // Each task is an independent chain ordered by its own data dependencies;
+  // the per-host queue in src/mw.js is what keeps en.wikipedia, wikidata,
+  // commons, archive.org and openlibrary each polite while all five run.
+  const categoryName = subjectClaims.P373?.[0]?.mainsnak?.datavalue?.value
+
+  const qidsAndCommons = (async () => {
+    const allTitles = [...new Set(units.flatMap((u) => u.linkCandidates))]
+    const qids = await fetchQids(CACHE, allTitles)
+    const perUnit = new Map()
+    for (const unit of units) {
+      const picked = unit.linkCandidates
+        .map((t) => qids.get(t))
+        .filter((q, i, a) => q && a.indexOf(q) === i)
+        .slice(0, QIDS_PER_SECTION)
+      stats.anchorsQid += picked.length
+      const entries = []
+      const breadth = []
+      for (const qid of picked) {
+        try {
+          const { files, totalhits } = await commonsDepicting(qid)
+          entries.push(...files)
+          stats.commons += files.length
+          if (files.length) breadth.push({ qid, shown: files.length, totalhits })
+        } catch (e) {
+          console.error(`  commons lookup failed (${qid}): ${e.message}`)
+        }
+      }
+      perUnit.set(unit, { entries, breadth })
+    }
+    return perUnit
+  })()
+
+  const iaTask = iaLookups(units.flatMap((u) => u.identified))
+  const volumesTask = openLibraryVolumes(
+    units.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean),
+  )
+  const thesisTask = collectionByDescribedThesis(subjectClaims, page).catch((e) => {
+    console.error(`  thesis pivot failed: ${e.message}`)
+    return null
+  })
+  const worksTask = subjectAuthorWorks(subjectClaims).catch((e) => {
+    console.error(`  author works failed: ${e.message}`)
+    return { entries: [], total: 0 }
+  })
+  const categoryTask =
+    typeof categoryName === 'string'
+      ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
+          console.error(`  commons category failed: ${e.message}`)
+          return []
+        })
+      : Promise.resolve([])
+
+  const [commonsByUnit, iaHits, volumes, thesis, works, categoryFiles] = await Promise.all([
+    qidsAndCommons,
+    iaTask,
+    volumesTask,
+    thesisTask,
+    worksTask,
+    categoryTask,
+  ])
+
+  if (thesis)
+    console.error(
+      `thesis: ${thesis.title} (` +
+        (thesis.corroboratedBy
+          ? `${thesis.corroboratedBy.length} signals agree`
+          : 'identified by the P724 Wikidata states') +
+        ')',
+    )
+  if (works.entries.length) console.error(`works by subject: ${works.entries.length} of ${works.total}`)
+  if (categoryFiles.length) console.error(`commons category: ${categoryFiles.length} files`)
+
+  // Where the subject is a person who wrote a thesis, the thesis itself is the
+  // one thing the ecosystem holds that no identifier will reach. Anchor labels
+  // for every section's disclosure come in one batched request.
+  const labels = await entityLabels(
+    [...commonsByUnit.values()].flatMap(({ breadth }) => breadth.map((b) => b.qid)),
+  )
+
+  // ---- Assembly, in article order. ----------------------------------------
+  const bands = []
+  for (const unit of units) {
+    const { entries: commonsEntries, breadth } = commonsByUnit.get(unit) ?? { entries: [], breadth: [] }
     const entries = []
 
     // The primary source first, where the subject IS a document — or wrote one.
@@ -698,45 +796,21 @@ async function main() {
     if (unit.index === '0') entries.push(...works.entries, ...categoryFiles)
 
     // Citation anchors -> Internet Archive. No entity resolution in front.
-    for (const cite of identified) {
-      try {
-        const hit = await iaByIdentifier(cite)
-        if (hit) {
-          entries.push(hit)
-          stats.ia++
-        }
-      } catch (e) {
-        console.error(`  ia lookup failed (${cite.isbn ?? cite.oclc ?? cite.lccn}): ${e.message}`)
+    for (const cite of unit.identified) {
+      const hit = iaHits.get(cite)
+      if (hit) {
+        entries.push(hit)
+        stats.ia++
       }
     }
 
     // Wikilink anchors -> QID -> Commons.
-    const candidates = proseLinks(unit.html).slice(0, 24)
-    const qids = await fetchQids(CACHE, candidates)
-    // Keep document order — fetchQids returns a Map keyed by title, so read it
-    // back through the ranked candidate list rather than by insertion order.
-    const picked = candidates
-      .map((t) => qids.get(t))
-      .filter((q, i, a) => q && a.indexOf(q) === i)
-      .slice(0, QIDS_PER_SECTION)
-    stats.anchorsQid += picked.length
-    const breadth = []
-    for (const qid of picked) {
-      try {
-        const { files, totalhits } = await commonsDepicting(qid)
-        entries.push(...files)
-        stats.commons += files.length
-        if (files.length) breadth.push({ qid, shown: files.length, totalhits })
-      } catch (e) {
-        console.error(`  commons lookup failed (${qid}): ${e.message}`)
-      }
-    }
+    entries.push(...commonsEntries)
+
+    const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
 
     // Disclose how each anchor's media was drawn. Above the threshold the four
     // shown are arbitrary, and saying so is the honest rendering.
-    const labels = await entityLabels(breadth.map((b) => b.qid))
-    // The lede also carries the subject-level pivots, which were not anchored on
-    // any wikilink and so need their own sentence.
     const subjectNotes = []
     if (unit.index === '0' && works.entries.length)
       subjectNotes.push(
@@ -761,7 +835,7 @@ async function main() {
     bands.push({
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,
       title: unit.title,
-      blocks,
+      blocks: unit.blocks,
       entries,
       citations: cites,
       coverage: coverageText(coverage),
@@ -826,12 +900,17 @@ async function main() {
   await mkdir(dirname(out), { recursive: true })
   await writeFile(out, html)
 
+  const tally = [...requestTally.entries()].map(([h, n]) => `${h}:${n}`).join(' ')
   console.error(
     `\n${page}: ${stats.sections} sections, ${stats.anchorsCite} citation anchors ` +
       `(${stats.viaShortCite} via the bibliography), ` +
       `${stats.anchorsQid} entity anchors -> ${stats.ia} IA + ${stats.commons} Commons items` +
       (opinion ? ' + 1 Free Law opinion' : '') +
       (dropped > 0 ? ` (${dropped} sections dropped by MAX_SECTIONS)` : ''),
+  )
+  console.error(
+    `${((Date.now() - started) / 1000).toFixed(1)}s` +
+      (tally ? `, network requests — ${tally}` : ', fully from cache'),
   )
   console.error(out)
 }

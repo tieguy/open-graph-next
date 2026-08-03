@@ -5,3 +5,4 @@
 
 # Lavish review sessions — copies of built artifacts, regenerable
 .lavish/
+node_modules/

@@ -1,45 +1,12 @@
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { createHash } from 'node:crypto'
-import { join } from 'node:path'
-
-import { retryAfterMs, isRetryable, userAgent, withMaxlag } from './wmf.js'
-
-const API = 'https://en.wikipedia.org/w/api.php'
+import { cachedRequest } from './mw.js'
 
 /**
- * Every network call goes through here. Reruns are offline and byte-reproducible,
- * matching the project's existing "pre-cached data over live APIs" decision.
+ * Every English-Wikipedia call goes through the shared m3api transport: disk
+ * cache (reruns offline and byte-reproducible), per-host serial queue, UA,
+ * maxlag, and Retry-After handling all live in src/mw.js.
  */
-async function cachedGet(cacheDir, params) {
-  const url = `${API}?${new URLSearchParams({ ...params, format: 'json', formatversion: '2' })}`
-  const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
-  const path = join(cacheDir, `${key}.json`)
-
-  try {
-    return JSON.parse(await readFile(path, 'utf8'))
-  } catch {
-    // not cached yet
-  }
-
-  // Serial by construction — every caller awaits this — and polite: maxlag lets
-  // Wikimedia shed this batch traffic when replication is behind, and a 429/503
-  // is waited out for as long as the server asks rather than retried immediately.
-  let response
-  for (let attempt = 1; ; attempt++) {
-    response = await fetch(withMaxlag(url), {
-      headers: { 'User-Agent': userAgent('tapestry-gen'), 'Accept-Encoding': 'gzip' },
-    })
-    if (response.ok) break
-    if (!isRetryable(response.status) || attempt >= 3) {
-      throw new Error(`${response.status} ${response.statusText} for ${url}`)
-    }
-    await new Promise((r) => setTimeout(r, retryAfterMs(response.headers) ?? 1000 * 2 ** attempt))
-  }
-  const body = await response.json()
-
-  await mkdir(cacheDir, { recursive: true })
-  await writeFile(path, JSON.stringify(body, null, 2))
-  return body
+function cachedGet(cacheDir, params) {
+  return cachedRequest(cacheDir, 'en.wikipedia.org', params)
 }
 
 /**
@@ -52,7 +19,12 @@ async function cachedGet(cacheDir, params) {
  */
 export async function fetchSections(cacheDir, page) {
   const body = await cachedGet(cacheDir, { action: 'parse', page, prop: 'sections' })
-  return body.parse.sections
+  return sectionOutline(body.parse.sections)
+}
+
+/** The same outline, derived from an already-fetched section list. */
+export function sectionOutline(sections) {
+  return sections
     .filter((s) => s.toclevel <= 2)
     .map((s, i, all) => ({
       index: s.index,
@@ -97,6 +69,81 @@ export async function fetchSection(cacheDir, page, index) {
 export async function fetchSectionWikitext(cacheDir, page, index) {
   const body = await cachedGet(cacheDir, { action: 'parse', page, section: String(index), prop: 'wikitext' })
   return body.parse.wikitext
+}
+
+/**
+ * The whole article in one request: section list, rendered HTML, and raw
+ * wikitext together. This is the spine — what used to cost two requests per
+ * section costs one per article, and the splitters below reproduce the
+ * per-section views from it exactly.
+ */
+export async function fetchArticle(cacheDir, page) {
+  const body = await cachedGet(cacheDir, {
+    action: 'parse',
+    page,
+    prop: 'sections|text|wikitext',
+    disableeditsection: '1',
+    disabletoc: '1',
+  })
+  return { sections: body.parse.sections, html: body.parse.text, wikitext: body.parse.wikitext }
+}
+
+/**
+ * One section's wikitext sliced from the whole article, reproducing what
+ * `action=parse&section=N` returns: the section *including its subsections*,
+ * i.e. from its own heading to the next heading at its level or above.
+ *
+ * Despite its name, `byteoffset` lines up with JS string indices, not UTF-8
+ * bytes — measured empirically on a page full of multi-byte umlauts, where
+ * byte-wise slicing drifted by exactly the multi-byte character count and
+ * string slicing landed on every heading. Sections a template transcludes
+ * carry a null byteoffset and a `T-` index; they cannot be sliced, and callers
+ * get null back rather than someone else's text.
+ */
+export function sliceSectionWikitext(wikitext, sections, index) {
+  if (String(index) === '0') {
+    const end = sections.find((s) => s.byteoffset != null)?.byteoffset ?? wikitext.length
+    return wikitext.slice(0, end).replace(/\s+$/, '')
+  }
+  const at = sections.findIndex((s) => String(s.index) === String(index))
+  const own = sections[at]
+  if (!own || own.byteoffset == null) return null
+  const next = sections
+    .slice(at + 1)
+    .find((s) => s.byteoffset != null && s.toclevel <= own.toclevel)
+  // parse&section=N returns the section without its trailing blank lines;
+  // matching that exactly is what lets the slicer claim equivalence.
+  return wikitext.slice(own.byteoffset, next?.byteoffset ?? wikitext.length).replace(/\s+$/, '')
+}
+
+/**
+ * One section's HTML cut from the whole rendered page, on the same
+ * include-subsections rule as the wikitext slicer. Headings are located by the
+ * anchor ids the section list states. The fragments are not balanced HTML — a
+ * heading's wrapper div is cut mid-element — which the regex-based consumers
+ * (articleBlocks, proseLinks) never notice.
+ */
+export function sliceSectionHtml(html, sections, index) {
+  const headingStart = (s) => {
+    const id = html.indexOf(`id="${s.anchor}"`)
+    if (id < 0) return -1
+    return html.lastIndexOf('<h', id)
+  }
+  if (String(index) === '0') {
+    const first = sections.map(headingStart).find((p) => p >= 0)
+    return first == null ? html : html.slice(0, first)
+  }
+  const at = sections.findIndex((s) => String(s.index) === String(index))
+  const own = sections[at]
+  if (!own) return null
+  const start = headingStart(own)
+  if (start < 0) return null
+  const next = sections
+    .slice(at + 1)
+    .filter((s) => s.toclevel <= own.toclevel)
+    .map(headingStart)
+    .find((p) => p >= 0)
+  return html.slice(start, next ?? html.length)
 }
 
 /**

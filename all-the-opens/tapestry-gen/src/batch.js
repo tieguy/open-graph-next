@@ -1,0 +1,74 @@
+// Batched forms of the citation pivots. archive.org's Solr and OpenLibrary's
+// volumes API both answer many identifiers in one request; these helpers build
+// those requests and re-associate the combined answer to the citation that
+// asked, so the per-citation semantics (and guards) stay exactly what the
+// one-request-per-identifier versions established.
+
+/** `items` in runs of at most `size`, order preserved. */
+export function chunk(items, size) {
+  const out = []
+  for (let i = 0; i < items.length; i += size) out.push(items.slice(i, i + size))
+  return out
+}
+
+const stop = new Set(['the', 'a', 'an', 'of', 'and', 'in', 'to', 'its', 'on', 'for'])
+const tokens = (s) =>
+  new Set(
+    (s ?? '')
+      .toLowerCase()
+      .split(/[^a-z0-9]+/)
+      .filter((w) => w.length > 2 && !stop.has(w)),
+  )
+
+/**
+ * One Solr query for a run of ISBNs. `mediatype:texts` is constrained in the
+ * query, not filtered after, because book-dealer donation manifests are indexed
+ * with every ISBN on the pallet and would otherwise spend the result rows.
+ * `fl[]=isbn` is what lets the combined answer be dealt back out: the field is
+ * multi-valued, one row can satisfy several queried ISBNs.
+ */
+export function iaSearchUrl(isbns, { rowsPer = 8 } = {}) {
+  const q = `(${isbns.map((i) => `isbn:${i}`).join(' OR ')}) AND mediatype:texts`
+  return (
+    'https://archive.org/advancedsearch.php?q=' +
+    encodeURIComponent(q) +
+    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn' +
+    `&rows=${isbns.length * rowsPer}&output=json`
+  )
+}
+
+/**
+ * The best archive.org row for one citation, from a combined result set.
+ * Candidacy is a shared ISBN; the title-overlap guard is then the same second,
+ * different check the single-lookup version used — against a mis-keyed ISBN in
+ * the citation resolving to a real but unrelated book.
+ */
+export function matchIaDoc(cite, docs) {
+  const wanted = tokens(cite.title)
+  const shared = (doc) => {
+    const held = Array.isArray(doc.isbn) ? doc.isbn : doc.isbn ? [doc.isbn] : []
+    return held.includes(cite.isbn)
+  }
+  return (
+    docs
+      .filter(shared)
+      .map((d) => {
+        const overlap = [...tokens(d.title)].filter((w) => wanted.has(w)).length
+        return { d, score: wanted.size ? overlap / wanted.size : 0 }
+      })
+      .filter((x) => x.score >= 0.34)
+      .sort((a, b) => b.score - a.score)[0]?.d ?? null
+  )
+}
+
+/**
+ * One volumes/brief request for a run of ISBNs. `|` separates independent
+ * queries (`;` would declare them editions of one book); the response is keyed
+ * by each `isbn:x` sub-request.
+ */
+export function olVolumesUrl(isbns) {
+  return (
+    'https://openlibrary.org/api/volumes/brief/json/' +
+    isbns.map((i) => `isbn:${i}`).join('%7C')
+  )
+}

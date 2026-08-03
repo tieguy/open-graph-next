@@ -18,8 +18,8 @@ that date.
 
 ## Tech Stack
 
-Node 22+, zero npm dependencies (built-in `fetch`, `zlib.crc32`); disk-cached,
-byte-reproducible.
+Node 22+, one npm dependency (m3api, for MediaWiki requests — see
+`tapestry-gen/src/mw.js`); disk-cached, byte-reproducible.
 
 ## Commands
 

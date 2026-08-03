@@ -50,6 +50,18 @@ conflating them would overstate what the page knows:
   three signals are required, because the same collection holds theses by Ludwig,
   Hans and Antonius Prandtl.
 
+## Request shape (Tier-1 performance work, 2026-08-03)
+
+The spike fetches the whole article in ONE parse call (`fetchArticle`:
+sections + HTML + wikitext) and reproduces the per-section views locally —
+`sliceSectionWikitext` / `sliceSectionHtml` are verified byte-identical to
+`parse&section=N` (note: the API's `byteoffset` is a string index, not bytes).
+Identifier pivots are batched (`src/batch.js`): one archive.org Solr OR-query
+per run of ISBNs, one OpenLibrary volumes request per 25 (`|`-separated), QIDs
+and labels at 50 per request. Pivots run concurrently across hosts over the
+per-host serial queue. Cold Prandtl: 33.6s/72 requests before, 9.0s/39 after;
+warm reruns are 100% offline.
+
 ## Pipeline (output-agnostic core → renderer)
 
 `dataset` → `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox
@@ -87,19 +99,27 @@ Tapestry `layout`/`emit`/`zip`).
 ## Wikimedia compliance (required)
 
 Wikimedia runs on donations and blocks non-compliant clients without notice; the
-block lands on whoever ran the code. `src/wmf.js` is the **single** definition
-for the whole repo — never write a User-Agent string anywhere else.
+block lands on whoever ran the code. `src/wmf.js` is the **single** UA definition
+for the whole repo — never write a User-Agent string anywhere else. MediaWiki
+requests go through **m3api** via `src/mw.js`, which owns maxlag, Retry-After
+and retries; non-MediaWiki sources (archive.org, OpenLibrary, CourtListener)
+keep the hand-rolled client in `spike.js`.
 
 - **`WIKIMEDIA_UA_CONTACT` must be set** or `userAgent()` throws at startup. There
   is no default on purpose: anyone can clone this, and a baked-in address would
   attribute their traffic to someone who never ran it. Set it to *your own*
   address.
-- `withMaxlag()` adds `maxlag=5` to Action API URLs only — nothing here is a human
-  waiting on a response, so this batch traffic yields to interactive users.
-- 429/503 honour `Retry-After` (capped at 60s); other 4xx are **never** retried —
-  a 404 is our bad identifier, not the server's bad day.
-- Requests are serial by construction. Never introduce `Promise.all` against a
-  Wikimedia host; batch with `titles=A|B|C` instead.
+- `maxlag=5` rides every Action API request (an m3api default param in
+  `src/mw.js`) — nothing here is a human waiting on a response, so this batch
+  traffic yields to interactive users. `withMaxlag()` remains for the
+  hand-rolled client, where it no-ops on non-Wikimedia URLs.
+- 429/503 honour `Retry-After`; other 4xx are **never** retried — a 404 is our
+  bad identifier, not the server's bad day.
+- Requests are **serial per host** by construction: every request rides the
+  per-host queue in `src/mw.js` (`enqueue`). Different hosts run concurrently —
+  that is where the Tier-1 speedup lives — but never two in-flight requests to
+  the same API. Batch with `titles=A|B|C` (and the batched pivots in
+  `src/batch.js`) instead of adding parallelism.
 - The browser extension must use **`Api-User-Agent`** — browsers silently drop a
   script-set `User-Agent` — and takes its contact from extension storage, since
   the installer is the operator.
@@ -115,7 +135,8 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
   `../../.claude/settings.local.json` along with the host allowlist (Wikipedia,
   Wikidata, Commons, archive.org, OpenLibrary, CourtListener, upload/maps
   wikimedia). Verifying reachability with `curl` does **not** prove the
-  generator can reach a host.
+  generator can reach a host. m3api's own cookie dispatcher would bypass that
+  proxy and hang — `src/mw.js` drops it whenever `NODE_USE_ENV_PROXY` is set.
 - First run needs network (fills `.cache`); reruns are offline.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
   backoff.

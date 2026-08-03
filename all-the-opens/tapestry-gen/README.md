@@ -7,7 +7,10 @@ Tapestry format — retained but secondary; its viewer/artifacts are gitignored)
 Design: `docs/design-plans/2026-07-23-article-tapestry.md`. Intent and contracts:
 `CLAUDE.md`.
 
-Zero dependencies. Node 22+ (uses `zlib.crc32` and built-in `fetch`).
+One dependency: [m3api](https://www.npmjs.com/package/m3api), the minimal
+MediaWiki API client, which owns the User-Agent, maxlag and retry rules for
+every Wikimedia request (see `src/mw.js`). Node 22+ (uses `zlib.crc32` and
+built-in `fetch` for the non-MediaWiki sources).
 
 ```
 npm run generate    # writes demo/apollo-11.html and ../tapestry/apollo-11.tapestry
