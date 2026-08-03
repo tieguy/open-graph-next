@@ -1,0 +1,37 @@
+completion_tokens: 1252
+cost_usd: 0.0045086
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18787
+property: P856
+property_label: official website
+rationale: The official website for Ōmuta-shi (Q385623) was changed from the legitimate
+  municipal site https://www.city.omuta.lg.jp/ to https://www.koreanair.com, the official
+  website of Korean Air, an airline with no connection to Ōmuta-shi. Multiple independently
+  verified sources confirm the city's official website is hosted under the .city.omuta.lg.jp
+  domain. No evidence supports the new value as the official website of Ōmuta-shi,
+  and the edit appears to be erroneous.
+rcid: null
+revid: 2466237994
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.omuta.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.koreanair.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.omuta.lg.jp/hpkiji/pub/List.aspx?c_id=5&class_set_id=1&class_id=206
+- provenance: reported
+  supports_claim: false
+  url: https://ckan.open-governmentdata.org/dataset/401000_jinkouidouchousa-shikuchouson
+- provenance: reported
+  supports_claim: false
+  url: https://www.gsi.go.jp/common/000238295.pdf
+timestamp: '2026-04-10T13:34:37.059174+00:00'
+title: Q385623
+turns: 1
+value_label: null
+verdict: incorrect

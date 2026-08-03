@@ -1,0 +1,27 @@
+completion_tokens: 801
+cost_usd: 0.0055144
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25169
+property: P27
+property_label: country of citizenship
+rationale: No direct evidence was found to confirm or refute whether 'Second Polish
+  Republic' was an appropriate value for Leon Petrażycki's country of citizenship.
+  The sources consulted did not provide explicit information regarding his citizenship
+  status during that period. Without authoritative confirmation or denial, the removal
+  cannot be judged as correct or incorrect.
+rcid: null
+revid: 2471727027
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://lexmotion.eu/blog/polish-citizenship-law/
+- provenance: verified
+  supports_claim: false
+  url: https://www.cambridge.org/core/journals/law-and-society-review/article/abs/unrecognized-father-of-sociology-of-law-leon-petrazycki/F47B3EA0D7935626E1F378DEF75FF9A1
+timestamp: '2026-04-11T17:52:55.086732+00:00'
+title: Q1818913
+turns: 1
+value_label: Second Polish Republic
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 891
+cost_usd: 0.005330650000000001
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 103049
+property: P27
+property_label: country of citizenship
+rationale: No verifiable sources could be accessed to confirm or refute the claim
+  that Analía Gadé's country of citizenship is Spain. Multiple searches of the web
+  showed no results for credible sources supporting the change, and attempts to access
+  language-specific Wikipedia pages were blocked as of the search date. Wikipedia
+  references do not count as verifiable primary sources for Wikidata claims.
+rcid: null
+revid: 2470329665
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Analía_Gadé
+- provenance: verified
+  supports_claim: null
+  url: https://es.wikipedia.org/wiki/Analía_Gadé
+- provenance: verified
+  supports_claim: null
+  url: https://pt.wikipedia.org/wiki/Anal%C3%ADa_Gadé
+- provenance: verified
+  supports_claim: null
+  url: https://fr.wikipedia.org/wiki/Analia_Gad%C3%A9
+timestamp: '2026-04-07T10:34:38.735112+00:00'
+title: Q8198353
+turns: 15
+value_label: Spain
+verdict: unverifiable

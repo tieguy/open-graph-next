@@ -1,0 +1,21 @@
+completion_tokens: 558
+cost_usd: 0.0015168375000000002
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15836
+property: P2397
+property_label: YouTube channel ID
+rationale: The edit adds several qualifiers to an existing YouTube channel ID claim
+  for Gianina D'Angelo, but no references were provided to support these additions.
+  The prefetched references did not yield accessible content, and due to the current
+  unavailability of the web search tool, independent verification of the qualifiers
+  could not be performed.
+rcid: 2550952330
+revid: 2474272373
+sources: []
+timestamp: '2026-04-11T17:22:36.156570+00:00'
+title: Q108911681
+turns: 2
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 1873
+cost_usd: 0.00443275
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42288
+property: P856
+property_label: official website
+rationale: The rank change on the official website claim for the Quanzhou Overseas
+  Relations Museum cannot be verified with the available sources. The claim is supported
+  by a reference to English Wikipedia, but we cannot access the specific content to
+  confirm its accuracy.
+rcid: 2551429832
+revid: 2474729766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Quanzhou_Overseas_Relations_Museum
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelchinaguide.com/attraction/fujian/quanzhou/maritimemuseum.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.tripadvisor.com/Attraction_Review-g303693-d1851128-Reviews-Quanzhou_Museum-Quanzhou_Fujian.html
+timestamp: '2026-04-10T13:58:01.944682+00:00'
+title: Q17163836
+turns: 4
+value_label: null
+verdict: unverifiable

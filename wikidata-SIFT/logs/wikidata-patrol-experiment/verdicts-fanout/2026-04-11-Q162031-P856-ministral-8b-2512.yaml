@@ -1,0 +1,28 @@
+completion_tokens: 2235
+cost_usd: 0.00677256
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55060
+property: P856
+property_label: official website
+rationale: The website `http://www.1-division.dk` exists and appears to be a football
+  league portal in Denmark, but no independent, verified source explicitly confirms
+  it as the official website for the Danish 1st Division. The reference added to the
+  Wikidata claim is from a blocked English Wikipedia page, and no other verified source
+  directly supports the claim. Without clear, independent evidence, the claim remains
+  unverifiable.
+rcid: 2550748245
+revid: 2474074534
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://football.fandom.com/wiki/Danish_1st_Division
+- provenance: verified
+  supports_claim: false
+  url: http://www.1-division.dk
+timestamp: '2026-04-11T08:33:43.144778+00:00'
+title: Q162031
+turns: 5
+value_label: null
+verdict: unverifiable

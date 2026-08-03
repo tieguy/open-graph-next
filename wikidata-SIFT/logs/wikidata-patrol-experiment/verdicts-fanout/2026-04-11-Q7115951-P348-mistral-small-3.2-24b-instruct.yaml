@@ -1,0 +1,22 @@
+completion_tokens: 998
+cost_usd: 0.00857969375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 90834
+property: P348
+property_label: software version identifier
+rationale: The prefetched reference from https://www.oxygenxml.com/xml_editor/whats_new.html
+  confirms the release of version 28.1 of Oxygen XML Editor. The edit is supported
+  by this primary source.
+rcid: 2550539244
+revid: 2473872937
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.oxygenxml.com/xml_editor/whats_new.html
+timestamp: '2026-04-11T06:31:57.768069+00:00'
+title: Q7115951
+turns: 5
+value_label: null
+verdict: verified-high

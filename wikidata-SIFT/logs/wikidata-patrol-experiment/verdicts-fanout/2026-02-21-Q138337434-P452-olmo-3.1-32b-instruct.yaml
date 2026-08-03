@@ -1,0 +1,24 @@
+completion_tokens: 1218
+cost_usd: 0.0038544
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15618
+property: P452
+property_label: industry
+rationale: The official website of Institut für limbische Kommunikation und Strategie
+  GmbH explicitly states that the organization has been engaged in market research
+  for over a decade and provides market research institute services. This primary
+  evidence directly supports the assignment of 'market research' (Q913709) as the
+  industry.
+rcid: 2540918444
+revid: 2464709626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://iflk.ch
+timestamp: '2026-02-21T02:24:36.138276+00:00'
+title: Q138337434
+turns: 2
+value_label: market research
+verdict: verified-high

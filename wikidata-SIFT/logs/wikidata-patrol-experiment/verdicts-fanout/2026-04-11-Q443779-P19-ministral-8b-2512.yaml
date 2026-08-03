@@ -1,0 +1,33 @@
+completion_tokens: 1907
+cost_usd: 0.00819378
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 65365
+property: P19
+property_label: place of birth
+rationale: The claim that María Blanchard (Q443779) was born in San Marino (Q238)
+  is contradicted by multiple verified sources. All prefetched references explicitly
+  confirm her birthplace as Santander (Q12233), Spain. The referenced Integrated Authority
+  File (Q36578) is unreachable, and no independent source supports the new claim.
+  Therefore, the edit is incorrect.
+rcid: 2549495530
+revid: 2472859948
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://awarewomenartists.com/en/artiste/maria-blanchard/
+- provenance: verified
+  supports_claim: false
+  url: https://www.leandro-navarro.com/maria-blanchard_biografia_eng.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.museopicassomalaga.org/en/exposiciones/maria-blanchard-1
+- provenance: verified
+  supports_claim: false
+  url: https://collection.nationalmuseum.se/sv/artists/artist/8726
+timestamp: '2026-04-11T18:24:34.784089+00:00'
+title: Q443779
+turns: 3
+value_label: San Marino
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 2116
+cost_usd: 0.025074660000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 246124
+property: P20
+property_label: place of death
+rationale: The edit changing Pierre Bordage's place of death from Corsept to Angers
+  is strongly supported by multiple secondary sources, including Ecostylia, which
+  explicitly states that several sources place his death in Angers (Maine-et-Loire).
+  The Fichier des personnes décédées mirror, a structured data source, also supports
+  this claim. While the primary source (Lesoir.be) could not be verified due to unreachability,
+  the collective evidence from secondary sources and structured data is robust enough
+  to confirm Angers as the correct place of death. The old value (Corsept) lacks any
+  supporting evidence, making the edit justified and accurate.
+rcid: 2550574604
+revid: 2473906772
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ecostylia.com/en/death-pierre-bordage/
+- provenance: verified
+  supports_claim: false
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitt%C3%A9
+timestamp: '2026-04-11T16:46:50.523757+00:00'
+title: Q543836
+turns: 11
+value_label: Angers
+verdict: verified-high

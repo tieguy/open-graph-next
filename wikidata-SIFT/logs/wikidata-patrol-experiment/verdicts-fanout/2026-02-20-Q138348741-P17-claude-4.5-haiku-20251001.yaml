@@ -1,0 +1,36 @@
+completion_tokens: 1952
+cost_usd: 0.06103700000000001
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 51277
+property: P17
+property_label: country
+rationale: The claim that Team Building PACA's country is France is correct and supported
+  by independent sources (Aleou.fr, MyBusinessEvent.com, and the official Team Building
+  PACA website all confirm the company is based in Cavaillon, France). However, the
+  cited reference (lesbauxdeprovence.com) is a tertiary tourism aggregator that mentions
+  Team Building PACA only in passing within a French regional context. While the reference
+  implicitly establishes a French operational context, it does not explicitly state
+  the country claim. The edit is factually sound but relies on a weak reference that
+  doesn't directly support the specific country assertion.
+rcid: 2540935698
+revid: 2464726015
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lesbauxdeprovence.com/preparer/vos-evenements/
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+- provenance: reported
+  supports_claim: true
+  url: https://www.aleou.fr/en/team-building-seminaire/39915-team-building-paca
+- provenance: reported
+  supports_claim: true
+  url: https://annuaire.mybusinessevent.com/fiche-annuaire/team-building-paca/
+timestamp: '2026-02-20T17:08:34.337444+00:00'
+title: Q138348741
+turns: 4
+value_label: France
+verdict: verified-low

@@ -1,0 +1,34 @@
+completion_tokens: 1987
+cost_usd: 0.0028353600000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20141
+property: P570
+property_label: date of death
+rationale: The edit changed Nzingha Mbande's date of death from the historically verified
+  year 1663 to an implausible 2030. Multiple verified primary sources (BlackPast.org,
+  Wikitree, BlackHistoryHeroes) confirm her death occurred in 1663. The new value
+  lacks credible support and contradicts established historical records. The cited
+  references (Pantheon.world and Italian Wikipedia) were either unreachable or secondary
+  sources, making the edit incorrect.
+rcid: null
+revid: 2470777111
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://blackpast.org/global-african-history/queen-nzinga-1583-1663/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikitree.com/wiki/Mbande-1
+- provenance: verified
+  supports_claim: false
+  url: https://www.blackhistoryheroes.com/2011/03/queen-ana-de-sousa-njinga-mbande-of.html
+- provenance: verified
+  supports_claim: false
+  url: https://pantheon.world/profile/person/Njinga_of_Ndongo_and_Matamba
+timestamp: '2026-04-11T15:50:45.054866+00:00'
+title: Q467650
+turns: 1
+value_label: null
+verdict: incorrect

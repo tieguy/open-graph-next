@@ -1,0 +1,29 @@
+completion_tokens: 393
+cost_usd: 0.0031853999999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30675
+property: P3373
+property_label: sibling
+rationale: The edit is verified by multiple sources, including the Argentine Footballers
+  Abroad Wiki and an article from Ole, which confirm that Federico Sarra is indeed
+  the brother of Felipe Sarra. Both sources provide detailed information about their
+  careers and personal lives, including their shared experiences in football and entrepreneurship.
+rcid: 2540927358
+revid: 2464718116
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://argentine-footballers-abroad.fandom.com/wiki/Felipe_Sarra
+- provenance: verified
+  supports_claim: true
+  url: https://argentine-footballers-abroad.fandom.com/wiki/Federico_Sarra
+- provenance: verified
+  supports_claim: true
+  url: https://www.ole.com.ar/fuera-de-juego/felipe-federico-fede-sarra-futbol-fut-rap-cartas-hermanos-mellizos_0_MoLe7fT0iQ.html
+timestamp: '2026-02-20T21:42:31.839299+00:00'
+title: Q138348816
+turns: 3
+value_label: Federico Sarra
+verdict: verified-high

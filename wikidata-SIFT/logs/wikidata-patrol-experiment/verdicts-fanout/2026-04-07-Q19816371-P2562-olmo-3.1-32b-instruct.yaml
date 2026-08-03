@@ -1,0 +1,20 @@
+completion_tokens: 755
+cost_usd: 0.013711600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 66293
+property: P2562
+property_label: married name
+rationale: No independent sources were found that confirm or deny whether 'Мария Владимировна'
+  is the correct married name for Maria Vorontsova. Multiple web searches returned
+  no authoritative or relevant results, and the Wikidata claim lacks any citations.
+  Therefore, the claim cannot be verified based on available evidence.
+rcid: null
+revid: 2471474532
+sources: []
+timestamp: '2026-04-07T07:36:56.110900+00:00'
+title: Q19816371
+turns: 11
+value_label: null
+verdict: unverifiable

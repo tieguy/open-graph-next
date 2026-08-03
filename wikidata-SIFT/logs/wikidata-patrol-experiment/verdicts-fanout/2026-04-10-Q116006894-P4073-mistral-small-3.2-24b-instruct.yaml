@@ -1,0 +1,31 @@
+completion_tokens: 1386
+cost_usd: 0.0083874375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 85770
+property: P4073
+property_label: Fandom wiki ID
+rationale: The established Fandom wiki ID for 'The Ark' television series is 'the-ark.fandom.com/wiki/The_Ark_Wiki'.
+  The new value 'the-ark' does not match this established ID. Therefore, the edit
+  is incorrect.
+rcid: 2551298135
+revid: 2474606708
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://the-ark.fandom.com/wiki/The_Ark
+- provenance: reported
+  supports_claim: false
+  url: https://the-ark.fandom.com/wiki/The_Ark_Wiki
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/ARK/comments/ycxwl6/i_dont_think_that_is_true_ark_wiki/
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/ARK/comments/x1hjc0/the_ark_wiki_is_so_glitched_out_right_now/
+timestamp: '2026-04-10T13:26:50.317807+00:00'
+title: Q116006894
+turns: 9
+value_label: null
+verdict: incorrect

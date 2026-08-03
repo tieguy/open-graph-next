@@ -1,0 +1,31 @@
+completion_tokens: 1983
+cost_usd: 0.00235611
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19920
+property: P20
+property_label: place of death
+rationale: Independent historical sources confirm that Rabih az-Zubayr died near the
+  Chari River (Sarh, Chad), not in Marah Rabah. The new value (Marah Rabah) is contradicted
+  by primary historical accounts, and the cited reference (Russian Wikipedia) is invalid
+  for Wikidata verification. The old value (Maha) lacks direct corroboration but is
+  not contradicted, while the new value is unsupported and factually inconsistent
+  with verified historical records.
+rcid: 2549456770
+revid: 2472822126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://medium.com/@HistoryOfMuslims/rabih-az-zubayr-the-muslim-tyrant-who-dared-to-defy-france-britain-and-fell-in-blood-188a86fc21d2
+- provenance: verified
+  supports_claim: false
+  url: https://lingualibre.org/wiki/Q819644
+timestamp: '2026-04-11T06:31:02.969070+00:00'
+title: Q932368
+turns: 1
+value_label: Marah Rabah
+verdict: incorrect

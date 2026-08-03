@@ -1,0 +1,34 @@
+completion_tokens: 1360
+cost_usd: 0.00306472
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38836
+property: P157
+property_label: killed by
+rationale: No independent sources were found to confirm or deny the claim that the
+  Southern Transitional Council was responsible for the killing of Jaafar Mohammed
+  Saad. The edit lacks references, and further investigation is needed.
+rcid: null
+revid: 2455656009
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Jaafar+Mohammed+Saad+killed+by+Southern+Transitional+Council
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Southern+Transitional+Council+2015+Aden+car+bombing
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Jaafar+Mohammed+Saad+Islamic+State
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=2015+Aden+car+bombing+Islamic+State
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Jaafar+Mohammed+Saad+killed+by+Islamic+State
+timestamp: '2026-04-07T13:45:05.569341+00:00'
+title: Q21668992
+turns: 6
+value_label: Southern Transitional Council
+verdict: unverifiable

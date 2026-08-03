@@ -1,0 +1,37 @@
+completion_tokens: 2047
+cost_usd: 0.07091599999999999
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 60681
+property: P3373
+property_label: sibling
+rationale: Multiple independent Argentine sports media sources confirm that Federico
+  and Felipe Sarra are twins ('mellizos') born in San Martín, Argentina in late 2002.
+  Clarín directly states 'Felipe y Federico Sarra viven en San Martín y juegan en
+  Platense' and describes them as twins. TyC Sports confirms 'Nacidos en San Martín,
+  Federico y Felipe Sarra se criaron bajo el lema "persevera y triunfarás"' and refers
+  to them as twin footballers. El Gráfico's detailed article establishes 'Federico
+  y Felipe Sarra nacieron a fines del año 2002' and consistently refers to them as
+  'mellizos.' The existing Wikidata reference to Clarín is appropriate and corroborated
+  by multiple independent sources.
+rcid: 2540927492
+revid: 2464718247
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.clarin.com/zonales/mellizos-hacen-par-futbol-diseno-grafico-creacion-apps_0_zzTdSdHHe.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.tycsports.com/al-angulo/mellizos-sarra-historia-conocio-lionel-messi-sorpresivo-regalo-id530613.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.elgrafico.com.ar/articulo/las-entrevistas-de-el-grafico/80297/ascenso-espaniol-aplicaciones-y-disenio-grafico-la-historia-detras-de-los-mellizos%C2%A0sensacion
+- provenance: reported
+  supports_claim: true
+  url: https://www.ole.com.ar/fuera-de-juego/felipe-federico-fede-sarra-futbol-fut-rap-cartas-hermanos-mellizos_0_MoLe7fT0iQ.html
+timestamp: '2026-02-20T21:42:23.138198+00:00'
+title: Q138348272
+turns: 4
+value_label: Felipe Sarra
+verdict: verified-high

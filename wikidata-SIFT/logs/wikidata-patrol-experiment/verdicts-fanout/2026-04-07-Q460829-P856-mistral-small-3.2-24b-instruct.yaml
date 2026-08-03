@@ -1,0 +1,24 @@
+completion_tokens: 583
+cost_usd: 0.00630019375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 64804
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Matsusaka to an unrelated URL.
+  The correct official website is https://www.city.matsusaka.mie.jp/.
+rcid: null
+revid: 2471370338
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.matsusaka.mie.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.airasia.com
+timestamp: '2026-04-07T13:39:44.025281+00:00'
+title: Q460829
+turns: 5
+value_label: null
+verdict: incorrect

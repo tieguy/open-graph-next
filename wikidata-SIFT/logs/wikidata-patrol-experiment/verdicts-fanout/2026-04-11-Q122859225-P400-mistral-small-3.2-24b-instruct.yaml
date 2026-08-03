@@ -1,0 +1,23 @@
+completion_tokens: 999
+cost_usd: 0.00211168
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27541
+property: P400
+property_label: platform
+rationale: The GitHub page for MicroWeb explicitly states that it requires an 'Intel
+  8088 or compatible CPU' to run, which supports the new value added by the edit.
+  The old value of 'DOS' is also correct as MicroWeb is a DOS web browser, but the
+  new value adds additional hardware platform information.
+rcid: 2550751980
+revid: 2474078141
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/jhhoward/MicroWeb
+timestamp: '2026-04-11T15:49:43.203906+00:00'
+title: Q122859225
+turns: 2
+value_label: Intel 8088
+verdict: verified-high

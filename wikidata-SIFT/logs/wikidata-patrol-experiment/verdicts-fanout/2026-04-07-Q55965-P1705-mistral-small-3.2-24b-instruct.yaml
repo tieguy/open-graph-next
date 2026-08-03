@@ -1,0 +1,22 @@
+completion_tokens: 797
+cost_usd: 0.002343025
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24006
+property: P1705
+property_label: native label
+rationale: 'The search results indicate that the correct spelling of the native label
+  for Auguste and Louis Lumière includes the accent: "Auguste et Louis Lumière." The
+  edit that removes the accent is incorrect.'
+rcid: null
+revid: 2471480787
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Auguste+et+Louis+Lumière+native+label
+timestamp: '2026-04-07T09:01:02.987097+00:00'
+title: Q55965
+turns: 4
+value_label: null
+verdict: incorrect

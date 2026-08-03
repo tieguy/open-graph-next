@@ -1,0 +1,22 @@
+completion_tokens: 475
+cost_usd: 0.0065831625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71991
+property: P106
+property_label: occupation
+rationale: Unable to perform web searches to verify the occupation of Johannes W.
+  Dietrich. No direct sources were fetched to confirm or refute the change from 'endocrinologist'
+  to 'physician'.
+rcid: 2550595212
+revid: 2473926492
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-zur-gemeinsamen-sitzung-der-klasse-fuer-naturwissenschaften-und-technikwissenschaften-der-leibniz-sozietaet-mit-der-deutschen-gesellschaft-fuer-kybernetik-am-11-april-2024/
+timestamp: '2026-04-11T12:18:55.048659+00:00'
+title: Q48800274
+turns: 4
+value_label: physician
+verdict: unverifiable

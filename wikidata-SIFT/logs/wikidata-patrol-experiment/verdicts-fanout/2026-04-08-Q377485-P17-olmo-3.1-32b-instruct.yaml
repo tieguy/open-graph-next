@@ -1,0 +1,25 @@
+completion_tokens: 740
+cost_usd: 0.008704600000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 41303
+property: P17
+property_label: country
+rationale: Mount Sinai is universally recognized as being located in Egypt. The cited
+  reference is not authoritative and does not support associating Mount Sinai with
+  Finland. All other claims and descriptions in the item confirm the location in Egypt.
+rcid: 2550179591
+revid: 2473523123
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mount_Sinai
+- provenance: verified
+  supports_claim: true
+  url: https://qwikiapi.wikidata.org/prop/direct/Q377485/P17
+timestamp: '2026-04-08T18:36:12.741854+00:00'
+title: Q377485
+turns: 7
+value_label: Finnish
+verdict: incorrect

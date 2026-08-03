@@ -1,0 +1,21 @@
+completion_tokens: 594
+cost_usd: 0.0093557
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 184738
+property: P569
+property_label: date of birth
+rationale: No reliable sources were found to confirm or refute the claim that Christopher
+  Polhem was born on 18 December 1660. Multiple web searches for relevant historical
+  records, biographies, or authoritative databases returned no usable results, and
+  no sources were fetched during the investigation. Therefore, the claim remains unverifiable
+  based on available evidence.
+rcid: null
+revid: 2467048208
+sources: []
+timestamp: '2026-04-07T05:27:38.437061+00:00'
+title: Q353693
+turns: 15
+value_label: null
+verdict: unverifiable

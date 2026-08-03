@@ -1,0 +1,29 @@
+completion_tokens: 1332
+cost_usd: 0.010987650000000002
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 175113
+property: P27
+property_label: country of citizenship
+rationale: The claim that Grigori Rasputin was a citizen of Nazi Germany (Q7318) is
+  historically implausible and unsupported by verified sources. Rasputin lived from
+  1869 to 1916, during the Russian Empire, and all reputable sources (e.g., Spartacus
+  Educational, New World Encyclopedia) confirm his Russian citizenship and association
+  with the Romanov dynasty. The edit cites the same unreliable source (Russian Wikipedia)
+  for both the old and new values, and no independent evidence supports the claim
+  of Nazi Germany citizenship. The edit was reverted, further indicating its incorrectness.
+rcid: 2550551580
+revid: 2473884664
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://spartacus-educational.com/RUSrasputin.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.newworldencyclopedia.org/entry/Grigori_Rasputin
+timestamp: '2026-04-11T12:08:59.400925+00:00'
+title: Q43989
+turns: 15
+value_label: Nazi Germany
+verdict: incorrect

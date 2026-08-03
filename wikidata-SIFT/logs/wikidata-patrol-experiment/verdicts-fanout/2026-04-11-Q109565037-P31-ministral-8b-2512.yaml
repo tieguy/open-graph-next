@@ -1,0 +1,29 @@
+completion_tokens: 1748
+cost_usd: 0.0033258900000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36297
+property: P31
+property_label: instance of
+rationale: The edit changes the instance of claim for Malik (Q109565037) from 'film
+  character' (Q15773347) to 'human species as depicted in the Space Jam universe'
+  (Q138751725). While the new value is logically more specific and aligns with the
+  item's other claims, no independent sources were successfully fetched or verified
+  to confirm the accuracy of this change. The lack of references and inability to
+  corroborate the change with external sources means the edit cannot be verified or
+  disproven based on available evidence.
+rcid: 2551000260
+revid: 2474318432
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.quora.com/Are-people-with-Malik-as-their-surname-Muslims-or-Hindus
+- provenance: verified
+  supports_claim: false
+  url: https://www.tandfonline.com/doi/full/10.1080/15570274.2023.2272433
+timestamp: '2026-04-11T07:10:00.375823+00:00'
+title: Q109565037
+turns: 4
+value_label: human
+verdict: unverifiable

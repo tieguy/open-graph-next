@@ -1,0 +1,28 @@
+completion_tokens: 2321
+cost_usd: 0.02742628
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 122379
+property: P348
+property_label: software version identifier
+rationale: The claim that '6.2.2404.10' is a software version identifier for HyperCam
+  is strongly supported by independent evidence from videohelp.com, a reputable software
+  version tracking site. The source explicitly lists this version with release date
+  '10 April 2024', which matches the publication date qualifier in the Wikidata statement.
+  While the originally cited SolveigMM reference URL returns 404, the independent
+  confirmation from videohelp.com provides reliable verification.
+rcid: 2541056707
+revid: 2464838781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.solveigmm.com/en/products/hypercam/history/home-edition/
+- provenance: verified
+  supports_claim: true
+  url: https://www.videohelp.com/software/Hypercam/version-history
+timestamp: '2026-02-21T03:16:28.423840+00:00'
+title: Q3072026
+turns: 12
+value_label: null
+verdict: verified-high

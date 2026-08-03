@@ -1,0 +1,28 @@
+completion_tokens: 706
+cost_usd: 0.0005514000000000001
+diff_type: reference_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 8204
+property: P10197
+property_label: Numista mint ID
+rationale: The reference URL https://sherritt.com (verified) supports the claim by
+  confirming Sherritt Mint operated 1961-1996 and produced circulating coinage, aligning
+  with the Numista mint ID context. The supports_claim was set to true based on the
+  direct operational period confirmation. The other source https://sherritt.com/about-us/history/
+  shows provenance verified but supporting_claim false as it doesn't mention Numista
+  specifically. Both sources confirm the historical context of the entity
+rcid: 2549959596
+revid: 2473310864
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sherritt.com
+- provenance: verified
+  supports_claim: false
+  url: https://sherritt.com/about-us/history/
+timestamp: '2026-04-07T10:01:58.899860+00:00'
+title: Q111709240
+turns: 1
+value_label: null
+verdict: verified-low

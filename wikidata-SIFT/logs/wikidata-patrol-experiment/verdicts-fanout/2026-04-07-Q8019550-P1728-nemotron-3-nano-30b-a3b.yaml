@@ -1,0 +1,20 @@
+completion_tokens: 760
+cost_usd: 0.004207849999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81117
+property: P1728
+property_label: AllMusic artist ID
+rationale: No valid AllMusic URLs were found that could verify the claim. Many searches
+  returned redirect pages requiring login, error pages, or no content, with no source
+  found that confirms 'mn0000934173' as a valid AllMusic artist ID for William Tucker.
+  The claim appears unverifiable based on available internet sources.
+rcid: null
+revid: 2467186786
+sources: []
+timestamp: '2026-04-07T09:45:37.292043+00:00'
+title: Q8019550
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 303
+cost_usd: 0.0025616
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11899
+property: P31
+property_label: instance of
+rationale: The item 'Shimo-Takatsu' is a place (a district in Tsuchiura, Ibaraki Prefecture,
+  Japan), not a person named Chōchō Akimichi. The new value Q5327369 refers to a character
+  from the Naruto franchise. The old value 'human settlement' (Q486972) is a generic
+  classification for inhabited places, which is more appropriate for a geographic
+  entity like Shimo-Takatsu. Multiple authoritative sources confirm Shimo-Takatsu
+  as a locality in Japan, not a fictional character. Therefore, changing the instance
+  of from 'human settlement' to 'chōchō' is incorrect.
+rcid: 2550859616
+revid: 2474183197
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Shimo-Takatsu
+- provenance: verified
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/下鷹寺
+- provenance: verified
+  supports_claim: false
+  url: https://hero.fandom.com/wiki/Ch%C5%8Dch%C5%8D_Akimichi
+timestamp: '2026-04-11T14:06:41.781116+00:00'
+title: Q11361513
+turns: 1
+value_label: chōchō
+verdict: incorrect

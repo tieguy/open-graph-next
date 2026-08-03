@@ -1,0 +1,28 @@
+completion_tokens: 1199
+cost_usd: 0.00671792125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70706
+property: P21
+property_label: sex or gender
+rationale: No sources were found that confirm or deny the claim that Jérôme Dupras
+  is a bisexual person. The lack of references and corroborating evidence makes it
+  impossible to verify the claim.
+rcid: null
+revid: 2470757467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.crcecoeco.ca/wp-content/uploads/2024/12/2024-Curriculum-vitae_JDupras.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.lesaffaires.com/dossiers/mois-du-genie-regarnir-les-rangs-de-la-profession-2/jerome-dupras-cowboys-fringants-professeur-et-entrepreneur-2/
+- provenance: verified
+  supports_claim: false
+  url: https://uqo.academia.edu/jeromedupras
+timestamp: '2026-04-08T19:02:31.506032+00:00'
+title: Q3190884
+turns: 9
+value_label: bisexual person
+verdict: unverifiable

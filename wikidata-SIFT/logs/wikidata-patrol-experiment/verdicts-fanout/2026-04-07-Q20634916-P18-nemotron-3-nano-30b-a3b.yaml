@@ -1,0 +1,26 @@
+completion_tokens: 776
+cost_usd: 0.00401285
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 77153
+property: P18
+property_label: image
+rationale: No verifiable web sources could be located supporting that the proposed
+  image filename depicts a Mercedes-Benz GLC 43 4MATIC or that such a model is an
+  upcoming 2025 variant. Searches for relevant terms like 'Mercedes-Benz GLC X254
+  facelift', 'Mercedes-AMG GLC 43 4MATIC prototype' and related year/identifier combinations
+  yielded no matches for the file name or vehicle model. Without external evidence
+  confirming a 2025 Mercedes-Benz GLC 43 4MATIC exists or that this specific filename
+  corresponds to it, the claim remains unverifiable.
+rcid: 2550728955
+revid: 2474056342
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Mercedes-Benz_GLC
+timestamp: '2026-04-07T09:32:30.755830+00:00'
+title: Q20634916
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 1496
+cost_usd: 0.0031344
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11184
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The removed claim was not supported by any cited references, and no independent,
+  authoritative sources could confirm that GBPS Dil Sher Brohi is located in Dil Sher
+  Brohi. The removal of an unsourced claim is justified, but the correct location
+  remains unverified.
+rcid: 2550351161
+revid: 2473689936
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rsu-sindh.gov.pk
+- provenance: verified
+  supports_claim: false
+  url: https://www.facebook.com/groups/436089879384540/posts/10160143525514034/
+timestamp: '2026-04-11T09:21:37.537124+00:00'
+title: Q67047020
+turns: 1
+value_label: Dil Sher Brohi
+verdict: verified-low

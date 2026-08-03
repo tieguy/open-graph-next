@@ -1,0 +1,27 @@
+completion_tokens: 990
+cost_usd: 0.0082518
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38289
+property: P569
+property_label: date of birth
+rationale: The BBC obituary (verified source) reports that Susana Chávez was 36 years
+  old at the time of her death in January 2011, which places her birth year in the
+  early 1970s, consistent with the previously cited date of 5 November 1974. No authoritative
+  source supports the new value of 5 November 1942, and the only cited reference is
+  circular and non-authoritative.
+rcid: null
+revid: 2471057389
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-latin-america-12177543
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/Сусана_Чавес
+timestamp: '2026-04-07T10:04:27.175516+00:00'
+title: Q457812
+turns: 6
+value_label: null
+verdict: incorrect

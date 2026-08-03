@@ -1,0 +1,29 @@
+completion_tokens: 1409
+cost_usd: 0.005224793750000001
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54282
+property: P18
+property_label: image
+rationale: The reference to the Russian Wikipedia for the image 'Wail Al-Shehri color.jpg'
+  was correctly removed as it is not supported by the verified sources. The image
+  might not be directly related to Wail al-Shehri or might not be used in any of the
+  verified sources.
+rcid: 2551423438
+revid: 2474724622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Wail_al-Shehri
+- provenance: verified
+  supports_claim: false
+  url: https://www.counterextremism.com/extremists/wail-al-shehri
+- provenance: verified
+  supports_claim: false
+  url: https://historfiction.fandom.com/wiki/Wail_al-Shehri
+timestamp: '2026-04-10T14:17:49.441059+00:00'
+title: Q2414493
+turns: 5
+value_label: null
+verdict: verified-high

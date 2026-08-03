@@ -1,0 +1,31 @@
+completion_tokens: 1945
+cost_usd: 0.0016965600000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15561
+property: P1477
+property_label: birth name
+rationale: The new birth name 'Roberto Pancracio Musso esquividi' lacks credible support
+  from any verified independent source. The only cited reference (marvin.com.mx) is
+  unreachable, and no reliable sources confirm this exact name. The old value 'Roberto
+  Armando Musso Focaccio' is plausible but also lacks independent corroboration. The
+  edit is unsupported and likely incorrect due to the absence of evidence for the
+  new value and the unreliability of the cited source.
+rcid: 2551399658
+revid: 2474703473
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://happyhappybirthday.net/es/age/roberto-musso-person_gealqqg
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/roberto-musso.html
+- provenance: verified
+  supports_claim: false
+  url: https://marvin.com.mx/el-cuarteto-de-nos-entrevista-roberto-daniel-musso/
+timestamp: '2026-04-11T14:17:32.414615+00:00'
+title: Q6109886
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,31 @@
+completion_tokens: 545
+cost_usd: 0.01858
+diff_type: value_changed
+finish_status: max_turns
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 91265
+property: P856
+property_label: official website
+rationale: No authoritative or independent source confirming that https://www.flypeach.com
+  is the official website of Tajiri town was located. Multiple searches in Japanese
+  and English returned no official municipal or government sources listing this URL.
+  The previous official website https://www.town.tajiri.osaka.jp/ is consistent with
+  typical Japanese municipal sites and appears plausible as an official site, but
+  without confirmation from an authoritative source, the claim cannot be verified.
+rcid: null
+revid: 2471397011
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.osaka.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/田尻町
+timestamp: '2026-04-07T04:18:00.148353+00:00'
+title: Q1347129
+turns: 15
+value_label: null
+verdict: unverifiable

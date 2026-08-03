@@ -1,0 +1,27 @@
+completion_tokens: 698
+cost_usd: 0.00448605
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86929
+property: P2048
+property_label: height
+rationale: No verifiable sources confirming the height of the Venus Callipyge statue
+  were found in the performed searches. Extensive queries for 'Venus Callipyge' or
+  related terms (e.g., 'statue height', 'centimetre measurement') yielded zero results
+  for authoritative metadata about the statue's dimensions. The edit referenced Italian
+  Wikipedia (' Venere_Callipigia') and its import URL, but no successful fetches of
+  these sources occurred, and Wikipedia is excluded as an admissible source per policy.
+  Given that only unreachable or circular references were encountered and no independent
+  evidence was located, the claim cannot be verified with available tools.
+rcid: 2550521904
+revid: 2473856056
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Venus_(sculpture)
+timestamp: '2026-04-07T12:02:03.876315+00:00'
+title: Q618521
+turns: 15
+value_label: null
+verdict: unverifiable

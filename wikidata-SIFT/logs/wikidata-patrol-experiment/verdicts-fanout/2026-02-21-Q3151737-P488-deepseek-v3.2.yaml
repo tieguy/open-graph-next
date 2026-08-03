@@ -1,0 +1,27 @@
+completion_tokens: 1682
+cost_usd: 0.02695403
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 95631
+property: P488
+property_label: chairperson
+rationale: The claim that Alexis Brouhns is chairperson of the Egmont Institute is
+  strongly supported by the official Egmont Institute website, which states he was
+  appointed as Chair of the Board of Directors in January 2026. The staff directory
+  page also lists him as Chair of the Board of Directors. This is a primary source
+  from the organization itself, providing authoritative confirmation of the claim.
+rcid: 2540921498
+revid: 2464712520
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/alexis-brouhns/
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/
+timestamp: '2026-02-21T00:25:08.291609+00:00'
+title: Q3151737
+turns: 10
+value_label: Alexis Brouhns
+verdict: verified-high

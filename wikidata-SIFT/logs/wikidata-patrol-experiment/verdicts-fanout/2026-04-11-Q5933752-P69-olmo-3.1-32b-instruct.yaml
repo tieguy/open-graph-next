@@ -1,0 +1,25 @@
+completion_tokens: 1468
+cost_usd: 0.0053406
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22299
+property: P69
+property_label: educated at
+rationale: Multiple reputable and independent sources confirm that Masoud Pezeshkian
+  was educated at Tabriz University of Medical Sciences. The removal of this claim
+  is not supported by evidence.
+rcid: 2551335640
+revid: 2474642174
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://iranprimer.usip.org/blog/2024/jul/10/pezeshkian-profile-president-elect
+- provenance: verified
+  supports_claim: true
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+timestamp: '2026-04-11T13:30:19.715155+00:00'
+title: Q5933752
+turns: 1
+value_label: Tabriz University of Medical Sciences
+verdict: incorrect

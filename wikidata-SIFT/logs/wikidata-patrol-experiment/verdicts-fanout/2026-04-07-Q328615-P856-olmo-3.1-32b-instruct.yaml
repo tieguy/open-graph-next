@@ -1,0 +1,26 @@
+completion_tokens: 1007
+cost_usd: 0.008743599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40697
+property: P856
+property_label: official website
+rationale: The new official website URL (https://www.ceair.com) could not be verified.
+  No content was retrieved from the URL, and no independent authoritative source confirmed
+  that it is the official website of Okinawa City. High-impact edits to official website
+  claims require reliable supporting evidence, which is currently absent.
+rcid: 2551422060
+revid: 2474723570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ceair.com
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T08:24:57.754493+00:00'
+title: Q328615
+turns: 5
+value_label: null
+verdict: suspect

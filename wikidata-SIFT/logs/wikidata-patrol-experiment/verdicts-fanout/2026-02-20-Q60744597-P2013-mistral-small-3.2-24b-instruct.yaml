@@ -1,0 +1,22 @@
+completion_tokens: 196
+cost_usd: 0.0022974749999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24505
+property: P2013
+property_label: Facebook username
+rationale: The official website and social media links confirm that the correct Facebook
+  username is 'globalbankingandfinance', not 'globalbankingandfinancereview' as proposed
+  in the edit.
+rcid: 2540959311
+revid: 2464747347
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com/llms-full.txt
+timestamp: '2026-02-20T05:03:40.629433+00:00'
+title: Q60744597
+turns: 3
+value_label: null
+verdict: incorrect

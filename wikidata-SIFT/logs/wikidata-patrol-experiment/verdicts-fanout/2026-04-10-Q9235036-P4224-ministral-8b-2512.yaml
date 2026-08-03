@@ -1,0 +1,30 @@
+completion_tokens: 1509
+cost_usd: 0.0031070100000000003
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21944
+property: P4224
+property_label: category contains
+rationale: Independent sources confirm that Orientales de Humacao is a volleyball
+  team, not a baseball team. The category 'Players of Orientales de Humacao' logically
+  represents volleyball players, and the qualifier 'volleyball player' accurately
+  describes the occupation of its members. The value 'human' (Q5) is a correct base
+  value for a category of players.
+rcid: 2550827920
+revid: 2474152190
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://women.volleybox.net/grises-de-humacao-t4793/players
+- provenance: verified
+  supports_claim: true
+  url: https://world-volleyball.fandom.com/wiki/Orientales_de_Humacao
+- provenance: verified
+  supports_claim: true
+  url: https://www.improveyourvolley.com/falyn-fonoimoana.html
+timestamp: '2026-04-10T07:44:45.957813+00:00'
+title: Q9235036
+turns: 2
+value_label: human
+verdict: verified-high

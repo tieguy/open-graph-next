@@ -1,0 +1,25 @@
+completion_tokens: 450
+cost_usd: 0.012732662500000002
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 133941
+property: P856
+property_label: official website
+rationale: The URL https://www.flyasiana.com is not accessible and does not appear
+  to be related to Murakami, a city in Niigata Prefecture, Japan. The correct official
+  website for Murakami is https://www.city.murakami.lg.jp/.
+rcid: null
+revid: 2471540803
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.murakami.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flyasiana.com
+timestamp: '2026-04-07T07:46:38.461299+00:00'
+title: Q284503
+turns: 15
+value_label: null
+verdict: incorrect

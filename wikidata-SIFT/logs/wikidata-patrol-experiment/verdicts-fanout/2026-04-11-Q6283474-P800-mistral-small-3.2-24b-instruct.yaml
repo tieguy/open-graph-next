@@ -1,0 +1,32 @@
+completion_tokens: 1886
+cost_usd: 0.00454903125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48671
+property: P800
+property_label: notable work
+rationale: Both the old value 'Untitled (1976) - MFAH' and the new value 'Male Head
+  in Red Landscape' are confirmed to be valid artworks by Joseph Glasco. The edit
+  changes one notable work to another without adding the new work as a separate entry.
+  This could be an improvement if the intention was to replace a less significant
+  work with a more notable one, but without additional context, it is difficult to
+  determine the editor's intent. The verdict is 'verified-low' due to the lack of
+  clear evidence that the change is an improvement.
+rcid: 2550443681
+revid: 2473780362
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.metmuseum.org/art/collection/search/488704
+- provenance: verified
+  supports_claim: true
+  url: https://josephglascofoundation.org/museum-collections
+- provenance: verified
+  supports_claim: true
+  url: https://emuseum.mfah.org/objects/31412/untitled-no-4
+timestamp: '2026-04-11T16:21:13.409891+00:00'
+title: Q6283474
+turns: 1
+value_label: Male Head in Red Landscape
+verdict: verified-low

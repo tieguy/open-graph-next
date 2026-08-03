@@ -1,0 +1,23 @@
+completion_tokens: 942
+cost_usd: 0.00354639375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37425
+property: P18
+property_label: image
+rationale: The edit to change the image of starch to "Potato starch.jpg" is supported
+  by independent sources that confirm potato starch as a valid representation of starch.
+  The evidence from iStockPhoto, which includes a photomicrograph of potato starch,
+  supports the claim that "Potato starch.jpg" is an appropriate image for starch.
+rcid: 2549975574
+revid: 2473325366
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.istockphoto.com/photos/starch
+timestamp: '2026-04-10T07:36:08.390196+00:00'
+title: Q41534
+turns: 3
+value_label: null
+verdict: verified-high

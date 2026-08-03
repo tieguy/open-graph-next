@@ -1,0 +1,28 @@
+completion_tokens: 1041
+cost_usd: 0.0025821375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26444
+property: P31
+property_label: instance of
+rationale: Multiple primary sources confirm that Pacific Engineering is a business.
+  The sources provide detailed information about the company's services and history,
+  supporting the claim that it is an instance of a business.
+rcid: 2551234866
+revid: 2474547207
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacificengineeringinc.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacengtech.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/1342616D:US
+timestamp: '2026-04-10T11:44:06.923493+00:00'
+title: Q11347666
+turns: 3
+value_label: business
+verdict: verified-high

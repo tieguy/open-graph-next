@@ -1,0 +1,30 @@
+completion_tokens: 1417
+cost_usd: 0.0045672
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18585
+property: P750
+property_label: distributed by
+rationale: Fut Rap Cartas is confirmed to be distributed via Google Play (Q79576),
+  as evidenced by a verified Google Play listing and the official website. However,
+  the claim that it is distributed by the iOS App Store (Q368215) could not be independently
+  confirmed because the referenced App Store URL returned a 404 error during fetching.
+  Therefore, the iOS distribution is only partially supported.
+rcid: 2540918215
+revid: 2464709398
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324
+- provenance: reported
+  supports_claim: null
+  url: https://apps.apple.com/us/app/frc-25-futrapcartas/id6466343305
+timestamp: '2026-02-21T02:35:50.524581+00:00'
+title: Q138348136
+turns: 3
+value_label: Q368215
+verdict: verified-low

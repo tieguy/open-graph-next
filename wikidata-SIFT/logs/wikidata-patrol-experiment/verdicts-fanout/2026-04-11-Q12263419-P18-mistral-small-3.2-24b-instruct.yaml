@@ -1,0 +1,20 @@
+completion_tokens: 265
+cost_usd: 0.0037369125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39159
+property: P18
+property_label: image
+rationale: The web search tool failed to retrieve results due to a '402 Payment Required'
+  error, preventing the investigation of both the old and new image values for Q12263419.
+  Without access to relevant sources, it is impossible to verify the correctness of
+  the image change.
+rcid: null
+revid: 2471634013
+sources: []
+timestamp: '2026-04-11T09:22:16.705443+00:00'
+title: Q12263419
+turns: 4
+value_label: null
+verdict: unverifiable

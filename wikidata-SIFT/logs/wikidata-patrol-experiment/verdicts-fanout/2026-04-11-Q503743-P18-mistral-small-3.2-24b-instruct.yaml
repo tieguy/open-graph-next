@@ -1,0 +1,19 @@
+completion_tokens: 205
+cost_usd: 0.00478870625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53272
+property: P18
+property_label: image
+rationale: Unable to verify the image change due to search errors and lack of accessible
+  sources. No direct evidence could be found to confirm or refute the change from
+  'Frammersbach vom Bäckersberg.JPG' to 'Frammersbach vom Bäckersberg 2026.jpg'.
+rcid: 2551340944
+revid: 2474647153
+sources: []
+timestamp: '2026-04-11T17:28:39.183925+00:00'
+title: Q503743
+turns: 3
+value_label: null
+verdict: unverifiable

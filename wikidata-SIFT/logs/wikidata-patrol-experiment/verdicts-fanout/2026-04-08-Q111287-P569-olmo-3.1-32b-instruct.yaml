@@ -1,0 +1,27 @@
+completion_tokens: 829
+cost_usd: 0.0056006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25516
+property: P569
+property_label: date of birth
+rationale: The edit claims that Hans-Georg Backhaus was born on April 29, 1929, citing
+  a reference to NUKAT. However, the referenced NUKAT source could not be accessed
+  due to a blocked or unreachable domain, and no independent, accessible sources confirm
+  this date of birth. Therefore, the claim cannot be verified with currently available
+  evidence.
+rcid: 2549601953
+revid: 2472963887
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nukat.de/
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Hans-Georg_Backhaus
+timestamp: '2026-04-08T16:31:43.277866+00:00'
+title: Q111287
+turns: 4
+value_label: null
+verdict: unverifiable

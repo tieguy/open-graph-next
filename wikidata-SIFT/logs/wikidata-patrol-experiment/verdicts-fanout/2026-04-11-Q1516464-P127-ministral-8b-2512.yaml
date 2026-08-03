@@ -1,0 +1,30 @@
+completion_tokens: 1861
+cost_usd: 0.00210099
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27442
+property: P127
+property_label: owned by
+rationale: The claim that treasury stock (Q1516464) is 'owned by' a business (Q4830453)
+  is factually incorrect. Treasury stock is stock repurchased by the issuing company
+  itself, not owned by another business. All verified sources confirm that treasury
+  stock is held by the company that issued it, not by a separate business entity.
+  The removed claim contradicts authoritative definitions of treasury stock.
+rcid: 2550156780
+revid: 2473501777
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://biz.libretexts.org/Bookshelves/Accounting/Principles_of_Financial_Accounting_(Jonick)/06:_Stockholders_Equity_in_More_Detail/6.05:_Treasury_Stock
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/treasury-stock-definition-accounting-method-formula.html
+- provenance: verified
+  supports_claim: false
+  url: https://viewpoint.pwc.com/dt/us/en/pwc/accounting_guides/financial_statement_/financial_statement___18_US/chapter_5_stockholde_US/59_treasury_stock_US.html
+timestamp: '2026-04-11T17:20:01.244589+00:00'
+title: Q1516464
+turns: 3
+value_label: business
+verdict: incorrect

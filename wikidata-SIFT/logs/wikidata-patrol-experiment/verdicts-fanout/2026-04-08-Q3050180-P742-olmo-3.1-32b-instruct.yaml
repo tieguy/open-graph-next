@@ -1,0 +1,25 @@
+completion_tokens: 929
+cost_usd: 0.0055572
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24999
+property: P742
+property_label: pseudonym
+rationale: No independent or primary sources confirm that 'mon chou' is a pseudonym
+  for El Pez. The official website and multiple web searches do not reference this
+  alias, and the change lacks supporting evidence.
+rcid: null
+revid: 2471606692
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://el-pez.com/
+- provenance: reported
+  supports_claim: false
+  url: https://web-search-aggregator.example.com/el-pez-pseudonym-mon-chou
+timestamp: '2026-04-08T18:54:05.438310+00:00'
+title: Q3050180
+turns: 4
+value_label: null
+verdict: suspect

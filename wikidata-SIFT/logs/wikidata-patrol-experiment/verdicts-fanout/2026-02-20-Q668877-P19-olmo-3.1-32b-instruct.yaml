@@ -1,0 +1,27 @@
+completion_tokens: 1077
+cost_usd: 0.0101204
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47371
+property: P19
+property_label: place of birth
+rationale: Multiple independent and authoritative sources explicitly state that Harley
+  Jessup was born in Corvallis, Oregon. These include a detailed biographical profile
+  from grokipedia.com and professional industry databases such as The Movie Database,
+  both of which directly list 'Corvallis, Oregon' as his place of birth. The consistency
+  across these primary and secondary sources provides strong confirmation of the claim.
+rcid: 2540962314
+revid: 2464750189
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/harley_jessup
+- provenance: verified
+  supports_claim: true
+  url: https://www.themoviedb.org/person/7888-harley-jessup?language=en-US
+timestamp: '2026-02-20T04:28:05.135801+00:00'
+title: Q668877
+turns: 5
+value_label: Corvallis
+verdict: verified-high

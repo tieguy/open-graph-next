@@ -1,0 +1,22 @@
+completion_tokens: 1309
+cost_usd: 0.0031863000000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41850
+property: P106
+property_label: occupation
+rationale: The fetched reference and independent sources consistently describe María
+  Izquierdo as a painter. There is no evidence to support the claim that she was a
+  'tapissier.' Therefore, the edit is incorrect.
+rcid: 2549597016
+revid: 2472959052
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+timestamp: '2026-04-07T07:00:42.360248+00:00'
+title: Q461937
+turns: 5
+value_label: tapissier
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 679
+cost_usd: 0.022150999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 108718
+property: P856
+property_label: official website
+rationale: The official website for Yaizu City should be under the yaizu-shi.lg.jp
+  or city.yaizu.lg.jp municipal domain. The cited URL, https://www.vietjetair.com,
+  is a Vietnamese airline and is unrelated to Yaizu City. No credible source supports
+  this claim, and the official municipal website does not match the new value.
+rcid: null
+revid: 2471590660
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.yaizu.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/やいづ市
+timestamp: '2026-04-08T18:35:37.474450+00:00'
+title: Q696783
+turns: 12
+value_label: null
+verdict: incorrect

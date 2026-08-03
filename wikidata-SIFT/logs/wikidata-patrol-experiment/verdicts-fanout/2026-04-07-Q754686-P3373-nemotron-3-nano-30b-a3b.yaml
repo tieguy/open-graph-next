@@ -1,0 +1,33 @@
+completion_tokens: 768
+cost_usd: 0.00395665
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76061
+property: P3373
+property_label: sibling
+rationale: The investigation failed to locate any verifiable sources supporting the
+  claim that Cacus is correctly updated as the sibling of Cacus. Extensive searches
+  yielded no supplemental corroborating material for the claim. No proven source was
+  found to confirm nor deny the edit. Without any fetchable source that directly addresses
+  the claim, the verification remains inconclusive.
+rcid: null
+revid: 2471473084
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+Roman+mythology+sibling
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+myth+brother+partner
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+fire+breathing+giant+Roman+mythology
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+myth+synergy
+timestamp: '2026-04-07T09:14:40.575039+00:00'
+title: Q754686
+turns: 15
+value_label: Cacus
+verdict: unverifiable

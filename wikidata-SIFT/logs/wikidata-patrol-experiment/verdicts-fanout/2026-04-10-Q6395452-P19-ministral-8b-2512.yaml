@@ -1,0 +1,31 @@
+completion_tokens: 1609
+cost_usd: 0.00234195
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22734
+property: P19
+property_label: place of birth
+rationale: The claim that Ketsada Souksavanh (Q6395452) was born in Thailand (Q869)
+  lacks credible, independent verification. All verified sources mention him as a
+  Laos national team player and do not confirm Thailand as his birthplace. The edit
+  has no references, and existing claims (citizenship, early career in Lao clubs)
+  strongly suggest Laos as his birthplace. Without clear, corroborating evidence,
+  this edit is deemed suspect.
+rcid: 2551256412
+revid: 2474567221
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://football-tribe.com/asia/2017/06/18/super-power-sign-laos-international-defender-ketsada-souksavanh/
+- provenance: verified
+  supports_claim: false
+  url: https://globalsportsarchive.com/people/soccer/ketsada-souksavanh/48665/
+- provenance: verified
+  supports_claim: false
+  url: https://www.national-football-teams.com/player/35038/Ketsada_Souksavanh.html
+timestamp: '2026-04-10T13:20:47.709424+00:00'
+title: Q6395452
+turns: 2
+value_label: Thailand
+verdict: suspect

@@ -1,0 +1,25 @@
+completion_tokens: 948
+cost_usd: 0.0021534375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19884
+property: P69
+property_label: educated at
+rationale: The investigation could not be completed due to issues with the search
+  API. Therefore, it is not possible to verify the change from 'ArtFX School' to 'Aas'
+  for Q117078952.
+rcid: null
+revid: 2470273606
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://aas.org/grants-and-prizes/education-prize
+- provenance: verified
+  supports_claim: false
+  url: https://www.coursera.org/articles/associate-of-applied-science
+timestamp: '2026-04-11T16:23:12.208052+00:00'
+title: Q117078952
+turns: 2
+value_label: Aas
+verdict: unverifiable

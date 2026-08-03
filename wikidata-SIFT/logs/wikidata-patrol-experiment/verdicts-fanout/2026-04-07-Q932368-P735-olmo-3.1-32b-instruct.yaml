@@ -1,0 +1,30 @@
+completion_tokens: 1364
+cost_usd: 0.010559800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 48707
+property: P735
+property_label: given name
+rationale: The edit changes the given name from 'Rabih' to 'Rabah' without any cited
+  or independently corroborated evidence. All reliable sources, including academic
+  and encyclopedic references, consistently use 'Rabih' as the given name for this
+  individual. No primary or reputable secondary source was found that uses 'Rabah'
+  as the given name.
+rcid: 2549457072
+revid: 2472822431
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Rabih_az-Zubayr
+- provenance: reported
+  supports_claim: false
+  url: https://dictionary.africanbiography.com/article/rabih-az-zubayr
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D1%81%D1%8C%D0%BA%D1%8F_%D0%A0%D0%B0%D0%B1%D0%B8%D1%87_%D0%A7-%D0%90%D0%B6-%D0%9A%D0%B0%D1%8F%D1%8F%D1%80
+timestamp: '2026-04-07T05:07:14.323302+00:00'
+title: Q932368
+turns: 8
+value_label: Rabah
+verdict: incorrect

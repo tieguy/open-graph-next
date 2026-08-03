@@ -1,0 +1,29 @@
+completion_tokens: 906
+cost_usd: 0.0041668
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18116
+property: P21
+property_label: sex or gender
+rationale: No credible, authoritative source supports assigning 'therian' as the sex
+  or gender for George Pig. Official franchise materials and mainstream news coverage
+  consistently portray George Pig as male. The change to 'therian' is not corroborated
+  by any verified evidence.
+rcid: null
+revid: 2471111206
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.thesun.co.uk/fabulous/3249804/peppa-pig-voice-cast-harley-bird-cecily-bloom-about/
+- provenance: reported
+  supports_claim: false
+  url: https://de.peppapig.com/zeichen/
+- provenance: reported
+  supports_claim: false
+  url: https://www.peppapig.co.uk/characters/
+timestamp: '2026-04-10T00:09:54.783721+00:00'
+title: Q93975105
+turns: 1
+value_label: therian
+verdict: incorrect

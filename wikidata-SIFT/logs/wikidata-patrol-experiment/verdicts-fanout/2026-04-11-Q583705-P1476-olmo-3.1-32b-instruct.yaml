@@ -1,0 +1,32 @@
+completion_tokens: 252
+cost_usd: 0.0034612
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16550
+property: P1476
+property_label: title
+rationale: The change from 'La Celestina' to 'La Celestina.' involves the addition
+  of a period at the end of the title. However, authoritative sources consulted do
+  not clarify the standard form of the title with respect to punctuation. Multiple
+  reputable references use the title without a period, but none explicitly mandate
+  or forbid the period. Without a clear authoritative rule or guidance from primary
+  sources, this change cannot be definitively judged as correct or incorrect based
+  on the evidence found.
+rcid: 2550361284
+revid: 2473699830
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gutenberg.org/ebooks/1619
+- provenance: verified
+  supports_claim: false
+  url: https://www.spainthenandnow.com/spanish-literature/la-celestina
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/La_Celestina
+timestamp: '2026-04-11T08:22:34.975770+00:00'
+title: Q583705
+turns: 1
+value_label: null
+verdict: unverifiable

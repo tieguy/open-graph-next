@@ -1,0 +1,28 @@
+completion_tokens: 1014
+cost_usd: 0.00366921125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36081
+property: P742
+property_label: pseudonym
+rationale: The investigation did not find any evidence supporting 'mon chou' as a
+  pseudonym for El Pez. The sources consulted do not mention 'mon chou' in relation
+  to El Pez, and the edit does not cite any references.
+rcid: null
+revid: 2471606692
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://avantgallery.com/collections/el-pez
+- provenance: verified
+  supports_claim: false
+  url: https://streetartdatabase.wordpress.com/2017/11/06/pez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.artsy.net/artist/el-pez
+timestamp: '2026-04-10T11:38:39.282159+00:00'
+title: Q3050180
+turns: 3
+value_label: null
+verdict: incorrect

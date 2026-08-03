@@ -1,0 +1,35 @@
+completion_tokens: 3976
+cost_usd: 0.007415399999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25149
+property: P54
+property_label: member of sports team
+rationale: The edit replaced 'Tune Squad' with 'Goon Squad' for Dom James without
+  providing context or qualifiers. Multiple independent and verified sources confirm
+  that Dom James was initially a member of the Goon Squad and later joined the Tune
+  Squad. Replacing the value rather than adding a new statement with appropriate qualifiers
+  misrepresents the character's story arc by omitting his association with the Tune
+  Squad. The correct approach would have been to add 'Goon Squad' as an earlier team
+  with a qualifying statement, not to replace the 'Tune Squad' claim.
+rcid: 2550863905
+revid: 2474187409
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://hero.fandom.com/wiki/Dom_James
+- provenance: verified
+  supports_claim: true
+  url: https://www.rottentomatoes.com/m/space_jam_a_new_legacy
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/title/tt11036876/plotsummary/
+- provenance: verified
+  supports_claim: true
+  url: https://www.cnn.com/2021/07/16/entertainment/space-jam-a-new-legacy-review/index.html
+timestamp: '2026-04-11T18:45:19.137133+00:00'
+title: Q108312450
+turns: 1
+value_label: Goon Squad
+verdict: suspect

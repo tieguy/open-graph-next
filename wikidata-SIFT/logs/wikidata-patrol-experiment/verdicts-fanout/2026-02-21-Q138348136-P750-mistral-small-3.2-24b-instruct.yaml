@@ -1,0 +1,27 @@
+completion_tokens: 435
+cost_usd: 0.0037919
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36614
+property: P750
+property_label: distributed by
+rationale: The official website of Fut Rap Cartas confirms that the game is available
+  on both Google Play and the App Store. Additionally, the App Store page for Fut
+  Rap Cartas shows that the game is indeed distributed by the App Store. Therefore,
+  the claim that 'Q368215' (App Store) is a correct updated distributed by for Fut
+  Rap Cartas is verified.
+rcid: 2540918215
+revid: 2464709398
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: true
+  url: https://apps.apple.com/za/app/1041803369?see-all=reviews&platform=iphone
+timestamp: '2026-02-21T02:35:21.279013+00:00'
+title: Q138348136
+turns: 5
+value_label: Q368215
+verdict: verified-high

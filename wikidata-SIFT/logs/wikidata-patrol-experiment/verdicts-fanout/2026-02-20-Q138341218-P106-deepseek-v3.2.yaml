@@ -1,0 +1,32 @@
+completion_tokens: 404
+cost_usd: 0.00719376
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 17929
+property: P106
+property_label: occupation
+rationale: The provided reference https://sambakker.com is the subject's official
+  website and directly supports the occupation claim. The website states 'Now I run
+  two companies.' and describes building SaaS companies, holding CMO, CTO, and CEO
+  roles at companies he built, which qualifies as entrepreneurial activity. Multiple
+  independent search results also corroborate his identity as an entrepreneur, referring
+  to him as a 'travelling entrepreneur' and discussing his business ventures. The
+  source is a primary source (his own site) and clearly supports the claim.
+rcid: 2540976497
+revid: 2464763227
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sambakker.com
+- provenance: reported
+  supports_claim: true
+  url: https://travellingentrepreneurs.wordpress.com/2015/10/22/the-nz-flat-white-in-moscow/
+- provenance: reported
+  supports_claim: true
+  url: https://onlinebzdog.com/jvzoo-academy/
+timestamp: '2026-02-20T02:20:12.626608+00:00'
+title: Q138341218
+turns: 3
+value_label: entrepreneur
+verdict: verified-high

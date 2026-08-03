@@ -1,0 +1,28 @@
+completion_tokens: 1398
+cost_usd: 0.0010928399999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12930
+property: P19
+property_label: place of birth
+rationale: The primary source and independent corroboration support "Gata de Gorgos"
+  as the place of birth for Francesc Arabí. There is no evidence supporting "Marruecos"
+  as the place of birth. The edit to change the place of birth to "Marruecos" is incorrect.
+rcid: null
+revid: 2464673102
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://editorialcirculorojo.com/autores/francesc-arabi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.levante-emv.com/autores/francesc-arabi-2.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.todostuslibros.com/autor/arabi-arabi-francesc
+timestamp: '2026-04-11T15:37:30.910429+00:00'
+title: Q42380621
+turns: 1
+value_label: Marruecos
+verdict: incorrect

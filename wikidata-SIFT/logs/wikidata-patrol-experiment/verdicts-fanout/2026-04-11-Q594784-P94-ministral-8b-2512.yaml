@@ -1,0 +1,36 @@
+completion_tokens: 2141
+cost_usd: 0.0075112500000000006
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 74520
+property: P94
+property_label: coat of arms image
+rationale: The claim for the coat of arms image of Candói (Q594784) cites a Spanish
+  Wikipedia reference that is unreachable due to blocked access. No independent, verified
+  source confirms the existence or authenticity of the image 'Brasão candói.jpg'.
+  The edit did not improve the claim's validity and lacks corroboration from any accessible
+  or relevant source.
+rcid: 2551346100
+revid: 2474652132
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://anygen.art/photo-generator/coat-of-arms-maker
+- provenance: verified
+  supports_claim: false
+  url: https://coatofarmsof.com/candot
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Coat_of_arms_of_the_Kingdom_of_Candia.svg
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Candói
+- provenance: reported
+  supports_claim: false
+  url: http://www.candoi.pr.gov.br
+timestamp: '2026-04-11T12:00:38.949146+00:00'
+title: Q594784
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 1331
+cost_usd: 0.00633905
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62305
+property: P39
+property_label: position held
+rationale: The sources confirm that Samira Sabou is the president of the Association
+  of Bloggers for Active Citizenship (ABCA), which supports the qualifier added to
+  her 'position held' claim.
+rcid: 2550582773
+revid: 2473914508
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://cpj.org/awards/samira-sabou-niger/
+- provenance: verified
+  supports_claim: true
+  url: https://www.indexoncensorship.org/2021/09/journalism-2021/
+timestamp: '2026-04-11T11:49:42.290012+00:00'
+title: Q122983110
+turns: 5
+value_label: manager
+verdict: verified-high

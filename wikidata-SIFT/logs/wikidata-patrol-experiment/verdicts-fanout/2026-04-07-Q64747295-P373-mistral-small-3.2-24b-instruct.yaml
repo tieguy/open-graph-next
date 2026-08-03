@@ -1,0 +1,34 @@
+completion_tokens: 1178
+cost_usd: 0.00574805375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 66970
+property: P373
+property_label: Commons category
+rationale: No reliable sources were found to confirm or deny the updated Commons category
+  'The Honorable Soroi Marepo Eoe CMG, MP.png' for Soroi Marepo Eoe. The edit lacks
+  references, and independent searches did not yield verifiable information.
+rcid: 2551442447
+revid: 2474740123
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://www.google.com/search?q=Soroi+Marepo+Eoe+CMG%2C+MP+Commons+category
+- provenance: verified
+  supports_claim: null
+  url: https://www.google.com/search?q=Soroi+Marepo+Eoe+CMG%2C+MP
+- provenance: verified
+  supports_claim: null
+  url: https://www.google.com/search?q=Soroi+Marepo+Eoe+PNG+politician+Commons+category
+- provenance: verified
+  supports_claim: null
+  url: https://www.google.com/search?q=Soroi+Marepo+Eoe+PNG+politician
+- provenance: verified
+  supports_claim: null
+  url: https://www.google.com/search?q=Soroi+Marepo+Eoe+official+government+sources
+timestamp: '2026-04-07T11:17:34.711658+00:00'
+title: Q64747295
+turns: 9
+value_label: null
+verdict: unverifiable

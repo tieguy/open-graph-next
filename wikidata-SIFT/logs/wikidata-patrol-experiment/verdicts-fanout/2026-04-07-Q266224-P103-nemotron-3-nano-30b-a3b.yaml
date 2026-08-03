@@ -1,0 +1,25 @@
+completion_tokens: 1009
+cost_usd: 0.00098415
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 15647
+property: P103
+property_label: native language
+rationale: No sources support the claim that Markus Persson's native language is Pene;
+  the cited source Q7162538 (a programmer from Canada) is unrelated, and biographical
+  sources consistently identify Swedish as his native language, making the edit unsupported
+rcid: null
+revid: 2468736305
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pene_(Programmer)
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Markus_Persson
+timestamp: '2026-04-07T06:37:58.903293+00:00'
+title: Q266224
+turns: 1
+value_label: Pene
+verdict: suspect

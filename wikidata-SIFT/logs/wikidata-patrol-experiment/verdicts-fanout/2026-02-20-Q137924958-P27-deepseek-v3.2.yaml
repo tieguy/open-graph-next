@@ -1,0 +1,37 @@
+completion_tokens: 2210
+cost_usd: 0.025441740000000004
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 98449
+property: P27
+property_label: country of citizenship
+rationale: The claim that Manvik Chandra has Indian citizenship is plausible based
+  on circumstantial evidence but not directly verified. The subject's claimed place
+  of birth is Uttam Nagar, Delhi, India (Q25247490), which suggests likely Indian
+  citizenship. However, no sources found during investigation explicitly confirm the
+  subject's nationality or citizenship. India follows a mixed citizenship system (jus
+  sanguinis with limited jus soli), so birth in India does not automatically confer
+  citizenship. The Google Books and Google Play listings confirm Manvik Chandra as
+  a child artist and author but provide no citizenship information. While plausible
+  given the birth location, the claim lacks direct supporting evidence.
+rcid: 2540949858
+revid: 2464738842
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Student_Life.html?id=JnWgEQAAQBAJ
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/books/details/Manvik_Chandra_Student_Life?id=JnWgEQAAQBAJ
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/User_talk:Manvikchandra
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/playlist?list=PLzAI2DgY0nRxO24TczSLFOSJcA3b5TocB
+timestamp: '2026-02-20T10:35:36.783350+00:00'
+title: Q137924958
+turns: 11
+value_label: India
+verdict: plausible

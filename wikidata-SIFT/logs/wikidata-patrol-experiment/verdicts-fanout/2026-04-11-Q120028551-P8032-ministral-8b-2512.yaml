@@ -1,0 +1,31 @@
+completion_tokens: 2054
+cost_usd: 0.00165156
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15152
+property: P8032
+property_label: victim(s)
+rationale: The claim for Nahel Merzouk as the victim (Q120047915) is well-supported
+  by verified sources such as BFM TV and INDEX Investigation. However, the newly added
+  qualifier 'polesaw' (P2868) is not supported by any verified source. This qualifier
+  is inconsistent with descriptions of Nahel Merzouk and lacks evidence. The absence
+  of references for this qualifier and the lack of corroboration from independent
+  sources make this edit suspicious.
+rcid: 2549974142
+revid: 2473324003
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rmc.bfmtv.com/actualites/societe/il-faisait-tout-son-possible-pour-s-en-sortir-qui-etait-nahel-le-jeune-tue-a-nanterre_AV-202306290312.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.index.ngo/en/investigations/killing-of-nahel-merzouk/
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/watch?v=QkJSCtBrl9s
+timestamp: '2026-04-11T11:45:08.184193+00:00'
+title: Q120028551
+turns: 1
+value_label: Nahel Merzouk
+verdict: suspect

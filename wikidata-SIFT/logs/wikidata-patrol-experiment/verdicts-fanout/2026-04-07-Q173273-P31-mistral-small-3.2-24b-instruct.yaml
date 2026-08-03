@@ -1,0 +1,26 @@
+completion_tokens: 972
+cost_usd: 0.0031040200000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52489
+property: P31
+property_label: instance of
+rationale: The edit changes the 'instance of' property to 'Chinmayananda Saraswati'
+  which is not a standard or appropriate classification. The correct instance of for
+  a person should typically be 'human' (Q5). The sources consulted do not support
+  this specific change.
+rcid: null
+revid: 2470122213
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Chinmayananda
+- provenance: verified
+  supports_claim: false
+  url: https://www.chinmayananda.org/
+timestamp: '2026-04-07T06:56:10.589851+00:00'
+title: Q173273
+turns: 8
+value_label: Chinmayananda Saraswati
+verdict: incorrect

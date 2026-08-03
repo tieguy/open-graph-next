@@ -1,0 +1,29 @@
+completion_tokens: 2431
+cost_usd: 0.01031991
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 97620
+property: P1477
+property_label: birth name
+rationale: Multiple verified sources, including Royalty Exchange, Billboard, and Biography.com,
+  consistently confirm Bruno Mars's birth name as 'Peter Gene Hernandez.' The proposed
+  change to 'Pablo Gene Hernandez' lacks any credible evidence and contradicts well-established
+  biographical records. Therefore, the edit is incorrect.
+rcid: 2549922834
+revid: 2473276732
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://royaltyexchange.com/blog/the-heartfelt-story-behind-bruno-mars-stage-name
+- provenance: verified
+  supports_claim: false
+  url: https://www.billboard.com/artist/bruno-mars/
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/musicians/bruno-mars
+timestamp: '2026-04-11T17:26:36.770119+00:00'
+title: Q1450
+turns: 6
+value_label: null
+verdict: incorrect

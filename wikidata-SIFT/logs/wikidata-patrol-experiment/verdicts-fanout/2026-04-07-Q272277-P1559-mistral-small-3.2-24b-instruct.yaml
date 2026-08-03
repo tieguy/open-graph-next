@@ -1,0 +1,23 @@
+completion_tokens: 909
+cost_usd: 0.00352339375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34922
+property: P1559
+property_label: name in native language
+rationale: The new value "בת שבע 61233332123332466_6€"6€&_-_::8:+'_" appears to be
+  incorrect or malformed. The search results did not provide any independent sources
+  that support this new value. The edit seems to be incorrect based on the available
+  evidence.
+rcid: null
+revid: 2471469871
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=98353659
+timestamp: '2026-04-07T10:46:57.652806+00:00'
+title: Q272277
+turns: 4
+value_label: null
+verdict: incorrect

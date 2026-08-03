@@ -1,0 +1,30 @@
+completion_tokens: 2503
+cost_usd: 0.00329298
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32097
+property: P39
+property_label: position held
+rationale: The edit changes Richard Baud's position from 'member of the departmental
+  council of Haute-Savoie' to 'municipal councillor of Thonon-les-Bains'. While the
+  new role is plausible given his current position as mayor (confirmed by verified
+  sources), the edit lacks references for the new claim. The old claim was sourced
+  from an unverifiable reference (French National Directory of Representatives). Without
+  clear evidence that Baud was not a municipal councillor before becoming mayor, the
+  removal of the old claim and the addition of the new claim without references is
+  suspicious.
+rcid: 2551398573
+revid: 2474702579
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ledauphine.com/politique/2026/03/28/richard-baud-officiellement-elu-maire-de-thonon-les-bains
+- provenance: verified
+  supports_claim: true
+  url: https://www.ville-thonon.fr/actualite/installation-du-nouveau-conseil-municipal-de-thonon-et-election-du-maire/
+timestamp: '2026-04-11T05:47:01.812486+00:00'
+title: Q63765092
+turns: 3
+value_label: municipal councillor of Thonon-les-Bains
+verdict: suspect

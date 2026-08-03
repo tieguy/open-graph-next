@@ -1,0 +1,31 @@
+completion_tokens: 2330
+cost_usd: 0.0051616000000000006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18818
+property: P2562
+property_label: married name
+rationale: Independent, verified sources confirm that Maria Vorontsova is publicly
+  known by the surname 'Vorontsova' after her divorce from Jorrit Faassen and that
+  the patronymic is not used as a married name in Russian convention. However, the
+  Wikidata claim includes the patronymic, which is not standard for a married name.
+  The edit is consistent with her post-divorce public identity but does not precisely
+  follow naming conventions for married names.
+rcid: null
+revid: 2471474532
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://wealthyspy.com/maria-vorontsova/
+- provenance: verified
+  supports_claim: true
+  url: https://www.dailymail.co.uk/news/article-10734833/Putin-stopped-daughter-flying-abroad-birthday-amid-fears-not-return-Russia.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.rferl.org/a/putin-relative-nagorny-novatek-murmansk-lng-mikhelson/32950259.html
+timestamp: '2026-04-10T14:14:48.608075+00:00'
+title: Q19816371
+turns: 1
+value_label: null
+verdict: verified-low

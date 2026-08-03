@@ -1,0 +1,28 @@
+completion_tokens: 1246
+cost_usd: 0.00216251875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22259
+property: P1477
+property_label: birth name
+rationale: The old value "Suzanne Bélair" is supported by reliable sources, while
+  the new value "Suzanne hkjk" is not supported by any reliable source and appears
+  to be incorrect.
+rcid: null
+revid: 2454234091
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/no2019155649.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.lunionsuite.com/black-history-highlight-sanite-belair-tigress-haiti/
+- provenance: verified
+  supports_claim: false
+  url: https://kentakepage.com/sanite-belair-the-tigress-of-haiti/
+timestamp: '2026-04-11T05:45:00.391014+00:00'
+title: Q3472292
+turns: 2
+value_label: null
+verdict: incorrect

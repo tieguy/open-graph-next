@@ -1,0 +1,29 @@
+completion_tokens: 1384
+cost_usd: 0.0092523
+diff_type: unknown
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 89493
+property: P8030
+property_label: military size designation
+rationale: The claim is supported by multiple independent sources that confirm 'escadrille'
+  as a valid military size designation used within the Danish Air Force. The sources
+  provide direct evidence that 'escadrille' is an appropriate term for Eskadrille
+  729.
+rcid: 2540917290
+revid: 2464708541
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://monarchies.fandom.com/wiki/Royal_Danish_Air_Force
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Escadrille
+- provenance: verified
+  supports_claim: true
+  url: https://www.abmc.gov/history/discover-the-history-of-lafayette-escadrille-memorial-cemetery/
+timestamp: '2026-02-21T02:59:14.275033+00:00'
+title: Q138348685
+turns: 8
+value_label: escadrille
+verdict: verified-high

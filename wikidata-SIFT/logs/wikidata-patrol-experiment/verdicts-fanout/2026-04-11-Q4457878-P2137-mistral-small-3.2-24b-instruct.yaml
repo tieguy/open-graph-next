@@ -1,0 +1,22 @@
+completion_tokens: 1065
+cost_usd: 0.0092047625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 99528
+property: P2137
+property_label: total equity
+rationale: The referenced source for the edit could not be fetched due to a timeout
+  error. No independent sources could be found to confirm or deny the new value due
+  to search API issues. Therefore, the edit cannot be verified.
+rcid: 2550547047
+revid: 2473880235
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://static.tinkoff.ru/documents/eng/investor-relations/financial-results/2017/TCS_FSPWC_CY_FY2017.pdf
+timestamp: '2026-04-11T06:47:47.215000+00:00'
+title: Q4457878
+turns: 4
+value_label: null
+verdict: unverifiable

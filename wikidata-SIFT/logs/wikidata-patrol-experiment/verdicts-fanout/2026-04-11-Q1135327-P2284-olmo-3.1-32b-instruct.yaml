@@ -1,0 +1,30 @@
+completion_tokens: 1600
+cost_usd: 0.0037076
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13738
+property: P2284
+property_label: price
+rationale: No credible source supports a Whopper price of '1,000 euro' in Germany.
+  Independent, reputable sources indicate typical Whopper prices in Germany are between
+  €5 and €8. The cited reference for the new value could not be fetched and does not
+  substantiate the claim. Therefore, changing the price to '1,000 euro' is factually
+  incorrect.
+rcid: 2551413015
+revid: 2474715963
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://burgerking-breakfast-menu.com/whopper-menu-prices/
+- provenance: reported
+  supports_claim: false
+  url: https://www.preisvergleich.de/
+- provenance: reported
+  supports_claim: false
+  url: https://www.giga.de/
+timestamp: '2026-04-11T16:56:16.907112+00:00'
+title: Q1135327
+turns: 1
+value_label: null
+verdict: incorrect

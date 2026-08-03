@@ -1,0 +1,36 @@
+completion_tokens: 1961
+cost_usd: 0.0086816375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 85964
+property: P570
+property_label: date of death
+rationale: The old date of death (May 19, 1895) is consistently supported by multiple
+  reliable sources, including Biography.com, New World Encyclopedia, ThoughtCo, Encyclopædia
+  Britannica Online, and Find a Grave. The new date of death (May 25, 2025) is not
+  supported by any of the investigated sources and contradicts the widely accepted
+  date.
+rcid: null
+revid: 2470704977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/writer/jose-marti
+- provenance: verified
+  supports_claim: false
+  url: https://www.newworldencyclopedia.org/entry/Jose_Marti
+- provenance: verified
+  supports_claim: false
+  url: https://www.thoughtco.com/biography-of-jose-marti-2136381
+- provenance: reported
+  supports_claim: false
+  url: Q5375741
+- provenance: reported
+  supports_claim: false
+  url: Q63056
+timestamp: '2026-04-11T08:53:18.456554+00:00'
+title: Q103285
+turns: 4
+value_label: null
+verdict: incorrect

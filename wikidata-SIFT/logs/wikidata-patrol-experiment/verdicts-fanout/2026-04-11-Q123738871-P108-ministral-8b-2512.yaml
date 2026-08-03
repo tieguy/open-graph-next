@@ -1,0 +1,24 @@
+completion_tokens: 1379
+cost_usd: 0.00923928
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 63947
+property: P108
+property_label: employer
+rationale: The edit claims Josh Universe is an employer of the International Biohacking
+  Community (Q125809149), but the referenced sources are unreachable. The only verified
+  source (Fandom wiki) explicitly states Josh Universe is the **founder**, not an
+  employer, of the International Biohacking Community. This contradicts the employer
+  claim and renders it unsupported by independent evidence.
+rcid: 2551432360
+revid: 2474731846
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://space.fandom.com/wiki/Josh_Universe
+timestamp: '2026-04-11T07:31:19.672402+00:00'
+title: Q123738871
+turns: 3
+value_label: International Biohacking Community
+verdict: suspect

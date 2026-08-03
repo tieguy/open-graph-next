@@ -1,0 +1,22 @@
+completion_tokens: 757
+cost_usd: 0.013221718750000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 139013
+property: P348
+property_label: software version identifier
+rationale: The change from "5.1.9" to "9.0.8" is verified by the KiCad blog, which
+  confirms the release of version 9.0.8. The edit reflects the progression of software
+  versions accurately.
+rcid: 2550612239
+revid: 2473943060
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.kicad.org/blog/2026/03/KiCad-9.0.8-Release/
+timestamp: '2026-04-11T10:24:14.524799+00:00'
+title: Q942363
+turns: 4
+value_label: null
+verdict: verified-high

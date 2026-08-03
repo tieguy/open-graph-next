@@ -1,0 +1,32 @@
+completion_tokens: 1597
+cost_usd: 0.020201859999999995
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 76299
+property: P31
+property_label: instance of
+rationale: The claim that Libera Associazione Disabili Imprenditori APS is a nonprofit
+  organization is supported by multiple independent sources describing it as an association
+  dedicated to supporting entrepreneurs with disabilities. The official website (ladiets.org)
+  and secondary news coverage consistently refer to it as an 'associazione', which
+  aligns with the nonprofit classification. However, the primary reference cited (PDF
+  statute) is unverifiable due to access issues, and direct evidence of formal nonprofit
+  registration or statutory documents confirming its nonprofit status was not found.
+rcid: 2540923695
+revid: 2464714594
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ladiets.org/
+- provenance: verified
+  supports_claim: true
+  url: https://www.uisp.it/progetti/pagina/alessandro-cataldo-ti-abbiamo-assunto-perch-sei-disabile
+- provenance: verified
+  supports_claim: true
+  url: https://ladiets.org/associati/
+timestamp: '2026-02-20T23:51:09.901563+00:00'
+title: Q138348772
+turns: 9
+value_label: nonprofit organization
+verdict: verified-low

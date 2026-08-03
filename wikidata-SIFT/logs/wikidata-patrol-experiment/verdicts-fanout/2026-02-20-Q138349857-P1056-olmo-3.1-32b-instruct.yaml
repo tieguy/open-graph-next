@@ -1,0 +1,28 @@
+completion_tokens: 1010
+cost_usd: 0.0033948
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13944
+property: P1056
+property_label: product or material produced
+rationale: The term 'felling' refers to the process of cutting down a tree and is
+  not a product or material produced by a tree service company. MacNeela's Tree Service
+  official website and independent search results describe standard services such
+  as tree removal, trimming, and stump grinding, but do not list 'felling' as a product
+  or output. Therefore, assigning 'felling' to property P1056 (product or material
+  produced) is likely incorrect.
+rcid: 2540970108
+revid: 2464757433
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://macneelastreeservicenc.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=MacNeela's+Tree+Service+felling
+timestamp: '2026-02-20T03:26:56.133592+00:00'
+title: Q138349857
+turns: 2
+value_label: felling
+verdict: suspect

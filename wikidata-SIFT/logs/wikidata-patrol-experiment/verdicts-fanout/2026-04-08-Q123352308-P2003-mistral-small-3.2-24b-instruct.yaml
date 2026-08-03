@@ -1,0 +1,28 @@
+completion_tokens: 819
+cost_usd: 0.00161384
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22667
+property: P2003
+property_label: Instagram username
+rationale: No independent sources were found to confirm or deny the Instagram username
+  'giannamariella' for Mariella Tripke. The added reference does not provide sufficient
+  evidence to support the claim.
+rcid: 2550352161
+revid: 2473690906
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mariella+Tripke+Instagram+giannamariella
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mariella+Tripke+Instagram
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=giannamariella+Instagram
+timestamp: '2026-04-08T18:42:02.997358+00:00'
+title: Q123352308
+turns: 4
+value_label: null
+verdict: unverifiable

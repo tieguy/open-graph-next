@@ -1,0 +1,31 @@
+completion_tokens: 1651
+cost_usd: 0.00467985
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19051
+property: P31
+property_label: instance of
+rationale: The artwork 'The Child’s Bath' by Mary Cassatt is universally recognized
+  as a painting (Q3305213) based on independent sources such as the Art Institute
+  of Chicago’s official page and other reputverified sources. The proposed instance
+  'PIN' (Q10614542) refers to 'Prints, Illustrations, and Novels,' which is incorrect
+  for this artwork. The cited reference (English Wikipedia) is invalid for Wikidata
+  due to circular citation. Therefore, the edit is wrong.
+rcid: null
+revid: 2471525372
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.artic.edu/artworks/111442/the-child-s-bath
+- provenance: verified
+  supports_claim: false
+  url: http://www.artic.edu/aic/collections/artwork/111442
+- provenance: verified
+  supports_claim: false
+  url: https://shelbeeontheedge.com/style-imitating-art-the-childs-bath-by-mary-cassatt/
+timestamp: '2026-04-10T07:30:08.037405+00:00'
+title: Q3172226
+turns: 1
+value_label: PIN
+verdict: incorrect

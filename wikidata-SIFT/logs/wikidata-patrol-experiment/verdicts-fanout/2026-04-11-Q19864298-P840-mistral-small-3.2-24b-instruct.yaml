@@ -1,0 +1,22 @@
+completion_tokens: 955
+cost_usd: 0.0038617875
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37895
+property: P840
+property_label: narrative location
+rationale: 'The plot summary from the Alchetron page confirms that New York City is
+  a narrative location for "Looney Tunes: Rabbits Run." The description of Lola Bunny''s
+  activities in New York City provides strong evidence supporting the claim.'
+rcid: 2550868201
+revid: 2474191667
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://alchetron.com/Looney-Tunes:-Rabbits-Run
+timestamp: '2026-04-11T11:09:52.009585+00:00'
+title: Q19864298
+turns: 3
+value_label: New York City
+verdict: verified-high

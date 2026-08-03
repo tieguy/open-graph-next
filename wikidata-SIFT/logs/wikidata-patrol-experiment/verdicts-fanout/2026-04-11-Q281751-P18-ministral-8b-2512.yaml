@@ -1,0 +1,25 @@
+completion_tokens: 1910
+cost_usd: 0.00353265
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40739
+property: P18
+property_label: image
+rationale: The image 'Tortilla de Patatas (Corte transversal).jpg' is a legitimate
+  and widely used representation of a Spanish omelette, as confirmed by its presence
+  on Wikimedia Commons and usage across multiple Wikipedia language editions. However,
+  the removed Wikidata claim lacked any references, which is a critical deficiency
+  for image claims. Without proper sourcing or justification for removal, the edit
+  appears questionable.
+rcid: null
+revid: 2472545443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Tortilla_de_Patatas_(Corte_transversal).jpg
+timestamp: '2026-04-11T18:01:34.170298+00:00'
+title: Q281751
+turns: 5
+value_label: null
+verdict: suspect

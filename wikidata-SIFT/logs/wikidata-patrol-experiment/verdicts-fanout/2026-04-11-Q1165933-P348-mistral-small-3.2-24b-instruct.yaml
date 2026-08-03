@@ -1,0 +1,25 @@
+completion_tokens: 622
+cost_usd: 0.016543956250000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 175894
+property: P348
+property_label: software version identifier
+rationale: The reference URLs for both versions 20.08.1 and 25.12.0 confirm that these
+  are valid releases of Okular. The change from 20.08.1 to 25.12.0 is supported by
+  the evidence from the official KDE repositories.
+rcid: 2551023227
+revid: 2474340618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://invent.kde.org/graphics/okular/-/tags/v20.08.1
+- provenance: verified
+  supports_claim: true
+  url: https://invent.kde.org/graphics/okular/-/tags/v25.12.0
+timestamp: '2026-04-11T08:10:56.040615+00:00'
+title: Q1165933
+turns: 5
+value_label: null
+verdict: verified-high

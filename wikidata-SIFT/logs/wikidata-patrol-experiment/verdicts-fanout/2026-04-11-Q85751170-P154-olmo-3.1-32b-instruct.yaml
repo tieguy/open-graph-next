@@ -1,0 +1,23 @@
+completion_tokens: 1399
+cost_usd: 0.0029892
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10749
+property: P154
+property_label: logo image
+rationale: The previously used logo image was not confirmed as the official logo of
+  Center for Telematics. The official website displays a different branded logo, and
+  the previous claim lacked a reliable reference. Therefore, the removal of the image
+  is justified.
+rcid: 2551390921
+revid: 2474695277
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.telematik-zentrum.de
+timestamp: '2026-04-11T15:39:04.220984+00:00'
+title: Q85751170
+turns: 1
+value_label: null
+verdict: verified-high

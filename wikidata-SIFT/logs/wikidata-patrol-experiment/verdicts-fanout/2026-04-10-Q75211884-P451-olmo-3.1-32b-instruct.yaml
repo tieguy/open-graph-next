@@ -1,0 +1,29 @@
+completion_tokens: 2091
+cost_usd: 0.0063414
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25434
+property: P451
+property_label: unmarried partner
+rationale: Multiple independent, verified sources confirm that Nicki Nicole and Trueno
+  ended their romantic relationship in early 2023, which predates the March 2024 edit
+  that removed Trueno as her 'unmarried partner.' Therefore, the removal is factually
+  correct and well-supported by reliable evidence.
+rcid: 2551416214
+revid: 2474718576
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.billboard.com/espanol/musica/nicki-nicole-como-esta-alcanzando-globalizacion-entrevista-portada-billboard-1235634814/
+- provenance: verified
+  supports_claim: true
+  url: https://www.billboard.com/espanol/musica/peso-pluma-reemplazado-por-ex-novio-de-nicki-nicole-trueno-17400.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.rollingstone.com/music/music-features/nicki-nicole-trueno-musicians-on-musicians-1234614274/
+timestamp: '2026-04-10T13:27:31.176779+00:00'
+title: Q75211884
+turns: 1
+value_label: Trueno
+verdict: verified-high

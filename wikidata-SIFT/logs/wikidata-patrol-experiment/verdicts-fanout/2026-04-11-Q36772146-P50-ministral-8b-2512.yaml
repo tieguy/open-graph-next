@@ -1,0 +1,31 @@
+completion_tokens: 2601
+cost_usd: 0.02776221
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 232740
+property: P50
+property_label: author
+rationale: 'The edit incorrectly changes the author from Zehra Aycan (Q88682995) to
+  Prof. Dr. Cengiz Kara (Q138745982) for the article ''Diabetes care, glycemic control,
+  complications, and concomitant autoimmune diseases in children with type 1 diabetes
+  in Turkey: a multicenter study''. The cited source (PMC/PubMed) and the Wikidata
+  author list (P2093) confirm Zehra Aycan as the correct author. No evidence supports
+  Prof. Dr. Cengiz Kara''s authorship for this article.'
+rcid: 2550941699
+revid: 2474262095
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC3628388/
+- provenance: verified
+  supports_claim: false
+  url: https://pubmed.ncbi.nlm.nih.gov/23419424/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Special:EntityData/Q36772146#P2093
+timestamp: '2026-04-11T16:36:12.198538+00:00'
+title: Q36772146
+turns: 9
+value_label: Prof. Dr. Cengiz Kara
+verdict: incorrect

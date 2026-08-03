@@ -1,0 +1,22 @@
+completion_tokens: 552
+cost_usd: 0.00665465
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 130885
+property: P291
+property_label: place of publication
+rationale: Despite conducting multiple web searches with various queries related to
+  Mein Kampf's publication history, no reliable sources were found to confirm that
+  'ward' is a correct publication location. No references with verifiable content
+  were located, and no precedent exists in the item's existing references that supports
+  this change. Therefore, there is insufficient evidence to verify or falsify the
+  claim.
+rcid: 2550422718
+revid: 2473759966
+sources: []
+timestamp: '2026-04-07T08:56:32.543426+00:00'
+title: Q48244
+turns: 15
+value_label: ward
+verdict: unverifiable

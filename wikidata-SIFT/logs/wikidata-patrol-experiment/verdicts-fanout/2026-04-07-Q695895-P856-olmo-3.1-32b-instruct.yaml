@@ -1,0 +1,24 @@
+completion_tokens: 1373
+cost_usd: 0.0176398
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 84080
+property: P856
+property_label: official website
+rationale: The new URL http://www.jta-okinawa.com is not supported by any authoritative
+  or independent source as the official website of Urasoe. The city's official municipal
+  website (https://www.city.urasoe.lg.jp/) does not mention or redirect to jta-okinawa.com,
+  and there is no evidence of a website migration to that domain. The change appears
+  to be unsupported and likely incorrect.
+rcid: null
+revid: 2471370372
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.urasoe.lg.jp/
+timestamp: '2026-04-07T04:01:38.234046+00:00'
+title: Q695895
+turns: 11
+value_label: null
+verdict: suspect

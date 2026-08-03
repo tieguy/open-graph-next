@@ -1,0 +1,31 @@
+completion_tokens: 695
+cost_usd: 0.006487649999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 126973
+property: P856
+property_label: official website
+rationale: The edit changes the official website from https://www.town.aridagawa.lg.jp/
+  to https://www.aerok.com/. Attempts to access the new URL resulted in HTTP 403 Forbidden,
+  and attempts to access the old URL also failed initially before a working version
+  was found via web_fetch showing a generic government website. However, the new URL
+  was never verified to actually represent the official site of Aridagawa. Multiple
+  searches for the town's official website yielded no authoritative confirmation that
+  aerok.com is the correct website. The investigation was unable to confirm either
+  URL as definitively matching the municipal government's official site, making it
+  impossible to verify if the change was correct.
+rcid: 2551409955
+revid: 2474713170
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.aerok.com/
+- provenance: verified
+  supports_claim: false
+  url: http://www.town.aridagawa.lg.jp/
+timestamp: '2026-04-07T10:15:10.622674+00:00'
+title: Q1345889
+turns: 15
+value_label: null
+verdict: unverifiable

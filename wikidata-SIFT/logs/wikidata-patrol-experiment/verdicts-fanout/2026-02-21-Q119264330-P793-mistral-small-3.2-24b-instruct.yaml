@@ -1,0 +1,25 @@
+completion_tokens: 1513
+cost_usd: 0.015379775
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 153703
+property: P793
+property_label: significant event
+rationale: The claim is supported by direct reference from the Art UK website and
+  corroborated by the history of St Peter's College, both of which confirm that the
+  artwork was a gift from Lord Nuffield.
+rcid: 2540920003
+revid: 2464711065
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+- provenance: verified
+  supports_claim: true
+  url: https://www.spc.ox.ac.uk/about/history
+timestamp: '2026-02-21T01:21:26.840101+00:00'
+title: Q119264330
+turns: 12
+value_label: gift
+verdict: verified-high

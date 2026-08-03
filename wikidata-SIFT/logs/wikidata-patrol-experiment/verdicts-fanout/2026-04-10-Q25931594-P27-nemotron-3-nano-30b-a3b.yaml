@@ -1,0 +1,9 @@
+model: nvidia/nemotron-3-nano-30b-a3b
+rationale: null
+rcid: 2551044304
+revid: 2474361066
+sources: []
+timeout: true
+timestamp: '2026-04-10T12:08:43.585932+00:00'
+title: Q25931594
+verdict: null

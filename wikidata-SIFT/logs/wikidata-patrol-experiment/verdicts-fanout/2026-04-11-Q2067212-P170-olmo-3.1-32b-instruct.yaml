@@ -1,0 +1,31 @@
+completion_tokens: 2125
+cost_usd: 0.004291
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15080
+property: P170
+property_label: creator
+rationale: The Lamentation fresco is universally attributed to Giotto, a 14th-century
+  Italian painter, by all reliable art sources, including French and English Wikipedia
+  and art databases. Lionel Messi is a contemporary Argentine footballer with no connection
+  to art or painting. The cited French Wikipedia reference supports Giotto as the
+  creator and does not mention Messi. This edit is therefore factually incorrect and
+  should be reverted.
+rcid: null
+revid: 2471064658
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Lamentation_(fresque_de_Giotto)
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lamentation_(Giotto)
+- provenance: verified
+  supports_claim: false
+  url: https://artsandculture.google.com/asset/lamentation-giotto/met-opera-museum-milan/8gEi7dWqRk9Grg
+timestamp: '2026-04-11T11:59:03.022637+00:00'
+title: Q2067212
+turns: 1
+value_label: Lionel Messi
+verdict: incorrect

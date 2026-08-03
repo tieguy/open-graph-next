@@ -1,0 +1,24 @@
+completion_tokens: 1795
+cost_usd: 0.0032864699999999997
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29536
+property: P856
+property_label: official website
+rationale: The removed HTTP URL (`http://www.town.hanawa.fukushima.jp/`) is still
+  functional and accessible as the official website for Hanawa Town, Fukushima. The
+  edit incorrectly assumed a migration to HTTPS, but no redirect or deprecation of
+  the HTTP version was confirmed. The removal lacks valid justification and contradicts
+  live evidence.
+rcid: 2550767195
+revid: 2474093010
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.hanawa.fukushima.jp/
+timestamp: '2026-04-11T18:31:37.082976+00:00'
+title: Q1205922
+turns: 2
+value_label: null
+verdict: incorrect

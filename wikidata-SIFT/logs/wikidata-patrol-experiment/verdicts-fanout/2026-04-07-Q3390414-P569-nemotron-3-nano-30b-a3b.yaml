@@ -1,0 +1,22 @@
+completion_tokens: 596
+cost_usd: 0.00497835
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 97183
+property: P569
+property_label: date of birth
+rationale: No sources were able to corroborate that Alex González was born on 13 August
+  1999. Multiple web searches for variations of 'Alex González birth date', 'Álex
+  González 1999', 'filmportal.de Alex González', and related queries returned no relevant
+  web pages or filmography entries to confirm the claimed date of birth. Without any
+  verifiable source evidence, the claim cannot be assessed as correct or incorrect,
+  only unverifiable.
+rcid: null
+revid: 2463918541
+sources: []
+timestamp: '2026-04-07T07:55:15.070062+00:00'
+title: Q3390414
+turns: 15
+value_label: null
+verdict: unverifiable

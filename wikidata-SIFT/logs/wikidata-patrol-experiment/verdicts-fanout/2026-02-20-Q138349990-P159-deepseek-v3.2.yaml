@@ -1,0 +1,26 @@
+completion_tokens: 882
+cost_usd: 0.030856900000000003
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 96257
+property: P159
+property_label: headquarters location
+rationale: 'The claim that Suchfokus has its headquarters in Cologne is strongly supported
+  by multiple references within the company''s official website. The site repeatedly
+  identifies itself as an ''Online Marketing Agentur Köln'' and explicitly states
+  ''Lokal & regional: Lokal in Köln, skalierbar in DACH.'' It also features a ''Teamfoto
+  — Köln HQ'' section and in its FAQ confirms ''Ja. Wir arbeiten mit Unternehmen in
+  Köln sowohl remote als auch vor Ort.'' The website serves as a primary source for
+  the company''s location and operations.'
+rcid: 2540974153
+revid: 2464761009
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:43:15.347742+00:00'
+title: Q138349990
+turns: 9
+value_label: Cologne
+verdict: verified-high

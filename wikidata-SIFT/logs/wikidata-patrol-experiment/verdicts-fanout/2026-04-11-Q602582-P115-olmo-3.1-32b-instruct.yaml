@@ -1,0 +1,30 @@
+completion_tokens: 2609
+cost_usd: 0.0050378
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17362
+property: P115
+property_label: home venue
+rationale: Multiple independent and primary sources confirm that CD Universidad San
+  Martín de Porres currently plays at Villa Deportiva de la Universidad San Martín
+  de Porres. Neither Wikipedia, Transfermarkt, nor local Peruvian news sources mention
+  'Estadio Alberto Gallardo' as the current home ground. Therefore, changing the home
+  venue to the new value is correct.
+rcid: 2550689816
+revid: 2474018391
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Club_Deportivo_Universidad_de_San_Mart%C3%ADn_de_Porres
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/universidad-san-martin-de-porres/startseite/verein/11622
+- provenance: verified
+  supports_claim: true
+  url: https://www.elpopular.pe/deportes/futbol/club-deportivo-universidad-san-martin-de-porres-juega-en-su-estadio-nuevo-ubicado-en-porres_1_12570136.html
+timestamp: '2026-04-11T12:43:24.502851+00:00'
+title: Q602582
+turns: 1
+value_label: Villa Deportiva de la Universidad San Martín de Porres [es]
+verdict: verified-high

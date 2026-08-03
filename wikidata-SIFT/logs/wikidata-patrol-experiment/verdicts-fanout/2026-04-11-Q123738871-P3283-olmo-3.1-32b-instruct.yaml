@@ -1,0 +1,29 @@
+completion_tokens: 1609
+cost_usd: 0.0064478
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27412
+property: P3283
+property_label: Bandcamp profile ID
+rationale: There is no evidence that the Bandcamp handle 'joshuniverse' belongs to
+  Josh Universe. Independent searches and direct lookups on Bandcamp and other platforms
+  did not find any profile associated with Josh Universe using that handle. The only
+  matching profile found is for an unrelated artist. Therefore, the claim is incorrect.
+rcid: 2551428451
+revid: 2474728701
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bandcamp.com/search?q=josh+universe
+- provenance: verified
+  supports_claim: false
+  url: https://adiosuniverse.bandcamp.com/
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com/
+timestamp: '2026-04-11T07:17:10.049914+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: incorrect

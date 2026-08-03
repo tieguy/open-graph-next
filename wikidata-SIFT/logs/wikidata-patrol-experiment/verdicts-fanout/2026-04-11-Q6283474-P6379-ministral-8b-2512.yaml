@@ -1,0 +1,29 @@
+completion_tokens: 2403
+cost_usd: 0.02120898
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 181877
+property: P6379
+property_label: has works in the collection
+rationale: Both the old and new values for Joseph Glasco's works in the collection
+  (Yale University Art Gallery and Hirshhorn Museum and Sculpture Garden) could not
+  be verified due to blocked access to the referenced URLs. No independent sources
+  were successfully fetched or accessed to confirm or deny the claim. Therefore, the
+  edit cannot be verified based on available evidence.
+rcid: 2550426216
+revid: 2473763457
+sources:
+- provenance: verified
+  summary: URL blocked; cannot verify content.
+  supports_claim: false
+  url: https://artgallery.yale.edu/collections/objects/90072
+- provenance: verified
+  summary: URL blocked; cannot verify content.
+  supports_claim: false
+  url: https://hirshhorn.si.edu/collection/artwork/?edanUrl=edanmdm%3Ahmsg_66.2078
+timestamp: '2026-04-11T18:31:07.365872+00:00'
+title: Q6283474
+turns: 7
+value_label: Hirshhorn Museum and Sculpture Garden
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 1788
+cost_usd: 0.034469
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 25529
+property: P19
+property_label: place of birth
+rationale: Two independent, reliable sources explicitly state that ZedEye (Bobby Mabhena)
+  was born in Johannesburg, Gauteng, not Vereeniging. The Music in Africa biography
+  clarifies that while born in Johannesburg, he was raised in the Vaal Triangle region
+  (which includes Vereeniging). The edit conflates birthplace with upbringing, making
+  the claimed value factually incorrect.
+rcid: 2540934397
+revid: 2464724892
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.musicinafrica.net/directory/zedeye
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/00coRF9xAYoKUyF2CtGmi8
+timestamp: '2026-02-20T18:16:00.383796+00:00'
+title: Q138349093
+turns: 3
+value_label: Vereeniging
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 720
+cost_usd: 0.0056704
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 110528
+property: P570
+property_label: date of death
+rationale: The edit changed Nzingha Mbande's date of death to 17 December 2030, citing
+  Wikipedia reference https://pantheon.world/profile/person/Njinga_of_Ndongo_and_Matamba
+  which failed to fetch with 'requests.sessions.Session.request() got multiple values
+  for keyword argument timeout'. Multiple web searches for death date confirmation
+  returned no results that could verify or contradict the claim. Living person prediction
+  of 2030 death date has no verifiable sources in search results. The cited source
+  could not be retrived or evaluated, and no independent sources confirming or denying
+  the claim were found.
+rcid: null
+revid: 2470777111
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://pantheon.world/profile/person/Njinga_of_Ndongo_and_Matamba
+timestamp: '2026-04-07T06:09:31.630849+00:00'
+title: Q467650
+turns: 15
+value_label: null
+verdict: unverifiable

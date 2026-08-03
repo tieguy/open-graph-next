@@ -1,0 +1,29 @@
+completion_tokens: 2163
+cost_usd: 0.0028191600000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22827
+property: P734
+property_label: family name
+rationale: 'The edit correctly changed the family name from ''Brendon'' to ''Schultz''
+  for Nicholas Brendon (Q434778). The new value ''Schultz'' is supported by the birth
+  name claim (P1477: ''Nicholas Brendon Schultz'') and verified sources such as profilelayers.com
+  and The Hollywood Reporter, which explicitly confirm ''Schultz'' as the family name.
+  The old value ''Brendon'' was not supported by any credible source and appears to
+  be a misattribution. The heuristic reference (P887) is justified and consistent
+  with the verified evidence.'
+rcid: 2551334492
+revid: 2474641066
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://profilelayers.com/nicholas-brendon/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hollywoodreporter.com/tv/tv-news/nicholas-brendon-dead-buffy-the-vampire-slayer-1236543090/
+timestamp: '2026-04-11T07:02:33.498134+00:00'
+title: Q434778
+turns: 1
+value_label: Schultz
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 607
+cost_usd: 0.003006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13209
+property: P19
+property_label: place of birth
+rationale: No verified primary or authoritative source explicitly states that Irina
+  Mazing was born in Odesa. The available sources provide general information about
+  Odesa and confirm it as a recognized place of birth for notable individuals, but
+  do not reference Irina Mazing's birthplace. The claim cannot be confirmed or denied
+  with the current evidence.
+rcid: 2551426232
+revid: 2474726867
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.new-books-in-german.com/recommendations/summer-in-odesa/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Births_in_Odesa
+timestamp: '2026-04-10T11:23:20.745490+00:00'
+title: Q4274528
+turns: 1
+value_label: Odesa
+verdict: unverifiable

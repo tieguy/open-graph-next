@@ -1,0 +1,27 @@
+completion_tokens: 1613
+cost_usd: 0.0034695999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12509
+property: P856
+property_label: official website
+rationale: The official website URL for Jav Wiki remained unchanged in the edit. The
+  only modification was the addition of an archive URL and deprecation of the primary
+  URL, which is a reasonable step for link preservation. However, the edit lacked
+  references or an edit summary justifying the change. The website URL is correct
+  and confirmed by direct fetch and archival source.
+rcid: 2550694820
+revid: 2474023122
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://jav.fandom.com/wiki/Main_Page
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20210622223327/https://jav.fandom.com/wiki/Main_Page
+timestamp: '2026-04-11T15:10:59.324428+00:00'
+title: Q107554181
+turns: 1
+value_label: null
+verdict: verified-low

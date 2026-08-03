@@ -1,0 +1,29 @@
+completion_tokens: 1656
+cost_usd: 0.0035664375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33626
+property: P31
+property_label: instance of
+rationale: Multiple independent sources consistently describe Christopher Thorndyke
+  as a human character. The change from 'fictional human' to 'human' is supported
+  by these sources. The removal of the 'fictional' qualifier is justified as all sources
+  confirm his status as a human character.
+rcid: 2550770084
+revid: 2474095812
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sonic.fandom.com/wiki/Christopher_Thorndyke
+- provenance: verified
+  supports_claim: true
+  url: https://www.deviantart.com/evilgidgit/art/The-Trauma-of-Chris-Thorndyke-in-Sonic-X-676041321
+- provenance: verified
+  supports_claim: true
+  url: https://www.giantbomb.com/christopher-thorndyke/3005-39281/
+timestamp: '2026-04-11T07:07:26.573691+00:00'
+title: Q17634983
+turns: 3
+value_label: human
+verdict: verified-high

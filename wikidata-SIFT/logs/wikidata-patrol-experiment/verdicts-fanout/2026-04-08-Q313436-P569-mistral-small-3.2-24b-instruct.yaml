@@ -1,0 +1,25 @@
+completion_tokens: 702
+cost_usd: 0.006640140000000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 122998
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth from 980 to 2026, which is implausible
+  for a historical figure who died in 1022. No reliable sources support the claim
+  of a birth year of 2026.
+rcid: 2550010063
+revid: 2473358656
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Olof_Skotkonung
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Olaf-I
+timestamp: '2026-04-08T18:58:34.240603+00:00'
+title: Q313436
+turns: 15
+value_label: null
+verdict: incorrect

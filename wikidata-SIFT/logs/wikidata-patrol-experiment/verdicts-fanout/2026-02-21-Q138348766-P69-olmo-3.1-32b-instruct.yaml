@@ -1,0 +1,31 @@
+completion_tokens: 1993
+cost_usd: 0.0089136
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38589
+property: P69
+property_label: educated at
+rationale: The claim that Danny Gaskin was educated at the University of Salford in
+  biomedicine is supported by independent, reliable sources including the University
+  of Salford's alumni publication and bioscientist magazine, which explicitly state
+  he completed a BSc in Biomedical Science at the University of Salford. The cited
+  reference is consistent with the claim but not explicit regarding the degree field.
+  Thus, the claim is supported but the cited source could be improved for specificity.
+rcid: 2540920775
+revid: 2464711803
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://openjournals.salford.ac.uk/bioscientist/article/id/148/
+- provenance: verified
+  supports_claim: true
+  url: https://bioscientistmagazine.wordpress.com/2021/05/10/being-a-biomedical-scientist-danny-gaskin/
+- provenance: verified
+  supports_claim: false
+  url: https://news-archive.salford.ac.uk/news/articles/2018/scientist-danny-is-rising-star-of-nhs.html
+timestamp: '2026-02-21T01:02:06.459798+00:00'
+title: Q138348766
+turns: 6
+value_label: University of Salford
+verdict: verified-low

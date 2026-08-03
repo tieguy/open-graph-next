@@ -1,0 +1,18 @@
+completion_tokens: 194
+cost_usd: 0.0040674125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42263
+property: P4214
+property_label: longest observed lifespan
+rationale: The search for 'naked mole-rat longest observed lifespan' did not return
+  any results, and no sources were fetched during the investigation.
+rcid: 2550579192
+revid: 2473911118
+sources: []
+timestamp: '2026-04-11T13:43:11.096464+00:00'
+title: Q276290
+turns: 4
+value_label: null
+verdict: unverifiable

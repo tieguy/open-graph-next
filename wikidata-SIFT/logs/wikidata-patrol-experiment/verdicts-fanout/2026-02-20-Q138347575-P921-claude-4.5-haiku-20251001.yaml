@@ -1,0 +1,28 @@
+completion_tokens: 1323
+cost_usd: 0.044046
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 37431
+property: P921
+property_label: main subject
+rationale: The cited reference from engage.it (2019-12-09) explicitly supports the
+  claim that economy is a main subject of Money.it by discussing its ranking in the
+  'Business and Finance' category and describing it as a 'financial information website.'
+  This is corroborated by direct examination of Money.it's official homepage, which
+  demonstrates that economy, finance, markets, taxes, and business topics are central
+  to the publication's content and editorial focus.
+rcid: 2540926230
+revid: 2464717000
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.engage.it/media-industry/moneyit-classifica-business-comscore.aspx
+- provenance: verified
+  supports_claim: true
+  url: https://www.money.it
+timestamp: '2026-02-20T22:15:32.996224+00:00'
+title: Q138347575
+turns: 4
+value_label: economy
+verdict: verified-high

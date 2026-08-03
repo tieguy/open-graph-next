@@ -1,0 +1,25 @@
+completion_tokens: 1541
+cost_usd: 0.005223875
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51612
+property: P496
+property_label: ORCID iD
+rationale: The ORCID "0009-0003-5395-3235" is confirmed by Josh Universe's official
+  links page. The qualifiers added (subject named as "Josh Universe" and language
+  of work or name "English") are consistent with the information available.
+rcid: 2551430589
+revid: 2474730362
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.framer.ai/official-links
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0009-0003-5395-3235
+timestamp: '2026-04-11T17:43:03.260508+00:00'
+title: Q123738871
+turns: 2
+value_label: null
+verdict: verified-high

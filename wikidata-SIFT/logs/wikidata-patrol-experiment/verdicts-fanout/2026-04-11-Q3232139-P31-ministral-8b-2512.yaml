@@ -1,0 +1,27 @@
+completion_tokens: 2255
+cost_usd: 0.00654924
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 45759
+property: P31
+property_label: instance of
+rationale: The sources confirm that 'Les Divisions de la Joie' is a DVD containing
+  concert footage, which aligns with the definition of a video album (Q10590726).
+  The Indochine Records product page and the Indoprisme article both describe it as
+  a DVD with concert footage, supporting the change from 'album' to 'video album'.
+  The new classification is accurate and improves the representation of the item.
+rcid: 2551383621
+revid: 2474688215
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://indochinerecords.com/products/les-divisions-de-la-joie-dvd
+- provenance: verified
+  supports_claim: true
+  url: https://indoprisme.com/2020/09/27/les-divisions-de-la-joie-live/
+timestamp: '2026-04-11T08:10:33.327926+00:00'
+title: Q3232139
+turns: 6
+value_label: video album
+verdict: verified-high

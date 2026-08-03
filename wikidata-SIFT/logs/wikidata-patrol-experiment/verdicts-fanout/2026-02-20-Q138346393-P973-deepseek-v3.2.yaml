@@ -1,0 +1,35 @@
+completion_tokens: 1503
+cost_usd: 0.029130689999999997
+diff_type: qualifier_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 142190
+property: P973
+property_label: described at URL
+rationale: The URL https://www.steelexpertwitness.com/about.php is indeed a correct
+  'described at URL' for the SteelExpertWitness item. I verified that this page exists
+  and provides a comprehensive description of SteelExpertWitness as 'a group of steel
+  industry experts' that 'provide technical and commercial evidence to assist with
+  the resolution of steel sector disputes.' The page describes its operation by Metals
+  Consulting International Limited, its founding, services offered, and professional
+  standards. Since P973 'described at URL' requires that the item is described at
+  the given URL, and this about.php page specifically describes the entity in detail,
+  the edit is correct. The page is part of the entity's own website and serves as
+  its official 'about' page.
+rcid: 2540958450
+revid: 2464746572
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.steelexpertwitness.com/about.php
+- provenance: verified
+  supports_claim: true
+  url: http://www.steelexpertwitness.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P973
+timestamp: '2026-02-20T05:34:02.895126+00:00'
+title: Q138346393
+turns: 15
+value_label: null
+verdict: verified-high

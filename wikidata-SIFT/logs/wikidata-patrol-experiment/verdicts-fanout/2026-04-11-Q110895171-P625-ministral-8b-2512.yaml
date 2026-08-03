@@ -1,0 +1,32 @@
+completion_tokens: 2639
+cost_usd: 0.00282048
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28811
+property: P625
+property_label: coordinate location
+rationale: The new coordinate location (33°16'33"N, 35°31'6"E) is nearly identical
+  to the old value (33.276111, 35.518333) and lacks substantive geographic or sourcing
+  justification. The only reference provided (WikiMapia) pertains to Taybeh in Israel,
+  not Taybeh in Lebanon, making it irrelevant. No verified independent sources confirm
+  the new coordinate’s accuracy for the well in Taybeh, Marjeyoun District, Lebanon.
+  The change appears to be a superficial formatting update without evidence of correctness
+  or improvement.
+rcid: 2551393841
+revid: 2474698113
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://trek.zone/en/israel/places/301268/tayibe
+- provenance: verified
+  supports_claim: false
+  url: https://www.andrewlawler.com/where-the-wells-never-go-dry/
+- provenance: verified
+  supports_claim: false
+  url: https://www.seetheholyland.net/taybeh/
+timestamp: '2026-04-11T06:49:46.884966+00:00'
+title: Q110895171
+turns: 3
+value_label: null
+verdict: suspect

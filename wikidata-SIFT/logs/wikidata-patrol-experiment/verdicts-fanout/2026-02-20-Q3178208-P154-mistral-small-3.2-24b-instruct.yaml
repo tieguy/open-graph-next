@@ -1,0 +1,26 @@
+completion_tokens: 489
+cost_usd: 0.0034038000000000002
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34309
+property: P154
+property_label: logo image
+rationale: The logo image for JeuxActu is available on Wikimedia Commons and is in
+  SVG format. The file consists of simple geometric shapes or text and does not meet
+  the threshold of originality needed for copyright protection. This supports the
+  claim that the logo image is correctly identified and ranked.
+rcid: 2540972292
+revid: 2464759478
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:JeuxActu_logo.svg
+- provenance: verified
+  supports_claim: true
+  url: https://www.jeuxactu.com/
+timestamp: '2026-02-20T03:02:19.552484+00:00'
+title: Q3178208
+turns: 5
+value_label: null
+verdict: verified-high

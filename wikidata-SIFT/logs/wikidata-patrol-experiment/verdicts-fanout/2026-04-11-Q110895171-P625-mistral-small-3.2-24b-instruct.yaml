@@ -1,0 +1,35 @@
+completion_tokens: 1991
+cost_usd: 0.0078584375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 78514
+property: P625
+property_label: coordinate location
+rationale: The new coordinate for the ancient well in Taybeh is not supported by the
+  available sources. The reference to WikiMapia is unreachable, and independent sources
+  do not provide specific information about the coordinates. Therefore, the edit to
+  change the coordinate location is suspect.
+rcid: 2551393841
+revid: 2474698113
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wikimapia.org
+- provenance: verified
+  supports_claim: false
+  url: https://trek.zone/en/israel/places/301268/tayibe
+- provenance: verified
+  supports_claim: false
+  url: https://www.andrewlawler.com/where-the-wells-never-go-dry/
+- provenance: verified
+  supports_claim: false
+  url: https://www.seetheholyland.net/taybeh/
+- provenance: verified
+  supports_claim: false
+  url: https://www.openstreetmap.org
+timestamp: '2026-04-11T06:49:58.083659+00:00'
+title: Q110895171
+turns: 9
+value_label: null
+verdict: suspect

@@ -1,0 +1,33 @@
+completion_tokens: 1897
+cost_usd: 0.00475887
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41554
+property: P2031
+property_label: start of work period
+rationale: The claim that Juan Magán's start of work period is 1492 is factually incorrect.
+  Independent sources confirm his career began in the late 2000s (2008-2009), and
+  his birth year (1978) makes the 1492 claim biologically implausible. The sole cited
+  reference (Portuguese Wikipedia) is unreachable, and no credible evidence supports
+  the edit.
+rcid: null
+revid: 2460036669
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://juanmagan.es/biografia/
+- provenance: verified
+  supports_claim: false
+  url: https://www.southsummit.io/leader/juan-magan/
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Juan-magan
+- provenance: reported
+  supports_claim: false
+  url: https://pt.wikipedia.org/w/index.php?title=Juan_Magán&oldid=56002931
+timestamp: '2026-04-10T14:19:14.024128+00:00'
+title: Q3087850
+turns: 3
+value_label: null
+verdict: incorrect

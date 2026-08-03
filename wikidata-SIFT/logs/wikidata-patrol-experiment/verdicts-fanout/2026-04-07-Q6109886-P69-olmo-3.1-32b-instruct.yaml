@@ -1,0 +1,19 @@
+completion_tokens: 622
+cost_usd: 0.0064446
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30357
+property: P69
+property_label: educated at
+rationale: No reliable or independent sources confirm that Roberto Musso attended
+  'Cobach' as an educational institution. The previous value, a known technical school,
+  was replaced by an unverified place name without supporting evidence.
+rcid: 2551400079
+revid: 2474703858
+sources: []
+timestamp: '2026-04-07T13:54:25.288602+00:00'
+title: Q6109886
+turns: 5
+value_label: Cobach
+verdict: suspect

@@ -1,0 +1,32 @@
+completion_tokens: 2132
+cost_usd: 0.0027309
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32580
+property: P31
+property_label: instance of
+rationale: The removed claim that Hizb ut-Tahrir Australia is an instance of a political
+  party (Q7278) is incorrect. Independent sources confirm that Hizb ut-Tahrir is a
+  banned extremist organization, not a legitimate political party. The item's description
+  explicitly states it is a 'terror organisation,' and authoritative sources (e.g.,
+  Australian government ban, CounterExtremism Project) classify it as a radical Islamist
+  movement rather than a political party. The removal of this claim is justified and
+  accurate.
+rcid: 2551442830
+revid: 2474740441
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theconversation.com/explainer-what-is-hizb-ut-tahrir-37963
+- provenance: verified
+  supports_claim: false
+  url: https://www.counterextremism.com/threat/hizb-ut-tahrir
+- provenance: verified
+  supports_claim: false
+  url: https://www.longwarjournal.org/archives/2026/03/australia-bans-hizb-ut-tahrir-under-new-hate-laws.php
+timestamp: '2026-04-11T13:23:26.726335+00:00'
+title: Q19874326
+turns: 3
+value_label: political party
+verdict: verified-high

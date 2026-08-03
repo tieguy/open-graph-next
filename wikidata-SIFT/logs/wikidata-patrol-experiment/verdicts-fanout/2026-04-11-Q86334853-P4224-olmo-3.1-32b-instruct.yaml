@@ -1,0 +1,32 @@
+completion_tokens: 2623
+cost_usd: 0.003876
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11511
+property: P4224
+property_label: category contains
+rationale: Setting P4224 to Q5 ('human') on a category representing a specific group
+  of people is not in line with Wikidata best practices. Official documentation and
+  community discussion recommend using P4224 to link to specific items that belong
+  in the category (e.g., the individual coaches), not to general classes such as 'human'
+  (Q5). There are also no references provided for this claim. Instead, if the category
+  is about humans in general, P31 should be used. This edit therefore misapplies the
+  property.
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:WikiProject_Categories/Documentation/Using_claims_for_categories
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P4224
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata_talk:WikiProject_Categories
+timestamp: '2026-04-11T07:08:17.053409+00:00'
+title: Q86334853
+turns: 1
+value_label: human
+verdict: incorrect

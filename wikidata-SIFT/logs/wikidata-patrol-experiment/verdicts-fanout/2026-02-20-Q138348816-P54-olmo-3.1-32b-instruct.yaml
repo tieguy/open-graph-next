@@ -1,0 +1,24 @@
+completion_tokens: 477
+cost_usd: 0.0031358
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14248
+property: P54
+property_label: member of sports team
+rationale: The primary source referenced on Transfermarkt explicitly lists Felipe
+  Sarra as a player for CD Manchego Ciudad Real B with a contract starting on 01/07/2025.
+  This directly supports the claim that he is a member of that football club for the
+  2025-2026 season. The source is authoritative and current, and the specific timeframe
+  matches the claim.
+rcid: 2540924174
+revid: 2464715047
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.com.ar/felipe-sarra/profil/spieler/1089729
+timestamp: '2026-02-20T23:22:02.533370+00:00'
+title: Q138348816
+turns: 2
+value_label: CD Manchego Ciudad Real
+verdict: verified-high

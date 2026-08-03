@@ -1,0 +1,29 @@
+completion_tokens: 1254
+cost_usd: 0.005984725
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59341
+property: P108
+property_label: employer
+rationale: Multiple independent sources, including Michael Backes' ORCID profile,
+  his profile on the Deutsche Physikalische Gesellschaft (DPG) website, and the University
+  of Oxford's Department of Physics page, confirm his affiliation with North-West
+  University.
+rcid: 2541054580
+revid: 2464836961
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-9326-6400
+- provenance: verified
+  supports_claim: true
+  url: https://www.dpg-physik.de/vereinigungen/fachuebergreifend/ag/agyouleap/members-collection/backes-michael
+- provenance: verified
+  supports_claim: true
+  url: https://www.physics.ox.ac.uk/our-people/backesm
+timestamp: '2026-02-21T04:21:20.379025+00:00'
+title: Q55807313
+turns: 5
+value_label: North-West University
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 16756
+cost_usd: 0.015559370000000001
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 93909
+property: P18
+property_label: image
+rationale: The image file Doc Gynéco.jpg exists on Wikimedia Commons, is listed as
+  used on Wikidata, and has been uploaded by the editor. Its file page provides primary
+  evidence of its existence, format, license, and usage, confirming it is a correct
+  and current image for the entity.
+rcid: 2551341425
+revid: 2474647621
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Doc_Gyn%C3%A9co.jpg
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Doc_Gyn%C3%A9co
+timestamp: '2026-04-10T07:59:07.345347+00:00'
+title: Q1233700
+turns: 7
+value_label: null
+verdict: verified-high

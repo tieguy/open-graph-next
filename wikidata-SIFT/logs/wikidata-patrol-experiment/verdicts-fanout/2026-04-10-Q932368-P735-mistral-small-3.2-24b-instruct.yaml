@@ -1,0 +1,21 @@
+completion_tokens: 916
+cost_usd: 0.0047187374999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47117
+property: P735
+property_label: given name
+rationale: The Google Books source confirms that Rabih az-Zubayr is usually known
+  as Rabah in French, supporting the edit.
+rcid: 2549457072
+revid: 2472822431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://books.google.com/books/about/Rabih_Az_Zubayr.html?id=3I_EMgEACAAJ
+timestamp: '2026-04-10T09:53:47.713901+00:00'
+title: Q932368
+turns: 4
+value_label: Rabah
+verdict: verified-high

@@ -1,0 +1,34 @@
+completion_tokens: 2134
+cost_usd: 0.00315261
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25079
+property: P742
+property_label: pseudonym
+rationale: The edit incorrectly changes the pseudonym from 'Camilo Sexto' (a widely
+  recognized and verified stage name supported by multiple independent sources like
+  Last.fm, AllMusic, and Discogs) to 'El Divo de Alcoy,' which lacks any credible
+  evidence or corroboration in verified sources. The cited reference is unreachable,
+  and no primary or secondary source supports the new value. The old value is well-established,
+  while the new value is unsupported.
+rcid: 2550721498
+revid: 2474049237
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Camilo+Sesto/+wiki
+- provenance: verified
+  supports_claim: false
+  url: https://www.walikali.com/camilo-sesto/
+- provenance: reported
+  supports_claim: true
+  url: https://www.allmusic.com/artist/camilo-sesto-mn0000540139
+- provenance: reported
+  supports_claim: true
+  url: https://www.biography.com/musician/camilo-sesto
+timestamp: '2026-04-11T16:42:28.417968+00:00'
+title: Q1029506
+turns: 1
+value_label: null
+verdict: incorrect

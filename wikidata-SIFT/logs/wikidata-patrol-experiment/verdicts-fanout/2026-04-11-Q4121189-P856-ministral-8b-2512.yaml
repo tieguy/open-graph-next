@@ -1,0 +1,23 @@
+completion_tokens: 1278
+cost_usd: 0.00436833
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40491
+property: P856
+property_label: official website
+rationale: The official website for EuRuKo is indeed `https://euruko.org`, and the
+  content of the website is entirely in English. The qualifier P407 (language of work
+  or name) with the value Q1860 (English) is accurate and justified based on the verified
+  content of the website.
+rcid: 2551412490
+revid: 2474715513
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://euruko.org
+timestamp: '2026-04-11T13:12:38.099445+00:00'
+title: Q4121189
+turns: 3
+value_label: null
+verdict: verified-high

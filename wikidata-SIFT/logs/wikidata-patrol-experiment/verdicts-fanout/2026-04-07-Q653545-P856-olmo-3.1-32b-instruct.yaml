@@ -1,0 +1,24 @@
+completion_tokens: 1231
+cost_usd: 0.0052674
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22644
+property: P856
+property_label: official website
+rationale: The official website for Kitaakita City is https://www.city.kitaakita.akita.jp/,
+  as confirmed by fetching the primary source. The new value, https://www.cathaypacific.com,
+  is the website of an airline and is not related to Kitaakita City. No supporting
+  evidence was found for this change, and the primary source directly contradicts
+  the edit.
+rcid: null
+revid: 2471370125
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.kitaakita.akita.jp/
+timestamp: '2026-04-07T05:53:40.102303+00:00'
+title: Q653545
+turns: 2
+value_label: null
+verdict: incorrect

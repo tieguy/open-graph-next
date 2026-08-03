@@ -1,0 +1,26 @@
+completion_tokens: 1610
+cost_usd: 0.00576036
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42988
+property: P1477
+property_label: birth name
+rationale: The claim that David Attenborough's birth name is 'Marley paella' is incorrect.
+  The added reference is invalid (malformed timestamp) and does not support the claim.
+  Multiple verified and reported sources confirm his birth name is 'David Frederick
+  Attenborough'.
+rcid: 2549922944
+revid: 2473276842
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://davidattenborough.fandom.com/wiki/David_Attenborough
+- provenance: verified
+  supports_claim: false
+  url: http://www.bodleian.ox.ac.uk/news/2015/mar-20
+timestamp: '2026-04-11T11:08:53.744927+00:00'
+title: Q183337
+turns: 1
+value_label: null
+verdict: incorrect

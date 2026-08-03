@@ -1,0 +1,38 @@
+completion_tokens: 2323
+cost_usd: 0.011629849999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 112862
+property: P39
+property_label: position held
+rationale: Multiple independent sources, including the official website of LADI and
+  personal websites, consistently confirm that Alessandro Cataldo is the president
+  of Libera Associazione Disabili Imprenditori. The information is consistent and
+  reliable.
+rcid: 2540927337
+revid: 2464718094
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lanazione.it/arezzo/cronaca/disabili-imprenditori-la-storia-di-368fe989
+- provenance: verified
+  supports_claim: true
+  url: https://italiaeconomy.it/libera-associazione-disabili-imprenditori/
+- provenance: verified
+  supports_claim: true
+  url: https://superando.it/2025/12/17/la-libera-associazione-disabili-imprenditori-ponte-operativo-tra-persone-imprese-e-istituzioni/
+- provenance: verified
+  supports_claim: true
+  url: https://ladiets.org/
+- provenance: verified
+  supports_claim: true
+  url: https://www.alessandrocataldo.it/chi-sono/
+- provenance: verified
+  supports_claim: true
+  url: https://www.uisp.it/nazionale/pagina/disabilit-e-impresa-sociale-alessandro-cataldo-al-pitching-day
+timestamp: '2026-02-20T21:45:02.167071+00:00'
+title: Q138348968
+turns: 14
+value_label: president
+verdict: verified-high

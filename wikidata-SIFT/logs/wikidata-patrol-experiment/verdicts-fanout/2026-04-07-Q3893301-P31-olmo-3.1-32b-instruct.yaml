@@ -1,0 +1,24 @@
+completion_tokens: 1115
+cost_usd: 0.0064352
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28831
+property: P31
+property_label: instance of
+rationale: The edit cites the Italian Wikipedia as a reference, but this is not an
+  acceptable primary source for Wikidata and could not be fetched for verification.
+  No independent, authoritative sources were found to confirm that Q3893301 should
+  be classified as an instance of Panini Group (Q15085475). Therefore, the claim cannot
+  be verified with the available evidence.
+rcid: null
+revid: 2464989926
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://it.wikipedia.org/wiki/Panini_Video
+timestamp: '2026-04-07T07:28:57.469382+00:00'
+title: Q3893301
+turns: 6
+value_label: Panini Group
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1431
+cost_usd: 0.001592975
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13715
+property: P197
+property_label: adjacent station
+rationale: The edit does not change the value of the adjacent station but might involve
+  changes in qualifiers or references. Since the value remains the same and there
+  is no new reference added, the edit does not seem to be an improvement. The Wikipedia
+  page supports the claim, but other sources do not provide specific information about
+  adjacent stations.
+rcid: 2550457912
+revid: 2473794392
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Otomo_Station
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan-travel.com/train/ofunato-line/
+- provenance: verified
+  supports_claim: false
+  url: https://www.jreast.co.jp/e/stations/
+timestamp: '2026-04-11T05:54:36.630561+00:00'
+title: Q7108986
+turns: 1
+value_label: Nishishita Station
+verdict: unverifiable

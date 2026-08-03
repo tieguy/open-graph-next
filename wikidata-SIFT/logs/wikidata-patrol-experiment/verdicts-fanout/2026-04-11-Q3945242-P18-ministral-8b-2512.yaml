@@ -1,0 +1,31 @@
+completion_tokens: 2066
+cost_usd: 0.00180927
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19417
+property: P18
+property_label: image
+rationale: The new image filename ('Ceiling of the Room of the giants in Palazzo Te,
+  Mantua.jpg') is a precise and accurate replacement for the old filename ('Gigants.jpg').
+  The ceiling of the Sala dei Giganti is the most iconic and well-documented feature
+  of the room, as confirmed by multiple verified sources. The old filename was vague
+  and did not specify the ceiling, which is the focal point of the artwork. The change
+  improves the specificity and accuracy of the image claim.
+rcid: null
+revid: 2441473264
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.atlasobscura.com/places/chamber-of-the-giants
+- provenance: verified
+  supports_claim: true
+  url: https://www.centropalazzote.it/en/chamber-of-the-giants/
+- provenance: verified
+  supports_claim: true
+  url: https://www.alamy.com/palazzo-te-palace-sala-dei-giganti-fall-of-the-giants-fresco-mantua-lombardy-italy-europe-image455153316.html
+timestamp: '2026-04-11T17:02:20.571413+00:00'
+title: Q3945242
+turns: 2
+value_label: null
+verdict: verified-high

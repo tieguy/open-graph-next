@@ -1,0 +1,22 @@
+completion_tokens: 833
+cost_usd: 0.0018309799999999998
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26870
+property: P20
+property_label: place of death
+rationale: The edit does not cite any references, and independent searches did not
+  yield any sources confirming the change. The removal of the qualifiers is not supported
+  by any evidence.
+rcid: null
+revid: 2470341038
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.ipsb.nina.gov.pl/a/biografia/antoni-strzelecki-1774-1825-nauczyciel-liceum-w-krzemiencu
+timestamp: '2026-04-07T09:52:07.311212+00:00'
+title: Q96305321
+turns: 5
+value_label: Kremenets
+verdict: unverifiable

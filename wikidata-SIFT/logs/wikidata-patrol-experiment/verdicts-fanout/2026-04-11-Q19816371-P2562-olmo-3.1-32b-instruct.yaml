@@ -1,0 +1,32 @@
+completion_tokens: 3457
+cost_usd: 0.0061674
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20466
+property: P2562
+property_label: married name
+rationale: Maria Vorontsova publicly divorced her husband Jorrit Faassen in 2017,
+  and there is no evidence from reputable independent sources that she adopted a new
+  married name after marrying Yevgeny Nagorny. It is standard practice to revert to
+  one's birth surname after divorce, making the change from 'Мария Владимировна Воронцова'
+  to 'Мария Владимировна' reasonable. However, there is no direct authoritative source
+  in the fetched coverage explicitly stating her current surname, so the evidence
+  is indirect.
+rcid: null
+revid: 2471474532
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/world-europe-62792007
+- provenance: verified
+  supports_claim: true
+  url: https://www.rferl.org/a/putin-relative-nagorny-novatek-murmansk-lng-mikhelson/32950259.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.independent.co.uk/news/world/europe/putin-daughter-maria-vorontsova-b2168116.html
+timestamp: '2026-04-11T07:52:07.220844+00:00'
+title: Q19816371
+turns: 1
+value_label: null
+verdict: verified-low

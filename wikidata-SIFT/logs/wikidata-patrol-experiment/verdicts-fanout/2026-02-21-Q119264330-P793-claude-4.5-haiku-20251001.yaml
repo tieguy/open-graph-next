@@ -1,0 +1,36 @@
+completion_tokens: 2268
+cost_usd: 0.120337
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 108997
+property: P793
+property_label: significant event
+rationale: 'The claim that the painting was transferred via gift from William Morris,
+  1st Viscount Nuffield to St Peter''s College in 1938 is strongly supported by Art
+  UK, the official UK public art collections database. Art UK search results explicitly
+  state ''Acquisition method: gift from Lord Nuffield, 1938'' for accession SPC002.
+  This is corroborated by multiple independent secondary sources (Art Detective platform,
+  art vendors) that consistently report the same provenance information. The reference
+  to Art UK website (Q105003187) is authoritative and appropriate for this type of
+  claim.'
+rcid: 2540920003
+revid: 2464711065
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+- provenance: reported
+  supports_claim: true
+  url: https://artuk.org/artdetective/propose-a-discussion/painting/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+- provenance: reported
+  supports_claim: true
+  url: https://wahooart.com/en/art/oswald-hornby-joseph-birley-christopher-maude-chavasse-1884-1962-founding-f-AQUTAH-en/
+- provenance: reported
+  supports_claim: true
+  url: https://artuk.org/discover/people/chavasse-christopher-41684
+timestamp: '2026-02-21T01:25:00.724319+00:00'
+title: Q119264330
+turns: 9
+value_label: gift
+verdict: verified-high

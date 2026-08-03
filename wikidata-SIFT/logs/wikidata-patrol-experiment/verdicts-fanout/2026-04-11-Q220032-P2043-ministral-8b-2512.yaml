@@ -1,0 +1,29 @@
+completion_tokens: 1639
+cost_usd: 0.00211761
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18674
+property: P2043
+property_label: length
+rationale: The edit changed the length of the Golden Gate (Q220032) from an unsupported
+  value of '+5' to '+2737 metre', which is explicitly confirmed by the official Golden
+  Gate Bridge website (https://www.goldengate.org) as 2,737 meters (including approaches).
+  Multiple independent sources corroborate this measurement, and no credible source
+  supports the old value. The referenced Encyclopædia Britannica Online URL is blocked
+  and could not be verified, but the official source is authoritative and sufficient
+  to justify the edit.
+rcid: 2550897352
+revid: 2474220238
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.goldengate.org/bridge/history-research/statistics-data/design-construction-stats/
+- provenance: verified
+  supports_claim: true
+  url: https://www.nps.gov/places/000/how-long-is-the-golden-gate-bridge.htm
+timestamp: '2026-04-11T05:43:03.961248+00:00'
+title: Q220032
+turns: 1
+value_label: null
+verdict: verified-high

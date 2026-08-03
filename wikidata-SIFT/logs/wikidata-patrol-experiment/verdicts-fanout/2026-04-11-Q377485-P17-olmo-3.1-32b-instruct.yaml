@@ -1,0 +1,27 @@
+completion_tokens: 2351
+cost_usd: 0.0049422
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17658
+property: P17
+property_label: country
+rationale: The new value 'Finnish' is a language, not a country, and is factually
+  incorrect for Mount Sinai, which is located in Egypt. The cited Czech Wikipedia
+  reference and multiple independent sources confirm that Mount Sinai is in Egypt.
+  There is no credible source associating Mount Sinai with Finland or the Finnish
+  language as a country. The edit should be reverted.
+rcid: 2550179591
+revid: 2473523123
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://cs.wikipedia.org/wiki/Sínai
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mount_Sinai
+timestamp: '2026-04-11T07:25:39.802189+00:00'
+title: Q377485
+turns: 1
+value_label: Finnish
+verdict: incorrect

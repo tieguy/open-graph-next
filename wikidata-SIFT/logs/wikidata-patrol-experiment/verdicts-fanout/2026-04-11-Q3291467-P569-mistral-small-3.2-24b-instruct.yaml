@@ -1,0 +1,25 @@
+completion_tokens: 1439
+cost_usd: 0.0052571875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51490
+property: P569
+property_label: date of birth
+rationale: The old value of October 26, 1945, is supported by multiple sources, while
+  the new value of July 26, 1945, is not supported by any sources. Therefore, the
+  edit to change the date of birth is incorrect.
+rcid: null
+revid: 2470983334
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://wikibio.in/marie-andree-leclerc/
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Marie-Andr%C3%A9e_Leclerc
+timestamp: '2026-04-11T18:20:07.698794+00:00'
+title: Q3291467
+turns: 4
+value_label: null
+verdict: incorrect

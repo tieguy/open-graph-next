@@ -1,0 +1,28 @@
+completion_tokens: 1570
+cost_usd: 0.0065526000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28053
+property: P1477
+property_label: birth name
+rationale: The change from the old value with the nonsensical trailing 'hgfghjk' to
+  the correct and standard form of the birth name is supported by independent, authoritative
+  sources. Both the Wikimedia Commons category and the Spanish literary profile page
+  list the birth name as 'María Blanca de la Asunción de los Reyes de los Ríos y Nostench'
+  and do not include the extraneous characters found in the old value, confirming
+  that the correction improves the accuracy of the Wikidata item.
+rcid: null
+revid: 2470780799
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Blanca_de_los_R%C3%ADos
+- provenance: verified
+  supports_claim: true
+  url: https://www.poetasandaluces.com/profile/347/
+timestamp: '2026-04-11T17:05:30.832304+00:00'
+title: Q5729862
+turns: 1
+value_label: null
+verdict: verified-high

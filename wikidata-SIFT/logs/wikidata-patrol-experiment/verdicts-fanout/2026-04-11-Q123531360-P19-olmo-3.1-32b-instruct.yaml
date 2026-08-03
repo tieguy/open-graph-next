@@ -1,0 +1,23 @@
+completion_tokens: 158
+cost_usd: 0.0023574
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11313
+property: P19
+property_label: place of birth
+rationale: The prefetched reference from 'grokipedia.com' explicitly states that Taylor
+  Ann Thompson was born in Los Angeles, California, which supports the P19 (place
+  of birth) claim with a primary source. The text directly references her being 'born
+  and raised in Los Angeles, California,' providing clear verification for the claim.
+rcid: 2550925503
+revid: 2474247102
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Taylor_Ann_Thompson
+timestamp: '2026-04-11T05:45:30.497208+00:00'
+title: Q123531360
+turns: 1
+value_label: Los Angeles
+verdict: verified-high

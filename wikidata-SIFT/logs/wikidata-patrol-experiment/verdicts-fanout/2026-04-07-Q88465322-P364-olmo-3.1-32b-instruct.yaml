@@ -1,0 +1,26 @@
+completion_tokens: 730
+cost_usd: 0.0197396
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 96508
+property: P364
+property_label: original language of film or TV show
+rationale: The only cited source for the claim that 'Arabic' is an original language
+  of the film could not be fetched and verified in this investigation. Multiple independent
+  searches did not yield any source confirming or denying the claim. As a result,
+  the claim cannot be verified with high confidence at this time.
+rcid: null
+revid: 2471382618
+sources:
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.gencat.cat/llengua/cinema/film.html?film=35625
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/The_Man_Who_Sold_His_Skin
+timestamp: '2026-04-07T04:06:03.797820+00:00'
+title: Q88465322
+turns: 8
+value_label: Arabic
+verdict: unverifiable

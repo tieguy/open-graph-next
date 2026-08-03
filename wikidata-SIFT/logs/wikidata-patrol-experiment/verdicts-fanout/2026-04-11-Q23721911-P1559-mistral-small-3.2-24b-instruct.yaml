@@ -1,0 +1,35 @@
+completion_tokens: 2203
+cost_usd: 0.00909376
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 97231
+property: P1559
+property_label: name in native language
+rationale: The old value 'Марина Сергіївна Вязо́вська' is confirmed by multiple reliable
+  sources as the correct name in the native Ukrainian language for Maryna Viazovska.
+  The new value 'DrggМарина Сергіївна Вязо́вська' is not supported by any reliable
+  source and appears to be incorrect. Therefore, the change is not justified.
+rcid: 2549494216
+revid: 2472858663
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://actu.epfl.ch/news/an-epfl-mathematician-is-awarded-a-fields-medal/
+- provenance: verified
+  supports_claim: true
+  url: https://breakthroughprize.org/News/41
+- provenance: verified
+  supports_claim: true
+  url: https://kids.kiddle.co/Maryna_Viazovska
+- provenance: verified
+  supports_claim: true
+  url: https://pantheon.world/profile/person/Maryna_Viazovska
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?hl=ru&user=KntSJpQAAAAJ&view_op=list_works
+timestamp: '2026-04-11T15:33:13.667097+00:00'
+title: Q23721911
+turns: 4
+value_label: null
+verdict: suspect

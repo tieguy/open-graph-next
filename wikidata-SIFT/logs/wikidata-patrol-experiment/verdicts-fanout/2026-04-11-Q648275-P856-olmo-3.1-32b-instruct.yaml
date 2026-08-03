@@ -1,0 +1,31 @@
+completion_tokens: 1439
+cost_usd: 0.00477
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19533
+property: P856
+property_label: official website
+rationale: The old value (https://www.city.iwakura.aichi.jp/) is confirmed as the
+  official website of Iwakura City by the city's official website and independent
+  sources. The new value (https://www.ana.co.jp/) is the official website of ANA Co.,
+  Ltd., an airline, and is not related to Iwakura City. There is no evidence supporting
+  the new value as the official website for Iwakura. Therefore, the change is incorrect
+  and should be reverted.
+rcid: null
+revid: 2471370294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.iwakura.aichi.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ana.co.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/岩倉市
+timestamp: '2026-04-11T15:32:25.164636+00:00'
+title: Q648275
+turns: 1
+value_label: null
+verdict: incorrect

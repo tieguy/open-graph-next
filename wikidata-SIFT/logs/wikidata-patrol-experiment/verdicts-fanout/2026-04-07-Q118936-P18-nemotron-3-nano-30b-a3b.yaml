@@ -1,0 +1,27 @@
+completion_tokens: 810
+cost_usd: 0.013644449999999999
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 269649
+property: P18
+property_label: image
+rationale: No verifiable sources were found supporting or contradicting the removed
+  image claim. Extensive search for 'Rafael Alberti 1978-10-01.jpg' across Wikimedia
+  Commons, Wikipedia, general web indices, and related academic sources returned no
+  relevant results. The deleted claim cited English Wikipedia (Q328) as its source,
+  but Wikipedia itself declines the request (500 error), preventing verification of
+  its content. Without any fetchable or verified source material, the claim cannot
+  be confirmed or falsified through independent corroboration, fitting the 'unverifiable'
+  category per instructions.
+rcid: 2549843942
+revid: 2473200548
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikipedia.org
+timestamp: '2026-04-07T07:22:01.031606+00:00'
+title: Q118936
+turns: 15
+value_label: null
+verdict: unverifiable

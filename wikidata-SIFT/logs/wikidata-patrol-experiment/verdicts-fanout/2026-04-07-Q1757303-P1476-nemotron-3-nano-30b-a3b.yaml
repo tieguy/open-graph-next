@@ -1,0 +1,19 @@
+completion_tokens: 560
+cost_usd: 0.004895600000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 95672
+property: P1476
+property_label: title
+rationale: No references were found for the edit; web searches for 'It's Not Me It's
+  You' track listing, lyrics, or official discography returned no matches to confirm
+  or deny the claim about the title.
+rcid: 2550745424
+revid: 2474071948
+sources: []
+timestamp: '2026-04-07T11:48:48.428870+00:00'
+title: Q1757303
+turns: 15
+value_label: null
+verdict: unverifiable

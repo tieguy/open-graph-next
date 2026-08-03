@@ -1,0 +1,28 @@
+completion_tokens: 1252
+cost_usd: 0.0065256
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28872
+property: P31
+property_label: instance of
+rationale: Yosemite Sam is a fictional character from the Looney Tunes universe, depicted
+  as an anthropomorphic human but not a biological Homo sapiens. The Wikidata class
+  'human' (Q138751605) refers to the biological species, whereas 'fictional human'
+  (Q15632617) is intended for human characters that exist only in fiction. Multiple
+  searches did not yield authoritative sources classifying Yosemite Sam as a biological
+  human. Therefore, the change from 'fictional human' to 'human' is incorrect.
+rcid: null
+revid: 2474182189
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Yosemite_Sam
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Looney_Tunes
+timestamp: '2026-04-07T05:57:14.718191+00:00'
+title: Q1248567
+turns: 4
+value_label: human
+verdict: incorrect

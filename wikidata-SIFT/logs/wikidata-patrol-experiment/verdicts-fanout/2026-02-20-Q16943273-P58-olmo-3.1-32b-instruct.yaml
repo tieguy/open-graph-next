@@ -1,0 +1,26 @@
+completion_tokens: 1093
+cost_usd: 0.0036604000000000003
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15023
+property: P58
+property_label: screenwriter
+rationale: The only reference provided for the screenwriter claim is an IMDb ID, but
+  the IMDb page could not be accessed due to domain blocking. No independent sources
+  confirm that Q28389 is a screenwriter for Q16943273. Therefore, the claim cannot
+  be verified with the available evidence.
+rcid: 2540946575
+revid: 2464735791
+sources:
+- provenance: unreachable (blocked domain)
+  supports_claim: false
+  url: https://www.imdb.com/name/nm175566/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2021/04
+timestamp: '2026-02-20T11:44:37.931027+00:00'
+title: Q16943273
+turns: 3
+value_label: screenwriter
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 2160
+cost_usd: 0.004318
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15110
+property: P1416
+property_label: affiliation
+rationale: The removal of 'AfD Freising-Pfaffenhofen' as an affiliation for Corona
+  Rebellen appears unjustified. An independent, verified local source reports ongoing
+  connections between the AfD Freising-Pfaffenhofen and Corona Rebellen activities
+  in Freising, supporting the original affiliation claim. No evidence of a formal
+  disaffiliation or change in status was found.
+rcid: 2551215744
+revid: 2474528736
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://deinfreising.de/politik/die-verstrickung-der-freisinger-afd-mit-den-querdenkern-und-den-corona-rebellen-freising/
+- provenance: reported
+  supports_claim: null
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-10T08:38:42.069946+00:00'
+title: Q107646877
+turns: 1
+value_label: AfD Freising-Pfaffenhofen
+verdict: incorrect

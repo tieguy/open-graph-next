@@ -1,0 +1,23 @@
+completion_tokens: 1102
+cost_usd: 0.0146818
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 70103
+property: P1412
+property_label: languages spoken, written or signed
+rationale: No independent sources indicate that Josep Maria Guzmán speaks Uzbek. The
+  edit lacks citations and web searches, as well as attempted fetches of his biography,
+  found no mention of Uzbek or any other language spoken by him. The claim is therefore
+  incorrect.
+rcid: 2550211245
+revid: 2473553870
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Josep_Maria_Guzm%C3%A1n
+timestamp: '2026-04-07T10:38:31.280110+00:00'
+title: Q1991498
+turns: 10
+value_label: Uzbek
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 1497
+cost_usd: 0.00727446
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 129918
+property: P170
+property_label: creator
+rationale: The edit changing the creator of 'Lamentation' from Giotto to Lionel Messi
+  is incorrect. Giotto is a well-known Renaissance painter, and there is no credible
+  evidence linking Lionel Messi to this artwork. The reference to French Wikipedia
+  is not reliable for this verification.
+rcid: null
+revid: 2471064658
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Lamentation_(Giotto)
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/biography/Giotto-di-Bondone
+timestamp: '2026-04-11T11:58:43.371999+00:00'
+title: Q2067212
+turns: 15
+value_label: Lionel Messi
+verdict: incorrect

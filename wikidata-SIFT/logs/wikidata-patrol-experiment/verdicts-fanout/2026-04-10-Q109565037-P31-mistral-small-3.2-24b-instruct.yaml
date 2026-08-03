@@ -1,0 +1,30 @@
+completion_tokens: 1251
+cost_usd: 0.00549831875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 57785
+property: P31
+property_label: instance of
+rationale: 'Multiple sources confirm that Malik is a human character in the "Space
+  Jam: A New Legacy" universe. The TV Tropes page describes him as a human character,
+  the Wikiquote page includes a quote from Malik that suggests he is human, and the
+  Warner Bros. Entertainment Wiki describes him as a childhood friend of LeBron James,
+  implying he is a human character.'
+rcid: 2551000260
+revid: 2474318432
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Characters/SpaceJamANewLegacy
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikiquote.org/wiki/Space_Jam:_A_New_Legacy
+- provenance: verified
+  supports_claim: true
+  url: https://warnerbros.fandom.com/wiki/Malik
+timestamp: '2026-04-10T13:32:11.720007+00:00'
+title: Q109565037
+turns: 5
+value_label: human
+verdict: verified-high

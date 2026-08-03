@@ -1,0 +1,34 @@
+completion_tokens: 876
+cost_usd: 0.0053359
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 103214
+property: P2044
+property_label: elevation above sea level
+rationale: Despite extensive search efforts across multiple query variations in English,
+  Spanish, Catalan, and targeted academic domains, no independent sources confirming
+  or denying the 2,000,000 metre elevation for Abric Romaní were found. No references
+  cited in the edit were accessible due to blocked domains, and neither web_search
+  nor web_fetch yielded any usable results during this investigation. The absence
+  of independently verifiable information means the claim cannot be confirmed or refuted.
+rcid: 2550238829
+revid: 2473580242
+sources:
+- provenance: blocked
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Abric_Romani
+- provenance: blocked
+  supports_claim: null
+  url: https://es.wikipedia.org/wiki/Abric_Romani
+- provenance: blocked
+  supports_claim: null
+  url: https://ca.wikipedia.org/wiki/Abric_Romani
+- provenance: reported
+  supports_claim: null
+  url: https://patrimonicultural.diba.cat/element/abric-romani
+timestamp: '2026-04-07T10:21:02.813378+00:00'
+title: Q331404
+turns: 15
+value_label: null
+verdict: unverifiable

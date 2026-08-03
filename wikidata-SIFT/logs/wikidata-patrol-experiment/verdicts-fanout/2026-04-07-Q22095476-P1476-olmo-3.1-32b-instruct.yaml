@@ -1,0 +1,30 @@
+completion_tokens: 926
+cost_usd: 0.0114802
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 54623
+property: P1476
+property_label: title
+rationale: No official or independent source was found that confirms the title 'Megaknight
+  royale' as the current or intended title for the game previously known as 'Clash
+  Royale'. The official Clash Royale website and all tracked communications continue
+  to use 'Clash Royale' as the title. Without corroborating evidence from the rights
+  holder or reliable third parties, the claim cannot be verified.
+rcid: null
+revid: 2470970015
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://clashroyale.com
+- provenance: reported
+  supports_claim: false
+  url: https://twitter.com/search?q=supercell%20Megaknight%20royale&src=typed_query
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/ClashRoyale/search?q=Megaknight%20royale
+timestamp: '2026-04-07T06:16:08.387008+00:00'
+title: Q22095476
+turns: 4
+value_label: null
+verdict: unverifiable

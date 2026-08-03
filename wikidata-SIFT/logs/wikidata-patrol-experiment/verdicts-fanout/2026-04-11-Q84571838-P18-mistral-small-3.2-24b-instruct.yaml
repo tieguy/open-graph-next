@@ -1,0 +1,28 @@
+completion_tokens: 1286
+cost_usd: 0.0039409812499999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39904
+property: P18
+property_label: image
+rationale: The edit does not cite any references for either the old or new image.
+  Independent searches did not yield specific results confirming the new image's validity.
+  Without supporting evidence, the correctness of the change cannot be verified.
+rcid: null
+revid: 2470506374
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/leo-gassmann
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Leo+Gassmann/+images
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCH6ZEmuuVNz1fsVAyfa4lsQ
+timestamp: '2026-04-11T18:25:24.527811+00:00'
+title: Q84571838
+turns: 4
+value_label: null
+verdict: unverifiable

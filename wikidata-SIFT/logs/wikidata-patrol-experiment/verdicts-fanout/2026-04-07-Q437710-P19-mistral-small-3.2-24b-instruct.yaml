@@ -1,0 +1,33 @@
+completion_tokens: 644
+cost_usd: 0.006672890000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68580
+property: P19
+property_label: place of birth
+rationale: The investigation did not yield any verified sources that confirm or deny
+  the claim about Isabel Preysler's place of birth being San Roque. The Wikipedia
+  page and other potential sources were either blocked or did not provide relevant
+  information. Without accessible and verifiable sources, it is not possible to confirm
+  the accuracy of the claim.
+rcid: 2550296081
+revid: 2473636089
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Isabel_Preysler
+- provenance: verified
+  supports_claim: false
+  url: https://www.geni.com/people/Isabel-Preysler/6000000012562010000
+- provenance: verified
+  supports_claim: false
+  url: https://www.clara.es/celebrities/asi-fue-agitada-llegada-isabel-preysler-a-espana-60-fatal-galan-ambicion-y-mucho-poder-seduccion_32185
+- provenance: verified
+  supports_claim: false
+  url: https://www.vanitatis.elconfidencial.com/real-life/2018-05-17/isabel-preysler-biografia_1578713/
+timestamp: '2026-04-07T11:01:37.787104+00:00'
+title: Q437710
+turns: 7
+value_label: San Roque
+verdict: unverifiable

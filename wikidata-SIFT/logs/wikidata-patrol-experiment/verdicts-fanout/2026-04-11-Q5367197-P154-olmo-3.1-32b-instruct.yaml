@@ -1,0 +1,28 @@
+completion_tokens: 2289
+cost_usd: 0.0036293999999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11280
+property: P154
+property_label: logo image
+rationale: The old value was demonstrably incorrect, as the image is associated with
+  a different organization. The new value is not confirmed by any authoritative or
+  primary source, and the cited Wikipedia reference does not support either value.
+  Although the organization uses a logo on its official website, it does not use the
+  exact filename claimed. Therefore, the edit lacks proper sourcing and should be
+  considered suspicious.
+rcid: 2550346933
+revid: 2473685794
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Body_%26_Brain
+- provenance: verified
+  supports_claim: false
+  url: https://www.bodynbrain.com/
+timestamp: '2026-04-11T14:41:52.356072+00:00'
+title: Q5367197
+turns: 1
+value_label: null
+verdict: suspect

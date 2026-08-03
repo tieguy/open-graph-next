@@ -1,0 +1,21 @@
+completion_tokens: 1205
+cost_usd: 0.0048966
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20868
+property: P279
+property_label: subclass of
+rationale: The edit changes the P279 (subclass of) claim for 'Maduro-Kangeanic' from
+  'Malayo-Sumbawan' to 'Javanic'. The only cited source could not be accessed or verified
+  during the investigation. Major linguistic databases (Glottolog, WALS) could not
+  be fetched or confirmed in this session. Without independent, authoritative confirmation,
+  the correctness of the change cannot be established.
+rcid: null
+revid: 2433618650
+sources: []
+timestamp: '2026-04-07T07:24:57.160606+00:00'
+title: Q117085830
+turns: 4
+value_label: Javanic
+verdict: unverifiable

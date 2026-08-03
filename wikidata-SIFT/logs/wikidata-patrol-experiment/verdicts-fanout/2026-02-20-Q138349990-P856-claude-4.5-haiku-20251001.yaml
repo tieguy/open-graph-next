@@ -1,0 +1,25 @@
+completion_tokens: 1289
+cost_usd: 0.036125
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 29680
+property: P856
+property_label: official website
+rationale: Direct access to https://suchfokus.de confirms it is the official website
+  of SuchFokus, a digital marketing agency based in Cologne, Germany. The website
+  is comprehensive and professional, containing organization details, founder information,
+  and service documentation. The German language qualifier is appropriate given the
+  site content is entirely in German. Although no references were originally cited,
+  independent verification of the URL itself provides strong confirmation.
+rcid: 2540969601
+revid: 2464756990
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T03:36:39.517625+00:00'
+title: Q138349990
+turns: 3
+value_label: null
+verdict: verified-high

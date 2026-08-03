@@ -1,0 +1,35 @@
+completion_tokens: 335
+cost_usd: 0.0037435999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17713
+property: P2572
+property_label: hashtag
+rationale: 'The new value ''gros paf six seven'' does not correspond to any known
+  or official hashtag associated with the Invictus Games. The Invictus Games use the
+  hashtag #IAMInvictus and related branded hashtags as evidenced by their official
+  website and social media channels. There is no indication that ''gros paf six seven''
+  is an official or widely recognized hashtag for this event. The change removes a
+  relevant and recognizable identifier and replaces it with an unverified string,
+  which is likely incorrect and reduces discoverability and consistency.'
+rcid: 2550521355
+revid: 2473855554
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.invictusgamesfoundation.org/
+- provenance: verified
+  supports_claim: false
+  url: https://www.invictusgamesfoundation.org/news/the-invictus-games-vancouver-whistler-2025-launches-the-shareyouriam-campaign
+- provenance: verified
+  supports_claim: false
+  url: https://www.townandcountrymag.com/society/tradition/a12044088/what-are-the-invictus-games-competition/
+- provenance: reported
+  supports_claim: false
+  url: https://twitter.com/InvictusGames
+timestamp: '2026-04-11T16:02:57.978773+00:00'
+title: Q16987323
+turns: 1
+value_label: null
+verdict: suspect

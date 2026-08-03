@@ -1,0 +1,22 @@
+completion_tokens: 670
+cost_usd: 0.003436
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15170
+property: P569
+property_label: date of birth
+rationale: The primary authoritative source (Brazzers pornstar profile) explicitly
+  states that Alyx Star's date of birth is September 7th, 1998, directly contradicting
+  the new value of 2007-09-07. Therefore, the edit is incorrect and should be reverted.
+rcid: 2551348762
+revid: 2474654651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.brazzers.com/pornstar/75477/alyx-star
+timestamp: '2026-04-07T07:34:59.911570+00:00'
+title: Q115177434
+turns: 2
+value_label: null
+verdict: incorrect

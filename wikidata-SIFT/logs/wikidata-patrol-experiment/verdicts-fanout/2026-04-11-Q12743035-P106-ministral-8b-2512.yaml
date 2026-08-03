@@ -1,0 +1,31 @@
+completion_tokens: 2193
+cost_usd: 0.00283056
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22873
+property: P106
+property_label: occupation
+rationale: The occupation claim for Valentina Rusu-Ciobanu as a painter is strongly
+  supported by multiple verified primary sources, including her official website and
+  HKW Berlin. The new reference URL provided in the edit is unreachable, but this
+  does not invalidate the claim itself, as independent and credible sources confirm
+  her occupation as a painter. The previous claim of sculptor had no references and
+  is unsupported by any credible source.
+rcid: 2550500062
+revid: 2473835443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+timestamp: '2026-04-11T07:06:44.483021+00:00'
+title: Q12743035
+turns: 1
+value_label: painter
+verdict: verified-high

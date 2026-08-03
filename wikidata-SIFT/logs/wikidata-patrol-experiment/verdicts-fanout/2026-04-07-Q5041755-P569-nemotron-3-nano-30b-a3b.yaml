@@ -1,0 +1,23 @@
+completion_tokens: 661
+cost_usd: 0.01585135
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 314383
+property: P569
+property_label: date of birth
+rationale: No verifiable primary or secondary sources were found to confirm Carlos
+  Amorales' birth year. Multiple attempts to locate credible sources (including biography
+  pages, institutional websites, and artist profiles) failed to return content confirming
+  1901 or 1970 as his birth year. The cited references in the edit are inaccessible
+  (prefetch failed with timeout error) or contain only administrative metadata without
+  biographical details. No independent corroboration exists for either proposed birth
+  year.
+rcid: null
+revid: 2465815964
+sources: []
+timestamp: '2026-04-07T11:30:16.875969+00:00'
+title: Q5041755
+turns: 15
+value_label: null
+verdict: unverifiable

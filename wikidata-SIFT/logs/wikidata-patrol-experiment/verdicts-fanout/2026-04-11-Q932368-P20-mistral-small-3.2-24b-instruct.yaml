@@ -1,0 +1,28 @@
+completion_tokens: 2132
+cost_usd: 0.007915387500000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77716
+property: P20
+property_label: place of death
+rationale: The sources consulted do not provide specific information about 'Marah
+  Rabah' as the place of death for Rabih az-Zubayr. Therefore, the claim cannot be
+  verified based on the available evidence.
+rcid: 2549456770
+revid: 2472822126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://medium.com/@HistoryOfMuslims/rabih-az-zubayr-the-muslim-tyrant-who-dared-to-defy-france-britain-and-fell-in-blood-188a86fc21d2
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://talkafricana.com/rabih-az-zubayr-the-african-slave-trader-who-was-beheaded-for-daring-to-fight-against-the-french-colonialist/
+timestamp: '2026-04-11T06:31:19.562912+00:00'
+title: Q932368
+turns: 6
+value_label: Marah Rabah
+verdict: unverifiable

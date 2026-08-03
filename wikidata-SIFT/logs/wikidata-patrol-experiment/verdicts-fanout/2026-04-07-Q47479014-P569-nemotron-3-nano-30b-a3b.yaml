@@ -1,0 +1,25 @@
+completion_tokens: 603
+cost_usd: 0.005063200000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 98852
+property: P569
+property_label: date of birth
+rationale: No verifiable sources could be located to confirm or deny the claim that
+  Laurent Lacasa's date of birth is 28 September 1964. Extensive searches for reliable
+  references (including official sports databases, Olympic records, and reputable
+  biographical sources) yielded no accessible content that could verify this claim.
+  Without any verifiable sources available for review, the claim cannot be confirmed
+  or refuted.
+rcid: null
+revid: 2471461345
+sources:
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T06:19:28.670400+00:00'
+title: Q47479014
+turns: 15
+value_label: null
+verdict: unverifiable

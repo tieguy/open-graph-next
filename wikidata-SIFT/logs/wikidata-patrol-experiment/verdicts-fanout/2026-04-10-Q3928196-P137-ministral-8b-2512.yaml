@@ -1,0 +1,33 @@
+completion_tokens: 2312
+cost_usd: 0.00420534
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38626
+property: P137
+property_label: operator
+rationale: The claim that 'RCA Italiana' is the operator of 'RCA Milano' is contradicted
+  by multiple verified sources. Discogs and other tertiary sources explicitly state
+  that 'RCA Milano' is a subsidiary of 'RCA S.P.A.' or 'RCA Records,' not 'RCA Italiana.'
+  Historical and authoritative sources confirm that 'RCA Italiana' is a distinct entity
+  unrelated to 'RCA Milano.'
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/label/371440-RCA-Milano
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/label/290779-RCA-Italiana-SpA
+- provenance: verified
+  supports_claim: false
+  url: https://www.italianprog.com/l_rca.htm
+- provenance: verified
+  supports_claim: false
+  url: https://artistagraph.com/labels/rca-italiana
+timestamp: '2026-04-10T00:03:30.220833+00:00'
+title: Q3928196
+turns: 4
+value_label: RCA Italiana
+verdict: incorrect

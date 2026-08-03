@@ -1,0 +1,22 @@
+completion_tokens: 639
+cost_usd: 0.0033764999999999997
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 64974
+property: P856
+property_label: official website
+rationale: Heavily branded promotional site with no corporate entity information;
+  contains no details about the former oil company, history, or headquarters that
+  could confirm it represents the former Conoco entity.
+rcid: null
+revid: 2459590480
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.conoco.com
+timestamp: '2026-04-07T07:27:04.955219+00:00'
+title: Q1126518
+turns: 10
+value_label: null
+verdict: unverifiable

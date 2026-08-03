@@ -1,0 +1,28 @@
+completion_tokens: 752
+cost_usd: 0.01022935
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 201579
+property: P364
+property_label: original language of film or TV show
+rationale: During the investigation, multiple web searches were conducted to verify
+  whether 'Arabic' is correctly listed as the original language of the film 'The Man
+  Who Sold His Skin'. No credible or independent sources confirming this claim were
+  found. The default Wikipedia search result returned a 'blocked_domain' error when
+  attempting to access the English Wikipedia page, which is unsuitable as a reference
+  given Wikipedia's circularity with Wikidata. No primary or secondary sources were
+  successfully retrieved to support the claim that Arabic is the original language.
+  As no verifiable source was obtained to confirm or refute the update, the category
+  is unverifiable.
+rcid: null
+revid: 2471382618
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/The_Man_Who_Sold_His_Skin
+timestamp: '2026-04-07T04:06:44.614942+00:00'
+title: Q88465322
+turns: 15
+value_label: Arabic
+verdict: unverifiable

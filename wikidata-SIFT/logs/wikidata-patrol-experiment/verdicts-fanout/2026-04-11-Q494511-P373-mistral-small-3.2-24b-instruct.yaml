@@ -1,0 +1,28 @@
+completion_tokens: 1416
+cost_usd: 0.0016431437500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13157
+property: P373
+property_label: Commons category
+rationale: The new value 'IUDH98Q9Y8Q7IGYWGIYFIGYUYFD' (Devi Dja) is incorrect and
+  does not support the claim. The old value 'Hindu goddesses' is correct and supported
+  by independent sources.
+rcid: null
+revid: 2470687341
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Devi_Dja
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Devi
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Hindu_goddesses
+timestamp: '2026-04-11T16:31:43.290836+00:00'
+title: Q494511
+turns: 1
+value_label: null
+verdict: incorrect

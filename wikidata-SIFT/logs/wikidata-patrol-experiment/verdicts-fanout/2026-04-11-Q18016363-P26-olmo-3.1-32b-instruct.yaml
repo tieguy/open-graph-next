@@ -1,0 +1,27 @@
+completion_tokens: 1457
+cost_usd: 0.0036654
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13956
+property: P26
+property_label: spouse
+rationale: Independent reliable sources (Wikipedia and Genealogics) confirm that Johan
+  van Gogh's spouse was Anneke van Santen and not Anneke van Gogh. The edit corrected
+  an apparent error in the spouse's name, and the change is supported by evidence
+  from these sources. However, the edit should have included a reference to a reliable
+  source at the time of the change.
+rcid: 2550384550
+revid: 2473722496
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Johan_van_Gogh
+- provenance: reported
+  supports_claim: true
+  url: https://www.genealogics.org/
+timestamp: '2026-04-11T13:35:01.621687+00:00'
+title: Q18016363
+turns: 1
+value_label: Anneke van Santen
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1836
+cost_usd: 0.004899199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18988
+property: P2013
+property_label: Facebook username
+rationale: Multiple independent and primary sources confirm that the correct Facebook
+  username for Nasser Yassin is 'NasDaily'. No reputable or primary source supports
+  'D9yp7d9h8 soup hddup' as his Facebook username. The cited reference for the new
+  value does not mention a Facebook username and thus does not support the change.
+  Therefore, reverting to the previously established username is warranted.
+rcid: null
+revid: 2470331368
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nuseir_Yassin
+- provenance: verified
+  supports_claim: false
+  url: https://nasdaily.com/
+- provenance: verified
+  supports_claim: false
+  url: https://about.me/NasserYassin
+timestamp: '2026-04-11T08:14:07.988498+00:00'
+title: Q56055107
+turns: 1
+value_label: null
+verdict: incorrect

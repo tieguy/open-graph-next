@@ -1,0 +1,22 @@
+completion_tokens: 591
+cost_usd: 0.005411999999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 105876
+property: P569
+property_label: date of birth
+rationale: Extensive searches for independent, reliable sources confirming Ayu Azhari's
+  birth date of 19 November 1966 returned no results. No external references were
+  found to verify this claimed change.
+rcid: 2549792878
+revid: 2473150609
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/entity/Q4200761
+timestamp: '2026-04-07T13:24:28.778348+00:00'
+title: Q4200761
+turns: 15
+value_label: null
+verdict: unverifiable

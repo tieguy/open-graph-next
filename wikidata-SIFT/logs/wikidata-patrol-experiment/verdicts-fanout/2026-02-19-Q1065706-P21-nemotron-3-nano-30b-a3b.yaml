@@ -1,0 +1,26 @@
+completion_tokens: 20518
+cost_usd: 0.0076377
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 70682
+property: P21
+property_label: sex or gender
+rationale: Scholarly source mentions a 'new male identity' but does not explicitly
+  state that Maria of Castile identifies as a trans man; historical records describe
+  her as female, and no reliable source directly confirms the claim, making it unverified
+  and likely anachronistic.
+rcid: 2540984425
+revid: 2464770766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.academia.edu/111848976/The_King_s_Other_Body_Mar%C3%B3a_of_Castile_and_the_Crown_of_Aragon_Theresa_Earenfight_The_Measure_of_Woman_Law_and_Female_Identity_in_the_Crown_of_Aragon_Marie_A_Kelleher
+- provenance: reported
+  supports_claim: false
+  url: https://muse.jhu.edu/book/13526/
+timestamp: '2026-02-19T22:54:49.373769+00:00'
+title: Q1065706
+turns: 7
+value_label: trans man
+verdict: suspect

@@ -1,0 +1,42 @@
+completion_tokens: 2807
+cost_usd: 0.0042862
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13010
+property: P856
+property_label: official website
+rationale: The cited Wikipedia source does not mention an official website for the
+  Quanzhou Overseas Relations Museum, and no independent, authoritative sources found
+  online could confirm the value 'http://www.qzhjg.com' as the official website. Therefore,
+  deprecating the claim is appropriate due to lack of supporting evidence, though
+  the correct official website remains unverified.
+rcid: 2551429832
+revid: 2474729766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Quanzhou_Maritime_Museum&oldid=934248525
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelchinaguide.com/attraction/fujian/quanzhou/maritimemuseum.htm
+- provenance: verified
+  supports_claim: false
+  url: https://zh.wikipedia.org/wiki/泉州海外交通史博物馆
+- provenance: verified
+  supports_claim: false
+  url: https://baike.baidu.com/item/泉州海外交通史博物馆/25804179
+- provenance: verified
+  supports_claim: false
+  url: https://www.fjtravel.cn/
+- provenance: verified
+  supports_claim: false
+  url: http://www.qzhjg.com/
+- provenance: verified
+  supports_claim: false
+  url: http://www.qzhjg.cn/
+timestamp: '2026-04-10T13:58:41.117313+00:00'
+title: Q17163836
+turns: 1
+value_label: null
+verdict: verified-low

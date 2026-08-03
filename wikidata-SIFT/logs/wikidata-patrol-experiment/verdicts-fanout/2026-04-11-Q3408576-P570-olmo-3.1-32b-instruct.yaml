@@ -1,0 +1,26 @@
+completion_tokens: 282
+cost_usd: 0.0031676
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14992
+property: P570
+property_label: date of death
+rationale: The correct date of death for Prudencia Ayala is July 11, 1936, not 1945.
+  Multiple reputable sources, including BlackPast.org and the National Hispanic Cultural
+  Center, confirm her death in 1936 at age 51. Changing the date to 1945 is factually
+  incorrect.
+rcid: null
+revid: 2470732977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://blackpast.org/global-african-history/prudencia-ayala-1885-1936/
+- provenance: verified
+  supports_claim: false
+  url: https://nhcoa.org/latino-empowerment-prudencia-ayala/
+timestamp: '2026-04-11T14:01:56.892882+00:00'
+title: Q3408576
+turns: 1
+value_label: null
+verdict: incorrect

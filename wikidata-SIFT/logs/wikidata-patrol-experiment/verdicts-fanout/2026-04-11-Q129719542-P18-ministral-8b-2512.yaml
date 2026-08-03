@@ -1,0 +1,33 @@
+completion_tokens: 2601
+cost_usd: 0.005890889999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69824
+property: P18
+property_label: image
+rationale: The edit replaces an image with qualifiers (author, timestamp, and media
+  legend) with a new image that lacks any contextual qualifiers or references. The
+  old image was tied to a specific content creator and timestamp, providing clear
+  provenance. The new image, 'Bonnie Blue, July 2025 (cropped).jpg', has no references
+  or qualifiers, making it unverifiable and potentially misleading. No independent
+  sources confirm the validity or relevance of the new image, and the absence of references
+  for the new value raises concerns about its authenticity and context. This edit
+  lacks sufficient justification and transparency.
+rcid: 2550508122
+revid: 2473843061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://avn.com/news/video/pornhub-awards-get-a-little-bit-country-for-7th-edition-179491
+- provenance: verified
+  supports_claim: false
+  url: https://de.pornopedia.com/wiki/Bonnie_Blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.boobpedia.com/boobs/Bonnie_Blue
+timestamp: '2026-04-11T13:07:18.796443+00:00'
+title: Q129719542
+turns: 6
+value_label: null
+verdict: suspect

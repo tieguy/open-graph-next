@@ -1,0 +1,28 @@
+completion_tokens: 1591
+cost_usd: 0.00364344
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37857
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Pablo Iglesias Turrión was born
+  in Madrid. The qualifier 'Spanish transition to democracy' does not seem relevant
+  or accurate in this context.
+rcid: 2550690061
+revid: 2474018630
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://grokipedia.com/page/Pablo_Iglesias_Turri%C3%B3n
+- provenance: reported
+  supports_claim: true
+  url: https://www.elmundo.es/cronica/2014/06/01/53899911268e3e4c468b456c.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/pablo-iglesias-turrion.html
+timestamp: '2026-04-11T14:12:50.413158+00:00'
+title: Q13989269
+turns: 1
+value_label: Madrid
+verdict: verified-high

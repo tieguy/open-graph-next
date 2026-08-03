@@ -1,0 +1,29 @@
+completion_tokens: 1542
+cost_usd: 0.004459462500000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48564
+property: P735
+property_label: given name
+rationale: The old value 'Max' is consistently supported by multiple independent sources,
+  including biographical pages and art databases. The new value 'LeGros' is not supported
+  by any independent sources and appears to be incorrect. The references cited for
+  both values are the same, indicating a potential error in the new value's reference.
+rcid: 2550807127
+revid: 2474131950
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://lorenzelliarte.com/en/artists/32-max-bill/biography/
+- provenance: verified
+  supports_claim: true
+  url: https://www.tate.org.uk/art/art-terms/c/concrete-art
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikiart.org/en/max-bill
+timestamp: '2026-04-11T16:33:12.073410+00:00'
+title: Q123454
+turns: 1
+value_label: LeGros
+verdict: incorrect

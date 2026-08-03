@@ -1,0 +1,23 @@
+completion_tokens: 298
+cost_usd: 0.0051030625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53638
+property: P1814
+property_label: name in kana
+rationale: The edit changes the name in kana from 'エンハイプン' to 'Enhypenis7'. Based
+  on the investigation, there is no evidence supporting the new name 'Enhypenis7'.
+  The official website and other reliable sources consistently use 'エンハイプン' as the
+  name in kana for Enhypen.
+rcid: 2549261042
+revid: 2472631395
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://beliftlab.com/artist/profile/ENHYPEN
+timestamp: '2026-04-07T06:29:17.788480+00:00'
+title: Q99479445
+turns: 5
+value_label: null
+verdict: incorrect

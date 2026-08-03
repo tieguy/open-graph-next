@@ -1,0 +1,23 @@
+completion_tokens: 587
+cost_usd: 0.000892
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 15492
+property: P1477
+property_label: birth name
+rationale: The edit adds 'leila gayyyy' as birth name with no references. Search for
+  independent corroboration returned no sources, and the only retrieved source (Le
+  Union 2024 article) was examined but contains no mention of this name. No source
+  was both fetched and verified, failing the requirement for verifiable provenance.
+rcid: null
+revid: 2472594864
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lunion.fr/id620641/article/2024-07-12/poupette-kenza-trois-questions-pour-comprendre-laffaire-qui-entoure
+timestamp: '2026-04-07T14:20:37.920280+00:00'
+title: Q116446754
+turns: 2
+value_label: null
+verdict: unverifiable

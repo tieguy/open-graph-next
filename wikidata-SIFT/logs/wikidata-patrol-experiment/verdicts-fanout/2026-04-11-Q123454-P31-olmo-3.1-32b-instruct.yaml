@@ -1,0 +1,35 @@
+completion_tokens: 2161
+cost_usd: 0.0070688
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28861
+property: P31
+property_label: instance of
+rationale: The change from 'human' (Q5) to 'demon' (Q177413) for Max Bill is not supported
+  by any credible source. Authoritative biographical sources, including the English
+  Wikipedia, the Historical Dictionary of Switzerland, and the Bibliothèque nationale
+  de France, describe Max Bill as a Swiss architect, painter, and sculptor. The Wikidata
+  class 'demon' is exclusively used for supernatural beings and is never applied to
+  real people. Therefore, this edit introduces a major factual error and should be
+  reverted.
+rcid: 2550804143
+revid: 2474129061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Max_Bill
+- provenance: verified
+  supports_claim: false
+  url: https://historicaldictionaryofswitzerland.org/index.php?id=entry&entryid=MBIL
+- provenance: verified
+  supports_claim: false
+  url: https://www.bnf.fr/ark:/12148/cb41533891n
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q177413
+timestamp: '2026-04-11T11:06:25.605856+00:00'
+title: Q123454
+turns: 1
+value_label: demon
+verdict: incorrect

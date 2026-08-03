@@ -1,0 +1,34 @@
+completion_tokens: 2517
+cost_usd: 0.0053178
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46352
+property: P8408
+property_label: KBpedia ID
+rationale: The KBpedia ID 'negeri' is recognized as a reference concept in KBpedia,
+  but no independent, authoritative source confirms its correctness as an official
+  administrative division in Maluku, Indonesia. The prefetched KBpedia sources do
+  not provide direct verification, and attempts to access official Indonesian administrative
+  division databases were blocked or unavailable. Without direct verification from
+  an official source, the claim remains unverifiable.
+rcid: 2550543092
+revid: 2473876698
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kbpedia.org/knowledge-graph/reference-concept/?uri=negeri
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/Cognonto/kbpedia
+- provenance: verified
+  supports_claim: false
+  url: https://gratisdata.miraheze.org/wiki/Property:P288
+- provenance: verified
+  supports_claim: false
+  url: https://portal.mardi4nfdi.de/wiki/Property:P294
+timestamp: '2026-04-11T09:43:21.215529+00:00'
+title: Q97202782
+turns: 6
+value_label: null
+verdict: unverifiable

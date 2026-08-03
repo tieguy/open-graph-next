@@ -1,0 +1,29 @@
+completion_tokens: 714
+cost_usd: 0.005072800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23222
+property: P21
+property_label: sex or gender
+rationale: No independent, reliable source was found confirming that Luís Figo identifies
+  as a trans man. The only sources available are biographical or news reports about
+  his football career and family, none of which mention gender transition or identity.
+  Changing a core identity claim without corroborating evidence is not justified.
+rcid: 2551322483
+revid: 2474629968
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mirror.co.uk/sport/football/news/daughter-barcelona-real-madrid-legend-11842512
+- provenance: verified
+  supports_claim: false
+  url: https://www.queerclick.com/qc/2006/08/luis_figo_dick.php
+- provenance: verified
+  supports_claim: false
+  url: http://www.ordens.presidencia.pt/?idc=153
+timestamp: '2026-04-11T18:17:07.071712+00:00'
+title: Q483145
+turns: 1
+value_label: trans man
+verdict: suspect

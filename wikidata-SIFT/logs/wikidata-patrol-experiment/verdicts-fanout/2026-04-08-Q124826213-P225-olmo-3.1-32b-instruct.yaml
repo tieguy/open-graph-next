@@ -1,0 +1,32 @@
+completion_tokens: 2019
+cost_usd: 0.005654200000000001
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22214
+property: P225
+property_label: taxon name
+rationale: No authoritative taxonomic databases recognize 'Pilolabus nigriclava' as
+  an accepted species name. Major sources such as Catalogue of Life, ITIS, GBIF, and
+  NCBI do not list this taxon, indicating that the name is not valid or accepted.
+  Therefore, removing it as the taxon name was correct.
+rcid: 2550597437
+revid: 2473928696
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi
+- provenance: reported
+  supports_claim: false
+  url: https://www.catalogueoflife.org/
+- provenance: reported
+  supports_claim: false
+  url: https://www.itis.gov/
+- provenance: reported
+  supports_claim: false
+  url: https://www.gbif.org/species/202595
+timestamp: '2026-04-08T19:06:25.693688+00:00'
+title: Q124826213
+turns: 4
+value_label: null
+verdict: incorrect

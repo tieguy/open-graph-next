@@ -1,0 +1,33 @@
+completion_tokens: 325
+cost_usd: 0.0031788
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14919
+property: P1559
+property_label: name in native language
+rationale: The name "両面宿儺" is the canonical Japanese rendering of Ryomen Sukuna's
+  name in native language as attested by multiple independent sources, including the
+  official Jujutsu Kaisen fandom page and Japanese-language cultural resources. The
+  kanji and kana forms are consistent with established Japanese folklore and media
+  usage. The change from "Ryōmen Sukuna" (transliteration) to the native kanji "両面宿儺"
+  is a standard and correct practice for the 'name in native language' property on
+  Wikidata. The value is also consistent with primary references and media franchise
+  materials.
+rcid: null
+revid: 2471724158
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://jujutsu-kaisen.fandom.com/wiki/Sukuna
+- provenance: verified
+  supports_claim: true
+  url: https://sekaikokeshi.com/ryomensukunaname/
+- provenance: verified
+  supports_claim: true
+  url: https://www.tumblr.com/luminescentauthor/637356797462757376/sukuna-mythology-kanji-meaning-jujutsu-kaisen
+timestamp: '2026-04-11T14:12:24.027226+00:00'
+title: Q105037685
+turns: 1
+value_label: null
+verdict: verified-high

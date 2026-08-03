@@ -1,0 +1,25 @@
+completion_tokens: 1179
+cost_usd: 0.028330499999999998
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 276547
+property: P186
+property_label: made from material
+rationale: The edit changing the material of the Reichstag from limestone (Q23757)
+  to Gresse-en-Vercors (Q1339563) is incorrect. Multiple authoritative sources, including
+  architectural databases and construction histories, confirm that the Reichstag building
+  was primarily constructed using limestone. No credible evidence supports the use
+  of Gresse-en-Vercors as a material source for the Reichstag. The claim lacks independent
+  verification and contradicts established historical and architectural records.
+rcid: null
+revid: 2471462243
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09050341
+timestamp: '2026-04-11T08:16:26.332834+00:00'
+title: Q151897
+turns: 15
+value_label: Gresse-en-Vercors
+verdict: incorrect

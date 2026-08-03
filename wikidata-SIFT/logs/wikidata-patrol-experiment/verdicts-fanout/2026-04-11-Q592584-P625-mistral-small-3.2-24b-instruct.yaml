@@ -1,0 +1,25 @@
+completion_tokens: 1648
+cost_usd: 0.007262149999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 72290
+property: P625
+property_label: coordinate location
+rationale: The new coordinate is more precise and likely correct based on the official
+  address of Imprensa Nacional-Casa da Moeda. The old coordinate seems less precise
+  and may not be accurate.
+rcid: 2550438253
+revid: 2473775019
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://eportugal.gov.pt/entidades/imprensa-nacional-casa-da-moeda
+- provenance: verified
+  supports_claim: true
+  url: https://www.gov.pt/entidades/imprensa-nacional-casa-da-moeda
+timestamp: '2026-04-11T17:46:34.291061+00:00'
+title: Q592584
+turns: 7
+value_label: null
+verdict: verified-high

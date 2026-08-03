@@ -1,0 +1,29 @@
+completion_tokens: 1464
+cost_usd: 0.0023197875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22624
+property: P17
+property_label: country
+rationale: The change from 'Kingdom of Spain' to 'Felipe VI of Spain' is incorrect.
+  The Glorious Revolution took place in the Kingdom of Spain and led to the deposition
+  of Queen Isabella II. Felipe VI of Spain has no historical connection to the Glorious
+  Revolution. The edit removes a correct value without any supporting evidence.
+rcid: null
+revid: 2454916333
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Felipe_VI
+- provenance: verified
+  supports_claim: false
+  url: https://monarchies.fandom.com/wiki/Felipe_VI,_King_of_Spain
+- provenance: verified
+  supports_claim: true
+  url: https://www.diba.cat/en/web/exposicions/-/first-republic-150-years-on
+timestamp: '2026-04-11T12:47:34.873575+00:00'
+title: Q1540751
+turns: 2
+value_label: Felipe VI of Spain
+verdict: incorrect

@@ -1,0 +1,20 @@
+completion_tokens: 562
+cost_usd: 0.00603575
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 118467
+property: P856
+property_label: official website
+rationale: No authoritative source was found supporting 'finnair.com' as the official
+  website for Ina town. Multiple searches identified official town resources (ina-town.jp
+  domain), but they could not be accessed to verify content. The neweditorial.value
+  (finnair.com) remains unverified and lacks supporting evidence.
+rcid: null
+revid: 2472085986
+sources: []
+timestamp: '2026-04-07T10:56:59.458219+00:00'
+title: Q915773
+turns: 15
+value_label: null
+verdict: unverifiable

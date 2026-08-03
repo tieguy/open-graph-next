@@ -1,0 +1,33 @@
+completion_tokens: 1735
+cost_usd: 0.0048372599999999995
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36709
+property: P19
+property_label: place of birth
+rationale: The removed reference from English Wikipedia correctly cited Avril Lavigne's
+  place of birth as Belleville, Ontario. Multiple verified independent sources (Fandom
+  Wiki, Notable Biographies, and Scribd) confirm this information. Removing the only
+  reference without adding a new one violates Wikidata's policy of requiring references
+  for claims, making the edit unjustified and incorrect.
+rcid: null
+revid: 2471644098
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Avril_Lavigne
+- provenance: verified
+  supports_claim: true
+  url: https://avrillavigne.fandom.com/wiki/Avril_Lavigne
+- provenance: verified
+  supports_claim: true
+  url: https://www.notablebiographies.com/news/Ge-La/Lavigne-Avril.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.scribd.com/document/39560858/Avril-Lavigne-Was-Born-in-Belleville
+timestamp: '2026-04-11T12:55:13.834292+00:00'
+title: Q30449
+turns: 1
+value_label: Belleville
+verdict: incorrect

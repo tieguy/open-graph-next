@@ -1,0 +1,29 @@
+completion_tokens: 2092
+cost_usd: 0.00608995875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58684
+property: P1366
+property_label: replaced by
+rationale: The removed claim had no references, and the sources fetched do not provide
+  clear evidence that Samuel Ikome Sako was a replacement for Sisiku Julius Ayuk Tabe.
+  The edit was tagged as a manual revert by a new editor, which might indicate a potential
+  issue with the claim.
+rcid: 2550926522
+revid: 2474248018
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ambazoniagov.org/index.php/press-room/81-president-samuel-ikome-sako-end-of-year-address-to-the-nation-2019
+- provenance: verified
+  supports_claim: false
+  url: https://www.abcambatv.com/news/historicity-and-legality-of-the-interim-government~165
+- provenance: verified
+  supports_claim: false
+  url: https://www.bareta.news/ambazonia-governing-council-national-security-council-officially-names-samuel-ikome-sako-chris-anu-and-others-as-cameroun-infiltrators/
+timestamp: '2026-04-11T05:32:27.950061+00:00'
+title: Q60606828
+turns: 7
+value_label: Samuel Ikome Sako
+verdict: verified-high

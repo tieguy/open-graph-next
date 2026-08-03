@@ -1,0 +1,28 @@
+completion_tokens: 1921
+cost_usd: 0.0066571799999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55107
+property: P1559
+property_label: name in native language
+rationale: The edit changed the name in native language from 'نادية مراد' (Nadia Murad
+  in Arabic) to 'rgwvrwfنادية مراد', which includes nonsensical random characters.
+  The old value is confirmed as correct by authoritative sources such as the Nobel
+  Prize official page and the Library of Congress. The new value is unsupported by
+  any credible source and lacks references. The edit was made by a new editor, tagged
+  as suspicious, and reverted, indicating it was likely malicious or incorrect.
+rcid: null
+revid: 2470711327
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nobelprize.org/prizes/peace/2018/murad/facts/
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/n2017048314.html
+timestamp: '2026-04-11T16:15:15.633986+00:00'
+title: Q22007112
+turns: 3
+value_label: null
+verdict: incorrect

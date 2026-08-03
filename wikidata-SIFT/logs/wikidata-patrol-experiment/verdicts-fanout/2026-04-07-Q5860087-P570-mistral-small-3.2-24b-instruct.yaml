@@ -1,0 +1,32 @@
+completion_tokens: 2157
+cost_usd: 0.005845725
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58250
+property: P570
+property_label: date of death
+rationale: The edit changes the date of death to 20 January 2026, but no independent
+  sources were found to verify this claim. The initial date of death, 23 August 1936,
+  is widely recognized and documented. The lack of references and the absence of supporting
+  evidence make it impossible to verify the new date.
+rcid: 2550184703
+revid: 2473528090
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Fernando+Primo+de+Rivera+y+S%C3%A1enz+de+Heredia+date+of+death+20+January+2026
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Fernando+Primo+de+Rivera+y+S%C3%A1enz+de+Heredia+date+of+death
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Fernando+Primo+de+Rivera+y+S%C3%A1enz+de+Heredia+death
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Fernando+Primo+de+Rivera+y+S%C3%A1enz+de+Heredia+2026
+timestamp: '2026-04-07T06:22:52.047787+00:00'
+title: Q5860087
+turns: 9
+value_label: null
+verdict: unverifiable

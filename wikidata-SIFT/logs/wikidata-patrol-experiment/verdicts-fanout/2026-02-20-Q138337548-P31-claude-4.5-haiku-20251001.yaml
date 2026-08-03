@@ -1,0 +1,41 @@
+completion_tokens: 2976
+cost_usd: 0.109874
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 94994
+property: P31
+property_label: instance of
+rationale: The official developer website (Institut für limbische Kommunikation und
+  Strategie GmbH) explicitly describes LimbiCODE as a psychographic segmentation model
+  ('psychografisches Segmentierungsmodell') based on neuroscientific findings about
+  limbic personality structures. Multiple independent market research authorities
+  confirm that psychographic segmentation divides audiences based on psychological
+  traits, motivations, and values—the exact methodology LimbiCODE employs. The edit's
+  reference to the developer's own documentation directly supports this classification.
+rcid: 2540923890
+revid: 2464714782
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/limbicode-consulting/
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/medien/
+- provenance: verified
+  supports_claim: true
+  url: https://www.qualtrics.com/en-au/articles/strategy-research/psychographic-segmentation/
+- provenance: verified
+  supports_claim: true
+  url: https://www.surveymonkey.com/market-research/resources/what-is-psychographic-segmentation/
+- provenance: verified
+  supports_claim: true
+  url: https://www.acxiom.com/blog/market-segmentation-psychographic-vs-demographic-vs-behavioral/
+- provenance: verified
+  supports_claim: true
+  url: https://gfm.ch/en/blog-en/die-gfm-trend-tagung-ist-ein-jaehrliches-event-highlight-der-branche/
+timestamp: '2026-02-20T23:43:00.425239+00:00'
+title: Q138337548
+turns: 6
+value_label: Psychographic segmentation
+verdict: verified-high

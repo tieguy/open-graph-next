@@ -1,0 +1,31 @@
+completion_tokens: 1923
+cost_usd: 0.0037852
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13157
+property: P18
+property_label: image
+rationale: The edit replaced a generic laser image with a specific RGB laser pointer
+  image for a list article that covers a broad range of laser applications. Independent
+  sources such as the Wikipedia 'List of laser applications' use generic laser device
+  images rather than images of specific laser pointer types. There are no references
+  supporting either image, but the change narrows the scope of the article inappropriately
+  by using a subtype image instead of a general representation.
+rcid: 2550452689
+revid: 2473789256
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/List_of_laser_applications
+- provenance: verified
+  supports_claim: false
+  url: https://www.physics-and-radio-electronics.com/physics/laser/applicationsoflasers.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.rp-photonics.com/laser_applications.html
+timestamp: '2026-04-11T18:02:19.555389+00:00'
+title: Q21651845
+turns: 1
+value_label: null
+verdict: suspect

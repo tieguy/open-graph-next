@@ -1,0 +1,25 @@
+completion_tokens: 770
+cost_usd: 0.0057336
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26358
+property: P10212
+property_label: Stack Exchange user ID
+rationale: The Stack Exchange user ID 37014638 is directly associated with the profile
+  of 'Josh Universe' on Stack Exchange, as confirmed by a verified primary source.
+  This matches the Wikidata item subject, and no contradictory evidence was found.
+rcid: 2551428889
+revid: 2474729065
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.stackexchange.com/users/37014638/josh-universe
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+timestamp: '2026-04-11T07:11:28.500712+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 3755
+cost_usd: 0.128413
+diff_type: reference_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 109638
+property: P58
+property_label: screenwriter
+rationale: 'The reference cannot be verified as supporting the screenwriter claim
+  because: (1) the IMDb ID nm175566 appears malformed (6 digits instead of the required
+  7-digit format ^nm\d{7}$), (2) IMDb domain is blocked from automated access, preventing
+  direct verification of the reference, and (3) the item Q16943273 is a documented
+  tutorial/sandbox item used for Wikidata Tours demonstrations, not a real entity.
+  The claim structure is also conceptually incorrect—P58 (screenwriter) should point
+  to a specific person, not the abstract occupation concept Q28389.'
+rcid: 2540946575
+revid: 2464735791
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:Notability/Items_considered_notable
+- provenance: verified
+  supports_claim: false
+  url: https://myapifilms.com/imdb.do
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:Tours
+timestamp: '2026-02-20T11:47:19.929604+00:00'
+title: Q16943273
+turns: 12
+value_label: screenwriter
+verdict: unverifiable

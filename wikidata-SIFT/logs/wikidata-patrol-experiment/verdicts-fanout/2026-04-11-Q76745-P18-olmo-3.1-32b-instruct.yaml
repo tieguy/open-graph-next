@@ -1,0 +1,36 @@
+completion_tokens: 1632
+cost_usd: 0.006207
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26139
+property: P18
+property_label: image
+rationale: The image claim 'Theodor Schwann Litho.jpg' could not be corroborated by
+  any fetched and verified source. While Theodor Schwann is a well-documented historical
+  figure, no authoritative repository or primary source confirmed the use or correctness
+  of this specific image filename. Best practice on Wikidata is to remove unsourced
+  image claims, and the removal thus improves data quality.
+rcid: 2549461755
+revid: 2472827040
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://docs.google.com/spreadsheets/d/1dsunM9ukGLgaW3HdG9cvJ_QKd7pWjGI0qi_fCb1ROD4/pubhtml?gid=1336391689&single=true
+- provenance: verified
+  supports_claim: false
+  url: http://kalliope-verbund.info/DE-611-BF-116940
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/theodor-schwann.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/theodor-schwann
+- provenance: verified
+  supports_claim: false
+  url: https://www.sciencesource.com/1384996-theodor-schwann-german-physiologist-stock-image-rights-managed.html
+timestamp: '2026-04-11T10:15:08.420972+00:00'
+title: Q76745
+turns: 1
+value_label: null
+verdict: verified-low

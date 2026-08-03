@@ -1,0 +1,32 @@
+completion_tokens: 1861
+cost_usd: 0.0021652800000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25221
+property: P154
+property_label: logo image
+rationale: The new logo image, 'Cosplay of Monkey D. Luffy from One Piece at Made
+  in Asia 2023.jpg', is a fictional character's cosplay and is not a credible or official
+  logo for the real-world charity Emmaus (Q989437). The old logo value, 'Logo Emmaus.jpg',
+  is at least plausible for an organization's branding. No references or evidence
+  support the new value, and the edit was reverted, indicating it was inappropriate.
+  The organization's context as a charity and its official branding materials do not
+  align with the new image.
+rcid: null
+revid: 2472586501
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://seeklogo.com/free-vector-logos/emmaus
+- provenance: verified
+  supports_claim: false
+  url: https://seeklogo.com/vector-logo/397414/emmaus-france
+- provenance: verified
+  supports_claim: false
+  url: https://seeklogo.com/vector-logo/47536/emmaus
+timestamp: '2026-04-11T06:02:44.515550+00:00'
+title: Q989437
+turns: 3
+value_label: null
+verdict: incorrect

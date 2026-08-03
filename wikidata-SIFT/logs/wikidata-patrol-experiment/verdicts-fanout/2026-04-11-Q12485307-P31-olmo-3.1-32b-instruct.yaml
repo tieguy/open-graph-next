@@ -1,0 +1,31 @@
+completion_tokens: 341
+cost_usd: 0.0042398
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20176
+property: P31
+property_label: instance of
+rationale: The official administrative profile for Haria at kampungkb.bkkbn.go.id
+  lists Haria as a 'negeri' within Saparua. However, the page returned a connection
+  error during investigation, and although the website is authoritative, the specific
+  text confirming 'negeri' could not be directly verified due to the fetch failure.
+  The external source sultansinindonesieblog.wordpress.com identifies Haria as a negeri
+  and provides additional context about its location and governance, supporting the
+  new value. Given the authoritative nature of the source type and partial confirmation,
+  the change from 'desa' to 'negeri' appears correct but is supported by only indirect
+  and partially unreachable evidence.
+rcid: 2550514282
+revid: 2473848904
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kampungkb.bkkbn.go.id/kampung/13844
+- provenance: verified
+  supports_claim: true
+  url: https://sultansinindonesieblog.wordpress.com/maluku/haria-leawaka-amapatti-negeri-saparua/
+timestamp: '2026-04-11T07:29:54.677894+00:00'
+title: Q12485307
+turns: 1
+value_label: negeri
+verdict: verified-low

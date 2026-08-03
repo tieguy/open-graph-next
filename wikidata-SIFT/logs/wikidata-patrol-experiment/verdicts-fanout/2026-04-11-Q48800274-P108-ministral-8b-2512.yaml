@@ -1,0 +1,28 @@
+completion_tokens: 2055
+cost_usd: 0.00547347
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43856
+property: P108
+property_label: employer
+rationale: The edit changed the employer of Johannes W. Dietrich from University Hospital
+  Ulm to St Josef Hospital for the period 2002-2005. The ORCID profile and PhilPeople
+  profile explicitly confirm that St Josef Hospital was the correct employer during
+  this period. The old value (University Hospital Ulm) is not supported by any independent
+  source and contradicts the authoritative ORCID profile and PhilPeople profile, which
+  directly state Dietrich's role at St Josef Hospital.
+rcid: 2550596746
+revid: 2473928017
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-1185-3549
+- provenance: verified
+  supports_claim: true
+  url: https://philpeople.org/profiles/johannes-w-dietrich
+timestamp: '2026-04-11T09:03:14.372086+00:00'
+title: Q48800274
+turns: 2
+value_label: St Josef Hospital
+verdict: verified-high

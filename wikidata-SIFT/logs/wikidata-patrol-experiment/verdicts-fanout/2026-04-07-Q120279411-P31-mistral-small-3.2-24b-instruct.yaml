@@ -1,0 +1,31 @@
+completion_tokens: 1621
+cost_usd: 0.005926201250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59488
+property: P31
+property_label: instance of
+rationale: 'The edit changes the ''instance of'' property to itself, which is incorrect.
+  AllMusic confirms that ''Post Human: NeX GEn'' is an album, and other sources could
+  not be verified due to errors.'
+rcid: null
+revid: 2471549715
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmusic.com/album/mw0004021855
+- provenance: verified
+  supports_claim: false
+  url: https://www.metalstorm.net/2024/05/bring-me-horizon-post-human-nex-gen.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.metaldevastationchild.com/2024/05/bring-me-horizon-post-human-nex-gen-review.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.metalunderground.com/reviews/mainstream/bring-me-the-horizon/post-human-nex-gen
+timestamp: '2026-04-07T08:37:57.715801+00:00'
+title: Q120279411
+turns: 9
+value_label: 'Post Human: NeX GEn'
+verdict: incorrect

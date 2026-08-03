@@ -1,0 +1,26 @@
+completion_tokens: 1441
+cost_usd: 0.00745680625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 79144
+property: P7293
+property_label: National Library of Poland MMS ID
+rationale: The investigation did not find any sources confirming either the old or
+  the new MMS ID for Francis Drake. The National Library of Poland's pages do not
+  contain the relevant information, making it impossible to verify the correctness
+  of the change.
+rcid: null
+revid: 2470746353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://portal.ehri-project.eu/institutions/pl-003142
+- provenance: verified
+  supports_claim: false
+  url: https://publicdomainreview.org/collections/source/national-digital-library-of-poland/
+timestamp: '2026-04-11T12:22:27.327583+00:00'
+title: Q36517
+turns: 4
+value_label: null
+verdict: unverifiable

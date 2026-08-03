@@ -1,0 +1,27 @@
+completion_tokens: 1415
+cost_usd: 0.00833031
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 85660
+property: P1477
+property_label: birth name
+rationale: The new birth name value 'Joseph David Keery fecha der nacimiento' is not
+  supported by any verified source. Multiple authoritative sources, including CelebrityXYZ
+  and Stranger Things Fandom, confirm the correct birth name is simply 'Joseph David
+  Keery'. The addition of 'fecha der nacimiento' is nonsensical and unsupported, making
+  the edit incorrect.
+rcid: 2549631340
+revid: 2472992457
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://celebrityxyz.com/actor/joseph-david-keery
+- provenance: verified
+  supports_claim: false
+  url: https://strangerthings.fandom.com/wiki/Joe_Keery
+timestamp: '2026-04-11T16:58:10.714012+00:00'
+title: Q27064031
+turns: 7
+value_label: null
+verdict: incorrect

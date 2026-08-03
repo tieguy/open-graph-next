@@ -1,0 +1,24 @@
+completion_tokens: 640
+cost_usd: 0.0054847
+diff_type: qualifier_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 107134
+property: P1411
+property_label: nominated for
+rationale: The investigation failed to locate any verifiable primary or authoritative
+  source confirming whether 'International Submission to the Academy Awards' correctly
+  represents the claim. Multiple web searches for relevant information regarding Oscar
+  submission processes, Tunisia's submission procedure, and the specific film 'Beauty
+  and the Dogs' yielded no accessible or directly supportive sources. All attempts
+  to verify through official Academy Awards resources resulted in access restrictions
+  (403 errors), and no credible independent sources were found to corroborate the
+  claim or its alternative interpretations.
+rcid: 2550487242
+revid: 2473823040
+sources: []
+timestamp: '2026-04-07T12:25:33.336605+00:00'
+title: Q29413105
+turns: 15
+value_label: International Submission to the Academy Awards
+verdict: unverifiable

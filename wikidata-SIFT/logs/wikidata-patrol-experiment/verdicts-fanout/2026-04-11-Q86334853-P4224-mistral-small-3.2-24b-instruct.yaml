@@ -1,0 +1,23 @@
+completion_tokens: 992
+cost_usd: 0.0022845887499999998
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21455
+property: P4224
+property_label: category contains
+rationale: The fetched page from the official Purdue Sports website lists the staff
+  for the Purdue Boilermakers women's volleyball team, confirming that the coaches
+  and staff members are humans. This supports the edit adding the qualifier "coach
+  of sports team" with the value "Purdue Boilermakers women's volleyball."
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/staff-directory/department/womens-volleyball
+timestamp: '2026-04-11T07:07:38.041770+00:00'
+title: Q86334853
+turns: 3
+value_label: human
+verdict: verified-high

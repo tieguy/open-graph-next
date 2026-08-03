@@ -1,0 +1,28 @@
+completion_tokens: 1414
+cost_usd: 0.001722425
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16505
+property: P1875
+property_label: represented by
+rationale: Multiple independent sources confirm that Kim Seon-ho is represented by
+  Fantagio. The change from 'SALT Entertainment' to 'Fantagio' is supported by evidence
+  from AllKpop, Korea Times, and a Reddit post.
+rcid: 2550486037
+revid: 2473821961
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allkpop.com/article/2026/02/fantagio-issues-additional-statement-on-kim-seon-hos-one-person-corporation
+- provenance: verified
+  supports_claim: true
+  url: https://www.koreatimes.co.kr/www/art/2025/03/398_393292.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.reddit.com/r/KDRAMA/comments/1j0pot3/kim_seon_ho_signs_with_fantagio/
+timestamp: '2026-04-11T09:21:49.932477+00:00'
+title: Q37565564
+turns: 1
+value_label: Fantagio
+verdict: verified-high

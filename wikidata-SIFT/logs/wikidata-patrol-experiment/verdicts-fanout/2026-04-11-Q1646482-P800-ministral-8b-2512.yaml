@@ -1,0 +1,33 @@
+completion_tokens: 2417
+cost_usd: 0.00849453
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 66860
+property: P800
+property_label: notable work
+rationale: The edit correctly replaces the incorrect 'Mary Poppins Returns' with 'Hamilton'
+  as a notable work of Lin-Manuel Miranda. Multiple verified sources confirm Miranda's
+  creation of 'Hamilton,' including his official website and award databases. The
+  old value was not associated with Miranda in any credible source, and the new value
+  is well-documented and widely recognized.
+rcid: 2550460211
+revid: 2473796684
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.linmanuel.com/project/hamilton/
+- provenance: verified
+  supports_claim: true
+  url: https://lortelaward.com/lead-actor-in-a-musical
+- provenance: reported
+  supports_claim: true
+  url: https://hamiltonmusical.fandom.com/wiki/Lin-Manuel_Miranda
+- provenance: verified
+  supports_claim: true
+  url: https://bedtimehistorystories.com/the-story-of-lin-manuel-miranda-and-the-making-of-hamilton/
+timestamp: '2026-04-11T17:34:49.568561+00:00'
+title: Q1646482
+turns: 3
+value_label: Hamilton
+verdict: verified-high

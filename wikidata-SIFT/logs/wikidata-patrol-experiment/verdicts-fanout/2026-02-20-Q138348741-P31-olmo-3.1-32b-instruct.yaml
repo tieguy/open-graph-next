@@ -1,0 +1,24 @@
+completion_tokens: 881
+cost_usd: 0.0050336
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22525
+property: P31
+property_label: instance of
+rationale: The official website of Team Building Paca describes the organization as
+  an enterprise providing commercial services in Provence, France, which directly
+  supports the Wikidata claim that Q138348741 is an instance of Q6881511 ('enterprise').
+  The primary source is authoritative and unambiguous. There is limited independent
+  corroboration, but the primary evidence is sufficient to confirm the claim.
+rcid: 2540931138
+revid: 2464721783
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+timestamp: '2026-02-20T19:56:42.779801+00:00'
+title: Q138348741
+turns: 3
+value_label: enterprise
+verdict: verified-high

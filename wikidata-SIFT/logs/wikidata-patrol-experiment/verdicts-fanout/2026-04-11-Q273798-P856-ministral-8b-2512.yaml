@@ -1,0 +1,32 @@
+completion_tokens: 1770
+cost_usd: 0.0033162599999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26534
+property: P856
+property_label: official website
+rationale: The edit incorrectly changed the official website of Narita (Q273798) from
+  the city's official municipal website (`https://www.city.narita.chiba.jp/`) to the
+  website of Jetstar Airways (`https://www.jetstar.com/`). The old value is the correct
+  and authoritative official website for Narita City, as confirmed by the city's own
+  official municipal website and independent sources. The new value is irrelevant
+  and does not represent the city's official website. No references were provided
+  for either value, and the change is clearly incorrect.
+rcid: null
+revid: 2471590860
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.narita.chiba.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.narita-airport.jp/en/
+- provenance: reported
+  supports_claim: false
+  url: https://www.jetstar.com/
+timestamp: '2026-04-11T14:44:42.883690+00:00'
+title: Q273798
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 823
+cost_usd: 0.00868335125
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 92297
+property: P1476
+property_label: title
+rationale: The edit changes the title of the artwork 'Conversion of Saint Augustine'
+  to 'Michael B jordan won the Oscar', which is not supported by any reliable sources.
+  The original title 'La Conversion de saint Augustin' is consistent with the artwork's
+  historical context and the artist Fra Angelico. There is no evidence connecting
+  Michael B. Jordan or the Oscar to this historical painting.
+rcid: 2549728769
+revid: 2473087157
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wga.hu/art/a/angelico/biography.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.wga.hu/frames-e.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.cherbourg.fr/fileadmin/user_upload/Services_et_demarches/Culture_et_loisirs/Musees/Thomas_Henry/fra_angelico_def_concours_ecriture.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://collections.musees-normandie.fr/ark:/16418/mth1159805
+timestamp: '2026-04-07T12:50:29.889018+00:00'
+title: Q86858941
+turns: 15
+value_label: null
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 692
+cost_usd: 0.0040856500000000006
+diff_type: qualifier_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78945
+property: P793
+property_label: significant event
+rationale: No verifiable sources were identified that discuss Hansel Hernández's death
+  or related events in Cuba. All web search attempts for the deceased individual returned
+  no news-archival results, obituaries, or credible reports. The Wikipedia page is
+  blocked. No independent confirmation of the death exists after multiple searches
+  in Spanish and English.
+rcid: 2550305041
+revid: 2473644875
+sources:
+- provenance: verified
+  supports_claim: false
+  url: None
+- provenance: verified
+  supports_claim: false
+  url: None
+- provenance: verified
+  supports_claim: false
+  url: None
+- provenance: verified
+  supports_claim: false
+  url: None
+timestamp: '2026-04-07T11:15:05.617685+00:00'
+title: Q129177543
+turns: 15
+value_label: death of Hansel Hernández
+verdict: unverifiable

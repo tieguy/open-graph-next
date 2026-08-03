@@ -1,0 +1,39 @@
+completion_tokens: 3344
+cost_usd: 0.442326
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 425606
+property: P1412
+property_label: languages spoken, written or signed
+rationale: Muhammad ibn Sulayman al-Kurdi's epithet 'al-Kurdi' indicates Kurdish ethnic
+  origin, and historical sources confirm that Kurdish Islamic scholars of the 17th-18th
+  centuries were typically multilingual, using Kurdish for teaching and explanation
+  while writing formal works in Arabic. The comprehensive Islamic Encyclopedia biography
+  and the MuslimMatters article on Kurdish scholars confirm his prominence and multilingual
+  scholarly tradition. However, no direct evidence was found explicitly documenting
+  that al-Kurdi himself spoke Kurdish as a living language. All his documented works
+  are in Arabic, and his entire professional life was spent in Damascus and Medina
+  (major Arab centers). While the claim is consistent with the linguistic practices
+  of Kurdish scholars of his era and his ethnic background, it lacks explicit primary
+  source confirmation.
+rcid: 2540918651
+revid: 2464709782
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://islamansiklopedisi.org.tr/kurdi-muhammed-b-suleyman
+- provenance: verified
+  supports_claim: true
+  url: https://muslimmatters.org/2024/10/13/the-dissemination-of-islamic-knowledge-in-the-malay-archipelago/
+- provenance: verified
+  supports_claim: true
+  url: https://islamclass.wordpress.com/2012/08/12/traditional-kurdish-curriculum/
+- provenance: verified
+  supports_claim: true
+  url: https://dspace.library.uu.nl/bitstream/handle/1874/20695
+timestamp: '2026-02-21T02:13:27.575271+00:00'
+title: Q86631287
+turns: 15
+value_label: Kurdish
+verdict: plausible

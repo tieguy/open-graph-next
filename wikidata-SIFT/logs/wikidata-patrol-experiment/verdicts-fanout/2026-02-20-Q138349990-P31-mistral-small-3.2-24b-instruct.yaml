@@ -1,0 +1,22 @@
+completion_tokens: 1124
+cost_usd: 0.0032075
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28703
+property: P31
+property_label: instance of
+rationale: The primary source (Suchfokus's official website) strongly supports the
+  claim that Suchfokus is a business. No independent sources were found to corroborate
+  or contradict this claim, but the primary source is sufficient to verify the claim.
+rcid: 2540974428
+revid: 2464761242
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:36:51.560685+00:00'
+title: Q138349990
+turns: 3
+value_label: business
+verdict: verified-high

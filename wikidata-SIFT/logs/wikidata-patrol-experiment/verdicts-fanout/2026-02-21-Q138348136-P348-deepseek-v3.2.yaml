@@ -1,0 +1,35 @@
+completion_tokens: 1426
+cost_usd: 0.01798458
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 66832
+property: P348
+property_label: software version identifier
+rationale: The claim that Fut Rap Cartas has software version identifier 1.8.0 is
+  supported by multiple independent secondary sources (AppBrain, APKCombo, APKPure)
+  which explicitly list version 1.8.0 as the latest version for the app with Google
+  Play ID com.fyf.frc2324. The cited Google Play Store reference is appropriate for
+  the app but does not display the version number on the fetched page. The convergence
+  of evidence from multiple app distribution and information sites provides strong
+  corroboration.
+rcid: 2540919288
+revid: 2464710366
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324
+- provenance: verified
+  supports_claim: true
+  url: https://www.appbrain.com/app/frc-25-futrapcartas/com.fyf.frc2324
+- provenance: verified
+  supports_claim: true
+  url: https://apkcombo.com/frc-25-futrapcartas/com.fyf.frc2324/
+- provenance: reported
+  supports_claim: true
+  url: https://apkpure.net/frc-23-24/com.fyf.frc2324/versions
+timestamp: '2026-02-21T01:38:25.184831+00:00'
+title: Q138348136
+turns: 8
+value_label: null
+verdict: verified-high

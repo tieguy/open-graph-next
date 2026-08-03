@@ -1,0 +1,19 @@
+completion_tokens: 129
+cost_usd: 0.003002625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31684
+property: P495
+property_label: country of origin
+rationale: I was unable to perform a web search to verify the origin of the Spanish
+  omelette due to a technical issue. Therefore, I cannot confirm or deny the change
+  from 'Spain' to 'Basque Country' as the country of origin.
+rcid: null
+revid: 2471446683
+sources: []
+timestamp: '2026-04-11T06:20:26.136252+00:00'
+title: Q281751
+turns: 3
+value_label: Basque Country
+verdict: unverifiable

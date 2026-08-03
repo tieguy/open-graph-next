@@ -1,0 +1,29 @@
+completion_tokens: 1749
+cost_usd: 0.0033558
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11532
+property: P1080
+property_label: from narrative universe
+rationale: No authoritative sources confirm the existence of a distinct 'Smallfoot
+  universe' entity. All major sources recognize Fleem as originating from the film
+  'Smallfoot.' Changing the value to a non-official 'universe' item is unsupported
+  and should be reverted.
+rcid: 2550391586
+revid: 2473729392
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Smallfoot_(2018_film)
+- provenance: verified
+  supports_claim: false
+  url: https://smallfoot.fandom.com/wiki/Smallfoot
+- provenance: verified
+  supports_claim: false
+  url: https://warnerbros.fandom.com/wiki/Smallfoot
+timestamp: '2026-04-11T13:34:33.459346+00:00'
+title: Q111958591
+turns: 1
+value_label: Smallfoot universe
+verdict: incorrect

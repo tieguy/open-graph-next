@@ -1,0 +1,29 @@
+completion_tokens: 616
+cost_usd: 0.01852521
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 68316
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The edit adds 'Arabic and English Dictionary' (Q107005370), which is a
+  dictionary reference work, as a language spoken by Muammar Gaddafi. This is clearly
+  erroneous because P1412 (languages spoken, written or signed) should contain language
+  items (like Arabic or English), not dictionary titles. The cited reference (BnF
+  authorities) lists 'arabe' as a language, not the dictionary. Independent search
+  confirms 'Arabic and English Dictionary' is a publication, not a language. Therefore,
+  the edit is incorrect.
+rcid: 2540948173
+revid: 2464737285
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb11920818j
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q107005370
+timestamp: '2026-02-20T11:21:36.268164+00:00'
+title: Q19878
+turns: 3
+value_label: Arabic and English Dictionary
+verdict: incorrect

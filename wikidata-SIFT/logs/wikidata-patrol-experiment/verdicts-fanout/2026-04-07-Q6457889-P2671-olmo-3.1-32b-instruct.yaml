@@ -1,0 +1,25 @@
+completion_tokens: 1224
+cost_usd: 0.0046478000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19567
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The new value 'hola' is not a valid Google Knowledge Graph ID and is not
+  supported by any evidence. No primary or independent source references a Google
+  KG ID for this item, and the change appears to be an error.
+rcid: null
+revid: 2469321198
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=LGBTQ+history+in+Spain+site%3Akg.google.com
+- provenance: reported
+  supports_claim: false
+  url: (multiple web searches, no authoritative result found)
+timestamp: '2026-04-07T05:21:39.165086+00:00'
+title: Q6457889
+turns: 4
+value_label: null
+verdict: incorrect

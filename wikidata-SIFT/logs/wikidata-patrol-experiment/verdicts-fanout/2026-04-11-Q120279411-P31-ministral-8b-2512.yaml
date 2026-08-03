@@ -1,0 +1,32 @@
+completion_tokens: 1542
+cost_usd: 0.00192672
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20724
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changed the P31 (instance of) claim from the correct
+  category 'album' (Q482994) to a self-referential value (Q120279411). The item's
+  metadata, including genres, producer, record label, and publication date, all confirm
+  it is a studio album. No references or independent evidence support the change,
+  and the self-referential edit is nonsensical for this property. The edit was also
+  tagged as 'self-referencing' and 'mw-reverted', indicating it was flagged as problematic.
+rcid: null
+revid: 2471549715
+sources:
+- provenance: verified
+  summary: The item is listed as a studio album by Bring Me the Horizon, confirming
+    the old value (Q482994) was correct.
+  supports_claim: false
+  url: https://www.allmusic.com/album/mw0004021855
+- provenance: verified
+  summary: The item's genres, producer, and record label align with it being an album,
+    supporting the old value and contradicting the self-referential edit.
+  supports_claim: true
+  url: https://www.allmusic.com/album/mw0004021855
+timestamp: '2026-04-11T10:34:35.011274+00:00'
+title: Q120279411
+turns: 2
+value_label: 'Post Human: NeX GEn'
+verdict: incorrect

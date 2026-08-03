@@ -1,0 +1,26 @@
+completion_tokens: 1167
+cost_usd: 0.0037432687500000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36035
+property: P31
+property_label: instance of
+rationale: The evidence suggests that 'library and information science' is not correctly
+  classified as an 'academic degree.' The field itself is more accurately described
+  as an academic discipline or professional field, and the degrees within it (like
+  MLIS) are instances of academic degrees.
+rcid: 2551339635
+revid: 2474645889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bulletins.wayne.edu/graduate/school-information-sciences/masters-programs/library-and-information-science/
+- provenance: verified
+  supports_claim: false
+  url: https://www.librariancertification.com/types-of-library-information-science-degree-programs/
+timestamp: '2026-04-10T13:08:53.510593+00:00'
+title: Q13420675
+turns: 3
+value_label: academic degree
+verdict: suspect

@@ -1,0 +1,34 @@
+completion_tokens: 1442
+cost_usd: 0.00824724375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 86143
+property: P26
+property_label: spouse
+rationale: The claim that Im Nayeon is the spouse of Huang Hua is incorrect. There
+  is no reliable evidence supporting this claim, and it is chronologically implausible.
+  Im Nayeon is confirmed to be married to Lee Dae-hwi, not Huang Hua.
+rcid: null
+revid: 2462909447
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://zh.wikipedia.org/w/index.php?title=%E9%BB%84%E5%8D%8E_(1913%E5%B9%B4)&oldid=82348463
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Huang_Hua
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/people/literature-magazines/huang-hua-1913-2010
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Im_Nayeon
+- provenance: verified
+  supports_claim: false
+  url: https://www.soompi.com/article/1448107wpp/im-nayeon-confirms-marriage-to-lee-dae-hwi
+timestamp: '2026-04-07T09:53:38.281764+00:00'
+title: Q381220
+turns: 10
+value_label: Im Nayeon
+verdict: incorrect

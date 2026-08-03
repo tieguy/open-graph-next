@@ -1,0 +1,27 @@
+completion_tokens: 232
+cost_usd: 0.0052556
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25582
+property: P22
+property_label: father
+rationale: The change from 'Ade' to 'Adelaide' for the property 'father' of Robert
+  Brasillach is suspect because 'Adelaide' is a typically feminine given name and
+  conflicts with historical records and the known context of Robert Brasillach's family.
+  The Grokipedia source indicates Brasillach's mother's name was Marguerite Redo,
+  and there is no indication of a father named 'Adelaide'. The old value 'Ade' is
+  ambiguous and may be an abbreviation or error, but changing it to 'Adelaide' introduces
+  a plausible gender inconsistency. Without explicit evidence supporting 'Adelaide'
+  as the correct father's name, this edit should be regarded with skepticism.
+rcid: 2550652843
+revid: 2473982658
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Robert_Brasillach
+timestamp: '2026-04-11T17:21:06.776614+00:00'
+title: Q1488
+turns: 1
+value_label: Adelaide
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 905
+cost_usd: 0.0032596000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13583
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: No reference was provided for the LinkedIn profile ID, and independent
+  verification was not possible due to LinkedIn's anti-scraping measures. There is
+  no publicly available evidence confirming that 'francissevin' is Francis Sevin's
+  LinkedIn profile ID.
+rcid: 2540920242
+revid: 2464711305
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.linkedin.com/in/francissevin
+- provenance: reported
+  supports_claim: false
+  url: https://winback.com/find-a-therapist/
+- provenance: reported
+  supports_claim: false
+  url: https://www.sartrouville.fr/portrait/francis-sevin/
+timestamp: '2026-02-21T01:13:48.973021+00:00'
+title: Q137844713
+turns: 2
+value_label: null
+verdict: unverifiable

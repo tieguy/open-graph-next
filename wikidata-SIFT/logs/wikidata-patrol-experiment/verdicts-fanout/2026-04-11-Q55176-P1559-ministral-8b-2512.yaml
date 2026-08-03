@@ -1,0 +1,27 @@
+completion_tokens: 1580
+cost_usd: 0.00829515
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 88947
+property: P1559
+property_label: name in native language
+rationale: The old value 'Roberrrrrrrrrrrta' was a clear misspelling, and the new
+  value 'Roberta' is consistently confirmed as correct in multiple verified sources,
+  including a primary biography (HistoryLink) and a secondary authoritative source
+  (Ars Technica). Both sources explicitly use the correct spelling 'Roberta' for Roberta
+  Williams.
+rcid: 2550513262
+revid: 2473847989
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.historylink.org/File/20912
+- provenance: verified
+  supports_claim: true
+  url: https://arstechnica.com/gaming/2022/04/roberta-and-ken-williams-open-up-about-their-first-video-game-in-25-years
+timestamp: '2026-04-11T11:24:25.181312+00:00'
+title: Q55176
+turns: 8
+value_label: null
+verdict: verified-high

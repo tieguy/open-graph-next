@@ -1,0 +1,21 @@
+completion_tokens: 598
+cost_usd: 0.0015035500000000002
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 27679
+property: P569
+property_label: date of birth
+rationale: The website mentions Francine Descarries was 16 when her father died, aligning
+  with a 1942 birth year, supporting the updated date of birth claim.
+rcid: 2549616148
+revid: 2472977776
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://prixduquebec.gouv.qc.ca/recipiendaires/francine-descarries/
+timestamp: '2026-04-07T13:55:12.860260+00:00'
+title: Q50358701
+turns: 4
+value_label: null
+verdict: verified-low

@@ -1,0 +1,27 @@
+completion_tokens: 209
+cost_usd: 0.0025548000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12147
+property: P1120
+property_label: number of deaths
+rationale: No reliable sources were found that specify the number of deaths directly
+  attributable to the Night of the Pencils event. The prefetched reference from Italian
+  Wikipedia does not provide a clear figure for deaths, and the other sources found
+  discuss the event but do not state a number of deaths. The change from '+10' to
+  '6' cannot be confirmed or denied based on independent, authoritative evidence.
+rcid: 2551037471
+revid: 2474354425
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Night_of_the_Pencils
+- provenance: verified
+  supports_claim: false
+  url: https://peoplesdispatch.org/2019/09/16/the-night-of-the-pencils/
+timestamp: '2026-04-11T06:18:14.140820+00:00'
+title: Q2526840
+turns: 1
+value_label: null
+verdict: unverifiable

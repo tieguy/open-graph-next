@@ -1,0 +1,29 @@
+completion_tokens: 2201
+cost_usd: 0.0070828
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28811
+property: P1477
+property_label: birth name
+rationale: Neither the old value ('Erwin sroderfinger') nor the new value ('Erwin
+  srgrosfinger') is supported by any authoritative source. All reliable biographical
+  sources and archives consistently use 'Erwin Schrödinger' as his birth name. The
+  edit changed one incorrect spelling to another, without improving accuracy.
+rcid: 2550564549
+revid: 2473897156
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: false
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Schr%C3%B6dinger/
+- provenance: verified
+  supports_claim: false
+  url: https://vls.hsa.ethz.ch/client/link/de/archiv/einheit/8138b9b39bbe431d85db420e92ef84da
+timestamp: '2026-04-11T12:35:17.996001+00:00'
+title: Q9130
+turns: 1
+value_label: null
+verdict: suspect

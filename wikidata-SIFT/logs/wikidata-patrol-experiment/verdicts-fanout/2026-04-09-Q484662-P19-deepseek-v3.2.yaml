@@ -1,0 +1,34 @@
+completion_tokens: 2902
+cost_usd: 0.060763127
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 240548
+property: P19
+property_label: place of birth
+rationale: All verified sources consistently state Wentworth Miller was born in Chipping
+  Norton, Oxfordshire, England, not Belgium. The Ghost Whisperer Fandom, TVRage, TV
+  Guide, and LGBT Archive sources all confirm the English birthplace. No sources were
+  found supporting Belgium as his birthplace. The edit appears factually incorrect
+  and the item's description as 'British-born American actor' aligns with the English
+  birthplace.
+rcid: 2549577486
+revid: 2472940165
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ghostwhisperer.fandom.com/wiki/Wentworth_Miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvrage.com/person/id-25355/Wentworth_Miller/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvguide.com/celebrities/wentworth-miller/credits/3000188883/
+- provenance: verified
+  supports_claim: false
+  url: https://lgbthistoryuk.org/wiki/Wentworth_Miller
+timestamp: '2026-04-09T23:27:14.173504+00:00'
+title: Q484662
+turns: 15
+value_label: Belgium
+verdict: incorrect

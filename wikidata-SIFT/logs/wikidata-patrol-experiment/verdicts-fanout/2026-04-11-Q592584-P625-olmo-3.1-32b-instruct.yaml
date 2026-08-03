@@ -1,0 +1,33 @@
+completion_tokens: 2021
+cost_usd: 0.0044744
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16309
+property: P625
+property_label: coordinate location
+rationale: Independent verification from Google Maps and OpenStreetMap confirms that
+  the old coordinate value for Imprensa Nacional–Casa da Moeda is correct and matches
+  the official address. The new coordinate value is inconsistent with these sources
+  and no supporting evidence for the new value was found. Therefore, changing from
+  the old to the new value was incorrect.
+rcid: 2550438253
+revid: 2473775019
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://eportugal.gov.pt/entidades/imprensa-nacional-casa-da-moeda
+- provenance: verified
+  supports_claim: false
+  url: https://www.incm.pt/
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/maps
+- provenance: reported
+  supports_claim: false
+  url: https://www.openstreetmap.org
+timestamp: '2026-04-11T17:46:29.035077+00:00'
+title: Q592584
+turns: 1
+value_label: null
+verdict: incorrect

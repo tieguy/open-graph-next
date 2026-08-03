@@ -1,0 +1,31 @@
+completion_tokens: 541
+cost_usd: 0.007030675
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 75998
+property: P6375
+property_label: street address
+rationale: The investigation did not yield any verifiable sources that confirm or
+  deny the street address change for the Institute for Regenerative Medicine & Biotherapy.
+  The official website and other potential sources did not provide the necessary information.
+rcid: 2550939311
+revid: 2474259838
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.irmb-inserm.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://lifenethealth.org/institute-regenerative-medicine
+- provenance: verified
+  supports_claim: false
+  url: https://medicine.tamu.edu/centers/irm/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.njregenerativeinstitute.com/
+timestamp: '2026-04-11T09:28:26.321411+00:00'
+title: Q30261465
+turns: 9
+value_label: null
+verdict: unverifiable

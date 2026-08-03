@@ -1,0 +1,31 @@
+completion_tokens: 940
+cost_usd: 0.0035598
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14979
+property: P154
+property_label: logo image
+rationale: The edit promotes an unverified logo image to preferred rank without external
+  corroboration that 'Totalmente Demais.png' is the correct or official logo for the
+  telenovela. The only accessible fan-run database entry confirms the show's existence
+  but does not reference a logo file by that name. There is no independent evidence
+  supporting the use of this image as the official logo, and elevating its rank without
+  such evidence is questionable.
+rcid: 2550762319
+revid: 2474088232
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://logos.fandom.com/wiki/Totalmente_Demais
+- provenance: reported
+  supports_claim: false
+  url: https://redeglobologopedia.fandom.com/wiki/Totalmente_Demais
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/playlist?list=PLCG86DHec6YGM_Hp2xtwOoj4QtkjRCQx9
+timestamp: '2026-04-11T09:32:21.945622+00:00'
+title: Q21296891
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,20 @@
+completion_tokens: 917
+cost_usd: 0.0042576
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18537
+property: P2002
+property_label: X (Twitter) username
+rationale: No references were provided for the X (Twitter) username claim, and independent
+  web searches did not find any confirmation of a Twitter/X account with the handle
+  'AshefTajwarAmin' for Ashef Tajwar Amin. Without corroborating evidence from an
+  official or verified source, the correctness of this edit cannot be assessed.
+rcid: 2540977689
+revid: 2464764385
+sources: []
+timestamp: '2026-02-20T02:12:42.459085+00:00'
+title: Q138349878
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1609
+cost_usd: 0.03311944
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 107881
+property: P127
+property_label: owned by
+rationale: 'The edit claims William Morris, 1st Viscount Nuffield (Q335487) as ''owned
+  by'' for the Oswald Birley portrait of Christopher Maude Chavasse dated 1938. The
+  evidence found shows that a different portrait of the same subject by Philip de
+  László was commissioned by Lord Nuffield in 1937, but there is no verified evidence
+  linking Nuffield to the specific Birley painting described by this Wikidata item.
+  The item''s claims (creator: Oswald Birley, inscription ''Oswald Birley / 1938'',
+  collection: St Peter''s College) all pertain to the Birley work, not the de László
+  portrait. The claim appears to conflate two distinct artworks.'
+rcid: 2540919649
+revid: 2464710726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Christopher_Maude_Chavasse_by_L%C3%A1szl%C3%B3.jpg
+- provenance: reported
+  supports_claim: null
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+timestamp: '2026-02-21T01:31:21.667541+00:00'
+title: Q119264330
+turns: 10
+value_label: William Morris, 1st Viscount Nuffield
+verdict: suspect

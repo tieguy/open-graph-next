@@ -1,0 +1,22 @@
+completion_tokens: 483
+cost_usd: 0.04328738125
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 457191
+property: P19
+property_label: place of birth
+rationale: The verified sources all confirm that Susan B. Anthony was born in Adams,
+  Massachusetts, not on a Saturday. The claim that her place of birth is 'Saturday'
+  is incorrect.
+rcid: 2550572172
+revid: 2473904435
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/activist/susan-b-anthony
+timestamp: '2026-04-07T12:53:18.951904+00:00'
+title: Q192245
+turns: 15
+value_label: Saturday
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 914
+cost_usd: 0.0035320000000000004
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14918
+property: P7678
+property_label: Wikimapia ID
+rationale: The edit added a reference to a Wikimapia URL that appears to correspond
+  to the claimed street, but the referenced page could not be fetched and read due
+  to a blocked request. No independent, reliable source confirmed the Wikimapia ID
+  '372687' for Q77525105. The OpenStreetMap wiki discusses Wikimapia's general issues
+  but does not verify this specific ID. Therefore, the claim cannot be confirmed or
+  denied based on the available evidence.
+rcid: 2550779618
+revid: 2474105114
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wiki.openstreetmap.org/wiki/Wikimapia
+- provenance: attempted
+  supports_claim: null
+  url: http://wikimapia.org/#lang=en&lat=48.432959&lon=35.058146&z=15&m=w&show=/street/372687/Mandrykivska-vulytsia
+timestamp: '2026-04-11T16:34:19.712832+00:00'
+title: Q77525105
+turns: 1
+value_label: null
+verdict: unverifiable

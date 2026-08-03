@@ -1,0 +1,33 @@
+completion_tokens: 1549
+cost_usd: 0.0035794
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13250
+property: P856
+property_label: official website
+rationale: The cited reference (Portuguese Wikipedia) does not verify the official
+  website, and independent sources and official Brazilian business registries do not
+  confirm http://www.grupobertin.com.br/ as Grupo Bertin's official website. The website
+  itself does not provide evidence that it is Grupo Bertin's official site. Therefore,
+  the claim cannot be confirmed or denied with reliable, independent evidence.
+rcid: 2551146644
+revid: 2474461153
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pt.wikipedia.org/w/index.php?title=Grupo_Bertin&oldid=54567734
+- provenance: verified
+  supports_claim: false
+  url: https://investnews.com.br/negocios/bertin-retomada-rj-2027/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bnamericas.com/en/company-profile/grupo-bertin-sa-grupo-bertin
+- provenance: verified
+  supports_claim: false
+  url: http://www.grupobertin.com.br/
+timestamp: '2026-04-11T15:18:18.859869+00:00'
+title: Q10291694
+turns: 1
+value_label: null
+verdict: unverifiable

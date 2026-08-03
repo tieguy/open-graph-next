@@ -1,0 +1,34 @@
+completion_tokens: 2889
+cost_usd: 0.098282
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 83837
+property: P214
+property_label: VIAF cluster ID
+rationale: The new VIAF ID 3142568709 is demonstrably incorrect. Every independent
+  source—including Wikidata itself, DBpedia, Wikidocumentaries, and Wikimedia Commons—consistently
+  identifies Ella Ewing's correct VIAF cluster ID as 31223779. A web search for 3142568709
+  as a VIAF identifier returns zero results; the number does not appear in any authority
+  file or library database. The edit replaces a correct, well-attested identifier
+  with an invalid one.
+rcid: 2540978591
+revid: 2464765237
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q511163
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Ella_Ewing
+- provenance: verified
+  supports_claim: false
+  url: https://viaf.org/viaf/3142568709/
+- provenance: verified
+  supports_claim: true
+  url: https://viaf.org/viaf/31223779/
+timestamp: '2026-02-20T02:07:13.339487+00:00'
+title: Q511163
+turns: 8
+value_label: null
+verdict: incorrect

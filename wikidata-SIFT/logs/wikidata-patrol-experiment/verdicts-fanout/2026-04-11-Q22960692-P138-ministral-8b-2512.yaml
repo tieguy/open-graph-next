@@ -1,0 +1,32 @@
+completion_tokens: 654
+cost_usd: 0.008968199999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35475
+property: P138
+property_label: named after
+rationale: The Northrop Grumman B-21 Raider was named after the **Doolittle Raid**,
+  which occurred in **1942** during **World War II (20th century)**. Multiple verified
+  sources, including Northrop Grumman's official website and CNN, explicitly state
+  that the B-21 Raider is named in honor of the Doolittle Raiders, not the 21st or
+  25th century. The original claim of '21st century' was incorrect, but changing it
+  to '25th century' is also incorrect based on the verified sources. The naming inspiration
+  is tied to a historical event from the 20th century, not a century designation.
+rcid: 2549246649
+revid: 2472617889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.northropgrumman.com/what-we-do/aircraft/b-21-raider
+- provenance: verified
+  supports_claim: false
+  url: https://www.cnn.com/2022/12/02/politics/b-21-stealth-bomber-air-force/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://aircraft.fandom.com/wiki/Northrop_Grumman_B-21_Raider
+timestamp: '2026-04-11T08:42:35.916959+00:00'
+title: Q22960692
+turns: 3
+value_label: 25th century
+verdict: incorrect

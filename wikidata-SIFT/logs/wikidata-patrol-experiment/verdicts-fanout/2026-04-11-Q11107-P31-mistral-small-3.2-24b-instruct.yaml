@@ -1,0 +1,28 @@
+completion_tokens: 1363
+cost_usd: 0.0076298125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77750
+property: P31
+property_label: instance of
+rationale: The edit changing the instance of Sonia Sotomayor from "human" to "robot"
+  is incorrect. There is no credible evidence to support the claim that she is a robot,
+  and reliable sources confirm her human status.
+rcid: null
+revid: 2470268184
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/magazine/2010/01/11/number-nine
+- provenance: verified
+  supports_claim: false
+  url: https://www.supremecourt.gov/about/biographies.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://www.washingtonexaminer.com/news/supreme-court/4523576/sotomayor-ai-supreme-court-rulings/
+timestamp: '2026-04-11T06:36:56.661275+00:00'
+title: Q11107
+turns: 5
+value_label: robot
+verdict: incorrect

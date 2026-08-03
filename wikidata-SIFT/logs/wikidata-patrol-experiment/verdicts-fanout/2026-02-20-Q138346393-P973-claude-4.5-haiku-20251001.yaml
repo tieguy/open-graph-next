@@ -1,0 +1,32 @@
+completion_tokens: 1900
+cost_usd: 0.050356
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 40856
+property: P973
+property_label: described at URL
+rationale: Web search results confirm that https://www.steelexpertwitness.com/about.php
+  exists and is the official 'about' page for SteelExpertWitness, describing it as
+  a group of steel industry experts providing litigation support. However, I was unable
+  to directly fetch and verify the page content due to SSL certificate verification
+  failures, so the verification is based on reported search results rather than direct
+  inspection of the target URL. The URL structure and context are consistent with
+  the item's description and other verified sources about the organization.
+rcid: 2540958450
+revid: 2464746572
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.steelexpertwitness.com/about.php
+- provenance: reported
+  supports_claim: true
+  url: https://www.steelexpertwitness.com/
+- provenance: reported
+  supports_claim: true
+  url: https://www.metalsconsultinginternational.com/
+timestamp: '2026-02-20T05:34:40.476605+00:00'
+title: Q138346393
+turns: 5
+value_label: null
+verdict: verified-low

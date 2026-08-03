@@ -1,0 +1,30 @@
+completion_tokens: 2707
+cost_usd: 0.00939642
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 110829
+property: P102
+property_label: member of political party
+rationale: The removal of the qualifiers (start and end times) from the claim that
+  Torsten Heinrich was a member of an unknown political party (Q24238356) was correct.
+  The original claim referenced an unverifiable party with no clear context or corroboration.
+  Independent sources confirm Torsten Heinrich's known membership in the Young Alternative
+  for Germany (JA), the youth wing of the AfD, from June 2013 to March 2014. The referenced
+  article does not support the claim of membership in an unknown party with specific
+  dates, and the unknown party itself is not recognized in any credible source. The
+  removal of qualifiers aligns with verified political career details.
+rcid: null
+revid: 2470876455
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.everybodywiki.com/Torsten_Heinrich
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20181129184010/https://www.huffingtonpost.de/torsten-heinrich/afd-partei-der-spinner_b_6067076.html
+timestamp: '2026-04-11T18:23:44.355390+00:00'
+title: Q118524207
+turns: 9
+value_label: unknown
+verdict: verified-high

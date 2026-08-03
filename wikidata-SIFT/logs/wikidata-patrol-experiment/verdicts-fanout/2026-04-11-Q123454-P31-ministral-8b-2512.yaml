@@ -1,0 +1,36 @@
+completion_tokens: 2511
+cost_usd: 0.02188107
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 206064
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changes Max Bill's instance of (P31) from 'human'
+  (Q5) to 'demon' (Q177413). The cited reference (BnF authorities) is unreachable,
+  and no verified independent sources support this claim. The item's description and
+  other claims (e.g., occupation, awards, birth/death dates) confirm Max Bill was
+  a real, historical person. This is a clear factual error and should be reverted.
+rcid: 2550804143
+revid: 2474129061
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://stadt.winterthur.ch/themen/leben-in-winterthur/kultur/kulturfoerderung/kulturpreis/dateien/preistraegerinnen-kulturpreis-stadt-winterthur2023.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Max-Bill
+- provenance: reported
+  supports_claim: false
+  url: https://rkd.nl/en/explore/artists/8423
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Max_Bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q123454
+timestamp: '2026-04-11T11:06:07.750809+00:00'
+title: Q123454
+turns: 8
+value_label: demon
+verdict: incorrect

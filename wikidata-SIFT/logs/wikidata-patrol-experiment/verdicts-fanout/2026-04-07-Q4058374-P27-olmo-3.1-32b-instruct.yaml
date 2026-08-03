@@ -1,0 +1,27 @@
+completion_tokens: 1022
+cost_usd: 0.0038806
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16337
+property: P27
+property_label: country of citizenship
+rationale: The reference provided in the edit is from a blocked domain and cannot
+  be accessed. The only independently fetched primary source confirms Misha Aznavour's
+  birthplace in Switzerland but does not specify his country of citizenship. No reliable
+  source was found that directly supports the country of citizenship change from France
+  to Switzerland.
+rcid: null
+revid: 2470267514
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.voici.fr/bios-people/mischa-aznavour
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.zefix.ch/de/search/entity/list/firm/1191677
+timestamp: '2026-04-07T12:15:34.063572+00:00'
+title: Q4058374
+turns: 2
+value_label: Switzerland
+verdict: unverifiable

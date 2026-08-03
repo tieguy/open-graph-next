@@ -1,0 +1,25 @@
+completion_tokens: 2144
+cost_usd: 0.01494639
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 113371
+property: P800
+property_label: notable work
+rationale: The new notable work claim, 'Male Head in Red Landscape' (Q138663008),
+  is independently confirmed by The Metropolitan Museum of Art as a well-documented
+  work by Joseph Glasco. The old claim, 'Untitled (1976) - MFAH' (Q138663124), lacks
+  independent verification due to an unreachable reference URL. Since the new value
+  is strongly supported by a primary source and the old value cannot be verified,
+  the edit is justified and improves the accuracy of the Wikidata claim.
+rcid: 2550443681
+revid: 2473780362
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.metmuseum.org/art/collection/search/488704
+timestamp: '2026-04-11T16:21:00.625879+00:00'
+title: Q6283474
+turns: 4
+value_label: Male Head in Red Landscape
+verdict: verified-high

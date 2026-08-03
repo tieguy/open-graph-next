@@ -1,0 +1,28 @@
+completion_tokens: 1187
+cost_usd: 0.0044670000000000005
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18774
+property: P154
+property_label: logo image
+rationale: No official source confirms a new logo for JeuxActu as of the time of investigation.
+  The current website and brand asset listings display the same logo as previously
+  used. Therefore, promoting a new logo value appears unjustified.
+rcid: 2540972292
+revid: 2464759478
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jeuxactu.com/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikidata.org/wiki/File:JeuxActu_logo.svg
+- provenance: verified
+  supports_claim: false
+  url: https://www.jeuxactu.com/page/mentions-legales.htm
+timestamp: '2026-02-20T03:02:47.151079+00:00'
+title: Q3178208
+turns: 2
+value_label: null
+verdict: suspect

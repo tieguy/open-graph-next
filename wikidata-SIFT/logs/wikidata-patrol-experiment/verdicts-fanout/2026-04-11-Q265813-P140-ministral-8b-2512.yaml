@@ -1,0 +1,34 @@
+completion_tokens: 2177
+cost_usd: 0.00554958
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 47467
+property: P140
+property_label: religion or worldview
+rationale: The edit changes the religion or worldview from a generic English label
+  ('Catholicism') to a Spanish label ('Catolicismo [es]'). While this aligns with
+  linguistic best practices for a Spanish-language Wikidata item, no verified sources
+  explicitly confirm Susana Higuchi's religion. The cited reference (Spanish Wikipedia)
+  could not be accessed due to domain restrictions, and no independent sources mention
+  her religion. The change is linguistically justified but lacks direct corroboration.
+rcid: 2549615483
+revid: 2472977120
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Susana_Higuchi
+- provenance: verified
+  supports_claim: false
+  url: https://hiplatina.com/susana-higuchi-peru-first-lady/
+- provenance: verified
+  supports_claim: false
+  url: https://infogob.jne.gob.pe/Politico/FichaPolitico/susana-higuchi-miyagawa_historial-partidario_10i9LM4dY74=iM
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Susana_Higuchi
+timestamp: '2026-04-11T06:21:36.279679+00:00'
+title: Q265813
+turns: 3
+value_label: Catolicismo [es]
+verdict: plausible

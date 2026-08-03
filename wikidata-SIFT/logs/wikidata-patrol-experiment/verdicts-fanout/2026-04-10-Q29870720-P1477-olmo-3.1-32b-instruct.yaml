@@ -1,0 +1,30 @@
+completion_tokens: 1494
+cost_usd: 0.0033026
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12031
+property: P1477
+property_label: birth name
+rationale: The only reference provided for changing Jarfaiter's birth name to 'semen'
+  was unreachable. Independent secondary sources such as MusicBrainz list a different
+  legal name ('Olmo Suárez Sánchez') and do not mention 'semen' as the birth name.
+  Therefore, there is no evidence to support the change, and it is contradicted by
+  reliable sources.
+rcid: 2550531970
+revid: 2473865781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/80404ff9-7329-40cb-b5b6-24b23d83059a
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/jarfaiter.html
+timestamp: '2026-04-10T12:31:18.610889+00:00'
+title: Q29870720
+turns: 1
+value_label: null
+verdict: incorrect

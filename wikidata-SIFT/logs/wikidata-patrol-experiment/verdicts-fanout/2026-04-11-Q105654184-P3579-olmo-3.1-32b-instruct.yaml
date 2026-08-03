@@ -1,0 +1,33 @@
+completion_tokens: 2430
+cost_usd: 0.0041128
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13274
+property: P3579
+property_label: Weibo user ID
+rationale: Fan and aggregator sources report that Patrick Nattawat Finkler uses the
+  Weibo handle 'u/7527950457', but these are secondary sources. Direct verification
+  is not possible because Weibo.com is inaccessible for content fetching. No independent,
+  reliable source confirms the Weibo user ID. Therefore, the edit cannot be confirmed
+  as correct or incorrect based on available evidence.
+rcid: 2551413554
+revid: 2474716399
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gmmtv.fandom.com/wiki/Patrick_Nattawat_Finkler
+- provenance: verified
+  supports_claim: false
+  url: https://kprofiles.com/patrick-profile/
+- provenance: verified
+  supports_claim: false
+  url: https://yinhaoyu.carrd.co/
+- provenance: attempted
+  supports_claim: null
+  url: https://weibo.com/u/7527950457
+timestamp: '2026-04-11T18:32:29.786568+00:00'
+title: Q105654184
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 1549
+cost_usd: 0.0044862
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17784
+property: P1705
+property_label: native label
+rationale: The new value '20 FrenchTacos Street' is not supported by any authoritative
+  or independent sources. All reliable references—including official building records
+  and news coverage—use '20 Fenchurch Street' as the correct address. Changing the
+  established address to an unsupported name is suspicious and risks misinformation.
+rcid: 2549596457
+revid: 2472958532
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.skyscrapercenter.com/building/20-fenchurch-street/3350
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/news/uk-34116610
+timestamp: '2026-04-11T10:50:19.190850+00:00'
+title: Q212834
+turns: 1
+value_label: null
+verdict: suspect

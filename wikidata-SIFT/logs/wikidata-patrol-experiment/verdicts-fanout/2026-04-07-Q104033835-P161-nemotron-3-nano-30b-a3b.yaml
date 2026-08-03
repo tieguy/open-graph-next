@@ -1,0 +1,25 @@
+completion_tokens: 667
+cost_usd: 0.008096450000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 159261
+property: P161
+property_label: cast member
+rationale: No verifiable sources were found confirming that Donald Trump is a cast
+  member of The Adam Project (2022). Multiple searches for the film's cast on official
+  and authoritative sources returned no relevant results or were blocked. Existing
+  references on the claim cite circular sources like Wikipedia without supporting
+  verification. Without external corroboration from reliable sources, the claim remains
+  unverifiable.
+rcid: 2550549913
+revid: 2473883037
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/The_Adam_Project_(film)
+timestamp: '2026-04-07T05:50:32.595830+00:00'
+title: Q104033835
+turns: 15
+value_label: Donald Trump
+verdict: unverifiable

@@ -1,0 +1,21 @@
+completion_tokens: 336
+cost_usd: 0.00217165
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 42089
+property: P18
+property_label: image
+rationale: The edit attempted to change the image of Pierre Bordage to 'Minecraft
+  Creeper (Crop).png' but provided no references or supporting evidence. A web search
+  for this image and related claims did not yield any sources, and no sources were
+  fetched during investigation. Without any sources to evaluate, verification cannot
+  be completed.
+rcid: 2550574858
+revid: 2473907021
+sources: []
+timestamp: '2026-04-07T10:19:19.084901+00:00'
+title: Q543836
+turns: 2
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1488
+cost_usd: 0.0106658
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 48865
+property: P27
+property_label: country of citizenship
+rationale: The cited reference confirms that Muhammad ibn Sulayman al-Kurdi was an
+  Ottoman jurist born in Damascus and based in Medina, but does not support the claim
+  that his country of citizenship was 'Kurdistan.' Independent historical sources
+  also do not describe him as a citizen of a polity named 'Kurdistan,' and such an
+  entity did not exist as a recognized country during his lifetime. Therefore, there
+  is insufficient evidence to confirm the new claim.
+rcid: 2540918985
+revid: 2464710067
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://islamansiklopedisi.org.tr/kurdi-muhammed-b-suleyman
+- provenance: verified
+  supports_claim: false
+  url: https://kurdistanmemoryprogramme.com/history-of-the-kurds/
+timestamp: '2026-02-21T01:58:15.697929+00:00'
+title: Q86631287
+turns: 3
+value_label: Kurdistan
+verdict: unverifiable

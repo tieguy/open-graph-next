@@ -1,0 +1,42 @@
+completion_tokens: 1695
+cost_usd: 0.04048
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 32005
+property: P856
+property_label: official website
+rationale: The reference URL (https://www.maldiluna.com) directly supports the official
+  website claim for Mal di Luna. Fetching the website confirms it is operational and
+  belongs to the band, displaying 'Postmodern Gothic Rock from Trieste, Italy' which
+  matches the item's description. The detailed About page confirms all band members
+  (Chris Glenn, Giovanni Bertossi, Michael Bonanno, Lorenzo Visintin), location (Trieste,
+  Italy), and record label (Alice In...), validating consistency across the Wikidata
+  item. Multiple independent sources (Spotify, Chartmetric, Bandcamp, Side-Line) independently
+  confirm maldiluna.com as the band's official web presence, providing strong corroboration.
+rcid: 2540937926
+revid: 2464727575
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com/about-us/
+- provenance: reported
+  supports_claim: true
+  url: https://open.spotify.com/artist/2PLr0CLTtezGtTALQhX6Ac
+- provenance: reported
+  supports_claim: true
+  url: https://app.chartmetric.com/artist/10197379
+- provenance: reported
+  supports_claim: true
+  url: https://alice-in.bandcamp.com/album/the-postmodern-gothic
+- provenance: reported
+  supports_claim: true
+  url: https://www.side-line.com/trieste-based-gothic-industrial-rock-act-mal-di-luna-unveils-video-for-their-debut-single-moonlight/
+timestamp: '2026-02-20T16:26:35.496710+00:00'
+title: Q138348548
+turns: 4
+value_label: null
+verdict: verified-high

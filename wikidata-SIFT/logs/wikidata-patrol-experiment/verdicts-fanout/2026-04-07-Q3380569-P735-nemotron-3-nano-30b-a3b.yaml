@@ -1,0 +1,22 @@
+completion_tokens: 770
+cost_usd: 0.0027741
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 52402
+property: P735
+property_label: given name
+rationale: No verifiable source confirms that Q133388175 is Philippe Pozzo di Borgo's
+  given name. The only fetched source (RTS biographical page) contains no mention
+  of this name and was marked as 'unknown' regarding support for the claim.
+rcid: null
+revid: 2468670518
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rts.ch/dossiers/2012/de-chair-et-d-ame/4437103-biographie-philippe-pozzo-di-borgo.html
+timestamp: '2026-04-07T08:14:11.440001+00:00'
+title: Q3380569
+turns: 6
+value_label: Q133388175
+verdict: unverifiable

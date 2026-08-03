@@ -1,0 +1,25 @@
+completion_tokens: 1192
+cost_usd: 0.0025640312500000003
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24171
+property: P4224
+property_label: category contains
+rationale: The sources confirm that the coaches and players of the Purdue Boilermakers
+  women's volleyball team are human. The edit adds a relevant qualifier to the claim,
+  which is supported by the evidence.
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/staff-directory/department/womens-volleyball
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/sports/volleyball/roster
+timestamp: '2026-04-10T13:30:20.027036+00:00'
+title: Q86334853
+turns: 3
+value_label: human
+verdict: verified-high

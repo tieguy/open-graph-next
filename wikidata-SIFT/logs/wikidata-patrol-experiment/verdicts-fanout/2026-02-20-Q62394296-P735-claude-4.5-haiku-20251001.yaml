@@ -1,0 +1,41 @@
+completion_tokens: 4167
+cost_usd: 0.32999599999999996
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 309161
+property: P735
+property_label: given name
+rationale: Multiple reliable sources consistently identify Mansour Abbas' given name
+  as 'Mansour' (منصور), not 'Black'. All major news outlets (NPR, TIME, Haaretz) and
+  biographical references consistently use the name structure 'Mansour Abbas' where
+  Mansour is the given name and Abbas is the family name. The value Q2662465 is classified
+  by Wikidata itself as an English family name, not a given name, making it factually
+  incorrect for the P735 (given name) property. The claim is demonstrably false and
+  contradicts all reliable biographical sources.
+rcid: 2540944872
+revid: 2464734208
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jcfa.org/article/mansour-abbas-mahmoud-abbas-and-the-abraham-effect/
+- provenance: verified
+  supports_claim: false
+  url: https://www.jns.org/mansour-abbas-mahmoud-abbas-and-the-abraham-effect/
+- provenance: verified
+  supports_claim: false
+  url: https://www.npr.org/2022/01/17/1073565965/arab-leaders-gamble-to-play-kingmaker-in-israel-is-paying-off
+- provenance: verified
+  supports_claim: false
+  url: https://time.com/6073019/mansour-abbas-arab-israel-coalition-government/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q2662465
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q19381004
+timestamp: '2026-02-20T12:12:07.206485+00:00'
+title: Q62394296
+turns: 14
+value_label: Black
+verdict: incorrect

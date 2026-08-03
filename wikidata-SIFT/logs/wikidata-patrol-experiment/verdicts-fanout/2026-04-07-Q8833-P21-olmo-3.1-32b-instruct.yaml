@@ -1,0 +1,26 @@
+completion_tokens: 1295
+cost_usd: 0.009353799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42884
+property: P21
+property_label: sex or gender
+rationale: No reliable or primary sources were found that support assigning the identity
+  'bisexual person' to Gaius Maecenas. Modern identity labels should not be applied
+  to historical figures without explicit evidence from primary or reputable secondary
+  sources.
+rcid: 2549268643
+revid: 2472638900
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Gaius_Maecenas
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T05:36:15.400781+00:00'
+title: Q8833
+turns: 5
+value_label: bisexual person
+verdict: unverifiable

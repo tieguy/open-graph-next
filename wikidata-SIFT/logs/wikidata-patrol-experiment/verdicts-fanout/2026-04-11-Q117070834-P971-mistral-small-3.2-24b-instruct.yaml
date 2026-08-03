@@ -1,0 +1,32 @@
+completion_tokens: 2000
+cost_usd: 0.0013632875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 10600
+property: P971
+property_label: category combines topics
+rationale: The new value "persons active in this association" (Q104216787) is supported
+  by the Wikidata item for UC Santa Barbara Gauchos men's volleyball (Q18397585).
+  However, the old value "volleyball coach" (Q20730881) is also supported by the UC
+  Santa Barbara Gauchos Men's Volleyball coaches page and the Wikidata item for volleyball
+  coach. The change from "volleyball coach" to "persons active in this association"
+  may not be justified as both values appear to be correct and relevant. The edit
+  lacks references, which adds to the suspicion.
+rcid: 2550308138
+revid: 2473647927
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ucsbgauchos.com/sports/mens-volleyball/coaches
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q18397585
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q20730881
+timestamp: '2026-04-11T06:12:53.849024+00:00'
+title: Q117070834
+turns: 1
+value_label: persons active in this association
+verdict: suspect

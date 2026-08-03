@@ -1,0 +1,29 @@
+completion_tokens: 1614
+cost_usd: 0.023253
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 111423
+property: P1477
+property_label: birth name
+rationale: The referenced birth certificate could not be fetched to verify the exact
+  wording of the birth name. However, multiple independent authoritative sources consistently
+  record Maurice Ravel's birth name as 'Joseph Maurice Ravel.' The change to 'Maurice
+  Ravel' is not supported by these sources and therefore appears suspect.
+rcid: null
+revid: 2471911372
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://earchives.le64.fr/archives-en-ligne/ark:/81221/r20328zwkx417k/f32?context=ead::FRAD064003_IR0002_e0055076
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Brockhaus_Enzyklop%C3%A4die
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Maurice-Ravel
+timestamp: '2026-04-07T04:20:46.138000+00:00'
+title: Q1178
+turns: 7
+value_label: null
+verdict: suspect

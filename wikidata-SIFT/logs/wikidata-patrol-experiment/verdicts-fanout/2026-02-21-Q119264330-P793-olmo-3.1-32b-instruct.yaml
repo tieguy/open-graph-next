@@ -1,0 +1,27 @@
+completion_tokens: 1644
+cost_usd: 0.009464
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42388
+property: P793
+property_label: significant event
+rationale: The Art UK catalog snippet indicates the painting was acquired as a gift
+  from Lord Nuffield in 1938, directly supporting the claim. However, the primary
+  source (Art UK) could not be fetched due to a blocked domain, and no independent
+  sources corroborate the gift. Therefore, while the claim is plausible and supported
+  by the cited source, the evidence is not independently confirmed.
+rcid: 2540920003
+revid: 2464711065
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+- provenance: verified
+  supports_claim: false
+  url: https://www.spc.ox.ac.uk/asset/SPC_2020_21_Accounts.pdf
+timestamp: '2026-02-21T01:21:59.753787+00:00'
+title: Q119264330
+turns: 5
+value_label: gift
+verdict: verified-low

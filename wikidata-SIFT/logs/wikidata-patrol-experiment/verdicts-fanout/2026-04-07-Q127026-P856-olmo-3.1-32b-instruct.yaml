@@ -1,0 +1,27 @@
+completion_tokens: 1391
+cost_usd: 0.022626200000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 108958
+property: P856
+property_label: official website
+rationale: The new value https://www.vietnamairlines.com is the official website of
+  Vietnam Airlines, a commercial airline, and not a municipal government site. However,
+  the investigation could not fetch or verify from an authoritative source that https://www.city.sakurai.lg.jp/
+  is the current official website of Sakurai City. Without confirmation of the prior
+  official website, the change cannot be judged definitively.
+rcid: 2551422192
+revid: 2474723676
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.sakurai.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T08:44:17.025151+00:00'
+title: Q127026
+turns: 11
+value_label: null
+verdict: unverifiable

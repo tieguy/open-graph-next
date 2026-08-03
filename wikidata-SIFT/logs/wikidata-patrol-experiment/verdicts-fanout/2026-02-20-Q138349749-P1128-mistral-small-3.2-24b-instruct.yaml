@@ -1,0 +1,22 @@
+completion_tokens: 313
+cost_usd: 0.0019771
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18832
+property: P1128
+property_label: employees
+rationale: The edit to update the number of employees at Amarra to 25 is supported
+  by a direct statement from a verified source. The Business Insider article explicitly
+  states that Amarra has grown from 2 employees at launch to 25 employees as of 2024.
+rcid: 2540958653
+revid: 2464746760
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.businessinsider.com/wholesale-formal-gown-distributor-using-ai-for-ecommerce-operations
+timestamp: '2026-02-20T05:20:42.528482+00:00'
+title: Q138349749
+turns: 3
+value_label: null
+verdict: verified-high

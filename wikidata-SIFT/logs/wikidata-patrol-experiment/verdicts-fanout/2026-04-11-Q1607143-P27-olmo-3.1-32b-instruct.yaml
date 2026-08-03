@@ -1,0 +1,35 @@
+completion_tokens: 2016
+cost_usd: 0.0067902
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27903
+property: P27
+property_label: country of citizenship
+rationale: The edit changed Henry Parkes' country of citizenship from a valid historical
+  country (United Kingdom of Great Britain and Ireland) to a journal ('Australian
+  Journal of Chemistry'), which is not a country and cannot be a valid value for P27.
+  Multiple independent and verified sources confirm that Henry Parkes was British
+  by birth and remained a British subject throughout his life in Australia. There
+  is no evidence that he held Australian citizenship in the modern sense. Therefore,
+  this edit is factually incorrect and should be reverted.
+rcid: null
+revid: 2466185039
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Henry_Parkes
+- provenance: verified
+  supports_claim: false
+  url: https://www.nla.gov.au/ndp/del/article/1194616
+- provenance: verified
+  supports_claim: false
+  url: https://www.naa.gov.au/explore-collection/australian-political-leaders/henry-parkes
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q781542
+timestamp: '2026-04-11T08:03:55.734246+00:00'
+title: Q1607143
+turns: 1
+value_label: Australian Journal of Chemistry
+verdict: incorrect

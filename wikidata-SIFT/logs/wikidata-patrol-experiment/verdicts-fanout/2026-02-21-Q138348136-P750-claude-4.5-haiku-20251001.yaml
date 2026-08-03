@@ -1,0 +1,36 @@
+completion_tokens: 3730
+cost_usd: 0.177817
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 159167
+property: P750
+property_label: distributed by
+rationale: 'The claim that Fut Rap Cartas was distributed by the App Store (Q368215)
+  is historically accurate and supported by independent sources. The Rap Fandom wiki
+  documents that the game launched on iOS in January 2022. However, verification is
+  weakened by three critical factors: (1) the cited reference URL returns HTTP 404
+  and is unreachable, (2) the game is currently unavailable on the App Store according
+  to official sources (removed in 2022), and (3) the claim lacks a temporal qualifier
+  to indicate this was past distribution. The Q-identifier is correct, but the reference
+  support is compromised.'
+rcid: 2540918215
+revid: 2464709398
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: false
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: false
+  url: https://apps.apple.com/us/app/frc-25-futrapcartas/id6466343305
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q368215
+timestamp: '2026-02-21T02:38:50.890825+00:00'
+title: Q138348136
+turns: 12
+value_label: Q368215
+verdict: verified-low

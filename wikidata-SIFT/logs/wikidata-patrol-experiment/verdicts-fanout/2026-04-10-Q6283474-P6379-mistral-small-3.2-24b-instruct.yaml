@@ -1,0 +1,22 @@
+completion_tokens: 1639
+cost_usd: 0.00782181875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77187
+property: P6379
+property_label: has works in the collection
+rationale: The claim is supported by a direct reference from the Joseph Glasco Foundation's
+  museum collections page, which explicitly lists The Menil Collection as holding
+  works by Joseph Glasco, including a specific piece titled 'Untitled, 1976.'
+rcid: 2550378518
+revid: 2473716615
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://josephglascofoundation.org/museum-collections
+timestamp: '2026-04-10T14:15:14.609452+00:00'
+title: Q6283474
+turns: 2
+value_label: The Menil Collection
+verdict: verified-high

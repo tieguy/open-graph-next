@@ -1,0 +1,33 @@
+completion_tokens: 305
+cost_usd: 0.0025612
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11891
+property: P31
+property_label: instance of
+rationale: The change from 'fictional human' to 'human' for the character Helen from
+  Sonic X is suspect because Helen is a fictional character within a media franchise.
+  Authoritative sources confirm that Helen of Troy is a mythological and literary
+  figure, but Helen from Sonic X is a fictional character depicted as a human in the
+  Sonic universe. However, designating her simply as 'human' omits the essential context
+  that she is a fictional creation, whereas 'fictional human' more accurately reflects
+  her ontological status. This change appears to reduce specificity and may misrepresent
+  her nature within Wikidata's instance of hierarchy.
+rcid: 2550750525
+revid: 2474076726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/learn/lesson/helen-of-troy-story-mythology-trojan-war.html
+- provenance: verified
+  supports_claim: false
+  url: https://web.sas.upenn.edu/discentes/2024/04/21/the-anatomy-of-a-misunderstood-woman/
+- provenance: reported
+  supports_claim: true
+  url: https://sonic.fandom.com/wiki/Helen_(Sonic_X)
+timestamp: '2026-04-11T13:32:48.911817+00:00'
+title: Q116754785
+turns: 1
+value_label: human
+verdict: suspect

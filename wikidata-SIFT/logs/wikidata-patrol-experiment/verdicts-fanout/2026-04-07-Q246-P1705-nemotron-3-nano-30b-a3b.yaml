@@ -1,0 +1,32 @@
+completion_tokens: 1093
+cost_usd: 0.01175295
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 230687
+property: P1705
+property_label: native label
+rationale: No credible source was found to confirm 'Volkswageo' as the native label
+  for Volkswagen. Comprehensive searches of official Volkswagen domains and German
+  language content yielded no results, preventing verification of the claim.
+rcid: 2549274042
+revid: 2472643648
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://webcache.googleusercontent.com/search?q=cache:Volkswageo vehicle label
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Volkswagen+native+label
+- provenance: reported
+  supports_claim: false
+  url: https://www.vox-efficacy.com/volkswagen-german-name
+- provenance: verified
+  provenance_verification: web_fetch confirmed access
+  supports_claim: false
+  url: https://archive.org/details/volkswagen-website-2023
+timestamp: '2026-04-07T08:18:00.165969+00:00'
+title: Q246
+turns: 11
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 1702
+cost_usd: 0.0017751124999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13709
+property: P127
+property_label: owned by
+rationale: The sources consulted define treasury stock as stock repurchased by the
+  issuing company, which is a specific financial concept rather than a general business
+  entity. There is no clear evidence that "treasury stock" is owned by "business"
+  in the general sense. The removal of the statement appears to be justified.
+rcid: 2550156780
+revid: 2473501777
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://biz.libretexts.org/Bookshelves/Accounting/Principles_of_Financial_Accounting_(Jonick)/06:_Stockholders_Equity_in_More_Detail/6.05:_Treasury_Stock
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/treasury-stock-definition-accounting-method-formula.html
+- provenance: verified
+  supports_claim: false
+  url: https://viewpoint.pwc.com/dt/us/en/pwc/accounting_guides/financial_statement_/financial_statement___18_US/chapter_5_stockholde_US/59_treasury_stock_US.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.sec.gov/answers/treasurystock.htm
+timestamp: '2026-04-11T17:20:02.533888+00:00'
+title: Q1516464
+turns: 1
+value_label: business
+verdict: verified-high

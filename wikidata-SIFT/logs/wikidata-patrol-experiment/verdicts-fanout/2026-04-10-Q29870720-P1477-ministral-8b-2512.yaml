@@ -1,0 +1,32 @@
+completion_tokens: 2063
+cost_usd: 0.0035679600000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30709
+property: P1477
+property_label: birth name
+rationale: Multiple verified sources (MusicBrainz, Genius, AllFamous.org) confirm
+  Jarfaiter's birth name is 'Olmo Suárez Sánchez,' directly contradicting the claim
+  that it is 'semen.' The cited reference (20minutos.es) is unreachable, and no credible
+  evidence supports the edit. The claim is clearly incorrect.
+rcid: 2550531970
+revid: 2473865781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/80404ff9-7329-40cb-b5b6-24b23d83059a
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Jarfaiter
+- provenance: verified
+  supports_claim: false
+  url: https://allfamous.org/people/jarfaiter-fnkd.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-10T12:31:21.059141+00:00'
+title: Q29870720
+turns: 3
+value_label: null
+verdict: incorrect

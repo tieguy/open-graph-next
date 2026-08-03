@@ -1,0 +1,30 @@
+completion_tokens: 1453
+cost_usd: 0.00392568
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30453
+property: P18
+property_label: image
+rationale: The image 'Penis pumped.jpg' is inappropriate and incorrect for Q31331
+  (Pello), a Finnish municipality. Multiple verified primary sources, including Wikimedia
+  Commons and the official municipal website, confirm that this image is not used
+  or associated with Pello. The image is clearly unrelated to the municipality's official
+  representation.
+rcid: null
+revid: 2471248028
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Pello_kunta.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://www.pello.fi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pello+municipality+image
+timestamp: '2026-04-10T13:22:59.505231+00:00'
+title: Q31331
+turns: 1
+value_label: null
+verdict: incorrect

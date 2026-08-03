@@ -1,0 +1,35 @@
+completion_tokens: 1810
+cost_usd: 0.03369
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 24640
+property: P509
+property_label: cause of death
+rationale: Multiple authoritative Peruvian news sources (El Comercio, La República,
+  Ojo, Peru21) directly confirm that David Núñez died of COVID-19 on April 24, 2021,
+  at Hospital Regional de Loreto—a fact verified by hospital director Joyce Rojas.
+  The edit claims Mia Khalifa (a webcam model and former adult film actress) as the
+  cause of death, which is demonstrably false, nonsensical, and contradicted by all
+  available reliable sources. No reference supports this claim, and it represents
+  clear vandalism.
+rcid: 2540985426
+revid: 2464771741
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://elcomercio.pe/peru/loreto-david-nunez-cantante-de-explosion-de-iquitos-fallecio-en-la-madrugada-del-sabado-nnpp-noticia/
+- provenance: reported
+  supports_claim: false
+  url: https://larepublica.pe/espectaculos/2021/04/24/fallece-david-nunez-integrante-de-explosion-de-iquitos-por-covid-19
+- provenance: reported
+  supports_claim: false
+  url: https://ojo.pe/regionales/loreto-fallece-cantante-de-explosion-de-iquitos-a-causa-de-covid-19-nnpp-noticia/
+- provenance: reported
+  supports_claim: false
+  url: https://peru21.pe/peru/loreto-cantante-de-explosion-de-iquitos-murio-tras-contraer-covid-19-nnpp-noticia/
+timestamp: '2026-02-19T22:19:35.806705+00:00'
+title: Q106629259
+turns: 2
+value_label: Mia Khalifa
+verdict: incorrect

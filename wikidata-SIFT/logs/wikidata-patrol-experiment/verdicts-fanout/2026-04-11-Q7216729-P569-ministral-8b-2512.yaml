@@ -1,0 +1,28 @@
+completion_tokens: 2352
+cost_usd: 0.00349149
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36797
+property: P569
+property_label: date of birth
+rationale: The investigation was unable to verify the claim due to blocked domains
+  and payment errors preventing access to relevant sources. The cited references (Korean
+  Authority File and National Library of Korea ID) were unreachable, and no independent,
+  verified sources confirmed the birthdate of Lee Hye-gyeong (writer) as 16 June 1960.
+  Additionally, the references cited appear to pertain to Lee Hye-yeong (actress),
+  not the writer.
+rcid: 2551329586
+revid: 2474636438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.primevideo.com/person/Lee-Hye-yeong/amzn1.dv.gti.d90620e2-b286-42ab-bb3f-bb02c9bd475d/
+- provenance: verified
+  supports_claim: false
+  url: https://www.whosdatedwho.com/dating/lee-hye-yeong
+timestamp: '2026-04-11T15:29:46.955065+00:00'
+title: Q7216729
+turns: 4
+value_label: null
+verdict: unverifiable

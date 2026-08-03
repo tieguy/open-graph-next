@@ -1,0 +1,29 @@
+completion_tokens: 1097
+cost_usd: 0.0040745
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40536
+property: P69
+property_label: educated at
+rationale: The removed claim had no references, and web searches could not be performed
+  to find independent corroboration. The prefetched references do not provide any
+  information about O Dae-geoyong's education. Therefore, it is unverifiable whether
+  the removal was justified.
+rcid: 2550198098
+revid: 2473541049
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://gaem.kangwon.ac.kr/FacultyList.asp
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/institution/Kangwon_National_University/members/5
+- provenance: verified
+  supports_claim: false
+  url: https://www.topuniversities.com/universities/kangwon-national-university
+timestamp: '2026-04-11T10:46:00.976455+00:00'
+title: Q107615244
+turns: 5
+value_label: Kangwon National University
+verdict: unverifiable

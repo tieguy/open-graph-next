@@ -1,0 +1,34 @@
+completion_tokens: 838
+cost_usd: 0.016516140000000002
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 47466
+property: P1477
+property_label: birth name
+rationale: The edit cites 'University of Salamanca' (Q308963) as a reference for the
+  birth name 'María Ángeles Almeida Parra' but provides no specific URL. Investigation
+  found multiple sources listing 'Ángeles Almeida' or 'María Ángeles Almeida Parra'
+  as a researcher at CSIC/University of Salamanca, but none explicitly confirm this
+  as her legal birth name versus a professional name. The Universidad de Salamanca's
+  research portal shows 'María Ángeles Almeida Parra' but doesn't specify it's her
+  birth name. Without access to an official primary source (birth certificate, university
+  official record) confirming this is her legal birth name, the claim cannot be sufficiently
+  verified.
+rcid: 2540939136
+revid: 2464728724
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://produccioncientifica.usal.es/investigadores/56846/publicaciones?herculesThematic=General%20Neuroscience&lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://ibfg.usal-csic.es/angeles-almeida-en.html
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0003-0485-8904
+timestamp: '2026-02-20T15:57:54.813827+00:00'
+title: Q59162465
+turns: 7
+value_label: null
+verdict: unverifiable

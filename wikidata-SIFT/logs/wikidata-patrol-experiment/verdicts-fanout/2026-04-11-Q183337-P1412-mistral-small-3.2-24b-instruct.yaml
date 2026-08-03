@@ -1,0 +1,22 @@
+completion_tokens: 197
+cost_usd: 0.010015906249999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 106311
+property: P1412
+property_label: languages spoken, written or signed
+rationale: Due to search errors, I was unable to verify the claim or find sufficient
+  evidence to confirm or deny the change from 'English' to 'cha-cha-chá' as a language
+  spoken by David Attenborough.
+rcid: 2549923767
+revid: 2473277640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://example.com/primary-source
+timestamp: '2026-04-11T12:14:19.900244+00:00'
+title: Q183337
+turns: 4
+value_label: cha-cha-chá
+verdict: unverifiable

@@ -1,0 +1,21 @@
+completion_tokens: 1174
+cost_usd: 0.0044458
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18707
+property: P921
+property_label: main subject
+rationale: Unable to verify the correctness of the removal due to lack of accessible,
+  independent sources. All web searches returned no results, and the Wikidata page
+  for 'Wikimedian' was inaccessible. There is no cited reference for the original
+  claim, and no evidence could be found to confirm or deny the previous assignment
+  of 'Wikimedian' as the main subject of Wikipedia:Babel.
+rcid: 2550595538
+revid: 2473926814
+sources: []
+timestamp: '2026-04-07T02:52:05.018209+00:00'
+title: Q6476774
+turns: 4
+value_label: Wikimedian
+verdict: unverifiable

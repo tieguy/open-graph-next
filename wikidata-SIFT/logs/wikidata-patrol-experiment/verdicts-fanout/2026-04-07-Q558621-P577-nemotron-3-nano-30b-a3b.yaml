@@ -1,0 +1,21 @@
+completion_tokens: 643
+cost_usd: 0.00879905
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 173409
+property: P577
+property_label: publication date
+rationale: No verifiable source was found that confirms or contradicts the claimed
+  17 August 2012 publication date after trying multiple relevant searches. Citations
+  appear broken, the accompanying reference URL could not be retrieved, and no independent
+  confirmation of the date was located despite extensive searching. Therefore there
+  is insufficient evidence to verify or refute the claim with the current investigation.
+rcid: null
+revid: 2470911740
+sources: []
+timestamp: '2026-04-07T05:10:53.426616+00:00'
+title: Q558621
+turns: 15
+value_label: null
+verdict: unverifiable

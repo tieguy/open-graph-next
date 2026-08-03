@@ -1,0 +1,41 @@
+completion_tokens: 2286
+cost_usd: 0.0068728
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27506
+property: P26
+property_label: spouse
+rationale: No independent, authoritative sources (including official university profiles,
+  major news outlets, and a presidential decree) mention Maryna Viazovska having a
+  spouse named 'El Rodrigo' or the previous value 'Daniel Yevtushinsky'. The new spouse
+  claim is not corroborated by any reliable source, making the edit suspicious.
+rcid: null
+revid: 2471464419
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://actu.epfl.ch/news/an-epfl-mathematician-is-awarded-a-fields-medal/
+- provenance: verified
+  supports_claim: false
+  url: https://people.epfl.ch/maryna.viazovska?lang=en
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Maryna_Viazovska
+- provenance: verified
+  supports_claim: false
+  url: https://www.quantamagazine.org/ukrainian-mathematician-maryna-viazovska-wins-fields-medal-20220705/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/news/resources/idt-75af095e-21f7-41b0-9c5f-a96a5e0615c1
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/ukrainian/news-62040884
+- provenance: verified
+  supports_claim: false
+  url: https://www.president.gov.ua/documents/4962022-43293
+timestamp: '2026-04-11T17:24:10.176645+00:00'
+title: Q23721911
+turns: 1
+value_label: El Rodrigo
+verdict: suspect

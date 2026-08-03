@@ -1,0 +1,37 @@
+completion_tokens: 1521
+cost_usd: 0.03388708
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 145636
+property: P31
+property_label: instance of
+rationale: The claim that LimbiCODE is a psychographic segmentation method is strongly
+  supported by multiple sources. The official LimbiCODE website explicitly describes
+  it as 'ein auf neurowissenschaftlichen Erkenntnissen basierendes psychografisches
+  Segmentierungsmodell' (a neuroscientifically-based psychographic segmentation model).
+  Additionally, the ZHAW (Zurich University of Applied Sciences) lists a project for
+  'Revision und Neuvalidierung des LimbiCODE Tests' (revision and revalidation of
+  the LimbiCODE test), confirming its status as a validated segmentation methodology.
+  The method divides people into six segments based on psychological traits, which
+  aligns with the definition of psychographic segmentation.
+rcid: 2540923890
+revid: 2464714782
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/limbicode-consulting/
+- provenance: verified
+  supports_claim: true
+  url: https://gfm.ch/en/blog-en/die-gfm-trend-tagung-ist-ein-jaehrliches-event-highlight-der-branche/
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/marktforschung2/
+- provenance: verified
+  supports_claim: true
+  url: https://www.zhaw.ch/de/ueber-uns/person/acka
+timestamp: '2026-02-20T23:42:16.699391+00:00'
+title: Q138337548
+turns: 15
+value_label: Psychographic segmentation
+verdict: verified-high

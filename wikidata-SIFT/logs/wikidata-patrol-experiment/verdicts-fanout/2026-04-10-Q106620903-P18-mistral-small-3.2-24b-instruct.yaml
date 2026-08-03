@@ -1,0 +1,32 @@
+completion_tokens: 2200
+cost_usd: 0.0016171375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13057
+property: P18
+property_label: image
+rationale: The edit changes the image of the Audi Q6 e-tron to 'Audi Q6L Sportback
+  e-tron 001.jpg'. No references were cited for the edit. Independent sources do not
+  provide specific confirmation of the new image. The image 'Audi Q6L Sportback e-tron
+  001.jpg' could not be verified through the available sources.
+rcid: null
+revid: 2471360509
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.audi-mediacenter.com/en/photos/album/audi-q6-suv-e-tron-quattro-2509
+- provenance: verified
+  supports_claim: false
+  url: https://www.audiusa.com/en/models/q6-e-tron/q6-e-tron/2027/overview/
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/photos/g60075321/2025-audi-q6-sq6-e-tron-revealed-gallery/
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?tbm=isch&q=Audi+Q6L+Sportback+e-tron+001.jpg
+timestamp: '2026-04-10T14:18:34.302770+00:00'
+title: Q106620903
+turns: 1
+value_label: null
+verdict: unverifiable

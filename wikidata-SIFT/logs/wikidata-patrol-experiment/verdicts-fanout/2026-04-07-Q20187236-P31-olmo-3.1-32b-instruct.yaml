@@ -1,0 +1,28 @@
+completion_tokens: 1060
+cost_usd: 0.007796
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35800
+property: P31
+property_label: instance of
+rationale: The only cited source for the value 'Hua' as the instance of for this painting
+  is currently unreachable due to a 403 Forbidden error. No independent, authoritative
+  sources confirm that the Andrew Jackson portrait by Thomas Sully at the National
+  Gallery of Art should be classified as 'Hua.' The change is inconsistent with standard
+  art classification practices and the item's previous and general categorization
+  as a painting.
+rcid: null
+revid: 2467026793
+sources:
+- provenance: unverifiable
+  supports_claim: false
+  url: https://www.nga.gov/content/ngaweb/Collection/art-object-page.1128.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Andrew_Jackson_portrait_by_Thomas_Sully
+timestamp: '2026-04-07T12:04:25.493872+00:00'
+title: Q20187236
+turns: 5
+value_label: Hua
+verdict: suspect

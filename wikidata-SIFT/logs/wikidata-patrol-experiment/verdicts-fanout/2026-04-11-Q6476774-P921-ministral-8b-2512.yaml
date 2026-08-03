@@ -1,0 +1,28 @@
+completion_tokens: 1745
+cost_usd: 0.0023074799999999998
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26285
+property: P921
+property_label: main subject
+rationale: The removed claim that Wikipedia:Babel's main subject is 'Wikimedian' (Q41546637)
+  was incorrect and irrelevant. Prefetched references confirm that Wikipedia:Babel
+  is a system for displaying language proficiency, not about individuals contributing
+  to Wikimedia. The current claim for 'language proficiency' (Q2390977) aligns with
+  the verified purpose of the page. The absence of references for the removed claim
+  further supports its removal.
+rcid: 2550595538
+revid: 2473926814
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Commons:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:Babel
+timestamp: '2026-04-11T12:12:48.761297+00:00'
+title: Q6476774
+turns: 3
+value_label: Wikimedian
+verdict: verified-high

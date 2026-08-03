@@ -1,0 +1,33 @@
+completion_tokens: 1399
+cost_usd: 0.004302675000000001
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44730
+property: P1435
+property_label: heritage designation
+rationale: The edit adds a qualifier to the heritage designation claim without any
+  supporting references. The lack of accessible sources and the absence of references
+  make it impossible to verify the correctness of the qualifier "wikipedia" for the
+  Victorian Heritage Register ID. The edit appears suspect due to the lack of supporting
+  evidence.
+rcid: 2550246347
+revid: 2473587562
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.heritage.vic.gov.au/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Scienceworks_(Melbourne)
+- provenance: verified
+  supports_claim: false
+  url: https://museumvictoria.com.au/scienceworks/
+- provenance: verified
+  supports_claim: false
+  url: https://vhd.heritage.vic.gov.au/
+timestamp: '2026-04-11T16:57:47.031724+00:00'
+title: Q7433721
+turns: 6
+value_label: null
+verdict: suspect

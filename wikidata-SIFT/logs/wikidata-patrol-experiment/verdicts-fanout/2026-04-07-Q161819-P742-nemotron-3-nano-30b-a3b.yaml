@@ -1,0 +1,23 @@
+completion_tokens: 724
+cost_usd: 0.0034236500000000003
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 65577
+property: P742
+property_label: pseudonym
+rationale: The cited reference explicitly identifies Julie Andrews as author 'Julie
+  Edwards', not 'Dame Julie Andrews'. Evidence confirms her actual pseudonym was 'Julie
+  Edwards' during authorship, making the edit's claim that 'Dame Julie Andrews' is
+  the updated pseudonym factually unsupported
+rcid: null
+revid: 2471416401
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.revistavanityfair.es/articulos/actrices-escritoras-julie-andrews-carrie-fisher-sophie-marceau
+timestamp: '2026-04-07T08:54:22.831119+00:00'
+title: Q161819
+turns: 3
+value_label: null
+verdict: incorrect

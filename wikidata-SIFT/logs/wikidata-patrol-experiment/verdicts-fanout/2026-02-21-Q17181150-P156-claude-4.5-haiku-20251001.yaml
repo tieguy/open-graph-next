@@ -1,0 +1,37 @@
+completion_tokens: 4099
+cost_usd: 0.226912
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 206417
+property: P156
+property_label: followed by
+rationale: Crimson Winter did not follow Legion of Shadows. Multiple authoritative
+  sources confirm both albums were released simultaneously on October 31, 2013. The
+  official Nox Arcana news describes them as concurrent 'A Double Dose of Darkness
+  for Halloween' releases. William Piotrowski's Crimson Winter is a separate solo
+  project, not a successor. The actual next Nox Arcana release was Ebonshire Vol.
+  1 (December 7, 2013), followed by Gothic (2015).
+rcid: 2541054265
+revid: 2464836689
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/legion.html
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/news2012-2013.html
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/crimsonwinter.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/release/7338813-Nox-Arcana-Ebonshire-Volume-1
+- provenance: verified
+  supports_claim: false
+  url: https://rateyourmusic.com/release/album/nox-arcana/legion-of-shadows/
+timestamp: '2026-02-21T04:32:33.972118+00:00'
+title: Q17181150
+turns: 11
+value_label: 'Crimson Winter: Original Motion Picture Soundtrack'
+verdict: incorrect

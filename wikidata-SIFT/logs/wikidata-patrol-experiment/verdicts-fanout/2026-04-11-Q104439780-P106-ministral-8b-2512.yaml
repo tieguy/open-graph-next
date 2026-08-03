@@ -1,0 +1,27 @@
+completion_tokens: 1522
+cost_usd: 0.00182172
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20044
+property: P106
+property_label: occupation
+rationale: The occupation 'analyst' was incorrectly removed for Antoine Andary. Multiple
+  verified sources explicitly confirm his role as an 'Intelligence Analyst' at organizations
+  like the Counter-Terrorism Group (CTG) and ResearchGate, which directly supports
+  the claim. The removal lacks evidence and contradicts the available professional
+  profiles.
+rcid: 2550041295
+revid: 2473388953
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://muckrack.com/antoine-andary-research/bio
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Antoine-Andary
+timestamp: '2026-04-11T09:03:51.403337+00:00'
+title: Q104439780
+turns: 2
+value_label: analyst
+verdict: incorrect

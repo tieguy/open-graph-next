@@ -1,0 +1,31 @@
+completion_tokens: 1770
+cost_usd: 0.0032962800000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32852
+property: P19
+property_label: place of birth
+rationale: The claim that Christophe Bassons (Q328034) was born in Saudi Arabia (Q851)
+  is inconsistent with all available evidence. The only cited reference (French Wikipedia)
+  is unreachable, and no independent sources confirm this claim. Christophe Bassons
+  is a French road bicycle racer with a career entirely within France and Europe,
+  and no credible evidence links him to Saudi Arabia. The old value, Mazamet (Q631977),
+  aligns with his French identity and career context. The edit is therefore incorrect.
+rcid: 2549520329
+revid: 2472883949
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cyclingweekly.com/news/latest-news/anti-doping-campaigner-christophe-bassons-given-compensation-french-federation-ban-404163
+- provenance: verified
+  supports_claim: false
+  url: https://www.procyclingstats.com/rider/christophe-bassons
+- provenance: reported
+  supports_claim: false
+  url: https://wikitrusted.com/christophe-bassons-wikipedia/
+timestamp: '2026-04-11T17:54:27.691287+00:00'
+title: Q328034
+turns: 3
+value_label: Saudi Arabia
+verdict: incorrect

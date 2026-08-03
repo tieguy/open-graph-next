@@ -1,0 +1,36 @@
+completion_tokens: 2865
+cost_usd: 0.00453
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14055
+property: P570
+property_label: date of death
+rationale: All authoritative and independently verified sources—including English
+  and Danish Wikipedia, the Danish Biographical Dictionary, MusicBrainz, DR archives,
+  and a Berlingske obituary—confirm that Jodle Birge died on 27 August 2004. The new
+  value of 1 January 2025 is unsupported by any evidence and contradicts well-established
+  facts. Changing the date of death to an unsupported later date is therefore incorrect.
+rcid: 2549906557
+revid: 2473261319
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jodle_Birge
+- provenance: verified
+  supports_claim: false
+  url: https://da.wikipedia.org/wiki/Jodle_Birge
+- provenance: verified
+  supports_claim: false
+  url: https://dbl.dk/bio/jodle-birge
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/e88f3ad1-6811-4d97-86e1-e4c5f30de2e4
+- provenance: verified
+  supports_claim: false
+  url: https://www.berlingske.dk/kultur/jodle-birge-d%C3%B8dt
+timestamp: '2026-04-11T18:43:07.857690+00:00'
+title: Q6208009
+turns: 1
+value_label: null
+verdict: incorrect

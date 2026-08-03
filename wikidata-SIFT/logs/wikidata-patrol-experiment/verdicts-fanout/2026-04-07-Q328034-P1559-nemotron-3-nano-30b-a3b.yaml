@@ -1,0 +1,26 @@
+completion_tokens: 651
+cost_usd: 0.0047164
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 91724
+property: P1559
+property_label: name in native language
+rationale: No verifiable sources were found that confirm the claim that 'le mongol
+  de coussin de léandre' represents the correct updated name in native language for
+  Christian cyclist Christophe Bassons. Multiple web searches using variations of
+  the alleged name, references to the rider's history, and contextual clues yielded
+  no meaningful results. The only web page found through direct URL access was the
+  Cyclingnews homepage, which contains no relevant information about the claim. No
+  external identifiers or reliable secondary sources were discovered during the investigation.
+rcid: 2549515198
+revid: 2472879071
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cyclingnews.com
+timestamp: '2026-04-07T10:33:12.615705+00:00'
+title: Q328034
+turns: 15
+value_label: null
+verdict: unverifiable

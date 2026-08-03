@@ -1,0 +1,37 @@
+completion_tokens: 2244
+cost_usd: 0.048661
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 37441
+property: P569
+property_label: date of birth
+rationale: Every independent source consulted—including celebrity databases (Famous
+  Birthdays), music platforms (Last.fm), media archives (Amazon Prime Video), and
+  fan wikis—consistently confirms Zara Larsson was born on 16 December 1997, not 1802.
+  The day and month of the edit are correct, but the year is catastrophically wrong
+  by 195 years. This is a clear data entry error that directly contradicts all available
+  evidence.
+rcid: 2540966149
+revid: 2464753744
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/zara-larsson.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.astrotheme.com/astrology/Zara_Larsson
+- provenance: verified
+  supports_claim: false
+  url: https://zaralarsson.fandom.com/wiki/Zara_Larsson
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/prime-video/actor/Zara-Larsson/amzn1.dv.gti.05587848-bf59-4621-943b-c00a41401ca5/
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Zara+Larsson
+timestamp: '2026-02-20T03:49:13.409366+00:00'
+title: Q4177928
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 782
+cost_usd: 0.008576
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40534
+property: P856
+property_label: official website
+rationale: The new value https://www.eurowings.com is inconsistent with the expected
+  official website of Uruma city, a municipality in Japan. Eurowings is an airline
+  and has no apparent connection to Uruma. The previous official website, https://www.city.uruma.lg.jp/,
+  is consistent with the standard Japanese municipal domain. I attempted to verify
+  the new URL but was unable to fetch it due to a 403 Forbidden error. No independent
+  sources confirm the new website as official. Therefore, the edit is highly suspect.
+rcid: null
+revid: 2468927624
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.eurowings.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.uruma.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T07:23:18.855657+00:00'
+title: Q694313
+turns: 5
+value_label: null
+verdict: suspect

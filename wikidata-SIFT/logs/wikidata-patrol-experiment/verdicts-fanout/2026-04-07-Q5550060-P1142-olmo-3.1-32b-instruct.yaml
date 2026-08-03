@@ -1,0 +1,23 @@
+completion_tokens: 903
+cost_usd: 0.0071573999999999995
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33078
+property: P1142
+property_label: political ideology
+rationale: The previous reference was circular (Wikipedia referencing Wikidata) and
+  not a valid primary source. The official party website does not explicitly state
+  communism as the ideology, and no independent, authoritative source confirms the
+  claim. Therefore, the removal of the unsupported reference is likely justified.
+rcid: null
+revid: 2471555273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://msomosvenezuela.org/
+timestamp: '2026-04-07T11:23:19.082477+00:00'
+title: Q5550060
+turns: 7
+value_label: communism
+verdict: suspect

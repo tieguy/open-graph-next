@@ -1,0 +1,34 @@
+completion_tokens: 2490
+cost_usd: 0.0044964
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15012
+property: P39
+property_label: position held
+rationale: The position 'mayor's adjunct' is a legitimate and recognized municipal
+  role in French local government, and independent reporting confirms Richard Baud
+  held this position in Thonon-les-Bains. However, the edit did not provide a reference
+  for this claim or its qualifier, which is a best practice violation. Therefore,
+  the factual correctness is established, but the lack of sourcing results in a 'verified-low'
+  verdict.
+rcid: 2551399708
+revid: 2474703503
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q21664651
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Adjoint_au_maire
+- provenance: verified
+  supports_claim: true
+  url: https://www.ville-thonon-les-bains.fr
+- provenance: verified
+  supports_claim: true
+  url: https://www.ledauphine-libere.fr/actualites/thonon-les-bains-richard-baud-reelu-conseil-communal-2020-2026
+timestamp: '2026-04-11T08:02:38.075959+00:00'
+title: Q63765092
+turns: 1
+value_label: mayor's adjunct
+verdict: verified-low

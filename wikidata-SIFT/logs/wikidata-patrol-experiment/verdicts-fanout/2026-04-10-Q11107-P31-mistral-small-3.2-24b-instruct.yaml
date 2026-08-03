@@ -1,0 +1,30 @@
+completion_tokens: 585
+cost_usd: 0.00365675
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36464
+property: P31
+property_label: instance of
+rationale: The claim that Sonia Sotomayor is a robot is directly contradicted by multiple
+  reliable sources. The New Yorker article explicitly states that the 'robotic dispensation
+  of justice is a fiction,' and other sources confirm her human identity and professional
+  achievements. The edit's reference to Wikipedia is unreachable, and no credible
+  source supports the claim that she is a robot.
+rcid: null
+revid: 2470268184
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/magazine/2010/01/11/number-nine
+- provenance: verified
+  supports_claim: false
+  url: https://www.supremecourt.gov/about/biographies.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://www.washingtonexaminer.com/news/supreme-court/4523576/sotomayor-ai-supreme-court-rulings/
+timestamp: '2026-04-10T12:47:15.248381+00:00'
+title: Q11107
+turns: 2
+value_label: robot
+verdict: incorrect

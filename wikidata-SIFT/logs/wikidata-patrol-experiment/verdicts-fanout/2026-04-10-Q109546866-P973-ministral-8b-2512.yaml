@@ -1,0 +1,27 @@
+completion_tokens: 1541
+cost_usd: 0.0037286700000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35042
+property: P973
+property_label: described at URL
+rationale: The new URL provided (filmyspark.com) is inaccessible due to a 403 Forbidden
+  error, and no credible or independent sources corroborate its legitimacy as a description
+  of Ridgeback Biotherapeutics. The old URL (CNN) remains a valid and accessible reference.
+  The lack of verifiable content and corroboration strongly suggests this edit is
+  incorrect or misleading.
+rcid: 2551339571
+revid: 2474645827
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://filmyspark.com/merck-and-ridgeback-biotherapeutics-provide-update-on-new-merck/
+- provenance: reported
+  supports_claim: true
+  url: https://www.cnn.com/2021/11/04/health/uk-authorizes-merck-antiviral-molnupiravir-covid/index.html
+timestamp: '2026-04-10T13:33:59.246675+00:00'
+title: Q109546866
+turns: 3
+value_label: null
+verdict: suspect

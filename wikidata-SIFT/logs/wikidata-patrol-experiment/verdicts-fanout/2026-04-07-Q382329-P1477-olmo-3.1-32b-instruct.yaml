@@ -1,0 +1,36 @@
+completion_tokens: 1610
+cost_usd: 0.0234616
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 112478
+property: P1477
+property_label: birth name
+rationale: The value 'jacques truc bidule' is a nonsensical placeholder and is not
+  supported by any authoritative biographical or archival sources. All reputable references
+  confirm Jacques-Henri Lartigue's birth name as a variant of 'Jacques-Henri Lartigue',
+  with no mention of the proposed value. The cited reference is unreachable and does
+  not support the claim.
+rcid: null
+revid: 2462860117
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Jacques_Henri_Lartigue
+- provenance: reported
+  supports_claim: false
+  url: https://www.bnf.fr/
+- provenance: reported
+  supports_claim: false
+  url: https://www.rkd.nl/
+- provenance: reported
+  supports_claim: false
+  url: https://www.encyclopedia-britannica.com/
+- provenance: reported
+  supports_claim: false
+  url: https://www.moma.org/
+timestamp: '2026-04-07T13:09:07.795273+00:00'
+title: Q382329
+turns: 8
+value_label: null
+verdict: incorrect

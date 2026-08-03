@@ -1,0 +1,25 @@
+completion_tokens: 1753
+cost_usd: 0.02119534375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 221409
+property: P1559
+property_label: name in native language
+rationale: The new value 'PENEelope' is not supported by any reliable sources. The
+  old value 'Caterina Albert i Paradís' is consistently mentioned as the correct name
+  in native language. The edit appears to be incorrect.
+rcid: null
+revid: 2470714390
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://lareviewofbooks.org/article/call-her-by-his-name-caterina-albert-and-catalonias-tradition-of-radical-women/
+- provenance: verified
+  supports_claim: false
+  url: http://www.parroquiaempuries.org/en/node/1035
+timestamp: '2026-04-11T18:29:19.742111+00:00'
+title: Q2914475
+turns: 14
+value_label: null
+verdict: incorrect

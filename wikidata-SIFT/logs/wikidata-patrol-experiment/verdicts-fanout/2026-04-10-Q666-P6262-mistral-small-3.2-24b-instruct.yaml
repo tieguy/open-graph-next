@@ -1,0 +1,51 @@
+completion_tokens: 1894
+cost_usd: 0.00312804375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26819
+property: P6262
+property_label: Fandom article ID
+rationale: The web search for "religion:6666789шго" did not yield any relevant results
+  related to the "number of the beast." The search results primarily include general
+  information about religion databases, journals, and studies, but nothing specific
+  to the Fandom article ID in question. Given the lack of evidence supporting the
+  new Fandom article ID, we can conclude that the edit is likely incorrect.
+rcid: 2551353948
+revid: 2474659620
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.worldreligiondatabase.org/
+- provenance: verified
+  supports_claim: false
+  url: https://www.learnreligions.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.graphsaboutreligion.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.usreligioncensus.org/
+- provenance: verified
+  supports_claim: false
+  url: https://religionfacts.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.religion.ucsb.edu/
+- provenance: verified
+  supports_claim: false
+  url: https://compass.onlinelibrary.wiley.com/journal/17498171
+- provenance: verified
+  supports_claim: false
+  url: https://www.derekthompson.org/p/all-the-religious-trends-youre-wrong
+- provenance: verified
+  supports_claim: false
+  url: https://www.tandfonline.com/journals/rrel20
+- provenance: verified
+  supports_claim: false
+  url: https://www.religion-online.org/
+timestamp: '2026-04-10T14:12:46.231337+00:00'
+title: Q666
+turns: 2
+value_label: null
+verdict: incorrect

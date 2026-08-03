@@ -1,0 +1,28 @@
+completion_tokens: 13417
+cost_usd: 0.01574112
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 100444
+property: P106
+property_label: occupation
+rationale: The occupation property (P106) in Wikidata must denote a profession, not
+  a physical act. 'Sexual intercourse' is not a valid occupation category. Extensive
+  searches of reliable sources (e.g., Tate, Lorenzelli Arte) confirm Max Bill's professional
+  roles as architect, sculptor, and designer. No credible source supports linking
+  him to 'sexual intercourse' as an occupation; cited references only relate to unrelated
+  sexual assault cases involving a different individual.
+rcid: 2550803282
+revid: 2474128221
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tate.org.uk/art/art-terms/c/concrete-art
+- provenance: verified
+  supports_claim: false
+  url: https://lorenzelliarte.com/en/artists/32-max-bill/biography/
+timestamp: '2026-04-10T12:05:43.548326+00:00'
+title: Q123454
+turns: 3
+value_label: sexual intercourse
+verdict: incorrect

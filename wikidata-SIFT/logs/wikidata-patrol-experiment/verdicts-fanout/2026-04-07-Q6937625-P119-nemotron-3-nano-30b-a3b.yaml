@@ -1,0 +1,24 @@
+completion_tokens: 682
+cost_usd: 0.0055396
+diff_type: reference_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 108064
+property: P119
+property_label: place of burial
+rationale: Investigation found no independent sources confirming or denying Nellie
+  Camposucio's place of burial in Durango. A reference linking to a Scielo article
+  could not be retrieved or verified; subsequent searches for relevant sources yielded
+  no results. Without fetchable or verifiable content supporting the claim or its
+  removal, the edit cannot be confidently verified or refuted.
+rcid: 2550019752
+revid: 2473368142
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1665-85742011000100003
+timestamp: '2026-04-07T12:55:32.276383+00:00'
+title: Q6937625
+turns: 15
+value_label: Durango
+verdict: unverifiable

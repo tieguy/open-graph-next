@@ -1,0 +1,37 @@
+completion_tokens: 2461
+cost_usd: 0.0072304
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28769
+property: P21
+property_label: sex or gender
+rationale: There is no credible, independent evidence that Kylian Mbappé identifies
+  as a trans woman. All major biographical and news sources refer to him as male.
+  The cited references do not support the change from 'male' to 'trans woman.'
+rcid: 2549570887
+revid: 2472933653
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kylian_Mbapp%C3%A9
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Kylian_Mbapp%C3%A9
+- provenance: verified
+  supports_claim: false
+  url: https://www.lequipe.fr/Football/FootballFicheJoueur58221.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.francefootball.fr/news/Kylian-mbappe-psg-positif-au-covid-19/1169204/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lemonde.fr/sport/article/2024/07/16/la-signature-de-kylian-mbappe-au-real-madrid-cree-de-nouvelles-opportunites-pour-sa-pme_6250566_3242.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.com/sport/football
+timestamp: '2026-04-11T12:45:58.411680+00:00'
+title: Q21621995
+turns: 1
+value_label: trans woman
+verdict: incorrect

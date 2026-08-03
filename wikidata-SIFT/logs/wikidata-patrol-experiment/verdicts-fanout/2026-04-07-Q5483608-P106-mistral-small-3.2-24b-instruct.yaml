@@ -1,0 +1,24 @@
+completion_tokens: 969
+cost_usd: 0.0028381875000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27690
+property: P106
+property_label: occupation
+rationale: The edit changes the occupation of Francisco Luque from 'sculptor' to 'subnormal
+  number,' which is not supported by any independent sources. The item's description
+  and other claims, such as 'field of work' (art of sculpture), suggest that Francisco
+  Luque is known as a sculptor. The edit appears to be incorrect based on the available
+  evidence.
+rcid: null
+revid: 2460300984
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Francisco_Luque&oldid=916830026
+timestamp: '2026-04-07T13:01:45.395489+00:00'
+title: Q5483608
+turns: 5
+value_label: subnormal number
+verdict: incorrect

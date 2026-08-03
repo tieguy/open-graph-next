@@ -1,0 +1,30 @@
+completion_tokens: 2537
+cost_usd: 0.072595
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 59910
+property: P101
+property_label: field of work
+rationale: Clear evidence directly contradicts this claim. Masahiro Sakurai is a world-renowned
+  video game designer and director with a well-documented 35+ year professional career
+  in video game development, including creation of the Kirby and Super Smash Bros.
+  series, starting at HAL Laboratory in the late 1980s and continuing through his
+  own company Sora Ltd. founded in 2005. Multiple authoritative sources (Super Smash
+  Bros. Wiki, The Guardian, gaming databases) identify him exclusively as a video
+  game professional. No credible source supports any connection to pornographic work.
+  This claim appears to be vandalism or test editing by a new user.
+rcid: 2540950583
+revid: 2464739506
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/games/2018/aug/08/super-smash-bros-ultimate-masahiro-sakurai-35-years-gaming-history-nintendo
+timestamp: '2026-02-20T09:09:17.805336+00:00'
+title: Q1906721
+turns: 4
+value_label: pornographic actor
+verdict: incorrect

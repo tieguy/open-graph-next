@@ -1,0 +1,23 @@
+completion_tokens: 591
+cost_usd: 0.00116434
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15400
+property: P856
+property_label: official website
+rationale: The edit removed a language qualifier from the official website claim for
+  Zip Water. No references were provided, and independent searches did not yield any
+  relevant sources to confirm or deny the presence or necessity of the language qualifier.
+  Therefore, the removal cannot be verified.
+rcid: 2550467436
+revid: 2473803857
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.zipwater.com/
+timestamp: '2026-04-07T13:47:58.038435+00:00'
+title: Q8072611
+turns: 3
+value_label: null
+verdict: unverifiable

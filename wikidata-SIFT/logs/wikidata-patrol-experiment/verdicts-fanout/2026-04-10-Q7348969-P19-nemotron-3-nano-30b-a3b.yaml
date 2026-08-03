@@ -1,0 +1,28 @@
+completion_tokens: 16337
+cost_usd: 0.013886190000000001
+diff_type: qualifier_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81683
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm Dublin as Robert Poore's birthplace;
+  the prefetched military-history wiki page and MyHeritage genealogy both explicitly
+  state his birth on 20 March 1866 in Dublin, Ireland, corroborating the qualifier.
+rcid: 2550599672
+revid: 2473930839
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Robert_Poore
+- provenance: reported
+  supports_claim: true
+  url: https://www.myheritage.com/names/robert_poore
+- provenance: reported
+  supports_claim: true
+  url: https://www.espncricinfo.com/cricketers/robert-poore-46776
+timestamp: '2026-04-10T12:14:31.386130+00:00'
+title: Q7348969
+turns: 6
+value_label: Dublin
+verdict: verified-high

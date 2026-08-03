@@ -1,0 +1,26 @@
+completion_tokens: 1640
+cost_usd: 0.019555109999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 171787
+property: P22
+property_label: father
+rationale: The claim that Lady Gaga (born 1986) is the father of Sacha Guitry (born
+  1885) is biologically impossible. No credible sources support this claim, and the
+  new reference is unreachable (HTTP 403 Forbidden). Multiple verified sources confirm
+  Sacha Guitry's father was Lucien Guitry (Q1225727).
+rcid: null
+revid: 2471465149
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://filmstarpostcards.blogspot.com/2015/05/sacha-guitry.html
+- provenance: verified
+  supports_claim: false
+  url: https://snippetofhistory.wordpress.com/portfolio/sacha-guitry-and-yvonne-printemps-1927/
+timestamp: '2026-04-11T18:12:46.727397+00:00'
+title: Q337276
+turns: 8
+value_label: Lady Gaga
+verdict: incorrect

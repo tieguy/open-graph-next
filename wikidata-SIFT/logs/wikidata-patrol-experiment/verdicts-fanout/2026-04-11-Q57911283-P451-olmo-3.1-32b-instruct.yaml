@@ -1,0 +1,34 @@
+completion_tokens: 1849
+cost_usd: 0.0046056
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17481
+property: P451
+property_label: unmarried partner
+rationale: The claim that Michelle Bolsonaro had Marcos Santos da Silva listed as
+  an 'unmarried partner' was unsourced and could not be independently verified. Independent
+  searches and fetched sources did not provide any evidence supporting the existence
+  of this relationship. Michelle Bolsonaro's spouse is documented as Jair Bolsonaro
+  with a proper citation. Removal of unsourced personal relationship claims is appropriate
+  and improves data quality.
+rcid: 2549679635
+revid: 2473039269
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://agenciabrasil.ebc.com.br/es/politica/noticia/2021-12/el-presidente-bolsonaro-otorga-los-ministros-la-orden-de-rio-branco
+- provenance: verified
+  supports_claim: false
+  url: https://www.congressoemfoco.com.br/coluna/37556/bolsonaro-michelle-e-a-monstruosa-sombra-do-ciume
+- provenance: verified
+  supports_claim: false
+  url: https://www.kwai.com/discover/marcos-santos-da-silva-ex-de-michelle-bolsonaro?lang=pt-BR
+- provenance: verified
+  supports_claim: false
+  url: https://www.voanews.com/covid-19-pandemic/brazil-first-lady-michelle-bolsonaro-has-coronavirus
+timestamp: '2026-04-11T07:17:44.047514+00:00'
+title: Q57911283
+turns: 1
+value_label: Marcos Santos da Silva
+verdict: verified-high

@@ -1,0 +1,35 @@
+completion_tokens: 2693
+cost_usd: 0.102538
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 89073
+property: P106
+property_label: occupation
+rationale: Multiple independent sources consistently describe Ivan Lindsay's professional
+  occupation as 'art dealer' rather than 'art collector.' His official biography details
+  decades of professional work establishing world record prices for artists—characteristic
+  of dealing activity. Country and Town House explicitly calls him 'a leading art
+  dealer.' Wikidata's WikiProject Provenance guidance distinguishes between collectors
+  and dealers, stating 'If they were dealing, then art dealer.' While Lindsay may
+  personally collect art, the edit understates his actual professional occupation.
+rcid: 2540960304
+revid: 2464748294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ivanlindsay.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.countryandtownhouse.com/culture/qa-with-director-margy-kinmonth-on-her-new-film-revolution/
+- provenance: verified
+  supports_claim: false
+  url: https://prabook.com/web/ivan.lindsay/2369235
+- provenance: verified
+  supports_claim: false
+  url: https://www.thepeerage.com/p2039.htm
+timestamp: '2026-02-20T04:53:05.047225+00:00'
+title: Q16194655
+turns: 8
+value_label: art collector
+verdict: suspect

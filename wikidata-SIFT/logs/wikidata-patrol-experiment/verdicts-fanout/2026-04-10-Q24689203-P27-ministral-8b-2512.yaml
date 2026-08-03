@@ -1,0 +1,31 @@
+completion_tokens: 1588
+cost_usd: 0.00279288
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22766
+property: P27
+property_label: country of citizenship
+rationale: The claim that Niska's country of citizenship is the Congolese franc (Q4734)
+  is contradicted by multiple verified sources. The BnF authority profile and Culturap.fr
+  biography explicitly confirm Niska as a French rapper born in France. The cited
+  reference (NRJ.fr) was unreachable, and no independent source supports the claim
+  of Congolese citizenship. The evidence overwhelmingly supports France (Q142) as
+  the correct country of citizenship.
+rcid: null
+revid: 2471645188
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb17011992j
+- provenance: verified
+  supports_claim: false
+  url: https://culturap.fr/artistes/niska/
+- provenance: reported
+  supports_claim: false
+  url: https://www.nrj.fr/artistes/niska/biographie
+timestamp: '2026-04-10T13:28:20.128514+00:00'
+title: Q24689203
+turns: 1
+value_label: Congolese franc
+verdict: incorrect

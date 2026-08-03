@@ -1,0 +1,22 @@
+completion_tokens: 1097
+cost_usd: 0.0034967187500000003
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34373
+property: P1343
+property_label: described by source
+rationale: The primary reference does not support the claim, and no independent or
+  authoritative sources were found to confirm it. Therefore, the removal of the claim
+  is justified.
+rcid: 2551215838
+revid: 2474528828
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tagesschau.de/faktenfinder/mwgfd-101.html
+timestamp: '2026-04-08T18:47:03.402682+00:00'
+title: Q107646877
+turns: 5
+value_label: ARD-Faktenfinder
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1012
+cost_usd: 0.019593
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 94929
+property: P1477
+property_label: birth name
+rationale: The addition of the suffix 'GOAT' to 'Theodore John Kaczynski' is not supported
+  by any credible or primary source. Authoritative biographies and the cited New York
+  Times article consistently use the name 'Theodore John Kaczynski' without this addition.
+  The term 'GOAT' appears to be an informal or internet-derived nickname and is not
+  part of his legal or documented birth name.
+rcid: 2550032144
+revid: 2473380091
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nytimes.com/1996/05/26/us/prisoner-of-rage-a-special-report-from-a-child-of-promise-to-the-unabom-suspect.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ted_Kaczynski
+- provenance: reported
+  supports_claim: false
+  url: https://apnews.com/article/ted-kaczynski-unabomber-dies-federal-prison-95fdd4f398fbfe20aaadf5d53a91dc26
+timestamp: '2026-04-08T18:53:28.885139+00:00'
+title: Q222134
+turns: 6
+value_label: null
+verdict: incorrect

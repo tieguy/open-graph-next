@@ -1,0 +1,29 @@
+completion_tokens: 1015
+cost_usd: 0.004259000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18250
+property: P2048
+property_label: height
+rationale: The new value of '191 centimetre' for María Pedraza's height is not supported
+  by any credible, independently verifiable source. Multiple reliable sources, including
+  bollysuperstar.com and celebritytall.com, consistently report her height as approximately
+  170 centimetres (5 feet 7 inches). The cited source for the new value could not
+  be accessed, and the old value of approximately 169 centimetres is reasonable and
+  consistent with the consensus. Changing the height to 191 cm is a gross error and
+  should be reverted.
+rcid: 2550317616
+revid: 2473657207
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bollysuperstar.com/maria-pedraza/
+- provenance: verified
+  supports_claim: false
+  url: https://celebritytall.com/maria-pedraza/
+timestamp: '2026-04-11T13:52:46.486068+00:00'
+title: Q51280886
+turns: 1
+value_label: null
+verdict: incorrect

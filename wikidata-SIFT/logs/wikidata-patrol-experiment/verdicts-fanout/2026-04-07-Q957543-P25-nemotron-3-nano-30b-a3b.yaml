@@ -1,0 +1,27 @@
+completion_tokens: 838
+cost_usd: 0.00156015
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 27851
+property: P25
+property_label: mother
+rationale: The claim that Laura Salvadori is Ernest Shackleton's mother is supported
+  by verified references from authoritative genealogical sources, specifically The
+  Peerage website which records her as the mother. The evidence consists of primary
+  genealogical records, though these are secondary to official civil registration
+  authority records and require careful interpretation.
+rcid: null
+revid: 2471632459
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.thepeerage.com/p16116.htm#i161155
+- provenance: verified
+  supports_claim: true
+  url: https://genealogy.onefamily.net/peerage/p/16116.htm#i161155
+timestamp: '2026-04-07T10:56:16.962319+00:00'
+title: Q957543
+turns: 1
+value_label: Laura Salvadori
+verdict: verified-low

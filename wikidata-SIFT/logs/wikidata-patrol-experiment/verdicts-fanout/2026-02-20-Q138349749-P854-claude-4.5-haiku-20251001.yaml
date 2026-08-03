@@ -1,0 +1,40 @@
+completion_tokens: 3432
+cost_usd: 0.07101
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 53850
+property: P854
+property_label: reference URL
+rationale: 'The Constant Contact reference URL is appropriate and well-supported.
+  Although the URL currently returns a 403 Forbidden error, the article''s existence
+  is confirmed by Google search indexing and the article title matches exactly what
+  the Wikidata claim qualifier states. The article snippet corroborates its content:
+  it discusses the two brothers (Kunal and Abhi Madan) founding Amarra as a fashion
+  house creating special-occasion dresses. All key facts on the Amarra Wikidata item
+  are independently verified by multiple authoritative sources (Business Insider,
+  official website, ZoomInfo), confirming the referenced source would be reliable.
+  The inaccessibility is a technical limitation, not evidence of invalidity.'
+rcid: 2540959310
+revid: 2464747346
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.constantcontact.com/blog/customer-story-amarra/
+- provenance: verified
+  supports_claim: true
+  url: https://www.amarra.com/pages/the-brand
+- provenance: verified
+  supports_claim: true
+  url: https://www.amarra.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.businessinsider.com/wholesale-formal-gown-distributor-using-ai-for-ecommerce-operations
+- provenance: verified
+  supports_claim: true
+  url: https://www.zoominfo.com/pic/amarra/1291989443
+timestamp: '2026-02-20T05:10:42.431623+00:00'
+title: Q138349749
+turns: 6
+value_label: null
+verdict: verified-high

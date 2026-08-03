@@ -1,0 +1,31 @@
+completion_tokens: 2353
+cost_usd: 0.08498299999999999
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 73218
+property: P276
+property_label: location
+rationale: The claim that this photograph is located at the National Portrait Gallery
+  is confirmed by primary evidence from the National Portrait Gallery's official catalog,
+  which lists NPG x84663 as a bromide print by Bassano Ltd purchased in 1996 and held
+  in the Photographs Collection. Multiple independent sources including Wikimedia
+  Commons metadata corroborate this location. The National Portrait Gallery (Q238587)
+  is properly identified as an art museum in London, England, United Kingdom.
+rcid: 2540979633
+revid: 2464766266
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.npg.org.uk/collections/search/portrait/mw52409/Bertrand-Russell
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Bertrand_Russell_photo.jpg
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q238587
+timestamp: '2026-02-20T01:51:18.761016+00:00'
+title: Q125447060
+turns: 6
+value_label: National Portrait Gallery
+verdict: verified-high

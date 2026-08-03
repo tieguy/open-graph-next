@@ -1,0 +1,30 @@
+completion_tokens: 1496
+cost_usd: 0.0037466
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14245
+property: P279
+property_label: subclass of
+rationale: Independent secondary sources (Wikipedia, UNWTO) confirm that travel agencies
+  are part of the tourism industry and operate as tourism organizations. However,
+  the newly added reference is unreachable and cannot be verified. Therefore, while
+  the claim is plausible, it is not strongly supported by a directly accessible and
+  relevant reference.
+rcid: null
+revid: 2471824685
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Travel_agency
+- provenance: verified
+  supports_claim: true
+  url: https://www.unwto.org/tourism-economy
+- provenance: unverified
+  supports_claim: false
+  url: https://www.indianpanorama.in/
+timestamp: '2026-04-11T18:14:43.293248+00:00'
+title: Q217107
+turns: 1
+value_label: tourism organization
+verdict: plausible

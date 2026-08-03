@@ -1,0 +1,21 @@
+completion_tokens: 850
+cost_usd: 0.010204600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 48473
+property: P1559
+property_label: name in native language
+rationale: The edit changed the 'name in native language' from a standard name to
+  an unsupported value without any citation or independent corroboration. Multiple
+  searches failed to find any authoritative source referencing 'le mongol de coussin
+  de léandre' as a name for Christophe Bassons, and no references were provided with
+  the edit. Therefore, the change is not supported by evidence and should be reverted.
+rcid: 2549515198
+revid: 2472879071
+sources: []
+timestamp: '2026-04-07T10:33:00.227886+00:00'
+title: Q328034
+turns: 9
+value_label: null
+verdict: incorrect

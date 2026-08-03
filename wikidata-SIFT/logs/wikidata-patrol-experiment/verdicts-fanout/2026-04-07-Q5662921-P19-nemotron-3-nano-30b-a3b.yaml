@@ -1,0 +1,20 @@
+completion_tokens: 545
+cost_usd: 0.00499585
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 97737
+property: P19
+property_label: place of birth
+rationale: Despite extensive searches for independent evidence, no verifiable sources
+  were found to confirm whether 'Little Saint James' is Alberto Chicote's place of
+  birth, and no sources were successfully fetched during investigation, making the
+  claim unverifiable.
+rcid: 2549267877
+revid: 2472638141
+sources: []
+timestamp: '2026-04-07T07:00:28.536288+00:00'
+title: Q5662921
+turns: 15
+value_label: Little Saint James
+verdict: unverifiable

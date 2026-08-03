@@ -1,0 +1,25 @@
+completion_tokens: 1328
+cost_usd: 0.011099075
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 116144
+property: P22
+property_label: father
+rationale: The old value, Lucien Guitry, is confirmed as the father of Sacha Guitry
+  by reliable sources. There is no evidence supporting Lady Gaga as the father of
+  Sacha Guitry. The edit to change the father to Lady Gaga is incorrect.
+rcid: null
+revid: 2471465149
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://filmstarpostcards.blogspot.com/2015/05/sacha-guitry.html
+- provenance: verified
+  supports_claim: false
+  url: https://snippetofhistory.wordpress.com/portfolio/sacha-guitry-and-yvonne-printemps-1927/
+timestamp: '2026-04-11T18:13:04.685440+00:00'
+title: Q337276
+turns: 5
+value_label: Lady Gaga
+verdict: incorrect

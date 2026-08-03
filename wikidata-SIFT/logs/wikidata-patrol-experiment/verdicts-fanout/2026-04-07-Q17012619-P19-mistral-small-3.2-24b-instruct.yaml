@@ -1,0 +1,22 @@
+completion_tokens: 792
+cost_usd: 0.00406864
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52192
+property: P19
+property_label: place of birth
+rationale: The BnF record, a reliable source, specifies the birthplace as Bohuslav,
+  Ukraine, which contradicts the edit changing it to Poland. Therefore, the edit is
+  incorrect.
+rcid: null
+revid: 2470681275
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb10376516b
+timestamp: '2026-04-07T12:46:38.977659+00:00'
+title: Q17012619
+turns: 7
+value_label: Poland
+verdict: incorrect

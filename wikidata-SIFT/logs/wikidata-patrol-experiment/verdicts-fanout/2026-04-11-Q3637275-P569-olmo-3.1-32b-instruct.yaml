@@ -1,0 +1,32 @@
+completion_tokens: 1333
+cost_usd: 0.0046632
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19317
+property: P569
+property_label: date of birth
+rationale: Every reliable source consulted — including official EU, Paralympic, and
+  Italian government pages — confirms that Beatrice Vio was born in March 1997. The
+  new value '4 March 1513' is not supported by any evidence and contradicts all available
+  records. The edit was incorrect and should be reverted to the previous value.
+rcid: 2549504572
+revid: 2472868771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sport.ec.europa.eu/node/463
+- provenance: verified
+  supports_claim: true
+  url: https://www.paralympic.org/beatrice-vio
+- provenance: verified
+  supports_claim: true
+  url: https://www.radiofrance.fr/franceinter/podcasts/esprit-sport/histoire-de-sport-du-mercredi-25-aout-2021-5140445
+- provenance: verified
+  supports_claim: true
+  url: https://www.thecityceleb.com/biography/personality/content-creator/writer/beatrice-vio-biography-parents-net-worth-age-height-ethnicity-books-sister-awards/
+timestamp: '2026-04-11T09:32:50.988219+00:00'
+title: Q3637275
+turns: 1
+value_label: null
+verdict: incorrect

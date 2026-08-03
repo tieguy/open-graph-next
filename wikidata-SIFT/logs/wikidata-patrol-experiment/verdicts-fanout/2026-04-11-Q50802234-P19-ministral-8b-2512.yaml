@@ -1,0 +1,23 @@
+completion_tokens: 1671
+cost_usd: 0.006341639999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 65983
+property: P19
+property_label: place of birth
+rationale: The official biography from the University of Cádiz explicitly states that
+  Laura M. Lechuga was born in Seville (Q8717). The change to Maleján (Q1646178) contradicts
+  this authoritative source and lacks any credible supporting evidence. Therefore,
+  the new value is incorrect.
+rcid: null
+revid: 2470682818
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.uca.es/laura-maria-lechuga-gomez/
+timestamp: '2026-04-11T05:54:55.835260+00:00'
+title: Q50802234
+turns: 5
+value_label: Maleján
+verdict: incorrect

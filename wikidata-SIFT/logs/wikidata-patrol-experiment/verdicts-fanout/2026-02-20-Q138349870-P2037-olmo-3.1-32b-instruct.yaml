@@ -1,0 +1,29 @@
+completion_tokens: 694
+cost_usd: 0.002903
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12433
+property: P2037
+property_label: GitHub account
+rationale: The GitHub user page at https://github.com/AyaanDhalait exists and is controlled
+  by Ayaan Dhalait, as confirmed by matching biographical information and links to
+  their personal website and other profiles. Multiple independent sources corroborate
+  this identity, supporting the edit.
+rcid: 2540964812
+revid: 2464752450
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/AyaanDhalait
+- provenance: verified
+  supports_claim: true
+  url: https://ayaandhalait.github.io/
+- provenance: verified
+  supports_claim: true
+  url: https://dev.to/ayaandhalait
+timestamp: '2026-02-20T03:54:49.564077+00:00'
+title: Q138349870
+turns: 2
+value_label: null
+verdict: verified-high

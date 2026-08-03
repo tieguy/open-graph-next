@@ -1,0 +1,30 @@
+completion_tokens: 1006
+cost_usd: 0.011954370000000002
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 174511
+property: P140
+property_label: religion or worldview
+rationale: The edit changes the religion or worldview of Elissa (Q1118831) from Islam
+  (Q432) to Christianity (Q5043). The cited reference, the Encyclopedia of Christianity
+  (Q16991765), does not support either claim for the Lebanese singer Elissa, as the
+  prefetched content from the cited URL does not mention Elissa or her religion. Additionally,
+  attempts to search for independent sources about Elissa's religion using multiple
+  queries failed due to search restrictions. No verified sources were found to confirm
+  or deny the claim, and the cited source itself is irrelevant or unreachable for
+  this entity. This results in an unverifiable verdict.
+rcid: 2550605731
+revid: 2473936721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://elissawall.com/my-story
+- provenance: verified
+  supports_claim: false
+  url: https://intervarsity.org/blog/one-year-risks-and-lifetime-change-elissas-story
+timestamp: '2026-04-11T10:48:46.530187+00:00'
+title: Q1118831
+turns: 15
+value_label: Christianity
+verdict: unverifiable

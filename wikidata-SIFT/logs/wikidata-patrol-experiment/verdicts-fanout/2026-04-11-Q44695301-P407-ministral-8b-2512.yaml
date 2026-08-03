@@ -1,0 +1,32 @@
+completion_tokens: 2550
+cost_usd: 0.0028334099999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22535
+property: P407
+property_label: language of work or name
+rationale: The edit incorrectly changes the language of work or name for Old School
+  RuneScape from English (Q1860) to Canadian French (Q1450506). The old value was
+  supported by official sources, including the BAFTA nomination and RuneScape support
+  pages, which explicitly state the game is only available in English. The new value
+  lacks direct evidence from the game’s official sources or Steam, and the Steam UI
+  does not explicitly list Canadian French as a distinct language option. The official
+  RuneScape support page contradicts the claim entirely.
+rcid: 2549782596
+revid: 2473140499
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bafta.org/media-centre/press-releases/nominations-announced-british-academy-games-awards/
+- provenance: verified
+  supports_claim: false
+  url: https://steamcommunity.com/app/1343370/discussions/0/3153077511679117093/
+- provenance: verified
+  supports_claim: false
+  url: https://support.runescape.com/hc/en-gb/articles/360001339677-Change-client-language
+timestamp: '2026-04-11T13:20:44.320285+00:00'
+title: Q44695301
+turns: 1
+value_label: Canadian French
+verdict: incorrect

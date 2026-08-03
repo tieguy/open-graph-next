@@ -1,0 +1,30 @@
+completion_tokens: 2027
+cost_usd: 0.0119877
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 112541
+property: P800
+property_label: notable work
+rationale: The edit changes Boy George's notable work from 'Arthur's Whisky' (Q123685382)
+  to 'Pene' (Q7162538). 'Pene' is a genus of molluscs, which is unrelated to Boy George's
+  musical career. No references were attached to either value, and no credible sources
+  confirm 'Arthur's Whisky' as a notable work by Boy George. The new value is factually
+  incorrect for this context, and the edit lacks any supporting evidence.
+rcid: null
+revid: 2463233603
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.last.fm/music/Boy+George/+wiki
+- provenance: reported
+  supports_claim: false
+  url: https://www.onthisday.com/people/boy-george
+- provenance: reported
+  supports_claim: false
+  url: https://www.theguardian.com/global/2018/oct/28/this-boys-life-the-fabulous-return-of-boy-george
+timestamp: '2026-04-11T12:54:21.488518+00:00'
+title: Q312883
+turns: 7
+value_label: Pene
+verdict: incorrect

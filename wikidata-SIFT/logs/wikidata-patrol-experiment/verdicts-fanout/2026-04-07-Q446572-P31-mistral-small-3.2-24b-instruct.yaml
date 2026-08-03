@@ -1,0 +1,26 @@
+completion_tokens: 1026
+cost_usd: 0.005719925
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59898
+property: P31
+property_label: instance of
+rationale: The claim that Mike Paradinas is an instance of "human" is strongly supported
+  by independent sources such as Discogs and AllMusic, which provide biographical
+  information confirming his existence as a human. The removal of the reference from
+  the Russian Wikipedia does not affect the validity of the claim.
+rcid: null
+revid: 2470220595
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/artist/1075-%CE%BC-Ziq
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/mike-paradinas-bio
+timestamp: '2026-04-07T06:26:19.306364+00:00'
+title: Q446572
+turns: 8
+value_label: human
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 2237
+cost_usd: 0.0045210300000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51206
+property: P156
+property_label: followed by
+rationale: The edit incorrectly changed the 'followed by' property for the 2025 Africa
+  Cup of Nations from the 2027 edition to the 2029 edition. Official sources from
+  Al Jazeera and BBC confirm that the 2029 Africa Cup of Nations was moved forward
+  to 2028 due to a new four-year cycle. The correct next edition after 2025 is the
+  2027 Africa Cup of Nations, not 2029. Therefore, the new value is incorrect and
+  the edit should be reverted.
+rcid: 2549713777
+revid: 2473072483
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/sports/2025/12/20/afcon-moves-to-4-year-cycle-as-new-africa-nations-league-created
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/sport/football/articles/cgjnx6x4281o
+timestamp: '2026-04-11T17:35:27.043957+00:00'
+title: Q60515006
+turns: 5
+value_label: 2029 Africa Cup of Nations
+verdict: incorrect

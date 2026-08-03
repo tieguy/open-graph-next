@@ -1,0 +1,23 @@
+completion_tokens: 1044
+cost_usd: 0.0042494
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18115
+property: P279
+property_label: subclass of
+rationale: No independent sources were found to support the subclass relationship
+  between Q33123524 ('support') and Q8341493 ('Cartón [es]'). The previous parent
+  class ('art material', Q15303351) was more appropriate. The edit lacks references
+  and external corroboration.
+rcid: null
+revid: 2464010163
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q33123524
+timestamp: '2026-04-07T10:31:30.427729+00:00'
+title: Q33123524
+turns: 4
+value_label: Cartón [es]
+verdict: suspect

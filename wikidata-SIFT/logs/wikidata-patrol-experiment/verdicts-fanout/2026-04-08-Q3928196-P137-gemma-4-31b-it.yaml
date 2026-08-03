@@ -1,0 +1,24 @@
+completion_tokens: 545
+cost_usd: 0.012347620000000002
+diff_type: value_changed
+finish_status: max_turns
+model: google/gemma-4-31b-it
+prompt_tokens: 79176
+property: P137
+property_label: operator
+rationale: Despite multiple search attempts using various combinations of 'RCA Milano',
+  'RCA Italiana', and 'RCA Italiana S.p.A.' in both English and Italian, no independent
+  web sources could be found to confirm the existence of 'RCA Milano' as a distinct
+  record label or its relationship with 'RCA Italiana'. The absence of results for
+  such a specific entity makes it impossible to verify if the operator change is correct.
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=RCA+Milano+operator+RCA+Italiana
+timestamp: '2026-04-08T20:17:49.644761+00:00'
+title: Q3928196
+turns: 15
+value_label: RCA Italiana
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 1524
+cost_usd: 0.0064944
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27900
+property: P109
+property_label: signature
+rationale: The old signature image 'Nina Simone signature.svg' is a well-documented,
+  appropriately licensed, and widely recognized signature of Nina Simone, as confirmed
+  by Wikimedia Commons and multiple Wikipedia projects. The new value 'Cacá.jpg' is
+  not associated with Nina Simone in any reputable source and appears unrelated to
+  her. Multiple independent searches did not find any evidence linking 'Cacá.jpg'
+  to Nina Simone's signature. This change lacks citation and justification, and should
+  be reverted.
+rcid: null
+revid: 2471466421
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Nina_Simone_signature.svg
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nina_Simone
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/10584-Nina-Simone
+timestamp: '2026-04-11T09:31:29.517424+00:00'
+title: Q174957
+turns: 1
+value_label: null
+verdict: incorrect

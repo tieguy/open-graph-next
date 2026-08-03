@@ -1,0 +1,32 @@
+completion_tokens: 1178
+cost_usd: 0.00619353125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62923
+property: P1477
+property_label: birth name
+rationale: The old value 'Jacques Henry Charles Auguste Lartigue' is well-supported
+  by multiple reliable sources, including the BnF authorities and other reputable
+  references. The new value 'jacques truc bidule' is not supported by any verifiable
+  sources and appears to be incorrect.
+rcid: null
+revid: 2462860117
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.workwithdata.com/person/jacques-henri-lartigue-1894
+- provenance: verified
+  supports_claim: false
+  url: https://www.artnet.com/artists/jacques-henri-lartigue/biography
+- provenance: verified
+  supports_claim: false
+  url: https://library.nga.gov/permalink/01NGA_INST/1cl1g8d/alma991998033504896
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n79089147.html
+timestamp: '2026-04-11T13:02:04.666793+00:00'
+title: Q382329
+turns: 3
+value_label: null
+verdict: incorrect

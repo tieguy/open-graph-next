@@ -1,0 +1,33 @@
+completion_tokens: 1326
+cost_usd: 0.0048584000000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46522
+property: P4264
+property_label: LinkedIn company or organization ID
+rationale: The edit updates the LinkedIn company ID to 'altairdata' for Altair Data
+  Resources, Inc. However, the investigation did not find any verifiable sources confirming
+  this specific LinkedIn company ID. The company's official website and other related
+  pages do not mention the LinkedIn company ID, and additional searches did not yield
+  conclusive results. Therefore, the edit cannot be verified at this time.
+rcid: 2540942855
+revid: 2464732302
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://altairdata.com/company-overview/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eff.org/files/2025/06/24/appendix_b_-_data_broker_full_registry_2025.xlsx
+- provenance: verified
+  supports_claim: false
+  url: https://www.zoominfo.com/c/altair-data-resources/4475771
+- provenance: verified
+  supports_claim: false
+  url: https://www.datanyze.com/companies/altair-data-resources/4475771
+timestamp: '2026-02-20T13:17:21.425830+00:00'
+title: Q138349149
+turns: 8
+value_label: null
+verdict: unverifiable

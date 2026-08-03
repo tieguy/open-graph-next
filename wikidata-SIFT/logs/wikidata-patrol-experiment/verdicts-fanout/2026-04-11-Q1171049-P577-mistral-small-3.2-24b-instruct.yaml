@@ -1,0 +1,25 @@
+completion_tokens: 1458
+cost_usd: 0.00168304
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15682
+property: P577
+property_label: publication date
+rationale: The new publication date of November 29, 1990, is supported by reliable
+  sources such as Filmgalerie451 and IMDb. The old value of April 26, 1997, lacks
+  supporting evidence. Therefore, the change is justified.
+rcid: 2550347780
+revid: 2473686639
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.filmgalerie451.de/en/films/the-german-chainsaw-massacre
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/title/tt0099415/releaseinfo
+timestamp: '2026-04-11T15:36:30.533041+00:00'
+title: Q1171049
+turns: 1
+value_label: null
+verdict: verified-high

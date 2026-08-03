@@ -1,0 +1,34 @@
+completion_tokens: 2297
+cost_usd: 0.0027465
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24743
+property: P1142
+property_label: political ideology
+rationale: The claim that the Antifa movement in France is correctly labeled as having
+  a 'criminal' political ideology (Q2159907) is incorrect. Independent sources confirm
+  that Antifa is primarily recognized as an anti-fascist ideology opposing fascism,
+  racism, and white supremacism. None of the verified sources classify Antifa as a
+  criminal ideology, and the edit lacks a cited reference. The evidence clearly contradicts
+  the claim.
+rcid: null
+revid: 2463239162
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lemonde.fr/en/les-decodeurs/article/2026/02/22/ultra-left-antifa-what-do-these-labels-really-mean_6750750_8.html
+- provenance: verified
+  supports_claim: false
+  url: https://icct.nl/publication/it-cant-happen-here-designating-antifa-terrorist-organisation-europe
+- provenance: verified
+  supports_claim: false
+  url: https://unherd.com/newsroom/french-antifa-violence-is-spilling-into-mainstream-politics/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/articles/c3630g3e802o
+timestamp: '2026-04-10T13:46:20.658521+00:00'
+title: Q125954719
+turns: 2
+value_label: criminal
+verdict: incorrect

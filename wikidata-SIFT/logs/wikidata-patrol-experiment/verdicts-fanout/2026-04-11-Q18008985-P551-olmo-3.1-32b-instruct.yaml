@@ -1,0 +1,32 @@
+completion_tokens: 1295
+cost_usd: 0.003132
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11775
+property: P551
+property_label: residence
+rationale: The only cited source for Yelena Shulman's residence in Kyiv is the Ukrainian
+  Wikipedia page, which could not be fetched for verification due to access restrictions.
+  No independently verifiable source was found that explicitly confirms her current
+  residence in Kyiv.
+rcid: 2550909206
+revid: 2474231483
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://uk.wikipedia.org/wiki/Олена_Шульман
+- provenance: reported
+  supports_claim: false
+  url: https://www.kinoafisha.info/en/person/8326939/
+- provenance: reported
+  supports_claim: false
+  url: https://www.officialusa.com/names/Yelena-Shulman/
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/DotA2/comments/12ggb5p/elena_shulman_russian_voice_of_luna_and_winter/
+timestamp: '2026-04-11T18:19:17.949009+00:00'
+title: Q18008985
+turns: 1
+value_label: Kyiv
+verdict: unverifiable

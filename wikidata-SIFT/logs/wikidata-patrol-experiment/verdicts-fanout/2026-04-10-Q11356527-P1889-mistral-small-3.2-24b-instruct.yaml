@@ -1,0 +1,26 @@
+completion_tokens: 1301
+cost_usd: 0.005612487500000001
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58527
+property: P1889
+property_label: different from
+rationale: The evidence does not support the need for the "different from" qualifier.
+  The sources indicate that Eriko Miura is primarily known as a Japanese AV actress,
+  and there is no clear indication of two distinct individuals with the same name
+  who need to be differentiated.
+rcid: 2550576467
+revid: 2473908558
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.boobpedia.com/boobs/Eriko_Miura
+- provenance: verified
+  supports_claim: false
+  url: https://jpop.fandom.com/wiki/Miura_Eriko_(Seifuku_Koujo_Iinkai)
+timestamp: '2026-04-10T13:13:16.655672+00:00'
+title: Q11356527
+turns: 6
+value_label: Eriko Miura
+verdict: suspect

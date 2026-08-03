@@ -1,0 +1,27 @@
+completion_tokens: 2017
+cost_usd: 0.0034234
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11066
+property: P856
+property_label: official website
+rationale: The Wayback Machine archives confirm that https://www.fountainhouse.org/
+  has been the official website of Fountain House for years, and the transition from
+  http://www.fountainhouse.org/ to the https://www. version is consistent with current
+  official web practices. No contradictory evidence was found, and both URLs have
+  been historically used, but the new URL is the current official presence.
+rcid: 2550491848
+revid: 2473827509
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20200218084623/https://www.fountainhouse.org/
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20190208090141/http://www.fountainhouse.org/
+timestamp: '2026-04-11T16:43:15.321304+00:00'
+title: Q3364461
+turns: 1
+value_label: null
+verdict: verified-high

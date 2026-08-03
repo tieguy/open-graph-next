@@ -1,0 +1,28 @@
+completion_tokens: 1790
+cost_usd: 0.0031414200000000002
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28574
+property: P19
+property_label: place of birth
+rationale: The claim that Ellis S. Chesbrough was born in Baltimore (Q5092) was removed
+  from Wikidata, but this is contradicted by multiple verified primary sources. The
+  ASCE article and WaterWorksHistory explicitly state that Chesbrough was born in
+  Baltimore, Maryland. The current Wikidata entry incorrectly lists Baltimore County
+  (Q488668) as the birthplace, which is inconsistent with the evidence. Therefore,
+  the removal of the Baltimore claim is incorrect.
+rcid: 2550382459
+revid: 2473720423
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.waterworkshistory.us/bio/Chesbrough/index.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.asce.org/publications-and-news/civil-engineering-source/article/2021/07/06/civil-engineering-almanac-ellis-s-chesbrough-is-born
+timestamp: '2026-04-11T14:33:30.741458+00:00'
+title: Q16062843
+turns: 2
+value_label: Baltimore
+verdict: incorrect

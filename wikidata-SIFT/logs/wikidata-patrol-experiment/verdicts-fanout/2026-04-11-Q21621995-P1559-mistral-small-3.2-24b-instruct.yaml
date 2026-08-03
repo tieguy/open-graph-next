@@ -1,0 +1,28 @@
+completion_tokens: 1658
+cost_usd: 0.0037416875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35490
+property: P1559
+property_label: name in native language
+rationale: The old value 'Kylian Mbappé' is well-supported by multiple independent
+  sources, including Wikipedia and FIFA. The new value 'Kyky de bondy' is not supported
+  by any credible sources and appears to be incorrect.
+rcid: 2549572102
+revid: 2472934847
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Kylian_Mbappé
+- provenance: verified
+  supports_claim: true
+  url: https://www.fifa.com/players/kylian-mbappe-21407000/
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Kyky+de+bondy
+timestamp: '2026-04-11T15:15:43.273596+00:00'
+title: Q21621995
+turns: 1
+value_label: null
+verdict: incorrect

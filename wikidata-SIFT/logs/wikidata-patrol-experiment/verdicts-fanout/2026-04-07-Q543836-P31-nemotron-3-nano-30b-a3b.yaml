@@ -1,0 +1,23 @@
+completion_tokens: 580
+cost_usd: 0.01325385
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 262757
+property: P31
+property_label: instance of
+rationale: No credible evidence was found to confirm that 'Chat' is a valid phenomenon
+  in the context of the edit. Multiple search attempts for 'Pierre Bordage' combined
+  with 'Chat', 'pseudonym', 'author', or related terms returned no relevant results
+  that clarify the referenced entity or its properties. Neither external sources nor
+  authoritative documentation support the claim that 'Chat' should be classified as
+  an instance of. Given the lack of verifiable information, this edit remains unverifiable,
+  and therefore cannot be confidently classified as correct.
+rcid: 2550573942
+revid: 2473906120
+sources: []
+timestamp: '2026-04-07T03:49:43.583337+00:00'
+title: Q543836
+turns: 15
+value_label: Chat
+verdict: unverifiable

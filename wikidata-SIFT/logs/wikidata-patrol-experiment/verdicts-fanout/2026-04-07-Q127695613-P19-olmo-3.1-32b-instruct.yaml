@@ -1,0 +1,22 @@
+completion_tokens: 1109
+cost_usd: 0.0073836
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33591
+property: P19
+property_label: place of birth
+rationale: The only cited reference for Metrika's place of birth could not be accessed,
+  and no independent sources confirmed the claim. Therefore, it is not possible to
+  verify whether 'Castellón de la Plana' was the correct value to remove.
+rcid: 2549685112
+revid: 2473044623
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.elperiodicomediterraneo.com/cultura/2021/06/22/metrika-voz-trap-castellon-hablo-54132977.html
+timestamp: '2026-04-07T13:39:14.950987+00:00'
+title: Q127695613
+turns: 5
+value_label: Castellón de la Plana
+verdict: unverifiable

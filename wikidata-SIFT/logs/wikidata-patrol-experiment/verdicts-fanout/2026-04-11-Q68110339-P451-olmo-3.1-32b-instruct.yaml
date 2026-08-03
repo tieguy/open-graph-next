@@ -1,0 +1,36 @@
+completion_tokens: 2040
+cost_usd: 0.005445800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21109
+property: P451
+property_label: unmarried partner
+rationale: The edit replaced a well-documented relationship (Emilia Mernes with Duki)
+  with an unsubstantiated one (with Coscu). Multiple reliable sources confirm the
+  relationship with Duki from 2021 through at least 2024, but there is no credible
+  evidence supporting a romantic relationship with Coscu during this period. The cited
+  reference could not be fetched and thus does not support the edit.
+rcid: 2549423609
+revid: 2472789338
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Emilia_Mernes
+- provenance: verified
+  supports_claim: false
+  url: https://www.chefer.com/entretenimiento/emilia-mernes-y-duki-que-hicieron-publico-su-union-2373551.html
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Emilia_Mernes
+- provenance: verified
+  supports_claim: false
+  url: https://www.taringa.net/posts/noticias/78071030/Emilia-Mernes-y-Duki-se-separaron.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.ambito.com/espectaculos/romance/duki-y-emilia-mernes-confirmaron-su-noviazgo-n5332279
+timestamp: '2026-04-11T15:52:54.795309+00:00'
+title: Q68110339
+turns: 1
+value_label: Coscu
+verdict: incorrect

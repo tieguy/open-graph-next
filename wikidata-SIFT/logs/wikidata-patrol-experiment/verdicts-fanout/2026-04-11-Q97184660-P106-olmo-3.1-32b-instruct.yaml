@@ -1,0 +1,32 @@
+completion_tokens: 1846
+cost_usd: 0.0042212
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15568
+property: P106
+property_label: occupation
+rationale: The new value 'Porn Star Dancing' is not supported by any independent or
+  encyclopedic source. Authoritative Japanese-language sources consistently describe
+  Nozomi Ishihara as an AV actress. The change to a less accurate and less general
+  term is not justified and may misrepresent her primary occupation.
+rcid: null
+revid: 2468754434
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/石原希望
+- provenance: verified
+  supports_claim: false
+  url: https://jav.guru/actress/ishihara-nozomi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bestjavporn.com/pornstar/nozomi-ishihara/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eporner.com/pornstar/nozomi-ishihara/
+timestamp: '2026-04-11T16:16:04.905007+00:00'
+title: Q97184660
+turns: 1
+value_label: Porn Star Dancing
+verdict: suspect

@@ -1,0 +1,23 @@
+completion_tokens: 233
+cost_usd: 0.002396375
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25493
+property: P452
+property_label: industry
+rationale: The search results and fetched content do not provide any relevant information
+  about 'Team building PACA' or its industry. The search results mostly relate to
+  unrelated organizations, and no verifiable sources were found to support the industry
+  claim.
+rcid: 2540940501
+revid: 2464730024
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pacaweb.org/
+timestamp: '2026-02-20T14:58:01.286625+00:00'
+title: Q138348741
+turns: 3
+value_label: team building
+verdict: unverifiable

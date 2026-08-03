@@ -1,0 +1,39 @@
+completion_tokens: 1771
+cost_usd: 0.051431000000000004
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 42576
+property: P31
+property_label: instance of
+rationale: 'Multiple independent, authoritative sources confirm that Novacore Builders
+  is a licensed contractor and construction company engaged in commercial professional
+  activity. The official website describes it as ''a locally owned remodeling and
+  construction company'' operating since 2015 with Florida Certified Building Contractor
+  license (CBC1269188). The Wikidata definition of Q4830453 (''business'') precisely
+  matches: ''organization undertaking commercial, industrial, or professional activity.''
+  Secondary sources (Yelp, BBB, ZoomInfo, BuildZoom) consistently corroborate this
+  classification.'
+rcid: 2540919150
+revid: 2464710231
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.novacorebuilders.com/about
+- provenance: reported
+  supports_claim: true
+  url: https://m.yelp.com/biz/novacore-builders-tampa
+- provenance: reported
+  supports_claim: true
+  url: https://www.bbb.org/us/fl/tampa/profile/construction/novacore-builders-llc-0653-90457053
+- provenance: reported
+  supports_claim: true
+  url: https://www.zoominfo.com/c/novacore-builders/1340322033
+- provenance: reported
+  supports_claim: true
+  url: https://www.buildzoom.com/contractor/novacore-builders
+timestamp: '2026-02-21T01:47:07.324544+00:00'
+title: Q138348389
+turns: 5
+value_label: business
+verdict: verified-high

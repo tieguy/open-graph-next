@@ -1,0 +1,21 @@
+completion_tokens: 716
+cost_usd: 0.0105654
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50679
+property: P451
+property_label: unmarried partner
+rationale: The edit changes Gaten Matarazzo's unmarried partner to 'Yo', citing a
+  Wikipedia import as the only reference. Multiple independent web searches did not
+  find any reliable source confirming this relationship. Wikipedia is not an acceptable
+  independent source for Wikidata claims, and the absence of corroborating evidence
+  suggests the new value is likely incorrect or unverified.
+rcid: null
+revid: 2471227250
+sources: []
+timestamp: '2026-04-07T13:07:46.382989+00:00'
+title: Q26704332
+turns: 7
+value_label: Yo
+verdict: suspect

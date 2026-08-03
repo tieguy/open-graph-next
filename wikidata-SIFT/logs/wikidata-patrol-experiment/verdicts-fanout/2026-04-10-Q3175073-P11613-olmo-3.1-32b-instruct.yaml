@@ -1,0 +1,36 @@
+completion_tokens: 2734
+cost_usd: 0.004315
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13373
+property: P11613
+property_label: SACEM Museum artist ID
+rationale: The value 'COAD 968.454.00' for the SACEM Museum artist ID of Jean Voguet
+  is not supported by any authoritative source. The official SACEM repertoire website
+  does not list this ID for the artist, and other major music databases and the artist's
+  official website also do not reference it. Therefore, the edit is incorrect and
+  should be reverted.
+rcid: 2550086263
+revid: 2473432930
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://repertoire.sacem.fr/recherche?search=auteurpersonne%3DJean%20Voguet
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Jean_Voguet
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/0fba2678-3e8b-49f4-bf4c-0b4582861803
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sacem.fr/professionnels/patrimoine-musical/consultation-du-repertoire
+timestamp: '2026-04-10T13:08:30.945358+00:00'
+title: Q3175073
+turns: 1
+value_label: null
+verdict: incorrect

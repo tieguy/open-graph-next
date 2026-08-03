@@ -1,0 +1,25 @@
+completion_tokens: 2186
+cost_usd: 0.00413901
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 45715
+property: P1477
+property_label: birth name
+rationale: The investigation could not fetch or verify the cited Google Books reference
+  due to technical limitations. No independent sources were successfully accessed
+  to confirm or deny the claim that 'Baron Stirling Henry di Victor Nahum' is the
+  correct birth name. Without verified evidence, it is impossible to determine whether
+  the rank change from 'preferred' to 'normal' is justified or incorrect.
+rcid: 2550975808
+revid: 2474295196
+sources:
+- provenance: verified
+  summary: Failed to fetch content, so cannot confirm or deny support for the claim.
+  supports_claim: false
+  url: https://books.google.be/books?newbks=0&redir_esc=y&hl=nl&id=LnIjAQAAMAAJ&focus=searchwithinvolume&q=%22Baron+Stirling+Henry+di+Victor+Nahum%22
+timestamp: '2026-04-11T14:28:25.948394+00:00'
+title: Q15998777
+turns: 4
+value_label: null
+verdict: unverifiable

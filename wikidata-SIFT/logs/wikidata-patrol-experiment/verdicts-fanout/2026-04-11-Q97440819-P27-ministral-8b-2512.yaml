@@ -1,0 +1,33 @@
+completion_tokens: 2072
+cost_usd: 0.00520779
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 48519
+property: P27
+property_label: country of citizenship
+rationale: The edit incorrectly changes Kathrine Switzer's country of citizenship
+  from the United States (Q30) to Germany (Q183). All verified sources describe her
+  as an American, with no credible evidence supporting German citizenship. The cited
+  references either do not mention Germany or explicitly confirm her American identity.
+  The change contradicts established biographical records and independent sources.
+rcid: 2550904110
+revid: 2474226718
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wanderwomenproject.com/women/kathrine-switzer/
+- provenance: verified
+  supports_claim: false
+  url: https://www.womenofthehall.org/inductee/kathrine-switzer/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nyrr.org/about/hall-of-fame/kathrine-switzer
+- provenance: verified
+  supports_claim: false
+  url: https://www.francetvinfo.fr/culture/patrimoine/histoire/sport-portrait-de-kathrine-switzer-marathonienne-pionniere_4314539.html
+timestamp: '2026-04-11T18:09:43.498656+00:00'
+title: Q97440819
+turns: 4
+value_label: Germany
+verdict: incorrect

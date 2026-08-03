@@ -1,0 +1,31 @@
+completion_tokens: 1114
+cost_usd: 0.0039962
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16639
+property: P569
+property_label: date of birth
+rationale: The Bibliothèque nationale de France, a primary bibliographic authority,
+  states that Gaëlle Ghesquière was born on 22 January 1978. This directly contradicts
+  the 'January 1976' date of birth added in this edit. No independent authoritative
+  source supports the 1976 date, and the Drouot artist ID containing '1976' does not
+  constitute evidence of birth year. Therefore, the edit is incorrect and should be
+  reverted.
+rcid: 2540938720
+revid: 2464728324
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb14517999v
+- provenance: verified
+  supports_claim: false
+  url: https://drouot.com/fr/l/22298396-david-bowiegaelle-ghesquiere-1
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-02-20T16:07:03.779686+00:00'
+title: Q3099888
+turns: 2
+value_label: null
+verdict: incorrect

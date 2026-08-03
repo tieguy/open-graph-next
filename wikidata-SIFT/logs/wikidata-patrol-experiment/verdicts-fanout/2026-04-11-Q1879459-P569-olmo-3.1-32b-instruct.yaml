@@ -1,0 +1,27 @@
+completion_tokens: 753
+cost_usd: 0.004373999999999999
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19611
+property: P569
+property_label: date of birth
+rationale: The newly added reference does not support the date of birth claim and
+  is unrelated to Potap. Although the date of birth itself is supported by independent
+  reliable sources, the edit does not improve sourcing and may be misleading. The
+  factual correctness of the value is maintained, but the edit's reference change
+  is not substantiated.
+rcid: 2551280660
+revid: 2474589836
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kids.kiddle.co/Potap
+- provenance: verified
+  supports_claim: false
+  url: https://allfamousbirthday.com/potap/
+timestamp: '2026-04-11T15:36:21.812515+00:00'
+title: Q1879459
+turns: 1
+value_label: null
+verdict: unverifiable

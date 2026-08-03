@@ -1,0 +1,37 @@
+completion_tokens: 2489
+cost_usd: 0.175715
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 163270
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: The edit adds a LinkedIn personal profile ID 'francissevin' for Francis
+  Sevin. While I verified that Francis Sevin is a real French politician (born 1947)
+  serving as deputy mayor of Sartrouville and former president of GEBS, I cannot directly
+  verify the LinkedIn profile ID because LinkedIn is a blocked domain that prevents
+  automated access. No independent sources, public records, or third-party documentation
+  were found that confirm or deny the association between Francis Sevin and the username
+  'francissevin' on LinkedIn. The ID format is technically valid according to Wikidata
+  P6634 specifications, but without access to LinkedIn or corroborating documentation,
+  the claim cannot be verified.
+rcid: 2540920242
+revid: 2464711305
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P6634
+- provenance: verified
+  supports_claim: true
+  url: https://www.sartrouville.fr/portrait/francis-sevin/
+- provenance: verified
+  supports_claim: true
+  url: https://gebs.fr/conseil-d-administration.php
+- provenance: verified
+  supports_claim: false
+  url: https://www.linkedin.com/in/francissevin
+timestamp: '2026-02-21T01:16:28.208774+00:00'
+title: Q137844713
+turns: 15
+value_label: null
+verdict: unverifiable

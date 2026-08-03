@@ -1,0 +1,22 @@
+completion_tokens: 466
+cost_usd: 0.0036512
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16858
+property: P569
+property_label: date of birth
+rationale: The provided reference is a personal Google Sites page with no biographical
+  information, and independent searches did not yield any sources confirming the date
+  of birth of 7 June 2011 for Manvik Chandra. Therefore, the claim cannot be verified.
+rcid: 2540950560
+revid: 2464739487
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+timestamp: '2026-02-20T09:09:58.410909+00:00'
+title: Q137924958
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1257
+cost_usd: 0.0032502
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12480
+property: P675
+property_label: Google Books ID
+rationale: The provided Google Books ID 'WDZGL2JY0ND' does not resolve to a valid
+  Google Books entry, and no independent sources link this ID to Manvik Chandra. Therefore,
+  the updated claim is incorrect.
+rcid: 2540951751
+revid: 2464740527
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books?id=WDZGL2JY0ND
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Student_Life.html?id=JnWgEQAAQBAJ
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Manik_Chandra.html?id=-3k5EAAAQBAJ
+timestamp: '2026-02-20T08:23:06.136510+00:00'
+title: Q137924958
+turns: 2
+value_label: null
+verdict: incorrect

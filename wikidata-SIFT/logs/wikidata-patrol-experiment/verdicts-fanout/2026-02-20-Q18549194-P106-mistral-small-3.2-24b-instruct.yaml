@@ -1,0 +1,26 @@
+completion_tokens: 1688
+cost_usd: 0.0025112499999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22009
+property: P106
+property_label: occupation
+rationale: Multiple independent sources, including Romania Journal and Fox News, refer
+  to Alexandru Vișinescu as a torturer and describe his role in oppressing political
+  prisoners. These sources provide strong evidence supporting the claim that his occupation
+  should be updated to reflect his actions.
+rcid: 2540940198
+revid: 2464729757
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.romaniajournal.ro/society-people/law-crime/communist-torturer-alexandru-visinescu-dies-in-prison-hospital-aged-93/
+- provenance: verified
+  supports_claim: true
+  url: https://www.foxnews.com/world/romanian-officials-say-communist-prison-commander-caused-deaths-of-6-political-prisoners
+timestamp: '2026-02-20T15:06:46.799295+00:00'
+title: Q18549194
+turns: 3
+value_label: military officer
+verdict: verified-high

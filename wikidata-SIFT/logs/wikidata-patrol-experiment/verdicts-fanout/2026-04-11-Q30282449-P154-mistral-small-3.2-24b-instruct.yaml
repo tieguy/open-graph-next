@@ -1,0 +1,25 @@
+completion_tokens: 1151
+cost_usd: 0.0057983875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58648
+property: P154
+property_label: logo image
+rationale: The sources consulted do not provide any specific information about the
+  logo image 'IISPV logo.svg'. Therefore, it is unverifiable whether the removal of
+  this logo was correct.
+rcid: 2550207698
+revid: 2473550373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.iispv.cat/en/
+- provenance: verified
+  supports_claim: false
+  url: https://citizenscience.eu/organisation/308
+timestamp: '2026-04-11T06:14:36.931956+00:00'
+title: Q30282449
+turns: 6
+value_label: null
+verdict: unverifiable

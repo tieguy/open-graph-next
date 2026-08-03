@@ -1,0 +1,29 @@
+completion_tokens: 2540
+cost_usd: 0.00379293
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35393
+property: P7678
+property_label: Wikimapia ID
+rationale: The Wikimapia ID claim for Q77525105 was added with a reference to Wikimapia,
+  but the platform is no longer actively maintained and is considered a historical
+  archive. Prefetched references confirm Wikimapia is not an authoritative source
+  for current or reliable data. The direct URL fetch failed due to server issues,
+  and no independent, verified sources were found to confirm the Wikimapia ID '372687'
+  for Mandrykivska-vulytsia in Dnipro. Without access to the actual content or independent
+  verification, the claim cannot be confirmed or denied.
+rcid: 2550779618
+revid: 2474105114
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bellingcat.gitbook.io/toolkit/more/all-tools/wikimapia
+- provenance: verified
+  supports_claim: false
+  url: https://wiki.openstreetmap.org/wiki/Wikimapia
+timestamp: '2026-04-11T16:34:28.363118+00:00'
+title: Q77525105
+turns: 3
+value_label: null
+verdict: unverifiable

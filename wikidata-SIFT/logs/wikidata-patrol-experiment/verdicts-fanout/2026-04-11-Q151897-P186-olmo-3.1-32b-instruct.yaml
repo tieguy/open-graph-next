@@ -1,0 +1,37 @@
+completion_tokens: 2251
+cost_usd: 0.0070416
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28455
+property: P186
+property_label: made from material
+rationale: The edit replacing the material source of the Reichstag from 'limestone
+  from Limestone Quarry Rüdersdorf' to 'Gresse-en-Vercors' is not supported by any
+  credible source. Authoritative architectural and historical records indicate that
+  the limestone used in the construction of the Reichstag was sourced from local German
+  quarries, specifically Rüdersdorf. No reliable evidence links the Reichstag's construction
+  to limestone from Gresse-en-Vercors. Therefore, this change is factually incorrect.
+rcid: null
+revid: 2471462243
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bildhauerei-in-berlin.de/bildwerk/reichstag-10905/
+- provenance: verified
+  supports_claim: false
+  url: https://denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09050341
+- provenance: verified
+  supports_claim: false
+  url: https://www.dw.com/en/christos-wrapped-reichstag-a-symbol-of-freedom-25-years-on/a-53928722
+- provenance: verified
+  supports_claim: false
+  url: https://publicartarchive.org/art/Wrapped-Reichstag/b0435cc2
+- provenance: unreachable
+  supports_claim: false
+  url: https://structurae.net/fr/ouvrages/palais-du-reichstag
+timestamp: '2026-04-11T08:16:32.278924+00:00'
+title: Q151897
+turns: 1
+value_label: Gresse-en-Vercors
+verdict: incorrect

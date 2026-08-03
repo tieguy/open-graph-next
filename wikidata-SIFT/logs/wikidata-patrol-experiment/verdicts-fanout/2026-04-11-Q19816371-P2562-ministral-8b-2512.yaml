@@ -1,0 +1,33 @@
+completion_tokens: 2102
+cost_usd: 0.0023895599999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20024
+property: P2562
+property_label: married name
+rationale: The old value 'Мария Владимировна Воронцова' was unsupported by any independent
+  source. All verified sources confirm Maria Vorontsova’s married name is tied to
+  her husbands (Jorrit Faassen or Yevgeny Nagorny), not 'Воронцова'. The new value
+  'Мария Владимировна' is incomplete and lacks sourcing. The edit incorrectly removes
+  the accurate married surname and lacks any evidence to support the change.
+rcid: null
+revid: 2471474532
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://voxhour.com/maria-vorontsova/
+- provenance: verified
+  supports_claim: false
+  url: https://www.dailymail.co.uk/news/article-10640855
+- provenance: verified
+  supports_claim: false
+  url: https://www.dailymail.co.uk/news/article-10734833
+- provenance: verified
+  supports_claim: false
+  url: https://www.rferl.org/a/putin-relative-nagorny-novatek-murmansk-lng-mikhelson/32950259.html
+timestamp: '2026-04-11T07:51:11.881568+00:00'
+title: Q19816371
+turns: 1
+value_label: null
+verdict: incorrect

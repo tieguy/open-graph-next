@@ -1,0 +1,31 @@
+completion_tokens: 738
+cost_usd: 0.0190318
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 92945
+property: P856
+property_label: official website
+rationale: The new value https://www.turkishairlines.com is the official website of
+  Turkish Airlines, an airline company, and is not related to Ōda-shi, a city in Shimane
+  Prefecture, Japan. No authoritative source was found supporting this change. The
+  previous value https://www.city.oda.lg.jp/ is consistent with the naming convention
+  for Japanese municipalities and is likely the correct official website. The change
+  appears to be an error.
+rcid: 2549352572
+revid: 2472719882
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.turkishairlines.com
+- provenance: reported
+  supports_claim: null
+  url: https://www.city.ohda.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/%C5%8Cda-shi
+timestamp: '2026-04-07T12:20:33.454275+00:00'
+title: Q384796
+turns: 10
+value_label: null
+verdict: incorrect

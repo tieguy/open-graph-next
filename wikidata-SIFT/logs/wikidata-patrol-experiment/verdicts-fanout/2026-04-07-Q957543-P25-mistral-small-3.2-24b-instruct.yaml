@@ -1,0 +1,34 @@
+completion_tokens: 972
+cost_usd: 0.018958547500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 228283
+property: P25
+property_label: mother
+rationale: The edit changes the mother of Ernest Shackleton from Henrietta Letitia
+  Sophia Gavan to Laura Salvadori. The edit references two sources, 'The Peerage'
+  and 'Kindred Britain [de]', but both sources are blocked and cannot be accessed
+  directly. Independent searches for 'Ernest Shackleton mother Laura Salvadori' and
+  'Ernest Shackleton mother' did not return any relevant results. The lack of independent
+  corroboration suggests that the edit is suspect.
+rcid: null
+revid: 2471632459
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ernest_Shackleton
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Ernest-Shackleton
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/4564/ernest-henry-shackleton
+- provenance: verified
+  supports_claim: false
+  url: https://www.geographicus.com/P/RareMaps/shackleton
+timestamp: '2026-04-07T10:55:39.395966+00:00'
+title: Q957543
+turns: 13
+value_label: Laura Salvadori
+verdict: suspect

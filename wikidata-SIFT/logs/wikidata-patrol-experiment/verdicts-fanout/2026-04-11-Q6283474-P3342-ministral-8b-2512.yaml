@@ -1,0 +1,31 @@
+completion_tokens: 2270
+cost_usd: 0.01849746
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 180522
+property: P3342
+property_label: significant person
+rationale: The edit changing the significant person from Sonia Sekula to Julian Schnabel
+  for Joseph Glasco is justified. The new value, Julian Schnabel, is supported by
+  a verified press release from Waddington Custot, which explicitly documents their
+  friendship and collaboration. The old value, Sonia Sekula, lacks verifiable references,
+  as the cited sources are unreachable. No independent evidence supports Sonia Sekula's
+  significance to Joseph Glasco.
+rcid: 2550519761
+revid: 2473854045
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.waddingtoncustot.com/usr/documents/exhibitions/press_release_url/95/joseph-glasco-press-release.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://hyperallergic.com/sonja-sekula-a-survey-peter-blum-gallery-2017/
+- provenance: reported
+  supports_claim: false
+  url: https://www.sonja-sekula.org/timeline.htm
+timestamp: '2026-04-11T09:54:07.660161+00:00'
+title: Q6283474
+turns: 7
+value_label: Julian Schnabel
+verdict: verified-high

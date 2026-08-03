@@ -1,0 +1,29 @@
+completion_tokens: 1945
+cost_usd: 0.00613159375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60217
+property: P26
+property_label: spouse
+rationale: The new value 'Pipidae' is a family of amphibians and not a person, making
+  it an incorrect spouse for Vincent Dugomier. The old value 'Veerle Swinnen' needs
+  further verification, but based on the available sources, the change to 'Pipidae'
+  is clearly incorrect.
+rcid: null
+revid: 2463995680
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bedetheque.com/auteur-2806-BD-Dugomier.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.maisondelabd.com/11-presse/236-toutes-les-recompenses
+- provenance: verified
+  supports_claim: false
+  url: https://www.ricochet-jeunes.org/auteurs/vincent-dugomier
+timestamp: '2026-04-11T11:34:39.587857+00:00'
+title: Q3041019
+turns: 5
+value_label: Pipidae
+verdict: incorrect

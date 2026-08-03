@@ -1,0 +1,18 @@
+completion_tokens: 285
+cost_usd: 0.00811842875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 86158
+property: P1082
+property_label: population
+rationale: Unable to verify the population change due to repeated web search failures.
+  No reliable sources could be accessed to confirm or refute the claim.
+rcid: 2551278923
+revid: 2474588215
+sources: []
+timestamp: '2026-04-11T06:38:09.280076+00:00'
+title: Q407947
+turns: 6
+value_label: null
+verdict: unverifiable

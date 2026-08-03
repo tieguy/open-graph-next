@@ -1,0 +1,23 @@
+completion_tokens: 718
+cost_usd: 0.0074318
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35005
+property: P119
+property_label: place of burial
+rationale: The only reference that previously supported the claim about Nellie Camposucio's
+  place of burial was unreachable and could not be verified. Independent searches
+  did not yield any reliable sources confirming burial in Durango. Therefore, the
+  claim cannot be confirmed or denied with available evidence.
+rcid: 2550019752
+revid: 2473368142
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1665-85742011000100003
+timestamp: '2026-04-07T12:55:14.156534+00:00'
+title: Q6937625
+turns: 5
+value_label: Durango
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 598
+cost_usd: 0.004084
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39046
+property: P1559
+property_label: name in native language
+rationale: The edit claims that the native name for Masahiro Sakurai is 'rusia'. However,
+  based on the information from the verified sources, Masahiro Sakurai's name in Japanese
+  is 桜井 政博 (Sakurai Masahiro). There is no indication that he is known as 'rusia'
+  in any native context. The verified sources consistently refer to him as Masahiro
+  Sakurai or by his Japanese name, but not as 'rusia'.
+rcid: 2540929965
+revid: 2464720645
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Creator/MasahiroSakurai
+- provenance: verified
+  supports_claim: false
+  url: https://gamefaqs.gamespot.com/boards/234547-super-smash-bros-ultimate/78100465?page=4
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+timestamp: '2026-02-20T20:27:51.266009+00:00'
+title: Q1906721
+turns: 3
+value_label: null
+verdict: incorrect

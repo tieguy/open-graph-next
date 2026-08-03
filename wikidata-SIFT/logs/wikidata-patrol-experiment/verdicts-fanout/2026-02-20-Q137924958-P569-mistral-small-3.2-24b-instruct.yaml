@@ -1,0 +1,29 @@
+completion_tokens: 1477
+cost_usd: 0.0022138749999999997
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19529
+property: P569
+property_label: date of birth
+rationale: The independent sources consistently indicate that Manvik Chandra was born
+  in 2002, which contradicts the edited date of birth of June 7, 2011. The primary
+  source cited in the edit is inaccessible, and the secondary sources do not support
+  the claim.
+rcid: 2540950560
+revid: 2464739487
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://clustrmaps.com/person/Chandra-d3mpl2
+- provenance: verified
+  supports_claim: false
+  url: https://nationalpublicdata.com/people/c/manvik-chandra/
+- provenance: verified
+  supports_claim: false
+  url: https://www.truthfinder.com/people-search/manvik-chandra/
+timestamp: '2026-02-20T09:09:47.709679+00:00'
+title: Q137924958
+turns: 3
+value_label: null
+verdict: incorrect

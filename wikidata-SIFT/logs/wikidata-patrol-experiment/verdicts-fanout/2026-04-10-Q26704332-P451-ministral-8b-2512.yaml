@@ -1,0 +1,30 @@
+completion_tokens: 1929
+cost_usd: 0.00253788
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20725
+property: P451
+property_label: unmarried partner
+rationale: The edit claims Gaten Matarazzo's unmarried partner is now 'Yo' (Q37562164).
+  However, multiple verified independent sources (People.com, AOL.com, Yahoo!) confirm
+  that his girlfriend is Elizabeth Yu (Q122216813). No credible source supports the
+  claim that 'Yo' is his partner, and the cited Wikipedia reference is unreachable.
+  Therefore, the claim is incorrect.
+rcid: null
+revid: 2471329483
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://people.com/who-is-elizabeth-yu-gaten-matarazzo-11852875
+- provenance: verified
+  supports_claim: false
+  url: https://www.aol.com/articles/gaten-matarazzos-girlfriend-actress-elizabeth-140000641.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.yahoo.com/entertainment/gaten-matarazzo-girlfriend-elizabeth-yu-072738456.html
+timestamp: '2026-04-10T13:43:42.328182+00:00'
+title: Q26704332
+turns: 1
+value_label: Yo
+verdict: incorrect

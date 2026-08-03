@@ -1,0 +1,31 @@
+completion_tokens: 2579
+cost_usd: 0.04442002
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 206053
+property: P1813
+property_label: short name
+rationale: The referenced URL (https://suchfokus.de) is the official website of the
+  business and displays 'SuchFokus' prominently as a brand name on the homepage, which
+  supports its use as a short name/trading name for property P1813. However, the website
+  also mentions 'Boost Corovic' in other sections, creating some ambiguity about the
+  exact relationship between the names, and no independent sources were found to corroborate
+  that 'Suchfokus' is specifically a short name rather than just a domain/brand name.
+rcid: 2540973863
+revid: 2464760744
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de/kontakt
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de/ueber-uns
+timestamp: '2026-02-20T02:57:55.764326+00:00'
+title: Q138349990
+turns: 13
+value_label: null
+verdict: verified-low

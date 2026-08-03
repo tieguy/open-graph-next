@@ -1,0 +1,22 @@
+completion_tokens: 1058
+cost_usd: 0.005520000000000001
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24426
+property: P7014
+property_label: terms of service URL
+rationale: The URL https://about.qwant.com/legal/mentions-legales/ was fetched and
+  confirmed to contain Qwant's Privacy Policy, not its Terms of Service. Therefore,
+  assigning this URL to the 'terms of service URL' property is incorrect.
+rcid: 2550576086
+revid: 2473908181
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://about.qwant.com/legal/mentions-legales/
+timestamp: '2026-04-11T16:50:47.418095+00:00'
+title: Q14657870
+turns: 1
+value_label: null
+verdict: incorrect

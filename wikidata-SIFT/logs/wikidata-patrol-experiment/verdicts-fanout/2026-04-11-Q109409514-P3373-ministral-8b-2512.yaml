@@ -1,0 +1,28 @@
+completion_tokens: 1974
+cost_usd: 0.0023343599999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19784
+property: P3373
+property_label: sibling
+rationale: The original *The Lion King* (1994) canonically establishes Scar and Mufasa
+  as siblings, supported by multiple verified sources (e.g., Disney Fandom Wiki and
+  Reader’s Digest). The old value ('Brad Grey Pictures') was nonsensical and incorrect.
+  While the 2024 prequel redefines their relationship, it does not override the original
+  film’s canon. The edit is factually correct, though the lack of references remains
+  a gap.
+rcid: 2550820709
+revid: 2474145112
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://disney.fandom.com/wiki/Scar
+- provenance: verified
+  supports_claim: true
+  url: https://www.rd.com/article/lion-king-brothers/
+timestamp: '2026-04-11T17:31:55.111468+00:00'
+title: Q109409514
+turns: 1
+value_label: Mufasa
+verdict: verified-high

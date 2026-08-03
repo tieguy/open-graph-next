@@ -1,0 +1,28 @@
+completion_tokens: 2043
+cost_usd: 0.0025805700000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33222
+property: P136
+property_label: genre
+rationale: The edit changes the genre of Urma Sellinger from 'punk rock' to 'metalcore'.
+  The prefetched sources from Grokipedia and Mistshelter explicitly confirm that Urma
+  Sellinger is a post-hardcore/metalcore band, with no mention of punk rock as a defining
+  genre. The absence of references for the original claim and the strong support for
+  the new value in independent sources justify the edit. The item's description as
+  a 'Swedish post-hardcore band' further aligns with the new genre label.
+rcid: 2551109366
+revid: 2474425014
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/urma_sellinger_album
+- provenance: verified
+  supports_claim: true
+  url: https://mistshelter.com/urmasellinger/
+timestamp: '2026-04-11T09:22:41.335986+00:00'
+title: Q1164188
+turns: 4
+value_label: metalcore
+verdict: verified-high

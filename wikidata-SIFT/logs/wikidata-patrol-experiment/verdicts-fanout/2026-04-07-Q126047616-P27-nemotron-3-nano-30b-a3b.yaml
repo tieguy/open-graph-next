@@ -1,0 +1,21 @@
+completion_tokens: 814
+cost_usd: 0.004597250000000001
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 88689
+property: P27
+property_label: country of citizenship
+rationale: No sources supporting the claim that country of citizenship should be Sri
+  Lanka for Nasdas were found. Searches for 'Nasdas Sri Lanka citizenship' and 'Nasdas
+  country of citizenship' returned no relevant results. The cited reference URL was
+  inaccessible (404 error). Without verifiable sources confirming either the current
+  citizenship claim or an alternative, the removal cannot be verified or disproven.
+rcid: null
+revid: 2470675650
+sources: []
+timestamp: '2026-04-07T12:58:22.511721+00:00'
+title: Q126047616
+turns: 15
+value_label: Sri Lanka
+verdict: unverifiable

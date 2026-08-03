@@ -1,0 +1,29 @@
+completion_tokens: 1739
+cost_usd: 0.0037058000000000004
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13312
+property: P69
+property_label: educated at
+rationale: The claim that O Dae-geoyong was educated at Kangwon National University
+  was unsourced in Wikidata and is not supported by any authoritative biography or
+  literary database. Both English and Korean Wikipedia articles on O Dae-geoyong do
+  not mention Kangwon National University as his alma mater, and no records from the
+  Korean Writers' Association indicate university education for him. Therefore, the
+  removal of this claim is correct and well-supported by the absence of evidence from
+  reliable sources.
+rcid: 2550198098
+revid: 2473541049
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/O_Dae-geoyong
+- provenance: verified
+  supports_claim: false
+  url: https://ko.wikipedia.org/wiki/%EC%98%A8%EB%8C%80%EA%B2%80%EB%AF%8C
+timestamp: '2026-04-11T10:46:12.015513+00:00'
+title: Q107615244
+turns: 1
+value_label: Kangwon National University
+verdict: verified-high

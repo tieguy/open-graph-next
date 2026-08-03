@@ -1,0 +1,28 @@
+completion_tokens: 1302
+cost_usd: 0.004950400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20846
+property: P856
+property_label: official website
+rationale: The official website of Abiko City is https://www.city.abiko.chiba.jp/,
+  confirmed by direct fetch of the primary source. The new value https://www.lufthansa.com
+  is the official website of Lufthansa, an airline, and contains no reference to Abiko
+  City. No independent sources support the claim that Lufthansa's website is the official
+  website of Abiko. Therefore, changing the official website to Lufthansa's site was
+  incorrect.
+rcid: null
+revid: 2471019462
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.abiko.chiba.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lufthansa.com/
+timestamp: '2026-04-11T15:10:15.488289+00:00'
+title: Q243859
+turns: 1
+value_label: null
+verdict: incorrect

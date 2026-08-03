@@ -1,0 +1,25 @@
+completion_tokens: 907
+cost_usd: 0.0059230875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62787
+property: P856
+property_label: official website
+rationale: The new URL provided for the official website of Yaizu is incorrect. The
+  URL 'https://www.vietjetair.com' is not related to the city of Yaizu. The correct
+  official website is 'https://www.city.yaizu.lg.jp/'.
+rcid: null
+revid: 2471590660
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/焼津市
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.yaizu.lg.jp/
+timestamp: '2026-04-08T18:35:19.948813+00:00'
+title: Q696783
+turns: 6
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1768
+cost_usd: 0.006696199999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28177
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: The LinkedIn profile ID 'univ' is confirmed as correct for Josh Universe.
+  The official website and the LinkedIn platform itself both list the profile at https://www.linkedin.com/in/univ/
+  and associate it with Josh Universe. Multiple independent sources corroborate this
+  information. There is no evidence of error or impersonation.
+rcid: 2551426392
+revid: 2474726997
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.linkedin.com/in/univ/
+- provenance: verified
+  supports_claim: true
+  url: https://www.crunchbase.com/person/josh-universe
+timestamp: '2026-04-11T12:05:06.832015+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

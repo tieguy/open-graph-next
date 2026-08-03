@@ -1,0 +1,22 @@
+completion_tokens: 406
+cost_usd: 0.0017909125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19400
+property: P279
+property_label: subclass of
+rationale: No sources were found to verify the claim that bipang is a subclass of
+  'brittle'. The edit lacks references, and independent sources could not be located
+  to confirm or deny the change.
+rcid: 2551233444
+revid: 2474545826
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://example.com/nonexistent
+timestamp: '2026-04-11T05:59:24.860790+00:00'
+title: Q57981532
+turns: 2
+value_label: brittle
+verdict: unverifiable

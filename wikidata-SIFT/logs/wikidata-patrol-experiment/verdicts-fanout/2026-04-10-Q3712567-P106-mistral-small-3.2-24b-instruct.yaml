@@ -1,0 +1,44 @@
+completion_tokens: 3676
+cost_usd: 0.009354168749999999
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 86076
+property: P106
+property_label: occupation
+rationale: The claim that Doina Ruști is a writer is strongly supported by multiple
+  independent sources, including her official website, Goodreads, interviews, and
+  other literary references. The evidence is consistent and corroborative, confirming
+  her identity as a novelist and writer.
+rcid: 2550664192
+revid: 2473993718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://medium.com/@doinarusti/who-i-am-and-who-im-not-5d1edb16715f
+- provenance: verified
+  supports_claim: true
+  url: https://www.goodreads.com/author/show/2919952.Doina_Ru_ti
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro/en/interviuri.html
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro/en/carti.html
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro/roman/en/
+- provenance: verified
+  supports_claim: true
+  url: https://www.academia.edu/65016793/Doina_RUȘTI_Writer
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro/en/stiri.html
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro/en/
+timestamp: '2026-04-10T07:48:30.151390+00:00'
+title: Q3712567
+turns: 3
+value_label: writer
+verdict: verified-high

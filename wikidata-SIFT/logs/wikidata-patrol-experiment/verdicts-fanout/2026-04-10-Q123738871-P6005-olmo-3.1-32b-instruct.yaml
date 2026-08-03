@@ -1,0 +1,37 @@
+completion_tokens: 1743
+cost_usd: 0.0063794
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26668
+property: P6005
+property_label: Muck Rack journalist ID
+rationale: There is strong independent evidence that Josh Universe maintains a Muck
+  Rack profile and is recognized as a science communicator and journalist. However,
+  the exact Muck Rack journalist ID value was not directly extracted from the authoritative
+  source during this investigation, preventing a 'verified-high' verdict. The claim
+  is plausible and supported by surrounding evidence, but confirmation from Muck Rack
+  itself is required for higher certainty.
+rcid: 2551430194
+revid: 2474730046
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://muckrack.com/josh-universe
+- provenance: verified
+  supports_claim: false
+  url: https://biohackinginternational.com/Staff/Josh+Habka
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: verified
+  supports_claim: false
+  url: https://www.linkedin.com/in/univ/
+- provenance: verified
+  supports_claim: false
+  url: https://socialblade.com/facebook/user/joshtospace
+timestamp: '2026-04-10T08:56:34.853419+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-low

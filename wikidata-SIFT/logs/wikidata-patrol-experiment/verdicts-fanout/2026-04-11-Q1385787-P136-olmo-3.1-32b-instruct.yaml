@@ -1,0 +1,28 @@
+completion_tokens: 295
+cost_usd: 0.0027684
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12957
+property: P136
+property_label: genre
+rationale: Multiple independent sources explicitly describe Eyes Set to Kill as an
+  American metalcore band, with one source noting they blend screamo, post-hardcore,
+  and metalcore. The band is associated with the metalcore circuit and has toured
+  with acts typical of the genre. The old value of 'punk rock' is not supported by
+  these sources, which instead emphasize metalcore and related genres. Therefore,
+  changing the genre from 'punk rock' to 'metalcore' is factually correct and well-supported.
+rcid: 2550855336
+revid: 2474178979
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://equipboard.com/band/eyes-set-to-kill
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Eyes_Set_to_Kill
+timestamp: '2026-04-11T15:49:25.899131+00:00'
+title: Q1385787
+turns: 1
+value_label: metalcore
+verdict: verified-high

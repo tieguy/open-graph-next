@@ -1,0 +1,30 @@
+completion_tokens: 1453
+cost_usd: 0.0024644700000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26702
+property: P31
+property_label: instance of
+rationale: Multiple verified primary sources confirm that Pacific Engineering is a
+  business entity. The official websites of Pacific Engineering Inc. and Pacific Engineering
+  Technologies, Inc., along with Bloomberg’s business profile, all describe Pacific
+  Engineering as a business providing engineering services. There is no credible evidence
+  supporting the previous claim of it being a musical group.
+rcid: 2551234866
+revid: 2474547207
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacificengineeringinc.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacengtech.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/1342616D:US
+timestamp: '2026-04-10T11:44:06.886409+00:00'
+title: Q11347666
+turns: 3
+value_label: business
+verdict: verified-high

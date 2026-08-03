@@ -1,0 +1,27 @@
+completion_tokens: 1594
+cost_usd: 0.0029916
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10176
+property: P856
+property_label: official website
+rationale: Multiple independent and primary sources confirm that https://www.zipwater.com/
+  is the official website of Zip Water. The removal of the language qualifier from
+  the official website claim does not affect the factual correctness of the website
+  URL. The edit is appropriate. However, it is recommended to add a reference to a
+  reliable source supporting the website claim.
+rcid: 2550473546
+revid: 2473809897
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Zip_Water
+- provenance: verified
+  supports_claim: true
+  url: https://abr.business.gov.au/BR/ViewEntity.aspx?entityType=ABREntityType&entityID=59491812_000000000000000000000000
+timestamp: '2026-04-11T18:15:18.826428+00:00'
+title: Q8072611
+turns: 1
+value_label: null
+verdict: verified-high

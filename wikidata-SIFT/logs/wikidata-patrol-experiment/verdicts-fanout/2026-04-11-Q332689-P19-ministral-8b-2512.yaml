@@ -1,0 +1,26 @@
+completion_tokens: 1549
+cost_usd: 0.006389430000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 53694
+property: P19
+property_label: place of birth
+rationale: Multiple verified sources explicitly confirm that Daniel Pennac was born
+  in Casablanca, Morocco (Q7903), contradicting the new claim of China (Q29520). The
+  edit is unsupported by evidence and directly contradicts well-documented biographical
+  records.
+rcid: null
+revid: 2470760557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://biography.jrank.org/pages/1030/Pennac-Daniel-1944.html
+- provenance: verified
+  supports_claim: false
+  url: https://job-in-france.babylangues.com/french-figures/daniel-pennac/
+timestamp: '2026-04-11T16:47:54.579748+00:00'
+title: Q332689
+turns: 3
+value_label: China
+verdict: incorrect

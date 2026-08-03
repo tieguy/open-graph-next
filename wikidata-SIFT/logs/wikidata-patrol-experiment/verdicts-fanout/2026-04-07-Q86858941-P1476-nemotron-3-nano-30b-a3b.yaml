@@ -1,0 +1,26 @@
+completion_tokens: 709
+cost_usd: 0.0048553500000000005
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 94271
+property: P1476
+property_label: title
+rationale: Comprehensive searches for evidence confirming or contradicting the claim
+  'Michael B jordan won the Oscar' for the 'Conversion of Saint Augustine' title yielded
+  no reliable sources that mention either Michael B. Jordan or an Oscar award in connection
+  with this artwork. Multiple search variations were attempted, including variations
+  of the name and Oscar-related queries, but no verifiable sources were found. External
+  verification through standard academic or official Oscar databases was not possible
+  due to access restrictions and the absence of mentions in available indexed pages.
+rcid: 2549728769
+revid: 2473087157
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cherbourg.fr/ressources/ressources/artwork/angelico_conversion_st_augustine.html
+timestamp: '2026-04-07T12:51:06.035989+00:00'
+title: Q86858941
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 315
+cost_usd: 0.003469
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16400
+property: P27
+property_label: country of citizenship
+rationale: The available historical sources consistently identify Rabih az-Zubayr
+  as a Sudanese figure who operated in Sudan and Chad, with no evidence linking him
+  to Syrian citizenship. Military History Fandom states he was a 'Sudanese warlord',
+  and the Google Books excerpt likewise describes him as Sudanese. No reputable source
+  found supports a claim of Syrian citizenship. Changing the country of citizenship
+  from Sudan to Syria is therefore incorrect.
+rcid: 2549457145
+revid: 2472822502
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Rabih_Az_Zubayr.html?id=LI9IXwAACAAJ
+timestamp: '2026-04-11T07:46:56.423877+00:00'
+title: Q932368
+turns: 1
+value_label: Syria
+verdict: incorrect

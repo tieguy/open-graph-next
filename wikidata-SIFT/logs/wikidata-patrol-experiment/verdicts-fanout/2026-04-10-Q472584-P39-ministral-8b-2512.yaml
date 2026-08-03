@@ -1,0 +1,35 @@
+completion_tokens: 2616
+cost_usd: 0.00629367
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51067
+property: P39
+property_label: position held
+rationale: All verified sources confirm that Louis of Meissen was Archbishop of Mainz
+  from 1373 to 1381 and Archbishop of Magdeburg from 1381 to 1382. There is no credible
+  evidence or historical record supporting the claim that he was Bishop of Halberstadt
+  during the period of 1374–1381. The edit incorrectly assigns this position.
+rcid: 2550979675
+revid: 2474298977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://the-meaning.com/louis_of_meissen.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/diocese/dh521.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/43348295/ludwig-von_meissen
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/bishop/bmeissl.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.howold.co/person/louis-of-meissen/biography
+timestamp: '2026-04-10T13:24:18.696748+00:00'
+title: Q472584
+turns: 3
+value_label: Roman Catholic Bishop of Halberstadt
+verdict: incorrect

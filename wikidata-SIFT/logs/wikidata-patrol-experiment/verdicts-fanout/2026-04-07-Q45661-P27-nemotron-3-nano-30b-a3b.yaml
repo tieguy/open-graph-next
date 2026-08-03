@@ -1,0 +1,28 @@
+completion_tokens: 634
+cost_usd: 0.01209745
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 239413
+property: P27
+property_label: country of citizenship
+rationale: No independent source was found to confirm whether 'French frigate Italienne'
+  is a correct representation of Coco Chanel's country of citizenship claim. Searches
+  for references to Coco Chanel's nationality or citizenship returned no relevant
+  results identifying her as having naval service or citizenship tied to a specific
+  frigate. Attempts to verify through related military vessel classifications also
+  yielded no supporting information. While the edit may have been made on Wikipedia,
+  Wikipedia cannot serve as a verifiable source for Wikidata assertions. The lack
+  of corroborating evidence from authoritative sources prevents confirmation of this
+  claim.
+rcid: 2551311087
+revid: 2474619179
+sources:
+- provenance: blocked_domain
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Coco_Chanel
+timestamp: '2026-04-07T08:24:27.137428+00:00'
+title: Q45661
+turns: 15
+value_label: French frigate Italienne
+verdict: unverifiable

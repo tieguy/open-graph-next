@@ -1,0 +1,30 @@
+completion_tokens: 1882
+cost_usd: 0.005776425
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55864
+property: P6375
+property_label: street address
+rationale: The new street address "0525319894 - فيكتور رنتيسي محامي" does not match
+  the context of a church building in Lod, Israel. The old address "רח' אליהו גולומב,
+  העיר העתיקה" is consistent with the item's context and is supported by the prefetched
+  references. The lack of accessible evidence to support the new address makes the
+  edit suspect.
+rcid: 2550404305
+revid: 2473741785
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://st-george.org/
+- provenance: verified
+  supports_claim: false
+  url: https://stgeorge-stdemetrios.ny.goarch.org/
+- provenance: verified
+  supports_claim: false
+  url: https://www.stgeorgeshanoversquare.org/
+timestamp: '2026-04-11T16:38:08.561979+00:00'
+title: Q2318440
+turns: 6
+value_label: null
+verdict: suspect

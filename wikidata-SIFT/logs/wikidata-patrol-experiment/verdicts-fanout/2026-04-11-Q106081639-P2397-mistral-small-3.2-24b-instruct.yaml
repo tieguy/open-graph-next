@@ -1,0 +1,28 @@
+completion_tokens: 979
+cost_usd: 0.00230715625
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21497
+property: P2397
+property_label: YouTube channel ID
+rationale: The edit adds a qualifier to the YouTube channel ID claim without citing
+  any references. No independent sources could be verified due to a search error,
+  making it impossible to confirm the accuracy of the qualifier.
+rcid: 2550864199
+revid: 2474187696
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@pinacoteca_faenza
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCX-oEQvg8rEAWse8E6tUpIg
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/watch?v=e1lf1xOKCWc
+timestamp: '2026-04-11T12:50:32.743340+00:00'
+title: Q106081639
+turns: 3
+value_label: null
+verdict: unverifiable

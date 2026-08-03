@@ -1,0 +1,33 @@
+completion_tokens: 1970
+cost_usd: 0.0069556
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28868
+property: P569
+property_label: date of birth
+rationale: Multiple authoritative and primary sources—including the Bibliothèque nationale
+  de France, Encyclopædia Britannica, BBC History, and Find a Grave—explicitly state
+  that Ernest Shackleton was born on 15 February 1873. None of these sources support
+  the previously recorded birth date of 15 February 1874. The change to the correct
+  date is therefore well-justified.
+rcid: null
+revid: 2465968204
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://data.bnf.fr/ark:/12148/cb12107714x
+- provenance: verified
+  supports_claim: true
+  url: https://www.britannica.com/biography/Ernest-Henry-Shackleton
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/4564/ernest-henry-shackleton
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.co.uk/history/historic_figures/shackleton_ernest.shtml
+timestamp: '2026-04-11T17:36:41.690261+00:00'
+title: Q957543
+turns: 1
+value_label: null
+verdict: verified-high

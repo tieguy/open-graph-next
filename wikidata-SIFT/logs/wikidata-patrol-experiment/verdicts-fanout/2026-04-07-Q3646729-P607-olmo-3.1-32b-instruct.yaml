@@ -1,0 +1,30 @@
+completion_tokens: 768
+cost_usd: 0.0099402
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47397
+property: P607
+property_label: participated in conflict
+rationale: The only cited reference for Wacław Radziszewski's participation in World
+  War II is Polish Wikipedia, but this source could not be accessed due to a blocked
+  domain. No independent, accessible sources were found that confirm or deny his participation
+  in World War II. Therefore, the claim cannot be verified based on the available
+  evidence.
+rcid: null
+revid: 2470529662
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://artyzm.com/artysta.php?id=1887
+- provenance: reported
+  supports_claim: null
+  url: https://pl.wikipedia.org/wiki/Wac%C5%82aw_Radziszewski
+- provenance: reported
+  supports_claim: null
+  url: https://ru.wikipedia.org/wiki/Вацлав_Радзишевский
+timestamp: '2026-04-07T10:54:38.043187+00:00'
+title: Q3646729
+turns: 8
+value_label: World War II
+verdict: unverifiable

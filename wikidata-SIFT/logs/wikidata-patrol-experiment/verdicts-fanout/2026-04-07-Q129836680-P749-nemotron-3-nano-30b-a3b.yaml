@@ -1,0 +1,35 @@
+completion_tokens: 736
+cost_usd: 0.00413335
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 79723
+property: P749
+property_label: parent organization or unit
+rationale: No sources were found supporting or contradicting the claim that Sanofi
+  is the parent organization of Opella. Multiple searches using permutations of 'Opella
+  Sanofi', 'Opella parent company', and related terms yielded no authoritative information
+  about Opella's corporate structure or parentage. While Sanofi appears to be an incomplete
+  entity in this context with no cited references in the original edit, there is no
+  external evidence either confirming or refuting that Sanofi serves as Opella's parent
+  organization.
+rcid: 2549919417
+revid: 2473273845
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Opella+parent+organization+Sanofi
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Opella+Sanofi
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Opella+crop+structure
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Opella+crop+parent+company
+timestamp: '2026-04-07T09:27:37.528760+00:00'
+title: Q129836680
+turns: 15
+value_label: Sanofi
+verdict: unverifiable

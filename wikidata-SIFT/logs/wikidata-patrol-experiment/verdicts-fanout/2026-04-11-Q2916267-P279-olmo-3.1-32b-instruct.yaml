@@ -1,0 +1,33 @@
+completion_tokens: 294
+cost_usd: 0.0026844
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12540
+property: P279
+property_label: subclass of
+rationale: The Tulip chair is a famous piece of furniture designed by Eero Saarinen
+  and is widely recognized as a chair and piece of modernist furniture, not as cookware
+  or bakeware. The item description and category listings on Wikipedia and museum
+  collections confirm its classification as a chair. The new value 'cookware and bakeware'
+  is categorically incorrect for the Tulip chair. The only sources supporting 'cookware
+  and bakeware' are generic pages about cookware, which do not mention the Tulip chair
+  or relate it to cookware. There is no authoritative source indicating the Tulip
+  chair should be classified under cookware and bakeware.
+rcid: 2551186634
+revid: 2474500439
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Tulip_chair
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/collection/works/79808
+- provenance: verified
+  supports_claim: false
+  url: https://www.tuliphome.ca/pages/cookware-bakeware
+timestamp: '2026-04-11T09:57:56.628362+00:00'
+title: Q2916267
+turns: 1
+value_label: cookware and bakeware
+verdict: suspect

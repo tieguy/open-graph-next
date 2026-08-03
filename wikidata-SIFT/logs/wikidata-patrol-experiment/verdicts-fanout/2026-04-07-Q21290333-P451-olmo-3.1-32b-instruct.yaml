@@ -1,0 +1,29 @@
+completion_tokens: 900
+cost_usd: 0.016361999999999998
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 79110
+property: P451
+property_label: unmarried partner
+rationale: The cited references were not accessible and could not be verified. Independent
+  searches did not produce any reliable reporting confirming or denying that Max Verstappen
+  was Kelly Piquet's unmarried partner starting in November 2020. Therefore, the edit
+  cannot be confirmed or denied with available evidence.
+rcid: 2550276465
+revid: 2473616911
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.terra.com.br/esportes/automobilismo/verstappen-curte-natal-ao-lado-da-enteada-penelope-e-kelly-piquet-exibe-barrigao-veja-imagens,cfa63b744199323e04bdb6351b935d591zlj8knw.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.metropoles.com/colunas/claudia-meireles/modelo-kelly-piquet-assume-romance-com-piloto-da-formula-1-max-verstappen
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T04:34:52.345103+00:00'
+title: Q21290333
+turns: 10
+value_label: Max Verstappen
+verdict: unverifiable

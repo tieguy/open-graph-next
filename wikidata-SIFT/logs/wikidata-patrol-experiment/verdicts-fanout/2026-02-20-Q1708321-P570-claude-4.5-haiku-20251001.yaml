@@ -1,0 +1,37 @@
+completion_tokens: 4478
+cost_usd: 0.155555
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 133165
+property: P570
+property_label: date of death
+rationale: The value '1575' is plausible but represents an older, looser estimate.
+  The Jewish Encyclopedia (verified primary source) states Joseph died 'at Genoa in
+  1575 or shortly after,' which technically supports the claim. However, modern authoritative
+  sources including Deutsche Biographie (GND 122750144), the National Library of Israel,
+  and peer-reviewed scholarship (Pollak 1975) indicate death occurred in 1577 or 1578.
+  The Wikidata item already contains a preferred statement for 1577 with a 'no earlier
+  than' qualifier, which better reflects current scholarly consensus. While 1575 is
+  not contradicted directly, it represents a less precise and less supported position
+  on a genuinely uncertain historical date.
+rcid: 2540982383
+revid: 2464768833
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8858-joseph-ha-kohen
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/joseph-ha-kohen
+- provenance: verified
+  supports_claim: false
+  url: https://www.deutsche-biographie.de/pnd122750144.html?language=en
+- provenance: verified
+  supports_claim: false
+  url: https://www.chabad.org/library/article_cdo/aid/111903/jewish/Rabbi-Joseph-HaKohen.htm
+timestamp: '2026-02-20T01:41:48.400874+00:00'
+title: Q1708321
+turns: 6
+value_label: null
+verdict: plausible

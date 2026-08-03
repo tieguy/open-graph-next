@@ -1,0 +1,22 @@
+completion_tokens: 1489
+cost_usd: 0.004851422500000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49941
+property: P580
+property_label: start time
+rationale: The cited source from Infobae states that Taringa! was launched in 2004,
+  which contradicts the edit that changes the start time to '100'. No independent
+  sources support the edit.
+rcid: 2550474980
+revid: 2473811315
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.infobae.com/tecno/2024/03/24/taringa-la-famosa-red-social-argentina-cierra-hoy-sus-servicios-despues-de-veinte-anos/#:~:text=se%20despide%20definitivamente%20el%20próximo,digitales%20más%20emblemáticos%20y%20apreciados.
+timestamp: '2026-04-07T10:03:13.408895+00:00'
+title: Q2035715
+turns: 7
+value_label: null
+verdict: incorrect

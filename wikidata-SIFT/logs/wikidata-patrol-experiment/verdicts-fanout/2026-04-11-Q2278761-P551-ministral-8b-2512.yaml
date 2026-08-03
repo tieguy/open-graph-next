@@ -1,0 +1,33 @@
+completion_tokens: 1955
+cost_usd: 0.00494424
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46879
+property: P551
+property_label: residence
+rationale: The claim that Sylvia Rivera's residence was changed from 'New York City'
+  to 'Nueva York – Granada' is incorrect. All verified sources confirm that Sylvia
+  Rivera was born in New York City and spent her entire life and activism there. There
+  is no credible evidence linking her to 'Nueva York – Granada'. The new value contradicts
+  well-established facts about her life and lacks any supporting documentation.
+rcid: null
+revid: 2462592210
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://lgbthistorymonth.com/sylvia-rivera?tab=biography
+- provenance: verified
+  supports_claim: false
+  url: http://www.latintrends.com/in-honor-of-hispanic-heritage-month-influential-hispanic-trans-people/
+- provenance: verified
+  supports_claim: false
+  url: https://reference.jrank.org/biography-2/Rivera_Sylvia_Lee.html
+- provenance: verified
+  supports_claim: false
+  url: https://makinggayhistory.org/podcast/sylvia-rivera-part-2/
+timestamp: '2026-04-11T12:53:25.074111+00:00'
+title: Q2278761
+turns: 4
+value_label: Nueva York – Granada
+verdict: incorrect

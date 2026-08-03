@@ -1,0 +1,22 @@
+completion_tokens: 515
+cost_usd: 0.003001625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30644
+property: P1324
+property_label: source code repository URL
+rationale: The removed claim did not have any references cited, and I was unable to
+  perform web searches to find independent sources to verify the claim. Without any
+  sources to back up the claim, it is hard to verify its accuracy.
+rcid: 2550591060
+revid: 2473922555
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://github.com/ewilderj/doap
+timestamp: '2026-04-11T12:02:36.812377+00:00'
+title: Q5205836
+turns: 3
+value_label: null
+verdict: unverifiable

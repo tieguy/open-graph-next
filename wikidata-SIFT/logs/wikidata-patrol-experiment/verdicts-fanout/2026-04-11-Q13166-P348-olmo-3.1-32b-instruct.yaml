@@ -1,0 +1,30 @@
+completion_tokens: 1823
+cost_usd: 0.0068322
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28692
+property: P348
+property_label: software version identifier
+rationale: The new value '6.9.4' for the software version identifier of WordPress
+  (Q13166) is not supported by any official or independent source. The cited reference
+  only pertains to version '6.5', and the official WordPress release archive and news
+  channels do not list a '6.9.4' release. Therefore, the edit was incorrect and introduced
+  a factual inaccuracy.
+rcid: 2550603071
+revid: 2473934125
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wordpress.org/news/2024/04/regina/
+- provenance: verified
+  supports_claim: false
+  url: https://wordpress.org/download/release-archive/
+- provenance: verified
+  supports_claim: false
+  url: https://wptavern.com
+timestamp: '2026-04-11T10:39:47.980403+00:00'
+title: Q13166
+turns: 1
+value_label: null
+verdict: incorrect

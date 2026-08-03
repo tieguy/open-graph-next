@@ -1,0 +1,21 @@
+completion_tokens: 719
+cost_usd: 0.00139126
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26962
+property: P18
+property_label: image
+rationale: The cited reference failed to fetch, and no independent sources were found
+  to confirm or deny the image. Therefore, the claim cannot be verified.
+rcid: 2550622213
+revid: 2473952631
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://uniuneascriitorilor.md/membru/hlib-lidia
+timestamp: '2026-04-07T07:06:57.964511+00:00'
+title: Q34362956
+turns: 5
+value_label: null
+verdict: unverifiable

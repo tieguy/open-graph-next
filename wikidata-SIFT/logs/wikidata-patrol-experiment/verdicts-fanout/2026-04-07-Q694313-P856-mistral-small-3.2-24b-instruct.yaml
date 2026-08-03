@@ -1,0 +1,25 @@
+completion_tokens: 1029
+cost_usd: 0.0057748124999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58854
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Uruma to an unrelated URL without
+  any supporting evidence. The new URL does not provide any relevant information about
+  Uruma, and the old URL is invalid. Therefore, the edit is incorrect.
+rcid: null
+revid: 2468927624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.uruma.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eurowings.com
+timestamp: '2026-04-07T07:23:02.266957+00:00'
+title: Q694313
+turns: 7
+value_label: null
+verdict: incorrect

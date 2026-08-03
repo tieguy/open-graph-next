@@ -1,0 +1,30 @@
+completion_tokens: 1378
+cost_usd: 0.00395109375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37844
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth for Amélie Zurcher to 27 August 1847,
+  supported by references from the Léonore database, GeneaStar, and the Nouveau dictionnaire
+  de biographie alsacienne. However, these sources are not directly accessible via
+  standard web search, and no independent coverage corroborating the new date of birth
+  was found. Therefore, the claim cannot be verified.
+rcid: null
+revid: 2471212055
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www2.culture.gouv.fr/reference/base/leonore/1980003527436653
+- provenance: verified
+  supports_claim: true
+  url: https://www.geneastar.org/person/zurcherl
+- provenance: verified
+  supports_claim: true
+  url: https://www.ndba.fr/biographie/amelie-zurcher
+timestamp: '2026-04-07T10:27:52.821573+00:00'
+title: Q266505
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 2030
+cost_usd: 0.00562944
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51372
+property: P570
+property_label: date of death
+rationale: The edit changed Salvian's date of death from 470 to 477. The GND (Integrated
+  Authority File) and other scholarly sources confirm Salvian's death around 470,
+  not 477. The new value lacks independent corroboration and contradicts established
+  records, making the edit incorrect.
+rcid: 2549650892
+revid: 2473011455
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118605208
+- provenance: verified
+  supports_claim: false
+  url: https://spartacus-educational.com/ROMsalvian.htm
+- provenance: verified
+  supports_claim: false
+  url: https://tomstheology.blog/2025/02/18/salvian-of-marseille/
+timestamp: '2026-04-11T12:21:45.651217+00:00'
+title: Q532684
+turns: 4
+value_label: null
+verdict: incorrect

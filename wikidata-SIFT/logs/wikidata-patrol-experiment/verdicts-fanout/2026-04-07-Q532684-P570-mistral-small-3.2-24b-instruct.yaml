@@ -1,0 +1,29 @@
+completion_tokens: 1542
+cost_usd: 0.00818451375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 83861
+property: P570
+property_label: date of death
+rationale: The 1911 Encyclopædia Britannica suggests that Salvian was alive until
+  at least the papacy of Gelasius (492–496), which contradicts the new date of death
+  (477). The Vatican Library and GND references do not provide clear confirmation
+  of the date of death as 477.
+rcid: 2549650892
+revid: 2473011455
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://opac.vatlib.it/
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118605208
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Salvian
+timestamp: '2026-04-07T07:50:02.853044+00:00'
+title: Q532684
+turns: 8
+value_label: null
+verdict: suspect

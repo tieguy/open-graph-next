@@ -1,0 +1,27 @@
+completion_tokens: 1708
+cost_usd: 0.0136554
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 108426
+property: P641
+property_label: sport
+rationale: The Australian Open (Q60874) is a well-documented tennis tournament with
+  strong contextual evidence supporting this classification. The item's claims (e.g.,
+  P279 subclass of 'tennis tournament', P664 organizer as Tennis Australia, P765 surface
+  as hardcourt/grass, P4622 tennis-specific trophies) are consistent with tennis.
+  The edit incorrectly changed the sport to Australian rules football (Q50776), which
+  contradicts all available evidence and authoritative context. No credible source
+  supports this change, and the cited reference (French Wikipedia) is unreliable for
+  this claim. The Australian Open is universally recognized as a tennis event.
+rcid: 2551269774
+revid: 2474579679
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/sports-and-leisure/australian-rules-football
+timestamp: '2026-04-11T06:45:58.875137+00:00'
+title: Q60874
+turns: 5
+value_label: Australian rules football
+verdict: incorrect

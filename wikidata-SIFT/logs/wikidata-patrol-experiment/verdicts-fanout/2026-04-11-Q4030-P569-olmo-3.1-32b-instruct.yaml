@@ -1,0 +1,29 @@
+completion_tokens: 1819
+cost_usd: 0.006975
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29418
+property: P569
+property_label: date of birth
+rationale: The new value '29 April 1898' for Duke Ellington's date of birth is contradicted
+  by multiple independently verified sources (Library of Congress, Grammy.com, and
+  Wikipedia), all of which state April 29, 1899 as the correct date of birth. The
+  new value is not supported by any cited references and should not have been accepted.
+rcid: 2549483558
+revid: 2472848291
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.loc.gov/item/musn-0000000219
+- provenance: verified
+  supports_claim: false
+  url: https://www.grammy.com/grammys/artists/duke-ellington/11972
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Duke_Ellington#Birth_and_early_life
+timestamp: '2026-04-11T16:43:51.940050+00:00'
+title: Q4030
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,23 @@
+completion_tokens: 899
+cost_usd: 0.00249621875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24229
+property: P691
+property_label: NL CR AUT ID
+rationale: The removed claim did not have any references cited. Independent searches
+  did not yield any sources confirming the existence of "ph117830" as a valid NL CR
+  AUT ID for Moroccans. The removal of this claim appears to be justified due to the
+  lack of supporting evidence.
+rcid: 2550702324
+revid: 2474030410
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://immigration-netherlands.com/immigrate-to-the-netherlands-from-morocco/
+timestamp: '2026-04-10T13:30:40.411175+00:00'
+title: Q1891793
+turns: 3
+value_label: null
+verdict: verified-high

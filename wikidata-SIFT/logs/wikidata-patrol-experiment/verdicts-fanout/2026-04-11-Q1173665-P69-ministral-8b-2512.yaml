@@ -1,0 +1,32 @@
+completion_tokens: 2202
+cost_usd: 0.00248346
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20550
+property: P69
+property_label: educated at
+rationale: The edit changing Richard Taruskin's education from High School of Music
+  & Art to Columbia University is correct. Multiple verified primary sources (NYT
+  obituary archive, Kyoto Prize biography, and Columbia-related biographical accounts)
+  confirm his Ph.D. from Columbia University in 1975. No independent sources corroborate
+  his attendance at High School of Music & Art, and the Wikipedia reference for the
+  old value does not provide direct evidence of his attendance there. The new value
+  aligns with authoritative biographical records.
+rcid: 2550714893
+revid: 2474042742
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20220702211524/https://www.nytimes.com/2022/07/01/arts/music/richard-taruskin-dead.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.kyotoprize.org/en/laureates/richard_taruskin/
+- provenance: verified
+  supports_claim: true
+  url: https://bibliolore.org/2024/04/16/richard-taruskin-musicologist-music-critic-and-interpreter-of-early-music/
+timestamp: '2026-04-11T14:05:04.079645+00:00'
+title: Q1173665
+turns: 1
+value_label: Columbia University
+verdict: verified-high

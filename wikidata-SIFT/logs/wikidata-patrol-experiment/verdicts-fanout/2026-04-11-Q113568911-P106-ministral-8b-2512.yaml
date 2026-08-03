@@ -1,0 +1,28 @@
+completion_tokens: 2135
+cost_usd: 0.00196995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25776
+property: P106
+property_label: occupation
+rationale: The occupation of Felianho tshunza was changed from 'influencer' (Q2906862)
+  to 'YouTuber' (Q17125263). The presence of a verified YouTube channel at https://www.youtube.com/@felianhotshunza9478/about
+  and a link-in-bio page (https://linktr.ee/felianho) strongly supports the occupation
+  of 'YouTuber'. The term 'influencer' is broader and less specific, while 'YouTuber'
+  accurately reflects his documented online activity. No contradictory evidence was
+  found during the investigation.
+rcid: 2551423630
+revid: 2474724789
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/@felianhotshunza9478/about
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/felianho
+timestamp: '2026-04-11T14:10:57.579374+00:00'
+title: Q113568911
+turns: 3
+value_label: YouTuber
+verdict: verified-high

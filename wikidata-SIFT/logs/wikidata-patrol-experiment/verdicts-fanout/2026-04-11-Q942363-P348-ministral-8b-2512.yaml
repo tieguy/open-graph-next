@@ -1,0 +1,25 @@
+completion_tokens: 1960
+cost_usd: 0.00953922
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 71056
+property: P348
+property_label: software version identifier
+rationale: The edit incorrectly changes the software version identifier from '5.1.9'
+  to '9.0.8'. The old value '5.1.9' is confirmed by the official KiCad blog post as
+  a stable release from December 28, 2020. No independent or official source supports
+  '9.0.8' as the current version of KiCad. The latest versions in Wikidata and official
+  documentation are '9.0.0' and '9.0.1', with no evidence of a '9.0.8' release. The
+  version jump is inconsistent with KiCad's versioning progression.
+rcid: 2550612239
+revid: 2473943060
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kicad.org/blog/2020/12/KiCad-5.1.9-Release/
+timestamp: '2026-04-11T10:24:18.212990+00:00'
+title: Q942363
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 1354
+cost_usd: 0.00406685875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39478
+property: P3342
+property_label: significant person
+rationale: The evidence from the Süddeutsche Zeitung article and independent search
+  results confirms that Stefano Angelopoulos is associated with the Querdenken movement
+  and Corona demonstrations, which are related to the Corona Rebellen organization.
+  Therefore, the removal of the claim was incorrect.
+rcid: 2551215702
+revid: 2474528697
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+- provenance: verified
+  supports_claim: false
+  url: https://www.corona-rebellen.ch/
+timestamp: '2026-04-10T13:10:23.651135+00:00'
+title: Q107646877
+turns: 4
+value_label: Stefano Angelopoulos
+verdict: incorrect

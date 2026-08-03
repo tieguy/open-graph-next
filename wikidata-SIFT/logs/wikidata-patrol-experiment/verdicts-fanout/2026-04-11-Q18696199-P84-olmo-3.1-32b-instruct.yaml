@@ -1,0 +1,27 @@
+completion_tokens: 1753
+cost_usd: 0.0043034
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16258
+property: P84
+property_label: architect
+rationale: The change from 'Joaquim Vancells i Vieta' to '67' as the architect of
+  Farmàcia Albinyana is not supported by any evidence. A verified, independently fetched
+  source explicitly states that Joaquim Vancells i Vieta was the architect. No credible
+  source associates the number '67' with the architect of this building, indicating
+  that the change is likely an error. The original value should be restored.
+rcid: 2549532311
+revid: 2472895717
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://estimadaterra.wordpress.com/2020/06/09/farmacia-albinyana-de-terrassa/
+- provenance: attempted
+  supports_claim: false
+  url: http://invarquit.cultura.gencat.cat/Cerca/Fitxa?index=0&consulta=&codi=28071
+timestamp: '2026-04-11T05:48:31.852771+00:00'
+title: Q18696199
+turns: 1
+value_label: '67'
+verdict: incorrect

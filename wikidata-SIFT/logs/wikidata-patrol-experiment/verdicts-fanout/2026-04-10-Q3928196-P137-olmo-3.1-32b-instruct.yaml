@@ -1,0 +1,34 @@
+completion_tokens: 2001
+cost_usd: 0.0036122
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12058
+property: P137
+property_label: operator
+rationale: Independent, verified sources (Wikipedia and Discogs) indicate that RCA
+  Milano was historically operated by 'RCA Italiana S.p.A.', the Italian branch of
+  RCA Victor. There is no evidence from these sources supporting a change to a different
+  operator named simply 'RCA Italiana'. The cited reference in the edit is unreachable,
+  and the only other referenced website is unrelated to the music industry context.
+  Therefore, the change cannot be substantiated and is likely incorrect.
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/RCA_Italiana
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/label/40031-RCA-Italiana
+- provenance: unreachable
+  supports_claim: false
+  url: https://it.kompass.com/c/rca-s-r-l/it0406550/
+- provenance: verified
+  supports_claim: false
+  url: https://rcamilano.it/
+timestamp: '2026-04-10T00:03:08.688496+00:00'
+title: Q3928196
+turns: 1
+value_label: RCA Italiana
+verdict: suspect

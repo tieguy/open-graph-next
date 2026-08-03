@@ -1,0 +1,28 @@
+completion_tokens: 1199
+cost_usd: 0.03751
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 31515
+property: P571
+property_label: inception
+rationale: The reference URL (https://packetra.com/about) directly supports the inception
+  claim, explicitly stating 'Packetra launched publicly in January 2026.' This is
+  corroborated by an independent third-party review (whtop.com) which confirms 'The
+  platform went live publicly in January 2026 after a beta phase.' Both sources are
+  consistent and authoritative, establishing the January 2026 inception date with
+  high confidence.
+rcid: 2540931999
+revid: 2464722626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/about
+- provenance: verified
+  supports_claim: true
+  url: https://www.whtop.com/review/packetra.com
+timestamp: '2026-02-20T19:40:44.691717+00:00'
+title: Q138348890
+turns: 3
+value_label: null
+verdict: verified-high

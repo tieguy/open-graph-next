@@ -1,0 +1,28 @@
+completion_tokens: 1313
+cost_usd: 0.0031534175
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29764
+property: P569
+property_label: date of birth
+rationale: Multiple independent sources confirm the date of birth of 28 October 1920
+  for Valentina Rusu-Ciobanu. The prefetched references provide consistent and direct
+  evidence supporting the claim.
+rcid: 2550500984
+revid: 2473836351
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: https://academictraditions.com/artists/valentina-rusu-ciobanu
+- provenance: verified
+  supports_claim: true
+  url: https://visit.chisinau.md/en/obiective_turistice/valentina-rusu-ciobanu/
+timestamp: '2026-04-11T12:27:05.652315+00:00'
+title: Q12743035
+turns: 2
+value_label: null
+verdict: verified-high

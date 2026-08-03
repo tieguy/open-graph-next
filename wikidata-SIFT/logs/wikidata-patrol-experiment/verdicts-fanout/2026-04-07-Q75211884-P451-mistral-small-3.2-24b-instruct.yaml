@@ -1,0 +1,22 @@
+completion_tokens: 632
+cost_usd: 0.00509802
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 65673
+property: P451
+property_label: unmarried partner
+rationale: The removed claim had no references, and independent searches did not yield
+  any evidence supporting the relationship between Nicki Nicole and Pablo Lescano.
+  Therefore, the removal of the claim is justified.
+rcid: 2551416198
+revid: 2474718565
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Nicki+Nicole+Pablo+lescano+relationship
+timestamp: '2026-04-07T07:02:27.572226+00:00'
+title: Q75211884
+turns: 7
+value_label: Pablo lescano
+verdict: unverifiable

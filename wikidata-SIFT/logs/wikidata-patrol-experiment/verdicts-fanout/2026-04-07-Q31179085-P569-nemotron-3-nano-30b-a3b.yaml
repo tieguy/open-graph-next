@@ -1,0 +1,21 @@
+completion_tokens: 604
+cost_usd: 0.00395925
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76769
+property: P569
+property_label: date of birth
+rationale: No independent sources could be found to corroborate the claimed birth
+  date of 30 June 1931 for Jeong Ji-geun. Multiple search queries in Korean and English
+  returned no relevant articles or historical records. The only cited reference in
+  the Wikidata edit appears to be from 'Korean Wikipedia' but direct confirmation
+  could not be obtained as no accessible source was found to verify this claim.
+rcid: 2549638145
+revid: 2472999077
+sources: []
+timestamp: '2026-04-07T10:42:11.138083+00:00'
+title: Q31179085
+turns: 15
+value_label: null
+verdict: unverifiable

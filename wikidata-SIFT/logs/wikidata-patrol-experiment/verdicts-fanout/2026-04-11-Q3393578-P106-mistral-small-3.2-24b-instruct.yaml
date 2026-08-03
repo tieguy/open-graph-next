@@ -1,0 +1,28 @@
+completion_tokens: 1397
+cost_usd: 0.0021041124999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18149
+property: P106
+property_label: occupation
+rationale: The evidence from the available sources supports the occupation of 'writer'
+  for Luis Xosé Pereira Arias. There is no evidence to support the occupation of 'Carpintero.'
+  Therefore, the change from 'writer' to 'Carpintero' is suspect.
+rcid: null
+revid: 2460606061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://galegos.galiciadigital.com/en/luis-xose-pereira-arias
+- provenance: verified
+  supports_claim: false
+  url: http://www.ateneodecordoba.com/index.php/Lois_Xos%C3%A9_Pereira
+- provenance: verified
+  supports_claim: false
+  url: https://datos.bne.es/persona/XX1722355.html
+timestamp: '2026-04-11T18:43:58.154829+00:00'
+title: Q3393578
+turns: 2
+value_label: Carpintero
+verdict: suspect

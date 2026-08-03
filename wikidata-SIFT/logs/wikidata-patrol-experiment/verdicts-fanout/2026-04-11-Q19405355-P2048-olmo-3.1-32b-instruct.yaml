@@ -1,0 +1,29 @@
+completion_tokens: 1675
+cost_usd: 0.004779800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18874
+property: P2048
+property_label: height
+rationale: The new value '1.70 centimetre' is not a plausible height for an adult
+  and is likely a typographical and unit error. All verified independent sources,
+  including Italian and English Wikipedia as well as CelebHeights, report Pia Wurtzbach's
+  height as approximately 173 centimeters. The change introduced a factual inaccuracy.
+rcid: null
+revid: 2470318983
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Pia_Wurtzbach
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pia_Wurtzbach
+- provenance: verified
+  supports_claim: false
+  url: https://www.celebheights.com/s/Pia-Wurtzbach-50210.html
+timestamp: '2026-04-11T16:35:40.988680+00:00'
+title: Q19405355
+turns: 1
+value_label: null
+verdict: incorrect

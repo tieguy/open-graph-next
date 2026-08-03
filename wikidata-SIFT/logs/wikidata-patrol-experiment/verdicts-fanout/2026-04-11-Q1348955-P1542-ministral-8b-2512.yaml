@@ -1,0 +1,17 @@
+completion_tokens: 1828
+cost_usd: 0.00166686
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15480
+property: P1542
+property_label: has effect
+rationale: null
+rcid: null
+revid: 2471611652
+sources: []
+timestamp: '2026-04-11T18:33:15.305616+00:00'
+title: Q1348955
+turns: 1
+value_label: Skibidi Toilet
+verdict: null

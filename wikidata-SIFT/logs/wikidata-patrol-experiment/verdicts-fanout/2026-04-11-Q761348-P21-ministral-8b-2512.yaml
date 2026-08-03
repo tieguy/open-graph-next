@@ -1,0 +1,30 @@
+completion_tokens: 1459
+cost_usd: 0.0029647199999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27727
+property: P21
+property_label: sex or gender
+rationale: The claim that Juana Azurduy was male contradicts all verified historical
+  and academic sources. Multiple verified sources explicitly describe her as a woman,
+  and no credible evidence supports the claim that she was male. The referenced German
+  Wikipedia source is inaccessible, and the prefetched content does not support the
+  new claim.
+rcid: null
+revid: 2471138485
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://nursingclio.org/2022/09/21/a-double-edged-sword-war-and-motherhood-in-nineteenth-century-latin-america/
+- provenance: verified
+  supports_claim: false
+  url: https://unrulyfigures.substack.com/p/54-juana-azurduy-de-padilla
+- provenance: verified
+  supports_claim: false
+  url: https://www.academia.edu/41736710/Genealogia_de_Juana_Asurdui_de_Padilla_1780-1862_
+timestamp: '2026-04-11T10:47:03.628412+00:00'
+title: Q761348
+turns: 2
+value_label: male
+verdict: incorrect

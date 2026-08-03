@@ -1,0 +1,35 @@
+completion_tokens: 1508
+cost_usd: 0.046739960000000004
+diff_type: qualifier_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 183801
+property: P856
+property_label: official website
+rationale: The website https://futrapcartas.app/ is confirmed to be the official website
+  of Fut Rap Cartas. The site contains comprehensive information about the game's
+  development history, creators (Federico and Felipe Sarra), release timeline (started
+  December 2016, launched May 2017), and contact details. The content matches information
+  found in other sources like the Rap Wiki page and Google Play listing. The website
+  is exclusively in Spanish, supporting the language qualifier (Q1321) added in the
+  edit. The site presents itself authoritatively as the game's official online presence.
+rcid: 2540920980
+revid: 2464712010
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/futrapcartas.app
+timestamp: '2026-02-21T00:50:36.116494+00:00'
+title: Q138348136
+turns: 15
+value_label: null
+verdict: verified-high

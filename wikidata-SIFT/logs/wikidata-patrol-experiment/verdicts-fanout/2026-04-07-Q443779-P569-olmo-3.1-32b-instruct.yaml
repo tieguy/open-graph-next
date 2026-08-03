@@ -1,0 +1,23 @@
+completion_tokens: 507
+cost_usd: 0.019095
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 93954
+property: P569
+property_label: date of birth
+rationale: The only cited reference for María Blanchard's date of birth (6 March 1900)
+  is unavailable (HTTP 404). Independent web searches did not yield authoritative
+  sources confirming this date. Without access to the cited data or other corroborating
+  evidence, the claim cannot be verified.
+rcid: 2549501116
+revid: 2472865397
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://datos.gob.es/es/catalogo/e00123904-autores-espanoles-en-dominio-publico-fallecidos-desde-1900
+timestamp: '2026-04-07T08:00:29.233794+00:00'
+title: Q443779
+turns: 7
+value_label: null
+verdict: unverifiable

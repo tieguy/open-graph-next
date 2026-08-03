@@ -1,0 +1,32 @@
+completion_tokens: 1934
+cost_usd: 0.01201278
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 90798
+property: P69
+property_label: educated at
+rationale: The claim that Max Bill (Q123454) was educated at 'rue des Raguidelles'
+  (Q111450445) is incorrect and lacks credible evidence. Max Bill is well-documented
+  as a student of the Bauhaus (Q124354) during the late 1920s, a fact supported by
+  multiple authoritative sources. The new claim contradicts historical records and
+  is not corroborated by any verified or reliable sources. The qualifiers (2020–2020)
+  are nonsensical for a historical education claim, further indicating an error. The
+  cited references (English Wikipedia and bauhaus.community) do not support this claim.
+rcid: 2550803650
+revid: 2474128579
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.bauhaus.de/en/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Bauhaus
+- provenance: reported
+  supports_claim: false
+  url: https://www.bauhaus.community/
+timestamp: '2026-04-11T11:38:27.120521+00:00'
+title: Q123454
+turns: 3
+value_label: rue des Raguidelles
+verdict: incorrect

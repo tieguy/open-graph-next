@@ -1,0 +1,21 @@
+completion_tokens: 602
+cost_usd: 0.006274950000000001
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 123091
+property: P856
+property_label: official website
+rationale: No live, verifiable sources could be found to confirm the existence or
+  content of http://www.town.yuasa.wakayama.jp/. Attempts to access the original URL
+  returned cached HTML listing only recent updates with no site content, and no official
+  municipal website list for Yuasa could be located through official Wakayama Prefecture
+  channels. The claim that this domain was the official website remains unverifiable.
+rcid: 2551431259
+revid: 2474730880
+sources: []
+timestamp: '2026-04-07T12:03:54.568185+00:00'
+title: Q1345625
+turns: 15
+value_label: null
+verdict: unverifiable

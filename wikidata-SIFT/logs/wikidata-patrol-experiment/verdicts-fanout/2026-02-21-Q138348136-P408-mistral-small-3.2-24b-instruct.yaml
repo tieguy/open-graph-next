@@ -1,0 +1,28 @@
+completion_tokens: 1276
+cost_usd: 0.006845125
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68300
+property: P408
+property_label: software engine
+rationale: The sources consulted do not provide explicit information about the software
+  engine used for Fut Rap Cartas. Therefore, the claim cannot be verified based on
+  the available evidence.
+rcid: 2540921134
+revid: 2464712163
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: false
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324&hl=en_US
+timestamp: '2026-02-21T00:37:14.520974+00:00'
+title: Q138348136
+turns: 6
+value_label: Q63966
+verdict: unverifiable

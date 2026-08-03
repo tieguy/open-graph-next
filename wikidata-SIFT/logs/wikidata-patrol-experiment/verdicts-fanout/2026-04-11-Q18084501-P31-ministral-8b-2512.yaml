@@ -1,0 +1,26 @@
+completion_tokens: 2295
+cost_usd: 0.0032364299999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31928
+property: P31
+property_label: instance of
+rationale: The edit changes the instance of claim from Q3305213 (likely a more specific
+  subclass of painting, such as 'portrait painting') to Q11629 (generic 'painting').
+  The item's context, including the prefetched reference from Google Arts & Culture
+  and the depiction of the Mozart family, strongly suggests that Q3305213 is the more
+  accurate classification. The edit removes precision without any supporting references,
+  and no independent sources confirm that Q11629 is the correct choice over Q3305213.
+  This edit appears to be a loss of specificity rather than an improvement.
+rcid: null
+revid: 2471244123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artsandculture.google.com/asset/the-mozart-famliy-johann-nepomuk-della-croce/PwFMv8-fFDJkDw
+timestamp: '2026-04-11T10:52:27.010001+00:00'
+title: Q18084501
+turns: 3
+value_label: painting
+verdict: suspect

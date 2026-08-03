@@ -1,0 +1,31 @@
+completion_tokens: 1609
+cost_usd: 0.006384000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27093
+property: P735
+property_label: given name
+rationale: Authoritative sources such as Dictionary.com, Encyclopedia.com, and Wikipedia
+  consistently refer to the playwright as 'Lope de Vega', with 'Lope' as the given
+  name and 'de Vega' as the surname. There is no evidence from these reliable sources
+  that 'Vega' is used as the given name. The change from 'Lope' to 'Vega' for the
+  given name appears to be a confusion between given name and surname and is not supported
+  by independent corroboration.
+rcid: 2549920085
+revid: 2473274505
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.dictionary.com/browse/lope-de-vega
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/people/history/brazilian-history-biographies/lope-de-vega
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lope_de_Vega
+timestamp: '2026-04-11T05:33:02.049758+00:00'
+title: Q165257
+turns: 1
+value_label: Vega
+verdict: suspect

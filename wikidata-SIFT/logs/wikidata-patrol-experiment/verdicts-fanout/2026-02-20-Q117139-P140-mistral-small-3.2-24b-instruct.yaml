@@ -1,0 +1,31 @@
+completion_tokens: 1720
+cost_usd: 0.022448799999999998
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 219328
+property: P140
+property_label: religion or worldview
+rationale: The investigation found no credible evidence to support the claim that
+  Wiz Khalifa identifies as Jewish. The available sources discuss his connection to
+  Islam through his grandfather and the origin of his stage name, as well as his favorite
+  rappers who are Jewish. However, there is no explicit mention of Wiz Khalifa identifying
+  as Jewish or practicing Judaism. Therefore, the claim that 'Judaism' is a correct
+  updated religion or worldview for Wiz Khalifa is incorrect.
+rcid: 2540942568
+revid: 2464732035
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/islam/comments/1y5zye/id_like_rislams_feedback_on_rapper_wiz_khalifas/
+- provenance: verified
+  supports_claim: false
+  url: https://hollowverse.com/wiz-khalifa
+- provenance: verified
+  supports_claim: false
+  url: https://www.capitalxtra.com/features/rappers-rnb-singers-real-name/wiz-khalifa/
+timestamp: '2026-02-20T13:35:12.901902+00:00'
+title: Q117139
+turns: 15
+value_label: Judaism
+verdict: incorrect

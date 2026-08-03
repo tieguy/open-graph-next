@@ -1,0 +1,19 @@
+completion_tokens: 191
+cost_usd: 0.00401035625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41756
+property: P2048
+property_label: height
+rationale: The search engine returned an error, preventing the verification of the
+  height change for Venus Callipyge. Without access to reliable sources, it is not
+  possible to confirm or deny the change.
+rcid: 2550522112
+revid: 2473856250
+sources: []
+timestamp: '2026-04-11T16:08:59.288400+00:00'
+title: Q618521
+turns: 5
+value_label: null
+verdict: unverifiable

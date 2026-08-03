@@ -1,0 +1,24 @@
+completion_tokens: 1155
+cost_usd: 0.00664289
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 63482
+property: P19
+property_label: place of birth
+rationale: The sources confirm that ZedEye was born in Johannesburg, not Vereeniging.
+  The claim that he was born in Vereeniging is incorrect.
+rcid: 2540934397
+revid: 2464724892
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.musicinafrica.net/directory/zedeye
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/00coRF9xAYoKUyF2CtGmi8
+timestamp: '2026-02-20T18:14:22.928996+00:00'
+title: Q138349093
+turns: 10
+value_label: Vereeniging
+verdict: incorrect

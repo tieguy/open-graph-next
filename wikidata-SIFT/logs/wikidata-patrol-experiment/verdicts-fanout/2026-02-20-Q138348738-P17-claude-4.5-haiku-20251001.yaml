@@ -1,0 +1,27 @@
+completion_tokens: 1680
+cost_usd: 0.034138
+diff_type: reference_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 25738
+property: P17
+property_label: country
+rationale: The cited reference (official website P856 at https://www.bibbyfinancialservices.pl/)
+  directly and clearly supports the country claim. The website explicitly identifies
+  the company as operating in Poland with a Warsaw headquarters. Independent sources
+  (EMIS company database) corroborate this information consistently. The reference
+  is appropriate as a primary source, accessible, and strongly supports the claim.
+rcid: 2540926341
+revid: 2464717113
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/
+- provenance: verified
+  supports_claim: true
+  url: https://www.emis.com/php/company-profile/PL/Bibby_Financial_Services_Sp_z_oo_en_2405584.html
+timestamp: '2026-02-20T22:11:49.205853+00:00'
+title: Q138348738
+turns: 3
+value_label: Poland
+verdict: verified-high

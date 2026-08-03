@@ -1,0 +1,30 @@
+completion_tokens: 1703
+cost_usd: 0.00664
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28091
+property: P345
+property_label: IMDb ID
+rationale: The IMDb page for nm13786262 confirms that the ID corresponds to Josh Universe
+  (Josh Habka), an American biohacker and science communicator. Multiple independent
+  sources, including the official website and business databases, also link the same
+  IMDb ID to this individual. There is no contradictory evidence found, and the claim
+  is well-supported by reliable, independently verifiable sources.
+rcid: 2551429933
+revid: 2474729856
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/name/nm13786262/
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: true
+  url: https://crunchbase.com/person/josh-universe
+timestamp: '2026-04-11T09:49:09.317739+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

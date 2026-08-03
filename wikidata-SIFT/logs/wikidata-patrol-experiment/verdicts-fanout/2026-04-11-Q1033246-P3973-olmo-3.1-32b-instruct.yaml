@@ -1,0 +1,27 @@
+completion_tokens: 1292
+cost_usd: 0.004229
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17269
+property: P3973
+property_label: PIM authority ID
+rationale: The removed PIM authority ID had no supporting references, and I could
+  not verify its correctness due to access restrictions to the PIM authority database.
+  Independent sources do not reference this ID for Gábor Halász, and the property
+  appears to have been used in error. However, without confirmation from the authoritative
+  source, the removal cannot be definitively classified as correct or incorrect.
+rcid: 2550563367
+revid: 2473895998
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb144740851
+- provenance: reported
+  supports_claim: false
+  url: https://resolver.pim.hu/auth/PIM57254
+timestamp: '2026-04-11T11:39:16.456512+00:00'
+title: Q1033246
+turns: 1
+value_label: null
+verdict: plausible

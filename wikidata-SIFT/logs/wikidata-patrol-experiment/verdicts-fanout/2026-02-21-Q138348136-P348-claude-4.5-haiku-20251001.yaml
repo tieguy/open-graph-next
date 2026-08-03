@@ -1,0 +1,31 @@
+completion_tokens: 2713
+cost_usd: 0.091802
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 78237
+property: P348
+property_label: software version identifier
+rationale: The claim that FRC 25 (FutRapCartas) has software version identifier 1.8.0
+  on Android is supported by the cited Google Play Store reference and independently
+  corroborated by multiple authoritative APK distribution services. All sources consistently
+  confirm version 1.8.0 was released on March 5-6, 2025, matching both the version
+  identifier and the publication date qualifier. The reference is appropriate and
+  the claim is reliable.
+rcid: 2540919288
+revid: 2464710366
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324
+- provenance: verified
+  supports_claim: true
+  url: https://apkpure.com/frc-23-24/com.fyf.frc2324/download
+- provenance: verified
+  supports_claim: true
+  url: https://www.appbrain.com/app/frc-25-futrapcartas/com.fyf.frc2324
+timestamp: '2026-02-21T01:38:59.998354+00:00'
+title: Q138348136
+turns: 7
+value_label: null
+verdict: verified-high

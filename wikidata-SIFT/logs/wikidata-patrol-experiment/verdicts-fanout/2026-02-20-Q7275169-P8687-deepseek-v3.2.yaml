@@ -1,0 +1,31 @@
+completion_tokens: 923
+cost_usd: 0.009661880000000001
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 30539
+property: P8687
+property_label: social media followers
+rationale: The social aggregator site Twstalker reports the RAFBF Twitter account
+  has 33K followers, which is close to and consistent with the claimed 32,880. However,
+  the primary source (Twitter) is blocked from automated verification, and no other
+  independent, current sources directly confirming the exact figure were found. The
+  claim is plausible given the corroborating aggregator data, but cannot be verified
+  with high confidence due to lack of direct access to the primary platform.
+rcid: 2540926916
+revid: 2464717681
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mobile.twstalker.com/RAFBF
+- provenance: verified
+  supports_claim: null
+  url: https://twitter.com/RAFBF
+- provenance: verified
+  supports_claim: null
+  url: https://www.rafbf.org/get-involved/fundraise/fundraising-resources
+timestamp: '2026-02-20T21:52:02.007623+00:00'
+title: Q7275169
+turns: 5
+value_label: null
+verdict: plausible

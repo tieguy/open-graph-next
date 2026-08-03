@@ -1,0 +1,20 @@
+completion_tokens: 511
+cost_usd: 0.0207036
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 101985
+property: P26
+property_label: spouse
+rationale: The edit replaces an obviously incorrect spouse (Nintendo) with a plausible-sounding
+  name. However, I was unable to fetch or verify any independent, authoritative source
+  that confirms Luigi Nono was married to Maria Manetti Shrem. Without corroborating
+  evidence from a reliable source, the claim remains unverified.
+rcid: null
+revid: 2470544961
+sources: []
+timestamp: '2026-04-07T05:58:44.879196+00:00'
+title: Q160451
+turns: 9
+value_label: Maria Manetti Shrem
+verdict: unverifiable

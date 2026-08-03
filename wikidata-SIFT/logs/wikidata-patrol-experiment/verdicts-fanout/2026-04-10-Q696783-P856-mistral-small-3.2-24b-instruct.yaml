@@ -1,0 +1,28 @@
+completion_tokens: 1138
+cost_usd: 0.004817425
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 50361
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Yaizu to an unrelated URL. The
+  official sources confirm that the correct URL is "https://www.city.yaizu.lg.jp/".
+  The new URL provided in the edit is incorrect and should be reverted.
+rcid: null
+revid: 2471590660
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.yaizu.lg.jp/foreign-language/english/001.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.yaizu.lg.jp/foreign-language/english/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.yaizu.gr.jp/photocity/en/
+timestamp: '2026-04-10T13:45:19.731490+00:00'
+title: Q696783
+turns: 3
+value_label: null
+verdict: incorrect

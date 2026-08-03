@@ -1,0 +1,30 @@
+completion_tokens: 823
+cost_usd: 0.0057248
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26155
+property: P2373
+property_label: Genius artist ID
+rationale: The primary sources describing Josh Universe—his official website, biohacking
+  community profiles, and academic affiliations—do not mention any connection to a
+  music career or to the Genius artist platform. The Genius 'Josh A' artist page describes
+  a different individual with no link to Josh Universe. Therefore, assigning 'Josh-universe'
+  as the Genius artist ID is incorrect.
+rcid: 2551429578
+revid: 2474729584
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Josh-a
+- provenance: verified
+  supports_claim: false
+  url: https://biohackinginternational.com/about
+timestamp: '2026-04-10T13:04:58.564260+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: incorrect

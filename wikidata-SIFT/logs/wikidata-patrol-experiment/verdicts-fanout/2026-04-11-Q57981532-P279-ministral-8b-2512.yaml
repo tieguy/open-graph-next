@@ -1,0 +1,27 @@
+completion_tokens: 1915
+cost_usd: 0.00264693
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28378
+property: P279
+property_label: subclass of
+rationale: The edit incorrectly changed the subclass of Q57981532 (bipang) from 'snack'
+  (Q749316) to 'brittle' (Q708823). Prefetched sources confirm bipang is a traditional
+  Indonesian rice snack with a crunchy texture, not a brittle candy. No evidence supports
+  the classification as 'brittle', while the old value 'snack' aligns with the item's
+  description and texture.
+rcid: 2551233444
+revid: 2474545826
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://namakucell.blogspot.com/2022/09/buat-bepang-kacang-tanahbrittle-nut.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.oleholehpasuruan.com/news/Apa-Itu-Bipang-Kenali-Camilan-Tradisional-yang-Kini-Lebih-Sehat
+timestamp: '2026-04-11T05:59:36.635408+00:00'
+title: Q57981532
+turns: 3
+value_label: brittle
+verdict: incorrect

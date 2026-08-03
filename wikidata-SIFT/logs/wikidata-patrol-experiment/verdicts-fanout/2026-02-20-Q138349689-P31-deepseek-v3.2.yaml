@@ -1,0 +1,25 @@
+completion_tokens: 1200
+cost_usd: 0.02444267
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 149605
+property: P31
+property_label: instance of
+rationale: The entity 'Category:Swiss male film directors' is labeled as a Wikimedia
+  category and is described as 'Wikimedia category', confirming its type. The edit
+  sets P31 (instance of) to Q4167836 (Wikimedia category). Independent web search
+  confirms the Wikimedia Commons category page exists and that the entity follows
+  the naming convention for such categories. This is a straightforward structural
+  edit aligning the formal Wikidata classification with the entity's label and purpose.
+rcid: 2540955032
+revid: 2464743343
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Swiss_male_film_directors
+timestamp: '2026-02-20T07:24:35.767677+00:00'
+title: Q138349689
+turns: 15
+value_label: Wikimedia category
+verdict: verified-high

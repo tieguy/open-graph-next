@@ -1,0 +1,19 @@
+completion_tokens: 530
+cost_usd: 0.006601812499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 69006
+property: P22
+property_label: father
+rationale: No sources were found that confirm or deny the claim that Alexis Gay is
+  the father of Antonio de Ulloa. The edit lacks references, and independent searches
+  did not yield any relevant information.
+rcid: null
+revid: 2472453851
+sources: []
+timestamp: '2026-04-07T09:45:48.454253+00:00'
+title: Q470306
+turns: 7
+value_label: Alexis Gay
+verdict: unverifiable

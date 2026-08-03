@@ -1,0 +1,32 @@
+completion_tokens: 665
+cost_usd: 0.01908546
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 55739
+property: P155
+property_label: follows
+rationale: 'The edit adds a qualifier ''performer: Buzz-Works'' to the ''follows:
+  House of Nightmares'' claim on ''The Dark Tower'' album. The cited reference (noxarcana.com/nightmares.html)
+  confirms ''House of Nightmares'' is a Buzz-Works album released October 2010, and
+  independent sources (Apple Music artist page, Justapedia) confirm ''The Dark Tower''
+  (September 2011) follows ''House of Nightmares'' in Nox Arcana''s discography. The
+  qualifier accurately identifies Buzz-Works as the performer of the preceding album,
+  making the claim correct and well-supported.'
+rcid: 2541055100
+revid: 2464837372
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/nightmares.html
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/pl/artist/nox-arcana/7041274
+- provenance: verified
+  supports_claim: true
+  url: https://justapedia.org/wiki/The_Dark_Tower_(album)
+timestamp: '2026-02-21T04:16:34.615675+00:00'
+title: Q7729016
+turns: 7
+value_label: House of Nightmares
+verdict: verified-high

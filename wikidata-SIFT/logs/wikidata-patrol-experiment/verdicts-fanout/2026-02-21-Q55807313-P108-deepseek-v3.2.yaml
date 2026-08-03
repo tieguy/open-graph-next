@@ -1,0 +1,33 @@
+completion_tokens: 2125
+cost_usd: 0.05428556
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 186500
+property: P108
+property_label: employer
+rationale: Multiple independent authoritative sources confirm Michael Backes is affiliated
+  with North-West University as an Extraordinary Professor. The Oxford University
+  page (primary institutional source), North-West University's own website, and the
+  Global Young Academy profile all consistently list this affiliation. The claim is
+  well-supported by direct evidence from official institutional websites.
+rcid: 2541054580
+revid: 2464836961
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.physics.ox.ac.uk/our-people/backesm
+- provenance: verified
+  supports_claim: true
+  url: http://natural-sciences.nwu.ac.za/centre-space-research/michael-backes
+- provenance: verified
+  supports_claim: true
+  url: https://globalyoungacademy.net/mbackes/
+- provenance: verified
+  supports_claim: true
+  url: https://africanscientists.africa/business-directory/backes/
+timestamp: '2026-02-21T04:24:09.949843+00:00'
+title: Q55807313
+turns: 14
+value_label: North-West University
+verdict: verified-high

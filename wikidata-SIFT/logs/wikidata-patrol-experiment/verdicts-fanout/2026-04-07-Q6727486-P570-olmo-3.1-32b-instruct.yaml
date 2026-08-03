@@ -1,0 +1,22 @@
+completion_tokens: 951
+cost_usd: 0.009583200000000002
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 45063
+property: P570
+property_label: date of death
+rationale: No independent or cited sources confirm that Madhumita Raut died on 21
+  March 2026. Multiple searches and attempts to fetch relevant articles did not yield
+  any evidence supporting the claim. The edit lacks references and corroboration.
+rcid: 2551232239
+revid: 2474544637
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Madhumita_Raut
+timestamp: '2026-04-07T09:11:24.099176+00:00'
+title: Q6727486
+turns: 9
+value_label: null
+verdict: unverifiable

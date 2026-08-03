@@ -1,0 +1,28 @@
+completion_tokens: 1638
+cost_usd: 0.0022338749999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19460
+property: P54
+property_label: member of sports team
+rationale: Multiple reliable sources confirm that Anass Zaroury is currently a player
+  for Panathinaikos F.C. and that Lommel SK is a previous team. The edit is supported
+  by strong evidence.
+rcid: 2551379055
+revid: 2474683776
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ca.sports.yahoo.com/news/official-anass-zaroury-signs-panathinaikos-063500805.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.slgr.gr/en/player/4632/
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/anass-zaroury/nationalmannschaft/spieler/491296
+timestamp: '2026-04-11T15:25:23.496022+00:00'
+title: Q105203860
+turns: 1
+value_label: Panathinaikos F.C.
+verdict: verified-high

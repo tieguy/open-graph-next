@@ -1,0 +1,21 @@
+completion_tokens: 1155
+cost_usd: 0.004227
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 79920
+property: P18
+property_label: image
+rationale: The edited image claim 'IVE Leeseo 260321.jpg' lacks verifiable support.
+  No reliable sources confirm this image exists, shows Leeseo, or relates to her identity
+  as a K-pop singer. Searches across multiple relevant terms and platforms yield no
+  results. Without any citations or independent corroboration of the image's validity,
+  the change cannot be confirmed or dismissed as correct.
+rcid: 2551399257
+revid: 2474703093
+sources: []
+timestamp: '2026-04-07T09:41:02.653939+00:00'
+title: Q109572155
+turns: 13
+value_label: null
+verdict: unverifiable

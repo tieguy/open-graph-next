@@ -1,0 +1,34 @@
+completion_tokens: 1695
+cost_usd: 0.029375030000000003
+diff_type: reference_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 115674
+property: P11245
+property_label: YouTube handle
+rationale: The YouTube channel https://www.youtube.com/@gbafreview exists with the
+  exact handle 'gbafreview' and is named 'Global Banking & Finance Review', providing
+  direct confirmation. Independent corroboration from a 2018 forum post mentions '@GBAFReview'
+  and its YouTube channel, and multiple external references link this handle to the
+  magazine. The evidence strongly supports that '@gbafreview' is the correct YouTube
+  handle for Global Banking & Finance Review.
+rcid: 2540959993
+revid: 2464747993
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/@gbafreview
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/channel/UCjawTpi6AhQrUDZ67rIFfuQ
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com/
+- provenance: verified
+  supports_claim: true
+  url: https://bitcointalk.org/index.php?topic=2135312.360
+timestamp: '2026-02-20T04:56:03.502425+00:00'
+title: Q60744597
+turns: 14
+value_label: null
+verdict: verified-high

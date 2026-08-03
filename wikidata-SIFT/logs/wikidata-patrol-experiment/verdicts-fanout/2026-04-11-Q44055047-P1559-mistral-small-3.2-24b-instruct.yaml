@@ -1,0 +1,32 @@
+completion_tokens: 1678
+cost_usd: 0.00543034375
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53449
+property: P1559
+property_label: name in native language
+rationale: The removed claim had no references, and independent sources could not
+  be found to confirm or deny the claim. The absence of sources supporting the claim
+  suggests that the removal might be justified due to a lack of evidence. However,
+  without definitive evidence, the verdict remains unverifiable.
+rcid: 2551258253
+revid: 2474568961
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://discover.23andme.com/last-name/Tarasov
+- provenance: verified
+  supports_claim: false
+  url: https://forebears.io/surnames/tarasov
+- provenance: verified
+  supports_claim: false
+  url: https://www.ancestry.com/name-origin?surname=tarasov
+- provenance: verified
+  supports_claim: false
+  url: https://www.unian.info
+timestamp: '2026-04-11T15:24:37.706792+00:00'
+title: Q44055047
+turns: 5
+value_label: null
+verdict: unverifiable

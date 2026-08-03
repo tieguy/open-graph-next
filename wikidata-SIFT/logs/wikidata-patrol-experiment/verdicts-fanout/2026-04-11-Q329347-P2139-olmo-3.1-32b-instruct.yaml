@@ -1,0 +1,27 @@
+completion_tokens: 2436
+cost_usd: 0.0073422
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29403
+property: P2139
+property_label: total revenue
+rationale: The new value of 3,767,768,000,000 Russian rubles for Lukoil's total revenue
+  is unsupported by any authoritative financial reporting. Multiple reputable sources,
+  including Vedomosti and Expert RA, report Lukoil's 2018 total revenue as approximately
+  8.1 trillion rubles, matching the previously stated value of +8035889000000. Therefore,
+  the change is not justified and appears to be incorrect.
+rcid: 2550551242
+revid: 2473884349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.vedomosti.ru/economy/news/2019/03/28/773409-lukoil-2018
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20181028193225/https://raexpert.ru/rankingtable/top_companies/2018/main/
+timestamp: '2026-04-11T09:29:19.263705+00:00'
+title: Q329347
+turns: 1
+value_label: null
+verdict: incorrect

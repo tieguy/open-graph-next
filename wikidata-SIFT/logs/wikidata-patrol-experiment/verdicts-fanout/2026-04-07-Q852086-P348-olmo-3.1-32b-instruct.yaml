@@ -1,0 +1,29 @@
+completion_tokens: 1159
+cost_usd: 0.0081668
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 37357
+property: P348
+property_label: software version identifier
+rationale: The cited reference (official download page) could not be fetched, and
+  no independent evidence confirming version 1.73.32 of flat assembler was found through
+  targeted web searches on the official site and the project's GitHub repository.
+  Without corroborating evidence, the claim cannot be verified.
+rcid: 2550388630
+revid: 2473726456
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: http://flatassembler.net/download.php
+- provenance: reported
+  supports_claim: false
+  url: https://github.com/tgrysztar/fasm
+- provenance: reported
+  supports_claim: false
+  url: https://flatassembler.net/
+timestamp: '2026-04-07T02:41:01.449788+00:00'
+title: Q852086
+turns: 5
+value_label: null
+verdict: unverifiable

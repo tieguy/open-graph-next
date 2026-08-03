@@ -1,0 +1,31 @@
+completion_tokens: 1067
+cost_usd: 0.00263164
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45439
+property: P569
+property_label: date of birth
+rationale: The investigation could not fetch or verify any reliable sources that confirm
+  or deny the specific date of birth (29 July 1961) for Esmaeil Khatib. The available
+  sources either do not provide the exact date or could not be accessed due to errors.
+rcid: 2549961628
+revid: 2473312837
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://historica.fandom.com/wiki/Esmaeil_Khatib
+- provenance: verified
+  supports_claim: false
+  url: https://www.afio.com/obituaries/2026/03/20/esmaeil-khatib-iran%E2%80%99s-minister-of-intelligence/
+- provenance: verified
+  supports_claim: null
+  url: https://www.palestinechronicle.com/profile-who-is-esmail-khatib-irans-assassinated-intelligence-chief/
+- provenance: verified
+  supports_claim: null
+  url: https://www.president.ir/en/president/cabinet
+timestamp: '2026-04-11T16:05:13.624494+00:00'
+title: Q108120922
+turns: 6
+value_label: null
+verdict: unverifiable

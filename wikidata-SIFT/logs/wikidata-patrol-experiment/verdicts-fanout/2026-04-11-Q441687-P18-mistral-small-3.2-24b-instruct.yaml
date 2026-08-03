@@ -1,0 +1,28 @@
+completion_tokens: 716
+cost_usd: 0.002089075
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23016
+property: P18
+property_label: image
+rationale: The new image 'IDOT rest area garbage can.jpg' appears unrelated to Kendall
+  Myers based on the filename. The old image 'Kendall Myers (cropped).jpg' is more
+  likely to be relevant. The edit seems incorrect without further verification.
+rcid: null
+revid: 2333215909
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/kendall-myers
+- provenance: verified
+  supports_claim: false
+  url: https://www.kendallnicolestudios.com/collection2025/p/the-sun
+- provenance: verified
+  supports_claim: false
+  url: https://www.kendallnicolestudios.com/photography
+timestamp: '2026-04-11T11:02:01.067502+00:00'
+title: Q441687
+turns: 3
+value_label: null
+verdict: suspect

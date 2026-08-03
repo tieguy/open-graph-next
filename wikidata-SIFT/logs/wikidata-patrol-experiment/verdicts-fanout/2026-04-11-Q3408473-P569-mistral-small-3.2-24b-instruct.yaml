@@ -1,0 +1,32 @@
+completion_tokens: 1476
+cost_usd: 0.0026447625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26437
+property: P569
+property_label: date of birth
+rationale: The old value of July 10, 1980 is supported by multiple independent sources.
+  The new value of July 10, 1975 is not supported by any verifiable sources and the
+  reference provided is unreachable. Therefore, the change from July 10, 1980 to July
+  10, 1975 is not justified based on the available evidence.
+rcid: 2550663962
+revid: 2473993493
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://vipactors.com/karen-dejo/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bornglorious.com/person/?pi=3408473
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/karen-dejo.html
+- provenance: verified
+  supports_claim: false
+  url: https://trome.com/espectaculos/karen-dejo-edad-de-cumpleanos-guerrera-cumple-41-anos-noticia/
+timestamp: '2026-04-11T09:48:25.617997+00:00'
+title: Q3408473
+turns: 2
+value_label: null
+verdict: suspect

@@ -1,0 +1,27 @@
+completion_tokens: 782
+cost_usd: 0.0168292
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 81800
+property: P18
+property_label: image
+rationale: The new image attached to Rosalía de Castro's Wikidata item is a photograph
+  of a soccer match involving Romario Ibarra and is completely unrelated to the subject,
+  who is a 19th-century Galician poet and writer. The official website of Rosalía
+  de Castro and independent web searches confirm that this image is not relevant to
+  her biography or legacy. Therefore, the edit is incorrect and should be reverted.
+rcid: 2549245218
+revid: 2472616570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://rosalia.gal/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T08:48:27.190947+00:00'
+title: Q464264
+turns: 7
+value_label: null
+verdict: incorrect

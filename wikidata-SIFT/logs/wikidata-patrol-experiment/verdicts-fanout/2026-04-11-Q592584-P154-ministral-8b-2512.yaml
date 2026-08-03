@@ -1,0 +1,26 @@
+completion_tokens: 2354
+cost_usd: 0.00902655
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 124441
+property: P154
+property_label: logo image
+rationale: The edit changes the logo image for Imprensa Nacional-Casa da Moeda from
+  'Imprensa Nacional.jpg' to 'Logo of Portugal National Printing House and Mint.svg'.
+  The cited reference (English Wikipedia) is blocked and unreliable for Wikidata.
+  No verified independent sources were found confirming the new logo's accuracy or
+  official status. The official website and Wikimedia Commons do not provide definitive
+  evidence for either logo. Without direct verification of the new logo's source or
+  official endorsement, the change cannot be substantiated.
+rcid: 2550361153
+revid: 2473699701
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.incm.pt/
+timestamp: '2026-04-11T11:41:17.667585+00:00'
+title: Q592584
+turns: 13
+value_label: null
+verdict: unverifiable

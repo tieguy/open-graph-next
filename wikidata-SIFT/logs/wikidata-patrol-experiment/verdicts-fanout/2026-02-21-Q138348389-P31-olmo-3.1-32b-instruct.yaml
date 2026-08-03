@@ -1,0 +1,31 @@
+completion_tokens: 1319
+cost_usd: 0.0041990000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17038
+property: P31
+property_label: instance of
+rationale: Primary and official sources confirm that Novacore Builders is an active
+  business entity in Florida, operating as a licensed general contractor in the Tampa
+  Bay area. The official website provides a valid Florida contractor license number
+  and describes services consistent with the 'business' classification. Therefore,
+  the claim that novacore builders is an instance of 'business' (Q4830453) is strongly
+  supported.
+rcid: 2540919150
+revid: 2464710231
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://search.sunbiz.org/Inquiry/corporationsearch/SearchResultDetail?inquirytype=EntityName&directionType=Initial&searchNameOrder=NOVACOREBUILDERS+L25000244004
+- provenance: verified
+  supports_claim: true
+  url: https://www.novacorebuilders.com/
+- provenance: reported
+  supports_claim: true
+  url: https://m.yelp.com/biz/novacore-builders-tampa
+timestamp: '2026-02-21T01:43:36.383462+00:00'
+title: Q138348389
+turns: 2
+value_label: business
+verdict: verified-high

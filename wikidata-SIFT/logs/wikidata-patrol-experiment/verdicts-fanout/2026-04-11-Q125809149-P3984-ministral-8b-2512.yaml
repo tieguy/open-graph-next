@@ -1,0 +1,28 @@
+completion_tokens: 1910
+cost_usd: 0.0034341299999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33631
+property: P3984
+property_label: subreddit
+rationale: The investigation could not fetch or verify the existence of the new subreddit
+  value ('biohacking') or the old value ('icebaths') due to unreachable URLs and blocked
+  searches. No primary source was independently verified during this investigation,
+  making it impossible to confirm or deny the correctness of the edit. The lack of
+  references for the new value and the unreliability of the old value's reference
+  further prevent a definitive assessment.
+rcid: 2551421483
+revid: 2474723081
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/icebaths/
+- provenance: verified
+  supports_claim: false
+  url: https://biohackinginternational.com/
+timestamp: '2026-04-11T10:09:53.332504+00:00'
+title: Q125809149
+turns: 3
+value_label: null
+verdict: unverifiable

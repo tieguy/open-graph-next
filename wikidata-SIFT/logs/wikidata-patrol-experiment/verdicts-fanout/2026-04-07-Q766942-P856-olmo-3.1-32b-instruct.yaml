@@ -1,0 +1,27 @@
+completion_tokens: 899
+cost_usd: 0.01469
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 70753
+property: P856
+property_label: official website
+rationale: The new value 'https://www.qantas.com' does not appear to be related to
+  the city of Shibetsu, Hokkaido, Japan, and no independent primary source could be
+  located or verified to confirm this claim. The expected official website for the
+  city could not be reached or confirmed during this investigation. As a result, the
+  claim is unverifiable.
+rcid: null
+revid: 2468927497
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.shibetsu.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E9%99%AB%E3%83%AC%E3%82%A6%E3%83%B3%E4%BA%88%E9%83%A8
+timestamp: '2026-04-07T06:07:00.691697+00:00'
+title: Q766942
+turns: 9
+value_label: null
+verdict: unverifiable

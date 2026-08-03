@@ -1,0 +1,32 @@
+completion_tokens: 1361
+cost_usd: 0.046478
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 39673
+property: P19
+property_label: place of birth
+rationale: The cited reference from Página 12 (June 8, 2016) explicitly states 'Daniel
+  Basilio (Rosario, 1986)', directly confirming Rosario as the place of birth. This
+  is further corroborated by multiple independent sources including the subject's
+  official website (danielbasilio.com), which identifies him as a writer from Rosario.
+  The reference is reliable (a published literary review in a major Argentine newspaper
+  by professional critic Beatriz Vignoli) and the claim is consistent across all sources
+  consulted.
+rcid: 2540931205
+revid: 2464721849
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pagina12.com.ar/diario/suplementos/rosario/12-54948-2016-06-08.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.danielbasilio.com/zoom.php?id=4
+- provenance: reported
+  supports_claim: true
+  url: https://www.goodreads.com/book/show/42512902-la-noche-se-presta-para-pegarle-a-un-viejo
+timestamp: '2026-02-20T19:55:51.270356+00:00'
+title: Q138349024
+turns: 4
+value_label: Rosario
+verdict: verified-high

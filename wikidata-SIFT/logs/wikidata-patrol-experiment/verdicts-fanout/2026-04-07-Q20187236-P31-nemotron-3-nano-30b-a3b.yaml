@@ -1,0 +1,24 @@
+completion_tokens: 623
+cost_usd: 0.005636499999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 110238
+property: P31
+property_label: instance of
+rationale: No references cited that support the claim. Multiple web searches failed
+  to find credible sources identifying 'Hua' as a given name, meaning, or usage relevant
+  to Andrew Jackson or art objects. No dictionary entries, encyclopedic references,
+  or reputable sources confirming 'Hua' as a Chinese given name were found. External
+  searches returned no results.
+rcid: null
+revid: 2467026793
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.nga.gov/content/ngaweb/Collection/art-object-page.1128.html
+timestamp: '2026-04-07T12:04:38.804747+00:00'
+title: Q20187236
+turns: 15
+value_label: Hua
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 1962
+cost_usd: 0.003822
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13224
+property: P1814
+property_label: name in kana
+rationale: The new value 'eros ramazzott*' for the name in kana of Eijirō Ono is not
+  supported by any reliable or independent source. The cited Japanese Wikipedia article
+  and multiple other authoritative Japanese-language sources consistently use 'おの
+  えいじろう' as the kana rendering. The new value appears to be arbitrary and incorrect.
+rcid: null
+revid: 2464869007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E5%B0%8F%E9%87%8E%E3%83%86%E3%82%A4%E3%83%A0
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Eijir%C5%8D_Ono
+- provenance: verified
+  supports_claim: false
+  url: https://jahis.law.nagoya-u.ac.jp/who/docs/who4-2656
+timestamp: '2026-04-11T07:37:35.994111+00:00'
+title: Q11464251
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 1732
+cost_usd: 0.007726500000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 100844
+property: P571
+property_label: inception
+rationale: The edit changed the inception year of Jorge Basadre Grohmann National
+  University from 1971 to 1973. The verified sources (Grokipedia and UniRank) confirm
+  that the university was founded in 1971, with no evidence supporting 1973 as the
+  correct inception year. The new value is therefore incorrect.
+rcid: null
+revid: 2471463298
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/jorge_basadre_grohmann_national_university
+- provenance: verified
+  supports_claim: false
+  url: https://www.unirank.org/pe/uni/jorge-basadre-grohmann-national-university/
+timestamp: '2026-04-11T18:22:14.062375+00:00'
+title: Q6156567
+turns: 11
+value_label: null
+verdict: incorrect

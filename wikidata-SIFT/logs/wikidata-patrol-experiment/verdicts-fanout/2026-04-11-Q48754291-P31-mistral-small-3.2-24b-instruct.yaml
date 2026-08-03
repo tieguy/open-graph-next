@@ -1,0 +1,28 @@
+completion_tokens: 1300
+cost_usd: 0.0014134375
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11610
+property: P31
+property_label: instance of
+rationale: Multiple independent sources confirm that Tochigasawa-Kōen Park Station
+  is a bus stop. The rank change from 'preferred' to 'normal' does not affect the
+  accuracy of the claim.
+rcid: 2550470396
+revid: 2473806774
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Tochigasawa-Kōen_Park_Station
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.rikuzentakata.iwate.jp/e2497.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.jreast.co.jp/e/stations/brt.html
+timestamp: '2026-04-11T17:09:08.125973+00:00'
+title: Q48754291
+turns: 1
+value_label: bus stop
+verdict: verified-high

@@ -1,0 +1,40 @@
+completion_tokens: 1918
+cost_usd: 0.05096441
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 207763
+property: P106
+property_label: occupation
+rationale: The edit adds 'video game' (Q7889) as an occupation for Masahiro Sakurai.
+  However, Q7889 represents the electronic game itself ('electronic game with user
+  interface and visual feedback'), not a profession. Multiple independent sources
+  confirm Sakurai is a 'video game designer', 'video game director', and 'video game
+  developer' - all distinct professions from 'video game'. The WiKirby page states
+  his role as 'Game Designer & Director', the SmashWiki page lists his occupation
+  as 'Video game director, game designer, founder of Sora Ltd.', and Video Games Chronicle
+  describes him as a 'Japanese video game designer'. Using Q7889 as an occupation
+  is a category error - one cannot have 'video game' as an occupation; one creates
+  video games or works in the video game industry. The item also shows extensive vandalism
+  with incorrect gender, citizenship, birth date, and other claims, suggesting this
+  entire edit session is problematic.
+rcid: 2540950305
+revid: 2464739277
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://bulbapedia.bulbagarden.net/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.videogameschronicle.com/people/masahiro-sakurai/
+timestamp: '2026-02-20T09:40:46.101470+00:00'
+title: Q1906721
+turns: 15
+value_label: video game
+verdict: incorrect

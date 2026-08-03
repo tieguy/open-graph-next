@@ -1,0 +1,26 @@
+completion_tokens: 853
+cost_usd: 0.01110800625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 114787
+property: P20
+property_label: place of death
+rationale: The change from "Corsept" to "Angers" as the place of death for Pierre
+  Bordage is supported by the reference from ecostylia.com. The reference from actusf.com
+  does not mention the location of death, so it does not contradict the claim. Therefore,
+  the edit appears to be correct based on the available evidence.
+rcid: 2550574604
+revid: 2473906772
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitt%C3%A9
+- provenance: verified
+  supports_claim: true
+  url: https://www.ecostylia.com/en/death-pierre-bordage/
+timestamp: '2026-04-11T16:46:50.860395+00:00'
+title: Q543836
+turns: 5
+value_label: Angers
+verdict: verified-high

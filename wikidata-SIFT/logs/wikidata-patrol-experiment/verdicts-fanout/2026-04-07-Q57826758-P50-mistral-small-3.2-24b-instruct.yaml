@@ -1,0 +1,22 @@
+completion_tokens: 782
+cost_usd: 0.00273444
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46944
+property: P50
+property_label: author
+rationale: The search results did not provide sufficient evidence to confirm or refute
+  the change in authorship. The PDF of the article did not yield direct evidence of
+  authorship. Further investigation is needed to verify the edit.
+rcid: null
+revid: 2473094550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.scielo.br/j/icse/a/Mnb4hKbwdhzmfmXwLZPRKsj/?format=pdf&lang=pt
+timestamp: '2026-04-07T07:38:13.225332+00:00'
+title: Q57826758
+turns: 9
+value_label: Fábio Luiz Vieira
+verdict: unverifiable

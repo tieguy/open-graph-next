@@ -1,0 +1,26 @@
+completion_tokens: 1042
+cost_usd: 0.0075484
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34616
+property: P1559
+property_label: name in native language
+rationale: The prefix 'rgwvrwf' does not appear in any authoritative source for Nadia
+  Murad Basee's name in her native language. The standard Arabic rendering is 'نادية
+  مراد' without this prefix. The change appears to be an error or non-standard transliteration
+  and is not supported by reliable references.
+rcid: null
+revid: 2470711327
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/peace/2018/murad/facts/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T07:01:53.660229+00:00'
+title: Q22007112
+turns: 3
+value_label: null
+verdict: suspect

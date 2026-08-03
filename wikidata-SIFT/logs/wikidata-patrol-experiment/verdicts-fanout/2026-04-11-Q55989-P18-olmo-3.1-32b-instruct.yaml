@@ -1,0 +1,30 @@
+completion_tokens: 1941
+cost_usd: 0.0039244
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13799
+property: P18
+property_label: image
+rationale: The edit changed the representative image for 'convertible' from one model
+  to another, but no sources or justifications were provided for either image. Although
+  the Chevrolet Corvette C8 is a plausible modern example of a convertible, there
+  is no consensus or official image for the concept, and the absence of references
+  means the change cannot be verified as an improvement.
+rcid: null
+revid: 2470330698
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Convertible_(car_body_style)
+- provenance: verified
+  supports_claim: false
+  url: https://unsplash.com/s/photos/convertible-car
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/convertible
+timestamp: '2026-04-11T17:54:16.324868+00:00'
+title: Q55989
+turns: 1
+value_label: null
+verdict: unverifiable

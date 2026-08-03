@@ -1,0 +1,20 @@
+completion_tokens: 552
+cost_usd: 0.00948
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 45744
+property: P21
+property_label: sex or gender
+rationale: The edit claims Elias Hadaya is female based on a heuristic inference from
+  the given name. No independent, primary, or official sources confirming this gender
+  assignment were found after multiple web searches. Therefore, the claim remains
+  unverified due to lack of accessible, reliable evidence.
+rcid: 2549662898
+revid: 2473023126
+sources: []
+timestamp: '2026-04-07T09:09:02.342258+00:00'
+title: Q89080747
+turns: 9
+value_label: female
+verdict: unverifiable

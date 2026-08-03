@@ -1,0 +1,25 @@
+completion_tokens: 1097
+cost_usd: 0.00138714375
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14436
+property: P31
+property_label: instance of
+rationale: The added references support the claim that Odette Ponge is an instance
+  of human. Independent sources confirm her existence and human status, providing
+  strong evidence for the claim.
+rcid: 2550399768
+revid: 2473737426
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://books.openedition.org/septentrion/80546?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://poetrysociety.org/poems-essays/in-their-own-words/joshua-corey-on-trying-to-translate-ponge
+timestamp: '2026-04-11T12:21:07.719948+00:00'
+title: Q95749031
+turns: 1
+value_label: human
+verdict: verified-high

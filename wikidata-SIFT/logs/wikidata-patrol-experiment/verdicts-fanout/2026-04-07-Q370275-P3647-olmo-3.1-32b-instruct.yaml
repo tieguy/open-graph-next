@@ -1,0 +1,27 @@
+completion_tokens: 1410
+cost_usd: 0.008581799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38679
+property: P3647
+property_label: NBA.com player ID
+rationale: No authoritative source was found that confirms NBA.com assigns or publishes
+  a numeric player ID for Rudy Gay, nor that '2007' is a valid NBA.com player ID.
+  The Basketball-Reference player page, which is an authoritative sports statistics
+  source, does not reference an NBA.com player ID for Rudy Gay. Therefore, the edit
+  cannot be verified or disproven based on available evidence.
+rcid: null
+revid: 2471336922
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.basketball-reference.com/players/g/gayru01.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Rudy+Gay+NBA.com+player+ID
+timestamp: '2026-04-07T03:29:44.033593+00:00'
+title: Q370275
+turns: 2
+value_label: null
+verdict: unverifiable

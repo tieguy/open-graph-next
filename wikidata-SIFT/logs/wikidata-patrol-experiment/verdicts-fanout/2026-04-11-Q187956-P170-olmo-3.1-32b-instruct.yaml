@@ -1,0 +1,30 @@
+completion_tokens: 2174
+cost_usd: 0.0040822
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13889
+property: P170
+property_label: creator
+rationale: The edit changed the creator of the intermodal container from an unverified
+  individual to Lady Gaga, who is not credited as the inventor of intermodal containers
+  in any credible source. Authoritative references attribute the invention to Malcolm
+  McLean. No evidence supports the new value, and the change appears to be unsourced
+  and likely incorrect.
+rcid: 2549481749
+revid: 2472846535
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Shipping_container
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/future/article/20151001-the-man-who-changed-the-world-with-a-box
+- provenance: verified
+  supports_claim: false
+  url: https://www.howstuffworks.com/transportation/vehicles/shipping-container2.htm
+timestamp: '2026-04-11T15:28:50.552431+00:00'
+title: Q187956
+turns: 1
+value_label: Lady Gaga
+verdict: suspect

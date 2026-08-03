@@ -1,0 +1,36 @@
+completion_tokens: 1960
+cost_usd: 0.010444769999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 90251
+property: P2031
+property_label: start of work period
+rationale: Independent, verified sources confirm that Roberto Benigni's first film
+  appearance was in **1977**, not 1972. Multiple primary sources, including film databases
+  and biographies, consistently state that his career began in the late 1960s with
+  theater and his first film role in 1977. The claim of a 1972 start of work period
+  is not supported by credible evidence.
+rcid: 2551339872
+revid: 2474646120
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/movies/dictionaries-thesauruses-pictures-and-press-releases/benigni-roberto
+- provenance: verified
+  supports_claim: false
+  url: https://www.tribute.ca/people/biography/roberto-benigni/2850/
+- provenance: verified
+  supports_claim: false
+  url: https://www.italiamia.com/culture/biographies/biography-roberto-benigni/
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/person/4818-roberto-benigni
+- provenance: verified
+  supports_claim: false
+  url: https://www.understandingitaly.com/roberto-benigni.html
+timestamp: '2026-04-10T12:09:06.575189+00:00'
+title: Q23301
+turns: 3
+value_label: null
+verdict: incorrect

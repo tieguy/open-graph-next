@@ -1,0 +1,29 @@
+completion_tokens: 1673
+cost_usd: 0.0061353125
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60982
+property: P10606
+property_label: notable role
+rationale: Multiple independent sources confirm that Jennifer Connelly played the
+  role of Naamah in the movie Noah. The added reference, although unverifiable due
+  to a blocked domain, is consistent with the information found in other reliable
+  sources.
+rcid: 2551277601
+revid: 2474586967
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Jennifer_Connelly
+- provenance: verified
+  supports_claim: true
+  url: https://screenrant.com/jennifer-connelly-darren-aronofsky-noah-requiem-for-a-dream-reunion/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lefigaro.fr/cinema/2012/06/19/03002-20120619ARTFIG00618-jennifer-connelly-epouse-de-noe-chez-aronofsky.php
+timestamp: '2026-04-11T17:36:08.123086+00:00'
+title: Q103343
+turns: 3
+value_label: Naamah
+verdict: verified-high

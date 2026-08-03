@@ -1,0 +1,35 @@
+completion_tokens: 346
+cost_usd: 0.0022268
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10096
+property: P242
+property_label: locator map image
+rationale: The new image 'Polichni map.jpg' was not independently verified as an accurate
+  locator map for Polichni. The previous image 'Dim.polihnis.png' is referenced by
+  a long-standing, reputable source (Maplandia.com), which has since discontinued
+  its service but previously hosted a dedicated Polichni page and map. No reliable,
+  independently fetched source confirms that 'Polichni map.jpg' is an appropriate
+  locator map for Polichni. The change lacks citation and independent corroboration,
+  making it suspect.
+rcid: null
+revid: 2471173768
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://web.archive.org/web/20220101000000*/http://www.maplandia.com/greece/makedonia/thessaloniki/polichni/
+- provenance: reported
+  supports_claim: false
+  url: http://web.archive.org/web/20220101000000*/http://www.maplandia.com/greece/makedonia/thessaloniki/polichni/register/
+- provenance: reported
+  supports_claim: false
+  url: https://mapcarta.com/13814754
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Polichni_map.jpg
+timestamp: '2026-04-11T16:17:35.717928+00:00'
+title: Q182327
+turns: 1
+value_label: null
+verdict: suspect

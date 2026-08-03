@@ -1,0 +1,27 @@
+completion_tokens: 276
+cost_usd: 0.0035682
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17013
+property: P39
+property_label: position held
+rationale: The Catholic-Hierarchy.org source explicitly lists Arnold von Solms as
+  having served as Bishop of Bamberg from 15 May 1286 to 19 July 1296, with additional
+  diocesan and temporal details. This directly corroborates the claim that 'Roman
+  Catholic Bishop of Bamberg' is an appropriate and correct position held by Arnold
+  von Solms. The dates and diocese match the Wikidata qualifiers provided.
+rcid: 2550974079
+revid: 2474293537
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Arnold_von_Solms
+timestamp: '2026-04-11T14:05:46.510789+00:00'
+title: Q99486
+turns: 1
+value_label: Roman Catholic Bishop of Bamberg
+verdict: verified-high

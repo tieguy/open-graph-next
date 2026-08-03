@@ -1,0 +1,29 @@
+completion_tokens: 899
+cost_usd: 0.0028856999999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13993
+property: P373
+property_label: Commons category
+rationale: The edit changed the Commons category for the bus model NEFAZ-5299 from
+  'NefAZ 5299' (with a space) to 'NefAZ-5299' (with a hyphen). The new value aligns
+  with the actual active category on Wikimedia Commons, as confirmed by the existence
+  of the category 'NefAZ-5299' and its subcategories like 'NefAZ-5299-40'. The old
+  value does not match the naming convention used in the active Wikimedia Commons
+  category structure. No conflicting evidence was found, and the change improves consistency
+  with Wikimedia Commons conventions.
+rcid: 2551408901
+revid: 2474712127
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:NefAZ-5299
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:NefAZ-5299-40
+timestamp: '2026-04-11T09:50:29.033112+00:00'
+title: Q4318022
+turns: 1
+value_label: null
+verdict: verified-high

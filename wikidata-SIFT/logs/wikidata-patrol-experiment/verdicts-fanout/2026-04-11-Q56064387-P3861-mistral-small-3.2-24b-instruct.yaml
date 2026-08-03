@@ -1,0 +1,22 @@
+completion_tokens: 949
+cost_usd: 0.00258804
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29767
+property: P3861
+property_label: App Store app ID
+rationale: The URL of the App Store page confirms that '613066215' is the correct
+  App Store app ID for Superbru. There is no evidence to confirm or deny the removal
+  of the Bundle ID qualifier.
+rcid: 2550629012
+revid: 2473959282
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://apps.apple.com/gh/app/superbru/id613066215
+timestamp: '2026-04-11T15:31:33.407769+00:00'
+title: Q56064387
+turns: 3
+value_label: null
+verdict: verified-high

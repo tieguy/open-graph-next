@@ -1,0 +1,30 @@
+completion_tokens: 1278
+cost_usd: 0.0121738
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 57035
+property: P17
+property_label: country
+rationale: There is no independent, reliable evidence that Samudra Pasai is recognized
+  as a modern country. All available context describes it as a historical sultanate
+  within Aceh, not as a contemporary sovereign state. The edit lacks supporting references
+  and sets a self-referential country value, which is inconsistent with standard Wikidata
+  practices.
+rcid: null
+revid: 2471647352
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Samudra_Pasai
+- provenance: reported
+  supports_claim: false
+  url: https://id.wikipedia.org/wiki/Samudra_Pasai
+- provenance: reported
+  supports_claim: false
+  url: https://data.wikimedia.org/
+timestamp: '2026-04-07T12:59:07.014942+00:00'
+title: Q3284315
+turns: 7
+value_label: Samudra Pasai
+verdict: unverifiable

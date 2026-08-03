@@ -1,0 +1,26 @@
+completion_tokens: 1075
+cost_usd: 0.0054264
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23907
+property: P54
+property_label: member of sports team
+rationale: There is no reliable evidence that 'Kurdistan Province' is a sports team
+  associated with Elias Hadaya. Transfermarkt and other searches confirm his club
+  history does not include this entity. The only cited reference is an import from
+  Norwegian Wikipedia, which is not a reliable source for this claim.
+rcid: 2549663044
+revid: 2473023270
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.transfermarkt.us/ Elias Hadaya/profil/spieler/272542/verein/ Levanger-FK/
+- provenance: reported
+  supports_claim: false
+  url: https://no.wikipedia.org/wiki/Elias_Hadaya
+timestamp: '2026-04-07T07:29:47.789975+00:00'
+title: Q89080747
+turns: 4
+value_label: Kurdistan Province
+verdict: incorrect

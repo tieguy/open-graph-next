@@ -1,0 +1,32 @@
+completion_tokens: 1807
+cost_usd: 0.01313604
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 189069
+property: P268
+property_label: Bibliothèque nationale de France ID
+rationale: The necessary information to verify the change from '17001362r' to '14022014'
+  for the Bibliothèque nationale de France ID related to CAPTCHA could not be found
+  in the available sources. The sources consulted did not provide specific details
+  about these IDs.
+rcid: 2549625894
+revid: 2472987257
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://dculturelles.hypotheses.org/tag/captcha
+- provenance: verified
+  supports_claim: false
+  url: https://www.centre-mersenne.org/en/identifiers/
+- provenance: verified
+  supports_claim: false
+  url: https://www.idref.fr/03361122X
+- provenance: verified
+  supports_claim: false
+  url: http://captcha.net
+timestamp: '2026-04-11T14:50:20.075837+00:00'
+title: Q484598
+turns: 15
+value_label: null
+verdict: unverifiable

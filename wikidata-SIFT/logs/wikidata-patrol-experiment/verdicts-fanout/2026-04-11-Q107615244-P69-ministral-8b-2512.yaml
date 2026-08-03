@@ -1,0 +1,31 @@
+completion_tokens: 1929
+cost_usd: 0.00276222
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35123
+property: P69
+property_label: educated at
+rationale: The removed claim that O Dae-geoyong (Q107615244) was educated at Kangwon
+  National University (Q497259) lacked any references and was not supported by the
+  prefetched sources. Kangwon National University is primarily known for fields like
+  science, engineering, and agriculture, not literature, and none of the verified
+  sources (faculty lists, university profiles) mention O Dae-geoyong or his education
+  there. The removal was justified due to the absence of evidence.
+rcid: 2550198098
+revid: 2473541049
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://gaem.kangwon.ac.kr/FacultyList.asp
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/institution/Kangwon_National_University/members/5
+- provenance: verified
+  supports_claim: false
+  url: https://www.topuniversities.com/universities/kangwon-national-university
+timestamp: '2026-04-11T10:45:53.275769+00:00'
+title: Q107615244
+turns: 4
+value_label: Kangwon National University
+verdict: verified-high

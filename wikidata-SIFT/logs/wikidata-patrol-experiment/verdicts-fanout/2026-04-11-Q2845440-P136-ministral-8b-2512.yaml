@@ -1,0 +1,29 @@
+completion_tokens: 1841
+cost_usd: 0.0019122599999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17103
+property: P136
+property_label: genre
+rationale: The new genre value 'pop rock' (Q484641) is supported by independent sources
+  that describe Anarbor's music as a blend of pop punk and rock, aligning more accurately
+  with the new value than the previous 'rock music' (Q11399), which was too generic.
+  The Less Than Jake Wiki explicitly lists the genre as 'Pop Punk Alternative Rock,'
+  and Equipboard describes their sound as a mix of pop punk, modern rock, and neon
+  pop punk influences. These sources confirm that 'pop rock' is a valid and precise
+  classification for Anarbor's genre.
+rcid: 2550848252
+revid: 2474172029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://lessthanjake.fandom.com/wiki/Anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://equipboard.com/band/anarbor
+timestamp: '2026-04-11T07:32:05.648909+00:00'
+title: Q2845440
+turns: 1
+value_label: pop rock
+verdict: verified-high

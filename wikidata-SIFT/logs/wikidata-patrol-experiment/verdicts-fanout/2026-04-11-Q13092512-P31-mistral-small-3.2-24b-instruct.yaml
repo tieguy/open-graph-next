@@ -1,0 +1,28 @@
+completion_tokens: 1357
+cost_usd: 0.003212375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33184
+property: P31
+property_label: instance of
+rationale: The change from 'musical work/composition' to 'folk music' for 'Cublak-Cublak
+  Suweng' is supported by multiple independent sources. The sources describe it as
+  a folk song from Indonesia, which justifies the edit.
+rcid: 2550310973
+revid: 2473650715
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bethsnotesplus.com/2024/05/cublak-cublak-suweng.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.mamalisa.com/?t=es&p=3274
+- provenance: verified
+  supports_claim: true
+  url: https://www.scribd.com/doc/315708498/TBB-01
+timestamp: '2026-04-11T16:21:56.431102+00:00'
+title: Q13092512
+turns: 4
+value_label: folk music
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 1408
+cost_usd: 0.00209751
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18771
+property: P17
+property_label: country
+rationale: The edit incorrectly changed Taringa!'s country from Argentina (Q414) to
+  Afghanistan (Q889). The official news source (Infobae) explicitly confirms Taringa!
+  as an Argentine social network, with no credible evidence linking it to Afghanistan.
+  The change is unsupported by verified sources and contradicts established facts
+  about Taringa!'s origin.
+rcid: 2550475083
+revid: 2473811409
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.infobae.com/tecno/2024/03/24/taringa-la-famosa-red-social-argentina-cierra-hoy-sus-servicios-despues-de-veinte-anos/
+- provenance: verified
+  supports_claim: false
+  url: https://www.taringa.net/
+timestamp: '2026-04-11T11:58:18.909445+00:00'
+title: Q2035715
+turns: 1
+value_label: Afghanistan
+verdict: incorrect

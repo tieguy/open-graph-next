@@ -1,0 +1,28 @@
+completion_tokens: 1407
+cost_usd: 0.0020953400000000002
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22928
+property: P1971
+property_label: number of children
+rationale: 'The sources consistently indicate that Masoud Pezeshkian has four children:
+  three remaining children (a daughter and two sons) and one deceased son. Therefore,
+  the removal of the claim that he has four children is incorrect.'
+rcid: 2551335576
+revid: 2474642108
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://wanaen.com/the-unmarried-presidents-daughter-got-the-first-daughter-title/
+- provenance: verified
+  supports_claim: true
+  url: https://www.newscentralasia.net/2024/07/08/looking-at-masoud-pezeshkian-from-a-different-angle/
+- provenance: verified
+  supports_claim: true
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+timestamp: '2026-04-11T14:29:35.993244+00:00'
+title: Q5933752
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 2382
+cost_usd: 0.00745917
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56767
+property: P569
+property_label: date of birth
+rationale: The claim that Sofia Coppola's date of birth is 14 May 1971 is contradicted
+  by multiple verified independent sources. Encyclopedia.com and Notable Biographies
+  both state her birth date is 12 May 1971. The cited references (GND and RKDartists)
+  could not be verified directly, but the majority of authoritative sources support
+  the alternative date. The edit is therefore incorrect.
+rcid: null
+revid: 2471331014
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/people/literature-and-arts/film-and-television-biographies/sofia-coppola
+- provenance: verified
+  supports_claim: false
+  url: https://www.notablebiographies.com/news/Ca-Ge/Coppola-Sofia.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.thefamouspeople.com/profiles/sofia-coppola-4385.php
+timestamp: '2026-04-11T17:31:21.390222+00:00'
+title: Q193628
+turns: 2
+value_label: null
+verdict: incorrect

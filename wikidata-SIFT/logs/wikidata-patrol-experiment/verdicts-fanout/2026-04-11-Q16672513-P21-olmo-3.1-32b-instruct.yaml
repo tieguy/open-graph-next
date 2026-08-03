@@ -1,0 +1,30 @@
+completion_tokens: 1641
+cost_usd: 0.0033753999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11954
+property: P21
+property_label: sex or gender
+rationale: There is no reliable, independent source confirming that Renaud Gromeulen
+  identifies as transmasculine. The cited fandom wiki is not an authoritative reference
+  for identity claims, and searches of Wikipedia, news, and official profiles provide
+  no confirmation. Therefore, the change from 'male' to 'transmasculine' is unsupported
+  and should be treated as suspect.
+rcid: 2549294702
+revid: 2472663578
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gender.fandom.com/wiki/Transmasculine
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Renaud_Gromeulen
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Renaud_Gromeulen
+timestamp: '2026-04-11T11:47:44.340502+00:00'
+title: Q16672513
+turns: 1
+value_label: transmasculine
+verdict: suspect

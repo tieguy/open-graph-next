@@ -1,0 +1,26 @@
+completion_tokens: 1459
+cost_usd: 0.00144594
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16278
+property: P566
+property_label: has basionym
+rationale: The change from 'Eupatorium rebaudianum' to 'gay' for the 'has basionym'
+  property of candyleaf (Stevia rebaudiana) is incorrect. Multiple reliable sources
+  confirm 'Eupatorium rebaudianum' as the correct basionym, while there is no evidence
+  supporting 'gay' as a valid basionym for this plant.
+rcid: 2550294426
+revid: 2473634449
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pfaf.org/user/plant.aspx?latinname=Stevia+rebaudiana
+- provenance: verified
+  supports_claim: false
+  url: https://seemnemaailm.com/en/stevia-rebaudiana.html
+timestamp: '2026-04-11T14:14:22.723162+00:00'
+title: Q7213452
+turns: 1
+value_label: gay
+verdict: incorrect

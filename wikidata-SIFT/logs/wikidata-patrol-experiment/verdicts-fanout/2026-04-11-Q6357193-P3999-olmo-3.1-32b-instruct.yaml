@@ -1,0 +1,33 @@
+completion_tokens: 2057
+cost_usd: 0.0040558
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14108
+property: P3999
+property_label: date of official closure
+rationale: Multiple independent and primary sources confirm that Kami-Shishiori Station
+  officially closed on 1 April 2020. The old value (March 2011) is not supported by
+  the cited Wikipedia revision or by other sources; in fact, the Wikipedia revision
+  already states the closure was in 2020. The new value is therefore correct and properly
+  referenced by primary and secondary evidence.
+rcid: 2550475086
+revid: 2473811414
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.namu.wiki/w/%EC%8B%9C%EC%8B%9C%EC%98%A4%EB%A6%AC%EC%B9%B4%EB%9D%BC%EC%BF%A0%EC%99%80%EC%97%AD
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Kami-Shishiori_Station
+- provenance: verified
+  supports_claim: true
+  url: https://www3.nhk.or.jp/news/html/20200327/k10013082621000t2.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Kami-Shishiori_Station&oldid=791473602
+timestamp: '2026-04-11T14:15:34.459801+00:00'
+title: Q6357193
+turns: 1
+value_label: null
+verdict: verified-high

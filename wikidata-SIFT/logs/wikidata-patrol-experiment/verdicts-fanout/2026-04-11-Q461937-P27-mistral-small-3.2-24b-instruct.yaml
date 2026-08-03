@@ -1,0 +1,35 @@
+completion_tokens: 1916
+cost_usd: 0.0024278187499999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23488
+property: P27
+property_label: country of citizenship
+rationale: The edit changes the country of citizenship from Mexico to Marroca [de].
+  However, multiple independent sources confirm that María Izquierdo was born and
+  lived in Mexico. There is no evidence supporting the new value "Marroca [de]", and
+  the edit was reverted, indicating it was likely incorrect.
+rcid: 2549596620
+revid: 2472958694
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://awarewomenartists.com/en/artiste/maria-izquierdo/
+- provenance: verified
+  supports_claim: true
+  url: https://medium.com/@arteoriginal.co/mar%C3%ADa-izquierdo-overshadowed-color-in-the-history-of-mexican-art-a01f2f953181
+- provenance: verified
+  supports_claim: true
+  url: https://www.admagazine.com/cultura/maria-izquierdo-lo-que-no-sabias-de-la-pintora-surrealista-20200406-6229-articulos
+- provenance: verified
+  supports_claim: true
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+- provenance: verified
+  supports_claim: true
+  url: https://www.infinite-women.com/women/maria-izquierdo/
+timestamp: '2026-04-11T06:57:06.530433+00:00'
+title: Q461937
+turns: 1
+value_label: Marroca [de]
+verdict: incorrect

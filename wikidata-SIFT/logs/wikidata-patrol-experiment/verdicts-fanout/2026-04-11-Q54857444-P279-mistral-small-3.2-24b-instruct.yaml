@@ -1,0 +1,25 @@
+completion_tokens: 1162
+cost_usd: 0.0025714625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25825
+property: P279
+property_label: subclass of
+rationale: The removed claim had no references, and the independent sources consulted
+  do not provide clear evidence to confirm or deny the classification of 'magic school'
+  as a 'location in a fictional work.' Therefore, the verdict is unverifiable.
+rcid: 2551339587
+revid: 2474645842
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Main/WizardingSchool
+- provenance: verified
+  supports_claim: false
+  url: https://www.michelandregauthier.com/magic-schols-in-literature
+timestamp: '2026-04-11T11:36:37.761084+00:00'
+title: Q54857444
+turns: 3
+value_label: location in a fictional work
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1980
+cost_usd: 0.00313311
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25103
+property: P54
+property_label: member of sports team
+rationale: The edit incorrectly changes Dom James' membership from the Tune Squad
+  (Q56850085) to the Goon Squad (Q108306598). Independent sources from Fandom confirm
+  Dom James is currently a member of the Tune Squad and was only part of the Goon
+  Squad before joining the Tune Squad. The narrative timeline and character role align
+  with the Tune Squad affiliation.
+rcid: 2550863905
+revid: 2474187409
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hero.fandom.com/wiki/Dom_James
+- provenance: verified
+  supports_claim: true
+  url: https://protagonists.fandom.com/wiki/Dom_James
+- provenance: verified
+  supports_claim: false
+  url: https://heroes-and-villains.fandom.com/wiki/Goon_Squad
+timestamp: '2026-04-11T18:44:50.054560+00:00'
+title: Q108312450
+turns: 1
+value_label: Goon Squad
+verdict: incorrect

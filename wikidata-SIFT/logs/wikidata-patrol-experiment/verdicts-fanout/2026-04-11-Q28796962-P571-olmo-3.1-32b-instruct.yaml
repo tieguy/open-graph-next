@@ -1,0 +1,30 @@
+completion_tokens: 2058
+cost_usd: 0.0044202
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15927
+property: P571
+property_label: inception
+rationale: Independent, reliable museum sources (Google Arts & Culture and Pinacoteca
+  de São Paulo) confirm that 'Escrava Romana' by Oscar Pereira da Silva was created
+  in 1894. The previously claimed date of 1882 is not supported by these sources and
+  appears to be incorrect. Although the cited reference in the edit could not be fetched,
+  the new value is well-supported by independent evidence.
+rcid: 2550489005
+revid: 2473824742
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artsandculture.google.com/asset/escrava-romana-roman-slave-oscar-pereira-da-silva/o6i1QkGKjJc
+- provenance: verified
+  supports_claim: true
+  url: http://www.pinacotecasp.org.br/
+- provenance: unreachable
+  supports_claim: false
+  url: http://enciclopedia.itaucultural.org.br/obra3249/escrava-romana
+timestamp: '2026-04-11T07:54:06.932220+00:00'
+title: Q28796962
+turns: 1
+value_label: null
+verdict: verified-high

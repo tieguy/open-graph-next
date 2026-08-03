@@ -1,0 +1,23 @@
+completion_tokens: 655
+cost_usd: 0.00371155
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 71611
+property: P31
+property_label: instance of
+rationale: No independently verifiable sources were found to confirm or refute the
+  claim that Amalia González Caballero de Castillo Ledón is a diplomat. Multiple search
+  variations failed to locate any relevant web pages. Since no qualitative evidence
+  was available, the claim remains unverifiable.
+rcid: 2550063540
+revid: 2473410647
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q5671619
+timestamp: '2026-04-07T12:43:39.292774+00:00'
+title: Q5671619
+turns: 12
+value_label: diplomat
+verdict: unverifiable

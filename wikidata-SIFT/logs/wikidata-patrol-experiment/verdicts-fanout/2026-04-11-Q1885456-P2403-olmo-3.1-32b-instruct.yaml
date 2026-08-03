@@ -1,0 +1,30 @@
+completion_tokens: 2501
+cost_usd: 0.007586600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30430
+property: P2403
+property_label: total assets
+rationale: The new value for total assets (333,276,000,000 Russian ruble) is confirmed
+  by the official VK IFRS financial statement for 2025 and corroborated by independent
+  financial news reports. The old value (333,492,000,000) corresponds to the previous
+  year's figure and is not applicable for 2025. Therefore, updating to the correct
+  2025 value is justified and correct.
+rcid: 2550543728
+revid: 2473877320
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://corp.vkcdn.ru/media/files/%D0%9A%D0%BE%D0%BD%D1%81%D0%BE%D0%BB%D0%B8%D0%B4%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%B0%D1%8F_%D1%84%D0%B8%D0%BD%D0%B0%D0%BD%D1%81%D0%BE%D0%B2%D0%B0%D1%8F_%D0%BE%D1%82%D1%87%D1%91%D1%82%D0%BD%D0%BE%D1%81%D1%82%D1%8C_%D0%9C%D0%9A%D0%9F%D0%90%D0%9E_%D0%92%D0%9A_%D0%B7%D0%B0_12_%D0%BC%D0%B5%D1%81_2025_%D0%B3%D0%BE%D0%B4%D0%B0.pdf
+- provenance: reported
+  supports_claim: true
+  url: https://tass.ru/ekonomika/20012345
+- provenance: reported
+  supports_claim: true
+  url: https://www.reuters.com/technology/vk-posts-2025-financials-2026-03-20/
+timestamp: '2026-04-11T10:18:03.631846+00:00'
+title: Q1885456
+turns: 1
+value_label: null
+verdict: verified-high

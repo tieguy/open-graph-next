@@ -1,0 +1,22 @@
+completion_tokens: 988
+cost_usd: 0.0045357999999999996
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19715
+property: P569
+property_label: date of birth
+rationale: The cited GND authority file confirms that Kristian Kroschel's life dates
+  begin in 1942, supporting the year-level claim. However, it does not provide a specific
+  day or month of birth, so the exact date cannot be verified by the reference.
+rcid: 2540942340
+revid: 2464731827
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/13189269X
+timestamp: '2026-02-20T13:42:16.665185+00:00'
+title: Q130773068
+turns: 4
+value_label: null
+verdict: verified-low

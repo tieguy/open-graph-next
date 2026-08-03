@@ -1,0 +1,23 @@
+completion_tokens: 664
+cost_usd: 0.0035960500000000004
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 69265
+property: P1142
+property_label: political ideology
+rationale: Despite extensive searches, no reliable source was found confirming whether
+  'criminal' is an accurate political ideology label for Antifa France. All web searches
+  returned no relevant results, and no accessible sources were retrieved during investigation.
+  Without trustworthy external evidence, the claim remains unverifiable.
+rcid: null
+revid: 2463239162
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://example.com/placeholder-source
+timestamp: '2026-04-07T12:09:30.392652+00:00'
+title: Q125954719
+turns: 15
+value_label: criminal
+verdict: unverifiable

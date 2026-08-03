@@ -1,0 +1,31 @@
+completion_tokens: 822
+cost_usd: 0.011171400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 53391
+property: P856
+property_label: official website
+rationale: There is no evidence supporting https://www.finnair.com as the official
+  website of Nikaho, and the previous value https://www.city.nikaho.akita.jp/ is the
+  standard municipal site for Nikaho City. Multiple searches and a failed fetch attempt
+  did not yield any confirmation that the change is legitimate. Changing a municipal
+  website to a commercial airline domain is highly unlikely and unsupported by any
+  reference or independent source.
+rcid: null
+revid: 2471596609
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.nikaho.akita.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nikaho,_Akita
+- provenance: unreachable (blocked domain)
+  supports_claim: false
+  url: https://www.finnair.com
+timestamp: '2026-04-07T11:25:41.419200+00:00'
+title: Q847550
+turns: 7
+value_label: null
+verdict: suspect

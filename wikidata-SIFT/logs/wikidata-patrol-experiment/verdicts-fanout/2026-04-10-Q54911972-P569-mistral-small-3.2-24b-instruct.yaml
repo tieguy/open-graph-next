@@ -1,0 +1,23 @@
+completion_tokens: 852
+cost_usd: 0.006679549999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71431
+property: P569
+property_label: date of birth
+rationale: The reference URL provided in the edit could not be fetched successfully,
+  and the search results did not yield any direct information confirming Elsie Margaret
+  Clifford's date of birth as 4 June 1886. Therefore, the claim cannot be verified
+  with the available evidence.
+rcid: 2550754799
+revid: 2474080915
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cheltenhammuseum.org.uk/collection/two-women-archaeologists-of-gloucestershire/
+timestamp: '2026-04-10T13:12:03.627206+00:00'
+title: Q54911972
+turns: 6
+value_label: null
+verdict: unverifiable

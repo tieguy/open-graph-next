@@ -1,0 +1,33 @@
+completion_tokens: 1551
+cost_usd: 0.0028309249999999998
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25786
+property: P106
+property_label: occupation
+rationale: The claim that Danny Balgley is a visual artist is strongly supported by
+  multiple independent sources, including primary sources like the Wexler Gallery
+  and secondary sources like the I Like Your Work Podcast, Booooooom, and MutualArt.
+  These sources provide consistent and detailed information about his artistic background,
+  education, and exhibitions.
+rcid: 2540974279
+revid: 2464761115
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wexlergallery.com/secondary-artists/danny-balgley
+- provenance: verified
+  supports_claim: true
+  url: https://www.ilikeyourworkpodcast.com/post/artist-danny-balgley
+- provenance: verified
+  supports_claim: true
+  url: https://www.booooooom.com/2013/04/18/artist-painter-danny-balgley/
+- provenance: verified
+  supports_claim: true
+  url: https://www.mutualart.com/Artist/Danny-Balgley/5E419165382E67C9
+timestamp: '2026-02-20T02:38:53.326562+00:00'
+title: Q138350070
+turns: 4
+value_label: visual artist
+verdict: verified-high

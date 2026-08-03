@@ -1,0 +1,32 @@
+completion_tokens: 2269
+cost_usd: 0.008097775
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 79259
+property: P106
+property_label: occupation
+rationale: The claim that Eliphas Levi was a short story writer is supported by the
+  mention of 'The Wizard of Meudon' as two short novels. However, other sources primarily
+  describe him as an esoteric writer and occultist, with no further mention of short
+  story writing. This provides some evidence but is not conclusive.
+rcid: 2550646412
+revid: 2473976401
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Eliphas-Levi/e/B0034NHSQY
+- provenance: verified
+  supports_claim: true
+  url: https://bestofbooksok.com/search?type=author&q=Levi,+Eliphas&page=5
+- provenance: verified
+  supports_claim: false
+  url: https://www.audible.com/pd/Notes-on-the-Astral-Light-Esoteric-Classics-Audiobook/B07GZXZHNL
+- provenance: verified
+  supports_claim: false
+  url: https://www.thriftbooks.com/a/liphas-lvi/270715/
+timestamp: '2026-04-10T12:00:46.750202+00:00'
+title: Q274681
+turns: 6
+value_label: short story writer
+verdict: verified-low

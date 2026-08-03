@@ -1,0 +1,27 @@
+completion_tokens: 1946
+cost_usd: 0.0030631499999999997
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34693
+property: P734
+property_label: family name
+rationale: The removal of 'Valverde' as the family name for Enrique Obregón Valverde
+  (Q16562277) is incorrect. Multiple verified sources, including Costa Rican media
+  outlets (La Nación and Surcos Digital), explicitly confirm that 'Valverde' is the
+  correct family name. The current Wikidata item incorrectly lists 'Obregón' as both
+  the given name and family name, which contradicts authoritative references.
+rcid: 2551109157
+revid: 2474424804
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nacion.com/el-pais/politica/fallece-enrique-obregon-valverde-escritor-politico/2CMDBNH3R5F6BLAQEJ4RU34KMI/story/
+- provenance: verified
+  supports_claim: true
+  url: https://surcosdigital.com/in-memoriam-don-enrique-obregon-valverde/
+timestamp: '2026-04-10T13:13:44.287892+00:00'
+title: Q16562277
+turns: 4
+value_label: Valverde
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 1822
+cost_usd: 0.034415
+diff_type: qualifier_removed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 25305
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The claim that Ayaan Dhalait speaks and writes English is strongly supported
+  by multiple independent primary sources. His official website (ayaan.is-a.dev),
+  GitHub profile, and Dev.to profile are all written in English and document his professional
+  work as a software developer and programmer. All sources consistently confirm English
+  language proficiency and use. However, the edit itself cites no reference, and the
+  specific question about qualifier removal cannot be fully addressed without the
+  previous statement state.
+rcid: 2540965133
+revid: 2464752767
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ayaan.is-a.dev
+- provenance: verified
+  supports_claim: true
+  url: https://ayaandhalait.github.io/
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/AyaanDhalait
+- provenance: verified
+  supports_claim: true
+  url: https://dev.to/ayaandhalait
+timestamp: '2026-02-20T03:54:18.851719+00:00'
+title: Q138349870
+turns: 3
+value_label: English
+verdict: verified-high

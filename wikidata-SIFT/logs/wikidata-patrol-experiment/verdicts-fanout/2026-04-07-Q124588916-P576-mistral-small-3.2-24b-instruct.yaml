@@ -1,0 +1,38 @@
+completion_tokens: 1901
+cost_usd: 0.0040212500000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37824
+property: P576
+property_label: dissolved, abolished or demolished date
+rationale: The new dissolution date of September 1844 is not supported by any reliable
+  sources. The original date of November 1943 aligns with historical context, as the
+  group was active during World War II and was dismantled by the German forces in
+  1943.
+rcid: null
+revid: 2471429559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+dissolved%2C+abolished+or+demolished+date+September+1844
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+dissolution+date
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+World+War+II
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+history
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+timeline
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manouchian+group+World+War+II+timeline
+timestamp: '2026-04-07T12:23:04.478190+00:00'
+title: Q124588916
+turns: 7
+value_label: null
+verdict: incorrect

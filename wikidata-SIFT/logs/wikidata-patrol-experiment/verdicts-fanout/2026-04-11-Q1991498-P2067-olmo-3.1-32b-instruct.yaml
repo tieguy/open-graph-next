@@ -1,0 +1,40 @@
+completion_tokens: 1939
+cost_usd: 0.0045754
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17060
+property: P2067
+property_label: mass
+rationale: Neither the new value '3,620 pound' nor the old value '+155' for mass are
+  supported by any reliable or independent source. The cited English Wikipedia page
+  does not mention Josep Maria Guzmán's mass or weight, and multiple reputable sports
+  sources (ACB.com, Basketball Reference, FIBA, RealGM, and Spanish Wikipedia) only
+  list his height. Introducing unsourced mass information is not in line with Wikidata
+  best practices.
+rcid: 2550211455
+revid: 2473554072
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jos%C3%A9_Maria_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://www.basketball-reference.com/players/g/guzmanjo01.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.acb.com/en/players/josep-maria-guzman/100055
+- provenance: verified
+  supports_claim: false
+  url: https://www.realgm.com/josep-maria-guzman-119841
+- provenance: verified
+  supports_claim: false
+  url: https://www.fiba.basketball/player/138658/josep-maria-guzman
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jos%C3%A9_Mar%C3%ADa_Guzm%C3%A1n
+timestamp: '2026-04-11T13:24:09.467834+00:00'
+title: Q1991498
+turns: 1
+value_label: null
+verdict: suspect

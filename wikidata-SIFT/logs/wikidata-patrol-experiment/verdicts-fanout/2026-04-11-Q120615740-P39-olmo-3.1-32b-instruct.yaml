@@ -1,0 +1,35 @@
+completion_tokens: 895
+cost_usd: 0.0034532
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14581
+property: P39
+property_label: position held
+rationale: The removed claim stated that Gallagher Fenwick held the position of 'director'
+  at France 24 from 2018 to 2022. However, none of the independently fetched and verified
+  sources provide confirmation of this role for Gallagher Fenwick. The most relevant
+  news source fetched (Telerama) discusses management changes at France 24 but does
+  not mention Gallagher Fenwick or his directorship. Other sources either do not provide
+  employment details or are inaccessible. Therefore, there is no live, independently
+  verifiable evidence supporting or contradicting the removed claim.
+rcid: null
+revid: 2471531273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.telerama.fr/ecrans/a-france-24-les-journalistes-votent-la-levee-de-la-greve-mais-restent-vigilants-7005149.php
+- provenance: verified
+  supports_claim: false
+  url: https://booknode.com/auteur/gallagher-fenwick/biographie
+- provenance: verified
+  supports_claim: false
+  url: https://www.allocine.fr/personne/fichepersonne_gen_cpersonne=223547.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.babelio.com/auteur/Gallagher-Fenwick/614728
+timestamp: '2026-04-11T18:42:19.858527+00:00'
+title: Q120615740
+turns: 1
+value_label: director
+verdict: unverifiable

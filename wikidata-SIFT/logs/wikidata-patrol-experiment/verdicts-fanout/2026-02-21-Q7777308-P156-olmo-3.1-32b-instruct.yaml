@@ -1,0 +1,31 @@
+completion_tokens: 2147
+cost_usd: 0.0057288
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22203
+property: P156
+property_label: followed by
+rationale: Official sources from Nox Arcana's website confirm a close thematic and
+  collaborative relationship between 'Theater of Illusion' and 'House of Nightmares,'
+  both released in 2010 with artist involvement from Joseph Vargo. However, explicit
+  confirmation of a formal 'followed by' sequence is not found in the fetched sources.
+  The evidence supports a plausible connection but not a strictly defined sequential
+  order.
+rcid: 2541055215
+revid: 2464837480
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/illusion.html
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/music.html
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/nightmares.html
+timestamp: '2026-02-21T04:08:51.058654+00:00'
+title: Q7777308
+turns: 2
+value_label: House of Nightmares
+verdict: verified-low

@@ -1,0 +1,29 @@
+completion_tokens: 1802
+cost_usd: 0.0069076
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29132
+property: P451
+property_label: unmarried partner
+rationale: The new references provided after the edit do not explicitly confirm that
+  Joseph Glasco and William Goyen were unmarried partners. The UT Austin PDF and the
+  Texas Monthly article, both fetched and verified, do not mention this relationship.
+  No independently verified source was found to support the claim.
+rcid: 2550519876
+revid: 2473854158
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://norman.hrc.utexas.edu/fasearch/pdf/00507.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.texasmonthly.com/arts-entertainment/in-search-of-william-goyen/
+- provenance: reported
+  supports_claim: false
+  url: https://www.moma.org/artists/495
+timestamp: '2026-04-11T14:33:18.537537+00:00'
+title: Q6283474
+turns: 1
+value_label: William Goyen
+verdict: unverifiable

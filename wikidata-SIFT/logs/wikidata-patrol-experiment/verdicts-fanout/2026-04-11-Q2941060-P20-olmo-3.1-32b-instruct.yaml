@@ -1,0 +1,29 @@
+completion_tokens: 2143
+cost_usd: 0.0040776
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13959
+property: P20
+property_label: place of death
+rationale: Multiple primary and reputable secondary sources explicitly confirm that
+  Casimir Reymond died in Lausanne in 1969. There is no evidence from these sources
+  that he died in Vaulion. Therefore, changing the place of death from Vaulion to
+  Lausanne is correct and well-supported.
+rcid: 2551376211
+revid: 2474680960
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sikart.ch/en/person/4023469
+- provenance: verified
+  supports_claim: true
+  url: https://data.bnf.fr/ark:/12148/cb136858861
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Casimir_Reymond
+timestamp: '2026-04-11T10:32:37.109094+00:00'
+title: Q2941060
+turns: 1
+value_label: Lausanne
+verdict: verified-high

@@ -1,0 +1,29 @@
+completion_tokens: 2612
+cost_usd: 0.00987183
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 105799
+property: P21
+property_label: sex or gender
+rationale: The claim that Rosalía de Castro (Q464264) was 'faʻafafine' (Q1399232)
+  is not supported by any credible or accessible source. The cited references (BnF
+  authorities and GND) either do not support the claim or are inaccessible for verification.
+  Historical and biographical sources consistently document Rosalía de Castro as a
+  female poet, and there is no evidence linking her to the Samoan cultural identity
+  of 'faʻafafine'. The new value contradicts established historical context and lacks
+  independent corroboration.
+rcid: 2549245283
+revid: 2472616627
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.data.bnf.fr/120604552
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118935267
+timestamp: '2026-04-11T16:56:43.031660+00:00'
+title: Q464264
+turns: 6
+value_label: faʻafafine
+verdict: incorrect

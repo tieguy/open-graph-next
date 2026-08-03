@@ -1,0 +1,35 @@
+completion_tokens: 1675
+cost_usd: 0.02798424
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 78914
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: The LinkedIn profile URL linkedin.com/in/francissevin is a blocked domain,
+  preventing direct verification of whether this profile belongs to the French politician
+  Francis Sevin. Independent web searches confirmed the existence of Francis Sevin
+  as a deputy mayor in Sartrouville and president of the GEBS business group, but
+  none of the found sources mention or link to a LinkedIn profile. Without access
+  to the LinkedIn profile itself or a reliable secondary source confirming the profile's
+  connection, the correctness of the identifier cannot be established.
+rcid: 2540920242
+revid: 2464711305
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.linkedin.com/in/francissevin
+- provenance: verified
+  supports_claim: false
+  url: https://www.sartrouville.fr/portrait/francis-sevin/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sartrouville.fr/ma-ville/conseil-municipal/le-maire-et-les-elus/
+- provenance: verified
+  supports_claim: false
+  url: https://www.saintgermainbouclesdeseine.fr/entreprendre/se-developper/les-reseaux-dentreprise-et-les-partenaires/
+timestamp: '2026-02-21T01:15:17.038008+00:00'
+title: Q137844713
+turns: 11
+value_label: null
+verdict: unverifiable

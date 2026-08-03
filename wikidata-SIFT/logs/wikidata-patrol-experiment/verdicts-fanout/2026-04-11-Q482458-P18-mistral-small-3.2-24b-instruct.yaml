@@ -1,0 +1,23 @@
+completion_tokens: 1211
+cost_usd: 0.0026342500000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26393
+property: P18
+property_label: image
+rationale: The edit changes the image of the Hyundai Sonata. There are no references
+  cited for the new image, and we couldn't find independent sources for either the
+  old or the new image. Given the lack of references and independent verification,
+  the verdict is unverifiable.
+rcid: 2550728569
+revid: 2474055982
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.hyundaiusa.com/us/en/vehicles/sonata/gallery
+timestamp: '2026-04-11T11:20:56.913073+00:00'
+title: Q482458
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,35 @@
+completion_tokens: 1782
+cost_usd: 0.014412250000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 143262
+property: P18
+property_label: image
+rationale: The investigation found multiple references to the 2024 Maserati GranTurismo
+  Trofeo in Grigio Cangiante, confirming the car's existence and specifications. However,
+  no specific image matching the exact filename '2024 Maserati GranTurismo Trofeo
+  in Grigio Cangiante, front right.jpg' was found. The sources provide detailed descriptions
+  and reviews of the car but do not include the specific image required to verify
+  the claim. Therefore, the claim remains unverifiable due to the lack of direct visual
+  evidence.
+rcid: 2540983469
+revid: 2464769840
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.caranddriver.com/reviews/a60466315/2024-maserati-granturismo-trofeo-test/
+- provenance: verified
+  supports_claim: true
+  url: https://buildmaserati.dealerleads.com/vehicle/maserati-granturismo_trofeo
+- provenance: verified
+  supports_claim: true
+  url: https://news.dupontregistry.com/blogs/articles/review-the-2024-maserati-granturismo-trofeo-doesnt-split-the-difference
+- provenance: verified
+  supports_claim: true
+  url: https://www.supercars.net/blog/the-new-maserati-gran-turismo-trofeo-prima-serie-limited-edition/
+timestamp: '2026-02-19T23:17:31.014933+00:00'
+title: Q123038
+turns: 14
+value_label: null
+verdict: unverifiable

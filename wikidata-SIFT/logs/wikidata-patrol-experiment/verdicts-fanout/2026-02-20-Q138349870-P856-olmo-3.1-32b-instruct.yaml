@@ -1,0 +1,31 @@
+completion_tokens: 1076
+cost_usd: 0.0034168
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13856
+property: P856
+property_label: official website
+rationale: There is no independent, verified source that confirms https://ayaan.is-a.dev
+  as the official website of Ayaan Dhalait. The claim is based solely on the provided
+  website, which has not been externally corroborated.
+rcid: 2540964631
+revid: 2464752273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ayaandhalait.github.io/
+- provenance: verified
+  supports_claim: false
+  url: https://dev.to/ayaandhalait
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/AyaanDhalait
+- provenance: verified
+  supports_claim: false
+  url: https://ayaan.is-a.dev
+timestamp: '2026-02-20T03:56:43.323171+00:00'
+title: Q138349870
+turns: 2
+value_label: null
+verdict: unverifiable

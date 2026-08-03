@@ -1,0 +1,28 @@
+completion_tokens: 1639
+cost_usd: 0.00181565125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14589
+property: P5817
+property_label: state of use
+rationale: The independent sources found support the station being in use, but the
+  evidence is not as strong as having a primary source or multiple independent sources
+  explicitly stating the current state of use.
+rcid: 2550460673
+revid: 2473797138
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Hosoura_Station
+- provenance: verified
+  supports_claim: true
+  url: https://en.wtmnews.net/20200314153
+- provenance: verified
+  supports_claim: true
+  url: https://www.japan-guide.com/e/e5035.html
+timestamp: '2026-04-11T11:00:34.435565+00:00'
+title: Q8189404
+turns: 1
+value_label: in use
+verdict: verified-low

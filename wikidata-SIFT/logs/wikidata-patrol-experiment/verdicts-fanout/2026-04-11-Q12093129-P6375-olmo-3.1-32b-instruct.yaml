@@ -1,0 +1,25 @@
+completion_tokens: 2235
+cost_usd: 0.0038628000000000004
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12609
+property: P6375
+property_label: street address
+rationale: The removed address was incorrect (wrong postal code), as confirmed by
+  the institution's official website and Wikipedia. The address was not referenced
+  and thus its removal is justified. However, the correct address should be added.
+rcid: 2550561460
+revid: 2473894151
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://viknu.mil.gov.ua/contacts
+- provenance: verified
+  supports_claim: false
+  url: https://uk.wikipedia.org/wiki/Військовий_інститут_ім._Тараса_Шевченка
+timestamp: '2026-04-11T16:24:09.552137+00:00'
+title: Q12093129
+turns: 1
+value_label: null
+verdict: verified-high

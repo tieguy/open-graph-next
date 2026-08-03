@@ -1,0 +1,29 @@
+completion_tokens: 1500
+cost_usd: 0.0039514
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15257
+property: P577
+property_label: publication date
+rationale: The value '203. century' is syntactically invalid and factually incorrect.
+  Authoritative sources—including the publisher's website, Wikipedia, and Amazon—confirm
+  that the first edition of Good Night Stories for Rebel Girls was published in 2016.
+  There is no evidence supporting a publication in the 22nd century.
+rcid: null
+revid: 2473296413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Good_Night_Stories_for_Rebel_Girls
+- provenance: verified
+  supports_claim: false
+  url: https://rebelgirls.com/en/books/good-night-stories-for-rebel-girls
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Good-Night-Stories-Rebel-Girls/dp/014198600X
+timestamp: '2026-04-10T14:08:53.885906+00:00'
+title: Q48966676
+turns: 1
+value_label: null
+verdict: incorrect

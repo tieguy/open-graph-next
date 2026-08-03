@@ -1,0 +1,28 @@
+completion_tokens: 1844
+cost_usd: 0.0015518099999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14697
+property: P3999
+property_label: date of official closure
+rationale: 'The new closure date of 1 April 2020 for Kami-Shishiori Station is supported
+  by two independently verified sources: Commons Wikimedia and Namu Wiki (Japanese
+  Wikipedia via Namu). The old value of 11 March 2011 was unsupported and likely confused
+  the earthquake suspension with the official closure date. The lack of references
+  for the new value is mitigated by the strong independent corroboration from primary
+  sources.'
+rcid: 2550475086
+revid: 2473811414
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Kami-Shishiori_Station
+- provenance: verified
+  supports_claim: true
+  url: https://en.namu.wiki/w/%EC%8B%9C%EC%8B%9C%EC%98%A4%EB%A6%AC%EC%B9%B4%EB%9D%BC%EC%BF%A0%EC%99%80%EC%97%AD
+timestamp: '2026-04-11T14:15:06.057593+00:00'
+title: Q6357193
+turns: 1
+value_label: null
+verdict: verified-high

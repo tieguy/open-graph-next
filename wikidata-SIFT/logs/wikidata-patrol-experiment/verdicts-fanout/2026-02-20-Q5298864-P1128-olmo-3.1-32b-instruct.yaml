@@ -1,0 +1,27 @@
+completion_tokens: 1678
+cost_usd: 0.0069566
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29749
+property: P1128
+property_label: employees
+rationale: An official Dorset Police publication independently confirms that as of
+  29 February 2024, Dorset Police had 1,431 FTE officers. This supports the value
+  '1,431' for the 'employees' property at that point in time. However, the specific
+  reference URL cited in the edit was inaccessible during verification, so the evidence
+  is indirect and the claim is rated as verified-low.
+rcid: 2540948903
+revid: 2464737973
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.dorset.police.uk/police-forces/dorset-police/areas/about-us/about-us/dorset-police-2024/understanding-policing-in-dorset/
+- provenance: unverified
+  supports_claim: false
+  url: https://www.dorset.police.uk/accessing-information/about-dorset-police/facts-about-the-force/
+timestamp: '2026-02-20T11:12:57.302540+00:00'
+title: Q5298864
+turns: 3
+value_label: null
+verdict: verified-low

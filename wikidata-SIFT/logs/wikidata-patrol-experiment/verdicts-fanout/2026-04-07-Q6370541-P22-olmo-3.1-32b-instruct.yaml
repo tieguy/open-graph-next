@@ -1,0 +1,22 @@
+completion_tokens: 1063
+cost_usd: 0.0151698
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 72660
+property: P22
+property_label: father
+rationale: The only cited reference supporting the father relationship could not be
+  accessed for verification. No independent sources were found to corroborate or contradict
+  the claim. Without readable evidence, the edit cannot be confirmed or denied.
+rcid: null
+revid: 2472173241
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.ukwhoswho.com/view/10.1093/ww/9780199540884.001.0001/ww-9780199540884-e-254408/version/6
+timestamp: '2026-04-07T03:32:47.975907+00:00'
+title: Q6370541
+turns: 10
+value_label: Saeed Khan
+verdict: unverifiable

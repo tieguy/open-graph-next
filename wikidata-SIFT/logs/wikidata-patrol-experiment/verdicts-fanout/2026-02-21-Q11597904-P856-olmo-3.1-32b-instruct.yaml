@@ -1,0 +1,31 @@
+completion_tokens: 1066
+cost_usd: 0.0051818
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22711
+property: P856
+property_label: official website
+rationale: The URL https://www.tachikawa-edu.jp/es01/ resolves to a website presenting
+  itself as the official site of Tachikawa Municipal Tachikawa Elementary School.
+  The domain is affiliated with the Tachikawa Board of Education and contains authoritative
+  school information. Independent official sources confirm the existence of the school
+  and the domain's association with municipal education in Tachikawa, with no evidence
+  contradicting the claim.
+rcid: 2541055768
+revid: 2464837968
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.tachikawa-edu.jp/es01/
+- provenance: verified
+  supports_claim: true
+  url: https://tachikawa-edu.jp/
+- provenance: verified
+  supports_claim: true
+  url: https://global-navi.metro.tokyo.lg.jp/en/board_education/tachikawa.html
+timestamp: '2026-02-21T03:53:51.721466+00:00'
+title: Q11597904
+turns: 2
+value_label: null
+verdict: verified-high

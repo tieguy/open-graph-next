@@ -1,0 +1,26 @@
+completion_tokens: 1574
+cost_usd: 0.0033363999999999998
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11960
+property: P19
+property_label: place of birth
+rationale: The 'About the Author' section from Dan Wang's published book on Amazon
+  explicitly states that he moved to Canada at age seven from Yunnan, confirming the
+  place of birth claim. The reference cited in the edit does not support the claim.
+  Therefore, the edit is supported by a primary and reliable source.
+rcid: 2550901709
+revid: 2474224431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com/Breakneck-Chinas-Quest-Engineer-Future/dp/0693279283
+- provenance: verified
+  supports_claim: false
+  url: https://danwang.co/
+timestamp: '2026-04-10T14:03:37.670732+00:00'
+title: Q125470280
+turns: 1
+value_label: Yunnan
+verdict: verified-high

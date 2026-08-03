@@ -1,0 +1,29 @@
+completion_tokens: 889
+cost_usd: 0.0052822
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23744
+property: P856
+property_label: official website
+rationale: The official tourism and governmental sources for Matsusaka do not list
+  https://www.airasia.com as the official website of the city. The site is unrelated
+  to Matsusaka and appears to belong to a travel or airline company. There is no evidence
+  from primary or authoritative sources supporting this change.
+rcid: null
+revid: 2471370338
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://matsusaka-info.jp/english/
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan.travel/en/spot/118/
+- provenance: verified
+  supports_claim: false
+  url: https://matsusaka-projects.com/english/
+timestamp: '2026-04-10T14:03:06.533743+00:00'
+title: Q460829
+turns: 1
+value_label: null
+verdict: incorrect

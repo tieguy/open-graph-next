@@ -1,0 +1,26 @@
+completion_tokens: 1501
+cost_usd: 0.0049212
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20103
+property: P625
+property_label: coordinate location
+rationale: The new coordinate for Treimani matches the authoritative coordinates listed
+  on the Estonian Wikipedia, an independent and reliable source. The previous coordinate
+  did not match this authoritative source and is therefore incorrect. The change is
+  well-supported by independent evidence.
+rcid: null
+revid: 2471356041
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://et.wikipedia.org/wiki/Treimani
+- provenance: verified
+  supports_claim: false
+  url: http://metaweb.stat.ee/view_xml.htm?id=4388196&searchText=4388196
+timestamp: '2026-04-11T12:27:34.836286+00:00'
+title: Q3462143
+turns: 1
+value_label: null
+verdict: verified-high

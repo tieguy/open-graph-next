@@ -1,0 +1,23 @@
+completion_tokens: 666
+cost_usd: 0.0055485
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 108306
+property: P69
+property_label: educated at
+rationale: Despite extensive searching, no independent sources were found to confirm
+  that Columbia University is associated with Richard Taruskin's education. Searches
+  for his education at Columbia, High School of Music & Art, or related Wikipedia/Wikidata
+  references yielded no verifiable results. No sources were successfully fetched or
+  directly accessed during investigation, and cited web references were either blocked
+  or linked access was not granted. Therefore, sufficient evidence could not be gathered
+  to verify this claim.
+rcid: 2550713654
+revid: 2474041515
+sources: []
+timestamp: '2026-04-07T12:42:01.778332+00:00'
+title: Q1173665
+turns: 15
+value_label: Columbia University
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 326
+cost_usd: 0.003931625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41068
+property: P856
+property_label: official website
+rationale: The URL provided in the edit, https://www.ana.co.jp, is the website of
+  All Nippon Airways (ANA), a Japanese airline, and not the official website of Iwakura.
+  The correct official website of Iwakura is https://www.city.iwakura.aichi.jp, which
+  was verified by fetching its content.
+rcid: null
+revid: 2471370294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ana.co.jp
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.iwakura.aichi.jp/
+timestamp: '2026-04-07T06:07:40.076609+00:00'
+title: Q648275
+turns: 4
+value_label: null
+verdict: incorrect

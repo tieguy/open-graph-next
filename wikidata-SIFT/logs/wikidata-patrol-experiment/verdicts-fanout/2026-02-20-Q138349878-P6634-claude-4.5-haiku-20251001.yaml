@@ -1,0 +1,34 @@
+completion_tokens: 3496
+cost_usd: 0.164294
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 146814
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: The username 'asheftajwaramin' conforms to LinkedIn's format requirements
+  and Ashef Tajwar Amin's existence is confirmed via Google Play Store. However, LinkedIn
+  is a blocked domain preventing direct verification that this specific profile exists
+  or belongs to this person. Without access to the LinkedIn profile itself or independent
+  sources confirming the assignment, the claim cannot be verified despite the valid
+  format and verified person identity.
+rcid: 2540975653
+revid: 2464762404
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/dev?id=6413524727619359116
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P6634
+- provenance: verified
+  supports_claim: true
+  url: https://ligosocial.com/blog/how-to-find-your-linkedin-username-a-complete-guide-2025
+- provenance: reported
+  supports_claim: false
+  url: https://www.linkedin.com/in/asheftajwaramin
+timestamp: '2026-02-20T02:26:32.927547+00:00'
+title: Q138349878
+turns: 13
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 557
+cost_usd: 0.00138184375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12886
+property: P2397
+property_label: YouTube channel ID
+rationale: No independent sources were found to confirm the updated YouTube channel
+  ID for Théâtre la Seizième. The edit has no references, and a web search did not
+  yield any relevant results.
+rcid: 2551329122
+revid: 2474636002
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@theatrelaseizieme_
+timestamp: '2026-04-07T14:08:17.290219+00:00'
+title: Q100965387
+turns: 2
+value_label: null
+verdict: unverifiable

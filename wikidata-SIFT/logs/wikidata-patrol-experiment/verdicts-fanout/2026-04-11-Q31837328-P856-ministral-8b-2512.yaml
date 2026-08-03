@@ -1,0 +1,28 @@
+completion_tokens: 1468
+cost_usd: 0.0031333800000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46756
+property: P856
+property_label: official website
+rationale: The change from the HTTP URL (http://www.punchpowertrain.com) to the HTTPS
+  URL (https://www.punchpowertrain.com) for Punch Powertrain’s official website is
+  correct and aligns with modern web security standards. Both URLs were verified to
+  load the same content, but HTTPS is the preferred and secure standard. The absence
+  of references does not invalidate the change, as the evidence directly confirms
+  the new URL is the current official one.
+rcid: 2550496245
+revid: 2473831704
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.punchpowertrain.com
+- provenance: verified
+  supports_claim: false
+  url: http://www.punchpowertrain.com
+timestamp: '2026-04-11T09:05:23.288292+00:00'
+title: Q31837328
+turns: 7
+value_label: null
+verdict: verified-high

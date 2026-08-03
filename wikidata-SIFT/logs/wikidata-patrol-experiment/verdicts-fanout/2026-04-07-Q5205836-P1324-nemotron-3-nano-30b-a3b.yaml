@@ -1,0 +1,24 @@
+completion_tokens: 643
+cost_usd: 0.00172025
+diff_type: statement_removed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 31833
+property: P1324
+property_label: source code repository URL
+rationale: No reliable source was found to confirm or refute the presence of the GitHub
+  URL as the source code repository URL for DOAP. Search efforts could not access
+  the claimed URL or identify any verifiable third-party reporting on its use. Without
+  a verifiable source (either primary content or an authoritative secondary report),
+  the claim cannot be assessed as true, false, or verifiable.
+rcid: 2550591060
+revid: 2473922555
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://github.com/ewilderj/doap
+timestamp: '2026-04-07T04:32:01.371194+00:00'
+title: Q5205836
+turns: 6
+value_label: null
+verdict: unverifiable

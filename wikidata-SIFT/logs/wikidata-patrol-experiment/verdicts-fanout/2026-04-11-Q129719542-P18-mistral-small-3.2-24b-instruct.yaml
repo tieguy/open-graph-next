@@ -1,0 +1,38 @@
+completion_tokens: 1369
+cost_usd: 0.00192118125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19146
+property: P18
+property_label: image
+rationale: The old image had specific qualifiers and references, indicating it was
+  sourced from a specific context. The new image lacks any references or qualifiers,
+  making it unverifiable. No independent sources confirm the new image's authenticity
+  or relevance.
+rcid: 2550508122
+revid: 2473843061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://avn.com/news/video/pornhub-awards-get-a-little-bit-country-for-7th-edition-179491
+- provenance: verified
+  supports_claim: false
+  url: https://de.pornopedia.com/wiki/Bonnie_Blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.boobpedia.com/boobs/Bonnie_Blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/bonnie-blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.pinterest.com/ideas/bonnie-blue-pictures/908683519255/
+- provenance: verified
+  supports_claim: false
+  url: https://www.pornpics.com/pornstars/bonnie-blue/
+timestamp: '2026-04-11T13:07:38.391312+00:00'
+title: Q129719542
+turns: 1
+value_label: null
+verdict: unverifiable

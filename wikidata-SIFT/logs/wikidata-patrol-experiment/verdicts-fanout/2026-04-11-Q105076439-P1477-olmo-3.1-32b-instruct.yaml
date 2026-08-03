@@ -1,0 +1,27 @@
+completion_tokens: 1208
+cost_usd: 0.0051736
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22244
+property: P1477
+property_label: birth name
+rationale: Multiple independent and reputable Italian news sources explicitly refer
+  to Blanco as Riccardo Fabbriconi, confirming this as his publicly known birth name.
+  No evidence was found to support the new value 'Riccardo Maricconni'. Changing the
+  birth name to an unsupported value is inconsistent with reliable sources. The edit
+  should be reverted unless a trustworthy primary source is provided.
+rcid: 2550592940
+revid: 2473924373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.quibrescia.it/storie-bresciane/2022/02/06/blanco-il-ragazzo-di-calvagese-che-ha-sbancato-sanremo/606860/
+- provenance: verified
+  supports_claim: false
+  url: https://www.vanityfair.it/music/storie-music/2021/09/19/blanco-album-blu-celeste-intervista-niente-etichette-io-sto-bene-cosi/
+timestamp: '2026-04-11T18:03:56.324840+00:00'
+title: Q105076439
+turns: 1
+value_label: null
+verdict: incorrect

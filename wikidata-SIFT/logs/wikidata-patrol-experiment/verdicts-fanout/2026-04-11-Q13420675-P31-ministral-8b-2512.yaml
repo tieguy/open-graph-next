@@ -1,0 +1,31 @@
+completion_tokens: 2242
+cost_usd: 0.0019961099999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17261
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changed the instance of 'library and information science'
+  from 'interdisciplinary science' (a valid classification for the field) to 'academic
+  degree'. Independent sources confirm that 'library and information science' is a
+  field of study, not an academic degree itself. The new value lacks references and
+  contradicts authoritative sources, such as Wayne State University and Simmons University
+  program descriptions.
+rcid: 2551339635
+revid: 2474645889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bulletins.wayne.edu/graduate/school-information-sciences/masters-programs/library-and-information-science/
+- provenance: verified
+  supports_claim: false
+  url: https://www.librariancertification.com/types-of-library-information-science-degree-programs/
+- provenance: verified
+  supports_claim: false
+  url: https://www.simmons.edu/graduate/academic-programs/graduate-and-certificate-programs/library-and-information-science-ms
+timestamp: '2026-04-11T06:45:39.113137+00:00'
+title: Q13420675
+turns: 1
+value_label: academic degree
+verdict: incorrect

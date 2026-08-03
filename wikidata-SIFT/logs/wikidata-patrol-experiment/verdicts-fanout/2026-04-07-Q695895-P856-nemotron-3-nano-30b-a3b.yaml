@@ -1,0 +1,28 @@
+completion_tokens: 771
+cost_usd: 0.0086107
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 169130
+property: P856
+property_label: official website
+rationale: The edit changes Urasoe's official website claim to http://www.jta-okinawa.com.
+  No authoritative source confirms this as the correct official website for Urasoe.
+  Existing references in the item point to the city's own municipal website (www.city.urasoe.lg.jp),
+  which is a .lg.jp domain and a reasonable official source. My searches for 'JTA
+  Okinawa official site', 'JTA Okinawa official website', 'JTA Okinawa', 'Okinawa
+  Prefectural Government', and variations in Japanese did not locate any official
+  JTA Okinawa website domain or page that would validate this change. The JTA domain
+  appears to be a misattribution; JTA is Japan Transocean Air, which operates under
+  jta.co.jp domains, not the city administration.
+rcid: null
+revid: 2471370372
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.urasoe.lg.jp/article?articleId=609e75583d59ae2434bfddd0
+timestamp: '2026-04-07T04:01:55.539072+00:00'
+title: Q695895
+turns: 15
+value_label: null
+verdict: unverifiable

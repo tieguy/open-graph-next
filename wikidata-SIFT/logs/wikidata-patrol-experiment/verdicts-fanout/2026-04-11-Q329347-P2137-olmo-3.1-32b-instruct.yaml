@@ -1,0 +1,27 @@
+completion_tokens: 1697
+cost_usd: 0.006761
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28714
+property: P2137
+property_label: total equity
+rationale: The new value for Lukoil's total equity (4,523,184,000,000 Russian ruble)
+  is supported by the cited 2021 Lukoil Consolidated Financial Statements and independently
+  confirmed by Vedomosti's coverage of the 2021 financial results. The old value (~4.13
+  trillion RUB) aligns with the 2020 report, indicating a plausible and documented
+  increase. Both values are substantiated by appropriate sources.
+rcid: 2550551160
+revid: 2473884267
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.vedomosti.ru/investments/news/2022/03/24/1172151-lukoil-2021-results
+- provenance: attempted
+  supports_claim: true
+  url: http://www.lukoil.com/FileSystem/9/534848.pdf
+timestamp: '2026-04-11T06:54:20.196501+00:00'
+title: Q329347
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 2279
+cost_usd: 0.00347613
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33542
+property: P4399
+property_label: Itaú Cultural ID
+rationale: The edit changes the Itaú Cultural ID from '147-joaquim-paiva' to '147'.
+  The old value format suggests an official reference, but the corresponding page
+  is blocked (HTTP 403). The new value is a plausible minimal identifier format, consistent
+  with standard practices for identifiers. No independent sources confirm or deny
+  the exact format, but the change is not verifiably incorrect. The lack of accessible
+  references prevents a higher confidence verdict.
+rcid: 2550722111
+revid: 2474049848
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mam.rio/historia/mam-recebe-novas-fotos-da-colecao-joaquim-paiva/
+- provenance: verified
+  supports_claim: false
+  url: https://www.catalogodasartes.com.br/artista/Joaquim%20Arnaldo%20de%20Paiva%20Oliveira%20-%20Joaquim%20Paiva/
+- provenance: reported
+  supports_claim: false
+  url: https://www.enciclopedia.itaucultural.org.br/pessoas/147-joaquim-paiva
+timestamp: '2026-04-11T15:32:40.627431+00:00'
+title: Q94684838
+turns: 3
+value_label: null
+verdict: plausible

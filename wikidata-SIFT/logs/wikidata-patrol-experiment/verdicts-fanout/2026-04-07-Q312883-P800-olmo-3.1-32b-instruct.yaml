@@ -1,0 +1,29 @@
+completion_tokens: 1131
+cost_usd: 0.013502199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 64118
+property: P800
+property_label: notable work
+rationale: The value 'Pene' (Q7162538) refers to a genus of molluscs and is biologically
+  unrelated to Boy George. No references or independent sources support the claim
+  that 'Pene' is a notable work of Boy George. Web searches returned no evidence associating
+  Boy George with 'Pene' as a work.
+rcid: null
+revid: 2463233603
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Boy_George
+- provenance: verified
+  supports_claim: false
+  url: ''
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T09:56:25.504610+00:00'
+title: Q312883
+turns: 7
+value_label: Pene
+verdict: incorrect

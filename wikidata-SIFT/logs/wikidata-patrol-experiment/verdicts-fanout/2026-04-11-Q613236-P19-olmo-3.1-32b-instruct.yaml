@@ -1,0 +1,30 @@
+completion_tokens: 1689
+cost_usd: 0.0039328
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14597
+property: P19
+property_label: place of birth
+rationale: All reliable and primary sources confirm that Blek le Rat was born in Paris
+  (Boulogne-Billancourt, near Paris). The cited Italian Wikipedia source supports
+  the original value and does not support Niger. Multiple independent sources also
+  confirm Paris as the place of birth. Therefore, changing the place of birth to Niger
+  is incorrect.
+rcid: 2549506887
+revid: 2472871010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Blek_Le_Rat
+- provenance: verified
+  supports_claim: false
+  url: http://blekleratoriginal.com/en/blek-le-rat
+- provenance: verified
+  supports_claim: false
+  url: https://urban-nation.com/artist/blek-le-rat/
+timestamp: '2026-04-11T14:44:28.414385+00:00'
+title: Q613236
+turns: 1
+value_label: Niger
+verdict: incorrect

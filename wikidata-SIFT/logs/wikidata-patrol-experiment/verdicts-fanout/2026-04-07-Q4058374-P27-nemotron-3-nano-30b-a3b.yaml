@@ -1,0 +1,26 @@
+completion_tokens: 695
+cost_usd: 0.00494355
+diff_type: reference_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 96091
+property: P27
+property_label: country of citizenship
+rationale: Despite extensive searches across multiple relevant queries, no reliable
+  sources were identified that confirm or deny Misha Aznavour's country of citizenship.
+  The only reference cited in the edit (zefix.ch URL) could not be fetched due to
+  technical errors and does not demonstrate support for the claim upon review of accessible
+  pages. Wikipedia and other secondary sources could not be accessed to provide verification,
+  and no independent confirmation of the citizenship claim was found. Therefore, the
+  evidence is insufficient to classify the claim as verified or incorrect.
+rcid: null
+revid: 2470267514
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.voici.fr/bios-people/mischa-aznavour
+timestamp: '2026-04-07T12:15:46.227323+00:00'
+title: Q4058374
+turns: 15
+value_label: Switzerland
+verdict: unverifiable

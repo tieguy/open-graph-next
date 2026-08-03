@@ -1,0 +1,29 @@
+completion_tokens: 1775
+cost_usd: 0.00163113
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14834
+property: P1477
+property_label: birth name
+rationale: Multiple verified primary sources (Library of Congress, L'Union Suite)
+  confirm Sanité Bélair's birth name as 'Suzanne Bélair.' The edit changes it to 'Suzanne
+  hkjk,' which is not supported by any credible source. The cited reference URL is
+  unreachable, and no independent evidence supports the altered value.
+rcid: null
+revid: 2454234091
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/no2019155649.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.lunionsuite.com/black-history-highlight-sanite-belair-tigress-haiti/
+- provenance: reported
+  supports_claim: false
+  url: https://kentakepage.com/sanite-belair-the-tigress-of-haiti/
+timestamp: '2026-04-10T08:33:38.142524+00:00'
+title: Q3472292
+turns: 1
+value_label: null
+verdict: incorrect

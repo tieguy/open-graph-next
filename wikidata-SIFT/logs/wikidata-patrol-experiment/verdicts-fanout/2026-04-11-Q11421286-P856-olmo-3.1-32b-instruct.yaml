@@ -1,0 +1,30 @@
+completion_tokens: 1330
+cost_usd: 0.0043236
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17628
+property: P856
+property_label: official website
+rationale: The URL 'http://www.hosp.go.jp/' does not resolve to the official website
+  of the National Hospital Organization (Japan). Authoritative Japanese government
+  sources and the official National Hospital Organization website (https://www.nha.go.jp/)
+  confirm that the correct official website uses a different domain. The current value
+  for P856 is therefore incorrect and should be replaced.
+rcid: 2550867542
+revid: 2474191023
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nha.go.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www8.cao.go.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E5%9C%8B%E7%84%B6%E6%85%AF%E5%AE%BF%E7%94%9F%E7%B7%9F%E8%88%88%E5%AF%BC%E3%83%9B%E3%82%B8%E3%83%B3
+timestamp: '2026-04-11T05:59:19.844332+00:00'
+title: Q11421286
+turns: 1
+value_label: null
+verdict: suspect

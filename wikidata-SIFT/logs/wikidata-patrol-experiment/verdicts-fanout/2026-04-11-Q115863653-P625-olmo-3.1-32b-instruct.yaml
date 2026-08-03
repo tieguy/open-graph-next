@@ -1,0 +1,29 @@
+completion_tokens: 1882
+cost_usd: 0.0035484
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12096
+property: P625
+property_label: coordinate location
+rationale: The new coordinate value (-7.805918266275645,110.34108655746095) matches
+  the independently verified coordinates from OpenStreetMap and is consistent with
+  Google Maps data, while the old value was less accurate. The change is therefore
+  a justified improvement.
+rcid: 2551086767
+revid: 2474402704
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.openstreetmap.org/node/11680944#map=17/7.80591/110.34105
+- provenance: verified
+  supports_claim: false
+  url: https://museorium.upy.ac.id/
+- provenance: reported
+  supports_claim: true
+  url: https://www.google.com/maps?q=Yogyakarta+PGRI+University+History+Museum
+timestamp: '2026-04-11T14:19:05.712450+00:00'
+title: Q115863653
+turns: 1
+value_label: null
+verdict: verified-high

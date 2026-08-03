@@ -1,0 +1,30 @@
+completion_tokens: 1773
+cost_usd: 0.0058238000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23800
+property: P856
+property_label: official website
+rationale: The new value assigned to the official website property (https://www.vietnamairlines.com)
+  is the official website of Vietnam Airlines, an unrelated entity. Authoritative
+  sources, including Nara Prefecture and the Japanese Wikipedia, confirm that the
+  correct official website for Sakurai, Nara is https://www.city.sakurai.lg.jp/. The
+  change was not supported by any credible source and appears to be erroneous.
+rcid: 2551422192
+revid: 2474723676
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.pref.nara.jp/6265.htm
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E6%A1%9C%E4%BA%95%E5%B8%82
+- provenance: verified
+  supports_claim: false
+  url: https://www.vietnamairlines.com
+timestamp: '2026-04-11T17:47:04.046993+00:00'
+title: Q127026
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,22 @@
+completion_tokens: 871
+cost_usd: 0.008555
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40162
+property: P17
+property_label: country
+rationale: No independently fetched source could confirm or deny the country claim
+  for Minth Group Limited. The official website timed out and no other authoritative
+  sources were found that directly address the company's country affiliation.
+rcid: 2551282427
+revid: 2474591551
+sources:
+- provenance: reported
+  supports_claim: null
+  url: http://www.minthgroup.com/
+timestamp: '2026-04-07T14:05:52.290993+00:00'
+title: Q19599200
+turns: 9
+value_label: People's Republic of China
+verdict: unverifiable

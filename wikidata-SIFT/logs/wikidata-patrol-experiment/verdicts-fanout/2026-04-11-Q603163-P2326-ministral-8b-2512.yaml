@@ -1,0 +1,28 @@
+completion_tokens: 1515
+cost_usd: 0.00145326
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14369
+property: P2326
+property_label: GNS Unique Feature ID
+rationale: The new value provided for the GNS Unique Feature ID ('FABIO ESTUVO AQUI
+  ALQUIZAR REPRESENTANDO BOTAAAAAA') is nonsensical and lacks any credible support.
+  The old value ('-1613038') is confirmed as the correct GNS Unique Feature ID for
+  Alquízar by the GDELT Geographic Feature ID crosswalk, an authoritative source.
+  The new value is unsupported by any credible database or reference, indicating it
+  is incorrect and likely malicious or accidental vandalism.
+rcid: null
+revid: 2471291012
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://blog.gdeltproject.org/geographic-featureid-common-name-crosswalk/
+- provenance: reported
+  supports_claim: false
+  url: https://www.loc.gov/catdir/cpso/geogname.html
+timestamp: '2026-04-11T14:42:01.509198+00:00'
+title: Q603163
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1984
+cost_usd: 0.0069332000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28714
+property: P734
+property_label: family name
+rationale: The new value 'Daifugō' is the name of a Japanese card game, not a person's
+  family name, as confirmed by Wikipedia and other reliable sources. All sources consistently
+  identify Max Bill's family name as 'Bill'. This appears to be an error, likely a
+  mix-up of property values. The change is not supported by any citation or evidence.
+rcid: 2550806629
+revid: 2474131480
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Daifugō
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Max_Bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.bauhaus.de/en/artists/max-bill/
+timestamp: '2026-04-11T06:25:09.992222+00:00'
+title: Q123454
+turns: 1
+value_label: Daifugō
+verdict: suspect

@@ -1,0 +1,32 @@
+completion_tokens: 1904
+cost_usd: 0.04702
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 37500
+property: P856
+property_label: official website
+rationale: The claimed official website URL (https://packetra.com) is directly supported
+  by both the cited reference and multiple independent sources. The reference—using
+  the website's own homepage—is appropriate for verifying an official website claim,
+  and the fetched content confirms Packetra's ownership through branding, service
+  descriptions, and contemporaneous customer testimonials dated February 2026. Additional
+  corroboration from established web hosting review sites independently identifies
+  the same URL as Packetra's official domain.
+rcid: 2540928717
+revid: 2464719458
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.whtop.com/review/packetra.com
+- provenance: reported
+  supports_claim: true
+  url: https://www.trustpilot.com/review/packetra.com
+timestamp: '2026-02-20T21:26:22.192467+00:00'
+title: Q138348890
+turns: 4
+value_label: null
+verdict: verified-high

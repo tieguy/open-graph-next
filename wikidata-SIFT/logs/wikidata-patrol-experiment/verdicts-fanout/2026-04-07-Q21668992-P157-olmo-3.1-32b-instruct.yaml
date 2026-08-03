@@ -1,0 +1,23 @@
+completion_tokens: 1141
+cost_usd: 0.0119772
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 56463
+property: P157
+property_label: killed by
+rationale: No independently retrievable evidence was found to confirm that the Southern
+  Transitional Council was responsible for the death of Jaafar Mohammed Saad. Neither
+  the new nor the old value in the 'killed by' claim is supported by verified sources.
+  The edit lacks citations and cannot be substantiated by available reporting.
+rcid: null
+revid: 2455656009
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jaafar_Mohammed_Saad
+timestamp: '2026-04-07T13:45:27.020702+00:00'
+title: Q21668992
+turns: 10
+value_label: Southern Transitional Council
+verdict: unverifiable

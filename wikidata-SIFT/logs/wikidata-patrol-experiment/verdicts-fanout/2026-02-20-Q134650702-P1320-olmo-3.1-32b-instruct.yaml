@@ -1,0 +1,28 @@
+completion_tokens: 1341
+cost_usd: 0.0052718
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22336
+property: P1320
+property_label: OpenCorporates ID
+rationale: The Wikidata claim lacks a direct citation supporting the OpenCorporates
+  ID. The French official business registry confirms the SIREN and location for GROUPE
+  FURNOTEL but does not reference the OpenCorporates ID. I was unable to access the
+  OpenCorporates page directly due to a CAPTCHA barrier, and no independent third-party
+  sources corroborate the link between this entity and the OpenCorporates ID. Therefore,
+  the correctness of the ID cannot be verified with the available evidence.
+rcid: 2540939982
+revid: 2464729556
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/groupe-furnotel-810825547
+- provenance: reported
+  supports_claim: null
+  url: https://opencorporates.com/companies/810825547
+timestamp: '2026-02-20T15:26:29.906560+00:00'
+title: Q134650702
+turns: 4
+value_label: null
+verdict: unverifiable

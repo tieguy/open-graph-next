@@ -1,0 +1,30 @@
+completion_tokens: 1893
+cost_usd: 0.00252813
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31064
+property: P170
+property_label: creator
+rationale: The claim that Lionel Messi (Q615) is the creator of the Lamentation fresco
+  (Q2067212) is factually incorrect. The fresco is universally attributed to Giotto
+  (Q7814), a 14th-century artist, based on authoritative art historical records. No
+  credible evidence supports Messi's attribution, and the cited reference (French
+  Wikipedia) is invalid for this type of claim. The edit is a clear error.
+rcid: null
+revid: 2471064658
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.scrovegni.org/en/
+- provenance: reported
+  supports_claim: false
+  url: https://www.metmuseum.org/toah/hd/giot/hd_giot.htm
+- provenance: reported
+  supports_claim: false
+  url: https://www.giotto.it/en/
+timestamp: '2026-04-11T11:58:35.249015+00:00'
+title: Q2067212
+turns: 3
+value_label: Lionel Messi
+verdict: incorrect

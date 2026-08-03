@@ -1,0 +1,26 @@
+completion_tokens: 787
+cost_usd: 0.0044710999999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86274
+property: P2326
+property_label: GNS Unique Feature ID
+rationale: Despite extensive searches for the quoted string 'FABIO ESTUVO AQUI ALQUIZAR
+  REPRESENTANDO BOTAAAAAA', no credible or relevant sources were found. Searches for
+  Alquízar's GNS Unique Feature ID yielded abundant references to '1935135', but none
+  linked to the claimed value. The edit involves a completely new editor adding a
+  nonsensical string without references, and I was unable to fetch any verifiable
+  source due to domain blocks or unavailability. No independent evidence confirms
+  or denies this claim.
+rcid: null
+revid: 2471291012
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kmbstory.com/i-am-baidal/2019/07/26/fabio-estuvo-aqui-alquizar-que-hizo-novelas-brutales-de-policia-avion-y-espionaje/
+timestamp: '2026-04-07T04:39:23.586805+00:00'
+title: Q603163
+turns: 15
+value_label: null
+verdict: unverifiable

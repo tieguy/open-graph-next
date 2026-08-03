@@ -1,0 +1,30 @@
+completion_tokens: 2023
+cost_usd: 0.0048897
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56873
+property: P495
+property_label: country of origin
+rationale: The edit incorrectly changed the country of origin of Oques Grasses from
+  Spain (Q29) to Dagestan (Q5118). The group is a Catalan regge-pop band with no credible
+  evidence linking it to Dagestan. The original claim (Spain) aligns with the group's
+  identity, genre, and language, and no verified sources support the new claim. The
+  absence of references and lack of corroboration make this edit incorrect.
+rcid: null
+revid: 2464955735
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://trackify.am/artist/5qPeAT4ikl6gJNUexAOEy0
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/4406423-Oques-Grasses
+- provenance: verified
+  supports_claim: false
+  url: https://oquesgrasses.com/
+timestamp: '2026-04-11T11:08:16.879616+00:00'
+title: Q20108558
+turns: 6
+value_label: Dagestan
+verdict: incorrect

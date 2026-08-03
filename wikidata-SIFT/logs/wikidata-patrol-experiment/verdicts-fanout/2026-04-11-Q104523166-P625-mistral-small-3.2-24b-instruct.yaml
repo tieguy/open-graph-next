@@ -1,0 +1,29 @@
+completion_tokens: 1454
+cost_usd: 0.00525454375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53910
+property: P625
+property_label: coordinate location
+rationale: The prefetched references are not relevant to Ondód in Hungary. We were
+  unable to find independent sources that confirm the new coordinate location. The
+  edit lacks references, and the available information is insufficient to verify the
+  change.
+rcid: 2551278720
+revid: 2474588027
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://latitude.to/articles-by-country/ng/nigeria/72610/ondo-city
+- provenance: verified
+  supports_claim: false
+  url: https://www.latlong.net/place/ondo-nigeria-18121.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.openstreetmap.org/search?query=Ondód#map=18/47.2349265/16.5412054
+timestamp: '2026-04-11T08:19:47.549607+00:00'
+title: Q104523166
+turns: 7
+value_label: null
+verdict: unverifiable

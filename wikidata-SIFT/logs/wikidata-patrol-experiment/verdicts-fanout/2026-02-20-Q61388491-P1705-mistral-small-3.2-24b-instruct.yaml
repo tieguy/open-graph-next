@@ -1,0 +1,28 @@
+completion_tokens: 1306
+cost_usd: 0.0023052
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19134
+property: P1705
+property_label: native label
+rationale: The native label "Šlokenbekas muiža" is supported by multiple independent
+  sources, including primary and secondary sources that confirm its existence and
+  historical significance in Latvia.
+rcid: 2540973166
+revid: 2464760076
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pilis.lv/home/pilis-un-muizas/kurzemes-pilis-un-muizas/slokenbekas-muiza/
+- provenance: reported
+  supports_claim: true
+  url: https://www.latvia.travel/lv/apskates-vieta/slokenbekas-muiza
+- provenance: reported
+  supports_claim: true
+  url: https://www.tripadvisor.com/Hotel_Review-g26325020-d6200773-Reviews-Slokenbekas_Muiza-Milzkalne_Zemgale_Region.html
+timestamp: '2026-02-20T02:58:54.615201+00:00'
+title: Q61388491
+turns: 3
+value_label: null
+verdict: verified-high

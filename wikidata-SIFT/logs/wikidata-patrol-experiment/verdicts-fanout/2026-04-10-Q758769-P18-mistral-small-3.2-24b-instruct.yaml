@@ -1,0 +1,26 @@
+completion_tokens: 1583
+cost_usd: 0.0054459
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54402
+property: P18
+property_label: image
+rationale: The investigation did not yield any direct evidence or confirmation of
+  the image 'Audi Q5 GU 2.0 TDI IMG 3603.jpg' in reliable sources. The search results
+  and fetched content do not mention this specific image, and the Audi MediaCenter
+  does not provide a direct link or confirmation.
+rcid: 2550738233
+revid: 2474065326
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.autoexpress.co.uk/audi/q5/59309/audi-q5-20-tdi-pictures
+- provenance: verified
+  supports_claim: false
+  url: https://www.audi-mediacenter.com/en/tags/q5-135/photos
+timestamp: '2026-04-10T08:04:32.207318+00:00'
+title: Q758769
+turns: 5
+value_label: null
+verdict: unverifiable

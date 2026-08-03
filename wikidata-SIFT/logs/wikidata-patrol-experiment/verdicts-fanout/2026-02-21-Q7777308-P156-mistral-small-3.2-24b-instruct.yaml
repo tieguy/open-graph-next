@@ -1,0 +1,25 @@
+completion_tokens: 1631
+cost_usd: 0.00538225
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49427
+property: P156
+property_label: followed by
+rationale: The referenced source supports the claim that "House of Nightmares" is
+  thematically connected to "Theater of Illusion." However, independent sources do
+  not explicitly confirm the sequential relationship.
+rcid: 2541055215
+revid: 2464837480
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/nightmares.html
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.bandcamp.com/album/theater-of-illusion
+timestamp: '2026-02-21T04:08:12.401774+00:00'
+title: Q7777308
+turns: 6
+value_label: House of Nightmares
+verdict: verified-low

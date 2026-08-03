@@ -1,0 +1,29 @@
+completion_tokens: 1703
+cost_usd: 0.004876
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19271
+property: P21
+property_label: sex or gender
+rationale: There is no verifiable evidence that Jérôme Dupras identifies as a 'bisexual
+  person.' The change from 'hijra' to 'bisexual person' is unsupported by any cited
+  reference or independent source. The absence of explicit confirmation from Dupras
+  or any authoritative profile means this edit is speculative and potentially incorrect.
+rcid: null
+revid: 2470757467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.crcecoeco.ca/wp-content/uploads/2024/12/2024-Curriculum-vitae_JDupras.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.uno.edu/safe-space-allies/terminology
+- provenance: verified
+  supports_claim: false
+  url: https://www.acog.org/womens-health/faqs/lgbtq-teens
+timestamp: '2026-04-11T07:42:07.100294+00:00'
+title: Q3190884
+turns: 1
+value_label: bisexual person
+verdict: suspect

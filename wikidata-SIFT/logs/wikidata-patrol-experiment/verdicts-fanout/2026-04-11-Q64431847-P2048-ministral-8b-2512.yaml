@@ -1,0 +1,29 @@
+completion_tokens: 2016
+cost_usd: 0.00471306
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55184
+property: P2048
+property_label: height
+rationale: The new height value of 176 cm is not supported by the cited source (Olympedia),
+  which explicitly states Maria-Magdalena Rusu's height as 175 cm. No other independent
+  sources confirm the new value, and the old value (175 cm) is corroborated by Olympedia.
+  The change from 175 cm to 176 cm is therefore incorrect.
+rcid: 2550797029
+revid: 2474122104
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.olympedia.org/athletes/146314
+- provenance: verified
+  supports_claim: false
+  url: https://worldrowing.com/athlete/maria-magdalena-rusu?id=47554
+- provenance: verified
+  supports_claim: false
+  url: https://www.espn.com/olympics/summer/2020/athletes/_/athlete/65117
+timestamp: '2026-04-11T14:28:09.656633+00:00'
+title: Q64431847
+turns: 6
+value_label: null
+verdict: incorrect

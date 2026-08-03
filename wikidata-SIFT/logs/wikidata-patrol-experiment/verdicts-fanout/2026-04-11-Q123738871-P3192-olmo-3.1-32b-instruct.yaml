@@ -1,0 +1,30 @@
+completion_tokens: 1344
+cost_usd: 0.006296599999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27451
+property: P3192
+property_label: Last.fm ID
+rationale: The edit introduces a Last.fm ID for 'Josh Universe', but independent,
+  verified sources describe him exclusively as a science communicator, biohacker,
+  and space professional, with no indication of a music career or a Last.fm presence.
+  The change lacks citation or justification and appears inconsistent with the subject's
+  known identity.
+rcid: 2551430065
+revid: 2474729945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://astrochain.net/the-team/
+- provenance: reported
+  supports_claim: false
+  url: https://joshuniverse.com/
+- provenance: reported
+  supports_claim: false
+  url: https://www.last.fm/music/Josh
+timestamp: '2026-04-11T16:07:32.773342+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: suspect

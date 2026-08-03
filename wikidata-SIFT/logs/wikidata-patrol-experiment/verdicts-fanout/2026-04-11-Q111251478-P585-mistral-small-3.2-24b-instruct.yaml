@@ -1,0 +1,26 @@
+completion_tokens: 1294
+cost_usd: 0.0021328125
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21795
+property: P585
+property_label: point in time
+rationale: The new reference could not be verified due to a timeout error. The old
+  reference was also unverifiable, and independent searches did not provide any confirmatory
+  evidence. Therefore, the edit's claim cannot be confirmed or refuted with the available
+  information.
+rcid: 2551378281
+revid: 2474683025
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.infobae.com/america/agencias/2026/03/08/el-ano-electoral-comienza-en-alemania-con-las-elecciones-regionales-en-baden-wurttemberg/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wahlen.rlp.de/fileadmin/wahlen.rlp.de/dokumente-wahlen/ltw/PDF/LW2026_Bekanntmachung_Landeslisten_LWL-1.pdf
+timestamp: '2026-04-11T07:20:43.705999+00:00'
+title: Q111251478
+turns: 2
+value_label: null
+verdict: unverifiable

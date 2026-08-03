@@ -1,0 +1,24 @@
+completion_tokens: 624
+cost_usd: 0.00661185
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 129741
+property: P17
+property_label: country
+rationale: No credible sources were found to verify the claimed country assignment
+  for Samudra Pasai. Despite extensive searches, no reliable references supporting
+  the edit's claim could be accessed. Web searches and direct URL accesses resulted
+  in empty or blocked pages without usable content. No sources were found to confirm
+  or deny the statement, resulting in unverifiable status.
+rcid: null
+revid: 2471647352
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://racimoid.org/record/g4765474
+timestamp: '2026-04-07T12:59:27.182426+00:00'
+title: Q3284315
+turns: 15
+value_label: Samudra Pasai
+verdict: unverifiable

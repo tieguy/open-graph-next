@@ -1,0 +1,24 @@
+completion_tokens: 1642
+cost_usd: 0.00223602
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31614
+property: P18
+property_label: image
+rationale: The reference URL provided for the image claim (literaturasiarta.ro/nina-josu/)
+  is unreachable, and no verified sources could be fetched to confirm the legitimacy
+  of the image 'Nina josu.jpg' for Nina Josu. No independent corroboration exists,
+  and the only reference is inaccessible.
+rcid: 2550321180
+revid: 2473660721
+sources:
+- provenance: verified
+  summary: Reference URL is unreachable; content cannot be verified.
+  supports_claim: false
+  url: https://literaturasiarta.ro/nina-josu/
+timestamp: '2026-04-11T06:18:47.129196+00:00'
+title: Q7037983
+turns: 4
+value_label: null
+verdict: unverifiable

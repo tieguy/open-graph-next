@@ -1,0 +1,28 @@
+completion_tokens: 637
+cost_usd: 0.007925050000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 155953
+property: P31
+property_label: instance of
+rationale: The proposition that IShowSpeed is classified as a 'monkey' requires investigating
+  potential linguistic, cultural, or humorous contexts where such a descriptor might
+  emerge. Despite extensive searches across web resources, no meaningful information
+  was found regarding the use of 'monkey' to describe or categorize streamer IShowSpeed
+  in any official, scholarly, or widely recognized context. While the profile appears
+  to be active and contextually complex (with references to social media, gameplay,
+  and digital content), no verifiable source confirmed either the classification or
+  its broader usage. As a result, the available data is insufficient to either confirm
+  or refute this claim.
+rcid: 2550521343
+revid: 2473855539
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://link.me/ishowspeed
+timestamp: '2026-04-07T07:59:00.905118+00:00'
+title: Q114834007
+turns: 15
+value_label: monkey
+verdict: unverifiable

@@ -1,0 +1,34 @@
+completion_tokens: 2200
+cost_usd: 0.00651411
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 50213
+property: P9071
+property_label: character type
+rationale: 'The claim that Dom James (Q108312450) is an ''anti-villain'' (Q12218723)
+  in *Space Jam: A New Legacy* is not supported by any credible source. All verified
+  primary and secondary sources classify Dom James as a protagonist or tritagonist.
+  The cited reference (Fandom) does not support this claim, and no independent evidence
+  confirms Dom James as an anti-villain. The claim contradicts established narrative
+  roles and is therefore incorrect.'
+rcid: 2550845811
+revid: 2474169642
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Characters/SpaceJamANewLegacy
+- provenance: verified
+  supports_claim: false
+  url: https://warnerbros.fandom.com/wiki/Dom_James
+- provenance: verified
+  supports_claim: false
+  url: https://hero.fandom.com/wiki/Dom_James
+- provenance: verified
+  supports_claim: false
+  url: https://tropedia.fandom.com/wiki/Anti-Villain
+timestamp: '2026-04-10T11:05:28.345521+00:00'
+title: Q108312450
+turns: 3
+value_label: anti-villain
+verdict: incorrect

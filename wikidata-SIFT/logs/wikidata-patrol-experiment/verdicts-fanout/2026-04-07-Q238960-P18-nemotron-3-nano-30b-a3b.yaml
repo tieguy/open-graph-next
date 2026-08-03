@@ -1,0 +1,21 @@
+completion_tokens: 614
+cost_usd: 0.0048864500000000005
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 95273
+property: P18
+property_label: image
+rationale: No sources were found that confirm or deny the claim that Sacagawea has
+  an image titled 'Abraham Lincoln head on shoulders photo portrait.jpg'. Exhaustive
+  searches across museums, libraries, archives, and authoritative websites did not
+  yield any relevant results, indicating that this citation cannot currently be verified
+  or refuted with available information.
+rcid: 2550569795
+revid: 2473902165
+sources: []
+timestamp: '2026-04-07T05:25:43.592081+00:00'
+title: Q238960
+turns: 15
+value_label: null
+verdict: unverifiable

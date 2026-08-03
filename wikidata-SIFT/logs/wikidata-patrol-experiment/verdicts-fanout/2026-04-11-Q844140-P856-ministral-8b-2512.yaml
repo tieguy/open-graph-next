@@ -1,0 +1,28 @@
+completion_tokens: 1796
+cost_usd: 0.00299781
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24385
+property: P856
+property_label: official website
+rationale: The official website for Chikushino (Q844140) was incorrectly changed from
+  the municipal domain `https://www.city.chikushino.fukuoka.jp/` (verified as the
+  city’s official portal via prefetched content and independent municipal references)
+  to `https://www.flyasiana.com/`, which is an airline website with no affiliation
+  to Chikushino’s local government. The new value lacks any supporting evidence or
+  references and contradicts all available sources.
+rcid: null
+revid: 2472099838
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.chikushino.fukuoka.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flyasiana.com/
+timestamp: '2026-04-11T18:44:10.016147+00:00'
+title: Q844140
+turns: 1
+value_label: null
+verdict: incorrect

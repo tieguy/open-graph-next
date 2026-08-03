@@ -1,0 +1,31 @@
+completion_tokens: 983
+cost_usd: 0.0035852
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14977
+property: P749
+property_label: parent organization or unit
+rationale: The primary sources from both Sanofi and Opella confirm that Opella has
+  become operationally independent as of April 2025 but that Sanofi retains a significant
+  48.2% stake. This indicates that while Opella is no longer a fully controlled subsidiary,
+  a parent organization relationship may still exist due to Sanofi's continued major
+  shareholding and involvement. Therefore, removing 'Sanofi' as the parent organization
+  is not fully justified by the evidence.
+rcid: 2549919417
+revid: 2473273845
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sanofi.com/en/media-room/press-releases/2025/2025-04-30-11-00-00-3071167
+- provenance: verified
+  supports_claim: false
+  url: https://www.sanofi.com/en/media-room/press-releases/2024/2024-10-21-05-30-00-2965875
+- provenance: verified
+  supports_claim: false
+  url: https://www.opella.com/en/making-headlines/breaking-news/2025-global-opella-independent
+timestamp: '2026-04-11T09:26:45.183942+00:00'
+title: Q129836680
+turns: 1
+value_label: Sanofi
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 1480
+cost_usd: 0.00254928
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21250
+property: P2048
+property_label: height
+rationale: Multiple verified primary sources (Bundesliga.com, Transfermarkt) consistently
+  list Hugo Ekitike's height as 190 cm, directly contradicting the claim of 185 cm.
+  No verified source supports the new value, and the majority of evidence refutes
+  it.
+rcid: 2550370207
+revid: 2473708572
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bundesliga.com/en/bundesliga/player/hugo-ekitike
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/hugo-ekitike/profil/spieler/709726
+- provenance: verified
+  supports_claim: false
+  url: https://www.foxsports.com/soccer/hugo-ekitike-player-bio
+timestamp: '2026-04-10T14:09:59.745362+00:00'
+title: Q100602910
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,21 @@
+completion_tokens: 1062
+cost_usd: 0.0019091999999999998
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18955
+property: P3579
+property_label: Weibo user ID
+rationale: The new qualifier "尹浩宇Patrick" is supported by the source https://kprofiles.com/patrick-profile/.
+  The edit is therefore verified as high.
+rcid: 2551413554
+revid: 2474716399
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kprofiles.com/patrick-profile/
+timestamp: '2026-04-11T18:32:14.324857+00:00'
+title: Q105654184
+turns: 2
+value_label: null
+verdict: verified-high

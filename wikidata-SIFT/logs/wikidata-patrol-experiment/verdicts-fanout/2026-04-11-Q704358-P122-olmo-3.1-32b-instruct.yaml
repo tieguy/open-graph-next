@@ -1,0 +1,27 @@
+completion_tokens: 2973
+cost_usd: 0.005067
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16416
+property: P122
+property_label: basic form of government
+rationale: Independent, verified sources describe the State of Burma (1943–1945) as
+  a Japanese puppet regime under Ba Maw, lacking autonomy and any constitution. This
+  regime does not fit the definition of a constitutional monarchy or a dictatorship
+  in the standard sense. Therefore, replacing 'constitutional monarchy' with 'dictatorship'
+  was incorrect, as neither value accurately reflects the historical reality.
+rcid: 2551284723
+revid: 2474593781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/History_of_Burma
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ba_Maw
+timestamp: '2026-04-11T13:37:58.466154+00:00'
+title: Q704358
+turns: 1
+value_label: dictatorship
+verdict: incorrect

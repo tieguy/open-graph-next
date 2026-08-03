@@ -1,0 +1,27 @@
+completion_tokens: 451
+cost_usd: 0.014747430000000002
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 42302
+property: P569
+property_label: date of birth
+rationale: The claim '16 December 1802' as Zara Larsson's date of birth is clearly
+  wrong. Multiple reliable sources confirm Zara Larsson was born on 16 December 1997.
+  The edit appears to be a vandalism attempt (as indicated by the 'mw-reverted' tag)
+  changing the year from 1997 to 1802, which would make her over 200 years old. Independent
+  sources consistently report her birth year as 1997, not 1802.
+rcid: 2540966149
+revid: 2464753744
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zaralarsson.fandom.com/wiki/Zara_Larsson
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/zara-larsson.html
+timestamp: '2026-02-20T03:48:47.696123+00:00'
+title: Q4177928
+turns: 3
+value_label: null
+verdict: incorrect

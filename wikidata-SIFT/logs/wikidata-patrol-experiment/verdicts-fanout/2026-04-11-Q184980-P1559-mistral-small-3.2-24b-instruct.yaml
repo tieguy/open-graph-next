@@ -1,0 +1,27 @@
+completion_tokens: 283
+cost_usd: 0.00669559375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70665
+property: P1559
+property_label: name in native language
+rationale: Unable to verify the claim due to search errors. No sources could be fetched
+  to confirm or refute the change from 'Thomas Samuel Kuhn' to 'Tomás Samuel Kuhna'.
+rcid: null
+revid: 2471011553
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.jinfo.org/Philosophers.html
+- provenance: verified
+  supports_claim: false
+  url: https://mprl-series.mpg.de/studies/2/8/index.html#16
+- provenance: verified
+  supports_claim: false
+  url: https://www.pronounceitright.com/pronunciation/thomas-samuel-kuhn-3540
+timestamp: '2026-04-11T18:09:58.500813+00:00'
+title: Q184980
+turns: 4
+value_label: null
+verdict: unverifiable

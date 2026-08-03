@@ -1,0 +1,27 @@
+completion_tokens: 2355
+cost_usd: 0.00377832
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34559
+property: P2003
+property_label: Instagram username
+rationale: The Instagram username claim 'giannamariella' for Mariella Tripke is supported
+  by independent, verified sources (e.g., Anne Schüßler’s blog explicitly confirming
+  the handle). The removed reference (P813) was not linked to any verifiable source
+  in the prefetched content, indicating it was either incorrectly added or unsupported.
+  Thus, the removal of the reference was justified because the claim itself is correct.
+rcid: 2550356159
+revid: 2473694826
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://anneschuessler.com/2019/02/28/lieblingstweets-im-februar-teil-2-7/
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+timestamp: '2026-04-10T14:02:47.496241+00:00'
+title: Q123352308
+turns: 3
+value_label: null
+verdict: incorrect

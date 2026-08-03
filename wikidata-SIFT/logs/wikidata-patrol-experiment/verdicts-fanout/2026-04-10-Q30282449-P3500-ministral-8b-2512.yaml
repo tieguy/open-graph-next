@@ -1,0 +1,34 @@
+completion_tokens: 2369
+cost_usd: 0.004574669999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39854
+property: P3500
+property_label: Ringgold ID
+rationale: The Ringgold ID '427539' was not found in any verified independent source,
+  and the only cited reference (Q64159407) is a batch edit page that does not directly
+  confirm the association of this ID with Institut d'Investigació Sanitària Pere Virgili.
+  The institute's ROR ID (01av3a615) does not link to the Ringgold ID, and no official
+  Ringgold database or API was consulted to verify the claim. Without direct evidence
+  from Ringgold's authoritative source, the claim remains unverifiable.
+rcid: 2550612669
+revid: 2473943467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ror.org/01av3a615
+- provenance: verified
+  supports_claim: false
+  url: https://authors.bmj.com/open-access/what-is-ringgold/
+- provenance: verified
+  supports_claim: false
+  url: https://www.iispv.cat/
+- provenance: verified
+  supports_claim: false
+  url: https://idibell.cat/en/the-institute/
+timestamp: '2026-04-10T13:19:42.615474+00:00'
+title: Q30282449
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 887
+cost_usd: 0.005047481249999999
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 50807
+property: P19
+property_label: place of birth
+rationale: 'The updated reference from the Integrated Authority File (GND) supports
+  the place of birth claim for Friedrich Meggendorfer as Bad Aibling. The fetched
+  content explicitly states ''Geburtsort: Bad Aibling'', confirming the claim.'
+rcid: 2550857140
+revid: 2474180764
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://d-nb.info/gnd/1055366881
+timestamp: '2026-04-11T12:53:10.235832+00:00'
+title: Q97210
+turns: 5
+value_label: Bad Aibling
+verdict: verified-high

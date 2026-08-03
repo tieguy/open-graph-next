@@ -1,0 +1,31 @@
+completion_tokens: 1801
+cost_usd: 0.00857403
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 68006
+property: P569
+property_label: date of birth
+rationale: The new value '3 CE' for Germaine Tillion's date of birth is not supported
+  by any credible or independently verified sources. Multiple authoritative sources,
+  including English Wikipedia, Encyclopedia.com, and Students and Parents, confirm
+  her birth date as May 30, 1907. The cited references in the edit are unreachable,
+  and no source supports the new value. The change to '3 CE' is historically implausible
+  and incorrect.
+rcid: null
+revid: 2470121557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Germaine_Tillion
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/arts/encyclopedias-almanacs-transcripts-and-maps/tillion-germaine-marie-rosine
+- provenance: verified
+  supports_claim: false
+  url: https://www.studentsandparents.com/biography17/germaine-tillion.html
+timestamp: '2026-04-11T16:42:00.769510+00:00'
+title: Q271991
+turns: 3
+value_label: null
+verdict: incorrect

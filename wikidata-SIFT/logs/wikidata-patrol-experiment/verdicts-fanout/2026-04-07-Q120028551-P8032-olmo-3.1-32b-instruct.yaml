@@ -1,0 +1,36 @@
+completion_tokens: 785
+cost_usd: 0.0154962
+diff_type: qualifier_changed
+finish_status: max_turns
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 75126
+property: P8032
+property_label: victim(s)
+rationale: The claim that 'Nahel Merzouk' is a correct updated qualifier for the victim(s)
+  claim could not be verified because no authoritative primary source confirming the
+  identity and status of the victim was accessible or fetched during the investigation.
+  All attempted searches for official statements or reports from French government
+  or law enforcement sources returned no usable results, and commonly referenced secondary
+  sources such as Wikipedia were blocked or did not provide verifiable evidence. Therefore,
+  while the edit is consistent with the item's subject, there is no fetched primary
+  or high-quality independent evidence to confirm its accuracy.
+rcid: 2549974142
+revid: 2473324003
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Killing_of_Nahel_Merzouk
+- provenance: reported
+  supports_claim: null
+  url: https://www.france24.com/fr/france/20230628-nahel-merzouk-jeune-mort-police-nanterre
+- provenance: reported
+  supports_claim: null
+  url: https://www.lemonde.fr/france/article/2023/06/28/meurtre-de-nahel-merzouk-a-nanterre-une-jeune-personne-mortue-par-un-agent-de-police_6191139_3232.html
+- provenance: reported
+  supports_claim: null
+  url: https://www.lefigaro.fr/actualites/2023/06/28/11001/20230628ARTFIG00246-nanterre-le-jeune-mort-par-le-feu-d-un-agent-de-police-une-jeune-femme-accusee-de-voiture-en-fuite.php
+timestamp: '2026-04-07T06:33:37.475257+00:00'
+title: Q120028551
+turns: 15
+value_label: Nahel Merzouk
+verdict: unverifiable

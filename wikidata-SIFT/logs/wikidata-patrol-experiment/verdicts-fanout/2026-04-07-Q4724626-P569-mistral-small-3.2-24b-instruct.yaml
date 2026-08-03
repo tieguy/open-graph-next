@@ -1,0 +1,25 @@
+completion_tokens: 932
+cost_usd: 0.0018679062500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17439
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth from 4 May 1951 to 4 May 1959. However,
+  no independent sources could be found to confirm the new date of birth. The lack
+  of reliable sources makes it difficult to verify the accuracy of the edit.
+rcid: 2549613088
+revid: 2472974774
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ali+Al-Sebaa+date+of+birth
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%D8%B9%D9%84%D9%8A+%D8%A7%D9%84%D8%B3%D8%A8%D8%B9+%D8%AA%D8%A7%D8%B1%D9%8A%D8%AE+%D8%A7%D9%84%D9%85%D9%8A%D9%84%D8%A7%D8%AF
+timestamp: '2026-04-07T04:51:47.983907+00:00'
+title: Q4724626
+turns: 3
+value_label: null
+verdict: unverifiable

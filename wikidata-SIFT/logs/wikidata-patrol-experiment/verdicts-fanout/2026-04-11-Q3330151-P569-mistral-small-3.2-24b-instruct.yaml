@@ -1,0 +1,25 @@
+completion_tokens: 1460
+cost_usd: 0.0080248375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 84910
+property: P569
+property_label: date of birth
+rationale: The new value of "1796" is well-supported by multiple primary sources,
+  including the Biblioteca Virtual Miguel de Cervantes and the BnF authorities. The
+  old value of "6767" is clearly incorrect.
+rcid: 2550552434
+revid: 2473885504
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bvpb.mcu.es/es/consulta_aut/registro.do?control=BVPB20090028920
+- provenance: verified
+  supports_claim: true
+  url: https://catalogue.bnf.fr/ark:/12148/cb12668057m
+timestamp: '2026-04-11T18:36:59.727984+00:00'
+title: Q3330151
+turns: 5
+value_label: null
+verdict: verified-high

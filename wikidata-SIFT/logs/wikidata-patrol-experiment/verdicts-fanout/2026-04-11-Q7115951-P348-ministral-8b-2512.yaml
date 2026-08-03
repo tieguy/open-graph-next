@@ -1,0 +1,29 @@
+completion_tokens: 1781
+cost_usd: 0.01075707
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 101818
+property: P348
+property_label: software version identifier
+rationale: The change from software version identifier '28.0' to '28.1' for Oxygen
+  XML Editor is supported by the official release timeline from Oxygen XML's website.
+  The new version '28.1' is confirmed with a release date of March 18, 2026, matching
+  the publication date in the edit. The reference URL ([https://www.oxygenxml.com/xml_editor.html](https://www.oxygenxml.com/xml_editor.html))
+  is authoritative, and prefetched content from [https://www.oxygenxml.com/xml_editor/whats_new.html](https://www.oxygenxml.com/xml_editor/whats_new.html)
+  and [https://www.oxygenxml.com/history.html](https://www.oxygenxml.com/history.html)
+  corroborates the version progression without contradictions.
+rcid: 2550539244
+revid: 2473872937
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.oxygenxml.com/xml_editor/whats_new.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.oxygenxml.com/history.html
+timestamp: '2026-04-11T06:31:52.428732+00:00'
+title: Q7115951
+turns: 6
+value_label: null
+verdict: verified-high

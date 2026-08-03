@@ -1,0 +1,24 @@
+completion_tokens: 1489
+cost_usd: 0.007335175
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77186
+property: P973
+property_label: described at URL
+rationale: Both the old and new URLs are either behind a paywall or inaccessible,
+  making it impossible to verify the content or determine if the change is accurate.
+rcid: 2551338591
+revid: 2474644867
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ft.com/content/4ef8e646-828d-43fa-8892-b42c8a7efc28
+- provenance: verified
+  supports_claim: false
+  url: https://almanac.upenn.edu/articles/penn-global-research-and-engagement-program-awards-12-million-to-penn-faculty-for-research-initiatives
+timestamp: '2026-04-11T16:25:19.320785+00:00'
+title: Q110968992
+turns: 5
+value_label: null
+verdict: unverifiable

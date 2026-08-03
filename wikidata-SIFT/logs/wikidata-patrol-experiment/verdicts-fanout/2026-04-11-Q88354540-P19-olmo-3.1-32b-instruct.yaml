@@ -1,0 +1,28 @@
+completion_tokens: 1249
+cost_usd: 0.0050594
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21550
+property: P19
+property_label: place of birth
+rationale: There is no credible evidence that Sara García Alonso was born in Santiago.
+  Official sources such as the European Space Agency and Spanish university profiles
+  confirm her birth year and country (Spain), and some indicate León as her origin,
+  but none list Santiago as her place of birth. The cited reference in the edit was
+  unverifiable due to a blocked domain, and no independent source supports the Santiago
+  claim. Therefore, the removal of 'Santiago' as the place of birth was correct.
+rcid: null
+revid: 2471059626
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: false
+  url: https://www.upv.es/noticias-upv/noticia-15191-sara-garcia-al-en.html
+timestamp: '2026-04-11T13:16:27.910854+00:00'
+title: Q88354540
+turns: 1
+value_label: Santiago
+verdict: incorrect

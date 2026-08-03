@@ -1,0 +1,29 @@
+completion_tokens: 1999
+cost_usd: 0.004824
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18123
+property: P569
+property_label: date of birth
+rationale: All verified primary and secondary sources consistently state that Jean
+  Louis de Viefville des Essarts was born on February 29, 1744. No source supports
+  the date '1 March 1745.' The change to the latter is therefore incorrect and not
+  supported by evidence.
+rcid: 2550965015
+revid: 2474284682
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www2.assemblee-nationale.fr/sycomore/fiche?num_dept=14042
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/deviefvilledesessarj/jean-louis-de-viefville-des-essarts
+- provenance: verified
+  supports_claim: false
+  url: https://www.geneastar.org/celebrite/deviefvilledesessarj/jean-louis-de-viefville-des-essarts
+timestamp: '2026-04-11T15:51:43.347569+00:00'
+title: Q3173277
+turns: 1
+value_label: null
+verdict: incorrect

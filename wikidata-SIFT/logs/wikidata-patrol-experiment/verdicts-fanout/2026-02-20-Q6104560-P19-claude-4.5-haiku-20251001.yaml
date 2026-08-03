@@ -1,0 +1,33 @@
+completion_tokens: 2110
+cost_usd: 0.068631
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 58081
+property: P19
+property_label: place of birth
+rationale: The most authoritative source—the detailed family obituary from the Daily
+  Progress (published January 2026)—explicitly states Reid Harrison 'was born November
+  6, 1958, in Fredericksburg, Virginia' and then notes 'Growing up in Orange, he was
+  a charming scrapper.' This clearly distinguishes birthplace (Fredericksburg) from
+  childhood residence (Orange). While some online databases list Orange as birthplace,
+  the official family obituary from a major regional newspaper provides authoritative
+  documentation that the actual birthplace was Fredericksburg, Virginia, not Orange.
+  The edit conflates his childhood town with his actual birthplace.
+rcid: 2540964224
+revid: 2464751889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.legacy.com/us/obituaries/dailyprogress/name/reid-harrison-obituary?id=60544470
+- provenance: verified
+  supports_claim: true
+  url: https://angelorules.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: true
+  url: https://www.filmbooster.co.uk/creator/76141-reid-harrison/
+timestamp: '2026-02-20T04:01:09.602378+00:00'
+title: Q6104560
+turns: 5
+value_label: Orange
+verdict: incorrect

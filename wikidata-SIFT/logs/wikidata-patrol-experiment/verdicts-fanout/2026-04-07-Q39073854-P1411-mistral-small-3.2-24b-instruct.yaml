@@ -1,0 +1,23 @@
+completion_tokens: 191
+cost_usd: 0.0015795499999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15906
+property: P1411
+property_label: nominated for
+rationale: The search results did not provide any direct evidence to verify the claim
+  that 'The Journey' was submitted as an International Submission to the Academy Awards
+  by the United Kingdom. The sources found do not confirm or deny the claim, making
+  it unverifiable based on the available information.
+rcid: 2550486540
+revid: 2473822461
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%22The+Journey%22+film+2017+Academy+Awards+submission+Iraq+UK
+timestamp: '2026-04-07T13:27:09.140125+00:00'
+title: Q39073854
+turns: 2
+value_label: International Submission to the Academy Awards
+verdict: unverifiable

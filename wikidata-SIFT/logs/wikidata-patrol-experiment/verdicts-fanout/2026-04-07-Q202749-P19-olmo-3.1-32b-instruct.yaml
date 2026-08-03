@@ -1,0 +1,26 @@
+completion_tokens: 1591
+cost_usd: 0.034678600000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 168620
+property: P19
+property_label: place of birth
+rationale: The edit references several sources for Duttlenheim as the place of birth
+  of Edmond Rostand, but none of the cited sources could be accessed or verified during
+  this investigation. No independent, accessible evidence could be found to confirm
+  or deny the claim. Therefore, the claim remains unverifiable.
+rcid: 2549848486
+revid: 2473204970
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ia.id.loc.gov/authorities/namesno2006016364
+- provenance: reported
+  supports_claim: false
+  url: https://www.francebleu.fr/infos/culture-loisirs/marseille-honore-la-memoire-d-edmond-rostand-1491068977
+timestamp: '2026-04-07T12:24:23.166638+00:00'
+title: Q202749
+turns: 11
+value_label: Duttlenheim
+verdict: unverifiable

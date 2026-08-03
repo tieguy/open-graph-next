@@ -1,0 +1,26 @@
+completion_tokens: 13238
+cost_usd: 0.01106471
+diff_type: reference_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 64747
+property: P7085
+property_label: TikTok username
+rationale: The prefetched source https://joshuniverse.com does not mention 'joshtospace',
+  providing no support for the TikTok username claim. Although a TikTok profile for
+  that handle exists, it could not be fetched, so the cited reference fails to substantiate
+  the edit, making the claim suspect.
+rcid: 2551427212
+revid: 2474727712
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com
+- provenance: reported
+  supports_claim: true
+  url: https://www.tiktok.com/@joshtospace
+timestamp: '2026-04-10T12:35:15.637424+00:00'
+title: Q123738871
+turns: 3
+value_label: null
+verdict: suspect

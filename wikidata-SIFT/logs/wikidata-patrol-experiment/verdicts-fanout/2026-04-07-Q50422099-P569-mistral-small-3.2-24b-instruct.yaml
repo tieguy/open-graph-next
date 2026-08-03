@@ -1,0 +1,26 @@
+completion_tokens: 1446
+cost_usd: 0.009976068749999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 101747
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth from 1957 to 2026, which is highly implausible.
+  The referenced source (Spanish Wikipedia) could not be accessed, and no independent
+  sources support the new date. The ORCID profile link provided is not accessible,
+  further indicating the lack of verifiable evidence for the edit.
+rcid: null
+revid: 2472523494
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Beatriz_González_López-Valcárcel
+- provenance: verified
+  supports_claim: false
+  url: https://pub.orcid.org/v3.0/0000-0002-5571-3257/employment
+timestamp: '2026-04-07T12:00:35.809924+00:00'
+title: Q50422099
+turns: 10
+value_label: null
+verdict: incorrect

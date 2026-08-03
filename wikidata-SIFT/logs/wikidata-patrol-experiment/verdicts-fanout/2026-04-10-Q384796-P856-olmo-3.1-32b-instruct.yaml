@@ -1,0 +1,34 @@
+completion_tokens: 310
+cost_usd: 0.004682199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22481
+property: P856
+property_label: official website
+rationale: The cited URL https://www.turkishairlines.com does not appear to relate
+  to Ōda-shi, nor could its content be verified as an official website for the city.
+  Attempts to fetch the page from the official city context sources failed, and the
+  Turkish Airlines website does not contain any information indicating it serves as
+  the official website for Ōda-shi. No independent or primary source confirms this
+  claim.
+rcid: 2549352572
+revid: 2472719882
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan.travel/en/spot/2309/
+- provenance: verified
+  supports_claim: false
+  url: https://pref.shimane-toukei.jp/?view=8779
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.ohda.lg.jp/ohda_city/city_organization/25b/27/75/15750/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Oda,_Shimane
+timestamp: '2026-04-10T13:04:16.753040+00:00'
+title: Q384796
+turns: 1
+value_label: null
+verdict: unverifiable

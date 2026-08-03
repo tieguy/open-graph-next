@@ -1,0 +1,22 @@
+completion_tokens: 1176
+cost_usd: 0.00410896875
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40693
+property: P39
+property_label: position held
+rationale: The Commons category page for Georg Fuchs von Rügheim explicitly states
+  that he held the position of 'diocesan bishop' from 1556 to 1561, which confirms
+  the edit. The edit is supported by a primary source.
+rcid: 2550975963
+revid: 2474295348
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Georg_Fuchs_von_R%C3%BCgheim
+timestamp: '2026-04-11T06:38:55.413742+00:00'
+title: Q1504843
+turns: 3
+value_label: diocesan bishop
+verdict: verified-high

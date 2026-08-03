@@ -1,0 +1,35 @@
+completion_tokens: 1690
+cost_usd: 0.0032302
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11081
+property: P18
+property_label: image
+rationale: The image claim was unsourced and could not be independently verified as
+  associated with Dufek Coast by any authoritative or notable source. Removal of unsourced
+  images from Wikidata is appropriate, especially when no recognized visual representation
+  exists for the entity.
+rcid: 2549917621
+revid: 2473272106
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Dufek_Coast
+- provenance: verified
+  supports_claim: false
+  url: https://www.bas.ac.uk/data/uk-ant maps/dufek-coast.html
+- provenance: verified
+  supports_claim: false
+  url: https://mrdata.usgs.gov/geology/map-viewer/antarctica
+- provenance: verified
+  supports_claim: false
+  url: https://unsplash.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.ca/photos/dufek_coast
+timestamp: '2026-04-11T12:32:23.893301+00:00'
+title: Q3933851
+turns: 1
+value_label: null
+verdict: verified-high

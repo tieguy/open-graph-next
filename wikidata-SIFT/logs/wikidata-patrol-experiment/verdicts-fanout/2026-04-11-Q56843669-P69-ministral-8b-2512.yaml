@@ -1,0 +1,25 @@
+completion_tokens: 2195
+cost_usd: 0.01064652
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 131195
+property: P69
+property_label: educated at
+rationale: 'The updated reference (URN-NBN: urn:nbn:de:gbv:700-2010012932) from Osnabrück
+  University''s official repository confirms that Florian Hartig submitted a doctoral
+  thesis in 2010, labeled as a doctoral thesis ([doctoralThesis]). This directly supports
+  the claim that Florian Hartig earned a Doctor of Natural Sciences degree from Osnabrück
+  University. The supervisor listed in the URN-NBN source also matches the Wikidata
+  claim for his doctoral advisor (P184). No contradictory evidence was found.'
+rcid: 2550568737
+revid: 2473901120
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://nbn-resolving.org/urn:nbn:de:gbv:700-2010012932
+timestamp: '2026-04-11T07:11:12.261679+00:00'
+title: Q56843669
+turns: 11
+value_label: Osnabrück University
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 299
+cost_usd: 0.0025462
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11834
+property: P197
+property_label: adjacent station
+rationale: 'The edit appears to be a no-op: both the old and new values for the ''adjacent
+  station'' property are ''Nishishita Station.'' However, the investigation could
+  not locate any independent, verifiable source confirming that Otomo Station in Rikuzentakata
+  is adjacent to Nishishita Station. The cited references on Wikidata are empty, and
+  web searches did not yield any authoritative source confirming this adjacency. The
+  pre-fetched external references were either unreachable or did not contain relevant
+  information. Therefore, the claim cannot be verified based on available evidence.'
+rcid: 2550457912
+revid: 2473794392
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.jreast.co.jp/en/e/stations/e350.html
+- provenance: reported
+  supports_claim: false
+  url: https://mapcarta.com/28750698
+- provenance: reported
+  supports_claim: false
+  url: https://www.japan-experience.com/plan-your-trip/travel-by-train/train-in-japan/yotsubashi-subway-line
+timestamp: '2026-04-11T05:54:33.326479+00:00'
+title: Q7108986
+turns: 1
+value_label: Nishishita Station
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 1932
+cost_usd: 0.00214023
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18071
+property: P31
+property_label: instance of
+rationale: The edit incorrectly assigns the instance of (P31) claim to the item itself
+  (Q173273), creating a self-referential loop. This is a fundamental error in Wikidata
+  structure, as an entity cannot logically be an instance of itself. All verified
+  sources confirm that the correct instance should be a subclass of human (e.g., Q5)
+  or a more specific category like spiritual teacher (Q1097530). The cited reference
+  URL failed to fetch, but independent sources (Kiddle, Chinmaya Mission, and DLSHQ)
+  do not support the self-referential claim and instead confirm the individual's identity
+  as a human/spiritual teacher.
+rcid: null
+revid: 2470123900
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Chinmayananda_Saraswati
+- provenance: verified
+  supports_claim: false
+  url: https://www.chinmayamission.com/who-we-are/swami-chinmayananda/
+- provenance: verified
+  supports_claim: false
+  url: https://www.dlshq.org/saints/his-holiness-sri-swami-chinmayananda-saraswati-maharaj/
+timestamp: '2026-04-10T12:53:17.368123+00:00'
+title: Q173273
+turns: 1
+value_label: Chinmayananda Saraswati
+verdict: incorrect

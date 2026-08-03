@@ -1,0 +1,28 @@
+completion_tokens: 1320
+cost_usd: 0.0061652
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26866
+property: P8159
+property_label: SciProfiles ID
+rationale: The SciProfiles ID '4667533' is not associated with Josh Universe. The
+  SciProfiles profile for this ID does not exist, and no independent or academic sources
+  link this ID to Josh Universe. The claim is therefore incorrect and should be removed.
+rcid: 2551430993
+revid: 2474730676
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sciprofile.com/profile/4667533
+- provenance: reported
+  supports_claim: false
+  url: https://biohackinginternational.com/about
+- provenance: reported
+  supports_claim: false
+  url: https://www.crunchbase.com/person/josh-universe
+timestamp: '2026-04-11T16:51:31.347359+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: incorrect

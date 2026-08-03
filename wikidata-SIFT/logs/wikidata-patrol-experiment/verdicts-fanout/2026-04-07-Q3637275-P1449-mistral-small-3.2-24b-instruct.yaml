@@ -1,0 +1,34 @@
+completion_tokens: 756
+cost_usd: 0.008938515000000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 116201
+property: P1449
+property_label: nickname
+rationale: The nickname 'Bebn' for Beatrice Vio is not supported by any of the verified
+  sources. All sources consistently refer to her as 'Bebe Vio'. The edit to change
+  her nickname to 'Bebn' is incorrect based on the evidence found.
+rcid: 2549505925
+revid: 2472870068
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bebevio.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.laureus.com/ambassadors/beatrice-vio
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/franceinter/podcasts/esprit-sport/histoire-de-sport-du-mercredi-25-aout-2021-5140445
+- provenance: verified
+  supports_claim: false
+  url: https://sport.ec.europa.eu/news/italian-ambassador-with-a-determination-like-no-other
+- provenance: verified
+  supports_claim: false
+  url: https://www.bebevio.com/?lang=en
+timestamp: '2026-04-07T07:44:48.181658+00:00'
+title: Q3637275
+turns: 15
+value_label: null
+verdict: incorrect

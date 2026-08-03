@@ -1,0 +1,28 @@
+completion_tokens: 1472
+cost_usd: 0.00973146875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 99877
+property: P6
+property_label: head of government
+rationale: The edit changes the head of government from Olivier Delaporte to Richard
+  Lejeune. The old value had a reference from the French National Directory of Representatives,
+  but it is not directly verified. The new value has no references. Independent sources
+  indicate that Richard Lejeune is a candidate for the municipal elections but do
+  not confirm his current position as the head of government. Therefore, the claim
+  cannot be verified with the available information.
+rcid: 2551270937
+revid: 2474580731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://richardlejeune.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://www.rassemblerpourlcsc.fr/
+timestamp: '2026-04-11T11:53:42.207367+00:00'
+title: Q367553
+turns: 5
+value_label: Richard Lejeune
+verdict: unverifiable

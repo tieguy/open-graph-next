@@ -1,0 +1,27 @@
+completion_tokens: 2017
+cost_usd: 0.013283010000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 95522
+property: P2403
+property_label: total assets
+rationale: The claim of 6,864,749,000,000 Russian rubles for Lukoil's total assets
+  in 2025 is strongly supported by Lukoil's official financial statement from e-disclosure.ru,
+  which reports 6,892,008,000,000 Russian rubles. The minor difference is negligible
+  and likely due to rounding or reporting adjustments. No independent sources contradict
+  this value, and the primary source is authoritative.
+rcid: 2550551117
+revid: 2473884224
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.e-disclosure.ru/portal/FileLoad.ashx?Fileid=1915683
+- provenance: verified
+  supports_claim: false
+  url: https://www.vedomosti.ru/investments/news/2026/03/20/1184268-ubitok-lukoila
+timestamp: '2026-04-10T10:16:55.577058+00:00'
+title: Q329347
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 834
+cost_usd: 0.0057312000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26154
+property: P12854
+property_label: Plex person key
+rationale: No independently verifiable sources were found that confirm the association
+  between Uwe Manßhardt and the Plex person key '5d7768366f4521001ea9c427'. The cited
+  reference to The Movie Database could not be accessed or corroborated, and no other
+  reliable sources support this claim.
+rcid: 2550949499
+revid: 2474269648
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.themoviedb.org/person/6023673
+timestamp: '2026-04-07T09:17:44.035052+00:00'
+title: Q95901509
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 251
+cost_usd: 0.010716031249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 113635
+property: P22
+property_label: father
+rationale: The claim that Jeffrey Epstein is the father of Jane Goodall is incorrect.
+  Jane Goodall's father is Mortimer Morris-Goodall, as cited by Genealogics. Additionally,
+  Jeffrey Epstein was born in 1953, which is after Jane Goodall's birth in 1934, making
+  it biologically impossible for him to be her father.
+rcid: null
+revid: 2472081214
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.genealogics.org/getperson.php?personID=I00015677&tree=LEO
+timestamp: '2026-04-07T08:32:34.822270+00:00'
+title: Q184746
+turns: 4
+value_label: Jeffrey Epstein
+verdict: incorrect

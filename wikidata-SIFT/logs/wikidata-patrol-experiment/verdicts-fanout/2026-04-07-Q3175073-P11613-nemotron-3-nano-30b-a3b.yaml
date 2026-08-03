@@ -1,0 +1,23 @@
+completion_tokens: 751
+cost_usd: 0.0044893500000000005
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86783
+property: P11613
+property_label: SACEM Museum artist ID
+rationale: I searched for multiple variations to verify if '968454' is a correct SACEM
+  Museum artist ID for Jean Voguet but found no reliable sources supporting this claim.
+  The relative clause on Wikidata shows the field was previously 'COAD 968.454.00'
+  but no references were cited for either the new or old values during investigation.
+  Without any fetched or verifiable sources confirming either the historical or updated
+  value, there is insufficient evidence to assess correctness. This meets the 'unverifiable'
+  criterion as no source was successfully fetched to confirm or refute the claim.
+rcid: 2550086824
+revid: 2473433486
+sources: []
+timestamp: '2026-04-07T13:47:50.535152+00:00'
+title: Q3175073
+turns: 15
+value_label: null
+verdict: unverifiable

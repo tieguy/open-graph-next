@@ -1,0 +1,30 @@
+completion_tokens: 1995
+cost_usd: 0.00177357
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19250
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.hitechgp.co.uk/', is explicitly
+  confirmed as the official domain by the team's own website content. The new value,
+  'http://www.hitechracing.net/', lacks any independent corroboration or reference.
+  The change from a confirmed official website to an unverified domain is not justified,
+  making the edit incorrect.
+rcid: 2551353052
+revid: 2474658753
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.hitechgp.co.uk/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hitechgp.co.uk/about/
+- provenance: verified
+  supports_claim: false
+  url: https://www.fiaformula2.com/Teams/228/Hitech-TGR
+timestamp: '2026-04-11T18:18:40.435339+00:00'
+title: Q4352414
+turns: 2
+value_label: null
+verdict: incorrect

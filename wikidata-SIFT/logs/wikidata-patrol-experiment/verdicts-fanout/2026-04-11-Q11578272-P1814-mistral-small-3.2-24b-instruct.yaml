@@ -1,0 +1,29 @@
+completion_tokens: 935
+cost_usd: 0.00200206
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33088
+property: P1814
+property_label: name in kana
+rationale: The investigation did not yield sufficient evidence to verify the correctness
+  of the edit. The prefetched references and search queries did not provide specific
+  information about the name '町田ありっくまX' and its kana representations. Additionally,
+  attempts to fetch relevant content were restricted due to HTTP 403 Forbidden errors.
+rcid: 2550597969
+revid: 2473929225
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://japanese-names.info/first-name/kana-2/
+- provenance: verified
+  supports_claim: false
+  url: https://www.quora.com/How-do-common-people-use-kana-names-in-Japan
+- provenance: verified
+  supports_claim: false
+  url: https://www.thebump.com/b/kana-baby-name
+timestamp: '2026-04-11T14:20:22.103983+00:00'
+title: Q11578272
+turns: 4
+value_label: null
+verdict: unverifiable

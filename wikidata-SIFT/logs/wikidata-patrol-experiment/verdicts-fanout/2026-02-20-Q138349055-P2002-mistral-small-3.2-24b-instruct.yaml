@@ -1,0 +1,25 @@
+completion_tokens: 878
+cost_usd: 0.0020204999999999997
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17571
+property: P2002
+property_label: X (Twitter) username
+rationale: The company's official website and the Companies House page do not mention
+  the Twitter username "mg_timber." Therefore, it is unverifiable whether "mg_timber"
+  is the correct X (Twitter) username for MG Timber Products Ltd.
+rcid: 2540935096
+revid: 2464725431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mgtimberproductsltd.co.uk/
+- provenance: verified
+  supports_claim: false
+  url: https://find-and-update.company-information.service.gov.uk/company/10560760
+timestamp: '2026-02-20T17:34:54.076737+00:00'
+title: Q138349055
+turns: 3
+value_label: null
+verdict: unverifiable

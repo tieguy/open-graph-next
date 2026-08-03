@@ -1,0 +1,31 @@
+completion_tokens: 1836
+cost_usd: 0.0016669200000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18698
+property: P18
+property_label: image
+rationale: The new image filename ('Alsergrund (Wien) - Müllverbrennungsanlage Spittelau,
+  Schlot.JPG') explicitly references the Spittelau incinerator, which aligns perfectly
+  with the item's description ('Chimney of Müllverbrennungsanlage Spittelau'). The
+  old image filename ('City of Vienna, Fernwaerme Wien.jpg') does not reference the
+  Spittelau incinerator, making it less relevant. The prefetched content from visitingvienna.com
+  confirms the Spittelau incinerator's chimney as a distinctive landmark, supporting
+  the new image's accuracy. The new image's qualifier ('Chimney of the Spittelau waste
+  incineration plant in Vienna') further confirms its relevance. No contradictory
+  evidence was found.
+rcid: 2551004619
+revid: 2474322646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.visitingvienna.com/footsteps/spittelau/
+- provenance: reported
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Alsergrund_(Wien)_-_Müllverbrennungsanlage_Spittelau,_Schlot.JPG
+timestamp: '2026-04-11T14:11:55.833388+00:00'
+title: Q56072632
+turns: 2
+value_label: null
+verdict: verified-high

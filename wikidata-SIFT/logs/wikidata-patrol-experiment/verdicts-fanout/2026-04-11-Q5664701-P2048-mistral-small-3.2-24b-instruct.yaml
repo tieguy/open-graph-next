@@ -1,0 +1,28 @@
+completion_tokens: 1411
+cost_usd: 0.00184625625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17967
+property: P2048
+property_label: height
+rationale: The edit to change the height from 170 cm to 120 cm is incorrect. Multiple
+  independent sources consistently report Alejandra Onieva's height as 165 cm. Neither
+  the old value nor the new value is supported by these sources.
+rcid: 2550874491
+revid: 2474197843
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bodysize.org/en/alejandra-onieva/
+- provenance: verified
+  supports_claim: false
+  url: https://www.dreshare.com/alejandra-onieva/
+- provenance: verified
+  supports_claim: false
+  url: https://www.legit.ng/1419650-alejandra-onieva-biography-sebastian-stans-girlfriend.html
+timestamp: '2026-04-11T08:31:39.851259+00:00'
+title: Q5664701
+turns: 1
+value_label: null
+verdict: incorrect

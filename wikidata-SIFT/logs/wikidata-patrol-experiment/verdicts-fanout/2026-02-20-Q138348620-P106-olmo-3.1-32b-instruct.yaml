@@ -1,0 +1,28 @@
+completion_tokens: 1631
+cost_usd: 0.0092946
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 41580
+property: P106
+property_label: occupation
+rationale: Chang Gao is confirmed to be a PhD candidate and visual artist engaged
+  in research within an academic and artistic context, as evidenced by her Royal College
+  of Art profile. However, there is no independent, non-academic evidence that she
+  is employed as a professional 'researcher' in the broader, scientific sense typically
+  implied by the property value Q1650915. Therefore, while 'researcher' is not incorrect,
+  it is not fully substantiated as her primary professional occupation.
+rcid: 2540932374
+revid: 2464722990
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://rca.ac.uk/research-innovation/research-degrees/research-students/chang-gao/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Researcher
+timestamp: '2026-02-20T19:33:04.012277+00:00'
+title: Q138348620
+turns: 3
+value_label: researcher
+verdict: plausible

@@ -1,0 +1,27 @@
+completion_tokens: 1131
+cost_usd: 0.0020720699999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22104
+property: P136
+property_label: genre
+rationale: Prefetched sources from Equipboard and Grokipedia explicitly confirm that
+  Eyes Set to Kill is primarily associated with the genre of metalcore, blending it
+  with post-hardcore. No independent evidence supports the previous claim of 'punk
+  rock' as the primary genre. The edit aligns with authoritative descriptions of the
+  band’s musical identity.
+rcid: 2550855336
+revid: 2474178979
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://equipboard.com/band/eyes-set-to-kill
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Eyes_Set_to_Kill
+timestamp: '2026-04-11T15:49:31.223275+00:00'
+title: Q1385787
+turns: 2
+value_label: metalcore
+verdict: verified-high

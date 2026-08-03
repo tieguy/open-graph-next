@@ -1,0 +1,33 @@
+completion_tokens: 2426
+cost_usd: 0.00358344
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 59800
+property: P3417
+property_label: Quora topic ID
+rationale: The edit changes the Quora topic ID for Q5367197 ('Body & Brain') from
+  'Dahn-Yoga-1' to 'bodynbrain'. The only cited reference (Quora) is unreachable due
+  to 403 errors and blocked domains. No independent sources were found to confirm
+  either value, and no verified sources were fetched during the investigation. The
+  lack of accessible evidence prevents verification of the new claim.
+rcid: 2549655803
+revid: 2473016251
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.quora.com/topic/bodynbrain
+- provenance: reported
+  supports_claim: false
+  url: https://www.quora.com/topic/Dahn-Yoga-1
+- provenance: verified
+  supports_claim: false
+  url: https://www.hedweb.com/quora/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.ncbi.nlm.nih.gov/books/NBK556443/
+timestamp: '2026-04-11T16:01:31.410005+00:00'
+title: Q5367197
+turns: 8
+value_label: null
+verdict: unverifiable

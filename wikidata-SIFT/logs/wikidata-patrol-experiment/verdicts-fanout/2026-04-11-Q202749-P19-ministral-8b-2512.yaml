@@ -1,0 +1,30 @@
+completion_tokens: 2133
+cost_usd: 0.00558066
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41267
+property: P19
+property_label: place of birth
+rationale: The edit changed Edmond Rostand's place of birth from Marseille (Q23482)
+  to *Ta mère* (Q21953196), a 2015 film. This is nonsensical and contradicts all verified
+  biographical sources. Multiple independent sources (e.g., GeneaStar, Find a Grave,
+  Encyclopædia Britannica, French Wikipedia) confirm Rostand was born in Marseille.
+  The new value is unsupported by any credible source and is clearly incorrect.
+rcid: 2549847201
+revid: 2473203737
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/rostande/edmond-rostand
+- provenance: verified
+  supports_claim: false
+  url: https://www.academie-francaise.fr/prix-toirac
+- provenance: verified
+  supports_claim: false
+  url: https://www.mairie-luchon.fr/edmond-rostand-2/
+timestamp: '2026-04-11T17:48:35.022721+00:00'
+title: Q202749
+turns: 1
+value_label: Ta mère
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 2526
+cost_usd: 0.0038510000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11677
+property: P279
+property_label: subclass of
+rationale: Multiple authoritative sources confirm that Maduro-Kangeanic is a subgroup
+  of the Javanic language family, which is itself a branch of the Malayo-Sumbawan
+  languages. Changing the direct parent from 'Malayo-Sumbawan' to 'Javanic' is therefore
+  correct and more precise. The cited reference, while secondary, supports this classification,
+  and independent linguistic databases (Glottolog, Wikipedia) provide verified evidence.
+rcid: null
+revid: 2433618650
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Maduro-Kangeanic_languages
+- provenance: verified
+  supports_claim: true
+  url: https://glottolog.org/resource/languoid/id/madr1240
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Malayo-Sumbawan_languages
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikiquote.org/wiki/Kangeanic
+timestamp: '2026-04-11T14:51:47.249743+00:00'
+title: Q117085830
+turns: 1
+value_label: Javanic
+verdict: verified-high

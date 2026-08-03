@@ -1,0 +1,30 @@
+completion_tokens: 1770
+cost_usd: 0.0042214
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15797
+property: P735
+property_label: given name
+rationale: The edit changes the given name from 'Rabih' to 'Rabah' without supporting
+  references. Authoritative sources, including the 1911 Encyclopaedia Britannica and
+  scholarly histories, consistently use 'Rabih' as the given name, with 'Rabah' appearing
+  only as an anglicized or transliterated variant. There is no evidence that 'Rabah'
+  is the correct or standard form for this individual's given name.
+rcid: 2549457072
+revid: 2472822431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Rabah_Zobeir
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n85380702.html
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+timestamp: '2026-04-10T09:54:11.869135+00:00'
+title: Q932368
+turns: 1
+value_label: Rabah
+verdict: suspect

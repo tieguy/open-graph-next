@@ -1,0 +1,25 @@
+completion_tokens: 591
+cost_usd: 0.006652399999999999
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31489
+property: P17
+property_label: country
+rationale: The claim that Jinjeop Elementary School is located in South Korea is plausible
+  given its location in Namyangju, Gyeonggi Province, which is known to be in South
+  Korea. However, the specific reference provided (Gyeonggi-do Ordinance No. 8726
+  Special Rule) could not be located or verified as supporting this claim. Without
+  accessible evidence for the cited reference, the claim cannot be confirmed to the
+  required standard.
+rcid: 2549921081
+revid: 2473275192
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.jinjeop.es.kr
+timestamp: '2026-04-07T05:23:17.671631+00:00'
+title: Q21060377
+turns: 7
+value_label: South Korea
+verdict: unverifiable

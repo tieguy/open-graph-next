@@ -1,0 +1,26 @@
+completion_tokens: 1559
+cost_usd: 0.00455174625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44057
+property: P101
+property_label: field of work
+rationale: The University of Regensburg's pages for Florian Hartig's research group
+  and personal profile both confirm that his field of work includes both statistics
+  and data science. Therefore, changing the field of work from 'statistics' to 'data
+  science' is justified.
+rcid: 2550568317
+revid: 2473900722
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig
+- provenance: verified
+  supports_claim: true
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig/team/prof-dr-florian-hartig
+timestamp: '2026-04-11T11:03:40.601556+00:00'
+title: Q56843669
+turns: 4
+value_label: data science
+verdict: verified-high

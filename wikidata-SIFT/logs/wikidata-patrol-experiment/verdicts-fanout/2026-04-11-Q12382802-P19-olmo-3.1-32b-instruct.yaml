@@ -1,0 +1,25 @@
+completion_tokens: 1534
+cost_usd: 0.0030076
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10436
+property: P19
+property_label: place of birth
+rationale: Two independent and verified secondary sources explicitly state that Alicia
+  Borrás was born in Madrid. No evidence supports the previous value of Vigo. Therefore,
+  changing the place of birth from Vigo to Madrid is correct and well-supported.
+rcid: 2551012576
+revid: 2474330276
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://narniafans.com/cast/alicia-borrachero/
+- provenance: verified
+  supports_claim: true
+  url: https://www.cinemathaque.net/actrices/alicia-borras/
+timestamp: '2026-04-11T06:06:57.164995+00:00'
+title: Q12382802
+turns: 1
+value_label: Madrid
+verdict: verified-high

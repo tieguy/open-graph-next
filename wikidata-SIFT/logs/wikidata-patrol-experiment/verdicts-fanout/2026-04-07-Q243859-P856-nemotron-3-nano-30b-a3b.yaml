@@ -1,0 +1,24 @@
+completion_tokens: 592
+cost_usd: 0.0067408
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 132448
+property: P856
+property_label: official website
+rationale: No official source confirming that "https://www.lufthansa.com" is the correct
+  official website for Abiko was found despite extensive searches using multiple queries
+  targeting Japanese municipal websites and official domains. None of the searched
+  URLs yielded verifiable municipal websites for Abiko. Therefore no source was successfully
+  fetched or verified, making the claim unverifiable.
+rcid: null
+revid: 2471019462
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.lufthansa.com
+timestamp: '2026-04-07T12:41:02.079333+00:00'
+title: Q243859
+turns: 15
+value_label: null
+verdict: unverifiable

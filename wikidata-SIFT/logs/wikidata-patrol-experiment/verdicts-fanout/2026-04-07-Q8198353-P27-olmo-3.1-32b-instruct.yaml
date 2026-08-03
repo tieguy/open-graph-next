@@ -1,0 +1,27 @@
+completion_tokens: 752
+cost_usd: 0.0082304
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38896
+property: P27
+property_label: country of citizenship
+rationale: The removal of Spain from Analía Gadé's country of citizenship appears
+  reasonable given her documented Argentine birth and nationality. However, I was
+  unable to access or locate an authoritative open source that explicitly confirms
+  or denies Spanish citizenship, so the assessment is based on indirect evidence and
+  consistency with available item data.
+rcid: null
+revid: 2470329665
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Anal%C3%ADa_Gad%C3%A9
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q8198353
+timestamp: '2026-04-07T10:34:26.050842+00:00'
+title: Q8198353
+turns: 6
+value_label: Spain
+verdict: verified-low

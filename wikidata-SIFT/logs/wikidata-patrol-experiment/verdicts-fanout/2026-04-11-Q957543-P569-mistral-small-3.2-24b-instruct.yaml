@@ -1,0 +1,23 @@
+completion_tokens: 1127
+cost_usd: 0.01782631875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 188594
+property: P569
+property_label: date of birth
+rationale: The source [https://www.geographicus.com/P/RareMaps/shackleton](https://www.geographicus.com/P/RareMaps/shackleton)
+  directly supports the claim that Ernest Shackleton was born on February 15, 1874.
+  The information provided is consistent and detailed, confirming the accuracy of
+  the birth date.
+rcid: null
+revid: 2465968204
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.geographicus.com/P/RareMaps/shackleton
+timestamp: '2026-04-11T17:36:45.485914+00:00'
+title: Q957543
+turns: 8
+value_label: null
+verdict: verified-high

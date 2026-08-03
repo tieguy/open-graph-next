@@ -1,0 +1,26 @@
+completion_tokens: 650
+cost_usd: 0.00474505
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92301
+property: P69
+property_label: educated at
+rationale: No credible sources or external references confirm or contradict the claim
+  that Roberto Musso's educational background is 'Cobach' (Elbio Fernández School
+  and Lyceum). Extensive searches for relevant educational institutions, musician
+  backgrounds, and Uruguayan education identifiers yielded no supporting or contradictory
+  evidence. All searches returned empty results, indicating no verifiable information
+  could be found about 'Cobach' in relation to musical education or the subject's
+  biography.
+rcid: 2551400079
+revid: 2474703858
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%22Elbio+Fern%C3%A1ndez+School+and+Lyceum%22+Uruguay
+timestamp: '2026-04-07T13:54:39.520122+00:00'
+title: Q6109886
+turns: 15
+value_label: Cobach
+verdict: unverifiable

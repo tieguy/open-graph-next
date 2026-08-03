@@ -1,0 +1,33 @@
+completion_tokens: 1224
+cost_usd: 0.0049272
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20964
+property: P1971
+property_label: number of children
+rationale: The evidence fetched does not provide a definitive, authoritative, and
+  independently verified statement regarding the number of children Masoud Pezeshkian
+  has. The best available reporting (The Guardian) indicates that he has three surviving
+  children after the accident that killed his wife and youngest son, but it does not
+  state the total number of children either before or after the accident. The removed
+  value was '+4', but no verified source explicitly confirms or refutes this number.
+  Therefore, the removal of the claim cannot be confirmed as justified based on the
+  available evidence.
+rcid: 2551335576
+revid: 2474642108
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+- provenance: verified
+  supports_claim: false
+  url: https://wanaen.com/the-unmarried-presidents-daughter-got-the-%E2%80%9Cfirst-daughter%E2%80%9D-title/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehindu.com/news/international/irans-khamenei-formally-grants-masoud-pezeshkian-presidential-powers/article68456408.ece
+timestamp: '2026-04-11T14:29:50.972736+00:00'
+title: Q5933752
+turns: 1
+value_label: null
+verdict: unverifiable

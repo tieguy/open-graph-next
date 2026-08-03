@@ -1,0 +1,31 @@
+completion_tokens: 1885
+cost_usd: 0.00332811
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26498
+property: P856
+property_label: official website
+rationale: The new official website URL, `https://www.aerok.com/`, is a promotional
+  site for budo sansho, a local spice, and does not represent the official town website
+  for Aridagawa. The old URL, `https://www.town.aridagawa.lg.jp/`, is the correct
+  and official domain for Aridagawa, consistent with standard Japanese local government
+  website conventions and corroborated by other Wikidata claims. The edit incorrectly
+  replaces the official town website with an unrelated commercial site.
+rcid: 2551409955
+revid: 2474713170
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.aerok.com/
+- provenance: reported
+  supports_claim: true
+  url: https://www.town.aridagawa.lg.jp/
+- provenance: reported
+  supports_claim: true
+  url: https://visitwakayama.jp/en/stories/detail_306.html
+timestamp: '2026-04-11T13:57:43.345999+00:00'
+title: Q1345889
+turns: 1
+value_label: null
+verdict: incorrect

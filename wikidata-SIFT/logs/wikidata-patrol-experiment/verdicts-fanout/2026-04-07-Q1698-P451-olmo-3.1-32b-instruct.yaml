@@ -1,0 +1,30 @@
+completion_tokens: 1593
+cost_usd: 0.0387592
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 189017
+property: P451
+property_label: unmarried partner
+rationale: Independent music histories and biographies confirm that Bamboula (Caroline
+  von Paulus) was Serge Gainsbourg's partner from 1981 until his death in 1991. However,
+  no primary or directly fetched authoritative source was available to mark this as
+  'verified-high', and the cited Wikipedia reference cannot be considered primary
+  evidence. The claim is therefore supported but with moderate confidence.
+rcid: null
+revid: 2471682735
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/biography/Serge-Gainsbourg
+- provenance: reported
+  supports_claim: true
+  url: https://www.allmusic.com/artist/serge-gainsbourg-mn0000198127/biography
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Serge_Gainsbourg
+timestamp: '2026-04-07T11:49:43.008111+00:00'
+title: Q1698
+turns: 12
+value_label: Bamboula
+verdict: verified-low

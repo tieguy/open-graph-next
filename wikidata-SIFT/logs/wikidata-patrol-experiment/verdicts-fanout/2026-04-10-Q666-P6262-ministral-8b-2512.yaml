@@ -1,0 +1,25 @@
+completion_tokens: 2043
+cost_usd: 0.00440832
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39071
+property: P6262
+property_label: Fandom article ID
+rationale: The new Fandom article ID 'religion:6666789шго' is nonsensical and does
+  not match any valid Fandom article structure or naming convention. The authoritative
+  source for the 'number of the beast' (https://religion.fandom.com/wiki/Number_of_the_Beast)
+  confirms that '666' is a biblical number, not a Fandom article identifier. No evidence
+  supports the validity of the new value, and it contradicts all available information
+  about Fandom article IDs in the 'religion' namespace.
+rcid: 2551353948
+revid: 2474659620
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://religion.fandom.com/wiki/Number_of_the_Beast
+timestamp: '2026-04-10T14:12:13.681909+00:00'
+title: Q666
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 2021
+cost_usd: 0.0035026
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11450
+property: P18
+property_label: image
+rationale: Authoritative sources such as Wikipedia, Honda's official website, and
+  major automotive review sites consistently use recent-model, front-facing images
+  to represent the Honda Civic. The new image matches this standard and is a more
+  accurate and representative depiction of the current Honda Civic model series compared
+  to the previous image. However, the edit did not provide a citation for the new
+  image, which is a best practice violation.
+rcid: 2550729228
+revid: 2474056611
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Honda_Civic
+- provenance: verified
+  supports_claim: true
+  url: https://automobiles.honda.com/civic
+- provenance: verified
+  supports_claim: true
+  url: https://www.caranddriver.com/honda/civic
+timestamp: '2026-04-11T16:29:07.334613+00:00'
+title: Q216747
+turns: 1
+value_label: null
+verdict: verified-high

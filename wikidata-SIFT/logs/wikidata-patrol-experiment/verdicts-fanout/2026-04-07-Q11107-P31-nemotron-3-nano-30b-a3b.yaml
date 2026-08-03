@@ -1,0 +1,31 @@
+completion_tokens: 862
+cost_usd: 0.011674499999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 230042
+property: P31
+property_label: instance of
+rationale: The claim that Sonia Sotomayor's instance of is 'robot' lacks independent
+  verification. Searches for official sources (e.g., supremecourt.gov biographies,
+  government publications) confirm she is a human jurist with a documented legal career
+  including roles as prosecutor, judge, and academic. No credible source supports
+  the artificial intelligence/robot classification. Citations provided in the edit
+  appear to be Wikipedia-derived, which is circular and unreliable. The SingleMalt
+  sources verified would need to directly document this property claim to potentially
+  support it, but no such evidence exists in pre-fetched API responses or web search
+  results.
+rcid: null
+revid: 2470268184
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.supremecourt.gov/about/biographies.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://www.oyez.org/supremecourt/justice/sonia-sotomayor
+timestamp: '2026-04-07T09:14:02.012989+00:00'
+title: Q11107
+turns: 15
+value_label: robot
+verdict: unverifiable

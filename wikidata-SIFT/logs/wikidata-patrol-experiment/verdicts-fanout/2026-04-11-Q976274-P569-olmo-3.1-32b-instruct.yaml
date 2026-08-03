@@ -1,0 +1,28 @@
+completion_tokens: 307
+cost_usd: 0.0033888
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16023
+property: P569
+property_label: date of birth
+rationale: The new value '13 February 194' is not a valid date format and omits the
+  year entirely, while the old value '+1948-02-13T00:00:00Z' corresponds to February
+  13, 1948. Multiple reliable sources, including the Canadian Broadcasting Corporation
+  and The Monster of Miramichi profile, confirm that Allan Legere was born on February
+  13, 1948. Changing the date of birth to an incomplete and invalid value is factually
+  incorrect and unsupported by any evidence.
+rcid: null
+revid: 2471472476
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ici.radio-canada.ca/nouvelle/2236450/allan-legere-mort-monstre-miramichi
+- provenance: verified
+  supports_claim: true
+  url: https://theywillkillyou.com/profile/allan-joseph-legere
+timestamp: '2026-04-11T13:09:34.677708+00:00'
+title: Q976274
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,22 @@
+completion_tokens: 978
+cost_usd: 0.0026590562500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25360
+property: P569
+property_label: date of birth
+rationale: The edit cites the Arabic Wikipedia as a reference, but the URL is blocked
+  and cannot be accessed. No independent sources were found to confirm or deny the
+  claim that the date of birth is 10 August 1987. Therefore, the claim cannot be verified.
+rcid: 2549391839
+revid: 2472757950
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://ar.wikipedia.org/?oldid=62076754
+timestamp: '2026-04-07T09:54:31.041148+00:00'
+title: Q20390331
+turns: 5
+value_label: null
+verdict: unverifiable

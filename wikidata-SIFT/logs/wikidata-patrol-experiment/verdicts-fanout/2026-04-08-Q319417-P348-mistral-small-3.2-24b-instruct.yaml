@@ -1,0 +1,24 @@
+completion_tokens: 323
+cost_usd: 0.0072158
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 79919
+property: P348
+property_label: software version identifier
+rationale: The fetched content from the provided URL indicates that the SQLite Release
+  3.52.0, which was initially released on 2026-03-06, has been withdrawn due to backwards-compatibility
+  issues. This information supports the removal of the version "3.52.0" as a software
+  version identifier for Q319417 (SQLite) because the release was subsequently withdrawn
+  and is no longer valid.
+rcid: 2550272025
+revid: 2473612560
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sqlite.org/releaselog/3_52_0.html
+timestamp: '2026-04-08T19:04:51.794204+00:00'
+title: Q319417
+turns: 2
+value_label: null
+verdict: verified-high

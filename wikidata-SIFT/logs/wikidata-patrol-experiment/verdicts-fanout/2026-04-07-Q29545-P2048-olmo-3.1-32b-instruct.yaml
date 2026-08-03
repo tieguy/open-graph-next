@@ -1,0 +1,22 @@
+completion_tokens: 379
+cost_usd: 0.0086934
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42330
+property: P2048
+property_label: height
+rationale: The official NBA player profile lists Kevin Durant's height as 6'11" (2.11m),
+  which is equivalent to 211 centimeters, not 213 centimeters. This directly contradicts
+  the updated value of 213 centimeters.
+rcid: null
+revid: 2471467596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nba.com/players/kevin/durant/201142
+timestamp: '2026-04-07T08:07:09.002799+00:00'
+title: Q29545
+turns: 2
+value_label: null
+verdict: incorrect

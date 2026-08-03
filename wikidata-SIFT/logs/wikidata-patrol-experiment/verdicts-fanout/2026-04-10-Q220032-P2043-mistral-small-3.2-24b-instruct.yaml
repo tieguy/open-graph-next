@@ -1,0 +1,28 @@
+completion_tokens: 1400
+cost_usd: 0.0018443062499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17962
+property: P2043
+property_label: length
+rationale: Multiple reliable sources confirm that the length of the Golden Gate strait
+  is approximately 2,737 meters. The new value in the edit is consistent with these
+  sources.
+rcid: 2550897352
+revid: 2474220238
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.goldengate.org/bridge/history-research/statistics-data/design-construction-stats/
+- provenance: verified
+  supports_claim: true
+  url: https://www.parksconservancy.org/parks/golden-gate-bridge
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Golden_Gate
+timestamp: '2026-04-10T08:25:23.083197+00:00'
+title: Q220032
+turns: 1
+value_label: null
+verdict: verified-high

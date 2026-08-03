@@ -1,0 +1,31 @@
+completion_tokens: 1784
+cost_usd: 0.01838613
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 102040
+property: P103
+property_label: native language
+rationale: The evidence from multiple verified sources confirms that Rosalía de Castro's
+  native language was Galician (Q9307), not Spanish (Q1321). All consulted sources,
+  including Encyclopedia Britannica, Encyclopedia of Women, and Virtual Workers of
+  America, explicitly state that she wrote primarily in Galician and contributed significantly
+  to the Galician literary revival. Changing her native language to Spanish contradicts
+  this well-established historical and literary consensus.
+rcid: 2549286766
+revid: 2472655917
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/arts/encyclopedias-almanacs-transcripts-and-maps/castro-rosalia-de
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/castro-rosalia-de-1837-1885
+- provenance: verified
+  supports_claim: false
+  url: https://virtualworkersofamerica.com/rosalia-de-castro-who-she-was-and-her-life-story/
+timestamp: '2026-04-11T09:37:46.903344+00:00'
+title: Q464264
+turns: 5
+value_label: Spanish
+verdict: incorrect

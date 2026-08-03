@@ -1,0 +1,30 @@
+completion_tokens: 823
+cost_usd: 0.0146206
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 70634
+property: P509
+property_label: cause of death
+rationale: There is no credible evidence that Victor French's cause of death was phimosis.
+  Multiple web searches did not return any reliable source stating this, and the medical
+  plausibility is extremely low. The previously recorded cause of death, cancer, is
+  consistent with public reporting and the item's prior state. The edit appears to
+  be factually incorrect.
+rcid: 2550210573
+revid: 2473553203
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Victor_French
+- provenance: reported
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/6380277/victor-french
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm0283843/
+timestamp: '2026-04-08T18:52:55.293613+00:00'
+title: Q1347274
+turns: 10
+value_label: phimosis
+verdict: incorrect

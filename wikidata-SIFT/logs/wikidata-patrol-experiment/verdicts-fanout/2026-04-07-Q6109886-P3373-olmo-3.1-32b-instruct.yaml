@@ -1,0 +1,21 @@
+completion_tokens: 635
+cost_usd: 0.0064436
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30313
+property: P3373
+property_label: sibling
+rationale: No independent sources were found that support a familial relationship
+  between Roberto Musso and Kimberly Loaiza. The edit replaces an implausible previous
+  value with a name not documented as a sibling in any reliable source. The absence
+  of supporting references or corroborating evidence suggests the claim is likely
+  incorrect.
+rcid: 2551400255
+revid: 2474704021
+sources: []
+timestamp: '2026-04-07T05:57:47.353704+00:00'
+title: Q6109886
+turns: 5
+value_label: Kimberly Loaiza
+verdict: suspect

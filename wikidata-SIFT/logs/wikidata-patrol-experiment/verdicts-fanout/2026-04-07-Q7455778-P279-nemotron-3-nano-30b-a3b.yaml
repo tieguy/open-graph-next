@@ -1,0 +1,25 @@
+completion_tokens: 683
+cost_usd: 0.003626
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 69788
+property: P279
+property_label: subclass of
+rationale: No sources were found supporting or contradicting the claim that 'person
+  identifier' is a correct subclass of 'service number' in this item. Despite extensive
+  searches using various queries related to the item and property, no verifiable web
+  sources were located. The only references listed in the edit record could not be
+  located or shown to support the claim. Without any accessible sources, the claim
+  cannot be verified as correct or incorrect, leading to an 'unverifiable' verdict.
+rcid: null
+revid: 2470295643
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q7455778
+timestamp: '2026-04-07T12:11:06.824504+00:00'
+title: Q7455778
+turns: 15
+value_label: person identifier
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 2076
+cost_usd: 0.0068352
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27948
+property: P21
+property_label: sex or gender
+rationale: The edit changed Joan Maragall's sex or gender from 'male' to 'intersex'
+  without any credible source supporting the claim of intersex status. All authoritative
+  biographical and bibliographic sources describe Joan Maragall as male and provide
+  no evidence for intersex identity. The cited references do not support the new value,
+  and independent corroboration could not be found.
+rcid: null
+revid: 2471640708
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://viaf.org/viaf/118640887
+- provenance: verified
+  supports_claim: false
+  url: https://authoritats.ub.edu/person/Joan+Maragall+i+Gorina
+- provenance: verified
+  supports_claim: false
+  url: https://dicc.gencat.cat/dlbc/
+- provenance: verified
+  supports_claim: false
+  url: https://imslp.org/wiki/Category:Maragall,_Joan
+timestamp: '2026-04-11T11:28:36.100040+00:00'
+title: Q562402
+turns: 1
+value_label: intersex
+verdict: incorrect

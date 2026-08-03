@@ -1,0 +1,32 @@
+completion_tokens: 846
+cost_usd: 0.01428
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54264
+property: P569
+property_label: date of birth
+rationale: The edit changed Beatrice Vio's date of birth from the well-documented
+  and widely confirmed value of **4 March 1997** to an implausible and unsupported
+  value of **4 March 1513**. Multiple verified sources, including [TheCityCeleb](https://www.thecityceleb.com/biography/personality/content-creator/writer/beatrice-vio-biography-parents-net-worth-age-height-ethnicity-books-sister-awards/)
+  and biographical context from Paralympic and Laureus profiles, consistently confirm
+  her birth year as 1997. The new value contradicts all available evidence and is
+  not supported by any credible source. The old value was well-sourced, while the
+  new value lacks any corroboration.
+rcid: 2549504572
+revid: 2472868771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.thecityceleb.com/biography/personality/content-creator/writer/beatrice-vio-biography-parents-net-worth-age-height-ethnicity-books-sister-awards/
+- provenance: verified
+  supports_claim: false
+  url: https://www.paralympic.org/beatrice-vio
+- provenance: verified
+  supports_claim: false
+  url: https://www.laureus.com/ambassadors/beatrice-vio
+timestamp: '2026-04-11T09:32:41.401991+00:00'
+title: Q3637275
+turns: 4
+value_label: null
+verdict: incorrect

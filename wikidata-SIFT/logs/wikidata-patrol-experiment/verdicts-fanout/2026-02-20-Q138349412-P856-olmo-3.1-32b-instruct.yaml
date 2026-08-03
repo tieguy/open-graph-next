@@ -1,0 +1,33 @@
+completion_tokens: 1491
+cost_usd: 0.0041492000000000005
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16273
+property: P856
+property_label: official website
+rationale: The domain https://www.reatrixweb.com is actively used by Reatrixweb Media
+  for publishing news content, and multiple third-party sources corroborate the company's
+  existence and digital media focus. However, the cited reference from TechInAsia
+  could not be accessed, so it cannot be confirmed as supporting evidence. Thus, the
+  claim is supported by independent sources but with limited reference verification.
+rcid: 2540945784
+revid: 2464735029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.reatrixweb.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.reatrixweb.com/2025/03/warhammer-40k-space-marine-3-resmi.html
+- provenance: verified
+  supports_claim: true
+  url: https://glints.com/id/en/companies/pt-reatrix-media-indonesia/fb09963e-dee1-482b-bba3-f0ce80f98141
+- provenance: reported
+  supports_claim: false
+  url: https://www.techinasia.com/companies/reatrixwebcom-media
+timestamp: '2026-02-20T11:55:15.449059+00:00'
+title: Q138349412
+turns: 3
+value_label: null
+verdict: verified-low

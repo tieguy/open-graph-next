@@ -1,0 +1,32 @@
+completion_tokens: 309
+cost_usd: 0.0028582
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13364
+property: P39
+property_label: position held
+rationale: The new value 'Member of the Legislative Assembly of Costa Rica' is plausible
+  for Marcelle Taylor Brown based on her profile as a Costa Rican politician, but
+  the only available source confirming her parliamentary membership could not be fetched
+  (https://www.inamu.go.cr/marcelle-taylor-brown returned 404). The old value 'deputy'
+  may or may not refer to the same role within the Legislative Assembly, but there
+  is no live, independently verifiable source confirming that she held the position
+  as a Member of the Legislative Assembly, nor any official parliament list. Without
+  direct evidence, changing the property from 'deputy' to a more specific position
+  is suspect, especially as the new value introduces a potentially broader or different
+  role that cannot be confirmed.
+rcid: 2551149773
+revid: 2474464260
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://data.ipu.org/parliament/CR/CR-LC01/
+- provenance: reported
+  supports_claim: false
+  url: https://www.inamu.go.cr/marcelle-taylor-brown
+timestamp: '2026-04-11T17:06:49.673105+00:00'
+title: Q122237938
+turns: 1
+value_label: Member of the Legislative Assembly of Costa Rica
+verdict: suspect

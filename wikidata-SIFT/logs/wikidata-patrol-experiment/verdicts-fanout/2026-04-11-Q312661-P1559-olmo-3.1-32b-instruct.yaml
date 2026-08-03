@@ -1,0 +1,30 @@
+completion_tokens: 326
+cost_usd: 0.0046828
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22436
+property: P1559
+property_label: name in native language
+rationale: The change from 'جما' to 'جما sas' in the property P1559 (name in native
+  language) for Jamel Debbouze was not supported by any verifiable independent source.
+  The official Pantheon.World profile provides extensive biographical information
+  but does not indicate or discuss a native name variant with 'sas'. The cited reference
+  provided by the edit (a French government page) could not be fetched and thus does
+  not provide evidence. No other independent source fetched during the investigation
+  confirmed the change or explained its rationale. Without primary or authoritative
+  confirmation, the edit's correctness cannot be verified.
+rcid: null
+revid: 2471216964
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pantheon.world/profile/person/Jamel_Debbouze
+- provenance: reported
+  supports_claim: false
+  url: http://www.culture.gouv.fr/Nous-connaitre/Organisation/Conseil-de-l-Ordre-des-Arts-et-des-Lettres/Arretes-de-Nominations-dans-l-ordre-des-Arts-et-des-Lettres/Nomination-dans-l-ordre-des-Arts-et-des-Lettres-janvier-2013
+timestamp: '2026-04-11T09:17:23.706642+00:00'
+title: Q312661
+turns: 1
+value_label: null
+verdict: unverifiable

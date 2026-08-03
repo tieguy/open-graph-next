@@ -1,0 +1,30 @@
+completion_tokens: 2432
+cost_usd: 0.00593856
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 62074
+property: P1320
+property_label: OpenCorporates ID
+rationale: The edit adds a reference to OpenCorporates (a primary source for company
+  registration data) and a jurisdiction qualifier (Belgium) to the existing OpenCorporates
+  ID claim for SYENSQO. While the value itself did not change, the addition of a reference
+  improves the claim’s reliability. However, direct verification of the OpenCorporates
+  page for the ID `be/0798896453` was not possible due to technical limitations, and
+  independent corroboration was unavailable due to search restrictions. Contextual
+  evidence (company location, address, and industry) supports the claim, but the lack
+  of direct verification limits the verdict to `verified-low`.
+rcid: 2551397408
+revid: 2474701517
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://api.opencorporates.com/documentation/API-Reference
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/syensqo?rid=685934152245-39
+timestamp: '2026-04-11T07:44:22.055884+00:00'
+title: Q123752186
+turns: 5
+value_label: null
+verdict: verified-low

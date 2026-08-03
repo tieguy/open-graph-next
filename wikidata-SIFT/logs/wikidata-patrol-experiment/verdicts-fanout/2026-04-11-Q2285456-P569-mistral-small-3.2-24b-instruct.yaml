@@ -1,0 +1,27 @@
+completion_tokens: 1418
+cost_usd: 0.0071922062499999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 72469
+property: P569
+property_label: date of birth
+rationale: The edit changing the date of birth from 1911 to 1523 is highly suspect.
+  The new date of birth in the 16th century is inconsistent with the other biographical
+  information about Sigurð Joensen, such as his involvement in politics in the 20th
+  century and his receipt of awards in the late 20th century. The reference provided,
+  the Great Norwegian Encyclopedia, is not a primary source and may contain errors.
+rcid: null
+revid: 2471243717
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://snl.no/Sigurð_Joensen
+- provenance: verified
+  supports_claim: false
+  url: https://www.geni.com/people/Sigurð_Joensen/6000000001109962123
+timestamp: '2026-04-11T11:17:22.471730+00:00'
+title: Q2285456
+turns: 9
+value_label: null
+verdict: suspect

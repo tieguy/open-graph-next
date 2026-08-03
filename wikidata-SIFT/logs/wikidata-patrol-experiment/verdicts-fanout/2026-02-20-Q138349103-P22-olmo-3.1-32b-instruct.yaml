@@ -1,0 +1,28 @@
+completion_tokens: 1633
+cost_usd: 0.0040734
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15468
+property: P22
+property_label: father
+rationale: There is no accessible, cited reference that explicitly identifies Muhammad
+  Rashid as the father of Omar Rashid (OR) MRX. The only mention of parentage found
+  is from a general MusicBrainz summary not referenced in Wikidata and does not constitute
+  reliable evidence. The Apple Music biography, which is cited for other attributes,
+  does not mention family or parentage. No independent, reliable source corroborates
+  the claim.
+rcid: 2540954990
+revid: 2464743302
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/artist/omar-rashid-or-mrx/1871293364
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a
+timestamp: '2026-02-20T07:25:57.963550+00:00'
+title: Q138349103
+turns: 2
+value_label: Muhammad Rashid
+verdict: unverifiable

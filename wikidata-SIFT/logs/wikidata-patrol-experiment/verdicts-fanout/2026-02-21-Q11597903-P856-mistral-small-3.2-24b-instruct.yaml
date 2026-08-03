@@ -1,0 +1,22 @@
+completion_tokens: 339
+cost_usd: 0.0026647000000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27895
+property: P856
+property_label: official website
+rationale: The search results and fetched content do not provide direct confirmation
+  of the official website URL for Tachikawa Municipal Junior High School. The URL
+  provided in the edit could not be verified through the available sources.
+rcid: 2541055664
+revid: 2464837874
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.futoukouportal.metro.tokyo.lg.jp/en/municipality-support/tachikawa/
+timestamp: '2026-02-21T04:02:22.295459+00:00'
+title: Q11597903
+turns: 3
+value_label: null
+verdict: unverifiable

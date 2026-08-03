@@ -1,0 +1,33 @@
+completion_tokens: 804
+cost_usd: 0.0031912
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13544
+property: P69
+property_label: educated at
+rationale: No reliable, primary evidence was found to confirm that Sisiku Julius Ayuk
+  Tabe, Q60606828, was educated at the University of Sheffield. The reference provided
+  was unreachable, and the University of Sheffield's official pages and general directories
+  do not mention this individual. Therefore, the claim cannot be verified based on
+  the available sources.
+rcid: 2550926983
+revid: 2474248427
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sheffield.ac.uk/education/people/academic/all
+- provenance: verified
+  supports_claim: false
+  url: https://www.mastersportal.com/universities/232/university-of-sheffield.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.ucas.com/explore/unis/dbd76d8b/university-of-sheffield
+- provenance: unverifiable
+  supports_claim: false
+  url: https://theguardianpostcameroon.com/post/1156/en/homethem-
+timestamp: '2026-04-10T13:56:04.177571+00:00'
+title: Q60606828
+turns: 1
+value_label: University of Sheffield
+verdict: unverifiable

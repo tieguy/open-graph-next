@@ -1,0 +1,25 @@
+completion_tokens: 1184
+cost_usd: 0.0091264
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42080
+property: P135
+property_label: movement
+rationale: The Birth of Venus by Jean-Honoré Fragonard is universally recognized as
+  a Rococo painting. There is no credible source associating the movement 'KK' with
+  this work or its artist. The edit replacing 'Rococo' with 'KK' is therefore incorrect.
+rcid: null
+revid: 2463224370
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/The_Birth_of_Venus_(Fragonard)
+- provenance: reported
+  supports_claim: false
+  url: https://www.metmuseum.org/art/collection/search/580441
+timestamp: '2026-04-07T09:46:58.086018+00:00'
+title: Q3211034
+turns: 7
+value_label: KK
+verdict: incorrect

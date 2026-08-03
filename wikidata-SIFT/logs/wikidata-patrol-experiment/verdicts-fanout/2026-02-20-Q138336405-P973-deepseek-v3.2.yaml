@@ -1,0 +1,30 @@
+completion_tokens: 1511
+cost_usd: 0.02261479
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 70089
+property: P973
+property_label: described at URL
+rationale: The URL https://www.steelonthenet.com/about.html is the 'About' page of
+  the Steelonthenet website, which explicitly describes the company, its history,
+  services, and expertise. The page states 'Meet the team behind London-based Steelonthenet
+  - 25 years of steel industry expertise, government advisory experience, and expert
+  witness credentials.' This directly supports that the URL is a valid 'described
+  at URL' source for the Wikidata item representing Steelonthenet. Additionally, the
+  homepage (steelonthenet.com) corroborates the entity's description. No contradictory
+  evidence was found.
+rcid: 2540958208
+revid: 2464746351
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.steelonthenet.com/about.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.steelonthenet.com/
+timestamp: '2026-02-20T05:48:47.831160+00:00'
+title: Q138336405
+turns: 7
+value_label: null
+verdict: verified-high

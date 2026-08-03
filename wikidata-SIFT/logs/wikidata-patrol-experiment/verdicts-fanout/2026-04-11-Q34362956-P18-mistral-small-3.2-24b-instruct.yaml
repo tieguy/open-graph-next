@@ -1,0 +1,24 @@
+completion_tokens: 363
+cost_usd: 0.00401475
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41856
+property: P18
+property_label: image
+rationale: The investigation was unable to fetch any relevant sources to verify the
+  claim due to API errors. Therefore, the claim cannot be verified at this time.
+rcid: 2550622213
+revid: 2473952631
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://uniuneascriitorilor.md/membru/hlib-lidia
+- provenance: verified
+  supports_claim: false
+  url: https://www.librariaonline.ro/autori/hlib_lidia
+timestamp: '2026-04-11T07:13:39.274334+00:00'
+title: Q34362956
+turns: 4
+value_label: null
+verdict: unverifiable

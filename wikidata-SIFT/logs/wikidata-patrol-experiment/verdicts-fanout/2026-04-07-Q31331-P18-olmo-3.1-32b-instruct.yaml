@@ -1,0 +1,25 @@
+completion_tokens: 891
+cost_usd: 0.0125926
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 60290
+property: P18
+property_label: image
+rationale: The image 'Penis pumped.jpg' is not appropriate for a municipality's official
+  image and is not referenced by any credible, authoritative source. The image name
+  and lack of supporting evidence indicate this is likely vandalism or an error.
+rcid: null
+revid: 2471248028
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pello.fi/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T11:04:30.792671+00:00'
+title: Q31331
+turns: 4
+value_label: null
+verdict: incorrect

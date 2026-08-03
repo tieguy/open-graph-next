@@ -1,0 +1,31 @@
+completion_tokens: 1814
+cost_usd: 0.0034568100000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27427
+property: P1813
+property_label: short name
+rationale: The edit changed the short name of MAIF from 'MAIF' to 'MAF'. Independent
+  investigation of the official website (maif.fr), Wikipedia, and industry references
+  confirms that 'MAIF' is the universally accepted and correct short name for the
+  company. No credible source supports 'MAF' as the short name. The cited EU Transparency
+  Register reference does not validate this change. Therefore, the edit is incorrect
+  and should be reverted.
+rcid: null
+revid: 2460269740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.maif.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/MAIF
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/maif?rid=62975755109-62
+timestamp: '2026-04-11T15:23:43.637694+00:00'
+title: Q3331029
+turns: 1
+value_label: null
+verdict: incorrect

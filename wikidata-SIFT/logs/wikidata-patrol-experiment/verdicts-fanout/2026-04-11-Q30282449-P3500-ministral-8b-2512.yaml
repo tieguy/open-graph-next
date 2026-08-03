@@ -1,0 +1,32 @@
+completion_tokens: 2361
+cost_usd: 0.00185856
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16225
+property: P3500
+property_label: Ringgold ID
+rationale: The Ringgold ID claim for Southern Catalonia Biomedical Research Institute
+  (Q30282449) lacks independent verification. The only cited reference is a Wikidata
+  batch edit record (Q64159407), which is not a primary source. No external databases
+  (Ringgold, ISNI, or the institute’s official website) confirm the ID '427539'. Additionally,
+  the edit appears to be a no-op (no actual change in value), and no verified primary
+  source was found to support the claim. The edit is therefore unverifiable due to
+  insufficient evidence.
+rcid: 2550612669
+revid: 2473943467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://authors.bmj.com/open-access/what-is-ringgold/
+- provenance: verified
+  supports_claim: false
+  url: https://www.copyright.com/solutions-ringgold/get-id/
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q64159407
+timestamp: '2026-04-11T06:55:51.877207+00:00'
+title: Q30282449
+turns: 1
+value_label: null
+verdict: unverifiable

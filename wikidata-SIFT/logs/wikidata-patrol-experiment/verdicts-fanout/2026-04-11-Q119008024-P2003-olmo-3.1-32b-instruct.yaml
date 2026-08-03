@@ -1,0 +1,32 @@
+completion_tokens: 1902
+cost_usd: 0.0039178
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13883
+property: P2003
+property_label: Instagram username
+rationale: Official sources, including Instagram and Twitter profiles managed by EXILE,
+  confirm that the correct Instagram username is 'exile_show'. Neither the previous
+  value 'exile_pupunya' nor the new value 'exile_music' is recognized or exists on
+  Instagram. Therefore, changing the username to 'exile_music' was incorrect.
+rcid: null
+revid: 2461490866
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/exile_show/
+- provenance: verified
+  supports_claim: false
+  url: https://twitter.com/exile__japan
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/exile_music/
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/exile_pupunya/
+timestamp: '2026-04-11T06:39:36.410403+00:00'
+title: Q119008024
+turns: 1
+value_label: null
+verdict: incorrect

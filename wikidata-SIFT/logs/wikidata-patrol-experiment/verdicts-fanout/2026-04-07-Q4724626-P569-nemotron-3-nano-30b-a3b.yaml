@@ -1,0 +1,45 @@
+completion_tokens: 911
+cost_usd: 0.003945850000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 75273
+property: P569
+property_label: date of birth
+rationale: Despite thorough investigation across multiple search variations in both
+  English and Arabic, no verifiable sources confirming Ali Al-Sebaa's birth date of
+  4 May 1959 could be located. No web pages were successfully fetched, and no references
+  were found to support or contradict the edit. Therefore, there is insufficient evidence
+  to verify or refute the claim.
+rcid: 2549613088
+revid: 2472974774
+sources:
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa birth date'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa date of birth'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa 1959 birth'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: علي السبع تاريخ الميلاد'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa actor birth'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa Wikipedia'
+- provenance: reported
+  supports_claim: null
+  url: 'Search: Ali Al-Sebaa 1959'
+- provenance: verified
+  supports_claim: null
+  url: https://www.eltafseel.com
+timestamp: '2026-04-07T04:52:14.194070+00:00'
+title: Q4724626
+turns: 15
+value_label: null
+verdict: unverifiable

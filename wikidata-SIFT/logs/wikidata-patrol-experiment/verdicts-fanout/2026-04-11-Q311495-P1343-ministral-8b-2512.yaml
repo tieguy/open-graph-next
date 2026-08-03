@@ -1,0 +1,32 @@
+completion_tokens: 2903
+cost_usd: 0.00306351
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23716
+property: P1343
+property_label: described by source
+rationale: The edit incorrectly changed the value of P1343 (described by source) from
+  a valid source Q-ID (Q867541, 1911 Encyclopædia Britannica) to a language (Q1321,
+  Spanish). The property P1343 expects a source (e.g., a book, encyclopedia, or document),
+  not a language. Independent sources confirm that Abu al-Qasim al-Zahrawi was an
+  Arab/Andalusian physician whose works were primarily in Arabic, and none describe
+  him as 'described by source Spanish.' The new value is semantically mismatched and
+  unsupported by authoritative sources.
+rcid: null
+revid: 2464203314
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://muslimheritage.com/abu-al-qasim-al-zahrawi-the-great-surgeon/
+- provenance: verified
+  supports_claim: false
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC6077085/
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/science/encyclopedias-almanacs-transcripts-and-maps/abul-qasim-khalaf-ibn-al-abbas-al-zahrawi
+timestamp: '2026-04-11T10:50:40.305857+00:00'
+title: Q311495
+turns: 1
+value_label: Spanish
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 1043
+cost_usd: 0.0027339799999999996
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27206
+property: P4224
+property_label: category contains
+rationale: No independent sources were found that confirm or deny the claim. The edit
+  does not have any references cited, and the search did not return any relevant results.
+rcid: 2551384440
+revid: 2474689007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/news/2016/12/21/tomasevic-named-arizona-states-head-womens-volleyball-coach
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/sports/volleyball/roster
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/staff-directory/department/volleyball-fax-480-965-7398
+timestamp: '2026-04-10T07:41:46.622478+00:00'
+title: Q60917184
+turns: 4
+value_label: human
+verdict: unverifiable

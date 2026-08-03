@@ -1,0 +1,22 @@
+completion_tokens: 976
+cost_usd: 0.0038768250000000004
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37613
+property: P4173
+property_label: Instagram location ID
+rationale: The edit adding the Instagram location ID "dannybalgley" to Danny Balgley's
+  Wikidata item is supported by evidence from his official website. The contact page
+  of the website explicitly mentions the Instagram handle, confirming the claim.
+rcid: 2540974717
+revid: 2464761526
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.dbalgley.com/contact
+timestamp: '2026-02-20T02:30:15.033736+00:00'
+title: Q138350070
+turns: 6
+value_label: null
+verdict: verified-high

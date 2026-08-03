@@ -1,0 +1,30 @@
+completion_tokens: 2508
+cost_usd: 0.0037103400000000003
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42132
+property: P2295
+property_label: net profit
+rationale: The removed claim of net profit (82,470,000 Czech koruna for ČD – Telematika
+  in 2015) was unsupported by any references or independent verification. Financial
+  claims on Wikidata require strong sourcing, and the absence of references for this
+  claim makes it unreliable. The removal was justified due to the lack of evidence
+  supporting the claim, and no verified sources were found to confirm its validity.
+rcid: 2550267292
+revid: 2473607976
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cdt.cz/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.metro.cz/protext/cd-telematika-dosahla-v-lonskem-roce-historicky-rekordniho-zisku-ebitda-mezirocne-vzrostl-o-temer-dv.A250526_115700_metro-protext_air
+- provenance: verified
+  supports_claim: false
+  url: https://czechinvest.gov.cz/en/Key-sectors/Smart-mobility-catalog/Firmy/CD-%E2%80%91-Telematika-a-s
+timestamp: '2026-04-11T17:04:48.610694+00:00'
+title: Q28970253
+turns: 4
+value_label: null
+verdict: verified-high

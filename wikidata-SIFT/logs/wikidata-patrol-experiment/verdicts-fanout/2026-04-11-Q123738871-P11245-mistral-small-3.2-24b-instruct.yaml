@@ -1,0 +1,29 @@
+completion_tokens: 1479
+cost_usd: 0.00977106875
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 102966
+property: P11245
+property_label: YouTube handle
+rationale: The YouTube channels for both 'joshtospace' and 'JoshsHandle' could not
+  be accessed directly, and the attempt to fetch data from Social Blade resulted in
+  an error. Therefore, it is not possible to verify the YouTube handle and the number
+  of viewers/listeners independently.
+rcid: 2551426785
+revid: 2474727345
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@joshtospace
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@JoshsHandle
+- provenance: verified
+  supports_claim: false
+  url: https://socialblade.com/youtube/channel/joshtospace
+timestamp: '2026-04-11T16:16:40.934003+00:00'
+title: Q123738871
+turns: 5
+value_label: null
+verdict: unverifiable

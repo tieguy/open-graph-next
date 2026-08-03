@@ -1,0 +1,29 @@
+completion_tokens: 1843
+cost_usd: 0.0037484
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13213
+property: P69
+property_label: educated at
+rationale: The new value 'Aas' is not supported by any reliable source as an educational
+  institution. Independent sources confirm that 'ArtFX School' is a recognized institution
+  in digital and 3D graphics, matching the subject's field of work. There is no evidence
+  that 'Aas' is a valid educational institution, making this edit incorrect.
+rcid: null
+revid: 2470273606
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://aas.org/grants-and-prizes/education-prize
+- provenance: reported
+  supports_claim: true
+  url: https://www.artfxschool.com/
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/ArtFX_School
+timestamp: '2026-04-11T16:23:26.906455+00:00'
+title: Q117078952
+turns: 1
+value_label: Aas
+verdict: incorrect

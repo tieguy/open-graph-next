@@ -1,0 +1,32 @@
+completion_tokens: 1309
+cost_usd: 0.00154215
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13597
+property: P170
+property_label: creator
+rationale: The old value, Keith Tantlinger, is widely recognized as the inventor of
+  the intermodal container. There is no credible evidence supporting the claim that
+  Lady Gaga is the creator of intermodal containers. The sources consulted do not
+  support the new value, and the edit appears to be incorrect.
+rcid: 2549481749
+revid: 2472846535
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.britannica.com/biography/Keith-Tantlinger
+- provenance: verified
+  supports_claim: false
+  url: https://ladygaga.fandom.com/wiki/Haus_of_Gaga/Born_This_Way
+- provenance: verified
+  supports_claim: false
+  url: https://www.livedesignonline.com/concerts/lady-gaga-a-box
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/LadyGaga/comments/wjmnb5/how_is_the_stage_transported/
+timestamp: '2026-04-11T15:28:34.355016+00:00'
+title: Q187956
+turns: 1
+value_label: Lady Gaga
+verdict: incorrect

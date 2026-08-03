@@ -1,0 +1,28 @@
+completion_tokens: 2092
+cost_usd: 0.00212061
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18241
+property: P742
+property_label: pseudonym
+rationale: The change from 'Iceman' to 'Aokiji' as Richard Kuklinski's pseudonym is
+  incorrect. Multiple verified sources, including CriminalMinds Fandom Wiki and The
+  Vintage News, confirm 'Iceman' as his well-documented pseudonym. No credible source
+  supports 'Aokiji' as a pseudonym for Kuklinski. The cited Czech National Authority
+  Database was unreachable and does not appear relevant to this claim. The new value
+  lacks independent corroboration and contradicts established records.
+rcid: null
+revid: 2471526447
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://criminalminds.fandom.com/wiki/Richard_Kuklinski
+- provenance: verified
+  supports_claim: false
+  url: https://www.thevintagenews.com/2018/10/15/richard-kuklinski/
+timestamp: '2026-04-11T18:13:59.455787+00:00'
+title: Q554978
+turns: 1
+value_label: null
+verdict: incorrect

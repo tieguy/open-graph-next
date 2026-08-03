@@ -1,0 +1,24 @@
+completion_tokens: 535
+cost_usd: 0.00875966375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 91147
+property: P1476
+property_label: title
+rationale: The edit changes the title of the film from 'The Adam Project' to 'The
+  Hitler Project'. The Russian Wikipedia page, which was cited as the source, is blocked
+  and cannot be verified. Independent searches for 'The Hitler Project' do not yield
+  any results related to a film with that title. The evidence suggests that the new
+  title 'The Hitler Project' is incorrect.
+rcid: 2550548740
+revid: 2473881890
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=114211129
+timestamp: '2026-04-11T16:18:11.662198+00:00'
+title: Q104033835
+turns: 7
+value_label: null
+verdict: incorrect

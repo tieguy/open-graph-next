@@ -1,0 +1,28 @@
+completion_tokens: 1120
+cost_usd: 0.0039775999999999995
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16528
+property: P4985
+property_label: TMDB person ID
+rationale: Two independent, verified German-language sources confirm the identity
+  and career of Mariella Tripke as a comedian and TV author, supporting that the Wikidata
+  item represents the correct person. However, neither source directly references
+  the TMDB person ID (3165195), and no primary TMDB source was fetched to confirm
+  the exact ID assignment. Therefore, while the claim is plausible and the person
+  is correctly identified, the direct support for the TMDB ID itself is indirect.
+rcid: 2550351039
+revid: 2473689813
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: true
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+timestamp: '2026-04-11T09:20:44.186337+00:00'
+title: Q123352308
+turns: 1
+value_label: null
+verdict: verified-low

@@ -1,0 +1,24 @@
+completion_tokens: 1081
+cost_usd: 0.0157292
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 75403
+property: P856
+property_label: official website
+rationale: The value https://www.china-airlines.com is the official website of a commercial
+  airline, not a Japanese city government. No official or independent source identifies
+  this as the official website for Chikusei City. The previous value, https://www.city.chikusei.lg.jp/,
+  was consistent with the expected official municipal website format for Japanese
+  cities.
+rcid: null
+revid: 2465913630
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.ibaraki.jp/kikaku/tokei/fukyu/tokei/betsu/jinko/getsu/index.html
+timestamp: '2026-04-07T12:46:00.063936+00:00'
+title: Q694322
+turns: 9
+value_label: null
+verdict: incorrect

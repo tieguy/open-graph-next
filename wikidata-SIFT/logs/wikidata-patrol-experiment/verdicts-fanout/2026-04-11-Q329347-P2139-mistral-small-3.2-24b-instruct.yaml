@@ -1,0 +1,23 @@
+completion_tokens: 1394
+cost_usd: 0.01571684375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 163929
+property: P2139
+property_label: total revenue
+rationale: The new value of '3,767,768,000,000 Russian rubles' for Lukoil's total
+  revenue in 2024 is not supported by the fetched references. The old value of '+8035889000000'
+  is supported by historical data up to 2023, but there is no evidence to support
+  the new value.
+rcid: 2550551242
+revid: 2473884349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://companiesmarketcap.com/lukoil/revenue/
+timestamp: '2026-04-11T09:28:51.000308+00:00'
+title: Q329347
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,31 @@
+completion_tokens: 1681
+cost_usd: 0.00298233
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30848
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changes the instance of claim for María Inés Falconi
+  from 'human' (Q5) to 'Mono' (Q722656), a software project. All verified sources
+  confirm she is a human writer, playwright, and children's author. The cited reference
+  (datos.bne.es) is unreachable, and no independent source supports the claim that
+  she is a software project. The old value (Q5) is correct and well-supported by verified
+  evidence.
+rcid: null
+revid: 2471487652
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://radeff.com.ar/categoria/autores/falconi-maria-ines/
+- provenance: verified
+  supports_claim: false
+  url: https://www.dramaticpublishing.com/authors/profile/view/url/maria-ines-falconi
+- provenance: verified
+  supports_claim: false
+  url: https://www.loqueleo.com/ar/autores/maria-ines-falconi
+timestamp: '2026-04-11T14:46:59.251524+00:00'
+title: Q274635
+turns: 3
+value_label: Mono
+verdict: incorrect

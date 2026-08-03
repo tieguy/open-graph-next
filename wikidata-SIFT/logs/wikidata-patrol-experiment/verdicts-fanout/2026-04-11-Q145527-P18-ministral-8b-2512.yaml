@@ -1,0 +1,35 @@
+completion_tokens: 1906
+cost_usd: 0.004313040000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 71808
+property: P18
+property_label: image
+rationale: The investigation could not fetch or verify any external sources due to
+  access restrictions. Both the old and new image claims lack references, and no independent
+  verification of the images' appropriateness for the Kia Sportage model could be
+  performed. The lack of sourcing and inability to corroborate the edit with external
+  evidence renders the verdict unverifiable.
+rcid: null
+revid: 2471363118
+sources:
+- provenance: verified
+  summary: URL returned HTTP 403 Forbidden, content could not be accessed.
+  supports_claim: false
+  url: https://www.edmunds.com/kia/sportage/2022/pictures/
+- provenance: verified
+  summary: URL fetched but does not provide direct evidence about the specific images
+    in question.
+  supports_claim: false
+  url: https://www.gettyimages.ch/fotos/kia-sportage
+- provenance: verified
+  summary: URL fetched but does not contain relevant information about the specific
+    images in question.
+  supports_claim: false
+  url: https://www.pakwheels.com/new-cars/kia/sportage/photos/
+timestamp: '2026-04-11T11:35:01.703918+00:00'
+title: Q145527
+turns: 11
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,21 @@
+completion_tokens: 652
+cost_usd: 0.0066634
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 130660
+property: P569
+property_label: date of birth
+rationale: No corroborating sources were found to verify or refute the claim that
+  Israel Epstein's date of birth is '20 April 1916'. Extensive searches uncovered
+  no authoritative references with verifiable content supporting this specific detail,
+  and existing references appear to be internal or unverifiable. Without external
+  verification, the claim remains unverifiable.
+rcid: null
+revid: 2471677263
+sources: []
+timestamp: '2026-04-07T03:56:32.945186+00:00'
+title: Q601957
+turns: 15
+value_label: null
+verdict: unverifiable

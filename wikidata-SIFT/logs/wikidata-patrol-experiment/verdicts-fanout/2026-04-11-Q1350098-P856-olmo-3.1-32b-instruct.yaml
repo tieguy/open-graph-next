@@ -1,0 +1,29 @@
+completion_tokens: 2131
+cost_usd: 0.0045044
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16129
+property: P856
+property_label: official website
+rationale: The new website https://www.starflyer.jp is not the official website of
+  Mizumaki Town. Multiple independent, verified sources—including the town's own official
+  website and Japanese Wikipedia—confirm that https://www.town.mizumaki.lg.jp/ is
+  the correct official website. The change was incorrect.
+rcid: null
+revid: 2471589734
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.town.mizumaki.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/水巻町
+- provenance: verified
+  supports_claim: false
+  url: https://www.starflyer.jp/
+timestamp: '2026-04-11T16:03:44.288663+00:00'
+title: Q1350098
+turns: 1
+value_label: null
+verdict: incorrect

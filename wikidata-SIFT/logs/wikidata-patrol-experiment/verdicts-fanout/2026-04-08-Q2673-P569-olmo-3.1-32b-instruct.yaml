@@ -1,0 +1,27 @@
+completion_tokens: 1687
+cost_usd: 0.026050800000000002
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 125193
+property: P569
+property_label: date of birth
+rationale: The removal of the '1940' value for Chuck Norris's date of birth was not
+  supported by independently verifiable evidence during this investigation. The community
+  reverted the edit, indicating consensus that the value should remain. Although secondary
+  sources widely report March 10, 1940 as the birth date, no primary source was independently
+  confirmed here to justify the removal.
+rcid: 2550579420
+revid: 2473911318
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q2673
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Chuck_Norris
+timestamp: '2026-04-08T18:44:15.968652+00:00'
+title: Q2673
+turns: 10
+value_label: null
+verdict: incorrect

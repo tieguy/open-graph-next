@@ -1,0 +1,27 @@
+completion_tokens: 1765
+cost_usd: 0.00201786
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26811
+property: P569
+property_label: date of birth
+rationale: The new date of birth, 20 May 1930, is consistent with the age of 89 years
+  mentioned in two verified sources from 2019 (Grid.ID and Suara.com). While these
+  sources confirm the birth year as 1930, they do not explicitly state the exact date
+  of 20 May. The edit improves precision but lacks direct corroboration for the specific
+  date. No references are cited for this claim.
+rcid: 2550944352
+revid: 2474264653
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.grid.id/read/041745733/mengenal-sunarti-sri-hadiyah-ibunda-ani-yudhoyono-yang-telah-berusia-89-tahun-dan-memiliki-17-cicit-namun-tetap-tampak-bugar
+- provenance: verified
+  supports_claim: false
+  url: https://www.suara.com/entertainment/2019/06/02/154525/5-fakta-tak-terduga-sunarti-sri-hadiyah-ibunda-ani-yudhoyono
+timestamp: '2026-04-11T12:01:48.613731+00:00'
+title: Q101424647
+turns: 3
+value_label: null
+verdict: plausible

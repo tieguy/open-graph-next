@@ -1,0 +1,33 @@
+completion_tokens: 1643
+cost_usd: 0.00362757
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34266
+property: P19
+property_label: place of birth
+rationale: The claim that Eshel Armony (Q18919670) was born in North Carolina (Q1454)
+  is supported only by a reference to Hebrew Wikipedia, which is blocked from automated
+  access. No verified independent sources were found to corroborate or deny the claim,
+  and no additional sources were fetched during the investigation. The lack of accessible
+  evidence prevents verification of the claim.
+rcid: null
+revid: 2473762133
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://guides.loc.gov/north-carolina-local-history-genealogy/vital-records
+- provenance: verified
+  supports_claim: false
+  url: https://vitalrecords.nc.gov/
+- provenance: verified
+  supports_claim: false
+  url: https://www.psychologytoday.com/us/therapists/rachel-eshel-durham-nc/385568
+- provenance: reported
+  supports_claim: null
+  url: https://he.wikipedia.org/w/index.php?title=אשל_ארמוני&oldid=38120022
+timestamp: '2026-04-10T13:16:55.778337+00:00'
+title: Q18919670
+turns: 3
+value_label: North Carolina
+verdict: unverifiable

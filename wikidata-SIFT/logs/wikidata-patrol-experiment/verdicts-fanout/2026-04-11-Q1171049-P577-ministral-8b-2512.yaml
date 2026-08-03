@@ -1,0 +1,27 @@
+completion_tokens: 2332
+cost_usd: 0.00418989
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41473
+property: P577
+property_label: publication date
+rationale: The new publication date of 29 November 1990 for *The German Chainsaw Massacre*
+  is strongly supported by verified primary sources (Filmgalerie451 and MoMA), which
+  explicitly confirm the German premiere date. The old value of 1997-04-26 lacks corroboration
+  and was unsupported. The edit improves the claim by replacing an unsourced value
+  with a well-documented one, and no contradictions were found in the verified sources.
+rcid: 2550347780
+revid: 2473686639
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.filmgalerie451.de/en/films/the-german-chainsaw-massacre
+- provenance: verified
+  supports_claim: true
+  url: https://www.moma.org/calendar/events/147
+timestamp: '2026-04-11T15:36:48.093207+00:00'
+title: Q1171049
+turns: 4
+value_label: null
+verdict: verified-high

@@ -1,0 +1,34 @@
+completion_tokens: 2444
+cost_usd: 0.0043288625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38632
+property: P136
+property_label: genre
+rationale: Multiple independent sources confirm that Miss May I is a metalcore band.
+  The edit to change the genre from "thrash metal" to "metalcore" is justified based
+  on the evidence gathered.
+rcid: 2551121467
+revid: 2474436837
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/miss-may-i/253411523
+- provenance: verified
+  supports_claim: true
+  url: https://www.masqueradeatlanta.com/attraction/miss-may-i/
+- provenance: verified
+  supports_claim: true
+  url: https://lessthanjake.fandom.com/wiki/Miss_May_I
+- provenance: verified
+  supports_claim: true
+  url: https://www.breathingthecore.com/2024/09/interviews-miss-may-i.html
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/ddd38886-728c-4cc7-8593-0c42edbef734
+timestamp: '2026-04-10T11:51:59.671855+00:00'
+title: Q289126
+turns: 3
+value_label: metalcore
+verdict: verified-high

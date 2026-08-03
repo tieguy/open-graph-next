@@ -1,0 +1,23 @@
+completion_tokens: 3687
+cost_usd: 0.029184315000000002
+diff_type: statement_removed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 324783
+property: P109
+property_label: signature
+rationale: The signature 'Firma Rafael Alberti.svg' is confirmed by the file description
+  on Wikimedia Commons, which states it is the signature of Rafael Alberti, Spanish
+  writer. The file is digitized and vectorized from an autograph dated 1987, providing
+  strong evidence that the signature is authentic.
+rcid: 2549843723
+revid: 2473200329
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Firma_Rafael_Alberti.svg
+timestamp: '2026-04-07T12:12:43.465666+00:00'
+title: Q118936
+turns: 15
+value_label: null
+verdict: verified-high

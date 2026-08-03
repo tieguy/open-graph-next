@@ -1,0 +1,28 @@
+completion_tokens: 1054
+cost_usd: 0.005850360000000001
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 22026
+property: P31
+property_label: instance of
+rationale: The Apple Music reference provides birth date and location consistent with
+  a human individual. Independent sources, especially the MusicBrainz biography, explicitly
+  describe Omar Rashid as a person with biographical details (born December 1, 1998,
+  from Lahore, Pakistan, occupation as composer/lyricist/vocalist), confirming the
+  entity is a human being. Multiple sources consistently portray him as a specific
+  human artist.
+rcid: 2540938587
+revid: 2464728194
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/artist/omar-rashid-or-mrx/1871293364
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a?va=1
+timestamp: '2026-02-20T16:11:57.045924+00:00'
+title: Q138349103
+turns: 3
+value_label: human
+verdict: verified-high

@@ -1,0 +1,33 @@
+completion_tokens: 2127
+cost_usd: 0.0046134
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16686
+property: P31
+property_label: instance of
+rationale: The edit changed Jarfaiter's instance of from 'human' to 'Peruvian Hairless
+  Dog' without any evidence supporting this claim. Multiple authoritative and primary
+  sources confirm Jarfaiter is a human musician, and there is no credible information
+  linking him to being a dog. No references were provided for this change, making
+  it factually incorrect.
+rcid: 2550532145
+revid: 2473865955
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.akc.org/dog-breeds/peruvian-inca-orchid/
+- provenance: verified
+  supports_claim: false
+  url: https://vetscolumbia.com/2022/06/01/spotlight-on-the-peruvian-hairless-dog/
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jarfaiter
+timestamp: '2026-04-11T06:06:27.878572+00:00'
+title: Q29870720
+turns: 1
+value_label: Peruvian Hairless Dog
+verdict: incorrect

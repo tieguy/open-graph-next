@@ -1,0 +1,28 @@
+completion_tokens: 765
+cost_usd: 0.0042848
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52649
+property: P166
+property_label: award received
+rationale: 'No independent sources were found to confirm the new award ''Культурный
+  империум: книги и проекты'' for Mikhail Babkin. The edit lacks references, and searches
+  did not yield any relevant results.'
+rcid: 2550483765
+revid: 2473819803
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mikhail+Babkin+award+received+Cultural+Imperium%3A+books+and+projects
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mikhail+Babkin+awards
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mikhail+Babkin+Russian+Award+%E2%80%9CThe+best+books%2C+publishing+houses%2C+projects%E2%80%9D
+timestamp: '2026-04-07T08:50:51.166223+00:00'
+title: Q4074457
+turns: 4
+value_label: 'Культурный империум: книги и проекты'
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 3351
+cost_usd: 0.19767500000000002
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 180920
+property: P127
+property_label: owned by
+rationale: Clear evidence demonstrates the oil painting has been owned by St Peter's
+  College, University of Oxford, not by William Morris, 1st Viscount Nuffield. Art
+  UK, the authoritative artwork registry, explicitly lists the collection as 'St Peter's
+  College, University of Oxford'. A photographic print of this painting was in Nuffield's
+  collection (per National Trust Collections), but the oil painting itself was never
+  owned by Nuffield. The edit's own cited reference (Art UK) directly contradicts
+  the claim by listing St Peter's College as the collection.
+rcid: 2540919649
+revid: 2464710726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+- provenance: verified
+  supports_claim: false
+  url: https://www.nationaltrustcollections.org.uk/object/1651700
+timestamp: '2026-02-21T01:32:26.246182+00:00'
+title: Q119264330
+turns: 12
+value_label: William Morris, 1st Viscount Nuffield
+verdict: incorrect

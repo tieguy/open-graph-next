@@ -1,0 +1,31 @@
+completion_tokens: 1163
+cost_usd: 0.00245464375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31376
+property: P3373
+property_label: sibling
+rationale: The edit sets Cacus as his own sibling, which is self-referential and lacks
+  supporting evidence. No independent sources were found to confirm this claim. The
+  edit appears to be incorrect based on the available information.
+rcid: null
+revid: 2471473084
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+siblings
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+brother
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+family
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Cacus+family+tree
+timestamp: '2026-04-07T09:14:17.735633+00:00'
+title: Q754686
+turns: 6
+value_label: Cacus
+verdict: incorrect

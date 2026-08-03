@@ -1,0 +1,23 @@
+completion_tokens: 623
+cost_usd: 0.022874138750000002
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 265971
+property: P451
+property_label: unmarried partner
+rationale: The claim that 'Bamboula' is a kind of drum is incorrect. Bamboula is a
+  type of dance and drum rhythm, not a specific kind of drum. The edit to change the
+  unmarried partner of Serge Gainsbourg to 'Bamboula' is based on a misunderstanding
+  or misinformation.
+rcid: null
+revid: 2471682735
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Bamboula_(drum)
+timestamp: '2026-04-07T11:49:07.993238+00:00'
+title: Q1698
+turns: 15
+value_label: Bamboula
+verdict: incorrect

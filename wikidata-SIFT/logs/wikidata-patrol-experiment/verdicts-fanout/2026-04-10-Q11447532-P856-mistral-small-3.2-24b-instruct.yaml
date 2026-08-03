@@ -1,0 +1,31 @@
+completion_tokens: 1342
+cost_usd: 0.004589031249999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45371
+property: P856
+property_label: official website
+rationale: The URL 'http://www.city.himeji.hyogo.jp/art/' is still valid and is mentioned
+  as the official website in multiple sources. The removal of this URL as the official
+  website for the Himeji City Museum of Art appears to be incorrect.
+rcid: 2550661952
+revid: 2473991546
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kunishitei.bunka.go.jp/heritage/detail/101/00003129
+- provenance: verified
+  supports_claim: false
+  url: https://visit-himeji.com/en/sightseeing/himeji-city-museum-of-art/
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.himeji.lg.jp/art/0000007420.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.himeji.lg.jp/art/
+timestamp: '2026-04-10T13:02:00.902087+00:00'
+title: Q11447532
+turns: 3
+value_label: null
+verdict: incorrect

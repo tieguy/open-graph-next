@@ -1,0 +1,27 @@
+completion_tokens: 672
+cost_usd: 0.005081
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 98932
+property: P1476
+property_label: title
+rationale: No verifiable source could be located that confirms 'La Celestina.' as
+  the correct updated title. Multiple web searches for the title in various formats
+  returned no relevant results. All attempted web fetches failed due to blocked domains
+  (Wikipedia) or non-existent URLs. No reliable source was found to support or contradict
+  the claim.
+rcid: 2550361284
+revid: 2473699830
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/La_Celestina
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/La_Celestina
+timestamp: '2026-04-07T04:21:42.500693+00:00'
+title: Q583705
+turns: 15
+value_label: null
+verdict: unverifiable

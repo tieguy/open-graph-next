@@ -1,0 +1,23 @@
+completion_tokens: 720
+cost_usd: 0.0029999999999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30080
+property: P2044
+property_label: elevation above sea level
+rationale: The new elevation claim of +2,000,000 meters for Abric Romaní is not supported
+  by any reliable sources. The previous elevation of +350 meters is more consistent
+  with typical elevations for archaeological sites and is supported by the context
+  of the item's location.
+rcid: 2550238829
+revid: 2473580242
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://invarque.cultura.gencat.cat/card/7647
+timestamp: '2026-04-07T10:20:30.555032+00:00'
+title: Q331404
+turns: 4
+value_label: null
+verdict: incorrect

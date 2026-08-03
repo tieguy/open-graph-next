@@ -1,0 +1,32 @@
+completion_tokens: 2141
+cost_usd: 0.0151658
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 145235
+property: P734
+property_label: family name
+rationale: The edit changing Mansour Abbas's family name to "nigga" is not supported
+  by any credible sources. The sources consulted provide detailed information about
+  Mansour Abbas's political activities and views but do not mention any change in
+  his family name. This edit appears to be a case of vandalism or a malicious edit.
+rcid: 2540944904
+revid: 2464734242
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jns.org/mansour-abbas-mahmoud-abbas-and-the-abraham-effect/
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/magazine/2021/11/01/the-arab-israeli-power-broker-in-the-knesset
+- provenance: verified
+  supports_claim: false
+  url: https://www.npr.org/2022/01/17/1073565965/arab-leaders-gamble-to-play-kingmaker-in-israel-is-paying-off
+- provenance: verified
+  supports_claim: false
+  url: https://www.haaretz.com/israel-news/2021-07-01/ty-article-magazine/.highlight/whats-driving-israeli-islamist-leader-mansour-abbas/0000017f-f475-d487-abff-f7ff51500000
+timestamp: '2026-02-20T12:03:08.881162+00:00'
+title: Q62394296
+turns: 9
+value_label: nigga
+verdict: incorrect

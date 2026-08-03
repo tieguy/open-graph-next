@@ -1,0 +1,19 @@
+completion_tokens: 261
+cost_usd: 0.007273089999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77201
+property: P856
+property_label: official website
+rationale: The investigation was unable to confirm the official website for Ōda-shi
+  due to search API limitations. The provided URLs could not be verified against reliable
+  sources.
+rcid: 2549352572
+revid: 2472719882
+sources: []
+timestamp: '2026-04-11T06:41:25.760663+00:00'
+title: Q384796
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1363
+cost_usd: 0.0050072
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20947
+property: P373
+property_label: Commons category
+rationale: The previous Commons category 'Église arménienne Maranatha de Valence (Drôme)'
+  exists and contains relevant media files, indicating it is the appropriate category
+  for an Armenian church. The new value 'Église Maranatha de Valence (Drôme)' does
+  not correspond to any existing Commons category, as confirmed by a direct fetch
+  returning a 404 error. Therefore, the edit changing the category to a non-existent
+  value is incorrect.
+rcid: 2549982364
+revid: 2473331775
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:%C3%89glise_arm%C3%A9nienne_Maranatha_de_Valence_(Dr%C3%B4me)
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:%C3%89glise_Maranatha_de_Valence_(Dr%C3%B4me)
+timestamp: '2026-04-08T16:32:51.966476+00:00'
+title: Q38389291
+turns: 4
+value_label: null
+verdict: incorrect

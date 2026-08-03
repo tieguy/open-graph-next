@@ -1,0 +1,27 @@
+completion_tokens: 1380
+cost_usd: 0.00095706
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 11196
+property: P159
+property_label: headquarters location
+rationale: The headquarters location claim for Body & Brain (Q5367197) as Mesa (Q49261)
+  is supported by an independent verified source (Yahoo Local). However, the newly
+  added reference to the Arizona Corporation Commission is unreachable, which weakens
+  the edit's reliability. The old reference from English Wikipedia is invalid for
+  Wikidata verification due to circular citation rules.
+rcid: 2551426020
+revid: 2474726714
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://local.yahoo.com/info-226890581-body-brain-yoga-health-center-mesa/
+- provenance: reported
+  supports_claim: false
+  url: https://ecorp.azcc.gov
+timestamp: '2026-04-11T17:03:10.441288+00:00'
+title: Q5367197
+turns: 1
+value_label: Mesa
+verdict: verified-low

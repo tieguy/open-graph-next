@@ -1,0 +1,27 @@
+completion_tokens: 2498
+cost_usd: 0.0046916
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15964
+property: P2088
+property_label: Crunchbase organization ID
+rationale: The provided reference (Crunchbase page for SYENSQO) does not explicitly
+  state that 'syensqo' is the Crunchbase organization ID, despite pointing to the
+  correct company page. No independent source explicitly confirms this value as the
+  organization ID. The change only improves reference provenance but does not provide
+  confirmation of the claim.
+rcid: 2551386810
+revid: 2474691246
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://www.crunchbase.com/organization/syensqo
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/SYENSQO
+timestamp: '2026-04-11T16:17:28.539189+00:00'
+title: Q123752186
+turns: 1
+value_label: null
+verdict: unverifiable

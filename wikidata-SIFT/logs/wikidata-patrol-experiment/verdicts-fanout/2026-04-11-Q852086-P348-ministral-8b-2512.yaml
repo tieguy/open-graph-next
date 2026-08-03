@@ -1,0 +1,27 @@
+completion_tokens: 2118
+cost_usd: 0.00275421
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22439
+property: P348
+property_label: software version identifier
+rationale: The edit changed the software version identifier for flat assembler from
+  '1.73.23' to '1.73.32'. Independent sources confirm that the latest version as of
+  February 2026 is '1.73.35', not '1.73.32'. The cited reference URL was unreachable,
+  and no verified source supports '1.73.32' as the current version. Therefore, the
+  change from '1.73.23' to '1.73.32' is incorrect.
+rcid: 2550388751
+revid: 2473726576
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.softpedia.com/get/Programming/Coding-languages-Compilers/flat-assembler.shtml
+- provenance: reported
+  supports_claim: false
+  url: https://flatassembler.net/download.php
+timestamp: '2026-04-11T18:35:10.364754+00:00'
+title: Q852086
+turns: 1
+value_label: null
+verdict: incorrect

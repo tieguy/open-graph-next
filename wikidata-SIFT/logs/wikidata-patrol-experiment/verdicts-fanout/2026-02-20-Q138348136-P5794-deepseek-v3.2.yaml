@@ -1,0 +1,33 @@
+completion_tokens: 1750
+cost_usd: 0.019760960000000004
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 135718
+property: P5794
+property_label: Internet Game Database game ID
+rationale: The Internet Game Database (IGDB) is a proprietary platform belonging to
+  Fandom, and its web content appears to be dynamically loaded or otherwise inaccessible
+  to the web_fetch tool, returning empty or minimal content. Searches for 'Fut Rap
+  Cartas IGDB', 'Fut Rap Cartas frc-25', and 'FRC 25 IGDB' failed to return any authoritative,
+  verifiable pages that list the game's IGDB ID. The edit's claim that the ID is 'frc-25'
+  cannot be confirmed through direct access to the IGDB record, nor found via independent
+  coverage. The IGDB API was not checked due to the scope of available tools. Therefore,
+  the evidence is insufficient to confirm or deny the claim.
+rcid: 2540954667
+revid: 2464743006
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.igdb.com/games/frc-25
+- provenance: verified
+  supports_claim: false
+  url: https://www.igdb.com/games/fut-rap-cartas
+- provenance: verified
+  supports_claim: false
+  url: https://www.igdb.com/search?q=Fut+Rap+Cartas
+timestamp: '2026-02-20T07:35:36.091455+00:00'
+title: Q138348136
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 851
+cost_usd: 0.0031352000000000003
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13123
+property: P69
+property_label: educated at
+rationale: The artist's official website directly states that Danny Balgley holds
+  an MFA from Columbia University, confirming the 'educated at' claim. The cited reference
+  is primary and reliable.
+rcid: 2540974468
+revid: 2464761278
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.dbalgley.com/about
+- provenance: reported
+  supports_claim: false
+  url: https://www.wexlergallery.com/secondary-artists/danny-balgley
+timestamp: '2026-02-20T02:35:08.273514+00:00'
+title: Q138350070
+turns: 2
+value_label: Columbia University
+verdict: verified-high

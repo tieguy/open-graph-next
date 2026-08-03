@@ -1,0 +1,29 @@
+completion_tokens: 1580
+cost_usd: 0.00225858
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26124
+property: P856
+property_label: official website
+rationale: The official website URL for Minth Group Limited was changed from an outdated
+  HTTP link (`http://www.minthgroup.com/`) to the current HTTPS version (`https://www.minthgroup.com`).
+  Direct verification confirmed that the new URL is active, functional, and hosts
+  official corporate content, while the old URL redirects to the new one and is no
+  longer functional. The change is factually correct and necessary. No references
+  were attached to the claim, but direct evidence confirms the new URL is the current
+  official website.
+rcid: 2551282822
+revid: 2474591943
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.minthgroup.com
+- provenance: verified
+  supports_claim: false
+  url: http://www.minthgroup.com/
+timestamp: '2026-04-11T10:43:29.710797+00:00'
+title: Q19599200
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1657
+cost_usd: 0.0030704
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10381
+property: P21
+property_label: sex or gender
+rationale: The only cited sources for the edit (IMDb and Moviemeter) were inaccessible
+  at the time of investigation, preventing direct verification of the claimed gender
+  identity. No independent, accessible sources were found that confirm or contradict
+  the change from 'male' to 'trans woman' for John-Kees LanJouw. Therefore, the edit
+  cannot be verified based on available evidence.
+rcid: 2549884023
+revid: 2473239589
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm10442502/
+- provenance: reported
+  supports_claim: false
+  url: https://www.moviemeter.com/celebrities/2232257/john-kees-lanjouw
+- provenance: verified
+  supports_claim: false
+  url: https://www.quora.com/So-a-male-is-John-Doe-and-a-female-is-Jane-Doe-but-what-about-a-trans-person-which-doe-is-a-transgender-person
+timestamp: '2026-04-11T11:51:16.430017+00:00'
+title: Q71577770
+turns: 1
+value_label: trans woman
+verdict: unverifiable

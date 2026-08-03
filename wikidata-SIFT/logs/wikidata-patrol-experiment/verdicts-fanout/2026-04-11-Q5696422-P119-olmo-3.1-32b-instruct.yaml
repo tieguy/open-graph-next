@@ -1,0 +1,29 @@
+completion_tokens: 247
+cost_usd: 0.0032208000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15363
+property: P119
+property_label: place of burial
+rationale: The new value 'Venezuela' for place of burial is supported only by a reference
+  to Spanish Wikipedia, which is a circular source for Wikidata. The old value 'Central
+  Cemetery of Bogotá' is also referenced to Spanish Wikipedia, making both claims
+  unverifiable by independent sources. Attempts to fetch an authoritative external
+  source about José Antonio Osorio Lizarazo's burial location failed (HTTP 502 error),
+  and no primary or reliable third-party sources confirming the burial location were
+  found. Therefore, there is insufficient evidence to confirm or deny the change.
+rcid: null
+revid: 2465810238
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb12186848x
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jos%C3%A9_Antonio_Osorio
+timestamp: '2026-04-11T14:52:38.937963+00:00'
+title: Q5696422
+turns: 1
+value_label: Venezuela
+verdict: unverifiable

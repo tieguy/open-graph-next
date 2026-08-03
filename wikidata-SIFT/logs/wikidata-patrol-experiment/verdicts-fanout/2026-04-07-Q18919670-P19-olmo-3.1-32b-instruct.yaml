@@ -1,0 +1,23 @@
+completion_tokens: 615
+cost_usd: 0.0050558
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23434
+property: P19
+property_label: place of birth
+rationale: The only source cited for Eshel Armony's place of birth is the Hebrew Wikipedia
+  page, which could not be accessed due to a blocked domain. No independent, accessible
+  sources were found to corroborate the claim that Eshel Armony was born in North
+  Carolina. Therefore, the claim remains unverified.
+rcid: null
+revid: 2473762133
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://he.wikipedia.org/wiki/אשל_ארמוני
+timestamp: '2026-04-07T07:31:38.581399+00:00'
+title: Q18919670
+turns: 4
+value_label: North Carolina
+verdict: unverifiable

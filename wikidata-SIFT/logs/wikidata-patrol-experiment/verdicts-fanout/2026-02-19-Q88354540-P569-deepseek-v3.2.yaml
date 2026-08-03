@@ -1,0 +1,32 @@
+completion_tokens: 948
+cost_usd: 0.014675420000000002
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 43208
+property: P569
+property_label: date of birth
+rationale: The claim that Sara García Alonso was born in 2000 is clearly incorrect.
+  The European Space Agency (ESA), her official employer, states she was born in 1989
+  on both its English and Spanish profiles. Multiple independent Spanish news sources
+  and biographies consistently report her birth year as 1989. Additionally, her educational
+  timeline (starting university in 2007) would be impossible if she was born in 2000.
+  The current Wikidata value of 2000 appears to be an error that contradicts all available
+  authoritative sources.
+rcid: 2540985100
+revid: 2464771431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Space_in_Member_States/Spain/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/tecnologia/actualidad/quien-es-sara-garcia-alonso-la-nueva-astronauta-de-reserva-de-la-esa-que-investiga-sobre-el-cancer-5079079/
+timestamp: '2026-02-19T22:32:11.297822+00:00'
+title: Q88354540
+turns: 4
+value_label: null
+verdict: incorrect

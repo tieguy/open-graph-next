@@ -1,0 +1,52 @@
+completion_tokens: 2444
+cost_usd: 0.0037367187500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33341
+property: P21
+property_label: sex or gender
+rationale: The claim that George Pig is 'therian' is not supported by any of the sources
+  consulted. The official sources and community-driven wikis do not mention this aspect
+  of his character. The edit appears to be incorrect and possibly vandalism.
+rcid: null
+revid: 2471111206
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://peppapig.fandom.com/wiki/George_Pig
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/FanTheories/comments/x6s0as/peppa_pig_george_was_adopted/
+- provenance: verified
+  supports_claim: false
+  url: https://peppafanon.miraheze.org/wiki/George_Pig
+- provenance: verified
+  supports_claim: false
+  url: https://bamboobamboo.com/blogs/peppa-blog/7-facts-about-george-pig-that-your-kid-will-love
+- provenance: verified
+  supports_claim: false
+  url: https://theunitedorganizationtoonsheroes.fandom.com/wiki/George_Pig
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/DanielTigerConspiracy/comments/u6dh9l/why_doesnt_georges_name_start_p/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/Fauxmoi/comments/1qw8lbg/peppa_pig_reveals_her_younger_brother_george_has/
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@GeorgePigOfficial
+- provenance: verified
+  supports_claim: false
+  url: https://youtube-chandia.fandom.com/wiki/George_Pig
+- provenance: verified
+  supports_claim: false
+  url: https://categories.fandom.com/wiki/George_Pig
+- provenance: reported
+  supports_claim: false
+  url: https://www.peppapig.co.uk/characters/
+timestamp: '2026-04-10T00:09:36.172348+00:00'
+title: Q93975105
+turns: 2
+value_label: therian
+verdict: incorrect

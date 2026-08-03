@@ -1,0 +1,22 @@
+completion_tokens: 808
+cost_usd: 0.0060859375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62762
+property: P364
+property_label: original language of film or TV show
+rationale: The source from Rotten Tomatoes supports the claim that the original language
+  of the film "The Man Who Sold His Skin" is Arabic. This provides strong evidence
+  for the edit.
+rcid: null
+revid: 2471382618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.rottentomatoes.com/m/the_man_who_sold_his_skin
+timestamp: '2026-04-07T04:05:32.836793+00:00'
+title: Q88465322
+turns: 4
+value_label: Arabic
+verdict: verified-high

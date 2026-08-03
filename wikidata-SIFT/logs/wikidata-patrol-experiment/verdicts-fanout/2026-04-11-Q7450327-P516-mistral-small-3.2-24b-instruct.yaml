@@ -1,0 +1,25 @@
+completion_tokens: 1218
+cost_usd: 0.0036723437500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37709
+property: P516
+property_label: powered by
+rationale: The prefetched references from CLUI and Hydroreform provide strong evidence
+  that the Seneca Pumped Storage Generating Station uses pump turbines. The change
+  from a placeholder value to 'pump turbine' is well-supported by these sources.
+rcid: 2550659641
+revid: 2473989292
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://clui.org/projects/offstream/pumped-storage-facilities-usa/seneca
+- provenance: verified
+  supports_claim: true
+  url: https://hydroreform.org/hydro-project/seneca-p-2280/
+timestamp: '2026-04-11T11:07:45.648533+00:00'
+title: Q7450327
+turns: 4
+value_label: pump turbine
+verdict: verified-high

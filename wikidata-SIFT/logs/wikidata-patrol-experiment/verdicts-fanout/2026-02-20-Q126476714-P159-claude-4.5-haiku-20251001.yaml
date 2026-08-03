@@ -1,0 +1,51 @@
+completion_tokens: 1885
+cost_usd: 0.05803099999999999
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 48606
+property: P159
+property_label: headquarters location
+rationale: The claim that Pixartprinting's headquarters is in Quarto d'Altino is strongly
+  supported by multiple independent, authoritative business databases and official
+  company documents. While the cited reference (pixartprinting.it homepage) does not
+  explicitly state the location on the fetched page, independent sources including
+  Dun & Bradstreet, Creditsafe, Bloomberg, PitchBook, and official Pixartprinting
+  privacy policy documents all consistently confirm the headquarters address as Via
+  I Maggio 8, 30020 Quarto d'Altino, Veneto, Italy. The claim is factually correct
+  despite the cited source not visibly supporting it on the homepage.
+rcid: 2540930601
+revid: 2464721244
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pixartprinting.it/
+- provenance: reported
+  supports_claim: true
+  url: https://www.dnb.com/business-directory/company-profiles.pixartprinting_spa.1c5edf3566bd50f9824c14d31d212f55.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.creditsafe.com/business-index/en-us/company/pixartprinting-spa-it04315178
+- provenance: reported
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/0650461D:IM
+- provenance: reported
+  supports_claim: true
+  url: https://pitchbook.com/profiles/company/56676-16
+- provenance: verified
+  supports_claim: true
+  url: https://www.pixartprinting.com/company-profile/
+- provenance: reported
+  supports_claim: true
+  url: https://hub.pixartprinting.com/privacy-policy
+- provenance: reported
+  supports_claim: true
+  url: https://www.waze.com/fy/live-map/directions/pixartprinting-via-1o-maggio-8-quarto-daltino
+- provenance: reported
+  supports_claim: true
+  url: https://www.crunchbase.com/organization/pixartprinting
+timestamp: '2026-02-20T20:03:43.348366+00:00'
+title: Q126476714
+turns: 4
+value_label: Quarto d'Altino
+verdict: verified-high

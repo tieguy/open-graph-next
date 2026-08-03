@@ -1,0 +1,37 @@
+completion_tokens: 2717
+cost_usd: 0.234759
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 221174
+property: P4264
+property_label: LinkedIn company or organization ID
+rationale: 'The value ''pitchbook'' is correct for P4264 (LinkedIn company or organization
+  ID). Independent sources confirm that PitchBook''s LinkedIn page uses the slug ''pitchbook''
+  in the URL (linkedin.com/company/pitchbook), as documented by Bitscale.ai which
+  explicitly states ''LinkedIn: linkedin.com/company/pitchbook''. The Wikidata property
+  P4264 is designed to store the website slug (not the numeric ID), as confirmed by
+  the property''s regex constraint ([a-z\d][a-z\d-]+[a-z\d]) and a SPARQL reference
+  describing P4264 as ''LinkedIn organization id/website slug''. The edit adds a properly
+  formatted, verified identifier that matches the expected format and resolves to
+  the correct organization.'
+rcid: 2540957361
+revid: 2464745557
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bitscale.ai/directory/pitchbook
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P4264
+- provenance: verified
+  supports_claim: true
+  url: https://derrick-app.com/en/linkedin-company-id-2/
+- provenance: reported
+  supports_claim: true
+  url: https://gist.github.com/VladimirAlexiev/cf2de89b692bbc2ae70917aae021ec07
+timestamp: '2026-02-20T06:14:27.313653+00:00'
+title: Q16967130
+turns: 15
+value_label: null
+verdict: verified-high

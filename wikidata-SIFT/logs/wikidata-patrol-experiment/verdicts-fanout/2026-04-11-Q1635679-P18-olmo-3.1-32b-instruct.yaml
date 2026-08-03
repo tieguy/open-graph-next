@@ -1,0 +1,40 @@
+completion_tokens: 1287
+cost_usd: 0.005177
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22024
+property: P18
+property_label: image
+rationale: The edit replaced an older image of Montacute House with a newer one, indicated
+  by the filename's recent date. Independent sources confirm Montacute House is a
+  notable heritage site, supporting the general context of the edit. However, neither
+  the old nor the new image is referenced or verified by an authoritative primary
+  source (e.g., National Trust or Wikimedia Commons) in the evidence gathered. The
+  intent to update to a more recent image is reasonable, but the absence of a citation
+  or provenance for the new image means the change cannot be classified as verified.
+  Further improvement would be to add a reliable reference confirming the copyright
+  and suitability of the new image.
+rcid: 2550960431
+revid: 2474280251
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.alva.org.uk/details.cfm?p=597
+- provenance: verified
+  supports_claim: false
+  url: https://vocaleyes.co.uk/research/heritage-access-2022/benchmark/
+- provenance: verified
+  supports_claim: true
+  url: https://www.britainexpress.com/attractions.htm?attraction=296
+- provenance: reported
+  supports_claim: false
+  url: https://www.shutterstock.com/search/montacute-house
+- provenance: verified
+  supports_claim: false
+  url: https://www.somersetheritage.org.uk/record/54836
+timestamp: '2026-04-11T16:27:28.108144+00:00'
+title: Q1635679
+turns: 1
+value_label: null
+verdict: plausible

@@ -1,0 +1,29 @@
+completion_tokens: 810
+cost_usd: 0.009735549999999997
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 191471
+property: P21
+property_label: sex or gender
+rationale: Despite a thorough search, no credible source could be found that confirms
+  or denies Joan Maragall's sex or gender identity beyond the claim itself. The claim
+  is based solely on the edit's citation of references from BnF, GND, and other aggregators
+  without independent verification. No external sources supporting or contradicting
+  the 'intersex' classification were identified.
+rcid: null
+revid: 2471640708
+sources:
+- provenance: unverified
+  supports_claim: false
+  url: https://datos.gob.es/es/catalogo/e00123904-autores-espanoles-en-dominio-publico-fallecidos-desde-1900
+- provenance: verified
+  summary: Homepage listing Dictionaries and Translations but does not contain specific
+    information about Joan Maragall's gender or sex characteristics.
+  supports_claim: false
+  url: https://biography.yourdictionary.com/joan-maragall
+timestamp: '2026-04-07T03:41:34.519469+00:00'
+title: Q562402
+turns: 15
+value_label: intersex
+verdict: unverifiable

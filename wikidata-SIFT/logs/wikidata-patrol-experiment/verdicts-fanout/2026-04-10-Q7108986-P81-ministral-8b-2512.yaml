@@ -1,0 +1,31 @@
+completion_tokens: 1839
+cost_usd: 0.0031953899999999998
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25454
+property: P81
+property_label: connecting line
+rationale: Otomo Station (Q7108986) is now a bus stop and no longer a railway station.
+  The station was destroyed in the 2011 Tōhoku earthquake and replaced by a bus rapid
+  transit system. The Ōfunato Line (Q1057758) does not include Otomo Station as a
+  stop, as confirmed by multiple verified sources. Therefore, the claim that the Ōfunato
+  Line is a connecting line for Otomo Station is incorrect, and the rank change to
+  deprecated is justified.
+rcid: 2550458317
+revid: 2473794797
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://travel.sygic.com/en/poi/otomo-poi:8361319
+- provenance: verified
+  supports_claim: false
+  url: https://matcha-jp.com/en/mcm21640
+- provenance: verified
+  supports_claim: false
+  url: https://jp.commutetour.com/transport/train/train-line/jr-ofunato-line/
+timestamp: '2026-04-10T08:59:14.054715+00:00'
+title: Q7108986
+turns: 2
+value_label: Ōfunato Line
+verdict: incorrect

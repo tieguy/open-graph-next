@@ -1,0 +1,32 @@
+completion_tokens: 1333
+cost_usd: 0.00239578125
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24405
+property: P1454
+property_label: legal form
+rationale: The dewiki.de source supports the claim that the legal form is 'Gesellschaft
+  mit beschränkter Haftung' (GmbH). The Bloomberg LEI source indicates a slightly
+  different legal form, 'Gemeinnützige Gesellschaft mit beschränkter Haftung' (Non-profit
+  GmbH). Given that 'Gemeinnützige Gesellschaft mit beschränkter Haftung' is a specific
+  type of 'Gesellschaft mit beschränkter Haftung,' the added reference can be considered
+  supportive but not entirely precise. The reference added in the edit could not be
+  verified due to a fetch failure.
+rcid: 2550578218
+revid: 2473910225
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://dewiki.de/Lexikon/Secure_Payment_Technologies
+- provenance: verified
+  supports_claim: false
+  url: https://lei.bloomberg.com/leis/view/529900WXSVY6ZB8B6468
+- provenance: verified
+  supports_claim: false
+  url: https://spt-payments.com/
+timestamp: '2026-04-11T08:17:11.265032+00:00'
+title: Q61874299
+turns: 2
+value_label: Gesellschaft mit beschränkter Haftung
+verdict: verified-low

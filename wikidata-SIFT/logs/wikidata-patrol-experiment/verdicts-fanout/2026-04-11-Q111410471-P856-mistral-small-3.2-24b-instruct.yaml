@@ -1,0 +1,22 @@
+completion_tokens: 270
+cost_usd: 0.00236605875
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24459
+property: P856
+property_label: official website
+rationale: The added reference URL does not support the official website claim for
+  Ibis Wien Mariahilf as it does not mention the hotel anywhere on the page. The claim
+  is therefore suspect.
+rcid: 2550334114
+revid: 2473673383
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://all.accor.com/hotel/0796/index.en.shtml
+timestamp: '2026-04-11T08:16:41.251349+00:00'
+title: Q111410471
+turns: 2
+value_label: null
+verdict: suspect

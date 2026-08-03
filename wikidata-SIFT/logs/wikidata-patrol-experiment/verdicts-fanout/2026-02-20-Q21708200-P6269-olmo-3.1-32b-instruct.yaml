@@ -1,0 +1,25 @@
+completion_tokens: 321
+cost_usd: 0.0107606
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 52840
+property: P6269
+property_label: API endpoint URL
+rationale: The URL https://developers.openai.com/api/reference/overview is the official
+  API reference overview page for OpenAI, as confirmed by directly fetching and reading
+  the page. The page describes the RESTful, streaming, and realtime APIs for interacting
+  with the OpenAI platform and is intended as the authoritative documentation for
+  developers. This confirms that the URL is a correct and current API endpoint reference
+  for OpenAI.
+rcid: 2540969614
+revid: 2464757003
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://developers.openai.com/api/reference/overview/
+timestamp: '2026-02-20T03:33:45.754466+00:00'
+title: Q21708200
+turns: 2
+value_label: null
+verdict: verified-high

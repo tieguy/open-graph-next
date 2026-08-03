@@ -1,0 +1,28 @@
+completion_tokens: 1170
+cost_usd: 0.0016583375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17020
+property: P136
+property_label: genre
+rationale: Multiple independent sources consistently describe Built to Spill as an
+  indie rock band. The evidence strongly supports the change from 'alternative rock'
+  to 'indie rock'.
+rcid: 2550852005
+revid: 2474175735
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://thehandlebar850.com/built-to-spill-indie-rock-band/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wweek.com/music/2025/11/18/built-to-spill-keeps-it-indie-for-the-streaming-age/
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/built-to-spill-mn0000527267
+timestamp: '2026-04-11T16:52:53.884232+00:00'
+title: Q1003115
+turns: 1
+value_label: indie rock
+verdict: verified-high

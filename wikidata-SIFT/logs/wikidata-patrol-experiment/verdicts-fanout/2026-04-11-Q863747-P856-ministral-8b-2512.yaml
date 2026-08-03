@@ -1,0 +1,33 @@
+completion_tokens: 1933
+cost_usd: 0.00228891
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19522
+property: P856
+property_label: official website
+rationale: The new official website value, 'https://www.malaysiaairlines.com', is
+  unrelated to Uda, Nara Prefecture, Japan. Multiple verified and reported sources
+  confirm that 'https://www.city.uda.nara.jp/' is the correct official website for
+  Uda. The change lacks any logical or contextual justification and contradicts all
+  available evidence.
+rcid: 2551405603
+revid: 2474709008
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.uda.nara.jp/
+- provenance: reported
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/%E8%89%AF%E5%8F%A4%E5%B8%82
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.nara.jp/6265.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.malaysiaairlines.com
+timestamp: '2026-04-11T18:33:48.681624+00:00'
+title: Q863747
+turns: 1
+value_label: null
+verdict: incorrect

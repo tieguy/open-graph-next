@@ -1,0 +1,35 @@
+completion_tokens: 1715
+cost_usd: 0.0044878
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17294
+property: P569
+property_label: date of birth
+rationale: The previous references for Xolidayboy's date of birth are now unreachable
+  or blocked, and no independently verifiable source for the date of birth could be
+  located. Although the date is widely reported, it lacks a citable, reliable source.
+  Therefore, the claim remains unverified.
+rcid: null
+revid: 2436149160
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ru.wikipedia.org/?oldid=126569431
+- provenance: verified
+  supports_claim: false
+  url: https://xolidayboy.ru/
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Xolidayboy
+- provenance: reported
+  supports_claim: null
+  url: https://tophit.com/artist/46558-xolidayboy
+- provenance: reported
+  supports_claim: null
+  url: https://vk.com/video-200564540_456239910
+timestamp: '2026-04-11T14:16:07.125334+00:00'
+title: Q115258159
+turns: 1
+value_label: null
+verdict: unverifiable

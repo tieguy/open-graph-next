@@ -1,0 +1,30 @@
+completion_tokens: 792
+cost_usd: 0.0032454
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13851
+property: P19
+property_label: place of birth
+rationale: There is no independently verified source found that confirms Irina Mazing's
+  place of birth as either Odesa or Donetsk. The new value 'Odesa' is plausible given
+  Odesa's recognition as a place of birth in Ukraine, but without a direct citation
+  or reliable biographical reference, the change cannot be confirmed. The edit should
+  have included a reference to a reputable source for the new value.
+rcid: 2551426232
+revid: 2474726867
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Births_in_Odesa
+- provenance: verified
+  supports_claim: false
+  url: https://www.new-books-in-german.com/recommendations/summer-in-odesa/
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm0949738/
+timestamp: '2026-04-11T06:20:11.491502+00:00'
+title: Q4274528
+turns: 1
+value_label: Odesa
+verdict: unverifiable

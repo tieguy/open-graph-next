@@ -1,0 +1,29 @@
+completion_tokens: 2174
+cost_usd: 0.0046482
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16719
+property: P18
+property_label: image
+rationale: The image in question had no supporting references and could not be independently
+  verified from reliable sources. There is no evidence that an image of Antoine d'Irumberry
+  de Salaberry (1880-1915) exists or is notable. Therefore, the removal of the unsourced
+  image is correct.
+rcid: 2550201522
+revid: 2473544385
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/w/index.php?search=Antoine+d%27Irumberry+de+Salaberry&title=Special%3ASearch&go=Go
+- provenance: verified
+  supports_claim: false
+  url: https://cote.bnf.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://www.artfacts.net/artist/antoine-dirumberry-de-salaberry
+timestamp: '2026-04-11T06:19:55.619723+00:00'
+title: Q116279825
+turns: 1
+value_label: null
+verdict: verified-high

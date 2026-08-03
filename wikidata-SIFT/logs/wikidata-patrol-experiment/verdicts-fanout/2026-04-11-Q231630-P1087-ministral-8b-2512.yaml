@@ -1,0 +1,29 @@
+completion_tokens: 2178
+cost_usd: 0.016426589999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 123205
+property: P1087
+property_label: Elo rating
+rationale: The edit changes Nona Gaprindashvili's Elo rating from '+2312' to '2,243'
+  for November 2013. While the old value aligns with historical Elo rating patterns
+  for her career, the new value '2,243' is unrealistic for a chess player's Elo rating
+  (typical ranges are 1000–3000). The reference source (FIDE Standard Ratings as of
+  30 November 2013) could not be verified due to unreachable URLs. No independent,
+  verified source supports the new value, and the change appears inconsistent with
+  her documented career trajectory.
+rcid: 2550305107
+revid: 2473644942
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.fide.com/fide/handbook.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nona_Gaprindashvili
+timestamp: '2026-04-11T17:25:09.255192+00:00'
+title: Q231630
+turns: 4
+value_label: null
+verdict: suspect

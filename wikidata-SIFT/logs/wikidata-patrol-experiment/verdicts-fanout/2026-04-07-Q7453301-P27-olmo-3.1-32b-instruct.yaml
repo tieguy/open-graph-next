@@ -1,0 +1,30 @@
+completion_tokens: 751
+cost_usd: 0.009905
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47272
+property: P27
+property_label: country of citizenship
+rationale: No independent, publicly accessible sources were found to confirm that
+  Serge Edongo's country of citizenship is France. The edit changed his citizenship
+  from Cameroon to France, but there is no corroborating evidence from credible third-party
+  sources. The absence of supporting documentation means the claim cannot be verified
+  at this time.
+rcid: null
+revid: 2472283777
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Serge+Edongo+country+of+citizenship+France
+- provenance: reported
+  supports_claim: false
+  url: https://www.fivb.org/en/search?q=Serge+Edongo
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?search=Serge+Edongo
+timestamp: '2026-04-07T06:41:28.847061+00:00'
+title: Q7453301
+turns: 11
+value_label: France
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 2158
+cost_usd: 0.00229062
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22534
+property: P19
+property_label: place of birth
+rationale: The claim that T. J. Sullivan (Q114697399) was born in Milford, Connecticut
+  (Q755798) is strongly supported by independent sources, including a verified Fandom
+  wiki page that explicitly states his birthplace. While the edit added a redundant
+  qualifier for the country (P17), the primary value itself is correct and well-supported.
+  The lack of references on the claim remains a concern, but the evidence confirms
+  the accuracy of the birthplace claim.
+rcid: 2551385479
+revid: 2474690011
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://howtotrainyourdragon.fandom.com/wiki/T.J._Sullivan
+timestamp: '2026-04-11T10:28:58.483686+00:00'
+title: Q114697399
+turns: 2
+value_label: Milford
+verdict: verified-high

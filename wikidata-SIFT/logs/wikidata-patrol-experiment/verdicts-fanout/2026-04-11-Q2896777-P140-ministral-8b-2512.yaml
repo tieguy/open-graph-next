@@ -1,0 +1,22 @@
+completion_tokens: 1536
+cost_usd: 0.00185358
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23468
+property: P140
+property_label: religion or worldview
+rationale: The edit changes Suliman Bashear's religion from Islam (Q432) to Druze
+  Faith (Q163943). While the item's description as a 'Druze Arab historian' suggests
+  plausibility, no independent or verified sources could be accessed to confirm or
+  deny the claim. The only cited reference (English Wikipedia) was unreachable, and
+  no additional sources were fetched or confirmed during this investigation. Without
+  verified evidence, the claim cannot be confirmed or refuted.
+rcid: 2550427355
+revid: 2473764517
+sources: []
+timestamp: '2026-04-11T14:29:05.990404+00:00'
+title: Q2896777
+turns: 3
+value_label: Druze Faith
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1809
+cost_usd: 0.00173596875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13083
+property: P1477
+property_label: birth name
+rationale: The claim that Jarfaiter's birth name is 'semen' is contradicted by independent
+  sources stating his legal name is 'Olmo Suárez Sánchez'. The cited reference could
+  not be verified due to a fetch failure.
+rcid: 2550531970
+revid: 2473865781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://allfamous.org/people/jarfaiter-fnkd.html
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/80404ff9-7329-40cb-b5b6-24b23d83059a
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/jarfaiter.html
+timestamp: '2026-04-10T12:31:11.842038+00:00'
+title: Q29870720
+turns: 1
+value_label: null
+verdict: incorrect

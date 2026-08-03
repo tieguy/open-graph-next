@@ -1,0 +1,25 @@
+completion_tokens: 999
+cost_usd: 0.0020337125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18495
+property: P569
+property_label: date of birth
+rationale: The removed date of birth "30 April 1987" is not supported by the independent
+  sources found. The sources indicate the date of birth as "20 April" without specifying
+  the year, which suggests that the removal was justified.
+rcid: null
+revid: 2463100359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://alchetron.com/Kadambari-Jethwani
+- provenance: verified
+  supports_claim: false
+  url: https://chiloka.com/celebrity/kadambari-jethwani
+timestamp: '2026-04-11T18:48:49.713236+00:00'
+title: Q26213685
+turns: 2
+value_label: null
+verdict: verified-high

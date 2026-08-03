@@ -1,0 +1,26 @@
+completion_tokens: 1607
+cost_usd: 0.0030964
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10661
+property: P2397
+property_label: YouTube channel ID
+rationale: The edit changes the YouTube channel ID to the canonical form, which is
+  confirmed by the official website of Théâtre la Seizième and by the YouTube channel
+  itself. However, the edit was not supported by a cited reference in Wikidata, so
+  the confidence level is 'low'.
+rcid: 2551329122
+revid: 2474636002
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://seizieme.ca/fr/
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/@theatrelaseizieme_
+timestamp: '2026-04-11T17:08:07.198746+00:00'
+title: Q100965387
+turns: 1
+value_label: null
+verdict: verified-low

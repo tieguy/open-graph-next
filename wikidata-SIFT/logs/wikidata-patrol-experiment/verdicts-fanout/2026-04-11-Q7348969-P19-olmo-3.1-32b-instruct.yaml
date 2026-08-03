@@ -1,0 +1,30 @@
+completion_tokens: 1674
+cost_usd: 0.0049604
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19780
+property: P19
+property_label: place of birth
+rationale: Multiple independent and reputable sources explicitly confirm that Robert
+  Poore was born in Dublin, Ireland. ESPNcricinfo, a reputable cricket database, and
+  secondary biographical sources state his birthplace as Dublin. The cited Wikipedia
+  source is corroborated by these independent sources, providing strong support for
+  the claim.
+rcid: 2550599672
+revid: 2473930839
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.espncricinfo.com/player/32458-robert-poore
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Robert_Poore
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/w/index.php?title=Robert_Poore&oldid=846157030
+timestamp: '2026-04-11T06:29:15.637803+00:00'
+title: Q7348969
+turns: 1
+value_label: Dublin
+verdict: verified-high

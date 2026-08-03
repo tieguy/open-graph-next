@@ -1,0 +1,30 @@
+completion_tokens: 3963
+cost_usd: 0.025105829999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 231640
+property: P2139
+property_label: total revenue
+rationale: The cited reference (Consolidated Financial Statements for the year ended
+  December 31, 2019) could not be verified due to extraction issues, and no independent
+  sources explicitly confirm the total revenue figure of 100,500,000,000 Russian rubles
+  for VK in 2019. The closest available data does not support this claim, and no verified
+  sources corroborate the updated value.
+rcid: 2550543807
+revid: 2473877385
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://corp.imgsmail.ru/media/files/mail.rugroupifrsfy2019.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://tadviser.com/index.php/Article:VK_financials_(formerly_Mail.ru_Group)
+- provenance: verified
+  supports_claim: false
+  url: https://vk.company/en/investors/ir_blog/10605/
+timestamp: '2026-04-10T13:04:09.363251+00:00'
+title: Q1885456
+turns: 8
+value_label: null
+verdict: unverifiable

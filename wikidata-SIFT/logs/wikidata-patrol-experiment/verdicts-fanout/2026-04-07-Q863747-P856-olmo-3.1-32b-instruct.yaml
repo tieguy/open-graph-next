@@ -1,0 +1,24 @@
+completion_tokens: 590
+cost_usd: 0.0128324
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62392
+property: P856
+property_label: official website
+rationale: The new value for the official website of Uda, Nara (https://www.malaysiaairlines.com)
+  is clearly incorrect, as it is the official website of Malaysia Airlines and not
+  related to Uda city. No independent or official sources support this new value.
+  The previous value was a Nara Prefecture government page, which is consistent with
+  an official city resource. The edit appears to be an error.
+rcid: 2551405603
+revid: 2474709008
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.pref.nara.jp/6265.htm
+timestamp: '2026-04-07T13:18:53.079491+00:00'
+title: Q863747
+turns: 8
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 598
+cost_usd: 0.0079922
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38167
+property: P856
+property_label: official website
+rationale: The value https://www.airasia.com is the official website of AirAsia, a
+  commercial airline, not Matsusaka City. No independent sources confirm this as the
+  official website for Matsusaka. Assigning an airline's website as the official site
+  of a city is clearly erroneous.
+rcid: null
+revid: 2471370338
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.airasia.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.pref.mie.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Matsusaka,_Mie
+timestamp: '2026-04-07T13:39:59.698858+00:00'
+title: Q460829
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,34 @@
+completion_tokens: 2736
+cost_usd: 0.052299
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 38619
+property: P856
+property_label: official website
+rationale: 'The URL http://www2.ifrn.edu.br/ojs/index.php/RBEPT/index is factually
+  correct and points to an active, verified official website for Revista Brasileira
+  da Educação Profissional e Tecnológica. Direct verification confirms it hosts the
+  journal''s homepage with matching ISSN (e-ISSN: 2447-1801, ISSN: 1983-0408) and
+  current content. However, the edit is problematic because the item already contains
+  the HTTPS version of this URL ranked as ''normal'' while this HTTP version is marked
+  ''deprecated''. Updating the HTTP version appears to reverse prior corrections favoring
+  the more secure HTTPS protocol, representing a quality regression rather than a
+  proper update.'
+rcid: 2540959981
+revid: 2464747981
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www2.ifrn.edu.br/ojs/index.php/RBEPT/index
+- provenance: verified
+  supports_claim: true
+  url: https://www2.ifrn.edu.br/ojs/index.php/RBEPT/index
+- provenance: reported
+  supports_claim: true
+  url: https://portal.issn.org/resource/ISSN/2447-1801
+timestamp: '2026-02-20T05:01:11.983053+00:00'
+title: Q96719539
+turns: 3
+value_label: null
+verdict: suspect

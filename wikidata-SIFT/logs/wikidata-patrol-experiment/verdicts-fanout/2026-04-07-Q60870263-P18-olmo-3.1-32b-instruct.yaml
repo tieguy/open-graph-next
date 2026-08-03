@@ -1,0 +1,28 @@
+completion_tokens: 1193
+cost_usd: 0.0053476
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23159
+property: P18
+property_label: image
+rationale: The image '260314 ITZY Yuna at K-WONDER Taipei (2).jpg' was replaced as
+  the visual representation of Shin Yu-na (Q60870263), but there is no independently
+  verifiable source confirming that this image is an official or appropriate representation.
+  The official ITZY and JYP channels referenced on fan sources do not explicitly display
+  or endorse this image. No reference URL was provided with the edit, and web searches
+  did not locate authoritative confirmation.
+rcid: 2550871923
+revid: 2474195298
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kprofiles.com/itzy-members-profile-2/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T06:44:42.973922+00:00'
+title: Q60870263
+turns: 2
+value_label: null
+verdict: unverifiable

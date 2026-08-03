@@ -1,0 +1,31 @@
+completion_tokens: 2886
+cost_usd: 0.00989691
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 93193
+property: P348
+property_label: software version identifier
+rationale: The edit incorrectly changes the software version identifier from 'RAD
+  Studio 12.2 Athens' (confirmed by a valid reference and release date) to 'RAD Studio
+  13.1 Florence'. The new version lacks credible evidence of release or announcement,
+  and the publication date qualifier is future-dated (2026-03-19), which is inconsistent
+  with the current state of the software. The change skips intermediate versions and
+  is not supported by any verified source.
+rcid: 2550800549
+revid: 2474125557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/omonien/Delphi-Version-Information
+- provenance: reported
+  supports_claim: true
+  url: https://blogs.embarcadero.com/announcing-the-availability-of-rad-studio-12-2-athens/
+- provenance: reported
+  supports_claim: false
+  url: https://blogs.embarcadero.com/announcing-the-availability-of-rad-studio-13-florence-update-1/
+timestamp: '2026-04-11T16:59:19.901154+00:00'
+title: Q487378
+turns: 4
+value_label: null
+verdict: incorrect

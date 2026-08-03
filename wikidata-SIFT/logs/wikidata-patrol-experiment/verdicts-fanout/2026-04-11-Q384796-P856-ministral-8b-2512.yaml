@@ -1,0 +1,27 @@
+completion_tokens: 1977
+cost_usd: 0.00846909
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 93972
+property: P856
+property_label: official website
+rationale: The new official website value, 'https://www.turkishairlines.com', is unrelated
+  to Ōda-shi, a city in Japan. The old value, 'https://www.city.oda.lg.jp/', is contextually
+  appropriate for a Japanese municipal website, despite being currently unreachable.
+  No verified sources support the new value, and the change is inconsistent with the
+  item's context and purpose.
+rcid: 2549352572
+revid: 2472719882
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Oda,_Shimane
+- provenance: verified
+  supports_claim: false
+  url: https://pref.shimane-toukei.jp/?view=8779
+timestamp: '2026-04-11T06:41:38.876079+00:00'
+title: Q384796
+turns: 6
+value_label: null
+verdict: incorrect

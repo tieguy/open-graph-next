@@ -1,0 +1,34 @@
+completion_tokens: 891
+cost_usd: 0.0049944
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 75585
+property: P451
+property_label: unmarried partner
+rationale: The edit changes the unmarried partner of Emilia Mernes from Duki to Coscu.
+  The prefetched reference from Ambito.com confirms that Duki and Emilia Mernes confirmed
+  their relationship, providing strong evidence that Duki is indeed her unmarried
+  partner. In contrast, there is no clear evidence supporting a relationship between
+  Emilia Mernes and Coscu based on the prefetched references from ViaPais and A24.
+  Therefore, the edit to change the unmarried partner from Duki to Coscu is incorrect.
+rcid: 2549423609
+revid: 2472789338
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ambito.com/espectaculos/romance/duki-y-emilia-mernes-confirmaron-su-noviazgo-n5332279
+- provenance: verified
+  supports_claim: false
+  url: https://viapais.com.ar/urbano/coscu-metio-interna-maria-becerra-emilia-mernes-revelo-queria-borrar-competencia_0_QkCYfij3FT.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.a24.com/primiciasya/acusan-emilia-mernes-coquetear-un-famoso-delante-su-novio-duki-el-video-n1539360
+- provenance: verified
+  supports_claim: false
+  url: https://www.a24.com/primiciasya/la-fuerte-reaccion-emilia-mernes-la-incomoda-pregunta-coscu-duki-n1263062
+timestamp: '2026-04-11T15:52:30.229152+00:00'
+title: Q68110339
+turns: 6
+value_label: Coscu
+verdict: incorrect

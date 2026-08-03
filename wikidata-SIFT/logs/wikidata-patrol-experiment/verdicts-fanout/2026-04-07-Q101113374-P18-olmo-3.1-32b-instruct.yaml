@@ -1,0 +1,20 @@
+completion_tokens: 1086
+cost_usd: 0.0043892
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18688
+property: P18
+property_label: image
+rationale: No authoritative or independently verifiable source was found to confirm
+  that the new image is correct for Our Lady of Hope and Consolation. Both the new
+  and old images lack citations, and web searches did not yield any official or reliable
+  confirmation of the new image.
+rcid: null
+revid: 2467778049
+sources: []
+timestamp: '2026-04-07T04:50:36.094229+00:00'
+title: Q101113374
+turns: 4
+value_label: null
+verdict: unverifiable

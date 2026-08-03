@@ -1,0 +1,21 @@
+completion_tokens: 631
+cost_usd: 0.00144941875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14864
+property: P225
+property_label: taxon name
+rationale: The removed claim had no references cited, and the investigation was unable
+  to verify the taxon name due to a technical issue.
+rcid: 2550597437
+revid: 2473928696
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gbif.org/species/1173584
+timestamp: '2026-04-11T17:25:50.427644+00:00'
+title: Q124826213
+turns: 2
+value_label: null
+verdict: unverifiable

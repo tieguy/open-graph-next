@@ -1,0 +1,22 @@
+completion_tokens: 961
+cost_usd: 0.0084007375
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 86535
+property: P156
+property_label: followed by
+rationale: The investigation did not yield any verified sources confirming the sequence
+  of the Africa Cup of Nations from 2025 to 2029. The official CAF website and other
+  potential sources either did not provide the necessary information or were inaccessible.
+rcid: 2549713777
+revid: 2473072483
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cafonline.com/press-releases/caf-executive-committee-approves-hosts-for-totalenergies-caf-africa-cup-of-nations-2025-2027-2029/
+timestamp: '2026-04-07T10:07:33.445335+00:00'
+title: Q60515006
+turns: 15
+value_label: 2029 Africa Cup of Nations
+verdict: unverifiable

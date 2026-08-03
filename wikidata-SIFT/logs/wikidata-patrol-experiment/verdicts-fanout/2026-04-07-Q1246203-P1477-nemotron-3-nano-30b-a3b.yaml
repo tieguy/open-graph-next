@@ -1,0 +1,25 @@
+completion_tokens: 631
+cost_usd: 0.006103850000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 119553
+property: P1477
+property_label: birth name
+rationale: Multiple searches failed to locate authoritative sources confirming whether
+  'José de Nebra Blasco' is the correct birth name. Sources that might contain relevant
+  information (Wikipedia articles) returned 'blocked_domain' errors when accessed,
+  and no verifiable web results were found for authoritative confirmation of the name.
+  This prevents verification of the claim, though the edit does not appear incorrect
+  on its face.
+rcid: null
+revid: 2471495510
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Jos%C3%A9_de_Nebra
+timestamp: '2026-04-07T12:37:00.727737+00:00'
+title: Q1246203
+turns: 15
+value_label: null
+verdict: unverifiable

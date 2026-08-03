@@ -1,0 +1,25 @@
+completion_tokens: 1444
+cost_usd: 0.00592676
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70808
+property: P856
+property_label: official website
+rationale: The URL is relevant to the film but does not explicitly state it is the
+  official website. The reference from the Polish Wikipedia does not directly support
+  the claim. Therefore, the claim cannot be verified with the available evidence.
+rcid: null
+revid: 2471201620
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pl.wikipedia.org/w/index.php?title=Pałac_wicekróla_(film)&oldid=55548631
+- provenance: verified
+  supports_claim: false
+  url: http://benditnetworks.com/filmography/viceroy/
+timestamp: '2026-04-11T15:14:17.869784+00:00'
+title: Q20950016
+turns: 5
+value_label: null
+verdict: unverifiable

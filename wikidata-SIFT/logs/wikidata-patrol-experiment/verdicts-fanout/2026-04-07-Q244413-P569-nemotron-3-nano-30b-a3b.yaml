@@ -1,0 +1,25 @@
+completion_tokens: 706
+cost_usd: 0.00723165
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 141809
+property: P569
+property_label: date of birth
+rationale: Exhaustive attempts to locate independent verification of the claimed 1660
+  death date for Vincent de Paul failed. All searches for 'Vincent de Paul' combined
+  with 'birth', 'date of birth', '1581', '1660', and variations (including language-specific
+  queries) returned no confirmed sources that directly state his birthdate. While
+  the query 'Vincent de Paul 1581-1660' appeared relevant in some imagined contexts,
+  no actual verified web results or content was retrieved to confirm the year 2026
+  as either correct or incorrect. Given the complete absence of accessible primary
+  or secondary sources confirming the edit's claim, and no corroborating evidence
+  found through authoritative references, the edit remains unverifiable.
+rcid: null
+revid: 2470232927
+sources: []
+timestamp: '2026-04-07T03:48:20.330418+00:00'
+title: Q244413
+turns: 15
+value_label: null
+verdict: unverifiable

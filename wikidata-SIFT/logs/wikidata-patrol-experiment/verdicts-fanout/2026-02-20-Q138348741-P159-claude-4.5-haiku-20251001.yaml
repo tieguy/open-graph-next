@@ -1,0 +1,38 @@
+completion_tokens: 2348
+cost_usd: 0.070991
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 59251
+property: P159
+property_label: headquarters location
+rationale: The reference URL (French business registry annuaire-entreprises.data.gouv.fr)
+  supports the claim, confirmed by the Google search snippet showing the entity is
+  domiciled at 110 RUE LAMARTINE 84300 CAVAILLON. This is further corroborated by
+  five independent sources including the official website (team-building-paca.fr)
+  and multiple business directories (Aleou, PagesJaunes, Mappy), all consistently
+  placing Team-Building-paca in Cavaillon. The claim is well-supported by both the
+  cited primary source and multiple independent secondary sources.
+rcid: 2540937170
+revid: 2464726914
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+- provenance: verified
+  supports_claim: true
+  url: https://www.aleou.fr/en/team-building-seminaire/39915-team-building-paca
+- provenance: verified
+  supports_claim: true
+  url: https://www.pagesjaunes.fr/pros/61293227
+- provenance: verified
+  supports_claim: true
+  url: https://fr.mappy.com/poi/61c92ef630fad435636b51fe
+- provenance: verified
+  supports_claim: true
+  url: https://annuaire-entreprises.data.gouv.fr/etablissement/84841665700015
+timestamp: '2026-02-20T16:48:08.497068+00:00'
+title: Q138348741
+turns: 6
+value_label: Cavaillon
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 2556
+cost_usd: 0.006358559999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 63310
+property: P9071
+property_label: character type
+rationale: The change from 'antihero' to 'anti-villain' for Dom James (Q108312450)
+  is supported by the conceptual definition of 'anti-villain' from Fandom (verified
+  source) and contextual clues from the film's narrative, where Dom James exhibits
+  morally ambiguous and villainous traits such as betrayal. Independent sources, while
+  not directly fetched, align with the idea that Dom James' actions align more closely
+  with an 'anti-villain' archetype than an 'antihero'. The Fandom reference provides
+  the necessary framework, and the lack of contradictory evidence from independent
+  sources strengthens the validity of the change.
+rcid: 2550845811
+revid: 2474169642
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://tropedia.fandom.com/wiki/Anti-Villain
+timestamp: '2026-04-11T06:16:55.115635+00:00'
+title: Q108312450
+turns: 4
+value_label: anti-villain
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 1132
+cost_usd: 0.0019994500000000003
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 35461
+property: P577
+property_label: publication date
+rationale: The publication date claim for Q11705564 lacks any cited references. Exhaustive
+  searches found no authoritative sources supporting either the original 1991 date
+  or the proposed 800,000-year CE value. Wikipedia was searched but is inaccessible
+  as a direct source. Without any verified sources to consult, the claim remains unverifiable.
+rcid: null
+revid: 2460147349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q11705564
+timestamp: '2026-04-07T03:16:28.929069+00:00'
+title: Q11705564
+turns: 7
+value_label: null
+verdict: unverifiable

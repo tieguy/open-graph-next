@@ -1,0 +1,29 @@
+completion_tokens: 1346
+cost_usd: 0.0045518749999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44964
+property: P18
+property_label: image
+rationale: The edit changes the image of the Kia Sportage but lacks references for
+  both the old and new images. Independent searches for both images did not yield
+  any relevant results, making it impossible to verify the accuracy of the images.
+  Therefore, the verdict is unverifiable.
+rcid: null
+revid: 2471363118
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.edmunds.com/kia/sportage/2022/pictures/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.ch/fotos/kia-sportage
+- provenance: verified
+  supports_claim: false
+  url: https://www.pakwheels.com/new-cars/kia/sportage/photos/
+timestamp: '2026-04-11T11:35:09.386264+00:00'
+title: Q145527
+turns: 7
+value_label: null
+verdict: unverifiable

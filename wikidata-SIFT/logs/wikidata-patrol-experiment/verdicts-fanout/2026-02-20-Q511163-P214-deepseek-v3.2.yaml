@@ -1,0 +1,23 @@
+completion_tokens: 248
+cost_usd: 0.0062448700000000005
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 16664
+property: P214
+property_label: VIAF cluster ID
+rationale: The edit adds VIAF cluster ID '3142568709' to Ella Ewing's Wikidata item,
+  but no evidence could be found to confirm or deny this identifier. While VIAF is
+  an authoritative source for person identifiers, searches for Ella Ewing's VIAF ID
+  returned no relevant results, and the Virtual International Authority File itself
+  could not be directly queried for this specific identifier during this investigation.
+  Without being able to verify the ID through VIAF's API or authoritative sources
+  listing Ella Ewing's VIAF ID, the claim remains unverified.
+rcid: 2540978591
+revid: 2464765237
+sources: []
+timestamp: '2026-02-20T02:06:28.406886+00:00'
+title: Q511163
+turns: 2
+value_label: null
+verdict: unverifiable

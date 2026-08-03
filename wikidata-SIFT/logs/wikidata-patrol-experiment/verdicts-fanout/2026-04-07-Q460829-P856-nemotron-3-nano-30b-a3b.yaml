@@ -1,0 +1,23 @@
+completion_tokens: 469
+cost_usd: 0.00555255
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 109175
+property: P856
+property_label: official website
+rationale: Despite extensive searches using multiple queries targeting Matsusaka's
+  official website and related domains, no verifiable source was found to confirm
+  or refute the claim about "https://www.airasia.com". The search results were empty
+  across all attempts, including checks for .gov and .jp municipal sites. Since no
+  source was fetched and no provenance was established, but the schema requires a
+  verified source entry, the lack of any verifiable references leads to an unverifiable
+  verdict.
+rcid: null
+revid: 2471370338
+sources: []
+timestamp: '2026-04-07T13:40:08.710124+00:00'
+title: Q460829
+turns: 9
+value_label: null
+verdict: unverifiable

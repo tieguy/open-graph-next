@@ -1,0 +1,31 @@
+completion_tokens: 931
+cost_usd: 0.0038074000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16244
+property: P2043
+property_label: length
+rationale: The Britannica source explicitly states the total length of the Golden
+  Gate Bridge including approaches is 2,737 metres, supporting the new value. However,
+  primary sources such as the National Park Service provide the main span length but
+  do not confirm the total length, and the Parks Conservancy does not provide the
+  metric value. Thus, while there is partial support from a reliable tertiary source,
+  definitive confirmation from an authoritative primary source is lacking.
+rcid: 2550897352
+revid: 2474220238
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/place/Golden-Gate-strait-California
+- provenance: verified
+  supports_claim: false
+  url: https://www.nps.gov/places/000/how-long-is-the-golden-gate-bridge.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.parksconservancy.org/parks/golden-gate-bridge
+timestamp: '2026-04-10T08:25:18.575353+00:00'
+title: Q220032
+turns: 1
+value_label: null
+verdict: plausible

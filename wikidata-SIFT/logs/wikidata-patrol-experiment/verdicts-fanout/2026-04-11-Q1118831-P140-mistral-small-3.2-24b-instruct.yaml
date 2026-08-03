@@ -1,0 +1,19 @@
+completion_tokens: 524
+cost_usd: 0.00674721875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70573
+property: P140
+property_label: religion or worldview
+rationale: I was unable to perform web searches or fetch web pages due to an error
+  with the search engine API. Therefore, I cannot verify the claim about Elissa's
+  religion.
+rcid: 2550605731
+revid: 2473936721
+sources: []
+timestamp: '2026-04-11T10:48:39.373935+00:00'
+title: Q1118831
+turns: 6
+value_label: Christianity
+verdict: unverifiable

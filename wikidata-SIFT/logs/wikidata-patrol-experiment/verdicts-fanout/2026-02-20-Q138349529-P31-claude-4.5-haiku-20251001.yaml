@@ -1,0 +1,26 @@
+completion_tokens: 1499
+cost_usd: 0.031393
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 23898
+property: P31
+property_label: instance of
+rationale: 'The edit adds P31 (instance of) = Q5 (human) for Muhammad Rashid, referenced
+  by P40 (child) = Q138349103 (Omar Rashid). Independent investigation via MusicBrainz
+  confirms Omar Rashid (OR) MRX is a real Pakistani musical artist whose official
+  biography explicitly states he was ''Born to Muhammad Rashid and Samina''. This
+  corroborates that Muhammad Rashid is a real human parent. The reference logic is
+  sound: parenthood necessarily implies humanity. The claim is strongly supported
+  by primary-source documentation.'
+rcid: 2540949504
+revid: 2464738501
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a
+timestamp: '2026-02-20T11:01:47.650974+00:00'
+title: Q138349529
+turns: 3
+value_label: human
+verdict: verified-high

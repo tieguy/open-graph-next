@@ -1,0 +1,27 @@
+completion_tokens: 531
+cost_usd: 0.015266650000000001
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 48772
+property: P7085
+property_label: TikTok username
+rationale: Search results show William Dunst's official TikTok username appears to
+  be '@williamdunstofficial' with 3270 followers, not 'williamdunst13'. The claimed
+  username 'williamdunst13' returns no relevant results. The official website listing
+  social media also does not mention TikTok. Therefore, the updated value is likely
+  incorrect.
+rcid: 2540962564
+revid: 2464750414
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.tiktok.com/@williamdunstofficial
+- provenance: verified
+  supports_claim: false
+  url: https://william-dunst4.webnode.hu/
+timestamp: '2026-02-20T04:22:37.652441+00:00'
+title: Q137736106
+turns: 7
+value_label: null
+verdict: incorrect

@@ -1,0 +1,20 @@
+completion_tokens: 512
+cost_usd: 0.006008599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28507
+property: P1971
+property_label: number of children
+rationale: No independent, reliable source could be found that confirms or refutes
+  the number of children for Roei Gabay. The edit changed the value from '+5' to '+3'
+  without any citation or explanation. Absence of evidence is not evidence of correctness,
+  so the change cannot be verified.
+rcid: null
+revid: 2464935407
+sources: []
+timestamp: '2026-04-07T12:29:56.476785+00:00'
+title: Q115223899
+turns: 6
+value_label: null
+verdict: unverifiable

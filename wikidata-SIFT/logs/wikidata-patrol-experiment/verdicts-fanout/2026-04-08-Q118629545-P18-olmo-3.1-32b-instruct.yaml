@@ -1,0 +1,20 @@
+completion_tokens: 587
+cost_usd: 0.0057416
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26947
+property: P18
+property_label: image
+rationale: No independently verifiable source was found displaying or referencing
+  the image 'Daniela-Guillen-FIM-WMX.jpg' for Daniela Guillen. The FIM athletes page
+  could not be fetched, and no authoritative third-party source confirmed the image.
+  Therefore, the correctness of the updated image cannot be established.
+rcid: 2550347384
+revid: 2473686245
+sources: []
+timestamp: '2026-04-08T18:40:42.307985+00:00'
+title: Q118629545
+turns: 5
+value_label: null
+verdict: unverifiable

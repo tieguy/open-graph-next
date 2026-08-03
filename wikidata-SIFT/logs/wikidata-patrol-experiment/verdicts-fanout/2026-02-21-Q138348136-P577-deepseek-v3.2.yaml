@@ -1,0 +1,30 @@
+completion_tokens: 1760
+cost_usd: 0.0198137
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 92689
+property: P577
+property_label: publication date
+rationale: Multiple independent sources confirm Fut Rap Cartas was first published
+  in May 2017. The official website (primary source) explicitly states 'lanzarían
+  la primera versión oficial del juego, el 29 de mayo de 2017' and the Rap Wiki (secondary
+  source) confirms 'La aplicación fue lanzada por primera vez el 29 de mayo de 2017'.
+  Both directly support the claim of May 2017 publication date.
+rcid: 2540917900
+revid: 2464709086
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: null
+  url: https://www.androidlista.com/item/android-apps/905363/fut-rap-cartas-pack-opener/
+timestamp: '2026-02-21T02:46:31.895198+00:00'
+title: Q138348136
+turns: 10
+value_label: null
+verdict: verified-high

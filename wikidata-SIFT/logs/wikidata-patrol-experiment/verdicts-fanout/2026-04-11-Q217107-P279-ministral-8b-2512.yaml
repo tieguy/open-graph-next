@@ -1,0 +1,33 @@
+completion_tokens: 1758
+cost_usd: 0.00159456
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15068
+property: P279
+property_label: subclass of
+rationale: The reference URL provided (`https://www.indianpanorama.in/`) is unreachable,
+  and no verified independent sources confirm that a travel agency (Q217107) is a
+  subclass of a tourism organization (Q117467133). While travel agencies are part
+  of the broader tourism industry, no authoritative source explicitly defines this
+  subclass relationship. Without accessible evidence, the claim cannot be verified.
+rcid: null
+revid: 2471824685
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://tourism.alabama.gov/press-room/tourism-industry-glossary
+- provenance: verified
+  supports_claim: false
+  url: https://guides.loc.gov/tourism-and-travel/travel-agents
+- provenance: verified
+  supports_claim: false
+  url: https://kresgeguides.bus.umich.edu/c.php?g=602692&p=4174484
+- provenance: reported
+  supports_claim: null
+  url: https://www.indianpanorama.in/
+timestamp: '2026-04-11T18:14:29.059634+00:00'
+title: Q217107
+turns: 1
+value_label: tourism organization
+verdict: unverifiable

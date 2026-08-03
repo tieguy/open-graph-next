@@ -1,0 +1,38 @@
+completion_tokens: 1962
+cost_usd: 0.0424903
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 162498
+property: P21
+property_label: sex or gender
+rationale: 'Multiple independent sources consistently identify Masahiro Sakurai as
+  male. The Kyoto Report wiki explicitly states ''Gender: ♂ Male'', and other verified
+  sources like the SmashWiki and WiKirby consistently use male pronouns and reference
+  his wife, Michiko Sakurai. The edit adding ''female'' as his gender contradicts
+  all available evidence. The edit appears to be vandalism, which is consistent with
+  the tags ''possible vandalism'' and ''new editor changing statement'' in the edit
+  record.'
+rcid: 2540929270
+revid: 2464719977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://kyoto-report.wikidot.com/masahiro-sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.tokyoweekender.com/entertainment/gaming/masahiro-sakurai-manga-biography-kirby-smash-bros/
+- provenance: reported
+  supports_claim: false
+  url: https://www.themoviedb.org/person/2202271?language=en-US
+timestamp: '2026-02-20T21:07:01.527017+00:00'
+title: Q1906721
+turns: 12
+value_label: female
+verdict: incorrect

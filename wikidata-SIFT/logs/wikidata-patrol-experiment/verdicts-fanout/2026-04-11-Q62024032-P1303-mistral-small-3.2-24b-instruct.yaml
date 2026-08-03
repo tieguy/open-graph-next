@@ -1,0 +1,31 @@
+completion_tokens: 1218
+cost_usd: 0.015287693750000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 162098
+property: P1303
+property_label: instrument
+rationale: The edit does not have any references attached, and the search queries
+  did not yield any verifiable sources to confirm or deny the change from 'voice'
+  to 'human voice' for Duki's instrument.
+rcid: 2549423169
+revid: 2472788904
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://app.kits.ai/convert/shared/duki-2018-4
+- provenance: verified
+  supports_claim: false
+  url: https://www.ambito.com/espectaculos/romance/duki-y-emilia-mernes-confirmaron-su-noviazgo-n5332279
+- provenance: verified
+  supports_claim: false
+  url: https://www.fineshare.com/ai-voice/duki.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.vocalize.fm/voices/914
+timestamp: '2026-04-11T13:02:58.578834+00:00'
+title: Q62024032
+turns: 15
+value_label: human voice
+verdict: unverifiable

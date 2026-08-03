@@ -1,0 +1,32 @@
+completion_tokens: 1435
+cost_usd: 0.0050634437499999995
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52461
+property: P989
+property_label: spoken text audio
+rationale: The removed claim did not have any references cited, and independent sources
+  do not confirm the existence or relevance of 'Wikipedia - Web accessibility.mp3'
+  as a spoken text audio for web accessibility. The lack of evidence supports the
+  removal of this claim.
+rcid: null
+revid: 2471265154
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://support.google.com/accessibility/answer/9032490?hl=en
+- provenance: verified
+  supports_claim: false
+  url: https://w3c.github.io/wai-showcase-examples/speech.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/WAI/
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/WAI/perspective-videos/speech/
+timestamp: '2026-04-11T11:15:06.277749+00:00'
+title: Q808932
+turns: 5
+value_label: null
+verdict: verified-high

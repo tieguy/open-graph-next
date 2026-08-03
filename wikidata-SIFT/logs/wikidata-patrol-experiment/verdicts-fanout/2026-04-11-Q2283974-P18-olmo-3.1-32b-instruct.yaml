@@ -1,0 +1,36 @@
+completion_tokens: 2664
+cost_usd: 0.004601
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15013
+property: P18
+property_label: image
+rationale: Neither the old nor the new image is supported by a cited or independently
+  verifiable source. Although the new image appears to be from a recent event, there
+  is no confirmation from an official or reliable third-party source that it is the
+  correct or preferred image. Wikidata policy requires images to be cited to a reliable
+  source. Changing an image without such evidence is not justified and may be disruptive.
+rcid: null
+revid: 2470471869
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Sal_Da_Vinci
+- provenance: verified
+  supports_claim: false
+  url: https://www.tgcom24.com/enterimento/festival-di-sanremo-2026-immagini-ufficiali
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/saldavinci.it/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/sal-da-vinci
+- provenance: verified
+  supports_claim: false
+  url: https://saldavinci.it/
+timestamp: '2026-04-11T09:44:17.525745+00:00'
+title: Q2283974
+turns: 1
+value_label: null
+verdict: unverifiable

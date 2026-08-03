@@ -1,0 +1,23 @@
+completion_tokens: 943
+cost_usd: 0.0018208625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18010
+property: P1476
+property_label: title
+rationale: The reference provided with the removed claim is unreachable, making it
+  impossible to verify its content. Additionally, the web search did not provide any
+  independent sources that confirm or deny the title 'Brave Search' in the context
+  of 'The Last of Us.' Therefore, the verdict is unverifiable.
+rcid: null
+revid: 2470688551
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://search.brave.com/search?q=the+last+of+us
+timestamp: '2026-04-07T03:50:43.897683+00:00'
+title: Q107355971
+turns: 3
+value_label: null
+verdict: unverifiable

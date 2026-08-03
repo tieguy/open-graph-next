@@ -1,0 +1,25 @@
+completion_tokens: 2014
+cost_usd: 0.0037834800000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35856
+property: P569
+property_label: date of birth
+rationale: The edit changes Fatma Sarhan's date of birth from an unspecified year
+  (1928) to a specific date (13 April 1928) with additional unsupported qualifiers
+  (time zone and refine date). The only cited source, an archived article from Al-Masry
+  Al-Youm, confirms the birth year (1928) but does not mention the specific date or
+  qualifiers. No independent sources were found to corroborate the new value, making
+  the edit unsupported by evidence.
+rcid: 2551320550
+revid: 2474628164
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20260316100937/https://www.almasryalyoum.com/news/details/4221853
+timestamp: '2026-04-11T12:40:10.313647+00:00'
+title: Q28714774
+turns: 3
+value_label: null
+verdict: suspect

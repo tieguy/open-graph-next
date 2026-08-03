@@ -1,0 +1,38 @@
+completion_tokens: 2112
+cost_usd: 0.02670924
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 132518
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm Chang Gao is a researcher. The primary
+  source from Universität der Künste Berlin explicitly lists her as a Postdoctoral
+  Researcher (07/2025 - today). Her personal website, gallery profiles, and academic
+  institution pages consistently describe her as a postdoctoral researcher, researcher,
+  or academic researcher. She holds a PhD from Royal College of Art and has numerous
+  research publications, establishing her credentials as an active researcher in addition
+  to being a multimedia artist.
+rcid: 2540932374
+revid: 2464722990
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sfb-intervenierende-kuenste.de/personen/gao/index.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.galeriefutura.de/en/chang-gao/
+- provenance: verified
+  supports_claim: true
+  url: https://beingsync.org.uk/c-changgao
+- provenance: verified
+  supports_claim: true
+  url: https://www.rca.ac.uk/research-innovation/research-degrees/research-students/chang-gao/
+- provenance: verified
+  supports_claim: true
+  url: https://gaochangart.net/
+timestamp: '2026-02-20T19:35:04.605031+00:00'
+title: Q138348620
+turns: 12
+value_label: researcher
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 696
+cost_usd: 0.0008933
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 15082
+property: P287
+property_label: designed by
+rationale: The edit falsely claims Kylian Mbappé designed the Tulip chair. Overwhelming
+  contextual evidence confirms Eero Saarinen (Q167073) as the true designer, supported
+  by multiple claims with attributed creation dates in 1956. No credible connection
+  exists between footballer Mbappé and mid-20th century furniture design. The claim
+  introduces a historical impossibility without any verifying source.
+rcid: 2551187138
+revid: 2474500945
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q2916267
+timestamp: '2026-04-07T13:30:03.626834+00:00'
+title: Q2916267
+turns: 2
+value_label: Kylian Mbappé
+verdict: incorrect

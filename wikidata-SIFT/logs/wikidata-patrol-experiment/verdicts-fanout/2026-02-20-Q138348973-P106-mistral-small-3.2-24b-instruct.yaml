@@ -1,0 +1,25 @@
+completion_tokens: 417
+cost_usd: 0.0013483
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12232
+property: P106
+property_label: occupation
+rationale: The fetched content from the provided URL indicates that Isabelle Galy
+  is indeed involved in various roles related to artificial intelligence, including
+  being a Director of the Maison de l'Intelligence Artificielle and a Vice-President
+  of ClusterIA. These roles align with the occupation of a lecturer or knowledgeable
+  person in the field of AI. Therefore, the reference supports the occupation claim
+  for Isabelle Galy.
+rcid: 2540936078
+revid: 2464726379
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://instituteuropia.eu/video/comment-lia-change-notre-quotidien-isabelle-galy
+timestamp: '2026-02-20T17:03:31.443327+00:00'
+title: Q138348973
+turns: 2
+value_label: lecturer
+verdict: verified-high

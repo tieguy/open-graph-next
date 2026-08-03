@@ -1,0 +1,29 @@
+completion_tokens: 372
+cost_usd: 0.00300002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41531
+property: P570
+property_label: date of death
+rationale: The edit changed the date of death from June 2, 2012, to June 2, 2013.
+  However, multiple verified sources, including an archived news article and a blog
+  post, confirm that Genichi Taguchi died on June 2, 2012. Therefore, the new value
+  is incorrect.
+rcid: null
+revid: 2472578007
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20121019015145/http:/www.asiusa.com/thought-leadership/news-and-events/167-death-of-dr-taguchi
+- provenance: verified
+  supports_claim: true
+  url: https://www.leanblog.org/2012/06/dr-genichi-taguchi-january-1-1924-june-2-2012/
+- provenance: verified
+  supports_claim: true
+  url: https://www.toolshero.com/toolsheroes/genichi-taguchi/
+timestamp: '2026-04-11T14:01:28.778898+00:00'
+title: Q201416
+turns: 3
+value_label: null
+verdict: incorrect

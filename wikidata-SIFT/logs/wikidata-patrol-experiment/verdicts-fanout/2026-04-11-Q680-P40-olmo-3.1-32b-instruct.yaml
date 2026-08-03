@@ -1,0 +1,36 @@
+completion_tokens: 2028
+cost_usd: 0.0067316
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27574
+property: P40
+property_label: child
+rationale: Both the old and new values for the 'child' property of Alessandro Volta
+  are incorrect and unsupported by any authoritative source. All major biographies
+  and encyclopedias state that Volta had no legitimate children. Replacing one incorrect
+  value with another incorrect value does not improve factual accuracy and suggests
+  the edit may be problematic.
+rcid: 2549645054
+revid: 2473005744
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Alessandro_Volta
+- provenance: verified
+  supports_claim: false
+  url: https://ethw.org/Alessandro_Volta
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Alessandro-Volta
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Adolf-Hitler
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/24793/alessandro_volta
+timestamp: '2026-04-11T09:18:34.109725+00:00'
+title: Q680
+turns: 1
+value_label: Adolf Hitler
+verdict: suspect

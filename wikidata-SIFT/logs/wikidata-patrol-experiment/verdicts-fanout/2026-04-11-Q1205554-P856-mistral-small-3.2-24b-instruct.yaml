@@ -1,0 +1,26 @@
+completion_tokens: 552
+cost_usd: 0.00431915625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44599
+property: P856
+property_label: official website
+rationale: The new website URL (https://www.flysas.com) is for SAS airlines and does
+  not appear to be related to Onga town in Japan. The old website URL (https://www.town.onga.lg.jp/)
+  seems more plausible as it follows the typical format for Japanese municipal websites.
+  The change is likely incorrect based on the available evidence.
+rcid: null
+revid: 2471590197
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.flysas.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.onga.lg.jp/
+timestamp: '2026-04-11T12:16:51.478057+00:00'
+title: Q1205554
+turns: 4
+value_label: null
+verdict: incorrect

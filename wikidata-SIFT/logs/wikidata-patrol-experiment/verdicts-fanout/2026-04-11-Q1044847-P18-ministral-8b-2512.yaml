@@ -1,0 +1,33 @@
+completion_tokens: 2127
+cost_usd: 0.0019715699999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28790
+property: P18
+property_label: image
+rationale: The investigation was unable to verify either the old or new image due
+  to persistent search and fetch failures. No sources were directly fetched or confirmed
+  during this investigation, and the cited English Wikipedia reference (P143) could
+  not be verified. Without independent verification of the image sources, the edit
+  cannot be confirmed or denied.
+rcid: 2550729114
+revid: 2474056499
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.edmunds.com/lexus/ls/2024/pictures/
+- provenance: reported
+  supports_claim: false
+  url: https://www.istockphoto.com/photos/lexus-ls
+- provenance: reported
+  supports_claim: false
+  url: https://www.lexus.com/models/LS
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lexus_LS
+timestamp: '2026-04-11T18:13:18.994321+00:00'
+title: Q1044847
+turns: 4
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,35 @@
+completion_tokens: 1877
+cost_usd: 0.0069212
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28975
+property: P19
+property_label: place of birth
+rationale: Multiple reliable sources, including the Dutch Wikipedia, MacTutor History
+  of Mathematics archive, Britannica, and the Dutch Digital Library (DBNL), confirm
+  that Simon Stevin was born in Brugge (Dutch for Bruges). The change from 'Bruges'
+  (Q12994) to 'Brugge' (Q37155872) reflects the modern, locally appropriate Dutch
+  spelling and identifier. The references supporting the new value are valid and directly
+  confirm the claim. This was a terminological standardization rather than a factual
+  change, and all evidence supports the edit.
+rcid: null
+revid: 2471440743
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://nl.wikipedia.org/wiki/Brugge
+- provenance: verified
+  supports_claim: true
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Stevin/
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/biography/Simon-Stevin
+- provenance: verified
+  supports_claim: true
+  url: https://www.dbnl.org/tekst/anro001bioe01_01/anro001bioe01_01_0009.php
+timestamp: '2026-04-11T12:20:13.897500+00:00'
+title: Q23696
+turns: 1
+value_label: Brugge
+verdict: verified-high

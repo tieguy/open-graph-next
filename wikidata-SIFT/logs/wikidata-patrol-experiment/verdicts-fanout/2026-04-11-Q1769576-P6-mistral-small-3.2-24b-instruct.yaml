@@ -1,0 +1,21 @@
+completion_tokens: 213
+cost_usd: 0.01024610625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 110586
+property: P6
+property_label: head of government
+rationale: Unable to fetch any sources to verify the claim due to network connectivity
+  issues.
+rcid: 2550561250
+revid: 2473893949
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.goal.com/en-us/lists/ex-juventus-chief-explains-problem-cristiano-ronaldo-transfer-created/blt6815767c3f4a3600
+timestamp: '2026-04-11T08:56:02.640698+00:00'
+title: Q1769576
+turns: 5
+value_label: Cristiano Ronaldo
+verdict: unverifiable

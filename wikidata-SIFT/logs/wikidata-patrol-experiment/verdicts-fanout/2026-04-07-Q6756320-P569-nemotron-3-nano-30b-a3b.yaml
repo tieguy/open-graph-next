@@ -1,0 +1,21 @@
+completion_tokens: 1094
+cost_usd: 0.0039494
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 74612
+property: P569
+property_label: date of birth
+rationale: No independent web sources confirm or contradict the attributed date of
+  birth of Marcelino Miyares Sotolongo. Multiple search queries yielded no corroborating
+  results, and the edit's sole cited reference (English Wikipedia import tag) cannot
+  be used as a source under sourcing rules. The claim remains unverifiable pending
+  verifiable external evidence.
+rcid: 2549617169
+revid: 2472978736
+sources: []
+timestamp: '2026-04-07T14:02:42.542501+00:00'
+title: Q6756320
+turns: 15
+value_label: null
+verdict: unverifiable

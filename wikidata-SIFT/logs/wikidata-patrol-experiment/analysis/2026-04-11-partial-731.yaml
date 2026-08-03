@@ -1,0 +1,3229 @@
+breakdowns:
+  by_diff_type:
+    qualifier_added:
+      confusion_matrix:
+        reverted:
+          abstain: 4
+          accept: 6
+          reject: 5
+        survived:
+          abstain: 39
+          accept: 39
+          reject: 17
+      cost_per_verdict: 0.006228957363636364
+      precision_accept: 0.8666666666666667
+      recall_reject: 0.3333333333333333
+      sample_count: 110
+    qualifier_changed:
+      confusion_matrix:
+        reverted:
+          abstain: 5
+          accept: 9
+          reject: 4
+        survived:
+          abstain: 17
+          accept: 60
+          reject: 13
+      cost_per_verdict: 0.004523414479166666
+      precision_accept: 0.8695652173913043
+      recall_reject: 0.2222222222222222
+      sample_count: 108
+    qualifier_removed:
+      confusion_matrix:
+        reverted:
+          abstain: 7
+          accept: 3
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.005585044666666666
+      precision_accept: 0.5
+      recall_reject: 0.16666666666666666
+      sample_count: 15
+    rank_changed:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 13
+          accept: 11
+          reject: 9
+      cost_per_verdict: 0.004516050798611112
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 36
+    reference_added:
+      confusion_matrix:
+        reverted:
+          abstain: 9
+          accept: 2
+          reject: 7
+        survived:
+          abstain: 10
+          accept: 52
+          reject: 7
+      cost_per_verdict: 0.0035830772557471262
+      precision_accept: 0.9629629629629629
+      recall_reject: 0.3888888888888889
+      sample_count: 87
+    reference_changed:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 27
+          accept: 39
+          reject: 6
+      cost_per_verdict: 0.005230547316666666
+      precision_accept: 0.975
+      recall_reject: 0.3333333333333333
+      sample_count: 75
+    reference_removed:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 5
+          reject: 2
+        survived:
+          abstain: 4
+          accept: 6
+          reject: 2
+      cost_per_verdict: 0.0036730502976190476
+      precision_accept: 0.5454545454545454
+      recall_reject: 0.2222222222222222
+      sample_count: 21
+    statement_removed:
+      confusion_matrix:
+        reverted:
+          abstain: 15
+          accept: 43
+          reject: 26
+        survived:
+          abstain: 24
+          accept: 59
+          reject: 40
+      cost_per_verdict: 0.00459354711352657
+      precision_accept: 0.5784313725490197
+      recall_reject: 0.30952380952380953
+      sample_count: 207
+    value_changed:
+      confusion_matrix:
+        reverted:
+          abstain: 204
+          accept: 107
+          reject: 601
+        survived:
+          abstain: 198
+          accept: 241
+          reject: 208
+      cost_per_verdict: 0.005390248978511866
+      precision_accept: 0.6925287356321839
+      recall_reject: 0.6589912280701754
+      sample_count: 1559
+  by_evidence_type:
+    mw-reverted-tag:
+      confusion_matrix:
+        reverted:
+          abstain: 137
+          accept: 109
+          reject: 327
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.005051068200261781
+      precision_accept: 0.0
+      recall_reject: 0.5706806282722513
+      sample_count: 573
+    not-reverted-14d:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 332
+          accept: 510
+          reject: 302
+      cost_per_verdict: 0.00524803643902972
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 1144
+    reverter-traced:
+      confusion_matrix:
+        reverted:
+          abstain: 110
+          accept: 67
+          reject: 324
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.005304325436626746
+      precision_accept: 0.0
+      recall_reject: 0.6467065868263473
+      sample_count: 501
+  by_property:
+    P101:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0036925520833333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P10212:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.009696389166666668
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P103:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 7
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.006474226770833333
+      precision_accept: 0.0
+      recall_reject: 0.7777777777777778
+      sample_count: 12
+    P1056:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.002134229583333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P106:
+      confusion_matrix:
+        reverted:
+          abstain: 4
+          accept: 0
+          reject: 11
+        survived:
+          abstain: 8
+          accept: 35
+          reject: 20
+      cost_per_verdict: 0.004484906137820513
+      precision_accept: 1.0
+      recall_reject: 0.7333333333333333
+      sample_count: 78
+    P1072:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.011521785416666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P108:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 11
+          reject: 1
+      cost_per_verdict: 0.004464713854166667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 12
+    P1080:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 6
+      cost_per_verdict: 0.003468435208333334
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 6
+    P1082:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.006775219583333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P109:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.01179849375
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P1103:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 4
+      cost_per_verdict: 0.0036283172916666668
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 6
+    P11079:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.007584700416666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P11090:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.007154614166666667
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P112:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 6
+          reject: 0
+      cost_per_verdict: 0.0038129391666666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P1120:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.003145453333333334
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1128:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0037549891666666673
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1142:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0042184225
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P11496:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.003695470416666667
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P115:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.003506307916666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P11613:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.003967151666666667
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P117:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.0019220775
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P11810:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.008753336666666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P11892:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.008619803333333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P122:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0030714595833333334
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P12361:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.005604404166666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P12873:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.01282564875
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1303:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.007810651250000001
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P131:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 4
+          reject: 6
+        survived:
+          abstain: 1
+          accept: 3
+          reject: 2
+      cost_per_verdict: 0.003666844791666667
+      precision_accept: 0.42857142857142855
+      recall_reject: 0.5
+      sample_count: 18
+    P1320:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.004374020416666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1324:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 2
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.003138365
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P13240:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.003628174583333333
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1343:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 4
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004188970833333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P136:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 11
+          accept: 24
+          reject: 6
+      cost_per_verdict: 0.0037534134840425536
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 47
+    P1366:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.00374805625
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P138:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004879610416666666
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P140:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 3
+        survived:
+          abstain: 4
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.0077667869791666665
+      precision_accept: 0.5
+      recall_reject: 0.5
+      sample_count: 12
+    P1411:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00320666375
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1412:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 4
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 3
+      cost_per_verdict: 0.006901406875000001
+      precision_accept: 1.0
+      recall_reject: 0.6666666666666666
+      sample_count: 12
+    P1416:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.003750442916666667
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P1417:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.00346640625
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1435:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.00397284125
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1441:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 3
+      cost_per_verdict: 0.0037256947916666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P1448:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.00479328
+      precision_accept: 1.0
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P1454:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.00286174375
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1476:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 2
+          reject: 8
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.003932804270833334
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 12
+    P1477:
+      confusion_matrix:
+        reverted:
+          abstain: 6
+          accept: 0
+          reject: 30
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.00661138391025641
+      precision_accept: 0.0
+      recall_reject: 0.8333333333333334
+      sample_count: 39
+    P149:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.005499627083333332
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P154:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 4
+        survived:
+          abstain: 5
+          accept: 6
+          reject: 1
+      cost_per_verdict: 0.004786243611111111
+      precision_accept: 0.75
+      recall_reject: 0.6666666666666666
+      sample_count: 18
+    P1556:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.003951568333333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1559:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 4
+          reject: 8
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00461450225
+      precision_accept: 0.0
+      recall_reject: 0.5333333333333333
+      sample_count: 15
+    P1581:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.009685993333333335
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P159:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.0032460670833333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P161:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.006658009583333333
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P162:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.007283165833333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P1635:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 3
+      cost_per_verdict: 0.0080053875
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P166:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.005634787361111111
+      precision_accept: 0.6666666666666666
+      recall_reject: 0.0
+      sample_count: 9
+    P167:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.002782730416666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P17:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 21
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0053918186458333335
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 24
+    P170:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004697863333333333
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P1705:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.008077218333333332
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P175:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0031141720833333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P178:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.010874195416666668
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P18:
+      confusion_matrix:
+        reverted:
+          abstain: 41
+          accept: 13
+          reject: 21
+        survived:
+          abstain: 35
+          accept: 25
+          reject: 27
+      cost_per_verdict: 0.004558457816358025
+      precision_accept: 0.6578947368421053
+      recall_reject: 0.28
+      sample_count: 162
+    P180:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004540464583333333
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P1813:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.006834799999999999
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1814:
+      confusion_matrix:
+        reverted:
+          abstain: 4
+          accept: 1
+          reject: 4
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0035431195833333334
+      precision_accept: 0.0
+      recall_reject: 0.4444444444444444
+      sample_count: 9
+    P1827:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0044221500000000006
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P186:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0137793
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P1866:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.004684656666666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P1875:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 5
+          reject: 1
+      cost_per_verdict: 0.004394183888888889
+      precision_accept: 0.8333333333333334
+      recall_reject: 0.3333333333333333
+      sample_count: 9
+    P1889:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 4
+          reject: 1
+      cost_per_verdict: 0.005216870833333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P19:
+      confusion_matrix:
+        reverted:
+          abstain: 17
+          accept: 20
+          reject: 8
+        survived:
+          abstain: 6
+          accept: 15
+          reject: 9
+      cost_per_verdict: 0.004826115716666667
+      precision_accept: 0.42857142857142855
+      recall_reject: 0.17777777777777778
+      sample_count: 75
+    P1950:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.006542419791666667
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P1960:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.004421344166666667
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P197:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 9
+          accept: 2
+          reject: 4
+      cost_per_verdict: 0.0029772877500000004
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 15
+    P1971:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.009550827083333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P20:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 2
+          reject: 4
+        survived:
+          abstain: 4
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.004456276416666667
+      precision_accept: 0.3333333333333333
+      recall_reject: 0.4444444444444444
+      sample_count: 15
+    P2002:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 4
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.01233211541666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P2003:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 2
+          accept: 3
+          reject: 1
+      cost_per_verdict: 0.003563030138888889
+      precision_accept: 1.0
+      recall_reject: 0.3333333333333333
+      sample_count: 9
+    P2013:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00772403125
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P2031:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 5
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.006179191136363635
+      precision_accept: 0.5
+      recall_reject: 0.625
+      sample_count: 11
+    P2032:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.014396208333333334
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P2037:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.00578342
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2043:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0028826887499999996
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2048:
+      confusion_matrix:
+        reverted:
+          abstain: 6
+          accept: 4
+          reject: 8
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 5
+      cost_per_verdict: 0.005573681875
+      precision_accept: 0.0
+      recall_reject: 0.4444444444444444
+      sample_count: 24
+    P2067:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00591097875
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P21:
+      confusion_matrix:
+        reverted:
+          abstain: 16
+          accept: 0
+          reject: 20
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.005313038717948719
+      precision_accept: 0.0
+      recall_reject: 0.5555555555555556
+      sample_count: 39
+    P213:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.006986817083333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2137:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 4
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.012503927083333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P2139:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 4
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.019794379791666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P22:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 9
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.008128482777777777
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 9
+    P225:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.01233505
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P2295:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 4
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.01020797375
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P2348:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0031256325
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P2373:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.006461249166666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2397:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 3
+          accept: 2
+          reject: 4
+      cost_per_verdict: 0.004763928125
+      precision_accept: 1.0
+      recall_reject: 0.3333333333333333
+      sample_count: 12
+    P2403:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 4
+          accept: 3
+          reject: 2
+      cost_per_verdict: 0.01338495986111111
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 9
+    P245:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.007414100833333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P25:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.014517013333333334
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P2521:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.002787482083333333
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2562:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 1
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00364047625
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P26:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 1
+          reject: 8
+        survived:
+          abstain: 2
+          accept: 4
+          reject: 0
+      cost_per_verdict: 0.0041437668055555555
+      precision_accept: 0.8
+      recall_reject: 0.6666666666666666
+      sample_count: 18
+    P2607:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.0074958333333333335
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P2671:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 2
+          reject: 3
+        survived:
+          abstain: 3
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004123558611111111
+      precision_accept: 0.0
+      recall_reject: 0.5
+      sample_count: 9
+    P27:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 26
+        survived:
+          abstain: 1
+          accept: 3
+          reject: 2
+      cost_per_verdict: 0.004609126857142857
+      precision_accept: 0.75
+      recall_reject: 0.896551724137931
+      sample_count: 35
+    P279:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 3
+          reject: 7
+        survived:
+          abstain: 2
+          accept: 3
+          reject: 4
+      cost_per_verdict: 0.003553466607142857
+      precision_accept: 0.5
+      recall_reject: 0.5833333333333334
+      sample_count: 21
+    P287:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00408718625
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P291:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.009021054583333334
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P296:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.004860100833333333
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P3063:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 3
+      cost_per_verdict: 0.005392117916666665
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P31:
+      confusion_matrix:
+        reverted:
+          abstain: 4
+          accept: 14
+          reject: 36
+        survived:
+          abstain: 18
+          accept: 36
+          reject: 18
+      cost_per_verdict: 0.004067235982142857
+      precision_accept: 0.72
+      recall_reject: 0.6666666666666666
+      sample_count: 126
+    P3283:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.0089801525
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P3342:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.00863770375
+      precision_accept: 0.5
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P3373:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.007315993541666667
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P345:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.008265700833333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P348:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 3
+          reject: 5
+        survived:
+          abstain: 3
+          accept: 13
+          reject: 14
+      cost_per_verdict: 0.01233428266025641
+      precision_accept: 0.8125
+      recall_reject: 0.5555555555555556
+      sample_count: 39
+    P3500:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.0029428366666666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P360:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.0025173633333333335
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P361:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 4
+        survived:
+          abstain: 4
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.0033641509374999997
+      precision_accept: 1.0
+      recall_reject: 0.6666666666666666
+      sample_count: 12
+    P364:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00525057625
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P3647:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.006696076666666666
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P373:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 3
+          reject: 3
+        survived:
+          abstain: 1
+          accept: 3
+          reject: 2
+      cost_per_verdict: 0.0028792060416666667
+      precision_accept: 0.5
+      recall_reject: 0.5
+      sample_count: 12
+    P3789:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 3
+      cost_per_verdict: 0.003818433333333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P39:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 4
+          reject: 1
+        survived:
+          abstain: 11
+          accept: 25
+          reject: 12
+      cost_per_verdict: 0.004445895787037037
+      precision_accept: 0.8620689655172413
+      recall_reject: 0.16666666666666666
+      sample_count: 54
+    P3973:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0046929108333333336
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P3984:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.003200536875
+      precision_accept: 0.5
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P40:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 4
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 3
+      cost_per_verdict: 0.0076315103125
+      precision_accept: 1.0
+      recall_reject: 0.6666666666666666
+      sample_count: 12
+    P400:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004233379166666666
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P4015:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.0022556079166666664
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P4033:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.009048788125
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 6
+    P407:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 6
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00356826125
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P4073:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.0036500100000000004
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P41:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.005895787499999999
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P4214:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.0031185575000000003
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P4224:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 10
+          reject: 6
+      cost_per_verdict: 0.0030281933333333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 18
+    P434:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.00488348375
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P451:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 5
+          reject: 5
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.006211678854166666
+      precision_accept: 0.0
+      recall_reject: 0.4166666666666667
+      sample_count: 12
+    P452:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0028980875
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P463:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 7
+        survived:
+          abstain: 1
+          accept: 5
+          reject: 0
+      cost_per_verdict: 0.004563470583333334
+      precision_accept: 1.0
+      recall_reject: 0.7777777777777778
+      sample_count: 15
+    P4862:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.010743606666666664
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P488:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 6
+          reject: 0
+      cost_per_verdict: 0.004096297083333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P495:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 1
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0043765477083333336
+      precision_accept: 0.0
+      recall_reject: 0.5
+      sample_count: 6
+    P4969:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.00586872625
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P4985:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.0041995825
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P50:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.012460554583333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P5008:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.002678915
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P509:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 2
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.005188703541666667
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P512:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 2
+          reject: 2
+      cost_per_verdict: 0.005022513333333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P516:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0030995845833333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P527:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 1
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00224388375
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P54:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.003599164791666667
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 6
+    P551:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.005953025416666667
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 6
+    P569:
+      confusion_matrix:
+        reverted:
+          abstain: 28
+          accept: 20
+          reject: 81
+        survived:
+          abstain: 13
+          accept: 27
+          reject: 14
+      cost_per_verdict: 0.003892532137978142
+      precision_accept: 0.574468085106383
+      recall_reject: 0.627906976744186
+      sample_count: 183
+    P570:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 6
+          reject: 21
+        survived:
+          abstain: 4
+          accept: 8
+          reject: 6
+      cost_per_verdict: 0.004734201755319149
+      precision_accept: 0.5714285714285714
+      recall_reject: 0.7241379310344828
+      sample_count: 47
+    P571:
+      confusion_matrix:
+        reverted:
+          abstain: 5
+          accept: 6
+          reject: 7
+        survived:
+          abstain: 4
+          accept: 4
+          reject: 4
+      cost_per_verdict: 0.004379291041666666
+      precision_accept: 0.4
+      recall_reject: 0.3888888888888889
+      sample_count: 30
+    P576:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0036054483333333334
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P577:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 10
+        survived:
+          abstain: 4
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.005224578263888889
+      precision_accept: 0.0
+      recall_reject: 0.8333333333333334
+      sample_count: 18
+    P580:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00369027875
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P5817:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.002887477083333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P582:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.0033346866666666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P585:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.0035869241666666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P587:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0032680475
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P6:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 3
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.009900056666666665
+      precision_accept: 1.0
+      recall_reject: 0.6666666666666666
+      sample_count: 9
+    P6005:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.00667359875
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P607:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0038659
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P625:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 2
+          reject: 0
+        survived:
+          abstain: 8
+          accept: 5
+          reject: 5
+      cost_per_verdict: 0.004385137142857143
+      precision_accept: 0.7142857142857143
+      recall_reject: 0.0
+      sample_count: 21
+    P6262:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.0037212225
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 6
+    P6276:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 0
+          reject: 2
+      cost_per_verdict: 0.013134890416666664
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P6343:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004382984583333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P6375:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 5
+          accept: 2
+          reject: 2
+      cost_per_verdict: 0.004039364722222222
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 9
+    P6379:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.012572539583333334
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P641:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0107848625
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P646:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.0028748775
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P648:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.014891033333333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P6634:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.006012427916666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P674:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.00482296875
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P689:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 1
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.005875641666666667
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P69:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 4
+        survived:
+          abstain: 7
+          accept: 8
+          reject: 6
+      cost_per_verdict: 0.005500272175925925
+      precision_accept: 1.0
+      recall_reject: 0.6666666666666666
+      sample_count: 27
+    P691:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0036080558333333335
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P7085:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.009459594583333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P7293:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.008362252083333334
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P7317:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 1
+          reject: 1
+      cost_per_verdict: 0.010999962916666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P734:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 2
+          accept: 2
+          reject: 5
+      cost_per_verdict: 0.007464148645833334
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 12
+    P735:
+      confusion_matrix:
+        reverted:
+          abstain: 3
+          accept: 3
+          reject: 12
+        survived:
+          abstain: 4
+          accept: 2
+          reject: 8
+      cost_per_verdict: 0.0080812309375
+      precision_accept: 0.4
+      recall_reject: 0.6666666666666666
+      sample_count: 32
+    P737:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0038173404166666667
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P742:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 3
+          reject: 13
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.004740562738095238
+      precision_accept: 0.5
+      recall_reject: 0.7222222222222222
+      sample_count: 21
+    P747:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0067775974999999995
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P749:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.006975679166666666
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P793:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 2
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.004774082083333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 6
+    P800:
+      confusion_matrix:
+        reverted:
+          abstain: 1
+          accept: 0
+          reject: 2
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.008573563333333334
+      precision_accept: 0.0
+      recall_reject: 0.6666666666666666
+      sample_count: 3
+    P8032:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00310851375
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P81:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 3
+          reject: 1
+      cost_per_verdict: 0.004260893541666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P84:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00418664
+      precision_accept: 0.0
+      recall_reject: 1.0
+      sample_count: 3
+    P840:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 1
+          accept: 2
+          reject: 0
+      cost_per_verdict: 0.0043793525
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P8408:
+      confusion_matrix:
+        reverted:
+          abstain: 2
+          accept: 0
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00422345625
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P846:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 5
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.0023290829166666667
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 6
+    P856:
+      confusion_matrix:
+        reverted:
+          abstain: 14
+          accept: 7
+          reject: 66
+        survived:
+          abstain: 11
+          accept: 34
+          reject: 9
+      cost_per_verdict: 0.005029170372340425
+      precision_accept: 0.8292682926829268
+      recall_reject: 0.7586206896551724
+      sample_count: 141
+    P859:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.002178361666666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P8964:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 0
+          reject: 1
+      cost_per_verdict: 0.006323759583333334
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P9071:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 2
+          reject: 1
+      cost_per_verdict: 0.005937135416666666
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P910:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.0024878933333333333
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+    P921:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 3
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.002288413333333333
+      precision_accept: 0.0
+      recall_reject: 0.0
+      sample_count: 3
+    P9345:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.00298555125
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P94:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 3
+          accept: 3
+          reject: 0
+      cost_per_verdict: 0.0054943762499999995
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P9493:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 0
+          accept: 1
+          reject: 2
+      cost_per_verdict: 0.011075609166666667
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P968:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 1
+          reject: 0
+      cost_per_verdict: 0.0024257408333333333
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 3
+    P971:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 0
+        survived:
+          abstain: 2
+          accept: 2
+          reject: 2
+      cost_per_verdict: 0.003076106875
+      precision_accept: 1.0
+      recall_reject: 0.0
+      sample_count: 6
+    P973:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 0
+          reject: 3
+        survived:
+          abstain: 2
+          accept: 2
+          reject: 5
+      cost_per_verdict: 0.005098061770833333
+      precision_accept: 1.0
+      recall_reject: 1.0
+      sample_count: 12
+    P989:
+      confusion_matrix:
+        reverted:
+          abstain: 0
+          accept: 2
+          reject: 1
+        survived:
+          abstain: 0
+          accept: 0
+          reject: 0
+      cost_per_verdict: 0.00333460125
+      precision_accept: 0.0
+      recall_reject: 0.3333333333333333
+      sample_count: 3
+ensemble:
+  majority_vote:
+    confusion_matrix:
+      reverted:
+        abstain: 0
+        accept: 52
+        reject: 307
+      survived:
+        abstain: 0
+        accept: 160
+        reject: 224
+    cost_per_verdict: null
+    precision_accept: 0.7547169811320755
+    recall_reject: 0.8551532033426184
+    sample_count: 743
+  open_models_majority_vote:
+    confusion_matrix:
+      reverted:
+        abstain: 0
+        accept: 52
+        reject: 307
+      survived:
+        abstain: 0
+        accept: 160
+        reject: 224
+    cost_per_verdict: null
+    precision_accept: 0.7547169811320755
+    recall_reject: 0.8551532033426184
+    sample_count: 743
+  open_models_unanimous_accept:
+    confusion_matrix:
+      reverted:
+        abstain: 0
+        accept: 19
+        reject: 340
+      survived:
+        abstain: 0
+        accept: 74
+        reject: 310
+    cost_per_verdict: null
+    precision_accept: 0.7956989247311828
+    recall_reject: 0.947075208913649
+    sample_count: 743
+  unanimous_accept:
+    confusion_matrix:
+      reverted:
+        abstain: 0
+        accept: 19
+        reject: 340
+      survived:
+        abstain: 0
+        accept: 74
+        reject: 310
+    cost_per_verdict: null
+    precision_accept: 0.7956989247311828
+    recall_reject: 0.947075208913649
+    sample_count: 743
+per_model:
+  allenai/olmo-3.1-32b-instruct:
+    confusion_matrix:
+      reverted:
+        abstain: 54
+        accept: 79
+        reject: 226
+      survived:
+        abstain: 50
+        accept: 207
+        reject: 125
+    cost_per_verdict: 0.004496325775978407
+    fr_at_90:
+      achieved_recall: 1.0
+      filter_rate: 0.0
+    fr_at_99:
+      achieved_recall: 1.0
+      filter_rate: 0.0
+    pr_auc: 0.6597387058816879
+    precision_accept: 0.7237762237762237
+    recall_reject: 0.6295264623955432
+    sample_count: 741
+  mistralai/ministral-8b-2512:
+    confusion_matrix:
+      reverted:
+        abstain: 47
+        accept: 57
+        reject: 252
+      survived:
+        abstain: 97
+        accept: 159
+        reject: 124
+    cost_per_verdict: 0.0059789717527173915
+    fr_at_90:
+      achieved_recall: 1.0
+      filter_rate: 0.0
+    fr_at_99:
+      achieved_recall: 1.0
+      filter_rate: 0.0
+    pr_auc: 0.6769459855338948
+    precision_accept: 0.7361111111111112
+    recall_reject: 0.7078651685393258
+    sample_count: 736
+  mistralai/mistral-small-3.2-24b-instruct:
+    confusion_matrix:
+      reverted:
+        abstain: 146
+        accept: 40
+        reject: 173
+      survived:
+        abstain: 185
+        accept: 144
+        reject: 53
+    cost_per_verdict: 0.005159490146761134
+    fr_at_90:
+      achieved_recall: 0.9080779944289693
+      filter_rate: 0.21187584345479082
+    fr_at_99:
+      achieved_recall: 1.0
+      filter_rate: 0.0
+    pr_auc: 0.6792935524229357
+    precision_accept: 0.782608695652174
+    recall_reject: 0.4818941504178273
+    sample_count: 741
+summary:
+  ground_truth_distribution:
+    reverted: 1074
+    survived: 1144
+  models:
+  - allenai/olmo-3.1-32b-instruct
+  - mistralai/ministral-8b-2512
+  - mistralai/mistral-small-3.2-24b-instruct
+  total_edits: 743
+  total_verdicts: 2218

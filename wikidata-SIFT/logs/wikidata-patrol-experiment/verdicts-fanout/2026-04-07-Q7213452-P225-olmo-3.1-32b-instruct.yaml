@@ -1,0 +1,24 @@
+completion_tokens: 1135
+cost_usd: 0.0086908
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40049
+property: P225
+property_label: taxon name
+rationale: The accepted scientific name for candyleaf (Stevia rebaudiana) is 'Stevia
+  rebaudiana', not 'a', as confirmed by authoritative sources including the ARS GRIN
+  taxonomy database. There is no evidence from scientific literature or botanical
+  databases that 'a' is a valid or accepted taxon name for this species. The edit
+  is therefore incorrect.
+rcid: 2550294685
+revid: 2473634707
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://npgsweb.ars-grin.gov/gringlobal/taxonomydetail.aspx?id=35581
+timestamp: '2026-04-07T11:44:46.458572+00:00'
+title: Q7213452
+turns: 6
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 620
+cost_usd: 0.01258068
+diff_type: reference_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 34058
+property: P17
+property_label: country
+rationale: The official website at www.bibbyfinancialservices.pl confirms the company
+  operates in Poland, with Polish-language content and contact information in Warsaw.
+  The EMIS company profile explicitly lists 'Bibby Financial Services Sp. z o.o. (Poland)'
+  with headquarters at Ul. Al. Aleje Jerozolimskie 134, Warsaw, Poland. The company's
+  Polish website and registration information from business databases consistently
+  identify it as a Polish entity, providing strong evidence that the country claim
+  for Poland (Q36) is correct.
+rcid: 2540926341
+revid: 2464717113
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/
+- provenance: verified
+  supports_claim: true
+  url: https://www.emis.com/php/company-profile/PL/Bibby_Financial_Services_Sp_z_oo_en_2405584.html
+timestamp: '2026-02-20T22:11:27.135645+00:00'
+title: Q138348738
+turns: 5
+value_label: Poland
+verdict: verified-high

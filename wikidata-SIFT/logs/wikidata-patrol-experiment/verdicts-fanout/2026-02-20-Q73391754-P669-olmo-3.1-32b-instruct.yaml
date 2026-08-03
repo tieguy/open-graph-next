@@ -1,0 +1,30 @@
+completion_tokens: 1703
+cost_usd: 0.007775600000000001
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33769
+property: P669
+property_label: located on street
+rationale: The cited reference is the Wuppertaler Gedenkbuch, a primary and authoritative
+  source documenting memorials in Wuppertal. The main and related pages confirm that
+  the Stolperstein dedicated to Emilie Röttgen is located at Gartenstraße 24. Additional
+  local historical documents corroborate this information, ensuring the claim is supported
+  by reliable sources.
+rcid: 2540936238
+revid: 2464726531
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://wuppertaler-gedenkbuch.de/historische-einfuehrung/deportationen/
+- provenance: verified
+  supports_claim: true
+  url: https://wuppertaler-gedenkbuch.de/
+- provenance: verified
+  supports_claim: true
+  url: https://www.alte-synagoge-wuppertal.de/fileadmin/user_upload/BAS_Gedenkstaetten_Wuppertal-7.pdf
+timestamp: '2026-02-20T16:59:40.240078+00:00'
+title: Q73391754
+turns: 4
+value_label: Gartenstraße
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 1068
+cost_usd: 0.00258566
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30947
+property: P39
+property_label: position held
+rationale: The only reference provided is from a blocked domain, and web searches
+  did not yield any additional information to confirm or deny the claim. Therefore,
+  the claim cannot be verified.
+rcid: 2551408859
+revid: 2474712086
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Deuxi%C3%A8me_gouvernement_Phil%C3%A9mon_Yang
+timestamp: '2026-04-07T13:48:48.931903+00:00'
+title: Q111394635
+turns: 5
+value_label: null
+verdict: unverifiable

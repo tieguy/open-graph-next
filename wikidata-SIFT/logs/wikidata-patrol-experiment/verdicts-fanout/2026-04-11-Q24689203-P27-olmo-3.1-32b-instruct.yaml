@@ -1,0 +1,30 @@
+completion_tokens: 1415
+cost_usd: 0.005164200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21576
+property: P27
+property_label: country of citizenship
+rationale: The edit changed the country of citizenship (P27) for Niska from France
+  (Q142) to Congolese franc (Q4734), which is a currency and not a country. Multiple
+  reliable sources confirm that Niska is a French citizen of Congolese descent, but
+  not a citizen of the Democratic Republic of the Congo. The edit is a clear semantic
+  and factual error.
+rcid: null
+revid: 2471645188
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Niska_(rappeur)
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/fr/artist/3958584-Niska
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb17011992j
+timestamp: '2026-04-11T07:06:02.205692+00:00'
+title: Q24689203
+turns: 1
+value_label: Congolese franc
+verdict: incorrect

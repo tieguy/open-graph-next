@@ -1,0 +1,27 @@
+completion_tokens: 2118
+cost_usd: 0.00337203
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39921
+property: P569
+property_label: date of birth
+rationale: The only cited reference (Comic Vine) is unreachable due to HTTP 403 Forbidden
+  error, and no independent, verified sources confirm either the old (1996) or new
+  (1989) birth date for Desiree Bressend. The edit was reverted, indicating potential
+  issues with the new value. Without verifiable evidence, the change cannot be confirmed
+  or denied.
+rcid: null
+revid: 2464195721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://comicvine.gamespot.com/desiree-bressend/4040-98627/
+- provenance: verified
+  supports_claim: false
+  url: https://elpais.com/cultura/2020/07/25/ka_boom/1595666391_528092.html
+timestamp: '2026-04-11T13:45:07.537119+00:00'
+title: Q106964003
+turns: 4
+value_label: null
+verdict: unverifiable

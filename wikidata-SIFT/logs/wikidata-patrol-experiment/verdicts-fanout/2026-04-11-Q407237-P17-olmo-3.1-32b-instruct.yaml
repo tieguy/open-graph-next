@@ -1,0 +1,26 @@
+completion_tokens: 1959
+cost_usd: 0.006869
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28468
+property: P17
+property_label: country
+rationale: No credible, independent sources support associating Air France-KLM with
+  Colombia as its country. Official and industry sources consistently identify the
+  airline as European, based in France and the Netherlands. The change from 'France'
+  to 'Colombia' is therefore incorrect and not substantiated by any reliable evidence.
+rcid: null
+revid: 2465002456
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Air_France-KLM
+- provenance: verified
+  supports_claim: false
+  url: https://www.airfranceklm.com/
+timestamp: '2026-04-11T09:30:07.698269+00:00'
+title: Q407237
+turns: 1
+value_label: Colombia
+verdict: incorrect

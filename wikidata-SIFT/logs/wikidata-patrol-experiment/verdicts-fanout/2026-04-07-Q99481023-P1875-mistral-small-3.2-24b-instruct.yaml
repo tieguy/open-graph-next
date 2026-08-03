@@ -1,0 +1,27 @@
+completion_tokens: 883
+cost_usd: 0.0027426687500000002
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28388
+property: P1875
+property_label: represented by
+rationale: The content from the fetched URL https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+  provides clear evidence that Yasam Sasmazer is represented by Zilberman Gallery.
+  The page lists several personal exhibitions by Yaşam Şaşmazer, including one at
+  Zilberman Istanbul in 2021, which supports the claim that Zilberman Gallery represents
+  Yasam Sasmazer.
+rcid: 2551221921
+revid: 2474534638
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.sasmazeryasam.com/contact-2/
+timestamp: '2026-04-07T04:32:12.619906+00:00'
+title: Q99481023
+turns: 4
+value_label: Zilberman Gallery
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 255
+cost_usd: 0.0027254000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12862
+property: P31
+property_label: instance of
+rationale: Cà di Angiolitt is a mountain hut located in the Italian Dolomites. Multiple
+  independent and verified sources confirm that 'mountain hut' is the correct classification
+  for such structures, and that the specific hut (Cà di Angiolitt) is commonly referred
+  to as a mountain hut. The previous value 'mountain' was not appropriate for a constructed
+  hut facility. The change from 'mountain' (P8502) to 'mountain hut' (Q182676) is
+  therefore correct and supported by authoritative sources.
+rcid: 2549655145
+revid: 2473015618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://inafarawayland.com/best-mountain-huts-in-the-italian-dolomites/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hiwio.com/en/Article/Rifugio-Lagazuoi-mountain-hut-hike-570
+timestamp: '2026-04-11T10:41:43.212580+00:00'
+title: Q127172134
+turns: 1
+value_label: mountain hut
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 1268
+cost_usd: 0.0057564
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24978
+property: P244
+property_label: Library of Congress authority ID
+rationale: The Library of Congress Name Authority File does not list Generoso Pompa,
+  and no independent source confirms the use of the authority ID 'no2026017297'. The
+  edit is unsupported and cannot be verified.
+rcid: 2540933306
+revid: 2464723897
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://authorities.loc.gov/authorities/search?query=Generoso+Pompa&searchType=PersonalName
+timestamp: '2026-02-20T18:55:22.183923+00:00'
+title: Q96583750
+turns: 4
+value_label: null
+verdict: suspect

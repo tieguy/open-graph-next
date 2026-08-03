@@ -1,0 +1,27 @@
+completion_tokens: 4040
+cost_usd: 0.0082768
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29264
+property: P2607
+property_label: BookBrainz author ID
+rationale: The edit adds a BookBrainz author ID for Josh Universe with a specific
+  qualifier. However, I was unable to fetch the BookBrainz page for the provided UUID
+  to directly confirm that this ID corresponds to Josh Universe. The context and use
+  of a specific qualifier suggest the claim is likely correct, but without direct
+  verification, the evidence remains indirect.
+rcid: 2551429137
+revid: 2474729246
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://joshuniverse.com
+- provenance: reported
+  supports_claim: false
+  url: https://bookbrainz.org/artist/9d1bae78-08bd-43f3-ba85-3f3775ab738e
+timestamp: '2026-04-10T11:03:56.593395+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: plausible

@@ -1,0 +1,21 @@
+completion_tokens: 1386
+cost_usd: 0.011648437499999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 120554
+property: P40
+property_label: child
+rationale: The article from ARA News provides clear evidence that Yousef Pezeshkian
+  is the son of Masoud Pezeshkian. The removal of the claim is therefore incorrect.
+rcid: 2551335460
+revid: 2474641995
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.ara.cat/international/after-nineteen-days-of-war-today-finally-cried-the-personal-diary-of-the-iranian-president-s-son_1_5698319.html
+timestamp: '2026-04-11T12:34:06.520256+00:00'
+title: Q5933752
+turns: 9
+value_label: Yousef Pezeshkian
+verdict: incorrect

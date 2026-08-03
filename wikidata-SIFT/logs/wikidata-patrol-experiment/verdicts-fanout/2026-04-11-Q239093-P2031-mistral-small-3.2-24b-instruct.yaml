@@ -1,0 +1,24 @@
+completion_tokens: 241
+cost_usd: 0.0053365
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 56280
+property: P2031
+property_label: start of work period
+rationale: The prefetched reference from Grokipedia confirms that Annie Wersching
+  graduated from high school in 1995 and began her professional acting career shortly
+  after, which supports the change to '1995' as the start of her work period. The
+  old value of '2002' is not supported by the available evidence, as her acting career
+  began earlier with roles in theater and television.
+rcid: null
+revid: 2470633876
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Annie_Wersching
+timestamp: '2026-04-11T09:14:36.361683+00:00'
+title: Q239093
+turns: 4
+value_label: null
+verdict: verified-high

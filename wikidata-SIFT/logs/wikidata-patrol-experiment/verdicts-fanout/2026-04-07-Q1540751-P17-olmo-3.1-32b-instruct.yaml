@@ -1,0 +1,27 @@
+completion_tokens: 1293
+cost_usd: 0.007552
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33881
+property: P17
+property_label: country
+rationale: The 'country' property (P17) should denote the sovereign state where the
+  Glorious Revolution of 1868 took place, which is Spain (Q29). Assigning 'Felipe
+  VI of Spain' (a modern monarch) as the country is semantically incorrect and not
+  supported by any credible source. Multiple searches failed to find evidence supporting
+  this change, and the change appears to be a category error.
+rcid: null
+revid: 2454916333
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Glorious_Revolution_(Spain)
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Revoluci%C3%B3n_Gloriosa_de_1868
+timestamp: '2026-04-07T03:51:58.500784+00:00'
+title: Q1540751
+turns: 7
+value_label: Felipe VI of Spain
+verdict: incorrect

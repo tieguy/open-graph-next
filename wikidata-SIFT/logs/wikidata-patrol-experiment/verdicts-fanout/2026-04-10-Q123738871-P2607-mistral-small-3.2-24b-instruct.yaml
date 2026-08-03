@@ -1,0 +1,34 @@
+completion_tokens: 2006
+cost_usd: 0.021399908750000002
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 233061
+property: P2607
+property_label: BookBrainz author ID
+rationale: The search results do not provide a direct source to verify the BookBrainz
+  author ID "af16cc29-ddf8-48dc-8876-b6b24cdd95b6" for Josh Universe. The available
+  sources do not mention this ID, making it impossible to confirm its correctness.
+rcid: 2551429137
+revid: 2474729246
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/stores/Josh-Universe/author/B0DKHPN4SH
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: false
+  url: https://docs.joshuniverse.com/
+- provenance: verified
+  supports_claim: false
+  url: https://about.me/joshhabka
+- provenance: verified
+  supports_claim: false
+  url: https://sessionize.com/josh-universe
+timestamp: '2026-04-10T11:03:24.756325+00:00'
+title: Q123738871
+turns: 11
+value_label: null
+verdict: unverifiable

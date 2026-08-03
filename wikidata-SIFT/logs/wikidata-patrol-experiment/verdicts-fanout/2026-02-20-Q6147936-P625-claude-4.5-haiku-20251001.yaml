@@ -1,0 +1,34 @@
+completion_tokens: 3033
+cost_usd: 0.22765599999999997
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 212491
+property: P625
+property_label: coordinate location
+rationale: 'The edit updates the coordinate location from decimal format (35.57252777777778,
+  139.73380555555556) to DMS format (35°34''21.1"N, 139°44''1.7"E), which are mathematically
+  equivalent values. Multiple independent sources confirm coordinates in this general
+  range for Omori: latitude.to reports 35°34''0.00"N, 139°43''60.00"E; satellites.pro
+  reports 35°34''00"N, 139°43''58"E; and Mapcarta''s snippet for Omorimachi Station
+  shows 35.57251° (= 35°34''21"), matching the edit''s precision. The coordinates
+  represent a consistent geographic center for the Omori neighborhood in Ōta, Tokyo.
+  This is a valid format conversion/precision update with no substantive location
+  change.'
+rcid: 2540941061
+revid: 2464730556
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://latitude.to/articles-by-country/jp/japan/75416/mori-ta-tokyo
+- provenance: verified
+  supports_claim: true
+  url: https://satellites.pro/Omori_map.Tokyo_region.Japan
+- provenance: reported
+  supports_claim: true
+  url: https://mapcarta.com/27450312
+timestamp: '2026-02-20T14:50:07.255106+00:00'
+title: Q6147936
+turns: 15
+value_label: null
+verdict: verified-high

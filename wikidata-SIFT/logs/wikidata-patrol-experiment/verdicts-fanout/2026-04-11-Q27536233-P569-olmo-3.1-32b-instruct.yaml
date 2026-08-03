@@ -1,0 +1,27 @@
+completion_tokens: 1407
+cost_usd: 0.0037229999999999997
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14394
+property: P569
+property_label: date of birth
+rationale: The edit removed the birth year 1974 from Virginia Gasull's item, but an
+  independent, verified source (Casadellibro/pocketbook.es) explicitly states that
+  she was born in 1974. No evidence was found to contradict this year, and the cited
+  BNE source could not be accessed to confirm the value in this investigation. Removing
+  a supported claim without replacing it with a correct value is not justified.
+rcid: 2550206963
+revid: 2473549656
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pocketbook.es/author/virginia-gasull
+- provenance: reported
+  supports_claim: false
+  url: http://datos.bne.es/resource/XX5458205
+timestamp: '2026-04-11T09:37:15.250416+00:00'
+title: Q27536233
+turns: 1
+value_label: null
+verdict: incorrect

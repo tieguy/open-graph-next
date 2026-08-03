@@ -1,0 +1,34 @@
+completion_tokens: 1236
+cost_usd: 0.021102400000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 101804
+property: P2067
+property_label: mass
+rationale: The claimed mass of 6767 grams for Audouin's Gull is biologically implausible
+  and not supported by accessible authoritative sources. Multiple attempts to fetch
+  primary references (e.g., IUCN Red List, Handbook of the Birds of the World, Cornell
+  Lab, BirdLife) failed to provide corroboration. The cited paper could not be verified,
+  and typical body mass for this species is in the range of 350–600 grams. The edit
+  should be treated with caution.
+rcid: null
+revid: 2469565950
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.iucnredlist.org/species/22694478/134088553
+- provenance: reported
+  supports_claim: false
+  url: https://www.hbw.com/species/audouins-gull-ichthyaetus-audouinii/
+- provenance: reported
+  supports_claim: false
+  url: https://www.birdlife.org/species/factsheet/audouins-gull-ichthyaetus-audouinii
+- provenance: reported
+  supports_claim: false
+  url: https://www.avianweb.com/audouinsgull.html
+timestamp: '2026-04-07T08:30:55.791883+00:00'
+title: Q519583
+turns: 6
+value_label: null
+verdict: suspect

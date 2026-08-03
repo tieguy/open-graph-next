@@ -1,0 +1,20 @@
+completion_tokens: 573
+cost_usd: 0.015510200000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 75832
+property: P2048
+property_label: height
+rationale: No accessible, authoritative source was found that confirms Hugo Ekitike's
+  height as 185 cm following the edit. Multiple searches and a direct attempt to fetch
+  his Transfermarkt profile returned no usable data. The absence of corroborating
+  evidence from a reliable primary or secondary source means the claim cannot be verified.
+rcid: 2550370207
+revid: 2473708572
+sources: []
+timestamp: '2026-04-07T08:37:22.730175+00:00'
+title: Q100602910
+turns: 9
+value_label: null
+verdict: unverifiable

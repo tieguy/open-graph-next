@@ -1,0 +1,27 @@
+completion_tokens: 1427
+cost_usd: 0.0038543
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39731
+property: P570
+property_label: date of death
+rationale: The date of death, March 21, 2026, is confirmed by multiple sources. The
+  exact time of death, 6:22 am, is confirmed by one source. However, the time zone
+  qualifier added in the edit (UTC+03:00) does not match the implied IST (UTC+05:30)
+  from the source. Therefore, the edit is partially correct but contains an incorrect
+  time zone qualifier.
+rcid: 2551232239
+revid: 2474544637
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://empireangle.com/celebrity/madhumita-raut/
+- provenance: verified
+  supports_claim: true
+  url: https://english.mathrubhumi.com/news/india/odissi-dancer-madhumita-raut-passes-away-jfl8rowl
+timestamp: '2026-04-11T06:11:17.978744+00:00'
+title: Q6727486
+turns: 4
+value_label: null
+verdict: verified-low

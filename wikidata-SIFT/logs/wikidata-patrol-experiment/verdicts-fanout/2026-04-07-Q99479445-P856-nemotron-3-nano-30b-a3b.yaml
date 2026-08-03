@@ -1,0 +1,25 @@
+completion_tokens: 668
+cost_usd: 0.00822835
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 161895
+property: P856
+property_label: official website
+rationale: The edit changes the official website claim to http://belift.com/enhypen.
+  Investigate found no verifiable sources confirming 'belift.com' as a registered
+  domain or official Enhypen homepage. The only reachable related URLs (e.g., enhypen-jp.weverse.io)
+  were not direct official website sources. Web searches for 'enhypen official website'
+  and domain verification returned no conclusive results, preventing confirmation
+  of the claim's accuracy.
+rcid: 2550299956
+revid: 2473639870
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://enhypen-jp.weverse.io/
+timestamp: '2026-04-07T11:20:24.697025+00:00'
+title: Q99479445
+turns: 15
+value_label: null
+verdict: unverifiable

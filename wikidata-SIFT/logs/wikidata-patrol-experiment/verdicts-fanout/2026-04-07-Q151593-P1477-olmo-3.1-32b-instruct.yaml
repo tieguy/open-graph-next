@@ -1,0 +1,32 @@
+completion_tokens: 1606
+cost_usd: 0.0269272
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 129818
+property: P1477
+property_label: birth name
+rationale: The cited Grove Music Online source could not be accessed to verify the
+  new birth name. All independently accessible and verified sources consistently record
+  Olivier Messiaen's birth name as 'Olivier Eugène Charles Prosper Messiaen'. There
+  is no verified evidence supporting the claimed change to 'Olivier Penne Messi Aen'.
+rcid: null
+revid: 2472451349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Olivier_Messiaen
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Olivier_Messiaen
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Olivier_Messiaen
+- provenance: unverified
+  supports_claim: null
+  url: https://doi.org/10.1093/gmo/9781561592630.article.18497
+timestamp: '2026-04-07T10:23:38.051956+00:00'
+title: Q151593
+turns: 8
+value_label: null
+verdict: unverifiable

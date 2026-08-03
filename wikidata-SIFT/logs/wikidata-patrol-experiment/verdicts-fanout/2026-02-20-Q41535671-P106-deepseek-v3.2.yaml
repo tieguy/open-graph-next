@@ -1,0 +1,34 @@
+completion_tokens: 2010
+cost_usd: 0.01625762
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 101617
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm Christian Bois is a filmmaker. The
+  page 'Habiter autrement en Europe' explicitly mentions 'réalisation de films – film
+  académique' in his biography, while two seminar listings from 2016 identify him
+  as 'cinéaste-auteur' (filmmaker-author). These sources provide strong corroboration
+  that filmmaking is indeed one of his occupations alongside his work as an intellectual
+  and writer.
+rcid: 2540943748
+revid: 2464733097
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://habiterautrementeneurope.com/christian-bois/
+- provenance: verified
+  supports_claim: true
+  url: https://calenda.org/381355
+- provenance: verified
+  supports_claim: true
+  url: https://www.marceljousse.com/marcel-jousse-cinema-focus-charlie-chaplin/
+- provenance: reported
+  supports_claim: null
+  url: https://vimeo.com/45086822
+timestamp: '2026-02-20T12:55:19.275809+00:00'
+title: Q41535671
+turns: 12
+value_label: filmmaker
+verdict: verified-high

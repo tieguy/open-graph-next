@@ -1,0 +1,22 @@
+completion_tokens: 726
+cost_usd: 0.0038846999999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 74790
+property: P18
+property_label: image
+rationale: Despite extensive searching across multiple queries, no verifiable source
+  was found that confirms the existence or relevance of 'Audi Q6L Sportback e-tron
+  001.jpg' as an image for the Audi Q6 e-tron item. All searches returned noユผลิต
+  findings, including searches specifically targeting Wikimedia Commons and general
+  image repositories. No cited references were present in the edit, and no independent
+  sources could be located through web searches.
+rcid: null
+revid: 2471360509
+sources: []
+timestamp: '2026-04-07T06:03:52.250100+00:00'
+title: Q106620903
+turns: 15
+value_label: null
+verdict: unverifiable

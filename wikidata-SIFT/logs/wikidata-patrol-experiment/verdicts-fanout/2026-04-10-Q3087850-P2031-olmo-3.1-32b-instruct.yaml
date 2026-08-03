@@ -1,0 +1,36 @@
+completion_tokens: 1101
+cost_usd: 0.0042976
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18185
+property: P2031
+property_label: start of work period
+rationale: The claim that Juan Magán's start of work period is 1492 is not supported
+  by any credible sources. All verified biographical and music industry sources indicate
+  that Juan Magán is a contemporary artist born in 1978 and began his professional
+  music career in the late 1990s or early 2000s. No evidence exists to support a start
+  date in 1492, and the value appears to be a data error.
+rcid: null
+revid: 2460036669
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Juan-magan
+- provenance: verified
+  supports_claim: false
+  url: https://top40-charts.com/artist.php?aid=15949
+- provenance: verified
+  supports_claim: false
+  url: https://www.huffingtonpost.es/2017/05/01/juan-magan-nos-creimos-europeos-y-se-nos-olvido-que-eramos-lat_a_22048053/
+- provenance: verified
+  supports_claim: false
+  url: https://www.universalmusic.fr/artistes/30079807377
+- provenance: verified
+  supports_claim: false
+  url: https://www.viberate.com/artist/juan-magan/
+timestamp: '2026-04-10T14:19:22.015856+00:00'
+title: Q3087850
+turns: 1
+value_label: null
+verdict: incorrect

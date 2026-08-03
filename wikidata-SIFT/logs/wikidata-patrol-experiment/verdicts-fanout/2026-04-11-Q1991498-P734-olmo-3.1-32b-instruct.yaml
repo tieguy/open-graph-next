@@ -1,0 +1,28 @@
+completion_tokens: 1506
+cost_usd: 0.0044638
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17801
+property: P734
+property_label: family name
+rationale: All authoritative sources such as Wikipedia, ACB.com, and Basketball Reference
+  consistently use 'Guzmán' as the family name for Josep Maria Guzmán. No evidence
+  was found supporting the change to 'Menchov', which appears to be an error.
+rcid: 2550214529
+revid: 2473556917
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Josep_Maria_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://www.acb.com/en/players/josep-maria-guzman
+- provenance: verified
+  supports_claim: false
+  url: https://www.basketball-reference.com/players/g/guzmajo01.html
+timestamp: '2026-04-11T11:24:03.530741+00:00'
+title: Q1991498
+turns: 1
+value_label: Menchov
+verdict: incorrect

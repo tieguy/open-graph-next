@@ -1,0 +1,20 @@
+completion_tokens: 683
+cost_usd: 0.013478400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 65343
+property: P1971
+property_label: number of children
+rationale: There are no cited references on Wikidata for the number of children, and
+  independent searches did not locate any reliable primary or secondary source stating
+  that Frank Sheeran had five children. Without corroborating evidence, the claim
+  cannot be verified.
+rcid: 2550069182
+revid: 2473416119
+sources: []
+timestamp: '2026-04-07T07:16:03.449785+00:00'
+title: Q476443
+turns: 10
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1843
+cost_usd: 0.00195651
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17396
+property: P119
+property_label: place of burial
+rationale: The claim that Nellie Camposucio (Q6937625) is buried in Durango (Q79918)
+  is supported by an independent primary source (Find a Grave), which confirms her
+  burial location in Durango. However, the original reference (Scielo article) was
+  removed without justification, despite being the only cited source. Since the claim
+  itself is well-supported by other sources, removing the reference without evidence
+  is unjustified and appears to be an unnecessary or potentially erroneous edit.
+rcid: 2550019752
+revid: 2473368142
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/218783894/nellie-campobello
+- provenance: reported
+  supports_claim: false
+  url: https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1665-85742011000100003
+timestamp: '2026-04-11T16:34:41.572018+00:00'
+title: Q6937625
+turns: 1
+value_label: Durango
+verdict: suspect

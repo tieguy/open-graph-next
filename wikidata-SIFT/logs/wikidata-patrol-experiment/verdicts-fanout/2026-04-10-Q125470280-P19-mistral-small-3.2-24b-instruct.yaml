@@ -1,0 +1,29 @@
+completion_tokens: 1257
+cost_usd: 0.0014903875
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11999
+property: P19
+property_label: place of birth
+rationale: The claim that Dan Wang was born in Yunnan is strongly supported by an
+  article from Rest of World, which explicitly states that Dan Wang moved to Canada
+  from Yunnan at age seven. This provides clear and direct evidence supporting the
+  claim.
+rcid: 2550901709
+revid: 2474224431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://danwang.co/
+- provenance: verified
+  supports_claim: true
+  url: https://restofworld.org/2025/dan-wang-breakneck-book-china-tech/
+- provenance: verified
+  supports_claim: false
+  url: https://freakonomics.com/podcast/china-is-run-by-engineers-america-is-run-by-lawyers/
+timestamp: '2026-04-10T14:03:24.563180+00:00'
+title: Q125470280
+turns: 1
+value_label: Yunnan
+verdict: verified-high

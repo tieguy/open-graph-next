@@ -1,0 +1,34 @@
+completion_tokens: 2355
+cost_usd: 0.053054000000000004
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 41279
+property: P31
+property_label: instance of
+rationale: The edit assigns P31 (instance of) = Q328644 (Apache), which refers to
+  an American rapper born 1964 who died in 2010—a completely different person. Multiple
+  independent official sources (ESA, SatCen, SpaceFacts) confirm that Sara García
+  Alonso (born 1989) is a Spanish molecular biologist, cancer researcher, and ESA
+  astronaut reserve member—a human person. The correct instance of value should be
+  Q5 (human). This is a fundamental factual error.
+rcid: 2540985241
+revid: 2464771565
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q328644
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: false
+  url: https://www.satcen.europa.eu/News/visit-of-sara-garc-a-alonso-esa-astronaut-to-satcen
+- provenance: verified
+  supports_claim: false
+  url: https://www.spacefacts.de/bios/candidates/reserve/english/garcia_sara.htm
+timestamp: '2026-02-19T22:29:39.675149+00:00'
+title: Q88354540
+turns: 3
+value_label: Apache
+verdict: incorrect

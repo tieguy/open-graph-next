@@ -1,0 +1,46 @@
+completion_tokens: 2622
+cost_usd: 0.0065044000000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60648
+property: P40
+property_label: child
+rationale: Multiple independent sources confirm that Erwin Schrödinger's daughter
+  is named Ruth Georgie Erica. The sources consistently mention her birth date and
+  her relationship to Schrödinger.
+rcid: 2550564108
+revid: 2473896730
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bookofproofs.github.io/history/19th-century/schrodinger.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.newworldencyclopedia.org/entry/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: true
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Schrodinger/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidoc.org/index.php/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: true
+  url: https://www.thoughtco.com/erwin-schrodingers-cat-4173102
+- provenance: verified
+  supports_claim: true
+  url: https://www.dib.ie/biography/schrodinger-erwin-a7947
+- provenance: verified
+  supports_claim: true
+  url: https://kulturpool.at/en/content/brenner-forum-schroedinger
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Schr%C3%B6dinger-1
+- provenance: verified
+  supports_claim: true
+  url: https://men.fandom.com/wiki/Erwin_Schr%C3%B6dinger
+timestamp: '2026-04-10T13:45:01.093261+00:00'
+title: Q9130
+turns: 2
+value_label: Ruth
+verdict: verified-high

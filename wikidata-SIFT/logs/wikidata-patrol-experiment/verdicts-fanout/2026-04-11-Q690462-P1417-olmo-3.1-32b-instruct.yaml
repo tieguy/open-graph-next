@@ -1,0 +1,32 @@
+completion_tokens: 314
+cost_usd: 0.0025744
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11930
+property: P1417
+property_label: Encyclopædia Britannica Online ID
+rationale: The change from 'Dred-Scott-decision' to 'event/Dred-Scott-decision' for
+  the Encyclopædia Britannica Online ID property (P1417) is suspect because the new
+  value format is not supported by evidence from Britannica itself or any authoritative
+  source. The Britannica Guide on Dred Scott v. Sandford does not reference an identifier
+  like 'event/Dred-Scott-decision', nor does Oyez or the LOC guide indicate such a
+  format. Changing the ID to a format not verified by the referenced source may break
+  linkage to the intended Britannica article and is not justified by current evidence.
+rcid: 2551189300
+revid: 2474503104
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://guides.loc.gov/dred-scott
+- provenance: verified
+  supports_claim: false
+  url: https://civilwaronthewesternborder.org/encyclopedia/dred-scott-v-sandford-1857
+- provenance: reported
+  supports_claim: false
+  url: https://www.oyez.org/cases/1850-1900/60us393
+timestamp: '2026-04-11T06:17:54.959928+00:00'
+title: Q690462
+turns: 1
+value_label: null
+verdict: suspect

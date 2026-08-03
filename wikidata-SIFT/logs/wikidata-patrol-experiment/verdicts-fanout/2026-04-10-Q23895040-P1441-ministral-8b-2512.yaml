@@ -1,0 +1,27 @@
+completion_tokens: 1878
+cost_usd: 0.00413142
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37390
+property: P1441
+property_label: present in work
+rationale: The claim that James Rhodes (Q23895040) is present in the 2008 film *Iron
+  Man* (Q192724) is strongly supported by multiple independent sources. The character's
+  appearance in the film is confirmed by multiple Fandom pages and Quora, which explicitly
+  state that Terrence Howard played James Rhodes in *Iron Man (2008)*. No contradictory
+  evidence was found, and the sources are reliable for MCU canon.
+rcid: 2550976153
+revid: 2474295530
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ironman.fandom.com/wiki/James_Rhodes_(Earth-199999)
+- provenance: verified
+  supports_claim: true
+  url: https://www.cbr.com/iron-man-don-cheadle-replaced-terrence-howard/
+timestamp: '2026-04-10T13:15:47.683513+00:00'
+title: Q23895040
+turns: 3
+value_label: Iron Man
+verdict: verified-high

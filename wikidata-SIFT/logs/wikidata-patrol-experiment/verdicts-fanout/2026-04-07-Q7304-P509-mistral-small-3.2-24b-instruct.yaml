@@ -1,0 +1,22 @@
+completion_tokens: 663
+cost_usd: 0.015835725000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 171288
+property: P509
+property_label: cause of death
+rationale: The evidence from Biography.com clearly states that Gustav Mahler died
+  of heart disease. The claim that his cause of death was 'nigga' is incorrect and
+  appears to be a case of vandalism or a malicious edit.
+rcid: 2550519841
+revid: 2473854124
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/musician/gustav-mahler
+timestamp: '2026-04-07T05:42:14.111221+00:00'
+title: Q7304
+turns: 8
+value_label: nigga
+verdict: incorrect

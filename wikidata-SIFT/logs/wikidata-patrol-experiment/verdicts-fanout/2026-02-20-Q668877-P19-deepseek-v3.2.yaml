@@ -1,0 +1,33 @@
+completion_tokens: 2574
+cost_usd: 0.03412457
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 125203
+property: P19
+property_label: place of birth
+rationale: 'Multiple independent sources confirm Harley Jessup was born in Corvallis,
+  Oregon. The Oregon State University news article directly states ''Jessup was born
+  in Corvallis in 1954.'' In an interview with the Democrat-Herald, Jessup himself
+  confirms: ''No, I was born in Corvallis. But my parents moved to the Bay Area —
+  my father to go to seminary — 10 days after I was born.'' Additionally, the Grokipedia
+  biography states ''Born in Corvallis, Oregon'' and provides detailed biographical
+  information. All sources consistently support the claim, and no contradictory evidence
+  was found.'
+rcid: 2540962314
+revid: 2464750189
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://news.oregonstate.edu/news/oscar-winning-designer-harley-jessup-named-osu-commencement-speaker-june
+- provenance: verified
+  supports_claim: true
+  url: https://democratherald.com/entertainment/movies/article_e28a70fc-7c50-5d69-8254-d250ad73ac9a.html
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/harley_jessup
+timestamp: '2026-02-20T04:30:05.856703+00:00'
+title: Q668877
+turns: 8
+value_label: Corvallis
+verdict: verified-high

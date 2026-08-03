@@ -1,0 +1,29 @@
+completion_tokens: 1818
+cost_usd: 0.0066952
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28022
+property: P1072
+property_label: readable file format
+rationale: The edit changed the 'readable file format' for OpenJPEG from 'TIFF' (which,
+  in this context, refers to TIFF files with embedded JPEG 2000 support) to 'Portable
+  Graymap, binary variant' (PGM binary). However, according to the official OpenJPEG
+  documentation and repository README, OpenJPEG is a JPEG 2000 codec that supports
+  JPEG 2000 formats (JP2, JP3, JPC, J2K) and some TIFF files with JPEG 2000, but it
+  does NOT support the PGM or PGM binary format. Therefore, the change is factually
+  incorrect and misrepresents OpenJPEG's capabilities.
+rcid: 2550517869
+revid: 2473852193
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/uclouvain/openjpeg/blob/main/README.md
+- provenance: verified
+  supports_claim: false
+  url: https://www.openjpeg.org/
+timestamp: '2026-04-11T17:50:51.625238+00:00'
+title: Q3353118
+turns: 1
+value_label: Portable Graymap, binary variant
+verdict: incorrect

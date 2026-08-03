@@ -1,0 +1,21 @@
+completion_tokens: 440
+cost_usd: 0.0052064
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24712
+property: P3373
+property_label: sibling
+rationale: No independent, accessible sources could confirm whether Cacus is considered
+  a sibling of himself in Roman mythology. The Wikipedia article, a commonly referenced
+  primary source, was unreachable due to domain blocking, and alternative searches
+  did not yield reliable evidence. Without explicit authoritative support, the claim
+  remains unverified.
+rcid: null
+revid: 2471473084
+sources: []
+timestamp: '2026-04-07T09:14:27.258341+00:00'
+title: Q754686
+turns: 5
+value_label: Cacus
+verdict: unverifiable

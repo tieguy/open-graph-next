@@ -1,0 +1,29 @@
+completion_tokens: 1069
+cost_usd: 0.0062002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27794
+property: P856
+property_label: official website
+rationale: The new official website https://www.flysas.com is not reachable and is
+  not referenced by any authoritative source as the official website of Onga, Fukuoka.
+  No evidence supports this claim, and the domain returns a 404 error. This indicates
+  the edit was incorrect.
+rcid: null
+revid: 2471590197
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.flysas.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.town.onga.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://www.fukuoka.lg.jp/
+timestamp: '2026-04-07T12:17:52.269956+00:00'
+title: Q1205554
+turns: 3
+value_label: null
+verdict: incorrect

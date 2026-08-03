@@ -1,0 +1,36 @@
+completion_tokens: 1433
+cost_usd: 0.045433999999999995
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 38269
+property: P856
+property_label: official website
+rationale: The reference URL https://www.globalbankingandfinance.com is confirmed
+  to be the official website of Global Banking & Finance Review through multiple independent
+  sources. The About Us page (directly fetched) explicitly identifies the site as
+  the official platform for 'Global Banking & Finance Review®, a global financial
+  intelligence and recognition platform' established in the United Kingdom in 2010.
+  Web search results from Zoominfo, MuckRack, and the official domain confirm this
+  URL as the magazine's official website. The claim and reference are consistent with
+  other verified claims in the item (inception year 2010).
+rcid: 2540949368
+revid: 2464738370
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/about-us/
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com
+- provenance: reported
+  supports_claim: true
+  url: https://www.zoominfo.com/c/global-banking--finance-review/355949996
+- provenance: reported
+  supports_claim: true
+  url: https://muckrack.com/media-outlet/globalbankingandfinance
+timestamp: '2026-02-20T11:05:05.652587+00:00'
+title: Q60744597
+turns: 4
+value_label: null
+verdict: verified-high

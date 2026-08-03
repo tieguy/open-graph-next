@@ -1,0 +1,17 @@
+completion_tokens: 2791
+cost_usd: 0.00247725
+diff_type: value_changed
+finish_status: stop
+model: qwen/qwen3.5-9b
+prompt_tokens: 41172
+property: P19
+property_label: place of birth
+rationale: null
+rcid: 2549577486
+revid: 2472940165
+sources: []
+timestamp: '2026-04-07T02:09:13.644124+00:00'
+title: Q484662
+turns: 4
+value_label: Belgium
+verdict: null

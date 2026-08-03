@@ -1,0 +1,30 @@
+completion_tokens: 933
+cost_usd: 0.004441400000000001
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19408
+property: P973
+property_label: described at URL
+rationale: The removed URL was not an authoritative or current description of DOAP.
+  Multiple searches failed to locate any official W3C documentation for DOAP at the
+  referenced URL or elsewhere on w3.org. The page at the referenced URL returned a
+  404 error and is therefore not a reliable reference. The ontology is best described
+  by its XML namespace and active GitHub repository, already referenced in the item.
+rcid: 2550591142
+revid: 2473922634
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/
+- provenance: verified
+  supports_claim: false
+  url: https://api.github.com/repos/edumbill/doap
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/wiki/SemanticWebDOAPBulletinBoard
+timestamp: '2026-04-07T10:00:24.999235+00:00'
+title: Q5205836
+turns: 4
+value_label: null
+verdict: verified-high

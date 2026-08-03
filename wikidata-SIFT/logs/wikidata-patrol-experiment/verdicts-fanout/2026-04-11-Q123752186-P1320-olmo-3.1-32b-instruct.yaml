@@ -1,0 +1,33 @@
+completion_tokens: 1887
+cost_usd: 0.0048871999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18775
+property: P1320
+property_label: OpenCorporates ID
+rationale: The OpenCorporates ID value for SYENSQO did not change in this edit, but
+  references and qualifiers were added. I attempted to verify the ID using the OpenCorporates
+  primary source, but the fetch failed with an HTTP 406 error. Secondary sources did
+  not display the OpenCorporates ID for SYENSQO, so I could not independently confirm
+  the correctness of the claim. Therefore, the edit is unverifiable at this time.
+rcid: 2551397408
+revid: 2474701517
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://api.opencorporates.com/documentation/API-Reference
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/syensqo?rid=685934152245-39
+- provenance: reported
+  supports_claim: false
+  url: https://www.syensqo.com/en/investors/corporate-governance/executive-leadership-team
+- provenance: attempted
+  supports_claim: false
+  url: https://opencorporates.com/companies/be/0798896453
+timestamp: '2026-04-11T07:44:40.035305+00:00'
+title: Q123752186
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1175
+cost_usd: 0.0015081600000000001
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15075
+property: P136
+property_label: genre
+rationale: The claim that Snap! is a Eurodance band is strongly supported by multiple
+  verified independent sources, including RateYourMusic and Last.fm. The removal of
+  this claim is not justified based on the evidence. The only reference for the removed
+  claim (English Wikipedia) could not be verified due to a 403 error, but this does
+  not negate the corroboration from other sources. Therefore, the removal of the Eurodance
+  genre claim is incorrect.
+rcid: 2549494437
+revid: 2472858881
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rateyourmusic.com/release/single/snap_/rhythm_is_a_dancer/
+- provenance: verified
+  supports_claim: true
+  url: https://www.last.fm/music/Snap!/+wiki
+timestamp: '2026-04-11T11:06:59.469783+00:00'
+title: Q705689
+turns: 1
+value_label: Eurodance
+verdict: incorrect

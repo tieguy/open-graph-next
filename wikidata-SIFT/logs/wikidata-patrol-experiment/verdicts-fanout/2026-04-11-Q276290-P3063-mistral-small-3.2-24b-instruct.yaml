@@ -1,0 +1,24 @@
+completion_tokens: 759
+cost_usd: 0.00608184375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62849
+property: P3063
+property_label: gestation period
+rationale: The sources consistently support a gestation period of around 70 days for
+  naked mole-rats. The change to '67 day' is not supported by the evidence.
+rcid: 2550579357
+revid: 2473911257
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ielc.libguides.com/sdzg/factsheets/naked-mole-rat/reproduction
+- provenance: verified
+  supports_claim: true
+  url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0017744
+timestamp: '2026-04-11T09:15:58.185188+00:00'
+title: Q276290
+turns: 5
+value_label: null
+verdict: incorrect

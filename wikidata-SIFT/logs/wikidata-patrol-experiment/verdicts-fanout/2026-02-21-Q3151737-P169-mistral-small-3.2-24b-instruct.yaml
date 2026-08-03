@@ -1,0 +1,26 @@
+completion_tokens: 341
+cost_usd: 0.0040776
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42579
+property: P169
+property_label: chief executive officer
+rationale: The edit claims that Sven Biscop is the chief executive officer of EGMONT
+  – The Royal Institute for International Relations. However, the fetched sources
+  indicate that he is actually the director of the Europe in the World programme at
+  Egmont. There is no mention of him holding the position of chief executive officer.
+rcid: 2540921501
+revid: 2464712523
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.egmontinstitute.be/staff/sven-biscop/
+- provenance: verified
+  supports_claim: false
+  url: https://research.kent.ac.uk/global-europe-centre/professor-sven-biscop/
+timestamp: '2026-02-21T00:18:11.725926+00:00'
+title: Q3151737
+turns: 4
+value_label: Sven Biscop
+verdict: incorrect

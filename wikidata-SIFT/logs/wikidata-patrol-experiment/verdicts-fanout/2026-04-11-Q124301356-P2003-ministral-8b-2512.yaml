@@ -1,0 +1,31 @@
+completion_tokens: 1625
+cost_usd: 0.0024319800000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27235
+property: P2003
+property_label: Instagram username
+rationale: The new Instagram username `/lunitheatre/` is invalid because Instagram
+  usernames must include the domain (e.g., `instagram.com`). The old value (`https://www.instagram.com/lunitheatre/`)
+  was correct and verifiable. No independent sources confirm the use of a minimal
+  username format for UniThéâtre, and the edit removed a correct reference in favor
+  of an incorrect one. The change is unsupported by any evidence and contradicts standard
+  Instagram username conventions.
+rcid: 2551326120
+revid: 2474633291
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://instantusername.com/instagram-username-checker/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lunitheatre.ca/fr/notre-histoire
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelalberta.com/listings/lunitheatre-7145
+timestamp: '2026-04-11T13:03:16.244304+00:00'
+title: Q124301356
+turns: 3
+value_label: null
+verdict: incorrect

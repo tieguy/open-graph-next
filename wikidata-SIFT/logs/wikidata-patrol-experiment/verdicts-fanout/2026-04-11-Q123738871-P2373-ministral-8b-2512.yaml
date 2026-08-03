@@ -1,0 +1,30 @@
+completion_tokens: 1891
+cost_usd: 0.0044039100000000005
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33664
+property: P2373
+property_label: Genius artist ID
+rationale: The Genius artist ID claim 'Josh-universe' for Josh Universe (Q123738871)
+  lacks any references or verifiable evidence. Independent sources, including Genius.com,
+  do not confirm this ID for the analog astronaut/biohacker Josh Universe. The only
+  Genius artist page found corresponds to a different entity (Josh A, musician), and
+  no direct verification of the ID was possible.
+rcid: 2551429578
+revid: 2474729584
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Josh-a
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/discussions/266607-Artist-merge-josh-homme-joshua-homme
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/discussions/280987-Whats-the-easiest-way-to-get-an-artist-id
+timestamp: '2026-04-11T06:41:50.962285+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: unverifiable

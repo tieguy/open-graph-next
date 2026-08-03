@@ -1,0 +1,24 @@
+completion_tokens: 642
+cost_usd: 0.006626700000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 129966
+property: P856
+property_label: official website
+rationale: No reliable, verifiable source was found confirming that https://www.aeromexico.com/
+  is the official website for Uozu. Despite extensive searches for Aeromexico's corporate
+  registry, contact information, and domain ownership, no authoritative source was
+  located. The search yielded zero results when attempting to trace Aeromexico's official
+  registration or corporate details, and the only captured source, when fetched directly,
+  returned a server error without content to verify. The absence of fetches returning
+  content means no verified source exists in the provenance record. Therefore, there
+  is no verified evidence confirming or denying the claim.
+rcid: null
+revid: 2471397246
+sources: []
+timestamp: '2026-04-07T03:32:03.944626+00:00'
+title: Q819613
+turns: 15
+value_label: null
+verdict: unverifiable

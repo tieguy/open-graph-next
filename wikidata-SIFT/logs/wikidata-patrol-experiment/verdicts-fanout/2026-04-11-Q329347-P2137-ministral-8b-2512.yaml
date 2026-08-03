@@ -1,0 +1,21 @@
+completion_tokens: 1825
+cost_usd: 0.01804695
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 137586
+property: P2137
+property_label: total equity
+rationale: The investigation was unable to verify the new value of total equity for
+  Lukoil due to restrictions on fetching the cited PDF and inability to access independent
+  sources. The new value does not align with the specified point in time (2020) and
+  matches the 2021 value instead. Without direct access to the referenced financial
+  statement or independent corroboration, the edit cannot be confirmed or denied.
+rcid: 2550551160
+revid: 2473884267
+sources: []
+timestamp: '2026-04-11T06:54:11.009310+00:00'
+title: Q329347
+turns: 5
+value_label: null
+verdict: unverifiable

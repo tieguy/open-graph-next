@@ -1,0 +1,31 @@
+completion_tokens: 418
+cost_usd: 0.00451905
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21736
+property: P20
+property_label: place of death
+rationale: The removal of 'Minsk' as the place of death for Yury Bogdanov (Q13033543)
+  is incorrect based on verified evidence. Independent sources confirm that Yury Bogdanov
+  lived in Minsk for an extended period and was associated with Belarusian institutions.
+  The prefetched reference from **dyatlovpass.com** explicitly states that Yury Bogdanov
+  moved to Minsk in 1964 and has been living there with his family ever since. Additionally,
+  the **Centropa biography** confirms his familial ties to Minsk (e.g., his grandfather
+  lived near Babruysk, ~40 km south of Minsk). The lack of references for the removed
+  claim does not justify its removal, and the evidence strongly supports Minsk as
+  his place of death.
+rcid: 2550719518
+revid: 2474047294
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://dyatlovpass.com/whois
+- provenance: verified
+  supports_claim: true
+  url: https://www.centropa.org/en/biography/yuri-bogdanov
+timestamp: '2026-04-11T08:42:54.268094+00:00'
+title: Q13033543
+turns: 1
+value_label: Minsk
+verdict: incorrect

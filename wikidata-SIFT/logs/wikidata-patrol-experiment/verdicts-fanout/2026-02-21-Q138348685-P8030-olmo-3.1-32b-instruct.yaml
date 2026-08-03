@@ -1,0 +1,33 @@
+completion_tokens: 1421
+cost_usd: 0.005261
+diff_type: unknown
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22042
+property: P8030
+property_label: military size designation
+rationale: Multiple secondary but authoritative sources, including mirrored NATO Order
+  of Battle documents and aviation catalogues, confirm that 'escadrille' is the correct
+  Danish military designation for a unit between a flight and a squadron, and that
+  Eskadrille 729 was indeed listed as such in the Royal Danish Air Force. There is
+  no contradictory evidence and the claim is well-supported.
+rcid: 2540917290
+revid: 2464708541
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://studylib.net/doc/9015982/nato-order-of-battle-1989-mod-5
+- provenance: verified
+  supports_claim: true
+  url: https://aeroillustrations.com/wp-content/uploads/AI_Drawing_Catalogue-LowRes%20201703.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.scribd.com/doc/135966291/NATO-Order-of-battle-1989
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Escadrille
+timestamp: '2026-02-21T02:59:44.075607+00:00'
+title: Q138348685
+turns: 3
+value_label: escadrille
+verdict: verified-high

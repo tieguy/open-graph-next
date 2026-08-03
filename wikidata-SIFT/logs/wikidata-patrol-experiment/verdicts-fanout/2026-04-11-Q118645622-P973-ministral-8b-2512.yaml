@@ -1,0 +1,29 @@
+completion_tokens: 2074
+cost_usd: 0.0082641
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 72118
+property: P973
+property_label: described at URL
+rationale: The reference added to P973 (described at URL) for Q118645622 points to
+  **https://durandal.gg**, which is a fan-made resource focused on weapon rankings
+  and TTK calculations for the game 'Marathon'. This site is not an authoritative
+  or official source for describing the game itself. The official website for the
+  game, **https://www.marathonthegame.com**, is the appropriate and verified source
+  for such claims. The addition of this reference is not supported by authoritative
+  evidence.
+rcid: null
+revid: 2470743360
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://durandal.gg
+- provenance: reported
+  supports_claim: true
+  url: https://www.marathonthegame.com
+timestamp: '2026-04-11T13:46:45.769613+00:00'
+title: Q118645622
+turns: 5
+value_label: null
+verdict: suspect

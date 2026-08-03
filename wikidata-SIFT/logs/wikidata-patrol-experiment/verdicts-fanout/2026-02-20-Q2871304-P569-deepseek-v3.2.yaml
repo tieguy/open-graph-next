@@ -1,0 +1,31 @@
+completion_tokens: 1573
+cost_usd: 0.02653052
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 95447
+property: P569
+property_label: date of birth
+rationale: The investigation found contradictory evidence from different sources.
+  WikiTree cites a FamilySearch record supporting May 1, 1806, while Clairval.com
+  and GeneaStar (the current Wikidata reference) state March 1, 1806. Without direct
+  access to the primary civil registration record to resolve this conflict, and with
+  conflicting secondary sources, the claim cannot be confirmed or denied with sufficient
+  confidence.
+rcid: 2540934282
+revid: 2464724785
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Marceau-574
+- provenance: verified
+  supports_claim: false
+  url: https://www.clairval.com/en/captain-auguste-marceau/
+- provenance: reported
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/marceaua/auguste-marceau
+timestamp: '2026-02-20T18:18:54.282402+00:00'
+title: Q2871304
+turns: 8
+value_label: null
+verdict: unverifiable

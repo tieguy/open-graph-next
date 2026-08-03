@@ -1,0 +1,29 @@
+completion_tokens: 1008
+cost_usd: 0.0047906625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49675
+property: P18
+property_label: image
+rationale: The edit changes the image of Leeseo to 'IVE Leeseo 260321.jpg'. However,
+  no verifiable sources were found to confirm the correctness of this new image. The
+  sources consulted did not provide any direct confirmation or contradiction of the
+  claim.
+rcid: 2551399257
+revid: 2474703093
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.idolwiki.net/wiki/Leeseo
+- provenance: verified
+  supports_claim: false
+  url: https://www.kpopinfo.com/leeseo
+- provenance: verified
+  supports_claim: false
+  url: https://www.stardailynews.com/ive-leeseo-recent-photo/
+timestamp: '2026-04-07T09:40:27.738607+00:00'
+title: Q109572155
+turns: 9
+value_label: null
+verdict: unverifiable

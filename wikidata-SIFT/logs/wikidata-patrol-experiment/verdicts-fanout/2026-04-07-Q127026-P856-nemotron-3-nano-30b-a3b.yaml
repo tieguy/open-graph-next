@@ -1,0 +1,25 @@
+completion_tokens: 652
+cost_usd: 0.008346300000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 164318
+property: P856
+property_label: official website
+rationale: I attempted to verify the claim that 'https://www.vietnamairlines.com'
+  is the correct official website for Sakurai, but could not confirm this through
+  any independent sources. No authoritative Japanese government or Sakurai city official
+  website was locatable. A web fetch of the provided URL returned only a promotional
+  site for Vietnam Airlines, not a site about Japanese municipalities. Multiple searches
+  for the city's official website returned no working results or confirmed URLs.
+rcid: 2551422192
+revid: 2474723676
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.vietnamairlines.com
+timestamp: '2026-04-07T08:44:37.028917+00:00'
+title: Q127026
+turns: 15
+value_label: null
+verdict: unverifiable

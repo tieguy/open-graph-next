@@ -1,0 +1,32 @@
+completion_tokens: 2350
+cost_usd: 0.00472554
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34767
+property: P735
+property_label: given name
+rationale: The investigation could not verify the correctness of the change from 'Dong-sin'
+  to 'Seo, Dong Shin' for the given name of Q52661852 due to the unavailability of
+  search tools and lack of independent corroborating sources. The prefetched references
+  only confirm the existence of individuals with similar names but in unrelated fields
+  (entertainment), and no references were attached to the claim. Without additional
+  verified sources or references, it is impossible to determine the validity of the
+  edit.
+rcid: null
+revid: 2471550177
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.namu.wiki/w/%EC%84%9C%EB%8F%99%EC%A7%84(1992)
+- provenance: verified
+  supports_claim: false
+  url: https://kpop.fandom.com/wiki/Seo_Dong_Sung
+- provenance: verified
+  supports_claim: false
+  url: https://mydramalist.com/people/38607-seo-dong-sung
+timestamp: '2026-04-11T08:25:19.124806+00:00'
+title: Q52661852
+turns: 3
+value_label: Seo, Dong Shin
+verdict: unverifiable

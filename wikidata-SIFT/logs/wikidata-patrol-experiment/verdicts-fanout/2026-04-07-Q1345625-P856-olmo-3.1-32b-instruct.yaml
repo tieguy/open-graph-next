@@ -1,0 +1,26 @@
+completion_tokens: 1404
+cost_usd: 0.004866
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20118
+property: P856
+property_label: official website
+rationale: The removal of the HTTP official website was justified by a deprecation
+  reason referencing a migration to HTTPS, but no explicit migration notice or authoritative
+  documentation confirming this change was found. The current HTTPS website is operational,
+  supporting the plausibility of the change, but direct evidence is lacking.
+rcid: 2551431259
+revid: 2474730880
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.town.yuasa.wakayama.jp/
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T12:03:39.926262+00:00'
+title: Q1345625
+turns: 2
+value_label: null
+verdict: unverifiable

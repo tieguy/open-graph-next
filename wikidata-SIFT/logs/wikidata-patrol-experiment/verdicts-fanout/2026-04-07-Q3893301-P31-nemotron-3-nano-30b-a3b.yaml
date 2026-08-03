@@ -1,0 +1,22 @@
+completion_tokens: 589
+cost_usd: 0.0038166000000000003
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 73976
+property: P31
+property_label: instance of
+rationale: Despite extensive search, no web sources were successfully retrieved that
+  mention Q3893301 or confirm Panini Group as its instance of. The edit claims 'Panini
+  Group' is the instance of value, but no verifiable source was accessible. Cached
+  references in the edit record appear to point to inaccessible content (though no
+  active blocking domains were detected), and no independent confirmation was found
+  through available web search operations.
+rcid: null
+revid: 2464989926
+sources: []
+timestamp: '2026-04-07T07:29:09.166374+00:00'
+title: Q3893301
+turns: 15
+value_label: Panini Group
+verdict: unverifiable

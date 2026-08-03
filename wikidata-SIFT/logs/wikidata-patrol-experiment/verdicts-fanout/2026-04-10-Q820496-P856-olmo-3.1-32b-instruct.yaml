@@ -1,0 +1,26 @@
+completion_tokens: 203
+cost_usd: 0.0039380000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19081
+property: P856
+property_label: official website
+rationale: The cited URL https://www.alaskaair.com is the official website of Alaska
+  Airlines, an airline company based in the United States, and does not contain any
+  content related to Kōnan-shi, a city in Aichi Prefecture, Japan. No evidence was
+  found indicating that this URL is the official website for Kōnan-shi. The source
+  was fetched and verified to belong to Alaska Airlines, not Kōnan-shi. No independent
+  sources were found that confirm this website as the official website of Kōnan-shi.
+  Therefore, the claim cannot be verified.
+rcid: null
+revid: 2471591782
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.alaskaair.com
+timestamp: '2026-04-10T13:52:52.888418+00:00'
+title: Q820496
+turns: 1
+value_label: null
+verdict: unverifiable

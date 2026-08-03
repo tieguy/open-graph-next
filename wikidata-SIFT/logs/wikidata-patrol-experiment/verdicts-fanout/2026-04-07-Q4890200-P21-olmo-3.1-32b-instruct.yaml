@@ -1,0 +1,20 @@
+completion_tokens: 828
+cost_usd: 0.0065054
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30043
+property: P21
+property_label: sex or gender
+rationale: No reliable, independently verifiable sources were found that support assigning
+  the gender identity 'trans woman' to Bilintx, a 19th-century Basque writer. The
+  claim lacks primary or secondary evidence and thus cannot be confirmed or denied
+  based on current available information.
+rcid: null
+revid: 2470741044
+sources: []
+timestamp: '2026-04-07T09:38:55.402540+00:00'
+title: Q4890200
+turns: 5
+value_label: trans woman
+verdict: unverifiable

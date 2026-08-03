@@ -1,0 +1,36 @@
+completion_tokens: 1323
+cost_usd: 0.006466
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28361
+property: P18
+property_label: image
+rationale: No authoritative or independent source confirms that the new image is the
+  correct and official representation of Sal Da Vinci for the 2026 Festival di Sanremo.
+  The official website does not display or reference the image, and major Italian
+  news outlets do not corroborate its use. Until proper sourcing is provided, this
+  change should be regarded with suspicion.
+rcid: null
+revid: 2470471869
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://saldavinci.it
+- provenance: reported
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Sal_Da_Vinci
+- provenance: reported
+  supports_claim: false
+  url: https://www.corriere della sera.it
+- provenance: reported
+  supports_claim: false
+  url: https://ansa.it
+- provenance: reported
+  supports_claim: false
+  url: https://www.repubblica.it
+timestamp: '2026-04-07T05:29:41.984566+00:00'
+title: Q2283974
+turns: 4
+value_label: null
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 951
+cost_usd: 0.0058224
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26259
+property: P641
+property_label: sport
+rationale: The Australian Open is universally recognized as a tennis tournament. The
+  claim that it is an Australian rules football event is unsupported by the cited
+  French Wikipedia reference and contradicted by multiple independent authoritative
+  sources, including the official Australian Open website. The edit should be reverted.
+rcid: 2551269774
+revid: 2474579679
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Australian_Open
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Australian_Open
+- provenance: verified
+  supports_claim: false
+  url: https://ausopen.com/
+timestamp: '2026-04-10T13:09:13.436547+00:00'
+title: Q60874
+turns: 1
+value_label: Australian rules football
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 2125
+cost_usd: 0.055886000000000005
+diff_type: qualifier_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 45261
+property: P3602
+property_label: candidacy in election
+rationale: Multiple authoritative, independent sources confirm the claim. Official
+  French government election data (Ministry of Interior via Bien Public) lists David
+  Carmier as an elected candidate in the 2020 Sartrouville municipal election. The
+  official candidate list (Le Parisien/Ministry of Interior) from March 3, 2020, specifically
+  shows him in position 7 on the 'SARTROUVILLE J'AIME MA VILLE' list, which matches
+  all qualifiers already in the Wikidata statement. The claim is well-supported by
+  primary electoral sources.
+rcid: 2540916603
+revid: 2464707960
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bienpublic.com/elections/resultats/elections-municipales-2020?commune=78586&circonscription=7805
+- provenance: verified
+  supports_claim: true
+  url: https://www.leparisien.fr/yvelines-78/sartrouville-78500/candidats-aux-elections-municipales-2020-a-sartrouville-06-03-2020-ORZ7COCO35E5BD533ZS3DBLJ6A.php
+timestamp: '2026-02-21T03:12:26.857859+00:00'
+title: Q47259332
+turns: 3
+value_label: 2020 Sartrouville municipal election
+verdict: verified-high

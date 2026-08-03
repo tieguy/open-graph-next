@@ -1,0 +1,30 @@
+completion_tokens: 1794
+cost_usd: 0.01366269
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 105163
+property: P9493
+property_label: artist files at
+rationale: The edit changes the artist files at property for Joseph Glasco from Frick
+  Art Research Library (Q5503390) to Archives of American Art (Q2860568). The old
+  value was supported by a specific reference URL and an Artist File ID qualifier,
+  indicating a direct and authoritative source. The new value lacks a new reference
+  URL or independent corroboration that the Archives of American Art is the primary
+  location for Joseph Glasco's artist files. The Archives of American Art holds his
+  papers, but this does not necessarily confirm it as the primary location for his
+  artist files. The edit lacks sufficient evidence to justify the change.
+rcid: 2550520896
+revid: 2473855106
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.aaa.si.edu/collections/joseph-glasco-papers-10523
+- provenance: reported
+  supports_claim: false
+  url: https://research.frick.org/directory/viewItem/3523
+timestamp: '2026-04-11T13:31:19.219543+00:00'
+title: Q6283474
+turns: 4
+value_label: Archives of American Art
+verdict: suspect

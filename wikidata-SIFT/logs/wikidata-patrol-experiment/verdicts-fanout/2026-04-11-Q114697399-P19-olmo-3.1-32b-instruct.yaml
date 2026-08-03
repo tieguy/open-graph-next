@@ -1,0 +1,30 @@
+completion_tokens: 1770
+cost_usd: 0.0038146
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13763
+property: P19
+property_label: place of birth
+rationale: A secondary source (fandom wiki) states that T. J. Sullivan was born in
+  Milford, Connecticut. However, this is not corroborated by primary or independent
+  authoritative sources such as official biographies, interviews, or reputable news
+  outlets. Therefore, while the claim is plausible, it cannot be confirmed with high
+  confidence.
+rcid: 2551385479
+revid: 2474690011
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://howtotrainyourdragon.fandom.com/wiki/T.J._Sullivan
+- provenance: verified
+  supports_claim: false
+  url: http://www.tjsullivan.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eliteprospects.com/player/740649/tj-sullivan
+timestamp: '2026-04-11T10:29:19.065828+00:00'
+title: Q114697399
+turns: 1
+value_label: Milford
+verdict: plausible

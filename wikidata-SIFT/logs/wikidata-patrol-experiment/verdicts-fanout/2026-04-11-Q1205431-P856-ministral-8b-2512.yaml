@@ -1,0 +1,32 @@
+completion_tokens: 1917
+cost_usd: 0.00683166
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 65951
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.town.kagamiishi.fukushima.jp/',
+  is consistently referenced in multiple claims related to Kagamiishi (population,
+  electoral district, events) and aligns with the town's administrative context. The
+  new value, 'https://www.latamairlines.com/', is unrelated to Kagamiishi and is an
+  airline website, not a local government site. The prefetched content confirms the
+  new value is not relevant to Kagamiishi. The edit is incorrect as it replaces a
+  verified official website with an unrelated external link.
+rcid: null
+revid: 2471668584
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.town.kagamiishi.fukushima.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.latamairlines.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tohokukanko.jp/en/attractions/detail_1006069.html
+timestamp: '2026-04-11T12:34:28.811013+00:00'
+title: Q1205431
+turns: 6
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 2269
+cost_usd: 0.005567000000000001
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21028
+property: P1866
+property_label: Catholic Hierarchy diocese ID
+rationale: The Wikipedia infobox for the Roman Catholic Diocese of Campo Limpo explicitly
+  lists the Catholic Hierarchy ID as 'cmli', providing independent secondary confirmation.
+  However, the primary cited source (Catholic-Hierarchy.org) could not be directly
+  accessed due to domain blocking, preventing full primary verification.
+rcid: 2550635860
+revid: 2473965993
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Roman_Catholic_Diocese_of_Campo_Limpo
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.catholic-hierarchy.org/diocese/dcmli.html
+- provenance: verified
+  supports_claim: null
+  url: https://gcatholic.org/dioceses/diocese/camp6
+timestamp: '2026-04-11T13:25:49.985837+00:00'
+title: Q867602
+turns: 1
+value_label: null
+verdict: verified-low

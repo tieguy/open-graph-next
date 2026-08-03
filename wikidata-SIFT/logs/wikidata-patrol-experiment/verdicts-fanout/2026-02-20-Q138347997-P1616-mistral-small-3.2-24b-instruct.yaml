@@ -1,0 +1,25 @@
+completion_tokens: 565
+cost_usd: 0.002717
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25475
+property: P1616
+property_label: SIREN number
+rationale: Multiple independent sources confirm that the SIREN number for Inoxkit
+  is 801422437. The sources include Le Figaro Entreprises and Verif, both of which
+  explicitly list the SIREN number as 801422437.
+rcid: 2540939249
+revid: 2464728837
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://entreprises.lefigaro.fr/inoxkit-83/entreprise-801422437
+- provenance: verified
+  supports_claim: true
+  url: https://www.verif.com/societe/IKARE-801422437/
+timestamp: '2026-02-20T15:46:47.624816+00:00'
+title: Q138347997
+turns: 3
+value_label: null
+verdict: verified-high

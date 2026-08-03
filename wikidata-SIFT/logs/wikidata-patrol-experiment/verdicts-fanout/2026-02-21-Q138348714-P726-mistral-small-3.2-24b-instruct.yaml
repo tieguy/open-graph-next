@@ -1,0 +1,22 @@
+completion_tokens: 518
+cost_usd: 0.00266165
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27474
+property: P726
+property_label: candidate
+rationale: The fetched content from Le Journal de Saône-et-Loire confirms that Francine
+  Granié was indeed a candidate in the 2020 Sartrouville municipal election, supporting
+  the update of her candidacy for Ensemble pour Sartrouville.
+rcid: 2540918504
+revid: 2464709666
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lejsl.com/elections/resultats/elections-municipales-2020?commune=78586
+timestamp: '2026-02-21T02:21:02.021180+00:00'
+title: Q138348714
+turns: 3
+value_label: Francine Granié
+verdict: verified-high

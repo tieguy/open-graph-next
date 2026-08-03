@@ -1,0 +1,42 @@
+completion_tokens: 4288
+cost_usd: 0.157281
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 135841
+property: P570
+property_label: date of death
+rationale: The edit sets Joseph ha-Kohen's date of death to 1575, but evidence indicates
+  this represents the end date of his chronicle, not his actual death. The Jewish
+  Encyclopedia states he 'died in 1575 or shortly after,' but scholarly sources (Pollak
+  1975, Cassen 2014) explicitly distinguish between when his chronicle reaches 1575
+  and when he died, with Pollak stating 'He seems to have died either in 1577 or in
+  1578.' The National Library of Israel Authority File (already in Wikidata as the
+  preferred statement) indicates 'no earlier than 1577,' and Encyclopedia.com cites
+  1578. While 1575 is chronologically plausible as an earliest possible bound, multiple
+  authoritative sources favor 1577 as the actual death year. Setting 1575 without
+  qualification obscures this historical uncertainty and conflicts with the item's
+  own preferred statement.
+rcid: 2540983578
+revid: 2464769946
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jewishencyclopedia.com/articles/8852-joseph-ben-joshua-ben-meir-ha-kohen
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/joseph-ha-kohen
+- provenance: verified
+  supports_claim: false
+  url: https://www.chabad.org/library/article_cdo/aid/111903/jewish/Rabbi-Joseph-HaKohen.htm
+- provenance: reported
+  supports_claim: false
+  url: https://www.jstor.org/stable/20139182
+- provenance: reported
+  supports_claim: false
+  url: https://www.cambridge.org/core/journals/ajs-review/article/last-spanish-expulsion-in-europe-milan-15651597/5BC3AC69B6791A51F502F2E1C378FDA4
+timestamp: '2026-02-19T23:14:11.423693+00:00'
+title: Q1708321
+turns: 7
+value_label: null
+verdict: suspect

@@ -1,0 +1,25 @@
+completion_tokens: 2197
+cost_usd: 0.00248463
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31910
+property: P279
+property_label: subclass of
+rationale: The edit changing the subclass of Maduro-Kangeanic from 'Malayo-Sumbawan'
+  to 'Javanic' is strongly supported by verified evidence from en.wikiquote.org, which
+  explicitly classifies Kangeanic as an Eastern Javanic language. The item's broader
+  linguistic context (e.g., Madurese being a Javanic language) further corroborates
+  this classification. The cited reference (Q123473780) could not be accessed, but
+  the independent evidence is sufficient to confirm the edit's correctness.
+rcid: null
+revid: 2433618650
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikiquote.org/wiki/Kangeanic
+timestamp: '2026-04-11T14:51:35.528526+00:00'
+title: Q117085830
+turns: 4
+value_label: Javanic
+verdict: verified-high

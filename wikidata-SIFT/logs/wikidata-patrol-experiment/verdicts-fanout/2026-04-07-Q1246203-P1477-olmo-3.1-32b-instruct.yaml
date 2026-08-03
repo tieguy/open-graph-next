@@ -1,0 +1,19 @@
+completion_tokens: 1134
+cost_usd: 0.011268199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 52939
+property: P1477
+property_label: birth name
+rationale: No cited references exist for the birth name claim, and independent authoritative
+  sources could not be located to confirm or deny the new value. Without verifiable
+  evidence, the edit cannot be assessed as correct or incorrect.
+rcid: null
+revid: 2471495510
+sources: []
+timestamp: '2026-04-07T12:36:47.922023+00:00'
+title: Q1246203
+turns: 7
+value_label: null
+verdict: unverifiable

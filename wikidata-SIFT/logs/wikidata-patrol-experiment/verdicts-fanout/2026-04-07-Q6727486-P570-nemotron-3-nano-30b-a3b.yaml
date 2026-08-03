@@ -1,0 +1,25 @@
+completion_tokens: 749
+cost_usd: 0.00426115
+diff_type: qualifier_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 82227
+property: P570
+property_label: date of death
+rationale: No verifiable source could be located through web search to confirm or
+  refute the claim that '21 March 2026' is an appropriate qualifier for the date of
+  death. All searches for 'Madhumita Raut' yielded no relevant results from biographical
+  sources, news outlets, or official records. Direct searches for specific terms like
+  'Madhumita Raut March 2026', 'Madhumita Raut obituary', and 'Madhumita Raut verified'
+  produced no meaningful results, leaving no factual basis to assess the claim.
+rcid: 2551232239
+revid: 2474544637
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q6727486
+timestamp: '2026-04-07T09:11:39.906589+00:00'
+title: Q6727486
+turns: 15
+value_label: null
+verdict: unverifiable

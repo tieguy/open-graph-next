@@ -1,0 +1,31 @@
+completion_tokens: 2334
+cost_usd: 0.004397
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14983
+property: P13240
+property_label: Die Tageszeitung tag ID
+rationale: There is no publicly accessible evidence confirming that 't5749350' is
+  the correct Die Tageszeitung tag ID for the 2026 Rhineland-Palatinate state election.
+  The edit changes the value from '!t5749350' to 't5749350', but without any references
+  or independent confirmation, it cannot be verified whether the new value is accurate
+  or the old value was incorrect. A reference to Die Tageszeitung's coverage or an
+  official documentation of the tag ID is required to confirm this change.
+rcid: 2551379742
+revid: 2474684438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://politpro.eu/en/rhineland-palatinate
+- provenance: verified
+  supports_claim: false
+  url: https://www.newswall.org/summary/election-compass-rhineland-palatinate-2026-state-election-on-march-22nd
+- provenance: verified
+  supports_claim: false
+  url: https://www.wahlen.rlp.de/fileadmin/wahlen.rlp.de/dokumente-wahlen/ltw/PDF/LW2026_Bekanntmachung_Landeslisten_LWL-1.pdf
+timestamp: '2026-04-11T11:31:36.604583+00:00'
+title: Q111251478
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 1765
+cost_usd: 0.00469983
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42214
+property: P2048
+property_label: height
+rationale: The new height value of '3.45 metre' for AuronPlay is physically implausible
+  for a human and contradicts multiple direct statements from AuronPlay himself on
+  Twitter, where he consistently stated his height as around 1.73 meters. No credible
+  source supports the new value, and the change lacks any references or corroboration.
+rcid: 2550021363
+revid: 2473369639
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://twitter.com/auronplay/status/504688181032517632
+- provenance: verified
+  supports_claim: false
+  url: https://twitter.com/auronplay/status/495315422062067713
+- provenance: verified
+  supports_claim: false
+  url: https://twitter.com/auronplay/status/351339588553412610
+- provenance: verified
+  supports_claim: false
+  url: https://www.foroalturas.com/t1222-cuanto-mide-auronplay-altura
+timestamp: '2026-04-11T13:24:38.202755+00:00'
+title: Q21126909
+turns: 3
+value_label: null
+verdict: incorrect

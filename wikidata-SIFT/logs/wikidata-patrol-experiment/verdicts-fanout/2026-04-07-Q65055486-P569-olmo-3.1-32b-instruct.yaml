@@ -1,0 +1,23 @@
+completion_tokens: 1236
+cost_usd: 0.0098104
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 45344
+property: P569
+property_label: date of birth
+rationale: The only reference provided for the new date of birth is English Wikipedia,
+  which is not an acceptable source for Wikidata claims regarding dates of birth.
+  Multiple independent searches did not yield any reliable or primary sources confirming
+  May 4, 1964 as Soleimani's date of birth.
+rcid: 2549965120
+revid: 2473316060
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Gholamreza_Soleimani
+timestamp: '2026-04-07T11:15:53.944583+00:00'
+title: Q65055486
+turns: 7
+value_label: null
+verdict: unverifiable

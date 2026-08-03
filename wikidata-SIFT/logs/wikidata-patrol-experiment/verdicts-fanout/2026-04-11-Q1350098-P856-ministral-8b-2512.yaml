@@ -1,0 +1,27 @@
+completion_tokens: 1794
+cost_usd: 0.0033612299999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33261
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.town.mizumaki.lg.jp/', was
+  confirmed by verified sources as the official website for Mizumaki. The new value,
+  'https://www.starflyer.jp', was not supported by any verified source and is unrelated
+  to local government services. The change from a verified official town website to
+  an unrelated domain is incorrect.
+rcid: null
+revid: 2471589734
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.crossroadfukuoka.jp/en/spot/13085
+- provenance: verified
+  supports_claim: false
+  url: https://prowrestling.fandom.com/wiki/Mizumaki,_Fukuoka
+timestamp: '2026-04-11T16:03:16.339976+00:00'
+title: Q1350098
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 2392
+cost_usd: 0.0043694
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14671
+property: P570
+property_label: date of death
+rationale: Multiple independent, reputable news sources (Reuters, BBC, Al Jazeera)
+  explicitly report that Esmaeil Khatib was killed on 18 March 2026, confirming the
+  new value for date of death. The previous value was a placeholder and not a valid
+  date. However, the edit did not include a citation to a reliable source, which is
+  a best-practice violation.
+rcid: 2549961667
+revid: 2473312868
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.reuters.com/world/middle-east/israel-says-it-killed-irans-intelligence-minister-tehran-2026-03-18/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/articles/c2d1dz14k51o
+- provenance: verified
+  supports_claim: true
+  url: https://www.aljazeera.com/news/2026/3/18/israel-says-it-killed-iran-intel-minister-in-third-assassination-in-2-days
+timestamp: '2026-04-11T12:10:56.119515+00:00'
+title: Q108120922
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,29 @@
+completion_tokens: 1166
+cost_usd: 0.016752
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 80262
+property: P569
+property_label: date of birth
+rationale: No reliable or accessible sources confirm the date of birth '18 February
+  1432' for Isabel Preysler. Multiple attempts to verify this claim failed, and the
+  date is inconsistent with known historical records of the subject. The previously
+  cited date should be restored.
+rcid: 2550296457
+revid: 2473636467
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Isabel_Preysler
+- provenance: reported
+  supports_claim: false
+  url: https://www.clara.es/celebrities/asi-fue-agitada-llegada-isabel-preysler-a-espana-60-fatal-galan-ambicion-y-mucho-poder-seduccion_32185
+- provenance: reported
+  supports_claim: false
+  url: https://www.isabelpreysler.com/
+timestamp: '2026-04-07T09:41:35.105164+00:00'
+title: Q437710
+turns: 10
+value_label: null
+verdict: incorrect

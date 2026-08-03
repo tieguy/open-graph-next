@@ -1,0 +1,31 @@
+completion_tokens: 3392
+cost_usd: 0.0083202
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31425
+property: P1087
+property_label: Elo rating
+rationale: The new rating value '2,243' (interpreted as 2425) is consistent with the
+  rating reported by Wikipedia as of November 2013, which cites FIDE's rating lists.
+  However, the cited FIDE source does not provide a directly browsable confirmation,
+  and the old value was incorrectly cited from a source that only covers up to 2001.
+  The value itself appears correct, but citation formatting and source accessibility
+  need improvement.
+rcid: 2550305107
+revid: 2473644942
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Nona_Gaprindashvili
+- provenance: verified
+  supports_claim: false
+  url: https://ratings.fide.com/history.asp?listtype=StandW
+- provenance: verified
+  supports_claim: false
+  url: https://ratings.fide.com/download_standard-ratings_by-month.asp
+timestamp: '2026-04-11T17:25:40.732371+00:00'
+title: Q231630
+turns: 1
+value_label: null
+verdict: verified-low

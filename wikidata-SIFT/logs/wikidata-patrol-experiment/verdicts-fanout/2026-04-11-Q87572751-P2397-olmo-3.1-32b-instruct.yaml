@@ -1,0 +1,29 @@
+completion_tokens: 1595
+cost_usd: 0.005206199999999999
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21246
+property: P2397
+property_label: YouTube channel ID
+rationale: The claim that '@MILEAGE-2145' is Ge Wang's YouTube channel ID is not supported
+  by any authoritative or reliable sources. Ge Wang's official faculty page and ORCID
+  record do not mention any YouTube channel, and the handle 'gewang' does not correspond
+  to a YouTube channel. Therefore, the removal of this claim was appropriate.
+rcid: 2550481042
+revid: 2473817201
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://faculty.rpi.edu/ge-wang
+- provenance: verified
+  supports_claim: false
+  url: https://pub.orcid.org/v3.0/0000-0002-2656-7705/education/9983933
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/gewang
+timestamp: '2026-04-11T09:47:24.302449+00:00'
+title: Q87572751
+turns: 1
+value_label: null
+verdict: incorrect

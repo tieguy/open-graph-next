@@ -1,0 +1,28 @@
+completion_tokens: 1140
+cost_usd: 0.003234525
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39627
+property: P27
+property_label: country of citizenship
+rationale: The removed claim of Sri Lankan citizenship for Nasdas could not be verified
+  or refuted based on the available sources. The item's other claims suggest a French
+  and Algerian background, but there is no clear evidence regarding Sri Lankan citizenship.
+rcid: null
+revid: 2470675650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lefigaro.fr/actualite-france/femmes-humiliees-discrimination-anti-blanc-dans-le-monde-de-nasdas-l-influenceur-qui-promeut-une-effarante-contre-culture-en-france-20250404
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/mouv/nasdas-va-payer-des-profs-pour-donner-des-cours-dans-son-quartier-4691544
+- provenance: verified
+  supports_claim: false
+  url: https://www.marianne.net/politique/nasdas-le-robin-des-bois-de-snapchat-en-guerre-avec-la-mairie-rn-de-perpignan
+timestamp: '2026-04-07T12:57:21.331963+00:00'
+title: Q126047616
+turns: 7
+value_label: Sri Lanka
+verdict: unverifiable

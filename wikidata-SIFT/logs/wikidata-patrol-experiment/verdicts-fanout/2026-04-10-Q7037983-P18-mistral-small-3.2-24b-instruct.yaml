@@ -1,0 +1,31 @@
+completion_tokens: 1296
+cost_usd: 0.0012795624999999999
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11600
+property: P18
+property_label: image
+rationale: The reference URL provided in the edit is unreachable. Independent sources
+  do not provide any confirmation of the image claim. No primary source could be identified
+  to confirm the image.
+rcid: 2550321180
+revid: 2473660721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://literaturasiarta.ro/nina-josu/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flickr.com/photos/95243741@N03/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gmanetwork.com/entertainment/photos/in-photos-where-is-nina-jose-now/13948/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gmanetwork.com/entertainment/photos/nina-jose-announces-pregnancy/24314/
+timestamp: '2026-04-10T11:17:19.467564+00:00'
+title: Q7037983
+turns: 1
+value_label: null
+verdict: unverifiable

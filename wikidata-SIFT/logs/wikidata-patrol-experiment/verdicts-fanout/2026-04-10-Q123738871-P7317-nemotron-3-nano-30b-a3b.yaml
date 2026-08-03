@@ -1,0 +1,40 @@
+completion_tokens: 13908
+cost_usd: 0.022850999999999996
+diff_type: qualifier_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 154380
+property: P7317
+property_label: iHeart artist ID
+rationale: The edit adds the numeric qualifier "45306804" to the iHeart artist ID
+  of Josh Universe, but none of the consulted sources provide confirmation that this
+  number is the correct iHeart artist ID. The fetched biography (https://fit.academia.edu/JoshUniverse)
+  confirms biographical details but does not mention an iHeart ID. Searches across
+  iHeart.com and help documentation return no matching artist page or ID reference,
+  leaving the claim unsupported and thus unverifiable.
+rcid: 2551429781
+revid: 2474729721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: reported
+  supports_claim: false
+  url: https://help.iheart.com/hc/en-us/categories/203849207-iHeart-for-Artists
+- provenance: reported
+  supports_claim: false
+  url: https://help.iheart.com/hc/en-us/articles/228919307-Artist-bios-on-iHeart
+- provenance: reported
+  supports_claim: false
+  url: https://www.iheart.com/artist/
+- provenance: reported
+  supports_claim: false
+  url: https://www.iheart.com/artist/josh-eacrett-31289964/
+- provenance: reported
+  supports_claim: false
+  url: https://www.iheart.com/artist/profile-30701051/
+timestamp: '2026-04-10T10:16:36.405326+00:00'
+title: Q123738871
+turns: 7
+value_label: null
+verdict: unverifiable

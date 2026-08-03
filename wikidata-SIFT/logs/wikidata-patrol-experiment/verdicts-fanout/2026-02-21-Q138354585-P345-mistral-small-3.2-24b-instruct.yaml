@@ -1,0 +1,22 @@
+completion_tokens: 729
+cost_usd: 0.0026403
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24216
+property: P345
+property_label: IMDb ID
+rationale: The provided reference URL is inaccessible, and no independent sources
+  could be found to corroborate the IMDb ID claim. Therefore, the claim cannot be
+  verified at this time.
+rcid: 2541056045
+revid: 2464838186
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.backstage.com/u/bella-hue/
+timestamp: '2026-02-21T03:50:40.946529+00:00'
+title: Q138354585
+turns: 4
+value_label: null
+verdict: unverifiable

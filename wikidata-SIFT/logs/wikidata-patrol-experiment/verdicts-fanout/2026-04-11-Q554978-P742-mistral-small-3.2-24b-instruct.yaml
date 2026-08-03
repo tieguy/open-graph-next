@@ -1,0 +1,23 @@
+completion_tokens: 1068
+cost_usd: 0.0042734125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44797
+property: P742
+property_label: pseudonym
+rationale: The edit changes the pseudonym from 'Iceman' to 'Aokiji.' The reference
+  cited (Czech National Authority Database) could not be verified. Independent sources
+  refer to Richard Kuklinski as 'The Iceman,' but do not mention 'Aokiji.' Therefore,
+  the edit appears to be incorrect.
+rcid: null
+revid: 2471526447
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://criminalminds.fandom.com/wiki/Richard_Kuklinski
+timestamp: '2026-04-11T18:14:18.604986+00:00'
+title: Q554978
+turns: 4
+value_label: null
+verdict: incorrect

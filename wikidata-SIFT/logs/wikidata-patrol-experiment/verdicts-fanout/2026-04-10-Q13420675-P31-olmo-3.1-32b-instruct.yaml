@@ -1,0 +1,30 @@
+completion_tokens: 775
+cost_usd: 0.0033585999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14468
+property: P31
+property_label: instance of
+rationale: Three independent and authoritative sources — a university bulletin, a
+  professional certification website, and another university program page — all explicitly
+  present Library and Information Science as an academic degree at the graduate level.
+  This confirms that 'academic degree' is a correct and appropriate value for P31
+  for this item.
+rcid: 2551339635
+revid: 2474645889
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bulletins.wayne.edu/graduate/school-information-sciences/masters-programs/library-and-information-science/
+- provenance: verified
+  supports_claim: true
+  url: https://www.librariancertification.com/types-of-library-information-science-degree-programs/
+- provenance: verified
+  supports_claim: true
+  url: https://www.simmons.edu/graduate/academic-programs/graduate-and-certificate-programs/library-and-information-science-ms/
+timestamp: '2026-04-10T13:08:46.061052+00:00'
+title: Q13420675
+turns: 1
+value_label: academic degree
+verdict: verified-high

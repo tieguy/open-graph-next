@@ -1,0 +1,36 @@
+completion_tokens: 1497
+cost_usd: 0.00327267
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23316
+property: P463
+property_label: member of
+rationale: The claim that Rigoberta Menchú (Q188620) is an honorary member of Paris
+  Saint-Germain FC (Q483020) is unsupported by any credible or authoritative source.
+  None of the verified sources—including Nobel Prize documentation, Nobel Women’s
+  Initiative, Biblioteca Nacional, and The Famous People—mention this affiliation.
+  Rigoberta Menchú’s documented work and affiliations are centered around human rights
+  activism, political parties, and humanitarian organizations, with no connection
+  to sports or corporate entities like Paris Saint-Germain FC. The lack of evidence
+  and the presence of a revert tag strongly indicate this claim is incorrect.
+rcid: 2549478649
+revid: 2472843478
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/nobel_prizes/peace/laureates/1992/tum-facts.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelwomensinitiative.org/rigobertamenchutum
+- provenance: verified
+  supports_claim: false
+  url: https://www.bibliotecanacional.gob.cl/noticias/rigoberta-menchu-0
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/rigoberta-mench-5732.php
+timestamp: '2026-04-10T08:27:36.608313+00:00'
+title: Q188620
+turns: 1
+value_label: Paris Saint-Germain FC
+verdict: incorrect

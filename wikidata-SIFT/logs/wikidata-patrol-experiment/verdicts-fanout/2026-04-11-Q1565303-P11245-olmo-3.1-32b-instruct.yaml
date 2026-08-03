@@ -1,0 +1,29 @@
+completion_tokens: 1806
+cost_usd: 0.0031296
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10230
+property: P11245
+property_label: YouTube handle
+rationale: Multiple independent and authoritative sources confirm that 'neznidalibor'
+  is the correct YouTube handle for Nežni Dalibor and that the associated channel
+  ID is accurate. The official YouTube channel and external music databases explicitly
+  list the handle and channel ID.
+rcid: 2550452267
+revid: 2473788838
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Ne%C5%BEni_Dalibor
+- provenance: verified
+  supports_claim: true
+  url: https://muzika.sr/artists/neznidalibor
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/@neznidalibor
+timestamp: '2026-04-11T14:52:33.284597+00:00'
+title: Q1565303
+turns: 1
+value_label: null
+verdict: verified-high

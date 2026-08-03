@@ -1,0 +1,29 @@
+completion_tokens: 1444
+cost_usd: 0.0012967249999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11351
+property: P856
+property_label: official website
+rationale: Multiple independent sources, including Wikipedia and a company profile,
+  confirm that https://www.autech-elco.co.jp/ is the official website of Autech Elco.
+  The old URL http://www.autech-elco.co.jp/HOME/ does not appear to be referenced
+  by any reliable sources as the official website.
+rcid: 2550792597
+revid: 2474117804
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.autech-elco.co.jp/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Autech_Elco
+- provenance: verified
+  supports_claim: true
+  url: https://www.japanesearch.com/autech-elco
+timestamp: '2026-04-11T14:02:33.209632+00:00'
+title: Q11293291
+turns: 1
+value_label: null
+verdict: verified-high

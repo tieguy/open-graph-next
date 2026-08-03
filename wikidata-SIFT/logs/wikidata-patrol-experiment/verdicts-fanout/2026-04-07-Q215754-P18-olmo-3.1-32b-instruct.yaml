@@ -1,0 +1,27 @@
+completion_tokens: 1264
+cost_usd: 0.004532
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18868
+property: P18
+property_label: image
+rationale: The new image 'Schloss Güterfelde Carl Jöken und Hans Moser 017095.jpg'
+  fetched from Wikimedia Commons does not depict an energy drink and is unrelated
+  to the topic of the item. The previous image 'Energydrinks-collection.jpg' is widely
+  used and directly relevant. No reliable source supports the new image as appropriate
+  for 'energy drink.'
+rcid: 2549869901
+revid: 2473225851
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Schloss_G%C3%BCterfelde_Carl_J%C3%B6ken_und_Hans_Moser_017095.jpg
+- provenance: reported
+  supports_claim: true
+  url: https://www.google.com/search?q=Energydrinks-collection.jpg+energy+drink
+timestamp: '2026-04-07T03:15:22.483850+00:00'
+title: Q215754
+turns: 3
+value_label: null
+verdict: incorrect

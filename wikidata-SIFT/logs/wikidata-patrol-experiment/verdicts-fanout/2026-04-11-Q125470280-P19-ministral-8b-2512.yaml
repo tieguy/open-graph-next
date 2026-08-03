@@ -1,0 +1,28 @@
+completion_tokens: 1472
+cost_usd: 0.00165792
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19002
+property: P19
+property_label: place of birth
+rationale: The claim that Dan Wang (Q125470280) was born in Yunnan (Q43194) is supported
+  by a primary source (Rest of World interview), but the newly added reference is
+  invalid—it is a placeholder timestamp (`+2026-00-00T00:00:00Z`) rather than a valid,
+  verifiable URL. This makes the edit suspicious because the reference does not substantiate
+  the claim, and the placeholder is not a valid citation method. The claim itself
+  is plausible but lacks proper sourcing.
+rcid: 2550901709
+revid: 2474224431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://restofworld.org/2025/dan-wang-breakneck-book-china-tech/
+- provenance: verified
+  supports_claim: false
+  url: https://danwang.co/
+timestamp: '2026-04-11T07:40:06.216626+00:00'
+title: Q125470280
+turns: 2
+value_label: Yunnan
+verdict: suspect

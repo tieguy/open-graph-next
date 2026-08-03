@@ -1,0 +1,30 @@
+completion_tokens: 1918
+cost_usd: 0.003799
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13241
+property: P349
+property_label: NDL Authority ID
+rationale: The edit removed a qualifier from the NDL Authority ID (P349) statement
+  for Moto, but no cited or independent source justifies this change. General documentation
+  about the NDL Authority Data and Wikidata property P349 does not specify whether
+  a qualifier should be present or absent in this context. Removing qualifiers without
+  clear justification, especially when the claim is unsourced, is considered suspect.
+rcid: 2550869622
+revid: 2474193065
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ndl.go.jp/en/data/data_service/authorities.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.ndl.go.jp/en/dlib/standards/lod/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P349
+timestamp: '2026-04-11T15:42:54.724796+00:00'
+title: Q83680589
+turns: 1
+value_label: null
+verdict: suspect

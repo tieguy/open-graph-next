@@ -1,0 +1,26 @@
+completion_tokens: 3210
+cost_usd: 0.01222143
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 136700
+property: P18
+property_label: image
+rationale: The new image 'Sal da Vinci - conferenza stampa Festival di Sanremo 2026
+  (headshot).jpg' was confirmed to exist on Wikimedia Commons, but no independent,
+  verified sources (such as official news articles or the Sanremo Festival website)
+  confirm Sal Da Vinci's participation in the 2026 Sanremo Festival. The old image
+  was also confirmed to exist but lacked independent verification of its relevance
+  to the event as well. No references were cited for either image, and no additional
+  verified sources were found to support the change.
+rcid: null
+revid: 2470471869
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Sal_Da_Vinci
+timestamp: '2026-04-11T09:44:04.441932+00:00'
+title: Q2283974
+turns: 13
+value_label: null
+verdict: unverifiable

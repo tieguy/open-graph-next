@@ -1,0 +1,25 @@
+completion_tokens: 366
+cost_usd: 0.0033916
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15860
+property: P571
+property_label: inception
+rationale: The official company website states that CHN Energy was formally established
+  on November 28, 2017, following the merger of China Guodian Corporation and Shenhua
+  Group. This directly contradicts the new value of '2016' for the inception property.
+  The old value of '+2017-00-00T00:00:00Z' aligns with the establishment date reported
+  by the company. Changing the inception date to 2016 is not supported by the company's
+  own website and appears to be incorrect.
+rcid: 2549567339
+revid: 2472930201
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ceic.com/gjnyjtwwEn/jtgk/chnjtjs.shtml
+timestamp: '2026-04-11T16:20:21.867993+00:00'
+title: Q38180956
+turns: 1
+value_label: null
+verdict: suspect

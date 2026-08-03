@@ -1,0 +1,23 @@
+completion_tokens: 682
+cost_usd: 0.0036946000000000006
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 71164
+property: P734
+property_label: family name
+rationale: During the investigation, no sources were successfully fetched (web_fetch
+  calls returned no valid results), preventing direct verification of the claim. The
+  only reference identified from secondary searches points to Q6816529 without confirmation
+  of relevance, making the claim unverifiable.
+rcid: 2550214529
+revid: 2473556917
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/entity/Q6816529
+timestamp: '2026-04-07T11:41:34.315617+00:00'
+title: Q1991498
+turns: 9
+value_label: Menchov
+verdict: unverifiable

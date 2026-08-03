@@ -1,0 +1,23 @@
+completion_tokens: 901
+cost_usd: 0.00275589625
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26786
+property: P1142
+property_label: political ideology
+rationale: The lack of direct evidence from web searches and the official website
+  makes it challenging to verify the correctness of the reference removal. The absence
+  of clear, independent sources supporting the political ideology claim makes it difficult
+  to assess the validity of the reference removal.
+rcid: null
+revid: 2471555273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://msomosvenezuela.org/
+timestamp: '2026-04-07T11:22:57.687427+00:00'
+title: Q5550060
+turns: 5
+value_label: communism
+verdict: unverifiable

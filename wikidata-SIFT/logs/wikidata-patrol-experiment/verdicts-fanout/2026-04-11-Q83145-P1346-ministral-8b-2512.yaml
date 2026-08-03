@@ -1,0 +1,22 @@
+completion_tokens: 2276
+cost_usd: 0.00839577
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 79245
+property: P1346
+property_label: winner
+rationale: The edit changes the winner of the Africa Cup of Nations from Congo to
+  Morocco for the year 1972. While historical records indicate Morocco was the winner
+  in 1972, no verified sources were fetched or accessed during this investigation
+  due to restrictions on automated access to authoritative sports history databases.
+  The lack of verified sources and references attached to the edit means the claim
+  cannot be independently confirmed or verified.
+rcid: 2549717242
+revid: 2473075755
+sources: []
+timestamp: '2026-04-11T16:41:20.722236+00:00'
+title: Q83145
+turns: 7
+value_label: Morocco
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 1669
+cost_usd: 0.006305880000000001
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 73177
+property: P1556
+property_label: zbMATH author ID
+rationale: The zbMATH author ID 'roos.matts.1' for Matts Roos (Q23040018) was never
+  supported by any references or independent sources. The zbMATH database is unreachable
+  (HTTP 403 errors), and the obituary from Helsinki Sanomat does not mention any zbMATH
+  author ID. The claim lacked any evidence of validity, making its removal justified.
+rcid: 2550283313
+revid: 2473623545
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.hs.fi/muistot/art-2000011769616.html
+- provenance: reported
+  supports_claim: false
+  url: https://zbmath.org/authors/
+timestamp: '2026-04-11T06:42:41.035641+00:00'
+title: Q23040018
+turns: 8
+value_label: null
+verdict: verified-high

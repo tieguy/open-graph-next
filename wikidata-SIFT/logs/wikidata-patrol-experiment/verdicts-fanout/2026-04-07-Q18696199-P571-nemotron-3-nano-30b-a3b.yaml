@@ -1,0 +1,21 @@
+completion_tokens: 629
+cost_usd: 0.0040311
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78106
+property: P571
+property_label: inception
+rationale: No references were cited for the claim and no verifiable independent sources
+  were found confirming or contradicting the 1908 inception year. Multiple web searches
+  for the farmacia and its history yielded no results, and the referenced Cultural
+  Asset URL returned 'extraction_empty'. Without any verifiable source content supporting
+  this change, the claim cannot be verified.
+rcid: null
+revid: 2471626970
+sources: []
+timestamp: '2026-04-07T04:57:13.718834+00:00'
+title: Q18696199
+turns: 15
+value_label: null
+verdict: unverifiable

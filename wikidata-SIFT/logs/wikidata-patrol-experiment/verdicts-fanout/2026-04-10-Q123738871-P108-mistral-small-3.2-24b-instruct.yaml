@@ -1,0 +1,28 @@
+completion_tokens: 1310
+cost_usd: 0.0068556625
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68287
+property: P108
+property_label: employer
+rationale: Multiple independent sources, including Josh Universe's official website
+  and GitHub profile, confirm that he is the founder and leader of the International
+  Biohacking Community. This provides strong support for the employer claim.
+rcid: 2551432360
+revid: 2474731846
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://space.fandom.com/wiki/Josh_Universe
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/joshuniverse
+timestamp: '2026-04-10T13:55:27.991332+00:00'
+title: Q123738871
+turns: 3
+value_label: International Biohacking Community
+verdict: verified-high

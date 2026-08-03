@@ -1,0 +1,32 @@
+completion_tokens: 1368
+cost_usd: 0.0036808
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14300
+property: P21
+property_label: sex or gender
+rationale: All consulted primary and secondary sources consistently refer to Juan
+  Alcayaga as male using the name 'Juan' and masculine pronouns. There is no evidence
+  from reliable sources to support a change from male to female. The edit is therefore
+  incorrect.
+rcid: 2549978373
+revid: 2473327843
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://uchile.cl/noticias/217826/juan-don-carter-alcayaga-comenta-sobre-su-vida-universitaria
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmaffinity.com/en/name.php?name-id=921084156
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvtime.com/people/8093089-juan-alcayaga
+- provenance: verified
+  supports_claim: false
+  url: https://www.rottentomatoes.com/celebrity/juan_alcayaga
+timestamp: '2026-04-11T09:15:24.387729+00:00'
+title: Q49230947
+turns: 1
+value_label: female
+verdict: incorrect

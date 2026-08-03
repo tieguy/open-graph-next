@@ -1,0 +1,37 @@
+completion_tokens: 2455
+cost_usd: 0.0030782099999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24262
+property: P569
+property_label: date of birth
+rationale: 'The edit incorrectly changes Hans Scholl''s date of birth from the widely
+  confirmed **22 September 1918** (supported by three independent primary sources:
+  Consider the Source NY, Spartacus Educational, and Holocaust Historical Society)
+  to **18 September 1918**, which lacks authoritative corroboration. The cited references
+  (Find a Grave, Babelio, Munzinger) do not support the new date in their prefetched
+  content. This contradicts established biographical records and requires reversal.'
+rcid: null
+revid: 2468034032
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://considerthesourceny.org/teaching-holocaust-and-genocide/responses-holocaust/resistance/readings/biography-hans-scholl
+- provenance: verified
+  supports_claim: false
+  url: https://spartacus-educational.com/GERschollH.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.holocausthistoricalsociety.org.uk/contents/germanbiographies/hansandsophiescholl.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/20681/hans-scholl
+- provenance: reported
+  supports_claim: false
+  url: https://babelio.com/auteur/51833-hans-scholl
+timestamp: '2026-04-11T14:09:01.651860+00:00'
+title: Q57820
+turns: 1
+value_label: null
+verdict: incorrect

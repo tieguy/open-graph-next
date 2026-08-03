@@ -1,0 +1,29 @@
+completion_tokens: 1962
+cost_usd: 0.0073663999999999995
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30946
+property: P27
+property_label: country of citizenship
+rationale: No reliable source indicates that Nasdas is or was a citizen of Sri Lanka.
+  Multiple journalistic sources describe Nasdas as Algerian-French, corroborating
+  the remaining claim of Algeria as his country of citizenship. Therefore, the removal
+  of 'Sri Lanka' from the country of citizenship is correct and justified.
+rcid: null
+revid: 2470675650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lefigaro.fr/actualite-france/femmes-humiliees-discrimination-anti-blanc-dans-le-monde-de-nasdas-l-influenceur-qui-promeut-une-effarante-contre-culture-en-france-20250404
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/mouv/nasdas-va-payer-des-profs-pour-donner-des-cours-dans-son-quartier-4691544
+- provenance: verified
+  supports_claim: false
+  url: https://www.leparisien.fr/faits-divers/une-dizaine-de-morsures-les-chiens-de-linfluenceur-nasdas-accuses-dattaquer-ceux-de-ses-voisins-03-04-2025-452E6PKLJZBWNDLCB7DSNT7EFU.php
+timestamp: '2026-04-07T12:58:02.928984+00:00'
+title: Q126047616
+turns: 4
+value_label: Sri Lanka
+verdict: verified-high

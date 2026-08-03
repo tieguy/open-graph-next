@@ -1,0 +1,27 @@
+completion_tokens: 1822
+cost_usd: 0.0046786
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17927
+property: P18
+property_label: image
+rationale: There is no authoritative or independently verifiable source confirming
+  that 'Doc Gynéco.jpg' is the current or official image of Doc Gynéco. The edit replaced
+  a dated image with a generic filename, but no external source references or endorses
+  the new image. No citation was provided on Wikidata for the new image, and major
+  media/image databases do not confirm its use as current or official.
+rcid: 2551341425
+revid: 2474647621
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gala.fr/l_actu/news_de_stars/christine-angotetdocgynecoretoursurleurcoupleimprobable_389891
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/doc-gyneco
+timestamp: '2026-04-10T07:57:05.284161+00:00'
+title: Q1233700
+turns: 1
+value_label: null
+verdict: unverifiable

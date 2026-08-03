@@ -1,0 +1,31 @@
+completion_tokens: 362
+cost_usd: 0.0032582
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15205
+property: P571
+property_label: inception
+rationale: The investigation located sources confirming that the Africa Cup of Nations
+  began in 1957, but none of the fetched sources provide a specific inception date
+  formatted as a single year such as '2045' or '1957'. The EBSco source explicitly
+  states the tournament debuted in 1957. The Italian Wikipedia (prefetched) may have
+  influenced the edit, but its content was not directly verified in this session.
+  Without a source that explicitly supports the value '2045' for inception, the edit
+  cannot be confirmed as correct. The old value '+0210-00-00T00:00:00Z' (which appears
+  to be an invalid or nonsensical date) is also not substantiated by any reliable
+  source.
+rcid: 2550014824
+revid: 2473363340
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/sports-and-leisure/africa-cup-nations
+- provenance: verified
+  supports_claim: false
+  url: https://icn.com/en-jo/blog/africa-cup-of-nations
+timestamp: '2026-04-11T06:03:17.118035+00:00'
+title: Q83145
+turns: 1
+value_label: null
+verdict: unverifiable

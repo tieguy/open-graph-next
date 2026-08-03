@@ -1,0 +1,27 @@
+completion_tokens: 1218
+cost_usd: 0.0075226
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33959
+property: P910
+property_label: topic's main category
+rationale: The edit removed a self-referential claim that was not supported by any
+  independent sources. Extensive searches on Wikimedia and Meta-Wiki did not find
+  any documentation or convention specifying a main category for Wikipedia:Babel.
+  Therefore, while the removal is reasonable, there is insufficient evidence to confirm
+  it as correct.
+rcid: 2550595474
+revid: 2473926752
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://meta.wikimedia.org/wiki/Main_Page
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Category:Wikipedia:Babel
+timestamp: '2026-04-07T13:51:38.685500+00:00'
+title: Q6476774
+turns: 8
+value_label: Category:Wikipedia:Babel
+verdict: plausible

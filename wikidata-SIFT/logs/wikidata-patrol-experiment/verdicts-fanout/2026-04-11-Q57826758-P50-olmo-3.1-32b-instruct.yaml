@@ -1,0 +1,30 @@
+completion_tokens: 300
+cost_usd: 0.0025548000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11874
+property: P50
+property_label: author
+rationale: The change from 'Eliana Goldfarb Cyrino' to 'Fábio Luiz Vieira' as author
+  for Q57826758 could not be verified or refuted. The primary cited source for the
+  new author (Fábio Luiz Vieira) is a general CV page that does not mention authorship
+  of the item in question, and the article's own references do not provide evidence
+  linking Fábio Luiz Vieira as an author. No independent, verified sources were found
+  to confirm or deny this change. The old author, Eliana Goldfarb Cyrino, is listed
+  in the item's current claims without any supporting references, so neither value
+  is substantiated by reliable evidence.
+rcid: null
+revid: 2473094550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bv.fapesp.br/en/pesquisador/673610/luiz-carlos-vieira
+- provenance: reported
+  supports_claim: false
+  url: https://www.scielo.br/j/icse/a/Mnb4hKbwdhzmfmXwLZPRKsj/?format=pdf&lang=pt
+timestamp: '2026-04-11T14:02:42.434448+00:00'
+title: Q57826758
+turns: 1
+value_label: Fábio Luiz Vieira
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1836
+cost_usd: 0.0043414199999999995
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38832
+property: P18
+property_label: image
+rationale: The image claim 'Nina josu.jpg' for Q7037983 (Nina Josu, Moldovan activist
+  and writer) is incorrect. Independent sources confirm that the image is associated
+  with Niña Jose, a Filipino actress, not the Moldovan activist. The cited reference
+  URL is unreachable, and no verified evidence supports the image claim for the Moldovan
+  activist.
+rcid: 2550321180
+revid: 2473660721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.flickr.com/photos/95243741@N03/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Replica_Nina.JPG
+- provenance: reported
+  supports_claim: false
+  url: https://www.gmanetwork.com/entertainment/photos/nina-jose-announces-pregnancy/24314/
+timestamp: '2026-04-10T11:17:23.881319+00:00'
+title: Q7037983
+turns: 4
+value_label: null
+verdict: incorrect

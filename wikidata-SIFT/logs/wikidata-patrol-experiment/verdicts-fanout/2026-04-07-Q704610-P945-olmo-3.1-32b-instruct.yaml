@@ -1,0 +1,24 @@
+completion_tokens: 998
+cost_usd: 0.011799
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 56001
+property: P945
+property_label: allegiance
+rationale: The only cited source for the claim that Arseniy Golovko's allegiance changed
+  to the United States is Russian Wikipedia, but the page could not be fetched for
+  verification. Independent web searches did not surface any reliable sources supporting
+  this change. Without direct, independently verifiable evidence, the claim remains
+  unverified.
+rcid: 2549721291
+revid: 2473079789
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/%D0%90%D1%80%D1%81%D0%B5%D0%BD%D0%B8%D1%8F_%D0%93%D0%BE%D0%BB%D0%BE%D0%B2%D0%BA%D0%BE
+timestamp: '2026-04-07T06:25:48.789655+00:00'
+title: Q704610
+turns: 7
+value_label: United States
+verdict: unverifiable

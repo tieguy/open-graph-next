@@ -1,0 +1,22 @@
+completion_tokens: 651
+cost_usd: 0.0048786
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 94968
+property: P1559
+property_label: name in native language
+rationale: The edit updated the native-language name from 'Ricardo Musso' to 'Ricardo
+  Musso Focaccio' but no references were found on the claim itself, and extensive
+  searches for independent sources (including musician associations, publications,
+  and media) yielded no corroborating evidence. Only speculative searches were conducted
+  without results, so no source was verified to support the new value. The claim remains
+  unverifiable based on available evidence.
+rcid: 2551405092
+revid: 2474708502
+sources: []
+timestamp: '2026-04-07T10:30:09.628480+00:00'
+title: Q17628748
+turns: 15
+value_label: null
+verdict: unverifiable

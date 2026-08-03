@@ -1,0 +1,33 @@
+completion_tokens: 1761
+cost_usd: 0.006488799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27161
+property: P1559
+property_label: name in native language
+rationale: The name 'Lope de Vega' is the widely recognized and historically documented
+  name for this entity, supported by multiple verified sources including Britannica,
+  Collins Dictionary, and others. The name 'erik marikon' is not associated with this
+  person in any reliable source and appears to be incorrect. Changing the established
+  name to an unsupported and unrelated name is factually wrong.
+rcid: 2549919720
+revid: 2473274144
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Lope-de-Vega
+- provenance: verified
+  supports_claim: false
+  url: https://www.collinsdictionary.com/us/dictionary/english/lope-de-vega
+- provenance: verified
+  supports_claim: false
+  url: https://www.dictionary.com/browse/lope-de-vega
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lope_de_Vega
+timestamp: '2026-04-11T15:39:39.242726+00:00'
+title: Q165257
+turns: 1
+value_label: null
+verdict: incorrect

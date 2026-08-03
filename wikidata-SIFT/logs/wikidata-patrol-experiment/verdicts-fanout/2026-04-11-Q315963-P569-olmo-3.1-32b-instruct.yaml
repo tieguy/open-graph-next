@@ -1,0 +1,30 @@
+completion_tokens: 326
+cost_usd: 0.005436
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26202
+property: P569
+property_label: date of birth
+rationale: The original value '+1930-05-08T00:00:00Z' (May 8, 1930) is supported by
+  multiple reliable sources, including Wikipedia, a university archive finding aid,
+  and an academic research starter. The new value '9 May 1930' is not supported by
+  any primary or reliable secondary source found in this investigation. The change
+  from May 8 to May 9 is unsupported and appears to be an error.
+rcid: 2549543050
+revid: 2472906341
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Gary_Snyder
+- provenance: verified
+  supports_claim: true
+  url: https://www.library.kent.edu/gary-snyder-papers
+- provenance: verified
+  supports_claim: true
+  url: https://www.ebsco.com/research-starters/biography/gary-snyder
+timestamp: '2026-04-11T10:02:50.677280+00:00'
+title: Q315963
+turns: 1
+value_label: null
+verdict: incorrect

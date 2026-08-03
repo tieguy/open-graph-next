@@ -1,0 +1,33 @@
+completion_tokens: 1907
+cost_usd: 0.0045986099999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34946
+property: P570
+property_label: date of death
+rationale: The edit incorrectly changes José Martí's date of death from the historically
+  verified 19 May 1895 to an impossible 25 May 2025. All verified sources (Encyclopædia
+  Britannica, New World Encyclopedia, ThoughtCo, Find a Grave) confirm his death in
+  1895, and no credible source supports the new date. The cited references do not
+  validate the change and are irrelevant to the new claim.
+rcid: null
+revid: 2470704977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newworldencyclopedia.org/entry/Jose_Marti
+- provenance: verified
+  supports_claim: false
+  url: https://www.thoughtco.com/biography-of-jose-marti-2136381
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/2494/jose-marti
+- provenance: verified
+  supports_claim: false
+  url: https://biography.com/writer/jose-marti
+timestamp: '2026-04-11T08:53:14.814283+00:00'
+title: Q103285
+turns: 1
+value_label: null
+verdict: incorrect

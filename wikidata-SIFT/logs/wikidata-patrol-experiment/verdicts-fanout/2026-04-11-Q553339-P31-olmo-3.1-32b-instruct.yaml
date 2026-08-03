@@ -1,0 +1,33 @@
+completion_tokens: 293
+cost_usd: 0.0035702
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16972
+property: P31
+property_label: instance of
+rationale: Lajos Tichy is widely recognized as an association football player, most
+  notably for Budapest Honvéd FC and the Hungary national team. Multiple reputable
+  sources, including WorldFootball.net and Fbref (attempted, but access blocked),
+  confirm his career as a forward and his participation in FIFA World Cups and European
+  Championships. The change from 'Munk' (which means 'worker' or 'laborer' in Hungarian)
+  to 'association football player' is both semantically and factually correct. The
+  original value ('Munk') was incorrect and unsupported by any credible evidence,
+  while the new value is well-supported by multiple independent sources.
+rcid: 2550571711
+revid: 2473903997
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.worldfootball.net/player_summary/lajos-tichy/
+- provenance: reported
+  supports_claim: null
+  url: https://fbref.com/en/players/0afa1661/Lajos-Tichy
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Lajos_Tichy
+timestamp: '2026-04-11T18:22:44.864852+00:00'
+title: Q553339
+turns: 1
+value_label: association football player
+verdict: verified-high

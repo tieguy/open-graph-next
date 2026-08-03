@@ -1,0 +1,28 @@
+completion_tokens: 455
+cost_usd: 0.0044876562499999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46496
+property: P17
+property_label: country
+rationale: The Australian Open is traditionally held in Australia, and there is no
+  credible evidence to support the claim that it is associated with New Zealand. The
+  edit to change the country from Australia to New Zealand is incorrect.
+rcid: 2551270257
+revid: 2474580109
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ausopen.com/players/new-zealand/michael-venus
+- provenance: verified
+  supports_claim: false
+  url: https://www.flicks.co.nz/sport/tennis/australian-open/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flicks.co.nz/sport/tennis/australian-open/australian-open-day-1/
+timestamp: '2026-04-11T06:59:40.135494+00:00'
+title: Q60874
+turns: 2
+value_label: New Zealand
+verdict: incorrect

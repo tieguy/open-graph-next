@@ -1,0 +1,28 @@
+completion_tokens: 868
+cost_usd: 0.00421723125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44696
+property: P800
+property_label: notable work
+rationale: The edit changes Boy George's notable work to 'Pene,' which is a genus
+  of molluscs. No independent sources support this claim, and it contradicts Boy George's
+  known works. The edit appears to be incorrect.
+rcid: null
+revid: 2463233603
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Boy+George+Pene
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pene+mollusc+genus
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Boy+George+mollusc+genus
+timestamp: '2026-04-07T09:56:01.728490+00:00'
+title: Q312883
+turns: 4
+value_label: Pene
+verdict: incorrect

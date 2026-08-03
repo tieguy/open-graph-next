@@ -1,0 +1,26 @@
+completion_tokens: 687
+cost_usd: 0.00567575
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 110767
+property: P451
+property_label: unmarried partner
+rationale: No sources pertaining to the claim could be located despite extensive searches
+  across multiple languages. Neither authoritative nor reliable secondary sources
+  could confirm the statement about Marcos Santos da Silva as an unmarried partner.
+  All cited references were internal Wikipedia URLs that could not be accessed or
+  verified, and no alternative independent sources were found to confirm or refute
+  this claim. Therefore, the information cannot be verified or disproven with available
+  evidence.
+rcid: 2549679635
+revid: 2473039269
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.voanews.com/covid-19-pandemic/brazil-first-lady-michelle-bolsonaro-has-coronavirus
+timestamp: '2026-04-07T07:46:19.005041+00:00'
+title: Q57911283
+turns: 15
+value_label: Marcos Santos da Silva
+verdict: unverifiable

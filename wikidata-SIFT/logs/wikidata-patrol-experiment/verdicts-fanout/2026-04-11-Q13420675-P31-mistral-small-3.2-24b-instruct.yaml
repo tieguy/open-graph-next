@@ -1,0 +1,18 @@
+completion_tokens: 125
+cost_usd: 0.00207699375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23428
+property: P31
+property_label: instance of
+rationale: The investigation was unable to fetch any relevant sources to verify the
+  claim due to search errors.
+rcid: 2551339635
+revid: 2474645889
+sources: []
+timestamp: '2026-04-11T06:45:30.868276+00:00'
+title: Q13420675
+turns: 2
+value_label: academic degree
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1099
+cost_usd: 0.0039632
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16519
+property: P18
+property_label: image
+rationale: No independently fetched, reliable source confirms that 'Lidia Hlib.jpg'
+  is the correct image for Lidia Hlib. The most authoritative source (Writers' Union
+  profile) could not be accessed due to a blocked domain. Secondary sources fetched
+  do not mention or display any image for the subject. Therefore, there is insufficient
+  evidence to verify the image claim.
+rcid: 2550622213
+revid: 2473952631
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://bibliografiicaie.blogspot.com/2015/02/lidia-hlib-scriitoarea-celor-micuti.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.librariaonline.ro/autori/hlib_lidia
+- provenance: reported
+  supports_claim: null
+  url: https://uniuneascriitorilor.md/membru/hlib-lidia
+timestamp: '2026-04-10T13:36:26.833300+00:00'
+title: Q34362956
+turns: 1
+value_label: null
+verdict: unverifiable

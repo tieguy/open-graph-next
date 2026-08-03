@@ -1,0 +1,29 @@
+completion_tokens: 1935
+cost_usd: 0.0045588
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16989
+property: P19
+property_label: place of birth
+rationale: Multiple independent and reliable sources confirm that Elvira Sastre was
+  born in Segovia, Spain. The new value assigned to the 'place of birth' property,
+  'embrace, extend and extinguish [fr]', is not a location and is inappropriate for
+  this property. The edit is a factual error and should be reverted.
+rcid: 2550515692
+revid: 2473850168
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Elvira_Sastre
+- provenance: verified
+  supports_claim: false
+  url: https://babbelliterature.com/elvira-sastre-biography-english/
+- provenance: verified
+  supports_claim: false
+  url: https://eurolitkrant.com/OneAuthor.aspx?Id=150
+timestamp: '2026-04-11T17:09:42.447973+00:00'
+title: Q27670801
+turns: 1
+value_label: embrace, extend and extinguish [fr]
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 913
+cost_usd: 0.011579200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 55157
+property: P1477
+property_label: birth name
+rationale: There is no evidence from authoritative or primary sources to support the
+  claim that 'hola' is Mary Jackson's birth name. All independent and reputable sources
+  consistently refer to her birth name as 'Mary Winston.' The only cited reference
+  is a Wikipedia page that was not directly verified, and the NASA biography page
+  referenced in the item could not be fetched. Therefore, the edit replacing 'Mary
+  Winston' with 'hola' is incorrect.
+rcid: 2550573768
+revid: 2473905962
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nasa.gov/content/mary-jackson-biography
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mary_Jackson
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Mary-Jackson-mathematician-and-engineer
+timestamp: '2026-04-07T09:04:32.209675+00:00'
+title: Q27221300
+turns: 7
+value_label: null
+verdict: incorrect

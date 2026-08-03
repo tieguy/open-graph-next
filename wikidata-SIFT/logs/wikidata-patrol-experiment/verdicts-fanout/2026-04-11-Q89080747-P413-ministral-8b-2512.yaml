@@ -1,0 +1,31 @@
+completion_tokens: 1849
+cost_usd: 0.00243282
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23791
+property: P413
+property_label: position played on team / speciality
+rationale: The edit incorrectly changed Elias Hadaya's position played on team (P413)
+  from 'goalkeeper' (Q201330) to '67' (Q713157). Multiple verified sources—Transfermarkt,
+  Sofascore, and FotMob—confirm Elias Hadaya plays as a goalkeeper. The value '67'
+  is not a valid position and appears to be a jersey number, which is irrelevant for
+  this property. No references were provided to support the change, and the new value
+  contradicts all available evidence.
+rcid: 2549662946
+revid: 2473023174
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://www.sofascore.com/football/player/elia-hadaya/833250
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1049254/elias-hadaya
+timestamp: '2026-04-11T17:23:10.585686+00:00'
+title: Q89080747
+turns: 2
+value_label: '67'
+verdict: incorrect

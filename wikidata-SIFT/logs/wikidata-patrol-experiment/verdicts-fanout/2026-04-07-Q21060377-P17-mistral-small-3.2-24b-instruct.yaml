@@ -1,0 +1,21 @@
+completion_tokens: 614
+cost_usd: 0.002118775
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20599
+property: P17
+property_label: country
+rationale: The reference provided is blocked and cannot be accessed. Additionally,
+  no independent sources could be found to verify the claim.
+rcid: 2549921081
+revid: 2473275192
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ko.wikipedia.org/w/index.php?title=조익소토키&oldid=41511523
+timestamp: '2026-04-07T05:22:46.369358+00:00'
+title: Q21060377
+turns: 4
+value_label: South Korea
+verdict: unverifiable

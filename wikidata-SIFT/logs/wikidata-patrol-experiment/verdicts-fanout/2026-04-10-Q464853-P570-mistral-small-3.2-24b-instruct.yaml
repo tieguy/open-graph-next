@@ -1,0 +1,30 @@
+completion_tokens: 846
+cost_usd: 0.0033663375000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36388
+property: P570
+property_label: date of death
+rationale: Multiple verified sources confirm that Anna Marly died on 15 February 2006,
+  not 16 February 2025. The claim of 16 February 2025 as the date of death is incorrect.
+rcid: 2549570512
+revid: 2472933287
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.the-independent.com/news/obituaries/anna-marly-6108581.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Anna+Marly/+wiki
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/15550408/anna-marly
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/2006/03/13/world/europe/anna-marly-88-dies-inspired-french-resistance-in-song.html
+timestamp: '2026-04-10T14:03:48.532040+00:00'
+title: Q464853
+turns: 2
+value_label: null
+verdict: incorrect

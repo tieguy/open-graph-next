@@ -1,0 +1,28 @@
+completion_tokens: 2495
+cost_usd: 0.00403853125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38926
+property: P54
+property_label: member of sports team
+rationale: Multiple independent sources confirm that Hugo Bolin has moved from Malmö
+  FF to Borussia Mönchengladbach. The evidence supports the change in the member of
+  sports team property.
+rcid: 2550366679
+revid: 2473705105
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bundesliga.com/en/bundesliga/news/borussia-monchengladbach-loan-hugo-bolin-transfer-malmo-sweden-35882
+- provenance: verified
+  supports_claim: true
+  url: https://www.bundesliga.com/en/bundesliga/news/hugo-bolin-who-is-borussia-monchengladbach-s-swedish-winger-36519
+- provenance: verified
+  supports_claim: true
+  url: https://www.getfootballnewsgermany.com/2026/gladbach-activate-purchase-option-hugo-bolin-bundesliga/
+timestamp: '2026-04-11T17:29:18.153361+00:00'
+title: Q118151312
+turns: 3
+value_label: Borussia Mönchengladbach
+verdict: verified-high

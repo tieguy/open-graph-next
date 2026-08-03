@@ -1,0 +1,28 @@
+completion_tokens: 1689
+cost_usd: 0.00217734
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19932
+property: P570
+property_label: date of death
+rationale: The independent sources consistently confirm the date of death as 17 December
+  1663. The new date of death (17 December 2030) is not supported by any reliable
+  sources. Therefore, the edit changing the date of death to 2030 is incorrect.
+rcid: null
+revid: 2470777111
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://blackpast.org/global-african-history/queen-nzinga-1583-1663/
+- provenance: verified
+  supports_claim: true
+  url: https://www.blackhistoryheroes.com/2011/03/queen-ana-de-sousa-njinga-mbande-of.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Mbande-1
+timestamp: '2026-04-11T15:50:44.439689+00:00'
+title: Q467650
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 702
+cost_usd: 0.003736
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35254
+property: P244
+property_label: Library of Congress authority ID
+rationale: The search results for 'Generoso Pompa Library of Congress authority ID
+  no2026017297' and 'no2026017297' did not provide any direct evidence confirming
+  the Library of Congress authority ID 'no2026017297' for Generoso Pompa. The results
+  included various unrelated documents and products, but none confirmed the ID. Without
+  direct access to the Library of Congress database or a reliable source that lists
+  authority IDs, the verification of the Library of Congress authority ID 'no2026017297'
+  for Generoso Pompa is inconclusive based on the available information.
+rcid: 2540933306
+revid: 2464723897
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://viaf.org/viaf/108059105/
+timestamp: '2026-02-20T18:54:57.419127+00:00'
+title: Q96583750
+turns: 5
+value_label: null
+verdict: unverifiable

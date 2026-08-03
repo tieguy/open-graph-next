@@ -1,0 +1,29 @@
+completion_tokens: 465
+cost_usd: 0.010080879999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 28327
+property: P2037
+property_label: GitHub account
+rationale: The GitHub account 'AyaanDhalait' is confirmed to belong to Ayaan Dhalait
+  through multiple independent sources. The GitHub profile at https://github.com/AyaanDhalait
+  explicitly states 'I am Ayaan Dhalait' and matches the entity's description as a
+  computer programmer. Additionally, the official website at https://ayaan.is-a.dev
+  (already present in the item's P856 claim) lists the same GitHub account, creating
+  a consistent cross-reference. The edit adds the correct GitHub username that corresponds
+  to the individual described in the item.
+rcid: 2540964812
+revid: 2464752450
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/AyaanDhalait
+- provenance: verified
+  supports_claim: true
+  url: https://ayaan.is-a.dev
+timestamp: '2026-02-20T03:55:26.404695+00:00'
+title: Q138349870
+turns: 5
+value_label: null
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 1085
+cost_usd: 0.0011807999999999999
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 19276
+property: P1619
+property_label: date of official opening
+rationale: No verifiable sources were recovered during the investigation; the only
+  cited source points to a blocked domain and cannot be accessed, preventing independent
+  confirmation of the claim.
+rcid: 2549884163
+revid: 2473239727
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://nl.wikipedia.org/w/index.php?title=Ciutat_de_les_Arts_i_les_Ciències&oldid=52290977
+timestamp: '2026-04-07T02:47:26.364352+00:00'
+title: Q239935
+turns: 2
+value_label: null
+verdict: unverifiable

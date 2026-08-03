@@ -1,0 +1,19 @@
+completion_tokens: 336
+cost_usd: 0.00137375
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 26131
+property: P22
+property_label: father
+rationale: Initial web search for 'Antonio de Ulloa Alexis Gay father' returned no
+  results, and no references exist in the claim's own statement. No sources were fetched
+  to verify the claim, making it unverifiable rather than correct or incorrect.
+rcid: null
+revid: 2472453851
+sources: []
+timestamp: '2026-04-07T09:46:11.699666+00:00'
+title: Q470306
+turns: 2
+value_label: Alexis Gay
+verdict: unverifiable

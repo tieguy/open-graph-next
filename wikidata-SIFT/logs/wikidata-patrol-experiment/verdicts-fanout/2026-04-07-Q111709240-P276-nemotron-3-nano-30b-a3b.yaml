@@ -1,0 +1,24 @@
+completion_tokens: 708
+cost_usd: 0.00362445
+diff_type: reference_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 69657
+property: P276
+property_label: location
+rationale: No external sources were found that confirm or deny the claim that the
+  location 'Fort Saskatchewan' in Alberta, Canada is associated with Sherritt Mint
+  (1961-1996). Multiple search queries targeting relevant sources (corporate history,
+  government records, news archives) returned no verifiable content from primary or
+  secondary sources. While the referenced Wikipedia URL (https://sherritt.com/about-us/history/)
+  was prefetched, it is not a valid reference source (Wikipedia cannot be cited).
+  Historical records about Sherritt Mint's operations cannot be confirmed through
+  accessible independent sources.
+rcid: 2549969877
+revid: 2473320153
+sources: []
+timestamp: '2026-04-07T07:56:39.346527+00:00'
+title: Q111709240
+turns: 15
+value_label: Fort Saskatchewan
+verdict: unverifiable

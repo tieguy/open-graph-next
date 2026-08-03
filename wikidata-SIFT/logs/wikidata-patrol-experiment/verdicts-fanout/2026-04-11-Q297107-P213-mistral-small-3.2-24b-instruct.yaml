@@ -1,0 +1,23 @@
+completion_tokens: 1234
+cost_usd: 0.0020188
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19162
+property: P213
+property_label: ISNI
+rationale: The ISNI website could not be fetched to verify the ISNI values. Without
+  direct access to the ISNI database or an authoritative source confirming the ISNI
+  values, it is not possible to verify the correctness of the change from '0000000122115907'
+  to '0000000122115810'.
+rcid: 2549383100
+revid: 2472749485
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.isni.org/
+timestamp: '2026-04-11T15:51:54.484422+00:00'
+title: Q297107
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 1737
+cost_usd: 0.003777
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13674
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The change from '/m/012sd9hj&hl' to '/m/012sd9hj' for Juan de Sanabria's
+  Google Knowledge Graph ID is correct. Google's Knowledge Graph panels display for
+  the subject, and the canonical KG ID format omits language parameters such as '&hl'.
+  This aligns with standard practice and improves data consistency on Wikidata.
+rcid: 2550898083
+revid: 2474220949
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.google.com/search?q=Juan+de+Sanabria
+- provenance: reported
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Help:Property:P2671
+timestamp: '2026-04-11T11:46:10.590984+00:00'
+title: Q19288538
+turns: 1
+value_label: null
+verdict: verified-high

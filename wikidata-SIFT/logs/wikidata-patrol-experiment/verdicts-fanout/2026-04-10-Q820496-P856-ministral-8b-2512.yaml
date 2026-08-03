@@ -1,0 +1,27 @@
+completion_tokens: 1589
+cost_usd: 0.00627858
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 61555
+property: P856
+property_label: official website
+rationale: The official website for Kōnan-shi (Q820496) was previously listed as `https://www.city.konan.lg.jp/`,
+  which is confirmed as the correct official municipal website by direct inspection.
+  The new value, `https://www.alaskaair.com/`, is the website of Alaska Air, an unrelated
+  American airline, and does not pertain to Kōnan-shi. No evidence supports the claim
+  that `https://www.alaskaair.com/` is the official website for Kōnan-shi.
+rcid: null
+revid: 2471591782
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.konan.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.alaskaair.com/
+timestamp: '2026-04-10T13:53:06.370980+00:00'
+title: Q820496
+turns: 4
+value_label: null
+verdict: incorrect

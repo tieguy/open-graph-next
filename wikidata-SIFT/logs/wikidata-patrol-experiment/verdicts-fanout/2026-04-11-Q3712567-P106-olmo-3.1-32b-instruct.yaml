@@ -1,0 +1,31 @@
+completion_tokens: 2284
+cost_usd: 0.00751
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30698
+property: P106
+property_label: occupation
+rationale: Authoritative and independent sources—including Doina Ruști's official
+  website and Goodreads—explicitly describe her as a novelist and prose writer. There
+  is no credible evidence that her primary occupation is simply 'writer' in the broad
+  sense, nor that she is known primarily for non-prose writing. Therefore, changing
+  her occupation from 'writer' to 'prose writer' is accurate and improves the specificity
+  of the claim.
+rcid: 2550664437
+revid: 2473993952
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://doinarusti.ro
+- provenance: verified
+  supports_claim: true
+  url: https://www.goodreads.com/author/show/2919952.Doina_Ru_ti
+- provenance: reported
+  supports_claim: true
+  url: https://evz.ro/idiocratie-cartile-ostracizate-ii-povestea-fascinanta-a-orig.html
+timestamp: '2026-04-11T15:05:24.373780+00:00'
+title: Q3712567
+turns: 1
+value_label: prose writer
+verdict: verified-high

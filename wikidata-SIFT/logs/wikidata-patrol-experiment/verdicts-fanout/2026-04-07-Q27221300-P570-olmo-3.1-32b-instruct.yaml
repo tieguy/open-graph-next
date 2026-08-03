@@ -1,0 +1,23 @@
+completion_tokens: 682
+cost_usd: 0.0166756
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 81332
+property: P570
+property_label: date of death
+rationale: The proposed date of death (11 September 2011) directly contradicts the
+  primary biographical source on Find a Grave, which states that Mary Jackson died
+  in 2005 at the age of 83. No independent or primary source evidence supports a 2011
+  death date. Therefore, updating the date of death to 2011 is factually incorrect.
+rcid: 2549859111
+revid: 2473215342
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/174900723/mary-jackson
+timestamp: '2026-04-07T12:21:37.795649+00:00'
+title: Q27221300
+turns: 9
+value_label: null
+verdict: incorrect

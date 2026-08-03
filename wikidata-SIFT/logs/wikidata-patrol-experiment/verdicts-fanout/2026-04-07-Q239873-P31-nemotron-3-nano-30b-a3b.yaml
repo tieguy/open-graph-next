@@ -1,0 +1,23 @@
+completion_tokens: 704
+cost_usd: 0.0089481
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 176146
+property: P31
+property_label: instance of
+rationale: No independent sources found that confirm or deny the claim that 'JSP'
+  is a correct instance of for soeur Emmanuelle. Existing references point to Libris
+  catalog entries that were not accessible or could not be verified. Therefore, the
+  claim cannot be confirmed as correct or incorrect based on evidence.
+rcid: 2549848041
+revid: 2473204528
+sources:
+- provenance: unverified
+  supports_claim: false
+  url: http://libris.library.kb.se/catalog/86lnnmfs3dzbtp9
+timestamp: '2026-04-07T14:22:24.801431+00:00'
+title: Q239873
+turns: 15
+value_label: JSP
+verdict: unverifiable

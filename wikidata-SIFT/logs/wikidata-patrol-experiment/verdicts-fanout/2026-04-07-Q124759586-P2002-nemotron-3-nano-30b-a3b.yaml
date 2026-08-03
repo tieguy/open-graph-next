@@ -1,0 +1,20 @@
+completion_tokens: 593
+cost_usd: 0.0043063500000000005
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 83755
+property: P2002
+property_label: X (Twitter) username
+rationale: All searches for 'Cherbaca' on Twitter or related to the alleged adult
+  film actor returned no results. No verified sources were found that confirm or refute
+  the claimed Twitter username. No primary sources were retrieved. Therefore, there
+  is no evidence to assess, making the claim unverifiable.
+rcid: null
+revid: 2471188654
+sources: []
+timestamp: '2026-04-07T06:15:01.418229+00:00'
+title: Q124759586
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 1275
+cost_usd: 0.00289852
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38293
+property: P6375
+property_label: street address
+rationale: The reference URL is blocked and cannot be accessed directly. No independent
+  sources were found to corroborate the new street address. The new value appears
+  to be a phone number and a name, which is unusual for a street address.
+rcid: 2550404305
+revid: 2473741785
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://he.wikipedia.org/wiki/%D7%A4%D7%95%D7%A8%D7%98%D7%9C:%D7%90%D7%AA%D7%A8%D7%99_%D7%9E%D7%95%D7%A8%D7%A9%D7%AA_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C/%D7%A8%D7%A9%D7%99%D7%9E%D7%AA_%D7%90%D7%AA%D7%A8%D7%99_%D7%94%D7%9E%D7%95%D7%A8%D7%A9%D7%AA_%D7%91%D7%99%D7%A9%D7%A8%D7%90%D7%9C
+timestamp: '2026-04-07T12:30:20.030969+00:00'
+title: Q2318440
+turns: 6
+value_label: null
+verdict: unverifiable

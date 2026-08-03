@@ -1,0 +1,23 @@
+completion_tokens: 1901
+cost_usd: 0.00265347
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38170
+property: P50
+property_label: author
+rationale: The article metadata confirms that both Fábio Luiz Vieira and Eliana Goldfarb
+  Cyrino are co-authors. The edit incorrectly removes Eliana Goldfarb Cyrino entirely,
+  omitting her contribution and failing to include all co-authors. The claim should
+  reflect the full list of authors as listed in the article's metadata page.
+rcid: null
+revid: 2473094550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.scielo.br/j/icse/a/Mnb4hKbwdhzmfmXwLZPRKsj/
+timestamp: '2026-04-11T14:02:53.625381+00:00'
+title: Q57826758
+turns: 4
+value_label: Fábio Luiz Vieira
+verdict: incorrect

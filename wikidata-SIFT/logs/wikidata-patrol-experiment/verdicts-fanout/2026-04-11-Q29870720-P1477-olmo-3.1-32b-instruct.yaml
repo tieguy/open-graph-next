@@ -1,0 +1,35 @@
+completion_tokens: 2139
+cost_usd: 0.0039156
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13161
+property: P1477
+property_label: birth name
+rationale: The cited reference for the birth name could not be fetched and thus provides
+  no usable evidence. Independent searches across reputable music, news, and official
+  sources do not mention either the old value 'José del Olmo Jimenez' or the new value
+  'semen' as Jarfaiter's birth name. There is no reliable evidence supporting the
+  change, and the new value is implausible as a legal name. This edit appears suspicious
+  and should be reverted or flagged for further review until a credible source is
+  provided.
+rcid: 2550531970
+revid: 2473865781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/jarfaiter.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jarfaiter
+- provenance: verified
+  supports_claim: false
+  url: https://jarfaiter.com/
+- provenance: unverifiable
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-11T06:33:50.502524+00:00'
+title: Q29870720
+turns: 1
+value_label: null
+verdict: suspect

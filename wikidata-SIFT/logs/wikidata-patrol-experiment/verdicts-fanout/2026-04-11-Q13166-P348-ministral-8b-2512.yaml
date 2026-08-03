@@ -1,0 +1,23 @@
+completion_tokens: 1434
+cost_usd: 0.012810959999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 137112
+property: P348
+property_label: software version identifier
+rationale: The official WordPress news page for version 6.5 (https://wordpress.org/news/2024/04/regina/)
+  explicitly confirms that the latest version is '6.5 Regina'. There is no evidence
+  or reference supporting the new value '6.9.4' as the current version. The edit incorrectly
+  changes the version identifier from a verified value to an unverified one.
+rcid: 2550603071
+revid: 2473934125
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wordpress.org/news/2024/04/regina/
+timestamp: '2026-04-11T10:39:30.327755+00:00'
+title: Q13166
+turns: 5
+value_label: null
+verdict: incorrect

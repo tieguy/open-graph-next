@@ -1,0 +1,35 @@
+completion_tokens: 2374
+cost_usd: 0.052663
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 40793
+property: P1412
+property_label: languages spoken, written or signed
+rationale: Multiple independent sources confirm Bronisław Teofil Piwko was a Polish
+  national and military officer (major) in the Second Polish Republic who died in
+  Lwów in 1935. Polish was the official language of Poland during this period, and
+  a Polish military officer serving in the Polish armed forces would have been a native
+  Polish speaker. No source contradicts this claim. However, no source explicitly
+  documents Piwko's languages—the claim is supported by strong contextual evidence
+  (nationality, occupation, era) rather than direct documentation.
+rcid: 2540941176
+revid: 2464730669
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sejm-wielki.pl/b/n.206353
+- provenance: verified
+  supports_claim: true
+  url: https://wielcy.pl/nekrologia/206353
+- provenance: verified
+  supports_claim: true
+  url: https://jenikirbyhistory.getarchive.net/topics/polish+legions+in+world+war+i+members
+- provenance: verified
+  supports_claim: true
+  url: https://www.myheritage.com/names/stanis%C5%82aw_piwko
+timestamp: '2026-02-20T14:44:24.743169+00:00'
+title: Q138349322
+turns: 4
+value_label: Polish
+verdict: verified-low

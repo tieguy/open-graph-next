@@ -1,0 +1,26 @@
+completion_tokens: 798
+cost_usd: 0.008132799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38270
+property: P138
+property_label: named after
+rationale: There is no reliable evidence that 'Mormonism' is named after the Harry
+  Potter series. The established understanding, supported by the item's own claims
+  and mainstream sources, is that Mormonism is named after the Book of Mormon. The
+  new value lacks any citation and is contradicted by all available evidence.
+rcid: null
+revid: 2470676045
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikidata.org/wiki/Q747802
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mormonism
+timestamp: '2026-04-07T03:19:12.666422+00:00'
+title: Q747802
+turns: 7
+value_label: ハリー・ポッターシリーズ [ja]
+verdict: incorrect

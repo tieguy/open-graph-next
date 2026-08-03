@@ -1,0 +1,19 @@
+completion_tokens: 1752
+cost_usd: 0.008317168750000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 83258
+property: P3541
+property_label: MLB.com player ID
+rationale: No sources were found that confirm or deny the MLB.com player ID for Moon
+  Bo-gyeong as '唐保景'. The edit does not cite any references, and the search results
+  did not provide any verifiable information.
+rcid: null
+revid: 2470929716
+sources: []
+timestamp: '2026-04-07T10:59:31.979953+00:00'
+title: Q107109167
+turns: 15
+value_label: null
+verdict: unverifiable

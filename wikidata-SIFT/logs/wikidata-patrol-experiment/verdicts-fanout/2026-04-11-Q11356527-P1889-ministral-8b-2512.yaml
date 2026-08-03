@@ -1,0 +1,28 @@
+completion_tokens: 1717
+cost_usd: 0.0022372800000000003
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25845
+property: P1889
+property_label: different from
+rationale: The claim that Q11356527 (Eriko Miura, Japanese actor/idol) is different
+  from Q11356434 (Eriko Miura, Japanese AV idol) is supported by independent sources.
+  The two individuals have conflicting birthdates (June 11, 1983 vs. March 3, 1969)
+  and distinct occupations (idol vs. AV actress), confirming they are separate entities.
+  The qualifier P1013 (two persons with the same name or a similar name) is appropriate
+  and justified by the evidence.
+rcid: 2550576467
+revid: 2473908558
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://jpop.fandom.com/wiki/Miura_Eriko_(Seifuku_Koujo_Iinkai)
+- provenance: reported
+  supports_claim: true
+  url: https://www.boobpedia.com/boobs/Eriko_Miura
+timestamp: '2026-04-11T06:50:10.986129+00:00'
+title: Q11356527
+turns: 3
+value_label: Eriko Miura
+verdict: verified-high

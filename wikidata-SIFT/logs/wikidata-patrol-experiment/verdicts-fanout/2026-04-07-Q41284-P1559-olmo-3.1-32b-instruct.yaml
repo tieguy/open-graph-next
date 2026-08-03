@@ -1,0 +1,27 @@
+completion_tokens: 567
+cost_usd: 0.0146302
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 71450
+property: P1559
+property_label: name in native language
+rationale: Authoritative sources, including Biography.com and the Wikipedia item,
+  consistently refer to John Dalton by the name 'John Dalton' and do not recognize
+  'fernanfloo' as a correct native language name for him. No reliable evidence supports
+  the use of 'fernanfloo' as Dalton's name in any language, indicating that the edit
+  is incorrect.
+rcid: null
+revid: 2471761461
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/people/john-dalton-9265201
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/John_Dalton
+timestamp: '2026-04-07T08:39:55.393344+00:00'
+title: Q41284
+turns: 5
+value_label: null
+verdict: incorrect

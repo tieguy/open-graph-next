@@ -1,0 +1,37 @@
+completion_tokens: 2250
+cost_usd: 0.0019406100000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16883
+property: P569
+property_label: date of birth
+rationale: The edit incorrectly changes Luzmila Carpio's date of birth from **1954**
+  (supported by multiple verified official Bolivian sources, including the Ministry
+  of Culture and UNESCO) to **1949**, which lacks any independent corroboration. The
+  cited sources (Discogs and BnF) are unreachable, and no other authoritative source
+  confirms the new value. The evidence overwhelmingly supports the old value, making
+  the edit incorrect.
+rcid: 2551360525
+revid: 2474665763
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cultura.gob.bo
+- provenance: verified
+  supports_claim: false
+  url: https://bolivia.unesco.org
+- provenance: verified
+  supports_claim: false
+  url: https://www.boliviamusica.com/biography/luzmila-carpio
+- provenance: reported
+  supports_claim: true
+  url: https://www.discogs.com/artist/Luzmila-Carpio
+- provenance: reported
+  supports_claim: true
+  url: https://fr.bnf.fr/authorities/authorities/14052816t
+timestamp: '2026-04-11T06:32:11.884572+00:00'
+title: Q466102
+turns: 1
+value_label: null
+verdict: incorrect

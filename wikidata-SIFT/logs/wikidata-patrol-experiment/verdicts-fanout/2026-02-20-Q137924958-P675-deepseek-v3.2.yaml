@@ -1,0 +1,33 @@
+completion_tokens: 1439
+cost_usd: 0.015781379999999998
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 87524
+property: P675
+property_label: Google Books ID
+rationale: The edit adds Google Books ID WDZGL2JY0ND. I investigated the user's provided
+  reference URL (a Google Sites page) for the date of birth claim, but it does not
+  contain any Google Books ID. A targeted web search for "Manvik Chandra Google Books
+  ID WDZGL2JY0ND" returned no relevant results linking this identifier to the person.
+  The Google Books lookup URL (books.google.com/books?id=WDZGL2JY0ND) is inaccessible
+  (returns a 404 error). Without any verifiable source linking this specific ID to
+  Manvik Chandra, the claim cannot be confirmed. It may be a placeholder, incorrect,
+  or a non-public profile.
+rcid: 2540951751
+revid: 2464740527
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Manvik+Chandra+Google+Books+ID+WDZGL2JY0ND
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books?id=WDZGL2JY0ND
+timestamp: '2026-02-20T08:25:04.936567+00:00'
+title: Q137924958
+turns: 15
+value_label: null
+verdict: unverifiable

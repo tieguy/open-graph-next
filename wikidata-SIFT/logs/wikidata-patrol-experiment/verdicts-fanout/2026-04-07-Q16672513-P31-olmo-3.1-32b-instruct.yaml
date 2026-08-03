@@ -1,0 +1,27 @@
+completion_tokens: 861
+cost_usd: 0.005404600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24440
+property: P31
+property_label: instance of
+rationale: The edit changes Renaud Gromeulen's instance of from 'human' to 'individual
+  animal', but all other claims on the item are consistent with a human (e.g., occupation
+  as musician, male sex, date of birth). No references support this change, and independent
+  web searches found no evidence that Renaud Gromeulen is considered an animal. The
+  change is likely an error.
+rcid: 2549294534
+revid: 2472663431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q16672513
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T10:25:46.459727+00:00'
+title: Q16672513
+turns: 5
+value_label: individual animal
+verdict: incorrect

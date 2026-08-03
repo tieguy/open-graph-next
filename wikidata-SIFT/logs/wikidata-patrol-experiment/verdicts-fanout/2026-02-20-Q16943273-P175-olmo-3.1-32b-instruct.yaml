@@ -1,0 +1,27 @@
+completion_tokens: 623
+cost_usd: 0.0044642
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20452
+property: P175
+property_label: performer
+rationale: The claim that Adrian Nunez Rodriguez is an actor is supported by an independently
+  fetched source which describes him as an actor and filmmaker. However, the cited
+  IMDb reference (nm175566) could not be verified, as the corresponding IMDb page
+  does not exist or is not publicly accessible. Therefore, while the performer claim
+  is likely correct, the specific reference provided lacks confirmation.
+rcid: 2540949923
+revid: 2464738906
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Adrin_Nez_Rodrguez
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.imdb.com/name/nm175566/
+timestamp: '2026-02-20T10:25:54.072533+00:00'
+title: Q16943273
+turns: 4
+value_label: actor
+verdict: verified-low

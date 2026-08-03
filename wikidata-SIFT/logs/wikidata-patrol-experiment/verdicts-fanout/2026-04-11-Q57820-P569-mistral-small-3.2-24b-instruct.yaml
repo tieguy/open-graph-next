@@ -1,0 +1,22 @@
+completion_tokens: 6645
+cost_usd: 0.022833319999999994
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 300731
+property: P569
+property_label: date of birth
+rationale: The investigation found that Hans Scholl was born on September 22, 1918,
+  as confirmed by multiple reliable sources. The edit to change the date of birth
+  to September 18, 1918, is incorrect.
+rcid: null
+revid: 2468034032
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://spartacus-educational.com/GERschollH.htm
+timestamp: '2026-04-11T14:10:07.474305+00:00'
+title: Q57820
+turns: 15
+value_label: null
+verdict: incorrect

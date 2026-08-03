@@ -1,0 +1,26 @@
+completion_tokens: 1631
+cost_usd: 0.004391
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17062
+property: P509
+property_label: cause of death
+rationale: All reliable and authoritative sources, including obituaries and biographies,
+  state that Victor French died from lung cancer in 1989. 'Phimosis' is a medical
+  condition and cannot be a cause of death for an adult male. No source found supports
+  'phimosis' as a cause of death, and the edit is therefore factually incorrect.
+rcid: 2550210573
+revid: 2473553203
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.hellomagazine.com/us/893972/little-house-on-the-prairie-fans-mourn-the-loss-of-beloved-family-member/
+- provenance: verified
+  supports_claim: false
+  url: https://www.naijanews.com/buzz/people/victor-french-biography-children-family-cause-of-death/
+timestamp: '2026-04-10T13:55:10.172605+00:00'
+title: Q1347274
+turns: 1
+value_label: phimosis
+verdict: incorrect

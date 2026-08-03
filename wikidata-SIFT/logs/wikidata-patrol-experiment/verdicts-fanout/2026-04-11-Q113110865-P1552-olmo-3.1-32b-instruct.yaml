@@ -1,0 +1,32 @@
+completion_tokens: 1725
+cost_usd: 0.004569800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17674
+property: P1552
+property_label: has characteristic
+rationale: The change from 'anime based on a manga' to 'anime television series based
+  on a literary work' is plausible based on secondary reporting that the anime is
+  based on a web novel (a literary work), but no primary or cited source explicitly
+  confirms that the anime is directly adapted from a literary work or that it is not
+  based on the manga. The edit lacks cited references and no fetched primary source
+  clarifies the adaptation origin. Therefore, the change cannot be verified based
+  on the available evidence.
+rcid: 2550394902
+revid: 2473732650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.animenewsnetwork.com/encyclopedia/anime.php?id=26032
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Shangri-La_Frontier_(anime)
+- provenance: reported
+  supports_claim: true
+  url: https://myanimelist.net/anime/506599/Shangri-La_Frontier
+timestamp: '2026-04-11T15:55:48.876475+00:00'
+title: Q113110865
+turns: 1
+value_label: anime television series based on a literary work
+verdict: unverifiable

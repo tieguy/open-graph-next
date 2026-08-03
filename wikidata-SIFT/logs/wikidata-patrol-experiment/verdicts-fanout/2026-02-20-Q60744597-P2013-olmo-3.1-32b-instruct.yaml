@@ -1,0 +1,23 @@
+completion_tokens: 1125
+cost_usd: 0.0061297999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27274
+property: P2013
+property_label: Facebook username
+rationale: The official website of Global Banking & Finance Review does not reference
+  any Facebook presence or username, and independent searches did not confirm that
+  'globalbankingandfinancereview' is an official Facebook username for the publication.
+  Therefore, the edit is not supported by verifiable evidence.
+rcid: 2540959311
+revid: 2464747347
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com
+timestamp: '2026-02-20T05:04:03.402164+00:00'
+title: Q60744597
+turns: 4
+value_label: null
+verdict: suspect

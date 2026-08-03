@@ -1,0 +1,26 @@
+completion_tokens: 498
+cost_usd: 0.0055347
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53853
+property: P106
+property_label: occupation
+rationale: Multiple reliable sources confirm that Masahiro Sakurai is a video game
+  director, game designer, and creator of notable video game series such as Kirby
+  and Super Smash Bros. These sources provide strong evidence supporting the claim
+  that 'video game' is a correct occupation for him.
+rcid: 2540950305
+revid: 2464739277
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: true
+  url: https://remptongames.com/2022/10/03/how-masahiro-sakurai-makes-games-game-designer-spotlight/
+timestamp: '2026-02-20T09:38:30.192864+00:00'
+title: Q1906721
+turns: 4
+value_label: video game
+verdict: verified-high

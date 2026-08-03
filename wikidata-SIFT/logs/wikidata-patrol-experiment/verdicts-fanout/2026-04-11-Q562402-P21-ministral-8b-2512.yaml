@@ -1,0 +1,27 @@
+completion_tokens: 2313
+cost_usd: 0.021613920000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 189217
+property: P21
+property_label: sex or gender
+rationale: The edit incorrectly changes Joan Maragall's sex or gender from 'male'
+  to 'intersex'. The verified sources (GND and BnF) explicitly state that Joan Maragall
+  was male, and no credible independent sources support the 'intersex' claim. The
+  change contradicts well-established biographical records and is not supported by
+  any evidence.
+rcid: null
+revid: 2471640708
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118640887
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb119979315
+timestamp: '2026-04-11T11:28:24.517720+00:00'
+title: Q562402
+turns: 10
+value_label: intersex
+verdict: incorrect

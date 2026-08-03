@@ -1,0 +1,22 @@
+completion_tokens: 1140
+cost_usd: 0.012621382499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 147121
+property: P735
+property_label: given name
+rationale: The Nobel Prize biography provides a detailed and authoritative account
+  of Erwin Schrödinger's life, confirming his full name as "Erwin Schrödinger". This
+  source is highly reliable and directly supports the claim.
+rcid: 2549635131
+revid: 2472996167
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nobelprize.org/prizes/physics/1933/schrodinger/biographical/
+timestamp: '2026-04-07T06:01:04.115858+00:00'
+title: Q9130
+turns: 8
+value_label: Erwin Schrödinger
+verdict: verified-high

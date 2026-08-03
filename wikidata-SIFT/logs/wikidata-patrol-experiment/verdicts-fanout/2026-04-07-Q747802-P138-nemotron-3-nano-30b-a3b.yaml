@@ -1,0 +1,24 @@
+completion_tokens: 674
+cost_usd: 0.004499199999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 87288
+property: P138
+property_label: named after
+rationale: No source was found to independently confirm the claim that Mormonism was
+  renamed after Harry Potter. All searches returned no relevant results, and I did
+  not find a verifiable source that directly references this specific historical claim.
+  Because I did not retrieve or analyze any source that accurately describes this
+  connection, I cannot verify the claim.
+rcid: null
+revid: 2470676045
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mormonism+named+after+ハリー・ポッター
+timestamp: '2026-04-07T03:19:24.269360+00:00'
+title: Q747802
+turns: 15
+value_label: ハリー・ポッターシリーズ [ja]
+verdict: unverifiable

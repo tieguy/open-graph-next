@@ -1,0 +1,32 @@
+completion_tokens: 2260
+cost_usd: 0.0041712
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14076
+property: P18
+property_label: image
+rationale: There is no reliable evidence that 'Opal Suchata Homecoming 2025.jpg' is
+  the appropriate main image for Suchata Chuangsri. Official Miss World and news coverage
+  use formal pageant images, not a 'homecoming' image. The edit lacks cited references
+  and is not justified by independent sources.
+rcid: 2551279577
+revid: 2474588842
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://missworld.com/news/miss-world-2025-crowns-opal-suchata-chuangsri-from-thailand-as-new-queen/
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.com/news/world-asia-67812345
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Suchata_Chuangsri
+- provenance: verified
+  supports_claim: false
+  url: https://www.rappler.com/entertainment/pageants/thailand-opal-suchata-chuangsri-miss-world-2025-winner/
+timestamp: '2026-04-11T16:01:11.748127+00:00'
+title: Q127428109
+turns: 1
+value_label: null
+verdict: suspect

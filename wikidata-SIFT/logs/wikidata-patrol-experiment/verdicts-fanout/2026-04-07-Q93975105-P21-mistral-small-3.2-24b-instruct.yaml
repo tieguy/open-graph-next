@@ -1,0 +1,27 @@
+completion_tokens: 505
+cost_usd: 0.012548143749999997
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 131827
+property: P21
+property_label: sex or gender
+rationale: The claim that George Pig is 'therian' is incorrect. George Pig is a fictional
+  character from the children's television series 'Peppa Pig' and is consistently
+  referred to as male in all available sources. The edit to change his gender to 'therian'
+  is not supported by any credible source and contradicts established information
+  about the character.
+rcid: null
+revid: 2471111206
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/George_Pig
+- provenance: reported
+  supports_claim: false
+  url: https://www.peppapig.com/characters
+timestamp: '2026-04-07T02:50:40.338595+00:00'
+title: Q93975105
+turns: 15
+value_label: therian
+verdict: incorrect

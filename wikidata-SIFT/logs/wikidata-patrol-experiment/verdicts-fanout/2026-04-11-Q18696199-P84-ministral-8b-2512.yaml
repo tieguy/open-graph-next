@@ -1,0 +1,27 @@
+completion_tokens: 1661
+cost_usd: 0.00249522
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24395
+property: P84
+property_label: architect
+rationale: The edit incorrectly changed the architect of Farmàcia Albinyana (Q18696199)
+  from Joaquim Vancells i Vieta (Q11685058), which is well-documented in multiple
+  verified sources, to '67' (Q30227), a year and not an architect. The new value is
+  nonsensical and contradicts all available evidence. No references were attached
+  to the claim, and the change is unsupported by credible sources.
+rcid: 2549532311
+revid: 2472895717
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://jplananieto.blogspot.com/2015/12/farmacia-albinyana.html
+- provenance: verified
+  supports_claim: false
+  url: https://estimadaterra.wordpress.com/2020/06/09/farmacia-albinyana-de-terrassa/
+timestamp: '2026-04-11T05:48:09.197850+00:00'
+title: Q18696199
+turns: 2
+value_label: '67'
+verdict: incorrect

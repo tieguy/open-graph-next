@@ -1,0 +1,23 @@
+completion_tokens: 476
+cost_usd: 0.00876949
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 41192
+property: P1476
+property_label: title
+rationale: The reference URL https://www.globalbankingandfinance.com directly supports
+  the title claim. Fetching the homepage confirms the website's title matches 'Global
+  Banking & Finance Review' and that it is a UK-based financial publication, aligning
+  with the item's description and other claims.
+rcid: 2540954138
+revid: 2464742531
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com
+timestamp: '2026-02-20T07:46:05.930345+00:00'
+title: Q60744597
+turns: 6
+value_label: null
+verdict: verified-high

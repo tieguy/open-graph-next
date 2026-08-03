@@ -1,0 +1,33 @@
+completion_tokens: 2106
+cost_usd: 0.0056216
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21790
+property: P140
+property_label: religion or worldview
+rationale: No independent, primary-source evidence was found that confirms Susana
+  Higuchi's religion or worldview. The only cited reference is an import from the
+  Spanish Wikipedia, which is not considered an independent source for this claim
+  due to circularity. The change appears to be a localization edit, but the factual
+  correctness of the underlying claim cannot be verified.
+rcid: 2549615483
+revid: 2472977120
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.elcomercio.pe/politica/susana-higuchi-fallecio-este-miercoles-por-problemas-de-salud-noticia/
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Susana_Higuchi
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Susana_Higuchi
+- provenance: verified
+  supports_claim: false
+  url: https://infogob.jne.gob.pe/Politico/FichaPolitico/susana-higuchi-miyagawa_historial-partidario_10i9LM4dY74=iM
+timestamp: '2026-04-11T06:21:57.321665+00:00'
+title: Q265813
+turns: 1
+value_label: Catolicismo [es]
+verdict: unverifiable

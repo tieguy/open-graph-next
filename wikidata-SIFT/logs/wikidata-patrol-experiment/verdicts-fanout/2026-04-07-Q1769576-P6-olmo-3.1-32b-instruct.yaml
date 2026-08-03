@@ -1,0 +1,29 @@
+completion_tokens: 709
+cost_usd: 0.0181826
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 88786
+property: P6
+property_label: head of government
+rationale: There is no credible evidence that Cristiano Ronaldo is the head of government
+  of Juneda. The claim is inconsistent with all available public records and the identity
+  of Cristiano Ronaldo as a professional footballer. The official Juneda municipal
+  website does not list him as mayor, and no independent source supports this claim.
+rcid: 2550561250
+revid: 2473893949
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.juneda.cat/
+- provenance: reported
+  supports_claim: false
+  url: https://www.ine.es/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Cristiano_Ronaldo
+timestamp: '2026-04-07T07:11:01.171382+00:00'
+title: Q1769576
+turns: 5
+value_label: Cristiano Ronaldo
+verdict: incorrect

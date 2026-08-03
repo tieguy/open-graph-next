@@ -1,0 +1,23 @@
+completion_tokens: 1230
+cost_usd: 0.015773199999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 75176
+property: P577
+property_label: publication date
+rationale: The cited reference from Eurogamer could not be fetched to verify the publication
+  date claim, and independent primary sources such as Nintendo's official website
+  were also unreachable during this investigation. Without verified evidence confirming
+  the date, the claim remains unverifiable.
+rcid: null
+revid: 2470911740
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://www.eurogamer.net/articles/2012-06-05-new-super-mario-bros-2-us-release-date
+timestamp: '2026-04-07T05:10:37.964247+00:00'
+title: Q558621
+turns: 7
+value_label: null
+verdict: unverifiable

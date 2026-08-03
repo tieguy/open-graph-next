@@ -1,0 +1,26 @@
+completion_tokens: 1549
+cost_usd: 0.00518712
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44757
+property: P217
+property_label: inventory number
+rationale: The edit proposes changing the inventory number from 1983.1.29 to 1983.1.28.
+  Both the National Gallery of Art's official collection page and Grokipedia explicitly
+  confirm the correct accession number as 1983.1.29. There is no evidence supporting
+  the new value, making the edit incorrect.
+rcid: 2551372059
+revid: 2474676890
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nga.gov/artworks/61379-woman-parasol-madame-monet-and-her-son
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Woman_with_a_Parasol_%E2%80%93_Madame_Monet_and_Her_Son
+timestamp: '2026-04-10T00:21:00.880515+00:00'
+title: Q2395218
+turns: 3
+value_label: null
+verdict: incorrect

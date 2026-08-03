@@ -1,0 +1,25 @@
+completion_tokens: 1542
+cost_usd: 0.0020152200000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21314
+property: P5817
+property_label: state of use
+rationale: The change from 'in use' to 'decommissioned' for Kami-Shishiori Station
+  (Q6357193) is strongly supported by the Wikimedia Commons category page, which explicitly
+  states the station is a 'former railway station (2020–)' and lists the official
+  closure date as 1 April 2020. The item's own claims (P3999) also confirm this closure
+  date, making the decommissioned status accurate. The old value ('in use') was incorrect,
+  and the new value is well-supported by independent evidence.
+rcid: 2550475131
+revid: 2473811459
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Kami-Shishiori_Station
+timestamp: '2026-04-11T18:15:57.880753+00:00'
+title: Q6357193
+turns: 2
+value_label: decommissioned
+verdict: verified-high

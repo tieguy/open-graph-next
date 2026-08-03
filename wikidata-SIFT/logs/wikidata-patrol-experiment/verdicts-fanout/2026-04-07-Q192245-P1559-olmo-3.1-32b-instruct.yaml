@@ -1,0 +1,35 @@
+completion_tokens: 1577
+cost_usd: 0.026184199999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 126190
+property: P1559
+property_label: name in native language
+rationale: The edit cites the Hebrew Wikipedia as the source for changing Susan B.
+  Anthony's name to 'Susan B. Anthon.' However, I was unable to fetch or verify the
+  Hebrew Wikipedia page to confirm the spelling used there. All other reliable and
+  independently fetched sources (e.g., English Wikipedia, New York Times, National
+  Portrait Gallery) consistently use the spelling 'Susan B. Anthony.' Without confirmation
+  from the cited source and in the absence of corroborating evidence, the change cannot
+  be verified.
+rcid: 2550571405
+revid: 2473903700
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Susan_B._Anthony
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/1906/03/13/archives/miss-susan-b-anthony-died-this-morning-end-came-to-the-famous-woman.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.npg.si.edu/feature/susan-b-anthony
+- provenance: reported
+  supports_claim: null
+  url: https://he.wikipedia.org/wiki/סוזן_בי_אנתוני
+timestamp: '2026-04-07T09:00:41.196722+00:00'
+title: Q192245
+turns: 9
+value_label: null
+verdict: unverifiable

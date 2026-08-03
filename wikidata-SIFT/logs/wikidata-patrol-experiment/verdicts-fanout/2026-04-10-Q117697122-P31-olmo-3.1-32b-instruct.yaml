@@ -1,0 +1,22 @@
+completion_tokens: 1188
+cost_usd: 0.0029297999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11085
+property: P31
+property_label: instance of
+rationale: Wikipedia independently describes the Dolní Paseky Bridge as a road bridge
+  carrying vehicular traffic, which supports the change from general 'bridge' to the
+  more specific 'road bridge'.
+rcid: 2551358756
+revid: 2474664135
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Doln%C3%AD_Pasek%C3%BD_Bridge
+timestamp: '2026-04-10T13:20:33.890827+00:00'
+title: Q117697122
+turns: 1
+value_label: road bridge
+verdict: verified-high

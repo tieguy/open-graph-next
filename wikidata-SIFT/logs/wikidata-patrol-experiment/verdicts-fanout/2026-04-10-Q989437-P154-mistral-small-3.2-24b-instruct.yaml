@@ -1,0 +1,29 @@
+completion_tokens: 1086
+cost_usd: 0.00280804375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26431
+property: P154
+property_label: logo image
+rationale: The new logo image "Cosplay of Monkey D. Luffy from One Piece at Made in
+  Asia 2023.jpg" does not match the official branding of Emmaus as shown on the Emmaus
+  France website and logo download pages. The official logos are different and consistent
+  with the branding of Emmaus.
+rcid: null
+revid: 2472586501
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://emmaus-france.org/
+- provenance: verified
+  supports_claim: false
+  url: https://seeklogo.com/free-vector-logos/emmaus
+- provenance: verified
+  supports_claim: false
+  url: https://seeklogo.com/vector-logo/47536/emmaus
+timestamp: '2026-04-10T10:02:48.922561+00:00'
+title: Q989437
+turns: 3
+value_label: null
+verdict: incorrect

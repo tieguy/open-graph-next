@@ -1,0 +1,24 @@
+completion_tokens: 2520
+cost_usd: 0.0040884300000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37383
+property: P973
+property_label: described at URL
+rationale: The old value (CNN article) is a verified, authoritative source confirming
+  Ridgeback Biotherapeutics' association with Molnupiravir. The new value (Filmyspark
+  article) is unreachable (403 Forbidden) and lacks direct verification. Replacing
+  a well-supported claim with an unverifiable source is suspicious and does not improve
+  the quality of the claim.
+rcid: 2551339571
+revid: 2474645827
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cnn.com/2021/11/04/health/uk-authorizes-merck-antiviral-molnupiravir-covid/index.html
+timestamp: '2026-04-11T07:12:02.378768+00:00'
+title: Q109546866
+turns: 3
+value_label: null
+verdict: suspect

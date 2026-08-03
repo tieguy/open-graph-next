@@ -1,0 +1,27 @@
+completion_tokens: 609
+cost_usd: 0.008762
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 41983
+property: P27
+property_label: country of citizenship
+rationale: The edit claims that Willy Voet's country of citizenship is 'Mongols',
+  but no independent or reliable sources support this claim. The item's description
+  and birthplace indicate Belgian origin, and attempts to verify this change through
+  web sources did not yield any supporting evidence. The change appears to be unsupported
+  and likely incorrect.
+rcid: 2549518128
+revid: 2472881856
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Willy_Voet
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T11:57:12.354915+00:00'
+title: Q3569193
+turns: 9
+value_label: Mongols
+verdict: suspect

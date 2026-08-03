@@ -1,0 +1,33 @@
+completion_tokens: 2617
+cost_usd: 0.00400938
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44535
+property: P361
+property_label: part of
+rationale: The edit changes the 'part of' claim for Melayu from Srivijaya (Q234197)
+  to Samudra Pasai (Q3284315). The pre-fetched sources do not provide clear evidence
+  that Melayu was historically part of Samudra Pasai. Instead, the sources describe
+  Samudra Pasai as an independent Islamic kingdom emerging in the 13th century, with
+  no explicit mention of Melayu as a part of it. Srivijaya, on the other hand, is
+  a more plausible predecessor given Melayu's timeline (~1183–1347 CE) and geographical
+  context in Sumatra. The lack of corroborating evidence for the new value and the
+  absence of references in the edit make this change suspect.
+rcid: null
+revid: 2471664700
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://perihal-bangsa-melayu.blogspot.com/2010/01/kesultanan-samudera-pasai.html
+- provenance: verified
+  supports_claim: false
+  url: https://abhiseva.id/kerajaan-samudra-pasai-1267-1524/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ruangguru.com/blog/kerajaan-samudera-pasai
+timestamp: '2026-04-11T09:06:08.059942+00:00'
+title: Q3112053
+turns: 4
+value_label: Samudra Pasai
+verdict: suspect

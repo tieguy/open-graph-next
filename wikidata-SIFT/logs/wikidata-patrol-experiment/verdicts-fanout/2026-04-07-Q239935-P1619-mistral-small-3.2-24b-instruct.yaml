@@ -1,0 +1,22 @@
+completion_tokens: 879
+cost_usd: 0.0036674999999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36776
+property: P1619
+property_label: date of official opening
+rationale: The cited reference could not be verified due to a blocked domain, and
+  no independent sources were found to confirm the new date. The change from 1998
+  to 1864 is highly implausible given the item's context and architectural style.
+rcid: 2549884163
+revid: 2473239727
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://nl.wikipedia.org/w/index.php?title=Ciutat_de_les_Arts_i_les_Ciències&oldid=52290977
+timestamp: '2026-04-07T02:46:47.991354+00:00'
+title: Q239935
+turns: 5
+value_label: null
+verdict: unverifiable

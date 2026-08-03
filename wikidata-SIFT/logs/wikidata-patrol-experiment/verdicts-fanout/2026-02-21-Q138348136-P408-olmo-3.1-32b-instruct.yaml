@@ -1,0 +1,27 @@
+completion_tokens: 1377
+cost_usd: 0.005198599999999999
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21862
+property: P408
+property_label: software engine
+rationale: The fandom wiki, which was directly fetched and verified, states that the
+  iOS version of Fut Rap Cartas uses Unity as the graphics engine. This supports the
+  claim that the game uses Unity, at least for iOS. However, a primary confirmation
+  for all platforms was not found in the fetched sources, so the evidence is considered
+  moderate rather than strong.
+rcid: 2540921134
+revid: 2464712163
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: false
+  url: https://futrapcartas.app
+timestamp: '2026-02-21T00:37:40.528793+00:00'
+title: Q138348136
+turns: 2
+value_label: Q63966
+verdict: verified-low

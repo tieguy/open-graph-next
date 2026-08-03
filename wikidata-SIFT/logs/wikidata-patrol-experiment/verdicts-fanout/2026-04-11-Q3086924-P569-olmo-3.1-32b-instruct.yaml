@@ -1,0 +1,31 @@
+completion_tokens: 1709
+cost_usd: 0.0048844000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19295
+property: P569
+property_label: date of birth
+rationale: Multiple independent and verified sources confirm that Fred Pellerin's
+  date of birth is November 22, 1976. No credible source supports the value '22 November
+  1890'. The edit is therefore incorrect.
+rcid: null
+revid: 2471073178
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Fred_Pellerin
+- provenance: verified
+  supports_claim: false
+  url: https://astrologify.com/people/fred-pellerin/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ask-oracle.com/birth-chart/fred-pellerin/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ledroit.com/2021/07/19/quand-frederic-pellerin-est-devenu-fred-pellerin-163e703cd6274af25bb8896c09c306f0/
+timestamp: '2026-04-11T07:45:13.878427+00:00'
+title: Q3086924
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 2050
+cost_usd: 0.0041014
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14357
+property: P18
+property_label: image
+rationale: The only reference for the image was an internal Wikimedia source (Russian
+  Wikipedia), and the Commons file page does not provide a reliable external source
+  for the image. Independent searches did not find the image attributed to a reputable
+  news agency or reliable external source. Therefore, the removal of the reference
+  was justified, as it did not add value to the claim.
+rcid: 2551423438
+revid: 2474724622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Wail_Al-Shehri_color.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/wail_al-shehri
+timestamp: '2026-04-10T14:18:16.748475+00:00'
+title: Q2414493
+turns: 1
+value_label: null
+verdict: verified-high

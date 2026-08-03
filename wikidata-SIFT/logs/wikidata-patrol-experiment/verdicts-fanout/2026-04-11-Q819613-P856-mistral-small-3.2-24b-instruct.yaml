@@ -1,0 +1,27 @@
+completion_tokens: 492
+cost_usd: 0.007244112499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 75123
+property: P856
+property_label: official website
+rationale: The old value 'https://www.city.uozu.toyama.jp/' is confirmed to be the
+  official website of Uozu, as it contains relevant information about the city. The
+  new value 'https://www.aeromexico.com/' is unrelated and does not serve as a valid
+  official website for Uozu. The change appears to be incorrect and likely a mistake
+  or vandalism.
+rcid: null
+revid: 2471397246
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.uozu.toyama.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.aeromexico.com/
+timestamp: '2026-04-11T12:59:47.556646+00:00'
+title: Q819613
+turns: 6
+value_label: null
+verdict: incorrect

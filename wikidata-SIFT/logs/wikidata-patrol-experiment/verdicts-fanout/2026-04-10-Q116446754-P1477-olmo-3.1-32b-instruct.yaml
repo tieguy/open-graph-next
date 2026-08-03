@@ -1,0 +1,32 @@
+completion_tokens: 753
+cost_usd: 0.0038948000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17215
+property: P1477
+property_label: birth name
+rationale: No reliable source supports the claim that 'Clément sous string léopard
+  grrr' is the birth name of Poupette Kenza. Major journalistic profiles and the legal
+  birth record do not reference this name, and the cited references do not corroborate
+  it. The value appears only in the edit, with no independent evidence found.
+rcid: 2549579439
+revid: 2472942112
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.lemonde.fr/pixels/article/2023/02/18/poupette-kenza-exhibe-sa-vie-de-femme-au-foyer-a-ses-millions-d-abonnes-sur-snapchat_6162397_4408996.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.voici.fr/bios-people/poupette-kenza
+- provenance: reported
+  supports_claim: false
+  url: https://en.everybodywiki.com/Poupette_Kenza
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/franceinter/podcasts/capture-d-ecrans/capture-d-ecrans-du-mercredi-28-decembre-2022-1263560
+timestamp: '2026-04-10T14:13:56.688905+00:00'
+title: Q116446754
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 2144
+cost_usd: 0.009932937499999999
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 100234
+property: P1559
+property_label: name in native language
+rationale: The added reference from 'Kürschners Deutscher Gelehrten-Kalender' does
+  not clearly support the claim, and the independent sources found do not provide
+  the full name 'Johannes Wolfgang Christian Dietrich.' Therefore, the verdict is
+  that the added reference does not sufficiently support the claim.
+rcid: 2550593100
+revid: 2473924533
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-zur-gemeinsamen-sitzung-der-klasse-fuer-naturwissenschaften-und-technikwissenschaften-der-leibniz-sozietaet-mit-der-deutschen-gesellschaft-fuer-kybernetik-am-11-april-2024/
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneanet.org/surnames/DIETRICH
+- provenance: verified
+  supports_claim: false
+  url: https://en.wiktionary.org/wiki/Dietrich
+- provenance: verified
+  supports_claim: false
+  url: https://www.houseofnames.com/dietrich-family-crest
+timestamp: '2026-04-11T18:39:51.958321+00:00'
+title: Q48800274
+turns: 5
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 1303
+cost_usd: 0.008357499999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 89019
+property: P18
+property_label: image
+rationale: The removed image claim had no references, and independent searches did
+  not yield any specific results confirming the existence or relevance of the image
+  'Theodor Schwann Litho.jpg'. Therefore, the removal of this image claim appears
+  justified.
+rcid: 2549461755
+revid: 2472827040
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/theodor-schwann
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/theodor-schwann.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.sciencesource.com/1384996-theodor-schwann-german-physiologist-stock-image-rights-managed.html
+timestamp: '2026-04-11T10:15:01.676230+00:00'
+title: Q76745
+turns: 5
+value_label: null
+verdict: verified-high

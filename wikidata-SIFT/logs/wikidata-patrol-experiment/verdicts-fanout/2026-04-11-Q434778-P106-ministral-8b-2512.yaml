@@ -1,0 +1,33 @@
+completion_tokens: 2445
+cost_usd: 0.0033584699999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29366
+property: P106
+property_label: occupation
+rationale: The change from 'film actor' (Q10800557) to 'television actor' (Q10798782)
+  for Nicholas Brendon (Q434778) is strongly supported by independent sources. Nicholas
+  Brendon is best known for his iconic role as Xander Harris in *Buffy the Vampire
+  Slayer*, a television series, which is widely recognized as his defining work. While
+  he did have film roles, his television career is emphasized across multiple verified
+  sources, including the Hollywood Reporter, Rotten Tomatoes, and The Guardian. The
+  new value accurately reflects his primary occupation. However, it is worth noting
+  that retaining 'film actor' as a secondary occupation would be more comprehensive.
+rcid: 2550958298
+revid: 2474278185
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.hollywoodreporter.com/tv/tv-news/nicholas-brendon-dead-buffy-the-vampire-slayer-1236543090/
+- provenance: verified
+  supports_claim: true
+  url: https://www.rottentomatoes.com/celebrity/nicholas_brendon
+- provenance: verified
+  supports_claim: true
+  url: https://www.theguardian.com/tv-and-radio/2026/mar/20/nicholas-brendon-buffy-the-vampire-slayer-actor-dies
+timestamp: '2026-04-11T11:57:21.525690+00:00'
+title: Q434778
+turns: 2
+value_label: television actor
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 1316
+cost_usd: 0.0057702
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24903
+property: P973
+property_label: described at URL
+rationale: The cited URL points to a news article about a Sterling fund winning an
+  award in 2016. While Stephen Tiller is mentioned in his executive capacity in the
+  article, the page is not a biographical or professional description of Tiller himself.
+  'Described at URL' is generally intended for sources that directly describe the
+  subject as an individual, not for news articles about organizational achievements.
+  Therefore, the citation does not appropriately describe Stephen Tiller as a person.
+rcid: 2540928236
+revid: 2464718978
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.thebahamasinvestor.com/2016/nassau-fund-wins-international-award/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sterlinggloballtd.com/about-us/
+timestamp: '2026-02-20T21:30:59.523668+00:00'
+title: Q136533846
+turns: 3
+value_label: null
+verdict: suspect

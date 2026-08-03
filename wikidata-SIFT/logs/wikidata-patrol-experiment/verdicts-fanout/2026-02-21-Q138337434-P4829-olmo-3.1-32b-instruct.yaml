@@ -1,0 +1,24 @@
+completion_tokens: 825
+cost_usd: 0.007633
+diff_type: unknown
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35690
+property: P4829
+property_label: Swiss Enterprise Identification Number
+rationale: The official Swiss company registry lists the UID as CHE-276.195.210 for
+  the Institut für limbische Kommunikation und Strategie GmbH. No official or independent
+  source corroborates CHE-137.472.345 as the correct enterprise number for this entity.
+  The cited value is not present in the primary registry and could not be verified
+  through authoritative sources.
+rcid: 2540916641
+revid: 2464708000
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.moneyhouse.ch/de/company/institut-fuer-limbische-kommunikation-und-str-21178345071
+timestamp: '2026-02-21T03:05:29.269001+00:00'
+title: Q138337434
+turns: 6
+value_label: null
+verdict: unverifiable

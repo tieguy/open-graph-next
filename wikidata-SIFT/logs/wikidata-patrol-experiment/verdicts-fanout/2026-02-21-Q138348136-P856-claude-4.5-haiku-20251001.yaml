@@ -1,0 +1,28 @@
+completion_tokens: 1175
+cost_usd: 0.034943
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 29068
+property: P856
+property_label: official website
+rationale: Direct verification of the website at https://futrapcartas.app confirms
+  it is the official project hub. The site displays authentic information about Fut
+  Rap Cartas as a collectible card video game based on freestyle rap, created by Federico
+  and Felipe Sarra, with all details (founders, country of origin, release date, platforms)
+  matching existing Wikidata claims. The URL is functional, authoritative, and serves
+  as the primary source for the project's official information.
+rcid: 2540920980
+revid: 2464712010
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app
+- provenance: reported
+  supports_claim: true
+  url: https://www.tiktok.com/@futrapcartas.app
+timestamp: '2026-02-21T00:50:53.579870+00:00'
+title: Q138348136
+turns: 3
+value_label: null
+verdict: verified-high

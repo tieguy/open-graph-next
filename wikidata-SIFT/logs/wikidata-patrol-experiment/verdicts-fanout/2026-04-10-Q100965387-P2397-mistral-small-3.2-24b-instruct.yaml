@@ -1,0 +1,26 @@
+completion_tokens: 1098
+cost_usd: 0.003151325
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32253
+property: P2397
+property_label: YouTube channel ID
+rationale: The edit changes the YouTube channel ID to a new format with an '@' prefix.
+  However, the current YouTube channel URL does not mention the new '@theatrelaseizieme_'
+  ID, and no independent sources confirm the new ID. Therefore, the claim cannot be
+  verified with the available evidence.
+rcid: 2551329084
+revid: 2474635968
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCuzZvFNQSnicSFwUR2XSWiA
+- provenance: verified
+  supports_claim: false
+  url: https://www.createastir.ca/theatre-la-seizieme
+timestamp: '2026-04-10T00:12:57.289884+00:00'
+title: Q100965387
+turns: 4
+value_label: null
+verdict: unverifiable

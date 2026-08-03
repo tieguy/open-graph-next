@@ -1,0 +1,28 @@
+completion_tokens: 727
+cost_usd: 0.027942949999999998
+diff_type: reference_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 555951
+property: P1971
+property_label: number of children
+rationale: No independent source was found to confirm the number of children claim.
+  While Wikipedia (a secondary source) and the VIPER site contain biographical information
+  about Cardi B, no primary source explicitly confirming '4' children was located.
+  The gathered information indicates she has at least two confirmed children (Kulture
+  and a son born September 4, 2021), but there is no verified source stating exactly
+  four children. Therefore, the claim remains unverifiable based on available evidence.
+rcid: null
+revid: 2471547309
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://people.com/parents/cardi-b-and-offset-welcome-second-baby-a-son/
+- provenance: verified
+  supports_claim: false
+  url: https://hedendaagsesieraden.nl/2024/10/08/cardi-b/
+timestamp: '2026-04-07T13:52:53.856207+00:00'
+title: Q29033668
+turns: 15
+value_label: null
+verdict: unverifiable

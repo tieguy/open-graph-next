@@ -1,0 +1,19 @@
+completion_tokens: 138
+cost_usd: 0.0053019375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 56186
+property: P856
+property_label: official website
+rationale: I was unable to fetch any sources to verify the claim due to a technical
+  issue with the search API. Therefore, I cannot confirm or deny the correctness of
+  the change to the official website.
+rcid: null
+revid: 2465913630
+sources: []
+timestamp: '2026-04-11T15:06:39.114925+00:00'
+title: Q694322
+turns: 4
+value_label: null
+verdict: unverifiable

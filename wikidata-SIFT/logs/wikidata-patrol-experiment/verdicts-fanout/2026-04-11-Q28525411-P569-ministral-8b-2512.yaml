@@ -1,0 +1,32 @@
+completion_tokens: 2000
+cost_usd: 0.00256881
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21321
+property: P569
+property_label: date of birth
+rationale: The edit changes Ana Pardo de Vera's date of birth from a precise date
+  (`1974-02-07`) to a year-only value (`1974`). While the BNE authority file (unreachable)
+  cited the exact day, multiple independent sources confirm the year (`1974`) and
+  month (`February`). Since the exact day is not independently verifiable due to the
+  unreachable source, the change to `1974` is justified but lacks full precision.
+  The removal of precision is supported by accessible sources, but the lack of confirmation
+  for the day reduces the certainty.
+rcid: 2550885214
+revid: 2474208340
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.infobae.com/espana/2025/07/04/quien-es-ana-pardo-de-vera-la-periodista-que-ha-denunciado-a-vito-quiles-por-acoso/
+- provenance: verified
+  supports_claim: false
+  url: https://www.libertaddigital.com/personajes/ana-pardo-de-vera/
+- provenance: verified
+  supports_claim: false
+  url: https://www.penguinlibros.com/es/966434-ana-pardo-de-vera
+timestamp: '2026-04-11T05:50:31.295244+00:00'
+title: Q28525411
+turns: 1
+value_label: null
+verdict: verified-low

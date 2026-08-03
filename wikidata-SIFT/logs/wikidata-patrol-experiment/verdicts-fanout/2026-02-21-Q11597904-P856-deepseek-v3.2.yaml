@@ -1,0 +1,26 @@
+completion_tokens: 268
+cost_usd: 0.00742736
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 15732
+property: P856
+property_label: official website
+rationale: 'The official website URL https://www.tachikawa-edu.jp/es01/ is confirmed
+  to be the correct website for Tachikawa City First Elementary School (立川市立第一小学校).
+  The webpage title matches the school''s name, and the content indicates this is
+  indeed the school''s official website. The URL structure (tachikawa-edu.jp) is consistent
+  with the municipal education domain, and the ''/es01/'' path suggests it''s for
+  elementary school #1, aligning with the school''s designation as ''First Elementary
+  School''.'
+rcid: 2541055768
+revid: 2464837968
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.tachikawa-edu.jp/es01/
+timestamp: '2026-02-21T03:54:08.735530+00:00'
+title: Q11597904
+turns: 2
+value_label: null
+verdict: verified-high

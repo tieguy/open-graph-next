@@ -1,0 +1,29 @@
+completion_tokens: 3177
+cost_usd: 0.0052222
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16580
+property: P571
+property_label: inception
+rationale: The university was legally founded on August 26, 1971, as documented in
+  the official decree and corroborated by both the university's official website and
+  English Wikipedia. There is no credible evidence supporting a founding date of 1973.
+  Changing the inception from 1971 to 1973 is therefore incorrect.
+rcid: null
+revid: 2471463298
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://busquedas.elperiodico.com/documento/LEY-18942-DE-26-DE-AGOSTO-DE-1971
+- provenance: verified
+  supports_claim: false
+  url: http://www.unjbg.edu.pe/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jorge_Basadre_Grohmann_National_University
+timestamp: '2026-04-11T18:22:38.945958+00:00'
+title: Q6156567
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 1376
+cost_usd: 0.0017004300000000002
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22607
+property: P6375
+property_label: street address
+rationale: The street address claim for Ibis Wien Mariahilf (Mariahilfer Gürtel 22–24,
+  1060 Wien) is supported by a verified secondary source (wien.info). However, the
+  newly added reference (ibis-wien-mariahilf.meinhotel.top/) is unreachable, limiting
+  the strength of verification. The claim is independently confirmed but lacks a reliable
+  primary source.
+rcid: 2550325433
+revid: 2473664898
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wien.info/en/ibis-wien-mariahilf-162062
+- provenance: reported
+  supports_claim: false
+  url: https://ibis-wien-mariahilf.meinhotel.top/
+timestamp: '2026-04-11T16:27:48.384660+00:00'
+title: Q111410471
+turns: 3
+value_label: null
+verdict: verified-low

@@ -1,0 +1,31 @@
+completion_tokens: 2459
+cost_usd: 0.0040752900000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40582
+property: P287
+property_label: designed by
+rationale: The claim that Kylian Mbappé designed the Tulip chair is incorrect. The
+  Tulip chair is a well-established design attributed to Eero Saarinen, supported
+  by authoritative sources such as the Museum of Modern Art and multiple verified
+  independent sources (Houzz, ModHolic, Sarzastore). No credible sources link Kylian
+  Mbappé to the design of the Tulip chair, and the edit lacks any references or evidence.
+  The change contradicts established claims and authoritative documentation.
+rcid: 2551187138
+revid: 2474500945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.houzz.com/magazine/must-know-furniture-the-tulip-chair-stsetivw-vs~35009204
+- provenance: verified
+  supports_claim: false
+  url: https://www.modholic.com/tulip-swivel-side-chair-white/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sarzastore.com/products/tulip-dining-chair
+timestamp: '2026-04-11T10:53:14.215193+00:00'
+title: Q2916267
+turns: 4
+value_label: Kylian Mbappé
+verdict: incorrect

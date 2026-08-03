@@ -1,0 +1,34 @@
+completion_tokens: 1994
+cost_usd: 0.00918570625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 97106
+property: P69
+property_label: educated at
+rationale: Multiple independent sources confirm that Josh Universe is currently a
+  student at the Florida Institute of Technology, pursuing a Bachelor's degree in
+  Astronomy and Astrophysics with a minor in Entrepreneurship, and taking courses
+  toward a Master's degree in Commercial Enterprise in Space. There is no mention
+  of Josh Universe being educated at Ivy Tech Community College, Central Indiana Region
+  in the investigated sources.
+rcid: 2551433524
+revid: 2474732929
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://about.me/joshhabka
+- provenance: verified
+  supports_claim: true
+  url: https://adscientificindex.com/scientist/josh-universe/5538240/
+- provenance: verified
+  supports_claim: true
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: verified
+  supports_claim: true
+  url: https://leanspacetech.com/people/josh-universe/
+timestamp: '2026-04-11T12:12:25.698640+00:00'
+title: Q123738871
+turns: 4
+value_label: Florida Institute of Technology
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 1490
+cost_usd: 0.00499647
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55929
+property: P840
+property_label: narrative location
+rationale: 'The narrative location claim for ''Looney Tunes: Rabbits Run'' being set
+  in New York City is strongly supported by the Alchetron summary, which explicitly
+  states that key plot events occur in New York City. The qualifiers added (e.g.,
+  located in New York, United States) are consistent with the narrative context provided
+  by the source.'
+rcid: 2550868201
+revid: 2474191667
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://alchetron.com/Looney-Tunes:-Rabbits-Run
+timestamp: '2026-04-11T11:09:53.955259+00:00'
+title: Q19864298
+turns: 5
+value_label: New York City
+verdict: verified-high

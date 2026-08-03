@@ -1,0 +1,23 @@
+completion_tokens: 2160
+cost_usd: 0.00762687
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 67809
+property: P19
+property_label: place of birth
+rationale: The official Ministry of Justice profile of the Republic of Moldova explicitly
+  states Veronica Mihailov-Moraru's birthplace as Chișinău. This primary source confirms
+  the updated claim is accurate and precise, removing the redundant 'Municipality'
+  qualifier.
+rcid: 2550301257
+revid: 2473641160
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.justice.gov.md/en/content/veronica-mihailov-moraru
+timestamp: '2026-04-10T13:00:26.545329+00:00'
+title: Q116786041
+turns: 6
+value_label: Chișinău
+verdict: verified-high

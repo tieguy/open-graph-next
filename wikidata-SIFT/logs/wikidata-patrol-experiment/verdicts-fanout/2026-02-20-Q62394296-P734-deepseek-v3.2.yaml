@@ -1,0 +1,30 @@
+completion_tokens: 1605
+cost_usd: 0.0343761
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 222606
+property: P734
+property_label: family name
+rationale: Multiple independent authoritative sources consistently identify Mansour
+  Abbas's family name as 'Abbas'. The current value 'nigga' (Q4117010) is a slang
+  term derived from an ethnic slur and is not a family name. No evidence supports
+  its use as a family name for Mansour Abbas or any other individual. The claim was
+  likely a vandalous edit.
+rcid: 2540944904
+revid: 2464734242
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://main.knesset.gov.il/mk/Pages/MKPersonalDetails.aspx?MKID=1007
+- provenance: verified
+  supports_claim: false
+  url: https://www.washingtoninstitute.org/policy-analysis/arab-leader-israel-conversation-mansour-abbas
+- provenance: verified
+  supports_claim: false
+  url: https://www.jpost.com/tags/mansour-abbas
+timestamp: '2026-02-20T12:06:28.970200+00:00'
+title: Q62394296
+turns: 15
+value_label: nigga
+verdict: incorrect

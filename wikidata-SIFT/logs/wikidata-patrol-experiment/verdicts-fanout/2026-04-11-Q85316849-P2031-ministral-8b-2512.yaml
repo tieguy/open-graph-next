@@ -1,0 +1,23 @@
+completion_tokens: 1788
+cost_usd: 0.00351717
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25286
+property: P2031
+property_label: start of work period
+rationale: The edit changing the start of work period for Q85316849 (Xian) from 1990
+  to 2019 lacks any references or verifiable sources. Additionally, the item contains
+  contradictory information (e.g., claiming citizenship of the Basque Country while
+  describing a Beijing-based Chinese activist) and an implausible date of birth. Without
+  any independently verified sources or references, it is impossible to confirm the
+  accuracy of the new value or the old value. The lack of ability to perform web searches
+  further prevents investigation of the claim's validity.
+rcid: null
+revid: 2471235233
+sources: []
+timestamp: '2026-04-11T09:35:35.996216+00:00'
+title: Q85316849
+turns: 3
+value_label: null
+verdict: unverifiable

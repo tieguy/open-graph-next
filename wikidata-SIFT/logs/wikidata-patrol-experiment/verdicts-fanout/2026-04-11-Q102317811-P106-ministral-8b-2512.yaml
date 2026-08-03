@@ -1,0 +1,30 @@
+completion_tokens: 1856
+cost_usd: 0.00140691
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13719
+property: P106
+property_label: occupation
+rationale: The Mathematics Genealogy Project explicitly categorizes Arnaud Le Ny as
+  a mathematician, supported by his advisors and doctoral students also listed as
+  mathematicians. ResearchGate profiles confirm his work aligns with mathematical
+  physics. No credible sources support the old value ('physicist'), and the change
+  to 'mathematician' is well-supported by authoritative academic records.
+rcid: 2550521965
+revid: 2473856107
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.genealogy.math.ndsu.nodak.edu/id.php?id=117491
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/lab/Arnaud-Le-Ny-Lab
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Arnaud-Le-Ny-2
+timestamp: '2026-04-11T07:15:16.794717+00:00'
+title: Q102317811
+turns: 1
+value_label: mathematician
+verdict: verified-high

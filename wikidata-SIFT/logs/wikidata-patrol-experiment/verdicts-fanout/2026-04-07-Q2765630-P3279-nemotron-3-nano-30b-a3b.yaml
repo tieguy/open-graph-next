@@ -1,0 +1,22 @@
+completion_tokens: 556
+cost_usd: 0.0039525
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76826
+property: P3279
+property_label: statistical leader
+rationale: No independent verified sources were found to confirm or refute that 'Galatasaray
+  S.K.' is the correct updated statistical leader for the list of Turkish football
+  champions. Multiple search attempts using various query variations did not return
+  any relevant source material that could be verified or provide substantive evidence
+  about the claim. Therefore, based on the available evidence, the statement cannot
+  be confirmed.
+rcid: null
+revid: 2471846791
+sources: []
+timestamp: '2026-04-07T07:09:39.039796+00:00'
+title: Q2765630
+turns: 15
+value_label: Galatasaray S.K.
+verdict: unverifiable

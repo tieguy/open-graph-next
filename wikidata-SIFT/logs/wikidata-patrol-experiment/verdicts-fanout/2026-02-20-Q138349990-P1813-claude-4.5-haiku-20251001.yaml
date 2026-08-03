@@ -1,0 +1,26 @@
+completion_tokens: 1383
+cost_usd: 0.08595
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 79035
+property: P1813
+property_label: short name
+rationale: The official company website (https://suchfokus.de) directly supports the
+  claim that the short name is 'Suchfokus'. The website explicitly identifies the
+  company as 'SuchFokus - SEO, Google Ads und Conversion aus einer Hand' throughout
+  multiple sections, including the founder statement and service descriptions. As
+  a primary source (the official company website), this provides strong evidence that
+  the short name claim is accurate. The reference cited in the edit is authoritative
+  and directly supports the added claim.
+rcid: 2540973863
+revid: 2464760744
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:58:35.802046+00:00'
+title: Q138349990
+turns: 6
+value_label: null
+verdict: verified-high

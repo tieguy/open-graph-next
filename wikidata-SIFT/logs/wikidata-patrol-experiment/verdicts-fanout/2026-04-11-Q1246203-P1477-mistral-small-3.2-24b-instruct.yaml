@@ -1,0 +1,30 @@
+completion_tokens: 1637
+cost_usd: 0.00195694
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17884
+property: P1477
+property_label: birth name
+rationale: Both the old and new values are supported by different authoritative sources.
+  The edit to change the birth name from the longer form to the shorter form is plausible
+  but not definitively correct. The presence of both names in reliable sources suggests
+  that the edit might be an attempt to simplify the name, but it does not necessarily
+  make the old value incorrect.
+rcid: null
+revid: 2471495510
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.hoasm.org/VIIH/Nebra.html
+- provenance: verified
+  supports_claim: true
+  url: https://imslp.org/wiki/Category:Nebra,_Jos%C3%A9_de
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/0d7881bf-7c49-43b0-963a-cc7b08b91b48
+timestamp: '2026-04-11T15:22:28.168006+00:00'
+title: Q1246203
+turns: 1
+value_label: null
+verdict: plausible

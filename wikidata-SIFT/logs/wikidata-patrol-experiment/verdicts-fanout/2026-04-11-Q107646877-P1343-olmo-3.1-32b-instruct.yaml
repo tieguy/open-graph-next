@@ -1,0 +1,29 @@
+completion_tokens: 1084
+cost_usd: 0.0042424
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17960
+property: P1343
+property_label: described by source
+rationale: The cited source (ARD-faktenfinder) discusses 'Corona Rebellen' in the
+  context of reporting on 'Querdenken' groups, but it does not serve as a primary
+  or authoritative description of the organization. The removal of the P1343 (described
+  by source) claim referencing ARD-Faktenfinder is therefore justified as the source
+  is not appropriate for that property. However, the evidence confirming the removal's
+  correctness is indirect, as no primary or official description by ARD-Faktenfinder
+  was found.
+rcid: 2551215838
+revid: 2474528828
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.tagesschau.de/faktenfinder/faktenchecks-corona-101.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-11T11:52:39.797661+00:00'
+title: Q107646877
+turns: 1
+value_label: ARD-Faktenfinder
+verdict: verified-low

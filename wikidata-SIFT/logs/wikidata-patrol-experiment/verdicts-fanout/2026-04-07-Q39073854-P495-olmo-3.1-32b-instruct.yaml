@@ -1,0 +1,26 @@
+completion_tokens: 1059
+cost_usd: 0.007278399999999999
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33215
+property: P495
+property_label: country of origin
+rationale: The only reference for the claim that Iraq was the country of origin was
+  English Wikipedia, which is not a valid reference for Wikidata and could not be
+  accessed. Independent web searches did not find any reliable source confirming Iraq
+  as the country of origin. Therefore, removing the claim was appropriate.
+rcid: 2550486511
+revid: 2473822432
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/The_Journey_(2017_film)
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q39073854
+timestamp: '2026-04-07T09:19:15.924920+00:00'
+title: Q39073854
+turns: 6
+value_label: Iraq
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 368
+cost_usd: 0.0040168
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18980
+property: P348
+property_label: software version identifier
+rationale: The official flat assembler website lists version 1.73.32 as a released
+  version for Windows, Linux, and DOS. The site also indicates a progression of version
+  numbers from earlier versions, including 1.73.23, with explicit last update timestamps
+  for each OS build. Additionally, the GitHub repository for flat assembler contains
+  releases that include version 1.73.32 as a later release than 1.73.23. These independent,
+  authoritative sources confirm that both 1.73.23 and 1.73.32 were official releases,
+  and that 1.73.32 is a subsequent version. The change from 1.73.23 to 1.73.32 is
+  therefore correct.
+rcid: 2550388751
+revid: 2473726576
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://flatassembler.net/download.php
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/tgrysztar/fasm/releases
+timestamp: '2026-04-11T18:35:05.330857+00:00'
+title: Q852086
+turns: 1
+value_label: null
+verdict: verified-high

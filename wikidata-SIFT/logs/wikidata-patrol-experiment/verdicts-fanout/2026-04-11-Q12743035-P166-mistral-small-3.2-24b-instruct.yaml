@@ -1,0 +1,28 @@
+completion_tokens: 1402
+cost_usd: 0.0031370800000000004
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36586
+property: P166
+property_label: award received
+rationale: Multiple independent sources, including the official biography page and
+  a news article, confirm that Valentina Rusu-Ciobanu was awarded the Order of Cultural
+  Merit in 2020. The claim is well-supported by these sources.
+rcid: 2550500242
+revid: 2473835625
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/pictorita-valentina-rusu-ciobanu-a-fost-decorata-cu-ordinul-meritul-cultural-in-grad-de-mare-ofiter-al-romaniei/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+timestamp: '2026-04-11T14:37:58.531070+00:00'
+title: Q12743035
+turns: 2
+value_label: Order of Cultural Merit
+verdict: verified-high

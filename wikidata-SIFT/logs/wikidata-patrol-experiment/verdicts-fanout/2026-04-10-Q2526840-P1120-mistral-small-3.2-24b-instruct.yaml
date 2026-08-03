@@ -1,0 +1,25 @@
+completion_tokens: 1401
+cost_usd: 0.0032408625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32249
+property: P1120
+property_label: number of deaths
+rationale: The sources consulted do not provide specific information about the number
+  of deaths related to the Night of the Pencils. The sources provide context and details
+  about the event but do not confirm the specific number of deaths.
+rcid: 2551037471
+revid: 2474354425
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://peoplesdispatch.org/2019/09/16/the-night-of-the-pencils/
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Night_of_the_Pencils
+timestamp: '2026-04-10T11:14:30.810372+00:00'
+title: Q2526840
+turns: 3
+value_label: null
+verdict: unverifiable

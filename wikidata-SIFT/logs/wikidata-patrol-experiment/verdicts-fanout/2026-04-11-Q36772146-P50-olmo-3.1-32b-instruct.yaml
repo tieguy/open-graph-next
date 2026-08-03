@@ -1,0 +1,33 @@
+completion_tokens: 2758
+cost_usd: 0.0076024000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29738
+property: P50
+property_label: author
+rationale: Multiple primary sources—including the full text of the article on NCBI
+  PMC, the PubMed entry, the Europe PMC page, and the journal's abstract—explicitly
+  list Cengiz Kara as an author but do not list Zehra Aycan as an author of the publication
+  in question. This confirms that changing the author from Zehra Aycan to Prof. Dr.
+  Cengiz Kara was correct.
+rcid: 2550941699
+revid: 2474262095
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3628388
+- provenance: verified
+  supports_claim: true
+  url: https://pubmed.ncbi.nlm.nih.gov/23419424/
+- provenance: verified
+  supports_claim: true
+  url: https://europepmc.org/articles/pmc3628388
+- provenance: verified
+  supports_claim: true
+  url: https://www.jcrendocrine.org/article/S1681-2985(13)00043-8/abstract
+timestamp: '2026-04-11T16:36:34.795655+00:00'
+title: Q36772146
+turns: 1
+value_label: Prof. Dr. Cengiz Kara
+verdict: verified-high

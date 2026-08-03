@@ -1,0 +1,23 @@
+completion_tokens: 666
+cost_usd: 0.0056412
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26208
+property: P18
+property_label: image
+rationale: There is no evidence from the official Mitsubishi Motors UK website that
+  '2020 Mitsubishi Outlander ES AWD front 01.jpg' is an official or authorized image
+  for the 2020 Outlander ES AWD. The previous image was for a different variant, and
+  no reliable source confirming the new image's authenticity or licensing was found.
+rcid: null
+revid: 2471362709
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mitsubishi-motors.co.uk/cars/outlander
+timestamp: '2026-04-08T19:02:01.090739+00:00'
+title: Q1044544
+turns: 5
+value_label: null
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 625
+cost_usd: 0.0030249062500000003
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32404
+property: P3789
+property_label: Telegram username
+rationale: The Telegram channel https://t.me/biohackerlounge is confirmed to be the
+  official channel for the International Biohacking Community. The qualifiers added,
+  such as the number of subscribers and the language, are consistent with the information
+  available on the Telegram channel and the community's activities.
+rcid: 2551421282
+revid: 2474722888
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://biohackers.framer.ai/
+- provenance: verified
+  supports_claim: false
+  url: https://biohackinginternational.com/
+- provenance: verified
+  supports_claim: true
+  url: https://t.me/biohackerlounge
+timestamp: '2026-04-11T05:57:48.603381+00:00'
+title: Q125809149
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,35 @@
+completion_tokens: 4150
+cost_usd: 0.183069
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 162319
+property: P569
+property_label: date of birth
+rationale: Multiple authoritative genealogical sources (WikiTree, Find A Grave, FamilySearch)
+  consistently cite 6 February 1889 as Orel Busby's birth date. This is corroborated
+  by the official Oklahoma Historical Society necrology published in 1965 (the year
+  of his death), which explicitly states 'He was born February 6, 1889.' The documented
+  death date (May 15, 1965) and age (76) are mathematically consistent with an 1889
+  birth year, not 1890. While some low-authority tertiary sources cite 1890, the weight
+  of primary genealogical evidence strongly supports 1889, making the edit correct.
+rcid: 2540941603
+revid: 2464731096
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Busby-2670
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/41651152/orel-busby
+- provenance: reported
+  supports_claim: true
+  url: https://gateway.okhistory.org/ark:/67531/metadc2123929/m2/1/high_res_d/1965-v43-n03_necrology.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://astrologify.com/people/orel-busby/
+timestamp: '2026-02-20T14:09:48.123933+00:00'
+title: Q105835696
+turns: 13
+value_label: null
+verdict: verified-high

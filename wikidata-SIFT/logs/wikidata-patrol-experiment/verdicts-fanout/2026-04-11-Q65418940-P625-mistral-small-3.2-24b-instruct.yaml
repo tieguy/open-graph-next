@@ -1,0 +1,22 @@
+completion_tokens: 1124
+cost_usd: 0.00123365
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11465
+property: P625
+property_label: coordinate location
+rationale: The new coordinate value is supported by a primary source (Satellites.pro),
+  and no sources were found to support the old coordinate value. Therefore, the change
+  is justified.
+rcid: 2550803589
+revid: 2474128519
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://satellites.pro/Garhi_Khairo_map
+timestamp: '2026-04-11T08:08:30.253163+00:00'
+title: Q65418940
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 1399
+cost_usd: 0.0015766687499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14828
+property: P1329
+property_label: phone number
+rationale: The primary source for the phone number is unreachable, and secondary sources
+  do not provide the phone number. Both phone number formats are valid representations
+  of the same number, but the new format is more standardized. The change appears
+  to be a formatting improvement rather than a correction of an incorrect value.
+rcid: 2550332892
+revid: 2473672194
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://all.accor.com/hotel/0796/index.en.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://www.wien.info/en/ibis-wien-mariahilf-162062
+- provenance: verified
+  supports_claim: false
+  url: https://www.yelp.com/biz/ibis-wien-mariahilf-wien
+- provenance: verified
+  supports_claim: false
+  url: https://ibis-wien-mariahilf.meinhotel.top/
+timestamp: '2026-04-11T17:52:23.800678+00:00'
+title: Q111410471
+turns: 1
+value_label: null
+verdict: plausible

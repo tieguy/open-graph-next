@@ -1,0 +1,29 @@
+completion_tokens: 1005
+cost_usd: 0.003337875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32847
+property: P31
+property_label: instance of
+rationale: The edit changing the instance of Jarfaiter from human to Peruvian Hairless
+  Dog is incorrect. The item context and independent sources confirm that Jarfaiter
+  is a Spanish actor and rapper. There is no evidence to support the claim that he
+  is a Peruvian Hairless Dog.
+rcid: 2550532145
+revid: 2473865955
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://jarfaiter.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCUCxEgrssyvszRfaLBmFxhA
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Jarfaiter
+timestamp: '2026-04-10T10:21:32.648170+00:00'
+title: Q29870720
+turns: 3
+value_label: Peruvian Hairless Dog
+verdict: incorrect

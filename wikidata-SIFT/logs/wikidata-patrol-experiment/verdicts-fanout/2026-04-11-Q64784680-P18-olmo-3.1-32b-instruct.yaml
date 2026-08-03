@@ -1,0 +1,34 @@
+completion_tokens: 391
+cost_usd: 0.0036788000000000003
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17221
+property: P18
+property_label: image
+rationale: Multiple independent and authoritative sources confirm that Bjart Faye
+  Mohr designed and was closely associated with Holmsbu billedgalleri. The Norwegian
+  Architecture Magazine explicitly states that Holmsbu billedgalleri is one of Bjart
+  Mohr's most recognized works and describes the building in detail. The Nasjonalmuseet
+  (National Museum) for Art, Architecture, and Design holds architectural drawings
+  of the house, further confirming Mohr's authorship of the project. The SNL.no biography
+  also identifies Mohr as the driving force behind the realization of Holmsbu billedgalleri.
+  Therefore, using 'Holmsbu billedgalleri.JPG' as the image for Bjart Faye Mohr is
+  fully supported by reliable sources.
+rcid: 2551358400
+revid: 2474663798
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.arkitektur.no/folk/minneord/bjart-mohr/
+- provenance: verified
+  supports_claim: true
+  url: https://www.nasjonalmuseet.no/en/collection/object/NMK.2023.0011.007
+- provenance: verified
+  supports_claim: true
+  url: https://snl.no/Bjart_Faye_Mohr
+timestamp: '2026-04-11T17:36:53.044742+00:00'
+title: Q64784680
+turns: 1
+value_label: null
+verdict: verified-high

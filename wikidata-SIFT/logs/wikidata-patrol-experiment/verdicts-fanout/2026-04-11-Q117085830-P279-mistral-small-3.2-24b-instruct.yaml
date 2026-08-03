@@ -1,0 +1,35 @@
+completion_tokens: 2220
+cost_usd: 0.0016655625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11846
+property: P279
+property_label: subclass of
+rationale: The edit changes the subclass of "Maduro-Kangeanic" from "Malayo-Sumbawan"
+  to "Javanic." While some sources support the new value, others contradict it. The
+  authoritative source does not provide clear evidence to support the change. Therefore,
+  the edit is suspect.
+rcid: null
+revid: 2433618650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikiquote.org/wiki/Kangeanic
+- provenance: verified
+  supports_claim: false
+  url: https://library.oapen.org/handle/20.500.12657/32230
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Kangeanic_language
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Madurese_language
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Malayo-Sumbawan_languages
+timestamp: '2026-04-11T14:51:59.183961+00:00'
+title: Q117085830
+turns: 1
+value_label: Javanic
+verdict: suspect

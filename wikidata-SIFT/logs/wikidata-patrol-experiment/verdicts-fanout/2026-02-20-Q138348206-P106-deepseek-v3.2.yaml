@@ -1,0 +1,35 @@
+completion_tokens: 2341
+cost_usd: 0.018914989999999996
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 105021
+property: P106
+property_label: occupation
+rationale: Multiple independent authoritative sources confirm Bartolomeo Koczenasz
+  is a visual artist. The ANK.gov.pl exhibition page (Polish National Cultural Institution)
+  explicitly describes him as 'Artysta sztuk wizualnych' (artist of visual arts).
+  The OpenCity.pl event page lists him as 'artysta wizualny' (visual artist). His
+  personal Behance profile states 'He is a visual artist from Poland.' Additionally,
+  his mural work documented on Culture.pl constitutes visual art. These sources are
+  consistent and directly support the claim.
+rcid: 2540947521
+revid: 2464736655
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ank.gov.pl/wystawa-klatki-czasow-kazimir/
+- provenance: verified
+  supports_claim: true
+  url: https://2024-krakow.opencity.pl/program/bartolomeo-koczenasz-wschod-ziemi-2021/
+- provenance: verified
+  supports_claim: true
+  url: https://www.behance.net/bartsmiles?locale=en_US
+- provenance: verified
+  supports_claim: true
+  url: https://culture.pl/pl/artykul/krakow-nowa-stolica-street-artu
+timestamp: '2026-02-20T11:35:00.753743+00:00'
+title: Q138348206
+turns: 13
+value_label: visual artist
+verdict: verified-high

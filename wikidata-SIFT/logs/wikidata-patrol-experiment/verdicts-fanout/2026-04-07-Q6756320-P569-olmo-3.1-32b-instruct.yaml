@@ -1,0 +1,23 @@
+completion_tokens: 1082
+cost_usd: 0.0072124
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32816
+property: P569
+property_label: date of birth
+rationale: The only cited reference is English Wikipedia, which is not a valid source
+  for verifying Wikidata claims due to circularity. No independent, reliable sources
+  confirming the date of birth '19 March 1937' were found after multiple web searches.
+  Therefore, the updated value cannot be verified.
+rcid: 2549617169
+revid: 2472978736
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Marcelino_Miyares_Sotolongo
+timestamp: '2026-04-07T14:02:19.984173+00:00'
+title: Q6756320
+turns: 7
+value_label: null
+verdict: unverifiable

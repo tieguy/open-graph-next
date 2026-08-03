@@ -1,0 +1,30 @@
+completion_tokens: 1075
+cost_usd: 0.00598355
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 115371
+property: P580
+property_label: start time
+rationale: No verifiable source was found that confirms Taringa!'s precise launch
+  date. Multiple searches for the relevant statement and related information in Spanish-language
+  sources (specifically targeting the claim about the service ending after 20 years)
+  returned either empty results or no usable extracted content. While infobae.com
+  contains articles about Taringa!'s closure on March 24, 2024, the available fetches
+  failed due to technical issues with the URL parameters. Without a readable, directly
+  relevant source confirming the claimed '+0100-00-00T00:00:00Z' start time (which
+  appears to be a fictional placeholder rather than an actual 2003 launch date), there
+  is no evidence to verify the update. The absence of reliably sourced information
+  after thorough searching means the claim remains unverifiable based on the available
+  investigation.
+rcid: 2550474980
+revid: 2473811315
+sources:
+- provenance: verifed
+  supports_claim: false
+  url: https://www.infobae.com/tecno/2024/03/24/taringa-la-famosa-red-social-argentina-cierra-hoy-sus-servicios-despues-de-veinte-anos/#:~:text=se%20despide%20definitivamente%20el%20próximo,digitales%20más%20emblem%C3%A1ticos%20y%20apreciados.
+timestamp: '2026-04-07T10:03:55.226828+00:00'
+title: Q2035715
+turns: 15
+value_label: null
+verdict: unverifiable

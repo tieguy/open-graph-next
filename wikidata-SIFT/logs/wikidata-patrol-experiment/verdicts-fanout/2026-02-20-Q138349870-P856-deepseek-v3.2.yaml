@@ -1,0 +1,34 @@
+completion_tokens: 910
+cost_usd: 0.01360006
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 36476
+property: P856
+property_label: official website
+rationale: The claim that https://ayaan.is-a.dev is Ayaan Dhalait's official website
+  is strongly supported by evidence. The website at that URL contains first-person
+  biographical information matching the Wikidata item's description of Ayaan Dhalait
+  as a computer programmer and CTO. Additionally, Ayaan Dhalait's GitHub profile lists
+  this same URL as their personal website, and the content on the site matches other
+  known profiles of Ayaan Dhalait found during investigation.
+rcid: 2540964631
+revid: 2464752273
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ayaan.is-a.dev
+- provenance: verified
+  supports_claim: true
+  url: https://ayaandhalait.github.io/
+- provenance: verified
+  supports_claim: true
+  url: https://dev.to/ayaandhalait
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/AyaanDhalait
+timestamp: '2026-02-20T03:57:32.230799+00:00'
+title: Q138349870
+turns: 5
+value_label: null
+verdict: verified-high

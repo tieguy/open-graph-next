@@ -1,0 +1,25 @@
+completion_tokens: 1604
+cost_usd: 0.014340875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 148692
+property: P19
+property_label: place of birth
+rationale: The removal of Castellón de la Plana as the place of birth for Metrika
+  is incorrect. Multiple reliable sources confirm that Metrika was born in Castellón
+  de la Plana.
+rcid: 2549685112
+revid: 2473044623
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.20minutos.es/musica/entrevista-metrika_6923647_0.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.elplural.com/playtime/metrika-madre-fundadora-propio-culto_346578102
+timestamp: '2026-04-11T17:44:54.552442+00:00'
+title: Q127695613
+turns: 11
+value_label: Castellón de la Plana
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 1368
+cost_usd: 0.014716499999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 143061
+property: P21
+property_label: sex or gender
+rationale: Multiple independent sources confirm that Masahiro Sakurai is male. Therefore,
+  the edit updating his gender to 'female' is incorrect.
+rcid: 2540929270
+revid: 2464719977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://joke-battles.fandom.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: http://kyoto-report.wikidot.com/masahiro-sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://gamefaqs.gamespot.com/boards/928518-super-smash-bros-brawl/51200956
+timestamp: '2026-02-20T21:05:13.574068+00:00'
+title: Q1906721
+turns: 11
+value_label: female
+verdict: incorrect

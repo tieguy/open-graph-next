@@ -1,0 +1,24 @@
+completion_tokens: 277
+cost_usd: 0.00238200625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26213
+property: P856
+property_label: official website
+rationale: The official website for Tajiri town in Osaka, Japan, is http://www.town.tajiri.osaka.jp/,
+  not https://www.flypeach.com. The fetched content from http://www.town.tajiri.osaka.jp/
+  confirms that this is the correct and active official website for Tajiri, providing
+  various local services and information. The URL https://www.flypeach.com is unrelated
+  to the town's official website.
+rcid: null
+revid: 2471397011
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.town.tajiri.osaka.jp/
+timestamp: '2026-04-07T04:17:46.118194+00:00'
+title: Q1347129
+turns: 3
+value_label: null
+verdict: incorrect

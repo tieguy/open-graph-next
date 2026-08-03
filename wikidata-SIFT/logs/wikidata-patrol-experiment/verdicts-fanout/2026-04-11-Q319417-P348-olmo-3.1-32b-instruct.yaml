@@ -1,0 +1,25 @@
+completion_tokens: 1215
+cost_usd: 0.006264199999999999
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27676
+property: P348
+property_label: software version identifier
+rationale: There is no independent evidence that a SQLite version 3.52.0 exists. The
+  referenced release log is unreachable, and official SQLite documentation and repositories
+  list no such version. Therefore, the claim was incorrect and its removal is justified.
+rcid: 2550272025
+revid: 2473612560
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sqlite.org/chronology.html
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/sqlite/sqlite/releases
+timestamp: '2026-04-11T11:01:14.042780+00:00'
+title: Q319417
+turns: 1
+value_label: null
+verdict: incorrect

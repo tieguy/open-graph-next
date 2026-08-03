@@ -1,0 +1,23 @@
+completion_tokens: 666
+cost_usd: 0.006661200000000001
+diff_type: qualifier_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 130560
+property: P166
+property_label: award received
+rationale: The investigation failed to locate independent evidence confirming the
+  presence or context of the 'Golden Gargoyle' award for Mujuice. Multiple searches
+  using various query combinations yielded no relevant results. Although one source
+  (daily.afisha.ru) appears to mention the award, access to retrieve a cached version
+  failed initially and returning a partial response did not yield usable content.
+  No reliably fetched web pages or verifiable references confirming this claim could
+  be obtained.
+rcid: null
+revid: 2470243966
+sources: []
+timestamp: '2026-04-07T12:50:03.577194+00:00'
+title: Q4044629
+turns: 15
+value_label: Golden Gargoyle
+verdict: unverifiable

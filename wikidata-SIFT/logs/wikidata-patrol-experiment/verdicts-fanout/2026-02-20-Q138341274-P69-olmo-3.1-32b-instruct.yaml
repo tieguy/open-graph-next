@@ -1,0 +1,23 @@
+completion_tokens: 863
+cost_usd: 0.004108799999999999
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17955
+property: P69
+property_label: educated at
+rationale: The official faculty page at Loyola University New Orleans explicitly states
+  that Nathan Henne earned an M.A. from San Diego State University in 2001, directly
+  supporting the Wikidata claim. This source is primary and was fetched and verified
+  during the investigation.
+rcid: 2540929703
+revid: 2464720400
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.loyno.edu/academics/faculty-and-staff-directory/nathan-henne
+timestamp: '2026-02-20T20:36:51.454998+00:00'
+title: Q138341274
+turns: 2
+value_label: San Diego State University
+verdict: verified-high

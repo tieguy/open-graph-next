@@ -1,0 +1,31 @@
+completion_tokens: 2653
+cost_usd: 0.0074566
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29324
+property: P18
+property_label: image
+rationale: The edit replaced an image with ambiguous licensing by a properly licensed
+  image, which is a positive change regarding copyright compliance. However, the new
+  image is not the most standard or formal representation of Erwin Schrödinger, and
+  there is no evidence the edit was intended to improve the quality or notability
+  of the representation. Therefore, while licensing improved, the overall change is
+  suspicious in terms of content quality.
+rcid: 2550565117
+revid: 2473897662
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Erwin-Main-Street-tn1.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+- provenance: reported
+  supports_claim: false
+  url: https://www.nac.gov.pl/en/online-collections/physics-and-mathematics
+timestamp: '2026-04-11T11:32:42.856547+00:00'
+title: Q9130
+turns: 1
+value_label: null
+verdict: suspect

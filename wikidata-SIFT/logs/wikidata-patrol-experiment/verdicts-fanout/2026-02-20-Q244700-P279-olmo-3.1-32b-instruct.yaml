@@ -1,0 +1,36 @@
+completion_tokens: 1415
+cost_usd: 0.004183
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16670
+property: P279
+property_label: subclass of
+rationale: All authoritative sources classify ultimate frisbee as a flying disc sport,
+  not a rowing sport. Wikipedia, Wikidata, and multiple league descriptions confirm
+  this classification. There is no evidence supporting the claim that ultimate is
+  a subclass of rowing. Therefore, the edit changing the subclass from 'flying disc
+  sports' to 'rowing' is incorrect.
+rcid: 2540951538
+revid: 2464740357
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ultimate_(sport)
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q244700
+- provenance: verified
+  supports_claim: false
+  url: https://www.kcultimate.com/what-is-ultimate
+- provenance: verified
+  supports_claim: false
+  url: https://waikatoultimate.com/ultimate-frisbee
+- provenance: verified
+  supports_claim: false
+  url: https://tmupa.org/what-is-ultimate-frisbee
+timestamp: '2026-02-20T08:26:41.064897+00:00'
+title: Q244700
+turns: 2
+value_label: rowing
+verdict: incorrect

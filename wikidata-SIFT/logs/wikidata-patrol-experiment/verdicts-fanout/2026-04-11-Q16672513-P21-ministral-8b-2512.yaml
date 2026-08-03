@@ -1,0 +1,27 @@
+completion_tokens: 2086
+cost_usd: 0.0019663199999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26204
+property: P21
+property_label: sex or gender
+rationale: The item Q16672513 ('Renaud gromeulen') contains nonsensical claims (e.g.,
+  occupation as 'Anakin Skywalker', Northern Korean citizenship, and an unrealistic
+  birth year of 1810), indicating it is likely a joke or placeholder. The edit changing
+  the sex or gender from 'male' (Q6581097) to 'transmasculine' (Q27679766) lacks credible
+  evidence. The only cited reference (P887 heuristic based on name) is insufficient
+  and inappropriate for this type of claim. The edit is unsupported by any verified
+  source and contradicts the item's nonsensical context. The tags ('possible vandalism',
+  'mw-reverted') further suggest this edit is invalid.
+rcid: 2549294702
+revid: 2472663578
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gender.fandom.com/wiki/Transmasculine
+timestamp: '2026-04-11T11:47:30.652927+00:00'
+title: Q16672513
+turns: 3
+value_label: transmasculine
+verdict: incorrect

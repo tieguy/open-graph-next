@@ -1,0 +1,33 @@
+completion_tokens: 1867
+cost_usd: 0.00421848
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44087
+property: P577
+property_label: publication date
+rationale: The claim that '203. century' is the publication date for *Good Night Stories
+  for Rebel Girls* is not supported by any authoritative source. Multiple verified
+  sources (Amazon listings and the Rebel Girls website) confirm the original publication
+  date as 2016, with later editions in 2022 and 2025. The value '203. century' is
+  nonsensical and contradicts all available evidence.
+rcid: null
+revid: 2473296413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Good-Night-Stories-Rebel-Girls/dp/014198600X
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Good-Night-Stories-Rebel-Girls/dp/0997895810
+- provenance: verified
+  supports_claim: false
+  url: https://www.rebelgirls.com/products/good-night-stories-for-rebel-girls-new-edition
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/good-night-stories-rebel-girls/dp/b0djctpjhj
+timestamp: '2026-04-10T14:08:47.145115+00:00'
+title: Q48966676
+turns: 3
+value_label: null
+verdict: incorrect

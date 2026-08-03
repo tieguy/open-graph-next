@@ -1,0 +1,29 @@
+completion_tokens: 253
+cost_usd: 0.0027688
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13085
+property: P6262
+property_label: Fandom article ID
+rationale: The investigation found no authoritative source confirming whether 'scoobydoo:Humans'
+  or 'scoobydoo:Category:Humans' is the correct Fandom article ID for the 'human'
+  entity in the context of Scooby-Doo. Fandom wikis typically use namespace prefixes
+  such as 'Category:' for category pages, but the specific usage for this item was
+  not confirmed by fetching or reading the referenced pages. Without direct confirmation
+  from the Fandom wiki or its documentation, the correctness of the change cannot
+  be determined.
+rcid: 2550752457
+revid: 2474078613
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://scoobydoo.fandom.com/wiki/Category:Characters
+- provenance: verified
+  supports_claim: true
+  url: https://help.fandom.com/hc/en-us/articles/360013139971-What-are-categories-and-how-do-they-work-
+timestamp: '2026-04-11T05:55:34.247114+00:00'
+title: Q117470136
+turns: 1
+value_label: null
+verdict: unverifiable

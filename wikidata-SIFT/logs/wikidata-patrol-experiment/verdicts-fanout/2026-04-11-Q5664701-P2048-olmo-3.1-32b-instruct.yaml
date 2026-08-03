@@ -1,0 +1,28 @@
+completion_tokens: 244
+cost_usd: 0.0032902
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15719
+property: P2048
+property_label: height
+rationale: The new value '120 centimetre' for Alejandra Onieva's height is inconsistent
+  with multiple independent, verified sources reporting her height as approximately
+  165 cm (5'5''). Legit.ng and Bodysize.org both list her height as 165 cm, while
+  a major biography site also states 5'5'' (165 cm). The cited reference for the new
+  value (rbcasting.com) could not be fetched, and the old value '+170' is also not
+  supported by independent sources. This suggests the change is likely incorrect.
+rcid: 2550874491
+revid: 2474197843
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.legit.ng/1419650-alejandra-onieva-biography-sebastian-stans-girlfriend.html
+- provenance: verified
+  supports_claim: false
+  url: https://bodysize.org/en/alejandra-onieva/
+timestamp: '2026-04-11T08:31:24.642287+00:00'
+title: Q5664701
+turns: 1
+value_label: null
+verdict: suspect

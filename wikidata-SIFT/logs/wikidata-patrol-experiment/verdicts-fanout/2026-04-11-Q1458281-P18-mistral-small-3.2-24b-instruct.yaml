@@ -1,0 +1,22 @@
+completion_tokens: 632
+cost_usd: 0.0027913812499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29380
+property: P18
+property_label: image
+rationale: The reference URL for the new image is blocked and cannot be verified.
+  Independent searches for the new image also failed due to errors. Without accessible
+  sources, it is not possible to confirm or deny the change.
+rcid: null
+revid: 2471361853
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=120650117
+timestamp: '2026-04-11T10:48:16.535386+00:00'
+title: Q1458281
+turns: 4
+value_label: null
+verdict: unverifiable

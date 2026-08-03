@@ -1,0 +1,33 @@
+completion_tokens: 755
+cost_usd: 0.00835016
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 22843
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm Ludovic Bellot-Gurlet holds the position
+  of full professor. A HAL open science document explicitly states 'Ludovic Bellot-Gurlet
+  is Full Professor of analytical chemistry at the Sorbonne University in the MONARIS
+  laboratory.' Additionally, his ORCID profile lists his affiliation as Sorbonne University
+  with the title 'Professor,' and other academic profiles consistently refer to him
+  as 'Professor' or 'Prof.' This aligns with his employment history at Sorbonne University
+  (formerly Pierre and Marie Curie University), where full professor is a recognized
+  academic rank.
+rcid: 2540934629
+revid: 2464725100
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://hal.science/hal-04238186/document
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-7995-6261
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?user=-zq92ygAAAAJ&hl=en
+timestamp: '2026-02-20T18:03:31.270076+00:00'
+title: Q57878708
+turns: 3
+value_label: full professor
+verdict: verified-high

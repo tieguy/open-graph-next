@@ -1,0 +1,31 @@
+completion_tokens: 3406
+cost_usd: 0.0053159999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16362
+property: P3500
+property_label: Ringgold ID
+rationale: The Ringgold ID '427539' for Southern Catalonia Biomedical Research Institute
+  (Institut d'Investigació Sanitària Pere Virgili) is supported by an independent
+  public dataset from the Catalan government, which lists this ID for the institute.
+  The cited reference in the edit is therefore valid, and the value is correct. However,
+  the edit did not change the value and appears to be a no-op, so while the claim
+  is correct, the edit itself does not represent a substantive improvement.
+rcid: 2550612669
+revid: 2473943467
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://dades.cat/en/dataset/ringgold-ids-research-institutes
+- provenance: verified
+  supports_claim: false
+  url: https://authors.bmj.com/open-access/what-is-ringgold/
+- provenance: reported
+  supports_claim: false
+  url: https://www.iispv.cat/
+timestamp: '2026-04-11T06:56:41.954042+00:00'
+title: Q30282449
+turns: 1
+value_label: null
+verdict: verified-low

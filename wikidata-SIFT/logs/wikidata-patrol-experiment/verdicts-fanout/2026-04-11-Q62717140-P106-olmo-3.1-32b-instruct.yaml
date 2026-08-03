@@ -1,0 +1,27 @@
+completion_tokens: 1544
+cost_usd: 0.003862
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14678
+property: P106
+property_label: occupation
+rationale: Authoritative sources such as the Spanish Wikipedia and El Universal describe
+  Marina del Pilar as a lawyer by education and professional experience. There is
+  no credible evidence to support the claim that she worked as a prostitute. Changing
+  her occupation from 'lawyer' to 'prostitute' is not justified and contradicts reliable
+  information.
+rcid: null
+revid: 2470654230
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Marina_del_Pilar_%C3%81vila_Olmeda
+- provenance: verified
+  supports_claim: false
+  url: https://www.eluniversal.com.mx/cultura/2021/07/12/marina-del-pilar-se-postula-como-gobernadora-de-baja-california
+timestamp: '2026-04-11T18:17:37.886284+00:00'
+title: Q62717140
+turns: 1
+value_label: prostitute
+verdict: suspect

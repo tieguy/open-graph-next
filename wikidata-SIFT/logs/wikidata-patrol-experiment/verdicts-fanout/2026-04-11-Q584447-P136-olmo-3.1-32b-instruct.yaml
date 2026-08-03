@@ -1,0 +1,30 @@
+completion_tokens: 1634
+cost_usd: 0.0044198
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17197
+property: P136
+property_label: genre
+rationale: Chunk! No, Captain Chunk! is described by multiple independent sources
+  as fusing pop-punk and melodic hardcore. There is no authoritative source stating
+  their genre is exclusively 'melodic hardcore.' Removing 'pop-punk' in favor of only
+  'melodic hardcore' narrows their stylistic identity and is not fully supported by
+  the evidence.
+rcid: 2551132866
+revid: 2474447747
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://scream-it-like-you-mean-it.fandom.com/wiki/Chunk!_No,_Captain_Chunk!
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Chunk!+No,+Captain+Chunk!
+- provenance: verified
+  supports_claim: false
+  url: https://soundsofbroadstreet.wordpress.com/category/chunk-no-captain-chunk/
+timestamp: '2026-04-11T10:25:34.316655+00:00'
+title: Q584447
+turns: 1
+value_label: melodic hardcore
+verdict: suspect

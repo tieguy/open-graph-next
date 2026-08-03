@@ -1,0 +1,24 @@
+completion_tokens: 1413
+cost_usd: 0.00415206
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43983
+property: P154
+property_label: logo image
+rationale: The new logo image, 'Cosplay of Monkey D. Luffy from One Piece at Made
+  in Asia 2023.jpg,' is unrelated to Emmaus's branding. The official logo for Emmaus
+  is confirmed to be 'Logo Emmaus.jpg,' as evidenced by its use on Wikimedia Commons
+  and other Wikimedia projects. There is no credible evidence supporting the use of
+  a fictional character cosplay as the charity's official logo.
+rcid: null
+revid: 2472586501
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Logo_Emmaus.jpg
+timestamp: '2026-04-10T10:02:51.053664+00:00'
+title: Q989437
+turns: 5
+value_label: null
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 605
+cost_usd: 0.00267705
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28060
+property: P1559
+property_label: name in native language
+rationale: The edit updates the transliteration or transcription qualifier for the
+  name in native language claim on Ryomen Sukuna (Q105037685) to 'HIJO DE GOJO SATORU.'
+  However, the investigation did not yield any verifiable sources that confirm or
+  contradict this specific transliteration. The search results did not provide direct
+  evidence regarding the correctness of the updated qualifier.
+rcid: null
+revid: 2471724158
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=両面宿儺+transliteration+Jujutsu+Kaisen
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=りょうめんすくな+Jujutsu+Kaisen
+timestamp: '2026-04-07T05:32:11.996169+00:00'
+title: Q105037685
+turns: 5
+value_label: null
+verdict: unverifiable

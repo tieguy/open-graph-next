@@ -1,0 +1,27 @@
+completion_tokens: 1234
+cost_usd: 0.0037592000000000003
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15094
+property: P1082
+property_label: population
+rationale: The value '67,302' for the population of Laplace, Louisiana is incorrect
+  and outdated. The most recent official US Census data (2020) reports the population
+  of Laplace CDP as approximately 18,000, contradicting the removed value. The previously
+  cited reference was a Nigerian statistics document, which is irrelevant and does
+  not support the claim. Therefore, removing the outdated value was justified.
+rcid: 2550340662
+revid: 2473679619
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.census.gov/quickfacts/fact/table/laplacecdplouisiana/BZA115222
+- provenance: verified
+  supports_claim: false
+  url: https://www.nigerianstat.gov.ng/pdfuploads/Annual_Abstract_of_Statistics_2011.pdf
+timestamp: '2026-04-11T15:31:57.515691+00:00'
+title: Q6799703
+turns: 1
+value_label: null
+verdict: verified-high

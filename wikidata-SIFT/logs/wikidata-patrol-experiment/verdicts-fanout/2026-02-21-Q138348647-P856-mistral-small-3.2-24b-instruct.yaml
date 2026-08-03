@@ -1,0 +1,34 @@
+completion_tokens: 1659
+cost_usd: 0.014976375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 149527
+property: P856
+property_label: official website
+rationale: Multiple independent sources confirm that "https://buhlmann.dk" is the
+  correct official website for Bühlmann Hotels. The sources provide consistent and
+  detailed information about the hotels, supporting the claim.
+rcid: 2540917574
+revid: 2464708765
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk/buehlmann-hotels/?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk/?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk/buehlmann-hotels-old-2/?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://hotelbillund.dk/?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk/about-buehlmann-hotels/?lang=en
+timestamp: '2026-02-21T02:57:49.182755+00:00'
+title: Q138348647
+turns: 14
+value_label: null
+verdict: verified-high

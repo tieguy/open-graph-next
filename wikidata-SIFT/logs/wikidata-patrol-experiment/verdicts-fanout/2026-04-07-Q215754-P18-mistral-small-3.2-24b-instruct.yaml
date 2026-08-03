@@ -1,0 +1,22 @@
+completion_tokens: 1263
+cost_usd: 0.0035383125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34374
+property: P18
+property_label: image
+rationale: The image 'Schloss Güterfelde Carl Jöken und Hans Moser 017095.jpg' is
+  not relevant to the concept of an energy drink. The lack of references and the revert
+  tag suggest that the edit was not appropriate.
+rcid: 2549869901
+revid: 2473225851
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Schloss_G%C3%BCterfelde_Carl_J%C3%B6ken_und_Hans_Moser_017095.jpg
+timestamp: '2026-04-07T03:14:56.669981+00:00'
+title: Q215754
+turns: 6
+value_label: null
+verdict: incorrect

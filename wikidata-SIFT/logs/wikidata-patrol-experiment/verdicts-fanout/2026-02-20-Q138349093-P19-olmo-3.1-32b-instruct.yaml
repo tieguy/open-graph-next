@@ -1,0 +1,23 @@
+completion_tokens: 885
+cost_usd: 0.0070338
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32514
+property: P19
+property_label: place of birth
+rationale: The primary source 'Music in Africa' explicitly states that ZedEye was
+  born in Johannesburg, not Vereeniging. No independent source supports Vereeniging
+  as the place of birth. Therefore, the edit changing the place of birth to Vereeniging
+  is incorrect.
+rcid: 2540934397
+revid: 2464724892
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.musicinafrica.net/directory/zedeye
+timestamp: '2026-02-20T18:14:52.921029+00:00'
+title: Q138349093
+turns: 7
+value_label: Vereeniging
+verdict: incorrect

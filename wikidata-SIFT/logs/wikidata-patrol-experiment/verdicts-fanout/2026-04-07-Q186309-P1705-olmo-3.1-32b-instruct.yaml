@@ -1,0 +1,26 @@
+completion_tokens: 856
+cost_usd: 0.010736599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 51115
+property: P1705
+property_label: native label
+rationale: The native label 's' for Madame Tussauds is not supported by any authoritative
+  source. Czech Wikipedia, the official website, and other reliable sources consistently
+  use 'Madame Tussauds' as the official name. There is no evidence that 's' is an
+  official or native label for the institution.
+rcid: null
+revid: 2471668312
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://cs.wikipedia.org/wiki/Madam%C3%A9_Tussauds
+- provenance: verified
+  supports_claim: false
+  url: https://www.madametussauds.com/london/
+timestamp: '2026-04-07T09:26:36.245668+00:00'
+title: Q186309
+turns: 9
+value_label: null
+verdict: incorrect

@@ -1,0 +1,24 @@
+completion_tokens: 1385
+cost_usd: 0.00079045
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 10269
+property: P3541
+property_label: MLB.com player ID
+rationale: The edit updates the MLB.com player ID from '823575' to '唐保景' without any
+  cited references, violating Wikidata's sourcing policy. Independent verification
+  confirms the correct ID is '823575' through official MLB sources. The substitution
+  of a personal name for the numeric ID is factually unsupported, as '唐保景' does not
+  correspond to any authoritative MLB.com identifier for Moon Bo-gyeong.
+rcid: null
+revid: 2470929716
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mlb.com/help/categories/player-id
+timestamp: '2026-04-07T11:00:20.167879+00:00'
+title: Q107109167
+turns: 1
+value_label: null
+verdict: incorrect

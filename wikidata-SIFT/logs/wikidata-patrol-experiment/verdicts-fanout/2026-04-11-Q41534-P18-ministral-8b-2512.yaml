@@ -1,0 +1,28 @@
+completion_tokens: 2012
+cost_usd: 0.00685389
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56583
+property: P18
+property_label: image
+rationale: The edit changed the image for starch from 'Cornstarch mixed with water.jpg'
+  to 'Potato starch.jpg' without any supporting references or authoritative justification.
+  The NIOSH Pocket Guide, a cited reference for other claims on this item, does not
+  specify a type of starch, only that it is a fine white powder. Wikimedia Commons
+  includes images of both potato starch and cornstarch, but no consensus exists on
+  which is the best representation. The change lacks evidence and appears arbitrary.
+rcid: 2549975574
+revid: 2473325366
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.cdc.gov/niosh/npg/npgd0567.html
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Starch
+timestamp: '2026-04-11T05:28:38.669289+00:00'
+title: Q41534
+turns: 4
+value_label: null
+verdict: suspect

@@ -1,0 +1,31 @@
+completion_tokens: 1664
+cost_usd: 0.004397
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16993
+property: P106
+property_label: occupation
+rationale: Multiple independently fetched and verified sources describe Ari Bajgora
+  as a performing artist and rapper, with no evidence supporting the previous claim
+  of 'dancer'. The new value is accurate and properly reflects his professional identity.
+rcid: 2551375983
+revid: 2474680736
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.viberate.com/artist/ari-bajgora/
+- provenance: verified
+  supports_claim: true
+  url: https://top40-charts.com/artist.php?aid=26024
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Ari_Bajgora
+- provenance: verified
+  supports_claim: true
+  url: https://www.proff.no/rolle/ari-bajgora/oslo/2449943
+timestamp: '2026-04-11T06:17:48.337355+00:00'
+title: Q127164625
+turns: 1
+value_label: performing artist
+verdict: verified-high

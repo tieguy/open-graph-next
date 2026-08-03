@@ -1,0 +1,31 @@
+completion_tokens: 1736
+cost_usd: 0.0039515999999999996
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14550
+property: P921
+property_label: main subject
+rationale: The Help:CirrusSearch page is an official help/documentation page for the
+  CirrusSearch extension, not a primary subject work about CirrusSearch itself. In
+  Wikidata conventions, 'main subject' (P921) is used for works where the central
+  topic is the referenced item. Since the page is documentation rather than a primary
+  subject treatise, removing the P921 claim linking it to CirrusSearch is correct
+  and justified.
+rcid: null
+revid: 2472251003
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Help:CirrusSearch
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:CirrusSearch
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q93590016
+timestamp: '2026-04-11T17:16:31.078915+00:00'
+title: Q93590016
+turns: 1
+value_label: CirrusSearch
+verdict: verified-high

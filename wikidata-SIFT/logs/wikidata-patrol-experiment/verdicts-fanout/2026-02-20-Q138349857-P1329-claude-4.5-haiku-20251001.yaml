@@ -1,0 +1,38 @@
+completion_tokens: 2176
+cost_usd: 0.045522
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 34642
+property: P1329
+property_label: phone number
+rationale: The cited reference (macneelastreeservicenc.com) is the official business
+  website and directly supports the phone number claim by displaying (919) 951-9103
+  in its Contact Info section across multiple pages. This was verified through direct
+  web fetch. Independent business directories (Yelp, Yahoo Local, Chamber of Commerce,
+  MapQuest) all confirm the same phone number, providing strong corroboration from
+  multiple reliable sources. The phone number format in the claim (+1 919-951-9103)
+  is the proper international format for the listed business phone.
+rcid: 2540966739
+revid: 2464754320
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://macneelastreeservicenc.com
+- provenance: reported
+  supports_claim: true
+  url: https://m.yelp.com/biz/macneelas-tree-service-hillsborough
+- provenance: reported
+  supports_claim: true
+  url: https://local.yahoo.com/info-234668680-macneelas-tree-service-hillsborough/
+- provenance: reported
+  supports_claim: true
+  url: https://www.chamberofcommerce.com/business-directory/north-carolina/hillsborough/christmas-tree-farm/2033712900-macneelas-tree-service
+- provenance: reported
+  supports_claim: true
+  url: https://www.mapquest.com/us/north-carolina/macneelas-tree-service-543339909
+timestamp: '2026-02-20T03:38:49.598289+00:00'
+title: Q138349857
+turns: 4
+value_label: null
+verdict: verified-high

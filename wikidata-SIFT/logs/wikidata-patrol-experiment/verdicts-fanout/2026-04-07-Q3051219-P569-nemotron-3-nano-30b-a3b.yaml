@@ -1,0 +1,22 @@
+completion_tokens: 574
+cost_usd: 0.004380149999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 85307
+property: P569
+property_label: date of birth
+rationale: A comprehensive web search for Elizabeth Hanna's biography, filmography,
+  and award records yielded no external sources confirming her date of birth as 1969.
+  Multiple search queries targeting her career, education, and memorial status returned
+  no relevant results, and attempts to access blocked domains (IMDb, Wikipedia) were
+  unsuccessful. Since no source was successfully fetched and verified, the sources
+  array is empty of verified entries, requiring 'unverifiable' verdict.
+rcid: null
+revid: 2472007468
+sources: []
+timestamp: '2026-04-07T07:13:59.858799+00:00'
+title: Q3051219
+turns: 15
+value_label: null
+verdict: unverifiable

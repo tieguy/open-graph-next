@@ -1,0 +1,30 @@
+completion_tokens: 803
+cost_usd: 0.0033722
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14452
+property: P1103
+property_label: number of platform tracks
+rationale: No independent or reliable source explicitly confirms the number of platform
+  tracks at Rikuzen-Takata Station. The edit changes the rank of the claim without
+  supporting evidence. The referenced DBpedia and JREAST pages provide operational
+  information but do not state the platform count, and the Commons category is not
+  a factual source. Therefore, the rank change is unsupported and suspect.
+rcid: 2550443985
+revid: 2473780667
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Rikuzen-Takata_Station
+- provenance: verified
+  supports_claim: false
+  url: https://www.jreast-timetable.jp/en/timetable/list1667.html
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Rikuzen-Takata_Station
+timestamp: '2026-04-11T05:58:21.063564+00:00'
+title: Q7334139
+turns: 1
+value_label: null
+verdict: suspect

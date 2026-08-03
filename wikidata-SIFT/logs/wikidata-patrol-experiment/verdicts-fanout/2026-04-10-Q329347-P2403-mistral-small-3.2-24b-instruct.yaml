@@ -1,0 +1,25 @@
+completion_tokens: 1269
+cost_usd: 0.011305781249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 117211
+property: P2403
+property_label: total assets
+rationale: The edited value of "6,864,749,000,000 Russian ruble" for Lukoil's total
+  assets in 2016 does not match the reported value of $75.22 billion from MacroTrends.
+  The primary reference could not be verified due to a fetch error.
+rcid: 2550551117
+revid: 2473884224
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.macrotrends.net/stocks/charts/LUKOY/lukoil/total-assets
+- provenance: reported
+  supports_claim: false
+  url: http://www.lukoil.ru/FileSystem/PressCenter/116701.pdf
+timestamp: '2026-04-10T10:16:56.165752+00:00'
+title: Q329347
+turns: 3
+value_label: null
+verdict: incorrect

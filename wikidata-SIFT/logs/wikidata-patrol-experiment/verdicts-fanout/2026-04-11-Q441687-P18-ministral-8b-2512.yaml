@@ -1,0 +1,30 @@
+completion_tokens: 1913
+cost_usd: 0.00214428
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25029
+property: P18
+property_label: image
+rationale: The edit replaces a plausible image of Kendall Myers ('Kendall Myers (cropped).jpg')
+  with an unrelated image ('IDOT rest area garbage can.jpg'). The new image is completely
+  unrelated to Kendall Myers, who is a high-profile government official with no credible
+  sources confirming this change. The lack of references and the unrelated nature
+  of the new image make this edit incorrect.
+rcid: null
+revid: 2333215909
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/kendall-myers
+- provenance: verified
+  supports_claim: false
+  url: https://www.kendallnicolestudios.com/collection2025/p/the-sun
+- provenance: verified
+  supports_claim: false
+  url: https://www.kendallnicolestudios.com/photography
+timestamp: '2026-04-11T11:02:01.273626+00:00'
+title: Q441687
+turns: 3
+value_label: null
+verdict: incorrect

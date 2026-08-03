@@ -1,0 +1,29 @@
+completion_tokens: 2006
+cost_usd: 0.0036636000000000004
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12300
+property: P18
+property_label: image
+rationale: The only reference provided for the image could not be accessed to verify
+  its relevance, and independent sources do not confirm that 'Nina josu.jpg' is the
+  correct image for Nina Josu. Without reliable, accessible evidence, the claim remains
+  unverifiable.
+rcid: 2550321180
+revid: 2473660721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nina_Josu
+- provenance: verified
+  supports_claim: false
+  url: https://www.gmanetwork.com/entertainment/photos/in-photos-where-is-nina-jose-now/13948/
+- provenance: unverifiable
+  supports_claim: null
+  url: https://literaturasiarta.ro/nina-josu/
+timestamp: '2026-04-11T06:19:13.809509+00:00'
+title: Q7037983
+turns: 1
+value_label: null
+verdict: unverifiable

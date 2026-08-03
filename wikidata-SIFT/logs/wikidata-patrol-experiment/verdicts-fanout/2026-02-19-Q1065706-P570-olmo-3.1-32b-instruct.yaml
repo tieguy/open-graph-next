@@ -1,0 +1,25 @@
+completion_tokens: 1412
+cost_usd: 0.009694
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 44234
+property: P570
+property_label: date of death
+rationale: The date of death for Maria of Castile, Queen of Aragon, is historically
+  recorded in the 15th century. No credible or independent source supports a death
+  date of 13 November 2015. This is an anachronism and the edit should be reverted.
+rcid: 2540983951
+revid: 2464770310
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Maria_of_Castile
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-02-19T23:02:44.105986+00:00'
+title: Q1065706
+turns: 6
+value_label: null
+verdict: incorrect

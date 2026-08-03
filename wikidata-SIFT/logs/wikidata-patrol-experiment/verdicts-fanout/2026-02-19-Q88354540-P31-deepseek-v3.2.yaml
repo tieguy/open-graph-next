@@ -1,0 +1,31 @@
+completion_tokens: 1692
+cost_usd: 0.04247628
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 168858
+property: P31
+property_label: instance of
+rationale: The edit claims Sara García Alonso (Spanish molecular biologist and ESA
+  reserve astronaut born 1989) is an instance of 'Apache' (Q328644), which refers
+  to American rapper Anthony Peaks (1964-2010). The ESA official page confirms her
+  identity and occupation, while sources about Apache the rapper show a completely
+  different person. There is no connection between these individuals, making the claim
+  factually incorrect.
+rcid: 2540985241
+revid: 2464771565
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: false
+  url: https://hip-hop-music.fandom.com/wiki/Apache
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q328644
+timestamp: '2026-02-19T22:29:10.422865+00:00'
+title: Q88354540
+turns: 13
+value_label: Apache
+verdict: incorrect

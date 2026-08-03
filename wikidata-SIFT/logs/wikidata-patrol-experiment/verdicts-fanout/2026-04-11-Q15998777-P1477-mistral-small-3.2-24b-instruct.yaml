@@ -1,0 +1,21 @@
+completion_tokens: 1042
+cost_usd: 0.00210472
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34888
+property: P1477
+property_label: birth name
+rationale: The reference provided does not support the claim, and no independent sources
+  could be found to confirm the birth name. Therefore, the verdict is 'unverifiable'.
+rcid: 2550975808
+revid: 2474295196
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.be/books?newbks=0&redir_esc=y&hl=nl&id=LnIjAQAAMAAJ&focus=searchwithinvolume&q=%22Baron+Stirling+Henry+di+Victor+Nahum%22
+timestamp: '2026-04-11T14:28:20.827906+00:00'
+title: Q15998777
+turns: 3
+value_label: null
+verdict: unverifiable

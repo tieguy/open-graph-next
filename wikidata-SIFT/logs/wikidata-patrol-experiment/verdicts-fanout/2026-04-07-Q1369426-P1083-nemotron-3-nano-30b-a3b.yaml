@@ -1,0 +1,26 @@
+completion_tokens: 669
+cost_usd: 0.004471599999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86756
+property: P1083
+property_label: maximum capacity
+rationale: No direct evidence was found confirming the claimed maximum capacity of
+  50,093 for Estadio Monumental U. Multiple site-specific searches, including queries
+  with 'capacity' and numeric values, yielded zero relevant results. Attempts to locate
+  authoritative sources about the stadium's capacity or authoritative records that
+  corroborate this figure were unsuccessful. Since no externally verifiable sources
+  were found, it was appropriate to investigate even though the edit may not be correct.
+  The lack of corroborating documentation limits any assessment to unverifiable.
+rcid: 2551024262
+revid: 2474341621
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://fussballtempel.net/conmebol/PER.html
+timestamp: '2026-04-07T07:57:33.549955+00:00'
+title: Q1369426
+turns: 15
+value_label: null
+verdict: unverifiable

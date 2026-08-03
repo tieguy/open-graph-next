@@ -1,0 +1,31 @@
+completion_tokens: 1018
+cost_usd: 0.0031953
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23254
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Wentworth Miller was born in
+  **Chipping Norton, Oxfordshire, England**, not Belgium. The new value (Belgium)
+  contradicts verified sources from Geneastar, Ghostwhisperer.fandom, and TVRage,
+  all of which explicitly state his birthplace as Chipping Norton. The edit lacks
+  credible evidence supporting Belgium as his place of birth and instead relies on
+  a single Wikipedia import that does not align with other authoritative sources.
+rcid: 2549577486
+revid: 2472940165
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/millerwentw/wentworth-miller
+- provenance: verified
+  supports_claim: false
+  url: https://ghostwhisperer.fandom.com/wiki/Wentworth_Miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvrage.com/person/id-25355/Wentworth_Miller/
+timestamp: '2026-04-11T13:44:39.161142+00:00'
+title: Q484662
+turns: 1
+value_label: Belgium
+verdict: incorrect

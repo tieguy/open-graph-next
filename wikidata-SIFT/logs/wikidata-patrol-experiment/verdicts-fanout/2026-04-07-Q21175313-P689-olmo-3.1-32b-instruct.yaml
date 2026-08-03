@@ -1,0 +1,24 @@
+completion_tokens: 1296
+cost_usd: 0.007548999999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33857
+property: P689
+property_label: afflicts
+rationale: The only cited reference (CDC/NIOSH starch exposure safety data sheet)
+  could not be fetched to verify the claim directly. No independently fetched and
+  verified sources were found to confirm that starch exposure afflicts humans or the
+  respiratory system. Therefore, the claim remains unverifiable based on the available
+  evidence.
+rcid: 2549977353
+revid: 2473327016
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.cdc.gov/niosh/npg/npgd0567.html
+timestamp: '2026-04-07T03:12:26.443597+00:00'
+title: Q21175313
+turns: 5
+value_label: human
+verdict: unverifiable

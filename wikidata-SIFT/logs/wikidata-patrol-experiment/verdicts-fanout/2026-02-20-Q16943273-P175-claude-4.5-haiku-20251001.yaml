@@ -1,0 +1,32 @@
+completion_tokens: 2729
+cost_usd: 0.09153299999999999
+diff_type: reference_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 77888
+property: P175
+property_label: performer
+rationale: 'The MUBI reference (adrian-nunez-rodriguez) was directly fetched and verified
+  to list Adrian Núñez Rodríguez as an ''Actor'' among his professions, explicitly
+  supporting the P175/Q33999 claim. The Grokipedia source independently corroborates
+  that he is a Spanish ''actor'' alongside his other roles. While the IMDb reference
+  (nm175566) cannot be accessed due to domain blocking, the accessible MUBI source
+  provides sufficient primary-source verification of the performer/actor claim. The
+  claim is factually accurate: Adrian Núñez Rodríguez is indeed an actor.'
+rcid: 2540949923
+revid: 2464738906
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mubi.com/en/cast/adrian-nunez-rodriguez
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Adrin_Nez_Rodrguez
+- provenance: reported
+  supports_claim: true
+  url: https://www.imdb.com/name/nm175566/
+timestamp: '2026-02-20T10:28:58.190378+00:00'
+title: Q16943273
+turns: 9
+value_label: actor
+verdict: verified-high

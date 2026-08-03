@@ -1,0 +1,39 @@
+completion_tokens: 3416
+cost_usd: 0.159594
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 142514
+property: P553
+property_label: website account on
+rationale: The edit changes P553 'website account on' from Q102345381 ('social media
+  account') to Q202833 ('social media'), which violates Wikidata's semantic model.
+  P553 is explicitly defined as a property for referencing specific websites or platforms
+  where an organization has an account. Q202833 'social media' is a conceptual category
+  representing the entire social media domain, not a specific platform or account
+  type. Wikidata's own property documentation and best practice guides consistently
+  show P553 pointing to specific platforms (Twitter, LinkedIn, Facebook) or account
+  types like Q102345381, never to abstract concepts. The URL qualifier in the statement
+  (https://uk.linkedin.com/company/global-banking-finance-review) proves this represents
+  a specific LinkedIn company account, making Q102345381 or a specific platform entity
+  semantically appropriate, but Q202833 factually incorrect for this property.
+rcid: 2540956529
+revid: 2464744754
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P553
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q202833
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q102345381
+- provenance: verified
+  supports_claim: false
+  url: https://topofthelist.net/blog/how-to-create-wikidata-page/
+timestamp: '2026-02-20T06:56:03.672007+00:00'
+title: Q60744597
+turns: 11
+value_label: social media
+verdict: incorrect

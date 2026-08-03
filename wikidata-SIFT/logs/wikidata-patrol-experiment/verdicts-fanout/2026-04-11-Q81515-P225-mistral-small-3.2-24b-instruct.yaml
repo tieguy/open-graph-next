@@ -1,0 +1,19 @@
+completion_tokens: 195
+cost_usd: 0.010856250000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 115280
+property: P225
+property_label: taxon name
+rationale: Unable to fetch any sources to verify the claim due to API errors. No direct
+  evidence could be obtained to confirm or refute the change from 'Bubo virginianus'
+  to 'Bubo verganus' for the Great Horned Owl.
+rcid: null
+revid: 2469756403
+sources: []
+timestamp: '2026-04-11T09:34:47.612967+00:00'
+title: Q81515
+turns: 4
+value_label: null
+verdict: unverifiable

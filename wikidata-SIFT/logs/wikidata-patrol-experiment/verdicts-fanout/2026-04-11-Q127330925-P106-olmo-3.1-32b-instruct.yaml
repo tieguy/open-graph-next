@@ -1,0 +1,30 @@
+completion_tokens: 1126
+cost_usd: 0.003674
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14992
+property: P106
+property_label: occupation
+rationale: The edit changing John Mingam's occupation to 'SEO specialist' is partially
+  supported by an independent secondary source (training center listing) that identifies
+  him as a trainer in SEO and marketing. However, primary sources such as the official
+  business registry and personal website could not be accessed to confirm the claim
+  directly, leaving some uncertainty. The evidence is consistent but not yet definitive.
+rcid: 2550603312
+revid: 2473934363
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ie-mob.com/nos-formations/notre-centre-de-formation/formateur/6/mingam-john/
+- provenance: attempted
+  supports_claim: false
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/john-mingam-parmon-953189313#etablissements
+- provenance: unreachable
+  supports_claim: false
+  url: https://johnmingam.com/
+timestamp: '2026-04-11T14:38:48.545185+00:00'
+title: Q127330925
+turns: 1
+value_label: SEO specialist
+verdict: verified-low

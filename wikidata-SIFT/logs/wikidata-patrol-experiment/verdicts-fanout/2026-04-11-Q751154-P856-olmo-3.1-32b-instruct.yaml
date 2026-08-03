@@ -1,0 +1,42 @@
+completion_tokens: 412
+cost_usd: 0.0036952
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17240
+property: P856
+property_label: official website
+rationale: The new value 'https://www.airfrance.com' is the official website of Air
+  France, a French airline, and is unrelated to Susaki city in Japan. The previous
+  value 'https://www.city.susaki.lg.jp/' is the official website of Susaki city government.
+  Multiple authoritative sources confirm that the official website of Susaki city
+  is the .lg.jp municipal site. Changing the official website of a Japanese city to
+  an airline's website is inconsistent with the entity's identity and supported facts.
+  No evidence was found that Susaki city operates under the official website of Air
+  France.
+rcid: null
+revid: 2471591132
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.susaki.lg.jp/
+- notes: Wikipedia article for Susaki, Kōchi confirms that the official website is
+    https://www.city.susaki.lg.jp/
+  provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Susaki,_K%C5%8Dchi
+- notes: Japan-Guide lists the Susaki city government website as the official site
+    for Susaki.
+  provenance: verified
+  supports_claim: false
+  url: https://www.japan-guide.com/e/e2137.html
+- notes: Official Japanese government statistics site lists Susaki under Kōchi Prefecture,
+    with no mention of Air France.
+  provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+timestamp: '2026-04-11T12:31:09.590370+00:00'
+title: Q751154
+turns: 1
+value_label: null
+verdict: suspect

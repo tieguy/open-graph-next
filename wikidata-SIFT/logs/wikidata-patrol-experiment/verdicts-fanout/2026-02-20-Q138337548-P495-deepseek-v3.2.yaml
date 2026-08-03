@@ -1,0 +1,40 @@
+completion_tokens: 1633
+cost_usd: 0.043570459999999984
+diff_type: qualifier_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 167577
+property: P495
+property_label: country of origin
+rationale: The claim that Switzerland is the country of origin for LimbiCODE is strongly
+  supported by multiple independent sources. The official website (iflk.ch) shows
+  the Institut für limbische Kommunikation und Strategie GmbH is located at Hottingerstrasse
+  12, 8032 Zürich, Switzerland with a Swiss phone number (+41). The gfm article confirms
+  it's 'the only institute in Switzerland that offers neuro-consulting' with LimbiCODE,
+  and states the owner previously built up 'the Swiss branch of an Austrian market
+  research institute.' The ZHAW research project page identifies the institute as
+  a Swiss entity collaborating with the Swiss university. All verified sources consistently
+  point to LimbiCODE being a Swiss-developed market segmentation method.
+rcid: 2540928757
+revid: 2464719494
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/kontakt/
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/
+- provenance: verified
+  supports_claim: true
+  url: https://gfm.ch/en/blog-en/die-gfm-trend-tagung-ist-ein-jaehrliches-event-highlight-der-branche/
+- provenance: verified
+  supports_claim: true
+  url: https://www.zhaw.ch/de/forschung/projekt/73354
+- provenance: verified
+  supports_claim: true
+  url: https://www.northdata.de/Institut%20f%C3%BCr%20limbische%20Kommunikation%20und%20Strategie%20GmbH,%20Z%C3%BCrich/CHE-276.195.210
+timestamp: '2026-02-20T21:19:48.168739+00:00'
+title: Q138337548
+turns: 15
+value_label: Switzerland
+verdict: verified-high

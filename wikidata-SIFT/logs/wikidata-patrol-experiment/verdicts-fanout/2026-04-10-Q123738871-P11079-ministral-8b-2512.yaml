@@ -1,0 +1,37 @@
+completion_tokens: 1829
+cost_usd: 0.00468648
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35149
+property: P11079
+property_label: Linktree ID
+rationale: The official website of Josh Universe (https://joshuniverse.com/official-links/)
+  explicitly lists 'joshtospace' as the Linktree ID. This is corroborated by consistency
+  across Josh Universe's other verified social media profiles, including Twitter,
+  LinkedIn, Instagram, and Facebook, all of which use the same username or handle.
+  The prefetched content from the official-links page confirms the claim directly,
+  and no contradictions were found in independent sources.
+rcid: 2551423238
+revid: 2474724491
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com/official-links/
+- provenance: reported
+  supports_claim: true
+  url: https://twitter.com/joshtospace
+- provenance: reported
+  supports_claim: true
+  url: https://www.linkedin.com/in/univ/
+- provenance: reported
+  supports_claim: true
+  url: https://instagram.com/joshtospace
+- provenance: reported
+  supports_claim: true
+  url: https://www.facebook.com/joshtospace
+timestamp: '2026-04-10T13:39:00.538622+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

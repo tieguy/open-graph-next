@@ -1,0 +1,33 @@
+completion_tokens: 2033
+cost_usd: 0.0019024200000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20071
+property: P117
+property_label: chemical structure
+rationale: The edit changed the chemical structure file format from `.png` to `.svg`
+  for chloro(triphenylphosphine)gold(I) (Q5102990). While `.svg` is the preferred
+  format for chemical structures on Wikidata due to its scalability and compatibility,
+  no references or independent sources were successfully fetched or accessed to confirm
+  the validity of either the old or new chemical structure image. The absence of verified
+  sources and the inability to confirm the source of the image means the edit cannot
+  be verified. Additionally, the lack of references for the chemical structure itself
+  is a critical gap.
+rcid: 2550521810
+revid: 2473855961
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://pubchem.ncbi.nlm.nih.gov/compound/10874691
+- provenance: reported
+  supports_claim: false
+  url: https://www.chemicalbook.com/ChemicalProductProperty_EN_CB9734179.htm
+- provenance: reported
+  supports_claim: false
+  url: https://www.sigmaaldrich.com/US/en/product/aldrich/254037
+timestamp: '2026-04-11T10:31:52.880331+00:00'
+title: Q5102990
+turns: 2
+value_label: null
+verdict: unverifiable

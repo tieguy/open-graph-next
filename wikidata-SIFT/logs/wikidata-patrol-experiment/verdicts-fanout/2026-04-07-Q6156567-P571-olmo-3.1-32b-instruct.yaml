@@ -1,0 +1,27 @@
+completion_tokens: 1253
+cost_usd: 0.007816400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35323
+property: P571
+property_label: inception
+rationale: The only cited reference for the 1973 inception date is English Wikipedia,
+  which ultimately depends on a blocked Spanish Wikipedia page and cannot be verified.
+  Independent searches of the university's official website and other authoritative
+  Peruvian sources did not provide a clear foundation date. Therefore, there is insufficient
+  evidence to confirm or refute the claim.
+rcid: null
+revid: 2471463298
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.unjbg.edu.pe
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jorge_Basadre_Grohmann_National_University
+timestamp: '2026-04-07T05:28:51.495892+00:00'
+title: Q6156567
+turns: 6
+value_label: null
+verdict: unverifiable

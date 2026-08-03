@@ -1,0 +1,24 @@
+completion_tokens: 1478
+cost_usd: 0.00407445
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38327
+property: P69
+property_label: educated at
+rationale: The claim is supported by multiple independent sources, including Danny
+  Balgley's official website and his resume.
+rcid: 2540974468
+revid: 2464761278
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.dbalgley.com/about
+- provenance: verified
+  supports_claim: true
+  url: https://static1.squarespace.com/static/50998cdbe4b0f629c2b0e343/t/5c057535032be4aac5a82da9/1543861558055/DannyBalgley_resume_2018.pdf
+timestamp: '2026-02-20T02:34:47.423055+00:00'
+title: Q138350070
+turns: 6
+value_label: Columbia University
+verdict: verified-high

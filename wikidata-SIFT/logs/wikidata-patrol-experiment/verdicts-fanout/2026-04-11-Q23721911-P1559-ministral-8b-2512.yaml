@@ -1,0 +1,30 @@
+completion_tokens: 1951
+cost_usd: 0.0153135
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 137669
+property: P1559
+property_label: name in native language
+rationale: The new value 'DrggМарина Сергіївна Вязо́вська' is not supported by any
+  verified or authoritative source. All available evidence, including verified sources
+  such as the EPFL announcement, Kiddle.co, and BBC Ukrainian articles, consistently
+  use 'Марина Сергіївна Вязо́вська' as the correct native name for Maryna Viazovska.
+  The addition of 'Drgg' is nonsensical and lacks any credible backing.
+rcid: 2549494216
+revid: 2472858663
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://actu.epfl.ch/news/an-epfl-mathematician-is-awarded-a-fields-medal/
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Maryna_Viazovska
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.com/ukrainian/news-62040884
+timestamp: '2026-04-11T15:33:06.841351+00:00'
+title: Q23721911
+turns: 7
+value_label: null
+verdict: incorrect

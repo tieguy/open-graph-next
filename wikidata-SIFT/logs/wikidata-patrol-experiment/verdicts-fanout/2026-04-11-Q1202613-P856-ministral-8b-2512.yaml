@@ -1,0 +1,40 @@
+completion_tokens: 741
+cost_usd: 0.0038871
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18650
+property: P856
+property_label: official website
+rationale: The old official website (`https://www.town.kaisei.kanagawa.jp/`) is the
+  official municipal website for towns in Kanagawa prefecture, including Kaisei. This
+  is corroborated by the town's administrative context and the presence of related
+  claims (e.g., population data, head of government) sourced from Kanagawa prefecture's
+  official website. The new website (`https://www.flysas.com`) does not appear to
+  be related to Kaisei or its municipal government. No evidence supports `flysas.com`
+  as the official website for Kaisei, and the old value is clearly authoritative and
+  consistent with the town's administrative context. The change from a well-established
+  official municipal website to an unrelated website is incorrect.
+rcid: null
+revid: 2471019687
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.town.kaisei.kanagawa.jp/
+- provenance: verified
+  supports_claim: true
+  url: https://www.pref.kanagawa.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flysas.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+- provenance: verified
+  supports_claim: false
+  url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/GSI-menseki20210101.pdf
+timestamp: '2026-04-11T09:27:08.087305+00:00'
+title: Q1202613
+turns: 1
+value_label: null
+verdict: incorrect

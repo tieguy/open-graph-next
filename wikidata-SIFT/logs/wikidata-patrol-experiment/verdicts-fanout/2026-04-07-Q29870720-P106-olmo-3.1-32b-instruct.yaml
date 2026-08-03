@@ -1,0 +1,29 @@
+completion_tokens: 936
+cost_usd: 0.0045092000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19738
+property: P106
+property_label: occupation
+rationale: The edit changed Jarfaiter's occupation to 'McDonald's' without any supporting
+  evidence. Official sources and independent coverage consistently describe Jarfaiter
+  as a Spanish rapper and actor with no association to McDonald's. Therefore, the
+  claim is incorrect.
+rcid: 2550532782
+revid: 2473866578
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jarfaiter.com/
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jarfaiter
+- provenance: reported
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-07T07:55:47.829784+00:00'
+title: Q29870720
+turns: 3
+value_label: McDonald's
+verdict: incorrect

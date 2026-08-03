@@ -1,0 +1,22 @@
+completion_tokens: 621
+cost_usd: 0.007196600000000001
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34120
+property: P31
+property_label: instance of
+rationale: The official MusicBrainz biography confirms that Muhammad Rashid is the
+  father of Omar Rashid (MRX), and since Omar Rashid is a human, it follows that Muhammad
+  Rashid is also a human. The reference directly supports the instance of claim.
+rcid: 2540949504
+revid: 2464738501
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a?va=1&all=1
+timestamp: '2026-02-20T10:58:27.312717+00:00'
+title: Q138349529
+turns: 6
+value_label: human
+verdict: verified-high

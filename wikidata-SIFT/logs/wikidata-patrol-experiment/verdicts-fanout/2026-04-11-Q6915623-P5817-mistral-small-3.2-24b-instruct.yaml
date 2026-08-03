@@ -1,0 +1,26 @@
+completion_tokens: 1662
+cost_usd: 0.0012769399999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13979
+property: P5817
+property_label: state of use
+rationale: The edit is justified as it accurately reflects the current state of the
+  station. The old value 'decommissioned' is supported by sources indicating the station
+  was closed after the Second World War. The new value 'structure under reconstruction'
+  is supported by sources indicating ongoing reconstruction and nearing completion.
+rcid: 2550344830
+revid: 2473683702
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://moseleyforum.org.uk/moseley-village-train-station/
+- provenance: verified
+  supports_claim: true
+  url: https://www.tfwm.org.uk/plan-your-journey/major-roadworks-and-events/camp-hill-line-railway-stations/moseley-village-station/
+timestamp: '2026-04-11T14:23:40.556714+00:00'
+title: Q6915623
+turns: 1
+value_label: structure under reconstruction
+verdict: verified-high

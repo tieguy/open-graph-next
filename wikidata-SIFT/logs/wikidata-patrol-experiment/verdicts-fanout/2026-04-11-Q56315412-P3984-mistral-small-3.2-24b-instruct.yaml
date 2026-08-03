@@ -1,0 +1,34 @@
+completion_tokens: 1298
+cost_usd: 0.00126365625
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11400
+property: P3984
+property_label: subreddit
+rationale: The references provided in the edit could not be fetched and verified.
+  Additionally, independent search results for 'eSIM subreddit' could not be fetched,
+  making it impossible to confirm the subreddit claim for eSIM.
+rcid: null
+revid: 2472565257
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://strongesim.com/
+- provenance: verified
+  supports_claim: false
+  url: https://simpulse.uk
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/esims/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/TravelProperly/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/JapanTravelTips/
+timestamp: '2026-04-11T10:11:41.719163+00:00'
+title: Q56315412
+turns: 1
+value_label: null
+verdict: unverifiable

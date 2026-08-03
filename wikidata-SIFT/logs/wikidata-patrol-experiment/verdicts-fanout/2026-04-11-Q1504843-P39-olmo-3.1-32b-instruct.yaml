@@ -1,0 +1,35 @@
+completion_tokens: 1159
+cost_usd: 0.0043408000000000006
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18227
+property: P39
+property_label: position held
+rationale: The claim that Georg Fuchs von Rügheim held the position of diocesan bishop
+  of the Roman Catholic Diocese of Bamberg from 1556 to 1561 is cited with references,
+  but fetching those references did not yield explicit confirmation of this specific
+  fact. The official Catholic Hierarchy pages for the diocese and the related digital
+  archive do not, in the fetched excerpts, mention Georg Fuchs von Rügheim as diocesan
+  bishop during the specified period. Therefore, the claim cannot be verified as correct
+  or incorrect based on independently fetched evidence.
+rcid: 2550975963
+revid: 2474295348
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+- provenance: verified
+  supports_claim: false
+  url: https://doi.org/10.26015/adwdocs-106
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/country/bdec.html
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Georg_Fuchs_von_R%C3%BCgheim
+timestamp: '2026-04-11T06:38:59.953469+00:00'
+title: Q1504843
+turns: 1
+value_label: diocesan bishop
+verdict: unverifiable

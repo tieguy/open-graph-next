@@ -1,0 +1,29 @@
+completion_tokens: 1337
+cost_usd: 0.006633399999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29156
+property: P641
+property_label: sport
+rationale: The referenced Norwegian Football Federation (NFF) database and all independent
+  sources confirm that 'Hore' is not recognized as a sport and that Elias Hadaya is
+  an association football player. The edit to change the sport to 'Hore' is unsupported
+  and appears to be an error.
+rcid: 2549663191
+revid: 2473023415
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.transfermarkt.se/eliashadaya/verein/272542
+- provenance: reported
+  supports_claim: false
+  url: https://www.ksf.se/
+- provenance: reported
+  supports_claim: false
+  url: https://www.nff.no/
+timestamp: '2026-04-07T12:28:48.694736+00:00'
+title: Q89080747
+turns: 5
+value_label: Hore
+verdict: incorrect

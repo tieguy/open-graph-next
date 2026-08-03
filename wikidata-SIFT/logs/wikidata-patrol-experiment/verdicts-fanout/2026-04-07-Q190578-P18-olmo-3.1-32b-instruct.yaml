@@ -1,0 +1,33 @@
+completion_tokens: 1382
+cost_usd: 0.0052504
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22106
+property: P18
+property_label: image
+rationale: No independent evidence was found to confirm the existence or appropriateness
+  of the image '2024 Audi A3 8Y Sedan IMG 1019.jpg' for the general class 'sedan'.
+  The edit replaces a Buick image with an Audi-specific filename, but there is no
+  verification that the image is correct or relevant. As a result, the change appears
+  to be incorrect.
+rcid: null
+revid: 2471361616
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.autocar.co.uk
+- provenance: reported
+  supports_claim: false
+  url: https://www.caranddriver.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.audi.com
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org
+timestamp: '2026-04-07T07:39:27.972640+00:00'
+title: Q190578
+turns: 4
+value_label: null
+verdict: incorrect

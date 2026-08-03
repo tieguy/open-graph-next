@@ -1,0 +1,24 @@
+completion_tokens: 923
+cost_usd: 0.0026091875
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25370
+property: P18
+property_label: image
+rationale: The edit changes the rank of the image claim to 'preferred' but does not
+  cite any references. The prefetched references do not provide specific information
+  confirming that 'Ang Bayan ng Liliw.jpg' is the preferred image for 'The Town of
+  Liliw historical marker'. Without additional evidence, the rank change cannot be
+  verified.
+rcid: 2550678241
+revid: 2474007324
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://philhistoricsites.nhcp.gov.ph/registry_database/ang-bayan-ng-liliw/
+timestamp: '2026-04-11T09:33:30.795108+00:00'
+title: Q105594668
+turns: 2
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1665
+cost_usd: 0.019429830000000002
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 88399
+property: P1581
+property_label: official blog URL
+rationale: The referenced source (`https://biohackinginternational.com`) was unreachable
+  due to fetch errors, and no independent primary source confirming `https://biohackers.media`
+  as the official blog for the International Biohacking Community was accessible.
+  The site `https://biohackers.media` itself returned an HTTP 502 error, preventing
+  verification. No verified sources support the claim, and no direct evidence was
+  found to confirm or deny its validity.
+rcid: 2551442073
+revid: 2474739798
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://biohackinginternational.com
+- provenance: reported
+  supports_claim: false
+  url: https://biohackers.media
+timestamp: '2026-04-11T08:19:09.132258+00:00'
+title: Q125809149
+turns: 9
+value_label: null
+verdict: unverifiable

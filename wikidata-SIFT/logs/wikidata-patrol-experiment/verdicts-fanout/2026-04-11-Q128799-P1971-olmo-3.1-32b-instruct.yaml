@@ -1,0 +1,29 @@
+completion_tokens: 310
+cost_usd: 0.0052844
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25492
+property: P1971
+property_label: number of children
+rationale: 'The change from ''+4'' to ''0'' for the number of children for Ricky Martin
+  is incorrect. Independent reporting from People.com confirms Ricky Martin has four
+  children: twins Matteo and Valentino, and later two more children, Lucia and Renn,
+  with his former husband Jwan Yosef. The cited reference for the new value (claiming
+  the birth of Renn in 2019) is unreachable due to a failed fetch, but the pre-existing
+  and ongoing reporting consistently documents four children. The change to ''0''
+  is unsupported by any credible evidence and contradicts established reporting.'
+rcid: 2549502591
+revid: 2472866821
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://people.com/all-about-ricky-martin-kids-7502782
+- provenance: unreachable (fetch failed)
+  supports_claim: false
+  url: https://people.com/parents/ricky-martin-jwan-yosef-welcome-baby-son-renn/
+timestamp: '2026-04-11T18:11:29.345926+00:00'
+title: Q128799
+turns: 1
+value_label: null
+verdict: incorrect

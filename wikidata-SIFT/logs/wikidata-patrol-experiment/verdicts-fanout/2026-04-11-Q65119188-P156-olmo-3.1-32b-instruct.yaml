@@ -1,0 +1,33 @@
+completion_tokens: 2166
+cost_usd: 0.004508
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16042
+property: P156
+property_label: followed by
+rationale: The new value (Q112339523) is the correct Wikidata item for the 2026 Slovenian
+  parliamentary election, as confirmed by the official State Election Commission and
+  multiple independent sources including Wikipedia. The old value (Q111746009) is
+  not recognized as the 2026 election by any credible source and is likely incorrect.
+  Therefore, changing the 'followed by' claim improves the accuracy of the item data.
+rcid: 2551357520
+revid: 2474662963
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.drv.si/en/elections/parliamentary-elections/2026
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/2022_Slovenian_parliamentary_election
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q112339523
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q111746009
+timestamp: '2026-04-11T17:40:38.218019+00:00'
+title: Q65119188
+turns: 1
+value_label: 2026 Slovenian parliamentary election
+verdict: verified-high

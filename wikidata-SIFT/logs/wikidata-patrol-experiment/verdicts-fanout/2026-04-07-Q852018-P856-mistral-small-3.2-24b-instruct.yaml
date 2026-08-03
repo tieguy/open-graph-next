@@ -1,0 +1,24 @@
+completion_tokens: 331
+cost_usd: 0.00322046875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33469
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Izumisano to 'https://www.flypeach.com',
+  which is the website for Peach Aviation, an airline company. The correct official
+  website for Izumisano is 'http://www.city.izumisano.lg.jp', as verified by the fetched
+  content which provides various official information and services related to the
+  city.
+rcid: null
+revid: 2471396729
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.city.izumisano.lg.jp/
+timestamp: '2026-04-07T07:25:16.729202+00:00'
+title: Q852018
+turns: 3
+value_label: null
+verdict: incorrect

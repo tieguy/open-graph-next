@@ -1,0 +1,30 @@
+completion_tokens: 2777
+cost_usd: 0.01984248
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 170665
+property: P105
+property_label: taxon rank
+rationale: The taxon rank of Common Kestrel (Falco tinnunculus) as a species (Q7432)
+  is strongly supported by multiple authoritative sources such as the IOC World Bird
+  List, HBW, and BirdLife Taxonomic Checklist. While the publication date for the
+  ITIS reference was updated from 1996-06-13 to 2000-06-13, direct verification of
+  this specific date was not possible due to access restrictions. However, the core
+  claim remains well-supported by independent sources. The edit does not change the
+  value itself but updates metadata, which is a valid improvement if the new date
+  is accurate.
+rcid: null
+revid: 2464396670
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q26490
+- provenance: reported
+  supports_claim: false
+  url: https://www.itis.gov/
+timestamp: '2026-04-11T18:37:49.500580+00:00'
+title: Q26490
+turns: 6
+value_label: species
+verdict: verified-low

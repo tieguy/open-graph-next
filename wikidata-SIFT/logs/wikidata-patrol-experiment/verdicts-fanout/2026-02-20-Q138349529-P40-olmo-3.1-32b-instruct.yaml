@@ -1,0 +1,23 @@
+completion_tokens: 985
+cost_usd: 0.004803
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21060
+property: P40
+property_label: child
+rationale: The primary source (MusicBrainz artist biography) explicitly states that
+  Omar Rashid (OR) MRX was born to Muhammad Rashid and Samina. This directly supports
+  the Wikidata claim that Muhammad Rashid is the father of Omar Rashid (OR) MRX. No
+  contradictory evidence was found.
+rcid: 2540953211
+revid: 2464741756
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a
+timestamp: '2026-02-20T07:52:25.698637+00:00'
+title: Q138349529
+turns: 3
+value_label: Omar Rashid (OR) MRX
+verdict: verified-high

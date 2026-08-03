@@ -1,0 +1,30 @@
+completion_tokens: 1096
+cost_usd: 0.0047
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20212
+property: P569
+property_label: date of birth
+rationale: Authoritative and independent sources confirm that Santa Claus is based
+  on Saint Nicholas, who lived around 280 AD, making Santa thousands of years old.
+  None of the reputable sources reference a birth year of 1993 for Santa. The cited
+  references in the edit do not support the claim and are either unrelated or do not
+  corroborate the date. Therefore, the updated date of birth is incorrect.
+rcid: 2551007153
+revid: 2474325045
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://eu.usatoday.com/story/life/2024/12/09/how-old-is-santa-claus/76499582007/
+- provenance: reported
+  supports_claim: false
+  url: https://www.emailsanta.com/santa-claus-faq/how-old-is-santa-claus.asp
+- provenance: reported
+  supports_claim: false
+  url: https://parade.com/living/how-old-is-santa-claus
+timestamp: '2026-04-10T14:13:40.708974+00:00'
+title: Q123370607
+turns: 1
+value_label: null
+verdict: incorrect

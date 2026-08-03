@@ -1,0 +1,25 @@
+completion_tokens: 719
+cost_usd: 0.00514475
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 100019
+property: P569
+property_label: date of birth
+rationale: No reliable source was found that confirms or denies the claim that Susana
+  Chávez was born on 5 November 1942. Attempts to locate independent corroboration
+  through multiple searches of Wikipedia, news sources, and targeted queries for birth
+  date '1942' returned no relevant results. The only potential source found was an
+  RTVE article, but it contains no information about her date of birth and cannot
+  serve as verification.
+rcid: null
+revid: 2471057389
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rtve.es/noticias/20110112/muere-activista-ciudad-juarez-autora-del-lema-ni-muerta-mas/394587.shtml
+timestamp: '2026-04-07T10:04:39.769974+00:00'
+title: Q457812
+turns: 15
+value_label: null
+verdict: unverifiable

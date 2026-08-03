@@ -1,0 +1,30 @@
+completion_tokens: 3163
+cost_usd: 0.0056278000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18650
+property: P1960
+property_label: Google Scholar author ID
+rationale: The edit did not change the Google Scholar author ID for Jusung An, as
+  both the old and new values are identical. Independent sources confirm his affiliation
+  and research area, but I was unable to directly fetch and read the Google Scholar
+  profile to verify the name and affiliation due to a technical error. Therefore,
+  the claim cannot be confirmed or denied with certainty based on the fetched evidence.
+rcid: 2551431915
+revid: 2474731455
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mirica.web.illinois.edu
+- provenance: verified
+  supports_claim: true
+  url: https://pub.orcid.org/v3.0/0000-0003-4324-2782
+- provenance: reported
+  supports_claim: false
+  url: https://scholar.google.com/citations?user=m5vq9ScAAAAJ&hl=en
+timestamp: '2026-04-11T12:11:56.639163+00:00'
+title: Q92358640
+turns: 1
+value_label: null
+verdict: unverifiable

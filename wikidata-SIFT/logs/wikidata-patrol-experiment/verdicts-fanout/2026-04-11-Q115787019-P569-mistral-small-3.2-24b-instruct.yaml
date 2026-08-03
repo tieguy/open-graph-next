@@ -1,0 +1,22 @@
+completion_tokens: 1471
+cost_usd: 0.00154994
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17282
+property: P569
+property_label: date of birth
+rationale: The edit changes the earliest date qualifier to April 7, 1986, but the
+  independent source (Iran News Wire) clearly states that Aida Rostami was born on
+  July 16, 1986. Therefore, the edit is incorrect.
+rcid: 2549630432
+revid: 2472991596
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://irannewswire.org/dr-aida-rostami-was-killed-by-the-iranian-regi/
+timestamp: '2026-04-11T14:16:17.891090+00:00'
+title: Q115787019
+turns: 1
+value_label: null
+verdict: incorrect

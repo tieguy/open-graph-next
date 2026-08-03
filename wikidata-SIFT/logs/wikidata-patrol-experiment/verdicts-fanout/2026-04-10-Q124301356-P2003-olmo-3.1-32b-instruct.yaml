@@ -1,0 +1,23 @@
+completion_tokens: 1337
+cost_usd: 0.0033207999999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12593
+property: P2003
+property_label: Instagram username
+rationale: The official Instagram account for UniThéâtre (L'UniThéâtre) is @lunitheatre,
+  as confirmed by the primary source (Instagram profile). This directly supports the
+  updated value for the Instagram username property. The previous value with a slash
+  is not a valid Instagram username format.
+rcid: 2551326183
+revid: 2474633354
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.instagram.com/lunitheatre/
+timestamp: '2026-04-10T13:11:32.696130+00:00'
+title: Q124301356
+turns: 1
+value_label: null
+verdict: verified-high

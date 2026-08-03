@@ -1,0 +1,21 @@
+completion_tokens: 658
+cost_usd: 0.0076970499999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 151309
+property: P106
+property_label: occupation
+rationale: Despite extensive search, no verifiable primary or secondary sources were
+  found that confirm Anton Chubenko's occupation as 'deputy head'. Both cited references
+  (poda.gov.ua and en.lb.ua) could not be fetched due to technical errors, and no
+  independent reliable sources were identified through multiple search strategies.
+  The complete absence of corroborating evidence prevents verification of the claim.
+rcid: 2550034709
+revid: 2473382565
+sources: []
+timestamp: '2026-04-07T10:43:41.966212+00:00'
+title: Q28052613
+turns: 15
+value_label: null
+verdict: unverifiable

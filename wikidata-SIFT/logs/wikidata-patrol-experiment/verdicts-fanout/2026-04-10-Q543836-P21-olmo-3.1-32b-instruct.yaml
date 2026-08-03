@@ -1,0 +1,35 @@
+completion_tokens: 1521
+cost_usd: 0.0066646
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28760
+property: P21
+property_label: sex or gender
+rationale: All reliable and verified sources, including obituaries and official author
+  pages, consistently refer to Pierre Bordage using masculine pronouns and as a male
+  author. There is no evidence from primary or reputable secondary sources to support
+  changing his sex or gender to 'female organism.'
+rcid: 2550573515
+revid: 2473905731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lesoir.be/719395/article/2025-12-29/lecrivain-de-science-fiction-pierre-bordage-est-decede
+- provenance: verified
+  supports_claim: false
+  url: https://www.nosfere.org/auteurs/pierre-bordage
+- provenance: verified
+  supports_claim: false
+  url: https://data.bnf.fr/ark:/12148/cb11935018w
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pierre_Bordage
+- provenance: verified
+  supports_claim: false
+  url: http://bobmorane.noosfere.org/?page_id=8
+timestamp: '2026-04-10T00:08:31.737598+00:00'
+title: Q543836
+turns: 1
+value_label: female organism
+verdict: incorrect

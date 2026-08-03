@@ -1,0 +1,27 @@
+completion_tokens: 675
+cost_usd: 0.00548165
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 106933
+property: P569
+property_label: date of birth
+rationale: No verifiable external references were found supporting the updated date
+  of birth value of 22 November 1890 for Fred Pellerin. Multiple web searches using
+  various query strategies failed to locate any reliable source confirming or denying
+  this claim. All attempted documentary sources initially flagged potential entries
+  but either underwent and yielded HTTP errors (blocked domains) or produced no actionable
+  results through fetching attempts. This absence of corroborating evidence, despite
+  exhaustive search attempts across relevant domains and languages, prevents any verification
+  status beyond 'unverifiable'.
+rcid: null
+revid: 2471073178
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://www.fredpellerin.com/
+timestamp: '2026-04-07T10:34:06.278646+00:00'
+title: Q3086924
+turns: 15
+value_label: null
+verdict: unverifiable

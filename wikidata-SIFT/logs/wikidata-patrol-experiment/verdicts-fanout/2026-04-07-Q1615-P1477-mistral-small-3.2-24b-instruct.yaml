@@ -1,0 +1,22 @@
+completion_tokens: 826
+cost_usd: 0.01015866
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 107403
+property: P1477
+property_label: birth name
+rationale: The edit changes Neil Armstrong's birth name to 'Michael jackson,' but
+  no credible sources support this claim. The referenced URL is unreachable, and independent
+  searches confirm his birth name as 'Neil Alden Armstrong.'
+rcid: null
+revid: 2471070596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://planet4589.org/space/astro/rides.html
+timestamp: '2026-04-07T09:34:29.335555+00:00'
+title: Q1615
+turns: 4
+value_label: null
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 1476
+cost_usd: 0.00614625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 61624
+property: P856
+property_label: official website
+rationale: The old value, https://www.city.uruma.lg.jp/, is the correct official website
+  of Uruma City, as it contains official announcements, event information, and administrative
+  details. The new value, https://www.eurowings.com, is unrelated to Uruma City and
+  appears to be a mistake.
+rcid: null
+revid: 2468927624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://uruma-ru.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://uruma-ru.jp/urumadaytrip/
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.uruma.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.okinawa.jp/site/kikaku/shichoson/top/sichousongaiyou.html
+timestamp: '2026-04-11T13:47:48.317406+00:00'
+title: Q694313
+turns: 4
+value_label: null
+verdict: incorrect

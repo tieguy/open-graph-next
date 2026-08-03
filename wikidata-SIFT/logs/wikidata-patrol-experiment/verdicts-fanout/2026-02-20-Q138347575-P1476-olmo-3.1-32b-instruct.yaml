@@ -1,0 +1,27 @@
+completion_tokens: 655
+cost_usd: 0.0034142
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15106
+property: P1476
+property_label: title
+rationale: The cited reference from Engage.it explicitly states that Forexinfo.it
+  was rebranded as Money.it and describes it as an economic and financial news outlet.
+  This directly supports the assignment of the title 'Money.it' to the publication.
+  Additional corroboration from Wikipedia confirms the editorial focus and use of
+  the title. Both sources are independent and reliable.
+rcid: 2540925402
+revid: 2464716248
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.engage.it/media-industry/forexinfo-it-cambia-online-money-it.aspx
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Money.it
+timestamp: '2026-02-20T22:32:20.104449+00:00'
+title: Q138347575
+turns: 2
+value_label: null
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1477
+cost_usd: 0.0017985000000000002
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25579
+property: P3579
+property_label: Weibo user ID
+rationale: The qualifier '尹浩宇Patrick' for the Weibo user ID claim on Patrick Nattawat
+  Finkler (Q105654184) is explicitly confirmed by the verified source Kprofiles.com.
+  This source directly states the Weibo username as '尹浩宇Patrick', aligning with the
+  individual's known Chinese and English names. No contradictory evidence was found
+  in the investigated sources.
+rcid: 2551413554
+revid: 2474716399
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kprofiles.com/patrick-profile/
+- provenance: verified
+  supports_claim: false
+  url: https://gmmtv.fandom.com/wiki/Patrick_Nattawat_Finkler
+- provenance: verified
+  supports_claim: false
+  url: https://yinhaoyu.carrd.co/
+timestamp: '2026-04-11T18:32:02.662650+00:00'
+title: Q105654184
+turns: 3
+value_label: null
+verdict: verified-high

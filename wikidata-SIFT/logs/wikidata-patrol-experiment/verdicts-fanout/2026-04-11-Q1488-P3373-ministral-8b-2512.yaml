@@ -1,0 +1,28 @@
+completion_tokens: 1142
+cost_usd: 0.018311760000000003
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 262204
+property: P3373
+property_label: sibling
+rationale: The edit incorrectly changed the sibling of Robert Brasillach from **Suzanne
+  Bardèche (Q20655644)**, which is supported by multiple independent sources (e.g.,
+  Wikimedia Commons and Geneastar), to **Laurent (Q16763977)**. No credible sources
+  were found to support the new value, and the old value is well-documented. The lack
+  of references for the new value and the absence of corroboration for Laurent as
+  a sibling strongly indicate that the change is incorrect.
+rcid: 2550652936
+revid: 2473982750
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Robert_Brasillach
+- provenance: verified
+  supports_claim: true
+  url: https://en.geneastar.org/genealogy/brasillachr/robert-brasillach
+timestamp: '2026-04-11T13:42:01.259418+00:00'
+title: Q1488
+turns: 15
+value_label: Laurent
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 1608
+cost_usd: 0.0038808
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 63936
+property: P5817
+property_label: state of use
+rationale: The sources consulted do not provide definitive information about the current
+  state of use of Ōfunato Station. Therefore, it is unclear whether the change from
+  'decommissioned' to 'in use' is correct.
+rcid: 2550465286
+revid: 2473801730
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://psmsl.org/data/obtaining/stations/1140.php
+- provenance: verified
+  supports_claim: false
+  url: https://timetables.jreast.co.jp/en/timetable/list0342.html
+- provenance: verified
+  supports_claim: false
+  url: https://wanderlog.com/place/details/368642/%C5%8Cfuna-station
+timestamp: '2026-04-11T15:29:05.072906+00:00'
+title: Q8081459
+turns: 7
+value_label: in use
+verdict: unverifiable

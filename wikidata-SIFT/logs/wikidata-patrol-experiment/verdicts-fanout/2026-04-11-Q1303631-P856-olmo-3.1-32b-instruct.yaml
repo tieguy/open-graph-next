@@ -1,0 +1,29 @@
+completion_tokens: 1073
+cost_usd: 0.0043968
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18765
+property: P856
+property_label: official website
+rationale: The new value 'https://www.finnair.com' is the official website of a Finnish
+  airline and is completely unrelated to Eiheiji town or temple. Authoritative sources,
+  including the official Eiheiji Temple website and Japan National Tourism Organization,
+  list the temple or town's own website as the official site. There is no evidence
+  supporting Finnair's website as the official website for Eiheiji. This change appears
+  to be an error or vandalism and should be reverted unless a reliable source explicitly
+  identifies Finnair as the official website.
+rcid: null
+revid: 2471369538
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://daihonzan-eiheiji.com/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan.travel/en/spot/1385/
+timestamp: '2026-04-11T17:47:45.292890+00:00'
+title: Q1303631
+turns: 1
+value_label: null
+verdict: suspect

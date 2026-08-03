@@ -1,0 +1,24 @@
+completion_tokens: 1164
+cost_usd: 0.0046892
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19954
+property: P101
+property_label: field of work
+rationale: The supporting reference is the company's own website, which describes
+  SEO as a service but does not provide independent, neutral verification that the
+  organization's formal field of work should be classified as 'search engine optimization'.
+  Wikidata requires such claims to be supported by authoritative, non-self-referential
+  sources.
+rcid: 2540973962
+revid: 2464760841
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:49:01.413277+00:00'
+title: Q138349990
+turns: 2
+value_label: search engine optimization
+verdict: suspect

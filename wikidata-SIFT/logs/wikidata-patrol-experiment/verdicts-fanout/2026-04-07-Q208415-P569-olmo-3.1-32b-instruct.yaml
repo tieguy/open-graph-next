@@ -1,0 +1,21 @@
+completion_tokens: 968
+cost_usd: 0.0042866
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18529
+property: P569
+property_label: date of birth
+rationale: The only previously cited reference for the date of birth claim was removed.
+  The original reference (English Wikipedia) is not a reliable primary source and
+  could not be accessed or verified. No independent, fetchable source could be found
+  to confirm the date of birth during this investigation. Therefore, the claim is
+  now unsupported by any reference.
+rcid: null
+revid: 2471644486
+sources: []
+timestamp: '2026-04-07T06:27:34.363624+00:00'
+title: Q208415
+turns: 3
+value_label: null
+verdict: unverifiable

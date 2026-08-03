@@ -1,0 +1,33 @@
+completion_tokens: 1545
+cost_usd: 0.013369800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62214
+property: P569
+property_label: date of birth
+rationale: The new date of birth (30 October 1958) is only supported by aggregator
+  and authority file references, none of which are primary sources. Multiple independent
+  reporting sources, including the English Wikipedia, consistently list Juliet Stevenson's
+  birth date as 30 October 1956. No primary or official source was found to support
+  the new value, making the change likely incorrect.
+rcid: null
+revid: 2471976069
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Juliet_Stevenson
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/topic/Juliet-Stevenson
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm0000532/
+- provenance: reported
+  supports_claim: false
+  url: https://d-nb.info/gnd/14127459X
+timestamp: '2026-04-07T05:24:35.010748+00:00'
+title: Q272518
+turns: 9
+value_label: null
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 728
+cost_usd: 0.01417367
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 149386
+property: P19
+property_label: place of birth
+rationale: The investigation did not yield any verified sources that confirm or deny
+  the claim that Daniel Pennac's place of birth is China. The primary reference, Wikipedia,
+  is blocked, and other sources either do not provide the necessary information or
+  are inaccessible.
+rcid: null
+revid: 2470760557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Daniel_Pennac
+- provenance: verified
+  supports_claim: false
+  url: https://www.biographies.net/people/daniel-pennac
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousauthors.org/daniel-pennac
+- provenance: verified
+  supports_claim: false
+  url: https://www.goodreads.com/author/show/3076.Daniel_Pennac
+- provenance: verified
+  supports_claim: false
+  url: https://www.babelio.com/auteurs/Pennac-Daniel/13591
+timestamp: '2026-04-07T14:07:33.871892+00:00'
+title: Q332689
+turns: 15
+value_label: China
+verdict: unverifiable

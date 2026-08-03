@@ -1,0 +1,26 @@
+completion_tokens: 2051
+cost_usd: 0.005716860000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42257
+property: P348
+property_label: software version identifier
+rationale: The edit changes the software version identifier from '2.1.0' to '5.1.0'
+  for OpenHAB, skipping all intermediate versions (3.x and 4.x). While the latest
+  version '5.1.0' is confirmed by GitHub releases, the edit does not reflect the full
+  development history of OpenHAB, which includes multiple major releases. This omission
+  of intermediate versions makes the edit misleading and potentially misleading for
+  users relying on Wikidata for version tracking. The lack of explicit justification
+  for skipping versions in independent sources further supports the suspicion.
+rcid: 2550942715
+revid: 2474263063
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/openhab/openhab-core/releases
+timestamp: '2026-04-11T12:38:23.036085+00:00'
+title: Q15837622
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,17 @@
+completion_tokens: 91
+cost_usd: 0.005122093750000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 65427
+property: P69
+property_label: educated at
+rationale: null
+rcid: null
+revid: 2471001308
+sources: []
+timestamp: '2026-04-07T09:28:27.662976+00:00'
+title: Q7396400
+turns: 5
+value_label: pornography
+verdict: null

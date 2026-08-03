@@ -1,0 +1,34 @@
+completion_tokens: 549
+cost_usd: 0.00379995625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42012
+property: P19
+property_label: place of birth
+rationale: Multiple verified sources confirm that Wentworth Miller was born in Chipping
+  Norton, Oxfordshire, England, United Kingdom. Therefore, the claim that his place
+  of birth is Belgium is incorrect.
+rcid: 2549577486
+revid: 2472940165
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ethnicelebs.com/wentworth-miller
+- provenance: verified
+  supports_claim: false
+  url: https://wikibio.us/wentworth-miller/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/wentworth-miller.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.thecityceleb.com/biography/celebrity/actor/wentworth-miller-biography-wife-height-siblings-movies-age-net-worth-family-wikipedia/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bornglorious.com/person/?pi=484662
+timestamp: '2026-04-07T01:44:44.492262+00:00'
+title: Q484662
+turns: 3
+value_label: Belgium
+verdict: incorrect

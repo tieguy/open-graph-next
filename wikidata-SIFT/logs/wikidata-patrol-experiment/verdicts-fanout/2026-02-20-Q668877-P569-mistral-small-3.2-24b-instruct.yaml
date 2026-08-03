@@ -1,0 +1,31 @@
+completion_tokens: 1269
+cost_usd: 0.008597974999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 84991
+property: P569
+property_label: date of birth
+rationale: The evidence from Astro.com and myAstropedia, which both indicate that
+  Harley Jessup was born on 3 September 1954, supports the edit changing the date
+  of birth to 3 September 1954.
+rcid: 2540962237
+revid: 2464750125
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.themoviedb.org/person/7888-harley-jessup?language=en-US
+- provenance: verified
+  supports_claim: true
+  url: https://www.astro.com/astro-databank/Jessup,_Harley
+- provenance: verified
+  supports_claim: true
+  url: https://prabook.com/web/harley_william.jessup/3569349
+- provenance: verified
+  supports_claim: true
+  url: https://myastro.com/myastropedia/harley-jessup
+timestamp: '2026-02-20T04:31:03.308025+00:00'
+title: Q668877
+turns: 10
+value_label: null
+verdict: verified-high

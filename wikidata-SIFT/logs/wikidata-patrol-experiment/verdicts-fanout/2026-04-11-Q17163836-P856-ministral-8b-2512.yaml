@@ -1,0 +1,28 @@
+completion_tokens: 1823
+cost_usd: 0.00232008
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26291
+property: P856
+property_label: official website
+rationale: The investigation could not verify the current status of the official website
+  claim for Quanzhou Overseas Relations Museum due to the inability to fetch or search
+  for independent sources. The prefetched references were either irrelevant or could
+  not be directly confirmed. Without verified evidence, it is impossible to determine
+  whether the rank change from 'normal' to 'deprecated' for `http://www.qzhjg.com`
+  is correct.
+rcid: 2551429832
+revid: 2474729766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Quanzhou_Overseas_Relations_Museum
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelchinaguide.com/attraction/fujian/quanzhou/maritimemuseum.htm
+timestamp: '2026-04-11T07:34:41.539719+00:00'
+title: Q17163836
+turns: 3
+value_label: null
+verdict: unverifiable

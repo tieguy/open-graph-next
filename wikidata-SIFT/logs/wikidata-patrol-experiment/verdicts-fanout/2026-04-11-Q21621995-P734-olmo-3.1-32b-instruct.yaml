@@ -1,0 +1,32 @@
+completion_tokens: 1776
+cost_usd: 0.006833199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28838
+property: P734
+property_label: family name
+rationale: All authoritative sources consistently list Kylian Mbappé's family name
+  as 'Mbappé'. The cited reference (L'Équipe player profile) does not support 'Arfelli'
+  as a family name, and no credible independent source uses 'Arfelli'. Therefore,
+  changing the family name to 'Arfelli' was not justified.
+rcid: 2549571737
+revid: 2472934483
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lequipe.fr/Football/FootballFicheJoueur58221.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.psg.fr/teams/first-team/squad/kylian-mbappe
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.fr/kylian-mbappe/verein/18/PSG/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kylian_Mbapp%C3%A9
+timestamp: '2026-04-11T15:50:32.933477+00:00'
+title: Q21621995
+turns: 1
+value_label: Arfelli
+verdict: incorrect

@@ -1,0 +1,34 @@
+completion_tokens: 2069
+cost_usd: 0.0064822000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26204
+property: P108
+property_label: employer
+rationale: The ORCID profile of Johannes W. Dietrich explicitly lists employment at
+  University Hospital Ulm from 2002 to 2005 and at St. Josef Hospital from October
+  2021 onward. Multiple independent professional sources corroborate his current affiliation
+  with St. Josef Hospital. There is no evidence that he remains employed by University
+  Hospital Ulm. Therefore, the change from University Hospital Ulm to St. Josef Hospital
+  as employer is accurate and supported by reliable primary and secondary sources.
+rcid: 2550596746
+revid: 2473928017
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-1185-3549
+- provenance: verified
+  supports_claim: true
+  url: https://philpeople.org/profiles/johannes-w-dietrich
+- provenance: verified
+  supports_claim: true
+  url: https://ruhr-uni-bochum.academia.edu/JohannesWDietrich
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Johannes-W-Dietrich
+timestamp: '2026-04-11T09:03:38.128765+00:00'
+title: Q48800274
+turns: 1
+value_label: St Josef Hospital
+verdict: verified-high

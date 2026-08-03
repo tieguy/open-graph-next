@@ -1,0 +1,25 @@
+completion_tokens: 2557
+cost_usd: 0.01327089
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 101788
+property: P2137
+property_label: total equity
+rationale: The reference URL for the total equity claim (2017 IFRS report) is inaccessible
+  (HTTP 403 Forbidden), and no verified independent sources could be located to confirm
+  or deny the new value of 176,091,000,000 Russian rubles for T-Bank in 2017. Additionally,
+  the new value matches the 2021 total equity claim in the item context, raising further
+  suspicion. Without access to the primary source or corroborating evidence, the edit
+  cannot be verified.
+rcid: 2550547047
+revid: 2473880235
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://static.tinkoff.ru/documents/eng/investor-relations/financial-results/2017/TCS_FSPWC_CY_FY2017.pdf
+timestamp: '2026-04-11T06:47:51.720342+00:00'
+title: Q4457878
+turns: 4
+value_label: null
+verdict: unverifiable

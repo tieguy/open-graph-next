@@ -1,0 +1,19 @@
+completion_tokens: 880
+cost_usd: 0.002307675
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23998
+property: P18
+property_label: image
+rationale: The edit has no references attached to either the old or new value. Additionally,
+  the web searches could not be completed due to an API error, making it impossible
+  to verify the accuracy of the change.
+rcid: 2550437488
+revid: 2473774385
+sources: []
+timestamp: '2026-04-11T14:45:59.450411+00:00'
+title: Q592584
+turns: 2
+value_label: null
+verdict: unverifiable

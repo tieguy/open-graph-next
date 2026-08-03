@@ -1,0 +1,34 @@
+completion_tokens: 1868
+cost_usd: 0.032966
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 23626
+property: P1705
+property_label: native label
+rationale: The value 'Šlokenbekas muiža' is well-supported as the correct Latvian
+  native label for Q61388491. Multiple independent sources—including official Latvia
+  tourism boards, regional tourism sites, and international hospitality platforms—consistently
+  use this term. The term 'muiža' is the standard Latvian word for 'manor,' matching
+  the item's instance-of classification. Although the edit itself has no reference
+  attached, the claim is independently verified across multiple authoritative sources.
+rcid: 2540973166
+revid: 2464760076
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q61388491
+- provenance: verified
+  supports_claim: true
+  url: https://www.latvia.travel/en/sight/slokenbeka-manor
+- provenance: verified
+  supports_claim: true
+  url: https://visittukums.lv/en/Where-to-stay/Hotels-and-motels/Slokenbeka-Manor1
+- provenance: verified
+  supports_claim: true
+  url: https://www.booking.com/hotel/lv/a-lokenbergas-muia3-4a.html
+timestamp: '2026-02-20T03:01:58.387607+00:00'
+title: Q61388491
+turns: 3
+value_label: null
+verdict: verified-high

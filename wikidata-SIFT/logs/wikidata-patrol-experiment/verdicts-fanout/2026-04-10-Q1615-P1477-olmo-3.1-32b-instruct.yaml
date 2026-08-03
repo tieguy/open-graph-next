@@ -1,0 +1,29 @@
+completion_tokens: 1316
+cost_usd: 0.0063062
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27583
+property: P1477
+property_label: birth name
+rationale: All authoritative and independent sources confirm Neil Armstrong's birth
+  name as 'Neil Alden Armstrong.' The cited reference does not support the claimed
+  new birth name, and there is no evidence from reliable sources to substantiate the
+  change. The new value appears to be erroneous or a fictional reference.
+rcid: 2550337240
+revid: 2473676273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/2012/08/26/science/space/neil-armstrong-dies-first-man-on-moon.html
+- provenance: verified
+  supports_claim: false
+  url: https://planet4589.org/space/astro/rides.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Neil_Armstrong
+timestamp: '2026-04-10T09:10:56.142259+00:00'
+title: Q1615
+turns: 1
+value_label: null
+verdict: incorrect

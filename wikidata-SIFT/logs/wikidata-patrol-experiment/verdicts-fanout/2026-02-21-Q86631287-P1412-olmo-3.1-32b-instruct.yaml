@@ -1,0 +1,30 @@
+completion_tokens: 1342
+cost_usd: 0.0060777999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26363
+property: P1412
+property_label: languages spoken, written or signed
+rationale: No reliable, verifiable sources explicitly state that Muhammad ibn Sulayman
+  al-Kurdi spoke, wrote, or signed in Kurdish. The primary Turkish biographical source
+  consulted makes no such claim, and independent scholarly sources similarly do not
+  assert Kurdish language proficiency, focusing instead on his legal and Sufi scholarship.
+  Thus, the claim cannot be confirmed or denied with the current evidence.
+rcid: 2540918651
+revid: 2464709782
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://islamansiklopedisi.org.tr/kurdi-muhammed-b-suleyman
+- provenance: verified
+  supports_claim: false
+  url: https://dspace.library.uu.nl/bitstream/handle/1874/20756/bruinessen_98_kurdishulamaandtheirindonesian.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://kurdipedia.org/docviewer.aspx?id=86763&document=0001.PDF
+timestamp: '2026-02-21T02:10:34.313046+00:00'
+title: Q86631287
+turns: 2
+value_label: Kurdish
+verdict: unverifiable

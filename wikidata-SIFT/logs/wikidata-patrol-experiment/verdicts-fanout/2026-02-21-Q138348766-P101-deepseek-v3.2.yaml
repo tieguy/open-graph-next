@@ -1,0 +1,36 @@
+completion_tokens: 2079
+cost_usd: 0.02141286
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 86136
+property: P101
+property_label: field of work
+rationale: The cited reference (Lifeblood article) does not directly support the claim
+  that Danny Gaskin's field of work is 'Transfusion Medicine' - it only mentions he
+  wrote an opinion piece about fatigue in transfusion laboratories. However, multiple
+  independent sources (BBTS profile, Bloodstocks contact page, bioscientist magazine
+  interview) consistently describe him as a biomedical scientist specializing in blood
+  transfusion and transfusion laboratory management. While these sources don't explicitly
+  use the term 'Transfusion Medicine' (Q15758505), his work in blood transfusion clearly
+  falls under this medical specialty domain.
+rcid: 2540921131
+revid: 2464712161
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lifeblood.com.au/news-and-stories/health-professionals-news/fatigue-in-focus
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/dannygaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://bioscientistmagazine.wordpress.com/2021/05/10/being-a-biomedical-scientist-danny-gaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloodstocks.co.uk/contact/
+timestamp: '2026-02-21T00:43:04.323195+00:00'
+title: Q138348766
+turns: 10
+value_label: Transfusion Medicine
+verdict: verified-low

@@ -1,0 +1,26 @@
+completion_tokens: 1642
+cost_usd: 0.00941771875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 96077
+property: P106
+property_label: occupation
+rationale: The edit changes the occupation from "frontiersman" to "pornography" without
+  any cited references. Historical accounts and reliable sources do not support the
+  new value "pornography." The old value "frontiersman" is more consistent with known
+  information about Calamity Jane's life as a scout and frontierswoman.
+rcid: null
+revid: 2471214901
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/american-folk-hero/calamity-jane
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/calamity-jane-1852-1903
+timestamp: '2026-04-11T15:23:17.627899+00:00'
+title: Q236795
+turns: 10
+value_label: pornography
+verdict: suspect

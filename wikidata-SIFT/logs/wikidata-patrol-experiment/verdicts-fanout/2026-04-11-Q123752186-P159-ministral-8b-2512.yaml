@@ -1,0 +1,26 @@
+completion_tokens: 1703
+cost_usd: 0.0025424700000000002
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24668
+property: P159
+property_label: headquarters location
+rationale: The edit claims SYENSQO's headquarters is in Brussels (Q239) with a new
+  reference URL that failed to fetch. However, an independent verified source (LobbyFacts.eu)
+  confirms SYENSQO's headquarters is at Rue de la Fusée 98, Brussels 1130, Belgium,
+  matching the coordinates (P625) and street address (P6375) qualifiers added in the
+  edit. While the direct reference is unavailable, the claim is strongly supported
+  by external evidence. The edit is justified, but the reference quality is weakened
+  by the unreachable URL.
+rcid: 2551398780
+revid: 2474702785
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lobbyfacts.eu/datacard/syensqo?rid=685934152245-39
+timestamp: '2026-04-11T08:50:50.735957+00:00'
+title: Q123752186
+turns: 2
+value_label: Brussels
+verdict: verified-low

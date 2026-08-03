@@ -1,0 +1,28 @@
+completion_tokens: 1438
+cost_usd: 0.011026687499999998
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 116275
+property: P1448
+property_label: official name
+rationale: The investigation was unable to find any reliable sources to verify the
+  official name of Jorge diez. The search attempts did not yield any relevant results
+  due to errors.
+rcid: null
+revid: 2460658202
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.georgiastrategygroup.com/teams/jorge-diez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.primehc.com/md/jorge-diez-md
+- provenance: verified
+  supports_claim: false
+  url: https://www.trinityhealthofne.org/provider/jorge-l-diez-md-endocrinology-diabetes-metabolism
+timestamp: '2026-04-11T09:24:03.867863+00:00'
+title: Q5935950
+turns: 15
+value_label: null
+verdict: unverifiable

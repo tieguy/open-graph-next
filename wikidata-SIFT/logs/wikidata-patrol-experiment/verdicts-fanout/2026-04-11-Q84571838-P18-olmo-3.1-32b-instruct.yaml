@@ -1,0 +1,37 @@
+completion_tokens: 1593
+cost_usd: 0.0038524
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14483
+property: P18
+property_label: image
+rationale: Both the new image from the 2026 Sanremo Music Festival and the old image
+  from 2025 in Rome are authentic and documented by reliable tertiary sources. However,
+  the edit lacked any citation or rationale for the change, and there is no explicit
+  policy requiring the image to be the most recent or tied to a specific event. Therefore,
+  while the factual correctness of the images is confirmed, the edit cannot be judged
+  as a clear improvement without additional context.
+rcid: null
+revid: 2470506374
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Sanremo_Music_Festival_2026
+- provenance: verified
+  supports_claim: true
+  url: https://it.wikipedia.org/wiki/Leo_Gassmann
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/leo-gassmann
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Leo+Gassmann/+images
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCH6ZEmuuVNz1fsVAyfa4lsQ
+timestamp: '2026-04-11T18:25:26.677760+00:00'
+title: Q84571838
+turns: 1
+value_label: null
+verdict: plausible

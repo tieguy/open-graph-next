@@ -1,0 +1,31 @@
+completion_tokens: 1976
+cost_usd: 0.0066084
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27114
+property: P4033
+property_label: Mastodon address
+rationale: The Mastodon address 'josh@science.social' was added to Josh Universe's
+  Wikidata item without any supporting reference or direct confirmation from a primary
+  source. Although the 'science.social' Mastodon instance is legitimate, there is
+  no publicly accessible evidence that this specific address belongs to Josh Universe.
+  The lack of citation and independent verification raises suspicion that the edit
+  may be incorrect or unsourced.
+rcid: 2551423432
+revid: 2474724616
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://science.social
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.linkedin.com/in/univ/
+timestamp: '2026-04-11T17:31:03.773553+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: suspect

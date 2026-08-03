@@ -1,0 +1,25 @@
+completion_tokens: 1115
+cost_usd: 0.0015050875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14739
+property: P106
+property_label: occupation
+rationale: The old value 'sculptor' is well-supported by multiple reliable sources,
+  including Wikipedia and the field of work claim. The new value 'subnormal number'
+  has no supporting evidence and appears to be incorrect.
+rcid: null
+revid: 2460300984
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/w/index.php?title=Francisco_Luque&oldid=916830026
+- provenance: verified
+  supports_claim: false
+  url: https://radaris.com/p/Francisco/Luque/
+timestamp: '2026-04-11T12:37:04.297192+00:00'
+title: Q5483608
+turns: 1
+value_label: subnormal number
+verdict: incorrect

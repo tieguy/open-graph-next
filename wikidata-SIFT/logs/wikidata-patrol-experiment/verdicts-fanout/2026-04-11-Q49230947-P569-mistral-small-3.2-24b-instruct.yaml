@@ -1,0 +1,29 @@
+completion_tokens: 1339
+cost_usd: 0.00154423125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14606
+property: P569
+property_label: date of birth
+rationale: The primary source, The Movie Database, supports the old value of January
+  18, 1949, for Juan Alcayaga's date of birth. No independent sources support the
+  new value of January 18, 1950. Therefore, the edit to change the date of birth is
+  incorrect.
+rcid: 2549978675
+revid: 2473328137
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.themoviedb.org/person/1268103-juan-alcayaga?language=en-US
+- provenance: verified
+  supports_claim: false
+  url: https://www.officialusa.com/names/Juan-Alcayaga/
+- provenance: verified
+  supports_claim: false
+  url: https://uchile.cl/noticias/217826/juan-don-carter-alcayaga-comenta-sobre-su-vida-universitaria
+timestamp: '2026-04-11T13:19:02.164550+00:00'
+title: Q49230947
+turns: 1
+value_label: null
+verdict: incorrect

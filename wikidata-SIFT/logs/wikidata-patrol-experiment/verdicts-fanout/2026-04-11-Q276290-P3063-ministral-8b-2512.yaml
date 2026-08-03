@@ -1,0 +1,30 @@
+completion_tokens: 1902
+cost_usd: 0.0045875099999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20546
+property: P3063
+property_label: gestation period
+rationale: The old value of '+70' days for the naked mole-rat's gestation period is
+  strongly supported by multiple verified primary sources, including peer-reviewed
+  studies (PLOS ONE) and reputable zoological resources (San Diego Zoo Wildlife. These
+  sources explicitly state the gestation period is 70 days, with a range of 66-74
+  days. The new value of '67 day' (missing '+' sign and inconsistent formatting) lacks
+  strong independent corroboration as the preferred value, despite being within the
+  documented range. The change from '+70' to '67 day' is not justified by the available
+  evidence, making this edit suspect.
+rcid: 2550579357
+revid: 2473911257
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ielc.libguides.com/sdzg/factsheets/naked-mole-rat/reproduction
+- provenance: verified
+  supports_claim: true
+  url: https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0017744
+timestamp: '2026-04-11T09:15:57.617147+00:00'
+title: Q276290
+turns: 1
+value_label: null
+verdict: suspect

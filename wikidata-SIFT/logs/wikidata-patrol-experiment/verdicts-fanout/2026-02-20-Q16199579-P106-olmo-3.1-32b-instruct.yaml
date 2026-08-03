@@ -1,0 +1,30 @@
+completion_tokens: 1580
+cost_usd: 0.012263000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 56575
+property: P106
+property_label: occupation
+rationale: Secondary sources consistently describe Malcolm George Baker as a murderer
+  convicted of multiple homicides, but no primary legal or government source was accessible
+  to verify the claim that 'murderer' is an appropriate occupation value. Wikidata
+  standards discourage using 'murderer' as an occupation; a more neutral and precise
+  property should be used, supported by an official court record or criminal register.
+rcid: 2540957683
+revid: 2464745864
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://justiceaction.org.au/wp-content/uploads/2023/07/Case-Study-Of-Malcolm-George-Baker-16-04-2015.doc
+- provenance: reported
+  supports_claim: true
+  url: https://fountain.fm/show/809425
+- provenance: reported
+  supports_claim: true
+  url: https://www.dailytelegraph.com.au/truecrimeaustralia/police-courts-nsw/australias-most-shocking-and-hated-criminals-behind-bars-for-life-revealed/news-story/97c8cf3bb002205d2b047f777cf98e8c
+timestamp: '2026-02-20T06:07:08.451372+00:00'
+title: Q16199579
+turns: 9
+value_label: murderer
+verdict: suspect

@@ -1,0 +1,27 @@
+completion_tokens: 2766
+cost_usd: 0.00893154
+diff_type: reference_added
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 159789
+property: P31
+property_label: instance of
+rationale: The prefetched references provided do not directly support the claim that
+  San Gregorio Vecchio is a former municipality. The content from visitdolomitibellunesi.com
+  describes San Gregorio nelle Alpi as a current municipality, and the content from
+  visitlazio.com describes San Gregorio da Sassola, which is a different location.
+  No independent sources were found to confirm or deny the claim.
+rcid: 2550410297
+revid: 2473747654
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.visitdolomitibellunesi.com/en/discover-the-dolomites-in-belluno/villages-and-cities-for-art/san-gregorio-nelle-alpi
+- provenance: verified
+  supports_claim: false
+  url: https://www.visitlazio.com/en/san-gregorio-da-sassola/
+timestamp: '2026-04-11T16:00:28.431824+00:00'
+title: Q17652102
+turns: 15
+value_label: former municipality
+verdict: unverifiable

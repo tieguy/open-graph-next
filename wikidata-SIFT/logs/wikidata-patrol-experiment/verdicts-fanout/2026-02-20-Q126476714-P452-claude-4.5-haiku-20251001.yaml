@@ -1,0 +1,37 @@
+completion_tokens: 1899
+cost_usd: 0.054681999999999994
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 45187
+property: P452
+property_label: industry
+rationale: The reference URL (company's official website) directly supports the industry
+  claim. The website confirms Pixartprinting operates in commercial printing through
+  explicit descriptions of its printing services and product categories. Multiple
+  independent sources (Canon Europe, PitchBook, Bloomberg, ZoomInfo) corroborate this
+  classification. The claim is well-supported by both the cited reference and independent
+  coverage.
+rcid: 2540925015
+revid: 2464715869
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pixartprinting.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.pixartprinting.com/company-profile/
+- provenance: reported
+  supports_claim: true
+  url: https://www.canon-europe.com/business/insights/case-studies/pixarprinting-maintains-competitive-edge/
+- provenance: reported
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/0650461D:IM
+- provenance: reported
+  supports_claim: true
+  url: https://www.zoominfo.com/c/pixartprinting/347948620
+timestamp: '2026-02-20T22:56:53.857644+00:00'
+title: Q126476714
+turns: 6
+value_label: Commercial Printing
+verdict: verified-high

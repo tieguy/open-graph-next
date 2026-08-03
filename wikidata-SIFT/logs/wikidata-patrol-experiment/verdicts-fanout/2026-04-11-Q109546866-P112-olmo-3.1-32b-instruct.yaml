@@ -1,0 +1,33 @@
+completion_tokens: 2075
+cost_usd: 0.004182
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14685
+property: P112
+property_label: founder
+rationale: Multiple independent, reliable sources—including Wikipedia, Crunchbase,
+  and the Wall Street Journal—explicitly confirm that Wayne Holman is a co-founder
+  of Ridgeback Biotherapeutics. This provides strong evidence that the added reference
+  supports the founder claim, despite the new reference being unverifiable due to
+  a technical error during fetching.
+rcid: 2551339028
+revid: 2474645293
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Ridgeback_Biotherapeutics
+- provenance: verified
+  supports_claim: true
+  url: https://www.crunchbase.com/organization/ridgeback-biotherapeutics
+- provenance: verified
+  supports_claim: true
+  url: https://www.wsj.com/articles/behind-a-new-pill-to-treat-covid-a-husband-and-wife-team-and-a-hunch-11640025453
+- provenance: unverifiable
+  supports_claim: false
+  url: https://ridgebackbio.com/about/development-advisory-board/wayne-holman-md/
+timestamp: '2026-04-11T10:15:43.338903+00:00'
+title: Q109546866
+turns: 1
+value_label: Wayne Holman
+verdict: verified-high

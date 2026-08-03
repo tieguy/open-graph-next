@@ -1,0 +1,30 @@
+completion_tokens: 2448
+cost_usd: 0.0038783999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12048
+property: P527
+property_label: has part(s)
+rationale: Authoritative sources such as Yale Medicine, WHO, and Wikipedia clearly
+  distinguish 'sex' as a biological category (with parts like 'male' and 'female')
+  from 'gender' as a social/cultural identity (including 'woman'). 'Woman' is consistently
+  described as a gender identity, not a part of 'sex.' Therefore, changing the 'has
+  part(s)' from 'sex' to 'woman' is semantically incorrect and unsupported by evidence.
+rcid: 2550951525
+revid: 2474271596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://medicine.yale.edu/news-article/what-do-we-mean-by-sex-and-gender/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sex_and_gender_distinction
+- provenance: verified
+  supports_claim: false
+  url: https://www.who.int/health-topics/sex-gender-and-health
+timestamp: '2026-04-11T10:41:01.023335+00:00'
+title: Q18382802
+turns: 1
+value_label: woman
+verdict: suspect

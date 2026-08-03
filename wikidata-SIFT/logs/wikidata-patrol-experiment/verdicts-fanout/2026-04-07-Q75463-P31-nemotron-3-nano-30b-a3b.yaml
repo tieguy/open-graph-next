@@ -1,0 +1,21 @@
+completion_tokens: 671
+cost_usd: 0.00843595
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 166035
+property: P31
+property_label: instance of
+rationale: Despite extensive investigation, no reliable source was found to confirm
+  whether the claim that 'Subhuman' is the correct instance of for Marianne Cohn is
+  accurate. Multiple web searches using various query strategies failed to locate
+  any mention of this claim, and available prefetched references were inaccessible
+  due to technical errors, preventing verification of the cited source.
+rcid: 2549484172
+revid: 2472848876
+sources: []
+timestamp: '2026-04-07T08:59:47.742212+00:00'
+title: Q75463
+turns: 15
+value_label: Subhuman
+verdict: unverifiable

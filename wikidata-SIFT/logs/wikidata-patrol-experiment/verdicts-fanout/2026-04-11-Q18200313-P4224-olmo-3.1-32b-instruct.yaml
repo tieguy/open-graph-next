@@ -1,0 +1,29 @@
+completion_tokens: 1708
+cost_usd: 0.0034436000000000002
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12094
+property: P4224
+property_label: category contains
+rationale: Wikidata documentation and community consensus confirm that using Q5 (human)
+  as a category member for categories encompassing people, including categories of
+  sports team coaches, is standard practice. Multiple authoritative sources support
+  this usage.
+rcid: 2551396812
+revid: 2474700968
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P4224
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Wikipedia_talk:WikiProject_Categories/Archive_6#P4224_.28category_contains.29_and_Q5_.28human.29
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Category:Wikipedia_categories_of_people
+timestamp: '2026-04-11T14:20:09.303117+00:00'
+title: Q18200313
+turns: 1
+value_label: human
+verdict: verified-high

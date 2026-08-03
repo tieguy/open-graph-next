@@ -1,0 +1,23 @@
+completion_tokens: 624
+cost_usd: 0.00930665
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 183637
+property: P69
+property_label: educated at
+rationale: Extensive investigation across credible entertainment sources (IMDB, official
+  artist website, and independent news archives) yielded no evidence supporting the
+  claim that Sabrina Carpenter attended Oak Park High School or involved pornography.
+  No verifiable sources were found to confirm or refute either aspect of the claim.
+rcid: null
+revid: 2471001308
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.sabrinacarpenter.com
+timestamp: '2026-04-07T09:29:08.626213+00:00'
+title: Q7396400
+turns: 15
+value_label: pornography
+verdict: unverifiable

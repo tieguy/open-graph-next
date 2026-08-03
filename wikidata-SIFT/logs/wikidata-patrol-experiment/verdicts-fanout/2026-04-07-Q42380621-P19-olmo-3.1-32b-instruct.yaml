@@ -1,0 +1,27 @@
+completion_tokens: 833
+cost_usd: 0.0068032
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31517
+property: P19
+property_label: place of birth
+rationale: No independent, accessible sources confirm Francesc Arabí's place of birth
+  as 'Marruecos'. The edit replaced the specific locality 'Gata de Gorgos' with a
+  broader region without citation or confirmation. Access to potential biographical
+  sources (e.g., Spanish Wikipedia) was blocked, and web searches did not yield reliable
+  evidence supporting the change.
+rcid: null
+revid: 2464673102
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://es.wikipedia.org/wiki/Francesc_Arabi
+- provenance: reported
+  supports_claim: null
+  url: ''
+timestamp: '2026-04-07T14:13:46.402041+00:00'
+title: Q42380621
+turns: 7
+value_label: Marruecos
+verdict: unverifiable

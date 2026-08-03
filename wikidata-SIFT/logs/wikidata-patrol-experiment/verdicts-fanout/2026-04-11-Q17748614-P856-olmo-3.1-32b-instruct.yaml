@@ -1,0 +1,32 @@
+completion_tokens: 345
+cost_usd: 0.0026578
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12254
+property: P856
+property_label: official website
+rationale: The new website https://www.anker.oslo.no/ is the current official website
+  for Stiftelsen Anker Studentboliger og Hotel (Anker STI), as evidenced by the official
+  registration details from the Norwegian Business Register and the content of the
+  site itself. The old URL http://www.anker.oslo.no was a non-HTTPS version, which
+  is typically redirected to the HTTPS version in modern web practice. The new URL
+  is operational, contains up-to-date information about the organization, and is referenced
+  as the official web address by authoritative sources.
+rcid: 2550947442
+revid: 2474267669
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=966891750
+- provenance: verified
+  supports_claim: true
+  url: https://www.anker.oslo.no/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bloomberg.com/profile/company/5469361Z:NO
+timestamp: '2026-04-11T08:33:55.141006+00:00'
+title: Q17748614
+turns: 1
+value_label: null
+verdict: verified-high

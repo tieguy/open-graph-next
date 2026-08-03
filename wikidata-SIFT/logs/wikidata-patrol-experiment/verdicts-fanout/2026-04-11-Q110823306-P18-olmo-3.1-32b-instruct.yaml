@@ -1,0 +1,29 @@
+completion_tokens: 2086
+cost_usd: 0.0040982
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14233
+property: P18
+property_label: image
+rationale: The image was changed without citation or justification. Independent sources
+  such as Transfermarkt, Sofascore, and Wikipedia do not reference or display either
+  image, and there is no evidence that the new image is more appropriate. Changing
+  the image without a reliable source is suspicious.
+rcid: 2551409863
+revid: 2474713080
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/matias-cordova/profil/spieler/805148
+- provenance: verified
+  supports_claim: false
+  url: https://www.sofascore.com/football/player/matias-cordova/1050329
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Mat%C3%ADas_C%C3%B3rdova
+timestamp: '2026-04-11T09:04:48.896230+00:00'
+title: Q110823306
+turns: 1
+value_label: null
+verdict: suspect

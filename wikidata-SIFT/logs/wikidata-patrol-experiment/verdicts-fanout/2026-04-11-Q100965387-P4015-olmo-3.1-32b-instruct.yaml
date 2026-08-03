@@ -1,0 +1,29 @@
+completion_tokens: 1754
+cost_usd: 0.0031842
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10659
+property: P4015
+property_label: Vimeo ID
+rationale: Neither the old nor the new Vimeo ID resolves to a valid Vimeo page for
+  Théâtre la Seizième. The official website and direct URL checks confirm the absence
+  of a Vimeo presence. The change was not supported by any references or independent
+  evidence.
+rcid: 2551327748
+revid: 2474634879
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://vimeo.com/seizieme
+- provenance: verified
+  supports_claim: false
+  url: https://seizieme.ca/fr/
+- provenance: reported
+  supports_claim: false
+  url: Web search for 'Théâtre la Seizième vimeo'
+timestamp: '2026-04-11T13:06:09.609431+00:00'
+title: Q100965387
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 849
+cost_usd: 0.0046684125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46762
+property: P735
+property_label: given name
+rationale: No independent sources were found to confirm or deny the claim that IShowSpeed's
+  first given name is 'Dicky'. The edit lacks references, and web searches did not
+  yield any relevant information.
+rcid: 2550522023
+revid: 2473856160
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=IShowSpeed+given+name+Dicky
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dicky+Watkins
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=IShowSpeed+birth+name
+timestamp: '2026-04-07T06:13:47.310371+00:00'
+title: Q114834007
+turns: 4
+value_label: Dicky
+verdict: unverifiable

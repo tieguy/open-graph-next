@@ -1,0 +1,32 @@
+completion_tokens: 962
+cost_usd: 0.0037554
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15891
+property: P1477
+property_label: birth name
+rationale: The edit shortened José de Nebra's birth name from the fully expanded 'José
+  Melchor Baltasar Gaspar Nebra Blasco' to 'José de Nebra Blasco'. Multiple sources
+  recognize both forms as alternate names for the same composer, but none explicitly
+  justify the removal of the middle names. While the shortened form is commonly used,
+  the change lacks a source that supports dropping 'Baltasar Gaspar' and does not
+  preserve the fuller name as an alias or with qualifiers, representing a loss of
+  information. Therefore, the edit is considered suspect.
+rcid: null
+revid: 2471495510
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.hoasm.org/VIIH/Nebra.html
+- provenance: verified
+  supports_claim: true
+  url: https://imslp.org/wiki/Category:Nebra,_Jos%C3%A9_de
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/0d7881bf-7c49-43b0-963a-cc7b08b91b48
+timestamp: '2026-04-11T15:22:34.005955+00:00'
+title: Q1246203
+turns: 1
+value_label: null
+verdict: suspect

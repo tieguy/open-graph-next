@@ -1,0 +1,33 @@
+completion_tokens: 307
+cost_usd: 0.0022302
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10230
+property: P18
+property_label: image
+rationale: The new image appears to be an official, manufacturer-provided photo of
+  a 2021 Nissan Armada in Brilliant Silver Metallic. Nissan's official US website
+  hosts gallery pages with exterior and interior photos for the Armada, including
+  color options and the model year 2026, which suggests a similar gallery for 2021
+  models. The filename convention and description match typical official marketing
+  images. The old image ('Nissan-Armada-2.jpg') lacks specificity and could be generic
+  or outdated. Multiple authoritative sources confirm the availability of official,
+  model-specific images for Nissan Armada, supporting the replacement.
+rcid: 2550729446
+revid: 2474056825
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/armada/gallery/exterior.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/armada/gallery/interior.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/photos/g69307460/2026-nissan-armada-nismo-drive-gallery/
+timestamp: '2026-04-11T06:42:02.669139+00:00'
+title: Q611158
+turns: 1
+value_label: null
+verdict: verified-high

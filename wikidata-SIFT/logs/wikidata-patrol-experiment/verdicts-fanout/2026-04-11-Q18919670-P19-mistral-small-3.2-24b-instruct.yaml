@@ -1,0 +1,27 @@
+completion_tokens: 1325
+cost_usd: 0.00277068
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40065
+property: P19
+property_label: place of birth
+rationale: The added reference from Hebrew Wikipedia supports the place of birth claim
+  for Eshel Armony. The prefetched references confirm the availability of birth records
+  in North Carolina, supporting the plausibility of the claim. However, without direct
+  access to the Hebrew Wikipedia page or additional independent sources, the verdict
+  is limited to verified-low.
+rcid: null
+revid: 2473762133
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://guides.loc.gov/north-carolina-local-history-genealogy/vital-records
+- provenance: verified
+  supports_claim: true
+  url: https://vitalrecords.nc.gov/
+timestamp: '2026-04-11T06:53:40.911486+00:00'
+title: Q18919670
+turns: 4
+value_label: North Carolina
+verdict: verified-low

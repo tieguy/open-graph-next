@@ -1,0 +1,20 @@
+completion_tokens: 565
+cost_usd: 0.004736000000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92460
+property: P569
+property_label: date of birth
+rationale: No reliable sources were found to confirm or refute the birth date of Hans-Georg
+  Backhaus as '29 April 1929'. Multiple web searches using various queries returned
+  no results, indicating no readily verifiable information on Wikipedia, Wikidata,
+  academic databases, or other sources was located to substantiate the edit.
+rcid: 2549601953
+revid: 2472963887
+sources: []
+timestamp: '2026-04-07T10:51:01.467230+00:00'
+title: Q111287
+turns: 15
+value_label: null
+verdict: unverifiable

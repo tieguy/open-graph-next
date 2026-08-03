@@ -1,0 +1,27 @@
+completion_tokens: 2191
+cost_usd: 0.007191599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29385
+property: P18
+property_label: image
+rationale: The edit replaced a well-documented 1909 photographic portrait held by
+  the Copenhagen Photo Museum with a less provenanced 1925 image whose filename lacks
+  authoritative confirmation. There is no citation or clear justification for the
+  change, and no reliable source confirms the new image as the preferred representation
+  of Ignacio Zuloaga.
+rcid: 2550641513
+revid: 2473971597
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cphphotorama.dk/en/collection/item/3a44376
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/collection/works/123456
+timestamp: '2026-04-11T11:51:54.759141+00:00'
+title: Q460198
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,28 @@
+completion_tokens: 921
+cost_usd: 0.04700325999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 156615
+property: P1477
+property_label: birth name
+rationale: The edit changed the birth name of Swedish singer Zara Larsson to 'The
+  queen', which is clearly not a birth name but appears to be a nickname or fan title.
+  Multiple sources consulted, including an official fan wiki and various biography
+  pages, consistently state that her birth name is 'Zara Maria Larsson'. The claim
+  has no references cited in Wikidata, and the evidence directly contradicts the value
+  'The queen' as a birth name. This appears to be vandalism or a joke edit.
+rcid: 2540958099
+revid: 2464746262
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zaralarsson.fandom.com/wiki/Zara_Larsson
+- provenance: verified
+  supports_claim: false
+  url: https://www.lofficielusa.com/music/zara-larsson-age-parents-boyfriend-songs-facts-to-know-tour-concerts
+timestamp: '2026-02-20T05:54:26.846369+00:00'
+title: Q4177928
+turns: 10
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1929
+cost_usd: 0.00283227
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35302
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The edit changes the administrative territorial entity from the broader
+  'Gold Coast' (Q140075) to the precise 'City of Gold Coast' (Q30267253), which aligns
+  with the item's description and claims. The item's description explicitly states
+  it is the local government for Gold Coast City, Queensland, Australia, and the P31
+  claim confirms it is a local government agency. While the cited GRID reference URL
+  is unreachable, the item's context and logical distinction between a broader region
+  and a specific local government entity strongly support the correctness of the change.
+  The new value is more accurate and consistent with the item's purpose as a local
+  government. The lack of access to the GRID reference does not invalidate the edit,
+  as the item's own claims and description provide sufficient evidence.
+rcid: 2549787883
+revid: 2473145691
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.goldcoast.qld.gov.au/
+timestamp: '2026-04-11T12:35:33.238652+00:00'
+title: Q30267253
+turns: 4
+value_label: City of Gold Coast
+verdict: verified-high

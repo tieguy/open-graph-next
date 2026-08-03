@@ -1,0 +1,33 @@
+completion_tokens: 1446
+cost_usd: 0.0050774
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21049
+property: P856
+property_label: official website
+rationale: The new value https://www.koreanair.com/ is the official website of Korean
+  Air, an airline based in South Korea, and is not related to Tonami city. The old
+  value https://www.city.tonami.toyama.jp/ is the official website of Tonami city,
+  confirmed by the city's own website and third-party tourism sources. Replacing the
+  city's official website with an unrelated corporate website is incorrect.
+rcid: null
+revid: 2471589497
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.tonami.toyama.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.koreanair.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.japan.travel/en/spot/1409/
+- provenance: verified
+  supports_claim: true
+  url: https://visit-toyama-japan.com/en/festivals/40019
+timestamp: '2026-04-11T17:19:23.073878+00:00'
+title: Q526760
+turns: 1
+value_label: null
+verdict: incorrect

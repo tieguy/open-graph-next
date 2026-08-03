@@ -1,0 +1,25 @@
+completion_tokens: 1601
+cost_usd: 0.0030559999999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28328
+property: P136
+property_label: genre
+rationale: Multiple independent sources confirm that Reversal of Man is a hardcore/screamo
+  band. The edit changing the genre from screamo to hardcore punk is supported by
+  these sources.
+rcid: 2550852639
+revid: 2474176357
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://sophiesfloorboard.blogspot.com/2019/12/reversal-of-man.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.brooklynvegan.com/reversal-of-man-launch-pre-orders-for-vinyl-discography-comp-nothing-more-nothing-less/
+timestamp: '2026-04-10T09:07:45.037459+00:00'
+title: Q30638510
+turns: 3
+value_label: hardcore punk
+verdict: verified-high

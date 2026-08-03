@@ -1,0 +1,35 @@
+completion_tokens: 2433
+cost_usd: 0.0073194
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29298
+property: P973
+property_label: described at URL
+rationale: The edit replaced a well-cited, neutral secondary source (Benezit via Oxford
+  Art Online) with an official but non-independent primary source (Joseph Glasco Foundation
+  website) and removed all references from the claim. While both sources are factual,
+  the removal of a properly referenced source and the lack of citation on the new
+  value reduce the evidentiary reliability of the 'described at URL' claim. Wikidata
+  standards recommend retaining and supplementing reliable secondary sources rather
+  than replacing them with primary institutional sites without references.
+rcid: 2550521734
+revid: 2473855887
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.oxfordartonline.com/benezit/view/10.1093/benz/9780199773787.article.B00075458
+- provenance: verified
+  supports_claim: true
+  url: https://www.moma.org/artists/495
+- provenance: verified
+  supports_claim: true
+  url: https://www.nytimes.com/1996/06/09/nyregion/joseph-glasco-71-painter-and-sculptor.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.josephglascofoundation.org
+timestamp: '2026-04-11T17:21:01.246029+00:00'
+title: Q6283474
+turns: 1
+value_label: null
+verdict: suspect

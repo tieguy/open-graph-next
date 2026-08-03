@@ -1,0 +1,31 @@
+completion_tokens: 1609
+cost_usd: 0.0054068
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22207
+property: P27
+property_label: country of citizenship
+rationale: All verified sources consulted — including an institutional Mexican biography
+  and art historical databases — consistently identify María Izquierdo as Mexican
+  by birth and nationality. There is no credible evidence that she was a citizen of
+  Morocco or associated with Morocco in any capacity. The new value 'Marroca [de]'
+  appears to be a mistranslation or data entry error and is unsupported by reliable
+  sources.
+rcid: 2549596620
+revid: 2472958694
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+- provenance: verified
+  supports_claim: false
+  url: https://awarewomenartists.com/en/artiste/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.infinite-women.com/women/maria-izquierdo/
+timestamp: '2026-04-11T06:57:13.698749+00:00'
+title: Q461937
+turns: 1
+value_label: Marroca [de]
+verdict: incorrect

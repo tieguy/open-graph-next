@@ -1,0 +1,31 @@
+completion_tokens: 1660
+cost_usd: 0.007157637499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71073
+property: P569
+property_label: date of birth
+rationale: The available sources do not provide clear and accessible evidence to confirm
+  or deny the updated date of birth for Hans Scholl. The Find a Grave memorial page
+  does not explicitly state the date of birth, and other sources are inaccessible.
+rcid: null
+revid: 2468034032
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/20681/hans-scholl
+- provenance: verified
+  supports_claim: false
+  url: https://www.babelio.com/auteurs/Scholl-Hans/51833
+- provenance: verified
+  supports_claim: false
+  url: https://www.munzinger.de/Personen/biographie/hans-scholl-20681
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Hans_Scholl
+timestamp: '2026-04-07T04:28:06.684158+00:00'
+title: Q57820
+turns: 7
+value_label: null
+verdict: unverifiable

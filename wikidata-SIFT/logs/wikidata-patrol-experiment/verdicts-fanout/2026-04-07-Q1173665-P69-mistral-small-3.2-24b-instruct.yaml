@@ -1,0 +1,22 @@
+completion_tokens: 689
+cost_usd: 0.006949024999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71866
+property: P69
+property_label: educated at
+rationale: The referenced Wikipedia page could not be fetched, and no independent
+  sources could be found to confirm or deny the claim that Richard Taruskin was educated
+  at Columbia University.
+rcid: 2550713654
+revid: 2474041515
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=High_School_of_Music_&_Art&oldid=1009561877
+timestamp: '2026-04-07T12:41:14.674966+00:00'
+title: Q1173665
+turns: 10
+value_label: Columbia University
+verdict: unverifiable

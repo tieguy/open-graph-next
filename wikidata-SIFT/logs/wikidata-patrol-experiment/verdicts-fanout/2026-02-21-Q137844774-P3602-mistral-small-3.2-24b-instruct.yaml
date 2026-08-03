@@ -1,0 +1,23 @@
+completion_tokens: 837
+cost_usd: 0.0087785
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 85274
+property: P3602
+property_label: candidacy in election
+rationale: The edit is plausible based on the context provided by other claims about
+  Lina Lim's political career and her listed roles in Sartrouville's municipal activities.
+  However, direct confirmation from official election records or reliable news sources
+  is needed to verify the specific candidacy in the 2020 Sartrouville municipal election.
+rcid: 2540919045
+revid: 2464710128
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sartrouville.fr/portrait/lina-lim/
+timestamp: '2026-02-21T01:54:07.865005+00:00'
+title: Q137844774
+turns: 11
+value_label: 2020 Sartrouville municipal election
+verdict: plausible

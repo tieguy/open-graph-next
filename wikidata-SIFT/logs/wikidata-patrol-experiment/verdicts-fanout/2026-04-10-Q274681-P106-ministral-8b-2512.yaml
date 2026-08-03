@@ -1,0 +1,34 @@
+completion_tokens: 2332
+cost_usd: 0.006802829999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55001
+property: P106
+property_label: occupation
+rationale: Eliphas Lévi's literary output is overwhelmingly focused on occultism,
+  esoteric philosophy, and ceremonial magic. No verified independent sources confirm
+  that he was a 'short story writer.' His notable works, such as 'Transcendental Magic'
+  and 'The History of Magic,' are explicitly occult in nature. The claim that he was
+  a 'short story writer' is not supported by his known literary contributions or verified
+  sources.
+rcid: 2550646412
+revid: 2473976401
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Eliphas-Levi/e/B0034NHSQY
+- provenance: verified
+  supports_claim: false
+  url: https://bestofbooksok.com/search?type=author&q=Levi,+Eliphas&page=5
+- provenance: reported
+  supports_claim: false
+  url: https://www.occult.live/index.php/%C3%89liphas_L%C3%A9vi
+- provenance: verified
+  supports_claim: false
+  url: https://www.audible.com/pd/Notes-on-the-Astral-Light-Esoteric-Classics-Audiobook/B07GZXZHNL
+timestamp: '2026-04-10T12:00:28.351604+00:00'
+title: Q274681
+turns: 4
+value_label: short story writer
+verdict: incorrect

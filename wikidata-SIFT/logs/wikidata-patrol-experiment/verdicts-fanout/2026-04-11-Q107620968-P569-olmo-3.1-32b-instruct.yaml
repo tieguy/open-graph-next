@@ -1,0 +1,36 @@
+completion_tokens: 2825
+cost_usd: 0.0040914
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11982
+property: P569
+property_label: date of birth
+rationale: No cited references were provided for the edit, and a comprehensive search
+  of independent sources—including IMDb, Greek and Cypriot news outlets, theatre society
+  bios, and Wikipedia—failed to find any reliable publication of Marinos Hatzivasileiou's
+  date of birth. Therefore, it is impossible to confirm the correctness of either
+  the old or new value.
+rcid: 2551191071
+revid: 2474504870
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/name/nm11018701/
+- provenance: verified
+  supports_claim: false
+  url: https://el.wikipedia.org/wiki/Μαρίνος_Χατζηβασιλείου
+- provenance: verified
+  supports_claim: false
+  url: https://kyproustheatro.gr/ellinikes-egkliseis/thn-epos-kyprou/2022/10-kyprkos-aktor-marinos-hatzivasileiou/
+- provenance: verified
+  supports_claim: false
+  url: https://www.cyprusmail.com/2022/10/11/cypriot-actor-marinos-hatzivasileiou-on-his-latest-role/
+- provenance: verified
+  supports_claim: false
+  url: https://www.actorscyprus.org.cy/en/members/
+timestamp: '2026-04-11T16:11:02.704500+00:00'
+title: Q107620968
+turns: 1
+value_label: null
+verdict: unverifiable

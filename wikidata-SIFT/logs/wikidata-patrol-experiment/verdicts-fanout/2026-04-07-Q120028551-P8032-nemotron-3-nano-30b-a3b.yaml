@@ -1,0 +1,25 @@
+completion_tokens: 849
+cost_usd: 0.004631500000000001
+diff_type: qualifier_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 89234
+property: P8032
+property_label: victim(s)
+rationale: No live web sources could be accessed or fetched to independently verify
+  the claim about Nahel Merzouks identity. Although the edit added qualifiers to the
+  victim claim, no supporting references were found in the pre-fetched data beyond
+  a blocked URL, and all search attempts returned no relevant live content. Without
+  any reachable source to confirm or refute the claim, the evidence remains insufficient
+  for classification beyond unverifiable.
+rcid: 2549974142
+revid: 2473324003
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rmc.bfmtv.com/actualites/societe/il-faisait-tout-son-possible-pour-s-en-sortir-qui-etait-nahel-le-jeune-tue-a-nanterre_AV-202306290312.html
+timestamp: '2026-04-07T06:33:53.552618+00:00'
+title: Q120028551
+turns: 15
+value_label: Nahel Merzouk
+verdict: unverifiable

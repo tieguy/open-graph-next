@@ -1,0 +1,34 @@
+completion_tokens: 2458
+cost_usd: 0.101052
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 88762
+property: P178
+property_label: developer
+rationale: Multiple independent sources confirm that Institut für limbische Kommunikation
+  und Strategie GmbH developed and owns LimbiCODE. The GFM industry membership page
+  explicitly states the institute 'specializes in...the validated segmentation approach
+  LimbiCODE®' and describes it as 'our own validated segmentation approach.' Ursula
+  Kaspar, the institute's owner, is identified as building up this organization over
+  10+ years. The cited reference URL (iflk.ch/medien/) is from the institute's official
+  website and, while the specific fetched page doesn't explicitly state developer
+  status, it confirms the institute's authority on limbic segmentation research. The
+  reference is therefore appropriate for this developer claim.
+rcid: 2540922313
+revid: 2464713301
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/
+- provenance: verified
+  supports_claim: true
+  url: https://gfm.ch/en/blog-en/die-gfm-trend-tagung-ist-ein-jaehrliches-event-highlight-der-branche/
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch/medien/
+timestamp: '2026-02-21T00:11:50.329138+00:00'
+title: Q138337548
+turns: 9
+value_label: Institut für limbische Kommunikation und Strategie GmbH
+verdict: verified-high

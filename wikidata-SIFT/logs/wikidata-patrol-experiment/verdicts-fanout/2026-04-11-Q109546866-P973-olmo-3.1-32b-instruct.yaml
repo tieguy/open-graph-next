@@ -1,0 +1,40 @@
+completion_tokens: 465
+cost_usd: 0.0031608
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14409
+property: P973
+property_label: described at URL
+rationale: The new 'described at URL' provided for Ridgeback Biotherapeutics points
+  to a site (filmyspark.com) that is not a recognized news or authoritative industry
+  source. The old URL from CNN is a reputable news outlet that covered UK authorization
+  of molnupiravir, which is directly relevant to Ridgeback Biotherapeutics' drug.
+  The new URL does not appear to be from a reputable journalistic or medical source
+  and may not accurately describe Ridgeback Biotherapeutics' role or the update. No
+  independent, verified source was found that references the new URL as a description
+  of Ridgeback Biotherapeutics or the Merck antiviral update. Thus, changing to this
+  new URL is not justified and appears to be incorrect.
+rcid: 2551339571
+revid: 2474645827
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cnn.com/2021/11/04/health/uk-authorizes-merck-antiviral-molnupiravir-covid/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.wsj.com/articles/behind-a-new-pill-to-treat-covid-a-husband-and-wife-team-and-a-hunch-11640025453
+- provenance: verified
+  supports_claim: false
+  url: https://www.reuters.com/business/healthcare-pharmaceuticals/more-vulnerable-people-receiving-fewer-covid-pills-us-study-2022-06-21/
+- provenance: verified
+  supports_claim: false
+  url: https://ridgebackbio.com/
+- provenance: verified
+  supports_claim: false
+  url: https://filmyspark.com/merck-and-ridgeback-biotherapeutics-provide-update-on-new-merck/
+timestamp: '2026-04-11T07:11:53.531933+00:00'
+title: Q109546866
+turns: 1
+value_label: null
+verdict: suspect

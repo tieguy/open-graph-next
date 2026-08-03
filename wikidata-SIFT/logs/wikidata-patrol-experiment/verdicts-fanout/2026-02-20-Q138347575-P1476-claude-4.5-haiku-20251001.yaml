@@ -1,0 +1,31 @@
+completion_tokens: 2119
+cost_usd: 0.071971
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 61376
+property: P1476
+property_label: title
+rationale: The cited reference (Engage.it article) directly supports the title claim
+  with explicit confirmation that Forexinfo.it was rebranded to Money.it. The official
+  Money.it website confirms current operation under this title. Multiple independent
+  media sources (TouchPoint News, Prima Online, Spot and Web) corroborate the 2017
+  rebranding. Evidence is consistent, authoritative, and includes both primary (official
+  website) and secondary (reputable media outlets) sources.
+rcid: 2540925402
+revid: 2464716248
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.engage.it/media-industry/forexinfo-it-cambia-online-money-it.aspx
+- provenance: verified
+  supports_claim: true
+  url: https://www.money.it/
+- provenance: verified
+  supports_claim: true
+  url: https://www.touchpoint.news/2020/07/10/forex-media-diventa-money-it-e-amplia-il-proprio-team/
+timestamp: '2026-02-20T22:33:52.469976+00:00'
+title: Q138347575
+turns: 6
+value_label: null
+verdict: verified-high

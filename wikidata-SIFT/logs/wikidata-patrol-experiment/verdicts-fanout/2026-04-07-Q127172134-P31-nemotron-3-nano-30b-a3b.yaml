@@ -1,0 +1,27 @@
+completion_tokens: 697
+cost_usd: 0.0036131999999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 69476
+property: P31
+property_label: instance of
+rationale: No external sources could be found to corroborate the claim that Cà di
+  Angiolitt ('Q127172134') is a 'mountain hut' (Q182676). Multiple search queries
+  using the building's name, keywords like 'mountain hut', and various filters (site:.it,
+  site:.gov, exact phrase searches) returned no relevant results that could be fetched
+  and verified. The claim appears to be a placeholder edit on a recently created item,
+  but there is insufficient evidence to confirm or deny the change. This outcome suggests
+  the edit may lack supporting context, but without verifiable sources, the change
+  remains unverifiable rather than incorrect.
+rcid: 2549655145
+revid: 2473015618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q127172134
+timestamp: '2026-04-07T11:01:13.084749+00:00'
+title: Q127172134
+turns: 15
+value_label: mountain hut
+verdict: unverifiable

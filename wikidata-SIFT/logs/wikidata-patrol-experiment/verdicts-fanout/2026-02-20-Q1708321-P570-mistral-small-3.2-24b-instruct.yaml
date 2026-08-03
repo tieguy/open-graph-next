@@ -1,0 +1,21 @@
+completion_tokens: 1078
+cost_usd: 0.01668046
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 165181
+property: P570
+property_label: date of death
+rationale: The Jewish Encyclopedia entry provides a direct and clear statement that
+  Joseph ha-Kohen died in 1575 or shortly after, which supports the edit.
+rcid: 2540982383
+revid: 2464768833
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8858-joseph-ha-kohen
+timestamp: '2026-02-20T01:39:12.046374+00:00'
+title: Q1708321
+turns: 11
+value_label: null
+verdict: verified-high

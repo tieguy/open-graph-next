@@ -1,0 +1,22 @@
+completion_tokens: 219
+cost_usd: 0.00328439375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34347
+property: P13240
+property_label: Die Tageszeitung tag ID
+rationale: Unable to verify the Die Tageszeitung tag ID for the 2026 Rhineland-Palatinate
+  state election due to search errors. No sources could be fetched to confirm or deny
+  the claim.
+rcid: 2551379742
+revid: 2474684438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.taz.de
+timestamp: '2026-04-11T11:31:00.621448+00:00'
+title: Q111251478
+turns: 4
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 729
+cost_usd: 0.006295099999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 122986
+property: P1303
+property_label: instrument
+rationale: No independent sources were found to support or contradict the change from
+  'voice' to 'human voice' as Duki's instrument. Extensive searches across music industry
+  sites, news outlets such as Billboard, Rolling Stone, and articles about his vocal
+  range found no mentions of 'human voice' as an instrument category for Duki. Official
+  sources indicating his vocal role or singer identity do not specify the instrument
+  used, and no primary source was located that confirms whether 'voice' qualifies
+  as an instrument in this context. Since no verifiable source was found to confirm
+  the instrument designation, the claim remains unverifiable based on available evidence.
+rcid: 2549423169
+revid: 2472788904
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://duki.com.ar
+timestamp: '2026-04-07T08:02:22.698654+00:00'
+title: Q62024032
+turns: 15
+value_label: human voice
+verdict: unverifiable

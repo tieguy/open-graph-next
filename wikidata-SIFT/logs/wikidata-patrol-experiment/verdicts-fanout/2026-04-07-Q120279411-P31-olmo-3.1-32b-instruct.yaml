@@ -1,0 +1,29 @@
+completion_tokens: 1060
+cost_usd: 0.006910599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31373
+property: P31
+property_label: instance of
+rationale: 'All available external sources consistently describe ''Post Human: NeX
+  GEn'' as a studio album by Bring Me the Horizon. There is no evidence supporting
+  the classification of the item as an instance of itself. The edit contradicts standard
+  industry and encyclopedic treatment.'
+rcid: null
+revid: 2471549715
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Post_Human:_NeX_GEn
+- provenance: reported
+  supports_claim: false
+  url: https://musicbrainz.org/release/4d9b8a4d-2e7d-4d34-ba7b-7c4e9c8c1f88
+- provenance: reported
+  supports_claim: false
+  url: https://www.allmusic.com/album/mw0004021855
+timestamp: '2026-04-07T08:38:19.137912+00:00'
+title: Q120279411
+turns: 5
+value_label: 'Post Human: NeX GEn'
+verdict: incorrect

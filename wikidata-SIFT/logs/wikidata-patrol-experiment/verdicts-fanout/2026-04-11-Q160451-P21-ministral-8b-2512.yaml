@@ -1,0 +1,28 @@
+completion_tokens: 1742
+cost_usd: 0.009406379999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 63216
+property: P21
+property_label: sex or gender
+rationale: 'The new value ''therian'' for Luigi Nono''s gender (Q25393510) contradicts
+  the explicitly stated gender as ''male'' in authoritative sources: the BnF authority
+  (Bibliothèque nationale de France) and the GND (Integrated Authority File). Both
+  sources explicitly confirm Luigi Nono''s gender as male. No independent sources
+  support the claim that Luigi Nono identified as ''therian''. The edit is therefore
+  incorrect and unsupported by any credible references.'
+rcid: null
+revid: 2470542662
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb138980102
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118588559
+timestamp: '2026-04-11T09:20:19.871969+00:00'
+title: Q160451
+turns: 3
+value_label: therian
+verdict: incorrect

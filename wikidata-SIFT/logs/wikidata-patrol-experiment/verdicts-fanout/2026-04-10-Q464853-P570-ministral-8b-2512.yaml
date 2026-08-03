@@ -1,0 +1,43 @@
+completion_tokens: 2596
+cost_usd: 0.0049449
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39100
+property: P570
+property_label: date of death
+rationale: The edit claims Anna Marly died on 16 February 2025, which contradicts
+  all verified primary sources. Multiple authoritative sources (Find a Grave, The
+  Independent, The New York Times, ADP Library, Grokipedia, Wikimedia Commons, and
+  Last.fm) confirm her death occurred on 15 February 2006. The cited references in
+  the edit could not be accessed or verified, and no credible source supports the
+  new date.
+rcid: 2549570512
+revid: 2472933287
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/15550408/anna-marly
+- provenance: verified
+  supports_claim: false
+  url: https://www.the-independent.com/news/obituaries/anna-marly-6108581.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/2006/03/13/world/europe/anna-marly-88-dies-inspired-french-resistance-in-song.html
+- provenance: verified
+  supports_claim: false
+  url: https://adp.library.ucsb.edu/index.php/mastertalent/detail/107976/Marly_Anna
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Anna_Marly
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Anna_Marly
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Anna+Marly/+wiki
+timestamp: '2026-04-10T14:04:09.312745+00:00'
+title: Q464853
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 2633
+cost_usd: 0.0071646
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 53861
+property: P570
+property_label: date of death
+rationale: Multiple verified primary sources (USA Today, Variety, Yahoo Fact Check,
+  and prefetched Spanish news) confirm Chuck Norris died on **19 March 2026**. The
+  family statement (shared on 20 March 2026) explicitly confirms the death occurred
+  on 19 March 2026. The old references (unreachable) are unreliable and do not outweigh
+  the primary evidence.
+rcid: 2550579975
+revid: 2473911851
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://eu.usatoday.com/story/entertainment/celebrities/2026/03/20/chuck-norris-dies/89230252007/
+- provenance: verified
+  supports_claim: true
+  url: https://variety.com/2026/film/news/chuck-norris-dead-walker-texas-ranger-dies-1236694953/
+- provenance: verified
+  supports_claim: true
+  url: https://www.yahoo.com/entertainment/celebrity/articles/fact-check-chuck-norris-did-003832583.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.elperiodico.com/es/ocio-y-cultura/20260320/muere-86-anos-actor-chuck-norris-128222331
+timestamp: '2026-04-10T13:06:23.350490+00:00'
+title: Q2673
+turns: 2
+value_label: null
+verdict: verified-high

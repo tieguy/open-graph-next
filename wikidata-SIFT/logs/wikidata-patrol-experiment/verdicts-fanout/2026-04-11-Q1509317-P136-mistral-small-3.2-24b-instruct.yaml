@@ -1,0 +1,31 @@
+completion_tokens: 1746
+cost_usd: 0.00208003125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17531
+property: P136
+property_label: genre
+rationale: The AllMusic source verifies that Hopesfall is categorized as a post-hardcore
+  band. There is no conflicting evidence supporting the old value of "hardcore punk."
+  The German Wikipedia reference could not be verified due to a blocked domain.
+rcid: 2551109897
+revid: 2474425540
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/hopesfall-mn0000823410
+- provenance: verified
+  supports_claim: false
+  url: https://rateyourmusic.com/artist/hopesfall
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/PostHardcore/comments/1hdto3n/if_you_havent_gotten_into_hopesfall_you_might/
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Hopesfall
+timestamp: '2026-04-11T08:43:41.849019+00:00'
+title: Q1509317
+turns: 2
+value_label: post-hardcore
+verdict: verified-high

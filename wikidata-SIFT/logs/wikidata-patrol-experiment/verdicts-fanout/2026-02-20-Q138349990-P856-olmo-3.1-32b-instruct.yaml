@@ -1,0 +1,26 @@
+completion_tokens: 1195
+cost_usd: 0.0047824
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20327
+property: P856
+property_label: official website
+rationale: No independent evidence was found to confirm that https://suchfokus.de
+  is the official website of Q138349990. Attempts to fetch the website directly failed,
+  and web searches did not uncover any authoritative third-party sources supporting
+  this claim. The claim is thus unverifiable at this time.
+rcid: 2540969601
+revid: 2464756990
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://suchfokus.de
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Q138349990+official+website
+timestamp: '2026-02-20T03:35:54.211360+00:00'
+title: Q138349990
+turns: 2
+value_label: null
+verdict: unverifiable

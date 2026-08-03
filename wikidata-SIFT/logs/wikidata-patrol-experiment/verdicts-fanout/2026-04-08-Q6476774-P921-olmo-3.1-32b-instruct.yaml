@@ -1,0 +1,23 @@
+completion_tokens: 795
+cost_usd: 0.005747799999999999
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26354
+property: P921
+property_label: main subject
+rationale: Unable to verify the appropriateness of 'language proficiency' as the main
+  subject for Wikipedia:Babel because the English Wikipedia page could not be accessed
+  and no independent documentation clarifies the intended main subject for meta pages.
+  Without direct evidence, the correctness of the removal cannot be determined.
+rcid: 2550595599
+revid: 2473926877
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Wikipedia:Babel
+timestamp: '2026-04-08T19:00:21.179400+00:00'
+title: Q6476774
+turns: 6
+value_label: language proficiency
+verdict: unverifiable

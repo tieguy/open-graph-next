@@ -1,0 +1,34 @@
+completion_tokens: 1484
+cost_usd: 0.0021920999999999998
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19324
+property: P856
+property_label: official website
+rationale: Multiple independent sources, including Ayaan Dhalait's personal website
+  and profiles on DEV Community, GitHub, and Forem, consistently confirm that "https://ayaan.is-a.dev"
+  is his official website. The evidence is strong and reliable.
+rcid: 2540964631
+revid: 2464752273
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ayaandhalait.github.io/
+- provenance: verified
+  supports_claim: true
+  url: https://dev.to/ayaandhalait
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/AyaanDhalait
+- provenance: verified
+  supports_claim: true
+  url: https://forem.com/ayaandhalait
+- provenance: verified
+  supports_claim: true
+  url: https://dev.to/ayaandhalait/introducing-pykp130-kid
+timestamp: '2026-02-20T03:56:16.485435+00:00'
+title: Q138349870
+turns: 3
+value_label: null
+verdict: verified-high

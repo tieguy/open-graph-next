@@ -1,0 +1,30 @@
+completion_tokens: 736
+cost_usd: 0.00415615
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 80179
+property: P989
+property_label: spoken text audio
+rationale: No verifiable sources were found supporting the claim that 'Wikipedia -
+  Web accessibility.mp3' is associated with web accessibility audio spoken text content
+  about the Web Accessibility Initiative. Multiple web searches targeting the Web
+  Accessibility Initiative's audio resources, spoken text audio files, and related
+  terminology returned no relevant results. All proposed URLs either returned HTTP
+  404 errors, were blocked (HTTP 403), or had no presence in search results. The domain
+  w3.org is critical to this claim but exhibits cascading failures - its main navigation
+  yields no accessible content for 'audio', 'spoken text', or 'intranet' features
+  despite exhaustive searching. Since no originated content exists to verify or refute
+  this specific audio file's inclusion, the claim cannot be confirmed or denied on
+  evidentiary grounds.
+rcid: null
+revid: 2471265154
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/WAI/
+timestamp: '2026-04-07T13:50:22.803537+00:00'
+title: Q808932
+turns: 15
+value_label: null
+verdict: unverifiable

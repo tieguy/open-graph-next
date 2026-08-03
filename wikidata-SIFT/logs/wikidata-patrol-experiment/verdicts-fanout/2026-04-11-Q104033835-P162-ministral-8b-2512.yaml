@@ -1,0 +1,30 @@
+completion_tokens: 2018
+cost_usd: 0.00675771
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69101
+property: P162
+property_label: producer
+rationale: No verified sources could be accessed to confirm or deny the claim that
+  Mia Khalifa is a producer of *The Adam Project*. The Wikipedia page and other potential
+  sources were either blocked or inaccessible for direct verification. The old value
+  (Don Granger) was cited from a blocked Wikipedia page, and no independent corroboration
+  was found for the new value (Mia Khalifa).
+rcid: 2550549023
+revid: 2473882171
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/The_Adam_Project
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/title/tt2463208/
+- provenance: reported
+  supports_claim: false
+  url: https://www.netflix.com/tudum/articles/the-adam-project-release-date-cast-news
+timestamp: '2026-04-11T09:12:34.711063+00:00'
+title: Q104033835
+turns: 5
+value_label: Mia Khalifa
+verdict: unverifiable

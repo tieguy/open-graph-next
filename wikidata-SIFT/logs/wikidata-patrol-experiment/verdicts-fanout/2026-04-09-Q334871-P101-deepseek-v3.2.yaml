@@ -1,0 +1,35 @@
+completion_tokens: 2005
+cost_usd: 0.05292608199999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 224456
+property: P101
+property_label: field of work
+rationale: The claim that Reza Pahlavi's field of work is 'slave' has no supporting
+  evidence. No cited references exist for this statement in Wikidata, and independent
+  searches found no legitimate sources describing him as a slave. All authoritative
+  sources consistently describe him as a crown prince, political activist, former
+  fighter pilot, and opposition figure. The edit appears to be vandalism, changing
+  a legitimate occupation ('politician') to an absurd and offensive value without
+  justification.
+rcid: 2549853948
+revid: 2473210297
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://rezapahlavi.org/en/about
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/features/2026/1/12/who-is-reza-pahlavi-the-exiled-prince-urging-iranians-to-seize
+- provenance: verified
+  supports_claim: false
+  url: https://www.biyografiler.com/en/biography/reza-pahlavi-2
+- provenance: verified
+  supports_claim: false
+  url: https://www.euronews.com/2026/01/11/who-is-reza-pahlavi-the-heir-to-the-persian-throne-and-what-is-his-vision-for-irans-polity
+timestamp: '2026-04-09T23:32:10.825977+00:00'
+title: Q334871
+turns: 9
+value_label: slave
+verdict: incorrect

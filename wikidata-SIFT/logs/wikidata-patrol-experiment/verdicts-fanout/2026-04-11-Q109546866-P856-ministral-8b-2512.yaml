@@ -1,0 +1,24 @@
+completion_tokens: 1544
+cost_usd: 0.005035019999999999
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58436
+property: P856
+property_label: official website
+rationale: The URL 'http://www.ridgebackbio.com/' is confirmed as the official website
+  of Ridgeback Biotherapeutics through prefetched content, which is entirely in English.
+  The addition of the qualifier P407 (language = English) is accurate and consistent
+  with the content of the website. The site's content aligns with the company's description
+  and other claims in Wikidata, confirming both the URL and the language qualifier.
+rcid: 2551339214
+revid: 2474645475
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.ridgebackbio.com/
+timestamp: '2026-04-11T13:43:28.709615+00:00'
+title: Q109546866
+turns: 6
+value_label: null
+verdict: verified-high

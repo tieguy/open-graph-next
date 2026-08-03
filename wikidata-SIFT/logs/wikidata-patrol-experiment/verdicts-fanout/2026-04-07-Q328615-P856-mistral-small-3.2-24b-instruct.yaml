@@ -1,0 +1,23 @@
+completion_tokens: 956
+cost_usd: 0.00399165625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37960
+property: P856
+property_label: official website
+rationale: The new URL provided, https://www.ceair.com, does not appear to be the
+  correct official website for Okinawa City. The old URL, https://www.city.okinawa.okinawa.jp/,
+  is confirmed to be the legitimate official website through direct access and independent
+  sources. The edit to change the official website to https://www.ceair.com is incorrect.
+rcid: 2551422060
+revid: 2474723570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.okinawa.okinawa.jp/
+timestamp: '2026-04-07T08:24:38.253099+00:00'
+title: Q328615
+turns: 4
+value_label: null
+verdict: incorrect

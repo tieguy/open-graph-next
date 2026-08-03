@@ -1,0 +1,26 @@
+completion_tokens: 644
+cost_usd: 0.00414194
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 57401
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Shibetsu to the URL of an Australian
+  airline, which is clearly incorrect. The correct official website for Shibetsu is
+  http://www.city.shibetsu.lg.jp/, as verified by fetching the URL and confirming
+  it leads to the city's official site.
+rcid: null
+revid: 2468927497
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.city.shibetsu.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.qantas.com/
+timestamp: '2026-04-07T06:06:40.959182+00:00'
+title: Q766942
+turns: 6
+value_label: null
+verdict: incorrect

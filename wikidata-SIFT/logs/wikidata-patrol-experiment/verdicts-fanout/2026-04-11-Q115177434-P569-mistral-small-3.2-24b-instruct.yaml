@@ -1,0 +1,29 @@
+completion_tokens: 1522
+cost_usd: 0.00151634
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16793
+property: P569
+property_label: date of birth
+rationale: The original date of birth (September 7, 1998) is supported by multiple
+  reliable sources, including The Liberacy and Brazzers. The new date (September 7,
+  2007) is not supported by any credible source. Therefore, the edit to change the
+  date of birth to 2007 is incorrect.
+rcid: 2551348762
+revid: 2474654651
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://theliberacy.com/2022/12/13/alyx-star-biography-career-contact-private-life-wealth-and-more/
+- provenance: verified
+  supports_claim: false
+  url: https://vocal.media/humans/alyx-star-biography-the-rising-star-in-the-adult-industry
+- provenance: verified
+  supports_claim: true
+  url: https://www.brazzers.com/pornstar/75477/alyx-star
+timestamp: '2026-04-11T14:17:11.496603+00:00'
+title: Q115177434
+turns: 1
+value_label: null
+verdict: incorrect

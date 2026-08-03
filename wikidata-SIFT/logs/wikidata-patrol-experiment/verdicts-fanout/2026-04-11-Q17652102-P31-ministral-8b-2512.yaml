@@ -1,0 +1,31 @@
+completion_tokens: 2398
+cost_usd: 0.00254766
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32878
+property: P31
+property_label: instance of
+rationale: The claim that San Gregorio Vecchio (Q17652102) is a former municipality
+  (Q19730508) cannot be verified due to the unreachable reference (SSL error) and
+  the inability to fetch independent sources. No verified sources were consulted during
+  this investigation, and the prefetched references were irrelevant or unrelated to
+  the claim. The lack of verifiable evidence prevents any definitive assessment of
+  the claim's validity.
+rcid: 2550410297
+revid: 2473747654
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.visitdolomitibellunesi.com/en/discover-the-dolomites-in-belluno/villages-and-cities-for-art/san-gregorio-nelle-alpi
+- provenance: verified
+  supports_claim: false
+  url: https://www.visitlazio.com/en/san-gregorio-da-sassola/
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.wifi.italia.it/en/newseng/11-territorio/475-municipality-of-san-gregorio-magno.html
+timestamp: '2026-04-11T15:59:56.606257+00:00'
+title: Q17652102
+turns: 4
+value_label: former municipality
+verdict: unverifiable

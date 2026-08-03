@@ -1,0 +1,34 @@
+completion_tokens: 1883
+cost_usd: 0.005858599999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 56126
+property: P159
+property_label: headquarters location
+rationale: Multiple reliable sources confirm that the headquarters location of the
+  Embassy of Israel, Brasilia is indeed Brasília. The addresses provided in these
+  sources consistently point to Brasília, supporting the claim.
+rcid: 2540929440
+revid: 2464720147
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/brazil/en/the-embassy/about
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.info/IsraeliEmbassyinBrasiliaBrazil
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/brazil/en/contacts
+- provenance: verified
+  supports_claim: true
+  url: https://www.embassy-worldwide.com/embassy/embassy-of-israel-in-brasilia-brazil/
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.net/israel-in-brazil/brasilia
+timestamp: '2026-02-20T20:49:10.429317+00:00'
+title: Q105705907
+turns: 7
+value_label: Brasília
+verdict: verified-high

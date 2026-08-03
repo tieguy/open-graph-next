@@ -1,0 +1,30 @@
+completion_tokens: 1564
+cost_usd: 0.0078215
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 118163
+property: P1477
+property_label: birth name
+rationale: The old birth name 'Olivier Eugène Charles Prosper Messiaen' is consistently
+  mentioned in reliable sources, while there is no evidence supporting the new birth
+  name 'Olivier Penne Messi Aen'. The edit's reference to Grove Music Online could
+  not be verified directly, but the independent sources do not support the new birth
+  name.
+rcid: null
+revid: 2472451349
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://erasmusprijs.org/prijswinnaars/olivier-messiaen/
+- provenance: verified
+  supports_claim: true
+  url: https://www.oliviermessiaen.org/biography
+- provenance: unreachable
+  supports_claim: false
+  url: https://doi.org/10.1093/gmo/9781561592630.article.18497
+timestamp: '2026-04-11T15:39:55.626310+00:00'
+title: Q151593
+turns: 5
+value_label: null
+verdict: suspect

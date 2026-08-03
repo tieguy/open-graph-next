@@ -1,0 +1,30 @@
+completion_tokens: 2029
+cost_usd: 0.00336024
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36245
+property: P937
+property_label: work location
+rationale: The claim that Abel Maxwell's work location is Ontario (Q1904) is strongly
+  supported by multiple verified sources, including Canadian Immigrant Magazine and
+  Celebrity Press Publishing. These sources explicitly confirm his base in Ontario
+  and Toronto, respectively. While the updated reference URL is unreachable, the claim
+  itself is well-supported by independent, verified evidence.
+rcid: 2551327631
+revid: 2474634766
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://canadianimmigrant.ca/canadas-top-25-immigrants/canadas-top-25-immigrants-2024/maxwell-abel
+- provenance: verified
+  supports_claim: true
+  url: https://celebritypresspublishing.com/members/abel-maxwell/
+- provenance: verified
+  supports_claim: false
+  url: https://www.abelmaxwell.com/en
+timestamp: '2026-04-11T18:32:48.006659+00:00'
+title: Q111939126
+turns: 4
+value_label: Ontario
+verdict: verified-high

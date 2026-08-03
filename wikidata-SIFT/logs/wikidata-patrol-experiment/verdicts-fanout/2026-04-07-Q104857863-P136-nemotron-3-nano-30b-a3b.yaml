@@ -1,0 +1,24 @@
+completion_tokens: 680
+cost_usd: 0.004646850000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 90217
+property: P136
+property_label: genre
+rationale: No corroborating sources were found to confirm that 'children's television
+  series' is the correct genre for Gabby's Dollhouse. The only reference cited in
+  the edit (Q1273568) could not be verified, and general searches for the claim's
+  classification yielded no reliable evidence supporting the change. Therefore, the
+  claim remains unverifiable based on available investigation.
+rcid: null
+revid: 2471197187
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gabbysdollhouse.com
+timestamp: '2026-04-07T14:18:35.017772+00:00'
+title: Q104857863
+turns: 15
+value_label: children's television series
+verdict: unverifiable

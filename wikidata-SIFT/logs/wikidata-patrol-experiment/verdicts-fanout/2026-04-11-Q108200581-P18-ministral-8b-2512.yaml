@@ -1,0 +1,26 @@
+completion_tokens: 1980
+cost_usd: 0.0020901599999999998
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18150
+property: P18
+property_label: image
+rationale: The removed qualifiers ('Iling-Junior with Middlesbrough in 2025' and the
+  timestamp) were factually incorrect. Independent sources confirm Samuel Iling-Junior
+  was with Middlesbrough in 2021-2022, not 2025. The removal of these inaccurate qualifiers
+  is justified and supported by verified sources like FotMob and Alamy.
+rcid: 2551347692
+revid: 2474653619
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/juventus-english-forward-samuel-iling-junior-looks-during-the-serie-a-football-match-between-ssc-napoli-and-juventus-napoli-won-5-1-image504695768.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1368061/samuel-iling-junior
+timestamp: '2026-04-11T12:20:32.158818+00:00'
+title: Q108200581
+turns: 1
+value_label: null
+verdict: verified-high

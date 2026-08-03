@@ -1,0 +1,29 @@
+completion_tokens: 2501
+cost_usd: 0.00634
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24197
+property: P31
+property_label: instance of
+rationale: The edit changing the instance of Ramon Casadevall i Sala from 'human'
+  to 'communist' is not supported by any cited source or independent coverage. He
+  is described as a leader and member of the CUP, a left-wing independentist party,
+  but is not referred to as an 'instance of communist' in reputable sources. Wikidata
+  guidelines recommend using P31 for broad ontological categories, not for narrow
+  political affiliations unless the person is primarily defined by that ideology.
+  Therefore, the change is incorrect and should be reverted.
+rcid: 2549550695
+revid: 2472913917
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.banyolestv.cat/index.php/politica/13550-el-banyoli-non-casadevall-nomenat-secretari-general-i-portaveu-de-la-cup.html
+- provenance: verified
+  supports_claim: false
+  url: https://perguanyar.cat/candidates-de-girona/
+timestamp: '2026-04-11T08:40:36.023982+00:00'
+title: Q60458077
+turns: 1
+value_label: communist
+verdict: incorrect

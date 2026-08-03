@@ -1,0 +1,23 @@
+completion_tokens: 1438
+cost_usd: 0.010410200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47737
+property: P11127
+property_label: MEXT school code
+rationale: The only reference supporting the previous MEXT school code is now unavailable,
+  and no independent sources corroborate the new value '魚さんさっさとしね' as an official
+  MEXT school code for this institution. Without accessible evidence, the update cannot
+  be verified.
+rcid: null
+revid: 2470914758
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.pref.shizuoka.jp/kyouiku/meibo/20120809.html
+timestamp: '2026-04-08T18:50:02.399539+00:00'
+title: Q83622875
+turns: 8
+value_label: null
+verdict: unverifiable

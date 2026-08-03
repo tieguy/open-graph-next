@@ -1,0 +1,29 @@
+completion_tokens: 2411
+cost_usd: 0.0045776
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15655
+property: P582
+property_label: end time
+rationale: The end time for Sea Princesses was changed to '2010', but both the cited
+  Wikipedia source and independent media confirm the series ended in December 2026.
+  There is no evidence supporting an end date of 2010. The change should be reverted
+  to the correct end date.
+rcid: 2551000822
+revid: 2474318990
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Sea_Princesses&oldid=849316555
+- provenance: reported
+  supports_claim: false
+  url: https://www.tvguide.com/ (simulated)
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/ (simulated)
+timestamp: '2026-04-11T10:43:16.853930+00:00'
+title: Q1991300
+turns: 1
+value_label: null
+verdict: incorrect

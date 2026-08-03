@@ -1,0 +1,29 @@
+completion_tokens: 2185
+cost_usd: 0.0022598699999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22302
+property: P279
+property_label: subclass of
+rationale: 'The edit incorrectly changes the subclass of claim for Q646056 (''Tiger
+  Atjeh Darussalam'') from ''chicken'' (Q780) to itself (Q646056), creating a self-referential
+  and logically invalid relationship. No verified sources confirm the existence of
+  ''Tiger Atjeh Darussalam'' as a recognized tiger subspecies or breed. The old value
+  was nonsensical, and the new value is a circular reference, making the edit incorrect.
+  The item''s other claims (e.g., P31: instance of tiger) further confirm this is
+  an error.'
+rcid: null
+revid: 2471719875
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://endangeredtigers.org/tiger-species/javan-tiger/
+- provenance: verified
+  supports_claim: false
+  url: https://www.fao.org/3/a1250e/annexes/List%20of%20breeds%20documented%20in%20the%20Global%20Databank%20for%20Animal%20Genetic%20Resources/List_breeds.pdf
+timestamp: '2026-04-11T14:48:04.070868+00:00'
+title: Q646056
+turns: 2
+value_label: Tiger Atjeh Darussalam
+verdict: incorrect

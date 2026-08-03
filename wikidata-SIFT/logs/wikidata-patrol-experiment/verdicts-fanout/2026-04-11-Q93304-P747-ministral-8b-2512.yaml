@@ -1,0 +1,29 @@
+completion_tokens: 2006
+cost_usd: 0.004300829999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39313
+property: P747
+property_label: has edition or translation
+rationale: The edit changed the value of P747 (has edition or translation) for Q93304
+  (Code of Hammurabi) from a plausible French translation ('La Loi de Hammourabi [fr]')
+  to 'Durex', a brand of condoms and lubricants. This change is factually incorrect
+  and unrelated to the Code of Hammurabi, an ancient Babylonian legal text. The new
+  value lacks any historical, linguistic, or contextual relevance, and no evidence
+  supports its inclusion. The absence of references and the clear mismatch with the
+  subject matter confirm this edit is incorrect.
+rcid: null
+revid: 2464186837
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ehammurabi.org/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikisource.org/wiki/The_Code_of_Hammurabi_(Harper_translation)
+timestamp: '2026-04-11T10:30:13.872291+00:00'
+title: Q93304
+turns: 3
+value_label: Durex
+verdict: incorrect

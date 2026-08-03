@@ -1,0 +1,28 @@
+completion_tokens: 1522
+cost_usd: 0.004809975
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49011
+property: P11613
+property_label: SACEM Museum artist ID
+rationale: No sources were found to confirm or deny either the old or new values for
+  the SACEM Museum artist ID. The edit was reverted, suggesting it might not have
+  been justified.
+rcid: 2550086263
+revid: 2473432930
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://audiospace.soundingfuture.com/artists/jean-voguet
+- provenance: verified
+  supports_claim: false
+  url: https://audiospace.soundingfuture.com/artists/jean-voguet?sort=bio
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/054rjNtknOlUV0Hb9bzL5q
+timestamp: '2026-04-11T06:45:06.555718+00:00'
+title: Q3175073
+turns: 6
+value_label: null
+verdict: unverifiable

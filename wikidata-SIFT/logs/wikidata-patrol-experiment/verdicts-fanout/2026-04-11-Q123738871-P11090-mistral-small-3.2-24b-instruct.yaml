@@ -1,0 +1,19 @@
+completion_tokens: 691
+cost_usd: 0.0063548125
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 65942
+property: P11090
+property_label: Boomplay artist ID
+rationale: Unable to verify the Boomplay artist ID and qualifiers due to the inability
+  to perform a web search or fetch the relevant Boomplay artist page. No direct evidence
+  could be obtained to confirm or refute the claim.
+rcid: 2551429099
+revid: 2474729209
+sources: []
+timestamp: '2026-04-11T05:58:33.147201+00:00'
+title: Q123738871
+turns: 3
+value_label: null
+verdict: unverifiable

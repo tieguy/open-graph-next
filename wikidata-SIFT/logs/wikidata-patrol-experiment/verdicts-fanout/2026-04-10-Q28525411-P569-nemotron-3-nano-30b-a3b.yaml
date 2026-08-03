@@ -1,0 +1,29 @@
+completion_tokens: 13846
+cost_usd: 0.0086335
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 45110
+property: P569
+property_label: date of birth
+rationale: Independent secondary sources confirm that Ana Pardo de Vera was born in
+  February 1974, supporting the updated date of birth claim. The primary BNE authority
+  file reference could not be accessed due to a timeout, but the multiple corroborating
+  reports provide strong evidence. No contradictory information was found.
+rcid: 2550885214
+revid: 2474208340
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.infobae.com/espana/2025/07/04/quien-es-ana-pardo-de-vera-la-periodista-que-ha-denunciado-a-vito-quiles-por-acoso/
+- provenance: reported
+  supports_claim: true
+  url: https://grokipedia.com/page/ana_pardo_de_vera
+- provenance: reported
+  supports_claim: true
+  url: https://www.celebsagewiki.com/ana-pardo-de-vera
+timestamp: '2026-04-10T09:04:28.324710+00:00'
+title: Q28525411
+turns: 3
+value_label: null
+verdict: verified-high

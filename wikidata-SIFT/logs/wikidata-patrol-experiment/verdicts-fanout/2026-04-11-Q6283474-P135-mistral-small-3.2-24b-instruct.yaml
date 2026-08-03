@@ -1,0 +1,27 @@
+completion_tokens: 663
+cost_usd: 0.009845906250000001
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 103255
+property: P135
+property_label: movement
+rationale: The updated reference from the Joseph Glasco Foundation biography indicates
+  that while Joseph Glasco was influenced by Jackson Pollock and was part of the art
+  scene during the rise of Abstract Expressionism, his early paintings were distinctly
+  figurative and formal in style, setting them apart from the Abstract Expressionist
+  movement. The text suggests that Glasco's work was not typically classified under
+  Abstract Expressionism, despite his associations with key figures in the movement.
+  Therefore, the claim that Joseph Glasco was part of the Abstract Expressionism movement
+  is not strongly supported by the updated reference.
+rcid: 2550521060
+revid: 2473855269
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://josephglascofoundation.org/joseph-glasco-biography
+timestamp: '2026-04-11T15:25:53.419548+00:00'
+title: Q6283474
+turns: 4
+value_label: abstract expressionism
+verdict: suspect

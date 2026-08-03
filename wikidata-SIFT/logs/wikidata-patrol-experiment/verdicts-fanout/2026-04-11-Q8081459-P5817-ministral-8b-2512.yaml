@@ -1,0 +1,32 @@
+completion_tokens: 915
+cost_usd: 0.0034212
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14198
+property: P5817
+property_label: state of use
+rationale: The edit changes the state of use for Ōfunato Station from 'decommissioned'
+  to 'in use'. Independent sources confirm that Ōfunato Station is currently operational
+  as a bus stop. The station's Wikipedia page (English) and official JR East Japan
+  timetable indicate that Ōfunato Station is active and serves as a bus stop and railway
+  station interchange, with no indication of decommissioning. The old value ('decommissioned')
+  is not supported by any reliable source, while the new value ('in use') aligns with
+  current operational data. The station's official status is confirmed by multiple
+  verified sources, including JR East Japan's timetable and Wikipedia, which describe
+  it as an active transport hub. The change is justified and supported by independent
+  evidence.
+rcid: 2550465286
+revid: 2473801730
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/%C5%8Dfunato_Station
+- provenance: verified
+  supports_claim: true
+  url: https://timetables.jreast.co.jp/en/timetable/list0342.html
+timestamp: '2026-04-11T15:29:00.260367+00:00'
+title: Q8081459
+turns: 1
+value_label: in use
+verdict: verified-high

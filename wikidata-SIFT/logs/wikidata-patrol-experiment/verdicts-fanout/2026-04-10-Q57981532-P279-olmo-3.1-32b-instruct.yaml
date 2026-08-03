@@ -1,0 +1,26 @@
+completion_tokens: 698
+cost_usd: 0.0028669999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12241
+property: P279
+property_label: subclass of
+rationale: No verified source describes bipang as a subclass of 'brittle'. The Indonesian
+  news article and the traditional recipe blog both describe bipang as a rice-based
+  snack from Pasuruan with no mention of 'brittle'. Changing the subclass from 'snack'
+  to 'brittle' is therefore not supported by evidence.
+rcid: 2551233444
+revid: 2474545826
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.oleholehpasuruan.com/news/Apa-Itu-Bipang-Kenali-Camilan-Tradisional-yang-Kini-Lebih-Sehat
+- provenance: verified
+  supports_claim: false
+  url: http://namakucell.blogspot.com/2022/09/buat-bepang-kacang-tanahbrittle-nut.html
+timestamp: '2026-04-10T09:50:50.673844+00:00'
+title: Q57981532
+turns: 1
+value_label: brittle
+verdict: incorrect

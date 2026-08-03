@@ -1,0 +1,30 @@
+completion_tokens: 1164
+cost_usd: 0.00457340625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45679
+property: P2031
+property_label: start of work period
+rationale: The edit changes the start of work period for Lally Cadeau from 1958 to
+  1970. The original claim was imported from the English Wikipedia, but the new claim
+  has no references. Web searches and attempts to fetch content from primary and secondary
+  sources did not yield any conclusive evidence to confirm or refute the new claim.
+  Therefore, the verdict is unverifiable.
+rcid: null
+revid: 2471986466
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/name/nm0128119/
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Lally-Cadeau
+- provenance: verified
+  supports_claim: false
+  url: https://www.thecanadianencyclopedia.ca/en/article/lally-cadeau
+timestamp: '2026-04-07T13:27:59.748897+00:00'
+title: Q6480502
+turns: 9
+value_label: null
+verdict: unverifiable

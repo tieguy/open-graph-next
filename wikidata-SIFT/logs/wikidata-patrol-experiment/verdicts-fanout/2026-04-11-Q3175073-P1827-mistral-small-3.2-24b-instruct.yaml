@@ -1,0 +1,28 @@
+completion_tokens: 1506
+cost_usd: 0.00536635
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55647
+property: P1827
+property_label: ISWC
+rationale: The removed ISWC value "T-333.059.369-2" had no references when it was
+  added. Independent searches and fetched sources do not confirm this ISWC value for
+  Jean Voguet. The removal of this unsupported claim is justified.
+rcid: 2550210775
+revid: 2473553400
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://independent.academia.edu/jeanvoguetcomposer
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.laurentine.net/auteur/jean-voguet?lang=fr
+timestamp: '2026-04-11T07:23:56.981865+00:00'
+title: Q3175073
+turns: 6
+value_label: null
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 1327
+cost_usd: 0.00450226125
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44362
+property: P569
+property_label: date of birth
+rationale: The edit references German Wikipedia, but no independent sources could
+  be found to confirm or deny the age qualifier. The lack of direct evidence makes
+  it impossible to verify the claim.
+rcid: 2550517522
+revid: 2473851873
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Yvonne_Aki-Sawyerr
+timestamp: '2026-04-07T05:13:15.967992+00:00'
+title: Q55238200
+turns: 7
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,35 @@
+completion_tokens: 997
+cost_usd: 0.01021195
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 109427
+property: P161
+property_label: cast member
+rationale: Multiple independent sources confirm the cast of 'The Adam Project' includes
+  Ryan Reynolds, Walker Scobell, Mark Ruffalo, Jennifer Garner, and Zoe Saldana. None
+  of these sources list Donald Trump as a cast member. The edit to add Donald Trump
+  as a cast member is incorrect.
+rcid: 2550549913
+revid: 2473883037
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://aveleyman.fandom.com/wiki/The_Adam_Project
+- provenance: verified
+  supports_claim: false
+  url: https://www.netflix.com/tudum/the-adam-project
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/movie/696806-the-adam-project/cast
+- provenance: verified
+  supports_claim: false
+  url: https://www.rottentomatoes.com/m/the_adam_project/cast-and-crew
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvguide.com/movies/the-adam-project/cast/2000483042/
+timestamp: '2026-04-10T13:40:29.933910+00:00'
+title: Q104033835
+turns: 7
+value_label: Donald Trump
+verdict: incorrect

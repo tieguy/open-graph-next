@@ -1,0 +1,23 @@
+completion_tokens: 1907
+cost_usd: 0.01041471
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 97624
+property: P8964
+property_label: OpenReview.net profile ID
+rationale: The OpenReview.net profile ID must follow the documented format of starting
+  with a tilde (e.g., `~Josh_Merel1`). The claim `Josh_Universe1` lacks this tilde
+  prefix, making it incorrect according to the official OpenReview documentation.
+  No evidence supports the validity of this claim without the tilde.
+rcid: 2551430559
+revid: 2474730333
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://docs.openreview.net/getting-started/creating-an-openreview-profile/finding-your-profile-id
+timestamp: '2026-04-11T13:35:18.629356+00:00'
+title: Q123738871
+turns: 5
+value_label: null
+verdict: incorrect

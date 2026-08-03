@@ -1,0 +1,20 @@
+completion_tokens: 567
+cost_usd: 0.0049487
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 96706
+property: P571
+property_label: inception
+rationale: No sources were located that confirm or deny the claim regarding Alpiq
+  Holding's incorporation date. Multiple web searches using various query formats
+  returned no relevant results, and the prefetched_references section was empty. Without
+  any accessible references or independent corroboration, the claim cannot be verified.
+rcid: null
+revid: 2471235559
+sources: []
+timestamp: '2026-04-07T10:07:07.795156+00:00'
+title: Q679402
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 2316
+cost_usd: 0.00435
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14802
+property: P571
+property_label: inception
+rationale: Local historical sources indicate the church of San Rocco in Abbadia Lariana
+  existed at least by the 1500s, with documented reforms in the late 16th century,
+  but no evidence supports an inception date of 1600. The change from +1500 to 1600
+  is therefore not justified.
+rcid: 2549661282
+revid: 2473021579
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.parrocchiadiabbadialariana.it/storia-san-rocco/
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Abbadia_Lariana
+timestamp: '2026-04-11T05:44:47.183573+00:00'
+title: Q118745036
+turns: 1
+value_label: null
+verdict: incorrect

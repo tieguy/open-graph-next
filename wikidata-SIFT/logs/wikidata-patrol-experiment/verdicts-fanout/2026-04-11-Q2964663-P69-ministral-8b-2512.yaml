@@ -1,0 +1,28 @@
+completion_tokens: 1915
+cost_usd: 0.00227772
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22691
+property: P69
+property_label: educated at
+rationale: The claim that Chris Brancato was educated in the Democratic Republic of
+  the Congo (Q974) is not supported by any credible or verified source. Independent
+  sources, such as TheOuterLimits.fandom.com, confirm that he attended Teaneck High
+  School and graduated from Brown University. The cited Wikipedia import is unreachable,
+  and no other source corroborates the new value. The old value, Teaneck High School,
+  is well-supported by independent evidence.
+rcid: 2549852986
+revid: 2473209359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theouterlimits.fandom.com/wiki/Chris_Brancato
+- provenance: unreachable
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Teaneck_High_School&oldid=1008209248
+timestamp: '2026-04-11T10:25:47.666034+00:00'
+title: Q2964663
+turns: 2
+value_label: Democratic Republic of the Congo
+verdict: incorrect

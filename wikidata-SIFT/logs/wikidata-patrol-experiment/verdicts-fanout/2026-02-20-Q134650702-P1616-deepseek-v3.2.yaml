@@ -1,0 +1,31 @@
+completion_tokens: 2366
+cost_usd: 0.045081090000000004
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 184161
+property: P1616
+property_label: SIREN number
+rationale: 'The SIREN number 810825547 belongs to ''GROUPE FURNOTEL'', a holding company
+  created in 2015 with activity code 6420Z (Activités des sociétés holding). The Wikidata
+  item Q134650702 describes ''FURNOTEL'' (not GROUPE FURNOTEL) with inception date
+  1992-10-07 and industry matching SIREN 388842148 (Commerce de gros... 4669C). These
+  are two distinct legal entities: SIREN 810825547 is for the holding company GROUPE
+  FURNOTEL (2015), while the item represents the trading company FURNOTEL (1992).'
+rcid: 2540940005
+revid: 2464729579
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.societe.com/societe/groupe-furnotel-810825547.html
+- provenance: verified
+  supports_claim: false
+  url: https://entreprises.lefigaro.fr/groupe-furnotel-91/entreprise-810825547
+- provenance: verified
+  supports_claim: false
+  url: https://www.societe.com/societe/furnotel-388842148.html
+timestamp: '2026-02-20T15:25:14.374608+00:00'
+title: Q134650702
+turns: 12
+value_label: null
+verdict: incorrect

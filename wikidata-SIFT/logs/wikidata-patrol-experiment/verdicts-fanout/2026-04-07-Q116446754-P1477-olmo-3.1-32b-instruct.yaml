@@ -1,0 +1,20 @@
+completion_tokens: 932
+cost_usd: 0.0081454
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 37931
+property: P1477
+property_label: birth name
+rationale: No authoritative or independent sources were found that confirm 'leila
+  gayyyy' as the birth name of Poupette Kenza. Multiple web searches did not yield
+  any official documentation or reputable media reference for this birth name. The
+  edit lacks supporting citations and corroboration.
+rcid: null
+revid: 2472594864
+sources: []
+timestamp: '2026-04-07T14:20:28.870197+00:00'
+title: Q116446754
+turns: 7
+value_label: null
+verdict: unverifiable

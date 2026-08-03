@@ -1,0 +1,29 @@
+completion_tokens: 1391
+cost_usd: 0.00570561875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59452
+property: P106
+property_label: occupation
+rationale: The edit changes the occupation from 'painter' to 'tapissier'. Multiple
+  independent sources confirm that María Izquierdo was a painter, and there is no
+  evidence to support the occupation of 'tapissier'. The cited reference is unreachable,
+  and the change is not supported by any verifiable sources.
+rcid: 2549597016
+revid: 2472959052
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artsandculture.google.com/entity/mar%C3%ADa-izquierdo/m025z7hy?hl=en
+- provenance: verified
+  supports_claim: true
+  url: https://histoireparlesfemmes.com/2015/01/14/maria-izquierdo-peintre-talentueuse/
+- provenance: verified
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+timestamp: '2026-04-11T17:29:53.322113+00:00'
+title: Q461937
+turns: 5
+value_label: tapissier
+verdict: incorrect

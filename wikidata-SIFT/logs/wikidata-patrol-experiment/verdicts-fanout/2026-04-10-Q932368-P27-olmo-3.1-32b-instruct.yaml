@@ -1,0 +1,29 @@
+completion_tokens: 906
+cost_usd: 0.0038297999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16431
+property: P27
+property_label: country of citizenship
+rationale: Multiple reliable, independently sourced biographies state that Rabih az-Zubayr
+  was Sudanese and born near Khartoum, Sudan. There is no credible evidence linking
+  him to Syria as a country of citizenship. The edit changing his country of citizenship
+  to Syria is therefore factually incorrect.
+rcid: 2549457145
+revid: 2472822502
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Rabih_Az_Zubayr.html?id=LI9IXwAACAAJ
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://medium.com/@HistoryOfMuslims/rabih-az-zubayr-the-muslim-tyrant-who-dared-to-defy-france-britain-and-fell-in-blood-188a86fc21d2
+timestamp: '2026-04-10T14:09:50.631738+00:00'
+title: Q932368
+turns: 1
+value_label: Syria
+verdict: incorrect

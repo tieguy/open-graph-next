@@ -1,0 +1,22 @@
+completion_tokens: 840
+cost_usd: 0.00390383125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40500
+property: P17
+property_label: country
+rationale: The Glorious Revolution is an event that took place in Spain. The edit
+  changing the country to 'Felipe VI of Spain' is incorrect as it confuses the country
+  with a monarch. The correct country associated with the Glorious Revolution is Spain.
+rcid: null
+revid: 2454916333
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Glorious_Revolution_(Spain)
+timestamp: '2026-04-07T03:51:31.614372+00:00'
+title: Q1540751
+turns: 8
+value_label: Felipe VI of Spain
+verdict: incorrect

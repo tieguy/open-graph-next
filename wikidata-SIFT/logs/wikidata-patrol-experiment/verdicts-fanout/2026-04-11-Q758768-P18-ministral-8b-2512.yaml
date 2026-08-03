@@ -1,0 +1,30 @@
+completion_tokens: 2905
+cost_usd: 0.0063006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58197
+property: P18
+property_label: image
+rationale: The edit changes the image filename for Audi Q3 from 'Audi Q3 F3 DSC 7495.jpg'
+  to 'Audi Q3 FJ DSC 3763.jpg'. Neither filename appears in Wikimedia Commons, CarDekho,
+  or CarWale image galleries, and the original source (Dutch Wikipedia) is unreachable.
+  No independent evidence supports either image, making the edit unverifiable and
+  potentially unjustified.
+rcid: 2550737772
+revid: 2474064888
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Audi_Q3
+- provenance: verified
+  supports_claim: false
+  url: https://www.cardekho.com/audi/q3/pictures
+- provenance: verified
+  supports_claim: false
+  url: https://www.carwale.com/audi-cars/q3/images
+timestamp: '2026-04-11T14:16:58.429756+00:00'
+title: Q758768
+turns: 5
+value_label: null
+verdict: suspect

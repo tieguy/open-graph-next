@@ -1,0 +1,26 @@
+completion_tokens: 1373
+cost_usd: 0.0058066
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24914
+property: P138
+property_label: named after
+rationale: The claim that the B-21 Raider is named after the 25th century is not supported
+  by any credible sources. Authoritative reporting, such as the CNN article, clearly
+  states the bomber was named in honor of the Doolittle Raid from World War II. There
+  is no evidence linking the name to the 25th century. This edit should be reverted.
+rcid: 2549246649
+revid: 2472617889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cnn.com/2022/12/02/politics/b-21-stealth-bomber-air-force/index.html
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Northrop_Grumman_B-21_Raider
+timestamp: '2026-04-07T11:32:57.239583+00:00'
+title: Q22960692
+turns: 3
+value_label: 25th century
+verdict: incorrect

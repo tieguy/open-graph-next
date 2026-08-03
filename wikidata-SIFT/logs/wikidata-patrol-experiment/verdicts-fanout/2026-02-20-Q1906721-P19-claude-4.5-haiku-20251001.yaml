@@ -1,0 +1,33 @@
+completion_tokens: 1786
+cost_usd: 0.049851
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 40921
+property: P19
+property_label: place of birth
+rationale: Masahiro Sakurai was born on August 3, 1970, in Musashimurayama, Tokyo,
+  Japan, as confirmed by multiple independent sources. The 1980 Summer Olympics is
+  a sporting event, not a geographic location, and occurred a decade after his birth.
+  This edit is factually incorrect—it claims a person was born at an event that happened
+  10 years after his actual birth date.
+rcid: 2540950173
+revid: 2464739148
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sourcegaming.info/2015/10/23/sakuraitimeline/
+- provenance: reported
+  supports_claim: false
+  url: https://kirby.fandom.com/wiki/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://myanimelist.net/people/33719/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/masahiro-sakurai.html
+timestamp: '2026-02-20T09:57:51.831425+00:00'
+title: Q1906721
+turns: 3
+value_label: 1980 Summer Olympics
+verdict: incorrect

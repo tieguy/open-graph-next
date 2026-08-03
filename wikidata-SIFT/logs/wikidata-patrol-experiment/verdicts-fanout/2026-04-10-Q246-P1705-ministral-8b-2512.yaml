@@ -1,0 +1,30 @@
+completion_tokens: 1407
+cost_usd: 0.01312737
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 97834
+property: P1705
+property_label: native label
+rationale: The native label for Volkswagen in German is universally recognized as
+  'Volkswagen,' meaning 'People’s Car.' Multiple verified and reported sources confirm
+  this, including official Volkswagen history and brand naming conventions. The claim
+  that 'Volkswageo' is the correct native label is not supported by any credible evidence
+  and is therefore incorrect.
+rcid: 2549274042
+revid: 2472643648
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.volkswagen-newsroom.com/en/history-3693
+- provenance: verified
+  supports_claim: false
+  url: https://www.vw.com/en.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.streetvw.com/volkswagen-research/volkswagen-car-names
+timestamp: '2026-04-10T09:21:43.472183+00:00'
+title: Q246
+turns: 3
+value_label: null
+verdict: incorrect

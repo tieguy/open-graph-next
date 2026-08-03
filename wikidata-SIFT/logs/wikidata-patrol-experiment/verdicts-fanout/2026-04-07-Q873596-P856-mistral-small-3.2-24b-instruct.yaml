@@ -1,0 +1,23 @@
+completion_tokens: 504
+cost_usd: 0.0032991812500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35860
+property: P856
+property_label: official website
+rationale: The new URL provided, https://www.delta.com, is incorrect as it redirects
+  to Delta Air Lines, which is unrelated to Niimi. The correct official website for
+  Niimi is https://www.city.niimi.okayama.jp/, which contains relevant information
+  and updates about the city.
+rcid: null
+revid: 2471019911
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.niimi.okayama.jp/
+timestamp: '2026-04-07T09:09:28.760281+00:00'
+title: Q873596
+turns: 3
+value_label: null
+verdict: incorrect

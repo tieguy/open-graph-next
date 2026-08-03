@@ -1,0 +1,30 @@
+completion_tokens: 755
+cost_usd: 0.004395400000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 84888
+property: P21
+property_label: sex or gender
+rationale: No verifiable primary sources were found confirming Elias Hadaya's gender
+  identity as female. All searches for public references to 'Elias Hadaya female'
+  returned no results of potential source material. The only references retrieved
+  were either unreachable (Transfermarkt certificate error), 404 not found (Soccerway),
+  or non-existent. Given the critical nature of biological sex/gender claims and the
+  absence of any verifiable documentation supporting the change, the edit cannot be
+  verified as correct or incorrect, but also cannot be said to have sufficient evidence.
+rcid: 2549662898
+revid: 2473023126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.se/elias-hadaya/profil/spieler/315663
+- provenance: reported
+  supports_claim: false
+- provenance: reported
+  supports_claim: false
+timestamp: '2026-04-07T09:09:19.070345+00:00'
+title: Q89080747
+turns: 15
+value_label: female
+verdict: unverifiable

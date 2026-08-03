@@ -1,0 +1,31 @@
+completion_tokens: 2937
+cost_usd: 0.134542
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 119857
+property: P166
+property_label: award received
+rationale: 'The award ''Knight of the Seraphim'' is confirmed by multiple independent
+  sources as correctly awarded to Halla Tómasdóttir during Sweden''s state visit in
+  May 2025. However, the edit contains a critical date error: the point-in-time qualifier
+  shows May 6, 2026, while all authoritative sources consistently confirm the award
+  was received on May 6, 2025. The award itself and Q-id are correct and well-documented
+  from primary and secondary sources.'
+rcid: 2540942167
+revid: 2464731653
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.royal-news.org/european-royals/swedens-royals-host-iceland-president-for-state-visit/
+- provenance: verified
+  supports_claim: true
+  url: https://regalevents913271078.wordpress.com/blog-2/sweden/carl-xvi-gustaf/2025-icelandic-state-visit-to-sweden/3/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q115440099
+timestamp: '2026-02-20T13:54:31.770313+00:00'
+title: Q24494577
+turns: 7
+value_label: Knight of the Seraphim
+verdict: verified-high

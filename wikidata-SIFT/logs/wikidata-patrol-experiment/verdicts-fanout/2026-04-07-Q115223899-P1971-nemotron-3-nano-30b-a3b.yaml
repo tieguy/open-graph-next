@@ -1,0 +1,19 @@
+completion_tokens: 463
+cost_usd: 0.0016520999999999999
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 31190
+property: P1971
+property_label: number of children
+rationale: 'No sources with provenance: verified were found during investigation.
+  Multiple web searches for Roei Gabay''s number of children yielded no reliable or
+  supporting sources. Therefore, there is insufficient evidence to verify the edit.'
+rcid: null
+revid: 2464935407
+sources: []
+timestamp: '2026-04-07T12:30:04.353426+00:00'
+title: Q115223899
+turns: 6
+value_label: null
+verdict: unverifiable

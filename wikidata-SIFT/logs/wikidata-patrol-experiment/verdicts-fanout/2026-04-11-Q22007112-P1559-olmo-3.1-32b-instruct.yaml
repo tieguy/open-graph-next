@@ -1,0 +1,27 @@
+completion_tokens: 1469
+cost_usd: 0.0055902
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23544
+property: P1559
+property_label: name in native language
+rationale: The new value 'rgwvrwfنادية مراد' for the property 'name in native language'
+  (P1559) is not supported by any authoritative or cited source. Multiple verified
+  sources, including the Nobel Prize website and major news outlets, consistently
+  use 'نادية مراد' or Latinized forms of Nadia Murad's name without the 'rgwvrwf'
+  prefix. The change appears to be an error or vandalism and should be reverted.
+rcid: null
+revid: 2470711327
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/peace/2018/murad/facts/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thenational.ae/world/mena/who-is-the-nobel-peace-prize-2018-winner-nadia-murad-1.777517
+timestamp: '2026-04-11T16:15:29.150912+00:00'
+title: Q22007112
+turns: 1
+value_label: null
+verdict: incorrect

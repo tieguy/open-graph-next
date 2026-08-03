@@ -1,0 +1,25 @@
+completion_tokens: 1694
+cost_usd: 0.00459954
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44842
+property: P26
+property_label: spouse
+rationale: The claim that Huang Hua (Q381220), a 20th-century Chinese revolutionary
+  and diplomat, was married to Im Nayeon (Q22804243), a modern South Korean singer,
+  is factually implausible and unsupported by credible evidence. The only cited source
+  (Chinese Wikipedia) is unreachable, and no verified independent sources confirm
+  this relationship. The temporal and cultural disconnect between the two individuals
+  makes the claim highly unlikely.
+rcid: null
+revid: 2462909447
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://zh.wikipedia.org/w/index.php?title=%E9%BB%84%E5%8D%8E_(1913%E5%B9%B4)&oldid=82348463
+timestamp: '2026-04-11T12:44:53.489780+00:00'
+title: Q381220
+turns: 4
+value_label: Im Nayeon
+verdict: incorrect

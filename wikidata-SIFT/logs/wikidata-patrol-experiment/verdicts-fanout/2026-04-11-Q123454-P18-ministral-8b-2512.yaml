@@ -1,0 +1,31 @@
+completion_tokens: 1757
+cost_usd: 0.00892512
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 67165
+property: P18
+property_label: image
+rationale: The image claim 'Com L19-0188-0203A.jpg' for Max Bill (Q123454) was removed,
+  but no independent verification of the image's validity or authenticity could be
+  performed due to search restrictions and lack of accessible sources. The original
+  reference was imported from French Wikipedia, which is not a direct Wikimedia Commons
+  source. Without direct access to the image or its metadata, the removal cannot be
+  confirmed or denied as correct.
+rcid: 2550196679
+revid: 2473539659
+sources:
+- provenance: verified
+  summary: Reference URL returned a 404 error, indicating the document is not accessible.
+  supports_claim: false
+  url: https://stadt.winterthur.ch/themen/leben-in-winterthur/kultur/kulturfoerderung/kulturpreis/dateien/preistraegerinnen-kulturpreis-stadt-winterthur2023.pdf
+- provenance: verified
+  summary: Artsy page lead mentions Max Bill's career but does not confirm or deny
+    the specific image 'Com L19-0188-0203A.jpg'.
+  supports_claim: false
+  url: https://www.artsy.net/artist/max-bill
+timestamp: '2026-04-11T09:51:58.024239+00:00'
+title: Q123454
+turns: 2
+value_label: null
+verdict: unverifiable

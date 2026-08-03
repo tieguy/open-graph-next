@@ -1,0 +1,17 @@
+completion_tokens: 190
+cost_usd: 0.00569171875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71296
+property: P1080
+property_label: from narrative universe
+rationale: null
+rcid: 2551006852
+revid: 2474324756
+sources: []
+timestamp: '2026-04-11T14:48:36.942470+00:00'
+title: Q96770446
+turns: 6
+value_label: Captain Caveman and the Teen Angels universe
+verdict: null

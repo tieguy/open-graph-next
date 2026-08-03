@@ -1,0 +1,28 @@
+completion_tokens: 1420
+cost_usd: 0.00160724
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15038
+property: P18
+property_label: image
+rationale: The old image is associated with the S-Class, not the E-Class, making it
+  incorrect. The new image is associated with the E-Class, making it the correct image
+  for the E-Class item. Multiple sources confirm the correctness of the new image.
+rcid: 2550729940
+revid: 2474057299
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cardekho.com/mercedes-benz/e-class/pictures
+- provenance: verified
+  supports_claim: true
+  url: https://www.gettyimages.com/photos/mercedes-e-class
+- provenance: verified
+  supports_claim: true
+  url: https://www.mercedes-benz.de/passengercars/models/saloon/new/e-class.html
+timestamp: '2026-04-11T14:33:42.829822+00:00'
+title: Q324127
+turns: 1
+value_label: null
+verdict: verified-high

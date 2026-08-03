@@ -1,0 +1,30 @@
+completion_tokens: 2252
+cost_usd: 0.0043496
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14992
+property: P197
+property_label: adjacent station
+rationale: Authoritative sources such as the English Wikipedia articles for Ōfunato
+  Station and Shimofunato Station, as well as the Japan Rail Pass route map, confirm
+  that Shimofunato Station is directly adjacent to Ōfunato Station on the Ōfunato
+  Line. Sakari Station is not adjacent to Ōfunato Station. Therefore, changing the
+  adjacent station from 'Sakari Station' to 'Shimofunato Station' is correct.
+rcid: 2550465639
+revid: 2473802083
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/%C5%8Cfunato_Station
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Shimofunato_Station
+- provenance: verified
+  supports_claim: true
+  url: https://www.japanrailpass.net/jrlines/lineofu.shtml
+timestamp: '2026-04-11T09:02:37.013901+00:00'
+title: Q8081459
+turns: 1
+value_label: Shimofunato Station
+verdict: verified-high

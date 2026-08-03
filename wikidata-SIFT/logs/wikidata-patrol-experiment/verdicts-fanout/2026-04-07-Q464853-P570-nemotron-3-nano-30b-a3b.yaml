@@ -1,0 +1,26 @@
+completion_tokens: 693
+cost_usd: 0.007795350000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 153135
+property: P570
+property_label: date of death
+rationale: I am unable to locate any reliable sources confirming that Anna Marly dies
+  on 16 February 2025 or any updated date of death beyond the originally recorded
+  2006 date. Searches for obituaries, official records, and credible news sources
+  related to Anna Marly's death return no relevant results. Despite multiple search
+  strategies across different query formats, no primary or secondary sources were
+  found to verify the revised date. Conclusion is based solely on exhaustive search
+  failure rather than evidence of contradiction.
+rcid: 2549570512
+revid: 2472933287
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Anna+Marly+date+of+death
+timestamp: '2026-04-07T13:35:08.882009+00:00'
+title: Q464853
+turns: 15
+value_label: null
+verdict: unverifiable

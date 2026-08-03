@@ -1,0 +1,27 @@
+completion_tokens: 1339
+cost_usd: 0.0040928
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16447
+property: P569
+property_label: date of birth
+rationale: Two independent and reliable sources (Wikipedia in Spanish and Famous Birthdays)
+  directly state that Álex González was born on 13 August 1999. These sources confirm
+  the updated value in the edit. The original citation from filmportal.de could not
+  be verified due to domain blocking, but the independent corroboration is sufficient
+  for a high-verification rating.
+rcid: null
+revid: 2463918541
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Álex_González
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/alex-gonzalez-1111.html
+timestamp: '2026-04-10T10:27:16.043011+00:00'
+title: Q3390414
+turns: 1
+value_label: null
+verdict: verified-high

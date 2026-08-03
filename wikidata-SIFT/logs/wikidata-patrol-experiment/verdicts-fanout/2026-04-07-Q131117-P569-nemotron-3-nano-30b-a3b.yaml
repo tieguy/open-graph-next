@@ -1,0 +1,36 @@
+completion_tokens: 908
+cost_usd: 0.0112519
+diff_type: reference_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 221406
+property: P569
+property_label: date of birth
+rationale: No independent source could be located confirming Maria Montessori's birth
+  date of 31 August 1870. Multiple web searches for 'Maria Montessori date of birth',
+  'Maria Montessori born', 'Maria Montessori biography', and specific queries including
+  '31 August 1870' returned no verifiable sources. External sources mentioned in the
+  edit (e.g., Britannica, Salzburgwiki, FemBio database) could not be accessed due
+  to blocked domains, timeouts, or 404 errors, and thus were not given 'verified'
+  provenance. Only URLs from the edit itself were found in prefetched_references but
+  were not successfully fetched.
+rcid: null
+revid: 2471019989
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://historiek.net/google-eert-pedagoog-maria-montessori/18019/
+- provenance: blocked_domain
+  supports_claim: false
+  url: https://www.britannica.com/biography/Maria-Montessori
+- provenance: timeout
+  supports_claim: false
+  url: https://www.salzburgwiki.at/index.php?title=Maria_Montessori&oldid=9778
+- provenance: not_found
+  supports_claim: false
+  url: https://www.munichre.com/maria-montessori
+timestamp: '2026-04-07T06:37:05.138994+00:00'
+title: Q131117
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,37 @@
+completion_tokens: 574
+cost_usd: 0.015132080000000001
+diff_type: reference_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 36566
+property: P20
+property_label: place of death
+rationale: The claim that Joseph ha-Kohen died in Genoa is directly supported by the
+  Jewish Encyclopedia article cited in the edit, which states he 'died at Genoa in
+  1575 or shortly after.' This source is authoritative for biographical information
+  about Jewish historical figures. Additionally, multiple other independent sources
+  from the search results confirm Genoa as his place of death, including academic
+  and Jewish history sources, providing strong corroboration.
+rcid: 2540983105
+revid: 2464769525
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8852-joseph-ben-joshua-ben-meir-ha-kohen
+- provenance: reported
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8858-joseph-ha-kohen
+- provenance: reported
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8852-joseph-ben-joshua-ben-meir-ha-kohen
+- provenance: reported
+  supports_claim: true
+  url: https://www.chabad.org/library/article_cdo/aid/111903/jewish/Rabbi-Joseph-HaKohen.htm
+- provenance: reported
+  supports_claim: true
+  url: https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/joseph-ha-kohen
+timestamp: '2026-02-20T01:37:58.023932+00:00'
+title: Q1708321
+turns: 3
+value_label: Genoa
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 1908
+cost_usd: 0.00837084
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 114986
+property: P27
+property_label: country of citizenship
+rationale: The removed claim that Simon Kubica (Q123758079) is a citizen of Poland
+  (Q36) was unsupported and inconsistent with the item's other claims. The item already
+  correctly listed Australia (Q408) as his country of citizenship, supported by his
+  place of birth (Sydney, Q3130) and affiliations with Australian companies. No independent
+  sources confirm Poland as Simon Kubica's citizenship, and the official website confirms
+  he is an Australian entrepreneur. The removal of the incorrect claim was justified.
+rcid: 2550459524
+revid: 2473795998
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://simonkubica.com
+- provenance: verified
+  supports_claim: false
+  url: https://f1.fandom.com/wiki/Robert_Kubica
+- provenance: verified
+  supports_claim: false
+  url: https://www.racefans.net/robert-kubica
+timestamp: '2026-04-11T10:08:17.999132+00:00'
+title: Q123758079
+turns: 13
+value_label: Poland
+verdict: incorrect

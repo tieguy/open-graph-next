@@ -1,0 +1,25 @@
+completion_tokens: 730
+cost_usd: 0.00435
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19560
+property: P31
+property_label: instance of
+rationale: The claim that Q138349990 is an instance of 'business' (Q4830453) is supported
+  only by a self-published website (Suchfokus.de), which describes the entity as an
+  online marketing agency. While the description is consistent with the meaning of
+  'business,' it does not constitute independent or authoritative verification of
+  the entity's legal classification. Without confirmation from an official registry
+  or publication, the claim cannot be considered reliably verified.
+rcid: 2540974428
+revid: 2464761242
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:37:12.685556+00:00'
+title: Q138349990
+turns: 2
+value_label: business
+verdict: suspect

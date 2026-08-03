@@ -1,0 +1,29 @@
+completion_tokens: 270
+cost_usd: 0.002577
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12075
+property: P576
+property_label: dissolved, abolished or demolished date
+rationale: Neither the old value of '+1943-11-00T00:00:00Z' nor the new value of 'September
+  1844' for the 'dissolved, abolished or demolished date' of the Manouchian group
+  is supported by any verified source. The group was active during World War II, specifically
+  until 1944, and sources such as marxists.org and licra.org refer to events in 1944
+  but do not mention any date of dissolution in 1844. No primary or authoritative
+  sources were found to confirm or deny either date. Therefore, the change cannot
+  be assessed as correct or incorrect based on available evidence.
+rcid: null
+revid: 2471429559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.marxists.org/history/france/resistance/manouchian/manouchian-group.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.licra.org/21-fevrier-1944-le-groupe-manouchian-mort-pour-la-france
+timestamp: '2026-04-11T08:08:51.810882+00:00'
+title: Q124588916
+turns: 1
+value_label: null
+verdict: unverifiable

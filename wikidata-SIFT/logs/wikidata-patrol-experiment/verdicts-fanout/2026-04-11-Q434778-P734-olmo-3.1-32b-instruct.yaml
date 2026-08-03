@@ -1,0 +1,31 @@
+completion_tokens: 2527
+cost_usd: 0.005792
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21379
+property: P734
+property_label: family name
+rationale: Although Nicholas Brendon's legal full name includes 'Schultz', he is universally
+  known and credited as 'Brendon' in professional and public contexts. The cited reference
+  for the change is a heuristic source, not a primary or authoritative one, and changing
+  the family name to 'Schultz' contradicts established naming conventions for public
+  figures on Wikidata. This edit is inconsistent with how the subject is referenced
+  in reputable sources.
+rcid: 2551334492
+revid: 2474641066
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nicholas_Brendon
+- provenance: verified
+  supports_claim: false
+  url: https://www.hollywoodreporter.com/tv/tv-news/nicholas-brendon-dead-buffy-the-vampire-slayer-1236543090/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q97033143
+timestamp: '2026-04-11T07:03:08.825695+00:00'
+title: Q434778
+turns: 1
+value_label: Schultz
+verdict: suspect

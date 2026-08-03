@@ -1,0 +1,30 @@
+completion_tokens: 740
+cost_usd: 0.0042263000000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40043
+property: P856
+property_label: official website
+rationale: The URL 'http://141sex161.com/' contains content that aligns with the description
+  of Sex141.com as a Hong Kong information network for sex workers. The search results
+  and fetched content from 'http://sex141.com/en/region-18-hong-kong-central-coyote-sex-girls.html'
+  and 'https://global.141-161.com/' support the claim that this is a relevant and
+  active official website for the service.
+rcid: 2540966218
+revid: 2464753813
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://141sex161.com/
+- provenance: verified
+  supports_claim: true
+  url: http://sex141.com/en/region-18-hong-kong-central-coyote-sex-girls.html
+- provenance: verified
+  supports_claim: true
+  url: https://global.141-161.com/
+timestamp: '2026-02-20T03:39:09.534480+00:00'
+title: Q15291503
+turns: 5
+value_label: null
+verdict: verified-high

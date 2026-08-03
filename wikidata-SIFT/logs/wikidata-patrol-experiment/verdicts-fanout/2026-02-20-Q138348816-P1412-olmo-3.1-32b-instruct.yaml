@@ -1,0 +1,23 @@
+completion_tokens: 1001
+cost_usd: 0.0045652
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19823
+property: P1412
+property_label: languages spoken, written or signed
+rationale: There is no reliable evidence that Felipe Sarra speaks, writes, or signs
+  Spanish or any other language. The primary sports database (Transfermarkt) does
+  not mention any language for this player, and independent sources do not provide
+  this information. The previous claim was unsupported and should be removed.
+rcid: 2540926642
+revid: 2464717413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com.ar/felipe-sarra/profil/spieler/1089729
+timestamp: '2026-02-20T21:57:25.649818+00:00'
+title: Q138348816
+turns: 2
+value_label: Spanish
+verdict: suspect

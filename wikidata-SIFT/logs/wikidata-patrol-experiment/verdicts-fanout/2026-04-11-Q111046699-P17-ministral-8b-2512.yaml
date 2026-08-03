@@ -1,0 +1,31 @@
+completion_tokens: 2123
+cost_usd: 0.00318018
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31725
+property: P17
+property_label: country
+rationale: The edit changing the country from United States (Q30) to Israel (Q801)
+  for Q111046699 is strongly supported by multiple verified sources. The item's context—such
+  as ownership by Israel Canada (Q61125886), location in Hod HaSharon (Q152379), and
+  a Hebrew Wikipedia Commons category—further confirms Israel as the correct country.
+  No evidence supports the United States as the correct location, and the change aligns
+  with independent sources confirming Israel's geographical and cultural identity.
+rcid: 2550656233
+revid: 2473985943
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/the-kingdom-of-bahrain/en/the-embassy/https-embassiesgovil-manana-aboutisrael-pages-about-israelaspx
+- provenance: verified
+  supports_claim: true
+  url: https://globalcincinnati.org/programs/global-education/country-profiles/israel/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/world-middle-east-14628835
+timestamp: '2026-04-11T11:26:21.204737+00:00'
+title: Q111046699
+turns: 3
+value_label: Israel
+verdict: verified-high

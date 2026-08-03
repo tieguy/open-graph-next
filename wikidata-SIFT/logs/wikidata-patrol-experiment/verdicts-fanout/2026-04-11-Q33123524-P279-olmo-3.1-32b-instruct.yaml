@@ -1,0 +1,30 @@
+completion_tokens: 254
+cost_usd: 0.0024222000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11349
+property: P279
+property_label: subclass of
+rationale: No reliable sources were found that establish 'support' as a subclass of
+  'Cartón [es]' or 'art material'. The cited sources do not discuss Wikidata subclass
+  relationships, and no authoritative ontologies or databases corroborate this subclass
+  relation for the given items. The change could be correct or incorrect, but there
+  is no evidence available to verify it.
+rcid: null
+revid: 2464010163
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hyperioxes.com/eso/tank/subclass-build
+- provenance: verified
+  supports_claim: false
+  url: https://help.elderscrollsonline.com/app/answers/detail/a_id/70950/~/subclassing---system---the-elder-scrolls-online
+- provenance: verified
+  supports_claim: false
+  url: https://www.taricsupport.com/nomenclature/es/4821101000.html
+timestamp: '2026-04-11T13:59:14.598056+00:00'
+title: Q33123524
+turns: 1
+value_label: Cartón [es]
+verdict: unverifiable

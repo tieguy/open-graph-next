@@ -1,0 +1,28 @@
+completion_tokens: 1774
+cost_usd: 0.005851175
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 56431
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Reid Harrison was born in Orange,
+  Virginia. The obituary mentions Fredericksburg as the birthplace but indicates that
+  he grew up in Orange, which does not contradict the other sources.
+rcid: 2540964224
+revid: 2464751889
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://angelorules.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: true
+  url: https://catscratch.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://www.legacy.com/us/obituaries/dailyprogress/name/reid-harrison-obituary?id=60544470
+timestamp: '2026-02-20T03:58:27.427619+00:00'
+title: Q6104560
+turns: 6
+value_label: Orange
+verdict: verified-high

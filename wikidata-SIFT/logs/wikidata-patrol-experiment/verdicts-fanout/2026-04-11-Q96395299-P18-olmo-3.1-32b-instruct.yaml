@@ -1,0 +1,27 @@
+completion_tokens: 1725
+cost_usd: 0.0031842
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10746
+property: P18
+property_label: image
+rationale: There is no independent confirmation that 'New Alamein.jpg' with the legend
+  'فندق ريكسوس' (Rex Hotel) is the correct image for New Alamein city. No references
+  were provided, and reliable secondary sources such as Wikipedia do not support this
+  claim. The change is therefore suspect and should not be accepted without a reliable
+  source.
+rcid: 2550897783
+revid: 2474220651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/New_Alamein
+- provenance: verified
+  supports_claim: false
+  url: https://www.istockphoto.com/photos/el-alamein
+timestamp: '2026-04-11T16:34:01.679047+00:00'
+title: Q96395299
+turns: 1
+value_label: null
+verdict: suspect

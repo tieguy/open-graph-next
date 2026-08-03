@@ -1,0 +1,33 @@
+completion_tokens: 2236
+cost_usd: 0.00130851
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19019
+property: P4224
+property_label: category contains
+rationale: The category Q60917184 represents 'Arizona State Sun Devils women’s volleyball
+  coaches,' and the base value Q5 (human) is logically correct as it categorizes human
+  individuals. The addition of the qualifier P6087 (coach of sports team) with value
+  Q48838243 (Arizona State Sun Devils women’s volleyball) provides context and specificity
+  to the category, which is a valid and useful enhancement. The prefetched references
+  confirm the existence of the team and its coaching staff, supporting the logical
+  consistency of the edit. No contradictions were found in the available sources,
+  and the edit aligns with the expected structure of Wikidata categories.
+rcid: 2551384440
+revid: 2474689007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/news/2016/12/21/tomasevic-named-arizona-states-head-womens-volleyball-coach
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/sports/volleyball/roster
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/staff-directory/department/volleyball-fax-480-965-7398
+timestamp: '2026-04-11T05:29:39.091258+00:00'
+title: Q60917184
+turns: 2
+value_label: human
+verdict: verified-high

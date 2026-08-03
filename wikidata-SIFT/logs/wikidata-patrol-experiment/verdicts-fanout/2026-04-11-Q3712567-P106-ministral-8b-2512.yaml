@@ -1,0 +1,28 @@
+completion_tokens: 2177
+cost_usd: 0.006945720000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 53549
+property: P106
+property_label: occupation
+rationale: The change from 'writer' (Q36180) to 'prose writer' (Q12144794) for Doina
+  Ruști (Q3712567) is well-supported by independent sources. Both the Academia.edu
+  profile and the translated content of her official website confirm her primary literary
+  output consists of novels and short stories, which are prose-based. The old value
+  was correct but overly broad, while the new value is more precise and aligns with
+  her literary achievements and awards. No contradictory evidence was found.
+rcid: 2550664437
+revid: 2473993952
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://independent.academia.edu/DRusti
+- provenance: verified
+  supports_claim: true
+  url: https://translate.google.com/translate?sl=en&tl=auto&u=https%3A%2F%2Fdoinarusti.ro%2Fen%2Fdespre.html
+timestamp: '2026-04-11T15:04:59.901531+00:00'
+title: Q3712567
+turns: 2
+value_label: prose writer
+verdict: verified-high

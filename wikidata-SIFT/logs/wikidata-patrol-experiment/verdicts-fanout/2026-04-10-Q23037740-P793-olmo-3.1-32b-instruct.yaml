@@ -1,0 +1,28 @@
+completion_tokens: 1988
+cost_usd: 0.0045912
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16992
+property: P793
+property_label: significant event
+rationale: There is no verifiable evidence that the 'significant event' for the Self-portrait
+  by Elisabeth Vigée Le Brun is an 'art auction.' The cited Christie's reference is
+  a general essay about her pastels and does not mention the sale of this specific
+  work. The Wikipedia entry and auction house records also do not indicate that this
+  painting was sold at auction. Therefore, the claim cannot be confirmed or denied
+  based on available evidence.
+rcid: 2549552740
+revid: 2472915943
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.christies.com/lot/lot-5665246
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Self-portrait_at_age_sixteen_by_Elisabeth_Vig%C3%A9e_Le_Brun
+timestamp: '2026-04-10T14:20:02.047436+00:00'
+title: Q23037740
+turns: 1
+value_label: art auction
+verdict: unverifiable

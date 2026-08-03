@@ -1,0 +1,30 @@
+completion_tokens: 1405
+cost_usd: 0.029636
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 22611
+property: P641
+property_label: sport
+rationale: The cited Transfermarkt reference is reachable and authoritative, confirming
+  Felipe Sarra is a professional footballer with detailed career information including
+  position (delantero/forward), birth date, and nationality. Independent sources (Crunchbase,
+  Argentine Footballers Abroad Wiki) corroborate the claim consistently. The sport
+  claim for association football is well-supported from multiple reliable sources.
+rcid: 2540927200
+revid: 2464717957
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.com.ar/felipe-sarra/profil/spieler/1089729
+- provenance: reported
+  supports_claim: true
+  url: https://www.crunchbase.com/person/felipe-sarra-ceb4
+- provenance: reported
+  supports_claim: true
+  url: https://argentine-footballers-abroad.fandom.com/wiki/Federico_Sarra
+timestamp: '2026-02-20T21:50:37.424370+00:00'
+title: Q138348816
+turns: 2
+value_label: association football
+verdict: verified-high

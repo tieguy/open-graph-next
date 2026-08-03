@@ -1,0 +1,55 @@
+completion_tokens: 1453
+cost_usd: 0.009014520000000002
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 141793
+property: P106
+property_label: occupation
+rationale: The edit changes Nozomi Ishihara's occupation from 'AV idol' to 'Porn Star
+  Dancing'. Despite multiple attempts to fetch authoritative sources (Japanese Wikipedia,
+  AV industry websites, and other relevant platforms), all attempts either returned
+  errors (blocked domains, 404 errors, or unreachable URLs). No verified sources were
+  found to confirm or deny either occupation claim. The prefetched references did
+  not provide direct evidence regarding her occupation. Without access to reliable
+  sources, it is impossible to verify the correctness of the edit.
+rcid: null
+revid: 2468754434
+sources:
+- provenance: verified
+  summary: Blocked domain; could not verify occupation claim.
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E7%9F%B3%E5%8E%9F%E5%B8%8C%E6%9C%9B
+- provenance: verified
+  summary: Blocked domain; could not verify occupation claim.
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nozomi_Ishihara
+- provenance: verified
+  summary: URL not reachable; could not verify occupation claim.
+  supports_claim: false
+  url: https://www.av-girls.com/actress/nozomi-ishihara
+- provenance: verified
+  summary: URL not reachable; could not verify occupation claim.
+  supports_claim: false
+  url: https://www.jav-girls.com/actress/nozomi-ishihara
+- provenance: verified
+  summary: HTTP 404 error; page not found.
+  supports_claim: false
+  url: https://www.dmm.co.jp/act/actress/ishihara_nozomi/
+- provenance: verified
+  summary: No mention of occupation; irrelevant to claim.
+  supports_claim: false
+  url: https://jav.guru/actress/ishihara-nozomi/
+- provenance: verified
+  summary: Lists videos but does not clarify occupation.
+  supports_claim: false
+  url: https://www.bestjavporn.com/pornstar/nozomi-ishihara/
+- provenance: verified
+  summary: Lists videos but does not clarify occupation.
+  supports_claim: false
+  url: https://www.eporner.com/pornstar/nozomi-ishihara/
+timestamp: '2026-04-11T16:16:01.304468+00:00'
+title: Q97184660
+turns: 15
+value_label: Porn Star Dancing
+verdict: unverifiable

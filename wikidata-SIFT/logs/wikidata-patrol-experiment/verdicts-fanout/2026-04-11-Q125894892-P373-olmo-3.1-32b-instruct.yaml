@@ -1,0 +1,30 @@
+completion_tokens: 1863
+cost_usd: 0.0032762
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10792
+property: P373
+property_label: Commons category
+rationale: There is no evidence that 'Dr.Sexo' is an appropriate or recognized Commons
+  category for Dr. Simi. The previous category 'Dr. Simi' is associated with an established
+  Commons category, while 'Dr.Sexo' does not appear to be an active or recognized
+  category. No references were provided for the new value, and independent sources
+  do not support the change.
+rcid: 2550133844
+revid: 2473479562
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Dr._Simi
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Dr.Sexo
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/WikiProject_Medicine/Pharmacy_chains_in_Mexico
+timestamp: '2026-04-11T10:29:54.804377+00:00'
+title: Q125894892
+turns: 1
+value_label: null
+verdict: suspect

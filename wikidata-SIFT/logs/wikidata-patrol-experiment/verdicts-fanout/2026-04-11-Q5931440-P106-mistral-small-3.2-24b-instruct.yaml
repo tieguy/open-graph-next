@@ -1,0 +1,28 @@
+completion_tokens: 1883
+cost_usd: 0.0033338625
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34279
+property: P106
+property_label: occupation
+rationale: Multiple reliable sources confirm that Joan Josep Nuet is a politician,
+  currently serving as a Member of the Congress of Deputies of Spain. The evidence
+  strongly supports the claim.
+rcid: 2549582614
+revid: 2472945196
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Joan_Josep_Nuet_i_Pujals
+- provenance: verified
+  supports_claim: true
+  url: https://www.catalannews.com/politics/item/trial-of-former-parliament-bureau-member-moved-to-supreme-court
+- provenance: verified
+  supports_claim: true
+  url: https://www.congreso.es/en/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&_diputadomodule_codParlamentario=189&_diputadomodule_idLegislatura=XIV
+timestamp: '2026-04-11T17:51:19.068536+00:00'
+title: Q5931440
+turns: 1
+value_label: politician
+verdict: verified-high

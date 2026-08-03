@@ -1,0 +1,24 @@
+completion_tokens: 1110
+cost_usd: 0.00972821
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 110271
+property: P569
+property_label: date of birth
+rationale: The Last.fm biography clearly states that Nancy Ajram was born on May 16,
+  1983, which contradicts the edited date of 1973. Therefore, the edit is incorrect.
+rcid: null
+revid: 2471852785
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Nancy+Ajram/+wiki
+- provenance: verified
+  supports_claim: false
+  url: https://www.babesdirectory.com/nancy-ajram/
+timestamp: '2026-04-07T09:31:10.885847+00:00'
+title: Q774155
+turns: 11
+value_label: null
+verdict: incorrect

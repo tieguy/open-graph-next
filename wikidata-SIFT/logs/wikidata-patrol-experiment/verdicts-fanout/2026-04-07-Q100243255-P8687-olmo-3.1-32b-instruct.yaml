@@ -1,0 +1,25 @@
+completion_tokens: 726
+cost_usd: 0.008044
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38042
+property: P8687
+property_label: social media followers
+rationale: There is no publicly accessible evidence from Bahia Notícias' official
+  website or from a verifiable Facebook page that displays the number of followers
+  for the social media followers claim. The edit changed the Facebook username qualifier
+  but did not provide or reference a source that confirms the existence of a Facebook
+  page with a visible follower count. Without such evidence, the value 'unknown value'
+  cannot be confirmed or denied.
+rcid: 2549609001
+revid: 2472970792
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bahianoticias.com.br/fale-conosco.html
+timestamp: '2026-04-07T13:10:57.666578+00:00'
+title: Q100243255
+turns: 5
+value_label: null
+verdict: unverifiable

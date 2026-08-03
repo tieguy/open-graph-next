@@ -1,0 +1,28 @@
+completion_tokens: 2024
+cost_usd: 0.0053542799999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69646
+property: P3789
+property_label: Telegram username
+rationale: The Telegram username 'roscosmos_gk' is confirmed as the official Telegram
+  channel for Roscosmos State Corporation, which owns TV Roskosmos (Q4454118). There
+  is no evidence from verified sources that TV Roskosmos has a separate Telegram channel.
+  The deprecation of this value is unjustified and incorrect, as it is the correct
+  and official channel for the parent organization. The edit lacks supporting references
+  and contradicts the verified official status of the channel.
+rcid: 2551261387
+revid: 2474571896
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://t.me/roscosmos_gk
+- provenance: verified
+  supports_claim: false
+  url: https://t.me/s/roscosmos_gk
+timestamp: '2026-04-11T12:46:19.300204+00:00'
+title: Q4454118
+turns: 8
+value_label: null
+verdict: incorrect

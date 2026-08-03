@@ -1,0 +1,23 @@
+completion_tokens: 1094
+cost_usd: 0.0035478000000000003
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14457
+property: P159
+property_label: headquarters location
+rationale: The claim that SYENSQO's headquarters is located in Brussels is supported
+  by an independent third-party industry publication, even though the cited company
+  reference could not be fetched or verified directly. This provides partial confirmation
+  but not full primary evidence.
+rcid: 2551398780
+revid: 2474702785
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.plasticsengineeringmagazine.com/syensqo-spin-off-solvay/
+timestamp: '2026-04-11T08:50:57.708810+00:00'
+title: Q123752186
+turns: 1
+value_label: Brussels
+verdict: verified-low

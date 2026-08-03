@@ -1,0 +1,23 @@
+completion_tokens: 408
+cost_usd: 0.0020691125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21996
+property: P570
+property_label: date of death
+rationale: No independent sources could be found to verify the date of death for Jodle
+  Birge. The only reference cited is English Wikipedia, which is not an acceptable
+  primary source for Wikidata. The web searches did not yield any relevant results
+  that could confirm or deny the claim.
+rcid: 2549906557
+revid: 2473261319
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jodle_Birge
+timestamp: '2026-04-07T06:22:01.668706+00:00'
+title: Q6208009
+turns: 4
+value_label: null
+verdict: unverifiable

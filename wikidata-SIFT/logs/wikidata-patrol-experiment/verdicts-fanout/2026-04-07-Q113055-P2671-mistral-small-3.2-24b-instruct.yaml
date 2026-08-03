@@ -1,0 +1,62 @@
+completion_tokens: 3871
+cost_usd: 0.005244540000000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 84180
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The investigation did not yield any relevant sources that confirm or deny
+  the association of 'Hamburgefonts' with the 'classical garalde typeface genre' or
+  its Google Knowledge Graph ID. The lack of independent coverage makes it impossible
+  to verify the claim.
+rcid: 2549697760
+revid: 2473056935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=classical+garalde+typeface+genre+Google+Knowledge+Graph+ID
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+Google+Knowledge+Graph+ID
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=classical+garalde+typeface+genre+Hamburgefonts
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Google+Knowledge+Graph+ID+for+typeface+classifications
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Vox-ATypI+classification+Google+Knowledge+Graph+ID
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=classical+garalde+typeface+genre
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+typeface
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Google+Knowledge+Graph+ID+for+typeface+families
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Vox-ATypI+classification+typeface+families
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=classical+garalde+typeface+genre+Vox-ATypI
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+Vox-ATypI
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Google+Knowledge+Graph+ID+for+classical+garalde+typeface+genre
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=classical+garalde+typeface+genre+typeface+family
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+typeface+family
+timestamp: '2026-04-07T11:52:06.369637+00:00'
+title: Q113055
+turns: 15
+value_label: null
+verdict: unverifiable

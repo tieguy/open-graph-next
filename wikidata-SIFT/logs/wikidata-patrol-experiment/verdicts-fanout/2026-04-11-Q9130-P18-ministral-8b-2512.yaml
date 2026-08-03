@@ -1,0 +1,28 @@
+completion_tokens: 2285
+cost_usd: 0.012269309999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 142442
+property: P18
+property_label: image
+rationale: The edit replaces an image hosted on a reputable archive (Narodowe Archiwum
+  Cyfrowe) with an image (`Erwin-Main-Street-tn1.jpg`) that lacks independent verification,
+  provenance, or references. The new image does not appear in credible sources for
+  Erwin Schrödinger's 1933 portrait, and no evidence supports its authenticity or
+  relevance. The absence of references for both images further undermines the credibility
+  of the change.
+rcid: 2550565117
+revid: 2473897662
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/physics/1933/schrodinger/photo-gallery/
+- provenance: verified
+  supports_claim: false
+  url: https://library.si.edu/image-gallery/74073
+timestamp: '2026-04-11T11:32:12.148357+00:00'
+title: Q9130
+turns: 7
+value_label: null
+verdict: suspect

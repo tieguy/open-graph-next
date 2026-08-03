@@ -1,0 +1,25 @@
+completion_tokens: 1723
+cost_usd: 0.00718075
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 72000
+property: P39
+property_label: position held
+rationale: The edit is supported by the Catholic Hierarchy page, which clearly states
+  the death date of Heinrich Groß von Trockau as 27 Mar 1501. This aligns with the
+  new end time qualifier added to his tenure as Bishop of Bamberg.
+rcid: 2550977138
+revid: 2474296500
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.catholic-hierarchy.org/bishop/bgvt.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+timestamp: '2026-04-11T13:29:51.767498+00:00'
+title: Q101821
+turns: 6
+value_label: diocesan bishop
+verdict: verified-high

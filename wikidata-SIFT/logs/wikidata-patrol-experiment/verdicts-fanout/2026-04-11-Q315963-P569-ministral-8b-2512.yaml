@@ -1,0 +1,29 @@
+completion_tokens: 2187
+cost_usd: 0.009240930000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 72066
+property: P569
+property_label: date of birth
+rationale: The edit changed Gary Snyder's date of birth from May 8, 1930 to May 9,
+  1930. Three independent verified sources (EBSCO, Medium, and Kent State University)
+  explicitly confirm the correct birth date as May 8, 1930. The new value is therefore
+  incorrect based on the available evidence.
+rcid: 2549543050
+revid: 2472906341
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://jenb-writing.medium.com/biography-of-gary-snyder-dac6f56c212d
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/biography/gary-snyder
+- provenance: verified
+  supports_claim: false
+  url: https://www.library.kent.edu/gary-snyder-papers
+timestamp: '2026-04-11T10:03:06.391002+00:00'
+title: Q315963
+turns: 3
+value_label: null
+verdict: incorrect

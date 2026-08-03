@@ -1,0 +1,30 @@
+completion_tokens: 1960
+cost_usd: 0.00160101
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14909
+property: P570
+property_label: date of death
+rationale: The date of death '21 March 2026' is consistent with verified sources,
+  but the added qualifiers (UTC+03:00 time zone and 05:10 AM) are incorrect. Delhi
+  operates on UTC+05:30, and all verified sources confirm the time as 6:22 AM IST.
+  The edit introduces an inaccurate time zone qualifier and lacks any references,
+  making the edit suspect.
+rcid: 2551232239
+revid: 2474544637
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://empireangle.com/celebrity/madhumita-raut/
+- provenance: verified
+  supports_claim: true
+  url: https://english.mathrubhumi.com/news/india/odissi-dancer-madhumita-raut-passes-away-jfl8rowl
+- provenance: verified
+  supports_claim: true
+  url: https://www.thehindu.com/entertainment/dance/odissi-dancer-madhumita-raut-dies-of-cardiac-arrest/article70768451.ece
+timestamp: '2026-04-11T06:11:16.035280+00:00'
+title: Q6727486
+turns: 1
+value_label: null
+verdict: suspect

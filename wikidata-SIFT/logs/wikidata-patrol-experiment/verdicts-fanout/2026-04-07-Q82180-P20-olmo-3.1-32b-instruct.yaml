@@ -1,0 +1,27 @@
+completion_tokens: 1066
+cost_usd: 0.015855
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 76077
+property: P20
+property_label: place of death
+rationale: The consensus historical record places Mata Hari's execution in France
+  at the Fort de Vincennes in Paris. The cited references could not be verified to
+  support Dakar as the place of death, and independent sources fetched or consulted
+  do not corroborate this claim. Therefore, the edit changing the place of death to
+  Dakar is incorrect.
+rcid: 2550970497
+revid: 2474289994
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mata_Hari
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Mata-Hari
+timestamp: '2026-04-07T04:37:06.420243+00:00'
+title: Q82180
+turns: 6
+value_label: Dakar
+verdict: incorrect

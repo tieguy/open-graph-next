@@ -1,0 +1,28 @@
+completion_tokens: 769
+cost_usd: 0.013162
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 63503
+property: P856
+property_label: official website
+rationale: The new official website https://www.aerok.com for Tateyama could not be
+  verified as authoritative. The previous official website https://www.city.tateyama.chiba.jp/
+  is consistent with the standard Japanese municipal website naming convention. Multiple
+  searches did not find any independent confirmation that aerok.com is the official
+  site, and direct fetching failed due to a 403 Forbidden error. Therefore, changing
+  to this new domain appears to be incorrect in the absence of evidence.
+rcid: null
+revid: 2471597268
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.tateyama.chiba.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://www.aerok.com
+timestamp: '2026-04-07T06:23:57.685012+00:00'
+title: Q646755
+turns: 8
+value_label: null
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 408
+cost_usd: 0.0024942000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11247
+property: P39
+property_label: position held
+rationale: Pierre Titti is described as having held the position of Directeur du Budget
+  prior to his appointment as Minister Delegate to the Minister of Finance in September
+  2007, according to official Cameroonian government sources. However, the edit replaces
+  the more specific, accurately sourced position ('Minister Delegate to the Minister
+  of Finance') with the vaguer 'directeur du Budget [fr]', for which the cited Wikipedia
+  source references the same government page that describes Titti's prior role, not
+  his current one. The official sources detail Titti's career progression, showing
+  that 'directeur du Budget' was a previous role, not his position after 2007. Changing
+  the position held to 'directeur du Budget' is therefore incorrect based on the evidence.
+rcid: 2551409126
+revid: 2474712353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://minfi.gov.cm/ministre-delegue/
+- provenance: verified
+  supports_claim: false
+  url: https://minfi.gov.cm/pierre-titti-minister-delegate-to-the-minister-of-finance-2/
+timestamp: '2026-04-11T18:41:32.032753+00:00'
+title: Q111394635
+turns: 1
+value_label: directeur du Budget [fr]
+verdict: suspect

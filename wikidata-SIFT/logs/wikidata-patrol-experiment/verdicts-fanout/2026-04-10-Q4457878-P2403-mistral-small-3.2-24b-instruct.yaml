@@ -1,0 +1,30 @@
+completion_tokens: 2420
+cost_usd: 0.022071562500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 234639
+property: P2403
+property_label: total assets
+rationale: The edit references a financial report that could not be accessed for verification.
+  Independent sources, including the bank's profile and recent news articles, do not
+  provide the specific figure of 6,083,903,000,000 Russian rubles for T-Bank's total
+  assets in 2025. Therefore, the claim remains unverifiable based on the available
+  information.
+rcid: 2550547031
+revid: 2473880220
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://banksdaily.com/info/tbank
+- provenance: verified
+  supports_claim: false
+  url: https://tadviser.com/index.php/Company:T-Bank
+- provenance: verified
+  supports_claim: false
+  url: https://interfax.com/newsroom/top-stories/107328/
+timestamp: '2026-04-10T08:02:43.456758+00:00'
+title: Q4457878
+turns: 9
+value_label: null
+verdict: unverifiable

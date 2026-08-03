@@ -1,0 +1,24 @@
+completion_tokens: 326
+cost_usd: 0.0032667
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33138
+property: P973
+property_label: described at URL
+rationale: The added reference URL https://durandal.gg does not support the described
+  at URL claim for Q118645622. The content of the URL is focused on a weapon tier
+  list and time-to-kill (TTK) calculator for a different game, possibly also called
+  Marathon but not the one developed by Bungie. Therefore, the reference does not
+  provide relevant information about the video game Marathon developed by Bungie.
+rcid: null
+revid: 2470743360
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://durandal.gg
+timestamp: '2026-04-11T13:46:37.594126+00:00'
+title: Q118645622
+turns: 2
+value_label: null
+verdict: incorrect

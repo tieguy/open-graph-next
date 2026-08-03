@@ -1,0 +1,24 @@
+completion_tokens: 218
+cost_usd: 0.0032746
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15719
+property: P180
+property_label: depicts
+rationale: The Metropolitan Museum of Art's official record for the painting 'Notre-Dame
+  de la Garde (La Bonne Mère), Marseille' by Paul Signac states that the work depicts
+  the Old Port of Marseille and is not associated with Vijaykumar Dandwani. Changing
+  the 'depicts' value from 'Old Port of Marseille' to 'Vijaykumar Dandwani' is therefore
+  factually incorrect based on authoritative provenance and descriptive sources.
+rcid: null
+revid: 2470826231
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.metmuseum.org/art/collection/search/437672
+timestamp: '2026-04-11T11:59:08.171599+00:00'
+title: Q19912132
+turns: 1
+value_label: Vijaykumar Dandwani
+verdict: incorrect

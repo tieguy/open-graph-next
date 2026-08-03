@@ -1,0 +1,33 @@
+completion_tokens: 1227
+cost_usd: 0.00365973875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37055
+property: P31
+property_label: instance of
+rationale: The searches did not yield any definitive sources or information that confirm
+  the classification of Cà di Angiolitt as a mountain hut.
+rcid: 2549655145
+revid: 2473015618
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=C%C3%A0+di+Angiolitt+instance+of+mountain+hut
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=C%C3%A0+di+Angiolitt+building+located+in+the+mountains
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=C%C3%A0+di+Angiolitt
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=C%C3%A0+di+Angiolitt+mountain+hut
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=C%C3%A0+di+Angiolitt+authoritative+sources
+timestamp: '2026-04-07T11:00:36.142476+00:00'
+title: Q127172134
+turns: 8
+value_label: mountain hut
+verdict: unverifiable

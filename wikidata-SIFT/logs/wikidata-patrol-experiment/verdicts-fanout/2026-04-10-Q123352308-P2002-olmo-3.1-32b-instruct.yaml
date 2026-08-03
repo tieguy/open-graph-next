@@ -1,0 +1,33 @@
+completion_tokens: 1412
+cost_usd: 0.0036378
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13953
+property: P2002
+property_label: X (Twitter) username
+rationale: The claim that the X (Twitter) username for Mariella Tripke is 'giannamariella'
+  cannot be confirmed based on independently fetched and verified sources. Authoritative
+  biographical sources mention Mariella Tripke by name and describe her career but
+  do not provide or confirm any X (Twitter) handle. No primary or reputable secondary
+  source fetched in this investigation explicitly states the username. The presence
+  of qualifiers like a numeric user ID and follower count suggests the information
+  may have originated from a social media profile, but without direct confirmation
+  from the platform or a reliable citation, the claim remains unverifiable.
+rcid: 2550356918
+revid: 2473695576
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/intl-de/artist/0Ht0EmEcuqMZRjSUb5oNce
+timestamp: '2026-04-10T13:37:39.437451+00:00'
+title: Q123352308
+turns: 1
+value_label: null
+verdict: unverifiable

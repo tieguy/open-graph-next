@@ -1,0 +1,28 @@
+completion_tokens: 1566
+cost_usd: 0.02109768375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 215440
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The provided references are unverifiable due to accessibility issues. Independent
+  searches did not yield any credible information supporting the claim that David
+  Attenborough speaks 'cha-cha-chá.' Therefore, the claim cannot be verified.
+rcid: 2549923767
+revid: 2473277640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bnf.fr/en
+- provenance: verified
+  supports_claim: false
+  url: https://www.kb.cz/en/author/3000000598-david-attenborough
+- provenance: verified
+  supports_claim: false
+  url: https://www.conorsl.org/en/author/39935587
+timestamp: '2026-04-07T13:42:59.617487+00:00'
+title: Q183337
+turns: 10
+value_label: cha-cha-chá
+verdict: unverifiable

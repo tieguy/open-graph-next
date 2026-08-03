@@ -1,0 +1,36 @@
+completion_tokens: 1374
+cost_usd: 0.047692
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 40822
+property: P159
+property_label: headquarters location
+rationale: The cited reference URL (https://www.bibbyfinancialservices.pl/kontakt)
+  directly supports the headquarters location claim, explicitly labeling the Warsaw
+  office as 'Centrala' (headquarters). Multiple independent sources including ZoomInfo,
+  Yelp, RocketReach, and the official About page all confirm Warsaw as the company's
+  headquarters location, with consistent address information across business directories.
+rcid: 2540937827
+revid: 2464727493
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/kontakt
+- provenance: reported
+  supports_claim: true
+  url: https://www.zoominfo.com/c/bibby-financial-services-poland/426936084
+- provenance: reported
+  supports_claim: true
+  url: https://m.yelp.com/biz/bibby-financial-services-warszawa
+- provenance: reported
+  supports_claim: true
+  url: https://rocketreach.co/bibby-financial-services-poland-profile_b5ec3336f42e72da
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/o-nas
+timestamp: '2026-02-20T16:29:14.445627+00:00'
+title: Q138348738
+turns: 5
+value_label: Warsaw
+verdict: verified-high

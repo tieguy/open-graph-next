@@ -1,0 +1,22 @@
+completion_tokens: 201
+cost_usd: 0.0021377
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20774
+property: P856
+property_label: official website
+rationale: The website https://www.novacorebuilders.com is active and provides detailed
+  information about Novacore Builders, including their services, licensing, and contact
+  information, confirming its association with the company.
+rcid: 2540926050
+revid: 2464716823
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.novacorebuilders.com/
+timestamp: '2026-02-20T22:18:42.635984+00:00'
+title: Q138348389
+turns: 3
+value_label: null
+verdict: verified-high

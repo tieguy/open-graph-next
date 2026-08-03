@@ -1,0 +1,29 @@
+completion_tokens: 2387
+cost_usd: 0.073774
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 61839
+property: P106
+property_label: occupation
+rationale: Q7889 (video game) is a product/work category defined as 'electronic game
+  with user interface and visual feedback', not a profession or occupation. All independent
+  sources consistently identify Masahiro Sakurai as a 'video game designer,' 'game
+  developer,' and 'game director'—occupational roles, not the product itself. The
+  Wikidata item already contains correct occupation claims (Q2702296 video game producer,
+  Q63538345 video game director). Adding the product as an occupation violates basic
+  taxonomical integrity and directly contradicts every reliable source consulted.
+rcid: 2540950305
+revid: 2464739277
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q7889
+timestamp: '2026-02-20T09:41:21.552391+00:00'
+title: Q1906721
+turns: 4
+value_label: video game
+verdict: incorrect

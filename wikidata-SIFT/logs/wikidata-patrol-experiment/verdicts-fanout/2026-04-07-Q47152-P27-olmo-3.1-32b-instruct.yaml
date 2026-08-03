@@ -1,0 +1,30 @@
+completion_tokens: 624
+cost_usd: 0.026951
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 132883
+property: P27
+property_label: country of citizenship
+rationale: Mary Shelley was born in England in 1797 and died in 1851. The Second Spanish
+  Republic existed from 1931 to 1939, long after her death, and there is no historical
+  evidence that she ever held Spanish citizenship or had any connection to the Second
+  Spanish Republic. Therefore, listing 'Second Spanish Republic' as her country of
+  citizenship is factually incorrect.
+rcid: null
+revid: 2471032323
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mary_Shelley
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Mary-Shelley
+- provenance: reported
+  supports_claim: false
+  url: https://www.poetryfoundation.org/poets/mary-shelley
+timestamp: '2026-04-07T07:59:25.028388+00:00'
+title: Q47152
+turns: 9
+value_label: Second Spanish Republic
+verdict: incorrect

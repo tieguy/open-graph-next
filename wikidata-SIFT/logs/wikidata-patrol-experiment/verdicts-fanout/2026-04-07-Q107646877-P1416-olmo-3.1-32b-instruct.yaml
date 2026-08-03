@@ -1,0 +1,26 @@
+completion_tokens: 1678
+cost_usd: 0.006550800000000001
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27720
+property: P1416
+property_label: affiliation
+rationale: The investigation found a Süddeutsche Zeitung article that confirms a close
+  operational and organizational link between the AfD and the Corona Rebellen group
+  in Freising. However, the article does not directly verify the specific claim that
+  'AfD Freising-Pfaffenhofen' was an official affiliation of Corona Rebellen as modeled
+  in Wikidata. The removal of the affiliation claim is reasonable given the controversy
+  and lack of a direct source, but the evidence does not meet the standard for a 'high
+  verification.'
+rcid: 2551215744
+revid: 2474528736
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-07T08:27:53.063109+00:00'
+title: Q107646877
+turns: 3
+value_label: AfD Freising-Pfaffenhofen
+verdict: verified-low

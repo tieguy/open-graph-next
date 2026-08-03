@@ -1,0 +1,27 @@
+completion_tokens: 1091
+cost_usd: 0.007924
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 36347
+property: P1559
+property_label: name in native language
+rationale: No authoritative primary source confirms 'Roberta Lynn angélique Williams'
+  as Roberta Williams's name in native language. The official website does not provide
+  her full legal name, and independently fetched secondary sources do not verify this
+  specific name variant. The claim therefore cannot be confirmed or denied with high
+  confidence.
+rcid: null
+revid: 2454174839
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sierragamers.com/
+- provenance: reported
+  supports_claim: false
+  url: https://arstechnica.com/gaming/2022/04/roberta-and-ken-williams-open-up-about-their-first-video-game-in-25-years
+timestamp: '2026-04-07T03:26:25.132070+00:00'
+title: Q55176
+turns: 5
+value_label: null
+verdict: unverifiable

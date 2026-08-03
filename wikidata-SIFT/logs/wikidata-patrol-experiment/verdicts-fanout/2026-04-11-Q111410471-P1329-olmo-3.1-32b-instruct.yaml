@@ -1,0 +1,36 @@
+completion_tokens: 2191
+cost_usd: 0.0042768
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14811
+property: P1329
+property_label: phone number
+rationale: The authoritative Booking.com listing for Ibis Wien Mariahilf specifies
+  the phone number as '+43-1-599 98 0', which includes a trailing zero not present
+  in either the old or new Wikidata value. Both the old and new values are therefore
+  incorrect. The cited references do not confirm the value, and the edit did not result
+  in a correct or improved entry.
+rcid: 2550332892
+revid: 2473672194
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.booking.com/hotel/at/ibis-wien-mariahilf.html
+- provenance: verified
+  supports_claim: false
+  url: https://all.accor.com/hotel/0796/index.en.shtml
+- provenance: unverifiable
+  supports_claim: null
+  url: https://ibis-wien-mariahilf.meinhotel.top/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wien.info/en/ibis-wien-mariahilf-162062
+- provenance: verified
+  supports_claim: false
+  url: https://www.yelp.com/biz/ibis-wien-mariahilf-wien
+timestamp: '2026-04-11T17:52:40.580864+00:00'
+title: Q111410471
+turns: 1
+value_label: null
+verdict: incorrect

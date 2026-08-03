@@ -1,0 +1,35 @@
+completion_tokens: 1950
+cost_usd: 0.00169164
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14292
+property: P27
+property_label: country of citizenship
+rationale: The edit changes Willy Voet's country of citizenship from Belgium to Mongols.
+  However, multiple independent sources confirm that Willy Voet is a Belgian sports
+  physiotherapist. There are no credible sources supporting the claim that his country
+  of citizenship is Mongols. The edit is incorrect.
+rcid: 2549518128
+revid: 2472881856
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://citizenshipbyinvestment.news/index.php/2019/04/19/mongols-invented-the-worlds-first-diplomatic-passport/
+- provenance: verified
+  supports_claim: false
+  url: https://migrants-refugees.va/country-profile/mongolia/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/mongolia/comments/196bx1x/immigrate_to_mongolia/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Willy_Voet
+- provenance: verified
+  supports_claim: true
+  url: https://www.cyclingnews.com/news/willy-voet/
+timestamp: '2026-04-11T14:11:41.875124+00:00'
+title: Q3569193
+turns: 1
+value_label: Mongols
+verdict: incorrect

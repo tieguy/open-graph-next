@@ -1,0 +1,35 @@
+completion_tokens: 3390
+cost_usd: 0.146717
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 129767
+property: P166
+property_label: award received
+rationale: Multiple independent French sources (France 3 regional TV, La Dépêche regional
+  news, FotoFemmeUnited) consistently confirm that Gaëlle Ghesquière was elevated
+  from Chevalier (appointed June 2022) to Officier (Officer) of the Ordre des Arts
+  et des Lettres in July 2024 by Minister Rachida Dati. The primary source (French
+  Ministry of Culture official record) confirms her 2022 appointment as Chevalier,
+  establishing the rank progression. The claim's value and label are accurate, and
+  'Officer' is the correct English translation of 'Officier.'
+rcid: 2540939331
+revid: 2464728916
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.fotofemmeunited.com/article/658-female-photographers-and-feminism
+- provenance: verified
+  supports_claim: true
+  url: https://france3-regions.franceinfo.fr/hauts-de-france/nord-0/gaelle-nous-finirons-par-travailler-ensemble-nagui-cosigne-le-livre-d-or-du-concert-des-30-ans-de-taratata-avec-une-photographe-de-maubeuge-3052996.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.ladepeche.fr/2025/04/26/gaelle-ghesquiere-planete-rock-12659451.php
+- provenance: verified
+  supports_claim: true
+  url: https://www.culture.gouv.fr/nous-connaitre/organisation-du-ministere/conseil-de-l-ordre-des-arts-et-des-lettres/arretes-de-nominations-dans-l-ordre-des-arts-et-des-lettres/Nomination-dans-l-ordre-des-Arts-et-des-Lettres-hiver-2022
+timestamp: '2026-02-20T15:43:49.827086+00:00'
+title: Q3099888
+turns: 6
+value_label: Officer of Arts and Letters
+verdict: verified-high

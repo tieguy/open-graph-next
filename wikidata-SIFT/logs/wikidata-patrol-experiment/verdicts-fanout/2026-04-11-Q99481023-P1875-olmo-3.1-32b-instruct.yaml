@@ -1,0 +1,29 @@
+completion_tokens: 231
+cost_usd: 0.0034162
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16388
+property: P1875
+property_label: represented by
+rationale: The added reference provided by the editor (https://www.sasmazeryasam.com/contact-2/)
+  could not be fetched due to a network error, and the Zilberman Gallery pages about
+  Yasam Sasmazer did not contain verifiable statements confirming representation.
+  The gallery's description on its own pages is general and does not explicitly state
+  that Yasam Sasmazer is currently represented by Zilberman Gallery. Without a directly
+  accessible and readable primary source confirming the representation, the claim
+  cannot be verified.
+rcid: 2551221921
+revid: 2474534638
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+- provenance: reported
+  supports_claim: false
+  url: https://www.sasmazeryasam.com/contact-2/
+timestamp: '2026-04-11T12:53:37.580566+00:00'
+title: Q99481023
+turns: 1
+value_label: Zilberman Gallery
+verdict: unverifiable

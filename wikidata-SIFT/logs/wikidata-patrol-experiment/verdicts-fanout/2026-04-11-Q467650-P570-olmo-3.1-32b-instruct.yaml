@@ -1,0 +1,33 @@
+completion_tokens: 416
+cost_usd: 0.0037208
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17356
+property: P570
+property_label: date of death
+rationale: The new value of 17 December 2030 for Nzingha Mbande's date of death is
+  inconsistent with all reliable historical sources. Multiple reputable sources, including
+  Wikipedia and academic works, state her death occurred in 1663, specifically around
+  December 17. There is no credible evidence suggesting she lived until 2030. The
+  change appears to be erroneous and unsupported by any primary or secondary source.
+rcid: null
+revid: 2470777111
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nzinga_of_Ndongo_and_Matamba
+- provenance: verified
+  supports_claim: false
+  url: https://www.blackhistoryheroes.com/2011/03/queen-ana-de-sousa-njinga-mbande-of.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikitree.com/wiki/Mbande-1
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Nzinga
+timestamp: '2026-04-11T15:50:41.982123+00:00'
+title: Q467650
+turns: 1
+value_label: null
+verdict: incorrect

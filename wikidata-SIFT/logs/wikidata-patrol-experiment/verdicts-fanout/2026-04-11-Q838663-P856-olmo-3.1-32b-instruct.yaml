@@ -1,0 +1,38 @@
+completion_tokens: 358
+cost_usd: 0.0043196
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20524
+property: P856
+property_label: official website
+rationale: The removed official website claim was not independently verified because
+  the cited reference URL (http://www.city.hitachiota.ibaraki.jp/) could not be fetched
+  and no alternative authoritative source confirming the prior official website was
+  found. The Japanese city's main portal could not be accessed to confirm whether
+  it was indeed the official website at the time of the edit. Without being able to
+  verify the prior claim or find a replacement official website from a reliable source,
+  the removal cannot be judged as correct or incorrect with confidence.
+rcid: 2551065993
+revid: 2474382400
+sources:
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.city.hitachiota.ibaraki.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://savorjapan.com/areas/ibaraki/spots/197
+- provenance: verified
+  supports_claim: false
+  url: https://www.gltjp.com/en/directory/item/14021/
+- provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+- provenance: verified
+  supports_claim: false
+  url: https://en.japantravel.com/ibaraki/hitachi
+timestamp: '2026-04-11T12:22:39.277896+00:00'
+title: Q838663
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 680
+cost_usd: 0.011386100000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 225002
+property: P569
+property_label: date of birth
+rationale: 'Despite extensive searching, no credible source confirming Sofia Coppola''s
+  birth date of 14 May 1971 could be located. All searches returned empty results
+  or blocked/missing domains. Wikipedia and IMDb references were inaccessible: Wikipedia
+  was blocked (wikimedia.org), IMDb was blocked (imdb.com), and the RKDartists site
+  returned HTTP 404. No primary or secondary sources were found to verify the revised
+  date of birth value. Therefore the edit cannot be verified as correct or incorrect.'
+rcid: null
+revid: 2471331014
+sources: []
+timestamp: '2026-04-07T03:37:46.779052+00:00'
+title: Q193628
+turns: 15
+value_label: null
+verdict: unverifiable

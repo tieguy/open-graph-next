@@ -1,0 +1,33 @@
+completion_tokens: 1258
+cost_usd: 0.0089546
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40999
+property: P570
+property_label: date of death
+rationale: The proposed date of death (20 January 2026) is not supported by any independent
+  source. Historical records and the item's previous claim confirm that Fernando Primo
+  de Rivera y Sáenz de Heredia died on 23 August 1936. Multiple web searches across
+  major news outlets and reference sources found no evidence supporting a 2026 death
+  date, making the edit incorrect.
+rcid: 2550184703
+revid: 2473528090
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Fernando_Primo_de_Rivera_y_S%C3%A1enz_de_Heredia
+- provenance: verified
+  supports_claim: false
+  url: https://historia-hispanica.rah.es/biografias/47480
+- provenance: verified
+  supports_claim: false
+  url: https://elpais.com/diario/1990/08/24/escocia/940741152_850215.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Fernando-Primo-de-Rivera
+timestamp: '2026-04-07T06:23:16.520053+00:00'
+title: Q5860087
+turns: 7
+value_label: null
+verdict: incorrect

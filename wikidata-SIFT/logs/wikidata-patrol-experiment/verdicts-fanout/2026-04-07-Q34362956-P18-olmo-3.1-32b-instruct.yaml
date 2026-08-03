@@ -1,0 +1,22 @@
+completion_tokens: 1020
+cost_usd: 0.0034955999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14418
+property: P18
+property_label: image
+rationale: The cited reference does not contain or reference an image for Lidia Hlib,
+  and no independent sources confirm that 'Lidia Hlib.jpg' is an official or correct
+  image. Therefore, the claim cannot be verified.
+rcid: 2550622213
+revid: 2473952631
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://uniuneascriitorilor.md/membru/hlib-lidia
+timestamp: '2026-04-07T07:07:21.589713+00:00'
+title: Q34362956
+turns: 2
+value_label: null
+verdict: unverifiable

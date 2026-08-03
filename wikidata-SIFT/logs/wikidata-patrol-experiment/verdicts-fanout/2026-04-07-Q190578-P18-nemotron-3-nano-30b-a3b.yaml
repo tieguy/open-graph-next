@@ -1,0 +1,23 @@
+completion_tokens: 823
+cost_usd: 0.005897200000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 114652
+property: P18
+property_label: image
+rationale: The edit attempted to add a new image file as the image of the 'sedan'
+  entity, but no verifiable references were found supporting its use. All searches
+  for the specific filename '2024 Audi A3 8Y Sedan IMG 1019.jpg' returned either 404
+  errors or zero results. Wikimedia image pages have unpredictable URLs, and attempts
+  to locate the file on Commons or via external searches failed. No source was successfully
+  fetched that could confirm the file's existence or relevance. The absence of accessible,
+  citable evidence means the claim cannot be confirmed nor definitively refuted.
+rcid: null
+revid: 2471361616
+sources: []
+timestamp: '2026-04-07T07:39:41.095777+00:00'
+title: Q190578
+turns: 15
+value_label: null
+verdict: unverifiable

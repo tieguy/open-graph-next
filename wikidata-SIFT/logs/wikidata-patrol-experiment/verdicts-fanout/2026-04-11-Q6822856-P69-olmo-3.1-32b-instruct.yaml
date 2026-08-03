@@ -1,0 +1,32 @@
+completion_tokens: 1822
+cost_usd: 0.0039136
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14102
+property: P69
+property_label: educated at
+rationale: The claim that Chaim Domi was educated at Hebrew Reali School was not supported
+  by any references in Wikidata and is not confirmed by independent reliable sources
+  such as the Hebrew Wikipedia or the IDF profile. Therefore, removing this unsourced
+  claim is appropriate.
+rcid: 2550252704
+revid: 2473593753
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://he.wikipedia.org/wiki/חיים_דומי
+- provenance: verified
+  supports_claim: false
+  url: https://www.idf.il/89-24888-He/English/AboutUs/Personalities/Pages/Chaim%20Domi.aspx
+- provenance: reported
+  supports_claim: false
+  url: https://www.etzchaim.net/learning/religious-school/
+- provenance: reported
+  supports_claim: false
+  url: https://www.templeetzchaim.org/learn/religious-school/
+timestamp: '2026-04-11T11:01:48.933430+00:00'
+title: Q6822856
+turns: 1
+value_label: Hebrew Reali School
+verdict: verified-high

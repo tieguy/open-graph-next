@@ -1,0 +1,29 @@
+completion_tokens: 2963
+cost_usd: 0.0069006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 67899
+property: P41
+property_label: flag image
+rationale: The edit changes the flag image for Alatskivi Rural Municipality from 'Alatskivi
+  valla lipp.png' to 'Flag of Alatskiv Parish.svg'. While both files exist on Wikimedia
+  Commons, neither source explicitly confirms which is the official flag. The new
+  value contains a spelling error ('Alatskiv' instead of 'Alatskivi') and lacks independent
+  verification from official or authoritative sources. The old value remains a plausible
+  and historically sourced option, but the new value's correctness cannot be confirmed
+  due to insufficient evidence.
+rcid: 2551422286
+revid: 2474723740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Alatskivi_valla_lipp.png
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Flag_of_Alatskiv_Parish.svg
+timestamp: '2026-04-11T10:00:10.378205+00:00'
+title: Q1446420
+turns: 5
+value_label: null
+verdict: unverifiable

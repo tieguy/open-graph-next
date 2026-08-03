@@ -1,0 +1,42 @@
+completion_tokens: 2359
+cost_usd: 0.0053671
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46594
+property: P1477
+property_label: birth name
+rationale: All consulted sources consistently state that Feid's real name is Salomón
+  Villada Hoyos, contradicting the claim that his birth name is 'Martin Chaski Hoyos'.
+rcid: 2540938475
+revid: 2464728082
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.latinolife.co.uk/articles/feid
+- provenance: verified
+  supports_claim: false
+  url: https://www.billboard.com/music/latin/feid-ferxxo-name-colombian-slang-explainer-1235282854/
+- provenance: verified
+  supports_claim: false
+  url: https://caplinnews.fiu.edu/colombian-artist-feid-world-tour-hard-rock-stadium/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sportingnews.com/us/soccer/news/who-feid-reggaeton-copa-america-2024-opening-ceremony-performer/a6a5ea549ef082056f34e915
+- provenance: verified
+  supports_claim: false
+  url: https://www.vipnation.com/artist/feid
+- provenance: verified
+  supports_claim: false
+  url: https://hollywoodlife.com/2024/07/03/5-things-about-colombian-artist-feid/
+- provenance: verified
+  supports_claim: false
+  url: https://en.softonic.com/articles/who-is-feid-this-is-the-life-of-the-artist-of-the-moment
+- provenance: verified
+  supports_claim: false
+  url: https://www.billboard.com/music/latin/feid-billboard-latin-artist-on-the-rise-7800962/
+timestamp: '2026-02-20T16:13:03.235937+00:00'
+title: Q29649988
+turns: 3
+value_label: null
+verdict: incorrect

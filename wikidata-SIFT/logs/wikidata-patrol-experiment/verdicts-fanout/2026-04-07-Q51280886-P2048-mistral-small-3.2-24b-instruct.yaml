@@ -1,0 +1,22 @@
+completion_tokens: 691
+cost_usd: 0.00349431875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36836
+property: P2048
+property_label: height
+rationale: The only cited reference for the height claim is unreachable, and independent
+  searches did not yield any conclusive evidence to confirm or deny the claim. Therefore,
+  the verdict is unverifiable.
+rcid: 2550317616
+revid: 2473657207
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://superstarsbio.com/bios/maria-pedraza/
+timestamp: '2026-04-07T11:06:01.879484+00:00'
+title: Q51280886
+turns: 5
+value_label: null
+verdict: unverifiable

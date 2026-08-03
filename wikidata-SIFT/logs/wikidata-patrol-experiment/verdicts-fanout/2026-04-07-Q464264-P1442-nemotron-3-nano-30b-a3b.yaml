@@ -1,0 +1,24 @@
+completion_tokens: 1201
+cost_usd: 0.0067779500000000005
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 130755
+property: P1442
+property_label: image of grave
+rationale: No sources were successfully fetched to verify the claim about 'La Masia
+  - Centre de Formação Oriol Tort 01.jpg' being Rosalía de Castro's grave image. Searches
+  found no evidence linking this image to her burial in Adina Cemetery, and discrepancies
+  exist between the image name and known burial location. Without direct verification,
+  the claim remains unverifiable.
+rcid: 2549245361
+revid: 2472616703
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Rosal%C3%ADa_de_Castro
+timestamp: '2026-04-07T07:28:05.372324+00:00'
+title: Q464264
+turns: 11
+value_label: null
+verdict: unverifiable

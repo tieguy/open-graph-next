@@ -1,0 +1,31 @@
+completion_tokens: 1560
+cost_usd: 0.00199095625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16343
+property: P495
+property_label: country of origin
+rationale: The claim that the Basque Country is the correct updated country of origin
+  for the Spanish omelette is supported by primary sources. The article from euskalkazeta.com
+  states that the origin of the potato omelet may be Basque, and the article from
+  spainonafork.com describes tortilla de bacalao as a famous omelet from the Basque
+  Country. However, it is important to note that the dish is also widely recognized
+  as a national dish of Spain, indicating a broader origin within Spain.
+rcid: null
+revid: 2471446683
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://euskalkazeta.com/basque-recipe-tortilla-de-patatas/
+- provenance: verified
+  supports_claim: true
+  url: https://spainonafork.com/the-famous-omelet-from-the-basque-country-tortilla-de-bacalao/
+- provenance: verified
+  supports_claim: false
+  url: https://spanishsabores.com/best-spanish-omelet-recipe/
+timestamp: '2026-04-10T11:26:30.949061+00:00'
+title: Q281751
+turns: 1
+value_label: Basque Country
+verdict: verified-high

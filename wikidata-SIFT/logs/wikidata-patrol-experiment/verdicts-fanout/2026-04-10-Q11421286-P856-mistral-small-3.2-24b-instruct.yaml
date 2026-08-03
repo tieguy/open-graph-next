@@ -1,0 +1,26 @@
+completion_tokens: 1430
+cost_usd: 0.008101012500000001
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 81603
+property: P856
+property_label: official website
+rationale: The GRID ID reference does not directly support the claim, and independent
+  searches did not yield any direct confirmation of the URL as the official website.
+  The fetched content from a related medical center's website also does not mention
+  the URL.
+rcid: 2550867542
+revid: 2474191023
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.grid.ac/institutes/grid.416698.4
+- provenance: verified
+  supports_claim: false
+  url: https://hokkaido-mc.hosp.go.jp/english.html
+timestamp: '2026-04-10T09:47:59.255882+00:00'
+title: Q11421286
+turns: 6
+value_label: null
+verdict: unverifiable

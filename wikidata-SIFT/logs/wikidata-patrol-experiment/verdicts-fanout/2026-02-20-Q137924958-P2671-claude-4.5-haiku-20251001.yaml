@@ -1,0 +1,36 @@
+completion_tokens: 2877
+cost_usd: 0.260938
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 246553
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: While Manvik Chandra is confirmed to be a real child artist and author
+  with a published book 'Student Life' (verified through Google Books), the Google
+  Knowledge Graph ID /g/11x_1wz8m8 cannot be independently verified. The ID follows
+  the correct format per Wikidata's documented constraint pattern, but Google Knowledge
+  Graph IDs are not publicly discoverable through standard web search or accessible
+  APIs without authentication. The referenced personal website (https://www.sites.google.com/view/manvikchandra)
+  exists but provides no Knowledge Graph ID information. No external sources directly
+  confirm or contradict this specific ID assignment.
+rcid: 2540953516
+revid: 2464742009
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Student_Life.html?id=JnWgEQAAQBAJ
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P2671
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/books/details/Manvik_Chandra_Student_Life?id=JnWgEQAAQBAJ
+timestamp: '2026-02-20T07:51:55.134992+00:00'
+title: Q137924958
+turns: 15
+value_label: null
+verdict: unverifiable

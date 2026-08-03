@@ -1,0 +1,31 @@
+completion_tokens: 1584
+cost_usd: 0.0050074
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20285
+property: P39
+property_label: position held
+rationale: The edit claims that Louis of Meissen held the position of 'Roman Catholic
+  Bishop of Halberstadt' from 1374 to 1381. However, multiple independent and reliable
+  sources—including the Catholic Hierarchy, English Wikipedia, and Deutsche Biographie—state
+  that Louis of Meissen was Bishop of Halberstadt only until 1366, after which he
+  was transferred to the see of Bamberg. There is no evidence to support that he resumed
+  or held the Halberstadt bishopric after 1366, making the added claim factually incorrect.
+rcid: 2550979675
+revid: 2474298977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/diocese/dh521.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Louis_of_Meissen
+- provenance: verified
+  supports_claim: false
+  url: https://www.deutsche-biographie.de/sfz54766.html
+timestamp: '2026-04-10T13:24:27.364250+00:00'
+title: Q472584
+turns: 1
+value_label: Roman Catholic Bishop of Halberstadt
+verdict: incorrect

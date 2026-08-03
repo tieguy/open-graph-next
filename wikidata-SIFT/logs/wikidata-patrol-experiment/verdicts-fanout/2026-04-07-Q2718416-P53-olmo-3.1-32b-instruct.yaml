@@ -1,0 +1,21 @@
+completion_tokens: 1489
+cost_usd: 0.0130814
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 60940
+property: P53
+property_label: family
+rationale: The edit replaces the established family/dynasty of Hugh Roe O'Donnell
+  with a geographic location, which is semantically inappropriate for the 'family'
+  property (P53). No references or independent sources support this change. All available
+  biographical information identifies Hugh Roe O'Donnell as a member of the O'Donnell
+  dynasty, not as the 'family' of O'Donnells Island.
+rcid: 2549953091
+revid: 2473304559
+sources: []
+timestamp: '2026-04-07T09:58:38.402420+00:00'
+title: Q2718416
+turns: 10
+value_label: O'Donnells Island
+verdict: incorrect

@@ -1,0 +1,22 @@
+completion_tokens: 574
+cost_usd: 0.00873646875
+diff_type: qualifier_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 103822
+property: P1411
+property_label: nominated for
+rationale: The claim is referenced by Wikipedia, but Wikipedia is not a valid source
+  for Wikidata. The official Oscars website is blocked and cannot be accessed for
+  verification. No other sources could be found to confirm or deny the claim.
+rcid: 2550487242
+revid: 2473823040
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/91st_Academy_Awards
+timestamp: '2026-04-07T12:24:58.361375+00:00'
+title: Q29413105
+turns: 15
+value_label: International Submission to the Academy Awards
+verdict: unverifiable

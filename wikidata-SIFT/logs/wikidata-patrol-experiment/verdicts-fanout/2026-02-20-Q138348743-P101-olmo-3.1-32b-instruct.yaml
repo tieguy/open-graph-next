@@ -1,0 +1,28 @@
+completion_tokens: 848
+cost_usd: 0.005216
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23536
+property: P101
+property_label: field of work
+rationale: The edit claims that Carlos Augusto Tavares Junior's field of work is 'media
+  studies.' The ORCID page confirms affiliation with the University of São Paulo but
+  does not specify the field of work. The cited Lattes profile could not be fetched
+  due to a CAPTCHA barrier, so the supporting evidence is inaccessible. No independent,
+  accessible sources confirm the field of work as 'media studies.' Therefore, the
+  claim is unverifiable based on available evidence.
+rcid: 2540940034
+revid: 2464729609
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0003-0868-0760
+- provenance: reported
+  supports_claim: false
+  url: http://lattes.cnpq.br/5987225961848965
+timestamp: '2026-02-20T15:19:05.710306+00:00'
+title: Q138348743
+turns: 3
+value_label: media studies
+verdict: unverifiable

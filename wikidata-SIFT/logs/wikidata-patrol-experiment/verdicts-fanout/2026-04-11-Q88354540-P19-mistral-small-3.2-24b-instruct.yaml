@@ -1,0 +1,30 @@
+completion_tokens: 1493
+cost_usd: 0.002539625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23108
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Sara García Alonso was born in
+  León, not Santiago. The removed claim of Santiago as the place of birth is incorrect.
+rcid: null
+revid: 2471059626
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: true
+  url: https://www.upv.es/noticias-upv/noticia-15191-sara-garcia-al-en.html
+- provenance: verified
+  supports_claim: true
+  url: https://efeminista.com/orbitas-primer-libro-astronauta-sara-garcia/
+- provenance: verified
+  supports_claim: true
+  url: https://www.leonoticias.com/cultura/sara-garcia-alonso-astronauta-leonesa_12345.html
+timestamp: '2026-04-11T13:16:32.925023+00:00'
+title: Q88354540
+turns: 1
+value_label: Santiago
+verdict: verified-high

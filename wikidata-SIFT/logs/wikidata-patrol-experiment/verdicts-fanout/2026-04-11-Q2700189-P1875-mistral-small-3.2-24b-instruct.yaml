@@ -1,0 +1,32 @@
+completion_tokens: 1040
+cost_usd: 0.011557156249999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 120503
+property: P1875
+property_label: represented by
+rationale: The removal of Marjan Sterk Fine Art Jewellery as represented by for Suzanne
+  Belperron is incorrect. The page https://hedendaagsesieraden.nl/2024/06/23/marjan-sterk-fine-art-jewellery/
+  lists Suzanne Belperron among the jewelers presented by Marjan Sterk Fine Art Jewellery,
+  indicating that they do represent Suzanne Belperron's work.
+rcid: 2550307776
+revid: 2473647568
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hedendaagsesieraden.nl/2024/06/23/marjan-sterk-fine-art-jewellery/
+- provenance: verified
+  supports_claim: false
+  url: https://www.marjansterk.com/jewellery/product/suzanne-belperron-bracelet/
+- provenance: verified
+  supports_claim: false
+  url: https://www.marjansterk.com/jewellery/
+- provenance: verified
+  supports_claim: false
+  url: https://www.marjansterk.com/jewellery/maker/jar-en/
+timestamp: '2026-04-11T10:36:23.106867+00:00'
+title: Q2700189
+turns: 8
+value_label: Marjan Sterk Fine Art Jewellery
+verdict: incorrect

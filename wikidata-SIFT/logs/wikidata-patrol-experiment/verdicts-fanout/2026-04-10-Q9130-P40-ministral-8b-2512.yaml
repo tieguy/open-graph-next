@@ -1,0 +1,39 @@
+completion_tokens: 2259
+cost_usd: 0.009012629999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 84872
+property: P40
+property_label: child
+rationale: The edit incorrectly changes the child of Erwin Schrödinger from the well-documented
+  name 'Ruth Braunizer' to the generic name 'Ruth'. Multiple verified sources confirm
+  that Schrödinger's daughter was named 'Ruth Braunizer', born to Hilde March. The
+  name 'Ruth' alone is insufficient and does not reflect the accurate identity of
+  the child as documented in historical records.
+rcid: 2550564108
+revid: 2473896730
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bookofproofs.github.io/history/19th-century/schrodinger.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.newworldencyclopedia.org/entry/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: false
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Schrodinger/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidoc.org/index.php/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: true
+  url: https://www.npr.org/sections/13.7/2015/05/24/409194643/pinning-down-one-scientists-legacy
+- provenance: verified
+  supports_claim: true
+  url: https://kulturpool.at/en/content/brenner-forum-schroedinger
+timestamp: '2026-04-10T13:44:38.257153+00:00'
+title: Q9130
+turns: 3
+value_label: Ruth
+verdict: incorrect

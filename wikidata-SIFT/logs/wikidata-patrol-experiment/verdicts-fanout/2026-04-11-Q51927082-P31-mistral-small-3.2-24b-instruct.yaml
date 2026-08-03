@@ -1,0 +1,26 @@
+completion_tokens: 1979
+cost_usd: 0.0031711375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30404
+property: P31
+property_label: instance of
+rationale: The edit changes the instance of property from 'short film' to 'film' without
+  any supporting evidence. Given that 'short film' is a more specific category of
+  'film,' changing it to a more general category without any supporting evidence is
+  not justified. Therefore, the edit appears to be incorrect.
+rcid: 2550557183
+revid: 2473890032
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/culture/the-front-row/the-drama-is-one-long-troll
+- provenance: verified
+  supports_claim: false
+  url: https://www.rogerebert.com/reviews/crooked-house-2017
+timestamp: '2026-04-11T09:19:54.214823+00:00'
+title: Q51927082
+turns: 3
+value_label: film
+verdict: incorrect

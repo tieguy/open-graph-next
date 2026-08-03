@@ -1,0 +1,38 @@
+completion_tokens: 2104
+cost_usd: 0.03057551
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 120775
+property: P452
+property_label: industry
+rationale: The claim that Institut für limbische Kommunikation und Strategie GmbH
+  operates in the market research industry is strongly supported by multiple independent
+  sources. The company's official website states it has been engaged in market research
+  for over 10 years and provides market research services. Official commercial registry
+  entries list its purpose as conducting market, communication, and social research
+  studies, and specifically classify it under 'Durchführung von Markt- und Meinungsforschung'
+  (conducting market and opinion research). The founder's professional profile also
+  describes the company as providing online market research services. However, the
+  edit only includes a retrieval date reference without a supporting URL, which is
+  insufficient for proper Wikidata referencing.
+rcid: 2540918444
+revid: 2464709626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.iflk.ch
+- provenance: verified
+  supports_claim: true
+  url: https://www.xing.com/profile/Ursula_Kaspar3
+- provenance: verified
+  supports_claim: true
+  url: https://www.northdata.de/Institut%20f%C3%BCr%20limbische%20Kommunikation%20und%20Strategie%20GmbH,%20Z%C3%BCrich/CHE-276.195.210
+- provenance: verified
+  supports_claim: true
+  url: https://www.moneyhouse.ch/de/company/institut-fuer-limbische-kommunikation-und-str-21178345071
+timestamp: '2026-02-21T02:27:27.060309+00:00'
+title: Q138337434
+turns: 13
+value_label: market research
+verdict: verified-high

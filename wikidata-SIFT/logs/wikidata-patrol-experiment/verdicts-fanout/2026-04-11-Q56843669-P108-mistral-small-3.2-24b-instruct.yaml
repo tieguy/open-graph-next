@@ -1,0 +1,21 @@
+completion_tokens: 935
+cost_usd: 0.0041518125
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41119
+property: P108
+property_label: employer
+rationale: The fetched page from the University of Regensburg confirms that Florian
+  Hartig is a W2 Professor there since 2016, which supports the employer claim.
+rcid: 2550568458
+revid: 2473900851
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig/team/prof-dr-florian-hartig
+timestamp: '2026-04-11T08:47:35.339342+00:00'
+title: Q56843669
+turns: 4
+value_label: University of Regensburg
+verdict: verified-high

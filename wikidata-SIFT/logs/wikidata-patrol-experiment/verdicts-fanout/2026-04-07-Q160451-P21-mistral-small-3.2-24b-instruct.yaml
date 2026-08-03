@@ -1,0 +1,26 @@
+completion_tokens: 361
+cost_usd: 0.005767441250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60488
+property: P21
+property_label: sex or gender
+rationale: The claim that Luigi Nono is a 'therian' is not supported by any reliable
+  sources. Luigi Nono is widely recognized as a male composer, and there is no evidence
+  to suggest otherwise. The claim appears to be incorrect and contradicts general
+  knowledge about Luigi Nono.
+rcid: null
+revid: 2470542662
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Luigi_Nono
+- provenance: verified
+  supports_claim: false
+  url: https://www.bnf.fr
+timestamp: '2026-04-07T09:12:18.438436+00:00'
+title: Q160451
+turns: 4
+value_label: therian
+verdict: incorrect

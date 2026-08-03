@@ -1,0 +1,30 @@
+completion_tokens: 2577
+cost_usd: 0.00421587
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34950
+property: P856
+property_label: official website
+rationale: The old official website value, `https://www.city.uozu.toyama.jp/`, is
+  strongly supported by multiple verified sources, including Toyama Prefecture's open
+  data portal and municipal references. The new value, `https://www.aeromexico.com/`,
+  is unrelated to Uozu and lacks any evidence of legitimacy as the city's official
+  website. The change is incorrect and should be reverted.
+rcid: null
+revid: 2471397246
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://linkdata.org/work/rdf1s7929i
+- provenance: verified
+  supports_claim: true
+  url: http://www.pref.toyama.jp/sections/1015/lib/jinko/index.html
+- provenance: verified
+  supports_claim: true
+  url: https://visit-toyama-japan.com/en/places-to-go/51090
+timestamp: '2026-04-11T12:59:47.076895+00:00'
+title: Q819613
+turns: 2
+value_label: null
+verdict: incorrect

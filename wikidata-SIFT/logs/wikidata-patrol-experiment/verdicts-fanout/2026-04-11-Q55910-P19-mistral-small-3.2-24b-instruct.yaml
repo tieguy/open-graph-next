@@ -1,0 +1,28 @@
+completion_tokens: 761
+cost_usd: 0.00268564
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30769
+property: P19
+property_label: place of birth
+rationale: Multiple verified sources confirm that Jerzy Buzek was born in Smilovice,
+  Czechoslovakia (now the Protectorate of Bohemia and Moravia). The edit correctly
+  updates the qualifier for the place of birth to reflect the historical context.
+rcid: null
+revid: 2470226363
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Jerzy_Buzek
+- provenance: verified
+  supports_claim: true
+  url: https://historica.fandom.com/wiki/Jerzy_Buzek
+- provenance: verified
+  supports_claim: true
+  url: https://historicalarchives.europarl.europa.eu/en/presidents/jerzy-buzek
+timestamp: '2026-04-11T14:29:58.138823+00:00'
+title: Q55910
+turns: 1
+value_label: Smilovice
+verdict: verified-high

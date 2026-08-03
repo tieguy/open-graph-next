@@ -1,0 +1,29 @@
+completion_tokens: 1552
+cost_usd: 0.0033064
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11876
+property: P136
+property_label: genre
+rationale: The edit did not change the value of the 'genre' property for Stabbing
+  Westward; both the old and new values are 'industrial rock'. Multiple independent
+  and primary sources confirm this genre classification. Since there was no factual
+  change and no improvement to sourcing or structure, the edit is plausible but unnecessary.
+rcid: 2550849827
+revid: 2474173593
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Stabbing_Westward
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/stabbing-westward-mn0000023526
+- provenance: verified
+  supports_claim: true
+  url: https://www.stabbingwestward.com/
+timestamp: '2026-04-11T16:40:49.514112+00:00'
+title: Q939556
+turns: 1
+value_label: industrial rock
+verdict: plausible

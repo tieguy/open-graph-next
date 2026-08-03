@@ -1,0 +1,25 @@
+completion_tokens: 2027
+cost_usd: 0.0026728499999999996
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34890
+property: P734
+property_label: family name
+rationale: The claim of 'Valverde' as a family name for Enrique Obregón Valverde (Q16562277)
+  could not be verified due to the absence of references attached to the removed claim
+  and the inability to access or extract meaningful information from the prefetched
+  sources. No independent, verified sources were found to confirm or deny the validity
+  of 'Valverde' as a family name. The item's label includes 'Valverde,' but without
+  further evidence, the removal cannot be justified or disproven.
+rcid: 2551109157
+revid: 2474424804
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gw.geneanet.org/mdelcastillo?lang=en&n=obregon+valverde&oc=0&p=enrique
+timestamp: '2026-04-11T06:50:46.830552+00:00'
+title: Q16562277
+turns: 5
+value_label: Valverde
+verdict: unverifiable

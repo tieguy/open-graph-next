@@ -1,0 +1,34 @@
+completion_tokens: 1888
+cost_usd: 0.0033448
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11060
+property: P6375
+property_label: street address
+rationale: Multiple independent and authoritative sources, including the official
+  Vienna tourism website (wien.info), TripAdvisor, and Booking.com, explicitly list
+  the address 'Mariahilfer Gürtel 22–24, 1060 Wien' for Ibis Wien Mariahilf. The added
+  reference to the hotel's own website is likely authoritative but could not be fetched
+  in this session. However, the address claim is correct and strongly supported by
+  independent evidence.
+rcid: 2550325433
+revid: 2473664898
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wien.info/en/ibis-wien-mariahilf-162062
+- provenance: verified
+  supports_claim: true
+  url: https://www.tripadvisor.com/Hotel_Review-g188147-d19123122-Reviews-Ibis_Wien_Mariahilf-Vienna_Vienna_Region.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.booking.com/hotel/at/ibiswienmariahilf.html
+- provenance: reported
+  supports_claim: null
+  url: https://ibis-wien-mariahilf.meinhotel.top/
+timestamp: '2026-04-11T16:28:09.476979+00:00'
+title: Q111410471
+turns: 1
+value_label: null
+verdict: verified-high

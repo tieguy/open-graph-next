@@ -1,0 +1,32 @@
+completion_tokens: 1631
+cost_usd: 0.00107691
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 11744
+property: P3984
+property_label: subreddit
+rationale: The claim that 'eSIMs' is a subreddit is factually incorrect. The only
+  relevant subreddit is 'r/eSIMs', which was not referenced. The newly added references
+  (strongesim.com and simpulse.uk) are eSIM service providers and do not support the
+  subreddit claim. The edit is unsupported and incorrect.
+rcid: null
+revid: 2472565257
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/eSIMs/
+- provenance: verified
+  supports_claim: false
+  url: https://www.usmobile.com/esim
+- provenance: reported
+  supports_claim: false
+  url: https://strongesim.com/
+- provenance: reported
+  supports_claim: false
+  url: https://simpulse.uk
+timestamp: '2026-04-11T10:11:42.887541+00:00'
+title: Q56315412
+turns: 1
+value_label: null
+verdict: incorrect

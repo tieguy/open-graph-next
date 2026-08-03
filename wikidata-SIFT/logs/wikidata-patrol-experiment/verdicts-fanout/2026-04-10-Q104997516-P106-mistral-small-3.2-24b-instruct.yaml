@@ -1,0 +1,26 @@
+completion_tokens: 1164
+cost_usd: 0.00377545625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38794
+property: P106
+property_label: occupation
+rationale: The removed claim had no references. Independent sources confirm Evi Vatidou's
+  occupations as a model, television presenter, beauty pageant contestant, and judge.
+  No independent sources confirm her occupation as an actor. Therefore, the removal
+  of "actor" as an occupation is justified.
+rcid: 2550561811
+revid: 2473894481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://networthpost.org/net-worth/evi-vatidou-net-worth/
+- provenance: verified
+  supports_claim: false
+  url: https://en.famagusta.news/lifestyle/celebrities/se-vary-penthos-i-evi-vatidou-i-megali-a/
+timestamp: '2026-04-10T14:13:11.027489+00:00'
+title: Q104997516
+turns: 5
+value_label: actor
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 780
+cost_usd: 0.00084355
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 13751
+property: P106
+property_label: occupation
+rationale: Could not verify occupation change due to inaccessible references. Original
+  citation active but timeout occurred; retrieved National Gallery record silent on
+  occupation. No credible source confirms 'tapissier' role for this specific attribution.
+rcid: 2549597016
+revid: 2472959052
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+- provenance: verified
+  supports_claim: false
+  url: https://www.admagazine.com/cultura/maria-izquierdo-lo-que-no-sabias-de-la-pintora-surrealista-20200406-6229-articulos
+- provenance: verified
+  supports_claim: false
+  url: https://library.nga.gov/permalink/01NGA_INST/1cl1g8d/alma994127255604896
+timestamp: '2026-04-07T07:01:17.381821+00:00'
+title: Q461937
+turns: 1
+value_label: tapissier
+verdict: unverifiable

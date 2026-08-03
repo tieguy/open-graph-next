@@ -1,0 +1,31 @@
+completion_tokens: 1958
+cost_usd: 0.061246999999999996
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 51457
+property: P856
+property_label: official website
+rationale: The official website claim is well-supported by two independent sources.
+  First, the website itself (https://www.team-building-paca.fr/) was successfully
+  fetched and contains legitimate business content describing Team Building PACA's
+  services, activities, and operations in Provence. Second, RocketReach, a reputable
+  third-party business intelligence database, independently confirms this URL as the
+  official website for Team-Building Provence. The website content and company location
+  (Cavaillon) align with other verified claims in the Wikidata item. Although the
+  primary reference is self-referential, independent corroboration from a business
+  directory provides strong confidence in the claim's accuracy.
+rcid: 2540937304
+revid: 2464727023
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+- provenance: verified
+  supports_claim: true
+  url: https://rocketreach.co/team-building-provence-email-format_b4175015ff8abc64
+timestamp: '2026-02-20T16:42:23.813551+00:00'
+title: Q138348741
+turns: 5
+value_label: null
+verdict: verified-high

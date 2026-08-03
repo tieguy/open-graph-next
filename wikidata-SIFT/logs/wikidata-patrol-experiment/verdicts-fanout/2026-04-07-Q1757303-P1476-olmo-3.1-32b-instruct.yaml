@@ -1,0 +1,30 @@
+completion_tokens: 1151
+cost_usd: 0.0083302
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38198
+property: P1476
+property_label: title
+rationale: The fetched music database entry (AllMusic) does not confirm the title
+  'Fuc You'. Authoritative third-party sources referenced in the Wikidata item (Rolling
+  Stone, NME) consistently use the title 'Fuck You'. No fetched authoritative source
+  supports the new value 'Fuc You', and there is no evidence of an official title
+  change.
+rcid: 2550745424
+revid: 2474071948
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmusic.com/album/fuck-you-mw0000141802
+- provenance: reported
+  supports_claim: false
+  url: https://web.archive.org/web/20120330062322/http://www.nme.com:80/news/lily-allen/43881
+- provenance: reported
+  supports_claim: false
+  url: https://web.archive.org/web/20100315154517/http://www.rollingstone.com/reviews/album/25574875/review/25885625
+timestamp: '2026-04-07T11:48:35.936906+00:00'
+title: Q1757303
+turns: 6
+value_label: null
+verdict: incorrect

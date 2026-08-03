@@ -1,0 +1,29 @@
+completion_tokens: 885
+cost_usd: 0.0060160000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27425
+property: P19
+property_label: place of birth
+rationale: All reliable and verified sources consulted consistently state that María
+  Blanchard was born in Santander, Spain. No independent source supports the claim
+  that her place of birth is San Marino. The change from 'Santander' to 'San Marino'
+  is therefore not supported by evidence and appears to be incorrect.
+rcid: 2549495530
+revid: 2472859948
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://awarewomenartists.com/en/artiste/maria-blanchard/
+- provenance: verified
+  supports_claim: true
+  url: https://collection.nationalmuseum.se/sv/artists/artist/8726
+- provenance: verified
+  supports_claim: true
+  url: https://www.leandro-navarro.com/maria-blanchard_biografia_eng.htm
+timestamp: '2026-04-11T18:24:37.320910+00:00'
+title: Q443779
+turns: 1
+value_label: San Marino
+verdict: incorrect

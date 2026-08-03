@@ -1,0 +1,27 @@
+completion_tokens: 719
+cost_usd: 0.005261200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24149
+property: P856
+property_label: official website
+rationale: The new value assigned to P856 (official website) for Narita is the website
+  of Jetstar, an airline, which is not related to the City of Narita. The previous
+  value was the official city website, confirmed by direct fetching. There is no evidence
+  that Jetstar.com is the official website for Narita City, and this change appears
+  to be an error.
+rcid: null
+revid: 2471590860
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.narita.chiba.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.jetstar.com/
+timestamp: '2026-04-11T14:44:43.877295+00:00'
+title: Q273798
+turns: 1
+value_label: null
+verdict: suspect

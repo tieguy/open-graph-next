@@ -1,0 +1,26 @@
+completion_tokens: 2323
+cost_usd: 0.00179823
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24040
+property: P846
+property_label: GBIF taxon ID
+rationale: The edit changes the GBIF taxon ID for Microceratops from '3238857' to
+  '3258613'. While the GBIF Discourse post clarifies the distinction between taxonKey
+  and TaxonID, the new value cannot be independently verified due to blocked access
+  to the GBIF pages for both IDs. No verified sources confirm the correctness of the
+  new taxonKey ('3258613') for Microceratops. The retrieval date update suggests a
+  potential attempt to reflect a recent change, but without direct verification, the
+  edit remains unverifiable.
+rcid: 2550734457
+revid: 2474061624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://discourse.gbif.org/t/what-is-int-in-the-species-api-is-it-taxonid-or-taxonkey-and-are-they-the-same-thing/3215
+timestamp: '2026-04-11T07:58:43.241706+00:00'
+title: Q2437631
+turns: 3
+value_label: null
+verdict: unverifiable

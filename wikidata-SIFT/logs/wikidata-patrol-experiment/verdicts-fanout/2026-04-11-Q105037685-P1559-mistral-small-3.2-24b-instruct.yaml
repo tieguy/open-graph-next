@@ -1,0 +1,29 @@
+completion_tokens: 1463
+cost_usd: 0.00448504
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62785
+property: P1559
+property_label: name in native language
+rationale: The new qualifier 'HIJO DE GOJO SATORU' for the name in native language
+  claim on Ryomen Sukuna does not appear to be supported by the available sources.
+  The search results did not yield any conclusive evidence to verify the accuracy
+  of this qualifier.
+rcid: null
+revid: 2471724158
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://jujutsu-kaisen.fandom.com/wiki/Sukuna
+- provenance: verified
+  supports_claim: false
+  url: https://sekaikokeshi.com/ryomensukunaname/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tumblr.com/luminescentauthor/637356797462757376/sukuna-mythology-kanji-meaning-jujutsu-kaisen
+timestamp: '2026-04-11T14:12:34.951247+00:00'
+title: Q105037685
+turns: 6
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1839
+cost_usd: 0.0020152200000000003
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29369
+property: P18
+property_label: image
+rationale: No verified sources were fetched or accessed during this investigation
+  due to persistent search errors. The removed image claim had no references attached,
+  and no independent sources were successfully consulted to confirm or deny its relevance
+  to Q3933851 (Dufek Coast). Without verified evidence, it is impossible to definitively
+  assess whether the removal was correct.
+rcid: 2549917621
+revid: 2473272106
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://detailedpedia.com/wiki-Dufek_Coast
+- provenance: reported
+  supports_claim: false
+  url: https://unsplash.com/s/photos/coast
+- provenance: reported
+  supports_claim: false
+  url: https://www.gettyimages.ca/photos/dufek_coast
+timestamp: '2026-04-11T12:32:04.868421+00:00'
+title: Q3933851
+turns: 4
+value_label: null
+verdict: unverifiable

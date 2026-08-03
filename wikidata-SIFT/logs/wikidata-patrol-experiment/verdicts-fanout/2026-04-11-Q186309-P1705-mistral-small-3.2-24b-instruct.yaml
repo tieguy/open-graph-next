@@ -1,0 +1,26 @@
+completion_tokens: 1568
+cost_usd: 0.00315288
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46902
+property: P1705
+property_label: native label
+rationale: The change from 'Madame Tussauds' to 's' is incorrect. The native label
+  'Madame Tussauds' is well-supported by multiple reliable sources, while 's' has
+  no evidence supporting it as the correct native label. The edit appears to be a
+  mistake or an attempt to vandalize the entry.
+rcid: null
+revid: 2471668312
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.goldentours.com/travelblog/facts-about-madame-tussaud-museum
+- provenance: verified
+  supports_claim: true
+  url: https://www.madametussauds.com/
+timestamp: '2026-04-11T14:31:01.597270+00:00'
+title: Q186309
+turns: 4
+value_label: null
+verdict: incorrect

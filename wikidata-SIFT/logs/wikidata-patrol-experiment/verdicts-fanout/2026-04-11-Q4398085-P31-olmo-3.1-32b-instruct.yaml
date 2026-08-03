@@ -1,0 +1,26 @@
+completion_tokens: 1662
+cost_usd: 0.0036414000000000004
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13221
+property: P31
+property_label: instance of
+rationale: Multiple authoritative and independently sourced descriptions confirm that
+  the Russian Quantum Center is a research organization, not a physical facility.
+  The previous instance of 'facility' was not supported by independent evidence and
+  was correctly removed.
+rcid: 2550560658
+revid: 2473893370
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Russian_Quantum_Center
+- provenance: verified
+  supports_claim: true
+  url: https://tadviser.com/index.php/Company:Russian_Quantum_Center_(RCC,_Russian_Quantum_Center,_RQC)
+timestamp: '2026-04-11T15:38:36.879410+00:00'
+title: Q4398085
+turns: 1
+value_label: facility
+verdict: verified-high

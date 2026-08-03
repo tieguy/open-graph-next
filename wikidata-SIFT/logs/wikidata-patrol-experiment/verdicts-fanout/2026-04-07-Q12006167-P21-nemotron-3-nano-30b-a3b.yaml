@@ -1,0 +1,21 @@
+completion_tokens: 616
+cost_usd: 0.0040548
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78632
+property: P21
+property_label: sex or gender
+rationale: No credible sources could be located regarding Thor Soltvedt's gender beyond
+  the Wikipedia annotation that based gender on probability. Norwegian sources were
+  searched extensively with no results confirming female sex, and without comprehensive
+  occupational or biographical sources from reputable Norwegian archives, the claim
+  cannot be verified or falsified.
+rcid: 2549612108
+revid: 2472973819
+sources: []
+timestamp: '2026-04-07T03:34:04.857537+00:00'
+title: Q12006167
+turns: 15
+value_label: female
+verdict: unverifiable

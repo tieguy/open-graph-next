@@ -1,0 +1,24 @@
+completion_tokens: 1688
+cost_usd: 0.0029276
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 9574
+property: P971
+property_label: category combines topics
+rationale: The category 'Category:UC Santa Barbara Gauchos men's volleyball coaches'
+  is specifically about volleyball coaches. The new 'category combines topics' value
+  'persons active in this association' is too broad and not supported by the category's
+  content or any cited sources. The previous value 'volleyball coach' is directly
+  relevant and accurate.
+rcid: 2550308138
+revid: 2473647927
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gauchos.com/sports/mens-volleyball/coaches
+timestamp: '2026-04-10T10:45:09.979286+00:00'
+title: Q117070834
+turns: 1
+value_label: persons active in this association
+verdict: suspect

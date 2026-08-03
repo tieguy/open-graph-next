@@ -1,0 +1,31 @@
+completion_tokens: 2005
+cost_usd: 0.0042702
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15336
+property: P108
+property_label: employer
+rationale: The claim that Florian Hartig's employer is the University of Regensburg
+  is supported by independent, verified sources (DBLP and ORCID), both of which list
+  his affiliation with the University of Regensburg since 2016. However, the specific
+  reference provided in the edit (the university department page) could not be fetched
+  and thus cannot be directly verified. Therefore, while the claim is substantiated
+  by reliable independent sources, the original citation is unverifiable.
+rcid: 2550568458
+revid: 2473900851
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://dblp.org/person/2115960/hartig_florian
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-6255-9059
+- provenance: unverifiable
+  supports_claim: null
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig
+timestamp: '2026-04-11T08:47:54.298810+00:00'
+title: Q56843669
+turns: 1
+value_label: University of Regensburg
+verdict: verified-low

@@ -1,0 +1,27 @@
+completion_tokens: 2649
+cost_usd: 0.0068499599999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 80893
+property: P569
+property_label: date of birth
+rationale: The new date of birth, '4 April 1941', is contradicted by the primary source
+  (`overleden.net`) which states the birth date as '1 January 1941'. The GND entry
+  (verified) only confirms the birth year (1941) without specifying the exact date.
+  No independent corroboration for the new value was found, making the change unsupported
+  by reliable evidence.
+rcid: 2551174151
+revid: 2474488135
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://overleden.net/xose-antonio-garcia-cotarelo-85-overleden-advocaat/
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/1026933765
+timestamp: '2026-04-11T15:14:48.798607+00:00'
+title: Q114258559
+turns: 8
+value_label: null
+verdict: suspect

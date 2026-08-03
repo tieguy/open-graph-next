@@ -1,0 +1,30 @@
+completion_tokens: 1329
+cost_usd: 0.004964
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20833
+property: P856
+property_label: official website
+rationale: The new value https://www.delta.com is not the official website of Niimi
+  city. Multiple primary sources, including the city's own homepage and third-party
+  directories, confirm that the official website is https://www.city.niimi.okayama.jp/.
+  The new value belongs to an unrelated entity and there is no evidence supporting
+  its use as an official city website. This appears to be an error or vandalism.
+rcid: null
+revid: 2471019911
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.niimi.okayama.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.delta.com/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Niimi,_Okayama
+timestamp: '2026-04-11T16:19:22.641560+00:00'
+title: Q873596
+turns: 1
+value_label: null
+verdict: incorrect

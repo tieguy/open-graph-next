@@ -1,0 +1,26 @@
+completion_tokens: 2116
+cost_usd: 0.00390099
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39763
+property: P6262
+property_label: Fandom article ID
+rationale: Both the old value ('scoobydoo:Humans') and the new value ('scoobydoo:Category:Humans')
+  were verified to be incorrect as neither the article nor the category exists on
+  the Scooby-Doo Fandom wiki. The edit does not improve the claim and should be reverted
+  or corrected to a valid, existing Fandom article ID.
+rcid: 2550752457
+revid: 2474078613
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://scoobydoo.fandom.com/wiki/Humans
+- provenance: verified
+  supports_claim: false
+  url: https://scoobydoo.fandom.com/wiki/Category:Humans
+timestamp: '2026-04-11T05:55:46.745814+00:00'
+title: Q117470136
+turns: 4
+value_label: null
+verdict: incorrect

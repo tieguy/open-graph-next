@@ -1,0 +1,19 @@
+completion_tokens: 887
+cost_usd: 0.0092298
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43488
+property: P27
+property_label: country of citizenship
+rationale: No references are provided for the change in country of citizenship. Multiple
+  web searches did not yield any accessible, reliable sources to confirm or deny the
+  update from Israel to Palestine. Therefore, the edit remains unverifiable.
+rcid: null
+revid: 2471750490
+sources: []
+timestamp: '2026-04-07T07:48:45.846598+00:00'
+title: Q106962786
+turns: 8
+value_label: Palestine
+verdict: unverifiable

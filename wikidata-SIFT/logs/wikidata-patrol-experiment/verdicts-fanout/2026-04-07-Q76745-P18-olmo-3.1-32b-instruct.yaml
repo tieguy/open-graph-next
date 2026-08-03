@@ -1,0 +1,26 @@
+completion_tokens: 1067
+cost_usd: 0.015544200000000001
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 74520
+property: P18
+property_label: image
+rationale: The image statement had no attached references and no independent authoritative
+  sources could be located to confirm the existence, copyright status, or appropriateness
+  of 'Theodor Schwann Litho.jpg'. Removal was reasonable in the absence of supporting
+  evidence, but the lack of corroborating information prevents a stronger verdict.
+rcid: 2549461755
+revid: 2472827040
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q76745
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Theodor+Schwann+Litho.jpg
+timestamp: '2026-04-07T08:41:24.550910+00:00'
+title: Q76745
+turns: 6
+value_label: null
+verdict: unverifiable

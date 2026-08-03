@@ -1,0 +1,31 @@
+completion_tokens: 1253
+cost_usd: 0.0056205625000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60993
+property: P25
+property_label: mother
+rationale: Multiple independent sources, including New World Encyclopedia, WikiTree,
+  Kiddle, and Mudabicara, consistently identify Sukirah as Suharto's mother. The evidence
+  strongly supports the claim.
+rcid: null
+revid: 2471122718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.newworldencyclopedia.org/entry/Suharto
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Sukirah-1
+- provenance: verified
+  supports_claim: true
+  url: https://kids.kiddle.co/Suharto
+- provenance: verified
+  supports_claim: true
+  url: https://mudabicara.com/en/biography-of-soeharto-2nd-president-of-indonesia/
+timestamp: '2026-04-10T00:19:12.519970+00:00'
+title: Q44819
+turns: 2
+value_label: Sukirah
+verdict: verified-high

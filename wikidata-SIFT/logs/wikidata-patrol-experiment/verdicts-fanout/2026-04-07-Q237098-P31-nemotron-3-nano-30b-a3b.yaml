@@ -1,0 +1,24 @@
+completion_tokens: 641
+cost_usd: 0.00718745
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 141185
+property: P31
+property_label: instance of
+rationale: No verifiable sources or independent corroboration could be found to confirm
+  or deny whether 'therian' is a correct instance of for Louise Labé. Standard search
+  strategies for Wikipedia, Wikidata, and scholarly literature yielded no relevant
+  results related to the definition, usage, or examples of 'therian' as a self-identified
+  category for Louise Labé. No primary or secondary sources describing this identity
+  were located through exhaustive searching. Without any publicly accessible documentation
+  of Louise Labé identifying as non-human animal, the claim remains unverifiable with
+  current evidence.
+rcid: null
+revid: 2471473740
+sources: []
+timestamp: '2026-04-07T04:59:32.577660+00:00'
+title: Q237098
+turns: 15
+value_label: therian
+verdict: unverifiable

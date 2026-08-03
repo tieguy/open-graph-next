@@ -1,0 +1,22 @@
+completion_tokens: 1225
+cost_usd: 0.0031284
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11967
+property: P691
+property_label: NL CR AUT ID
+rationale: The value 'ph117830' refers to a Philippine electoral district, not to
+  Moroccans or Morocco. There was no supporting reference for the original claim,
+  and its removal is therefore correct.
+rcid: 2550702324
+revid: 2474030410
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q117830
+timestamp: '2026-04-10T13:30:50.864977+00:00'
+title: Q1891793
+turns: 1
+value_label: null
+verdict: verified-high

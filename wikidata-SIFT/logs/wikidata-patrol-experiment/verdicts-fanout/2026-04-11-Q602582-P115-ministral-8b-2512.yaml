@@ -1,0 +1,25 @@
+completion_tokens: 1578
+cost_usd: 0.00356883
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34861
+property: P115
+property_label: home venue
+rationale: The new home venue, Villa Deportiva de la Universidad San Martín de Porres
+  (Q6162120), is explicitly confirmed by Transfermarkt, a reliable sports database.
+  The old venue, Estadio Alberto Gallardo (Q930349), lacks direct independent verification
+  in the prefetched data, but the new venue is strongly supported by a verified primary
+  source. The change aligns with the club's current context and is corroborated by
+  independent evidence.
+rcid: 2550689816
+revid: 2474018391
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/universidad-san-martin-de-porres/stadion/verein/11622
+timestamp: '2026-04-11T12:42:47.033250+00:00'
+title: Q602582
+turns: 3
+value_label: Villa Deportiva de la Universidad San Martín de Porres [es]
+verdict: verified-high

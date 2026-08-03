@@ -1,0 +1,32 @@
+completion_tokens: 2119
+cost_usd: 0.00170454
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16884
+property: P18
+property_label: image
+rationale: The sources consulted do not provide specific evidence to confirm or deny
+  the change from "Audi Q3 F3 DSC 7495.jpg" to "Audi Q3 FJ DSC 3763.jpg". The Dutch
+  Wikipedia reference could not be verified due to a connection error, and independent
+  sources do not provide clear evidence.
+rcid: 2550737772
+revid: 2474064888
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cardekho.com/carmodels/Audi/Audi_Q3
+- provenance: verified
+  supports_claim: false
+  url: https://www.carwale.com/audi-cars/q3/images/
+- provenance: verified
+  supports_claim: false
+  url: https://www.audi.de/de/neuwagen/q3/
+- provenance: verified
+  supports_claim: false
+  url: https://www.usnews.com/cars-trucks/audi/q3/photos-interior
+timestamp: '2026-04-11T14:16:41.633993+00:00'
+title: Q758768
+turns: 1
+value_label: null
+verdict: unverifiable

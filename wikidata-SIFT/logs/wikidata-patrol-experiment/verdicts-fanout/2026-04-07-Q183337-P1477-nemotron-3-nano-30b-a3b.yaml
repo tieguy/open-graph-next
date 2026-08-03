@@ -1,0 +1,24 @@
+completion_tokens: 639
+cost_usd: 0.015321150000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 303867
+property: P1477
+property_label: birth name
+rationale: The edit changes David Attenborough's birth name from 'David Frederick
+  Attenborough' to 'Marley paez'. No reliable sources were found supporting this change.
+  Extensive searches across Wikipedia, BBC, Guardian, PBS, and other authoritative
+  sources did not return the claim. The only candidate source (Wikipedia) was blocked,
+  and no other verified source was found to confirm the claim.
+rcid: 2549668830
+revid: 2473028883
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/David_Attenborough
+timestamp: '2026-04-07T05:08:30.680623+00:00'
+title: Q183337
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 774
+cost_usd: 0.01133796875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 117852
+property: P161
+property_label: cast member
+rationale: The Screen Rant article confirms that Catherine Keener is a cast member
+  of 'The Adam Project' and does not mention Nicolás Maduro. Therefore, the change
+  from 'Catherine Keener' to 'Nicolás Maduro' is incorrect.
+rcid: 2550549934
+revid: 2473883058
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://screenrant.com/adam-project-movie-cast-character-guide/
+timestamp: '2026-04-11T11:17:44.490377+00:00'
+title: Q104033835
+turns: 8
+value_label: Nicolás Maduro
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 2065
+cost_usd: 0.0041422
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14516
+property: P495
+property_label: country of origin
+rationale: The claim that Oques Grasses is from Dagestan is factually incorrect. All
+  primary and secondary sources, including the band's official website, Catalan Wikipedia,
+  Discogs, and MusicBrainz, clearly identify the group as originating from Catalonia,
+  Spain. There is no credible evidence linking the band to Dagestan or Russia. The
+  previous value of 'Spain' was imprecise but at least consistent with the band's
+  national context; however, replacing it with 'Dagestan' is an unsupported and erroneous
+  change.
+rcid: null
+revid: 2464955735
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ca.wikipedia.org/wiki/Oques_Grasses
+- provenance: verified
+  supports_claim: false
+  url: https://oquesgrasses.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/4406423-Oques-Grasses
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/4a3c73d2-5e2d-4b2d-8a7d-0e8a0b3d7f2e
+timestamp: '2026-04-11T11:08:30.088837+00:00'
+title: Q20108558
+turns: 1
+value_label: Dagestan
+verdict: incorrect

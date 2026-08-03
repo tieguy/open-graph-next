@@ -1,0 +1,20 @@
+completion_tokens: 1351
+cost_usd: 0.028408399999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 137989
+property: P742
+property_label: pseudonym
+rationale: The only cited reference for the pseudonym change could not be accessed
+  for verification. No authoritative source was found that establishes 'Dame Julie
+  Andrews' as Julie Andrews' official pseudonym. Therefore, the claim cannot be confirmed
+  or denied based on verifiable evidence.
+rcid: null
+revid: 2471416401
+sources: []
+timestamp: '2026-04-07T08:54:13.409760+00:00'
+title: Q161819
+turns: 9
+value_label: null
+verdict: unverifiable

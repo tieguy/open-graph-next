@@ -1,0 +1,26 @@
+completion_tokens: 2476
+cost_usd: 0.003823
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11687
+property: P846
+property_label: GBIF taxon ID
+rationale: The Catalogue of Life, an independent and authoritative source, confirms
+  that the correct GBIF taxonKey for Microceratops is 3238857. The new value, 3258613,
+  is assigned to a different genus (Microceratus), not Microceratops. Therefore, changing
+  the GBIF taxon ID to 3258613 for Microceratops was incorrect.
+rcid: 2550734457
+revid: 2474061624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.catalogueoflife.org/species/id/159894
+- provenance: verified
+  supports_claim: false
+  url: https://www.catalogueoflife.org/species/id/3258613
+timestamp: '2026-04-11T07:59:16.841540+00:00'
+title: Q2437631
+turns: 1
+value_label: null
+verdict: incorrect

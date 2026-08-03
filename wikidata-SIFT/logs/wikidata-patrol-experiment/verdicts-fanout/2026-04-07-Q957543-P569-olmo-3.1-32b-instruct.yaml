@@ -1,0 +1,30 @@
+completion_tokens: 925
+cost_usd: 0.04453240000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 219887
+property: P569
+property_label: date of birth
+rationale: The edit claims Ernest Shackleton's date of birth as 15 February 1873.
+  However, no independently fetched and verified source could be consulted to confirm
+  this date within the investigation due to technical issues accessing cited references.
+  Widely recognized historical sources generally list his birth date as 15 February
+  1874, but without direct verification from a fetched source, the claim remains unverified.
+rcid: null
+revid: 2465968204
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ernest_Shackleton
+- provenance: reported
+  supports_claim: null
+  url: http://www.bbc.co.uk/history/historic_figures/shackleton_ernest.shtml
+- provenance: reported
+  supports_claim: null
+  url: https://www.geographicus.com/P/RareMaps/shackleton
+timestamp: '2026-04-07T04:38:21.883638+00:00'
+title: Q957543
+turns: 14
+value_label: null
+verdict: unverifiable

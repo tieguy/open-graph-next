@@ -1,0 +1,31 @@
+completion_tokens: 1641
+cost_usd: 0.00547032
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44249
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changed Luís Figo's instance of (P31) from 'human'
+  (Q5) to 'pig' (Q787). The cited reference (datos.bne.es) does not support this claim
+  and is unrelated to biological classification. Independent verified sources (BBC,
+  Yahoo Sports, Givemesport) confirm Luís Figo is a human and describe the pig's head
+  incident as a symbolic protest, not a biological classification. The new value is
+  unsupported by credible evidence.
+rcid: 2551322580
+revid: 2474630051
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sports.yahoo.com/watch-sickening-luis-figo-pig-090500492.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/sport/football/45956352
+- provenance: verified
+  supports_claim: false
+  url: https://www.givemesport.com/barcelona-fans-pigs-head-luis-figo-michel-salgado/
+timestamp: '2026-04-11T18:16:27.641341+00:00'
+title: Q483145
+turns: 2
+value_label: pig
+verdict: incorrect

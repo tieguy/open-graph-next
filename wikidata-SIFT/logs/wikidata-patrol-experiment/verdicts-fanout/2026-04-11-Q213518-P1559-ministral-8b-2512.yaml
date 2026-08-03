@@ -1,0 +1,27 @@
+completion_tokens: 2383
+cost_usd: 0.00377802
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32225
+property: P1559
+property_label: name in native language
+rationale: The edit changed the name in native language (P1559) for Blackbeard (Q213518)
+  from 'Edduardo Maistro' to 'Pirata de Culiacan'. Neither value is supported by credible
+  historical sources or independent evidence. The cited source (Russian Wikipedia)
+  is invalid for Wikidata claims, and no verified sources confirm either name as a
+  native or regional alias for Blackbeard. The claim is unsupported and incorrect.
+rcid: 2551399119
+revid: 2474702961
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://onepiece.fandom.com/wiki/Marshall_D._Teach
+- provenance: verified
+  supports_claim: false
+  url: https://www.houseofnames.com/blackbeard-family-crest
+timestamp: '2026-04-11T15:23:32.184811+00:00'
+title: Q213518
+turns: 2
+value_label: null
+verdict: incorrect

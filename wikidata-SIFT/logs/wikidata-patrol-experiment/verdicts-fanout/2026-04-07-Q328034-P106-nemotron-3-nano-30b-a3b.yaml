@@ -1,0 +1,36 @@
+completion_tokens: 884
+cost_usd: 0.004800249999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92469
+property: P106
+property_label: occupation
+rationale: Despite extensive searching across cycling-focused sources and news outlets,
+  no evidence confirms or denies that Christophe Bassons worked as a stripper. The
+  single cited source containing this occupation (likely originating from the same
+  Wikipedia talk page or user discussion) could not be accessed and is not independently
+  verifiable. External sources show he was a professional road cyclist, not an adult
+  entertainer. Therefore, while the occupation edit is suspicious, it cannot be confirmed
+  as incorrect due to lack of accessible corroborating sources.
+rcid: 2549515786
+revid: 2472879595
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Christophe_Bassons
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Christophe_Bassons
+- provenance: reported
+  supports_claim: false
+  url: https://www.lemonde.fr/sports/article/2016/02/16/christophe-bassons-un-espoir-contre-la-violence-domestique_5056235_1650054.html
+- provenance: reported
+  supports_claim: false
+  url: Possible original source lacking specific URL - investigation could not locate
+    verifiable source showing occupation as stripper
+timestamp: '2026-04-07T07:36:24.469959+00:00'
+title: Q328034
+turns: 15
+value_label: stripper
+verdict: unverifiable

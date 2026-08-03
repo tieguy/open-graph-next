@@ -1,0 +1,29 @@
+completion_tokens: 795
+cost_usd: 0.0045498
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20364
+property: P856
+property_label: official website
+rationale: The URL https://www.vietjetair.com belongs to Vietjet Air, a Vietnamese
+  airline, and contains no reference to Yaizu City. Independent verification confirms
+  that the official website of Yaizu City is https://www.city.yaizu.lg.jp/. Therefore,
+  the new value for the official website property is incorrect.
+rcid: null
+revid: 2471590660
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.vietjetair.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.yaizu.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.yaizu.lg.jp/foreign-language/english/index.html
+timestamp: '2026-04-10T13:45:21.982312+00:00'
+title: Q696783
+turns: 1
+value_label: null
+verdict: incorrect

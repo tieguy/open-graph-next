@@ -1,0 +1,32 @@
+completion_tokens: 379
+cost_usd: 0.0024292
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11009
+property: P27
+property_label: country of citizenship
+rationale: The change from France to United States for Patrice Hauret's country of
+  citizenship is not supported by independent evidence. The primary sources consulted
+  (TheOrg and ResearchGate profiles) indicate a French affiliation (Michelin, France;
+  profile metadata and affiliations referencing France). No verified source indicates
+  United States citizenship or primary affiliation. The cited French Wikipedia reference
+  does not directly address citizenship, and the USCIS glossary is unrelated. Therefore,
+  the edit appears to be incorrect.
+rcid: 2551044304
+revid: 2474361066
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theorg.com/org/michelin/org-chart/patrice-hauret
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Patrice-Hauret
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Patrice_Hauret
+timestamp: '2026-04-11T06:28:10.459514+00:00'
+title: Q25931594
+turns: 1
+value_label: United States
+verdict: suspect

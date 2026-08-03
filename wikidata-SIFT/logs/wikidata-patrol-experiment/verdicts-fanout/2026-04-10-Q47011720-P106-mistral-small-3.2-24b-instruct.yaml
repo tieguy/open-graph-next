@@ -1,0 +1,28 @@
+completion_tokens: 1318
+cost_usd: 0.005785193750000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58575
+property: P106
+property_label: occupation
+rationale: Multiple sources describe Dennis Vareide as a YouTuber, content creator,
+  and media personality, with no mention of him being a pornographic actor. The claim
+  is not supported by any of the sources consulted.
+rcid: null
+revid: 2471745657
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/dennis-vareide.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmbooster.com/creator/834063-dennis-vareide/biography/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thecityceleb.com/biography/personality/content-creator/youtuber/dennis-vareide-biography-tiktok-age-partner-kids-net-worth-movies-books-height-youtube/
+timestamp: '2026-04-10T13:44:18.607329+00:00'
+title: Q47011720
+turns: 5
+value_label: pornographic actor
+verdict: incorrect

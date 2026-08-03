@@ -1,0 +1,26 @@
+completion_tokens: 2757
+cost_usd: 0.00216494375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15052
+property: P4224
+property_label: category contains
+rationale: The roster page and the head coach page both confirm that the category
+  "Category:Ohio State Buckeyes men's volleyball coaches" contains humans who are
+  volleyball coaches. This evidence supports the edit adding the qualifier "human"
+  with the occupation "volleyball coach".
+rcid: 2551333601
+revid: 2474640269
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ohiostatebuckeyes.com/sports/mens-volleyball/roster
+- provenance: verified
+  supports_claim: true
+  url: https://ohiostatebuckeyes.com/sports/mens-volleyball/roster/coaches/kevin-burch/2152
+timestamp: '2026-04-10T11:46:21.974033+00:00'
+title: Q30621595
+turns: 1
+value_label: human
+verdict: verified-high

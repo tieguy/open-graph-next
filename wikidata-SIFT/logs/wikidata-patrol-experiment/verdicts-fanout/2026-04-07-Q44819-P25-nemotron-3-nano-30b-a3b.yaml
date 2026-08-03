@@ -1,0 +1,21 @@
+completion_tokens: 626
+cost_usd: 0.0117294
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 232084
+property: P25
+property_label: mother
+rationale: No verifiable sources were found to confirm or refute the claim that Sukirah
+  (Q138639210) is Suharto's mother. Multiple searches for relevant keywords (e.g.,
+  'Suharto mother Sukirah') returned no results confirming the claim. Sources cited
+  in the edit were unreachable (blocked domains or HTTP 403) and no independent evidence
+  supporting the modification was identified.
+rcid: null
+revid: 2471122718
+sources: []
+timestamp: '2026-04-07T03:09:46.175551+00:00'
+title: Q44819
+turns: 15
+value_label: Sukirah
+verdict: unverifiable

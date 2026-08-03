@@ -1,0 +1,30 @@
+completion_tokens: 2280
+cost_usd: 0.00718752
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37701
+property: P625
+property_label: coordinate location
+rationale: The new coordinate value (28°4'0"N, 67°59'0"E) and the old coordinate value
+  (28.240277777777777, 68.775) were not supported by any primary or authoritative
+  source. The only tertiary source found (28°03'38"N, 67°58'49"E) does not align with
+  either value. No independent verification was possible, and no references were attached
+  to either coordinate.
+rcid: 2550803589
+revid: 2474128519
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://citypopulation.de/en/pakistan/sindh/admin/jacobabad/80501__garhi_khairo/
+- provenance: verified
+  supports_claim: false
+  url: https://satellites.pro/Garhi_Khairo_map
+- provenance: reported
+  supports_claim: false
+  url: https://tt.maptons.com/1925304
+timestamp: '2026-04-11T08:08:41.330047+00:00'
+title: Q65418940
+turns: 5
+value_label: null
+verdict: unverifiable

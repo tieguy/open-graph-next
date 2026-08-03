@@ -1,0 +1,29 @@
+completion_tokens: 1908
+cost_usd: 0.0035524000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12038
+property: P569
+property_label: date of birth
+rationale: The cited primary reference could not be accessed to verify the claim,
+  and no independent, reliable sources found during this investigation confirm that
+  Néstor Manrique Oviedo Guzmán was born on 22 December 1963. Therefore, the claim
+  remains unverifiable based on accessible evidence.
+rcid: 2551085711
+revid: 2474401700
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/N%C3%A9stor_Manrique_Oviedo_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://radaris.com/p/Nestor/Oviedo/
+- provenance: reported
+  supports_claim: null
+  url: http://www.pgrweb.go.cr/scij/Busqueda/Normativa/Pronunciamiento/pro_ficha.aspx?param1=PRD&param6=1&nDictamen=17901&strTipM=T
+timestamp: '2026-04-10T08:22:37.223174+00:00'
+title: Q20016718
+turns: 1
+value_label: null
+verdict: unverifiable

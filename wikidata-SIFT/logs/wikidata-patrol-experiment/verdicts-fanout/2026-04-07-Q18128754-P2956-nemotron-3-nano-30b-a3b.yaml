@@ -1,0 +1,23 @@
+completion_tokens: 767
+cost_usd: 0.00716855
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 140303
+property: P2956
+property_label: NAIF ID
+rationale: Multiple attempts to verify the NAIF ID change from -198 to -165053 failed.
+  The original reference URL crashed with 'extraction_empty' errors and could not
+  resolve '-' arguments. Searches of official NASA and ISRO sites for 'NAIR ID' yielded
+  no results. Given the critical nature of NAIF identifiers in mission operations
+  and the lack of any verifiable source confirming either value, there is no evidence
+  to confirm or deny the edit's correctness. No successfully fetched source was found
+  to support or contradict the claim.
+rcid: 2550876499
+revid: 2474199822
+sources: []
+timestamp: '2026-04-07T03:43:36.978232+00:00'
+title: Q18128754
+turns: 15
+value_label: null
+verdict: unverifiable

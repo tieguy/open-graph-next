@@ -1,0 +1,32 @@
+completion_tokens: 1810
+cost_usd: 0.0024284099999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20575
+property: P18
+property_label: image
+rationale: The new image value 'Tara Brawl Stars Info.png' is unrelated to Josep Maria
+  Guzmán, a Spanish basketball player. The image has no credible references in basketball
+  or sports contexts. The cited reference from Italian Wikipedia does not support
+  this change. Independent sources, including the Commons category for Josep Maria
+  Guzmán, confirm the existence of correct basketball-related images for the subject.
+  The old image was also incorrect but was at least a file reference, whereas the
+  new image is a nonsensical placeholder.
+rcid: 2550213778
+revid: 2473556232
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Josep_Maria_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://basketball.eurobasket.com/player/Josep-Maria-Guzman/38520
+- provenance: verified
+  supports_claim: false
+  url: https://playback.fm/person/josep-maria-guzm%C3%A1n
+timestamp: '2026-04-11T16:03:57.636841+00:00'
+title: Q1991498
+turns: 1
+value_label: null
+verdict: incorrect

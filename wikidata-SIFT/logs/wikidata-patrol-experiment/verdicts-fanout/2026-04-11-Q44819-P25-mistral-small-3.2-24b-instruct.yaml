@@ -1,0 +1,25 @@
+completion_tokens: 1246
+cost_usd: 0.013720000000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 143024
+property: P25
+property_label: mother
+rationale: Both Wikitree and New World Encyclopedia confirm Sukirah as the mother
+  of Suharto. The change from Q100594739 to Q138639210 does not alter the label and
+  is supported by reliable sources. The new Q-ID is accurate and well-sourced.
+rcid: null
+revid: 2471122718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Sukirah-1
+- provenance: verified
+  supports_claim: true
+  url: https://www.newworldencyclopedia.org/entry/Suharto
+timestamp: '2026-04-11T13:16:03.550452+00:00'
+title: Q44819
+turns: 6
+value_label: Sukirah
+verdict: verified-high

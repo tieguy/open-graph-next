@@ -1,0 +1,23 @@
+completion_tokens: 530
+cost_usd: 0.007023
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33525
+property: P742
+property_label: pseudonym
+rationale: No independent, accessible sources were found that confirm 'Jessicaaa'
+  as a pseudonym for Invader. The Wikipedia page, a primary reference for such information,
+  was unreachable during the investigation. Without corroborating evidence, the change
+  cannot be verified.
+rcid: 2550277585
+revid: 2473618007
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Invader_(artist)
+timestamp: '2026-04-07T12:17:08.750653+00:00'
+title: Q1671666
+turns: 4
+value_label: null
+verdict: unverifiable

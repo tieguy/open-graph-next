@@ -1,0 +1,25 @@
+completion_tokens: 1996
+cost_usd: 0.00610218
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 59396
+property: P94
+property_label: coat of arms image
+rationale: The file 'CoA Pasenbach (Vierkirchen).svg' exists on Wikimedia Commons
+  and is described as the coat of arms of Pasenbach, a former municipality now part
+  of Vierkirchen. While the file is labeled as a historical reconstruction and lacks
+  explicit confirmation as the current official coat of arms, it is the only available
+  visual representation of Pasenbach's coat of arms. No official municipal source
+  or authoritative German heraldry database was found to confirm its current validity.
+rcid: 2550582232
+revid: 2473913971
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:CoA_Pasenbach_(Vierkirchen).svg
+timestamp: '2026-04-10T13:15:23.658147+00:00'
+title: Q1257682
+turns: 5
+value_label: null
+verdict: plausible

@@ -1,0 +1,26 @@
+completion_tokens: 671
+cost_usd: 0.00615
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28737
+property: P154
+property_label: logo image
+rationale: No evidence supports the replacement of Emmaus' logo with a cosplay image
+  from an anime convention. Official sources and reliable references do not list or
+  display this image as the charity's logo. The previous image, 'Logo Emmaus.jpg',
+  is consistent with typical organizational branding.
+rcid: null
+revid: 2472586501
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.emmaus-international.org/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Emmaus_(charity)
+timestamp: '2026-04-07T03:19:48.677835+00:00'
+title: Q989437
+turns: 5
+value_label: null
+verdict: incorrect

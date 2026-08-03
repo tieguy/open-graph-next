@@ -1,0 +1,23 @@
+completion_tokens: 391
+cost_usd: 0.004288931250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 43831
+property: P31
+property_label: instance of
+rationale: The evidence from the fetched source confirms that Amalia González Caballero
+  de Castillo Ledón had significant roles in diplomacy, including serving as a subsecretary
+  of culture and holding diplomatic posts in several countries. This aligns with the
+  characteristics of a diplomat.
+rcid: 2550063540
+revid: 2473410647
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.elem.mx/autor/datos/120147
+timestamp: '2026-04-07T12:43:01.380932+00:00'
+title: Q5671619
+turns: 7
+value_label: diplomat
+verdict: verified-high

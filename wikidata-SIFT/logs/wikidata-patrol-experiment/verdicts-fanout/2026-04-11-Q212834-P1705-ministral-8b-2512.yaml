@@ -1,0 +1,33 @@
+completion_tokens: 1880
+cost_usd: 0.00222861
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19173
+property: P1705
+property_label: native label
+rationale: The edit changed the native label from '20 Fenchurch Street' to '20 FrenchTacos
+  Street'. Multiple verified sources (BBC News, SkyscraperCenter, and Map of London)
+  confirm that the correct and official name of the building is '20 Fenchurch Street'.
+  No credible sources support the new value, and the change contradicts other established
+  claims about the building's location. The edit is unsourced and incorrect.
+rcid: 2549596457
+revid: 2472958532
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/news/uk-34116610
+- provenance: verified
+  supports_claim: false
+  url: http://www.skyscrapercenter.com/building/20-fenchurch/3350
+- provenance: verified
+  supports_claim: false
+  url: https://mapoflondon.uvic.ca/FENC1.htm
+- provenance: reported
+  supports_claim: true
+  url: https://www.google.com/search?q=20+FrenchTacos+Street+official+name
+timestamp: '2026-04-11T10:50:00.574033+00:00'
+title: Q212834
+turns: 1
+value_label: null
+verdict: incorrect

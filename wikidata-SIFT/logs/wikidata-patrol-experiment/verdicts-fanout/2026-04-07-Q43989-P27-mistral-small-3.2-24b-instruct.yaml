@@ -1,0 +1,21 @@
+completion_tokens: 952
+cost_usd: 0.005656670000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 78482
+property: P27
+property_label: country of citizenship
+rationale: The edit does not include any references, and no sources were fetched during
+  the investigation. Therefore, the claim cannot be verified.
+rcid: 2550961873
+revid: 2474281611
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Grigori_Rasputin
+timestamp: '2026-04-07T14:17:08.691519+00:00'
+title: Q43989
+turns: 9
+value_label: Russian Empire
+verdict: unverifiable

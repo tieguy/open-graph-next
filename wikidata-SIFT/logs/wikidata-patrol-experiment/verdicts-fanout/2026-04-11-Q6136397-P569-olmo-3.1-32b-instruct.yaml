@@ -1,0 +1,28 @@
+completion_tokens: 1623
+cost_usd: 0.0037818
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14040
+property: P569
+property_label: date of birth
+rationale: The date of birth '1958' for Susana de la Puente is confirmed by both the
+  cited reference and multiple independent, authoritative sources, including UK government
+  company registries. Removing this claim is therefore incorrect.
+rcid: null
+revid: 2471412314
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/officers/nn0p5vnAjXRXNjCEnYsI11cz9fU/appointments
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/officers/bKLUZyxq3GzUHZCz9CfgI0HtAwQ/appointments
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/susana_de_la_puente
+timestamp: '2026-04-11T11:48:59.887884+00:00'
+title: Q6136397
+turns: 1
+value_label: null
+verdict: incorrect

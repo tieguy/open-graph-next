@@ -1,0 +1,27 @@
+completion_tokens: 666
+cost_usd: 0.005094775
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54334
+property: P856
+property_label: official website
+rationale: The fetched content for https://www.town.aridagawa.lg.jp/ confirms it is
+  the official website for Aridagawa, providing various local services and information.
+  The new URL https://www.aerok.com/ returned a 403 Forbidden error, indicating it
+  might not be a valid or accessible website. Therefore, the edit to change the official
+  website to https://www.aerok.com/ is incorrect.
+rcid: 2551409955
+revid: 2474713170
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.town.aridagawa.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.aerok.com/
+timestamp: '2026-04-07T10:14:37.904917+00:00'
+title: Q1345889
+turns: 6
+value_label: null
+verdict: incorrect

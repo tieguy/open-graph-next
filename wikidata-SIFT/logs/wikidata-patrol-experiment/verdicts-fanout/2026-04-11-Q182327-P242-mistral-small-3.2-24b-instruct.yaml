@@ -1,0 +1,18 @@
+completion_tokens: 890
+cost_usd: 0.001890125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17788
+property: P242
+property_label: locator map image
+rationale: Unable to perform web searches to verify the locator map image for Polichni.
+  No sources were fetched during the investigation.
+rcid: null
+revid: 2471173768
+sources: []
+timestamp: '2026-04-11T16:17:46.163046+00:00'
+title: Q182327
+turns: 2
+value_label: null
+verdict: unverifiable

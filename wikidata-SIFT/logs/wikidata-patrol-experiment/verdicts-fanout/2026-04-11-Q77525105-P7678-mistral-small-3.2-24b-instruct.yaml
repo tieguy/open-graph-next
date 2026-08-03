@@ -1,0 +1,30 @@
+completion_tokens: 1691
+cost_usd: 0.0017905625
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16512
+property: P7678
+property_label: Wikimapia ID
+rationale: The added reference points to a Wikimapia URL, which is a relevant source
+  for historical geolocation data. However, the URL itself could not be fetched, and
+  while other sources support the general reliability of Wikimapia, they do not specifically
+  confirm the exact Wikimapia ID for Mandrykivska vulytsia. Therefore, the verdict
+  is `verified-low`.
+rcid: 2550779618
+revid: 2474105114
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bellingcat.gitbook.io/toolkit/more/all-tools/wikimapia
+- provenance: verified
+  supports_claim: true
+  url: https://wiki.openstreetmap.org/wiki/Wikimapia
+- provenance: verified
+  supports_claim: true
+  url: https://wikimapia-api-py.readthedocs.io/en/latest/tutorial.html
+timestamp: '2026-04-11T16:34:30.739094+00:00'
+title: Q77525105
+turns: 1
+value_label: null
+verdict: verified-low

@@ -1,0 +1,29 @@
+completion_tokens: 1342
+cost_usd: 0.008903593750000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 91393
+property: P937
+property_label: work location
+rationale: The old value of Madrid is well-documented as a work location for Cristiano
+  Ronaldo, where he played for Real Madrid from 2009 to 2018. There is no credible
+  evidence supporting Rus as a work location. The fetched sources do not provide any
+  information linking Ronaldo to Rus.
+rcid: null
+revid: 2472199945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cristianoronaldo.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/cristiano-ronaldo/profil/spieler/8198
+- provenance: verified
+  supports_claim: false
+  url: https://www.wonderfulmuseums.com/museum/cr7-museum-location/
+timestamp: '2026-04-11T17:00:01.511106+00:00'
+title: Q238955
+turns: 4
+value_label: Rus
+verdict: incorrect

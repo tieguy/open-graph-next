@@ -1,0 +1,25 @@
+completion_tokens: 1035
+cost_usd: 0.00148379375
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12541
+property: P279
+property_label: subclass of
+rationale: The removed claim that remote administration software is a subclass of
+  software is supported by independent sources. The edit to remove this claim appears
+  to be incorrect as it contradicts the evidence from reliable sources.
+rcid: 2550090185
+revid: 2473436830
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.airdroid.com/mdm/remote-administration-tool/
+- provenance: verified
+  supports_claim: true
+  url: https://www.playroll.com/blog/best-remote-management-tools
+timestamp: '2026-04-11T08:36:36.786301+00:00'
+title: Q111100275
+turns: 1
+value_label: software
+verdict: incorrect

@@ -1,0 +1,20 @@
+completion_tokens: 899
+cost_usd: 0.0065258
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29932
+property: P570
+property_label: date of death
+rationale: The only cited reference (English Wikipedia) could not be located or verified.
+  Multiple independent searches across news outlets and other sources did not produce
+  any evidence supporting a 2025 date of death for Jodle Birge. Without accessible
+  and reliable supporting evidence, the claim cannot be confirmed or denied.
+rcid: 2549906557
+revid: 2473261319
+sources: []
+timestamp: '2026-04-07T06:22:18.853904+00:00'
+title: Q6208009
+turns: 6
+value_label: null
+verdict: unverifiable

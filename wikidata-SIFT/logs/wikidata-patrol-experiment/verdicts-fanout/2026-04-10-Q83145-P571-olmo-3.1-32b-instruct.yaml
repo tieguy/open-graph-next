@@ -1,0 +1,26 @@
+completion_tokens: 1272
+cost_usd: 0.0038989999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15679
+property: P571
+property_label: inception
+rationale: The edit claiming the Africa Cup of Nations was founded in 2045 is not
+  supported by any credible evidence. Multiple verified sources confirm the tournament
+  began in 1957. The cited reference appears to be incorrect or unreliable, and no
+  independent source supports the new value.
+rcid: 2550014824
+revid: 2473363340
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://icn.com/en-jo/blog/africa-cup-of-nations
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/sports-and-leisure/africa-cup-nations
+timestamp: '2026-04-10T10:06:02.254066+00:00'
+title: Q83145
+turns: 1
+value_label: null
+verdict: incorrect

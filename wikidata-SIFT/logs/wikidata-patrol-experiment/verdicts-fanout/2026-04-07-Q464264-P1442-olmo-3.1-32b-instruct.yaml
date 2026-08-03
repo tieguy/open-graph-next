@@ -1,0 +1,20 @@
+completion_tokens: 602
+cost_usd: 0.019325199999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 94820
+property: P1442
+property_label: image of grave
+rationale: No authoritative or independent source was found that confirms 'La Masia
+  - Centre de Formació Oriol Tort 01.jpg' is an image of Rosalía de Castro's grave.
+  The Panteón de Galegos Ilustres is her known burial location, but no official or
+  reputable image of her grave was located or fetched during the investigation.
+rcid: 2549245361
+revid: 2472616703
+sources: []
+timestamp: '2026-04-07T07:27:49.602352+00:00'
+title: Q464264
+turns: 9
+value_label: null
+verdict: unverifiable

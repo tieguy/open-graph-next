@@ -1,0 +1,28 @@
+completion_tokens: 1275
+cost_usd: 0.0030079399999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29480
+property: P1559
+property_label: name in native language
+rationale: The old value 'Lope de Vega' is strongly supported by multiple reliable
+  sources. The new value 'erik marikon' has no evidence supporting it as the correct
+  name in native language for Lope de Vega. Therefore, the edit is incorrect.
+rcid: 2549919720
+revid: 2473274144
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.classicspanishbooks.com/16th-cent-baroque-lope-life.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/biography/Lope-de-Vega
+- provenance: reported
+  supports_claim: true
+  url: https://www.dictionary.com/browse/lope-de-vega
+timestamp: '2026-04-11T15:39:12.208823+00:00'
+title: Q165257
+turns: 1
+value_label: null
+verdict: incorrect

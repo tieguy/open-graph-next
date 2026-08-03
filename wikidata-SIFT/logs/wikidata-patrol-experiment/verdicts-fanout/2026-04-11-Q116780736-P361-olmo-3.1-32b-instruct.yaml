@@ -1,0 +1,26 @@
+completion_tokens: 1977
+cost_usd: 0.0035488
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11813
+property: P361
+property_label: part of
+rationale: The qualifier 'followed by' is not supported by authoritative or independently
+  verifiable sources. The only cited reference is a travel guide, which is not authoritative
+  for street numbering. The official local registry lists both house numbers but does
+  not clarify adjacency or order. Therefore, the claim is suspect.
+rcid: 2551217148
+revid: 2474530113
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mogilev.biz/spravka/street/street_969.html
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikivoyage.org/?oldid=561556#5240222001
+timestamp: '2026-04-11T14:05:40.739078+00:00'
+title: Q116780736
+turns: 1
+value_label: улица Шмидта 32 34 [ru]
+verdict: suspect

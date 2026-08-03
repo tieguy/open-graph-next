@@ -1,0 +1,22 @@
+completion_tokens: 1128
+cost_usd: 0.00328935
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31770
+property: P101
+property_label: field of work
+rationale: The cited source supports the claim that Suchfokus's field of work includes
+  search engine optimization. However, there is a lack of independent corroboration
+  from other sources, leading to a verdict of verified-low.
+rcid: 2540973962
+revid: 2464760841
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:48:31.119930+00:00'
+title: Q138349990
+turns: 4
+value_label: search engine optimization
+verdict: verified-low

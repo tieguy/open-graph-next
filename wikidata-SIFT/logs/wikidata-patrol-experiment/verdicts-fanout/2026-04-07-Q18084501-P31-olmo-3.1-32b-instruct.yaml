@@ -1,0 +1,22 @@
+completion_tokens: 1040
+cost_usd: 0.0044098
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18929
+property: P31
+property_label: instance of
+rationale: The work is documented as an oil painting on its primary source (Wikimedia
+  Commons), which unambiguously identifies it as a painting. No contradictory evidence
+  was found in verified sources.
+rcid: null
+revid: 2471244123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Croce-Mozart-Detail.jpg
+timestamp: '2026-04-07T04:44:03.183569+00:00'
+title: Q18084501
+turns: 2
+value_label: painting
+verdict: verified-high

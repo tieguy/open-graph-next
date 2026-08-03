@@ -1,0 +1,29 @@
+completion_tokens: 1846
+cost_usd: 0.0043764
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16344
+property: P2295
+property_label: net profit
+rationale: The claim regarding the net profit of '82,470,000 Czech koruna' for 2015
+  lacked any citation and could not be independently verified through accessible,
+  authoritative sources. No reliable publication or official document was found that
+  supports this figure for the given year, making the claim unverifiable.
+rcid: 2550267292
+revid: 2473607976
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://czechinvest.gov.cz/en/Key-sectors/Smart-mobility-catalog/Firmy/CD–Telematika-a-s
+- provenance: verified
+  supports_claim: false
+  url: https://www.cdt.cz/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.metro.cz/protext/cd-telematika-dosahla-v-lonskem-roce-historicky-rekordniho-zisku-ebitda-mezirocne-vzrostl-o-temer-dv.A250526_115700_metro-protext_air
+timestamp: '2026-04-11T17:05:02.058499+00:00'
+title: Q28970253
+turns: 1
+value_label: null
+verdict: unverifiable

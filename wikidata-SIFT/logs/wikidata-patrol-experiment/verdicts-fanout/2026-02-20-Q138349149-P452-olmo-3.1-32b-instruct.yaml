@@ -1,0 +1,35 @@
+completion_tokens: 1826
+cost_usd: 0.004482
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16932
+property: P452
+property_label: industry
+rationale: EFF's Data Broker Registry explicitly categorizes Altair Data Resources,
+  Inc. as a data broker, which aligns with the Wikidata property Q1418159 ('information
+  broker'). The company's official website describes activities consistent with data
+  brokerage for consumer marketing and credit data. However, the company does not
+  explicitly use the label 'information broker,' and not all cited references could
+  be independently verified in this session. Therefore, the claim is supported by
+  secondary evidence but with limited direct confirmation.
+rcid: 2540941252
+revid: 2464730745
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://altairdata.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.eff.org/files/2025/06/24/appendix_b_-_data_broker_full_registry_2025.xlsx
+- provenance: reported
+  supports_claim: null
+  url: https://www.dnb.com/business-directory/company-profiles.altair_data_resources_inc.24d0249813464e54f9f73b93aa2c0b28.html
+- provenance: reported
+  supports_claim: null
+  url: https://www.eff.org/files/2025/06/24/2025-06-24_-_texas_data_broker_letter.pdf
+timestamp: '2026-02-20T14:32:06.871475+00:00'
+title: Q138349149
+turns: 2
+value_label: information broker
+verdict: verified-low

@@ -1,0 +1,28 @@
+completion_tokens: 877
+cost_usd: 0.00276935
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28883
+property: P570
+property_label: date of death
+rationale: The search queries returned errors, and the prefetched references did not
+  provide concrete information to verify the change in the date of death. The available
+  sources either do not mention the date of death or provide conflicting information.
+rcid: 2550909051
+revid: 2474231341
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://international-dubbing.fandom.com/wiki/Elena_Shulman
+- provenance: verified
+  supports_claim: false
+  url: https://www.kinoafisha.info/en/person/8326939/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/DotA2/comments/12ggb5p/elena_shulman_russian_voice_of_luna_and_winter/
+timestamp: '2026-04-11T12:39:18.637993+00:00'
+title: Q18008985
+turns: 3
+value_label: null
+verdict: unverifiable

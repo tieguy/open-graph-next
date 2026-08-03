@@ -1,0 +1,29 @@
+completion_tokens: 1404
+cost_usd: 0.0034559125000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35612
+property: P279
+property_label: subclass of
+rationale: The edit changes the subclass of Tiger Atjeh Darussalam to itself, which
+  is logically incorrect. There are no references cited for the new value, and the
+  item context shows that Tiger Atjeh Darussalam is an instance of a tiger, not a
+  subclass of itself.
+rcid: null
+revid: 2471719875
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://endangeredtigers.org/tiger-species/javan-tiger/
+- provenance: verified
+  supports_claim: false
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC4406268/
+- provenance: verified
+  supports_claim: false
+  url: https://www.fao.org/3/a1250e/annexes/List%20of%20breeds%20documented%20in%20the%20Global%20Databank%20for%20Animal%20Genetic%20Resources/List_breeds.pdf
+timestamp: '2026-04-11T14:48:18.919019+00:00'
+title: Q646056
+turns: 4
+value_label: Tiger Atjeh Darussalam
+verdict: incorrect

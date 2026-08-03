@@ -1,0 +1,30 @@
+completion_tokens: 1333
+cost_usd: 0.0053638
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22820
+property: P451
+property_label: unmarried partner
+rationale: Multiple independent Spanish-language news sources confirm that Emilia
+  Mernes's publicly acknowledged unmarried partner from 2021 to 2024 was Coscu. Although
+  the cited Ambito reference could not be fetched directly due to a blocked domain,
+  the relationship is corroborated by additional verified reporting. The edit is therefore
+  supported by strong evidence.
+rcid: 2549423609
+revid: 2472789338
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.eldiario.es/entretenimiento/emilia-mernes-duki-novio_1_12120388.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.hola.com/entretenimiento/emilia-mernes-duki-noviazgo-20240510-855253.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.ambito.com/espectaculos/romance/duki-y-emilia-mernes-confirmaron-su-noviazgo-n5332279
+timestamp: '2026-04-07T12:35:55.146719+00:00'
+title: Q68110339
+turns: 2
+value_label: Coscu
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 1660
+cost_usd: 0.0065442
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27741
+property: P373
+property_label: Commons category
+rationale: The added reference points to an existing Wikimedia Commons category named
+  'Josh Universe', which contains media directly associated with the subject. This
+  supports the use of the category via property P373. However, the source is a media
+  repository and does not provide narrative biographical validation, thus supporting
+  the claim only to a limited extent.
+rcid: 2551427492
+revid: 2474727918
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Josh_Universe
+timestamp: '2026-04-11T14:13:35.263869+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-low

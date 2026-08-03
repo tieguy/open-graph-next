@@ -1,0 +1,32 @@
+completion_tokens: 1717
+cost_usd: 0.0022016500000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21349
+property: P625
+property_label: coordinate location
+rationale: The new coordinate value "57°55'24.9830"N, 24°23'39.3641"E" is supported
+  by reliable sources such as Google Maps and Latitude and Longitude Finder. The old
+  value "57.920833333333,24.388333333333" is less precise and not supported by the
+  same level of authoritative sources. Therefore, the change is an improvement.
+rcid: null
+revid: 2471356041
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.latlong.net/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tripadvisor.com/LocationPhotos-g7753894-Treimani_Parnu_County.html
+- provenance: verified
+  supports_claim: false
+  url: https://123reserve.com/estonia/treimani/treimani-country-house
+- provenance: verified
+  supports_claim: true
+  url: https://www.google.com/maps
+timestamp: '2026-04-11T12:27:29.169045+00:00'
+title: Q3462143
+turns: 1
+value_label: null
+verdict: verified-high

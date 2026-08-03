@@ -1,0 +1,23 @@
+completion_tokens: 1299
+cost_usd: 0.00286633875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26983
+property: P119
+property_label: place of burial
+rationale: The new value "Venezuela" has a reference to the Spanish Wikipedia, but
+  the domain is blocked and cannot be verified. The old value "Central Cemetery of
+  Bogotá" does not have any independent references cited. No independent sources confirm
+  the place of burial, making the edit unverifiable.
+rcid: null
+revid: 2465810238
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb12186848x
+timestamp: '2026-04-11T14:53:10.147703+00:00'
+title: Q5696422
+turns: 2
+value_label: Venezuela
+verdict: unverifiable

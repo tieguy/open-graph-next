@@ -1,0 +1,25 @@
+completion_tokens: 1586
+cost_usd: 0.0032830000000000003
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11657
+property: P607
+property_label: participated in conflict
+rationale: Local historical sources confirm that La Gardata (Mandello) was a location
+  used by partisans during World War II, supporting the edit's intent to associate
+  the locality with the conflict through its role in resistance activity. However,
+  the property P607 ('participated in conflict') is generally reserved for entities
+  that acted as belligerents, and while the context is justified, a more specific
+  property may be preferable.
+rcid: 2549637443
+revid: 2472998396
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.visitmandello.it/it-it/scopri/itinerari/passo-3-somana-santa-maria-era-e-gardata-51606-1-649ec874a48dad823d1a9ba9b3955eba
+timestamp: '2026-04-10T09:13:38.752612+00:00'
+title: Q121865046
+turns: 1
+value_label: World War II
+verdict: verified-low

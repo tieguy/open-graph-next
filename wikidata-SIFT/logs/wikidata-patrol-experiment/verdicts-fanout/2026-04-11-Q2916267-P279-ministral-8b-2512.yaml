@@ -1,0 +1,29 @@
+completion_tokens: 1831
+cost_usd: 0.00367254
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38525
+property: P279
+property_label: subclass of
+rationale: The Tulip chair (Q2916267) is a well-documented furniture design by Eero
+  Saarinen, not a cooking utensil. The original value ('chair') aligns with the item's
+  description, P31 (instance of), and P287 (designed by). No credible source supports
+  the new value ('cookware and bakeware'). The edit lacks references and contradicts
+  established knowledge about the item. The prefetched references and attempts to
+  verify the new claim failed to find any authoritative support for the classification
+  of the Tulip chair as cookware.
+rcid: 2551186634
+revid: 2474500439
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tuliphome.ca/collections/cookware-sets
+- provenance: verified
+  supports_claim: false
+  url: https://www.webstaurantstore.com/guide/501/types-of-cookware.html
+timestamp: '2026-04-11T09:58:10.349930+00:00'
+title: Q2916267
+turns: 4
+value_label: cookware and bakeware
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 262
+cost_usd: 0.0031064
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14746
+property: P577
+property_label: publication date
+rationale: The new value '16 April 1982' is presented without primary source evidence
+  and conflicts with multiple independent sources stating the film's release year
+  as 1977. The original Wikipedia and AllMovie sources reference 1977 as the release
+  year. The IMDb release info page referenced in the item also supports a 1977 release.
+  The change to 1982 is not corroborated by any verified source and appears inconsistent
+  with the established release year. Therefore, the edit is suspect.
+rcid: 2551439309
+revid: 2474737522
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmovie.com/movie/tiger-love-am283615
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/title/tt1603915/releaseinfo
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Tiger_Love_(1977_film)
+timestamp: '2026-04-11T12:01:30.561670+00:00'
+title: Q7801437
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,24 @@
+completion_tokens: 757
+cost_usd: 0.015074200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 73100
+property: P577
+property_label: publication date
+rationale: The only cited reference (Integrated Authority File) could not be accessed
+  to confirm the 1962 publication date. Independent web searches did not provide a
+  primary source supporting a 1962 publication date for 'Mein Kampf'. Historical consensus
+  places the original publication in the mid-1920s. Without verifiable primary evidence,
+  the claim cannot be confirmed.
+rcid: 2550422389
+revid: 2473759636
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.integratedauthorityfile.de/en
+timestamp: '2026-04-07T13:06:54.369608+00:00'
+title: Q48244
+turns: 9
+value_label: null
+verdict: unverifiable

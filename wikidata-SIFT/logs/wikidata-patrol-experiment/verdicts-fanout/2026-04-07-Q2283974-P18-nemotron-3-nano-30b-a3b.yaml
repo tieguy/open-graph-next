@@ -1,0 +1,22 @@
+completion_tokens: 592
+cost_usd: 0.0010158
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 17948
+property: P18
+property_label: image
+rationale: No verifiable source was found to confirm or refute the existence or accuracy
+  of the claimed image file. Searches for the exact title returned no results, and
+  no external references or metadata could be accessed to support the claim.
+rcid: null
+revid: 2470471869
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Sal+da+Vinci+conferenza+stampa+Festival+di+Sanremo+2026+headshot
+timestamp: '2026-04-07T05:29:50.479405+00:00'
+title: Q2283974
+turns: 2
+value_label: null
+verdict: unverifiable

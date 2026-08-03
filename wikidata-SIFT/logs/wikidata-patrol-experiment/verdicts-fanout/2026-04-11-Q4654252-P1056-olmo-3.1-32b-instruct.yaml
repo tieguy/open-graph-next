@@ -1,0 +1,26 @@
+completion_tokens: 2026
+cost_usd: 0.0035072000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11458
+property: P1056
+property_label: product or material produced
+rationale: ASIX Electronics produces semiconductor chips and controllers classified
+  as electronic components rather than finished networking hardware, as confirmed
+  by the company's official product page and an independent supplier profile. Both
+  sources support the new value 'electronic component'.
+rcid: null
+revid: 2466981237
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.asix.com.tw/en/product
+- provenance: verified
+  supports_claim: true
+  url: https://www.procureinc.com/manufacturer/ASIX_Electronics/
+timestamp: '2026-04-11T16:54:56.048949+00:00'
+title: Q4654252
+turns: 1
+value_label: electronic component
+verdict: verified-high

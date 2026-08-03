@@ -1,0 +1,28 @@
+completion_tokens: 1746
+cost_usd: 0.0035672000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12598
+property: P569
+property_label: date of birth
+rationale: The cited German Wikipedia source and multiple independently verified sources
+  confirm that Irka Bochenko was born in 1960. The new value '1 CE' is not supported
+  by any credible evidence and appears to be erroneous. This edit should be reverted.
+rcid: 2550585037
+revid: 2473916700
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Irka_Bochenko
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Irka_Bochenko
+- provenance: verified
+  supports_claim: false
+  url: https://www.whosdatedwho.com/irka-bochenko
+timestamp: '2026-04-11T11:04:28.602716+00:00'
+title: Q1672927
+turns: 1
+value_label: null
+verdict: incorrect

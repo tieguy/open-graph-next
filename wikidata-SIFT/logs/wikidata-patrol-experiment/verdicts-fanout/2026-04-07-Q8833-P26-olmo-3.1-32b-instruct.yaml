@@ -1,0 +1,33 @@
+completion_tokens: 911
+cost_usd: 0.0062568
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28551
+property: P26
+property_label: spouse
+rationale: There is no historical or scholarly evidence that Gaius Maecenas was married
+  to Mia Khalifa. The historically attested spouse is Terentia, as confirmed by classical
+  sources and reputable encyclopedias. The cited reference 'Terentii' does not support
+  the new claim, and no independent sources corroborate the addition of Mia Khalifa
+  as a spouse. The claim contradicts well-established historical knowledge.
+rcid: 2549269168
+revid: 2472639424
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Gaius_Maecenas
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Terentia_(wife_of_Maecenas)
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Terence
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Gaius-Maecenas
+timestamp: '2026-04-07T04:09:22.105642+00:00'
+title: Q8833
+turns: 3
+value_label: Mia Khalifa
+verdict: incorrect

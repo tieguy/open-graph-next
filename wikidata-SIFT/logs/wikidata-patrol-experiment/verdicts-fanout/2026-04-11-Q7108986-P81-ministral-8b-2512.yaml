@@ -1,0 +1,31 @@
+completion_tokens: 2412
+cost_usd: 0.0029587800000000003
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29960
+property: P81
+property_label: connecting line
+rationale: Otomo Station (Q7108986) was a railway station connected to the Ōfunato
+  Line (Q1057758) until 2020-04-01, after which it transitioned to a bus stop. The
+  rank change from 'normal' to 'deprecated' is justified because the connection to
+  the Ōfunato Line is no longer applicable to its current role as a bus stop. The
+  item's context and the logical transition align with this change, and no independent
+  sources contradict this conclusion.
+rcid: 2550458317
+revid: 2473794797
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://jp.commutetour.com/transport/train/train-line/jr-ofunato-line/
+- provenance: verified
+  supports_claim: false
+  url: https://matcha-jp.com/en/mcm21640
+- provenance: verified
+  supports_claim: false
+  url: https://timetables.jreast.co.jp/en/timetable/list0343.html
+timestamp: '2026-04-11T05:50:02.934838+00:00'
+title: Q7108986
+turns: 3
+value_label: Ōfunato Line
+verdict: verified-high

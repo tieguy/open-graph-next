@@ -1,0 +1,29 @@
+completion_tokens: 1442
+cost_usd: 0.0018858125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16270
+property: P910
+property_label: topic's main category
+rationale: The removed claim had a reference from the Portuguese Wikipedia, which
+  is not a reliable source for Wikidata. Independent sources do not provide specific
+  information about the category 'Category:Moroccan people' being the main category
+  for 'Moroccans.' Therefore, the removal of the statement appears to be justified.
+rcid: 2550702161
+revid: 2474030248
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/morocco-ethnic-groups.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.authentic-tours-marrakech.com/moroccan-people/
+- provenance: verified
+  supports_claim: false
+  url: https://www.morocco.com/culture/people/
+timestamp: '2026-04-11T17:17:47.299974+00:00'
+title: Q1891793
+turns: 1
+value_label: Category:Moroccan people
+verdict: verified-high

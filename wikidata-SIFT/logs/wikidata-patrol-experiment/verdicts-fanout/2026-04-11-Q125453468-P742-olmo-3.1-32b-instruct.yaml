@@ -1,0 +1,34 @@
+completion_tokens: 2237
+cost_usd: 0.0044107999999999994
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15343
+property: P742
+property_label: pseudonym
+rationale: All verified primary and memorial sources document the pseudonym of Diana
+  Esmeralda Teruggi Dawson as 'Didi'. No verified source mentions 'chichi' as a pseudonym.
+  The change to 'chichi' is therefore unsupported and incorrect.
+rcid: 2549656302
+revid: 2473016742
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://basededatos.parquedelamemoria.org.ar/registros/7888/
+- provenance: verified
+  supports_claim: false
+  url: http://sedici.unlp.edu.ar/handle/10915/125674
+- provenance: verified
+  supports_claim: false
+  url: https://www.fahce.unlp.edu.ar/facultad/secretarias-y-prosecretarias/academica/prosecretaria-de-derechos-humanos/politicas-de-memoria/nomina/personades-240323201832892971
+- provenance: verified
+  supports_claim: false
+  url: https://www.huellasdelamemoria.com.ar/diana-esmeralda-teruggi/
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.revistaanfibia.com/todos-los-fuegos-de-un-tiempo/
+timestamp: '2026-04-11T16:40:07.617584+00:00'
+title: Q125453468
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,19 @@
+completion_tokens: 124
+cost_usd: 0.0027153999999999998
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30196
+property: P39
+property_label: position held
+rationale: The investigation was unable to verify the removal of the 'director' position
+  for Gallagher Fenwick due to search errors. No sources could be fetched to confirm
+  or deny the claim.
+rcid: null
+revid: 2471531273
+sources: []
+timestamp: '2026-04-11T18:42:10.588240+00:00'
+title: Q120615740
+turns: 3
+value_label: director
+verdict: unverifiable

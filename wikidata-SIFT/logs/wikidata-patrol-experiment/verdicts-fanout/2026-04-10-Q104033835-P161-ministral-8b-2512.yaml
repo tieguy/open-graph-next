@@ -1,0 +1,30 @@
+completion_tokens: 1785
+cost_usd: 0.00308553
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24520
+property: P161
+property_label: cast member
+rationale: Multiple verified sources, including Fandom Wiki, Vague Visages, and The
+  Movie Database, confirm that Donald Trump is not listed as a cast member of *The
+  Adam Project*. The claim contradicts all available evidence, and the cited reference
+  (English Wikipedia) could not be verified due to unreachable content. There is no
+  credible support for Donald Trump's inclusion in the cast.
+rcid: 2550549913
+revid: 2473883037
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://aveleyman.fandom.com/wiki/The_Adam_Project
+- provenance: verified
+  supports_claim: false
+  url: https://vaguevisages.com/2022/03/11/the-adam-project-cast-netflix/
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/movie/696806-the-adam-project/cast
+timestamp: '2026-04-10T13:40:22.231583+00:00'
+title: Q104033835
+turns: 1
+value_label: Donald Trump
+verdict: incorrect

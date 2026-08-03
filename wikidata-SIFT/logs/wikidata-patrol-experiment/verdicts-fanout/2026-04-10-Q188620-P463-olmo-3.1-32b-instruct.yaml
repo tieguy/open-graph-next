@@ -1,0 +1,30 @@
+completion_tokens: 1571
+cost_usd: 0.005371
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22142
+property: P463
+property_label: member of
+rationale: No credible sources support the claim that Rigoberta Menchú is a member
+  of Paris Saint-Germain FC. Her documented biography and all authoritative sources
+  focus exclusively on her activism and humanitarian work, with no mention of any
+  connection to football or the club. The Wikidata claim lacks citation and is inconsistent
+  with her known profile.
+rcid: 2549478649
+revid: 2472843478
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelwomensinitiative.org/rigobertamenchutum
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/rigoberta-mench-5732.php
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Paris_Saint-Germain_Football_Club
+timestamp: '2026-04-10T08:27:59.809917+00:00'
+title: Q188620
+turns: 1
+value_label: Paris Saint-Germain FC
+verdict: suspect

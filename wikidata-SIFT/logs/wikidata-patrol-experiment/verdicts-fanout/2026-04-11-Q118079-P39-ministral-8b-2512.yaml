@@ -1,0 +1,29 @@
+completion_tokens: 2042
+cost_usd: 0.00239091
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20093
+property: P39
+property_label: position held
+rationale: The edit correctly identifies Hieronymus Schulz's position as 'Roman Catholic
+  Bishop of Brandenburg' (Q115249949), which is supported by authoritative sources
+  like Catholic Hierarchy and Deutsche Biographie. However, the qualifiers (diocese,
+  start time, and succession) are incorrectly set to reflect Havelberg instead of
+  Brandenburg. This indicates a mechanical error in the edit, not a factual error.
+  The new value is correct, but the qualifiers must be updated to align with Brandenburg
+  for the claim to be accurate.
+rcid: 2550970950
+revid: 2474290446
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bschulz.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.deutsche-biographie.de/sfz32232.html
+timestamp: '2026-04-11T18:38:31.983504+00:00'
+title: Q118079
+turns: 1
+value_label: Roman Catholic Bishop of Brandenburg
+verdict: suspect

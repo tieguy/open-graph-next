@@ -1,0 +1,27 @@
+completion_tokens: 2765
+cost_usd: 0.006321510000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 57094
+property: P625
+property_label: coordinate location
+rationale: The coordinate 33°16'33"N, 35°31'6"E is geographically plausible for the
+  Marjeyoun District, Lebanon, where the item is located. However, the cited reference
+  (WikiMapia) is unreachable, and no verified independent sources confirm the exact
+  coordinate for an ancient well in Taybeh, Marjeyoun District. No primary or secondary
+  sources were successfully fetched or confirmed during the investigation.
+rcid: 2551393841
+revid: 2474698113
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/marjayoun_district
+- provenance: verified
+  supports_claim: false
+  url: https://palarchive.org/index.php/Detail/objects/91133/lang/en_US
+timestamp: '2026-04-10T13:12:27.950952+00:00'
+title: Q110895171
+turns: 5
+value_label: null
+verdict: unverifiable

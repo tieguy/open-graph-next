@@ -1,0 +1,34 @@
+completion_tokens: 1625
+cost_usd: 0.01855856
+diff_type: reference_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 86929
+property: P2003
+property_label: Instagram username
+rationale: Multiple independent sources confirm that Bella Hue uses the Instagram
+  username @ItsBellaHue. The Spotify artist page explicitly states 'You can find Bella
+  across all social media platforms @ItsBellaHue', and Linktree pages consistently
+  show @ItsBellaHue as her social media handle across multiple platforms. While Instagram
+  itself may block automated access, the consistency across her official artist profiles
+  provides strong evidence that @ItsBellaHue is her correct Instagram username.
+rcid: 2541056088
+revid: 2464838226
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://open.spotify.com/artist/7BdNAO2RTQfDWiRJkrrsHE
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/BellaHue
+- provenance: reported
+  supports_claim: true
+  url: https://linktr.ee/itsbellahue
+- provenance: reported
+  supports_claim: true
+  url: https://www.tiktok.com/@itsbellahue?lang=en
+timestamp: '2026-02-21T03:43:55.954658+00:00'
+title: Q138354585
+turns: 15
+value_label: null
+verdict: verified-high

@@ -1,0 +1,25 @@
+completion_tokens: 2075
+cost_usd: 0.00414747
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34996
+property: P18
+property_label: image
+rationale: The edit changed the image filename from 'María Zambrano ca. 1918.JPG'
+  (a historically descriptive and contextually meaningful filename) to 'María-Zambrano-1-e1602071174321.png'
+  (a generic, auto-generated filename). The old filename is more informative for biographical
+  representation, and no evidence or justification was provided for the change. The
+  Wikimedia Commons category page confirms both images exist, but the new filename
+  lacks historical context. No additional sources were found to support the change.
+rcid: 2551264965
+revid: 2474575212
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Mar%C3%ADa_Zambrano
+timestamp: '2026-04-11T13:08:52.620276+00:00'
+title: Q235134
+turns: 2
+value_label: null
+verdict: suspect

@@ -1,0 +1,23 @@
+completion_tokens: 634
+cost_usd: 0.0038427
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 74318
+property: P577
+property_label: publication date
+rationale: No external sources were found during the investigation that confirm or
+  deny the claim that Kruskal's algorithm was originally published in 1957. Multiple
+  search queries attempting to locate historical references to Kruskal's algorithm
+  publication date returned zero results, indicating either the information is not
+  publicly documented online or cannot be accessed through standard search methods.
+  Since no sources were fetchable and verified for provenance, the claim cannot be
+  verified as correct or incorrect.
+rcid: 2550640073
+revid: 2473970169
+sources: []
+timestamp: '2026-04-07T09:57:07.575121+00:00'
+title: Q797860
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 255
+cost_usd: 0.0059137625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 61482
+property: P140
+property_label: religion or worldview
+rationale: The primary sources (Wikipedia and Britannica) are blocked, preventing
+  direct verification of the claim. Without access to these sources, it is not possible
+  to confirm or deny the claim that Lope de Vega's religion or worldview is Catholicism.
+rcid: 2550217848
+revid: 2473560018
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Lope_de_Vega
+- provenance: reported
+  supports_claim: null
+  url: https://www.britannica.com/biography/Lope-de-Vega
+timestamp: '2026-04-07T10:28:42.187947+00:00'
+title: Q165257
+turns: 4
+value_label: Catholicism
+verdict: unverifiable

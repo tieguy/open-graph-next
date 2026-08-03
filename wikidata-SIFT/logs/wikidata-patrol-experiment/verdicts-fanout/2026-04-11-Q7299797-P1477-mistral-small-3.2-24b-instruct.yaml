@@ -1,0 +1,29 @@
+completion_tokens: 2598
+cost_usd: 0.005616375000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52980
+property: P1477
+property_label: birth name
+rationale: Strong evidence supports 'Raúl Lucio Hernández Lechuga' as the correct
+  birth name from multiple reliable sources. No independent sources were found to
+  support 'Joel Guzmán Hernández' as the birth name. The edit appears to be incorrect
+  based on the available evidence.
+rcid: null
+revid: 2471113685
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://insightcrime.org/news/brief/mexico-arrests-founding-member-of-zetas/
+- provenance: verified
+  supports_claim: true
+  url: https://peoplepill.com/i/raul-lucio-hernandez-lechuga/
+- provenance: verified
+  supports_claim: true
+  url: https://www.opensanctions.org/entities/NK-VLYv5ghPTetse9SvSeakzW/
+timestamp: '2026-04-11T08:46:34.429534+00:00'
+title: Q7299797
+turns: 6
+value_label: null
+verdict: suspect

@@ -1,0 +1,31 @@
+completion_tokens: 1358
+cost_usd: 0.010702240000000002
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 42320
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm ZedEye (Bobby Mabhena) is a hip-hop/rap
+  artist. The Shazam page explicitly lists his genre as 'Hip-Hop/Rap', while the Music
+  In Africa profile describes him as a songwriter and recording artist whose work
+  includes 'every verse', consistent with rap performance. Additional search results
+  show his music is tagged with rap and hip-hop labels. The occupation 'rapper' accurately
+  describes an artist who performs in the hip-hop/rap genre.
+rcid: 2540935121
+revid: 2464725457
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.musicinafrica.net/directory/zedeye
+- provenance: verified
+  supports_claim: true
+  url: https://open.spotify.com/artist/00coRF9xAYoKUyF2CtGmi8
+- provenance: verified
+  supports_claim: true
+  url: https://www.shazam.com/artist/zedeye/1456072539
+timestamp: '2026-02-20T17:34:01.329736+00:00'
+title: Q138349093
+turns: 6
+value_label: rapper
+verdict: verified-high

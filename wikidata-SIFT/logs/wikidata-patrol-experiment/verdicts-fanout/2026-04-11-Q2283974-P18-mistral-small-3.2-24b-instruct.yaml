@@ -1,0 +1,28 @@
+completion_tokens: 684
+cost_usd: 0.00205804375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21718
+property: P18
+property_label: image
+rationale: The edit does not include any references for the new image, and the web
+  search for the new image resulted in an error. Therefore, it is not possible to
+  verify the correctness of the change at this time.
+rcid: null
+revid: 2470471869
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/sal-da-vinci.html?sortBy=relevant
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/sal-da-vinci
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCq8KLfsQ84CzSFSyaPDsuMQ
+timestamp: '2026-04-11T09:43:36.009100+00:00'
+title: Q2283974
+turns: 2
+value_label: null
+verdict: unverifiable

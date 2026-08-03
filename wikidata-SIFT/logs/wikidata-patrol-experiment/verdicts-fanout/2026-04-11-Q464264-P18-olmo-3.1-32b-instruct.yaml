@@ -1,0 +1,33 @@
+completion_tokens: 1421
+cost_usd: 0.0059544
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25509
+property: P18
+property_label: image
+rationale: The new image added to Rosalía de Castro's item is a photograph from a
+  modern American soccer match and is completely unrelated to the subject. The old
+  image, while not found in major repositories, at least pertains to Rosalía de Castro.
+  No justification or supporting reference was found for this change, and it misrepresents
+  the item. This edit should be reverted.
+rcid: 2549245218
+revid: 2472616570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://academia.gal/letras-galegas/1963/rosalia-de-castro
+- provenance: verified
+  supports_claim: false
+  url: https://www.cervantesvirtual.com/portales/rosalia_de_castro/imagenes_vida/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lavozdegalicia.es/noticia/cultura/2021/10/02/span-langgl-documento-inedito-demostra-rosalia-naceu-23-febreiro-non-24span/0003_202110G2P34991.htm
+- provenance: reported
+  supports_claim: false
+  url: https://www.gettyimages.es/fotos/rosalia-de-castro
+timestamp: '2026-04-11T11:10:37.066140+00:00'
+title: Q464264
+turns: 1
+value_label: null
+verdict: incorrect

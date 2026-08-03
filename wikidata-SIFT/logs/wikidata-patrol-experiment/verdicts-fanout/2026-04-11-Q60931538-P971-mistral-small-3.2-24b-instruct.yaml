@@ -1,0 +1,30 @@
+completion_tokens: 1521
+cost_usd: 0.0061307537500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60640
+property: P971
+property_label: category combines topics
+rationale: The edit changes the category combines topics value for the Wikimedia category
+  "Category:Illinois Fighting Illini women's volleyball coaches" from "Illinois Fighting
+  Illini women's volleyball" to "persons active in this association". However, due
+  to the inability to fetch relevant pages and verify the change with independent
+  sources, the correctness of the edit cannot be confirmed.
+rcid: 2550918264
+revid: 2474240280
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fightingillini.com/news/2024/11/13/fighting-illini-volleyball-unveils-2025-class.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://fightingillini.com/sports/womens-volleyball/coaches
+- provenance: verified
+  supports_claim: false
+  url: https://fightingillini.com/sports/womens-volleyball/roster/coaches/chris-tamas/2095
+timestamp: '2026-04-11T09:09:13.185234+00:00'
+title: Q60931538
+turns: 8
+value_label: persons active in this association
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 2015
+cost_usd: 0.0038224
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13067
+property: P361
+property_label: part of
+rationale: The edit proposes a 'followed by' relationship between two buildings on
+  Шмидта street in Pavlovo. The only cited source is a Wikivoyage page, which is not
+  an authoritative reference for Wikidata. OpenStreetMap data supports the existence
+  of sequentially numbered buildings on the street but does not confirm the specific
+  labeling or order of 'улица Шмидта 1 3' and 'улица Шмидта 3'. Without a primary
+  or official source that explicitly confirms the numbering and sequence, the claim
+  is plausible but not verified.
+rcid: 2551159233
+revid: 2474473492
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikivoyage.org/?oldid=561556#5240207002
+- provenance: verified
+  supports_claim: false
+  url: https://www.openstreetmap.org/export/embed.html?bbox=43.0600,55.9650,43.0640,55.9670
+timestamp: '2026-04-11T10:06:58.022502+00:00'
+title: Q116781961
+turns: 1
+value_label: улица Шмидта 1 3 [ru]
+verdict: plausible

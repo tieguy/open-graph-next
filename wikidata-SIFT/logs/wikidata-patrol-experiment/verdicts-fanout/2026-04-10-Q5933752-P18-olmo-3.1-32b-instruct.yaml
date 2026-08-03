@@ -1,0 +1,32 @@
+completion_tokens: 936
+cost_usd: 0.0044578
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19481
+property: P18
+property_label: image
+rationale: There is no publicly accessible, authoritative source that explicitly confirms
+  or denies whether 'Masoud Pezeshkian 14040616 (cropped).jpg' was the correct or
+  current image for Masoud Pezeshkian on Wikidata. Getty Images shows multiple photos
+  of him but does not specify which is the official image. Major news outlets mention
+  Pezeshkian but do not reference the image in question. The potentially authoritative
+  Iranian government site could not be accessed. Therefore, the removal of this image
+  cannot be verified as correct or incorrect based on available evidence.
+rcid: 2551335010
+revid: 2474641550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/masoud-pezeshkian
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehindu.com/news/international/irans-khamenei-formally-grants-masoud-pezeshkian-presidential-powers/article68456408.ece
+timestamp: '2026-04-10T14:17:36.642052+00:00'
+title: Q5933752
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1749
+cost_usd: 0.00385893
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36624
+property: P140
+property_label: religion or worldview
+rationale: The investigation could not fetch independent sources due to persistent
+  search errors. The old value ('Protestantism') was supported by a Wikipedia reference,
+  but the new value ('religious syncretism') lacks any references or corroborating
+  evidence. Without verified sources, it is impossible to confirm or deny the accuracy
+  of the change. The absence of direct evidence and the inability to investigate further
+  necessitates an 'unverifiable' verdict.
+rcid: 2550612871
+revid: 2473943666
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mlpp.pressbooks.pub/worldreligionsthespiritsearching/part/syncretic-traditions/
+- provenance: verified
+  supports_claim: false
+  url: https://oer.pressbooks.pub/beliefs/chapter/religion-and-syncretism/
+timestamp: '2026-04-11T13:39:27.760021+00:00'
+title: Q466838
+turns: 3
+value_label: religious syncretism
+verdict: unverifiable

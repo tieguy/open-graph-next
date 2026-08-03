@@ -1,0 +1,24 @@
+completion_tokens: 623
+cost_usd: 0.00778295
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 153167
+property: P1971
+property_label: number of children
+rationale: Despite extensive searching, no verifiable sources confirming Circe Maia's
+  number of children were found. The Wikipedia page and various academic sites mentioning
+  her biography either did not appear in search results or contained no information
+  about her children count. Without primary or authoritative secondary sources to
+  confirm the edit, the claim remains unverifiable.
+rcid: null
+revid: 2469371140
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://circemaia.org.uy/
+timestamp: '2026-04-07T03:50:35.603123+00:00'
+title: Q511494
+turns: 15
+value_label: null
+verdict: unverifiable

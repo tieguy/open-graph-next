@@ -1,0 +1,41 @@
+completion_tokens: 3061
+cost_usd: 0.16620600000000002
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 150901
+property: P106
+property_label: occupation
+rationale: Multiple independent sources from 2021–2025 confirm Ludovic Bellot-Gurlet's
+  rank as 'Full Professor of analytical chemistry' at Sorbonne Université. The most
+  authoritative evidence comes from peer-reviewed conference proceedings (IACA 2022)
+  and the HAL academic repository, both explicitly stating his professorial rank and
+  current institutional affiliation (MONARIS UMR8233). His ongoing publication record
+  through 2025 and presence on Google Scholar, ResearchGate, and other academic databases
+  further corroborate this status.
+rcid: 2540934629
+revid: 2464725100
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://cv.hal.science/ludovic-bellot-gurlet
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?user=-zq92ygAAAAJ&hl=en
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Ludovic-Bellot-Gurlet
+- provenance: verified
+  supports_claim: true
+  url: https://www.growkudos.com/profile/ludovic_bellot-gurlet
+- provenance: reported
+  supports_claim: true
+  url: https://hal.science/hal-04238186/
+- provenance: reported
+  supports_claim: true
+  url: https://www.gia.edu/gems-gemology/fall-2021-first-identification-sudoite
+timestamp: '2026-02-20T18:04:27.996172+00:00'
+title: Q57878708
+turns: 9
+value_label: full professor
+verdict: verified-high

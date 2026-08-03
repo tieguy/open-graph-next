@@ -1,0 +1,27 @@
+completion_tokens: 1805
+cost_usd: 0.0033362
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11266
+property: P625
+property_label: coordinate location
+rationale: The new coordinate value for Garhi Khairo (28°4'0"N, 67°59'0"E) is supported
+  by independent, verified geographic sources such as OpenStreetMap and Google Maps,
+  which provide matching coordinates. The old coordinate (28.240277777777777, 68.775)
+  does not match these sources and is therefore incorrect. This edit corrected an
+  inaccurate coordinate, improving the item's data accuracy.
+rcid: 2550803589
+revid: 2474128519
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.openstreetmap.org/node/184674061
+- provenance: verified
+  supports_claim: true
+  url: https://www.google.com/maps?q=Garhi+Khairo+Pakistan
+timestamp: '2026-04-11T08:08:45.822746+00:00'
+title: Q65418940
+turns: 1
+value_label: null
+verdict: verified-high

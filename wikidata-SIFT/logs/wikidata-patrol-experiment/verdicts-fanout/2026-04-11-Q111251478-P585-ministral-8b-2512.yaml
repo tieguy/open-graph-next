@@ -1,0 +1,26 @@
+completion_tokens: 2183
+cost_usd: 0.00498936
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 66075
+property: P585
+property_label: point in time
+rationale: The new reference URL is from the official Rhineland-Palatinate election
+  authority domain, which is authoritative for election dates. However, the content
+  of the referenced PDF could not be fetched or verified due to technical issues.
+  The old reference was irrelevant (about Baden-Württemberg) and also unreachable.
+  No independent sources were successfully fetched or verified during this investigation,
+  and no verified evidence supports the updated reference. Thus, the claim cannot
+  be verified.
+rcid: 2551378281
+revid: 2474683025
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wahlen.rlp.de/en/
+timestamp: '2026-04-11T07:20:43.132058+00:00'
+title: Q111251478
+turns: 8
+value_label: null
+verdict: unverifiable

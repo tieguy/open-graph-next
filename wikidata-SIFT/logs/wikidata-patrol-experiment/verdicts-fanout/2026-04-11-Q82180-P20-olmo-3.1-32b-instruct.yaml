@@ -1,0 +1,38 @@
+completion_tokens: 2149
+cost_usd: 0.0067736
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27421
+property: P20
+property_label: place of death
+rationale: The change from 'Vincennes' to 'Dakar' for Mata Hari's place of death is
+  not supported by any credible source. All authoritative historical records indicate
+  that Mata Hari was executed at the military garrison at Fontainebleau near Paris
+  in 1917. The claim that she died in Dakar is entirely unsupported and incorrect.
+rcid: 2550970497
+revid: 2474289994
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mata_Hari
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Mata_Hari
+- provenance: verified
+  supports_claim: false
+  url: https://www.nationalww2museum.org/war-article/mata-hari-spy-myth-truth
+- provenance: verified
+  supports_claim: false
+  url: https://www.history.com/topics/world-war-i/mata-hari
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/history/article/20141010-mata-hari-spy-myth-truth
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20220116102052/https://www.britannica.com/biography/Mata-Hari
+timestamp: '2026-04-11T16:06:32.978857+00:00'
+title: Q82180
+turns: 1
+value_label: Dakar
+verdict: incorrect

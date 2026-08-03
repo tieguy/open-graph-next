@@ -1,0 +1,33 @@
+completion_tokens: 1842
+cost_usd: 0.006983600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29392
+property: P3373
+property_label: sibling
+rationale: Transfermarkt independently confirms that both Felipe Sarra and Federico
+  Sarra share the same birthdate, hometown, youth club, and current club, strongly
+  indicating a familial relationship. Two independent journalistic sources explicitly
+  refer to them as twins. This cross-referenced evidence confirms that Federico Sarra
+  is a sibling (specifically, a twin) of Felipe Sarra.
+rcid: 2540927358
+revid: 2464718116
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/felipe-sarra/profil/spieler/1089729
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/federico-sarra/profil/spieler/1089728
+- provenance: verified
+  supports_claim: true
+  url: https://www.clarin.com/zonales/mellizos-hacen-par-futbol-diseno-grafico-creacion-apps_0_zzTdSdHHe.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.tycsports.com/al-angulo/mellizos-sarra-historia-conocio-lionel-messi-sorpresivo-regalo-id530613.html
+timestamp: '2026-02-20T21:43:12.027101+00:00'
+title: Q138348816
+turns: 3
+value_label: Federico Sarra
+verdict: verified-high

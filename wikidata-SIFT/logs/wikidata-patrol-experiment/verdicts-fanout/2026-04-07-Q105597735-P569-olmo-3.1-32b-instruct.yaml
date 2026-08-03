@@ -1,0 +1,20 @@
+completion_tokens: 566
+cost_usd: 0.00429
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19752
+property: P569
+property_label: date of birth
+rationale: No independent or primary source could be accessed or located to verify
+  the birth date of Laslo Pavlik as '11 April 1946'. The only cited reference is German
+  Wikipedia, which is not an acceptable source for Wikidata and could not be accessed.
+  Without verifiable evidence, the claim cannot be confirmed or denied.
+rcid: 2549617609
+revid: 2472979161
+sources: []
+timestamp: '2026-04-07T08:06:16.580121+00:00'
+title: Q105597735
+turns: 4
+value_label: null
+verdict: unverifiable

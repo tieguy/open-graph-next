@@ -1,0 +1,27 @@
+completion_tokens: 778
+cost_usd: 0.010077
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 48051
+property: P570
+property_label: date of death
+rationale: The referenced Vatican Library source could not be accessed and no independent,
+  readable, reliable source explicitly confirms that Salvian died in the year 477.
+  The claim is supported only by cited records that could not be verified, and the
+  use of a 'circa' qualifier is appropriate given the evidence available. Without
+  primary or independently verifiable confirmation, the date cannot be confirmed.
+rcid: 2549650892
+revid: 2473011455
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://opac.vatlib.it/record/495/125236
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T07:50:19.030968+00:00'
+title: Q532684
+turns: 7
+value_label: null
+verdict: unverifiable

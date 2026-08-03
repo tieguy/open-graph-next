@@ -1,0 +1,34 @@
+completion_tokens: 345
+cost_usd: 0.0033813999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15872
+property: P19
+property_label: place of birth
+rationale: No verified sources were found that confirm Nzingha Mbande's place of birth
+  as either 'Caculo Cabaça' or 'Francia'. Several reputable sources, including UNESCO
+  and Black History Heroes, state that Nzingha was born in the Kingdom of Ndongo in
+  what is now Angola, but do not specify 'Caculo Cabaça' as her birthplace. The claim
+  that her place of birth is 'Francia' (Francia, a historical region in what is now
+  France) is not supported by any reliable, independently verifiable sources. The
+  only sources fetched and checked were either unavailable or did not contain the
+  relevant information. Therefore, the change from 'Caculo Cabaça' to 'Francia' cannot
+  be verified or refuted with the evidence currently available.
+rcid: 2550579530
+revid: 2473911425
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.unesco.org/womeninafrica/njinga-mbandi/biography
+- provenance: reported
+  supports_claim: false
+  url: https://www.blackhistoryheroes.com/2011/03/queen-ana-de-sousa-njinga-mbande-of.html
+- provenance: reported
+  supports_claim: false
+  url: https://kids.kiddle.co/Nzinga_of_Ndongo_and_Matamba
+timestamp: '2026-04-11T18:07:04.817042+00:00'
+title: Q467650
+turns: 1
+value_label: Francia
+verdict: unverifiable

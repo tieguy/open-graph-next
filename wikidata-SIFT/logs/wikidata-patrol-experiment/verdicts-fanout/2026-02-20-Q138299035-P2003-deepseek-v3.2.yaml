@@ -1,0 +1,27 @@
+completion_tokens: 366
+cost_usd: 0.0085994
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 25471
+property: P2003
+property_label: Instagram username
+rationale: The Instagram username 'https://www.instagram.com/ciriminna/' is likely
+  incorrect as Instagram usernames should be simple handles without the full URL prefix
+  (e.g., 'ciriminna'). However, I was unable to verify Andrea Ciriminna's actual Instagram
+  presence because the official website (andreaciriminna.it) returned an HTTP 500
+  error and the clickechic.it site could not be fetched due to a network error. The
+  search results showed references to Instagram but did not provide the specific handle.
+  The edit appears to be by a new editor and uses an improper format for Instagram
+  username values in Wikidata, which should be plain text handles, not full URLs.
+rcid: 2540929463
+revid: 2464720169
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.andreaciriminna.it/
+timestamp: '2026-02-20T20:47:41.737649+00:00'
+title: Q138299035
+turns: 3
+value_label: null
+verdict: unverifiable

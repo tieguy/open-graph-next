@@ -1,0 +1,34 @@
+completion_tokens: 311
+cost_usd: 0.0030762000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14448
+property: P31
+property_label: instance of
+rationale: The change from 'interdisciplinary science' to 'academic degree' for the
+  property P31 (instance of) on the item for library and information science is not
+  supported by independent sources. Library and information science is generally recognized
+  as an academic discipline or field of study, but not typically as an 'academic degree'
+  at the instance-of level. The primary sources consulted describe library and information
+  science as a discipline or field, and the new value 'academic degree' is more appropriately
+  used for specific degree entities, not for the subject field itself. There is no
+  evidence found that library and information science should be classified as an 'academic
+  degree' at the instance-of level.
+rcid: 2551339635
+revid: 2474645889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.simmons.edu/graduate/academic-programs/graduate-and-certificate-programs/library-and-information-science-ms
+- provenance: verified
+  supports_claim: false
+  url: https://bulletins.wayne.edu/graduate/school-information-sciences/masters-programs/library-and-information-science/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Library_and_information_science
+timestamp: '2026-04-11T06:45:32.455821+00:00'
+title: Q13420675
+turns: 1
+value_label: academic degree
+verdict: suspect

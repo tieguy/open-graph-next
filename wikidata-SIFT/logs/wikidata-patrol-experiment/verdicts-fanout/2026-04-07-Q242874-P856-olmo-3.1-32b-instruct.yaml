@@ -1,0 +1,27 @@
+completion_tokens: 708
+cost_usd: 0.0121824
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 58788
+property: P856
+property_label: official website
+rationale: No independent, authoritative source identifies https://www.koreanair.com
+  as the official website of Koganei city. The URL belongs to a major airline and
+  is not associated with the municipal government of Koganei. Standard Japanese municipal
+  conventions and expected domain patterns (e.g., .go.jp) were not matched. The cited
+  references are secondary and do not constitute primary evidence supporting the claim.
+rcid: null
+revid: 2471369726
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Koganei,_Tokyo
+- provenance: reported
+  supports_claim: false
+  url: https://www.koreanair.com
+timestamp: '2026-04-07T11:30:53.534645+00:00'
+title: Q242874
+turns: 7
+value_label: null
+verdict: incorrect

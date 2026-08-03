@@ -1,0 +1,27 @@
+completion_tokens: 1439
+cost_usd: 0.0052896
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22131
+property: P18
+property_label: image
+rationale: The edit replaces the previous image with a highly specific filename, but
+  no independent or official source confirms that '2021 Nissan Armada SV 2WD in Brilliant
+  Silver Metallic, front left.jpg' is an appropriate or official representative image
+  for the Nissan Armada. The cited reference is circular and not acceptable per Wikidata
+  policy. There is no verified evidence supporting the use of this image.
+rcid: 2550729446
+revid: 2474056825
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nissanusa.com/automobiles/model-overview/2021/armada-sv.html
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Nissan_Armada
+timestamp: '2026-04-07T09:37:59.871113+00:00'
+title: Q611158
+turns: 4
+value_label: null
+verdict: suspect

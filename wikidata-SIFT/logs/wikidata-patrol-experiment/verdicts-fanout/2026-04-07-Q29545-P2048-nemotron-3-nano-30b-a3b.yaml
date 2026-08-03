@@ -1,0 +1,21 @@
+completion_tokens: 593
+cost_usd: 0.012786900000000004
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 253366
+property: P2048
+property_label: height
+rationale: 'No reliable sources were found to corroborate the claim that Kevin Durant''s
+  height is 213 centimeters. All search queries for ''Kevin Durant height'' returned
+  no relevant results to verify the claim. Given that this was an edit from a new
+  editor (tags: ''new editor changing statement'', ''mw-reverted''), and without external
+  verification, the change cannot be confirmed as correct or incorrect.'
+rcid: null
+revid: 2471467596
+sources: []
+timestamp: '2026-04-07T08:07:27.115065+00:00'
+title: Q29545
+turns: 15
+value_label: null
+verdict: unverifiable

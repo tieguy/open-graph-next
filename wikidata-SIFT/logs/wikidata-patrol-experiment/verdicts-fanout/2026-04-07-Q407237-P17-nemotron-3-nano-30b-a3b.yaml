@@ -1,0 +1,17 @@
+completion_tokens: 724
+cost_usd: 0.013565600000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 268416
+property: P17
+property_label: country
+rationale: null
+rcid: null
+revid: 2465002456
+sources: []
+timestamp: '2026-04-07T08:22:47.194071+00:00'
+title: Q407237
+turns: 15
+value_label: Colombia
+verdict: null

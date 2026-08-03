@@ -1,0 +1,22 @@
+completion_tokens: 912
+cost_usd: 0.0029798
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 55948
+property: P1477
+property_label: birth name
+rationale: The edit cited only an English‑Wikipedia import, which is prohibited as
+  a source; no reliable source was fetched or found that confirms the birth‑name value
+  "hola" for Mary Jackson, leaving the claim unverifiable.
+rcid: 2550573768
+revid: 2473905962
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mary_Jackson_(mathematician)
+timestamp: '2026-04-07T09:04:45.522521+00:00'
+title: Q27221300
+turns: 6
+value_label: null
+verdict: unverifiable

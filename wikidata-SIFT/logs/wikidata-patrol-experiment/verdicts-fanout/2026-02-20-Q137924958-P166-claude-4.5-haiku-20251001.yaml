@@ -1,0 +1,28 @@
+completion_tokens: 1736
+cost_usd: 0.024682000000000003
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 16002
+property: P166
+property_label: award received
+rationale: 'The claim asserts that Manvik Chandra received ''drawing'' (Q93184, a
+  visual artwork category) as an award. This is semantically problematic: ''drawing''
+  is a medium or artwork type, not an award, and should not be a value for the P166
+  ''award received'' property. The cited Instagram reference is on a blocked domain
+  and cannot be verified. The personal website provides no substantiation. No independent
+  sources confirm this award claim.'
+rcid: 2540956799
+revid: 2464745014
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/p/DT43S4TEhmY/?igsh=d3NjMGsyeXVxdDZ2
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+timestamp: '2026-02-20T06:46:21.932609+00:00'
+title: Q137924958
+turns: 2
+value_label: drawing
+verdict: suspect

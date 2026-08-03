@@ -1,0 +1,22 @@
+completion_tokens: 1114
+cost_usd: 0.007616562499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 77385
+property: P742
+property_label: pseudonym
+rationale: The investigation found no evidence supporting 'Pauline Kebab' as a pseudonym
+  for Pauline Kergomard. The prefetched reference and independent sources do not mention
+  this pseudonym. Therefore, the edit appears to be incorrect.
+rcid: null
+revid: 2463368304
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bibulyon.hypotheses.org/7020
+timestamp: '2026-04-11T13:36:35.726291+00:00'
+title: Q3372727
+turns: 6
+value_label: null
+verdict: incorrect

@@ -1,0 +1,37 @@
+completion_tokens: 2969
+cost_usd: 0.0048658
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15422
+property: P19
+property_label: place of birth
+rationale: The old value ('Loja', Portugal) is incorrect and unsupported by any credible
+  source. The new value ('Roman Republic') is not a specific place of birth and is
+  not supported by any cited or independently verified source. Multiple reputable
+  secondary and primary sources do not specify Lucius Aurelius Cotta's place of birth.
+  Therefore, the change from an incorrect specific value to an unsourced and imprecise
+  one is not an improvement.
+rcid: null
+revid: 2470502901
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lucius_Aurelius_Cotta_(consul_119_BC)
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Lucius_Aurelius_Cotta_(consul_119_BC)
+- provenance: verified
+  supports_claim: false
+  url: https://www.ancient-origins.net/people-legends-legends/lucius-aurelius-cotta-roman-politician-and-general-001931
+- provenance: verified
+  supports_claim: false
+  url: https://prosopography.org/person/1485
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Loja,_Portugal
+timestamp: '2026-04-11T15:22:15.265516+00:00'
+title: Q3265869
+turns: 1
+value_label: Roman Republic
+verdict: suspect

@@ -1,0 +1,34 @@
+completion_tokens: 649
+cost_usd: 0.010554679999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 28516
+property: P625
+property_label: coordinate location
+rationale: The edit updates the coordinate location for Ōmori (Tokyo) from 35.57252777777778,
+  139.73380555555556 to 35°34'21.1"N, 139°44'1.7"E. I searched for independent confirmation
+  of this coordinate but found no sources directly supporting the specific value 35°34'21.1"N,
+  139°44'1.7"E. The reference cited in the edit is a Japanese Wikipedia import, which
+  cannot be used as a Wikidata reference source. My search found some general location
+  data suggesting coordinates around 35.5667, 139.7333 and 35.567, 139.733 for Ōmori,
+  but the fetched source (latitude.to) was inaccessible. Without being able to verify
+  the specific coordinates against authoritative sources, I cannot confirm the accuracy
+  of this update.
+rcid: 2540941061
+revid: 2464730556
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.maplandia.com/japan/kanto/tokyo/omori/
+- provenance: reported
+  supports_claim: null
+  url: https://latitude.to/articles-by-country/jp/japan/75416/mori-ta-tokyo
+- provenance: reported
+  supports_claim: null
+  url: https://www.tageo.com/index-e-ja-v-40-d-m363693.htm
+timestamp: '2026-02-20T14:49:01.940876+00:00'
+title: Q6147936
+turns: 5
+value_label: null
+verdict: unverifiable

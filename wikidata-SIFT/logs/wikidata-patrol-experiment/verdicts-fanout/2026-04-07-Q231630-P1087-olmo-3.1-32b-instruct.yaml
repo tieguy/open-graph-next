@@ -1,0 +1,20 @@
+completion_tokens: 793
+cost_usd: 0.0374886
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 185064
+property: P1087
+property_label: Elo rating
+rationale: The edit claims an Elo rating of 2,243 for Nona Gaprindashvili and cites
+  OlimpBase as the source. However, I was unable to access the referenced OlimpBase
+  page or find any other authoritative, accessible source that confirms this rating
+  value. Without reliable evidence, the claim cannot be verified.
+rcid: 2550305107
+revid: 2473644942
+sources: []
+timestamp: '2026-04-07T08:18:47.270989+00:00'
+title: Q231630
+turns: 5
+value_label: null
+verdict: unverifiable

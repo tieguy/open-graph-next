@@ -1,0 +1,25 @@
+completion_tokens: 723
+cost_usd: 0.00412975
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 79703
+property: P53
+property_label: family
+rationale: Despite extensive search attempts, no verifiable sources were found that
+  confirm or deny the claim that 'O'Donnells Island' is the correct family for Hugh
+  Roe O'Donnell. All search queries returned no relevant results, preventing evaluation
+  of source reliability or content support. Without any sources to assess, the lack
+  of corroborating evidence means the claim cannot be verified, leading to an 'unverifiable'
+  verdict rather than 'suspect'.
+rcid: 2549953091
+revid: 2473304559
+sources:
+- provenance: verified
+  supports_claim: null
+  url: None
+timestamp: '2026-04-07T09:58:49.049607+00:00'
+title: Q2718416
+turns: 12
+value_label: O'Donnells Island
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 1314
+cost_usd: 0.00484015
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51267
+property: P1477
+property_label: birth name
+rationale: The independent sources consistently refer to Neil Armstrong's birth name
+  as 'Neil Alden Armstrong' and do not mention 'Goku super sayayin'. The provided
+  reference is unreachable, and no credible source supports the claim that his birth
+  name is 'Goku super sayayin'.
+rcid: 2550337240
+revid: 2473676273
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://nationalaviation.org/enshrinee/neil-alden-armstrong/
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/scientists/neil-armstrong
+- provenance: verified
+  supports_claim: false
+  url: https://www.natgeokids.com/uk/discover/science/space/neil-armstrong-facts/
+- provenance: verified
+  supports_claim: false
+  url: https://planet4589.org/space/astro/rides.html
+timestamp: '2026-04-10T09:10:45.266470+00:00'
+title: Q1615
+turns: 1
+value_label: null
+verdict: incorrect

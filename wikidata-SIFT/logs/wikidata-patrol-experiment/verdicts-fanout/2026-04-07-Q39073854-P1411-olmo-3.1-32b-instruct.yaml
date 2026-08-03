@@ -1,0 +1,27 @@
+completion_tokens: 671
+cost_usd: 0.0103246
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49610
+property: P1411
+property_label: nominated for
+rationale: No independent authoritative source confirms that 'The Journey' (2017)
+  was submitted by the United Kingdom to the 91st Academy Awards. The only cited reference
+  is circular (imported from Wikipedia), and web searches did not locate confirmation
+  from the Academy's official materials or reputable media coverage. Therefore, the
+  edit appears suspect.
+rcid: 2550486540
+revid: 2473822461
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.academyawards.org/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/91st_Academy_Awards
+timestamp: '2026-04-07T13:27:24.906312+00:00'
+title: Q39073854
+turns: 9
+value_label: International Submission to the Academy Awards
+verdict: suspect

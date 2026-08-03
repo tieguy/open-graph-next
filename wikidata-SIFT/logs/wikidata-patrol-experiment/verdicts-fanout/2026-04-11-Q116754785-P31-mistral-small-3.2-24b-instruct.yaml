@@ -1,0 +1,30 @@
+completion_tokens: 1358
+cost_usd: 0.0027021812500000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26847
+property: P31
+property_label: instance of
+rationale: The edit changes the 'instance of' property from 'fictional human' to 'human'
+  for the character Helen from the Sonic X universe. However, due to the inability
+  to access relevant sources, it is unverifiable whether this change is accurate.
+  The character is part of a fictional anime series, and the original value 'fictional
+  human' seems more appropriate given the context.
+rcid: 2550750525
+revid: 2474076726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/learn/lesson/helen-of-troy-story-mythology-trojan-war.html
+- provenance: verified
+  supports_claim: false
+  url: https://web.sas.upenn.edu/discentes/2024/04/21/the-anatomy-of-a-misunderstood-woman/
+- provenance: verified
+  supports_claim: false
+  url: https://www.quora.com/What-did-Helen-of-Troy-look-like-Was-she-really-as-beautiful-as-they-say-or-was-it-just-propaganda-from-the-winning-side-Greeks
+timestamp: '2026-04-11T13:33:29.457700+00:00'
+title: Q116754785
+turns: 3
+value_label: human
+verdict: unverifiable

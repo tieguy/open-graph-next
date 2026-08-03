@@ -1,0 +1,28 @@
+completion_tokens: 1699
+cost_usd: 0.00181407
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19816
+property: P18
+property_label: image
+rationale: The edit references French Wikipedia (Q8447) as the source, but the page
+  could not be accessed due to blocked domain restrictions. No independent sources
+  were successfully fetched or verified to confirm the correctness of the new image
+  filename ('Skonto stadium (20.10.2025.).jpg') or the old filename ('Riga Skonto
+  Stadium.jpg'). Without access to the cited source or corroborating evidence, the
+  edit cannot be verified or denied.
+rcid: 2550330274
+revid: 2473669626
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/skonto-stadium.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/skonto-stadions
+timestamp: '2026-04-11T08:54:04.273635+00:00'
+title: Q1474452
+turns: 2
+value_label: null
+verdict: unverifiable

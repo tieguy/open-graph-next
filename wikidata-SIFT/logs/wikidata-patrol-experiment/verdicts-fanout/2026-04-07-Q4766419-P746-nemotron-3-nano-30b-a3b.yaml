@@ -1,0 +1,22 @@
+completion_tokens: 738
+cost_usd: 0.0038885
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 74818
+property: P746
+property_label: date of disappearance
+rationale: Despite extensive searches, no contemporary or independent sources were
+  located that mention 'Ann Gotlib' or confirm a disappearance on '1 June 1983' in
+  the relevant historical records from major archives. All attempted search queries
+  returned no results, and pre-fetched references for this edit contained no URLs
+  to verify. Without any sourced evidence, the existence of a citation in the edit
+  cannot be confirmed, and no independent corroboration was found.
+rcid: null
+revid: 2335259226
+sources: []
+timestamp: '2026-04-07T10:35:25.326036+00:00'
+title: Q4766419
+turns: 15
+value_label: null
+verdict: unverifiable

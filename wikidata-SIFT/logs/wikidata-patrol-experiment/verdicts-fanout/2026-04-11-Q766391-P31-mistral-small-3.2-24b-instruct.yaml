@@ -1,0 +1,25 @@
+completion_tokens: 1051
+cost_usd: 0.0034822
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36366
+property: P31
+property_label: instance of
+rationale: The change to 'former railway station' is supported by the Commons Wikimedia
+  page and the Grokipedia page, which both indicate that the station is planned to
+  be closed soon. This aligns with the definition of a 'former railway station'.
+rcid: 2550701037
+revid: 2474029199
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Niyama_Station
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/niyama_station
+timestamp: '2026-04-11T13:10:07.283985+00:00'
+title: Q766391
+turns: 3
+value_label: former railway station
+verdict: verified-high

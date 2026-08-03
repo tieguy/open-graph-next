@@ -1,0 +1,26 @@
+completion_tokens: 1348
+cost_usd: 0.010945400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50683
+property: P747
+property_label: has edition or translation
+rationale: No credible sources support the claim that 'Durex' is an edition or translation
+  of the Code of Hammurabi. Multiple searches and attempted fetches found no evidence
+  associating the brand 'Durex' with any translation or edition of this historical
+  text. The presence of 'Durex' appears to be an error and should be removed.
+rcid: null
+revid: 2464186837
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Code_de_Hammourabi
+- provenance: reported
+  supports_claim: false
+  url: http://www.larousse.fr/encyclopedie/oeuvre/code_de_Hammourabi/111485
+timestamp: '2026-04-08T18:39:09.351959+00:00'
+title: Q93304
+turns: 8
+value_label: Durex
+verdict: incorrect

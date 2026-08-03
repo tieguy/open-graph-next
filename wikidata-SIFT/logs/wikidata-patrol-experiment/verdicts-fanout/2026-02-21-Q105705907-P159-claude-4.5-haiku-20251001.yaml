@@ -1,0 +1,31 @@
+completion_tokens: 2042
+cost_usd: 0.038689
+diff_type: qualifier_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 28479
+property: P159
+property_label: headquarters location
+rationale: The claim that the Embassy of Israel's headquarters location is Brasília
+  is correct and strongly supported by multiple independent sources. The official
+  Israeli Ministry of Foreign Affairs website (embassies.gov.il/brazil) directly confirms
+  the embassy address is in 'Brasilia/DF' and provides historical documentation that
+  the embassy was transferred to Brasília in 1964 with the building completed in 1977.
+  Additional embassy directories consistently corroborate this location. The coordinate
+  qualifier (-15.81137, -47.88257) also corresponds to Brasília's coordinates. While
+  the edit lacks cited references (a weakness), the factual claim itself is unambiguously
+  correct.
+rcid: 2540920501
+revid: 2464711556
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/brazil/en/the-embassy/about
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q105705907
+timestamp: '2026-02-21T01:10:04.329085+00:00'
+title: Q105705907
+turns: 3
+value_label: Brasília
+verdict: verified-high

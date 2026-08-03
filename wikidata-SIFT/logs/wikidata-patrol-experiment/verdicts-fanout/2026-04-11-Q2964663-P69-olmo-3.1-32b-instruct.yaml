@@ -1,0 +1,35 @@
+completion_tokens: 292
+cost_usd: 0.0026522000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12385
+property: P69
+property_label: educated at
+rationale: Multiple independent, verified sources state that Chris Brancato attended
+  and graduated from Brown University, not the Democratic Republic of the Congo. The
+  Democratic Republic of the Congo is a country and not an educational institution,
+  making the new value factually incoherent. The old value, 'Teaneck High School',
+  is consistent with biographical information found in multiple sources, though it
+  is incomplete as it omits Brown University. However, changing the value to a country
+  is clearly incorrect.
+rcid: 2549852986
+revid: 2473209359
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://theouterlimits.fandom.com/wiki/Chris_Brancato
+- provenance: verified
+  supports_claim: true
+  url: https://www.tvinsider.com/people/chris-brancato/
+- provenance: verified
+  supports_claim: false
+  url: https://port.hu/jump/person-15296
+- provenance: verified
+  supports_claim: false
+  url: https://playback.fm/person/chris-brancato
+timestamp: '2026-04-11T10:25:40.643239+00:00'
+title: Q2964663
+turns: 1
+value_label: Democratic Republic of the Congo
+verdict: incorrect

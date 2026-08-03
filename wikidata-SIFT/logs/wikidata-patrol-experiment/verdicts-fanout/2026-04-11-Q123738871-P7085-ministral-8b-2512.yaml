@@ -1,0 +1,26 @@
+completion_tokens: 2302
+cost_usd: 0.014278889999999999
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 129211
+property: P7085
+property_label: TikTok username
+rationale: The TikTok username 'joshtospace' is consistent with Josh Universe's other
+  social media profiles (Instagram, Facebook). Social Blade confirms the existence
+  of the @joshtospace TikTok profile, indicating activity and plausibility. However,
+  the primary cited source (`https://joshuniverse.com`) is unreachable, preventing
+  direct verification of its content. Since no direct contradiction was found and
+  the username aligns with other verified platforms, the claim is considered plausible
+  but not fully verifiable due to the missing primary source.
+rcid: 2551427212
+revid: 2474727712
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://socialblade.com/tiktok/user/joshtospace
+timestamp: '2026-04-11T06:34:18.864372+00:00'
+title: Q123738871
+turns: 7
+value_label: null
+verdict: verified-low

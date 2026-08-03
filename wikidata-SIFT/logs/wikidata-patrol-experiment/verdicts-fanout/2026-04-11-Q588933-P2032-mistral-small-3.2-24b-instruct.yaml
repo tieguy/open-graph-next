@@ -1,0 +1,36 @@
+completion_tokens: 1032
+cost_usd: 0.024358025000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 253490
+property: P2032
+property_label: end of work period
+rationale: The fetched content from the pre-fetched reference URLs and the official
+  website of Shaun Tan does not support the claim that his end of work period is 67
+  CE. The information suggests that Shaun Tan is still actively working and creating
+  new works as of recent years. The change of the end of work period to 67 CE appears
+  to be incorrect based on the available evidence.
+rcid: null
+revid: 2468965926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.sfadb.com/Locus_Awards_2011
+- provenance: verified
+  supports_claim: false
+  url: http://www.shauntan.net
+- provenance: verified
+  supports_claim: false
+  url: https://balcattashs.wa.edu.au/shaun-tan/
+- provenance: verified
+  supports_claim: false
+  url: https://www.shauntan.net/cicada-book
+- provenance: verified
+  supports_claim: false
+  url: https://www.shauntan.net/new-page-1
+timestamp: '2026-04-11T12:55:02.305037+00:00'
+title: Q588933
+turns: 10
+value_label: null
+verdict: incorrect

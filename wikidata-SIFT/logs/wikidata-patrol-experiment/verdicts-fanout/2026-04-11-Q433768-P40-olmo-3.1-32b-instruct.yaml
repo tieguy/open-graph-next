@@ -1,0 +1,29 @@
+completion_tokens: 1984
+cost_usd: 0.0047688
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17892
+property: P40
+property_label: child
+rationale: No reliable or independently verifiable source states that Eugénie Cotton
+  had a child named Claude Cotton. The change to this value is unsupported and appears
+  incorrect. The previous value, Eugène Cotton, is also not supported by any source,
+  but the new value has even less justification.
+rcid: 2549850807
+revid: 2473207244
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://maitron.fr/cotton-eugenie-nee-feytis-eugenie-elise-celine/
+- provenance: verified
+  supports_claim: false
+  url: https://bibliotheques-specialisees.paris.fr/ark:/73873/FRCGMNOV-751135101-AAX
+- provenance: verified
+  supports_claim: false
+  url: https://clg-cotton-argenteuil.ac-versailles.fr/
+timestamp: '2026-04-11T11:12:36.852040+00:00'
+title: Q433768
+turns: 1
+value_label: Claude Cotton
+verdict: incorrect

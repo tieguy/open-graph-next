@@ -1,0 +1,25 @@
+completion_tokens: 1665
+cost_usd: 0.0034775937499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34113
+property: P19
+property_label: place of birth
+rationale: The edit changes the place of birth from Brazil to Vitória. The prefetched
+  reference could not be verified due to a timeout error. Independent sources confirm
+  that Joaquim Paiva was born in Rio de Janeiro, making the edit incorrect.
+rcid: 2550719609
+revid: 2474047386
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.catalogodasartes.com.br/artista/Joaquim%20Arnaldo%20de%20Paiva%20Oliveira%20-%20Joaquim%20Paiva/
+- provenance: verified
+  supports_claim: false
+  url: https://livrosdefotografia.org/perfil/473/joaquim-paiva
+timestamp: '2026-04-10T12:35:42.401597+00:00'
+title: Q94684838
+turns: 5
+value_label: Vitória
+verdict: incorrect

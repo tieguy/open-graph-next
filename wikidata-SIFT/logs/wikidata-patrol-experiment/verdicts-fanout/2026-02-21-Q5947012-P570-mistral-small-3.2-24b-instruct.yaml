@@ -1,0 +1,25 @@
+completion_tokens: 937
+cost_usd: 0.00389089
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36279
+property: P570
+property_label: date of death
+rationale: The primary source indicating the date of death as 1829 could not be accessed
+  directly, and other sources did not provide verifiable information to confirm the
+  claim.
+rcid: 2540922672
+revid: 2464713619
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://ancestors.familysearch.org/en/KDWX-LLT
+- provenance: verified
+  supports_claim: false
+  url: https://www.myheritage.es/names/juan_moyano
+timestamp: '2026-02-21T00:03:17.824689+00:00'
+title: Q5947012
+turns: 6
+value_label: null
+verdict: unverifiable

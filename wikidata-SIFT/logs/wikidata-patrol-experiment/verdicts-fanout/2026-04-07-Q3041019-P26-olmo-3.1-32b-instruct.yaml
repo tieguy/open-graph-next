@@ -1,0 +1,26 @@
+completion_tokens: 1237
+cost_usd: 0.0052656
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22617
+property: P26
+property_label: spouse
+rationale: No reliable source indicates that Vincent Dugomier's spouse is 'Pipidae.'
+  'Pipidae' is a biological taxonomic family, not a person, and the author's professional
+  biography and secondary sources do not mention such a relationship. The change appears
+  to be an error.
+rcid: null
+revid: 2463995680
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bedetheque.com/auteur-2806-BD-Dugomier.html
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Vincent_Dugomier
+timestamp: '2026-04-07T10:30:44.035183+00:00'
+title: Q3041019
+turns: 3
+value_label: Pipidae
+verdict: incorrect

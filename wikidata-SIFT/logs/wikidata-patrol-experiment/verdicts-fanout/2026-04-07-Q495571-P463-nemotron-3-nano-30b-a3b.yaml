@@ -1,0 +1,25 @@
+completion_tokens: 601
+cost_usd: 0.0064996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 127588
+property: P463
+property_label: member of
+rationale: No references to Miau were found as a published novel. Extensive web searches
+  for variants of the terms 'Miau', 'novel', 'cat', and related phrases returned no
+  results indicating Miau is an author, work, or related publication. Attempts to
+  fetch potential sources resulted in blocked_domain or connection errors, confirming
+  content could not be verified. No authoritative source supporting the claim's reference
+  exists.
+rcid: null
+revid: 2471595202
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.blipcat.com/user/miau/style/all
+timestamp: '2026-04-07T04:30:31.443949+00:00'
+title: Q495571
+turns: 15
+value_label: Miau
+verdict: unverifiable

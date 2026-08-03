@@ -1,0 +1,23 @@
+completion_tokens: 1015
+cost_usd: 0.013574
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 64825
+property: P1477
+property_label: birth name
+rationale: No reliable sources support the claim that Gordon Ramsay's birth name is
+  'Gordon 67 Ramsay'. All mainstream biographies and profiles list his birth name
+  as 'Gordon James Ramsay'. The absence of any independent confirmation and the lack
+  of cited references make this edit incorrect.
+rcid: 2550632577
+revid: 2473962774
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Gordon_Ramsay
+timestamp: '2026-04-07T13:31:42.545654+00:00'
+title: Q15280
+turns: 7
+value_label: null
+verdict: incorrect

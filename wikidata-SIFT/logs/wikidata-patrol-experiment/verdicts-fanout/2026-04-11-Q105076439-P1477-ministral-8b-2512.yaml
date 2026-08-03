@@ -1,0 +1,29 @@
+completion_tokens: 2688
+cost_usd: 0.01023129
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 130065
+property: P1477
+property_label: birth name
+rationale: The edit incorrectly changes the birth name from 'Riccardo Fabbriconi'
+  to 'Riccardo Maricconni'. Multiple verified sources (Vanity Fair, Treccani, and
+  Quibrescia.it) confirm the correct birth name as 'Riccardo Fabbriconi'. The new
+  value lacks any supporting evidence and contradicts established claims on the item.
+rcid: 2550592940
+revid: 2473924373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.vanityfair.it/music/storie-music/2021/09/19/blanco-album-blu-celeste-intervista-niente-etichette-io-sto-bene-cosi
+- provenance: verified
+  supports_claim: false
+  url: https://www.treccani.it/enciclopedia/blanco/
+- provenance: verified
+  supports_claim: false
+  url: https://www.quibrescia.it/storie-bresciane/2022/02/06/blanco-il-ragazzo-di-calvagese-che-ha-sbancato-sanremo/606860/
+timestamp: '2026-04-11T18:03:59.089008+00:00'
+title: Q105076439
+turns: 9
+value_label: null
+verdict: incorrect

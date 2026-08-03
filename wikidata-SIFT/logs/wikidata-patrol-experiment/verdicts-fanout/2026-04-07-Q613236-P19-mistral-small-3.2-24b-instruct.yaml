@@ -1,0 +1,22 @@
+completion_tokens: 494
+cost_usd: 0.0037065312499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38219
+property: P19
+property_label: place of birth
+rationale: The edit changes the place of birth from Paris to Niger, but the reference
+  to the Italian Wikipedia is blocked and cannot be verified. No independent sources
+  were found to confirm or deny the claim.
+rcid: 2549506887
+revid: 2472871010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Blek_le_Rat
+timestamp: '2026-04-07T08:04:38.069130+00:00'
+title: Q613236
+turns: 6
+value_label: Niger
+verdict: unverifiable

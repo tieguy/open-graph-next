@@ -1,0 +1,23 @@
+completion_tokens: 1178
+cost_usd: 0.0067408
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30170
+property: P1559
+property_label: name in native language
+rationale: The value 'rusia' is not the native Japanese name of Masahiro Sakurai.
+  Authoritative biographical sources confirm that his native name is 桜井 政博 (Sakurai
+  Masahiro). 'Rusia' is the Spanish word for 'Russia' and has no connection to Sakurai.
+  Therefore, this edit is incorrect and should be reverted.
+rcid: 2540929965
+revid: 2464720645
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mariowiki.com/Masahiro_Sakurai
+timestamp: '2026-02-20T20:28:15.252105+00:00'
+title: Q1906721
+turns: 3
+value_label: null
+verdict: incorrect

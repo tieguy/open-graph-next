@@ -1,0 +1,30 @@
+completion_tokens: 1282
+cost_usd: 0.038154770000000005
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 151910
+property: P1320
+property_label: OpenCorporates ID
+rationale: The Wikidata item Q134650702 appears to be for a company named 'FURNOTEL'
+  founded on 1992-10-07, but the OpenCorporates ID '810825547' corresponds to 'GROUPE
+  FURNOTEL', a holding company created in 2015 with different business activities
+  (6420Z - holding activities vs. wholesale trade for the Wikidata item). Multiple
+  French business directories confirm SIREN 810825547 belongs to GROUPE FURNOTEL SAS
+  with headquarters in Athis-Mons, but this appears to be a different legal entity
+  than the FURNOTEL described in Wikidata with 1992 inception date. The OpenCorporates
+  ID may belong to a related but distinct corporate entity.
+rcid: 2540939982
+revid: 2464729556
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.societe.com/societe/groupe-furnotel-810825547.html
+- provenance: verified
+  supports_claim: false
+  url: https://entreprises.lefigaro.fr/groupe-furnotel-91/entreprise-810825547
+timestamp: '2026-02-20T15:28:14.088249+00:00'
+title: Q134650702
+turns: 15
+value_label: null
+verdict: suspect

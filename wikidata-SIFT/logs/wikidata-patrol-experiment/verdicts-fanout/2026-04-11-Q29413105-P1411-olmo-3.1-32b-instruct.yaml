@@ -1,0 +1,34 @@
+completion_tokens: 2127
+cost_usd: 0.0049342
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18290
+property: P1411
+property_label: nominated for
+rationale: Multiple independent sources confirm that Tunisia submitted 'Beauty and
+  the Dogs' for the 91st Academy Awards in the Best International Feature category.
+  However, the label 'International Submission to the Academy Awards' is not standard
+  terminology according to primary and secondary sources, which use more specific
+  phrasing. The edit is factually correct regarding the submission but the label could
+  be improved for accuracy.
+rcid: 2550487242
+revid: 2473823040
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/title/tt7067540/awards/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Beauty_and_the_Dogs
+- provenance: attempted
+  supports_claim: false
+  url: https://www.oscars.org/oscars/ceremonies/91
+- provenance: reported
+  supports_claim: true
+  url: https://www.the-numbers.com/movies/2018/BKTDD.php
+timestamp: '2026-04-11T15:41:45.713207+00:00'
+title: Q29413105
+turns: 1
+value_label: International Submission to the Academy Awards
+verdict: verified-low

@@ -1,0 +1,26 @@
+completion_tokens: 1778
+cost_usd: 0.0039556
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14444
+property: P27
+property_label: country of citizenship
+rationale: Multiple independent Ukrainian news sources explicitly identify Владимир
+  Петрович Токаренко as a citizen of Ukraine and a resident of Baryshivka Raion, where
+  he lived and died. No credible sources indicate he was a citizen of Russia. Therefore,
+  changing his country of citizenship from Russia to Ukraine is correct and well-supported.
+rcid: 2550320869
+revid: 2473660410
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gazeta.kyiv.ua/rubric/2021/08/05/228094/
+- provenance: reported
+  supports_claim: true
+  url: ''
+timestamp: '2026-04-11T16:55:25.336067+00:00'
+title: Q62714465
+turns: 1
+value_label: Ukraine
+verdict: verified-high

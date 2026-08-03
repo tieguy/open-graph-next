@@ -1,0 +1,30 @@
+completion_tokens: 1908
+cost_usd: 0.00244221
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20569
+property: P106
+property_label: occupation
+rationale: The edit changes Valeriy Priyomykhov's occupation from 'film director'
+  (correctly cited) to 'film actor' without sufficient justification. Independent
+  sources confirm he was both an actor and a director. The removal of a correct and
+  cited occupation without adding new evidence or improving the representation makes
+  this edit suspicious.
+rcid: 2551404654
+revid: 2474708127
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://alchetron.com/Valeriy-Priyomykhov
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Valeriy_Priyomykhov
+- provenance: verified
+  supports_claim: true
+  url: https://peoplepill.com/i/valeriy-priyomykhov
+timestamp: '2026-04-11T11:49:54.913742+00:00'
+title: Q4379461
+turns: 1
+value_label: film actor
+verdict: suspect

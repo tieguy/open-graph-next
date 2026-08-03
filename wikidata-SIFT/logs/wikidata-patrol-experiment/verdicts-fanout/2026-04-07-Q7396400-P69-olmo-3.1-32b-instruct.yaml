@@ -1,0 +1,27 @@
+completion_tokens: 990
+cost_usd: 0.01637
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 78880
+property: P69
+property_label: educated at
+rationale: Reliable biographical sources consistently state that Sabrina Carpenter
+  attended Oak Park High School and the Pennsylvania Cyber Charter School. There is
+  no credible reporting or biography mentioning any educational institution related
+  to pornography. The cited reference (English Wikipedia) could not be fetched directly
+  due to domain blocking, but secondary knowledge confirms the inaccuracy of the claim.
+rcid: null
+revid: 2471001308
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sabrina_Carpenter
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm3456115/bio/
+timestamp: '2026-04-07T09:28:50.596332+00:00'
+title: Q7396400
+turns: 7
+value_label: pornography
+verdict: incorrect

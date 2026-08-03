@@ -1,0 +1,27 @@
+completion_tokens: 1688
+cost_usd: 0.00308922
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30632
+property: P31
+property_label: instance of
+rationale: The edit incorrectly removes the 'film character' (Q15773347) classification
+  for Malik (Q109565037) and replaces it with the broader 'human' (Q138751725). Malik
+  is a fictional human character in the Space Jam universe, and the 'film character'
+  classification is more specific and accurate for Wikidata. The removal of this classification
+  is unjustified and reduces the precision of the item's representation.
+rcid: 2551000260
+revid: 2474318432
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://space-jam.fandom.com/wiki/Space_Jam:_A_New_Legacy
+- provenance: reported
+  supports_claim: false
+  url: https://warnerbros.fandom.com/wiki/Malik
+timestamp: '2026-04-10T13:32:07.554810+00:00'
+title: Q109565037
+turns: 3
+value_label: human
+verdict: incorrect

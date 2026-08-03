@@ -1,0 +1,31 @@
+completion_tokens: 2575
+cost_usd: 0.0042008
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13279
+property: P1435
+property_label: heritage designation
+rationale: Multiple authoritative sources confirm that Scienceworks is listed on the
+  Victorian Heritage Register. Therefore, leaving the heritage designation claim as
+  'no value' is incorrect and should be replaced with the appropriate designation.
+rcid: 2550246347
+revid: 2473587562
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://museumvictoria.com.au/scienceworks
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Scienceworks
+- provenance: verified
+  supports_claim: true
+  url: https://www.heritage.vic.gov.au/heritage-register/search?search=Spotswood+Booker+Street
+- provenance: verified
+  supports_claim: true
+  url: https://www.portphillip.vic.gov.au/heritage
+timestamp: '2026-04-11T16:57:54.136255+00:00'
+title: Q7433721
+turns: 1
+value_label: null
+verdict: incorrect

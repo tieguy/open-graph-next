@@ -1,0 +1,26 @@
+completion_tokens: 2031
+cost_usd: 0.004325000000000001
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15532
+property: P31
+property_label: instance of
+rationale: The Paradiesbrücke in Zwickau is documented by multiple reliable sources
+  as a pedestrian and bicycle bridge that does not allow vehicular traffic. Therefore,
+  labeling it as a 'road bridge' (Q537127) is factually incorrect and should be replaced
+  with a more appropriate classification.
+rcid: 2551085656
+revid: 2474401646
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bridgehunterschronicles.wordpress.com/2016/11/02/the-bridges-of-zwickau-saxony-germany/
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Paradiesbrücke
+timestamp: '2026-04-11T12:41:48.592771+00:00'
+title: Q49439071
+turns: 1
+value_label: road bridge
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 2661
+cost_usd: 0.00205088
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21947
+property: P361
+property_label: part of
+rationale: The initial web search and fetch did not yield specific information about
+  'улица Шмидта 32 34' in Pavlovo. The Russian Wikivoyage reference does not support
+  the claim.
+rcid: 2551217148
+revid: 2474530113
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mogilev.biz/spravka/street/street_969.html
+- provenance: verified
+  supports_claim: false
+  url: https://mogilev.nakarte.by/shmidta-pr-t/34
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikivoyage.org/?oldid=561556#5240222001
+timestamp: '2026-04-11T14:05:20.532934+00:00'
+title: Q116780736
+turns: 2
+value_label: улица Шмидта 32 34 [ru]
+verdict: unverifiable

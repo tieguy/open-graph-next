@@ -1,0 +1,22 @@
+completion_tokens: 490
+cost_usd: 0.0028411250000000003
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28862
+property: P571
+property_label: inception
+rationale: The 'About Us' page of Global Banking & Finance Review explicitly states
+  that it was established in the United Kingdom in 2010, which supports the inception
+  claim of 11 October 2010.
+rcid: 2540950185
+revid: 2464739160
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/about-us/
+timestamp: '2026-02-20T09:50:07.267681+00:00'
+title: Q60744597
+turns: 4
+value_label: null
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 2259
+cost_usd: 0.0035302
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10874
+property: P2397
+property_label: YouTube channel ID
+rationale: The official website of Pinacoteca comunale di Faenza links to a YouTube
+  channel with the handle 'pinacoteca_faenza', which does not correspond to the claimed
+  channel ID 'UC97bEFdif_jn2yK0HqNzVnA'. The new ID does not match the official channel
+  referenced by the institution, and the previous channel is no longer active. Therefore,
+  the updated YouTube channel ID is incorrect.
+rcid: 2550864076
+revid: 2474187575
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.pinacotecafaenza.it/
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@pinacoteca_faenza
+timestamp: '2026-04-10T08:19:43.882391+00:00'
+title: Q106081639
+turns: 1
+value_label: null
+verdict: incorrect

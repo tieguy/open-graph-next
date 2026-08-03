@@ -1,0 +1,21 @@
+completion_tokens: 1173
+cost_usd: 0.0048584000000000006
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20773
+property: P746
+property_label: date of disappearance
+rationale: No independent, reliable sources were found that confirm Ann Gotlib disappeared
+  on 1 June 1983. The claim had no references in Wikidata, and a search of major news
+  outlets and documentation did not yield any corroborating evidence. Therefore, the
+  edit's correctness cannot be verified, but its removal is reasonable due to lack
+  of support.
+rcid: null
+revid: 2335259226
+sources: []
+timestamp: '2026-04-07T10:35:10.390478+00:00'
+title: Q4766419
+turns: 4
+value_label: null
+verdict: unverifiable

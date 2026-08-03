@@ -1,0 +1,31 @@
+completion_tokens: 1780
+cost_usd: 0.0046514
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17917
+property: P1435
+property_label: heritage designation
+rationale: The claim that 'bien de interés cultural' is the correct heritage designation
+  for Castillo de Moguer is consistent with Spanish heritage classification practices
+  and is referenced from a recognized cultural heritage guide. However, the specific
+  start date update from 1985 to 1993 could not be directly confirmed from an authoritative
+  primary source in this investigation. No contradictory evidence was found, but direct
+  confirmation of the date change is lacking.
+rcid: 2550553509
+revid: 2473886511
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://castillodelostemplarios.com/bien-de-interes-cultural-y-monumento-nacional/
+- provenance: verified
+  supports_claim: false
+  url: https://www.boe.es/diario_boe/txt.php?id=BOE-A-2014-3218
+- provenance: reported
+  supports_claim: false
+  url: https://tools.wmflabs.org/heritage/api/api.php?action=search&format=json&srcountry=es&srlang=es&srid=RI-51-0007843
+timestamp: '2026-04-11T11:57:06.468414+00:00'
+title: Q5757445
+turns: 1
+value_label: bien de interés cultural
+verdict: plausible

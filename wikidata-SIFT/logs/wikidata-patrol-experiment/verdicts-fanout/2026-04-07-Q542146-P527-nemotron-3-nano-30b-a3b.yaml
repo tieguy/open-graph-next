@@ -1,0 +1,25 @@
+completion_tokens: 630
+cost_usd: 0.0052263000000000006
+diff_type: reference_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 102006
+property: P527
+property_label: has part(s)
+rationale: No references were found to support the claim that Tamil Nadu is a part
+  of South India. Searches did not locate any authoritative sources discussing the
+  regional composition of India that include both Tamil Nadu and South India. The
+  attempted web search queries returned no results, and no URLs could be fetched to
+  verify the claim. The existing reference on Wikipedia was blocked, preventing direct
+  access to potential evidence.
+rcid: null
+revid: 2471823989
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.indianpanorama.in/
+timestamp: '2026-04-07T05:59:39.820348+00:00'
+title: Q542146
+turns: 15
+value_label: Tamil Nadu
+verdict: unverifiable

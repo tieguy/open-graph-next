@@ -1,0 +1,32 @@
+completion_tokens: 1767
+cost_usd: 0.0052744
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21071
+property: P31
+property_label: instance of
+rationale: Third-party sources explicitly identify Haria as a 'negeri' (local kingdom/state)
+  within Maluku. However, the primary official source (BKKBN KampungKB) could not
+  be fetched, leaving the classification only indirectly supported. The evidence is
+  consistent but not definitively confirmed by a primary government document.
+rcid: 2550514282
+revid: 2473848904
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sig.bps.go.id/bridging-kode/
+- provenance: verified
+  supports_claim: true
+  url: https://sultansinindonesieblog.wordpress.com/maluku/haria-leawaka-amapatti-negeri-saparua/
+- provenance: verified
+  supports_claim: true
+  url: https://sultansinindonesieblog.wordpress.com/maluku/haria-leawaka-amapatti-negeri-saparua/1-hh-2/
+- provenance: verified
+  supports_claim: null
+  url: https://kampungkb.bkkbn.go.id/kampung/13844
+timestamp: '2026-04-10T13:53:49.583211+00:00'
+title: Q12485307
+turns: 1
+value_label: negeri
+verdict: verified-low

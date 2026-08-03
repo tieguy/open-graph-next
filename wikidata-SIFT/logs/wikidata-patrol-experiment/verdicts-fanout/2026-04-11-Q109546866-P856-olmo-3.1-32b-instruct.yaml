@@ -1,0 +1,31 @@
+completion_tokens: 2458
+cost_usd: 0.004757
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16411
+property: P856
+property_label: official website
+rationale: The URL http://www.ridgebackbio.com/ is historically associated with Ridgeback
+  Biotherapeutics and resolves to the company's official website domain. Multiple
+  independent and reliable sources, including Wikipedia and CNBC, list ridgebackbio.com
+  as the official site. However, the canonical current URL is https://ridgebackbio.com/
+  using HTTPS and typically without the 'www.' prefix. The edit does not introduce
+  an incorrect website but should be updated to the current canonical form.
+rcid: 2551339214
+revid: 2474645475
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Ridgeback_Biotherapeutics
+- provenance: verified
+  supports_claim: true
+  url: https://ridgebackbio.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.cnbc.com/video/2021/10/01/ridgeback-biotherapeutics-co-founders-on-how-pill-can-tackle-covid-19.html
+timestamp: '2026-04-11T13:43:59.839232+00:00'
+title: Q109546866
+turns: 1
+value_label: null
+verdict: verified-low

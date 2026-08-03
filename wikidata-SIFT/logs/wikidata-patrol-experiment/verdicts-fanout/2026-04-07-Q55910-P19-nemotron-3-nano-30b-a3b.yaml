@@ -1,0 +1,25 @@
+completion_tokens: 669
+cost_usd: 0.0101576
+diff_type: qualifier_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 200476
+property: P19
+property_label: place of birth
+rationale: Investigation could not locate any information about Smilovice as the place
+  of birth for Jerzy Buzek. Multiple web searches using various approaches (e.g.,
+  'Jerzy Buzek Smilovice', 'Smilovice village', 'Smilovice Czech Republic', etc.)
+  returned no results. Wikipedia page for Smilovice was blocked (blocked_domain),
+  preventing direct verification. No primary or reliable secondary sources confirming
+  this birthplace could be found despite extensive searching.
+rcid: null
+revid: 2470226363
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Smilovice
+timestamp: '2026-04-07T11:12:30.582823+00:00'
+title: Q55910
+turns: 15
+value_label: Smilovice
+verdict: unverifiable

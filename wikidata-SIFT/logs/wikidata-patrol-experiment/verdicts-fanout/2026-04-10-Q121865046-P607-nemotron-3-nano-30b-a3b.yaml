@@ -1,0 +1,27 @@
+completion_tokens: 13116
+cost_usd: 0.00745244
+diff_type: qualifier_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 37148
+property: P607
+property_label: participated in conflict
+rationale: 'Two independent sources confirm that La Gardata was involved in World
+  War II: the tourism site caigrigne.it states that Gardata had a notable role during
+  the Second World War, and the memorial site itinerarimemoria.it documents a partisan
+  battle in August 1944 near La Gardata. Both explicitly reference WWII events, providing
+  reliable corroboration of the claim.'
+rcid: 2549637443
+revid: 2472998396
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.caigrigne.it/wordpress/gardata/
+- provenance: verified
+  supports_claim: true
+  url: https://itinerarimemoria.it/en/itinerario/mandello-resistance-2/
+timestamp: '2026-04-10T09:15:30.982282+00:00'
+title: Q121865046
+turns: 4
+value_label: World War II
+verdict: verified-high

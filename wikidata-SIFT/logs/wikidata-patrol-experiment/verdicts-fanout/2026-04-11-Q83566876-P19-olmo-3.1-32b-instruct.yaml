@@ -1,0 +1,29 @@
+completion_tokens: 871
+cost_usd: 0.0047236
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21005
+property: P19
+property_label: place of birth
+rationale: Multiple verified independent sources consistently state that Ibai Llanos
+  was born in Bilbao, Spain. There is no mention of 'La Fernandina [es]' as his birthplace
+  in these sources. The change from 'Bilbao' to 'La Fernandina [es]' is therefore
+  unsupported and incorrect based on available evidence.
+rcid: null
+revid: 2471108339
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://marketing4ecommerce.net/en/who-is-ibai-llanos-the-story-of-the-spanish-caster-who-became-a-global-influencer/
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Ibai_Llanos
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/ibai-llanos.html
+timestamp: '2026-04-11T18:30:22.207492+00:00'
+title: Q83566876
+turns: 1
+value_label: La Fernandina [es]
+verdict: incorrect

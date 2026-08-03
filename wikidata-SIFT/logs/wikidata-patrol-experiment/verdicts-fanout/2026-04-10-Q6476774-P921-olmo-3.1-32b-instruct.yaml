@@ -1,0 +1,31 @@
+completion_tokens: 1644
+cost_usd: 0.003414
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12138
+property: P921
+property_label: main subject
+rationale: The Wikipedia:Babel page is a help page for displaying language proficiency
+  using the {{#babel}} template and is not an article about Wikimedians or the Wikimedia
+  movement. Authoritative Wikipedia and Wikidata sources define 'Wikimedian' as a
+  contributor to Wikimedia projects, but do not associate this term with the subject
+  of the Wikipedia:Babel help page. Therefore, removing 'Wikimedian' as the main subject
+  (P921) is correct.
+rcid: 2550595538
+revid: 2473926814
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wikipedia:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wikimedian
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q41546637
+timestamp: '2026-04-10T00:11:26.842023+00:00'
+title: Q6476774
+turns: 1
+value_label: Wikimedian
+verdict: verified-high

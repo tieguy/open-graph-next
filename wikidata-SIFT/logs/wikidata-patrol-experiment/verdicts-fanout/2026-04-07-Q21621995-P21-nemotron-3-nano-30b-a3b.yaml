@@ -1,0 +1,26 @@
+completion_tokens: 849
+cost_usd: 0.012299949999999997
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 242603
+property: P21
+property_label: sex or gender
+rationale: No reliable source or scholarly evidence has been found to verify whether
+  Kylian Mbappé identifies as a trans woman, including checks of his own public statements,
+  reputable news coverage, or biographical sources mentioning gender identity. All
+  available references relate to his football career, interviews about language learning
+  or sponsorships, without any indication of gender identity. Wikimedia references
+  cited as heuristic inference from given name are not credible evidence of gender
+  identity.
+rcid: 2549570887
+revid: 2472933653
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sports.fr/football/mbappe-maitrise-deja-lespagnol-325949.html
+timestamp: '2026-04-07T08:55:26.416588+00:00'
+title: Q21621995
+turns: 15
+value_label: trans woman
+verdict: unverifiable

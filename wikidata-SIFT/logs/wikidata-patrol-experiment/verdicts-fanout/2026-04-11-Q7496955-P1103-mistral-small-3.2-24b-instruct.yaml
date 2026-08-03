@@ -1,0 +1,28 @@
+completion_tokens: 1235
+cost_usd: 0.00450850875
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44311
+property: P1103
+property_label: number of platform tracks
+rationale: The claim about the number of platform tracks at Shimofunato Station does
+  not have any references, and independent corroboration could not be found. Therefore,
+  the correctness of the rank change cannot be verified.
+rcid: 2550463800
+revid: 2473800252
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Shin-Matsudo_Station
+- provenance: verified
+  supports_claim: false
+  url: https://en.namu.wiki/w/%EC%8B%A0%EB%A7%88%EC%B8%A0%EB%8F%84%EC%97%AD
+- provenance: verified
+  supports_claim: false
+  url: https://wanderlog.com/place/details/2572464/shimoyamato-station
+timestamp: '2026-04-11T11:56:31.650889+00:00'
+title: Q7496955
+turns: 4
+value_label: null
+verdict: unverifiable

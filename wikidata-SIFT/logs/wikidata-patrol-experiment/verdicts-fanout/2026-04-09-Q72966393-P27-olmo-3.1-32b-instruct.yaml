@@ -1,0 +1,26 @@
+completion_tokens: 891
+cost_usd: 0.008062
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 37637
+property: P27
+property_label: country of citizenship
+rationale: Multiple independent, publisher-verified sources explicitly or implicitly
+  confirm that Gwénola Morizur is French and based in Brittany, France. At least one
+  source directly states her nationality as French. There is no credible evidence
+  to suggest otherwise, and the change from 'Congolese' to 'French' is therefore correct.
+rcid: 2550549307
+revid: 2473882435
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ricochet-jeunes.org/auteurs/gwenola-morizur
+- provenance: verified
+  supports_claim: true
+  url: https://www.bedetheque.com/auteur-46042-BD-Morizur-Gwenola.html
+timestamp: '2026-04-09T23:17:48.610048+00:00'
+title: Q72966393
+turns: 4
+value_label: French
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 1168
+cost_usd: 0.007943500000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 81616
+property: P742
+property_label: pseudonym
+rationale: The claim that 'Aokiji' is a pseudonym for Richard Kuklinski is not supported
+  by any reliable sources. The only reference cited in the edit could not be verified,
+  and independent searches did not yield any corroborating evidence. The name 'Aokiji'
+  is associated with a character from the 'One Piece' series, not with Richard Kuklinski.
+rcid: null
+revid: 2471526447
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.crimemuseum.org/crime-library/organized-crime/richard-kuklinski/
+- provenance: verified
+  supports_claim: false
+  url: https://onepiece.fandom.com/wiki/Aokiji
+timestamp: '2026-04-07T13:46:13.972699+00:00'
+title: Q554978
+turns: 11
+value_label: null
+verdict: incorrect

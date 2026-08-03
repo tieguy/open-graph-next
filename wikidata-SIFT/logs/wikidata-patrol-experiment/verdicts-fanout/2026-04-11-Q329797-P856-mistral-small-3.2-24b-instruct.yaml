@@ -1,0 +1,22 @@
+completion_tokens: 397
+cost_usd: 0.0058623187500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 63738
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Iwakuni from a legitimate city
+  URL to an unrelated airline URL. The prefetched reference for the old URL supports
+  it as the correct official website.
+rcid: null
+revid: 2471604754
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kankou.iwakuni-city.net/itn/
+timestamp: '2026-04-11T18:10:24.935663+00:00'
+title: Q329797
+turns: 5
+value_label: null
+verdict: incorrect

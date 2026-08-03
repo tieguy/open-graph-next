@@ -1,0 +1,27 @@
+completion_tokens: 1128
+cost_usd: 0.015324
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 73236
+property: P742
+property_label: pseudonym
+rationale: The edit changed Travis Scott's pseudonym from 'La Flame' to 'La negro'
+  without any supporting references or independent corroboration. Multiple web searches
+  did not find any credible sources confirming 'La negro' as a pseudonym for Travis
+  Scott. The most commonly recognized pseudonyms are 'Cactus Jack' and 'La Flame'.
+  In the absence of supporting evidence, the change is highly suspect and likely incorrect.
+rcid: null
+revid: 2471270631
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Travis_Scott
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T09:07:09.563878+00:00'
+title: Q13605596
+turns: 6
+value_label: null
+verdict: suspect

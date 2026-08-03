@@ -1,0 +1,21 @@
+completion_tokens: 893
+cost_usd: 0.0045405
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42726
+property: P17
+property_label: country
+rationale: The official website of Team-Building-paca confirms that the company operates
+  in Provence, France, which supports the country claim for Q138348741.
+rcid: 2540935698
+revid: 2464726015
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+timestamp: '2026-02-20T17:05:54.600042+00:00'
+title: Q138348741
+turns: 5
+value_label: France
+verdict: verified-high

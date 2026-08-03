@@ -1,0 +1,24 @@
+completion_tokens: 2802
+cost_usd: 0.00709255
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 130643
+property: P27
+property_label: country of citizenship
+rationale: No independent source could be found that confirms or contradicts the claim
+  that Roberta Williams holds Senegalese citizenship. Multiple search queries combining
+  her name with terms related to nationality, citizenship, or specific country names
+  yielded no relevant results indicating a change in citizenship status. Without verifiable
+  evidence from credible sources, the claim remains unverifiable.
+rcid: 2550512446
+revid: 2473847200
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.lemonde.fr/en/roberta-williams_bio.shtml
+timestamp: '2026-04-07T10:46:36.354742+00:00'
+title: Q55176
+turns: 15
+value_label: Sénégalaise [fr]
+verdict: unverifiable

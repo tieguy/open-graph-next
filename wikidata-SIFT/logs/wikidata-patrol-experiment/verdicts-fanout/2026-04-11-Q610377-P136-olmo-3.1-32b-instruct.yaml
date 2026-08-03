@@ -1,0 +1,35 @@
+completion_tokens: 2664
+cost_usd: 0.0044406
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14211
+property: P136
+property_label: genre
+rationale: Multiple authoritative and independent sources classify Hey Monday as a
+  pop-punk band, emphasizing a fusion of punk rock and pop/power pop elements. None
+  of the consulted sources describe them primarily as a punk rock band. Changing the
+  genre from 'punk rock' to 'pop-punk' is thus well-supported by the evidence.
+rcid: 2550847937
+revid: 2474171727
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/hey-monday-mn0003076925/biography
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Hey_Monday
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20091020083910/http://www.mtv.com/artists/hey_monday/bio.jhtml
+- provenance: verified
+  supports_claim: true
+  url: https://www.rollingstone.com/music/music-news/hey-monday-how-you-love-me-now-review-11172038/
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20090501022758/http://www.nme.com/music/hey-monday/15496
+timestamp: '2026-04-11T11:44:56.758327+00:00'
+title: Q610377
+turns: 1
+value_label: pop-punk
+verdict: verified-high

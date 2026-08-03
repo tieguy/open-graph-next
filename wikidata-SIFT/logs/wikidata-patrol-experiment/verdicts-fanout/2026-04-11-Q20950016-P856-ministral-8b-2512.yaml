@@ -1,0 +1,28 @@
+completion_tokens: 2494
+cost_usd: 0.00695841
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69963
+property: P856
+property_label: official website
+rationale: The URL `http://benditnetworks.com/filmography/viceroy/` is associated
+  with Bend It Films, the production company behind *Viceroy's House*. The page is
+  in English, confirming the qualifier P407 (English). While it is not explicitly
+  labeled as the 'official website' in other sources, it is the most relevant and
+  authoritative source available for this filmography. No contradictory evidence was
+  found, and the claim is supported by the production company's own page.
+rcid: null
+revid: 2471201620
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://benditnetworks.com/filmography/viceroy/
+- provenance: reported
+  supports_claim: false
+  url: https://pl.wikipedia.org/w/index.php?title=Pałac_wicekróla_(film)&oldid=55548631
+timestamp: '2026-04-11T15:14:23.195936+00:00'
+title: Q20950016
+turns: 5
+value_label: null
+verdict: verified-low

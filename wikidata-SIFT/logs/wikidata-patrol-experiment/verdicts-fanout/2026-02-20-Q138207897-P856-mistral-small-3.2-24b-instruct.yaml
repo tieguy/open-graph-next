@@ -1,0 +1,26 @@
+completion_tokens: 1004
+cost_usd: 0.004040475
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40064
+property: P856
+property_label: official website
+rationale: The website "https://www.deganius.de" does not appear to be related to
+  Christof Thalhofer Versandhandel. The content of the website focuses on equine products
+  and does not mention the company. Therefore, the claim that this is the official
+  website for Christof Thalhofer Versandhandel is suspect.
+rcid: 2540941593
+revid: 2464731086
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gelbeseiten.de/gsbiz/1b73993e-3aec-4fb8-888b-713937b1903f
+- provenance: verified
+  supports_claim: false
+  url: https://www.deganius.de
+timestamp: '2026-02-20T14:10:08.326924+00:00'
+title: Q138207897
+turns: 5
+value_label: null
+verdict: suspect

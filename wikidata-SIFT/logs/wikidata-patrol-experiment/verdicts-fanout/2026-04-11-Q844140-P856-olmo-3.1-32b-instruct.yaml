@@ -1,0 +1,28 @@
+completion_tokens: 779
+cost_usd: 0.0051614
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23470
+property: P856
+property_label: official website
+rationale: The official website for Chikushino City is confirmed by the city's own
+  website (https://www.city.chikushino.fukuoka.jp/), a primary and authoritative source.
+  The new value, https://www.flyasiana.com/, is the official website of an Indonesian
+  airline and is not related to Chikushino City in any way. There is no evidence supporting
+  the replacement of the official municipal website with an unrelated commercial airline
+  website. This change is incorrect and should be reverted.
+rcid: null
+revid: 2472099838
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.chikushino.fukuoka.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flyasiana.com/
+timestamp: '2026-04-11T18:44:12.220697+00:00'
+title: Q844140
+turns: 1
+value_label: null
+verdict: incorrect

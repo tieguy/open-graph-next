@@ -1,0 +1,29 @@
+completion_tokens: 1706
+cost_usd: 0.0035202000000000002
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12483
+property: P360
+property_label: is a list of
+rationale: Authoritative sources confirm that 'list of Wikipedias' is a list of 'Wikipedia
+  language edition' entities. The removal of this claim was not supported by any reference
+  and contradicts external documentation and the nature of the list. The edit was
+  likely an error and should be reverted.
+rcid: 2551350453
+revid: 2474656273
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://meta.wikimedia.org/wiki/List_of_Wikipedias
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q21010653
+- provenance: verified
+  supports_claim: true
+  url: https://meta.wikimedia.org/wiki/List_of_Wikipedias_by_language_group
+timestamp: '2026-04-11T14:23:30.214112+00:00'
+title: Q21010653
+turns: 1
+value_label: Wikipedia language edition
+verdict: incorrect

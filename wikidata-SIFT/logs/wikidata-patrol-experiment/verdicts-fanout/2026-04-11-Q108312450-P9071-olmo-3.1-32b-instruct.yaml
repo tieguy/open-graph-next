@@ -1,0 +1,26 @@
+completion_tokens: 2075
+cost_usd: 0.0055718
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21634
+property: P9071
+property_label: character type
+rationale: Primary sources, including the English Wikipedia article, describe Dom
+  James as a sympathetic protagonist rather than an anti-villain or antihero. There
+  is no evidence to support labeling him as an 'anti-villain.' The change from 'antihero'
+  to 'anti-villain' is therefore likely inaccurate and should be reconsidered.
+rcid: 2550845811
+revid: 2474169642
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Dom_James
+- provenance: verified
+  supports_claim: false
+  url: https://tropedia.fandom.com/wiki/Anti-Villain
+timestamp: '2026-04-11T06:17:15.667273+00:00'
+title: Q108312450
+turns: 1
+value_label: anti-villain
+verdict: suspect

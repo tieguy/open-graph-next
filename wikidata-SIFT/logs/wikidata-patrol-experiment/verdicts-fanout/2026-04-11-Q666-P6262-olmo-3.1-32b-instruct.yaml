@@ -1,0 +1,33 @@
+completion_tokens: 299
+cost_usd: 0.0031946
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15076
+property: P6262
+property_label: Fandom article ID
+rationale: The change from 'religion:666' to 'religion:6666789шго' for the Fandom
+  article ID of 'number of the beast' is not supported by any independent evidence.
+  The canonical reference for the 'number of the beast' is 666, as found in the Book
+  of Revelation and widely recognized sources. The new value '6666789шго' does not
+  correspond to any known or authoritative Fandom article and lacks corroboration.
+  The old value '666' aligns with the established association of the number with the
+  'number of the beast.' No verified source supports the new value, making the edit
+  suspect.
+rcid: 2551353948
+revid: 2474659620
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Number_of_the_beast
+- provenance: reported
+  supports_claim: true
+  url: https://www.britannica.com/topic/number-of-the-beast
+- provenance: verified
+  supports_claim: true
+  url: https://www.biblegateway.com/passage/?search=Revelation%2013%3A18
+timestamp: '2026-04-11T07:49:14.749832+00:00'
+title: Q666
+turns: 1
+value_label: null
+verdict: suspect

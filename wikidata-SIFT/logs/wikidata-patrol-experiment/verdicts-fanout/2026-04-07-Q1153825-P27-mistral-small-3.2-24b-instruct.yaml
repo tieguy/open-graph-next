@@ -1,0 +1,28 @@
+completion_tokens: 1368
+cost_usd: 0.009245525
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 97763
+property: P27
+property_label: country of citizenship
+rationale: Multiple reliable sources confirm that Annie Ernaux is a citizen of France.
+  There is no evidence to support the claim that she is a citizen of Switzerland.
+  The edit appears to be incorrect.
+rcid: 2549660053
+revid: 2473020390
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/literature/2022/ernaux/facts/
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/books/2022/oct/06/annie-ernaux-wins-the-2022-nobel-prize-in-literature
+- provenance: verified
+  supports_claim: false
+  url: https://www.lemonde.fr/international/article/2022/10/06/le-prix-nobel-de-litterature-attribue-a-la-romanciere-francaise-annie-ernaux_6144694_3210.html
+timestamp: '2026-04-07T04:23:22.912666+00:00'
+title: Q1153825
+turns: 7
+value_label: Switzerland
+verdict: incorrect

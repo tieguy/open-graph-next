@@ -1,0 +1,25 @@
+completion_tokens: 2201
+cost_usd: 0.00678018
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55647
+property: P19
+property_label: place of birth
+rationale: The updated references for Johannes W. Dietrich's place of birth (Salzburg)
+  were not directly verifiable due to lack of access to the content of the referenced
+  sources (Laudatio and Kürschners Deutscher Gelehrten-Kalender). The only prefetched
+  source mentioning Salzburg (https://www.duoterlano.com/about-johannes.html) does
+  not explicitly confirm Dietrich's birthplace, only his association with Salzburg.
+  No verified sources directly confirm or deny the claim.
+rcid: 2550593019
+revid: 2473924450
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.duoterlano.com/about-johannes.html
+timestamp: '2026-04-11T08:55:21.602463+00:00'
+title: Q48800274
+turns: 3
+value_label: Salzburg
+verdict: unverifiable

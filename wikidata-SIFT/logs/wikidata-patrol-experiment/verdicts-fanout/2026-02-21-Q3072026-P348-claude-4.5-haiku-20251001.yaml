@@ -1,0 +1,35 @@
+completion_tokens: 2259
+cost_usd: 0.055940000000000004
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 44645
+property: P348
+property_label: software version identifier
+rationale: The version identifier 6.2.2404.10 is strongly confirmed by multiple authoritative
+  sources. The official SolveigMM developer website (primary source) explicitly lists
+  '10 April 2024 6.2.2404.10' with detailed fix notes including 'Unable to record
+  audio only', 'Unable to resume the recording after pause', and 'Multiple Media Editor
+  instances on stop recording'. This is independently corroborated by VideoHelp.com,
+  which provides an identical version history. The version number is correctly formatted,
+  properly documented, and confirmed across multiple reliable sources.
+rcid: 2541056707
+revid: 2464838781
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.solveigmm.com/en/products/hypercam/history/
+- provenance: verified
+  supports_claim: true
+  url: https://www.videohelp.com/software/Hypercam/version-history
+- provenance: reported
+  supports_claim: true
+  url: https://filehippo.com/download_hypercam/6.2.2404.10/
+- provenance: reported
+  supports_claim: true
+  url: https://hypercam.en.softonic.com/versions
+timestamp: '2026-02-21T03:16:54.739327+00:00'
+title: Q3072026
+turns: 3
+value_label: null
+verdict: verified-high

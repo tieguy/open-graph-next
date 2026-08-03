@@ -1,0 +1,36 @@
+completion_tokens: 2019
+cost_usd: 0.0058113999999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23000
+property: P463
+property_label: member of
+rationale: No reliable sources support the claim that Rigoberta Menchú is a member
+  of either the Club of Rome or Paris Saint-Germain FC. Her official biographies and
+  independent reporting exclusively focus on her activism and human rights work, with
+  no mention of either organization. This edit introduces an unsupported and likely
+  incorrect claim and should be reverted.
+rcid: 2549478649
+revid: 2472843478
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/peace/1992/tum/biographical/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelwomensinitiative.org/rigobertamenchutum
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/rigoberta-mench-5732.php
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Rigoberta+Menchú+Paris+Saint-Germain+FC
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Rigoberta+Menchú+Club+of+Rome
+timestamp: '2026-04-11T05:44:02.740153+00:00'
+title: Q188620
+turns: 1
+value_label: Paris Saint-Germain FC
+verdict: suspect

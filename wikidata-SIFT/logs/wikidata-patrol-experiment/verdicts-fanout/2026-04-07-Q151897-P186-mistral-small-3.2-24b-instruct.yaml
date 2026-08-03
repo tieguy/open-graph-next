@@ -1,0 +1,38 @@
+completion_tokens: 820
+cost_usd: 0.01277778
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 186867
+property: P186
+property_label: made from material
+rationale: The investigation did not yield any verifiable sources that confirm or
+  deny the claim that the Reichstag is made from material sourced from Gresse-en-Vercors.
+  The references provided in the edit could not be accessed, and the web searches
+  did not return any relevant results.
+rcid: null
+revid: 2471462243
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Reichstag_(Germany)
+- provenance: verified
+  supports_claim: false
+  url: https://www.architecturaldigest.com/story/reichstag-building-berlin
+- provenance: verified
+  supports_claim: false
+  url: https://www.dbp.de/en/reichstag-building
+- provenance: verified
+  supports_claim: false
+  url: https://www.bundestag.de/en/reichstag
+- provenance: verified
+  supports_claim: false
+  url: https://www.berliner-unterwelten.de/english/reichstag.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.denkmaldatenbank.berlin.de/daobj.php?obj_dok_nr=09050341
+timestamp: '2026-04-07T13:24:59.601207+00:00'
+title: Q151897
+turns: 15
+value_label: Gresse-en-Vercors
+verdict: unverifiable

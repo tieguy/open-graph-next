@@ -1,0 +1,29 @@
+completion_tokens: 656
+cost_usd: 0.003149
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13777
+property: P27
+property_label: country of citizenship
+rationale: No independent, reliable source was found confirming that Simon Kubica
+  holds Polish citizenship. The only pages retrieved about a Kubica with Polish nationality
+  pertain to Robert Kubica, not Simon Kubica. The current Wikidata claim is based
+  on the item's description but lacks independent verification. Given the absence
+  of contradictory evidence and no independent source confirming Poland as a citizenship
+  for Simon Kubica, the removal of 'Poland' appears reasonable but cannot be definitively
+  verified.
+rcid: 2550459524
+revid: 2473795998
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://f1.fandom.com/wiki/Robert_Kubica
+- provenance: verified
+  supports_claim: false
+  url: https://www.racefans.net/robert-kubica/
+timestamp: '2026-04-11T10:07:55.366811+00:00'
+title: Q123758079
+turns: 1
+value_label: Poland
+verdict: plausible

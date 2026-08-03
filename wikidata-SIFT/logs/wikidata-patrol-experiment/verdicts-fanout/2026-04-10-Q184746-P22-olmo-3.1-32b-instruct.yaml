@@ -1,0 +1,32 @@
+completion_tokens: 1417
+cost_usd: 0.0063178
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27338
+property: P22
+property_label: father
+rationale: All authoritative and verified sources consistently identify Mortimer Morris-Goodall
+  as Jane Goodall's father. The cited reference (Genealogics) could not be verified,
+  and no independent evidence supports the claim that Jeffrey Epstein is her father.
+  Therefore, the edit is incorrect.
+rcid: null
+revid: 2472081214
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jane_Goodall
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Jane-Goodall
+- provenance: verified
+  supports_claim: false
+  url: https://www.janegoodall.org/about-jane/
+- provenance: reported
+  supports_claim: false
+  url: Q19847326
+timestamp: '2026-04-10T13:41:20.622155+00:00'
+title: Q184746
+turns: 1
+value_label: Jeffrey Epstein
+verdict: incorrect

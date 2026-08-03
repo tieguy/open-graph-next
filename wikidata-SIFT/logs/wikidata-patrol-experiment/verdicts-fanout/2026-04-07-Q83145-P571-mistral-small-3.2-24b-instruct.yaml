@@ -1,0 +1,25 @@
+completion_tokens: 411
+cost_usd: 0.0034542725
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37996
+property: P571
+property_label: inception
+rationale: The official CAF website and Wikipedia do not support the claim that the
+  inception of the Africa Cup of Nations is 2045. The tournament's inception is widely
+  recognized as 1957, and there is no evidence to suggest a change to 2045.
+rcid: 2550014824
+revid: 2473363340
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Africa_Cup_of_Nations
+- provenance: verified
+  supports_claim: false
+  url: https://www.cafonline.com/africa-cup-of-nations/
+timestamp: '2026-04-07T07:17:35.018835+00:00'
+title: Q83145
+turns: 5
+value_label: null
+verdict: incorrect

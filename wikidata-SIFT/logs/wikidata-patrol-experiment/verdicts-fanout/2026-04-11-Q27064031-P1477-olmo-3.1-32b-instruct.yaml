@@ -1,0 +1,31 @@
+completion_tokens: 429
+cost_usd: 0.003892
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18173
+property: P1477
+property_label: birth name
+rationale: The new value 'Joseph David Keery fecha der nacimiento' appears to be a
+  nonsensical or erroneous concatenation of the actor's birth name and what looks
+  like a placeholder for a date of birth in Spanish ('fecha der nacimiento' translates
+  to 'date of birth'). None of the verified sources consulted support this change;
+  all sources consistently list Joe Keery's birth name as 'Joseph David Keery'. This
+  change introduces a factual error and should be reverted to the previous value.
+rcid: 2549631340
+revid: 2472992457
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://celebralityxyz.com/actor/joseph-david-keery
+- provenance: verified
+  supports_claim: true
+  url: https://strangerthings.fandom.com/wiki/Joe_Keery
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/joe-keery.html
+timestamp: '2026-04-11T16:58:02.150025+00:00'
+title: Q27064031
+turns: 1
+value_label: null
+verdict: incorrect

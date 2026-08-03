@@ -1,0 +1,21 @@
+completion_tokens: 548
+cost_usd: 0.00441645
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86137
+property: P571
+property_label: inception
+rationale: No reliable sources were found that confirm the updated inception date
+  of 2016 for the entity CHN Energy. Multiple search attempts using the entity's official
+  name and variations failed to retrieve any web pages providing authoritative information
+  about its founding or incorporation date. Without verifiable external sources corroborating
+  the change, the claim remains unverifiable.
+rcid: 2549567339
+revid: 2472930201
+sources: []
+timestamp: '2026-04-07T12:10:13.347015+00:00'
+title: Q38180956
+turns: 15
+value_label: null
+verdict: unverifiable

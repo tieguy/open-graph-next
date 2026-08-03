@@ -1,0 +1,32 @@
+completion_tokens: 1597
+cost_usd: 0.0046414575
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44567
+property: P3500
+property_label: Ringgold ID
+rationale: The edit includes a reference to Q64159407, but the content of this reference
+  could not be verified. Independent searches for the Ringgold ID "427539" and the
+  Southern Catalonia Biomedical Research Institute did not yield any results. Therefore,
+  the claim cannot be verified with the available evidence.
+rcid: 2550612669
+revid: 2473943467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://authors.bmj.com/open-access/what-is-ringgold/
+- provenance: verified
+  supports_claim: false
+  url: https://cerca.cat/c/iispv/
+- provenance: verified
+  supports_claim: false
+  url: https://www.copyright.com/solutions-ringgold/get-id/
+- provenance: verified
+  supports_claim: false
+  url: https://www.iispv.cat/wp-content/uploads/2024/03/CV-Dr-Vendrell_cat.pdf
+timestamp: '2026-04-10T13:19:35.214968+00:00'
+title: Q30282449
+turns: 5
+value_label: null
+verdict: unverifiable

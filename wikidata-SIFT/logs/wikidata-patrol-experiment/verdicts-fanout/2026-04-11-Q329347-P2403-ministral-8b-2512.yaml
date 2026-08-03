@@ -1,0 +1,25 @@
+completion_tokens: 1945
+cost_usd: 0.0155031
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 137499
+property: P2403
+property_label: total assets
+rationale: The referenced source (PDF) for the total assets claim could not be accessed
+  or verified due to technical limitations. No independent sources were successfully
+  fetched to confirm or deny the change in the value. Without access to the original
+  reference or additional corroborating evidence, it is impossible to verify the accuracy
+  of the new value or the justification for the change.
+rcid: 2550551101
+revid: 2473884206
+sources:
+- provenance: verified
+  summary: Reference source for the claim, but content could not be accessed or extracted.
+  supports_claim: false
+  url: http://www.lukoil.ru/FileSystem/PressCenter/116701.pdf
+timestamp: '2026-04-11T15:43:15.718184+00:00'
+title: Q329347
+turns: 5
+value_label: null
+verdict: unverifiable

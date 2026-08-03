@@ -1,0 +1,26 @@
+completion_tokens: 788
+cost_usd: 0.0097129
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 191106
+property: P27
+property_label: country of citizenship
+rationale: The edited claim adds 'Senegal' as country of citizenship to Q3501778 but
+  no references are provided for this change. My attempts to verify Senegal's relevance
+  through searches yielded no results linking the author to Senegal or confirming
+  the nationality. Searches for author biography, nationality, and related information
+  returned no usable sources. The only source related to this topic (the website hosting
+  the author's work) does not mention nationality or citizenship. Without any verified
+  source supporting the claim, it remains unverifiable.
+rcid: null
+revid: 2471164000
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://pinceauxdenuit.com/
+timestamp: '2026-04-07T14:09:43.407507+00:00'
+title: Q3501778
+turns: 15
+value_label: Senegal
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1389
+cost_usd: 0.008139799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 36532
+property: P166
+property_label: award received
+rationale: No official or independent source confirms that Gaëlle Ghesquière was awarded
+  the 'Officer of Arts and Letters' in 2024. The cited reference does not support
+  the claim, and authoritative sources such as the Ordre des Arts et des Lettres official
+  site do not list her as a laureate for that year. Therefore, the claim is considered
+  suspect.
+rcid: 2540939331
+revid: 2464728916
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.decitre.fr/livres/all-events-all-access-9782847630244.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.culture.gouv.fr/Portals/0/Documents/ALE/Laur%C3%A9ats_2024.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://www.ordredesartslettre.gouv.fr/
+timestamp: '2026-02-20T15:41:33.065315+00:00'
+title: Q3099888
+turns: 6
+value_label: Officer of Arts and Letters
+verdict: suspect

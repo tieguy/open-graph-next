@@ -1,0 +1,31 @@
+completion_tokens: 827
+cost_usd: 0.0034808
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14923
+property: P2868
+property_label: subject has role
+rationale: The label 'conspiracy theorist' for the organization 'Corona Rebellen'
+  is not supported by any independent, verified sources. Academic and investigative
+  journalism sources discuss COVID-19 conspiracy theories in general but do not specifically
+  assign this label to 'Corona Rebellen.' The cited references are from German news
+  outlets, but without being able to fetch their content, and with no supporting evidence
+  from other reliable sources, the removal of the 'conspiracy theorist' claim is justified.
+rcid: 2551217026
+revid: 2474529992
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://link.springer.com/article/10.1007/s42001-020-00086-5
+- provenance: verified
+  supports_claim: false
+  url: https://us.boell.org/en/2020/09/10/it-must-be-plot-coronavirus-conspiracy-theorists-take-streets-germany
+- provenance: verified
+  supports_claim: false
+  url: https://www.wired.com/story/revenge-of-the-covid-conspiracy-theorists/
+timestamp: '2026-04-11T15:26:13.859463+00:00'
+title: Q107646877
+turns: 1
+value_label: conspiracy theorist
+verdict: verified-high

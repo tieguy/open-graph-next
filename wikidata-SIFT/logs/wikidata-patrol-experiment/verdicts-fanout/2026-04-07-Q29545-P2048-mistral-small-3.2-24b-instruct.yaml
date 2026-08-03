@@ -1,0 +1,25 @@
+completion_tokens: 504
+cost_usd: 0.067688525
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 754433
+property: P2048
+property_label: height
+rationale: Multiple verified sources, including the NBA's official roster, confirm
+  Kevin Durant's height as 6'10" (213 cm). This is consistent across all reliable
+  references.
+rcid: null
+revid: 2471467596
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nba.com/player/kevin-durant
+- provenance: verified
+  supports_claim: true
+  url: https://www.basketball-reference.com/players/d/duranke01.html
+timestamp: '2026-04-07T08:06:58.662030+00:00'
+title: Q29545
+turns: 15
+value_label: null
+verdict: verified-high

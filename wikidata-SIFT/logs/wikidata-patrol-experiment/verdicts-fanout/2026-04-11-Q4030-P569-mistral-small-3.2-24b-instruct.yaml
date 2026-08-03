@@ -1,0 +1,29 @@
+completion_tokens: 1143
+cost_usd: 0.01283436875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 131907
+property: P569
+property_label: date of birth
+rationale: The majority of reliable sources, including the Kennedy Center and Columbia
+  University, consistently state that Duke Ellington was born on April 29, 1899. The
+  edit changing the date of birth to April 29, 1898 is not supported by the available
+  evidence.
+rcid: 2549483558
+revid: 2472848291
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cc-seas.columbia.edu/wkcr/story/duke-ellington-birthday-broadcast-tuesday-april-29th
+- provenance: verified
+  supports_claim: true
+  url: https://www.kennedy-center.org/education/resources-for-educators/classroom-resources/media-and-interactives/artists/ellington-duke/
+- provenance: verified
+  supports_claim: true
+  url: https://www2.gwu.edu/~jazz/performersd.html
+timestamp: '2026-04-11T16:44:02.422128+00:00'
+title: Q4030
+turns: 4
+value_label: null
+verdict: incorrect

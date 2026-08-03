@@ -1,0 +1,31 @@
+completion_tokens: 324
+cost_usd: 0.002759
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12823
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The Spanish Wikipedia biography and the composer's official website do
+  not explicitly state the languages spoken, written, or signed by Sonia Megías. The
+  only citation provided for the new value ('Americano') is missing and no references
+  are attached to the claim. The old value ('Spanish') is consistent with her country
+  of citizenship and place of birth, but no primary source confirms this. Therefore,
+  there is insufficient evidence to verify either the old or the new value.
+rcid: null
+revid: 2460854921
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://soniamegias.es/bio/
+- provenance: verified
+  supports_claim: false
+  url: https://soniamegias.es/en/
+- provenance: verified
+  supports_claim: false
+  url: https://imslp.org/wiki/Category:Megías,_Sonia
+timestamp: '2026-04-11T10:57:31.446677+00:00'
+title: Q96147529
+turns: 1
+value_label: Americano
+verdict: unverifiable

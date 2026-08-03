@@ -1,0 +1,19 @@
+completion_tokens: 165
+cost_usd: 0.00511846875
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54157
+property: P26
+property_label: spouse
+rationale: The investigation was unable to fetch any sources to verify the claim due
+  to technical issues with the search tools. Therefore, the claim cannot be verified
+  at this time.
+rcid: 2550498306
+revid: 2473833725
+sources: []
+timestamp: '2026-04-11T06:25:57.403666+00:00'
+title: Q12743035
+turns: 4
+value_label: Glebus Sainciuc
+verdict: unverifiable

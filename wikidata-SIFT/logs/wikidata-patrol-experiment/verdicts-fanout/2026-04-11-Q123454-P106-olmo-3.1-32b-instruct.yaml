@@ -1,0 +1,31 @@
+completion_tokens: 1904
+cost_usd: 0.0068788
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28682
+property: P106
+property_label: occupation
+rationale: The claim that Max Bill's occupation is 'prostitute' is not supported by
+  any credible sources. Major authoritative art-historical sources such as the RKDartists,
+  MoMA, Britannica, and Wikipedia (for context) consistently describe Max Bill as
+  an architect, painter, and sculptor. The cited references do not support the 'prostitute'
+  occupation, and independent web searches yield no reputable confirmation. Therefore,
+  changing the occupation from 'designer' to 'prostitute' is incorrect.
+rcid: 2550802520
+revid: 2474127490
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rkd.nl/en/explore/artists/8423/mx-bill-max
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/artists/1695
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Max-Bill
+timestamp: '2026-04-11T15:31:08.267504+00:00'
+title: Q123454
+turns: 1
+value_label: prostitute
+verdict: incorrect

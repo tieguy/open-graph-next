@@ -1,0 +1,34 @@
+completion_tokens: 402
+cost_usd: 0.0037254000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17421
+property: P856
+property_label: official website
+rationale: The new value https://www.ceair.com/ is not an official government website
+  for Okinawa City. The city's official website is https://www.city.okinawa.okinawa.jp/,
+  as confirmed by direct fetching and by the Okinawa Prefecture government site. The
+  new URL belongs to a private entity (CEAIR), which appears to be a tourism promotional
+  organization, not the official city government. Changing the official website from
+  a government site to a private promotional site is not justified and likely incorrect.
+rcid: 2551422060
+revid: 2474723570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.okinawa.okinawa.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.okinawa.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ceair.com/
+- provenance: verified
+  supports_claim: false
+  url: https://visitokinawajapan.com/
+timestamp: '2026-04-11T13:45:47.759705+00:00'
+title: Q328615
+turns: 1
+value_label: null
+verdict: suspect

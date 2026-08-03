@@ -1,0 +1,26 @@
+completion_tokens: 1437
+cost_usd: 0.00550542
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55385
+property: P18
+property_label: image
+rationale: There is no clear evidence supporting the new image 'Jarfaiterpag.jpg'
+  for Jarfaiter. The official website and the 20minutos.es article do not mention
+  or display the image. Search results did not provide any relevant information about
+  the new image.
+rcid: 2550533887
+revid: 2473867681
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jarfaiter.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-07T14:14:26.100324+00:00'
+title: Q29870720
+turns: 9
+value_label: null
+verdict: unverifiable

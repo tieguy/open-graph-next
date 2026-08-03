@@ -1,0 +1,35 @@
+completion_tokens: 1029
+cost_usd: 0.0046824
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20325
+property: P27
+property_label: country of citizenship
+rationale: No authoritative or verified source was found that directly confirms or
+  refutes whether Nasdas had Sri Lanka as a country of citizenship. The only directly
+  relevant source retrieved was the Sri Lankan government's general page on dual citizenship,
+  which does not reference Nasdas or provide any evidence about their citizenship
+  status. Other sources retrieved mention Nasdas or Sri Lanka individually but do
+  not provide reliable information regarding this specific claim. Therefore, the edit
+  cannot be verified as correct or incorrect based on the available evidence.
+rcid: null
+revid: 2470675650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.immigration.gov.lk/pages_e.php?id=4
+- provenance: verified
+  supports_claim: false
+  url: https://www.francebleu.fr/infos/faits-divers-justice/ils-auraient-pu-les-tuer-les-chiens-de-l-influenceur-nasdas-accuses-d-attaquer-ceux-de-ses-voisins-8428804
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/mouv/nasdas-va-payer-des-profs-pour-donner-des-cours-dans-son-quartier-4691544
+- provenance: verified
+  supports_claim: false
+  url: https://www.lefigaro.fr/actualite-france/femmes-humiliees-discrimination-anti-blanc-dans-le-monde-de-nasdas-l-influenceur-qui-promeut-une-effarante-contre-culture-en-france-20250404
+timestamp: '2026-04-11T07:41:33.148004+00:00'
+title: Q126047616
+turns: 1
+value_label: Sri Lanka
+verdict: unverifiable

@@ -1,0 +1,20 @@
+completion_tokens: 370
+cost_usd: 0.0025580000000000004
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 49680
+property: P569
+property_label: date of birth
+rationale: No sources were located confirming Jan Baptist van Helmont's updated claimed
+  date of birth (1788) or the original date. Web searches for relevant information
+  returned empty results, indicating that both the original and updated claims lack
+  verifiable source support.
+rcid: 2549655379
+revid: 2473015848
+sources: []
+timestamp: '2026-04-07T09:08:30.495998+00:00'
+title: Q294169
+turns: 3
+value_label: null
+verdict: unverifiable

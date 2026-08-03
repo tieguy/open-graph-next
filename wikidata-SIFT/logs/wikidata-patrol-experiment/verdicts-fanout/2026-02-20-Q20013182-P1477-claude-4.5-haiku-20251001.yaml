@@ -1,0 +1,38 @@
+completion_tokens: 3263
+cost_usd: 0.097696
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 81381
+property: P1477
+property_label: birth name
+rationale: 'The birth name ''John Jairo Arias Tascon'' is strongly supported by multiple
+  independent, authoritative sources spanning decades: the LA Times (1990 contemporaneous
+  news report), comprehensive biographical sources (Grokipedia), genealogical databases
+  (FamilySearch), and official human rights investigations (Human Rights Watch). All
+  sources consistently confirm this name; no reliable source supports the previous
+  label ''John Jairo Arias Campana,'' which appears to be an error. The edit successfully
+  corrects this factual error.'
+rcid: 2540941018
+revid: 2464730513
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.latimes.com/archives/la-xpm-1990-06-14-mn-571-story.html
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/John_Jairo_Arias_Tasc%C3%B3n
+- provenance: verified
+  supports_claim: true
+  url: https://www.bornglorious.com/person/?pi=20013182
+- provenance: verified
+  supports_claim: true
+  url: https://ancestors.familysearch.org/en/P916-CM2/john-jairo-arias-tascon-1961-1990
+- provenance: verified
+  supports_claim: true
+  url: https://www.hrw.org/reports/pdfs/c/colombia/colombia.90o/colom90full.pdf
+timestamp: '2026-02-20T14:53:44.435000+00:00'
+title: Q20013182
+turns: 5
+value_label: null
+verdict: verified-high

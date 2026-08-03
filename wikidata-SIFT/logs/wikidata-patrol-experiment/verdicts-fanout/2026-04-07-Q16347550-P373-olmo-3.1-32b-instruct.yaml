@@ -1,0 +1,22 @@
+completion_tokens: 729
+cost_usd: 0.0032192
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13909
+property: P373
+property_label: Commons category
+rationale: The 'Category:Mati_Logoreci' exists on Wikimedia Commons and contains media
+  specifically associated with Mati Logoreci, confirming the category is correct for
+  the item.
+rcid: 2549603193
+revid: 2472965098
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Mati_Logoreci
+timestamp: '2026-04-07T06:42:06.087683+00:00'
+title: Q16347550
+turns: 2
+value_label: null
+verdict: verified-high

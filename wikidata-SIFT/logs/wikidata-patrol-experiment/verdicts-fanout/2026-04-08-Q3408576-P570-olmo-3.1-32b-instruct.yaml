@@ -1,0 +1,19 @@
+completion_tokens: 637
+cost_usd: 0.010236
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49269
+property: P570
+property_label: date of death
+rationale: The only cited reference (Spanish Wikipedia) could not be accessed due
+  to a blocked domain, and no independent, reliable sources could be located to confirm
+  or deny the date of death 11 July 1945 for Prudencia Ayala.
+rcid: null
+revid: 2470732977
+sources: []
+timestamp: '2026-04-08T18:41:44.259304+00:00'
+title: Q3408576
+turns: 9
+value_label: null
+verdict: unverifiable

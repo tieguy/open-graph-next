@@ -1,0 +1,30 @@
+completion_tokens: 1491
+cost_usd: 0.010054287500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 106410
+property: P1082
+property_label: population
+rationale: Multiple independent sources confirm the population figure of 77,948 for
+  Aira as of February 29, 2024.
+rcid: 2551278923
+revid: 2474588215
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mapcarta.com/35568970
+- provenance: verified
+  supports_claim: true
+  url: https://maps.apple.com/place?auid=2924045207228598694&lsp=9902
+- provenance: verified
+  supports_claim: true
+  url: https://thereaderwiki.com/en/Aira,_Kagoshima
+- provenance: verified
+  supports_claim: true
+  url: https://travelpal.ai/destinations/asia/japan/kagoshima/aira
+timestamp: '2026-04-10T12:56:36.651165+00:00'
+title: Q407947
+turns: 7
+value_label: null
+verdict: verified-high

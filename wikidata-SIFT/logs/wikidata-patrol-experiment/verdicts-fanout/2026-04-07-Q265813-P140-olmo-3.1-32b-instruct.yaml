@@ -1,0 +1,24 @@
+completion_tokens: 643
+cost_usd: 0.009937600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47759
+property: P140
+property_label: religion or worldview
+rationale: The only cited reference for the new value 'Catolicismo [es]' is Spanish
+  Wikipedia, which could not be accessed due to a blocked domain. No independently
+  fetched sources confirm Susana Higuchi's religion or worldview. While the change
+  may be semantically equivalent to the previous value, the lack of accessible, reliable
+  evidence means the claim cannot be verified.
+rcid: 2549615483
+revid: 2472977120
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Susana_Higuchi
+timestamp: '2026-04-07T04:24:22.715964+00:00'
+title: Q265813
+turns: 6
+value_label: Catolicismo [es]
+verdict: unverifiable

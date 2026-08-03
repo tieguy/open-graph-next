@@ -1,0 +1,29 @@
+completion_tokens: 1520
+cost_usd: 0.0031848
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11364
+property: P31
+property_label: instance of
+rationale: Independent primary and secondary sources confirm that Pacific Engineering
+  is a business providing engineering services and not a musical group. The company
+  website and Bloomberg both describe it as a professional engineering firm. No evidence
+  was found to support the previous classification as a musical group.
+rcid: 2551234866
+revid: 2474547207
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacengtech.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/1342616D:US
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pacific_Engineering
+timestamp: '2026-04-11T06:23:49.402085+00:00'
+title: Q11347666
+turns: 1
+value_label: business
+verdict: verified-high

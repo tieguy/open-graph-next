@@ -1,0 +1,41 @@
+completion_tokens: 3115
+cost_usd: 0.098783
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 83208
+property: P373
+property_label: Commons category
+rationale: 'The Commons category ''Jaunmokas hunting castle'' exists on Wikimedia
+  Commons as a legitimate category containing 19 media files. The category name is
+  factually accurate—multiple independent sources confirm this building was constructed
+  in 1901 as a hunting lodge for Riga''s mayor. The category is verified as the current
+  Wikidata Commons sitelink for this item. However, the verdict is ''verified-low''
+  because: (1) the edit provides no references to justify the choice of this specific
+  category name over the equally valid alternative ''Category:Jaunmokas Manor'', and
+  (2) both category names accurately describe the same structure, making this a choice
+  of emphasis rather than a factual correction. The claim is correct but insufficiently
+  supported by cited evidence.'
+rcid: 2540964068
+revid: 2464751739
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Jaunmokas_hunting_castle
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Jaunmokas_Manor
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q6164839
+- provenance: verified
+  supports_claim: true
+  url: https://www.mammadaba.lv/en/mammadaba-nature-objects/jaunmokas-palace
+- provenance: verified
+  supports_claim: true
+  url: https://www.jaunmokupils.lv/en/about-the-palace
+timestamp: '2026-02-20T04:07:58.567934+00:00'
+title: Q6164839
+turns: 8
+value_label: null
+verdict: verified-low

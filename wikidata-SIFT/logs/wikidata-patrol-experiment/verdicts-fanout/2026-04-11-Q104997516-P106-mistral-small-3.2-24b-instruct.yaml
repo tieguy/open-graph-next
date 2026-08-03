@@ -1,0 +1,31 @@
+completion_tokens: 1388
+cost_usd: 0.005222756249999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51382
+property: P106
+property_label: occupation
+rationale: The sources consulted did not provide specific information about Evi Vatidou's
+  occupation as an actor. Therefore, it is unverifiable whether the removal of 'actor'
+  as an occupation is correct.
+rcid: 2550561811
+revid: 2473894481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://networthpost.org/net-worth/evi-vatidou-net-worth/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousfix.com/topic/evi-vatidou
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@evivatidou1
+- provenance: verified
+  supports_claim: false
+  url: https://www.in.gr
+timestamp: '2026-04-11T07:49:48.311162+00:00'
+title: Q104997516
+turns: 7
+value_label: actor
+verdict: unverifiable

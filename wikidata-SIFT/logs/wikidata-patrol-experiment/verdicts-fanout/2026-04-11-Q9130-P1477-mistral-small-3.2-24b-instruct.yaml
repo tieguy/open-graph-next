@@ -1,0 +1,26 @@
+completion_tokens: 690
+cost_usd: 0.0183906925
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 194521
+property: P1477
+property_label: birth name
+rationale: The investigation did not yield any reliable sources that explicitly confirm
+  or deny the birth name 'Erwin srgrosfinger' or 'Erwin sroderfinger' for Erwin Schrödinger.
+  The fetched content from multiple sources did not provide the specific information
+  needed to verify the claim.
+rcid: 2550564549
+revid: 2473897156
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/scientist/erwin-schrdinger
+- provenance: verified
+  supports_claim: false
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Schrodinger/
+timestamp: '2026-04-11T12:35:01.129867+00:00'
+title: Q9130
+turns: 9
+value_label: null
+verdict: unverifiable

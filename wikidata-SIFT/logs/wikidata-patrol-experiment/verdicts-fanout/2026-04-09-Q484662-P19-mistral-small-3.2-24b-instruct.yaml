@@ -1,0 +1,49 @@
+completion_tokens: 1220
+cost_usd: 0.0031706187499999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33239
+property: P19
+property_label: place of birth
+rationale: Multiple reliable sources confirm that Wentworth Miller was born in Chipping
+  Norton, Oxfordshire, England, not Belgium. The edit changing the place of birth
+  to Belgium is incorrect.
+rcid: 2549577486
+revid: 2472940165
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/millerwentw/wentworth-miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.nndb.com/people/655/000044523/
+- provenance: verified
+  supports_claim: false
+  url: https://ethnicelebs.com/wentworth-miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/wentworth-miller-3169.php
+- provenance: verified
+  supports_claim: false
+  url: https://ghostwhisperer.fandom.com/wiki/Wentworth_Miller
+- provenance: verified
+  supports_claim: false
+  url: https://kreolmagazine.com/culture/features/wentworth-miller-a-creole-son-born-in-the-uk-and-raised-in-america/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvguide.com/celebrities/wentworth-miller/bio/3000188883/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/wentworth-miller.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvrage.com/person/id-25355/Wentworth_Miller/
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/person/3972-wentworth-miller?language=en-US
+timestamp: '2026-04-09T23:21:54.233993+00:00'
+title: Q484662
+turns: 2
+value_label: Belgium
+verdict: incorrect

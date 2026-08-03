@@ -1,0 +1,38 @@
+completion_tokens: 2289
+cost_usd: 0.005815290000000001
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51200
+property: P735
+property_label: given name
+rationale: The removal of the reference from the given name claim for Yasam Sasmazer
+  is suspect because multiple independent sources (Artsy, Artnet, Ocula, and Turkish
+  Culture Portal) explicitly confirm the artist's name as 'Yaşam Şaşmazer'. The official
+  website (`https://www.sasmazeryasam.com/about/`) does not explicitly state the name
+  in the fetched text, but the context strongly implies it. The removal of the reference
+  without further investigation or confirmation that the official website no longer
+  supports the name is premature and lacks sufficient justification.
+rcid: 2551222880
+revid: 2474535561
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sasmazeryasam.com/about/
+- provenance: verified
+  supports_claim: true
+  url: https://www.artsy.net/artist/yasam-sasmazer
+- provenance: verified
+  supports_claim: true
+  url: https://www.artnet.com/artists/yasam-sasmazer/
+- provenance: verified
+  supports_claim: true
+  url: https://ocula.com/artists/yasam-sasmazer/
+- provenance: verified
+  supports_claim: true
+  url: http://www.turkishculture.org/whoiswho/visual-arts/sculptor/yasam-sasmazer-2052.htm
+timestamp: '2026-04-10T09:35:59.091193+00:00'
+title: Q99481023
+turns: 4
+value_label: Yaşam
+verdict: suspect

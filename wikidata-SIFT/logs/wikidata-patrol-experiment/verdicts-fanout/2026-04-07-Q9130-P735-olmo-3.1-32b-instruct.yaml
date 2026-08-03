@@ -1,0 +1,28 @@
+completion_tokens: 842
+cost_usd: 0.044853199999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 221740
+property: P735
+property_label: given name
+rationale: The given name 'Erwin Schrödinger' matches the widely recognized and established
+  identity of the historical figure as reflected in the Wikidata item's own properties
+  and biographical details. However, I was unable to fetch an independent primary
+  source such as Britannica due to domain access restrictions, preventing a 'verified-high'
+  classification. The name is consistent with known records but lacks direct primary
+  source confirmation in this investigation.
+rcid: 2549635131
+revid: 2472996167
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q9130
+timestamp: '2026-04-07T06:01:25.190676+00:00'
+title: Q9130
+turns: 15
+value_label: Erwin Schrödinger
+verdict: verified-low

@@ -1,0 +1,32 @@
+completion_tokens: 2381
+cost_usd: 0.015157320000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 195353
+property: P856
+property_label: official website
+rationale: The edit changed Enhypen's official website from a contextually plausible
+  Japanese fanclub site (`https://enhypen-jp.weverse.io/`) to a suspicious and unverified
+  domain (`http://beshit.com/enhypen`). The new URL lacks credible references and
+  contradicts established official sources like Belift Lab (`beliftlab.com`). The
+  prefetched reference for Belift Lab confirms it as the official site, and the domain
+  `beshit.com` is not credible for official artist websites. The change is incorrect
+  and unsupported by any evidence.
+rcid: 2550299337
+revid: 2473639263
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://beliftlab.com/artist/profile/ENHYPEN
+- provenance: reported
+  supports_claim: false
+  url: https://enhypen-jp.weverse.io/
+- provenance: reported
+  supports_claim: false
+  url: http://beshit.com/enhypen
+timestamp: '2026-04-11T11:22:04.204930+00:00'
+title: Q99479445
+turns: 15
+value_label: null
+verdict: incorrect

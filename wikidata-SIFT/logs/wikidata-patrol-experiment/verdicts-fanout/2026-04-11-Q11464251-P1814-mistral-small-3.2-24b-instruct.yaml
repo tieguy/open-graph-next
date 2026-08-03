@@ -1,0 +1,19 @@
+completion_tokens: 566
+cost_usd: 0.0018776374999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19932
+property: P1814
+property_label: name in kana
+rationale: The search results for both the old and new values returned errors, preventing
+  a thorough investigation. Therefore, it is not possible to verify the accuracy of
+  the edit.
+rcid: null
+revid: 2464869007
+sources: []
+timestamp: '2026-04-11T07:37:04.350397+00:00'
+title: Q11464251
+turns: 2
+value_label: null
+verdict: unverifiable

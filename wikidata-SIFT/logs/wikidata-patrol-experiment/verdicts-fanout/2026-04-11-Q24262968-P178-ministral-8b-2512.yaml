@@ -1,0 +1,30 @@
+completion_tokens: 1742
+cost_usd: 0.0033753
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42738
+property: P178
+property_label: developer
+rationale: The claim that 'Cacá Mourthé' (Q125887365) is the developer of Google Nest
+  (Q24262968) is factually incorrect and semantically inconsistent. The old value,
+  'Google' (Q95), aligns logically with the item's other claims (e.g., manufacturer,
+  brand, and ecosystem). The cited Wikipedia reference is unreachable, and no verified
+  independent source supports the new value. The edit is incorrect and should be reverted.
+rcid: null
+revid: 2471471372
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Google_Home&oldid=933154935
+- provenance: verified
+  supports_claim: false
+  url: https://developers.google.com/nest/programs
+- provenance: verified
+  supports_claim: false
+  url: https://developers.nest.com/
+timestamp: '2026-04-11T11:26:48.963224+00:00'
+title: Q24262968
+turns: 5
+value_label: Cacá Mourthé
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 322
+cost_usd: 0.00775222
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 18473
+property: P2013
+property_label: Facebook username
+rationale: The claim is that 'globalbankingandfinancereview' is the Facebook username
+  for Global Banking & Finance Review. I conducted searches for the magazine's Facebook
+  presence but found no direct verification. The search results primarily linked to
+  the magazine's own website and third-party business profiles, none of which provided
+  a Facebook username. No social media links were evident in the search results, and
+  attempts to find a Facebook page via site-specific searches yielded no relevant
+  matches. Because the specific username could not be verified through any accessible
+  sources, the claim remains unconfirmed.
+rcid: 2540959311
+revid: 2464747347
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com/
+timestamp: '2026-02-20T05:04:42.935313+00:00'
+title: Q60744597
+turns: 3
+value_label: null
+verdict: unverifiable

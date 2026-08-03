@@ -1,0 +1,25 @@
+completion_tokens: 684
+cost_usd: 0.008971299999999998
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 176690
+property: P18
+property_label: image
+rationale: The investigation could not locate any independently verifiable source
+  that confirms the image claim. No reference URL was found that supports the assertion
+  that the image depicts Rosalía de Castro in the described context. Multiple web
+  searches returned no relevant results, and direct attempts to access Wikimedia Commons
+  image paths failed with 404 errors. Without any verifiable source to confirm or
+  contradict the claim, it cannot be classified beyond 'unverifiable'.
+rcid: 2549245218
+revid: 2472616570
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Special:FilePath/Rosalía_de_Castro
+timestamp: '2026-04-07T08:48:46.952106+00:00'
+title: Q464264
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 775
+cost_usd: 0.002632125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33809
+property: P242
+property_label: locator map image
+rationale: The edit changes the locator map image for Polichni but does not include
+  any references. The search for independent coverage and authoritative sources did
+  not yield any relevant results. Therefore, it is unverifiable whether 'Polichni
+  map.jpg' is the correct updated locator map image for Polichni.
+rcid: null
+revid: 2471173768
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Polichni_map.jpg
+timestamp: '2026-04-08T18:54:17.019987+00:00'
+title: Q182327
+turns: 5
+value_label: null
+verdict: unverifiable

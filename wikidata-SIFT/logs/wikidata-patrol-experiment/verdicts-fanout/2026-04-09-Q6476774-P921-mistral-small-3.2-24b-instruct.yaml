@@ -1,0 +1,40 @@
+completion_tokens: 1665
+cost_usd: 0.00820995
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 85626
+property: P921
+property_label: main subject
+rationale: The sources indicate that the Wikipedia:Babel page is related to the Babel
+  system for indicating language proficiency, not specifically about "Wikimedian."
+  Therefore, the removal of "Wikimedian" as the main subject is justified.
+rcid: 2550595538
+revid: 2473926814
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Commons:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://meta.wikimedia.org/wiki/Meta:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://meta.wikimedia.org/wiki/Babel_wiki
+- provenance: verified
+  supports_claim: false
+  url: https://community.fandom.com/wiki/Community_Central:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikiversity.org/wiki/Wikiversity:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://wikisource.org/wiki/Wikisource:Babel
+timestamp: '2026-04-09T23:44:46.750468+00:00'
+title: Q6476774
+turns: 9
+value_label: Wikimedian
+verdict: verified-high

@@ -1,0 +1,36 @@
+completion_tokens: 3378
+cost_usd: 0.129531
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 112641
+property: P569
+property_label: date of birth
+rationale: The edit proposes changing Auguste Marceau's birth date to 1 May 1806,
+  but multiple authoritative sources confirm the correct date is 1 March 1806. The
+  comprehensive Clairval biography I fetched explicitly states 'Auguste-François Marceau
+  was born on March 1, 1806 in Châteaudun.' GeneaStar (the current Wikidata reference)
+  also confirms March 1, 1806. The eBay book description and current Wikidata entry
+  corroborate March 1. While WikiTree cites FamilySearch for May 1, this is contradicted
+  by the preponderance of more authoritative sources. The edit would introduce an
+  incorrect date where the correct date is already documented.
+rcid: 2540934282
+revid: 2464724785
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.clairval.com/en/captain-auguste-marceau/
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Marceau-574
+- provenance: reported
+  supports_claim: false
+  url: https://www.ebay.com/itm/164148003561
+- provenance: reported
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/marceaua/auguste-marceau
+timestamp: '2026-02-20T18:20:01.454812+00:00'
+title: Q2871304
+turns: 8
+value_label: null
+verdict: incorrect

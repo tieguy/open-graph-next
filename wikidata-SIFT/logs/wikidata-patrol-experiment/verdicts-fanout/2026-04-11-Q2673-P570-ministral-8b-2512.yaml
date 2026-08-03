@@ -1,0 +1,36 @@
+completion_tokens: 2638
+cost_usd: 0.00462771
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34409
+property: P570
+property_label: date of death
+rationale: The edit incorrectly changes Chuck Norris's date of death from March 19,
+  2026 (consistently confirmed by multiple verified sources including USA Today, Variety,
+  BBC News, and the Library of Congress) to March 20, 2026. The cited reference (Gauchazh.clicrbs.com.br)
+  is unreachable and cannot be verified. The new value contradicts all independent,
+  verified evidence.
+rcid: 2550577833
+revid: 2473909863
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://eu.usatoday.com/story/entertainment/celebrities/2026/03/20/chuck-norris-dies/89230252007/
+- provenance: verified
+  supports_claim: false
+  url: https://variety.com/2026/film/news/chuck-norris-dead-walker-texas-ranger-dies-1236694953/
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/n82239657
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/articles/c0le8e5jg1xo
+- provenance: reported
+  supports_claim: false
+  url: https://gauchazh.clicrbs.com.br/cultura-e-lazer/cinema/noticia/2026/03/morre-chuck-norris-estrela-do-cinema-de-acao-aos-86-anos-cmmyz3zx1026y013tvqnz6qax.html
+timestamp: '2026-04-11T15:12:10.484605+00:00'
+title: Q2673
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 1377
+cost_usd: 0.00553698
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 48183
+property: P31
+property_label: instance of
+rationale: The edit incorrectly changes Sonia Sotomayor's instance of from 'human'
+  (Q5) to 'robot' (Q11012). Sonia Sotomayor is a well-documented U.S. Supreme Court
+  justice with a human identity, career, and public record. The cited reference (English
+  Wikipedia) is unreachable, and no credible evidence supports the claim that she
+  is a robot. The new value contradicts all known facts about her, making this edit
+  incorrect.
+rcid: null
+revid: 2470268184
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.supremecourt.gov/about/biographies.aspx
+- provenance: verified
+  supports_claim: false
+  url: http://www.nytimes.com/2009/05/15/us/15sotomayor.html
+timestamp: '2026-04-11T06:36:47.358992+00:00'
+title: Q11107
+turns: 3
+value_label: robot
+verdict: incorrect

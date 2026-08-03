@@ -1,0 +1,29 @@
+completion_tokens: 464
+cost_usd: 0.010553340000000001
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 23306
+property: P31
+property_label: instance of
+rationale: The cited reference (https://sambakker.com) is a personal website that
+  identifies Sam Bakker as a human by showing his photo, using first-person pronouns,
+  and describing his professional background. This is sufficient to support the 'instance
+  of human' claim. Additionally, an independent source (Stuff.co.nz article) confirms
+  Sam Bakker is a real person and software entrepreneur from New Zealand, corroborating
+  the claim. The personal website is a primary source for biographical information
+  about himself, and the news article serves as secondary verification.
+rcid: 2540977207
+revid: 2464763921
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sambakker.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.stuff.co.nz/travel/experiences/budget-holidays/77783166/how-to-become-a-digital-nomad-and-make-money-while-travelling-the-world
+timestamp: '2026-02-20T02:16:42.687857+00:00'
+title: Q138341218
+turns: 4
+value_label: human
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 1069
+cost_usd: 0.004957875
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51994
+property: P19
+property_label: place of birth
+rationale: The edit adds qualifiers to the place of birth claim for Mieczysław Grabowski,
+  specifying that it was known as Wilno and located within Wilno Voivodeship in the
+  Second Polish Republic. The edit includes a reference to a Wikipedia page, but the
+  content could not be verified due to the domain being blocked. Without direct access
+  to the cited reference, the verdict is limited to unverifiable.
+rcid: null
+revid: 2468481710
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Mieczys%C5%82aw_Grabowski
+timestamp: '2026-04-11T13:11:15.484134+00:00'
+title: Q65553426
+turns: 5
+value_label: Vilnius
+verdict: unverifiable

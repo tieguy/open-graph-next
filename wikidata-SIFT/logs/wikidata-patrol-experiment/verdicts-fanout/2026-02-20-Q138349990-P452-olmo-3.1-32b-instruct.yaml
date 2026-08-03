@@ -1,0 +1,27 @@
+completion_tokens: 1167
+cost_usd: 0.0046722
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19860
+property: P452
+property_label: industry
+rationale: The primary source (Suchfokus' own website) explicitly describes the company
+  as an 'Online Marketing Agentur' specializing in SEO and Google Ads, which aligns
+  with the claim of 'internet marketing.' This is corroborated by independent business
+  listings that also describe the company as an internet marketing agency. Both the
+  cited reference and independent sources support the claim.
+rcid: 2540973916
+revid: 2464760796
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+- provenance: reported
+  supports_claim: true
+  url: https://www.google.com/search?q=Suchfokus+Köln+Online+Marketing+Agentur
+timestamp: '2026-02-20T02:51:59.321018+00:00'
+title: Q138349990
+turns: 2
+value_label: internet marketing
+verdict: verified-high

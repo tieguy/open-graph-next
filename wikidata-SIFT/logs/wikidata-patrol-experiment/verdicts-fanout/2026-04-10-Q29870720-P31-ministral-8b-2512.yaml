@@ -1,0 +1,31 @@
+completion_tokens: 1909
+cost_usd: 0.00332001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37076
+property: P31
+property_label: instance of
+rationale: The claim that Jarfaiter (Q29870720) is a Peruvian Hairless Dog (Q38874)
+  is incorrect. Independent sources, including a verified article from 20minutos.es,
+  confirm Jarfaiter as a human artist, rapper, and singer from Spain. This contradicts
+  the claim and all other existing claims about Jarfaiter in Wikidata, which align
+  with human attributes. No credible evidence supports the claim that Jarfaiter is
+  a dog breed.
+rcid: 2550532145
+revid: 2473865955
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+- provenance: verified
+  supports_claim: false
+  url: https://www.akc.org/dog-breeds/peruvian-inca-orchid/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wisdompanel.com/en-us/dog-breeds/peruvian-inca-orchid
+timestamp: '2026-04-10T10:21:29.205590+00:00'
+title: Q29870720
+turns: 3
+value_label: Peruvian Hairless Dog
+verdict: incorrect

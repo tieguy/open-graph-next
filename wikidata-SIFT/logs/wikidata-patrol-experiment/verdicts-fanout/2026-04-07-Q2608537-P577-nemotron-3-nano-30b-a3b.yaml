@@ -1,0 +1,25 @@
+completion_tokens: 623
+cost_usd: 0.0047888
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 93284
+property: P577
+property_label: publication date
+rationale: No verifiable sources were found to confirm or refute the claimed 1620
+  publication date for Fuenteovejuna. All searches for '1620' in combination with
+  'Fuenteovejuna' or author Lope de Vega returned empty results or irrelevant content.
+  No reliable reference sources were accessed, making it impossible to verify the
+  claim through independent evidence. Therefore the edit cannot be definitively confirmed
+  or rejected, resulting in an 'unverifiable' verdict.
+rcid: 2549229821
+revid: 2472602601
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Fuenteovejuna
+timestamp: '2026-04-07T09:50:50.345989+00:00'
+title: Q2608537
+turns: 15
+value_label: null
+verdict: unverifiable

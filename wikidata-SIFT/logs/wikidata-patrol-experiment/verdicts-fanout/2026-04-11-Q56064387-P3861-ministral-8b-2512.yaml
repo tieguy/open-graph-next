@@ -1,0 +1,28 @@
+completion_tokens: 1700
+cost_usd: 0.00156051
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14899
+property: P3861
+property_label: App Store app ID
+rationale: The App Store app ID '613066215' is confirmed by the official App Store
+  pages for Superbru, validating the claim. The removal of the Bundle ID qualifier
+  (P7429) is not incorrect as it is not a required qualifier for the App Store app
+  ID claim. However, the lack of references in Wikidata and the removal of a previously
+  included qualifier warrant a cautious verdict. The edit does not introduce an incorrect
+  value but could benefit from additional context or references.
+rcid: 2550629012
+revid: 2473959282
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://apps.apple.com/gh/app/superbru/id613066215
+- provenance: verified
+  supports_claim: true
+  url: https://apps.apple.com/jm/app/superbru/id613066215
+timestamp: '2026-04-11T15:31:18.501462+00:00'
+title: Q56064387
+turns: 1
+value_label: null
+verdict: verified-low

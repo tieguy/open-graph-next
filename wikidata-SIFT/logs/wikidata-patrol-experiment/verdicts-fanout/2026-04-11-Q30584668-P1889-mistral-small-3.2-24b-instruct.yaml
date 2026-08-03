@@ -1,0 +1,29 @@
+completion_tokens: 1277
+cost_usd: 0.014556149999999999
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 154970
+property: P1889
+property_label: different from
+rationale: The edit adds a qualifier to an existing claim without providing any references.
+  While the Boobpedia page supports the existence of Kenna James, it does not provide
+  information about the need for a disambiguation qualifier. Without additional references
+  or external verification, it's challenging to confirm the necessity of this qualifier.
+rcid: 2551312389
+revid: 2474620404
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.adultfilmindex.com/actor/11102/kenna-james
+- provenance: verified
+  supports_claim: false
+  url: https://www.iafd.com/actor.php?name=kenna+james
+- provenance: verified
+  supports_claim: true
+  url: https://boobpedia.com/boobs/Kenna_James
+timestamp: '2026-04-11T12:49:45.639292+00:00'
+title: Q30584668
+turns: 11
+value_label: Kenna James
+verdict: unverifiable

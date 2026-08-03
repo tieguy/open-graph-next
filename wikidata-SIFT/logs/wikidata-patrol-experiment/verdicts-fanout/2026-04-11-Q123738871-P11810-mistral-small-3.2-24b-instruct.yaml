@@ -1,0 +1,25 @@
+completion_tokens: 1147
+cost_usd: 0.01015638
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 107544
+property: P11810
+property_label: Mastodon instance URL
+rationale: The edit adds qualifiers to the Mastodon instance URL claim for Josh Universe,
+  but the URL is not accessible. Without accessible references or direct confirmation
+  from the Mastodon instance, we cannot verify the accuracy of the qualifiers.
+rcid: 2551429280
+revid: 2474729373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://science.social/
+- provenance: verified
+  supports_claim: false
+  url: https://science.social/about
+timestamp: '2026-04-11T12:44:13.546502+00:00'
+title: Q123738871
+turns: 5
+value_label: null
+verdict: unverifiable

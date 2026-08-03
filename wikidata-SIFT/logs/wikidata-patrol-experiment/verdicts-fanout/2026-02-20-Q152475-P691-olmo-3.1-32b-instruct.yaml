@@ -1,0 +1,27 @@
+completion_tokens: 1534
+cost_usd: 0.0048012
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19404
+property: P691
+property_label: NL CR AUT ID
+rationale: The value 'the' is not a valid NL CR AUT ID for a chamber pot. NL CR AUT
+  identifiers are alphanumeric codes, not English articles. Multiple verified sources
+  confirm that institutional identifiers for cultural objects use codes such as 'ph1075667',
+  not generic words. The edit introduced an invalid identifier without citation, making
+  it incorrect.
+rcid: 2540931818
+revid: 2464722450
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Chamber_pot
+- provenance: verified
+  supports_claim: false
+  url: https://collection.sciencemuseumgroup.org.uk/objects/co146585/chamber-pot-netherlands-1651-1780
+timestamp: '2026-02-20T19:48:26.937355+00:00'
+title: Q152475
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 1742
+cost_usd: 0.0040222
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14885
+property: P569
+property_label: date of birth
+rationale: The Spanish Wikipedia (an independent secondary source) explicitly states
+  that Luzmila Carpio was born in 1949, matching the new value on Wikidata. However,
+  the primary references previously cited (Discogs and BnF authorities) were either
+  unreachable or did not provide a readable birth year. No contradictory evidence
+  was found, but a primary source confirming the birth year was not located.
+rcid: 2551360525
+revid: 2474665763
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Luzmila_Carpio
+- provenance: reported
+  supports_claim: false
+  url: https://rateyourmusic.com/artist/luzmila-carpio
+- provenance: reported
+  supports_claim: false
+  url: https://www.bnf.fr/
+timestamp: '2026-04-10T12:25:24.294284+00:00'
+title: Q466102
+turns: 1
+value_label: null
+verdict: verified-low

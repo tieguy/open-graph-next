@@ -1,0 +1,21 @@
+completion_tokens: 587
+cost_usd: 0.009954000000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 196732
+property: P21
+property_label: sex or gender
+rationale: Insufficient evidence was found to determine whether 'therian' is a correct
+  sex or gender designation for Luigi Nono. Despite multiple searches for reliable
+  sources confirming Luigi Nono's gender identity, no verifiable information was found.
+  No factual basis existed to confirm or deny the claim, and no sources with provenance
+  'verified' were identified to support or refute the edit.
+rcid: null
+revid: 2470542662
+sources: []
+timestamp: '2026-04-07T09:12:58.018043+00:00'
+title: Q160451
+turns: 15
+value_label: therian
+verdict: unverifiable

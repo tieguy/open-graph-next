@@ -1,0 +1,31 @@
+completion_tokens: 1171
+cost_usd: 0.03177244
+diff_type: qualifier_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 133781
+property: P106
+property_label: occupation
+rationale: The edit adds 'business' (Q4830453) as an occupation for Ashef Tajwar Amin.
+  Investigation found evidence that Amin is associated with DEVOMAC Technology Limited
+  as shown on Google Play Developer pages, confirming he is involved with a business
+  entity. However, 'business' in Wikidata refers to an organization type (Q4830453),
+  not a person's occupation. The claim lacks references, and no independent sources
+  verify this specific Wikidata occupation value. While Amin appears to be an entrepreneur/businessperson,
+  'business' is not a standard occupation value for individuals in Wikidata's data
+  model. The correct occupation would likely be 'entrepreneur' (Q131524) or 'businessperson'
+  (Q43845), not 'business' (Q4830453).
+rcid: 2540971679
+revid: 2464758897
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/dev?id=6413524727619359116
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q4830453
+timestamp: '2026-02-20T03:17:09.097914+00:00'
+title: Q138349878
+turns: 15
+value_label: business
+verdict: unverifiable

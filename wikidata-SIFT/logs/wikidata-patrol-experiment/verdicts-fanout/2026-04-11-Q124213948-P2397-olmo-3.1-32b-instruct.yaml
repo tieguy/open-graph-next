@@ -1,0 +1,36 @@
+completion_tokens: 924
+cost_usd: 0.0034538
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14497
+property: P2397
+property_label: YouTube channel ID
+rationale: No independent or authoritative sources could be found that associate the
+  YouTube channel ID 'UCqF-iiJGBmvaqk4iE43MfQw' with Whake. The Library of Congress
+  and IMDb provide biographical information about Whake but do not reference this
+  channel ID. As such, the presence of this claim was likely incorrect, and its removal
+  is justified.
+rcid: 2550621157
+revid: 2473951622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n2024039943
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm15597962/bio/
+- provenance: verified
+  supports_claim: false
+  url: https://commentpicker.com/youtube-channel-id.php
+- provenance: verified
+  supports_claim: false
+  url: https://www.tunepocket.com/youtube-channel-id-finder/
+- provenance: verified
+  supports_claim: false
+  url: https://www.streamweasels.com/%20tools/youtube-channel-id-and-%20user-id-convertor/
+timestamp: '2026-04-11T11:29:39.450639+00:00'
+title: Q124213948
+turns: 1
+value_label: null
+verdict: suspect

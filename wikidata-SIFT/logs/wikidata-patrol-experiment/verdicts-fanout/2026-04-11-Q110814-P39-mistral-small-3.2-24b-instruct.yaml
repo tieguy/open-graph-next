@@ -1,0 +1,29 @@
+completion_tokens: 1369
+cost_usd: 0.0031055187500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31924
+property: P39
+property_label: position held
+rationale: The change from 'Prince-Bishop' to 'diocesan bishop' is supported by the
+  context provided in the prefetched references, particularly from the Catholic-Hierarchy.org
+  page, which confirms his role as Bishop of Bamberg. However, the lack of direct
+  references and the inability to perform a web search limit the strength of the evidence.
+rcid: 2550976966
+revid: 2474296328
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Veit_Truchse%C3%9F_von_Pommersfelden
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Veit_Truchse%C3%9F_von_Pommersfelden
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/btvp.html
+timestamp: '2026-04-11T16:26:42.949484+00:00'
+title: Q110814
+turns: 3
+value_label: diocesan bishop
+verdict: verified-low

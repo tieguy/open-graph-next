@@ -1,0 +1,31 @@
+completion_tokens: 2090
+cost_usd: 0.066724
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 56274
+property: P2003
+property_label: Instagram username
+rationale: The Hestetika.art article from May 2020, an established Italian cultural
+  publication, explicitly lists https://www.instagram.com/ciriminna/ in the WEB &
+  SOCIAL section of an online interview with Andrea Ciriminna. This provides direct
+  confirmation that the Instagram handle is correctly associated with the photographer.
+  The identity is further corroborated by his Leica Certified Photographer status
+  and professional website (Click E Chic).
+rcid: 2540929463
+revid: 2464720169
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://hestetika.art/studiovisitonline-andrea-ciriminna/
+- provenance: verified
+  supports_claim: false
+  url: https://www.certifiedbyleica.it/en/photographers/200/
+- provenance: verified
+  supports_claim: false
+  url: https://www.clickechic.it/
+timestamp: '2026-02-20T20:48:14.980498+00:00'
+title: Q138299035
+turns: 6
+value_label: null
+verdict: verified-high

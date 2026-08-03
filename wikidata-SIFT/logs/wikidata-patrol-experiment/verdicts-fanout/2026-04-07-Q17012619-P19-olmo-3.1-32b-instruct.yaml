@@ -1,0 +1,24 @@
+completion_tokens: 1394
+cost_usd: 0.011574799999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 53692
+property: P19
+property_label: place of birth
+rationale: No independent, reliable source has been found confirming that Hélène Sparrow's
+  place of birth was Poland. The only cited reference is the Ukrainian Wikipedia,
+  which is not considered a reliable source for Wikidata biographical claims. Without
+  primary documentation or a reputable biographical source specifying her birthplace,
+  the claim cannot be verified.
+rcid: null
+revid: 2470681275
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://uk.wikipedia.org/wiki/Гелен_Спаро́в
+timestamp: '2026-04-07T12:47:07.650546+00:00'
+title: Q17012619
+turns: 8
+value_label: Poland
+verdict: unverifiable

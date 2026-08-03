@@ -1,0 +1,34 @@
+completion_tokens: 669
+cost_usd: 0.005021050000000001
+diff_type: reference_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 90356
+property: P21
+property_label: sex or gender
+rationale: The reference URL provided in the edit could not be fetched, and no other
+  reliable sources could be found to verify the claim. The Wikipedia page was blocked,
+  and other biographical sources returned 404 errors.
+rcid: 2551279358
+revid: 2474588640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://famereports.com/balen-shah-biography/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Balen_Shah
+- provenance: verified
+  supports_claim: false
+  url: https://www.nepal24hours.com/n24-story/1313332.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.biographyonline.net/politicians/balen-shah.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/politicians/balen-shah
+timestamp: '2026-04-07T08:02:52.715598+00:00'
+title: Q111772343
+turns: 15
+value_label: male
+verdict: unverifiable

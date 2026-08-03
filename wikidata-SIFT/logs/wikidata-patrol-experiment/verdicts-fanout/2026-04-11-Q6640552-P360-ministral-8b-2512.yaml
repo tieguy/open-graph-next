@@ -1,0 +1,29 @@
+completion_tokens: 2018
+cost_usd: 0.00185958
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27922
+property: P360
+property_label: is a list of
+rationale: The investigation was unable to fetch or verify any authoritative sources
+  due to technical limitations (blocked domains, payment walls, and unreachable URLs).
+  The change from 'highway' to 'state highway' is semantically plausible for a list
+  of state highways in São Paulo, but without direct evidence or references, the edit
+  cannot be verified. The lack of verified sources means the claim remains unverifiable.
+rcid: 2551131421
+revid: 2474446307
+sources:
+- provenance: reported
+  summary: Prefetched reference was unreachable due to server error.
+  supports_claim: false
+  url: https://wiki.aaroads.com/wiki/List_of_state_highways_in_S%C3%A3o_Paulo
+- provenance: reported
+  summary: Fetch failed due to HTTP 403 Forbidden.
+  supports_claim: false
+  url: https://www.famousfix.com/list/highways-in-sao-paulo-state
+timestamp: '2026-04-11T07:09:39.384027+00:00'
+title: Q6640552
+turns: 4
+value_label: state highway
+verdict: unverifiable

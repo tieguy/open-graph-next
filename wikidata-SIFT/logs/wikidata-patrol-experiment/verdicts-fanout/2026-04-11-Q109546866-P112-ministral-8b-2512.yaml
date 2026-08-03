@@ -1,0 +1,26 @@
+completion_tokens: 1650
+cost_usd: 0.00297453
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30827
+property: P112
+property_label: founder
+rationale: The added reference to Ridgeback Bio's official page confirms Wayne Holman
+  as a co-founder of Ridgeback Biotherapeutics. This is corroborated by an independent
+  source (Ridgeback Capital's team page), which also confirms his co-founder status.
+  Both sources are authoritative and directly support the claim.
+rcid: 2551339028
+revid: 2474645293
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ridgebackbio.com/about/development-advisory-board/wayne-holman-md/
+- provenance: verified
+  supports_claim: true
+  url: http://www.ridgebackcap.com/team
+timestamp: '2026-04-11T10:15:26.405556+00:00'
+title: Q109546866
+turns: 3
+value_label: Wayne Holman
+verdict: verified-high

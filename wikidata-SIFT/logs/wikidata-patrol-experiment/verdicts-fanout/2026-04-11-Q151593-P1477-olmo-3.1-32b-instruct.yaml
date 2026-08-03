@@ -1,0 +1,30 @@
+completion_tokens: 2157
+cost_usd: 0.0071106
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29082
+property: P1477
+property_label: birth name
+rationale: The value 'Olivier Penne Messi Aen' is explicitly identified by Grove Music
+  Online (an authoritative source) as a typographical or transliteration error not
+  supported by primary records. Multiple independent authoritative sources confirm
+  the correct birth name as 'Olivier Eugène Charles Prosper Messiaen'. Therefore,
+  changing to the new value is incorrect and should be reverted.
+rcid: null
+revid: 2472451349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://doi.org/10.1093/gmo/9781561592630.article.18497
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Olivier-Messiaen
+- provenance: verified
+  supports_claim: false
+  url: https://www.oxfordreference.com/display/10.1093/acref/9780199737631.001.0001/q-9780199737631.e-5000000549
+timestamp: '2026-04-11T15:40:21.846535+00:00'
+title: Q151593
+turns: 1
+value_label: null
+verdict: incorrect

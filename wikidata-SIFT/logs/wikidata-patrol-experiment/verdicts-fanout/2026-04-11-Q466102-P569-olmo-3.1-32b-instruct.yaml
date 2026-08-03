@@ -1,0 +1,25 @@
+completion_tokens: 1247
+cost_usd: 0.0037459999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14989
+property: P569
+property_label: date of birth
+rationale: The previously cited source (Last.fm) supports a birth year of 1954. No
+  verified primary source supports the new value of 1949. Changing a well-sourced
+  date to an unsupported value without reliable evidence is suspicious.
+rcid: 2551360525
+revid: 2474665763
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Luzmila+Carpio/+wiki
+- provenance: verified
+  supports_claim: false
+  url: https://www.luzmilacarpio.tv/
+timestamp: '2026-04-11T06:32:21.418375+00:00'
+title: Q466102
+turns: 1
+value_label: null
+verdict: suspect

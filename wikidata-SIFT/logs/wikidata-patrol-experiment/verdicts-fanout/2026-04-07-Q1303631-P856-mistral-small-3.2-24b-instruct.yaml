@@ -1,0 +1,23 @@
+completion_tokens: 744
+cost_usd: 0.0031882375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31379
+property: P856
+property_label: official website
+rationale: The new URL provided in the edit, "https://www.finnair.com", is the website
+  for Finnair, a Finnish airline, and does not align with the context of Eiheiji.
+  The old URL, "https://www.town.eiheiji.lg.jp/", is confirmed to be the legitimate
+  official website for Eiheiji.
+rcid: 2550188004
+revid: 2473531230
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.eiheiji.lg.jp/
+timestamp: '2026-04-07T10:24:38.672735+00:00'
+title: Q1303631
+turns: 3
+value_label: null
+verdict: incorrect

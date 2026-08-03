@@ -1,0 +1,37 @@
+completion_tokens: 2480
+cost_usd: 0.007100219999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54276
+property: P213
+property_label: ISNI
+rationale: The ISNI value `0000000513392880` is already cited on the Wikidata item
+  for Josh Universe, but the primary source (INSPIRE-HEP) is unreachable. The qualifier
+  `P1810` (subject named as) was added to clarify that this ISNI corresponds to the
+  subject named 'Josh Universe'. While the ISNI itself cannot be independently verified
+  due to database restrictions (ISNI.org blocked automated access), the qualifier
+  improves the claim's clarity and is logically justified based on the subject's identity
+  and context provided by verified sources (e.g., official website, Fandom page, and
+  Academia.edu). The edit is a reasonable improvement to the claim but lacks full
+  independent verification of the ISNI value itself.
+rcid: 2551428255
+revid: 2474728549
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com/
+- provenance: verified
+  supports_claim: false
+  url: https://space.fandom.com/wiki/Josh_Universe
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: reported
+  supports_claim: false
+  url: https://inspirehep.net/authors/2962404
+timestamp: '2026-04-11T12:24:14.325283+00:00'
+title: Q123738871
+turns: 2
+value_label: null
+verdict: verified-low

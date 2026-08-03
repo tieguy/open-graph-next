@@ -1,0 +1,43 @@
+completion_tokens: 851
+cost_usd: 0.00789266125
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 129602
+property: P19
+property_label: place of birth
+rationale: The search results did not provide any direct evidence regarding Laura
+  M. Lechuga's place of birth. The available sources either do not mention her place
+  of birth or are blocked and cannot be accessed.
+rcid: null
+revid: 2470682818
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/publication/335310214_A_biosensor_based_on_plasmonic_nanostructures_for_the_detection_of_foodborne_pathogens
+- provenance: verified
+  supports_claim: false
+  url: https://www.ucm.es/laura-lechuga
+- provenance: verified
+  supports_claim: false
+  url: https://www.icn2.cat/en/laura-lechuga
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Laura-Lechuga
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Laura-Lechuga-2
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Laura-Lechuga-3
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Laura-Lechuga-4
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Laura-Lechuga-5
+timestamp: '2026-04-07T14:11:08.707901+00:00'
+title: Q50802234
+turns: 15
+value_label: Maleján
+verdict: unverifiable

@@ -1,0 +1,24 @@
+completion_tokens: 275
+cost_usd: 0.00817493875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 94547
+property: P2048
+property_label: height
+rationale: Unable to verify the height change due to restrictions preventing access
+  to necessary resources.
+rcid: 2550580349
+revid: 2473912214
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.celebheights.com/s/Chuck-Norris-140.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.dimensions.com/element/chuck-norris?9e7db5ba_page=2
+timestamp: '2026-04-11T12:09:40.166747+00:00'
+title: Q2673
+turns: 5
+value_label: null
+verdict: unverifiable

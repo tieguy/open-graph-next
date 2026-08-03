@@ -1,0 +1,27 @@
+completion_tokens: 1728
+cost_usd: 0.00183927
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19577
+property: P569
+property_label: date of birth
+rationale: The removed claim of Kadambari Jethwani's date of birth as '30 April 1987'
+  was incorrect. Independent verified sources (Alchetron and Chiloka) explicitly state
+  her birthdate as '20 April'. The cited National Medical Commission reference was
+  unreachable, and no other verifiable evidence supported the removed claim. The removal
+  was justified as the claim was contradicted by multiple reliable sources.
+rcid: null
+revid: 2463100359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://alchetron.com/Kadambari-Jethwani
+- provenance: verified
+  supports_claim: false
+  url: https://chiloka.com/celebrity/kadambari-jethwani
+timestamp: '2026-04-11T18:48:43.677304+00:00'
+title: Q26213685
+turns: 2
+value_label: null
+verdict: incorrect

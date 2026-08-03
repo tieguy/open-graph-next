@@ -1,0 +1,33 @@
+completion_tokens: 786
+cost_usd: 0.0032216000000000002
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13750
+property: P856
+property_label: official website
+rationale: The official website https://packetra.com, as cited in the edit, is confirmed
+  to be the current and authoritative web presence for Packetra, a privacy-focused
+  web hosting provider. Primary sources directly from the domain describe the service
+  and privacy features, and an independent third-party review corroborates the claim.
+  The reference is authoritative and directly supports the 'official website' statement.
+rcid: 2540928717
+revid: 2464719458
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/hosting
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/about
+- provenance: verified
+  supports_claim: true
+  url: https://www.whtop.com/review/packetra.com
+timestamp: '2026-02-20T21:25:08.374087+00:00'
+title: Q138348890
+turns: 2
+value_label: null
+verdict: verified-high

@@ -1,0 +1,21 @@
+completion_tokens: 429
+cost_usd: 0.00236120625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23583
+property: P569
+property_label: date of birth
+rationale: The primary reference (Portuguese Wikipedia) is blocked and cannot be fetched.
+  No independent sources were found to confirm or deny the new date of birth.
+rcid: 2550560737
+revid: 2473893449
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pt.wikipedia.org/wiki/José_Luís_Abecassis
+timestamp: '2026-04-11T08:22:49.906647+00:00'
+title: Q10309818
+turns: 3
+value_label: null
+verdict: unverifiable

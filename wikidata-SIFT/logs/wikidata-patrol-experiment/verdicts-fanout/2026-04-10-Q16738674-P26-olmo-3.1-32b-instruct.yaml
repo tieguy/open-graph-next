@@ -1,0 +1,30 @@
+completion_tokens: 801
+cost_usd: 0.0044606
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19900
+property: P26
+property_label: spouse
+rationale: Multiple independent, verified sources confirm that Daisy Ridley and Tom
+  Bateman are married. Major outlets such as People, NBC Insider, and Elle describe
+  their marriage and relationship in detail. Removing Tom Bateman as a spouse from
+  Daisy Ridley's item appears to be an error, as there is no evidence of a change
+  in their marital status.
+rcid: null
+revid: 2470254262
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.people.com/all-about-daisy-ridley-tom-bateman-relationship-8658529
+- provenance: verified
+  supports_claim: true
+  url: https://www.nbc.com/nbc-insider/who-is-tom-bateman-wife-daisy-ridley
+- provenance: verified
+  supports_claim: true
+  url: https://www.elle.com/culture/celebrities/a65454630/who-is-tom-bateman-daisy-ridley-husband/
+timestamp: '2026-04-10T13:06:57.858670+00:00'
+title: Q16738674
+turns: 1
+value_label: Tom Bateman
+verdict: incorrect

@@ -1,0 +1,22 @@
+completion_tokens: 311
+cost_usd: 0.0004708
+diff_type: statement_removed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 8172
+property: P18
+property_label: image
+rationale: The edit removed an image claim with no cited references. No sources were
+  available to verify or contradict the claim, meaning there is insufficient evidence
+  to assess its correctness.
+rcid: 2549917621
+revid: 2473272106
+sources:
+- provenance: verified
+  supports_claim: false
+  url: None
+timestamp: '2026-04-07T13:22:32.676259+00:00'
+title: Q3933851
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 1281
+cost_usd: 0.0268136
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 130225
+property: P569
+property_label: date of birth
+rationale: The edit proposes a birth year of 1788 for Jan Baptist van Helmont, which
+  is over two centuries later than the widely documented historical consensus. No
+  reliable primary or secondary sources support this date, and all available evidence
+  indicates a birth year in the late 16th century (around 1577).
+rcid: 2549655379
+revid: 2473015848
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jan_Baptista_van_Helmont
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Jan-Baptista-van-Helmont
+- provenance: reported
+  supports_claim: false
+  url: https://www.geni.com/people/Jan-Baptista-van-Helmont/6000000001181435496
+timestamp: '2026-04-07T09:08:22.713463+00:00'
+title: Q294169
+turns: 11
+value_label: null
+verdict: incorrect

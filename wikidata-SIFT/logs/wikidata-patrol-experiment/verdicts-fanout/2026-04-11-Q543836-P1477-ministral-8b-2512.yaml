@@ -1,0 +1,33 @@
+completion_tokens: 2616
+cost_usd: 0.00790122
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 59480
+property: P1477
+property_label: birth name
+rationale: The edit changes the birth name from 'Maël DELOPRTE' to 'Pierre BORDAGE'
+  for Pierre Bordage (Q543836). Independent sources such as Grokipedia, ActuSF, and
+  Le Parisien do not support 'Maël DELOPRTE' as a birth name. The cited reference
+  (Fichier des personnes décédées mirror) is unverifiable and lacks transparency.
+  The new value 'Pierre BORDAGE' aligns with the item's established public name but
+  lacks direct evidence for being a birth name. The item's claims for family name
+  (Delporte) and given name (Maël) suggest 'Maël Delporte' is likely a pseudonym or
+  professional name rather than a birth name.
+rcid: 2550574471
+revid: 2473906644
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Pierre_Bordage
+- provenance: verified
+  supports_claim: false
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitt%C3%A9
+- provenance: verified
+  supports_claim: false
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+timestamp: '2026-04-11T17:04:01.239713+00:00'
+title: Q543836
+turns: 2
+value_label: null
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 1536
+cost_usd: 0.0020630099999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18413
+property: P1559
+property_label: name in native language
+rationale: All verified sources consistently refer to the individual as 'Xabier Lete'
+  in Basque contexts. The proposed change to 'Antton Lete' lacks any credible evidence
+  or support from authoritative sources. The edit contradicts established biographical
+  and cultural references, indicating it is incorrect.
+rcid: null
+revid: 2470741421
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.badok.eus/euskal-musika/xabier-lete
+- provenance: verified
+  supports_claim: false
+  url: https://www.behindthename.com/name/xabier
+- provenance: verified
+  supports_claim: true
+  url: https://www.biographies.net/people/en/xabier_lete
+timestamp: '2026-04-11T11:31:47.757936+00:00'
+title: Q3091084
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,23 @@
+completion_tokens: 1351
+cost_usd: 0.004577406250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45223
+property: P569
+property_label: date of birth
+rationale: The official profile from Speed Skating Canada clearly states that Félix
+  Roussel was born on August 10, 2001. The edited date of August 10, 67 CE is incorrect
+  and highly implausible for a modern athlete. The cited reference could not be accessed,
+  but independent sources confirm the correct date of birth.
+rcid: null
+revid: 2471484916
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://speedskating.ca/fr/athletes/felix-roussel/
+timestamp: '2026-04-07T05:52:23.416506+00:00'
+title: Q123164089
+turns: 5
+value_label: null
+verdict: incorrect

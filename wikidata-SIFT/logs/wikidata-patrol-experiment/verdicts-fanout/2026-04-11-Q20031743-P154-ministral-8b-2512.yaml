@@ -1,0 +1,31 @@
+completion_tokens: 1624
+cost_usd: 0.01059675
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 99351
+property: P154
+property_label: logo image
+rationale: The edit changed the logo from an incorrect value ('Rocket League logo.svg')
+  to the correct value ('Roblox logo.svg'). Multiple verified sources (icons8.com
+  and citypng.com) confirm the existence of the 'Roblox logo.svg' file. The old value
+  was incorrect because Psyonix is the developer of Rocket League, not Roblox. Although
+  no references were cited for this edit, the new value is strongly supported by independent
+  evidence.
+rcid: null
+revid: 2471694386
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://icons8.com/icons/set/roblox-logo
+- provenance: verified
+  supports_claim: true
+  url: https://www.citypng.com/photo/7025/hd-new-roblox-logo-icon-png
+- provenance: verified
+  supports_claim: false
+  url: https://www.psyonix.com
+timestamp: '2026-04-11T07:09:09.100162+00:00'
+title: Q20031743
+turns: 4
+value_label: null
+verdict: verified-high

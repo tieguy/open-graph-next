@@ -1,0 +1,30 @@
+completion_tokens: 1588
+cost_usd: 0.00377346
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29764
+property: P1559
+property_label: name in native language
+rationale: The claim that Lope de Vega's name in native language is 'erik marikon'
+  is incorrect. Extensive independent sources, including dictionaries and biographical
+  pages, confirm that his name is consistently 'Lope de Vega' or 'Félix Lope de Vega
+  y Carpio'. No credible sources support the new value, and the old value aligns with
+  established historical records.
+rcid: 2549919720
+revid: 2473274144
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.classicspanishbooks.com/16th-cent-baroque-lope-life.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.collinsdictionary.com/us/dictionary/english/lope-de-vega
+- provenance: verified
+  supports_claim: true
+  url: https://www.dictionary.com/browse/lope-de-vega
+timestamp: '2026-04-11T15:39:16.816391+00:00'
+title: Q165257
+turns: 1
+value_label: null
+verdict: incorrect

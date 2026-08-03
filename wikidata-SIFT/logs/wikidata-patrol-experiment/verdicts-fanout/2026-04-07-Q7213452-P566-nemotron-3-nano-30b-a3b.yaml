@@ -1,0 +1,23 @@
+completion_tokens: 655
+cost_usd: 0.0047501999999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92384
+property: P566
+property_label: has basionym
+rationale: The edit changes the basionym claim from Q38781268 (Eupatorium rebaudianum)
+  to Q592 (gay). After extensive searching, no reliable sources verifying that 'gay'
+  is a correct basionym for candyleaf were found. Attempts to find definitions, taxonomic
+  uses, or related scholarly content using various queries returned no useful results.
+  The term 'gay' as a taxonomic designation appears to be a non-standard or erroneous
+  usage that lacks documented evidence in botanical literature or Wikidata references.
+  No credible sources were located to confirm or refute this change.
+rcid: 2550294426
+revid: 2473634449
+sources: []
+timestamp: '2026-04-07T03:24:34.822103+00:00'
+title: Q7213452
+turns: 15
+value_label: gay
+verdict: unverifiable

@@ -1,0 +1,17 @@
+completion_tokens: 1797
+cost_usd: 0.03400654
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 217256
+property: P735
+property_label: given name
+rationale: null
+rcid: 2540944872
+revid: 2464734208
+sources: []
+timestamp: '2026-02-20T12:11:00.127089+00:00'
+title: Q62394296
+turns: 15
+value_label: Black
+verdict: null

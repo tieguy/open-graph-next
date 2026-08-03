@@ -1,0 +1,36 @@
+completion_tokens: 2023
+cost_usd: 0.024583659999999997
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 92157
+property: P856
+property_label: official website
+rationale: The evidence strongly supports the website update. The new URL https://www.tachikawa-edu.jp/jh09/
+  is the active, functioning official website for Tachikawa Municipal Tachikawa Ninth
+  Junior High School, containing current announcements and matching contact information
+  (phone 042-535-1415, address 東京都立川市若葉町3-19-5). The old domain tachikawa.ed.jp no
+  longer resolves (DNS error), indicating the school has migrated from the .ed.jp
+  to -edu.jp domain. Multiple independent sources confirm the school's identity through
+  matching contact details, and the new domain appears to be the legitimate current
+  website.
+rcid: 2541055664
+revid: 2464837874
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.tachikawa-edu.jp/jh09/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tachikawa.ed.jp/jh09/
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.tachikawa.lg.jp/shisetsu/1008069/1008217.html
+- provenance: verified
+  supports_claim: false
+  url: https://school.js88.com/scl_j/31130620
+timestamp: '2026-02-21T04:04:53.538510+00:00'
+title: Q11597903
+turns: 9
+value_label: null
+verdict: verified-high

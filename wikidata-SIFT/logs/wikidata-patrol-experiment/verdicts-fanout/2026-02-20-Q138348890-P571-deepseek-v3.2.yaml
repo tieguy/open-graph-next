@@ -1,0 +1,31 @@
+completion_tokens: 1298
+cost_usd: 0.01190596
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 41706
+property: P571
+property_label: inception
+rationale: The cited reference (packetra.com/about) directly supports the claim, stating
+  Packetra launched publicly in January 2026. Independent corroboration from whtop.com
+  review confirms the same timeline. The privacy policy (last updated January 9, 2026)
+  and directory listings further support the claim that Packetra is a new company
+  starting operations in early 2026. Multiple sources consistently confirm the inception
+  date.
+rcid: 2540931999
+revid: 2464722626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/about
+- provenance: verified
+  supports_claim: true
+  url: https://www.whtop.com/review/packetra.com
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/privacy
+timestamp: '2026-02-20T19:40:24.675209+00:00'
+title: Q138348890
+turns: 4
+value_label: null
+verdict: verified-high

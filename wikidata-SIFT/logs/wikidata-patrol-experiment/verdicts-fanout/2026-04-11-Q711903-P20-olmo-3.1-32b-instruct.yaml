@@ -1,0 +1,30 @@
+completion_tokens: 2204
+cost_usd: 0.007212
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29448
+property: P20
+property_label: place of death
+rationale: Multiple authoritative sources, including the Union List of Artist Names
+  (ULAN), Encyclopædia Britannica, and French Wikipedia, confirm that Albert Gleizes
+  died in Saint-Rémy-de-Provence. The previous value of 'Avignon' is not supported
+  by these sources and is therefore incorrect. The edit to change the place of death
+  is correct and well-supported.
+rcid: 2551232936
+revid: 2474545318
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://vocab.getty.edu/page/ulan/500001380
+- provenance: verified
+  supports_claim: true
+  url: http://oxfordindex.oup.com/view/10.1093/benz/9780199773787.article.B00075583
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Albert_Gleizes
+timestamp: '2026-04-11T18:34:31.235316+00:00'
+title: Q711903
+turns: 1
+value_label: Saint-Rémy-de-Provence
+verdict: verified-high

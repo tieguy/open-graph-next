@@ -1,0 +1,21 @@
+completion_tokens: 621
+cost_usd: 0.029614249999999998
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 589801
+property: P641
+property_label: sport
+rationale: Investigation into whether Lidia Karen Zapata Campos is an association
+  football player failed to locate any verifiable source confirming this claim. No
+  referenced sources from the edit were accessible, and web searches produced no evidence
+  linking her to professional football. Given the absence of supporting evidence and
+  inability to verify the change, the claim remains unverifiable.
+rcid: null
+revid: 2471022844
+sources: []
+timestamp: '2026-04-07T11:32:17.606486+00:00'
+title: Q1504216
+turns: 15
+value_label: association football player
+verdict: unverifiable

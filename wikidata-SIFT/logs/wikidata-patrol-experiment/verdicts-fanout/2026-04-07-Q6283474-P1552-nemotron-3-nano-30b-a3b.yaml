@@ -1,0 +1,36 @@
+completion_tokens: 859
+cost_usd: 0.0208146
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 412856
+property: P1552
+property_label: has characteristic
+rationale: I conducted extensive searches across the web for any evidence that Joseph
+  Glasco used collage or had collage as an artistic characteristic. Despite exhaustive
+  searches using various terms including 'Joseph Glasco collage', 'collage technique',
+  and combinations with relevant domains like museum websites (whitney.org, moma.org),
+  no substantive sources were found that mention this connection. The existing edit
+  shows this claim was added without references, and my independent searching failed
+  to locate any sources that support or contradict the claim. This leaves the claim
+  unverifiable based on available evidence.
+rcid: 2550181703
+revid: 2473525139
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nytimes.com/1996/06/09/nyregion/joseph-glasco-71-painter-and-sculptor.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.artsclubchicago.org/exhibit/six-american-sculptors-baskin-farr-glasco-lipton-schmidt-schor/
+- provenance: reported
+  supports_claim: false
+  url: https://www.slideshare.net/slideshow/moma-1957/4670347#2
+- provenance: reported
+  supports_claim: false
+  url: https://www.moma.org/artists/?exhibition_id=2871
+timestamp: '2026-04-07T09:44:32.166616+00:00'
+title: Q6283474
+turns: 15
+value_label: collage
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 723
+cost_usd: 0.0040232
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 77572
+property: P18
+property_label: image
+rationale: No verifiable references were found supporting the image claim. Extensive
+  searches across multiple query variations failed to locate any Wikimedia or other
+  web resources that confirm the existence or accuracy of the specific image '2021
+  Nissan Armada SV 2WD in Brilliant Silver Metallic, front left.jpg' for this vehicle
+  model or its year. Wikipedia searches showed no images matching the description,
+  and Wikimedia Commons lacks any relevant files. Without any found documentation
+  or corroborating sources, the claim cannot be verified.
+rcid: 2550729446
+revid: 2474056825
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=2021+Nissan+Armada+SV+2WD+Brilliant+Silver+Metallic+front+left.jpg
+timestamp: '2026-04-07T09:38:17.155998+00:00'
+title: Q611158
+turns: 15
+value_label: null
+verdict: unverifiable

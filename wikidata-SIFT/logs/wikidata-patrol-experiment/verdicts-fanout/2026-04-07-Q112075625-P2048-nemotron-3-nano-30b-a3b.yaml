@@ -1,0 +1,22 @@
+completion_tokens: 689
+cost_usd: 0.00547655
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 106775
+property: P2048
+property_label: height
+rationale: No verifiable sources could be located to confirm or contest the claim
+  that Daniel Noboa has a height of 160 centimetres. Multiple targeted web searches
+  for news reports, official profiles, and reputable secondary sources failed to retrieve
+  any content mentioning '160 centimetres' or providing corroborating evidence for
+  this specific height measurement. The edit's claim remains unverified due to the
+  complete absence of supporting verifiable sources in the investigation.
+rcid: null
+revid: 2470904177
+sources: []
+timestamp: '2026-04-07T12:27:14.890960+00:00'
+title: Q112075625
+turns: 15
+value_label: null
+verdict: unverifiable

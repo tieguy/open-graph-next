@@ -1,0 +1,22 @@
+completion_tokens: 757
+cost_usd: 0.00533172
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 63405
+property: P18
+property_label: image
+rationale: The investigation encountered repeated errors when attempting to search
+  for and fetch relevant sources. Due to the inability to access and verify the necessary
+  information, the verdict is unverifiable.
+rcid: 2550678678
+revid: 2474007762
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Russe_(Schiff,_1959)
+timestamp: '2026-04-11T13:05:03.151393+00:00'
+title: Q107067041
+turns: 5
+value_label: null
+verdict: unverifiable

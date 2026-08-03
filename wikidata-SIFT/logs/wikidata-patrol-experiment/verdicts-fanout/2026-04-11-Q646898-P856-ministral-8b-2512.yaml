@@ -1,0 +1,28 @@
+completion_tokens: 1616
+cost_usd: 0.005646480000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 48674
+property: P856
+property_label: official website
+rationale: The edit incorrectly changed the official website of Komatsu (Q646898)
+  from the verified municipal government site (https://www.city.komatsu.lg.jp/) to
+  an unrelated airline website (https://www.malaysiaairlines.com). The old value was
+  confirmed as correct through direct inspection of the official municipal website,
+  which includes population data, municipal services, and alerts. The new value is
+  unrelated to Komatsu city and contradicts independent evidence.
+rcid: null
+revid: 2471370213
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.komatsu.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.malaysiaairlines.com
+timestamp: '2026-04-11T10:49:48.080836+00:00'
+title: Q646898
+turns: 3
+value_label: null
+verdict: incorrect

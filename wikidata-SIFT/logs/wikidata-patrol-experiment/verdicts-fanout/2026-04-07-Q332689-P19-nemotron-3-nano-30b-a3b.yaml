@@ -1,0 +1,27 @@
+completion_tokens: 703
+cost_usd: 0.007579800000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 148784
+property: P19
+property_label: place of birth
+rationale: The investigation attempted to verify if 'China' is a correct place of
+  birth for Daniel Pennac. Multiple searches were conducted including 'Daniel Pennac
+  place of birth', 'Pennac birthplace', and various specific sources, but no verifiable
+  external sources were found. Attempts to fetch Wikipedia pages failed due to blocked
+  domains, and general web searches returned results but required sifting through
+  noise. Since no definitive, verifiable source was found to confirm or refute the
+  claim, and no primary source was located, the claim remains unverifiable based on
+  available investigation.
+rcid: null
+revid: 2470760557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.objektnetz.de/NAME_2%20Pennac%20Perc%C3%A9e.htm
+timestamp: '2026-04-07T14:08:05.192679+00:00'
+title: Q332689
+turns: 15
+value_label: China
+verdict: unverifiable

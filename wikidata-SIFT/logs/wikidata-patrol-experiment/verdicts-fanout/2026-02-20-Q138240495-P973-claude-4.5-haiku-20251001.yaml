@@ -1,0 +1,27 @@
+completion_tokens: 1197
+cost_usd: 0.029077
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 23092
+property: P973
+property_label: described at URL
+rationale: The URL https://perfectdailygrind.com/2026/02/long-term-relationships-roasters-coffee-volatility/
+  is a legitimate article from Perfect Daily Grind that substantively describes San
+  Agustín Cafés. The article directly quotes the company's co-founder Luis Ángel Garrido
+  and extensively discusses San Agustín's operations and market challenges in 2025-2026.
+  The company's details in the article (location in León, Spain; specialty coffee
+  roasting; founder name) match all existing Wikidata claims. The URL is accessible,
+  the source is reputable within the specialty coffee industry, and the content clearly
+  qualifies as a description of the company and its business context.
+rcid: 2540935372
+revid: 2464725709
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://perfectdailygrind.com/2026/02/long-term-relationships-roasters-coffee-volatility/
+timestamp: '2026-02-20T17:21:55.796827+00:00'
+title: Q138240495
+turns: 2
+value_label: null
+verdict: verified-high

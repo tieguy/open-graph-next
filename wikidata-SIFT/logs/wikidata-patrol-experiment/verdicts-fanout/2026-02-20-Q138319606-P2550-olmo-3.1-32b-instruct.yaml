@@ -1,0 +1,24 @@
+completion_tokens: 1179
+cost_usd: 0.0060902000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26914
+property: P2550
+property_label: recording or performance of
+rationale: No independent sources or references were found that identify the specific
+  musical work associated with the recording 'South 74' by Seuzlah. The edit sets
+  the 'recording or performance of' claim to the generic 'musical work/composition'
+  class, which is not sufficient for verification. Proper verification would require
+  identification and citation of the specific work.
+rcid: 2540959299
+revid: 2464747334
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q105543609
+timestamp: '2026-02-20T05:11:45.804843+00:00'
+title: Q138319606
+turns: 5
+value_label: musical work/composition
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 1926
+cost_usd: 0.007883190000000002
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 85509
+property: P19
+property_label: place of birth
+rationale: The Military-History Fandom page explicitly confirms that Robert Montagu
+  Poore was born in Dublin, Ireland, on 20 March 1866. This is a verified primary
+  source that supports the claim. The qualifier P17 (United Kingdom of Great Britain
+  and Ireland) is historically accurate for Dublin during the birth year of 1866.
+  The Wikipedia reference cited in the edit is invalid for Wikidata, but the independent
+  source confirms the accuracy of the claim.
+rcid: 2550599672
+revid: 2473930839
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Robert_Poore
+timestamp: '2026-04-11T06:29:02.035755+00:00'
+title: Q7348969
+turns: 6
+value_label: Dublin
+verdict: verified-high

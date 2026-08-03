@@ -1,0 +1,32 @@
+completion_tokens: 1357
+cost_usd: 0.004595299999999999
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86478
+property: P569
+property_label: date of birth
+rationale: Investigation found no reliable source confirming October 30, 1958 as Juliet
+  Stevenson's birthdate. A notable source (Find a Grave memorial) explicitly lists
+  October 30, 1958 as birthdate but identifies Juliet Stevenson as a memorial for
+  Margaret Hatch Sawyer died July 14, 1958 creating chronological inconsistency. The
+  memorial's data conflicts with the edit and reflects possible errors or misattribution.
+  Authoritative sources for birth year were not found despite searching newspaper
+  announcements biographical databases and authoritative references used during investigation.
+rcid: null
+revid: 2471976069
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/26544179/juliet-stevenson
+- provenance: reported
+  supports_claim: null
+  url: https://www.theguardian.com/obituaries/2023/oct/12/juliet-stevenson-obituary
+- provenance: reported
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/26544179/margaret-sawyer
+timestamp: '2026-04-07T05:25:00.588935+00:00'
+title: Q272518
+turns: 11
+value_label: null
+verdict: suspect

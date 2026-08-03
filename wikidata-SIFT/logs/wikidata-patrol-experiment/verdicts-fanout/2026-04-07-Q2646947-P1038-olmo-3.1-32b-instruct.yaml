@@ -1,0 +1,24 @@
+completion_tokens: 517
+cost_usd: 0.0155416
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 76157
+property: P1038
+property_label: relative
+rationale: The cited reference (a PDF from justsolutions.eu) could not be accessed
+  due to a blocked domain, and no independent, reliable sources could be located to
+  confirm or deny whether Albert Einstein was a relative of Alice Schalek. Without
+  access to the cited source or additional corroboration, the edit's correctness cannot
+  be determined.
+rcid: null
+revid: 2460300868
+sources:
+- provenance: unreachable (blocked domain)
+  supports_claim: null
+  url: http://www.justsolutions.eu/resources/AliceSchaleksWar.pdf
+timestamp: '2026-04-07T09:30:35.555043+00:00'
+title: Q2646947
+turns: 6
+value_label: Albert Einstein
+verdict: unverifiable

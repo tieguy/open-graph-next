@@ -1,0 +1,25 @@
+completion_tokens: 1922
+cost_usd: 0.00266214
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31698
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The edit lacks direct sourcing, and no verified sources were fetched during
+  the investigation due to persistent search errors. The change from Russian to Ukrainian
+  for Tokarenko Vladimir's languages spoken cannot be confirmed or denied without
+  reliable, independently verified evidence. The contextual clues (birthplace in Russia,
+  occupation as a Chernobyl liquidator) suggest Russian is more plausible, but without
+  corroborating sources, the edit remains unverifiable.
+rcid: 2550384677
+revid: 2473722624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ukraine.com/culture/languages/
+timestamp: '2026-04-11T10:44:31.869758+00:00'
+title: Q62714465
+turns: 4
+value_label: Ukrainian
+verdict: unverifiable

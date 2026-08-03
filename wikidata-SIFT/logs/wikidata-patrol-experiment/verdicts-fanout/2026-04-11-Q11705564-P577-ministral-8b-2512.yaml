@@ -1,0 +1,28 @@
+completion_tokens: 1737
+cost_usd: 0.00269907
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25678
+property: P577
+property_label: publication date
+rationale: The new publication date of '800000 years CE' for the essay 'Amador' by
+  Fernando Savater is factually incorrect. Independent sources, including Amazon listings
+  for both the Spanish and English editions, confirm the correct publication date
+  is 1991. The old value (+1991-00-00T00:00:00Z) aligns with these sources and the
+  item's description ('1991 essay by Fernando Savater'). The new value is nonsensical
+  and unsupported by any credible evidence.
+rcid: null
+revid: 2460147349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Amador-Fernando-Savater/dp/0805032711
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com/Etica-para-Amador-Serie-Apeiron/dp/9686640371
+timestamp: '2026-04-11T12:14:58.503317+00:00'
+title: Q11705564
+turns: 2
+value_label: null
+verdict: incorrect

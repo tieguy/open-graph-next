@@ -1,0 +1,20 @@
+completion_tokens: 861
+cost_usd: 0.0057428
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26131
+property: P2397
+property_label: YouTube channel ID
+rationale: No evidence was found to confirm that Ge Wang has a YouTube channel or
+  that '@MILEAGE-2145' is a valid YouTube channel ID. The edit lacks references, and
+  independent searches did not locate any official or third-party confirmation of
+  a YouTube channel for this individual.
+rcid: 2550480914
+revid: 2473817080
+sources: []
+timestamp: '2026-04-07T05:19:52.358849+00:00'
+title: Q87572751
+turns: 3
+value_label: null
+verdict: unverifiable

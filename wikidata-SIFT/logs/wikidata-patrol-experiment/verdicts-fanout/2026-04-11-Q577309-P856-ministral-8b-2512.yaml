@@ -1,0 +1,30 @@
+completion_tokens: 1626
+cost_usd: 0.00480342
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 61706
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.city.kai.yamanashi.jp/', is
+  consistent with the standard format for Japanese city government websites and aligns
+  logically with the item context (Kai, Yamanashi Prefecture, Japan). The new value,
+  'https://www.spicejet.com', is the website of SpiceJet, an Indian airline, and has
+  no logical or contextual connection to the city of Kai, Yamanashi. No verified sources
+  support the new value, and the prefetched references do not corroborate it. The
+  edit incorrectly replaces a plausible and contextually appropriate value with an
+  unrelated one.
+rcid: null
+revid: 2465913168
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.city.kai.yamanashi.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://www.spicejet.com
+timestamp: '2026-04-11T09:49:27.846418+00:00'
+title: Q577309
+turns: 6
+value_label: null
+verdict: incorrect

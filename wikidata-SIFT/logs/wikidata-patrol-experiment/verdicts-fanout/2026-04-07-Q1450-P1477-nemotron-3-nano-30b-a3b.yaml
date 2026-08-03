@@ -1,0 +1,26 @@
+completion_tokens: 644
+cost_usd: 0.007783
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 153084
+property: P1477
+property_label: birth name
+rationale: No verifiable sources were found to confirm or deny that 'Pablo Gene Hernandez'
+  is the birth name of Bruno Mars. Multiple search attempts returned no relevant results,
+  and the only direct references are from uncredible sources. The claim lacks support
+  in reliable documentation.
+rcid: 2549922834
+revid: 2473276732
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Bruno_Mars
+- provenance: verified
+  supports_claim: false
+  url: https://www.officialbrunomars.com/bio/
+timestamp: '2026-04-07T11:10:27.707467+00:00'
+title: Q1450
+turns: 15
+value_label: null
+verdict: unverified-low

@@ -1,0 +1,29 @@
+completion_tokens: 859
+cost_usd: 0.008869
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 41768
+property: P18
+property_label: image
+rationale: There is no independent evidence that 'Abraham Lincoln head on shoulders
+  photo portrait.jpg' is a portrait of Sacagawea. Multiple searches and attempts to
+  verify the image's subject returned no supporting sources, and the image is not
+  associated with Sacagawea in any accessible records. The edit should be reverted.
+rcid: 2550569795
+revid: 2473902165
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sacagawea
+- provenance: reported
+  supports_claim: false
+  url: https://www.nps.gov/people/sacagawea.htm
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Sacagawea
+timestamp: '2026-04-07T05:25:31.281905+00:00'
+title: Q238960
+turns: 7
+value_label: null
+verdict: incorrect

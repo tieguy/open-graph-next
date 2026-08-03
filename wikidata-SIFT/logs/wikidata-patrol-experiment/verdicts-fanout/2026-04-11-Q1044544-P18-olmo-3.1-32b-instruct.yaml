@@ -1,0 +1,29 @@
+completion_tokens: 1905
+cost_usd: 0.0033439999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11005
+property: P18
+property_label: image
+rationale: Neither the new nor the old image is supported by an official or reputable
+  source. Independent searches confirm that both images lack official recognition
+  from the manufacturer or major automotive outlets. No authoritative evidence was
+  found to confirm the superiority of the new image over the old one.
+rcid: null
+revid: 2471362709
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mitsubishi-motors.com/vehicles/outlander
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mitsubishi_Outlander
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/mitsubishi/outlander
+timestamp: '2026-04-11T12:28:54.242788+00:00'
+title: Q1044544
+turns: 1
+value_label: null
+verdict: unverifiable

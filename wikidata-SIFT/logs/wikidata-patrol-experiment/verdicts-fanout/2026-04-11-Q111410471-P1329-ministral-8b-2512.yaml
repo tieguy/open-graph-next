@@ -1,0 +1,30 @@
+completion_tokens: 2193
+cost_usd: 0.00358608
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34361
+property: P1329
+property_label: phone number
+rationale: The edit changes the phone number from '+43 1 599 98' to '+43-1-59998',
+  which deviates from standard Austrian phone number formatting and lacks independent
+  verification. The cited reference URL is unreachable, and no verified source supports
+  the new value. The old value is consistent with typical formatting and lacks contradictory
+  evidence.
+rcid: 2550332892
+revid: 2473672194
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://all.accor.com/hotel/0796/index.en.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://www.wien.info/en/ibis-wien-mariahilf-162062
+- provenance: verified
+  supports_claim: false
+  url: https://www.yelp.com/biz/ibis-wien-mariahilf-wien
+timestamp: '2026-04-11T17:52:18.868016+00:00'
+title: Q111410471
+turns: 3
+value_label: null
+verdict: suspect

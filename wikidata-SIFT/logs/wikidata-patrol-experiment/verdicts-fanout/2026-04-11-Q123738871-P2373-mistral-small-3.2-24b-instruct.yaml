@@ -1,0 +1,22 @@
+completion_tokens: 782
+cost_usd: 0.0091658375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 99158
+property: P2373
+property_label: Genius artist ID
+rationale: The Genius page for Josh Universe directly confirms the artist ID 'Josh-universe'.
+  The page includes information about his work and popular songs, which supports the
+  claim.
+rcid: 2551429578
+revid: 2474729584
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://genius.com/artists/Josh-universe
+timestamp: '2026-04-11T06:41:54.340923+00:00'
+title: Q123738871
+turns: 5
+value_label: null
+verdict: verified-high

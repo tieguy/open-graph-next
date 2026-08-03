@@ -1,0 +1,36 @@
+completion_tokens: 2013
+cost_usd: 0.0024821125000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20350
+property: P17
+property_label: country
+rationale: Multiple independent sources consistently place Marah Rabah in the West
+  Bank, Palestine. The edit changing the country to Syria is incorrect.
+rcid: 2549455644
+revid: 2472821010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.palestineremembered.com/GeoPoints/Marah_Rabah_11755/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://mapcarta.com/N431633786
+- provenance: verified
+  supports_claim: false
+  url: https://www.citypopulation.de/en/palestine/westbank/bayt_lahm/452500__marah_rabah/
+- provenance: verified
+  supports_claim: false
+  url: https://www.oikoumene.org/news/thousands-in-beit-fajjar-and-marah-rabah-face-life-draining-economic-crush
+- provenance: verified
+  supports_claim: false
+  url: https://www.timesofisrael.com/liveblog_entry/idf-says-explosive-detonated-on-civilian-bus-in-the-west-bank-no-injuries-caused-but-bus-damaged/
+- provenance: verified
+  supports_claim: false
+  url: https://www.jpost.com/breaking-news/article-816319
+timestamp: '2026-04-10T13:51:56.553529+00:00'
+title: Q6754648
+turns: 2
+value_label: Syria
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 2064
+cost_usd: 0.0013678800000000001
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 12790
+property: P19
+property_label: place of birth
+rationale: The claim that Dan Wang (Q125470280) was born in Yunnan (Q43194) is strongly
+  supported by independent, verified sources. While the added reference (danwang.co)
+  does not explicitly confirm the birthplace, a credible source like Rest of World
+  (2025) directly states that Dan Wang moved to Canada from Yunnan at age seven. This
+  corroborates the claim with authoritative evidence. The reference added to the Wikidata
+  claim is insufficient on its own but is outweighed by external corroboration.
+rcid: 2550901709
+revid: 2474224431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://restofworld.org/2025/dan-wang-breakneck-book-china-tech/
+- provenance: verified
+  supports_claim: false
+  url: https://danwang.co/
+timestamp: '2026-04-10T14:03:18.624809+00:00'
+title: Q125470280
+turns: 1
+value_label: Yunnan
+verdict: verified-high

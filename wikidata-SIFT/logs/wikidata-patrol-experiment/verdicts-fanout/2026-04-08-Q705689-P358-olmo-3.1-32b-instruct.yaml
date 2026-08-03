@@ -1,0 +1,19 @@
+completion_tokens: 964
+cost_usd: 0.0116354
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 55285
+property: P358
+property_label: discography
+rationale: The discography claim was unsourced in Wikidata, and independent web searches
+  did not uncover any authoritative or official discography for the band Snap!. Therefore,
+  removal of the unsourced claim is correct.
+rcid: 2549494407
+revid: 2472858851
+sources: []
+timestamp: '2026-04-08T19:08:39.945157+00:00'
+title: Q705689
+turns: 9
+value_label: Snap! discography
+verdict: verified-high

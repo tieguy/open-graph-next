@@ -1,0 +1,32 @@
+completion_tokens: 1614
+cost_usd: 0.0077150000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33733
+property: P1616
+property_label: SIREN number
+rationale: The SIREN number 810825547 is officially registered to 'GROUPE FURNOTEL',
+  which matches the headquarters location in the item. However, the Wikidata item
+  is currently labeled as 'FURNOTEL', which is a distinct entity with a different
+  SIREN number (388 842 148). This suggests a possible conflation of two related but
+  separate legal entities unless the item's label is updated to reflect 'GROUPE FURNOTEL'.
+  Therefore, the update is suspect unless accompanied by clarification or a label
+  change.
+rcid: 2540940005
+revid: 2464729579
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/groupe-furnotel-810825547
+- provenance: verified
+  supports_claim: false
+  url: https://api-avis-situation-sirene.insee.fr/identification/pdf/38884214800040
+- provenance: reported
+  supports_claim: null
+  url: https://www.sirene.fr/entreprise/810825547
+timestamp: '2026-02-20T15:23:05.587444+00:00'
+title: Q134650702
+turns: 6
+value_label: null
+verdict: suspect

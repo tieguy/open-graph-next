@@ -1,0 +1,30 @@
+completion_tokens: 662
+cost_usd: 0.04145360000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 205282
+property: P1705
+property_label: native label
+rationale: The official corporate name of the company in German is 'Volkswagen', as
+  consistently used by the company and recognized in all authoritative sources. The
+  value 'Volkswageo' is not supported by any official documentation or corporate communications.
+  The edit appears to be a typographical error and does not reflect the correct native
+  label.
+rcid: 2549274042
+revid: 2472643648
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.volkswagen.de/
+- provenance: verified
+  supports_claim: false
+  url: https://www.vw.com/en.html
+- provenance: reported
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Volkswagen
+timestamp: '2026-04-07T08:17:37.740769+00:00'
+title: Q246
+turns: 11
+value_label: null
+verdict: incorrect

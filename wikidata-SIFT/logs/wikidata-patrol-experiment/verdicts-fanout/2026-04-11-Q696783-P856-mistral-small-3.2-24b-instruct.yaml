@@ -1,0 +1,31 @@
+completion_tokens: 1499
+cost_usd: 0.006597306249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68560
+property: P856
+property_label: official website
+rationale: The URL "https://www.city.yaizu.lg.jp/" is confirmed as the official website
+  of Yaizu through multiple references. The URL "https://www.vietjetair.com" is unrelated
+  and appears to be the website of an airline. Therefore, the change is incorrect.
+rcid: null
+revid: 2471590660
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://toukei.pref.shizuoka.jp/chosa/02-030/index.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.yaizu.lg.jp/foreign-language/english/001.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.yaizu.lg.jp/foreign-language/english/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.yaizu.gr.jp/photocity/en/
+timestamp: '2026-04-11T07:23:14.290151+00:00'
+title: Q696783
+turns: 5
+value_label: null
+verdict: incorrect

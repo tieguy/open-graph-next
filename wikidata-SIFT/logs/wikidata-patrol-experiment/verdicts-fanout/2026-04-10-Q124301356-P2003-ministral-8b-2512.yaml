@@ -1,0 +1,33 @@
+completion_tokens: 1841
+cost_usd: 0.00403389
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39772
+property: P2003
+property_label: Instagram username
+rationale: The claim that 'lunitheatre' is the Instagram username for UniThéâtre (Q124301356)
+  lacks direct evidence. No references were cited for the claim, and no verified sources
+  explicitly confirm the username. Independent searches for the company's Instagram
+  profile or explicit mention of the username on official or reliable third-party
+  sources were unsuccessful. Without explicit confirmation, the claim cannot be verified.
+rcid: 2551326183
+revid: 2474633354
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelalberta.com/listings/lunitheatre-7145
+- provenance: verified
+  supports_claim: false
+  url: https://www.theatrealberta.com/2018/05/17/whats-on-edmonton-lunitheatre-is-celebrating-25-years/
+- provenance: verified
+  supports_claim: false
+  url: https://lunitheatre.online.red61.ca/
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/lunitheatre/
+timestamp: '2026-04-10T13:11:27.071893+00:00'
+title: Q124301356
+turns: 4
+value_label: null
+verdict: unverifiable

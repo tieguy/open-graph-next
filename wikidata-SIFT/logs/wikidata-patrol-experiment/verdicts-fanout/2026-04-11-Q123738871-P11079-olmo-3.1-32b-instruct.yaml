@@ -1,0 +1,32 @@
+completion_tokens: 1534
+cost_usd: 0.0064784000000000005
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27790
+property: P11079
+property_label: Linktree ID
+rationale: The Linktree handle 'joshtospace' is confirmed by the official website
+  of Josh Universe and is directly accessible at https://linktr.ee/joshtospace. Multiple
+  independent third-party sources also list this handle for Josh Universe, providing
+  strong corroboration that the update is correct.
+rcid: 2551423287
+revid: 2474724538
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/joshtospace
+- provenance: reported
+  supports_claim: true
+  url: https://theorg.com/org/astrochain/org-chart/josh-habka
+- provenance: reported
+  supports_claim: true
+  url: https://www.crunchbase.com/person/josh-universe
+timestamp: '2026-04-11T09:51:14.850061+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

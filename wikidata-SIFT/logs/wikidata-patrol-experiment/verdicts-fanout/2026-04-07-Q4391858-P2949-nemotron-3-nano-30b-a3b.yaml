@@ -1,0 +1,24 @@
+completion_tokens: 710
+cost_usd: 0.00867645
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 170689
+property: P2949
+property_label: WikiTree person ID
+rationale: Multiple attempts to locate or verify the source URL https://iknownetworths.com/shohei-ohtani-net-worth/
+  failed. Web_search queries returned no useful results, web_fetch disconnected without
+  response, and subsequent attempts to access the domain also failed. No verifiable
+  content was found to confirm whether the URL was a reliable source for the WikiTree
+  person ID claim.
+rcid: 2550628472
+revid: 2473958748
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://iknownetworths.com/shohei-ohtani-net-worth/
+timestamp: '2026-04-07T13:16:26.883722+00:00'
+title: Q4391858
+turns: 15
+value_label: null
+verdict: unverifiable

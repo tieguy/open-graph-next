@@ -1,0 +1,28 @@
+completion_tokens: 1720
+cost_usd: 0.00238851
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20399
+property: P856
+property_label: official website
+rationale: The new official website value, 'https://www.ana.co.jp', belongs to ANA
+  Holdings, a major airline company, and does not serve as the official website for
+  Iwakura city. The old value, 'https://www.city.iwakura.aichi.jp/', is confirmed
+  as the correct official municipal website through verified sources, including the
+  municipal government's own website and consistent search results. The change is
+  incorrect as it does not reflect the actual official website of Iwakura city.
+rcid: null
+revid: 2471370294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.iwakura.aichi.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ana.co.jp/
+timestamp: '2026-04-11T15:32:09.494237+00:00'
+title: Q648275
+turns: 1
+value_label: null
+verdict: incorrect

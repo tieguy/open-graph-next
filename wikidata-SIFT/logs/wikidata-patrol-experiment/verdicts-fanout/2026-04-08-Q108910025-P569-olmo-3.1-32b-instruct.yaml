@@ -1,0 +1,23 @@
+completion_tokens: 943
+cost_usd: 0.010137
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47856
+property: P569
+property_label: date of birth
+rationale: The Library of Congress authority file, a verified primary source, states
+  that Alice Kellen was born in 1989. The edit changes the date of birth to '198',
+  which is inconsistent with this authoritative record. No independent, verified source
+  supports the value '198' for Alice Kellen's birth year.
+rcid: 2549961154
+revid: 2473312373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/no2015069657
+timestamp: '2026-04-08T18:38:26.421203+00:00'
+title: Q108910025
+turns: 8
+value_label: null
+verdict: incorrect

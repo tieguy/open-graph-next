@@ -1,0 +1,26 @@
+completion_tokens: 633
+cost_usd: 0.00641821875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 66773
+property: P856
+property_label: official website
+rationale: The new URL (https://www.united.com) is not related to Hanawa town; it
+  is the website for United Airlines. The old URL (https://www.town.hanawa.fukushima.jp/)
+  is still active and contains relevant information about Hanawa town, indicating
+  that the edit to change the official website is incorrect.
+rcid: 2550187892
+revid: 2473531119
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.united.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.hanawa.fukushima.jp/
+timestamp: '2026-04-07T12:59:42.235642+00:00'
+title: Q1205922
+turns: 8
+value_label: null
+verdict: incorrect

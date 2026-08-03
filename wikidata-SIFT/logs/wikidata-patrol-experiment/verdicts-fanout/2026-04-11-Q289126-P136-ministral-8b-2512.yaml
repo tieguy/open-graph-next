@@ -1,0 +1,25 @@
+completion_tokens: 2892
+cost_usd: 0.008237099999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 73714
+property: P136
+property_label: genre
+rationale: The investigation could not fetch or verify any reliable, reachable sources
+  that explicitly confirm the genre of Miss May I as either 'metalcore' or 'thrash
+  metal'. The only prefetched source (Apple Music) was ambiguous and did not provide
+  definitive evidence. All other potential sources were unreachable due to HTTP errors,
+  blocked domains, or extraction failures. Without verified, accessible sources, it
+  is impossible to confirm or deny the accuracy of the genre change.
+rcid: 2551121467
+revid: 2474436837
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/artist/miss-may-i/253411523
+timestamp: '2026-04-11T06:25:51.057907+00:00'
+title: Q289126
+turns: 8
+value_label: metalcore
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 1445
+cost_usd: 0.0040668
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15999
+property: P17
+property_label: country
+rationale: The cited reference for the claim is unreachable, and independent sources
+  indicate that EuRuKo is a rotating European conference without a single, stable
+  country of association. Therefore, the claim that the country is Germany is ambiguous
+  and not well-supported by a verifiable source.
+rcid: 2551411814
+revid: 2474714909
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://euruko.org
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/EuRuKo
+timestamp: '2026-04-11T15:21:16.076843+00:00'
+title: Q4121189
+turns: 1
+value_label: Germany
+verdict: unverifiable

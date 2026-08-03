@@ -1,0 +1,29 @@
+completion_tokens: 1582
+cost_usd: 0.00192036
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17416
+property: P106
+property_label: occupation
+rationale: The claim that Christophe Bassons (Q328034) was a 'stripper' (Q1141526)
+  is not supported by any credible independent or primary source. Christophe Bassons
+  is well-documented as a professional cyclist in reputable sources such as his memoir
+  ('A Clean Break') and cycling statistics (ProCyclingStats). The only cited reference
+  (CQ Ranking) is unreachable and identical for both the old and new values, which
+  is highly suspicious and does not provide valid support for the new claim. The evidence
+  overwhelmingly confirms that the occupation should remain 'sport cyclist' (Q2309784).
+rcid: 2549515786
+revid: 2472879595
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.goodreads.com/book/show/22511978-a-clean-break
+- provenance: verified
+  supports_claim: false
+  url: https://www.procyclingstats.com/rider/christophe-bassons
+timestamp: '2026-04-11T15:19:17.359145+00:00'
+title: Q328034
+turns: 1
+value_label: stripper
+verdict: incorrect

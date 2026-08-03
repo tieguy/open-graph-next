@@ -1,0 +1,26 @@
+completion_tokens: 877
+cost_usd: 0.0025548625000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27507
+property: P856
+property_label: official website
+rationale: The edit changes the official website URL by adding a trailing slash. Both
+  URLs lead to the same website, but without the ability to perform web searches,
+  I cannot definitively verify the correctness of the edit. The edit does not add
+  any references, which makes it harder to assess its accuracy.
+rcid: null
+revid: 2459590480
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.conoco.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.conoco.com/
+timestamp: '2026-04-11T11:15:57.580558+00:00'
+title: Q1126518
+turns: 3
+value_label: null
+verdict: unverifiable

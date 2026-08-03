@@ -1,0 +1,33 @@
+completion_tokens: 1902
+cost_usd: 0.00411732
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28542
+property: P512
+property_label: academic degree
+rationale: The Wikidoc profile (https://www.wikidoc.org/index.php/User:Johannes_W._Dietrich)
+  explicitly confirms Johannes W. Dietrich received a habilitation in 2017 at Ruhr
+  University Bochum. This is a verified primary source that directly supports the
+  claim. No contradictions were found in other verified sources, and the edit aligns
+  with the individual's academic career and institutional context.
+rcid: 2550597109
+revid: 2473928375
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidoc.org/index.php/User:Johannes_W._Dietrich
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0002-1185-3549
+- provenance: verified
+  supports_claim: false
+  url: https://philpeople.org/profiles/johannes-w-dietrich
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-zur-gemeinsamen-sitzung-der-klasse-fuer-naturwissenschaften-und-technikwissenschaften-der-leibniz-sozietaet-mit-der-deutschen-gesellschaft-fuer-kybernetik-am-11-april-2024/
+timestamp: '2026-04-10T07:33:03.524975+00:00'
+title: Q48800274
+turns: 1
+value_label: habilitation
+verdict: verified-high

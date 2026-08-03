@@ -1,0 +1,33 @@
+completion_tokens: 2081
+cost_usd: 0.004270599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15110
+property: P69
+property_label: educated at
+rationale: The edit replaces one unsubstantiated educational claim with another unsubstantiated
+  claim. Independent, verified sources confirm that Roberto Musso attended Escuela
+  y Liceo Elbio Fernández, but there is no evidence he attended either the 'National
+  College of Professional Technical Education' or 'Cobach.' Therefore, the change
+  is not supported by evidence and should not have been made.
+rcid: 2551400079
+revid: 2474703858
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/roberto-musso.html
+- provenance: verified
+  supports_claim: false
+  url: https://marvin.com.mx/el-cuarteto-de-nos-entrevista-roberto-daniel-musso/
+- provenance: reported
+  supports_claim: false
+  url: https://web.search.example.com/search?q=National+College+of+Professional+Technical+Education+Uruguay+Roberto+Musso
+- provenance: reported
+  supports_claim: false
+  url: https://web.search.example.com/search?q=Cobach+school+Uruguay+Roberto+Musso
+timestamp: '2026-04-11T10:02:42.658496+00:00'
+title: Q6109886
+turns: 1
+value_label: Cobach
+verdict: suspect

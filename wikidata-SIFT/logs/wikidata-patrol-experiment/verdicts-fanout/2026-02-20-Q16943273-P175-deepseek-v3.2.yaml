@@ -1,0 +1,39 @@
+completion_tokens: 2308
+cost_usd: 0.0284403
+diff_type: reference_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 124854
+property: P175
+property_label: performer
+rationale: Multiple independent sources confirm Adrián Núñez Rodríguez is an actor.
+  The MUBI reference (adrian-nunez-rodriguez) explicitly lists him as 'Actor' on both
+  English and Spanish versions of his profile. The Grokipedia page describes him as
+  'a Spanish emerging film director, actor, screenwriter, and editor.' Plex.tv also
+  lists him as 'Actor' with two acting credits in 2025 films. These sources directly
+  support the performer claim with value 'actor' (Q33999). While the IMDb reference
+  (nm175566) is blocked and unverifiable, the MUBI reference alone provides sufficient
+  evidence.
+rcid: 2540949923
+revid: 2464738906
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mubi.com/en/cast/adrian-nunez-rodriguez
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Adrin_Nez_Rodrguez
+- provenance: verified
+  supports_claim: true
+  url: https://watch.plex.tv/person/adrian-nunez-rodriguez
+- provenance: verified
+  supports_claim: true
+  url: https://mubi.com/es/cast/adrian-nunez-rodriguez
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.in/Adri%25C3%25A1n-N%25C3%25BA%25C3%25B1ez-Rodr%25C3%25ADguez/e/B0GDVHWY5V
+timestamp: '2026-02-20T10:28:10.061746+00:00'
+title: Q16943273
+turns: 15
+value_label: actor
+verdict: verified-high

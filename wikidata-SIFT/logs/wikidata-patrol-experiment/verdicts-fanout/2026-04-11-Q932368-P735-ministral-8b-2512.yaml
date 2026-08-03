@@ -1,0 +1,30 @@
+completion_tokens: 2744
+cost_usd: 0.010120619999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 101994
+property: P735
+property_label: given name
+rationale: The edit incorrectly changes the given name from 'Rabih' (Q256719) to 'Rabah'
+  (Q1356432). Independent sources confirm that 'Rabih' is the Arabic given name used
+  in historical and authoritative records, while 'Rabah' is a French variant. The
+  change lacks sourcing and contradicts the primary evidence. The original value ('Rabih')
+  is correct and well-supported by verified sources.
+rcid: 2549457072
+revid: 2472822431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n85380702.html
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Rabih_Az_Zubayr.html?id=3I_EMgEACAAJ
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+timestamp: '2026-04-11T06:00:32.774013+00:00'
+title: Q932368
+turns: 10
+value_label: Rabah
+verdict: incorrect

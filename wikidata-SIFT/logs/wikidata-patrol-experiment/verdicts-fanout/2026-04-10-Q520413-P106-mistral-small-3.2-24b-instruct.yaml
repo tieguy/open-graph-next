@@ -1,0 +1,31 @@
+completion_tokens: 1603
+cost_usd: 0.0017873124999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14790
+property: P106
+property_label: occupation
+rationale: Multiple independent sources consistently describe Walter of Pontoise as
+  a Benedictine monk and abbot. The evidence strongly supports the claim that his
+  occupation was 'monk.'
+rcid: 2551408357
+revid: 2474711589
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Walter_of_Pontoise
+- provenance: verified
+  supports_claim: true
+  url: https://faith.nd.edu/saint/st-walter-of-pontoise/
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/walter-pontoise-st
+- provenance: verified
+  supports_claim: true
+  url: https://www.regnumchristi.com/en/st-walter-of-pontoise/
+timestamp: '2026-04-10T12:44:31.696596+00:00'
+title: Q520413
+turns: 1
+value_label: monk
+verdict: verified-high

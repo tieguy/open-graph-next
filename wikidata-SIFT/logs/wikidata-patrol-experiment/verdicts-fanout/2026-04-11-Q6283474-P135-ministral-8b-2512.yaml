@@ -1,0 +1,24 @@
+completion_tokens: 1749
+cost_usd: 0.00835062
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 63343
+property: P135
+property_label: movement
+rationale: The Joseph Glasco Foundation's biography (a primary source) explicitly
+  labels Joseph Glasco as an 'American abstract expressionist painter, draftsman,
+  and sculptor.' This directly supports the claim, despite his distinct figurative
+  style. No contradictions were found in the available evidence, and the Foundation's
+  reference is authoritative.
+rcid: 2550521060
+revid: 2473855269
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://josephglascofoundation.org/joseph-glasco-biography
+timestamp: '2026-04-11T15:25:36.753484+00:00'
+title: Q6283474
+turns: 2
+value_label: abstract expressionism
+verdict: verified-high

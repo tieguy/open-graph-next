@@ -1,0 +1,34 @@
+completion_tokens: 1296
+cost_usd: 0.0038922
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15573
+property: P689
+property_label: afflicts
+rationale: Multiple authoritative scientific sources confirm that starch exposure
+  primarily affects humans via ingestion and metabolic pathways, but there is no evidence
+  that it afflicts the respiratory system. The change from 'respiratory system' to
+  'human' is therefore accurate and justified. The cited CDC reference could not be
+  verified due to a fetch error, but other reliable sources consistently support the
+  human-centric affliction without mention of respiratory involvement.
+rcid: 2549977353
+revid: 2473327016
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC10252388/
+- provenance: verified
+  supports_claim: true
+  url: https://pubmed.ncbi.nlm.nih.gov/40202198/
+- provenance: reported
+  supports_claim: false
+  url: http://www.cdc.gov/niosh/npg/npgd0567.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=starch+exposure+respiratory+system
+timestamp: '2026-04-11T07:38:01.825858+00:00'
+title: Q21175313
+turns: 1
+value_label: human
+verdict: verified-high

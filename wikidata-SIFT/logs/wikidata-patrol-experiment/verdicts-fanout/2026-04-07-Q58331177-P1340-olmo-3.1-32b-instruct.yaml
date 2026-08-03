@@ -1,0 +1,22 @@
+completion_tokens: 481
+cost_usd: 0.0049792000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23453
+property: P1340
+property_label: eye color
+rationale: A directly fetched and verified source states Ester Expósito's eye color
+  as 'Hazel', which contradicts the updated value 'red'. This indicates the new claim
+  is incorrect.
+rcid: 2549254823
+revid: 2472625357
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://esp.unbilgi.com/ester-exposito/
+timestamp: '2026-04-07T08:04:27.621197+00:00'
+title: Q58331177
+turns: 3
+value_label: red
+verdict: incorrect

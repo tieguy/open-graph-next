@@ -1,0 +1,31 @@
+completion_tokens: 1806
+cost_usd: 0.0064832
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26998
+property: P1477
+property_label: birth name
+rationale: The proposed birth name "Lia Savonea" is consistent with the professional
+  name used by the individual in multiple independent, verified secondary sources.
+  However, the primary cited source (CNSAS press release) could not be accessed to
+  confirm the claim directly. No contradictory evidence was found in independently
+  verified sources, but the absence of a directly verified primary document limits
+  the certainty of the claim.
+rcid: 2540962657
+revid: 2464750492
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://network-presidents.eu/page/ro-biography-1
+- provenance: reported
+  supports_claim: null
+  url: http://www.cnsas.ro/documente/comunicate%20presa/2019/Comunicat%20presa%202019.11.19.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://europrospects.eu/a-new-threshold-in-romanias-democracy-its-own-justice-system/
+timestamp: '2026-02-20T04:17:29.349577+00:00'
+title: Q137385268
+turns: 5
+value_label: null
+verdict: verified-low

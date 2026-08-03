@@ -1,0 +1,21 @@
+completion_tokens: 1240
+cost_usd: 0.0069039
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21773
+property: P279
+property_label: subclass of
+rationale: The claim that 'remote administration software' is a subclass of 'software'
+  (Q7397) was incorrect. Remote administration software is a specific type of utility
+  software or IT management tool, not a standalone subclass of general software. The
+  removal of this claim is justified, as it aligns with established classifications
+  and industry standards. Sourcesweb_search{
+rcid: 2550090185
+revid: 2473436830
+sources: []
+timestamp: '2026-04-11T08:37:34.524649+00:00'
+title: Q111100275
+turns: 2
+value_label: software
+verdict: verified-high

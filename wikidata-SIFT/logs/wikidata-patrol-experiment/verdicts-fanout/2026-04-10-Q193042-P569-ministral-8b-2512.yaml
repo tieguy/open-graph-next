@@ -1,0 +1,37 @@
+completion_tokens: 2406
+cost_usd: 0.008716409999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 48708
+property: P569
+property_label: date of birth
+rationale: All independent verified sources confirm that Thomas Newcomen was born
+  in 1663 or 1664, not in 2 CE. The claim that he was born in 2 CE is not supported
+  by any credible evidence and directly contradicts historical records.
+rcid: null
+revid: 2471084344
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousscientists.org/thomas-newcomen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/history/historic_figures/newcomen_thomas.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/thomas-newcomen-biography-inventions-the-steam-engine.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.thoughtco.com/thomas-newcomen-profile-1992201
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikitree.com/wiki/Newcomen-55
+- provenance: verified
+  supports_claim: false
+  url: https://www.madehow.com/inventorbios/67/Thomas-Newcomen.html
+timestamp: '2026-04-10T14:10:48.635300+00:00'
+title: Q193042
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 2716
+cost_usd: 0.0049832
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16768
+property: P18
+property_label: image
+rationale: The image removed from Wikidata does not match the image currently recognized
+  and used by the French Wikipedia and the Musée des Beaux-Arts de Nantes for Antoine
+  d'Irumberry de Salaberry (1880-1915). The current image is properly sourced from
+  a reputable museum and is appropriately licensed. Although there is no explicit
+  statement declaring the removed image incorrect, the evidence supports that its
+  removal was justified.
+rcid: 2550201522
+revid: 2473544385
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Antoine_d%27Irumberry_de_Salaberry
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Fichier:Antoine_d%27Irumberry_de_Salaberry_(1915).jpg
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q116279825
+timestamp: '2026-04-10T11:21:02.138844+00:00'
+title: Q116279825
+turns: 1
+value_label: null
+verdict: verified-low

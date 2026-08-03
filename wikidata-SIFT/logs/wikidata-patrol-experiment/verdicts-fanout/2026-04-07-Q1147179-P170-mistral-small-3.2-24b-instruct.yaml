@@ -1,0 +1,25 @@
+completion_tokens: 896
+cost_usd: 0.00219811875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22146
+property: P170
+property_label: creator
+rationale: The claim cannot be verified as there is insufficient evidence to confirm
+  or deny it. The lack of references and the absence of relevant sources make it impossible
+  to ascertain the correctness of the edit.
+rcid: 2550256566
+revid: 2473597481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Kartlis+Deda+creator
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Kartlis+Deda+official+information
+timestamp: '2026-04-07T03:54:26.924988+00:00'
+title: Q1147179
+turns: 4
+value_label: Wolfgang Amadeus Mozart
+verdict: unverifiable

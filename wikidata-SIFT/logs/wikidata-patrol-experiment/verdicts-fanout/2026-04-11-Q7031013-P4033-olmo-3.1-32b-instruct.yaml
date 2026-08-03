@@ -1,0 +1,30 @@
+completion_tokens: 1700
+cost_usd: 0.0048188
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18994
+property: P4033
+property_label: Mastodon address
+rationale: Neither the old nor the new Mastodon address for Niebuszewo-Bolinko is
+  confirmed by any authoritative or independent source. The official neighbourhood
+  website could not be accessed to verify the claim, and other local sources do not
+  mention a Mastodon address. Therefore, the edit cannot be verified as correct or
+  incorrect.
+rcid: 2550680039
+revid: 2474009063
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zeszczecina.pl/przewodnik/niebuszewo-bolinko
+- provenance: verified
+  supports_claim: false
+  url: https://pomeranica.pl/wiki/Bolinko
+- provenance: reported
+  supports_claim: false
+  url: http://bolinko.osiedla.szczecin.pl/
+timestamp: '2026-04-11T07:58:28.548384+00:00'
+title: Q7031013
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 996
+cost_usd: 0.0043246
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18635
+property: P2031
+property_label: start of work period
+rationale: The change from '+2009-00-00T00:00:00Z' to '1492' for Juan Magán's start
+  of work period is not supported by any credible evidence. Multiple independent biographies
+  and music industry records indicate that Magán's professional music career began
+  around 2008–2009. There is no evidence that his work period started in 1492, which
+  is implausible for a 21st-century artist. The original value should be restored.
+rcid: null
+revid: 2460036669
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://genius.com/artists/Juan-magan
+- provenance: verified
+  supports_claim: true
+  url: https://top40-charts.com/artist.php?aid=15949
+- provenance: verified
+  supports_claim: true
+  url: https://www.huffingtonpost.es/2017/05/01/juan-magan-nos-creimos-europeos-y-se-nos-olvido-que-eramos-lat_a_22048053/
+- provenance: reported
+  supports_claim: false
+  url: https://pt.wikipedia.org/w/index.php?title=Juan_Magán&oldid=56002931
+timestamp: '2026-04-11T07:56:30.232462+00:00'
+title: Q3087850
+turns: 1
+value_label: null
+verdict: incorrect

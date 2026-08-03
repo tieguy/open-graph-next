@@ -1,0 +1,29 @@
+completion_tokens: 1394
+cost_usd: 0.007810599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34871
+property: P726
+property_label: candidate
+rationale: The official election results page required to verify the claim is not
+  accessible due to domain restrictions. No independent sources confirmed Francine
+  Granié's candidacy for Ensemble pour Sartrouville in the 2014 Sartrouville municipal
+  election. Without accessible evidence, the claim cannot be verified.
+rcid: 2540918504
+revid: 2464709666
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.archives-resultats-elections.interieur.gouv.fr/resultats/MN2014/078/C1078586L003.php
+- provenance: reported
+  supports_claim: false
+  url: https://www.proxiti.info/election-municipale-2014.php?o=78586&n=SARTROUVILLE
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-02-21T02:21:34.388842+00:00'
+title: Q138348714
+turns: 5
+value_label: Francine Granié
+verdict: unverifiable

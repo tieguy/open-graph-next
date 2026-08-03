@@ -1,0 +1,29 @@
+completion_tokens: 1429
+cost_usd: 0.0057044
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24235
+property: P569
+property_label: date of birth
+rationale: The new date of birth (27 August 1847) is cited in references that could
+  not be accessed or verified due to domain or technical issues. Independent web searches
+  did not produce any reliable sources confirming this date. Under the SIFT methodology,
+  the claim remains unverified.
+rcid: null
+revid: 2471212055
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://leonore.u-strasbg.fr/
+- provenance: reported
+  supports_claim: false
+  url: https://www.geneastar.com/en/persons/individual/record/zurcherl
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.editions-alsace.com/nouveau-dictionnaire-de-biographie-alsacienne
+timestamp: '2026-04-07T10:28:22.517587+00:00'
+title: Q266505
+turns: 3
+value_label: null
+verdict: unverifiable

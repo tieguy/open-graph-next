@@ -1,0 +1,22 @@
+completion_tokens: 1162
+cost_usd: 0.00506167625
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 57514
+property: P20
+property_label: place of death
+rationale: The primary reference could not be verified due to an SSL certificate verification
+  error. Additionally, independent sources could not be found to confirm or deny the
+  claim. Therefore, the evidence supporting the claim is insufficient.
+rcid: 2550516247
+revid: 2473850657
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://presedinte.md/rom/discursuri/necrolog-valentina-rusu-ciobanu-28-octombrie-1920-1-noiembrie-2021
+timestamp: '2026-04-11T16:54:19.491485+00:00'
+title: Q12743035
+turns: 5
+value_label: Chișinău
+verdict: unverifiable

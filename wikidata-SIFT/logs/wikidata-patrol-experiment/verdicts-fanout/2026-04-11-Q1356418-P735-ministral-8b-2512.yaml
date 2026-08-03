@@ -1,0 +1,31 @@
+completion_tokens: 1906
+cost_usd: 0.006126749999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 73301
+property: P735
+property_label: given name
+rationale: The removal of 'Salvador' as the given name for the boxer identified as
+  Q1356418 is incorrect. All verified primary sources (legacy website, BoxRec, and
+  Ippo Fandom) consistently refer to the individual as 'Salvador Sánchez.' The removed
+  claim had no references, and the item’s label and description also use 'Salvador
+  Sánchez.' The evidence overwhelmingly supports that 'Salvador' is the correct given
+  name.
+rcid: 2550605911
+revid: 2473936900
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.salvadorsanchez.com/English/legacy.html
+- provenance: verified
+  supports_claim: true
+  url: https://boxrec.com/en/box-pro/2201
+- provenance: verified
+  supports_claim: true
+  url: https://ippo.fandom.com/wiki/Salvador_S%C3%A1nchez
+timestamp: '2026-04-11T09:22:07.439058+00:00'
+title: Q1356418
+turns: 6
+value_label: Salvador
+verdict: incorrect

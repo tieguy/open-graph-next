@@ -1,0 +1,36 @@
+completion_tokens: 2233
+cost_usd: 0.0013623300000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 12584
+property: P17
+property_label: country
+rationale: The claim that Marah Rabah (Q6754648) is located in Syria (Q3509007) is
+  contradicted by multiple verified primary sources. All independent sources, including
+  PalestineRemembered, Wikipedia, and OpenStreetMap, confirm Marah Rabah is located
+  in Bethlehem Governorate, Palestine. The item’s coordinates (P625) and administrative
+  location (P131) further support this. No credible evidence supports the Syria claim,
+  and the Syria reference (Q3509007) is a homonym of a different village. The lack
+  of cited references and overwhelming evidence against the claim justify the verdict
+  of 'incorrect'.
+rcid: 2549455644
+revid: 2472821010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.palestineremembered.com/GeoPoints/Marah_Rabah_11755/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Bethlehem_Governorate
+- provenance: verified
+  supports_claim: false
+  url: https://www.openstreetmap.org/search?query=Marah+Rabah
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Rabah,_Syria
+timestamp: '2026-04-10T13:51:47.089885+00:00'
+title: Q6754648
+turns: 1
+value_label: Syria
+verdict: incorrect

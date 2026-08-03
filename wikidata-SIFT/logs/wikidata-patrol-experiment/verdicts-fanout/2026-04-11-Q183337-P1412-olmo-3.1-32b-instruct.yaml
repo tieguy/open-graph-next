@@ -1,0 +1,29 @@
+completion_tokens: 1678
+cost_usd: 0.0067596
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28764
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The property P1412 is intended for natural or sign languages. 'Cha-cha-chá'
+  is a musical genre, not a language, and there is no credible evidence that David
+  Attenborough speaks, writes, or signs it. The previous value 'English' is correct
+  and well-supported by multiple independent sources.
+rcid: 2549923767
+revid: 2473277640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/David_Attenborough
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/doc/Style/Guidelines/Genre
+- provenance: verified
+  supports_claim: false
+  url: https://query.wikidata.org/s/5g4s7
+timestamp: '2026-04-11T12:14:41.504195+00:00'
+title: Q183337
+turns: 1
+value_label: cha-cha-chá
+verdict: incorrect

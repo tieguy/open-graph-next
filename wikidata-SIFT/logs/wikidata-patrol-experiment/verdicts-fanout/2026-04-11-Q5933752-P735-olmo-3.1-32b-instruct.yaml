@@ -1,0 +1,31 @@
+completion_tokens: 608
+cost_usd: 0.0041566
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18959
+property: P735
+property_label: given name
+rationale: The given name 'Nin' is not recognized as the first or primary given name
+  of Masoud Pezeshkian in any authoritative biographical sources. Multiple verified
+  sources, including The Guardian and The Hindu, consistently refer to him as 'Masoud
+  Pezeshkian'. 'Nin' appears to be a town or settlement in Croatia and not a given
+  name for this individual. Changing his given name from 'Masoud' to 'Nin' is therefore
+  incorrect.
+rcid: 2551334952
+revid: 2474641491
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Masoud_Pezeshkian
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehindu.com/news/international/irans-khamenei-formally-grants-masoud-pezeshkian-presidential-powers/article68456408.ece
+timestamp: '2026-04-11T07:14:13.882593+00:00'
+title: Q5933752
+turns: 1
+value_label: Nin
+verdict: incorrect

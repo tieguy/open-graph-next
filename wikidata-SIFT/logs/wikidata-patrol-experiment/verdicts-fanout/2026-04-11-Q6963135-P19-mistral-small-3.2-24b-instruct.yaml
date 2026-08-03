@@ -1,0 +1,29 @@
+completion_tokens: 1248
+cost_usd: 0.0050180187499999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52391
+property: P19
+property_label: place of birth
+rationale: The change from "Myanmar" to "Yangon" is not supported by the available
+  evidence. The old value had a reference from English Wikipedia, and the new value
+  does not have any supporting references. Additionally, another source lists the
+  place of birth as Amaraura, not Yangon.
+rcid: 2551251592
+revid: 2474562725
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.national-football-teams.com/player/52742/Nanda_Lin_Kyaw_Chit.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/nanda-kyaw/profil/spieler/375340
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/nanda-lin-kyaw-chit/profil/spieler/352510
+timestamp: '2026-04-11T09:34:21.073094+00:00'
+title: Q6963135
+turns: 5
+value_label: Yangon
+verdict: suspect

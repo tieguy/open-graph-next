@@ -1,0 +1,32 @@
+completion_tokens: 1568
+cost_usd: 0.02194124
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 81962
+property: P5794
+property_label: Internet Game Database game ID
+rationale: The value 'fut-rap-cartas' correctly corresponds to the game's entry on
+  the Internet Game Database (IGDB). Search results show a dedicated IGDB page at
+  'https://www.igdb.com/games/fut-rap-cartas' with the exact URL slug matching the
+  proposed ID. The official website confirms the game's existence and name, and while
+  direct fetching of IGDB was blocked (HTTP 403), the consistent URL pattern across
+  search results provides strong evidence. The IGDB page structure uses URL slugs
+  as game IDs, making 'fut-rap-cartas' the correct identifier for 'Fut Rap Cartas'.
+rcid: 2540920331
+revid: 2464711390
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: reported
+  supports_claim: true
+  url: https://www.igdb.com/games/fut-rap-cartas
+- provenance: reported
+  supports_claim: true
+  url: https://www.igdb.com/games/frc-25
+timestamp: '2026-02-21T01:12:22.545671+00:00'
+title: Q138348136
+turns: 10
+value_label: null
+verdict: verified-high

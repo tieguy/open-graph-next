@@ -1,0 +1,29 @@
+completion_tokens: 2337
+cost_usd: 0.00635451
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 73006
+property: P18
+property_label: image
+rationale: The edit replaces a valid and Wikimedia-hosted image (`Honda Civic (FE)
+  Washington DC Metro Area, USA.jpg`) with an unverified image filename (`2022 Honda
+  Civic EX, front 10.29.21.jpg`). The old image was confirmed to exist on Wikimedia
+  Commons and is recent (April 2025). However, the new image could not be independently
+  verified due to access restrictions on official and automotive review sites. No
+  references were attached to either image, which is unusual for a preferred image
+  claim. The lack of corroborating evidence makes the edit suspect.
+rcid: 2550729228
+revid: 2474056611
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Honda_Civic_(FE)_Washington_DC_Metro_Area,_USA.jpg
+- provenance: reported
+  supports_claim: false
+  url: https://www.caranddriver.com/cars/honda/civic
+timestamp: '2026-04-11T16:29:07.443689+00:00'
+title: Q216747
+turns: 9
+value_label: null
+verdict: suspect

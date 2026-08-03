@@ -1,0 +1,24 @@
+completion_tokens: 1679
+cost_usd: 0.00177396
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21437
+property: P11245
+property_label: YouTube handle
+rationale: The edit adds a YouTube channel ID qualifier (UCbb5T8ezXRJA4cB8RYKNZVA)
+  to the YouTube handle claim for Nežni Dalibor. The prefetched YouTube channel page
+  did not explicitly confirm the channel ID, and independent sources could not be
+  accessed due to search restrictions. Without direct verification of the channel
+  ID, the edit lacks sufficient evidence to confirm its correctness.
+rcid: 2550452267
+revid: 2473788838
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@neznidalibor
+timestamp: '2026-04-11T14:52:12.670520+00:00'
+title: Q1565303
+turns: 3
+value_label: null
+verdict: unverifiable

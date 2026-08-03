@@ -1,0 +1,24 @@
+completion_tokens: 626
+cost_usd: 0.0036570500000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 70637
+property: P3417
+property_label: Quora topic ID
+rationale: The claim regarding 'bodynbrain' as a Quora topic ID was investigated extensively
+  but no supporting evidence was found through independent searches. The existing
+  cited source was not reachable via web_fetch and no reliable secondary or primary
+  sources could be located to corroborate the change. This lack of verifiable evidence
+  makes the claim unverifiable.
+rcid: 2549655803
+revid: 2473016251
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bodynbrain.com/
+timestamp: '2026-04-07T04:41:29.396052+00:00'
+title: Q5367197
+turns: 15
+value_label: null
+verdict: unverifiable

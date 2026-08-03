@@ -1,0 +1,25 @@
+completion_tokens: 2349
+cost_usd: 0.00265305
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34436
+property: P360
+property_label: is a list of
+rationale: 'The removed claim incorrectly categorized **Q124570860** as a list of
+  a single television series episode (Q21191270), which is inconsistent with the item''s
+  established type as a television series season (P31: Q3464665). No evidence from
+  verified sources (including fetched content from epguides.com) supports the claim,
+  and the absence of references further undermines its validity. The removal was justified
+  as the claim was factually inconsistent and unsupported.'
+rcid: 2550290558
+revid: 2473630662
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://epguides.com/
+timestamp: '2026-04-11T18:03:12.382926+00:00'
+title: Q124570860
+turns: 5
+value_label: television series episode
+verdict: verified-high

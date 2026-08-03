@@ -1,0 +1,30 @@
+completion_tokens: 1532
+cost_usd: 0.0046238
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18523
+property: P1902
+property_label: Spotify artist ID
+rationale: The added reference is a Spotify artist page that does not mention Mariella
+  Tripke by name or confirm her as the artist. Two independent, verified sources confirm
+  Mariella Tripke's identity and career but do not link her to the provided Spotify
+  ID. No independent evidence was found that connects Mariella Tripke to the Spotify
+  artist ID 0Ht0EmEcuqMZRjSUb5oNce.
+rcid: 2550392107
+revid: 2473729911
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/0Ht0EmEcuqMZRjSUb5oNce
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+timestamp: '2026-04-11T14:36:36.397647+00:00'
+title: Q123352308
+turns: 1
+value_label: null
+verdict: unverifiable

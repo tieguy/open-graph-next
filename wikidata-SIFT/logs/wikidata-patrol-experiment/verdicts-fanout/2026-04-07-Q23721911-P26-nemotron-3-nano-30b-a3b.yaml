@@ -1,0 +1,22 @@
+completion_tokens: 579
+cost_usd: 0.008825850000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 174201
+property: P26
+property_label: spouse
+rationale: No independent sources were found that confirm or deny the claim that Maryna
+  Viazovska's spouse is El Rodrigo. Exhaustive web searches using various keyword
+  combinations returned no relevant results. The only cited reference in the edit
+  is inaccessible due to a prefetch failure, preventing verification of its content.
+  Without either working cited sources or independent corroboration, there is insufficient
+  evidence to assess the claim's validity.
+rcid: null
+revid: 2471464419
+sources: []
+timestamp: '2026-04-07T08:11:35.346323+00:00'
+title: Q23721911
+turns: 15
+value_label: El Rodrigo
+verdict: unverifiable

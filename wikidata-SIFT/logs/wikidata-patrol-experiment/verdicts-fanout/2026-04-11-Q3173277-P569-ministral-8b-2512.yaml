@@ -1,0 +1,29 @@
+completion_tokens: 1833
+cost_usd: 0.00308502
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28155
+property: P569
+property_label: date of birth
+rationale: The new date of birth (1 March 1745) is contradicted by multiple verified
+  primary sources. Both GeneaStar and the Assemblée nationale explicitly confirm the
+  birth date as 29 February 1744. The edit incorrectly replaces a well-supported value
+  with an unsupported one, lacking any evidence to justify the change.
+rcid: 2550965015
+revid: 2474284682
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/deviefvilledesessarj/jean-louis-de-viefville-des-essarts
+- provenance: verified
+  supports_claim: false
+  url: https://www.geneastar.org/celebrite/deviefvilledesessarj/jean-louis-de-viefville-des-essarts
+- provenance: verified
+  supports_claim: true
+  url: https://www2.assemblee-nationale.fr/sycomore/fiche?num_dept=14042
+timestamp: '2026-04-11T15:51:22.100779+00:00'
+title: Q3173277
+turns: 2
+value_label: null
+verdict: incorrect

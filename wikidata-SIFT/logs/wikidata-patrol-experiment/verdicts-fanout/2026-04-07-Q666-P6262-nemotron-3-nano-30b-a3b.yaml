@@ -1,0 +1,23 @@
+completion_tokens: 792
+cost_usd: 0.0042378
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81588
+property: P6262
+property_label: Fandom article ID
+rationale: No sources were found that reference the claimed Fandom article ID 'religion:6666789шго'.
+  Exhaustive searches returned no results for that exact string or variations. The
+  only related page (https://takanta.com/666-angel-number) does not support the claim
+  and therefore is not relevant as a support source.
+rcid: 2551353948
+revid: 2474659620
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://takanta.com/666-angel-number
+timestamp: '2026-04-07T06:28:24.438783+00:00'
+title: Q666
+turns: 12
+value_label: null
+verdict: unverifiable

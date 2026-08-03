@@ -1,0 +1,28 @@
+completion_tokens: 986
+cost_usd: 0.0099004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 46544
+property: P1303
+property_label: instrument
+rationale: The change from 'voice' (Q17172850) to 'human voice' (Q7390) for Duki is
+  not supported by any reliable, independently verifiable source. Duki is listed as
+  a singer and rapper, for whom 'voice' or 'vocals' is the standard instrument designation.
+  The term 'human voice' is not used as an instrument in mainstream music sources
+  for Duki. No fetched or cited source explicitly supports this change, making the
+  edit suspect.
+rcid: 2549423169
+revid: 2472788904
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Duki_(rapper)
+- provenance: verified
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T08:02:10.462281+00:00'
+title: Q62024032
+turns: 6
+value_label: human voice
+verdict: suspect

@@ -1,0 +1,25 @@
+completion_tokens: 1318
+cost_usd: 0.0056308999999999994
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52355
+property: P577
+property_label: publication date
+rationale: The official website and the Rap Wiki - Fandom page both confirm that Fut
+  Rap Cartas was launched on May 29, 2017. This evidence supports the edit to update
+  the publication date to May 2017.
+rcid: 2540917900
+revid: 2464709086
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+timestamp: '2026-02-21T02:44:24.718225+00:00'
+title: Q138348136
+turns: 6
+value_label: null
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 881
+cost_usd: 0.0245922
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 120318
+property: P569
+property_label: date of birth
+rationale: No fetched, reliable source was found that supports the date of birth '1901'
+  for Carlos Amorales. The edit references several art authority databases, but direct
+  fetched evidence regarding the artist's birth year was not available during this
+  investigation. The previous value of '1970' is widely reported in art contexts,
+  but without primary confirmation from fetched sources, updating to '1901' cannot
+  be verified.
+rcid: null
+revid: 2465815964
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://rijksakademie.nl/nl/alumni/carlos-amorales
+- provenance: reported
+  supports_claim: false
+  url: https://www.estudioamorales.com/
+- provenance: reported
+  supports_claim: false
+  url: https://www.kooness.com/posts/magazine/the-man-who-became-carlos-amorales
+timestamp: '2026-04-07T11:29:47.283832+00:00'
+title: Q5041755
+turns: 8
+value_label: null
+verdict: unverifiable

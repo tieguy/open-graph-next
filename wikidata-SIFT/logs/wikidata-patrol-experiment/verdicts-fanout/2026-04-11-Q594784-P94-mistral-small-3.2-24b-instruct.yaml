@@ -1,0 +1,22 @@
+completion_tokens: 1137
+cost_usd: 0.0106718375
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 113769
+property: P94
+property_label: coat of arms image
+rationale: The file page on Wikimedia Commons provides a direct and authoritative
+  source confirming the coat of arms image for Candói. The image is sourced from the
+  Municipal Chamber of Candói and is in the public domain.
+rcid: 2551346100
+revid: 2474652132
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Bras%C3%A3o_cand%C3%B3i.jpg
+timestamp: '2026-04-11T12:00:47.381512+00:00'
+title: Q594784
+turns: 8
+value_label: null
+verdict: verified-high

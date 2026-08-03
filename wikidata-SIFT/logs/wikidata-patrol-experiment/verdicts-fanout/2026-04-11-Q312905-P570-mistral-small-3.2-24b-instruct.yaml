@@ -1,0 +1,28 @@
+completion_tokens: 1176
+cost_usd: 0.0019348125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17502
+property: P570
+property_label: date of death
+rationale: Multiple independent sources consistently state that John Rackham died
+  on November 18, 1720. The new value of 1 CE is not supported by any reliable sources
+  and contradicts the well-documented historical record.
+rcid: 2549661876
+revid: 2473022159
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Calico_Jack
+- provenance: verified
+  supports_claim: false
+  url: https://www.famous-pirates.com/famous-pirates/john-rackham/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thewayofthepirates.com/famous-pirates/calico-rackham-jack/
+timestamp: '2026-04-11T18:16:53.768531+00:00'
+title: Q312905
+turns: 1
+value_label: null
+verdict: incorrect

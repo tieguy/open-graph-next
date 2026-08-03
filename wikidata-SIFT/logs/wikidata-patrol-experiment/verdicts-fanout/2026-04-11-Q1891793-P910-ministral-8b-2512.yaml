@@ -1,0 +1,35 @@
+completion_tokens: 2291
+cost_usd: 0.0019649100000000003
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17004
+property: P910
+property_label: topic's main category
+rationale: The removal of the claim that 'Category:Moroccan people' (Q6993318) was
+  the main category (P910) for Moroccans (Q1891793) was justified. Independent sources
+  confirm that Moroccans are primarily identified as Arab-Berber, which is already
+  reflected in the item’s subclass claims (P279). The cited reference from Portuguese
+  Wikipedia is unreliable for determining Wikidata’s main category assignments, and
+  no other Wikidata items use this category as their primary classification. The removal
+  aligns with evidence-backed subclass claims and is thus correct.
+rcid: 2550702161
+revid: 2474030248
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/morocco-ethnic-groups.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.authentic-tours-marrakech.com/moroccan-people/
+- provenance: verified
+  supports_claim: false
+  url: https://www.cia.gov/library/publications/the-world-factbook/geos/mo.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.morocco.com/culture/people/
+timestamp: '2026-04-11T17:17:26.512243+00:00'
+title: Q1891793
+turns: 1
+value_label: Category:Moroccan people
+verdict: verified-high

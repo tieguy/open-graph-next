@@ -1,0 +1,22 @@
+completion_tokens: 468
+cost_usd: 0.0026026875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26514
+property: P569
+property_label: date of birth
+rationale: The prefetched reference from Grokipedia supports the old value of August
+  13, 1980, for Stas Piekha's date of birth. The edit changes this to August 8, 1980,
+  without providing new supporting evidence. Therefore, the change appears suspect.
+rcid: 2551280007
+revid: 2474589250
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Stas_Piekha
+timestamp: '2026-04-11T14:58:27.126842+00:00'
+title: Q1340169
+turns: 2
+value_label: null
+verdict: suspect

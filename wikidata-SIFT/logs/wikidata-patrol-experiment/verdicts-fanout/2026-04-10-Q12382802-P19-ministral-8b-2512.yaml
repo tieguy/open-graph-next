@@ -1,0 +1,30 @@
+completion_tokens: 1932
+cost_usd: 0.00235986
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22786
+property: P19
+property_label: place of birth
+rationale: 'The claim that Alicia Borrás was born in Madrid (Q2807) is strongly supported
+  by direct evidence from a verified source (narniafans.com), which explicitly states
+  ''Place of Birth: Madrid, Spain''. Additional sources corroborate her association
+  with Madrid, and no contradictory evidence was found. The previous claim of Vigo
+  had no references or supporting evidence.'
+rcid: 2551012576
+revid: 2474330276
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://narniafans.com/cast/alicia-borrachero/
+- provenance: verified
+  supports_claim: false
+  url: https://ultimatepopculture.fandom.com/wiki/Alicia_Borrachero
+- provenance: verified
+  supports_claim: false
+  url: https://www.angelsproject.com/talents/6-alicia-borras
+timestamp: '2026-04-10T10:24:30.883739+00:00'
+title: Q12382802
+turns: 3
+value_label: Madrid
+verdict: verified-high

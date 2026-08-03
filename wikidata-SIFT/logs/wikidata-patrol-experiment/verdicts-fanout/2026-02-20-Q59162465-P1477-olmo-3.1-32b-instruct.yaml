@@ -1,0 +1,30 @@
+completion_tokens: 1147
+cost_usd: 0.0055402
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24260
+property: P1477
+property_label: birth name
+rationale: The University of Salamanca's official researcher directory explicitly
+  lists 'Julia Almeida Parra' as an affiliated researcher and confirms the surname
+  'Almeida Parra'. This directly supports the addition of 'María Ángeles Almeida Parra'
+  as the birth name for the item. The cited reference to the University of Salamanca
+  is appropriate and supported by primary and secondary sources.
+rcid: 2540939136
+revid: 2464728724
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://produccioncientifica.usal.es/investigadores/56846/detalle
+- provenance: verified
+  supports_claim: true
+  url: https://cicweb2.dep.usal.es/uploads/paginas/ScientificReport2014_2015.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://ciiien.org/2022
+timestamp: '2026-02-20T15:56:38.959803+00:00'
+title: Q59162465
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 660
+cost_usd: 0.0074652
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29616
+property: P19
+property_label: place of birth
+rationale: 'The English Wikipedia page for RMR (singer) explicitly states that RMR
+  was born in **Atlanta, Georgia, USA**. This directly contradicts the new claim of
+  **Cotonou, Benin**. The original claim of Atlanta was correct, and the change to
+  Cotonou is inconsistent with the item''s established identity as an American rapper
+  and its US citizenship (P27: Q30). The edit is incorrect and should be reverted.'
+rcid: null
+revid: 2472563425
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/RMR_(singer)
+timestamp: '2026-04-11T09:40:20.567501+00:00'
+title: Q97357327
+turns: 3
+value_label: Cotonou
+verdict: incorrect

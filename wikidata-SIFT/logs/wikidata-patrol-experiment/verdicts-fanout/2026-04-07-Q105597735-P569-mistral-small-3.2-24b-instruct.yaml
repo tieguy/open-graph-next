@@ -1,0 +1,22 @@
+completion_tokens: 2147
+cost_usd: 0.004755779999999999
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 78672
+property: P569
+property_label: date of birth
+rationale: No independent sources were found to confirm the date of birth of Laslo
+  Pavlik as 11 April 1946. The only reference cited is the German Wikipedia, which
+  is not a reliable source for Wikidata.
+rcid: 2549617609
+revid: 2472979161
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Laslo_Pavlik
+timestamp: '2026-04-07T08:06:03.365272+00:00'
+title: Q105597735
+turns: 15
+value_label: null
+verdict: unverifiable

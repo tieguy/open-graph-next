@@ -1,0 +1,26 @@
+completion_tokens: 1365
+cost_usd: 0.00375750625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35768
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm that Hernando Téllez was actively
+  involved in politics, serving on the Bogotá City Council and as a senator, and was
+  a political activist. This supports the change from "writer" to "politician" for
+  one of his occupations.
+rcid: 2550351487
+revid: 2473690248
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ebsco.com/research-starters/history/hernando-tellez
+- provenance: verified
+  supports_claim: true
+  url: https://www.supersummary.com/lather-and-nothing-else/background/
+timestamp: '2026-04-11T08:20:47.306357+00:00'
+title: Q2294038
+turns: 4
+value_label: politician
+verdict: verified-high

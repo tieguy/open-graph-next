@@ -1,0 +1,33 @@
+completion_tokens: 2370
+cost_usd: 0.0037676
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11728
+property: P742
+property_label: pseudonym
+rationale: The change from 'Jodle Birge' to 'Jodle' as the pseudonym lacks any supporting
+  references or independent corroboration. All reliable sources — including Spotify,
+  Discogs, Danish Wikipedia, and MusicBrainz — refer to the artist as 'Jodle Birge'
+  and provide no evidence that 'Jodle' is used as a pseudonym. This edit appears to
+  be unsupported and likely incorrect.
+rcid: 2549549196
+revid: 2472912429
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/3pcPbJ5oVGttgz0bZdg6Oc
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/1280848-Jodle-Birge
+- provenance: verified
+  supports_claim: false
+  url: https://da.wikipedia.org/wiki/Jodle_Birge
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/6d8e7c7b-2a0e-4b9b-9c02-1a0e8d9c3d71
+timestamp: '2026-04-11T12:42:33.711941+00:00'
+title: Q6208009
+turns: 1
+value_label: null
+verdict: suspect

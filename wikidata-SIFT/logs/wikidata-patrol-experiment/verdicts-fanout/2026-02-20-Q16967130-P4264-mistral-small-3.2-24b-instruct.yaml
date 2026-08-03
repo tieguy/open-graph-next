@@ -1,0 +1,34 @@
+completion_tokens: 1511
+cost_usd: 0.0038759500000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36896
+property: P4264
+property_label: LinkedIn company or organization ID
+rationale: The edit updates the LinkedIn company or organization ID for PitchBook
+  Data to "pitchbook." No direct references were provided with the edit. The search
+  results indicate that Pitchbook does track LinkedIn profile URLs, but specific details
+  are not accessible due to HTTP 403 errors. The LinkedIn profile URL for PitchBook
+  Data should be verified directly. Given the lack of direct evidence and accessibility
+  issues, the verdict is unverifiable.
+rcid: 2540957361
+revid: 2464745557
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pitchbook.com/profiles/company/13329-01
+- provenance: verified
+  supports_claim: false
+  url: https://pitchbook.com/media/press-releases/pitchbook-ranked-10th-on-linkedins-2022-top-companies-in-financial-services
+- provenance: verified
+  supports_claim: true
+  url: https://cloud.docs.tamr.com/docs/pitchbook
+- provenance: reported
+  supports_claim: true
+  url: https://www.linkedin.com/company/pitchbook-data
+timestamp: '2026-02-20T06:09:18.499662+00:00'
+title: Q16967130
+turns: 5
+value_label: null
+verdict: unverifiable

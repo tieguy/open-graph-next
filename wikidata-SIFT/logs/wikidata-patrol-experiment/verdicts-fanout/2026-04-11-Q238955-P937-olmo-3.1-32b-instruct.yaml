@@ -1,0 +1,23 @@
+completion_tokens: 1640
+cost_usd: 0.006883
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29495
+property: P937
+property_label: work location
+rationale: The only cited reference for the change in work location from Madrid to
+  Rus for CR7 (Q238955) could not be fetched due to a technical error, and no independent,
+  reliable sources corroborate either value. As a result, the claim cannot be verified
+  or judged as correct or incorrect based on available evidence.
+rcid: null
+revid: 2472199945
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: http://www.congreso.es/portal/page/portal/Congreso/Congreso/Iniciativas?_piref73_2148295_73_1335437_1335437.next_page=/wc/servidorCGI&CMD=VERLST&BASE=DIPH&FMT=DIPHXD1S.fmt&DOCS=1-1&DOCORDER=FIFO&OPDEF=Y&NUM1=&DES1=&QUERY=%2855760%29.NDIP.
+timestamp: '2026-04-11T16:59:53.830618+00:00'
+title: Q238955
+turns: 1
+value_label: Rus
+verdict: unverifiable

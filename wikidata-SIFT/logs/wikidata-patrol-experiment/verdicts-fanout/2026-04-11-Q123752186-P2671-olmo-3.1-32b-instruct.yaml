@@ -1,0 +1,30 @@
+completion_tokens: 2208
+cost_usd: 0.00498
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18276
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The only reference provided for the Google Knowledge Graph ID is a Google
+  Search URL that demonstrates an association between the KG ID and the entity 'Syensqo',
+  but it does not constitute a direct or authoritative citation. No independently
+  citable source explicitly confirms the KG ID '/g/11kqn7d7z7' for SYENSQO. Therefore,
+  the claim remains unverifiable based on the current evidence.
+rcid: 2551389745
+revid: 2474694140
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=/g/11kqn7d7z7
+- provenance: verified
+  supports_claim: false
+  url: https://live.euronext.com/en/product/equities/BE0974464977-XBRU/market-information
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/syensqo?rid=685934152245-39
+timestamp: '2026-04-11T15:09:20.908339+00:00'
+title: Q123752186
+turns: 1
+value_label: null
+verdict: unverifiable

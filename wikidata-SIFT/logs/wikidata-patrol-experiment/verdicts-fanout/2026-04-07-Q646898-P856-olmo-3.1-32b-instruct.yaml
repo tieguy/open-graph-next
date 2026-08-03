@@ -1,0 +1,26 @@
+completion_tokens: 599
+cost_usd: 0.013788200000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 67144
+property: P856
+property_label: official website
+rationale: Unable to verify the claim that https://www.malaysiaairlines.com is the
+  official website of Komatsu due to inability to fetch or locate authoritative sources
+  confirming this claim. Both the referenced URL and the official city website could
+  not be accessed for validation.
+rcid: null
+revid: 2471370213
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.komatsu.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://www.malaysiaairlines.com
+timestamp: '2026-04-07T06:45:22.745871+00:00'
+title: Q646898
+turns: 7
+value_label: null
+verdict: unverifiable

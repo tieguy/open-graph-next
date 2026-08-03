@@ -1,0 +1,29 @@
+completion_tokens: 230
+cost_usd: 0.0032452
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15536
+property: P4214
+property_label: longest observed lifespan
+rationale: The change from '+28' to '+67' years for the longest observed lifespan
+  of the naked mole-rat is not supported by recent primary sources I was able to verify.
+  While a PubMed article cites a maximum lifespan of '30 years' for naked mole rats,
+  I could not find a verified primary source that supports a value of 67 years. The
+  value of 28 years, while lower than some reports, is closer to the cited literature.
+  Without clear evidence supporting 67 years from a reliable primary or recent review
+  source, the change appears suspect.
+rcid: 2550579192
+revid: 2473911118
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pubmed.ncbi.nlm.nih.gov/21411857/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nature.com/articles/d41586-025-03279-y
+timestamp: '2026-04-11T13:43:06.694761+00:00'
+title: Q276290
+turns: 1
+value_label: null
+verdict: suspect

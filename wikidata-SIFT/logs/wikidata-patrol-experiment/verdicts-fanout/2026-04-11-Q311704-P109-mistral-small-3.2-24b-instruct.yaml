@@ -1,0 +1,32 @@
+completion_tokens: 1390
+cost_usd: 0.00267158
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31967
+property: P109
+property_label: signature
+rationale: The edit to change the signature from 'Jeff Kinney.svg' to '19.45-Day Moon
+  - Flickr - chipdatajeffb.jpg' is suspect. No references were found to support the
+  new value, and the old value is a common format for signatures. The lack of evidence
+  supporting the new value suggests the edit may be incorrect.
+rcid: 2551350997
+revid: 2474656751
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://brockhaus.de/ecs/julex/article/kinney-jeff-20
+- provenance: verified
+  supports_claim: false
+  url: https://www.canva.com/signature-generator/
+- provenance: verified
+  supports_claim: false
+  url: https://www.mail-signatures.com/signature-generator/
+- provenance: verified
+  supports_claim: false
+  url: https://www.signwell.com/online-signature/
+timestamp: '2026-04-11T14:32:02.834870+00:00'
+title: Q311704
+turns: 2
+value_label: null
+verdict: suspect

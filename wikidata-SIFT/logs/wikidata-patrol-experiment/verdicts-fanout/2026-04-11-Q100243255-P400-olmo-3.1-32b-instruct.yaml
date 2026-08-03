@@ -1,0 +1,33 @@
+completion_tokens: 1809
+cost_usd: 0.0054774
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21960
+property: P400
+property_label: platform
+rationale: The newly added reference is the official Google Play listing for the 'Bahia
+  Notícias' Android app, which directly confirms that the platform is Android. This
+  is further supported by the official Bahia Notícias website and independent third-party
+  sources that corroborate the existence of the app on the Android platform. The evidence
+  is primary, recent, and directly relevant to the claim.
+rcid: 2549607968
+revid: 2472969774
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/details?id=com.navegarte.bahianoticia&hl=en_US
+- provenance: verified
+  supports_claim: true
+  url: https://www.bahianoticias.com.br/quem-somos.html
+- provenance: verified
+  supports_claim: false
+  url: https://apps.apple.com/br/app/bahia-not%C3%ADcias/id853789369
+- provenance: reported
+  supports_claim: true
+  url: https://www.bnews.com.br/
+timestamp: '2026-04-11T17:34:00.446955+00:00'
+title: Q100243255
+turns: 1
+value_label: Android
+verdict: verified-high

@@ -1,0 +1,33 @@
+completion_tokens: 1168
+cost_usd: 0.010601800000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49505
+property: P69
+property_label: educated at
+rationale: Reliable independent sources confirm that Wiz Khalifa attended Taylor Allderdice
+  High School. The identifier 'IES Goya' does not correspond to this institution in
+  any verified source consulted, and appears to refer to a disambiguation page rather
+  than the school itself. Replacing the correct identifier with an unverified one
+  is therefore incorrect.
+rcid: 2540942810
+revid: 2464732262
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wiz_Khalifa
+- provenance: verified
+  supports_claim: true
+  url: https://www.wtae.com/article/rap-star-wiz-khalifa-surprises-taylor-allderdice-students-1/7473593
+- provenance: verified
+  supports_claim: true
+  url: https://www.post-gazette.com/ae/music/2010/08/12/Like-Wiz-Khalifa-rapper-Mac-Miller-is-another-talent-from-Allderdice/stories/201008120489
+- provenance: verified
+  supports_claim: true
+  url: https://www.pittsburghmagazine.com/pittsburgh-then-and-now-taylor-allderdice-high-school/
+timestamp: '2026-02-20T13:21:22.323309+00:00'
+title: Q117139
+turns: 4
+value_label: IES Goya
+verdict: incorrect

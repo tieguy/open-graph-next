@@ -1,0 +1,35 @@
+completion_tokens: 437
+cost_usd: 0.00769036
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 16275
+property: P156
+property_label: followed by
+rationale: The edit adds 'Zombie Influx' as the 'followed by' album for 'Blackthorn
+  Asylum'. The official Nox Arcana website (noxarcana.com/zombie.html) confirms that
+  'Zombie Influx' is an album released in 2009 by Buzz-Works, which is a side project
+  of Nox Arcana members. The site also states it is a 'concept album' with similar
+  horror themes, consistent with Nox Arcana's style. The referenced Wikipedia edit
+  history (which cannot be used directly due to circularity) points to the same URL,
+  and independent sources like Bandcamp and Discogs list the same release date (September
+  2009) and artist credits linking to Nox Arcana, confirming the album's existence
+  and its sequential position after Blackthorn Asylum (released June 2009). The claim
+  is well-supported by primary and secondary sources.
+rcid: 2541055346
+revid: 2464837605
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/zombie.html
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.bandcamp.com/album/zombie-influx
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/release/5863383-Buzz-Works-Zombie-Influx
+timestamp: '2026-02-21T04:07:12.800976+00:00'
+title: Q860827
+turns: 2
+value_label: Zombie Influx
+verdict: verified-high

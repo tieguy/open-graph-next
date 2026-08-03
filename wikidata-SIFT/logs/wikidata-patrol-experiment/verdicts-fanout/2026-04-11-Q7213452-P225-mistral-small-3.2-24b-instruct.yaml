@@ -1,0 +1,26 @@
+completion_tokens: 1521
+cost_usd: 0.0033075062500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33250
+property: P225
+property_label: taxon name
+rationale: The old value 'pene rico' and the new value 'a' are not supported by the
+  sources. The common name 'candyleaf' is supported by the source from rhs.org.uk,
+  but the taxon name change lacks evidence. The edit appears to be incorrect based
+  on the available information.
+rcid: 2550294685
+revid: 2473634707
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://plants.ces.ncsu.edu/plants/stevia-rebaudiana/
+- provenance: verified
+  supports_claim: true
+  url: https://www.rhs.org.uk/plants/109100/stevia-rebaudiana/details
+timestamp: '2026-04-11T17:01:05.356797+00:00'
+title: Q7213452
+turns: 3
+value_label: null
+verdict: suspect

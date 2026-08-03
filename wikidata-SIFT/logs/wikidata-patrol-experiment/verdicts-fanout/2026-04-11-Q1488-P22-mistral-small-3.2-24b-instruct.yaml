@@ -1,0 +1,40 @@
+completion_tokens: 982
+cost_usd: 0.006495193749999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70513
+property: P22
+property_label: father
+rationale: The edit changes the father of Robert Brasillach from 'Ade' to 'Adelaide',
+  both of which are female names. Neither value has any references attached, and despite
+  attempts to search for independent sources, no verifiable information could be found
+  to confirm either the old or new value. The biological implausibility of both values
+  and the lack of supporting evidence make this edit highly suspect, but without verifiable
+  sources, a definitive verdict cannot be reached.
+rcid: 2550652843
+revid: 2473982658
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://counter-currents.com/2020/03/the-martyrdom-of-robert-brasillach/
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Robert_Brasillach
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Robert_Brasillach
+- provenance: verified
+  supports_claim: false
+  url: https://www.jesuisfrancais.blog/2021/02/08/6-fevrier-1945-execution-de-robert-brasillach-au-fort-de-montrouge-pour-intelligence-avec-lennemi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediapart.fr/journal/politique/140124/au-rassemblement-national-l-homophobie-n-pas-disparu-mais-elle-est-tue
+- provenance: verified
+  supports_claim: false
+  url: https://www.retronews.fr/journal/l-humanite/20-janvier-1945/40/2495489/2
+timestamp: '2026-04-11T17:21:23.160724+00:00'
+title: Q1488
+turns: 3
+value_label: Adelaide
+verdict: unverifiable

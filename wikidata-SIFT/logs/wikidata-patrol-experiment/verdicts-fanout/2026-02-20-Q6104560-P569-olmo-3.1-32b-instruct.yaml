@@ -1,0 +1,26 @@
+completion_tokens: 1134
+cost_usd: 0.009107
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42133
+property: P569
+property_label: date of birth
+rationale: A reputable obituary explicitly states that Reid Harrison was born on November
+  6, 1958, directly contradicting the Wikidata value of November 9, 1959. No authoritative
+  independent source supports the '9 November 1959' date. The cited IMDb reference
+  is not corroborated by reliable primary sources.
+rcid: 2540964045
+revid: 2464751715
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.legacy.com/us/obituaries/dailyprogress/name/reid-harrison-obituary?id=60544470
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q6104560#P569
+timestamp: '2026-02-20T04:08:46.697708+00:00'
+title: Q6104560
+turns: 6
+value_label: null
+verdict: incorrect

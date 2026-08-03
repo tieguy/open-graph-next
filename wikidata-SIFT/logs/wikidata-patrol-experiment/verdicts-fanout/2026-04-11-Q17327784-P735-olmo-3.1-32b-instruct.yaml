@@ -1,0 +1,36 @@
+completion_tokens: 462
+cost_usd: 0.003978000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18504
+property: P735
+property_label: given name
+rationale: The change from 'Francesco' to 'Franciscus' as the given name for Francesco
+  Calzolari is not confirmed or denied by any reliable, independently fetched source.
+  The primary source on the page https://grokipedia.com/page/Francesco provides etymological
+  information about the name Francesco but does not specifically reference Francesco
+  Calzolari or discuss the variant 'Franciscus' as a given name for him. The biographical
+  page https://www.inomidellepiante.org/francesco-calzolari.html provides extensive
+  information about Francesco Calzolari but does not mention 'Franciscus' as a given
+  name. The Linda Hall Library page similarly does not mention 'Franciscus' as a given
+  name. No independently fetched source directly addresses whether 'Franciscus' was
+  historically used as a given name for this individual. Therefore, the claim cannot
+  be verified.
+rcid: 2551329957
+revid: 2474636806
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Francesco
+- provenance: verified
+  supports_claim: false
+  url: https://www.inomidellepiante.org/francesco-calzolari.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.lindahall.org/about/news/scientist-of-the-day/francesco-calzolari/
+timestamp: '2026-04-11T17:27:45.423363+00:00'
+title: Q17327784
+turns: 1
+value_label: Franciscus
+verdict: unverifiable

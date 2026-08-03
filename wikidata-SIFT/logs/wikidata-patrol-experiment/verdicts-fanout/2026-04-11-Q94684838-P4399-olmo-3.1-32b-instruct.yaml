@@ -1,0 +1,32 @@
+completion_tokens: 343
+cost_usd: 0.0032254
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15098
+property: P4399
+property_label: Itaú Cultural ID
+rationale: The change from '147-joaquim-paiva' to '147' for the Itaú Cultural ID property
+  cannot be verified because the primary reference (https://enciclopedia.itaucultural.org.br/pessoas/147-joaquim-paiva),
+  which would clarify the format and usage of the ID, returned a 403 Forbidden error
+  and could not be fetched. No alternative independent source confirms whether '147'
+  alone is the correct identifier for Joaquim Paiva in the Itaú Cultural database.
+  Both the old and new values are plausible, but the absence of accessible reference
+  material means the change cannot be confirmed as correct or incorrect.
+rcid: 2550722111
+revid: 2474049848
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://enciclopedia.itaucultural.org.br/pessoas/147-joaquim-paiva
+- provenance: verified
+  supports_claim: false
+  url: https://www.catalogodasartes.com.br/artista/Joaquim%20Arnaldo%20de%20Paiva%20Oliveira%20-%20Joaquim%20Paiva/
+- provenance: verified
+  supports_claim: false
+  url: https://www.escritoriodearte.com/artista/joaquim-paiva
+timestamp: '2026-04-11T15:32:35.404434+00:00'
+title: Q94684838
+turns: 1
+value_label: null
+verdict: unverifiable

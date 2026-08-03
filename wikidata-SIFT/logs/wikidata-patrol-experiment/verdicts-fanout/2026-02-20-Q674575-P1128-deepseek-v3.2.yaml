@@ -1,0 +1,38 @@
+completion_tokens: 1057
+cost_usd: 0.01490496
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 68667
+property: P1128
+property_label: employees
+rationale: The edit updates Arla Foods' employee count to '22,000' for the year 2023.
+  The current Wikidata statement already cites German Wikipedia as its reference,
+  which is considered circular for Wikidata sourcing and insufficient. A web search
+  for 'Arla Foods employees 2023 22,000' found multiple business and financial sites,
+  including the primary source Arla.com, reporting employee numbers in the range of
+  20,000-22,000 for recent years. One fetched article from Reuters mentions 'around
+  20,000' employees in 2021. While the exact figure of 22,000 for 2023 is plausible
+  and aligns with other reports, I could not find a primary source from 2023 that
+  explicitly confirms this number with the required precision. Therefore, the claim
+  is only weakly verified.
+rcid: 2540952550
+revid: 2464741209
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Arla_Foods
+- provenance: verified
+  supports_claim: false
+  url: https://reuters.com/article/idUSKBN2H21P5/
+- provenance: reported
+  supports_claim: true
+  url: https://www.statista.com/statistics/589165/number-of-employees-arla-foods/
+- provenance: reported
+  supports_claim: true
+  url: https://www.zoominfo.com/c/arla-foods/280689480
+timestamp: '2026-02-20T08:11:15.809100+00:00'
+title: Q674575
+turns: 5
+value_label: null
+verdict: verified-low

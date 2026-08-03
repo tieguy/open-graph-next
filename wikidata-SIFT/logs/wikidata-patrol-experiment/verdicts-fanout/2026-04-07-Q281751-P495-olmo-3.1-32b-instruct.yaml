@@ -1,0 +1,20 @@
+completion_tokens: 761
+cost_usd: 0.004901
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22222
+property: P495
+property_label: country of origin
+rationale: No reliable, fetched source could be found to confirm that the Basque Country
+  is the country of origin of the Spanish omelette. The edit removed Spain and replaced
+  it with the Basque Country, but without any citation or independent corroboration,
+  this change cannot be considered verified.
+rcid: null
+revid: 2471446683
+sources: []
+timestamp: '2026-04-07T03:55:28.266027+00:00'
+title: Q281751
+turns: 4
+value_label: Basque Country
+verdict: unverifiable

@@ -1,0 +1,32 @@
+completion_tokens: 2394
+cost_usd: 0.0042957
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 49374
+property: P19
+property_label: place of birth
+rationale: The edit updated the reference for Adolf Chronicki's place of birth from
+  Russian Wikipedia to Polish Wikipedia, which is a more authoritative source for
+  a Polish actor. The value (Laskivtsi) and qualifiers (Galicia and Lodomeria, Austria-Hungary)
+  are historically plausible for the time period. However, due to blocked access to
+  both Wikipedia sources and inability to fetch independent corroborating sources,
+  the evidence is limited to reported sources and historical context. No direct verification
+  of the Polish Wikipedia content was possible, limiting the confidence level.
+rcid: null
+revid: 2468795077
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://pl.wikipedia.org/wiki/Adolf_Chronicki
+- provenance: reported
+  supports_claim: true
+  url: https://ru.wikipedia.org/wiki/Адольф_Хроницкий
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Galicia_and_Lodomeria
+timestamp: '2026-04-11T11:13:22.135598+00:00'
+title: Q11684452
+turns: 5
+value_label: Laskivtsi
+verdict: verified-low

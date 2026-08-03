@@ -1,0 +1,31 @@
+completion_tokens: 1227
+cost_usd: 0.013069418749999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 134954
+property: P225
+property_label: taxon name
+rationale: The edit changes the taxon name of Stevia rebaudiana from 'pene rico' to
+  'a'. However, none of the reliable sources consulted, including Plants of the World
+  Online, World Flora Online, GBIF, PMC, NCBI Taxonomy Browser, and ITIS, support
+  the taxon name 'a' for Stevia rebaudiana. The sources consistently refer to the
+  taxon name as 'Stevia rebaudiana (Bertoni) Bertoni' or similar variations. Therefore,
+  the edit to change the taxon name to 'a' is incorrect.
+rcid: 2550294685
+revid: 2473634707
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names/245468-2
+- provenance: verified
+  supports_claim: false
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC8600158/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=55670
+timestamp: '2026-04-07T11:44:22.394236+00:00'
+title: Q7213452
+turns: 14
+value_label: null
+verdict: incorrect

@@ -1,0 +1,40 @@
+completion_tokens: 2756
+cost_usd: 0.005653531250000001
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52955
+property: P106
+property_label: occupation
+rationale: The claim that Valentina Rusu-Ciobanu was a painter is supported by multiple
+  independent sources, including primary sources from her official website and secondary
+  sources from reputable art and cultural institutions.
+rcid: 2550500062
+revid: 2473835443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: https://www.new-east-archive.org/features/show/12271/valentina-rusu-ciobanu-the-100-year-old-moldovan-artist-women-recollected
+- provenance: verified
+  supports_claim: true
+  url: https://academictraditions.com/artists/valentina-rusu-ciobanu
+- provenance: verified
+  supports_claim: true
+  url: https://visit.chisinau.md/en/obiective_turistice/valentina-rusu-ciobanu/
+- provenance: verified
+  supports_claim: true
+  url: https://old.gov.md/en/content/obituary-valentina-rusu-ciobanu-28-october-1920-1-november-2021
+timestamp: '2026-04-10T13:29:38.766997+00:00'
+title: Q12743035
+turns: 3
+value_label: painter
+verdict: verified-high

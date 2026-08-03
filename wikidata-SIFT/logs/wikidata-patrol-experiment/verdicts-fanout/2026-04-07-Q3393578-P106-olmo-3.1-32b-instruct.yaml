@@ -1,0 +1,20 @@
+completion_tokens: 978
+cost_usd: 0.006164200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27887
+property: P106
+property_label: occupation
+rationale: No references were provided for the new occupation claim 'Carpintero' (carpenter),
+  and independent searches did not yield any evidence that Luis Xosé Pereira Arias
+  is a carpenter. The individual is primarily known as a writer, but this change lacks
+  supporting documentation.
+rcid: null
+revid: 2460606061
+sources: []
+timestamp: '2026-04-07T07:44:06.806574+00:00'
+title: Q3393578
+turns: 5
+value_label: Carpintero
+verdict: unverifiable

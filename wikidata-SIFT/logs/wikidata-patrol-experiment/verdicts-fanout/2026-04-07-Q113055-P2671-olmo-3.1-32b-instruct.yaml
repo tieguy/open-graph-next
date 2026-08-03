@@ -1,0 +1,20 @@
+completion_tokens: 472
+cost_usd: 0.0060644
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28906
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: No independent, verified source was found to confirm that 'Hamburgefonts'
+  is a correct Google Knowledge Graph ID for the classical garalde typeface genre.
+  Multiple web searches returned no evidence supporting this claim, and attempts to
+  fetch reference sources (such as Wikipedia) were unsuccessful due to domain blocking.
+rcid: 2549697760
+revid: 2473056935
+sources: []
+timestamp: '2026-04-07T11:52:16.916379+00:00'
+title: Q113055
+turns: 7
+value_label: null
+verdict: unverifiable

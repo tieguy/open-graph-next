@@ -1,0 +1,18 @@
+completion_tokens: 133
+cost_usd: 0.004643581249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48495
+property: P569
+property_label: date of birth
+rationale: Unable to fetch any sources to verify the date of birth for Fred Pellerin
+  due to search errors.
+rcid: null
+revid: 2471073178
+sources: []
+timestamp: '2026-04-11T07:44:49.029014+00:00'
+title: Q3086924
+turns: 4
+value_label: null
+verdict: unverifiable

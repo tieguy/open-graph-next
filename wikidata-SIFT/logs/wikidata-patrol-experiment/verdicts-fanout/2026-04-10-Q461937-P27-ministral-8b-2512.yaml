@@ -1,0 +1,31 @@
+completion_tokens: 2015
+cost_usd: 0.007606170000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 60418
+property: P27
+property_label: country of citizenship
+rationale: All verified sources confirm that María Izquierdo was a Mexican artist
+  with no connection to Morocco. The claim that she held Moroccan citizenship (Q3294851)
+  is unsupported by any credible source and contradicts established biographical facts.
+rcid: 2549596620
+revid: 2472958694
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.infinite-women.com/women/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.theartstory.org/artist/izquierdo-maria/
+- provenance: verified
+  supports_claim: false
+  url: https://awarewomenartists.com/en/artiste/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.askart.com/artist/Maria_Izquierdo/11042118/Maria_Izquierdo.aspx
+timestamp: '2026-04-10T13:20:10.195808+00:00'
+title: Q461937
+turns: 3
+value_label: Marroca [de]
+verdict: incorrect

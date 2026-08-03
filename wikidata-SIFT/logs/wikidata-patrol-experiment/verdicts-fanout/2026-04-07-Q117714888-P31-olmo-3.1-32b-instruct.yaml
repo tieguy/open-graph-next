@@ -1,0 +1,21 @@
+completion_tokens: 881
+cost_usd: 0.0073426
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34070
+property: P31
+property_label: instance of
+rationale: The edit claims that Q117714888 is 'Mi madrecita', a 1940 film, but no
+  independent or reliable sources were found to support this assertion. The previous
+  instance of (musical group) was removed without evidence that 'Mi madrecita' is
+  a film, let alone a 1940 Spanish one. Absent reliable sources confirming this claim,
+  the change is likely incorrect.
+rcid: null
+revid: 2464150488
+sources: []
+timestamp: '2026-04-07T09:43:05.948131+00:00'
+title: Q117714888
+turns: 7
+value_label: Mi madrecita
+verdict: suspect

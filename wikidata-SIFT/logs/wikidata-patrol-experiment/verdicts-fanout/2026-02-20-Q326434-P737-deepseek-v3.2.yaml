@@ -1,0 +1,29 @@
+completion_tokens: 1695
+cost_usd: 0.05467976999999999
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 203069
+property: P737
+property_label: influenced by
+rationale: The cited reference directly supports the claim, stating that Couture 'immersed
+  himself in Renaissance techniques, particularly those of Titian and Rubens, which
+  he copied and reworked to nourish his own art.' Independent sources corroborate
+  Couture's admiration for Italian/Venetian masters. While the source is a commercial
+  auction website rather than scholarly literature, it provides specific, relevant
+  information about artistic influences. The claim is well-supported by the evidence
+  found.
+rcid: 2540944656
+revid: 2464733999
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.aucties.com/fr/guide-encheres/les-artistes-du-xixe-siecle/cote-et-valeur-des-tableaux-dessins-peintures-de-thomas-couture
+- provenance: verified
+  supports_claim: true
+  url: https://www.aucties.com/en/auction-guide/nineteenth-century-artists/rating-and-value-of-paintings-by-thomas-couture
+timestamp: '2026-02-20T12:24:01.980057+00:00'
+title: Q326434
+turns: 7
+value_label: Titian
+verdict: verified-high

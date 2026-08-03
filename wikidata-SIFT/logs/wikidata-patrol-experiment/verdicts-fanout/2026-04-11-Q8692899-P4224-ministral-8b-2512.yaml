@@ -1,0 +1,27 @@
+completion_tokens: 1887
+cost_usd: 0.00185613
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23134
+property: P4224
+property_label: category contains
+rationale: The occupation qualifier for the category 'Ohio State Buckeyes football
+  coaches' was updated from 'coach' (Q41583) to 'American football coach' (Q42331263).
+  This change is accurate and specific, as confirmed by the official Ohio State Buckeyes
+  coaching staff page, which lists all coaches with titles directly related to American
+  football coaching roles. The broader claim that this category contains 'human' (Q5)
+  is also correct. Although no references were attached to the claim or qualifier,
+  the prefetched content from the Ohio State Buckeyes website provides direct evidence
+  supporting the updated qualifier.
+rcid: 2551356291
+revid: 2474661792
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ohiostatebuckeyes.com/sports/football/coaches/2025
+timestamp: '2026-04-11T12:52:38.697900+00:00'
+title: Q8692899
+turns: 3
+value_label: human
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1582
+cost_usd: 0.0034762
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12635
+property: P4224
+property_label: category contains
+rationale: 'The added qualifier ''occupation: volleyball player'' is incorrect for
+  the category ''Players of Orientales de Humacao.'' Multiple independent and primary
+  sources confirm that Orientales de Humacao is a baseball team, not a volleyball
+  team. The qualifier restricts the category to the wrong sport and is not supported
+  by any evidence.'
+rcid: 2550827920
+revid: 2474152190
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Orientales_de_Humacao
+- provenance: verified
+  supports_claim: false
+  url: https://www.baseball-reference.com/bullpen/Grises_Orientales_de_Humacao
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Orientales_de_Humacao
+timestamp: '2026-04-10T07:45:00.803393+00:00'
+title: Q9235036
+turns: 1
+value_label: human
+verdict: incorrect

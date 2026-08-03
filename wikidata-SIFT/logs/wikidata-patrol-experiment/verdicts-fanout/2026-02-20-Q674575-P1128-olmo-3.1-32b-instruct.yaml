@@ -1,0 +1,34 @@
+completion_tokens: 1465
+cost_usd: 0.027603399999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 133622
+property: P1128
+property_label: employees
+rationale: Official Arla Foods UK plc financial summaries indicate average full-time
+  employee numbers in the low thousands (e.g., 5,970 and 6,120), which are substantially
+  lower than the claimed value of 22,000. The cited value is not supported by the
+  available evidence and appears inconsistent with recent official reporting summaries.
+  Due to inability to extract direct figures from PDFs, this assessment is based on
+  summarized data and is therefore suspect rather than incorrect.
+rcid: 2540952550
+revid: 2464741209
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.arla.com/493096/globalassets/arla-global/company---overview/investor/annual-reports/2024/parent-company/arla-parent-financial-statements-2024-uk.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://www.arla.com/4930be/globalassets/arla-global/company---overview/investor/annual-reports/2023/arla_annual-report-2023_uk.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.arla.com/493096/globalassets/arla-global/company---overview/investor/annual-reports/2024/parent-company/arla-parent-financial-statements-2024-uk.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://docs.publicnow.com/viewDoc.aspx?filename=23907%5CEXT%5C3833489BC776B2F079AADF2642E997A222EC2C41_74A72006512C47C11F4C78FC5E50F0F28A1D395E.PDF
+timestamp: '2026-02-20T08:09:58.558479+00:00'
+title: Q674575
+turns: 11
+value_label: null
+verdict: suspect

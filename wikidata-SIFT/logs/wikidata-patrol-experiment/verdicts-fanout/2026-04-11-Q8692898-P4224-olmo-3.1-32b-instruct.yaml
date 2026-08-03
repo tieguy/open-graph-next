@@ -1,0 +1,31 @@
+completion_tokens: 2150
+cost_usd: 0.004011
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13605
+property: P4224
+property_label: category contains
+rationale: The edit incorrectly uses Q5 (human) as the direct value for the P4224
+  (category contains) claim on Category:Ohio State Buckeyes football announcers. According
+  to Wikidata documentation and community consensus, P4224 should link a category
+  to specific instances (individuals or organizations), not to generic classes like
+  'human'. This misrepresents the intended meaning of the category and is considered
+  incorrect modeling.
+rcid: 2551356176
+revid: 2474661681
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P4224
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2020/03#P4224_and_instances
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Category:American_football_announcers
+timestamp: '2026-04-11T17:48:20.276690+00:00'
+title: Q8692898
+turns: 1
+value_label: human
+verdict: suspect

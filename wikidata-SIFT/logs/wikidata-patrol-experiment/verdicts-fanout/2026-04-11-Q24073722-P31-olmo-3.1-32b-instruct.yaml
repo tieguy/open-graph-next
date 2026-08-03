@@ -1,0 +1,30 @@
+completion_tokens: 2589
+cost_usd: 0.0040336
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12401
+property: P31
+property_label: instance of
+rationale: 'The added reference does not support the claim that Inakustik is an instance
+  of ''audio equipment.'' Multiple independent sources describe Inakustik as a record
+  label and/or a company involved in manufacturing audio cables, but none classify
+  Inakustik itself as an instance of audio equipment. Assigning P31: Q15190726 is
+  therefore not justified.'
+rcid: 2550539544
+revid: 2473873226
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.in-akustik.com/about-us/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Inakustik
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/label/160281-Inakustik
+timestamp: '2026-04-11T14:26:03.507876+00:00'
+title: Q24073722
+turns: 1
+value_label: audio equipment
+verdict: suspect

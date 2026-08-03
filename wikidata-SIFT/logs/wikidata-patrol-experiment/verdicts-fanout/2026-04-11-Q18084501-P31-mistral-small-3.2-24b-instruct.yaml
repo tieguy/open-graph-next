@@ -1,0 +1,26 @@
+completion_tokens: 1475
+cost_usd: 0.00180884125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14908
+property: P31
+property_label: instance of
+rationale: Both the old and new values for the 'instance of' property are correct
+  ('painting'), but the change does not improve the accuracy of the information. The
+  edit appears to be a potential Q-ID swap or an edit war, as both values point to
+  the same concept.
+rcid: null
+revid: 2471244123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artsandculture.google.com/asset/the-mozart-famliy-johann-nepomuk-della-croce/PwFMv8-fFDJkDw?hl=en
+- provenance: verified
+  supports_claim: true
+  url: https://bradleybambarger.medium.com/true-images-of-mozart-37136a8c6fd
+timestamp: '2026-04-11T10:52:25.778026+00:00'
+title: Q18084501
+turns: 1
+value_label: painting
+verdict: suspect

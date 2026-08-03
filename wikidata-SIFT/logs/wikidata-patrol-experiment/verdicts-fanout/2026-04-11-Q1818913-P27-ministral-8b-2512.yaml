@@ -1,0 +1,32 @@
+completion_tokens: 2361
+cost_usd: 0.014695559999999998
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 159117
+property: P27
+property_label: country of citizenship
+rationale: The investigation was unable to fetch or verify any primary sources regarding
+  Leon Petrażycki's citizenship of the Second Polish Republic due to API restrictions.
+  The removed claim was unsourced, and no independent corroboration could be obtained.
+  Without verified sources, it is impossible to determine the correctness of the removal.
+rcid: null
+revid: 2471727027
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=128241267
+- provenance: reported
+  supports_claim: false
+  url: https://kuryerpolski.us/en/Page/View/prezydenci-2-rp
+- provenance: reported
+  supports_claim: false
+  url: https://lexmotion.eu/blog/polish-citizenship-law/
+- provenance: reported
+  supports_claim: false
+  url: https://www.cambridge.org/core/journals/law-and-society-review/article/abs/unrecognized-father-of-sociology-of-law-leon-petrazycki/F47B3EA0D7935626E1F378DEF75FF9A1
+timestamp: '2026-04-11T17:53:03.850719+00:00'
+title: Q1818913
+turns: 10
+value_label: Second Polish Republic
+verdict: unverifiable

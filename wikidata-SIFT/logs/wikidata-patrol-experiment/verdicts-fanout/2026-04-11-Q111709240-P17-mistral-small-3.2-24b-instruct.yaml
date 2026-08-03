@@ -1,0 +1,25 @@
+completion_tokens: 1389
+cost_usd: 0.0009741400000000001
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11770
+property: P17
+property_label: country
+rationale: Multiple independent sources, including Numista and LastDodo, confirm that
+  the Sherritt Mint is located in Canada. The added reference to Fort Saskatchewan,
+  a city in Alberta, Canada, supports the claim that the Sherritt Mint is in Canada.
+rcid: 2549969607
+revid: 2473319945
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.numista.com/74513
+- provenance: verified
+  supports_claim: true
+  url: https://www.lastdodo.com/en/items/4564843-canada-the-sherritt-mint-1966
+timestamp: '2026-04-11T14:14:10.080317+00:00'
+title: Q111709240
+turns: 1
+value_label: Canada
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1740
+cost_usd: 0.0037582
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13571
+property: P5817
+property_label: state of use
+rationale: Multiple authoritative sources—including the English Wikipedia article,
+  the official JR East Ofunato Line page, and an NHK news report—explicitly state
+  that Kami-Shishiori Station ceased operations and was scheduled for dismantling
+  on April 1, 2020. This confirms that changing the 'state of use' from 'in use' to
+  'decommissioned' is accurate as of 2020 onward.
+rcid: 2550475131
+revid: 2473811459
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Kami-Shishiori_Station
+- provenance: verified
+  supports_claim: true
+  url: https://www.jreast.co.jp/e/line/03.html
+- provenance: verified
+  supports_claim: true
+  url: https://www3.nhk.or.jp/news/html/20200401/k10013008811000.html
+timestamp: '2026-04-11T18:16:12.558819+00:00'
+title: Q6357193
+turns: 1
+value_label: decommissioned
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 1429
+cost_usd: 0.0059280625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59422
+property: P1476
+property_label: title
+rationale: The title 'Heloo' does not appear in any of the consulted sources and seems
+  incorrect. The title 'Franciszek I' is also not supported by the independent sources.
+  The change from 'Franciszek I' to 'Heloo' is suspect and likely incorrect.
+rcid: null
+revid: 2471621755
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.luminarium.org/encyclopedia/francis1.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.newadvent.org/cathen/06207a.htm
+- provenance: verified
+  supports_claim: false
+  url: https://beckchris.wordpress.com/visual-arts/art-history-101-part-one-30000-bce-1599/
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/humanities/encyclopedias-almanacs-transcripts-and-maps/francis-i-1494-1547-king-france
+timestamp: '2026-04-11T17:55:12.556002+00:00'
+title: Q20020084
+turns: 4
+value_label: null
+verdict: suspect

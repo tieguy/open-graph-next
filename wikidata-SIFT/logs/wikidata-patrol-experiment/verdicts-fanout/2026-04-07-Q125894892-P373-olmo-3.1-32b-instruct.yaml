@@ -1,0 +1,22 @@
+completion_tokens: 883
+cost_usd: 0.0034106
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14404
+property: P373
+property_label: Commons category
+rationale: The new Commons category 'dR SIMEN' does not exist on Wikimedia Commons
+  and there is no supporting evidence from independent sources. The edit lacks references
+  and justification, and the previous value should be restored.
+rcid: 2550134244
+revid: 2473479928
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:dR_SIMEN
+timestamp: '2026-04-07T08:36:13.111685+00:00'
+title: Q125894892
+turns: 3
+value_label: null
+verdict: incorrect

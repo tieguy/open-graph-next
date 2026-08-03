@@ -1,0 +1,23 @@
+completion_tokens: 1013
+cost_usd: 0.00356896875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37117
+property: P26
+property_label: spouse
+rationale: The edit lacks references, and the prefetched references do not provide
+  information about Johan van Gogh's spouse. The fetched page does not contain any
+  relevant information about Anneke van Santen or Anneke van Gogh. Therefore, we cannot
+  verify the correctness of the edit.
+rcid: 2550384550
+revid: 2473722496
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.theartnewspaper.com/2019/03/08/the-astonishing-life-of-johan-van-gogh-vincents-great-nephew-dies-aged-96
+timestamp: '2026-04-11T13:34:53.632959+00:00'
+title: Q18016363
+turns: 4
+value_label: Anneke van Santen
+verdict: unverifiable

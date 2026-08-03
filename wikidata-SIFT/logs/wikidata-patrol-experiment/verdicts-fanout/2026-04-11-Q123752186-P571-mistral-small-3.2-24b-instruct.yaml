@@ -1,0 +1,22 @@
+completion_tokens: 230
+cost_usd: 0.004421025
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47871
+property: P571
+property_label: inception
+rationale: The reference URL provided for the inception claim could not be fetched,
+  and no other sources were found to confirm the claim. Therefore, the claim cannot
+  be verified at this time.
+rcid: 2551364881
+revid: 2474669973
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.specchemonline.com/syensqo-completes-spin
+timestamp: '2026-04-11T10:59:46.473870+00:00'
+title: Q123752186
+turns: 4
+value_label: null
+verdict: unverifiable

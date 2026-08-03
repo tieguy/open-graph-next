@@ -1,0 +1,29 @@
+completion_tokens: 1224
+cost_usd: 0.0038912
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15784
+property: P2003
+property_label: Instagram username
+rationale: No primary source could be fetched to confirm the Instagram username, and
+  secondary sources only indicate the existence of an Instagram account without explicitly
+  verifying the username. Therefore, the claim cannot be confirmed or denied with
+  the available evidence.
+rcid: 2541056088
+revid: 2464838226
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://linktr.ee/itsbellahue
+- provenance: verified
+  supports_claim: false
+  url: https://linktr.ee/BellaHue
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.instagram.com/itsbella_hue/
+timestamp: '2026-02-21T03:41:59.858266+00:00'
+title: Q138354585
+turns: 3
+value_label: null
+verdict: unverifiable

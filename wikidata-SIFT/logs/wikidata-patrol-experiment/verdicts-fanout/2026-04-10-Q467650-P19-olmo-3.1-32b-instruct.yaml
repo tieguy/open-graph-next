@@ -1,0 +1,29 @@
+completion_tokens: 1169
+cost_usd: 0.0039914
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16450
+property: P19
+property_label: place of birth
+rationale: None of the independently verified sources support 'Francia' as the place
+  of birth for Nzingha Mbande. All reliable sources indicate she was born in the Kingdom
+  of Ndongo, present-day Angola. 'Francia' is historically and geographically inconsistent
+  with her documented origins. The claim should be reverted.
+rcid: 2550579530
+revid: 2473911425
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Nzinga_of_Ndongo_and_Matamba
+- provenance: verified
+  supports_claim: false
+  url: https://tangietwoods.blog/2025/09/18/queen-nzinga-african-queen-in-history/
+- provenance: verified
+  supports_claim: false
+  url: https://www.blackhistoryheroes.com/2011/03/queen-ana-de-sousa-njinga-mbande-of.html
+timestamp: '2026-04-10T00:16:11.133481+00:00'
+title: Q467650
+turns: 1
+value_label: Francia
+verdict: incorrect

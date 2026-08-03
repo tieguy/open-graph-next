@@ -1,0 +1,31 @@
+completion_tokens: 1628
+cost_usd: 0.014221000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 66221
+property: P2348
+property_label: time period
+rationale: There is no credible scholarly or encyclopedic support for assigning 'prehistoric
+  archaeology' as the time period for Dhul-Qarnayn. Islamic tradition and academic
+  literature consistently place Dhul-Qarnayn in the ancient or late antiquity period,
+  often associating him with Alexander the Great or a similar historical figure. No
+  primary or independently verifiable sources support the 'prehistoric archaeology'
+  label, and the change lacks citation.
+rcid: 2550679267
+revid: 2474008312
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Dhul-Qarnayn
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/topic/Dhul-Qarnayn
+- provenance: reported
+  supports_claim: false
+  url: https://referenceworks.brillonline.com/entries/encyclopaedia-of-islam-2/encyclopaedia-of-islam-2-islamic-legendary-figure-dhul-qarnayn/EIECOM_9789004182254_OXP0000150063_free
+timestamp: '2026-04-07T07:30:54.063924+00:00'
+title: Q1207846
+turns: 13
+value_label: prehistoric archaeology
+verdict: incorrect

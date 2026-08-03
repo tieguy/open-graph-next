@@ -1,0 +1,38 @@
+completion_tokens: 1984
+cost_usd: 0.01553552
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 53529
+property: P39
+property_label: position held
+rationale: Multiple independent sources consistently confirm that Alessandro Cataldo
+  is the president/founder of the Libera Associazione Disabili Imprenditori (LADI).
+  The LADI website, news articles from La Nazione and ItaliaEconomy, and Cataldo's
+  personal website all state his presidential role. The association's establishment
+  in 2025 aligns with the start time qualifier of 2025-10-07. While the cited PDF
+  reference couldn't be parsed, the corroborating evidence from multiple reliable
+  sources provides strong verification.
+rcid: 2540927337
+revid: 2464718094
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ladiets.org/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lanazione.it/arezzo/cronaca/disabili-imprenditori-la-storia-di-368fe989
+- provenance: verified
+  supports_claim: true
+  url: https://italiaeconomy.it/libera-associazione-disabili-imprenditori/
+- provenance: verified
+  supports_claim: true
+  url: https://www.alessandrocataldo.it/chi-sono/
+- provenance: verified
+  supports_claim: false
+  url: https://ladiets.org/wp-content/uploads/2025/10/Statuto-Libera-Associazione-Disabili-Imprenditori-LADI.pdf
+timestamp: '2026-02-20T21:47:17.127342+00:00'
+title: Q138348968
+turns: 7
+value_label: president
+verdict: verified-high

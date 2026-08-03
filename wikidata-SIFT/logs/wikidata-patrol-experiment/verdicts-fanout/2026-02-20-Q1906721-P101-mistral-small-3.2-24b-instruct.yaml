@@ -1,0 +1,49 @@
+completion_tokens: 1156
+cost_usd: 0.016649900000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 163031
+property: P101
+property_label: field of work
+rationale: The search results and fetched content do not provide any credible evidence
+  that Masahiro Sakurai, a well-known video game designer, has ever been involved
+  in pornographic acting. The information available suggests that he is primarily
+  recognized for his work in the video game industry, particularly for creating the
+  Kirby series and serving as the director of the Super Smash Bros. series. The claim
+  that Masahiro Sakurai is a pornographic actor is false and should be removed.
+rcid: 2540950583
+revid: 2464739506
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.namu.wiki/w/AV%20%EB%82%A8%EB%B0%B0%EC%9A%B0
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/smashbros/comments/wn87dn/people_who_sell_hentai_at_majors_are_actively/
+- provenance: verified
+  supports_claim: false
+  url: https://www.pornhub.com/video/search?search=masahiro+sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://journals.library.brandeis.edu/index.php/PMAJLS/article/download/2433/1923/5916
+- provenance: verified
+  supports_claim: false
+  url: https://craigjclark.livejournal.com/436368.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/scientific-contributions/M-Sakurai-65576980
+- provenance: verified
+  supports_claim: false
+  url: https://jav.guru/24303/introduction-to-male-jav-actors/
+- provenance: verified
+  supports_claim: false
+  url: https://paulroberts.jp/recommendations-books-movies-tv-shows-podcasts-games/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/AskReddit/comments/eoy7xq/non_japanese_people_of_reddit_what_is_something/
+timestamp: '2026-02-20T09:05:44.811245+00:00'
+title: Q1906721
+turns: 11
+value_label: pornographic actor
+verdict: incorrect

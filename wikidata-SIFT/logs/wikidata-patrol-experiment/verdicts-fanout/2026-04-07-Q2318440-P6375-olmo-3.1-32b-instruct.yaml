@@ -1,0 +1,20 @@
+completion_tokens: 865
+cost_usd: 0.0099568
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47189
+property: P6375
+property_label: street address
+rationale: The only cited reference (Hebrew Wikipedia) could not be accessed due to
+  domain blocking, and no independent sources confirm the new street address '0525319894
+  - فيكتور رنتيسي محامي' for Church of Saint George in Lod, Israel. Therefore, the
+  claim cannot be verified.
+rcid: 2550404305
+revid: 2473741785
+sources: []
+timestamp: '2026-04-07T12:30:36.413885+00:00'
+title: Q2318440
+turns: 8
+value_label: null
+verdict: unverifiable

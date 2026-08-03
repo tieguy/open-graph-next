@@ -1,0 +1,26 @@
+completion_tokens: 1295
+cost_usd: 0.00405114
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42156
+property: P856
+property_label: official website
+rationale: The new URL provided in the edit does not appear to be a valid official
+  website for Chikusei. The current official website "https://www.city.chikusei.lg.jp/"
+  is confirmed to be correct and relevant. The new URL returned a 403 Forbidden error,
+  suggesting it is not a valid official website.
+rcid: null
+revid: 2465913630
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.chikusei.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.china-airlines.com
+timestamp: '2026-04-07T12:45:33.746073+00:00'
+title: Q694322
+turns: 4
+value_label: null
+verdict: incorrect

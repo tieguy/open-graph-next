@@ -1,0 +1,27 @@
+completion_tokens: 1808
+cost_usd: 0.00135321
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13409
+property: P167
+property_label: structure replaced by
+rationale: The replacement of Elsterbrücke Kleindalzig is confirmed to be actively
+  underway as of mid-2026, based on multiple verified sources. The qualifier 'work
+  in process' (Q357662) accurately reflects the current status, replacing the outdated
+  'future event' qualifier. The evidence is consistent and directly supports the updated
+  qualifier.
+rcid: 2550574959
+revid: 2473907120
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://medienportal-grimma.de/47936/kleindalzig-neue-bruecke-ersetzt-marodes-bauwerk-bauarbeiten-bis-august-2026/
+- provenance: verified
+  supports_claim: true
+  url: https://www.l-iz.de/politik/region/2025/07/bruecke-ueber-die-weisse-elster-bei-kleindalzig-ersatzneubau-beginnt-am-4-august-629121
+timestamp: '2026-04-11T14:08:02.054206+00:00'
+title: Q43157669
+turns: 1
+value_label: Elsterbrücke Kleindalzig
+verdict: verified-high

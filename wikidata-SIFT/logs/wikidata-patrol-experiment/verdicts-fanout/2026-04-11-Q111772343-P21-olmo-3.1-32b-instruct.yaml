@@ -1,0 +1,31 @@
+completion_tokens: 2910
+cost_usd: 0.0050162
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16351
+property: P21
+property_label: sex or gender
+rationale: Multiple independent news sources consistently refer to Balen Shah using
+  male pronouns and present him as a male public figure, strongly implying that his
+  sex or gender is male. However, none of these sources explicitly state his sex or
+  gender in a formal claim, and the newly added reference could not be verified due
+  to a fetch failure. Thus, while the claim is plausible and indirectly supported,
+  there is no direct, citable evidence confirming the fact.
+rcid: 2551279358
+revid: 2474588640
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jagranjosh.com/general-knowledge/balen-shah-biography-1820006815-1
+- provenance: verified
+  supports_claim: true
+  url: https://kathmandupost.ekantipur.com/news/2026/03/27/balen-shah-sworn-in-as-nepals-youngest-prime-minister
+- provenance: reported
+  supports_claim: false
+  url: https://famereports.com/balen-shah-biography/
+timestamp: '2026-04-11T18:30:06.949123+00:00'
+title: Q111772343
+turns: 1
+value_label: male
+verdict: verified-low

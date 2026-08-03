@@ -1,0 +1,36 @@
+completion_tokens: 1654
+cost_usd: 0.0053694
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21885
+property: P20
+property_label: place of death
+rationale: The new value 'Paris 7' for Lucas de Heere's place of death is not supported
+  by any independent, authoritative source. All reliable art history references indicate
+  Paris as the place of death, with no mention of a specific arrondissement. The cited
+  French Wikipedia reference does not provide this level of detail, making the change
+  unwarranted and potentially incorrect.
+rcid: null
+revid: 2460961343
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Lucas_de_Heere
+- provenance: verified
+  supports_claim: false
+  url: https://www.artrenewal.org/artists/lucas-de-heere/8601
+- provenance: reported
+  supports_claim: false
+  url: https://www.rkd.nl/artist/36881
+- provenance: reported
+  supports_claim: false
+  url: https://www.odnb.co.uk/view/10.1093/ref:odnb/9780198614128.001.0001/odnb-9780198614128-e-11731
+- provenance: reported
+  supports_claim: false
+  url: https://www.benezit-dictionary.com/en/search?query=Lucas%20de%20Heere
+timestamp: '2026-04-11T13:38:46.257319+00:00'
+title: Q2419460
+turns: 1
+value_label: Paris 7
+verdict: suspect

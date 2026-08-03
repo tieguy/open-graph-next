@@ -1,0 +1,31 @@
+completion_tokens: 2124
+cost_usd: 0.00625497
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55045
+property: P26
+property_label: spouse
+rationale: The claim that Glebus Sainciuc (Q12729362) was the spouse of Valentina
+  Rusu-Ciobanu (Q12743035) is strongly supported by multiple verified primary sources.
+  Independent sources, including a prefetched reference from peoplepill.com and verified
+  articles from moldavie.fr and presedinte.md, explicitly confirm their lifelong partnership.
+  The unreachable references cited in the edit do not invalidate the claim, as the
+  evidence from other sources is robust and consistent.
+rcid: 2550498306
+revid: 2473833725
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://peoplepill.com/i/valentina-rusu-ciobanu/
+- provenance: verified
+  supports_claim: true
+  url: https://www.moldavie.fr/La-peintre-Valentina-Rusu-Ciobanu-presqu-un-siecle-d-amour.html
+- provenance: verified
+  supports_claim: true
+  url: https://presedinte.md/rom/discursuri/necrolog-valentina-rusu-ciobanu-28-octombrie-1920-1-noiembrie-2021
+timestamp: '2026-04-10T11:54:55.216829+00:00'
+title: Q12743035
+turns: 3
+value_label: Glebus Sainciuc
+verdict: verified-high

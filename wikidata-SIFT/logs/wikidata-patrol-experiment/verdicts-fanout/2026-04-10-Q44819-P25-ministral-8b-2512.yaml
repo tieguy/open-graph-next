@@ -1,0 +1,30 @@
+completion_tokens: 2051
+cost_usd: 0.012793170000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 94962
+property: P25
+property_label: mother
+rationale: Multiple independent and verified sources, including WikiTree (a genealogical
+  database), New World Encyclopedia, and Military Wiki, confirm that Sukirah (Q138639210)
+  is the correct mother of Suharto. The WikiTree source provides direct genealogical
+  evidence, making the claim highly reliable. The edit aligns with established historical
+  accounts and is supported by primary and secondary sources.
+rcid: null
+revid: 2471122718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Sukirah-1
+- provenance: verified
+  supports_claim: true
+  url: https://www.newworldencyclopedia.org/entry/Suharto
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Suharto
+timestamp: '2026-04-10T00:20:03.591012+00:00'
+title: Q44819
+turns: 3
+value_label: Sukirah
+verdict: verified-high

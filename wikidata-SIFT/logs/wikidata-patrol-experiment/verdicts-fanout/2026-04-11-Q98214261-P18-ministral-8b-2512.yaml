@@ -1,0 +1,43 @@
+completion_tokens: 655
+cost_usd: 0.00309285
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15233
+property: P18
+property_label: image
+rationale: The removed image claim, 'Sabiha Çimen at Visa pour l'Image Perpignan 29
+  August 2022.jpg', was not corroborated by any verified sources. Sabiha Çimen’s participation
+  in Visa pour l'Image 2022 was not found in any official or reliable sources. The
+  only references to her events were related to awards, exhibitions, and projects
+  like 'Hafiz,' but none mentioned Visa pour l'Image. The removal of this claim is
+  justified as it lacks credible evidence. The qualifiers (media legend and point
+  in time) were also unsupported by any verified sources, reinforcing the need for
+  removal.
+rcid: null
+revid: 2470153631
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lensculture.com/articles/sabiha-cimen-hafiz
+- provenance: verified
+  supports_claim: false
+  url: https://www.magnumphotos.com/photographer/sabiha-cimen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.magnumphotos.com/theory-and-practice/hafiz-guardians-quran-sabiha-cimen/
+- provenance: reported
+  supports_claim: false
+  url: https://twitter.com/jf_leroy/status/1292846263726202884
+- provenance: reported
+  supports_claim: false
+  url: https://www.gf.org/stories/announcing-the-2025-guggenheim-fellows
+- note: HTTP 404 error, unreachable
+  provenance: verified
+  supports_claim: false
+  url: https://www.worldpressphoto.org/person/39172/Sabiha%20Çimen
+timestamp: '2026-04-11T08:45:30.679148+00:00'
+title: Q98214261
+turns: 1
+value_label: null
+verdict: verified-high

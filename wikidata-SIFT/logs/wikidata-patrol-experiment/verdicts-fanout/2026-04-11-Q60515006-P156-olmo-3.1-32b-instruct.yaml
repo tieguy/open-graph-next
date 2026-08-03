@@ -1,0 +1,30 @@
+completion_tokens: 296
+cost_usd: 0.0029186000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13705
+property: P156
+property_label: followed by
+rationale: Multiple reliable sources confirm that the Africa Cup of Nations (AFCON)
+  has transitioned to a four-year cycle, with the 2028 edition being the first under
+  the new schedule, following the 2025 and 2027 tournaments. The change was officially
+  announced by CAF president Patrice Motsepe. The 2027 AFCON will proceed as planned,
+  followed by the 2028 edition, and the event will then be held every four years.
+  The new structure replaces the previous biennial schedule. This supports the edit
+  that changed the 'followed by' value from the 2027 edition to the 2029 edition,
+  since the 2028 edition now exists in the new cycle.
+rcid: 2549713777
+revid: 2473072483
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/sport/football/articles/cgjnx6x4281o
+- provenance: verified
+  supports_claim: true
+  url: https://www.aljazeera.com/sports/2025/12/20/afcon-moves-to-4-year-cycle-as-new-africa-nations-league-created
+timestamp: '2026-04-11T17:35:13.698967+00:00'
+title: Q60515006
+turns: 1
+value_label: 2029 Africa Cup of Nations
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 2199
+cost_usd: 0.00231714
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29121
+property: P31
+property_label: instance of
+rationale: The removed reference (P131) incorrectly linked Niceto Alcalá Zamora Avenue
+  to Hortaleza (Q1928529). The property P131 is not suitable for describing an avenue’s
+  relationship to a district. The claim P31 (instance of) is correctly set to 'avenue,'
+  and no independent evidence supports the use of P131 for this claim. The removal
+  of the misapplied reference is justified. The prefetched references confirm the
+  avenue exists in Madrid, but none support the incorrect use of P131.
+rcid: 2550563514
+revid: 2473896142
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://codigo-postal.co/en-us/spain/madrid/madrid/avenida-niceto-alcala-zamora/
+- provenance: verified
+  supports_claim: false
+  url: https://getnofilter.com/en/spot/madrid-from-avenida-de-niceto-alcala-zamora-in-spain
+timestamp: '2026-04-11T18:07:31.292587+00:00'
+title: Q62107332
+turns: 4
+value_label: avenue
+verdict: verified-high

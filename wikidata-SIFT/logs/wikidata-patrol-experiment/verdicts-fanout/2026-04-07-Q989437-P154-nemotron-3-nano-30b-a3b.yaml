@@ -1,0 +1,24 @@
+completion_tokens: 512
+cost_usd: 0.00138865
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 25725
+property: P154
+property_label: logo image
+rationale: No references were found to corroborate the claim that 'Cosplay of Monkey
+  D. Luffy from One Piece at Made in Asia 2023.jpg' is the current logo image of Emmaus.
+  All web searches for relevant sources returned empty or irrelevant results, and
+  no pre-fetched references were available in the edit record. Without any fetches
+  performed, there is no verified source evidence to assess the claim.
+rcid: null
+revid: 2472586501
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Emmaus+charity+logo+image
+timestamp: '2026-04-07T03:19:55.879684+00:00'
+title: Q989437
+turns: 4
+value_label: null
+verdict: unverifiable

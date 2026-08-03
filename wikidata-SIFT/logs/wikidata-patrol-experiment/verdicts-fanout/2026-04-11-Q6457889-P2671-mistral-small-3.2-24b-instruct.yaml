@@ -1,0 +1,27 @@
+completion_tokens: 859
+cost_usd: 0.00173954
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25820
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The edit changes the Google Knowledge Graph ID from "/g/11c718mwtv" to
+  "hola". The new value "hola" appears suspicious and potentially incorrect. However,
+  due to the inability to perform web searches and fetches, it is not possible to
+  verify the correctness of either the old or new values. The lack of references for
+  both values further complicates the verification process.
+rcid: null
+revid: 2469321198
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%2Fg%2F11c718mwtv
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=hola
+timestamp: '2026-04-11T16:01:42.732118+00:00'
+title: Q6457889
+turns: 4
+value_label: null
+verdict: unverifiable

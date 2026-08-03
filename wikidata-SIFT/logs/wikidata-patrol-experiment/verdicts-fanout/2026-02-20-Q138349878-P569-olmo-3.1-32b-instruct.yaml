@@ -1,0 +1,30 @@
+completion_tokens: 1214
+cost_usd: 0.00571
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24908
+property: P569
+property_label: date of birth
+rationale: No reliable or primary source was found to confirm the date of birth '12
+  September 1998' for Ashef Tajwar Amin. Multiple web searches across professional,
+  news, and organizational sources did not yield any authoritative confirmation or
+  denial of this claim. The Wikidata item does not cite any supporting reference for
+  this value.
+rcid: 2540979211
+revid: 2464765846
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.linkedin.com/in/asheftajwaramin/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ashef_Tajwar_Amin
+- provenance: reported
+  supports_claim: false
+  url: https://www.thefinancialexpress.com.bd/
+timestamp: '2026-02-20T02:23:35.670245+00:00'
+title: Q138349878
+turns: 4
+value_label: null
+verdict: unverifiable

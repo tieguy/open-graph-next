@@ -1,0 +1,31 @@
+completion_tokens: 1460
+cost_usd: 0.00120861
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 12793
+property: P106
+property_label: occupation
+rationale: The occupation claim for Reylynn Caster as an actor (Q33999) is strongly
+  supported by multiple independent, verified sources (SoapHub, SWAT CBS Fandom, and
+  TV Insider). These sources explicitly confirm her occupation as an actress through
+  her roles in various television shows and films. However, the newly added reference
+  from English Wikipedia is invalid for Wikidata due to circular citation policies.
+  The claim itself is well-supported and accurate.
+rcid: 2551428376
+revid: 2474728648
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://soaphub.com/actors/reylynn-caster/
+- provenance: verified
+  supports_claim: true
+  url: https://swatcbs.fandom.com/wiki/Reylynn_Caster
+- provenance: verified
+  supports_claim: true
+  url: https://www.tvinsider.com/people/reylynn-caster/
+timestamp: '2026-04-11T09:23:11.964542+00:00'
+title: Q96245246
+turns: 1
+value_label: actor
+verdict: verified-high

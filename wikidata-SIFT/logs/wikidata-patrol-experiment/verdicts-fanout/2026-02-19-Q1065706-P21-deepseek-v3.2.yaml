@@ -1,0 +1,24 @@
+completion_tokens: 228
+cost_usd: 0.00906688
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 19549
+property: P21
+property_label: sex or gender
+rationale: Maria of Castile (1401-1458) was a historical queen consort of Aragon,
+  born as a female to King Henry III of Castile and Catherine of Lancaster. The claim
+  that she was a trans man is historically unsupported and appears to be vandalism.
+  All authoritative sources describe her as a woman who served as regent while her
+  husband was absent, with no mention of gender transition. The Wikipedia reference
+  cited in the Wikidata edit (Italian Wikipedia) does not contain information supporting
+  this claim upon inspection. The edit was appropriately flagged with 'possible vandalism'
+  tags by community patrollers.
+rcid: 2540984425
+revid: 2464770766
+sources: []
+timestamp: '2026-02-19T22:55:49.417501+00:00'
+title: Q1065706
+turns: 2
+value_label: trans man
+verdict: incorrect

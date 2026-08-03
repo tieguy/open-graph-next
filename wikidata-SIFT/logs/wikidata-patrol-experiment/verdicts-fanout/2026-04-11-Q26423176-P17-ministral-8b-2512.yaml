@@ -1,0 +1,30 @@
+completion_tokens: 1932
+cost_usd: 0.00251028
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27450
+property: P17
+property_label: country
+rationale: The edit incorrectly changes the country of 33, Duck Street (Q26423176)
+  from the United Kingdom (Q145) to the People's Republic of China (Q148). The item’s
+  description, address (P6375), and heritage designation (P1435) all confirm its location
+  in the UK. No references support the new value, and all other claims align with
+  the UK. The change is unsupported and contradicts all available evidence.
+rcid: null
+revid: 2464601070
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nationsonline.org/oneworld/china.htm
+- provenance: verified
+  supports_claim: false
+  url: https://english.www.gov.cn/
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Special:EntityData/Q26423176
+timestamp: '2026-04-11T09:53:12.846434+00:00'
+title: Q26423176
+turns: 3
+value_label: People's Republic of China
+verdict: incorrect

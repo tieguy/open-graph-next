@@ -1,0 +1,23 @@
+completion_tokens: 671
+cost_usd: 0.00197941125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27814
+property: P973
+property_label: described at URL
+rationale: The old URL returned an HTTP 202 status, indicating it is temporarily unavailable.
+  The new URL was prefetched, but no independent sources could be verified due to
+  a payment issue with the search API. Therefore, the edit cannot be confirmed or
+  denied based on the available evidence.
+rcid: 2550605803
+revid: 2473936793
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.vmfa.museum/artworks/william-smith-and-his-grandson-59913
+timestamp: '2026-04-11T12:02:59.341408+00:00'
+title: Q36923000
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 1504
+cost_usd: 0.00202938
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17760
+property: P136
+property_label: genre
+rationale: The claim that 'The Structure of Scientific Revolutions' has the genre
+  'Kinmen Airport' is factually incorrect and logically inconsistent. The book is
+  a foundational work in the history and philosophy of science, widely recognized
+  as an essay and philosophical text. No credible source supports associating this
+  work with an airport. The cited reference (French Wikipedia) is unreliable for this
+  claim and does not substantiate the assertion. Independent sources, including the
+  publisher's website and Amazon product pages, categorize the book under philosophy
+  and history of science, not aviation.
+rcid: null
+revid: 2459970856
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://press.uchicago.edu/ucp/books/book/chicago/S/bo13179781.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Structure-Scientific-Revolutions-50th-Anniversary/dp/0226458121
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/Structure-Scientific-Revolutions-Thomas-Kuhn/dp/0226458083
+timestamp: '2026-04-10T13:56:37.969383+00:00'
+title: Q951060
+turns: 1
+value_label: Kinmen Airport
+verdict: incorrect

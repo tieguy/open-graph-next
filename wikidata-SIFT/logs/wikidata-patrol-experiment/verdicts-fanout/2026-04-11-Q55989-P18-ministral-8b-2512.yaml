@@ -1,0 +1,31 @@
+completion_tokens: 1953
+cost_usd: 0.0026284200000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22021
+property: P18
+property_label: image
+rationale: The investigation could not fetch or verify any independent sources or
+  references for either the old image ('Peugeot 306-Cabrio-I.jpg') or the new image
+  ('Chevrolet Corvette C8 convertibles IAA 2021 1X7A0152.jpg'). The prefetched references
+  were generic stock image search pages that did not provide evidence for the specific
+  images' relevance to the item 'convertible'. Without verified evidence or references,
+  the edit cannot be confirmed or denied.
+rcid: null
+revid: 2470330698
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://stock.adobe.com/search?k=convertible
+- provenance: verified
+  supports_claim: false
+  url: https://unsplash.com/s/photos/convertible
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/convertible
+timestamp: '2026-04-11T17:53:59.694079+00:00'
+title: Q55989
+turns: 2
+value_label: null
+verdict: unverifiable

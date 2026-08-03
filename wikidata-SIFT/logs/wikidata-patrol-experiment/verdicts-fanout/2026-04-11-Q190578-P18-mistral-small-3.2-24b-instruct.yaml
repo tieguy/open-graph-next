@@ -1,0 +1,26 @@
+completion_tokens: 332
+cost_usd: 0.0016913749999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17156
+property: P18
+property_label: image
+rationale: The investigation encountered a payment error when attempting to search
+  for the images, preventing the verification of both the old and new image claims.
+  Without access to the necessary sources, it is not possible to confirm the correctness
+  of the image change.
+rcid: null
+revid: 2471361616
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://api.search.brave.com/res/v1/web/search?q=sedan+image+2024+Audi+A3+8Y+Sedan+IMG+1019.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://api.search.brave.com/res/v1/web/search?q=sedan+image+1991-1996+Buick+Park+Avenue.jpg
+timestamp: '2026-04-11T10:26:34.195128+00:00'
+title: Q190578
+turns: 2
+value_label: null
+verdict: unverifiable

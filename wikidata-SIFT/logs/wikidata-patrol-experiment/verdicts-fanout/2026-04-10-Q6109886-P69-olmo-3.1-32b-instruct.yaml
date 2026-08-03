@@ -1,0 +1,31 @@
+completion_tokens: 831
+cost_usd: 0.0031532
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13273
+property: P69
+property_label: educated at
+rationale: No reliable, independently verifiable source mentions Roberto Musso's education
+  at the 'National College of Professional Technical Education.' The cited Wikidata
+  claim lacks supporting evidence from primary or secondary reputable sources. The
+  primary source page provides only biographical data (birth date and place), and
+  other sources either do not mention education or refer to a different individual
+  named Roberto Musso.
+rcid: 2551399955
+revid: 2474703750
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://happyhappybirthday.net/es/age/roberto-musso-person_gealqqg
+- provenance: verified
+  supports_claim: false
+  url: https://marvin.com.mx/el-cuarteto-de-nos-entrevista-roberto-daniel-musso/
+- provenance: verified
+  supports_claim: false
+  url: https://www.technologyleadershipsummit.com/2021/speaker/230706/roberto-musso
+timestamp: '2026-04-10T10:18:32.448117+00:00'
+title: Q6109886
+turns: 1
+value_label: National College of Professional Technical Education
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 944
+cost_usd: 0.0075588124999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 78110
+property: P742
+property_label: pseudonym
+rationale: The change from 'Julie Edwards' to 'Dame Julie Andrews' is justified. 'Julie
+  Edwards' is indeed one of her pseudonyms, but 'Dame Julie Andrews' is her formal
+  title and is more commonly used in official contexts. The edit improves the accuracy
+  and formality of the pseudonym listed for Julie Andrews.
+rcid: null
+revid: 2471416401
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/people/literature-and-arts/music-popular-and-jazz-biographies/julie-andrews
+timestamp: '2026-04-11T08:51:43.269204+00:00'
+title: Q161819
+turns: 3
+value_label: null
+verdict: verified-high

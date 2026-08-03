@@ -1,0 +1,24 @@
+completion_tokens: 493
+cost_usd: 0.0006662
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 11352
+property: P1814
+property_label: name in kana
+rationale: The change to P1814 (name in kana) on Q11464251 appears problematic. No
+  sources were fetched to verify the claim, making verification impossible with the
+  current investigation scope, so the appropriate verdict is unverifiable. However,
+  the alteration from 'おの えいじろう' to 'eros ramazzott*' lacks linguistic justification
+  and reliable sourcing, necessitating further investigation before modification.
+  Until verified sources confirm the reading, the update should be treated as suspect.
+  No URL entries were added to sources because no web_search or web_fetch operations
+  were performed during this phase of the investigation.
+rcid: null
+revid: 2464869007
+sources: []
+timestamp: '2026-04-07T08:32:26.676206+00:00'
+title: Q11464251
+turns: 1
+value_label: null
+verdict: suspect

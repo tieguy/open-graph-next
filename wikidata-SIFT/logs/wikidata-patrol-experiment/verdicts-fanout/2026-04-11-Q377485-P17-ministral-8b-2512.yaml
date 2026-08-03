@@ -1,0 +1,31 @@
+completion_tokens: 1309
+cost_usd: 0.00352908
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34865
+property: P17
+property_label: country
+rationale: The claim that Mount Sinai (Q377485) is located in Finland (Q1412) is incorrect.
+  Multiple authoritative sources confirm that Mount Sinai is located in the Sinai
+  Peninsula, Egypt (Q79). The old value (Egypt) is well-supported by primary sources,
+  while the new value (Finnish) lacks any credible evidence or support. The reference
+  from Czech Wikipedia is unreliable for this claim and does not substantiate the
+  change.
+rcid: 2550179591
+revid: 2473523123
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newworldencyclopedia.org/entry/Mount_Sinai
+- provenance: verified
+  supports_claim: false
+  url: https://www.worldhistory.org/Mount_Sinai/
+- provenance: verified
+  supports_claim: false
+  url: http://www.peakbagger.com/peak.aspx?pid=10459
+timestamp: '2026-04-11T07:25:07.952658+00:00'
+title: Q377485
+turns: 3
+value_label: Finnish
+verdict: incorrect

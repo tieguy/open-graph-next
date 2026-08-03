@@ -1,0 +1,32 @@
+completion_tokens: 1863
+cost_usd: 0.0019735200000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20715
+property: P373
+property_label: Commons category
+rationale: The edit incorrectly removed the qualifier 'arménienne' from the Commons
+  category for Église Maranatha de Valence (Drôme). The old category ('Église arménienne
+  Maranatha de Valence (Drôme)') was supported by explicit evidence from Commons image
+  filenames (e.g., 'Église Arménienne Maranatha - Valence') and the item's description.
+  The new category ('Église Maranatha de Valence (Drôme)') omits this critical detail,
+  contradicting the available evidence. No independent corroborating sources were
+  found, and the removal of the Armenian affiliation qualifier is unsupported.
+rcid: 2549982364
+revid: 2473331775
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:%C3%89glise_arm%C3%A9nienne_Maranatha_de_Valence_(Dr%C3%B4me)
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Maranatha
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Maranatha_churches
+timestamp: '2026-04-11T14:48:53.018589+00:00'
+title: Q38389291
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1936
+cost_usd: 0.00114186
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 11872
+property: P856
+property_label: official website
+rationale: The edit changes the official website from an outdated HTTP URL (`http://www.toho-titanium.co.jp/`)
+  to the correct HTTPS URL (`https://www.toho-titanium.co.jp/`). The new value is
+  confirmed as the official website by the domain itself (`https://www.toho-titanium.co.jp/en/`),
+  which is a primary source. The old value is unreachable and likely outdated. While
+  the Japanese Wikipedia reference was cited, it was unverifiable in this session.
+  The change is justified and correct, and the new value is independently corroborated
+  by a verified primary source.
+rcid: 2550790938
+revid: 2474116176
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.toho-titanium.co.jp/en/
+- provenance: verified
+  supports_claim: false
+  url: https://sharedresearch.jp/en/companies/5727
+timestamp: '2026-04-11T16:31:01.793057+00:00'
+title: Q11528432
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 2455
+cost_usd: 0.02056587
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 195048
+property: P569
+property_label: date of birth
+rationale: The edit incorrectly changes Duke Ellington's date of birth from 29 April
+  1899 to 29 April 1898. Authoritative sources such as the Integrated Authority File
+  (GND) and the Bibliothèque nationale de France (BnF) explicitly confirm his birth
+  year as 1899. The new value lacks support from these primary sources, making the
+  change factually incorrect.
+rcid: 2549483558
+revid: 2472848291
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118529994
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb13893638w
+timestamp: '2026-04-11T16:43:47.803827+00:00'
+title: Q4030
+turns: 7
+value_label: null
+verdict: incorrect

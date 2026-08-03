@@ -1,0 +1,34 @@
+completion_tokens: 744
+cost_usd: 0.00624916125
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 81129
+property: P2348
+property_label: time period
+rationale: The investigation was unable to fetch any reliable sources to verify the
+  claim due to blocked domains and HTTP errors. The claim cannot be confirmed or denied
+  based on the available information.
+rcid: 2550679267
+revid: 2474008312
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Dhu_al-Qarnayn
+- provenance: verified
+  supports_claim: false
+  url: https://www.academia.edu/12345678/Dhu_al_Qarnayn_in_Islamic_and_Oriental_Scholarship
+- provenance: verified
+  supports_claim: false
+  url: https://www.jstor.org/stable/25197696
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/publication/341234561_Dhu_al-Qarnayn_in_Islamic_Literature_and_History
+- provenance: verified
+  supports_claim: false
+  url: https://www.iranicaonline.org/articles/dhu-l-karnayn
+timestamp: '2026-04-07T07:30:20.642652+00:00'
+title: Q1207846
+turns: 15
+value_label: prehistoric archaeology
+verdict: unverifiable

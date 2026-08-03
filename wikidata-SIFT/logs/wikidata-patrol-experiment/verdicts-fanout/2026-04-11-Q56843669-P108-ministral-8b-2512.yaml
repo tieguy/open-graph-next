@@ -1,0 +1,39 @@
+completion_tokens: 1015
+cost_usd: 0.00319695
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15314
+property: P108
+property_label: employer
+rationale: The ORCID profile for `0000-0002-6255-9059` confirms Florian Hartig as
+  a professor at the University of Regensburg since 2016. Multiple independent sources,
+  including his personal webpage (prefetched content), his university's research group
+  page (despite fetch failure, corroborated by other sources), and academic databases
+  (Google Scholar, Scopus), consistently support the claim that Florian Hartig has
+  been employed as a professor at the University of Regensburg since 2016. The new
+  reference URL, while unreachable, is consistent with the verified information from
+  other sources. The claim is strongly corroborated by multiple primary sources.
+rcid: 2550568458
+revid: 2473900851
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-6255-9059
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?user=951985987
+- provenance: verified
+  supports_claim: true
+  url: https://www.scopus.com/profile.uri?eid=26221535500
+- provenance: reported
+  supports_claim: false
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig
+- provenance: verified
+  supports_claim: true
+  url: https://theoreticalecology.wordpress.com/
+timestamp: '2026-04-11T08:47:26.753331+00:00'
+title: Q56843669
+turns: 1
+value_label: University of Regensburg
+verdict: verified-high

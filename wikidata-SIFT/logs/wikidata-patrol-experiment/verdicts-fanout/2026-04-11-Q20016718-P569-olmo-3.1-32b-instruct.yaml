@@ -1,0 +1,31 @@
+completion_tokens: 1629
+cost_usd: 0.0034266
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12246
+property: P569
+property_label: date of birth
+rationale: The cited reference to Spanish Wikipedia does not contain a verifiable
+  date of birth for Néstor Manrique Oviedo Guzmán, and no independent sources provide
+  a reliable date of birth for this individual. Therefore, the change cannot be verified.
+rcid: 2551085711
+revid: 2474401700
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/N%C3%A9stor_Manrique_Oviedo_Guzm%C3%A1n
+- provenance: unverifiable
+  supports_claim: false
+  url: http://www.pgrweb.go.cr/scij/Busqueda/Normativa/Pronunciamiento/pro_ficha.aspx?param1=PRD&param6=1&nDictamen=17901&strTipM=T
+- provenance: verified
+  supports_claim: false
+  url: https://radaris.com/p/Nestor/Oviedo/
+- provenance: unverifiable
+  supports_claim: false
+  url: https://www.ojoalvoto.com/actores/nestor-manrique-oviedo-guzman
+timestamp: '2026-04-11T05:42:54.439670+00:00'
+title: Q20016718
+turns: 1
+value_label: null
+verdict: unverifiable

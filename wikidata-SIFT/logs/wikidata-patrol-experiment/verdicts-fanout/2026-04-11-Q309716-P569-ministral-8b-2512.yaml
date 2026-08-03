@@ -1,0 +1,31 @@
+completion_tokens: 1879
+cost_usd: 0.01093053
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 83638
+property: P569
+property_label: date of birth
+rationale: The edit changed Michel Butor's date of birth from 14 September 1855 (with
+  multiple cited references) to 14 September 1854 (with no supporting references).
+  Independent and verified sources (GND, Goodreads, Biographs.org) confirm Michel
+  Butor's birth date as 14 September 1926. The new value is not supported by any authoritative
+  source, and the old value, while cited, appears to be incorrect based on these verified
+  sources. The edit is therefore incorrect and should be reverted.
+rcid: 2549487939
+revid: 2472852523
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.deutsche-biographie.de/gnd118518135.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.goodreads.com/author/show/29880.Michel_Butor
+- provenance: verified
+  supports_claim: false
+  url: https://biographs.org/michel-butor
+timestamp: '2026-04-11T16:48:53.650120+00:00'
+title: Q309716
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 2051
+cost_usd: 0.00328392
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29263
+property: P225
+property_label: taxon name
+rationale: The taxon name change from 'messitus GOATitus' to 'adolfitus hitleritus'
+  for Glaucomys sabrinus (Q1094722) is incorrect. Both values are nonsensical and
+  unsupported by authoritative sources. The correct scientific name is 'Glaucomys
+  sabrinus,' as confirmed by verified sources like Species.Wikimedia.org and Idaho
+  Fish & Game. The new value violates taxonomic naming conventions and lacks any credible
+  reference support.
+rcid: null
+revid: 2471629089
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://species.wikimedia.org/wiki/Glaucomys_sabrinus
+- provenance: verified
+  supports_claim: false
+  url: https://idfg.idaho.gov/species/taxa/16055
+timestamp: '2026-04-11T16:51:52.403486+00:00'
+title: Q1094722
+turns: 2
+value_label: null
+verdict: incorrect

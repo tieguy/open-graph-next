@@ -1,0 +1,27 @@
+completion_tokens: 1569
+cost_usd: 0.0066744000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28665
+property: P2139
+property_label: total revenue
+rationale: The claimed total revenue of 100,500,000,000 Russian rubles for VK is not
+  supported by the referenced financial statement, which explicitly states the revenue
+  for the year ended December 31, 2019 as 97,629,000,000 RUB. This is corroborated
+  by independent reporting from Reuters and Bloomberg. Therefore, the edit introducing
+  the higher value is factually incorrect.
+rcid: 2550543807
+revid: 2473877385
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://corp.imgsmail.ru/media/files/mail.rugroupifrsfy2019.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.reuters.com/article/business/media/vk-posts-2019-results-idUSKCN20Y1ZP/
+timestamp: '2026-04-10T13:03:33.575614+00:00'
+title: Q1885456
+turns: 1
+value_label: null
+verdict: incorrect

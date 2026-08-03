@@ -1,0 +1,25 @@
+completion_tokens: 1827
+cost_usd: 0.0036310500000000002
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42342
+property: P571
+property_label: inception
+rationale: The removed claim of '31 March 2020' as the inception date for Alpiq Holding
+  (Q679402) is incorrect. The prefetched source from Swiss-partner.biz confirms that
+  Alpiq Holding was founded in 2009 due to the merger of Energie Ouest Suisse (EOS)
+  and Aare-Tessin AG für Elektrizität (Atel). The LEI reference alone does not substantiate
+  the claim of 2020 as the inception date, and the evidence directly contradicts the
+  removed claim.
+rcid: null
+revid: 2471235559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://swiss-partner.biz/swiss-companies/overview-of-the-swiss-company-alpiq-holding
+timestamp: '2026-04-11T07:29:06.990929+00:00'
+title: Q679402
+turns: 4
+value_label: null
+verdict: incorrect

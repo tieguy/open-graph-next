@@ -1,0 +1,32 @@
+completion_tokens: 1545
+cost_usd: 0.08316599999999999
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 75441
+property: P569
+property_label: date of birth
+rationale: Multiple independent sources consistently report Reid Harrison was born
+  on November 6, 1958, not November 9, 1959 as claimed in this edit. Two separate
+  wiki databases (Angelo Rules Wiki and Grokipedia) both cite November 6, 1958 as
+  his birth date. Critically, Reid Harrison died on January 15, 2024, at age 65, which
+  mathematically confirms a 1958 birth year (he would have turned 65 in November 2023).
+  The edit introduces an incorrect year (1959) and an incorrect day (9th instead of
+  6th).
+rcid: 2540964045
+revid: 2464751715
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://angelorules.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://blog.sitcomsonline.com/2024/12/in-memoriam-remembering-sitcom-stars-we.html
+timestamp: '2026-02-20T04:09:57.352568+00:00'
+title: Q6104560
+turns: 6
+value_label: null
+verdict: incorrect

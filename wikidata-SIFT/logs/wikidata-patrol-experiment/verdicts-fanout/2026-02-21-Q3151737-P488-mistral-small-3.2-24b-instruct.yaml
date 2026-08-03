@@ -1,0 +1,25 @@
+completion_tokens: 866
+cost_usd: 0.0143249
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 140651
+property: P488
+property_label: chairperson
+rationale: The Egmont Institute's official staff page and staff directory both confirm
+  that Alexis Brouhns is the Chair of the Board of Directors. This information is
+  consistent and verified from primary sources.
+rcid: 2540921498
+revid: 2464712520
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/alexis-brouhns/
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/
+timestamp: '2026-02-21T00:21:59.566615+00:00'
+title: Q3151737
+turns: 11
+value_label: Alexis Brouhns
+verdict: verified-high

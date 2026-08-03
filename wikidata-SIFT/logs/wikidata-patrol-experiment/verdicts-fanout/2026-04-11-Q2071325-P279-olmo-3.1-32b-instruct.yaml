@@ -1,0 +1,36 @@
+completion_tokens: 394
+cost_usd: 0.0036354
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16995
+property: P279
+property_label: subclass of
+rationale: Multiple independent sources confirm that Kangean (Kangeanic) is classified
+  as a Javanic language within the Austronesian family, and not as a direct subclass
+  of Madurese. Ethnologue and Glottolog both list Kangean as an Eastern Javanic language.
+  The cited reference (journal.ugm.ac.id) notes that the classification as a sub-division
+  of Madurese is based on an obsolete system and explicitly references Wouk and Ross
+  (2002), which itself no longer maintains this classification. Wikipedia and other
+  linguistic resources align with the Javanic classification for Kangean. Therefore,
+  changing the P279 from Madurese to Javanic is correct.
+rcid: null
+revid: 2433523780
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Kangean_language
+- provenance: verified
+  supports_claim: true
+  url: https://www.ethnologue.com/language/kkv
+- provenance: reported
+  supports_claim: true
+  url: https://glottolog.org/resource/languoid/id/kang1289
+- provenance: unreachable (timeout)
+  supports_claim: true
+  url: https://journal.ugm.ac.id/jurnal-humaniora/article/view/1337
+timestamp: '2026-04-11T07:15:47.428304+00:00'
+title: Q2071325
+turns: 1
+value_label: Javanic
+verdict: verified-high

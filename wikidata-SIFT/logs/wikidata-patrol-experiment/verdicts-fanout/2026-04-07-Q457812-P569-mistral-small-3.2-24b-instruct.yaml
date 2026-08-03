@@ -1,0 +1,28 @@
+completion_tokens: 1029
+cost_usd: 0.0038999062499999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38855
+property: P569
+property_label: date of birth
+rationale: The original date of birth (November 5, 1974) is more consistently supported
+  by various sources. The new date (November 5, 1942) does not have strong independent
+  corroboration.
+rcid: null
+revid: 2471057389
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Susana_Ch%C3%A1vez_Castillo
+- provenance: verified
+  supports_claim: false
+  url: https://www.biografiasyvidas.com/biografia/c/chavez-susana.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.jornada.com.mx/2011/01/07/index.php?section=politica&article=024n1pol
+timestamp: '2026-04-07T10:04:03.824205+00:00'
+title: Q457812
+turns: 6
+value_label: null
+verdict: incorrect

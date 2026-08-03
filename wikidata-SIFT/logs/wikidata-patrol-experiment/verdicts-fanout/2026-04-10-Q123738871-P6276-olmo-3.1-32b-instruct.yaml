@@ -1,0 +1,23 @@
+completion_tokens: 1379
+cost_usd: 0.00615
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26613
+property: P6276
+property_label: Amazon Music artist ID
+rationale: The Amazon Music API documentation confirms the format of artist IDs but
+  does not verify that B0DS9LVYDT is assigned to Josh Universe. No independent, publicly
+  accessible source or third-party platform confirms this mapping. Therefore, the
+  claim cannot be verified based on available evidence.
+rcid: 2551428339
+revid: 2474728618
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://developer.amazon.com/docs/music/API_web_artist.html
+timestamp: '2026-04-10T13:16:35.527993+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: unverifiable

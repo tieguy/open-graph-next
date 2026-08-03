@@ -1,0 +1,29 @@
+completion_tokens: 734
+cost_usd: 0.01893615
+diff_type: reference_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 375787
+property: P105
+property_label: taxon rank
+rationale: Independent confirmation for the taxon rank claim could not be established
+  through available search methods. No reliable sources were found to verify or contradict
+  the addition of 'species' as a taxon rank, and no primary taxonomic references were
+  successfully accessed to support this classification.
+rcid: null
+revid: 2464396670
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://vertebrate-ecology.univ-lemberg.be/chefflink.php?english=0&user_id=4923&species=Falco_tinnunculus
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wiktionary.org/wiki/taxon#fr
+- provenance: reported
+  supports_claim: false
+  url: https://sv.wiktionary.org/wiki/taxon#sv
+timestamp: '2026-04-07T06:50:09.966040+00:00'
+title: Q26490
+turns: 15
+value_label: species
+verdict: unverifiable

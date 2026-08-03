@@ -1,0 +1,29 @@
+completion_tokens: 1615
+cost_usd: 0.0035308
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12809
+property: P625
+property_label: coordinate location
+rationale: The coordinate value for the Litani River's source (34.0145, 36.0978) is
+  explicitly and consistently reported by multiple independent and reliable sources,
+  including Russian Wikipedia, English Wikipedia, and OpenStreetMap. This confirms
+  the value is correct and supports changing its rank from 'deprecated' to 'normal'.
+rcid: 2551393662
+revid: 2474697934
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ru.wikipedia.org/wiki/Литани_(река)
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Litani_River
+- provenance: verified
+  supports_claim: true
+  url: https://www.openstreetmap.org/node/14710130
+timestamp: '2026-04-11T10:06:19.418892+00:00'
+title: Q456415
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 414
+cost_usd: 0.007789299999999999
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 18213
+property: P1616
+property_label: SIREN number
+rationale: The edit adds SIREN number '84841665700015' to entity Q138348741. The referenced
+  URL from the French government's official business directory (annuaire-entreprises.data.gouv.fr)
+  explicitly shows 'ASSOCIATION TEAM ARTANDSHOW' with SIREN 848 416 657 and SIRET
+  848 416 657 00015, confirming the exact SIREN/SIRET numbers. This is a primary source
+  from the French government's open data portal, providing official business registration
+  information. The URL contains the SIREN in its path and displays the exact SIREN/SIRET
+  numbers on the page, directly supporting the claim.
+rcid: 2540936304
+revid: 2464726593
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/association-team-artandshow-848416657
+timestamp: '2026-02-20T16:55:11.308915+00:00'
+title: Q138348741
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 1346
+cost_usd: 0.005745725
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60206
+property: P856
+property_label: official website
+rationale: The claim that 'http://www.newyorktabesminare.com' is the official website
+  for 'Five Minarets in New York' could not be verified through the available sources.
+  The website itself does not provide clear confirmation, and other reliable sources
+  like Rotten Tomatoes do not support the claim.
+rcid: null
+revid: 2470344359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.newyorktabesminare.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.rottentomatoes.com/m/five_minarets_in_new_york
+timestamp: '2026-04-10T08:10:36.656189+00:00'
+title: Q1481681
+turns: 5
+value_label: null
+verdict: unverifiable

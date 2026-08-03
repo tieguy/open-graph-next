@@ -1,0 +1,31 @@
+completion_tokens: 380
+cost_usd: 0.0027286
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12503
+property: P27
+property_label: country of citizenship
+rationale: The new value 'Hokey' is not a recognized country and does not correspond
+  to any official entity. Multiple verified sources confirm Shelley-Ann Brown's country
+  of citizenship as Canada. This change appears to be an error or vandalism.
+rcid: null
+revid: 2462852692
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://canadianathletesnow.ca/athletes/shelley-ann-brown/
+- provenance: verified
+  supports_claim: true
+  url: https://olympic.ca/team-canada/shelley-ann-brown/
+- provenance: verified
+  supports_claim: true
+  url: https://www.olympedia.org/athletes/118710
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Shelley-Ann_Brown
+timestamp: '2026-04-11T16:19:50.171653+00:00'
+title: Q2409410
+turns: 1
+value_label: Hokey
+verdict: incorrect

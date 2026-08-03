@@ -1,0 +1,32 @@
+completion_tokens: 1320
+cost_usd: 0.004535320000000001
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44260
+property: P18
+property_label: image
+rationale: The edit removed a qualifier from the image claim for Assala Nasri, but
+  there are no references cited for the change. Independent sources do not provide
+  clear information about the qualifier 'media legend'. Further investigation is needed
+  to verify the accuracy of the edit.
+rcid: null
+revid: 2472125521
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bintbattutadiaries.com/2018/09/21/assala-nasri-a-syrian-nightingale
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/asala
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/assala
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/assala-nasri
+timestamp: '2026-04-11T10:07:18.819776+00:00'
+title: Q2353139
+turns: 4
+value_label: null
+verdict: unverifiable

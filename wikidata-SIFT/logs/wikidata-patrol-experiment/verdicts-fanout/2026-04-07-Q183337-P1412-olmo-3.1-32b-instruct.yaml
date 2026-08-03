@@ -1,0 +1,30 @@
+completion_tokens: 1060
+cost_usd: 0.020634
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 99990
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The value 'cha-cha-chá' is not a language but a genre of Cuban music. Independent
+  authoritative sources consistently list David Attenborough's primary language as
+  English and do not mention any other language. The cited sources referenced in the
+  edit could not be verified due to unavailability. Therefore, the claim is factually
+  incorrect and should be reverted.
+rcid: 2549923767
+revid: 2473277640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/David-Attenborough
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/bbcthree/article/1m7q7k5j/david-attenborough-biography
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/David_Attenborough
+timestamp: '2026-04-07T13:43:25.421429+00:00'
+title: Q183337
+turns: 5
+value_label: cha-cha-chá
+verdict: incorrect

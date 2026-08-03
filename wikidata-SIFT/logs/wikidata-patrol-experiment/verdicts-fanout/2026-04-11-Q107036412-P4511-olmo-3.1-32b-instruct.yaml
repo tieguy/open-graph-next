@@ -1,0 +1,31 @@
+completion_tokens: 1811
+cost_usd: 0.003945
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14292
+property: P4511
+property_label: vertical depth
+rationale: Neither the old value '+150' nor the new value '50 centimetre' for the
+  vertical depth of 'I am' by Salvatore Garau is supported by any independent, authoritative
+  source. Multiple reputable sources, including Wikipedia, The Art Story, and Artsy,
+  describe the work as a conceptual or invisible sculpture but do not provide any
+  physical dimensions. Therefore, the edit is not substantiated by evidence and cannot
+  be considered an improvement.
+rcid: null
+revid: 2470996654
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Salvatore_Garau
+- provenance: verified
+  supports_claim: false
+  url: https://www.theartstory.org/artist/garau-salvatore/
+- provenance: verified
+  supports_claim: false
+  url: https://www.artsy.net/artwork/salvatore-garau-i-am
+timestamp: '2026-04-11T16:14:19.788143+00:00'
+title: Q107036412
+turns: 1
+value_label: null
+verdict: unverifiable

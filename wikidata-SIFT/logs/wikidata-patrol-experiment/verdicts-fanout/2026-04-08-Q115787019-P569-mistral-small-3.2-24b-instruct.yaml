@@ -1,0 +1,21 @@
+completion_tokens: 913
+cost_usd: 0.00472372375
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47770
+property: P569
+property_label: date of birth
+rationale: The edit's reference could not be accessed, and no independent sources
+  were found to confirm the date of birth. Therefore, the claim cannot be verified.
+rcid: 2549630432
+revid: 2472991596
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://iranwire.com/en/politics/111407-tehran-doctor-tortured-and-killed-for-treating-wounded-protesters/
+timestamp: '2026-04-08T18:37:31.483167+00:00'
+title: Q115787019
+turns: 7
+value_label: null
+verdict: unverifiable

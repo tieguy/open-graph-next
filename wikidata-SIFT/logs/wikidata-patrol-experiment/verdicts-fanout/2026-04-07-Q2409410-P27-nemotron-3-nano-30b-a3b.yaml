@@ -1,0 +1,23 @@
+completion_tokens: 643
+cost_usd: 0.00463035
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 90035
+property: P27
+property_label: country of citizenship
+rationale: Despite extensive search efforts, no independent evidence confirming that
+  'Hokey' as nationality was found publicly available. Italian Wikipedia mentions
+  this edit but its content could not be accessed due to blocked domains. No other
+  credible sources corroborate the nationality change.
+rcid: null
+revid: 2462852692
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://it.wikipedia.org/?oldid=93904014
+timestamp: '2026-04-07T06:10:44.909034+00:00'
+title: Q2409410
+turns: 15
+value_label: Hokey
+verdict: unverifiable

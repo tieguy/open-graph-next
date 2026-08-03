@@ -1,0 +1,30 @@
+completion_tokens: 1146
+cost_usd: 0.02044
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 98762
+property: P856
+property_label: official website
+rationale: No authoritative sources support https://www.flyasiana.com as the official
+  website of Chikushino city. The previous official website used the city's standard
+  domain (city.chikushino.fukuoka.jp), and there is no evidence that the new value
+  is correct. 'FlyA siana' is a Japanese low-cost airline, not a municipal government,
+  and there is no indication of a legitimate connection.
+rcid: null
+revid: 2472099838
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.chikushino.fukuoka.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Chikushino,_Fukuoka
+- provenance: reported
+  supports_claim: false
+  url: https://www.flyasiana.com/
+timestamp: '2026-04-07T10:45:16.174435+00:00'
+title: Q844140
+turns: 12
+value_label: null
+verdict: incorrect

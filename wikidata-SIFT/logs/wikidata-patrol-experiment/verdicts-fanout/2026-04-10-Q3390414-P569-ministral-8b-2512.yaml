@@ -1,0 +1,39 @@
+completion_tokens: 2667
+cost_usd: 0.00530061
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41656
+property: P569
+property_label: date of birth
+rationale: Multiple verified sources (Amazon Prime Video, FilmAffinity, TMDB, Plex,
+  TV Insider, and La Vanguardia) consistently confirm that Álex González was born
+  on **13 August 1980**, not 1999. The original reference (filmportal.de) is unreachable,
+  and no credible evidence supports the revised date. The proposed change contradicts
+  all available independent corroboration.
+rcid: null
+revid: 2463918541
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/prime-video/actor/%C3%81lex-Gonz%C3%A1lez/amzn1.dv.gti.ea702226-4037-41ef-b2e8-b206e7d57fb9/
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmaffinity.com/us/name.php?name-id=952753925
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/person/1030252-alex-gonzalez?language=en-US
+- provenance: verified
+  supports_claim: false
+  url: https://watch.plex.tv/person/alex-gonzalez
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvinsider.com/people/alex-gonzalez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lavanguardia.com/magazine/protagonistas/20260114/11439634/alex-gonzalez-actor-45-anos-40-clave-empezar-cuidar-regulacion-hormonal-verme-joven-sentirme-forma-mmn.html
+timestamp: '2026-04-10T10:27:07.103464+00:00'
+title: Q3390414
+turns: 3
+value_label: null
+verdict: incorrect

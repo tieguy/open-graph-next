@@ -1,0 +1,25 @@
+completion_tokens: 1199
+cost_usd: 0.00378364375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39639
+property: P21
+property_label: sex or gender
+rationale: The fetched sources do not provide explicit information about Elias Hadaya's
+  gender. The reference 'inferred from person's given name' is not sufficient to verify
+  the gender accurately.
+rcid: 2549662898
+revid: 2473023126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1049254/elias-hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/272542
+timestamp: '2026-04-11T08:15:36.872482+00:00'
+title: Q89080747
+turns: 4
+value_label: female
+verdict: unverifiable

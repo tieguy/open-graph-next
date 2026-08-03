@@ -1,0 +1,29 @@
+completion_tokens: 473
+cost_usd: 0.00161253125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17228
+property: P106
+property_label: occupation
+rationale: The removed claim had no references, and independent searches did not yield
+  verifiable sources confirming or denying the occupation of 'radio editor' for Gábor
+  Báthory. Without direct evidence, it is impossible to confirm the correctness of
+  the removal.
+rcid: 2550547176
+revid: 2473880353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.concurrences.com/en/auteur/Gabor-Bathory
+- provenance: verified
+  supports_claim: false
+  url: https://www.electronicbeats.net/24-hours-in-budapest-gabor-csabai-part-two-of-six
+- provenance: verified
+  supports_claim: false
+  url: https://www.pinterest.com/bathorygabor/
+timestamp: '2026-04-11T16:12:41.547914+00:00'
+title: Q104927331
+turns: 2
+value_label: radio editor
+verdict: unverifiable

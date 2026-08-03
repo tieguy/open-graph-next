@@ -1,0 +1,30 @@
+completion_tokens: 1790
+cost_usd: 0.00324873
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32425
+property: P348
+property_label: software version identifier
+rationale: The claim that '1.73.32' is the correct software version identifier for
+  flat assembler as of 2023-12-04 is incorrect. The official download page (reported)
+  and independent sources (verified) indicate that the latest version listed is '1.73.35'
+  as of February 2026, which contradicts the claim. No verified source confirms '1.73.32'
+  as the version for the specified date.
+rcid: 2550388630
+revid: 2473726456
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://flatassembler.net/download.php
+- provenance: verified
+  supports_claim: false
+  url: https://www.softpedia.com/get/Programming/Coding-languages-Compilers/flat-assembler.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/tgrysztar/fasm/releases
+timestamp: '2026-04-10T00:07:42.481566+00:00'
+title: Q852086
+turns: 2
+value_label: null
+verdict: incorrect

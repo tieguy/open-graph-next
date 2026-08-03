@@ -1,0 +1,35 @@
+completion_tokens: 3035
+cost_usd: 0.0044044
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12917
+property: P4224
+property_label: category contains
+rationale: The edit replaces the category member with Q5 ('human'), using qualifiers
+  to narrow to volleyball coaches for the Arizona State Sun Devils women's team. However,
+  Wikidata best practice and similar category items recommend listing specific Q-items
+  for each coach rather than using the general class 'human' with qualifiers. The
+  cited news sources confirm that humans serve as coaches, but do not support the
+  use of the generic Q5 as the category member. Therefore, this edit is not in line
+  with recommended practices and is considered suspect.
+rcid: 2551384440
+revid: 2474689007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:WikiProject_Categories/P42
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q1791976
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q60917184
+- provenance: verified
+  supports_claim: false
+  url: https://thesundevils.com/news/2016/12/21/tomasevic-named-arizona-states-head-womens-volleyball-coach
+timestamp: '2026-04-11T05:30:20.904461+00:00'
+title: Q60917184
+turns: 1
+value_label: human
+verdict: suspect

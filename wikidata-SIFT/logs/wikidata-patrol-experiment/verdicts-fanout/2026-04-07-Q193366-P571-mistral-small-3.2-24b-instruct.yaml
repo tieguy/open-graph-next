@@ -1,0 +1,41 @@
+completion_tokens: 762
+cost_usd: 0.005267796249999999
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 76082
+property: P571
+property_label: inception
+rationale: The claim that the inception date of the Kosovo Liberation Army is 100
+  is incorrect. The Kosovo Liberation Army (KLA) was formed in 1991, as indicated
+  by historical records and sources. The edit changing the inception date to 100 is
+  not supported by any credible evidence and contradicts established historical facts.
+rcid: 2549583327
+revid: 2472945896
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kosovo_Liberation_Army
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kosovo_War
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/topic/Kosovo-Liberation-Army
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/topic/Kosovo-War
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/place/Kosovo
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-europe-25785315
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-europe-22886176
+timestamp: '2026-04-07T09:32:52.469959+00:00'
+title: Q193366
+turns: 15
+value_label: null
+verdict: incorrect

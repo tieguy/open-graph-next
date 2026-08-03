@@ -1,0 +1,24 @@
+completion_tokens: 843
+cost_usd: 0.0056872
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 57113
+property: P6634
+property_label: LinkedIn personal profile ID
+rationale: The LinkedIn profile URL is blocked, preventing direct verification. No
+  other sources confirm the LinkedIn profile ID "francissevin" for Francis Sevin.
+rcid: 2540920242
+revid: 2464711305
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.linkedin.com/in/francissevin/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sartrouville.fr/portrait/francis-sevin/
+timestamp: '2026-02-21T01:13:30.746335+00:00'
+title: Q137844713
+turns: 7
+value_label: null
+verdict: unverifiable

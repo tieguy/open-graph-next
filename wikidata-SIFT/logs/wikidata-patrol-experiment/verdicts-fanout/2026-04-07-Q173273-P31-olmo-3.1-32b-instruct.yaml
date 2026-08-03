@@ -1,0 +1,26 @@
+completion_tokens: 1614
+cost_usd: 0.0099602
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 44959
+property: P31
+property_label: instance of
+rationale: The edit sets the instance of (P31) for Chinmayananda Saraswati to the
+  item itself (Q173273), which is not standard practice for individual persons on
+  Wikidata. The typical value should be Q5 (human) unless a more specific subclass
+  is reliably sourced. The only cited reference (English Wikipedia) could not be fetched
+  due to a blocked domain, making it impossible to verify the claim. No independently
+  fetched sources support using the item itself as its own instance of class. This
+  change appears to be a modeling error.
+rcid: null
+revid: 2470122213
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Chinmayananda_Saraswati
+timestamp: '2026-04-07T06:57:00.561535+00:00'
+title: Q173273
+turns: 7
+value_label: Chinmayananda Saraswati
+verdict: suspect

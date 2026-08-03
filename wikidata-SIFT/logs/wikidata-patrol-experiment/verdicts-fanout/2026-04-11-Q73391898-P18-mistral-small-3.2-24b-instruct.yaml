@@ -1,0 +1,22 @@
+completion_tokens: 1160
+cost_usd: 0.0029912
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30522
+property: P18
+property_label: image
+rationale: The reference URL provided in the edit could not be fetched, and searches
+  for independent sources failed due to client errors. Therefore, we cannot verify
+  the claim or the added reference.
+rcid: null
+revid: 2464726697
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://stolpersteine.wdr.de/web/de/stolperstein/9472
+timestamp: '2026-04-11T11:11:37.044473+00:00'
+title: Q73391898
+turns: 3
+value_label: null
+verdict: unverifiable

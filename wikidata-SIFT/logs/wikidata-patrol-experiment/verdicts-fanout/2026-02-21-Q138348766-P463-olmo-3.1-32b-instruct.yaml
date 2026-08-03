@@ -1,0 +1,26 @@
+completion_tokens: 1134
+cost_usd: 0.0034564
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13880
+property: P463
+property_label: member of
+rationale: The official British Blood Transfusion Society council page directly states
+  that Danny Gaskin sits on the BBTS Council and is a Fellow of the Society. Being
+  a council member constitutes organizational membership, and the source is primary
+  and authoritative. This directly supports the 'member of' claim.
+rcid: 2540920683
+revid: 2464711712
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/dannygaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/
+timestamp: '2026-02-21T01:04:18.354976+00:00'
+title: Q138348766
+turns: 2
+value_label: British Blood Transfusion Society
+verdict: verified-high

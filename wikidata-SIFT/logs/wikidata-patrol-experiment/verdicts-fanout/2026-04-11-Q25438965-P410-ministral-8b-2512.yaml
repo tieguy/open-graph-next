@@ -1,0 +1,30 @@
+completion_tokens: 1906
+cost_usd: 0.00202161
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17767
+property: P410
+property_label: military, police or special rank
+rationale: Multiple verified primary sources (military news outlets and official Ukrainian
+  news) consistently confirm that Oleksandr Dovhach held the rank of colonel (OF-7)
+  rather than lieutenant colonel. No credible evidence supports the old value, and
+  the new value aligns with direct reporting from authoritative sources. The edit
+  is factually accurate and well-supported by independent verification.
+rcid: 2550529778
+revid: 2473863672
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://militarnyi.com/en/news/oleksandr-dovhach-kia-in-eastern-ukraine/
+- provenance: verified
+  supports_claim: true
+  url: https://news.liga.net/en/politics/news/commander-of-the-39th-tactical-aviation-brigade-killed-in-eastern-ukraine-during-a-combat-mission
+- provenance: verified
+  supports_claim: true
+  url: https://vinnychany.info/war/u-boiu-na-skhodi-zahynuv-komandyr-39-i-bryhady-taktychnoi-aviatsii-heroj-ukrainy-oleksandr-dovhach/
+timestamp: '2026-04-11T17:01:17.421435+00:00'
+title: Q25438965
+turns: 1
+value_label: colonel
+verdict: verified-high

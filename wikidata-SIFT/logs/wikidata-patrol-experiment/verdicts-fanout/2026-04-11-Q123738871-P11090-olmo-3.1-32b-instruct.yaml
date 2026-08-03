@@ -1,0 +1,32 @@
+completion_tokens: 1673
+cost_usd: 0.0063634
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26798
+property: P11090
+property_label: Boomplay artist ID
+rationale: No independent or primary source confirms that '104557862' is a valid Boomplay
+  artist ID for Josh Universe. The claim is unsourced and could not be verified through
+  web searches or fetched content. It is possible the ID is incorrect or associated
+  with a different artist.
+rcid: 2551429099
+revid: 2474729209
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: reported
+  supports_claim: false
+  url: https://astrochain.net/the-team/
+- provenance: reported
+  supports_claim: false
+  url: https://biohackinginternational.com/Staff/Josh+Habka
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Josh+Universe+Boomplay+artist+ID+104557862
+timestamp: '2026-04-11T05:58:53.934018+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: suspect

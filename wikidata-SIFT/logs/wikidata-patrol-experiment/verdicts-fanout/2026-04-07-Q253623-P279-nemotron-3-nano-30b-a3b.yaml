@@ -1,0 +1,29 @@
+completion_tokens: 732
+cost_usd: 0.00508745
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 98821
+property: P279
+property_label: subclass of
+rationale: The search attempts to find evidence about whether Q131257 or Q591041 refer
+  to a subclass of patent or a type of scientific publication returned no usable results.
+  No authoritative source was found to confirm or contradict the classification change.
+  Without verifiable references, the claim remains unverifiable.
+rcid: null
+revid: 2471453563
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://patents.google.com/patent/DE10036231A1
+- provenance: reported
+  supports_claim: false
+  url: https://urgencymagnet.com/patent-index-classifications
+- provenance: reported
+  supports_claim: false
+  url: https://webcache.googleusercontent.com/search?q=cache:qaJpneolEVQJ:scholar.google.com/+%22expiration+date%22+university+library
+timestamp: '2026-04-07T03:39:14.334747+00:00'
+title: Q253623
+turns: 15
+value_label: Q131257
+verdict: unverifiable

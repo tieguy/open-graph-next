@@ -1,0 +1,25 @@
+completion_tokens: 1677
+cost_usd: 0.0039458
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14698
+property: P31
+property_label: instance of
+rationale: There is no evidence that María Inés Falconi is related to the software
+  project 'Mono'. All independent sources describe her as a human writer and playwright.
+  Changing her instance of from 'human' (Q5) to 'Mono' (Q722656) is factually incorrect.
+rcid: null
+revid: 2471487652
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Mar%C3%ADa_In%C3%A9s_Falconi
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q722656
+timestamp: '2026-04-11T14:47:18.547740+00:00'
+title: Q274635
+turns: 1
+value_label: Mono
+verdict: incorrect

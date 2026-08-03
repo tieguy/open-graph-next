@@ -1,0 +1,33 @@
+completion_tokens: 2331
+cost_usd: 0.00341496
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36999
+property: P689
+property_label: afflicts
+rationale: The claim that 'human' (Q5) is an afflicted entity for starch exposure
+  (Q21175313) is not supported by the evidence. The CDC source and independent sources
+  focus on specific organs or systems (e.g., respiratory system, skin) as targets
+  of starch exposure, not the general category 'human'. The claim is redundant and
+  misleading, as humans are not the direct target of exposure in this context.
+rcid: 2549977353
+revid: 2473327016
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.cdc.gov/niosh/npg/npgd0567.html
+- provenance: verified
+  supports_claim: false
+  url: https://cameochemicals.noaa.gov/chemical/25065
+- provenance: verified
+  supports_claim: false
+  url: https://medlineplus.gov/ency/article/002741.htm
+- provenance: verified
+  supports_claim: false
+  url: https://pubmed.ncbi.nlm.nih.gov/40202198/
+timestamp: '2026-04-10T14:01:18.202588+00:00'
+title: Q21175313
+turns: 3
+value_label: human
+verdict: incorrect

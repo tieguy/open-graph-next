@@ -1,0 +1,21 @@
+completion_tokens: 644
+cost_usd: 0.00404405
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78305
+property: P106
+property_label: occupation
+rationale: No sources were found that confirm or deny the claim that 'subnormal number'
+  is a valid occupation for Francisco Luque. Extensive searches for technical definitions
+  of 'subnormal number' returned no relevant results, and no references supporting
+  this occupation were located. The edit's change appears unsupported by the existing
+  data and cannot be verified.
+rcid: null
+revid: 2460300984
+sources: []
+timestamp: '2026-04-07T13:02:20.853164+00:00'
+title: Q5483608
+turns: 15
+value_label: subnormal number
+verdict: unverifiable

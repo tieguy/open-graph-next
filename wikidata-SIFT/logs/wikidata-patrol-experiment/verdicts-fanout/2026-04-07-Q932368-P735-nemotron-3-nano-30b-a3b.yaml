@@ -1,0 +1,22 @@
+completion_tokens: 611
+cost_usd: 0.005030649999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 98169
+property: P735
+property_label: given name
+rationale: Despite extensive searches, no external sources were found that confirm
+  'Rabah' as a known given name or alternative spelling for Rabih az-Zubayr. The edit
+  proposes changing Rabih to Rabah, but no independent corroboration or authoritative
+  source was found to verify this claim. The original Wikipedia entry retrieved from
+  the claim's context shows only 'Rabih az-Zubayr' without mentioning 'Rabah', and
+  no reliable biographical sources were located to support the alternate spelling.
+rcid: 2549457072
+revid: 2472822431
+sources: []
+timestamp: '2026-04-07T05:07:28.865102+00:00'
+title: Q932368
+turns: 15
+value_label: Rabah
+verdict: unverifiable

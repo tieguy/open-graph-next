@@ -1,0 +1,30 @@
+completion_tokens: 1977
+cost_usd: 0.0066026
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27082
+property: P570
+property_label: date of death
+rationale: Multiple independent and primary sources, including USA Today and BBC,
+  confirm that Chuck Norris died on March 19, 2026. The cited reference for the new
+  value ('20 March 2026') does not support this date, and the family's official announcement
+  also confirms March 19. Changing the date from the correct value to an incorrect
+  one is not supported by any reliable evidence.
+rcid: 2550577833
+revid: 2473909863
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://eu.usatoday.com/story/entertainment/celebrities/2026/03/20/chuck-norris-dies/89230252007/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/articles/c9y8n1e0n3ko
+- provenance: reported
+  supports_claim: false
+  url: https://gauchazh.clicrbs.com.br/cultura-e-lazer/cinema/noticia/2026/03/morre-chuck-norris-estrela-do-cinema-de-acao-aos-86-anos-cmmyz3zx1026y013tvqnz6qax.html
+timestamp: '2026-04-11T15:12:33.422736+00:00'
+title: Q2673
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 581
+cost_usd: 0.00898488
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 21165
+property: P20
+property_label: place of death
+rationale: The claim cites a Latvian Wikipedia import as its reference, but Wikipedia
+  is not an acceptable Wikidata reference source due to circularity. Independent searches
+  for 'Erich Reinhold von Albedyl' return genealogy sites listing place of death as
+  'Tuckum, Kurland, Latvia' or 'Tume Parish, Tukuma novads, Latvia' (geni.com and
+  FamilySearch). These sources do not mention Jaunmokas Manor. However, Jaunmokas
+  Manor is located in Tukums municipality, which aligns with the general region of
+  'Tuckum/Tukuma'. Without a reliable primary source specifically confirming Jaunmokas
+  Manor as his precise place of death, the claim remains unverifiable.
+rcid: 2540983850
+revid: 2464770214
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://lv.wikipedia.org/w/index.php?title=Erihs_Reinholds_fon_Albedils&oldid=2946772
+- provenance: verified
+  supports_claim: false
+  url: https://www.geni.com/people/Erich-Reinhold-von-Albedyll/6000000018165129215
+- provenance: verified
+  supports_claim: false
+  url: https://ancestors.familysearch.org/en/2MJ7-J48/erich-reinhold-von-albedyll-1732-1804
+timestamp: '2026-02-19T23:05:05.979088+00:00'
+title: Q16356080
+turns: 3
+value_label: Jaunmokas Manor
+verdict: unverifiable

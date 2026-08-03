@@ -1,0 +1,28 @@
+completion_tokens: 1239
+cost_usd: 0.02548325
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 150134
+property: P279
+property_label: subclass of
+rationale: The investigation conclusively shows Ultimate is a flying disc sport, not
+  rowing. The claim 'rowing' (Q159354) was added as a subclass of Ultimate (Q244700),
+  but all independent sources describe Ultimate as a sport played with a flying disc.
+  The World Flying Disc Federation, recognized by the International Olympic Committee,
+  governs Ultimate. No source links Ultimate to rowing, which involves boats and oars.
+  The edit is clearly wrong and appears to be vandalism.
+rcid: 2540951538
+revid: 2464740357
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ultimate_(sport)
+- provenance: verified
+  supports_claim: false
+  url: https://www.wfdf.sport/sports/ultimate
+timestamp: '2026-02-20T08:29:22.418978+00:00'
+title: Q244700
+turns: 15
+value_label: rowing
+verdict: incorrect

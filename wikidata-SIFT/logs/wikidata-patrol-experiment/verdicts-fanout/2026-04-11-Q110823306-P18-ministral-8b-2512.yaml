@@ -1,0 +1,31 @@
+completion_tokens: 2057
+cost_usd: 0.00281133
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29332
+property: P18
+property_label: image
+rationale: The new image filename suggests a specific event (post-match interview
+  after a match against Universitario), but no verified independent source confirms
+  this claim. The old image filename is generic and plausible, while the new one lacks
+  supporting evidence. No references are provided for either image, which is a critical
+  gap for image claims. The edit lacks justification and independent corroboration,
+  making it suspect.
+rcid: 2551409863
+revid: 2474713080
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/matias-cordova/profil/spieler/805148
+- provenance: verified
+  supports_claim: false
+  url: https://www.sofascore.com/football/player/matias-cordova/1050329
+- provenance: verified
+  supports_claim: false
+  url: https://www.360cities.net/image/fray-matias-de-cordova-comitan
+timestamp: '2026-04-11T09:04:22.452327+00:00'
+title: Q110823306
+turns: 3
+value_label: null
+verdict: suspect

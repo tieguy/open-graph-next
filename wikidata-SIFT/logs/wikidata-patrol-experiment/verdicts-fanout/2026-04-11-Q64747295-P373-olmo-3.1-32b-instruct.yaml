@@ -1,0 +1,33 @@
+completion_tokens: 411
+cost_usd: 0.0032482
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15008
+property: P373
+property_label: Commons category
+rationale: The new Commons category value 'The Honorable Soroi Marepo Eoe CMG, MP.png'
+  is highly specific and appears to be the filename of an image rather than a category
+  name. Wikimedia Commons typically uses descriptive, standardized category names
+  (e.g., 'Papua New Guinea politicians' or 'Members of the Papua New Guinea Parliament'),
+  not image filenames. The old value 'Soroi Eoe' is a known, existing Commons category
+  for the politician. There is no evidence from reliable sources that the category
+  was intended to be replaced by an image filename, and doing so appears to be a misapplication
+  of the P373 property. This change is likely incorrect.
+rcid: 2551442447
+revid: 2474740123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Soroi_Eoe
+- provenance: verified
+  supports_claim: false
+  url: http://www.parliament.gov.pg/index.php/tenth-parliament/bio/view/kikori-district
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Commons:Categories
+timestamp: '2026-04-11T17:45:29.164195+00:00'
+title: Q64747295
+turns: 1
+value_label: null
+verdict: suspect

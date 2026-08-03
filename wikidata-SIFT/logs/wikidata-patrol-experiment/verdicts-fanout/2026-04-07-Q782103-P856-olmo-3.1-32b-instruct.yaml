@@ -1,0 +1,28 @@
+completion_tokens: 1149
+cost_usd: 0.0094366
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43736
+property: P856
+property_label: official website
+rationale: The new value https://www.evaair.com is not an official government website
+  for Mizuho City. It belongs to a commercial airline, and no authoritative or independent
+  sources confirm this as the official website of Mizuho City. Multiple attempts to
+  verify the official website failed due to DNS resolution errors, and there is no
+  evidence supporting the change. The previous value was consistent with standard
+  Japanese municipal domain naming.
+rcid: null
+revid: 2471369644
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://www.city.mizuho.lg.jp/
+- provenance: unverified
+  supports_claim: false
+  url: https://www.evaair.com/
+timestamp: '2026-04-07T12:05:17.102770+00:00'
+title: Q782103
+turns: 6
+value_label: null
+verdict: suspect

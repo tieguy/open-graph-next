@@ -1,0 +1,26 @@
+completion_tokens: 1272
+cost_usd: 0.004858268749999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 50440
+property: P2397
+property_label: YouTube channel ID
+rationale: The removed claim had no references. Independent searches did not yield
+  any specific information about Whake's YouTube channel ID. The Library of Congress
+  authority file for Whake does not mention a YouTube channel ID. Therefore, the removal
+  of this claim appears to be justified.
+rcid: 2550621157
+revid: 2473951622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commentpicker.com/youtube-channel-id.php
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n2024039943
+timestamp: '2026-04-11T11:29:35.027870+00:00'
+title: Q124213948
+turns: 5
+value_label: null
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 795
+cost_usd: 0.009380625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 97940
+property: P1477
+property_label: birth name
+rationale: The biography from Biography.com explicitly states that Bruno Mars's real
+  name is 'Peter Gene Hernandez,' which contradicts the edit that changes the birth
+  name to 'Pablo Gene Hernandez.'
+rcid: 2549922834
+revid: 2473276732
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/artist/bruno-mars
+timestamp: '2026-04-07T11:09:58.826304+00:00'
+title: Q1450
+turns: 8
+value_label: null
+verdict: incorrect

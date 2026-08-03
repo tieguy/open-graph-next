@@ -1,0 +1,33 @@
+completion_tokens: 1965
+cost_usd: 0.0069144
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28677
+property: P2403
+property_label: total assets
+rationale: The total assets value of 6,083,903,000,000 Russian rubles for T-Bank as
+  of the end of Q4 2025 is confirmed in the bank's official consolidated IFRS financial
+  statements (primary source) and independently corroborated by TASS, Vedomosti, and
+  the Central Bank of Russia. Multiple high-quality, verified sources support the
+  claim without contradiction.
+rcid: 2550547031
+revid: 2473880220
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://cdn.tbank.ru/static/documents/fd10c537-d3d5-4764-923c-36afcff667f5.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://tass.ru/ekonomika/20012367
+- provenance: verified
+  supports_claim: true
+  url: https://vedomosti.ru/business/articles/2026/03/21/952061-velikaya-tnk
+- provenance: verified
+  supports_claim: true
+  url: https://www.cbr.ru/statistics/credit_and_money/banks/
+timestamp: '2026-04-10T08:02:48.475563+00:00'
+title: Q4457878
+turns: 1
+value_label: null
+verdict: verified-high

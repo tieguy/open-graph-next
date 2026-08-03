@@ -1,0 +1,36 @@
+completion_tokens: 2665
+cost_usd: 0.0048337200000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38981
+property: P27
+property_label: country of citizenship
+rationale: The claim that María Izquierdo's country of citizenship is 'Marroca [de]'
+  (Q3294851) is not supported by any credible source. Multiple verified sources confirm
+  that María Izquierdo was born in San Juan de los Lagos, Mexico, and died in Mexico
+  City, Mexico, making Mexico her country of citizenship. The new value lacks any
+  evidence and contradicts well-established facts about her life.
+rcid: 2549596620
+revid: 2472958694
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://awarewomenartists.com/en/artiste/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+- provenance: verified
+  supports_claim: false
+  url: https://www.infinite-women.com/women/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.admagazine.com/cultura/maria-izquierdo-lo-que-no-sabias-de-la-pintora-surrealista-20200406-6229-articulos
+- provenance: verified
+  supports_claim: false
+  url: https://medium.com/@arteoriginal.co/mar%C3%ADa-izquierdo-overshadowed-color-in-the-history-of-mexican-art-a01f2f953181
+timestamp: '2026-04-11T06:57:19.983288+00:00'
+title: Q461937
+turns: 2
+value_label: Marroca [de]
+verdict: incorrect

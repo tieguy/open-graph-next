@@ -1,0 +1,23 @@
+completion_tokens: 641
+cost_usd: 0.005689
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26522
+property: P11892
+property_label: Threads username
+rationale: The Threads profile at https://www.threads.com/@joshtospace exists and
+  uses the username 'joshtospace', which directly matches the edit's claimed value
+  for Josh Universe's Threads username. This primary source confirms the update is
+  correct.
+rcid: 2551423057
+revid: 2474724337
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.threads.com/@joshtospace
+timestamp: '2026-04-10T12:17:45.942800+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-high

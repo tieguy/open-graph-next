@@ -1,0 +1,23 @@
+completion_tokens: 740
+cost_usd: 0.00929345
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 182909
+property: P1884
+property_label: hair color
+rationale: No verifiable sources were found confirming 'Morado' as Sabrina Carpenter's
+  current hair color. Multiple searches across news, social media, streaming platforms,
+  and official venues did not yield any indexed pages that mention 'Morado' as her
+  hair color or show evidence of a recent dyed hair color in new blue-toned form.
+  The edit claim has no cited references to supported by evidence. The original 'blond
+  hair' classification appears supported by available documentation like the Deutsche
+  Synchronkartei record in the item context.
+rcid: null
+revid: 2471000108
+sources: []
+timestamp: '2026-04-07T11:59:25.320790+00:00'
+title: Q7396400
+turns: 15
+value_label: Morado
+verdict: unverifiable

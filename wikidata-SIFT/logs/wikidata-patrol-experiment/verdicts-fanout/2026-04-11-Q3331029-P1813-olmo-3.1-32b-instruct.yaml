@@ -1,0 +1,30 @@
+completion_tokens: 779
+cost_usd: 0.005202999999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23678
+property: P1813
+property_label: short name
+rationale: All authoritative and live sources consulted consistently use 'MAIF' as
+  the short name for the entity. There is no evidence from the official corporate
+  website, the French Wikipedia, or other reliable sources that 'MAF' is an authorized
+  or recognized short form. The change to 'MAF' lacks corroboration and appears inconsistent
+  with established usage.
+rcid: null
+revid: 2460269740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.maif.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://entreprise.maif.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Mutuelle_d%27assurance_des_instituteurs_de_France
+timestamp: '2026-04-11T15:23:48.440587+00:00'
+title: Q3331029
+turns: 1
+value_label: null
+verdict: suspect

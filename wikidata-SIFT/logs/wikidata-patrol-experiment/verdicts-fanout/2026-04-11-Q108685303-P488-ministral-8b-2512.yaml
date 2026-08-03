@@ -1,0 +1,28 @@
+completion_tokens: 1676
+cost_usd: 0.00133506
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13420
+property: P488
+property_label: chairperson
+rationale: The edit changing the chairperson of Q108685303 from Bruno Mettling to
+  Michel Yahiel is supported by multiple verified sources. Michel Yahiel is explicitly
+  confirmed as the current président of ARPE (Q108685303) starting in 2023 by both
+  ihedate.org and RocketReach. No credible evidence supports Bruno Mettling as chairperson
+  for this organization. The change is well-founded and aligns with independent, authoritative
+  sources.
+rcid: 2550348782
+revid: 2473687632
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ihedate.org/yahiel-michel
+- provenance: verified
+  supports_claim: true
+  url: https://rocketreach.co/michel-yahiel-email_28563097
+timestamp: '2026-04-11T12:22:59.480370+00:00'
+title: Q108685303
+turns: 1
+value_label: Michel Yahiel
+verdict: verified-high

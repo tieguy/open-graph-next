@@ -1,0 +1,27 @@
+completion_tokens: 834
+cost_usd: 0.0047396
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21196
+property: P488
+property_label: chairperson
+rationale: The primary cited source (association's PDF) could not be accessed for
+  direct verification. However, a reported source (Alessandro Cataldo's personal website)
+  indicates he is the founder and president of the association, which is consistent
+  with the chairperson claim. Due to the lack of a directly accessible primary source,
+  the evidence is indirect but supportive.
+rcid: 2540928097
+revid: 2464718844
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ladiets.org/wp-content/uploads/2025/10/Statuto-Libera-Associazione-Disabili-Imprenditori-LADI.pdf
+- provenance: reported
+  supports_claim: true
+  url: https://www.alessandrocataldo.it/en/chi-sono/
+timestamp: '2026-02-20T21:37:42.453483+00:00'
+title: Q138348772
+turns: 4
+value_label: Alessandro Cataldo [it]
+verdict: verified-low

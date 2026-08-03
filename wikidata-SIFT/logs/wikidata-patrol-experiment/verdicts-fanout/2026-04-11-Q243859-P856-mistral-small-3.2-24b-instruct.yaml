@@ -1,0 +1,35 @@
+completion_tokens: 1566
+cost_usd: 0.007584825000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 79418
+property: P856
+property_label: official website
+rationale: The new value "https://www.lufthansa.com" is the website of a German airline
+  and is clearly not related to the city of Abiko. The old value "https://www.city.abiko.chiba.jp/"
+  is more consistent with the context of the city of Abiko in Chiba, Japan. The prefetched
+  references do not support the new value and indicate that it is incorrect.
+rcid: null
+revid: 2471019462
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.abiko.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.abiko.com/products/
+- provenance: verified
+  supports_claim: false
+  url: https://www.abiko.com/quality/
+- provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+- provenance: verified
+  supports_claim: false
+  url: https://www.gsi.go.jp/KOKUJYOHO/MENCHO/backnumber/GSI-menseki20210101.pdf
+timestamp: '2026-04-11T15:10:28.390946+00:00'
+title: Q243859
+turns: 6
+value_label: null
+verdict: incorrect

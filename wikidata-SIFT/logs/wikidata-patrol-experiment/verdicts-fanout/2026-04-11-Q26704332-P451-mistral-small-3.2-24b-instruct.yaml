@@ -1,0 +1,20 @@
+completion_tokens: 290
+cost_usd: 0.00397418
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60389
+property: P451
+property_label: unmarried partner
+rationale: Unable to fetch any sources to verify the claim due to technical issues.
+rcid: null
+revid: 2471227250
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.yahoo.com/entertainment/gaten-matarazzo-girlfriend-elizabeth-yu-072738456.html
+timestamp: '2026-04-11T15:34:14.814760+00:00'
+title: Q26704332
+turns: 5
+value_label: Yo
+verdict: unverifiable

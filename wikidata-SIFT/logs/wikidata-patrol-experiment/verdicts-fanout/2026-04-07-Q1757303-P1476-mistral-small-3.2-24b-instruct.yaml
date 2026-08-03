@@ -1,0 +1,19 @@
+completion_tokens: 530
+cost_usd: 0.00246242
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39047
+property: P1476
+property_label: title
+rationale: The edit changes the title of the song "Fuck You" by Lily Allen to "Fuc
+  You". There are no references cited for this change, and independent searches do
+  not confirm the new title. Therefore, the edit is deemed incorrect.
+rcid: 2550745424
+revid: 2474071948
+sources: []
+timestamp: '2026-04-07T11:48:12.282383+00:00'
+title: Q1757303
+turns: 6
+value_label: null
+verdict: incorrect

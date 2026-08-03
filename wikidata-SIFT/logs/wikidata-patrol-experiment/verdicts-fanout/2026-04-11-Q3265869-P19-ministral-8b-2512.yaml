@@ -1,0 +1,28 @@
+completion_tokens: 1860
+cost_usd: 0.00166206
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15416
+property: P19
+property_label: place of birth
+rationale: The change from 'Loja' (Q944697) to 'Roman Republic' (Q17167) for Lucius
+  Aurelius Cotta's place of birth is justified because 'Loja' is implausible for a
+  2nd-century BC Roman consul and lacks credible support. While 'Roman Republic' is
+  a reasonable default for a Roman politician, no primary source explicitly confirms
+  this as his birthplace. The lack of references for both values is a limitation,
+  but the new value is less incorrect than the old. Independent sources like the Fandom
+  article and Digital Prosopography of the Roman Republic do not mention a birthplace,
+  reinforcing the need for a general category. The edit improves the claim by removing
+  an incorrect location, though more precise evidence would strengthen it.
+rcid: null
+revid: 2470502901
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Lucius_Aurelius_Cotta_(consul_119_BC)
+timestamp: '2026-04-11T15:21:31.130835+00:00'
+title: Q3265869
+turns: 1
+value_label: Roman Republic
+verdict: plausible

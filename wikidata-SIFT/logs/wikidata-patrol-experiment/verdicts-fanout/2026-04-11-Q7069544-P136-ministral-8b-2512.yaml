@@ -1,0 +1,29 @@
+completion_tokens: 1580
+cost_usd: 0.00140421
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13977
+property: P136
+property_label: genre
+rationale: Multiple verified independent sources (Genius, Apple Music, and SoundClick)
+  explicitly describe Number One Gun as a Christian rock band with Christian themes.
+  The old value, alternative rock, is not supported by these sources, confirming the
+  change from Q11366 to Q753520 is accurate and well-supported.
+rcid: 2551093964
+revid: 2474409808
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://genius.com/artists/Number-one-gun
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/number-one-gun/18235645
+- provenance: verified
+  supports_claim: true
+  url: https://www.soundclick.com/numberonegun
+timestamp: '2026-04-11T12:37:24.933906+00:00'
+title: Q7069544
+turns: 1
+value_label: Christian rock
+verdict: verified-high

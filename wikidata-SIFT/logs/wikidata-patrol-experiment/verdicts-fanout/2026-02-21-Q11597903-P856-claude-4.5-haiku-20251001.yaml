@@ -1,0 +1,34 @@
+completion_tokens: 3987
+cost_usd: 0.311948
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 292013
+property: P856
+property_label: official website
+rationale: The edited URL contains a critical error in the domain name. The correct
+  official website for Tachikawa Daiku (Ninth) Junior High School is https://www.tachikawa-edu.jp/jh09/
+  (with hyphen between 'tachikawa' and 'edu'), not https://www.tachikawa.ed.jp/jh09/
+  (without hyphen). I verified this by successfully fetching the correct URL, which
+  displays the school's actual homepage with content stating '立川市立立川第九中学校のホームページです'
+  (This is the homepage of Tachikawa Municipal Tachikawa Ninth Junior High School),
+  while the edited URL fails to resolve with a DNS error. Multiple independent sources
+  including the school's verified website, official city pages, and search results
+  all confirm tachikawa-edu.jp is the correct domain for junior high schools in Tachikawa.
+rcid: 2541055664
+revid: 2464837874
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tachikawa-edu.jp/jh09/
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.tachikawa.lg.jp/shisetsu/1008069/1008217.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.tachikawa.lg.jp/kosodate/kyoiku/1004237/1004246.html
+timestamp: '2026-02-21T04:06:00.100674+00:00'
+title: Q11597903
+turns: 12
+value_label: null
+verdict: incorrect

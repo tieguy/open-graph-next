@@ -1,0 +1,26 @@
+completion_tokens: 1514
+cost_usd: 0.09662000000000001
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 89050
+property: P571
+property_label: inception
+rationale: 'The edit claims SuchFokus was founded in 2025 (P571: inception), citing
+  the company''s official website (https://suchfokus.de) as reference. However, the
+  fetched website content directly contradicts this claim, explicitly stating ''10+
+  Jahre Erfahrung'' (10+ years of experience) and ''seit 2016'' (since 2016), with
+  multiple references to the company''s operational history from 2016-2025. The cited
+  reference does not support the inception claim; it refutes it. The correct inception
+  year appears to be 2016, not 2025.'
+rcid: 2540974902
+revid: 2464761709
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:29:45.338346+00:00'
+title: Q138349990
+turns: 7
+value_label: null
+verdict: incorrect

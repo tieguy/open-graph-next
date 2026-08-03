@@ -1,0 +1,33 @@
+completion_tokens: 1641
+cost_usd: 0.034498
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 26293
+property: P734
+property_label: family name
+rationale: Multiple independent sources consistently confirm that Masahiro Sakurai's
+  family name is 'Sakurai' (桜井), a Japanese surname meaning 'cherry blossom well.'
+  The edit claims his family name is 'olive oil' (Q93165), which is a food product,
+  not a human surname. This claim directly contradicts all available evidence and
+  is self-evidently false.
+rcid: 2540949726
+revid: 2464738710
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/sakurai_surname
+- provenance: verified
+  supports_claim: false
+  url: https://www.wisdomlib.org/names/sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://japanese-names.info/last-name/sakurai/
+- provenance: verified
+  supports_claim: false
+  url: https://gamefaqs.gamespot.com/boards/234547-super-smash-bros-ultimate/78100465
+timestamp: '2026-02-20T10:51:44.844855+00:00'
+title: Q1906721
+turns: 2
+value_label: olive oil
+verdict: incorrect

@@ -1,0 +1,36 @@
+completion_tokens: 482
+cost_usd: 0.0025646
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11377
+property: P1448
+property_label: official name
+rationale: The edit changed the official name from 'Raúl Jorge Rojas' to 'Raúl Jorge
+  Rojas casado con Comesaña', but reliable biographical sources and official profiles
+  for the subject known as Jorge Diez (Q5935950) do not reference any married name
+  or suffix in their official names. The subject is widely known and referenced as
+  'Jorge Rojas' or 'Jorge Diez', with no mention of 'casado con Comesaña' in primary
+  or secondary sources. Changing the official name to include marital status is not
+  consistent with standard naming conventions on Wikidata for living persons unless
+  it is an official legal change, which is not supported here.
+rcid: null
+revid: 2460658202
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jorge_Rojas_(cantante)
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jorge_Diez
+- provenance: verified
+  supports_claim: false
+  url: https://www.georgiastrategygroup.com/teams/jorge-diez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.trinityhealthofne.org/provider/jorge-l-diez-md-endocrinology-diabetes-metabolism
+timestamp: '2026-04-11T09:23:47.689791+00:00'
+title: Q5935950
+turns: 1
+value_label: null
+verdict: suspect

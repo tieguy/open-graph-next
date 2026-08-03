@@ -1,0 +1,23 @@
+completion_tokens: 622
+cost_usd: 0.00583215
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 114155
+property: P856
+property_label: official website
+rationale: 'No authoritative source could be identified that confirms or denies whether
+  https://bermudarun.gov is the correct official website for Bermuda Run. Basic searches
+  for "Bermuda Run official website" returned no results; searches restricted to government
+  domains also returned no relevant pages. While some census data articles reference
+  the town''s properties, none verify the website claim. No source was successfully
+  fetched to read content, so no provenance: "verified" entries exist. Therefore,
+  the evidence is insufficient to verify the change, and the claim remains unverifiable.'
+rcid: 2549660025
+revid: 2473020363
+sources: []
+timestamp: '2026-04-07T12:00:13.588327+00:00'
+title: Q2045091
+turns: 15
+value_label: null
+verdict: unverifiable

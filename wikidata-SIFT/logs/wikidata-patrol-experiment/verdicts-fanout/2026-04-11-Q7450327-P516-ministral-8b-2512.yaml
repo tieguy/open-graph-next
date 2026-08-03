@@ -1,0 +1,31 @@
+completion_tokens: 1744
+cost_usd: 0.0016940100000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15745
+property: P516
+property_label: powered by
+rationale: The new value 'pump turbine' (Q1740237) is explicitly supported by a verified
+  primary source (clui.org), which describes the Seneca Pumped Storage Generating
+  Station as using 'pump/turbines' for electricity generation. The old value was a
+  placeholder with no meaningful context or references. Independent corroboration
+  confirms that the technology used aligns with the new value, making the edit accurate
+  and well-supported.
+rcid: 2550659641
+revid: 2473989292
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://clui.org/projects/offstream/pumped-storage-facilities-usa/seneca
+- provenance: verified
+  supports_claim: false
+  url: https://hydroreform.org/hydro-project/seneca-p-2280/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eia.gov/todayinenergy/detail.php?id=6910
+timestamp: '2026-04-11T11:07:38.580969+00:00'
+title: Q7450327
+turns: 1
+value_label: pump turbine
+verdict: verified-high

@@ -1,0 +1,33 @@
+completion_tokens: 2285
+cost_usd: 0.0032031299999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38052
+property: P13240
+property_label: Die Tageszeitung tag ID
+rationale: The edit changes the tag ID from an invalid format (`!t5749350`) to a plausible
+  one (`t5749350`). However, no references were attached to either value, and no verified
+  external sources confirm that `t5749350` is the correct tag ID for *Die Tageszeitung*
+  in the 2026 Rhineland-Palatinate state election. Without independent verification
+  or references, the edit cannot be confirmed as correct or incorrect.
+rcid: 2551379742
+revid: 2474684438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://politpro.eu/en/rhineland-palatinate
+- provenance: verified
+  supports_claim: false
+  url: https://www.infobae.com/america/agencias/2026/03/08/verdes-se-imponen-en-baden-wurttemberg-a-cdu-con-ventaja-minima-con-el-99-escrutado/
+- provenance: verified
+  supports_claim: false
+  url: https://www.newswall.org/summary/election-compass-rhineland-palatinate-2026-state-election-on-march-22nd
+- provenance: verified
+  supports_claim: false
+  url: https://www.wahlen.rlp.de/fileadmin/wahlen.rlp.de/dokumente-wahlen/ltw/PDF/LW2026_Bekanntmachung_Landeslisten_LWL-1.pdf
+timestamp: '2026-04-11T11:31:06.676070+00:00'
+title: Q111251478
+turns: 4
+value_label: null
+verdict: unverifiable

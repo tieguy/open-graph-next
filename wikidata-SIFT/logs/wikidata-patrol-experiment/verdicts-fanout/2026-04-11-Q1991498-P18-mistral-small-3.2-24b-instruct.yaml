@@ -1,0 +1,28 @@
+completion_tokens: 1291
+cost_usd: 0.00355358
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41084
+property: P18
+property_label: image
+rationale: The edit changes the image to an unrelated file, and the old image is also
+  not relevant. The Wikimedia Commons category page provides appropriate images for
+  Josep Maria Guzmán.
+rcid: 2550213778
+revid: 2473556232
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Josep_Maria_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://basketball.eurobasket.com/player/Josep-Maria-Guzman/38520
+- provenance: verified
+  supports_claim: false
+  url: https://playback.fm/person/josep-maria-guzm%C3%A1n
+timestamp: '2026-04-11T16:03:55.486141+00:00'
+title: Q1991498
+turns: 3
+value_label: null
+verdict: incorrect

@@ -1,0 +1,18 @@
+completion_tokens: 236
+cost_usd: 0.004025497499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42472
+property: P569
+property_label: date of birth
+rationale: Unable to perform web searches to verify the date of birth for Reiko Tajima.
+  No sources were fetched during the investigation.
+rcid: null
+revid: 2471749419
+sources: []
+timestamp: '2026-04-11T08:48:50.852820+00:00'
+title: Q11576609
+turns: 4
+value_label: null
+verdict: unverifiable

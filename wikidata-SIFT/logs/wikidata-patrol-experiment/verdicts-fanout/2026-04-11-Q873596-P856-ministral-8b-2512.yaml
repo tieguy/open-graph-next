@@ -1,0 +1,31 @@
+completion_tokens: 1878
+cost_usd: 0.00543858
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 47026
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.city.niimi.okayama.jp/', was
+  confirmed as the correct and official website for Niimi City through verified prefetched
+  content and direct fetching of its English-language page. The new value, 'https://www.delta.com',
+  is unrelated to Niimi and is the corporate website of Delta Air Lines. No references
+  were provided for either value, and the change from a verified official municipal
+  website to an unrelated corporate site is clearly incorrect.
+rcid: null
+revid: 2471019911
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.niimi.okayama.jp/
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.niimi.okayama.jp/kanko/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.delta.com
+timestamp: '2026-04-11T16:19:12.282988+00:00'
+title: Q873596
+turns: 3
+value_label: null
+verdict: incorrect

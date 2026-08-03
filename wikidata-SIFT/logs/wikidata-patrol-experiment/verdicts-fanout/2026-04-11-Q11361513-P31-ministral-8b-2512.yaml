@@ -1,0 +1,26 @@
+completion_tokens: 1789
+cost_usd: 0.00196782
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20751
+property: P31
+property_label: instance of
+rationale: 'The edit changes the instance of Q11361513 (Shimo-Takatsu) from ''human
+  settlement'' (Q486972) to ''chōchō'' (Q5327369). The item''s other claims (P131:
+  located in Tsuchiura, P17: country Japan, and P625: coordinates) strongly indicate
+  it is a geographic place. No references or evidence support the new value, and the
+  term ''chōchō'' is unrelated to Shimo-Takatsu. The prefetched reference pertains
+  to a fictional character, not a geographic subdivision. The old value is correct,
+  and the new value is incorrect.'
+rcid: 2550859616
+revid: 2474183197
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hero.fandom.com/wiki/Ch%C5%8Dch%C5%8D_Akimichi
+timestamp: '2026-04-11T14:06:47.504518+00:00'
+title: Q11361513
+turns: 2
+value_label: chōchō
+verdict: incorrect

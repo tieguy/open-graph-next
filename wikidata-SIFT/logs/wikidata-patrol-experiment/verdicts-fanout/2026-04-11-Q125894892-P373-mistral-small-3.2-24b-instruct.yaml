@@ -1,0 +1,29 @@
+completion_tokens: 1453
+cost_usd: 0.00138728125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 10923
+property: P373
+property_label: Commons category
+rationale: The change from 'Dr. Simi' to 'Dr.Sexo' is incorrect. The Commons category
+  'Dr. Simi' is well-documented and supported by multiple sources, while 'Dr.Sexo'
+  does not exist as a valid category for Dr. Simi. The edit should be reverted to
+  the original value.
+rcid: 2550133844
+revid: 2473479562
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Dr._Simi
+- provenance: verified
+  supports_claim: true
+  url: https://www.drsimi.com/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Dr.Sexo
+timestamp: '2026-04-11T10:29:29.157916+00:00'
+title: Q125894892
+turns: 1
+value_label: null
+verdict: incorrect

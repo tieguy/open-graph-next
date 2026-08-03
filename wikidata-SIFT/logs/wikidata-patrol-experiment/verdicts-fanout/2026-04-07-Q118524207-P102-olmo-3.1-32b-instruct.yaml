@@ -1,0 +1,27 @@
+completion_tokens: 1477
+cost_usd: 0.010920399999999999
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50171
+property: P102
+property_label: member of political party
+rationale: The removed qualifiers specified a membership period for Torsten Heinrich
+  in the Young Alternative for Germany (JA) from March 2013 to March 2014. Independent
+  reporting, including the English Wikipedia, corroborates that Heinrich left the
+  AfD in March 2014. No newer or more precise source has been provided to justify
+  the removal of these qualifiers. Therefore, the removal appears to be an error.
+rcid: null
+revid: 2470876455
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20250219202033/https://en.wikipedia.org/wiki/Torsten_Heinrich
+- provenance: reported
+  supports_claim: false
+  url: https://www.focus.de/
+timestamp: '2026-04-07T11:55:11.794727+00:00'
+title: Q118524207
+turns: 7
+value_label: unknown
+verdict: incorrect

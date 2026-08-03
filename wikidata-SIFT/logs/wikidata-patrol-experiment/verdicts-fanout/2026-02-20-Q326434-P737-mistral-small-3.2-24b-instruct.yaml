@@ -1,0 +1,26 @@
+completion_tokens: 380
+cost_usd: 0.009465825
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 100352
+property: P737
+property_label: influenced by
+rationale: The fetched content from the auction guide explicitly states that Thomas
+  Couture was inspired by the Italian and Flemish masters, particularly mentioning
+  Titian and Rubens, whose techniques he copied and reworked. This directly supports
+  the claim that Titian influenced Thomas Couture. Additionally, other search results
+  mention Thomas Couture's admiration for Venetian painting and his interest in still-life
+  elements in paintings by Titian and Tintoretto, further corroborating the influence
+  of Titian on his work.
+rcid: 2540944656
+revid: 2464733999
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.aucties.com/en/auction-guide/nineteenth-century-artists/rating-and-value-of-paintings-by-thomas-couture
+timestamp: '2026-02-20T12:22:17.097922+00:00'
+title: Q326434
+turns: 3
+value_label: Titian
+verdict: verified-high

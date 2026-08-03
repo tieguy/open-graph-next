@@ -1,0 +1,30 @@
+completion_tokens: 1104
+cost_usd: 0.01316784
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 46913
+property: P452
+property_label: industry
+rationale: The company website (primary source) clearly states that MG Timber Products
+  Ltd manufactures and sells garden furniture to both domestic and commercial customers
+  through its online platform, supporting the 'garden furniture shop' aspect of the
+  claim. However, the official Companies House registration lists the SIC code as
+  '95220 - Repair of household appliances and home and garden equipment', which suggests
+  a repair service classification rather than retail. While the company engages in
+  retail sales through its website and online marketplaces, the 'garden furniture
+  shop' classification may not fully capture the manufacturing aspect of their business.
+rcid: 2540934643
+revid: 2464725111
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mgtimberproductsltd.co.uk/
+- provenance: verified
+  supports_claim: false
+  url: https://find-and-update.company-information.service.gov.uk/company/10560760
+timestamp: '2026-02-20T18:00:48.985638+00:00'
+title: Q138349055
+turns: 7
+value_label: garden furniture shop
+verdict: verified-low

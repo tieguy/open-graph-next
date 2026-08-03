@@ -1,0 +1,28 @@
+completion_tokens: 1824
+cost_usd: 0.00288111
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23579
+property: P19
+property_label: place of birth
+rationale: The edit changes Isabel Preysler's place of birth from Manila (Q1461) to
+  San Roque (Q846153). Multiple verified sources explicitly confirm Manila as her
+  birthplace, while no credible source supports San Roque. The cited reference (Genealogía
+  de don Práxedes Mateo-Sagasta y Escolar) is unreachable, and the change contradicts
+  her documented Filipino heritage and citizenship. This edit is incorrect and should
+  be reverted.
+rcid: 2550296081
+revid: 2473636089
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ask-oracle.com/birth-chart/isabel-preysler/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/isabel-preysler-33105.php
+timestamp: '2026-04-11T17:39:08.437396+00:00'
+title: Q437710
+turns: 1
+value_label: San Roque
+verdict: incorrect

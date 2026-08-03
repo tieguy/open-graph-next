@@ -1,0 +1,29 @@
+completion_tokens: 1809
+cost_usd: 0.0138822
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 142381
+property: P569
+property_label: date of birth
+rationale: All verified sources (BBC History, Shackleton.net, and SPRI) confirm that
+  Ernest Shackleton was born on **15 February 1874**. The edit changed the date to
+  **15 February 1873**, which lacks any supporting evidence and contradicts the consensus
+  of authoritative sources. The new value is unsupported and incorrect.
+rcid: null
+revid: 2465968204
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.bbc.co.uk/history/historic_figures/shackleton_ernest.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://www.ernestshackleton.net/
+- provenance: verified
+  supports_claim: false
+  url: https://www.spri.cam.ac.uk/museum/shackleton/biographies/Shackleton,_Ernest_Henry/
+timestamp: '2026-04-11T17:36:26.203827+00:00'
+title: Q957543
+turns: 6
+value_label: null
+verdict: incorrect

@@ -1,0 +1,32 @@
+completion_tokens: 1039
+cost_usd: 0.0063352
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28559
+property: P735
+property_label: given name
+rationale: Every authoritative and reliable source consulted identifies Masahiro Sakurai's
+  given name as 'Masahiro,' not 'Aurora.' No official Nintendo material, reputable
+  biography, or major aggregator uses 'Aurora' as his given name. This change is unsupported
+  and likely incorrect.
+rcid: 2540931518
+revid: 2464722161
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://nintendo.fandom.com/wiki/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Creator/MasahiroSakurai
+- provenance: reported
+  supports_claim: false
+  url: https://sourcegaming.info/2015/10/23/sakuraitimeline/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nintendo.com/us/whatsnew/take-a-look-back-at-super-smash-bros-fighter-reveals-with-masahiro-sakurai-part-1/
+timestamp: '2026-02-20T19:52:21.031285+00:00'
+title: Q1906721
+turns: 3
+value_label: Aurora
+verdict: incorrect

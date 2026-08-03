@@ -1,0 +1,35 @@
+completion_tokens: 2168
+cost_usd: 0.005756025
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 58288
+property: P81
+property_label: connecting line
+rationale: The edit changes the rank of the connecting line claim for Otomo Station
+  from "normal" to "deprecated" with an end time qualifier of April 1, 2020. No references
+  were cited for this edit. Independent sources do not provide clear information about
+  the rank change. Therefore, the verdict is "unverifiable".
+rcid: 2550458317
+revid: 2473794797
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://matcha-jp.com/en/mcm21640
+- provenance: verified
+  supports_claim: false
+  url: https://jp.commutetour.com/transport/train/train-line/jr-ofunato-line/
+- provenance: verified
+  supports_claim: false
+  url: https://traininfo.jreast.co.jp/train_info/e/tohoku.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/JapanTravel/comments/154sa79/odakyu_line/
+- provenance: verified
+  supports_claim: false
+  url: https://matcha-jp.com/en/953
+timestamp: '2026-04-10T08:59:28.801093+00:00'
+title: Q7108986
+turns: 5
+value_label: Ōfunato Line
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1922
+cost_usd: 0.00417774
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51306
+property: P18
+property_label: image
+rationale: The old image ('Nadav Ravid.jpg') was a plausible portrait of Nadav Ravid,
+  given the context of the item as a journalist. The new image ('Wiki-bukkake-2-simple.png')
+  is unrelated to Nadav Ravid and lacks any supporting evidence or references. No
+  independent sources confirm the validity of the new image, and the edit lacks references.
+  The change is not justified and appears to be an incorrect or inappropriate replacement.
+rcid: 2549874547
+revid: 2473230396
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bandcamp.com/nadavravid
+- provenance: verified
+  supports_claim: false
+  url: https://ra.co/dj/ndv/biography
+- provenance: verified
+  supports_claim: false
+  url: https://www.ravidlawgroup.com/professionals/nadav-ravid/
+timestamp: '2026-04-11T15:33:50.873399+00:00'
+title: Q47488244
+turns: 6
+value_label: null
+verdict: suspect

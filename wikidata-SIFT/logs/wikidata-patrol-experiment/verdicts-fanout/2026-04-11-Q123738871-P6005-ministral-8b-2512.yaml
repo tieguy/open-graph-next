@@ -1,0 +1,24 @@
+completion_tokens: 1826
+cost_usd: 0.0107463
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 115122
+property: P6005
+property_label: Muck Rack journalist ID
+rationale: The claim for the Muck Rack journalist ID 'josh-universe' lacks direct
+  verification due to the inability to fetch or confirm the Muck Rack profile. The
+  prefetched content did not provide explicit confirmation, and no verified sources
+  were accessed during this investigation. Without a verified source confirming the
+  Muck Rack ID, the claim cannot be substantiated.
+rcid: 2551430194
+revid: 2474730046
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://muckrack.com/josh-universe
+timestamp: '2026-04-11T05:49:47.420771+00:00'
+title: Q123738871
+turns: 6
+value_label: null
+verdict: unverifiable

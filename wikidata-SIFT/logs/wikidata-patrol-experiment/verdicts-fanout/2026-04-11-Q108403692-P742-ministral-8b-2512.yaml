@@ -1,0 +1,27 @@
+completion_tokens: 1697
+cost_usd: 0.00174981
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16164
+property: P742
+property_label: pseudonym
+rationale: The change from 'Punisher' to 'The Punisher' as the pseudonym for Frank
+  Castle is supported by verified primary sources from Marvel Comics lore. The Chronology
+  Project thread explicitly confirms that 'The Punisher' is the official alias used
+  in Marvel Comics, while 'Punisher' alone is a common shorthand. No credible sources
+  contradict this change, and the new value aligns with official Marvel Comics designations.
+rcid: 2550546012
+revid: 2473879283
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.chronologyproject.com/phpbb2/viewtopic.php?t=4342
+- provenance: verified
+  supports_claim: false
+  url: https://www.denofgeek.com/comics/the-punisher-the-secret-of-frank-castles-alias/
+timestamp: '2026-04-11T06:35:09.214644+00:00'
+title: Q108403692
+turns: 1
+value_label: null
+verdict: verified-high

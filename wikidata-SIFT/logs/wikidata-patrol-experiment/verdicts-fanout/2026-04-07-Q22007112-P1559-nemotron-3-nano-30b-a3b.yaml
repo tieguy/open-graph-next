@@ -1,0 +1,22 @@
+completion_tokens: 569
+cost_usd: 0.0077796
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 153316
+property: P1559
+property_label: name in native language
+rationale: The investigation aimed to verify whether 'rgwvrwfنادية مراد' is a correct
+  updated name in native language for Nadia Murad in Wikidata's native language field.
+  Despite extensive searches, no direct evidence confirming or denying the change
+  could be located. No sources were successfully fetched and verified during this
+  investigation. The claim appears in Wikidata without cited references, and independent
+  corroboration could not be found through web searches.
+rcid: null
+revid: 2470711327
+sources: []
+timestamp: '2026-04-07T07:02:10.015567+00:00'
+title: Q22007112
+turns: 15
+value_label: null
+verdict: unverifiable

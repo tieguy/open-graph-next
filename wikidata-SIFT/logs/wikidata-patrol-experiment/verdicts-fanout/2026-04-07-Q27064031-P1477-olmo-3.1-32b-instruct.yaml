@@ -1,0 +1,29 @@
+completion_tokens: 1181
+cost_usd: 0.0102878
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47896
+property: P1477
+property_label: birth name
+rationale: The phrase 'Joseph David Keery fecha der nacimiento' is not recognized
+  as a valid birth name for Joe Keery in any reliable or authoritative source. The
+  edit appears to be an error, and the previous value 'Joseph David Keery' should
+  be restored.
+rcid: 2549631340
+revid: 2472992457
+sources:
+- provenance: attempted_fetch
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Joe_Keery
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm7297311/
+- provenance: reported
+  supports_claim: false
+  url: https://www.rollingstone.com/music/music-features/joe-keery-stranger-things-1234627869/
+timestamp: '2026-04-07T11:39:27.071025+00:00'
+title: Q27064031
+turns: 6
+value_label: null
+verdict: incorrect

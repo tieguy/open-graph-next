@@ -1,0 +1,29 @@
+completion_tokens: 1343
+cost_usd: 0.006867999999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30311
+property: P21
+property_label: sex or gender
+rationale: There is no credible evidence from official or mainstream sources that
+  George Pig's sex or gender is 'therian.' All reliable sources consistently identify
+  George Pig as a male pig character. The cited reference could not be accessed, and
+  independent sources do not support the claim.
+rcid: null
+revid: 2471111206
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://peppapig.fandom.com/wiki/George_Pig
+- provenance: reported
+  supports_claim: false
+  url: https://nickelodeon.fandom.com/wiki/George_Pig
+- provenance: verified
+  supports_claim: false
+  url: https://www.animationmagazine.net/2025/02/peppa-pig-is-going-to-be-a-big-sister-again/
+timestamp: '2026-04-09T23:41:32.495750+00:00'
+title: Q93975105
+turns: 2
+value_label: therian
+verdict: incorrect

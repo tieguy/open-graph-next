@@ -1,0 +1,30 @@
+completion_tokens: 1810
+cost_usd: 0.00290748
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30220
+property: P569
+property_label: date of birth
+rationale: The edit changed Elizabeth Hanna's date of birth from the verified value
+  of April 2, 1953 (supported by multiple verified sources like Alchetron and Dubbing.fandom)
+  to an unsupported value of 1969. No independent source corroborates the new value,
+  and all verified sources explicitly contradict it. This edit is incorrect and should
+  be reverted.
+rcid: null
+revid: 2472007468
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://alchetron.com/Elizabeth-Hanna
+- provenance: verified
+  supports_claim: false
+  url: https://dubbing.fandom.com/wiki/Elizabeth_Hanna
+- provenance: verified
+  supports_claim: false
+  url: https://www.behindthevoiceactors.com/Elizabeth-Hanna/
+timestamp: '2026-04-11T15:27:16.529280+00:00'
+title: Q3051219
+turns: 3
+value_label: null
+verdict: incorrect

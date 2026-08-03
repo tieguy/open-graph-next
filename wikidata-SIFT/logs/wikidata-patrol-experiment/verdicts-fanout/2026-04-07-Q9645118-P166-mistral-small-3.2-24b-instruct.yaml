@@ -1,0 +1,37 @@
+completion_tokens: 1417
+cost_usd: 0.0051495625000000005
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51150
+property: P166
+property_label: award received
+rationale: The search results did not yield any relevant information or sources that
+  confirm the addition of the qualifier 'investor' with the value '2025' to the existing
+  claim. Therefore, the verdict is unverifiable.
+rcid: 2550592279
+revid: 2473923730
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Banco+Carregosa+Euromoney+award+2025
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Banco+Carregosa+awards
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Banco+Carregosa+Euromoney
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Euromoney+awards+2025
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Euromoney+official+website
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Euromoney+press+releases+2025
+timestamp: '2026-04-07T09:57:21.503205+00:00'
+title: Q9645118
+turns: 10
+value_label: Euromoney
+verdict: unverifiable

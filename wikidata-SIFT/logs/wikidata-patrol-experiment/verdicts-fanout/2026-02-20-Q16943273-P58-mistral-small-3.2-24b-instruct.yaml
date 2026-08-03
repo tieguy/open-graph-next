@@ -1,0 +1,22 @@
+completion_tokens: 664
+cost_usd: 0.0037793
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35801
+property: P58
+property_label: screenwriter
+rationale: The updated reference supports the screenwriter claim for Q16943273 as
+  it is part of the test data used in the Wikidata tour. The discussion on the Wikidata
+  Project chat archive page confirms the nature of Q16943273 as a test item.
+rcid: 2540946575
+revid: 2464735791
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Wikidata:Project_chat/Archive/2021/04
+timestamp: '2026-02-20T11:44:15.589099+00:00'
+title: Q16943273
+turns: 6
+value_label: screenwriter
+verdict: verified-high

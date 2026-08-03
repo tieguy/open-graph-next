@@ -1,0 +1,28 @@
+completion_tokens: 2186
+cost_usd: 0.005113889999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46627
+property: P1416
+property_label: affiliation
+rationale: The claim that 'AfD Freising-Pfaffenhofen' was an affiliation of 'Corona
+  Rebellen' is not supported by verified sources. While AfD members participated in
+  related protests, there is no evidence that the organization itself was an official
+  affiliation. The removal of this claim is justified as the claim conflates individual
+  involvement with organizational affiliation, and the only cited reference (Süddeutsche
+  Zeitung) could not be verified due to unreachability.
+rcid: 2551215744
+revid: 2474528736
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://deinfreising.de/politik/die-verstrickung-der-freisinger-afd-mit-den-querdenkern-und-den-corona-rebellen-freising/
+- provenance: reported
+  supports_claim: false
+  url: https://snf-freising.org/2020/05/die-corona-rebellen-freising/
+timestamp: '2026-04-10T08:38:23.636762+00:00'
+title: Q107646877
+turns: 4
+value_label: AfD Freising-Pfaffenhofen
+verdict: incorrect

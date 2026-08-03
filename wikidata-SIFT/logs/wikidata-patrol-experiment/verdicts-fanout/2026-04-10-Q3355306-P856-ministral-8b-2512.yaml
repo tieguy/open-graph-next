@@ -1,0 +1,27 @@
+completion_tokens: 1343
+cost_usd: 0.00921897
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 71842
+property: P856
+property_label: official website
+rationale: The official website for Fukuchiyama, a city in Kyoto Prefecture, Japan,
+  is confirmed to be `https://www.city.fukuchiyama.lg.jp` through direct fetches of
+  the city's homepage and official documents. The new value, `https://www.hawaiianairlines.com`,
+  is unrelated to Fukuchiyama and is the website of a U.S.-based airline, making the
+  edit incorrect.
+rcid: null
+revid: 2471591651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.fukuchiyama.lg.jp
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.fukuchiyama.lg.jp/reiki/reiki_honbun/k103RG00000001.html
+timestamp: '2026-04-10T09:30:36.539119+00:00'
+title: Q3355306
+turns: 4
+value_label: null
+verdict: incorrect

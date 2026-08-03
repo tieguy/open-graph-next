@@ -1,0 +1,25 @@
+completion_tokens: 917
+cost_usd: 0.0160848
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 77673
+property: P140
+property_label: religion or worldview
+rationale: The edit changes Lope de Vega's religion from Judaism to Catholicism. While
+  Judaism is historically implausible for this Spanish playwright of the Catholic-dominated
+  Golden Age, I was unable to fetch or locate any independently verifiable sources
+  that explicitly state Lope de Vega's religion due to blocked or unavailable references.
+  No cited references accompany the claim on Wikidata, and my attempts to verify through
+  authoritative biographical sources failed. Therefore, the claim remains unverified.
+rcid: 2550217848
+revid: 2473560018
+sources:
+- provenance: unreachable (blocked domain)
+  supports_claim: null
+  url: https://www.britannica.com/biography/Lope-de-Vega
+timestamp: '2026-04-07T10:29:01.429695+00:00'
+title: Q165257
+turns: 6
+value_label: Catholicism
+verdict: unverifiable

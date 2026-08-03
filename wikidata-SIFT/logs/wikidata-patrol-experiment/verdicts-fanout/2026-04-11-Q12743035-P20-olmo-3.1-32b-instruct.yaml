@@ -1,0 +1,28 @@
+completion_tokens: 1387
+cost_usd: 0.0043616
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17647
+property: P20
+property_label: place of death
+rationale: The tourism website of Chișinău explicitly states that Valentina Rusu-Ciobanu
+  died in Chișinău and is buried at the Central Cemetery there. This directly supports
+  the 'place of death' claim and is a reliable, independently sourced confirmation.
+rcid: 2550516247
+revid: 2473850657
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://visit.chisinau.md/en/obiective_turistice/valentina-rusu-ciobanu/
+- provenance: verified
+  supports_claim: false
+  url: https://teza.md/images/exemple/Problematica_culturala_in_presa_scrisa.pdf
+- provenance: unverified
+  supports_claim: null
+  url: https://old.gov.md/en/content/obituary-valentina-rusu-ciobanu-28-october-1920-1-november-2021
+timestamp: '2026-04-11T16:54:22.566873+00:00'
+title: Q12743035
+turns: 1
+value_label: Chișinău
+verdict: verified-high

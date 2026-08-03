@@ -1,0 +1,32 @@
+completion_tokens: 2395
+cost_usd: 0.0068042
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26836
+property: P39
+property_label: position held
+rationale: The edit claims that Johannes W. Dietrich holds a professorship starting
+  in 2025, but no fetched, independent source explicitly confirms this specific start
+  date or the explicit assumption of a professorship in 2025. While his academic affiliations
+  are supported by ORCID and Academia.edu, these sources do not specify a 2025 start
+  date or use the term 'professorship.' The cited Leibniz-Sozietät event page mentions
+  him but does not reference a 2025 professorship. Therefore, the evidence is insufficient
+  to verify the claim.
+rcid: 2550594182
+revid: 2473925546
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0002-1185-3549
+- provenance: verified
+  supports_claim: false
+  url: https://ruhr-uni-bochum.academia.edu/JohannesWDietrich
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-zur-gemeinsamen-sitzung-der-klasse-fuer-naturwissenschaften-und-technikwissenschaften-der-leibniz-sozietaet-mit-der-deutschen-gesellschaft-fuer-kybernetik-am-11-april-2024/
+timestamp: '2026-04-11T13:36:06.517024+00:00'
+title: Q48800274
+turns: 1
+value_label: professorship
+verdict: unverifiable

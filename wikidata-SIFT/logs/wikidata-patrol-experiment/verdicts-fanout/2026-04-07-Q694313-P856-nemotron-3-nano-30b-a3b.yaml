@@ -1,0 +1,24 @@
+completion_tokens: 620
+cost_usd: 0.006263449999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 122789
+property: P856
+property_label: official website
+rationale: No verifiable official source was found confirming Uruma's official website.
+  Multiple web searches for 'Uruma official website', 'Uruma Okinawa site:gov', and
+  local variations returned no relevant results. Given that the claim involves a website
+  update and official sources should be accessible either through municipal government
+  domains (.gov or .jp) or the entity's own domain, but no corroborating evidence
+  was located despite comprehensive searches, the evidence is insufficient to verify
+  the change. This meets the threshold for unverifiable status as no source was found
+  to support the claim.
+rcid: null
+revid: 2468927624
+sources: []
+timestamp: '2026-04-07T07:23:31.246623+00:00'
+title: Q694313
+turns: 15
+value_label: null
+verdict: unverifiable

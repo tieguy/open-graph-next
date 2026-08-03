@@ -1,0 +1,24 @@
+completion_tokens: 1340
+cost_usd: 0.00179392
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26566
+property: P136
+property_label: genre
+rationale: The Bandcamp page and an album review both describe City Lights as a pop-punk
+  band. This supports the change from "punk rock" to "pop-punk".
+rcid: 2551132335
+revid: 2474447217
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://citylightspoppunk.bandcamp.com/
+- provenance: verified
+  supports_claim: true
+  url: https://itsalldead.com/2013/12/16/city-lights-the-way-things-should-be/
+timestamp: '2026-04-11T11:59:32.594748+00:00'
+title: Q15052843
+turns: 3
+value_label: pop-punk
+verdict: verified-high

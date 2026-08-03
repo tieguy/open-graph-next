@@ -1,0 +1,32 @@
+completion_tokens: 1607
+cost_usd: 0.0062316
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26337
+property: P856
+property_label: official website
+rationale: Multiple independent and primary sources, including Britannica, IMDb, USATODAY,
+  and the official website itself, confirm that https://chucknorris.com/ is the correct
+  official website for Chuck Norris. The edit did not change the website URL but did
+  change the associated web feed qualifier, which should be separately verified.
+rcid: 2550580873
+revid: 2473912673
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.britannica.com/biography/Chuck-Norris
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/name/nm0001602/
+- provenance: verified
+  supports_claim: true
+  url: https://eu.usatoday.com/story/entertainment/celebrities/2026/03/20/chuck-norris-dies/89230252007/
+- provenance: verified
+  supports_claim: true
+  url: https://chucknorris.com/
+timestamp: '2026-04-11T13:56:59.636213+00:00'
+title: Q2673
+turns: 1
+value_label: null
+verdict: verified-high

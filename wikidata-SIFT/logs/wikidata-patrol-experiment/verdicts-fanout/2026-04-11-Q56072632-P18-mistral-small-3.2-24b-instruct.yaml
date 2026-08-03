@@ -1,0 +1,26 @@
+completion_tokens: 1890
+cost_usd: 0.00200892
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27066
+property: P18
+property_label: image
+rationale: The new image 'Alsergrund (Wien) - Müllverbrennungsanlage Spittelau, Schlot.JPG'
+  is more relevant and accurate for the item 'Chimney of Müllverbrennungsanlage Spittelau'
+  compared to the old image 'City of Vienna, Fernwaerme Wien.jpg'. The new image matches
+  the description of the item and includes specific location and design details.
+rcid: 2551004619
+revid: 2474322646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.alamy.com/wien-vienna-mllverbrennungsanlage-waste-incineration-plant-spittelau-design-by-friedensreich-hundertwasser-smoke-at-chimney-in-09-alsergrund-image467509044.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.visitingvienna.com/footsteps/spittelau/
+timestamp: '2026-04-11T14:12:03.546130+00:00'
+title: Q56072632
+turns: 3
+value_label: null
+verdict: verified-high

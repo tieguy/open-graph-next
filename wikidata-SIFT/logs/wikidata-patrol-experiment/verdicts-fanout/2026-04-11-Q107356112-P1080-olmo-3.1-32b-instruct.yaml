@@ -1,0 +1,31 @@
+completion_tokens: 1949
+cost_usd: 0.003915
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13728
+property: P1080
+property_label: from narrative universe
+rationale: The new value 'Smallfoot universe' is not an officially recognized narrative
+  universe by the creators or rights holders of Smallfoot. Percy Patterson is consistently
+  described as a character from the film 'Smallfoot,' and there is no evidence from
+  official or reliable sources supporting the existence of a separate 'Smallfoot universe.'
+  The change replaces a correct, well-sourced value with a fan-created entity, which
+  is not appropriate for Wikidata.
+rcid: 2550392621
+revid: 2473730418
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.warnerbros.com/movies/smallfoot/
+- provenance: verified
+  supports_claim: false
+  url: https://smallfoot.fandom.com/wiki/Percy_Patterson
+- provenance: verified
+  supports_claim: false
+  url: https://smallfoot.fandom.com/wiki/Smallfoot_Universe
+timestamp: '2026-04-11T07:01:11.678591+00:00'
+title: Q107356112
+turns: 1
+value_label: Smallfoot universe
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 1479
+cost_usd: 0.0096024
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43575
+property: P570
+property_label: date of death
+rationale: The edit claims John Demjanjuk died on 17 March 1988, but multiple reputable
+  contemporary obituaries and biographies state that he died on 17 March 2012. The
+  only reference provided for the 1988 date is a 2012 obituary that does not cite
+  a primary source, and it is contradicted by independent reporting. Therefore, the
+  1988 date is incorrect.
+rcid: 2549931652
+revid: 2473284245
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/2012/03/18/world/europe/john-demjanjuk-last-nazi-guard-dies-at-91.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-europe-17388965
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20120505075757/http://worldnews.msnbc.msn.com/_news/2012/03/17/10730988-nazi-war-criminal-john-demjanjuk-dies-at-91
+timestamp: '2026-04-07T11:56:25.749247+00:00'
+title: Q152672
+turns: 4
+value_label: null
+verdict: incorrect

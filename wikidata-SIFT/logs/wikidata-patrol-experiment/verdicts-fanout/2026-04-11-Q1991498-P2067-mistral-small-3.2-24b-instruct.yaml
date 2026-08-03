@@ -1,0 +1,31 @@
+completion_tokens: 1034
+cost_usd: 0.00819109625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 84007
+property: P2067
+property_label: mass
+rationale: The claim could not be verified due to difficulties in accessing reliable
+  sources. The referenced Wikipedia page is blocked, and other potential sources such
+  as Basketball Reference and FIBA did not yield relevant information.
+rcid: 2550211455
+revid: 2473554072
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Josep_Maria_Guzm%C3%A1n
+- provenance: verified
+  supports_claim: false
+  url: https://www.basketball-reference.com/players/g/guzmanjo01.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.fib.eu/player/i/138658/josep-maria-guzman-canas
+- provenance: verified
+  supports_claim: false
+  url: https://www.acb.com/player/20200653/josep-maria-guzman-canas
+timestamp: '2026-04-11T13:24:23.174009+00:00'
+title: Q1991498
+turns: 8
+value_label: null
+verdict: unverifiable

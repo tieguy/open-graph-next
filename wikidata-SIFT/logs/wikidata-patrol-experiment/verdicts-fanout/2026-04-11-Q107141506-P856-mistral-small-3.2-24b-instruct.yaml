@@ -1,0 +1,22 @@
+completion_tokens: 789
+cost_usd: 0.00512775
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52592
+property: P856
+property_label: official website
+rationale: The claim does not have any references cited, and we are unable to perform
+  web searches and fetch additional information to verify the claim. The website https://sluishuis.nl
+  exists but does not explicitly state it is the official website of Sluishuis.
+rcid: 2550966960
+revid: 2474286587
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sluishuis.nl
+timestamp: '2026-04-11T17:10:35.898382+00:00'
+title: Q107141506
+turns: 4
+value_label: null
+verdict: unverifiable

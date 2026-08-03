@@ -1,0 +1,35 @@
+completion_tokens: 2023
+cost_usd: 0.00193152
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20275
+property: P19
+property_label: place of birth
+rationale: The edit added a reference from English Wikipedia, which is blocked and
+  cannot be verified. While multiple secondary sources (Grokipedia, Famous Birthdays,
+  and The Movie Database) independently confirm that Taylor Ann Thompson was born
+  in Los Angeles, these sources are not authoritative enough to replace the invalid
+  Wikipedia reference. Since Wikipedia cannot be used as a valid reference for Wikidata,
+  the edit does not improve the claim’s reliability. The value itself did not change,
+  and no new primary evidence was introduced.
+rcid: 2550925503
+revid: 2474247102
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://grokipedia.com/page/Taylor_Ann_Thompson
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/taylor-thompson-movieactress.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.themoviedb.org/person/1558411-taylor-ann-thompson
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Taylor_Ann_Thompson
+timestamp: '2026-04-11T05:45:38.550860+00:00'
+title: Q123531360
+turns: 2
+value_label: Los Angeles
+verdict: suspect

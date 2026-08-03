@@ -1,0 +1,27 @@
+completion_tokens: 1794
+cost_usd: 0.01005768
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 94896
+property: P13568
+property_label: ‎Substack handle
+rationale: The Substack website at https://joshuniverse.substack.com/ confirms the
+  handle 'joshuniverse' and explicitly identifies the author as 'Josh Universe'. The
+  content is in English, supporting the qualifiers P1810 (subject named as) and P407
+  (language of work or name). The primary source directly supports the claim, and
+  no contradictions were found.
+rcid: 2551428839
+revid: 2474729035
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.substack.com/
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.substack.com/about
+timestamp: '2026-04-11T15:35:51.390316+00:00'
+title: Q123738871
+turns: 5
+value_label: null
+verdict: verified-high

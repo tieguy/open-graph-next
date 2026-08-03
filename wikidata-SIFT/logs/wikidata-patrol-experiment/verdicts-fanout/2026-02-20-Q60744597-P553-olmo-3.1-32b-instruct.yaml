@@ -1,0 +1,30 @@
+completion_tokens: 1277
+cost_usd: 0.0042064
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17201
+property: P553
+property_label: website account on
+rationale: No authoritative source confirms that Global Banking & Finance Review maintains
+  an official social media account. The official website does not indicate such an
+  account, and third-party business directories list social media links as unknown.
+  While the magazine covers social media topics, this does not equate to the magazine
+  itself having an official social media presence.
+rcid: 2540956529
+revid: 2464744754
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com/social-media-must-mean-more-to-banks-than-facebook-channel-says-report/
+- provenance: reported
+  supports_claim: false
+  url: https://www.zoominfo.com/c/global-banking--finance-review/355949996
+timestamp: '2026-02-20T06:51:53.301083+00:00'
+title: Q60744597
+turns: 2
+value_label: social media
+verdict: suspect

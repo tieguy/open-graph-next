@@ -1,0 +1,28 @@
+completion_tokens: 493
+cost_usd: 0.01124027
+diff_type: qualifier_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 28704
+property: P159
+property_label: headquarters location
+rationale: The official website of the Embassy of Israel in Brazil clearly states
+  its address in Brasília, confirming the headquarters location. The 'About the embassy'
+  page mentions the embassy was transferred to Brasília in 1964, and the 'Contact
+  us' page lists the address as Av. das Nações, s/n - Lote 38 - Asa Sul, Brasília
+  - DF, which matches the street address claim (P6375) on the Wikidata item. The item's
+  description as 'Embassy of Israel, Brasilia' also aligns with the verified location.
+rcid: 2540920501
+revid: 2464711556
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/brazil/en/the-embassy/about
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/brazil/en/contacts
+timestamp: '2026-02-21T01:09:22.328929+00:00'
+title: Q105705907
+turns: 4
+value_label: Brasília
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 1890
+cost_usd: 0.01685937
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 213815
+property: P106
+property_label: occupation
+rationale: The claim that Georgios Papanikolaou (Q319321) was a pedophile (Q29042975)
+  is unsupported by any credible sources. The removed claim had no references and
+  contradicts the well-established historical record of Papanikolaou as a physician,
+  cytopathologist, and inventor of the Pap smear. All verified sources describe his
+  contributions to medicine and do not mention any association with pedophilia.
+rcid: 2551345536
+revid: 2474651600
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://greekreporter.com/2025/02/04/pap-smear-georgios-papanikolaou-greek-doctor/
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/news/2019/5/13/georgios-papanikolaou-the-story-of-a-scientist-and-pioneer
+timestamp: '2026-04-11T06:15:04.924510+00:00'
+title: Q319321
+turns: 15
+value_label: pedophile
+verdict: verified-high

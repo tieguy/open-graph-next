@@ -1,0 +1,40 @@
+completion_tokens: 3302
+cost_usd: 0.005774080000000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 82798
+property: P26
+property_label: spouse
+rationale: No verifiable sources were found to confirm or deny the claim that Ahlam
+  is the spouse of Mubarak Al-Hajiri. The search results did not provide any relevant
+  information to support or contradict the edit.
+rcid: null
+revid: 2471852029
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mubarak+Al-Hajiri+spouse+Ahlam
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ahlam+spouse
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mubarak+Al-Hajiri+spouse
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mubarak+Al-Hajiri+Ahlam
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mubarak+Al-Hajiri+Nancy+Ajram
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Mubarak+Al-Hajiri+marriage
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ahlam+marriage
+timestamp: '2026-04-07T14:16:22.565949+00:00'
+title: Q12238493
+turns: 15
+value_label: Ahlam
+verdict: unverifiable

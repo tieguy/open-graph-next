@@ -1,0 +1,33 @@
+completion_tokens: 1169
+cost_usd: 0.03506098
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 130114
+property: P734
+property_label: family name
+rationale: 'The edit adds family name ''Abaza'' (Q16147986) to Viktor Abaza (Q12075586).
+  Multiple independent sources confirm that ''Abaza'' is indeed his family name. The
+  Encyclopedia of Ukraine entry for Graycoats lists ''Lt Col Viktor Abaza'' as a commander,
+  directly using the surname Abaza. The Find a Grave memorial for ''Viktor Ivanovich
+  Abaza'' also records the surname. Additionally, the Wikidata item itself shows the
+  entity is part of the ''House of Abaza'' (P53: Q4054212), a noble family, which
+  corroborates that Abaza is the family name. The claim is straightforward, consistent
+  across sources, and the surname is explicitly stated.'
+rcid: 2540962487
+revid: 2464750348
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopediaofukraine.com/display.asp?linkpath=pages%5CG%5CR%5CGraycoats.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/173727667/viktor-ivanovich-abaza
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q4054212
+timestamp: '2026-02-20T04:26:36.449333+00:00'
+title: Q12075586
+turns: 9
+value_label: Abaza
+verdict: verified-high

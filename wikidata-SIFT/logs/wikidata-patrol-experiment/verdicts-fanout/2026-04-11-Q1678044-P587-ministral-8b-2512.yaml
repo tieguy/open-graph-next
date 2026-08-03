@@ -1,0 +1,26 @@
+completion_tokens: 1735
+cost_usd: 0.00410913
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38306
+property: P587
+property_label: MMSI
+rationale: The new MMSI value, **370610000**, is confirmed by two independent primary
+  sources (CruiseMapper and VesselFinder). The old MMSI value, **248124000**, is not
+  supported by any credible source. The edit aligns with authoritative maritime databases
+  and is therefore correct.
+rcid: 2550773799
+revid: 2474099463
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cruisemapper.com/ships/Crown-Iris-601
+- provenance: verified
+  supports_claim: true
+  url: https://www.vesselfinder.com/vessels/details/8814744
+timestamp: '2026-04-11T05:33:32.995870+00:00'
+title: Q1678044
+turns: 3
+value_label: null
+verdict: verified-high

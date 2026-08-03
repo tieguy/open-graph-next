@@ -1,0 +1,38 @@
+completion_tokens: 354
+cost_usd: 0.00269208
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 19479
+property: P69
+property_label: educated at
+rationale: The claim that Wiz Khalifa was educated at IES Goya is incorrect. IES Goya
+  is a secondary school in Zaragoza, Spain, as confirmed by its official website.
+  Independent searches for 'Wiz Khalifa IES Goya', 'Wiz Khalifa school', and 'Wiz
+  Khalifa education' return no evidence linking him to this Spanish school. All reliable
+  sources, including his official biography, state he attended high school in Pittsburgh,
+  Pennsylvania, USA (Taylor Allderdice High School). The current claim appears to
+  be vandalism or a disambiguation error.
+rcid: 2540942810
+revid: 2464732262
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wiz_Khalifa
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Wiz-Khalifa
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/musicians/wiz-khalifa
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmusic.com/artist/wiz-khalifa-mn0000840950/biography
+- provenance: verified
+  supports_claim: false
+  url: https://www.iesgoya.com/
+timestamp: '2026-02-20T13:23:43.635975+00:00'
+title: Q117139
+turns: 1
+value_label: IES Goya
+verdict: incorrect

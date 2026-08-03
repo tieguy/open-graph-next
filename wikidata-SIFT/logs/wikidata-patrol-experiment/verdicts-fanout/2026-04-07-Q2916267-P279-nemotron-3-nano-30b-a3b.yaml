@@ -1,0 +1,28 @@
+completion_tokens: 771
+cost_usd: 0.0044469
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 85854
+property: P279
+property_label: subclass of
+rationale: The investigation could not identify any source confirming that 'cookware
+  and bakeware' is an appropriate 'subclass of' label for the Tulip chair. Multiple
+  search queries for Eero Saarinen or Tulip chair in relation to cookware/bakeware
+  or industry categories returned no relevant sources containing this classification.
+  None of the fetched or found pages supported the claim, and no verifiable primary
+  or secondary source identified the Tulip chair as cookware/bakeware.
+rcid: 2551186634
+revid: 2474500439
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.museumofmodernart.org/collection/works/127810
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Eero+Saarinen+chair+industry+category
+timestamp: '2026-04-07T08:53:21.877712+00:00'
+title: Q2916267
+turns: 15
+value_label: cookware and bakeware
+verdict: unverifiable

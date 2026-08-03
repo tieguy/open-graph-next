@@ -1,0 +1,36 @@
+completion_tokens: 394
+cost_usd: 0.00594
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28518
+property: P348
+property_label: software version identifier
+rationale: The new value '1.15.0' does not appear in any official release notes or
+  changelogs for the Gleam programming language. The most recent releases found via
+  official GitHub releases are in the 0.x series (e.g., 0.32.0, 0.33.0, up to at least
+  0.22.0 as of June 2022). There is no evidence that Gleam ever released a version
+  numbered '1.15.0' or transitioned from 0.x to 1.x. The cited reference URL in the
+  edit for the new value (https://github.com/gleam-lang/gleam/releases/tag/v1.15.0)
+  does not exist on GitHub, and no independent sources mention such a version. Therefore,
+  the change is not supported by any verifiable source.
+rcid: 2551243231
+revid: 2474555010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/gleam-lang/gleam/releases/tag/v0.32.0
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/gleam-lang/gleam/releases/tag/v0.22.0
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/gleam-lang/gleam/releases
+- provenance: reported
+  supports_claim: false
+  url: https://web.archive.org/web/20220620120000/https://github.com/gleam-lang/gleam/releases
+timestamp: '2026-04-11T15:09:30.431996+00:00'
+title: Q66370905
+turns: 1
+value_label: null
+verdict: unverifiable

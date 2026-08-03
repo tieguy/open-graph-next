@@ -1,0 +1,31 @@
+completion_tokens: 1468
+cost_usd: 0.0049856
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20524
+property: P18
+property_label: image
+rationale: The image 'Masoud Pezeshkian 14040616 (cropped).jpg' was removed without
+  any referenced source or independent verification that it is the official or most
+  appropriate image for the subject. Standard Wikidata policy discourages retaining
+  unsourced images. Independent news and stock photo sources do not confirm this image
+  as the official portrait, making its removal appropriate, but its correctness cannot
+  be confirmed.
+rcid: 2551335010
+revid: 2474641550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/masoud-pezeshkian
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehindu.com/news/international/irans-khamenei-formally-grants-masoud-pezeshkian-presidential-powers/article68456408.ece
+timestamp: '2026-04-11T07:55:26.806287+00:00'
+title: Q5933752
+turns: 1
+value_label: null
+verdict: suspect

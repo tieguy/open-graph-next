@@ -1,0 +1,24 @@
+completion_tokens: 1619
+cost_usd: 0.00171981
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16042
+property: P122
+property_label: basic form of government
+rationale: The State of Burma (1943–1945) was a Japanese puppet state under authoritarian/military
+  control, not an independent constitutional monarchy. Independent sources confirm
+  it was governed as a dictatorship. The old value ('constitutional monarchy') lacks
+  credible support, while the new value ('dictatorship') aligns with historical context
+  and verified primary sources.
+rcid: 2551284723
+revid: 2474593781
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://burmacampaign.org.uk/about-burma/
+timestamp: '2026-04-11T13:37:12.385084+00:00'
+title: Q704358
+turns: 1
+value_label: dictatorship
+verdict: verified-high

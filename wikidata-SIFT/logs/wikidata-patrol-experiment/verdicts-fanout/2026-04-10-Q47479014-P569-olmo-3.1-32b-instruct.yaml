@@ -1,0 +1,24 @@
+completion_tokens: 998
+cost_usd: 0.0029786
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11899
+property: P569
+property_label: date of birth
+rationale: Sports-Reference.com, a reputable sports statistics website, explicitly
+  states Laurent Lacasa's date of birth as 28 September 1964, confirming the edit.
+  The original cited source (World Rowing athlete database) previously supported this
+  value but is now unreachable. Independent verification suffices for a high-confidence
+  rating.
+rcid: null
+revid: 2471461345
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sports-reference.com/olympics/athletes/lacasa-laurent.html
+timestamp: '2026-04-10T09:56:55.618298+00:00'
+title: Q47479014
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 848
+cost_usd: 0.00197961875
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20065
+property: P31
+property_label: instance of
+rationale: The edit's claim has cited references, but both URLs are unreachable. Independent
+  searches for 'Runway Magazine instance of organization' and 'Runway Magazine' did
+  not yield relevant results. Therefore, the claim cannot be verified or refuted based
+  on the available information.
+rcid: null
+revid: 2471602727
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://runwaylive.com
+- provenance: verified
+  supports_claim: false
+  url: https://ww.runwaylive.com
+timestamp: '2026-04-07T12:33:16.365127+00:00'
+title: Q113486067
+turns: 3
+value_label: organization
+verdict: unverifiable

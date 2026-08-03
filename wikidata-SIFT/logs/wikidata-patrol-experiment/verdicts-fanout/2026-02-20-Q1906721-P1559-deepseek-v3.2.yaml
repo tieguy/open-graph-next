@@ -1,0 +1,34 @@
+completion_tokens: 1337
+cost_usd: 0.047355360000000006
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 221398
+property: P1559
+property_label: name in native language
+rationale: The edit sets P1559 (name in native language) to 'rusia', which is Spanish
+  for 'Russia', not a Japanese name. Masahiro Sakurai is a Japanese video game designer,
+  and multiple independent sources confirm his native Japanese name is 桜井政博 (Sakurai
+  Masahiro). WiKirby, SmashWiki, MarioWiki, and Wikimedia Commons all list 桜井政博 as
+  his Japanese name. No source supports 'rusia' as his name in native language; it
+  appears to be a language code or mistaken value.
+rcid: 2540929965
+revid: 2464720645
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.mariowiki.com/Masahiro_Sakurai
+timestamp: '2026-02-20T20:30:04.281190+00:00'
+title: Q1906721
+turns: 15
+value_label: null
+verdict: incorrect

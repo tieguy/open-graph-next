@@ -1,0 +1,27 @@
+completion_tokens: 1551
+cost_usd: 0.003401
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12352
+property: P1814
+property_label: name in kana
+rationale: The value 'eros ramazzott*' is not a valid Japanese kana rendering for
+  Eijirō Ono's name. All reliable sources indicate the correct kana name is おの えいじろう.
+  The cited Japanese Wikipedia reference could not be fetched to verify the claim,
+  and independent sources do not support the new value. This change appears to be
+  an error and should be reverted.
+rcid: null
+revid: 2464869007
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Eijir%C5%8D_Ono
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/小野_英二郎
+timestamp: '2026-04-10T14:00:49.016594+00:00'
+title: Q11464251
+turns: 1
+value_label: null
+verdict: incorrect

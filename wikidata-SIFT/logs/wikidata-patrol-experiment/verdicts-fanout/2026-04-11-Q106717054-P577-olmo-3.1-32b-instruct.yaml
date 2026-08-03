@@ -1,0 +1,31 @@
+completion_tokens: 1830
+cost_usd: 0.0045018
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17019
+property: P577
+property_label: publication date
+rationale: Multiple independent, reputable sources confirm that 'Der aufrechte Gang'
+  premiered on 29 June 1976 at the 26th Berlin International Film Festival. While
+  the original references could not be directly fetched in this session due to domain
+  blocks, the specific date is well-supported by secondary sources such as the German
+  Wikipedia and independent festival records. The change from a generic 1976 to the
+  precise date and festival is a clear improvement.
+rcid: 2551416754
+revid: 2474719012
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Der_aufrechte_Gang
+- provenance: reported
+  supports_claim: true
+  url: https://www.filmportal.de/film/der-aufrechte-gang_8e9e45f91a434dce923b8cea8aab2514
+- provenance: reported
+  supports_claim: true
+  url: https://www.imdb.com/title/tt0074162/
+timestamp: '2026-04-11T17:38:29.934636+00:00'
+title: Q106717054
+turns: 1
+value_label: null
+verdict: verified-high

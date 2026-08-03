@@ -1,0 +1,24 @@
+completion_tokens: 1075
+cost_usd: 0.0159488
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 76519
+property: P26
+property_label: spouse
+rationale: The only cited reference for the spouse change is the Chinese Wikipedia
+  page, which is not a primary or independent source for biographical relationship
+  claims. Multiple searches and fetch attempts did not find any independent, reliable
+  confirmation that Im Nayeon is Huang Hua's spouse. Without such corroboration, the
+  edit cannot be verified.
+rcid: null
+revid: 2462909447
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zh.wikipedia.org/w/index.php?title=%E9%BB%84%E5%8D%8E_(1913%E5%B9%B4)&oldid=82348463
+timestamp: '2026-04-07T09:54:01.920248+00:00'
+title: Q381220
+turns: 10
+value_label: Im Nayeon
+verdict: unverifiable

@@ -1,0 +1,33 @@
+completion_tokens: 3468
+cost_usd: 0.10303699999999999
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 85697
+property: P856
+property_label: official website
+rationale: The URL https://ranbirsidhu.com/ belongs to Ranbir Sidhu the writer/author
+  (author of novels 'Night in Delhi' and 'Dark Star'), not to Ranbir Sidhu the visual
+  artist/sculptor represented by Q110811463. Direct inspection of the website confirms
+  it contains only literary content (books, essays, press coverage of his novels).
+  Q110811463 clearly describes a Toronto-based sculptor born in Maidenhead, England,
+  who works with steel and marble and had a museum debut at the Art Gallery of Ontario
+  in December 2025. These are two different people sharing the same name. The edit
+  assigns the wrong person's website to the wrong Wikidata item.
+rcid: 2540950477
+revid: 2464739420
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ranbirsidhu.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thestar.com/entertainment/visual-arts/ranbir-sidhu-ago/article_c2fb14cf-be49-494b-be37-c20e1c5576f1.html
+- provenance: verified
+  supports_claim: false
+  url: https://bluemedium.com/clients/ranbir-sidhu/
+timestamp: '2026-02-20T09:20:10.409040+00:00'
+title: Q110811463
+turns: 8
+value_label: null
+verdict: incorrect

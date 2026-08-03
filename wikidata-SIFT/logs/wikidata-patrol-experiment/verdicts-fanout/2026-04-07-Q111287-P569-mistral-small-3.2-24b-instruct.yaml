@@ -1,0 +1,37 @@
+completion_tokens: 725
+cost_usd: 0.0133216625
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 136242
+property: P569
+property_label: date of birth
+rationale: No verified sources were found to confirm the date of birth of Hans-Georg
+  Backhaus as 29 April 1929. The Wikipedia pages and other potential sources were
+  either blocked or did not provide the necessary information.
+rcid: 2549601953
+revid: 2472963887
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Hans-Georg_Backhaus
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Hans-Georg_Backhaus
+- provenance: verified
+  supports_claim: false
+  url: https://www.nukat.edu.pl/katalog/123542
+- provenance: verified
+  supports_claim: false
+  url: https://www.leevi.org/backhaus/biography/
+- provenance: verified
+  supports_claim: false
+  url: https://www.uni-leipzig.de/en/faculties/faculty-of-economics-and-management-science/
+- provenance: verified
+  supports_claim: false
+  url: https://www.uni-leipzig.de/en/faculties/faculty-of-economics-and-management-science/institute-for-theoretical-economics/
+timestamp: '2026-04-07T10:50:41.499238+00:00'
+title: Q111287
+turns: 15
+value_label: null
+verdict: unverifiable

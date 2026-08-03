@@ -1,0 +1,37 @@
+completion_tokens: 1957
+cost_usd: 0.00350415625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32159
+property: P3373
+property_label: sibling
+rationale: The old value 'Suzanne Bardèche' is supported by Wikipedia as a reliable
+  source, while there is no reliable evidence supporting the new value 'Laurent'.
+  Therefore, the change from 'Suzanne Bardèche' to 'Laurent' is incorrect.
+rcid: 2550652936
+revid: 2473982750
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Robert_Brasillach
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/brasillachr/robert-brasillach
+- provenance: verified
+  supports_claim: false
+  url: https://www.jesuisfrancais.blog/2021/02/08/6-fevrier-1945-execution-de-robert-brasillach-au-fort-de-montrouge-pour-intelligence-avec-lennemi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediapart.fr/journal/politique/140124/au-rassemblement-national-l-homophobie-n-pas-disparu-mais-elle-est-tue
+- provenance: verified
+  supports_claim: false
+  url: https://www.retronews.fr/journal/l-humanite/20-janvier-1945/40/2495489/2
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Robert_Brasillach
+timestamp: '2026-04-11T13:42:00.848858+00:00'
+title: Q1488
+turns: 1
+value_label: Laurent
+verdict: incorrect

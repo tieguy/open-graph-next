@@ -1,0 +1,28 @@
+completion_tokens: 1006
+cost_usd: 0.0012063400000000002
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12271
+property: P577
+property_label: publication date
+rationale: The publication date of April 15, 2026, is supported by the Movie Insider
+  page. However, other potential sources could not be verified due to fetch failures,
+  limiting the strength of the evidence.
+rcid: 2550462849
+revid: 2473799307
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.movieinsider.com/m25276/balls-up
+- provenance: verified
+  supports_claim: false
+  url: https://hadnews.com/balls-up-official-trailer-2026-mark-wahlberg/
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmratings.com/Content/Downloads/cara_rating_bulletin.pdf
+timestamp: '2026-04-11T15:59:32.520455+00:00'
+title: Q127688132
+turns: 1
+value_label: null
+verdict: verified-low

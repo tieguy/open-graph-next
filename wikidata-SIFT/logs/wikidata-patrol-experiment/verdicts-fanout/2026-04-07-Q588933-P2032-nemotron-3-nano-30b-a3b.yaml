@@ -1,0 +1,24 @@
+completion_tokens: 684
+cost_usd: 0.014558350000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 288431
+property: P2032
+property_label: end of work period
+rationale: The provided URL https://www.shauntan.net/about contains a statement that
+  Shaun Tan 'works as an artist, writer and film-maker in Melbourne' but does not
+  specify an end of work period or contain any information about a 67 CE value. No
+  source was found that confirms the claim that '67 CE' is a correct end of work period
+  extension. Therefore the edit cannot be verified or disproven with available evidence.
+rcid: null
+revid: 2468965926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.shauntan.net/about
+timestamp: '2026-04-07T04:25:51.905020+00:00'
+title: Q588933
+turns: 15
+value_label: null
+verdict: unverifiable

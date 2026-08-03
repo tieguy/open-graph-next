@@ -1,0 +1,29 @@
+completion_tokens: 2120
+cost_usd: 0.00195123
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16623
+property: P31
+property_label: instance of
+rationale: Independent sources confirm that 'library and information science' is an
+  academic degree (e.g., MLIS, MA, MS) and not an instance of 'interdisciplinary science.'
+  The cited reference (ASC Leiden Thesaurus) is unreachable, and the item's description
+  aligns with an academic degree rather than an interdisciplinary science classification.
+rcid: 2551339635
+revid: 2474645889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bulletins.wayne.edu/graduate/school-information-sciences/masters-programs/library-and-information-science/
+- provenance: verified
+  supports_claim: false
+  url: https://www.librariancertification.com/types-of-library-information-science-degree-programs/
+- provenance: verified
+  supports_claim: false
+  url: https://www.simmons.edu/graduate/academic-programs/graduate-and-certificate-programs/library-and-information-science-ms
+timestamp: '2026-04-10T13:08:43.637857+00:00'
+title: Q13420675
+turns: 1
+value_label: academic degree
+verdict: incorrect

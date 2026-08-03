@@ -1,0 +1,22 @@
+completion_tokens: 663
+cost_usd: 0.0021174
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19308
+property: P452
+property_label: industry
+rationale: The fetched content from Northdata explicitly states that the company's
+  purpose includes market research activities, which directly supports the industry
+  claim.
+rcid: 2540918444
+revid: 2464709626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.northdata.com/Institut%20f%C3%BCr%20limbische%20Kommunikation%20und%20Strategie%20GmbH,%20Z%C3%BCrich/CHE-276.195.210
+timestamp: '2026-02-21T02:24:08.502693+00:00'
+title: Q138337434
+turns: 3
+value_label: market research
+verdict: verified-high

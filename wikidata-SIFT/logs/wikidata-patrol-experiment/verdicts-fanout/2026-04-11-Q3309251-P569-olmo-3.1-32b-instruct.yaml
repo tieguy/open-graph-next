@@ -1,0 +1,27 @@
+completion_tokens: 1606
+cost_usd: 0.0045684
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18024
+property: P569
+property_label: date of birth
+rationale: The old value of December 20, 666 is inconsistent with all other biographical
+  information and is implausible for a 20th-century Canadian politician. Multiple
+  authoritative sources, including Library and Archives Canada and the Parliament
+  of Canada, independently confirm that Michel Chartrand was born on December 20,
+  1906. Therefore, the change to the new value is correct and well-supported.
+rcid: 2550798454
+revid: 2474123491
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bac-lac.gc.ca/eng/Discover/Pages/Collection/highlights/chartrand-michel.aspx
+- provenance: verified
+  supports_claim: true
+  url: https://www.parl.ca/Members/MPParl/En/Bio/121451
+timestamp: '2026-04-11T11:22:36.330232+00:00'
+title: Q3309251
+turns: 1
+value_label: null
+verdict: verified-high

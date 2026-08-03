@@ -1,0 +1,23 @@
+completion_tokens: 1032
+cost_usd: 0.0041782
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17795
+property: P21
+property_label: sex or gender
+rationale: The edit changes the sex or gender of Aron Blesch from 'female' to 'male,'
+  but no cited or independently verifiable sources confirm this value. The only fetched
+  source (Academia.edu profile) does not mention sex or gender. Without reliable evidence,
+  the claim cannot be verified.
+rcid: null
+revid: 2472178662
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://rochester.academia.edu/aronblesch
+timestamp: '2026-04-07T05:18:15.385735+00:00'
+title: Q62617655
+turns: 3
+value_label: male
+verdict: unverifiable

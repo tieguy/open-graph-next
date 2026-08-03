@@ -1,0 +1,23 @@
+completion_tokens: 2054
+cost_usd: 0.0041656
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14666
+property: P5817
+property_label: state of use
+rationale: Ōfunato Station was converted from a railway station to a bus stop in 2013
+  and is currently in operation as a bus stop, according to the Japanese Wikipedia.
+  There is no evidence that the station is decommissioned or out of use. The change
+  from 'decommissioned' to 'in use' is therefore correct.
+rcid: 2550465286
+revid: 2473801730
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/大船渡駅
+timestamp: '2026-04-11T15:29:29.751732+00:00'
+title: Q8081459
+turns: 1
+value_label: in use
+verdict: verified-high

@@ -1,0 +1,38 @@
+completion_tokens: 836
+cost_usd: 0.01420486
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 37795
+property: P1329
+property_label: phone number
+rationale: The phone number '+1 919-951-9103' is indeed associated with MacNeelas
+  Tree Service on multiple independent sources (MapQuest, Yelp, contact pages), but
+  the specific reference cited in the Wikidata edit (https://macneelastreeservicenc.com)
+  does NOT contain this phone number when fetched. The contact page (https://macneelastreeservicenc.com/contact/)
+  and about page both lack the phone number despite being from the same domain. This
+  suggests the edit's reference URL is incorrect or insufficient to support the claim,
+  even though the phone number itself appears to be correct based on other sources.
+rcid: 2540966739
+revid: 2464754320
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://macneelastreeservicenc.com
+- provenance: verified
+  supports_claim: false
+  url: https://macneelastreeservicenc.com/contact/
+- provenance: verified
+  supports_claim: false
+  url: https://macneelastreeservicenc.com/about/
+- provenance: reported
+  supports_claim: true
+  url: https://www.mapquest.com/us/north-carolina/macneelas-tree-service-543339909
+- provenance: reported
+  supports_claim: true
+  url: https://m.yelp.com/biz/macneelas-tree-service-hillsborough
+timestamp: '2026-02-20T03:38:13.921276+00:00'
+title: Q138349857
+turns: 6
+value_label: null
+verdict: suspect

@@ -1,0 +1,34 @@
+completion_tokens: 1926
+cost_usd: 0.00278166
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22814
+property: P103
+property_label: native language
+rationale: The edit incorrectly changes Frankie Muniz's native language from English
+  to Spanish. Multiple verified sources confirm Muniz does not speak Spanish despite
+  his Puerto Rican heritage, and his career context (e.g., P1412, P6886) consistently
+  lists English as his native language. The cited reference (English Wikipedia) is
+  unreachable (HTTP 404), and no independent evidence supports Spanish as Muniz's
+  native language.
+rcid: 2550704650
+revid: 2474032664
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://celebritytoob.com/five-fast-facts-former-child-star-frankie-muniz/
+- provenance: verified
+  supports_claim: false
+  url: https://niketalk.com/threads/celebrities-you-may-not-know-are-latino.531421/
+- provenance: verified
+  supports_claim: false
+  url: https://sac.media/2021/05/31/celebrities-you-didnt-know-were-hispanic/
+- provenance: verified
+  supports_claim: false
+  url: https://www.elcomercio.com/tendencias/entretenimiento/nueva-vida-protagonista-malcolm-frankie-muniz.html
+timestamp: '2026-04-11T11:08:42.572634+00:00'
+title: Q310275
+turns: 1
+value_label: Spanish
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1350
+cost_usd: 0.004844575
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47334
+property: P21
+property_label: sex or gender
+rationale: The updated references for the claim that Balen Shah's sex or gender is
+  male could not be verified. The Wikipedia page was blocked, and the biography from
+  Jagran Josh did not mention his gender. The biography URL provided in the reference
+  could not be fetched, leaving the claim unsupported by verifiable sources.
+rcid: 2551279358
+revid: 2474588640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Balen_Shah
+- provenance: verified
+  supports_claim: false
+  url: https://www.jagranjosh.com/general-knowledge/balen-shah-biography-1820006815-1
+- provenance: verified
+  supports_claim: false
+  url: https://famereports.com/balen-shah-biography/
+timestamp: '2026-04-11T18:30:03.365389+00:00'
+title: Q111772343
+turns: 5
+value_label: male
+verdict: unverifiable

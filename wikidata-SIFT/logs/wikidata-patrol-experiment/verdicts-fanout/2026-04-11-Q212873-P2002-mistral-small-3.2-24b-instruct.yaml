@@ -1,0 +1,22 @@
+completion_tokens: 1332
+cost_usd: 0.0179311625
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 189191
+property: P2002
+property_label: X (Twitter) username
+rationale: The lack of accessible sources and direct information makes it difficult
+  to confirm the start time of the username 'JaneBirkinOff'. The available sources
+  do not provide specific details about the X (Twitter) username claim on Jane Birkin.
+rcid: 2551130701
+revid: 2474445634
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://getdaytrends.com/trend/Jane%20Birkin/
+timestamp: '2026-04-11T08:32:42.294809+00:00'
+title: Q212873
+turns: 7
+value_label: null
+verdict: unverifiable

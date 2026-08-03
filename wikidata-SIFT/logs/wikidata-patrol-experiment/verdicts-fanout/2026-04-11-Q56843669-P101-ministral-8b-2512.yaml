@@ -1,0 +1,30 @@
+completion_tokens: 2362
+cost_usd: 0.00202671
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17345
+property: P101
+property_label: field of work
+rationale: The edit correctly changes the field of work from 'statistics' to 'data
+  science' for Florian Hartig (Q56843669). Independent verified sources (University
+  of Regensburg lab page and personal profile) explicitly describe Hartig's work as
+  'data science,' including the use of statistical methods, machine learning, and
+  algorithms—core components of data science. The existing reference URL (P854) already
+  supports this change, and the broader term 'data science' is more accurate than
+  'statistics' based on Hartig's self-description and research focus. No contradictions
+  were found in verified sources.
+rcid: 2550568317
+revid: 2473900722
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig
+- provenance: verified
+  supports_claim: true
+  url: https://www.uni-regensburg.de/biologie-vorklinische-medizin/forschen/arbeitsgruppen/ag-hartig/team/prof-dr-florian-hartig
+timestamp: '2026-04-11T11:03:30.156626+00:00'
+title: Q56843669
+turns: 1
+value_label: data science
+verdict: verified-high

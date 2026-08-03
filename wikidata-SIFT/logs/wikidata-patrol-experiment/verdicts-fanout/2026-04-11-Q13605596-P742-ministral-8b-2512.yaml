@@ -1,0 +1,32 @@
+completion_tokens: 1947
+cost_usd: 0.013580189999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 119346
+property: P742
+property_label: pseudonym
+rationale: The new pseudonym 'La negro' for Travis Scott (Q13605596) is not supported
+  by any verified sources. Multiple independent sources, including Nickfinder.com
+  and Capital Xtra, confirm 'La Flame' as a documented pseudonym, but there is no
+  evidence or corroboration for 'La negro'. The absence of references and lack of
+  corroboration from credible sources indicate that 'La negro' is not a valid pseudonym
+  for Travis Scott. The edit was reverted, further supporting the conclusion that
+  this change is incorrect.
+rcid: null
+revid: 2471270631
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://nickfinder.com/TravisScott
+- provenance: verified
+  supports_claim: false
+  url: https://www.capitalxtra.com/features/lists/travis-scott-facts/real-name/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehollywoodgossip.com/2024/06/how-did-travis-scott-get-his-name/
+timestamp: '2026-04-11T16:26:02.729292+00:00'
+title: Q13605596
+turns: 6
+value_label: null
+verdict: incorrect

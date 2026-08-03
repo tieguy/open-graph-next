@@ -1,0 +1,28 @@
+completion_tokens: 1148
+cost_usd: 0.0009176499999999999
+diff_type: value_changed
+finish_status: stop
+model: qwen/qwen3.5-9b
+prompt_tokens: 14909
+property: P137
+property_label: operator
+rationale: The item description for RCA Milano (Q3928196) already notes it was an
+  'imprint of RCA Italiana S.p.A.', suggesting RCA Italiana is a correct operator
+  reference. However, I only retrieved search results without fetching any sources
+  directly, limiting verification. The change from 'RCA Italiana S.p.A.' to 'RCA Italiana'
+  appears to be a standard Wikidata naming convention difference (full legal name
+  vs. trade name).
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.discogs.com/label/94677-RCA-Italiana
+- provenance: reported
+  supports_claim: true
+  url: https://grokipedia.com/page/rca_italiana
+timestamp: '2026-04-07T02:08:48.558253+00:00'
+title: Q3928196
+turns: 2
+value_label: RCA Italiana
+verdict: plausible

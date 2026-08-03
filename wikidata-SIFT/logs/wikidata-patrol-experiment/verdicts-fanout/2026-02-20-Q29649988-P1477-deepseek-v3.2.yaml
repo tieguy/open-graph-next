@@ -1,0 +1,34 @@
+completion_tokens: 1616
+cost_usd: 0.024692279999999997
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 89382
+property: P1477
+property_label: birth name
+rationale: Multiple independent sources consistently report that Feid's birth name
+  is Salomón Villada Hoyos, not Martin Chaski Hoyos. The verified source from Famous
+  Birthdays explicitly states 'His real name is Salomón Villada Hoyos,' and several
+  other reputable sources (Billboard, Sporting News, Latino Life) corroborate this.
+  No evidence was found supporting 'Martin Chaski Hoyos' as Feid's birth name. The
+  edit appears to introduce incorrect information.
+rcid: 2540938475
+revid: 2464728082
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/feid.html
+- provenance: reported
+  supports_claim: false
+  url: https://am570lasports.iheart.com/content/2019-02-20-feid/
+- provenance: reported
+  supports_claim: false
+  url: https://www.billboard.com/music/latin/feid-billboard-latin-artist-on-the-rise-7800962/
+- provenance: reported
+  supports_claim: false
+  url: https://www.sportingnews.com/us/soccer/news/who-feid-reggaeton-copa-america-2024-opening-ceremony-performer/a6a5ea549ef082056f34e915
+timestamp: '2026-02-20T16:15:02.841852+00:00'
+title: Q29649988
+turns: 8
+value_label: null
+verdict: incorrect

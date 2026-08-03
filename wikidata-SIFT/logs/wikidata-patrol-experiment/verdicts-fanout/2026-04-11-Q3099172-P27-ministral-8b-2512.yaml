@@ -1,0 +1,29 @@
+completion_tokens: 2654
+cost_usd: 0.006525030000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 78837
+property: P27
+property_label: country of citizenship
+rationale: The edit changing Ibn Zamrak's country of citizenship from 'al-Andalus'
+  (Q123559) to 'Emirate of Granada' (Q238445) is supported by verified sources. Prefetched
+  references from grokipedia.com and Alhambra Patronato explicitly associate Ibn Zamrak
+  with the Nasrid Emirate of Granada, confirming his political and personal ties to
+  this specific polity. The broader term 'al-Andalus' is historically less precise
+  for his lifetime and context. No contradictions were found in the available sources,
+  and the change improves the accuracy of the claim.
+rcid: 2551395411
+revid: 2474699651
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/ibn_zamrak
+- provenance: verified
+  supports_claim: true
+  url: https://www.alhambra-patronato.es/en/elemento-del-mes/ibn-zamrak
+timestamp: '2026-04-11T18:00:20.053238+00:00'
+title: Q3099172
+turns: 8
+value_label: Emirate of Granada
+verdict: verified-high

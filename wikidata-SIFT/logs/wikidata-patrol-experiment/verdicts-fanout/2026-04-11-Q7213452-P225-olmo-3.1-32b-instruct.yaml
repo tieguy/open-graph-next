@@ -1,0 +1,30 @@
+completion_tokens: 289
+cost_usd: 0.0028142
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13204
+property: P225
+property_label: taxon name
+rationale: Neither the old value 'pene rico' nor the new value 'a' for the taxon name
+  of Stevia rebaudiana could be independently confirmed as the correct scientific
+  or common name in reliable sources fetched during this investigation. The primary
+  authoritative source (NC State Plants Database) refers to the species as 'Stevia
+  rebaudiana' and does not mention 'pene rico' or 'a' as the accepted taxon name.
+  The Royal Horticultural Society also lists the accepted common name as 'candyleaf'
+  and the scientific name as 'Stevia rebaudiana', but does not reference either value
+  change. No verified source supports the change from 'pene rico' to 'a'.
+rcid: 2550294685
+revid: 2473634707
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://plants.ces.ncsu.edu/plants/stevia-rebaudiana/
+- provenance: verified
+  supports_claim: false
+  url: https://www.rhs.org.uk/plants/109100/stevia-rebaudiana/details
+timestamp: '2026-04-11T17:00:30.797997+00:00'
+title: Q7213452
+turns: 1
+value_label: null
+verdict: unverifiable

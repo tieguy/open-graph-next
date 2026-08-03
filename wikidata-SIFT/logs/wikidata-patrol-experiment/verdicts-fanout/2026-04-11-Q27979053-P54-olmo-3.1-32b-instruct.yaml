@@ -1,0 +1,32 @@
+completion_tokens: 1764
+cost_usd: 0.005423000000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21823
+property: P54
+property_label: member of sports team
+rationale: Vladimir Screciu did play for Real Madrid Castilla in the past according
+  to independent, verified sources. However, current official squad listings do not
+  include him as a member of Real Madrid Castilla, indicating he is no longer affiliated
+  with the team. The edit changed his team from the national under-19 team to Real
+  Madrid Castilla without specifying a time frame or using a 'former team' property,
+  making the current claim potentially incorrect as a representation of his present
+  affiliation.
+rcid: null
+revid: 2470721773
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://us.soccerway.com/players/vladimir-screciu/445545/
+- provenance: verified
+  supports_claim: false
+  url: https://www.espn.com/soccer/team/squad/_/id/7000/real-madrid-castilla
+- provenance: verified
+  supports_claim: true
+  url: https://www.romaniansoccer.ro/players/4361/vladimir-screciu.htm
+timestamp: '2026-04-11T16:46:14.723980+00:00'
+title: Q27979053
+turns: 1
+value_label: Real Madrid Castilla
+verdict: suspect

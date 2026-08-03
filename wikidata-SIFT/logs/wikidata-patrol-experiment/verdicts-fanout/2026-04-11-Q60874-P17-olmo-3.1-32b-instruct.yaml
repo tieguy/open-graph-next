@@ -1,0 +1,29 @@
+completion_tokens: 1714
+cost_usd: 0.0065106
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27411
+property: P17
+property_label: country
+rationale: The Australian Open is consistently described by authoritative sources
+  as being held in Melbourne, Australia and organized by Tennis Australia. No credible
+  source supports changing the country property from Australia to New Zealand. The
+  edit appears to be erroneous.
+rcid: 2551270257
+revid: 2474580109
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ausopen.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.itftennis.com/tournaments/australian-open
+- provenance: verified
+  supports_claim: false
+  url: https://www.espn.com/tennis/tournament/_/id/australian-open
+timestamp: '2026-04-11T07:00:01.330770+00:00'
+title: Q60874
+turns: 1
+value_label: New Zealand
+verdict: incorrect

@@ -1,0 +1,17 @@
+completion_tokens: 3502
+cost_usd: 0.0088208125
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 93368
+property: P21
+property_label: sex or gender
+rationale: null
+rcid: 2549612108
+revid: 2472973819
+sources: []
+timestamp: '2026-04-07T03:33:24.225182+00:00'
+title: Q12006167
+turns: 15
+value_label: female
+verdict: null

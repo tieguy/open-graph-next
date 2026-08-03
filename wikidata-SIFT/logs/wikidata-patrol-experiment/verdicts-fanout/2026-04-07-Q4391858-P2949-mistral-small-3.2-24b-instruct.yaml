@@ -1,0 +1,27 @@
+completion_tokens: 1246
+cost_usd: 0.00763834375
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 78153
+property: P2949
+property_label: WikiTree person ID
+rationale: The URL "https://iknownetworths.com/shohei-ohtani-net-worth/" does not
+  appear to be a valid or authoritative source for a WikiTree person ID. The lack
+  of references and the inability to find any credible sources supporting the URL
+  as a valid WikiTree person ID justify its removal. The removal aligns with maintaining
+  the accuracy and reliability of Wikidata.
+rcid: 2550628472
+revid: 2473958748
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://iknownetworths.com/shohei-ohtani-net-worth/
+- provenance: verified
+  supports_claim: false
+  url: https://www.celebritynetworth.com/sports/baseball/shohei-ohtani-net-worth/
+timestamp: '2026-04-07T13:13:07.715334+00:00'
+title: Q4391858
+turns: 6
+value_label: null
+verdict: verified-high

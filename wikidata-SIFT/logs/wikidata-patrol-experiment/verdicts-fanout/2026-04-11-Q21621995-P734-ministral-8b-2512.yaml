@@ -1,0 +1,35 @@
+completion_tokens: 2503
+cost_usd: 0.00771342
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55371
+property: P734
+property_label: family name
+rationale: The edit changed Kylian Mbappé’s family name from 'Mbappé' (Q57766011)
+  to 'Arfelli' (Q99943648). Multiple verified sources, including FamousBirthdays,
+  The Famous People, Soccerway, and Lequipe.fr, consistently confirm 'Mbappé' as the
+  correct family name. No credible source supports 'Arfelli' as Kylian Mbappé’s family
+  name. The cited reference ([Lequipe.fr](https://www.lequipe.fr/Football/FootballFicheJoueur58221.html))
+  was prefetched and does not support the change. This edit contradicts all available
+  evidence and is therefore incorrect.
+rcid: 2549571737
+revid: 2472934483
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/kylian-mbapp.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefamouspeople.com/profiles/kylian-mbapp-43638.php
+- provenance: verified
+  supports_claim: false
+  url: https://us.soccerway.com/players/kylian-mbappe-lottin/377149/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lequipe.fr/Football/FootballFicheJoueur58221.html
+timestamp: '2026-04-11T15:50:17.615622+00:00'
+title: Q21621995
+turns: 2
+value_label: Arfelli
+verdict: incorrect

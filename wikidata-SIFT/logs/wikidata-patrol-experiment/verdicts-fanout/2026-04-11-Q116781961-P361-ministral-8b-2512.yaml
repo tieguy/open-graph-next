@@ -1,0 +1,24 @@
+completion_tokens: 2109
+cost_usd: 0.00257691
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31634
+property: P361
+property_label: part of
+rationale: The qualifier 'followed by улица Шмидта 3' for the street address 'улица
+  Шмидта 1 3' was not supported by the referenced Wikivoyage page, which was fetched
+  and verified. No additional independent sources could be accessed to confirm or
+  deny the claim. The Wikivoyage reference did not mention the qualifier, and no other
+  verified sources were available to validate the relationship between the addresses.
+rcid: 2551159233
+revid: 2474473492
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikivoyage.org/?oldid=561556#5240207002
+timestamp: '2026-04-11T10:06:38.380887+00:00'
+title: Q116781961
+turns: 3
+value_label: улица Шмидта 1 3 [ru]
+verdict: unverifiable

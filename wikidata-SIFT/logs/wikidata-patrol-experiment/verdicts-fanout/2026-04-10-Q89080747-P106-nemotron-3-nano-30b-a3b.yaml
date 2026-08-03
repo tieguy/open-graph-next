@@ -1,0 +1,31 @@
+completion_tokens: 10534
+cost_usd: 0.00606452
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 30444
+property: P106
+property_label: occupation
+rationale: The edit attempts to change Elias Hadaya's occupation from goalkeeper to
+  dancer, but no reliable source supports this change. Authoritative sports databases
+  list him exclusively as a goalkeeper, directly contradicting the proposed claim.
+rcid: 2549662661
+revid: 2473022935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1049254/elias-hadaya
+- provenance: reported
+  supports_claim: false
+  url: https://www.tiktok.com/discover/elias-dance
+- provenance: reported
+  supports_claim: false
+  url: https://www.youtube.com/watch?v=lWzqzxBriNM
+timestamp: '2026-04-10T09:35:36.118647+00:00'
+title: Q89080747
+turns: 3
+value_label: dancer
+verdict: incorrect

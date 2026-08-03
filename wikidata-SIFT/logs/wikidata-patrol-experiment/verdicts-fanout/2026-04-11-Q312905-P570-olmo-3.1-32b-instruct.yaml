@@ -1,0 +1,29 @@
+completion_tokens: 221
+cost_usd: 0.0032284
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15479
+property: P570
+property_label: date of death
+rationale: John Rackham's historically documented date of death is November 18, 1720,
+  as confirmed by multiple reputable sources including the official 'Famous Pirates'
+  database and historical accounts. Changing the date of death to '1 CE' is factually
+  incorrect and unsupported by any credible evidence. The cited source for the new
+  value (Find a Grave) is not authoritative for historical dates of death in this
+  context, and the value provided ('1 CE') is nonsensical for a person known to have
+  died in 1720.
+rcid: 2549661876
+revid: 2473022159
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.famous-pirates.com/famous-pirates/john-rackham/
+- provenance: verified
+  supports_claim: true
+  url: https://kids.kiddle.co/Calico_Jack
+timestamp: '2026-04-11T18:16:33.113330+00:00'
+title: Q312905
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 330
+cost_usd: 0.0062812400000000004
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 13264
+property: P856
+property_label: official website
+rationale: The website https://buhlmann.dk is clearly the official website for Bühlmann
+  Hotels. The fetched page displays 'Velkommen til Bühlmann Hotels' and presents the
+  company's branding, mission, and offerings. The search results also consistently
+  show buhlmann.dk as the domain for Bühlmann Hotel Group, with pages describing their
+  hotels, sustainability initiatives, and corporate information. This is a primary
+  source (the company's own website) that directly confirms the URL is correct for
+  the official website claim.
+rcid: 2540917574
+revid: 2464708765
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk
+- provenance: reported
+  supports_claim: true
+  url: https://buhlmann.dk/?lang=en
+timestamp: '2026-02-21T02:58:26.356268+00:00'
+title: Q138348647
+turns: 2
+value_label: null
+verdict: verified-high

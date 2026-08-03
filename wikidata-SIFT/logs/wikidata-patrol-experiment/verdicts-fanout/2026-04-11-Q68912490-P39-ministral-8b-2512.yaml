@@ -1,0 +1,31 @@
+completion_tokens: 2314
+cost_usd: 0.00575571
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 60685
+property: P39
+property_label: position held
+rationale: The edit changes Johann Wepelitz's position held from a generic 'bishop'
+  (Q29182) to the specific 'Roman Catholic Bishop of Havelberg' (Q44229338). This
+  refinement is supported by the German National Library Catalog (GND), which explicitly
+  confirms Johann Wepelitz as Bishop of Havelberg from 1385 to 1401. The GND entry
+  directly validates the new value, and the diocese qualifier (Havelberg) was already
+  correctly associated with the old value. The Wissens-Aggregator Mittelalter und
+  Frühe Neuzeit ID, while reputable, could not be verified directly due to URL unreachability
+  but aligns with the GND evidence. The change is well-supported and improves specificity
+  without introducing inconsistencies.
+rcid: 2550969990
+revid: 2474289516
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://d-nb.info/gnd/1013085426
+- provenance: reported
+  supports_claim: false
+  url: https://www.wissens-aggregator.de
+timestamp: '2026-04-11T18:45:40.231691+00:00'
+title: Q68912490
+turns: 5
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

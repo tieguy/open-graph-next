@@ -1,0 +1,27 @@
+completion_tokens: 2303
+cost_usd: 0.00271947
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25248
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth from a cited value (January 1, 2007)
+  to an uncited value (March 25, 2007). While Screendollars.com supports the new value,
+  Tribute.ca contradicts it, and the original reference (Czech National Authority
+  Database) is inaccessible for verification. Independent corroboration is lacking
+  for the new value, making the edit suspect.
+rcid: 2551382499
+revid: 2474687130
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://screendollars.com/celebrity/cailey-fleming/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tribute.ca/people/biography/cailey-fleming/58547/
+timestamp: '2026-04-11T18:46:58.055597+00:00'
+title: Q61000282
+turns: 2
+value_label: null
+verdict: suspect

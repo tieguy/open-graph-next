@@ -1,0 +1,29 @@
+completion_tokens: 2012
+cost_usd: 0.0067847125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 66182
+property: P1417
+property_label: Encyclopædia Britannica Online ID
+rationale: The edit changes the Encyclopædia Britannica Online ID for Dred Scott v.
+  Sandford. No references were provided for the edit. The new ID "event/Dred-Scott-decision"
+  could not be verified due to the inability to access the Encyclopædia Britannica
+  website directly and the lack of direct references to the ID in other sources.
+rcid: 2551189300
+revid: 2474503104
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://civilwaronthewesternborder.org/encyclopedia/dred-scott-v-sandford-1857
+- provenance: verified
+  supports_claim: false
+  url: https://guides.loc.gov/dred-scott
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/watch?v=704Hn9flZV8
+timestamp: '2026-04-10T11:11:30.711430+00:00'
+title: Q690462
+turns: 7
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,24 @@
+completion_tokens: 587
+cost_usd: 0.00056665
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 8985
+property: P2397
+property_label: YouTube channel ID
+rationale: The updated YouTube channel ID https://www.youtube.com/@theatrelaseizieme_
+  resolves to a non-existent YouTube channel. The channel handle format '@theatrelaunched'
+  appears invalid and does not represent an official or recognized channel for Théâtre
+  la Seizée based on web testing. This contradicts the expected digital presence of
+  an established performing arts organization.
+rcid: 2551329122
+revid: 2474636002
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@theatrelaseizieme_
+timestamp: '2026-04-07T14:08:42.889786+00:00'
+title: Q100965387
+turns: 1
+value_label: null
+verdict: incorrect

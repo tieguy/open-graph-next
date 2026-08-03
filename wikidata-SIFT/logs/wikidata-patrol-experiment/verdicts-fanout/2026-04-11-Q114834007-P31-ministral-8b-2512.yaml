@@ -1,0 +1,32 @@
+completion_tokens: 1934
+cost_usd: 0.00298581
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24167
+property: P31
+property_label: instance of
+rationale: The claim that IShowSpeed (Q114834007) is an instance of 'monkey' (Q1367)
+  is incorrect. The old value, 'human' (Q5), aligns with all other claims about IShowSpeed
+  (occupation, ethnicity, birth name, etc.) and is supported by multiple credible
+  sources, including news articles and fan discussions. The new value is nonsensical
+  and unsupported by any credible source. The Fandom page mentioning 'monkey' is a
+  humorous context, not a factual claim. The edit is clearly erroneous and should
+  be reverted.
+rcid: 2550521343
+revid: 2473855539
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ishowspeed.fandom.com/wiki/Monkey
+- provenance: verified
+  supports_claim: true
+  url: https://kotaku.com/youtuber-streamer-ishowspeed-ban-valorant-riot-keemstar-1848764368
+- provenance: verified
+  supports_claim: true
+  url: https://dotesports.com/streaming/news/ishowspeed-fastest-growing-streamer-on-youtube-right-now
+timestamp: '2026-04-11T15:46:33.762144+00:00'
+title: Q114834007
+turns: 1
+value_label: monkey
+verdict: incorrect

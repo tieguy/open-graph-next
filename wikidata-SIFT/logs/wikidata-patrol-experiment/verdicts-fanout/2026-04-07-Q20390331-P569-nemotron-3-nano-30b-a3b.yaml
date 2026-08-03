@@ -1,0 +1,25 @@
+completion_tokens: 1170
+cost_usd: 0.00383125
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 71945
+property: P569
+property_label: date of birth
+rationale: The edit introduced a birth date of 10 August 1987 for Q20390331, citing
+  a Wikipedia URL that was blocked and could not be retrieved; no independent or verifiable
+  source confirming this date was found through web searches, leaving the claim unverifiable.
+rcid: 2549391839
+revid: 2472757950
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ar.wikipedia.org/?oldid=62076754
+- provenance: reported
+  supports_claim: false
+  url: https://ar.wikipedia.org/wiki/10_August_1987
+timestamp: '2026-04-07T09:55:05.618163+00:00'
+title: Q20390331
+turns: 15
+value_label: null
+verdict: unverifiable

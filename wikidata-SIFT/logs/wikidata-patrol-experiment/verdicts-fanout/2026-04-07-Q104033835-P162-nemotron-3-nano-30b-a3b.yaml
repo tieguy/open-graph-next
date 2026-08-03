@@ -1,0 +1,25 @@
+completion_tokens: 666
+cost_usd: 0.00805215
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 158379
+property: P162
+property_label: producer
+rationale: No verifiable sources were found supporting Mia Khalifa as producer of
+  The Adam Project despite multiple web searches across Wikipedia, news sources, Netflix
+  databases, and other references. References cited in the edit lead to blocked or
+  inaccessible domains (Wikipedia, Meta), and external searches yielded no results
+  connecting Mia Khalifa to the film's production. The absence of corroborating evidence
+  prevents confirmation or denial of the claim.
+rcid: 2550549023
+revid: 2473882171
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Mia_Khalifa&oldid=1048055489
+timestamp: '2026-04-07T13:31:00.152725+00:00'
+title: Q104033835
+turns: 15
+value_label: Mia Khalifa
+verdict: unverifiable

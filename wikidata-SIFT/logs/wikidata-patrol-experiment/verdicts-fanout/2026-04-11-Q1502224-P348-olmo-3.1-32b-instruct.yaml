@@ -1,0 +1,35 @@
+completion_tokens: 1657
+cost_usd: 0.006941
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29734
+property: P348
+property_label: software version identifier
+rationale: The official Gpg4win website and announcement mailing list confirm that
+  version 5.0.0 was released in January 2026 and 5.0.1 in March 2026, following version
+  4.4.1. The release notes for 5.0.0 document significant changes, including a major
+  version increment and architectural updates, which justify the version change. The
+  cited announcement for 4.4.1 and the download/release pages for 5.0.1 are authoritative
+  and directly support the change. There is no evidence of error or inconsistency
+  in the version update.
+rcid: 2551406964
+revid: 2474710224
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gpg4win.org/download.html
+- provenance: verified
+  supports_claim: true
+  url: https://gpg4win.org/version5.html
+- provenance: verified
+  supports_claim: true
+  url: https://lists.wald.intevation.org/pipermail/gpg4win-announce/2025/000105.html
+- provenance: verified
+  supports_claim: true
+  url: https://files.gpg4win.org/gpg4win-4.4.1.exe
+timestamp: '2026-04-11T18:08:39.769700+00:00'
+title: Q1502224
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 1331
+cost_usd: 0.00813489
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 123782
+property: P571
+property_label: inception
+rationale: The official website of CHN Energy confirms the company was established
+  on November 28, 2017, following the merger of China Guodian Corporation and Shenhua
+  Group. The edit incorrectly changed the inception date from 2017 to 2016, contradicting
+  the primary source.
+rcid: 2549567339
+revid: 2472930201
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ceic.com/gjnyjtwwEn/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ceic.com/gjnyjtwwEn/jtgk/chnjtjs.shtml
+timestamp: '2026-04-11T16:20:39.018453+00:00'
+title: Q38180956
+turns: 12
+value_label: null
+verdict: incorrect

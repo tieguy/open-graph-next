@@ -1,0 +1,29 @@
+completion_tokens: 1948
+cost_usd: 0.00497475
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 57515
+property: P569
+property_label: date of birth
+rationale: The new value, '4 June 1886', is supported by the Royal Archaeological
+  Institute's wiki page, which confirms Elsie Margaret Clifford's birth year as 1886.
+  While the exact day is not explicitly stated in this source, the year aligns with
+  the new value. The old value, '1885-00-00', is unspecific and lacks independent
+  corroboration. The cited reference URL is unreachable, so the RAI wiki page serves
+  as the primary verified source. The edit improves specificity from an unspecific
+  year to a plausible date supported by credible evidence.
+rcid: 2550754799
+revid: 2474080915
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://historywiki.therai.org.uk/index.php?title=Elsie_Margaret_Clifford
+- provenance: reported
+  supports_claim: false
+  url: https://www.cheltenhammuseum.org.uk/collection/two-women-archaeologists-of-gloucestershire/
+timestamp: '2026-04-11T06:49:14.355859+00:00'
+title: Q54911972
+turns: 6
+value_label: null
+verdict: verified-low

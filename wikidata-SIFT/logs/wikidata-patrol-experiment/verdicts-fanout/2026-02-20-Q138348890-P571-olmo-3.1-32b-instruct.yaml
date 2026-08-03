@@ -1,0 +1,28 @@
+completion_tokens: 842
+cost_usd: 0.0033044
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13996
+property: P571
+property_label: inception
+rationale: The official 'About' page of Packetra explicitly states that the company
+  launched publicly in January 2026, directly supporting the inception claim. No contradictory
+  evidence was found, and secondary sources acknowledge the provider's existence.
+rcid: 2540931999
+revid: 2464722626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com/about
+- provenance: verified
+  supports_claim: false
+  url: https://www.whtop.com/directory.companies/p
+- provenance: verified
+  supports_claim: false
+  url: https://www.hostsearch.com/directory/web-hosting-directory-t.asp
+timestamp: '2026-02-20T19:39:20.633075+00:00'
+title: Q138348890
+turns: 2
+value_label: null
+verdict: verified-high

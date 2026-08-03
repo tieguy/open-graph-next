@@ -1,0 +1,27 @@
+completion_tokens: 1963
+cost_usd: 0.014787779999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 133749
+property: P4033
+property_label: Mastodon address
+rationale: The Mastodon address 'radaosiedlaniebuszewobolinko@mastodon.com.pl' is
+  confirmed as the official handle for the Niebuszewo-Bolinko neighborhood council.
+  The official website of the council explicitly lists this handle, and the Mastodon
+  profile exists and is accessible. The official website reference confirms the claim
+  directly, and the Mastodon profile page further corroborates the address.
+rcid: 2550680039
+revid: 2474009063
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://bolinko.osiedla.szczecin.pl/plac%C3%B3wki-pomocy-spo%C5%82ecznej
+- provenance: verified
+  supports_claim: true
+  url: https://mastodon.com.pl/@radaosiedlaniebuszewobolinko
+timestamp: '2026-04-10T14:20:30.168145+00:00'
+title: Q7031013
+turns: 7
+value_label: null
+verdict: verified-high

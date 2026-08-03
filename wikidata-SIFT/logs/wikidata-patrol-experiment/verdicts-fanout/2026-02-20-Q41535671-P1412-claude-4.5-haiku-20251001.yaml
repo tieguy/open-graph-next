@@ -1,0 +1,29 @@
+completion_tokens: 2758
+cost_usd: 0.11701
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 103220
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The cited reference (https://zenodo.org/records/4115999) is a working paper
+  about Wikipedia censorship that does not mention Christian Bois or his language
+  abilities. The reference does not support the claim that Christian Bois speaks,
+  writes, or signs English. While independent investigation confirms the underlying
+  claim is likely correct (his academic publications page states he publishes documents
+  in English on Zenodo), the specific reference added in this edit is unsuitable and
+  does not justify the statement.
+rcid: 2540943566
+revid: 2464732926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zenodo.org/records/4115999
+- provenance: verified
+  supports_claim: true
+  url: https://christianboisacademic.home.blog/publications/
+timestamp: '2026-02-20T13:05:47.095105+00:00'
+title: Q41535671
+turns: 10
+value_label: English
+verdict: incorrect

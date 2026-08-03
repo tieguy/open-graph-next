@@ -1,0 +1,20 @@
+completion_tokens: 324
+cost_usd: 0.0135516
+diff_type: value_changed
+finish_status: max_turns
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 66786
+property: P20
+property_label: place of death
+rationale: No independent sources confirm Irina Mazing's place of death as Kharkiv.
+  The only source for this claim in Wikidata is absent or inaccessible, and multiple
+  web searches did not locate any primary or secondary sources supporting the change
+  from Luhansk to Kharkiv. Without accessible evidence, the edit cannot be verified.
+rcid: 2551426267
+revid: 2474726881
+sources: []
+timestamp: '2026-04-07T04:51:22.380958+00:00'
+title: Q4274528
+turns: 15
+value_label: Kharkiv
+verdict: unverifiable

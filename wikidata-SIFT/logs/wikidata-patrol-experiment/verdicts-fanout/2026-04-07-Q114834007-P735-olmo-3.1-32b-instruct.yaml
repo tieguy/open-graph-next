@@ -1,0 +1,26 @@
+completion_tokens: 1076
+cost_usd: 0.0106632
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50088
+property: P735
+property_label: given name
+rationale: The edit changes IShowSpeed's given name to 'Dicky' without any cited or
+  independently verifiable source. Multiple searches and the Wikipedia article indicate
+  the subject is known as Darren Jason Watkins Jr., not 'Dicky.' There is no evidence
+  supporting the use of 'Dicky' as a given name for this individual.
+rcid: 2550522023
+revid: 2473856160
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/IShowSpeed
+- provenance: reported
+  supports_claim: false
+  url: https://www.youtube.com/@ishowspeed
+timestamp: '2026-04-07T06:14:10.220121+00:00'
+title: Q114834007
+turns: 5
+value_label: Dicky
+verdict: incorrect

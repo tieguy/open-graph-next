@@ -1,0 +1,29 @@
+completion_tokens: 1179
+cost_usd: 0.00129614375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12135
+property: P1728
+property_label: AllMusic artist ID
+rationale: The new value "hey, yo! what is that! kkk" is clearly incorrect and appears
+  to be vandalism. The correct AllMusic artist ID for William Tucker is "mn0001763811"
+  as confirmed by the AllMusic page. The old value "mn0000934173" does not match the
+  current AllMusic URL for William Tucker.
+rcid: null
+revid: 2467186786
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/william-tucker-mn0001763811
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/7b505163-5792-47fa-9800-253fad24a8ac
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/artist/79621-William-Tucker
+timestamp: '2026-04-11T16:49:42.100436+00:00'
+title: Q8019550
+turns: 1
+value_label: null
+verdict: incorrect

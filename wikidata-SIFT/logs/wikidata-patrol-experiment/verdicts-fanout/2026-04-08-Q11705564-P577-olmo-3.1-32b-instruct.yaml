@@ -1,0 +1,29 @@
+completion_tokens: 955
+cost_usd: 0.003816
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16215
+property: P577
+property_label: publication date
+rationale: The new publication date of '800000 years CE' for 'Amador' (Ética para
+  Amador) by Fernando Savater is unsupported by any evidence. All available context
+  and prior item data indicate a 1991 publication date. No independent sources or
+  references corroborate the new value, and the edit appears to be factually incorrect.
+rcid: null
+revid: 2460147349
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Ética_para_Amador
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikisource.org/wiki/Ética_para_Amador
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Fernando+Savater+Amador+1991+publicaci%C3%B3n
+timestamp: '2026-04-08T16:30:25.432493+00:00'
+title: Q11705564
+turns: 3
+value_label: null
+verdict: incorrect

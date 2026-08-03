@@ -1,0 +1,30 @@
+completion_tokens: 1283
+cost_usd: 0.02345648
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 141394
+property: P856
+property_label: official website
+rationale: The website https://ranbirsidhu.com/ is explicitly listed as the official
+  website of artist Ranbir Sidhu on his verified Instagram profile bio and his Art
+  Gallery of Ontario exhibition page, both authoritative sources directly associated
+  with him. The site's content is dedicated to his artistic portfolio and contact
+  information, consistent with an artist's official online presence.
+rcid: 2540950477
+revid: 2464739420
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ranbirsidhu.com/
+- provenance: verified
+  supports_claim: true
+  url: https://ago.ca/exhibitions/ranbir-sidhu-no-limits
+- provenance: verified
+  supports_claim: true
+  url: https://www.instagram.com/ranbirsidhu/?hl=en
+timestamp: '2026-02-20T09:19:24.251526+00:00'
+title: Q110811463
+turns: 15
+value_label: null
+verdict: verified-high

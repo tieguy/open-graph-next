@@ -1,0 +1,27 @@
+completion_tokens: 956
+cost_usd: 0.00614
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27832
+property: P989
+property_label: spoken text audio
+rationale: The removed spoken text audio claim lacked any authoritative reference
+  or provenance. Extensive searches of official web accessibility sources, including
+  the W3C, found no official spoken text audio for the topic. Therefore, the removal
+  was reasonable due to lack of verification, but the absence of an official resource
+  means we cannot definitively rule out such a claim in the future.
+rcid: null
+revid: 2471265154
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/WAI/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Web_accessibility
+timestamp: '2026-04-07T13:50:07.054896+00:00'
+title: Q808932
+turns: 6
+value_label: null
+verdict: plausible

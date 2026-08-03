@@ -1,0 +1,23 @@
+completion_tokens: 1290
+cost_usd: 0.00388263
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37241
+property: P26
+property_label: spouse
+rationale: The prefetched content from snl.no confirms Anne-Marie Backer Mohr married
+  Bjart Mohr in 1950, not 1951. The qualifier P580 with the value '+1951-00-00T00:00:00Z'
+  was therefore incorrect and should have been removed. The removal of this incorrect
+  qualifier is justified.
+rcid: 2551327289
+revid: 2474634436
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://snl.no/Anne-Marie_Backer_Mohr
+timestamp: '2026-04-11T17:37:08.950703+00:00'
+title: Q64784680
+turns: 3
+value_label: Anne-Marie Backer Mohr
+verdict: verified-high

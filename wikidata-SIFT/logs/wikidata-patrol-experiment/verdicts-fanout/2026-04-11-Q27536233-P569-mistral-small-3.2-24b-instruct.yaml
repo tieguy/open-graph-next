@@ -1,0 +1,31 @@
+completion_tokens: 1456
+cost_usd: 0.0025042925
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22048
+property: P569
+property_label: date of birth
+rationale: The primary source (National Library of Spain) is unreachable, but the
+  source from pocketbook.es directly supports the claim that Virginia Gasull was born
+  in 1974. Therefore, the removal of the date of birth "1974" appears to be incorrect.
+rcid: 2550206963
+revid: 2473549656
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://datos.bne.es/resource/XX5458205
+- provenance: verified
+  supports_claim: false
+  url: https://find-and-update.company-information.service.gov.uk/officers/BZXdDHtO8f1jt023ZZs37siod80/appointments
+- provenance: verified
+  supports_claim: true
+  url: https://pocketbook.es/author/virginia-gasull
+- provenance: verified
+  supports_claim: false
+  url: https://www.casadellibro.com/libros-ebooks/virginia-gasull/20095156
+timestamp: '2026-04-11T09:37:14.094952+00:00'
+title: Q27536233
+turns: 2
+value_label: null
+verdict: incorrect

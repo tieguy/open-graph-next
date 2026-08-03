@@ -1,0 +1,29 @@
+completion_tokens: 1057
+cost_usd: 0.0071292
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32475
+property: P19
+property_label: place of birth
+rationale: No fetchable, reliable sources could be located to confirm that Adolf Chronicki
+  was born in Laskivtsi. The cited references (Polish and Russian Wikipedia) could
+  not be accessed due to domain blocking, and independent web searches did not yield
+  any verifiable information supporting the claim.
+rcid: null
+revid: 2468795077
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://pl.wikipedia.org/wiki/Adolf_Chonik
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/Адольф_Хроникки
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-08T18:56:40.574973+00:00'
+title: Q11684452
+turns: 5
+value_label: Laskivtsi
+verdict: unverifiable

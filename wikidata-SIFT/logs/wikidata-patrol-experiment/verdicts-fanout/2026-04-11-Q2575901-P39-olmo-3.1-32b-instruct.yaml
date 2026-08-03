@@ -1,0 +1,29 @@
+completion_tokens: 1376
+cost_usd: 0.0041778
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16761
+property: P39
+property_label: position held
+rationale: Primary authoritative sources (Catholic-Hierarchy.org) and multiple secondary
+  sources confirm that Wilhelm von Havelberg served as Bishop of Havelberg from 1219
+  to 1244. The previous value of 'auxiliary bishop' is inconsistent with these sources,
+  making the change to 'Roman Catholic Bishop of Havelberg' correct and well-supported.
+rcid: 2550967044
+revid: 2474286671
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bhavew.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dh522.html
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Wilhelm_von_Havelberg
+timestamp: '2026-04-11T18:35:54.602241+00:00'
+title: Q2575901
+turns: 1
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

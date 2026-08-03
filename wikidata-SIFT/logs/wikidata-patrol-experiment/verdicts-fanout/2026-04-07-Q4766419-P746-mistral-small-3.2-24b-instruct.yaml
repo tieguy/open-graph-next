@@ -1,0 +1,34 @@
+completion_tokens: 1191
+cost_usd: 0.0038192975
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39859
+property: P746
+property_label: date of disappearance
+rationale: The removed claim did not have any references, and independent searches
+  did not yield any conclusive evidence to verify the date of disappearance. Therefore,
+  the removal cannot be verified.
+rcid: null
+revid: 2335259226
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ann+Gotlib+date+of+disappearance
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ann+Gotlib+missing+person
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ann+Gotlib+disappearance+1983
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ann+Gotlib+biography
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Ann+Gotlib+missing+person+case+files
+timestamp: '2026-04-07T10:34:49.975333+00:00'
+title: Q4766419
+turns: 8
+value_label: null
+verdict: unverifiable

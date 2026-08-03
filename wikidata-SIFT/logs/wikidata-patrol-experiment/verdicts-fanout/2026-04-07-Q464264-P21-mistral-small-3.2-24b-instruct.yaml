@@ -1,0 +1,25 @@
+completion_tokens: 1045
+cost_usd: 0.0054503812500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55285
+property: P21
+property_label: sex or gender
+rationale: The references provided do not support the claim, and no independent sources
+  confirm that Rosalía de Castro is 'faʻafafine.' The edit appears to be incorrect
+  based on the available evidence.
+rcid: 2549245283
+revid: 2472616627
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://data.bnf.fr
+- provenance: verified
+  supports_claim: false
+  url: https://d-nb.info/gnd/118935267
+timestamp: '2026-04-07T10:47:46.684932+00:00'
+title: Q464264
+turns: 4
+value_label: faʻafafine
+verdict: incorrect

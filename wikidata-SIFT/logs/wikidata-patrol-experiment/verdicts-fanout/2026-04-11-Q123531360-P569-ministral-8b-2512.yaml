@@ -1,0 +1,28 @@
+completion_tokens: 2096
+cost_usd: 0.00250998
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27284
+property: P569
+property_label: date of birth
+rationale: The birth date claim of 4 June 2002 for Taylor Ann Thompson is supported
+  by fan sites (e.g., Moviefanon), but these are not authoritative sources. The only
+  cited reference is English Wikipedia, which violates Wikidata policy as it cannot
+  be used as a direct source. No official or verified source (e.g., IMDb, actor databases,
+  or interviews) was found to confirm the claim independently. The edit adds an invalid
+  reference, making the claim unreliable and suspicious.
+rcid: 2550925463
+revid: 2474247063
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://moviefanon.fandom.com/wiki/Taylor_Ann_Thompson
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/taylor-thompson-movieactress.html
+timestamp: '2026-04-11T09:54:42.375760+00:00'
+title: Q123531360
+turns: 3
+value_label: null
+verdict: suspect

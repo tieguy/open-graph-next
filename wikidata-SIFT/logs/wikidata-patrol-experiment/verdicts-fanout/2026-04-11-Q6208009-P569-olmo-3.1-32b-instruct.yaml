@@ -1,0 +1,28 @@
+completion_tokens: 334
+cost_usd: 0.0025694
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11845
+property: P569
+property_label: date of birth
+rationale: The new value '1 CE' for Jodle Birge's date of birth is contradicted by
+  multiple independent, verified sources, which consistently report his birth date
+  as 6 November 1945. The Wikipedia excerpt and MusicBrainz both state he was born
+  on 6 November 1945. Changing the birth date from a specific, well-sourced date to
+  a vague and implausible '1 CE' is not supported by any evidence and is likely an
+  error.
+rcid: 2549549530
+revid: 2472912760
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Jodle_Birge
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/e88f3ad1-6811-4d97-86e1-e4c5f30de2e4
+timestamp: '2026-04-11T09:56:09.829399+00:00'
+title: Q6208009
+turns: 1
+value_label: null
+verdict: incorrect

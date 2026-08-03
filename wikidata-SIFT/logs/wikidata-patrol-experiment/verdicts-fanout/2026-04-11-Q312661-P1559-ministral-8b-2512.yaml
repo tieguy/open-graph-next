@@ -1,0 +1,25 @@
+completion_tokens: 1776
+cost_usd: 0.00809814
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 68084
+property: P1559
+property_label: name in native language
+rationale: The edit incorrectly changes Jamel Debbouze's name in Arabic from 'جما'
+  to 'جما sas'. The authoritative source (Disney Fandom) confirms his Arabic name
+  is 'جمال دبوز' (Jamāl Dabūz), and neither the old nor the new value aligns with
+  this. The new value 'جما sas' is unsupported by any credible source, and the old
+  value 'جما' is also not referenced in any authoritative context. The change is therefore
+  incorrect and lacks proper sourcing.
+rcid: null
+revid: 2471216964
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://disney.fandom.com/wiki/Jamel_Debbouze
+timestamp: '2026-04-11T09:17:36.856106+00:00'
+title: Q312661
+turns: 4
+value_label: null
+verdict: incorrect

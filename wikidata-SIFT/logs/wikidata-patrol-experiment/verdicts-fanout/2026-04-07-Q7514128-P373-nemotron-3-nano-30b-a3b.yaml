@@ -1,0 +1,22 @@
+completion_tokens: 776
+cost_usd: 0.0030897999999999998
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 58692
+property: P373
+property_label: Commons category
+rationale: All searches for the Commons category name yielded no results, leaving
+  no verifiable source to confirm or deny the claim. Therefore no proof exists to
+  support the change.
+rcid: 2550995876
+revid: 2474314464
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org
+timestamp: '2026-04-07T14:01:02.702528+00:00'
+title: Q7514128
+turns: 7
+value_label: null
+verdict: unverifiable

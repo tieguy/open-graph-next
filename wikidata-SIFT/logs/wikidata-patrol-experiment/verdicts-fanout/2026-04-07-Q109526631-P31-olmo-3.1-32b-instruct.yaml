@@ -1,0 +1,20 @@
+completion_tokens: 804
+cost_usd: 0.006953
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32353
+property: P31
+property_label: instance of
+rationale: No reference was provided for the 'pirate' claim, and independent web searches
+  did not find any evidence that Iñaki Godoy is known as a pirate. Public sources
+  consistently identify him as an actor. Without corroborating evidence, the claim
+  cannot be verified.
+rcid: 2549929483
+revid: 2473282388
+sources: []
+timestamp: '2026-04-07T12:51:48.024038+00:00'
+title: Q109526631
+turns: 6
+value_label: pirate
+verdict: unverifiable

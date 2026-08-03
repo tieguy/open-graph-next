@@ -1,0 +1,28 @@
+completion_tokens: 1576
+cost_usd: 0.0036698
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13621
+property: P27
+property_label: country of citizenship
+rationale: All independently verifiable sources consistently identify Roberto Musso
+  as Uruguayan, with no evidence of Peruvian citizenship. The change from Uruguay
+  to Peru is unsupported by any reliable source.
+rcid: 2551399699
+revid: 2474703494
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/roberto-musso.html
+- provenance: reported
+  supports_claim: false
+  url: https://elcuartetodenos.com/
+- provenance: reported
+  supports_claim: false
+  url: https://happyhappybirthday.net/es/age/roberto-musso-person_gealqqg
+timestamp: '2026-04-10T14:00:18.909824+00:00'
+title: Q6109886
+turns: 1
+value_label: Peru
+verdict: incorrect

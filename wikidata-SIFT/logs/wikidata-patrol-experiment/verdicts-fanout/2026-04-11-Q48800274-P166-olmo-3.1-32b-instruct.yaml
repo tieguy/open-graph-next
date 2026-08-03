@@ -1,0 +1,35 @@
+completion_tokens: 2175
+cost_usd: 0.0059918
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23434
+property: P166
+property_label: award received
+rationale: An independent, verified news article explicitly states that Johannes W.
+  Dietrich received the Heinz von Foerster-Preis in 2024, supporting the claim. However,
+  not all cited references could be fetched and directly verified, limiting the strength
+  of the evidence.
+rcid: 2550594501
+revid: 2473925820
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://news.rub.de/leute/2025-07-30-auszeichnung-johannes-dietrich-neu-die-leibniz-sozietaet-aufgenommen
+- provenance: reported
+  supports_claim: true
+  url: https://news.rub.de/leute/2024-04-19-auszeichnung-johannes-dietrich-hat-den-heinz-von-foerster-preis-erhalten
+- provenance: reported
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-zur-gemeinsamen-sitzung-der-klasse-fuer-naturwissenschaften-und-technikwissenschaften-der-leibniz-sozietaet-mit-der-deutschen-gesellschaft-fuer-kybernetik-am-11-april-2024/
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/wp-content/uploads/2024/12/Leibniz-Online_54_Gesamt.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0002-1185-3549
+timestamp: '2026-04-11T16:32:41.813953+00:00'
+title: Q48800274
+turns: 1
+value_label: Heinz von Foerster-Preis
+verdict: verified-low

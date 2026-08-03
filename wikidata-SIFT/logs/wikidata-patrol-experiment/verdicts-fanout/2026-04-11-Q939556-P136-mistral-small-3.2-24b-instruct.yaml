@@ -1,0 +1,22 @@
+completion_tokens: 1356
+cost_usd: 0.0033239062500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31839
+property: P136
+property_label: genre
+rationale: The official website of Stabbing Westward confirms that the band's genre
+  is 'industrial rock.' The edit appears to be a no-op change, as both the old and
+  new values are the same and correct.
+rcid: 2550849827
+revid: 2474173593
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.stabbingwestward.com/
+timestamp: '2026-04-11T16:40:58.919147+00:00'
+title: Q939556
+turns: 4
+value_label: industrial rock
+verdict: verified-high

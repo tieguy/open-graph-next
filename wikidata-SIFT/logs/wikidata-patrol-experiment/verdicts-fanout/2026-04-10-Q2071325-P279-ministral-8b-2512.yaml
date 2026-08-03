@@ -1,0 +1,30 @@
+completion_tokens: 2332
+cost_usd: 0.00804
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 73822
+property: P279
+property_label: subclass of
+rationale: The claim that Kangeanic (Q2071325) is a subclass of Javanic (Q12509159)
+  is supported by the Glottolog code (kang1289) and a media legend referencing Glottolog
+  as the source. While the direct classification page for Kangeanic could not be fetched
+  due to technical limitations, the Glottolog code and the media legend provide credible
+  evidence. Independent linguistic sources also classify Kangeanic as an Eastern Javanic
+  language, distinct from Madurese. The unreachable reference URL does not invalidate
+  the claim, but the lack of direct access to the Glottolog classification page limits
+  certainty.
+rcid: null
+revid: 2433523780
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://glottolog.org/resource/languoid/id/kang1289
+- provenance: verified
+  supports_claim: false
+  url: https://journal.ugm.ac.id/jurnal-humaniora/article/view/1337
+timestamp: '2026-04-10T13:38:43.233816+00:00'
+title: Q2071325
+turns: 5
+value_label: Javanic
+verdict: verified-low

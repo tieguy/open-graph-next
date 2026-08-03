@@ -1,0 +1,38 @@
+completion_tokens: 1115
+cost_usd: 0.0078559
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 24955
+property: P856
+property_label: official website
+rationale: 'The website https://www.monettemoio.com is a personal/professional website
+  for actress Monette Moio. The fetched content includes a first-person biography
+  stating ''I''m an actress, stunt performer, improvisor, writer and singer; born
+  and raised in LA,'' which matches the Wikidata item''s description ''American actress''
+  and other claims (occupation: actor, place of birth: Los Angeles). The site contains
+  reels, headshots, and professional links, confirming it serves as her official online
+  presence.'
+rcid: 2540975739
+revid: 2464762489
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.monettemoio.com/
+- provenance: reported
+  supports_claim: true
+  url: https://www.monettemoio.com/headshots
+- provenance: reported
+  supports_claim: null
+  url: https://www.secondcity.com/people/monette-moio
+- provenance: reported
+  supports_claim: true
+  url: https://monettemoio.substack.com/p/rooted
+- provenance: reported
+  supports_claim: true
+  url: https://www.backstage.com/u/monette-moio/
+timestamp: '2026-02-20T02:21:57.203750+00:00'
+title: Q137385163
+turns: 4
+value_label: null
+verdict: verified-high

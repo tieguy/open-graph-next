@@ -1,0 +1,23 @@
+completion_tokens: 699
+cost_usd: 0.010312599999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49466
+property: P570
+property_label: date of death
+rationale: The only reference provided is the Spanish Wikipedia, which is not an acceptable
+  primary source for Wikidata and creates a circular reference. No independent, authoritative
+  source was found to confirm the date of death as '7 November 67 CE'. Therefore,
+  the claim cannot be verified.
+rcid: null
+revid: 2467061834
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Sancha_de_Le%C3%B3n
+timestamp: '2026-04-07T06:55:43.766180+00:00'
+title: Q1847459
+turns: 7
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 739
+cost_usd: 0.0061813
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 120670
+property: P856
+property_label: official website
+rationale: No official sources were found confirming whether 'https://www.united.com'
+  is a correct updated official website for Hanawa. Multiple search variations using
+  geographical and contextual identifiers (e.g., 'Hanawa Fukushima official website',
+  '福島県 那須塩原 町 町役場') returned no verifiable path to the municipality's official site.
+  Attempts to fetch 'https://www.united.com' resulted in a timeout error, and no prefetched
+  references were available to confirm this URL. Given the absence of verifiable direct
+  or indirect sources, and without primary government site context, this claim cannot
+  be confirmed or refuted based on available evidence.
+rcid: 2550187892
+revid: 2473531119
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.united.com
+timestamp: '2026-04-07T13:00:29.661884+00:00'
+title: Q1205922
+turns: 15
+value_label: null
+verdict: unverifiable

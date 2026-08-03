@@ -1,0 +1,32 @@
+completion_tokens: 694
+cost_usd: 0.0007486999999999999
+diff_type: qualifier_removed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 12198
+property: P856
+property_label: official website
+rationale: The edit removed a language qualifier (English) from the official website
+  claim for Zip Water. Investigation of the official website (https://www.zipwater.com)
+  shows no mention of language qualifications, but there is no evidence confirming
+  this qualifier was incorrectly applied. The removal appears neutral but its justification
+  cannot be confirmed due to lack of supporting information from retrieved sources.
+  The website content does not indicate the qualifier was inaccurate, making the edit's
+  rationale suspect based on current evidence.
+rcid: 2550467436
+revid: 2473803857
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.zipwater.com
+- provenance: reported
+  supports_claim: true
+  url: https://www.zipwater.com
+- provenance: reported
+  supports_claim: true
+  url: https://www.zipwater.com
+timestamp: '2026-04-07T13:48:34.875224+00:00'
+title: Q8072611
+turns: 2
+value_label: null
+verdict: suspect

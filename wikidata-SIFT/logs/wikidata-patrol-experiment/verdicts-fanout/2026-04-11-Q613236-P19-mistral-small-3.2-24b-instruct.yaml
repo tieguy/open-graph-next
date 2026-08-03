@@ -1,0 +1,25 @@
+completion_tokens: 1340
+cost_usd: 0.0028445025000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38685
+property: P19
+property_label: place of birth
+rationale: The official website and a reputable art website both confirm that Blek
+  le Rat was born in Paris. The claim that he was born in Niger is not supported by
+  these sources.
+rcid: 2549506887
+revid: 2472871010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://blekleratoriginal.com/en/blek-le-rat
+- provenance: verified
+  supports_claim: false
+  url: https://urban-nation.com/artist/blek-le-rat/
+timestamp: '2026-04-11T14:44:22.824758+00:00'
+title: Q613236
+turns: 4
+value_label: Niger
+verdict: incorrect

@@ -1,0 +1,24 @@
+completion_tokens: 1291
+cost_usd: 0.0056704
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24479
+property: P27
+property_label: country of citizenship
+rationale: The primary source confirms that Majid Al Mohandis is Iraqi by birth and
+  was granted Saudi citizenship in 2010. However, it does not indicate that he lost
+  or renounced his Iraqi citizenship after obtaining Saudi citizenship. The edit under
+  review removes Saudi Arabia as a country of citizenship without evidence of such
+  a change, making the update suspect.
+rcid: 2551405001
+revid: 2474708413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://platinumlist.net/artist/51/majid-al-mohandis
+timestamp: '2026-04-07T13:10:13.407826+00:00'
+title: Q12238123
+turns: 2
+value_label: Iraq
+verdict: suspect

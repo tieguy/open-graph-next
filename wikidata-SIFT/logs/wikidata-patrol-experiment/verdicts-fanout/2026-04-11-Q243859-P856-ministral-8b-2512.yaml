@@ -1,0 +1,31 @@
+completion_tokens: 2049
+cost_usd: 0.00290856
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23537
+property: P856
+property_label: official website
+rationale: The official website for Abiko (Q243859) was incorrectly changed from the
+  verified municipal government website (https://www.city.abiko.chiba.jp/) to an unrelated
+  corporate site (https://www.lufthansa.com). The old value is supported by Japanese
+  Wikipedia and logical context, while the new value lacks any credible support. The
+  cited reference (Japanese Wikipedia) is invalid for Wikidata, and no independent
+  source confirms the new URL as the official website for Abiko.
+rcid: null
+revid: 2471019462
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.abiko.chiba.jp/
+- provenance: reported
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/%E5%8D%8E%E5%8D%97%E5%AD%90%E5%B8%82
+- provenance: verified
+  supports_claim: false
+  url: https://www.lufthansa.com/
+timestamp: '2026-04-11T15:10:06.161687+00:00'
+title: Q243859
+turns: 1
+value_label: null
+verdict: incorrect

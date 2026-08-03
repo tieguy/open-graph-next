@@ -1,0 +1,26 @@
+completion_tokens: 785
+cost_usd: 0.0047548
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21419
+property: P1971
+property_label: number of children
+rationale: The official website of Circe Maia (https://circemaia.org.uy/) directly
+  states that she has nine children ('Tiene nueve hijos'). This primary source confirms
+  the new value. No evidence was found to support the previous value of '+6', and
+  the change is therefore justified.
+rcid: null
+revid: 2469371140
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://circemaia.org.uy/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lanacion.com.ar/cultura/orgullo-sudamericano-la-uruguaya-circe-maia-gano-el-premio-internacional-de-poesia-federico-garcia-nid19102023/
+timestamp: '2026-04-11T17:51:33.303074+00:00'
+title: Q511494
+turns: 1
+value_label: null
+verdict: verified-high

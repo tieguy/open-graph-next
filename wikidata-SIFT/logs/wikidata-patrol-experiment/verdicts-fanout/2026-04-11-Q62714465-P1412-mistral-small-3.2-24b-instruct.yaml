@@ -1,0 +1,23 @@
+completion_tokens: 875
+cost_usd: 0.002526125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24612
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The edit changes the language spoken by Vladimir Tokarenko from Russian
+  to Ukrainian. However, no references were provided for either the old or new value.
+  The fetched page about languages in Ukraine does not mention Vladimir Tokarenko
+  specifically. Therefore, there is insufficient evidence to verify the change.
+rcid: 2550384677
+revid: 2473722624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ukraine.com/culture/languages/
+timestamp: '2026-04-11T10:44:24.700018+00:00'
+title: Q62714465
+turns: 3
+value_label: Ukrainian
+verdict: unverifiable

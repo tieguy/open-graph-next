@@ -1,0 +1,29 @@
+completion_tokens: 321
+cost_usd: 0.004884043750000001
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54104
+property: P463
+property_label: member of
+rationale: The investigation was unable to verify the claim due to technical issues
+  with fetching relevant sources. The prefetched references for key URLs failed to
+  load, and subsequent search attempts encountered errors. Without accessible and
+  verifiable sources, it is not possible to confirm or refute the claim.
+rcid: 2550597978
+revid: 2473929234
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://leibnizsozietaet.de/bericht-ueber-den-leibniz-tag-2025/
+- provenance: verified
+  supports_claim: false
+  url: https://news.rub.de/leute/2025-07-30-auszeichnung-johannes-dietrich-neu-die-leibniz-sozietaet-aufgenommen
+- provenance: verified
+  supports_claim: false
+  url: https://prabook.com/web/johannes.dietrich/3776686
+timestamp: '2026-04-11T08:57:52.043776+00:00'
+title: Q48800274
+turns: 3
+value_label: Leibniz Society of Sciences
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 1478
+cost_usd: 0.0030192300000000004
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37921
+property: P856
+property_label: official website
+rationale: The edit correctly changed the rank of the official website claim for Yakov
+  Krotov (Q4241775) from 'normal' to 'deprecated' because the website itself (`http://krotov.info/`)
+  explicitly states it is no longer the official site and redirects users to `http://yakov.works/`.
+  This evidence directly supports the rank change as justified.
+rcid: 2550657419
+revid: 2473987097
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://krotov.info/
+timestamp: '2026-04-11T11:12:51.722530+00:00'
+title: Q4241775
+turns: 4
+value_label: null
+verdict: verified-high

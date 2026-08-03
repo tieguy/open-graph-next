@@ -1,0 +1,32 @@
+completion_tokens: 568
+cost_usd: 0.002879825
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29012
+property: P166
+property_label: award received
+rationale: The search results did not yield any relevant information about Gaëlle
+  Ghesquière receiving the 'Officer of Arts and Letters' award. The top results were
+  mostly unrelated to the query, focusing on various awards, memorials, and other
+  topics that do not provide any evidence regarding the award received by Gaëlle Ghesquière.
+rcid: 2540939331
+revid: 2464728916
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://ssh.worldwar1centennial.org/index.php/communicate/video/video-library/865-memorial-announcement-press-conference-full-length-00-50-46.html
+- provenance: verified
+  supports_claim: false
+  url: http://theirownmemorial.org/index.php/communicate/video/video-library/5214-choctaw-nation-code-talkers.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.2e-bureau.com/wp-content/uploads/2020/12/pk_PRIX_BAYEUX_2016.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.prixbayeux.org/wp-content/uploads/2021/06/Programme-PBC2016-GB.pdf
+timestamp: '2026-02-20T15:40:58.408035+00:00'
+title: Q3099888
+turns: 4
+value_label: Officer of Arts and Letters
+verdict: unverifiable

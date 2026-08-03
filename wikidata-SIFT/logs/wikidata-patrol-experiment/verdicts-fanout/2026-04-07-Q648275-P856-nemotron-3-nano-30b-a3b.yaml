@@ -1,0 +1,24 @@
+completion_tokens: 629
+cost_usd: 0.0076516
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 150516
+property: P856
+property_label: official website
+rationale: No verifiable source was found supporting the claim that https://www.ana.co.jp
+  is the official website of Iwakura. A web search for the city's official site returned
+  the domain city.iwakura.aichi.jp which contains municipal information, but no independent
+  source confirmed ana.co.jp as the official domain. The ana.co.jp domain appears
+  to be an airline domain that does not contain official city information.
+rcid: null
+revid: 2471370294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ana.co.jp
+timestamp: '2026-04-07T06:08:32.301254+00:00'
+title: Q648275
+turns: 15
+value_label: null
+verdict: unverifiable

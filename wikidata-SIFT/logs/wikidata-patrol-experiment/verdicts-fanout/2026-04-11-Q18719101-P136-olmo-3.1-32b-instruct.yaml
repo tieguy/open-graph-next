@@ -1,0 +1,37 @@
+completion_tokens: 340
+cost_usd: 0.0028968
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13464
+property: P136
+property_label: genre
+rationale: The band Little Big League is widely described as an indie rock band with
+  influences from emo and noise rock, but the primary genre cited by multiple sources
+  is indie rock. Wikipedia and music databases classify the band under the indie rock
+  umbrella, and band materials also emphasize an indie rock identity. However, the
+  presence of 'noise rock' as a genre in their claims could reflect their stylistic
+  overlap or subgenre associations. The change from 'noise rock' to 'indie rock' is
+  not contradicted by independent sources, but it does shift the primary genre emphasis
+  from a more specific/noisier subgenre to the broader indie rock category, which
+  is plausible given their musical profile and coverage. There is no direct, verified
+  source that explicitly states Little Big League should NOT be classified as indie
+  rock, nor is there a source that exclusively identifies them as noise rock as their
+  primary genre.
+rcid: 2551100800
+revid: 2474416565
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Little_Big_League_(band)
+- provenance: verified
+  supports_claim: true
+  url: https://littlebigleague.bandcamp.com/album/little-big-league
+- provenance: reported
+  supports_claim: true
+  url: https://www.allmusic.com/artist/little-big-league-mn0003158089
+timestamp: '2026-04-11T09:13:39.120436+00:00'
+title: Q18719101
+turns: 1
+value_label: indie rock
+verdict: plausible

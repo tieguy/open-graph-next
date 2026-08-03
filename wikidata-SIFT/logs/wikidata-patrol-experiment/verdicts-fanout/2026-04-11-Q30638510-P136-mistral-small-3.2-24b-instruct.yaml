@@ -1,0 +1,23 @@
+completion_tokens: 869
+cost_usd: 0.00347496875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34749
+property: P136
+property_label: genre
+rationale: The fetched content from Sophie's Floorboard blog does not explicitly mention
+  the genre "screamo" or "hardcore punk". The web search attempts failed, so no additional
+  sources could be consulted. Therefore, the genre change cannot be confirmed or refuted
+  with certainty.
+rcid: 2550852639
+revid: 2474176357
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://sophiesfloorboard.blogspot.com/2019/12/reversal-of-man.html
+timestamp: '2026-04-11T05:52:37.253095+00:00'
+title: Q30638510
+turns: 5
+value_label: hardcore punk
+verdict: unverifiable

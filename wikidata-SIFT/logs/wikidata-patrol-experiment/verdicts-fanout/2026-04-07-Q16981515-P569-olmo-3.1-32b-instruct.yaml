@@ -1,0 +1,29 @@
+completion_tokens: 1296
+cost_usd: 0.005242799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22326
+property: P569
+property_label: date of birth
+rationale: No accessible, reliable source could be found to confirm or deny that Lasse
+  Laaksonen's date of birth is '1 CE'. The cited Finnish Wikipedia reference could
+  not be fetched due to a blocked domain, and no other accessible sources provide
+  a verifiable date of birth. Therefore, the claim remains unverified.
+rcid: 2550272914
+revid: 2473613441
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://fi.wikipedia.org/wiki/Lasse_Laaksonen
+- provenance: reported
+  supports_claim: null
+  url: https://viaf.org/viaf/1044415096
+- provenance: reported
+  supports_claim: null
+  url: https://dbpedia.org/page/Lasse_Laaksonen
+timestamp: '2026-04-07T11:27:14.756276+00:00'
+title: Q16981515
+turns: 4
+value_label: null
+verdict: unverifiable

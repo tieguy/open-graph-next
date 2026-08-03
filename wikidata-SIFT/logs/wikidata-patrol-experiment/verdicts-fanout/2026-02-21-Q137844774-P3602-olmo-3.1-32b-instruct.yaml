@@ -1,0 +1,23 @@
+completion_tokens: 888
+cost_usd: 0.009171000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43191
+property: P3602
+property_label: candidacy in election
+rationale: The official results page for the 2020 Sartrouville municipal election
+  does not list Lina Lim as a candidate. No other authoritative source found names
+  her as a candidate for that election. This suggests the claim is likely incorrect
+  and should be reviewed.
+rcid: 2540919045
+revid: 2464710128
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.franceinfo.fr/elections/resultats/yvelines_78/sartrouville_78500
+timestamp: '2026-02-21T01:54:28.144478+00:00'
+title: Q137844774
+turns: 7
+value_label: 2020 Sartrouville municipal election
+verdict: suspect

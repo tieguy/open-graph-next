@@ -1,0 +1,35 @@
+completion_tokens: 1876
+cost_usd: 0.02087898
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 74315
+property: P1705
+property_label: native label
+rationale: Multiple independent and authoritative sources confirm that 'Šlokenbekas
+  muiža' is the correct native (Latvian) name for this manor. The Latvian Place Name
+  Database (LGIA), an official government source, lists this as the main name. Tourism
+  websites from Latvia.travel and Visit Tukums consistently use this name when referring
+  to the property in Latvian context. The name appears consistently across hotel listings,
+  tourism information, and historical references, establishing it as the established
+  native label.
+rcid: 2540973166
+revid: 2464760076
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.latvia.travel/en/sight/slokenbeka-manor
+- provenance: verified
+  supports_claim: true
+  url: https://visittukums.lv/en/Where-to-stay/Hotels-and-motels/Slokenbeka-Manor1
+- provenance: verified
+  supports_claim: true
+  url: https://vietvardi.lgia.gov.lv/search?objectID=144086
+- provenance: verified
+  supports_claim: true
+  url: https://baltictrails.eu/en/forest/poi/2705?lang=en
+timestamp: '2026-02-20T03:01:31.319488+00:00'
+title: Q61388491
+turns: 8
+value_label: null
+verdict: verified-high

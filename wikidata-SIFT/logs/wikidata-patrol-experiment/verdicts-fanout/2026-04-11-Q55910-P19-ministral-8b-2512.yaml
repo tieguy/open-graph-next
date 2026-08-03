@@ -1,0 +1,24 @@
+completion_tokens: 1620
+cost_usd: 0.01614393
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 145725
+property: P19
+property_label: place of birth
+rationale: The place of birth, Smilovice (Q1017012), is confirmed by the European
+  Parliament's official biography. The qualifier change from 'Nazi Germany' (Q7318)
+  to 'Protectorate of Bohemia and Moravia' (Q152750) is historically accurate, as
+  Smilovice was part of the Protectorate during World War II. The edit corrects an
+  inaccurate historical reference and aligns with verified historical records.
+rcid: null
+revid: 2470226363
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://historicalarchives.europarl.europa.eu/en/presidents/jerzy-buzek
+timestamp: '2026-04-11T14:30:15.004836+00:00'
+title: Q55910
+turns: 8
+value_label: Smilovice
+verdict: verified-high

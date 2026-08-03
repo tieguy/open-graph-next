@@ -1,0 +1,24 @@
+completion_tokens: 2288
+cost_usd: 0.00786159
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 82987
+property: P106
+property_label: occupation
+rationale: The occupation claim of 'pornography' (Q291) for Calamity Jane (Q236795)
+  is not supported by credible historical sources. Independent evidence, such as the
+  Find a Grave entry, confirms her roles as a frontierswoman and scout. No verified
+  sources link her to the pornography industry. The old value ('frontiersman') is
+  well-supported by historical records, while the new value lacks any credible backing.
+rcid: null
+revid: 2471214901
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/166/calamity-jane
+timestamp: '2026-04-11T15:22:56.291235+00:00'
+title: Q236795
+turns: 8
+value_label: pornography
+verdict: incorrect

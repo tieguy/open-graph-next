@@ -1,0 +1,26 @@
+completion_tokens: 997
+cost_usd: 0.023668400000000003
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 115351
+property: P1971
+property_label: number of children
+rationale: The only cited reference in the edit (People.com) is now unreachable, making
+  the claim unverifiable from that source at the time of the edit. While Cardi B has
+  publicly stated she has four children in other sources, the edit's reference is
+  inaccessible and no live, accessible source was verified during this investigation.
+rcid: null
+revid: 2471547309
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://people.com/parents/cardi-b-and-offset-welcome-second-baby-a-son/
+- provenance: verified
+  supports_claim: false
+  url: http://www.thefader.com/2016/02/29/cardi-b-interview
+timestamp: '2026-04-07T13:52:31.443803+00:00'
+title: Q29033668
+turns: 3
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 774
+cost_usd: 0.004614081250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49312
+property: P31
+property_label: instance of
+rationale: The claim that Caterina Albert is an instance of 'Dog with Five Puppies'
+  is contradicted by reliable sources that identify her as a Spanish writer. There
+  is no evidence to support the claim that she is a painting.
+rcid: null
+revid: 2470251466
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://example.com/primary-source
+timestamp: '2026-04-07T04:47:44.880196+00:00'
+title: Q2914475
+turns: 4
+value_label: Dog with Five Puppies
+verdict: incorrect

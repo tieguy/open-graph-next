@@ -1,0 +1,32 @@
+completion_tokens: 2325
+cost_usd: 0.0040441999999999995
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13246
+property: P39
+property_label: position held
+rationale: The claim that Denis Šulić was a 'member of parliament' (Q486839) from
+  2018 to 2022 was not supported by authoritative sources. The official Serbian National
+  Assembly register does not list him as a member of the National Assembly during
+  those years, and news coverage does not describe him as a national MP. While he
+  may have held a local deputy position from 2020, this is not equivalent to being
+  a national parliamentarian. Thus, the removal of the unsourced national parliamentary
+  claim was correct.
+rcid: 2549531939
+revid: 2472895345
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.parlament.sr/
+- provenance: verified
+  supports_claim: false
+  url: https://sr.wikipedia.org/wiki/Денис_Шулић
+- provenance: verified
+  supports_claim: false
+  url: https://www.b92.net/
+timestamp: '2026-04-11T10:27:58.987435+00:00'
+title: Q61133541
+turns: 1
+value_label: member of parliament
+verdict: verified-high

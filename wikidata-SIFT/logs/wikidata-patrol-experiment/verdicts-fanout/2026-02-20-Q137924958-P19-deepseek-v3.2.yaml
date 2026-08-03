@@ -1,0 +1,27 @@
+completion_tokens: 1451
+cost_usd: 0.008239060000000001
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 49472
+property: P19
+property_label: place of birth
+rationale: The cited reference URL (https://www.sites.google.com/view/manvikchandra)
+  leads to a nearly empty Google Sites page that contains no information about place
+  of birth. Independent searches confirmed Manvik Chandra exists as a child artist
+  and author, but no sources were found that confirm Uttam Nagar as their place of
+  birth.
+rcid: 2540949985
+revid: 2464738967
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Student_Life.html?id=JnWgEQAAQBAJ
+timestamp: '2026-02-20T10:24:43.621407+00:00'
+title: Q137924958
+turns: 9
+value_label: Uttam Nagar
+verdict: unverifiable

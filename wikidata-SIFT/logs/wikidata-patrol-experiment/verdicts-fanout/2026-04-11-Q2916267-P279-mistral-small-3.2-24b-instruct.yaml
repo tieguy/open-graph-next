@@ -1,0 +1,35 @@
+completion_tokens: 1980
+cost_usd: 0.008534812499999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 85758
+property: P279
+property_label: subclass of
+rationale: The Tulip chair is a piece of furniture designed by Eero Saarinen, specifically
+  a chair. The edit to change the subclass from 'chair' to 'cookware and bakeware'
+  is incorrect as it contradicts the item's description and other claims. No supporting
+  evidence was found for the new value.
+rcid: 2551186634
+revid: 2474500439
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/collection/works/82213
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Tulip_chair
+- provenance: verified
+  supports_claim: false
+  url: https://www.knoll.com/designers/eero-saarinen/tulip-chair
+- provenance: verified
+  supports_claim: false
+  url: https://www.architecturaldigest.com/story/tulip-chair-eero-saarinen
+- provenance: verified
+  supports_claim: false
+  url: https://www.knoll.com/news/eero-saarinen-tulip-chair
+timestamp: '2026-04-11T09:58:16.134316+00:00'
+title: Q2916267
+turns: 10
+value_label: cookware and bakeware
+verdict: incorrect

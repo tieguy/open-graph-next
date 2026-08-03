@@ -1,0 +1,29 @@
+completion_tokens: 1552
+cost_usd: 0.00212759375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20925
+property: P569
+property_label: date of birth
+rationale: Multiple independent sources confirm that Ana Pardo de Vera was born in
+  1974. While there is a discrepancy in the exact date (February 7th vs. just the
+  year), the independent sources consistently support the year 1974. Therefore, the
+  edit to change the date of birth to just the year "1974" is justified.
+rcid: 2550885214
+revid: 2474208340
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.infobae.com/espana/2025/07/04/quien-es-ana-pardo-de-vera-la-periodista-que-ha-denunciado-a-vito-quiles-por-acoso/
+- provenance: verified
+  supports_claim: true
+  url: https://www.libertaddigital.com/personajes/ana-pardo-de-vera/
+- provenance: verified
+  supports_claim: true
+  url: https://www.penguinlibros.com/es/966434-ana-pardo-de-vera
+timestamp: '2026-04-11T05:50:35.039245+00:00'
+title: Q28525411
+turns: 1
+value_label: null
+verdict: verified-high

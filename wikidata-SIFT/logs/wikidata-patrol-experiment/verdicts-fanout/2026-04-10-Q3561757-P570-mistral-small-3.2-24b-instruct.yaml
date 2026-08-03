@@ -1,0 +1,28 @@
+completion_tokens: 1735
+cost_usd: 0.007417375000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 74492
+property: P570
+property_label: date of death
+rationale: The edit changes the date of death to December 9, 1966, but the PeoplePill
+  page, a primary source, explicitly states the date of death as December 10, 1966.
+  Therefore, the edit is incorrect.
+rcid: null
+revid: 2461568245
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://mfd.agadir.free.fr/Agadir-reconstruction/Archis/Vladimir%20Bodiansky.html
+- provenance: verified
+  supports_claim: false
+  url: https://peoplepill.com/i/vladimir-bodiansky/
+- provenance: verified
+  supports_claim: false
+  url: https://www.centrepompidou.fr/en/ressources/personne/cdq8865
+timestamp: '2026-04-10T13:14:46.154470+00:00'
+title: Q3561757
+turns: 7
+value_label: null
+verdict: incorrect

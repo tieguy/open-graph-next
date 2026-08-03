@@ -1,0 +1,26 @@
+completion_tokens: 1152
+cost_usd: 0.0073584
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33336
+property: P22
+property_label: father
+rationale: Pedro Sánchez is a modern political figure and could not have been the
+  father of Guifré el Pilós, who lived in the 9th century. All historical and genealogical
+  records identify Sunifred, Count of Barcelona, as the father. No primary or secondary
+  sources support the new claim.
+rcid: null
+revid: 2469831792
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Guifré_the_Hairy
+- provenance: reported
+  supports_claim: false
+  url: https://www.geni.com/people/Guifré-el-Pilós/6000000030668392011
+timestamp: '2026-04-07T06:58:57.298007+00:00'
+title: Q504283
+turns: 4
+value_label: Pedro Sánchez
+verdict: incorrect

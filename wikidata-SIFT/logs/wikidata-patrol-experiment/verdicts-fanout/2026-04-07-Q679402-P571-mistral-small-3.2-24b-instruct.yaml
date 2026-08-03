@@ -1,0 +1,23 @@
+completion_tokens: 1083
+cost_usd: 0.0045874687499999995
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46045
+property: P571
+property_label: inception
+rationale: The reference provided (Legal Entity Identifier) could not be verified
+  as the source was unreachable. No independent sources were found to confirm or deny
+  the inception date of Alpiq Holding. Therefore, the edit cannot be verified based
+  on the available information.
+rcid: null
+revid: 2471235559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gleif.org/en/about-lei/lei-overview
+timestamp: '2026-04-07T10:06:26.471880+00:00'
+title: Q679402
+turns: 7
+value_label: null
+verdict: unverifiable

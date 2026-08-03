@@ -1,0 +1,26 @@
+completion_tokens: 1556
+cost_usd: 0.0068988
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29826
+property: P106
+property_label: occupation
+rationale: Official parliamentary records from the Parliament of Catalonia and journalistic
+  reporting confirm that Joan Josep Nuet has held elected political offices. These
+  roles unambiguously qualify him as a 'politician,' making the occupation claim accurate
+  and well-supported.
+rcid: 2549582614
+revid: 2472945196
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.congreso.es/en/busqueda-de-diputados?p_p_id=diputadomodule&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&_diputadomodule_mostrarFicha=true&_diputadomodule_codParlamentario=189&_diputadomodule_idLegislatura=XIV
+- provenance: verified
+  supports_claim: true
+  url: https://www.parlament.cat/web/composicio/diputats-fitxa/index.html?p_codi=1201&p_legislatura=12
+timestamp: '2026-04-11T17:51:18.659161+00:00'
+title: Q5931440
+turns: 1
+value_label: politician
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 1458
+cost_usd: 0.0042962
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17107
+property: P856
+property_label: official website
+rationale: The edit replaced the correct official website of Kagamiishi Town (https://www.town.kagamiishi.fukushima.jp/)
+  with the official website of LATAM Airlines Group (https://www.latamairlines.com/),
+  which is unrelated to the town. Multiple independent sources, including the town's
+  own homepage and Japanese Wikipedia, confirm the old value as the correct official
+  website. There is no evidence that the new value should be the official website
+  for Kagamiishi Town.
+rcid: null
+revid: 2471668584
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.town.kagamiishi.fukushima.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.latamairlines.com/
+- citation: Japanese Wikipedia page for Kagamiishi
+  provenance: reported
+  supports_claim: true
+timestamp: '2026-04-11T12:34:34.632987+00:00'
+title: Q1205431
+turns: 1
+value_label: null
+verdict: incorrect

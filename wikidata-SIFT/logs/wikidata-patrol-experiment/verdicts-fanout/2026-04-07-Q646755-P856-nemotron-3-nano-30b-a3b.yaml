@@ -1,0 +1,26 @@
+completion_tokens: 1229
+cost_usd: 0.007050350000000001
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 136091
+property: P856
+property_label: official website
+rationale: The investigation found no authoritative source confirming that the proposed
+  website URL 'https://www.aerok.com' serves as an official website for Tateyama.
+  Queries for Tateyama's official website returned no valid URLs, and attempts to
+  access aerok.com resulted in a 403 Forbidden error indicating the URL is not publicly
+  accessible. Fetched sources from the official Tateyama city portal and Chiba Prefecture
+  statistics page show no website link referencing aerok.com, preventing verification
+  of its legitimacy.
+rcid: null
+revid: 2471597268
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.tateyama.chiba.jp/
+timestamp: '2026-04-07T06:24:21.456884+00:00'
+title: Q646755
+turns: 15
+value_label: null
+verdict: unverifiable

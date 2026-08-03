@@ -1,0 +1,22 @@
+completion_tokens: 465
+cost_usd: 0.0023150000000000002
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21755
+property: P569
+property_label: date of birth
+rationale: The date of birth claim for Omar Rashid (OR) MRX is supported by a verified
+  source from MusicBrainz, which directly states his birth date as December 1, 1998.
+  This source is authoritative and confirms the accuracy of the claim.
+rcid: 2540955476
+revid: 2464743749
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://musicbrainz.org/artist/8e09d924-e719-4b0a-b23b-93c35667750a?va=1
+timestamp: '2026-02-20T07:07:00.357426+00:00'
+title: Q138349103
+turns: 3
+value_label: null
+verdict: verified-high

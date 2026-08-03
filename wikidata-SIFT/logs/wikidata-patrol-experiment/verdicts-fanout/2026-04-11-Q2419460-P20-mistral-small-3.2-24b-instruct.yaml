@@ -1,0 +1,22 @@
+completion_tokens: 237
+cost_usd: 0.005208165
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59040
+property: P20
+property_label: place of death
+rationale: The investigation encountered errors while attempting to fetch relevant
+  sources, making it impossible to verify the claim about Lucas de Heere's place of
+  death.
+rcid: null
+revid: 2460961343
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Lucas_de_Heere
+timestamp: '2026-04-11T13:38:26.841768+00:00'
+title: Q2419460
+turns: 4
+value_label: Paris 7
+verdict: unverifiable

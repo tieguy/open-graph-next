@@ -1,0 +1,21 @@
+completion_tokens: 162
+cost_usd: 0.0065856
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71966
+property: P3647
+property_label: NBA.com player ID
+rationale: Unable to fetch any sources to verify the NBA.com player ID for Rudy Gay
+  due to search errors.
+rcid: null
+revid: 2471336922
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nba.com/player/rudy-gay
+timestamp: '2026-04-11T11:59:59.856566+00:00'
+title: Q370275
+turns: 4
+value_label: null
+verdict: unverifiable

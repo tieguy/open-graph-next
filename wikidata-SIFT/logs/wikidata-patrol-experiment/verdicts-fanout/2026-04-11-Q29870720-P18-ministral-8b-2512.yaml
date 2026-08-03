@@ -1,0 +1,32 @@
+completion_tokens: 2079
+cost_usd: 0.00432585
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58530
+property: P18
+property_label: image
+rationale: The edit changed the image of Jarfaiter (Q29870720), a Spanish rapper,
+  to an image of a Peruvian Hairless Dog ('Quetta the peruvian hairless dog.jpg').
+  This is incorrect as Jarfaiter is a human entity, and no credible source supports
+  this nonsensical change. The old image ('Jarfaiterpag.jpg') was also unverified,
+  but the new image is clearly inappropriate for the subject. The item's nonsensical
+  claim that Jarfaiter is a 'Peruvian Hairless Dog' (P31) further confirms this edit
+  is incorrect.
+rcid: 2550532347
+revid: 2473866155
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://peruvianhairless.breedarchive.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+- provenance: verified
+  supports_claim: false
+  url: https://www.peruforless.com/blog/peruvian-hairless-dog
+timestamp: '2026-04-11T06:11:04.771412+00:00'
+title: Q29870720
+turns: 7
+value_label: Quetta the peruvian hairless dog.jpg
+verdict: incorrect

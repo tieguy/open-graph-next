@@ -1,0 +1,29 @@
+completion_tokens: 1250
+cost_usd: 0.0085202
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38851
+property: P641
+property_label: sport
+rationale: The referenced curling association website could not be reached, and there
+  is no independent evidence that José Juan Figueiras is a curling player. All available
+  information identifies him as a footballer. Changing the sport claim to curling
+  is unsupported and incorrect.
+rcid: null
+revid: 2464167184
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.es/jose-juan-figueras/profil/spieler/15499
+- provenance: verified-attempt
+  supports_claim: null
+  url: https://www.finnishcurling.fi/en/players/jose-juan-figueras
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/José_Juan_Figueras
+timestamp: '2026-04-07T13:03:03.145360+00:00'
+title: Q3328230
+turns: 5
+value_label: curling
+verdict: incorrect

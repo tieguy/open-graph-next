@@ -1,0 +1,21 @@
+completion_tokens: 1099
+cost_usd: 0.0048173875
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47821
+property: P27
+property_label: country of citizenship
+rationale: The reference URL provided does not support the claim, and independent
+  sources could not be verified due to search errors.
+rcid: null
+revid: 2470267514
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.zefix.ch/de/search/entity/list/firm/1191677
+timestamp: '2026-04-11T18:21:47.744843+00:00'
+title: Q4058374
+turns: 5
+value_label: Switzerland
+verdict: unverifiable

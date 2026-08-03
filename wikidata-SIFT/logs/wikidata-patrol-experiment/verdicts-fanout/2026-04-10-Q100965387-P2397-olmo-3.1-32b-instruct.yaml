@@ -1,0 +1,26 @@
+completion_tokens: 1782
+cost_usd: 0.0034124000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11716
+property: P2397
+property_label: YouTube channel ID
+rationale: The new YouTube channel ID '/@theatrelaseizieme_' is not valid and does
+  not match the official channel for Théâtre la Seizième. The correct channel ID is
+  'UCuzZvFNQSnicSFwUR2XSWiA', as confirmed by fetching the official YouTube channel
+  and a third-party website. The edit therefore introduces incorrect information.
+rcid: 2551329084
+revid: 2474635968
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCuzZvFNQSnicSFwUR2XSWiA
+- provenance: verified
+  supports_claim: false
+  url: https://www.createastir.ca/theatre-la-seizieme
+timestamp: '2026-04-10T00:13:31.181825+00:00'
+title: Q100965387
+turns: 1
+value_label: null
+verdict: incorrect

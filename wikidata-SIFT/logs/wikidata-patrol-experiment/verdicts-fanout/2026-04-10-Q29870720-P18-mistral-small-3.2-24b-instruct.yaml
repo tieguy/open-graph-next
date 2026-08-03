@@ -1,0 +1,29 @@
+completion_tokens: 1182
+cost_usd: 0.00309458
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30395
+property: P18
+property_label: image
+rationale: The image 'Quetta the peruvian hairless dog.jpg' does not appear in any
+  of the searched sources, and there are no references or independent corroboration
+  for this claim. The edit lacks cited references, and the independent search did
+  not yield any evidence supporting the new image.
+rcid: 2550532347
+revid: 2473866155
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://archive.org/details/mbid-9fdb3309-fe78-4648-8eb8-cb9cf09b55cb
+- provenance: verified
+  supports_claim: false
+  url: https://archive.org/details/mbid-929c778e-dab2-426b-9e26-0d9091a30168
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Jarfaiter
+timestamp: '2026-04-10T10:35:50.871054+00:00'
+title: Q29870720
+turns: 3
+value_label: Quetta the peruvian hairless dog.jpg
+verdict: unverifiable

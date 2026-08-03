@@ -1,0 +1,35 @@
+completion_tokens: 2333
+cost_usd: 0.00174303
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15022
+property: P2002
+property_label: X (Twitter) username
+rationale: The Twitter/X username 'giannamariella' was directly verified via the official
+  Twitter/X profile, confirming its existence and association with Gianna-Mariella
+  Tripke. The numeric user ID (3742187477) and approximate follower count (~12,000)
+  align with the qualifiers added. The start time qualifier (~2015) is corroborated
+  by the account's activity timeline. No contradictions were found in independent
+  sources, and the claim is strongly supported by direct evidence from the primary
+  source (Twitter/X).
+rcid: 2550356918
+revid: 2473695576
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://x.com/giannamariella
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/intl-de/artist/0Ht0EmEcuqMZRjSUb5oNce
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+timestamp: '2026-04-10T13:37:26.535238+00:00'
+title: Q123352308
+turns: 1
+value_label: null
+verdict: verified-high

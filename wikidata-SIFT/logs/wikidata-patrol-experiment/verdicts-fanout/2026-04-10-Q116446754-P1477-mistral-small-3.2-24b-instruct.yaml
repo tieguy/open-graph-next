@@ -1,0 +1,28 @@
+completion_tokens: 1245
+cost_usd: 0.0063809999999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 67495
+property: P1477
+property_label: birth name
+rationale: Multiple independent sources consistently refer to Poupette Kenza's real
+  name as Kenza Benchrif. There is no evidence to support the claim that 'Clément
+  sous string léopard grrr' is her correct birth name.
+rcid: 2549579439
+revid: 2472942112
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.everybodywiki.com/Poupette_Kenza
+- provenance: verified
+  supports_claim: false
+  url: https://www.voici.fr/bios-people/poupette-kenza
+- provenance: verified
+  supports_claim: false
+  url: https://en.bladi.net/influencer-poupette-kenza-resurfaces-from-prison-youtube-comeback-extortion,116566.html
+timestamp: '2026-04-10T14:14:02.260813+00:00'
+title: Q116446754
+turns: 5
+value_label: null
+verdict: incorrect

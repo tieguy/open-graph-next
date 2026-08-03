@@ -1,0 +1,42 @@
+completion_tokens: 4844
+cost_usd: 0.284636
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 260416
+property: P155
+property_label: follows
+rationale: While Zombie Influx (released September 15, 2009) was chronologically released
+  before Winter's Eve (November 27, 2009), the claim is suspect because Zombie Influx
+  is credited to Buzz-Works, not Nox Arcana. Wikidata's P155 property denotes the
+  'immediately prior item in a series of which the subject is a part.' Winter's Eve
+  belongs to the Nox Arcana album series, whose immediately prior album is Blackthorn
+  Asylum (June 21, 2009), not the Buzz-Works project. The P175 qualifier incorrectly
+  attributes Buzz-Works as the performer of Winter's Eve, when Winter's Eve's performer
+  is Nox Arcana.
+rcid: 2541055173
+revid: 2464837438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/music.html
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.bandcamp.com/album/zombie-influx
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.bandcamp.com/album/winters-eve
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/blackthorn.html
+- provenance: verified
+  supports_claim: false
+  url: https://rateyourmusic.com/release/album/nox-arcana/winters-eve/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P155
+timestamp: '2026-02-21T04:14:01.262967+00:00'
+title: Q8026171
+turns: 13
+value_label: Zombie Influx
+verdict: suspect

@@ -1,0 +1,31 @@
+completion_tokens: 1681
+cost_usd: 0.00154587
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18046
+property: P17
+property_label: country
+rationale: The claim that Sherritt Mint (Q111709240) is located in Canada (Q16) is
+  strongly supported by multiple verified sources. The qualifier P276 (Fort Saskatchewan,
+  Q1007407) is explicitly confirmed as being in Canada by Numista and LastDodo, both
+  of which provide direct evidence linking the mint to Canada. Sherritt.com further
+  corroborates the mint's operations in Canada. The reference added to the claim is
+  valid and directly supports the country claim without contradictions.
+rcid: 2549969607
+revid: 2473319945
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.numista.com/74513
+- provenance: verified
+  supports_claim: true
+  url: https://www.lastdodo.com/en/items/4564843-canada-the-sherritt-mint-1966
+- provenance: verified
+  supports_claim: true
+  url: https://sherritt.com
+timestamp: '2026-04-11T14:14:13.433613+00:00'
+title: Q111709240
+turns: 2
+value_label: Canada
+verdict: verified-high

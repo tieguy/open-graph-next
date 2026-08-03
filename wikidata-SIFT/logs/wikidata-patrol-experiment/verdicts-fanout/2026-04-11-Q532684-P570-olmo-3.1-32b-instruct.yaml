@@ -1,0 +1,28 @@
+completion_tokens: 1846
+cost_usd: 0.0047615999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18270
+property: P570
+property_label: date of death
+rationale: All verified and independently accessible sources indicate that Salvian
+  died around the year 470, not 477. There is no credible evidence to support changing
+  the date of death to 477. The edit is therefore unsupported and should be reverted.
+rcid: 2549650892
+revid: 2473011455
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://spartacus-educational.com/ROMsalvian.htm
+- provenance: verified
+  supports_claim: false
+  url: https://tomstheology.blog/2025/02/18/salvian-of-marseille/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ccel.org/ccel/salvian
+timestamp: '2026-04-11T12:22:00.906865+00:00'
+title: Q532684
+turns: 1
+value_label: null
+verdict: suspect

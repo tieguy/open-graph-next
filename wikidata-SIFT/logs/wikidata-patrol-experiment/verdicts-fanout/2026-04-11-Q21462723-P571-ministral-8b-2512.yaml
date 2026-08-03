@@ -1,0 +1,34 @@
+completion_tokens: 2147
+cost_usd: 0.00501321
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37470
+property: P571
+property_label: inception
+rationale: The edit incorrectly changed the inception date of Uber Eats from August
+  2014 to August 2015. Multiple verified sources, including Entrepreneur On Media,
+  Pestel Analysis, and Uber's official history blog, confirm that Uber Eats was launched
+  in August 2014. The new value contradicts these well-documented historical records
+  and lacks independent corroboration. The reference (English Wikipedia) was unreachable,
+  and no credible evidence supports the change.
+rcid: 2550543271
+revid: 2473876876
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://entrepreneuronemedia.com/success-stories/success-story-of-uber/
+- provenance: verified
+  supports_claim: false
+  url: https://pestel-analysis.com/blogs/brief-history/uber
+- provenance: verified
+  supports_claim: false
+  url: https://www.uberapps.tech/blog/uber-history.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.npr.org/sections/coronavirus-live-updates/2020/07/06/887961123/uber-gobbles-up-postmates-in-2-65-billion-bet-on-food-delivery
+timestamp: '2026-04-11T14:43:07.226729+00:00'
+title: Q21462723
+turns: 1
+value_label: null
+verdict: incorrect

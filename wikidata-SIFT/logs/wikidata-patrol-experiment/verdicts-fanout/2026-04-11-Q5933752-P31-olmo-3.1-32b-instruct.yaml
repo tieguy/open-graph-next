@@ -1,0 +1,26 @@
+completion_tokens: 1577
+cost_usd: 0.0055452
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22995
+property: P31
+property_label: instance of
+rationale: 'The edit removed the correct ''instance of: human'' claim from a living
+  person based on unreliable, circular references to Wikipedia. Multiple independent
+  and reliable sources confirm that Masoud Pezeshkian is a human being. There is no
+  evidence to support the removal of this claim, making the edit suspect.'
+rcid: 2551335336
+revid: 2474641870
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/article/2024/jul/06/masoud-pezeshkian-the-former-heart-surgeon-who-became-president-of-iran
+- provenance: verified
+  supports_claim: false
+  url: https://www.thehindu.com/news/international/irans-khamenei-formally-grants-masoud-pezeshkian-presidential-powers/article68456408.ece
+timestamp: '2026-04-11T10:03:46.777914+00:00'
+title: Q5933752
+turns: 1
+value_label: human
+verdict: suspect

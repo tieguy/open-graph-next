@@ -1,0 +1,28 @@
+completion_tokens: 1122
+cost_usd: 0.00141945
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17071
+property: P360
+property_label: is a list of
+rationale: The edit changes the classification of the list from 'highway' (Q269949)
+  to 'state highway' (Q1788582) for the item 'list of state highways in São Paulo'.
+  Independent sources, such as AARoads Wiki and Tripomatic, consistently use the term
+  'state highway' to describe highways managed by the state of São Paulo. This confirms
+  the edit is accurate and improves specificity. No contradictions were found, and
+  the term 'state highway' is the standard designation for this context.
+rcid: 2551131421
+revid: 2474446307
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://wiki.aaroads.com/wiki/List_of_state_highways_in_S%C3%A3o_Paulo
+- provenance: reported
+  supports_claim: true
+  url: https://tripomatic.com/en/poi/list-of-state-highways-in-sao-paulo-poi:20134358
+timestamp: '2026-04-10T13:31:29.665945+00:00'
+title: Q6640552
+turns: 2
+value_label: state highway
+verdict: verified-high

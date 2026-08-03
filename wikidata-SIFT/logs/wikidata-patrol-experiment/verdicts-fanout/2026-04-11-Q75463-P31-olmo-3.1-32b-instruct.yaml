@@ -1,0 +1,32 @@
+completion_tokens: 2226
+cost_usd: 0.006243
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24537
+property: P31
+property_label: instance of
+rationale: The claim that Marianne Cohn should be classified as 'Subhuman' is factually
+  incorrect and semantically inappropriate. Authoritative sources, including Yad Vashem
+  and Encyclopedia.com, describe her as a Jewish resistance fighter and hero. The
+  term 'Subhuman' is historically associated with Nazi propaganda and is not used
+  to describe real human beings, especially Holocaust victims and resistance fighters.
+  The cited reference could not be accessed to verify the claim, and no independent
+  evidence supports this classification.
+rcid: 2549484172
+revid: 2472848876
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wwv.yadvashem.org/yv/en/exhibitions/last-letters/1944/cohn_marianne.asp
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/cohn-marianne-1921-1944
+- provenance: reported
+  supports_claim: false
+  url: https://www.stolpersteine-berlin.de/de/stolpersteine-finden/download
+timestamp: '2026-04-11T09:06:50.335277+00:00'
+title: Q75463
+turns: 1
+value_label: Subhuman
+verdict: incorrect

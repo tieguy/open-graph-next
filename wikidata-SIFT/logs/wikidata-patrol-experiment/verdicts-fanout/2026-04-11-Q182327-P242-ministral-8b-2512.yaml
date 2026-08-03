@@ -1,0 +1,28 @@
+completion_tokens: 1795
+cost_usd: 0.00363237
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43650
+property: P242
+property_label: locator map image
+rationale: The old locator map image, 'Dim.polihnis.png', is explicitly referenced
+  in Wikimedia Commons under the category 'Maps of Thessaloniki,' confirming its validity
+  for Polichni. The new value, 'Polichni map.jpg', lacks any evidence or reference
+  in Wikimedia Commons or other reliable sources. Since no references were attached
+  to the claim in Wikidata and the new value is not corroborated by independent sources,
+  the edit is not justified.
+rcid: null
+revid: 2471173768
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Dim.polihnis.png
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Maps_of_Thessaloniki
+timestamp: '2026-04-11T16:17:43.607801+00:00'
+title: Q182327
+turns: 5
+value_label: null
+verdict: suspect

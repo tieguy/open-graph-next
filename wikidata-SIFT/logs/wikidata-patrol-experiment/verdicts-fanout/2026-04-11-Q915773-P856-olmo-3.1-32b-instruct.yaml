@@ -1,0 +1,26 @@
+completion_tokens: 1279
+cost_usd: 0.0041183999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16755
+property: P856
+property_label: official website
+rationale: The new value, https://www.finnair.com/, is the official website of Finnair,
+  a Finnish airline, and is not related to Ina Town, Saitama. The old value, https://www.town.saitama-ina.lg.jp/,
+  is the correct and official website of Ina Town, as confirmed by fetching the site
+  and independent web search. This change is factually incorrect and should be reverted.
+rcid: null
+revid: 2472085986
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.saitama-ina.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.finnair.com/
+timestamp: '2026-04-11T18:38:19.293034+00:00'
+title: Q915773
+turns: 1
+value_label: null
+verdict: incorrect

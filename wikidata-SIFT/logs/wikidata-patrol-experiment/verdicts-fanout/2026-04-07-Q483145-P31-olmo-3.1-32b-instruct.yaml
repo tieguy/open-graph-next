@@ -1,0 +1,29 @@
+completion_tokens: 1003
+cost_usd: 0.0082464
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38223
+property: P31
+property_label: instance of
+rationale: The edit changes Luís Figo's instance of from 'human' to 'pig,' a biologically
+  and contextually impossible classification. The cited reference could not be retrieved
+  or verified, and no independent sources support this claim. All reliable sources
+  describe Luís Figo as a human footballer.
+rcid: 2551322580
+revid: 2474630051
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Lu%C3%ADs_Figo
+- provenance: unreachable
+  supports_claim: false
+  url: https://datos.bne.es/record/XX1478499
+timestamp: '2026-04-07T07:52:34.404563+00:00'
+title: Q483145
+turns: 3
+value_label: pig
+verdict: incorrect

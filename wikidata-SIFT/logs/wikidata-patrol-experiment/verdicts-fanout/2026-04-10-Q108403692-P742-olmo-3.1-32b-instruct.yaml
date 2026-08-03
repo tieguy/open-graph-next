@@ -1,0 +1,28 @@
+completion_tokens: 1054
+cost_usd: 0.0034974000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14325
+property: P742
+property_label: pseudonym
+rationale: While 'The Punisher' is widely recognized as the vigilante alias of Frank
+  Castle in Marvel comics, none of the consulted sources confirm that 'The Punisher'
+  was ever used as a legal pseudonym for Frank Castle. The change from 'Punisher'
+  to 'The Punisher' appears to be a stylistic or formatting change rather than a factual
+  update regarding legal identity or pseudonym usage. Without evidence of 'The Punisher'
+  being a legal pseudonym, the edit cannot be verified as factually correct or incorrect.
+rcid: 2550546012
+revid: 2473879283
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.chronologyproject.com/phpbb2/viewtopic.php?t=4342
+- provenance: verified
+  supports_claim: false
+  url: https://www.denofgeek.com/comics/the-punisher-the-secret-of-frank-castles-alias/
+timestamp: '2026-04-10T12:38:33.806715+00:00'
+title: Q108403692
+turns: 1
+value_label: null
+verdict: unverifiable

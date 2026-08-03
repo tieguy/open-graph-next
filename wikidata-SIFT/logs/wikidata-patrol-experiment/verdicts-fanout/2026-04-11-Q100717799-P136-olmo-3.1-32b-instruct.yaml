@@ -1,0 +1,36 @@
+completion_tokens: 368
+cost_usd: 0.0036344000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17068
+property: P136
+property_label: genre
+rationale: Omer Fedi is primarily recognized as a pop and pop-rock producer and songwriter,
+  and has multiple genre associations including pop, emo pop, and pop-punk, but there
+  is no clear primary genre of 'hip-hop' associated with his main output. The new
+  value 'pop music' is more consistent with his known musical identity. However, the
+  source supporting the previous 'hip-hop' label is a Wikimedia import from Hebrew
+  Wikipedia, which does not appear to be a reliable or primary genre source for Omer
+  Fedi. Multiple genre claims exist, but evidence does not clearly support 'hip-hop'
+  as his main genre, making the change suspect rather than fully verified.
+rcid: 2551091193
+revid: 2474407057
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://variety.com/2021/music/news/omer-fedi-hitmaker-mood-without-you-montero-call-me-by-your-name-1234950939/
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/playlist/omer-fedi-the-producers/pl.db42e897106941f086dc68994a0e03f4
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Omer-fedi
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/omer-fedi.html
+timestamp: '2026-04-11T17:51:53.159043+00:00'
+title: Q100717799
+turns: 1
+value_label: pop music
+verdict: suspect

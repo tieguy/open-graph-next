@@ -1,0 +1,28 @@
+completion_tokens: 1797
+cost_usd: 0.0069705
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69531
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.city.fukuchiyama.lg.jp/',
+  is confirmed as the official government website of Fukuchiyama City through prefetched
+  content. The new value, 'https://www.hawaiianairlines.com', is the website of Hawaiian
+  Airlines, an unrelated airline company with no connection to Fukuchiyama. The edit
+  incorrectly replaces the legitimate official website with an unrelated and irrelevant
+  URL.
+rcid: null
+revid: 2471591651
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.fukuchiyama.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.hawaiianairlines.com
+timestamp: '2026-04-11T05:56:42.152884+00:00'
+title: Q3355306
+turns: 4
+value_label: null
+verdict: incorrect

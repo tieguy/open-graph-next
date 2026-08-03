@@ -1,0 +1,26 @@
+completion_tokens: 1322
+cost_usd: 0.0038408
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15238
+property: P19
+property_label: place of birth
+rationale: The French Wikipedia, the cited reference, and independent cycling databases
+  all confirm that Christophe Bassons was born in Mazamet, France. No credible source
+  supports a place of birth of Saudi Arabia. The edit changing the birthplace to Saudi
+  Arabia is therefore factually incorrect.
+rcid: 2549520329
+revid: 2472883949
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Christophe_Bassons
+- provenance: reported
+  supports_claim: false
+  url: https://www.procyclingstats.com/rider/christophe-bassons
+timestamp: '2026-04-11T17:54:38.172315+00:00'
+title: Q328034
+turns: 1
+value_label: Saudi Arabia
+verdict: incorrect

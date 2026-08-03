@@ -1,0 +1,29 @@
+completion_tokens: 1817
+cost_usd: 0.0066604
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27851
+property: P20
+property_label: place of death
+rationale: Multiple independently verified news sources report that Pierre Bordage
+  died in Angers. There is no credible evidence supporting Corsept as the place of
+  death. Therefore, changing the place of death from Corsept to Angers is correct
+  and justified.
+rcid: 2550574604
+revid: 2473906772
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lesoir.be/719395/article/2025-12-29/lecrivain-de-science-fiction-pierre-bordage-est-decede
+- provenance: verified
+  supports_claim: true
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+- provenance: verified
+  supports_claim: true
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitte
+timestamp: '2026-04-11T16:46:47.287623+00:00'
+title: Q543836
+turns: 1
+value_label: Angers
+verdict: verified-high

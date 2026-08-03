@@ -1,0 +1,34 @@
+completion_tokens: 1766
+cost_usd: 0.0042174249999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42157
+property: P137
+property_label: operator
+rationale: The evidence available does not confirm or deny the claim that 'RCA Italiana'
+  is the correct updated operator for RCA Milano. The sources consulted do not provide
+  direct information supporting the claim.
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.kompass.com/c/rca-s-r-l/it0406550/
+- provenance: verified
+  supports_claim: false
+  url: https://rcamilano.it/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sonymusic.it/rca-recording-studios/
+- provenance: verified
+  supports_claim: false
+  url: http://musicavincent.blogspot.com/2008/04/rca-italiana-story-1949-1987.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/label/371440-RCA-Milano
+timestamp: '2026-04-10T00:02:29.367152+00:00'
+title: Q3928196
+turns: 5
+value_label: RCA Italiana
+verdict: unverifiable

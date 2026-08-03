@@ -1,0 +1,30 @@
+completion_tokens: 1376
+cost_usd: 0.00648399
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56571
+property: P856
+property_label: official website
+rationale: The claim that `https://www.koreanair.com` is the official website for
+  Ōmuta-shi (Q385623) is incorrect. The official website is confirmed to be `https://www.city.omuta.lg.jp`
+  through direct verification of the official municipal website and corroboration
+  from search results. Korean Air is an airline and unrelated to Ōmuta-shi, making
+  the claim baseless.
+rcid: null
+revid: 2466237994
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.omuta.lg.jp
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.omuta.lg.jp.e.lu.hp.transer.com/default.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.crossroadfukuoka.jp/en/spot/11543
+timestamp: '2026-04-10T13:34:32.247015+00:00'
+title: Q385623
+turns: 4
+value_label: null
+verdict: incorrect

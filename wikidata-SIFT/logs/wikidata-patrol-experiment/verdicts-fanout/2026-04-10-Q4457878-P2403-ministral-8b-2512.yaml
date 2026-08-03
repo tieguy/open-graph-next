@@ -1,0 +1,31 @@
+completion_tokens: 2483
+cost_usd: 0.014084550000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 119152
+property: P2403
+property_label: total assets
+rationale: The edit claims T-Bank's total assets are 6,083,903,000,000 Russian rubles
+  for 2024-2025 under IFRS, but the cited reference (PDF) is unreachable due to technical
+  errors. No verified independent source confirms this value. The most recent public
+  figure for T-Bank (2023) is 2.18 trillion rubles, which is significantly lower than
+  the claimed value. Without access to the cited source or corroborating evidence
+  from verified sources, the claim cannot be verified.
+rcid: 2550547031
+revid: 2473880220
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://cdn.tbank.ru/static/documents/fd10c537-d3d5-4764-923c-36afcff667f5.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://banksdaily.com/info/tbank
+- provenance: reported
+  supports_claim: false
+  url: https://tinkoff-group.com/company-info/news/20032025-t-technologies-announces-ifrs-financial-results-for-4q-and-fy-2024-eng/
+timestamp: '2026-04-10T08:02:34.343431+00:00'
+title: Q4457878
+turns: 4
+value_label: null
+verdict: unverifiable

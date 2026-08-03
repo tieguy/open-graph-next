@@ -1,0 +1,29 @@
+completion_tokens: 1605
+cost_usd: 0.0065914
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28142
+property: P2137
+property_label: total equity
+rationale: The value '4,523,184,000,000 Russian ruble' for Lukoil's total equity as
+  of 2021 is directly supported by the official Lukoil consolidated financial statements
+  (IFRS) and independently corroborated by Bloomberg and Reuters. The figure matches
+  exactly across these sources, confirming its accuracy.
+rcid: 2550551160
+revid: 2473884267
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.lukoil.com/FileSystem/9/534848.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/quote/LUKOIL:MC/profile
+- provenance: verified
+  supports_claim: true
+  url: https://www.reuters.com/business/energy/lukoil-publishes-2021-annual-report-2022-03-10/
+timestamp: '2026-04-10T13:17:49.845120+00:00'
+title: Q329347
+turns: 1
+value_label: null
+verdict: verified-high

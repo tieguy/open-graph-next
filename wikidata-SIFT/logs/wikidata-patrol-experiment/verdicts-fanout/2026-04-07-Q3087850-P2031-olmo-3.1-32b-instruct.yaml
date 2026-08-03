@@ -1,0 +1,26 @@
+completion_tokens: 799
+cost_usd: 0.009026
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42733
+property: P2031
+property_label: start of work period
+rationale: The cited Portuguese Wikipedia import does not provide primary evidence
+  for a start of work period in 1492. Independent searches failed to corroborate this
+  date, and all available biographical sources place Juan Magán's career in the 21st
+  century. The value is implausible and unsupported.
+rcid: null
+revid: 2460036669
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://pt.wikipedia.org/w/index.php?title=Juan_Magán&oldid=56002931
+- provenance: verified
+  supports_claim: false
+  url: https://www.juanmagan.es/
+timestamp: '2026-04-07T11:24:00.247609+00:00'
+title: Q3087850
+turns: 6
+value_label: null
+verdict: incorrect

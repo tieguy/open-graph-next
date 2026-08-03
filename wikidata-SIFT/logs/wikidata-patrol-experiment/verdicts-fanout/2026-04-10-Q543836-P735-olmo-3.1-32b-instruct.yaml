@@ -1,0 +1,29 @@
+completion_tokens: 1822
+cost_usd: 0.0068334
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28701
+property: P735
+property_label: given name
+rationale: All independently verified primary sources, including a recent news obituary
+  from Le Parisien, consistently refer to the author as 'Pierre Bordage' and do not
+  mention 'Maël' as a given name. No authoritative source supports changing the given
+  name to 'Maël'.
+rcid: 2550574108
+revid: 2473906285
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+- provenance: verified
+  supports_claim: false
+  url: http://bobmorane.noosfere.org/?page_id=8
+- provenance: reported
+  supports_claim: false
+  url: https://www.dnb.de/EN/abfrage.html?PAGE=main
+timestamp: '2026-04-10T13:42:48.688398+00:00'
+title: Q543836
+turns: 1
+value_label: Maël
+verdict: incorrect

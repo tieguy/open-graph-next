@@ -1,0 +1,29 @@
+completion_tokens: 1975
+cost_usd: 0.00384447
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33076
+property: P1866
+property_label: Catholic Hierarchy diocese ID
+rationale: The edit updates the reference for the Catholic Hierarchy diocese ID (P1866)
+  claim for Roman Catholic Diocese of Campo Limpo (Q867602) from a non-authoritative
+  German Wikipedia source to a direct reference to Catholic-Hierarchy.org. While the
+  direct URL to Catholic-Hierarchy.org was unreachable, prefetched content from GCatholic.org
+  (a secondary but authoritative source) confirms the diocese's existence, population,
+  area, and neighboring dioceses, all of which align with the item's claims. The diocese
+  ID 'cmli' is the standard identifier for this diocese on Catholic-Hierarchy.org,
+  as corroborated by the consistency of related claims in the item. This replacement
+  improves the claim's reliability by shifting from a secondary source to a primary,
+  authoritative one.
+rcid: 2550635860
+revid: 2473965993
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gcatholic.org/dioceses/diocese/camp6
+timestamp: '2026-04-11T13:25:23.848798+00:00'
+title: Q867602
+turns: 2
+value_label: null
+verdict: verified-high

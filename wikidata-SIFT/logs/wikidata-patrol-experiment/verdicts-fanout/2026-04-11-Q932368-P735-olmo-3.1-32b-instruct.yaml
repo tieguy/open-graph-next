@@ -1,0 +1,30 @@
+completion_tokens: 2748
+cost_usd: 0.005105
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17281
+property: P735
+property_label: given name
+rationale: Multiple reliable sources, including the 1911 Encyclopaedia Britannica
+  and the Dictionary of African Biography, consistently refer to the subject as 'Rabah'
+  in European-language contexts. This supports the change from 'Rabih' to 'Rabah'
+  as the given name for this individual. However, the edit did not cite any references,
+  so the improvement is not well-documented.
+rcid: 2549457072
+revid: 2472822431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikisource.org/wiki/1911_Encyclopaedia_Britannica/Rabah_Zobeir
+- provenance: verified
+  supports_claim: true
+  url: https://www.oxfordreference.com/view/10.1093/acref/9780195382075.001.0001/acref-9780195382075-e-1723
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/n85380702.html
+timestamp: '2026-04-11T06:01:00.795275+00:00'
+title: Q932368
+turns: 1
+value_label: Rabah
+verdict: verified-low

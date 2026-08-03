@@ -1,0 +1,27 @@
+completion_tokens: 699
+cost_usd: 0.012785650000000003
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 252917
+property: P1559
+property_label: name in native language
+rationale: Despite extensive searches, no reliable source supporting the claim that
+  'Kyky de bondy' is Kylian Mbappé's name in native language was found. The only cited
+  reference URL (https://www.lequipe.fr/Football/FootballFicheJoueur58221.html) failed
+  to fetch during investigation and contains no mention of 'Kyky de bondy' in its
+  publicly visible content. Web searches for 'Kyky de bondy' yielded zero results
+  in reliable sources, and no verified online footprint exists for this supposed name
+  variation. This suggests the edit may be introducing fabricated information rather
+  than correcting it.
+rcid: 2549572102
+revid: 2472934847
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lequipe.fr/Football/FootballFicheJoueur58221.html
+timestamp: '2026-04-07T09:26:10.441788+00:00'
+title: Q21621995
+turns: 15
+value_label: null
+verdict: unverifiable

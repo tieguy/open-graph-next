@@ -1,0 +1,26 @@
+completion_tokens: 2195
+cost_usd: 0.00179139
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24756
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The added reference (Hortaleza, Q1928529) does not support the claim that
+  Niceto Alcalá Zamora Avenue is located in Madrid (Q2807). The prefetched reference
+  from callejerode.com explicitly confirms the avenue is in Madrid, Madrid, Spain.
+  Hortaleza is a district within Madrid, and the reference incorrectly suggests it
+  as the administrative territorial entity, which contradicts the claim's value and
+  the item's label. This misalignment makes the reference suspect and potentially
+  incorrect for this claim.
+rcid: 2550563463
+revid: 2473896092
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://callejerode.com/madrid/avenida-niceto-alcala-zamora
+timestamp: '2026-04-11T13:27:02.550744+00:00'
+title: Q62107332
+turns: 3
+value_label: Madrid
+verdict: suspect

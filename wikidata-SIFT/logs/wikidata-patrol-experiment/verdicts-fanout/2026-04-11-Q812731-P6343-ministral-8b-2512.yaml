@@ -1,0 +1,33 @@
+completion_tokens: 2248
+cost_usd: 0.00273876
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22206
+property: P6343
+property_label: urban population
+rationale: The new urban population value of 400,019 for Bağlar district in 2014 lacks
+  independent corroboration from verified sources. The closest official data from
+  CityPopulation.de (a primary source) shows population estimates of 357,727 (2013)
+  and 386,578 (2017), indicating a gradual increase. The old value of 367,314 aligns
+  with this trend, while the new value is significantly higher and unsupported by
+  any primary source. No references were attached to the edit, and no verified source
+  confirms this specific value for 2014. The edit appears to be unsupported and inconsistent
+  with available population trends.
+rcid: 2550215389
+revid: 2473557711
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.citypopulation.de/en/turkey/admin/diyarbak%C4%B1r/TRC2214__ba%C4%9Flar/
+- provenance: verified
+  supports_claim: false
+  url: https://kureansiklopedi.com/en/detay/baglar-district-b2c0f
+- provenance: verified
+  supports_claim: false
+  url: https://mesopotamia.coop/urban-renewal-in-diyarbakir-a-tool-for-gentrification-and-assimilation/
+timestamp: '2026-04-11T12:13:31.871872+00:00'
+title: Q812731
+turns: 1
+value_label: null
+verdict: suspect

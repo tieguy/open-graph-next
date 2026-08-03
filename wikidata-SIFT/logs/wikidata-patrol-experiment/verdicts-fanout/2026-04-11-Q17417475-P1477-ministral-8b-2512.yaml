@@ -1,0 +1,33 @@
+completion_tokens: 1740
+cost_usd: 0.00208551
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18359
+property: P1477
+property_label: birth name
+rationale: All verified sources (Fandom Disney Channel Wiki, Famous Birthdays, The
+  Movie Database, and reported source IMDb) consistently confirm Jace Norman's birth
+  name as 'Jace Lee Norman'. The new value 'Jace Jose Norman Lego' is not supported
+  by any credible source and introduces unsupported and nonsensical elements. This
+  edit is incorrect and should be reverted.
+rcid: null
+revid: 2471322880
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://disneychannel.fandom.com/wiki/Jace_Norman
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/jace-norman.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/person/1428067-jace-norman
+- provenance: reported
+  supports_claim: true
+  url: https://www.imdb.com/name/nm4872595/
+timestamp: '2026-04-11T14:10:18.926887+00:00'
+title: Q17417475
+turns: 1
+value_label: null
+verdict: incorrect

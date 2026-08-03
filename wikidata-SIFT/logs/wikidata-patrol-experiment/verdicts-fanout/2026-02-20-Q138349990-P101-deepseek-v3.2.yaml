@@ -1,0 +1,34 @@
+completion_tokens: 888
+cost_usd: 0.031565739999999995
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 99375
+property: P101
+property_label: field of work
+rationale: 'The claim that Suchfokus''s field of work is search engine optimization
+  (Q180711) is strongly supported by evidence from the company''s official website.
+  The site explicitly describes itself as an ''SEO Agentur'' (SEO agency) and details
+  services including SEO audits, local SEO, OnPage SEO, OffPage SEO, content SEO,
+  and technical SEO. The website states: ''Professionelle Suchmaschinenoptimierung
+  für messbare Erfolge'' (Professional search engine optimization for measurable success).
+  Multiple sections of the site confirm the company''s focus on search engine optimization
+  as its primary field of work, establishing this as a well-supported claim from a
+  primary source.'
+rcid: 2540973962
+revid: 2464760841
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de/leistungen/
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de/ueber-uns/
+timestamp: '2026-02-20T02:50:24.164762+00:00'
+title: Q138349990
+turns: 10
+value_label: search engine optimization
+verdict: verified-high

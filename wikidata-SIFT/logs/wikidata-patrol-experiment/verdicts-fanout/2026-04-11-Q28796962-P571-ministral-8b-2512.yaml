@@ -1,0 +1,25 @@
+completion_tokens: 1880
+cost_usd: 0.010909110000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40848
+property: P571
+property_label: inception
+rationale: The cited reference URL for this edit is unreachable, and no independent,
+  verified sources could be accessed to confirm or deny the change in inception year
+  from 1882 to 1894. Without access to the original source or additional verified
+  evidence, it is impossible to definitively assess the accuracy of the edit. The
+  lack of reachable sources means the claim cannot be verified.
+rcid: 2550489005
+revid: 2473824742
+sources:
+- provenance: verified
+  summary: Reference URL is unreachable, preventing verification of the claim.
+  supports_claim: false
+  url: http://enciclopedia.itaucultural.org.br/obra3249/escrava-romana
+timestamp: '2026-04-11T07:54:00.469622+00:00'
+title: Q28796962
+turns: 4
+value_label: null
+verdict: unverifiable

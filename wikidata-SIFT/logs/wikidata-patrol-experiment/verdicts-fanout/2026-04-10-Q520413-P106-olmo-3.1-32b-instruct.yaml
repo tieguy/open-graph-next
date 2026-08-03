@@ -1,0 +1,26 @@
+completion_tokens: 1893
+cost_usd: 0.0040384
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14513
+property: P106
+property_label: occupation
+rationale: Multiple independent and authoritative sources confirm that Walter of Pontoise
+  was a monk and later an abbot in a Benedictine monastery. These sources include
+  the Catholic Encyclopedia and Catholic Saints Info, both of which explicitly state
+  his monastic vocation.
+rcid: 2551408357
+revid: 2474711589
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.newadvent.org/cathen/11456c.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholicsaints.info/saints/saint-walter-of-pontoise/
+timestamp: '2026-04-10T12:44:38.353776+00:00'
+title: Q520413
+turns: 1
+value_label: monk
+verdict: verified-high

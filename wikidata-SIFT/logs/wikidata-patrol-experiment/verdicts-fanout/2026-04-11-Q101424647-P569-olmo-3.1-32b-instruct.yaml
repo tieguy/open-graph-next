@@ -1,0 +1,26 @@
+completion_tokens: 2152
+cost_usd: 0.0040762
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13925
+property: P569
+property_label: date of birth
+rationale: The change to a specific date of birth for Sunarti Sri Hadiyah is not supported
+  by any reliable or accessible source. News articles and biographies only confirm
+  the birth year 1930, not the day. Assigning '20 May 1930' without evidence is speculative
+  and may reduce data reliability.
+rcid: 2550944352
+revid: 2474264653
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.grid.id/read/041745733/mengenal-sunarti-sri-hadiyah-ibunda-ani-yudhoyono-yang-telah-berusia-89-tahun-dan-memiliki-17-cicit-namun-tetap-tampak-bugar?page=all
+- provenance: verified
+  supports_claim: false
+  url: https://www.suara.com/entertainment/2019/06/02/154525/5-fakta-tak-terduga-sunarti-sri-hadiyah-ibunda-ani-yudhoyono
+timestamp: '2026-04-11T12:02:18.994639+00:00'
+title: Q101424647
+turns: 1
+value_label: null
+verdict: suspect

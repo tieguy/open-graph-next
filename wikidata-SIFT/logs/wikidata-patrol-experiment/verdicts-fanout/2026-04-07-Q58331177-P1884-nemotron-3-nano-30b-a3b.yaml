@@ -1,0 +1,24 @@
+completion_tokens: 1219
+cost_usd: 0.0035748999999999998
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 66622
+property: P1884
+property_label: hair color
+rationale: No reliable sources were found to confirm or refute the change to red hair
+  for Ester Expósito. The only potential source (a Wikipedia page on her hair color)
+  was blocked and inaccessible, preventing verification. Searches for independent
+  coverage of her hair color returned no results, so there is no evidence to support
+  or contradict the claim.
+rcid: 2549251364
+revid: 2472622088
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.infobae.com/teleshow/2022/05/26/de-novios-la-romantica-foto-de-nicolas-furtado-y-ester-exposito/
+timestamp: '2026-04-07T10:15:51.208532+00:00'
+title: Q58331177
+turns: 9
+value_label: red hair
+verdict: unverifiable

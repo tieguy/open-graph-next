@@ -1,0 +1,26 @@
+completion_tokens: 992
+cost_usd: 0.00209871
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27835
+property: P2003
+property_label: Instagram username
+rationale: The claim that 'exile_music' is the current Instagram username for Exile
+  is directly confirmed by Socialveins, a verified primary source. The source explicitly
+  states that Exile uses the username 'exile_music' and is active on Instagram. No
+  contradictory evidence was found during the investigation.
+rcid: null
+revid: 2461490866
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://socialveins.com/influencer/instagram/exile_music
+- provenance: verified
+  supports_claim: false
+  url: https://freshlearn.com/blog/instagram-username-ideas/
+timestamp: '2026-04-10T13:01:07.749841+00:00'
+title: Q119008024
+turns: 3
+value_label: null
+verdict: verified-high

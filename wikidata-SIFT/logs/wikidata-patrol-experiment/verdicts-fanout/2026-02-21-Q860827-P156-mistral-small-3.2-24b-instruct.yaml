@@ -1,0 +1,25 @@
+completion_tokens: 846
+cost_usd: 0.0039308
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39436
+property: P156
+property_label: followed by
+rationale: The edit is supported by multiple independent sources that confirm the
+  'followed by' relationship between 'Blackthorn Asylum' and 'Zombie Influx', as well
+  as the qualifier specifying Buzz-Works as the performer of 'Zombie Influx'.
+rcid: 2541055346
+revid: 2464837605
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/album/blackthorn-asylum-mw0001769147
+- provenance: verified
+  supports_claim: true
+  url: https://monolithgraphics.com/interviews/idmadness.html
+timestamp: '2026-02-21T04:06:11.564977+00:00'
+title: Q860827
+turns: 4
+value_label: Zombie Influx
+verdict: verified-high

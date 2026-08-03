@@ -1,0 +1,31 @@
+completion_tokens: 2054
+cost_usd: 0.0056708999999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58594
+property: P31
+property_label: instance of
+rationale: The claim that Louise Labé (Q237098) is a 'therian' (Q25393510) contradicts
+  all available evidence. Louise Labé is widely documented as a human poet and writer
+  in multiple verified sources, including the Metzler Autorinnen Lexikon, Literary
+  Encyclopedia, and Rarebookhub. The cited reference (BnF authorities) is unreachable,
+  and no independent source supports the claim. The edit incorrectly reclassifies
+  her identity.
+rcid: null
+revid: 2471473740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://link.springer.com/chapter/10.1007/978-3-476-03702-2_195
+- provenance: verified
+  supports_claim: false
+  url: https://www.litencyc.com/php/speople.php?rec=true&UID=5832
+- provenance: verified
+  supports_claim: false
+  url: https://www.rarebookhub.com/articles/1900
+timestamp: '2026-04-11T13:20:19.538142+00:00'
+title: Q237098
+turns: 4
+value_label: therian
+verdict: incorrect

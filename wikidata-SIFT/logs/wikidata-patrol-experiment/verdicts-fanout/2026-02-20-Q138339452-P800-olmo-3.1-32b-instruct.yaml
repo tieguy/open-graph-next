@@ -1,0 +1,23 @@
+completion_tokens: 942
+cost_usd: 0.0052256
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23302
+property: P800
+property_label: notable work
+rationale: The provided reference does not mention 'The Building of Data Credibility'
+  or associate it with Victor Martini Gabry. Independent web searches did not find
+  evidence that this work exists or is authored by the subject. Therefore, the claim
+  is suspect and unsupported.
+rcid: 2540930858
+revid: 2464721503
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://revistas.ancib.org/tpbci/article/view/695
+timestamp: '2026-02-20T19:59:34.294929+00:00'
+title: Q138339452
+turns: 4
+value_label: The Building of Data Credibility
+verdict: suspect

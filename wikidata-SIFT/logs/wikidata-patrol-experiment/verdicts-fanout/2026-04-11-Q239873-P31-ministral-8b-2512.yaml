@@ -1,0 +1,28 @@
+completion_tokens: 2428
+cost_usd: 0.009849900000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 92416
+property: P31
+property_label: instance of
+rationale: The change from 'instance of human' (Q5) to 'instance of JSP' (Q54899068)
+  for Sœur Emmanuelle (Q239873) is incorrect. The cited reference from LIBRIS does
+  not substantiate this classification, and no verified sources confirm that Sœur
+  Emmanuelle is an instance of 'JSP'. Her well-documented identity as a religious
+  sister and humanitarian aligns exclusively with the category 'human'. The new classification
+  is inconsistent with her established claims and lacks independent corroboration.
+rcid: 2549848041
+revid: 2473204528
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://libris.kb.se/search?query=86lnnmfs3dzbtp9
+- provenance: verified
+  supports_claim: false
+  url: http://news.bbc.co.uk/2/hi/europe/7679487.stm
+timestamp: '2026-04-11T17:11:56.371444+00:00'
+title: Q239873
+turns: 5
+value_label: JSP
+verdict: incorrect

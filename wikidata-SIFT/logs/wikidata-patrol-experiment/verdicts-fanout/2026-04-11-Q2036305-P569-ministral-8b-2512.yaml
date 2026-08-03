@@ -1,0 +1,30 @@
+completion_tokens: 2138
+cost_usd: 0.0054912
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16166
+property: P569
+property_label: date of birth
+rationale: 'The edit changed Osvaldo Piro''s date of birth from January 1, 1937, to
+  December 26, 1936. While the original Integrated Authority File reference is unreachable,
+  **two independent verified sources** confirm December 26, 1936 as the correct birth
+  date: (1) Clarín’s official obituary (2025) explicitly states ''26 de diciembre
+  de 1936,'' and (2) Todo Tango’s biography (2017) lists ''1 January 1937'' as a likely
+  error, aligning with other sources. The old value (January 1, 1937) is not corroborated
+  by any verified source. Thus, the change to December 26, 1936 is **correct and well-supported**
+  by primary sources.'
+rcid: 2550777429
+revid: 2474102960
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.clarin.com/espectaculos/murio-osvaldo-piro-historico-bandoneonista-troilo-exesposo-susana-rinaldi_0_63Edci2WeI.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.todotango.com/english/artists/biography/794/Osvaldo-Piro/
+timestamp: '2026-04-11T08:13:30.920473+00:00'
+title: Q2036305
+turns: 1
+value_label: null
+verdict: verified-high

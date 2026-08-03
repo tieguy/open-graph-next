@@ -1,0 +1,24 @@
+completion_tokens: 1728
+cost_usd: 0.00200314
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18073
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Ellis S. Chesbrough was born
+  in Baltimore. Therefore, the removal of this claim is incorrect.
+rcid: 2550382459
+revid: 2473720423
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.asce.org/publications-and-news/civil-engineering-source/article/2021/07/06/civil-engineering-almanac-ellis-s-chesbrough-is-born
+- provenance: verified
+  supports_claim: true
+  url: http://www.waterworkshistory.us/bio/Chesbrough/index.htm
+timestamp: '2026-04-11T14:33:30.692657+00:00'
+title: Q16062843
+turns: 1
+value_label: Baltimore
+verdict: incorrect

@@ -1,0 +1,23 @@
+completion_tokens: 755
+cost_usd: 0.004452349999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 86027
+property: P2566
+property_label: ECHA Substance Infocard ID
+rationale: Despite multiple searches for "dextrin" combined with "ECHA Substance Infocard
+  ID" and CAS number 9004-53-9, no relevant sources confirming the substance was classified
+  as a dextrin were found. All direct attempts to access ECHA URLs returned 403 forbidden
+  errors, preventing verification of whether either ID field (100.029.693 or 67.41.420.69)
+  correctly refers to dextrin. No independent sources could be located to support
+  or contradict the claim. Therefore, the evidence is insufficient to confirm accuracy,
+  and the claim remains unverifiable based on available data.
+rcid: 2549365623
+revid: 2472732545
+sources: []
+timestamp: '2026-04-07T10:57:51.580197+00:00'
+title: Q191978
+turns: 15
+value_label: null
+verdict: unverifiable

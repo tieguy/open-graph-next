@@ -1,0 +1,30 @@
+completion_tokens: 1726
+cost_usd: 0.00159051
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15073
+property: P921
+property_label: main subject
+rationale: The removed claim incorrectly asserted that the Wikimedia help page 'Help:CirrusSearch'
+  (Q93590016) had a main subject of the CirrusSearch extension (Q21676498). Help pages
+  are documentation and not the subjects they describe. The CirrusSearch extension
+  is a separate software project (Q21676498), and linking a help page to it as its
+  main subject is factually incorrect. The removal of this claim was justified.
+rcid: null
+revid: 2472251003
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/wikimedia/mediawiki-extensions-CirrusSearch
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:CirrusSearch
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Help:CirrusSearch
+timestamp: '2026-04-11T17:16:14.113806+00:00'
+title: Q93590016
+turns: 1
+value_label: CirrusSearch
+verdict: incorrect

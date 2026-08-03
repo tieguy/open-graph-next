@@ -1,0 +1,24 @@
+completion_tokens: 872
+cost_usd: 0.0048548
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21658
+property: P7085
+property_label: TikTok username
+rationale: The official TikTok profile for William Dunst uses the username 'williamdunstofficial',
+  not 'williamdunst13'. Independent web searches did not find any profile for William
+  Dunst with the username 'williamdunst13', and a direct attempt to fetch that URL
+  did not yield a valid profile. No reference was provided for this edit. Therefore,
+  the change is incorrect and should be reverted.
+rcid: 2540962564
+revid: 2464750414
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tiktok.com/@williamdunstofficial
+timestamp: '2026-02-20T04:21:29.323544+00:00'
+title: Q137736106
+turns: 3
+value_label: null
+verdict: incorrect

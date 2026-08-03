@@ -1,0 +1,38 @@
+completion_tokens: 2244
+cost_usd: 0.00528858
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55575
+property: P27
+property_label: country of citizenship
+rationale: Mary Shelley was born in Somers Town, London, which was part of the Kingdom
+  of Great Britain. There is no historical evidence to suggest that she was a citizen
+  of the Second Spanish Republic. The change from 'Kingdom of Great Britain' to 'Second
+  Spanish Republic' for Mary Shelley's country of citizenship is incorrect.
+rcid: null
+revid: 2471032323
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://digitale.beic.it/primo_library/libweb/action/search.do?fn=search&vid=BEIC&vl%283134987UI0%29=creator&vl%28freeText0%29=Shelley%20Mary
+- provenance: verified
+  supports_claim: false
+  url: http://shelleygodwinarchive.org/contents/frankenstein/
+- provenance: verified
+  supports_claim: false
+  url: http://www.midamericon.org/halloffame/
+- provenance: verified
+  supports_claim: false
+  url: https://online.salempress.com/articleDetails.do?articleName=CIMS_0004&activationcode=ehsknights
+- provenance: verified
+  supports_claim: false
+  url: https://people.brandeis.edu/~teuber/shelleybio.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.cambridge.org/core/journals/contemporary-european-history/article/abs/citizenship-and-gender-equality-in-the-second-spanish-republic-representations-and-practices-in-socialist-culture-19311936/B4C0A119CCEED261A989441F98819AE8
+timestamp: '2026-04-11T15:48:55.485460+00:00'
+title: Q47152
+turns: 2
+value_label: Second Spanish Republic
+verdict: incorrect

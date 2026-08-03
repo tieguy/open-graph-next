@@ -1,0 +1,21 @@
+completion_tokens: 666
+cost_usd: 0.01169785
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 231293
+property: P1477
+property_label: birth name
+rationale: No external sources were found to verify or refute the claim that 'jacques
+  truc bidule' is the birth name of Jacques-Henri Lartigue. Multiple web searches
+  for the purported birth name and related terms produced no relevant results, and
+  all cited references could not be accessed. Without verifiable source material confirming
+  or denying this birth name, the claim remains unverifiable.
+rcid: null
+revid: 2462860117
+sources: []
+timestamp: '2026-04-07T13:09:26.530379+00:00'
+title: Q382329
+turns: 15
+value_label: null
+verdict: unverifiable

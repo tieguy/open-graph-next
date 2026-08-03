@@ -1,0 +1,33 @@
+completion_tokens: 1735
+cost_usd: 0.00491658
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43689
+property: P856
+property_label: official website
+rationale: The edit changed the official website of Takahagi (Q520428) from a logical
+  municipal government URL (`https://www.city.takahagi.ibaraki.jp/`) to an unrelated
+  airline website (`https://www.klm.com`). The old value aligns with standard Japanese
+  municipal government website conventions and Takahagi's identity as a city. The
+  new value has no logical connection to Takahagi and lacks any supporting evidence
+  or references. Prefetched references confirm that Takahagi's official websites are
+  related to local government, tourism, and culture—not airlines. No references were
+  provided for either value, and the change is clearly incorrect.
+rcid: null
+revid: 2471168809
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://takahagi-hachimangu.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.takahagi-kanko.jp/page/page000008.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.city.takahagi.ibaraki.jp/
+timestamp: '2026-04-11T09:24:17.479790+00:00'
+title: Q520428
+turns: 3
+value_label: null
+verdict: incorrect

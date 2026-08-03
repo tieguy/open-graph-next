@@ -1,0 +1,25 @@
+completion_tokens: 2538
+cost_usd: 0.00563642625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53843
+property: P18
+property_label: image
+rationale: The edit references English Wikipedia, which is not a reliable source for
+  verification. Independent searches did not yield clear, authoritative sources confirming
+  the new image. The official website did not provide extractable information.
+rcid: 2550077636
+revid: 2473424418
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/SsangYong_Rodius
+- provenance: verified
+  supports_claim: false
+  url: https://www.smotor.com/en/SHOWROOM/rodius/index.html
+timestamp: '2026-04-07T13:58:39.342237+00:00'
+title: Q734363
+turns: 10
+value_label: null
+verdict: unverifiable

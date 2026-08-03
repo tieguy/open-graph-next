@@ -1,0 +1,29 @@
+completion_tokens: 1004
+cost_usd: 0.003985
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16913
+property: P27
+property_label: country of citizenship
+rationale: The claim that Manuel Márquez Sterling was a citizen of the Republic of
+  Cuba is supported by independent biographical sources indicating he lived and worked
+  in Cuba and held diplomatic positions there. However, the cited reference is the
+  German Wikipedia, which is not a primary or authoritative source and creates a circular
+  dependency. No primary government or archival source was directly fetched and verified,
+  and the use of the historical-period entity for 'country of citizenship' is unconventional
+  unless a specific historical context is required.
+rcid: 2550633865
+revid: 2473964037
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.thecubanhistory.com/historical-pages-of-cuba/cuban-presidents/carlos-manuel-marquez-y-sterling/
+- provenance: reported
+  supports_claim: true
+  url: https://pantheon.world/profile/person/Manuel_Márquez_Sterling
+timestamp: '2026-04-10T10:08:30.010953+00:00'
+title: Q386478
+turns: 1
+value_label: Republic of Cuba
+verdict: verified-low

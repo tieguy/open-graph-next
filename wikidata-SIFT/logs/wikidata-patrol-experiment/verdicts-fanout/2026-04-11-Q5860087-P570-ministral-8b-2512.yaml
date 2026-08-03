@@ -1,0 +1,26 @@
+completion_tokens: 994
+cost_usd: 0.007437300000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29420
+property: P570
+property_label: date of death
+rationale: The edit incorrectly changes the date of death for Fernando Primo de Rivera
+  y Sáenz de Heredia from **23 August 1936** (confirmed by multiple independent sources,
+  including Kiddle.co) to **28 January 2026**. The new date is implausible for a historical
+  figure who died in 1936 during the Spanish Civil War, and no credible source supports
+  this change. The old value is well-documented and corroborated by the item's existing
+  claims (e.g., manner of death, burial place, and historical context). The lack of
+  references for either value further raises suspicion.
+rcid: 2550183150
+revid: 2473526567
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ninos.kiddle.co/Fernando_Primo_de_Rivera_y_S%C3%A1enz_de_Heredia
+timestamp: '2026-04-11T08:44:24.858269+00:00'
+title: Q5860087
+turns: 3
+value_label: null
+verdict: incorrect

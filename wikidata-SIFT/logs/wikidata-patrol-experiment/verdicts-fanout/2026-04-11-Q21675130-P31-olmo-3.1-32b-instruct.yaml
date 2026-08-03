@@ -1,0 +1,30 @@
+completion_tokens: 958
+cost_usd: 0.0035120000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14686
+property: P31
+property_label: instance of
+rationale: The item in question is an artwork by Matthias de Visch held in the Groeningemuseum.
+  Authoritative art databases and museum records confirm the work is a painting and
+  provide no indication it should be classified as 'Cherry', which is a female given
+  name and not a valid instance of type for an artwork. The new value is semantically
+  inconsistent and unsupported by any reliable source.
+rcid: null
+revid: 2464177312
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://balat.kikirpa.be/object/93775
+- provenance: verified
+  supports_claim: false
+  url: https://arthub.vlaamsekunstcollectie.be/nl/catalog/groeningemuseum:0000_GRO1294_I
+- provenance: reported
+  supports_claim: false
+  url: http://groeningemuseum.be/collection/work/data/0000_GRO1294_I
+timestamp: '2026-04-11T09:59:12.202650+00:00'
+title: Q21675130
+turns: 1
+value_label: Cherry
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 664
+cost_usd: 0.0067092
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 131528
+property: P856
+property_label: official website
+rationale: Despite thorough investigation, no independently verifiable source confirming
+  https://www.evaair.com as Sakaide's official website was found. General searches
+  for Sakaide's official website did not identify any authoritative municipal or prefectural
+  domain (e.g., .go.jp), and attempts to fetch plausible domains failed. The cited
+  source could not be accessed (403 error) and lacks corroboration from reliable sources
+  such as government records or established aviation authorities. With no primary
+  source verification and no independent evidence supporting the change, the claim
+  remains unverifiable.
+rcid: null
+revid: 2471596419
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.evaair.com
+timestamp: '2026-04-07T06:00:47.097347+00:00'
+title: Q855059
+turns: 15
+value_label: null
+verdict: unverifiable

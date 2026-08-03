@@ -1,0 +1,29 @@
+completion_tokens: 944
+cost_usd: 0.0035399999999999997
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14868
+property: P1416
+property_label: affiliation
+rationale: The claim that 'Querdenken 871 - Landshut' was an affiliation of 'Corona
+  Rebellen' is not supported by independent, reliable sources. One verified source
+  provides background on the Corona Rebellen network but does not list 'Querdenken
+  871 - Landshut' as an official affiliate. Another verified editorial explicitly
+  criticizes 'Querdenken 871' for extremist connections but does not present evidence
+  of organizational affiliation. The removal of this affiliation is therefore justified
+  due to lack of credible, independently verifiable support.
+rcid: 2551216916
+revid: 2474529889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://linksrumgeschwurbelt.wordpress.com/2020/09/20/das-netzwerk-der-corona-rebellen-initiativen-teil-ii-niederbayern/
+- provenance: verified
+  supports_claim: false
+  url: https://www.landshuter-stadtgucker.de/2020/09/19/querdenken-871-und-ihr-fehlender-abstand-zu-verschwoerungswahn-extremer-rechter-und-antisemitismus/
+timestamp: '2026-04-11T17:05:59.663755+00:00'
+title: Q107646877
+turns: 1
+value_label: Querdenken 871 - Landshut
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 2230
+cost_usd: 0.005285939999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54066
+property: P973
+property_label: described at URL
+rationale: Both the old and new URLs for P973 were blocked or paywalled, preventing
+  verification of whether they describe Wendy Holman. The old value (FT article) was
+  unverifiable due to access restrictions, and the new value (Penn Almanac article)
+  also lacked direct evidence of relevance to Wendy Holman. No independent corroboration
+  could be obtained due to search restrictions. The edit lacks sufficient evidence
+  to confirm correctness or relevance.
+rcid: 2551338591
+revid: 2474644867
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ft.com/content/4ef8e646-828d-43fa-8892-b42c8a7efc28
+- provenance: verified
+  supports_claim: false
+  url: https://almanac.upenn.edu/articles/penn-global-research-and-engagement-program-awards-12-million-to-penn-faculty-for-research-initiatives
+timestamp: '2026-04-11T16:25:04.573465+00:00'
+title: Q110968992
+turns: 3
+value_label: null
+verdict: unverifiable

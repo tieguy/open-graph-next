@@ -1,0 +1,30 @@
+completion_tokens: 891
+cost_usd: 0.0046672
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20663
+property: P856
+property_label: official website
+rationale: The official website https://www.maldiluna.com/ explicitly identifies itself
+  as the official home of the band Mal di Luna and contains band-specific content
+  such as discography, live event information, and official videos. Multiple pages
+  on the website and independent third-party sources confirm the site's official status.
+  Therefore, the provided reference strongly supports the claim.
+rcid: 2540937926
+revid: 2464727575
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com/about-us/
+- provenance: verified
+  supports_claim: true
+  url: https://absolution.nyc/2026/02/07/interview-with-mal-di-luna-by-tzina-dovve-dj-lady-davina/
+timestamp: '2026-02-20T16:24:53.557749+00:00'
+title: Q138348548
+turns: 4
+value_label: null
+verdict: verified-high

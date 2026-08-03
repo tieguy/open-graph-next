@@ -1,0 +1,29 @@
+completion_tokens: 1800
+cost_usd: 0.00171815
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15328
+property: P856
+property_label: official website
+rationale: The old URL (https://www.jusung-an.com) is unreachable, and the new URL
+  (https://www.jusungan.com) is also unreachable. However, Jusung An's LinkedIn profile
+  lists https://www.jusungan.com as the official website, providing strong evidence
+  that the change is correct.
+rcid: 2551431834
+revid: 2474731386
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.jusung-an.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.jusungan.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.linkedin.com/in/jusungan/
+timestamp: '2026-04-11T10:12:07.376876+00:00'
+title: Q92358640
+turns: 1
+value_label: null
+verdict: verified-high

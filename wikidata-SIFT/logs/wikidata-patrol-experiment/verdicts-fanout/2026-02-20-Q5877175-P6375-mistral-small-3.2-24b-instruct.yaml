@@ -1,0 +1,28 @@
+completion_tokens: 790
+cost_usd: 0.013034200000000003
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 127972
+property: P6375
+property_label: street address
+rationale: Multiple verified sources confirm that the street address for Hoge Heren
+  is indeed 'Gedempte Zalmhaven, Scheepvaartkwartier, Rotterdam'. The information
+  is consistent across several reliable real estate and architectural databases.
+rcid: 2540940449
+revid: 2464729971
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.skyscrapercenter.com/building/hoge-heren-i/5396
+- provenance: verified
+  supports_claim: true
+  url: https://www.vesteda.com/en/rotterdam-houses-for-rent/de-hoge-heren-i/gedempte-zalmhaven-205-rotterdam-6905
+- provenance: verified
+  supports_claim: true
+  url: https://www.skydb.net/building/130747792/de-hoge-heren-i-netherlands/
+timestamp: '2026-02-20T15:02:14.836205+00:00'
+title: Q5877175
+turns: 15
+value_label: null
+verdict: verified-high

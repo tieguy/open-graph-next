@@ -1,0 +1,27 @@
+completion_tokens: 659
+cost_usd: 0.011920199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 57624
+property: P291
+property_label: place of publication
+rationale: No independently verifiable primary source was found that confirms 'ward'
+  as the place of publication for Mein Kampf. The claim lacks corroborating evidence
+  from accessible, authoritative sources. The original publisher is documented as
+  Franz Eher Nachfolger in Munich, but the specific ward is not supported by any source
+  accessible in this investigation.
+rcid: 2550422718
+revid: 2473759966
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mein_Kampf
+- provenance: reported
+  supports_claim: false
+  url: https://gutenberg.net.au/ebooks02/0200601h.html
+timestamp: '2026-04-07T08:56:22.578468+00:00'
+title: Q48244
+turns: 7
+value_label: ward
+verdict: unverifiable

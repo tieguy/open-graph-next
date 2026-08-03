@@ -1,0 +1,23 @@
+completion_tokens: 1126
+cost_usd: 0.0027684
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10464
+property: P136
+property_label: genre
+rationale: The edit changed the genre from 'screamo' to 'hardcore punk' without providing
+  any references. The only independently fetched source, a band retrospective, discusses
+  the band's influence but does not assign a genre label. Therefore, there is insufficient
+  evidence to verify the new genre claim.
+rcid: 2550852639
+revid: 2474176357
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://sophiesfloorboard.blogspot.com/2019/12/reversal-of-man.html
+timestamp: '2026-04-10T09:07:50.055127+00:00'
+title: Q30638510
+turns: 1
+value_label: hardcore punk
+verdict: unverifiable

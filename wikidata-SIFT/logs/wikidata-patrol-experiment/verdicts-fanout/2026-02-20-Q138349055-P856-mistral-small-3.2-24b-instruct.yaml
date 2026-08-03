@@ -1,0 +1,25 @@
+completion_tokens: 1049
+cost_usd: 0.0034934999999999996
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31788
+property: P856
+property_label: official website
+rationale: The URL https://mgtimberproductsltd.co.uk/ is confirmed to be the official
+  website of MG Timber Products Ltd through multiple independent sources, including
+  the website itself and an Amazon seller profile.
+rcid: 2540935564
+revid: 2464725886
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mgtimberproductsltd.co.uk/
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.co.uk/s?i=merchant-items&me=AXS02XQM3PEU9
+timestamp: '2026-02-20T17:13:41.508633+00:00'
+title: Q138349055
+turns: 5
+value_label: null
+verdict: verified-high

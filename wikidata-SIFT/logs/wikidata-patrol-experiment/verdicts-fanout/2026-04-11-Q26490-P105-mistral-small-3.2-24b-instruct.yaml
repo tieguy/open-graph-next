@@ -1,0 +1,22 @@
+completion_tokens: 1295
+cost_usd: 0.028129625
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 296596
+property: P105
+property_label: taxon rank
+rationale: The Birds of the World page explicitly confirms that the Common Kestrel
+  (Falco tinnunculus) is a species. This source is authoritative and directly supports
+  the taxon rank claim.
+rcid: null
+revid: 2464396670
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.birdsoftheworld.org/bow/species/eurkes/cur/introduction
+timestamp: '2026-04-11T18:37:57.789113+00:00'
+title: Q26490
+turns: 9
+value_label: species
+verdict: verified-high

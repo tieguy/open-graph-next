@@ -1,0 +1,31 @@
+completion_tokens: 2089
+cost_usd: 0.00522141
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38916
+property: P1477
+property_label: birth name
+rationale: The edit incorrectly changed the birth name of Erwin Schrödinger from a
+  misspelling ('Erwin sroderfinger') to another misspelling ('Erwin srgrosfinger').
+  Authoritative sources confirm his correct birth name is 'Erwin Rudolf Schrödinger'
+  or simply 'Erwin Schrödinger'. Neither the old nor the new values are supported
+  by verified sources, and the edit does not correct the claim but replaces one incorrect
+  value with another.
+rcid: 2550564549
+revid: 2473897156
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mathshistory.st-andrews.ac.uk/Biographies/Schrodinger/
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/scientist/erwin-schrdinger
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/physics/1933/schrodinger/biographical/
+timestamp: '2026-04-11T12:34:47.816840+00:00'
+title: Q9130
+turns: 1
+value_label: null
+verdict: incorrect

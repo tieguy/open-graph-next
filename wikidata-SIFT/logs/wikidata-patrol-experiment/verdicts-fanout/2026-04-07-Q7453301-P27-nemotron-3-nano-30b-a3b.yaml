@@ -1,0 +1,23 @@
+completion_tokens: 580
+cost_usd: 0.0036917
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 71514
+property: P27
+property_label: country of citizenship
+rationale: No verifiable sources could be found to confirm current citizenship information
+  for Serge Edongo. Multiple web searches using various keywords related to the individual
+  and France yielded no results. The main page for the subject could not be accessed
+  due to a blocked domain error.
+rcid: null
+revid: 2472283777
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Serge_Edongo
+timestamp: '2026-04-07T06:41:40.734038+00:00'
+title: Q7453301
+turns: 15
+value_label: France
+verdict: unverifiable

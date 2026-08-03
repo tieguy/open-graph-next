@@ -1,0 +1,29 @@
+completion_tokens: 2221
+cost_usd: 0.0023687400000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29443
+property: P18
+property_label: image
+rationale: The investigation was unable to fetch or verify any primary sources (e.g.,
+  Wikimedia Commons or official Mitsubishi Motors image repositories) due to search
+  tool limitations. Without direct evidence from Wikimedia Commons or other authoritative
+  sources, it is impossible to definitively confirm whether the new image ('2020 Mitsubishi
+  Outlander ES AWD front 01.jpg') is more appropriate than the old image ('2025 Mitsubishi
+  Outlander PHEV (fourth generation) IMG 3128 (cropped).jpg') for representing the
+  general Mitsubishi Outlander model line. The lack of references and inability to
+  corroborate with primary sources renders this edit unverifiable.
+rcid: null
+revid: 2471362709
+sources:
+- provenance: reported
+  summary: Wikimedia Commons page for Mitsubishi Outlander does not exist, preventing
+    direct verification of image usage.
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Mitsubishi_Outlander
+timestamp: '2026-04-11T12:28:40.016252+00:00'
+title: Q1044544
+turns: 4
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 1910
+cost_usd: 0.00418941
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32215
+property: P1477
+property_label: birth name
+rationale: The edit incorrectly changed the birth name from 'Jacques Henry Charles
+  Auguste Lartigue' to 'jacques truc bidule'. The new value is nonsensical and unsupported
+  by any credible source. The old value, while not explicitly confirmed by all sources,
+  is not contradicted by authoritative references like BnF, Britannica, or RKDartists,
+  which consistently cite 'Jacques-Henri Lartigue' as the correct name. The new placeholder
+  value has no basis in any verified source and is inconsistent with the individual's
+  established identity across multiple reliable databases. The edit is therefore incorrect
+  and should be reverted.
+rcid: null
+revid: 2462860117
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.artnet.com/artists/jacques-henri-lartigue/biography
+- provenance: verified
+  supports_claim: true
+  url: https://www.nga.gov/collection/artist-info.100005.html
+timestamp: '2026-04-11T13:01:55.047491+00:00'
+title: Q382329
+turns: 1
+value_label: null
+verdict: incorrect

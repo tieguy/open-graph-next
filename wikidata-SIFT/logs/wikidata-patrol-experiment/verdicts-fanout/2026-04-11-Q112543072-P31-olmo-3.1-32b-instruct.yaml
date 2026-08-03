@@ -1,0 +1,31 @@
+completion_tokens: 1636
+cost_usd: 0.004485
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17517
+property: P31
+property_label: instance of
+rationale: The new PubMed reference is directly authored by Dr. Albert Muleke and
+  is related to agricultural research, which supports the instance-of claim that he
+  is a human (Q5) and a scientist. This is further corroborated by independent academic
+  profiles from Cranfield University and ResearchGate, both of which confirm his identity
+  and profession. The citation is appropriate and improves the evidentiary quality
+  of the claim.
+rcid: 2550321898
+revid: 2473661396
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pubmed.ncbi.nlm.nih.gov/41826691/
+- provenance: verified
+  supports_claim: true
+  url: https://www.cranfield.ac.uk/people/dr-albert-muleke-e3215
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Albert-Muleke
+timestamp: '2026-04-11T18:25:54.121543+00:00'
+title: Q112543072
+turns: 1
+value_label: human
+verdict: verified-high

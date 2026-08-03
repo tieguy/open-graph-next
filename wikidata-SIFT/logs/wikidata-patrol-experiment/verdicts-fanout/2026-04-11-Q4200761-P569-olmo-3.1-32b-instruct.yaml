@@ -1,0 +1,23 @@
+completion_tokens: 160
+cost_usd: 0.0032144
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15592
+property: P569
+property_label: date of birth
+rationale: The Grokipedia source, fetched and verified, states that Ayu Azhari was
+  born on November 19, 1969. This directly contradicts the new value of November 19,
+  1966. The old value of November 19, 1968, is also inconsistent with the verified
+  source, but the new value is demonstrably incorrect.
+rcid: 2549792878
+revid: 2473150609
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Ayu_Azhari
+timestamp: '2026-04-11T09:08:35.605444+00:00'
+title: Q4200761
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,34 @@
+completion_tokens: 369
+cost_usd: 0.00633042
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 14119
+property: P31
+property_label: instance of
+rationale: The claim that Money.it is an online newspaper is plausible and consistent
+  with available evidence, but direct authoritative confirmation is limited. The Wikipedia
+  article describes Money.it as an Italian financial newspaper, and the item description
+  characterizes it as an 'Italian online newspaper specializing in economics, finance,
+  and business.' The official website (money.it) appears to function as a news publication
+  focused on financial topics. However, I found no explicit statement on the official
+  site or other authoritative sources declaring it specifically as an 'online newspaper'
+  rather than simply a news website or publication. The claim aligns with the entity's
+  apparent function but lacks strong primary source confirmation.
+rcid: 2540925077
+revid: 2464715929
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.money.it
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Money.it
+- provenance: verified
+  supports_claim: true
+  url: https://bmmagazine.co.uk/business/money-it-and-financial-times-an-agreement-to-enhance-economic-information-in-italy/
+timestamp: '2026-02-20T22:48:27.307771+00:00'
+title: Q138347575
+turns: 2
+value_label: online newspaper
+verdict: verified-low

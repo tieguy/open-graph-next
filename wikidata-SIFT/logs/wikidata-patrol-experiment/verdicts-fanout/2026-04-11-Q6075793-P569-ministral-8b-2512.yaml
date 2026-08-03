@@ -1,0 +1,30 @@
+completion_tokens: 1769
+cost_usd: 0.00267912
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25513
+property: P569
+property_label: date of birth
+rationale: The edit changes Pilar Galán Rodríguez’s date of birth from **1967** (consistently
+  confirmed by multiple verified sources such as AEEX, Examenesdepau, and EPE) to
+  **1936**, which lacks any independent corroboration. The cited BNE reference could
+  not be verified due to a fetch failure. The new value is unsupported by any reliable
+  source, making the edit incorrect.
+rcid: 2550558750
+revid: 2473891535
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.aeex.es/autores/galan-pilar/
+- provenance: verified
+  supports_claim: false
+  url: https://www.examenesdepau.com/tema/pilar-galan-rodriguez/5500732/
+- provenance: unreachable
+  supports_claim: false
+  url: http://datos.bne.es/resource/XX935832
+timestamp: '2026-04-11T16:09:56.244894+00:00'
+title: Q6075793
+turns: 2
+value_label: null
+verdict: incorrect

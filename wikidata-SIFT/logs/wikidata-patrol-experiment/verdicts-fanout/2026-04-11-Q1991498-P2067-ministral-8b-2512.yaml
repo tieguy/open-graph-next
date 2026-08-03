@@ -1,0 +1,31 @@
+completion_tokens: 2042
+cost_usd: 0.00496644
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55292
+property: P2067
+property_label: mass
+rationale: The new mass value of '3,620 pound' is physically implausible for a human
+  basketball player, as professional basketball players typically weigh between 80-120
+  kg (176-265 lbs). The old value of '+155' is likely a misformatted unit (should
+  be '+155 kg'), which is plausible. The reference to English Wikipedia cannot be
+  verified due to blocked access, and no independent sources confirm the new value.
+  The edit was reverted, further suggesting the new value is unsupported.
+rcid: 2550211455
+revid: 2473554072
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Josep_Maria_Guzmán
+- provenance: reported
+  supports_claim: false
+  url: https://www.fiba.basketball/en/players/138658
+- provenance: reported
+  supports_claim: false
+  url: https://www.basketball-reference.com/players/g/guzmjo01.html
+timestamp: '2026-04-11T13:23:54.990255+00:00'
+title: Q1991498
+turns: 5
+value_label: null
+verdict: incorrect

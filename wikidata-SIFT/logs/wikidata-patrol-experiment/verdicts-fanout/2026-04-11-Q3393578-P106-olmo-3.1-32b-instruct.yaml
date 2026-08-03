@@ -1,0 +1,26 @@
+completion_tokens: 1578
+cost_usd: 0.0032822
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11677
+property: P106
+property_label: occupation
+rationale: Multiple independent and reliable sources describe Luis Xosé Pereira Arias
+  as a writer and teacher, with no indication he is a carpenter. The change from 'writer'
+  to 'Carpintero' (carpenter) is not supported by any evidence and contradicts available
+  biographical information.
+rcid: null
+revid: 2460606061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gl.wikipedia.org/wiki/Luis_Xos%C3%A9_Pereira_Arias
+- provenance: verified
+  supports_claim: false
+  url: http://galegos.galiciadigital.com/en/luis-xose-pereira-arias
+timestamp: '2026-04-11T18:43:47.088843+00:00'
+title: Q3393578
+turns: 1
+value_label: Carpintero
+verdict: incorrect

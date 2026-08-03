@@ -1,0 +1,25 @@
+completion_tokens: 700
+cost_usd: 0.0131136625
+diff_type: qualifier_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 137248
+property: P451
+property_label: unmarried partner
+rationale: The sources confirm that Kelly Piquet and Max Verstappen started their
+  relationship in October 2020, which supports the claim that the start time qualifier
+  should be updated to 2020-11-00T00:00:00Z.
+rcid: 2550276465
+revid: 2473616911
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.metropoles.com/colunas/claudia-meireles/modelo-kelly-piquet-assume-romance-com-piloto-da-formula-1-max-verstappen
+- provenance: verified
+  supports_claim: true
+  url: https://www.terra.com.br/esportes/automobilismo/verstappen-curte-natal-ao-lado-da-enteada-penelope-e-kelly-piquet-exibe-barrigao-veja-imagens,cfa63b744199323e04bdb6351b935d591zlj8knw.html
+timestamp: '2026-04-07T04:34:32.819911+00:00'
+title: Q21290333
+turns: 15
+value_label: Max Verstappen
+verdict: verified-high

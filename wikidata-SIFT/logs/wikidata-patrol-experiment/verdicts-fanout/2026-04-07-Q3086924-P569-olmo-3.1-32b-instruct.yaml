@@ -1,0 +1,29 @@
+completion_tokens: 797
+cost_usd: 0.0074776
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34997
+property: P569
+property_label: date of birth
+rationale: The only source cited for the new date of birth is a GeneaStar entry that
+  could not be accessed due to a blocked domain. No independent primary or reliable
+  secondary source confirming the date 22 November 1890 was found after a targeted
+  search of Quebec vital records and obituaries.
+rcid: null
+revid: 2471073178
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.geneastar.com/
+- provenance: reported
+  supports_claim: false
+  url: https://www.bonneville.ca/en/genealogy/vital-records
+- provenance: reported
+  supports_claim: false
+  url: https://www.bibliothecaq.ca/en/genealogy
+timestamp: '2026-04-07T10:33:52.961930+00:00'
+title: Q3086924
+turns: 5
+value_label: null
+verdict: unverifiable

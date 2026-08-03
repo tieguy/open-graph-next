@@ -1,0 +1,28 @@
+completion_tokens: 682
+cost_usd: 0.0055472
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25690
+property: P213
+property_label: ISNI
+rationale: The personal 'about.me' page of Josh Universe, authored by the subject,
+  confirms his identity and professional profile, which aligns with the Wikidata item.
+  However, the ISNI number was not explicitly displayed on this page, and attempts
+  to fetch other cited references failed. While the value is plausible and consistent
+  with the subject, direct verification of the ISNI number against an authoritative
+  registry was not achieved in this investigation.
+rcid: 2551428255
+revid: 2474728549
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://about.me/joshhabka
+- provenance: reported
+  supports_claim: false
+  url: https://inspirehep.net/authors/2962404
+timestamp: '2026-04-11T12:24:10.562238+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: verified-low

@@ -1,0 +1,31 @@
+completion_tokens: 2526
+cost_usd: 0.004424
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14542
+property: P279
+property_label: subclass of
+rationale: The edit changed the subclass of bipang from 'snack' to 'brittle', but
+  authoritative sources—including the Indonesian and English Wikipedia, as well as
+  a local culinary article—describe bipang as a distinct Indonesian snack with no
+  indication that it is a subclass of 'brittle'. The only similarity is texture, not
+  culinary classification. There is no evidence to support this change, making it
+  likely an error.
+rcid: 2551233444
+revid: 2474545826
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://id.wikipedia.org/wiki/Bipang
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Brittle_(candy)
+- provenance: verified
+  supports_claim: false
+  url: https://www.oleholehpasuruan.com/news/Apa-Itu-Bipang-Kenali-Camilan-Tradisional-yang-Kini-Lebih-Sehat
+timestamp: '2026-04-11T06:00:08.072794+00:00'
+title: Q57981532
+turns: 1
+value_label: brittle
+verdict: suspect

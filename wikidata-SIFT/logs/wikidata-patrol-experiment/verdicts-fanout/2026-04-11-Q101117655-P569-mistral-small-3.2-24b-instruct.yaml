@@ -1,0 +1,28 @@
+completion_tokens: 1337
+cost_usd: 0.0015429562500000001
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12245
+property: P569
+property_label: date of birth
+rationale: The date of birth claim for Huck Milner is supported by multiple independent
+  sources (Pixar Fandom and Amazon Prime Video). However, the added reference to English
+  Wikipedia is not reliable and should not be used as a reference source.
+rcid: 2550925169
+revid: 2474246818
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pixar.fandom.com/wiki/Huck_Milner
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com/prime-video/actor/Huck-Milner/amzn1.dv.gti.56a844d8-9ff0-4345-945b-0704dde2dff8/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/huckleberry-milner.html
+timestamp: '2026-04-11T13:12:03.098150+00:00'
+title: Q101117655
+turns: 1
+value_label: null
+verdict: verified-high

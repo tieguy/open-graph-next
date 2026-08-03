@@ -1,0 +1,29 @@
+completion_tokens: 1399
+cost_usd: 0.00831303125
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 88759
+property: P213
+property_label: ISNI
+rationale: The ISNI value "0000000513392880" is cited from a reliable source (International
+  Standard Name Identifier) and is supported by Josh Universe's professional and academic
+  profiles. However, direct verification from the ISNI website is not possible due
+  to access restrictions. Therefore, the verdict is 'verified-low'.
+rcid: 2551428255
+revid: 2474728549
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://about.me/joshhabka
+- provenance: verified
+  supports_claim: true
+  url: https://fit.academia.edu/JoshUniverse
+- provenance: verified
+  supports_claim: true
+  url: https://www.isni.org/isni/0000000513392880
+timestamp: '2026-04-11T12:24:16.998025+00:00'
+title: Q123738871
+turns: 4
+value_label: null
+verdict: verified-low

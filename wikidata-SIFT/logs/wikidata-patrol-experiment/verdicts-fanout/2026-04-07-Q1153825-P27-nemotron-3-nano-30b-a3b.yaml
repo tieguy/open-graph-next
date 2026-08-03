@@ -1,0 +1,20 @@
+completion_tokens: 616
+cost_usd: 0.010114950000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 199835
+property: P27
+property_label: country of citizenship
+rationale: Despite extensive web searches, no verifiable source was found that directly
+  mentions Annie Ernaux's nationality as Swiss. Searches returned no authoritative
+  records, official sources, or reliable references confirming Swiss citizenship or
+  dual nationality. The edit appears unsupported by accessible external evidence.
+rcid: 2549660053
+revid: 2473020390
+sources: []
+timestamp: '2026-04-07T04:23:55.374910+00:00'
+title: Q1153825
+turns: 15
+value_label: Switzerland
+verdict: unverifiable

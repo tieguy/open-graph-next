@@ -1,0 +1,25 @@
+completion_tokens: 1494
+cost_usd: 0.0052751000000000004
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48269
+property: P1477
+property_label: birth name
+rationale: The DBpedia page confirms the birth name John Jairo Arias Tascón, supporting
+  the edit. The Historica Wiki page could not be accessed, but the DBpedia confirmation
+  is sufficient for a verified-high verdict.
+rcid: 2540941018
+revid: 2464730513
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://historica.fandom.com/wiki/John_Jairo_Arias_Tasc%C3%B3n
+- provenance: verified
+  supports_claim: true
+  url: https://dbpedia.org/page/John_Jairo_Arias_Tasc%C3%B3n
+timestamp: '2026-02-20T14:50:33.995675+00:00'
+title: Q20013182
+turns: 6
+value_label: null
+verdict: verified-high

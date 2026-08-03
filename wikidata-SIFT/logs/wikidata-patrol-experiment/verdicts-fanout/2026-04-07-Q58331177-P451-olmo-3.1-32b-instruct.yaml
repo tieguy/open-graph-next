@@ -1,0 +1,26 @@
+completion_tokens: 1617
+cost_usd: 0.0062102
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26200
+property: P451
+property_label: unmarried partner
+rationale: The only cited reference could not be accessed due to a blocked domain,
+  and no independent, reliable sources confirm that Gavi is Ester Expósito's unmarried
+  partner or that Gavi is a footballer. Without accessible evidence, the claim remains
+  unverifiable.
+rcid: 2549255010
+revid: 2472625539
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://elpais.com/gente/2026-03-11/ester-exposito-y-kylian-mbappe-la-inesperada-pareja-que-protagoniza-todas-las-revistas-del-corazon.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.terra.com.mx/entretenimiento/2022/1/16/ester-exposito-los-verdaderos-motivos-por-los-cuales-la-actriz-termino-su-relacion-con-alvaro-rico-22777.html
+timestamp: '2026-04-07T13:36:19.846579+00:00'
+title: Q58331177
+turns: 3
+value_label: Gavi
+verdict: unverifiable

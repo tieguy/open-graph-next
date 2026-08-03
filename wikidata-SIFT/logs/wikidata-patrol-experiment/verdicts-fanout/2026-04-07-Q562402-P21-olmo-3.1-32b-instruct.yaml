@@ -1,0 +1,29 @@
+completion_tokens: 619
+cost_usd: 0.014683000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 71558
+property: P21
+property_label: sex or gender
+rationale: No independent, reliable source was found that explicitly states Joan Maragall's
+  sex or gender as 'intersex.' The cited references in the edit are either not accessible
+  or do not provide direct confirmation of this claim. Without corroborating evidence
+  from authoritative biographical or historical sources, the claim remains unverified.
+rcid: null
+revid: 2471640708
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Joan_Maragall
+- provenance: reported
+  supports_claim: false
+  url: https://www.bnf.fr/
+- provenance: reported
+  supports_claim: false
+  url: https://www.idfa.de/en/
+timestamp: '2026-04-07T03:41:17.314483+00:00'
+title: Q562402
+turns: 6
+value_label: intersex
+verdict: unverifiable

@@ -1,0 +1,31 @@
+completion_tokens: 2270
+cost_usd: 0.0036760625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33158
+property: P569
+property_label: date of birth
+rationale: Multiple reliable sources, including Astro-Seek.com, Ebsco Research Starters,
+  Encyclopædia Britannica Online, and a biography on Medium, all confirm that Gary
+  Snyder was born on May 8, 1930. The edit changing the date to May 9, 1930 is incorrect.
+rcid: 2549543050
+revid: 2472906341
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.astro-seek.com/birth-chart/gary-snyder-horoscope
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/biography/gary-snyder
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/arts/educational-magazines/snyder-gary-sherman-1930
+- provenance: verified
+  supports_claim: false
+  url: https://jenb-writing.medium.com/biography-of-gary-snyder-dac6f56c212d
+timestamp: '2026-04-11T10:03:15.479086+00:00'
+title: Q315963
+turns: 1
+value_label: null
+verdict: incorrect

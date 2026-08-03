@@ -1,0 +1,18 @@
+completion_tokens: 131
+cost_usd: 0.0036621062500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40387
+property: P577
+property_label: publication date
+rationale: Unable to fetch any sources to verify the publication date of Good Night
+  Stories for Rebel Girls due to search errors.
+rcid: null
+revid: 2473296413
+sources: []
+timestamp: '2026-04-11T07:45:51.482137+00:00'
+title: Q48966676
+turns: 4
+value_label: null
+verdict: unverifiable

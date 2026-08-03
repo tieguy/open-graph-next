@@ -1,0 +1,27 @@
+completion_tokens: 1571
+cost_usd: 0.0029562
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10068
+property: P360
+property_label: is a list of
+rationale: Authoritative sources such as the Wikipedia page for the List of state
+  highways in São Paulo and the OpenStreetMap documentation explicitly classify the
+  roads in question as 'state highways.' These sources confirm that the previous generic
+  label 'highway' was insufficiently specific for this list. Therefore, changing the
+  property value to 'state highway' is correct and improves data accuracy.
+rcid: 2551131421
+revid: 2474446307
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/List_of_state_highways_in_S%C3%A3o_Paulo
+- provenance: verified
+  supports_claim: true
+  url: https://wiki.openstreetmap.org/wiki/Tag:highway=state
+timestamp: '2026-04-11T07:09:47.719400+00:00'
+title: Q6640552
+turns: 1
+value_label: state highway
+verdict: verified-high

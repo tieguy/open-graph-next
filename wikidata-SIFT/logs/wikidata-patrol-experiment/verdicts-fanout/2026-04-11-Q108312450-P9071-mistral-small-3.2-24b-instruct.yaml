@@ -1,0 +1,24 @@
+completion_tokens: 1065
+cost_usd: 0.00588104625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59868
+property: P9071
+property_label: character type
+rationale: The change from "antihero" to "anti-villain" is plausible based on the
+  definitions of these terms and the limited information provided. However, without
+  more specific evidence or context from the film, it is difficult to definitively
+  verify the correctness of the change. The edit cites a reference from Fandom, but
+  the content of that reference is not available here.
+rcid: 2550845811
+revid: 2474169642
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://tropedia.fandom.com/wiki/Anti-Villain
+timestamp: '2026-04-11T06:16:59.284292+00:00'
+title: Q108312450
+turns: 4
+value_label: anti-villain
+verdict: plausible

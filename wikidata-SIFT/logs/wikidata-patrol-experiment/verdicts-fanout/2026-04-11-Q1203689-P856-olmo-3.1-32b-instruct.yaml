@@ -1,0 +1,30 @@
+completion_tokens: 716
+cost_usd: 0.0036934000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16319
+property: P856
+property_label: official website
+rationale: The official website for Shibayama, Chiba should be the municipal government
+  site at https://www.town.shibayama.lg.jp/, as confirmed by the town's own content
+  and the Chiba Prefecture directory of municipal websites. The new value, https://www.jetstar.com/,
+  is the website of an airline and has no connection to Shibayama town. Therefore,
+  changing the official website to that of an airline is incorrect.
+rcid: null
+revid: 2472124695
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.shibayama.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.jetstar.com/
+- provenance: reported
+  supports_claim: false
+  url: https://www.pref.chiba.lg.jp/
+timestamp: '2026-04-11T18:49:16.399897+00:00'
+title: Q1203689
+turns: 1
+value_label: null
+verdict: incorrect

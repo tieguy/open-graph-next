@@ -1,0 +1,29 @@
+completion_tokens: 1948
+cost_usd: 0.00222282
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30644
+property: P2521
+property_label: female form of label
+rationale: The edit changes the female form of the label for 'language inventor' (Q1206912)
+  from 'ideollingüista' to 'стваральніца моў'. Neither term is supported by any verified
+  independent source or authoritative reference. While both terms are grammatically
+  plausible in their respective languages (Spanish and Belarusian), there is no evidence
+  from primary or secondary sources confirming their use as the female form of 'language
+  inventor' in conlanging or linguistic contexts. The absence of references and lack
+  of corroborating evidence make this edit unverifiable.
+rcid: 2550876878
+revid: 2474200196
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://debuk.wordpress.com/2015/10/18/woman-made-language/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Constructed_language
+timestamp: '2026-04-11T12:07:15.843609+00:00'
+title: Q1206912
+turns: 4
+value_label: null
+verdict: unverifiable

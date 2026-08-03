@@ -1,0 +1,36 @@
+completion_tokens: 2336
+cost_usd: 0.004351799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14751
+property: P3500
+property_label: Ringgold ID
+rationale: No independent, publicly accessible source confirms that the Southern Catalonia
+  Biomedical Research Institute is assigned Ringgold ID 427539. The cited reference
+  is a general dataset about ISNI and Ringgold alignments and does not provide explicit
+  evidence for this specific assignment. Official and registry pages are unavailable.
+  Therefore, the claim cannot be verified at this time.
+rcid: 2550612669
+revid: 2473943467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://authors.bmj.com/open-access/what-is-ringgold/
+- provenance: reported
+  supports_claim: false
+  url: https://cerca.cat/c/iispv/
+- provenance: verified
+  supports_claim: false
+  url: https://idibell.cat/en/the-institute/
+- provenance: verified
+  supports_claim: false
+  url: https://www.copyright.com/solutions-ringgold/get-id/
+- provenance: reported
+  supports_claim: false
+  url: https://www.isni.org/en/search
+timestamp: '2026-04-10T13:19:51.087107+00:00'
+title: Q30282449
+turns: 1
+value_label: null
+verdict: unverifiable

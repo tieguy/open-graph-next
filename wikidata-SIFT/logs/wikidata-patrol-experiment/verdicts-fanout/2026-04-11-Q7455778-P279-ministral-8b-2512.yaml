@@ -1,0 +1,33 @@
+completion_tokens: 464
+cost_usd: 0.005895749999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23937
+property: P279
+property_label: subclass of
+rationale: The edit changed the subclass of Q7455778 ('service number') from Q36218176
+  ('person identifier') to the same value, which is a no-op change. This suggests
+  a potential edit war or unintended duplication. The new value Q36218176 ('person
+  identifier') is not a correct subclass for 'service number' as it represents a generic
+  identifier for a natural person, not a specific type of identifier used in formal
+  groups like military service numbers. The item's description explicitly states it
+  is an 'Identification number used in formal groups,' which aligns more closely with
+  a structured identifier system (e.g., military service numbers) rather than a generic
+  'person identifier.' The lack of meaningful change and the absence of references
+  or corroborating evidence for this edit further supports the conclusion that the
+  edit was incorrect or unnecessary.
+rcid: null
+revid: 2470295643
+sources:
+- provenance: verified
+  summary: Q36218176 is labeled as 'person identifier,' a generic identifier for a
+    natural person, which does not align with the specific context of 'service number'
+    as an identifier used in formal groups.
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q36218176
+timestamp: '2026-04-11T08:41:39.822913+00:00'
+title: Q7455778
+turns: 3
+value_label: person identifier
+verdict: incorrect

@@ -1,0 +1,37 @@
+completion_tokens: 2356
+cost_usd: 0.007013800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28001
+property: P800
+property_label: notable work
+rationale: Multiple authoritative sources, including Lin-Manuel Miranda's official
+  website, Wikipedia, Broadway World, the Lortel Awards, and independent narrative
+  accounts, confirm that 'Hamilton' is Lin-Manuel Miranda's most notable and celebrated
+  work. While he contributed significantly to 'Mary Poppins Returns,' that work is
+  not primarily associated with him as creator or star. Therefore, updating the notable
+  work from 'Mary Poppins Returns' to 'Hamilton' is accurate and appropriate.
+rcid: 2550460211
+revid: 2473796684
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Lin-Manuel_Miranda
+- provenance: verified
+  supports_claim: true
+  url: https://www.broadwayworld.com/lin-manuel-miranda/
+- provenance: verified
+  supports_claim: true
+  url: https://lortelaward.com/lead-actor-in-a-musical
+- provenance: verified
+  supports_claim: true
+  url: https://bedtimehistorystories.com/the-story-of-lin-manuel-miranda-and-the-making-of-hamilton/
+- provenance: verified
+  supports_claim: true
+  url: http://linmanuel.com/
+timestamp: '2026-04-11T17:35:08.000329+00:00'
+title: Q1646482
+turns: 1
+value_label: Hamilton
+verdict: verified-high

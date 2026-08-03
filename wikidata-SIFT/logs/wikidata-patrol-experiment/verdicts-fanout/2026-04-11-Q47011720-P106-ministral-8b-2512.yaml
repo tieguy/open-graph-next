@@ -1,0 +1,30 @@
+completion_tokens: 2020
+cost_usd: 0.0036354300000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34863
+property: P106
+property_label: occupation
+rationale: The claim that Dennis Vareide (Q47011720) is a 'pornographic actor' (Q488111)
+  is not supported by any verified sources. All available verified sources confirm
+  his identity as a YouTuber and content creator, with no evidence of pornographic
+  work. The old value ('YouTuber') is strongly corroborated by multiple sources, while
+  the new value lacks any backing and contradicts established facts about the individual.
+rcid: null
+revid: 2471745657
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/dennis-vareide.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmbooster.com/creator/834063-dennis-vareide/biography/
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/c/dennisvareide
+timestamp: '2026-04-11T07:21:51.533513+00:00'
+title: Q47011720
+turns: 3
+value_label: pornographic actor
+verdict: incorrect

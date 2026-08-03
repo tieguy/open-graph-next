@@ -1,0 +1,18 @@
+completion_tokens: 124
+cost_usd: 0.002655625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27996
+property: P18
+property_label: image
+rationale: Unable to verify the image change due to search errors. No sources were
+  fetched during the investigation.
+rcid: 2551291467
+revid: 2474600238
+sources: []
+timestamp: '2026-04-11T09:11:10.640339+00:00'
+title: Q16210528
+turns: 4
+value_label: null
+verdict: unverifiable

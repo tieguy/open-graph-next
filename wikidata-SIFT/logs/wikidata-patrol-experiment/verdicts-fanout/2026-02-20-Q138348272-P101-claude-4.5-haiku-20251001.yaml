@@ -1,0 +1,34 @@
+completion_tokens: 2305
+cost_usd: 0.10226400000000001
+diff_type: qualifier_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 90739
+property: P101
+property_label: field of work
+rationale: Federico Sarra is confirmed as a creator and developer of the video game
+  Fut Rap Cartas by multiple independent sources. The official Fut Rap Cartas website
+  explicitly states the game was created by Federico and Felipe Sarra and describes
+  their involvement in video game development and technical infrastructure. TyC Sports,
+  a major Argentine sports media outlet, explicitly lists 'desarrollo de videojuegos'
+  (video game development) as one of the areas in which both brothers have developed
+  expertise, specifically crediting them with creating Fut Rap Cartas starting in
+  2016. The claim is factually accurate, though it currently lacks any citations on
+  Wikidata.
+rcid: 2540929494
+revid: 2464720197
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+- provenance: verified
+  supports_claim: true
+  url: https://www.tycsports.com/al-angulo/mellizos-sarra-historia-conocio-lionel-messi-sorpresivo-regalo-id530613.html
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+timestamp: '2026-02-20T20:46:29.316752+00:00'
+title: Q138348272
+turns: 6
+value_label: video game developer
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 1601
+cost_usd: 0.00411126
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44675
+property: P856
+property_label: official website
+rationale: The edit adds a new reference (gcatholic.org) that explicitly confirms
+  'https://dcl.org.br' as the official website for the Roman Catholic Diocese of Campo
+  Limpo. This reference is a primary source and directly supports the claim. The new
+  reference improves the sourcing quality, and the URL is corroborated by an authoritative
+  ecclesiastical directory.
+rcid: 2550623441
+revid: 2473953844
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gcatholic.org/dioceses/diocese/camp6
+timestamp: '2026-04-11T15:00:58.631534+00:00'
+title: Q867602
+turns: 3
+value_label: null
+verdict: verified-high

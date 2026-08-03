@@ -1,0 +1,29 @@
+completion_tokens: 2044
+cost_usd: 0.00663543
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54839
+property: P1301
+property_label: number of elevators
+rationale: The claim that Tokyo Skytree has 100 elevators is not supported by any
+  verified independent source. Authoritative sources such as the Toshiba Elevator
+  official page and the Elevator Database confirm the presence of at least six elevators
+  (four shuttle elevators and two service elevators), but none mention 100 elevators.
+  The old value of +13 is also unsupported by these sources. The cited reference URL
+  failed to load, and no other verified source corroborates either value. Therefore,
+  the change from +13 to 100 is incorrect.
+rcid: 2549992448
+revid: 2473341596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://elevator-database.fandom.com/wiki/Tokyo_Skytree
+- provenance: verified
+  supports_claim: false
+  url: https://www.toshiba-elevator.co.jp/elv/infoeng/projects/japan/01.html
+timestamp: '2026-04-11T14:36:53.264388+00:00'
+title: Q57965
+turns: 3
+value_label: null
+verdict: incorrect

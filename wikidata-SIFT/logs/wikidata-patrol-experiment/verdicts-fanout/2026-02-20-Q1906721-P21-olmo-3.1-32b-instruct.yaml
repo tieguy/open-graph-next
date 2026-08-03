@@ -1,0 +1,27 @@
+completion_tokens: 687
+cost_usd: 0.008562399999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40751
+property: P21
+property_label: sex or gender
+rationale: There is no credible evidence that Masahiro Sakurai's sex or gender is
+  'female.' Multiple official Japanese and international sources consistently describe
+  Sakurai as male, and his gender is officially stated as unknown only for the character
+  Kirby, not for the real person. The change to 'female' is unsupported and contradicted
+  by reliable sources.
+rcid: 2540929270
+revid: 2464719977
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/List_of_misconceptions
+- provenance: reported
+  supports_claim: false
+  url: https://www.nintendo.com/whatsnew/detail/creator-spotlight-masahiro-sakurai/
+timestamp: '2026-02-20T21:05:29.231638+00:00'
+title: Q1906721
+turns: 4
+value_label: female
+verdict: incorrect

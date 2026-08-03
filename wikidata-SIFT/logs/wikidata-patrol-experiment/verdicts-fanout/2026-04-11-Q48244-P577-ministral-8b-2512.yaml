@@ -1,0 +1,32 @@
+completion_tokens: 1827
+cost_usd: 0.0032351100000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25936
+property: P577
+property_label: publication date
+rationale: The claim that *Mein Kampf* was published in 1962 is incorrect. Multiple
+  verified primary and secondary sources confirm the correct publication date as 18
+  July 1925. The referenced Integrated Authority File does not support the 1962 claim,
+  and no credible evidence was found to validate it.
+rcid: 2550422389
+revid: 2473759636
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.history.com/this-day-in-history/july-18/mein-kampf-is-published
+- provenance: verified
+  supports_claim: false
+  url: https://encyclopedia.ushmm.org/content/en/article/mein-kampf
+- provenance: verified
+  supports_claim: false
+  url: https://mosseprogram.wisc.edu/2019/04/19/hauner01/
+- provenance: verified
+  supports_claim: false
+  url: https://duitslandinstituut.nl/artikel/160/nieuwe-uitgave-moet-mein-kampf-demystificeren
+timestamp: '2026-04-11T10:18:18.233564+00:00'
+title: Q48244
+turns: 1
+value_label: null
+verdict: incorrect

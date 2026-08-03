@@ -1,0 +1,29 @@
+completion_tokens: 1637
+cost_usd: 0.0053140625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52318
+property: P18
+property_label: image
+rationale: The image '20220813 ECM22 Rowing 7761.jpg' does not appear in primary sources
+  or reputable image repositories. The removal of this image from Maria-Magdalena
+  Rusu's Wikidata item is justified due to the lack of references and independent
+  verification.
+rcid: 2550813389
+revid: 2474137950
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://worldrowing.com/athlete/maria-magdalena-rusu?id=47554
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/maria-magdalena-rusu
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Maria-Magdalena_Rusu
+timestamp: '2026-04-10T12:28:06.599045+00:00'
+title: Q64431847
+turns: 5
+value_label: null
+verdict: verified-high

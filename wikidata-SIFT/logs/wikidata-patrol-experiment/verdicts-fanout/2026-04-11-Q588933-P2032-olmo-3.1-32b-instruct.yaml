@@ -1,0 +1,30 @@
+completion_tokens: 1812
+cost_usd: 0.0069218000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29173
+property: P2032
+property_label: end of work period
+rationale: The new value '67 CE' for Shaun Tan's end of work period is factually incorrect
+  and is not supported by any authoritative or reliable source. Multiple verified
+  sources, including his official website, Wikipedia, and RKDartists, confirm that
+  Shaun Tan is a living artist active from the 1990s to the present. The claim that
+  his career ended in 67 CE is inconsistent with his known biography and career timeline.
+rcid: null
+revid: 2468965926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rkd.nl/explore/artists/373526-shaun-tan
+- provenance: verified
+  supports_claim: false
+  url: https://www.shauntan.net/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Shaun_Tan
+timestamp: '2026-04-11T12:54:54.497303+00:00'
+title: Q588933
+turns: 1
+value_label: null
+verdict: incorrect

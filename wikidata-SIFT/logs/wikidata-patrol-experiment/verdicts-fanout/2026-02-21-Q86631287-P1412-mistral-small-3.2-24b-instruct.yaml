@@ -1,0 +1,30 @@
+completion_tokens: 967
+cost_usd: 0.003741675
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38269
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The sources confirm that Muhammad ibn Sulayman al-Kurdi was a prominent
+  Islamic jurist and scholar specializing in Shafi'i jurisprudence. His works and
+  teachings were influential, and he was known for his expertise in Shafi'i fiqh.
+  The sources provide detailed information about his life, contributions, and influence,
+  supporting the claim that he spoke Kurdish.
+rcid: 2540918651
+revid: 2464709782
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://usul.ai/author/muhammad-bin-sulayman-al-kurdi-al-shafii
+- provenance: verified
+  supports_claim: true
+  url: https://muslimmatters.org/2024/10/13/the-dissemination-of-islamic-knowledge-in-the-malay-archipelago/
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Muhammad_bin_Sulaiman_al-Kurdi
+timestamp: '2026-02-21T02:10:05.745671+00:00'
+title: Q86631287
+turns: 3
+value_label: Kurdish
+verdict: verified-high

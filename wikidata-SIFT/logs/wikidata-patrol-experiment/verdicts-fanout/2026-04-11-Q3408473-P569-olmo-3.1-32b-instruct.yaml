@@ -1,0 +1,31 @@
+completion_tokens: 1591
+cost_usd: 0.0040174
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15314
+property: P569
+property_label: date of birth
+rationale: The new value for Karen Dejo's date of birth (1975-07-10) is not supported
+  by any verified independent sources. Two reputable biographical websites independently
+  confirm her birth year and month as 1980 and July, with one specifying July 10,
+  1980. The cited source in the edit could not be fetched, and the official registry
+  is currently unavailable. Therefore, changing the date of birth to 1975 is unsupported
+  and incorrect.
+rcid: 2550663962
+revid: 2473993493
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://vipactors.com/karen-dejo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bornglorious.com/person/?pi=3408473
+- provenance: reported
+  supports_claim: false
+  url: https://trome.com/espectaculos/karen-dejo-edad-de-cumpleanos-guerrera-cumple-41-anos-noticia/
+timestamp: '2026-04-11T09:48:37.621381+00:00'
+title: Q3408473
+turns: 1
+value_label: null
+verdict: incorrect

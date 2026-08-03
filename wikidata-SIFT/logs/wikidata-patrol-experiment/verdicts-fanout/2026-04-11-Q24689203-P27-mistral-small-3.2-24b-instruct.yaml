@@ -1,0 +1,34 @@
+completion_tokens: 1584
+cost_usd: 0.00667770625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 69817
+property: P27
+property_label: country of citizenship
+rationale: The edit changes the country of citizenship to an incorrect value (Congolese
+  franc). The cited source could not be verified, and independent sources refer to
+  Niska as a French rapper. The correct country of citizenship should be France (Q142).
+rcid: null
+revid: 2471645188
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nrj.fr/artistes/niska/biographie
+- provenance: verified
+  supports_claim: false
+  url: https://culturap.fr/artistes/niska/
+- provenance: verified
+  supports_claim: true
+  url: https://catalogue.bnf.fr/ark:/12148/cb17011992j
+- provenance: verified
+  supports_claim: false
+  url: https://www.multiplecitizenship.com/wscl/ws_DR_CONGO.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.gov.uk/guidance/living-in-drc
+timestamp: '2026-04-11T07:05:51.020680+00:00'
+title: Q24689203
+turns: 5
+value_label: Congolese franc
+verdict: incorrect

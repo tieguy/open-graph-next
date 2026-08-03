@@ -1,0 +1,23 @@
+completion_tokens: 602
+cost_usd: 0.0037673999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17031
+property: P217
+property_label: inventory number
+rationale: The National Gallery of Art's official artwork page lists the accession
+  (inventory) number for 'Woman with a Parasol – Madame Monet and Her Son' as '1983.1.29'.
+  The edit changed the value from '1983.1.29' to '1983.1.28', which is not supported
+  by the primary source. Therefore, the updated value is incorrect.
+rcid: 2551372059
+revid: 2474676890
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nga.gov/artworks/61379-woman-parasol-madam-monet-and-her-son
+timestamp: '2026-04-10T00:20:49.152690+00:00'
+title: Q2395218
+turns: 1
+value_label: null
+verdict: incorrect

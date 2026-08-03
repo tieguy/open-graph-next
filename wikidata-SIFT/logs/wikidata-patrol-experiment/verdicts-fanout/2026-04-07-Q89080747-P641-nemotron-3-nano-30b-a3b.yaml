@@ -1,0 +1,30 @@
+completion_tokens: 815
+cost_usd: 0.005493399999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 106608
+property: P641
+property_label: sport
+rationale: The edit changed the sport property to 'Hore' using a reference that could
+  not be located or fetched. Multiple web searches failed to find any source supporting
+  'Hore' as a sport for Elias Hadaya, and no official source from the Norwegian Football
+  Federation or other authoritative records was found. The reference to Q21450417
+  appears to be linked to 'Hore' but its URL was not successfully retrieved, and no
+  independent corroboration was found. Therefore, while the edit was made, there is
+  insufficient publicly verifiable evidence to confirm whether 'Hore' correctly represents
+  the sport.
+rcid: 2549663191
+revid: 2473023415
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://data.nff.no/en/person/3741243
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/4586760
+timestamp: '2026-04-07T12:29:33.131896+00:00'
+title: Q89080747
+turns: 15
+value_label: Hore
+verdict: unverifiable

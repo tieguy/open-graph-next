@@ -1,0 +1,35 @@
+completion_tokens: 3506
+cost_usd: 0.151359
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 133829
+property: P570
+property_label: date of death
+rationale: 'The date of death 1829 is strongly supported by multiple independent sources.
+  Genealogy databases (MyHeritage, FamilySearch) and academic library catalogs (CSUCA)
+  consistently list his death year as 1829. Historical sources provide context: the
+  Battle of Pilar on September 22, 1829, resulted in Moyano''s military defeat and
+  execution by José Félix Aldao''s forces. While the edit specifies only the year
+  without the full date, the year itself is verified as correct across all consulted
+  sources.'
+rcid: 2540922672
+revid: 2464713619
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.myheritage.es/names/juan_moyano
+- provenance: verified
+  supports_claim: true
+  url: https://catalogosiidca.csuca.org/Author/Home?author=Moyano%2C+Juan+Agusti%CC%81n
+- provenance: verified
+  supports_claim: true
+  url: https://alchetron.com/José-Félix-Aldao
+- provenance: verified
+  supports_claim: true
+  url: https://www.infobae.com/historia/2024/12/28/el-dramatico-final-de-laprida-el-procer-olvidado-su-rectitud-el-amor-por-su-prima-y-su-coraje-para-salvar-a-un-amigo/
+timestamp: '2026-02-21T00:05:51.613536+00:00'
+title: Q5947012
+turns: 11
+value_label: null
+verdict: verified-high

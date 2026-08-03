@@ -1,0 +1,17 @@
+completion_tokens: 752
+cost_usd: 0.0177069
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58271
+property: P31
+property_label: instance of
+rationale: null
+rcid: 2551037483
+revid: 2474354438
+sources: []
+timestamp: '2026-04-11T09:27:37.049299+00:00'
+title: Q20009465
+turns: 6
+value_label: former railway stop
+verdict: susweb_search{

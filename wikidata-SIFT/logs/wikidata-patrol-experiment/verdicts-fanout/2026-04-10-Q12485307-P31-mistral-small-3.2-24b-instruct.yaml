@@ -1,0 +1,28 @@
+completion_tokens: 1105
+cost_usd: 0.0061060687500000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 61119
+property: P31
+property_label: instance of
+rationale: Multiple independent sources confirm that Haria is referred to as a 'negeri.'
+  The evidence from these sources supports the edit to change the instance of Haria
+  from 'desa' to 'negeri.'
+rcid: 2550514282
+revid: 2473848904
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sultansinindonesieblog.wordpress.com/maluku/haria-leawaka-amapatti-negeri-saparua/
+- provenance: verified
+  supports_claim: true
+  url: https://p2k.stekom.ac.id/ensiklopedia/Haria,_Saparua,_Maluku_Tengah
+- provenance: verified
+  supports_claim: true
+  url: https://mapcarta.com/15632534
+timestamp: '2026-04-10T13:53:42.928039+00:00'
+title: Q12485307
+turns: 4
+value_label: negeri
+verdict: verified-high

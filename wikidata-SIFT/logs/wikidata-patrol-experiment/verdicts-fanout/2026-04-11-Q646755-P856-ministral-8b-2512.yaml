@@ -1,0 +1,28 @@
+completion_tokens: 1657
+cost_usd: 0.01063809
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 125744
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.city.tateyama.chiba.jp/',
+  is confirmed as the verified municipal portal for Tateyama City through its prefetched
+  content and usage in other claims. The new value, 'https://www.aerok.com', is a
+  tourism/cultural site unrelated to municipal governance and does not represent the
+  official government website. The edit incorrectly replaced the verified official
+  website with an unrelated site.
+rcid: null
+revid: 2471597268
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.tateyama.chiba.jp/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.aerok.com
+timestamp: '2026-04-11T10:21:21.950626+00:00'
+title: Q646755
+turns: 11
+value_label: null
+verdict: incorrect

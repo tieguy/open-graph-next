@@ -1,0 +1,38 @@
+completion_tokens: 2284
+cost_usd: 0.03744432
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 144493
+property: P159
+property_label: headquarters location
+rationale: The cited reference URL (https://www.bibbyfinancialservices.pl/kontakt)
+  directly supports the headquarters location claim by listing 'Centrala - Warszawa'
+  with the specific Warsaw address 'Al. Jerozolimskie 134, b. Eurocentrum, 02-305
+  Warszawa'. Multiple independent sources including the company's own website, job
+  postings, business directories, and financial statements consistently confirm the
+  headquarters is in Warsaw. The claim is well-supported by primary sources and the
+  reference is appropriate.
+rcid: 2540937827
+revid: 2464727493
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/kontakt
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/kariera/oferty-pracy/it-service-desk-analyst
+- provenance: verified
+  supports_claim: true
+  url: https://pracodawcy.pracuj.pl/company/20013181
+- provenance: verified
+  supports_claim: true
+  url: https://corporatewatch.org/floating-prisons-the-200-year-old-family-business-behind-the-bibby-stockholm/
+timestamp: '2026-02-20T16:28:48.704077+00:00'
+title: Q138348738
+turns: 12
+value_label: Warsaw
+verdict: verified-high

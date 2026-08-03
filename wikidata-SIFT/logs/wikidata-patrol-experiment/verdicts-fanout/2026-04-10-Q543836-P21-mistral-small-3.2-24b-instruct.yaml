@@ -1,0 +1,38 @@
+completion_tokens: 2072
+cost_usd: 0.00417228125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37465
+property: P21
+property_label: sex or gender
+rationale: The sources consulted do not support the claim that Pierre Bordage's sex
+  or gender is 'female organism'. The references provided do not support this claim,
+  and independent sources do not mention his gender. Therefore, the edit appears to
+  be incorrect.
+rcid: 2550573515
+revid: 2473905731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.viaf.org/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bnf.fr/
+- provenance: verified
+  supports_claim: false
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitt%C3%A9
+- provenance: verified
+  supports_claim: false
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pierre_Bordage
+- provenance: verified
+  supports_claim: false
+  url: https://www.babelio.com/auteur/Pierre-Bordage/1337
+timestamp: '2026-04-10T00:08:00.559846+00:00'
+title: Q543836
+turns: 1
+value_label: female organism
+verdict: incorrect

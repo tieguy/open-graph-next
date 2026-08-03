@@ -1,0 +1,23 @@
+completion_tokens: 1063
+cost_usd: 0.00308470375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32240
+property: P361
+property_label: part of
+rationale: The edit changes the 'part of' relationship to make it self-referential,
+  which is unusual and lacks supporting evidence. The reference URL provided does
+  not confirm this specific claim, and no independent sources were found to corroborate
+  it.
+rcid: 2550915951
+revid: 2474238017
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://beallslist.net/
+timestamp: '2026-04-07T12:13:39.581774+00:00'
+title: Q52636154
+turns: 5
+value_label: ELEWA BIOSCIENCES, F.a.C.T.LTD
+verdict: suspect

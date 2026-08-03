@@ -1,0 +1,20 @@
+completion_tokens: 794
+cost_usd: 0.0143208
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 69222
+property: P2067
+property_label: mass
+rationale: The new value for mass ('3,620 pound') is biologically implausible and
+  unsupported by any accessible source. The cited English Wikipedia reference is unreachable,
+  and independent searches found no credible reporting of Josep Maria Guzmán's weight.
+  This strongly indicates the edit is incorrect.
+rcid: 2550211455
+revid: 2473554072
+sources: []
+timestamp: '2026-04-07T09:03:42.239892+00:00'
+title: Q1991498
+turns: 10
+value_label: null
+verdict: incorrect

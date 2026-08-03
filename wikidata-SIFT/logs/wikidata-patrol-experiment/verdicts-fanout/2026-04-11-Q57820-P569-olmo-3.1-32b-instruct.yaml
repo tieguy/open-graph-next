@@ -1,0 +1,30 @@
+completion_tokens: 2661
+cost_usd: 0.0061762
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22898
+property: P569
+property_label: date of birth
+rationale: Multiple independent and authoritative sources, including Find a Grave,
+  Babelio, and Wikipedia, confirm that Hans Scholl was born on 18 September 1918.
+  The previously stated date of 22 September 1918 is not supported by any reliable
+  source and appears to be incorrect. Changing the birth date to 18 September 1918
+  was therefore a correct factual correction.
+rcid: null
+revid: 2468034032
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/20681/hans-scholl
+- provenance: verified
+  supports_claim: true
+  url: https://babelio.fr/auteur/hans-scholl
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Hans_Scholl
+timestamp: '2026-04-11T14:09:36.670660+00:00'
+title: Q57820
+turns: 1
+value_label: null
+verdict: verified-high

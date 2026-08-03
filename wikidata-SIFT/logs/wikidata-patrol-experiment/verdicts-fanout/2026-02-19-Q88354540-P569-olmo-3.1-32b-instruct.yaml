@@ -1,0 +1,26 @@
+completion_tokens: 1216
+cost_usd: 0.0035545999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14125
+property: P569
+property_label: date of birth
+rationale: Both the European Space Agency's official astronaut biography and the Spanish
+  Wikipedia page independently confirm that Sara García Alonso was born in the year
+  2000. This cross-corroboration from reliable and independent sources verifies the
+  claim with high confidence.
+rcid: 2540985100
+revid: 2464771431
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/Astronauts/Sara_Garcia_Alonso
+- provenance: verified
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Sara_Garc%C3%ADa_Alonso
+timestamp: '2026-02-19T22:31:25.043269+00:00'
+title: Q88354540
+turns: 1
+value_label: null
+verdict: verified-high

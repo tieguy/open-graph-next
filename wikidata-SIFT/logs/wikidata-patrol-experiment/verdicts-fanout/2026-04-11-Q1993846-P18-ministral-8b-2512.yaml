@@ -1,0 +1,31 @@
+completion_tokens: 2180
+cost_usd: 0.00292323
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29955
+property: P18
+property_label: image
+rationale: The new image filename 'Nissan Rogue T32 2.5 S Gun Metallic diplomatic.jpg'
+  lacks independent verification from official sources. No evidence was found confirming
+  the existence of a diplomatic variant with this specific description. The cited
+  Wikipedia source is unreachable, and no other verified sources support the new value.
+  The old image filename, while generic, aligns with typical promotional imagery and
+  is not contradicted by available evidence.
+rcid: 2550730187
+revid: 2474057540
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/rogue/gallery/exterior.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nissan-global.com/EN/NISSAN/ROGUE/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Nissan_Rogue
+timestamp: '2026-04-11T07:05:18.507359+00:00'
+title: Q1993846
+turns: 3
+value_label: null
+verdict: suspect

@@ -1,0 +1,21 @@
+completion_tokens: 583
+cost_usd: 0.0049525
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 96718
+property: P1705
+property_label: native label
+rationale: No sources were found that corroborate or provide context for the claim
+  that '20 FrenchTacos Street' is the native label for 20 Fenchurch Street. Exhaustive
+  searches using multiple query variations failed to locate any references, web pages,
+  or related content discussing this claim. No verified or reported sources were identified
+  that support or contradict the statement.
+rcid: 2549596457
+revid: 2472958532
+sources: []
+timestamp: '2026-04-07T08:39:33.992374+00:00'
+title: Q212834
+turns: 15
+value_label: null
+verdict: unverifiable

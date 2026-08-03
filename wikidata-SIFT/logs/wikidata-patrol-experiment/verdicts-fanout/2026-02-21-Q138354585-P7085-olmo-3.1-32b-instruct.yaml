@@ -1,0 +1,29 @@
+completion_tokens: 1250
+cost_usd: 0.0048698000000000005
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20599
+property: P7085
+property_label: TikTok username
+rationale: The claim that Bella Hue's TikTok username is 'ItsBellaHue' is supported
+  by her official TikTok profile and artist-maintained Linktree pages, which all use
+  or reference the same username. These sources are directly associated with the artist,
+  though they are social media profiles rather than primary authoritative records.
+rcid: 2541056067
+revid: 2464838208
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.tiktok.com/@itsbellahue?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/BellaHue
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/itsbellahue
+timestamp: '2026-02-21T03:45:05.194816+00:00'
+title: Q138354585
+turns: 4
+value_label: null
+verdict: verified-low

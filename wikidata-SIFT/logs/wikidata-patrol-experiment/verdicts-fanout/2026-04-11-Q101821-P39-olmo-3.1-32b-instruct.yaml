@@ -1,0 +1,30 @@
+completion_tokens: 266
+cost_usd: 0.0034294
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16349
+property: P39
+property_label: position held
+rationale: The claim that Heinrich Groß von Trockau held the position of 'diocesan
+  bishop' of the Roman Catholic Diocese of Bamberg is well-supported by multiple reliable
+  primary sources. The Catholic Hierarchy website explicitly identifies him as 'Bishop
+  of Bamberg,' which is the ordinary (diocesan) bishop of that diocese, and provides
+  detailed dates of his episcopacy (1487–1501). The item's statement includes qualifiers
+  and references consistent with these historical facts, including the diocese identifier
+  and Catholic Hierarchy person and diocese IDs. Therefore, the change to 'diocesan
+  bishop' as a qualifier is accurate and properly reflects his historical role.
+rcid: 2550977138
+revid: 2474296500
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.catholic-hierarchy.org/bishop/bgvt.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+timestamp: '2026-04-11T13:29:25.335008+00:00'
+title: Q101821
+turns: 1
+value_label: diocesan bishop
+verdict: verified-high

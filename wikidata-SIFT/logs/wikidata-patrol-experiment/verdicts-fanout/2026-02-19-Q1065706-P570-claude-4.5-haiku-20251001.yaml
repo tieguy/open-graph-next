@@ -1,0 +1,30 @@
+completion_tokens: 1901
+cost_usd: 0.04357900000000001
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 34074
+property: P570
+property_label: date of death
+rationale: The edit claims Maria of Castile died on 13 November 2015, but this is
+  demonstrably false. Multiple independent scholarly sources consistently confirm
+  that Maria of Castile died in September 1458 (specifically September 4 or 7, 1458)
+  in Valencia/Arevelo. She was a 15th-century queen consort of Aragon, not a 21st-century
+  figure. The date 2015 is anachronistic and clearly incorrect.
+rcid: 2540983951
+revid: 2464770310
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/maria-castile-1401-1458
+- provenance: verified
+  supports_claim: false
+  url: https://www.monstrousregimentofwomen.com/2020/09/maria-of-castile-queen-lieutenant.html
+- provenance: reported
+  supports_claim: false
+  url: https://kids.kiddle.co/Maria_of_Castile
+timestamp: '2026-02-19T23:03:38.958163+00:00'
+title: Q1065706
+turns: 3
+value_label: null
+verdict: incorrect

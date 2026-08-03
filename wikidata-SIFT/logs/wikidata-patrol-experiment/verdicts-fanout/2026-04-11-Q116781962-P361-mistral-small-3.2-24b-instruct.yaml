@@ -1,0 +1,23 @@
+completion_tokens: 1328
+cost_usd: 0.00453083875
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44595
+property: P361
+property_label: part of
+rationale: The referenced source (Russian Wikivoyage) does not contain the specific
+  query terms 'улица Шмидта 1 3'. Without additional independent sources confirming
+  the claim, it is not possible to verify the accuracy of the qualifier added to the
+  'part of' claim.
+rcid: 2551159513
+revid: 2474473769
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikivoyage.org/?oldid=561556#5240207001
+timestamp: '2026-04-11T07:27:27.175581+00:00'
+title: Q116781962
+turns: 5
+value_label: улица Шмидта 1 3 [ru]
+verdict: unverifiable

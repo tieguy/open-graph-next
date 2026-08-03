@@ -1,0 +1,31 @@
+completion_tokens: 1689
+cost_usd: 0.06054199999999999
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 52097
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm that ZedEye (Bobby Mabhena) is a rapper.
+  The Music in Africa Directory identifies him as a 'recording artist' born in 1998,
+  YouTube shows him performing rap tracks labeled as 'Real Raps' and 'Money Boy,'
+  and Shazam categorizes his track 'Forgive Us' as 'Hip-Hop/Rap' with Bobby Mabhena
+  confirmed as composer and performer. All sources consistently support the occupation
+  of 'rapper' for this South African artist.
+rcid: 2540935121
+revid: 2464725457
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.musicinafrica.net/directory/zedeye
+- provenance: verified
+  supports_claim: true
+  url: https://www.youtube.com/user/UpNorthSound
+- provenance: verified
+  supports_claim: true
+  url: https://www.shazam.com/song/1621771907/forgive-us/music-video
+timestamp: '2026-02-20T17:34:41.280758+00:00'
+title: Q138349093
+turns: 7
+value_label: rapper
+verdict: verified-high

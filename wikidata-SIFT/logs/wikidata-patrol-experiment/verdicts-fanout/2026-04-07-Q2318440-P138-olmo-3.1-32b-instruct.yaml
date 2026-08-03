@@ -1,0 +1,23 @@
+completion_tokens: 837
+cost_usd: 0.0060538
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27758
+property: P138
+property_label: named after
+rationale: The only cited reference (French Wikipedia) is unreachable due to domain
+  blocking and could not be verified. Independent sources do not provide evidence
+  that the Church of Saint George in Lod is named after Pope Victor I. Therefore,
+  the edit lacks verifiable support.
+rcid: 2550401635
+revid: 2473739291
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Église_Saint-Georges_(Lod)
+timestamp: '2026-04-07T04:29:10.970590+00:00'
+title: Q2318440
+turns: 5
+value_label: Victor I
+verdict: unverifiable

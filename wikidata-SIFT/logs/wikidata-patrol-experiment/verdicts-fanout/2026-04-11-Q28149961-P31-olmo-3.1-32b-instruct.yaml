@@ -1,0 +1,29 @@
+completion_tokens: 612
+cost_usd: 0.0031200000000000004
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13764
+property: P31
+property_label: instance of
+rationale: The term 'metaclass' is exclusively used in the context of programming
+  (specifically, as a concept in Python object-oriented design), and none of the authoritative
+  sources consulted relate 'metaclass' to botany or the classification of fruit. Therefore,
+  removing 'metaclass' as an instance of for 'type of fruit' is correct.
+rcid: null
+revid: 2468142326
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://realpython.com/python-metaclasses/
+- provenance: verified
+  supports_claim: false
+  url: https://jfreeman.dev/blog/2020/12/07/python-metaclasses/
+- provenance: verified
+  supports_claim: false
+  url: https://stackoverflow.com/questions/100003/what-are-metaclasses-in-python
+timestamp: '2026-04-11T07:36:00.863163+00:00'
+title: Q28149961
+turns: 1
+value_label: metaclass
+verdict: verified-high

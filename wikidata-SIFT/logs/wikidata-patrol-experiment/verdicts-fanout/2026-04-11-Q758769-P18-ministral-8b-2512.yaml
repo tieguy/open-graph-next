@@ -1,0 +1,30 @@
+completion_tokens: 2435
+cost_usd: 0.00300756
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 33315
+property: P18
+property_label: image
+rationale: The edit changes the preferred image for Audi Q5 from 'Audi Q5 Sportback
+  GU DSC 9268.jpg' to 'Audi Q5 GU 2.0 TDI IMG 3603.jpg'. While the 2.0 TDI engine
+  and Sportback variants are valid, there is no independent evidence confirming the
+  new image filename as the most recent or accurate representation. The edit lacks
+  references and corroboration from authoritative sources, such as Audi's official
+  website or reputable car review sites, which only mention variants but do not confirm
+  the specific filenames. The lack of references and corroboration makes this edit
+  suspect.
+rcid: 2550738233
+revid: 2474065326
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.audi.de/de/neuwagen/q5/
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/photos/g65014012/2025-audi-q5-sq5-drive-exterior-gallery/
+timestamp: '2026-04-11T05:38:31.782733+00:00'
+title: Q758769
+turns: 3
+value_label: null
+verdict: suspect

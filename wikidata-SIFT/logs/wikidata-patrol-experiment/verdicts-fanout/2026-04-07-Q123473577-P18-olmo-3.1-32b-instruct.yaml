@@ -1,0 +1,23 @@
+completion_tokens: 608
+cost_usd: 0.0049537999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22945
+property: P18
+property_label: image
+rationale: No authoritative or independently verifiable source confirms that the new
+  image 'FP Lleida Cathedral 2026 - Mare de Déu del Blau.jpg' is the correct representation
+  for Q123473577. The official website of Lleida Cathedral could not be fetched, and
+  no corroborating images or statements were found in web searches.
+rcid: 2550982395
+revid: 2474301633
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://blauslleida.com/
+timestamp: '2026-04-07T10:58:58.760514+00:00'
+title: Q123473577
+turns: 5
+value_label: null
+verdict: unverifiable

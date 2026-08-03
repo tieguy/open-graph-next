@@ -1,0 +1,32 @@
+completion_tokens: 1634
+cost_usd: 0.027645519999999996
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 100819
+property: P3602
+property_label: candidacy in election
+rationale: Multiple independent sources confirm Denis Vaigreville was a candidate
+  and was elected in the 2020 Sartrouville municipal elections. The Vosges Matin election
+  results page explicitly lists him as 'Denis VAIGREVILLE élu' on Pierre Fond's list
+  'SARTROUVILLE J'AIME MA VILLE'. The Franceinfo results page further corroborates
+  this, and his official city council profile confirms he serves as a municipal councillor.
+  The evidence strongly supports that his candidacy in the 2020 Sartrouville municipal
+  election is correct.
+rcid: 2540920916
+revid: 2464711944
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.vosgesmatin.fr/elections/resultats/elections-municipales-2020?commune=78586
+- provenance: verified
+  supports_claim: true
+  url: https://www.franceinfo.fr/elections/municipales/resultats/2020/yvelines_78/sartrouville_78500
+- provenance: verified
+  supports_claim: true
+  url: https://www.sartrouville.fr/portrait/denis-vaigreville/
+timestamp: '2026-02-21T00:53:16.612336+00:00'
+title: Q137909257
+turns: 9
+value_label: 2020 Sartrouville municipal election
+verdict: verified-high

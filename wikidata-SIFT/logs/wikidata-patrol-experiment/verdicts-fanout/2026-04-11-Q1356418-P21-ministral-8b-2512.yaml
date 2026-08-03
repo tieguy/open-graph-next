@@ -1,0 +1,34 @@
+completion_tokens: 2413
+cost_usd: 0.00636705
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 59132
+property: P21
+property_label: sex or gender
+rationale: The edit changes Salvador Sánchez’s gender from male to female, contradicting
+  all other biographical data (e.g., boxing career, awards, and death records). The
+  new value lacks credible, independent support, and the cited references (Swedish
+  and Italian Wikipedia) are invalid for Wikidata. The old value ('male') aligns with
+  established records, making the edit incorrect. No verified sources support the
+  female gender claim.
+rcid: 2550605729
+revid: 2473936719
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.boxrec.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/6954/Salvador-Sánchez
+- provenance: reported
+  supports_claim: false
+  url: https://sv.wikipedia.org/wiki/Salvador_Sánchez
+- provenance: reported
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Salvador_Sánchez
+timestamp: '2026-04-11T11:19:53.065751+00:00'
+title: Q1356418
+turns: 5
+value_label: female
+verdict: incorrect

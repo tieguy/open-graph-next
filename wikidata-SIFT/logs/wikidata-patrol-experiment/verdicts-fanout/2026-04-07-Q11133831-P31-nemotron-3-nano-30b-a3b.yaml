@@ -1,0 +1,31 @@
+completion_tokens: 744
+cost_usd: 0.003945949999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 75943
+property: P31
+property_label: instance of
+rationale: After conducting extensive searches across multiple queries and attempting
+  to fetch various URLs, no credible references were found to support the claim that
+  'Asturias' is correctly linked as an instance of 'Andoio, Tordoia'. Multiple web
+  searches returned no relevant results, and efforts to fetch page content encountered
+  blocked domains or errors. Thus, there is no verified source to confirm or deny
+  the claim, making it unverifiable.
+rcid: null
+revid: 2466804123
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Asturias
+- provenance: verified
+  supports_claim: false
+  url: http://ww25.ii.uib.no/commons-iw/htdocs/WP/
+- provenance: verified
+  supports_claim: false
+  url: https://www.turismoasturias.com/es/turismo/municipios-y-parajes/localidad-y-pueblos/andeyo
+timestamp: '2026-04-07T12:35:16.889725+00:00'
+title: Q11133831
+turns: 15
+value_label: Asturias
+verdict: unverifiable

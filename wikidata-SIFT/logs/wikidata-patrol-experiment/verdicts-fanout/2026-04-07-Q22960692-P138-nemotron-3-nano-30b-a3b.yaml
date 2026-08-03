@@ -1,0 +1,22 @@
+completion_tokens: 656
+cost_usd: 0.0047552
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92480
+property: P138
+property_label: named after
+rationale: No reliable sources were found to directly confirm or contradict the '25th
+  century' named after claim for the Northrop Grumman B-21 Raider. Multiple web searches
+  for relevant sources (e.g., 'Northrop Grumman B-21 Raider 25th century', 'B-21 Raider
+  named after century') returned no results. Sources cited on the claim (e.g., Wikipedia
+  page) could not be located or verified. As no fetched source 'verified' provenance
+  exists, the claim remains unverifiable.
+rcid: 2549246649
+revid: 2472617889
+sources: []
+timestamp: '2026-04-07T11:33:11.160596+00:00'
+title: Q22960692
+turns: 15
+value_label: 25th century
+verdict: unverifiable

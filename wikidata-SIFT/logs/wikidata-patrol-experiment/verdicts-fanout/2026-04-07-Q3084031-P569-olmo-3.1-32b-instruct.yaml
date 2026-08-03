@@ -1,0 +1,21 @@
+completion_tokens: 867
+cost_usd: 0.0049714
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22256
+property: P569
+property_label: date of birth
+rationale: No credible sources were found supporting the claim that François Bonnet
+  was born in '0 CE.' Multiple web searches and targeted checks on Mediapart.fr and
+  other news outlets did not yield any information confirming this birth date. The
+  previous date of birth (1959) should be restored in the absence of reliable evidence
+  for the new value.
+rcid: 2549514726
+revid: 2472878608
+sources: []
+timestamp: '2026-04-07T09:35:19.408771+00:00'
+title: Q3084031
+turns: 4
+value_label: null
+verdict: incorrect

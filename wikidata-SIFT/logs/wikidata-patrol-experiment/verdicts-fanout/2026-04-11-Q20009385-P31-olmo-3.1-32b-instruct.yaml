@@ -1,0 +1,26 @@
+completion_tokens: 1701
+cost_usd: 0.0033290000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11542
+property: P31
+property_label: instance of
+rationale: Independent sources confirm that Branca railway station ceased railway
+  operations in 1945 and is now disused. The Italian Wikipedia (cited source) and
+  OpenStreetMap both indicate the station is no longer in active railway use, supporting
+  the change from 'railway station' to 'former railway station'.
+rcid: 2551035902
+revid: 2474352939
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://it.wikipedia.org/w/index.php?title=Stazione_di_Branca&oldid=94779704
+- provenance: verified
+  supports_claim: true
+  url: https://www.openstreetmap.org/node/1458936578
+timestamp: '2026-04-11T13:10:53.895259+00:00'
+title: Q20009385
+turns: 1
+value_label: former railway station
+verdict: verified-high

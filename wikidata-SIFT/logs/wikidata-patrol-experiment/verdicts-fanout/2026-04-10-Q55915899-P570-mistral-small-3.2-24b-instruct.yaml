@@ -1,0 +1,28 @@
+completion_tokens: 1734
+cost_usd: 0.0017615625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14166
+property: P570
+property_label: date of death
+rationale: The edit is supported by the cited reference from the CERL Thesaurus, which
+  confirms the year of death. However, independent sources do not confirm the specific
+  date of May 15, 1696. Therefore, the verdict is `verified-low`.
+rcid: 2550900582
+revid: 2474223372
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://data.cerl.org/thesaurus/cnp01198204
+- provenance: verified
+  supports_claim: false
+  url: https://www.ancestry.com/genealogy/records/results?firstName=katharina&lastName=stahl
+- provenance: verified
+  supports_claim: false
+  url: https://www.openarchieven.nl/gra:c0e4d31a-43e7-a00e-7695-9f58f56973fd/en
+timestamp: '2026-04-10T13:22:05.437349+00:00'
+title: Q55915899
+turns: 1
+value_label: null
+verdict: verified-low

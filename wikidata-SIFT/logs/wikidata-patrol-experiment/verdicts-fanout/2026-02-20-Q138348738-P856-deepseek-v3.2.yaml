@@ -1,0 +1,33 @@
+completion_tokens: 1714
+cost_usd: 0.01736341
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 71303
+property: P856
+property_label: official website
+rationale: The reference URL https://www.bibbyfinancialservices.pl/ is indeed the
+  official website of Bibby Financial Services sp. z o.o. in Poland. The website itself
+  is a primary source that clearly identifies as the Polish operation of Bibby Financial
+  Services, with Polish-language content matching the qualifier. This is corroborated
+  by secondary sources including the Polish Factoring Association (PFA) website which
+  lists this exact website for the company. The website functions properly and contains
+  company information consistent with other claims about the entity (factoring company
+  in Poland, Warsaw headquarters).
+rcid: 2540929840
+revid: 2464720527
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/
+- provenance: verified
+  supports_claim: true
+  url: https://faktoring.pl/en/pfa-executive-committee/
+- provenance: verified
+  supports_claim: true
+  url: https://faktoring.pl/en/factoring-vs-other-services/
+timestamp: '2026-02-20T20:35:34.244972+00:00'
+title: Q138348738
+turns: 8
+value_label: null
+verdict: verified-high

@@ -1,0 +1,29 @@
+completion_tokens: 455
+cost_usd: 0.00215669375
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20959
+property: P18
+property_label: image
+rationale: The removed image claim had no references, and the web search for images
+  of Masoud Pezeshkian did not yield any specific results that could confirm or deny
+  the appropriateness of the removed image. Without direct evidence, it is impossible
+  to verify whether the removal was justified.
+rcid: 2551335010
+revid: 2474641550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/masoud-pezeshkian
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/massoud-pezeshkian?family=editorial&page=2
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/masoud-pezeshkian.html?sortBy=relevant
+timestamp: '2026-04-10T14:17:23.019431+00:00'
+title: Q5933752
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,36 @@
+completion_tokens: 1675
+cost_usd: 0.0055364
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22657
+property: P569
+property_label: date of birth
+rationale: All independent and cited sources confirm that Elias Hadaya was born on
+  31 August 1998. The cited Transfermarkt reference explicitly states 1998 and does
+  not support the claimed 1967 date. Multiple additional reputable sources corroborate
+  the 1998 birth date. Therefore, updating the date of birth to 1967 is factually
+  incorrect.
+rcid: 2549662841
+revid: 2473023071
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Elias_Hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.sandefjordfotball.no/lag/elias-hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikiwand.com/en/Elias_Hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.besoccer.com/player/elias-hadaya-384832
+timestamp: '2026-04-07T01:46:42.861296+00:00'
+title: Q89080747
+turns: 2
+value_label: null
+verdict: incorrect

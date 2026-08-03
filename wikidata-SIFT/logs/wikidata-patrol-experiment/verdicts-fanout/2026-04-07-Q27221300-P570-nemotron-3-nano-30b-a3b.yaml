@@ -1,0 +1,28 @@
+completion_tokens: 730
+cost_usd: 0.007011
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 137300
+property: P570
+property_label: date of death
+rationale: I attempted multiple searches to verify that "11 September 2011" is the
+  correct date of death for Mary Jackson. I checked for primary sources such as obituaries
+  from major publications (The New York Times, Find a Grave, Wikipedia, NASA biography
+  pages), news articles about her death in 2011, and direct references to her funeral
+  or burial. All searches returned no results ([] from web_search), indicating no
+  accessible, indexed coverage of her death on that date in reliable public sources.
+  The referenced Find a Grave memorial (ID 174900723) could not be located or confirmed,
+  and other related sources cited in the edit (e.g., Encyclopædia Britannica IDs)
+  were not found. Because I was unable to locate any direct evidence confirming the
+  2011 death date from authoritative sources, I cannot verify the edit and cannot
+  declare it verified or incorrect. This lack of corroborating information means the
+  edit is unverifiable based on the evidence available for independent confirmation.
+rcid: 2549859111
+revid: 2473215342
+sources: []
+timestamp: '2026-04-07T12:21:57.245334+00:00'
+title: Q27221300
+turns: 15
+value_label: null
+verdict: unverifiable

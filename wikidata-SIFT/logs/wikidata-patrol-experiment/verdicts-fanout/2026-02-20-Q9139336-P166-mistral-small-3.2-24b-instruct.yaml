@@ -1,0 +1,22 @@
+completion_tokens: 1324
+cost_usd: 0.01292115
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 129291
+property: P166
+property_label: award received
+rationale: The claim that Adam Bień received the "Commemorative Medal for the War
+  of 1918–1921" is not supported by any evidence. The search results and the content
+  from his personal website do not mention this award.
+rcid: 2540933997
+revid: 2464724504
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://about.adam-bien.com/
+timestamp: '2026-02-20T18:23:15.647053+00:00'
+title: Q9139336
+turns: 12
+value_label: Commemorative Medal for the War of 1918–1921
+verdict: incorrect

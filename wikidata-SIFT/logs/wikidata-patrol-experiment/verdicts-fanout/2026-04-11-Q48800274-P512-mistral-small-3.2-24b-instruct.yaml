@@ -1,0 +1,25 @@
+completion_tokens: 1403
+cost_usd: 0.00287614
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27778
+property: P512
+property_label: academic degree
+rationale: The Wikidoc profile provides clear evidence that Johannes W. Dietrich completed
+  his habilitation in 2017 at Ruhr University of Bochum. Therefore, the change from
+  "Privatdozent" to "habilitation" is correct.
+rcid: 2550594376
+revid: 2473925710
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidoc.org/index.php/User:Johannes_W._Dietrich
+- provenance: reported
+  supports_claim: false
+  url: https://www.aerzteblatt.de/archiv/193495/Medizinische-Fakultaeten-Habilitationen-im-2-Quartal-2017
+timestamp: '2026-04-11T14:06:06.346393+00:00'
+title: Q48800274
+turns: 1
+value_label: habilitation
+verdict: verified-high

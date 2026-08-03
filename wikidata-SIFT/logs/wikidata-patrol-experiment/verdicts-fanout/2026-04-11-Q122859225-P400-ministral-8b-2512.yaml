@@ -1,0 +1,27 @@
+completion_tokens: 1880
+cost_usd: 0.00220251
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18999
+property: P400
+property_label: platform
+rationale: The edit changes the platform of MicroWeb (Q122859225) from 'DOS' (Q170434)
+  to 'Intel 8088' (Q657808). The GitHub repository's README explicitly states that
+  MicroWeb requires an 'Intel 8088 or compatible CPU,' directly supporting the Intel
+  8088 platform claim. While the new value lacks a separate reference, the existing
+  GitHub reference already cited for the old value is sufficient to justify the change.
+  The edit improves specificity and accuracy, as MicroWeb is not just a DOS application
+  but specifically designed for Intel 8088 hardware. No contradictory evidence was
+  found.
+rcid: 2550751980
+revid: 2474078141
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/jhhoward/MicroWeb
+timestamp: '2026-04-11T15:49:42.644356+00:00'
+title: Q122859225
+turns: 1
+value_label: Intel 8088
+verdict: verified-high

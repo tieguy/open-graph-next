@@ -1,0 +1,29 @@
+completion_tokens: 1387
+cost_usd: 0.012900199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 60340
+property: P570
+property_label: date of death
+rationale: All authoritative historical sources agree that Nzinga of Ndongo and Matamba
+  died in the 17th century, around 1663. The claim of a 2030 death date is unsupported
+  by any verifiable source. The only cited reference is unreachable, and no independent
+  evidence corroborates this date. Therefore, the edit is incorrect.
+rcid: null
+revid: 2470777111
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nzinga_of_Ndongo
+- provenance: reported
+  supports_claim: false
+  url: https://en.unesco.org/womeninafrica/njinga-mbandi/biography
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Nzinga
+timestamp: '2026-04-07T06:09:19.711940+00:00'
+title: Q467650
+turns: 9
+value_label: null
+verdict: incorrect

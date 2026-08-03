@@ -1,0 +1,28 @@
+completion_tokens: 1580
+cost_usd: 0.0015356950000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11548
+property: P742
+property_label: pseudonym
+rationale: The sources do not support "Jodle" as a standalone pseudonym. The old value
+  "Jodle Birge" is consistently mentioned as the primary name, and there is no evidence
+  to support the change to "Jodle".
+rcid: 2549549196
+revid: 2472912429
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://music.youtube.com/channel/UCbdWwHJfuaDuNP75n43FpLA
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/3pcPbJ5oVGttgz0bZdg6Oc
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/1280848-Jodle-Birge
+timestamp: '2026-04-11T12:42:16.098951+00:00'
+title: Q6208009
+turns: 1
+value_label: null
+verdict: suspect

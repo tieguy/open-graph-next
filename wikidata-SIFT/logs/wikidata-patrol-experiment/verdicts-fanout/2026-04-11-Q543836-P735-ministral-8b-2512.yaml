@@ -1,0 +1,33 @@
+completion_tokens: 2559
+cost_usd: 0.0157098
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 121271
+property: P735
+property_label: given name
+rationale: The edit changing Pierre Bordage's given name from 'Maël' to 'Pierre' is
+  strongly supported by multiple verified sources, including the GND Integrated Authority
+  File (cited reference), obituaries, and the birth name explicitly listed as 'Pierre
+  BORDAGE'. No credible evidence supports 'Maël' as the correct given name. The new
+  value aligns with authoritative sources and the item's birth name claim.
+rcid: 2550574496
+revid: 2473906667
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.actusf.com/detail-d-un-article/pierre-bordage-nous-a-quitt%C3%A9
+- provenance: verified
+  supports_claim: true
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Pierre_Bordage
+- provenance: verified
+  supports_claim: true
+  url: https://www.noosfere.org/livres/auteur.asp?NumAuteur=28
+timestamp: '2026-04-11T18:26:27.210792+00:00'
+title: Q543836
+turns: 5
+value_label: Pierre
+verdict: verified-high

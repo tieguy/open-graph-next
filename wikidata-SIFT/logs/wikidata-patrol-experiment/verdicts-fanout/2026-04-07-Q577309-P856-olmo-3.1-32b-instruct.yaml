@@ -1,0 +1,27 @@
+completion_tokens: 1026
+cost_usd: 0.0085408
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 39626
+property: P856
+property_label: official website
+rationale: The new value https://www.spicejet.com is the official website of an Indian
+  airline and is not related to the city of Kai, Yamanashi. The previous official
+  website https://www.city.kai.yamanashi.jp/ is the correct and verified official
+  municipal site. No evidence supports the new value, and independent sources do not
+  corroborate it.
+rcid: null
+revid: 2465913168
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.kai.yamanashi.jp/
+- provenance: unverifiable
+  supports_claim: false
+  url: https://www.spicejet.com/
+timestamp: '2026-04-07T05:49:21.995032+00:00'
+title: Q577309
+turns: 5
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1840
+cost_usd: 0.003860674999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38277
+property: P3373
+property_label: sibling
+rationale: The edit changes the sibling of Cacus from Caca to Cacus. However, multiple
+  sources confirm that Caca is indeed the sister of Cacus. Changing the sibling to
+  Cacus himself is incorrect as it implies a self-referential relationship, which
+  is not supported by the sources.
+rcid: null
+revid: 2471473084
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pantheon.org/articles/c/cacus.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.perseus.tufts.edu/hopper/text?doc=Perseus:text:1999.04.0104:entry%3Dcacus-bio-1
+- provenance: verified
+  supports_claim: false
+  url: https://www.theoi.com/Gigante/GiganteKakos.html
+timestamp: '2026-04-11T08:31:11.627628+00:00'
+title: Q754686
+turns: 4
+value_label: Cacus
+verdict: suspect

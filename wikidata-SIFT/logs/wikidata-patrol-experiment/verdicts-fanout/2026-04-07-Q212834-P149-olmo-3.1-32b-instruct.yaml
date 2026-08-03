@@ -1,0 +1,30 @@
+completion_tokens: 1225
+cost_usd: 0.009300799999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42829
+property: P149
+property_label: architectural style
+rationale: No credible evidence supports 'Italian brainrot' as an architectural style
+  for 20 Fenchurch Street. Independent architectural sources consistently use standard
+  architectural terminology, and the cited Wikipedia reference could not be verified
+  due to domain blocking. The term appears to be internet meme slang rather than a
+  recognized architectural classification.
+rcid: 2549597615
+revid: 2472959637
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.skyscrapercenter.com/building/20-fenchurch/3350
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/20_Fenchurch_Street
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.co.uk/news/uk-34116610
+timestamp: '2026-04-07T04:07:36.225064+00:00'
+title: Q212834
+turns: 7
+value_label: Italian brainrot
+verdict: incorrect

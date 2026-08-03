@@ -1,0 +1,25 @@
+completion_tokens: 265
+cost_usd: 0.004449043749999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49167
+property: P106
+property_label: occupation
+rationale: The search function is currently not available, so I can't verify the occupation
+  details for Luar la L. The prefetched references do not provide any relevant information
+  about Luar la L's occupation.
+rcid: null
+revid: 2464617549
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pantheon.world/profile/occupation/pornographic-actor
+- provenance: verified
+  supports_claim: false
+  url: https://www.buenamusica.com/luar-la-l/biografia
+timestamp: '2026-04-11T09:38:33.477371+00:00'
+title: Q111008185
+turns: 4
+value_label: pornographic actor
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 1270
+cost_usd: 0.0017325625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15094
+property: P39
+property_label: position held
+rationale: The edit changes the position from 'deputy' to 'Member of the Legislative
+  Assembly of Costa Rica' for Marcelle Taylor Brown. However, there are no references
+  provided for the edit, and independent sources do not provide clear evidence to
+  support or contradict the claim. Therefore, the verdict is unverifiable.
+rcid: 2551149773
+revid: 2474464260
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://archive.ipu.org/parline-e/reports/2073.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.inamu.go.cr/marcelle-taylor-brown
+- provenance: verified
+  supports_claim: false
+  url: https://data.ipu.org/parliament/CR/CR-LC01/
+timestamp: '2026-04-11T17:07:10.522057+00:00'
+title: Q122237938
+turns: 1
+value_label: Member of the Legislative Assembly of Costa Rica
+verdict: unverifiable

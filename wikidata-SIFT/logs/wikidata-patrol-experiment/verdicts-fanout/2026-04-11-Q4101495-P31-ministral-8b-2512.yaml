@@ -1,0 +1,25 @@
+completion_tokens: 1458
+cost_usd: 0.00206538
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24958
+property: P31
+property_label: instance of
+rationale: The edit changed the instance of claim for the item labeled 'translation
+  office' from 'service provider' (Q2169973) to 'translation office' (Q4101495). The
+  new value is accurate and supported by the entity's own website (https://translationoffice.com),
+  which explicitly describes itself as a 'translation office' and 'translation agency'.
+  The old value was too generic and unsupported by any references. The change is justified
+  and correct.
+rcid: 2550753505
+revid: 2474079644
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://translationoffice.com
+timestamp: '2026-04-11T12:25:38.508655+00:00'
+title: Q4101495
+turns: 3
+value_label: translation office
+verdict: verified-high

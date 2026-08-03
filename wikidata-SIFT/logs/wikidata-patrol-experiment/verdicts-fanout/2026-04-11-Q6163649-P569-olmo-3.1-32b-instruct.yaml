@@ -1,0 +1,30 @@
+completion_tokens: 2418
+cost_usd: 0.004438
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14936
+property: P569
+property_label: date of birth
+rationale: Multiple authoritative and independent sources, including the Spanish Wikipedia,
+  the Costa Rican National Archives, and an academic publication, explicitly state
+  that Virgilio Calvo Sánchez was born on 26 August 1920. No source supports the previously
+  listed date of 1 January 1920, and several sources contradict it. Therefore, changing
+  the date of birth to 26 August 1920 is correct.
+rcid: 2551110844
+revid: 2474426475
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Virgilio_Calvo_S%C3%A1nchez
+- provenance: verified
+  supports_claim: true
+  url: https://www.archivo.gob.cr/Documentos/Lecciones/Historias/Ciudadanos/Virgilio_Calvo_Sanchez.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.scielo.cl/pdf/eh/v35n1/art04.pdf
+timestamp: '2026-04-11T15:04:41.866365+00:00'
+title: Q6163649
+turns: 1
+value_label: null
+verdict: verified-high

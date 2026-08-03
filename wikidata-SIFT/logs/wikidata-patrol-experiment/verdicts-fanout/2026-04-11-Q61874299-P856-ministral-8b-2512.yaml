@@ -1,0 +1,25 @@
+completion_tokens: 1390
+cost_usd: 0.00238863
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24211
+property: P856
+property_label: official website
+rationale: The removed reference (https://securepayments.com/) was irrelevant to Secure
+  Payment Technologies and did not support the official website claim. The removal
+  of an invalid reference is justified. However, the claim itself remains unverified
+  due to lack of independent evidence confirming the official website. Since the task
+  is to verify the correctness of the removal of the reference, not the claim itself,
+  the removal is validated as correct.
+rcid: 2550577552
+revid: 2473909589
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://securepayments.com/
+timestamp: '2026-04-11T15:20:14.226643+00:00'
+title: Q61874299
+turns: 3
+value_label: null
+verdict: verified-high

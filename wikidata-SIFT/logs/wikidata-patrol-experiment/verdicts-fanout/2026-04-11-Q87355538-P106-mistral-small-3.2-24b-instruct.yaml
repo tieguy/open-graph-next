@@ -1,0 +1,26 @@
+completion_tokens: 2848
+cost_usd: 0.00183864
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16038
+property: P106
+property_label: occupation
+rationale: The evidence consistently supports that Yoramu Bamunoba's occupation is
+  'Anglican bishop' and does not support the claim that his occupation is 'Nkondo
+  Primary School'. The change from 'Anglican bishop' to 'Nkondo Primary School' is
+  incorrect.
+rcid: 2550811220
+revid: 2474135847
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.monitor.co.ug/uganda/magazines/life/bishop-bamunoba-a-pillar-of-education-in-bushenyi-1775430
+- provenance: verified
+  supports_claim: true
+  url: https://www.westernfocusmagazine.com/the-50-bushenyi-people-awarded-for-what-greater-bushenyi-is/
+timestamp: '2026-04-11T14:34:38.631323+00:00'
+title: Q87355538
+turns: 1
+value_label: Nkondo Primary School
+verdict: incorrect

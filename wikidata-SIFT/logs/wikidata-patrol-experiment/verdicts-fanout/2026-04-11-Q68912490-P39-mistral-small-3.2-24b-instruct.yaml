@@ -1,0 +1,28 @@
+completion_tokens: 1326
+cost_usd: 0.006001825
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 61912
+property: P39
+property_label: position held
+rationale: The sources confirm that Johann Wepelitz was the Bishop of Havelberg, but
+  the additional qualifier 'Roman Catholic' is not explicitly verified. The edit is
+  plausible but lacks explicit confirmation for the full title.
+rcid: 2550969990
+revid: 2474289516
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/country/bde.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/country/bdec.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/country/bdei.html
+timestamp: '2026-04-11T18:45:50.947526+00:00'
+title: Q68912490
+turns: 5
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-low

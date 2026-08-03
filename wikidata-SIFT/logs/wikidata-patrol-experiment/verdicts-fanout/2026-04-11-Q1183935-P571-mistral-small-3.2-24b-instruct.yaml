@@ -1,0 +1,23 @@
+completion_tokens: 1252
+cost_usd: 0.0070608625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70614
+property: P571
+property_label: inception
+rationale: The TV Encyclopedia page indicates that Cartoon Network launched on October
+  1, 1992, which contradicts both the old and new values provided in the edit. Given
+  the contradiction and the lack of reliable sources supporting the new value, the
+  edit to change the inception date to October 1, 1981, appears to be incorrect.
+rcid: 2551080856
+revid: 2474396985
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvencyclopedia.org/tv-encyclopedia-3/cartoon-network
+timestamp: '2026-04-11T12:33:00.710999+00:00'
+title: Q1183935
+turns: 7
+value_label: null
+verdict: incorrect

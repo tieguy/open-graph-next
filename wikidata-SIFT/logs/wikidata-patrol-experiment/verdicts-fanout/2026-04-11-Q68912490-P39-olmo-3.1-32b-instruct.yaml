@@ -1,0 +1,26 @@
+completion_tokens: 1948
+cost_usd: 0.0049828
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19070
+property: P39
+property_label: position held
+rationale: Catholic-Hierarchy.org explicitly identifies Johann Wepelitz as the Bishop
+  of Havelberg, confirming that the specific position 'Roman Catholic Bishop of Havelberg'
+  is correct. This replaces the less specific 'bishop', improving the accuracy and
+  specificity of the claim. No evidence supports retaining the generic label.
+rcid: 2550969990
+revid: 2474289516
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/country/bde.html
+- provenance: reported
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Johann_W%C3%B6pelitz
+timestamp: '2026-04-11T18:45:51.802716+00:00'
+title: Q68912490
+turns: 1
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

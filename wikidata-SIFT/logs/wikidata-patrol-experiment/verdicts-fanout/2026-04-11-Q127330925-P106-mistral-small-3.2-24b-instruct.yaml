@@ -1,0 +1,18 @@
+completion_tokens: 129
+cost_usd: 0.0027673249999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 30764
+property: P106
+property_label: occupation
+rationale: I was unable to fetch any sources to verify the claim due to a search error.
+  Therefore, the claim cannot be verified at this time.
+rcid: 2550603312
+revid: 2473934363
+sources: []
+timestamp: '2026-04-11T14:38:33.492756+00:00'
+title: Q127330925
+turns: 3
+value_label: SEO specialist
+verdict: unverifiable

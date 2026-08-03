@@ -1,0 +1,30 @@
+completion_tokens: 1328
+cost_usd: 0.004111
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16571
+property: P1559
+property_label: name in native language
+rationale: The new value 'le mongol de coussin de léandre' is not supported by any
+  credible, independently verifiable sources. All reputable cycling and biographical
+  sources consistently list Christophe Bassons by his standard name, and the edit
+  was reverted on Wikipedia. No primary or secondary sources mention the alternate
+  phrase, and the change appears to be erroneous or a vandalism attempt.
+rcid: 2549515198
+revid: 2472879071
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://procyclingstats.com/rider/christophe-bassons
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Christophe_Bassons
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Christophe_Bassons
+timestamp: '2026-04-11T10:13:46.500832+00:00'
+title: Q328034
+turns: 1
+value_label: null
+verdict: incorrect

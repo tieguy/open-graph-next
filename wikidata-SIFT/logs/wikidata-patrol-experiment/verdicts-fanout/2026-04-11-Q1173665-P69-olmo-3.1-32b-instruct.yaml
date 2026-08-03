@@ -1,0 +1,27 @@
+completion_tokens: 338
+cost_usd: 0.003693
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17451
+property: P69
+property_label: educated at
+rationale: The source fetched from bibliolore.org states that Richard Taruskin 'learned
+  cello at the High School of Music & Art in Manhattan and studied musicology at Columbia
+  University.' This directly supports the previous value (High School of Music & Art)
+  as the institution where he studied cello, and Columbia University as where he studied
+  musicology. Changing 'educated at' from High School of Music & Art to Columbia University
+  conflates his early and later education and is not supported by the available evidence,
+  which indicates both were relevant to his education. The change appears to be a
+  conflation rather than a correction.
+rcid: 2550714893
+revid: 2474042742
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bibliolore.org/2024/04/16/richard-taruskin-musicologist-music-critic-and-interpreter-of-early-music/
+timestamp: '2026-04-11T14:04:57.014041+00:00'
+title: Q1173665
+turns: 1
+value_label: Columbia University
+verdict: suspect

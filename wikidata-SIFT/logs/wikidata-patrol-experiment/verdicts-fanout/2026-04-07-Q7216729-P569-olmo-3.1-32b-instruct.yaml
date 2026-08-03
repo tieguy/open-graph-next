@@ -1,0 +1,24 @@
+completion_tokens: 1058
+cost_usd: 0.0063750000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28701
+property: P569
+property_label: date of birth
+rationale: The edit cites the Korean Authority File (KAC201008665) as the source for
+  Lee Hye-gyeong's date of birth (16 June 1960). However, the National Library of
+  Korea website could not be navigated to confirm this information, and no independent,
+  reliable source was found that states this date of birth. As a result, the claim
+  cannot be verified or denied based on accessible evidence.
+rcid: null
+revid: 2470809082
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.klri.re.kr/kor/home.do
+timestamp: '2026-04-07T12:14:51.465923+00:00'
+title: Q7216729
+turns: 5
+value_label: null
+verdict: unverifiable

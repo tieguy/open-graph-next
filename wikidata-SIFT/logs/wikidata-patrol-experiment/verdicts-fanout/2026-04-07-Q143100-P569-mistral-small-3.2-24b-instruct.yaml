@@ -1,0 +1,17 @@
+completion_tokens: 322
+cost_usd: 0.00966521875
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 109470
+property: P569
+property_label: date of birth
+rationale: null
+rcid: 2550063810
+revid: 2473410912
+sources: []
+timestamp: '2026-04-07T10:05:44.283426+00:00'
+title: Q143100
+turns: 15
+value_label: null
+verdict: null

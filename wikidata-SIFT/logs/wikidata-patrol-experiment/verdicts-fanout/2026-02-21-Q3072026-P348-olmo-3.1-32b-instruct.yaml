@@ -1,0 +1,36 @@
+completion_tokens: 1512
+cost_usd: 0.0054842
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22885
+property: P348
+property_label: software version identifier
+rationale: The claim that HyperCam's version identifier is '6.2.2404.10' cannot be
+  verified because the official vendor page providing the authoritative version history
+  returned a 404 error and could not be fetched. Third-party sources mention this
+  version, but they are not primary or authoritative. Without a verifiable official
+  source, the edit is unverifiable.
+rcid: 2541056707
+revid: 2464838781
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.solveigmm.com/en/products/hypercam/
+- provenance: verified
+  supports_claim: false
+  url: https://www.solveigmm.com/en/downloads/
+- provenance: verified
+  supports_claim: false
+  url: https://www.solveigmm.com/en/support/doc/hypercam/whats-new.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.solveigmm.com/en/products/hypercam/history/home-edition/
+- provenance: reported
+  supports_claim: true
+  url: https://filehippo.com/download_hypercam/6.2.2404.10/
+timestamp: '2026-02-21T03:13:47.809481+00:00'
+title: Q3072026
+turns: 3
+value_label: null
+verdict: unverifiable

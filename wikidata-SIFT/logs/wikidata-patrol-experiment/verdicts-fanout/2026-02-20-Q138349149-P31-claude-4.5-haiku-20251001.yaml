@@ -1,0 +1,30 @@
+completion_tokens: 2634
+cost_usd: 0.084911
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 71741
+property: P31
+property_label: instance of
+rationale: The classification of Altair Data Resources, Inc. as an 'enterprise' is
+  well-supported by evidence. The company's own Terms of Service directly confirm
+  it is a 'Tennessee S-corporation,' a legal business entity producing goods and services.
+  Wikidata's definition of enterprise as 'organizational unit producing goods or services,
+  which benefits from a certain degree of autonomy in decision-making' precisely matches
+  Altair's status as a private S-corporation providing data and analytics services.
+  Multiple independent business directories consistently classify it as a commercial
+  business entity.
+rcid: 2540935551
+revid: 2464725878
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://altairdata.com/terms-of-service/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbb.org/us/tn/brentwood/profile/marketing-programs/altair-data-resources-inc-0573-37021086
+timestamp: '2026-02-20T17:18:42.907733+00:00'
+title: Q138349149
+turns: 7
+value_label: enterprise
+verdict: verified-high

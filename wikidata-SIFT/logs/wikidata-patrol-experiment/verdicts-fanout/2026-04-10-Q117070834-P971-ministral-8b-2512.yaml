@@ -1,0 +1,32 @@
+completion_tokens: 2817
+cost_usd: 0.00459021
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 49532
+property: P971
+property_label: category combines topics
+rationale: The new category 'persons active in this association' (Q104216787) is too
+  broad and does not accurately reflect the specific role of 'volleyball coach' for
+  the Wikimedia category 'UC Santa Barbara Gauchos men's volleyball coaches'. The
+  original category (Q20730881) was precise and appropriate. More specific categories
+  such as 'Sports coaches' or 'Coaches of [specific team]' are available and would
+  be more accurate. The change is incorrect as it replaces a precise category with
+  a vague one.
+rcid: 2550308138
+revid: 2473647927
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Sports_coaches
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Sports_coaches_by_sport
+- provenance: verified
+  supports_claim: false
+  url: https://ucsbgauchos.com/sports/mens-volleyball/coaches
+timestamp: '2026-04-10T10:45:01.083229+00:00'
+title: Q117070834
+turns: 5
+value_label: persons active in this association
+verdict: incorrect

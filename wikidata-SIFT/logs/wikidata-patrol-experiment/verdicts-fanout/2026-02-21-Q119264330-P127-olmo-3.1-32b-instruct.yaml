@@ -1,0 +1,23 @@
+completion_tokens: 1293
+cost_usd: 0.0066482
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29362
+property: P127
+property_label: owned by
+rationale: The only cited reference for the ownership claim is Art UK, which could
+  not be directly accessed or verified in this investigation. No independent or primary
+  source confirms that the painting is owned by William Morris, 1st Viscount Nuffield.
+  Ownership of artworks requires reliable primary documentation, which was not found.
+rcid: 2540919649
+revid: 2464710726
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://artuk.org/discover/artworks/christopher-maude-chavasse-18841962-founding-first-master-of-st-peters-hall-19281939-223499
+timestamp: '2026-02-21T01:29:56.308034+00:00'
+title: Q119264330
+turns: 3
+value_label: William Morris, 1st Viscount Nuffield
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 1129
+cost_usd: 0.00339221875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33173
+property: P26
+property_label: spouse
+rationale: The change from Nancy Ajram to Ahlam as the spouse of Mubarak Al-Hajiri
+  is supported by multiple independent sources. There is no evidence to support Nancy
+  Ajram as the spouse.
+rcid: null
+revid: 2471852029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://platinumlist.net/artist/968/ahlam
+- provenance: verified
+  supports_claim: true
+  url: https://www.albawaba.com/entertainment/ahlam-al-shamsi-and-mubarak-al-hajri-divorced-1438169
+timestamp: '2026-04-11T15:17:12.658850+00:00'
+title: Q12238493
+turns: 4
+value_label: Ahlam
+verdict: verified-high

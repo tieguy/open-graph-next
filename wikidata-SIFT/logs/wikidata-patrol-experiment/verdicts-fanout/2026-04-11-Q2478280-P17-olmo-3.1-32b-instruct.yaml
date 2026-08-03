@@ -1,0 +1,34 @@
+completion_tokens: 3141
+cost_usd: 0.0050666
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15910
+property: P17
+property_label: country
+rationale: The claim that Ormus (Historically the Kingdom of Hormuz) belonged to the
+  United Arab Emirates is historically inaccurate for the vast majority of its existence.
+  Ormus was an independent kingdom and later a vassal of the Portuguese (1507–1622),
+  then under Persian, Ottoman, and Omani control. It only became part of the UAE after
+  annexation by Fujairah in 1952 and the formation of the UAE in 1971. Assigning 'United
+  Arab Emirates' as the country without temporal qualifiers misrepresents the historical
+  facts. The previous value, 'Portuguese Empire', was historically accurate for the
+  period 1507–1622 (the item's date range is close and plausible). The edit should
+  be reverted or corrected to reflect the correct historical timeline.
+rcid: 2551247420
+revid: 2474558825
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/place/Ormuz
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/place/Hormuz
+- provenance: verified
+  supports_claim: false
+  url: https://www.iranicaonline.org/articles/hormuz
+timestamp: '2026-04-11T14:22:59.213985+00:00'
+title: Q2478280
+turns: 1
+value_label: United Arab Emirates
+verdict: suspect

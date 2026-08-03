@@ -1,0 +1,26 @@
+completion_tokens: 932
+cost_usd: 0.008379600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 39102
+property: P17
+property_label: country
+rationale: There is no evidence supporting the claim that Afghanistan is the country
+  associated with Taringa!. The edit changes the country from Argentina to Afghanistan
+  without any references or supporting evidence. The official website and prior item
+  state strongly associate Taringa! with Argentina. Therefore, this update is incorrect.
+rcid: 2550475083
+revid: 2473811409
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.taringa.net/
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Taringa!
+timestamp: '2026-04-08T19:01:00.369031+00:00'
+title: Q2035715
+turns: 7
+value_label: Afghanistan
+verdict: incorrect

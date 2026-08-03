@@ -1,0 +1,22 @@
+completion_tokens: 831
+cost_usd: 0.00138627875
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14905
+property: P973
+property_label: described at URL
+rationale: The URL "https://www.w3.org/wiki/SemanticWebDOAPBulletinBoard" is a valid
+  and relevant description of DOAP. The content of the URL supports its inclusion
+  as a described at URL for DOAP. Therefore, the removal of this URL is incorrect.
+rcid: 2550591142
+revid: 2473922634
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.w3.org/wiki/SemanticWebDOAPBulletinBoard
+timestamp: '2026-04-07T10:00:05.953390+00:00'
+title: Q5205836
+turns: 2
+value_label: null
+verdict: incorrect

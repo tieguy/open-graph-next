@@ -1,0 +1,38 @@
+completion_tokens: 1596
+cost_usd: 0.005204625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51260
+property: P973
+property_label: described at URL
+rationale: Multiple primary and secondary sources, including press releases from the
+  Sabin Vaccine Institute and news articles, confirm that Wendy Holman has joined
+  the Sabin Vaccine Institute Board of Trustees. The evidence is consistent and reliable,
+  supporting the edit.
+rcid: 2551338268
+revid: 2474644591
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sabin.org/updates/pressreleases/wendy-holman-joins-sabin-vaccine-institute-board-trustees?language=ru
+- provenance: verified
+  supports_claim: true
+  url: https://www.sabin.org/resources/sabin-vaccine-institute-elects-new-trustees-bringing-expertise-to-support-program-growth/
+- provenance: verified
+  supports_claim: true
+  url: https://www.sabin.org/resources/dr-regina-rabinovich-succeeds-dr-axel-hoos-as-sabin-vaccine-institute-board-chair-drs-norman-baylor-and-joann-suzich-join-the-board/
+- provenance: verified
+  supports_claim: true
+  url: https://www.sabin.org/board-trustees
+- provenance: verified
+  supports_claim: true
+  url: https://www.globenewswire.com/news-release/2019/08/13/1901007/0/en/Sabin-Vaccine-Institute-Elects-New-Trustees-Bringing-Expertise-to-Support-Program-Growth.html
+- provenance: verified
+  supports_claim: true
+  url: https://itif.org/person/wendy-commins-holman/
+timestamp: '2026-04-10T14:02:00.083320+00:00'
+title: Q110968992
+turns: 3
+value_label: null
+verdict: verified-high

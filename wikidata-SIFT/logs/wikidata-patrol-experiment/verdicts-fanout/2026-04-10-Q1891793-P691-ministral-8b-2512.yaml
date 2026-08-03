@@ -1,0 +1,34 @@
+completion_tokens: 2320
+cost_usd: 0.0023769
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22256
+property: P691
+property_label: NL CR AUT ID
+rationale: The removed claim that Moroccans (Q1891793) have the NL CR AUT ID 'ph117830'
+  was unsupported by any credible or authoritative source. No independent or primary
+  source confirmed the existence of this specific ID for Moroccans in the Netherlands.
+  The removal is justified as the claim lacked evidence and was not referenced. The
+  CR AUT ID system is individual-specific, and there is no indication that Moroccans
+  are collectively registered under this ID.
+rcid: 2550702324
+revid: 2474030410
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://immigration-netherlands.com/immigrate-to-the-netherlands-from-morocco/
+- provenance: verified
+  supports_claim: false
+  url: https://www.cia.gov/library/publications/the-world-factbook/geos/mo.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.netherlandsandyou.nl/web/morocco
+- provenance: verified
+  supports_claim: false
+  url: https://www.netherlandsworldwide.nl/passport-id-card/abroad/apply-morocco
+timestamp: '2026-04-10T13:30:41.537290+00:00'
+title: Q1891793
+turns: 2
+value_label: null
+verdict: verified-high

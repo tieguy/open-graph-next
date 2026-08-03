@@ -1,0 +1,29 @@
+completion_tokens: 1096
+cost_usd: 0.008047400000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 36949
+property: P31
+property_label: instance of
+rationale: The edit changes Manon Bannerman's instance of from 'human' to 'deity'
+  without any supporting references or evidence. Multiple web searches and attempts
+  to fetch reliable sources found no indication that she is anything but a human singer
+  and model. There is clear contradiction to the claim.
+rcid: null
+revid: 2471148444
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Katseye_(group)
+- provenance: reported
+  supports_claim: false
+  url: https://recreio.com.br/noticias/entretenimento/qual-e-a-idade-das-integrantes-do-katseye.phtml
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T13:41:00.538278+00:00'
+title: Q124692741
+turns: 7
+value_label: deity
+verdict: incorrect

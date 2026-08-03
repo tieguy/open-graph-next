@@ -1,0 +1,23 @@
+completion_tokens: 364
+cost_usd: 0.00476299375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52339
+property: P140
+property_label: religion or worldview
+rationale: The investigation encountered errors while attempting to search for information
+  about Pōmare IV's religion. The search service returned a payment error, and access
+  to Wikipedia was blocked. Without access to reliable sources, it is not possible
+  to verify the claim.
+rcid: 2550612871
+revid: 2473943666
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/P%C5%8Dmare_IV
+timestamp: '2026-04-11T13:39:27.440151+00:00'
+title: Q466838
+turns: 5
+value_label: religious syncretism
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 649
+cost_usd: 0.0005994
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 9392
+property: P570
+property_label: date of death
+rationale: The edit adds a date of death of 1 January 2025 with only a Wikimedia Commons
+  import reference, which is not a reliable primary source. No independent secondary
+  or primary sources confirming this specific death date were found after searching
+  the web. The cited source is to Wikimedia project metadata rather than an authoritative
+  external record, and no verifiable source was successfully fetched to support the
+  claim.
+rcid: 2549906557
+revid: 2473261319
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q6208009
+timestamp: '2026-04-07T06:22:26.446833+00:00'
+title: Q6208009
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 1953
+cost_usd: 0.008156700000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 71523
+property: P2949
+property_label: WikiTree person ID
+rationale: The new WikiTree ID ('Schultz-11304') is correct and standardized, while
+  the old ID ('Shultz-2442') was either misspelled or a legacy entry. Independent
+  verification via WikiTree profiles confirms the new ID accurately represents Nicholas
+  Brendon Schultz. The change resolves a clear error and aligns with WikiTree's naming
+  conventions.
+rcid: 2550732896
+revid: 2474060101
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikitree.com/wiki/Schultz-11304
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikitree.com/wiki/Shultz-2442
+timestamp: '2026-04-11T14:18:05.807519+00:00'
+title: Q434778
+turns: 5
+value_label: null
+verdict: verified-high

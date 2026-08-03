@@ -1,0 +1,29 @@
+completion_tokens: 1672
+cost_usd: 0.004909
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19529
+property: P31
+property_label: instance of
+rationale: The edit is supported by independent definitions of 'online newspaper'
+  and by direct observation that Money.it is an active online news publication. However,
+  the edit was unreferenced and could be improved by citing a source and potentially
+  using a more specific property if available.
+rcid: 2540925077
+revid: 2464715929
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.money.it
+- provenance: verified
+  supports_claim: true
+  url: https://blog.quintype.com/industry/online-newspaper-what-you-need-to-know
+- provenance: verified
+  supports_claim: true
+  url: https://www.collinsdictionary.com/us/dictionary/english/online-newspaper
+timestamp: '2026-02-20T22:48:09.052201+00:00'
+title: Q138347575
+turns: 3
+value_label: online newspaper
+verdict: verified-low

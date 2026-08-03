@@ -1,0 +1,32 @@
+completion_tokens: 1844
+cost_usd: 0.005529325
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55777
+property: P18
+property_label: image
+rationale: The investigation did not find clear evidence supporting the change from
+  'Honda Civic (FE) Washington DC Metro Area, USA.jpg' to '2022 Honda Civic EX, front
+  10.29.21.jpg'. The sources consulted do not provide direct confirmation or denial
+  of the new image value.
+rcid: 2550729228
+revid: 2474056611
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://cars.usnews.com/cars-trucks/honda/civic/photos-exterior
+- provenance: verified
+  supports_claim: false
+  url: https://stock.adobe.com/search?k=honda+civic
+- provenance: verified
+  supports_claim: false
+  url: https://www.edmunds.com/honda/civic/2026/pictures/
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/honda/civic
+timestamp: '2026-04-11T16:29:59.661677+00:00'
+title: Q216747
+turns: 8
+value_label: null
+verdict: unverifiable

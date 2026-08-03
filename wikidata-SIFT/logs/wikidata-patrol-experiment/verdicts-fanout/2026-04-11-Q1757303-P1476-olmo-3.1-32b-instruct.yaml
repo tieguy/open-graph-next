@@ -1,0 +1,26 @@
+completion_tokens: 1689
+cost_usd: 0.004605
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17958
+property: P1476
+property_label: title
+rationale: The edit changed the title from 'Fuck You' to 'Fuc You'. Multiple authoritative
+  sources, including Rolling Stone and Genius, consistently use the title 'Fuck You'.
+  There is no evidence that the correct title is 'Fuc You', and this appears to be
+  a typographical error.
+rcid: 2550745424
+revid: 2474071948
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20100315154517/http://www.rollingstone.com/reviews/album/25574875/review/25885625
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/Markacek-i-always-wanted-to-title-a-song-fuck-you-lyrics
+timestamp: '2026-04-11T18:20:36.167358+00:00'
+title: Q1757303
+turns: 1
+value_label: null
+verdict: incorrect

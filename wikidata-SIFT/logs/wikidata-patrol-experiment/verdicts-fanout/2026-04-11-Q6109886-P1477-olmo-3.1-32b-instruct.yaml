@@ -1,0 +1,34 @@
+completion_tokens: 1612
+cost_usd: 0.003851
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14419
+property: P1477
+property_label: birth name
+rationale: The previous birth name 'Roberto Armando Musso Focaccio' is consistently
+  reported by reliable independent sources such as the Spanish Wikipedia and music
+  biographies. The new name 'Roberto Pancracio Musso esquividi' is not corroborated
+  by any independent or reliable sources. The only cited reference supporting the
+  new value is unreachable, and no other sources confirm it. Therefore, the change
+  to the birth name is unsupported and incorrect.
+rcid: 2551399658
+revid: 2474703473
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Roberto_Musso
+- provenance: verified
+  supports_claim: false
+  url: https://rockuruguayo.com/artistas/el-cuarteto-de-nos/
+- provenance: verified
+  supports_claim: false
+  url: https://happyhappybirthday.net/es/age/roberto-musso-person_gealqqg
+- provenance: reported
+  supports_claim: false
+  url: https://marvin.com.mx/el-cuarteto-de-nos-entrevista-roberto-daniel-musso/
+timestamp: '2026-04-11T14:17:49.620942+00:00'
+title: Q6109886
+turns: 1
+value_label: null
+verdict: incorrect

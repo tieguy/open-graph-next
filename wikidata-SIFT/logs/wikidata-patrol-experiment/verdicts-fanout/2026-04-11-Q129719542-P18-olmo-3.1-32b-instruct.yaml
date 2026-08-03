@@ -1,0 +1,41 @@
+completion_tokens: 535
+cost_usd: 0.00372
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16995
+property: P18
+property_label: image
+rationale: Neither the new image 'Bonnie Blue, July 2025 (cropped).jpg' nor the old
+  image 'Bonnie Blue on Holly Randall Unfiltered.jpg' could be independently verified
+  as representing Bonnie Blue at the stated time or as an authentic, current image
+  via fetched and verified sources. While multiple pornographic databases list Bonnie
+  Blue and provide descriptive and biographical information, none provided a direct,
+  current image link or confirmation of the specific image filenames cited in the
+  edit. Getty Images and third-party aggregators show Bonnie Blue-related images but
+  do not confirm the specific filenames or their authenticity. The Sun article does
+  not provide an image of Bonnie Blue. Therefore, there is insufficient evidence to
+  confirm the edit's correctness.
+rcid: 2550508122
+revid: 2473843061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://de.pornopedia.com/wiki/Bonnie_Blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.boopedia.com/boobs/Bonnie_Blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/bonnie-blue
+- provenance: verified
+  supports_claim: false
+  url: https://www.pornpics.com/pornstars/bonnie-blue/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thesun.co.uk/fabulous/33574285/bonnie-blue-pregnancy-bullied-looks-porn-star/
+timestamp: '2026-04-11T13:07:03.677613+00:00'
+title: Q129719542
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,20 @@
+completion_tokens: 2792
+cost_usd: 0.00436615
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76155
+property: P18
+property_label: image
+rationale: The image change cannot be verified as correct due to lack of public documentation
+  for either the new image or its connection to energy drinks. No reliable sources
+  confirm this image is appropriate, and it was reverted by another editor. Both the
+  old and new images lack references in their claims.
+rcid: 2549869901
+revid: 2473225851
+sources: []
+timestamp: '2026-04-07T03:15:52.890709+00:00'
+title: Q215754
+turns: 12
+value_label: null
+verdict: unverifiable

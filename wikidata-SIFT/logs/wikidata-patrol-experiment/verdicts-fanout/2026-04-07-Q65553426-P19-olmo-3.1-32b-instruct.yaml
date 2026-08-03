@@ -1,0 +1,26 @@
+completion_tokens: 1124
+cost_usd: 0.0102718
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47987
+property: P19
+property_label: place of birth
+rationale: The only cited reference is a Polish Wikipedia page that could not be fetched
+  due to domain blocking. Multiple web searches did not locate any independently accessible,
+  reliable source confirming or denying that Mieczysław Grabowski was born in Vilnius.
+  Without verifiable evidence, the claim cannot be assessed.
+rcid: null
+revid: 2468481710
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://pl.wikipedia.org/wiki/Mieczysław_Jerzy_Grabowski
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T04:12:23.763863+00:00'
+title: Q65553426
+turns: 7
+value_label: Vilnius
+verdict: unverifiable

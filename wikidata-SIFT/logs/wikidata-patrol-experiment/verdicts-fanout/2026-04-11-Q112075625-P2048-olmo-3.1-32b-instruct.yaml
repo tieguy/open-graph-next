@@ -1,0 +1,28 @@
+completion_tokens: 1492
+cost_usd: 0.004411
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17579
+property: P2048
+property_label: height
+rationale: No independent, reliable source provides Daniel Noboa's height, neither
+  for the old value (+170) nor the new value (+160). Both claims lack citations and
+  corroborating evidence from reputable outlets or official biographies.
+rcid: null
+revid: 2470904177
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/mundo/articles/c7291r4xxneo
+- provenance: verified
+  supports_claim: false
+  url: https://www.astrotheme.com/astrology/Daniel_Noboa_Azin
+- provenance: verified
+  supports_claim: false
+  url: https://www.presidencia.gob.ec/
+timestamp: '2026-04-11T16:12:26.557133+00:00'
+title: Q112075625
+turns: 1
+value_label: null
+verdict: unverifiable

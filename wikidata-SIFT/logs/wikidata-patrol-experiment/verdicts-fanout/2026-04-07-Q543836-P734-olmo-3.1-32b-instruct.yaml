@@ -1,0 +1,30 @@
+completion_tokens: 1650
+cost_usd: 0.030793000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 149015
+property: P734
+property_label: family name
+rationale: There is no credible evidence that Pierre Bordage's family name should
+  be changed to 'Delporte'. The only cited reference is a fan community site stating
+  a heuristic inference from the full name, which is not sufficient evidence. Major
+  biographical and bibliographical sources consistently use 'Bordage' as his family
+  name. Changing an established identity to an unsupported name is incorrect.
+rcid: 2550574094
+revid: 2473906272
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.noosfere.org/rosny/historique2.asp
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Pierre_Bordage
+- provenance: reported
+  supports_claim: false
+  url: https://babelio.com/auteur/pierre-bordage
+timestamp: '2026-04-07T05:31:47.516223+00:00'
+title: Q543836
+turns: 11
+value_label: Delporte
+verdict: incorrect

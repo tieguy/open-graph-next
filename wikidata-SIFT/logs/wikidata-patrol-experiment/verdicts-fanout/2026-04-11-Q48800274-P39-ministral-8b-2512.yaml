@@ -1,0 +1,26 @@
+completion_tokens: 1762
+cost_usd: 0.01393446
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 129298
+property: P39
+property_label: position held
+rationale: The claim that Johannes W. Dietrich holds a generic 'professorship' (Q81752537)
+  is incorrect based on verified evidence. Independent sources confirm he is a **Professor**
+  at Ruhr University Bochum, which is a more specific and accurate academic title.
+  The generic claim does not reflect his actual position and is therefore inaccurate.
+rcid: 2550594182
+revid: 2473925546
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://philpeople.org/profiles/johannes-w-dietrich
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Johannes-W-Dietrich
+timestamp: '2026-04-11T13:35:44.935798+00:00'
+title: Q48800274
+turns: 8
+value_label: professorship
+verdict: incorrect

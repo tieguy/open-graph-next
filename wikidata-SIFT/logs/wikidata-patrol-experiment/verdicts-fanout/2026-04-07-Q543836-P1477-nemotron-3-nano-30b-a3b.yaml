@@ -1,0 +1,26 @@
+completion_tokens: 704
+cost_usd: 0.01199505
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 237085
+property: P1477
+property_label: birth name
+rationale: Despite extensive searching across multiple sources, no verified information
+  confirms that 'Maël DELOPRTE' is the correct birth name of Pierre Bordage. Post-edit
+  references point to public sources like ObalkyKnih, but these show the author's
+  name as 'Pierre Bordage' in official records without any mention of a name change
+  to 'Maël DELOPRTE'. No primary documents (e.g., birth certificates) referencing
+  'Maël DELOPRTE' were found, and no credible evidence supports a legitimate name
+  change.
+rcid: 2550574351
+revid: 2473906527
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.obalkyknih.cz/view_auth?auth_id=xx0161037
+timestamp: '2026-04-07T11:48:02.452089+00:00'
+title: Q543836
+turns: 15
+value_label: null
+verdict: unverifiable

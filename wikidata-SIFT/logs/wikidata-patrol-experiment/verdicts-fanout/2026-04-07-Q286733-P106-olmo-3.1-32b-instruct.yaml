@@ -1,0 +1,27 @@
+completion_tokens: 970
+cost_usd: 0.0054254
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24217
+property: P106
+property_label: occupation
+rationale: There is no independently verifiable evidence that Ximena Navarrete has
+  worked as an actress in film or television. The cited reference is from a modeling
+  directory, not a credible acting credit source. Multiple attempts to find authoritative
+  confirmation (e.g., IMDb, Wikipedia filmography) did not yield accessible, reliable
+  sources supporting the 'actress' claim.
+rcid: null
+revid: 2470550904
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm4047805/
+- provenance: reported
+  supports_claim: false
+  url: https://www.babesdirectory.com/profile/ximena-navarrete
+timestamp: '2026-04-07T08:34:42.766950+00:00'
+title: Q286733
+turns: 3
+value_label: actress
+verdict: suspect

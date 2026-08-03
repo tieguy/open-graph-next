@@ -1,0 +1,39 @@
+completion_tokens: 1496
+cost_usd: 0.025878099999999998
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 86316
+property: P31
+property_label: instance of
+rationale: The claim that Altair Data Resources, Inc. is an instance of 'enterprise'
+  is strongly supported by multiple verified sources. The company's own website describes
+  it as providing data-driven marketing solutions, analytics, and technology services,
+  which aligns precisely with the Wikidata definition of an enterprise as an 'organizational
+  unit producing goods or services.' Independent business directories like the Mortgage
+  Bankers Association member list and the Better Business Bureau profile confirm its
+  existence as a professional services business entity. No contradictory evidence
+  was found.
+rcid: 2540935551
+revid: 2464725878
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://altairdata.com/company-overview/
+- provenance: verified
+  supports_claim: true
+  url: https://altairdata.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.mba.org/membership/mba-member-companies
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbb.org/us/tn/brentwood/profile/marketing-programs/altair-data-resources-inc-0573-37021086
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q6881511
+timestamp: '2026-02-20T17:17:50.999424+00:00'
+title: Q138349149
+turns: 9
+value_label: enterprise
+verdict: verified-high

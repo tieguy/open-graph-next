@@ -1,0 +1,25 @@
+completion_tokens: 1253
+cost_usd: 0.0049519
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45760
+property: P856
+property_label: official website
+rationale: The website https://www.team-building-paca.fr/ is confirmed to be the official
+  website of Team-Building-paca through direct evidence from the website itself and
+  independent sources. The evidence strongly supports the claim.
+rcid: 2540937304
+revid: 2464727023
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/activites/
+timestamp: '2026-02-20T16:40:44.996102+00:00'
+title: Q138348741
+turns: 5
+value_label: null
+verdict: verified-high

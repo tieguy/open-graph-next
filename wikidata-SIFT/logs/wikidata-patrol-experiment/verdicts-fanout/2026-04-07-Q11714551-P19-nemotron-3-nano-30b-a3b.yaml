@@ -1,0 +1,20 @@
+completion_tokens: 570
+cost_usd: 0.005759300000000001
+diff_type: qualifier_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 112906
+property: P19
+property_label: place of birth
+rationale: Despite extensive Search of web, no verifiable source confirming 'Deliatyn'
+  as place of birth for Iwo Pollo could be found. No references supported the claim,
+  and all attempts yielded no Wikipedia or geographic results. Given absence of accessible
+  evidence, verdict is unverifiable.
+rcid: null
+revid: 2468362220
+sources: []
+timestamp: '2026-04-07T04:36:32.008267+00:00'
+title: Q11714551
+turns: 15
+value_label: Deliatyn
+verdict: unverifiable

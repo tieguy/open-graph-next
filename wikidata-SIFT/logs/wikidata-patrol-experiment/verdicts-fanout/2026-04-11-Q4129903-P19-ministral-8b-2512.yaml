@@ -1,0 +1,33 @@
+completion_tokens: 2111
+cost_usd: 0.0019626599999999998
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17169
+property: P19
+property_label: place of birth
+rationale: The qualifiers P131 (Ukrainian Soviet Socialist Republic) and P17 (Soviet
+  Union) for the place of birth claim of Inna Vykhodtseva (Donetsk) were historically
+  accurate and supported by multiple verified sources. These qualifiers provided essential
+  historical context, confirming Donetsk's administrative and political context during
+  her birth. Removing these qualifiers without justification is incorrect.
+rcid: null
+revid: 2417123745
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com/prime-video/actor/Inna-Vykhodtseva/amzn1.dv.gti.c03bb83c-9dfe-4bf1-8dd3-44cd3d87c08d/
+- provenance: verified
+  supports_claim: true
+  url: https://unikino.ru/31-декабря-2024-г-на-91-году-после-продолжител/
+- provenance: verified
+  supports_claim: true
+  url: https://moviechat.org/nm0904538/Inna-Vykhodtseva
+- provenance: verified
+  supports_claim: true
+  url: https://en.iz.ru/en/1817123/2025-01-01/actress-film-moscow-does-not-believe-tears-died-age-90-years
+timestamp: '2026-04-11T14:23:54.072846+00:00'
+title: Q4129903
+turns: 1
+value_label: Donetsk
+verdict: incorrect

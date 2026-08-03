@@ -1,0 +1,33 @@
+completion_tokens: 321
+cost_usd: 0.002538
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11727
+property: P18
+property_label: image
+rationale: The edit changes the image of Jarfaiter (a Spanish actor and rapper) to
+  'Quetta the peruvian hairless dog.jpg'. However, no reliable or authoritative sources
+  confirm that Jarfaiter should be represented by an image of a Peruvian Hairless
+  Dog. The only referenced source for Jarfaiter's image in Wikidata is a local Spanish
+  news site that discusses Jarfaiter as a person and does not mention or show any
+  image of a dog. The searched authoritative or relevant pages for Jarfaiter and for
+  the Peruvian Hairless Dog do not indicate any connection between Jarfaiter and such
+  an image. The change appears unrelated to Jarfaiter's identity or profession.
+rcid: 2550532347
+revid: 2473866155
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+- provenance: verified
+  supports_claim: false
+  url: https://www.peruforless.com/blog/peruvian-hairless-dog
+- provenance: verified
+  supports_claim: false
+  url: https://peruvianhairless.breedarchive.com/
+timestamp: '2026-04-10T10:35:43.023998+00:00'
+title: Q29870720
+turns: 1
+value_label: Quetta the peruvian hairless dog.jpg
+verdict: unverifiable

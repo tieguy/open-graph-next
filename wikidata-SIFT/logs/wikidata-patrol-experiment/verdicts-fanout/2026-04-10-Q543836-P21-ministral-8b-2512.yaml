@@ -1,0 +1,24 @@
+completion_tokens: 1747
+cost_usd: 0.011249760000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 82237
+property: P21
+property_label: sex or gender
+rationale: The edit incorrectly changes Pierre Bordage's sex or gender from male to
+  female organism. Multiple verified sources, including LibraryThing, explicitly confirm
+  Pierre Bordage as male. The references cited in the edit (VIAF and BnF) do not provide
+  explicit gender information, and no credible source supports the claim that Pierre
+  Bordage is female.
+rcid: 2550573515
+revid: 2473905731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.librarything.com/author/bordagepierre
+timestamp: '2026-04-10T00:09:05.733406+00:00'
+title: Q543836
+turns: 3
+value_label: female organism
+verdict: incorrect

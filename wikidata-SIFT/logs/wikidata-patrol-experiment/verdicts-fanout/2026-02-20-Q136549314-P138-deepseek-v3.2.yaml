@@ -1,0 +1,33 @@
+completion_tokens: 448
+cost_usd: 0.0117532
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 28176
+property: P138
+property_label: named after
+rationale: The claim that ChatGPT Atlas is named after ChatGPT is well-supported by
+  multiple independent sources. Official OpenAI marketing materials state "ChatGPT
+  Atlas, the browser with ChatGPT built in" and position it as an extension of the
+  ChatGPT experience. Technology publications like Digiday and MIT Technology Review
+  explicitly describe Atlas as having "ChatGPT built in" or being "powered by ChatGPT."
+  While the product name itself suggests this relationship, multiple authoritative
+  sources confirm that the browser is indeed named after the ChatGPT AI chatbot, which
+  aligns with its core functionality of integrating ChatGPT into web browsing.
+rcid: 2540965537
+revid: 2464753158
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://digiday.com/marketing/the-rundown-openais-chatgpt-atlas-browser-aims-to-turn-the-internet-into-a-conversation/
+- provenance: verified
+  supports_claim: true
+  url: https://chatgpt.com/atlas/
+- provenance: reported
+  supports_claim: true
+  url: https://www.technologyreview.com/2025/10/27/1126673/openai-new-atlas-browser/
+timestamp: '2026-02-20T03:51:18.235021+00:00'
+title: Q136549314
+turns: 3
+value_label: ChatGPT
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 1564
+cost_usd: 0.0054754
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22685
+property: P742
+property_label: pseudonym
+rationale: Reliable sources confirm that Camilo Sesto's early career used the stage
+  name 'Camilo Sexto,' while 'El Divo de Alcoy' is not recognized as an official pseudonym
+  in authoritative biographies, music databases, or news reports. Changing the pseudonym
+  from the documented 'Camilo Sexto' to the unsupported 'El Divo de Alcoy' introduces
+  an inaccuracy.
+rcid: 2550721498
+revid: 2474049237
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.eluniverso.com/entretenimiento/2019/09/08/nota/7509589/curiosa-vida-camilo-sesto%3famp
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Camilo_Sesto
+- provenance: verified
+  supports_claim: false
+  url: https://www.walikali.com/camilo-sesto/
+timestamp: '2026-04-11T16:42:42.350012+00:00'
+title: Q1029506
+turns: 1
+value_label: null
+verdict: incorrect

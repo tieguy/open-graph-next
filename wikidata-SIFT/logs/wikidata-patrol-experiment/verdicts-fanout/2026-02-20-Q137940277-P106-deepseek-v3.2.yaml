@@ -1,0 +1,31 @@
+completion_tokens: 1154
+cost_usd: 0.00987998
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 31696
+property: P106
+property_label: occupation
+rationale: The claim that Dimitri Stagnitto is an entrepreneur is strongly supported
+  by primary and secondary sources. His own company profile page (Money.it) explicitly
+  calls him a 'digital entrepreneur' and details his founding of multiple websites.
+  Independent news articles and business directories consistently refer to him as
+  the founder and CEO of Money.it, confirming his entrepreneurial role in creating
+  and operating a business.
+rcid: 2540933541
+revid: 2464724129
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.money.it/_Dimitri-Stagnitto_
+- provenance: verified
+  supports_claim: true
+  url: https://news.cgtn.com/news/2022-01-27/Money-it-CEO-thanks-CMG-for-technical-support-during-Winter-Olympics-178PLRCkREs/index.html
+- provenance: verified
+  supports_claim: true
+  url: https://rocketreach.co/dimitri-stagnitto-email_85466254
+timestamp: '2026-02-20T18:40:59.766474+00:00'
+title: Q137940277
+turns: 4
+value_label: entrepreneur
+verdict: verified-high

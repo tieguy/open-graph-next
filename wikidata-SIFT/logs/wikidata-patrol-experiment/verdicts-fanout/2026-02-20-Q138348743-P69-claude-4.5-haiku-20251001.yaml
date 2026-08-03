@@ -1,0 +1,36 @@
+completion_tokens: 2294
+cost_usd: 0.080772
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 69302
+property: P69
+property_label: educated at
+rationale: Multiple independent primary sources directly confirm Carlos Augusto Tavares
+  Junior's affiliation with Escola de Comunicações e Artes da Universidade de São
+  Paulo. The official CELACC registry (fetched directly) states he is pursuing postdoctoral
+  studies in the Department of Journalism and Publishing at ECA-USP. This is corroborated
+  by the Extraprensa journal publication (fetched) identifying him as a postdoctoral
+  fellow at the School of Communications and Arts. The dates specified in the claim
+  (2020-01-03 to 2023-09-20) align with documented postdoctoral research activities
+  during that period.
+rcid: 2540923656
+revid: 2464714553
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://celacc.eca.usp.br/pt-br/pesquisadores/detalhes/1999
+- provenance: verified
+  supports_claim: true
+  url: https://revistas.usp.br/extraprensa/pt_BR/user/setLocale/en?source=revistas.usp.br%2Fextraprensa%2Fpt_BR%2Farticle%2Fview%2F194162
+- provenance: reported
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Carlos-Tavares-Junior
+- provenance: reported
+  supports_claim: true
+  url: https://www.escavador.com/sobre/6599918/carlos-augusto-tavares-junior
+timestamp: '2026-02-20T23:58:02.141667+00:00'
+title: Q138348743
+turns: 6
+value_label: Escola de Comunicações e Artes da Universidade de São Paulo
+verdict: verified-high

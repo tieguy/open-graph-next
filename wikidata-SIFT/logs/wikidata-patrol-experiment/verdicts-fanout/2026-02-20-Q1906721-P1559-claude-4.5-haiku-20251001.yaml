@@ -1,0 +1,27 @@
+completion_tokens: 1986
+cost_usd: 0.065473
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 55543
+property: P1559
+property_label: name in native language
+rationale: Masahiro Sakurai's native-language Japanese name is consistently documented
+  as 桜井政博 (kanji) across authoritative sources including TV Tropes and the Super Smash
+  Bros. Wiki. The value 'rusia' is not a Japanese name and does not correspond to
+  any romanization or transliteration of his actual name. This claim is directly contradicted
+  by multiple independent verified sources.
+rcid: 2540929965
+revid: 2464720645
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Creator/MasahiroSakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+timestamp: '2026-02-20T20:30:29.394834+00:00'
+title: Q1906721
+turns: 3
+value_label: null
+verdict: incorrect

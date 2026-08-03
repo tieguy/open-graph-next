@@ -1,0 +1,26 @@
+completion_tokens: 2204
+cost_usd: 0.00315456
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43454
+property: P18
+property_label: image
+rationale: The change from the 2003-2007 Lexus GX 470 image to the 2018 Lexus GX 460
+  (facelift) image is justified as the latter represents a more recent and updated
+  model of the Lexus GX. The new image aligns with the most current iteration of the
+  vehicle, supported by independent automotive sources like Motortrend. While the
+  edit cites Russian Wikipedia as a reference, this source is not authoritative for
+  automotive image claims. The change itself is factually sound and improves the representation
+  of the Lexus GX model.
+rcid: null
+revid: 2471361853
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.motortrend.com/news/2024-lexus-gx-luxury-off-road-suv-photo-image-gallery
+timestamp: '2026-04-11T10:48:20.429292+00:00'
+title: Q1458281
+turns: 6
+value_label: null
+verdict: verified-high

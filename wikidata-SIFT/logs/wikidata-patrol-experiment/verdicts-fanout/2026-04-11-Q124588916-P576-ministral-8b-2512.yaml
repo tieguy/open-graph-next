@@ -1,0 +1,27 @@
+completion_tokens: 1646
+cost_usd: 0.0061376700000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35298
+property: P576
+property_label: dissolved, abolished or demolished date
+rationale: The Manouchian group was a French Resistance network active during World
+  War II. Historical sources confirm arrests in November 1943 and executions in February
+  1944, making the dissolution date of September 1844 factually inaccurate and inconsistent
+  with all available evidence. The old value (November 1943) aligns with documented
+  historical events, while the new value is historically implausible.
+rcid: null
+revid: 2471429559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://internationalviewpoint.org/Missak-Manouchian-their-commemoration-and-ours
+- provenance: verified
+  supports_claim: false
+  url: https://www.marxists.org/history/france/resistance/manouchian/manouchian-group.htm
+timestamp: '2026-04-11T08:09:14.335328+00:00'
+title: Q124588916
+turns: 4
+value_label: null
+verdict: incorrect

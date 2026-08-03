@@ -1,0 +1,29 @@
+completion_tokens: 1838
+cost_usd: 0.0036660599999999996
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39238
+property: P18
+property_label: image
+rationale: The media legend 'Iling-Junior with Middlesbrough in 2025' does not match
+  the context of the image, which is from a match between SSC Napoli and Juventus
+  dated January 13, 2023. The point in time '2021-11-02' is also not relevant to this
+  image. Therefore, the removal of the qualifiers is justified.
+rcid: 2551347692
+revid: 2474653619
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.alamy.com/juventus-english-forward-samuel-iling-junior-looks-during-the-serie-a-football-match-between-ssc-napoli-and-juventus-napoli-won-5-1-image504695768.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.fotmob.com/players/1368061/samuel-iling-junior
+- provenance: verified
+  supports_claim: true
+  url: https://www.gettyimages.com/photos/samuel-iling-junior
+timestamp: '2026-04-11T12:20:42.777845+00:00'
+title: Q108200581
+turns: 3
+value_label: null
+verdict: verified-high

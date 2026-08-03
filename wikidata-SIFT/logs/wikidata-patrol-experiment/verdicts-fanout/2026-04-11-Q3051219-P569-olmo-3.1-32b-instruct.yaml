@@ -1,0 +1,29 @@
+completion_tokens: 2433
+cost_usd: 0.0044312
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14857
+property: P569
+property_label: date of birth
+rationale: Multiple independent and reliable sources confirm Elizabeth Hanna's date
+  of birth as April 2, 1953. The new value of '1969' is not supported by any evidence
+  and contradicts well-established information. Therefore, changing the date of birth
+  to '1969' was incorrect.
+rcid: null
+revid: 2472007468
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://alchetron.com/Elizabeth-Hanna
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/name/nm0360200/
+- provenance: verified
+  supports_claim: false
+  url: https://www.behindthevoiceactors.com/Elizabeth-Hanna/
+timestamp: '2026-04-11T15:27:47.354268+00:00'
+title: Q3051219
+turns: 1
+value_label: null
+verdict: incorrect

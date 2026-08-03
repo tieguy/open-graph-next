@@ -1,0 +1,28 @@
+completion_tokens: 1426
+cost_usd: 0.01221223
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 118625
+property: P1477
+property_label: birth name
+rationale: The claim is strongly supported by multiple independent sources, including
+  academic publications and research profiles that consistently list 'María Ángeles
+  Almeida Parra' as the birth name.
+rcid: 2540939136
+revid: 2464728724
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?user=gLbDfQwAAAAJ&hl=es
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/scientific-contributions/Angeles-Almeida-Parra-2265306044
+- provenance: verified
+  supports_claim: true
+  url: https://produccioncientifica.usal.es/investigadores/56846/publicaciones?herculesThematic=General%252520Neuroscience&lang=en
+timestamp: '2026-02-20T15:56:10.292511+00:00'
+title: Q59162465
+turns: 10
+value_label: null
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 1662
+cost_usd: 0.00614049
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 55147
+property: P856
+property_label: official website
+rationale: The new official website value, 'https://www.jal.co.jp/', is the website
+  for Japan Airlines and is unrelated to Iwakuni City. The old value, 'https://www.city.iwakuni.lg.jp/',
+  is the correct official website for Iwakuni City, as confirmed by prefetched content
+  from the city's official municipal website. The edit lacks references and contradicts
+  the logical context of the item (a city government).
+rcid: null
+revid: 2471604754
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.iwakuni.lg.jp/
+- provenance: reported
+  supports_claim: false
+  url: https://www.jal.co.jp/
+timestamp: '2026-04-11T18:10:16.983476+00:00'
+title: Q329797
+turns: 4
+value_label: null
+verdict: incorrect

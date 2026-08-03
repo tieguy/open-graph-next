@@ -1,0 +1,24 @@
+completion_tokens: 1352
+cost_usd: 0.0037773299999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36477
+property: P40
+property_label: child
+rationale: The investigation could not fetch any new sources due to persistent search
+  errors. The only available source (Maitron entry) does not support the claim that
+  Eugénie Cotton had a child named Claude Cotton. Without additional verified sources,
+  it is impossible to confirm or deny the validity of the edit. The absence of references
+  and lack of independent corroboration make this claim unverifiable.
+rcid: 2549850807
+revid: 2473207244
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://maitron.fr/cotton-eugenie-nee-feytis-eugenie-elise-celine/
+timestamp: '2026-04-11T11:12:12.600217+00:00'
+title: Q433768
+turns: 3
+value_label: Claude Cotton
+verdict: unverifiable

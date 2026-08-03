@@ -1,0 +1,36 @@
+completion_tokens: 3674
+cost_usd: 0.0059039999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18498
+property: P1813
+property_label: short name
+rationale: Authoritative sources, including the French Wikipedia and the official
+  website of Vignerons indépendants de France, explicitly state that 'VIF' is the
+  correct short name for the French association. The previous value 'CEVI' refers
+  to the European confederation and is not appropriate for the French association.
+  Multiple independent and primary sources confirm the correctness of the new value.
+rcid: 2550567726
+revid: 2473900154
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Vignerons_ind%C3%A9pendants_de_France
+- provenance: verified
+  supports_claim: true
+  url: https://www.vignerons-independants.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.ecoi.net/article/les-vignerons-independants-une-organisation-qui-represente-les-vins-de-terroir/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lafranceagricole.com/actualites/industrie-vinicole/vignerons-independants-le-sigle-vif-reconnu
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/confédération-européenne-des-vignerons-indépendants?rid=424179021711-46
+timestamp: '2026-04-11T05:52:15.572827+00:00'
+title: Q1581683
+turns: 1
+value_label: null
+verdict: verified-high

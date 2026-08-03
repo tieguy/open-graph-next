@@ -1,0 +1,35 @@
+completion_tokens: 1741
+cost_usd: 0.0134965
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 139320
+property: P3342
+property_label: significant person
+rationale: Multiple independent sources confirm the significant relationship between
+  Julian Schnabel and Joseph Glasco. There is no independent evidence to support the
+  significance of Sonia Sekula in Joseph Glasco's life. Therefore, the change to Julian
+  Schnabel is well-supported.
+rcid: 2550519761
+revid: 2473854045
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://hamptonsarthub.com/2019/07/18/reviews-art-review-rediscovering-ab-ex-artist-joseph-glasco-in-rapport-with-pollock-schnabel-ossorio/
+- provenance: verified
+  supports_claim: true
+  url: https://waddingtoncustot2-web-eu-038.artlogic.net/exhibitions/95/
+- provenance: verified
+  supports_claim: true
+  url: https://www.michielsimons.com/artists/julian-schnabel
+- provenance: reported
+  supports_claim: false
+  url: https://hyperallergic.com/sonja-sekula-a-survey-peter-blum-gallery-2017/
+- provenance: reported
+  supports_claim: false
+  url: https://www.sonja-sekula.org/timeline.htm
+timestamp: '2026-04-11T09:54:10.732566+00:00'
+title: Q6283474
+turns: 5
+value_label: Julian Schnabel
+verdict: verified-high

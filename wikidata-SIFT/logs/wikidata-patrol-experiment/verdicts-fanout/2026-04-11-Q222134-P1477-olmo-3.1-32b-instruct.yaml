@@ -1,0 +1,30 @@
+completion_tokens: 1910
+cost_usd: 0.0069014
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28777
+property: P1477
+property_label: birth name
+rationale: The addition of 'GOAT' to Ted Kaczynski's birth name is not supported by
+  any reputable source. The cited New York Times article and other major biographical
+  sources consistently refer to him as 'Theodore John Kaczynski' without the phrase
+  'GOAT.' 'GOAT' is a modern slang term not associated with his legal or biographical
+  identity, making the edit factually incorrect.
+rcid: 2550032144
+revid: 2473380091
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/1996/05/26/us/prisoner-of-rage-a-special-report-from-a-child-of-promise-to-the-unabom-suspect.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Ted_Kaczynski
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Ted-Kaczynski
+timestamp: '2026-04-11T09:59:47.118474+00:00'
+title: Q222134
+turns: 1
+value_label: null
+verdict: incorrect

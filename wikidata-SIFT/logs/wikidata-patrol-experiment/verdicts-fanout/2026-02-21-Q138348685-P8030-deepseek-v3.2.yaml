@@ -1,0 +1,34 @@
+completion_tokens: 2165
+cost_usd: 0.0330605
+diff_type: unknown
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 134157
+property: P8030
+property_label: military size designation
+rationale: Multiple independent sources confirm that 'Eskadrille' is the standard
+  term used by the Royal Danish Air Force for its squadron-sized units. The key.aero
+  article explicitly states 'Eskadrille (Squadron) 721,' directly equating the terms.
+  The F-16.net page provides detailed history of Eskadrille 726, consistently treating
+  it as a squadron. While the Wikidata item Q17074763 (escadrille) describes it as
+  'military aviation unit, usually between a flight and squadron in size,' the actual
+  usage in the Royal Danish Air Force clearly shows 'Eskadrille' corresponds to the
+  squadron level, making it an appropriate military size designation for Eskadrille
+  729.
+rcid: 2540917290
+revid: 2464708541
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.key.aero/article/viking-warriors-what-does-future-hold-royal-danish-air-force
+- provenance: verified
+  supports_claim: true
+  url: https://www.f-16.net/units_article282.html
+- provenance: reported
+  supports_claim: true
+  url: https://monarchies.fandom.com/wiki/Royal_Danish_Air_Force
+timestamp: '2026-02-21T03:02:11.642510+00:00'
+title: Q138348685
+turns: 15
+value_label: escadrille
+verdict: verified-high

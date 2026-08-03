@@ -1,0 +1,27 @@
+completion_tokens: 1537
+cost_usd: 0.0034419999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12599
+property: P106
+property_label: occupation
+rationale: Arnaud Le Ny is listed in the Mathematics Genealogy Project as a mathematician
+  with mathematical advisors and students, and his research profile on ResearchGate
+  features publications in mathematical physics and related mathematical fields. These
+  independent primary and secondary sources support the occupation 'mathematician'
+  as correct.
+rcid: 2550521965
+revid: 2473856107
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.genealogy.math.ndsu.nodak.edu/id.php?id=117491
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Arnaud-Le-Ny-2
+timestamp: '2026-04-10T13:38:10.360600+00:00'
+title: Q102317811
+turns: 1
+value_label: mathematician
+verdict: verified-high

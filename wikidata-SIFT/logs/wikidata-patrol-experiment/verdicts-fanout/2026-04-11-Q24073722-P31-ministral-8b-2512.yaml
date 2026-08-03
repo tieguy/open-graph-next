@@ -1,0 +1,27 @@
+completion_tokens: 1691
+cost_usd: 0.0015187199999999999
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17855
+property: P31
+property_label: instance of
+rationale: The claim that Inakustik (Q24073722) is an instance of audio equipment
+  (Q15190726) contradicts all available evidence. The item's description and claims
+  (e.g., genres like jazz/blues, inception year 1977, and the label's primary activity
+  as a music label) align with it being a record label (Q18127). The added reference
+  (https://www.in-akustik.com/) is unreachable, and the prefetched content from the
+  'about-us' page confirms Inakustik's identity as a music label and cable manufacturer,
+  not audio equipment. The old value (Q18127) is correct and well-supported by the
+  item's context.
+rcid: 2550539544
+revid: 2473873226
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.in-akustik.com/about-us/
+timestamp: '2026-04-11T14:25:27.192163+00:00'
+title: Q24073722
+turns: 2
+value_label: audio equipment
+verdict: incorrect

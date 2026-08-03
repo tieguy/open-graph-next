@@ -1,0 +1,23 @@
+completion_tokens: 1530
+cost_usd: 0.01258490625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 130159
+property: P348
+property_label: software version identifier
+rationale: The cited reference from Apple's support page confirms the existence and
+  recommendation of iOS 15.8.7. Although no independent sources were found to corroborate
+  the claim, the authoritative nature of the cited source is sufficient to classify
+  the edit as verified-high.
+rcid: 2550289977
+revid: 2473630088
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://support.apple.com/en-us/HT212788
+timestamp: '2026-04-07T07:39:58.457414+00:00'
+title: Q107139673
+turns: 6
+value_label: null
+verdict: verified-high

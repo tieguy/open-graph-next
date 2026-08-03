@@ -1,0 +1,21 @@
+completion_tokens: 376
+cost_usd: 0.018232200000000004
+diff_type: value_changed
+finish_status: max_turns
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 90033
+property: P1884
+property_label: hair color
+rationale: No independent, verifiable sources were found that confirm or deny Ester
+  Expósito's current hair color is red. The Wikidata edit provides no reference URLs,
+  and a comprehensive search of recent and general media did not locate any evidence
+  regarding her hair color as of early 2026. The absence of primary or reliable secondary
+  sources means the claim cannot be confirmed or denied with confidence.
+rcid: 2549251364
+revid: 2472622088
+sources: []
+timestamp: '2026-04-07T10:15:32.008942+00:00'
+title: Q58331177
+turns: 15
+value_label: red hair
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1276
+cost_usd: 0.0037711999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15028
+property: P39
+property_label: position held
+rationale: Catholic-Hierarchy.org, an authoritative source for Catholic episcopal
+  history, identifies Veit I. Truchseß von Pommersfelden as 'Bishop of Bamberg' from
+  1501 to 1503, using the modern ecclesiastical title equivalent to 'diocesan bishop.'
+  There is no indication from this source that he held secular princely authority
+  during his episcopate. Therefore, changing the position held from 'Prince-Bishop'
+  to 'diocesan bishop' is accurate and improves the item's precision.
+rcid: 2550976966
+revid: 2474296328
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/btvp.html
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Veit_Truchse%C3%9F_von_Pommersfelden
+timestamp: '2026-04-11T16:26:45.611739+00:00'
+title: Q110814
+turns: 1
+value_label: diocesan bishop
+verdict: verified-high

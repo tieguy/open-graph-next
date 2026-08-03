@@ -1,0 +1,51 @@
+completion_tokens: 2172
+cost_usd: 0.0026812
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21870
+property: P1814
+property_label: name in kana
+rationale: The edit changes the name in kana from 'おの えいじろう' to 'eros ramazzott*'.
+  The Japanese Wikipedia, which is a blocked domain, cannot be accessed directly.
+  Independent sources do not provide any evidence supporting the new name in kana
+  'eros ramazzott*'. The new name in kana 'eros ramazzott*' seems to be incorrect
+  based on the available evidence.
+rcid: null
+revid: 2464869007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.geni.com/people/Eijiro-Ono/6000000015336609129
+- provenance: verified
+  supports_claim: false
+  url: https://www.ancestry.com/genealogy/records/eijiro-%E8%8B%B1%E4%BA%8C%E9%83%8E-ono-%E5%B0%8F%E9%87%8E-24-ynzwx8
+- provenance: verified
+  supports_claim: false
+  url: https://prabook.com/web/eijiro.ono/3745716
+- provenance: verified
+  supports_claim: false
+  url: https://www.myheritage.com/research/record-10182-2072076/eijiro-ono-in-biographical-summaries-of-notable-people
+- provenance: verified
+  supports_claim: false
+  url: https://www.entitree.com/en/family_tree/Q11464251
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/education/news-wires-white-papers-and-books/ramazzotti-eros
+- provenance: verified
+  supports_claim: false
+  url: https://peoplepill.com/people/eijiro-ono/lists
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikitree.com/wiki/Ono-28
+- provenance: verified
+  supports_claim: false
+  url: https://www.ancestry.com/genealogy/records/results?firstName=eijiro&lastName=ono%E5%B0%8F%E9%87%8E
+- provenance: verified
+  supports_claim: false
+  url: https://eusc.fandom.com/wiki/Eros_Ramazzotti
+timestamp: '2026-04-10T14:00:53.996781+00:00'
+title: Q11464251
+turns: 2
+value_label: null
+verdict: incorrect

@@ -1,0 +1,31 @@
+completion_tokens: 1418
+cost_usd: 0.00158614
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14833
+property: P2048
+property_label: height
+rationale: The only reference provided (Olympedia) supports the old value of 175 cm.
+  No independent sources support the new value of 176 cm. The edit changes the height
+  from 175 cm to 176 cm, but the only reference supports 175 cm.
+rcid: 2550797029
+revid: 2474122104
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.olympedia.org/athletes/146314
+- provenance: verified
+  supports_claim: false
+  url: https://worldrowing.com/athlete/maria-magdalena-rusu?id=47554
+- provenance: verified
+  supports_claim: false
+  url: https://www.espn.com/olympics/summer/2020/athletes/_/athlete/65117
+- provenance: verified
+  supports_claim: false
+  url: https://www.cosr.ro/sportiv/maria-magdalena-rusu-
+timestamp: '2026-04-11T14:28:00.552962+00:00'
+title: Q64431847
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,28 @@
+completion_tokens: 857
+cost_usd: 0.0027627999999999997
+diff_type: reference_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 51828
+property: P1875
+property_label: represented by
+rationale: The claim adds a reference to Zilberman Gallery to represent artist Yasam
+  Sasmazer. The gallery's official contact page directly states it has represented
+  the artist since 2016, confirming the claim. Additionally, the artist's own page
+  on the gallery's website explicitly lists 'Zilberman Gallery' under 'Represented
+  by' and provides a biography that aligns with the gallery's representation. Both
+  sources are primary and directly verify the representation.
+rcid: 2551221921
+revid: 2474534638
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sasmazeryasam.com/contact-2/
+- provenance: verified
+  supports_claim: true
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+timestamp: '2026-04-07T04:32:46.830094+00:00'
+title: Q99481023
+turns: 8
+value_label: Zilberman Gallery
+verdict: verified-high

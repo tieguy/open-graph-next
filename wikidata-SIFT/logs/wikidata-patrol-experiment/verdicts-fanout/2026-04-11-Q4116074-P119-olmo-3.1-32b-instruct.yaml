@@ -1,0 +1,36 @@
+completion_tokens: 2375
+cost_usd: 0.0048334
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17042
+property: P119
+property_label: place of burial
+rationale: Reliable sources (Wikipedia, Al Jazeera, The Guardian, Britannica) confirm
+  that Zein al-Sharaf Talal was buried in Lausanne, Switzerland. The previous value
+  'Raghadan Palace' was incorrect, but the new value 'Q82799' is a generic 'name'
+  item, not a valid location for place of burial. Therefore, the edit replaced an
+  incorrect value with an invalid one and did not constitute an improvement.
+rcid: 2549986475
+revid: 2473335771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Zein_Al-Sharaf_Talal
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/news/obituaries/1994/4/27/obituary-zein-al-sharaf-talal
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/world/1994/apr/28.06030
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Zein-al-Sharaf-Talal
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q82799
+timestamp: '2026-04-11T16:08:18.365765+00:00'
+title: Q4116074
+turns: 1
+value_label: name
+verdict: incorrect

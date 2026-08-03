@@ -1,0 +1,35 @@
+completion_tokens: 1014
+cost_usd: 0.0016548399999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27964
+property: P18
+property_label: image
+rationale: The lack of independent coverage and the absence of references make it
+  challenging to verify the accuracy of the removed image. The lack of search results
+  and the fact that the edit was reverted suggest that the image might not be appropriate
+  or correctly labeled for Dufek Coast.
+rcid: 2549917621
+revid: 2473272106
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dufek+Coast+image
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dufek+Coast+Antarctica+image
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dufek+Coast+Antarctica+map
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dufek+Coast+Antarctica+photo
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Dufek+Coast+Antarctica+picture
+timestamp: '2026-04-07T13:21:52.004236+00:00'
+title: Q3933851
+turns: 6
+value_label: null
+verdict: unverifiable

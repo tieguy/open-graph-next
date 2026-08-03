@@ -1,0 +1,27 @@
+completion_tokens: 866
+cost_usd: 0.0106304
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 209144
+property: P641
+property_label: sport
+rationale: The Australian Open is historically and officially recognized as a tennis
+  tournament. No authoritative sources confirm it is an Australian rules football
+  event. The official website does not specify the sport, and web searches did not
+  locate credible sources supporting a sport change to Australian rules football.
+  Therefore, the edit appears unsupported and suspect.
+rcid: 2551269774
+revid: 2474579679
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ausopen.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.itfglobal.org/
+timestamp: '2026-04-07T11:37:45.189508+00:00'
+title: Q60874
+turns: 13
+value_label: Australian rules football
+verdict: suspect

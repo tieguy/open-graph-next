@@ -1,0 +1,34 @@
+completion_tokens: 304
+cost_usd: 0.002674
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12458
+property: P495
+property_label: country of origin
+rationale: The change from Lithuania to Soviet Union as the country of origin for
+  Q16478774 lacks clear, authoritative evidence. While the Soviet Union did encompass
+  Lithuania from 1922 to 1991, country of origin typically refers to the entity that
+  originally produced the work, not the political state that later controlled the
+  territory. The sources confirm the USSR's existence and control over Lithuania during
+  the interwar period but do not indicate that the work in question was produced by
+  the Soviet Union rather than Lithuania. No source directly confirms the new value
+  or refutes the old value with respect to this item. Therefore, the edit is suspect
+  due to insufficient evidence supporting the change.
+rcid: 2551421983
+revid: 2474723496
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fiveable.me/key-terms/ap-world/soviet-union-russia
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/learn/lesson/soviet-union-history-geography-ussr.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.history.com/articles/history-of-the-soviet-union
+timestamp: '2026-04-11T17:00:07.376619+00:00'
+title: Q16478774
+turns: 1
+value_label: Soviet Union
+verdict: suspect

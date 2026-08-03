@@ -1,0 +1,31 @@
+completion_tokens: 1336
+cost_usd: 0.00478241875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49730
+property: P21
+property_label: sex or gender
+rationale: No references were cited for the edit, and independent searches did not
+  yield any specific information about Jérôme Dupras's gender or sexual orientation.
+  The available sources do not provide evidence to confirm or deny the claim.
+rcid: null
+revid: 2470757467
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://prixduquebec.gouv.qc.ca/recipiendaires/jerome-dupras/
+- provenance: verified
+  supports_claim: false
+  url: https://www.acog.org/womens-health/faqs/lgbtq-teens
+- provenance: verified
+  supports_claim: false
+  url: https://www.garblwriting.com/p/gender-sex-and-sexual-orientation
+- provenance: verified
+  supports_claim: false
+  url: https://www.uno.edu/safe-space-allies/terminology
+timestamp: '2026-04-11T07:41:53.531980+00:00'
+title: Q3190884
+turns: 4
+value_label: bisexual person
+verdict: unverifiable

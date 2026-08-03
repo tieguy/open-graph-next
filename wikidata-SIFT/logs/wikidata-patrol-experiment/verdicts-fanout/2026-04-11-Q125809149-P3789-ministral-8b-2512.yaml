@@ -1,0 +1,31 @@
+completion_tokens: 1973
+cost_usd: 0.00459489
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 52020
+property: P3789
+property_label: Telegram username
+rationale: The Telegram username 'biohackerlounge' is confirmed as correct by the
+  official Telegram channel page. However, the newly added qualifiers (+1829 subscribers
+  and timestamp 2026-03-22) are not supported by the available evidence. The Telegram
+  channel page shows 1,995 members, not 1,829, and there is no evidence supporting
+  the timestamp qualifier. Since the qualifiers are incorrect or unverifiable, the
+  edit is suspect.
+rcid: 2551421282
+revid: 2474722888
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://t.me/biohackerlounge
+- provenance: reported
+  supports_claim: false
+  url: https://biohackinginternational.com
+- provenance: reported
+  supports_claim: false
+  url: https://docs.biohackinginternational.com
+timestamp: '2026-04-11T05:57:54.234424+00:00'
+title: Q125809149
+turns: 5
+value_label: null
+verdict: suspect

@@ -1,0 +1,22 @@
+completion_tokens: 284
+cost_usd: 0.00463486875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47762
+property: P140
+property_label: religion or worldview
+rationale: The investigation did not yield any verified sources that explicitly mention
+  Susana Higuchi's religion. The available sources provide detailed information about
+  her life and career but do not address her religious beliefs.
+rcid: 2549615483
+revid: 2472977120
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hiplatina.com/susana-higuchi-peru-first-lady/
+timestamp: '2026-04-10T11:32:16.654512+00:00'
+title: Q265813
+turns: 3
+value_label: Catolicismo [es]
+verdict: unverifiable

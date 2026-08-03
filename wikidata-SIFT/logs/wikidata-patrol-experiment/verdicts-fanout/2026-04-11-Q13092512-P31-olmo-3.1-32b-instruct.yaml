@@ -1,0 +1,30 @@
+completion_tokens: 2355
+cost_usd: 0.0042122
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13996
+property: P31
+property_label: instance of
+rationale: Multiple authoritative and independent sources, including the Indonesian
+  Ministry of Education and Culture and Wikipedia, explicitly classify Cublak-Cublak
+  Suweng as a folk song and part of Indonesia's folk music tradition. This supports
+  the change from 'musical work/composition' to 'folk music' as more accurate and
+  specific.
+rcid: 2550310973
+revid: 2473650715
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Cublak-Cublak_Suweng
+- provenance: verified
+  supports_claim: true
+  url: https://warisanbudaya.kemdikbud.go.id/detail/cublak-cublak-suweng
+- provenance: verified
+  supports_claim: true
+  url: https://www.mamalisa.com/?t=es&p=3274
+timestamp: '2026-04-11T16:22:14.760886+00:00'
+title: Q13092512
+turns: 1
+value_label: folk music
+verdict: verified-high

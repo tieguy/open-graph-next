@@ -1,0 +1,38 @@
+completion_tokens: 1393
+cost_usd: 0.00999585
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 144824
+property: P689
+property_label: afflicts
+rationale: The edit changes the claim for 'starch exposure' (Q21175313) from 'respiratory
+  system' (Q7891) to 'human' (Q5). While the broader claim that starch exposure affects
+  humans is supported by independent sources (e.g., MedlinePlus and PubMed articles
+  describing symptoms in humans), the **reference cited in the edit (CDC NIOSH) is
+  unreachable**, making it impossible to verify whether it explicitly supports the
+  new claim. Additionally, the old value ('respiratory system') was not explicitly
+  contradicted by the sources, and the broader claim ('human') lacks direct corroboration
+  from the cited reference. The edit appears to be a **lateral change** without sufficient
+  evidence to justify the removal of the narrower claim ('respiratory system').
+rcid: 2549977353
+revid: 2473327016
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://medlineplus.gov/ency/article/002741.htm
+- provenance: verified
+  supports_claim: true
+  url: https://pmc.ncbi.nlm.nih.gov/articles/PMC10252388/
+- provenance: verified
+  supports_claim: true
+  url: https://pubmed.ncbi.nlm.nih.gov/40202198/
+- provenance: verified
+  reason: Unreachable (fetch failed)
+  supports_claim: false
+  url: http://www.cdc.gov/niosh/npg/npgd0567.html
+timestamp: '2026-04-11T07:37:57.582844+00:00'
+title: Q21175313
+turns: 15
+value_label: human
+verdict: suspect

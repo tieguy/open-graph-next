@@ -1,0 +1,22 @@
+completion_tokens: 647
+cost_usd: 0.004708450000000001
+diff_type: reference_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 91581
+property: P373
+property_label: Commons category
+rationale: No references were found supporting the Commons category claim for Jawi
+  script related to Q83942. Multiple web searches for 'Jawi script commons category',
+  'Jawi Archives and Rare Materials', and similar variants returned no usable results.
+  The Commons category page for Jawi script could not be located (404 error), and
+  no external sources corroborated the claim. Without any verifiable sources that
+  support or reference the category, the edit cannot be confirmed as correct or incorrect.
+rcid: null
+revid: 2471675439
+sources: []
+timestamp: '2026-04-07T07:24:16.815147+00:00'
+title: Q83942
+turns: 15
+value_label: null
+verdict: unverifiable

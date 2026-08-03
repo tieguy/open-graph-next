@@ -1,0 +1,30 @@
+completion_tokens: 1136
+cost_usd: 0.0132338
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62761
+property: P108
+property_label: employer
+rationale: Reliable, authoritative sources consistently describe Masahiro Sakurai's
+  career as associated with HAL Laboratory and Sora Ltd., focusing on Kirby and Super
+  Smash Bros. projects. No credible source indicates any employment by Supercell or
+  involvement with Brawl Stars. The addition of 'Brawl Stars' as an employer is therefore
+  factually incorrect.
+rcid: 2540950671
+revid: 2464739583
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://nintendo.fandom.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://supercell.com/en/about-us/
+timestamp: '2026-02-20T08:55:10.540716+00:00'
+title: Q1906721
+turns: 7
+value_label: Brawl Stars
+verdict: incorrect

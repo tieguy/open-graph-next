@@ -1,0 +1,27 @@
+completion_tokens: 1497
+cost_usd: 0.032387
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 24902
+property: P856
+property_label: official website
+rationale: The URL https://buhlmann.dk is confirmed as the official website of Bühlmann
+  Hotels through direct access to the domain, which displays the company's official
+  homepage with branding, hotel information, and corporate messaging. The Danish language
+  qualifier is appropriate given the website's default language presentation. The
+  claim is supported by primary source evidence.
+rcid: 2540917574
+revid: 2464708765
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://buhlmann.dk
+- provenance: reported
+  supports_claim: true
+  url: https://buhlmann.dk/?lang=en
+timestamp: '2026-02-21T02:58:44.580600+00:00'
+title: Q138348647
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 1519
+cost_usd: 0.0030691
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35926
+property: P54
+property_label: member of sports team
+rationale: The claim that 'Kurdistan Province' is a correct updated member of sports
+  team for Elias Hadaya is not supported by the evidence. Elias Hadaya's Transfermarkt
+  profile, a primary and reliable source for football player information, does not
+  list 'Kurdistan Province' as one of his teams. Therefore, the edit is incorrect.
+rcid: 2549663044
+revid: 2473023270
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/272542
+timestamp: '2026-04-07T07:29:24.629165+00:00'
+title: Q89080747
+turns: 6
+value_label: Kurdistan Province
+verdict: incorrect

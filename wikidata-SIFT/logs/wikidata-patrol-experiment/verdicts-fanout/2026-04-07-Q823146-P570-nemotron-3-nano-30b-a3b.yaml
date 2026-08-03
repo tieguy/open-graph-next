@@ -1,0 +1,28 @@
+completion_tokens: 774
+cost_usd: 0.006002250000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 116949
+property: P570
+property_label: date of death
+rationale: No independent sources were found that confirm or deny the claim that Bernat
+  Metge died in 2026. Multiple targeted web searches for historical records, academic
+  sources, and specific reference materials (Gran Enciclopèdia Catalana, Diccionari
+  de la Literatura Catalana, Biblioteca Nacional de España, etc.) returned no results,
+  indicating no external documentation exists in accessible public web sources to
+  verify this modern death date for a 14th-century historical figure. While the edit
+  references various archival systems (BnF, etc.), these references could not be retrieved
+  to verify their content supports the 2026 death claim. Therefore, there is insufficient
+  evidence to verify the claim either way.
+rcid: 2549960517
+revid: 2473311743
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Bernat_Metge
+timestamp: '2026-04-07T06:25:17.455168+00:00'
+title: Q823146
+turns: 15
+value_label: null
+verdict: unverifiable

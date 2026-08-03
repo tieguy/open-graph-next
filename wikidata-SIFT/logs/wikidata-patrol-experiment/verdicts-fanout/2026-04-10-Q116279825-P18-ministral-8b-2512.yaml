@@ -1,0 +1,33 @@
+completion_tokens: 1940
+cost_usd: 0.00425667
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29433
+property: P18
+property_label: image
+rationale: The removed image 'Antoine d'Irumberry de Salaberry (1880-1915).jpg' was
+  not supported by any references or verified sources for the correct individual.
+  The image appears to be misattributed to the wrong person (Ignace-Michel-Louis-Antoine
+  d'Irumberry de Salaberry, 1752-1828). Independent sources confirm no such image
+  exists for Antoine d'Irumberry de Salaberry (1880-1915), justifying the removal.
+rcid: 2550201522
+revid: 2473544385
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Ignace-Michel-Louis-Antoine_d'Irumberry_de_Salaberry
+- provenance: verified
+  supports_claim: false
+  url: https://fr-academic.com/dic.nsf/frwiki/116727
+- provenance: verified
+  supports_claim: false
+  url: https://www.artprice.com/artist/290838/antoine-salaberry-de
+- provenance: verified
+  supports_claim: false
+  url: https://gw.geneanet.org/garric?lang=en&n=d+irumberry+de+salaberry&p=antoine
+timestamp: '2026-04-10T11:20:20.990462+00:00'
+title: Q116279825
+turns: 2
+value_label: null
+verdict: verified-high

@@ -1,0 +1,29 @@
+completion_tokens: 1478
+cost_usd: 0.032640999999999996
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 25251
+property: P856
+property_label: official website
+rationale: The URL https://www.bswhealth.com/locations/hospital/plano resolves to
+  a fully functional official webpage belonging to Baylor Scott & White Health. The
+  page content directly validates multiple other claims on the Wikidata item (2004
+  inception, 160 beds, acute care hospital status) and displays legitimate institutional
+  information including phone numbers, departments, and services. The domain bswhealth.com
+  is confirmed as the organization's official web presence through primary source
+  corroboration.
+rcid: 2540942691
+revid: 2464732151
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bswhealth.com/locations/hospital/plano
+- provenance: verified
+  supports_claim: true
+  url: https://www.bswhealth.com/
+timestamp: '2026-02-20T13:30:31.142620+00:00'
+title: Q60749329
+turns: 2
+value_label: null
+verdict: verified-high

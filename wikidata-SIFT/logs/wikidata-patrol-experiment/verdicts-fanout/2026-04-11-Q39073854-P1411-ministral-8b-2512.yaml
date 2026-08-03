@@ -1,0 +1,33 @@
+completion_tokens: 1916
+cost_usd: 0.00160986
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15012
+property: P1411
+property_label: nominated for
+rationale: The edit changes the qualifier for the nominee country from Iraq (Q796)
+  to United Kingdom (Q145) for the film 'The Journey' (Q39073854) in its Academy Awards
+  submission claim. The United Kingdom is listed as one of the film's countries of
+  origin on the CNC France page, which supports the plausibility of this change. However,
+  no independent sources confirm Iraq as the submission country, and the cited Wikipedia
+  reference is inaccessible. The lack of definitive evidence for either value, combined
+  with the alignment of the new qualifier with the film's listed countries, results
+  in a `verified-low` verdict.
+rcid: 2550486540
+revid: 2473822461
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cnc.fr/professionnels/visas-et-classification/144151
+- provenance: verified
+  supports_claim: false
+  url: https://variety.com/2024/film/awards/oscars-diane-warren-her-six-triple-eight-journey-10-award-categories-announced/
+- provenance: reported
+  supports_claim: false
+  url: https://press.oscars.org/news/97th-oscarsr-shortlists-10-award-categories-announced
+timestamp: '2026-04-11T11:24:45.606296+00:00'
+title: Q39073854
+turns: 1
+value_label: International Submission to the Academy Awards
+verdict: verified-low

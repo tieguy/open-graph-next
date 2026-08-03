@@ -1,0 +1,28 @@
+completion_tokens: 1149
+cost_usd: 0.004580705
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45418
+property: P2003
+property_label: Instagram username
+rationale: The Instagram profile for 'lunitheatre' is blocked and cannot be verified.
+  The official website and other sources do not mention the Instagram username, making
+  it impossible to confirm the new value.
+rcid: 2551326183
+revid: 2474633354
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/lunitheatre/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lunitheatre.ca/fr/notre-histoire
+- provenance: verified
+  supports_claim: false
+  url: https://www.travelalberta.com/listings/lunitheatre-7145
+timestamp: '2026-04-10T13:11:23.720556+00:00'
+title: Q124301356
+turns: 5
+value_label: null
+verdict: unverifiable

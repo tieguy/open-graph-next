@@ -1,0 +1,33 @@
+completion_tokens: 1883
+cost_usd: 0.0068398
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28550
+property: P1477
+property_label: birth name
+rationale: The change from 'Neil Alden Armstrong' to 'Michael jackson' as the birth
+  name of Neil Armstrong is factually incorrect. Authoritative sources such as Britannica,
+  NASA, and Wikipedia confirm that Neil Armstrong's birth name is 'Neil Alden Armstrong'.
+  The cited reference supports only the original value and does not justify the new
+  value. There is no credible evidence supporting the change.
+rcid: null
+revid: 2471070596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Neil-Armstrong
+- provenance: verified
+  supports_claim: false
+  url: https://www.nasa.gov/mission_pages/moon/apollo/apollo11/apollo11.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Neil_Armstrong
+- provenance: verified
+  supports_claim: false
+  url: https://planet4589.org/space/astro/rides.html
+timestamp: '2026-04-11T18:10:56.987246+00:00'
+title: Q1615
+turns: 1
+value_label: null
+verdict: incorrect

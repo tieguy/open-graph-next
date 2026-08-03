@@ -1,0 +1,27 @@
+completion_tokens: 1960
+cost_usd: 0.00776172
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 59206
+property: P40
+property_label: child
+rationale: The old value (Q94736655, 'Ruth Braunizer') was not supported by any credible
+  sources. Multiple verified primary sources confirm Erwin Schrödinger had a daughter
+  named 'Ruth' (with middle names 'Georgie Erica') born in 1934, with no mention of
+  the surname 'Braunizer'. The change to 'Ruth' aligns with these sources and improves
+  the accuracy of the Wikidata claim.
+rcid: 2550564108
+revid: 2473896730
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bookofproofs.github.io/history/19th-century/schrodinger.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.newworldencyclopedia.org/entry/Erwin_Schr%C3%B6dinger
+timestamp: '2026-04-11T07:22:31.902816+00:00'
+title: Q9130
+turns: 2
+value_label: Ruth
+verdict: verified-high

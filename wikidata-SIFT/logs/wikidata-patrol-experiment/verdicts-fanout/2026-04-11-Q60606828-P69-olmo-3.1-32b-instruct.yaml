@@ -1,0 +1,33 @@
+completion_tokens: 332
+cost_usd: 0.0030648
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14328
+property: P69
+property_label: educated at
+rationale: No independently verified sources were found confirming that Sisiku Julius
+  Ayuk Tabe attended either the University of Keele or the University of Sheffield.
+  The cited reference for the University of Keele does not contain relevant information
+  about the subject, and no primary or reputable tertiary sources mentioning the subject's
+  education were located during the investigation.
+rcid: 2550926907
+revid: 2474248353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.whatuni.com/university-profile/keele-university/5303/
+- provenance: verified
+  supports_claim: false
+  url: https://www.topuniversities.com/universities/keele-university
+- provenance: verified
+  supports_claim: false
+  url: https://theguardianpostcameroon.com/post/1156/en/homethem-
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sisiku_Julius_Ayuk_Tabe
+timestamp: '2026-04-11T17:09:48.779397+00:00'
+title: Q60606828
+turns: 1
+value_label: University of Keele
+verdict: unverifiable

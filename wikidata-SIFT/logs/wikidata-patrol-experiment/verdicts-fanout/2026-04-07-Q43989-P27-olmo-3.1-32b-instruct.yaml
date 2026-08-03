@@ -1,0 +1,20 @@
+completion_tokens: 924
+cost_usd: 0.0104456
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49456
+property: P27
+property_label: country of citizenship
+rationale: No live, authoritative source was fetched to confirm that 'Russian Empire'
+  is the correct country of citizenship for Grigori Rasputin. The claim is plausible
+  based on historical context, but without direct, fetched evidence, the edit cannot
+  be verified.
+rcid: 2550961873
+revid: 2474281611
+sources: []
+timestamp: '2026-04-07T14:17:28.636137+00:00'
+title: Q43989
+turns: 6
+value_label: Russian Empire
+verdict: unverifiable

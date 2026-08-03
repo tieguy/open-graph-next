@@ -1,0 +1,19 @@
+completion_tokens: 885
+cost_usd: 0.017706999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 85880
+property: P3373
+property_label: sibling
+rationale: No reliable sources were found that confirm or deny whether 'Laurent' is
+  a correct sibling for Robert Brasillach. Multiple web searches returned no authoritative
+  biographical or genealogical information supporting the claim.
+rcid: 2550652936
+revid: 2473982750
+sources: []
+timestamp: '2026-04-07T12:22:34.519325+00:00'
+title: Q1488
+turns: 7
+value_label: Laurent
+verdict: unverifiable

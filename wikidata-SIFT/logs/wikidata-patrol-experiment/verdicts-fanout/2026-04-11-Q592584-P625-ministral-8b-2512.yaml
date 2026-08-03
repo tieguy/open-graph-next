@@ -1,0 +1,29 @@
+completion_tokens: 3746
+cost_usd: 0.007794659999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 94446
+property: P625
+property_label: coordinate location
+rationale: The new coordinate (38°44'13.2936"N, 9°8'34.5696"W) does not align with
+  the known location of Imprensa Nacional-Casa da Moeda, which is Avenida António
+  José de Almeida, 1000-042 Lisboa. The old coordinate (38.71763888888889,-9.152111111111111)
+  is consistent with this address. No references were provided for either coordinate,
+  and the new value lacks independent corroboration from official sources. The official
+  address was confirmed by verified primary sources, but the new coordinate does not
+  match the expected location.
+rcid: 2550438253
+revid: 2473775019
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://eportugal.gov.pt/entidades/imprensa-nacional-casa-da-moeda
+- provenance: verified
+  supports_claim: true
+  url: https://www.gov.pt/entidades/imprensa-nacional-casa-da-moeda
+timestamp: '2026-04-11T17:46:25.783562+00:00'
+title: Q592584
+turns: 9
+value_label: null
+verdict: suspect

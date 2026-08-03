@@ -1,0 +1,22 @@
+completion_tokens: 942
+cost_usd: 0.0043615
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 45642
+property: P18
+property_label: image
+rationale: The edit changes the image of Shin Yu-na but does not cite any references.
+  No independent sources confirm the new image, and the old image is verified to exist
+  on Wikimedia Commons. Therefore, the edit cannot be verified.
+rcid: 2550871923
+revid: 2474195298
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:251110_Shin_Yuna_from_ITZY.png
+timestamp: '2026-04-07T06:44:18.194095+00:00'
+title: Q60870263
+turns: 6
+value_label: null
+verdict: unverifiable

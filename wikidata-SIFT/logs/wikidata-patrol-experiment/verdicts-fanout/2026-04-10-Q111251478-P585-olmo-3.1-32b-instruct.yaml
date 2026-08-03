@@ -1,0 +1,36 @@
+completion_tokens: 2095
+cost_usd: 0.0039104
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13267
+property: P585
+property_label: point in time
+rationale: Multiple independent and primary sources confirm that the 2026 Rhineland-Palatinate
+  state election is scheduled for 22 March 2026. The Federal Agency for Civic Education
+  (Bpb.de) Wahl-O-Mat tool, an official German civic education resource, explicitly
+  states the election date as 22 March 2026, which is verified by fetching the page.
+  Election Compass and Wikipedia also independently corroborate the date. Although
+  the new official reference (PDF from the election authority) could not be fetched
+  during this investigation, the date is supported by authoritative and independently
+  verified sources.
+rcid: 2551378281
+revid: 2474683025
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bpb.de/politik/umfragen/wahl-o-mat/2026-rp
+- provenance: verified
+  supports_claim: true
+  url: https://www.newswall.org/summary/election-compass-rhineland-palatinate-2026-state-election-on-march-22nd
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/2026_Rhineland-Palatinate_state_election
+- provenance: reported
+  supports_claim: null
+  url: https://www.wahlen.rlp.de/fileadmin/wahlen.rlp.de/dokumente-wahlen/ltw/PDF/LW2026_Bekanntmachung_Landeslisten_LWL-1.pdf
+timestamp: '2026-04-10T13:43:30.672956+00:00'
+title: Q111251478
+turns: 1
+value_label: null
+verdict: verified-high

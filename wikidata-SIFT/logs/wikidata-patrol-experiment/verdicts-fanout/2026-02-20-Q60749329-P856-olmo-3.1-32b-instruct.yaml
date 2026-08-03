@@ -1,0 +1,27 @@
+completion_tokens: 550
+cost_usd: 0.0052996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24848
+property: P856
+property_label: official website
+rationale: The URL https://www.bswhealth.com/locations/hospital/plano is directly
+  confirmed as the official website of Baylor Scott & White Medical Center – Plano
+  by the hospital's own authoritative website. The hospital's page at this URL provides
+  detailed, location-specific information and operational details that match the Wikidata
+  item. This constitutes primary evidence confirming the claim.
+rcid: 2540942691
+revid: 2464732151
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bswhealth.com/locations/hospital/plano
+- provenance: verified
+  supports_claim: true
+  url: https://www.bswhealth.com/
+timestamp: '2026-02-20T13:28:01.057630+00:00'
+title: Q60749329
+turns: 3
+value_label: null
+verdict: verified-high

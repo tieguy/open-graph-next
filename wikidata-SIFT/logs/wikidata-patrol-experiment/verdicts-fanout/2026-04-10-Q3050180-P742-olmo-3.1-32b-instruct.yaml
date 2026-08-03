@@ -1,0 +1,29 @@
+completion_tokens: 773
+cost_usd: 0.003287
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14116
+property: P742
+property_label: pseudonym
+rationale: The edit changes El Pez's pseudonym to 'mon chou', but no authoritative,
+  independent sources mention 'mon chou' as a pseudonym for this artist. Multiple
+  reliable art and street art sources consistently use 'El Pez' and provide no evidence
+  for 'mon chou'. The change is not supported by cited references or independent corroboration.
+rcid: null
+revid: 2471606692
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://avantgallery.com/collections/el-pez
+- provenance: verified
+  supports_claim: false
+  url: https://streetartdatabase.wordpress.com/2017/11/06/pez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.artsy.net/artist/el-pez
+timestamp: '2026-04-10T11:38:22.094044+00:00'
+title: Q3050180
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,27 @@
+completion_tokens: 1843
+cost_usd: 0.00210807
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21632
+property: P910
+property_label: topic's main category
+rationale: The removed claim assigned 'Category:Wikipedia:Babel' (Q9723126) as the
+  'topic’s main category' for the Wikimedia project page 'Wikipedia:Babel' (Q6476774).
+  However, this category is specific to Wikimedia Commons and not an appropriate categorization
+  for a Wikimedia project page. The reference cited (P3452 inferred from Commons:Babel)
+  does not support this claim, as the Commons:Babel page describes language proficiency
+  templates but does not categorize the Wikimedia project page itself. No authoritative
+  Wikimedia source confirms this categorization, and the removal was justified as
+  the claim was unsupported and misapplied.
+rcid: 2550595474
+revid: 2473926752
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Commons:Babel
+timestamp: '2026-04-11T12:30:15.347778+00:00'
+title: Q6476774
+turns: 2
+value_label: Category:Wikipedia:Babel
+verdict: verified-high

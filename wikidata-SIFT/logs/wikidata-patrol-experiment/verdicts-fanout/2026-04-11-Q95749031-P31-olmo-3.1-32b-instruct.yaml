@@ -1,0 +1,28 @@
+completion_tokens: 688
+cost_usd: 0.0031614
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13743
+property: P31
+property_label: instance of
+rationale: 'The primary source https://books.openedition.org/septentrion/80546?lang=en
+  explicitly discusses Odette Ponge as a human individual engaged in literary and
+  intellectual activities. This directly supports the ''instance of: human (Q5)''
+  claim. The secondary source also corroborates the human identity of Ponge and associates
+  her with literary collaboration. Both sources are reliable and independently confirm
+  the claim.'
+rcid: 2550399768
+revid: 2473737426
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://books.openedition.org/septentrion/80546?lang=en
+- provenance: verified
+  supports_claim: true
+  url: https://newprairiepress.org/cgi/viewcontent.cgi?article=2191&context=sttcl
+timestamp: '2026-04-11T12:21:04.944309+00:00'
+title: Q95749031
+turns: 1
+value_label: human
+verdict: verified-high

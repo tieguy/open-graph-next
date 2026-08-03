@@ -1,0 +1,32 @@
+completion_tokens: 1927
+cost_usd: 0.0039888
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14163
+property: P5817
+property_label: state of use
+rationale: The change from 'decommissioned' to 'in use' for Hosoura Station is supported
+  by the timing of the Ofunato Line BRT service expansion in March 2020, as reported
+  by a primary news source (wtmnews.net), and is consistent with the Wikidata item's
+  property timeline indicating a transition from a former railway station to ongoing
+  use as a bus stop. However, there is no direct primary source explicitly stating
+  the station's current operational status attached to the claim. Thus, the evidence
+  is plausible and consistent but not definitively confirmed by a primary citation.
+rcid: 2550460673
+revid: 2473797138
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wtmnews.net/20200314153
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan-guide.com/e/e5035.html
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Hosoura_Station
+timestamp: '2026-04-11T11:00:49.079093+00:00'
+title: Q8189404
+turns: 1
+value_label: in use
+verdict: verified-low

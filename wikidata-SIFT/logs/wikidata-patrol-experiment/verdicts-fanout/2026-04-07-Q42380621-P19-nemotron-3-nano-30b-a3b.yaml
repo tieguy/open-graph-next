@@ -1,0 +1,20 @@
+completion_tokens: 465
+cost_usd: 0.00181475
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 34435
+property: P19
+property_label: place of birth
+rationale: No verifiable sources were found that confirm or contradict the claim that
+  Francesc Arabí's place of birth is Marruecos (Q38820208). Multiple web searches
+  using various keyword combinations and direct queries returned no relevant results
+  that could be fetched and analyzed to verify the claim.
+rcid: null
+revid: 2464673102
+sources: []
+timestamp: '2026-04-07T14:13:53.812014+00:00'
+title: Q42380621
+turns: 7
+value_label: Marruecos
+verdict: unverifiable

@@ -1,0 +1,31 @@
+completion_tokens: 1915
+cost_usd: 0.01702746
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 129317
+property: P735
+property_label: given name
+rationale: All verified sources consistently refer to Pierre Bordage as 'Pierre' and
+  do not mention 'Maël' as his given name. The cited GND reference does not support
+  the claim that Pierre Bordage's given name is 'Maël'.
+rcid: 2550574108
+revid: 2473906285
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.noosfere.org/heberg/bordage/bio.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.goodreads.com/author/show/40707.Pierre_Bordage
+- provenance: verified
+  supports_claim: false
+  url: https://locusmag.com/2025/12/pierre-bordage-1955-2025/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Pierre_Bordage
+timestamp: '2026-04-10T13:42:32.452319+00:00'
+title: Q543836
+turns: 5
+value_label: Maël
+verdict: incorrect

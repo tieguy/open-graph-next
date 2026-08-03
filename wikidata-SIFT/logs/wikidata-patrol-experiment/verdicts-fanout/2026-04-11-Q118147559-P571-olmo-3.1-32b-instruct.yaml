@@ -1,0 +1,34 @@
+completion_tokens: 2485
+cost_usd: 0.0040776
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12933
+property: P571
+property_label: inception
+rationale: The change from 1893 to 1900 for the inception (P571) of the Our Lady of
+  the Rosary Choir and Orchestra is supported by multiple independent sources, including
+  the official parish website and local cultural records. These sources confirm that
+  the formal founding year is 1900, while 1893 is only associated with earlier musical
+  activities and not the official inception. The new value is thus correct and more
+  accurate.
+rcid: 2550444458
+revid: 2473781138
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.olrosary.org/music.html
+- provenance: verified
+  supports_claim: true
+  url: https://pt.wikipedia.org/wiki/Pirenópolis#Cultura
+- provenance: verified
+  supports_claim: true
+  url: https://www.facebook.com/olorchoir/
+- provenance: reported
+  supports_claim: false
+  url: https://pt.wikipedia.org/wiki/Coro_e_Orquestra_Nossa_Senhora_do_Ros%C3%A1rio
+timestamp: '2026-04-11T10:09:38.165983+00:00'
+title: Q118147559
+turns: 1
+value_label: null
+verdict: verified-high

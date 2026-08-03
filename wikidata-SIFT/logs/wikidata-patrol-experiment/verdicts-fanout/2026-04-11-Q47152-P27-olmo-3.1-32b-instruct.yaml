@@ -1,0 +1,26 @@
+completion_tokens: 1752
+cost_usd: 0.0067274
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28381
+property: P27
+property_label: country of citizenship
+rationale: Mary Shelley is universally recognized as British, born and lived in England.
+  No authoritative sources, including Wikipedia and Britannica, mention Spanish citizenship
+  or any connection to the Second Spanish Republic. The addition of 'Second Spanish
+  Republic' as a country of citizenship is factually incorrect.
+rcid: null
+revid: 2471032323
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mary_Shelley
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Mary-Wollstonecraft-Shelley
+timestamp: '2026-04-11T15:49:07.260282+00:00'
+title: Q47152
+turns: 1
+value_label: Second Spanish Republic
+verdict: incorrect

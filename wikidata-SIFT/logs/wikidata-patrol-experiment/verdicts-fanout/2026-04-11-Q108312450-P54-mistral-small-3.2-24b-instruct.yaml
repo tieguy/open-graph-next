@@ -1,0 +1,18 @@
+completion_tokens: 113
+cost_usd: 0.0055930625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 59358
+property: P54
+property_label: member of sports team
+rationale: Unable to verify the claim due to technical issues preventing web searches
+  and fetches.
+rcid: 2550863905
+revid: 2474187409
+sources: []
+timestamp: '2026-04-11T18:44:27.242896+00:00'
+title: Q108312450
+turns: 4
+value_label: Goon Squad
+verdict: unverifiable

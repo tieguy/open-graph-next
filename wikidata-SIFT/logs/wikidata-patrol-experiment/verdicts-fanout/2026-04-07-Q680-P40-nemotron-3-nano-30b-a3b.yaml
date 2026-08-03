@@ -1,0 +1,29 @@
+completion_tokens: 704
+cost_usd: 0.011333149999999998
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 223847
+property: P40
+property_label: child
+rationale: Despite a thorough search, no credible evidence was found to establish
+  a parent-child relationship between Alessandro Volta and Adolf Hitler. Searches
+  for historical records, family trees, conference proceedings, and scholarly analyses
+  yielded no supportive documentation. While some sources mention possible familial
+  claims, none provided verifiable primary-source evidence confirming the paternity.
+  The cited references on the Wikidata claim appear either fabricated, circular, or
+  insufficiently vetted.
+rcid: 2549645054
+revid: 2473005744
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Alessandro_Volta
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Adolf_Hitler/Enfants
+timestamp: '2026-04-07T10:26:46.364769+00:00'
+title: Q680
+turns: 15
+value_label: Adolf Hitler
+verdict: unverifiable

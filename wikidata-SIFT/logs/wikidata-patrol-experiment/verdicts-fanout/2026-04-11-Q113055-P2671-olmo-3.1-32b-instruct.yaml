@@ -1,0 +1,29 @@
+completion_tokens: 1967
+cost_usd: 0.0035988
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12093
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The edit replaced a Google Knowledge Graph (KG) ID that conforms to the
+  expected format with a value that does not match the format and is not recognized
+  as a KG entity for 'classical garalde typeface genre.' Authoritative sources, including
+  Wikipedia and type history resources, confirm that 'Old style' or 'Garalde' is a
+  recognized typeface classification but do not recognize this specific genre as a
+  named entity with a KG ID. No evidence supports the new value, and the edit was
+  not accompanied by any references, making it suspect.
+rcid: 2549697760
+revid: 2473056935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Old_style_serif_typeface
+- provenance: verified
+  supports_claim: false
+  url: https://ilovetypography.com/2007/11/21/type-terminology-old-style/
+timestamp: '2026-04-11T08:38:30.003320+00:00'
+title: Q113055
+turns: 1
+value_label: null
+verdict: suspect

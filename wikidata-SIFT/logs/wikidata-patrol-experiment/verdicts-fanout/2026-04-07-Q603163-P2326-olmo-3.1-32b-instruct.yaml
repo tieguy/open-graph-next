@@ -1,0 +1,30 @@
+completion_tokens: 1252
+cost_usd: 0.0092414
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 42451
+property: P2326
+property_label: GNS Unique Feature ID
+rationale: The new value for the GNS Unique Feature ID is unsupported by any authoritative
+  source. Multiple web searches returned no evidence that 'FABIO ESTUVO AQUI ALQUIZAR
+  REPRESENTANDO BOTAAAAAA' is a valid identifier for Alquízar, Cuba. The previous
+  numeric value was consistent with typical identifier formats. No references or documentation
+  were provided to justify the change.
+rcid: null
+revid: 2471291012
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=GNS+Unique+Feature+ID+Alqu%C3%ADzar+Cuba
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q603163
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Alqu%C3%ADzar
+timestamp: '2026-04-07T04:39:09.808675+00:00'
+title: Q603163
+turns: 8
+value_label: null
+verdict: suspect

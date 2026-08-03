@@ -1,0 +1,20 @@
+completion_tokens: 632
+cost_usd: 0.012113599999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 58672
+property: P569
+property_label: date of birth
+rationale: No independent, reliable sources were found that specify Alicia Borrás's
+  date of birth or confirm she was born in the 21st century. The recent edit changed
+  the date from 2000 to '21st century', but there is no supporting evidence from authoritative
+  or published sources.
+rcid: 2551012332
+revid: 2474330033
+sources: []
+timestamp: '2026-04-08T16:32:23.661125+00:00'
+title: Q12382802
+turns: 14
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 412
+cost_usd: 0.0011983
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19144
+property: P106
+property_label: occupation
+rationale: No reliable sources were found to confirm or deny the claim that Pierre
+  Coeur is a footballer. The name Pierre Coeur does not correspond to any known public
+  figure, and the current claims on the Wikidata item suggest a possible error or
+  placeholder data.
+rcid: null
+revid: 2137096945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pierre+Coeur+occupation+Footballer
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pierre+Coeur+occupation
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pierre+Coeur
+timestamp: '2026-04-07T13:33:32.524480+00:00'
+title: Q102227635
+turns: 4
+value_label: Footballer
+verdict: unverifiable

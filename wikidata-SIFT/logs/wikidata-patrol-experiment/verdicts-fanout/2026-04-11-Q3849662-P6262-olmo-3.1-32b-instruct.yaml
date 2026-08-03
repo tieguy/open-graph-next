@@ -1,0 +1,25 @@
+completion_tokens: 187
+cost_usd: 0.0025611999999999996
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12245
+property: P6262
+property_label: Fandom article ID
+rationale: 'The edit adds a qualifier ''subject named as: Transhumanism'' to the Fandom
+  article ID claim, which correctly reflects the naming convention used on the Fandom
+  wiki for the article about transhumanism. The Fandom page for ''Transhumanism''
+  (https://transhumanism.fandom.com/wiki/Transhumanism) confirms that the page title
+  and subject are ''Transhumanism''. This directly supports the qualifier and the
+  use of ''transhumanism:Transhumanism'' as the article ID for the Fandom entry.'
+rcid: 2551079986
+revid: 2474396172
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://transhumanism.fandom.com/wiki/Transhumanism
+timestamp: '2026-04-11T13:54:30.426496+00:00'
+title: Q3849662
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 2073
+cost_usd: 0.0042724
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15143
+property: P1477
+property_label: birth name
+rationale: The birth name of Sanité Bélair is consistently reported as 'Suzanne Bélair'
+  by multiple independent and reliable sources. The new value 'Suzanne hkjk' is not
+  supported by any source and appears to be an error. Changing a well-sourced, correct
+  value to an unsupported and nonsensical one is incorrect.
+rcid: null
+revid: 2454234091
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Sanité_Bélair
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com.mx/Martyred-Lieutenant-Haitian-Revolutionary-English-ebook/dp/B07NNWVKBY
+- provenance: verified
+  supports_claim: true
+  url: https://www.lunionsuite.com/black-history-highlight-sanite-belair-tigress-haiti/
+- provenance: reported
+  supports_claim: true
+  url: https://kentakepage.com/sanite-belair-the-tigress-of-haiti/
+timestamp: '2026-04-11T05:45:26.779208+00:00'
+title: Q3472292
+turns: 1
+value_label: null
+verdict: incorrect

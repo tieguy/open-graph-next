@@ -1,0 +1,34 @@
+completion_tokens: 2525
+cost_usd: 0.007779540000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 65211
+property: P569
+property_label: date of birth
+rationale: The edit changed Beatriz González López-Valcárcel's date of birth from
+  1957 to 2026, which is implausible given her documented academic career starting
+  in the 1970s and 1980s. No verified independent source supports a birth year of
+  2026, and the cited Spanish Wikipedia reference could not be accessed. The old value
+  of 1957 aligns with her career timeline and is consistent with available evidence,
+  including her employment records and academic degrees.
+rcid: null
+revid: 2472523494
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pub.orcid.org/v3.0/0000-0002-5571-3257/education/4123800
+- provenance: verified
+  supports_claim: false
+  url: https://pub.orcid.org/v3.0/0000-0002-5571-3257/employment/4105532
+- provenance: verified
+  supports_claim: false
+  url: https://centroestudiospoliticaspublicas.com/dna-beatriz-gonzalez-lopez-valcarcel/
+- provenance: verified
+  supports_claim: false
+  url: https://www2.ulpgc.es/index.php?pagina=bvalcarcel.dmc&ver=inicio
+timestamp: '2026-04-11T10:37:42.120089+00:00'
+title: Q50422099
+turns: 4
+value_label: null
+verdict: incorrect

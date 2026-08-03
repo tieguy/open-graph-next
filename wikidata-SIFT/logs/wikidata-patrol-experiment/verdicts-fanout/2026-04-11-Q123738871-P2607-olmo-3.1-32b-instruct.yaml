@@ -1,0 +1,29 @@
+completion_tokens: 1899
+cost_usd: 0.006658600000000001
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27596
+property: P2607
+property_label: BookBrainz author ID
+rationale: The BookBrainz author ID claim for Josh Universe is not supported by any
+  referenced or independently verifiable source. Public BookBrainz interfaces do not
+  resolve the UUID to an author named Josh Universe, and no external source confirms
+  this association. Therefore, the claim cannot be verified at this time.
+rcid: 2551429137
+revid: 2474729246
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bookbrainz.org/author
+- provenance: verified
+  supports_claim: false
+  url: https://beta.bookbrainz.org/
+- provenance: reported
+  supports_claim: false
+  url: https://web.search results for 'Josh Universe BookBrainz'
+timestamp: '2026-04-11T06:16:35.849233+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: unverifiable

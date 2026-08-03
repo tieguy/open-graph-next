@@ -1,0 +1,29 @@
+completion_tokens: 2525
+cost_usd: 0.014231399999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44913
+property: P856
+property_label: official website
+rationale: The official website for Anker STI (Stiftelsen Anker Studentboliger og
+  Hotel) is confirmed to be https://www.anker.oslo.no/ by both the official website
+  itself and the Norwegian Central Coordinating Register for Legal Entities. The old
+  URL, http://www.anker.oslo.no, is unreachable and not supported by any official
+  source. The change from HTTP to HTTPS and the addition of a trailing slash is a
+  standard web practice and aligns with the current official website. The qualifierål
+  qualifier (P407) is appropriate for a Norwegian organization.
+rcid: 2550947442
+revid: 2474267669
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.anker.oslo.no/
+- provenance: verified
+  supports_claim: true
+  url: https://w2.brreg.no/enhet/sok/detalj.jsp?orgnr=966891750
+timestamp: '2026-04-11T08:36:27.085735+00:00'
+title: Q17748614
+turns: 5
+value_label: null
+verdict: verified-high

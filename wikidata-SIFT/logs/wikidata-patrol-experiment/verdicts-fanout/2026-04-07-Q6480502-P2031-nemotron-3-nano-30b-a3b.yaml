@@ -1,0 +1,24 @@
+completion_tokens: 724
+cost_usd: 0.0040834999999999995
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78774
+property: P2031
+property_label: start of work period
+rationale: 'No independent sources were found to verify the claim that Lally Cadeau''s
+  start of work period was updated to 1970. Multiple web searches returned no relevant
+  results, and known potential sources like Wikipedia and archival websites were inaccessible
+  or blocked. While the edit may be related to her actual career (as indicated by
+  other claims about birth date and citizenship), no primary or secondary source was
+  located that confirms the 1970 start date or supports the change. Because no source
+  was verified with ''provenance: verified'', it is impossible to assess the validity
+  of the claim.'
+rcid: null
+revid: 2471986466
+sources: []
+timestamp: '2026-04-07T13:28:41.297363+00:00'
+title: Q6480502
+turns: 15
+value_label: null
+verdict: unverifiable

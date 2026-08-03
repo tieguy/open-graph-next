@@ -1,0 +1,23 @@
+completion_tokens: 566
+cost_usd: 0.0026707
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39985
+property: P1559
+property_label: name in native language
+rationale: The edit corrects a typographical error in the name 'Roberrrrrrrrrrrta'
+  to the correct name 'Roberta'. The item context and the nature of the edit support
+  the correctness of the change. No further verification is needed as the change is
+  clearly a correction of a typographical error.
+rcid: 2550513262
+revid: 2473847989
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sierragamers.com/
+timestamp: '2026-04-08T19:04:21.729345+00:00'
+title: Q55176
+turns: 5
+value_label: null
+verdict: verified-high

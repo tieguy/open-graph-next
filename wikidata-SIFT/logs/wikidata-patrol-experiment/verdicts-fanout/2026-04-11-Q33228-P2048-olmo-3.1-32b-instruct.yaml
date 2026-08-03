@@ -1,0 +1,37 @@
+completion_tokens: 365
+cost_usd: 0.0054932
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26371
+property: P2048
+property_label: height
+rationale: The edit changed Nadia Comăneci's height from '+167' to '166 centimetre'.
+  While several sources confirm her height around 1.63 m (which is 163 cm), none of
+  the consulted sources explicitly state her height as 167 cm or 166 cm. The most
+  authoritative source (Olympedia) reports her height indirectly through profile data
+  but does not provide an explicit height value. The Italian Wikipedia (cited as a
+  reference for both values) was fetched but did not provide a directly readable value
+  for height in the previewed content. Without a reliable, primary source explicitly
+  stating either the old or new value, the change cannot be verified as correct or
+  incorrect.
+rcid: 2549596970
+revid: 2472959006
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.olympics.com/en/athletes/nadia-comaneci
+- provenance: verified
+  supports_claim: false
+  url: https://bodysize.org/en/nadia-comaneci/
+- provenance: verified
+  supports_claim: false
+  url: https://www.dimensions.com/element/nadia-comaneci
+- provenance: verified
+  supports_claim: false
+  url: http://news.bbc.co.uk/sport2/shared/spl/hi/tv_and_radio/02/sport_personality/past_winners/html/1974.stm
+timestamp: '2026-04-11T10:22:42.263053+00:00'
+title: Q33228
+turns: 1
+value_label: null
+verdict: unverifiable

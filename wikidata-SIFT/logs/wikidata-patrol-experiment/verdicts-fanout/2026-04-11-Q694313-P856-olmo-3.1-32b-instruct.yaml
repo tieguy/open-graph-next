@@ -1,0 +1,30 @@
+completion_tokens: 1551
+cost_usd: 0.0060984
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25839
+property: P856
+property_label: official website
+rationale: The official website for Uruma City is https://www.city.uruma.lg.jp/, as
+  confirmed by direct fetch of the city's official website and corroborated by third-party
+  references. The new value, https://www.eurowings.com/, is an airline's website and
+  is not related to Uruma City. There is no justification for replacing the official
+  municipal website with an unrelated commercial website.
+rcid: null
+revid: 2468927624
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.uruma.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.eurowings.com/
+- provenance: reported
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/ウルマ市
+timestamp: '2026-04-11T13:47:49.831611+00:00'
+title: Q694313
+turns: 1
+value_label: null
+verdict: incorrect

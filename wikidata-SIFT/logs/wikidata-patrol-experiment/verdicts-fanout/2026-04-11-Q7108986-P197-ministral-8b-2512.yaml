@@ -1,0 +1,33 @@
+completion_tokens: 1704
+cost_usd: 0.00212052
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 27902
+property: P197
+property_label: adjacent station
+rationale: The edit did not change the claim value itself (Nishishita Station remains
+  the same), and no independent sources could be verified due to technical limitations.
+  The edit appears to be a metadata update or duplicate statement removal rather than
+  a factual change. Without fetching and confirming the existence or adjacency of
+  Nishishita Station to Otomo Station from reliable sources, the claim cannot be verified.
+rcid: 2550457912
+revid: 2473794392
+sources:
+- error: HTTP 403 Forbidden
+  provenance: verified
+  supports_claim: false
+  url: https://mapcarta.com/28750698
+- provenance: verified
+  summary: Page lead and content do not mention Otomo Station or Nishishita Station.
+  supports_claim: false
+  url: https://www.japan-experience.com/plan-your-trip/travel-by-train/train-in-japan/yotsubashi-subway-line
+- error: HTTP 403 Forbidden
+  provenance: verified
+  supports_claim: false
+  url: https://www.jreast.co.jp/en/e/stations/e350.html
+timestamp: '2026-04-11T05:54:37.522534+00:00'
+title: Q7108986
+turns: 3
+value_label: Nishishita Station
+verdict: unverifiable

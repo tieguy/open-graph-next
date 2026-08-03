@@ -1,0 +1,39 @@
+completion_tokens: 1723
+cost_usd: 0.021477780000000005
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 72442
+property: P488
+property_label: chairperson
+rationale: The claim that Alessandro Cataldo is chairperson/president of Libera Associazione
+  Disabili Imprenditori APS (Q138348772) is strongly supported by multiple independent
+  sources. His personal website explicitly states he is 'fondatore e presidente' of
+  the association, the official LADI website identifies him as 'Presidente di LADI
+  APS', and two news articles from reputable publications (La Nazione and Italiaeconomy)
+  both confirm his role as president. While the referenced PDF statute could not be
+  read due to extraction issues, the independent corroboration from multiple authoritative
+  sources provides high confidence in the accuracy of the claim.
+rcid: 2540928097
+revid: 2464718844
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://ladiets.org/wp-content/uploads/2025/10/Statuto-Libera-Associazione-Disabili-Imprenditori-LADI.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.alessandrocataldo.it/chi-sono/
+- provenance: verified
+  supports_claim: true
+  url: https://ladiets.org/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lanazione.it/arezzo/cronaca/disabili-imprenditori-la-storia-di-368fe989
+- provenance: verified
+  supports_claim: true
+  url: https://italiaeconomy.it/libera-associazione-disabili-imprenditori/
+timestamp: '2026-02-20T21:39:38.887499+00:00'
+title: Q138348772
+turns: 10
+value_label: Alessandro Cataldo [it]
+verdict: verified-high

@@ -1,0 +1,30 @@
+completion_tokens: 2014
+cost_usd: 0.0014462099999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13823
+property: P1366
+property_label: replaced by
+rationale: The claim that Samuel Ikome Sako (Q60676421) replaced Sisiku Julius Ayuk
+  Tabe (Q60606828) was unsupported and contradicted by multiple verified primary sources.
+  Independent sources from AmbazoniaGov, Crisis Group, and Al Jazeera explicitly deny
+  this relationship, confirming Sisiku Julius Ayuk Tabe as the sole recognized leader.
+  The removal of this claim was justified.
+rcid: 2550926522
+revid: 2474248018
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ambazoniagov.org/leadership
+- provenance: verified
+  supports_claim: false
+  url: https://www.crisisgroup.org/africa/central-africa/cameroon/ambazonia-separatist-leaders-whos-who
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/news/2023/12/ambazonia-unrecognized-state
+timestamp: '2026-04-11T05:31:56.810639+00:00'
+title: Q60606828
+turns: 1
+value_label: Samuel Ikome Sako
+verdict: incorrect

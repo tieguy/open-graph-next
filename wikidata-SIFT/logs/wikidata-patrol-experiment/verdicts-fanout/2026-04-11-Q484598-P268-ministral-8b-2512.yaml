@@ -1,0 +1,30 @@
+completion_tokens: 2109
+cost_usd: 0.00263985
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31708
+property: P268
+property_label: Bibliothèque nationale de France ID
+rationale: The edit changes the Bibliothèque nationale de France ID for CAPTCHA from
+  '17001362r' to '14022014'. Neither value is supported by any verified references
+  or independent sources. Prefetched references do not confirm the correctness of
+  either value, and no additional sources were fetched due to search limitations.
+  The absence of references and lack of corroborating evidence make the edit unverifiable.
+rcid: 2549625894
+revid: 2472987257
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://dculturelles.hypotheses.org/tag/captcha
+- provenance: verified
+  supports_claim: false
+  url: https://www.idref.fr/03361122X
+- provenance: verified
+  supports_claim: false
+  url: https://www.centre-mersenne.org/en/identifiers/
+timestamp: '2026-04-11T14:49:58.722399+00:00'
+title: Q484598
+turns: 3
+value_label: null
+verdict: unverifiable

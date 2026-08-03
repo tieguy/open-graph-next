@@ -1,0 +1,23 @@
+completion_tokens: 1229
+cost_usd: 0.008935005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 100076
+property: P106
+property_label: occupation
+rationale: The evidence from the Find a Grave memorial page indicates that Calamity
+  Jane was primarily known as a scout and frontierswoman. While it mentions she worked
+  as a part-time prostitute, it does not support the claim that her occupation was
+  'pornography.' Therefore, the edit is incorrect.
+rcid: null
+revid: 2471214901
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.findagrave.com/memorial/166/calamity-jane
+timestamp: '2026-04-07T07:53:51.207455+00:00'
+title: Q236795
+turns: 11
+value_label: pornography
+verdict: incorrect

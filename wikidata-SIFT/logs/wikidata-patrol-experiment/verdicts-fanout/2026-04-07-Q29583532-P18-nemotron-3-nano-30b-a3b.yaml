@@ -1,0 +1,21 @@
+completion_tokens: 634
+cost_usd: 0.00421015
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81667
+property: P18
+property_label: image
+rationale: No external sources were found through web search or reference analysis
+  to confirm or deny the claim about Jean Vioulac's image. The deleted reference points
+  to Jean Vioulac.png, but no verifiable web sources containing this image or its
+  context were located. Without any verified sources supporting or contradicting the
+  claim, it cannot be determined whether the removal was justified.
+rcid: null
+revid: 2464711808
+sources: []
+timestamp: '2026-04-07T11:46:24.951537+00:00'
+title: Q29583532
+turns: 15
+value_label: null
+verdict: unverifiable

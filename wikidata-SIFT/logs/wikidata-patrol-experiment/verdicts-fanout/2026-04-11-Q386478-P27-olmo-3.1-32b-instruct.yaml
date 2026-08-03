@@ -1,0 +1,27 @@
+completion_tokens: 246
+cost_usd: 0.0034856
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16690
+property: P27
+property_label: country of citizenship
+rationale: The source 'The Cuban History' states that Manuel Márquez Sterling was
+  born 'under the flag of the Republic of Cuba in arms,' which indicates he was recognized
+  as a citizen of the Republic of Cuba from birth. This supports changing the country
+  of citizenship from the generic 'Cuba' to the specific historical entity 'Republic
+  of Cuba.' The change is consistent with best practices of specifying the relevant
+  state entity in Wikidata, especially for historical figures where the distinction
+  is meaningful. Both the old and new values are historically accurate, but the new
+  value is more precise.
+rcid: 2550633865
+revid: 2473964037
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.thecubanhistory.com/historical-pages-of-cuba/cuban-presidents/carlos-manuel-marquez-y-sterling/
+timestamp: '2026-04-11T06:03:28.370513+00:00'
+title: Q386478
+turns: 1
+value_label: Republic of Cuba
+verdict: verified-high

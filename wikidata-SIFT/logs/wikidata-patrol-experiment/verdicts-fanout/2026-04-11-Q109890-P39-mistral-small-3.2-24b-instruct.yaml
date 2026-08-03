@@ -1,0 +1,28 @@
+completion_tokens: 1552
+cost_usd: 0.0015738750000000002
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14334
+property: P39
+property_label: position held
+rationale: Multiple independent sources confirm that Georg II. Marschall von Ebnet
+  was the Bishop of Bamberg, which aligns with the role of a diocesan bishop. The
+  references provided in the edit are reliable and support the claim.
+rcid: 2550976786
+revid: 2474296152
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://database.factgrid.de/wiki/Item:Q655406
+- provenance: verified
+  supports_claim: true
+  url: https://www.biyografya.com/en/biographies/georg-ii-marschall-von-ebnet-5226ead5
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Georg_Marschalk_von_Ebneth
+timestamp: '2026-04-11T14:59:38.061707+00:00'
+title: Q109890
+turns: 1
+value_label: diocesan bishop
+verdict: verified-high

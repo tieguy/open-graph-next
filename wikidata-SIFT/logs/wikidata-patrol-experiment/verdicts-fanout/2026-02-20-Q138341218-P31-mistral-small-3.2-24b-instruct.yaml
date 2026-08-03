@@ -1,0 +1,22 @@
+completion_tokens: 567
+cost_usd: 0.0023863
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22162
+property: P31
+property_label: instance of
+rationale: The reference provided does not explicitly support the claim that Sam Bakker
+  is an instance of human. While it implies his humanity through professional activities,
+  it lacks direct confirmation.
+rcid: 2540977207
+revid: 2464763921
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sambakker.com/
+timestamp: '2026-02-20T02:15:47.392037+00:00'
+title: Q138341218
+turns: 4
+value_label: human
+verdict: unverifiable

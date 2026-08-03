@@ -1,0 +1,30 @@
+completion_tokens: 2343
+cost_usd: 0.0045316
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15629
+property: P108
+property_label: employer
+rationale: Multiple reliable sources, including the University of Oslo's official
+  faculty page and the Norwegian Wikipedia, confirm that Finn-Erik Vinje was employed
+  by the Faculty of Humanities at the University of Oslo. The change from the broader
+  'University of Oslo' to the more specific 'Faculty of Humanities, University of
+  Oslo' is therefore accurate and improves precision.
+rcid: 2550650051
+revid: 2473979917
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.uio.no/english/people/aca/scandinavian-languages/emeriti/erik/
+- provenance: verified
+  supports_claim: true
+  url: https://no.wikipedia.org/wiki/Finn-Erik_Vinje
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Faculty_of_Humanities_(University_of_Oslo)
+timestamp: '2026-04-11T12:17:41.340254+00:00'
+title: Q1780040
+turns: 1
+value_label: Faculty of Humanities, University of Oslo
+verdict: verified-high

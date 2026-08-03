@@ -1,0 +1,37 @@
+completion_tokens: 1334
+cost_usd: 0.026607
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 19937
+property: P856
+property_label: official website
+rationale: The URL https://www.pfarrverband-laim.de/st-philippus/home/ is confirmed
+  as the correct official website for St. Philippus (Munich). Direct fetching of the
+  website confirmed it is the active, official Pfarrgemeinde website with complete
+  contact information, church history (including the 1982 inauguration date matching
+  the item's P571 claim), and community details. The Archdiocese of Munich's official
+  directory independently lists this identical URL as St. Philippus's official website,
+  providing authoritative third-party confirmation. While the edit itself cites no
+  references, the claim is factually correct and supported by multiple independent,
+  reliable sources.
+rcid: 2540920828
+revid: 2464711857
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.pfarrverband-laim.de/st-philippus/home/
+- provenance: verified
+  supports_claim: true
+  url: https://www.erzbistum-muenchen.de/EMFInclude/Pages/Organisation.aspx?id=1149
+- provenance: verified
+  supports_claim: true
+  url: https://www.pfarrverband-laim.de/
+- provenance: verified
+  supports_claim: true
+  url: https://weekdaymasses.org.uk/en/area/munich/churches
+timestamp: '2026-02-21T01:00:54.073063+00:00'
+title: Q132198063
+turns: 2
+value_label: null
+verdict: verified-high

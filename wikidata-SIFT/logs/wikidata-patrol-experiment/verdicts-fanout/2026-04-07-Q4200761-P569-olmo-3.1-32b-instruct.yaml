@@ -1,0 +1,20 @@
+completion_tokens: 822
+cost_usd: 0.011980999999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 57439
+property: P569
+property_label: date of birth
+rationale: No independent sources were found that confirm Ayu Azhari's date of birth
+  as either 19 November 1966 or the previously listed 19 November 1968. The edit lacks
+  supporting citations and external corroboration, making it impossible to verify
+  the change.
+rcid: 2549792878
+revid: 2473150609
+sources: []
+timestamp: '2026-04-07T13:24:12.087710+00:00'
+title: Q4200761
+turns: 9
+value_label: null
+verdict: unverifiable

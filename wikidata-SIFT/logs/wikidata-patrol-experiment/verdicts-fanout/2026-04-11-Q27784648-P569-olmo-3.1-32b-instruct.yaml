@@ -1,0 +1,31 @@
+completion_tokens: 3144
+cost_usd: 0.004852
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14828
+property: P569
+property_label: date of birth
+rationale: The edit introduces a specific birth date ('20 January 1821') for Alexis
+  Louis Pierre Housselin without evidence from any reliable source. Independent secondary
+  sources confirm the birth year 1821 and the birthplace, but do not specify the day
+  or month. The previous value was an unspecific year, which was correct and sufficiently
+  precise given available evidence. The new value is not supported by any fetched
+  and verified source, making the edit unjustified and potentially incorrect.
+rcid: 2551234354
+revid: 2474546726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://data.bnf.fr/fr/ark:/12148/cb14969477c
+- provenance: verified
+  supports_claim: false
+  url: https://www.geneanet.org/fonds/bibliotheque/?go=1&lang=fr&nom=housselin&page=1&size=50
+- provenance: verified
+  supports_claim: false
+  url: https://thefugitivesaint.tumblr.com/post/167317801408/alexis-louis-pierre-housselin-fl-1858-1881
+timestamp: '2026-04-11T17:50:20.393401+00:00'
+title: Q27784648
+turns: 1
+value_label: null
+verdict: suspect

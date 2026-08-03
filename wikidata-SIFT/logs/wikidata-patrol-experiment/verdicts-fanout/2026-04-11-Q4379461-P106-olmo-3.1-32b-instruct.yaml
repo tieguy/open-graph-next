@@ -1,0 +1,31 @@
+completion_tokens: 2028
+cost_usd: 0.005091399999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19373
+property: P106
+property_label: occupation
+rationale: Multiple independent and verified sources confirm that Valeriy Priyomykhov
+  was both a film actor and a film director. The edit appears to have changed the
+  single value for occupation from 'film director' to 'film actor,' which risks erasing
+  a valid and well-sourced claim. Wikidata should represent both occupations as separate
+  statements under P106. Therefore, this change is suspect unless it was intended
+  to add 'film actor' rather than replace 'film director'.
+rcid: 2551404654
+revid: 2474708127
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Valery_Priyomykhov
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/name/nm0693925/
+- provenance: verified
+  supports_claim: true
+  url: https://ru.wikipedia.org/wiki/Валерий_Приёмыхов
+timestamp: '2026-04-11T11:50:16.763428+00:00'
+title: Q4379461
+turns: 1
+value_label: film actor
+verdict: suspect

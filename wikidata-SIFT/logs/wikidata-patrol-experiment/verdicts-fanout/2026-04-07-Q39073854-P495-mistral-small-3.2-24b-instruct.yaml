@@ -1,0 +1,22 @@
+completion_tokens: 990
+cost_usd: 0.006436074999999999
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 67309
+property: P495
+property_label: country of origin
+rationale: The only reference cited for the claim was from English Wikipedia, which
+  is not a reliable source. Additional searches did not provide any conclusive evidence
+  to confirm or deny the claim. Therefore, the verdict is unverifiable.
+rcid: 2550486511
+revid: 2473822432
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.allocine.fr/film/fichefilm_gen_cfilm=250926.html
+timestamp: '2026-04-07T09:18:53.499366+00:00'
+title: Q39073854
+turns: 12
+value_label: Iraq
+verdict: unverifiable

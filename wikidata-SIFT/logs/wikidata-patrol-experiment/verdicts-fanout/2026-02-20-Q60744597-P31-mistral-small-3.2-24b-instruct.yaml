@@ -1,0 +1,25 @@
+completion_tokens: 375
+cost_usd: 0.0028408
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27283
+property: P31
+property_label: instance of
+rationale: The official website of Global Banking & Finance Review describes it as
+  a global financial intelligence and recognition platform, which includes a Digital-First
+  Banking Awards Program. This supports the claim that it is a magazine.
+rcid: 2540950012
+revid: 2464738995
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/magazine/
+timestamp: '2026-02-20T10:14:30.239735+00:00'
+title: Q60744597
+turns: 4
+value_label: magazine
+verdict: verified-high

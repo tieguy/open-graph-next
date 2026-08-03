@@ -1,0 +1,36 @@
+completion_tokens: 4248
+cost_usd: 0.19144799999999998
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 170208
+property: P408
+property_label: software engine
+rationale: 'The cited Fandom wiki reference does mention Unity in relation to Fut
+  Rap Cartas, specifically as a ''graphics engine'' introduced in the January 2022
+  iOS launch. This claim is corroborated by independent sources: APKPure''s official
+  release notes from December 2021/January 2022 contain a developer statement thanking
+  ''nuestro nuevo motor gráfico Unity'' (our new graphics engine Unity). However,
+  the evidence describes Unity specifically as a graphics engine update in 2022 rather
+  than comprehensively establishing it as the overall software engine for all current
+  versions. In game development terminology, adopting Unity typically means adopting
+  the complete software framework, but the sources use more limited language. The
+  claim is supported but the terminology distinction and timing specificity (2022
+  update) limit confidence.'
+rcid: 2540921134
+revid: 2464712163
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rap.fandom.com/es/wiki/Fut_Rap_Cartas
+- provenance: verified
+  supports_claim: true
+  url: https://apkpure.com/fut-rap-cartas/com.futrapcartas.frc/download/1.1
+- provenance: verified
+  supports_claim: true
+  url: https://futrapcartas.app/
+timestamp: '2026-02-21T00:40:19.762177+00:00'
+title: Q138348136
+turns: 10
+value_label: Q63966
+verdict: verified-low

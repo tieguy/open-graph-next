@@ -1,0 +1,36 @@
+completion_tokens: 917
+cost_usd: 0.0053606999999999995
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25023
+property: P570
+property_label: date of death
+rationale: 'The claim that Philaret (Q695966) died on 20 March 2026 is factually incorrect.
+  The item''s existing claims (P20: place of death = Kyiv, P39: position held as Patriarch
+  ended in 2018) confirm Philaret (Denisenko) died in 2018. The referenced BBC News
+  Russian article (https://www.bbc.com/russian/articles/c4gjn44vyryo) is unreachable,
+  and no independent sources confirm a death in 2026. The edit attempts to update
+  a reference for an unsupported claim, which is invalid. The cited source cannot
+  be verified, and the claim itself contradicts established facts about Philaret''s
+  death.'
+rcid: 2550680445
+revid: 2474009452
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/russian/articles/c4gjn44vyryo
+- provenance: reported
+  supports_claim: false
+  url: https://www.pomisna.info/uk/vsi-novyny/upokoyivsya-u-bozi-svyatijshyj-patriarh-filaret/
+- provenance: reported
+  supports_claim: false
+  url: https://orthodoxwiki.org/Philaret_(Voznesensky)_of_New_York
+- provenance: reported
+  supports_claim: false
+  url: https://stjohndc.org/en/orthodoxy-foundation/saints/st-philaret-metropolitan-moscow
+timestamp: '2026-04-11T09:38:14.818871+00:00'
+title: Q695966
+turns: 1
+value_label: null
+verdict: incorrect

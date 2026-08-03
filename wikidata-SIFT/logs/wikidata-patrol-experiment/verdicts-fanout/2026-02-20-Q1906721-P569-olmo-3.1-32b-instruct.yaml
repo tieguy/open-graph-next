@@ -1,0 +1,42 @@
+completion_tokens: 1618
+cost_usd: 0.005632399999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23308
+property: P569
+property_label: date of birth
+rationale: All independently fetched and verified sources confirm that Masahiro Sakurai's
+  date of birth is August 3, 1970. There is no evidence supporting a birth date of
+  August 3, 2026. Multiple reputable sources across multiple languages and platforms
+  consistently report the 1970 date, and there is no indication of any change or error
+  in the widely accepted biographical information.
+rcid: 2540949866
+revid: 2464738850
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://nintendo.fandom.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://bulbapedia.bulbagarden.net/wiki/Masahiro_Sakurai
+- provenance: verified
+  supports_claim: false
+  url: https://www.mobygames.com/person/36619/masahiro-sakurai/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nintendolife.com/news/2020/08/today_is_masahiro_sakurais_50th_birthday
+timestamp: '2026-02-20T10:29:49.186439+00:00'
+title: Q1906721
+turns: 2
+value_label: null
+verdict: incorrect

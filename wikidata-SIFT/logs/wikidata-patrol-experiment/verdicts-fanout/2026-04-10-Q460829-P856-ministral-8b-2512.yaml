@@ -1,0 +1,31 @@
+completion_tokens: 1560
+cost_usd: 0.00341448
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26938
+property: P856
+property_label: official website
+rationale: The claim that AirAsia’s website (https://www.airasia.com) is the official
+  website for Matsusaka is incorrect. AirAsia is an airline, not a city government
+  website. Multiple verified sources, including official tourism and city-related
+  websites, do not list AirAsia as the official website for Matsusaka. The previous
+  value, https://www.city.matsusaka.mie.jp/, is the correct official website for Matsusaka
+  City, as confirmed by independent sources and the city’s context.
+rcid: null
+revid: 2471370338
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.matsusaka-info.jp/english/
+- provenance: verified
+  supports_claim: false
+  url: https://matsusaka-projects.com/english/
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan.travel/en/spot/118/
+timestamp: '2026-04-10T14:02:59.578695+00:00'
+title: Q460829
+turns: 1
+value_label: null
+verdict: incorrect

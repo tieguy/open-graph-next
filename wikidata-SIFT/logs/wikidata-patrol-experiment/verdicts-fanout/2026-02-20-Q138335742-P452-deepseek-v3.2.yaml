@@ -1,0 +1,36 @@
+completion_tokens: 2242
+cost_usd: 0.01824334
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 94767
+property: P452
+property_label: industry
+rationale: Metals Consulting International Limited's own official websites explicitly
+  describe the company as a steel industry advisory firm. Steelonthenet.com states
+  it is 'the intelligence platform of Metals Consulting International Limited' and
+  'an independent steel industry advisory firm.' The company provides steel industry
+  consulting, expert witness services, and publishes steel industry analysis. While
+  the official SIC code is generic management consultancy, the company's actual business
+  focus is clearly specialized in the steel industry, making 'steel industry' an appropriate
+  industry classification.
+rcid: 2540955123
+revid: 2464743430
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.steelonthenet.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.metalsconsultinginternational.com/
+- provenance: verified
+  supports_claim: false
+  url: https://find-and-update.company-information.service.gov.uk/company/04938719
+- provenance: verified
+  supports_claim: null
+  url: https://committees.parliament.uk/writtenevidence/35937/html/
+timestamp: '2026-02-20T07:18:32.895601+00:00'
+title: Q138335742
+turns: 9
+value_label: steel industry
+verdict: verified-high

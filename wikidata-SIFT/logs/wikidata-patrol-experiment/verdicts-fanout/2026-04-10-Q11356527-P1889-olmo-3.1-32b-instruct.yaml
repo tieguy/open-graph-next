@@ -1,0 +1,27 @@
+completion_tokens: 1612
+cost_usd: 0.0033201999999999997
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11765
+property: P1889
+property_label: different from
+rationale: The qualifier added to the 'different from' claim asserts there are two
+  persons with the same or similar names, but no cited reference supports this, and
+  the only primary source (Japanese Wikipedia) refers to a single individual named
+  Eriko Miura. No evidence of a second Eriko Miura was found in independent sources,
+  making the edit suspect.
+rcid: 2550576467
+revid: 2473908558
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/三浦絵理子
+- provenance: unreachable
+  supports_claim: false
+  url: https://jpop.fandom.com/wiki/Miura_Eriko_(MISSION)
+timestamp: '2026-04-10T13:13:29.234961+00:00'
+title: Q11356527
+turns: 1
+value_label: Eriko Miura
+verdict: suspect

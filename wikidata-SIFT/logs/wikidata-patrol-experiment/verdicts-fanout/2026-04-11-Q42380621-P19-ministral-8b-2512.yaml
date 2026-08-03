@@ -1,0 +1,27 @@
+completion_tokens: 1860
+cost_usd: 0.00239688
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 26766
+property: P19
+property_label: place of birth
+rationale: The change from 'Gata de Gorgos' to 'Marruecos' as the place of birth for
+  Francesc Arabí is not supported by any credible evidence. The primary source (editorialcirculorojo.com)
+  explicitly confirms Gata de Gorgos as his place of birth. No independent source
+  supports 'Marruecos', and the edit lacks references. The new value contradicts established
+  evidence, making the change incorrect.
+rcid: null
+revid: 2464673102
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://editorialcirculorojo.com/autores/francesc-arabi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.levante-emv.com/autores/francesc-arabi-2.html
+timestamp: '2026-04-11T15:37:36.773852+00:00'
+title: Q42380621
+turns: 3
+value_label: Marruecos
+verdict: incorrect

@@ -1,0 +1,24 @@
+completion_tokens: 793
+cost_usd: 0.0008444500000000001
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 13717
+property: P1449
+property_label: nickname
+rationale: The only cited reference for the nickname 'Bebn' does not actually contain
+  this value. No independent verification of the nickname can be found through available
+  sources including direct visits to the annual sports awards site and the subject's
+  official website. No sources were fetched that confirm this nickname exists or is
+  used by the athlete.
+rcid: 2549505925
+revid: 2472870068
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ru.m.wikipedia.org/?oldid=133005071
+timestamp: '2026-04-07T07:45:16.133942+00:00'
+title: Q3637275
+turns: 1
+value_label: null
+verdict: unverifiable

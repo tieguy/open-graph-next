@@ -1,0 +1,31 @@
+completion_tokens: 1002
+cost_usd: 0.0037196
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15592
+property: P512
+property_label: academic degree
+rationale: The NRK obituary confirms Finn-Erik Vinje's academic career at Stockholm
+  University and background in philology, making the claim plausible. However, no
+  primary or cited source explicitly states that he received a Licentiate of Philosophy
+  from Stockholm University in 1966. The absence of a direct citation or degree confirmation
+  leaves the claim unverified at a high level, but the context supports that it is
+  not incorrect.
+rcid: 2550649113
+revid: 2473978987
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nrk.no/nyheter/professor-og-spraknestor-finn-erik-vinje-_90_-er-dod-1.17817331
+- provenance: reported
+  supports_claim: false
+  url: https://prabook.com/web/finn-erik.vinje/473785
+- provenance: reported
+  supports_claim: false
+  url: https://www.anselmianum.com/en/29-faculties/faculty-of-philosophy/33-license-in-philosophy
+timestamp: '2026-04-10T13:59:45.427753+00:00'
+title: Q1780040
+turns: 1
+value_label: Licentiate of Philosophy
+verdict: verified-low

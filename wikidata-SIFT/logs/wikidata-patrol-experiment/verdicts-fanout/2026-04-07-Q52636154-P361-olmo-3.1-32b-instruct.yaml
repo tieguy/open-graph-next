@@ -1,0 +1,23 @@
+completion_tokens: 1248
+cost_usd: 0.0040276
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16394
+property: P361
+property_label: part of
+rationale: The only cited reference (Beall's List) is not authoritative for parent
+  relationships and was unreachable during verification. No independent, verified
+  sources support the claim that ELEWA BIOSCIENCES, F.a.C.T.LTD is 'part of' itself.
+  Assigning an entity as its own parent lacks justification and is not standard practice.
+rcid: 2550915951
+revid: 2474238017
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://beallslist.net/
+timestamp: '2026-04-07T12:14:04.773885+00:00'
+title: Q52636154
+turns: 3
+value_label: ELEWA BIOSCIENCES, F.a.C.T.LTD
+verdict: incorrect

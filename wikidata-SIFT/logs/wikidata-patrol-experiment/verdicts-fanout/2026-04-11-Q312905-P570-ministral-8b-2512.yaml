@@ -1,0 +1,32 @@
+completion_tokens: 1722
+cost_usd: 0.00202851
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17997
+property: P570
+property_label: date of death
+rationale: The edit changed John Rackham's date of death from 1720-11-17 (supported
+  by multiple verified sources) to 1 CE, which is historically implausible and contradicts
+  all available evidence. The new value has no credible backing and is inconsistent
+  with established historical records.
+rcid: 2549661876
+revid: 2473022159
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Calico_Jack
+- provenance: verified
+  supports_claim: false
+  url: https://www.famous-pirates.com/famous-pirates/john-rackham/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thewayofthepirates.com/famous-pirates/calico-rackham-jack/
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/
+timestamp: '2026-04-11T18:16:39.118610+00:00'
+title: Q312905
+turns: 1
+value_label: null
+verdict: incorrect

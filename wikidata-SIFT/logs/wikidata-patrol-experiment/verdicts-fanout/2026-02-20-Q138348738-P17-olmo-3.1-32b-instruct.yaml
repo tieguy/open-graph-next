@@ -1,0 +1,27 @@
+completion_tokens: 1117
+cost_usd: 0.003606
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14679
+property: P17
+property_label: country
+rationale: The official website of Bibby Financial Services sp. z o.o. is presented
+  in Polish and provides Polish contact information, indicating operation in Poland.
+  This is corroborated by an independent business registry (emis.com) listing the
+  company as based in Poland. Both primary and secondary sources directly support
+  the country claim.
+rcid: 2540926341
+revid: 2464717113
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/
+- provenance: verified
+  supports_claim: true
+  url: https://www.emis.com/php/company-profile/PL/Bibby_Financial_Services_Sp_z_oo_en_2405584.html
+timestamp: '2026-02-20T22:10:23.118342+00:00'
+title: Q138348738
+turns: 2
+value_label: Poland
+verdict: verified-high

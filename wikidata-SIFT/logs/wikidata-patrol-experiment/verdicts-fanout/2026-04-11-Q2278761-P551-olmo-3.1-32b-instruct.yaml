@@ -1,0 +1,34 @@
+completion_tokens: 329
+cost_usd: 0.0034846
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16436
+property: P551
+property_label: residence
+rationale: The change from 'New York City' to 'Nueva York – Granada' is not supported
+  by reliable sources. Sylvia Rivera's Wikipedia biography and multiple reputable
+  sources consistently list New York City as her place of residence and birthplace.
+  No verified source indicates that 'Nueva York – Granada' is an appropriate or recognized
+  label for her residence. The new value appears to be a generic or possibly confused
+  term, not specific to Sylvia Rivera's actual place of residence.
+rcid: null
+revid: 2462592210
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sylvia_Rivera
+- provenance: verified
+  supports_claim: false
+  url: http://www.latintrends.com/in-honor-of-hispanic-heritage-month-influential-hispanic-trans-people/
+- provenance: verified
+  supports_claim: false
+  url: https://makinggayhistory.org/podcast/sylvia-rivera-part-2/
+- provenance: verified
+  supports_claim: false
+  url: https://reference.jrank.org/biography-2/Rivera_Sylvia_Lee.html
+timestamp: '2026-04-11T12:53:17.610124+00:00'
+title: Q2278761
+turns: 1
+value_label: Nueva York – Granada
+verdict: suspect

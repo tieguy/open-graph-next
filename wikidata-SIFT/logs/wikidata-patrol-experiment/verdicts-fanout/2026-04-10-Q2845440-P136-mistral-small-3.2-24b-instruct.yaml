@@ -1,0 +1,53 @@
+completion_tokens: 2482
+cost_usd: 0.0032043
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26567
+property: P136
+property_label: genre
+rationale: The majority of sources, including Grokipedia, Rate Your Music, Famous
+  Birthdays, Equipboard, Last.fm, Concert Archives, and the French Wikipedia, support
+  the claim that Anarbor's genre is "pop rock." Although a few sources describe them
+  as an alternative rock band, the preponderance of evidence supports the claim.
+rcid: 2550848252
+revid: 2474172029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/Anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://rateyourmusic.com/artist/anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/bands/anarbor.html
+- provenance: verified
+  supports_claim: true
+  url: https://equipboard.com/band/anarbor
+- provenance: verified
+  supports_claim: false
+  url: https://lessthanjake.fandom.com/wiki/Anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://www.last.fm/music/Anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://www.concertarchives.org/bands/anarbor
+- provenance: verified
+  supports_claim: false
+  url: https://www.bringinitbackwards.com/interview-with-anarbor/
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/artist/1387100-Anarbor
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/anarbor/275736140
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Anarbor
+timestamp: '2026-04-10T13:56:28.755784+00:00'
+title: Q2845440
+turns: 2
+value_label: pop rock
+verdict: verified-high

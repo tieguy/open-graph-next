@@ -1,0 +1,30 @@
+completion_tokens: 1610
+cost_usd: 0.0063515937500000005
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 63457
+property: P793
+property_label: significant event
+rationale: Multiple reliable sources confirm that Jackie Robinson's Major League Baseball
+  debut was on April 15, 1947. The edit changing the date to 1948 is incorrect.
+rcid: null
+revid: 2464298327
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://baseballhall.org/discover-more/stories/baseball-history/remembering-jackie
+- provenance: verified
+  supports_claim: true
+  url: https://baseballhall.org/discover/inside-pitch/robinson-signs-first-big-league-contract
+- provenance: verified
+  supports_claim: true
+  url: https://baseballhall.org/hall-of-famers/robinson-jackie
+- provenance: verified
+  supports_claim: true
+  url: https://sabr.org/jackie75/dodgers/
+timestamp: '2026-04-11T09:02:52.765456+00:00'
+title: Q221048
+turns: 3
+value_label: Major League Baseball debut
+verdict: incorrect

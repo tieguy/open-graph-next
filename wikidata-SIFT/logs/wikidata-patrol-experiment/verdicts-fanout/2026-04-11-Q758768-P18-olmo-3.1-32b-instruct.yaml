@@ -1,0 +1,27 @@
+completion_tokens: 1516
+cost_usd: 0.00401
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15502
+property: P18
+property_label: image
+rationale: Neither the old nor the new image filenames could be independently verified
+  as the official or current image for the Audi Q3 on authoritative sources. Official
+  distributor galleries do not expose these filenames, and there is no confirmation
+  from the manufacturer or distributor that either image is the current official representation.
+  Therefore, the change cannot be justified as an improvement.
+rcid: 2550737772
+revid: 2474064888
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cardekho.com/carmodels/Audi/Audi_Q3
+- provenance: verified
+  supports_claim: false
+  url: https://www.carwale.com/audi-cars/q3/images/
+timestamp: '2026-04-11T14:17:00.577954+00:00'
+title: Q758768
+turns: 1
+value_label: null
+verdict: suspect

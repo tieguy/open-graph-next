@@ -1,0 +1,27 @@
+completion_tokens: 913
+cost_usd: 0.0304892
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 149707
+property: P856
+property_label: official website
+rationale: The new value (https://www.jetstar.com) is the official website of Jetstar,
+  an airline, not Narita City. No independent authoritative sources confirm that Jetstar's
+  website is the official website of Narita City. The previous value (https://www.city.narita.chiba.jp/)
+  is the expected official domain for the city, but its current status could not be
+  confirmed in this investigation. Therefore, the change is highly suspect and unsupported.
+rcid: null
+revid: 2471590860
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.narita.chiba.jp/shisei/page008100.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.jetstar.com
+timestamp: '2026-04-07T08:16:22.683156+00:00'
+title: Q273798
+turns: 15
+value_label: null
+verdict: suspect

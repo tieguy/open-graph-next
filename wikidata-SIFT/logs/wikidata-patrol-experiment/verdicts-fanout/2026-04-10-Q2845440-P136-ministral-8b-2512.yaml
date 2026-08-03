@@ -1,0 +1,31 @@
+completion_tokens: 2072
+cost_usd: 0.0043601099999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 45863
+property: P136
+property_label: genre
+rationale: The claim that Anarbor's genre is 'pop rock' (Q484641) is not supported
+  by authoritative sources. AllMusic explicitly labels Anarbor as an 'emo-rock' band,
+  while Equipboard and Lessthanjake.fandom describe their music as pop punk or alternative
+  rock. The cited French Wikipedia source is unreachable, and Rate Your Music, though
+  listing 'pop rock' among multiple genres, is not an authoritative source. The evidence
+  strongly contradicts the edit's claim.
+rcid: 2550848252
+revid: 2474172029
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://equipboard.com/band/anarbor
+- provenance: verified
+  supports_claim: false
+  url: https://lessthanjake.fandom.com/wiki/Anarbor
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmusic.com/artist/anarbor-mn0001568909
+timestamp: '2026-04-10T13:56:20.931424+00:00'
+title: Q2845440
+turns: 4
+value_label: pop rock
+verdict: incorrect

@@ -1,0 +1,26 @@
+completion_tokens: 1398
+cost_usd: 0.00253833
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28171
+property: P170
+property_label: creator
+rationale: The claim that Lady Gaga (Q19848) is the creator of an intermodal container
+  (Q187956) is not supported by any credible or independent sources. Intermodal containers
+  are a product of mid-20th century engineering, and no credible evidence links Lady
+  Gaga to their creation. Additionally, the previous claim about Keith Tantlinger
+  (Q6385097) also lacks any supporting references or corroboration. The prefetched
+  source about Lady Gaga’s fashion collaborations does not mention intermodal containers,
+  and no other verified sources were found to support either claim.
+rcid: 2549481749
+revid: 2472846535
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ladygaga.fandom.com/wiki/Haus_of_Gaga/Born_This_Way
+timestamp: '2026-04-11T15:28:23.396942+00:00'
+title: Q187956
+turns: 3
+value_label: Lady Gaga
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1910
+cost_usd: 0.00275568
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29108
+property: P856
+property_label: official website
+rationale: The edit changes the official website URL from 'https://www.conoco.com'
+  to 'https://www.conoco.com/' without evidence that the trailing slash is necessary
+  or correct. Both URLs redirect to a consumer-facing site (fuel discounts, rewards
+  programs) rather than a corporate or historical official website for Conoco. The
+  absence of references and lack of independent corroboration from reliable sources
+  make this edit suspect. The change appears to be a cosmetic modification rather
+  than a substantive correction.
+rcid: null
+revid: 2459590480
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.conoco.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.conocophillips.com/
+timestamp: '2026-04-11T11:16:03.623694+00:00'
+title: Q1126518
+turns: 3
+value_label: null
+verdict: suspect

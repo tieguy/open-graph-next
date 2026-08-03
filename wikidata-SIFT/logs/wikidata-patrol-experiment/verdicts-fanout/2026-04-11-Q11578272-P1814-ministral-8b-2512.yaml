@@ -1,0 +1,28 @@
+completion_tokens: 2284
+cost_usd: 0.00290259
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32939
+property: P1814
+property_label: name in kana
+rationale: The edit changes the kana name for 町田ありっくまX from 'まちだ ありか' to 'まちだありかですよー',
+  citing Japanese Wikipedia as the source. However, the Japanese Wikipedia page could
+  not be accessed due to automated access restrictions, and no independent sources
+  were successfully fetched or verified during this investigation. Without confirmation
+  of the correct kana name from a verifiable source, the edit cannot be assessed for
+  accuracy.
+rcid: 2550597969
+revid: 2473929225
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://japanese-names.info/first-name/kana-2/
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/町田ありっくまX
+timestamp: '2026-04-11T14:20:28.349782+00:00'
+title: Q11578272
+turns: 4
+value_label: null
+verdict: unverifiable

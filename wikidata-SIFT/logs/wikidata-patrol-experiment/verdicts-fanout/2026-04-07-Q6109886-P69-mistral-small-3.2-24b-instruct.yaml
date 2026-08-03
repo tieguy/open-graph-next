@@ -1,0 +1,22 @@
+completion_tokens: 610
+cost_usd: 0.00267371875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26893
+property: P69
+property_label: educated at
+rationale: No independent sources were found to confirm or deny the claim that Roberto
+  Musso was educated at Cobach. The edit lacks references, and searches did not yield
+  any relevant information.
+rcid: 2551400079
+revid: 2474703858
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://example.com/primary-source
+timestamp: '2026-04-07T13:54:11.567587+00:00'
+title: Q6109886
+turns: 4
+value_label: Cobach
+verdict: unverifiable

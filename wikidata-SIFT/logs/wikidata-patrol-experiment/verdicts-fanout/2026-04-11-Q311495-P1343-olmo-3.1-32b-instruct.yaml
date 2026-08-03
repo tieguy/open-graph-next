@@ -1,0 +1,29 @@
+completion_tokens: 1482
+cost_usd: 0.0050472
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20790
+property: P1343
+property_label: described by source
+rationale: The edit changed the 'described by source' property from a proper reference
+  (Q867541, the 1911 Encyclopædia Britannica article) to Q1321 ('Spanish'), which
+  is not a source but a geographic/language identifier. The Britannica article explicitly
+  describes Abu al-Qasim al-Zahrawi as Andalusian and associated with Spain, supporting
+  the subject's connection to Spain, but the change misrepresents provenance and violates
+  the intended usage of P1343. This edit is a regression in data modeling and should
+  be reverted.
+rcid: null
+revid: 2464203314
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://archive.org/details/1911encyclopediaal
+- provenance: verified
+  supports_claim: true
+  url: https://muslimheritage.com/abu-al-qasim-al-zahrawi-the-great-surgeon/
+timestamp: '2026-04-11T10:50:47.986026+00:00'
+title: Q311495
+turns: 1
+value_label: Spanish
+verdict: suspect

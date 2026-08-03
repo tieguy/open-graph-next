@@ -1,0 +1,23 @@
+completion_tokens: 853
+cost_usd: 0.0059754000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27318
+property: P2002
+property_label: X (Twitter) username
+rationale: No accessible or verifiable evidence could be found to confirm that the
+  X (Twitter) username 'cherbaca' belongs to Cherbaca. The official X profile page
+  could not be accessed due to a blocked domain, and no independent third-party sources
+  corroborate the new username. Therefore, the claim cannot be verified.
+rcid: null
+revid: 2471188654
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://x.com/cherbaca
+timestamp: '2026-04-07T06:14:48.523483+00:00'
+title: Q124759586
+turns: 5
+value_label: null
+verdict: unverifiable

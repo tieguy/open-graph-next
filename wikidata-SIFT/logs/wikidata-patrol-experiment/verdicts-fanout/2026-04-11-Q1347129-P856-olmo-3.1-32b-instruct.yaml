@@ -1,0 +1,30 @@
+completion_tokens: 1844
+cost_usd: 0.0041998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15467
+property: P856
+property_label: official website
+rationale: The previous official website was already non-functional and not the current
+  official source. The new value provided, https://www.flypeach.com, is an unrelated
+  commercial website with no connection to Tajiri town. Authoritative sources confirm
+  that the official information for Tajiri town is hosted by Osaka Prefecture. This
+  edit introduced incorrect information and should be reverted.
+rcid: null
+revid: 2471397011
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.osaka.lg.jp/site/town/tajiri/
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/田尻町
+- provenance: verified
+  supports_claim: false
+  url: https://www.flypeach.com/
+timestamp: '2026-04-11T17:12:34.670249+00:00'
+title: Q1347129
+turns: 1
+value_label: null
+verdict: incorrect

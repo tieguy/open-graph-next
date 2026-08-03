@@ -1,0 +1,30 @@
+completion_tokens: 2254
+cost_usd: 0.0036699999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11588
+property: P18
+property_label: image
+rationale: The new image aligns with the primary representation used on Wikimedia
+  Commons and Wikipedia for the Kia Sportage, which predominantly feature images of
+  the regular 2016 model. The old image, representing the 2021 Plug-in-Hybrid variant,
+  is not used as a main representation in these major public repositories. This indicates
+  the edit was correct and improves the representativeness of the Kia Sportage item.
+rcid: null
+revid: 2471363118
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Kia_Sportage
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Kia_Sportage
+- provenance: verified
+  supports_claim: false
+  url: https://www.kia.com/worldwide/vehicles/sportage
+timestamp: '2026-04-11T11:35:22.393982+00:00'
+title: Q145527
+turns: 1
+value_label: null
+verdict: verified-high

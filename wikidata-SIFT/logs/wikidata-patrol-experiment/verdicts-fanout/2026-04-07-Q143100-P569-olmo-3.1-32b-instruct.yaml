@@ -1,0 +1,20 @@
+completion_tokens: 632
+cost_usd: 0.009010800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43158
+property: P569
+property_label: date of birth
+rationale: No fetched evidence was found to confirm that 1454 is Josquin des Prez's
+  date of birth. Multiple authoritative music reference sources were searched but
+  could not be fetched or verified within this investigation. The item's P569 claim
+  currently lacks a reliable supporting reference.
+rcid: 2550063810
+revid: 2473410912
+sources: []
+timestamp: '2026-04-07T10:05:57.449976+00:00'
+title: Q143100
+turns: 6
+value_label: null
+verdict: unverifiable

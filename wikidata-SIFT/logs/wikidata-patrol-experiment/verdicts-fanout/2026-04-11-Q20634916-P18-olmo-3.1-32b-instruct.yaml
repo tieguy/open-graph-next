@@ -1,0 +1,29 @@
+completion_tokens: 2031
+cost_usd: 0.0037188000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12501
+property: P18
+property_label: image
+rationale: Neither the old nor the new image for the Mercedes-Benz GLC is confirmed
+  by an official or notable secondary source. The edit was made without citation or
+  justification, and the new image filename does not appear in official or widely-used
+  automotive sources. Image changes should be supported by reliable, referenced sources.
+rcid: 2550728947
+revid: 2474056335
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mbusa.com/mercedes/vehicles/class/class-GLC/bodystyle-SUV
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mercedes-Benz_GLC
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Mercedes-Benz_GLC-Class
+timestamp: '2026-04-11T16:04:57.951207+00:00'
+title: Q20634916
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,25 @@
+completion_tokens: 1308
+cost_usd: 0.0020220625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 20414
+property: P569
+property_label: date of birth
+rationale: The independent sources consistently support the original date of birth
+  (March 4, 1997) for Beatrice Vio. The new date (March 4, 1513) is incorrect and
+  not supported by any reliable evidence.
+rcid: 2549504572
+revid: 2472868771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/franceinter/podcasts/esprit-sport/histoire-de-sport-du-mercredi-25-aout-2021-5140445
+- provenance: verified
+  supports_claim: false
+  url: https://www.thecityceleb.com/biography/personality/content-creator/writer/beatrice-vio-biography-parents-net-worth-age-height-ethnicity-books-sister-awards/
+timestamp: '2026-04-11T09:32:33.919731+00:00'
+title: Q3637275
+turns: 1
+value_label: null
+verdict: incorrect

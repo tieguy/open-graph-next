@@ -1,0 +1,30 @@
+completion_tokens: 1037
+cost_usd: 0.0055228
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24503
+property: P570
+property_label: date of death
+rationale: Multiple verified sources identify Philaret as either a historical figure
+  who died in 1867 or a different individual who died in 1985. No reliable source
+  supports the claim that Philaret died on March 20, 2026. The BBC reference cited
+  in the edit could not be fetched, and other authoritative sources do not corroborate
+  the claimed date of death. Therefore, the claim is incorrect.
+rcid: 2550680445
+revid: 2474009452
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://stjohndc.org/en/orthodoxy-foundation/saints/st-philaret-metropolitan-moscow
+- provenance: verified
+  supports_claim: false
+  url: https://orthodoxwiki.org/Philaret_(Voznesensky)_of_New_York
+- provenance: verified
+  supports_claim: false
+  url: https://www.unian.ua/politics/769315-filaret-vid-imeni-upts-kp-poprosiv-probachennya-u-polyakiv-i-probachiv-jim.html
+timestamp: '2026-04-11T09:38:24.342992+00:00'
+title: Q695966
+turns: 1
+value_label: null
+verdict: incorrect

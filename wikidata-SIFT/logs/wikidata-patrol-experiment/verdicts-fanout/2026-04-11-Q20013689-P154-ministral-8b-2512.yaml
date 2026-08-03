@@ -1,0 +1,26 @@
+completion_tokens: 1670
+cost_usd: 0.00411477
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 62831
+property: P154
+property_label: logo image
+rationale: The removal of the logo image claim for CajaSur Banco (Q20013689) is justified
+  because the bank was dissolved on October 1, 2025, as confirmed by the official
+  CajaSur portal reference (P576). The logo claim was sourced from Spanish Wikipedia,
+  which is not an authoritative reference for Wikidata. No independent evidence supports
+  the continued relevance of the logo, and the entity no longer exists as an independent
+  bank. The removal aligns with the dissolution and lack of supporting evidence for
+  the logo's relevance.
+rcid: 2551012952
+revid: 2474330640
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://portal.cajasur.es/cs/Satellite/cajasur/es/particulares-0/proyecto-de-integracion-de-cajasur/generico
+timestamp: '2026-04-11T10:05:31.800583+00:00'
+title: Q20013689
+turns: 8
+value_label: null
+verdict: verified-high

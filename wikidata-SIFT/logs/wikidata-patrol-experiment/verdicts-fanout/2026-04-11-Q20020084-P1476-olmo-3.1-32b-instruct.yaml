@@ -1,0 +1,30 @@
+completion_tokens: 2689
+cost_usd: 0.0060424
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22145
+property: P1476
+property_label: title
+rationale: The title 'Heloo' for the Jean Clouet painting of Francis I is not supported
+  by any authoritative sources. The Louvre and multiple art historical references
+  consistently use titles referencing Francis I, never 'Heloo.' The old value, while
+  not the standard English or French title, at least referenced the correct historical
+  figure. Replacing it with 'Heloo' was an error.
+rcid: null
+revid: 2471621755
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.louvre.fr/en/oeuvre-notices/portrait-king-francis-i-france
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Portrait_of_Francis_I_of_France_(Clouet)
+- provenance: verified
+  supports_claim: false
+  url: https://artsandculture.google.com/asset/jean-clouet-ritratto-di-francesco-i/l6F7lK4UqjwRrg
+timestamp: '2026-04-11T17:55:32.101158+00:00'
+title: Q20020084
+turns: 1
+value_label: null
+verdict: incorrect

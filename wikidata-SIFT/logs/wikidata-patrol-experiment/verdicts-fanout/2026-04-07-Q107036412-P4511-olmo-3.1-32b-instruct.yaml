@@ -1,0 +1,20 @@
+completion_tokens: 890
+cost_usd: 0.007682
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35740
+property: P4511
+property_label: vertical depth
+rationale: No independently accessible or verifiable sources provide the vertical
+  depth of the artwork 'I am' by Salvatore Garau. The change from '+150' to '+50'
+  centimetres lacks supporting evidence and cannot be confirmed or denied based on
+  the information found.
+rcid: null
+revid: 2470996654
+sources: []
+timestamp: '2026-04-07T11:53:53.990914+00:00'
+title: Q107036412
+turns: 7
+value_label: null
+verdict: unverifiable

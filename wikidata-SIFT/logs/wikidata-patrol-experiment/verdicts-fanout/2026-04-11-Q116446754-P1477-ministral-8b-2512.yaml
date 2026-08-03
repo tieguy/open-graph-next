@@ -1,0 +1,38 @@
+completion_tokens: 2230
+cost_usd: 0.00234936
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19628
+property: P1477
+property_label: birth name
+rationale: The edit changed the birth name of Poupette Kenza from the well-documented
+  and widely confirmed value 'Kenza Benchrif' to an unsupported and nonsensical value
+  'Mike Moukh string ficelle'. Multiple verified primary sources (e.g., Voici.fr,
+  EverybodyWiki, Le Bladi) consistently confirm 'Kenza Benchrif' as her real name.
+  No credible source supports the new value, and the edit contradicts all available
+  evidence. The edit is therefore incorrect and should be reverted.
+rcid: 2549578640
+revid: 2472941318
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.bladi.net/influencer-poupette-kenza-resurfaces-from-prison-youtube-comeback-extortion,116566.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.everybodywiki.com/Poupette_Kenza
+- provenance: verified
+  supports_claim: false
+  url: https://www.voici.fr/bios-people/poupette-kenza
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/franceinter/podcasts/capture-d-ecrans/capture-d-ecrans-du-mercredi-28-decembre-2022-1263560
+- note: Fetch failed (HTTP 403), but no evidence contradicts the old value.
+  provenance: verified
+  supports_claim: false
+  url: https://www.legifrance.gouv.fr/jorf/jo/2006/08/22/0193
+timestamp: '2026-04-11T14:53:47.087078+00:00'
+title: Q116446754
+turns: 1
+value_label: null
+verdict: incorrect

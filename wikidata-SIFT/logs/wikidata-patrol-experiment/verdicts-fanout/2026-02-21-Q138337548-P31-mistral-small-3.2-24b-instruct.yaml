@@ -1,0 +1,34 @@
+completion_tokens: 1393
+cost_usd: 0.006806
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68044
+property: P31
+property_label: instance of
+rationale: Multiple independent sources confirm that psychographic segmentation is
+  a specific form of market segmentation based on psychological traits. The edit accurately
+  updates the instance of LimbiCODE to reflect its specific form of market segmentation.
+rcid: 2540919325
+revid: 2464710406
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://business.adobe.com/blog/basics/psychographic-segmentation
+- provenance: verified
+  supports_claim: true
+  url: https://www.simon-kucher.com/en/insights/power-psychographic-segmentation
+- provenance: verified
+  supports_claim: true
+  url: https://www.qualtrics.com/en-au/articles/strategy-research/psychographic-segmentation/
+- provenance: verified
+  supports_claim: true
+  url: https://mailchimp.com/resources/psychographic-segmentation-examples/
+- provenance: verified
+  supports_claim: true
+  url: https://www.acxiom.com/blog/market-segmentation-psychographic-vs-demographic-vs-behavioral/
+timestamp: '2026-02-21T01:33:00.525034+00:00'
+title: Q138337548
+turns: 6
+value_label: Psychographic segmentation
+verdict: verified-high

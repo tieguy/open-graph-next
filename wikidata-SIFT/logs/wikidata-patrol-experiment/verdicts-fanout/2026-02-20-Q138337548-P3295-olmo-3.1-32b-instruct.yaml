@@ -1,0 +1,22 @@
+completion_tokens: 787
+cost_usd: 0.0045994
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20636
+property: P3295
+property_label: code
+rationale: The only reference provided could not be read, and no independent source
+  confirms that the image is the official 'code' for LimbiCODE. Without accessible,
+  reliable evidence supporting the claim, the edit cannot be verified.
+rcid: 2540936661
+revid: 2464726775
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://swiss-insights.ch/wp-content/uploads/2020/05/MAFO2015_web.pdf
+timestamp: '2026-02-20T16:52:20.707612+00:00'
+title: Q138337548
+turns: 4
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 667
+cost_usd: 0.007239249999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 142117
+property: P1559
+property_label: name in native language
+rationale: No usable web sources were found in any search queries conducted. Searches
+  with keywords like 'جما sas Jamel Debbouze', 'Arabic name for Jamel Debbouze', 'Jamel
+  Debbouze native name', and similar variations produced no results that could confirm
+  or contradict the claimed name change. No references from the edit itself are accessible,
+  and independent corroboration could not be located. Based on available evidence,
+  the edit cannot be reliably verified or disproven.
+rcid: null
+revid: 2471216964
+sources: []
+timestamp: '2026-04-07T11:08:49.501014+00:00'
+title: Q312661
+turns: 15
+value_label: null
+verdict: unverifiable

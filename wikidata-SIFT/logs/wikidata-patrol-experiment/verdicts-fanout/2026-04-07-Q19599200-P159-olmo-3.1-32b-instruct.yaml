@@ -1,0 +1,23 @@
+completion_tokens: 1031
+cost_usd: 0.0070396
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32105
+property: P159
+property_label: headquarters location
+rationale: No independent or authoritative sources were found that confirm the headquarters
+  of Minth Group Limited as Taipei. The Wikidata claim lacks a reference, and web
+  searches did not yield any documentation or reporting confirming this location.
+  The official website could not be accessed to verify the information.
+rcid: 2551282660
+revid: 2474591784
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://www.minthgroup.com/
+timestamp: '2026-04-07T06:52:33.197962+00:00'
+title: Q19599200
+turns: 7
+value_label: Taipei
+verdict: unverifiable

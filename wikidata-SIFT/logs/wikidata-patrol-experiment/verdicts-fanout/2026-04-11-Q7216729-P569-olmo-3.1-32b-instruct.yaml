@@ -1,0 +1,33 @@
+completion_tokens: 3360
+cost_usd: 0.0049954000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14897
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth to '16 June 1960', but reliable, citable
+  sources such as the English Wikipedia and DBpedia state that Lee Hye-gyeong was
+  born on 'November 25, 1962'. The only source listing '16 June 1960' is the Korean
+  Wikipedia, which does not provide a citation for this date. No independent, reliable
+  source confirms the new value, making the edit suspect.
+rcid: 2551329586
+revid: 2474636438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lee_Hye-gyeong
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Lee_Hye-gyeong
+- provenance: reported
+  supports_claim: false
+  url: https://ko.wikipedia.org/wiki/이혜경_(작가)
+- provenance: verified
+  supports_claim: false
+  url: https://www.koreaherald.com/view.php?ud=20190305000657
+timestamp: '2026-04-11T15:30:31.365106+00:00'
+title: Q7216729
+turns: 1
+value_label: null
+verdict: suspect

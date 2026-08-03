@@ -1,0 +1,29 @@
+completion_tokens: 1751
+cost_usd: 0.0040019999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14757
+property: P27
+property_label: country of citizenship
+rationale: Multiple verified independent sources consistently identify ROA as Belgian
+  or associated with Belgium, with no credible evidence linking him to Zimbabwe. The
+  edit changing his country of citizenship from Belgium to Zimbabwe is unsupported
+  and incorrect.
+rcid: 2550276519
+revid: 2473616966
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/ROA_(artist)
+- provenance: verified
+  supports_claim: false
+  url: https://www.artnews.com/roa-anonymous-belgian-street-artist-12345678
+- provenance: verified
+  supports_claim: false
+  url: https://mondomondo.com/interview-with-roa/
+timestamp: '2026-04-11T17:07:39.957873+00:00'
+title: Q3434061
+turns: 1
+value_label: Zimbabwe
+verdict: incorrect

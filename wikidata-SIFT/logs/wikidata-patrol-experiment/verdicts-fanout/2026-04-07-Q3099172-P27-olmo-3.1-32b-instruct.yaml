@@ -1,0 +1,27 @@
+completion_tokens: 692
+cost_usd: 0.010715800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 51503
+property: P27
+property_label: country of citizenship
+rationale: No accessible, independent sources were found that directly confirm or
+  refute the claim that Ibn Zamrak's country of citizenship was the Emirate of Granada.
+  Multiple attempts to fetch and search for authoritative references failed due to
+  blocked domains or lack of accessible content. Therefore, the edit cannot be verified
+  with high confidence.
+rcid: 2551395411
+revid: 2474699651
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Ibn_Zamrak
+- provenance: reported
+  supports_claim: null
+  url: https://en.wikipedia.org/wiki/Emirate_of_Granada
+timestamp: '2026-04-07T11:50:28.166839+00:00'
+title: Q3099172
+turns: 11
+value_label: Emirate of Granada
+verdict: unverifiable

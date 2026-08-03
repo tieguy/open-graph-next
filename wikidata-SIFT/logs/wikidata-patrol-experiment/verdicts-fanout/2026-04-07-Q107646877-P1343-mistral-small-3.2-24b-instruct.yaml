@@ -1,0 +1,22 @@
+completion_tokens: 1039
+cost_usd: 0.00254413125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25913
+property: P1343
+property_label: described by source
+rationale: The removed claim is supported by a reliable source (Süddeutsche Zeitung)
+  and is corroborated by independent sources. The evidence strongly supports the claim
+  that Süddeutsche Zeitung describes Corona Rebellen.
+rcid: 2551215866
+revid: 2474528857
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-07T06:31:01.906288+00:00'
+title: Q107646877
+turns: 3
+value_label: Süddeutsche Zeitung
+verdict: verified-high

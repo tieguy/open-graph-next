@@ -1,0 +1,28 @@
+completion_tokens: 1587
+cost_usd: 0.0042632
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16555
+property: P18
+property_label: image
+rationale: The qualifier stating 'Iling-Junior with Middlesbrough in 2025' was removed
+  from the image claim. The authoritative Alamy image description confirms the image
+  depicts Samuel Iling-Junior as a Juventus player during a Serie A match in January
+  2023, not with Middlesbrough in 2025. His club history corroborates that he was
+  not with Middlesbrough at that time. Therefore, the qualifier was inaccurate and
+  its removal was correct.
+rcid: 2551347692
+revid: 2474653619
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.alamy.com/juventus-english-forward-samuel-iling-junior-looks-during-the-serie-a-football-match-between-ssc-napoli-and-juventus-napoli-won-5-1-image504695768.html
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Samuel_Iling-Junior
+timestamp: '2026-04-11T12:20:51.071164+00:00'
+title: Q108200581
+turns: 1
+value_label: null
+verdict: verified-high

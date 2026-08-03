@@ -1,0 +1,21 @@
+completion_tokens: 538
+cost_usd: 0.0017876
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 33600
+property: P569
+property_label: date of birth
+rationale: No verifiable sources were found to confirm the date of birth as 1 CE for
+  Lasse Laaksonen. All searches yielded no relevant or credible evidence.
+rcid: 2550272914
+revid: 2473613441
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lasse_Laaksonen
+timestamp: '2026-04-07T11:27:27.879263+00:00'
+title: Q16981515
+turns: 6
+value_label: null
+verdict: unverifiable

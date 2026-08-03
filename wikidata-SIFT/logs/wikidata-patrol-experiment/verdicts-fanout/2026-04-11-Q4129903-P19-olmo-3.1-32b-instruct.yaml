@@ -1,0 +1,30 @@
+completion_tokens: 1848
+cost_usd: 0.0043820000000000005
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16366
+property: P19
+property_label: place of birth
+rationale: Multiple independent sources confirm that Inna Vykhodtseva was born in
+  Donetsk. The administrative qualifiers previously attached to the place of birth
+  claim are not required by these sources and are not supported by them. Their removal
+  is therefore appropriate, though the referencing could be improved by replacing
+  or supplementing the Russian Wikipedia citation with a more authoritative source.
+rcid: null
+revid: 2417123745
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Inna_Vykhodtseva
+- provenance: verified
+  supports_claim: true
+  url: https://unikino.ru/31-декабря-2024-г-на-91-году-после-продолжител/
+- provenance: reported
+  supports_claim: true
+  url: https://ru.wikipedia.org/?oldid=140125151
+timestamp: '2026-04-11T14:24:17.291004+00:00'
+title: Q4129903
+turns: 1
+value_label: Donetsk
+verdict: verified-low

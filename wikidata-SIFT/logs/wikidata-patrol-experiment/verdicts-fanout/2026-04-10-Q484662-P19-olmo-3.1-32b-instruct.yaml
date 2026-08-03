@@ -1,0 +1,32 @@
+completion_tokens: 1457
+cost_usd: 0.0051348
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21303
+property: P19
+property_label: place of birth
+rationale: Multiple verified sources confirm that Wentworth Miller was born in Chipping
+  Norton, Oxfordshire, England. There is no credible evidence supporting a birthplace
+  in Belgium. The edit changing his place of birth to Belgium is therefore factually
+  incorrect.
+rcid: 2549577486
+revid: 2472940165
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ghostwhisperer.fandom.com/wiki/Wentworth_Miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvrage.com/person/id-25355/Wentworth_Miller/
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/millerwentw/wentworth-miller
+- provenance: verified
+  supports_claim: false
+  url: https://www.binged.com/news/wentworth-miller-prison-breaks-michael-scofield-reveals-hes-been-diagnosed-as-autistic/
+timestamp: '2026-04-10T00:04:20.878499+00:00'
+title: Q484662
+turns: 1
+value_label: Belgium
+verdict: incorrect

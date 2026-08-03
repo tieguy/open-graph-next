@@ -1,0 +1,31 @@
+completion_tokens: 1356
+cost_usd: 0.00134148
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13322
+property: P856
+property_label: official website
+rationale: The new official website URL, 'https://www.ffpri.go.jp/tmk/en/', is confirmed
+  as the current English-language official website for Tama Forest Science Garden
+  by the official source itself (the website at that URL). The old URL ('https://www.ffpri.affrc.go.jp/tmk/en/')
+  is outdated and no longer functional. Multiple independent sources corroborate the
+  change, including the official website and a secondary source that directs users
+  to the official site.
+rcid: 2550444325
+revid: 2473781004
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ffpri.go.jp/tmk/en/index.html
+- provenance: verified
+  supports_claim: false
+  url: https://at-tama.tokyo/lang_en/seasons/forestresearch/
+- provenance: verified
+  supports_claim: false
+  url: https://www.gotokyo.org/en/spot/1226/index.html
+timestamp: '2026-04-10T13:18:33.342045+00:00'
+title: Q5788556
+turns: 1
+value_label: null
+verdict: verified-high

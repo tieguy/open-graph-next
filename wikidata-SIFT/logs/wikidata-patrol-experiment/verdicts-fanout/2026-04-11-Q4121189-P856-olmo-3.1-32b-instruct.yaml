@@ -1,0 +1,28 @@
+completion_tokens: 1167
+cost_usd: 0.0040802
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16900
+property: P856
+property_label: official website
+rationale: The official website https://euruko.org is directly confirmed by the conference's
+  own site and subdomains, and independently verified by Wikipedia as the official
+  website of EuRuKo. This provides strong evidence that the value is correct.
+rcid: 2551412490
+revid: 2474715513
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://2024.euruko.org
+- provenance: verified
+  supports_claim: true
+  url: https://euruko.org/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/EuRuKo
+timestamp: '2026-04-11T13:12:39.246916+00:00'
+title: Q4121189
+turns: 1
+value_label: null
+verdict: verified-high

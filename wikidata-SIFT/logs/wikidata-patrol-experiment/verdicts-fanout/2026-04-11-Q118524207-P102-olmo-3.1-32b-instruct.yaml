@@ -1,0 +1,31 @@
+completion_tokens: 768
+cost_usd: 0.0040888
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18140
+property: P102
+property_label: member of political party
+rationale: The removal of the 'member of political party' (P102) claim is well-supported
+  by multiple independent sources. The English Wikipedia (archived and current) and
+  LovelyBooks.de biography indicate that Torsten Heinrich left the AfD in March 2014
+  and has not held any political party membership since. The removal of the qualifiers
+  and the claim itself is consistent with up-to-date information that Heinrich is
+  no longer affiliated with any political party.
+rcid: null
+revid: 2470876455
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Torsten_Heinrich
+- provenance: verified
+  supports_claim: true
+  url: https://www.lovelybooks.de/autor/Torsten-Heinrich/
+- provenance: verified
+  supports_claim: true
+  url: https://web.archive.org/web/20250219202033/https://en.wikipedia.org/wiki/Torsten_Heinrich
+timestamp: '2026-04-11T18:23:31.232948+00:00'
+title: Q118524207
+turns: 1
+value_label: unknown
+verdict: verified-high

@@ -1,0 +1,29 @@
+completion_tokens: 1554
+cost_usd: 0.006666
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28668
+property: P569
+property_label: date of birth
+rationale: All authoritative sources, including the Encyclopedia.com biography and
+  French national archives, confirm that Germaine Tillion was born on May 30, 1907.
+  The value '3 CE' is unsupported by any credible evidence and contradicts all known
+  biographical records.
+rcid: null
+revid: 2470121557
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/tillion-germaine-1907
+- provenance: reported
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Germaine_Tillion
+- provenance: reported
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Fichier_des_personnes_d%C3%A9c%C3%A9d%C3%A9es
+timestamp: '2026-04-11T16:42:10.407318+00:00'
+title: Q271991
+turns: 1
+value_label: null
+verdict: incorrect

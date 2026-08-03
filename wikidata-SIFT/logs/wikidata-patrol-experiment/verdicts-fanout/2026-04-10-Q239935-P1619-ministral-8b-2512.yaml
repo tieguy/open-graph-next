@@ -1,0 +1,30 @@
+completion_tokens: 1892
+cost_usd: 0.00212973
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18041
+property: P1619
+property_label: date of official opening
+rationale: The claim that the City of Arts and Sciences (Q239935) opened in 1864 is
+  factually incorrect. Multiple verified independent sources confirm the official
+  opening date as 1998. The cited reference from Dutch Wikipedia is invalid for Wikidata
+  and does not support the claim. The architectural context (modern design, Santiago
+  Calatrava as architect) further contradicts the 1864 claim.
+rcid: 2549884163
+revid: 2473239727
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://connectingvalencia.com/valencia/city-of-arts-and-sciences/
+- provenance: verified
+  supports_claim: false
+  url: https://www.theeasywayvalencia.com/city-of-arts-and-science
+- provenance: reported
+  supports_claim: false
+  url: https://nl.wikipedia.org/w/index.php?title=Ciutat_de_les_Arts_i_les_Ciències&oldid=52290977
+timestamp: '2026-04-10T00:17:18.617439+00:00'
+title: Q239935
+turns: 1
+value_label: null
+verdict: incorrect

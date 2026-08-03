@@ -1,0 +1,22 @@
+completion_tokens: 482
+cost_usd: 0.007142599999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34267
+property: P26
+property_label: spouse
+rationale: No independent sources could be located or accessed to verify that Ahlam
+  is the spouse of Mubarak Al-Hajiri. The edit removed Nancy Ajram as spouse and added
+  Ahlam, but there is no corroborating evidence available at this time.
+rcid: null
+revid: 2471852029
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mubarak_Al-Hajiri
+timestamp: '2026-04-07T14:16:33.135523+00:00'
+title: Q12238493
+turns: 8
+value_label: Ahlam
+verdict: unverifiable

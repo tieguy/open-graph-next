@@ -1,0 +1,33 @@
+completion_tokens: 441
+cost_usd: 0.0034590000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15972
+property: P569
+property_label: date of birth
+rationale: The new value of 13 August 1999 is supported by an independent, verified
+  source (Famous Birthdays), which states that Álex González was born on this date.
+  Baseball-Reference, while not directly stating the birth date on the fetched page
+  excerpt, provides consistent career data for a player named Álex González with a
+  consistent timeline that aligns with a late-1990s birth year. The cited Filmportal.de
+  reference in the edit also supports the 1999 date. There is no evidence supporting
+  the old value of 1980-08-13, and the change is consistent with reliable, publicly
+  available information.
+rcid: null
+revid: 2463918541
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.famousbirthdays.com/people/alex-gonzalez-1111.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.baseball-reference.com/players/g/gonzaal02.shtml
+- provenance: reported
+  supports_claim: true
+  url: https://pl.wikipedia.org/w/index.php?title=Álex_González&oldid=59300916
+timestamp: '2026-04-11T06:07:06.495382+00:00'
+title: Q3390414
+turns: 1
+value_label: null
+verdict: verified-high

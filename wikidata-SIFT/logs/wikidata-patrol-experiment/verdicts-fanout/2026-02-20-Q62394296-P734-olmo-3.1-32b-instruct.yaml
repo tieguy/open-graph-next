@@ -1,0 +1,30 @@
+completion_tokens: 1763
+cost_usd: 0.013540800000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62415
+property: P734
+property_label: family name
+rationale: The edit changes the family name of a prominent public figure to a term
+  that is a known racial slur and is not supported by any authoritative or reputable
+  biographical source. All official and journalistic sources refer to the individual
+  as 'Mansour Abbas.' There is no evidence from independent or primary sources to
+  support the new value.
+rcid: 2540944904
+revid: 2464734242
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://m.knesset.gov.il/en/mk/pages/MKPersonalDetails.aspx?mkid=1007
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/magazine/2021/11/01/the-arab-israeli-power-broker-in-the-knesset
+- provenance: verified
+  supports_claim: false
+  url: https://www.npr.org/2022/01/17/1073565965/arab-leaders-gamble-to-play-kingmaker-in-israel-is-paying-off
+timestamp: '2026-02-20T12:04:00.694650+00:00'
+title: Q62394296
+turns: 6
+value_label: nigga
+verdict: incorrect

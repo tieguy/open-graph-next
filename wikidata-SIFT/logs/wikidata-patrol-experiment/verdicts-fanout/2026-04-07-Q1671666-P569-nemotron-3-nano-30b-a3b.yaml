@@ -1,0 +1,38 @@
+completion_tokens: 1196
+cost_usd: 0.008015149999999999
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 155519
+property: P569
+property_label: date of birth
+rationale: Multiple independent sources written by or quoting the artist himself state
+  he was born in 1977, making a birth year of 646 CE historically implausible. The
+  Wikipedia entry cited as a reference is sourced from Wikipedia, which does not count
+  as a reliable primary source. Searches confirmed the consensus on his birth year
+  without finding any credible evidence supporting 646 Y. The extensive retrieval
+  of news articles about the artist does not contradict this finding but rather provides
+  contextual information about his career.
+rcid: 2550277990
+revid: 2473618406
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.lefigaro.fr/arts-expositions/2017/08/04/03015-20170804ARTFIG00135-street-art-invader-pille-en-plein-jour-dans-les-rues-de-paris.php
+- provenance: verified
+  supports_claim: true
+  url: https://www.francetvinfo.fr/culture/arts-expos/street-art/space-invader-perd-son-proces-contre-les-arracheurs-d-une-de-ses-mosaiques_3314617.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.lexpress.fr/actualite/societe/fait-divers/paris-de-faux-employes-de-mairie-volent-des-oeuvres-d-invader_1933054.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.nytimes.com/2023/02/12/world/europe/paris-street-art-space-invader.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.nytimes.com/2023/02/12/world/europe/paris-street-art-space-invader.html
+timestamp: '2026-04-07T04:50:02.204718+00:00'
+title: Q1671666
+turns: 15
+value_label: null
+verdict: incorrect

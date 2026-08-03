@@ -1,0 +1,20 @@
+completion_tokens: 792
+cost_usd: 0.0105354
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50301
+property: P1477
+property_label: birth name
+rationale: No credible external sources retrieved during this investigation support
+  changing the birth name of Raúl Lucio Hernández Lechuga to Joel Guzmán Hernández.
+  The current name and aliases are well-established in public records, and the proposed
+  change lacks independent corroboration.
+rcid: null
+revid: 2471113685
+sources: []
+timestamp: '2026-04-07T08:25:26.921138+00:00'
+title: Q7299797
+turns: 11
+value_label: null
+verdict: suspect

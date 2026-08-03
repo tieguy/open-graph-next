@@ -1,0 +1,34 @@
+completion_tokens: 2273
+cost_usd: 0.0042438
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14400
+property: P577
+property_label: publication date
+rationale: The French Wikipedia, which is cited as a reference, explicitly states
+  that the album was released in October 1973, supporting the change from an unspecific
+  1973 to October 1973. However, no primary authoritative source (such as a label
+  catalog or original press release) was found that independently confirms the exact
+  month. Thus, while the new value is supported by a secondary source, it cannot be
+  considered fully verified by independent primary evidence.
+rcid: 2551397491
+revid: 2474701600
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Pierre_de_Grenoble_(album)
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/release/1352530-Malicorne-Pierre-de-Grenoble
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/release/7e0d2f6f-0f9a-4a7b-8f53-3d9d0b2c7d55
+- provenance: verified
+  supports_claim: false
+  url: https://www.ina.fr/ark:/53355/PHM0005262982
+timestamp: '2026-04-11T14:59:09.369983+00:00'
+title: Q3387558
+turns: 1
+value_label: null
+verdict: verified-low

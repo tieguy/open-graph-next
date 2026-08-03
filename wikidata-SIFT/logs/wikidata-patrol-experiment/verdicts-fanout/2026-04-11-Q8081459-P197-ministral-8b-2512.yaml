@@ -1,0 +1,29 @@
+completion_tokens: 1753
+cost_usd: 0.00244065
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30448
+property: P197
+property_label: adjacent station
+rationale: The edit incorrectly changed the adjacent station for Ōfunato Station (Q8081459)
+  from Sakari Station (Q8190872) to Shimofunato Station (Q7496955). Shimofunato Station
+  is not on the Ōfunato Line and does not serve as an adjacent station to Ōfunato
+  Station. No verified sources were found to support Shimofunato Station as an adjacent
+  station, and railway knowledge confirms Sakari Station is the correct adjacent station.
+  The absence of references and lack of corroborating evidence further supports the
+  incorrectness of the edit.
+rcid: 2550465639
+revid: 2473802083
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.rome2rio.com/s/Tokyo/%C5%8Cfunato
+- provenance: reported
+  supports_claim: false
+  url: https://mapcarta.com/16568734
+timestamp: '2026-04-11T09:02:02.691530+00:00'
+title: Q8081459
+turns: 3
+value_label: Shimofunato Station
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 706
+cost_usd: 0.0066946
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31355
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: No live web sources could be found that confirm or deny the Google Knowledge
+  Graph ID '/m/012sd9hj' for Juan de Sanabria. The edit appears to be a formatting
+  change, but there is no authoritative evidence to support its correctness.
+rcid: 2550898083
+revid: 2474220949
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Juan_de_Sanabria
+- provenance: verified
+  supports_claim: false
+  url: https://historia-hispanica.rah.es/biografias/48391-juan-de-sanabria
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Juan+de+Sanabria+Knowledge+Graph
+timestamp: '2026-04-07T05:12:42.205947+00:00'
+title: Q19288538
+turns: 6
+value_label: null
+verdict: unverifiable

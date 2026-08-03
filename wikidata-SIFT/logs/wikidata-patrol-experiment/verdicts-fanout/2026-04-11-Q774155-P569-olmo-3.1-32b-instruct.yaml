@@ -1,0 +1,36 @@
+completion_tokens: 2306
+cost_usd: 0.00603
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23232
+property: P569
+property_label: date of birth
+rationale: Multiple independently verified sources, including reputable news outlets
+  and official fan biographies, confirm that Nancy Ajram's date of birth is May 16,
+  1983. The new value '16 May 1973' is not supported by any credible evidence and
+  appears to be factually incorrect. The edit replaced a correct value with an incorrect
+  one without justification from reliable sources.
+rcid: null
+revid: 2471852785
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Nancy_Ajram
+- provenance: verified
+  supports_claim: false
+  url: https://tirto.id/profil-nancy-ajram-penyanyi-lagu-ya-tabtab-wa-dalla-fntv
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/nancy-ajram.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/%D9%86%D8%A7%D9%86%D8%B3%D9%8A+%D8%B9%D8%AC%D8%B1%D9%85/+wiki
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nancy_Ajram
+timestamp: '2026-04-11T13:13:21.024638+00:00'
+title: Q774155
+turns: 1
+value_label: null
+verdict: incorrect

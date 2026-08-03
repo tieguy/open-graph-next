@@ -1,0 +1,23 @@
+completion_tokens: 1003
+cost_usd: 0.0034572187500000002
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33794
+property: P31
+property_label: instance of
+rationale: The removal of 'metaclass' as an instance of 'type of fruit' is justified.
+  The item 'type of fruit' is more accurately described as a subclass of 'type', aligning
+  with its botanical recognition and classification. There is no strong evidence to
+  support the claim that 'type of fruit' is an instance of 'metaclass'.
+rcid: null
+revid: 2468142326
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q28149961
+timestamp: '2026-04-08T18:39:21.923265+00:00'
+title: Q28149961
+turns: 7
+value_label: metaclass
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 909
+cost_usd: 0.0074438
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34492
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The cited reference confirms the subject's identity and some biographical
+  details but does not address language spoken, written, or signed. No independent,
+  directly verified source was found that confirms Bronisław Piwko spoke, wrote, or
+  signed Polish. Therefore, the claim remains unverified based on the available evidence.
+rcid: 2540941176
+revid: 2464730669
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sejm-wielki.pl/b/n.206353
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Ppor._Bronis%C5%82aw_Piwko.jpg
+timestamp: '2026-02-20T14:40:52.850667+00:00'
+title: Q138349322
+turns: 5
+value_label: Polish
+verdict: unverifiable

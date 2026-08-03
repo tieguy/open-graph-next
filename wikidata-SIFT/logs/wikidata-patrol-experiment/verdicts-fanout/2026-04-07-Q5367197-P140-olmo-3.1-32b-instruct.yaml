@@ -1,0 +1,27 @@
+completion_tokens: 1276
+cost_usd: 0.0037086
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14715
+property: P140
+property_label: religion or worldview
+rationale: The official Body & Brain website, directly fetched and read, does not
+  mention any religion or worldview, including 'Dahnhak'. Customer testimonials and
+  class descriptions focus solely on holistic wellness practices. There is no evidence
+  supporting the claim that 'Dahnhak' is the religion or worldview of Body & Brain.
+  Therefore, the removal of the P140 claim is justified.
+rcid: 2549655695
+revid: 2473016162
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bodynbrain.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bodynbrain.com/
+timestamp: '2026-04-07T12:18:58.050473+00:00'
+title: Q5367197
+turns: 2
+value_label: Dahnhak
+verdict: verified-high

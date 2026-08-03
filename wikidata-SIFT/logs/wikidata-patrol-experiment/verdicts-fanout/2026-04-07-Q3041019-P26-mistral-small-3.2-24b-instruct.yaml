@@ -1,0 +1,22 @@
+completion_tokens: 566
+cost_usd: 0.00242328125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24339
+property: P26
+property_label: spouse
+rationale: The edit changes the spouse of Vincent Dugomier to Pipidae, which is a
+  family of amphibians. This is factually incorrect and appears to be either a mistake
+  or vandalism. No references were cited for this change.
+rcid: null
+revid: 2463995680
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Vincent_Dugomier
+timestamp: '2026-04-07T10:30:17.308062+00:00'
+title: Q3041019
+turns: 4
+value_label: Pipidae
+verdict: incorrect

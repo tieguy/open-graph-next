@@ -1,0 +1,29 @@
+completion_tokens: 2043
+cost_usd: 0.0032048700000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28744
+property: P4033
+property_label: Mastodon address
+rationale: The Mastodon address claim for Niebuszewo-Bolinko (Q7031013) could not
+  be verified due to unreachable reference URLs for both the old and new values. No
+  independent, verified sources confirm the existence of the account 'radaosiedlaniebuszewobolinko@mastodon.com.pl'.
+  The new reference URL (https://bolinko.osiedla.szczecin.pl/) and the old reference
+  URL (https://mastodon.com.pl/@radaosiedlaniebuszewobolinko) were both unreachable,
+  and no additional verified sources were found to corroborate the claim. The addition
+  of a start time qualifier is also unsupported by evidence.
+rcid: 2550680039
+revid: 2474009063
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://mastodon.com.pl/@radaosiedlaniebuszewobolinko
+- provenance: reported
+  supports_claim: false
+  url: https://bolinko.osiedla.szczecin.pl/
+timestamp: '2026-04-11T07:58:10.334504+00:00'
+title: Q7031013
+turns: 2
+value_label: null
+verdict: unverifiable

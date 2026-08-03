@@ -1,0 +1,25 @@
+completion_tokens: 1489
+cost_usd: 0.00186784375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18562
+property: P6375
+property_label: street address
+rationale: The web searches to verify the street address change could not be completed
+  due to an error. Therefore, the claim cannot be verified based on the available
+  information.
+rcid: 2550576868
+revid: 2473908950
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.balingen.de/leben-in-balingen/oeffentliche+einrichtungen/stadtarchiv
+- provenance: verified
+  supports_claim: true
+  url: https://www.deutsche-digitale-bibliothek.de/organization/4QTHDRSBRB47LZZCXLTVZHEELOQ6OCZS
+timestamp: '2026-04-11T10:19:57.885877+00:00'
+title: Q28737480
+turns: 2
+value_label: null
+verdict: unverifiable

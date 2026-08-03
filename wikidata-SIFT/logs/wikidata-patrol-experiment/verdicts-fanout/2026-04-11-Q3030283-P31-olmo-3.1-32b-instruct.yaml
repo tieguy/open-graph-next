@@ -1,0 +1,28 @@
+completion_tokens: 1810
+cost_usd: 0.0042178
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15659
+property: P31
+property_label: instance of
+rationale: The change from 'film character' to 'human' for Karai is suspect because,
+  while Karai can appear human and has human ancestry, she is primarily depicted as
+  a mutant and as a character within the Teenage Mutant Ninja Turtles franchise. There
+  is no authoritative source that classifies her strictly as 'human,' and this change
+  introduces redundancy and potential inaccuracy given her primary and canonical identity.
+  More specific instance of claims already exist.
+rcid: 2550546137
+revid: 2473879397
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tmnt2012series.fandom.com/wiki/Karai
+- provenance: verified
+  supports_claim: false
+  url: https://turtlepedia.fandom.com/f/p/2481514856055120185
+timestamp: '2026-04-11T14:27:10.068024+00:00'
+title: Q3030283
+turns: 1
+value_label: human
+verdict: suspect

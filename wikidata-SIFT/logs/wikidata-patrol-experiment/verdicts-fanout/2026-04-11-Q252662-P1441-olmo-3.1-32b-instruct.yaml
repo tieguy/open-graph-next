@@ -1,0 +1,33 @@
+completion_tokens: 2271
+cost_usd: 0.0055768
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21071
+property: P1441
+property_label: present in work
+rationale: 'The 2003 animated Shredder (Ch''rell) does not appear in ''Teenage Mutant
+  Ninja Turtles II: The Secret of the Ooze,'' which is a live-action film from a different
+  continuity. He does appear in ''Turtles Forever,'' a crossover film that includes
+  the 2003 continuity. Multiple reliable sources confirm this, making the edit correct
+  and accurate.'
+rcid: 2550544147
+revid: 2473877702
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Turtles_Forever
+- provenance: verified
+  supports_claim: true
+  url: https://www.imdb.com/title/tt1442688/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Teenage_Mutant_Ninja_Turtles_(1991_film)
+- provenance: verified
+  supports_claim: true
+  url: https://turtlepedia.fandom.com/wiki/Ch'rell_(2003_TV_series)
+timestamp: '2026-04-11T16:30:39.522099+00:00'
+title: Q252662
+turns: 1
+value_label: Turtles Forever
+verdict: verified-high

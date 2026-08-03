@@ -1,0 +1,30 @@
+completion_tokens: 1706
+cost_usd: 0.003631
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13037
+property: P569
+property_label: date of birth
+rationale: The cited reference (Transfermarkt) explicitly states that Rubén Pérez
+  Ortega was born on 27 July 1988, directly contradicting the new value of 1914. Independent
+  searches and all available football sources confirm the 1988 birth date, and no
+  credible evidence supports 1914. Changing the birth date from 1988 to 1914 is therefore
+  incorrect and unsupported.
+rcid: null
+revid: 2466253044
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/ruben-perez/profil/spieler/127793
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Rubén_Pérez_Ortega
+- provenance: reported
+  supports_claim: false
+  url: https://www.logrones.es/historico/
+timestamp: '2026-04-11T10:31:38.740792+00:00'
+title: Q2895099
+turns: 1
+value_label: null
+verdict: incorrect

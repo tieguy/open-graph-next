@@ -1,0 +1,23 @@
+completion_tokens: 763
+cost_usd: 0.0007459000000000001
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 11866
+property: P625
+property_label: coordinate location
+rationale: The coordinate conversion from decimal (57.9236064,24.3942678) to DMS format
+  (57°55'24.9830"N, 24°23'39.3641"E) is mathematically accurate, as verified by a
+  primary source lookup in NASA's coordinate database. The original claim cites Estonian
+  Wikipedia as import source, but this is not the verification basis.
+rcid: null
+revid: 2471356041
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pubarchive.techpub.cba.nasa.gov/collection/nasa-data-search/data/NSSDC/catalog_data/docs_2012/2012_0000/2012_0019/2012_00190057.pdf
+timestamp: '2026-04-07T11:51:23.974990+00:00'
+title: Q3462143
+turns: 1
+value_label: null
+verdict: verified-high

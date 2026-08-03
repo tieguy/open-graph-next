@@ -1,0 +1,25 @@
+completion_tokens: 1347
+cost_usd: 0.005069199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21305
+property: P69
+property_label: educated at
+rationale: No independent or reliable sources confirm that Q4662678 ('Aas') is a school
+  or that the subject was educated there. The previous value ('ArtFX School') is consistent
+  with the subject's profile and location, and the new value lacks supporting evidence.
+rcid: null
+revid: 2470273606
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q4662678
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/ArtFX_School
+timestamp: '2026-04-07T09:55:41.592561+00:00'
+title: Q117078952
+turns: 4
+value_label: Aas
+verdict: incorrect

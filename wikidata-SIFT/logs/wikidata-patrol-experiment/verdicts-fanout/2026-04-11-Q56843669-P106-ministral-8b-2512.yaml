@@ -1,0 +1,28 @@
+completion_tokens: 1670
+cost_usd: 0.0018270600000000001
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16706
+property: P106
+property_label: occupation
+rationale: The occupation claim for Florian Hartig as a professor (Q121594) is strongly
+  supported by independent primary sources. ResearchGate explicitly confirms his title
+  as 'Professor at University of Regensburg.' While the added reference URL is unreachable,
+  the claim is corroborated by multiple credible sources, including his official ResearchGate
+  profile. The edit improves the claim by adding a reference, even if the original
+  URL cannot be accessed.
+rcid: 2550568206
+revid: 2473900626
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Florian-Hartig
+- provenance: verified
+  supports_claim: false
+  url: https://scholar.google.com/citations?user=AdcDit0AAAAJ&hl=de
+timestamp: '2026-04-11T09:08:22.078195+00:00'
+title: Q56843669
+turns: 1
+value_label: professor
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 1146
+cost_usd: 0.010584
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49482
+property: P516
+property_label: powered by
+rationale: The edit replaces the 'powered by' value with a temporary placeholder (Q53569537,
+  'placeholder for "somevalue"'), which is not substantiated by any reliable source.
+  Authoritative sources describe the Seneca Pumped Storage Generating Station as a
+  hydroelectric pumped storage facility operated by Seneca Generation LLC, but do
+  not support the use of a placeholder or undefined value for 'powered by'. This indicates
+  the claim is premature or incorrect and should be reverted or replaced with a substantiated
+  value.
+rcid: 2550658802
+revid: 2473988452
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.eia.gov/todayinenergy/detail.php?id=6910
+- provenance: verified
+  supports_claim: false
+  url: https://hydroreform.org/hydro-project/seneca-p-2280/
+- provenance: verified
+  supports_claim: false
+  url: https://openinframap.org/stats/area/United%20States/plants/419361415
+timestamp: '2026-04-10T13:03:01.448848+00:00'
+title: Q7450327
+turns: 6
+value_label: placeholder for "somevalue"
+verdict: suspect

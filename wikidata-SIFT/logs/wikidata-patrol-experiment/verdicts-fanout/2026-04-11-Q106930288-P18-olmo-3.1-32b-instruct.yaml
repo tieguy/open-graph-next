@@ -1,0 +1,31 @@
+completion_tokens: 299
+cost_usd: 0.0021696
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 9951
+property: P18
+property_label: image
+rationale: Neither the old nor the new image value for Lucy Meacham Thruston could
+  be independently verified as correct or appropriate. The new image URL points to
+  a source that cannot be fetched (HTTP 500) and does not provide accessible content
+  for evaluation. The old image was not confirmed via any independently accessible
+  source. No primary or reliable third-party source was found that confirms the use
+  of either image or the rationale for changing from one to the other.
+rcid: 2550678621
+revid: 2474007705
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.loyolanotredamelib.org/AperioBlog/index.php/2018/02/25/lucy-meacham-thruston/
+- provenance: reported
+  supports_claim: false
+  url: https://www.amazon.com/Jack-Island-Lucy-Meacham-Thruston/dp/B002LKURIM
+- provenance: reported
+  supports_claim: false
+  url: https://www.goodreads.com/author/show/14388883.Lucy_Meacham_Thruston
+timestamp: '2026-04-11T18:04:24.245233+00:00'
+title: Q106930288
+turns: 1
+value_label: null
+verdict: unverifiable

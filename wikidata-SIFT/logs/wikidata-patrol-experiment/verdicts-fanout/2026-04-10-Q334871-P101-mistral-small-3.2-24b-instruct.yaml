@@ -1,0 +1,50 @@
+completion_tokens: 2732
+cost_usd: 0.00563440625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52815
+property: P101
+property_label: field of work
+rationale: The edit changes Reza Pahlavi's field of work from 'politician' to 'slave.'
+  However, all consulted sources describe his work in terms of political activism,
+  advocacy for democracy, and historical research. There is no evidence to support
+  the claim that his field of work is 'slave.'
+rcid: 2549853948
+revid: 2473210297
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://rezapahlavi.org/en/about
+- provenance: verified
+  supports_claim: false
+  url: https://www.inthewarroom.com/reza-shah-pahlavi-modernization-and-national-identity/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/history/reza-shah-pahlavi
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/features/2026/1/12/who-is-reza-pahlavi-the-exiled-prince-urging-iranians-to-seize
+- provenance: verified
+  supports_claim: false
+  url: https://associationforiranianstudies.org/node/112
+- provenance: verified
+  supports_claim: false
+  url: https://iranopasmigirim.com/en/prince-reza-pahlavi
+- provenance: verified
+  supports_claim: false
+  url: https://thinkglobalschool.org/guest-speakers/reza-pahlavi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.biyografiler.com/en/biography/reza-pahlavi-2
+- provenance: verified
+  supports_claim: false
+  url: https://history.state.gov/historicaldocuments/frus1969-76ve04/d180
+- provenance: verified
+  supports_claim: false
+  url: https://althistory.fandom.com/wiki/Mohammad_Reza_Pahlavi_(Pahlavireich)
+timestamp: '2026-04-10T00:05:44.751064+00:00'
+title: Q334871
+turns: 2
+value_label: slave
+verdict: incorrect

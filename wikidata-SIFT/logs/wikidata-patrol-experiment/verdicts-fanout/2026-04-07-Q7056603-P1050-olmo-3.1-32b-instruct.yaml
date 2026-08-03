@@ -1,0 +1,20 @@
+completion_tokens: 1092
+cost_usd: 0.0067615999999999996
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30532
+property: P1050
+property_label: medical condition
+rationale: The edit introduces a medical condition qualifier without any citation
+  or independent evidence supporting the claim. Multiple web searches and attempts
+  to fetch potential sources returned no reliable confirmation that Gavriel Belhassen
+  had bipolar disorder. Therefore, the claim must be regarded as unverifiable.
+rcid: 2549977342
+revid: 2473327005
+sources: []
+timestamp: '2026-04-07T05:34:24.351327+00:00'
+title: Q7056603
+turns: 5
+value_label: bipolar disorder
+verdict: unverifiable

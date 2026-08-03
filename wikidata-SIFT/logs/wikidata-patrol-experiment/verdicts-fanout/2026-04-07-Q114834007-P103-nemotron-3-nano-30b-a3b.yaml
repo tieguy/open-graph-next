@@ -1,0 +1,22 @@
+completion_tokens: 553
+cost_usd: 0.00152935
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 28375
+property: P103
+property_label: native language
+rationale: No verifiable source was found that confirms IShowSpeed's native language
+  is Afrikaans. The only supporting citation is unreachable, and a web search returned
+  no reliable third‑party references, making the change unverified.
+rcid: 2550521729
+revid: 2473855881
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=IShowSpeed+native+language+Afrikaans
+timestamp: '2026-04-07T08:35:44.496911+00:00'
+title: Q114834007
+turns: 2
+value_label: Afrikaans
+verdict: suspect

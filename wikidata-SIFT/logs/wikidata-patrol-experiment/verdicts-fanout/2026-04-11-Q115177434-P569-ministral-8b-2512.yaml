@@ -1,0 +1,30 @@
+completion_tokens: 2180
+cost_usd: 0.00201636
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17458
+property: P569
+property_label: date of birth
+rationale: The edit changed Alyx Star's date of birth from 7 September 1998 (supported
+  by Brazzers.com and TheLiberacy) to 7 September 2007. No credible source supports
+  the new value, and the cited reference (Internet Adult Film Database) is inconsistent
+  and unreliable. All verified independent sources confirm the correct birth date
+  as 1998.
+rcid: 2551348762
+revid: 2474654651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theliberacy.com/2022/12/13/alyx-star-biography-career-contact-private-life-wealth-and-more/
+- provenance: verified
+  supports_claim: true
+  url: https://www.brazzers.com/pornstar/75477/alyx-star
+- provenance: verified
+  supports_claim: false
+  url: https://www.adultfilmdatabase.com/
+timestamp: '2026-04-11T14:17:19.414531+00:00'
+title: Q115177434
+turns: 1
+value_label: null
+verdict: incorrect

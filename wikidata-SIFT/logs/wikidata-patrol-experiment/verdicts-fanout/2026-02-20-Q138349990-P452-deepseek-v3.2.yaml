@@ -1,0 +1,25 @@
+completion_tokens: 926
+cost_usd: 0.02051478
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 75493
+property: P452
+property_label: industry
+rationale: The company's official website (https://suchfokus.de) clearly describes
+  the business as an 'Online Marketing Agentur' offering SEO, Google Ads, and conversion
+  optimization services, which directly aligns with the 'internet marketing' industry
+  classification. The site repeatedly references online marketing, digital marketing,
+  and internet-based marketing services throughout its content, providing strong primary
+  evidence supporting the claim.
+rcid: 2540973916
+revid: 2464760796
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:53:14.062228+00:00'
+title: Q138349990
+turns: 7
+value_label: internet marketing
+verdict: verified-high

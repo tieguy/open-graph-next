@@ -1,0 +1,25 @@
+completion_tokens: 1143
+cost_usd: 0.00229455375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42329
+property: P569
+property_label: date of birth
+rationale: The edited date of birth for Alyx Star as September 7, 2007, is contradicted
+  by her Brazzers profile, which states her date of birth as September 7, 1998. The
+  cited source (IAFD) could not be verified due to a 404 error.
+rcid: 2551348762
+revid: 2474654651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.iafd.com/person.aspx?id=alyxstar
+- provenance: verified
+  supports_claim: false
+  url: https://www.brazzers.com/pornstar/75477/alyx-star
+timestamp: '2026-04-07T07:34:40.249114+00:00'
+title: Q115177434
+turns: 7
+value_label: null
+verdict: incorrect

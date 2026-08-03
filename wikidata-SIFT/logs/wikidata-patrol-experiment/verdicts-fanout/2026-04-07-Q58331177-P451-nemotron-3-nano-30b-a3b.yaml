@@ -1,0 +1,23 @@
+completion_tokens: 877
+cost_usd: 0.0031631499999999996
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 59755
+property: P451
+property_label: unmarried partner
+rationale: The investigation failed to locate any source that verifies that Kylian
+  Mbappé's nickname is 'Gavi' or directly supports the claimed unmarried partner relationship.
+  While some news articles mention the relationship, no primary or direct source confirming
+  'Gavi' as his identified partner could be retrieved or verified.
+rcid: 2549255010
+revid: 2472625539
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://elpais.com/gente/2026-03-11/ester-exposito-y-kylian-mbappe-la-inesperada-pareja-que-protagoniza-todas-las-revistas-del-corazon.html
+timestamp: '2026-04-07T13:36:33.570230+00:00'
+title: Q58331177
+turns: 6
+value_label: Gavi
+verdict: unverifiable

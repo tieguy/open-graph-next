@@ -1,0 +1,22 @@
+completion_tokens: 1112
+cost_usd: 0.00806553125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 83067
+property: P39
+property_label: position held
+rationale: The reference URL provided in the edit is blocked and cannot be fetched.
+  Additionally, multiple attempts to search for independent sources were unsuccessful
+  due to errors. Therefore, it is not possible to verify the claim at this time.
+rcid: 2551409126
+revid: 2474712353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Deuxi%C3%A8me_gouvernement_Phil%C3%A9mon_Yang
+timestamp: '2026-04-11T18:42:04.473265+00:00'
+title: Q111394635
+turns: 11
+value_label: directeur du Budget [fr]
+verdict: unverifiable

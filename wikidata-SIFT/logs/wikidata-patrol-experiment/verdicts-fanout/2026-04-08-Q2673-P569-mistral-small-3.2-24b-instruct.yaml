@@ -1,0 +1,26 @@
+completion_tokens: 1449
+cost_usd: 0.010524560000000002
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 135689
+property: P569
+property_label: date of birth
+rationale: GeneaStar explicitly states that Chuck Norris was born on March 10, 1940.
+  Biography.com also supports the birth year, although the specific term '1940' was
+  not found in the fetched content. The removal of the date of birth '1940' from Chuck
+  Norris's Wikidata entry is incorrect, as it is supported by reliable sources.
+rcid: 2550579420
+revid: 2473911318
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.geneastar.org/celebrite/norrisc/chuck-norris
+- provenance: verified
+  supports_claim: true
+  url: https://www.biography.com/actor/chuck-norris
+timestamp: '2026-04-08T18:43:38.946974+00:00'
+title: Q2673
+turns: 9
+value_label: null
+verdict: incorrect

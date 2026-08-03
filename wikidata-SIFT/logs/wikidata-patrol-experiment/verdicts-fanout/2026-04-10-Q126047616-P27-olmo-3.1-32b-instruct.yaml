@@ -1,0 +1,39 @@
+completion_tokens: 1796
+cost_usd: 0.005185
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20537
+property: P27
+property_label: country of citizenship
+rationale: No independent, reliable source could confirm or deny whether 'Sri Lanka'
+  was correctly removed as country of citizenship for Nasdas. The available evidence
+  includes general pages about Sri Lankan citizenship law and unrelated news articles
+  about Nasdas in France, but none discuss his citizenship status. Without a direct,
+  citable source, the claim cannot be verified.
+rcid: null
+revid: 2470675650
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.immigration.gov.lk/pages_e.php?id=4
+- provenance: verified
+  supports_claim: false
+  url: https://www.multiplecitizenship.com/wscl/ws_SRI_LANKA.html
+- provenance: verified
+  supports_claim: false
+  url: https://shashikamanoj.medium.com/heres-how-i-started-to-invest-in-us-stock-market-from-sri-lanka-706b14dc2d5c
+- provenance: verified
+  supports_claim: false
+  url: https://www.francebleu.fr/infos/faits-divers-justice/ils-auraient-pu-les-tuer-les-chiens-de-l-influenceur-nasdas-accuses-d-attaquer-ceux-de-ses-voisins-8428804
+- provenance: verified
+  supports_claim: false
+  url: https://www.radiofrance.fr/mouv/nasdas-va-payer-des-profs-pour-donner-des-cours-dans-son-quartier-4691544
+- provenance: verified
+  supports_claim: false
+  url: https://www.lefigaro.fr/actualite-france/femmes-humiliees-discrimination-anti-blanc-dans-le-monde-de-nasdas-l-influenceur-qui-promeut-une-effarante-contre-culture-en-france-20250404
+timestamp: '2026-04-10T14:04:45.871608+00:00'
+title: Q126047616
+turns: 1
+value_label: Sri Lanka
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 1782
+cost_usd: 0.0041806
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15557
+property: P569
+property_label: date of birth
+rationale: No reliable source was found that explicitly states Fatma Sarhan's date
+  of birth as 13 April 1928. The only cited reference is a news obituary that is not
+  appropriate for Wikidata as a source for birthdate, and it could not be fetched
+  due to a technical error. Independent searches did not locate any authoritative
+  record confirming the specific date of birth.
+rcid: 2549602677
+revid: 2472964594
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20260316100937/https://www.almasryalyoum.com/news/details/4221853
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-10T10:51:11.465822+00:00'
+title: Q28714774
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,27 @@
+completion_tokens: 1296
+cost_usd: 0.00242811
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21087
+property: P1476
+property_label: title
+rationale: The edit changed the title of the artwork from 'Saint George and the Dragon'
+  to 'mmm'. The authoritative source (Art Institute of Chicago, referenced by P248)
+  explicitly confirms the title as 'Saint George and the Dragon'. Multiple independent
+  sources corroborate this title, while no credible source supports 'mmm' as a valid
+  title. The new value is nonsensical and contradicts all available evidence.
+rcid: null
+revid: 2466680194
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.artic.edu/aic/collections/artwork/15468
+- provenance: verified
+  supports_claim: false
+  url: https://www.artic.edu/artworks/15468/saint-george-and-the-dragon
+timestamp: '2026-04-11T10:10:25.589394+00:00'
+title: Q20272061
+turns: 1
+value_label: null
+verdict: incorrect

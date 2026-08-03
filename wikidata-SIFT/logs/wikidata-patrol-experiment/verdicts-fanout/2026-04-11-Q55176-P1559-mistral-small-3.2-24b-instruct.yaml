@@ -1,0 +1,28 @@
+completion_tokens: 1075
+cost_usd: 0.00173435
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17616
+property: P1559
+property_label: name in native language
+rationale: Multiple independent sources consistently refer to Roberta Williams by
+  the name 'Roberta.' The old value 'Roberrrrrrrrrrrta' appears to be a typo or intentional
+  misspelling. The new value 'Roberta' is supported by reliable sources.
+rcid: 2550513262
+revid: 2473847989
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://arstechnica.com/gaming/2022/04/roberta-and-ken-williams-open-up-about-their-first-video-game-in-25-years
+- provenance: verified
+  supports_claim: true
+  url: https://www.gamasutra.com/view/news/358772/Adventure_game_trailblazer_Roberta_Williams_to_receive_Pioneer_Award_at_GDC_2020.php
+- provenance: verified
+  supports_claim: true
+  url: https://www.historylink.org/File/20912
+timestamp: '2026-04-11T11:24:18.730534+00:00'
+title: Q55176
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,25 @@
+completion_tokens: 986
+cost_usd: 0.0033889
+diff_type: statement_removed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 63834
+property: P910
+property_label: topic's main category
+rationale: The reference to Category:Wikipedia:Babel was investigated via its primary
+  source URL (https://commons.wikimedia.org/wiki/Category:Wikipedia:Babel), which
+  returned a 404 error, indicating the resource is not accessible. No other sources
+  corroborated or contradicted the claim. Without accessible evidence confirming the
+  role of Category:Wikipedia:Babel as the topic's main category, the edit cannot be
+  verified as correct or incorrect.
+rcid: 2550595474
+revid: 2473926752
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Wikipedia:Babel
+timestamp: '2026-04-07T13:51:58.036668+00:00'
+title: Q6476774
+turns: 14
+value_label: Category:Wikipedia:Babel
+verdict: unverifiable

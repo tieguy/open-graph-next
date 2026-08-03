@@ -1,0 +1,32 @@
+completion_tokens: 1775
+cost_usd: 0.00191229375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17737
+property: P115
+property_label: home venue
+rationale: The evidence from Transfermarkt supports the new home venue, Villa Deportiva
+  de la Universidad San Martín de Porres, as the correct home venue for CD Universidad
+  San Martín. There is no reliable evidence supporting Estadio Alberto Gallardo as
+  the current home venue.
+rcid: 2550689816
+revid: 2474018391
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/universidad-san-martin-de-porres/stadion/verein/11622
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/universidad-san-martin-de-porres/startseite/verein/11622
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Estadio_Alberto_Gallardo
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Club_Deportivo_Universidad_San_Martín_de_Porres
+timestamp: '2026-04-11T12:43:04.329526+00:00'
+title: Q602582
+turns: 1
+value_label: Villa Deportiva de la Universidad San Martín de Porres [es]
+verdict: verified-high

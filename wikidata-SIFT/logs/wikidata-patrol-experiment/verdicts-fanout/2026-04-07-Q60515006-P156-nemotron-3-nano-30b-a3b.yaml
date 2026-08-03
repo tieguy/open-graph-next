@@ -1,0 +1,21 @@
+completion_tokens: 646
+cost_usd: 0.0043568
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 84552
+property: P156
+property_label: followed by
+rationale: No reliable source confirming the existence or scheduling of a 2029 Africa
+  Cup of Nations could be located. Multiple searches for CAF-organized tournaments
+  or official CAF site content did not return relevant results. All external service
+  references were unresolvable or unreachable, and no authoritative verification of
+  the 2029 tournament found.
+rcid: 2549713777
+revid: 2473072483
+sources: []
+timestamp: '2026-04-07T10:08:04.570990+00:00'
+title: Q60515006
+turns: 15
+value_label: 2029 Africa Cup of Nations
+verdict: unverifiable

@@ -1,0 +1,26 @@
+completion_tokens: 657
+cost_usd: 0.0043402
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 84176
+property: P31
+property_label: instance of
+rationale: The edit changes the 'instance of' property of Hotel Poem from hotel to
+  hotel, which is not a meaningful change since the value remains Q27686. Multiple
+  web searches did not yield a clear, definitive source confirming Hotel Poem's classification,
+  but the existing references on the item and the hotel's own description on its official
+  website strongly suggest it functions as a hotel. No sources directly contradict
+  the claim. Verdict is thus plausible due to supporting context but lacks explicit
+  verification from an external source.
+rcid: 2550228177
+revid: 2473569760
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.hotelpoem.com.tr
+timestamp: '2026-04-07T05:19:19.078383+00:00'
+title: Q111856802
+turns: 15
+value_label: hotel
+verdict: plausible

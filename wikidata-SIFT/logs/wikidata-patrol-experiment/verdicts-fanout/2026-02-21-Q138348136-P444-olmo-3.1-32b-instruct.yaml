@@ -1,0 +1,22 @@
+completion_tokens: 979
+cost_usd: 0.005109600000000001
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22611
+property: P444
+property_label: review score
+rationale: The official Google Play listing for Fut Rap Cartas (FRC 25) currently
+  shows a rating of 4.5/5, contradicting the claimed value of 4.0/5. The cited reference
+  is primary and verified but does not support the edit's assertion.
+rcid: 2540918639
+revid: 2464709771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/details?id=com.fyf.frc2324&hl=en_US
+timestamp: '2026-02-21T02:13:54.916206+00:00'
+title: Q138348136
+turns: 3
+value_label: null
+verdict: incorrect

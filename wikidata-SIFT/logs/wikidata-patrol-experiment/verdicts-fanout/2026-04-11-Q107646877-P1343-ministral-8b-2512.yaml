@@ -1,0 +1,24 @@
+completion_tokens: 1997
+cost_usd: 0.0054179399999999996
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58923
+property: P1343
+property_label: described by source
+rationale: The claim that ARD-Faktenfinder describes Corona Rebellen (Q107646877)
+  is not supported by the content of the cited URL ([https://www.tagesschau.de/faktenfinder/mwgfd-101.html](https://www.tagesschau.de/faktenfinder/mwgfd-101.html)),
+  which instead discusses a different group (MWGFD e.V.). ARD-Faktenfinder is a fact-checking
+  initiative and would not describe or endorse an organization opposing COVID-19 measures.
+  The removal of this claim is justified as it is incorrect and unsupported by evidence.
+rcid: 2551215838
+revid: 2474528828
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.tagesschau.de/faktenfinder/mwgfd-101.html
+timestamp: '2026-04-11T11:52:36.743783+00:00'
+title: Q107646877
+turns: 5
+value_label: ARD-Faktenfinder
+verdict: verified-high

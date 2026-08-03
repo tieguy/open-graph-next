@@ -1,0 +1,31 @@
+completion_tokens: 1672
+cost_usd: 0.00267441
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22353
+property: P39
+property_label: position held
+rationale: The updated qualifier for the start time of Otto von Königsmarck's position
+  as Roman Catholic Bishop of Havelberg (P39) from 1493 to 1494 is supported by multiple
+  verified primary sources, including Catholic-Hierarchy.org and gcatholic.org. These
+  sources confirm that Otto von Königsmarck was confirmed as bishop in January 1494,
+  making the updated start time accurate and well-documented. The change aligns with
+  the confirmation date rather than the selection date, which was previously misrepresented.
+rcid: 2550971300
+revid: 2474290793
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bkonio.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.gcatholic.org/dioceses/former/have0.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dh522.html
+timestamp: '2026-04-11T10:37:11.322681+00:00'
+title: Q64778291
+turns: 1
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

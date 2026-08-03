@@ -1,0 +1,29 @@
+completion_tokens: 1284
+cost_usd: 0.027496589999999994
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 300715
+property: P22
+property_label: father
+rationale: The edit changed Robert Brasillach's father from 'Ade' (Q15056358) to 'Adelaide'
+  (Q354633). Independent sources confirm that Brasillach's father was named **Arthémile
+  Brasillach**, who was killed in Morocco in 1914. Neither 'Ade' nor 'Adelaide' appears
+  in any credible source as his father's name. The old value ('Ade') was not referenced
+  in any verified source either, but the new value ('Adelaide') is also unsupported
+  by historical records. Therefore, the change from 'Ade' to 'Adelaide' is incorrect
+  and lacks any credible evidence.
+rcid: 2550652843
+revid: 2473982658
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Robert_Brasillach
+- provenance: verified
+  supports_claim: false
+  url: https://counter-currents.com/2020/03/the-martyrdom-of-robert-brasillach/
+timestamp: '2026-04-11T17:21:48.370925+00:00'
+title: Q1488
+turns: 15
+value_label: Adelaide
+verdict: incorrect

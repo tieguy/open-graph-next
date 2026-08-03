@@ -1,0 +1,28 @@
+completion_tokens: 1813
+cost_usd: 0.0035478
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12300
+property: P6375
+property_label: street address
+rationale: The new address 'Artur-Eppler-Platz 1, 72336 Balingen' is explicitly confirmed
+  by the official city of Balingen website and by the German Wikipedia, both of which
+  are independent and authoritative sources. The previously cited reference did not
+  contain the address, so it did not support either value. There is no evidence supporting
+  the old address from independent sources, so the change to the new address is correct
+  and well-supported.
+rcid: 2550576868
+revid: 2473908950
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.balingen.de/leben-in-balingen/oeffentliche+einrichtungen/stadtarchiv/kontakt
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Stadtarchiv_Balingen
+timestamp: '2026-04-11T10:20:20.845838+00:00'
+title: Q28737480
+turns: 1
+value_label: null
+verdict: verified-high

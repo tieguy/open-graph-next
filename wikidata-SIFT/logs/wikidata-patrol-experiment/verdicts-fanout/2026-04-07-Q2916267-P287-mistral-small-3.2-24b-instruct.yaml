@@ -1,0 +1,22 @@
+completion_tokens: 770
+cost_usd: 0.00239338125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24631
+property: P287
+property_label: designed by
+rationale: The edit changes the designer of the Tulip chair from Eero Saarinen to
+  Kylian Mbappé. However, independent sources confirm that Eero Saarinen is the correct
+  designer. Therefore, the edit is incorrect.
+rcid: 2551187138
+revid: 2474500945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://example.com/primary-source
+timestamp: '2026-04-07T13:29:37.310334+00:00'
+title: Q2916267
+turns: 4
+value_label: Kylian Mbappé
+verdict: incorrect

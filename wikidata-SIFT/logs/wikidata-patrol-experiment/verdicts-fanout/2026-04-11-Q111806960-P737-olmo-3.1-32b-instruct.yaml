@@ -1,0 +1,35 @@
+completion_tokens: 627
+cost_usd: 0.0032893999999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14566
+property: P737
+property_label: influenced by
+rationale: The referenced article that accompanied the change (https://www.timeout.cat/barcelona/ca/noticies/maria-nicolau-els-nostres-impostos-financen-la-ma-dobra-gratuita-dels-grans-restaurants-que-donen-de-menjar-als-rics-051824)
+  could not be fetched, and no independent, verified source was found that explicitly
+  states Maria Nicolau i Rocabayera was influenced by 'Runi'. The new value 'Runi'
+  appears to be a given name, but no primary or secondary source confirms this as
+  an influence. The old value 'Jay Rayner' is a known food critic, but no source directly
+  links him as an influence either. Without a fetchable reference or independent confirmation,
+  the edit's correctness cannot be established.
+rcid: null
+revid: 2466002616
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.timeout.cat/barcelona/ca/noticies/maria-nicolau-els-nostres-impostos-financen-la-ma-dobra-gratuita-dels-grans-restaurants-que-donen-de-menjar-als-rics-051824
+- provenance: verified
+  supports_claim: false
+  url: https://www.arallibres.cat/autor/maria-nicolau/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ccma.cat/3cat/maria-nicolau-la-cuina-no-va-de-menjar-sino-de-fer-el-mon-com-vols-que-sigui-/video/6248801/
+- provenance: verified
+  supports_claim: false
+  url: https://www.bookish.org/en/libro/cocina-o-barbarie/9788411001113/854408/
+timestamp: '2026-04-11T09:01:45.990837+00:00'
+title: Q111806960
+turns: 1
+value_label: Runi
+verdict: unverifiable

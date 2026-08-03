@@ -1,0 +1,32 @@
+completion_tokens: 1677
+cost_usd: 0.0035174400000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 49741
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The edit incorrectly changed the P131 claim for Q2318440 (Church of Saint
+  George) from 'Lod' (Q207540) to 'neuroplasticity' (Q849491). The old value 'Lod'
+  is strongly supported by multiple claims on the item itself, including coordinates
+  (P625), street address (P6375), and the item's description ('church building in
+  Lod, Israel'). Neuroplasticity is a scientific concept unrelated to administrative
+  territorial entities, making the new value factually incorrect for this claim. The
+  edit is clearly wrong and should be reverted.
+rcid: 2550401254
+revid: 2473738909
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.google.com/maps/place/Lod,+Israel/@31.953086,34.899471,17z/data=!3m1!4b1!4m6!3m5!1s0x151baa7f72222222:0x123456789abcdef0!8m2!3d31.953086!4d34.899471!16s%2Fg%2FLod_Israel
+- provenance: reported
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Lod-st-george-2-60.jpg
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q2318440
+timestamp: '2026-04-11T05:29:05.769658+00:00'
+title: Q2318440
+turns: 6
+value_label: neuroplasticity
+verdict: incorrect

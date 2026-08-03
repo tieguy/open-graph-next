@@ -1,0 +1,24 @@
+completion_tokens: 1772
+cost_usd: 0.0034824
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12096
+property: P569
+property_label: date of birth
+rationale: The Arabic Wikipedia page, referenced by the edit and fetched during investigation,
+  explicitly states the date of birth as 10 August 1987 and cites official records
+  as the source. The previous value of only the year 1987 is less precise and not
+  supported by the cited source. No contradictory evidence was found, and the edit
+  improves the item's accuracy.
+rcid: 2549391839
+revid: 2472757950
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ar.wikipedia.org/?oldid=62076754
+timestamp: '2026-04-11T15:08:39.742795+00:00'
+title: Q20390331
+turns: 1
+value_label: null
+verdict: verified-high

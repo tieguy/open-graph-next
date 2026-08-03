@@ -1,0 +1,29 @@
+completion_tokens: 1380
+cost_usd: 0.0051002
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21361
+property: P19
+property_label: place of birth
+rationale: Multiple independent, reliable sources confirm that Metrika (Thais Amores)
+  was born in Castellón de la Plana. The cited reference for the original claim could
+  not be fetched, but this does not outweigh the strong independent corroboration
+  from verified journalistic sources. Removing the claim was therefore incorrect.
+rcid: 2549685112
+revid: 2473044623
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.20minutos.es/musica/entrevista-metrika_6923647_0.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.citypopulation.de/en/spain/comunitatvalenciana/castellon/12040__castell_de_la_plana/
+- provenance: reported
+  supports_claim: false
+  url: https://www.elperiodicomediterraneo.com/cultura/2021/06/22/metrika-voz-trap-castellon-hablo-54132977.html
+timestamp: '2026-04-11T17:44:07.872483+00:00'
+title: Q127695613
+turns: 1
+value_label: Castellón de la Plana
+verdict: incorrect

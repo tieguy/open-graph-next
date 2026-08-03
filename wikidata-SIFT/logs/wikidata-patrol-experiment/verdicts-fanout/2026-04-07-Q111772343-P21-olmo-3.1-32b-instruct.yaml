@@ -1,0 +1,23 @@
+completion_tokens: 1278
+cost_usd: 0.0102908
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47620
+property: P21
+property_label: sex or gender
+rationale: The cited reference could not be fetched to verify the claim directly.
+  Although independent reporting suggests Balen Shah is identified as male, no live-fetched
+  and verified source was available to confirm the claim during this investigation.
+  Therefore, the evidence is insufficient to reach a higher confidence verdict.
+rcid: 2551279358
+revid: 2474588640
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://famereports.com/balen-shah-biography/
+timestamp: '2026-04-07T08:03:19.115280+00:00'
+title: Q111772343
+turns: 7
+value_label: male
+verdict: unverifiable

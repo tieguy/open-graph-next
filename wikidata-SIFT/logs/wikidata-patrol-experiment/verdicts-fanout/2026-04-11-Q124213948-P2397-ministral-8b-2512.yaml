@@ -1,0 +1,26 @@
+completion_tokens: 2042
+cost_usd: 0.00514482
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58382
+property: P2397
+property_label: YouTube channel ID
+rationale: The removed YouTube channel ID (UCqF-iiJGBmvaqk4iE43MfQw) was not verifiable
+  on YouTube, and no independent sources (Library of Congress, IMDb) confirm Whake's
+  official YouTube channel. The claim lacked references and qualifiers, and the channel
+  ID itself was inaccessible. Thus, the removal was justified.
+rcid: 2550621157
+revid: 2473951622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCqF-iiJGBmvaqk4iE43MfQw
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n2024039943
+timestamp: '2026-04-11T11:29:38.733970+00:00'
+title: Q124213948
+turns: 6
+value_label: null
+verdict: verified-high

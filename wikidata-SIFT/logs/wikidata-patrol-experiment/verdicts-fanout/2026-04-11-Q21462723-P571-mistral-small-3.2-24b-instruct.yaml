@@ -1,0 +1,28 @@
+completion_tokens: 1574
+cost_usd: 0.014479087499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 154739
+property: P571
+property_label: inception
+rationale: The sources indicate that Uber Eats was started in August 2014 and made
+  its debut in April 2015. Therefore, the edit changing the inception date from August
+  2014 to August 2015 is incorrect.
+rcid: 2550543271
+revid: 2473876876
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://entrepreneuronemedia.com/success-stories/success-story-of-uber/
+- provenance: verified
+  supports_claim: true
+  url: https://pestel-analysis.com/blogs/brief-history/uber
+- provenance: verified
+  supports_claim: true
+  url: https://www.uberapps.tech/blog/uber-history.html
+timestamp: '2026-04-11T14:43:56.260486+00:00'
+title: Q21462723
+turns: 7
+value_label: null
+verdict: incorrect

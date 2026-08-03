@@ -1,0 +1,32 @@
+completion_tokens: 2350
+cost_usd: 0.007381
+diff_type: rank_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29855
+property: P2295
+property_label: net profit
+rationale: The net profit value of -3,910,000,000 Russian rubles for 2022 is directly
+  supported by VK's official IFRS financial statements (verified source), and independently
+  confirmed by reputable financial news outlets such as Interfax and Vedomosti. The
+  factual correctness of the value is therefore well-established. However, the edit
+  only changed the rank of the claim without altering the value, references, or qualifiers,
+  and no rationale for the rank change was provided in the edit or supporting context.
+  Despite this, the edit does not introduce factual error.
+rcid: 2550543853
+revid: 2473877430
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://corp.vkcdn.ru/media/files/vkifrsfy2022eng.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.interfax.ru/business/860562
+- provenance: verified
+  supports_claim: true
+  url: https://www.vedomosti.ru/business/articles/2023/03/16/960871-vk-lir
+timestamp: '2026-04-11T09:57:10.650510+00:00'
+title: Q1885456
+turns: 1
+value_label: null
+verdict: verified-high

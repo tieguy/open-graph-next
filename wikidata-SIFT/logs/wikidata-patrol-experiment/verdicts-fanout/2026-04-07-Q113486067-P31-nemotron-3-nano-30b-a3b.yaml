@@ -1,0 +1,25 @@
+completion_tokens: 680
+cost_usd: 0.004424549999999999
+diff_type: reference_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 85771
+property: P31
+property_label: instance of
+rationale: No sources were successfully fetched to verify the claim. All reference
+  URLs attempted to fetch returned 'blocked_domain' errors (www.runwaylive.com, runwaylive.com,
+  wikidata.org). Web searches for supporting evidence (e.g. definition of instance
+  of organization, property definitions) returned zero results. Without accessible
+  primary or secondary sources to examine, there is no evidence to confirm or deny
+  whether the reference supports the instance of claim for Runway Magazine.
+rcid: null
+revid: 2471602727
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q43229
+timestamp: '2026-04-07T12:33:41.964432+00:00'
+title: Q113486067
+turns: 15
+value_label: organization
+verdict: unverifiable

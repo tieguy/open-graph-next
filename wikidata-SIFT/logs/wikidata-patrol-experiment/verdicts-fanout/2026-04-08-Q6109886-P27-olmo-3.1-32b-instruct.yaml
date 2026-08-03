@@ -1,0 +1,26 @@
+completion_tokens: 925
+cost_usd: 0.010105
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 47750
+property: P27
+property_label: country of citizenship
+rationale: The item's Portuguese description identifies Roberto Musso as 'uruguaio'
+  and lists Montevideo as his place of birth. Multiple web searches did not find any
+  authoritative source supporting a Peruvian citizenship claim. No reliable, citable
+  evidence was found to corroborate the change from Uruguay to Peru.
+rcid: 2551399699
+revid: 2474703494
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Roberto_Musso
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-08T18:48:01.975213+00:00'
+title: Q6109886
+turns: 8
+value_label: Peru
+verdict: incorrect

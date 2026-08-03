@@ -1,0 +1,20 @@
+completion_tokens: 341
+cost_usd: 0.00091015
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 16839
+property: P361
+property_label: part of
+rationale: No sources were found confirming the existence or relevance of the claimed
+  entity. The primary reference URL (https://beallslist.net/) was unreachable (HTTP
+  404), preventing direct content verification. No independent sources were located
+  to support the claim.
+rcid: 2550915951
+revid: 2474238017
+sources: []
+timestamp: '2026-04-07T12:14:11.368909+00:00'
+title: Q52636154
+turns: 3
+value_label: ELEWA BIOSCIENCES, F.a.C.T.LTD
+verdict: unverifiable

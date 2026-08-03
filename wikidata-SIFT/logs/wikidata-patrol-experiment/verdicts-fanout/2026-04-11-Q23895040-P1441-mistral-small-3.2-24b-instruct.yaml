@@ -1,0 +1,29 @@
+completion_tokens: 1548
+cost_usd: 0.00186654
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17247
+property: P1441
+property_label: present in work
+rationale: The sources confirm that James Rhodes appears in both 'Iron Man' and 'Iron
+  Man 2'. The edit incorrectly changes the value from 'Iron Man 2' to 'Iron Man',
+  which is not justified as both values are correct and should be present. The edit
+  removes a valid claim without providing a valid reason or reference.
+rcid: 2550976153
+revid: 2474295530
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ironman.fandom.com/wiki/James_Rhodes_(Earth-199999)
+- provenance: verified
+  supports_claim: true
+  url: https://marvel.fandom.com/wiki/James_Rhodes_(Earth-616)
+- provenance: verified
+  supports_claim: true
+  url: https://www.cbr.com/iron-man-don-cheadle-replaced-terrence-howard/
+timestamp: '2026-04-11T06:52:49.624142+00:00'
+title: Q23895040
+turns: 1
+value_label: Iron Man
+verdict: incorrect

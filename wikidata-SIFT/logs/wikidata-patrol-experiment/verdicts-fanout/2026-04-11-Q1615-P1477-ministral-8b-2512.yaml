@@ -1,0 +1,28 @@
+completion_tokens: 1148
+cost_usd: 0.033500249999999995
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 378949
+property: P1477
+property_label: birth name
+rationale: The edit incorrectly changes Neil Armstrong's birth name from 'Neil Alden
+  Armstrong' to 'Michael Jackson'. The cited reference (planet4589.org) does not support
+  this claim and contains no mention of 'Michael Jackson' in relation to Neil Armstrong.
+  Multiple independent sources, including NASA and biographical records, confirm that
+  Neil Armstrong's birth name is 'Neil Alden Armstrong'. The new value 'Michael Jackson'
+  is not associated with Neil Armstrong and is clearly incorrect.
+rcid: null
+revid: 2471070596
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20210923184156/https://planet4589.org/space/astro/rides.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.biography.com/astronaut/neil-armstrong
+timestamp: '2026-04-11T18:10:49.204673+00:00'
+title: Q1615
+turns: 15
+value_label: null
+verdict: incorrect

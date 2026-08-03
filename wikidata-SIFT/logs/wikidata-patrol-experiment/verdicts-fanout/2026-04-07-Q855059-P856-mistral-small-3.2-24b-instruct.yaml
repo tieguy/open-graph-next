@@ -1,0 +1,27 @@
+completion_tokens: 1260
+cost_usd: 0.008533312500000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 87662
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Sakaide to the website of EVA
+  Air, a Taiwanese airline. The correct official website of Sakaide is confirmed to
+  be 'https://www.city.sakaide.lg.jp/' based on the fetched content, which contains
+  various official announcements and information about the city. The reference to
+  Italian Wikipedia is not a reliable source for this claim.
+rcid: null
+revid: 2471596419
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.sakaide.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.evaair.com/
+timestamp: '2026-04-07T06:00:02.757107+00:00'
+title: Q855059
+turns: 9
+value_label: null
+verdict: incorrect

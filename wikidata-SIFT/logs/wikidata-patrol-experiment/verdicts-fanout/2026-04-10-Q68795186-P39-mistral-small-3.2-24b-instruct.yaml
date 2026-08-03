@@ -1,0 +1,26 @@
+completion_tokens: 1361
+cost_usd: 0.0034994375
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33698
+property: P39
+property_label: position held
+rationale: The edit is well-supported by authoritative sources from Catholic Hierarchy,
+  which provide consistent information about Helmbert's tenure as Bishop of Havelberg
+  from 1191 to 1206. The qualifiers added in the edit are accurate and corroborated
+  by these sources.
+rcid: 2550967758
+revid: 2474287360
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bhelmb.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dh522.html
+timestamp: '2026-04-10T14:09:04.125259+00:00'
+title: Q68795186
+turns: 3
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

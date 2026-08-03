@@ -1,0 +1,27 @@
+completion_tokens: 958
+cost_usd: 0.0057193999999999995
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25723
+property: P1476
+property_label: title
+rationale: The only reference provided for the title 'Brave Search' was a search results
+  page that does not establish official branding, and I could not fetch or locate
+  an authoritative, independent source confirming the title during this investigation.
+  Therefore, the removal cannot be judged as correct or incorrect based on available
+  evidence.
+rcid: null
+revid: 2470688551
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://search.brave.com/search?q=the+last+of+us
+- provenance: attempted
+  supports_claim: null
+  url: https://support.brave.com/hc/en-us/articles/4537609459469
+timestamp: '2026-04-07T03:51:04.964581+00:00'
+title: Q107355971
+turns: 5
+value_label: null
+verdict: unverifiable

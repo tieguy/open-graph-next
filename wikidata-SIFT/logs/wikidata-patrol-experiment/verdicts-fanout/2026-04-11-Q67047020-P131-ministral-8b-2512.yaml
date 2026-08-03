@@ -1,0 +1,29 @@
+completion_tokens: 2163
+cost_usd: 0.00331116
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43963
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The removed claim that GBPS Dil Sher Brohi is located in Dil Sher Brohi
+  (Q138732616) lacked any references and could not be independently verified through
+  accessible sources. The RSU Sindh website and other available resources did not
+  confirm this specific location. Since the claim had no supporting evidence and no
+  independent corroboration was found, the removal of this claim is justified. The
+  current claims (Garhi Khairo Tehsil and Jacobabad District) are more plausible and
+  supported by a reference, even if it is not directly linked to this specific school.
+rcid: 2550351161
+revid: 2473689936
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.rsu-sindh.gov.pk
+- provenance: verified
+  supports_claim: false
+  url: https://www.rsu-sindh.gov.pk/contents/FMIS/distbudget201516/Shikarpur.pdf
+timestamp: '2026-04-11T09:21:37.127725+00:00'
+title: Q67047020
+turns: 6
+value_label: Dil Sher Brohi
+verdict: verified-high

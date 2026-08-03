@@ -1,0 +1,29 @@
+completion_tokens: 1395
+cost_usd: 0.012459199999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 120407
+property: P106
+property_label: occupation
+rationale: The reference provided could not be verified due to human verification
+  requirements, and the independent sources found do not confirm that Christian Bois
+  is a filmmaker. Therefore, the claim remains unverifiable based on the available
+  evidence.
+rcid: 2540943748
+revid: 2464733097
+sources:
+- provenance: verified
+  supports_claim: null
+  url: https://vimeo.com/45086822
+- provenance: verified
+  supports_claim: false
+  url: https://journal.culanth.org/index.php/ca/article/download/4776/689
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmindependent.org/talent/christian-bruno/
+timestamp: '2026-02-20T12:52:07.171870+00:00'
+title: Q41535671
+turns: 9
+value_label: filmmaker
+verdict: unverifiable

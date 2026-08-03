@@ -1,0 +1,32 @@
+completion_tokens: 1456
+cost_usd: 0.02528065625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 263607
+property: P348
+property_label: software version identifier
+rationale: The reference provided for the new value '4.2.0' does not support the claim.
+  Independent searches and direct fetches of relevant pages do not confirm the version
+  '4.2.0' for Tellico. The old value '0.6.2' is supported by the GitHub release page,
+  which indicates it was a valid version. Therefore, the change appears to be incorrect.
+rcid: 2551005655
+revid: 2474323666
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/KDE/tellico/releases/tag/v0.6.2
+- provenance: verified
+  supports_claim: false
+  url: https://tellico-project.org/
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/KDE/tellico/releases
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/KDE/tellico
+timestamp: '2026-04-11T12:16:28.718100+00:00'
+title: Q2371645
+turns: 8
+value_label: null
+verdict: incorrect

@@ -1,0 +1,33 @@
+completion_tokens: 700
+cost_usd: 0.0163302
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 79551
+property: P19
+property_label: place of birth
+rationale: The edit claims Daniel Pennac's place of birth is China, but I could not
+  find any independent, accessible, and reliable source confirming this fact. The
+  only cited reference is an import from French Wikipedia, which I could not verify
+  due to domain blocking. In the absence of corroborating evidence, the change is
+  considered suspicious and likely incorrect.
+rcid: null
+revid: 2470760557
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Daniel_Pennac
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Daniel_Pennac
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.concerthall.com/author/daniel-pennac
+timestamp: '2026-04-07T14:07:49.539611+00:00'
+title: Q332689
+turns: 9
+value_label: China
+verdict: suspect

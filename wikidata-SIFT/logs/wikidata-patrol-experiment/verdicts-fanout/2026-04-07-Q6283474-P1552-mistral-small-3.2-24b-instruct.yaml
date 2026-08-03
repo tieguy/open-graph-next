@@ -1,0 +1,34 @@
+completion_tokens: 596
+cost_usd: 0.015224000000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 178676
+property: P1552
+property_label: has characteristic
+rationale: The search results and fetched content provide information about Joseph
+  Glasco's life, career, and works, but they do not directly confirm whether 'collage'
+  is a correct characteristic of his work. The information from the Archives of American
+  Art indicates that Glasco was primarily known as a painter, draftsman, and sculptor,
+  with a focus on abstract expressionism. There is no explicit mention of collage
+  as a technique he used.
+rcid: 2550181703
+revid: 2473525139
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/artists/2187
+- provenance: verified
+  supports_claim: false
+  url: https://www.nytimes.com/1996/06/09/nyregion/joseph-glasco-71-painter-and-sculptor.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.mfah.org/art/galleries/celebrating-joseph-glasco
+- provenance: verified
+  supports_claim: false
+  url: https://www.aaa.si.edu/collections/joseph-glasco-papers-10523
+timestamp: '2026-04-07T09:43:39.839370+00:00'
+title: Q6283474
+turns: 6
+value_label: collage
+verdict: unverifiable

@@ -1,0 +1,31 @@
+completion_tokens: 2428
+cost_usd: 0.0044984000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15208
+property: P569
+property_label: date of birth
+rationale: The English Wikipedia and its mirrors consistently state that Abantika
+  Deka's date of birth is 1 January 1991, and the cited Wikipedia revision supports
+  this. There is no evidence from independent primary sources explicitly confirming
+  the date, and no evidence supporting the previous value of 1987-01-01. Therefore,
+  the edit correcting the date appears justified, but a primary source would strengthen
+  the claim.
+rcid: 2549846795
+revid: 2473203334
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Abantika_Deka
+- provenance: reported
+  supports_claim: true
+  url: https://en.everybodywiki.com/Abantika_Deka
+- provenance: verified
+  supports_claim: false
+  url: https://bwfbadminton.com/player/54971/abantika-deka
+timestamp: '2026-04-11T06:15:58.242623+00:00'
+title: Q27913380
+turns: 1
+value_label: null
+verdict: verified-low

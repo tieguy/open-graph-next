@@ -1,0 +1,17 @@
+completion_tokens: 2178
+cost_usd: 0.01050438
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 99794
+property: P1559
+property_label: name in native language
+rationale: null
+rcid: null
+revid: 2470714390
+sources: []
+timestamp: '2026-04-11T18:28:01.815160+00:00'
+title: Q2914475
+turns: 6
+value_label: null
+verdict: null

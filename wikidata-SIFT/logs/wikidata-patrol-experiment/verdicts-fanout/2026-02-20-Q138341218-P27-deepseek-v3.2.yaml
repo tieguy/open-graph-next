@@ -1,0 +1,32 @@
+completion_tokens: 1445
+cost_usd: 0.02251242
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 88131
+property: P27
+property_label: country of citizenship
+rationale: 'The claim that Sam Bakker is a New Zealand citizen is partially supported
+  by one verified source: sambakkerproductsdirectory.com states he is ''originally
+  from Wellington, the capital of New Zealand,'' which strongly implies citizenship.
+  However, the reference cited in the Wikidata edit (sambakker.com) does not mention
+  citizenship or nationality at all. No official sources like government records were
+  found to confirm citizenship explicitly. The evidence suggests the claim is plausible
+  but only weakly supported by secondary sources.'
+rcid: 2540978388
+revid: 2464765038
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sambakker.com
+- provenance: verified
+  supports_claim: true
+  url: http://sambakkerproductsdirectory.com/
+- provenance: verified
+  supports_claim: false
+  url: https://communi.com/
+timestamp: '2026-02-20T02:09:21.236842+00:00'
+title: Q138341218
+turns: 11
+value_label: New Zealand
+verdict: verified-low

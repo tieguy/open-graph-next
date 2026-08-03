@@ -1,0 +1,29 @@
+completion_tokens: 1059
+cost_usd: 0.0035404
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14525
+property: P12361
+property_label: Bluesky handle
+rationale: The edit changes the Bluesky handle from the standard '@gconfidencial.bsky.social'
+  to the custom domain 'gconfidencial.bsky.social'. However, there is no evidence
+  in the Wikidata item that the domain 'galiciaconfidencial.gal' has been verified
+  or officially associated with the entity. According to a primary source, using a
+  custom domain handle requires explicit verification by the domain owner, which is
+  not demonstrated here. The change may be incorrect or at least unjustified without
+  supporting references or qualifiers.
+rcid: 2551311482
+revid: 2474619565
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.graycastlepress.com/bluesky-handle-domain/
+- provenance: verified
+  supports_claim: false
+  url: https://www.hopperhq.com/tools/bluesky-handle-generator/
+timestamp: '2026-04-11T09:25:25.277094+00:00'
+title: Q20541350
+turns: 1
+value_label: null
+verdict: suspect

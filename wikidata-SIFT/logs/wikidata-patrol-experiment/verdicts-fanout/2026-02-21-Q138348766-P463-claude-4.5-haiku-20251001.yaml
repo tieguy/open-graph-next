@@ -1,0 +1,28 @@
+completion_tokens: 1616
+cost_usd: 0.036562
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 28482
+property: P463
+property_label: member of
+rationale: The reference URL (official BBTS council page) directly and explicitly
+  supports the member of claim with primary source evidence. The page states Danny
+  Gaskin 'sits on the British Blood Transfusion Society (BBTS) Council' and lists
+  specific roles including Fellow, Chair of Communications Committee, and committee
+  memberships. Independent corroboration from Companies House confirms his status
+  as an active Director of the organization.
+rcid: 2540920683
+revid: 2464711712
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/dannygaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/officers/gtdcxQmquzVmV3SDMHBv5scL_og/appointments
+timestamp: '2026-02-21T01:05:02.977295+00:00'
+title: Q138348766
+turns: 4
+value_label: British Blood Transfusion Society
+verdict: verified-high

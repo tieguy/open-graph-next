@@ -1,0 +1,28 @@
+completion_tokens: 1457
+cost_usd: 0.001411425
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12669
+property: P27
+property_label: country of citizenship
+rationale: The edit changes the country of citizenship from France to the United States,
+  but independent sources confirm that Patrice Hauret is located in France and has
+  affiliations with French institutions. The change is not supported by reliable evidence.
+rcid: 2551044304
+revid: 2474361066
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theorg.com/org/michelin/org-chart/patrice-hauret
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/profile/Patrice-Hauret
+- provenance: verified
+  supports_claim: false
+  url: https://www.uscis.gov/glossary-term/78049
+timestamp: '2026-04-11T06:28:20.476551+00:00'
+title: Q25931594
+turns: 1
+value_label: United States
+verdict: incorrect

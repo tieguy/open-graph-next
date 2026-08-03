@@ -1,0 +1,22 @@
+completion_tokens: 734
+cost_usd: 0.004013056250000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 43435
+property: P136
+property_label: genre
+rationale: The investigation did not yield sufficient evidence to confirm or deny
+  the change of genre from 'punk rock' to 'pop-punk' for Hey Monday. The fetched sources
+  did not provide clear confirmation of the genre as 'pop-punk'.
+rcid: 2550847937
+revid: 2474171727
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://first-avenue.com/performer/hey-monday/
+timestamp: '2026-04-11T11:44:31.876512+00:00'
+title: Q610377
+turns: 5
+value_label: pop-punk
+verdict: unverifiable

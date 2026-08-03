@@ -1,0 +1,25 @@
+completion_tokens: 1479
+cost_usd: 0.0037272187500000005
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35813
+property: P571
+property_label: inception
+rationale: Multiple independent sources confirm that Alpiq Holding was founded in
+  2009. The removal of the inception date "31 March 2020" is correct based on the
+  evidence from these sources.
+rcid: null
+revid: 2471235559
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://swiss-partner.biz/swiss-companies/overview-of-the-swiss-company-alpiq-holding
+- provenance: verified
+  supports_claim: true
+  url: https://www.privateequityinternational.com/institution-profiles/alpiq-holding-ltd.html
+timestamp: '2026-04-10T13:52:47.629959+00:00'
+title: Q679402
+turns: 3
+value_label: null
+verdict: verified-high

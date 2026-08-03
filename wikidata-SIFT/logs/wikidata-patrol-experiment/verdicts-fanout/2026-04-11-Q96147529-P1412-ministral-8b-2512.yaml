@@ -1,0 +1,26 @@
+completion_tokens: 2272
+cost_usd: 0.00345054
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41212
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The edit incorrectly changes the language spoken/written/signed from 'Spanish'
+  (Q1321), which is strongly supported by Sonia Megías's Spanish citizenship, official
+  website, and biography, to 'Americano' (Q37247266). No evidence from Sonia Megías's
+  biography or external sources supports 'Americano' as a language she uses. The new
+  value lacks references and is not corroborated by any primary or secondary source.
+  The old value ('Spanish') is well-supported by context, making the edit unjustified
+  and incorrect.
+rcid: null
+revid: 2460854921
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://soniamegias.es/bio/
+timestamp: '2026-04-11T10:57:46.729143+00:00'
+title: Q96147529
+turns: 4
+value_label: Americano
+verdict: incorrect

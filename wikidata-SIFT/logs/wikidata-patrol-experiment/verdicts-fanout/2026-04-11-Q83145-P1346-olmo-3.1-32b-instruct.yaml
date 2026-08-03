@@ -1,0 +1,37 @@
+completion_tokens: 2173
+cost_usd: 0.00507
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18831
+property: P1346
+property_label: winner
+rationale: Multiple primary, independently verified sources—including BBC, ESPN, EuroNews,
+  and FIFA—confirm that Morocco was officially awarded the Africa Cup of Nations 2025
+  title after the Confederation of African Football overturned the original result.
+  Additionally, there is no evidence that the Congo men's national football team has
+  ever won the tournament, confirming that the change from Congo to Morocco is correct
+  and properly justified.
+rcid: 2549717242
+revid: 2473075755
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/sport/football/articles/ce949glzzglo
+- provenance: verified
+  supports_claim: true
+  url: https://www.espn.com/soccer/story/_/id/48233884/senegal-afcon-final-morocco-winner-caf-overturn
+- provenance: verified
+  supports_claim: true
+  url: https://www.euronews.com/2026/03/18/morocco-declared-afcon-2025-winners-after-caf-overturns-final-defeat-to-senegal
+- provenance: verified
+  supports_claim: true
+  url: https://www.fifa.com/en/news/afcon/morocco-declared-afcon-2025-champions-after-caf-appeal
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/List_of_Africa_Cup_of_Nations_winners
+timestamp: '2026-04-11T16:41:40.713859+00:00'
+title: Q83145
+turns: 1
+value_label: Morocco
+verdict: verified-high

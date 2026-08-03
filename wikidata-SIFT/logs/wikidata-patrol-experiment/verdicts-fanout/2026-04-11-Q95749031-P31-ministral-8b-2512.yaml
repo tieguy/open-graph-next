@@ -1,0 +1,31 @@
+completion_tokens: 2602
+cost_usd: 0.0026595300000000002
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 31807
+property: P31
+property_label: instance of
+rationale: The edit adds references to the claim that Odette Ponge (Q95749031) is
+  an instance of human (Q5). While Odette Ponge is a historically documented person
+  (confirmed by Wikipedia, though blocked from automated access), the references attached
+  to this edit are either unverifiable (French government death registry file could
+  not be extracted) or do not directly support the claim (prefetched reference does
+  not explicitly confirm the instance of claim). No verified source directly confirms
+  the claim based on the provided references, and the only independent corroboration
+  (Wikipedia) could not be fetched programmatically. Thus, the references do not meet
+  the standard for verification.
+rcid: 2550399768
+revid: 2473737426
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://books.openedition.org/septentrion/80546
+- provenance: verified
+  supports_claim: false
+  url: https://static.data.gouv.fr/resources/fichier-des-personnes-decedees/20191209-191027/deces-2006.txt
+timestamp: '2026-04-11T12:21:24.402648+00:00'
+title: Q95749031
+turns: 3
+value_label: human
+verdict: unverifiable

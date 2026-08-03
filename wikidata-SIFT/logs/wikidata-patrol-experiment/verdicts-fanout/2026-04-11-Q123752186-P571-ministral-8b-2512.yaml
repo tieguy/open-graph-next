@@ -1,0 +1,31 @@
+completion_tokens: 2357
+cost_usd: 0.00460098
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40963
+property: P571
+property_label: inception
+rationale: The claim of 11 December 2023 as SYENSQO's inception date is supported
+  by independent secondary sources like LobbyFacts (EU registration on 13 December
+  2023) and CEN ACS (December 2023 spin-off). However, the primary cited reference
+  (SpecChemo Online) could not be verified due to a fetch failure, limiting the certainty
+  of the claim. The closest official evidence aligns with the claim but does not definitively
+  confirm the exact date of 11 December 2023.
+rcid: 2551364881
+revid: 2474669973
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lobbyfacts.eu/datacard/syensqo?rid=685934152245-39
+- provenance: verified
+  supports_claim: true
+  url: https://cen.acs.org/business/specialty-chemicals/Bringing-science-Syensqo/103/web/2025/07
+- provenance: verified
+  supports_claim: true
+  url: https://metadrop.net/en/projects/syensqo
+timestamp: '2026-04-11T10:59:53.680301+00:00'
+title: Q123752186
+turns: 3
+value_label: null
+verdict: verified-low

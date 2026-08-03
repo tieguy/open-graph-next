@@ -1,0 +1,29 @@
+completion_tokens: 230
+cost_usd: 0.0025507999999999998
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12064
+property: P27
+property_label: country of citizenship
+rationale: Willy Voet is a Belgian sports physiotherapist and cyclist; there is no
+  evidence that he is ethnically Mongolian or that 'Mongols' is an appropriate value
+  for country of citizenship in Wikidata. The only cited reference for the new value
+  is a historical article about Mongol passports, which does not relate to Voet's
+  nationality. The old value 'Belgium' is consistent with all other available information
+  about Voet. Therefore, changing the country of citizenship to 'Mongols' is unsupported
+  and likely incorrect.
+rcid: 2549518128
+revid: 2472881856
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Willy_Voet
+- provenance: verified
+  supports_claim: false
+  url: http://data.bnf.fr/ark:/12148/cb13531831s
+timestamp: '2026-04-11T14:11:29.823017+00:00'
+title: Q3569193
+turns: 1
+value_label: Mongols
+verdict: suspect

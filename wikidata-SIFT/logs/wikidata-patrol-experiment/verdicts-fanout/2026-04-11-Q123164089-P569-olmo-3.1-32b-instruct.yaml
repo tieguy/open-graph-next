@@ -1,0 +1,26 @@
+completion_tokens: 1512
+cost_usd: 0.004536200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18145
+property: P569
+property_label: date of birth
+rationale: Multiple independent, reputable sources state that Félix Roussel was born
+  on 15 August 1991. The edit changed the date of birth from 10 August 2001 to 10
+  August 67 CE, neither of which is supported by reliable evidence. The new value
+  is factually incorrect.
+rcid: null
+revid: 2471484916
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://worldathletics.org/athletes/france/felix-roussel-14334966
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/F%C3%A9lix_Roussel_(speed_skater)
+timestamp: '2026-04-11T14:51:00.302890+00:00'
+title: Q123164089
+turns: 1
+value_label: null
+verdict: incorrect

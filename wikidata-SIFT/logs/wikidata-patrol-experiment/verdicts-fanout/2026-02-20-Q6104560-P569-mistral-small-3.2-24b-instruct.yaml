@@ -1,0 +1,36 @@
+completion_tokens: 616
+cost_usd: 0.003456
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32712
+property: P569
+property_label: date of birth
+rationale: Multiple independent sources confirm that Reid Harrison's date of birth
+  is November 6, 1958, not November 9, 1959. The edit is therefore incorrect.
+rcid: 2540964045
+revid: 2464751715
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://angelorules.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/reid_harrison
+- provenance: verified
+  supports_claim: false
+  url: https://www.legacy.com/us/obituaries/dailyprogress/name/reid-harrison-obituary?id=60544470
+- provenance: verified
+  supports_claim: false
+  url: https://simpsonswiki.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://catscratch.fandom.com/wiki/Reid_Harrison
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/person/1216655-reid-harrison?language=en-US
+timestamp: '2026-02-20T04:08:15.242125+00:00'
+title: Q6104560
+turns: 3
+value_label: null
+verdict: incorrect

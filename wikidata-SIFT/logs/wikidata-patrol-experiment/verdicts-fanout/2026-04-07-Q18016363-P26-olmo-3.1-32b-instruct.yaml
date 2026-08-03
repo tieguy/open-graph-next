@@ -1,0 +1,26 @@
+completion_tokens: 1473
+cost_usd: 0.005388199999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22522
+property: P26
+property_label: spouse
+rationale: No independent sources corroborate the claim that Johan van Gogh's spouse
+  is 'Anneke van Santen' married in 1936. The only detailed biographical source consulted
+  (The Art Newspaper obituary) does not mention this spouse or marriage. The Wikidata
+  claim is unreferenced.
+rcid: 2550384550
+revid: 2473722496
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.theartnewspaper.com/2019/03/08/the-astonishing-life-of-johan-van-gogh-vincents-great-nephew-dies-aged-96
+- provenance: reported
+  supports_claim: false
+  url: Web search for 'Johan van Gogh spouse Anneke van Santen married 1936'
+timestamp: '2026-04-07T08:57:28.683113+00:00'
+title: Q18016363
+turns: 3
+value_label: Anneke van Santen
+verdict: incorrect

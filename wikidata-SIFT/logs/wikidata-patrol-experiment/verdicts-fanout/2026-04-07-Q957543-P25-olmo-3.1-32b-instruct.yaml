@@ -1,0 +1,26 @@
+completion_tokens: 705
+cost_usd: 0.0316342
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 156056
+property: P25
+property_label: mother
+rationale: The edit cites reputable genealogical sources (The Peerage and Kindred
+  Britain) as references, but I was unable to fetch or independently verify the content
+  of these sources during the investigation. Without direct confirmation from accessible
+  and verifiable sources, the claim cannot be confirmed with high confidence.
+rcid: null
+revid: 2471632459
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://www.thepeerage.com/p16116.htm
+- provenance: reported
+  supports_claim: null
+  url: https://www.kindred.co.uk/search/results/?q=Ernest+Shackleton
+timestamp: '2026-04-07T10:55:56.893355+00:00'
+title: Q957543
+turns: 12
+value_label: Laura Salvadori
+verdict: unverifiable

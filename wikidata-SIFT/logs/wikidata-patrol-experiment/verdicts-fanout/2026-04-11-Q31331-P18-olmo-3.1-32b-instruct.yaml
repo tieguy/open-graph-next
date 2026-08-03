@@ -1,0 +1,29 @@
+completion_tokens: 1290
+cost_usd: 0.0063084000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27672
+property: P18
+property_label: image
+rationale: Neither the old nor the new image value for Pello is supported by any authoritative
+  or cited source. The new image is an internet meme, wholly inappropriate for a municipality
+  item. The old image appears to be a generic or misnamed file with no official recognition.
+  There is no evidence that either image should be used for Pello.
+rcid: null
+revid: 2471636945
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pello.fi/
+- provenance: verified
+  supports_claim: false
+  url: https://www.stat.fi/org/avoindata/paikkatietoaineistot/kuntapohjaiset_tilastointialueet.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/pello
+timestamp: '2026-04-11T18:08:10.996499+00:00'
+title: Q31331
+turns: 1
+value_label: null
+verdict: incorrect

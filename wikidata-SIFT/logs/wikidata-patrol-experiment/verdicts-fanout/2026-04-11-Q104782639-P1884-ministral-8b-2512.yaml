@@ -1,0 +1,28 @@
+completion_tokens: 1903
+cost_usd: 0.00262653
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 28254
+property: P1884
+property_label: hair color
+rationale: The edit changes Gretchen Müller's hair color from 'blond hair' to 'light
+  brown hair', but the only cited source ('Tooneel-herinneringen') is unreachable
+  due to a 404 error. No independent sources could be verified due to search restrictions
+  or unreachable URLs. Without access to the original source or corroborating evidence,
+  the claim cannot be verified or denied. No sources were fetched or confirmed during
+  this investigation.
+rcid: 2551421382
+revid: 2474722982
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.dbnl.org/tekst/herm001toone01_01/toone001_01_0073.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.bravotv.com/the-daily-dish/gretchen-rossi-black-hair-transformation-photo
+timestamp: '2026-04-11T18:00:57.021657+00:00'
+title: Q104782639
+turns: 3
+value_label: light brown hair
+verdict: unverifiable

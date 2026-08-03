@@ -1,0 +1,26 @@
+completion_tokens: 1495
+cost_usd: 0.0037292000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14161
+property: P31
+property_label: instance of
+rationale: The previous value for P31 (Q3305213) was the specific artwork itself and
+  not a class, which is incorrect for P31 (instance of), which requires a class. The
+  new value (Q11629) is the correct general class for 'painting.' Google Arts & Culture
+  independently confirms this work is a painting (oil on canvas), supporting the change.
+rcid: null
+revid: 2471244123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://artsandculture.google.com/asset/the-mozart-famliy-johann-nepomuk-della-croce/PwFMv8-fFDJkDw?hl=en
+- provenance: reported
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q3305213
+timestamp: '2026-04-11T10:52:37.687668+00:00'
+title: Q18084501
+turns: 1
+value_label: painting
+verdict: verified-high

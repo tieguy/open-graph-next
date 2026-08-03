@@ -1,0 +1,29 @@
+completion_tokens: 1619
+cost_usd: 0.00587937
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 64854
+property: P26
+property_label: spouse
+rationale: The edit changed the spouse claim for Vincent Dugomier (Q3041019) from
+  Veerle Swinnen (Q124337704) to Pipidae (Q56067), a family of amphibians. Pipidae
+  is biologically irrelevant to Vincent Dugomier, a comics artist, and there is no
+  evidence or context supporting this change. The old value, Veerle Swinnen, also
+  lacks any references or corroboration. Prefetched references for the item did not
+  support either value, and no independent sources confirm either claim. The new value
+  is nonsensical in this context, making the edit incorrect.
+rcid: null
+revid: 2463995680
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bedetheque.com/auteur-2806-BD-Dugomier.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.ricochet-jeunes.org/auteurs/vincent-dugomier
+timestamp: '2026-04-11T11:34:13.884817+00:00'
+title: Q3041019
+turns: 6
+value_label: Pipidae
+verdict: incorrect

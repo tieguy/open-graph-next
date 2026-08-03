@@ -1,0 +1,18 @@
+completion_tokens: 807
+cost_usd: 0.015073199999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 49437
+property: P2048
+property_label: height
+rationale: The edit changed Alejandra Onieva's height from **+170 cm** (incorrect)
+  to **+120 cm** (also incorrect). Independentweb_search{
+rcid: 2550874491
+revid: 2474197843
+sources: []
+timestamp: '2026-04-11T08:32:04.396909+00:00'
+title: Q5664701
+turns: 4
+value_label: null
+verdict: incorrect

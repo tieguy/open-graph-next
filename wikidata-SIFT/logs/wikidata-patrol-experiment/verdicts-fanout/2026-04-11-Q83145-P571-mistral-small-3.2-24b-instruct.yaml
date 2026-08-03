@@ -1,0 +1,19 @@
+completion_tokens: 272
+cost_usd: 0.00397409375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41665
+property: P571
+property_label: inception
+rationale: The investigation was unable to fetch reliable sources to verify the inception
+  date of the Africa Cup of Nations due to search errors. Therefore, the correctness
+  of changing the inception date from 210 to 2045 cannot be confirmed.
+rcid: 2550014824
+revid: 2473363340
+sources: []
+timestamp: '2026-04-11T06:03:19.460556+00:00'
+title: Q83145
+turns: 4
+value_label: null
+verdict: unverifiable

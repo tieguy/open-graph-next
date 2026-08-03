@@ -1,0 +1,23 @@
+completion_tokens: 753
+cost_usd: 0.0024350925
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23717
+property: P17
+property_label: country
+rationale: The National Heritage List for England, a primary and authoritative source,
+  clearly states that 33, Duck Street is located in Elton, Huntingdonshire, Cambridgeshire,
+  England, UK. Therefore, the claim that it is in the People's Republic of China is
+  incorrect.
+rcid: null
+revid: 2464601070
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://historicengland.org.uk/listing/the-list
+timestamp: '2026-04-08T18:51:07.612356+00:00'
+title: Q26423176
+turns: 4
+value_label: People's Republic of China
+verdict: incorrect

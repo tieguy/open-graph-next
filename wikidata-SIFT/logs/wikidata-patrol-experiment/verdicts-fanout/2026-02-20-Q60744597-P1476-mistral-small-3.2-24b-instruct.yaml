@@ -1,0 +1,27 @@
+completion_tokens: 721
+cost_usd: 0.00293375
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29073
+property: P1476
+property_label: title
+rationale: The source from Muck Rack confirms that Global Banking & Finance Review
+  is a leading online magazine, which supports the title claim.
+rcid: 2540954138
+revid: 2464742531
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globalbankingandfinance.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.crunchbase.com/organization/global-banking-and-finance-review
+- provenance: verified
+  supports_claim: true
+  url: https://muckrack.com/media-outlet/globalbankingandfinance
+timestamp: '2026-02-20T07:44:43.613149+00:00'
+title: Q60744597
+turns: 4
+value_label: null
+verdict: verified-high

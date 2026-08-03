@@ -1,0 +1,26 @@
+completion_tokens: 190
+cost_usd: 0.0026322
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12591
+property: P2348
+property_label: time period
+rationale: There is no reliable source directly confirming that Dhul-Qarnayn belongs
+  to the 'prehistoric archaeology' period or that 'ancient history' is incorrect.
+  The primary Islamic sources describe Dhul-Qarnayn as a legendary or mythical figure
+  whose story is not tied to archaeological periods. The cited reference from central-mosque.com
+  provides a religious tafsir narration but does not address archaeological periods.
+  No independent, authoritative historical source was found to support either value
+  change.
+rcid: 2550679267
+revid: 2474008312
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://central-mosque.com/index.php/Tafseer/dhulqar.html
+timestamp: '2026-04-11T09:11:59.485198+00:00'
+title: Q1207846
+turns: 1
+value_label: prehistoric archaeology
+verdict: unverifiable

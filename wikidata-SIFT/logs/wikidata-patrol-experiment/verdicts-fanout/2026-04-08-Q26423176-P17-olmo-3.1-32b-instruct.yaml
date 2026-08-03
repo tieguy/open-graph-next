@@ -1,0 +1,23 @@
+completion_tokens: 1129
+cost_usd: 0.010490999999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49068
+property: P17
+property_label: country
+rationale: The National Heritage List for England, a primary authoritative source,
+  explicitly identifies 33, Duck Street as a listed building in Elton, Cambridgeshire,
+  England. There is no mention or indication of any connection to the People's Republic
+  of China. Therefore, changing the country property to China is factually incorrect.
+rcid: null
+revid: 2464601070
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://historicengland.org.uk/listing/the-list/list-entry/1130092/
+timestamp: '2026-04-08T18:51:33.168425+00:00'
+title: Q26423176
+turns: 9
+value_label: People's Republic of China
+verdict: incorrect

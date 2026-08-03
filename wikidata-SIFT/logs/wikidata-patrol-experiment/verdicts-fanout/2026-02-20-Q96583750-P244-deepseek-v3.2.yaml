@@ -1,0 +1,33 @@
+completion_tokens: 1236
+cost_usd: 0.028067400000000003
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 119312
+property: P244
+property_label: Library of Congress authority ID
+rationale: The Library of Congress authority record at https://id.loc.gov/authorities/names/no2026017297
+  confirms that 'no2026017297' is indeed the Library of Congress authority ID for
+  Generoso Pompa. The record lists variant names 'Pompa, Generoso, 1952-' and 'Pompa,
+  Gene, 1952-', which matches the Wikidata item's label 'Generoso Pompa' and art name
+  'Gene'. The record also shows birth date 1952-03-11, matching the Wikidata item's
+  date of birth claim, and identifies the occupation as a painter (via the FastID
+  http://id.worldcat.org/fast/1050530 for 'painters'). The change notes indicate this
+  record was created on 2026-02-16, making it a current, authoritative source.
+rcid: 2540933306
+revid: 2464723897
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/no2026017297
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/no2026017297.html
+- provenance: verified
+  supports_claim: true
+  url: https://viaf.org/viaf/108059105
+timestamp: '2026-02-20T18:56:58.742058+00:00'
+title: Q96583750
+turns: 15
+value_label: null
+verdict: verified-high

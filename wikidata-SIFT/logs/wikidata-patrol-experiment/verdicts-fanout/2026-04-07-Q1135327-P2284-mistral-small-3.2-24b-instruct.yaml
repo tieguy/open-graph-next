@@ -1,0 +1,17 @@
+completion_tokens: 123
+cost_usd: 0.0021025312500000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26971
+property: P2284
+property_label: price
+rationale: null
+rcid: 2551413015
+revid: 2474715963
+sources: []
+timestamp: '2026-04-07T05:45:26.212319+00:00'
+title: Q1135327
+turns: 5
+value_label: null
+verdict: null

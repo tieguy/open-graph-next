@@ -1,0 +1,29 @@
+completion_tokens: 571
+cost_usd: 0.02494138
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 69910
+property: P570
+property_label: date of death
+rationale: The claim that Joseph ha-Kohen died in 1575 is strongly supported by authoritative
+  sources. The Jewish Encyclopedia (1906) states he 'died at Genoa in 1575 or shortly
+  after' and notes his work 'Emeḳ ha-Bakah' closes with events of 1575. Multiple independent
+  sources including academic encyclopedias and biographical sites consistently report
+  1575 as his year of death. While some sources mention 1578 as an alternative date,
+  the 1575 date has substantial evidentiary support from primary historical sources
+  referencing his final work.
+rcid: 2540982383
+revid: 2464768833
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8858-joseph-ha-kohen
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/religion/encyclopedias-almanacs-transcripts-and-maps/joseph-ha-kohen
+timestamp: '2026-02-20T01:40:46.657537+00:00'
+title: Q1708321
+turns: 5
+value_label: null
+verdict: verified-high

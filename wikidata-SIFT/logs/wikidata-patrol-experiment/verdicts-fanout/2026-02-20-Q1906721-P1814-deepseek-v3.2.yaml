@@ -1,0 +1,31 @@
+completion_tokens: 1562
+cost_usd: 0.035009109999999996
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 220949
+property: P1814
+property_label: name in kana
+rationale: The edit adds the value 'tralalero tralala' for the property 'name in kana'
+  (P1814) to the item for Japanese video game designer Masahiro Sakurai. Investigation
+  reveals this value appears to be a nonsense or placeholder string, not a legitimate
+  kana transcription. The item currently contains numerous vandalistic or incorrect
+  claims, including implausible occupations, a pet named 'Fukura', family name listed
+  as 'olive oil', and gender incorrectly set to female, strongly suggesting the item
+  has been compromised. A web search for the subject's correct name in kana yields
+  consistent, official sources showing it as さくらい まさひろ (Sakurai Masahiro), which directly
+  contradicts the submitted value. The evidence clearly shows the claim is wrong.
+rcid: 2540949786
+revid: 2464738770
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E6%A1%82%E5%8E%9F%E5%85%89
+- provenance: verified
+  supports_claim: false
+  url: https://www.nintendo.co.jp/n02/dmg/hvc/mk/index.html
+timestamp: '2026-02-20T10:47:19.939234+00:00'
+title: Q1906721
+turns: 15
+value_label: null
+verdict: incorrect

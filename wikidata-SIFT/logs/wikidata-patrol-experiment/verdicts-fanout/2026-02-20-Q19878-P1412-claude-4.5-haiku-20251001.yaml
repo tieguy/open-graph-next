@@ -1,0 +1,33 @@
+completion_tokens: 2786
+cost_usd: 0.18876400000000002
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 174834
+property: P1412
+property_label: languages spoken, written or signed
+rationale: 'The edit adds Q107005370 (an 1888 Arabic-English dictionary work by S.
+  Kassab & G. Hammam) as a value for P1412 ''languages spoken, written or signed''.
+  This is categorically wrong: P1412 must contain language entities (like Q13955 for
+  Arabic, Q1860 for English), not published works or reference materials. The edit''s
+  own cited reference—the BnF authority record (Q19938912, ID 11920818j)—explicitly
+  states Gaddafi''s language as ''arabe'' (Arabic) only, not a dictionary. The BBC
+  article confirms Gaddafi primarily spoke Libyan dialect Arabic. The edit confuses
+  a dictionary about languages with actual languages a person spoke.'
+rcid: 2540948173
+revid: 2464737285
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb11920818j
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-africa-12566277
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q107005370
+timestamp: '2026-02-20T11:22:20.780582+00:00'
+title: Q19878
+turns: 7
+value_label: Arabic and English Dictionary
+verdict: incorrect

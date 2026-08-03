@@ -1,0 +1,23 @@
+completion_tokens: 648
+cost_usd: 0.0071886
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 141180
+property: P856
+property_label: official website
+rationale: No independent or prefetched sources were found to verify or refute the
+  claim that Kitaakita's official website is 'https://www.cathaypacific.com'. Web
+  searches for official Kitaakita website returned no relevant results. The only fetch
+  performed was to cathaypacific.com, which is the Cathay Pacific airline website
+  showing booking pages unrelated to Kitaakita. This domain appears to be incorrectly
+  assigned or fabricated. No verified sources confirm this is an official municipal
+  website.
+rcid: null
+revid: 2471370125
+sources: []
+timestamp: '2026-04-07T05:53:56.984588+00:00'
+title: Q653545
+turns: 15
+value_label: null
+verdict: unverifiable

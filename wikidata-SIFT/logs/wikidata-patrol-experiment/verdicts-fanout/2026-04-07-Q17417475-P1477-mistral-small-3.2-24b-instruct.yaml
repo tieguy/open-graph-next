@@ -1,0 +1,30 @@
+completion_tokens: 669
+cost_usd: 0.010879606249999998
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 111174
+property: P1477
+property_label: birth name
+rationale: The investigation was unable to verify the birth name 'Jace Jose Norman
+  Lego' for Jace Norman due to the unavailability of reliable sources. The IMDb and
+  Biography.com pages were blocked, and other sources like CheatSheet returned 404
+  errors. Without accessible and verifiable sources, it is not possible to confirm
+  the accuracy of the claim.
+rcid: null
+revid: 2471322880
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/name/nm6317954/bio
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/actor/jace-norman
+- provenance: verified
+  supports_claim: false
+  url: https://www.cheatsheet.com/entertainment/jace-norman-biography-facts-age-height-family-girlfriend.html
+timestamp: '2026-04-07T09:29:26.640989+00:00'
+title: Q17417475
+turns: 15
+value_label: null
+verdict: unverifiable

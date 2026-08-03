@@ -1,0 +1,30 @@
+completion_tokens: 586
+cost_usd: 0.00123653125
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11141
+property: P856
+property_label: official website
+rationale: The reference to https://www.bluecode.com/ as the official website of Secure
+  Payment Technologies was correctly removed because the website does not mention
+  Secure Payment Technologies. Independent sources confirm that Secure Payment Technologies
+  is an Austrian payment technology provider, and the website https://www.bluecode.com/
+  is not related to it.
+rcid: 2550577552
+revid: 2473909589
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bluecode.com/
+- provenance: verified
+  supports_claim: false
+  url: https://securepayments.com/
+- provenance: verified
+  supports_claim: false
+  url: https://www.securepay.com/
+timestamp: '2026-04-11T15:20:12.040420+00:00'
+title: Q61874299
+turns: 1
+value_label: null
+verdict: verified-high

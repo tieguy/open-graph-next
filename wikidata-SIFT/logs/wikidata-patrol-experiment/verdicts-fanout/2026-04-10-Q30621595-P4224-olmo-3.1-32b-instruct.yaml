@@ -1,0 +1,28 @@
+completion_tokens: 1613
+cost_usd: 0.0036088
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13205
+property: P4224
+property_label: category contains
+rationale: The claim that the category 'contains' Q5 (human) is not correct usage
+  of the P4224 property. P4224 is intended to list specific members of the category,
+  such as individual persons (QIDs for the coaches), not the generic class 'human'.
+  The Wikipedia category lists individual coaches, confirming that the category should
+  contain their QIDs, not the general class Q5. This is explicitly stated in the Wikidata
+  Help documentation for P4224.
+rcid: 2551333601
+revid: 2474640269
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Category:Ohio_State_Buckeyes_men%27s_volleyball_coaches
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Help:Properties/P4224
+timestamp: '2026-04-10T11:46:06.237443+00:00'
+title: Q30621595
+turns: 1
+value_label: human
+verdict: incorrect

@@ -1,0 +1,23 @@
+completion_tokens: 641
+cost_usd: 0.016287549999999998
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 323187
+property: P509
+property_label: cause of death
+rationale: Despite extensive searches, no verifiable source was found that confirms
+  or refutes the claim that Gustav Mahler's cause of death was 'nigga'. While several
+  reputable sources about Mahler's death mention endocarditis and natural causes,
+  none record the term 'nigga' as used in the Wikipedia edit. The absence of direct
+  corroboration of the specific claim prevents classification as verified-high or
+  verified-low, and no sufficient independent sources were located to support this
+  edit.
+rcid: 2550519841
+revid: 2473854124
+sources: []
+timestamp: '2026-04-07T05:42:50.974353+00:00'
+title: Q7304
+turns: 15
+value_label: nigga
+verdict: unverifiable

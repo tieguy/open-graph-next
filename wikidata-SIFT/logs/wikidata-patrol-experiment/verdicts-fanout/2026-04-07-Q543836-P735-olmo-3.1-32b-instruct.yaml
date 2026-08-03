@@ -1,0 +1,29 @@
+completion_tokens: 1990
+cost_usd: 0.026386
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 125960
+property: P735
+property_label: given name
+rationale: Multiple independent, verified sources — including major French media obituaries
+  and authoritative bibliographic databases — consistently refer to the author as
+  'Pierre Bordage' with the given name 'Pierre'. There is no credible evidence supporting
+  the previous value 'Maël'.
+rcid: 2550574496
+revid: 2473906667
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.leparisien.fr/culture-loisirs/livres/deces-brutal-de-pierre-bordage-auteur-de-science-fiction-survenu-a-la-suite-dun-arret-cardiaque-29-12-2025-FH23MWR5IRHU5GQ4C24KCQX7XE.php
+- provenance: verified
+  supports_claim: true
+  url: https://www.lalibre.be/culture/livres-bd/2025/12/29/pierre-bordage-le-pape-de-la-sf-francaise-est-decee-6YM4XTNNTRB7NITP7LGJTKDA7E/
+- provenance: verified
+  supports_claim: true
+  url: https://id.loc.gov/authorities/names/n80127618
+timestamp: '2026-04-07T10:52:45.608932+00:00'
+title: Q543836
+turns: 9
+value_label: Pierre
+verdict: verified-high

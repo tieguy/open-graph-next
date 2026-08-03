@@ -1,0 +1,34 @@
+completion_tokens: 1615
+cost_usd: 0.013480499999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 137279
+property: P452
+property_label: industry
+rationale: The edit to update the industry of Q138349090 to 'information technology'
+  is supported by multiple reliable sources. These sources confirm that information
+  technology involves the development, management, and use of computer-based information
+  systems, which aligns with the description provided in the edit. The consistency
+  and reliability of these sources justify a high level of confidence in the accuracy
+  of the edit.
+rcid: 2540934075
+revid: 2464724581
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.mtu.edu/business/what-is-mis/
+- provenance: verified
+  supports_claim: true
+  url: https://www.networkdepot.com/information-technology-concepts/
+- provenance: verified
+  supports_claim: true
+  url: https://www.ques10.com/p/48098/computer-based-information-systems-1/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bls.gov/ooh/management/computer-and-information-systems-managers.htm
+timestamp: '2026-02-20T18:20:41.495455+00:00'
+title: Q138349090
+turns: 8
+value_label: information technology
+verdict: verified-high

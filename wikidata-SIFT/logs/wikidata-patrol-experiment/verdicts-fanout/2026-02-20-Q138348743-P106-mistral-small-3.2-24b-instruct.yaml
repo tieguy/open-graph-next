@@ -1,0 +1,28 @@
+completion_tokens: 1773
+cost_usd: 0.0076097249999999995
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 74336
+property: P106
+property_label: occupation
+rationale: The claim is strongly supported by multiple independent sources, including
+  a Google Scholar profile, an Escavador profile, and a PubMed publication, all of
+  which confirm his role as a researcher.
+rcid: 2540926856
+revid: 2464717625
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://scholar.google.com/citations?user=8RwNCwEAAAAJ&hl=en
+- provenance: verified
+  supports_claim: true
+  url: https://www.escavador.com/sobre/6599918/carlos-augusto-tavares-junior
+- provenance: verified
+  supports_claim: true
+  url: https://pubmed.ncbi.nlm.nih.gov/31904718/
+timestamp: '2026-02-20T21:53:39.287439+00:00'
+title: Q138348743
+turns: 8
+value_label: researcher
+verdict: verified-high

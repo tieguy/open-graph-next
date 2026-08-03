@@ -1,0 +1,21 @@
+completion_tokens: 611
+cost_usd: 0.0101699
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 200954
+property: P22
+property_label: father
+rationale: No verifiable sources were found confirming that 'Ade' (Q15056358) is the
+  correct father of Robert Brasillach. All searches for relevant sources returned
+  no usable results, and previously shredded references (e.g., French Wikipedia) were
+  inaccessible due to blocked domains. Without direct evidence supporting the claim
+  or its contradiction, the edit remains unverifiable.
+rcid: 2550652161
+revid: 2473981983
+sources: []
+timestamp: '2026-04-07T09:23:04.544053+00:00'
+title: Q1488
+turns: 15
+value_label: Ade
+verdict: unverifiable

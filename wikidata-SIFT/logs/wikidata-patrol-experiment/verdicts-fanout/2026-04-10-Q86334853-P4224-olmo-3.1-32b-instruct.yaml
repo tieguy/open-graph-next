@@ -1,0 +1,25 @@
+completion_tokens: 1243
+cost_usd: 0.0026964
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 9753
+property: P4224
+property_label: category contains
+rationale: Wikipedia category conventions dictate that categories for specific groups
+  (such as 'Purdue Boilermakers women's volleyball coaches') should contain articles
+  about individual members of that group, not the generic class 'human'. The primary
+  source (the Wikipedia category page) confirms that this category is for articles
+  about coaches, not for the class 'human'. Including Q5 ('human') as a member of
+  this category is therefore incorrect.
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Category:Purdue_Boilermakers_women%27s_volleyball_coaches
+timestamp: '2026-04-10T13:30:26.280105+00:00'
+title: Q86334853
+turns: 1
+value_label: human
+verdict: incorrect

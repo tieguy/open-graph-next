@@ -1,0 +1,21 @@
+completion_tokens: 620
+cost_usd: 0.0026364
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 50248
+property: P373
+property_label: Commons category
+rationale: No reliable evidence was found to confirm whether 'Kuk' is a valid Commons
+  category for the XGP handheld console. Multiple searches for relevant categories
+  and the XGP Wikipedia page yielded no results indicating 'Kuk' is a recognized category.
+  Attempts to access the Wikipedia page were blocked, and no references were available
+  to verify the claim.
+rcid: 2549975131
+revid: 2473324939
+sources: []
+timestamp: '2026-04-07T07:12:58.418487+00:00'
+title: Q1191039
+turns: 10
+value_label: null
+verdict: unverifiable

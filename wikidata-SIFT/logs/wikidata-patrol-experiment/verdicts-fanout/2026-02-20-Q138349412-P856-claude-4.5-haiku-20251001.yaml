@@ -1,0 +1,33 @@
+completion_tokens: 1179
+cost_usd: 0.028621
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 22726
+property: P856
+property_label: official website
+rationale: 'The claimed official website https://www.reatrixweb.com is directly confirmed
+  by two independent primary sources: the website itself, which displays as the active
+  platform for Reatrixweb with gaming/tech journalism content identifying as ''PT
+  Reatrix Media Indonesia'', and the corporate holding company portal at network.reatrixweb.com,
+  which explicitly lists ''ReatrixWeb (PT REATRIX MEDIA INDONESIA)'' as its media
+  journalism platform. The cited TechInAsia reference cannot be accessed (HTTP 403),
+  but independent verification from the entity''s own official channels provides authoritative
+  confirmation of the claim.'
+rcid: 2540945784
+revid: 2464735029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.reatrixweb.com/
+- provenance: verified
+  supports_claim: true
+  url: https://network.reatrixweb.com/
+- provenance: reported
+  supports_claim: true
+  url: https://www.techinasia.com/companies/reatrixwebcom-media
+timestamp: '2026-02-20T11:57:46.951051+00:00'
+title: Q138349412
+turns: 3
+value_label: null
+verdict: verified-high

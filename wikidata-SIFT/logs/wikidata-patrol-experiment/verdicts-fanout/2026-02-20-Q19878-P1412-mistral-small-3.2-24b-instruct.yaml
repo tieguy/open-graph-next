@@ -1,0 +1,29 @@
+completion_tokens: 728
+cost_usd: 0.004976425
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 52356
+property: P1412
+property_label: languages spoken, written or signed
+rationale: While it is accurate that Muammar Gaddafi spoke both Arabic and English,
+  the specific reference to 'Arabic and English Dictionary' as a value for the property
+  'languages spoken, written or signed' is not supported by the available evidence.
+  The dictionary reference seems to be incorrect or misleading in this context.
+rcid: 2540948173
+revid: 2464737285
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/world-africa-12566277
+- provenance: verified
+  supports_claim: true
+  url: https://www.quora.com/How-well-did-Libyan-dictator-Muammar-Gaddafi-speak-English
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/features/2018/10/13/tebu-cultural-awakening-we-may-not-be-arabs-but-we-are-libyan
+timestamp: '2026-02-20T11:20:28.024116+00:00'
+title: Q19878
+turns: 2
+value_label: Arabic and English Dictionary
+verdict: incorrect

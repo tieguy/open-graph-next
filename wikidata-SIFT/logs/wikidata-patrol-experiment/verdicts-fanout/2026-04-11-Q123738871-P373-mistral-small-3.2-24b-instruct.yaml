@@ -1,0 +1,19 @@
+completion_tokens: 517
+cost_usd: 0.00580932
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 69189
+property: P373
+property_label: Commons category
+rationale: Unable to perform web searches to verify the Commons category claim for
+  Josh Universe due to an error. No direct evidence could be fetched to support or
+  contradict the claim.
+rcid: 2551427492
+revid: 2474727918
+sources: []
+timestamp: '2026-04-11T14:13:09.435765+00:00'
+title: Q123738871
+turns: 3
+value_label: null
+verdict: unverifiable

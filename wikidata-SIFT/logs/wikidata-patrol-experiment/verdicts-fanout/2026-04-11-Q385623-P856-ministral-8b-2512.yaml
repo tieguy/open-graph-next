@@ -1,0 +1,31 @@
+completion_tokens: 1923
+cost_usd: 0.0026249100000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21772
+property: P856
+property_label: official website
+rationale: The new official website value, 'https://www.koreanair.com', is unrelated
+  to Ōmuta-shi (a city in Japan) and belongs to Korean Air, an airline. The old value,
+  'https://www.city.omuta.lg.jp/', follows the standard domain convention for Japanese
+  municipal governments and is the expected official website for Ōmuta-shi. No independent
+  source supports the new value as the official website for Ōmuta-shi, and the edit
+  was reverted, confirming its incorrectness.
+rcid: null
+revid: 2466237994
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.crossroadfukuoka.jp/en/spot/11543
+- provenance: verified
+  supports_claim: false
+  url: https://www.visit-kyushu.com/en/blogs/katana-training-omuta-exploration/
+- provenance: verified
+  supports_claim: false
+  url: https://www.koreanair.com
+timestamp: '2026-04-11T07:12:28.653544+00:00'
+title: Q385623
+turns: 1
+value_label: null
+verdict: incorrect

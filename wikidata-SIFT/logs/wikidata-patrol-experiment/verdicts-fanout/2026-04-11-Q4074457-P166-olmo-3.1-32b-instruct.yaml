@@ -1,0 +1,33 @@
+completion_tokens: 565
+cost_usd: 0.0049
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22805
+property: P166
+property_label: award received
+rationale: 'No independent, verified source could be found that confirms Mikhail Babkin
+  received the award ''Культурный империум: книги и проекты.'' The only reference
+  page that could be fetched does not mention Mikhail Babkin at all. The change appears
+  to be based on a citation that does not support the claim, and no corroborating
+  evidence was found after thorough search and fetch attempts.'
+rcid: 2550483765
+revid: 2473819803
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://lgz.ru/article/kulturnyj-imperium-i-ego-laureaty
+- provenance: verified
+  supports_claim: false
+  url: https://hram-ryazanka.ru/predsedatel-izdatelskogo-soveta-stal-laureatom-premii-kulturnyj-imperium-knigi-i-proekty/
+- provenance: verified
+  supports_claim: false
+  url: https://www.patriarchia.ru/article/120210
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/Михаил_Бабкин
+timestamp: '2026-04-11T16:24:21.465886+00:00'
+title: Q4074457
+turns: 1
+value_label: 'Культурный империум: книги и проекты'
+verdict: unverifiable

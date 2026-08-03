@@ -1,0 +1,22 @@
+completion_tokens: 699
+cost_usd: 0.0024720000000000002
+diff_type: reference_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 46644
+property: P19
+property_label: place of birth
+rationale: No reference could be successfully fetched or verified as supporting the
+  claimed place of birth, and no independent sources corroborated the claim. Verification
+  was impossible.
+rcid: null
+revid: 2473762133
+sources:
+- provenance: reported
+  supports_claim: false
+  url: Eshel Armony place of birth North Carolina web search
+timestamp: '2026-04-07T07:31:48.500925+00:00'
+title: Q18919670
+turns: 8
+value_label: North Carolina
+verdict: unverifiable

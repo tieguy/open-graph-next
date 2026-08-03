@@ -1,0 +1,28 @@
+completion_tokens: 1756
+cost_usd: 0.00459369
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44741
+property: P119
+property_label: place of burial
+rationale: The edit changed the place of burial from a specific location ('Raghadan
+  Palace') to a generic placeholder ('name'). The new value (Q82799) is not a valid
+  location for property P119 (place of burial). The cited reference (English Wikipedia)
+  is inaccessible, and no verified independent sources confirm the new value. The
+  edit was reverted, indicating it was incorrect. The old value was a plausible and
+  specific claim, while the new value lacks validity and evidence.
+rcid: 2549986475
+revid: 2473335771
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pantheon.world/profile/person/Zein_Al-Sharaf_Talal
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Zein_Al-Sharaf_Talal&oldid=862095215
+timestamp: '2026-04-11T16:07:53.876229+00:00'
+title: Q4116074
+turns: 4
+value_label: name
+verdict: incorrect

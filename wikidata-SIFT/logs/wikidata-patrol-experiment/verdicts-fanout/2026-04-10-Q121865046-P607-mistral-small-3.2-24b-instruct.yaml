@@ -1,0 +1,23 @@
+completion_tokens: 1371
+cost_usd: 0.00396178375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38409
+property: P607
+property_label: participated in conflict
+rationale: The blog post provides some context about the participation of La Gardata
+  (Mandello) in World War II, specifically related to partisan activities. However,
+  the specific qualifier value Q138709536 is not identified or verified by the available
+  sources.
+rcid: 2549637443
+revid: 2472998396
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://stelledilatta.blogspot.com/2014/08/alla-gardata-mandello.html
+timestamp: '2026-04-10T09:13:33.737822+00:00'
+title: Q121865046
+turns: 5
+value_label: World War II
+verdict: verified-low

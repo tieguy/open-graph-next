@@ -1,0 +1,31 @@
+completion_tokens: 1905
+cost_usd: 0.00191586
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 17063
+property: P1559
+property_label: name in native language
+rationale: The native name claim '両面宿儺' is correct and supported by multiple verified
+  sources (Fandom Wiki, Sekai Kokeshi blog, and Tumblr post). However, the edit changes
+  the qualifier for P2440 (transliteration or transcription) from 'Ryōmen Sukuna'
+  to 'HIJO DE GOJO SATORU', which is not supported by any authoritative source. This
+  qualifier change is unsupported and lacks evidence from official or credible references.
+  The edit does not improve the claim and introduces an unsupported transcription.
+rcid: null
+revid: 2471724158
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://jujutsu-kaisen.fandom.com/wiki/Sukuna
+- provenance: verified
+  supports_claim: true
+  url: https://sekaikokeshi.com/ryomensukunaname/
+- provenance: verified
+  supports_claim: true
+  url: https://www.tumblr.com/luminescentauthor/637356797462757376
+timestamp: '2026-04-11T14:12:29.625959+00:00'
+title: Q105037685
+turns: 1
+value_label: null
+verdict: suspect

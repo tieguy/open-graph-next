@@ -1,0 +1,21 @@
+completion_tokens: 579
+cost_usd: 0.006887900000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 135442
+property: P569
+property_label: date of birth
+rationale: Despite extensive search attempts for sources confirming Hans Scholl's
+  birth date of 18 September 1918, no reliable sources were found. All web searches
+  returned no results for verified sources. The claim lacks direct source verification
+  and cannot be confirmed through independent corroboration despite multiple different
+  search strategies.
+rcid: null
+revid: 2468034032
+sources: []
+timestamp: '2026-04-07T04:28:37.895116+00:00'
+title: Q57820
+turns: 15
+value_label: null
+verdict: unverifiable

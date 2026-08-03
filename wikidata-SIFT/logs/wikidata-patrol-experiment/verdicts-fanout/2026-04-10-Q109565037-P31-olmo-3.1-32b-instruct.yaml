@@ -1,0 +1,28 @@
+completion_tokens: 2174
+cost_usd: 0.0040344000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13650
+property: P31
+property_label: instance of
+rationale: The film's narrative, as described on Wikipedia, and the Wikidata item
+  for 'human species as depicted in the Space Jam universe' both indicate that Malik
+  is considered human. However, the use of a custom 'species' item as the sole instance
+  of is non-standard for a fictional character and not clearly justified by external
+  sources. The factual claim that Malik is human is supported, but the modeling choice
+  is atypical.
+rcid: 2551000260
+revid: 2474318432
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Space_Jam:_A_New_Legacy
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q138751725
+timestamp: '2026-04-10T13:32:35.713837+00:00'
+title: Q109565037
+turns: 1
+value_label: human
+verdict: verified-low

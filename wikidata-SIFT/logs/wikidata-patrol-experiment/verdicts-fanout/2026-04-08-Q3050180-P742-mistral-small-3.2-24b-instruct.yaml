@@ -1,0 +1,28 @@
+completion_tokens: 364
+cost_usd: 0.00308431
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36722
+property: P742
+property_label: pseudonym
+rationale: No verified sources were found to confirm or refute the claim that 'mon
+  chou' is a pseudonym for El Pez. The Wikipedia page for El Pez is blocked, and other
+  sources do not mention 'mon chou' in relation to El Pez.
+rcid: null
+revid: 2471606692
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/El_Pez
+- provenance: verified
+  supports_claim: false
+  url: https://www.imaginart-gallery.com/portfolio_page/pez/
+- provenance: verified
+  supports_claim: false
+  url: https://www.el-pez.com/
+timestamp: '2026-04-08T18:53:44.885424+00:00'
+title: Q3050180
+turns: 6
+value_label: null
+verdict: unverifiable

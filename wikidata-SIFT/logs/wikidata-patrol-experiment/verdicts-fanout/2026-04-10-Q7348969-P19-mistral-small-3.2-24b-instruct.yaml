@@ -1,0 +1,21 @@
+completion_tokens: 913
+cost_usd: 0.010187375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 105397
+property: P19
+property_label: place of birth
+rationale: The Military Wiki page provides clear evidence that Robert Poore was born
+  in Dublin, Ireland. This supports the qualifier added in the edit.
+rcid: 2550599672
+revid: 2473930839
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://military-history.fandom.com/wiki/Robert_Poore
+timestamp: '2026-04-10T12:11:59.879660+00:00'
+title: Q7348969
+turns: 9
+value_label: Dublin
+verdict: verified-high

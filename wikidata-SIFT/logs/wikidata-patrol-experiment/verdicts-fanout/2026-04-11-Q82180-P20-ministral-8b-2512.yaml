@@ -1,0 +1,30 @@
+completion_tokens: 1652
+cost_usd: 0.00708054
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 69200
+property: P20
+property_label: place of death
+rationale: The claim that Mata Hari was executed in Dakar (Q3718) is not supported
+  by any credible historical, military, or primary source. Multiple verified sources
+  confirm that Mata Hari was executed in Vincennes (Q193819), including French military
+  records, historical accounts, and re-enactments. The change from Vincennes to Dakar
+  is incorrect and lacks any valid evidence.
+rcid: 2550970497
+revid: 2474289994
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://chimeramyth.blogspot.com/2017/08/where-exactly-was-mata-hari-executed.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nationalgeographic.com/history/history-magazine/article/mata-hari-history-killing
+- provenance: verified
+  supports_claim: false
+  url: https://www.eyewitnesstohistory.com/matahari.htm
+timestamp: '2026-04-11T16:06:10.040895+00:00'
+title: Q82180
+turns: 3
+value_label: Dakar
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 1698
+cost_usd: 0.00420496875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40325
+property: P8408
+property_label: KBpedia ID
+rationale: The edit appears to be redundant as the value has not changed. The provided
+  references do not contain specific information about the KBpedia ID for 'negeri,'
+  and independent sources could not be found to verify the claim. Therefore, the edit
+  cannot be verified based on the available evidence.
+rcid: 2550543092
+revid: 2473876698
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/Cognonto/kbpedia
+- provenance: verified
+  supports_claim: false
+  url: https://gratisdata.miraheze.org/wiki/Property:P288
+- provenance: verified
+  supports_claim: false
+  url: https://portal.mardi4nfdi.de/wiki/Property:P294
+- provenance: verified
+  supports_claim: false
+  url: https://kbpedia.org
+- provenance: verified
+  supports_claim: false
+  url: https://kbpedia.org/knowledge-graph/reference-concepts/
+timestamp: '2026-04-11T09:43:14.239938+00:00'
+title: Q97202782
+turns: 5
+value_label: null
+verdict: unverifiable

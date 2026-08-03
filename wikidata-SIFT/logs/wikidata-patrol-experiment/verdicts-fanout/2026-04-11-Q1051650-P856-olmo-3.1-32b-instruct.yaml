@@ -1,0 +1,30 @@
+completion_tokens: 1989
+cost_usd: 0.004443600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16251
+property: P856
+property_label: official website
+rationale: The new official website https://nzdf.mil.nz/nzdf/ is the current, authoritative
+  site for the New Zealand Defence Force, hosted on the official government/military
+  domain (mil.nz). The Ministry of Defence directs users to this URL, and the previous
+  www subdomain is no longer maintained or redirects. Therefore, changing the official
+  website property to the non-www address is correct and justified.
+rcid: 2550567492
+revid: 2473899927
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://nzdf.mil.nz/nzdf/
+- provenance: verified
+  supports_claim: true
+  url: https://www.defence.govt.nz/about-us/contact-us/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nzdf.mil.nz/nzdf/
+timestamp: '2026-04-11T16:11:57.337399+00:00'
+title: Q1051650
+turns: 1
+value_label: null
+verdict: verified-high

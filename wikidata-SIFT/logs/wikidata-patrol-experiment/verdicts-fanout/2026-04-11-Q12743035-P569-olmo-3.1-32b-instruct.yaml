@@ -1,0 +1,23 @@
+completion_tokens: 205
+cost_usd: 0.0036092
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17431
+property: P569
+property_label: date of birth
+rationale: The official presidential necrology page of Moldova explicitly states that
+  Valentina Rusu-Ciobanu was born on 28 October 1920. This is a primary source directly
+  supporting the date of birth claim. The reference URL attached to the claim matches
+  this source.
+rcid: 2550500984
+revid: 2473836351
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://presedinte.md/rom/discursuri/necrolog-valentina-rusu-ciobanu-28-octombrie-1920-1-noiembrie-2021
+timestamp: '2026-04-11T12:26:44.967107+00:00'
+title: Q12743035
+turns: 1
+value_label: null
+verdict: verified-high

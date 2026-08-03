@@ -1,0 +1,33 @@
+completion_tokens: 1626
+cost_usd: 0.004047
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15357
+property: P856
+property_label: official website
+rationale: The provided URL (http://www.newyorktabesminare.com) does not function
+  as an official website for the film 'Five Minarets in New York'. The site is non-functional
+  (Flash-only, no content), and is not referenced as the official website by the distributor,
+  Rotten Tomatoes, IMDb, or Wikipedia. There is no independent or authoritative evidence
+  supporting this claim.
+rcid: null
+revid: 2470344359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.newyorktabesminare.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.boyutfilm.com.tr
+- provenance: verified
+  supports_claim: false
+  url: https://www.rottentomatoes.com/m/five_minarets_in_new_york
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/title/tt1686039/
+timestamp: '2026-04-10T08:10:42.386301+00:00'
+title: Q1481681
+turns: 1
+value_label: null
+verdict: incorrect

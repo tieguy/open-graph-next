@@ -1,0 +1,26 @@
+completion_tokens: 1066
+cost_usd: 0.049349199999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 243548
+property: P641
+property_label: sport
+rationale: The subject is documented as a chess player with participation in Women's
+  Chess Olympiads and the title of Woman International Master. There is no evidence
+  supporting an association with association football. Changing the sport to 'association
+  football player' is therefore incorrect.
+rcid: null
+revid: 2471022844
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q1504216
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=146688427
+timestamp: '2026-04-07T11:31:58.251195+00:00'
+title: Q1504216
+turns: 7
+value_label: association football player
+verdict: incorrect

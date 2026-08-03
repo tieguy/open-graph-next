@@ -1,0 +1,30 @@
+completion_tokens: 900
+cost_usd: 0.0067938
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31269
+property: P921
+property_label: main subject
+rationale: The 'main subject' (P921) for Wikipedia:Babel should not be 'Wikimedian.'
+  The Babel system is a user language proficiency template, and the Wikipedia:Babel
+  page is a project page explaining that template, not a page about Wikimedians as
+  a subject. No authoritative source identifies Wikipedia:Babel's main subject as
+  'Wikimedian.' The removal of this claim is therefore correct.
+rcid: 2550595538
+revid: 2473926814
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Commons:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://meta.wikimedia.org/wiki/Template:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:Babel
+timestamp: '2026-04-09T23:45:07.313908+00:00'
+title: Q6476774
+turns: 4
+value_label: Wikimedian
+verdict: incorrect

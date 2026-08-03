@@ -1,0 +1,25 @@
+completion_tokens: 675
+cost_usd: 0.0040787
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 78874
+property: P27
+property_label: country of citizenship
+rationale: No verifiable sources were found confirming or contradicting the claim
+  that Ibn Zamrak's country of citizenship is Emirate of Granada, so the claim remains
+  unverifiable despite being added to Wikidata.
+rcid: 2551395411
+revid: 2474699651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q3099172
+- provenance: verified
+  supports_claim: false
+  url: https://wikidata.org/wiki/Q238445
+timestamp: '2026-04-07T11:50:43.226388+00:00'
+title: Q3099172
+turns: 15
+value_label: Emirate of Granada
+verdict: unverifiable

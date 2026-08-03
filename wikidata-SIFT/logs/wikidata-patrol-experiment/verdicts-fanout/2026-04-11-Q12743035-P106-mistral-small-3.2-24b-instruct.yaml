@@ -1,0 +1,28 @@
+completion_tokens: 351
+cost_usd: 0.0032238562500000005
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36132
+property: P106
+property_label: occupation
+rationale: The updated reference supports the occupation claim for Valentina Rusu-Ciobanu
+  as a painter. Multiple sources confirm her career as a painter and provide detailed
+  information about her contributions to the art world.
+rcid: 2550500062
+revid: 2473835443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+timestamp: '2026-04-11T07:06:43.360062+00:00'
+title: Q12743035
+turns: 2
+value_label: painter
+verdict: verified-high

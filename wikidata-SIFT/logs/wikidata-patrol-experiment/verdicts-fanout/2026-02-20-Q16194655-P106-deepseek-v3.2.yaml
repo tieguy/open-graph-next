@@ -1,0 +1,32 @@
+completion_tokens: 1559
+cost_usd: 0.018160580000000003
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 65457
+property: P106
+property_label: occupation
+rationale: Multiple independent sources confirm Ivan Lindsay is an art collector.
+  His personal website directly states he is 'a British art collector, writer and
+  lecturer,' and Country & Town House describes him similarly. While some sources
+  refer to him as an art dealer (which may also be true), the specific claim of being
+  an art collector is well-documented and supported by primary sources. The Wikipedia
+  reference in the edit is circular and should not be used, but independent verification
+  confirms the claim.
+rcid: 2540960304
+revid: 2464748294
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ivanlindsay.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.countryandtownhouse.com/author/ivan-lindsay/
+- provenance: verified
+  supports_claim: false
+  url: https://yorkfestivalofideas.com/2015/talks/art-theft-looting-through-history/
+timestamp: '2026-02-20T04:52:17.819010+00:00'
+title: Q16194655
+turns: 8
+value_label: art collector
+verdict: verified-high

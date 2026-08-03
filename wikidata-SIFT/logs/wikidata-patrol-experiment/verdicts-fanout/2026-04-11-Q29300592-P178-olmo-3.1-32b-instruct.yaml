@@ -1,0 +1,33 @@
+completion_tokens: 1791
+cost_usd: 0.0067908
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28581
+property: P178
+property_label: developer
+rationale: The edit changed the developer of Hollow Knight from the well-established
+  and officially recognized 'Team Cherry' to the unverified and unrelated 'Team Liechtenstein.'
+  Multiple authoritative sources confirm Team Cherry as the developer, while there
+  is no evidence supporting 'Team Liechtenstein.' The change was also reverted by
+  the community, indicating recognition of its incorrectness.
+rcid: null
+revid: 2470234434
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Team_Cherry
+- provenance: verified
+  supports_claim: false
+  url: https://teamcherry.com.au/
+- provenance: verified
+  supports_claim: false
+  url: https://store.steampowered.com/app/367520/Hollow_Knight/
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Team+Liechtenstein+Hollow+Knight+developer
+timestamp: '2026-04-11T10:16:48.548561+00:00'
+title: Q29300592
+turns: 1
+value_label: Team Liechtenstein
+verdict: incorrect

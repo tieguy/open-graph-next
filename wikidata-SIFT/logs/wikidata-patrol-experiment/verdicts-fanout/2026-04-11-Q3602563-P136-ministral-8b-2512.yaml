@@ -1,0 +1,25 @@
+completion_tokens: 1956
+cost_usd: 0.00216981
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 30513
+property: P136
+property_label: genre
+rationale: The edit changes the genre of A Loss for Words from 'punk rock' to 'pop-punk'.
+  The only verified source (Apple Music) supports the new value ('pop-punk'), explicitly
+  describing the band's sound as pop-punk. However, no other independent sources could
+  be accessed to corroborate this claim, and the old value ('punk rock') was not contradicted
+  by any verified source. The lack of additional references and sources limits confidence
+  in the change.
+rcid: 2550849014
+revid: 2474172787
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/a-loss-for-words/280233207
+timestamp: '2026-04-11T08:59:57.659974+00:00'
+title: Q3602563
+turns: 4
+value_label: pop-punk
+verdict: verified-low

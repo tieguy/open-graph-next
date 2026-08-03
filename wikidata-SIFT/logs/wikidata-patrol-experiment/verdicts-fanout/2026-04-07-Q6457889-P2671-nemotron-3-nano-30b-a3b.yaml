@@ -1,0 +1,24 @@
+completion_tokens: 1146
+cost_usd: 0.00431715
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81759
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The edit changes the Google Knowledge Graph ID from a valid Q-identifier
+  to 'hola' with no references provided. No authoritative sources confirm 'hola' as
+  a Google Knowledge Graph ID. Google's documentation shows the API uses numeric IDs,
+  not linguistic strings. The target page was inaccessible, preventing verification.
+  This change cannot be confirmed or denied with available evidence.
+rcid: null
+revid: 2469321198
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://developers.google.com/knowledge-graph/
+timestamp: '2026-04-07T05:21:57.389225+00:00'
+title: Q6457889
+turns: 15
+value_label: null
+verdict: unverifiable

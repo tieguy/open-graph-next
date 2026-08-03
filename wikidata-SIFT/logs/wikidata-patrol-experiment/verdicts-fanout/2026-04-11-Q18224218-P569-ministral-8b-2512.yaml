@@ -1,0 +1,29 @@
+completion_tokens: 2462
+cost_usd: 0.00235332
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22648
+property: P569
+property_label: date of birth
+rationale: The change from 1949 to 2026 for María Angélica Illanes' date of birth
+  is incorrect. The cited Library of Congress reference (n90610029) and multiple independent
+  sources explicitly confirm her birth year as 1949. The new value of 2026 contradicts
+  all available evidence and is implausible given her documented career.
+rcid: 2549610311
+revid: 2472972061
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://mujeresbacanas.com/maria-angelica-illanes-1949/
+- provenance: verified
+  supports_claim: false
+  url: https://www.planetadelibros.us/autor/maria-angelica-illanes/000061758
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n90610029
+timestamp: '2026-04-11T12:50:02.127528+00:00'
+title: Q18224218
+turns: 2
+value_label: null
+verdict: incorrect

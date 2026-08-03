@@ -1,0 +1,36 @@
+completion_tokens: 476
+cost_usd: 0.005364
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 54986
+property: P20
+property_label: place of death
+rationale: The investigation was unable to fetch any relevant sources to verify the
+  claim about Yury Bogdanov's place of death.
+rcid: 2550719518
+revid: 2474047294
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://dyatlovpass.com/whois
+- provenance: verified
+  supports_claim: false
+  url: https://elib.bsu.by/bitstream/123456789/141836/1/%D0%91%D0%BE%D0%B3%D0%B4%D0%B0%D0%BD%D0%BE%D0%B2%D0%B0.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://gsu.by/ru/node/5229
+- provenance: verified
+  supports_claim: false
+  url: https://www.centropa.org/en/biography/yuri-bogdanov
+- provenance: verified
+  supports_claim: false
+  url: https://www.mathnet.ru/php/archive.phtml?wshow=paper&jrnid=de&paperid=6591&option_lang=rus
+- provenance: verified
+  supports_claim: false
+  url: https://www.wattpad.com/amp/1598040754
+timestamp: '2026-04-11T08:43:01.143064+00:00'
+title: Q13033543
+turns: 4
+value_label: Minsk
+verdict: unverifiable

@@ -1,0 +1,19 @@
+completion_tokens: 173
+cost_usd: 0.008233299999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 91079
+property: P18
+property_label: image
+rationale: The investigation was unable to fetch any relevant sources to verify the
+  change in the image of Ignacio Zuloaga from 'Ignacio Zuloaga cph.3a44376.jpg' to
+  'Ignacio Zuloaga 1925.jpg'.
+rcid: 2550641513
+revid: 2473971597
+sources: []
+timestamp: '2026-04-11T11:51:24.756898+00:00'
+title: Q460198
+turns: 4
+value_label: null
+verdict: unverifiable

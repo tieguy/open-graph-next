@@ -1,0 +1,32 @@
+completion_tokens: 1204
+cost_usd: 0.009640600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 44591
+property: P19
+property_label: place of birth
+rationale: No verifiable evidence supports changing Isabel Preysler's place of birth
+  to San Roque, Cádiz, Spain. Independent, reputable sources consistently list Manila,
+  Philippines as her birthplace. The cited reference is unverifiable and does not
+  substantiate the claim.
+rcid: 2550296081
+revid: 2473636089
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Isabel_Preysler
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Isabel_Preysler
+- provenance: verified
+  supports_claim: false
+  url: https://www.clara.es/celebrities/asi-fue-agitada-llegada-isabel-preysler-a-espana-60-fatal-galan-ambicion-y-mucho-poder-seduccion_32185
+- provenance: reported
+  supports_claim: false
+  url: Genealogía de don Práxedes Mateo-Sagasta y Escolar, p. 273
+timestamp: '2026-04-07T11:02:02.461659+00:00'
+title: Q437710
+turns: 5
+value_label: San Roque
+verdict: incorrect

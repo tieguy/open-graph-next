@@ -1,0 +1,29 @@
+completion_tokens: 2476
+cost_usd: 0.007701
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31077
+property: P6
+property_label: head of government
+rationale: There is no fetched, verified source explicitly stating that Richard Lejeune
+  became the head of government of La Celle-Saint-Cloud following the March 2026 municipal
+  election. The official election results page confirms his list's victory but does
+  not assign the head of government role. Richard Lejeune's personal website claims
+  he was deputy mayor since 2020 but does not assert he became head of government
+  in 2026. The previous value had a cited source that was not verified in this investigation.
+  Thus, the edit cannot be confirmed as correct.
+rcid: 2551270937
+revid: 2474580731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.leparisien.fr/elections/municipales/municipales-2026-a-la-celle-saint-cloud-decouvrez-les-resultats-du-premier-tour-16-03-2026-2XUGET7R6JD4TLK34K4GDMTXWQ.php
+- provenance: verified
+  supports_claim: false
+  url: https://www.richardlejeune.fr/
+timestamp: '2026-04-11T11:54:06.358101+00:00'
+title: Q367553
+turns: 1
+value_label: Richard Lejeune
+verdict: unverifiable

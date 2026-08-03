@@ -1,0 +1,20 @@
+completion_tokens: 1064
+cost_usd: 0.005834799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25982
+property: P18
+property_label: image
+rationale: No independent sources were found to confirm that 'Wiki-bukkake-2-simple.png'
+  is the correct image for Nadav Ravid. The edit was reverted, indicating community
+  doubt. Without a reliable source or citation supporting the new image, the change
+  is highly suspect.
+rcid: 2549874547
+revid: 2473230396
+sources: []
+timestamp: '2026-04-07T12:31:27.614499+00:00'
+title: Q47488244
+turns: 5
+value_label: null
+verdict: suspect

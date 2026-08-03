@@ -1,0 +1,39 @@
+completion_tokens: 2672
+cost_usd: 0.0025515599999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20534
+property: P136
+property_label: genre
+rationale: The edit changes Omer Fedi's genre from 'hip-hop' (Q11401) to 'pop music'
+  (Q37073). While independent sources like Variety and Apple Music highlight his work
+  with pop/alternative artists, there is no definitive evidence that he is exclusively
+  a pop artist. The cited Hebrew Wikipedia reference is ambiguous and does not exclude
+  'hip-hop' or definitively support 'pop music' as the sole genre. The old value ('hip-hop')
+  lacks corroboration, and the new value ('pop music') is plausible but not conclusively
+  supported by the cited source alone. The edit removes an unsupported claim without
+  sufficient justification, making it suspect.
+rcid: 2551091193
+revid: 2474407057
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://he.wikipedia.org/w/index.php?title=%d7%a2%d7%9e%d7%a8_%d7%91%d7%9c%d7%93&oldid=33046835
+- provenance: verified
+  supports_claim: true
+  url: https://variety.com/2021/music/news/omer-fedi-hitmaker-mood-without-you-montero-call-me-by-your-name-1234950939/
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/playlist/omer-fedi-the-producers
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Omer-fedi
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/omer-fedi.html
+timestamp: '2026-04-11T17:52:01.258201+00:00'
+title: Q100717799
+turns: 1
+value_label: pop music
+verdict: suspect

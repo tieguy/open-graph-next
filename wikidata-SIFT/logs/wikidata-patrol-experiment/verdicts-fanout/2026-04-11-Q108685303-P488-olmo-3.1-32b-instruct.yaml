@@ -1,0 +1,26 @@
+completion_tokens: 2034
+cost_usd: 0.0038744
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13270
+property: P488
+property_label: chairperson
+rationale: Two independent, verified journalistic sources (Le Monde and L'Express)
+  confirm that Michel Yahiel became the president of ARPE in September 2023, succeeding
+  Bruno Mettling. The edit's timing and value are consistent with these reports, indicating
+  the change is correct and appropriately documented.
+rcid: 2550348782
+revid: 2473687632
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lemonde.fr/plan-conomique/article/2023/09/01/le-nouveau-president-de-l-arpe-michel-yahiel_6194196_3234.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.lexpress.fr/actualite/economie/bruno-mettling-quitte-l-arpe_2153614.html
+timestamp: '2026-04-11T12:23:29.279113+00:00'
+title: Q108685303
+turns: 1
+value_label: Michel Yahiel
+verdict: verified-high

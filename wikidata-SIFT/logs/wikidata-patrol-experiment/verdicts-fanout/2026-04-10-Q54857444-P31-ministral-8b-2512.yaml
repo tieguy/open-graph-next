@@ -1,0 +1,31 @@
+completion_tokens: 1848
+cost_usd: 0.00138543
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13123
+property: P31
+property_label: instance of
+rationale: The removed claim incorrectly classified 'magic school' (Q54857444) as
+  an instance of 'location in a fictional work' (Q15796005). Independent sources confirm
+  that 'magic school' refers to an educational institution, not a location. The removal
+  aligns with semantic correctness and established categorization in fantasy literature
+  and tropes. No references were cited for the removed claim, further validating its
+  removal.
+rcid: 2551339484
+revid: 2474645743
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://scifi.stackexchange.com/questions/18437/what-was-the-first-school-of-magic-mentioned-in-modern-fantasy-literature
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Main/WizardingSchool
+- provenance: verified
+  supports_claim: false
+  url: https://bookanalysis.com/harry-potter/hogwarts-school-of-witchcraft-and-wizardry/
+timestamp: '2026-04-10T14:08:23.371210+00:00'
+title: Q54857444
+turns: 1
+value_label: location in a fictional work
+verdict: verified-high

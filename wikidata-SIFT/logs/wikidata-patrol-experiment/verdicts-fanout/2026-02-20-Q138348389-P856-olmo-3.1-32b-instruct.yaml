@@ -1,0 +1,31 @@
+completion_tokens: 1267
+cost_usd: 0.0039244
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15821
+property: P856
+property_label: official website
+rationale: The website https://www.novacorebuilders.com is confirmed as the official
+  website of NovaCore Builders, a licensed general contractor in Tampa, FL. This is
+  supported by direct fetching of the website content, which identifies the business
+  and its services, and by independent business directory listings (Yelp) and a Florida
+  contractor license verification portal. The evidence is consistent and primary in
+  nature.
+rcid: 2540926050
+revid: 2464716823
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.novacorebuilders.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.yelp.com/biz/novacore-builders-tampa
+- provenance: reported
+  supports_claim: true
+  url: https://www.myfloridalicense.com/verification/
+timestamp: '2026-02-20T22:19:05.060036+00:00'
+title: Q138348389
+turns: 2
+value_label: null
+verdict: verified-high

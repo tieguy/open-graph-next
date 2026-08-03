@@ -1,0 +1,31 @@
+completion_tokens: 2300
+cost_usd: 0.004214
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14170
+property: P1448
+property_label: official name
+rationale: The official name 'Мандриківка' is confirmed by multiple independent sources
+  such as the Ukrainian Wikipedia and the State Register of Settlements of Ukraine.
+  However, the reference provided in the edit (inferred from the title of a Wikidata
+  item) is not a primary authoritative source, and thus does not meet the strongest
+  evidence standard required for 'verified-high'. The edit is an improvement by adding
+  a reference, but it should be replaced with a direct government source.
+rcid: 2550779000
+revid: 2474104516
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://uk.wikipedia.org/wiki/Мандриківка
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q69652283
+- provenance: reported
+  supports_claim: true
+  url: https://register-settlements.gov.ua/
+timestamp: '2026-04-11T11:29:20.813345+00:00'
+title: Q12121131
+turns: 1
+value_label: null
+verdict: verified-low

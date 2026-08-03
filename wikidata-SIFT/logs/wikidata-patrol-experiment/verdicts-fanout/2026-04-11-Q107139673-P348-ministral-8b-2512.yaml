@@ -1,0 +1,29 @@
+completion_tokens: 2102
+cost_usd: 0.00843312
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 63540
+property: P348
+property_label: software version identifier
+rationale: The edit changes the software version identifier from '15.7.8' to '15.8.7'
+  for iOS 15 (Q107139673). No verified independent source confirms '15.8.7' as a stable
+  release. The publication date for '15.8.7' (March 11, 2023) is earlier than that
+  of '15.7.8' (July 24, 2023), which contradicts logical software versioning. The
+  cited reference URL (HT212788) is unreachable, and Apple's update history does not
+  support such a version jump without official documentation. The claim is unsupported
+  and incorrect.
+rcid: 2550289977
+revid: 2473630088
+sources:
+- provenance: unreachable
+  supports_claim: false
+  url: https://support.apple.com/en-us/HT212788
+- provenance: reported
+  supports_claim: false
+  url: https://developer.apple.com/news/releases/
+timestamp: '2026-04-11T12:46:45.414435+00:00'
+title: Q107139673
+turns: 2
+value_label: null
+verdict: incorrect

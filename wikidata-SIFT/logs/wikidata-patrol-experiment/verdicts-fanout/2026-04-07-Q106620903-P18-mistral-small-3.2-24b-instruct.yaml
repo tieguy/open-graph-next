@@ -1,0 +1,23 @@
+completion_tokens: 976
+cost_usd: 0.00378588125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37226
+property: P18
+property_label: image
+rationale: The new image 'Audi Q6L Sportback e-tron 001.jpg' does not exist in the
+  official Wikimedia Commons category for the Audi Q6 e-tron, while the original image
+  'Audi Q6 e-tron DSC 2908.jpg' is listed. Therefore, the edit to change the image
+  is incorrect.
+rcid: null
+revid: 2471360509
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Audi_Q6_e-tron
+timestamp: '2026-04-07T06:03:13.883883+00:00'
+title: Q106620903
+turns: 7
+value_label: null
+verdict: incorrect

@@ -1,0 +1,22 @@
+completion_tokens: 1298
+cost_usd: 0.0032082400000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31414
+property: P4073
+property_label: Fandom wiki ID
+rationale: The old value 'the-ark.fandom.com/wiki/The_Ark_Wiki' is confirmed to be
+  correct and relevant. There is no clear evidence that 'the-ark' is a recognized
+  alias or short form, making the edit incorrect.
+rcid: 2551298135
+revid: 2474606708
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://the-ark.fandom.com/wiki/The_Ark_Wiki
+timestamp: '2026-04-11T07:03:51.350443+00:00'
+title: Q116006894
+turns: 3
+value_label: null
+verdict: incorrect

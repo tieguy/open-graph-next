@@ -1,0 +1,22 @@
+completion_tokens: 607
+cost_usd: 0.0021658625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21414
+property: P968
+property_label: email address
+rationale: The search queries to verify the email addresses for the Southern Catalonia
+  Biomedical Research Institute resulted in errors, and no sources could be fetched
+  to confirm or deny the change.
+rcid: 2550611359
+revid: 2473942247
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://cerca.cat/c/iispv/
+timestamp: '2026-04-11T10:39:59.482100+00:00'
+title: Q30282449
+turns: 2
+value_label: null
+verdict: unverifiable

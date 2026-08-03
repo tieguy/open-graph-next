@@ -1,0 +1,28 @@
+completion_tokens: 476
+cost_usd: 0.0026827
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27896
+property: P156
+property_label: followed by
+rationale: 'The sources confirm that William Piotrowski, a member of Nox Arcana, created
+  the soundtrack for the vampire movie ''Crimson Winter''. This soundtrack is described
+  as a mix of Nox Arcana and the work of György Ligeti, and it is mentioned in the
+  context of ''Legion of Shadows''. Therefore, it is reasonable to conclude that ''Crimson
+  Winter: Original Motion Picture Soundtrack'' is a correct qualifier for the ''followed
+  by'' claim on ''Legion of Shadows''.'
+rcid: 2541054265
+revid: 2464836689
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/legion.html
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/nox-arcana/7041274
+timestamp: '2026-02-21T04:29:14.591086+00:00'
+title: Q17181150
+turns: 3
+value_label: 'Crimson Winter: Original Motion Picture Soundtrack'
+verdict: verified-high

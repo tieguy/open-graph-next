@@ -1,0 +1,26 @@
+completion_tokens: 1772
+cost_usd: 0.0032791499999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39187
+property: P628
+property_label: E number
+rationale: The old value, E1400, is explicitly confirmed as the correct E-number for
+  dextrin by verified sources (Food-Info.net and Cargo Handbook). The new value, 67,
+  lacks any authoritative support or confirmation as the E-number for dextrin. This
+  edit is incorrect and should be reverted.
+rcid: 2549365331
+revid: 2472732260
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.food-info.net/uk/e/e1400.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.cargohandbook.com/Dextrin
+timestamp: '2026-04-11T18:27:25.360899+00:00'
+title: Q191978
+turns: 5
+value_label: null
+verdict: incorrect

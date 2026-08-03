@@ -1,0 +1,29 @@
+completion_tokens: 2424
+cost_usd: 0.0042206
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13831
+property: P1477
+property_label: birth name
+rationale: All verified and authoritative sources confirm that Raúl Lucio Hernández
+  Lechuga's full name is 'Raúl Lucio Hernández Lechuga', with no mention or evidence
+  supporting 'Joel Guzmán Hernández' as his birth name. The change to the unsupported
+  name is therefore incorrect.
+rcid: null
+revid: 2471113685
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Ra%C3%BAl_Lucio_Hern%C3%A1ndez_Lechuga
+- provenance: verified
+  supports_claim: false
+  url: https://peoplepill.com/i/raul-lucio-hernandez-lechuga/
+- provenance: verified
+  supports_claim: false
+  url: https://www.opensanctions.org/entities/NK-VLYv5ghPTetse9SvSeakzW/
+timestamp: '2026-04-11T08:46:28.108872+00:00'
+title: Q7299797
+turns: 1
+value_label: null
+verdict: incorrect

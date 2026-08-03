@@ -1,0 +1,29 @@
+completion_tokens: 1462
+cost_usd: 0.0018709199999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26970
+property: P31
+property_label: instance of
+rationale: The edit changes the 'instance of' property from 'human settlement' to
+  'chōchō' without any supporting references. The prefetched references discuss an
+  unrelated topic, and the web search was unsuccessful. Therefore, the edit lacks
+  sufficient evidence to support the change.
+rcid: 2550859616
+revid: 2474183197
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://hero.fandom.com/wiki/Ch%C5%8Dch%C5%8D_Akimichi
+- provenance: verified
+  supports_claim: false
+  url: https://naruto.fandom.com/wiki/Ch%C5%8Dch%C5%8D_Akimichi
+- provenance: verified
+  supports_claim: false
+  url: https://naruto.fandom.com/wiki/Ch%C5%8Dch%C5%8D_Arc
+timestamp: '2026-04-11T14:06:46.787335+00:00'
+title: Q11361513
+turns: 3
+value_label: chōchō
+verdict: unverifiable

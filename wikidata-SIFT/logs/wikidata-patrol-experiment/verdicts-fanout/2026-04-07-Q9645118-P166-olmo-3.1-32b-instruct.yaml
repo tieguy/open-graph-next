@@ -1,0 +1,27 @@
+completion_tokens: 1146
+cost_usd: 0.0050208
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21666
+property: P166
+property_label: award received
+rationale: No independent or primary source evidence was found to support the claim
+  that Banco Carregosa received a Euromoney award as an investor in 2025. The official
+  Euromoney Awards 2025 page could not be accessed, and no third-party reporting corroborates
+  the claim. The edit should therefore be treated as suspect until reliable evidence
+  is provided.
+rcid: 2550592279
+revid: 2473923730
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.euromoney.com/awards/2025-winners
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Banco+Carregosa+Euromoney+2025+award
+timestamp: '2026-04-07T09:57:44.027792+00:00'
+title: Q9645118
+turns: 4
+value_label: Euromoney
+verdict: suspect

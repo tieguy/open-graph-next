@@ -1,0 +1,22 @@
+completion_tokens: 840
+cost_usd: 0.0046636625
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47408
+property: P19
+property_label: place of birth
+rationale: The only reference cited is the Polish Wikipedia article, which is not
+  considered a reliable source for verification. No independent sources were found
+  to confirm the specific qualifiers added to the 'place of birth' claim.
+rcid: null
+revid: 2468362220
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pl.wikipedia.org/wiki/Iwo_Pollo
+timestamp: '2026-04-07T04:35:27.496882+00:00'
+title: Q11714551
+turns: 6
+value_label: Deliatyn
+verdict: unverifiable

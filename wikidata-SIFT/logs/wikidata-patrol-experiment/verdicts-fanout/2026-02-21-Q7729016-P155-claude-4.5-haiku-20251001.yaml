@@ -1,0 +1,30 @@
+completion_tokens: 2057
+cost_usd: 0.040688
+diff_type: qualifier_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 30403
+property: P155
+property_label: follows
+rationale: The claim that The Dark Tower (2011) follows House of Nightmares (2010)
+  is strongly supported by the official Nox Arcana discography and corroborated by
+  multiple independent music databases. The release dates (October 1, 2010 vs. September
+  30, 2011) clearly establish House of Nightmares as the preceding album. The existing
+  reference to noxarcana.com is authoritative and directly confirms this relationship.
+rcid: 2541055100
+revid: 2464837372
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/music.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/album/the-dark-tower-mw0002272559
+- provenance: verified
+  supports_claim: true
+  url: https://www.spirit-of-metal.com/en/band/nox_arcana
+timestamp: '2026-02-21T04:16:56.296152+00:00'
+title: Q7729016
+turns: 3
+value_label: House of Nightmares
+verdict: verified-high

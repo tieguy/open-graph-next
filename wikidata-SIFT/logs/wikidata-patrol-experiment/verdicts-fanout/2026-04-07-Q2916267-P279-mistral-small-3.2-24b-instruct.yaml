@@ -1,0 +1,26 @@
+completion_tokens: 415
+cost_usd: 0.0028676312499999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29045
+property: P279
+property_label: subclass of
+rationale: The Tulip chair is widely recognized as a piece of furniture, specifically
+  a chair designed by Eero Saarinen. There is no evidence to support the claim that
+  it is a subclass of cookware and bakeware. The search results and independent sources
+  confirm that the Tulip chair is a furniture item, not related to cookware or bakeware.
+rcid: 2551186634
+revid: 2474500439
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Tulip_chair
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/collection/works/85310
+timestamp: '2026-04-07T08:52:40.576979+00:00'
+title: Q2916267
+turns: 5
+value_label: cookware and bakeware
+verdict: incorrect

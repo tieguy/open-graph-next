@@ -1,0 +1,27 @@
+completion_tokens: 1094
+cost_usd: 0.0045383125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 47413
+property: P27
+property_label: country of citizenship
+rationale: The removed claim had no references. The fetched content does not provide
+  any information about Simon Kubica's citizenship. The item context shows that Simon
+  Kubica is an Australian entrepreneur born in Sydney, with no other indications of
+  Polish citizenship. Given the lack of evidence supporting Simon Kubica's citizenship
+  in Poland, the removal of the claim appears to be justified.
+rcid: 2550459524
+revid: 2473795998
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://f1.fandom.com/wiki/Robert_Kubica
+- provenance: verified
+  supports_claim: false
+  url: https://www.racefans.net/robert-kubica/
+timestamp: '2026-04-11T10:07:59.777902+00:00'
+title: Q123758079
+turns: 5
+value_label: Poland
+verdict: verified-high

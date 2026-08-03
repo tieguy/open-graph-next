@@ -1,0 +1,28 @@
+completion_tokens: 1639
+cost_usd: 0.01445594
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 44241
+property: P569
+property_label: date of birth
+rationale: The existing Wikidata claim provides a precise date of birth (1998-09-12)
+  without any cited reference. The edit changes this to the year-only value "1998",
+  also without adding a reference. Independent web searches for Ashef Tajwar Amin's
+  date of birth returned multiple professional profiles, but none contained any mention
+  of his birth year, date, or age. Without any source confirming the year 1998 (or
+  the specific date), the claim remains unverifiable.
+rcid: 2540979135
+revid: 2464765773
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://theorg.com/org/conscience-vc/org-chart/ashef-tajwar-amin
+- provenance: verified
+  supports_claim: false
+  url: https://about.me/asheftajwaramin
+timestamp: '2026-02-20T02:02:01.376423+00:00'
+title: Q138349878
+turns: 6
+value_label: null
+verdict: unverifiable

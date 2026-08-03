@@ -1,0 +1,34 @@
+completion_tokens: 2067
+cost_usd: 0.013564
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 129439
+property: P735
+property_label: given name
+rationale: All consulted sources consistently refer to Mansour Abbas as Mansour Abbas,
+  with no mention of 'Black' as his given name. The claim that 'Black' is his given
+  name is not supported by any reliable sources.
+rcid: 2540944872
+revid: 2464734208
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.newarab.com/analysis/mansour-abbas-islamist-politician-reshaping-israels-political-landscape
+- provenance: verified
+  supports_claim: false
+  url: https://time.com/6073019/mansour-abbas-arab-israel-coalition-government/
+- provenance: verified
+  supports_claim: false
+  url: https://www.npr.org/2022/01/17/1073565965/arab-leaders-gamble-to-play-kingmaker-in-israel-is-paying-off
+- provenance: verified
+  supports_claim: false
+  url: https://www.newyorker.com/magazine/2021/11/01/the-arab-israeli-power-broker-in-the-knesset
+- provenance: verified
+  supports_claim: false
+  url: https://www.stateoftelaviv.com/p/the-islamist-disruptor-of-israel-mansour-abbas-speaks
+timestamp: '2026-02-20T12:07:49.259407+00:00'
+title: Q62394296
+turns: 8
+value_label: Black
+verdict: incorrect

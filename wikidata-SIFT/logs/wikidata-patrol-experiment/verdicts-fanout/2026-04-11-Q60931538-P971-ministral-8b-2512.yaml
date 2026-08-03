@@ -1,0 +1,26 @@
+completion_tokens: 1800
+cost_usd: 0.00152301
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20309
+property: P971
+property_label: category combines topics
+rationale: The edit changes the category combines topics from an incorrect link to
+  the team (Q16973085) to a more semantically appropriate but still overly broad category
+  (Q104216787, 'persons active in this association'). While this is an improvement
+  over the old value, the new value lacks specificity for volleyball coaches. No references
+  were provided, and no verified sources were consulted during this investigation
+  due to search limitations. The change aligns with Wikidata best practices for linking
+  categories to broader semantic groups but could be refined further.
+rcid: 2550918264
+revid: 2474240280
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Help:Category
+timestamp: '2026-04-11T09:08:57.211840+00:00'
+title: Q60931538
+turns: 2
+value_label: persons active in this association
+verdict: verified-low

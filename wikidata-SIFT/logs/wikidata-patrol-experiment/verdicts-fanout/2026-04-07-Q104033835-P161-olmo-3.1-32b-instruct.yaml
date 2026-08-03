@@ -1,0 +1,29 @@
+completion_tokens: 625
+cost_usd: 0.0104336
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50293
+property: P161
+property_label: cast member
+rationale: No independent or primary source confirms that Donald Trump is a cast member
+  of The Adam Project. The cited references for cast members do not list him, and
+  authoritative entertainment databases (IMDb, Rotten Tomatoes, major news outlets)
+  provide no evidence of his involvement. The edit appears to be an error.
+rcid: 2550549913
+revid: 2473883037
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=114211129
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/The_Adam_Project
+- provenance: reported
+  supports_claim: false
+  url: https://www.imdb.com/title/tt2463208/
+timestamp: '2026-04-07T05:50:13.100619+00:00'
+title: Q104033835
+turns: 5
+value_label: Donald Trump
+verdict: incorrect

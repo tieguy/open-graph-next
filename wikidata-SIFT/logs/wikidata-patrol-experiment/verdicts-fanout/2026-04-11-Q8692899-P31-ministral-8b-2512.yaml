@@ -1,0 +1,27 @@
+completion_tokens: 1836
+cost_usd: 0.00571539
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 83819
+property: P31
+property_label: instance of
+rationale: 'The removed reference (P143: English Wikipedia) was invalid for a Wikidata
+  claim, as Wikipedia should not be cited directly. Additionally, Wikimedia categories
+  (Q4167836) are not valid instances of any class in Wikidata; they are containers
+  or collections. The edit correctly removed an invalid reference and addressed an
+  incorrect classification by removing the reference itself, which is justified.'
+rcid: 2551356265
+revid: 2474661766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Ohio_State_Buckeyes_football_coaches
+- provenance: reported
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Wikidata:Manual_of_Style/References
+timestamp: '2026-04-11T10:08:40.014001+00:00'
+title: Q8692899
+turns: 11
+value_label: Wikimedia category
+verdict: verified-high

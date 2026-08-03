@@ -1,0 +1,27 @@
+completion_tokens: 1928
+cost_usd: 0.00227589
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29117
+property: P2397
+property_label: YouTube channel ID
+rationale: The new YouTube channel URL (https://www.youtube.com/@theatrelaseizieme_)
+  was not confirmed by the theatre's official website (https://seizieme.ca/) or the
+  YouTube channel itself. The old value was also unverified, and no independent sources
+  corroborate the association of this channel with Théâtre la Seizième. The edit lacks
+  sufficient evidence to confirm the validity of the new claim.
+rcid: 2551329122
+revid: 2474636002
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@theatrelaseizieme_
+- provenance: verified
+  supports_claim: false
+  url: https://seizieme.ca/en/
+timestamp: '2026-04-11T17:08:01.464742+00:00'
+title: Q100965387
+turns: 4
+value_label: null
+verdict: unverifiable

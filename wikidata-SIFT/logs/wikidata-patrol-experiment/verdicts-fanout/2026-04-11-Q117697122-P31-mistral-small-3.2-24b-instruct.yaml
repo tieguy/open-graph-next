@@ -1,0 +1,20 @@
+completion_tokens: 239
+cost_usd: 0.00364125625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40921
+property: P31
+property_label: instance of
+rationale: Unable to fetch any sources to verify the claim due to access restrictions.
+rcid: 2551358756
+revid: 2474664135
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Dolní_Paseky
+timestamp: '2026-04-11T06:57:27.855509+00:00'
+title: Q117697122
+turns: 6
+value_label: road bridge
+verdict: unverifiable

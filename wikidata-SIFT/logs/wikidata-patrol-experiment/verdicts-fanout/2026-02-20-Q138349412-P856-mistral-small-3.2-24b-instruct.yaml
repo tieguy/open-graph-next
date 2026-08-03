@@ -1,0 +1,28 @@
+completion_tokens: 1499
+cost_usd: 0.0080588
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 76091
+property: P856
+property_label: official website
+rationale: The edit to update the official website for Reatrixweb Media to https://www.reatrixweb.com
+  is supported by multiple independent sources. The website is active and provides
+  relevant content consistent with a media portal.
+rcid: 2540945784
+revid: 2464735029
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://network.reatrixweb.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.reatrixweb.com/
+- provenance: verified
+  supports_claim: true
+  url: https://sgpgrid.com/company/reatrixwebcom-media-ID0000
+timestamp: '2026-02-20T11:54:47.319285+00:00'
+title: Q138349412
+turns: 11
+value_label: null
+verdict: verified-high

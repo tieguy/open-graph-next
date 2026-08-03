@@ -1,0 +1,28 @@
+completion_tokens: 2018
+cost_usd: 0.06091680000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 215298
+property: P348
+property_label: software version identifier
+rationale: The edit incorrectly changes the software version identifier for Okular
+  from '20.08.1' to '25.12.0'. While the new version '25.12.0' exists as a tag, the
+  publication date qualifier provided (2020-08-31) is incorrect and does not match
+  the actual tag creation date (2025-12-03). The old version '20.08.1' is correctly
+  referenced and verified. The edit is incorrect because it misaligns the publication
+  date qualifier with the actual release date.
+rcid: 2551023227
+revid: 2474340618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://invent.kde.org/graphics/okular/-/tags/v20.08.1
+- provenance: verified
+  supports_claim: true
+  url: https://invent.kde.org/graphics/okular/-/tags/v25.12.0
+timestamp: '2026-04-11T08:11:29.676770+00:00'
+title: Q1165933
+turns: 8
+value_label: null
+verdict: incorrect

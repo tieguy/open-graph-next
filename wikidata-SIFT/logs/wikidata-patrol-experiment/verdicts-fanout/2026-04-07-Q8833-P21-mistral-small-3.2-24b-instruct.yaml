@@ -1,0 +1,25 @@
+completion_tokens: 897
+cost_usd: 0.0037181625000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 39039
+property: P21
+property_label: sex or gender
+rationale: The claim that Gaius Maecenas was a bisexual person is not supported by
+  any credible evidence. The edit appears to be based on no credible evidence and
+  is likely incorrect.
+rcid: 2549268643
+revid: 2472638900
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Gaius+Maecenas+sex+or+gender+bisexual
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Gaius+Maecenas+biography
+timestamp: '2026-04-07T05:35:48.060063+00:00'
+title: Q8833
+turns: 4
+value_label: bisexual person
+verdict: incorrect

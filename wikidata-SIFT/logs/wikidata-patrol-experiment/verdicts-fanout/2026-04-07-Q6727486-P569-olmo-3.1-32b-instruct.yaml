@@ -1,0 +1,25 @@
+completion_tokens: 586
+cost_usd: 0.008442199999999999
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40453
+property: P569
+property_label: date of birth
+rationale: No independent or reliable sources were found to confirm or deny the date
+  of birth '4 April 1966' for Madhumita Raut. The claim is not supported by any verified
+  external evidence.
+rcid: 2551232343
+revid: 2474544742
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Madhumita_Raut
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Madhumita+Raut+birth+date
+timestamp: '2026-04-07T03:43:58.496099+00:00'
+title: Q6727486
+turns: 8
+value_label: null
+verdict: unverifiable

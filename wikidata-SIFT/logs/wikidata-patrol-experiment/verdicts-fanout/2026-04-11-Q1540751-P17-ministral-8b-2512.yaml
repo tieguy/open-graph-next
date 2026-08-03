@@ -1,0 +1,27 @@
+completion_tokens: 1948
+cost_usd: 0.00239157
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23417
+property: P17
+property_label: country
+rationale: The claim that the Glorious Revolution (1868) had 'Felipe VI of Spain'
+  as its country is factually incorrect. Independent sources confirm the revolution
+  occurred in the Kingdom of Spain during Isabella II's reign. Felipe VI became king
+  in 2014, making the new value nonsensical for this historical event. The old value
+  ('Kingdom of Spain') was accurate, and no credible evidence supports the change.
+rcid: null
+revid: 2454916333
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.diba.cat/en/web/exposicions/-/first-republic-150-years-on
+- provenance: verified
+  supports_claim: false
+  url: https://kids.kiddle.co/Felipe_VI
+timestamp: '2026-04-11T12:47:27.397923+00:00'
+title: Q1540751
+turns: 2
+value_label: Felipe VI of Spain
+verdict: incorrect

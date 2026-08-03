@@ -1,0 +1,31 @@
+completion_tokens: 386
+cost_usd: 0.003249
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15087
+property: P31
+property_label: instance of
+rationale: The value 'Hua' is a Chinese given name and does not appropriately describe
+  the instance of Andrew Jackson, who is a person, not a name or character. The previous
+  value 'painting' was appropriate because the item represents a painting of Andrew
+  Jackson. Independent sources confirm that the National Gallery of Art page describes
+  the artwork as a painting, not as a given name. Changing the instance of from 'painting'
+  to 'Hua' is factually incorrect and misrepresents the nature of the entity.
+rcid: null
+revid: 2467026793
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nga.gov/content/ngaweb/Collection/art-object-page.1128.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.gilderlehrman.org/history-resources/spotlight-primary-source/andrew-jackson-cherokee-tribe-1835
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Andrew_Jackson
+timestamp: '2026-04-11T16:46:58.142561+00:00'
+title: Q20187236
+turns: 1
+value_label: Hua
+verdict: incorrect

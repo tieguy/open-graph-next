@@ -1,0 +1,29 @@
+completion_tokens: 2006
+cost_usd: 0.0042986000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15475
+property: P570
+property_label: date of death
+rationale: Multiple authoritative sources, including the German National Library GND
+  and the Gdańsk city archives, confirm that Heinrich Zernecke died on 29 October
+  1741. The value '30 July 1775' is not supported by any reliable source and is therefore
+  incorrect. The edit introduced a factually wrong date of death.
+rcid: 2550760877
+revid: 2474086834
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gnd.org/en/142241652
+- provenance: verified
+  supports_claim: false
+  url: https://gdansk.gedanopedia.pl/gdansk/?title=ZERNECKE_HEINRICH,_burmistrz_Gda%C5%84ska
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Heinrich_Zernecke
+timestamp: '2026-04-11T12:31:51.862847+00:00'
+title: Q94912890
+turns: 1
+value_label: null
+verdict: incorrect

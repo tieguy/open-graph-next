@@ -1,0 +1,26 @@
+completion_tokens: 1289
+cost_usd: 0.0039153
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35286
+property: P452
+property_label: industry
+rationale: The edit is supported by primary sources, including the company's official
+  website and Companies House, which confirm that MG Timber Products Ltd is involved
+  in the manufacturing and selling of garden furniture. The nature of business listed
+  on Companies House also supports the claim.
+rcid: 2540934643
+revid: 2464725111
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mgtimberproductsltd.co.uk/
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/company/10560760
+timestamp: '2026-02-20T17:59:28.034135+00:00'
+title: Q138349055
+turns: 5
+value_label: garden furniture shop
+verdict: verified-high

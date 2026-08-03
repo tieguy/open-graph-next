@@ -1,0 +1,22 @@
+completion_tokens: 890
+cost_usd: 0.003222875
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32004
+property: P119
+property_label: place of burial
+rationale: The reference URL provided for the place of burial claim is unreachable,
+  and no independent sources could be found to corroborate or refute the claim. Therefore,
+  the removal of the reference cannot be verified.
+rcid: 2550019752
+revid: 2473368142
+sources:
+- provenance: reported
+  supports_claim: null
+  url: https://www.scielo.org.mx/scielo.php?script=sci_arttext&pid=S1665-85742011000100003
+timestamp: '2026-04-07T12:55:00.429508+00:00'
+title: Q6937625
+turns: 4
+value_label: Durango
+verdict: unverifiable

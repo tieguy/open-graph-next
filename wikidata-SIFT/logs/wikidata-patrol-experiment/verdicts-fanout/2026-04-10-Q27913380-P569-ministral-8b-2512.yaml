@@ -1,0 +1,31 @@
+completion_tokens: 2017
+cost_usd: 0.00548097
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56616
+property: P569
+property_label: date of birth
+rationale: The claim of '1 January 1991' as the birth date for Abantika Deka (Q27913380)
+  is not strongly supported by authoritative sources. While EverybodyWiki cites the
+  BWF as a source, the BWF profile page itself does not explicitly confirm this date.
+  Additionally, secondary sources like PeoplePill and the implied age calculation
+  from the BWF profile suggest a birth year of 1987. Without direct, clear confirmation
+  from a primary source, the updated claim remains unverifiable.
+rcid: 2549846795
+revid: 2473203334
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://en.everybodywiki.com/Abantika_Deka
+- provenance: reported
+  supports_claim: false
+  url: https://peoplepill.com/people/abantika-deka
+- provenance: verified
+  supports_claim: false
+  url: https://bwfbadminton.com/player/54971/abantika-deka
+timestamp: '2026-04-10T10:59:58.143294+00:00'
+title: Q27913380
+turns: 5
+value_label: null
+verdict: unverifiable

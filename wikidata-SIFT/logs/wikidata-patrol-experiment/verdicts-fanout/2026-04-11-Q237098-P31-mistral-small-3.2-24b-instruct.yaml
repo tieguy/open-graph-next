@@ -1,0 +1,25 @@
+completion_tokens: 1256
+cost_usd: 0.005740768750000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60075
+property: P31
+property_label: instance of
+rationale: The sources consulted describe Louise Labé as a writer and poet, with no
+  mention of her being a therian. The edit changing her 'instance of' property from
+  'human' to 'therian' is not supported by the available evidence.
+rcid: null
+revid: 2471473740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.litencyc.com/php/speople.php?rec=true&UID=5832
+- provenance: verified
+  supports_claim: false
+  url: https://www.rarebookhub.com/articles/1900
+timestamp: '2026-04-11T13:20:27.321806+00:00'
+title: Q237098
+turns: 4
+value_label: therian
+verdict: incorrect

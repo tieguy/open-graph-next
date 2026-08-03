@@ -1,0 +1,22 @@
+completion_tokens: 1708
+cost_usd: 0.0060246975
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 89781
+property: P26
+property_label: spouse
+rationale: The obituary in The Art Newspaper, which is a detailed account of Johan
+  van Gogh's life, does not mention Anneke van Santen or any spouse. This suggests
+  that the claim may be incorrect or unverifiable based on the available sources.
+rcid: 2550384550
+revid: 2473722496
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.theartnewspaper.com/2019/03/08/the-astonishing-life-of-johan-van-gogh-vincents-great-nephew-dies-aged-96
+timestamp: '2026-04-07T08:56:58.393437+00:00'
+title: Q18016363
+turns: 14
+value_label: Anneke van Santen
+verdict: unverifiable

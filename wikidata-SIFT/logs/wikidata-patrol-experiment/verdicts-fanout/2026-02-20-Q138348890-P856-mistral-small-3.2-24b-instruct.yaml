@@ -1,0 +1,24 @@
+completion_tokens: 294
+cost_usd: 0.0018869999999999998
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17988
+property: P856
+property_label: official website
+rationale: The fetched content from the URL https://packetra.com confirms that it
+  is indeed the official website for Packetra, a privacy-focused web hosting provider.
+  The site offers various hosting services and highlights features such as 99.9% uptime,
+  DDoS protection, and 24/7 human support. Customer testimonials further support its
+  legitimacy as an official website.
+rcid: 2540928717
+revid: 2464719458
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://packetra.com
+timestamp: '2026-02-20T21:24:51.537380+00:00'
+title: Q138348890
+turns: 3
+value_label: null
+verdict: verified-high

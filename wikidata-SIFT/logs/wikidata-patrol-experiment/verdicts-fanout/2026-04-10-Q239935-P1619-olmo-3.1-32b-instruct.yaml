@@ -1,0 +1,29 @@
+completion_tokens: 770
+cost_usd: 0.0036466
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15923
+property: P1619
+property_label: date of official opening
+rationale: All verified independent sources consulted indicate that the City of Arts
+  and Sciences complex officially opened in 1998, not 1864. The claim of 1864 is unsupported
+  and contradicted by multiple reliable sources. No primary or authoritative source
+  was found to corroborate the 1864 date.
+rcid: 2549884163
+revid: 2473239727
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://connectingvalencia.com/valencia/city-of-arts-and-sciences/
+- provenance: verified
+  supports_claim: false
+  url: https://www.theeasywayvalencia.com/city-of-arts-and-science
+- provenance: verified
+  supports_claim: false
+  url: https://www.tripadvisor.com/Attraction_Review-g187529-d244246-Reviews-Ciudad_de_las_Artes_y_las_Ciencias-Valencia_Province_of_Valencia_Valencian_Communi.html
+timestamp: '2026-04-10T00:17:07.280054+00:00'
+title: Q239935
+turns: 1
+value_label: null
+verdict: unverifiable

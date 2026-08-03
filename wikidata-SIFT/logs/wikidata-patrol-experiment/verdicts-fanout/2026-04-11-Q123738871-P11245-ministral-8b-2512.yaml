@@ -1,0 +1,24 @@
+completion_tokens: 1904
+cost_usd: 0.00841923
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 66871
+property: P11245
+property_label: YouTube handle
+rationale: The YouTube handle 'joshtospace' is consistent with the URL `https://www.youtube.com/@joshtospace`,
+  which suggests it is likely the correct handle for Josh Universe. However, no independently
+  verified source confirms this handle or the number of viewers (+771560) as a qualifier.
+  The lack of references and corroborating evidence prevents a higher-level verification,
+  but the handle itself is plausible based on available data.
+rcid: 2551426785
+revid: 2474727345
+sources:
+- provenance: reported
+  supports_claim: true
+  url: https://www.youtube.com/@joshtospace
+timestamp: '2026-04-11T16:16:22.603955+00:00'
+title: Q123738871
+turns: 3
+value_label: null
+verdict: plausible

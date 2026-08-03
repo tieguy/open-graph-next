@@ -1,0 +1,28 @@
+completion_tokens: 1015
+cost_usd: 0.01684956
+diff_type: rank_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 58685
+property: P154
+property_label: logo image
+rationale: The Wikimedia Commons file 'JeuxActu logo.svg' exists and appears to be
+  a simple text-based logo, but the current JeuxActu website does not use this logo
+  in its header—instead, it displays a different styled logo. This suggests the file
+  may be outdated or unofficial, making the rank change (presumably from deprecated
+  to normal, or vice versa) questionable without clear evidence that this specific
+  logo image is the correct current logo for the entity.
+rcid: 2540972292
+revid: 2464759478
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:JeuxActu_logo.svg
+- provenance: verified
+  supports_claim: false
+  url: https://www.jeuxactu.com/
+timestamp: '2026-02-20T03:04:16.080275+00:00'
+title: Q3178208
+turns: 8
+value_label: null
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 1354
+cost_usd: 0.0061216000000000005
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26546
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The only provided reference is a general paper about Wikipedia censorship
+  and does not discuss Christian Bois or his language abilities. Independent web searches
+  did not yield any reliable sources confirming or denying that Christian Bois speaks,
+  writes, or signs in English. Therefore, the claim cannot be verified.
+rcid: 2540943566
+revid: 2464732926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zenodo.org/records/4115999
+- provenance: verified
+  supports_claim: false
+  url: https://zenodo.org/records/4290998
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Christian+Bois+languages+spoken+written+signed+English+French
+timestamp: '2026-02-20T13:02:03.062634+00:00'
+title: Q41535671
+turns: 4
+value_label: English
+verdict: unverifiable

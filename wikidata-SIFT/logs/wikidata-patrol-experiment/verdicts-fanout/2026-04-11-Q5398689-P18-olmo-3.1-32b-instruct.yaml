@@ -1,0 +1,32 @@
+completion_tokens: 897
+cost_usd: 0.0034928
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14773
+property: P18
+property_label: image
+rationale: The removed image 'Espace Pierres Folles Beaujolais 2 (mai 2020).jpg' had
+  no supporting reference and was not mentioned by Fossilea's official communications
+  or independent reporting. There is no evidence that this image was ever appropriate
+  for the item. Removing an unsourced image improves data quality and reliability.
+rcid: 2550863346
+revid: 2474186859
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mesinfos.fr/69380-saint-jean-des-vignes/la-deuxieme-saison-de-fossilea-debute-a-saint-jean-des-vignes-241904.html
+- provenance: verified
+  supports_claim: false
+  url: https://pixabay.com/fr/images/search/fossiles/
+- provenance: verified
+  supports_claim: false
+  url: https://stock.adobe.com/search?k=fossile
+- provenance: verified
+  supports_claim: false
+  url: https://unsplash.com/s/photos/fossil
+timestamp: '2026-04-11T14:10:43.028672+00:00'
+title: Q5398689
+turns: 1
+value_label: null
+verdict: verified-high

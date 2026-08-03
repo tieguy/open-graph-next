@@ -1,0 +1,30 @@
+completion_tokens: 1799
+cost_usd: 0.00145906875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12293
+property: P18
+property_label: image
+rationale: The new image value "2021 Nissan Armada SV 2WD in Brilliant Silver Metallic,
+  front left.jpg" is supported by multiple independent and primary sources, including
+  Car and Driver and the official Nissan USA website. The old value "Nissan-Armada-2.jpg"
+  could not be verified due to the blocked domain, but the new value is well-supported
+  by reliable sources.
+rcid: 2550729446
+revid: 2474056825
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.caranddriver.com/photos/g69307460/2026-nissan-armada-nismo-drive-gallery/
+- provenance: verified
+  supports_claim: true
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/armada/gallery/exterior.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/armada/gallery/interior.html
+timestamp: '2026-04-11T06:42:19.327418+00:00'
+title: Q611158
+turns: 1
+value_label: null
+verdict: verified-high

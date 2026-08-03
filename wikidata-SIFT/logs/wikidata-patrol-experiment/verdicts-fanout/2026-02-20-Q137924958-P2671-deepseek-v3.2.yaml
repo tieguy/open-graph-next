@@ -1,0 +1,35 @@
+completion_tokens: 1737
+cost_usd: 0.020487659999999998
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 135332
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The Google Knowledge Graph ID /g/11x_1wz8m8 cannot be verified using public
+  search tools. Attempts to search for this specific ID, the person in question, and
+  their Google Knowledge Graph information yielded no independent sources confirming
+  the identifier. The other claims on the item (place of birth, date of birth) cite
+  the same personal website, which cannot be considered an authoritative source for
+  verifying an external database ID. Without a method to directly verify the ID against
+  Google's system, the claim remains unverifiable.
+rcid: 2540953516
+revid: 2464742009
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%22%2Fg%2F11x_1wz8m8%22
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%22Manvik+Chandra%22+%22Google+Knowledge+Graph%22
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=%22Manvik+Chandra%22+%22%2Fg%2F11x_1wz8m8%22
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+timestamp: '2026-02-20T07:50:50.862236+00:00'
+title: Q137924958
+turns: 15
+value_label: null
+verdict: unverifiable

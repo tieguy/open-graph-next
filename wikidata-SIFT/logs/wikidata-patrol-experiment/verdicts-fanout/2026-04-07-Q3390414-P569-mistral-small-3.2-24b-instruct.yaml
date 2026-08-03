@@ -1,0 +1,21 @@
+completion_tokens: 481
+cost_usd: 0.00442828
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 93445
+property: P569
+property_label: date of birth
+rationale: The only reference cited for the date of birth is from filmportal.de, which
+  is unreachable. No other sources could be found to confirm or contradict the claim.
+rcid: null
+revid: 2463918541
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.filmportal.de/biografie/alex-gonzalez/9764cc3bf9dc49c8869b08dcee5c4c79
+timestamp: '2026-04-07T07:54:39.640428+00:00'
+title: Q3390414
+turns: 15
+value_label: null
+verdict: unverifiable

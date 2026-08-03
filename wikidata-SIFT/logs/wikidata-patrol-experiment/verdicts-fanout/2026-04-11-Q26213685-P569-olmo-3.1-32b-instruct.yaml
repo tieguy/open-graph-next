@@ -1,0 +1,29 @@
+completion_tokens: 2007
+cost_usd: 0.0037786
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12872
+property: P569
+property_label: date of birth
+rationale: The only cited source for the date of birth could not be accessed, and
+  no other reliable, independently verifiable sources provide a date of birth for
+  Kadambari Jethwani. Therefore, the removal of the '30 April 1987' date of birth
+  is justified due to lack of substantiation from accessible evidence.
+rcid: null
+revid: 2463100359
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kadambari_Jethwani
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.nmc.org.in/information-desk/indian-medical-register/
+- provenance: reported
+  supports_claim: false
+  url: https://chiloka.com/celebrity/kadambari-jethwani
+timestamp: '2026-04-11T18:49:03.804426+00:00'
+title: Q26213685
+turns: 1
+value_label: null
+verdict: verified-high

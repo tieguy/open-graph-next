@@ -1,0 +1,26 @@
+completion_tokens: 630
+cost_usd: 0.0055778
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25999
+property: P7317
+property_label: iHeart artist ID
+rationale: The primary source for the iHeart artist ID does not correspond to Josh
+  Universe, but rather to a different artist named Josh Blue. There is no evidence
+  supporting the use of '45306804' as the iHeart artist ID for Josh Universe. Therefore,
+  the qualifier is incorrect.
+rcid: 2551429781
+revid: 2474729721
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.iheart.com/artist/josh-blue-2765/
+- provenance: verified
+  supports_claim: false
+  url: https://fit.academia.edu/JoshUniverse
+timestamp: '2026-04-10T10:14:23.178670+00:00'
+title: Q123738871
+turns: 1
+value_label: null
+verdict: incorrect

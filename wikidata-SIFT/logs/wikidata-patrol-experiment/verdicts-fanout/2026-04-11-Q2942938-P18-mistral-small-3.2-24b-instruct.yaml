@@ -1,0 +1,25 @@
+completion_tokens: 1621
+cost_usd: 0.00298652
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37649
+property: P18
+property_label: image
+rationale: Both the old and new images are relevant to the Seu Nova (New Cathedral
+  of Lleida). The new image is more recent and appears to be a valid replacement for
+  the old image.
+rcid: 2550981938
+revid: 2474301181
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Special:Search?search=Lleida%2C+Catedral+Nova-PM+13013.jpg
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Special:Search?search=FP+Lleida+Cathedral+2026+-+Main+Façade.jpg
+timestamp: '2026-04-11T14:21:49.821225+00:00'
+title: Q2942938
+turns: 3
+value_label: null
+verdict: verified-high

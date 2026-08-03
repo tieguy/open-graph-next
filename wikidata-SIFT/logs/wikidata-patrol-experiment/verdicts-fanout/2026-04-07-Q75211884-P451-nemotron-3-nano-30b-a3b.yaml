@@ -1,0 +1,25 @@
+completion_tokens: 717
+cost_usd: 0.00703325
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 137797
+property: P451
+property_label: unmarried partner
+rationale: The removal of "unmarried partner" for Nicki Nicole appears correct and
+  supported. The cited reference in the removed claim directed to a news article confirming
+  Nicki Nicole's relationship with Lamine Yamal, indicating she was in a relationship
+  during the claimed timeframe rather than being in an unmarried partner status. Additionally,
+  other sources confirm her relationship with Lamine Yamal, effectively corroborating
+  the alignment of their timelines and supporting the justification for removal.
+rcid: 2551416198
+revid: 2474718565
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rpp.pe/famosos/celebridades/lamine-yamal-confirma-relacion-con-nicki-nicole-en-el-cumpleanos-de-la-cantante-argentina-con-foto-romantica-noticia-1652120?viz=amp
+timestamp: '2026-04-07T07:03:08.281330+00:00'
+title: Q75211884
+turns: 15
+value_label: Pablo lescano
+verdict: verified-high

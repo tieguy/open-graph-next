@@ -1,0 +1,33 @@
+completion_tokens: 1812
+cost_usd: 0.00629217
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51861
+property: P1971
+property_label: number of children
+rationale: The claim that Frank Sheeran had 5 children is not supported by the evidence.
+  The most detailed and reliable source, GreatCinema.fandom.com, explicitly lists
+  four daughters by name. Other sources either mention three or four children but
+  do not provide definitive proof of five. The claim of five children is inconsistent
+  with the available evidence and is therefore incorrect.
+rcid: 2550069182
+revid: 2473416119
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://heavy.com/news/2019/11/frank-sheerans-daughters-today-where-are-they-now/
+- provenance: reported
+  supports_claim: false
+  url: https://www.irishcentral.com/opinion/others/real-tragedy-irishmans-tale-irish-women
+- provenance: reported
+  supports_claim: false
+  url: https://greatcinema.fandom.com/wiki/Frank_Sheeran
+- provenance: reported
+  supports_claim: false
+  url: https://www.menshealth.com/entertainment/a30107469/frank-sheeran-the-irishman/
+timestamp: '2026-04-10T14:05:41.575512+00:00'
+title: Q476443
+turns: 3
+value_label: null
+verdict: incorrect

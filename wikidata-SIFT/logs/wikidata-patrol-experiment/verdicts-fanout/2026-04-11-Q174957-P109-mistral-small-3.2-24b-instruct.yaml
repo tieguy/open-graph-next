@@ -1,0 +1,35 @@
+completion_tokens: 2538
+cost_usd: 0.016198631249999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 164377
+property: P109
+property_label: signature
+rationale: The old value 'Nina Simone signature.svg' is supported by multiple sources,
+  including the Rock & Roll Hall of Fame and auction listings. The new value 'Cacá.jpg'
+  lacks any verifiable connection to Nina Simone. Therefore, the change from 'Nina
+  Simone signature.svg' to 'Cacá.jpg' is incorrect.
+rcid: null
+revid: 2471466421
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Nina_Simone_signature.svg
+- provenance: verified
+  supports_claim: true
+  url: https://www.billboard.com/music/rock/2018-rock-roll-hall-of-fame-inductees-8070293/
+- provenance: verified
+  supports_claim: false
+  url: https://www.blackpast.org/african-american-history/simone-nina-1933-2003/
+- provenance: verified
+  supports_claim: true
+  url: https://www.rrauction.com/auctions/lot-detail/340455205464314-nina-simone-signature/
+- provenance: verified
+  supports_claim: true
+  url: https://www.schubertiademusic.com/products/8616-simone-nina-1933-2003-autograph-signature
+timestamp: '2026-04-11T09:31:27.468747+00:00'
+title: Q174957
+turns: 8
+value_label: null
+verdict: incorrect

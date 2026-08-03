@@ -1,0 +1,27 @@
+completion_tokens: 1208
+cost_usd: 0.01678977
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 182929
+property: P154
+property_label: logo image
+rationale: The edit changes the logo image for the item labeled 'Roblox' from 'Rocket
+  League logo.svg' to 'Roblox logo.svg'. The official Roblox press kit confirms the
+  availability of a 'Roblox logo pack', and independent sources such as Seeklogo provide
+  visual evidence of the Roblox logo. The change aligns with the item's identity and
+  official branding, and there is no conflicting evidence found.
+rcid: null
+revid: 2471694386
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://about.roblox.com/press-kit
+- provenance: verified
+  supports_claim: true
+  url: https://icons8.com/icons/set/roblox-logo
+timestamp: '2026-04-10T13:31:09.426100+00:00'
+title: Q20031743
+turns: 8
+value_label: null
+verdict: verified-high

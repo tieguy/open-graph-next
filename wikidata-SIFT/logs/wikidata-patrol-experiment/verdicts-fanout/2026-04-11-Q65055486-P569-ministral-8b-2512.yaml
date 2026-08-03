@@ -1,0 +1,27 @@
+completion_tokens: 2262
+cost_usd: 0.00371739
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42425
+property: P569
+property_label: date of birth
+rationale: The edit changes the birth date of Gholamreza Soleimani from January 1,
+  1964, to May 4, 1964. Despite prefetched references and searches, no verified independent
+  source confirms the exact date of May 4, 1964. The only prefetched source (Al Jazeera)
+  only confirms the birth year as 1964 without specifying the exact date. The original
+  Wikipedia reference (P143) is unreachable, and no other verified sources support
+  the new date. The US Treasury records contradict the Wikidata values by listing
+  the birth year as 1965, further complicating verification. Without direct evidence
+  from a verified source, the change cannot be confirmed.
+rcid: 2549965120
+revid: 2473316060
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.aljazeera.com/features/2026/3/17/who-is-gholamreza-soleimani-the-commander-of-irans-basij-forces
+timestamp: '2026-04-11T18:26:56.074573+00:00'
+title: Q65055486
+turns: 4
+value_label: null
+verdict: unverifiable

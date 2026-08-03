@@ -1,0 +1,22 @@
+completion_tokens: 901
+cost_usd: 0.00220944
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19671
+property: P856
+property_label: official website
+rationale: The URL provided in the edit is confirmed to be the official website for
+  St. Philippus (Munich) through direct verification. The content of the website supports
+  the claim, and no contradictory evidence was found.
+rcid: 2540920828
+revid: 2464711857
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.pfarrverband-laim.de/st-philippus/home/
+timestamp: '2026-02-21T00:59:15.470463+00:00'
+title: Q132198063
+turns: 3
+value_label: null
+verdict: verified-high

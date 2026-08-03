@@ -1,0 +1,37 @@
+completion_tokens: 2259
+cost_usd: 0.0621
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 50805
+property: P19
+property_label: place of birth
+rationale: This edit is demonstrably incorrect. The Stolpersteine Berlin memorial
+  page, which I fetched directly, explicitly states 'Born 17 September 1922 in Mannheim.'
+  Multiple independent authoritative sources (Holocaust Memorial Museum, Yad Vashem,
+  EHRI Portal, encyclopedia entries) all unanimously confirm Marianne Cohn was born
+  in Mannheim, Germany—not at Tottenham Hotspur F.C., a London football club. The
+  claim is factually false and should be reverted immediately.
+rcid: 2540926102
+revid: 2464716870
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.stolpersteine-berlin.de/en/wulfila-ufer/52/marianne-cohn
+- provenance: reported
+  supports_claim: false
+  url: https://collections.ushmm.org/search/catalog/pa1140445
+- provenance: reported
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/cohn-marianne-1921-1944
+- provenance: reported
+  supports_claim: false
+  url: https://wwv.yadvashem.org/yv/en/exhibitions/last-letters/1944/cohn_marianne.asp
+- provenance: reported
+  supports_claim: false
+  url: https://resistanceheroines.blogspot.com/2015/09/marianne-cohn-1922-1944.html
+timestamp: '2026-02-20T22:18:37.417364+00:00'
+title: Q75463
+turns: 3
+value_label: Tottenham Hotspur F.C.
+verdict: incorrect

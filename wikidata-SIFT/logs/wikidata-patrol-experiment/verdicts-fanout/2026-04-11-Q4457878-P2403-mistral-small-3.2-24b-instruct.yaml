@@ -1,0 +1,22 @@
+completion_tokens: 226
+cost_usd: 0.009422756249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 104172
+property: P2403
+property_label: total assets
+rationale: The investigation was unable to verify the claim due to search errors and
+  the inability to fetch relevant sources. No sources were successfully retrieved
+  to confirm or refute the change in total assets for T-Bank.
+rcid: 2550547031
+revid: 2473880220
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.macrotrends.net/stocks/charts/TD/toronto-dominion-bank/total-assets
+timestamp: '2026-04-11T05:33:47.006720+00:00'
+title: Q4457878
+turns: 4
+value_label: null
+verdict: unverifiable

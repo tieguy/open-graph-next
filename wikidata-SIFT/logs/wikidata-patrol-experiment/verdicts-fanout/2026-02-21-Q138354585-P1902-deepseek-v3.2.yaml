@@ -1,0 +1,38 @@
+completion_tokens: 4039
+cost_usd: 0.03898674
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 150760
+property: P1902
+property_label: Spotify artist ID
+rationale: The Spotify artist ID '7BdNAO2RTQfDWiRJkrrsHE' is confirmed as Bella Hue's
+  correct ID on Spotify. The artist page describes her as a DJ/producer from Las Vegas,
+  matching the Wikidata item's description and place of birth. The '?si=I9cJUuYDSEKebAV0uVHPRA'
+  portion is a sharing parameter that Spotify adds to URLs; Wikidata's pattern matching
+  automatically strips such query parameters, so the edit effectively sets the correct
+  ID. Multiple independent sources confirm Bella Hue's identity and her presence on
+  Spotify with this ID.
+rcid: 2541055668
+revid: 2464837878
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://open.spotify.com/artist/7BdNAO2RTQfDWiRJkrrsHE
+- provenance: verified
+  supports_claim: true
+  url: https://linktr.ee/BellaHue
+- provenance: verified
+  supports_claim: true
+  url: https://www.dubstepfbi.com/post/premiere-bella-hue-kumera-infuse-apex-legends-into-dubstep-smash-marked
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property:P1902
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Property_talk:P1902
+timestamp: '2026-02-21T04:01:27.202234+00:00'
+title: Q138354585
+turns: 14
+value_label: null
+verdict: verified-high

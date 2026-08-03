@@ -1,0 +1,26 @@
+completion_tokens: 1775
+cost_usd: 0.0035484
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12417
+property: P1889
+property_label: different from
+rationale: There are at least two distinct individuals named 'Eriko Miura' in Japan,
+  with different professions and birth years. The edit clarifies the 'different from'
+  relationship by adding a criterion, which is necessary due to the ambiguity of the
+  name. Independent sources confirm the existence of both individuals.
+rcid: 2550576467
+revid: 2473908558
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/三浦恵理子
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Eriko_Miura_(idol)
+timestamp: '2026-04-11T06:50:31.967282+00:00'
+title: Q11356527
+turns: 1
+value_label: Eriko Miura
+verdict: verified-high

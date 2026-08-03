@@ -1,0 +1,21 @@
+completion_tokens: 772
+cost_usd: 0.05164299999999999
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 255899
+property: P105
+property_label: taxon rank
+rationale: The edit claims that the taxon rank for Common Kestrel (Falco tinnunculus)
+  is 'species'. While the Wikidata item is structured to reflect this, I was unable
+  to independently verify the cited references (e.g., ITIS, IOC World Bird List) due
+  to fetch failures or lack of accessible content. Without confirmation from authoritative
+  taxonomic sources, the claim cannot be verified at this time.
+rcid: null
+revid: 2464396670
+sources: []
+timestamp: '2026-04-07T06:49:54.799723+00:00'
+title: Q26490
+turns: 12
+value_label: species
+verdict: unverifiable

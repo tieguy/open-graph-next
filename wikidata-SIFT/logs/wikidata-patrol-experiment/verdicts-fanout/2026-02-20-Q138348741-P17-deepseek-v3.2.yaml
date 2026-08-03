@@ -1,0 +1,37 @@
+completion_tokens: 1608
+cost_usd: 0.0238084
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 87436
+property: P17
+property_label: country
+rationale: The claim that Q138348741 (Team Artandshow/Team Building PACA) is located
+  in France is strongly supported by multiple independent verified sources. The company's
+  own website (team-building-paca.fr) explicitly operates in the Provence-Alpes-Côte
+  d'Azur region of France, listing French cities like Avignon, Aix-en-Provence, and
+  Baux-de-Provence. The French government business registry (annuaire-entreprises.data.gouv.fr)
+  confirms the legal entity 'Association Team Artandshow' is registered in Cavaillon,
+  France with SIREN 848416657. The cited reference (lesbauxdeprovence.com) also mentions
+  the company operating in French locations. The consistency across primary official
+  sources provides high confidence that the country claim is correct.
+rcid: 2540935698
+revid: 2464726015
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.lesbauxdeprovence.com/preparer/vos-evenements/
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/
+- provenance: reported
+  supports_claim: true
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/association-team-artandshow-848416657
+- provenance: verified
+  supports_claim: true
+  url: https://www.northdata.com/Association%20Team%20Artandshow,%20Cavaillon/Siren%20848416657
+timestamp: '2026-02-20T17:07:57.477224+00:00'
+title: Q138348741
+turns: 9
+value_label: France
+verdict: verified-high

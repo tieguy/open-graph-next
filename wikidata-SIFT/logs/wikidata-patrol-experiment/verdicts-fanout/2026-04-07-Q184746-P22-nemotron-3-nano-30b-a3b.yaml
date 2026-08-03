@@ -1,0 +1,31 @@
+completion_tokens: 754
+cost_usd: 0.00245755
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 46135
+property: P22
+property_label: father
+rationale: Geni.com, Livescience, and Britannica biographies confirm Jane Goodall's
+  biological father was Mortimer Morris-Goodall. Jeffrey Epstein was a convicted sex
+  offender who died in 2019 and had no documented relationship with Dr. Goodall or
+  her family. The edit replacing her actual father with Epstein appears to be false
+  and potentially confused with discredited conspiracy theories. This constitutes
+  a clear incorrect edit that should be reverted.
+rcid: null
+revid: 2472081214
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.geni.com/people/jane-goodall-184746
+- provenance: verified
+  supports_claim: false
+  url: https://www.livescience.com/jane-goodall-biography.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Jane-Goodall
+timestamp: '2026-04-07T08:33:19.901610+00:00'
+title: Q184746
+turns: 1
+value_label: Jeffrey Epstein
+verdict: incorrect

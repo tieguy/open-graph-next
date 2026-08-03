@@ -1,0 +1,29 @@
+completion_tokens: 1719
+cost_usd: 0.0038752
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14219
+property: P106
+property_label: occupation
+rationale: The edit changed Francisco Luque's occupation from 'sculptor', which is
+  well-supported by Wikipedia and multiple art sources, to 'subnormal number', a mathematical
+  concept unrelated to him. No evidence links Luque to this concept, and all available
+  information confirms his occupation as a sculptor. The change is therefore incorrect.
+rcid: null
+revid: 2460300984
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Francisco_Luque&oldid=916830026
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Subnormal_number
+- provenance: verified
+  supports_claim: false
+  url: https://radaris.com/p/Francisco/Luque/
+timestamp: '2026-04-11T12:37:15.858705+00:00'
+title: Q5483608
+turns: 1
+value_label: subnormal number
+verdict: incorrect

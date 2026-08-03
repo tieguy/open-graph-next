@@ -1,0 +1,36 @@
+completion_tokens: 2972
+cost_usd: 0.149533
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 134673
+property: P138
+property_label: named after
+rationale: The edit claims ChatGPT Atlas is 'named after' ChatGPT (the AI product).
+  However, multiple verified sources confirm the 'Atlas' component derives from Greek
+  mythology—specifically the Titan Atlas, who carries the world on his shoulders.
+  This name is used as a metaphor for carrying the entire web experience. While the
+  full product name includes 'ChatGPT' for branding purposes (since it integrates
+  ChatGPT), the naming etymology itself is mythological, not derived from the ChatGPT
+  product. The item previously contained a more accurate claim (P138=Q162827, 'atlas'),
+  which this edit replaced with a less accurate one.
+rcid: 2540965537
+revid: 2464753158
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cnbc.com/2025/10/21/openai-browser-alphabet-stock.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.didomi.io/blog/atlas-browser-openai-end-free-consent
+- provenance: verified
+  supports_claim: false
+  url: https://barbarosozturk.com/blog/openais-atlas-cant-disrupt-google-chrome-but-the-next-platform-shift-will/
+- provenance: verified
+  supports_claim: false
+  url: https://spyglass.org/chatgpt-atlas-ai-browser/
+timestamp: '2026-02-20T03:52:17.716182+00:00'
+title: Q136549314
+turns: 7
+value_label: ChatGPT
+verdict: incorrect

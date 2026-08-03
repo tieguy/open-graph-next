@@ -1,0 +1,31 @@
+completion_tokens: 2119
+cost_usd: 0.00374751
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29060
+property: P364
+property_label: original language of film or TV show
+rationale: The edit correctly changes the original language of *The Man Who Sold His
+  Skin* from Flemish Dutch (unsupported by credible sources) to Arabic, which is strongly
+  supported by primary sources like Fi Kalam and Netflix. The film’s narrative and
+  cultural context align with Arabic as a primary language. No evidence supports Flemish
+  Dutch, making this a justified and accurate edit. The qualifier 'rarely' is plausible
+  given the film’s multilingual dialogue.
+rcid: null
+revid: 2471382618
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.fikalam.com/arabic-movies/the-man-who-sold-his-skin
+- provenance: verified
+  supports_claim: true
+  url: https://www.netflix.com/eg-en/title/81435380
+- provenance: verified
+  supports_claim: false
+  url: https://www.gencat.cat/llengua/cinema/film.html?film=35625
+timestamp: '2026-04-11T12:58:24.607956+00:00'
+title: Q88465322
+turns: 1
+value_label: Arabic
+verdict: verified-high

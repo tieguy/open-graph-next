@@ -1,0 +1,28 @@
+completion_tokens: 2124
+cost_usd: 0.00721053
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 58593
+property: P856
+property_label: official website
+rationale: The old official website value, 'https://www.city.tonami.toyama.jp/', was
+  verified as the correct official municipal website for Tonami City. The new value,
+  'https://www.koreanair.com/', is the official website for Korean Air, an airline,
+  and is unrelated to Tonami City. The edit replaced a correct and relevant official
+  website with an unrelated one, which is clearly incorrect. No references or evidence
+  support the new value.
+rcid: null
+revid: 2471589497
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.tonami.toyama.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.koreanair.com/
+timestamp: '2026-04-11T17:19:49.259217+00:00'
+title: Q526760
+turns: 3
+value_label: null
+verdict: incorrect

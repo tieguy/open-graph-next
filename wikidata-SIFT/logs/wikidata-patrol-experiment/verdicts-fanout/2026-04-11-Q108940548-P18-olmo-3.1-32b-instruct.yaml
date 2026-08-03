@@ -1,0 +1,29 @@
+completion_tokens: 1788
+cost_usd: 0.003548
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12376
+property: P18
+property_label: image
+rationale: No independent, reliable sources confirm that either the old or new image
+  is correct for Hennickendorf railway halt. Neither filename appears in third-party
+  sources or the Wikipedia article, and no references were provided with the edit.
+  This edit appears to be an unreferenced, speculative change.
+rcid: 2550678470
+revid: 2474007554
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://de.wikipedia.org/wiki/Hennickendorf
+- provenance: verified
+  supports_claim: false
+  url: https://www.susudata.de/messtisch/openstreetmap.html?lat=52.50815&lng=13.855562&opa=0.25&zoom=17&baselayer=Esri%20WorldImagery&overlays=tk25%2C
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/old-railway-station-halt.html
+timestamp: '2026-04-11T13:00:39.280407+00:00'
+title: Q108940548
+turns: 1
+value_label: null
+verdict: suspect

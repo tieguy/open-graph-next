@@ -1,0 +1,27 @@
+completion_tokens: 1361
+cost_usd: 0.012607740000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 130429
+property: P1813
+property_label: short name
+rationale: The prefetched reference from the EU Transparency Register does not mention
+  'Vignerons indépendants de France' directly but refers to 'Confédération Européenne
+  des Vignerons Indépendants (CEVI)'. The official website mentions 'Vignerons Indépendants
+  de France' but does not explicitly confirm 'VIF' as a short name. The search attempts
+  were unsuccessful due to errors, limiting the verification process.
+rcid: 2550567726
+revid: 2473900154
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/confédération-européenne-des-vignerons-indépendants?rid=424179021711-46
+- provenance: verified
+  supports_claim: false
+  url: https://en.resa-vignerons-independants.com/about-us
+timestamp: '2026-04-11T05:51:33.611145+00:00'
+title: Q1581683
+turns: 13
+value_label: null
+verdict: verified-low

@@ -1,0 +1,24 @@
+completion_tokens: 1513
+cost_usd: 0.01899654
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 164907
+property: P12873
+property_label: ArchWiki article
+rationale: The removed claim asserted the existence of a Portuguese ArchWiki article
+  titled 'Apache_HTTP_Server_(Português)' for Apache HTTP Server, but no references
+  were provided. ArchWiki does not have a dedicated Portuguese-language wiki, and
+  no evidence supports the existence of such an article. The lack of references and
+  independent corroboration makes the claim suspect.
+rcid: 2550202522
+revid: 2473545336
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wiki.archlinux.org/
+timestamp: '2026-04-11T16:58:30.169130+00:00'
+title: Q11354
+turns: 6
+value_label: null
+verdict: suspect

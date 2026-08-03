@@ -1,0 +1,28 @@
+completion_tokens: 2146
+cost_usd: 0.00372288
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35320
+property: P1441
+property_label: present in work
+rationale: The edit incorrectly changed the claim that James Rhodes (Don Cheadle)
+  was present in *Iron Man* (2008). Independent sources confirm that James Rhodes
+  was portrayed by Terrence Howard in *Iron Man* (2008) and by Don Cheadle in *Iron
+  Man 2* and *Iron Man 3*. The new value conflates two different actors and is therefore
+  incorrect. The old value ('Iron Man 2') was correct, and no references were provided
+  to support the edit.
+rcid: 2550976153
+revid: 2474295530
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ironman.fandom.com/wiki/James_Rhodes_(Earth-199999)
+- provenance: verified
+  supports_claim: false
+  url: https://marvel.fandom.com/wiki/James_Rhodes_(Earth-616)
+timestamp: '2026-04-11T06:52:55.306362+00:00'
+title: Q23895040
+turns: 3
+value_label: Iron Man
+verdict: incorrect

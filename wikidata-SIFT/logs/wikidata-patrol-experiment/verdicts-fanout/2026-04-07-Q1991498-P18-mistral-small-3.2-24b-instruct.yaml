@@ -1,0 +1,23 @@
+completion_tokens: 450
+cost_usd: 0.0019387187500000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21009
+property: P18
+property_label: image
+rationale: The image 'Tara Brawl Stars Info.png' is unrelated to Josep Maria Guzmán,
+  as it pertains to a character from the mobile game Brawl Stars. The reference to
+  the Italian Wikipedia does not support this image change, and independent searches
+  confirm the discrepancy.
+rcid: 2550213778
+revid: 2473556232
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://it.wikipedia.org/wiki/Josep_Maria_Guzmán
+timestamp: '2026-04-07T06:34:35.876623+00:00'
+title: Q1991498
+turns: 2
+value_label: null
+verdict: incorrect

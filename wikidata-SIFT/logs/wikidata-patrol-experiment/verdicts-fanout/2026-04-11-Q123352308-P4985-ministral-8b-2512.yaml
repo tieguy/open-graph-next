@@ -1,0 +1,39 @@
+completion_tokens: 1147
+cost_usd: 0.00433311
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25254
+property: P4985
+property_label: TMDB person ID
+rationale: The edit adds a reference timestamp (P813) for the TMDB person ID claim
+  (P4985) for Mariella Tripke, but no direct source (e.g., TMDB profile page or API
+  confirmation) is cited or fetched to verify the ID `3165195`. Attempts to search
+  for independent verification of the TMDB ID failed due to a payment wall (402 error),
+  and prefetched references did not include TMDB-related content. Without direct access
+  to TMDB's API or profile page for Mariella Tripke, it is impossible to confirm whether
+  the ID `3165195` is accurate or belongs to the correct individual. The added reference
+  is insufficient to support the claim.
+rcid: 2550351039
+revid: 2473689813
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/talk/5d614ae27f6c8d0017ece800
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/talk/5fb00ec9a22d3e0041034d2e
+- provenance: verified
+  supports_claim: false
+  url: https://www.themoviedb.org/talk/602622e8c5ada5004080c426
+timestamp: '2026-04-11T09:21:12.346553+00:00'
+title: Q123352308
+turns: 2
+value_label: null
+verdict: unverifiable

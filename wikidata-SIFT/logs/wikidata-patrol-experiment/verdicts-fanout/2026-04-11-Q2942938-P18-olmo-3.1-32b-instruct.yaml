@@ -1,0 +1,28 @@
+completion_tokens: 1567
+cost_usd: 0.0042807999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16703
+property: P18
+property_label: image
+rationale: The change from the old to the new image for Seu Nova is attributed to
+  Spanish Wikipedia via a cited reference, but direct verification of the Wikipedia
+  source was not possible. No independent, verified source confirms that the new image
+  is the current or preferred official image of the cathedral. The edit may be reasonable
+  if the new image is more current, but without explicit confirmation, the claim cannot
+  be verified.
+rcid: 2550981938
+revid: 2474301181
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tools.wmflabs.org/heritage/api/api.php?action=search&format=json&srcountry=es&srlang=es&srid=RI-51-0010177
+- provenance: verified
+  supports_claim: false
+  url: https://docs.nova.app/extensions/images/
+timestamp: '2026-04-11T14:22:00.715066+00:00'
+title: Q2942938
+turns: 1
+value_label: null
+verdict: unverifiable

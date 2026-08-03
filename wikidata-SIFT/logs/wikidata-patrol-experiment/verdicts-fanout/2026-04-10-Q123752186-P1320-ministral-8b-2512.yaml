@@ -1,0 +1,28 @@
+completion_tokens: 2194
+cost_usd: 0.0053716200000000006
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 45342
+property: P1320
+property_label: OpenCorporates ID
+rationale: 'The OpenCorporates ID ''be/0798896453'' for SYENSQO (Q123752186) is independently
+  verified by two Belgian business registries: NorthData and CompanyWeb. Both confirm
+  the KBO/VAT number ''0798.896.453'' for SYENSQO, matching the OpenCorporates ID
+  format. The jurisdiction qualifier (Belgium) aligns with SYENSQO''s headquarters
+  and Belgian legal registration. OpenCorporates is a trusted primary source for company
+  identifiers, and the ID is consistent with Belgian legal requirements.'
+rcid: 2551397408
+revid: 2474701517
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.northdata.com/Syensqo+N.V.,+Bruxelles/KBO+0798.896.453
+- provenance: verified
+  supports_claim: true
+  url: https://www.companyweb.be/en/0798896453/syensqo
+timestamp: '2026-04-10T14:07:09.642070+00:00'
+title: Q123752186
+turns: 3
+value_label: null
+verdict: verified-high

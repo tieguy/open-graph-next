@@ -1,0 +1,31 @@
+completion_tokens: 1943
+cost_usd: 0.003757
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12956
+property: P373
+property_label: Commons category
+rationale: The edit replaces a well-established Commons category 'Hindu goddesses'
+  with an opaque identifier that is not recognized as a valid Commons category in
+  any public source. The cited reference (English Wikipedia) does not support this
+  change, and independent web searches found no evidence for the identifier's validity.
+  This suggests the edit is likely incorrect and may have been made in error or as
+  vandalism.
+rcid: null
+revid: 2470687341
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Devi
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Hindu_goddesses
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-11T16:31:57.116620+00:00'
+title: Q494511
+turns: 1
+value_label: null
+verdict: suspect

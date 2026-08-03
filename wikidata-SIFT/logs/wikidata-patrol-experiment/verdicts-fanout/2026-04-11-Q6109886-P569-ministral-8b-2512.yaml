@@ -1,0 +1,38 @@
+completion_tokens: 2270
+cost_usd: 0.00183486
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16158
+property: P569
+property_label: date of birth
+rationale: The edit changes Roberto Musso's date of birth from 20 November 1961 to
+  6 July 1967. The only cited reference URL is unreachable, and no independent verified
+  sources confirm either date. While the new date (1967) aligns better with contextual
+  clues (e.g., education timeline), no reliable evidence supports it. The absence
+  of verifiable sources and the edit's reversal by the community justify the 'unverifiable'
+  verdict.
+rcid: 2551399572
+revid: 2474703388
+sources:
+- provenance: verified
+  summary: Reference URL is unreachable; cannot verify claim.
+  supports_claim: false
+  url: https://happyhappybirthday.net/es/age/roberto-musso-person_gealqqg
+- provenance: verified
+  supports_claim: false
+  url: https://rateyourmusic.com/artist/roberto-musso
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/roberto-musso.html
+- provenance: verified
+  supports_claim: false
+  url: https://marvin.com.mx/el-cuarteto-de-nos-entrevista-roberto-daniel-musso/
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/roberto-musso/profil/trainer/41193
+timestamp: '2026-04-11T13:40:50.608020+00:00'
+title: Q6109886
+turns: 1
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,24 @@
+completion_tokens: 782
+cost_usd: 0.0039264074999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40943
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Mizuho, Gifu from https://www.city.mizuho.lg.jp/
+  to https://www.evaair.com. The current official website of Mizuho, Gifu is https://www.city.mizuho.lg.jp/,
+  which provides accurate and reliable information about the city. In contrast, https://www.evaair.com
+  is the official website for EVA Air, a Taiwanese airline, and is not related to
+  Mizuho, Gifu. The edit appears to be a mistake or an attempt to vandalize the entry.
+rcid: null
+revid: 2471369644
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.mizuho.lg.jp/
+timestamp: '2026-04-07T12:04:50.583238+00:00'
+title: Q782103
+turns: 5
+value_label: null
+verdict: incorrect

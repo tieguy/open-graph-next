@@ -1,0 +1,26 @@
+completion_tokens: 1394
+cost_usd: 0.021178156249999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 222183
+property: P2032
+property_label: end of work period
+rationale: The edit claims that Shaun Tan's end of work period is 67 CE, which is
+  implausible given that he was born in 1974. The cited source is unreachable, and
+  independent sources indicate that Shaun Tan is actively working. Therefore, the
+  edit is incorrect.
+rcid: null
+revid: 2468965926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.shauntan.net/about
+- provenance: verified
+  supports_claim: false
+  url: https://www.rkdartists.nl/en/explore/artists/shaun-tan-373526
+timestamp: '2026-04-07T04:25:07.463657+00:00'
+title: Q588933
+turns: 11
+value_label: null
+verdict: incorrect

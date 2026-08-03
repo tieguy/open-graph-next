@@ -1,0 +1,31 @@
+completion_tokens: 1504
+cost_usd: 0.0101771
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 97259
+property: P3295
+property_label: code
+rationale: The investigation did not yield clear evidence to confirm or deny the correctness
+  of the updated code for LimbiCODE. The lack of references and independent verification
+  makes it difficult to assess the accuracy of the edit.
+rcid: 2540936661
+revid: 2464726775
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.iflk.ch/
+- provenance: verified
+  supports_claim: false
+  url: https://www.swissreg.ch/database-client/register/detail?type=trademark&lang=en&no=62215%2F2011
+- provenance: verified
+  supports_claim: false
+  url: https://mvri.de/
+- provenance: verified
+  supports_claim: false
+  url: https://swiss-insights.ch/wp-content/uploads/2020/05/MAFO2015_web.pdf
+timestamp: '2026-02-20T16:51:50.588655+00:00'
+title: Q138337548
+turns: 13
+value_label: null
+verdict: unverifiable

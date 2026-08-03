@@ -1,0 +1,34 @@
+completion_tokens: 2201
+cost_usd: null
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 151203
+property: P31
+property_label: instance of
+rationale: Multiple authoritative sources confirm Zara Larsson is a Swedish singer
+  and songwriter born in 1997, not a dolphin. The edit appears to be based on a viral
+  TikTok meme trend involving her song 'Symphony' with dolphin imagery, but this is
+  about internet culture, not biological classification. Dolphins (Delphinidae) are
+  marine mammals while Zara Larsson is clearly human (Homo sapiens). The cited Wikipedia
+  reference is invalid for Wikidata verification purposes.
+rcid: 2540985721
+revid: 2464772007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.billboard.com/artist/zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sonymusic.co.uk/artist/zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://thenightly.com.au/culture/music/zara-larsson-how-a-dolphin-meme-launched-the-pop-stars-rebrand-why-she-is-the-next-big-thing-c-21244902
+- provenance: verified
+  supports_claim: false
+  url: https://www.rollingstone.com/music/music-features/zara-larsson-dolphin-symphony-meme-clean-bandit-explained-1235098869/
+timestamp: '2026-02-19T21:51:02.342412+00:00'
+title: Q4177928
+turns: 9
+value_label: dolphin
+verdict: incorrect

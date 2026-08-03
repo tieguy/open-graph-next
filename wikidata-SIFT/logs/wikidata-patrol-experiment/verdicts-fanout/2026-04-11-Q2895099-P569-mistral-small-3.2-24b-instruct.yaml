@@ -1,0 +1,28 @@
+completion_tokens: 1323
+cost_usd: 0.00164923
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13474
+property: P569
+property_label: date of birth
+rationale: Both Transfermarkt and Fox Sports list Rubén Pérez Ortega's date of birth
+  as July 27, 1988. The new value of July 27, 1914, is not supported by any of the
+  sources consulted. The change to the new value is incorrect.
+rcid: null
+revid: 2466253044
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/ruben-perez/profil/spieler/127793
+- provenance: verified
+  supports_claim: false
+  url: https://www.foxsports.com/soccer/ruben-perez-ortega-player-bio
+- provenance: verified
+  supports_claim: false
+  url: https://fbref.com/en/players/2ea670c0/Ruben-Perez-Ortega
+timestamp: '2026-04-11T10:31:25.020436+00:00'
+title: Q2895099
+turns: 1
+value_label: null
+verdict: incorrect

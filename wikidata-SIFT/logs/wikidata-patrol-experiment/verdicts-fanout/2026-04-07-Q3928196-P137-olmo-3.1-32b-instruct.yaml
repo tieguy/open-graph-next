@@ -1,0 +1,32 @@
+completion_tokens: 1699
+cost_usd: 0.004666
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18233
+property: P137
+property_label: operator
+rationale: Multiple secondary sources confirm that 'RCA Italiana' is the correct operator
+  for RCA Milano, matching the historical and discographic context of the label. The
+  change from 'RCA Italiana S.p.A.' to 'RCA Italiana' aligns with standard naming
+  conventions for the Italian RCA subsidiary during the label's active period.
+rcid: 2551383180
+revid: 2474687781
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/label/94677-RCA-Italiana
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/label/290779-RCA-Italiana-SpA
+- provenance: reported
+  supports_claim: true
+  url: https://www.italianprog.com/l_rca.htm
+- provenance: reported
+  supports_claim: true
+  url: https://www.editricezona.it/old/storiadellarca.htm
+timestamp: '2026-04-07T01:41:33.635371+00:00'
+title: Q3928196
+turns: 2
+value_label: RCA Italiana
+verdict: verified-high

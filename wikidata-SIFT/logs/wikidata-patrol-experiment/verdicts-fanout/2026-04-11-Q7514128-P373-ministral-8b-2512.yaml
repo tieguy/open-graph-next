@@ -1,0 +1,29 @@
+completion_tokens: 1538
+cost_usd: 0.00230436
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20020
+property: P373
+property_label: Commons category
+rationale: The change from 'Silas Chatard' to 'Francis Silas Marean Chatard' as the
+  Commons category is strongly supported by the Indy Encyclopedia, which explicitly
+  states that Silas Chatard changed his name to 'Francis Silas Marean Chatard' after
+  his appointment as bishop. This aligns with the item's existing claims about his
+  full name. The old value was a generic category, while the new value accurately
+  reflects the bishop's full name after his appointment. No contradictions were found
+  in verified sources.
+rcid: 2550995876
+revid: 2474314464
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://indyencyclopedia.org/francis-silas-marean-chatard/
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Silas_Chatard
+timestamp: '2026-04-11T17:41:08.349485+00:00'
+title: Q7514128
+turns: 1
+value_label: null
+verdict: verified-high

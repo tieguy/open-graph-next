@@ -1,0 +1,36 @@
+completion_tokens: 1584
+cost_usd: 0.0027398099999999996
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22877
+property: P39
+property_label: position held
+rationale: The claim that Louis of Meissen (Q472584) held the position of Roman Catholic
+  Archbishop of Mainz (Q24024856) is strongly supported by multiple independent verified
+  sources. The edit adds a new qualifier ('replaced by') to clarify succession, which
+  aligns with historical records. Sources such as Deutsche Biographie and The Meaning
+  explicitly confirm this position, while Catholic Hierarchy, though not explicitly
+  mentioning Louis of Meissen, does not contradict the claim. The edit improves the
+  claim by adding clarity to the succession narrative without altering the core factual
+  accuracy.
+rcid: 2550979867
+revid: 2474299167
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://the-meaning.com/louis_of_meissen.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.deutsche-biographie.de/sfz54766.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.newadvent.org/cathen/09550a.htm
+- provenance: verified
+  supports_claim: false
+  url: https://catholic-hierarchy.org/diocese/dmain.html
+timestamp: '2026-04-11T15:07:19.506248+00:00'
+title: Q472584
+turns: 1
+value_label: Roman Catholic Archbishop of Mainz
+verdict: verified-high

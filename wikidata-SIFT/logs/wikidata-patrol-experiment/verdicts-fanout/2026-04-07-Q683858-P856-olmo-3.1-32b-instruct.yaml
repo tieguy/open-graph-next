@@ -1,0 +1,20 @@
+completion_tokens: 695
+cost_usd: 0.018177600000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 88803
+property: P856
+property_label: official website
+rationale: No independent, authoritative sources confirm the new official website
+  https://town.nagayo.nagasaki.jp/ for Nagayo town. The URL could not be reached and
+  no search results indicate it as the official site. Without verifiable evidence,
+  the claim cannot be confirmed or denied.
+rcid: 2550068874
+revid: 2473415816
+sources: []
+timestamp: '2026-04-07T12:56:25.149948+00:00'
+title: Q683858
+turns: 14
+value_label: null
+verdict: unverifiable

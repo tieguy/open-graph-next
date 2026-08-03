@@ -1,0 +1,28 @@
+completion_tokens: 805
+cost_usd: 0.009606899999999998
+diff_type: qualifier_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 188918
+property: P793
+property_label: significant event
+rationale: Despite extensive searches using various queries related to Jackie Robinson's
+  early baseball career, first MLB game, and Ebbets Field appearances, no reliable
+  sources were found that explicitly state or confirm Jackie Robinson's first official
+  Major League Baseball game occurred with the Brooklyn Dodgers at Ebbets Field in
+  1947. Standard historical sources like MLB.com archives, Wikipedia articles, archive.org
+  collections, and simple.wikipedia.org were inaccessible or yielded no relevant results.
+  While Jackie Robinson is widely known to have started his MLB career in 1947, the
+  specific qualifier 'Major League Baseball debut' for his 'significant event' claim
+  lacks independently verifiable evidence from accessible sources during this investigation.
+rcid: null
+revid: 2464298327
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jackie_Robinson#Early_life_and_minor-league_career
+timestamp: '2026-04-07T11:09:46.742953+00:00'
+title: Q221048
+turns: 15
+value_label: Major League Baseball debut
+verdict: unverifiable

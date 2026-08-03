@@ -1,0 +1,21 @@
+completion_tokens: 397
+cost_usd: 0.00209265
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 40265
+property: P101
+property_label: field of work
+rationale: No source with provenance of "verified" was found to support that the updated
+  field of work value "slave" (Q12773225) for Reza Pahlavi is correct.
+rcid: 2549853948
+revid: 2473210297
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q334871
+timestamp: '2026-04-07T02:40:21.011992+00:00'
+title: Q334871
+turns: 2
+value_label: slave
+verdict: unverifiable

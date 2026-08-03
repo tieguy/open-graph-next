@@ -1,0 +1,27 @@
+completion_tokens: 988
+cost_usd: 0.005700200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25537
+property: P512
+property_label: academic degree
+rationale: The user's personal homepage explicitly states that Johannes W. Dietrich
+  obtained a habilitation at Ruhr University of Bochum in 2017, directly supporting
+  the edit. This is corroborated by the presence of 'Habilitation' as an academic
+  degree on his ORCID profile. Multiple independent sources converge on the same fact,
+  confirming the correctness of the updated academic degree.
+rcid: 2550597109
+revid: 2473928375
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.wikidoc.org/index.php/User:Johannes_W._Dietrich
+- provenance: verified
+  supports_claim: true
+  url: https://orcid.org/0000-0002-1185-3549
+timestamp: '2026-04-10T07:33:09.669100+00:00'
+title: Q48800274
+turns: 1
+value_label: habilitation
+verdict: verified-high

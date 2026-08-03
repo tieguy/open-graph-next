@@ -1,0 +1,24 @@
+completion_tokens: 672
+cost_usd: 0.00695385
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 136389
+property: P19
+property_label: place of birth
+rationale: Despite online claims conflating Isbel Preysler with San Roque (e.g., 'San
+  Roque Cádiz' associations), no credible source confirms San Roque, Spain as her
+  place of birth. Searches for birthplace information yield no authoritative biographical
+  dates, municipal records, or primary sources supporting San Roque. Searches of major
+  biographical sources and islands of Spain show consistent birthplace information
+  (e.g., Manila, Philippines) but none for San Roque. Extensive searches found zero
+  verifiable sources confirming San Roque as her birthplace. Therefore, the claim
+  remains unverifiable based on available information.
+rcid: 2550296081
+revid: 2473636089
+sources: []
+timestamp: '2026-04-07T11:02:19.458999+00:00'
+title: Q437710
+turns: 15
+value_label: San Roque
+verdict: unverifiable

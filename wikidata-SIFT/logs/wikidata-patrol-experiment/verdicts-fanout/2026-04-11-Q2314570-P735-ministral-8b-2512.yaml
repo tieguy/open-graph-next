@@ -1,0 +1,28 @@
+completion_tokens: 1797
+cost_usd: 0.004897230000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43498
+property: P735
+property_label: given name
+rationale: The edit incorrectly changes the given name of Tatiana de Rosnay from an
+  unsupported value ('Vanessa') to an entirely incorrect value ('Tatiana Vilhelmová'),
+  which corresponds to a Czech actress. Authoritative sources such as Babelio, Who's
+  Who in France, and The Peerage consistently refer to her as Tatiana De Rosnay, confirming
+  that her given name is 'Tatiana'. The new value is factually wrong and does not
+  align with the item's context or verified sources.
+rcid: 2550269441
+revid: 2473610068
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Tatiana_Vilhelmov%C3%A1
+- provenance: verified
+  supports_claim: false
+  url: https://dbpedia.org/page/Tatiana_Dykov%C3%A1
+timestamp: '2026-04-11T11:37:06.638650+00:00'
+title: Q2314570
+turns: 3
+value_label: Tatiana Vilhelmová
+verdict: incorrect

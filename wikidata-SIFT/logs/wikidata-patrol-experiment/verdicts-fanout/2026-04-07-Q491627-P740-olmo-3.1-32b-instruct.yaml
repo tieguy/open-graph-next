@@ -1,0 +1,26 @@
+completion_tokens: 1015
+cost_usd: 0.0191526
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 92718
+property: P740
+property_label: location of formation
+rationale: The edit's claim that Hugo Boss was formed in Metzingen is widely reflected
+  in secondary sources such as Wikipedia, and Metzingen is consistently listed as
+  the company's headquarters. However, I could not directly fetch and verify a primary
+  authoritative source (e.g., Britannica, official Hugo Boss history) that explicitly
+  states the location of formation. The cited reference from Italian Wikipedia could
+  not be independently confirmed due to domain restrictions. Therefore, while the
+  claim is plausible and widely accepted, the evidence is indirect.
+rcid: 2549876464
+revid: 2473232274
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Hugo_Boss
+timestamp: '2026-04-07T04:08:39.820504+00:00'
+title: Q491627
+turns: 9
+value_label: Metzingen
+verdict: verified-low

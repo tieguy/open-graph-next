@@ -1,0 +1,25 @@
+completion_tokens: 1843
+cost_usd: 0.0041976900000000004
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 40862
+property: P3342
+property_label: significant person
+rationale: The claim that Stefano Angelopoulos (Q107646982) was a significant person
+  for Corona Rebellen (Q107646877) is not supported by the cited source (Süddeutsche
+  Zeitung article), which describes him as a Querdenken-Demosprecher in Freising,
+  not as a member of Corona Rebellen. No independent sources confirm his affiliation
+  with Corona Rebellen. The removal of this claim was justified as there is no credible
+  evidence supporting it.
+rcid: 2551215702
+revid: 2474528697
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-10T13:10:14.570290+00:00'
+title: Q107646877
+turns: 4
+value_label: Stefano Angelopoulos
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 1853
+cost_usd: 0.0038228000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13555
+property: P2003
+property_label: Instagram username
+rationale: The edit corrected the Instagram username from an improper full URL format
+  to the proper Wikidata handle format '/lunitheatre/'. Multiple independently verified
+  sources—including the official L'UniThéâtre website and Wikipedia—confirm that the
+  Instagram handle for UniThéâtre is @lunitheatre. Therefore, the change was both
+  correct and justified.
+rcid: 2551326120
+revid: 2474633291
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.instagram.com/lunitheatre/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lunitheatre.ca/fr/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/L%27UniTh%C3%A9%C2%80tre
+timestamp: '2026-04-11T13:03:38.774940+00:00'
+title: Q124301356
+turns: 1
+value_label: null
+verdict: verified-high

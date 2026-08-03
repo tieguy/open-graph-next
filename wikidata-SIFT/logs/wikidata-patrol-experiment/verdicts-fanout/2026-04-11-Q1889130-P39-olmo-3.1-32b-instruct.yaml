@@ -1,0 +1,30 @@
+completion_tokens: 1894
+cost_usd: 0.0049104000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18870
+property: P39
+property_label: position held
+rationale: Manegold von Neuenburg held both the bishopric of Bamberg and Würzburg
+  at different times, as confirmed by multiple reliable sources. The edit appears
+  to correctly reflect this historical fact by adding or preserving the Bamberg position.
+  However, the ambiguity in the diff regarding the status of the Würzburg position
+  means the evidence, while supportive, is not maximal.
+rcid: 2550974719
+revid: 2474294165
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://wuerzburgwiki.de/wiki/Manegold_von_Neuenburg
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Manegold_von_Neuenburg
+timestamp: '2026-04-11T12:07:00.393028+00:00'
+title: Q1889130
+turns: 1
+value_label: Roman Catholic Bishop of Bamberg
+verdict: verified-low

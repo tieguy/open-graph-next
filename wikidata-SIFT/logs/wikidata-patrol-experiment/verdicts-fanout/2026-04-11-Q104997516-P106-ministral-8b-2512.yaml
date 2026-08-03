@@ -1,0 +1,27 @@
+completion_tokens: 1489
+cost_usd: 0.0019806299999999997
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24362
+property: P106
+property_label: occupation
+rationale: The removed occupation 'actor' (Q33999) for Evi Vatidou (Q104997516) was
+  unsupported by any references and inconsistent with her other well-documented occupations
+  (television presenter, judge, model). The item's other claims align with her professional
+  identity in Greek media, and no credible evidence was found to support the 'actor'
+  claim. The removal is justified and accurate.
+rcid: 2550561811
+revid: 2473894481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/@evivatidou1
+- provenance: verified
+  supports_claim: false
+  url: https://networthpost.org/net-worth/evi-vatidou-net-worth/
+timestamp: '2026-04-11T07:49:41.911263+00:00'
+title: Q104997516
+turns: 3
+value_label: actor
+verdict: verified-high

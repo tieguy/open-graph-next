@@ -1,0 +1,32 @@
+completion_tokens: 1513
+cost_usd: 0.0063934000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27428
+property: P571
+property_label: inception
+rationale: Multiple reputable news sources independently confirm that Uber Eats was
+  launched in August 2015. No credible evidence supports an inception date in August
+  2014. Although the cited reference in the edit could not be fetched, the new value
+  is verified by independent reporting.
+rcid: 2550543271
+revid: 2473876876
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://techcrunch.com/2015/08/10/uber-eats-launches-in-chicago-and-new-york-city/
+- provenance: verified
+  supports_claim: true
+  url: https://www.theverge.com/2015/8/10/912597/uber-eats-food-delivery-launches-chicago-new-york-city
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/business-34310806
+- provenance: reported
+  supports_claim: false
+  url: https://about.ubereats.com/en/cities/
+timestamp: '2026-04-11T14:43:21.577022+00:00'
+title: Q21462723
+turns: 1
+value_label: null
+verdict: verified-high

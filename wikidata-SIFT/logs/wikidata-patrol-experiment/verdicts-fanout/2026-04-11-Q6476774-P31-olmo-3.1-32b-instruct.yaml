@@ -1,0 +1,30 @@
+completion_tokens: 1619
+cost_usd: 0.0034904000000000003
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12595
+property: P31
+property_label: instance of
+rationale: 'Wikipedia:Babel is a help/content page in the main namespace of Wikipedia.
+  Authoritative sources confirm that ''Wikimedia project page'' (Q14204246) refers
+  to pages in internal namespaces such as MediaWiki: or Project:. Since Wikipedia:Babel
+  is not in such a namespace, the previous ''instance of'' claim was incorrect and
+  its removal is justified.'
+rcid: 2550595625
+revid: 2473926903
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wikipedia:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Extension:Babel
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q14204246
+timestamp: '2026-04-11T10:31:06.342431+00:00'
+title: Q6476774
+turns: 1
+value_label: Wikimedia project page
+verdict: verified-high

@@ -1,0 +1,22 @@
+completion_tokens: 329
+cost_usd: 0.00199565
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19185
+property: P1454
+property_label: legal form
+rationale: The legal notice page of the Team-Building-paca website provides the SIRET
+  number and legal details that confirm the entity's legal form as an association.
+  This direct evidence supports the claim made in the Wikidata edit.
+rcid: 2540935692
+revid: 2464726008
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/mentions-legales/
+timestamp: '2026-02-20T17:08:44.605546+00:00'
+title: Q138348741
+turns: 3
+value_label: association
+verdict: verified-high

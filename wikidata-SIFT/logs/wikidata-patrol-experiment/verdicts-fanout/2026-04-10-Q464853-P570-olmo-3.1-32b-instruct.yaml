@@ -1,0 +1,22 @@
+completion_tokens: 459
+cost_usd: 0.0043888
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20567
+property: P570
+property_label: date of death
+rationale: The Independent, a reliable news source, reports that Anna Marly died on
+  15 February 2006. This directly contradicts the new value of 16 February 2025 for
+  the date of death. No credible source supports a 2025 date of death for Anna Marly.
+rcid: 2549570512
+revid: 2472933287
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.the-independent.com/news/obituaries/anna-marly-6108581.html
+timestamp: '2026-04-10T14:03:47.969599+00:00'
+title: Q464853
+turns: 1
+value_label: null
+verdict: incorrect

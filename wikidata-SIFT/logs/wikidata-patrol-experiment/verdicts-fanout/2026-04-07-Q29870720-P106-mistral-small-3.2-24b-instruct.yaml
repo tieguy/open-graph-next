@@ -1,0 +1,22 @@
+completion_tokens: 1061
+cost_usd: 0.0049601425000000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 66561
+property: P106
+property_label: occupation
+rationale: The article from 20minutos.es confirms that Jarfaiter is a rapper and actor,
+  with no mention of him working at McDonald's. Therefore, the edit changing his occupation
+  to 'McDonald's' is incorrect.
+rcid: 2550532782
+revid: 2473866578
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-07T07:55:27.902469+00:00'
+title: Q29870720
+turns: 9
+value_label: McDonald's
+verdict: incorrect

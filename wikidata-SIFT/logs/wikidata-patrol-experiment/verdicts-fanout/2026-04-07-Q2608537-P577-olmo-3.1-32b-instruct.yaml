@@ -1,0 +1,19 @@
+completion_tokens: 1031
+cost_usd: 0.012902799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 61421
+property: P577
+property_label: publication date
+rationale: The edit does not cite any source, and no independently verified sources
+  confirming the publication date of Fuenteovejuna as 1620 were found during investigation.
+  Therefore, the claim cannot be confirmed or denied based on available evidence.
+rcid: 2549229821
+revid: 2472602601
+sources: []
+timestamp: '2026-04-07T09:50:34.712241+00:00'
+title: Q2608537
+turns: 11
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,29 @@
+completion_tokens: 366
+cost_usd: 0.00362014
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37183
+property: P3373
+property_label: sibling
+rationale: The edit changing Scar's sibling from 'Brad Grey Pictures' to 'Mufasa'
+  is correct. The sources confirm that Mufasa is Scar's brother in The Lion King,
+  while 'Brad Grey Pictures' is unrelated to the character's sibling relationship.
+  The change aligns with the established narrative of The Lion King.
+rcid: 2550820709
+revid: 2474145112
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://disney.fandom.com/wiki/Scar
+- provenance: verified
+  supports_claim: true
+  url: https://screenrant.com/lion-king-mufasa-scar-brothers-relationship-history-explained/
+- provenance: verified
+  supports_claim: true
+  url: https://www.rd.com/article/lion-king-brothers/
+timestamp: '2026-04-11T17:31:55.638293+00:00'
+title: Q109409514
+turns: 3
+value_label: Mufasa
+verdict: verified-high

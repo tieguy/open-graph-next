@@ -1,0 +1,28 @@
+completion_tokens: 1288
+cost_usd: 0.0018861249999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16684
+property: P577
+property_label: publication date
+rationale: Multiple independent sources confirm that 'Amador' was published in 1991.
+  The new value of 800,000 years CE is not supported by any credible sources and appears
+  to be incorrect.
+rcid: null
+revid: 2460147349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Amador_(book)
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Ética_para_Amador.html?id=...
+- provenance: verified
+  supports_claim: false
+  url: https://www.goodreads.com/book/show/.../Amador
+timestamp: '2026-04-11T12:15:12.916776+00:00'
+title: Q11705564
+turns: 1
+value_label: null
+verdict: incorrect

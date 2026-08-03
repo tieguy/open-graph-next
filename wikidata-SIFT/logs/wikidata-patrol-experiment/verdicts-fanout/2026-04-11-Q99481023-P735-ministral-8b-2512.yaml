@@ -1,0 +1,32 @@
+completion_tokens: 2060
+cost_usd: 0.0041313
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 45444
+property: P735
+property_label: given name
+rationale: The claim that 'Yaşam' is the given name of the artist Yasam Şaşmazer is
+  plausible based on Turkish naming conventions and the sources consulted. However,
+  the removal of the only cited reference (the official website) is unjustified because
+  the source did not explicitly confirm the given name in a definitive manner. The
+  removal leaves the claim without any supporting evidence, which is not an improvement
+  and violates the principle of maintaining verified claims in Wikidata. No new references
+  were added to support the claim after the removal.
+rcid: 2551222880
+revid: 2474535561
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fondazioneberengo.org/artist/glasstress-artists/yasam-sasmazer/
+- provenance: verified
+  supports_claim: false
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+- provenance: verified
+  supports_claim: false
+  url: https://www.sasmazeryasam.com/about/
+timestamp: '2026-04-11T05:57:39.796353+00:00'
+title: Q99481023
+turns: 4
+value_label: Yaşam
+verdict: suspect

@@ -1,0 +1,17 @@
+completion_tokens: 127
+cost_usd: 0.00469928125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49787
+property: P856
+property_label: official website
+rationale: Unable to perform web searches to verify the claim due to technical issues.
+rcid: 2550661952
+revid: 2473991546
+sources: []
+timestamp: '2026-04-11T06:40:05.956665+00:00'
+title: Q11447532
+turns: 4
+value_label: null
+verdict: unverifiable

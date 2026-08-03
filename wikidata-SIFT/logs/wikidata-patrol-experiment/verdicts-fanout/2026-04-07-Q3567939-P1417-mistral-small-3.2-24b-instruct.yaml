@@ -1,0 +1,22 @@
+completion_tokens: 916
+cost_usd: 0.0019791
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28653
+property: P1417
+property_label: Encyclopædia Britannica Online ID
+rationale: The new ID "madcgader" could not be verified through a search on the Encyclopædia
+  Britannica Online website. The search did not yield any results for the Indian Councils
+  Act 1909, indicating that the new ID is likely incorrect.
+rcid: null
+revid: 2467859706
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/search?query=Indian+Councils+Act+1909
+timestamp: '2026-04-07T14:12:03.084665+00:00'
+title: Q3567939
+turns: 6
+value_label: null
+verdict: incorrect

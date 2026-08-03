@@ -1,0 +1,27 @@
+completion_tokens: 712
+cost_usd: 0.0055747999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25738
+property: P735
+property_label: given name
+rationale: Reliable biographical sources consistently refer to Lope de Vega by the
+  full name 'Lope de Vega' or 'Lope Félix de Vega Carpio,' with 'Vega' understood
+  as part of the surname, not a given name. There is no evidence that 'Vega' was ever
+  used as a given name for this historical figure. Changing the given name to 'Vega'
+  is therefore historically inaccurate.
+rcid: 2549920085
+revid: 2473274505
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.dictionary.com/browse/lope-de-vega
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/people/history/brazilian-history-biographies/lope-de-vega
+timestamp: '2026-04-10T07:53:48.307953+00:00'
+title: Q165257
+turns: 1
+value_label: Vega
+verdict: incorrect

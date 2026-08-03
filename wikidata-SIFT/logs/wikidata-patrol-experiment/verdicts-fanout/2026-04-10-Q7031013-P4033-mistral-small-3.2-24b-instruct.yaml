@@ -1,0 +1,25 @@
+completion_tokens: 1176
+cost_usd: 0.005927100000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 62647
+property: P4033
+property_label: Mastodon address
+rationale: The reference URL provided in the edit could not be fetched successfully,
+  and no independent sources could be found to confirm the Mastodon address. Therefore,
+  the claim cannot be verified.
+rcid: 2550680039
+revid: 2474009063
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://bolinko.osiedla.szczecin.pl/
+- provenance: verified
+  supports_claim: false
+  url: http://bolinko.osiedla.szczecin.pl/
+timestamp: '2026-04-10T14:20:19.973712+00:00'
+title: Q7031013
+turns: 5
+value_label: null
+verdict: unverifiable

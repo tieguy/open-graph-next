@@ -1,0 +1,32 @@
+completion_tokens: 1613
+cost_usd: 0.03950073999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 155892
+property: P169
+property_label: chief executive officer
+rationale: Multiple primary sources from the Egmont Institute's official website confirm
+  Sven Biscop became acting Director-General (chief executive officer) on October
+  1, 2025. The staff directory lists him as 'Acting Director-General', a dedicated
+  announcement page states he 'took over as acting Director-General of Egmont' on
+  that date, and a December 2025 policy brief explicitly refers to him as 'the acting
+  Director-General of Egmont'. This constitutes strong, direct evidence from authoritative
+  primary sources.
+rcid: 2540921501
+revid: 2464712523
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/sven-biscop-acting-dg/
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/staff/
+- provenance: verified
+  supports_claim: true
+  url: https://www.egmontinstitute.be/allies-and-rivals/
+timestamp: '2026-02-21T00:20:45.840745+00:00'
+title: Q3151737
+turns: 10
+value_label: Sven Biscop
+verdict: verified-high

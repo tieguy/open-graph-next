@@ -1,0 +1,28 @@
+completion_tokens: 1169
+cost_usd: 0.00297501875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 31093
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The change from 'Spanish' to 'Americano' is not supported by any evidence.
+  The website content suggests that Spanish is a language spoken by Sonia Megías,
+  and there is no indication that 'Americano' is a language she speaks.
+rcid: null
+revid: 2460854921
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://soniamegias.es/bio/
+- provenance: verified
+  supports_claim: false
+  url: https://soniamegias.es/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.wordmeaning.org/spanish/sonia.htm
+timestamp: '2026-04-11T10:57:47.625096+00:00'
+title: Q96147529
+turns: 3
+value_label: Americano
+verdict: suspect

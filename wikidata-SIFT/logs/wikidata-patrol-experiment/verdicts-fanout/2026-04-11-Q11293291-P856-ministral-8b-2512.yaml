@@ -1,0 +1,38 @@
+completion_tokens: 1194
+cost_usd: 0.005402580000000001
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 100462
+property: P856
+property_label: official website
+rationale: The search for independent sources confirming the official website of Autech
+  Elco was unsuccessful due to persistent search engine errors (402 Payment Required).
+  The old URL (`http://www.autech-elco.co.jp/HOME/`) is unreachable (404), and the
+  new URL (`https://www.autech-elco.co.jp/`) no longer appears to host the original
+  content of Autech Elco, as indicated by the lead text mentioning a business transfer.
+  The only reference cited (Japanese Wikipedia) is circular and unreliable. Without
+  verified independent sources or primary evidence, the change cannot be confirmed
+  or denied.
+rcid: 2550792597
+revid: 2474117804
+sources:
+- provenance: verified
+  summary: The URL is reachable but no longer hosts the original Autech Elco content;
+    lead text indicates a business transfer.
+  supports_claim: false
+  url: https://www.autech-elco.co.jp/
+- provenance: verified
+  summary: The URL returned a 404 error, indicating it is no longer accessible.
+  supports_claim: false
+  url: http://www.autech-elco.co.jp/HOME/
+- citation: Japanese Wikipedia (Q177837)
+  provenance: reported
+  summary: Circular reference (Wikipedia cites Wikidata, and Wikidata cites Wikipedia)
+    and cannot be trusted as a primary source.
+  supports_claim: false
+timestamp: '2026-04-11T14:02:27.713835+00:00'
+title: Q11293291
+turns: 15
+value_label: null
+verdict: unverifiable

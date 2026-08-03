@@ -1,0 +1,29 @@
+completion_tokens: 1992
+cost_usd: 0.0053487299999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46313
+property: P1476
+property_label: title
+rationale: The new title value 'Heloo' is not supported by any credible or verified
+  source. Independent sources such as Beckchris WordPress refer to the painting as
+  'Portrait of François I King of France' or 'Portret van François I,' but never as
+  'Heloo.' The old value 'Franciszek I' is plausible and aligns with the painting's
+  depiction of Francis I. The referenced source (Q135966125) is unreachable, and no
+  evidence confirms 'Heloo' as a valid title. The change from 'Franciszek I' to 'Heloo'
+  is therefore incorrect.
+rcid: null
+revid: 2471621755
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://beckchris.wordpress.com/visual-arts/art-history-101-part-one-30000-bce-1599/
+- provenance: verified
+  supports_claim: false
+  url: https://rkd.nl/en/explore/images/294657
+timestamp: '2026-04-11T17:55:08.958918+00:00'
+title: Q20020084
+turns: 3
+value_label: null
+verdict: incorrect

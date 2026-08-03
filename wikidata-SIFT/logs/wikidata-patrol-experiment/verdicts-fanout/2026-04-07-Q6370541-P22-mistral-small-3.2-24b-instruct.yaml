@@ -1,0 +1,31 @@
+completion_tokens: 778
+cost_usd: 0.012717343749999999
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 132770
+property: P22
+property_label: father
+rationale: The claim that Saeed Khan is the father of Karim Ahmad Khan is cited with
+  a Who's Who UK ID reference, but the reference URL is unreachable. No other sources
+  were found to confirm or contradict the claim.
+rcid: null
+revid: 2472173241
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ukwhoswho.com/view/10.1093/ww/9780199540884.001.0001/ww-9780199540884-e-254408/version/6
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Saeed_Khan
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/politics/2022/apr/11/imran-ahmad-khan-tory-mp-in-sexual-assault-case-had-oddball-reputation
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/law/2021/feb/12/karim-khan-international-criminal-court-prosecutor
+timestamp: '2026-04-07T03:32:24.832245+00:00'
+title: Q6370541
+turns: 15
+value_label: Saeed Khan
+verdict: unverifiable

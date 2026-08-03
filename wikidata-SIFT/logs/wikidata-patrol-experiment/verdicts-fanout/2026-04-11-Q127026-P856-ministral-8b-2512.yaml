@@ -1,0 +1,32 @@
+completion_tokens: 1714
+cost_usd: 0.00470637
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39083
+property: P856
+property_label: official website
+rationale: The old official website URL (`https://www.city.sakurai.lg.jp/`) is consistent
+  with Sakurai's identity as a Japanese city and aligns with the item's other claims.
+  The new URL (`https://www.vietnamairlines.com`) is unrelated to Sakurai and lacks
+  any contextual or logical justification. The prefetched content confirms the old
+  URL is a local government website for Sakurai, while the new URL is an airline website
+  with no relevance to the city's official functions. No independent corroboration
+  supports the new URL.
+rcid: 2551422192
+revid: 2474723676
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.pref.nara.jp/6265.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.sakurai.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.vietnamairlines.com
+timestamp: '2026-04-11T17:46:48.603637+00:00'
+title: Q127026
+turns: 2
+value_label: null
+verdict: incorrect

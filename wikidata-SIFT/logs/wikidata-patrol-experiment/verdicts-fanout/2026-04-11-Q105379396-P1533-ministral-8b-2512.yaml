@@ -1,0 +1,28 @@
+completion_tokens: 1961
+cost_usd: 0.00342294
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 36731
+property: P1533
+property_label: family name identical to this given name
+rationale: The edit changes the family name identical to the given name from 'Soydan'
+  (Q83439886) to 'Redif' (Q107375653). Prefetched references confirm that 'Soydan'
+  is a valid surname, primarily found in Turkey, with no evidence linking 'Redif'
+  to 'Soydan'. No references were provided for either the old or new claim, and no
+  independent sources were found to support the claim that 'Redif' is a family name
+  identical to 'Soydan'. The lack of corroborating evidence makes this edit suspect.
+rcid: null
+revid: 2464325559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://forebears.io/surnames/soydan
+- provenance: verified
+  supports_claim: false
+  url: https://www.igenea.com/en/surnames/s/soydan
+timestamp: '2026-04-11T15:13:43.464658+00:00'
+title: Q105379396
+turns: 4
+value_label: Redif
+verdict: suspect

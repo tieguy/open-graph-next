@@ -1,0 +1,39 @@
+completion_tokens: 1689
+cost_usd: 0.00290967875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 25148
+property: P136
+property_label: genre
+rationale: The edit changes the genre from 'pop music' to 'French pop' for the album
+  'Au masculin' by Amandine Bourgeois. However, none of the fetched sources provided
+  direct information about the genre of this specific album. The initial URLs returned
+  errors, and the subsequent searches did not yield verifiable information. Without
+  direct evidence, the verdict is 'unverifiable'.
+rcid: 2551004524
+revid: 2474322556
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.fr/musique/%25C3%25A0-masculin-Amandine-Bourgeois/dp/B00K5W31A2
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/music/album/Amandine_Bourgeois_Au_masculin?id=Bv235xqj3xh3k2xh3k2xh3&hl=fr
+- provenance: verified
+  supports_claim: false
+  url: https://www.discogs.com/fr/Amandine-Bourgeois-Au-Masculin/master/895936
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/album/3e8ZfLQXZVg319q319q319q
+- provenance: verified
+  supports_claim: false
+  url: https://www.deezer.com/fr/album/32432432
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Amandine+Bourgeois/+albums/Au+masculin
+timestamp: '2026-04-11T12:18:23.714482+00:00'
+title: Q16856268
+turns: 2
+value_label: French pop
+verdict: unverifiable

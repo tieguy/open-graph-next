@@ -1,0 +1,26 @@
+completion_tokens: 887
+cost_usd: 0.0029642
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12160
+property: P18
+property_label: image
+rationale: The new image selected for the 'energy drink' item does not depict an energy
+  drink, as confirmed by independent verified image galleries (Unsplash and Adobe
+  Stock), which only show beverage-related images for this topic. The previous image
+  was appropriate. Changing to an unrelated castle image is likely incorrect.
+rcid: 2549869901
+revid: 2473225851
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://unsplash.com/s/photos/energy-drink
+- provenance: verified
+  supports_claim: false
+  url: https://stock.adobe.com/search?k=energy+drink
+timestamp: '2026-04-11T15:00:33.747644+00:00'
+title: Q215754
+turns: 1
+value_label: null
+verdict: suspect

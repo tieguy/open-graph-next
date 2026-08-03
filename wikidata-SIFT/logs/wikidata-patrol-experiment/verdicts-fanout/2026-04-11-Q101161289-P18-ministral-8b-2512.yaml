@@ -1,0 +1,25 @@
+completion_tokens: 1751
+cost_usd: 0.00295278
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 42101
+property: P18
+property_label: image
+rationale: The edit lacks direct references or verifiable sources for either the old
+  or new image values. While the new image filename suggests a more recent event,
+  no verified sources (e.g., official website, Instagram post, or press release) were
+  found to confirm its authenticity or relevance. Without independent verification
+  of the image content or a reliable source confirming the new image’s validity, the
+  edit cannot be substantiated.
+rcid: null
+revid: 2471918431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kprofiles.com/aespa-profile/
+timestamp: '2026-04-11T15:57:56.568109+00:00'
+title: Q101161289
+turns: 4
+value_label: null
+verdict: unverifiable

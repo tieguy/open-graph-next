@@ -1,0 +1,17 @@
+completion_tokens: 1518
+cost_usd: 0.005305099999999999
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 100030
+property: P31
+property_label: instance of
+rationale: null
+rcid: null
+revid: 2470287196
+sources: []
+timestamp: '2026-04-07T03:11:35.448279+00:00'
+title: Q862978
+turns: 15
+value_label: composite number
+verdict: null

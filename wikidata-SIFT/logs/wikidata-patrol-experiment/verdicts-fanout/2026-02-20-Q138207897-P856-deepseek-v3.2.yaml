@@ -1,0 +1,28 @@
+completion_tokens: 1204
+cost_usd: 0.021984140000000003
+diff_type: qualifier_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 79824
+property: P856
+property_label: official website
+rationale: The website https://www.deganius.de is unequivocally the official website
+  of the company Deganius. The fetched homepage presents the company's products, history,
+  and branding, while the imprint page confirms the company's legal details, address
+  in Schwandorf (matching the Wikidata headquarters location claim), and ownership.
+  The content clearly establishes this as the primary online presence for the business
+  Deganius, which sells horse herbs and supplements.
+rcid: 2540941593
+revid: 2464731086
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.deganius.de/
+- provenance: verified
+  supports_claim: true
+  url: https://www.deganius.de/fragen/impressum/
+timestamp: '2026-02-20T14:11:46.018066+00:00'
+title: Q138207897
+turns: 8
+value_label: null
+verdict: verified-high

@@ -1,0 +1,32 @@
+completion_tokens: 305
+cost_usd: 0.0028772
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13471
+property: P17
+property_label: country
+rationale: The item in question (Q111046699) is identified as a building located in
+  Hod HaSharon, Israel, according to its 'located in the administrative territorial
+  entity' claim (P131) and 'coordinate location' (P625). Multiple authoritative sources,
+  including the Israeli government and BBC, confirm that Hod HaSharon is a town in
+  Israel. The previous value 'United States' is inconsistent with the item's location
+  claims and contradicted by all evidence. Therefore, changing the country from 'United
+  States' to 'Israel' is correct and well-supported.
+rcid: 2550656233
+revid: 2473985943
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://embassies.gov.il/the-kingdom-of-bahrain/en/the-embassy/https-embassiesgovil-manama-aboutisrael-pages-about-israelaspx
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/world-middle-east-14628835
+- provenance: verified
+  supports_claim: true
+  url: https://globalcincinnati.org/programs/global-education/country-profiles/israel/
+timestamp: '2026-04-11T11:26:13.112672+00:00'
+title: Q111046699
+turns: 1
+value_label: Israel
+verdict: verified-high

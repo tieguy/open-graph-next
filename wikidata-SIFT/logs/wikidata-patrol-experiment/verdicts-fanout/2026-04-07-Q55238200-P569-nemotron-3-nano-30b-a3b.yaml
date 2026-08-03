@@ -1,0 +1,24 @@
+completion_tokens: 736
+cost_usd: 0.004823449999999999
+diff_type: qualifier_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 93525
+property: P569
+property_label: date of birth
+rationale: No authoritative source directly confirms Yvonne Aki-Sawyerr's birthday
+  as January 7, 1968. The provided reference to the BBC profile does not mention a
+  birth date. This edit adds a qualifier P3629 (age of subject at event) with '+58'
+  based on a claimed 1968 birthdate not substantiated by any fetched or found source.
+  No independent verification of the 1968 date or the age qualifier was found.
+rcid: 2550517522
+revid: 2473851873
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/news/world-55042935
+timestamp: '2026-04-07T05:14:06.348710+00:00'
+title: Q55238200
+turns: 15
+value_label: null
+verdict: unverifiable

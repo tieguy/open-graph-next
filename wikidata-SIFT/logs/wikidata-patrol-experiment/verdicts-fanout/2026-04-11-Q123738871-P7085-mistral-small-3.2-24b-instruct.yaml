@@ -1,0 +1,25 @@
+completion_tokens: 968
+cost_usd: 0.00745709375
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 76961
+property: P7085
+property_label: TikTok username
+rationale: The new reference URL could not be fetched, and independent verification
+  of the TikTok username claim could not be confirmed due to fetch failures. Therefore,
+  the claim remains unverifiable.
+rcid: 2551427212
+revid: 2474727712
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://joshuniverse.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.tiktok.com/@joshtospace
+timestamp: '2026-04-11T06:34:06.637621+00:00'
+title: Q123738871
+turns: 4
+value_label: null
+verdict: unverifiable

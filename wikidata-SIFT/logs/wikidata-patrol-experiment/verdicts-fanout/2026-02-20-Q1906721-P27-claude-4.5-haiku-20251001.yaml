@@ -1,0 +1,37 @@
+completion_tokens: 2013
+cost_usd: 0.048383
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 38318
+property: P27
+property_label: country of citizenship
+rationale: All independent sources consistently identify Masahiro Sakurai as Japanese,
+  born in Tokyo, Japan on August 3, 1970. The Russian Empire ceased to exist in 1917,
+  over 50 years before his birth. This claim directly contradicts universally confirmed
+  biographical facts and conflicts with multiple existing Wikidata claims (P19 place
+  of birth in Japan, P569 birth date, item description). No credible evidence supports
+  Russian Empire citizenship.
+rcid: 2540929318
+revid: 2464720023
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wikirby.com/wiki/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://metroid.fandom.com/wiki/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://www.ssbwiki.com/Masahiro_Sakurai
+- provenance: reported
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Creator/MasahiroSakurai
+- provenance: reported
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/masahiro-sakurai.html
+timestamp: '2026-02-20T20:59:32.155587+00:00'
+title: Q1906721
+turns: 3
+value_label: Russian Empire
+verdict: incorrect

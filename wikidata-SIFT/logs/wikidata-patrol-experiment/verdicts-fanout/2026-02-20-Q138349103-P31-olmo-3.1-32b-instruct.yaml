@@ -1,0 +1,22 @@
+completion_tokens: 664
+cost_usd: 0.0040118
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18067
+property: P31
+property_label: instance of
+rationale: The Apple Music artist page, fetched directly, confirms that Omar Rashid
+  is a human artist with a documented date of birth and place of origin. This primary
+  source evidence directly supports the 'instance of human' (Q5) claim.
+rcid: 2540938587
+revid: 2464728194
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/omar-rashid-or-mrx/1871293364
+timestamp: '2026-02-20T16:10:54.922180+00:00'
+title: Q138349103
+turns: 3
+value_label: human
+verdict: verified-high

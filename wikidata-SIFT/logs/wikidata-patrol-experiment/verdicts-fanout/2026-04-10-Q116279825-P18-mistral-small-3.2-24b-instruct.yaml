@@ -1,0 +1,26 @@
+completion_tokens: 1252
+cost_usd: 0.0052186687500000006
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51373
+property: P18
+property_label: image
+rationale: There is no evidence to confirm the existence or appropriateness of the
+  image "Antoine d'Irumberry de Salaberry (1880-1915).jpg" as a representation of
+  Antoine d'Irumberry de Salaberry. The removal of the image claim cannot be verified
+  or refuted with the available information.
+rcid: 2550201522
+revid: 2473544385
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr-academic.com/dic.nsf/frwiki/116727
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Ignace-Michel-Louis-Antoine_d'Irumberry_de_Salaberry
+timestamp: '2026-04-10T11:20:34.186243+00:00'
+title: Q116279825
+turns: 4
+value_label: null
+verdict: unverifiable

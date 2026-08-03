@@ -1,0 +1,24 @@
+completion_tokens: 684
+cost_usd: 0.0029923499999999995
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 57111
+property: P856
+property_label: official website
+rationale: The official municipal website for Chikusei is https://www.city.chikusei.lg.jp/,
+  which does not reference or link to the cited external official website https://www.china-airlines.com.
+  The cited URL belongs to a Taiwanese airline and contains English content unrelated
+  to the city government. This discrepancy indicates a likely erroneous edit replacing
+  a Japanese government domain with an unrelated English commercial domain.
+rcid: null
+revid: 2465913630
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.chikusei.lg.jp/
+timestamp: '2026-04-07T12:46:17.463249+00:00'
+title: Q694322
+turns: 6
+value_label: null
+verdict: suspect

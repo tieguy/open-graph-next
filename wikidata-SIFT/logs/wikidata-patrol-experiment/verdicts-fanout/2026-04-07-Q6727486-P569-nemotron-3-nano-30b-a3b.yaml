@@ -1,0 +1,26 @@
+completion_tokens: 676
+cost_usd: 0.004282950000000001
+diff_type: qualifier_added
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 82955
+property: P569
+property_label: date of birth
+rationale: Extensive web search for independent sources confirming the birth date
+  of Madhumita Raut as 4 April 1966 produced no results. No reliable sources were
+  found that either support or contradict this qualifying value for the date of birth
+  claim. Wikipedia and other common biographical sources do not mention this date,
+  and no historical records or news articles referencing this specific date could
+  be located. Without any verifiable external sources, the claim cannot be confirmed
+  or fabricated through independent evidence.
+rcid: 2551232343
+revid: 2474544742
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=Madhumita+Raut+date+of+birth
+timestamp: '2026-04-07T03:44:09.913147+00:00'
+title: Q6727486
+turns: 15
+value_label: null
+verdict: unverifiable

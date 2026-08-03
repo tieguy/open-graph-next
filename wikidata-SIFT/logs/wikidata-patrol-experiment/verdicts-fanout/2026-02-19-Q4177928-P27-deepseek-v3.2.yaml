@@ -1,0 +1,33 @@
+completion_tokens: 1996
+cost_usd: null
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 187625
+property: P27
+property_label: country of citizenship
+rationale: 'Multiple independent sources consistently identify Zara Larsson as Swedish,
+  born in Solna, Sweden. The Atlantic Ocean is not a country and cannot be a country
+  of citizenship. This edit appears to be vandalism, as evidenced by the lack of references
+  and the presence of another clearly incorrect claim (instance of: dolphin) on the
+  same item.'
+rcid: 2540985974
+revid: 2464772251
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ethnicelebs.com/zara-larsson
+- provenance: verified
+  supports_claim: false
+  url: https://www.sonymusic.co.uk/artist/zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://healthyceleb.com/zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://www.billboard.com/artist/zara-larsson/
+timestamp: '2026-02-19T21:45:31.616978+00:00'
+title: Q4177928
+turns: 11
+value_label: Atlantic Ocean
+verdict: incorrect

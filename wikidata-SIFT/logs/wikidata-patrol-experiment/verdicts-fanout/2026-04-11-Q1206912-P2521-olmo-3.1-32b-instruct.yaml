@@ -1,0 +1,28 @@
+completion_tokens: 315
+cost_usd: 0.0022626
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10368
+property: P2521
+property_label: female form of label
+rationale: Neither the old value 'ideollingüista' nor the new value 'стваральніца
+  моў' could be independently verified as the correct female form of label for 'language
+  inventor'. The primary source on constructed languages (Wikipedia) was fetched but
+  does not provide a standard or documented female form of label for the concept 'language
+  inventor'. No reliable sources were found that confirm or refute either value. Therefore,
+  the change cannot be judged as correct or incorrect based on available evidence.
+rcid: 2550876878
+revid: 2474200196
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Conlang
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Suzette_Haden_Elgin
+timestamp: '2026-04-11T12:07:06.967408+00:00'
+title: Q1206912
+turns: 1
+value_label: null
+verdict: unverifiable

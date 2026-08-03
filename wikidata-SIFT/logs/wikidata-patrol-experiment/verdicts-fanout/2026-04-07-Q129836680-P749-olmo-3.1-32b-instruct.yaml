@@ -1,0 +1,23 @@
+completion_tokens: 1009
+cost_usd: 0.0077024
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35485
+property: P749
+property_label: parent organization or unit
+rationale: The removed claim that Sanofi was Opella's parent organization was not
+  supported by any references, and no independent sources confirmed or denied this
+  relationship. The official Opella website does not mention Sanofi as a parent or
+  owner, leaving the claim's accuracy undetermined.
+rcid: 2549919417
+revid: 2473273845
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.opella.com/
+timestamp: '2026-04-07T09:27:23.760386+00:00'
+title: Q129836680
+turns: 7
+value_label: Sanofi
+verdict: unverifiable

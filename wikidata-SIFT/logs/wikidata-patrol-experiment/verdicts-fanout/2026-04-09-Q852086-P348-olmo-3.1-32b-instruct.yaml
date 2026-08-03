@@ -1,0 +1,23 @@
+completion_tokens: 695
+cost_usd: 0.026495800000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 130394
+property: P348
+property_label: software version identifier
+rationale: The official flat assembler website does not confirm the existence of version
+  1.73.32 as a released version. Third-party download mirrors list this version, but
+  only the official source can authoritatively confirm a version identifier. No authoritative
+  evidence was found to verify this version number.
+rcid: 2550388630
+revid: 2473726456
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://flatassembler.net/download.php
+timestamp: '2026-04-09T23:33:57.561717+00:00'
+title: Q852086
+turns: 10
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 1678
+cost_usd: 0.0015035375
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11011
+property: P18
+property_label: image
+rationale: Multiple independent sources confirm the existence of the Rixos Premium
+  New Alamein hotel in New Alamein, Egypt. The new qualifier "فندق ريكسوس" (Rixos
+  Hotel) is supported by these sources.
+rcid: 2550897783
+revid: 2474220651
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.rixos.com/en/hotels/egypt/alamein/rixos-premium-new-alamein
+- provenance: verified
+  supports_claim: true
+  url: https://www.tripadvisor.com/Hotel_Review-g319860-d1987883-Reviews-Rixos_Premium_New_Alamein-New_Alamein_Matruh_Governorate.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.booking.com/hotel/eg/rixos-premium-new-alamein.en.html
+timestamp: '2026-04-11T16:33:48.118187+00:00'
+title: Q96395299
+turns: 1
+value_label: null
+verdict: verified-high

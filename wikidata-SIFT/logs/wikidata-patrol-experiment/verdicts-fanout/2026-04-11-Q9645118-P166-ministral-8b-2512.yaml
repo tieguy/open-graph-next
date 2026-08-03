@@ -1,0 +1,28 @@
+completion_tokens: 2055
+cost_usd: 0.00243537
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23602
+property: P166
+property_label: award received
+rationale: 'The award claim ''Euromoney'' for Banco Carregosa (Q9645118) is well-supported
+  by verified primary sources (*Jornal Económico* articles). The qualifier ''investor:
+  2025'' is explicitly confirmed by one of these sources, directly stating the award
+  was received in 2025. The edit improves the claim by adding a precise temporal qualifier,
+  which is strongly corroborated by the evidence. No contradictions were found in
+  the verified sources.'
+rcid: 2550592279
+revid: 2473923730
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://jornaleconomico.sapo.pt/noticias/banco-carregosa-distinguido-com-best-pure-play-boutique-private-bank-portugal-2025-pela-euromoney/
+- provenance: verified
+  supports_claim: true
+  url: https://jornaleconomico.sapo.pt/noticias/banco-carregosa-eleito-melhor-boutique-private-bank-em-portugal-pela-euromoney/
+timestamp: '2026-04-11T17:27:16.752781+00:00'
+title: Q9645118
+turns: 2
+value_label: Euromoney
+verdict: verified-high

@@ -1,0 +1,37 @@
+completion_tokens: 2986
+cost_usd: 0.023801740000000002
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 156205
+property: P571
+property_label: inception
+rationale: The Companies House reference shows GBAF Publications Ltd was incorporated
+  on 11 October 2010, and multiple independent sources confirm Global Banking & Finance
+  Review was founded in 2010. However, no source explicitly states the magazine launched
+  on October 11th specifically - the company incorporation date is being used as a
+  reasonable proxy for the magazine's inception date. The evidence supports the claim
+  but is indirect.
+rcid: 2540950185
+revid: 2464739160
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/company/07403411
+- provenance: verified
+  supports_claim: true
+  url: https://wiki.kidzsearch.com/wiki/Global_Banking_%26_Finance_Review
+- provenance: verified
+  supports_claim: true
+  url: https://www.golomtbank.com/en/news/21641
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/iute-moldova-is-honored-with-the-global-banking-and-finance-excellence-award/
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/about-us/
+timestamp: '2026-02-20T09:53:22.595710+00:00'
+title: Q60744597
+turns: 15
+value_label: null
+verdict: verified-low

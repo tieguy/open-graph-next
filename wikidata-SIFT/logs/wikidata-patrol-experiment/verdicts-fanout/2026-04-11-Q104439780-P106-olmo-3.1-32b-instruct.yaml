@@ -1,0 +1,29 @@
+completion_tokens: 1516
+cost_usd: 0.0034787999999999998
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12846
+property: P106
+property_label: occupation
+rationale: Multiple independently verified sources explicitly state that Antoine Andary
+  worked as an Intelligence Analyst at the Counter-Terrorism Group. These sources
+  include a professional bio and public academic profiles. Removing 'analyst' (Q485178)
+  from his occupations is therefore incorrect.
+rcid: 2550041295
+revid: 2473388953
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://muckrack.com/antoine-andary-research/bio
+- provenance: verified
+  supports_claim: true
+  url: https://radboud.academia.edu/AntoineAndary
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Antoine-Andary
+timestamp: '2026-04-11T09:04:08.029563+00:00'
+title: Q104439780
+turns: 1
+value_label: analyst
+verdict: incorrect

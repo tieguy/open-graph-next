@@ -1,0 +1,20 @@
+completion_tokens: 448
+cost_usd: 0.00250274375
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 27418
+property: P18
+property_label: image
+rationale: The edit adds a qualifier to an existing image claim on the Wikidata item
+  for Bjart Faye Mohr. However, the edit does not have any references cited for the
+  new qualifier. Without access to search tools, it is not possible to verify the
+  accuracy of the qualifier 'Holmsbu billedgalleri' for the image 'Holmsbu billedgalleri.JPG'.
+rcid: 2551358400
+revid: 2474663798
+sources: []
+timestamp: '2026-04-11T17:36:56.340319+00:00'
+title: Q64784680
+turns: 2
+value_label: null
+verdict: unverifiable

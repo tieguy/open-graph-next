@@ -1,0 +1,54 @@
+completion_tokens: 2245
+cost_usd: 0.0038393125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34966
+property: P973
+property_label: described at URL
+rationale: The new URL provided in the edit is inaccessible and returns a 403 Forbidden
+  error. There are no references supporting the new URL, and independent sources confirm
+  that Ridgeback Biotherapeutics is focused on developing therapies for emerging infectious
+  diseases. The edit should be reverted, and a valid, accessible URL should be provided
+  with appropriate references.
+rcid: 2551339571
+revid: 2474645827
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ridgebackbio.com/
+- provenance: verified
+  supports_claim: true
+  url: https://ridgebackbio.com/about/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/1746558D:US
+- provenance: verified
+  supports_claim: true
+  url: https://synapse.patsnap.com/organization/f7d45e197d07ab2d4404bb342a68df4b
+- provenance: verified
+  supports_claim: true
+  url: https://www.orpha.net/en/institutions/legal-entity/622168
+- provenance: verified
+  supports_claim: true
+  url: https://www.crunchbase.com/organization/ridgeback-biotherapeutics
+- provenance: verified
+  supports_claim: true
+  url: https://ridgebackbio.com/pipeline/
+- provenance: verified
+  supports_claim: true
+  url: https://investors.emergentbiosolutions.com/news-releases/news-release-details/emergent-biosolutions-and-ridgeback-biotherapeutics-enter
+- provenance: verified
+  supports_claim: true
+  url: https://www.reuters.com/company/ridgeback-biotherapeutics-l-p/
+- provenance: verified
+  supports_claim: true
+  url: https://www.merck.com/news/ridgeback-biotherapeutics-and-merck-announce-preliminary-findings-from-a-phase-2a-trial-of-investigational-covid-19-therapeutic-molnupiravir/
+- provenance: verified
+  supports_claim: false
+  url: https://filmyspark.com/merck-and-ridgeback-biotherapeutics-provide-update-on-new-merck/
+timestamp: '2026-04-10T13:33:59.982916+00:00'
+title: Q109546866
+turns: 3
+value_label: null
+verdict: incorrect

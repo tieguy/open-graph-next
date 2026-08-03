@@ -1,0 +1,38 @@
+completion_tokens: 2097
+cost_usd: 0.0016923749999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12460
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The edit changes the Google Knowledge Graph ID from "/g/12365n94" to "Hamburgefonts"
+  for the item "classical garalde typeface genre" (Q113055). The new value "Hamburgefonts"
+  does not appear in any of the sources consulted, and the edit does not have any
+  references cited. Therefore, the change is suspect.
+rcid: 2549697760
+revid: 2473056935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ilovetypography.com/2007/11/21/type-terminology-old-style/
+- provenance: verified
+  supports_claim: false
+  url: https://www.emigre.com/Essays/Type/OnClassifyingType
+- provenance: verified
+  supports_claim: false
+  url: https://luc.devroye.org/garamond.html
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Vox-ATypI_classification
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Typeface_classification
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Garalde
+timestamp: '2026-04-11T08:38:05.191929+00:00'
+title: Q113055
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,32 @@
+completion_tokens: 3019
+cost_usd: 0.0055092000000000006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18489
+property: P793
+property_label: significant event
+rationale: The change from 'auction' to 'art auction' is terminologically correct
+  and more specific for an artwork, as 'art auction' is a recognized subclass of 'auction'
+  according to authoritative sources. However, there is no independently verifiable
+  public source confirming that this specific pastel was sold at an art auction on
+  2013-04-10 for the stated price, despite the reference to a Christie's lot essay.
+  Therefore, while the property change is justified in terms of terminology, the factual
+  claim about the event remains only weakly supported.
+rcid: 2549552740
+revid: 2472915943
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.theartstory.org/movement/auction-houses/
+- provenance: verified
+  supports_claim: true
+  url: https://www.britannica.com/topic/auction
+- provenance: verified
+  supports_claim: false
+  url: https://www.christies.com/lot/lot-5665246
+timestamp: '2026-04-11T07:57:54.887633+00:00'
+title: Q23037740
+turns: 1
+value_label: art auction
+verdict: verified-low

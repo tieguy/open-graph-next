@@ -1,0 +1,28 @@
+completion_tokens: 1304
+cost_usd: 0.00292056
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 35306
+property: P1103
+property_label: number of platform tracks
+rationale: The claim P1103 (number of platform tracks) for Shimofunato Station (Q7496955)
+  is incorrect because the item is explicitly classified as a bus stop (Q953806).
+  Platform tracks are a feature of railway stations, not bus stops. The rank change
+  from 'normal' to 'deprecated' is justified as the claim contradicts the item's type
+  and lacks any supporting evidence. No verified sources were found to support the
+  claim of platform tracks for a bus stop.
+rcid: 2550463800
+revid: 2473800252
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/entity/Q7496955
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/entity/Q953806
+timestamp: '2026-04-11T11:55:50.690880+00:00'
+title: Q7496955
+turns: 3
+value_label: null
+verdict: incorrect

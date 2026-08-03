@@ -1,0 +1,25 @@
+completion_tokens: 301
+cost_usd: 0.00197
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26951
+property: P856
+property_label: official website
+rationale: The edit changes the official website of Kagamiishi to the URL of LATAM
+  Airlines, which is clearly incorrect. The old URL points to the official town website,
+  which is still active and relevant.
+rcid: null
+revid: 2471668584
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.latamairlines.com
+- provenance: verified
+  supports_claim: true
+  url: https://www.town.kagamiishi.fukushima.jp/
+timestamp: '2026-04-07T12:25:55.225327+00:00'
+title: Q1205431
+turns: 3
+value_label: null
+verdict: incorrect

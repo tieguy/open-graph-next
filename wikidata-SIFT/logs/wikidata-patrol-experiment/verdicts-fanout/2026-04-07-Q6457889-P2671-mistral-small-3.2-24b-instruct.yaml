@@ -1,0 +1,19 @@
+completion_tokens: 586
+cost_usd: 0.00164359375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15969
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The edit does not include any references, and a web search did not return
+  any relevant results to confirm or deny the new value "hola" as the Google Knowledge
+  Graph ID for LGBTQ history in Spain.
+rcid: null
+revid: 2469321198
+sources: []
+timestamp: '2026-04-07T05:21:13.562467+00:00'
+title: Q6457889
+turns: 3
+value_label: null
+verdict: unverifiable

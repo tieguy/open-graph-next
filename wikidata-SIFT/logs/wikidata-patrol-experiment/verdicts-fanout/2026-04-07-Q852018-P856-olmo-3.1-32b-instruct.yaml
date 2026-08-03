@@ -1,0 +1,26 @@
+completion_tokens: 961
+cost_usd: 0.010837200000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 51303
+property: P856
+property_label: official website
+rationale: The evidence shows that https://www.flypeach.com is an airline booking
+  website, not the official website of Izumisano city. The official municipal website,
+  http://www.city.izumisano.lg.jp/, remains unchanged and does not reference flypeach.com
+  as the official site. There is no independent confirmation that this change is legitimate.
+rcid: null
+revid: 2471396729
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.city.izumisano.lg.jp/
+- provenance: verified
+  supports_claim: false
+  url: https://www.flypeach.com/
+timestamp: '2026-04-07T07:25:48.257974+00:00'
+title: Q852018
+turns: 5
+value_label: null
+verdict: suspect

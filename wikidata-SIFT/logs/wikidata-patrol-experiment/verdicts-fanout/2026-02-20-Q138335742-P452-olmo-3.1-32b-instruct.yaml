@@ -1,0 +1,31 @@
+completion_tokens: 1394
+cost_usd: 0.0046574
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19105
+property: P452
+property_label: industry
+rationale: Metals Consulting International Limited's official website and multiple
+  independent business directories explicitly describe the company as specializing
+  in the steel industry. The UK Companies House registration confirms the entity but
+  does not specify the industry in detail; however, the consistent and corroborated
+  evidence from primary and secondary sources supports the assignment of 'steel industry'
+  as the company's industry.
+rcid: 2540955123
+revid: 2464743430
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/company/04938719
+- provenance: verified
+  supports_claim: true
+  url: https://www.steelonthenet.com/
+- provenance: verified
+  supports_claim: true
+  url: https://rocketreach.co/metals-consulting-international-limited-profile_b4637722fc5d9f4d
+timestamp: '2026-02-20T07:16:27.670381+00:00'
+title: Q138335742
+turns: 2
+value_label: steel industry
+verdict: verified-high

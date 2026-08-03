@@ -1,0 +1,24 @@
+completion_tokens: 657
+cost_usd: 0.0037421
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 72214
+property: P4225
+property_label: IPA Braille
+rationale: The investigation failed to locate any verifiable source supporting or
+  contradicting the claim that 'no se' represents the IPA Braille for a close front
+  rounded vowel. Despite numerous searches and attempts to access authoritative resources
+  (including testing via web tools), no reliable source could be fetched to confirm
+  either existence or meaning of 'no se' in IPA Braille. This leaves the claim unverifiable.
+rcid: null
+revid: 2441559632
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wiktionary.org/wiki/Appendix:IPA/Braille
+timestamp: '2026-04-07T06:10:01.189377+00:00'
+title: Q740728
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,20 @@
+completion_tokens: 588
+cost_usd: 0.0079916
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38194
+property: P106
+property_label: occupation
+rationale: Assigning 'Anakin Skywalker', a fictional character, as the occupation
+  of a real person is not supported by any evidence. Multiple searches and attempts
+  to fetch reliable sources failed to find any confirmation. This value is inconsistent
+  with standard Wikidata practice for the occupation property.
+rcid: 2549294198
+revid: 2472663095
+sources: []
+timestamp: '2026-04-08T18:54:58.485701+00:00'
+title: Q16672513
+turns: 8
+value_label: Anakin Skywalker
+verdict: incorrect

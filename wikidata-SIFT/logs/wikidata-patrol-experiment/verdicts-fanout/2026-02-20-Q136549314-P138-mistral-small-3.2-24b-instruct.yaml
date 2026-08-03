@@ -1,0 +1,31 @@
+completion_tokens: 1698
+cost_usd: 0.009764950000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 93081
+property: P138
+property_label: named after
+rationale: Multiple independent sources confirm that ChatGPT Atlas is named after
+  ChatGPT, supporting the claim. The sources consistently highlight the close association
+  and integration of ChatGPT with the browser.
+rcid: 2540965537
+revid: 2464753158
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://spyglass.org/chatgpt-atlas-ai-browser/
+- provenance: verified
+  supports_claim: true
+  url: https://apnews.com/article/openai-atlas-web-browser-chatgpt-google-ai-f59edaa239aebe26fc5a4a27291d717a
+- provenance: verified
+  supports_claim: true
+  url: https://www.cbsnews.com/news/openai-new-web-browser-called-atlas/
+- provenance: verified
+  supports_claim: true
+  url: https://techcrunch.com/2025/10/21/openai-launches-an-ai-powered-browser-chatgpt-atlas/
+timestamp: '2026-02-20T03:50:10.678692+00:00'
+title: Q136549314
+turns: 8
+value_label: ChatGPT
+verdict: verified-high

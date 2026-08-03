@@ -1,0 +1,25 @@
+completion_tokens: 1017
+cost_usd: 0.017463
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 84264
+property: P1559
+property_label: name in native language
+rationale: The official Uruguayan authors registry (autores.uy) confirms that the
+  birth name includes 'Focaccio', supporting the factual correctness of the edit.
+  However, there is limited independent evidence that this full name is the standard
+  'name in native language' as used professionally by the artist, who is most commonly
+  known as 'Riki Musso'. Therefore, the edit is accurate regarding the birth name
+  but may not reflect the conventional professional name.
+rcid: 2551405092
+revid: 2474708502
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://autores.uy/autor/4837
+timestamp: '2026-04-07T10:29:53.860104+00:00'
+title: Q17628748
+turns: 15
+value_label: null
+verdict: verified-low

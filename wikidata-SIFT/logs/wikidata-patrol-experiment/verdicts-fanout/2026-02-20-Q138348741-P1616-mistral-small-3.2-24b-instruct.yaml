@@ -1,0 +1,25 @@
+completion_tokens: 1062
+cost_usd: 0.0023868500000000003
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 22284
+property: P1616
+property_label: SIREN number
+rationale: The official website of Team-Building-paca confirms the SIREN number 84841665700015.
+  Although the primary reference URL is unreachable, the independent source provides
+  strong support for the claim.
+rcid: 2540936304
+revid: 2464726593
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://annuaire-entreprises.data.gouv.fr/entreprise/association-team-artandshow-848416657
+- provenance: verified
+  supports_claim: true
+  url: https://www.team-building-paca.fr/mentions-legales/
+timestamp: '2026-02-20T16:54:34.128741+00:00'
+title: Q138348741
+turns: 4
+value_label: null
+verdict: verified-high

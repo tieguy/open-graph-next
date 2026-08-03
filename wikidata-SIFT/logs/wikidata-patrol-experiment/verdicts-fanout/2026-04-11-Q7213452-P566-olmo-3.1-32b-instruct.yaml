@@ -1,0 +1,31 @@
+completion_tokens: 2250
+cost_usd: 0.0045918
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16209
+property: P566
+property_label: has basionym
+rationale: The new value assigned to has basionym for Stevia rebaudiana (candyleaf)
+  is 'gay', which is not a botanical name and is not recognized by any authoritative
+  botanical source as the basionym. Multiple reliable sources, including Wikipedia,
+  Kew's Plants of the World Online, and NCBI Taxonomy, confirm that the correct basionym
+  is Eupatorium rebaudianum Bertoni. There is no evidence supporting the use of 'gay'
+  as a basionym for this species.
+rcid: 2550294426
+revid: 2473634449
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Stevia_rebaudiana
+- provenance: verified
+  supports_claim: false
+  url: https://powo.science.kew.org/taxon/urn:lsid:ipni.org:names:324069-2
+- provenance: verified
+  supports_claim: false
+  url: https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id=431894
+timestamp: '2026-04-11T14:14:55.341662+00:00'
+title: Q7213452
+turns: 1
+value_label: gay
+verdict: incorrect

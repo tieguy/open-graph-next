@@ -1,0 +1,29 @@
+completion_tokens: 1899
+cost_usd: 0.0034208
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11407
+property: P4224
+property_label: category contains
+rationale: P4224 is intended to link Wikimedia categories to other Wikimedia categories,
+  not to species items such as Q5 ('human'). Q5 represents a biological species, not
+  a category, and there is no standard or documented use of P4224 in this manner.
+  The edit therefore misapplies the property and introduces an improper relationship.
+rcid: 2551384440
+revid: 2474689007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P4224
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q5
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:People
+timestamp: '2026-04-10T07:42:05.840011+00:00'
+title: Q60917184
+turns: 1
+value_label: human
+verdict: incorrect

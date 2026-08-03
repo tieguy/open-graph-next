@@ -1,0 +1,23 @@
+completion_tokens: 710
+cost_usd: 0.00409676
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55286
+property: P1559
+property_label: name in native language
+rationale: The edit changes the name in native language to 'rgwvrwfنادية مراد' without
+  any supporting references. Multiple web searches did not yield any independent sources
+  confirming this new name. The absence of evidence and the lack of references suggest
+  that the edit is incorrect or potentially vandalism.
+rcid: null
+revid: 2470711327
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nobelprize.org/prizes/peace/2018/murad/facts/
+timestamp: '2026-04-07T07:01:32.229409+00:00'
+title: Q22007112
+turns: 5
+value_label: null
+verdict: incorrect

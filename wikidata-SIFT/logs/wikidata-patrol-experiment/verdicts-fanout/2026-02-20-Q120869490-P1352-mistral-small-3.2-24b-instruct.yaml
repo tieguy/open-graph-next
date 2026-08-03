@@ -1,0 +1,24 @@
+completion_tokens: 944
+cost_usd: 0.003514525
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34305
+property: P1352
+property_label: ranking
+rationale: The FITEQ profile, a primary source, confirms that Apor Györgydeák's current
+  singles ranking is 1, supporting the edit.
+rcid: 2540970798
+revid: 2464758046
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.fiteq.org/world-ranking/player/1149
+- provenance: reported
+  supports_claim: true
+  url: https://www.insidethegames.biz/articles/fiteq-world-rankings-update
+timestamp: '2026-02-20T03:19:08.903911+00:00'
+title: Q120869490
+turns: 5
+value_label: null
+verdict: verified-high

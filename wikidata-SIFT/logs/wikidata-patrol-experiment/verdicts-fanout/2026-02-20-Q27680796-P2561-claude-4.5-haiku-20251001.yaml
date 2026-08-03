@@ -1,0 +1,39 @@
+completion_tokens: 5059
+cost_usd: 0.250644
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 225349
+property: P2561
+property_label: name
+rationale: The edit includes verified character names (Peanut Arbuckle, Georgio, Cody
+  Cigar, Master Kenchiro Ichiimada) confirmed in credible sources documenting Sam
+  Hyde's comedy work, but also includes Samir Al-Hajeed, which is a documented hoax
+  name created by internet trolls to falsely blame Sam Hyde for mass shootings. Multiple
+  fact-checking and news sources confirm this was disinformation, not a genuine character
+  name. Additionally, names like The Golden Kid, Mr.Golden Pipes, and Mr.Big cannot
+  be verified in any credible source. The claim has no references, and P2561 (name)
+  may not be semantically appropriate for fictional character personas.
+rcid: 2540944523
+revid: 2464733865
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Series/WorldPeace
+- provenance: verified
+  supports_claim: true
+  url: https://www.popdust.com/sam-hyde-canceled-popdust-opinion-2634039861
+- provenance: verified
+  supports_claim: false
+  url: https://www.nbcnews.com/storyline/texas-church-shooting/hoaxes-false-information-proliferated-after-texas-church-n818151
+- provenance: verified
+  supports_claim: false
+  url: https://www.snopes.com/tag/samir-al-hajeed/
+- provenance: verified
+  supports_claim: false
+  url: https://correspondent.afp.com/mass-shootings-other-innocent-victims
+timestamp: '2026-02-20T12:32:56.991321+00:00'
+title: Q27680796
+turns: 11
+value_label: null
+verdict: suspect

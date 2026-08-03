@@ -1,0 +1,31 @@
+completion_tokens: 352
+cost_usd: 0.0032262000000000002
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15075
+property: P136
+property_label: genre
+rationale: Multiple independent sources confirm that Built to Spill is widely recognized
+  as an indie rock band and that their music is classified within the indie rock genre.
+  Allmusic describes them as 'one of the most popular and influential indie rock bands.'
+  The Handlebar article discusses Built to Spill as a standout in the national indie
+  rock scene and explicitly refers to them as an 'indie rock band.' The old value
+  'alternative rock' is also used in some contexts, but indie rock is the more specific
+  and accurate genre label supported by the majority of reliable sources. The change
+  from 'alternative rock' to 'indie rock' for Built to Spill is therefore correct
+  and well-supported.
+rcid: 2550852005
+revid: 2474175735
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.allmusic.com/artist/built-to-spill-mn0000527267
+- provenance: verified
+  supports_claim: true
+  url: https://www.wweek.com/music/2025/11/18/built-to-spill-keeps-it-indie-for-the-streaming-age/
+timestamp: '2026-04-11T16:52:21.999186+00:00'
+title: Q1003115
+turns: 1
+value_label: indie rock
+verdict: verified-high

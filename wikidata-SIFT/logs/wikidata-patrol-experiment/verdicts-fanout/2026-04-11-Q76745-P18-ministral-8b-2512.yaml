@@ -1,0 +1,24 @@
+completion_tokens: 1292
+cost_usd: 0.01463565
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 134673
+property: P18
+property_label: image
+rationale: The removed image 'Theodor Schwann Litho.jpg' is a verified historical
+  lithograph from 1857, matching the qualifier on the claim. The image is publicly
+  available on Wikimedia Commons and widely used across Wikimedia projects, confirming
+  its relevance and accuracy. Since the image is historically accurate and lacks any
+  indication of inaccuracy, its removal was unjustified.
+rcid: 2549461755
+revid: 2472827040
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Theodor_Schwann_Litho.jpg
+timestamp: '2026-04-11T10:15:00.026500+00:00'
+title: Q76745
+turns: 8
+value_label: null
+verdict: incorrect

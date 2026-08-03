@@ -1,0 +1,30 @@
+completion_tokens: 1512
+cost_usd: 0.006366
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27294
+property: P641
+property_label: sport
+rationale: The cited French Wikipedia reference does not mention Australian rules
+  football in relation to the Australian Open. Multiple independent and official sources
+  confirm that the Australian Open is a tennis tournament, and there is no credible
+  evidence linking it to Australian rules football. Therefore, changing the sport
+  from 'tennis' to 'Australian rules football' is factually incorrect.
+rcid: 2551269774
+revid: 2474579679
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Ouverture_d%27Australie
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Australian_Open
+- provenance: verified
+  supports_claim: false
+  url: https://www.itftennis.com/en/tournaments/major-tournaments/australian-open/
+timestamp: '2026-04-11T06:46:09.319454+00:00'
+title: Q60874
+turns: 1
+value_label: Australian rules football
+verdict: incorrect

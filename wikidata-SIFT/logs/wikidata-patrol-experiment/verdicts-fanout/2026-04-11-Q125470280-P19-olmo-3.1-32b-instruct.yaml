@@ -1,0 +1,27 @@
+completion_tokens: 1945
+cost_usd: 0.0037258
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12794
+property: P19
+property_label: place of birth
+rationale: The claim that Dan Wang's place of birth is Yunnan is supported by his
+  own statement in a primary-source interview (Rest of World), which is verified evidence.
+  However, the reference added in the edit (danwang.co) does not substantiate the
+  claim, as it does not mention his place of birth. Therefore, while the factual correctness
+  is confirmed, the supporting reference is not appropriate.
+rcid: 2550901709
+revid: 2474224431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://danwang.co/
+- provenance: verified
+  supports_claim: true
+  url: https://restofworld.org/2025/dan-wang-breakneck-book-china-tech/
+timestamp: '2026-04-11T07:40:32.647677+00:00'
+title: Q125470280
+turns: 1
+value_label: Yunnan
+verdict: verified-low

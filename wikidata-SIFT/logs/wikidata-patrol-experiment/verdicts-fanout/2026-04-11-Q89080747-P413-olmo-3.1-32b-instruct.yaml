@@ -1,0 +1,31 @@
+completion_tokens: 1887
+cost_usd: 0.0041234
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14956
+property: P413
+property_label: position played on team / speciality
+rationale: The edit replaced the correct position 'goalkeeper' with the numeric value
+  '67', which is not semantically appropriate for the 'position played on team / speciality'
+  property (P413). Authoritative sources such as Transfermarkt and SofaScore confirm
+  that Elias Hadaya's position is goalkeeper, and the Wikidata documentation for P413
+  specifies that it should be used for positions, not jersey numbers. Therefore, the
+  change should be reverted.
+rcid: 2549662946
+revid: 2473023174
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P413
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://www.sofascore.com/football/player/elia-hadaya/833250
+timestamp: '2026-04-11T17:23:26.041980+00:00'
+title: Q89080747
+turns: 1
+value_label: '67'
+verdict: incorrect

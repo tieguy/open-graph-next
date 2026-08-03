@@ -1,0 +1,24 @@
+completion_tokens: 1180
+cost_usd: 0.004891
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20915
+property: P1142
+property_label: political ideology
+rationale: The edit claims that Okdiario's political ideology is 'communism,' but
+  there are no cited references for this claim and no independent, primary-source
+  evidence found that confirms Okdiario identifies as a communist publication. While
+  the newspaper is associated with far-left politics, this does not equate to communism.
+  The official website does not provide a clear statement on political ideology.
+rcid: null
+revid: 2471445829
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://okdiario.com
+timestamp: '2026-04-07T09:23:50.849536+00:00'
+title: Q30901816
+turns: 2
+value_label: communism
+verdict: unverifiable

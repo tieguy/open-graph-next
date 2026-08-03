@@ -1,0 +1,30 @@
+completion_tokens: 2095
+cost_usd: 0.0040359
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 47941
+property: P1142
+property_label: political ideology
+rationale: The edit changes Okdiario's political ideology from 'Spanish nationalism'
+  to 'communism'. Despite the new value being more consistent with Okdiario's other
+  claims (e.g., far-left politics), there are no verified, reachable, or credible
+  sources confirming either the old or new political ideology values. No primary sources
+  were fetched or found that support either claim, and the lack of references for
+  both values makes it impossible to verify the correctness of the edit. The absence
+  of independent corroboration and the inability to access relevant sources results
+  in an unverifiable verdict.
+rcid: null
+revid: 2471445829
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://kpu.pressbooks.pub/political-ideologies/chapter/4-2-3-communism/
+- provenance: verified
+  supports_claim: false
+  url: https://okdiario.com
+timestamp: '2026-04-11T14:37:26.823428+00:00'
+title: Q30901816
+turns: 5
+value_label: communism
+verdict: unverifiable

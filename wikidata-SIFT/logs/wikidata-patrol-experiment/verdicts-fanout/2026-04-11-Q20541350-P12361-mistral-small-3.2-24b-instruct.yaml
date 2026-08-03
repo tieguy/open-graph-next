@@ -1,0 +1,22 @@
+completion_tokens: 1132
+cost_usd: 0.0033105624999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32294
+property: P12361
+property_label: Bluesky handle
+rationale: The Bluesky profile page for gconfidencial.bsky.social confirms that this
+  is the correct handle for Galicia Confidencial. The old value was a URL that redirected
+  to the same profile, so the new value is more direct and accurate.
+rcid: 2551311482
+revid: 2474619565
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bsky.app/profile/gconfidencial.bsky.social
+timestamp: '2026-04-11T09:25:35.415355+00:00'
+title: Q20541350
+turns: 3
+value_label: null
+verdict: verified-high

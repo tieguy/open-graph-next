@@ -1,0 +1,33 @@
+completion_tokens: 1945
+cost_usd: 0.00146166
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13995
+property: P31
+property_label: instance of
+rationale: The edit changed the instance of claim for Helen (Q116754785), a fictional
+  character from *Sonic X*, from 'fictional human' (Q15632617) to 'human' (Q138750090).
+  This change is incorrect because Helen is a fictional character, and removing the
+  'fictional' qualifier contradicts established Wikidata practices for fictional entities.
+  No independent sources support classifying Helen as a real human, and the old value
+  aligns with Wikidata's classification system for fictional characters. The edit
+  lacks references and is inconsistent with the item's description as a fictional
+  character.
+rcid: 2550750525
+revid: 2474076726
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/learn/lesson/helen-of-troy-story-mythology-trojan-war.html
+- provenance: verified
+  supports_claim: false
+  url: https://web.sas.upenn.edu/discentes/2024/04/21/the-anatomy-of-a-misunderstood-woman/
+- provenance: reported
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Q15632617
+timestamp: '2026-04-11T13:32:53.822888+00:00'
+title: Q116754785
+turns: 1
+value_label: human
+verdict: incorrect

@@ -1,0 +1,25 @@
+completion_tokens: 2209
+cost_usd: 0.0025936199999999996
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 24503
+property: P570
+property_label: date of death
+rationale: The edit changed the date of death for Heinrich Zernecke from an unspecified
+  year (1775-00-00) to a precise date (30 July 1775). The new value is strongly supported
+  by the Gdańsk Gedanopedia page, which explicitly states Heinrich Zernecke died on
+  30 July 1775. The old value lacked specificity, making it unverifiable without additional
+  context. The cited reference (GND Catalog) is consistent with the new value, and
+  the change improves the precision of the claim.
+rcid: 2550760877
+revid: 2474086834
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gdansk.gedanopedia.pl/gdansk/?title=ZERNECKE_HEINRICH,_burmistrz_Gda%C5%84ska
+timestamp: '2026-04-11T12:31:31.026019+00:00'
+title: Q94912890
+turns: 2
+value_label: null
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 1986
+cost_usd: 0.0042515999999999995
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15300
+property: P570
+property_label: date of death
+rationale: Two independently verified sources—the local Gdańsk biographical database
+  (Gedanopedia) and the Polish Wikipedia—explicitly state that Johann Uphagen died
+  on 17 November 1802 in Gdańsk. No reputable source supports only the year 1802 without
+  specifying the day, making the previous value imprecise. Changing to the specific
+  date is a justified improvement.
+rcid: 2550769977
+revid: 2474095707
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://gdansk.gedanopedia.pl/gdansk/?title=UPHAGEN_JOHANN%2C_bibliofil%2C_historyk%2C_rajca
+- provenance: verified
+  supports_claim: true
+  url: https://pl.wikipedia.org/wiki/Johann_Uphagen
+timestamp: '2026-04-11T09:14:21.507628+00:00'
+title: Q11719325
+turns: 1
+value_label: null
+verdict: verified-high

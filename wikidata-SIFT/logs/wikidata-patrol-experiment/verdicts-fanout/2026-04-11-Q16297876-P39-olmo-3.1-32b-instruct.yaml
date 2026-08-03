@@ -1,0 +1,31 @@
+completion_tokens: 1717
+cost_usd: 0.005829
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23994
+property: P39
+property_label: position held
+rationale: The official government of Chile website and multiple reputable news organizations
+  confirm that Gabriel Boric has served as President of Chile since March 2022. The
+  dates and role in the statement align with these sources. However, the Wikidata
+  claim currently lacks a cited reference, which is a best practice violation. Despite
+  this procedural issue, the factual accuracy of the claim is well-supported by independent
+  evidence.
+rcid: null
+revid: 2470567113
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.gob.cl/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.com/news/world-latin-america-61062473
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/news/articles/2022-03-11/gabriel-boric-becomes-chile-s-youngest-president
+timestamp: '2026-04-11T13:05:36.353540+00:00'
+title: Q16297876
+turns: 1
+value_label: President of Chile
+verdict: verified-high

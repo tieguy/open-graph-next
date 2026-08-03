@@ -1,0 +1,35 @@
+completion_tokens: 2564
+cost_usd: 0.19896799999999998
+diff_type: qualifier_added
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 186148
+property: P2002
+property_label: X (Twitter) username
+rationale: MG Timber Products Ltd is a verified UK company (Companies House 10560760,
+  incorporated 2017) based in Aldridge/Hednesford that manufactures garden furniture.
+  However, I could not find independent verification that the Twitter/X username 'mg_timber'
+  is officially associated with this company. The company's official website contact
+  page mentions social media accounts but does not display the handles in accessible
+  text. Twitter/X is a blocked domain preventing direct account verification. The
+  only '@mg_timber' account found in searches is for a Latvian hot tub/jacuzzi company
+  (MG Timber Kubli), not the UK garden furniture firm. Without access to the actual
+  Twitter/X profile or corroborating sources linking this specific handle to MG Timber
+  Products Ltd, the claim cannot be verified.
+rcid: 2540935096
+revid: 2464725431
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://find-and-update.company-information.service.gov.uk/company/10560760
+- provenance: verified
+  supports_claim: false
+  url: https://mgtimberproductsltd.co.uk
+- provenance: verified
+  supports_claim: false
+  url: https://mgtimberproductsltd.co.uk/contact-us/
+timestamp: '2026-02-20T17:38:08.020821+00:00'
+title: Q138349055
+turns: 15
+value_label: null
+verdict: unverifiable

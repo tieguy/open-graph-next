@@ -1,0 +1,24 @@
+completion_tokens: 1786
+cost_usd: 0.00288201
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 39751
+property: P19
+property_label: place of birth
+rationale: 'The edit changed the place of birth from Vigo (Q8745) to Madrid (Q2807)
+  for Alicia Borrás (Q12382802). The new value, Madrid, is explicitly supported by
+  a verified source (NarniaFans), which states ''Place of Birth: Madrid, Spain''.
+  No independent sources corroborate Vigo as Alicia Borrás''s place of birth. The
+  change is justified by the available evidence, and the old value lacks corroboration.'
+rcid: 2551012576
+revid: 2474330276
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://narniafans.com/cast/alicia-borrachero/
+timestamp: '2026-04-11T06:06:41.938453+00:00'
+title: Q12382802
+turns: 6
+value_label: Madrid
+verdict: verified-high

@@ -1,0 +1,33 @@
+completion_tokens: 689
+cost_usd: 0.0058541999999999995
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27204
+property: P569
+property_label: date of birth
+rationale: The only cited reference (VK.com video) is unreachable due to domain blocking.
+  No independent, verifiable source confirms the date of birth of 2 May 2000. The
+  official website biography page does not exist, and the TikTok profile does not
+  provide a date of birth. Therefore, the claim is suspect and cannot be considered
+  reliable without additional evidence.
+rcid: null
+revid: 2436149160
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://vk.com/video-200564540_456239910
+- provenance: reported
+  supports_claim: false
+  url: https://xolidayboy.ru/biography
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/Шолидей_BoY
+- provenance: reported
+  supports_claim: false
+  url: https://www.tiktok.com/@xolidayboy___
+timestamp: '2026-04-07T10:42:34.897700+00:00'
+title: Q115258159
+turns: 4
+value_label: null
+verdict: suspect

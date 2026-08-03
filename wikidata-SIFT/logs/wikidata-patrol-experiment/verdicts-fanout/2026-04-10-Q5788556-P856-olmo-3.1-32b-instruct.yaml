@@ -1,0 +1,33 @@
+completion_tokens: 2150
+cost_usd: 0.003977
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13435
+property: P856
+property_label: official website
+rationale: Multiple authoritative and independent sources, including the official
+  FFPRI website and both Japanese and English Wikipedia, confirm that https://www.ffpri.go.jp/tmk/en/
+  is the current official website for Tama Forest Science Garden. The change from
+  the previous domain is consistent with a government agency reorganization and is
+  supported by up-to-date operational information on the official site.
+rcid: 2550444325
+revid: 2473781004
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.ffpri.go.jp/tmk/en/index.html
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Tama_Forest_Science_Garden
+- provenance: verified
+  supports_claim: true
+  url: https://ja.wikipedia.org/wiki/多摩林研樹園
+- provenance: verified
+  supports_claim: true
+  url: https://www.gotokyo.org/en/spot/1226/index.html
+timestamp: '2026-04-10T13:19:06.234213+00:00'
+title: Q5788556
+turns: 1
+value_label: null
+verdict: verified-high

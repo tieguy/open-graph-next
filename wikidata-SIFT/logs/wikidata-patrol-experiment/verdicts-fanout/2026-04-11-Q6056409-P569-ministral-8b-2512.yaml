@@ -1,0 +1,26 @@
+completion_tokens: 1421
+cost_usd: 0.00136806
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13895
+property: P569
+property_label: date of birth
+rationale: The new date of birth (31 February 2026) is factually impossible and contradicted
+  by all verified sources. Multiple independent sources confirm Pablo Ruz was born
+  on 28 November 1975. The edit introduces an unsupported, nonsensical value with
+  no credible backing.
+rcid: null
+revid: 2470596354
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://alchetron.com/Pablo-Ruz
+- provenance: verified
+  supports_claim: true
+  url: https://www.vanitatis.elconfidencial.com/noticias/2015-04-14/asi-es-la-familia-a-la-que-el-juez-ruz-quiere-dedicar-su-tiempo-tras-dejar-la-audiencia-nacional_755800/
+timestamp: '2026-04-11T12:30:01.900421+00:00'
+title: Q6056409
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1898
+cost_usd: 0.0069104
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28858
+property: P2403
+property_label: total assets
+rationale: The new value of 5,474,421,000,000 Russian rubles for Lukoil's total assets
+  at the relevant date is directly supported by the company's 2016 annual report and
+  independently confirmed by reputable financial news sources. The old value was ambiguous
+  and did not match the reported figure.
+rcid: 2550551101
+revid: 2473884206
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.lukoil.ru/FileSystem/PressCenter/116701.pdf
+- provenance: verified
+  supports_claim: true
+  url: https://www.reuters.com/article/business/energy/lukoil-reports-2016-results-idUSKCN11X1LK/
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/111141201
+timestamp: '2026-04-11T15:43:32.452713+00:00'
+title: Q329347
+turns: 1
+value_label: null
+verdict: verified-high

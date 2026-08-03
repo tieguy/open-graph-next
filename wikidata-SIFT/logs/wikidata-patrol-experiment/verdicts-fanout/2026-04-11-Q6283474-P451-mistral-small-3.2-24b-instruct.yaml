@@ -1,0 +1,26 @@
+completion_tokens: 1317
+cost_usd: 0.00439144
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46159
+property: P451
+property_label: unmarried partner
+rationale: The claim that William Goyen was Joseph Glasco's unmarried partner is supported
+  by reliable biographical information from the Joseph Glasco Foundation and Annex
+  Galleries. Both sources confirm the relationship between Joseph Glasco and William
+  Goyen.
+rcid: 2550519876
+revid: 2473854158
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.annexgalleries.com/artists/biography/3726/Glasco/Joseph%20M.
+- provenance: verified
+  supports_claim: true
+  url: https://josephglascofoundation.org/joseph-glasco-biography
+timestamp: '2026-04-11T14:32:53.765713+00:00'
+title: Q6283474
+turns: 1
+value_label: William Goyen
+verdict: verified-high

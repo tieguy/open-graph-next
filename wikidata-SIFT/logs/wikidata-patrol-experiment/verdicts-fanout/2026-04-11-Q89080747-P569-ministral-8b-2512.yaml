@@ -1,0 +1,27 @@
+completion_tokens: 1669
+cost_usd: 0.00130626
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13235
+property: P569
+property_label: date of birth
+rationale: The new date of birth (6 July 1967) contradicts the cited Transfermarkt
+  reference, which explicitly states Elias Hadaya's date of birth as 31 August 1998.
+  Independent corroboration from Fox Sports further confirms the 1998 date. The item’s
+  other claims (age, height, citizenship) also align with the 1998 date, making the
+  new value unsupported and incorrect.
+rcid: 2549663708
+revid: 2473023922
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://www.foxsports.com/soccer/elias-hadaya-player-bio
+timestamp: '2026-04-11T14:30:30.366625+00:00'
+title: Q89080747
+turns: 1
+value_label: null
+verdict: incorrect

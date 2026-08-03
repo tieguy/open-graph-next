@@ -1,0 +1,25 @@
+completion_tokens: 1408
+cost_usd: 0.0044028
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17790
+property: P577
+property_label: publication date
+rationale: All available independent sources confirm that 'Good Night Stories for
+  Rebel Girls' was published in 2016. There is no credible evidence supporting a future
+  or 203rd-century publication date. Assigning such a date is therefore incorrect.
+rcid: null
+revid: 2473296413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Good_Night_Stories_for_Rebel_Girls
+- provenance: verified
+  supports_claim: false
+  url: https://www.rebelgirls.com/
+timestamp: '2026-04-07T06:55:02.822045+00:00'
+title: Q48966676
+turns: 3
+value_label: null
+verdict: incorrect

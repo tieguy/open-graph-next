@@ -1,0 +1,31 @@
+completion_tokens: 2032
+cost_usd: 0.00215991
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18563
+property: P1477
+property_label: birth name
+rationale: The edit incorrectly changed the birth name from 'Gabriel Simon Macht'
+  to 'Gabriel Simon Macht Alshehri'. Multiple verified sources (FamousBirthdays, JewAge.org,
+  TV Guide) consistently list the birth name as 'Gabriel S. Macht' or 'Gabriel Macht'
+  without the middle name 'Alshehri'. The cited reference (Spokeo) is unreachable,
+  and no credible sources support the addition of 'Alshehri'. The old value is well-supported
+  by independent evidence, making the new value incorrect.
+rcid: null
+revid: 2471479395
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/gabriel-macht.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.jewage.org/wiki/en/Article:Gabriel_Macht_-_Biography
+- provenance: verified
+  supports_claim: false
+  url: https://www.tvguide.com/celebrities/gabriel-macht/bio/3030070713/
+timestamp: '2026-04-11T14:31:32.600579+00:00'
+title: Q320651
+turns: 1
+value_label: null
+verdict: incorrect

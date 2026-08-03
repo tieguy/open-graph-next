@@ -1,0 +1,49 @@
+completion_tokens: 1940
+cost_usd: 0.0026014799999999998
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23190
+property: P1827
+property_label: ISWC
+rationale: The removed ISWC code "T-333.059.369-2" had no references, and our search
+  did not find any independent sources that confirm the ISWC code. The removal appears
+  to be justified as it was unsourced and unverifiable.
+rcid: 2550210775
+revid: 2473553400
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://entreprises.lefigaro.fr/monsieur-jean-voguet-77/entreprise-348445925
+- provenance: verified
+  supports_claim: false
+  url: https://soundcloud.com/jeanvoguet
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.com/page/3/
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.bandcamp.com/
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.wordpress.com/wp-content/uploads/2025/12/2025-12_jeanvoguet_biographie-cv.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://tips.hushline.app/to/jeanvoguet
+- provenance: verified
+  supports_claim: false
+  url: https://music.apple.com/us/artist/jean-voguet/787211901
+- provenance: verified
+  supports_claim: false
+  url: https://electropixel.org/index.php/2018/08/31/jean-voguet/
+- provenance: verified
+  supports_claim: false
+  url: https://www.deezer.com/us/artist/6939623
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/054rjNtknOlUV0Hb9bzL5q
+timestamp: '2026-04-10T13:45:36.830901+00:00'
+title: Q3175073
+turns: 2
+value_label: null
+verdict: verified-high

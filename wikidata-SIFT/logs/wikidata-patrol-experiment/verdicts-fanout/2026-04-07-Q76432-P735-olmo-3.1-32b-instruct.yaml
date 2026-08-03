@@ -1,0 +1,32 @@
+completion_tokens: 698
+cost_usd: 0.024160600000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 118709
+property: P735
+property_label: given name
+rationale: Rudolf Virchow (1821–1902) is a well-documented historical figure whose
+  identity and given name are established in authoritative sources. 'Jeffrey Epstein'
+  refers to a different individual (1953–2019). No reliable evidence supports assigning
+  Epstein's name to Virchow. This appears to be a case of mistaken identity or vandalism.
+rcid: 2550298536
+revid: 2473638478
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Rudolf_Virchow
+- provenance: reported
+  supports_claim: false
+  url: https://www.britannica.com/biography/Rudolf-Virchow
+- provenance: reported
+  supports_claim: false
+  url: https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7126973/
+- provenance: reported
+  supports_claim: false
+  url: https://www.medicalhistorians.org/content/rudolf-virchow-1821%E2%80%931902
+timestamp: '2026-04-07T04:33:56.875864+00:00'
+title: Q76432
+turns: 7
+value_label: Jeffrey Epstein
+verdict: incorrect

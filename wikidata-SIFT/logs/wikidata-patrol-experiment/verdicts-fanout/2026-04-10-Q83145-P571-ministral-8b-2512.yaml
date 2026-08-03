@@ -1,0 +1,30 @@
+completion_tokens: 1913
+cost_usd: 0.00489243
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 47580
+property: P571
+property_label: inception
+rationale: The Africa Cup of Nations was founded in 1957, as confirmed by multiple
+  verified primary sources, including CAF's official history page and reputable sports
+  history websites. The claim that it was founded in 2045 is unsupported by any credible
+  evidence and contradicts all available historical records. The cited source (Italian
+  Wikipedia) is invalid for Wikidata due to circular citation.
+rcid: 2550014824
+revid: 2473363340
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cafonline.com/inside-caf/about-us/caf-history/
+- provenance: verified
+  supports_claim: false
+  url: https://www.footballhistory.org/tournament/africa-cup-of-nations.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.theguardian.com/football/2013/jan/17/african-cup-nations-history
+timestamp: '2026-04-10T10:05:53.941621+00:00'
+title: Q83145
+turns: 4
+value_label: null
+verdict: incorrect

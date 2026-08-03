@@ -1,0 +1,33 @@
+completion_tokens: 2042
+cost_usd: 0.00331992
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29512
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: The reference URL for the Google Knowledge Graph ID claim (`https://www.google.com/search?kgmid=/g/11kqn7d7z7`)
+  is unreachable (fetch failed), and no independent, verified sources confirm the
+  validity of the ID `/g/11kqn7d7z7` for SYENSQO. Attempts to search for corroborating
+  evidence were blocked due to payment requirements, leaving no verified evidence
+  to support or refute the claim.
+rcid: 2551389745
+revid: 2474694140
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://developers.google.com/knowledge-graph
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?kgmid=/g/11kqn7d7z7
+- provenance: verified
+  supports_claim: false
+  url: https://stackoverflow.com/questions/35642676/google-knowledge-graph-search-api-id-field
+- provenance: verified
+  supports_claim: false
+  url: https://support.google.com/knowledgepanel/answer/9787176
+timestamp: '2026-04-11T15:08:54.487596+00:00'
+title: Q123752186
+turns: 2
+value_label: null
+verdict: unverifiable

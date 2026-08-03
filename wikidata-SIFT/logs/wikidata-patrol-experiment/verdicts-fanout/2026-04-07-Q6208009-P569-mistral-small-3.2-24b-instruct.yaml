@@ -1,0 +1,22 @@
+completion_tokens: 1133
+cost_usd: 0.0036291937499999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36857
+property: P569
+property_label: date of birth
+rationale: The only reference cited for the edit is the English Wikipedia, which is
+  not a reliable primary source. Independent web searches did not yield any conclusive
+  results to confirm or deny the date of birth of Jodle Birge as 1 BCE.
+rcid: 2549549746
+revid: 2472912976
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Jodle_Birge
+timestamp: '2026-04-07T09:52:46.041841+00:00'
+title: Q6208009
+turns: 7
+value_label: null
+verdict: unverifiable

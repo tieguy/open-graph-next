@@ -1,0 +1,31 @@
+completion_tokens: 1852
+cost_usd: 0.00323058
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32332
+property: P31
+property_label: instance of
+rationale: The edit changed the instance of claim for Christopher Thorndyke from 'fictional
+  human' (Q15632617) to 'human' (Q138750090). Pre-fetched references confirm that
+  Christopher Thorndyke is a fictional character from the Sonic X anime, and the broader
+  category 'human' does not adequately reflect his fictional nature. The old value
+  was more accurate and specific. The change is incorrect because it removes the qualifier
+  'fictional,' which is essential for a fictional character.
+rcid: 2550770084
+revid: 2474095812
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sonic.fandom.com/wiki/Christopher_Thorndyke
+- provenance: verified
+  supports_claim: false
+  url: https://www.deviantart.com/evilgidgit/art/The-Trauma-of-Chris-Thorndyke-in-Sonic-X-676041321
+- provenance: verified
+  supports_claim: false
+  url: https://www.giantbomb.com/christopher-thorndyke/3005-39281/
+timestamp: '2026-04-11T07:07:25.956714+00:00'
+title: Q17634983
+turns: 3
+value_label: human
+verdict: incorrect

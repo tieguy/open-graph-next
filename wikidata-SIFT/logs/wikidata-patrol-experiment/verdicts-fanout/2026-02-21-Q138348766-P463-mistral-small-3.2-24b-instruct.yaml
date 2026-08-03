@@ -1,0 +1,35 @@
+completion_tokens: 1606
+cost_usd: 0.002381
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18992
+property: P463
+property_label: member of
+rationale: The primary source from the BBTS website directly confirms Danny Gaskin's
+  membership. Multiple independent sources, including ResearchGate, Salford Open Journals,
+  and Companies House, further corroborate this claim. The evidence is strong and
+  consistent across sources.
+rcid: 2540920683
+revid: 2464711712
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/dannygaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://www.researchgate.net/profile/Danny-Gaskin
+- provenance: verified
+  supports_claim: true
+  url: https://openjournals.salford.ac.uk/bioscientist/article/id/148/
+- provenance: verified
+  supports_claim: true
+  url: https://www.lifeblood.com.au/news-and-stories/health-professionals-news/fatigue-in-focus
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/officers/gtdcxQmquzVmV3SDMHBv5scL_og/appointments
+timestamp: '2026-02-21T01:03:56.173443+00:00'
+title: Q138348766
+turns: 3
+value_label: British Blood Transfusion Society
+verdict: verified-high

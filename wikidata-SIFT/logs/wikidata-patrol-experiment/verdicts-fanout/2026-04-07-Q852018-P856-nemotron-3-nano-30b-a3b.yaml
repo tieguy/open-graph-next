@@ -1,0 +1,27 @@
+completion_tokens: 675
+cost_usd: 0.0080179
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 157658
+property: P856
+property_label: official website
+rationale: No verifiable primary source confirming that flypeach.com is the official
+  website of Izumisano was found despite multiple searches and fetches. Attempts to
+  locate the city's official website and identify Peach's corporate website yielded
+  either irrelevant results or blocked domains. The discovered website (flypeach.com)
+  appears to be a commercial airline site, but no authoritative connection to Izumisano
+  was established. Authoritative sources like the city's official domain redirect
+  to unrelated content and do not list flypeach.com as a reference. Without confirmed
+  evidence linking this URL to the municipality, the claim remains unverifiable.
+rcid: null
+revid: 2471396729
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.flypeach.com
+timestamp: '2026-04-07T07:26:24.199723+00:00'
+title: Q852018
+turns: 15
+value_label: null
+verdict: unverifiable

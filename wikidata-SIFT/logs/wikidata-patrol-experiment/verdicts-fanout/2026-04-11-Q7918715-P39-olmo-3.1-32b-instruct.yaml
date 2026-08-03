@@ -1,0 +1,33 @@
+completion_tokens: 1816
+cost_usd: 0.0051434
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20269
+property: P39
+property_label: position held
+rationale: Veit von Würzburg is historically recorded as Prince-Bishop of Bamberg
+  from 1561 to 1577, which is functionally equivalent to a diocesan bishop in this
+  context. However, none of the directly cited references explicitly confirm the use
+  of the property 'diocesan bishop' (Q1144278) for him, though the dates and diocese
+  are correct. Therefore, the claim is reasonable but only weakly verified.
+rcid: 2550975374
+revid: 2474294791
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://doi.org/10.26015/adwdocs-106
+- provenance: verified
+  supports_claim: false
+  url: https://gcatholic.org/diocese/dbamb.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic-hierarchy.org/diocese/dwurz.html
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Veit_von_W%C3%BCrzburg
+timestamp: '2026-04-11T10:58:22.646441+00:00'
+title: Q7918715
+turns: 1
+value_label: diocesan bishop
+verdict: verified-low

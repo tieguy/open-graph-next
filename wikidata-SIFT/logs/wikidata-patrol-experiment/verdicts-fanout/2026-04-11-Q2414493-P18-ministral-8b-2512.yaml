@@ -1,0 +1,35 @@
+completion_tokens: 2156
+cost_usd: 0.0016802100000000001
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15241
+property: P18
+property_label: image
+rationale: The reference for the image claim of Wail al-Shehri was imported from Russian
+  Wikipedia, which is not a primary or authoritative source. The image itself lacks
+  explicit attribution from a reliable primary source such as an official government
+  report or widely cited news outlet. The removal of this reference is justified because
+  the original reference was secondary and did not provide sufficient evidence to
+  support the image claim independently. No verified primary source was found to confirm
+  the image’s validity, making the removal of the reference appropriate.
+rcid: 2551423438
+revid: 2474724622
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Wail_al-Shehri
+- provenance: verified
+  supports_claim: false
+  url: https://www.counterextremism.com/extremists/wail-al-shehri
+- provenance: reported
+  supports_claim: false
+  url: https://govinfo.library.unt.edu/911/report/911Report.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://vault.fbi.gov/9-11%20Commission%20Report/9-11-chronology-part-01-of-02/
+timestamp: '2026-04-11T07:55:38.781478+00:00'
+title: Q2414493
+turns: 1
+value_label: null
+verdict: verified-high

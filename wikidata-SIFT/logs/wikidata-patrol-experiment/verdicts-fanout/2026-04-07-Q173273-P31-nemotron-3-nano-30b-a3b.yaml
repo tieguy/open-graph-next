@@ -1,0 +1,22 @@
+completion_tokens: 654
+cost_usd: 0.00507715
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 98927
+property: P31
+property_label: instance of
+rationale: No sources were successfully fetched and verified during investigation.
+  The relevant source URL (https://www.wikidata.org/wiki/Q173273) returned a blocked_domain
+  error, preventing direct access verification. All other queries for independent
+  coverage returned empty results. Without any verified source to confirm or refute
+  the claim, the evidence is insufficient to determine its validity, meeting the criteria
+  for 'unverifiable' verdict.
+rcid: null
+revid: 2470122213
+sources: []
+timestamp: '2026-04-07T06:57:16.536685+00:00'
+title: Q173273
+turns: 15
+value_label: Chinmayananda Saraswati
+verdict: unverifiable

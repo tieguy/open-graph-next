@@ -1,0 +1,21 @@
+completion_tokens: 907
+cost_usd: 0.00433576875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41392
+property: P31
+property_label: instance of
+rationale: The Art Institute of Chicago confirms that 'The Child's Bath' is a painting,
+  not a 'PIN'. The edit changing the 'instance of' property to 'PIN' is incorrect.
+rcid: null
+revid: 2471525372
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.artic.edu/artworks/111442/the-child-s-bath
+timestamp: '2026-04-10T07:30:11.490426+00:00'
+title: Q3172226
+turns: 3
+value_label: PIN
+verdict: incorrect

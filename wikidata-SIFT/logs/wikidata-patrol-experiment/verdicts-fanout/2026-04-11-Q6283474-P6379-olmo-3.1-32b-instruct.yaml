@@ -1,0 +1,27 @@
+completion_tokens: 2318
+cost_usd: 0.0073324
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29708
+property: P6379
+property_label: has works in the collection
+rationale: Both the Hirshhorn Museum and Sculpture Garden and the Yale University
+  Art Gallery hold works by Joseph Glasco, including 'Untitled' (1957). The edit replaced
+  one correct institution with another, but did not introduce an error. Since both
+  claims are supported by primary sources and there is no evidence that only one should
+  be listed, the change is plausible but not an improvement.
+rcid: 2550426216
+revid: 2473763457
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://hirshhorn.si.edu/collection/artwork/?edanUrl=edanmdm%3Ahmsg_66.2078
+- provenance: verified
+  supports_claim: true
+  url: https://artgallery.yale.edu/collections/objects/90072
+timestamp: '2026-04-11T18:31:23.646516+00:00'
+title: Q6283474
+turns: 1
+value_label: Hirshhorn Museum and Sculpture Garden
+verdict: plausible

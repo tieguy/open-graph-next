@@ -1,0 +1,35 @@
+completion_tokens: 3496
+cost_usd: 0.139756
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 122276
+property: P569
+property_label: date of birth
+rationale: The edit claims January 1976 as Gaëlle Ghesquière's birth date, but this
+  contradicts multiple independent sources. The most authoritative source—the BnF
+  (French National Library) official record—explicitly states birth date 1978-01-22
+  (January 22, 1978). Multiple secondary sources (book biography, Commons category,
+  WikiWand) consistently report 1972. No independent sources corroborate the claimed
+  1976 date. The edit provides no references and introduces a value that is demonstrably
+  incorrect according to the most reliable available evidence.
+rcid: 2540938720
+revid: 2464728324
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://catalogue.bnf.fr/ark:/12148/cb14517999v
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com.be/-/en/Gaëlle-Ghesquière/dp/2847630244
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Gaëlle_Ghesquière
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotofemmeunited.com/article/658-female-photographers-and-feminism
+timestamp: '2026-02-20T16:10:18.161661+00:00'
+title: Q3099888
+turns: 9
+value_label: null
+verdict: incorrect

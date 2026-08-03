@@ -1,0 +1,26 @@
+completion_tokens: 12052
+cost_usd: 0.00873516
+diff_type: qualifier_added
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 48652
+property: P2607
+property_label: BookBrainz author ID
+rationale: The primary BookBrainz author page directly lists the UUID af16cc29-ddf8-48dc-8876-b6b24cdd95b6
+  as corresponding to 'Josh Universe', confirming the qualifier is correct. An independent
+  academic profile on fit.academia.edu also identifies the same individual, providing
+  corroborating evidence. No contradictory sources were identified.
+rcid: 2551429137
+revid: 2474729246
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bookbrainz.org/author/af16cc29-ddf8-48dc-8876-b6b24cdd95b6
+- provenance: verified
+  supports_claim: true
+  url: https://fit.academia.edu/JoshUniverse
+timestamp: '2026-04-10T11:05:08.071458+00:00'
+title: Q123738871
+turns: 2
+value_label: null
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 1260
+cost_usd: 0.0045702
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19071
+property: P18
+property_label: image
+rationale: The new image 'Jarfaiterpag.jpg' is not referenced or endorsed by any official
+  or primary source. The most authoritative interview with Jarfaiter does not mention
+  or display this image, and no official website confirmation was found. Changing
+  the image without clear authorization is suspect and may be incorrect.
+rcid: 2550533887
+revid: 2473867681
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.20minutos.es/noticia/5214920/0/jarfaiter-territorio-hostil-algunos-es-mi-zona-confort/
+timestamp: '2026-04-07T14:14:54.301119+00:00'
+title: Q29870720
+turns: 2
+value_label: null
+verdict: suspect

@@ -1,0 +1,33 @@
+completion_tokens: 1762
+cost_usd: 0.0037836
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13632
+property: P18
+property_label: image
+rationale: The edit replaced a standard portrait image from Wikimedia Commons with
+  a file named in a manner strongly suggestive of adult content. None of the primary
+  or authoritative sources consulted (official artist profile, professional bio, or
+  law firm page) reference or use the new image. There is no evidence that the new
+  image is appropriate or authorized, and the change is highly suspect.
+rcid: 2549874547
+revid: 2473230396
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Nadav_Ravid.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://bandcamp.com/nadavravid
+- provenance: verified
+  supports_claim: false
+  url: https://ra.co/dj/ndv/biography
+- provenance: verified
+  supports_claim: false
+  url: https://www.ravidlawgroup.com/professionals/nadav-ravid/
+timestamp: '2026-04-11T15:34:03.366977+00:00'
+title: Q47488244
+turns: 1
+value_label: null
+verdict: suspect

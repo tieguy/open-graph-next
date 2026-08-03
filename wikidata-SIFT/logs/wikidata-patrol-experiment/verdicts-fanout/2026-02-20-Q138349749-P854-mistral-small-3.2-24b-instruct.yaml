@@ -1,0 +1,45 @@
+completion_tokens: 2255
+cost_usd: 0.007088325
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 67713
+property: P854
+property_label: reference URL
+rationale: The claim is supported by multiple independent sources that consistently
+  describe Amarra as a formal wear design company. These sources provide detailed
+  descriptions of Amarra's products, which align with the claim. The unreachable reference
+  URL is a limitation, but the strong independent corroboration ensures the claim's
+  validity.
+rcid: 2540959310
+revid: 2464747346
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.chicboutiqueny.com/p22200317/amarra-88782.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.thedressoutlet.com/products/amarra-88299-long-formal-prom-fitted-lace-sequin-dress
+- provenance: verified
+  supports_claim: true
+  url: https://www.promgirl.com/products/amarra-ama-88130-dress
+- provenance: verified
+  supports_claim: true
+  url: https://www.forummagazine.org/?f=top-340384723
+- provenance: verified
+  supports_claim: true
+  url: https://www.newyorkdress.com/products/amarra-88126
+- provenance: verified
+  supports_claim: true
+  url: https://www.couturecandy.com/products/amarra-89195-multicolor-sequin-v-neck-evening-gown
+- provenance: verified
+  supports_claim: true
+  url: https://fostani.com/collections/amarra/products/style-89078?variant=53635580920180
+- provenance: verified
+  supports_claim: false
+  url: https://www.constantcontact.com/blog/customer-story-amarra/
+timestamp: '2026-02-20T05:06:33.827975+00:00'
+title: Q138349749
+turns: 8
+value_label: null
+verdict: verified-high

@@ -1,0 +1,31 @@
+completion_tokens: 2409
+cost_usd: 0.00300792
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29369
+property: P569
+property_label: date of birth
+rationale: The claim that Lucina Gil was born in 67 CE is incorrect. The real Lucina
+  Gil is a contemporary Spanish actress/director, and no verified source supports
+  the claim of birth in 67 CE. The only cited reference (Spanish Wikipedia) could
+  not be verified, and independent searches revealed confusion with a fictional character
+  from the *Fire Emblem* series. The previous Wikidata claim of 1967 is consistent
+  with her being a living actress.
+rcid: 2549241796
+revid: 2472613466
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://lucinagil.es/en/
+- provenance: verified
+  supports_claim: false
+  url: https://www.reddit.com/r/fireemblem/comments/8gyiu7/lucinas_minimum_age/
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Lucina_Gil
+timestamp: '2026-04-10T10:30:09.092322+00:00'
+title: Q5982216
+turns: 3
+value_label: null
+verdict: incorrect

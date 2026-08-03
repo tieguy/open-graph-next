@@ -1,0 +1,26 @@
+completion_tokens: 908
+cost_usd: 0.011841200000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 56482
+property: P19
+property_label: place of birth
+rationale: Authoritative secondary sources, including Biography.com, consistently
+  state that DJ Khaled was born in New Orleans, Louisiana. No credible evidence supports
+  the claim that his place of birth is Coventry. The edit to 'Coventry' is therefore
+  factually incorrect.
+rcid: 2540938015
+revid: 2464727651
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.biography.com/musicians/dj-khaled
+- provenance: reported
+  supports_claim: false
+  url: https://www.last.fm/music/DJ+Khaled/+wiki
+timestamp: '2026-02-20T16:22:27.567166+00:00'
+title: Q80805
+turns: 6
+value_label: Coventry
+verdict: incorrect

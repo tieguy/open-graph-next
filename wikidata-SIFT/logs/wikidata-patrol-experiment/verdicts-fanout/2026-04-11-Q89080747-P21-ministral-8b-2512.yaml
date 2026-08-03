@@ -1,0 +1,28 @@
+completion_tokens: 1674
+cost_usd: 0.00800907
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 60248
+property: P21
+property_label: sex or gender
+rationale: The change from male to female for Elias Hadaya (Q89080747) lacks credible
+  evidence. The heuristic-based reference (P887) is unreliable for determining biological
+  sex or gender. Independent sources such as FotMob and Transfermarkt do not mention
+  Elias Hadaya's gender and provide no evidence supporting the claim that he is female.
+  His name, career in male-dominated sports, and lack of gender-specific context strongly
+  suggest he should be classified as male.
+rcid: 2549662898
+revid: 2473023126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1049254/elias-hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/272542
+timestamp: '2026-04-11T08:15:48.444791+00:00'
+title: Q89080747
+turns: 7
+value_label: female
+verdict: incorrect

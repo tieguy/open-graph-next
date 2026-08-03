@@ -1,0 +1,22 @@
+completion_tokens: 1115
+cost_usd: 0.0017661875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15866
+property: P571
+property_label: inception
+rationale: The reference URL provided could not be fetched, and no independent sources
+  were found to confirm or deny the inception date change. The edit has been reverted,
+  suggesting it might not have been justified.
+rcid: 2550489005
+revid: 2473824742
+sources:
+- provenance: reported
+  supports_claim: false
+  url: http://enciclopedia.itaucultural.org.br/obra3249/escrava-romana
+timestamp: '2026-04-11T07:53:37.819767+00:00'
+title: Q28796962
+turns: 1
+value_label: null
+verdict: unverifiable

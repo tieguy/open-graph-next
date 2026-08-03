@@ -1,0 +1,28 @@
+completion_tokens: 1924
+cost_usd: 0.00672843
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54512
+property: P18
+property_label: image
+rationale: The new image ('Human vulva urinating.gif') is highly inappropriate and
+  irrelevant for an entity representing a location or population. The old image ('Sean
+  Combs Cannes 2012.jpg') was a legitimate and appropriate photograph of a person
+  at an event. The new image does not align with the entity's context (Q12263419,
+  located in Eskoriatza, Spain), and no references were provided for either image.
+  The edit was reverted, confirming its incorrectness.
+rcid: null
+revid: 2471634013
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/File:Sean_Combs_Cannes_2012.jpg
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Human_vulva_urinating.gif
+timestamp: '2026-04-11T09:22:24.642291+00:00'
+title: Q12263419
+turns: 5
+value_label: null
+verdict: incorrect

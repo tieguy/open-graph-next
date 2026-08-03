@@ -1,0 +1,31 @@
+completion_tokens: 2111
+cost_usd: 0.00241851
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 20208
+property: P175
+property_label: performer
+rationale: The edit changes the performer for Bo Peep from an unsupported claim of
+  Maria Plakidi to Annie Potts, which is strongly corroborated by multiple verified
+  primary sources (Pixar Fandom, Variety, and blog interviews). The qualifier P407
+  (Greek) is unsupported and inconsistent with the evidence. Since no credible source
+  supports Maria Plakidi as Bo Peep, the edit is accurate and improves the Wikidata
+  claim.
+rcid: 2550779368
+revid: 2474104864
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pixar.fandom.com/wiki/Annie_Potts
+- provenance: verified
+  supports_claim: true
+  url: https://variety.com/2019/film/news/toy-story-4-bo-peep-annie-potts-interview-1203244389/
+- provenance: verified
+  supports_claim: true
+  url: https://mamacitaonthemove.com/disney-toy-story-4-annie-potts-interview-on-bo-peep/
+timestamp: '2026-04-11T10:15:57.777487+00:00'
+title: Q20823443
+turns: 1
+value_label: Annie Potts
+verdict: verified-high

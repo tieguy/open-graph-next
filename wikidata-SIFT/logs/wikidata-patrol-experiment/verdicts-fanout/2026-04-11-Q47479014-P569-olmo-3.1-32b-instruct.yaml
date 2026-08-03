@@ -1,0 +1,34 @@
+completion_tokens: 3350
+cost_usd: 0.0049364000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14632
+property: P569
+property_label: date of birth
+rationale: The new date of birth (28 September 1964) is supported by the French Wikipedia,
+  a generally reliable secondary source. However, no primary or official source was
+  found to independently confirm the date of birth. The previously cited primary source
+  (World Rowing athlete database) is unavailable. There is no evidence supporting
+  the old value (1954-09-28), but the lack of a primary source prevents a higher confidence
+  rating.
+rcid: null
+revid: 2471461345
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://fr.wikipedia.org/wiki/Laurent_Lacasa
+- provenance: verified
+  supports_claim: false
+  url: https://www.sports-reference.com/olympics/athletes/lacasa-laurent.html
+- provenance: reported
+  supports_claim: null
+  url: http://www.worldrowing.com/athletes/athlete/6147/lacasa-laurent
+- provenance: verified
+  supports_claim: false
+  url: https://www.olympics.com/en/athletes/laurent-lacasa
+timestamp: '2026-04-11T06:02:05.015073+00:00'
+title: Q47479014
+turns: 1
+value_label: null
+verdict: plausible

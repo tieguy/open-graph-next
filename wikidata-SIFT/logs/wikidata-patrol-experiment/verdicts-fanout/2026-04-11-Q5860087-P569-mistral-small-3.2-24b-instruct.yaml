@@ -1,0 +1,28 @@
+completion_tokens: 1283
+cost_usd: 0.0030956562500000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29599
+property: P569
+property_label: date of birth
+rationale: The new date of birth (2024) is highly implausible and contradicts historical
+  records. The prefetched references indicate a birth year of 1908, and the edit to
+  change it to 2024 is not supported by the available evidence.
+rcid: 2550184564
+revid: 2473527955
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://datos.bne.es/resource/XX1096526
+- provenance: verified
+  supports_claim: false
+  url: https://ancestors.familysearch.org/en/KZZQ-VFY/fernando-primo-de-rivera-s%C3%A1enz-de-heredia-1908-1936
+- provenance: verified
+  supports_claim: false
+  url: https://ninos.kiddle.co/Fernando_Primo_de_Rivera_y_S%C3%A1enz_de_Heredia
+timestamp: '2026-04-11T16:22:51.413352+00:00'
+title: Q5860087
+turns: 3
+value_label: null
+verdict: incorrect

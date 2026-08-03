@@ -1,0 +1,25 @@
+completion_tokens: 1195
+cost_usd: 0.00145745625
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 13955
+property: P19
+property_label: place of birth
+rationale: The edit adding the country qualifier (United States) to the place of birth
+  (Milford) is supported by multiple independent sources. The sources confirm that
+  T.J. Sullivan was born in Milford, Connecticut, which is consistent with the edit.
+rcid: 2551385479
+revid: 2474690011
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://howtotrainyourdragon.fandom.com/wiki/T.J._Sullivan
+- provenance: verified
+  supports_claim: true
+  url: https://www.milfordmirror.com/news/article/T.J.-Sullivan-From-Milford-to-California-and-a-14162269.php
+timestamp: '2026-04-11T10:28:55.996103+00:00'
+title: Q114697399
+turns: 1
+value_label: Milford
+verdict: verified-high

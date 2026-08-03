@@ -1,0 +1,28 @@
+completion_tokens: 1991
+cost_usd: 0.10021300000000001
+diff_type: reference_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 90258
+property: P69
+property_label: educated at
+rationale: 'The Loyola University New Orleans faculty profile is an authoritative
+  primary source that explicitly and specifically supports the claim with concrete
+  detail: ''M.A., San Diego State University, 2001.'' The reference URL in the edit
+  points directly to this source, and its content unambiguously confirms Nathan Henne''s
+  education at San Diego State University. No contradicting information was found
+  in related sources or independent searches.'
+rcid: 2540929703
+revid: 2464720400
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.loyno.edu/academics/faculty-and-staff-directory/nathan-henne
+- provenance: verified
+  supports_claim: true
+  url: https://movingmedias.tulane.edu/nathan-henne/
+timestamp: '2026-02-20T20:38:29.450952+00:00'
+title: Q138341274
+turns: 9
+value_label: San Diego State University
+verdict: verified-high

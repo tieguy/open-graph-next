@@ -1,0 +1,30 @@
+completion_tokens: 1896
+cost_usd: 0.00333405
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 29061
+property: P27
+property_label: country of citizenship
+rationale: No independent, verified sources confirm Patrice Hauret's U.S. citizenship.
+  While he was a postdoctoral researcher at Caltech (United States), this does not
+  imply citizenship. His current affiliation and location are in France, and the only
+  cited reference (French Wikipedia) is invalid for Wikidata verification. The claim
+  lacks credible evidence.
+rcid: 2551044304
+revid: 2474361066
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://entretiensjacquescartier.com/biographicals/patrice-hauret/
+- provenance: verified
+  supports_claim: false
+  url: https://www.genealogy.math.ndsu.nodak.edu/id.php?id=86416
+- provenance: verified
+  supports_claim: false
+  url: https://theorg.com/org/michelin/org-chart/patrice-hauret
+timestamp: '2026-04-10T12:06:01.224131+00:00'
+title: Q25931594
+turns: 3
+value_label: United States
+verdict: suspect

@@ -1,0 +1,28 @@
+completion_tokens: 2752
+cost_usd: 0.0079188
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 31338
+property: P1814
+property_label: name in kana
+rationale: The edit changed the 'name in kana' (P1814) from the standard rendering
+  'すみよしたいしゃ' to the English name 'Sumiyoshi Taisha'. Authoritative sources such as
+  the Japanese Wikipedia and Google Maps confirm that the correct kana rendering is
+  'すみよしたいしゃ'. The English name should be used in an English name property, not in
+  the kana field. This misapplication of the property introduces a data integrity
+  issue.
+rcid: null
+revid: 2460858481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/住吉大社
+- provenance: verified
+  supports_claim: true
+  url: https://www.google.com/maps?q=Sumiyoshi+Taisha
+timestamp: '2026-04-11T15:03:50.120695+00:00'
+title: Q705949
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,27 @@
+completion_tokens: 1388
+cost_usd: 0.0058096
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24884
+property: P2956
+property_label: NAIF ID
+rationale: There is no authoritative source that defines or assigns a NAIF ID for
+  NASA-ISRO Synthetic Aperture Radar (NISAR). The official ISRO mission page does
+  not mention a NAIF ID, and the cited JPL Horizons URL could not be accessed to verify
+  the value. Therefore, the change from '-165053' to '-198' cannot be confirmed or
+  denied based on current evidence.
+rcid: 2550876499
+revid: 2474199822
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.isro.gov.in/NISARSatellite.html
+- provenance: reported
+  supports_claim: false
+  url: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27-165053%27
+timestamp: '2026-04-07T03:43:22.655283+00:00'
+title: Q18128754
+turns: 2
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,28 @@
+completion_tokens: 704
+cost_usd: 0.0030834
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13305
+property: P8032
+property_label: victim(s)
+rationale: Multiple independent, verified sources—including a detailed investigative
+  report by INDEX NGO and a major French news outlet—confirm that Nahel Merzouk was
+  indeed the victim killed by a police officer in Nanterre on June 27, 2023. The new
+  value for the 'victim(s)' claim (P8032) is correct and precisely matches the subject
+  of the item. No contradictory evidence was found, and the sources directly support
+  the edit.
+rcid: 2549974142
+revid: 2473324003
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://rmc.bfmtv.com/actualites/societe/il-faisait-tout-son-possible-pour-s-en-sortir-qui-etait-nahel-le-jeune-tue-a-nanterre_AV-202306290312.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.index.ngo/en/investigations/killing-of-nahel-merzouk/
+timestamp: '2026-04-11T11:45:10.903189+00:00'
+title: Q120028551
+turns: 1
+value_label: Nahel Merzouk
+verdict: verified-high

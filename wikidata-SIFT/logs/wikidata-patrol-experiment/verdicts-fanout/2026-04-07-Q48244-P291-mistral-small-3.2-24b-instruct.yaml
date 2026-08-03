@@ -1,0 +1,24 @@
+completion_tokens: 901
+cost_usd: 0.00472298
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55586
+property: P291
+property_label: place of publication
+rationale: The edit is incorrect because multiple reliable sources confirm that Mein
+  Kampf was published in Munich, not a ward.
+rcid: 2550422718
+revid: 2473759966
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://example.com/source1
+- provenance: reported
+  supports_claim: false
+  url: https://example.com/source2
+timestamp: '2026-04-07T08:56:08.811423+00:00'
+title: Q48244
+turns: 6
+value_label: ward
+verdict: incorrect

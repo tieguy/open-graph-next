@@ -1,0 +1,29 @@
+completion_tokens: 2289
+cost_usd: 0.0072082
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29174
+property: P577
+property_label: publication date
+rationale: Both the old and new publication date values claim a 2028 release for 'Final
+  Destination Bloodlines,' but all reliable sources confirm the film was released
+  in 2025. The edit replaces a referenced but incorrect date with an unsourced and
+  incorrect date, removing citation and not improving accuracy.
+rcid: 2549702809
+revid: 2473061745
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/title/tt9619824/releaseinfo/
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Final_Destination_Bloodlines
+- provenance: verified
+  supports_claim: false
+  url: https://variety.com/2024/film/news/final-destination-6-release-date-jj-abrams-flowervale-street-delayed-1236243425/
+timestamp: '2026-04-11T17:17:12.741306+00:00'
+title: Q118212751
+turns: 1
+value_label: null
+verdict: suspect

@@ -1,0 +1,29 @@
+completion_tokens: 1743
+cost_usd: 0.0034336
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11939
+property: P131
+property_label: located in the administrative territorial entity
+rationale: No authoritative sources recognize 'West Atjeh Darussalam' as an official
+  administrative territorial entity. The Aceh provincial government and Wikipedia
+  list only regencies and cities as administrative divisions, and the cited reference
+  is weak and does not support the claim.
+rcid: null
+revid: 2471718971
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Aceh
+- provenance: verified
+  supports_claim: false
+  url: https://www.aceh.go.id/
+- provenance: verified
+  supports_claim: false
+  url: https://www.academia.edu/117124089/KINGDOM_OF_ACEH_DARUSALAM
+timestamp: '2026-04-10T13:01:43.389669+00:00'
+title: Q96984686
+turns: 1
+value_label: West Atjeh Darussalam
+verdict: incorrect

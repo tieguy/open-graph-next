@@ -1,0 +1,36 @@
+completion_tokens: 2383
+cost_usd: 0.0073376
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29539
+property: P106
+property_label: occupation
+rationale: Multiple independent sources, including the Romanian Wikipedia and Goodreads,
+  confirm that Doina Ruști is recognized as a writer and novelist. The updated references,
+  although some could not be fetched during this investigation due to technical errors,
+  are consistent with this identity and are corroborated by additional literary and
+  media sources. No contradictory evidence was found.
+rcid: 2550664192
+revid: 2473993718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ro.wikipedia.org/wiki/Doina_Ru%C5%A3ti
+- provenance: verified
+  supports_claim: true
+  url: https://www.goodreads.com/author/show/2919952.Doina_Ru_ti
+- provenance: reported
+  supports_claim: true
+  url: https://doinarusti.ro
+- provenance: reported
+  supports_claim: true
+  url: https://scoala9.ro/scriitori-de-manual-doina-rusti--in-toate-cartile-mele-am-scris-cate-o/966/
+- provenance: reported
+  supports_claim: true
+  url: https://www.arcsproject.org/stories/post/interview-with-doina-ruști-romanian-novelist/
+timestamp: '2026-04-10T07:48:16.018663+00:00'
+title: Q3712567
+turns: 1
+value_label: writer
+verdict: verified-high

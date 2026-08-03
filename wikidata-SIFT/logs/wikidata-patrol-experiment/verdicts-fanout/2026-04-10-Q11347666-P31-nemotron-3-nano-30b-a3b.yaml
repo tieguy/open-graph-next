@@ -1,0 +1,27 @@
+completion_tokens: 10037
+cost_usd: 0.0033431500000000005
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 10275
+property: P31
+property_label: instance of
+rationale: The edit replaces a musical group classification with "business". Bloomberg's
+  company profile and the company's own website (pacengtech.com) both explicitly describe
+  Pacific Engineering as a business providing professional engineering services, confirming
+  the new instance of value. These sources are directly accessed (verified) and clearly
+  support the claim.
+rcid: 2551234866
+revid: 2474547207
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bloomberg.com/profile/company/1342616D:US
+- provenance: verified
+  supports_claim: true
+  url: https://www.pacengtech.com/
+timestamp: '2026-04-10T11:45:34.050590+00:00'
+title: Q11347666
+turns: 1
+value_label: business
+verdict: verified-high

@@ -1,0 +1,34 @@
+completion_tokens: 809
+cost_usd: 0.0048886
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22016
+property: P1889
+property_label: different from
+rationale: Multiple verified sources—including industry databases, award listings,
+  and major adult content platforms—consistently identify 'Kenna James' as a unique
+  and distinct individual within the adult entertainment industry. This supports the
+  use of the 'different from' qualifier when referencing another 'Kenna James' on
+  Wikidata, ensuring clarity and accuracy. There is no evidence from these sources
+  that the name refers to more than one distinct person in this context.
+rcid: 2551312389
+revid: 2474620404
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://adultfilmindex.com/actor/11102/kenna-james
+- provenance: verified
+  supports_claim: true
+  url: https://avn.com/news/video/2021-avn-award-winners-announced-170965
+- provenance: verified
+  supports_claim: true
+  url: https://ideas.fandom.com/wiki/Kenna_James
+- provenance: verified
+  supports_claim: true
+  url: https://www.pornhub.com/video/search?search=kenna+james
+timestamp: '2026-04-11T12:49:30.792585+00:00'
+title: Q30584668
+turns: 1
+value_label: Kenna James
+verdict: verified-high

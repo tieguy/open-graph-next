@@ -1,0 +1,31 @@
+completion_tokens: 278
+cost_usd: 0.0027860000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13096
+property: P18
+property_label: image
+rationale: Neither the new image ('Audi Q5 GU 2.0 TDI IMG 3603.jpg') nor the old image
+  ('Audi Q5 Sportback GU DSC 9268.jpg') could be verified as official or representative
+  through accessible, authoritative sources. The search did not return a primary source
+  confirming the authenticity or preferred usage of either image. Without confirmation
+  from an official manufacturer or trusted repository, the change cannot be judged
+  as correct or incorrect.
+rcid: 2550738233
+revid: 2474065326
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.cardekho.com/carmodels/Audi/Audi_Q5
+- provenance: reported
+  supports_claim: false
+  url: https://cars.usnews.com/cars-trucks/audi/q5/photos-exterior
+- provenance: verified
+  supports_claim: false
+  url: https://www.gettyimages.com/photos/audi-q5
+timestamp: '2026-04-11T05:38:18.979836+00:00'
+title: Q758769
+turns: 1
+value_label: null
+verdict: unverifiable

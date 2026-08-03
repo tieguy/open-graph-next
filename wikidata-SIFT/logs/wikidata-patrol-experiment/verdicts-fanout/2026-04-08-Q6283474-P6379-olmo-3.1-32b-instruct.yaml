@@ -1,0 +1,27 @@
+completion_tokens: 755
+cost_usd: 0.037061800000000006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 183044
+property: P6379
+property_label: has works in the collection
+rationale: The claim that Joseph Glasco has works in the collection of The Menil Collection
+  could not be independently verified. The Menil Collection website search and archives
+  do not provide accessible, explicit confirmation of Joseph Glasco's presence in
+  their collection. The cited reference is a generic collection search page that does
+  not confirm the claim. Without direct, accessible evidence, the claim remains unverifiable.
+rcid: 2550380214
+revid: 2473718222
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.menil.org/collection/search?query=Joseph%20Glasco
+- provenance: verified
+  supports_claim: false
+  url: https://adp.menil.org/node/278?b=0
+timestamp: '2026-04-08T18:57:58.195217+00:00'
+title: Q6283474
+turns: 12
+value_label: The Menil Collection
+verdict: unverifiable

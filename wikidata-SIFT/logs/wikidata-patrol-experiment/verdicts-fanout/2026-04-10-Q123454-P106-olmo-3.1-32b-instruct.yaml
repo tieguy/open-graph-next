@@ -1,0 +1,37 @@
+completion_tokens: 2083
+cost_usd: 0.0069092
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 28297
+property: P106
+property_label: occupation
+rationale: Multiple reputable and independently sourced biographical records describe
+  Max Bill as an architect, painter, and sculptor. Neither the cited references nor
+  independent sources such as the Museum of Modern Art, The Fine Art Archive, Encyclopedia
+  Britannica, RKDartists, nor the Historical Dictionary of Switzerland mention 'employee'
+  as a correct or relevant occupation for Max Bill. Therefore, adding 'employee' as
+  an occupation is not supported by any credible evidence.
+rcid: 2550802881
+revid: 2474127840
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.moma.org/explore/collection/artist/max-bill/
+- provenance: verified
+  supports_claim: false
+  url: https://www.thefineartarchive.com/artists/max-bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Max-Bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.rkd.nl/en/explore-the-database/artists/8423/max-bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.hds.ch/en/database/a-z/bill-max-1928-1994-100183851.html
+timestamp: '2026-04-10T13:47:40.635261+00:00'
+title: Q123454
+turns: 1
+value_label: employee
+verdict: incorrect

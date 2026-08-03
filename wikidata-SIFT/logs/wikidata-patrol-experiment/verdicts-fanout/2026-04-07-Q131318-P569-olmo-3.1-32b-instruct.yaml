@@ -1,0 +1,25 @@
+completion_tokens: 1369
+cost_usd: 0.0363512
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 177649
+property: P569
+property_label: date of birth
+rationale: The date of birth '23 December 1881' for Juan Ramón Jiménez is confirmed
+  by authoritative sources including the Nobel Prize official biography and Find a
+  Grave memorial. No contradictory evidence was found from independent, verified sources.
+rcid: null
+revid: 2466637841
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nobelprize.org/prizes/literature/1956/jimenez/biographical/
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/7533271/juan_ram%C3%B3n-jim%C3%A9nez
+timestamp: '2026-04-07T03:13:42.117369+00:00'
+title: Q131318
+turns: 8
+value_label: null
+verdict: verified-high

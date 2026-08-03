@@ -1,0 +1,25 @@
+completion_tokens: 1027
+cost_usd: 0.014347600000000002
+diff_type: reference_added
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 140395
+property: P641
+property_label: sport
+rationale: The edit updates the sport property for Felipe Sarra to association football,
+  which is supported by multiple independent sources. The Transfermarkt profile and
+  other sources confirm his involvement in football.
+rcid: 2540927200
+revid: 2464717957
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.transfermarkt.us/felipe-sarra/profil/spieler/1089729
+- provenance: verified
+  supports_claim: true
+  url: https://sortitoutsi.net/football-manager-2026/person/2000012696/felipe-sarra
+timestamp: '2026-02-20T21:48:35.645681+00:00'
+title: Q138348816
+turns: 15
+value_label: association football
+verdict: verified-high

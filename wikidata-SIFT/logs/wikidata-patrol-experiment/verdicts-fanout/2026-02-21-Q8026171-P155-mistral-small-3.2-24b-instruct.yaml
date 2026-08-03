@@ -1,0 +1,50 @@
+completion_tokens: 3593
+cost_usd: 0.004244775
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34807
+property: P155
+property_label: follows
+rationale: The independent sources confirm that both "Zombie Influx" and "Winter's
+  Eve" were released in 2009 and are associated with Nox Arcana and Buzz-Works. However,
+  none of the sources explicitly state that "Winter's Eve" follows "Zombie Influx."
+  The evidence is consistent with the claim but not definitive.
+rcid: 2541055173
+revid: 2464837438
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/w/index.php?title=Zombie_Influx&oldid=1214244168
+- provenance: verified
+  supports_claim: false
+  url: https://noxarcana.com/zombie.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.amazon.com/Winters-Eve-Nox-Arcana/dp/B002YG0K4O
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/pl/artist/nox-arcana/7041274
+- provenance: verified
+  supports_claim: true
+  url: https://open.spotify.com/artist/2vmxXfIAWKLWbN1yGgHdou
+- provenance: verified
+  supports_claim: true
+  url: https://www.discogs.com/artist/779435-Nox-Arcana
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/bio.html
+- provenance: verified
+  supports_claim: true
+  url: https://zombie-works.com/music.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.deepdiscount.com/nox-arcana-winters-majesty/887516066931
+- provenance: verified
+  supports_claim: true
+  url: https://noxarcana.com/fanmail.html
+timestamp: '2026-02-21T04:10:15.392302+00:00'
+title: Q8026171
+turns: 4
+value_label: Zombie Influx
+verdict: verified-low

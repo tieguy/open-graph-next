@@ -1,0 +1,27 @@
+completion_tokens: 576
+cost_usd: 0.0102034
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 49289
+property: P856
+property_label: official website
+rationale: The new website https://www.evaair.com could not be verified as the official
+  website of Sakaide City. The previous value, https://www.city.sakaide.lg.jp/, is
+  consistent with official Japanese municipal domains and is widely recognized as
+  the official city website. Independent searches did not confirm the new URL, and
+  the cited reference could not be accessed for verification.
+rcid: null
+revid: 2471596419
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.city.sakaide.lg.jp/
+- provenance: unreachable (blocked domain)
+  supports_claim: false
+  url: https://www.evaair.com
+timestamp: '2026-04-07T06:00:14.435386+00:00'
+title: Q855059
+turns: 6
+value_label: null
+verdict: incorrect

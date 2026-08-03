@@ -1,0 +1,33 @@
+completion_tokens: 1234
+cost_usd: 0.02796069
+diff_type: value_changed
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 171018
+property: P2561
+property_label: name
+rationale: The claim that Sam Hyde uses the pseudonyms 'Georgio, Cody Cigar, Samir
+  Al-Hajeed, The Golden Kid, Mr.Golden Pipes, Mr.Big, Master Kenchiro Ichiimada, Peanut
+  Arbuckle' appears suspicious. While Sam Hyde is known to use numerous aliases as
+  part of his comedic persona and to circumvent platform bans, the specific list provided
+  resembles an online joke or troll post rather than an authoritative, documented
+  account of his aliases. No credible source confirming this exact list was found.
+  The addition of improbable names like 'Master Kenchiro Ichiimada' and 'Peanut Arbuckle'
+  further suggests this edit is a prank or misinformation.
+rcid: 2540944523
+revid: 2464733865
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Sam_Hyde
+- provenance: verified
+  supports_claim: false
+  url: https://knowyourmeme.com/memes/people/sam-hyde
+- provenance: verified
+  supports_claim: false
+  url: https://rationalwiki.org/wiki/Sam_Hyde
+timestamp: '2026-02-20T12:31:38.743397+00:00'
+title: Q27680796
+turns: 15
+value_label: null
+verdict: suspect

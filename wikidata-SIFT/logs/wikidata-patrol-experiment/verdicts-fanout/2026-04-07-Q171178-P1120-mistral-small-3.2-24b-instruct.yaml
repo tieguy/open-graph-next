@@ -1,0 +1,23 @@
+completion_tokens: 1608
+cost_usd: 0.006580275
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 67594
+property: P1120
+property_label: number of deaths
+rationale: The edit references a Wikimedia project called 'silicon' (Q670), but since
+  Wikipedia is not a reliable source for Wikidata references and the domain is blocked,
+  we cannot verify the content of this reference. Independent searches did not yield
+  any relevant results to confirm or deny the claim.
+rcid: 2550307082
+revid: 2473646881
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Fukushima_Daiichi_nuclear_disaster
+timestamp: '2026-04-07T13:00:56.186874+00:00'
+title: Q171178
+turns: 9
+value_label: null
+verdict: unverifiable

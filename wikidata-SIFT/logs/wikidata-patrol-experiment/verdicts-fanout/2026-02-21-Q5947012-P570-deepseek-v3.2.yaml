@@ -1,0 +1,24 @@
+completion_tokens: 1086
+cost_usd: 0.014589979999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 54251
+property: P570
+property_label: date of death
+rationale: The claim that Juan Agustín Moyano died in 1829 is strongly supported by
+  historical sources. The fetched source from Mendozantigua blog specifically states
+  he was executed by firing squad on 23 October 1829 in Mendoza. This aligns with
+  search results mentioning his involvement in the 1828-1829 civil war and subsequent
+  execution. The year 1829 is consistent across multiple independent sources.
+rcid: 2540922672
+revid: 2464713619
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mendozantigua.blogspot.com/2016/10/efemerides-23-de-octubre-de-1829-se.html
+timestamp: '2026-02-21T00:04:58.324544+00:00'
+title: Q5947012
+turns: 8
+value_label: null
+verdict: verified-high

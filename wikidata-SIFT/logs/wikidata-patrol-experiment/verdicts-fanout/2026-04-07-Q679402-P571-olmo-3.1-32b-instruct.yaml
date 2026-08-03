@@ -1,0 +1,30 @@
+completion_tokens: 1459
+cost_usd: 0.007349
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 32368
+property: P571
+property_label: inception
+rationale: The only reference provided for the inception date (31 March 2020) was
+  a Legal Entity Identifier, which does not reliably include foundation dates. Attempts
+  to verify the date through the official company website and independent business
+  registries yielded no confirmation. As a result, the date remains unverified and
+  should not be reasserted without a reliable source.
+rcid: null
+revid: 2471235559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.alpiq.com/de/unternehmen/unternehmen-und-geschichte/
+- provenance: reported
+  supports_claim: false
+  url: https://leiregistry.org/
+- provenance: reported
+  supports_claim: false
+  url: https://www.scr.ch/
+timestamp: '2026-04-07T10:06:56.530740+00:00'
+title: Q679402
+turns: 5
+value_label: null
+verdict: unverifiable

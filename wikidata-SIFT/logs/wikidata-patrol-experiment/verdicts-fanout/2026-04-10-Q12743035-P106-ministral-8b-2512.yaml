@@ -1,0 +1,34 @@
+completion_tokens: 2433
+cost_usd: 0.00288888
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22561
+property: P106
+property_label: occupation
+rationale: The occupation of Valentina Rusu-Ciobanu as a painter (Q1028181) is strongly
+  supported by multiple verified primary sources, including her official website (http://www.valentinarusuciobanu.com)
+  and external art databases (e.g., https://www.hkw.de). These sources explicitly
+  describe her as a painter and provide detailed evidence of her artistic contributions.
+  The unreachable reference URLs do not invalidate the claim, as the primary evidence
+  is robust and consistent.
+rcid: 2550500062
+revid: 2473835443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+- provenance: verified
+  supports_claim: true
+  url: https://www.artmoldova.md/en/artists/valentina-rusu-ciobanu
+timestamp: '2026-04-10T13:29:24.736344+00:00'
+title: Q12743035
+turns: 1
+value_label: painter
+verdict: verified-high

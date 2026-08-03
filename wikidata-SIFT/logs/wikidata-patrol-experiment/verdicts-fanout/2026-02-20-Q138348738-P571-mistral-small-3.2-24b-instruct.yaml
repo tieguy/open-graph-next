@@ -1,0 +1,29 @@
+completion_tokens: 1597
+cost_usd: 0.0036475749999999997
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 34396
+property: P571
+property_label: inception
+rationale: The reference provided in the edit supports the inception date of 2002
+  for the Polish branch of Bibby Financial Services, but independent sources do not
+  provide clear corroboration. The verdict is `verified-low` due to the lack of independent
+  confirmation.
+rcid: 2540937727
+revid: 2464727400
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bibbyfinancialservices.pl/o-nas
+- provenance: verified
+  supports_claim: false
+  url: https://tracxn.com/d/companies/bibby-financial-services/__-7AYMf9A6yL1BV0TF6KxBwuiCMpxJckaeD_qOpq_3yU
+- provenance: verified
+  supports_claim: false
+  url: https://careers.bibbyfinancialservices.com/page/about-us
+timestamp: '2026-02-20T16:29:50.758864+00:00'
+title: Q138348738
+turns: 4
+value_label: null
+verdict: verified-low

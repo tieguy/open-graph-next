@@ -1,0 +1,27 @@
+completion_tokens: 1824
+cost_usd: 0.032271999999999995
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 23152
+property: P856
+property_label: official website
+rationale: The URL https://www.maldiluna.com is confirmed as Mal di Luna's legitimate
+  official website through direct fetches of the homepage and About Us page. The official
+  website is active, authoritative, and independently corroborates all existing Wikidata
+  claims about the band including location (Trieste), country (Italy), and genres
+  (gothic rock, dark wave). The claim is supported by primary sources.
+rcid: 2540918002
+revid: 2464709184
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com/
+- provenance: verified
+  supports_claim: true
+  url: https://www.maldiluna.com/about-us/
+timestamp: '2026-02-21T02:41:31.713793+00:00'
+title: Q138348548
+turns: 3
+value_label: null
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 1449
+cost_usd: 0.0044374
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17840
+property: P26
+property_label: spouse
+rationale: The new value 'Pipidae' is a biological taxon and cannot be the spouse
+  of a person. The old value 'Veerle Swinnen' is not supported by any reliable biography
+  or citation. There is no evidence for either value, making the edit erroneous.
+rcid: null
+revid: 2463995680
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q56067
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q124337704
+- provenance: verified
+  supports_claim: false
+  url: https://www.bedetheque.com/auteur-2806-BD-Dugomier-Vincent.html
+timestamp: '2026-04-11T11:34:27.509554+00:00'
+title: Q3041019
+turns: 1
+value_label: Pipidae
+verdict: incorrect

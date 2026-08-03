@@ -1,0 +1,26 @@
+completion_tokens: 813
+cost_usd: 0.00865655
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 169879
+property: P1814
+property_label: name in kana
+rationale: No verifiable source was found confirming that 'Sumiyoshi Taisha' is an
+  official or recognized kana representation of the shrine's name. Multiple searches
+  for official kanji/kana forms on Japanese government, shrine, and encyclopedia sites
+  yielded either blocked domains, unrelated content, or no clear evidence supporting
+  the kana spelling used in the edit. The shrine's official website uses '住吉大社' in
+  kanji, and without a verified source authorizing 'Sumiyoshi Taisha' as an alternate
+  or updated kana form, the claim remains unverifiable.
+rcid: null
+revid: 2460858481
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sumiyoshitaisha.net/
+timestamp: '2026-04-07T14:00:08.649776+00:00'
+title: Q705949
+turns: 15
+value_label: null
+verdict: unverifiable

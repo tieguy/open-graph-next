@@ -1,0 +1,25 @@
+completion_tokens: 925
+cost_usd: 0.0039948
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17199
+property: P1875
+property_label: represented by
+rationale: The Zilberman Gallery's official website explicitly confirms that Yasam
+  Sasmazer is represented by the gallery, providing a detailed biography and exhibition
+  history. This primary source directly supports the 'represented by' claim.
+rcid: 2551221921
+revid: 2474534638
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+- provenance: unverifiable
+  supports_claim: null
+  url: https://www.sasmazeryasam.com/contact-2/
+timestamp: '2026-04-07T04:32:31.677406+00:00'
+title: Q99481023
+turns: 2
+value_label: Zilberman Gallery
+verdict: verified-high

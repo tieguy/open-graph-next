@@ -1,0 +1,24 @@
+completion_tokens: 1244
+cost_usd: 0.0066114599999999996
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 68930
+property: P18
+property_label: image
+rationale: The claim is supported by an independent source on Wikimedia Commons, which
+  contains images of Stolpersteine in Wuppertal, including the specific Stolperstein
+  for Edith Bukofzer. The reference added in the edit, although unverifiable due to
+  fetch failure, is likely to be a valid source of information given the independent
+  confirmation.
+rcid: null
+revid: 2464726697
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Stolpersteine_in_Wuppertal
+timestamp: '2026-04-07T08:43:06.138773+00:00'
+title: Q73391898
+turns: 7
+value_label: null
+verdict: verified-high

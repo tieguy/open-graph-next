@@ -1,0 +1,22 @@
+completion_tokens: 896
+cost_usd: 0.004582879999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48530
+property: P20
+property_label: place of death
+rationale: The only reference cited is the Russian Wikipedia, which is not a reliable
+  source for Wikidata edits. No independent sources were found to corroborate the
+  place of death as Marah Rabah.
+rcid: 2549456770
+revid: 2472822126
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://ru.wikipedia.org/wiki/Рабих_аз-Зубайр
+timestamp: '2026-04-07T11:12:46.066914+00:00'
+title: Q932368
+turns: 7
+value_label: Marah Rabah
+verdict: unverifiable

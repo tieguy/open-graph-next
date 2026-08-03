@@ -1,0 +1,41 @@
+completion_tokens: 1428
+cost_usd: 0.00700725
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 70936
+property: P856
+property_label: official website
+rationale: The URL "https://www.hawaiianairlines.com" is not mentioned as the official
+  website of Fukuchiyama in any of the sources. The only URL that appears to be the
+  official website is "https://www.city.fukuchiyama.lg.jp", which is mentioned in
+  the prefetched references and confirmed by the content of the page.
+rcid: null
+revid: 2471591651
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.fukuchiyama.lg.jp/reiki/reiki_honbun/k103RG00000001.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.fukuchiyama.lg.jp/soshiki/1/2150.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.e-stat.go.jp/en/regional-statistics/ssdsview/municipality
+- provenance: verified
+  supports_claim: false
+  url: https://www.japan-experience.com/all-about-japan/kyoto/attractions-and-excursions/fukuchiyama-guide-discovering-the-hidden-gem-of-kyoto-prefecture
+- provenance: verified
+  supports_claim: false
+  url: https://www.kyotobythesea.com/fukuchiyama
+- provenance: verified
+  supports_claim: false
+  url: https://www.kyototourism.org/en/column/21878/
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.fukuchiyama.lg.jp/uploaded/attachment/34698.pdf
+timestamp: '2026-04-10T09:30:56.567840+00:00'
+title: Q3355306
+turns: 4
+value_label: null
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 2304
+cost_usd: 0.0052232
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19204
+property: P20
+property_label: place of death
+rationale: The change from 'Maha' to 'Marah Rabah' as the place of death for Rabih
+  az-Zubayr is not supported by any reliable, independent sources. Historical accounts
+  consistently place his death near the Chari River in Chad, and no reputable sources
+  mention 'Marah Rabah' as the place of death. The cited reference does not support
+  the new value, and the edit does not improve the accuracy of the claim.
+rcid: 2549456770
+revid: 2472822126
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://talkafricana.com/rabih-az-zubayr-the-african-slave-trader-who-was-beheaded-for-daring-to-fight-against-the-french-colonialist/
+timestamp: '2026-04-11T06:31:36.587475+00:00'
+title: Q932368
+turns: 1
+value_label: Marah Rabah
+verdict: suspect

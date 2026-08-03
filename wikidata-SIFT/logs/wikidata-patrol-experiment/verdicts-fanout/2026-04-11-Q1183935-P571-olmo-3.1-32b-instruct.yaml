@@ -1,0 +1,33 @@
+completion_tokens: 2296
+cost_usd: 0.0046996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16610
+property: P571
+property_label: inception
+rationale: The correct inception date for Cartoon Network is October 1, 1992. Multiple
+  independent and primary sources, including the official Cartoon Network website
+  and Britannica, confirm this date. Both the new value (1981-10-01) and the old value
+  (1997-10-17) are incorrect. The edit replaced an incorrect value with an even more
+  incorrect one, and was not supported by any credible source.
+rcid: 2551080856
+revid: 2474396985
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Cartoon_Network
+- provenance: verified
+  supports_claim: false
+  url: https://www.cartoonnetwork.com
+- provenance: verified
+  supports_claim: false
+  url: https://www.imdb.com/company/co0005163/
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/topic/Turner-Broadcasting-System
+timestamp: '2026-04-11T12:33:11.157361+00:00'
+title: Q1183935
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,30 @@
+completion_tokens: 2301
+cost_usd: 0.0039138
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12666
+property: P18
+property_label: image
+rationale: The image filename 'Audi Q6L Sportback e-tron 001.jpg' uses a naming convention
+  ('Q6L Sportback') that is not recognized by official Audi sources or major automotive
+  publications. Only 'Q6 e-tron' and 'Q6 Sportback e-tron' are referenced officially.
+  No primary source confirms the new naming or image filename, making the update likely
+  incorrect.
+rcid: null
+revid: 2471360509
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.audi.it/it/web/it/modelli/q6-e-tron/q6-e-tron.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.audiusa.com/en/models/q6-e-tron/
+- provenance: verified
+  supports_claim: false
+  url: https://www.caranddriver.com/photos/g60075321/2025-audi-q6-and-sq6-e-tron-revealed-gallery/
+timestamp: '2026-04-10T14:18:59.889964+00:00'
+title: Q106620903
+turns: 1
+value_label: null
+verdict: suspect

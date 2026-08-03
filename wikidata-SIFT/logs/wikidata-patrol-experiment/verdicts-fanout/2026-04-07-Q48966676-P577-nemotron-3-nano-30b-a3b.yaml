@@ -1,0 +1,25 @@
+completion_tokens: 702
+cost_usd: 0.0039532
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76256
+property: P577
+property_label: publication date
+rationale: The evidence does not definitively confirm or refute the claim about the
+  publication date being '203. century'. No sources were found to verify '203. century'
+  or provide authoritative context for the claim. While a search for '2016' and '2018'
+  did not yield relevant results, the absence of evidence is not evidence of absence.
+  The lack of supporting citations in the edit itself further prevents definitive
+  verification. This edit remains unverifiable without additional primary source evidence.
+rcid: null
+revid: 2473296413
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Good+Night+Stories+for+Rebel+Girls+203
+timestamp: '2026-04-07T06:55:15.294746+00:00'
+title: Q48966676
+turns: 15
+value_label: null
+verdict: unverifiable

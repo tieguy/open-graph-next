@@ -1,0 +1,38 @@
+completion_tokens: 1464
+cost_usd: 0.00855578
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 135515
+property: P740
+property_label: location of formation
+rationale: Multiple sources confirm that Metzingen is the location of HUGO BOSS's
+  headquarters, but none of the fetched sources provide specific information about
+  the location of formation or the end time qualifier. The claim is plausible but
+  lacks direct confirmation.
+rcid: 2549876464
+revid: 2473232274
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://group.hugoboss.com/en/career/locations/location-germany-metzingen/1000?cHash=c4551b19289b9ac3a2e5e883e0d1dad7
+- provenance: verified
+  supports_claim: false
+  url: https://www.businessoffashion.com/organisations/hugo-boss/projects/explore-our-headquarters-campus-in-metzingen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.lobbyfacts.eu/datacard/hugo-boss-ag?rid=123320646946-51
+- provenance: verified
+  supports_claim: false
+  url: https://group.hugoboss.com/en/contact
+- provenance: verified
+  supports_claim: false
+  url: https://group.hugoboss.com/fileadmin/media/pdf/sustainability/Auszeichnungen_und_Kooperationen_HUGO_BOSS_DE.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.boerse-frankfurt.de/aktie/hugo-boss-ag/unternehmensangaben
+timestamp: '2026-04-11T15:38:04.478632+00:00'
+title: Q491627
+turns: 9
+value_label: Metzingen
+verdict: verified-low

@@ -1,0 +1,26 @@
+completion_tokens: 2055
+cost_usd: 0.00299781
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 41406
+property: P39
+property_label: position held
+rationale: The removed claim that Gallagher Fenwick (Q120615740) was a director at
+  France 24 (Q166180) is supported by the verified source from Télérama, which confirms
+  his role as director and his departure due to internal conflicts. However, the replacement
+  by Thomas Fenton (Q137834794) is not explicitly mentioned in the source, and no
+  direct evidence confirms this replacement. The lack of references for the removed
+  claim is a limitation, but the independent source provides credible context for
+  the removal of the director position.
+rcid: null
+revid: 2471531273
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.telerama.fr/ecrans/a-france-24-les-journalistes-votent-la-levee-de-la-greve-mais-restent-vigilants-7005149.php
+timestamp: '2026-04-11T18:42:21.677054+00:00'
+title: Q120615740
+turns: 4
+value_label: director
+verdict: verified-low

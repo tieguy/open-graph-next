@@ -1,0 +1,26 @@
+completion_tokens: 2703
+cost_usd: 0.0048318
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16050
+property: P20
+property_label: place of death
+rationale: Multiple verified sources, including the Polish Wikipedia and a Polish
+  genealogical database, explicitly state that Antoni Strzelecki died in Kremenets.
+  The new value for place of death is therefore correct and more precise than the
+  previous, more general value.
+rcid: null
+revid: 2470341038
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pl.wikipedia.org/wiki/Antoni_Strzelecki
+- provenance: verified
+  supports_claim: true
+  url: https://genbase.pl/ind/pl/ind0000155147307
+timestamp: '2026-04-11T08:45:17.830231+00:00'
+title: Q96305321
+turns: 1
+value_label: Kremenets
+verdict: verified-high

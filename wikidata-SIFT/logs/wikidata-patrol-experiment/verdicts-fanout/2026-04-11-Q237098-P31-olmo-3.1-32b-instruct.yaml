@@ -1,0 +1,32 @@
+completion_tokens: 298
+cost_usd: 0.0041916
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20064
+property: P31
+property_label: instance of
+rationale: The change from 'human' (Q5) to 'therian' (Q25393510) for Louise Labé is
+  not supported by reliable, independently verifiable sources. The most authoritative
+  biographical sources consulted (including the Metzler Lexikon and The Literary Encyclopedia)
+  do not describe Louise Labé as a 'therian', nor do they indicate she identified
+  with the concept of a non-human animal identity. The cited reference for the 'therian'
+  claim appears to be from a blocked or rate-limited domain (BnF authorities), and
+  no independently fetched source confirms that this classification is appropriate
+  for Louise Labé. Changing the instance of from 'human' to a highly specific identity
+  such as 'therian' requires strong evidence, which could not be independently verified
+  in this investigation.
+rcid: null
+revid: 2471473740
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://link.springer.com/chapter/10.1007/978-3-476-03702-2_195
+- provenance: verified
+  supports_claim: false
+  url: https://www.litencyc.com/php/speople.php?rec=true&UID=5832
+timestamp: '2026-04-11T13:20:09.390520+00:00'
+title: Q237098
+turns: 1
+value_label: therian
+verdict: unverifiable

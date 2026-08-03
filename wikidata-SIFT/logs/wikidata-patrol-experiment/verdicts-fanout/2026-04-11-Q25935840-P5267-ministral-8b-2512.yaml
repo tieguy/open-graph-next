@@ -1,0 +1,36 @@
+completion_tokens: 2123
+cost_usd: 0.00424854
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 46969
+property: P5267
+property_label: YouPorn performer ID (archived)
+rationale: The edit changes the YouPorn performer ID from '4414' to '4415' without
+  any references or independent corroboration. No verified sources confirm either
+  value, and direct verification of the YouPorn profile returned a 404 error. Without
+  direct evidence from YouPorn or another authoritative source, the claim cannot be
+  verified.
+rcid: 2550477205
+revid: 2473813471
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://adultfilmindex.com/actor/2336/vannah-sterling
+- provenance: verified
+  supports_claim: false
+  url: https://www.eporner.com/pornstar/vannah-sterling/
+- provenance: verified
+  supports_claim: false
+  url: https://www.iafd.com/person.rme/id=2fe5b2b2-1441-4a35-acbc-54cf3e13e4c1
+- provenance: verified
+  supports_claim: false
+  url: https://www.pornhub.com/pornstar/vannah-sterling
+- provenance: verified
+  supports_claim: false
+  url: https://www.youporn.com/performer/vannah-sterling
+timestamp: '2026-04-11T18:34:51.009628+00:00'
+title: Q25935840
+turns: 4
+value_label: null
+verdict: unverifiable

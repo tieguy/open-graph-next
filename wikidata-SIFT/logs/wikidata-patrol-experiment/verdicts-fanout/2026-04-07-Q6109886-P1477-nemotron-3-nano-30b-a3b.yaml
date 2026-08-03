@@ -1,0 +1,21 @@
+completion_tokens: 597
+cost_usd: 0.00484875
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 94587
+property: P1477
+property_label: birth name
+rationale: No references could be successfully accessed or verified. The prefetch
+  record indicates the cited URL failed to fetch due to multiple timeout keyword arguments,
+  and subsequent web searches for corroborating information returned no results. No
+  external sources were found to confirm or refute the birth name change from 'Roberto
+  Daniel Musso Focaccio' to 'Roberto Armando Musso Focaccio', leaving the claim unverifiable.
+rcid: 2551399633
+revid: 2474703449
+sources: []
+timestamp: '2026-04-07T08:01:34.377300+00:00'
+title: Q6109886
+turns: 15
+value_label: null
+verdict: unverifiable

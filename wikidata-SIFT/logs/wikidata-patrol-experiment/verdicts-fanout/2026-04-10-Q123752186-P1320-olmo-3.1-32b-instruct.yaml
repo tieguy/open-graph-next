@@ -1,0 +1,25 @@
+completion_tokens: 2719
+cost_usd: 0.0054762000000000005
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19224
+property: P1320
+property_label: OpenCorporates ID
+rationale: The correct OpenCorporates ID for SYENSQO is be/0952870146, as confirmed
+  by direct search on OpenCorporates and third-party mirrors. The ID be/0798896453
+  does not correspond to SYENSQO, making the edit incorrect.
+rcid: 2551397408
+revid: 2474701517
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://opencorporates.com/companies/be/0952870146
+- provenance: verified
+  supports_claim: false
+  url: https://opencorporates.com/companies?q=SYENSQO
+timestamp: '2026-04-10T14:07:44.662344+00:00'
+title: Q123752186
+turns: 1
+value_label: null
+verdict: incorrect

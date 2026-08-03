@@ -1,0 +1,30 @@
+completion_tokens: 1557
+cost_usd: 0.0057508
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 24083
+property: P19
+property_label: place of birth
+rationale: The official obituary, a verified primary source, states that Reid Harrison
+  was born in Fredericksburg, Virginia, not Orange, Virginia. Secondary sources incorrectly
+  list Orange, Virginia as the birthplace, likely confusing it with where he grew
+  up. There is no independent primary evidence to support the claim that Orange is
+  the place of birth, making the current value likely incorrect.
+rcid: 2540964224
+revid: 2464751889
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.legacy.com/us/obituaries/dailyprogress/name/reid-harrison-obituary?id=60544470
+- provenance: reported
+  supports_claim: false
+  url: https://angelorules.fandom.com/wiki/Reid_Harrison
+- provenance: unreachable
+  supports_claim: null
+  url: https://www.imdb.com/name/nm0365829/
+timestamp: '2026-02-20T03:59:04.812353+00:00'
+title: Q6104560
+turns: 3
+value_label: Orange
+verdict: suspect

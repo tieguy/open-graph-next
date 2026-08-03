@@ -1,0 +1,31 @@
+completion_tokens: 1740
+cost_usd: 0.0013728299999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13147
+property: P1814
+property_label: name in kana
+rationale: The proposed value 'eros ramazzott*' is not a valid kana transcription
+  for Eijirō Ono. The previous value 'おの えいじろう' aligns with the item's context as
+  a Japanese businessman, while the new value appears to be a nonsensical or erroneous
+  entry. No verified independent source supports the new claim, and the cited Japanese
+  Wikipedia reference is unreachable. The new value does not match any linguistic
+  or contextual evidence for Ono's name in kana.
+rcid: null
+revid: 2464869007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20220415112235/https://jahis.law.nagoya-u.ac.jp/who/docs/who4-2656
+- provenance: reported
+  supports_claim: false
+  url: https://www.ancestry.com/genealogy/records/eijiro-%E8%8B%B1%E4%BA%8C%E9%83%8E-ono-%E5%B0%8F%E9%87%8E-24-ynzwx8
+- provenance: reported
+  supports_claim: false
+  url: https://ja.wikipedia.org/wiki/%E5%B0%8F%E9%87%8E%E8%8B%B1%E4%BA%8C%E9%83%8E
+timestamp: '2026-04-10T14:00:29.149856+00:00'
+title: Q11464251
+turns: 1
+value_label: null
+verdict: incorrect

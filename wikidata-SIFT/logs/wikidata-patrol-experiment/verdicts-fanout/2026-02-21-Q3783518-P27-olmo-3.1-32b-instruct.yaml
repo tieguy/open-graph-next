@@ -1,0 +1,23 @@
+completion_tokens: 1024
+cost_usd: 0.0034802
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14329
+property: P27
+property_label: country of citizenship
+rationale: The edit claims Harry Panjer's country of citizenship is Samoan, but no
+  independent, reliable source supports this. The only cited reference is Italian
+  Wikipedia, which is not acceptable and creates a circular reference. English Wikipedia
+  and other searches do not indicate Samoan citizenship for Harry Panjer.
+rcid: 2540918367
+revid: 2464709548
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Harry_Panjer
+timestamp: '2026-02-21T02:32:40.308300+00:00'
+title: Q3783518
+turns: 2
+value_label: Samoan
+verdict: suspect

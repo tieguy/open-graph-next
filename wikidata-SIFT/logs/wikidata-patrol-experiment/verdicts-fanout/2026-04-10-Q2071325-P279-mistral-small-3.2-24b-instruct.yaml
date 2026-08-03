@@ -1,0 +1,27 @@
+completion_tokens: 1208
+cost_usd: 0.0030695
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 29520
+property: P279
+property_label: subclass of
+rationale: Multiple independent sources confirm that Kangeanic is classified as an
+  Eastern Javanic language, supporting the edit.
+rcid: null
+revid: 2433523780
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikiquote.org/wiki/Kangeanic
+- provenance: verified
+  supports_claim: true
+  url: https://en.wiktionary.org/wiki/Kangean
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikivoyage.org/wiki/Kangean_phrasebook
+timestamp: '2026-04-10T13:38:29.203359+00:00'
+title: Q2071325
+turns: 2
+value_label: Javanic
+verdict: verified-high

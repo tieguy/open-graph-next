@@ -1,0 +1,33 @@
+completion_tokens: 2327
+cost_usd: 0.006892799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27483
+property: P25
+property_label: mother
+rationale: The claim that Suharto's mother was Sukirah is supported by multiple independent
+  and reliable sources, including Britannica and BBC News. The factual value did not
+  change between the old and new statements, but the new statement added a citation
+  (though to a circular source). The factual correctness of the claim is confirmed
+  by non-circular, verified sources.
+rcid: null
+revid: 2471122718
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.britannica.com/biography/Suharto
+- provenance: verified
+  supports_claim: true
+  url: https://news.bbc.co.uk/2/hi/asia-pacific/7211565.stm
+- provenance: verified
+  supports_claim: true
+  url: https://apjjf.org/2020/13/13_Whitney/449.html
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Suharto
+timestamp: '2026-04-11T13:15:05.525757+00:00'
+title: Q44819
+turns: 1
+value_label: Sukirah
+verdict: verified-high

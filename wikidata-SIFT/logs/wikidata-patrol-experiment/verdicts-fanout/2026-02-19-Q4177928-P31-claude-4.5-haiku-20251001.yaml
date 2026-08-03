@@ -1,0 +1,37 @@
+completion_tokens: 2619
+cost_usd: null
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 93984
+property: P31
+property_label: instance of
+rationale: All independent sources (Spotify, biographies, music databases) consistently
+  identify Zara Larsson as a human being — specifically a Swedish singer, songwriter,
+  and entertainer born in 1997. The only connection between Zara Larsson and dolphins
+  is a viral TikTok meme from 2024-2025 in which her song 'Symphony' was paired with
+  colorful dolphin imagery for humorous effect. Setting P31 (instance of) to Q7369
+  (dolphin) is factually wrong. Zara Larsson is human, not a marine mammal.
+rcid: 2540985721
+revid: 2464772007
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/artist/1Xylc3o4UrD53lo9CvFvVg
+- provenance: verified
+  supports_claim: false
+  url: https://www.biographyunfold.com/singer/zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://facts.net/celebrity/39-facts-about-zara-larsson/
+- provenance: verified
+  supports_claim: false
+  url: https://www.yahoo.com/entertainment/music/article/a-pop-star-keeps-accidentally-going-viral-with-decade-old-songs-it-has-saved-her-career-190035257.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q7369
+timestamp: '2026-02-19T21:51:46.130824+00:00'
+title: Q4177928
+turns: 4
+value_label: dolphin
+verdict: incorrect

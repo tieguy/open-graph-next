@@ -1,0 +1,25 @@
+completion_tokens: 1387
+cost_usd: 0.0031476000000000004
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11577
+property: P8408
+property_label: KBpedia ID
+rationale: The KBpedia source cited does not mention 'negeri' as a KBpedia ID, and
+  no independent sources confirm this mapping. Assigning an unsupported external identifier
+  is inconsistent with Wikidata best practices.
+rcid: 2550543092
+revid: 2473876698
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://github.com/Cognonto/kbpedia
+- provenance: verified
+  supports_claim: false
+  url: https://gratisdata.miraheze.org/wiki/Property:P288
+timestamp: '2026-04-11T09:43:24.889228+00:00'
+title: Q97202782
+turns: 1
+value_label: null
+verdict: suspect

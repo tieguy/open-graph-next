@@ -1,0 +1,30 @@
+completion_tokens: 811
+cost_usd: 0.008248349999999998
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 161723
+property: P856
+property_label: official website
+rationale: 'Despite extensive searches, no official source confirming the identity
+  or ownership of https://www.turkishairlines.com in relation to Ōda-shi could be
+  located. Attempts to find official municipal websites or domain ownership details
+  through searches restricted to city or prefectural domains returned no results.
+  The only accessible source related to population data did not mention the Turkish
+  Airlines URL. No primary or secondary sources were verified that directly support
+  or contradict the claim. Without confirmed provenance or detailed content verification,
+  the claim remains unverifiable. [Document: City edits show preferential referencing
+  of prefectural and national sources (e.g., pref.shimane-toukei.jp, e-stat.go.jp),
+  whereas the new URL (Turkish Airlines) lacks any verifiable connection to the city''s
+  official digital ecosystem through authoritative channels.]'
+rcid: 2549352572
+revid: 2472719882
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pref.shimane-toukei.jp/?view=8779
+timestamp: '2026-04-07T12:21:04.826287+00:00'
+title: Q384796
+turns: 15
+value_label: null
+verdict: unverifiable

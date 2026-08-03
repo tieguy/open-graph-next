@@ -1,0 +1,24 @@
+completion_tokens: 294
+cost_usd: 0.0045602
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44720
+property: P103
+property_label: native language
+rationale: The search results and fetched content do not provide any evidence that
+  Wiz Khalifa speaks Peruvian Spanish as his native language. The information available
+  indicates that he is an American rapper, singer, and actor, born in Minot, North
+  Dakota, and raised in Pittsburgh, Pennsylvania. There is no credible source supporting
+  the claim that his native language is Peruvian Spanish.
+rcid: 2540942690
+revid: 2464732149
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wiki.kidzsearch.com/wiki/Wiz_Khalifa
+timestamp: '2026-02-20T13:30:37.135432+00:00'
+title: Q117139
+turns: 3
+value_label: Peruvian Spanish
+verdict: incorrect

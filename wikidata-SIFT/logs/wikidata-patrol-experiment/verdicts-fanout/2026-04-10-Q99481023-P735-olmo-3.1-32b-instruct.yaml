@@ -1,0 +1,30 @@
+completion_tokens: 1840
+cost_usd: 0.0043082
+diff_type: reference_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16021
+property: P735
+property_label: given name
+rationale: The removed reference did not directly support the given name claim for
+  Yasam Sasmazer, as it did not mention 'Yaşam' as the given name. However, multiple
+  verified independent sources confirm that 'Yaşam' is the correct given name. The
+  removal of the reference was therefore justified for maintaining reference quality,
+  but the claim should be supported by a more directly relevant source.
+rcid: 2551222880
+revid: 2474535561
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.zilbermangallery.com/yasam-sasmazer-a422-tr.htm
+- provenance: verified
+  supports_claim: true
+  url: https://fondazioneberengo.org/artist/glasstress-artists/yasam-sasmazer/
+- provenance: verified
+  supports_claim: false
+  url: https://www.sasmazeryasam.com/about/
+timestamp: '2026-04-10T09:36:13.198004+00:00'
+title: Q99481023
+turns: 1
+value_label: Yaşam
+verdict: verified-low

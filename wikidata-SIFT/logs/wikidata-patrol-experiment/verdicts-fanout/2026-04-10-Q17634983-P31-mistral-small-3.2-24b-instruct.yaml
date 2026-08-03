@@ -1,0 +1,28 @@
+completion_tokens: 1187
+cost_usd: 0.00172671875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15253
+property: P31
+property_label: instance of
+rationale: Multiple independent sources consistently describe Christopher Thorndyke
+  as a human character in the Sonic X series. The evidence supports the claim that
+  'human' is a correct instance of for Christopher Thorndyke.
+rcid: 2550770084
+revid: 2474095812
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://sonic.fandom.com/wiki/Christopher_Thorndyke
+- provenance: verified
+  supports_claim: true
+  url: https://www.deviantart.com/evilgidgit/art/The-Trauma-of-Chris-Thorndyke-in-Sonic-X-676041321
+- provenance: verified
+  supports_claim: true
+  url: https://www.giantbomb.com/christopher-thorndyke/3005-39281/
+timestamp: '2026-04-10T13:29:47.059973+00:00'
+title: Q17634983
+turns: 1
+value_label: human
+verdict: verified-high

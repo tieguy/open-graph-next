@@ -1,0 +1,28 @@
+completion_tokens: 1639
+cost_usd: 0.00670572
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 54791
+property: P106
+property_label: occupation
+rationale: The claim that Georgios Papanikolaou (Q319321) was a pedophile was unsupported
+  by any references and contradicts his well-documented professional legacy. Independent
+  search results confirm that any allegations of pedophilia involving a Papanikolaou
+  refer to a different individual—a former Greek politician—not the scientist who
+  invented the Pap smear. The removal of this claim was justified as it was incorrect
+  and unsupported.
+rcid: 2551345536
+revid: 2474651600
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.thenationalherald.com/on-trial-greek-childrens-charity-leader-denies-abusing-minors-charge/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ekathimerini.com/news/1295792/child-shelter-founder-found-guilty-again-on-appeal/
+timestamp: '2026-04-10T10:56:49.760587+00:00'
+title: Q319321
+turns: 3
+value_label: pedophile
+verdict: incorrect

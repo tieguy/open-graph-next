@@ -1,0 +1,33 @@
+completion_tokens: 821
+cost_usd: 0.0033598
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14336
+property: P1556
+property_label: zbMATH author ID
+rationale: The primary source (Finnish obituary) confirms Matts Roos's identity and
+  career but provides no information about zbMATH author IDs. Attempts to verify the
+  existence of the author ID 'roos.matts.1' in zbMATH failed due to access restrictions.
+  Without evidence from zbMATH or other reliable sources, it is impossible to confirm
+  the correctness of removing this claim.
+rcid: 2550283313
+revid: 2473623545
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.hs.fi/muistot/art-2000011769616.html
+- provenance: reported
+  supports_claim: null
+  url: https://zbmath.org/authors/
+- provenance: reported
+  supports_claim: null
+  url: https://zbmath.org/authors/?q=ai:roos.teemu
+- provenance: reported
+  supports_claim: null
+  url: https://zbmath.org/authors/roos.joris
+timestamp: '2026-04-11T06:42:35.825064+00:00'
+title: Q23040018
+turns: 1
+value_label: null
+verdict: unverifiable

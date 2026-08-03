@@ -1,0 +1,29 @@
+completion_tokens: 1818
+cost_usd: 0.0033864
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11478
+property: P19
+property_label: place of birth
+rationale: Multiple verified independent sources consistently report that Joaquim
+  Paiva was born in Rio de Janeiro, not in Vitória, Espírito Santo. The cited source
+  supporting the change to Vitória could not be verified and no reliable independent
+  source corroborates this change.
+rcid: 2550719609
+revid: 2474047386
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pt.wikipedia.org/wiki/Joaquim_Paiva
+- provenance: verified
+  supports_claim: false
+  url: https://livrosdefotografia.org/perfil/473/joaquim-paiva
+- provenance: reported
+  supports_claim: false
+  url: https://www.catalogodasartes.com.br/artista/Joaquim%20Arnaldo%20de%20Paiva%20Oliveira%20-%20Joaquim%20Paiva/
+timestamp: '2026-04-11T06:34:59.514536+00:00'
+title: Q94684838
+turns: 1
+value_label: Vitória
+verdict: incorrect

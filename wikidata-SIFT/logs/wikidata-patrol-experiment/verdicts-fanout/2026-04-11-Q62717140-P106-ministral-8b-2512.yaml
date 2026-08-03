@@ -1,0 +1,27 @@
+completion_tokens: 1906
+cost_usd: 0.00482109
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 56187
+property: P106
+property_label: occupation
+rationale: The claim that Marina del Pilar (Q62717140) is a prostitute (Q14915751)
+  contradicts all available evidence. Her education in law, political career, and
+  public roles strongly support the occupation of lawyer (Q40348). No credible source
+  supports the new value, and the edit lacks references. The old value is well-supported
+  by her educational and professional claims on Wikidata.
+rcid: null
+revid: 2470654230
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://mexiconewsdaily.com/news/baja-california-governor-ex-husband-investigation/
+- provenance: reported
+  supports_claim: true
+  url: https://www.wikidata.org/wiki/Special:EntityData/Q62717140
+timestamp: '2026-04-11T18:17:28.531369+00:00'
+title: Q62717140
+turns: 6
+value_label: prostitute
+verdict: incorrect

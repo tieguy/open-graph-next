@@ -1,0 +1,28 @@
+completion_tokens: 1170
+cost_usd: 0.004317468749999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42933
+property: P569
+property_label: date of birth
+rationale: Multiple reliable sources, including Transfermarkt, EverybodyWiki, and
+  Live Soccer TV, consistently state that Elias Hadaya was born on 31 August 1998.
+  The edit changing the date of birth to 31 August 1967 is incorrect.
+rcid: 2549662841
+revid: 2473023071
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.com/elias-hadaya/profil/spieler/272542
+- provenance: verified
+  supports_claim: false
+  url: https://en.everybodywiki.com/Elias_Hadaya_by_JM7_DE
+- provenance: verified
+  supports_claim: false
+  url: https://www.livesoccertv.com/player/e-hadaya/238854/
+timestamp: '2026-04-07T01:46:05.600965+00:00'
+title: Q89080747
+turns: 5
+value_label: null
+verdict: incorrect

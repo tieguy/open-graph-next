@@ -1,0 +1,30 @@
+completion_tokens: 1632
+cost_usd: 0.00267921
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 22425
+property: P400
+property_label: platform
+rationale: The added reference (Steam application ID) is irrelevant and does not support
+  the Android platform claim for Bahia Notícias. Independent sources confirm the app
+  is available for both Android and iOS, but the claim only includes Android. The
+  edit incorrectly omits iOS and adds an unrelated reference, making the edit factually
+  incomplete and misleading.
+rcid: 2549607968
+revid: 2472969774
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://apps.apple.com/br/app/bahia-not%C3%ADcias/id853789369
+- provenance: verified
+  supports_claim: true
+  url: https://play.google.com/store/apps/details?id=com.navegarte.bahianoticia
+- provenance: verified
+  supports_claim: true
+  url: https://www.bahianoticias.com.br/quem-somos.html
+timestamp: '2026-04-11T17:33:40.754583+00:00'
+title: Q100243255
+turns: 1
+value_label: Android
+verdict: incorrect

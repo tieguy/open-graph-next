@@ -1,0 +1,28 @@
+completion_tokens: 1705
+cost_usd: 0.0047361
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42246
+property: P106
+property_label: occupation
+rationale: The sources from Ivan Lindsay's personal art page and his involvement with
+  Russian art dealers strongly support the claim that he is an art collector. His
+  active participation in the art market and setting world record prices for artists
+  aligns with the role of an art collector. Other sources, while not directly supporting
+  the claim, do not contradict it and provide additional context about his artistic
+  career.
+rcid: 2540960304
+revid: 2464748294
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://ivanlindsay.com/art/
+- provenance: verified
+  supports_claim: true
+  url: https://www.russianartdealer.com/socialist-realism/
+timestamp: '2026-02-20T04:50:07.664344+00:00'
+title: Q16194655
+turns: 6
+value_label: art collector
+verdict: verified-high

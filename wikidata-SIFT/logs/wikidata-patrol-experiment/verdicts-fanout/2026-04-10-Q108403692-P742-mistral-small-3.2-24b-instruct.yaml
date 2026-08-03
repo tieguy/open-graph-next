@@ -1,0 +1,29 @@
+completion_tokens: 1696
+cost_usd: 0.0040320625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38486
+property: P742
+property_label: pseudonym
+rationale: Multiple sources confirm that 'The Punisher' is a well-known and correct
+  pseudonym for Frank Castle. The evidence from Den of Geek and the Marvel Chronology
+  Project supports the claim, while the Marvel Database provides additional context
+  about his character.
+rcid: 2550546012
+revid: 2473879283
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.denofgeek.com/comics/the-punisher-the-secret-of-frank-castles-alias/
+- provenance: verified
+  supports_claim: false
+  url: https://marvel.fandom.com/wiki/Francis_Castle_(Earth-616)
+- provenance: verified
+  supports_claim: true
+  url: https://www.chronologyproject.com/phpbb2/viewtopic.php?t=4342
+timestamp: '2026-04-10T12:38:43.431021+00:00'
+title: Q108403692
+turns: 3
+value_label: null
+verdict: verified-high

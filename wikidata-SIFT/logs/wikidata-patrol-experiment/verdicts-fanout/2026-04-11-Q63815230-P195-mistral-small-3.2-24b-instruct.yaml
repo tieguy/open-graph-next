@@ -1,0 +1,31 @@
+completion_tokens: 2010
+cost_usd: 0.00187575625
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 16637
+property: P195
+property_label: collection
+rationale: The reference provided in the edit could not be verified due to a fetch
+  failure. Independent sources do not confirm the claim that 'Warrior and Horseman
+  Fighting' is part of the collection of the National Gallery of Art.
+rcid: 2551041256
+revid: 2474358087
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://artsandculture.google.com/usergallery/warriors-in-battle/-wKiFikAxo4KLw?hl=en
+- provenance: verified
+  supports_claim: false
+  url: https://nga.gov/collection/art-object-page.117959.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.nga.gov/research/publications/online-editions/dutch-paintings-seventeenth-century-battle-scene-c-16451646
+- provenance: verified
+  supports_claim: null
+  url: https://purl.org/nga/collection/artobject/43924
+timestamp: '2026-04-11T18:02:56.608822+00:00'
+title: Q63815230
+turns: 1
+value_label: National Gallery of Art
+verdict: unverifiable

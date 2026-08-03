@@ -1,0 +1,32 @@
+completion_tokens: 1651
+cost_usd: 0.007064279999999999
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 51179
+property: P2373
+property_label: Genius artist ID
+rationale: The claim that Josh Universe (Q123738871) has a Genius artist ID ('Josh-universe')
+  is incorrect. No Genius profile exists for Josh Universe, and the platform is not
+  aligned with his professional identity as a science communicator, biohacker, and
+  analog astronaut. The value 'Josh-universe' does not appear on Genius for this individual,
+  and no references or corroborating evidence were found to support this claim. The
+  search results and prefetched content confirm that Josh Universe is not associated
+  with Genius as a musician.
+rcid: 2551429578
+revid: 2474729584
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/artists/Josh-a
+- provenance: verified
+  supports_claim: false
+  url: https://genius.com/discussions/280987-Whats-the-easiest-way-to-get-an-artist-id
+- provenance: reported
+  supports_claim: false
+  url: https://shoutoutatlanta.com/meet-josh-universe-painter-grafitti-artist/
+timestamp: '2026-04-10T13:04:55.497779+00:00'
+title: Q123738871
+turns: 2
+value_label: null
+verdict: incorrect

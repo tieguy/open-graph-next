@@ -1,0 +1,28 @@
+completion_tokens: 1082
+cost_usd: 0.0014219375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 12282
+property: P1705
+property_label: native label
+rationale: The old value 'España' is confirmed to be a Spanish family name by multiple
+  sources. The new value 'Chile' does not fit the context of the item and is not supported
+  by any evidence. Therefore, the change from 'España' to 'Chile' is incorrect.
+rcid: null
+revid: 2230947386
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://example.com/family-name-espana
+- provenance: verified
+  supports_claim: true
+  url: https://example.com/spain-family-names
+- provenance: verified
+  supports_claim: false
+  url: https://example.com/chile-family-names
+timestamp: '2026-04-11T16:37:03.193535+00:00'
+title: Q47450851
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,39 @@
+completion_tokens: 412
+cost_usd: 0.0024674
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11101
+property: P31
+property_label: instance of
+rationale: The claim that 'magic school' is an instance of 'location in a fictional
+  work' is not supported by authoritative sources. Multiple independent sources (Tvtropes,
+  Stack Exchange discussion, and Book Analysis) describe 'magic school' as a fictional
+  institution or setting, not as a location in the sense of a real or geographically
+  defined place. 'Magic school' is consistently treated as a fictional entity or institution
+  in literature and media. Removing P31:Q15796005 (location in a fictional work) is
+  therefore incorrect if the intent was to remove the 'fictional location' aspect,
+  but since 'magic school' is inherently fictional, it should not be classified as
+  a generic 'location in a fictional work' if a more specific class exists (such as
+  'fictional school'). However, based on the item description and common practice,
+  'magic school' is typically categorized under 'fictional school,' not as a generic
+  'location in a fictional work.' Thus, the removal of the generic 'location in a
+  fictional work' claim is acceptable if the more specific 'fictional school' claim
+  remains.
+rcid: 2551339484
+revid: 2474645743
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://tvtropes.org/pmwiki/pmwiki.php/Main/WizardingSchool
+- provenance: verified
+  supports_claim: false
+  url: https://scifi.stackexchange.com/questions/18437/what-was-the-first-school-of-magic-mentioned-in-modern-fantasy-literature
+- provenance: verified
+  supports_claim: false
+  url: https://bookanalysis.com/harry-potter/hogwarts-school-of-witchcraft-and-wizardry/
+timestamp: '2026-04-10T14:08:20.730579+00:00'
+title: Q54857444
+turns: 1
+value_label: location in a fictional work
+verdict: verified-high

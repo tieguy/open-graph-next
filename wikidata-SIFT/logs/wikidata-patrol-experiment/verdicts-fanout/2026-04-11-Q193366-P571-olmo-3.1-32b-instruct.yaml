@@ -1,0 +1,28 @@
+completion_tokens: 241
+cost_usd: 0.0027064000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12809
+property: P571
+property_label: inception
+rationale: The new value '100' for the inception property is not a valid ISO date
+  and appears to be erroneous. The old value '+1993-00-00T00:00:00Z' is plausible
+  based on historical accounts that place the Kosovo Liberation Army's formation in
+  1996–1997, but even 1993 is likely too early. Independent sources indicate the KLA
+  began active operations in 1996–1997. The new value lacks any meaningful interpretation
+  and is unsupported by reliable evidence. Therefore, the edit appears to be incorrect.
+rcid: 2549583327
+revid: 2472945896
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/politics/legal-and-political-magazines/kosovo-liberation-army
+- provenance: verified
+  supports_claim: true
+  url: https://irp.fas.org/world/para/docs/fr033199.htm
+timestamp: '2026-04-11T14:39:39.020488+00:00'
+title: Q193366
+turns: 1
+value_label: null
+verdict: suspect

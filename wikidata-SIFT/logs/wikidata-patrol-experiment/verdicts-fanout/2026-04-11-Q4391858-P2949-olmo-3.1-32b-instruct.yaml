@@ -1,0 +1,34 @@
+completion_tokens: 1221
+cost_usd: 0.0077166
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34920
+property: P2949
+property_label: WikiTree person ID
+rationale: The reference added in the edit could not be verified due to a fetch failure.
+  However, multiple independent and reliable sources (MLB.com, Baseball-Reference,
+  Sponichi) confirm that the individual in question is Shohei Ohtani and support his
+  professional baseball career and identity. These sources indirectly corroborate
+  the use of a unique identifier such as the WikiTree ID. Therefore, while the specific
+  cited reference is not substantiated, the claim is supported by external evidence.
+rcid: 2550628540
+revid: 2473958816
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.mlb.com/player/shohei-ohtani-660271
+- provenance: verified
+  supports_claim: true
+  url: https://www.baseball-reference.com/players/o/ohtansh01.shtml
+- provenance: verified
+  supports_claim: true
+  url: https://www.sponichi.co.jp/person/UDAR10370238/
+- provenance: unreachable
+  supports_claim: false
+  url: https://iknownetworths.com/shohei-ohtani-net-worth/
+timestamp: '2026-04-11T18:36:17.640773+00:00'
+title: Q4391858
+turns: 1
+value_label: null
+verdict: verified-low

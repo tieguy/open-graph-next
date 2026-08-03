@@ -1,0 +1,28 @@
+completion_tokens: 1791
+cost_usd: 0.00966492
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 84645
+property: P18
+property_label: image
+rationale: The edit changes the image from 'Doc Gynéco en 1996.jpg' to 'Doc Gynéco.jpg'.
+  No verified independent source confirms that 'Doc Gynéco.jpg' is a valid or official
+  image for Doc Gynéco. The Wikimedia Commons category for Doc Gynéco does not include
+  an image labeled 'Doc Gynéco.jpg', and MusicBrainz does not reference it as an official
+  image. The old image remains available and widely used, indicating no clear evidence
+  supports the new image.
+rcid: 2551341425
+revid: 2474647621
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Category:Doc_Gyn%C3%A9co
+- provenance: verified
+  supports_claim: false
+  url: https://musicbrainz.org/artist/c01fbe95-f464-44d0-ada2-6ee6108699bc
+timestamp: '2026-04-10T07:56:56.376342+00:00'
+title: Q1233700
+turns: 6
+value_label: null
+verdict: unverifiable

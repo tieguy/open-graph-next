@@ -1,0 +1,28 @@
+completion_tokens: 1781
+cost_usd: 0.00303669
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 37504
+property: P569
+property_label: date of birth
+rationale: The edit changes the date of birth for Virgilio Calvo Sánchez from a placeholder
+  date (January 1, 1920) to a specific date (August 26, 1920). No references are attached
+  to either value, and no verified sources could be fetched to confirm the accuracy
+  of the new date. Prefetched references did not provide relevant information about
+  Virgilio Calvo Sánchez’s date of birth. Without independent verification, the claim
+  remains unverifiable.
+rcid: 2551110844
+revid: 2474426475
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://gcatholic.org/hierarchy/country/ES-age.htm
+- provenance: verified
+  supports_claim: false
+  url: https://heraldrycrests.com/s2/Sanchez_calvo.htm
+timestamp: '2026-04-11T15:04:09.403939+00:00'
+title: Q6163649
+turns: 4
+value_label: null
+verdict: unverifiable

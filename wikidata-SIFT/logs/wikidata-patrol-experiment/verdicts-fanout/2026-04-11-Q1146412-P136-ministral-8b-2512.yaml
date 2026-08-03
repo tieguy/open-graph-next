@@ -1,0 +1,28 @@
+completion_tokens: 2073
+cost_usd: 0.00151776
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 14241
+property: P136
+property_label: genre
+rationale: The edit changing the genre of Cute Is What We Aim For from 'power pop'
+  to 'pop-punk' is supported by multiple verified primary sources. Both Kent Amplifier
+  Vocal Academy and Apple Music explicitly describe the band as 'pop-punk' or 'emo-oriented
+  pop-punk'. No credible primary sources support 'power pop' as the band's primary
+  genre, and the old value was not corroborated by independent evidence. The change
+  is accurate and well-supported by authoritative sources.
+rcid: 2550854257
+revid: 2474177925
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kentamplinvocalacademy.com/artists-bands/lead/cute-is-what-we-aim-for/
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/cute-is-what-we-aim-for/159378970
+timestamp: '2026-04-11T06:46:21.081201+00:00'
+title: Q1146412
+turns: 1
+value_label: pop-punk
+verdict: verified-high

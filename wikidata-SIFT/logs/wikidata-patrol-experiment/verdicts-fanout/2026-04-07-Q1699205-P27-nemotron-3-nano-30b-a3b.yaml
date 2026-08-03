@@ -1,0 +1,32 @@
+completion_tokens: 747
+cost_usd: 0.009789250000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 192797
+property: P27
+property_label: country of citizenship
+rationale: No reliable evidence was found to confirm or refute the claim that John
+  Beasley Greene was a citizen of France. Multiple web searches using various queries
+  related to the individual's nationality, citizenship, and associated historical
+  context returned no relevant results. No primary or secondary sources were successfully
+  accessed or cited that discuss Greene's citizenship status. While the edit added
+  a reference to sources, no verifiable content was found to support those references
+  in the search results.
+rcid: null
+revid: 2456053042
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.nytimes.com/2019/12/17/arts/photography-john-beasley-greene.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.artic.edu/exhibitions/9167/signs-and-wonders-the-photographs-of-john-beasley-greene
+- provenance: reported
+  supports_claim: false
+  url: https://library.si.edu/art-and-artist-files
+timestamp: '2026-04-07T05:35:40.072843+00:00'
+title: Q1699205
+turns: 15
+value_label: France
+verdict: unverifiable

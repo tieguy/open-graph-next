@@ -1,0 +1,27 @@
+completion_tokens: 906
+cost_usd: 0.0035181500000000003
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 66739
+property: P18
+property_label: image
+rationale: The investigation failed to locate any corroborating evidence for the image
+  claim. The edit relates to 'Our Lady of Hope and Consolation' (Q101113374) having
+  a new image attributed to Jorge Albareda Agüeras from 1981, but no authoritative
+  source was found to confirm this attribution. All attempted searches returned no
+  relevant results, and the available sources indicate that the image cannot be verified
+  through standard discovery methods. Without verifiable references or authoritative
+  confirmation, the claim remains unverifiable.
+rcid: null
+revid: 2467778049
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://commons.wikimedia.org/api/newimages/init?dPicName=Esperanza_y_del_Consuelo_(es).jpg&dPicSize=full-width&dDescription=Nuestra%20Se%C3%B1ora%20de%20la%20Esperanza%20y%20del%20Consuelo.%20Jorge%20Albareda%20Ag%C3%Beyeras%2C%201981.jpg&dReferer=Special:Edit&d
+    Κατα лаτ
+timestamp: '2026-04-07T04:50:54.966792+00:00'
+title: Q101113374
+turns: 15
+value_label: null
+verdict: unverifiable

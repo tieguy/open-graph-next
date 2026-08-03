@@ -1,0 +1,34 @@
+completion_tokens: 2104
+cost_usd: 0.0107419
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 101107
+property: P91
+property_label: sexual orientation
+rationale: The claim that Sam Altman is gay is supported by multiple independent sources,
+  including primary and secondary sources. The evidence consistently confirms his
+  sexual orientation.
+rcid: 2540963698
+revid: 2464751389
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://timesofindia.indiatimes.com/etimes/trending/openly-gay-life-long-vegetarian-and-a-stanford-dropout-know-all-about-sam-altman-who-rejected-elon-musk/articleshow/118152077.cms
+- provenance: reported
+  supports_claim: true
+  url: https://www.sageusa.org/news/from-sam-altman-to-tim-cook-5-remarkable-gay-ceos-in-the-world-check-out/
+- provenance: verified
+  supports_claim: true
+  url: https://www.advocate.com/news/sam-altman-openai-exclusive
+- provenance: verified
+  supports_claim: true
+  url: https://www.indiatoday.in/technology/features/story/is-sam-altman-gay-yes-but-so-are-many-other-tech-leaders-like-apple-ceo-tim-cook-and-peter-thiel-2487950-2024-01-12
+- provenance: verified
+  supports_claim: true
+  url: https://www.attitude.co.uk/news/openly-gay-billionaire-describes-himself-as-politically-homeless-487604/
+timestamp: '2026-02-20T04:10:29.136862+00:00'
+title: Q7407093
+turns: 7
+value_label: gay
+verdict: verified-high

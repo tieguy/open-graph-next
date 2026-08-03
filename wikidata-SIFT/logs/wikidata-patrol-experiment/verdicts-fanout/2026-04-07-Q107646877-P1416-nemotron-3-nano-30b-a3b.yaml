@@ -1,0 +1,25 @@
+completion_tokens: 684
+cost_usd: 0.00477175
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92699
+property: P1416
+property_label: affiliation
+rationale: Despite extensive searches, no verifiable sources were found supporting
+  the claim that the AfD Freising-Pfaffenhofen affiliation was incorrectly attributed
+  to Corona Rebellen. Neither Wikipedia nor standard news searches yielded information
+  on this specific affiliation, and the only cited references (Süddeutsche Zeitung,
+  Tagesschau) were inaccessible during investigation. Without direct source access
+  to verify the removal was justified, the claim remains unverifiable.
+rcid: 2551215744
+revid: 2474528736
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-07T08:28:18.662868+00:00'
+title: Q107646877
+turns: 15
+value_label: AfD Freising-Pfaffenhofen
+verdict: unverifiable

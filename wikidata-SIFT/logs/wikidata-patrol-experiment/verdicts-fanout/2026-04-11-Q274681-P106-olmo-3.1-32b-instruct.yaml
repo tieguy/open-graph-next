@@ -1,0 +1,35 @@
+completion_tokens: 318
+cost_usd: 0.0035058
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16575
+property: P106
+property_label: occupation
+rationale: The claim that Eliphas Levi was a 'short story writer' is not supported
+  by reliable independent sources. While the Dutch and German Wikipedia references
+  cited by the edit acknowledge this occupation, major biographical sources and overviews
+  of Levi's work describe him primarily as an occultist, magician, and author of esoteric
+  treatises rather than a writer of short stories. No verified primary or secondary
+  source found during the investigation explicitly identifies him as a short story
+  writer. Therefore, the change from 'occultist' to 'short story writer' is not justified.
+rcid: 2550646412
+revid: 2473976401
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Eliphas_L%C3%A9vi
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Eliphas-Levi
+- provenance: verified
+  supports_claim: false
+  url: https://www.jewishvirtuallibrary.org/eliphas-levi
+- provenance: verified
+  supports_claim: false
+  url: https://www.sacred-texts.com/occ/elip/index.htm
+timestamp: '2026-04-11T06:27:10.181392+00:00'
+title: Q274681
+turns: 1
+value_label: short story writer
+verdict: suspect

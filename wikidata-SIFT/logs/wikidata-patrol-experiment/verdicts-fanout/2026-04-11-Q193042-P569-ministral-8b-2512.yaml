@@ -1,0 +1,31 @@
+completion_tokens: 1853
+cost_usd: 0.0022736099999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19500
+property: P569
+property_label: date of birth
+rationale: The edit changed Thomas Newcomen's date of birth from a historically verified
+  value of 1663 (supported by multiple independent sources like BBC and Study.com)
+  to an implausible value of 2 CE. The new value contradicts all available evidence
+  and lacks credible references. The cited Encyclopædia Britannica reference is unreachable,
+  and no other sources support the new claim. The old value is well-documented and
+  consistent with contextual claims (e.g., place of birth, death year).
+rcid: null
+revid: 2471084344
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://study.com/academy/lesson/thomas-newcomen-biography-inventions-the-steam-engine.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.co.uk/history/historic_figures/newcomen_thomas.shtml
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousscientists.org/thomas-newcomen/
+timestamp: '2026-04-11T07:47:33.599360+00:00'
+title: Q193042
+turns: 1
+value_label: null
+verdict: incorrect

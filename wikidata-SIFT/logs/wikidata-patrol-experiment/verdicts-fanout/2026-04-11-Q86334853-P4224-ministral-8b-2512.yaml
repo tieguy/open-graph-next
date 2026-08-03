@@ -1,0 +1,29 @@
+completion_tokens: 1842
+cost_usd: 0.00140247
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 16929
+property: P4224
+property_label: category contains
+rationale: The category 'Purdue Boilermakers women's volleyball coaches' logically
+  contains humans (Q5) as coaches are inherently human. The qualifier 'coach of sports
+  team' (P6087) with the value 'Purdue Boilermakers women's volleyball' (Q48837999)
+  is supported by the official Purdue Boilermakers women's volleyball staff directory,
+  confirming the accuracy of the qualifier. The pre-fetched references from Purdue's
+  official websites confirm both the category's logical classification and the specific
+  team affiliation.
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/staff-directory/department/womens-volleyball
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/sports/volleyball/roster
+timestamp: '2026-04-11T07:07:38.451273+00:00'
+title: Q86334853
+turns: 2
+value_label: human
+verdict: verified-high

@@ -1,0 +1,28 @@
+completion_tokens: 1373
+cost_usd: 0.00133866
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 13747
+property: P18
+property_label: image
+rationale: The new image filename 'Daniela-Guillen-FIM-WMX.jpg' accurately reflects
+  Daniela Guillén’s current classification as a WMX (Women's Motocross World Championship)
+  rider, as confirmed by the official racing profile on mxgpresults.com. The old filename
+  'Daniela-Guillen-FIM-MXW.jpg' is inconsistent with her official racing category
+  and lacks credible support. The change aligns with authoritative sources and improves
+  the accuracy of the Wikidata entry.
+rcid: 2550347384
+revid: 2473686245
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mxgpresults.com/riders/daniela-guillen/
+- provenance: verified
+  supports_claim: false
+  url: http://kids.cat/daniela-guillen-garcia/
+timestamp: '2026-04-11T18:06:17.329815+00:00'
+title: Q118629545
+turns: 1
+value_label: null
+verdict: verified-high

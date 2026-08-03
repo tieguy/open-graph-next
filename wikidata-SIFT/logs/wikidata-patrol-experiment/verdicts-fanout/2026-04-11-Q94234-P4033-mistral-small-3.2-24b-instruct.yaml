@@ -1,0 +1,34 @@
+completion_tokens: 1951
+cost_usd: 0.009468273749999999
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 94988
+property: P4033
+property_label: Mastodon address
+rationale: There are no references cited for the Mastodon address claim or the qualifier
+  that was removed. Independent sources do not provide clear information about Pieter
+  Heerma's Mastodon address. The Mastodon profile page requires JavaScript and does
+  not offer a text summary that can be fetched directly. Given the lack of verifiable
+  information, the removal of the qualifier cannot be confirmed as correct or incorrect
+  based on the available evidence.
+rcid: 2550846388
+revid: 2474170197
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Pieter_Heerma
+- provenance: verified
+  supports_claim: false
+  url: https://www.government.nl/government/members-of-cabinet/pieter-heerma
+- provenance: verified
+  supports_claim: false
+  url: https://www.kiesraad.nl/binaries/kiesraad/documenten/rapporten/2017/2/definitieve-kandidatenlijsten-tk-2017/definitieve-kandidatenlijsten-tk2017-kieskring-s-gravenhage/osv3-9_Definitieve+kandidatenlijsten_TK2017_sGravenhage.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://social.overheid.nl/@MinisterBZK
+timestamp: '2026-04-11T08:18:32.695151+00:00'
+title: Q94234
+turns: 7
+value_label: null
+verdict: unverifiable

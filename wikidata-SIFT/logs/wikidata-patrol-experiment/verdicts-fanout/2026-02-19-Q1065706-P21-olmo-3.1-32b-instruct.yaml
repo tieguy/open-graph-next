@@ -1,0 +1,30 @@
+completion_tokens: 923
+cost_usd: 0.0072096
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33279
+property: P21
+property_label: sex or gender
+rationale: No primary or secondary historical sources consulted support the claim
+  that Maria of Castile, Queen of Aragon, should be identified as 'trans man.' Authoritative
+  biographical and scholarly works describe her as a cisgender woman and do not reference
+  a transgender identity. Assigning the value 'trans man' is factually inconsistent
+  with the historical record.
+rcid: 2540984425
+revid: 2464770766
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://research.library.fordham.edu/dissertations/AAI9730089
+- provenance: verified
+  supports_claim: false
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/maria-castile-1401-1458
+- provenance: reported
+  supports_claim: false
+  url: https://publicmedievalist.com/transgender-middle-ages/
+timestamp: '2026-02-19T22:55:30.028000+00:00'
+title: Q1065706
+turns: 3
+value_label: trans man
+verdict: incorrect

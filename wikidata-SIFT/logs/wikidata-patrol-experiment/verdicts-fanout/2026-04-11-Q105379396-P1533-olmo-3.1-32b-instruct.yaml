@@ -1,0 +1,26 @@
+completion_tokens: 1525
+cost_usd: 0.0036016
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13433
+property: P1533
+property_label: family name identical to this given name
+rationale: Neither 'Soydan' nor 'Redif' is supported by independent sources as a male
+  given name for this item. Both appear to be surnames in available sources. There
+  are no references or external evidence to support the change from 'Soydan' to 'Redif',
+  making the edit suspect.
+rcid: null
+revid: 2464325559
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://forebears.io/surnames/soydan
+- provenance: verified
+  supports_claim: false
+  url: https://tr.wikipedia.org/wiki/Redif
+timestamp: '2026-04-11T15:13:56.067786+00:00'
+title: Q105379396
+turns: 1
+value_label: Redif
+verdict: suspect

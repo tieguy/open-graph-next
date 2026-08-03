@@ -1,0 +1,23 @@
+completion_tokens: 787
+cost_usd: 0.0044952
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20115
+property: P571
+property_label: inception
+rationale: The only reference provided is the company's own website, which does not
+  disclose a founding or inception year. Independent web searches did not find any
+  authoritative source confirming the year 2025 as the inception date. Therefore,
+  the claim cannot be verified with the available evidence.
+rcid: 2540974902
+revid: 2464761709
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de
+timestamp: '2026-02-20T02:27:02.296017+00:00'
+title: Q138349990
+turns: 2
+value_label: null
+verdict: unverifiable

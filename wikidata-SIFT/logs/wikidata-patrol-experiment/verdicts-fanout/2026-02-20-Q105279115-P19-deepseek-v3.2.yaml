@@ -1,0 +1,34 @@
+completion_tokens: 562
+cost_usd: 0.011777339999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 25583
+property: P19
+property_label: place of birth
+rationale: The claim that Peder Kongshaug was born in Wimbledon is strongly supported
+  by multiple independent sources. The primary reference cited in Wikidata (naeringsforeningen.no)
+  explicitly states he was born in Wimbledon. Independent authoritative sources like
+  Olympedia also confirm he was born in Wimbledon, England. Additionally, other reputable
+  sources including Reuters, Channel News Asia, and The Straits Times all report his
+  birthplace as Wimbledon, England. No contradictory evidence was found.
+rcid: 2540936206
+revid: 2464726502
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.naeringsforeningen.no/nyheter/profilen-maalet-er-en-besettelse
+- provenance: verified
+  supports_claim: true
+  url: https://www.olympedia.org/athletes/148716
+- provenance: reported
+  supports_claim: true
+  url: https://www.reuters.com/sports/speed-skating-kongshaug-hunts-individual-gold-milan-after-world-european-success-2026-02-06/
+- provenance: reported
+  supports_claim: true
+  url: https://www.channelnewsasia.com/sport/speed-skating-kongshaug-hunts-individual-gold-in-milan-after-world-european-success-5913756
+timestamp: '2026-02-20T17:02:51.258130+00:00'
+title: Q105279115
+turns: 2
+value_label: Wimbledon
+verdict: verified-high

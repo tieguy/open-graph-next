@@ -1,0 +1,29 @@
+completion_tokens: 1394
+cost_usd: 0.001835175
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 17881
+property: P27
+property_label: country of citizenship
+rationale: Kathrine Switzer was born in Germany but moved to the United States at
+  a young age. She grew up and likely acquired U.S. citizenship, given her extensive
+  involvement in American sports and media. The edit changing her country of citizenship
+  from the United States to Germany is incorrect.
+rcid: 2550904110
+revid: 2474226718
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://wanderwomenproject.com/women/kathrine-switzer/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nyrr.org/about/hall-of-fame/kathrine-switzer
+- provenance: verified
+  supports_claim: false
+  url: https://www.womenofthehall.org/inductee/kathrine-switzer/
+timestamp: '2026-04-11T18:09:45.958048+00:00'
+title: Q97440819
+turns: 1
+value_label: Germany
+verdict: incorrect

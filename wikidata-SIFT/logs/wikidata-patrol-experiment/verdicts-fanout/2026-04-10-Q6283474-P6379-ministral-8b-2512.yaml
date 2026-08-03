@@ -1,0 +1,27 @@
+completion_tokens: 1430
+cost_usd: 0.01261107
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 94369
+property: P6379
+property_label: has works in the collection
+rationale: The claim that Joseph Glasco's works are in The Menil Collection is strongly
+  supported by the Joseph Glasco Foundation's website, which explicitly lists works
+  by Glasco in The Menil Collection. Independent search results corroborate this claim,
+  and the reference URL provided aligns with the verified claim, despite extraction
+  limitations.
+rcid: 2550378518
+revid: 2473716615
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://josephglascofoundation.org/museum-collections
+- provenance: verified
+  supports_claim: false
+  url: https://adp.menil.org/sites/default/files/2020-03/glasco.pdf
+timestamp: '2026-04-10T14:15:05.598193+00:00'
+title: Q6283474
+turns: 3
+value_label: The Menil Collection
+verdict: verified-high

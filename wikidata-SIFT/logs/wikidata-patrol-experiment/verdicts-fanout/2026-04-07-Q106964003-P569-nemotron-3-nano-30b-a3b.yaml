@@ -1,0 +1,24 @@
+completion_tokens: 683
+cost_usd: 0.0047283
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 91834
+property: P569
+property_label: date of birth
+rationale: No verifiable sources were found to confirm or refute Desiree Bressend's
+  reported birth date of August 11, 1989. Multiple web searches returned no useful
+  results, and the only cited reference URL is blocked with HTTP 403. No independent
+  corroboration was found through standard web search queries in either English or
+  Spanish.
+rcid: null
+revid: 2464195721
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://comicvine.gamespot.com/desiree-bressend/4040-98627/
+timestamp: '2026-04-07T11:05:53.170005+00:00'
+title: Q106964003
+turns: 15
+value_label: null
+verdict: unverifiable

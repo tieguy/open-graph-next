@@ -1,0 +1,23 @@
+completion_tokens: 1239
+cost_usd: 0.006332600000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27946
+property: P551
+property_label: residence
+rationale: The edit changes Sylvia Rivera's residence from New York City to 'Nueva
+  York – Granada' in Spain, but a primary biographical source explicitly describes
+  her as a 'native New Yorker.' No fetched evidence supports the new residence claim,
+  suggesting the edit is likely incorrect.
+rcid: null
+revid: 2462592210
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.latintrends.com/in-honor-of-hispanic-heritage-month-influential-hispanic-trans-people/
+timestamp: '2026-04-07T13:18:00.988702+00:00'
+title: Q2278761
+turns: 4
+value_label: Nueva York – Granada
+verdict: suspect

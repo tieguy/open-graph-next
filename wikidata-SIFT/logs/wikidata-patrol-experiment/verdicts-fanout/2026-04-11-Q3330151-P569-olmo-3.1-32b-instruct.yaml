@@ -1,0 +1,30 @@
+completion_tokens: 1979
+cost_usd: 0.0064044
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 26085
+property: P569
+property_label: date of birth
+rationale: The old value '+6767-00-00T00:00:00Z' for date of birth is implausible
+  and unsupported by any credible source. Multiple authoritative and primary sources,
+  including the Biblioteca Virtual Miguel de Cervantes and the Bibliothèque nationale
+  de France, explicitly state the birth year as 1796. The new value is therefore correct
+  and well-supported.
+rcid: 2550552434
+revid: 2473885504
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://bvpb.mcu.es/es/consulta_aut/registro.do?control=BVPB20090028920
+- provenance: verified
+  supports_claim: true
+  url: https://catalogue.bnf.fr/ark:/12148/cb12668057m
+- provenance: verified
+  supports_claim: true
+  url: https://data.cervantesvirtual.com/person/1515
+timestamp: '2026-04-11T18:36:51.436506+00:00'
+title: Q3330151
+turns: 1
+value_label: null
+verdict: verified-high

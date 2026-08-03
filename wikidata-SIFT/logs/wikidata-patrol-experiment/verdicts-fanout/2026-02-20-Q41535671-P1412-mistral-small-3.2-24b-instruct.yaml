@@ -1,0 +1,23 @@
+completion_tokens: 498
+cost_usd: 0.002323
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 21736
+property: P1412
+property_label: languages spoken, written or signed
+rationale: The added reference does not support the claim that English is a language
+  spoken, written, or signed by Christian Bois. The reference does not provide any
+  information about the languages spoken by Christian Bois, and the search results
+  do not provide any independent corroboration of the claim.
+rcid: 2540943566
+revid: 2464732926
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zenodo.org/records/4115999
+timestamp: '2026-02-20T13:01:36.100701+00:00'
+title: Q41535671
+turns: 3
+value_label: English
+verdict: unverifiable

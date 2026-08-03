@@ -1,0 +1,34 @@
+completion_tokens: 1436
+cost_usd: 0.00820385
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 86950
+property: P21
+property_label: sex or gender
+rationale: Both cited references (VIAF and BnF) and independent sources (Wikipedia,
+  NooSFere, Babelio) consistently refer to Pierre Bordage as male. The edit to change
+  his gender to 'female organism' is incorrect.
+rcid: 2550573515
+revid: 2473905731
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://viaf.org/viaf/64135493
+- provenance: verified
+  supports_claim: false
+  url: https://www.sudoc.fr/12935018w
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pierre_Bordage
+- provenance: verified
+  supports_claim: false
+  url: https://www.noosfere.org/auteurs/bordage_pierre.asp
+- provenance: verified
+  supports_claim: false
+  url: https://www.babelio.com/auteurs/Bordage-Pierre/7654
+timestamp: '2026-04-07T02:41:29.518499+00:00'
+title: Q543836
+turns: 5
+value_label: female organism
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 1272
+cost_usd: 0.0120129
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 116313
+property: P800
+property_label: notable work
+rationale: The edit adds a new notable work titled 'The Building of Data Credibility'
+  to the Wikidata item for Victor Martini Gabry. However, the edit does not include
+  any references, and the subsequent investigation did not yield any verifiable sources
+  that confirm the existence or relevance of this work. The search results provided
+  no direct evidence to support the claim, and the fetched sources either did not
+  contain the relevant information or were inaccessible.
+rcid: 2540930858
+revid: 2464721503
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://pdfs.semanticscholar.org/b864/c7e426647c0272d50cbce8843d2820afd615.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://search.proquest.com/openview/86f8597faa8d86781190a30b590e004e/1.pdf?pq-origsite=gscholar&cbl=5008010
+timestamp: '2026-02-20T19:59:12.793712+00:00'
+title: Q138339452
+turns: 15
+value_label: The Building of Data Credibility
+verdict: unverifiable

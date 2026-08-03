@@ -1,0 +1,29 @@
+completion_tokens: 1691
+cost_usd: 0.0032714
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11284
+property: P140
+property_label: religion or worldview
+rationale: Multiple independent and verified sources—including a British Academy obituary
+  and academic articles—explicitly identify Suliman Bashear as Druze. These sources
+  directly contradict the previous value of 'Islam' and confirm the new value of 'Druze
+  Faith.' The change is therefore correct and well-supported by reliable evidence.
+rcid: 2550427355
+revid: 2473764517
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.britishacademy.org/publications/obituaries/suliman-basheer-1947-1991/
+- provenance: verified
+  supports_claim: true
+  url: https://www.jstor.org/stable/207830
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Suliman_Bashear
+timestamp: '2026-04-11T14:29:26.773626+00:00'
+title: Q2896777
+turns: 1
+value_label: Druze Faith
+verdict: verified-high

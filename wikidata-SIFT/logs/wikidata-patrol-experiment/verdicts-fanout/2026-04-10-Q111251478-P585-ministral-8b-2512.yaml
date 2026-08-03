@@ -1,0 +1,39 @@
+completion_tokens: 2924
+cost_usd: 0.0026761500000000004
+diff_type: reference_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23647
+property: P585
+property_label: point in time
+rationale: The claim that the 2026 Rhineland-Palatinate state election occurred on
+  22 March 2026 is strongly supported by multiple verified, authoritative sources,
+  including official municipal websites, political research institutions, and news
+  media. While the new reference (PDF) could not be accessed, the consensus from independent
+  sources justifies the edit.
+rcid: 2551378281
+revid: 2474683025
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.vg-goellheim.de/:translation/en/verwaltung/rathaus/landtagswahl-rheinland-palatinz-2026/
+- provenance: verified
+  supports_claim: true
+  url: https://www.kas.de/en/election-and-social-research-monitor/detail/-/content/analysis-of-the-state-election-in-rhineland-palatinate-on-22-march-2026
+- provenance: verified
+  supports_claim: true
+  url: https://grokipedia.com/page/2026_Rhineland-Palatinate_state_election
+- provenance: verified
+  supports_claim: true
+  url: https://www.idar-oberstein.de/:translation/en/idar-oberstein/politik-verwaltung/stadtverwaltung/wahlen/
+- provenance: verified
+  supports_claim: true
+  url: https://politpro.eu/en/rhineland-palatinate/election/2026-03-22/state-election
+- provenance: verified
+  supports_claim: true
+  url: https://www.dw.com/en/germany-news-cdu-wins-rhineland-palatinate-election/live-76465368
+timestamp: '2026-04-10T13:43:05.892032+00:00'
+title: Q111251478
+turns: 2
+value_label: null
+verdict: verified-high

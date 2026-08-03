@@ -1,0 +1,29 @@
+completion_tokens: 1756
+cost_usd: 0.0045834
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17649
+property: P856
+property_label: official website
+rationale: The official website http://www.hosp.go.jp/ is confirmed as the National
+  Hospital Organization's official site by direct fetch showing official branding
+  and content. This is corroborated by the English Wikipedia and the Japanese Ministry
+  of Health, Labour and Welfare, both of which list the same URL as the official website.
+rcid: 2550867542
+revid: 2474191023
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.hosp.go.jp/
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/National_Hospital_Organization
+- provenance: verified
+  supports_claim: true
+  url: https://www.mhlw.go.jp/english/database/db/hosp.html
+timestamp: '2026-04-10T09:48:11.222270+00:00'
+title: Q11421286
+turns: 1
+value_label: null
+verdict: verified-high

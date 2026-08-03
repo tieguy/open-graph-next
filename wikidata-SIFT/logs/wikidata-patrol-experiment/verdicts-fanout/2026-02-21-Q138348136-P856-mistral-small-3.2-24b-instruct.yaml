@@ -1,0 +1,24 @@
+completion_tokens: 1181
+cost_usd: 0.00629982
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 60048
+property: P856
+property_label: official website
+rationale: The search results did not provide direct evidence to confirm the correctness
+  of the new official website.
+rcid: 2540920980
+revid: 2464712010
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://fut-rap-cartas.en.uptodown.com/android
+- provenance: verified
+  supports_claim: false
+  url: https://www.gameloop.com/game/card/fut-rap-cartas-on-pc
+timestamp: '2026-02-21T00:48:22.346236+00:00'
+title: Q138348136
+turns: 7
+value_label: null
+verdict: unverifiable

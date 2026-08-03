@@ -1,0 +1,27 @@
+completion_tokens: 1706
+cost_usd: 0.00161121
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15231
+property: P569
+property_label: date of birth
+rationale: The date of birth claim for Madhumita Raut as '4 April 1966' is contradicted
+  by multiple verified sources. Empireangle.com explicitly states her date of birth
+  as 'January 1, 1967,' and Mathrubhumi confirms she was 59 years old at the time
+  of her death in March 2026, which aligns with a birth year of 1967. No independent
+  source supports the Wikidata claim of '4 April 1966.'
+rcid: 2551232343
+revid: 2474544742
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://empireangle.com/celebrity/madhumita-raut/
+- provenance: verified
+  supports_claim: false
+  url: https://english.mathrubhumi.com/news/india/odissi-dancer-madhumita-raut-passes-away-jfl8rowl
+timestamp: '2026-04-11T09:58:25.987648+00:00'
+title: Q6727486
+turns: 1
+value_label: null
+verdict: incorrect

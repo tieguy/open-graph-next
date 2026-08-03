@@ -1,0 +1,29 @@
+completion_tokens: 2099
+cost_usd: 0.0040222
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13814
+property: P569
+property_label: date of birth
+rationale: There is no reliable, independent source that confirms Ayman Sheikhani's
+  date of birth. The old value (March 24, 0024 CE) is implausible for a living person,
+  and the new value ('March 24 CE') is equally unsupported and non-specific. Neither
+  value is corroborated by trustworthy evidence.
+rcid: null
+revid: 2472858153
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sheikhani.com/
+- provenance: verified
+  supports_claim: false
+  url: https://elcinema.com/en/person/1105785/
+- provenance: verified
+  supports_claim: false
+  url: https://listal.com/ayman-sheikhani
+timestamp: '2026-04-11T18:09:29.535891+00:00'
+title: Q12181435
+turns: 1
+value_label: null
+verdict: suspect

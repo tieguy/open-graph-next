@@ -1,0 +1,22 @@
+completion_tokens: 653
+cost_usd: 0.013653700000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 270462
+property: P451
+property_label: unmarried partner
+rationale: No verifiable sources were found to confirm whether 'Bamboula' (Q6658)
+  is correctly identified as Serge Gainsbourg's unmarried partner. Multiple searches
+  for 'Serge Gainsbourg Bamboula', 'Brigitte Bardot married', and related details
+  returned no relevant web pages. All attempts to access potential sources like Wikipedia
+  were blocked by domain restrictions. Without accessible citations supporting this
+  claim, it cannot be verified with the available information.
+rcid: null
+revid: 2471682735
+sources: []
+timestamp: '2026-04-07T11:49:58.709857+00:00'
+title: Q1698
+turns: 15
+value_label: Bamboula
+verdict: unverifiable

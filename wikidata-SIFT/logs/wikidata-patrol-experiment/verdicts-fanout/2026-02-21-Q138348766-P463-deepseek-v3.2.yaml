@@ -1,0 +1,27 @@
+completion_tokens: 317
+cost_usd: 0.00772464
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 12843
+property: P463
+property_label: member of
+rationale: The cited reference (BBTS Council page) directly states that Danny Gaskin
+  'sits on the British Blood Transfusion Society (BBTS) Council,' which confirms his
+  membership in the organization. Additionally, a Companies House search shows him
+  as a Director of 'THE BRITISH BLOOD TRANSFUSION SOCIETY,' providing independent
+  official corroboration of his membership role.
+rcid: 2540920683
+revid: 2464711712
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbts.org.uk/whoweare/council/dannygaskin/
+- provenance: verified
+  supports_claim: true
+  url: https://find-and-update.company-information.service.gov.uk/officers/gtdcxQmquzVmV3SDMHBv5scL_og/appointments
+timestamp: '2026-02-21T01:04:42.458093+00:00'
+title: Q138348766
+turns: 2
+value_label: British Blood Transfusion Society
+verdict: verified-high

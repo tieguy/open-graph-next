@@ -1,0 +1,37 @@
+completion_tokens: 2625
+cost_usd: 0.0019075
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15307
+property: P2002
+property_label: X (Twitter) username
+rationale: The X (Twitter) username giannamariella is confirmed by the Twitter profile,
+  and the number of followers matches the qualifier added. The start time qualifier
+  is plausible but not directly confirmed.
+rcid: 2550356918
+revid: 2473695576
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://open.spotify.com/intl-de/artist/0Ht0EmEcuqMZRjSUb5oNce
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+- provenance: verified
+  supports_claim: false
+  url: https://www.news.de/promis/855885232/ingo-knollmann-privat-ingo-donot-verheiratet-ehefrau-gianna-mariella-familie-kinder-donots-saenger-musik-schrappmesser-tattoo-podcast/1/
+- provenance: verified
+  supports_claim: false
+  url: https://www.tiktok.com/@marie.mariella2
+- provenance: verified
+  supports_claim: false
+  url: https://www.tiktok.com/@mariella_mariella2
+- provenance: verified
+  supports_claim: true
+  url: https://twitter.com/giannamariella
+timestamp: '2026-04-10T13:37:36.365408+00:00'
+title: Q123352308
+turns: 1
+value_label: null
+verdict: verified-high

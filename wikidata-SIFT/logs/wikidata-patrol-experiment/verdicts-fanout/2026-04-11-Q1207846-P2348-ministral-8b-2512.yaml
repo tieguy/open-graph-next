@@ -1,0 +1,26 @@
+completion_tokens: 2117
+cost_usd: 0.00479151
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 52150
+property: P2348
+property_label: time period
+rationale: The change from 'ancient history' (Q41493) to 'prehistoric archaeology'
+  (Q2415966) for Dhul-Qarnayn is incorrect. Dhul-Qarnayn is a Quranic figure associated
+  with historical narratives and figures like Alexander the Great, which aligns with
+  the time period of 'ancient history.' There is no credible evidence or authoritative
+  source that supports classifying Dhul-Qarnayn under 'prehistoric archaeology.' The
+  prefetched reference and available Islamic context do not support this change, and
+  no independent sources were found to corroborate it.
+rcid: 2550679267
+revid: 2474008312
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://central-mosque.com/index.php/Tafseer/dhulqar.html
+timestamp: '2026-04-11T09:12:14.946461+00:00'
+title: Q1207846
+turns: 6
+value_label: prehistoric archaeology
+verdict: incorrect

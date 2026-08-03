@@ -1,0 +1,23 @@
+completion_tokens: 781
+cost_usd: 0.0032013
+diff_type: statement_removed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 60902
+property: P1476
+property_label: title
+rationale: No verifiable sources were found to confirm that "Brave Search" is the
+  correct title for the Brave Search entity on Wikidata. The homepage of search.brave.com
+  only displays a search box without explicit branding as "Brave Search" and contains
+  no indication in the page content that supports the claim.
+rcid: null
+revid: 2470688551
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://search.brave.com/
+timestamp: '2026-04-07T03:51:20.246349+00:00'
+title: Q107355971
+turns: 12
+value_label: null
+verdict: unverifiable

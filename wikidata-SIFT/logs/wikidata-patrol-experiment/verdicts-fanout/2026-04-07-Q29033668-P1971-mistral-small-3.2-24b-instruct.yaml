@@ -1,0 +1,23 @@
+completion_tokens: 504
+cost_usd: 0.00975624
+diff_type: reference_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 127212
+property: P1971
+property_label: number of children
+rationale: The removed reference from the number of children claim for Cardi B was
+  correctly removed as it is outdated. The source confirms that Cardi B is pregnant
+  with her second child, which means she has four children in total. The reference
+  was correctly removed as it is no longer relevant.
+rcid: null
+revid: 2471547309
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.billboard.com/music/music-news/cardi-b-announces-pregnancy-second-child-8528446/
+timestamp: '2026-04-07T13:52:09.062747+00:00'
+title: Q29033668
+turns: 3
+value_label: null
+verdict: verified-high

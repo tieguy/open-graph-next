@@ -1,0 +1,30 @@
+completion_tokens: 1354
+cost_usd: 0.0063986
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27931
+property: P2031
+property_label: start of work period
+rationale: The only authoritative source fetched (FilmReference.com) states that Roberto
+  Benigni's earliest credited professional activity was in 1977, with no mention of
+  work in 1972. The cited reference (Russian Wikipedia) is a tertiary source and does
+  not constitute primary evidence. Unable to fetch all referenced pages due to technical
+  limitations, so the claim cannot be confirmed or denied with high confidence.
+rcid: 2551339872
+revid: 2474646120
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.filmreference.com/film/3/Roberto-Benigni.html
+- provenance: verified
+  supports_claim: false
+  url: https://history-biography.com/roberto-benigni/
+- provenance: verified
+  supports_claim: false
+  url: https://id.lib.harvard.edu/alma/99157880264403941/catalog
+timestamp: '2026-04-10T12:09:11.997368+00:00'
+title: Q23301
+turns: 1
+value_label: null
+verdict: unverifiable

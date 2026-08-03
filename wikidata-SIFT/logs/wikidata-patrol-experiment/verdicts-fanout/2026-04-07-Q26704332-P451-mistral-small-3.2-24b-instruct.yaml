@@ -1,0 +1,23 @@
+completion_tokens: 548
+cost_usd: 0.00812908625
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 114341
+property: P451
+property_label: unmarried partner
+rationale: The only reference cited for this claim is a Wikipedia URL, which is not
+  a valid source for Wikidata. Attempts to find independent sources did not yield
+  any verifiable information. The claim cannot be confirmed or denied based on the
+  available evidence.
+rcid: null
+revid: 2471227250
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/?oldid=1241810655
+timestamp: '2026-04-07T13:07:30.306627+00:00'
+title: Q26704332
+turns: 15
+value_label: Yo
+verdict: unverifiable

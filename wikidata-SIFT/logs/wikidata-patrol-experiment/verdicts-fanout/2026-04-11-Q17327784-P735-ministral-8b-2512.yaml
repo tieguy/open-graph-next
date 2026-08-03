@@ -1,0 +1,31 @@
+completion_tokens: 2500
+cost_usd: 0.0027006599999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 21700
+property: P735
+property_label: given name
+rationale: The edit incorrectly changes the given name from 'Francesco' to 'Franciscus'
+  for Francesco Calzolari. All verified primary sources (BEIC Digital Library, Inomidellepiante.org,
+  and Linda Hall Library) consistently refer to him as 'Francesco,' with no evidence
+  supporting the use of 'Franciscus.' The cited reference (Italian Wikipedia) was
+  not independently verified and does not support the change. The new value lacks
+  corroboration and contradicts established historical records.
+rcid: 2551329957
+revid: 2474636806
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://digitale.beic.it/primo_library/libweb/action/search.do?fn=search&vid=BEIC&vl%283134987UI0%29=creator&vl%28freeText0%29=Calzolari%20Francesco
+- provenance: verified
+  supports_claim: false
+  url: https://www.inomidellepiante.org/francesco-calzolari.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.lindahall.org/about/news/scientist-of-the-day/francesco-calzolari/
+timestamp: '2026-04-11T17:27:57.558111+00:00'
+title: Q17327784
+turns: 1
+value_label: Franciscus
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 1816
+cost_usd: 0.0035533312499999997
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 32329
+property: P856
+property_label: official website
+rationale: The URL provided is confirmed to be the official website of Compañía Chilena
+  de Comunicaciones. The language of the website content is inferred to be Spanish
+  based on the context and the nature of the company. However, the specific qualifier
+  'Spanish' (Q1321) is not explicitly mentioned in the fetched content, and additional
+  independent sources could not be verified due to a search error. The change from
+  'Spanish Wikipedia' (Q8449) to 'Spanish' (Q1321) seems plausible but lacks direct
+  confirmation from independent sources.
+rcid: 2550596937
+revid: 2473928205
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cooperativa.cl/noticias/site/edic/base/port/home_modulo_informacion_corporativa.html
+- provenance: verified
+  supports_claim: true
+  url: https://red-conecta.com/empresa/592/compania-chilena-de-comunicaciones-sa
+- provenance: verified
+  supports_claim: true
+  url: https://www.cmfchile.cl/institucional/mercados/entidad.php?mercado=V&rut=90846000&tipoentidad=RVSOC&row=AAAxIgACgAAAD61AAR&vig=NV&control=svs&pestania=1
+- provenance: verified
+  supports_claim: true
+  url: https://www.mercantil.com/empresa/radio-cooperativa/santiago/300014132/eng/
+timestamp: '2026-04-11T13:32:40.830699+00:00'
+title: Q5779685
+turns: 4
+value_label: null
+verdict: verified-low

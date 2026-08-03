@@ -1,0 +1,22 @@
+completion_tokens: 1373
+cost_usd: 0.00560345125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 66416
+property: P569
+property_label: date of birth
+rationale: The reference cited is from a blocked domain and could not be verified.
+  No independent sources could be found to confirm or deny the new date of birth due
+  to search errors.
+rcid: 2549391839
+revid: 2472757950
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ar.wikipedia.org/?oldid=62076754
+timestamp: '2026-04-11T15:08:37.583553+00:00'
+title: Q20390331
+turns: 9
+value_label: null
+verdict: unverifiable

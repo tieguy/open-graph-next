@@ -1,0 +1,26 @@
+completion_tokens: 1437
+cost_usd: 0.00181098
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 23283
+property: P570
+property_label: date of death
+rationale: The claim for Marinette Prado's date of death (14 October 1983) lacks any
+  verified references or independent corroboration. No relevant sources were found
+  during the investigation, and prefetched references were unrelated to the subject.
+  Without verified evidence, the rank change cannot be substantiated.
+rcid: 2550396348
+revid: 2473734045
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.reddit.com/r/miraculousladybug/comments/1jvxyjv/does_anyone_know_if_marinette_actually_died_in/
+- provenance: reported
+  supports_claim: false
+  url: https://www.wbay.com/2026/02/13/boyfriend-marinette-woman-found-dead-now-charged-with-homicide/
+timestamp: '2026-04-11T14:59:47.727788+00:00'
+title: Q10326426
+turns: 3
+value_label: null
+verdict: unverifiable

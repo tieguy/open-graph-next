@@ -1,0 +1,26 @@
+completion_tokens: 1258
+cost_usd: 0.0046898
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19675
+property: P400
+property_label: platform
+rationale: The reference provided in the edit (a Steam app ID) is not relevant to
+  the claim about what Android is. Although the app is available on Android, the cited
+  reference does not substantiate the property label's definition of Android. The
+  label's content is accurate, but the evidence cited does not support it.
+rcid: 2549607968
+revid: 2472969774
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/details?id=com.navegarte.bahianoticia
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Android_(operating_system)
+timestamp: '2026-04-07T03:57:55.512783+00:00'
+title: Q100243255
+turns: 2
+value_label: Android
+verdict: suspect

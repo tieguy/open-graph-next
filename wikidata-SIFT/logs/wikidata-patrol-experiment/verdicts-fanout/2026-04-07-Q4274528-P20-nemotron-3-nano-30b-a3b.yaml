@@ -1,0 +1,21 @@
+completion_tokens: 578
+cost_usd: 0.0039365500000000005
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 76419
+property: P20
+property_label: place of death
+rationale: No reliable sources were found that confirm or deny the claim that Irina
+  Mazing's place of death is Kharkiv. All search attempts for any mention of her death,
+  location of death, or associated events returned no relevant results. Without any
+  verifiable sources to reference, there is insufficient evidence to assess the accuracy
+  of this edit.
+rcid: 2551426267
+revid: 2474726881
+sources: []
+timestamp: '2026-04-07T04:51:32.617909+00:00'
+title: Q4274528
+turns: 15
+value_label: Kharkiv
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 589
+cost_usd: 0.0194735375
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 205106
+property: P27
+property_label: country of citizenship
+rationale: The Metropolitan Museum of Art's record for John Beasley Greene explicitly
+  states that he was born in France, specifically in Le Havre. This directly supports
+  the claim that France is his country of citizenship. The information is from a verified
+  source, providing strong evidence for the claim.
+rcid: null
+revid: 2456053042
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.metmuseum.org/art/collection/search/266121
+timestamp: '2026-04-07T05:34:49.271032+00:00'
+title: Q1699205
+turns: 15
+value_label: France
+verdict: verified-high

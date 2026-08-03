@@ -1,0 +1,22 @@
+completion_tokens: 1705
+cost_usd: 0.0016539
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 11424
+property: P734
+property_label: family name
+rationale: The removal of the family name "Valverde" is incorrect because it is confirmed
+  by reliable sources, such as Wikipedia, that "Valverde" is indeed the family name
+  of Enrique Obregón Valverde.
+rcid: 2551109157
+revid: 2474424804
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://es.wikipedia.org/wiki/Enrique_Obreg%C3%B3n_Valverde
+timestamp: '2026-04-11T06:50:42.013516+00:00'
+title: Q16562277
+turns: 1
+value_label: Valverde
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 772
+cost_usd: 0.0051878
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 23623
+property: P166
+property_label: award received
+rationale: The only cited reference is on Instagram, which blocks automated access
+  and therefore could not be verified. Independent web searches did not find any reliable
+  third-party confirmation that Manvik Chandra received an award for drawing. Without
+  accessible or corroborating evidence, the claim remains unverifiable.
+rcid: 2540956799
+revid: 2464745014
+sources:
+- provenance: unreachable (blocked domain)
+  supports_claim: false
+  url: https://www.instagram.com/p/DT43S4TEhmY/
+- provenance: reported
+  supports_claim: false
+  url: https://gdgoenkamodeltown.com/achievements/
+- provenance: reported
+  supports_claim: false
+  url: http://www.starcreativeart.org/
+timestamp: '2026-02-20T06:43:20.886427+00:00'
+title: Q137924958
+turns: 5
+value_label: drawing
+verdict: unverifiable

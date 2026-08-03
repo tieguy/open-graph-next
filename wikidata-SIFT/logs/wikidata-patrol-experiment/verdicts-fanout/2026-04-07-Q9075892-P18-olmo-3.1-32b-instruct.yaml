@@ -1,0 +1,24 @@
+completion_tokens: 909
+cost_usd: 0.0129534
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62040
+property: P18
+property_label: image
+rationale: The only reference provided for the new image is Spanish Wikipedia, which
+  is not an acceptable primary source for Wikidata and creates a circular dependency.
+  No independent, authoritative source (such as the official Zaragoza Semana Santa
+  website or reputable news coverage) was found confirming that the image is the official
+  or correct 2026 cartel. Therefore, the claim cannot be verified.
+rcid: 2550602887
+revid: 2473933952
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://zaragozasemanasanta.es
+timestamp: '2026-04-07T11:36:36.187503+00:00'
+title: Q9075892
+turns: 12
+value_label: null
+verdict: unverifiable

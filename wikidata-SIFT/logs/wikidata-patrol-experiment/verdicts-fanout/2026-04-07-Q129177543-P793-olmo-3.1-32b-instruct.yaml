@@ -1,0 +1,33 @@
+completion_tokens: 813
+cost_usd: 0.0065278
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30200
+property: P793
+property_label: significant event
+rationale: No independent or primary source evidence was found to confirm or deny
+  the specific claim that Hansel Hernández was killed by Cuban police using a chainsaw
+  in 2020. Multiple web searches for credible news reports or official statements
+  returned no relevant or verifiable results. The Wikidata item contains some details
+  about the death, but the added qualifier lacks corroboration.
+rcid: 2550305041
+revid: 2473644875
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://news.google.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.com
+- provenance: reported
+  supports_claim: false
+  url: https://www.cubanews.cu
+- provenance: reported
+  supports_claim: false
+  url: https://www.eluniversal.com.cu
+timestamp: '2026-04-07T11:14:49.437820+00:00'
+title: Q129177543
+turns: 6
+value_label: death of Hansel Hernández
+verdict: unverifiable

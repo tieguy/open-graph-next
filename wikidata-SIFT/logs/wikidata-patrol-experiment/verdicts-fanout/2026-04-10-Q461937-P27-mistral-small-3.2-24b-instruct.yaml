@@ -1,0 +1,30 @@
+completion_tokens: 496
+cost_usd: 0.0031642125
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 35031
+property: P27
+property_label: country of citizenship
+rationale: Multiple verified sources confirm that María Izquierdo was a Mexican citizen,
+  contradicting the claim that her country of citizenship is 'Marroca [de]'.
+rcid: 2549596620
+revid: 2472958694
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.infinite-women.com/women/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://awarewomenartists.com/en/artiste/maria-izquierdo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.askart.com/artist/Maria_Izquierdo/11042118/Maria_Izquierdo.aspx
+- provenance: verified
+  supports_claim: false
+  url: https://medium.com/@arteoriginal.co/mar%C3%ADa-izquierdo-overshadowed-color-in-the-history-of-mexican-art-a01f2f953181
+timestamp: '2026-04-10T13:20:01.941682+00:00'
+title: Q461937
+turns: 2
+value_label: Marroca [de]
+verdict: incorrect

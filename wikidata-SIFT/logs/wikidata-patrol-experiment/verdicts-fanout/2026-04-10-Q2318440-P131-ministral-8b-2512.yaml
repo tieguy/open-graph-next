@@ -1,0 +1,39 @@
+completion_tokens: 1935
+cost_usd: 0.00363837
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25316
+property: P131
+property_label: located in the administrative territorial entity
+rationale: The Church of Saint George is confirmed to be located in Lod, Israel by
+  multiple verified sources. Neuroplasticity (Q849491) is a scientific concept describing
+  brain adaptability, not an administrative territorial entity. The edit incorrectly
+  assigns a non-location value to P131, which is used for administrative territorial
+  entities.
+rcid: 2550401254
+revid: 2473738909
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Church_of_Saint_George_(Lod)
+- provenance: verified
+  supports_claim: false
+  url: https://www.orthodoxholyland.com/st-georges-tomb-lod
+- provenance: verified
+  supports_claim: true
+  url: https://www.ncbi.nlm.nih.gov/books/NBK557811/
+- provenance: verified
+  supports_claim: true
+  url: https://www.physio-pedia.com/Neuroplasticity
+- provenance: verified
+  supports_claim: false
+  url: https://holylandviptours.net/attractions/church-of-saint-george/
+- provenance: verified
+  supports_claim: false
+  url: https://www.biblewalks.com/stgeorgelod/
+timestamp: '2026-04-10T07:39:07.052159+00:00'
+title: Q2318440
+turns: 2
+value_label: neuroplasticity
+verdict: incorrect

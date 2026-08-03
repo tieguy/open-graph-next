@@ -1,0 +1,29 @@
+completion_tokens: 1476
+cost_usd: 0.0109762
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 50453
+property: P569
+property_label: date of birth
+rationale: The date of birth '7 January 1968' is only cited from secondary sources
+  that are either circular (German Wikipedia) or now unavailable (BBC 100 Women).
+  No primary or independent source could be found to confirm this date. Therefore,
+  the claim remains unverifiable.
+rcid: 2550517522
+revid: 2473851873
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://howafrica.com/yvonne-aki-sawyerr-is-the-first-female-mayor-in-sierra-leone-since-1980/
+- provenance: unverifiable
+  supports_claim: false
+  url: https://www.bbc.com/news/world-55042935
+- provenance: reported
+  supports_claim: false
+  url: https://sierra-leone.gov.sl/
+timestamp: '2026-04-07T05:13:49.760545+00:00'
+title: Q55238200
+turns: 8
+value_label: null
+verdict: unverifiable

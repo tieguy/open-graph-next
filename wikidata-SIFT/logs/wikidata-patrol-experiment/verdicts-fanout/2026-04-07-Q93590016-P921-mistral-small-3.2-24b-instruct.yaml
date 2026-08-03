@@ -1,0 +1,22 @@
+completion_tokens: 870
+cost_usd: 0.00196365
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18234
+property: P921
+property_label: main subject
+rationale: No direct references or independent sources were found to confirm or deny
+  the claim that 'CirrusSearch' is the main subject of 'Help:CirrusSearch'. The removal
+  of the claim cannot be verified with the available information.
+rcid: null
+revid: 2472251003
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.mediawiki.org/wiki/Help:CirrusSearch
+timestamp: '2026-04-07T12:44:44.911861+00:00'
+title: Q93590016
+turns: 4
+value_label: CirrusSearch
+verdict: unverifiable

@@ -1,0 +1,23 @@
+completion_tokens: 945
+cost_usd: 0.0029601750000000002
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 28850
+property: P856
+property_label: official website
+rationale: The edit does not include any references, and the web search did not return
+  any independent sources to confirm or deny the claim. The website itself was verified
+  to be operational, but without additional corroborating evidence, the verdict is
+  unverifiable.
+rcid: 2540969601
+revid: 2464756990
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://suchfokus.de
+timestamp: '2026-02-20T03:35:23.668302+00:00'
+title: Q138349990
+turns: 4
+value_label: null
+verdict: unverifiable

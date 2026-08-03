@@ -1,0 +1,28 @@
+completion_tokens: 1256
+cost_usd: 0.00426926875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 41279
+property: P27
+property_label: country of citizenship
+rationale: The sources consistently describe Rabih az-Zubayr as a Sudanese warlord
+  and slave trader, with no mention of Syria. Therefore, the claim that Syria is his
+  country of citizenship is incorrect.
+rcid: 2549457145
+revid: 2472822502
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://military-history.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://nigeriainformation.fandom.com/wiki/Rabih_az-Zubayr
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Rabih_Az_Zubayr.html?id=3I_EMgEACAAJ
+timestamp: '2026-04-10T14:09:45.698577+00:00'
+title: Q932368
+turns: 3
+value_label: Syria
+verdict: incorrect

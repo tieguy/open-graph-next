@@ -1,0 +1,28 @@
+completion_tokens: 675
+cost_usd: 0.0043729500000000004
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 84759
+property: P18
+property_label: image
+rationale: No credible sources were found confirming that 'IDOT rest area garbage
+  can.jpg' is a correct image for Kendall Myers. Extensive searches across multiple
+  queries yielded zero results, including no references from government (.gov), educational
+  (.edu), or reputable news sources. The edit has no references attached, and no independent
+  verification could be located despite thorough searching across varied query patterns.
+  Existing item context suggests the prior image 'Kendall Myers (cropped).jpg' was
+  a formal identifier photo, while the replacement appears to be a non-official, potentially
+  erroneous image. Without any verifiable source supporting the change, the edit remains
+  unverifiable.
+rcid: null
+revid: 2333215909
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kendall_Myers
+timestamp: '2026-04-07T04:58:52.120732+00:00'
+title: Q441687
+turns: 15
+value_label: null
+verdict: unverifiable

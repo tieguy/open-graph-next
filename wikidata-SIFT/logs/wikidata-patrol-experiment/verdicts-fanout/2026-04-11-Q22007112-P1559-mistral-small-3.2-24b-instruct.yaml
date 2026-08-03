@@ -1,0 +1,24 @@
+completion_tokens: 464
+cost_usd: 0.00622775
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 65192
+property: P1559
+property_label: name in native language
+rationale: The edit changes the name in native language from 'نادية مراد' (Nadia Murad)
+  to 'rgwvrwfنادية مراد'. The old value 'نادية مراد' is consistent with the sources,
+  which refer to her as 'Nadia Murad' or 'Nadia Murad Basee Taha'. The new value appears
+  to be a concatenation of arbitrary characters with her name, which is not supported
+  by any of the sources. Therefore, the edit is incorrect.
+rcid: null
+revid: 2470711327
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.nobelprize.org/prizes/peace/2018/murad/facts/
+timestamp: '2026-04-11T16:15:21.470294+00:00'
+title: Q22007112
+turns: 4
+value_label: null
+verdict: incorrect

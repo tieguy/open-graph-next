@@ -1,0 +1,24 @@
+completion_tokens: 1595
+cost_usd: 0.0031448400000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38699
+property: P225
+property_label: taxon name
+rationale: The edit changed the taxon name (P225) from 'pene rico' (likely incorrect)
+  to 'a' (nonsensical and invalid). The item's other claims (P1813, P1843, P373) and
+  the GRIN URL reference confirm that the correct taxon name should be 'Stevia rebaudiana'.
+  The new value 'a' is not a valid scientific name and contradicts all available evidence.
+  The edit is incorrect and should be reverted.
+rcid: 2550294685
+revid: 2473634707
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://npgsweb.ars-grin.gov/gringlobal/taxonomydetail.aspx?id=35581
+timestamp: '2026-04-11T17:00:38.891909+00:00'
+title: Q7213452
+turns: 4
+value_label: null
+verdict: incorrect

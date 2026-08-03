@@ -1,0 +1,23 @@
+completion_tokens: 652
+cost_usd: 0.013139550000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 260183
+property: P1477
+property_label: birth name
+rationale: Despite extensive searches, no verifiable sources supporting that Maurice
+  Ravel's birth name was Joseph Maurice Ravel could be located or fetched. The cited
+  reference URL returned a fetch error, and no independent corroboration was found
+  in any accessible source.
+rcid: null
+revid: 2471911372
+sources:
+- provenance: reported
+  supports_claim: true
+  url: http://earchives.le64.fr/archives-en-ligne/ark:/81221/r20328zwkx417k/f32?context=ead::FRAD064003_IR0002_e0055076
+timestamp: '2026-04-07T04:21:00.883267+00:00'
+title: Q1178
+turns: 15
+value_label: null
+verdict: unverifiable

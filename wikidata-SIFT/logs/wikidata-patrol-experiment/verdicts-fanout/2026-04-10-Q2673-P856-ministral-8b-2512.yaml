@@ -1,0 +1,30 @@
+completion_tokens: 1489
+cost_usd: 0.00421953
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32376
+property: P856
+property_label: official website
+rationale: The official website for Chuck Norris is consistently confirmed as 'https://chucknorris.com/'
+  across multiple verified sources. The edit removes the outdated '/feed/' qualifier,
+  which is not referenced as the primary website in any independent or official source.
+  The change aligns with the authoritative domain and is supported by direct verification
+  of the website's existence and primary URL.
+rcid: 2550580766
+revid: 2473912589
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.chucknorris.com/
+- provenance: verified
+  supports_claim: true
+  url: https://roundhouseprovisions.com/
+- provenance: verified
+  supports_claim: true
+  url: https://knowyourmeme.com/memes/people/chuck-norris
+timestamp: '2026-04-10T13:26:10.175334+00:00'
+title: Q2673
+turns: 1
+value_label: null
+verdict: verified-high

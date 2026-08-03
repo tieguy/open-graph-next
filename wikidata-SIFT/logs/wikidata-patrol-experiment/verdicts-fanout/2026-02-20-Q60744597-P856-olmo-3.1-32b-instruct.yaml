@@ -1,0 +1,27 @@
+completion_tokens: 1054
+cost_usd: 0.0037251999999999997
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15464
+property: P856
+property_label: official website
+rationale: The provided URL https://www.globalbankingandfinance.com/ resolves to a
+  website that self-identifies as Global Banking & Finance Review, matching the item's
+  description as a UK-based finance magazine. The Wikipedia page for the magazine
+  also lists the same official website, providing independent confirmation. These
+  sources directly support the edit.
+rcid: 2540949368
+revid: 2464738370
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com/
+- provenance: reported
+  supports_claim: true
+  url: https://en.wikipedia.org/w/index.php?title=Global_Banking_&_Finance_Review_(Magazine)&oldid=904309193
+timestamp: '2026-02-20T11:02:13.880831+00:00'
+title: Q60744597
+turns: 2
+value_label: null
+verdict: verified-high

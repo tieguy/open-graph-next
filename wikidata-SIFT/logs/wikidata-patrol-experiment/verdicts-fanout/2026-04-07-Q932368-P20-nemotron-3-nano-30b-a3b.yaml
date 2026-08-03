@@ -1,0 +1,23 @@
+completion_tokens: 695
+cost_usd: 0.005247
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 102160
+property: P20
+property_label: place of death
+rationale: Despite exhaustive searching across multiple languages and thematically
+  relevant query variations, no verifiable source could be located that mentions 'Marah
+  Rabah' as a place of death or municipality in Bethlehem Governorate in relation
+  to Rabih az-Zubayr. All attempts to fetch specific URLs about the purported burial
+  site returned blocked domains, HTTP 403 forbidden errors, or resulted in no search
+  results. The referenced source was marked as blocked or unreachable, and no independent
+  sources confirm this claim.
+rcid: 2549456770
+revid: 2472822126
+sources: []
+timestamp: '2026-04-07T11:13:21.989048+00:00'
+title: Q932368
+turns: 15
+value_label: Marah Rabah
+verdict: unverifiable

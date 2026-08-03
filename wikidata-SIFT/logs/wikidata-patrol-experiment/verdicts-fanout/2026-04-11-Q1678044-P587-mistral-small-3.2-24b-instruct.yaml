@@ -1,0 +1,34 @@
+completion_tokens: 2071
+cost_usd: 0.0023168125000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19190
+property: P587
+property_label: MMSI
+rationale: Multiple independent sources confirm that the MMSI number '370610000' is
+  correctly associated with MS Crown Iris. The old MMSI number '248124000' is not
+  associated with any vessel, making the change an improvement.
+rcid: 2550773799
+revid: 2474099463
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.cruisemapper.com/ships/Crown-Iris-601
+- provenance: verified
+  supports_claim: true
+  url: https://www.marinetraffic.com/en/ais/details/ships/shipid:284103/mmsi:370610000/imo:8814744/vessel:CROWN%20IRIS
+- provenance: verified
+  supports_claim: true
+  url: https://www.vesselfinder.com/vessels/details/8814744
+- provenance: verified
+  supports_claim: false
+  url: https://www.marinetraffic.com/en/ais/details/ships/mmsi:248124000
+- provenance: verified
+  supports_claim: false
+  url: https://www.vesselfinder.com/vessels?mmsi=248124000
+timestamp: '2026-04-11T05:33:39.632019+00:00'
+title: Q1678044
+turns: 1
+value_label: null
+verdict: verified-high

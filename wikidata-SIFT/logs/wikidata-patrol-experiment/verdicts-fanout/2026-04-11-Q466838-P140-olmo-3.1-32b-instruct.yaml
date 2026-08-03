@@ -1,0 +1,31 @@
+completion_tokens: 2122
+cost_usd: 0.00481
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17684
+property: P140
+property_label: religion or worldview
+rationale: The edit changed Pōmare IV's religion or worldview from 'Protestantism'
+  to 'religious syncretism.' While there is evidence that Tahitian society was syncretic,
+  reliable biographical sources indicate she was raised and identified as a Protestant.
+  No explicit, cited source describes her as a practitioner of 'religious syncretism.'
+  The change also removed the previous citation, making the new claim unsupported.
+  Therefore, the edit is suspect.
+rcid: 2550612871
+revid: 2473943666
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Pōmare_IV
+- provenance: verified
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Pōmare_IV
+- provenance: verified
+  supports_claim: false
+  url: https://mlpp.pressbooks.pub/worldreligionsthespiritsearching/part/syncretic-traditions/
+timestamp: '2026-04-11T13:39:54.317286+00:00'
+title: Q466838
+turns: 1
+value_label: religious syncretism
+verdict: suspect

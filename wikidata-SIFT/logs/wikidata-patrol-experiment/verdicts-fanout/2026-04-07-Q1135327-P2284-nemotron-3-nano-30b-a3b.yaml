@@ -1,0 +1,26 @@
+completion_tokens: 858
+cost_usd: 0.006654650000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 129661
+property: P2284
+property_label: price
+rationale: The edited price of 1,000 euro for Whopper cannot be verified. No contemporary
+  source from Burger King Germany or its official distribution channels indicates
+  such a price; archived versions of fastfoodmenupreise.de from 2023 and 2022 show
+  standard menu prices ranging from around €4 to €11 for Whopper variants, with no
+  entry for €1,000. The retrieved archive page and multiple web search attempts failed
+  to locate any mention of a €1,000 price for Whopper, and there is no verifiable
+  source that supports this high price claim.
+rcid: 2551413015
+revid: 2474715963
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://web.archive.org/web/20230620100000/https://fastfoodmenupreise.de/burger-king-preise
+timestamp: '2026-04-07T05:46:10.550731+00:00'
+title: Q1135327
+turns: 15
+value_label: null
+verdict: unverifiable

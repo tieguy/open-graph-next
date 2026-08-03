@@ -1,0 +1,30 @@
+completion_tokens: 1610
+cost_usd: 0.00117021
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 12387
+property: P106
+property_label: occupation
+rationale: The removed claim that Gábor Báthory was a 'radio editor' (Q10270331) was
+  unsourced and lacked any credible evidence. Independent searches confirmed that
+  Gábor Báthory is primarily known as a journalist, with no reliable sources supporting
+  the occupation of 'radio editor'. The removal was justified as the claim was unsupported
+  and contradicted the existing well-established occupation claim of 'journalist'.
+rcid: 2550547176
+revid: 2473880353
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.electronicbeats.net/24-hours-in-budapest-gabor-csabai-part-two-of-six
+- provenance: verified
+  supports_claim: false
+  url: https://www.concurrences.com/en/auteur/Gabor-Bathory
+- provenance: verified
+  supports_claim: false
+  url: https://www.pinterest.com/bathorygabor/
+timestamp: '2026-04-11T16:12:35.685257+00:00'
+title: Q104927331
+turns: 1
+value_label: radio editor
+verdict: verified-high

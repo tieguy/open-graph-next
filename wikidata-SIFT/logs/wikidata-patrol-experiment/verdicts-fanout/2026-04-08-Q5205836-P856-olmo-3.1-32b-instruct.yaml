@@ -1,0 +1,23 @@
+completion_tokens: 993
+cost_usd: 0.0034982
+diff_type: statement_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 14512
+property: P856
+property_label: official website
+rationale: The removed claim referenced a GitHub repository API, not a website, and
+  the cited reference could not be verified. The W3C DOAP Bulletin Board, the primary
+  resource, does not designate the removed wiki as the official website. No independent
+  authoritative source confirms the wiki as the official site, supporting the removal.
+rcid: 2550591073
+revid: 2473922567
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.w3.org/wiki/SemanticWebDOAPBulletinBoard
+timestamp: '2026-04-08T19:10:42.053164+00:00'
+title: Q5205836
+turns: 2
+value_label: null
+verdict: verified-high

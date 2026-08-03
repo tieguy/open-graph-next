@@ -1,0 +1,26 @@
+completion_tokens: 1236
+cost_usd: 0.0022352
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 37742
+property: P154
+property_label: logo image
+rationale: The removal of the logo image claim is justified due to the lack of clear
+  evidence confirming 'Zentrum für Telematik e.V..jpg' as the official logo of the
+  Center for Telematics. The image's association with the organization is not explicitly
+  confirmed in the accessible sources.
+rcid: 2551390921
+revid: 2474695277
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.telematik-zentrum.de
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:Zentrum_f%C3%BCr_Telematik_e.V..jpg
+timestamp: '2026-04-11T15:38:49.168627+00:00'
+title: Q85751170
+turns: 5
+value_label: null
+verdict: verified-high

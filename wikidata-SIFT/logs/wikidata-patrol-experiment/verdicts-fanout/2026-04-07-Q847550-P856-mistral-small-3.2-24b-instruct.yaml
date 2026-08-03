@@ -1,0 +1,25 @@
+completion_tokens: 662
+cost_usd: 0.00482686875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 51401
+property: P856
+property_label: official website
+rationale: The new URL provided, "https://www.finnair.com/", is the website for Finnair,
+  an airline, and not related to Nikaho city. The correct official website for Nikaho
+  is "https://www.city.nikaho.akita.jp/".
+rcid: null
+revid: 2471596609
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.city.nikaho.akita.jp/
+- provenance: blocked
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Nikaho,_Akita
+timestamp: '2026-04-07T11:25:22.064367+00:00'
+title: Q847550
+turns: 6
+value_label: null
+verdict: incorrect

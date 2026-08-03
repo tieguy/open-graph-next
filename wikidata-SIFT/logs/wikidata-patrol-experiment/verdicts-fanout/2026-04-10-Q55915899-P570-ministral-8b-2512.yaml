@@ -1,0 +1,29 @@
+completion_tokens: 2307
+cost_usd: 0.00473229
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 43962
+property: P570
+property_label: date of death
+rationale: The edit updates Catharina Margaretha Stahl's date of death from an unspecified
+  date in 1696 to 15 May 1696. The cited source (CERL Thesaurus) only confirms the
+  year 1696 without specifying the exact date. Independent sources like genealogy
+  aggregators mention 15 May 1696, but these are unverifiable due to access restrictions.
+  No primary historical records (e.g., church registers from Halle) were found to
+  confirm the exact date. The claim is consistent with the available information but
+  lacks definitive evidence.
+rcid: 2550900582
+revid: 2474223372
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://data.cerl.org/thesaurus/cnp01198204
+- provenance: verified
+  supports_claim: false
+  url: https://www.deutsche-biographie.de/pnd139168613.html?language=en
+timestamp: '2026-04-10T13:22:12.033128+00:00'
+title: Q55915899
+turns: 4
+value_label: null
+verdict: plausible

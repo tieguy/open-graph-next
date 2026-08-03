@@ -1,0 +1,33 @@
+completion_tokens: 2466
+cost_usd: 0.005388525
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 53805
+property: P22
+property_label: father
+rationale: The claim that Jeffrey Epstein is the father of Jane Goodall is not supported
+  by any credible sources. The Genealogics database, which is cited as the reference,
+  lists Mortimer Morris-Goodall as her father. Independent sources do not provide
+  any evidence to support the claim, and the conspiracy theory mentioned in one article
+  lacks verifiable evidence.
+rcid: null
+revid: 2472081214
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.genealogics.org/
+- provenance: verified
+  supports_claim: false
+  url: https://www.ms.now/news/sascha-riley-trump-epstein-conspiracy-theory
+- provenance: verified
+  supports_claim: false
+  url: https://www.hellomagazine.com/royalty/893684/why-duchess-sophie-lady-louise-windsor-missed-easter-sunday-service/
+- provenance: verified
+  supports_claim: false
+  url: https://www.nbcnews.com/news/obituaries/dr-jane-goodall-legendary-animal-rights-advocate-dies-91-rcna235001
+timestamp: '2026-04-10T13:41:24.414278+00:00'
+title: Q184746
+turns: 1
+value_label: Jeffrey Epstein
+verdict: incorrect

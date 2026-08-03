@@ -1,0 +1,24 @@
+completion_tokens: 1782
+cost_usd: 0.0036159300000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 34971
+property: P580
+property_label: start time
+rationale: The new value of '+0100-00-00T00:00:00Z' (year 100) for Taringa's start
+  time is historically implausible for a modern social network. The cited source (Infobae)
+  implies a 2004 founding year based on its 20-year lifespan, and no independent or
+  verified source supports the new value. The edit is incorrect as it contradicts
+  both the cited reference and external knowledge.
+rcid: 2550474980
+revid: 2473811315
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.infobae.com/tecno/2024/03/24/taringa-la-famosa-red-social-argentina-cierra-hoy-sus-servicios-despues-de-veinte-anos/
+timestamp: '2026-04-11T12:51:40.429157+00:00'
+title: Q2035715
+turns: 3
+value_label: null
+verdict: incorrect

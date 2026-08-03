@@ -1,0 +1,30 @@
+completion_tokens: 2107
+cost_usd: 0.0038456000000000002
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12907
+property: P106
+property_label: occupation
+rationale: Reylynn Caster is described as an actress by independent sources such as
+  Soaphub.com and The Young and the Restless fan wiki, confirming the occupation claim.
+  However, the cited English Wikipedia reference does not support the claim, as there
+  is no article for Reylynn Caster at this time. The claim itself is correct but the
+  supporting reference is weak.
+rcid: 2551428376
+revid: 2474728648
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://soaphub.com/actors/reylynn-caster/
+- provenance: verified
+  supports_claim: true
+  url: https://twop.wiki/Wiki/Reylynn_Caster
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Reylynn_Caster
+timestamp: '2026-04-11T09:23:38.986738+00:00'
+title: Q96245246
+turns: 1
+value_label: actor
+verdict: verified-low

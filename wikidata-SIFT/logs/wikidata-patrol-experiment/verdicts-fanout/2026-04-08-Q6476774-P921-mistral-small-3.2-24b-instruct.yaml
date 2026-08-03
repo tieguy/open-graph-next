@@ -1,0 +1,24 @@
+completion_tokens: 1025
+cost_usd: 0.00400205625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 40980
+property: P921
+property_label: main subject
+rationale: The edit removed the claim that 'language proficiency' is the main subject
+  of 'Wikipedia:Babel.' No references were provided for the removed claim, and the
+  Wikipedia:Babel page is blocked, making direct verification impossible. The edit
+  was tagged as possible vandalism and reverted, suggesting that the removal might
+  be justified.
+rcid: 2550595599
+revid: 2473926877
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Wikipedia:Babel
+timestamp: '2026-04-08T19:00:04.035469+00:00'
+title: Q6476774
+turns: 9
+value_label: language proficiency
+verdict: verified-low

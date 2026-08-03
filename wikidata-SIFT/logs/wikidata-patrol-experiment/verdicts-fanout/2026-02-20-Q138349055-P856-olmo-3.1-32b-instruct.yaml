@@ -1,0 +1,28 @@
+completion_tokens: 578
+cost_usd: 0.003946
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 17996
+property: P856
+property_label: official website
+rationale: The URL https://mgtimberproductsltd.co.uk/ is the official website of MG
+  Timber Products Ltd, as confirmed by the site's explicit reference to the company's
+  registration number (10560760), which matches the Wikidata item's Companies House
+  company ID qualifier. The homepage also includes the company's VAT number and detailed
+  business information, corroborating its official status. This directly supports
+  the claim.
+rcid: 2540935564
+revid: 2464725886
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://mgtimberproductsltd.co.uk/
+- provenance: reported
+  supports_claim: false
+  url: https://www.gov.uk/government/organisations/companies-house
+timestamp: '2026-02-20T17:13:55.465550+00:00'
+title: Q138349055
+turns: 3
+value_label: null
+verdict: verified-high

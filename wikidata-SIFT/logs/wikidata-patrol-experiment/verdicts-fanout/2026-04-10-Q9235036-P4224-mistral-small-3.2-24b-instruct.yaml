@@ -1,0 +1,23 @@
+completion_tokens: 852
+cost_usd: 0.0025703124999999997
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26717
+property: P4224
+property_label: category contains
+rationale: The fetched content from the Volleyball Wiki confirms that the category
+  'Players of Orientales de Humacao' includes volleyball players. Therefore, the qualifier
+  'human' with the occupation 'volleyball player' is appropriate and supported by
+  the evidence.
+rcid: 2550827920
+revid: 2474152190
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://world-volleyball.fandom.com/wiki/Orientales_de_Humacao
+timestamp: '2026-04-10T07:44:52.098577+00:00'
+title: Q9235036
+turns: 3
+value_label: human
+verdict: verified-high

@@ -1,0 +1,33 @@
+completion_tokens: 2395
+cost_usd: 0.0072584
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 29107
+property: P735
+property_label: given name
+rationale: The edit changing the given name from 'Max' to 'LeGros' is not supported
+  by reliable sources. Although 'LeGros' appears in Max Bill's full birth name, all
+  authoritative biographical sources and reference works consistently use 'Max' as
+  his given name and refer to him as 'Max Bill.' There is no evidence that 'LeGros'
+  was ever used as a standalone given name in the public or professional record.
+rcid: 2550807127
+revid: 2474131950
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Max_Bill
+- provenance: verified
+  supports_claim: false
+  url: https://isni.org/ocean/0000000109057124
+- provenance: verified
+  supports_claim: false
+  url: https://www.rkd.nl/en/artist/8423/m/bill-max
+- provenance: verified
+  supports_claim: false
+  url: https://www.hnm.ch/en/personen/max-bill
+timestamp: '2026-04-11T16:33:28.561291+00:00'
+title: Q123454
+turns: 1
+value_label: LeGros
+verdict: incorrect

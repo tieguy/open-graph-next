@@ -1,0 +1,31 @@
+completion_tokens: 1818
+cost_usd: 0.00341436
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44562
+property: P279
+property_label: subclass of
+rationale: The edit changes the subclass of 'support' from 'art material' to 'Cartón
+  [es]'. The lack of references for both the old and new values is a significant red
+  flag. The term 'art material' is a more general and commonly accepted term for the
+  subclass of 'support' in the context of art. The search results did not provide
+  any supporting evidence for the new value 'Cartón [es]'. Therefore, the change appears
+  to be unsupported and potentially incorrect.
+rcid: null
+revid: 2464010163
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://help.elderscrollsonline.com/app/answers/detail/a_id/70950/~/subclassing---system---the-elder-scrolls-online
+- provenance: verified
+  supports_claim: false
+  url: https://hyperioxes.com/eso/tank/subclass-build
+- provenance: verified
+  supports_claim: false
+  url: https://www.taricsupport.com/nomenclature/es/4821101000.html
+timestamp: '2026-04-11T13:59:40.902847+00:00'
+title: Q33123524
+turns: 5
+value_label: Cartón [es]
+verdict: suspect

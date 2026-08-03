@@ -1,0 +1,31 @@
+completion_tokens: 698
+cost_usd: 0.0045394
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20603
+property: P39
+property_label: position held
+rationale: Multiple authoritative sources confirm that Louis of Meissen held the position
+  of Archbishop of Mainz. The New Advent Catholic Encyclopedia explicitly states that
+  Margrave Louis of Meissen was appointed Archbishop of Mainz in 1375. The German
+  Wikipedia and Deutsche Biographie also identify him as Erzbischof von Mainz. These
+  sources are reliable and independent of Wikidata, confirming the correctness of
+  the updated claim.
+rcid: 2550979867
+revid: 2474299167
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.newadvent.org/cathen/09550a.htm
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Ludwig_von_Meissen
+- provenance: verified
+  supports_claim: true
+  url: https://www.deutsche-biographie.de/sfz54766.html
+timestamp: '2026-04-11T15:07:20.486213+00:00'
+title: Q472584
+turns: 1
+value_label: Roman Catholic Archbishop of Mainz
+verdict: verified-high

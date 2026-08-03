@@ -1,0 +1,26 @@
+completion_tokens: 1224
+cost_usd: 0.0062622
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27639
+property: P569
+property_label: date of birth
+rationale: The claimed birth date of 22 October 2026 is implausible for a person described
+  as a historian, and the only cited reference could not be accessed or verified.
+  No independent sources corroborate this date. This strongly suggests the edit is
+  incorrect.
+rcid: 2549610484
+revid: 2472972238
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://authorities.loc.gov/id/n90610029
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Mar%C3%ADa_Ang%C3%A9lica_Illanes
+timestamp: '2026-04-08T17:17:28.226963+00:00'
+title: Q18224218
+turns: 5
+value_label: null
+verdict: suspect

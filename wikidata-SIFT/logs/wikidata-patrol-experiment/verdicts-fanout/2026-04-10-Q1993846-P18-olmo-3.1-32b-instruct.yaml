@@ -1,0 +1,28 @@
+completion_tokens: 2098
+cost_usd: 0.0037987999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12700
+property: P18
+property_label: image
+rationale: Although the Nissan Rogue T32 2.5 S in Gun Metallic is a real model and
+  color, as confirmed by Nissan USA and automotive review sources, there is no independently
+  verified evidence that the specific image 'Nissan Rogue T32 2.5 S Gun Metallic diplomatic.jpg'
+  is the correct or official image for Wikidata. The cited source (English Wikipedia)
+  is not a primary image source and could not be fetched. Therefore, the claim cannot
+  be confirmed or denied with current evidence.
+rcid: 2550730187
+revid: 2474057540
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.nissanusa.com/vehicles/crossovers-suvs/rogue/gallery/exterior.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.edmunds.com/nissan/rogue/
+timestamp: '2026-04-10T13:28:10.702480+00:00'
+title: Q1993846
+turns: 1
+value_label: null
+verdict: unverifiable

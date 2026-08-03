@@ -1,0 +1,27 @@
+completion_tokens: 735
+cost_usd: 0.0035118500000000004
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 67297
+property: P2671
+property_label: Google Knowledge Graph ID
+rationale: No reliable sources were found to confirm whether 'Hamburgefonts' is a
+  correct Google Knowledge Graph ID for the classical garalde typeface genre. Multiple
+  web searches for relevant terms returned no meaningful results, and attempts to
+  fetch potential sources were blocked by Google's anti-automation measures, preventing
+  verification of content.
+rcid: 2549697760
+revid: 2473056935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+%22Google+Knowledge+Graph+ID%22
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Hamburgefonts+%22Garalde+typeface%22
+timestamp: '2026-04-07T11:52:31.564408+00:00'
+title: Q113055
+turns: 15
+value_label: null
+verdict: unverifiable

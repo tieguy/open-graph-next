@@ -1,0 +1,39 @@
+completion_tokens: 1602
+cost_usd: 0.026267130000000003
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/ministral-8b-2512
+prompt_tokens: 289551
+property: P21
+property_label: sex or gender
+rationale: The edit changing Kylian Mbappé's sex or gender from 'male' to 'trans woman'
+  lacks credible evidence. The cited reference (Czech National Authority Database)
+  does not support this claim, and no verified official or reliable source confirms
+  Mbappé's gender identity as transgender. Independent sources, including official
+  club websites (PSG, Real Madrid), do not mention or imply this information. The
+  heuristic-based reference (P887) is unreliable for determining gender identity.
+  The change is unsupported by any authoritative or primary source and contradicts
+  the widely accepted public perception of Mbappé as a male athlete.
+rcid: 2549570887
+revid: 2472933653
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Kylian_Mbappé
+- provenance: verified
+  supports_claim: false
+  url: https://www.psg.fr/en/players/kylian-mbappe
+- provenance: verified
+  supports_claim: false
+  url: https://www.realmadrid.com/en/football/team/players/2024/25/kylian-mbappe
+- provenance: verified
+  supports_claim: false
+  url: https://jang.com.pk/en/56481-kylian-mbappe-injury-update-xabi-alonso-gives-details-on-recovery-progress-news
+- provenance: verified
+  supports_claim: false
+  url: https://m.allfootballapp.com/news/Headline/Who-is-Ines-Rau-Meet-the-Playboy-transgender-model-spotted-arm-in-arm-with-PSG-superstar-Kylian-Mbappe-at-Cannes/2895972
+timestamp: '2026-04-11T12:45:42.182618+00:00'
+title: Q21621995
+turns: 15
+value_label: trans woman
+verdict: incorrect

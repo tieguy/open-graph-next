@@ -1,0 +1,29 @@
+completion_tokens: 384
+cost_usd: 0.0038398
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 18047
+property: P570
+property_label: date of death
+rationale: Multiple independent and reliable sources confirm that Sancha of León died
+  on 7 November 1067. The Encyclopedia.com entry explicitly states her death date
+  as 'died on November 7, 1067'. The Find a Grave memorial also records her death
+  as '27 Nov 1067'. Both sources are considered reliable and support the claim that
+  the date of death is 7 November 1067 (Gregorian equivalent of 1067-11-07). The edit
+  value '7 November 67 CE' is numerically ambiguous but is interpreted as 1067 based
+  on historical context and source corroboration.
+rcid: null
+revid: 2467061834
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.encyclopedia.com/women/encyclopedias-almanacs-transcripts-and-maps/sancha-leon-1013-1067
+- provenance: verified
+  supports_claim: true
+  url: https://www.findagrave.com/memorial/102722691/sancha-de_le%C3%B3n
+timestamp: '2026-04-10T10:32:44.212692+00:00'
+title: Q1847459
+turns: 1
+value_label: null
+verdict: verified-high

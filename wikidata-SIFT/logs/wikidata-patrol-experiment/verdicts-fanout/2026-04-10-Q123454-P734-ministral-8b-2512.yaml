@@ -1,0 +1,28 @@
+completion_tokens: 1168
+cost_usd: 0.006490920000000001
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 67078
+property: P734
+property_label: family name
+rationale: The claim that Max Bill's family name is 'Daifugō' (Q704271) is incorrect.
+  'Daifugō' is a Japanese card game, not a surname. Multiple verified sources confirm
+  Max Bill's family name is consistently 'Bill'.
+rcid: 2550806629
+revid: 2474131480
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.palace-of-cards.com/card-games/daifugo/
+- provenance: verified
+  supports_claim: false
+  url: https://www.famousbirthdays.com/people/max-bill.html
+- provenance: verified
+  supports_claim: false
+  url: https://ocula.com/artists/max-bill/
+timestamp: '2026-04-10T11:48:47.180511+00:00'
+title: Q123454
+turns: 2
+value_label: Daifugō
+verdict: incorrect

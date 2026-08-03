@@ -1,0 +1,33 @@
+completion_tokens: 1351
+cost_usd: 0.004172800000000001
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16811
+property: P400
+property_label: platform
+rationale: The edit changed the platform (P400) from 'DOS' to 'Intel 8088'. Primary
+  sources (the project's README and release notes) confirm that MicroWeb requires
+  an Intel 8088 or compatible CPU and runs on DOS. Multiple secondary sources also
+  corroborate that MicroWeb targets 8088-class hardware. However, best practice would
+  be to maintain both the operating system (P361) and hardware platform (P400) claims
+  separately for completeness. Despite this, the factual basis for associating MicroWeb
+  with the Intel 8088 platform is well supported. Therefore, the change is factually
+  correct but potentially incomplete regarding overall platform description.
+rcid: 2550751980
+revid: 2474078141
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/jhhoward/MicroWeb
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/jhhoward/MicroWeb/releases/tag/v0.5
+- provenance: reported
+  supports_claim: true
+  url: https://news.knowledia.com/US/en/articles/github-jhhoward-microweb-dos-web-browser-for-8088-class-machines-df940e54a023e0258a32f9d359cedfe2f89c0542
+timestamp: '2026-04-11T15:49:57.921798+00:00'
+title: Q122859225
+turns: 1
+value_label: Intel 8088
+verdict: verified-low

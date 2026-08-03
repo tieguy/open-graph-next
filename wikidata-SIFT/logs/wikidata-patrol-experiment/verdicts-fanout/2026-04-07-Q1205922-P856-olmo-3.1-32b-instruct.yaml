@@ -1,0 +1,26 @@
+completion_tokens: 725
+cost_usd: 0.0091022
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 43336
+property: P856
+property_label: official website
+rationale: The URL https://www.united.com is the official website of a major international
+  airline and is not associated with Hanawa town in Fukushima Prefecture. No authoritative
+  source, including the Fukushima Prefecture official website, references this URL
+  as the official website of Hanawa. All available evidence contradicts the claim.
+rcid: 2550187892
+revid: 2473531119
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.pref.fukushima.lg.jp/sec/11045b/15846.html
+- provenance: reported
+  supports_claim: false
+  url: https://www.united.com
+timestamp: '2026-04-07T12:59:58.314973+00:00'
+title: Q1205922
+turns: 5
+value_label: null
+verdict: incorrect

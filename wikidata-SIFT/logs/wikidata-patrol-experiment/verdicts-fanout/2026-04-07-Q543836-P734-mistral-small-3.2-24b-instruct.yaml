@@ -1,0 +1,28 @@
+completion_tokens: 1098
+cost_usd: 0.0082254375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 84810
+property: P734
+property_label: family name
+rationale: The search results did not provide any reliable sources confirming that
+  Pierre Bordage's family name is 'Delporte'. The claim cannot be verified based on
+  the available information.
+rcid: 2550574094
+revid: 2473906272
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pierre+Bordage+family+name+Delporte
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Pierre+Bordage+family+name
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Delporte+family+name
+timestamp: '2026-04-07T05:31:11.784480+00:00'
+title: Q543836
+turns: 5
+value_label: Delporte
+verdict: unverifiable

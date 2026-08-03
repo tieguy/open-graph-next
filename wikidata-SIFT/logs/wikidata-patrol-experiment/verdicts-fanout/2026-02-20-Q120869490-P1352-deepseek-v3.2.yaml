@@ -1,0 +1,30 @@
+completion_tokens: 1341
+cost_usd: 0.01882374
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 66650
+property: P1352
+property_label: ranking
+rationale: 'The official FITEQ world ranking page for men''s singles clearly shows
+  Apor GYORGYDEAK as the #1 ranked player. His individual player profile on the same
+  official site also lists "Singles Ranking 1." This provides strong primary source
+  evidence from the sport''s governing body that the ranking value of "1" is correct
+  for this teqball player.'
+rcid: 2540970798
+revid: 2464758046
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.fiteq.org/world-ranking/player/1149
+- provenance: verified
+  supports_claim: true
+  url: https://www.fiteq.org/world-ranking/singles/men
+- provenance: reported
+  supports_claim: true
+  url: https://www.insidethegames.biz/articles/fiteq-world-rankings-update
+timestamp: '2026-02-20T03:21:31.959481+00:00'
+title: Q120869490
+turns: 8
+value_label: null
+verdict: verified-high

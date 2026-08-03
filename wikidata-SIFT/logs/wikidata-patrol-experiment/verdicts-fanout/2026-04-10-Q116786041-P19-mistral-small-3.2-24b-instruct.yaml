@@ -1,0 +1,28 @@
+completion_tokens: 1369
+cost_usd: 0.0049561562500000005
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 49215
+property: P19
+property_label: place of birth
+rationale: The available sources do not provide specific information about Veronica
+  Mihailov-Moraru's place of birth. Therefore, we cannot confirm the edit with high
+  confidence.
+rcid: 2550301257
+revid: 2473641160
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.justice.gov.md/en/content/secretary-state-veronica-mihailov-moraru
+- provenance: verified
+  supports_claim: false
+  url: https://www.justice.gov.md/en/content/veronica-mihailov-moraru
+- provenance: verified
+  supports_claim: false
+  url: https://www.scribd.com/document/423781926/Veronica-Mihailov-Moraru
+timestamp: '2026-04-10T13:00:31.090850+00:00'
+title: Q116786041
+turns: 5
+value_label: Chișinău
+verdict: unverifiable

@@ -1,0 +1,34 @@
+completion_tokens: 1928
+cost_usd: 0.007442
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 73475
+property: P6262
+property_label: Fandom article ID
+rationale: The edit changes the Fandom article ID from "religion:666" to "religion:6666789шго".
+  There are no references provided for either the old or the new value. Independent
+  searches and attempts to fetch specific pages did not yield any confirmatory evidence
+  for the new value "religion:6666789шго". The old value "religion:666" is more commonly
+  associated with the "number of the beast" in various cultural and religious contexts.
+  Therefore, the edit appears to be incorrect.
+rcid: 2551353948
+revid: 2474659620
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://metal.fandom.com/wiki/The_Number_of_the_Beast
+- provenance: verified
+  supports_claim: false
+  url: https://takanta.com/666-angel-number
+- provenance: verified
+  supports_claim: false
+  url: https://tropedia.fandom.com/wiki/Number_of_the_Beast
+- provenance: verified
+  supports_claim: false
+  url: https://typemoon.fandom.com/wiki/Number_of_the_Beast
+timestamp: '2026-04-11T07:49:30.856077+00:00'
+title: Q666
+turns: 7
+value_label: null
+verdict: incorrect

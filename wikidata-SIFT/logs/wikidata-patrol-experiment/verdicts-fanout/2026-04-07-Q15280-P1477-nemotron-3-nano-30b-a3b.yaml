@@ -1,0 +1,32 @@
+completion_tokens: 759
+cost_usd: 0.007671550000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 150395
+property: P1477
+property_label: birth name
+rationale: Despite extensive searches, no reliable source was found to confirm or
+  refute the claim that Gordon Ramsay's birth name is 'Gordon 67 Ramsay'. Available
+  references (e.g., Wikipedia) are inaccessible due to technical issues, and informal
+  sources (e.g., social media or commercial sites) do not provide authoritative verification.
+  The applicant originally provided 'Gordon James Ramsay' with [[P1477]] support,
+  indicating prior consensus on the full name. Reversion to the abbreviated form lacks
+  documented evidence in accessible, authoritative sources.
+rcid: 2550632577
+revid: 2473962774
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Gordon_Ramsay
+- provenance: verified
+  supports_claim: false
+  url: https://www.delish.com/food-news/a35617134/gordon-ramsay-arthritis/
+- provenance: verified
+  supports_claim: false
+  url: https://www.heraldscotland.com/default_content/12760170.tana-ramsay-interview/
+timestamp: '2026-04-07T13:31:57.599183+00:00'
+title: Q15280
+turns: 15
+value_label: null
+verdict: unverifiable

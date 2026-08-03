@@ -1,0 +1,32 @@
+completion_tokens: 1961
+cost_usd: 0.005129399999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19764
+property: P569
+property_label: date of birth
+rationale: All authoritative and independent sources confirm that Vincent de Paul
+  was born in 1581. No credible evidence supports the claim that he was born in 2026.
+  The edit changing the date of birth to '2026' is factually incorrect and should
+  be reverted.
+rcid: null
+revid: 2470232927
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Vincent_de_Paul
+- provenance: verified
+  supports_claim: false
+  url: https://www.britannica.com/biography/Vincent-de-Paul
+- provenance: verified
+  supports_claim: false
+  url: https://www.catholic.org/saints/saint.php?saint_id=326
+- provenance: verified
+  supports_claim: false
+  url: https://id.loc.gov/authorities/names/n79017811
+timestamp: '2026-04-11T10:48:03.063439+00:00'
+title: Q244413
+turns: 1
+value_label: null
+verdict: incorrect

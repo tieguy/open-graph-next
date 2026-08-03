@@ -1,0 +1,25 @@
+completion_tokens: 1395
+cost_usd: 0.0011517300000000001
+diff_type: qualifier_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 12018
+property: P607
+property_label: participated in conflict
+rationale: The claim that La Gardata (Mandello) participated in World War II is strongly
+  supported by verified evidence from the source 'itinerarimemoria.it'. This source
+  confirms Giuseppe Poletti, a partisan from Mandello del Lario, was involved in resistance
+  activities during World War II, directly linking the locality to the conflict. The
+  qualifier P3342 (significant person) accurately identifies Giuseppe Poletti as a
+  key figure in this context. No contradictory evidence was found.
+rcid: 2549637443
+revid: 2472998396
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://itinerarimemoria.it/en/itinerario/mandello-resistance-2/
+timestamp: '2026-04-10T09:13:18.624454+00:00'
+title: Q121865046
+turns: 1
+value_label: World War II
+verdict: verified-high

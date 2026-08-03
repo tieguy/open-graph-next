@@ -1,0 +1,27 @@
+completion_tokens: 212
+cost_usd: 0.0024511999999999997
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11620
+property: P106
+property_label: occupation
+rationale: The source fetched indicates that Hernando Téllez was a prominent writer
+  and journalist with significant involvement in politics, including holding public
+  office such as Bogotá City Council member and senator. However, the source does
+  not present him primarily as a 'politician' in the sense of a career politician,
+  but rather as a writer whose political activities were substantial but not his main
+  occupation. Changing his occupation from 'writer' to 'politician' oversimplifies
+  and misrepresents his multifaceted career. Therefore, the change is suspect because
+  it replaces a more accurate descriptor ('writer') with a less accurate one ('politician').
+rcid: 2550351487
+revid: 2473690248
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.ebsco.com/research-starters/history/hernando-tellez
+timestamp: '2026-04-11T08:20:24.919869+00:00'
+title: Q2294038
+turns: 1
+value_label: politician
+verdict: suspect

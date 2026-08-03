@@ -1,0 +1,22 @@
+completion_tokens: 416
+cost_usd: 0.013981899999999998
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 233701
+property: P17
+property_label: country
+rationale: The Australian Open is a tennis tournament held in Melbourne, Australia.
+  The edit changing the country to New Zealand is incorrect based on the available
+  evidence.
+rcid: 2551270257
+revid: 2474580109
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ausopen.com/
+timestamp: '2026-04-07T13:21:06.537908+00:00'
+title: Q60874
+turns: 15
+value_label: New Zealand
+verdict: incorrect

@@ -1,0 +1,28 @@
+completion_tokens: 1135
+cost_usd: 0.012306639999999999
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 45932
+property: P69
+property_label: educated at
+rationale: 'The cited reference (https://www.dbalgley.com/about) directly states that
+  Danny Balgley ''holds an MFA from Columbia University'' and lists ''EDUCATION: MFA,
+  Columbia University, NYC'', confirming the educated at claim. This is corroborated
+  by an independent Columbia University archive page (2006 MFA Thesis Exhibition)
+  listing Danny Balgley as a participant, confirming his MFA candidacy at Columbia.
+  Multiple primary sources consistently support the claim.'
+rcid: 2540974468
+revid: 2464761278
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.dbalgley.com/about
+- provenance: verified
+  supports_claim: true
+  url: http://www.columbia.edu/cu/arts/mfathesis2006/artists.html
+timestamp: '2026-02-20T02:36:14.380527+00:00'
+title: Q138350070
+turns: 7
+value_label: Columbia University
+verdict: verified-high

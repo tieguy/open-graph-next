@@ -1,0 +1,28 @@
+completion_tokens: 1171
+cost_usd: 0.0047133999999999995
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 20054
+property: P39
+property_label: position held
+rationale: Multiple authoritative sources explicitly confirm that Otto von Königsmarck
+  served as the Roman Catholic Bishop of Havelberg, with consistent dates and titles.
+  The Catholic-Hierarchy.org and gcatholic.org pages directly list him in that role.
+rcid: 2550971300
+revid: 2474290793
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bkonio.html
+- provenance: verified
+  supports_claim: true
+  url: http://www.gcatholic.org/dioceses/former/have0.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dh522.html
+timestamp: '2026-04-11T10:37:22.602721+00:00'
+title: Q64778291
+turns: 1
+value_label: Roman Catholic Bishop of Havelberg
+verdict: verified-high

@@ -1,0 +1,35 @@
+completion_tokens: 2017
+cost_usd: 0.06724329999999999
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 249082
+property: P19
+property_label: place of birth
+rationale: The claim that Samuel Finley Breese Morse was born in Mordor is clearly
+  incorrect. Mordor (Q202886) is a fictional country from J.R.R. Tolkien's Middle-earth,
+  created in the 20th century, while Morse was a real historical figure born in 1791.
+  All authoritative sources, including the 1911 Encyclopædia Britannica and the Lemelson-MIT
+  Program, confirm Morse was born in Charlestown, Massachusetts. The edit appears
+  to be vandalism by a new editor, as evidenced by the fictional nature of Mordor
+  and the complete mismatch with historical facts.
+rcid: 2540985630
+revid: 2464771936
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikisource.org/wiki/1911_Encyclop%C3%A6dia_Britannica/Morse,_Samuel_Finley_Breese
+- provenance: verified
+  supports_claim: false
+  url: https://lemelson.mit.edu/resources/samuel-morse
+- provenance: verified
+  supports_claim: false
+  url: https://tolkiengateway.net/wiki/Mordor
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q103958946
+timestamp: '2026-02-19T22:14:41.720880+00:00'
+title: Q75698
+turns: 10
+value_label: Mordor
+verdict: incorrect

@@ -1,0 +1,25 @@
+completion_tokens: 2065
+cost_usd: 0.020283159999999998
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 261091
+property: P2137
+property_label: total equity
+rationale: The references provided for both the old and new values could not be accessed
+  or extracted. Independent sources could not be verified due to errors in the search
+  function. Therefore, the change cannot be definitively verified.
+rcid: 2550551160
+revid: 2473884267
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://www.lukoil.com/FileSystem/9/534848.pdf
+- provenance: verified
+  supports_claim: false
+  url: https://www.lukoil.com/FileSystem/9/577500.pdf?dl=1
+timestamp: '2026-04-11T06:54:25.245354+00:00'
+title: Q329347
+turns: 8
+value_label: null
+verdict: unverifiable

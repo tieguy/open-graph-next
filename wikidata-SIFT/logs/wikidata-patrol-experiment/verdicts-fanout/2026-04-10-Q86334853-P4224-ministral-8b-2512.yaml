@@ -1,0 +1,32 @@
+completion_tokens: 1898
+cost_usd: 0.00172725
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18347
+property: P4224
+property_label: category contains
+rationale: The value 'human' (Q5) is a correct and appropriate classification for
+  the category 'Purdue Boilermakers women's volleyball coaches' as all coaches are
+  humans. The added qualifier 'coach of sports team' (P6087) with the value 'Purdue
+  Boilermakers women's volleyball' (Q48837999) is accurate and improves specificity.
+  Independent and verified sources confirm the existence of this coaching staff, validating
+  the edit. The addition of the qualifier P6087 enhances the precision of the category
+  membership.
+rcid: 2551388239
+revid: 2474692646
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/staff-directory/department/womens-volleyball
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/sports/womens-volleyball/roster
+- provenance: verified
+  supports_claim: true
+  url: https://purduesports.com/sports/womens-volleyball/coaches/1000
+timestamp: '2026-04-10T13:30:14.414162+00:00'
+title: Q86334853
+turns: 2
+value_label: human
+verdict: verified-high

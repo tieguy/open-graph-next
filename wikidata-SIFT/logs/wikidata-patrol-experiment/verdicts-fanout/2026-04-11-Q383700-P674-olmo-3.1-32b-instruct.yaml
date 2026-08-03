@@ -1,0 +1,29 @@
+completion_tokens: 1658
+cost_usd: 0.005217
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21111
+property: P674
+property_label: characters
+rationale: 'Multiple authoritative sources confirm that Gambit is a playable character
+  in Marvel vs. Capcom 2: New Age of Heroes, while Silver Samurai is not part of the
+  game''s official roster. The edit correcting the character association is therefore
+  accurate and improves the factual integrity of the item.'
+rcid: 2551085927
+revid: 2474401905
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://marvelvscapcom.fandom.com/wiki/Gambit
+- provenance: verified
+  supports_claim: true
+  url: https://marvelvscapcom.fandom.com/wiki/Marvel_vs._Capcom_2:_New_Age_of_Heroes
+- provenance: verified
+  supports_claim: true
+  url: https://www.gematsu.com/2022/05/capcom-sales-update-monster-hunter-rise-at-9-million-monster-hunter-world-iceborne-at-9-2-million-more
+timestamp: '2026-04-11T09:33:23.728703+00:00'
+title: Q383700
+turns: 1
+value_label: Gambit
+verdict: verified-high

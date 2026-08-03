@@ -1,0 +1,32 @@
+completion_tokens: 356
+cost_usd: 0.0030349500000000002
+diff_type: rank_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 15205
+property: P154
+property_label: logo image
+rationale: The edit changes the rank of the logo image claim for the telenovela 'Totalmente
+  Demais' from 'normal' to 'preferred'. While no direct official source explicitly
+  states that this logo is the preferred one, the logo image provided (`Totalmente
+  Demais.png`) is visually consistent with the branding of the show as depicted on
+  the Fandom Wiki page for 'Totalmente Demais' (verified source). Additionally, the
+  show's official website (reported) and the Fandom Wiki (verified) both reference
+  the show's branding, implying the logo is authoritative. However, no direct evidence
+  from an official source (e.g., TV Globo's official site) confirms this specific
+  logo as the preferred one. The lack of references cited in the Wikidata claim itself
+  further weakens the certainty of this rank change.
+rcid: 2550762319
+revid: 2474088232
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://logos.fandom.com/wiki/Totalmente_Demais
+- provenance: reported
+  supports_claim: false
+  url: https://gshow.globo.com/novelas/totalmente-demais/
+timestamp: '2026-04-11T09:32:08.491480+00:00'
+title: Q21296891
+turns: 1
+value_label: null
+verdict: verified-low

@@ -1,0 +1,26 @@
+completion_tokens: 731
+cost_usd: 0.00829475
+diff_type: qualifier_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 162971
+property: P8687
+property_label: social media followers
+rationale: During the investigation, no verifiable source material was found to confirm
+  either the original claim or the 'unknown value' qualifier. Social media profiles
+  for Bahia Notícias could not be located through web search or fetch operations using
+  available URLs from the edit record. The header link failed, YouTube app listing
+  only provided generic metadata without follower count details, and Mastodon/Mastodon
+  searches returned HTTP 404. Facebook search queries returned empty results. While
+  the Wikipedia page for Bahia Notícias exists, internal links from the item show
+  no page ID or connection mentioned. The lack of accessible primary sources creates
+  uncertainty about the claimed qualifier update, making the verdict unverifiable
+  due to absence of corroborating evidence.
+rcid: 2549609001
+revid: 2472970792
+sources: []
+timestamp: '2026-04-07T13:11:16.612180+00:00'
+title: Q100243255
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,24 @@
+completion_tokens: 934
+cost_usd: 0.001583125
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 14396
+property: P921
+property_label: main subject
+rationale: The primary sources confirm that "CirrusSearch" is indeed the main subject
+  of "Help:CirrusSearch". The removal of this claim was incorrect.
+rcid: null
+revid: 2472251003
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.mediawiki.org/wiki/Extension:CirrusSearch
+- provenance: verified
+  supports_claim: true
+  url: https://www.mediawiki.org/wiki/Help:CirrusSearch
+timestamp: '2026-04-11T17:16:34.082604+00:00'
+title: Q93590016
+turns: 1
+value_label: CirrusSearch
+verdict: incorrect

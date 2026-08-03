@@ -1,0 +1,42 @@
+completion_tokens: 1306
+cost_usd: 0.0045947625
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 48516
+property: P26
+property_label: spouse
+rationale: Multiple verified sources confirm that Daisy Ridley and Tom Bateman are
+  married. The removal of Tom Bateman as Daisy Ridley's spouse is therefore incorrect.
+rcid: null
+revid: 2470254262
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://people.com/all-about-daisy-ridley-tom-bateman-relationship-8658529
+- provenance: reported
+  supports_claim: true
+  url: https://www.nbc.com/nbc-insider/who-is-tom-bateman-wife-daisy-ridley
+- provenance: reported
+  supports_claim: true
+  url: https://www.dailymail.co.uk/tvshowbiz/article-15580019/Daisy-Ridley-wraps-black-coat-steps-husband-Tom-Bateman-London.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.yahoo.com/entertainment/daisy-ridley-husband-tom-bateman-022024025.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.dailymail.co.uk/tvshowbiz/article-14031789/Daisy-Ridley-husband-Tom-Bateman-magpie.html
+- provenance: reported
+  supports_claim: true
+  url: https://www.popsugar.com/celebrity/tom-bateman-daisy-ridley-relationship-timeline-49204649
+- provenance: reported
+  supports_claim: true
+  url: https://www.scmp.com/magazines/style/entertainment/article/3284312/who-star-wars-actress-daisy-ridleys-husband-tom-bateman-he-has-theatre-background-starred-death-nile
+- provenance: reported
+  supports_claim: true
+  url: https://www.themirror.com/entertainment/movies/tom-bateman-daisy-ridley-marriage-1276604
+timestamp: '2026-04-10T13:06:53.649267+00:00'
+title: Q16738674
+turns: 3
+value_label: Tom Bateman
+verdict: incorrect

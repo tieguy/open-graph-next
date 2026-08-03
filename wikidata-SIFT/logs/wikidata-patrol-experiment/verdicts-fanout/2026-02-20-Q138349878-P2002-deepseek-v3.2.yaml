@@ -1,0 +1,35 @@
+completion_tokens: 1971
+cost_usd: 0.03027014
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 122217
+property: P2002
+property_label: X (Twitter) username
+rationale: The claim is supported by Ashef Tajwar Amin's GitHub profile bio, which
+  explicitly lists '@AshefTajwarAmin'. This is a direct, user-provided assertion on
+  a platform they control. However, the X (Twitter) domain is blocked, preventing
+  direct verification that an active account with that username exists and belongs
+  to this individual. No other verified profiles (about.me, Behance, Google Play)
+  mention this username. The evidence is credible but limited to a single secondary
+  source.
+rcid: 2540977689
+revid: 2464764385
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://github.com/asheftajwaramin/
+- provenance: verified
+  supports_claim: false
+  url: https://about.me/asheftajwaramin
+- provenance: verified
+  supports_claim: false
+  url: https://www.behance.net/asheftajwaramin
+- provenance: verified
+  supports_claim: false
+  url: https://play.google.com/store/apps/dev?id=6413524727619359116
+timestamp: '2026-02-20T02:15:00.225490+00:00'
+title: Q138349878
+turns: 15
+value_label: null
+verdict: verified-low

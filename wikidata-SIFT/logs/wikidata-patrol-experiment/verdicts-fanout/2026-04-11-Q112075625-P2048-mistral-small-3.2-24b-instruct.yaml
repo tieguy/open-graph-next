@@ -1,0 +1,25 @@
+completion_tokens: 1163
+cost_usd: 0.0020054375000000003
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 18290
+property: P2048
+property_label: height
+rationale: No sources were found that confirm or deny either the old value of 170
+  cm or the new value of 160 cm for Daniel Noboa's height. Therefore, the edit cannot
+  be verified.
+rcid: null
+revid: 2470904177
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.astrotheme.com/astrology/Daniel_Noboa_Azin
+- provenance: verified
+  supports_claim: false
+  url: https://www.bbc.com/mundo/articles/c7291r4xxneo
+timestamp: '2026-04-11T16:12:15.817510+00:00'
+title: Q112075625
+turns: 1
+value_label: null
+verdict: unverifiable

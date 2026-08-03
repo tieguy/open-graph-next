@@ -1,0 +1,29 @@
+completion_tokens: 2480
+cost_usd: 0.0074884
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 30002
+property: P569
+property_label: date of birth
+rationale: The previous birth date of 1855-09-14 is not supported by primary sources.
+  Authoritative records from the Bibliothèque nationale de France, the Czech National
+  Library, and a French genealogy site all state that Michel Butor was born on 14
+  September 1854. This correction is therefore well supported by reliable evidence.
+rcid: 2549487939
+revid: 2472852523
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://data.bnf.fr/118946663/michel-butor
+- provenance: verified
+  supports_claim: true
+  url: https://www.obalkyknih.cz/view_auth?auth_id=jn19990001249
+- provenance: verified
+  supports_claim: true
+  url: https://www.gen-en-ligne.fr/ark:/53355/ce_00000001514225
+timestamp: '2026-04-11T16:49:19.740307+00:00'
+title: Q309716
+turns: 1
+value_label: null
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 498
+cost_usd: 0.00198175
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 37643
+property: P1559
+property_label: name in native language
+rationale: During investigation no verifiable source was found confirming that 'Sir
+  David Frederick Attenborough polla' appears in reliable materials. Attempts to fetch
+  reference URLs returned inaccessible content not containing text that supports the
+  claim modification.
+rcid: 2549922704
+revid: 2473276607
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://obalkyknih.cz/view_auth?auth_id=jn19990000302
+timestamp: '2026-04-07T04:15:57.575397+00:00'
+title: Q183337
+turns: 1
+value_label: null
+verdict: unverifiable

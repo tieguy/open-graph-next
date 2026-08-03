@@ -1,0 +1,31 @@
+completion_tokens: 801
+cost_usd: 0.005629500000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 109386
+property: P119
+property_label: place of burial
+rationale: Despite extensive searches across multiple query variations involving 'José
+  Antonio Osorio Lizarazo' and topics like burial place, tomb, mausoleum, and cemetery
+  in Colombia, South America, and Venezuela, no credible or verifiable sources were
+  found to confirm the updated place of burial. All attempted web searches returned
+  no results, and fetches to related URLs either failed, were blocked, or occurred
+  without substantive content. No source was successfully accessed to corroborate
+  the claim or provide independent verification. Another editor likely removed the
+  correct burial location without traceable backup. Without any satisfactory source
+  to review or rely on, the claim cannot be verified as correct or incorrect.
+rcid: null
+revid: 2465810238
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Jos%C3%A9_Antonio_Osorio_Lizarazo
+- provenance: verified
+  supports_claim: false
+  url: http://www.banrepcultural.org/blaavirtual/biografias/osorjose.htm
+timestamp: '2026-04-07T10:02:33.872022+00:00'
+title: Q5696422
+turns: 15
+value_label: Venezuela
+verdict: unverifiable

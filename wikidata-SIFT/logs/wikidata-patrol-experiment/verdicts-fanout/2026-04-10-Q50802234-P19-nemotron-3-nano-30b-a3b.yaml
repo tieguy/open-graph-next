@@ -1,0 +1,23 @@
+completion_tokens: 11359
+cost_usd: 0.021023780000000002
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 144246
+property: P19
+property_label: place of birth
+rationale: Multiple reliable biographical sources explicitly state that Laura M. Lechuga
+  was born in Seville, Spain, contradicting the claimed birthplace Maleján. The edit
+  introduced the change without any reference, so the new value directly contradicts
+  verified information.
+rcid: null
+revid: 2470682818
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/laura_lechuga
+timestamp: '2026-04-10T09:21:22.010095+00:00'
+title: Q50802234
+turns: 9
+value_label: Maleján
+verdict: incorrect

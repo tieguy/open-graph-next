@@ -1,0 +1,32 @@
+completion_tokens: 2472
+cost_usd: 0.005910449999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 79069
+property: P156
+property_label: followed by
+rationale: The edit changes the 'followed by' claim from Q111746009 to Q112339523,
+  both labeled as '2026 Slovenian parliamentary election'. While the logical expectation
+  is that the 2022 election would be followed by the 2026 election, no verified sources
+  were consulted to confirm the correctness of either Q-ID. Additionally, no references
+  were attached to either the old or new values. Without fetching and verifying independent
+  sources or references, it is impossible to determine the correct Q-ID for the 2026
+  election or validate the edit's correctness.
+rcid: 2551357520
+revid: 2474662963
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/2026_Slovenian_parliamentary_election
+- provenance: verified
+  supports_claim: false
+  url: https://www.freiheit.org/central-europe-and-baltic-states/narrow-victory-uncertain-future-what-slovenias-2026-elections-mean
+- provenance: verified
+  supports_claim: false
+  url: https://www.politico.eu/europe-poll-of-polls/slovenia/
+timestamp: '2026-04-11T17:40:27.081650+00:00'
+title: Q65119188
+turns: 8
+value_label: 2026 Slovenian parliamentary election
+verdict: unverifiable

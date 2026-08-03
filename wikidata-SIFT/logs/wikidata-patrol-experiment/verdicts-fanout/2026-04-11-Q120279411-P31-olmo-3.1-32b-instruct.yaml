@@ -1,0 +1,31 @@
+completion_tokens: 338
+cost_usd: 0.0025276
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11624
+property: P31
+property_label: instance of
+rationale: 'The new value ''Post Human: NeX GEn'' (Q120279411) is the title of the
+  release, not its type or instance. In Wikidata, P31 (instance of) should be used
+  for general types (e.g., ''album''), not for specific work titles. The old value
+  ''album'' (Q482994) is the correct instance of for a music release. Changing P31
+  to the specific work title is inconsistent with established Wikidata practice and
+  likely incorrect.'
+rcid: null
+revid: 2471549715
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Help:Property:P31
+- provenance: verified
+  supports_claim: false
+  url: https://ru.wikipedia.org/?oldid=132032242
+- provenance: verified
+  supports_claim: false
+  url: https://www.allmusic.com/album/mw0004021855
+timestamp: '2026-04-11T10:34:32.616520+00:00'
+title: Q120279411
+turns: 1
+value_label: 'Post Human: NeX GEn'
+verdict: suspect

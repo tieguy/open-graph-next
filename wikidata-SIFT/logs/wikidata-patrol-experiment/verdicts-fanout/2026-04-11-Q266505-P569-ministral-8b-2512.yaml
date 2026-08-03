@@ -1,0 +1,29 @@
+completion_tokens: 2204
+cost_usd: 0.00230751
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19375
+property: P569
+property_label: date of birth
+rationale: The edit incorrectly changes Amélie Zurcher's date of birth from 27 August
+  1858 (supported by multiple verified primary sources such as GeneaStar, Alsace-Histoire,
+  and Geneanet) to 27 August 1847. All independent, verified sources confirm the birth
+  year as 1858, making the new value unsupported and incorrect.
+rcid: null
+revid: 2471212055
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.geneastar.org/genealogy/zurcherl/amelie-zurcher
+- provenance: verified
+  supports_claim: false
+  url: https://www.alsace-histoire.org/netdba/zurcher-amelie-louise-marie/
+- provenance: verified
+  supports_claim: false
+  url: https://www.geneanet.org/fr/famille/zurcher
+timestamp: '2026-04-11T15:17:34.178564+00:00'
+title: Q266505
+turns: 1
+value_label: null
+verdict: incorrect

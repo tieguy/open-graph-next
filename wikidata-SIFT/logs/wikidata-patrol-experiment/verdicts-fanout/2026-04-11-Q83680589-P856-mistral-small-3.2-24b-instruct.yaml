@@ -1,0 +1,28 @@
+completion_tokens: 881
+cost_usd: 0.0024055625
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 23310
+property: P856
+property_label: official website
+rationale: The edit changes the qualifier from 'HIRED,Inc' to 'HIRED株式会社' without
+  any supporting references. The available sources do not provide evidence to confirm
+  or deny the claim.
+rcid: 2550865615
+revid: 2474189107
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://motorola.com/
+- provenance: verified
+  supports_claim: false
+  url: https://motorolanews.com/
+- provenance: verified
+  supports_claim: null
+  url: https://www.motorola-support.com/us-en/
+timestamp: '2026-04-11T16:11:19.005993+00:00'
+title: Q83680589
+turns: 3
+value_label: null
+verdict: unverifiable

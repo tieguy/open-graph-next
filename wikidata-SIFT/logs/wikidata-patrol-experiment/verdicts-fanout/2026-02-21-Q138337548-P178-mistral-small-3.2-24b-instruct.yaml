@@ -1,0 +1,30 @@
+completion_tokens: 1274
+cost_usd: 0.004417374999999999
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 42783
+property: P178
+property_label: developer
+rationale: The primary source (Institut für limbische Kommunikation und Strategie
+  GmbH website) does not explicitly confirm the development relationship with LimbiCODE.
+  However, secondary sources, such as Ursula Kaspar's profile, provide evidence of
+  the institute's involvement with LimbiCODE. This supports the claim to some extent,
+  but the evidence is not as direct or conclusive as it could be.
+rcid: 2540922313
+revid: 2464713301
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.iflk.ch/medien/
+- provenance: verified
+  supports_claim: true
+  url: https://www.xing.com/profile/Ursula_Kaspar3
+- provenance: verified
+  supports_claim: false
+  url: https://mvri.de/
+timestamp: '2026-02-21T00:09:20.572025+00:00'
+title: Q138337548
+turns: 6
+value_label: Institut für limbische Kommunikation und Strategie GmbH
+verdict: verified-low

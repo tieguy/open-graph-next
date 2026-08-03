@@ -1,0 +1,25 @@
+completion_tokens: 1320
+cost_usd: 0.0112245
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 116208
+property: P793
+property_label: significant event
+rationale: Both the MLB official site and Biography.com confirm that Jackie Robinson's
+  Major League Baseball debut was on April 15, 1947. The edit changing the date to
+  April 15, 1948, is incorrect.
+rcid: null
+revid: 2464298327
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.mlb.com/player/jackie-robinson-121314
+- provenance: verified
+  supports_claim: true
+  url: https://www.biography.com/athlete/jackie-robinson
+timestamp: '2026-04-07T11:09:05.987097+00:00'
+title: Q221048
+turns: 7
+value_label: Major League Baseball debut
+verdict: incorrect

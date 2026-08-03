@@ -1,0 +1,20 @@
+completion_tokens: 531
+cost_usd: 0.006038000000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 118636
+property: P40
+property_label: child
+rationale: Despite extensive searches, no independent verification was found for the
+  claim that Claude Cotton is a child of Eugénie Cotton. No credible sources were
+  identified supporting this parent-child relationship. Therefore, the edit cannot
+  be verified with current information.
+rcid: 2549850807
+revid: 2473207244
+sources: []
+timestamp: '2026-04-07T06:43:59.147655+00:00'
+title: Q433768
+turns: 15
+value_label: Claude Cotton
+verdict: unverifiable

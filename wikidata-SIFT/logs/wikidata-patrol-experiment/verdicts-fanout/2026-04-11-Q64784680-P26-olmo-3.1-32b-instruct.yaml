@@ -1,0 +1,32 @@
+completion_tokens: 2163
+cost_usd: 0.0051514
+diff_type: qualifier_removed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19268
+property: P26
+property_label: spouse
+rationale: The removed P580 start date qualifier was never supported by a cited source,
+  and independent biographical sources confirm the marriage to Anne-Marie Backer Mohr
+  occurred in 1950 without specifying a precise date. Therefore, removing the unsupported
+  start date improves data accuracy.
+rcid: 2551327289
+revid: 2474634436
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://snl.no/Anne-Marie_Backer_Mohr
+- provenance: verified
+  supports_claim: true
+  url: https://no.wikipedia.org/wiki/Bjart_Faye_Mohr
+- provenance: verified
+  supports_claim: false
+  url: https://snl.no/Bjart_Faye_Mohr
+- provenance: verified
+  supports_claim: false
+  url: https://www.arkitektur.no/folk/minneord/bjart-mohr/
+timestamp: '2026-04-11T17:37:33.185687+00:00'
+title: Q64784680
+turns: 1
+value_label: Anne-Marie Backer Mohr
+verdict: verified-high

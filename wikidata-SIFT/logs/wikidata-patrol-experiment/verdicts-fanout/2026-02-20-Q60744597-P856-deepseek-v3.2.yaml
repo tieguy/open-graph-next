@@ -1,0 +1,25 @@
+completion_tokens: 1696
+cost_usd: 0.02077446
+diff_type: reference_added
+finish_status: max_turns
+model: deepseek/deepseek-v3.2
+prompt_tokens: 131503
+property: P856
+property_label: official website
+rationale: The added reference URL `https://www.globalbankingandfinance.com` directly
+  serves as the website it claims to be the official website for. Fetching the page
+  confirms it is the operational homepage for 'Global Banking & Finance Review' and
+  identifies itself as such, with content consistent with the item's description as
+  a UK-based finance magazine. The self-citation is acceptable for verifying an official
+  website claim.
+rcid: 2540949368
+revid: 2464738370
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.globalbankingandfinance.com
+timestamp: '2026-02-20T11:04:45.844834+00:00'
+title: Q60744597
+turns: 15
+value_label: null
+verdict: verified-high

@@ -1,0 +1,42 @@
+completion_tokens: 866
+cost_usd: 0.006054250000000001
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 117621
+property: P856
+property_label: official website
+rationale: During investigation, the claim of updating the official website property
+  (P856) for Jean Voguet primarily relied on a cited reference to French Wikipedia
+  (imported from Wikimedia project) which is not supported as a source per guidelines.
+  Other references to potential external sites like mastodon.social, text.tchncs.de,
+  and mediatheque.cnsmdp.fr were found but marked as 'reported' provenance since they
+  were only mentioned in the edit record and not directly fetched and verified. A
+  direct web_fetch of https://jeanvoguet.com returned a functional page containing
+  artist content, but no external verification linking this URL to the official website
+  claim in Wikidata was established. The search efforts for independent confirmation
+  yielded no corroborating sources. Thus, there is insufficient verified evidence
+  to confirm the claim.
+rcid: 2550090151
+revid: 2473436796
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://jeanvoguet.com
+- provenance: reported
+  supports_claim: false
+  url: https://mastodon.social/@jeanvoguet
+- provenance: reported
+  supports_claim: false
+  url: https://text.tchncs.de/jeanvoguet/
+- provenance: reported
+  supports_claim: false
+  url: https://audiospace.soundingfuture.com/artists/jean-voguet
+- provenance: reported
+  supports_claim: false
+  url: https://fr.wikipedia.org/wiki/Jean_Voguet
+timestamp: '2026-04-07T05:37:35.580677+00:00'
+title: Q3175073
+turns: 15
+value_label: null
+verdict: unverifiable

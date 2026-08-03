@@ -1,0 +1,33 @@
+completion_tokens: 1942
+cost_usd: 0.02464722
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 97582
+property: P166
+property_label: award received
+rationale: 'The claim that Manvik Chandra received an ''award received: drawing''
+  (Q93184) is problematic for several reasons. First, Q93184 represents ''drawing''
+  as an art form, not as an award name. Second, the cited Instagram reference is inaccessible
+  due to domain blocking, making it unverifiable. Third, extensive searches found
+  no independent confirmation of Manvik Chandra receiving a drawing award, though
+  he is identified as a child artist. The available evidence suggests this may be
+  a misinterpretation of ''drawing'' as an award category rather than documenting
+  an actual award.'
+rcid: 2540956799
+revid: 2464745014
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.instagram.com/p/DT43S4TEhmY/?igsh=d3NjMGsyeXVxdDZ2
+- provenance: verified
+  supports_claim: false
+  url: https://www.sites.google.com/view/manvikchandra
+- provenance: verified
+  supports_claim: false
+  url: https://books.google.com/books/about/Student_Life.html?id=JnWgEQAAQBAJ
+timestamp: '2026-02-20T06:45:55.221670+00:00'
+title: Q137924958
+turns: 15
+value_label: drawing
+verdict: suspect

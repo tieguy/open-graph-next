@@ -1,0 +1,31 @@
+completion_tokens: 1126
+cost_usd: 0.00550287
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 55095
+property: P1705
+property_label: native label
+rationale: The edit to change the native label to '20 FrenchTacos Street' is incorrect.
+  There is no evidence to support the new name, and the original name '20 Fenchurch
+  Street' is consistently referenced in reliable sources.
+rcid: 2549596457
+revid: 2472958532
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.skyscrapercenter.com/building/20-fenchurch/3350
+- provenance: verified
+  supports_claim: true
+  url: https://mapoflondon.uvic.ca/FENC1.htm
+- provenance: verified
+  supports_claim: true
+  url: https://www.bbc.co.uk/news/uk-34116610
+- provenance: verified
+  supports_claim: true
+  url: https://www.skyscrapercenter.com/building/20-fenchurch-street/3350
+timestamp: '2026-04-11T10:50:07.426976+00:00'
+title: Q212834
+turns: 5
+value_label: null
+verdict: incorrect

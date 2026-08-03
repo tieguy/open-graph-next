@@ -1,0 +1,26 @@
+completion_tokens: 1414
+cost_usd: 0.00457974375
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 44293
+property: P69
+property_label: educated at
+rationale: The claim that Sisiku Julius Ayuk Tabe was educated at the University of
+  Sheffield is supported by multiple independent sources. The added reference, although
+  unreachable, is not necessary to confirm the claim as independent sources provide
+  sufficient corroboration.
+rcid: 2550926983
+revid: 2474248427
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://theguardianpostcameroon.com/post/1156/fr/search-for-return-peace-in-nw-sw-biya-please-thinking-them-
+- provenance: verified
+  supports_claim: true
+  url: https://cameroon-concord.com/headlines/southern-cameroons-gets-new-government-with-sessekou-ayuk-julius-tabe-as-interim-president
+timestamp: '2026-04-10T13:56:03.522690+00:00'
+title: Q60606828
+turns: 4
+value_label: University of Sheffield
+verdict: verified-high

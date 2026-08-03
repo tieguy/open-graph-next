@@ -1,0 +1,38 @@
+completion_tokens: 3828
+cost_usd: 0.21854200000000001
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 199402
+property: P1128
+property_label: employees
+rationale: 'Multiple authoritative sources consistently report Arla Foods'' employee
+  count as 21,307 (2023) or 21,895 (2024), not 22,000. The company''s own annual reports
+  show a clear historical progression: 20,020 (2020) → 20,617 (2021) → 20,907 (2022)
+  → 21,307 (2023) → 21,895 (2024). The figure 22,000 does not appear in any official
+  Arla Foods documentation and likely conflates suppliers (22,000+) with employees.
+  The claim is directly contradicted by Arla''s primary sources and third-party regulatory
+  databases.'
+rcid: 2540952550
+revid: 2464741209
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.globaldata.com/company-profile/arla-foods-amba/
+- provenance: verified
+  supports_claim: false
+  url: https://fortune.com/company/arla-foods/
+- provenance: verified
+  supports_claim: false
+  url: https://www.scribd.com/document/841332791/Arla-Annual-Report-2024-Uk2
+- provenance: verified
+  supports_claim: false
+  url: https://www.alfalaval.com/contentassets/c2cb5938b26d4153b60eb5b5f155e986/boosts-output-by-25-using-just-2-more-energy---copy.pdf
+- provenance: reported
+  supports_claim: false
+  url: https://www.arla.com/493575/globalassets/arla-global/company---overview/investor/annual-reports/2023/arla_annual-report-2023_uk_v2.pdf
+timestamp: '2026-02-20T08:12:27.502126+00:00'
+title: Q674575
+turns: 10
+value_label: null
+verdict: incorrect

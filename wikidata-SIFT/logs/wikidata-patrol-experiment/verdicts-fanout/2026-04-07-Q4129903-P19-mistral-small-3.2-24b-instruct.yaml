@@ -1,0 +1,25 @@
+completion_tokens: 1366
+cost_usd: 0.00256016625
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 38776
+property: P19
+property_label: place of birth
+rationale: 'The Union of Cinematographers of the Russian Federation confirms that
+  Inna Vykhodtseva was born in Donetsk. The qualifiers removed (located in the administrative
+  territorial entity: Ukrainian Soviet Socialist Republic and country: Soviet Union)
+  are consistent with historical context, as Donetsk was part of the Ukrainian Soviet
+  Socialist Republic during her birth. Therefore, the removal of the qualifiers appears
+  to be unjustified.'
+rcid: null
+revid: 2417123745
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://unikino.ru/31-декабря-2024-г-на-91-году-после-продолжител/
+timestamp: '2026-04-07T08:42:05.237321+00:00'
+title: Q4129903
+turns: 6
+value_label: Donetsk
+verdict: incorrect

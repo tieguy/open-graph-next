@@ -1,0 +1,36 @@
+completion_tokens: 2731
+cost_usd: 0.057504
+diff_type: value_changed
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 43849
+property: P19
+property_label: place of birth
+rationale: Multiple independent, authoritative sources consistently confirm that Peder
+  Kongshaug was born in Wimbledon, England, on 13 August 2001. The edit's cited reference
+  (Norwegian national profile from April 2024) directly states 'Peder Kongshaug er
+  født i Wimbledon utenfor London' (born in Wimbledon outside London). Olympedia,
+  the official Olympic database, explicitly records his birthplace as 'Wimbledon,
+  England (GBR)'. Reuters independently reported the same fact in February 2026. The
+  consistency across primary sources (official Olympic records and biographical profiles)
+  with no contradictory evidence establishes high confidence in the claim.
+rcid: 2540936206
+revid: 2464726502
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.naeringsforeningen.no/nyheter/profilen-maalet-er-en-besettelse
+- provenance: verified
+  supports_claim: true
+  url: https://www.olympedia.org/athletes/148716
+- provenance: verified
+  supports_claim: true
+  url: https://www.reuters.com/sports/speed-skating-kongshaug-hunts-individual-gold-milan-after-world-european-success-2026-02-06/
+- provenance: reported
+  supports_claim: false
+  url: https://isu-skating.com/speed-skating/skaters/peder-kongshaug/
+timestamp: '2026-02-20T17:03:21.450829+00:00'
+title: Q105279115
+turns: 3
+value_label: Wimbledon
+verdict: verified-high

@@ -1,0 +1,23 @@
+completion_tokens: 799
+cost_usd: 0.008156199999999999
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 38384
+property: P2003
+property_label: Instagram username
+rationale: The edit introduces 'giannamariella' as the Instagram username for Mariella
+  Tripke without any independent or official verification. A primary source interview
+  with Mariella Tripke does not mention an Instagram or any official social media
+  username, and no corroborating evidence was found to support the claim.
+rcid: 2550357235
+revid: 2473695880
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.deine-korrespondentin.de/lustige-frauen/
+timestamp: '2026-04-07T11:20:58.692475+00:00'
+title: Q123352308
+turns: 7
+value_label: null
+verdict: suspect

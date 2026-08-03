@@ -1,0 +1,31 @@
+completion_tokens: 804
+cost_usd: 0.011704049999999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 44457
+property: P31
+property_label: instance of
+rationale: The change from 'human' (Q5) to 'Chinmayananda Saraswati' (Q173273) for
+  the instance of (P31) claim is correct. The prefetched reference from the Chinmaya
+  Mission website explicitly confirms that the individual is referred to as 'Swami
+  Chinmayananda Saraswati,' a specific entity. Additionally, the item's detailed biography
+  and other claims (e.g., occupation as a guru, birth/death dates, and affiliations)
+  align with the identity of this specific individual. The old value 'human' was overly
+  generic and did not reflect the specific identity of the individual. The new value
+  is well-supported by the available sources and aligns with the broader context of
+  the item.
+rcid: null
+revid: 2470122213
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.chinmayamission.com/who-we-are/swami-chinmayananda/
+- provenance: verified
+  supports_claim: true
+  url: https://kids.kiddle.co/Chinmayananda_Saraswati
+timestamp: '2026-04-11T08:46:56.442841+00:00'
+title: Q173273
+turns: 4
+value_label: Chinmayananda Saraswati
+verdict: verified-high

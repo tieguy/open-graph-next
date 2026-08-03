@@ -1,0 +1,29 @@
+completion_tokens: 1481
+cost_usd: 0.0060258
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 25686
+property: P800
+property_label: notable work
+rationale: Neither the new value 'Pene' nor the old value 'Arthur's Whisky' is supported
+  by any independent, reliable source as a notable work of Boy George. The change
+  appears to be from one unsupported claim to another without evidence of improvement
+  or correction.
+rcid: null
+revid: 2463233603
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.last.fm/music/Boy+George/+wiki
+- provenance: verified
+  supports_claim: false
+  url: https://www.onthisday.com/people/boy-george
+- provenance: verified
+  supports_claim: false
+  url: https://www.hollywoodreporter.com/news/boy-george-talks-culture-club-160857
+timestamp: '2026-04-11T12:54:22.563965+00:00'
+title: Q312883
+turns: 1
+value_label: Pene
+verdict: suspect

@@ -1,0 +1,28 @@
+completion_tokens: 1040
+cost_usd: 0.0034036
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13898
+property: P31
+property_label: instance of
+rationale: The cited reference (Spanish Wikipedia) and multiple independent sources
+  confirm that Sara García Alonso is a researcher and astronaut, not a member of the
+  music group Apache. There is no evidence to support the claim that she is an 'Apache.'
+rcid: 2540985241
+revid: 2464771565
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://es.wikipedia.org/wiki/Sara_Garc%C3%ADa_Alonso
+- provenance: reported
+  supports_claim: false
+  url: https://www.esa.int/Science_Exploration/Human_and_Robotic_Exploration/ESA_presents_new_generation_of_astronauts
+- provenance: reported
+  supports_claim: false
+  url: https://dialnet.unirioja.es/servlet/tesis?codigo=249486
+timestamp: '2026-02-19T22:27:43.755363+00:00'
+title: Q88354540
+turns: 1
+value_label: Apache
+verdict: incorrect

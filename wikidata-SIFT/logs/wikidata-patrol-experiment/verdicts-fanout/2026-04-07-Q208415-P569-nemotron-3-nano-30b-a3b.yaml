@@ -1,0 +1,25 @@
+completion_tokens: 711
+cost_usd: 0.004313999999999998
+diff_type: reference_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 83436
+property: P569
+property_label: date of birth
+rationale: No verifiable sources were found supporting the claim about the Olsen twins'
+  date of birth. Multiple web searches for reputable sources (official biographies,
+  established media outlets, academic databases) returned no relevant results. While
+  the Wikidata edit indicates a reference was removed, no sources could be verified
+  through direct fetching or independent confirmation of the birth date. The available
+  sources either could not be accessed or did not support the specific claim.
+rcid: null
+revid: 2471644486
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Mary-Kate_and_Ashley_Olsen
+timestamp: '2026-04-07T06:27:48.542324+00:00'
+title: Q208415
+turns: 15
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,22 @@
+completion_tokens: 1034
+cost_usd: 0.010746856249999999
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 115409
+property: P1477
+property_label: birth name
+rationale: The cited reference from Grove Music Online could not be fetched, and no
+  independent sources were found to confirm the new birth name 'Olivier Penne Messi
+  Aen.' Therefore, the claim cannot be verified.
+rcid: null
+revid: 2472451349
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://doi.org/10.1093/gmo/9781561592630.article.18497
+timestamp: '2026-04-07T10:23:02.175911+00:00'
+title: Q151593
+turns: 6
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,30 @@
+completion_tokens: 909
+cost_usd: 0.0045052
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 19799
+property: P106
+property_label: occupation
+rationale: Multiple independently verified sources explicitly identify Valentina Rusu-Ciobanu
+  as a painter. Primary sources (artist's official biography and a reputable arts
+  institution profile) directly state her profession and artistic activity. These
+  sources are independently corroborated, confirming the occupation claim despite
+  the cited references being currently unreachable.
+rcid: 2550500062
+revid: 2473835443
+sources:
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/5938-2/
+- provenance: verified
+  supports_claim: true
+  url: http://www.valentinarusuciobanu.com/biografie/
+- provenance: verified
+  supports_claim: true
+  url: https://www.hkw.de/en/programme/contributors/valentina-rusu-ciobanu
+timestamp: '2026-04-10T13:29:27.279466+00:00'
+title: Q12743035
+turns: 1
+value_label: painter
+verdict: verified-high

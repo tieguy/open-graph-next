@@ -1,0 +1,23 @@
+completion_tokens: 1277
+cost_usd: 0.025074000000000003
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 121539
+property: P2032
+property_label: end of work period
+rationale: The claimed end of work period '67 CE' for Shaun Tan is implausible and
+  likely a typographical error. The cited source (RKDartists) could not be accessed
+  due to a blocked domain, and no independent, accessible sources corroborate this
+  value. Therefore, the claim cannot be verified.
+rcid: null
+revid: 2468965926
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.rkd.nl/en
+timestamp: '2026-04-07T04:25:35.010691+00:00'
+title: Q588933
+turns: 7
+value_label: null
+verdict: unverifiable

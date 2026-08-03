@@ -1,0 +1,25 @@
+completion_tokens: 1607
+cost_usd: 0.020189600000000002
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 197075
+property: P3602
+property_label: candidacy in election
+rationale: Multiple official sources confirm that David Carmier was indeed a candidate
+  in the 2020 Sartrouville municipal election. The claim is supported by strong evidence
+  from primary sources.
+rcid: 2540916603
+revid: 2464707960
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.bienpublic.com/elections/resultats/elections-municipales-2020?commune=78586&circonscription=7805
+- provenance: verified
+  supports_claim: true
+  url: https://www.lejsl.com/elections/resultats/elections-municipales-2020?commune=78586
+timestamp: '2026-02-21T03:10:00.731684+00:00'
+title: Q47259332
+turns: 13
+value_label: 2020 Sartrouville municipal election
+verdict: verified-high

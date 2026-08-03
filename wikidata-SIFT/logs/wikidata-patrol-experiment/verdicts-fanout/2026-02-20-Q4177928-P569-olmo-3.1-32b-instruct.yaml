@@ -1,0 +1,27 @@
+completion_tokens: 544
+cost_usd: 0.0159864
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 78300
+property: P569
+property_label: date of birth
+rationale: All reliable sources, including the Wikimedia Commons entry and multiple
+  music databases, confirm that Zara Larsson was born on 16 December 1997 in Solna,
+  Sweden. No credible source supports a birth date of 16 December 1802, and this date
+  is inconsistent with her publicly documented career and identity. Therefore, the
+  updated value of '16 December 1802' for her date of birth is incorrect.
+rcid: 2540966149
+revid: 2464753744
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/Zara_Larsson
+- provenance: verified
+  supports_claim: false
+  url: https://top40-charts.com/artist.php?aid=14213
+timestamp: '2026-02-20T03:48:02.124579+00:00'
+title: Q4177928
+turns: 6
+value_label: null
+verdict: incorrect

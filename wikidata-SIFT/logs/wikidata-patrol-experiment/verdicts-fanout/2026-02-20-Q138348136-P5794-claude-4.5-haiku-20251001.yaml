@@ -1,0 +1,33 @@
+completion_tokens: 2374
+cost_usd: 0.23280800000000001
+diff_type: value_changed
+finish_status: max_turns
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 220938
+property: P5794
+property_label: Internet Game Database game ID
+rationale: The IGDB game ID for Fut Rap Cartas is 'fut-rap-cartas', not 'frc-25'.
+  This was confirmed by direct search of IGDB, which returned the official game page
+  at https://www.igdb.com/games/fut-rap-cartas. The Wikidata property P5794 documentation
+  shows that Devil May Cry 5 uses the format 'devil-may-cry-5', confirming that IGDB
+  IDs are URL-slug identifiers derived from the game's title, not abbreviations. While
+  'frc-25' matches the valid regex pattern for P5794, it does not correspond to any
+  actual IGDB game entry and appears to conflate the game's alternate name 'FRC 25'
+  with the correct IGDB identifier. The edit introduced an incorrect identifier.
+rcid: 2540954667
+revid: 2464743006
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.igdb.com/games/fut-rap-cartas
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Property:P5794
+- provenance: verified
+  supports_claim: false
+  url: https://www.igdb.com/games/devil-may-cry-5
+timestamp: '2026-02-20T07:36:30.780050+00:00'
+title: Q138348136
+turns: 15
+value_label: null
+verdict: incorrect

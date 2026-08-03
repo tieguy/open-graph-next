@@ -1,0 +1,26 @@
+completion_tokens: 1366
+cost_usd: 0.0028662
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10233
+property: P31
+property_label: instance of
+rationale: Multiple independent sources confirm that the Church of Agios Nikolaos
+  in Ypati is a Greek Orthodox church. Changing the instance of from the generic 'church
+  building' to 'Greek Orthodox Church building' is therefore accurate and improves
+  the specificity of the data.
+rcid: 2550920206
+revid: 2474242109
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Agios_Nikolaos,_Ypati
+- provenance: verified
+  supports_claim: true
+  url: https://www.google.com/maps/place/Church+of+Agios+Nikolaos,+Ypati
+timestamp: '2026-04-11T12:23:55.917446+00:00'
+title: Q112619925
+turns: 1
+value_label: Greek Orthodox Church building
+verdict: verified-high

@@ -1,0 +1,24 @@
+completion_tokens: 1580
+cost_usd: 0.00271934375
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 24793
+property: P6375
+property_label: street address
+rationale: The removed address is incorrect based on the consistent information from
+  reliable sources. The correct address is verified by multiple independent sources.
+rcid: 2550561460
+revid: 2473894151
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kyivmaps.com/en/places/voennyj-institut-kievskogo-nacionalnogo-universiteta-imeni-tarasa-sevcenko
+- provenance: verified
+  supports_claim: true
+  url: https://www.waze.com/live-map/directions/ua/kyiv/kyiv/military-institute,-taras-shevchenko-national-university-of-kyiv?to=place.ChIJCRn-7OPI1EARVW89_tclSLo
+timestamp: '2026-04-11T16:23:57.879072+00:00'
+title: Q12093129
+turns: 3
+value_label: null
+verdict: verified-high

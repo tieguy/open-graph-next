@@ -1,0 +1,23 @@
+completion_tokens: 605
+cost_usd: 0.0073638
+diff_type: reference_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 35004
+property: P20
+property_label: place of death
+rationale: The Jewish Encyclopedia Brockhaus and Efron explicitly states that Joseph
+  ha-Kohen died in Genoa after returning there in 1571. This directly corroborates
+  the updated place of death claim. The source is authoritative and the information
+  is clearly stated.
+rcid: 2540983105
+revid: 2464769525
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.jewishencyclopedia.com/articles/8858-joseph-ha-kohen
+timestamp: '2026-02-20T01:37:29.042861+00:00'
+title: Q1708321
+turns: 3
+value_label: Genoa
+verdict: verified-high

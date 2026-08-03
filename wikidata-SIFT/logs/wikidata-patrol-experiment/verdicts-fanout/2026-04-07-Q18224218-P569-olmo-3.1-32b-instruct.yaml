@@ -1,0 +1,27 @@
+completion_tokens: 865
+cost_usd: 0.0051006
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 22908
+property: P569
+property_label: date of birth
+rationale: The only cited reference for the new birth year (2026) could not be fetched
+  or verified, and independent searches found no evidence supporting a 2026 birth
+  year for María Angélica Illanes. The established and consistent biographical information
+  lists her birth year as 1949. Without accessible, reliable evidence, the edit cannot
+  be confirmed.
+rcid: 2549610311
+revid: 2472972061
+sources:
+- provenance: attempted
+  supports_claim: false
+  url: https://authorities.loc.gov/id/n90610029
+- provenance: reported
+  supports_claim: false
+  url: ''
+timestamp: '2026-04-07T07:47:52.092403+00:00'
+title: Q18224218
+turns: 4
+value_label: null
+verdict: unverifiable

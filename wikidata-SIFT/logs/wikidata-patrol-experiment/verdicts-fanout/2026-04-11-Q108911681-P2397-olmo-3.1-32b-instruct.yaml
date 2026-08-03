@@ -1,0 +1,25 @@
+completion_tokens: 2069
+cost_usd: 0.0034836
+diff_type: qualifier_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 11211
+property: P2397
+property_label: YouTube channel ID
+rationale: The edit adds qualifiers to the YouTube channel ID for Gianina D'Angelo,
+  but there are no references provided to confirm ownership or official status. I
+  fetched the YouTube channel at the provided ID and found a channel branded as 'Gianina
+  D'Angelo Oficial', but there was no explicit confirmation that it belongs to Gianina
+  D'Angelo. Independent sources do not confirm this association. Therefore, the claim
+  remains unverifiable without primary evidence.
+rcid: 2550952330
+revid: 2474272373
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.youtube.com/channel/UCIO_BE-5K191t0vfwKUm2gQ
+timestamp: '2026-04-11T17:22:55.218836+00:00'
+title: Q108911681
+turns: 1
+value_label: null
+verdict: unverifiable

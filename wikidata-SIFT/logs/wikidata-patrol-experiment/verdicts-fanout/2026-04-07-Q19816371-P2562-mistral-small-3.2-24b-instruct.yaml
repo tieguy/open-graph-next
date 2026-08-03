@@ -1,0 +1,22 @@
+completion_tokens: 860
+cost_usd: 0.00346920625
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 36104
+property: P2562
+property_label: married name
+rationale: The edit changes the married name but does not provide any references.
+  Independent searches did not yield clear confirmation of the new married name. Therefore,
+  the verdict is unverifiable.
+rcid: null
+revid: 2471474532
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.google.com/search?q=Maria+Vorontsova+married+name+Мария+Владимировна
+timestamp: '2026-04-07T07:36:39.010296+00:00'
+title: Q19816371
+turns: 5
+value_label: null
+verdict: unverifiable

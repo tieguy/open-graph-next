@@ -1,0 +1,20 @@
+completion_tokens: 545
+cost_usd: 0.0070478
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 33604
+property: P136
+property_label: genre
+rationale: No source was cited in the edit, and independent verification attempts
+  via official website and reputable third-party sources did not yield evidence in
+  this investigation. Therefore, the claim cannot be confirmed or denied based on
+  available evidence.
+rcid: null
+revid: 2471197187
+sources: []
+timestamp: '2026-04-07T14:18:19.729924+00:00'
+title: Q104857863
+turns: 6
+value_label: children's television series
+verdict: unverifiable

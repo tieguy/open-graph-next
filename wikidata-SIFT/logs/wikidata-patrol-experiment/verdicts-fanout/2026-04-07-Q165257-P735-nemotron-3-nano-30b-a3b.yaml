@@ -1,0 +1,25 @@
+completion_tokens: 610
+cost_usd: 0.010363000000000002
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 204820
+property: P735
+property_label: given name
+rationale: Despite extensive search attempts across multiple query variations and
+  language-specific searches, no web results were found that confirm 'Vega' as the
+  given name of Lope de Vega. All attempts to locate reliable sources about Lope de
+  Vega's name variations returned either empty results or blocked domains. The edit's
+  cited references were not accessible through prefetching and no supporting documentation
+  was found in public web sources.
+rcid: 2549920085
+revid: 2473274505
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Lope_de_Vega
+timestamp: '2026-04-07T04:17:38.132783+00:00'
+title: Q165257
+turns: 15
+value_label: Vega
+verdict: unverifiable

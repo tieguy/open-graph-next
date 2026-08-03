@@ -1,0 +1,30 @@
+completion_tokens: 996
+cost_usd: 0.023506799999999998
+diff_type: reference_added
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 83631
+property: P856
+property_label: official website
+rationale: 'The new official website claim (`https://all.accor.com/hotel/0796/index.en.shtml`)
+  is **not supported** by independent evidence. The hotel''s own website (`https://ibis-wien-mariahilf.meinhotel.top`)
+  explicitly states in its lead: *''Offizielle Website des ibis Wien Mariahilf''*
+  (Official website of Ibis Wien Mariahilf), confirming it as the official website.
+  The Accor lookup page (`all.accor.com`) does not explicitly confirm this status
+  and is a generic hotel directory page, not a branded official website. The cited
+  reference does not substantiate the claim, and the old value (`ibis-wien-mariahilf.meinhotel.top`)
+  remains the only verified official website for this hotel.'
+rcid: 2550334114
+revid: 2473673383
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://ibis-wien-mariahilf.meinhotel.top
+- provenance: verified
+  supports_claim: false
+  url: https://all.accor.com/hotel/0796/index.en.shtml
+timestamp: '2026-04-11T08:16:54.690448+00:00'
+title: Q111410471
+turns: 9
+value_label: null
+verdict: incorrect

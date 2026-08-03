@@ -1,0 +1,24 @@
+completion_tokens: 824
+cost_usd: 0.013013799999999999
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 62597
+property: P856
+property_label: official website
+rationale: The new value for P856 (official website) points to https://www.starflyer.jp,
+  which is the homepage of Star Flyer, a regional airline, not Mizumaki town's official
+  website. No independent authoritative sources confirm this URL as the official website
+  for Mizumaki town. The previous URL, https://www.town.mizumaki.lg.jp/, was more
+  consistent with the town's official presence.
+rcid: null
+revid: 2471589734
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.starflyer.jp
+timestamp: '2026-04-07T05:02:38.322009+00:00'
+title: Q1350098
+turns: 9
+value_label: null
+verdict: incorrect

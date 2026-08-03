@@ -1,0 +1,29 @@
+completion_tokens: 2019
+cost_usd: 0.0033241399999999997
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 33380
+property: P20
+property_label: place of death
+rationale: The evidence consistently supports Vincennes as the place of death for
+  Mata Hari. The change to Dakar is not supported by any reliable sources and contradicts
+  the well-documented historical record. The references cited for both values are
+  identical, suggesting a possible error in the edit process.
+rcid: 2550970497
+revid: 2474289994
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://chimeramyth.blogspot.com/2017/08/where-exactly-was-mata-hari-executed.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.nationalgeographic.com/history/history-magazine/article/mata-hari-history-killing
+- provenance: verified
+  supports_claim: true
+  url: https://en.wikipedia.org/wiki/Mata_Hari
+timestamp: '2026-04-11T16:06:12.170050+00:00'
+title: Q82180
+turns: 1
+value_label: Dakar
+verdict: incorrect

@@ -1,0 +1,46 @@
+completion_tokens: 2555
+cost_usd: 0.002497225
+diff_type: reference_added
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 19583
+property: P569
+property_label: date of birth
+rationale: The Deutsche Nationalbibliothek entry supports the claim that Kristian
+  Kroschel was born in 1942. This source is authoritative and provides additional
+  context that aligns with other claims about him in the Wikidata item.
+rcid: 2540942340
+revid: 2464731827
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://d-nb.info/gnd/13189269X
+- provenance: verified
+  supports_claim: false
+  url: https://www.myheritage.com/names/clayton_kroschel
+- provenance: verified
+  supports_claim: false
+  url: https://www.amazon.com/stores/author/B0045A4TJY
+- provenance: verified
+  supports_claim: false
+  url: https://www.perfectgame.org/players/playerprofile.aspx?ID=778845
+- provenance: verified
+  supports_claim: false
+  url: http://biocatalysis.uni-graz.at/sites/people.html
+- provenance: verified
+  supports_claim: false
+  url: https://arxiv.org/pdf/2110.08495
+- provenance: verified
+  supports_claim: false
+  url: https://www.researchgate.net/figure/Example-for-data-dependencies-between-selected-modules-for-identification-of-a-person_fig4_220758308
+- provenance: verified
+  supports_claim: false
+  url: https://www.maxpreps.com/or/salem/livingstone-adventist-academy/athletes/harrison-kroschel/?careerid=pn8vnjk0kdrff
+- provenance: verified
+  supports_claim: false
+  url: https://dps.alaska.gov/getmedia/eb9cf9d8-3ce6-4b91-af75-b8f025dc0a1b/AST-Active-Warrants.pdf
+timestamp: '2026-02-20T13:41:54.103848+00:00'
+title: Q130773068
+turns: 3
+value_label: null
+verdict: verified-high

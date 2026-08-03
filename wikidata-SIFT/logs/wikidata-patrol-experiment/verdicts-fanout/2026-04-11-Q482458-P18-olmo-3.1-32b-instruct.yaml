@@ -1,0 +1,29 @@
+completion_tokens: 2627
+cost_usd: 0.0042514
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 13376
+property: P18
+property_label: image
+rationale: The new image appears to represent the current-generation Hyundai Sonata
+  N Line facelift, which is consistent with the item's current model description.
+  Official Hyundai sources confirm the availability of images for the current facelift
+  N Line, supporting the appropriateness of the change. However, the specific filename
+  could not be directly confirmed as official, and no references were attached to
+  the new image claim. The old image depicted an older model year and a different
+  trim, making it less representative.
+rcid: 2550728569
+revid: 2474055982
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.hyundaiusa.com/us/en/vehicles/sonata/gallery
+- provenance: verified
+  supports_claim: true
+  url: https://www.hyundain.com/models/sonata
+timestamp: '2026-04-11T11:21:31.975034+00:00'
+title: Q482458
+turns: 1
+value_label: null
+verdict: verified-low

@@ -1,0 +1,28 @@
+completion_tokens: 1133
+cost_usd: 0.0011149375
+diff_type: qualifier_removed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 10068
+property: P856
+property_label: official website
+rationale: The official website of Zip Water is in English, and there is no indication
+  that the website supports multiple languages. The qualifier indicating that the
+  website is in English was correctly removed because it is redundant.
+rcid: 2550473546
+revid: 2473809897
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.zipwater.com
+- provenance: verified
+  supports_claim: true
+  url: https://us.zipwater.com/home/
+- provenance: verified
+  supports_claim: false
+  url: https://culliganinternational.com/brands/zipwater
+timestamp: '2026-04-11T18:15:13.852007+00:00'
+title: Q8072611
+turns: 1
+value_label: null
+verdict: verified-high

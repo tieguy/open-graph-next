@@ -1,0 +1,36 @@
+completion_tokens: 3067
+cost_usd: 0.294952
+diff_type: reference_added
+finish_status: stop
+model: anthropic/claude-4.5-haiku-20251001
+prompt_tokens: 279617
+property: P737
+property_label: influenced by
+rationale: 'The cited reference (aucties.com) directly and explicitly supports the
+  claim, stating that Couture ''immersed himself in Renaissance techniques, particularly
+  those of Titian and Rubens, which he copied and reworked to nourish his own art.''
+  This is corroborated by multiple independent sources: The Spectator describes Couture
+  as ''a devotee of Venetian painting,'' and biographical sources confirm Couture
+  held ''Renaissance Italy'' in the highest respect as a stylistic predecessor. The
+  claim is well-supported by both the cited reference and independent art-historical
+  sources.'
+rcid: 2540944656
+revid: 2464733999
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.aucties.com/fr/guide-encheres/les-artistes-du-xixe-siecle/cote-et-valeur-des-tableaux-dessins-peintures-de-thomas-couture
+- provenance: verified
+  supports_claim: true
+  url: https://spectator.com/article/how-manet-was-influenced-by-the-artists-of-the-renaissance/
+- provenance: verified
+  supports_claim: true
+  url: https://johnkruseblog.wordpress.com/2023/11/07/thomas-couture-teacher-trendsetter/
+- provenance: verified
+  supports_claim: true
+  url: https://wahooart.com/en/artists/thomas-couture-en/
+timestamp: '2026-02-20T12:24:54.482269+00:00'
+title: Q326434
+turns: 8
+value_label: Titian
+verdict: verified-high

@@ -1,0 +1,27 @@
+completion_tokens: 1261
+cost_usd: 0.0050206
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 21320
+property: P106
+property_label: occupation
+rationale: Authoritative biographical sources describe María Izquierdo exclusively
+  as a painter and artist. The referenced URL supporting 'tapissier' as an occupation
+  could not be accessed and provides no evidence for the claim. No independent, reliable
+  sources found support the occupation 'tapissier.' Therefore, the edit is incorrect
+  and should be reverted.
+rcid: 2549597016
+revid: 2472959052
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.admagazine.com/cultura/maria-izquierdo-lo-que-no-sabias-de-la-pintora-surrealista-20200406-6229-articulos
+- provenance: unreachable
+  supports_claim: false
+  url: https://www.esmeralda.edu.mx/maria-izquierdo
+timestamp: '2026-04-07T07:01:08.779454+00:00'
+title: Q461937
+turns: 2
+value_label: tapissier
+verdict: incorrect

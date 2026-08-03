@@ -1,0 +1,27 @@
+completion_tokens: 1457
+cost_usd: 0.007098325
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 71022
+property: P373
+property_label: Commons category
+rationale: The new value "The Honorable Soroi Marepo Eoe CMG, MP.png" does not correspond
+  to an existing Commons category but rather to a specific file. The existing category
+  "Soroi Eoe" is well-established and contains relevant media files. Changing the
+  Commons category to a file name is not appropriate. The edit seems to confuse a
+  file name with a category name, which is not consistent with Wikimedia Commons practices.
+rcid: 2551442447
+revid: 2474740123
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://commons.wikimedia.org/wiki/Category:Soroi_Eoe
+- provenance: verified
+  supports_claim: false
+  url: https://commons.wikimedia.org/wiki/File:The_Honorable_Soroi_Marepo_Eoe_CMG,_MP.png
+timestamp: '2026-04-11T17:45:55.992560+00:00'
+title: Q64747295
+turns: 7
+value_label: null
+verdict: suspect

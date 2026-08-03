@@ -1,0 +1,23 @@
+completion_tokens: 680
+cost_usd: 0.0061481
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 120242
+property: P2048
+property_label: height
+rationale: No reputable sources were found to confirm or refute the claim that the
+  height of Alfred Sisley's 'Boat in the Flood at Port-Marly' is 50 millimetres. Multiple
+  web searches using various query formulations returned no relevant results about
+  the painting's dimensions. Without any source evidence assessing the claim, it cannot
+  be considered verified, plausible, or otherwise judged on its merits. The lack of
+  found search results prevents determining if the cited source '50 millimetre' is
+  authoritative for this claim.
+rcid: null
+revid: 2463352626
+sources: []
+timestamp: '2026-04-07T10:21:58.753270+00:00'
+title: Q17491848
+turns: 15
+value_label: null
+verdict: unverifiable

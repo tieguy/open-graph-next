@@ -1,0 +1,17 @@
+completion_tokens: 448
+cost_usd: 0.006131687499999999
+diff_type: value_changed
+finish_status: max_turns
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 69240
+property: P159
+property_label: headquarters location
+rationale: null
+rcid: 2551282660
+revid: 2474591784
+sources: []
+timestamp: '2026-04-07T06:51:53.979024+00:00'
+title: Q19599200
+turns: 15
+value_label: Taipei
+verdict: null

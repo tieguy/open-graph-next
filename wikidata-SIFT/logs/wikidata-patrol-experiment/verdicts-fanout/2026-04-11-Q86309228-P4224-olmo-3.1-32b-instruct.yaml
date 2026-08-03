@@ -1,0 +1,27 @@
+completion_tokens: 1472
+cost_usd: 0.003016
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 10664
+property: P4224
+property_label: category contains
+rationale: The claim that the category contains 'human' for Baylor Bears women's volleyball
+  coaches is supported by official Baylor Athletics and volleyball camp pages, which
+  list human individuals as coaches. However, the qualifier is likely redundant for
+  the 'coach' category and was added without a citation. The factual correctness is
+  confirmed, but best practices for sourcing were not followed.
+rcid: 2551318433
+revid: 2474626133
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://baylorbears.com/sports/womens-volleyball/coaches
+- provenance: verified
+  supports_claim: true
+  url: https://volleyballcamp.web.baylor.edu/coaches
+timestamp: '2026-04-11T09:30:58.659275+00:00'
+title: Q86309228
+turns: 1
+value_label: human
+verdict: verified-low

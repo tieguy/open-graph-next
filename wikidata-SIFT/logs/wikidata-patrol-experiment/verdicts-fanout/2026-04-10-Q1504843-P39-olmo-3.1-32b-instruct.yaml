@@ -1,0 +1,33 @@
+completion_tokens: 384
+cost_usd: 0.0036302
+diff_type: qualifier_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16999
+property: P39
+property_label: position held
+rationale: The claim that Georg Fuchs von Rügheim held the position of 'diocesan bishop'
+  is supported by multiple independent sources. The Catholic Hierarchy website lists
+  Georg Fuchs von Rügheim as a bishop of the Roman Catholic Diocese of Bamberg with
+  a defined start and end date (1556–1561), which matches the qualifiers attached
+  to the 'position held' claim on Wikidata. The German Wikipedia page also identifies
+  him as a prince-bishop of Bamberg, a title typically held by a diocesan bishop.
+  The sources fetched and read confirm the role and timeframe, providing strong evidence
+  for the correctness of this qualifier.
+rcid: 2550975963
+revid: 2474295348
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bfvr.html
+- provenance: verified
+  supports_claim: true
+  url: https://de.wikipedia.org/wiki/Georg_IV._Fuchs_von_R%C3%BCgheim
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/diocese/dbamb.html
+timestamp: '2026-04-10T13:00:39.609707+00:00'
+title: Q1504843
+turns: 1
+value_label: diocesan bishop
+verdict: verified-high

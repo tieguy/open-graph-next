@@ -1,0 +1,36 @@
+completion_tokens: 1894
+cost_usd: 0.024174820000000003
+diff_type: value_changed
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 101360
+property: P452
+property_label: industry
+rationale: 'Altair Data Resources, Inc. operates as an information broker based on
+  multiple lines of evidence: 1) Their privacy policy details extensive collection
+  of personal data from third-party partners and public sources for data marketing
+  and analytics services; 2) They appear in official state data broker registries
+  (California, Oregon, Vermont) according to search results; 3) The EFF analysis identifies
+  them as a registered data broker. Their business activities align precisely with
+  the definition of an information broker - collecting consumer data and providing
+  it to marketers for targeted campaigns.'
+rcid: 2540941252
+revid: 2464730745
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://altairdata.com/privacy-policy/
+- provenance: reported
+  supports_claim: true
+  url: https://www.eff.org/files/2025/06/24/2025-06-24_-_texas_data_broker_letter.pdf
+- provenance: reported
+  supports_claim: true
+  url: https://cppa.ca.gov/data_broker_registry/registry.csv
+- provenance: verified
+  supports_claim: false
+  url: https://altairdata.com/company-overview/
+timestamp: '2026-02-20T14:35:05.646943+00:00'
+title: Q138349149
+turns: 13
+value_label: information broker
+verdict: verified-high

@@ -1,0 +1,26 @@
+completion_tokens: 1570
+cost_usd: 0.003541
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12995
+property: P569
+property_label: date of birth
+rationale: Multiple reliable and independently accessible sources (Faroese and Danish
+  Wikipedia) confirm that Sigurð Joensen was born on 27 April 1523. No reputable sources
+  support the previously cited 1911 birth date. Therefore, changing the value from
+  1911 to 1523 is correct and improves data accuracy.
+rcid: null
+revid: 2471243717
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://fo.wikipedia.org/wiki/Sigur%C3%B0_Joensen
+- provenance: verified
+  supports_claim: true
+  url: https://da.wikipedia.org/wiki/Sigur%C3%B0_Joensen
+timestamp: '2026-04-11T11:17:24.001810+00:00'
+title: Q2285456
+turns: 1
+value_label: null
+verdict: verified-high

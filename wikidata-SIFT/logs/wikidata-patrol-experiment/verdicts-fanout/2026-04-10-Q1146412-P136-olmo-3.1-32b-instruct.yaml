@@ -1,0 +1,26 @@
+completion_tokens: 1598
+cost_usd: 0.0034815999999999996
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12614
+property: P136
+property_label: genre
+rationale: Two independent, verified sources explicitly describe Cute Is What We Aim
+  For as a pop-punk band. The band's official Apple Music profile and a music education
+  website both categorize the band under the pop-punk genre, confirming the edit is
+  correct.
+rcid: 2550854257
+revid: 2474177925
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://kentamplinvocalacademy.com/artists-bands/lead/cute-is-what-we-aim-for/
+- provenance: verified
+  supports_claim: true
+  url: https://music.apple.com/us/artist/cute-is-what-we-aim-for/159378970
+timestamp: '2026-04-10T13:09:49.789632+00:00'
+title: Q1146412
+turns: 1
+value_label: pop-punk
+verdict: verified-high

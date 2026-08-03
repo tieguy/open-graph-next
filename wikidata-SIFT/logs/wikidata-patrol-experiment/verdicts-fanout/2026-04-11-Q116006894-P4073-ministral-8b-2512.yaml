@@ -1,0 +1,28 @@
+completion_tokens: 1956
+cost_usd: 0.00371559
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 38687
+property: P4073
+property_label: Fandom wiki ID
+rationale: 'The old Fandom wiki ID (''the-ark.fandom.com/wiki/The_Ark_Wiki'') was
+  incorrect as it linked to a video game wiki (ARK: Survival Evolved) rather than
+  the TV series wiki. The new value (''the-ark'') is a valid shorthand identifier
+  for the TV series wiki, confirmed by the pre-fetched content of the correct wiki
+  page (https://the-ark.fandom.com/wiki/The_Ark_Wiki). The new value aligns with Fandom''s
+  typical wiki ID conventions and is supported by direct evidence from the wiki itself.'
+rcid: 2551298135
+revid: 2474606708
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://the-ark.fandom.com/wiki/The_Ark_Wiki
+- provenance: verified
+  supports_claim: false
+  url: the-ark.fandom.com/wiki/The_Ark_Wiki
+timestamp: '2026-04-11T07:03:59.719148+00:00'
+title: Q116006894
+turns: 4
+value_label: null
+verdict: verified-high

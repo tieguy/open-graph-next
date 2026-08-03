@@ -1,0 +1,28 @@
+completion_tokens: 1402
+cost_usd: 0.0063732
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 27660
+property: P734
+property_label: family name
+rationale: Q704271 ('Daifugō') is the name of a Japanese card game and not a person's
+  family name. All reliable sources consistently list 'Bill' as Max Bill's family
+  name. There is no evidence that Max Bill used 'Daifugō' as a surname.
+rcid: 2550806629
+revid: 2474131480
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.wikidata.org/wiki/Q704271
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/Max_Bill
+- provenance: verified
+  supports_claim: false
+  url: https://www.parlament.ch/de/biografie?CouncillorId=1533
+timestamp: '2026-04-10T11:49:03.637432+00:00'
+title: Q123454
+turns: 1
+value_label: Daifugō
+verdict: incorrect

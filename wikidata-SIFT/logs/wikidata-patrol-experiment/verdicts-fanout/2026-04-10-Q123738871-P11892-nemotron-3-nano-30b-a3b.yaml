@@ -1,0 +1,23 @@
+completion_tokens: 12444
+cost_usd: 0.012213060000000001
+diff_type: value_changed
+finish_status: stop
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 74802
+property: P11892
+property_label: Threads username
+rationale: The official website's curated 'Official Links' page explicitly lists the
+  Threads profile URL as https://www.threads.net/@joshtospace, confirming that the
+  claimed username 'joshtospace' matches the verified official presence of Josh Universe.
+  This primary source directly supports the claim.
+rcid: 2551423057
+revid: 2474724337
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://joshuniverse.com/blog/official-links
+timestamp: '2026-04-10T12:19:32.956057+00:00'
+title: Q123738871
+turns: 3
+value_label: null
+verdict: verified-high

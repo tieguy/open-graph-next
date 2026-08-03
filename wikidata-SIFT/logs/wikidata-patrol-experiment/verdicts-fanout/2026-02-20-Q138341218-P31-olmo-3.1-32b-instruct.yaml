@@ -1,0 +1,23 @@
+completion_tokens: 912
+cost_usd: 0.0037808
+diff_type: reference_added
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 16168
+property: P31
+property_label: instance of
+rationale: The reference provided is Sam Bakker's personal website, which identifies
+  him as a professional individual in technology entrepreneurship. This is consistent
+  with the claim that he is a human (instance of Homo sapiens), but the website does
+  not explicitly state this fact. Therefore, the support is indirect and not explicit.
+rcid: 2540977207
+revid: 2464763921
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://sambakker.com/
+timestamp: '2026-02-20T02:16:07.156756+00:00'
+title: Q138341218
+turns: 3
+value_label: human
+verdict: verified-low

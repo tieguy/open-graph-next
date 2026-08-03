@@ -1,0 +1,28 @@
+completion_tokens: 819
+cost_usd: 0.0085882
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 40484
+property: P2048
+property_label: height
+rationale: No independent, verifiable sources were found that report Daniel Noboa's
+  height, either as 160 cm or 170 cm. The edit cannot be confirmed or refuted based
+  on available evidence.
+rcid: null
+revid: 2470904177
+sources:
+- provenance: reported
+  supports_claim: false
+  url: https://www.google.com/search?q=daniel+noboa+height
+- provenance: reported
+  supports_claim: false
+  url: https://www.bbc.com/search?q=daniel+noboa+height
+- provenance: reported
+  supports_claim: false
+  url: https://www.elpais.com/search/daniel+noboa+height
+timestamp: '2026-04-07T12:27:02.096209+00:00'
+title: Q112075625
+turns: 6
+value_label: null
+verdict: unverifiable

@@ -1,0 +1,25 @@
+completion_tokens: 663
+cost_usd: 0.00475285
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 92405
+property: P570
+property_label: date of death
+rationale: No external sources were found to confirm or refute the 20 January 2026
+  date of death claim for Fernando Primo de Rivera y Sáenz de Heredia, and the wbsetclaim-update
+  edit removed all existing references. Searches across credible historical sources
+  (news, official records, cemetery records, academic publications) returned no verified
+  evidence either supporting or contradicting this future date. Without accessible
+  source evidence, the claim cannot be verified.
+rcid: 2550184703
+revid: 2473528090
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://historia-hispanica.rah.es/biografias/47480
+timestamp: '2026-04-07T06:23:29.117042+00:00'
+title: Q5860087
+turns: 15
+value_label: null
+verdict: unverifiable

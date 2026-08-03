@@ -1,0 +1,23 @@
+completion_tokens: 278
+cost_usd: 0.002432875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 26695
+property: P856
+property_label: official website
+rationale: The new URL provided for the official website of Kudamatsu, https://www.philippineairlines.com,
+  is incorrect as it redirects to the website of Philippine Airlines, which is unrelated
+  to the city. The old URL, https://www.city.kudamatsu.lg.jp, is confirmed to be the
+  correct official website for Kudamatsu.
+rcid: null
+revid: 2471590477
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.kudamatsu.lg.jp/
+timestamp: '2026-04-07T08:38:38.593373+00:00'
+title: Q841316
+turns: 3
+value_label: null
+verdict: incorrect

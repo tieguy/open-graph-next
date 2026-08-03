@@ -1,0 +1,28 @@
+completion_tokens: 1868
+cost_usd: 0.00479609375
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 46177
+property: P18
+property_label: image
+rationale: The edit changes the image associated with the Hennickendorf railway halt
+  but does not provide any references. Independent searches and fetches did not yield
+  conclusive results to confirm the accuracy of the new image.
+rcid: 2550678470
+revid: 2474007554
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://susudata.de/messtisch/openstreetmap.html?lat=52.50815&lng=13.855562&opa=0.25&zoom=17&baselayer=Esri%20WorldImagery&overlays=tk25%2C&marker=
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/old-railway-station-halt.html
+- provenance: verified
+  supports_claim: false
+  url: https://www.alamy.com/stock-photo/small-railway-halt.html
+timestamp: '2026-04-11T13:01:14.183230+00:00'
+title: Q108940548
+turns: 5
+value_label: null
+verdict: unverifiable

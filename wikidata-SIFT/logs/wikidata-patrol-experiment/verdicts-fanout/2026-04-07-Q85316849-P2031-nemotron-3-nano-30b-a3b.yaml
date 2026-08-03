@@ -1,0 +1,20 @@
+completion_tokens: 589
+cost_usd: 0.0036499999999999996
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 70644
+property: P2031
+property_label: start of work period
+rationale: No sources were found supporting or contradicting the claim that Xian's
+  start of work period was in the 2010s, and no references were cited to verify the
+  edit. The investigation failed to locate any verifiable source confirming this updated
+  claim.
+rcid: null
+revid: 2471235233
+sources: []
+timestamp: '2026-04-07T05:55:35.276602+00:00'
+title: Q85316849
+turns: 15
+value_label: null
+verdict: unverifiable

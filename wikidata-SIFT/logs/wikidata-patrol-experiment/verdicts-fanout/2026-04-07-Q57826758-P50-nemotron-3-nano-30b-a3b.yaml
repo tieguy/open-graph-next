@@ -1,0 +1,25 @@
+completion_tokens: 748
+cost_usd: 0.0042065
+diff_type: value_changed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 81138
+property: P50
+property_label: author
+rationale: No independent sources were found to verify or contradict the claim 'Fábio
+  Luiz Vieira' as an author of scholarly work Q57826758. Exhaustive web searches using
+  exact names, institutional affiliations, and contextual phrases yielded no relevant
+  results. The bibliography remains unchanged in the edit record, indicating no supporting
+  references were added. Due to complete absence of corroborating evidence from external
+  sources, the claim's validity cannot be assessed.
+rcid: null
+revid: 2473094550
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://orcid.org/0000-0003-3227-4290
+timestamp: '2026-04-07T07:38:41.985729+00:00'
+title: Q57826758
+turns: 15
+value_label: Fábio Luiz Vieira
+verdict: unverifiable

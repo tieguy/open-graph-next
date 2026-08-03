@@ -1,0 +1,31 @@
+completion_tokens: 1683
+cost_usd: 0.0439847
+diff_type: reference_added
+finish_status: stop
+model: deepseek/deepseek-v3.2
+prompt_tokens: 164395
+property: P571
+property_label: inception
+rationale: The cited reference (https://suchfokus.de) directly contradicts the inception
+  claim of 2025. The official website's 'Über uns' page states 'Alles begann im Jahr
+  2014' (Everything began in 2014) and references 10+ years of experience since 2014/2016.
+  Multiple sections of the website reference operational experience dating back to
+  2014-2016, not 2025. No independent sources corroborate the 2025 date, while the
+  primary source explicitly supports an earlier founding period.
+rcid: 2540974902
+revid: 2464761709
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de/ueber-uns
+- provenance: verified
+  supports_claim: false
+  url: https://suchfokus.de/impressum
+timestamp: '2026-02-20T02:29:06.327082+00:00'
+title: Q138349990
+turns: 13
+value_label: null
+verdict: incorrect

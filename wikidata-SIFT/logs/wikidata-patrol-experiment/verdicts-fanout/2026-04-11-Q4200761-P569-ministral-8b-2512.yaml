@@ -1,0 +1,26 @@
+completion_tokens: 1563
+cost_usd: 0.0020205600000000002
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 18103
+property: P569
+property_label: date of birth
+rationale: The edit changed Ayu Azhari's date of birth from 1968-11-19 to 1966-11-19.
+  Both values are contradicted by verified primary sources (e.g., artisazhari.blogspot.com
+  and grokipedia.com), which explicitly state her birth date as 19 November 1969.
+  No credible evidence supports either the old or new values, making the edit incorrect.
+rcid: 2549792878
+revid: 2473150609
+sources:
+- provenance: verified
+  supports_claim: false
+  url: http://artisazhari.blogspot.com/2009/08/ayu-azhari-profile.html
+- provenance: verified
+  supports_claim: false
+  url: https://grokipedia.com/page/Ayu_Azhari
+timestamp: '2026-04-11T09:08:41.115378+00:00'
+title: Q4200761
+turns: 1
+value_label: null
+verdict: incorrect

@@ -1,0 +1,35 @@
+completion_tokens: 2246
+cost_usd: 0.0043103099999999995
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 32685
+property: P569
+property_label: date of birth
+rationale: The edit corrected an erroneous date of birth for Lucie Aubrac from an
+  impossible value (1678) to a widely corroborated and historically accurate date
+  (June 29, 1912). Multiple verified primary sources (BBC News, Ask Oracle, Sunsigns,
+  Chip Chick) and secondary sources (Wikipedia) consistently confirm the new value.
+  The old value was clearly incorrect based on historical context and biographical
+  consistency, and the new value aligns with authoritative references and independent
+  corroboration.
+rcid: 2551324713
+revid: 2474631988
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://news.bbc.co.uk/2/hi/europe/6452615.stm
+- provenance: verified
+  supports_claim: true
+  url: https://www.ask-oracle.com/birth-chart/lucie-aubrac/
+- provenance: verified
+  supports_claim: true
+  url: https://www.sunsigns.org/famousbirthdays/d/profile/lucie-aubrac/
+- provenance: verified
+  supports_claim: true
+  url: https://www.chipchick.com/2026/03/she-pulled-off-a-daring-rescue-after-her-husband-was-captured-by-nazis-and-put-together-a-plan-involving-deception-and-disguises
+timestamp: '2026-04-11T17:06:28.642010+00:00'
+title: Q437091
+turns: 1
+value_label: null
+verdict: verified-high

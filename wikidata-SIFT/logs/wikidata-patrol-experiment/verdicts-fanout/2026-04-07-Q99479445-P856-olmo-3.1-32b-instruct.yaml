@@ -1,0 +1,27 @@
+completion_tokens: 1134
+cost_usd: 0.007483
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 34013
+property: P856
+property_label: official website
+rationale: The BELIFT LAB artist profile page does not explicitly designate http://belift.com/enhypen
+  as the official website of Enhypen. Independent verification attempts for the new
+  URL and the referenced Weverse URL did not yield authoritative confirmation that
+  http://belift.com/enhypen is the official website. The claim cannot be confirmed
+  or denied based on available evidence.
+rcid: 2550299956
+revid: 2473639870
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://beliftlab.com/artist/profile/ENHYPEN
+- provenance: reported
+  supports_claim: false
+  url: https://enhypen-jp.weverse.io/
+timestamp: '2026-04-07T11:20:04.215994+00:00'
+title: Q99479445
+turns: 3
+value_label: null
+verdict: unverifiable

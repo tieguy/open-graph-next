@@ -1,0 +1,27 @@
+completion_tokens: 834
+cost_usd: 0.009547449999999999
+diff_type: statement_removed
+finish_status: max_turns
+model: nvidia/nemotron-3-nano-30b-a3b
+prompt_tokens: 187613
+property: P1343
+property_label: described by source
+rationale: Investigation of the cited Süddeutsche Zeitung reference revealed no content
+  actually discussing the 'described by source' property for Corona Rebellen. Social
+  media evidence shows the SZ article merely mentions Corona Rebellen Freising as
+  part of a broader analysis of Querdenken groups, without attributing any institutional
+  role or 'description by source' to Corona Rebellen as a distinct organization. The
+  claim that Corona Rebellen was 'described by source' in SZ is unsupported. While
+  the removal relates to an external reference that appears in social media contexts,
+  the cited source does not verify the claim's content or institutional designation.
+rcid: 2551215866
+revid: 2474528857
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.sueddeutsche.de/muenchen/freising/freising-querdenker-telegram-afd-politiker-1.5145111
+timestamp: '2026-04-07T06:31:59.793465+00:00'
+title: Q107646877
+turns: 15
+value_label: Süddeutsche Zeitung
+verdict: suspect

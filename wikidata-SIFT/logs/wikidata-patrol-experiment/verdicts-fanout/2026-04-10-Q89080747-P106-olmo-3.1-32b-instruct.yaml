@@ -1,0 +1,26 @@
+completion_tokens: 1064
+cost_usd: 0.0031624
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 12620
+property: P106
+property_label: occupation
+rationale: Multiple verified sports databases and news sources describe Elias Hadaya
+  solely as a football goalkeeper. There is no evidence from independent or primary
+  sources indicating he is a dancer. The change to 'dancer' is therefore unsupported
+  and incorrect.
+rcid: 2549662661
+revid: 2473022935
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.fotmob.com/players/1049254/elias-hadaya
+- provenance: verified
+  supports_claim: false
+  url: https://www.transfermarkt.us/elias-hadaya/profil/spieler/272542
+timestamp: '2026-04-10T09:33:43.888897+00:00'
+title: Q89080747
+turns: 1
+value_label: dancer
+verdict: incorrect

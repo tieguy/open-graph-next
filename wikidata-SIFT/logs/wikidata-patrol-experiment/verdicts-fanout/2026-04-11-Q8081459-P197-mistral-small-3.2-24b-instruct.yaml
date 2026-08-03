@@ -1,0 +1,35 @@
+completion_tokens: 2155
+cost_usd: 0.00182316875
+diff_type: value_changed
+finish_status: stop
+model: mistralai/mistral-small-3.2-24b-instruct
+prompt_tokens: 15632
+property: P197
+property_label: adjacent station
+rationale: The primary source, Wikipedia, lists Ōfunato Fish Market Station, Jinomori
+  Station, and Sakari Station as adjacent stations to Ōfunato Station. Shimofunato
+  Station is not listed as an adjacent station. Therefore, the edit to change the
+  adjacent station from "Sakari Station" to "Shimofunato Station" appears to be incorrect.
+rcid: 2550465639
+revid: 2473802083
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://en.wikipedia.org/wiki/%C5%8Cfunato_Station
+- provenance: verified
+  supports_claim: false
+  url: https://www.jreast.co.jp/e/timeline/
+- provenance: verified
+  supports_claim: false
+  url: https://mapcarta.com/16568734
+- provenance: verified
+  supports_claim: false
+  url: https://www.rome2rio.com/s/Tokyo/%C5%8Cfunato
+- provenance: verified
+  supports_claim: false
+  url: https://www.tripadvisor.com/HotelsNear-g1022870-d4489108-Shimofunato_Station-Ofunato_Iwate_Prefecture_Tohoku.html
+timestamp: '2026-04-11T09:02:06.864458+00:00'
+title: Q8081459
+turns: 1
+value_label: Shimofunato Station
+verdict: incorrect

@@ -1,0 +1,29 @@
+completion_tokens: 1982
+cost_usd: 0.00223821
+diff_type: value_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 19135
+property: P39
+property_label: position held
+rationale: The edit incorrectly changed Wilhelm von Havelberg's position from an unsupported
+  'auxiliary bishop' claim (linked to Würzburg) to 'Roman Catholic Bishop of Havelberg'.
+  Primary sources (Catholic-Hierarchy.org and GCatholic.org) confirm Wilhelm von Havelberg
+  was the Bishop of Havelberg (1219–1244), not an auxiliary bishop. The old value
+  was unsupported and the qualifier (Würzburg) was historically inaccurate. The removal
+  of the incorrect claim was justified, but the edit should have retained the correct
+  historical position with proper references.
+rcid: 2550967044
+revid: 2474286671
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://www.catholic-hierarchy.org/bishop/bhavew.html
+- provenance: verified
+  supports_claim: true
+  url: https://www.gcatholic.org/diocese/dh522.html
+timestamp: '2026-04-11T18:35:44.155990+00:00'
+title: Q2575901
+turns: 1
+value_label: Roman Catholic Bishop of Havelberg
+verdict: incorrect

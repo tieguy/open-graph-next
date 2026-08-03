@@ -1,0 +1,29 @@
+completion_tokens: 2018
+cost_usd: 0.0043232
+diff_type: value_changed
+finish_status: stop
+model: allenai/olmo-3.1-32b-instruct
+prompt_tokens: 15562
+property: P159
+property_label: headquarters location
+rationale: Authoritative sources, including the company's official website and reputable
+  business databases, confirm that Minth Group Limited's headquarters is located in
+  Taipei, Taiwan. No credible evidence supports the previous value of 'Nanhu District.'
+  The change is therefore correct and well-supported.
+rcid: 2551282660
+revid: 2474591784
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pitchbook.com/profiles/company/11809-72
+- provenance: verified
+  supports_claim: true
+  url: https://www.marklines.com/en/top500/minth-group
+- provenance: verified
+  supports_claim: true
+  url: http://www.minthgroup.com/
+timestamp: '2026-04-11T13:58:43.481106+00:00'
+title: Q19599200
+turns: 1
+value_label: Taipei
+verdict: verified-high

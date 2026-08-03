@@ -1,0 +1,30 @@
+completion_tokens: 1516
+cost_usd: 0.00467427
+diff_type: statement_removed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 47131
+property: P856
+property_label: official website
+rationale: The removed URL 'http://www.city.himeji.hyogo.jp/art/' was not found in
+  any verified sources. The current official website URLs, 'https://www.city.himeji.lg.jp/art/'
+  and 'https://www.city.himeji.lg.jp/art/0000007420.html', were confirmed as the official
+  websites through verified sources. The removal of the outdated URL was correct and
+  justified.
+rcid: 2550661952
+revid: 2473991546
+sources:
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.himeji.lg.jp/art/
+- provenance: verified
+  supports_claim: false
+  url: https://www.city.himeji.lg.jp/art/0000007420.html
+- provenance: verified
+  supports_claim: false
+  url: https://visit-himeji.com/en/sightseeing/himeji-city-museum-of-art/
+timestamp: '2026-04-10T13:01:56.807765+00:00'
+title: Q11447532
+turns: 3
+value_label: null
+verdict: verified-high

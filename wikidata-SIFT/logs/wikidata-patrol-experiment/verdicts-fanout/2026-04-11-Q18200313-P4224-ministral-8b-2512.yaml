@@ -1,0 +1,31 @@
+completion_tokens: 1907
+cost_usd: 0.00227508
+diff_type: qualifier_changed
+finish_status: stop
+model: mistralai/ministral-8b-2512
+prompt_tokens: 25907
+property: P4224
+property_label: category contains
+rationale: The category 'Pepperdine Waves men's volleyball coaches' logically contains
+  humans, as coaches are humans by definition. The prefetched sources confirm the
+  coaching staff consists of humans, and the addition of the qualifier P6087 does
+  not invalidate the core claim. The claim is well-supported by the verified sources,
+  which explicitly list individuals as coaches, thereby confirming the category's
+  membership of humans.
+rcid: 2551396812
+revid: 2474700968
+sources:
+- provenance: verified
+  supports_claim: true
+  url: https://pepperdinewaves.com/sports/mens-volleyball/coaches
+- provenance: verified
+  supports_claim: true
+  url: https://pepperdinewaves.com/staff-directory/jonathan-winder/32
+- provenance: verified
+  supports_claim: true
+  url: https://www.pepperdine.edu/magazine/fall-2017/david-hunt-named-head-coach-waves-mens-volleyball.htm
+timestamp: '2026-04-11T14:19:50.563616+00:00'
+title: Q18200313
+turns: 3
+value_label: human
+verdict: verified-high
