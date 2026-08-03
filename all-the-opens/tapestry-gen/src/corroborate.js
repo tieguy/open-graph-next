@@ -157,3 +157,25 @@ export function describedThesisArchiveId(claims) {
   const id = claims?.P724?.[0]?.mainsnak?.datavalue?.value
   return typeof id === 'string' && id.trim() ? id.trim() : null
 }
+
+/**
+ * The best name a Wikidata item offers, or null.
+ *
+ * Archival records carry short-form titles — the Internet Archive files
+ * Prandtl's thesis as "Kipp-Erscheinungen", dropping the subtitle printed on its
+ * title page — so once an item has a label, the item names the work better than
+ * the scan does. English first because these pages are English; then any
+ * language, because a name in a language you don't read still beats a truncation.
+ */
+export function preferredLabel(labels) {
+  const value = (l) => (typeof l?.value === 'string' && l.value.trim() ? l.value.trim() : null)
+  for (const lang of ['en', 'de']) {
+    const v = value(labels?.[lang])
+    if (v) return v
+  }
+  for (const l of Object.values(labels ?? {})) {
+    const v = value(l)
+    if (v) return v
+  }
+  return null
+}

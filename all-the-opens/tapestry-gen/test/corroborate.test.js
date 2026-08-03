@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import {
   corroborate,
   describedThesisArchiveId,
+  preferredLabel,
   matchesName,
   sameYear,
   sameInstitution,
@@ -134,4 +135,29 @@ test('an empty or malformed id is not an identifier', () => {
   // losing an item the corroborated path would have found.
   assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: { datavalue: { value: '  ' } } }] }), null)
   assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: {} }] }), null)
+})
+
+// --- naming the work from the Wikidata side ---------------------------------
+
+// Archival records hold a short-form title: the Internet Archive calls Prandtl's
+// thesis "Kipp-Erscheinungen", dropping the subtitle the title page carries.
+// Once the item has a label, the item is the better name.
+
+test('an English label is preferred for an English page', () => {
+  const labels = { en: { value: 'Kipp-Erscheinungen : ein Fall…' }, de: { value: 'German' } }
+  assert.equal(preferredLabel(labels), 'Kipp-Erscheinungen : ein Fall…')
+})
+
+test('the work’s own language is next when there is no English label', () => {
+  assert.equal(preferredLabel({ de: { value: 'Kipp-Erscheinungen' } }), 'Kipp-Erscheinungen')
+})
+
+test('any label beats none — a Catalan cataloguer still named the thing', () => {
+  assert.equal(preferredLabel({ ca: { value: 'Tesi' } }), 'Tesi')
+})
+
+test('no usable label leaves the archive record to supply the name', () => {
+  assert.equal(preferredLabel({}), null)
+  assert.equal(preferredLabel(undefined), null)
+  assert.equal(preferredLabel({ en: { value: '   ' } }), null)
 })

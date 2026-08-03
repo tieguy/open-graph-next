@@ -38,7 +38,7 @@ import {
   sectionCitations,
   templateParams,
 } from './src/citations.js'
-import { corroborate, describedThesisArchiveId } from './src/corroborate.js'
+import { corroborate, describedThesisArchiveId, preferredLabel } from './src/corroborate.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
 import { buildHtml, iconUrls } from './src/emit-html.js'
@@ -163,11 +163,15 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
   const thesisQid = subjectClaims.P1026?.[0]?.mainsnak?.datavalue?.value?.id
   if (!thesisQid || !personName) return null
 
+  // Labels come along in the same request as the claims. They are what lets the
+  // pivot name the work from the Wikidata side rather than from whatever the
+  // holding archive happened to file it under.
   const body = await getJson(
     'https://www.wikidata.org/w/api.php?action=wbgetentities&format=json&formatversion=2' +
-      `&ids=${thesisQid}&props=claims`,
+      `&ids=${thesisQid}&props=claims|labels`,
   )
   const claims = body.entities?.[thesisQid]?.claims ?? {}
+  const label = preferredLabel(body.entities?.[thesisQid]?.labels)
 
   // If Wikidata now says which scan this is, take it and stop. Corroboration is
   // what you do when nobody has written the identifier down; continuing to guess
@@ -179,7 +183,7 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
     if (meta.title) {
       return {
         source: 'internet_archive',
-        title: meta.title,
+        title: label ?? meta.title,
         description: [meta.type_of_work ?? 'Thesis', meta.institution, yearText(meta.date)]
           .filter(Boolean)
           .join(' · '),
@@ -222,7 +226,7 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
     if (!matched) continue
     return {
       source: 'internet_archive',
-      title: meta.title ?? doc.title,
+      title: label ?? meta.title ?? doc.title,
       description: [meta.type_of_work ?? 'Thesis', meta.institution, yearText(doc.date)]
         .filter(Boolean)
         .join(' · '),
