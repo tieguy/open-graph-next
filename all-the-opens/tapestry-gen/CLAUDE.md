@@ -87,6 +87,27 @@ and labels at 50 per request. Pivots run concurrently across hosts over the
 per-host serial queue. Cold Prandtl: 33.6s/72 requests before, 9.0s/39 after;
 warm reruns are 100% offline.
 
+## Partner pivots (2026-08-03)
+
+Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
+
+- **Scholarly** (`src/scholarly.js`) — citation anchors carrying a DOI or PMID
+  batch through **OpenAlex** (no key; `mailto` carries the operator contact);
+  a card exists only when the work is genuinely open. **arXiv** citations are
+  open by construction and become cards with zero requests. Subject-level:
+  ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
+  OpenLibrary author pivot.
+- **Statements** (`src/statements.js`) — one WDQS query per page answers every
+  anchor's partner statements: Met objects (P3634), Art Institute of Chicago
+  (P4610), iNaturalist taxa (P3151), GBIF occurrence maps (P846), and P625
+  coordinates → OpenStreetMap map cards (one per section max; non-Earth
+  globes are refused — Tranquility Base gets no map of the Atlantic). The
+  subject's own statements enrich the lede.
+
+Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
+OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
+card with no visual is just a link, and links are already inline).
+
 ## Pipeline (output-agnostic core → renderer)
 
 `dataset` → `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox

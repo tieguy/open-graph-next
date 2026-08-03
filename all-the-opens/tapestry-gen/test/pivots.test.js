@@ -1,0 +1,125 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+
+import { arxivEntry, openAlexEntry, openAlexUrl, scholarlyIdentifiers } from '../src/scholarly.js'
+import {
+  aicEntryFrom,
+  gbifEntryFrom,
+  inatEntryFrom,
+  mapEntry,
+  metEntryFrom,
+  parseEarthPoint,
+  wdqsUrl,
+} from '../src/statements.js'
+
+// ---- scholarly ----------------------------------------------------------
+
+test('scholarlyIdentifiers reads doi, pmid, and both arXiv spellings', () => {
+  const wikitext = `
+    <ref>{{cite journal |title=Paper A |doi=10.1000/abc |pmid=123}}</ref>
+    <ref>{{cite arXiv |title=Paper B |arxiv=1706.03762}}</ref>
+    <ref>{{cite arXiv |title=Paper C |eprint=2001.00001}}</ref>
+    <ref>{{cite journal |title=Old arXiv styling |doi=10.48550/arXiv.1508.06576}}</ref>
+    <ref>{{cite web |title=No identifiers |url=https://example.test}}</ref>
+    <ref>{{cite journal |title=Paper A again |doi=10.1000/abc}}</ref>`
+  const found = scholarlyIdentifiers(wikitext)
+  assert.deepEqual(
+    found.map((c) => [c.title, c.doi, c.pmid, c.arxiv]),
+    [
+      ['Paper A', '10.1000/abc', '123', null],
+      ['Paper B', null, null, '1706.03762'],
+      ['Paper C', null, null, '2001.00001'],
+      // An arXiv DOI is folded into the arxiv field: open by construction.
+      ['Old arXiv styling', null, null, '1508.06576'],
+    ],
+  )
+})
+
+test('openAlexEntry only exists when the work is actually open', () => {
+  const open = openAlexEntry(
+    {
+      title: 'T',
+      publication_year: 2020,
+      open_access: { is_oa: true, oa_status: 'gold', oa_url: 'https://x.test/pdf' },
+      authorships: [{ author: { display_name: 'A. Author' } }, { author: { display_name: 'B' } }],
+    },
+    'doi',
+  )
+  assert.equal(open.href, 'https://x.test/pdf')
+  assert.equal(open.description, 'A. Author et al. · 2020')
+  assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
+  assert.equal(openAlexEntry({ title: 'oa but no url', open_access: { is_oa: true } }, 'doi'), null)
+})
+
+test('an arXiv citation becomes an entry with zero lookups', () => {
+  const e = arxivEntry({ title: 'Attention Is All You Need', arxiv: '1706.03762' })
+  assert.equal(e.href, 'https://arxiv.org/abs/1706.03762')
+  assert.equal(e.source, 'arxiv')
+})
+
+test('openAlexUrl batches values and carries the polite mailto', () => {
+  const url = openAlexUrl('doi', ['10.1/a', '10.2/b'], 'op@example.test')
+  assert.match(url, /filter=doi%3A10\.1%2Fa%7C10\.2%2Fb/)
+  assert.match(url, /mailto=op%40example\.test/)
+})
+
+// ---- statements ---------------------------------------------------------
+
+test('wdqsUrl asks for every partner property over the anchor set', () => {
+  const url = wdqsUrl(['Q1', 'Q2'])
+  for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625']) assert.ok(url.includes(p), p)
+  assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
+})
+
+test('parseEarthPoint reads Earth points and refuses other globes', () => {
+  assert.deepEqual(parseEarthPoint('Point(-80.649 28.573)'), { lon: -80.649, lat: 28.573 })
+  // Tranquility Base is real, but OpenStreetMap has not surveyed the Moon.
+  assert.equal(parseEarthPoint('<http://www.wikidata.org/entity/Q405> Point(23.47 0.67)'), null)
+  assert.equal(parseEarthPoint(undefined), null)
+})
+
+test('partner entries carry image, link, and the property that made them', () => {
+  const met = metEntryFrom({
+    title: 'Washington Crossing the Delaware',
+    artistDisplayName: 'Emanuel Leutze',
+    objectDate: '1851',
+    primaryImageSmall: 'https://images.metmuseum.org/x.jpg',
+    objectURL: 'https://www.metmuseum.org/art/collection/search/11417',
+    isPublicDomain: true,
+  })
+  assert.equal(met._via, 'P3634')
+  assert.match(met.attribution.author, /public domain/)
+
+  const aic = aicEntryFrom({
+    data: { id: 6565, title: 'American Gothic', artist_display: 'Grant Wood (American)\nx', date_display: '1930', image_id: 'img-1', is_public_domain: false },
+    config: { iiif_url: 'https://www.artic.edu/iiif/2' },
+  })
+  assert.equal(aic.imageUrl, 'https://www.artic.edu/iiif/2/img-1/full/400,/0/default.jpg')
+  assert.equal(aic.description, 'Grant Wood (American) · 1930')
+
+  const inat = inatEntryFrom({
+    id: 48662,
+    name: 'Danaus plexippus',
+    preferred_common_name: 'Monarch',
+    observations_count: 500000,
+    default_photo: { medium_url: 'https://inat.test/p.jpg', attribution: '(c) Someone, CC BY' },
+  })
+  assert.equal(inat.title, 'Monarch (Danaus plexippus)')
+  assert.match(inat.description, /500,000 community observations/)
+
+  const gbif = gbifEntryFrom({ scientificName: 'Danaus plexippus (Linnaeus, 1758)', canonicalName: 'Danaus plexippus' }, 5133088)
+  assert.match(gbif.imageUrl, /taxonKey=5133088/)
+  assert.match(gbif.title, /Where Danaus plexippus has been recorded/)
+
+  const map = mapEntry({ lat: 28.5729, lon: -80.649 }, 'Kennedy Space Center')
+  assert.match(map.imageUrl, /osm-intl,8,28\.5729,-80\.6490/)
+  assert.match(map.href, /openstreetmap\.org/)
+  assert.equal(map.title, 'Map: Kennedy Space Center')
+})
+
+test('entries with no image still render as named cards (no fabricated visuals)', () => {
+  assert.equal(metEntryFrom({ title: 'No image', primaryImageSmall: '' }).imageUrl, null)
+  assert.equal(metEntryFrom(null), null)
+  assert.equal(inatEntryFrom({ name: 'X' }).imageUrl, null)
+  assert.equal(gbifEntryFrom(null, 1), null)
+})

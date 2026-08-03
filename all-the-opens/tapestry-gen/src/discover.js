@@ -16,11 +16,6 @@
 // assembly runs as one task per unit, so a band waits only on its own
 // dependencies: its Commons lookups, the article-global identifier batches,
 // and — for the lede alone — the subject-level pivots.
-import { mkdir, readFile, writeFile } from 'node:fs/promises'
-import { createHash } from 'node:crypto'
-import { join } from 'node:path'
-import { fileURLToPath } from 'node:url'
-
 import {
   articleBlocks,
   fetchArticle,
@@ -42,17 +37,12 @@ import {
 } from './citations.js'
 import { chunk, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
-import { cachedRequest, enqueue } from './mw.js'
-import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
+import { cachedRequest } from './mw.js'
+import { CACHE, coverDataUri, getJson } from './http.js'
 import { authorWorkEntries } from './works.js'
+import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
+import { entityStatements, statementEntries } from './statements.js'
 
-const HERE = fileURLToPath(new URL('.', import.meta.url))
-export const CACHE = join(HERE, '..', '.cache')
-// Defined once for the whole repo, and refuses to build without a contact —
-// see src/wmf.js. Set WIKIMEDIA_UA_CONTACT to your own address. Lazy so that
-// importing this module never demands the env var — first network use does.
-let _ua
-const UA = () => (_ua ??= userAgent('tapestry-gen'))
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
 // caps and says what it dropped rather than pretending it covered everything.
@@ -66,6 +56,11 @@ const BROAD_ANCHOR = Number(process.env.BROAD_ANCHOR ?? 40)
 // rather than "what did this section cite?", so they land in the lede.
 const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
 const CATEGORY_FILES = Number(process.env.CATEGORY_FILES ?? 6)
+const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
+const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
+// OpenAlex's `mailto` politeness parameter carries the same operator contact
+// as the Wikimedia User-Agent: whoever runs this answers for its traffic.
+const CONTACT = () => process.env.WIKIMEDIA_UA_CONTACT
 
 const SKIP =
   /^(see also|references|notes|citations|sources|bibliography|further reading|external links|works cited|primary sources)$/i
@@ -75,57 +70,6 @@ const SKIP =
 // the article puts its bibliography there instead of a {{reflist}}.
 const BIBLIOGRAPHY = /^(sources|bibliography|works cited|primary sources|references|notes|citations)$/i
 
-/**
- * Every non-MediaWiki network call is disk-cached, so reruns are offline and
- * reproducible, and rides the same per-host queue as everything else — serial
- * at each API, concurrent across them.
- *
- * The timeout is not optional: a bare `fetch` has none, and one stalled
- * archive.org connection hung an entire run indefinitely. A source that goes
- * quiet must cost one slot, not the whole page.
- */
-async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {}) {
-  const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
-  const path = join(CACHE, `spike-${key}.json`)
-  try {
-    return JSON.parse(await readFile(path, 'utf8'))
-  } catch {
-    /* not cached */
-  }
-  const body = await enqueue(new URL(url).host, async () => {
-    let lastError
-    for (let attempt = 1; attempt <= tries; attempt++) {
-      // Only ever paid on a cache miss, and only by sources that ask for it.
-      if (throttleMs) await new Promise((r) => setTimeout(r, throttleMs))
-      const control = new AbortController()
-      const timer = setTimeout(() => control.abort(), timeoutMs)
-      try {
-        const res = await fetch(withMaxlag(url), {
-          headers: { 'User-Agent': UA(), 'Accept-Encoding': 'gzip' },
-          signal: control.signal,
-        })
-        if (!res.ok) {
-          // A 404 is our bad identifier, not the server's bad day: retrying it
-          // spends someone else's capacity to get the same answer twice.
-          if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
-          const wait = retryAfterMs(res.headers)
-          if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
-          throw new Error(`${res.status} ${res.statusText}`)
-        }
-        return await res.json()
-      } catch (e) {
-        lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
-        if (e.permanent) break
-      } finally {
-        clearTimeout(timer)
-      }
-    }
-    throw lastError
-  })
-  await mkdir(CACHE, { recursive: true })
-  await writeFile(path, JSON.stringify(body))
-  return body
-}
 
 /** A Wikidata Action API request through the shared cache and host queue. */
 function wikidata(params) {
@@ -286,37 +230,6 @@ async function openLibraryVolumes(isbns) {
   return volumes
 }
 
-/**
- * A cover fetched and base64'd, so the page does not depend on the archive.org
- * redirect OpenLibrary covers resolve through. Null when there is no cover —
- * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and
- * a broken image in the rail is worse than no image.
- */
-export async function coverDataUri(url, { minBytes = 1024 } = {}) {
-  const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
-  const path = join(CACHE, `datauri-${key}.txt`)
-  try {
-    const cached = await readFile(path, 'utf8')
-    return cached || null
-  } catch {
-    /* not fetched yet */
-  }
-  const uri = await enqueue(new URL(url).host, async () => {
-    try {
-      const res = await fetch(url, { headers: { 'User-Agent': UA() }, signal: AbortSignal.timeout(15000) })
-      if (!res.ok) return ''
-      const bytes = Buffer.from(await res.arrayBuffer())
-      // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
-      // favicon is legitimately smaller, so callers can lower it.
-      return bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
-    } catch {
-      return ''
-    }
-  })
-  await mkdir(CACHE, { recursive: true })
-  await writeFile(path, uri)
-  return uri || null
-}
 
 /**
  * A section's cited works as the rail shows them: ranked by how openly a reader
@@ -643,7 +556,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
   if (bibliography.size) console.error(`bibliography: ${bibliography.size} identified works`)
 
   // ---- Everything the pivots need, extracted locally before any of them run.
-  const stats = { commons: 0, ia: 0, anchorsQid: 0, anchorsCite: 0, viaShortCite: 0, sections: 0 }
+  const stats = {
+    commons: 0,
+    ia: 0,
+    scholar: 0,
+    statements: 0,
+    anchorsQid: 0,
+    anchorsCite: 0,
+    anchorsScholar: 0,
+    viaShortCite: 0,
+    sections: 0,
+  }
   const units = []
   for (const s of [{ index: '0', title: page }, ...sections]) {
     const html = sliceSectionHtml(article.html, article.sections, s.index) ?? ''
@@ -667,14 +590,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
       0,
       CITES_PER_SECTION,
     )
+    const scholarly = scholarlyIdentifiers(wikitext).slice(0, SCHOLARLY_PER_SECTION)
     stats.anchorsCite += identified.length
     stats.viaShortCite += identified.filter((c) => shortCites.includes(c)).length
+    stats.anchorsScholar += scholarly.length
     units.push({
       index: s.index,
       title: s.title,
       blocks,
       railCandidates,
       identified,
+      scholarly,
       linkCandidates: proseLinks(html).slice(0, 24),
     })
   }
@@ -688,15 +614,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // subject's own claims — a case citation, a thesis, an author identifier —
   // enrich only the lede, so nothing about them may sit ahead of the spine.
   const subjectPromise = (async () => {
-    const subjectQid = (await fetchQids(CACHE, [page])).get(page)
-    if (!subjectQid) return {}
+    const qid = (await fetchQids(CACHE, [page])).get(page)
+    if (!qid) return { qid: null, claims: {} }
     try {
-      const claimsBody = await wikidata({ action: 'wbgetentities', ids: subjectQid, props: 'claims' })
-      return claimsBody.entities?.[subjectQid]?.claims ?? {}
+      const claimsBody = await wikidata({ action: 'wbgetentities', ids: qid, props: 'claims' })
+      return { qid, claims: claimsBody.entities?.[qid]?.claims ?? {} }
     } catch (e) {
       // Cosmetic: the whole-page identifiers are optional enrichment.
       console.error(`  subject claims failed: ${e.message}`)
-      return {}
+      return { qid, claims: {} }
     }
   })()
 
@@ -728,13 +654,27 @@ export async function discover(page, { emit = async () => {} } = {}) {
     'openlibrary volumes',
     openLibraryVolumes(units.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean)),
   )
-  const ledeExtrasPromise = subjectPromise.then(async (subjectClaims) => {
+  const scholarPromise = timed(
+    'openalex batch',
+    openAlexLookups(units.flatMap((u) => u.scholarly), { contact: CONTACT() }),
+  )
+  // Partner statements for every anchor on the page — and the subject itself,
+  // whose statements (a museum ID on an artwork article, a taxon ID on a
+  // species article, coordinates on a place) belong to the lede.
+  const statementsPromise = timed(
+    'wdqs statements',
+    Promise.all([pickedPromise, subjectPromise]).then(([picked, subject]) =>
+      entityStatements([...[...picked.values()].flat(), subject.qid]),
+    ),
+  )
+  const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
     const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
     const categoryName = subjectClaims.P373?.[0]?.mainsnak?.datavalue?.value
-    const [thesis, works, categoryFiles] = await Promise.all([
+    const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
+    const [thesis, works, categoryFiles, scholarship] = await Promise.all([
       // The thesis pivot can spend eight serial archive.org requests, and it
       // enriches only the lede — so it waits for the identifier batches that
       // every band needs before taking its turn on that host's queue.
@@ -754,6 +694,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
             return []
           })
         : Promise.resolve([]),
+      typeof orcid === 'string'
+        ? openAlexAuthorWorks(orcid, { contact: CONTACT(), cap: WORKS_BY_SUBJECT }).catch((e) => {
+            console.error(`  openalex author works failed: ${e.message}`)
+            return { entries: [], total: 0 }
+          })
+        : Promise.resolve({ entries: [], total: 0 }),
     ])
     if (thesis)
       console.error(
@@ -765,8 +711,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
       )
     if (works.entries.length)
       console.error(`works by subject: ${works.entries.length} of ${works.total}`)
+    if (scholarship.entries.length)
+      console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
     if (categoryFiles.length) console.error(`commons category: ${categoryFiles.length} files`)
-    return { opinion, thesis, works, categoryFiles }
+    return { opinion, thesis, works, categoryFiles, scholarship, subjectQid }
   })
 
   // ---- One task per unit: a band completes when ITS dependencies do. -------
@@ -787,10 +735,13 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // section with no book citations must not stall behind OpenLibrary, nor a
     // section with no identifiers behind archive.org. That is what lets the
     // early rails stream while the slow batches are still answering.
-    const [iaHits, volumes, labels] = await Promise.all([
+    const picked = (await pickedPromise).get(unit)
+    const [iaHits, volumes, labels, scholarHits, statements] = await Promise.all([
       unit.identified.length ? iaPromise : new Map(),
       unit.railCandidates.some((c) => c.isbn) ? volumesPromise : new Map(),
-      breadth.length ? labelsPromise : new Map(),
+      breadth.length || picked.length ? labelsPromise : new Map(),
+      unit.scholarly.length ? scholarPromise : new Map(),
+      picked.length || unit.index === '0' ? statementsPromise : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
@@ -798,7 +749,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
-    if (extras) entries.push(...extras.works.entries, ...extras.categoryFiles)
+    if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries, ...extras.categoryFiles)
 
     // Citation anchors -> Internet Archive. No entity resolution in front.
     for (const cite of unit.identified) {
@@ -809,8 +760,40 @@ export async function discover(page, { emit = async () => {} } = {}) {
       }
     }
 
+    // Citation anchors -> open-access scholarship (OpenAlex / arXiv).
+    for (const cite of unit.scholarly) {
+      const hit = scholarHits.get(cite)
+      if (hit) {
+        entries.push(hit)
+        stats.scholar++
+      }
+    }
+
     // Wikilink anchors -> QID -> Commons.
     entries.push(...commonsEntries)
+
+    // Anchored entities' partner statements: museum objects, taxa,
+    // occurrence maps, place maps. The subject's own statements belong to the
+    // lede; one map per section, or every place-heavy section becomes
+    // wallpaper. Statement entries are capped like every other budget here.
+    const statementQids = unit.index === '0' && extras?.subjectQid ? [extras.subjectQid, ...picked] : picked
+    let mapsLeft = 1
+    let statementsLeft = STATEMENTS_PER_SECTION
+    for (const qid of statementQids) {
+      if (statementsLeft <= 0) break
+      const stmts = statements.get(qid)
+      if (!stmts) continue
+      const label =
+        unit.index === '0' && qid === extras?.subjectQid ? unit.title : (labels.get(qid) ?? null)
+      const found = (await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0 })).slice(
+        0,
+        statementsLeft,
+      )
+      if (found.some((e) => e._via === 'P625')) mapsLeft--
+      statementsLeft -= found.length
+      entries.push(...found)
+      stats.statements += found.length
+    }
 
     const { shown: cites, coverage } = await railCitations(unit.railCandidates, volumes)
 
@@ -821,6 +804,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
       subjectNotes.push(
         `${extras.works.entries.length} of ${extras.works.total} work${extras.works.total === 1 ? '' : 's'} by the subject, ` +
           'via its OpenLibrary author identifier',
+      )
+    if (extras?.scholarship.entries.length)
+      subjectNotes.push(
+        `${extras.scholarship.entries.length} of ${extras.scholarship.total} scholarly works by the subject, ` +
+          'via its ORCID',
       )
     if (extras?.categoryFiles.length)
       subjectNotes.push(`${extras.categoryFiles.length} files from the subject's own Commons category`)

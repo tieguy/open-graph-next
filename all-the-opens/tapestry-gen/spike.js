@@ -11,7 +11,8 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
-import { coverDataUri, discover } from './src/discover.js'
+import { discover } from './src/discover.js'
+import { coverDataUri } from './src/http.js'
 import { requestTally } from './src/mw.js'
 import { userAgent } from './src/wmf.js'
 import { buildHtml, iconUrls } from './src/emit-html.js'
@@ -89,8 +90,9 @@ async function main() {
   const tally = [...requestTally.entries()].map(([h, n]) => `${h}:${n}`).join(' ')
   console.error(
     `\n${page}: ${stats.sections} sections, ${stats.anchorsCite} citation anchors ` +
-      `(${stats.viaShortCite} via the bibliography), ` +
-      `${stats.anchorsQid} entity anchors -> ${stats.ia} IA + ${stats.commons} Commons items` +
+      `(${stats.viaShortCite} via the bibliography), ${stats.anchorsScholar} scholarly anchors, ` +
+      `${stats.anchorsQid} entity anchors -> ${stats.ia} IA + ${stats.scholar} open papers + ` +
+      `${stats.commons} Commons + ${stats.statements} partner-statement items` +
       (opinion ? ' + 1 Free Law opinion' : '') +
       (dropped > 0 ? ` (${dropped} sections dropped by MAX_SECTIONS)` : ''),
   )

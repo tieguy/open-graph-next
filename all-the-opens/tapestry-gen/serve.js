@@ -15,7 +15,8 @@
  */
 import { createServer } from 'node:http'
 
-import { coverDataUri, discover } from './src/discover.js'
+import { discover } from './src/discover.js'
+import { coverDataUri } from './src/http.js'
 import { userAgent } from './src/wmf.js'
 import {
   iconUrls,
@@ -65,7 +66,8 @@ follows as each source answers.</p>
 <form onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
 <input name="q" placeholder="Article title, e.g. Ludwig Prandtl" autofocus></form>
 <p><a href="/wiki/Apollo_11">Apollo 11</a> · <a href="/wiki/Brown_v._Board_of_Education">Brown v. Board</a>
- · <a href="/wiki/Ludwig_Prandtl">Ludwig Prandtl</a></p>
+ · <a href="/wiki/Ludwig_Prandtl">Ludwig Prandtl</a> · <a href="/wiki/Monarch_butterfly">Monarch butterfly</a>
+ · <a href="/wiki/American_Gothic">American Gothic</a> · <a href="/wiki/CRISPR_gene_editing">CRISPR</a></p>
 </body></html>`
 
 // Each discovery fans out dozens of upstream requests (politely — the

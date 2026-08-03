@@ -22,6 +22,10 @@ const SOURCE = {
   free_law: { name: 'Free Law Project', icon: 'https://www.courtlistener.com/favicon.ico' },
   inaturalist: { name: 'iNaturalist', icon: 'https://www.inaturalist.org/favicon.ico' },
   gbif: { name: 'GBIF', icon: 'https://www.gbif.org/favicon.ico' },
+  openalex: { name: 'OpenAlex', icon: 'https://openalex.org/favicon.ico' },
+  arxiv: { name: 'arXiv', icon: 'https://arxiv.org/favicon.ico' },
+  met: { name: 'The Met', icon: 'https://www.metmuseum.org/favicon.ico' },
+  artic: { name: 'Art Institute of Chicago', icon: 'https://www.artic.edu/favicon.ico' },
 }
 
 const CITATION_KIND = {
@@ -129,9 +133,14 @@ function card(entry, inline) {
           )
           .join('')}</ul>`
       : ''
+  // A card with an href is an open door, and the whole card says so: the
+  // title links out. Cards without one (most Commons media) stay as they were.
+  const heading = entry.href
+    ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
+    : `<h4>${escapeHtml(entry.title)}</h4>`
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
-    `<h4>${escapeHtml(entry.title)}</h4>` +
+    heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
     credit +
@@ -484,6 +493,8 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card figcaption{padding-top:8px;font-family:var(--sans)}
 .card h4{font-family:var(--serif);font-size:.95rem;line-height:1.22;margin:0 0 4px;color:var(--head);font-weight:600;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card h4 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
+.card h4 a:hover{color:var(--link);border-bottom-color:var(--link)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
