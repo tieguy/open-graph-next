@@ -35,11 +35,66 @@ const iaEmbed = (source) => {
   return m ? `https://archive.org/embed/${m[1]}` : null
 }
 
-function sourceTag(source) {
-  const meta = SOURCE[source] ?? { name: source.replace(/_/g, ' '), icon: null }
-  const icon = meta.icon ? `<img class="fav" src="${meta.icon}" alt="" loading="lazy">` : ''
-  return `<span class="src">${icon}${escapeHtml(meta.name)}</span>`
+/**
+ * A source's icon as an inlined data: URI, or nothing.
+ *
+ * Never a live hotlink. Two of these sites refuse them — CourtListener answers
+ * 403, GBIF varies by referrer — so a page built on live URLs shows broken
+ * images for exactly the sources a reader is least likely to recognise by name.
+ * The generator fetches what it can into `inline`; whatever failed renders as a
+ * named entry with no picture, which is the honest degradation.
+ */
+function favicon(slug, inline) {
+  const url = SOURCE[slug]?.icon
+  // A class, never the bytes: Apollo 11 has ~100 carousels, and inlining the
+  // data URI at each one added 242 KB of the same few images repeated. The
+  // bytes go in the stylesheet once (see faviconStyle) and every use is a
+  // 30-byte class reference.
+  return url && inline.has(url) ? `<span class="fav fav-${slug}" aria-hidden="true"></span>` : ''
 }
+
+/** Each used icon's bytes, exactly once, as background-image rules. */
+function faviconStyle(slugs, inline) {
+  const rules = slugs
+    .map((s) => [s, inline.get(SOURCE[s]?.icon)])
+    .filter(([, data]) => data)
+    .map(([s, data]) => `.fav-${s}{background-image:url("${data}")}`)
+  return rules.length ? `\n${rules.join('\n')}\n` : ''
+}
+
+function sourceTag(source, inline = new Map()) {
+  const meta = SOURCE[source] ?? { name: source.replace(/_/g, ' '), icon: null }
+  return `<span class="src">${favicon(source, inline)}${escapeHtml(meta.name)}</span>`
+}
+
+// A citation is a link, not an item, so it carries no source slug — but a page
+// that sends the reader to OpenLibrary twenty times is using OpenLibrary, and a
+// legend that omits it is describing the carousels rather than the page.
+const CITED_HOST = [
+  [/(^|\.)openlibrary\.org/, 'openlibrary'],
+  [/(^|\.)archive\.org/, 'internet_archive'],
+  [/(^|\.)courtlistener\.com/, 'free_law'],
+]
+
+/** The source slugs this page actually shows, in the order SOURCE declares them. */
+export function sourcesUsed(bands) {
+  const seen = new Set()
+  for (const b of bands ?? []) {
+    for (const e of b.entries ?? []) if (e.source) seen.add(e.source)
+    for (const c of b.citations ?? []) {
+      if (c.source) seen.add(c.source)
+      for (const url of [c.href, c.cover]) {
+        if (!url) continue
+        const host = URL.canParse?.(url) ? new URL(url).hostname : null
+        if (host) for (const [re, slug] of CITED_HOST) if (re.test(host)) seen.add(slug)
+      }
+    }
+  }
+  return Object.keys(SOURCE).filter((s) => seen.has(s))
+}
+
+/** Every icon URL a page will need, so the generator can prefetch them. */
+export const iconUrls = () => Object.values(SOURCE).map((m) => m.icon).filter(Boolean)
 
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
@@ -91,7 +146,7 @@ function carousel(source, items, inline) {
   // Only badge the count when there is more than one — "1" in the corner is noise.
   const count = items.length > 1 ? `<span class="count">${items.length}</span>` : ''
   return (
-    `<div class="carousel"><div class="carousel-head">${sourceTag(source)}${count}</div>` +
+    `<div class="carousel"><div class="carousel-head">${sourceTag(source, inline)}${count}</div>` +
     `<div class="carousel-track">${items.map((e) => card(e, inline)).join('')}</div></div>`
   )
 }
@@ -159,15 +214,32 @@ function band(b, eyebrow, inline) {
 // `inline` maps a fragile image URL (OpenLibrary covers, which redirect through
 // archive.org) to a pre-fetched data: URI, so those covers render without a live
 // dependency on the Internet Archive being up.
-export function buildHtml({ title, description, bands, inline = new Map(), provenance = '' }) {
+export function buildHtml({ title, description, bands, inline = new Map(), provenance = '', home = '' }) {
   let n = 0
   const body = bands
     .map((b) => (b.blocks ? band(b, b.id === 'slede' ? 'lede' : `§${++n}`, inline) : band(b, 'aside', inline)))
     .join('\n')
 
-  const legend = Object.values(SOURCE)
-    .map((m) => `<span class="key"><img class="fav" src="${m.icon}" alt="" loading="lazy">${escapeHtml(m.name)}</span>`)
+  const used = sourcesUsed(bands)
+  const legend = used
+    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
+
+  // Where a rail draws four files out of hundreds, the four are arbitrary and the
+  // page used to say so on every single anchor — eight times on a five-section
+  // article, which reads as hedging rather than as disclosure. The ratio already
+  // carries it; the rule is stated once here instead.
+  // The note states the rule; the argument about it lives on the index, and is
+  // only linked when a caller says where that index is. A page opened straight
+  // off disk has no site around it, so an unconditional link would dangle.
+  const discussion = home
+    ? ` Challenges to layout and selection are discussed on the
+       <a href="${escapeHtml(home)}#hard-problems">main page</a>.`
+    : ''
+  const drawNote = bands.some((b) => b.broad)
+    ? `<p class="draw-note">Where a rail shows <i>4 of 182</i>, the four are an arbitrary draw from
+       the whole set.${discussion}</p>`
+    : ''
 
   // Explain the one visual distinction that carries an argument, and only when
   // the page actually uses it — a key to a style nothing on the page has is
@@ -188,7 +260,7 @@ export function buildHtml({ title, description, bands, inline = new Map(), prove
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
 <style>
-${STYLE}
+${STYLE}${faviconStyle(used, inline)}
 </style>
 </head>
 <body>
@@ -196,10 +268,10 @@ ${STYLE}
   <p class="kicker">Rabbit Hole Browser · a rendering experiment</p>
   <h1>${escapeHtml(title)}</h1>
   <p class="lede">${escapeHtml(description)}</p>
-  <p class="thesis">Nothing here is placed by hand. Each item sits where the article’s own
-    <b>wikilinks</b>, resolved through <b>Wikidata</b> identifiers, put it — the article on the
-    left, the open ecosystem’s media and the sources it cites in the margin beside it.</p>
+  <p class="thesis">The article runs down the left; the open ecosystem’s media and the sources it
+    cites sit in the margin beside it. <b>Nothing here is placed by hand.</b></p>
   <div class="legend">${legend}</div>
+  ${drawNote}
   ${evidenceKey}
 </header>
 <main>
@@ -239,7 +311,7 @@ img{max-width:100%;display:block}
 .legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--muted);
   border-top:1px solid var(--rule);padding-top:22px}
 .key{display:inline-flex;align-items:center;gap:8px}
-.fav{width:16px;height:16px;object-fit:contain;flex:none;border-radius:2px;background:#fff}
+.fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;background-size:contain;display:inline-block}
 
 main{max-width:1180px;margin:0 auto;padding:0 40px}
 .band{padding:52px 0;border-top:1px solid var(--rule)}
@@ -289,6 +361,8 @@ main{max-width:1180px;margin:0 auto;padding:0 40px}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
+.draw-note{font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
+.draw-note i{color:var(--ink);font-style:normal;font-weight:600}
 .evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
 .evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
 .coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}

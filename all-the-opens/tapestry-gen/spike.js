@@ -41,7 +41,7 @@ import {
 import { corroborate, describedThesisArchiveId } from './src/corroborate.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
-import { buildHtml } from './src/emit-html.js'
+import { buildHtml, iconUrls } from './src/emit-html.js'
 import { escapeHtml } from './src/emit.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -257,7 +257,7 @@ async function openLibraryVolume(isbn) {
  * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and
  * a broken image in the rail is worse than no image.
  */
-async function coverDataUri(url) {
+async function coverDataUri(url, { minBytes = 1024 } = {}) {
   const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
   const path = join(CACHE, `datauri-${key}.txt`)
   try {
@@ -270,8 +270,9 @@ async function coverDataUri(url) {
     const res = await fetch(url, { headers: { 'User-Agent': UA }, signal: AbortSignal.timeout(15000) })
     if (!res.ok) return null
     const bytes = Buffer.from(await res.arrayBuffer())
-    // A placeholder, not a cover.
-    const uri = bytes.length < 1024 ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
+    // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
+    // favicon is legitimately smaller, so callers can lower it.
+    const uri = bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
     await mkdir(CACHE, { recursive: true })
     await writeFile(path, uri)
     return uri || null
@@ -747,8 +748,7 @@ async function main() {
             (b) =>
               b.totalhits == null
                 ? `${labels.get(b.qid) ?? b.qid} (${b.shown} shown, total unknown)`
-                : `${labels.get(b.qid) ?? b.qid} (${b.shown} of ${b.totalhits.toLocaleString()}` +
-                  `${b.totalhits > BROAD_ANCHOR ? ', arbitrarily selected' : ''})`,
+                : `${labels.get(b.qid) ?? b.qid} (${b.shown} of ${b.totalhits.toLocaleString()})`,
           )
           .join('; ')
       : null
@@ -762,6 +762,10 @@ async function main() {
       citations: cites,
       coverage: coverageText(coverage),
       disclosure: fullDisclosure,
+      // Set when any anchor here drew from more than BROAD_ANCHOR candidates.
+      // The renderer states what that means once per page rather than appending
+      // "arbitrarily selected" to every ratio.
+      broad: breadth.some((b) => b.totalhits > BROAD_ANCHOR),
     })
     console.error(`§ ${unit.title} — ${entries.length} items`)
   }
@@ -784,6 +788,17 @@ async function main() {
     }
   }
 
+  // Source icons travel too, and for a sharper reason than the covers: several
+  // of these sites refuse cross-origin hotlinks outright (CourtListener answers
+  // 403), so a live <img> is a guaranteed broken image for the sources readers
+  // are least likely to recognise unaided. Only the icons this page will show
+  // are fetched, and anything that fails simply renders as a name.
+  for (const url of iconUrls()) {
+    if (inline.has(url)) continue
+    const uri = await coverDataUri(url, { minBytes: 64 })
+    if (uri) inline.set(url, uri)
+  }
+
   const html = buildHtml({
     title: page,
     description:
@@ -795,6 +810,10 @@ async function main() {
     // The page opens by saying it used no curated dataset; the footer has to
     // agree with it. No timestamp — a rerun off the same cache must produce the
     // same bytes.
+    // Where the index that discusses these trade-offs is published. Overridable
+    // because anyone can run this; unset it and the page simply states the rule
+    // without pointing anywhere, which is right for a file opened off disk.
+    home: process.env.SITE_HOME ?? 'https://all-the-opens.netlify.app/',
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.replace(/ /g, '_'))}">` +

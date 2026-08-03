@@ -24,7 +24,7 @@ import {
 } from '../src/layout.js'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { attributionLine, buildTapestry, escapeHtml, placementNote } from '../src/emit.js'
-import { buildHtml } from '../src/emit-html.js'
+import { buildHtml, sourcesUsed } from '../src/emit-html.js'
 
 test('zip round-trips through an external unzip', () => {
   const payload = JSON.stringify({ version: 7, hello: 'wörld — ünicode' })
@@ -716,4 +716,50 @@ test('a page with no stated provenance claims none', () => {
   const html = buildHtml({ title: 'T', description: 'd', bands: [] })
   assert.doesNotMatch(html, /Generated from/)
   assert.match(html, /CC BY-SA 4\.0/, 'the licence line survives — it is true of every page')
+})
+
+// --- the legend describes this page, not the project ------------------------
+
+// Same rule as the corroborated key: a legend entry for something the page does
+// not contain is noise, and it implies a reach the page did not have. It also
+// happens to be where the broken icons were — sources this page never used.
+
+test('the legend names only the sources the page actually shows', () => {
+  const bands = [
+    {
+      id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }],
+      entries: [{ id: 'x', title: 'X', source: 'internet_archive' }],
+    },
+  ]
+  const html = buildHtml({ title: 'T', description: 'd', bands })
+  assert.match(html, /Internet Archive/)
+  assert.doesNotMatch(html, /GBIF/, 'nothing on this page came from GBIF')
+  assert.doesNotMatch(html, /iNaturalist/)
+  assert.doesNotMatch(html, /Free Law Project/)
+})
+
+test('a source with no fetchable icon still gets a legend entry, without a broken image', () => {
+  // CourtListener returns 403 to anyone hotlinking its favicon. A named entry
+  // with no picture beats an entry with a picture that will not load.
+  const bands = [
+    {
+      id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }],
+      entries: [{ id: 'x', title: 'X', source: 'free_law' }],
+    },
+  ]
+  const html = buildHtml({ title: 'T', description: 'd', bands, inline: new Map() })
+  assert.match(html, /Free Law Project/)
+  assert.doesNotMatch(html, /courtlistener\.com\/favicon/, 'no live hotlink that 403s')
+})
+
+test('a source reached only through citation links still makes the legend', () => {
+  // Citations carry no source slug — they are links. Apollo 11 points at
+  // OpenLibrary twenty times and would otherwise vanish from its own legend.
+  const bands = [
+    {
+      id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }],
+      citations: [{ title: 'Book', kind: 'book', href: 'https://openlibrary.org/books/OL1M' }],
+    },
+  ]
+  assert.deepEqual(sourcesUsed(bands), ['openlibrary'])
 })
