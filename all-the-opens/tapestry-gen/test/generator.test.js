@@ -24,6 +24,7 @@ import {
 } from '../src/layout.js'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { attributionLine, buildTapestry, escapeHtml, placementNote } from '../src/emit.js'
+import { buildHtml } from '../src/emit-html.js'
 
 test('zip round-trips through an external unzip', () => {
   const payload = JSON.stringify({ version: 7, hello: 'wörld — ünicode' })
@@ -693,4 +694,26 @@ test('an overview title aligns with the top of its band', () => {
     const overview = out.items.find((i) => i.id === `overview-${band.id}`)
     assert.equal(overview.position.y, band.y)
   }
+})
+
+// --- footer provenance -------------------------------------------------------
+
+// The page opens by claiming it used no curated dataset. A footer that names one
+// contradicts the page's own argument, so provenance is the caller's to state.
+
+test('the footer states the provenance its caller gives it', () => {
+  const html = buildHtml({
+    title: 'T',
+    description: 'd',
+    bands: [],
+    provenance: 'Generated from <code>somewhere/else/</code>.',
+  })
+  assert.match(html, /Generated from <code>somewhere\/else\/<\/code>\./)
+  assert.doesNotMatch(html, /web-demo\/data\/apollo-11/)
+})
+
+test('a page with no stated provenance claims none', () => {
+  const html = buildHtml({ title: 'T', description: 'd', bands: [] })
+  assert.doesNotMatch(html, /Generated from/)
+  assert.match(html, /CC BY-SA 4\.0/, 'the licence line survives — it is true of every page')
 })

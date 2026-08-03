@@ -159,7 +159,7 @@ function band(b, eyebrow, inline) {
 // `inline` maps a fragile image URL (OpenLibrary covers, which redirect through
 // archive.org) to a pre-fetched data: URI, so those covers render without a live
 // dependency on the Internet Archive being up.
-export function buildHtml({ title, description, bands, inline = new Map() }) {
+export function buildHtml({ title, description, bands, inline = new Map(), provenance = '' }) {
   let n = 0
   const body = bands
     .map((b) => (b.blocks ? band(b, b.id === 'slede' ? 'lede' : `§${++n}`, inline) : band(b, 'aside', inline)))
@@ -204,7 +204,7 @@ ${STYLE}
 ${body}
 </main>
 <footer class="foot">
-  <p>Generated from <code>web-demo/data/apollo-11/</code>. Article text CC BY-SA 4.0;
+  <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
   media under their own licences, shown on each item.</p>
 </footer>
 </body>

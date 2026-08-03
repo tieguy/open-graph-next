@@ -1,0 +1,25 @@
+# Publishes all-the-opens as a static site, matching the auto-deploy-from-main
+# pattern used by the other Netlify sites (see Self/remote-systems/SYSTEMS.md).
+#
+# No `base` is set on purpose: with a base directory, Netlify resolves `publish`
+# relative to it, which is a well-worn source of "page not found" deploys. Both
+# paths here are repo-relative and mean exactly what they say. `site/build.js`
+# resolves its own location, so the working directory does not matter.
+#
+# The build only copies committed files — no network, no npm install, no
+# generator run. Regenerating a render is a deliberate local act (it calls
+# Wikimedia and the Internet Archive); the result is committed and this just
+# ships it.
+
+[build]
+  command = "node all-the-opens/site/build.js"
+  publish = "all-the-opens/_site"
+
+[build.environment]
+  NODE_VERSION = "22"
+
+# The renders are large single files and change only when regenerated.
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=0, must-revalidate"

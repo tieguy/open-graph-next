@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>All the Opens — the article, enriched</title>
+<meta name="description" content="Wikipedia articles rendered with the open ecosystem's media and sources placed by the article's own identifiers. Nothing placed by hand.">
+<style>
+:root{
+  --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#0b0d0f; --muted:#54595d;
+  --rule:#d5d8dc; --faint:#eceef0; --link:#3366cc;
+  --gold:#c9a227; --gold-bg:#fffdf5; --gold-ink:#8a6d1f;
+  --serif:Charter,"Bitstream Charter","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,"SF Mono",Menlo,Consolas,"Liberation Mono",monospace;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
+  font-size:19px;line-height:1.7;text-rendering:optimizeLegibility}
+a{color:var(--link)}
+a:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:3px;border-radius:2px}
+img{max-width:100%;display:block}
+
+/* Every authority identifier on this page is set in mono and every human
+   sentence in serif, so you can see at a glance which claims a machine can
+   check and which ones I am asserting. */
+code,.id{font-family:var(--mono);font-size:.82em;background:var(--faint);
+  padding:1px 5px;border-radius:3px;color:#3a3f45}
+
+.wrap{max-width:1000px;margin:0 auto;padding:0 40px}
+.hero{padding:96px 0 8px}
+.kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--muted);margin:0 0 28px}
+h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
+  margin:0 0 24px;color:var(--head);font-weight:600}
+.lede{font-size:clamp(1.15rem,2vw,1.5rem);line-height:1.5;max-width:34ch;margin:0 0 24px;color:#333}
+.thesis{font-family:var(--sans);font-size:1rem;line-height:1.65;max-width:62ch;color:var(--muted);margin:0 0 8px}
+.thesis b{color:var(--ink);font-weight:600}
+
+h2{font-size:clamp(1.5rem,2.6vw,2.1rem);line-height:1.15;letter-spacing:-.01em;
+  margin:0 0 10px;color:var(--head);font-weight:600}
+.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--muted);display:block;margin-bottom:8px}
+section{padding:56px 0;border-top:1px solid var(--rule);margin-top:56px}
+section > p{max-width:60ch}
+
+/* --- the signature: one join, shown the way the page shows it -------------- */
+.join{background:var(--gold-bg);border:1px dashed var(--gold);border-radius:6px;
+  padding:28px 30px;margin:40px 0 0;max-width:760px}
+.join-kind{font-family:var(--sans);font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--gold-ink);font-weight:600;margin:0 0 14px}
+.join h3{font-family:var(--serif);font-size:1.3rem;line-height:1.25;margin:0 0 4px;color:var(--head);font-weight:600}
+.join .sub{font-family:var(--sans);font-size:.8rem;color:var(--muted);margin:0 0 20px}
+.join dl{display:grid;grid-template-columns:max-content 1fr;gap:10px 22px;margin:0 0 18px;
+  font-family:var(--mono);font-size:.8rem;line-height:1.45}
+.join dt{font-family:var(--sans);font-size:.6rem;letter-spacing:.08em;text-transform:uppercase;
+  color:#a0a4a9;align-self:center}
+.join dd{margin:0;color:#4a4f55;display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 10px}
+.join .agrees{color:var(--gold-ink);font-family:var(--sans);font-size:.72rem;flex:none}
+.join .why{font-family:var(--sans);font-size:.82rem;line-height:1.6;color:var(--muted);
+  margin:0;padding-top:16px;border-top:1px dotted var(--gold)}
+
+/* --- fixtures ------------------------------------------------------------- */
+.renders{list-style:none;margin:36px 0 0;padding:0;display:grid;gap:2px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+.renders li{background:var(--paper)}
+.renders a.render{display:grid;grid-template-columns:1fr auto;gap:6px 28px;align-items:baseline;
+  padding:22px 26px;text-decoration:none;color:inherit}
+.renders a.render:hover{background:#fbfcfd}
+.renders a.render:hover .name{text-decoration:underline;text-decoration-color:var(--link)}
+.name{font-size:1.22rem;font-weight:600;color:var(--link);line-height:1.25}
+.tests{font-family:var(--sans);font-size:.82rem;color:var(--muted);grid-column:1;max-width:52ch}
+.ledger{grid-column:2;grid-row:1/span 2;font-family:var(--mono);font-size:.7rem;line-height:1.7;
+  color:#7a7f85;text-align:right;white-space:nowrap}
+.ledger b{color:#4a4f55;font-weight:600}
+
+.note{font-family:var(--sans);font-size:.86rem;line-height:1.65;color:var(--muted);max-width:62ch}
+.limits{font-family:var(--sans);font-size:.92rem;line-height:1.7;color:var(--muted);
+  max-width:64ch;margin:20px 0 0;padding:0;list-style:none}
+.limits li{padding:0 0 14px 20px;position:relative}
+.limits li::before{content:"—";position:absolute;left:0;color:#a0a4a9}
+.limits b{color:var(--ink);font-weight:600}
+
+footer{padding:44px 0 72px;border-top:1px solid var(--rule);margin-top:56px;
+  font-family:var(--sans);font-size:.8rem;line-height:1.7;color:var(--muted)}
+
+@media(max-width:820px){
+  .wrap{padding:0 26px}
+  .hero{padding:64px 0 4px}
+  .renders a.render{grid-template-columns:1fr}
+  .ledger{grid-column:1;grid-row:auto;text-align:left;white-space:normal;padding-top:6px}
+  .join dl{grid-template-columns:1fr;gap:14px}
+  .join dt{margin-bottom:-8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="hero">
+  <p class="kicker">All the Opens · Rabbit Hole Browser</p>
+  <h1>The article, enriched</h1>
+  <p class="lede">The open knowledge ecosystem is already connected. Almost nothing shows you the connections.</p>
+  <p class="thesis">These pages take an English Wikipedia article and render it with the open
+    ecosystem's media and cited sources placed beside the prose — Internet Archive scans,
+    Commons files, OpenLibrary editions, court opinions. <b>Nothing is placed by hand.</b>
+    Every item was found by an identifier the article itself states: a citation's ISBN, OCLC or
+    LCCN, or a wikilink's Wikidata QID. There is no per-article code and, on the three pages
+    below, no curated dataset.</p>
+</header>
+
+<section>
+  <span class="eyebrow">The hard case</span>
+  <h2>An edge with no identifier on either side</h2>
+  <p>Ludwig Prandtl's 1899 dissertation is scanned and public at the Internet Archive. It carries no
+    ISBN, no OCLC, no LCCN. Wikidata knows of it only as <span class="id">Q72419729</span> — an item
+    with an author, a date and an institution, and <b>no label in any language</b>. Nothing is shared
+    between the two records to join on.</p>
+  <p>So the match is made on the object Wikidata <em>describes</em> (<span class="id">P1026</span>),
+    and the page shows its work:</p>
+
+  <div class="join">
+    <p class="join-kind">Corroborated — no shared identifier</p>
+    <h3>Kipp-Erscheinungen</h3>
+    <p class="sub">archive.org/details/<span class="id">IA41548318_0126</span></p>
+    <dl>
+      <dt>creator</dt>
+      <dd>Prandtl, Ludwig <span class="agrees">agrees with</span> Ludwig Prandtl</dd>
+      <dt>date</dt>
+      <dd>14 November 1899 <span class="agrees">agrees with</span> 1899</dd>
+      <dt>institution</dt>
+      <dd>Ludwigs-Maximilians-Universität zu München <span class="agrees">agrees with</span> Ludwig-Maximilians-Universität München</dd>
+    </dl>
+    <p class="why">All three signals are required, because the same collection holds theses by
+      Ludwig, Hans and Antonius Prandtl. The card is dashed and says <em>corroborated, not
+      identified</em>, because a description that agrees is a weaker claim than an identifier that
+      matches, and it must not be allowed to read like one.</p>
+  </div>
+</section>
+
+<section>
+  <span class="eyebrow">Generated live · no dataset</span>
+  <h2>Three articles</h2>
+  <p>Each was chosen to break the pipeline in a different way. The counts are from the run that
+    produced the linked page.</p>
+
+  <ul class="renders">
+    <li><a class="render" href="./apollo-11.html">
+      <span class="name">Apollo 11</span>
+      <span class="tests">An event, media-rich, and the citation style that hides the books:
+        57 of its 65 citation anchors are <span class="id">{{sfn}}</span> pointers into a
+        bibliography, invisible to anything that reads footnotes alone.</span>
+      <span class="ledger"><b>36</b> sections<br><b>130</b> anchors<br><b>17</b> IA · <b>191</b> Commons</span>
+    </a></li>
+    <li><a class="render" href="./brown-v-board-of-education.html">
+      <span class="name">Brown v. Board of Education</span>
+      <span class="tests">A legal document, cited inline, where the primary source is neither a
+        book nor a picture — the full opinion comes from the Free Law Project.</span>
+      <span class="ledger"><b>17</b> sections<br><b>54</b> anchors<br><b>10</b> IA · <b>55</b> Commons · <b>1</b> opinion</span>
+    </a></li>
+    <li><a class="render" href="./ludwig-prandtl.html">
+      <span class="name">Ludwig Prandtl</span>
+      <span class="tests">A person with a thin article, no bibliography, and the dissertation
+        above — reachable only by description. The page that proves the corroborated class exists.</span>
+      <span class="ledger"><b>5</b> sections<br><b>18</b> anchors<br><b>2</b> IA · <b>38</b> Commons</span>
+    </a></li>
+  </ul>
+  <p class="note">Each page is one self-contained HTML file, generated ahead of time — Apollo 11 is
+    905&nbsp;KB and takes a few minutes to build, most of it spent waiting politely on other
+    people's servers.</p>
+</section>
+
+<section>
+  <span class="eyebrow">Earlier · one curated dataset</span>
+  <h2>Two renderings of Apollo 11</h2>
+  <p>Before the live pipeline, the same argument ran on a hand-curated Apollo 11 dataset spanning
+    eight sources. Both of these read from that dataset, not from Wikipedia.</p>
+  <ul class="renders">
+    <li><a class="render" href="./curated-apollo-11.html">
+      <span class="name">Apollo 11, from the dataset</span>
+      <span class="tests">The same enriched-article render, fed by curated items instead of
+        discovery. The layout the live pages inherited.</span>
+    </a></li>
+    <li><a class="render" href="./graph/">
+      <span class="name">The connection graph</span>
+      <span class="tests">The first prototype: a force-directed graph of the same items, where
+        edge thickness is how many authority systems back the connection.</span>
+    </a></li>
+  </ul>
+</section>
+
+<section>
+  <span class="eyebrow">Honesty</span>
+  <h2>What this does not do</h2>
+  <ul class="limits">
+    <li><b>You can't type an article in.</b> These four pages are pre-generated. Making it live
+      needs streaming and a server, and that decision hasn't been made.</li>
+    <li><b>Coverage is the real bottleneck, not extraction.</b> Of the unique identifiers cited
+      across these articles, most reach no Internet Archive record at all. The query is right; the
+      answer is genuinely nothing. That is a fact about the ecosystem, not a bug in the pipeline —
+      so each section states how many of its sources you can actually open, and a section of dead
+      ends says so rather than just looking thin.</li>
+    <li><b>Where an article states no identifier, nothing appears.</b> There is no fuzzy title
+      search filling the gaps, because a guess presented beside a verified match would poison
+      every match on the page.</li>
+  </ul>
+</section>
+
+<footer>
+  <p>Source: <a href="https://github.com/tieguy/open-graph-next">github.com/tieguy/open-graph-next</a>
+  · Code CC0. Article text CC BY-SA 4.0; media under their own licences, shown on each item.</p>
+  <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>
+  about cooperative knowledge infrastructure.</p>
+</footer>
+
+</div>
+</body>
+</html>

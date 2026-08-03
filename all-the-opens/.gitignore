@@ -7,6 +7,9 @@
 # Tapestry rendering experiment — vendored viewer + generated .tapestry/.html build outputs
 /tapestry/
 
+# Publishable site, assembled from committed renders by site/build.js
+/_site/
+
 # Chainlink issue tracker
 .chainlink
 

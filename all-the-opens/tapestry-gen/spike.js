@@ -42,6 +42,7 @@ import { corroborate } from './src/corroborate.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './src/wmf.js'
 import { authorWorkEntries } from './src/works.js'
 import { buildHtml } from './src/emit-html.js'
+import { escapeHtml } from './src/emit.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const CACHE = join(HERE, '.cache')
@@ -761,6 +762,13 @@ async function main() {
       "wikilink's Wikidata QID. Each item sits in the section of the anchor that found it.",
     bands,
     inline,
+    // The page opens by saying it used no curated dataset; the footer has to
+    // agree with it. No timestamp — a rerun off the same cache must produce the
+    // same bytes.
+    provenance:
+      `Discovered live from the English Wikipedia article ` +
+      `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.replace(/ /g, '_'))}">` +
+      `${escapeHtml(page)}</a> — no curated dataset.`,
   })
   await mkdir(dirname(out), { recursive: true })
   await writeFile(out, html)

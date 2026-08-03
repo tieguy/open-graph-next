@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-07-28
+Last verified: 2026-08-02
 
 ## Purpose
 
@@ -77,6 +77,11 @@ Tapestry `layout`/`emit`/`zip`).
 - Pipeline modules never assume an output format; the renderer is the only
   format-specific layer.
 - Every rendered image is sized from real dimensions (API or header), not a guess.
+- **The footer's provenance is the caller's to state**, via `buildHtml({provenance})`.
+  It was once hardcoded to the curated dataset, which made every live-discovery
+  page contradict its own opening claim. Whatever goes there must be true of the
+  run that produced the file, and must not include a timestamp — reruns off the
+  same cache are byte-identical, and that is how a regeneration is verified.
 
 ## Wikimedia compliance (required)
 

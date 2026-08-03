@@ -404,6 +404,7 @@ async function main() {
         'resolved through Wikidata identifiers, with the open ecosystem’s media in place.',
       bands,
       inline,
+      provenance: 'Generated from <code>web-demo/data/apollo-11/</code>.',
     }),
   )
   console.log(`wrote ${HTML_OUT}`)

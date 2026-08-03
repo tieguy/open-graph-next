@@ -1,6 +1,6 @@
 # Jenifesto - Rabbit Hole Browser
 
-Last verified: 2026-07-25
+Last verified: 2026-08-02
 
 ## Purpose
 
@@ -26,7 +26,11 @@ renderings of the same data:
 
 - `python -m http.server 8000 -d web-demo` — serve the D3 demo.
 - `cd tapestry-gen && npm run generate` — build the HTML render (and a `.tapestry`).
+- `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Article Title"` —
+  build a live-discovery render.
 - `cd tapestry-gen && npm test` — run the generator's test suite.
+- `node site/build.js` — assemble the publishable site into `_site/`.
+- `python3 -m http.server 8000 -d _site` — preview it.
 - Open `tapestry-gen/demo/apollo-11.html` in a browser (self-contained).
 
 ## Project Structure
@@ -39,6 +43,10 @@ renderings of the same data:
   generated `.tapestry` artifacts. An interesting experiment set aside in favour
   of the HTML render; the generator still emits `.tapestry` but it lives here.
 - `extension/` — Firefox browser extension.
+- `site/` — the published index (`index.html`) and `build.js`, which assembles
+  `_site/` (gitignored) from the committed renders plus a copy of `web-demo/`.
+  The renders keep their generated names on disk; `build.js` maps them to the
+  URLs a reader should see, so `spike-` never appears in a published path.
 - `docs/design-plans/` — design documentation.
 
 ## Data Contracts
