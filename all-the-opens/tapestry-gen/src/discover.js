@@ -31,7 +31,6 @@ import {
   bibliographyIdentifiers,
   citationCoverage,
   coverageText,
-  openLibraryAccess,
   resolveShortCites,
   sectionCitations,
   templateParams,
@@ -222,9 +221,11 @@ const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null
  * far fewer of them. Each hit is wrapped in the volumes/brief record shape so
  * `openLibraryAccess` reads both eras' caches identically.
  *
- * Returns `{volumes, unchecked}`: failed groups get one delayed second pass, and ISBNs that still fail are reported as unchecked rather than silently absent.
+ * Returns `{volumes, unchecked}`: failed groups get one delayed second pass, and
+ * ISBNs that still fail are reported as unchecked rather than silently absent.
  *
- * @returns {{volumes: Map<string, object>, unchecked: Set<string>}} isbn → `{records}` value, and ISBNs whose batch failed
+ * @returns {{volumes: Map<string, object>, unchecked: Set<string>}} isbn →
+ * `{records}` value, and ISBNs whose batch failed
  */
 async function openLibraryVolumes(isbns) {
   const volumes = new Map()
