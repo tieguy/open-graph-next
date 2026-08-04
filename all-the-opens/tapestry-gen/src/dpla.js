@@ -79,9 +79,21 @@ export async function dplaEntries(lcId, anchorLabel, key) {
   if (!heading) return null
   const body = await getJson(dplaUrl(heading, key))
   const docs = body.docs ?? []
-  return {
-    heading,
-    total: body.count ?? docs.length,
-    entries: docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean),
-  }
+  const entries = uniqueEntries(docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean))
+  return { heading, total: body.count ?? docs.length, entries }
+}
+
+/**
+ * Multi-part records (an interview's reels, a scrapbook's pages) come back as
+ * near-identical docs; one shelf showing the same title twice reads as a bug,
+ * so only the first of each title-per-holder is kept.
+ */
+export function uniqueEntries(entries) {
+  const seen = new Set()
+  return entries.filter((e) => {
+    const k = `${e.title}|${e.description}`
+    if (seen.has(k)) return false
+    seen.add(k)
+    return true
+  })
 }

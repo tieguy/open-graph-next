@@ -263,17 +263,24 @@ function citationCoverage(candidates, volumes) {
 
 /**
  * The coverage line, phrased so an absence reads as a fact about the ecosystem
- * rather than as a thin section. Says nothing when there is nothing to say.
+ * rather than as a thin section — and so every bucket says where it points:
+ * "readable" means the Internet Archive links on the notes above, "catalogue"
+ * means OpenLibrary knows the book but holds no scan, and works we add nothing
+ * to are said to be exactly that. Says nothing when there is nothing to say.
  */
 function coverageText({ total, open, catalogued, linked }) {
   if (!total) return null
-  const parts = [`${total} work${total === 1 ? '' : 's'} cited here`]
-  if (open) parts.push(`${open} readable or borrowable`)
-  if (catalogued) parts.push(`${catalogued} catalogued but not scanned`)
-  if (linked) parts.push(`${linked} linked only`)
+  const parts = []
+  if (open)
+    parts.push(`${open} readable or borrowable at the Internet Archive — the links on the notes above`)
+  if (catalogued)
+    parts.push(`${catalogued} in OpenLibrary’s catalogue, but with no scan to open yet`)
+  if (linked)
+    parts.push(`${linked} with no open copy — the citation’s own links are all there is`)
   const unreached = total - open - catalogued - linked
-  if (unreached > 0) parts.push(`${unreached} the open ecosystem does not hold`)
-  return parts.join(' · ')
+  if (unreached > 0) parts.push(`${unreached} not held anywhere in the open ecosystem`)
+  if (!parts.length) return null
+  return `Of the ${total} work${total === 1 ? '' : 's'} cited here: ${parts.join(' · ')}`
 }
 
 /**
@@ -826,10 +833,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
         stats.scholar++
       }
     }
-    const scholarNote = unit.scholarly.length
-      ? `${openPapers} of ${unit.scholarly.length} scholarly citation${unit.scholarly.length === 1 ? '' : 's'} ` +
-        `resolve${openPapers === 1 ? 's' : ''} to an open copy`
-      : null
+    // Phrased to dodge the number-agreement trap "0 of 1 … resolve" falls into.
+    const scholarNote = !unit.scholarly.length
+      ? null
+      : openPapers === 0
+        ? unit.scholarly.length === 1
+          ? 'its 1 scholarly citation has no open copy'
+          : `none of its ${unit.scholarly.length} scholarly citations resolves to an open copy`
+        : `${openPapers} of its ${unit.scholarly.length} scholarly citation${unit.scholarly.length === 1 ? '' : 's'} ` +
+          `resolve${openPapers === 1 ? 's' : ''} to an open copy`
 
     // Anchored entities' partner statements: museum objects, taxa,
     // occurrence maps, place maps. The subject's own statements belong to the

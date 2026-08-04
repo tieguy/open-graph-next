@@ -132,6 +132,25 @@ test('a DPLA doc becomes a card credited to its holding institution, keyed on P2
   assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S', 'S'), null)
 })
 
+test('near-identical multi-part docs collapse to one card per title and holder', async () => {
+  const { uniqueEntries } = await import('../src/dpla.js')
+  const e = (title, description) => ({ title, description })
+  const out = uniqueEntries([
+    e('Interview, reel 1', 'Russell Library'),
+    e('Interview, reel 1', 'Russell Library'), // the second reel of the same interview
+    e('Interview, reel 1', 'South Carolina Digital Library'), // same title, different holder — kept
+    e('Statement on editorial', 'South Carolina Digital Library'),
+  ])
+  assert.deepEqual(
+    out.map((x) => `${x.title} @ ${x.description}`),
+    [
+      'Interview, reel 1 @ Russell Library',
+      'Interview, reel 1 @ South Carolina Digital Library',
+      'Statement on editorial @ South Carolina Digital Library',
+    ],
+  )
+})
+
 // ---- Europeana --------------------------------------------------------------
 
 test('europeanaUrl pivots on the stated entity URI and asks only for open items', async () => {

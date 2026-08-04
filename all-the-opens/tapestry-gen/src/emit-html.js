@@ -130,7 +130,10 @@ function card(entry, inline) {
       `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`
   } else if (entry.imageUrl) {
     const src = inline.get(entry.imageUrl) ?? entry.imageUrl
-    visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" alt="${escapeHtml(entry.title)}">`
+    // Partner thumbnails rot and hotlink-block (DPLA's `object` URLs point at
+    // the provider, not at DPLA). A broken-icon card is worse than a text
+    // card, so a thumbnail that fails to load takes itself off the page.
+    visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
   }
   const credit = entry.attribution
     ? `<p class="credit">${escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))}</p>`
