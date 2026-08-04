@@ -44,6 +44,7 @@ import { CACHE, getJson } from './http.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import { entityStatements, statementEntries } from './statements.js'
+import { claimAnchors, dropSeenFiles } from './dedup.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -605,8 +606,34 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // map lands, concurrent with the Commons lookups they describe. The
   // subject's own claims — a case citation, a thesis, an author identifier —
   // enrich only the lede, so nothing about them may sit ahead of the spine.
+  // The page's own title rides the same batch: its QID seeds the anchor
+  // registry below without waiting on the subject's claims fetch.
+  const qidsPromise = fetchQids(CACHE, [
+    ...new Set([page, ...units.flatMap((u) => u.linkCandidates)]),
+  ])
+  const pickedPromise = qidsPromise.then((qids) => {
+    // Every unit's candidates in article order; ownership is decided here,
+    // before any pivot runs, so streaming's completion-order emission can
+    // never reassign an anchor between runs. The subject QID is seeded to
+    // the lede: its statements and category belong there by design.
+    const seeded = new Map()
+    const ledeAt = units.findIndex((u) => u.index === '0')
+    const subjectQid = qids.get(page)
+    if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
+    const owned = claimAnchors(
+      units.map((u) => u.linkCandidates.map((t) => qids.get(t))),
+      { perUnit: QIDS_PER_SECTION, seeded },
+    )
+    const picked = new Map()
+    units.forEach((unit, i) => {
+      stats.anchorsQid += owned[i].length
+      picked.set(unit, owned[i])
+    })
+    return picked
+  })
+
   const subjectPromise = (async () => {
-    const qid = (await fetchQids(CACHE, [page])).get(page)
+    const qid = (await qidsPromise).get(page)
     if (!qid) return { qid: null, claims: {} }
     try {
       const claimsBody = await wikidata({ action: 'wbgetentities', ids: qid, props: 'claims' })
@@ -617,20 +644,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
       return { qid, claims: {} }
     }
   })()
-
-  const qidsPromise = fetchQids(CACHE, [...new Set(units.flatMap((u) => u.linkCandidates))])
-  const pickedPromise = qidsPromise.then((qids) => {
-    const picked = new Map()
-    for (const unit of units) {
-      const p = unit.linkCandidates
-        .map((t) => qids.get(t))
-        .filter((q, i, a) => q && a.indexOf(q) === i)
-        .slice(0, QIDS_PER_SECTION)
-      stats.anchorsQid += p.length
-      picked.set(unit, p)
-    }
-    return picked
-  })
   const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
