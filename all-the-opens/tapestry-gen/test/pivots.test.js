@@ -254,7 +254,7 @@ test('mergePlaceDefunct: marks location items as mappable/defunct based on class
   // Mock item map with location data
   const itemMap = new Map([
     ['Q1', { coord: 'Point(10 20)' }], // settlement
-    ['Q2', { coord: 'Point(30 40)' }], // language (not a place)
+    ['Q2', { coord: 'Point(30 40)' }], // dead polity: not a place, and ended
   ])
 
   // Mock class hierarchy results: Q123 is a place class, Q456 is defunct
@@ -265,8 +265,8 @@ test('mergePlaceDefunct: marks location items as mappable/defunct based on class
 
   // Item classes: Q1 → Q123 (place), Q2 → Q456 (defunct/language)
   const itemClasses = new Map([
-    ['Q1', 'Q123'],
-    ['Q2', 'Q456'],
+    ['Q1', new Set(['Q123'])],
+    ['Q2', new Set(['Q456'])],
   ])
 
   const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
@@ -286,7 +286,7 @@ test('mergePlaceDefunct: items with P576 (ended) are marked defunct', () => {
     { class: { value: 'http://www.wikidata.org/entity/Q123' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
   ]
 
-  const itemClasses = new Map([['Q1', 'Q123']])
+  const itemClasses = new Map([['Q1', new Set(['Q123'])]])
   const itemsWithEnded = new Set(['Q1'])
 
   const result = mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded)
@@ -323,4 +323,32 @@ test('mergePlaceDefunct: skips items without location bindings', () => {
   // Should have no place/defunct added
   assert.equal(result.get('Q1').place, undefined)
   assert.equal(result.get('Q1').defunct, undefined)
+})
+
+test('mergePlaceDefunct: any qualifying P31 makes a place — the EFEO case', () => {
+  // The EFEO is both a research institute (a place, via organization) and a
+  // publisher (not). Keeping one arbitrary P31 lost its map, and SPARQL row
+  // order is unspecified, so which one won varied between runs.
+  const itemMap = new Map([['Q273559', { coord: 'Point(103 13)' }]])
+  const classRows = [
+    { class: { value: 'http://www.wikidata.org/entity/Q31855' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q2516866' }, isPlace: { value: 'false' }, isDefunct: { value: 'false' } },
+  ]
+  const itemClasses = new Map([['Q273559', new Set(['Q2516866', 'Q31855'])]])
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
+  assert.equal(result.get('Q273559').place, 'true')
+  assert.equal(result.get('Q273559').defunct, 'false')
+})
+
+test('mergePlaceDefunct: a dead polity is defunct via any historical class', () => {
+  // Q201705 keeps P576 too, but a dead polity carrying only a historical-country
+  // P31 alongside a benign one must still refuse a modern map.
+  const itemMap = new Map([['Q201705', { coord: 'Point(103 13)' }]])
+  const classRows = [
+    { class: { value: 'http://www.wikidata.org/entity/Q11514315' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q3024240' }, isPlace: { value: 'true' }, isDefunct: { value: 'true' } },
+  ]
+  const itemClasses = new Map([['Q201705', new Set(['Q11514315', 'Q3024240'])]])
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
+  assert.equal(result.get('Q201705').defunct, 'true')
 })

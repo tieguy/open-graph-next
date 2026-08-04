@@ -179,8 +179,8 @@ export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnde
   for (const [qid, statements] of itemMap.entries()) {
     if (!needsPlaceDefunctQuery(statements)) continue // Skip items with no location data
 
-    const itemClass = itemClasses.get(qid)
-    if (!itemClass) {
+    const classes = itemClasses.get(qid)
+    if (!classes?.size) {
       // Item had no P31 binding (unusual for mappable things, but possible).
       // Set both to false to exclude from maps.
       statements.place = 'false'
@@ -188,12 +188,14 @@ export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnde
       continue
     }
 
-    // Check class membership against the resolved sets.
-    statements.place = placeClasses.has(itemClass) ? 'true' : 'false'
+    // Any qualifying class makes it a place — mirroring the EXISTS this
+    // assembly replaces, which was true if any P31 reached the allowset.
+    statements.place = [...classes].some((c) => placeClasses.has(c)) ? 'true' : 'false'
 
-    // Defunct if ended (P576) or class is historical.
+    // Defunct if ended (P576) or any class is historical.
     const hasEnded = itemsWithEnded.has(qid)
-    statements.defunct = (hasEnded || defunctClasses.has(itemClass)) ? 'true' : 'false'
+    statements.defunct =
+      hasEnded || [...classes].some((c) => defunctClasses.has(c)) ? 'true' : 'false'
   }
 
   return itemMap
@@ -248,7 +250,11 @@ export async function entityStatements(qids) {
       if (!qid) continue
       if (row.class) {
         const classQid = row.class.value.split('/').pop()
-        itemClasses.set(qid, classQid)
+        // Every P31 is kept: an item is a place if ANY of its classes is one.
+        // Keeping a single value would let SPARQL's unspecified row order pick
+        // the answer — the EFEO is both a research institute and a publisher.
+        if (!itemClasses.has(qid)) itemClasses.set(qid, new Set())
+        itemClasses.get(qid).add(classQid)
       }
       if (row.ended) {
         itemsWithEnded.add(qid)
@@ -258,7 +264,7 @@ export async function entityStatements(qids) {
 
   // Third query (phase 2b): resolve the distinct classes against place/defunct hierarchies.
   // Collect distinct classes from all item bindings — typically 10–30 per page.
-  const distinctClasses = [...new Set([...itemClasses.values()])]
+  const distinctClasses = [...new Set([...itemClasses.values()].flatMap((s) => [...s]))]
   let allClassRows = []
 
   if (distinctClasses.length > 0) {
