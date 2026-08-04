@@ -35,12 +35,11 @@ export function wdqsUrl(qids) {
 }
 
 /**
- * Whether a QID's first-query bindings carry enough location info to warrant
- * checking place/defunct status. The second query that answers place/defunct
- * (a transitive P31/P279* walk) is expensive; we issue it only for QIDs whose
- * first query already found a coordinate or OSM identifier — typically a handful
- * per page. This pure function factors that decision so it can be tested,
- * preventing regressions on the decision boundary itself.
+ * Whether a QID's bindings carry enough location info to be worth asking about.
+ * Nothing but a map card consumes place/defunct, so an anchor with neither a
+ * coordinate nor an OSM identifier could not use the answer. This pure function
+ * factors that decision out so it can be tested, which keeps the follow-up
+ * batches bounded by construction rather than by hope.
  */
 export function needsPlaceDefunctQuery(statements) {
   return Boolean(statements.coord || statements.osmr || statements.osmw || statements.osmn)
@@ -50,16 +49,17 @@ export function needsPlaceDefunctQuery(statements) {
  * Mappability is answered by two small follow-up queries rather than by
  * enriching the partner-statement query, because the transitive walk is what
  * costs: asked of the items, `P31/P279*` over a real page's anchors measured
- * 32–45s cold and blew the 15s timeout, and because that walk rode the query
- * answering EVERY partner pivot, a timeout cost the page its Met, AIC, GBIF,
- * iNat, IIIF, DPLA and Europeana cards as well as its maps.
+ * 16–37s cold and blew the 15s timeout every time; and because that walk rode
+ * the query answering EVERY partner pivot, a timeout cost the page its Met,
+ * AIC, GBIF, iNat, IIIF, DPLA and Europeana cards as well as its maps.
  *
  * Query 1 (itemClassesUrl) asks only direct P31/P576 of the location-bearing
  * anchors — no closure, measured 0.19–0.32s cold. Query 2 (classesUrl) walks
  * P279* over just the distinct classes that came back (~10–30 per page, a
  * small and near-static vocabulary that caches well), measured 0.32–0.50s
  * cold. Both numbers are from salted queries, so WDQS could not serve a
- * cached result.
+ * cached result. For scale, the deleted item-level walk measured 16–37s on
+ * the same real anchors, blowing the 15s timeout on every run.
  *
  * The structural guarantee, and the thing to preserve: no transitive walk is
  * ever asked of items, only of classes. A test asserts query 1 contains no
@@ -92,10 +92,10 @@ export function itemClassesUrl(qids) {
 }
 
 /**
- * The class hierarchy query: walk P279* over classes only (not items).
- * Input is a set of distinct classes from itemClassesUrl().
- * Returns which classes are (or are subclasses of) the mappable set,
- * and which are subclasses of the historical-polity class.
+ * The class hierarchy query: walk P279* over classes only, never items.
+ * Input is the distinct classes from itemClassesUrl(). Returns one row per
+ * (class, ancestor) pair — the classification against the allowsets happens
+ * in JS, in mergePlaceDefunct, for the reason the body comment gives.
  */
 export function classesUrl(classes) {
   const values = classes.map((c) => `wd:${c}`).join(' ')
@@ -103,9 +103,11 @@ export function classesUrl(classes) {
   // rather than asking WDQS the membership question directly. An
   // `EXISTS { VALUES ?locClass {…} ?class wdt:P279* ?locClass }` makes
   // Blazegraph re-plan the walk per class and per target: measured cold on
-  // twenty real classes it costs 13.8–23.7s, against getJson's 15s timeout.
+  // twenty real classes it costs 11–24s, against getJson's 15s timeout.
   // The same twenty answered as a plain ancestor walk in 0.32–0.50s. The walk
-  // returns more rows (~140KB) and that is the trade: bytes are cheap, and a
+  // returns far more rows — 237KB for twenty classes, 821KB for a full chunk
+  // of a hundred, but 6.3KB and 22.9KB gzipped on the wire — and that is the
+  // trade: bytes are cheap, Blazegraph CPU is the donated resource, and a
   // query that times out costs every map on the page.
   const query = `SELECT ?class ?super WHERE { VALUES ?class { ${values} } ?class wdt:P279* ?super }`
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
@@ -159,8 +161,10 @@ export function parseEarthPoint(wkt) {
  * - placeClasses: classes that are or subclass the mappable location set
  * - defunctClasses: classes that subclass the historical-polity class
  *
- * For each item with location data: mark place='true' if its class is mappable,
- * and defunct='true' if it has P576 (ended) OR its class is historical.
+ * For each item with location data: place='true' if ANY of its P31 classes
+ * reaches the allowset, defunct='true' if it has P576 (ended) or ANY of its
+ * classes reaches the historical-polity class. Any, not one — an item averages
+ * ~2.7 P31 values and the EFEO is both a research institute and a publisher.
  * Items with no class binding (no P31) are marked both false to exclude from maps.
  */
 export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded = new Set()) {
@@ -236,7 +240,7 @@ export async function entityStatements(qids) {
   // Second query (phase 2a): item classes and end dates, only for QIDs with
   // location data. Group by 100 like the main query — same host queue, same politeness.
   const needsPlaceDefunct = [...map].filter(([, s]) => needsPlaceDefunctQuery(s)).map(([q]) => q)
-  const itemClasses = new Map() // QID → class QID
+  const itemClasses = new Map() // QID → Set of its P31 class QIDs
   const itemsWithEnded = new Set() // QIDs that have P576 bindings
 
   for (const group of chunk(needsPlaceDefunct, 100)) {

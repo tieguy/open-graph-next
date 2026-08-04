@@ -346,4 +346,6 @@ test('mergePlaceDefunct: a dead polity is defunct via any historical class', () 
   const itemClasses = new Map([['Q201705', new Set(['Q11514315', 'Q3024240'])]])
   const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
   assert.equal(result.get('Q201705').defunct, 'true')
+  // The verdict is what the phase exists for, not the binding.
+  assert.equal(mappable(result.get('Q201705')), false)
 })
