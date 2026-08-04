@@ -254,6 +254,9 @@ ${friends}
     it has seen.</p>
   <p>Code is public domain (CC0) in <a href="https://github.com/tieguy/open-graph-next">open-graph-next</a>.
     Article text CC BY-SA 4.0; every item carries its own licence and credit.</p>
+  <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>
+    about cooperative knowledge infrastructure and the future of libraries, and by the work of the
+    <a href="https://tapestries.media">tapestries.media</a> team.</p>
 </div></footer>
 </body>
 </html>
