@@ -216,6 +216,10 @@ ${friends}
         <h4>Statement</h4>
         <p>Wikidata states the connection outright — this painting is Met object 11417, this species
         is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
+        <p>Each shelf says <i>who asked</i>, too: when one friend answers several of the
+        article&rsquo;s links, its cards split into one labelled shelf per link — and in the opening
+        section, works <i>by</i> the subject never share a shelf with works merely <i>cited</i>
+        there.</p>
       </div>
       <div class="box">
         <h3>Challenges and future opportunities</h3>
