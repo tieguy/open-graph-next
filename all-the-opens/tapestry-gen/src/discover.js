@@ -222,22 +222,40 @@ const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null
  * far fewer of them. Each hit is wrapped in the volumes/brief record shape so
  * `openLibraryAccess` reads both eras' caches identically.
  *
- * @returns {Map<string, object>} isbn → `{records}` value
+ * Returns `{volumes, unchecked}`: failed groups get one delayed second pass, and ISBNs that still fail are reported as unchecked rather than silently absent.
+ *
+ * @returns {{volumes: Map<string, object>, unchecked: Set<string>}} isbn → `{records}` value, and ISBNs whose batch failed
  */
 async function openLibraryVolumes(isbns) {
   const volumes = new Map()
-  for (const group of chunk([...new Set(isbns)], 40)) {
-    try {
-      const body = await getJson(olBooksUrl(group), { throttleMs: 1100 })
-      for (const isbn of group) {
-        const data = body[`ISBN:${isbn}`]
-        if (data) volumes.set(isbn, { records: { [`ISBN:${isbn}`]: { data } } })
-      }
-    } catch (e) {
-      console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
+  const unchecked = new Set()
+  const fill = (group, body) => {
+    for (const isbn of group) {
+      const data = body[`ISBN:${isbn}`]
+      if (data) volumes.set(isbn, { records: { [`ISBN:${isbn}`]: { data } } })
     }
   }
-  return volumes
+  const failed = []
+  for (const group of chunk([...new Set(isbns)], 40)) {
+    try {
+      fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
+    } catch (e) {
+      console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
+      failed.push(group)
+    }
+  }
+  // One more chance after a beat — OpenLibrary's stumbles are usually
+  // moments, not outages. Whatever still fails is truthfully unchecked.
+  if (failed.length) await new Promise((r) => setTimeout(r, 2000))
+  for (const group of failed) {
+    try {
+      fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
+    } catch (e) {
+      console.error(`  openlibrary books failed again (${group.length} isbns): ${e.message}`)
+      for (const isbn of group) unchecked.add(isbn)
+    }
+  }
+  return { volumes, unchecked }
 }
 
 /**
@@ -743,16 +761,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // section with no identifiers behind archive.org. That is what lets the
     // early rails stream while the slow batches are still answering.
     const picked = (await pickedPromise).get(unit)
-    const [iaHits, volumes, labels, scholarHits, statements] = await Promise.all([
+    const [iaHits, ol, labels, scholarHits, statements] = await Promise.all([
       unit.identified.length ? iaPromise : new Map(),
-      unit.railCandidates.some((c) => c.isbn) ? volumesPromise : new Map(),
+      unit.railCandidates.some((c) => c.isbn)
+        ? volumesPromise
+        : { volumes: new Map(), unchecked: new Set() },
       breadth.length || picked.length ? labelsPromise : new Map(),
       unit.scholarly.length ? scholarPromise : new Map(),
       picked.length || unit.index === '0' ? statementsPromise : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
-    const coverage = citationCoverage(unit.railCandidates, volumes)
+    const coverage = citationCoverage(unit.railCandidates, ol.volumes, ol.unchecked)
     // The gutter shows Wikipedia's own footnotes; where one cites a book the
     // open ecosystem holds, the access link rides along on the note itself.
     const accessByIsbn = new Map(
