@@ -156,9 +156,10 @@ function card(entry, inline) {
       : ''
   // A card with an href is an open door, and the whole card says so: the
   // title links out. Cards without one (most Commons media) stay as they were.
+  // The clamp can ellipsize the visible title; the tooltip always has all of it.
   const heading = entry.href
-    ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
-    : `<h4>${escapeHtml(entry.title)}</h4>`
+    ? `<h4 title="${escapeHtml(entry.title)}"><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
+    : `<h4 title="${escapeHtml(entry.title)}">${escapeHtml(entry.title)}</h4>`
   // Why this item is in THIS article: the anchor that asked for it. A
   // Valencia opera house in the Golden Gate Bridge article reads as a
   // mistake until the card says which link brought it here.
@@ -620,8 +621,12 @@ sup.ref a:hover{text-decoration:underline}
 .frame.audio iframe{position:static;height:52px}
 .shot{width:100%;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,.14);background:var(--faint)}
 .card figcaption{padding-top:8px;font-family:var(--sans)}
+/* Three lines before the ellipsis: archival titles spend their first line on
+   throat-clearing ("Tentative statement of philosophy for the…"), and the
+   deck has the vertical room the old narrow rail did not. The full title
+   rides on the tooltip. */
 .card h4{font-family:var(--serif);font-size:.95rem;line-height:1.22;margin:0 0 4px;color:var(--head);font-weight:600;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 .card h4 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
 .card h4 a:hover{color:var(--link);border-bottom-color:var(--link)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
