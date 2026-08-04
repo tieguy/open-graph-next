@@ -113,22 +113,23 @@ test('dplaUrl asks for the exact authorized heading and only the fields the card
 })
 
 test('a DPLA doc becomes a card credited to its holding institution, keyed on P244', () => {
-  const e = dplaEntryFrom(
-    {
-      'sourceResource.title': ['Apollo 11 launch photograph'],
-      dataProvider: { name: 'NASA on The Commons' },
-      object: 'https://thumb.test/x.jpg',
-      isShownAt: 'https://provider.test/item/1',
-    },
-    'Apollo 11 (Spacecraft)',
-    'Apollo 11',
-  )
+  const doc = {
+    id: 'abc123',
+    'sourceResource.title': ['Apollo 11 launch photograph'],
+    dataProvider: { name: 'NASA on The Commons' },
+    object: 'https://thumb.test/x.jpg',
+    isShownAt: 'https://provider.test/item/1',
+  }
+  const e = dplaEntryFrom(doc, 'Apollo 11 (Spacecraft)', 'Apollo 11')
   assert.equal(e.source, 'dpla')
   assert.equal(e.description, 'NASA on The Commons')
-  assert.equal(e.href, 'https://provider.test/item/1')
+  // The durable DPLA item page, not the provider host that may have rotted.
+  assert.equal(e.href, 'https://dp.la/item/abc123')
   assert.match(e.why, /Catalogued under “Apollo 11 \(Spacecraft\)” — the Library of Congress heading Wikidata states for Apollo 11/)
   assert.equal(e.attribution.license, 'via P244 LC authority')
-  // No landing page → no card: a dead-end card is not a finding.
+  // Without an id the provider link still opens a door…
+  assert.equal(dplaEntryFrom({ ...doc, id: undefined }, 'S', 'S').href, 'https://provider.test/item/1')
+  // …but no landing page at all → no card: a dead-end card is not a finding.
   assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S', 'S'), null)
 })
 

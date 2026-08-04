@@ -40,7 +40,7 @@ export function dplaUrl(heading, key) {
   return (
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
     `"${encodeURIComponent(heading)}"` +
-    '&fields=sourceResource.title,dataProvider,object,isShownAt' +
+    '&fields=id,sourceResource.title,dataProvider,object,isShownAt' +
     `&page_size=${DPLA_PER_ANCHOR}&api_key=${key}`
   )
 }
@@ -50,14 +50,18 @@ const first = (v) => (Array.isArray(v) ? v[0] : v)
 /** One DPLA doc as a page entry; null when it cannot be shown honestly. */
 export function dplaEntryFrom(doc, heading, anchorLabel) {
   const title = first(doc?.['sourceResource.title'])
-  if (!title || !doc?.isShownAt) return null
+  if (!title || !(doc?.id || doc?.isShownAt)) return null
   const provider = first(doc.dataProvider)?.name ?? first(doc.dataProvider) ?? null
   return {
     source: 'dpla',
     title,
     description: provider ?? 'A DPLA partner institution',
     imageUrl: doc.object ? first(doc.object) : null,
-    href: doc.isShownAt,
+    // DPLA's own item page, not the provider's isShownAt: partner hosts rot
+    // out from under the aggregator (the California Historical Society's
+    // whole domain now serves a Stanford proxy's certificate), while the
+    // dp.la page always resolves and carries the onward link itself.
+    href: doc.id ? `https://dp.la/item/${doc.id}` : doc.isShownAt,
     attribution: {
       author: provider,
       license: 'via P244 LC authority',
