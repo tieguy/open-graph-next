@@ -136,8 +136,9 @@ test('a DPLA doc becomes a card credited to its holding institution, keyed on P2
 
 test('europeanaUrl pivots on the stated entity URI and asks only for open items', async () => {
   const { europeanaUrl, rightsName, europeanaEntryFrom } = await import('../src/europeana.js')
+  // P7704 values carry a legacy /base/ segment the search index dropped.
   const url = europeanaUrl('agent/base/59904', 'KEY')
-  assert.match(url, /query=%22http%3A%2F%2Fdata\.europeana\.eu%2Fagent%2Fbase%2F59904%22/)
+  assert.match(url, /query=%22http%3A%2F%2Fdata\.europeana\.eu%2Fagent%2F59904%22/)
   assert.match(url, /reusability=open/)
   assert.match(url, /wskey=KEY/)
 

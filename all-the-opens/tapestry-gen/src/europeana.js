@@ -15,10 +15,14 @@ import { getJson } from './http.js'
 export const EUROPEANA_PER_ANCHOR = 4
 
 export function europeanaUrl(entityId, key) {
+  // Wikidata's P7704 values keep the legacy `/base/` path segment; the
+  // enrichment URIs in Europeana's own index dropped it. With the segment
+  // left in, every entity quietly matches nothing.
+  const canonical = entityId.replace(/^(agent|concept|place|timespan)\/base\//, '$1/')
   return (
     'https://api.europeana.eu/record/v2/search.json' +
     `?wskey=${key}` +
-    `&query=${encodeURIComponent(`"http://data.europeana.eu/${entityId}"`)}` +
+    `&query=${encodeURIComponent(`"http://data.europeana.eu/${canonical}"`)}` +
     '&reusability=open' +
     `&rows=${EUROPEANA_PER_ANCHOR}` +
     '&profile=minimal'
