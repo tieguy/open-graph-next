@@ -98,12 +98,13 @@ test('needsPlaceDefunctQuery gates the mappability query to location-bearing QID
 })
 
 test('mappable: a locatable extant place maps; a language or dead polity never does', () => {
-  // WDQS returns xsd:boolean bindings as the literal strings 'true'/'false',
-  // and entityStatements stores binding values verbatim.
+  // place/defunct are the strings 'true'/'false' — see mappable()'s note: a
+  // wire convention inherited from a deleted design, now written in JS by
+  // mergePlaceDefunct.
   assert.equal(mappable({ place: 'true', defunct: 'false', coord: 'Point(103.9 13.4)' }), true)
   assert.equal(mappable({ place: 'false', defunct: 'false', coord: 'Point(104 12)' }), false) // Khmer, a language
   assert.equal(mappable({ place: 'true', defunct: 'true' }), false) // Khmer Empire
-  assert.equal(mappable({}), false) // WDQS failed for this item: refuse, don't guess
+  assert.equal(mappable({}), false) // nothing answered for it: refuse, don't guess
 })
 
 test('parseEarthPoint reads Earth points and refuses other globes', () => {

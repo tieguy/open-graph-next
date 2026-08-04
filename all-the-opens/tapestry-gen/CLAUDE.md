@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-03
+Last verified: 2026-08-04
 
 ## Purpose
 
@@ -55,9 +55,16 @@ opinion}`, bands in ARTICLE order.
 every parse call sends `redirects=1`, `fetchArticle` returns the API's own
 `title`, and both the spine event's `page` and the returned `title` are that
 resolved title. A redirect that lingered in the caller's string would name an
-article the page is not. Cold-article profile (Barbara
-McClintock, 2026-08-03): spine at 0.9s, first rail 4.5s, complete ~9s; the
-tail is the Commons queue, serial by etiquette.
+article the page is not.
+
+Streaming profile (Barbara McClintock, **2026-08-03, before this branch**):
+spine 0.9s, first rail 4.5s, complete ~9s; the tail is the Commons queue,
+serial by etiquette. Phase 3 moved the first rail deliberately — the depicts
+chain seeds from `categoryFilesPromise`, which sits on every band's path — so
+treat these as the pre-branch shape, not current. A cold spot-check on
+2026-08-04 put first rail at ~4.7s against a ~55s completion on this page, and
+*earlier* than baseline on another; the property that matters is that the
+first rail still arrives far ahead of completion, not the absolute seconds.
 
 ## Deployed demo
 
@@ -103,7 +110,7 @@ sections + HTML + wikitext) and reproduces the per-section views locally —
 `sliceSectionWikitext` / `sliceSectionHtml` are verified byte-identical to
 `parse&section=N` (note: the API's `byteoffset` is a string index, not bytes).
 Identifier pivots are batched (`src/batch.js`): one archive.org Solr OR-query
-per run of ISBNs, one OpenLibrary volumes request per 25 (`|`-separated), QIDs
+per run of ISBNs, one OpenLibrary volumes request per 40 (`|`-separated), QIDs
 and labels at 50 per request. Pivots run concurrently across hosts over the
 per-host serial queue. Cold Prandtl: 33.6s/72 requests before the Tier-1 work,
 9.0s/39 after (2026-08-03); warm reruns are 100% offline.
@@ -130,7 +137,7 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
   OpenLibrary author pivot.
-- **Statements** (`src/statements.js`) — two WDQS queries per page answer every
+- **Statements** (`src/statements.js`) — THREE WDQS queries per page: one answers every
   anchor's partner statements and place/defunct gates (Phase 2, 2026-08-04):
   (1) Main query answers Met objects (P3634), Art Institute of Chicago (P4610),
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
@@ -142,9 +149,9 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   two small follow-ups: direct P31/P576 on the items (no closure), then a plain
   `?class wdt:P279* ?super` ancestor walk over just the distinct classes that
   came back, intersected against the allowset **in JS**. Both the shape and the
-  order matter and are load-bearing. Asking the closure of *items* cost 32–45s
+  order matter and are load-bearing. Asking the closure of *items* cost 16–37s
   cold and blew the 15s timeout; asking WDQS the membership question directly
-  (`EXISTS` with a nested `VALUES`) cost 13.8–23.7s where the plain ancestor
+  (`EXISTS` with a nested `VALUES`) cost 11–24s where the plain ancestor
   walk costs 0.32–0.50s. And because the first version rode the query answering
   every partner pivot, its timeout cost the page Met/AIC/GBIF/iNat/IIIF/DPLA/
   Europeana too. Now failure of either follow-up costs only maps (they are gated

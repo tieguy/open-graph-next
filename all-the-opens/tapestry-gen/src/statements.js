@@ -39,7 +39,10 @@ export function wdqsUrl(qids) {
  * Nothing but a map card consumes place/defunct, so an anchor with neither a
  * coordinate nor an OSM identifier could not use the answer. This pure function
  * factors that decision out so it can be tested, which keeps the follow-up
- * batches bounded by construction rather than by hope.
+ * batches bounded by construction rather than by hope. It admits an item with
+ * an OSM id but no coordinate, which can never draw a map (parseEarthPoint
+ * needs the P625 literal); that costs a row in a cheap query and keeps the
+ * gate a plain statement of "has location evidence".
  */
 export function needsPlaceDefunctQuery(statements) {
   return Boolean(statements.coord || statements.osmr || statements.osmw || statements.osmn)
@@ -115,9 +118,13 @@ export function classesUrl(classes) {
 
 /**
  * Whether a map card would be TRUE of this item: a locatable, extant place.
- * WDQS boolean bindings arrive as the strings 'true'/'false'; an item the
- * query never answered for stays unmappable — refusal over wrongness, the
- * same stance parseEarthPoint takes for non-Earth globes.
+ * `place`/`defunct` are the strings 'true'/'false', not booleans — a leftover
+ * of the deleted design that asked WDQS the question directly and got xsd
+ * booleans on the wire. mergePlaceDefunct writes them in JS now, so the
+ * convention is purely internal; it is kept only because changing it would
+ * touch every call site for no behavioural gain. An item nothing answered for
+ * stays unmappable — refusal over wrongness, the same stance parseEarthPoint
+ * takes for non-Earth globes.
  */
 export function mappable(statements) {
   return statements.place === 'true' && statements.defunct !== 'true'
@@ -190,7 +197,9 @@ export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnde
     const classes = itemClasses.get(qid)
     if (!classes?.size) {
       // Item had no P31 binding (unusual for mappable things, but possible).
-      // Set both to false to exclude from maps.
+      // Writing 'false' is belt-and-braces: mappable() already refuses on
+      // undefined, so this branch and the one in entityStatements below are
+      // both no-ops. They state the refusal rather than leaving it implied.
       statements.place = 'false'
       statements.defunct = 'false'
       continue

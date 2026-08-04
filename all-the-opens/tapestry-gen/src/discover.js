@@ -245,7 +245,11 @@ async function openLibraryVolumes(isbns) {
       fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
     } catch (e) {
       console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
-      failed.push(group)
+      // A permanent status (a 4xx that is our bad request, not OpenLibrary's
+      // bad day) will fail identically in two seconds. Retrying it spends a
+      // request to learn nothing; those ISBNs go straight to unchecked.
+      if (e.permanent) for (const isbn of group) unchecked.add(isbn)
+      else failed.push(group)
     }
   }
   // One more chance after a beat — OpenLibrary's stumbles are usually
@@ -510,11 +514,15 @@ export function proseLinks(html) {
 }
 
 /**
- * Normalize an article title to canonical form: replace underscores with spaces,
- * uppercase the first character. This handles raw command-line arguments and URL
- * paths that may not match the canonical title Wikipedia's API returns. Required
- * because fetchQids keys on the canonical `page.title` from the API response, and
- * keys like "Ludwig_Prandtl" or "ludwig prandtl" will silently return undefined.
+ * An article title as MediaWiki would write it: underscores to spaces, first
+ * character upper-cased. Applied to the caller's raw input — an argv string or
+ * a URL path — before the one parse call that resolves it for real.
+ *
+ * This is NOT what makes lookups match: `redirects=1` and `fetchArticle`'s
+ * returned title do that, and every downstream lookup uses the resolved title.
+ * What it buys is cache-key stability, so `"Ludwig_Prandtl"` and
+ * `"Ludwig Prandtl"` are one `.cache` entry rather than two. Keep it for that
+ * reason; do not reintroduce a lookup that depends on it.
  */
 export function canonicalTitle(title) {
   if (typeof title !== 'string') return ''
@@ -857,6 +865,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
         return { commonsEntries, breadth, seen }
       })
       depictsByUnit.set(unit, result)
+      // The last unit's assignment has no consumer. That is fine only while
+      // the chain cannot reject — see the audit above — because an unconsumed
+      // rejected promise surfaces as an unhandled-rejection warning. If a
+      // rejection path is ever reintroduced, this is where it will show up.
       seenSoFar = result.then((r) => r.seen)
     }
   }
