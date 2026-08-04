@@ -105,13 +105,20 @@ sections + HTML + wikitext) and reproduces the per-section views locally —
 Identifier pivots are batched (`src/batch.js`): one archive.org Solr OR-query
 per run of ISBNs, one OpenLibrary volumes request per 25 (`|`-separated), QIDs
 and labels at 50 per request. Pivots run concurrently across hosts over the
-per-host serial queue. Cold Prandtl: 33.6s/72 requests before, 9.0s/39 after;
-warm reruns are 100% offline. Those counts are the 2026-08-03 measurement and
-have since drifted *down*, not up — batching the subject lookup into the title
-batch cost one fewer en.wikipedia.org request per page (Prandtl 5→4, Dapples
-3→2), and page-wide depicts dedup drops Commons requests along with the
-duplicate files (Dapples commons.wikimedia.org 14→13). No cold profile has been
-re-measured since; treat 39 as an upper bound.
+per-host serial queue. Cold Prandtl: 33.6s/72 requests before the Tier-1 work,
+9.0s/39 after (2026-08-03); warm reruns are 100% offline.
+
+Re-measured cold on 2026-08-04 (empty `.cache`, isolated clone): **61.1s/47
+requests**. Two of the eight extra requests are the mappability follow-ups
+(`query.wikidata.org` is 3 per page now, not 1); the rest are partner pivots
+this profile never separated out. Two changes push the other way — batching the
+subject lookup into the title batch costs one fewer en.wikipedia.org request
+per page (Prandtl and Dapples both 4→3), and page-wide depicts dedup drops
+Commons requests with the duplicate files (Dapples 14→13). The wall-clock is
+**not** comparable across dates: cold runs are dominated by live upstream
+latency, and a review the same day measured cold pages at 55–67s on code that
+predates this branch. Treat 47 as the current request count and the seconds as
+weather.
 
 ## Partner pivots (2026-08-03)
 
