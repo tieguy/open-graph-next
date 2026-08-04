@@ -187,8 +187,13 @@ function carousel(source, items, inline, topic = null) {
     shared = `<p class="carousel-why">${escapeHtml(items[0].why)}</p>`
     items = items.map((e) => ({ ...e, why: null }))
   }
+  // The shelf's flex-basis is what its cards actually need (capped at three) —
+  // so a one-card shelf shares its deck row with the next shelf instead of
+  // claiming the whole width; wider shelves grow into whatever is left and
+  // scroll for the rest.
+  const basis = Math.min(items.length, 3) * 192
   return (
-    `<div class="carousel"><div class="carousel-head">${sourceTag(source, inline)}${topicTag}${count}</div>` +
+    `<div class="carousel" style="flex:1 1 ${basis}px"><div class="carousel-head">${sourceTag(source, inline)}${topicTag}${count}</div>` +
     shared +
     `<div class="carousel-track">${items.map((e) => card(e, inline)).join('')}</div></div>`
   )
@@ -236,11 +241,13 @@ function footnoteList(fns, wikiBase) {
 }
 
 /**
- * A band's right rail — media carousels, cited sources, disclosure — as its
- * own fragment, because the streaming renderer sends it separately from the
- * spine it belongs to. Empty string when the band has nothing to show.
+ * A band's enrichment in two parts: the references as a floated right rail
+ * (they pace the prose), and the media shelves as a full-width deck below it
+ * (they need the page's width — stacked in a narrow rail they build a column
+ * two or three times taller than the text, and everything left of it is
+ * blank). Each part is '' when the band has nothing for it.
  */
-export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
+export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // Group the band's media by source, in first-appearance order — then, within
   // a source, by topic (the anchor that asked for each item). A source whose
   // items all share one topic keeps a single plain carousel; one that mixes
@@ -274,11 +281,21 @@ export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
       : ''
   // An optional line stating how this band's media was selected. Used when the
   // anchor that produced it is broad enough that the selection is arbitrary —
-  // the prototype discloses that rather than filtering it out of sight.
+  // the prototype discloses that rather than filtering it out of sight. It
+  // describes the media, so it travels with the deck when there is one.
   const disclosure = b.disclosure
     ? `<p class="disclosure">${escapeHtml(b.disclosure)}</p>`
     : ''
-  return media || sources ? `<aside class="rail">${disclosure}${media}${sources}</aside>` : ''
+  return {
+    rail: sources || (disclosure && !media) ? `<aside class="rail">${media ? '' : disclosure}${sources}</aside>` : '',
+    deck: media ? `<div class="deck">${disclosure}${media}</div>` : '',
+  }
+}
+
+/** Both parts as one fragment — what the stream ships and the tests read. */
+export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
+  const { rail, deck } = bandParts(b, inline, wikiBase)
+  return rail + deck
 }
 
 function band(b, inline, wikiBase = '/wiki/') {
@@ -294,16 +311,15 @@ function band(b, inline, wikiBase = '/wiki/') {
         })
         .join('')
     : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
-  // Two columns: the article on the left, and a single right rail carrying the
-  // ecosystem's media with the section's references beneath it. The rail
-  // floats, so the prose wraps around it and reclaims full width below — no
-  // reserved empty column.
-  const rail = bandRail(b, inline, wikiBase)
+  // The references float right and the prose wraps them — they pace each
+  // other. The media deck comes after, full-width: shelves pack side by side
+  // and wrap, instead of stacking into a tall narrow column beside blank page.
+  const { rail, deck } = bandParts(b, inline, wikiBase)
   const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
     `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>` +
-    `<div class="band-body">${rail}<div class="prose">${prose}</div></div>` +
+    `<div class="band-body">${rail}<div class="prose">${prose}</div>${deck}</div>` +
     `</section>`
   )
 }
@@ -397,7 +413,8 @@ ${body}
 // place the hero's legend and notes once the page knows its sources.
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
-if(p&&s){var e=p.content.firstElementChild;if(e)s.querySelector(".band-body").insertBefore(e,s.querySelector(".prose"));p.remove()}}
+if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
+while((e=p.content.firstElementChild)){if(e.classList.contains("rail"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
 function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
@@ -515,7 +532,7 @@ img{max-width:100%;display:block}
 .fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;background-size:contain;display:inline-block}
 
 main{max-width:1180px;margin:0 auto;padding:0 40px}
-.band{padding:40px 0}
+.band{padding:32px 0}
 .band+.band{border-top:1px solid var(--rule)}
 .band:first-child{padding-top:28px}
 .band-head{margin:0 0 22px}
@@ -541,12 +558,19 @@ sup.ref a:hover{text-decoration:underline}
   color:var(--head);margin:1.8em 0 .5em}
 .note-lead{font-size:1.15rem;font-style:italic;color:#3a3f45;max-width:46em}
 
-/* The rail narrows in steps so the two-column layout survives well below a full
-   desktop width — a hi-DPI laptop at default scaling reports a narrow CSS width,
-   and it should still read as article + margin, not stack. */
+/* The rail (references only) narrows in steps so the two-column layout survives
+   well below a full desktop width — a hi-DPI laptop at default scaling reports a
+   narrow CSS width, and it should still read as article + margin, not stack. */
 .rail{float:right;width:404px;margin:6px 0 24px 46px}
 @media(max-width:1040px){.rail{width:344px;margin-left:38px}}
 @media(max-width:860px){.rail{width:290px;margin-left:28px}}
+
+/* The media deck: full-width, below the prose. Shelves size to their cards and
+   pack side by side, wrapping — a one-card shelf shares its row with the next
+   shelf instead of claiming a full-width (or full-column) band of its own. */
+.deck{clear:both;display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px 44px;padding-top:10px}
+.deck .disclosure{flex:1 1 100%;margin:0}
+.deck .carousel{flex:0 1 auto;min-width:0;max-width:100%;margin:0}
 
 /* One scroll-snapping strip per source; items scroll sideways instead of stacking. */
 .carousel{margin:0 0 22px}
@@ -574,7 +598,10 @@ sup.ref a:hover{text-decoration:underline}
 .card h4 a:hover{color:var(--link);border-bottom-color:var(--link)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px}
+/* Some Commons credits are whole paragraphs of reuse instructions; the card
+   shows two lines and keeps the rest in the DOM (and on the linked page). */
+.card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 .evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
 .evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
 .coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}
@@ -595,6 +622,8 @@ sup.ref a:hover{text-decoration:underline}
    bottom-of-page. Small, hanging-numbered, with the marker's number so the
    prose and the gutter agree. */
 .refs{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
+/* With media on the deck, the refs usually open the rail — no divider against nothing. */
+.rail .refs:first-child{margin-top:0;padding-top:0;border-top:0}
 .rail-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);margin:0 0 12px}
 .fnlist{list-style:none;margin:0;padding:0;font-family:var(--sans)}
@@ -624,6 +653,11 @@ sup.ref a:hover{text-decoration:underline}
 @media(max-width:640px){
   .hero{padding:26px 20px 20px}
   main{padding:0 20px}
-  .rail{float:none;width:auto;margin:26px 0}
+  /* Stacked order: the article first, then its references, then the media —
+     the DOM keeps the rail first for the floated layout, so flex reorders. */
+  .band-body{display:flex;flex-direction:column}
+  .rail{float:none;width:auto;margin:26px 0 0;order:2}
+  .prose{order:1}
+  .deck{order:3}
 }
 `

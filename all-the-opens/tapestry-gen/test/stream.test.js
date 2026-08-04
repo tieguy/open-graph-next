@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import {
+  bandParts,
   bandRail,
   streamBand,
   streamClose,
@@ -77,6 +78,26 @@ test('streamClose marks the stream as complete on purpose', () => {
   assert.match(streamClose({}), /window\.__tapdone=1/)
 })
 
+test('references float in the rail; media shelves ride the full-width deck', () => {
+  const { rail, deck } = bandParts(BAND)
+  // The rail carries the references and nothing visual.
+  assert.match(rail, /^<aside class="rail">/)
+  assert.match(rail, /References in this section/)
+  assert.doesNotMatch(rail, /<div class="carousel"/)
+  // The deck carries the media and nothing bibliographic.
+  assert.match(deck, /^<div class="deck">/)
+  assert.match(deck, /<div class="carousel"/)
+  assert.doesNotMatch(deck, /References in this section/)
+  // A disclosure describes the media, so it opens the deck when one exists.
+  const disclosed = bandParts({ ...BAND, disclosure: 'Media anchored on X' })
+  assert.match(disclosed.deck, /^<div class="deck"><p class="disclosure">Media anchored on X<\/p>/)
+  assert.doesNotMatch(disclosed.rail, /disclosure/)
+  // …and falls back to the rail when the band has notes but no media.
+  const noMedia = bandParts({ ...BAND, entries: [], disclosure: 'Media anchored on X' })
+  assert.match(noMedia.rail, /<p class="disclosure">Media anchored on X<\/p>/)
+  assert.equal(noMedia.deck, '')
+})
+
 test('a card says which anchor brought it here', () => {
   const rail = bandRail(BAND)
   assert.match(rail, /<p class="why">Depicts Santiago Calatrava, a link in this section<\/p>/)
@@ -99,7 +120,7 @@ test('one source, two topics: the carousel splits, one labelled strip per topic'
       mk('The strait', 'Golden Gate'),
     ],
   })
-  const carousels = rail.match(/<div class="carousel">/g) ?? []
+  const carousels = rail.match(/<div class="carousel"/g) ?? []
   assert.equal(carousels.length, 2)
   assert.match(rail, /<span class="topic">suspension bridge<\/span>/)
   assert.match(rail, /<span class="topic">Golden Gate<\/span>/)
@@ -113,7 +134,7 @@ test('one source, two topics: the carousel splits, one labelled strip per topic'
 
 test('one source, one topic: a single carousel with no topic label, as before', () => {
   const rail = bandRail(BAND)
-  assert.equal((rail.match(/<div class="carousel">/g) ?? []).length, 1)
+  assert.equal((rail.match(/<div class="carousel"/g) ?? []).length, 1)
   assert.doesNotMatch(rail, /<span class="topic">/)
 })
 

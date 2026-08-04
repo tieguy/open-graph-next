@@ -151,6 +151,15 @@ Tapestry `layout`/`emit`/`zip`).
   geometry could not (dead whitespace, squashed images, non-responsive). Only
   `layout.js`/`emit.js`/`zip.js`/`vendor/parse-root.mjs` are Tapestry-specific;
   everything else is output-agnostic and reused by the HTML render.
+- **References float right; media rides a full-width deck** (2026-08-03
+  evening): the floated `.rail` carries only the section's references — they
+  pace the prose — while the media shelves render as a `.deck` below it:
+  full-width, flex-wrapped, each shelf's flex-basis sized to its cards
+  (capped at three) so small shelves share a row. Stacking shelves in the
+  404px rail built columns 2–4× taller than the text, leaving the whole left
+  half of a band blank. `__thb` mounts both parts (rail before `.prose`,
+  deck after); at ≤640px the band-body turns flex so the order becomes
+  prose → refs → media.
 - **The gutter shows Wikipedia's own footnotes** (2026-08-03, replacing the
   earlier curated three-source shortlist): each band's rail renders the
   actual `reference-text` bodies the section's markers point at, numbered as
