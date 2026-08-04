@@ -112,7 +112,7 @@ export function frontPage({ inline = new Map() } = {}) {
     ([slug, name, gift, lic]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
-  <p class="lic"><span class="lic-mark">©</span> ${escapeHtml(lic)}</p>
+  <p class="lic"><span class="lic-mark">openness?</span> ${escapeHtml(lic)}</p>
 </div>`,
   ).join('\n')
 
@@ -182,7 +182,7 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .friend .gift{font-size:1.02rem;line-height:1.5;color:#3a3f45;margin:0;max-width:34ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
-.lic-mark{color:#8a8f95;margin-right:2px}
+.lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8f95;margin-right:3px}
 .friend.host{grid-column:1/-1}
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
@@ -235,7 +235,7 @@ ${friends}
   <p class="who"><span class="fav fav-wikipedia"></span>Wikidata &amp; Wikipedia</p>
   <p class="gift">The hosts: one writes the article that convenes everyone; the other makes the
     introductions — it knows every friend&rsquo;s name for every thing.</p>
-  <p class="lic"><span class="lic-mark">©</span> Article text CC BY-SA 4.0; Wikidata CC0.</p>
+  <p class="lic"><span class="lic-mark">openness?</span> Article text CC BY-SA 4.0; Wikidata CC0.</p>
 </div>
     </div>
   </div></section>
