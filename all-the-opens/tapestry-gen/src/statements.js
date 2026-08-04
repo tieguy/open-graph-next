@@ -2,8 +2,9 @@
 // object in a partner collection, and the partner's open API supplies the
 // object itself. Museums (Met P3634, Art Institute of Chicago P4610),
 // biodiversity (iNaturalist P3151, GBIF P846), and place (P625 coordinates →
-// OpenStreetMap render). One WDQS query answers every anchor on the page;
-// the per-object fetches then ride each partner's own host queue.
+// OpenStreetMap render). One WDQS query answers every anchor's partner
+// statements; two small follow-ups decide which anchors are mappable places,
+// and the per-object fetches then ride each partner's own host queue.
 //
 // These are `statement` evidence — Wikidata states the connection outright —
 // so each card credits the property that made it.
@@ -34,6 +35,102 @@ export function wdqsUrl(qids) {
 }
 
 /**
+ * Whether a QID's bindings carry enough location info to be worth asking about.
+ * Nothing but a map card consumes place/defunct, so an anchor with neither a
+ * coordinate nor an OSM identifier could not use the answer. This pure function
+ * factors that decision out so it can be tested, which keeps the follow-up
+ * batches bounded by construction rather than by hope. It admits an item with
+ * an OSM id but no coordinate, which can never draw a map (parseEarthPoint
+ * needs the P625 literal); that costs a row in a cheap query and keeps the
+ * gate a plain statement of "has location evidence".
+ */
+export function needsPlaceDefunctQuery(statements) {
+  return Boolean(statements.coord || statements.osmr || statements.osmw || statements.osmn)
+}
+
+/**
+ * Mappability is answered by two small follow-up queries rather than by
+ * enriching the partner-statement query, because the transitive walk is what
+ * costs: asked of the items, `P31/P279*` over a real page's anchors measured
+ * 16–37s cold and blew the 15s timeout every time; and because that walk rode
+ * the query answering EVERY partner pivot, a timeout cost the page its Met,
+ * AIC, GBIF, iNat, IIIF, DPLA and Europeana cards as well as its maps.
+ *
+ * Query 1 (itemClassesUrl) asks only direct P31/P576 of the location-bearing
+ * anchors — no closure, measured 0.19–0.32s cold. Query 2 (classesUrl) walks
+ * P279* over just the distinct classes that came back (~10–30 per page, a
+ * small and near-static vocabulary that caches well), measured 0.32–0.50s
+ * cold. Both numbers are from salted queries, so WDQS could not serve a
+ * cached result. For scale, the deleted item-level walk measured 16–37s on
+ * the same real anchors, blowing the 15s timeout on every run.
+ *
+ * The structural guarantee, and the thing to preserve: no transitive walk is
+ * ever asked of items, only of classes. A test asserts query 1 contains no
+ * P279 and query 2 contains no EXISTS.
+ *
+ * Failure semantic: either query failing leaves place/defunct unset, mappable()
+ * refuses, and the page loses maps only — never a partner pivot.
+ */
+// Q618123 geographical feature · Q486972 human settlement · Q56061
+// administrative territorial entity · Q41176 building · Q811979 architectural
+// structure · Q43229 organization — the last is what keeps an institution's
+// headquarters, like the EFEO, mappable.
+const LOCATABLE_CLASSES = new Set([
+  'Q618123',
+  'Q486972',
+  'Q56061',
+  'Q41176',
+  'Q811979',
+  'Q43229',
+])
+const HISTORICAL_COUNTRY = 'Q3024240'
+
+export function itemClassesUrl(qids) {
+  const values = qids.map((q) => `wd:${q}`).join(' ')
+  const query =
+    `SELECT ?item ?class ?ended WHERE { VALUES ?item { ${values} } ` +
+    'OPTIONAL { ?item wdt:P31 ?class } ' +
+    'OPTIONAL { ?item wdt:P576 ?ended } }'
+  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * The class hierarchy query: walk P279* over classes only, never items.
+ * Input is the distinct classes from itemClassesUrl(). Returns one row per
+ * (class, ancestor) pair — the classification against the allowsets happens
+ * in JS, in mergePlaceDefunct, for the reason the body comment gives.
+ */
+export function classesUrl(classes) {
+  const values = classes.map((c) => `wd:${c}`).join(' ')
+  // Ask for each class's ancestors and intersect against the allowsets in JS,
+  // rather than asking WDQS the membership question directly. An
+  // `EXISTS { VALUES ?locClass {…} ?class wdt:P279* ?locClass }` makes
+  // Blazegraph re-plan the walk per class and per target: measured cold on
+  // twenty real classes it costs 11–24s, against getJson's 15s timeout.
+  // The same twenty answered as a plain ancestor walk in 0.32–0.50s. The walk
+  // returns far more rows — 237KB for twenty classes, 821KB for a full chunk
+  // of a hundred, but 6.3KB and 22.9KB gzipped on the wire — and that is the
+  // trade: bytes are cheap, Blazegraph CPU is the donated resource, and a
+  // query that times out costs every map on the page.
+  const query = `SELECT ?class ?super WHERE { VALUES ?class { ${values} } ?class wdt:P279* ?super }`
+  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * Whether a map card would be TRUE of this item: a locatable, extant place.
+ * `place`/`defunct` are the strings 'true'/'false', not booleans — a leftover
+ * of the deleted design that asked WDQS the question directly and got xsd
+ * booleans on the wire. mergePlaceDefunct writes them in JS now, so the
+ * convention is purely internal; it is kept only because changing it would
+ * touch every call site for no behavioural gain. An item nothing answered for
+ * stays unmappable — refusal over wrongness, the same stance parseEarthPoint
+ * takes for non-Earth globes.
+ */
+export function mappable(statements) {
+  return statements.place === 'true' && statements.defunct !== 'true'
+}
+
+/**
  * The OSM feature an entity's statements name, most specific first: a way or
  * node outlines the thing itself (a building, a monument), a relation may be
  * anything from a campus to a country. Null when only coordinates exist.
@@ -58,12 +155,81 @@ export function parseEarthPoint(wkt) {
 }
 
 /**
- * Every anchored entity's partner statements, in one query per 100 anchors.
- * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?}>}
+ * Pure merge function: combine item-class bindings and class-hierarchy results
+ * into place/defunct booleans for each item.
+ *
+ * @param {Map<string, object>} itemMap - map from QID to statement object (from main query)
+ * @param {Array} classRows - bindings from classesUrl query
+ * @param {Map<string, Set<string>>} itemClasses - QID → its P31 classes (from itemClassesUrl)
+ * @param {Set<string>} itemsWithEnded - QIDs that have P576 (ended) bindings
+ * @returns {Map<string, object>} - updated itemMap with place/defunct booleans
+ *
+ * The merge builds two sets from classRows:
+ * - placeClasses: classes that are or subclass the mappable location set
+ * - defunctClasses: classes that subclass the historical-polity class
+ *
+ * For each item with location data: place='true' if ANY of its P31 classes
+ * reaches the allowset, defunct='true' if it has P576 (ended) or ANY of its
+ * classes reaches the historical-polity class. Any, not one — an item averages
+ * ~2.7 P31 values and the EFEO is both a research institute and a publisher.
+ * Items with no class binding (no P31) are marked both false to exclude from maps.
+ */
+export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded = new Set()) {
+  // The hierarchy query returns one row per (class, ancestor) pair; a class is
+  // mappable if any ancestor is in the allowset, defunct if any is Q3024240.
+  // P279* includes the class itself, so a class that IS an allowset member
+  // qualifies without a special case.
+  const placeClasses = new Set()
+  const defunctClasses = new Set()
+
+  for (const row of classRows) {
+    const classQid = row.class?.value?.split('/').pop()
+    const superQid = row.super?.value?.split('/').pop()
+    if (!classQid || !superQid) continue
+    if (LOCATABLE_CLASSES.has(superQid)) placeClasses.add(classQid)
+    if (superQid === HISTORICAL_COUNTRY) defunctClasses.add(classQid)
+  }
+
+  // For each item with location data, mark place/defunct based on class membership.
+  for (const [qid, statements] of itemMap.entries()) {
+    if (!needsPlaceDefunctQuery(statements)) continue // Skip items with no location data
+
+    const classes = itemClasses.get(qid)
+    if (!classes?.size) {
+      // Item had no P31 binding (unusual for mappable things, but possible).
+      // Writing 'false' is belt-and-braces: mappable() already refuses on
+      // undefined, so this branch and the one in entityStatements below are
+      // both no-ops. They state the refusal rather than leaving it implied.
+      statements.place = 'false'
+      statements.defunct = 'false'
+      continue
+    }
+
+    // Any qualifying class makes it a place — mirroring the EXISTS this
+    // assembly replaces, which was true if any P31 reached the allowset.
+    statements.place = [...classes].some((c) => placeClasses.has(c)) ? 'true' : 'false'
+
+    // Defunct if ended (P576) or any class is historical.
+    const hasEnded = itemsWithEnded.has(qid)
+    statements.defunct =
+      hasEnded || [...classes].some((c) => defunctClasses.has(c)) ? 'true' : 'false'
+  }
+
+  return itemMap
+}
+
+/**
+ * Every anchored entity's partner statements, in one query per 100 anchors,
+ * followed by the two small mappability queries described above — which run
+ * only for the anchors that carry a coordinate or an OSM identifier.
+ * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, place?, defunct?}>}
  */
 export async function entityStatements(qids) {
   const map = new Map()
-  for (const group of chunk([...new Set(qids)].filter(Boolean), 100)) {
+  const uniqueQids = [...new Set(qids)].filter(Boolean)
+
+  // First query: partner statements
+  for (const group of chunk(uniqueQids, 100)) {
     let rows = []
     try {
       rows = (await getJson(wdqsUrl(group))).results?.bindings ?? []
@@ -79,6 +245,70 @@ export async function entityStatements(qids) {
       map.set(qid, cur)
     }
   }
+
+  // Second query (phase 2a): item classes and end dates, only for QIDs with
+  // location data. Group by 100 like the main query — same host queue, same politeness.
+  const needsPlaceDefunct = [...map].filter(([, s]) => needsPlaceDefunctQuery(s)).map(([q]) => q)
+  const itemClasses = new Map() // QID → Set of its P31 class QIDs
+  const itemsWithEnded = new Set() // QIDs that have P576 bindings
+
+  for (const group of chunk(needsPlaceDefunct, 100)) {
+    let rows = []
+    try {
+      rows = (await getJson(itemClassesUrl(group))).results?.bindings ?? []
+    } catch (e) {
+      console.error(`  wdqs item classes query failed (${group.length} entities): ${e.message}`)
+      continue
+    }
+    for (const row of rows) {
+      const qid = row.item?.value?.split('/').pop()
+      if (!qid) continue
+      if (row.class) {
+        const classQid = row.class.value.split('/').pop()
+        // Every P31 is kept: an item is a place if ANY of its classes is one.
+        // Keeping a single value would let SPARQL's unspecified row order pick
+        // the answer — the EFEO is both a research institute and a publisher.
+        if (!itemClasses.has(qid)) itemClasses.set(qid, new Set())
+        itemClasses.get(qid).add(classQid)
+      }
+      if (row.ended) {
+        itemsWithEnded.add(qid)
+      }
+    }
+  }
+
+  // Third query (phase 2b): resolve the distinct classes against place/defunct hierarchies.
+  // Collect distinct classes from all item bindings — typically 10–30 per page.
+  const distinctClasses = [...new Set([...itemClasses.values()].flatMap((s) => [...s]))]
+  let allClassRows = []
+
+  if (distinctClasses.length > 0) {
+    for (const group of chunk(distinctClasses, 100)) {
+      let rows = []
+      try {
+        rows = (await getJson(classesUrl(group))).results?.bindings ?? []
+      } catch (e) {
+        console.error(`  wdqs class hierarchy query failed (${group.length} classes): ${e.message}`)
+        continue
+      }
+      allClassRows = allClassRows.concat(rows)
+    }
+  }
+
+  // Merge class hierarchy results into item statements once, with all data collected.
+  if (allClassRows.length > 0) {
+    mergePlaceDefunct(map, allClassRows, itemClasses, itemsWithEnded)
+  } else if (needsPlaceDefunct.length > 0) {
+    // If class query failed or returned nothing, mark location items as unmappable
+    // to avoid rendering maps when place/defunct status is unknown.
+    for (const [qid, statements] of map.entries()) {
+      if (needsPlaceDefunctQuery(statements)) {
+        statements.place = 'false'
+        statements.defunct = 'false'
+      }
+    }
+  }
+
   return map
 }
 
@@ -277,7 +507,11 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
     // objects from the same museum never share an unlabelled box.
     e.topic = label ?? null
   }
-  const coord = withMap ? parseEarthPoint(statements.coord) : null
+  // A map is only built for a locatable, extant place: a language with a
+  // coordinate, or an empire with a P625 centroid, would render a confident
+  // modern map of the wrong fact. An OSM identifier does not override the
+  // gate — OSM maps the territory, Wikidata says whether the item IS one.
+  const coord = withMap && mappable(statements) ? parseEarthPoint(statements.coord) : null
   // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
   // The exact chain, card by card: the statement that produced this record,

@@ -8,9 +8,11 @@
 // stays serial. discover() reports progress through an async `emit` callback:
 //
 //   emit('spine', { page, units, dropped })   — prose extracted, before pivots
+//     `page` here is the RESOLVED article title, after redirects — render that,
+//     not the caller's input, or a redirect names a page that has no article.
 //   emit('band', band)                        — one band, in COMPLETION order
 //
-// and resolves to { bands, stats, dropped } with bands in ARTICLE order. A
+// and resolves to { title, bands, stats, dropped } with bands in ARTICLE order. A
 // batch caller can ignore the events entirely; a streaming caller writes the
 // spine skeleton on the first event and a rail fragment per band event. Band
 // assembly runs as one task per unit, so a band waits only on its own
@@ -29,7 +31,8 @@ import {
 } from './wikipedia.js'
 import {
   bibliographyIdentifiers,
-  openLibraryAccess,
+  citationCoverage,
+  coverageText,
   resolveShortCites,
   sectionCitations,
   templateParams,
@@ -43,6 +46,7 @@ import { CACHE, getJson } from './http.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import { entityStatements, statementEntries } from './statements.js'
+import { claimAnchors, dropSeenFiles } from './dedup.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -220,67 +224,46 @@ const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null
  * far fewer of them. Each hit is wrapped in the volumes/brief record shape so
  * `openLibraryAccess` reads both eras' caches identically.
  *
- * @returns {Map<string, object>} isbn → `{records}` value
+ * Returns `{volumes, unchecked}`: failed groups get one delayed second pass, and
+ * ISBNs that still fail are reported as unchecked rather than silently absent.
+ *
+ * @returns {{volumes: Map<string, object>, unchecked: Set<string>}} isbn →
+ * `{records}` value, and ISBNs whose batch failed
  */
 async function openLibraryVolumes(isbns) {
   const volumes = new Map()
-  for (const group of chunk([...new Set(isbns)], 40)) {
-    try {
-      const body = await getJson(olBooksUrl(group), { throttleMs: 1100 })
-      for (const isbn of group) {
-        const data = body[`ISBN:${isbn}`]
-        if (data) volumes.set(isbn, { records: { [`ISBN:${isbn}`]: { data } } })
-      }
-    } catch (e) {
-      console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
+  const unchecked = new Set()
+  const fill = (group, body) => {
+    for (const isbn of group) {
+      const data = body[`ISBN:${isbn}`]
+      if (data) volumes.set(isbn, { records: { [`ISBN:${isbn}`]: { data } } })
     }
   }
-  return volumes
-}
-
-
-/**
- * What the section cites versus what a reader can actually open. The gutter
- * now shows the article's own footnotes rather than a curated shortlist, so
- * this is the summary line under them: without it the difference between a
- * section whose sources are all reachable and one whose sources are all dead
- * ends is invisible. Holdings arrive pre-fetched (one batched request for
- * the whole article); access lands on the candidates as a side effect, which
- * is also what lets footnotes borrow it by ISBN.
- */
-function citationCoverage(candidates, volumes) {
-  for (const cite of candidates) {
-    if (!cite.isbn) continue
-    cite.access = openLibraryAccess(volumes.get(cite.isbn))
+  const failed = []
+  for (const group of chunk([...new Set(isbns)], 40)) {
+    try {
+      fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
+    } catch (e) {
+      console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
+      // A permanent status (a 4xx that is our bad request, not OpenLibrary's
+      // bad day) will fail identically in two seconds. Retrying it spends a
+      // request to learn nothing; those ISBNs go straight to unchecked.
+      if (e.permanent) for (const isbn of group) unchecked.add(isbn)
+      else failed.push(group)
+    }
   }
-  const open = candidates.filter(
-    (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
-  ).length
-  const catalogued = candidates.filter((c) => c.access?.availability === 'catalog').length
-  const linked = candidates.filter((c) => !c.access && (c.archiveUrl || c.doi || c.url)).length
-  return { total: candidates.length, open, catalogued, linked }
-}
-
-/**
- * The coverage line, phrased so an absence reads as a fact about the ecosystem
- * rather than as a thin section — and so every bucket says where it points:
- * "readable" means the Internet Archive links on the notes above, "catalogue"
- * means OpenLibrary knows the book but holds no scan, and works we add nothing
- * to are said to be exactly that. Says nothing when there is nothing to say.
- */
-function coverageText({ total, open, catalogued, linked }) {
-  if (!total) return null
-  const parts = []
-  if (open)
-    parts.push(`${open} readable or borrowable at the Internet Archive — the links on the notes above`)
-  if (catalogued)
-    parts.push(`${catalogued} in OpenLibrary’s catalogue, but with no scan to open yet`)
-  if (linked)
-    parts.push(`${linked} with no open copy — the citation’s own links are all there is`)
-  const unreached = total - open - catalogued - linked
-  if (unreached > 0) parts.push(`${unreached} not held anywhere in the open ecosystem`)
-  if (!parts.length) return null
-  return `Of the ${total} work${total === 1 ? '' : 's'} cited here: ${parts.join(' · ')}`
+  // One more chance after a beat — OpenLibrary's stumbles are usually
+  // moments, not outages. Whatever still fails is truthfully unchecked.
+  if (failed.length) await new Promise((r) => setTimeout(r, 2000))
+  for (const group of failed) {
+    try {
+      fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
+    } catch (e) {
+      console.error(`  openlibrary books failed again (${group.length} isbns): ${e.message}`)
+      for (const isbn of group) unchecked.add(isbn)
+    }
+  }
+  return { volumes, unchecked }
 }
 
 /**
@@ -458,6 +441,7 @@ async function commonsCategoryFiles(category, limit) {
         attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
         why: 'From the subject’s own Commons category',
         _via: 'P373',
+        _file: p.title,
       }
     })
     .filter(Boolean)
@@ -507,10 +491,14 @@ const APPARATUS =
  * The rendered HTML includes everything inside <ref> tags, so ranking cannot
  * be skipped — unranked, the first two links of a section are usually its
  * first two footnotes. Document order is a decent prominence proxy: an article
- * links its subject matter early and its apparatus late.
+ * links its subject matter early and its apparatus late — which is exactly why
+ * hatnotes ({{distinguish|Novel}} atop Novell) are dangerous left in: they sit
+ * before the lede's own first sentence and would rank as the section's most
+ * prominent link despite naming what the article is explicitly NOT about.
  */
-function proseLinks(html) {
+export function proseLinks(html) {
   const body = html
+    .replace(/<div[^>]*class="[^"]*hatnote[^"]*"[\s\S]*?<\/div>/gi, ' ')
     .replace(/<ol class="references"[\s\S]*?<\/ol>/gi, ' ')
     .replace(/<sup[\s\S]*?<\/sup>/gi, ' ')
     .replace(/<table[\s\S]*?<\/table>/gi, ' ')
@@ -526,6 +514,27 @@ function proseLinks(html) {
 }
 
 /**
+ * An article title as MediaWiki would write it: underscores to spaces, first
+ * character upper-cased. Applied to the caller's raw input — an argv string or
+ * a URL path — before the one parse call that resolves it for real.
+ *
+ * This is NOT what makes lookups match: `redirects=1` and `fetchArticle`'s
+ * returned title do that, and every downstream lookup uses the resolved title.
+ * What it buys is cache-key stability, so `"Ludwig_Prandtl"` and
+ * `"Ludwig Prandtl"` are one `.cache` entry rather than two. Keep it for that
+ * reason; do not reintroduce a lookup that depends on it.
+ */
+export function canonicalTitle(title) {
+  if (typeof title !== 'string') return ''
+  return title
+    .replace(/_/g, ' ')    // Underscores to spaces
+    // `/^./u` and not `/^\w/`: \w is [A-Za-z0-9_], so an accented initial —
+    // "émile durkheim", "île-de-france" — would pass through uncapitalized and
+    // miss the QID map entirely, silently costing the page its whole lede.
+    .replace(/^./u, (c) => c.toUpperCase())
+}
+
+/**
  * Discover the enriched page for one article. See the module comment for the
  * emit protocol. `emit` may be async; each band's fragment is awaited before
  * the next event for the same band-task fires, so a streaming caller can
@@ -533,7 +542,13 @@ function proseLinks(html) {
  */
 export async function discover(page, { emit = async () => {} } = {}) {
   // ---- Spine: the whole article in one parse call, split locally. ----------
-  const article = await fetchArticle(CACHE, page)
+  // Normalize the page title at entry, then resolve to the API's own title —
+  // fetchArticle follows redirects, so a redirect source (e.g. "Coral Gables")
+  // must not linger in `page`/`normalizedPage` or every downstream lookup and
+  // display string would still name the redirect, not the article it targets.
+  const article = await fetchArticle(CACHE, canonicalTitle(page))
+  const normalizedPage = article.title
+  page = normalizedPage
   const outline = sectionOutline(article.sections)
   const bodySections = outline.filter((s) => !SKIP.test(s.title))
   const sections = bodySections.slice(0, MAX_SECTIONS)
@@ -543,7 +558,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     sliceSectionWikitext(article.wikitext, article.sections, index) ??
     // A template-transcluded section has no byteoffset to slice by; fetching
     // it individually is the rare fallback, not the rule.
-    (await fetchSectionWikitext(CACHE, page, index))
+    (await fetchSectionWikitext(CACHE, normalizedPage, index))
 
   // The apparatus sections are not rendered, but on an {{sfn}}-style article
   // they hold every identifier the body points at.
@@ -625,8 +640,46 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // map lands, concurrent with the Commons lookups they describe. The
   // subject's own claims — a case citation, a thesis, an author identifier —
   // enrich only the lede, so nothing about them may sit ahead of the spine.
+  // The page's own title rides the same batch: its QID seeds the anchor
+  // registry below without waiting on the subject's claims fetch.
+  const qidsPromise = fetchQids(CACHE, [
+    ...new Set([normalizedPage, ...units.flatMap((u) => u.linkCandidates)]),
+  ])
+  const pickedPromise = qidsPromise.then((qids) => {
+    // Every unit's candidates in article order; ownership is decided here,
+    // before any pivot runs, so streaming's completion-order emission can
+    // never reassign an anchor between runs. The subject QID is seeded to
+    // the lede: its statements and category belong there by design.
+    const seeded = new Map()
+    const ledeAt = units.findIndex((u) => u.index === '0')
+    const subjectQid = qids.get(normalizedPage)
+    if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
+    const owned = claimAnchors(
+      units.map((u) => u.linkCandidates.map((t) => qids.get(t))),
+      { perUnit: QIDS_PER_SECTION, seeded },
+    )
+    const picked = new Map()
+    units.forEach((unit, i) => {
+      stats.anchorsQid += owned[i].length
+      picked.set(unit, owned[i])
+    })
+    return picked
+  })
+
+  // The subject's QID, resolved via wikidata. `subjectPromise` waits on all N
+  // batches of `qidsPromise` (one per 50 titles), not just a single 50-title
+  // request: the page title now rides in the batched titles list alongside every
+  // unit's link candidates, pooling one WMF request. The tradeoff: subject
+  // claims arrive after ALL title batches complete instead of after the first
+  // batch — measured on Prandtl: +89ms for subject, +81ms for statements
+  // (each scales ~10ms per batch). This is acceptable because subject pivots
+  // enrich only the lede (no critical path to bands), and the savings (Prandtl
+  // and Dapples both 4→3 en.wikipedia.org requests) outweigh the latency. Task 3 will place
+  // `categoryFilesPromise = subjectPromise.then(...)` on EVERY band's depicts
+  // chain, making this latency load-bearing per-band, so the dependency must
+  // not grow further.
   const subjectPromise = (async () => {
-    const qid = (await fetchQids(CACHE, [page])).get(page)
+    const qid = (await qidsPromise).get(normalizedPage)
     if (!qid) return { qid: null, claims: {} }
     try {
       const claimsBody = await wikidata({ action: 'wbgetentities', ids: qid, props: 'claims' })
@@ -637,20 +690,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
       return { qid, claims: {} }
     }
   })()
-
-  const qidsPromise = fetchQids(CACHE, [...new Set(units.flatMap((u) => u.linkCandidates))])
-  const pickedPromise = qidsPromise.then((qids) => {
-    const picked = new Map()
-    for (const unit of units) {
-      const p = unit.linkCandidates
-        .map((t) => qids.get(t))
-        .filter((q, i, a) => q && a.indexOf(q) === i)
-        .slice(0, QIDS_PER_SECTION)
-      stats.anchorsQid += p.length
-      picked.set(unit, p)
-    }
-    return picked
-  })
   const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
@@ -679,6 +718,22 @@ export async function discover(page, { emit = async () => {} } = {}) {
       entityStatements([...[...picked.values()].flat(), subject.qid]),
     ),
   )
+  // The subject's Commons category, as its own promise: the depicts chain
+  // seeds from it, and waiting there for ALL the lede's pivots (thesis, IA)
+  // would stall every band's rail behind the slowest one. The catch is
+  // load-bearing: this promise now sits on EVERY band's critical path, and
+  // a failed category fetch is cosmetic, not fatal — without the catch it
+  // would reject the whole chain and take down discover() entirely.
+  const categoryFilesPromise = subjectPromise.then(({ claims }) => {
+    const categoryName = claims.P373?.[0]?.mainsnak?.datavalue?.value
+    return typeof categoryName === 'string'
+      ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
+          console.error(`  commons category failed: ${e.message}`)
+          return []
+        })
+      : []
+  })
+
   const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
@@ -691,7 +746,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // enriches only the lede — so it waits for the identifier batches that
       // every band needs before taking its turn on that host's queue.
       Promise.allSettled([iaPromise])
-        .then(() => collectionByDescribedThesis(subjectClaims, page))
+        .then(() => collectionByDescribedThesis(subjectClaims, normalizedPage))
         .catch((e) => {
           console.error(`  thesis pivot failed: ${e.message}`)
           return null
@@ -700,12 +755,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         console.error(`  author works failed: ${e.message}`)
         return { entries: [], total: 0 }
       }),
-      typeof categoryName === 'string'
-        ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
-            console.error(`  commons category failed: ${e.message}`)
-            return []
-          })
-        : Promise.resolve([]),
+      categoryFilesPromise,
       typeof orcid === 'string'
         ? openAlexAuthorWorks(orcid, { contact: CONTACT(), cap: WORKS_BY_SUBJECT }).catch((e) => {
             console.error(`  openalex author works failed: ${e.message}`)
@@ -764,38 +814,91 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return { opinion, thesis, works, categoryFiles, scholarship, subjectQid }
   })
 
+  // Commons depicts, deduped page-wide in ARTICLE order via a unit-to-unit
+  // chain: band i's rail waits only on bands 0..i-1's Commons work — which
+  // the serial commons host queue imposes anyway — never on later bands and
+  // never on the lede's slow pivots. Inside the band tasks this state would
+  // be first-come in completion order, i.e. nondeterministic streaming.
+  // The chain seeds from the subject's category files: its own media
+  // outranks an anchor's claim to the same file.
+  const depictsByUnit = new Map()
+  {
+    // Only the category files gate the seed. Each unit awaits pickedPromise
+    // itself, so naming it here would put a promise on the seed's path for a
+    // value the seed never reads.
+    let seenSoFar = categoryFilesPromise.then((catFiles) => {
+      // The subject's own media claims its keys before any anchor can: a file
+      // that is both in the subject's category and depicted by an anchor
+      // belongs to the lede's own shelf. If an article ever had no lede unit,
+      // these keys would still be claimed while nothing rendered them — the
+      // same -1 case pickedPromise guards above, and impossible today because
+      // section index '0' is always the lede.
+      const seen = new Set()
+      for (const f of catFiles) if (f._file) seen.add(f._file)
+      return seen
+    })
+    for (const unit of units) {
+      const result = seenSoFar.then(async (seen) => {
+        const commonsEntries = []
+        const breadth = []
+        for (const qid of (await pickedPromise).get(unit)) {
+          try {
+            const { files, totalhits } = await commonsDepicting(qid)
+            for (const f of files) f._qid = qid
+            const [kept] = dropSeenFiles([files], (f) => f._file, seen)
+            commonsEntries.push(...kept)
+            stats.commons += kept.length
+            // Deduped files stay disclosed: an anchor whose whole carousel
+            // rendered earlier on the page must not silently vanish from
+            // the band's own accounting.
+            if (files.length)
+              breadth.push({ qid, shown: kept.length, dropped: files.length - kept.length, totalhits })
+          } catch (e) {
+            console.error(`  commons lookup failed (${qid}): ${e.message}`)
+          }
+        }
+        // `seen` is ONE Set shared by every unit and mutated in place, not a
+        // per-unit snapshot — it is returned only to thread the chain to the
+        // next unit. The band task must never read it: consulting page-wide
+        // state from inside a band would decide dedup in completion order,
+        // which is exactly what this chain exists to prevent.
+        return { commonsEntries, breadth, seen }
+      })
+      depictsByUnit.set(unit, result)
+      // The last unit's assignment has no consumer, so if it ever rejects the
+      // rejection is unhandled. One source can reach here: fetchQids does not
+      // catch, so a failed title batch rejects qidsPromise → subjectPromise
+      // (whose try/catch covers only the wbgetentities call) →
+      // categoryFilesPromise → every result. That case already kills the run,
+      // since the band tasks await the same promises — the warning is noise on
+      // top of a fatal error, not a new failure. Everything else is caught:
+      // commonsCategoryFiles has its own .catch, commonsDepicting is caught
+      // per-QID below. Add a rejecting step to this chain and this line is
+      // where it surfaces.
+      seenSoFar = result.then((r) => r.seen)
+    }
+  }
+
   // ---- One task per unit: a band completes when ITS dependencies do. -------
   const bandTasks = units.map(async (unit) => {
-    const commonsEntries = []
-    const breadth = []
-    for (const qid of (await pickedPromise).get(unit)) {
-      try {
-        const { files, totalhits } = await commonsDepicting(qid)
-        // Remember which anchor asked: the card will say why it is here,
-        // once the anchor's label arrives.
-        for (const f of files) f._qid = qid
-        commonsEntries.push(...files)
-        stats.commons += files.length
-        if (files.length) breadth.push({ qid, shown: files.length, totalhits })
-      } catch (e) {
-        console.error(`  commons lookup failed (${qid}): ${e.message}`)
-      }
-    }
+    const { commonsEntries, breadth } = await depictsByUnit.get(unit)
     // A band waits only on the global batches it will actually read: a
     // section with no book citations must not stall behind OpenLibrary, nor a
     // section with no identifiers behind archive.org. That is what lets the
     // early rails stream while the slow batches are still answering.
     const picked = (await pickedPromise).get(unit)
-    const [iaHits, volumes, labels, scholarHits, statements] = await Promise.all([
+    const [iaHits, ol, labels, scholarHits, statements] = await Promise.all([
       unit.identified.length ? iaPromise : new Map(),
-      unit.railCandidates.some((c) => c.isbn) ? volumesPromise : new Map(),
+      unit.railCandidates.some((c) => c.isbn)
+        ? volumesPromise
+        : { volumes: new Map(), unchecked: new Set() },
       breadth.length || picked.length ? labelsPromise : new Map(),
       unit.scholarly.length ? scholarPromise : new Map(),
       picked.length || unit.index === '0' ? statementsPromise : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
-    const coverage = citationCoverage(unit.railCandidates, volumes)
+    const coverage = citationCoverage(unit.railCandidates, ol.volumes, ol.unchecked)
     // The gutter shows Wikipedia's own footnotes; where one cites a book the
     // open ecosystem holds, the access link rides along on the note itself.
     const accessByIsbn = new Map(
@@ -996,8 +1099,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
           .map(
             (b) =>
               b.totalhits == null
-                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown)`
-                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()})`,
+                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown` +
+                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`
+                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()}` +
+                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`,
           )
           .join('; ')
       : null
@@ -1023,5 +1128,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
   })
 
   const bands = await Promise.all(bandTasks)
-  return { bands, stats, dropped, opinion: (await ledeExtrasPromise).opinion }
+  // `title` is the article we actually read, which is not always the one we
+  // were asked for: "Coral Gables" is a redirect to "Coral Gables, Florida".
+  // A caller that renders its own input would title the page after a redirect
+  // that has no article behind it.
+  return { title: normalizedPage, bands, stats, dropped, opinion: (await ledeExtrasPromise).opinion }
 }
