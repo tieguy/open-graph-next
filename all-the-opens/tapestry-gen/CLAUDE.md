@@ -120,7 +120,12 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   band on its most prominent labelled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
-  pivot silently skips, so clones run keyless. The
+  pivot silently skips, so clones run keyless.
+- **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
+  through their stated Europeana entity (P7704); the search asks for items
+  enriched with exactly that entity URI, `reusability=open` only, and each
+  card names its item's licence. Gated on `EUROPEANA_API_KEY`, same keyless-
+  skip rule. The
   subject's own statements enrich the lede. Map images are single OSM tiles
   fetched server-side and inlined as data URIs — **never**
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)

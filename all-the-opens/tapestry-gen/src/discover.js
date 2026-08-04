@@ -36,6 +36,7 @@ import {
 } from './citations.js'
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { dplaEntries } from './dpla.js'
+import { europeanaEntries } from './europeana.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
@@ -555,6 +556,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     scholar: 0,
     statements: 0,
     dpla: 0,
+    europeana: 0,
     anchorsQid: 0,
     anchorsCite: 0,
     anchorsScholar: 0,
@@ -836,7 +838,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // which is what keeps eleven thousand bird photographs off the page.
     // Without DPLA_API_KEY the pivot is simply absent: the demo must run
     // keyless for anyone who clones it.
-    const dplaNotes = []
+    const partnerNotes = []
     if (process.env.DPLA_API_KEY) {
       const anchored = statementQids
         .map((q) => ({ lc: statements.get(q)?.lc, label: labels.get(q) ?? null, qid: q }))
@@ -852,12 +854,39 @@ export async function discover(page, { emit = async () => {} } = {}) {
           entries.push(...hit.entries)
           stats.dpla += hit.entries.length
           if (hit.total > hit.entries.length)
-            dplaNotes.push(
+            partnerNotes.push(
               `${hit.entries.length} of ${hit.total.toLocaleString()} DPLA partner items ` +
                 `catalogued under “${hit.heading}”`,
             )
         } catch (e) {
           console.error(`  dpla lookup failed (${lc}): ${e.message}`)
+        }
+      }
+    }
+
+    // Europeana, keyed the same way: only anchors whose Wikidata entry
+    // states a Europeana entity (P7704) pivot, and only openly licensed
+    // items come back. Keyless clones skip it silently.
+    if (process.env.EUROPEANA_API_KEY) {
+      const anchored = statementQids
+        .map((q) => ({ eu: statements.get(q)?.eu, label: labels.get(q) ?? null, qid: q }))
+        .map((a) =>
+          unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a,
+        )
+        .filter((a) => a.eu)
+        .slice(0, 2)
+      for (const { eu, label } of anchored) {
+        try {
+          const hit = await europeanaEntries(eu, label, process.env.EUROPEANA_API_KEY)
+          entries.push(...hit.entries)
+          stats.europeana += hit.entries.length
+          if (hit.total > hit.entries.length)
+            partnerNotes.push(
+              `${hit.entries.length} of ${hit.total.toLocaleString()} openly licensed items ` +
+                `Europeana’s partners link to ${label ?? eu}`,
+            )
+        } catch (e) {
+          console.error(`  europeana lookup failed (${eu}): ${e.message}`)
         }
       }
     }
@@ -905,7 +934,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
           .join('; ')
       : null
     const fullDisclosure =
-      [disclosure, ...subjectNotes, ...dplaNotes].filter(Boolean).join('. ') || null
+      [disclosure, ...subjectNotes, ...partnerNotes].filter(Boolean).join('. ') || null
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,

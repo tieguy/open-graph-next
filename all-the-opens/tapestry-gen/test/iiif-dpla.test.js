@@ -131,3 +131,33 @@ test('a DPLA doc becomes a card credited to its holding institution, keyed on P2
   // No landing page → no card: a dead-end card is not a finding.
   assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S', 'S'), null)
 })
+
+// ---- Europeana --------------------------------------------------------------
+
+test('europeanaUrl pivots on the stated entity URI and asks only for open items', async () => {
+  const { europeanaUrl, rightsName, europeanaEntryFrom } = await import('../src/europeana.js')
+  const url = europeanaUrl('agent/base/59904', 'KEY')
+  assert.match(url, /query=%22http%3A%2F%2Fdata\.europeana\.eu%2Fagent%2Fbase%2F59904%22/)
+  assert.match(url, /reusability=open/)
+  assert.match(url, /wskey=KEY/)
+
+  assert.equal(rightsName('http://creativecommons.org/publicdomain/mark/1.0/'), 'Public Domain')
+  assert.equal(rightsName('http://creativecommons.org/publicdomain/zero/1.0/'), 'CC0')
+  assert.equal(rightsName('http://creativecommons.org/licenses/by-sa/4.0/'), 'CC BY SA')
+  assert.equal(rightsName(undefined), null)
+
+  const e = europeanaEntryFrom(
+    {
+      title: ['Portret van een dame'],
+      dataProvider: ['Rijksmuseum'],
+      edmPreview: ['https://api.europeana.eu/thumbnail/x.jpg'],
+      rights: ['http://creativecommons.org/publicdomain/mark/1.0/'],
+      guid: 'https://www.europeana.eu/item/90402/SK_A_1',
+    },
+    'Rembrandt',
+  )
+  assert.equal(e.source, 'europeana')
+  assert.equal(e.attribution.author, 'Rijksmuseum · Public Domain')
+  assert.match(e.why, /Linked to Rembrandt by Europeana/)
+  assert.equal(europeanaEntryFrom({ title: ['no guid'] }, 'X'), null)
+})

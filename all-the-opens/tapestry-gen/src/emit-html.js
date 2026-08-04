@@ -35,6 +35,7 @@ const SOURCE = {
   // arrive from whichever library or museum holds the object.
   iiif: { name: 'IIIF collections', icon: 'https://iiif.io/favicon.ico' },
   dpla: { name: 'DPLA', icon: 'https://dp.la/favicon.ico' },
+  europeana: { name: 'Europeana', icon: 'https://www.europeana.eu/favicon.ico' },
 }
 
 const iaEmbed = (source) => {
