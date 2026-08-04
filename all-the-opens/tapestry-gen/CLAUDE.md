@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-02
+Last verified: 2026-08-03
 
 ## Purpose
 
@@ -17,8 +17,9 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 - **Reads** `data/apollo-11/` — the curated dataset (formerly shared with the D3
   demo, which now lives in `../../attic/`). Read-only, except deliberate dataset
   re-curation.
-- **Writes** `demo/apollo-11.html` (the committed demo) and
-  `../tapestry/apollo-11.tapestry` (gitignored).
+- **Writes** `demo/apollo-11.html` and `../tapestry/apollo-11.tapestry` — both
+  gitignored since 2026-08-03: no render output is committed; the demo is the
+  live streaming server.
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
 

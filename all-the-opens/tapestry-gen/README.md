@@ -1,9 +1,11 @@
 # tapestry-gen
 
 Renders the Apollo 11 dataset in `data/apollo-11/` as *"the article,
-enriched."* Two outputs from one run: **`demo/apollo-11.html`** (the primary,
-self-contained render) and `../tapestry/apollo-11.tapestry` (the Internet Archive
-Tapestry format — retained but secondary; its viewer/artifacts are gitignored).
+enriched."* Two outputs from one run: `demo/apollo-11.html` (self-contained
+render) and `../tapestry/apollo-11.tapestry` (the Internet Archive Tapestry
+format — retained but secondary). All render output is gitignored — the public
+demo is the **live streaming server** (`npm run serve`, deployed at
+help-from-our-friends.fly.dev); nothing pre-generated is committed.
 Design: `docs/design-plans/2026-07-23-article-tapestry.md`. Intent and contracts:
 `CLAUDE.md`.
 
@@ -17,7 +19,8 @@ npm run generate    # writes demo/apollo-11.html and ../tapestry/apollo-11.tapes
 npm test            # no network
 ```
 
-Then just open `demo/apollo-11.html` in a browser — it is self-contained. (To
+Then just open `demo/apollo-11.html` in a browser — it is self-contained (and
+local only; `demo/` is gitignored). (To
 view the `.tapestry` instead: `python -m http.server 8000 -d ../tapestry` and open
 `viewer/?source=../apollo-11.tapestry`.)
 

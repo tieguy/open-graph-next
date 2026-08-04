@@ -31,13 +31,13 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 - `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com npm run serve` —
   streaming server: `http://localhost:8787/wiki/<Article_Title>` renders the
   spine in ~1s and streams enrichment in behind it.
-- Open `tapestry-gen/demo/apollo-11.html` in a browser (self-contained).
 
 ## Project Structure
 
-- `tapestry-gen/` — the generator; `demo/apollo-11.html` is the committed HTML
-  render; `data/apollo-11/` is the curated dataset (moved here from the retired
-  web-demo, whose copy-paths are now broken by design).
+- `tapestry-gen/` — the generator; render output (`demo/`) is gitignored as of
+  2026-08-03 — the demo is the live streaming server, nothing pre-generated is
+  committed; `data/apollo-11/` is the curated dataset (moved here from the
+  retired web-demo, whose copy-paths are now broken by design).
 - `tapestry/` — **gitignored**: a vendored Internet Archive Tapestry viewer plus
   generated `.tapestry` artifacts. Set aside in favour of the HTML render; the
   generator still emits `.tapestry` here.
