@@ -29,6 +29,8 @@ import {
 } from './wikipedia.js'
 import {
   bibliographyIdentifiers,
+  citationCoverage,
+  coverageText,
   openLibraryAccess,
   resolveShortCites,
   sectionCitations,
@@ -236,51 +238,6 @@ async function openLibraryVolumes(isbns) {
     }
   }
   return volumes
-}
-
-
-/**
- * What the section cites versus what a reader can actually open. The gutter
- * now shows the article's own footnotes rather than a curated shortlist, so
- * this is the summary line under them: without it the difference between a
- * section whose sources are all reachable and one whose sources are all dead
- * ends is invisible. Holdings arrive pre-fetched (one batched request for
- * the whole article); access lands on the candidates as a side effect, which
- * is also what lets footnotes borrow it by ISBN.
- */
-function citationCoverage(candidates, volumes) {
-  for (const cite of candidates) {
-    if (!cite.isbn) continue
-    cite.access = openLibraryAccess(volumes.get(cite.isbn))
-  }
-  const open = candidates.filter(
-    (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
-  ).length
-  const catalogued = candidates.filter((c) => c.access?.availability === 'catalog').length
-  const linked = candidates.filter((c) => !c.access && (c.archiveUrl || c.doi || c.url)).length
-  return { total: candidates.length, open, catalogued, linked }
-}
-
-/**
- * The coverage line, phrased so an absence reads as a fact about the ecosystem
- * rather than as a thin section — and so every bucket says where it points:
- * "readable" means the Internet Archive links on the notes above, "catalogue"
- * means OpenLibrary knows the book but holds no scan, and works we add nothing
- * to are said to be exactly that. Says nothing when there is nothing to say.
- */
-function coverageText({ total, open, catalogued, linked }) {
-  if (!total) return null
-  const parts = []
-  if (open)
-    parts.push(`${open} readable or borrowable at the Internet Archive — the links on the notes above`)
-  if (catalogued)
-    parts.push(`${catalogued} in OpenLibrary’s catalogue, but with no scan to open yet`)
-  if (linked)
-    parts.push(`${linked} with no open copy — the citation’s own links are all there is`)
-  const unreached = total - open - catalogued - linked
-  if (unreached > 0) parts.push(`${unreached} not held anywhere in the open ecosystem`)
-  if (!parts.length) return null
-  return `Of the ${total} work${total === 1 ? '' : 's'} cited here: ${parts.join(' · ')}`
 }
 
 /**

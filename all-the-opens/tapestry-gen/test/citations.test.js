@@ -3,7 +3,9 @@ import assert from 'node:assert/strict'
 
 import {
   citationCoverUrl,
+  citationCoverage,
   citationHref,
+  coverageText,
   openLibraryAccess,
   parseCitation,
   prioritizeCitations,
@@ -198,4 +200,37 @@ test('the archived copy travels with its date, and the live URL is primary again
     '{{cite web |title=T |archive-url=https://web.archive.org/web/2023/x}}',
   )
   assert.equal(citationHref(dead), 'https://web.archive.org/web/2023/x')
+})
+
+// --- coverage functions (unchecked bucket) ----------------------------------
+
+test('citationCoverage buckets unchecked ISBNs instead of calling them closed', () => {
+  const candidates = [
+    { isbn: '111', url: 'https://x' }, // volumes hit, full scan
+    { isbn: '222', url: 'https://x' }, // unchecked: OL batch failed
+    { isbn: '333' },                   // unchecked, no links either
+    { url: 'https://y' },              // no isbn: plain linked citation
+    {},                                // no isbn, no links: unreached
+  ]
+  const volumes = new Map([
+    ['111', { records: { 'ISBN:111': { data: { ebooks: [{ availability: 'full', preview_url: 'https://archive.org/details/x' }] } } } }],
+  ])
+  const cov = citationCoverage(candidates, volumes, new Set(['222', '333']))
+  assert.equal(cov.total, 5)
+  assert.equal(cov.open, 1)
+  assert.equal(cov.unchecked, 2)
+  assert.equal(cov.linked, 1) // only the no-isbn linked cite; 222 must NOT land here
+  assert.equal(cov.catalogued, 0)
+})
+
+test('coverageText names the unchecked bucket and never counts it as unreached', () => {
+  const text = coverageText({ total: 5, open: 1, catalogued: 0, linked: 1, unchecked: 2 })
+  assert.match(text, /2 could not be checked this run/)
+  assert.match(text, /1 not held anywhere/)
+  assert.doesNotMatch(text, /3 not held/)
+})
+
+test('coverageText omits the unchecked part when everything was checked', () => {
+  const text = coverageText({ total: 2, open: 1, catalogued: 0, linked: 1, unchecked: 0 })
+  assert.doesNotMatch(text, /could not be checked/)
 })
