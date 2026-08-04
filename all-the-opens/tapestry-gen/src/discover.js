@@ -855,8 +855,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
           stats.dpla += hit.entries.length
           if (hit.total > hit.entries.length)
             partnerNotes.push(
-              `${hit.entries.length} of ${hit.total.toLocaleString()} DPLA partner items ` +
-                `catalogued under “${hit.heading}”`,
+              `${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s partner institutions ` +
+                `catalogue under the Library of Congress heading “${hit.heading}”`,
             )
         } catch (e) {
           console.error(`  dpla lookup failed (${lc}): ${e.message}`)
@@ -907,29 +907,34 @@ export async function discover(page, { emit = async () => {} } = {}) {
     entries.push(...commonsEntries)
     if (extras) entries.push(...extras.categoryFiles)
 
-    // Disclose how each anchor's media was drawn. Above the threshold the four
-    // shown are arbitrary, and saying so is the honest rendering.
+    // Disclose how each anchor's media was drawn, in words that name the
+    // mechanism: the links were followed, the counts are files shown of files
+    // held. Above the threshold the four shown are arbitrary, and saying so
+    // is the honest rendering. These notes only ever fire on the lede, where
+    // unit.title is the article's own title — so "the subject" has a name.
     const subjectNotes = []
     if (extras?.works.entries.length)
       subjectNotes.push(
-        `${extras.works.entries.length} of ${extras.works.total} work${extras.works.total === 1 ? '' : 's'} by the subject, ` +
-          'via its OpenLibrary author identifier',
+        `${extras.works.entries.length} of ${extras.works.total} work${extras.works.total === 1 ? '' : 's'} by ${unit.title} ` +
+          'in OpenLibrary, matched by their author identifier',
       )
     if (extras?.scholarship.entries.length)
       subjectNotes.push(
-        `${extras.scholarship.entries.length} openly readable of ${extras.scholarship.total} scholarly works by the subject, ` +
-          'via its ORCID',
+        `${extras.scholarship.entries.length} openly readable of ${extras.scholarship.total} scholarly works by ${unit.title}, ` +
+          'matched by their ORCID iD',
       )
     if (extras?.categoryFiles.length)
-      subjectNotes.push(`${extras.categoryFiles.length} files from the subject's own Commons category`)
+      subjectNotes.push(
+        `${extras.categoryFiles.length} files from the Commons category for ${unit.title}`,
+      )
     const disclosure = breadth.length
-      ? 'Media anchored on ' +
+      ? 'Commons media follows this section’s links: ' +
         breadth
           .map(
             (b) =>
               b.totalhits == null
-                ? `${labels.get(b.qid) ?? b.qid} (${b.shown} shown, total unknown)`
-                : `${labels.get(b.qid) ?? b.qid} (${b.shown} of ${b.totalhits.toLocaleString()})`,
+                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown)`
+                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()})`,
           )
           .join('; ')
       : null
