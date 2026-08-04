@@ -292,6 +292,9 @@ function iaEntry(doc, cite, via) {
     imageUrl: `https://archive.org/services/img/${doc.identifier}`,
     attribution: { author: `archive.org/details/${doc.identifier}`, license: `via ${via}` },
     why: `Cited in this section — matched by ${via.toUpperCase()}`,
+    // The reason class, not the citation: what must not mix in the lede's IA
+    // box is cited scans with the subject's own thesis, not scan with scan.
+    topic: 'Cited in this section',
     _via: via,
   }
 }
@@ -692,8 +695,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The shelves of the subject's own output say whose output and which
     // identifier vouches for that — the band's disclosure states the counts,
     // the card states the claim.
-    for (const e of works.entries) e.why = `By ${page} — from their OpenLibrary author record`
-    for (const e of scholarship.entries) e.why = `By ${page} — from their ORCID publication record`
+    // The subject's own output is its own reason class: in the lede an ORCID
+    // paper or the thesis must not share a strip with works merely cited there.
+    if (thesis) thesis.topic = `By ${page}`
+    for (const e of works.entries) {
+      e.why = `By ${page} — from their OpenLibrary author record`
+      e.topic = `By ${page}`
+    }
+    for (const e of scholarship.entries) {
+      e.why = `By ${page} — from their ORCID publication record`
+      e.topic = `By ${page}`
+    }
     // The subject's own category files are their own topic, so the lede's
     // Commons box never mixes them with files drawn in by other anchors.
     for (const e of categoryFiles) e.topic = page

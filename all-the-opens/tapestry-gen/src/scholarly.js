@@ -77,6 +77,10 @@ export function openAlexEntry(work, via) {
     href: oa.oa_url,
     attribution: { author: `open access · ${oa.oa_status ?? 'oa'}`, license: `via ${via}` },
     why: `Cited in this section — matched by ${via.toUpperCase()}`,
+    // The reason class, not the citation: per-item topics would split the
+    // strip into one-card carousels; what must not mix is cited work with
+    // the subject's own shelf (see subject topics in discover.js).
+    topic: 'Cited in this section',
     _via: via,
   }
 }
@@ -90,6 +94,7 @@ export function arxivEntry(cite) {
     href: `https://arxiv.org/abs/${cite.arxiv}`,
     attribution: { author: 'open access · arXiv', license: 'via arXiv id' },
     why: 'Cited in this section — matched by arXiv ID',
+    topic: 'Cited in this section',
     _via: 'arxiv',
   }
 }

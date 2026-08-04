@@ -48,6 +48,9 @@ test('openAlexEntry only exists when the work is actually open', () => {
   )
   assert.equal(open.href, 'https://x.test/pdf')
   assert.equal(open.description, 'A. Author et al. · 2020')
+  // The reason class, so a cited paper never shares an unlabelled strip with
+  // the subject's own ORCID shelf in the lede.
+  assert.equal(open.topic, 'Cited in this section')
   assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
   assert.equal(openAlexEntry({ title: 'oa but no url', open_access: { is_oa: true } }, 'doi'), null)
 })
@@ -56,6 +59,7 @@ test('an arXiv citation becomes an entry with zero lookups', () => {
   const e = arxivEntry({ title: 'Attention Is All You Need', arxiv: '1706.03762' })
   assert.equal(e.href, 'https://arxiv.org/abs/1706.03762')
   assert.equal(e.source, 'arxiv')
+  assert.equal(e.topic, 'Cited in this section')
 })
 
 test('openAlexUrl batches values and carries the polite mailto', () => {
