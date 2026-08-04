@@ -26,7 +26,7 @@ import {
   streamHeroExtras,
   streamOpen,
 } from './src/emit-html.js'
-import { escapeHtml } from './src/emit.js'
+import { escapeHtml } from './src/html.js'
 
 // Fail at startup, not mid-stream, if the operator contact is unset.
 userAgent('tapestry-gen')

@@ -1,4 +1,4 @@
-import { escapeHtml } from './emit.js'
+import { escapeHtml } from './html.js'
 
 // A second rendering of the same model (bands, entries, citations) as a single
 // scrolling HTML page. Where the Tapestry emitter reserves fixed pixel lanes and
