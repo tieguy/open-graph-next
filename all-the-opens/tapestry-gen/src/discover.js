@@ -726,7 +726,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       : []
   })
 
-    const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
+  const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
@@ -815,7 +815,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // outranks an anchor's claim to the same file.
   const depictsByUnit = new Map()
   {
-    let seenSoFar = Promise.all([pickedPromise, categoryFilesPromise]).then(([, catFiles]) => {
+    // Only the category files gate the seed. Each unit awaits pickedPromise
+    // itself, so naming it here would put a promise on the seed's path for a
+    // value the seed never reads.
+    let seenSoFar = categoryFilesPromise.then((catFiles) => {
+      // The subject's own media claims its keys before any anchor can: a file
+      // that is both in the subject's category and depicted by an anchor
+      // belongs to the lede's own shelf. If an article ever had no lede unit,
+      // these keys would still be claimed while nothing rendered them — the
+      // same -1 case pickedPromise guards above, and impossible today because
+      // section index '0' is always the lede.
       const seen = new Set()
       for (const f of catFiles) if (f._file) seen.add(f._file)
       return seen
@@ -840,6 +849,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
             console.error(`  commons lookup failed (${qid}): ${e.message}`)
           }
         }
+        // `seen` is ONE Set shared by every unit and mutated in place, not a
+        // per-unit snapshot — it is returned only to thread the chain to the
+        // next unit. The band task must never read it: consulting page-wide
+        // state from inside a band would decide dedup in completion order,
+        // which is exactly what this chain exists to prevent.
         return { commonsEntries, breadth, seen }
       })
       depictsByUnit.set(unit, result)
@@ -847,7 +861,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }
   }
 
-    // ---- One task per unit: a band completes when ITS dependencies do. -------
+  // ---- One task per unit: a band completes when ITS dependencies do. -------
   const bandTasks = units.map(async (unit) => {
     const { commonsEntries, breadth } = await depictsByUnit.get(unit)
     // A band waits only on the global batches it will actually read: a
@@ -1067,7 +1081,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
           .map(
             (b) =>
               b.totalhits == null
-                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown)`
+                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown` +
+                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`
                 : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()}` +
                   `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`,
           )
