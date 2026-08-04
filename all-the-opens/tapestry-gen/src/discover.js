@@ -35,6 +35,7 @@ import {
   templateParams,
 } from './citations.js'
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
+import { dplaEntries } from './dpla.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
@@ -553,6 +554,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     ia: 0,
     scholar: 0,
     statements: 0,
+    dpla: 0,
     anchorsQid: 0,
     anchorsCite: 0,
     anchorsScholar: 0,
@@ -828,6 +830,32 @@ export async function discover(page, { emit = async () => {} } = {}) {
       stats.statements += found.length
     }
 
+    // DPLA: one subject-heading lookup per band, on the band's most
+    // prominent labelled anchor (the subject itself, for the lede). A
+    // cataloger's subject heading is the anchor here, not a Wikidata
+    // statement — each card says so — and without DPLA_API_KEY the pivot
+    // is simply absent: the demo must run keyless for anyone who clones it.
+    let dplaNote = null
+    if (process.env.DPLA_API_KEY) {
+      const subject =
+        unit.index === '0'
+          ? unit.title
+          : statementQids.map((q) => labels.get(q)).find(Boolean)
+      if (subject) {
+        try {
+          const { entries: found, total } = await dplaEntries(subject, process.env.DPLA_API_KEY)
+          entries.push(...found)
+          stats.dpla += found.length
+          if (total > found.length)
+            dplaNote =
+              `${found.length} of ${total.toLocaleString()} DPLA partner items ` +
+              `catalogued under “${subject}”`
+        } catch (e) {
+          console.error(`  dpla lookup failed (${subject}): ${e.message}`)
+        }
+      }
+    }
+
     // Wikilink anchors -> QID -> Commons — deliberately LAST. The demo's
     // point is the breadth of the ecosystem's partners; Wikimedia's own
     // media should not outrank the museum's record of its own painting.
@@ -870,7 +898,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
           )
           .join('; ')
       : null
-    const fullDisclosure = [disclosure, ...subjectNotes].filter(Boolean).join('. ') || null
+    const fullDisclosure =
+      [disclosure, ...subjectNotes, dplaNote].filter(Boolean).join('. ') || null
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,

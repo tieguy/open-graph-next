@@ -1,0 +1,117 @@
+import test from 'node:test'
+import assert from 'node:assert/strict'
+
+import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
+import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
+
+// ---- IIIF (P6108) -----------------------------------------------------------
+
+test('iiifString reads every label shape the two Presentation APIs use', () => {
+  assert.equal(iiifString('Plain'), 'Plain')
+  assert.equal(iiifString(['First', 'Second']), 'First')
+  assert.equal(iiifString({ '@value': 'Valued' }), 'Valued')
+  assert.equal(iiifString({ en: ['English'], fr: ['French'] }), 'English')
+  assert.equal(iiifString({ none: ['Unlanged'] }), 'Unlanged')
+  assert.equal(iiifString({ ga: ['Irish only'] }), 'Irish only')
+  assert.equal(iiifString('<b>Marked up</b>'), 'Marked up')
+  assert.equal(iiifString(null), null)
+})
+
+const V2 = {
+  '@context': 'http://iiif.io/api/presentation/2/context.json',
+  label: 'Book of Kells',
+  attribution: '<span>© The Library of Trinity College Dublin</span>',
+  related: 'https://library.tcd.ie/kells',
+  sequences: [
+    {
+      canvases: [
+        {
+          images: [
+            {
+              resource: {
+                '@id': 'https://iiif.tcd.ie/full.jpg',
+                service: { '@id': 'https://iiif.tcd.ie/image/MS58_001r' },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+const V3 = {
+  '@context': 'http://iiif.io/api/presentation/3/context.json',
+  label: { en: ['Ellesmere Chaucer'] },
+  requiredStatement: { label: { en: ['Attribution'] }, value: { en: ['Huntington Library'] } },
+  provider: [{ label: { en: ['The Huntington'] } }],
+  homepage: [{ id: 'https://hdl.huntington.org/ellesmere' }],
+  items: [
+    {
+      items: [
+        {
+          items: [
+            { body: { id: 'https://hl.org/full.jpg', service: [{ id: 'https://hl.org/iiif/el1' }] } },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+test('a v2 manifest becomes a card: image service, attribution, related link', () => {
+  const e = iiifEntryFrom(V2, 'https://iiif.tcd.ie/manifest.json')
+  assert.equal(e.source, 'iiif')
+  assert.equal(e.title, 'Book of Kells')
+  assert.equal(e.imageUrl, 'https://iiif.tcd.ie/image/MS58_001r/full/400,/0/default.jpg')
+  assert.equal(e.href, 'https://library.tcd.ie/kells')
+  assert.equal(e.attribution.author, '© The Library of Trinity College Dublin')
+  assert.equal(e._via, 'P6108')
+})
+
+test('a v3 manifest becomes a card: requiredStatement wins the credit, homepage the link', () => {
+  const e = iiifEntryFrom(V3, 'https://hl.org/manifest.json')
+  assert.equal(e.title, 'Ellesmere Chaucer')
+  assert.equal(e.imageUrl, 'https://hl.org/iiif/el1/full/400,/0/default.jpg')
+  assert.equal(e.href, 'https://hdl.huntington.org/ellesmere')
+  assert.equal(e.attribution.author, 'Huntington Library')
+})
+
+test('a stated thumbnail beats canvas digging; a bare manifest still links itself', () => {
+  const e = iiifEntryFrom(
+    { label: 'X', thumbnail: [{ id: 'https://x.test/thumb.jpg' }] },
+    'https://x.test/manifest.json',
+  )
+  assert.equal(e.imageUrl, 'https://x.test/thumb.jpg')
+  assert.equal(e.href, 'https://x.test/manifest.json')
+  assert.equal(iiifCredit({}), null)
+  assert.equal(iiifThumbnail({}), null)
+  assert.equal(iiifEntryFrom(null, 'u', 'f'), null)
+})
+
+// ---- DPLA -------------------------------------------------------------------
+
+test('dplaUrl asks for the exact subject heading and only the fields the card reads', () => {
+  const url = dplaUrl('Apollo 11 (Spacecraft)', 'KEY')
+  assert.match(url, /sourceResource\.subject\.name="Apollo%2011%20\(Spacecraft\)"/)
+  assert.match(url, /api_key=KEY/)
+  assert.match(url, /page_size=4/)
+})
+
+test('a DPLA doc becomes a card credited to its holding institution', () => {
+  const e = dplaEntryFrom(
+    {
+      'sourceResource.title': ['Apollo 11 launch photograph'],
+      dataProvider: { name: 'NASA on The Commons' },
+      object: 'https://thumb.test/x.jpg',
+      isShownAt: 'https://provider.test/item/1',
+    },
+    'Apollo 11',
+  )
+  assert.equal(e.source, 'dpla')
+  assert.equal(e.description, 'NASA on The Commons')
+  assert.equal(e.href, 'https://provider.test/item/1')
+  assert.match(e.why, /Catalogued under the subject “Apollo 11”/)
+  // No landing page → no card: a dead-end card is not a finding.
+  assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S'), null)
+})

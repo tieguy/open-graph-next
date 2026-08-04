@@ -109,9 +109,18 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   OpenLibrary author pivot.
 - **Statements** (`src/statements.js`) — one WDQS query per page answers every
   anchor's partner statements: Met objects (P3634), Art Institute of Chicago
-  (P4610), iNaturalist taxa (P3151), GBIF occurrence maps (P846), and P625
+  (P4610), iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF
+  manifests (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing
+  institution with no per-partner code; Presentation v2 and v3 both parsed;
+  best coverage today is SMK Denmark and BnF Gallica, and stale manifest URLs
+  (e.g. Trinity College Dublin's platform move) degrade to no card — and P625
   coordinates → OpenStreetMap map cards (one per section max; non-Earth
-  globes are refused — Tranquility Base gets no map of the Atlantic). The
+  globes are refused — Tranquility Base gets no map of the Atlantic).
+- **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
+  band on its most prominent labelled anchor; the anchor is a *cataloger's*
+  LCSH subject heading, not a Wikidata statement, and the cards say so.
+  Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
+  pivot silently skips, so clones run keyless. The
   subject's own statements enrich the lede. Map images are single OSM tiles
   fetched server-side and inlined as data URIs — **never**
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
