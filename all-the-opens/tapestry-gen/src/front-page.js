@@ -218,21 +218,28 @@ ${friends}
         is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
       </div>
       <div class="box">
-        <h3>Challenges</h3>
-        <h4>Laying out pages nobody has seen</h4>
-        <p>An arbitrary article gives arbitrary shape: one section carries forty images, the next
-        carries none. Prose reflows around the media, every image is sized from its real dimensions,
-        and a sparse section closes up instead of leaving a hole.</p>
-        <h4>The citations that hide the books</h4>
-        <p>The better-sourced the article, the more likely its books live as pointers into a pooled
-        bibliography — Apollo 11 keeps 57 of 65 that way. They are joined back on surname and year.</p>
-        <h4>The works with no identifier anywhere</h4>
-        <p>Prandtl&rsquo;s dissertation is scanned and public and carries no ISBN, OCLC or LCCN — the
-        normal condition for a newly-scanned collection. Someone taught Wikidata which scan it is,
-        and the fix lives in the graph, where every reuser inherits it.</p>
-        <h4>Saying what was left out</h4>
-        <p>Where a rail shows <i>4 of 1,212</i> depictions, the four are an arbitrary draw, and the
-        page says so. An absence is a fact about the ecosystem, not a thinner section.</p>
+        <h3>Challenges and future opportunities</h3>
+        <p>This is a demo and not intended for production. Among other challenges:</p>
+        <h4>Page layout</h4>
+        <p>Arbitrary content means great layout is somewhere between difficult and impossible. Work
+        with designers on this challenge would be necessary (though even rudimentary implementations
+        would likely be very enjoyable for certain types of data nerds!)</p>
+        <h4>Content curation</h4>
+        <p>Sources can return thousands of responses. (Think the Smithsonian on the Apollo Program,
+        for example.) A gallery with a thousand items is not very helpful to the reader, so some
+        sort of curation (or at least ability to tune algorithmic prioritization) would be necessary
+        before widespread deployment.</p>
+        <h4>Source curation</h4>
+        <p>Similarly, there are many collections of open content these days. Picking and
+        prioritizing them would be an important challenge if we wanted to expand this.</p>
+        <h4>Metadata gaps</h4>
+        <p>The recent scan of thousands of theses from historical figures will be nice sources of
+        context, but very little of it has metadata yet. Ideally the fix is to deploy Wikipedian
+        energy to other repositories to improve the metadata, not have it curated only inside
+        Wikipedia.</p>
+        <h4>Bot volume and caching</h4>
+        <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
+        likely need extensive caching and likely formal agreements with the other data providers.</p>
       </div>
     </div>
   </div></section>
