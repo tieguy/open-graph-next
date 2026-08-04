@@ -30,7 +30,9 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 - **`spike.js`** — batch live discovery: `node spike.js "Any Article Title"`
   builds a self-contained enriched page for an arbitrary English Wikipedia
   article with no dataset and no per-article code, byte-reproducible off its
-  cache. Writes `demo/spike-<slug>.html`. Thin wrapper over `src/discover.js`.
+  cache. Writes `demo/spike-<slug>.html`, slugged from the **resolved** title,
+  not argv — `node spike.js "Coral_Gables"` writes
+  `demo/spike-coral-gables-florida.html`. Thin wrapper over `src/discover.js`.
   Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
   state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
 - **`serve.js`** — **streaming** live discovery (design-plan Phase 7, added
@@ -44,7 +46,16 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
 
 Both discovery entry points share `src/discover.js`, which reports progress
 through an async `emit('spine'|'band', …)` callback — batch ignores the
-events, streaming writes fragments from them. Cold-article profile (Barbara
+events, streaming writes fragments from them. `emit('spine', {page, units,
+dropped})` fires before any pivot; `emit('band', band)` fires per band in
+COMPLETION order. `discover()` resolves to `{title, bands, stats, dropped,
+opinion}`, bands in ARTICLE order.
+
+**Callers must render the resolved title, never their own input** (2026-08-04):
+every parse call sends `redirects=1`, `fetchArticle` returns the API's own
+`title`, and both the spine event's `page` and the returned `title` are that
+resolved title. A redirect that lingered in the caller's string would name an
+article the page is not. Cold-article profile (Barbara
 McClintock, 2026-08-03): spine at 0.9s, first rail 4.5s, complete ~9s; the
 tail is the Commons queue, serial by etiquette.
 
@@ -95,7 +106,12 @@ Identifier pivots are batched (`src/batch.js`): one archive.org Solr OR-query
 per run of ISBNs, one OpenLibrary volumes request per 25 (`|`-separated), QIDs
 and labels at 50 per request. Pivots run concurrently across hosts over the
 per-host serial queue. Cold Prandtl: 33.6s/72 requests before, 9.0s/39 after;
-warm reruns are 100% offline.
+warm reruns are 100% offline. Those counts are the 2026-08-03 measurement and
+have since drifted *down*, not up — batching the subject lookup into the title
+batch cost one fewer en.wikipedia.org request per page (Prandtl 5→4, Dapples
+3→2), and page-wide depicts dedup drops Commons requests along with the
+duplicate files (Dapples commons.wikimedia.org 14→13). No cold profile has been
+re-measured since; treat 39 as an upper bound.
 
 ## Partner pivots (2026-08-03)
 
@@ -154,8 +170,10 @@ card with no visual is just a link, and links are already inline).
 `dataset` → `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox
 links, section wikitext) → `place` (wikilink→QID placement, tier-2 via
 connections, prologue/coda for place-only items) → `resolve` (media) +
-`citations` (per-section `<ref>` templates) + `imagesize` → `emit-html` (or the
-Tapestry `layout`/`emit`/`zip`).
+`citations` (per-section `<ref>` templates, and the coverage tally/line — moved
+here from `discover.js` 2026-08-04) + `imagesize` → `emit-html` (or the Tapestry
+`layout`/`emit`/`zip`). Live discovery additionally runs `dedup` between the QID
+map and the pivots (see Key Decisions).
 
 ## Key Decisions
 
@@ -194,6 +212,17 @@ Tapestry `layout`/`emit`/`zip`).
   discover's Commons-depicts loop, lede extras (P648/P496/P373), DPLA
   (P244), Europeana (P7704). Citation-derived cards (OpenAlex/arXiv/IA) have
   no fold — nothing there is editable on Wikidata.
+- **Nothing enriches twice, and article order decides who owns it**
+  (`src/dedup.js`, 2026-08-04). An anchor QID belongs to the band of its
+  *first* mention (`claimAnchors`; a band whose early candidates were claimed
+  upstream backfills from its later ones, and the subject QID is seeded to the
+  lede), and a Commons file renders once per page (`dropSeenFiles`, threaded
+  unit-to-unit as one chained `seen` Set, seeded from the subject's category
+  files). Both are **pure over article-ordered input** because bands run and
+  emit in COMPLETION order — any first-come-wins state read at band-run time
+  would make the page nondeterministic and break batch byte-reproducibility.
+  A band task must therefore never read the shared `seen` Set itself. Nothing
+  vanishes silently: the disclosure line says "N shown earlier on this page".
 - **True image dimensions** are read from JPEG/PNG headers (`imagesize`) so covers
   and photos are never squashed by a guessed aspect.
 - **OpenLibrary covers are inlined** as data URIs — they redirect through
@@ -253,8 +282,16 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
   proxy and hang — `src/mw.js` drops it whenever `NODE_USE_ENV_PROXY` is set.
 - First run needs network (fills `.cache`); reruns are offline.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
-  backoff.
-- OSM place items resolve to keyless `maps.wikimedia.org` static-map thumbnails.
+  backoff. A whole batch that still fails retries once after 2s, and whatever
+  fails again comes back in `openLibraryVolumes`' `unchecked` set (it returns
+  `{volumes, unchecked}`, not a bare Map). Those ISBNs get **no** access verdict
+  and the coverage line says "N could not be checked this run" — "we could not
+  look" must never render as "there is no copy".
+- **A redirect title is not the article.** Without `redirects=1` the API parses
+  e.g. "Coral Gables" as its own one-line stub, so the page rendered 1 section
+  of redirect syntax instead of a city. Every parse call now sends it; the cost
+  is that the caller's input and the article's title can differ (see Three
+  entry points).
 - The dataset's IA/OpenLibrary/Smithsonian identifiers were fabricated and have
   been re-curated to real ones (see `../CLAUDE.md`).
 
@@ -262,10 +299,13 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 
 - `generate.js` — pipeline entry point + coverage report.
 - `src/place.js` — placement rules. `src/citations.js` — citation extraction,
-  reachability ranking, OpenLibrary access. `src/resolve.js` — media resolvers.
+  reachability ranking, OpenLibrary access, and the coverage tally/line
+  (`citationCoverage` / `coverageText`). `src/resolve.js` — media resolvers.
+- `src/dedup.js` — `claimAnchors` / `dropSeenFiles`: page-wide, article-ordered,
+  pure. See Key Decisions for why purity is load-bearing.
 - `src/emit-html.js` — the HTML render. `src/emit.js` / `layout.js` / `zip.js` —
   the Tapestry emitter.
-- `spike.js` — the live-discovery entry point (see Two entry points).
+- `spike.js` — the batch live-discovery entry point (see Three entry points).
   `src/corroborate.js` — described-object matching for the `corroborated` class.
 - `src/citations.js` also handles Wikipedia's **second** citation style:
   `{{sfn|Last|Year}}` pointers into a pooled bibliography, joined on
