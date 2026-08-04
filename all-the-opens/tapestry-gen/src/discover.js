@@ -437,6 +437,7 @@ async function commonsCategoryFiles(category, limit) {
         attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
         why: 'From the subject’s own Commons category',
         _via: 'P373',
+        _file: p.title,
       }
     })
     .filter(Boolean)
@@ -709,7 +710,23 @@ export async function discover(page, { emit = async () => {} } = {}) {
       entityStatements([...[...picked.values()].flat(), subject.qid]),
     ),
   )
-  const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
+  // The subject's Commons category, as its own promise: the depicts chain
+  // seeds from it, and waiting there for ALL the lede's pivots (thesis, IA)
+  // would stall every band's rail behind the slowest one. The catch is
+  // load-bearing: this promise now sits on EVERY band's critical path, and
+  // a failed category fetch is cosmetic, not fatal — without the catch it
+  // would reject the whole chain and take down discover() entirely.
+  const categoryFilesPromise = subjectPromise.then(({ claims }) => {
+    const categoryName = claims.P373?.[0]?.mainsnak?.datavalue?.value
+    return typeof categoryName === 'string'
+      ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
+          console.error(`  commons category failed: ${e.message}`)
+          return []
+        })
+      : []
+  })
+
+    const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
@@ -730,12 +747,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         console.error(`  author works failed: ${e.message}`)
         return { entries: [], total: 0 }
       }),
-      typeof categoryName === 'string'
-        ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
-            console.error(`  commons category failed: ${e.message}`)
-            return []
-          })
-        : Promise.resolve([]),
+      categoryFilesPromise,
       typeof orcid === 'string'
         ? openAlexAuthorWorks(orcid, { contact: CONTACT(), cap: WORKS_BY_SUBJECT }).catch((e) => {
             console.error(`  openalex author works failed: ${e.message}`)
@@ -794,23 +806,50 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return { opinion, thesis, works, categoryFiles, scholarship, subjectQid }
   })
 
-  // ---- One task per unit: a band completes when ITS dependencies do. -------
-  const bandTasks = units.map(async (unit) => {
-    const commonsEntries = []
-    const breadth = []
-    for (const qid of (await pickedPromise).get(unit)) {
-      try {
-        const { files, totalhits } = await commonsDepicting(qid)
-        // Remember which anchor asked: the card will say why it is here,
-        // once the anchor's label arrives.
-        for (const f of files) f._qid = qid
-        commonsEntries.push(...files)
-        stats.commons += files.length
-        if (files.length) breadth.push({ qid, shown: files.length, totalhits })
-      } catch (e) {
-        console.error(`  commons lookup failed (${qid}): ${e.message}`)
-      }
+  // Commons depicts, deduped page-wide in ARTICLE order via a unit-to-unit
+  // chain: band i's rail waits only on bands 0..i-1's Commons work — which
+  // the serial commons host queue imposes anyway — never on later bands and
+  // never on the lede's slow pivots. Inside the band tasks this state would
+  // be first-come in completion order, i.e. nondeterministic streaming.
+  // The chain seeds from the subject's category files: its own media
+  // outranks an anchor's claim to the same file.
+  const depictsByUnit = new Map()
+  {
+    let seenSoFar = Promise.all([pickedPromise, categoryFilesPromise]).then(([, catFiles]) => {
+      const seen = new Set()
+      for (const f of catFiles) if (f._file) seen.add(f._file)
+      return seen
+    })
+    for (const unit of units) {
+      const result = seenSoFar.then(async (seen) => {
+        const commonsEntries = []
+        const breadth = []
+        for (const qid of (await pickedPromise).get(unit)) {
+          try {
+            const { files, totalhits } = await commonsDepicting(qid)
+            for (const f of files) f._qid = qid
+            const [kept] = dropSeenFiles([files], (f) => f._file, seen)
+            commonsEntries.push(...kept)
+            stats.commons += kept.length
+            // Deduped files stay disclosed: an anchor whose whole carousel
+            // rendered earlier on the page must not silently vanish from
+            // the band's own accounting.
+            if (files.length)
+              breadth.push({ qid, shown: kept.length, dropped: files.length - kept.length, totalhits })
+          } catch (e) {
+            console.error(`  commons lookup failed (${qid}): ${e.message}`)
+          }
+        }
+        return { commonsEntries, breadth, seen }
+      })
+      depictsByUnit.set(unit, result)
+      seenSoFar = result.then((r) => r.seen)
     }
+  }
+
+    // ---- One task per unit: a band completes when ITS dependencies do. -------
+  const bandTasks = units.map(async (unit) => {
+    const { commonsEntries, breadth } = await depictsByUnit.get(unit)
     // A band waits only on the global batches it will actually read: a
     // section with no book citations must not stall behind OpenLibrary, nor a
     // section with no identifiers behind archive.org. That is what lets the
@@ -1029,7 +1068,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
             (b) =>
               b.totalhits == null
                 ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown)`
-                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()})`,
+                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()}` +
+                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`,
           )
           .join('; ')
       : null
