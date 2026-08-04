@@ -54,7 +54,12 @@ tail is the Commons queue, serial by etiquette.
 (Fly.io app `help-from-our-friends` — renamed from `article-tapestry`
 2026-08-03; personal org, sjc, scale-to-zero; `Dockerfile` + `fly.toml`
 here). The public name is *"Help From Our Friends: An Open Knowledge Web
-Experiment"*. Deploy with `flyctl deploy --remote-only` from this
+Experiment"*. Deliberately **one machine** (scaled down 2026-08-03; use
+`flyctl deploy --remote-only --ha=false` if ever recreating): the disk cache
+is per-machine, and Fly's default second "HA" machine made requests alternate
+between two independent cold caches — every page felt cold forever. One
+machine = one cache that accrues (18s cold → 0.3s warm); deploys still wipe
+it, which is the accepted trade. Deploy with `flyctl deploy --remote-only` from this
 directory. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
 never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing

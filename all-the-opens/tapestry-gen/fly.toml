@@ -20,6 +20,11 @@ kill_timeout = "45s"
   auto_start_machines = true
   min_machines_running = 0
 
+# ONE machine, on purpose (scaled 2026-08-03; recreate with `--ha=false`).
+# The disk cache is per-machine: with two, requests alternate between two
+# independent cold caches and every page feels cold forever. One machine is
+# one cache that actually accrues — 18s cold, 0.3s warm.
+
 [[vm]]
   size = "shared-cpu-1x"
   memory = "1gb"
