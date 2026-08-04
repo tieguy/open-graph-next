@@ -6,10 +6,12 @@ import {
   aicEntryFrom,
   gbifEntryFrom,
   inatEntryFrom,
+  mappable,
   mapEntry,
   metEntryFrom,
   osmFeature,
   parseEarthPoint,
+  statementEntries,
   wdqsUrl,
 } from '../src/statements.js'
 
@@ -75,6 +77,23 @@ test('wdqsUrl asks for every partner property over the anchor set', () => {
   for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
     assert.ok(url.includes(p), p)
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
+})
+
+test('wdqsUrl also asks whether the item is a locatable, extant place', () => {
+  const url = decodeURIComponent(wdqsUrl(['Q1']))
+  assert.match(url, /AS \?place/)
+  assert.match(url, /AS \?defunct/)
+  assert.match(url, /wdt:P31\/wdt:P279\*/)
+  assert.match(url, /wdt:P576/)
+})
+
+test('mappable: a locatable extant place maps; a language or dead polity never does', () => {
+  // WDQS returns xsd:boolean bindings as the literal strings 'true'/'false',
+  // and entityStatements stores binding values verbatim.
+  assert.equal(mappable({ place: 'true', defunct: 'false', coord: 'Point(103.9 13.4)' }), true)
+  assert.equal(mappable({ place: 'false', defunct: 'false', coord: 'Point(104 12)' }), false) // Khmer, a language
+  assert.equal(mappable({ place: 'true', defunct: 'true' }), false) // Khmer Empire
+  assert.equal(mappable({}), false) // WDQS failed for this item: refuse, don't guess
 })
 
 test('parseEarthPoint reads Earth points and refuses other globes', () => {
@@ -184,4 +203,14 @@ test('a mapped OSM feature beats a bare pin: link, zoom, and evidence follow it'
   const pin = mapEntry({ lat: 41.8794, lon: -87.6239 }, 'Somewhere')
   assert.equal(pin._via, 'P625')
   assert.match(pin.href, /mlat=41\.8794/)
+})
+
+test('statementEntries builds no map card for a non-place, even with room for one', async () => {
+  const dead = await statementEntries('Q201705', { coord: 'Point(103.9 13.4)', place: 'true', defunct: 'true' }, { label: 'Khmer Empire', withMap: true })
+  assert.deepEqual(dead, [])
+  const lang = await statementEntries('Q9205', { coord: 'Point(104 12)', place: 'false', defunct: 'false' }, { label: 'Khmer', withMap: true })
+  assert.deepEqual(lang, [])
+  const wat = await statementEntries('Q43473', { coord: 'Point(103.8667 13.4125)', place: 'true', defunct: 'false', osmw: '43497551' }, { label: 'Angkor Wat', withMap: true })
+  assert.equal(wat.length, 1)
+  assert.equal(wat[0].source, 'openstreetmap')
 })

@@ -13,12 +13,12 @@ import { getJson } from './http.js'
 import { iiifEntry } from './iiif.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
+const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'place', 'defunct']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?place ?defunct WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
@@ -29,8 +29,27 @@ export function wdqsUrl(qids) {
     // P244: the LC authority behind the DPLA subject-heading pivot.
     'OPTIONAL { ?item wdt:P244 ?lc } ' +
     // P7704: the Europeana entity behind the Europeana pivot.
-    'OPTIONAL { ?item wdt:P7704 ?eu } }'
+    'OPTIONAL { ?item wdt:P7704 ?eu } ' +
+    // A map card is only true of a locatable, extant place. `?place` asks
+    // whether the item is an instance of (or of a subclass of) one of a small
+    // set of mappable classes; `?defunct` whether it ended — a dissolution
+    // date or a historical-polity class. A language with a coordinate, or an
+    // empire that ended in 1431, answers false and gets no modern map.
+    'BIND(EXISTS { VALUES ?locClass { wd:Q618123 wd:Q486972 wd:Q56061 wd:Q41176 wd:Q811979 wd:Q43229 } ' +
+    '?item wdt:P31/wdt:P279* ?locClass } AS ?place) ' +
+    'BIND((EXISTS { ?item wdt:P576 ?ended } || ' +
+    'EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024240 }) AS ?defunct) }'
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * Whether a map card would be TRUE of this item: a locatable, extant place.
+ * WDQS boolean bindings arrive as the strings 'true'/'false'; an item the
+ * query never answered for stays unmappable — refusal over wrongness, the
+ * same stance parseEarthPoint takes for non-Earth globes.
+ */
+export function mappable(statements) {
+  return statements.place === 'true' && statements.defunct !== 'true'
 }
 
 /**
@@ -277,7 +296,11 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
     // objects from the same museum never share an unlabelled box.
     e.topic = label ?? null
   }
-  const coord = withMap ? parseEarthPoint(statements.coord) : null
+  // A map is only built for a locatable, extant place: a language with a
+  // coordinate, or an empire with a P625 centroid, would render a confident
+  // modern map of the wrong fact. An OSM identifier does not override the
+  // gate — OSM maps the territory, Wikidata says whether the item IS one.
+  const coord = withMap && mappable(statements) ? parseEarthPoint(statements.coord) : null
   // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
   // The exact chain, card by card: the statement that produced this record,
