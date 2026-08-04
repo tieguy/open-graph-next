@@ -1,8 +1,9 @@
 // The front page of the live demo: the cover of the same publication the
-// article pages belong to. Same serif, same hairline rules, same legend
-// icons — the page's one bold element is the search field itself, because
-// "type anything" IS the thesis. Each showcase card says what to watch
-// stream in for its domain, which is the honest way to sell streaming.
+// article pages belong to. Same serif, same hairline rules — recentered on
+// the FRIENDS (2026-08-03 review): the partners and what each one gives, not
+// the pipeline. The search field stays the one bold element, because "type
+// anything" is still the invitation; the mechanism lives in two quiet boxes
+// above the footer.
 
 import { escapeHtml } from './emit.js'
 import { sourceLegend } from './emit-html.js'
@@ -12,38 +13,55 @@ const SHOWCASE = [
     domain: 'Spaceflight',
     title: 'Apollo 11',
     watch:
-      'Fifty-seven of its books hide in a pooled bibliography. Watch them come back as borrowable copies — with maps of the launch and recovery sites.',
+      'Fifty-seven books hide in a pooled bibliography. The Archive lends them back — with maps of the launch and recovery sites.',
   },
   {
     domain: 'Law',
     title: 'Brown v. Board of Education',
     watch:
-      'The opinion itself arrives first, from the Free Law Project — the primary document before any book about it.',
+      'Free Law Project delivers the opinion itself first — the primary document before any book about it.',
   },
   {
     domain: 'A scientist’s life',
     title: 'Ludwig Prandtl',
     watch:
-      'His 1899 dissertation carries no identifier anywhere. It is matched on the description Wikidata states, and the card shows its work.',
+      'His 1899 dissertation carries no ISBN, OCLC or LCCN — but Wikidata knows which scan it is, and says so.',
   },
   {
     domain: 'Ecology',
     title: 'Monarch butterfly',
     watch:
-      'iNaturalist’s community photographs, and GBIF drawing everywhere a monarch has ever been recorded — from a million observations.',
+      'iNaturalist’s photographs, and GBIF drawing everywhere a monarch has ever been recorded.',
   },
   {
     domain: 'Art',
     title: 'American Gothic',
     watch:
-      'The Art Institute of Chicago’s own record of the painting, placed beside the article about it.',
+      'The Art Institute of Chicago’s own record of the painting, beside the article about it.',
   },
   {
     domain: 'Open science',
     title: 'CRISPR gene editing',
     watch:
-      'Forty-two of its cited papers resolve to readable open-access copies through OpenAlex and arXiv.',
+      'Forty-two cited papers resolve to readable copies through OpenAlex and arXiv.',
   },
+]
+
+// The friends, each with its gift — the page's actual subject. Order is
+// roughly a reader's journey: books, papers, museums, nature, place, law,
+// media; the hosts close the list.
+const FRIENDS = [
+  ['internet_archive', 'Internet Archive', 'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.'],
+  ['openlibrary', 'OpenLibrary', 'Knows every edition of every book — and which ones are actually open.'],
+  ['openalex', 'OpenAlex', 'Finds the free, legal copy of the paper behind the citation.'],
+  ['arxiv', 'arXiv', 'Keeps whole sciences open by construction — the preprint is the publication.'],
+  ['met', 'The Met', 'Shares its own record of its own objects, public domain wherever it can be.'],
+  ['artic', 'Art Institute of Chicago', 'The painting’s home, telling you about the painting.'],
+  ['inaturalist', 'iNaturalist', 'A community’s living field guide — photographs with the observer’s name on them.'],
+  ['gbif', 'GBIF', 'Draws where a species has been seen, from hundreds of millions of records.'],
+  ['openstreetmap', 'OpenStreetMap', 'Maps the world down to the building — by hand, by volunteers.'],
+  ['free_law', 'Free Law Project', 'Publishes the law itself. The opinion, not a paywall.'],
+  ['wikimedia_commons', 'Wikimedia Commons', 'Brings the photographs, freely licensed, of very nearly everything.'],
 ]
 
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
@@ -56,6 +74,12 @@ export function frontPage({ inline = new Map() } = {}) {
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="watch">${escapeHtml(c.watch)}</span>
 </a>`,
+  ).join('\n')
+  const friends = FRIENDS.map(
+    ([slug, name, gift]) => `<div class="friend">
+  <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
+  <p class="gift">${escapeHtml(gift)}</p>
+</div>`,
   ).join('\n')
 
   return `<!doctype html>
@@ -75,13 +99,13 @@ export function frontPage({ inline = new Map() } = {}) {
 body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
   font-size:19px;line-height:1.7;text-rendering:optimizeLegibility}
 a{color:var(--link)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 40px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 40px;min-width:0}
 .kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--muted);margin:0 0 28px}
 .hero{padding:96px 0 40px}
 h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
   margin:0 0 24px;color:var(--head);font-weight:600;max-width:16ch}
-.lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.55;max-width:52ch;margin:0 0 14px;color:#333}
+.lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.55;max-width:54ch;margin:0 0 14px;color:#333}
 .lede b{color:var(--head)}
 
 /* The search field is the thesis: an encyclopedia headword waiting to be
@@ -101,9 +125,9 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
   color:var(--muted);display:block;margin:0 0 26px}
 
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0 44px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
 .show{display:block;text-decoration:none;color:inherit;border-top:1px solid var(--rule);
-  padding:20px 0 26px}
+  padding:20px 0 26px;min-width:0}
 .show:hover .art,.show:focus-visible .art{color:var(--link)}
 .show:focus-visible{outline:2px solid var(--link);outline-offset:4px}
 .dom{display:block;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;
@@ -115,93 +139,102 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .watch{display:block;font-family:var(--sans);font-size:.82rem;line-height:1.6;color:var(--muted);
   max-width:38ch}
 
-.evi{display:grid;grid-template-columns:repeat(3,1fr);gap:0 44px;font-family:var(--sans)}
-.evi div{border-top:1px solid var(--rule);padding-top:18px}
-.evi h3{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;margin:0 0 10px;color:var(--head)}
-.evi p{font-size:.82rem;line-height:1.6;color:var(--muted);margin:0;max-width:38ch}
-.swatch{display:inline-block;width:22px;height:13px;border:1px dashed #c9a227;border-radius:3px;
-  background:#fffdf5;vertical-align:-2px;margin-right:6px}
-
-.legend{display:flex;flex-wrap:wrap;gap:10px 22px;font-family:var(--sans);font-size:.78rem;color:var(--muted)}
-.key{display:inline-flex;align-items:center;gap:8px}
-.fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;
+.friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
+.friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
+.friend .who{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:700;
+  font-size:1rem;color:var(--head);margin:0 0 8px}
+.fav{width:18px;height:18px;flex:none;border-radius:3px;background:#fff no-repeat center;
   background-size:contain;display:inline-block}
+.friend .gift{font-size:1.02rem;line-height:1.5;color:#3a3f45;margin:0;max-width:34ch}
+.friend.host{grid-column:1/-1}
+.friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
-.hard h3{font-family:var(--serif);font-size:1.15rem;margin:1.6em 0 .4em;color:var(--head)}
-.hard h3:first-of-type{margin-top:0}
-.hard p{font-family:var(--sans);font-size:.86rem;line-height:1.65;color:#3a3f45;max-width:66ch;margin:0 0 .9em}
-.hard code{background:var(--faint);padding:1px 5px;border-radius:3px;font-size:.8rem}
+.boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.box{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:22px 26px;min-width:0}
+.box h3{font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--head);margin:0 0 10px}
+.box p{font-family:var(--sans);font-size:.88rem;line-height:1.65;color:#3a3f45;margin:0 0 10px}
+.box p:last-child{margin-bottom:0}
+.box h4{font-family:var(--serif);font-size:1.02rem;margin:16px 0 4px;color:var(--head)}
 
 .foot{border-top:1px solid var(--rule);padding:40px 0 60px;font-family:var(--sans);
   font-size:.8rem;color:var(--muted)}
 .foot p{max-width:70ch;margin:0 0 8px}
 
-@media(max-width:960px){.grid,.evi{grid-template-columns:1fr 1fr}}
+@media(max-width:960px){.grid,.friends{grid-template-columns:repeat(2,minmax(0,1fr))}.boxes{grid-template-columns:minmax(0,1fr)}}
 @media(max-width:640px){
   .wrap{padding:0 20px}
   .hero{padding:56px 0 30px}
-  .grid,.evi{grid-template-columns:1fr}
+  .grid,.friends{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
 <body>
 <header class="hero"><div class="wrap">
   <p class="kicker">Help From Our Friends · an open knowledge web experiment</p>
-  <h1>The article, enriched — while you watch.</h1>
-  <p class="lede">Pick any English Wikipedia article. The article streams in first; then ten open
-    collections — libraries, archives, museums, science databases, maps — assemble around it.
-    <b>Nothing is placed by hand:</b> every item is found by an identifier the article itself
-    states, and lands in the section whose anchor found it.</p>
+  <h1>Wikipedia is not alone.</h1>
+  <p class="lede">Alongside every Wikipedia article there is a wider open world: libraries that lend,
+    museums that publish their own collections, scientists who post their papers openly, mappers and
+    naturalists who chart the planet for free. This experiment invites them in.
+    <b>Pick an article, and watch its friends arrive.</b></p>
   <form class="ask" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
     <input name="q" placeholder="Any article title — try your hometown" autofocus
       aria-label="English Wikipedia article title">
-    <p class="hint">Press <kbd>Enter</kbd> to discover. Pages take a few seconds to finish; they start in one.</p>
+    <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
 </div></header>
 <main>
   <section class="section"><div class="wrap">
-    <span class="eyebrow">Six domains, one pipeline — no per-article code</span>
+    <span class="eyebrow">Or start with one of these</span>
     <div class="grid">
 ${cards}
     </div>
   </div></section>
   <section class="section"><div class="wrap">
-    <span class="eyebrow">How a connection earns its place</span>
-    <div class="evi">
-      <div><h3>Identifier</h3><p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a
-        collection answers to exactly it. The strongest claim a card can make.</p></div>
-      <div><h3>Statement</h3><p>Wikidata states the connection outright — this painting is Met object
-        11417, this species is iNaturalist taxon 48662, this place is here. The card credits the property.</p></div>
-      <div><h3><span class="swatch"></span>Corroborated</h3><p>No identifier exists on either side, so
-        records are matched on what Wikidata <i>describes</i> — author, date, institution — and the card
-        prints the agreeing values rather than asking to be trusted.</p></div>
+    <span class="eyebrow">Current friends, and what they bring</span>
+    <div class="friends">
+${friends}
+      <div class="friend host">
+  <p class="who"><span class="fav fav-wikipedia"></span>Wikidata &amp; Wikipedia</p>
+  <p class="gift">The hosts: one writes the article that convenes everyone; the other makes the
+    introductions — it knows every friend&rsquo;s name for every thing.</p>
+</div>
     </div>
   </div></section>
   <section class="section"><div class="wrap">
-    <span class="eyebrow">The collections it reaches</span>
-    <div class="legend">${legend.html}</div>
-  </div></section>
-  <section class="section hard" id="hard-problems"><div class="wrap">
-    <span class="eyebrow">Where it gets hard</span>
-    <h3>Laying out data you have never seen</h3>
-    <p>An arbitrary article gives you arbitrary shape: one section carries forty images and the next
-      carries none. The page lets CSS reflow prose around the media rather than computing positions,
-      and every image is sized from its real dimensions — so a sparse section closes up instead of
-      leaving a hole, and nothing is squashed into a guessed aspect ratio.</p>
-    <h3>The citations that hide the books</h3>
-    <p>The better-sourced the article, the more likely it keeps its books as <code>{{sfn}}</code>
-      pointers into a pooled bibliography — Apollo 11 keeps 57 of 65 that way. Anything that reads
-      footnotes alone misses the most books on exactly the best-cited pages; they are joined back on
-      surname and year.</p>
-    <h3>The works with no identifier anywhere</h3>
-    <p>Prandtl’s dissertation is scanned and public, and carries no ISBN, OCLC or LCCN — the normal
-      condition for a newly-scanned collection, not an exotic one. The match is made on the object
-      Wikidata describes, and the card shows the agreeing values, because a description that agrees
-      is a weaker claim than an identifier that matches.</p>
-    <h3>Saying what was left out</h3>
-    <p>Where a rail shows <i>4 of 1,212</i> depictions, the four are an arbitrary draw, and the page
-      says so instead of implying a selection. A section whose sources are all dead ends states that
-      too — an absence is a fact about the ecosystem, not a thinner section.</p>
+    <div class="boxes">
+      <div class="box">
+        <h3>How it works</h3>
+        <p>The goal of this experiment is to demonstrate that open knowledge is not just hugely
+        successful, but also increasingly hugely interlinked. So when you load an article, some
+        simple javascript pulls existing linking information (from citations and Wikidata) and then
+        grabs context from those sources to enrich the article — in one of two ways, and each
+        card says which.</p>
+        <h4>Identifier</h4>
+        <p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a collection answers to
+        exactly it. The strongest claim a card can make.</p>
+        <h4>Statement</h4>
+        <p>Wikidata states the connection outright — this painting is Met object 11417, this species
+        is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
+      </div>
+      <div class="box">
+        <h3>Challenges</h3>
+        <h4>Laying out pages nobody has seen</h4>
+        <p>An arbitrary article gives arbitrary shape: one section carries forty images, the next
+        carries none. Prose reflows around the media, every image is sized from its real dimensions,
+        and a sparse section closes up instead of leaving a hole.</p>
+        <h4>The citations that hide the books</h4>
+        <p>The better-sourced the article, the more likely its books live as pointers into a pooled
+        bibliography — Apollo 11 keeps 57 of 65 that way. They are joined back on surname and year.</p>
+        <h4>The works with no identifier anywhere</h4>
+        <p>Prandtl&rsquo;s dissertation is scanned and public and carries no ISBN, OCLC or LCCN — the
+        normal condition for a newly-scanned collection. Someone taught Wikidata which scan it is,
+        and the fix lives in the graph, where every reuser inherits it.</p>
+        <h4>Saying what was left out</h4>
+        <p>Where a rail shows <i>4 of 1,212</i> depictions, the four are an arbitrary draw, and the
+        page says so. An absence is a fact about the ecosystem, not a thinner section.</p>
+      </div>
+    </div>
   </div></section>
 </main>
 <footer class="foot"><div class="wrap">

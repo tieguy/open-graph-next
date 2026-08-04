@@ -128,8 +128,7 @@ const server = createServer(async (req, res) => {
     })
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of await bandInline(b)) inline.set(k, v)
-    // The front page IS the home now; the draw-note's discussion link points
-    // at its #hard-problems section on this same host.
+    // The front page IS the home now; the hero's main-page link points there.
     res.write(streamHeroExtras(bands, { inline, home: process.env.SITE_HOME ?? '/' }))
     res.write(
       streamClose({

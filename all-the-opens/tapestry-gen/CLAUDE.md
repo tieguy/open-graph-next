@@ -66,17 +66,19 @@ inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description
 
 ## Evidence classes (spike)
 
-An edge is one of three things, and the render distinguishes them because
+An edge is one of two live things, and the render distinguishes them because
 conflating them would overstate what the page knows:
 
 - **identifier** — a shared authority ID (ISBN/OCLC/LCCN → Internet Archive).
 - **statement** — a Wikidata claim (`P180 depicts` → Commons).
-- **corroborated** — no shared identifier at all; the candidate satisfies an
-  object Wikidata *describes* (`P1026` → author + year + institution). Rendered
-  with a dashed card that prints the agreeing values, plus a legend entry that
-  appears only on pages that use it. `src/corroborate.js` decides these; all
-  three signals are required, because the same collection holds theses by Ludwig,
-  Hans and Antonius Prandtl.
+- **corroborated** — *retired 2026-08-03 (front-page review)*: the
+  described-object search fallback (`P1026` → author + year + institution) is
+  commented out in `src/discover.js`. Its one exemplar was closed the right
+  way — Wikidata learned the scan's identifier (P724 on Prandtl's thesis), so
+  the stated-identifier route answers and a fix in the graph is inherited by
+  every reuser. `src/corroborate.js`, its tests, and the dashed-card render
+  path are kept intact for revival if a genuinely unidentified work warrants
+  it.
 
 ## Request shape (Tier-1 performance work, 2026-08-03)
 

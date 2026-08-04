@@ -111,9 +111,13 @@ function citationIdentifiers(wikitext) {
  * and awarding university, and archival scans of theses carry exactly those three
  * fields and no identifier at all. So the two can be joined on the description.
  *
- * Returns an entry marked `corroborated` rather than `identifier`, with the
- * agreeing signals attached — the page shows the reasoning, because a matched
- * description is a weaker claim than a shared ISBN and must not read like one.
+ * RETIRED 2026-08-03 (front-page review): the search-based corroboration
+ * fallback is disabled below. The gap it covered was closed the right way —
+ * Wikidata learned the identifier (P724 on Prandtl's thesis), and a fix in
+ * the graph is inherited by every reuser, where a fix in this code helps only
+ * this code. What remains live is the stated-identifier route; the fallback
+ * is kept as commented code (with `corroborate.js` and its tests) in case a
+ * subject with a truly unidentified thesis makes it worth reviving.
  */
 async function collectionByDescribedThesis(subjectClaims, personName) {
   const thesisQid = subjectClaims.P1026?.[0]?.mainsnak?.datavalue?.value?.id
@@ -152,6 +156,8 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
     }
   }
 
+  // The described-object search fallback, disabled per the 2026-08-03 review.
+  /*
   const year = claims.P577?.[0]?.mainsnak?.datavalue?.value?.time
   const uniQid = claims.P4101?.[0]?.mainsnak?.datavalue?.value?.id
   if (!year || !uniQid) return null
@@ -197,6 +203,7 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
       _via: 'P1026',
     }
   }
+  */
   return null
 }
 
