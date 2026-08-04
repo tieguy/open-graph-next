@@ -2,9 +2,9 @@
   "name": "tapestry-gen",
   "private": true,
   "type": "module",
-  "description": "Generates a Tapestry canvas from the Apollo 11 dataset",
+  "description": "Renders a Wikipedia article enriched with the open ecosystem's media and sources",
   "scripts": {
-    "generate": "node generate.js",
+    "spike": "node spike.js",
     "serve": "node serve.js",
     "test": "node --test 'test/*.test.js'"
   },

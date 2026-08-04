@@ -16,7 +16,7 @@ import { coverDataUri } from './src/http.js'
 import { requestTally } from './src/mw.js'
 import { userAgent } from './src/wmf.js'
 import { buildHtml, iconUrls } from './src/emit-html.js'
-import { escapeHtml } from './src/emit.js'
+import { escapeHtml } from './src/html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 

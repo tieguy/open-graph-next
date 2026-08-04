@@ -4,35 +4,44 @@ Last verified: 2026-08-04
 
 ## Purpose
 
-A second rendering of the shared Apollo 11 dataset as *"the article, enriched"* —
-the Wikipedia article as a linear spine, the open ecosystem's media on one side,
-its cited sources on the other. It is **generated, not authored**: the article's
-own wikilinks, resolved through Wikidata QIDs, decide where each item lands, so
-the placement *is* the argument and generalises to any article. Primary output is
-a self-contained HTML page; a `.tapestry` (Internet Archive Tapestry format) is
-also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
+*"The article, enriched"* — any English Wikipedia article as a linear spine,
+the open ecosystem's media on one side, its cited sources on the other. It is
+**generated, not authored**: the article's own wikilinks, resolved through
+Wikidata QIDs, decide where each item lands, so the placement *is* the
+argument. Output is a self-contained HTML page. Fuller narrative in
+`README.md`.
+
+**The website is the product** (2026-08-04). The curated-dataset experiment —
+`generate.js`, the Apollo 11 dataset, hand placement, and the Internet Archive
+`.tapestry` emitter — was retired to
+`../../attic/all-the-opens/tapestry-gen-curated/`. It answered its question:
+live discovery renders the same article denser, with no dataset and no
+per-article code. What survives here is what serves the site. If something
+does not help generate the website, it belongs in the attic.
 
 ## Contracts
 
-- **Reads** `data/apollo-11/` — the curated dataset (formerly shared with the D3
-  demo, which now lives in `../../attic/`). Read-only, except deliberate dataset
-  re-curation.
-- **Writes** `demo/apollo-11.html` and `../tapestry/apollo-11.tapestry` — both
-  gitignored since 2026-08-03: no render output is committed; the demo is the
-  live streaming server.
+- **Reads** nothing on disk but its own cache. Every page is discovered live
+  from the article title.
+- **Writes** `demo/spike-<resolved-title>.html` from `spike.js` — gitignored
+  since 2026-08-03: no render output is committed; the demo is the live
+  streaming server.
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
 
-## Three entry points
+## Two entry points
 
-- **`generate.js`** — the original, dataset-bound: renders Apollo 11 from the
-  curated `data/apollo-11/`. Unchanged in intent.
 - **`spike.js`** — batch live discovery: `node spike.js "Any Article Title"`
   builds a self-contained enriched page for an arbitrary English Wikipedia
   article with no dataset and no per-article code, byte-reproducible off its
   cache. Writes `demo/spike-<slug>.html`, slugged from the **resolved** title,
   not argv — `node spike.js "Coral_Gables"` writes
   `demo/spike-coral-gables-florida.html`. Thin wrapper over `src/discover.js`.
+  **It is also the only test of the discovery path**: no test imports
+  `discover()`, so the acceptance checks in `docs/` are spike renders plus
+  greps, and the byte-reproducibility of a warm re-render is how a regression
+  is detected. `serve.js` cannot play that role — it emits bands in COMPLETION
+  order, which is deliberately nondeterministic.
   Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
   state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
 - **`serve.js`** — **streaming** live discovery (design-plan Phase 7, added
@@ -44,7 +53,7 @@ also emitted but secondary (see Key Decisions). Fuller narrative in `README.md`.
   differs. Byte-reproducibility is a batch-only invariant; streamed pages are
   expected to vary with live data.
 
-Both discovery entry points share `src/discover.js`, which reports progress
+Both entry points share `src/discover.js`, which reports progress
 through an async `emit('spine'|'band', …)` callback — batch ignores the
 events, streaming writes fragments from them. `emit('spine', {page, units,
 dropped})` fires before any pivot; `emit('band', band)` fires per band in
@@ -182,20 +191,20 @@ card with no visual is just a link, and links are already inline).
 
 ## Pipeline (output-agnostic core → renderer)
 
-`dataset` → `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox
-links, section wikitext) → `place` (wikilink→QID placement, tier-2 via
-connections, prologue/coda for place-only items) → `resolve` (media) +
-`citations` (per-section `<ref>` templates, and the coverage tally/line — moved
-here from `discover.js` 2026-08-04) + `imagesize` → `emit-html` (or the Tapestry
-`layout`/`emit`/`zip`). Live discovery additionally runs `dedup` between the QID
-map and the pivots (see Key Decisions).
+`wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox links,
+section wikitext) → `discover` (anchors, pivots, budgets) → `dedup` (article-
+order anchor ownership and page-wide file dedup, between the QID map and the
+pivots) + `citations` (per-section `<ref>` templates, and the coverage
+tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
+`src/html.js` holds `escapeHtml`, the one rule every renderer shares.
 
 ## Key Decisions
 
-- **HTML is primary.** CSS reflow solves what hand-computed `.tapestry` pixel
-  geometry could not (dead whitespace, squashed images, non-responsive). Only
-  `layout.js`/`emit.js`/`zip.js`/`vendor/parse-root.mjs` are Tapestry-specific;
-  everything else is output-agnostic and reused by the HTML render.
+- **HTML is the only output** (2026-08-04). CSS reflow solved what
+  hand-computed `.tapestry` pixel geometry could not — dead whitespace,
+  squashed images, non-responsive — so the Tapestry emitter
+  (`layout`/`emit`/`zip`/`vendor/parse-root.mjs`) retired to the attic with the
+  generator that drove it. It still ran when it was retired; nothing used it.
 - **References float right; media rides a full-width deck** (2026-08-03
   evening): the floated `.rail` carries only the section's references — they
   pace the prose — while the media shelves render as a `.deck` below it:
@@ -307,23 +316,20 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
   of redirect syntax instead of a city. Every parse call now sends it; the cost
   is that the caller's input and the article's title can differ (see Three
   entry points).
-- The dataset's IA/OpenLibrary/Smithsonian identifiers were fabricated and have
-  been re-curated to real ones (see `../CLAUDE.md`).
 
 ## Key Files
 
-- `generate.js` — pipeline entry point + coverage report.
-- `src/place.js` — placement rules. `src/citations.js` — citation extraction,
-  reachability ranking, OpenLibrary access, and the coverage tally/line
-  (`citationCoverage` / `coverageText`). `src/resolve.js` — media resolvers.
+- `src/discover.js` — the live-discovery pipeline both entry points share.
+- `src/citations.js` — citation extraction, reachability ranking, OpenLibrary
+  access, and the coverage tally/line (`citationCoverage` / `coverageText`).
 - `src/dedup.js` — `claimAnchors` / `dropSeenFiles`: page-wide, article-ordered,
   pure. See Key Decisions for why purity is load-bearing.
-- `src/emit-html.js` — the HTML render. `src/emit.js` / `layout.js` / `zip.js` —
-  the Tapestry emitter.
-- `spike.js` — the batch live-discovery entry point (see Three entry points).
+- `src/emit-html.js` — the HTML render, batch and streaming.
+  `src/html.js` — `escapeHtml`, shared by every renderer.
+- `spike.js` — the batch live-discovery entry point (see Two entry points).
   `src/corroborate.js` — described-object matching for the `corroborated` class.
 - `src/citations.js` also handles Wikipedia's **second** citation style:
   `{{sfn|Last|Year}}` pointers into a pooled bibliography, joined on
-  `(surname, year)`. Mature and featured articles use it heavily — Apollo 11 keeps
-  19 of its 22 ISBNs there — so reading `<ref>` contents alone misses most of the
-  books on exactly the best-sourced pages.
+  `(surname, year)`. Mature and featured articles use it heavily — the Apollo 11
+  article keeps 19 of its 22 ISBNs there — so reading `<ref>` contents alone
+  misses most of the books on exactly the best-sourced pages.

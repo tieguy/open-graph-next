@@ -5,7 +5,7 @@
 // anything" is still the invitation; the mechanism lives in two quiet boxes
 // above the footer.
 
-import { escapeHtml } from './emit.js'
+import { escapeHtml } from './html.js'
 import { sourceLegend } from './emit-html.js'
 
 const SHOWCASE = [
