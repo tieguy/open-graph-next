@@ -82,6 +82,41 @@ test('a card says which anchor brought it here', () => {
   assert.match(rail, /<p class="why">Depicts Santiago Calatrava, a link in this section<\/p>/)
 })
 
+test('one source, two topics: the carousel splits, one labelled strip per topic', () => {
+  const mk = (title, topic) => ({
+    source: 'wikimedia_commons',
+    title,
+    imageUrl: `https://example.test/${title}.jpg`,
+    topic,
+    why: `Depicts ${topic}, a link in this section`,
+  })
+  const rail = bandRail({
+    ...BAND,
+    footnotes: [],
+    entries: [
+      mk('Bridge deck', 'suspension bridge'),
+      mk('Towers', 'suspension bridge'),
+      mk('The strait', 'Golden Gate'),
+    ],
+  })
+  const carousels = rail.match(/<div class="carousel">/g) ?? []
+  assert.equal(carousels.length, 2)
+  assert.match(rail, /<span class="topic">suspension bridge<\/span>/)
+  assert.match(rail, /<span class="topic">Golden Gate<\/span>/)
+  // The shared why line is said once under the head, not on every card.
+  assert.match(
+    rail,
+    /<p class="carousel-why">Depicts suspension bridge, a link in this section<\/p>/,
+  )
+  assert.doesNotMatch(rail, /<p class="why">Depicts suspension bridge, a link in this section<\/p>/)
+})
+
+test('one source, one topic: a single carousel with no topic label, as before', () => {
+  const rail = bandRail(BAND)
+  assert.equal((rail.match(/<div class="carousel">/g) ?? []).length, 1)
+  assert.doesNotMatch(rail, /<span class="topic">/)
+})
+
 test('the rail shows the actual footnotes, numbered as the prose numbers them', () => {
   const rail = bandRail(BAND)
   assert.match(rail, /References in this section/)

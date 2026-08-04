@@ -168,12 +168,23 @@ function card(entry, inline) {
 
 // One horizontal, scroll-snapping carousel per source: the strip is labelled with
 // the source's own icon, and its items scroll sideways rather than stacking into a
-// tall column.
-function carousel(source, items, inline) {
+// tall column. When a band draws one source's media through several anchors, the
+// renderer splits it into one carousel per topic (the anchor's label) — a strip
+// mixing the suspension-bridge files with the strait's reads as one confused box.
+function carousel(source, items, inline, topic = null) {
   // Only badge the count when there is more than one — "1" in the corner is noise.
   const count = items.length > 1 ? `<span class="count">${items.length}</span>` : ''
+  const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
+  // A topic-labelled strip whose cards all share one why line says it once,
+  // under the head — four cards each repeating "Depicts X" is noise.
+  let shared = ''
+  if (topic && items.length > 1 && items[0].why && items.every((e) => e.why === items[0].why)) {
+    shared = `<p class="carousel-why">${escapeHtml(items[0].why)}</p>`
+    items = items.map((e) => ({ ...e, why: null }))
+  }
   return (
-    `<div class="carousel"><div class="carousel-head">${sourceTag(source, inline)}${count}</div>` +
+    `<div class="carousel"><div class="carousel-head">${sourceTag(source, inline)}${topicTag}${count}</div>` +
+    shared +
     `<div class="carousel-track">${items.map((e) => card(e, inline)).join('')}</div></div>`
   )
 }
@@ -225,13 +236,27 @@ function footnoteList(fns, wikiBase) {
  * spine it belongs to. Empty string when the band has nothing to show.
  */
 export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
-  // Group the band's media by source, in first-appearance order, one carousel each.
+  // Group the band's media by source, in first-appearance order — then, within
+  // a source, by topic (the anchor that asked for each item). A source whose
+  // items all share one topic keeps a single plain carousel; one that mixes
+  // topics gets one labelled carousel per topic, so "suspension bridge" media
+  // never shares an undifferentiated box with "Golden Gate" media.
   const bySource = new Map()
   for (const e of b.entries ?? []) {
-    if (!bySource.has(e.source)) bySource.set(e.source, [])
-    bySource.get(e.source).push(e)
+    if (!bySource.has(e.source)) bySource.set(e.source, new Map())
+    const byTopic = bySource.get(e.source)
+    const topic = e.topic ?? null
+    if (!byTopic.has(topic)) byTopic.set(topic, [])
+    byTopic.get(topic).push(e)
   }
-  const media = [...bySource].map(([source, items]) => carousel(source, items, inline)).join('')
+  const media = [...bySource]
+    .flatMap(([source, byTopic]) => {
+      const split = byTopic.size > 1
+      return [...byTopic].map(([topic, items]) =>
+        carousel(source, items, inline, split ? topic : null),
+      )
+    })
+    .join('')
   // The references go with their coverage line: the notes are what this
   // section cites, in Wikipedia's own words; the line beneath is how much of
   // that the open ecosystem holds.
@@ -522,6 +547,9 @@ sup.ref a:hover{text-decoration:underline}
 .carousel{margin:0 0 22px}
 .carousel-head{display:flex;align-items:center;gap:8px;margin:0 0 10px}
 .carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:600;color:#9aa0a6}
+.carousel-head .topic{font-family:var(--serif);font-size:.8rem;font-weight:600;color:var(--head);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}
 .carousel-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
   padding-bottom:10px;scrollbar-width:thin;scrollbar-color:#c1c6cc transparent;overscroll-behavior-x:contain}
 .carousel-track::-webkit-scrollbar{height:8px}

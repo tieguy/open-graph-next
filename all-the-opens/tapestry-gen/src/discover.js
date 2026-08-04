@@ -694,6 +694,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // the card states the claim.
     for (const e of works.entries) e.why = `By ${page} — from their OpenLibrary author record`
     for (const e of scholarship.entries) e.why = `By ${page} — from their ORCID publication record`
+    // The subject's own category files are their own topic, so the lede's
+    // Commons box never mixes them with files drawn in by other anchors.
+    for (const e of categoryFiles) e.topic = page
     if (thesis)
       console.error(
         `thesis: ${thesis.title} (` +
@@ -803,8 +806,13 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Each card says which anchor asked for it: a Valencia opera house in
     // the Golden Gate Bridge article is baffling until the card admits it
     // arrived through the section's link to Santiago Calatrava.
-    for (const e of commonsEntries)
-      e.why = labels.get(e._qid) ? `Depicts ${labels.get(e._qid)}, a link in this section` : null
+    for (const e of commonsEntries) {
+      const label = labels.get(e._qid)
+      e.why = label ? `Depicts ${label}, a link in this section` : null
+      // The renderer splits one source's carousel by topic, so files depicting
+      // the suspension-bridge anchor never share a box with the strait's.
+      e.topic = label ?? null
+    }
     entries.push(...commonsEntries)
     if (extras) entries.push(...extras.categoryFiles)
 

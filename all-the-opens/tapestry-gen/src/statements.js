@@ -235,12 +235,16 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   // Each card names the anchor whose Wikidata entry stated the connection —
   // a Met painting beside a section is a non sequitur until the card says
   // which linked thing it is the museum's record of.
-  for (const e of out)
+  for (const e of out) {
     e.why = label
       ? subject
         ? `Stated by Wikidata’s entry for ${label}`
         : `Stated by Wikidata for ${label}, a link in this section`
       : 'Stated by Wikidata'
+    // The renderer splits one source's carousel by topic, so two anchors'
+    // objects from the same museum never share an unlabelled box.
+    e.topic = label ?? null
+  }
   const coord = withMap ? parseEarthPoint(statements.coord) : null
   // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
