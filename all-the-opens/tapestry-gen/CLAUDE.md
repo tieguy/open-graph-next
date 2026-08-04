@@ -137,8 +137,9 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
   OpenLibrary author pivot.
-- **Statements** (`src/statements.js`) — THREE WDQS queries per page: one answers every
-  anchor's partner statements and place/defunct gates (Phase 2, 2026-08-04):
+- **Statements** (`src/statements.js`) — THREE WDQS queries per page: one
+  answers every anchor's partner statements, and two more answer the
+  place/defunct gates (Phase 2, 2026-08-04):
   (1) Main query answers Met objects (P3634), Art Institute of Chicago (P4610),
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
   (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution

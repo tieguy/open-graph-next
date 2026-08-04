@@ -865,10 +865,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
         return { commonsEntries, breadth, seen }
       })
       depictsByUnit.set(unit, result)
-      // The last unit's assignment has no consumer. That is fine only while
-      // the chain cannot reject — see the audit above — because an unconsumed
-      // rejected promise surfaces as an unhandled-rejection warning. If a
-      // rejection path is ever reintroduced, this is where it will show up.
+      // The last unit's assignment has no consumer, so if it ever rejects the
+      // rejection is unhandled. One source can reach here: fetchQids does not
+      // catch, so a failed title batch rejects qidsPromise → subjectPromise
+      // (whose try/catch covers only the wbgetentities call) →
+      // categoryFilesPromise → every result. That case already kills the run,
+      // since the band tasks await the same promises — the warning is noise on
+      // top of a fatal error, not a new failure. Everything else is caught:
+      // commonsCategoryFiles has its own .catch, commonsDepicting is caught
+      // per-QID below. Add a rejecting step to this chain and this line is
+      // where it surfaces.
       seenSoFar = result.then((r) => r.seen)
     }
   }
