@@ -3,6 +3,7 @@ import assert from 'node:assert/strict'
 
 import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
 import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
+import { lcHeadingFromGraph } from '../src/dpla.js'
 
 // ---- IIIF (P6108) -----------------------------------------------------------
 
@@ -91,14 +92,27 @@ test('a stated thumbnail beats canvas digging; a bare manifest still links itsel
 
 // ---- DPLA -------------------------------------------------------------------
 
-test('dplaUrl asks for the exact subject heading and only the fields the card reads', () => {
+test('the LC graph yields the authorized heading for exactly the asked id', () => {
+  const graph = [
+    { '@id': 'http://id.loc.gov/authorities/names/n79000001-781' },
+    {
+      '@id': 'http://id.loc.gov/authorities/names/n79000001',
+      'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'Armstrong, Neil, 1930-2012' }],
+    },
+  ]
+  assert.equal(lcHeadingFromGraph(graph, 'n79000001'), 'Armstrong, Neil, 1930-2012')
+  assert.equal(lcHeadingFromGraph([], 'n79000001'), null)
+  assert.equal(lcHeadingFromGraph('not a graph', 'x'), null)
+})
+
+test('dplaUrl asks for the exact authorized heading and only the fields the card reads', () => {
   const url = dplaUrl('Apollo 11 (Spacecraft)', 'KEY')
   assert.match(url, /sourceResource\.subject\.name="Apollo%2011%20\(Spacecraft\)"/)
   assert.match(url, /api_key=KEY/)
   assert.match(url, /page_size=4/)
 })
 
-test('a DPLA doc becomes a card credited to its holding institution', () => {
+test('a DPLA doc becomes a card credited to its holding institution, keyed on P244', () => {
   const e = dplaEntryFrom(
     {
       'sourceResource.title': ['Apollo 11 launch photograph'],
@@ -106,12 +120,14 @@ test('a DPLA doc becomes a card credited to its holding institution', () => {
       object: 'https://thumb.test/x.jpg',
       isShownAt: 'https://provider.test/item/1',
     },
+    'Apollo 11 (Spacecraft)',
     'Apollo 11',
   )
   assert.equal(e.source, 'dpla')
   assert.equal(e.description, 'NASA on The Commons')
   assert.equal(e.href, 'https://provider.test/item/1')
-  assert.match(e.why, /Catalogued under the subject “Apollo 11”/)
+  assert.match(e.why, /Catalogued under “Apollo 11 \(Spacecraft\)” — the Library of Congress heading Wikidata states for Apollo 11/)
+  assert.equal(e.attribution.license, 'via P244 LC authority')
   // No landing page → no card: a dead-end card is not a finding.
-  assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S'), null)
+  assert.equal(dplaEntryFrom({ 'sourceResource.title': 'T' }, 'S', 'S'), null)
 })

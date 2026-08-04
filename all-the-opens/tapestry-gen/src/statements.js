@@ -13,19 +13,21 @@ import { getJson } from './http.js'
 import { iiifEntry } from './iiif.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif']
+const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
     'OPTIONAL { ?item wdt:P402 ?osmr } OPTIONAL { ?item wdt:P10689 ?osmw } ' +
     'OPTIONAL { ?item wdt:P11693 ?osmn } ' +
     // P6108: the item's own IIIF manifest — any institution, one property.
-    'OPTIONAL { ?item wdt:P6108 ?iiif } }'
+    'OPTIONAL { ?item wdt:P6108 ?iiif } ' +
+    // P244: the LC authority behind the DPLA subject-heading pivot.
+    'OPTIONAL { ?item wdt:P244 ?lc } }'
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
 }
 

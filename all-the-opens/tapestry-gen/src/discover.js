@@ -830,28 +830,34 @@ export async function discover(page, { emit = async () => {} } = {}) {
       stats.statements += found.length
     }
 
-    // DPLA: one subject-heading lookup per band, on the band's most
-    // prominent labelled anchor (the subject itself, for the lede). A
-    // cataloger's subject heading is the anchor here, not a Wikidata
-    // statement — each card says so — and without DPLA_API_KEY the pivot
-    // is simply absent: the demo must run keyless for anyone who clones it.
-    let dplaNote = null
+    // DPLA, keyed on a real identifier: only anchors whose Wikidata entry
+    // states an LC authority (P244) pivot, via the authorized heading —
+    // "Eagle" the lunar module either has its own authority or stays out,
+    // which is what keeps eleven thousand bird photographs off the page.
+    // Without DPLA_API_KEY the pivot is simply absent: the demo must run
+    // keyless for anyone who clones it.
+    const dplaNotes = []
     if (process.env.DPLA_API_KEY) {
-      const subject =
-        unit.index === '0'
-          ? unit.title
-          : statementQids.map((q) => labels.get(q)).find(Boolean)
-      if (subject) {
+      const anchored = statementQids
+        .map((q) => ({ lc: statements.get(q)?.lc, label: labels.get(q) ?? null, qid: q }))
+        .map((a) =>
+          unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a,
+        )
+        .filter((a) => a.lc)
+        .slice(0, 2)
+      for (const { lc, label } of anchored) {
         try {
-          const { entries: found, total } = await dplaEntries(subject, process.env.DPLA_API_KEY)
-          entries.push(...found)
-          stats.dpla += found.length
-          if (total > found.length)
-            dplaNote =
-              `${found.length} of ${total.toLocaleString()} DPLA partner items ` +
-              `catalogued under “${subject}”`
+          const hit = await dplaEntries(lc, label, process.env.DPLA_API_KEY)
+          if (!hit) continue
+          entries.push(...hit.entries)
+          stats.dpla += hit.entries.length
+          if (hit.total > hit.entries.length)
+            dplaNotes.push(
+              `${hit.entries.length} of ${hit.total.toLocaleString()} DPLA partner items ` +
+                `catalogued under “${hit.heading}”`,
+            )
         } catch (e) {
-          console.error(`  dpla lookup failed (${subject}): ${e.message}`)
+          console.error(`  dpla lookup failed (${lc}): ${e.message}`)
         }
       }
     }
@@ -899,7 +905,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
           .join('; ')
       : null
     const fullDisclosure =
-      [disclosure, ...subjectNotes, dplaNote].filter(Boolean).join('. ') || null
+      [disclosure, ...subjectNotes, ...dplaNotes].filter(Boolean).join('. ') || null
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,

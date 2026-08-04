@@ -1,10 +1,11 @@
 // The DPLA pivot: America's union catalog — tens of millions of items from
-// libraries, archives and museums, one API. There is no per-item Wikidata
-// identifier to pivot on at scale, so the anchor is the subject HEADING: an
-// anchored entity's label matched against the LCSH-derived subject headings
-// DPLA's partner catalogers assigned. That is a cataloger's statement about
-// the item, not Wikidata's — the card says so, and the credit names the
-// holding institution.
+// libraries, archives and museums, one API. The anchor is a real key, not a
+// label: Wikidata states the entity's Library of Congress authority (P244),
+// id.loc.gov turns that into the AUTHORIZED heading string, and DPLA is
+// asked for items its partner catalogers filed under exactly that heading.
+// An anchor without an LC authority simply does not pivot — that is the
+// difference between "items about Eagle, the lunar module" and eleven
+// thousand photographs of birds.
 //
 // Requires DPLA_API_KEY (free: POST to https://api.dp.la/v2/api_key/{email}
 // and it arrives by mail). Without it the pivot is silently absent — the
@@ -14,10 +15,31 @@ import { getJson } from './http.js'
 
 export const DPLA_PER_ANCHOR = 4
 
-export function dplaUrl(subject, key) {
+/**
+ * The authorized heading for an LC authority id, from id.loc.gov. Subject
+ * ids (sh…, sj…, gf…) live under /subjects/, name authorities (n…, no…,
+ * nb…, nr…) under /names/. Returns null when the service answers strangely
+ * — a missing heading just means no pivot, never a guessed one.
+ */
+export function lcHeadingFromGraph(graph, id) {
+  if (!Array.isArray(graph)) return null
+  const node = graph.find((n) => typeof n?.['@id'] === 'string' && n['@id'].endsWith(`/${id}`))
+  const label =
+    node?.['http://www.w3.org/2004/02/skos/core#prefLabel']?.[0]?.['@value'] ??
+    node?.['http://www.loc.gov/mads/rdf/v1#authoritativeLabel']?.[0]?.['@value'] ??
+    null
+  return typeof label === 'string' ? label : null
+}
+
+export async function lcHeading(id) {
+  const branch = /^(sh|sj|gf)/.test(id) ? 'subjects' : 'names'
+  return lcHeadingFromGraph(await getJson(`https://id.loc.gov/authorities/${branch}/${id}.json`), id)
+}
+
+export function dplaUrl(heading, key) {
   return (
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
-    `"${encodeURIComponent(subject)}"` +
+    `"${encodeURIComponent(heading)}"` +
     '&fields=sourceResource.title,dataProvider,object,isShownAt' +
     `&page_size=${DPLA_PER_ANCHOR}&api_key=${key}`
   )
@@ -26,7 +48,7 @@ export function dplaUrl(subject, key) {
 const first = (v) => (Array.isArray(v) ? v[0] : v)
 
 /** One DPLA doc as a page entry; null when it cannot be shown honestly. */
-export function dplaEntryFrom(doc, subject) {
+export function dplaEntryFrom(doc, heading, anchorLabel) {
   const title = first(doc?.['sourceResource.title'])
   if (!title || !doc?.isShownAt) return null
   const provider = first(doc.dataProvider)?.name ?? first(doc.dataProvider) ?? null
@@ -38,23 +60,28 @@ export function dplaEntryFrom(doc, subject) {
     href: doc.isShownAt,
     attribution: {
       author: provider,
-      license: 'via LCSH subject heading',
+      license: 'via P244 LC authority',
     },
-    why: `Catalogued under the subject “${subject}” by DPLA’s partners`,
-    topic: subject,
-    _via: 'subject',
+    why:
+      `Catalogued under “${heading}” — the Library of Congress heading ` +
+      `Wikidata states for ${anchorLabel ?? 'this entity'}`,
+    topic: anchorLabel ?? heading,
+    _via: 'P244',
   }
 }
 
 /**
- * Items DPLA's partners catalogued under this exact subject heading.
- * @returns {{entries: object[], total: number}}
+ * Items DPLA's partners catalogued under an anchor's authorized heading.
+ * @returns {{entries: object[], total: number, heading: string}|null}
  */
-export async function dplaEntries(subject, key) {
-  const body = await getJson(dplaUrl(subject, key))
+export async function dplaEntries(lcId, anchorLabel, key) {
+  const heading = await lcHeading(lcId)
+  if (!heading) return null
+  const body = await getJson(dplaUrl(heading, key))
   const docs = body.docs ?? []
   return {
+    heading,
     total: body.count ?? docs.length,
-    entries: docs.map((d) => dplaEntryFrom(d, subject)).filter(Boolean),
+    entries: docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean),
   }
 }
