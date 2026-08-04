@@ -232,21 +232,38 @@ files; traces name both QIDs; cold-run request delta measured against the
 Prandtl profile and recorded in the implementation notes; tests cover
 intersection-hit and fallback paths.
 
-### Phase 6: Specificity gate, tuned on evidence (C)
-**Goal:** Broad anchors that the intersection cannot save stop rendering.
+### Phase 6: Specificity gate, tuned by iteration (C)
+**Goal:** Broad anchors that the intersection cannot save stop rendering —
+with the threshold and any class-level exclusions earned from evidence, not
+guessed.
+
+Tuning A, B, and C is expected to take **several iterations over a growing
+article set** (agreed 2026-08-04). The five known pages (Apollo 11, Brown
+v. Board, Prandtl, Dapples, Angkor Wat) are the starting census, not the
+evaluation; each iteration adds articles chosen to stress what the last
+round couldn't (dense biography, list-heavy article, non-Western subject,
+stub, current event), and the census must therefore be a rerunnable tool,
+not a one-off.
 
 **Components:**
-- Evaluation first: re-render Apollo 11, Brown v. Board, Prandtl, Dapples,
-  Angkor Wat with Phases 1–5; record per-band card censuses.
+- `tools/census.mjs` — a kept version of the review dump used for this
+  design's evidence: runs `discover()` for a list of titles and emits
+  per-band card provenance (source, anchor QID, pool `totalhits`,
+  intersection-vs-fallback, dedup ownership) as JSON, diffable across runs
+  and cache-faithful. Lives with the repo so every tuning round uses the
+  same instrument.
 - `src/discover.js` — anchors with `totalhits > BROAD_ANCHOR` and an empty
   intersection get no carousel; the disclosure line states the omission and
   the pool size. Threshold stays env-tunable (`BROAD_ANCHOR`).
 
 **Dependencies:** Phases 4–5.
 
-**Done when:** no fallback carousel on the five test pages draws from a
-pool over threshold; disclosure explains each omission; census diff reviewed
-before/after.
+**Done when:** the census tool exists and is documented; on the current
+article set no fallback carousel draws from a pool over threshold and
+disclosure explains each omission; at least one tuning iteration beyond the
+starting five pages is recorded (census diffs kept under
+`docs/implementation-plans/` notes or alongside the tool) with the
+threshold/blocklist decisions it produced.
 
 ### Phase 7: Sparse-page honesty budget (F — conditional)
 **Goal:** A thin subject gets a short honest page, not padding.
@@ -306,6 +323,13 @@ bytes) is the regression test.
 **Streaming determinism.** D's owner registry must be computed from article
 order, not band completion order, or streamed pages would nondeterministically
 reassign carousels between runs.
+
+**Tuning is iterative by design.** A, B, and C interact (ranking changes
+what intersection sees; the gate changes what ranking must rescue), so their
+"done" is convergence across census iterations, not a single pass. Renders
+are cheap off the warm cache; the cost of an iteration is choosing the next
+articles and reading the diff, which is why the census tool is a Phase 6
+deliverable rather than scratch tooling.
 
 **Upstream fixes remain the preferred fix.** E, C and G all route around bad
 or thin data; the provenance folds and the G list keep pointing at the
