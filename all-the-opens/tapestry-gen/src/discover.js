@@ -507,6 +507,20 @@ export function proseLinks(html) {
 }
 
 /**
+ * Normalize an article title to canonical form: replace underscores with spaces,
+ * uppercase the first character. This handles raw command-line arguments and URL
+ * paths that may not match the canonical title Wikipedia's API returns. Required
+ * because fetchQids keys on the canonical `page.title` from the API response, and
+ * keys like "Ludwig_Prandtl" or "ludwig prandtl" will silently return undefined.
+ */
+export function canonicalTitle(title) {
+  if (typeof title !== 'string') return ''
+  return title
+    .replace(/_/g, ' ')    // Underscores to spaces
+    .replace(/^\w/, (c) => c.toUpperCase())  // Uppercase first char
+}
+
+/**
  * Discover the enriched page for one article. See the module comment for the
  * emit protocol. `emit` may be async; each band's fragment is awaited before
  * the next event for the same band-task fires, so a streaming caller can
@@ -514,7 +528,10 @@ export function proseLinks(html) {
  */
 export async function discover(page, { emit = async () => {} } = {}) {
   // ---- Spine: the whole article in one parse call, split locally. ----------
-  const article = await fetchArticle(CACHE, page)
+  // Normalize the page title at entry so downstream uses of `page` for lookups
+  // match the canonical title Wikipedia's API returns.
+  const normalizedPage = canonicalTitle(page)
+  const article = await fetchArticle(CACHE, normalizedPage)
   const outline = sectionOutline(article.sections)
   const bodySections = outline.filter((s) => !SKIP.test(s.title))
   const sections = bodySections.slice(0, MAX_SECTIONS)
@@ -524,7 +541,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     sliceSectionWikitext(article.wikitext, article.sections, index) ??
     // A template-transcluded section has no byteoffset to slice by; fetching
     // it individually is the rare fallback, not the rule.
-    (await fetchSectionWikitext(CACHE, page, index))
+    (await fetchSectionWikitext(CACHE, normalizedPage, index))
 
   // The apparatus sections are not rendered, but on an {{sfn}}-style article
   // they hold every identifier the body points at.
@@ -609,7 +626,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // The page's own title rides the same batch: its QID seeds the anchor
   // registry below without waiting on the subject's claims fetch.
   const qidsPromise = fetchQids(CACHE, [
-    ...new Set([page, ...units.flatMap((u) => u.linkCandidates)]),
+    ...new Set([normalizedPage, ...units.flatMap((u) => u.linkCandidates)]),
   ])
   const pickedPromise = qidsPromise.then((qids) => {
     // Every unit's candidates in article order; ownership is decided here,
@@ -618,7 +635,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // the lede: its statements and category belong there by design.
     const seeded = new Map()
     const ledeAt = units.findIndex((u) => u.index === '0')
-    const subjectQid = qids.get(page)
+    const subjectQid = qids.get(normalizedPage)
     if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
     const owned = claimAnchors(
       units.map((u) => u.linkCandidates.map((t) => qids.get(t))),
@@ -632,8 +649,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return picked
   })
 
+  // The subject's QID, resolved via wikidata. `subjectPromise` waits on all N
+  // batches of `qidsPromise` (one per 50 titles), not just a single 50-title
+  // request: the page title now rides in the batched titles list alongside every
+  // unit's link candidates, pooling one WMF request. The tradeoff: subject
+  // claims arrive after ALL title batches complete instead of after the first
+  // batch — measured on Prandtl: +89ms for subject, +81ms for statements
+  // (each scales ~10ms per batch). This is acceptable because subject pivots
+  // enrich only the lede (no critical path to bands), and the savings (Prandtl
+  // 5→4 requests, Dapples 3→2) outweigh the latency. Task 3 will place
+  // `categoryFilesPromise = subjectPromise.then(...)` on EVERY band's depicts
+  // chain, making this latency load-bearing per-band, so the dependency must
+  // not grow further.
   const subjectPromise = (async () => {
-    const qid = (await qidsPromise).get(page)
+    const qid = (await qidsPromise).get(normalizedPage)
     if (!qid) return { qid: null, claims: {} }
     try {
       const claimsBody = await wikidata({ action: 'wbgetentities', ids: qid, props: 'claims' })
@@ -684,7 +713,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // enriches only the lede — so it waits for the identifier batches that
       // every band needs before taking its turn on that host's queue.
       Promise.allSettled([iaPromise])
-        .then(() => collectionByDescribedThesis(subjectClaims, page))
+        .then(() => collectionByDescribedThesis(subjectClaims, normalizedPage))
         .catch((e) => {
           console.error(`  thesis pivot failed: ${e.message}`)
           return null

@@ -1,7 +1,41 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { proseLinks } from '../src/discover.js'
+import { canonicalTitle, proseLinks } from '../src/discover.js'
+
+// ---- canonicalTitle -------------------------------------------------------
+
+test('canonicalTitle converts underscores to spaces', () => {
+  assert.equal(canonicalTitle('Ludwig_Prandtl'), 'Ludwig Prandtl')
+})
+
+test('canonicalTitle uppercases the first character', () => {
+  assert.equal(canonicalTitle('ludwig prandtl'), 'Ludwig prandtl')
+})
+
+test('canonicalTitle handles underscores and lowercase together', () => {
+  assert.equal(canonicalTitle('ludwig_prandtl'), 'Ludwig prandtl')
+})
+
+test('canonicalTitle leaves already-canonical titles unchanged', () => {
+  assert.equal(canonicalTitle('Dapples'), 'Dapples')
+  assert.equal(canonicalTitle('Ludwig Prandtl'), 'Ludwig Prandtl')
+})
+
+test('canonicalTitle handles empty and non-string inputs', () => {
+  assert.equal(canonicalTitle(''), '')
+  assert.equal(canonicalTitle(null), '')
+  assert.equal(canonicalTitle(undefined), '')
+})
+
+test('canonicalTitle handles titles with multiple underscores', () => {
+  assert.equal(canonicalTitle('foo_bar_baz'), 'Foo bar baz')
+})
+
+test('canonicalTitle preserves case after the first character', () => {
+  assert.equal(canonicalTitle('zürich'), 'Zürich')
+  assert.equal(canonicalTitle('Zürich'), 'Zürich')
+})
 
 // ---- proseLinks -----------------------------------------------------------
 
