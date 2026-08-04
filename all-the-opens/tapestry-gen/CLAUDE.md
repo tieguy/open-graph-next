@@ -163,7 +163,10 @@ Tapestry `layout`/`emit`/`zip`).
 - **The gutter shows Wikipedia's own footnotes** (2026-08-03, replacing the
   earlier curated three-source shortlist): each band's rail renders the
   actual `reference-text` bodies the section's markers point at, numbered as
-  the prose numbers them, folded past the first eight. Where a note cites a
+  the prose numbers them — closed by default behind a one-line `<details>`
+  summary (2026-08-03 late: a wall of citations must never be a section's
+  first block; `__open` expands the fold when a marker is clicked, and the
+  coverage line stays visible outside it). Where a note cites a
   book OpenLibrary says is readable/borrowable, the access link rides on the
   note. Prose keeps its wikilinks — rewritten to `/wiki/…` on this site, so
   readers click through to more enriched renders — and its footnote markers.

@@ -140,7 +140,7 @@ test('one source, one topic: a single carousel with no topic label, as before', 
 
 test('the rail shows the actual footnotes, numbered as the prose numbers them', () => {
   const rail = bandRail(BAND)
-  assert.match(rail, /References in this section/)
+  assert.match(rail, /References in this section · 1/)
   assert.match(rail, /<li class="fn" id="s3-note-x">/)
   assert.match(rail, /<span class="fn-num">1\.<\/span>/)
   assert.match(rail, /A Book/)
@@ -149,7 +149,7 @@ test('the rail shows the actual footnotes, numbered as the prose numbers them', 
   assert.match(rail, /1 work cited here/)
 })
 
-test('a long footnote list folds past the first eight', () => {
+test('the references fold closed; the coverage line stays out in the open', () => {
   const fns = Array.from({ length: 14 }, (_, i) => ({
     id: `s3-note-${i}`,
     num: String(i + 1),
@@ -157,8 +157,11 @@ test('a long footnote list folds past the first eight', () => {
     access: null,
   }))
   const rail = bandRail({ ...BAND, entries: [], footnotes: fns })
-  assert.match(rail, /<details class="fn-more"><summary>6 more references<\/summary>/)
+  // Every note lives inside the fold, whose one-line summary counts them…
+  assert.match(rail, /<details class="fn-fold"><summary>References in this section · 14<\/summary>/)
   assert.match(rail, /s3-note-13/)
+  // …and the coverage line is a sibling of the fold, visible while it is shut.
+  assert.match(rail, /<\/details><p class="coverage">1 work cited here<\/p>/)
 })
 
 test('streamBand wraps the same rail band() would embed, targeted at its band', () => {

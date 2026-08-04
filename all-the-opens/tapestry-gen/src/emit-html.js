@@ -225,18 +225,17 @@ function footnote(fn, wikiBase) {
 }
 
 /**
- * The band's references, folded past the first eight: a lede can carry fifty
- * markers, and the gutter is a margin, not a page of its own. Fragment
- * navigation into the folded part still works — browsers auto-expand a
- * <details> whose anchor target is inside it.
+ * The band's references, closed by default behind one quiet line: a lede can
+ * carry fifty notes, and a wall of citations must never be the first thing a
+ * section shows. Clicking a marker in the prose still lands on its note —
+ * `__open` (and, in newer browsers, the platform itself) expands a <details>
+ * whose anchor target is inside it before the jump.
  */
 function footnoteList(fns, wikiBase) {
   const items = fns.map((f) => footnote(f, wikiBase))
-  if (items.length <= 10) return `<ol class="fnlist">${items.join('')}</ol>`
   return (
-    `<ol class="fnlist">${items.slice(0, 8).join('')}</ol>` +
-    `<details class="fn-more"><summary>${items.length - 8} more references</summary>` +
-    `<ol class="fnlist">${items.slice(8).join('')}</ol></details>`
+    `<details class="fn-fold"><summary>References in this section · ${items.length}</summary>` +
+    `<ol class="fnlist">${items.join('')}</ol></details>`
   )
 }
 
@@ -274,8 +273,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // that the open ecosystem holds.
   const coverage = b.coverage ? `<p class="coverage">${escapeHtml(b.coverage)}</p>` : ''
   const sources = (b.footnotes ?? []).length
-    ? `<div class="refs"><p class="rail-label">References in this section</p>` +
-      `${footnoteList(b.footnotes, wikiBase)}${coverage}</div>`
+    ? `<div class="refs">${footnoteList(b.footnotes, wikiBase)}${coverage}</div>`
     : coverage
       ? `<div class="refs">${coverage}</div>`
       : ''
@@ -386,6 +384,7 @@ export function buildHtml({ title, bands, inline = new Map(), provenance = '', h
 <style>
 ${STYLE}${faviconStyle(used, inline)}
 </style>
+${FOLD_JS}
 </head>
 <body>
 ${hero({ title, home, legend, extras: evidenceKey })}
@@ -407,6 +406,18 @@ ${body}
 // answers — and each band's rail follows as a <template> plus a one-line
 // script that moves it into place as the browser parses it. No framework, no
 // client round-trips: the stream IS the page.
+
+// The references fold closed, and a prose marker must still land on its note:
+// before the jump, open every <details> above the target. Newer engines do
+// this natively for fragment targets; this covers the rest, and re-scrolls
+// because the browser measured the jump while the fold was still closed.
+const FOLD_JS = `<script>
+function __open(){var e=location.hash&&document.getElementById(location.hash.slice(1));
+var d=e&&e.closest("details");while(d){d.open=true;d=d.parentElement&&d.parentElement.closest("details")}
+if(e)e.scrollIntoView()}
+window.addEventListener("hashchange",__open);
+window.addEventListener("load",function(){if(location.hash)__open()})
+</script>`
 
 // The relocation helpers, inlined into the head so they exist before the
 // first fragment arrives. `__thb` mounts a band's rail; `__fill`/`__append`
@@ -444,6 +455,7 @@ export function streamOpen({ title, units, inline = new Map(), home = '/' }) {
 <style>
 ${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
 </style>
+${FOLD_JS}
 ${RELOCATE_JS}
 </head>
 <body>
@@ -624,8 +636,6 @@ sup.ref a:hover{text-decoration:underline}
 .refs{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
 /* With media on the deck, the refs usually open the rail — no divider against nothing. */
 .rail .refs:first-child{margin-top:0;padding-top:0;border-top:0}
-.rail-label{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 12px}
 .fnlist{list-style:none;margin:0;padding:0;font-family:var(--sans)}
 .fn{display:flex;gap:7px;font-size:.73rem;line-height:1.5;color:#54595d;margin:0 0 9px}
 .fn:target{background:#eaf3ff;outline:4px solid #eaf3ff;border-radius:2px}
@@ -636,8 +646,11 @@ sup.ref a:hover{text-decoration:underline}
 .fn-text cite{font-style:italic}
 /* A book you can actually borrow or read gets a quiet but firm call. */
 .fn-access{white-space:nowrap;font-weight:600}
-.fn-more summary{font-family:var(--sans);font-size:.7rem;color:var(--muted);cursor:pointer;margin:2px 0 10px}
-.fn-more summary:hover{color:var(--link)}
+/* Closed by default: one line where the wall of citations used to be. */
+.fn-fold summary{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted);cursor:pointer}
+.fn-fold summary:hover{color:var(--link)}
+.fn-fold[open] summary{margin:0 0 12px}
 
 /* Shown only when a streamed page's connection died before streamClose. */
 .stream-cut{position:fixed;left:0;right:0;bottom:0;z-index:9;background:#fff3cd;color:#5c4a03;
