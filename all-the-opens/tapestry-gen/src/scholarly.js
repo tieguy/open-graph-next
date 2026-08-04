@@ -49,12 +49,13 @@ export function scholarlyIdentifiers(wikitext) {
   return out
 }
 
-/** One batched OpenAlex works query. `select` keeps the response small. */
+/** One batched OpenAlex works query. `select` keeps the response small;
+ * `best_oa_location` rides along because it names the open copy's licence. */
 export function openAlexUrl(filterField, values, contact) {
   return (
     'https://api.openalex.org/works?filter=' +
     encodeURIComponent(`${filterField}:${values.join('|')}`) +
-    '&select=id,doi,ids,title,publication_year,open_access,authorships' +
+    '&select=id,doi,ids,title,publication_year,open_access,authorships,best_oa_location' +
     `&per-page=${Math.max(values.length, 25)}` +
     `&mailto=${encodeURIComponent(contact)}`
   )
@@ -62,12 +63,20 @@ export function openAlexUrl(filterField, values, contact) {
 
 const normDoi = (d) => d?.toLowerCase().replace(/^https:\/\/doi\.org\//, '') ?? null
 
-/** An OpenAlex work as a page entry — only when it is actually open. */
+/** OpenAlex licence slugs as readers know them: cc-by → CC BY. */
+const licenceName = (slug) =>
+  slug ? slug.toUpperCase().replace(/^CC-/, 'CC ').replace(/-/g, ' ') : null
+
+/** An OpenAlex work as a page entry — only when it is actually open. The
+ * credit carries the open copy's licence when OpenAlex knows it; "open
+ * access" alone promises readability, not reuse, and the difference between
+ * CC BY and merely free-to-read belongs on the card. */
 export function openAlexEntry(work, via) {
   const oa = work.open_access ?? {}
   if (!oa.is_oa || !oa.oa_url) return null
   const first = work.authorships?.[0]?.author?.display_name ?? null
   const more = (work.authorships?.length ?? 0) > 1 ? ' et al.' : ''
+  const licence = licenceName(work.best_oa_location?.license)
   return {
     source: 'openalex',
     title: work.title ?? 'Untitled work',
@@ -75,7 +84,10 @@ export function openAlexEntry(work, via) {
       .filter(Boolean)
       .join(' · '),
     href: oa.oa_url,
-    attribution: { author: `open access · ${oa.oa_status ?? 'oa'}`, license: `via ${via}` },
+    attribution: {
+      author: ['open access', oa.oa_status ?? 'oa', licence ?? 'free to read'].join(' · '),
+      license: `via ${via}`,
+    },
     why: `Cited in this section — matched by ${via.toUpperCase()}`,
     // The reason class, not the citation: per-item topics would split the
     // strip into one-card carousels; what must not mix is cited work with
@@ -136,29 +148,35 @@ export async function openAlexLookups(cites, { contact }) {
 
 /**
  * The subject's own scholarship, via its ORCID (P496) — the papers' twin of
- * the OpenLibrary author pivot. Top-cited first; shown whether or not each is
- * open, because they are the subject's works, but each card says which it is.
+ * the OpenLibrary author pivot. Top-cited first, and OPEN ONLY (2026-08-03):
+ * a closed work gets no card, and the caller's disclosure states how many of
+ * the subject's works that leaves out — the note is honest where a paywalled
+ * card would just be a dead end wearing a shelf.
  */
 export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
   const url =
     'https://api.openalex.org/works?filter=' +
     encodeURIComponent(`authorships.author.orcid:${orcid}`) +
     '&sort=cited_by_count:desc' +
-    `&per-page=${cap}` +
-    '&select=id,doi,title,publication_year,open_access,authorships' +
+    '&per-page=25' +
+    '&select=id,doi,title,publication_year,open_access,authorships,best_oa_location' +
     `&mailto=${encodeURIComponent(contact)}`
   const body = await getJson(url)
-  const results = body.results ?? []
+  const open = (body.results ?? []).filter((w) => w.open_access?.is_oa && w.open_access?.oa_url)
   return {
-    total: body.meta?.count ?? results.length,
-    entries: results.map((w) => {
-      const oa = w.open_access ?? {}
+    total: body.meta?.count ?? open.length,
+    entries: open.slice(0, cap).map((w) => {
+      const oa = w.open_access
+      const licence = licenceName(w.best_oa_location?.license)
       return {
         source: 'openalex',
         title: w.title ?? 'Untitled work',
-        description: [w.publication_year, oa.is_oa ? 'open access' : 'record'].filter(Boolean).join(' · '),
-        href: oa.oa_url ?? w.doi ?? w.id,
-        attribution: { author: oa.is_oa ? `open access · ${oa.oa_status}` : 'catalog record', license: 'via P496 ORCID' },
+        description: [w.publication_year, 'open access'].filter(Boolean).join(' · '),
+        href: oa.oa_url,
+        attribution: {
+          author: ['open access', oa.oa_status, licence ?? 'free to read'].filter(Boolean).join(' · '),
+          license: 'via P496 ORCID',
+        },
         _via: 'P496',
       }
     }),

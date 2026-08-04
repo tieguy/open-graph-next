@@ -108,10 +108,11 @@ test('partner entries carry image, link, and the property that made them', () =>
     name: 'Danaus plexippus',
     preferred_common_name: 'Monarch',
     observations_count: 500000,
-    default_photo: { medium_url: 'https://inat.test/p.jpg', attribution: '(c) Someone, CC BY' },
+    default_photo: { medium_url: 'https://inat.test/p.jpg', attribution: '(c) Someone, CC BY', license_code: 'cc-by' },
   })
   assert.equal(inat.title, 'Monarch (Danaus plexippus)')
   assert.match(inat.description, /500,000 community observations/)
+  assert.equal(inat.imageUrl, 'https://inat.test/p.jpg')
 
   const gbif = gbifEntryFrom({ scientificName: 'Danaus plexippus (Linnaeus, 1758)', canonicalName: 'Danaus plexippus' }, 5133088)
   assert.match(gbif.imageUrl, /taxonKey=5133088/)
@@ -123,6 +124,42 @@ test('partner entries carry image, link, and the property that made them', () =>
   assert.match(map.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/8\/\d+\/\d+\.png$/)
   assert.match(map.href, /openstreetmap\.org/)
   assert.equal(map.title, 'Map: Kennedy Space Center')
+})
+
+test('only openly licensed photos illustrate a taxon; reserved-rights sets say so', () => {
+  // The all-rights-reserved default photo (license_code null) yields to the
+  // first CC-licensed photo in the taxon's set.
+  const fallback = inatEntryFrom({
+    id: 1,
+    name: 'X',
+    default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A, all rights reserved', license_code: null },
+    taxon_photos: [
+      { photo: { medium_url: 'https://inat.test/arr2.jpg', attribution: '(c) B, all rights reserved', license_code: null } },
+      { photo: { medium_url: 'https://inat.test/open.jpg', attribution: '(c) C, CC BY-NC', license_code: 'cc-by-nc' } },
+    ],
+  })
+  assert.equal(fallback.imageUrl, 'https://inat.test/open.jpg')
+  assert.equal(fallback.attribution.author, '(c) C, CC BY-NC')
+  // Every photo reserved → unillustrated, and the credit states the fact.
+  const reserved = inatEntryFrom({
+    id: 2,
+    name: 'Y',
+    default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A', license_code: null },
+  })
+  assert.equal(reserved.imageUrl, null)
+  assert.match(reserved.attribution.author, /none under an open licence/)
+})
+
+test('an open paper card names the licence of its open copy, or admits read-only', () => {
+  const base = {
+    title: 'T',
+    open_access: { is_oa: true, oa_status: 'gold', oa_url: 'https://x.test/pdf' },
+    authorships: [{ author: { display_name: 'A' } }],
+  }
+  const ccby = openAlexEntry({ ...base, best_oa_location: { license: 'cc-by' } }, 'doi')
+  assert.equal(ccby.attribution.author, 'open access · gold · CC BY')
+  const bronze = openAlexEntry(base, 'doi')
+  assert.equal(bronze.attribution.author, 'open access · gold · free to read')
 })
 
 test('entries with no image still render as named cards (no fabricated visuals)', () => {

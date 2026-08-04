@@ -788,14 +788,23 @@ export async function discover(page, { emit = async () => {} } = {}) {
       stats.ia++
     }
 
-    // Citation anchors -> open-access scholarship (OpenAlex / arXiv).
+    // Citation anchors -> open-access scholarship (OpenAlex / arXiv). Papers
+    // with no open copy get no card — and the coverage line says how many
+    // were filtered, because a shelf that shows only the open ones must not
+    // imply the section cited only open ones.
+    let openPapers = 0
     for (const cite of unit.scholarly) {
       const hit = scholarHits.get(cite)
       if (hit) {
         entries.push(hit)
+        openPapers++
         stats.scholar++
       }
     }
+    const scholarNote = unit.scholarly.length
+      ? `${openPapers} of ${unit.scholarly.length} scholarly citation${unit.scholarly.length === 1 ? '' : 's'} ` +
+        `resolve${openPapers === 1 ? 's' : ''} to an open copy`
+      : null
 
     // Anchored entities' partner statements: museum objects, taxa,
     // occurrence maps, place maps. The subject's own statements belong to the
@@ -845,7 +854,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       )
     if (extras?.scholarship.entries.length)
       subjectNotes.push(
-        `${extras.scholarship.entries.length} of ${extras.scholarship.total} scholarly works by the subject, ` +
+        `${extras.scholarship.entries.length} openly readable of ${extras.scholarship.total} scholarly works by the subject, ` +
           'via its ORCID',
       )
     if (extras?.categoryFiles.length)
@@ -869,7 +878,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       blocks: unit.blocks,
       entries,
       footnotes,
-      coverage: coverageText(coverage),
+      coverage: [coverageText(coverage), scholarNote].filter(Boolean).join(' · ') || null,
       disclosure: fullDisclosure,
       // Set when any anchor here drew from more than BROAD_ANCHOR candidates.
       // The renderer states what that means once per page rather than appending

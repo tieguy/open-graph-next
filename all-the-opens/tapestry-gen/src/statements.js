@@ -123,9 +123,26 @@ export async function aicEntry(id) {
   )
 }
 
+/**
+ * The taxon's photo, but only an openly licensed one. Observers choose their
+ * own licence and some reserve all rights; this page shows only what its
+ * reader may reuse, so the default photo yields to the first CC-licensed one
+ * (`license_code` is null on all-rights-reserved photos), and a taxon whose
+ * photos are all reserved renders unillustrated — with the credit saying so,
+ * because "no open photo exists" is a different fact from "no photo exists".
+ */
+function openPhoto(taxon) {
+  const candidates = [
+    taxon.default_photo,
+    ...(taxon.taxon_photos ?? []).map((tp) => tp.photo),
+  ].filter(Boolean)
+  return candidates.find((p) => p.license_code && p.medium_url) ?? null
+}
+
 export function inatEntryFrom(taxon) {
   if (!taxon?.name) return null
-  const photo = taxon.default_photo ?? {}
+  const photo = openPhoto(taxon)
+  const hadAny = Boolean(taxon.default_photo || taxon.taxon_photos?.length)
   return {
     source: 'inaturalist',
     title: taxon.preferred_common_name
@@ -134,9 +151,14 @@ export function inatEntryFrom(taxon) {
     description: taxon.observations_count
       ? `${taxon.observations_count.toLocaleString()} community observations`
       : 'Community observations',
-    imageUrl: photo.medium_url ?? null,
+    imageUrl: photo?.medium_url ?? null,
     href: `https://www.inaturalist.org/taxa/${taxon.id}`,
-    attribution: { author: photo.attribution ?? null, license: 'via P3151 iNaturalist taxon' },
+    attribution: {
+      author:
+        photo?.attribution ??
+        (hadAny ? 'photos exist, but none under an open licence — shown unillustrated' : null),
+      license: 'via P3151 iNaturalist taxon',
+    },
     _via: 'P3151',
   }
 }
