@@ -2,8 +2,9 @@
 // object in a partner collection, and the partner's open API supplies the
 // object itself. Museums (Met P3634, Art Institute of Chicago P4610),
 // biodiversity (iNaturalist P3151, GBIF P846), and place (P625 coordinates →
-// OpenStreetMap render). One WDQS query answers every anchor on the page;
-// the per-object fetches then ride each partner's own host queue.
+// OpenStreetMap render). One WDQS query answers every anchor's partner
+// statements; two small follow-ups decide which anchors are mappable places,
+// and the per-object fetches then ride each partner's own host queue.
 //
 // These are `statement` evidence — Wikidata states the connection outright —
 // so each card credits the property that made it.
@@ -46,27 +47,41 @@ export function needsPlaceDefunctQuery(statements) {
 }
 
 /**
- * The second SPARQL query, Phase 2 optimization (2026-08-04): split the
- * expensive transitive P31/P279* walk off the items and onto the classes.
+ * Mappability is answered by two small follow-up queries rather than by
+ * enriching the partner-statement query, because the transitive walk is what
+ * costs: asked of the items, `P31/P279*` over a real page's anchors measured
+ * 32–45s cold and blew the 15s timeout, and because that walk rode the query
+ * answering EVERY partner pivot, a timeout cost the page its Met, AIC, GBIF,
+ * iNat, IIIF, DPLA and Europeana cards as well as its maps.
  *
- * Query 1 (itemClassesUrl): fetch direct properties for location-bearing items.
- * Cheap: P31 and P576 are direct property lookups, no transitive closures.
- * Returns ~10–30 distinct classes per page, heavily cacheable.
+ * Query 1 (itemClassesUrl) asks only direct P31/P576 of the location-bearing
+ * anchors — no closure, measured 0.19–0.32s cold. Query 2 (classesUrl) walks
+ * P279* over just the distinct classes that came back (~10–30 per page, a
+ * small and near-static vocabulary that caches well), measured 0.32–0.50s
+ * cold. Both numbers are from salted queries, so WDQS could not serve a
+ * cached result.
  *
- * Query 2 (classesUrl): resolve the small class vocabulary against the allowset.
- * Cheap: P279* walk operates on ~30 classes max, not 52+ items. Class-to-class
- * closure is far cheaper and results cache well across pages.
+ * The structural guarantee, and the thing to preserve: no transitive walk is
+ * ever asked of items, only of classes. A test asserts query 1 contains no
+ * P279 and query 2 contains no EXISTS.
  *
- * Measured cost (cold, Byzantine Empire 52-entity location-bearing set, several runs):
- * Query 1 (item classes): 0.2–0.3s
- * Query 2 (class hierarchy): 0.1–0.2s
- * Merge + cache write: <0.1s
- * Total: 0.4–0.6s (vs. 24s+ for the old single query). Warm: <0.1s.
- *
- * Failure semantic: if query 1 succeeds but query 2 times out, mappable() sees
- * missing place/defunct and refuses (no maps). This is correct: when we cannot
- * confirm the class hierarchy, we cannot confirm it is mappable.
+ * Failure semantic: either query failing leaves place/defunct unset, mappable()
+ * refuses, and the page loses maps only — never a partner pivot.
  */
+// Q618123 geographical feature · Q486972 human settlement · Q56061
+// administrative territorial entity · Q41176 building · Q811979 architectural
+// structure · Q43229 organization — the last is what keeps an institution's
+// headquarters, like the EFEO, mappable.
+const LOCATABLE_CLASSES = new Set([
+  'Q618123',
+  'Q486972',
+  'Q56061',
+  'Q41176',
+  'Q811979',
+  'Q43229',
+])
+const HISTORICAL_COUNTRY = 'Q3024240'
+
 export function itemClassesUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
@@ -84,30 +99,15 @@ export function itemClassesUrl(qids) {
  */
 export function classesUrl(classes) {
   const values = classes.map((c) => `wd:${c}`).join(' ')
-  const query =
-    `SELECT ?class ?isPlace ?isDefunct WHERE { VALUES ?class { ${values} } ` +
-    // A mappable place is an instance or subclass of one of the location classes.
-    'BIND(EXISTS { VALUES ?locClass { wd:Q618123 wd:Q486972 wd:Q56061 wd:Q41176 wd:Q811979 wd:Q43229 } ' +
-    '?class wdt:P279* ?locClass } AS ?isPlace) ' +
-    // A defunct place is a subclass of the historical-polity class (Q3024240).
-    'BIND(EXISTS { ?class wdt:P279* wd:Q3024240 } AS ?isDefunct) }'
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
-}
-
-/**
- * For backward compatibility during merge: still exported, but deprecated.
- * Use itemClassesUrl + classesUrl + mergePlaceDefunct instead.
- */
-export function placeDefunctUrl(qids) {
-  // This function is kept for test compatibility but should not be used in production.
-  // The new flow uses itemClassesUrl + classesUrl + mergePlaceDefunct.
-  const values = qids.map((q) => `wd:${q}`).join(' ')
-  const query =
-    `SELECT ?item ?place ?defunct WHERE { VALUES ?item { ${values} } ` +
-    'BIND(EXISTS { VALUES ?locClass { wd:Q618123 wd:Q486972 wd:Q56061 wd:Q41176 wd:Q811979 wd:Q43229 } ' +
-    '?item wdt:P31/wdt:P279* ?locClass } AS ?place) ' +
-    'BIND((EXISTS { ?item wdt:P576 ?ended } || ' +
-    'EXISTS { ?item wdt:P31/wdt:P279* wd:Q3024240 }) AS ?defunct) }'
+  // Ask for each class's ancestors and intersect against the allowsets in JS,
+  // rather than asking WDQS the membership question directly. An
+  // `EXISTS { VALUES ?locClass {…} ?class wdt:P279* ?locClass }` makes
+  // Blazegraph re-plan the walk per class and per target: measured cold on
+  // twenty real classes it costs 13.8–23.7s, against getJson's 15s timeout.
+  // The same twenty answered as a plain ancestor walk in 0.32–0.50s. The walk
+  // returns more rows (~140KB) and that is the trade: bytes are cheap, and a
+  // query that times out costs every map on the page.
+  const query = `SELECT ?class ?super WHERE { VALUES ?class { ${values} } ?class wdt:P279* ?super }`
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
 }
 
@@ -151,7 +151,7 @@ export function parseEarthPoint(wkt) {
  *
  * @param {Map<string, object>} itemMap - map from QID to statement object (from main query)
  * @param {Array} classRows - bindings from classesUrl query
- * @param {Map<string, string>} itemClasses - QID → class QID (from itemClassesUrl query)
+ * @param {Map<string, Set<string>>} itemClasses - QID → its P31 classes (from itemClassesUrl)
  * @param {Set<string>} itemsWithEnded - QIDs that have P576 (ended) bindings
  * @returns {Map<string, object>} - updated itemMap with place/defunct booleans
  *
@@ -164,15 +164,19 @@ export function parseEarthPoint(wkt) {
  * Items with no class binding (no P31) are marked both false to exclude from maps.
  */
 export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded = new Set()) {
-  // Build set of mappable classes and defunct classes from the hierarchy query results.
+  // The hierarchy query returns one row per (class, ancestor) pair; a class is
+  // mappable if any ancestor is in the allowset, defunct if any is Q3024240.
+  // P279* includes the class itself, so a class that IS an allowset member
+  // qualifies without a special case.
   const placeClasses = new Set()
   const defunctClasses = new Set()
 
   for (const row of classRows) {
     const classQid = row.class?.value?.split('/').pop()
-    if (!classQid) continue
-    if (row.isPlace?.value === 'true') placeClasses.add(classQid)
-    if (row.isDefunct?.value === 'true') defunctClasses.add(classQid)
+    const superQid = row.super?.value?.split('/').pop()
+    if (!classQid || !superQid) continue
+    if (LOCATABLE_CLASSES.has(superQid)) placeClasses.add(classQid)
+    if (superQid === HISTORICAL_COUNTRY) defunctClasses.add(classQid)
   }
 
   // For each item with location data, mark place/defunct based on class membership.
@@ -202,11 +206,9 @@ export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnde
 }
 
 /**
- * Every anchored entity's partner statements, in one query per 100 anchors.
- * Two additional queries (now run on location-bearing items):
- * 1. itemClassesUrl: fetch direct P31 and P576 for location items (cheap).
- * 2. classesUrl: resolve classes against place/defunct hierarchies (cheap).
- * See Critical 1 fix and measured cost in comments above.
+ * Every anchored entity's partner statements, in one query per 100 anchors,
+ * followed by the two small mappability queries described above — which run
+ * only for the anchors that carry a coordinate or an OSM identifier.
  * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, place?, defunct?}>}
  */
 export async function entityStatements(qids) {

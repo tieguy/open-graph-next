@@ -115,11 +115,17 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   with no per-partner code; Presentation v2 and v3 both parsed; best coverage
   today is SMK Denmark and BnF Gallica, and stale manifest URLs (e.g. Trinity
   College Dublin's platform move) degrade to no card — and P625 coordinates.
-  (2) Second query (place/defunct, Phase 2 optimization) runs on location-bearing
-  items only: splits the expensive transitive P31/P279* walk into two cheap steps:
-  direct P31/P576 lookups on items, then P279* walks over the small class
-  vocabulary. Failure of the second query costs only maps, never the partner
-  pivots (maps are gated on place/defunct booleans). Result: P625 coordinates →
+  (2) Mappability (place/defunct), asked only of location-bearing anchors, as
+  two small follow-ups: direct P31/P576 on the items (no closure), then a plain
+  `?class wdt:P279* ?super` ancestor walk over just the distinct classes that
+  came back, intersected against the allowset **in JS**. Both the shape and the
+  order matter and are load-bearing. Asking the closure of *items* cost 32–45s
+  cold and blew the 15s timeout; asking WDQS the membership question directly
+  (`EXISTS` with a nested `VALUES`) cost 13.8–23.7s where the plain ancestor
+  walk costs 0.32–0.50s. And because the first version rode the query answering
+  every partner pivot, its timeout cost the page Met/AIC/GBIF/iNat/IIIF/DPLA/
+  Europeana too. Now failure of either follow-up costs only maps (they are gated
+  on the place/defunct booleans), never the partner pivots. Result: P625 →
   OpenStreetMap map cards for locatable, extant places only (one per section max;
   non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per

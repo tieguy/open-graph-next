@@ -15,7 +15,6 @@ import {
   needsPlaceDefunctQuery,
   osmFeature,
   parseEarthPoint,
-  placeDefunctUrl,
   statementEntries,
   wdqsUrl,
 } from '../src/statements.js'
@@ -82,14 +81,6 @@ test('wdqsUrl asks for every partner property over the anchor set', () => {
   for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
     assert.ok(url.includes(p), p)
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
-})
-
-test('placeDefunctUrl asks whether the item is a locatable, extant place', () => {
-  const url = decodeURIComponent(placeDefunctUrl(['Q1']))
-  assert.match(url, /AS \?place/)
-  assert.match(url, /AS \?defunct/)
-  assert.match(url, /wdt:P31\/wdt:P279\*/)
-  assert.match(url, /wdt:P576/)
 })
 
 test('needsPlaceDefunctQuery gates the mappability query to location-bearing QIDs', () => {
@@ -242,12 +233,14 @@ test('itemClassesUrl asks for direct P31 and P576 on location-bearing items', ()
   assert.ok(!url.includes('P279'))
 })
 
-test('classesUrl asks for P279* walks over classes only', () => {
+test('classesUrl walks P279* over classes only, and asks no EXISTS question', () => {
   const url = decodeURIComponent(classesUrl(['Q1']))
   assert.match(url, /wdt:P279/)
-  // Should have explicit isPlace and isDefunct bindings
-  assert.match(url, /AS \?isPlace/)
-  assert.match(url, /AS \?isDefunct/)
+  assert.match(url, /\?super/)
+  // The membership question is answered in JS. Asking WDQS instead — an
+  // EXISTS with a nested VALUES — cost 13.8-23.7s cold against a 15s timeout,
+  // where the plain ancestor walk costs 0.32-0.50s. Keep it out of the query.
+  assert.ok(!url.includes('EXISTS'))
 })
 
 test('mergePlaceDefunct: marks location items as mappable/defunct based on class hierarchy', () => {
@@ -258,9 +251,11 @@ test('mergePlaceDefunct: marks location items as mappable/defunct based on class
   ])
 
   // Mock class hierarchy results: Q123 is a place class, Q456 is defunct
+  // One row per (class, ancestor) pair — Q123 reaches human settlement,
+  // Q456 reaches historical country.
   const classRows = [
-    { class: { value: 'http://www.wikidata.org/entity/Q123' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
-    { class: { value: 'http://www.wikidata.org/entity/Q456' }, isPlace: { value: 'false' }, isDefunct: { value: 'true' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q123' }, super: { value: 'http://www.wikidata.org/entity/Q486972' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q456' }, super: { value: 'http://www.wikidata.org/entity/Q3024240' } },
   ]
 
   // Item classes: Q1 → Q123 (place), Q2 → Q456 (defunct/language)
@@ -283,7 +278,7 @@ test('mergePlaceDefunct: items with P576 (ended) are marked defunct', () => {
   ])
 
   const classRows = [
-    { class: { value: 'http://www.wikidata.org/entity/Q123' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q123' }, super: { value: 'http://www.wikidata.org/entity/Q486972' } },
   ]
 
   const itemClasses = new Map([['Q1', new Set(['Q123'])]])
@@ -331,8 +326,8 @@ test('mergePlaceDefunct: any qualifying P31 makes a place — the EFEO case', ()
   // order is unspecified, so which one won varied between runs.
   const itemMap = new Map([['Q273559', { coord: 'Point(103 13)' }]])
   const classRows = [
-    { class: { value: 'http://www.wikidata.org/entity/Q31855' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
-    { class: { value: 'http://www.wikidata.org/entity/Q2516866' }, isPlace: { value: 'false' }, isDefunct: { value: 'false' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q31855' }, super: { value: 'http://www.wikidata.org/entity/Q43229' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q2516866' }, super: { value: 'http://www.wikidata.org/entity/Q2085381' } },
   ]
   const itemClasses = new Map([['Q273559', new Set(['Q2516866', 'Q31855'])]])
   const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
@@ -345,8 +340,8 @@ test('mergePlaceDefunct: a dead polity is defunct via any historical class', () 
   // P31 alongside a benign one must still refuse a modern map.
   const itemMap = new Map([['Q201705', { coord: 'Point(103 13)' }]])
   const classRows = [
-    { class: { value: 'http://www.wikidata.org/entity/Q11514315' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
-    { class: { value: 'http://www.wikidata.org/entity/Q3024240' }, isPlace: { value: 'true' }, isDefunct: { value: 'true' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q11514315' }, super: { value: 'http://www.wikidata.org/entity/Q618123' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q3024240' }, super: { value: 'http://www.wikidata.org/entity/Q3024240' } },
   ]
   const itemClasses = new Map([['Q201705', new Set(['Q11514315', 'Q3024240'])]])
   const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
