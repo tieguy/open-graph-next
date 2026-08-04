@@ -9,8 +9,10 @@ import {
   mappable,
   mapEntry,
   metEntryFrom,
+  needsPlaceDefunctQuery,
   osmFeature,
   parseEarthPoint,
+  placeDefunctUrl,
   statementEntries,
   wdqsUrl,
 } from '../src/statements.js'
@@ -79,12 +81,26 @@ test('wdqsUrl asks for every partner property over the anchor set', () => {
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
 })
 
-test('wdqsUrl also asks whether the item is a locatable, extant place', () => {
-  const url = decodeURIComponent(wdqsUrl(['Q1']))
+test('placeDefunctUrl asks whether the item is a locatable, extant place', () => {
+  const url = decodeURIComponent(placeDefunctUrl(['Q1']))
   assert.match(url, /AS \?place/)
   assert.match(url, /AS \?defunct/)
   assert.match(url, /wdt:P31\/wdt:P279\*/)
   assert.match(url, /wdt:P576/)
+})
+
+test('needsPlaceDefunctQuery gates the mappability query to location-bearing QIDs', () => {
+  // Coordinates or OSM IDs → include in the place/defunct query
+  assert.equal(needsPlaceDefunctQuery({ coord: 'Point(103.9 13.4)' }), true)
+  assert.equal(needsPlaceDefunctQuery({ osmr: '1234' }), true)
+  assert.equal(needsPlaceDefunctQuery({ osmw: '5678' }), true)
+  assert.equal(needsPlaceDefunctQuery({ osmn: '9012' }), true)
+  assert.equal(needsPlaceDefunctQuery({ coord: 'Point(103.9 13.4)', osmw: '5678' }), true)
+  // Nothing location-bearing → exclude, avoid expensive transitive walk
+  assert.equal(needsPlaceDefunctQuery({ met: '123' }), false)
+  assert.equal(needsPlaceDefunctQuery({ gbif: '456' }), false)
+  assert.equal(needsPlaceDefunctQuery({}), false)
+  assert.equal(needsPlaceDefunctQuery({ place: 'true' }), false) // place/defunct come from the second query
 })
 
 test('mappable: a locatable extant place maps; a language or dead polity never does', () => {

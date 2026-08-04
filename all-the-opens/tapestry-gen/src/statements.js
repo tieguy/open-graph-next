@@ -13,12 +13,12 @@ import { getJson } from './http.js'
 import { iiifEntry } from './iiif.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'place', 'defunct']
+const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?place ?defunct WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
@@ -29,7 +29,33 @@ export function wdqsUrl(qids) {
     // P244: the LC authority behind the DPLA subject-heading pivot.
     'OPTIONAL { ?item wdt:P244 ?lc } ' +
     // P7704: the Europeana entity behind the Europeana pivot.
-    'OPTIONAL { ?item wdt:P7704 ?eu } ' +
+    'OPTIONAL { ?item wdt:P7704 ?eu } }'
+  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * Whether a QID's first-query bindings carry enough location info to warrant
+ * checking place/defunct status. The second query that answers place/defunct
+ * (a transitive P31/P279* walk) is expensive; we issue it only for QIDs whose
+ * first query already found a coordinate or OSM identifier — typically a handful
+ * per page. This pure function factors that decision so it can be tested,
+ * preventing regressions on the decision boundary itself.
+ */
+export function needsPlaceDefunctQuery(statements) {
+  return Boolean(statements.coord || statements.osmr || statements.osmw || statements.osmn)
+}
+
+/**
+ * The second SPARQL query, bounded to QIDs with coord/osmr/osmw/osmn bindings,
+ * which ask whether each is a locatable, extant place. The expensive transitive
+ * P31/P279* walks ride this query, not the main one — a failure of this query
+ * costs only maps, never the partner pivots. When it times out or fails,
+ * mappable() sees missing place/defunct and refuses (no maps).
+ */
+export function placeDefunctUrl(qids) {
+  const values = qids.map((q) => `wd:${q}`).join(' ')
+  const query =
+    `SELECT ?item ?place ?defunct WHERE { VALUES ?item { ${values} } ` +
     // A map card is only true of a locatable, extant place. `?place` asks
     // whether the item is an instance of (or of a subclass of) one of a small
     // set of mappable classes; `?defunct` whether it ended — a dissolution
@@ -78,11 +104,15 @@ export function parseEarthPoint(wkt) {
 
 /**
  * Every anchored entity's partner statements, in one query per 100 anchors.
- * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?}>}
+ * A second query, bounded to QIDs with location data, answers place/defunct.
+ * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, place?, defunct?}>}
  */
 export async function entityStatements(qids) {
   const map = new Map()
-  for (const group of chunk([...new Set(qids)].filter(Boolean), 100)) {
+  const uniqueQids = [...new Set(qids)].filter(Boolean)
+
+  // First query: partner statements
+  for (const group of chunk(uniqueQids, 100)) {
     let rows = []
     try {
       rows = (await getJson(wdqsUrl(group))).results?.bindings ?? []
@@ -98,6 +128,36 @@ export async function entityStatements(qids) {
       map.set(qid, cur)
     }
   }
+
+  // Second query: place/defunct, only for QIDs with location data (to avoid
+  // expensive transitive walks for items that have no map anyway). Group by
+  // 100 like the main query — same host queue, same politeness.
+  const needsPlaceDefunct = Array.from(map.values()).filter(needsPlaceDefunctQuery)
+    .reduce((ids, stmt) => {
+      // Extract QID from the map by searching for the statements object
+      for (const [qid, s] of map.entries()) if (s === stmt) ids.push(qid)
+      return ids
+    }, [])
+
+  for (const group of chunk(needsPlaceDefunct, 100)) {
+    let rows = []
+    try {
+      rows = (await getJson(placeDefunctUrl(group))).results?.bindings ?? []
+    } catch (e) {
+      console.error(`  wdqs place/defunct query failed (${group.length} entities): ${e.message}`)
+      continue
+    }
+    for (const row of rows) {
+      const qid = row.item?.value?.split('/').pop()
+      if (!qid) continue
+      const cur = map.get(qid)
+      if (cur) {
+        if (row.place && cur.place == null) cur.place = row.place.value
+        if (row.defunct && cur.defunct == null) cur.defunct = row.defunct.value
+      }
+    }
+  }
+
   return map
 }
 
