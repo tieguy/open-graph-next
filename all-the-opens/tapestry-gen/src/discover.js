@@ -411,6 +411,9 @@ async function commonsDepicting(qid) {
         title: p.title.replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
         imageUrl: info.thumburl ?? info.url,
         attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
+        // The file page holds the depicts statement this card rests on —
+        // kept so the provenance fold can point a reader at it.
+        _file: p.title,
         _via: 'P180',
       }
     })
@@ -709,17 +712,35 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The subject's own output is its own reason class: in the lede an ORCID
     // paper or the thesis must not share a strip with works merely cited there.
     if (thesis) thesis.topic = `By ${page}`
+    const fixOn = (prop) => ({
+      url: `https://www.wikidata.org/wiki/${subjectQid}#${prop}`,
+      label: 'Check or fix it on Wikidata',
+    })
     for (const e of works.entries) {
       e.why = `By ${page} — from their OpenLibrary author record`
       e.topic = `By ${page}`
+      e.trace =
+        `Wikidata’s item for ${page} (${subjectQid}) states their OpenLibrary author ID (P648) — ` +
+        `these are the works OpenLibrary files under that author.`
+      e.fix = fixOn('P648')
     }
     for (const e of scholarship.entries) {
       e.why = `By ${page} — from their ORCID publication record`
       e.topic = `By ${page}`
+      e.trace =
+        `Wikidata’s item for ${page} (${subjectQid}) states their ORCID iD (P496) — ` +
+        `OpenAlex lists this work under that iD.`
+      e.fix = fixOn('P496')
     }
     // The subject's own category files are their own topic, so the lede's
     // Commons box never mixes them with files drawn in by other anchors.
-    for (const e of categoryFiles) e.topic = page
+    for (const e of categoryFiles) {
+      e.topic = page
+      e.trace =
+        `Wikidata’s item for ${page} (${subjectQid}) names its Commons category ` +
+        `(P373: “${categoryName}”) — this file is in that category.`
+      e.fix = fixOn('P373')
+    }
     if (thesis)
       console.error(
         `thesis: ${thesis.title} (` +
@@ -847,10 +868,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
         )
         .filter((a) => a.lc)
         .slice(0, 2)
-      for (const { lc, label } of anchored) {
+      for (const { lc, label, qid } of anchored) {
         try {
           const hit = await dplaEntries(lc, label, process.env.DPLA_API_KEY)
           if (!hit) continue
+          for (const e of hit.entries) {
+            e.trace =
+              `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
+              `authority ID (P244), whose authorized heading is “${hit.heading}” — DPLA’s ` +
+              `partners catalogue this item under that heading.`
+            e.fix = {
+              url: `https://www.wikidata.org/wiki/${qid}#P244`,
+              label: 'Check or fix it on Wikidata',
+            }
+          }
           entries.push(...hit.entries)
           stats.dpla += hit.entries.length
           if (hit.total > hit.entries.length)
@@ -875,9 +906,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
         )
         .filter((a) => a.eu)
         .slice(0, 2)
-      for (const { eu, label } of anchored) {
+      for (const { eu, label, qid } of anchored) {
         try {
           const hit = await europeanaEntries(eu, label, process.env.EUROPEANA_API_KEY)
+          for (const e of hit.entries) {
+            e.trace =
+              `Wikidata’s item for ${label ?? qid} (${qid}) states its Europeana entity ID ` +
+              `(P7704) — Europeana’s partner records link this item to that entity.`
+            e.fix = {
+              url: `https://www.wikidata.org/wiki/${qid}#P7704`,
+              label: 'Check or fix it on Wikidata',
+            }
+          }
           entries.push(...hit.entries)
           stats.europeana += hit.entries.length
           if (hit.total > hit.entries.length)
@@ -903,6 +943,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // The renderer splits one source's carousel by topic, so files depicting
       // the suspension-bridge anchor never share a box with the strait's.
       e.topic = label ?? null
+      // The chain: section link → Wikidata item → Commons files whose own
+      // structured data claim they depict it. A wrong depiction is fixed on
+      // the file page, so that is where the fold points.
+      e.trace =
+        `This section links to ${label ?? e._qid}; this file’s structured data on Commons ` +
+        `states it depicts that (P180 = ${e._qid}).`
+      if (e._file)
+        e.fix = {
+          url: `https://commons.wikimedia.org/wiki/${encodeURIComponent(e._file)}`,
+          label: 'Check or fix it on Commons',
+        }
     }
     entries.push(...commonsEntries)
     if (extras) entries.push(...extras.categoryFiles)

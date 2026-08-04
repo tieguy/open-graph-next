@@ -280,5 +280,30 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   const coord = withMap ? parseEarthPoint(statements.coord) : null
   // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
+  // The exact chain, card by card: the statement that produced this record,
+  // and the statement's own anchor on Wikidata — which is also where a reader
+  // who spots wrong metadata goes to fix it.
+  for (const e of out) {
+    const prop = /^P\d+$/.exec(e._via)?.[0]
+    if (!prop) continue
+    e.trace =
+      `Wikidata’s item for ${label ?? qid} (${qid}) states its ${PROP_NAME[prop] ?? prop} — ` +
+      `this card is what that identifier returned.`
+    e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${prop}`, label: 'Check or fix it on Wikidata' }
+  }
   return out
+}
+
+// The properties this pivot follows, in reader's words — an ⓘ fold that says
+// "P3634" and nothing else has explained nothing.
+const PROP_NAME = {
+  P3634: 'Met object ID (P3634)',
+  P4610: 'Art Institute of Chicago artwork ID (P4610)',
+  P6108: 'IIIF manifest URL (P6108)',
+  P3151: 'iNaturalist taxon ID (P3151)',
+  P846: 'GBIF taxon ID (P846)',
+  P625: 'coordinate location (P625)',
+  P402: 'OpenStreetMap relation ID (P402)',
+  P11693: 'OpenStreetMap node ID (P11693)',
+  P10689: 'OpenStreetMap way ID (P10689)',
 }

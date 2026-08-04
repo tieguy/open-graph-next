@@ -103,6 +103,24 @@ test('a card says which anchor brought it here', () => {
   assert.match(rail, /<p class="why">Depicts Santiago Calatrava, a link in this section<\/p>/)
 })
 
+test('a card with a trace grows an ⓘ fold: the exact chain, and the door to the fix', () => {
+  const rail = bandRail({
+    ...BAND,
+    entries: [
+      {
+        ...BAND.entries[0],
+        trace: 'Wikidata’s item for X (Q1) states its Met object ID (P3634) — this card is what that identifier returned.',
+        fix: { url: 'https://www.wikidata.org/wiki/Q1#P3634', label: 'Check or fix it on Wikidata' },
+      },
+    ],
+  })
+  assert.match(rail, /<details class="prov"><summary title="How this card got here">ⓘ<\/summary>/)
+  assert.match(rail, /states its Met object ID \(P3634\)/)
+  assert.match(rail, /<a href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener">Check or fix it on Wikidata ↗<\/a>/)
+  // A card with no trace shows no fold — an empty ⓘ is a broken promise.
+  assert.doesNotMatch(bandRail(BAND), /class="prov"/)
+})
+
 test('one source, two topics: the carousel splits, one labelled strip per topic', () => {
   const mk = (title, topic) => ({
     source: 'wikimedia_commons',

@@ -160,6 +160,18 @@ function card(entry, inline) {
   // Valencia opera house in the Golden Gate Bridge article reads as a
   // mistake until the card says which link brought it here.
   const why = entry.why ? `<p class="why">${escapeHtml(entry.why)}</p>` : ''
+  // The exact chain, behind an ⓘ: which statement, on which record, produced
+  // this card — with the door to the statement itself when the load-bearing
+  // link is editable. Wrong metadata upstream is a finding, and the reader
+  // who spotted it should land one click from the fix.
+  const trace = entry.trace
+    ? `<details class="prov"><summary title="How this card got here">ⓘ</summary>` +
+      `<p>${escapeHtml(entry.trace)}${
+        entry.fix
+          ? ` <a href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
+          : ''
+      }</p></details>`
+    : ''
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     heading +
@@ -167,6 +179,7 @@ function card(entry, inline) {
     evidence +
     credit +
     why +
+    trace +
     `</figcaption></figure>`
   )
 }
@@ -627,6 +640,14 @@ sup.ref a:hover{text-decoration:underline}
 .card .sig-pair{color:#4a4f55}
 .card .sig-vs{color:#a0a4a9;margin:0 4px}
 .card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
+/* The provenance fold: an ⓘ that opens into the exact chain behind the card. */
+.card .prov summary{list-style:none;width:fit-content;cursor:pointer;font-size:.75rem;
+  color:#9aa0a6;margin-top:4px}
+.card .prov summary::-webkit-details-marker{display:none}
+.card .prov summary:hover{color:var(--link)}
+.card .prov p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
+  border-radius:4px;padding:6px 8px;margin:4px 0 0}
+.card .prov a{font-weight:600}
 
 .disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
   margin:0 0 14px;padding:7px 9px;background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}

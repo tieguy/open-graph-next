@@ -173,6 +173,15 @@ Tapestry `layout`/`emit`/`zip`).
   No section numbering: Wikipedia doesn't number, so neither do we.
   `sanitizeFragment` in `src/wikipedia.js` is the only thing that lets
   article HTML through; everything else is still escaped.
+- **Every Wikidata- or Commons-backed card carries a provenance fold**
+  (2026-08-03 late): an ⓘ `<details>` whose text states the exact chain
+  (`entry.trace`) and links the statement it rests on (`entry.fix` —
+  `wikidata.org/wiki/Q…#P…`, or the Commons file page for P180 depicts),
+  because Wikidata's statement anchor IS the edit button. Stamped where the
+  qid is in scope: `statementEntries` (Met/AIC/IIIF/iNat/GBIF/maps),
+  discover's Commons-depicts loop, lede extras (P648/P496/P373), DPLA
+  (P244), Europeana (P7704). Citation-derived cards (OpenAlex/arXiv/IA) have
+  no fold — nothing there is editable on Wikidata.
 - **True image dimensions** are read from JPEG/PNG headers (`imagesize`) so covers
   and photos are never squashed by a guessed aspect.
 - **OpenLibrary covers are inlined** as data URIs — they redirect through
