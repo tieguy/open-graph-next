@@ -58,9 +58,8 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
     description: provider ?? 'A DPLA partner institution',
     imageUrl: doc.object ? first(doc.object) : null,
     // DPLA's own item page, not the provider's isShownAt: partner hosts rot
-    // out from under the aggregator (the California Historical Society's
-    // whole domain now serves a Stanford proxy's certificate), while the
-    // dp.la page always resolves and carries the onward link itself.
+    // out from under the aggregator, while the dp.la page always resolves
+    // and carries the onward link itself.
     href: doc.id ? `https://dp.la/item/${doc.id}` : doc.isShownAt,
     attribution: {
       author: provider,
