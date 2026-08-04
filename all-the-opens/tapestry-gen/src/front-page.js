@@ -206,9 +206,9 @@ ${friends}
       <div class="box">
         <h3>How it works</h3>
         <p>The goal of this experiment is to demonstrate that open knowledge is not just hugely
-        successful, but also increasingly hugely interlinked. So when you load an article, some
-        simple javascript pulls existing linking information (from citations and Wikidata) and then
-        grabs context from those sources to enrich the article — in one of two ways, and each
+        successful, but also increasingly hugely interlinked. So when you load an article, a small
+        script on our server pulls existing linking information (from citations and Wikidata) and
+        then grabs context from those sources to enrich the article — in one of two ways, and each
         card says which.</p>
         <h4>Identifier</h4>
         <p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a collection answers to
