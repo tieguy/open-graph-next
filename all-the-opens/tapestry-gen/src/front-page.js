@@ -49,19 +49,43 @@ const SHOWCASE = [
 
 // The friends, each with its gift — the page's actual subject. Order is
 // roughly a reader's journey: books, papers, museums, nature, place, law,
-// media; the hosts close the list.
+// media; the hosts close the list. The licence line states the terms of the
+// gift, because the terms ARE part of the story — and it must stay true of
+// the data this demo actually uses, not of the organisation in general.
 const FRIENDS = [
-  ['internet_archive', 'Internet Archive', 'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.'],
-  ['openlibrary', 'OpenLibrary', 'Knows every edition of every book — and which ones are actually open.'],
-  ['openalex', 'OpenAlex', 'Finds the free, legal copy of the paper behind the citation.'],
-  ['arxiv', 'arXiv', 'Keeps whole sciences open by construction — the preprint is the publication.'],
-  ['met', 'The Met', 'Shares its own record of its own objects, public domain wherever it can be.'],
-  ['artic', 'Art Institute of Chicago', 'The painting’s home, telling you about the painting.'],
-  ['inaturalist', 'iNaturalist', 'A community’s living field guide — photographs with the observer’s name on them.'],
-  ['gbif', 'GBIF', 'Draws where a species has been seen, from hundreds of millions of records.'],
-  ['openstreetmap', 'OpenStreetMap', 'Maps the world down to the building — by hand, by volunteers.'],
-  ['free_law', 'Free Law Project', 'Publishes the law itself. The opinion, not a paywall.'],
-  ['wikimedia_commons', 'Wikimedia Commons', 'Brings the photographs, freely licensed, of very nearly everything.'],
+  ['internet_archive', 'Internet Archive',
+    'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.',
+    'Public-domain scans free to read; in-copyright books lent, not copied.'],
+  ['openlibrary', 'OpenLibrary',
+    'Knows every edition of every book — and which ones are actually open.',
+    'Open bibliographic data, downloadable in bulk.'],
+  ['openalex', 'OpenAlex',
+    'Finds the free, legal copy of the paper behind the citation.',
+    'All catalog data CC0 — no strings at all.'],
+  ['arxiv', 'arXiv',
+    'Keeps whole sciences open by construction — the preprint is the publication.',
+    'Metadata CC0; each paper names its own licence.'],
+  ['met', 'The Met',
+    'Shares its own record of its own objects, public domain wherever it can be.',
+    'Public-domain works released CC0, images included.'],
+  ['artic', 'Art Institute of Chicago',
+    'The painting’s home, telling you about the painting.',
+    'Public-domain images CC0, served over open IIIF.'],
+  ['inaturalist', 'iNaturalist',
+    'A community’s living field guide — photographs with the observer’s name on them.',
+    'Each photo carries its observer’s chosen licence, most Creative Commons.'],
+  ['gbif', 'GBIF',
+    'Draws where a species has been seen, from hundreds of millions of records.',
+    'Records CC0 or CC BY, stated per dataset.'],
+  ['openstreetmap', 'OpenStreetMap',
+    'Maps the world down to the building — by hand, by volunteers.',
+    'Map data ODbL: share-alike, credit the contributors.'],
+  ['free_law', 'Free Law Project',
+    'Publishes the law itself. The opinion, not a paywall.',
+    'Court opinions are public domain: nobody owns the law.'],
+  ['wikimedia_commons', 'Wikimedia Commons',
+    'Brings the photographs, freely licensed, of very nearly everything.',
+    'Every file free-licensed or public domain, credit shown on the file.'],
 ]
 
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
@@ -76,9 +100,10 @@ export function frontPage({ inline = new Map() } = {}) {
 </a>`,
   ).join('\n')
   const friends = FRIENDS.map(
-    ([slug, name, gift]) => `<div class="friend">
+    ([slug, name, gift, lic]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
+  <p class="lic">${escapeHtml(lic)}</p>
 </div>`,
   ).join('\n')
 
@@ -146,6 +171,8 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .fav{width:18px;height:18px;flex:none;border-radius:3px;background:#fff no-repeat center;
   background-size:contain;display:inline-block}
 .friend .gift{font-size:1.02rem;line-height:1.5;color:#3a3f45;margin:0;max-width:34ch}
+.friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
+  margin:7px 0 0;max-width:40ch}
 .friend.host{grid-column:1/-1}
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
@@ -198,6 +225,7 @@ ${friends}
   <p class="who"><span class="fav fav-wikipedia"></span>Wikidata &amp; Wikipedia</p>
   <p class="gift">The hosts: one writes the article that convenes everyone; the other makes the
     introductions — it knows every friend&rsquo;s name for every thing.</p>
+  <p class="lic">Article text CC BY-SA 4.0; Wikidata CC0.</p>
 </div>
     </div>
   </div></section>
