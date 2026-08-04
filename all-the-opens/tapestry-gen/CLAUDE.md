@@ -107,15 +107,21 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
   OpenLibrary author pivot.
-- **Statements** (`src/statements.js`) — one WDQS query per page answers every
-  anchor's partner statements: Met objects (P3634), Art Institute of Chicago
-  (P4610), iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF
-  manifests (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing
-  institution with no per-partner code; Presentation v2 and v3 both parsed;
-  best coverage today is SMK Denmark and BnF Gallica, and stale manifest URLs
-  (e.g. Trinity College Dublin's platform move) degrade to no card — and P625
-  coordinates → OpenStreetMap map cards (one per section max; non-Earth
-  globes are refused — Tranquility Base gets no map of the Atlantic).
+- **Statements** (`src/statements.js`) — two WDQS queries per page answer every
+  anchor's partner statements and place/defunct gates (Phase 2, 2026-08-04):
+  (1) Main query answers Met objects (P3634), Art Institute of Chicago (P4610),
+  iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
+  (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution
+  with no per-partner code; Presentation v2 and v3 both parsed; best coverage
+  today is SMK Denmark and BnF Gallica, and stale manifest URLs (e.g. Trinity
+  College Dublin's platform move) degrade to no card — and P625 coordinates.
+  (2) Second query (place/defunct, Phase 2 optimization) runs on location-bearing
+  items only: splits the expensive transitive P31/P279* walk into two cheap steps:
+  direct P31/P576 lookups on items, then P279* walks over the small class
+  vocabulary. Failure of the second query costs only maps, never the partner
+  pivots (maps are gated on place/defunct booleans). Result: P625 coordinates →
+  OpenStreetMap map cards for locatable, extant places only (one per section max;
+  non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
   band on its most prominent labelled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.

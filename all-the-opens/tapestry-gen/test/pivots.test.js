@@ -4,10 +4,13 @@ import assert from 'node:assert/strict'
 import { arxivEntry, openAlexEntry, openAlexUrl, scholarlyIdentifiers } from '../src/scholarly.js'
 import {
   aicEntryFrom,
+  classesUrl,
   gbifEntryFrom,
   inatEntryFrom,
+  itemClassesUrl,
   mappable,
   mapEntry,
+  mergePlaceDefunct,
   metEntryFrom,
   needsPlaceDefunctQuery,
   osmFeature,
@@ -229,4 +232,95 @@ test('statementEntries builds no map card for a non-place, even with room for on
   const wat = await statementEntries('Q43473', { coord: 'Point(103.8667 13.4125)', place: 'true', defunct: 'false', osmw: '43497551' }, { label: 'Angkor Wat', withMap: true })
   assert.equal(wat.length, 1)
   assert.equal(wat[0].source, 'openstreetmap')
+})
+
+test('itemClassesUrl asks for direct P31 and P576 on location-bearing items', () => {
+  const url = decodeURIComponent(itemClassesUrl(['Q1']))
+  assert.match(url, /wdt:P31/)
+  assert.match(url, /wdt:P576/)
+  // Should NOT have transitive closures in item query
+  assert.ok(!url.includes('P279'))
+})
+
+test('classesUrl asks for P279* walks over classes only', () => {
+  const url = decodeURIComponent(classesUrl(['Q1']))
+  assert.match(url, /wdt:P279/)
+  // Should have explicit isPlace and isDefunct bindings
+  assert.match(url, /AS \?isPlace/)
+  assert.match(url, /AS \?isDefunct/)
+})
+
+test('mergePlaceDefunct: marks location items as mappable/defunct based on class hierarchy', () => {
+  // Mock item map with location data
+  const itemMap = new Map([
+    ['Q1', { coord: 'Point(10 20)' }], // settlement
+    ['Q2', { coord: 'Point(30 40)' }], // language (not a place)
+  ])
+
+  // Mock class hierarchy results: Q123 is a place class, Q456 is defunct
+  const classRows = [
+    { class: { value: 'http://www.wikidata.org/entity/Q123' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
+    { class: { value: 'http://www.wikidata.org/entity/Q456' }, isPlace: { value: 'false' }, isDefunct: { value: 'true' } },
+  ]
+
+  // Item classes: Q1 → Q123 (place), Q2 → Q456 (defunct/language)
+  const itemClasses = new Map([
+    ['Q1', 'Q123'],
+    ['Q2', 'Q456'],
+  ])
+
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
+
+  assert.equal(result.get('Q1').place, 'true')
+  assert.equal(result.get('Q1').defunct, 'false')
+  assert.equal(result.get('Q2').place, 'false')
+  assert.equal(result.get('Q2').defunct, 'true')
+})
+
+test('mergePlaceDefunct: items with P576 (ended) are marked defunct', () => {
+  const itemMap = new Map([
+    ['Q1', { coord: 'Point(10 20)' }], // Byzantine Empire
+  ])
+
+  const classRows = [
+    { class: { value: 'http://www.wikidata.org/entity/Q123' }, isPlace: { value: 'true' }, isDefunct: { value: 'false' } },
+  ]
+
+  const itemClasses = new Map([['Q1', 'Q123']])
+  const itemsWithEnded = new Set(['Q1'])
+
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded)
+
+  assert.equal(result.get('Q1').place, 'true')
+  assert.equal(result.get('Q1').defunct, 'true') // Marked defunct due to P576
+})
+
+test('mergePlaceDefunct: handles items with no class binding', () => {
+  const itemMap = new Map([
+    ['Q1', { coord: 'Point(10 20)' }], // No P31
+  ])
+
+  const classRows = []
+  const itemClasses = new Map() // Q1 has no class
+
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
+
+  // Should be marked both false to exclude from maps
+  assert.equal(result.get('Q1').place, 'false')
+  assert.equal(result.get('Q1').defunct, 'false')
+})
+
+test('mergePlaceDefunct: skips items without location bindings', () => {
+  const itemMap = new Map([
+    ['Q1', { met: '123' }], // Museum, no location
+  ])
+
+  const classRows = []
+  const itemClasses = new Map()
+
+  const result = mergePlaceDefunct(itemMap, classRows, itemClasses)
+
+  // Should have no place/defunct added
+  assert.equal(result.get('Q1').place, undefined)
+  assert.equal(result.get('Q1').defunct, undefined)
 })
