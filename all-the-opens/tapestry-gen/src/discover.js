@@ -483,10 +483,14 @@ const APPARATUS =
  * The rendered HTML includes everything inside <ref> tags, so ranking cannot
  * be skipped — unranked, the first two links of a section are usually its
  * first two footnotes. Document order is a decent prominence proxy: an article
- * links its subject matter early and its apparatus late.
+ * links its subject matter early and its apparatus late — which is exactly why
+ * hatnotes ({{distinguish|Novel}} atop Novell) are dangerous left in: they sit
+ * before the lede's own first sentence and would rank as the section's most
+ * prominent link despite naming what the article is explicitly NOT about.
  */
-function proseLinks(html) {
+export function proseLinks(html) {
   const body = html
+    .replace(/<div[^>]*class="[^"]*hatnote[^"]*"[\s\S]*?<\/div>/gi, ' ')
     .replace(/<ol class="references"[\s\S]*?<\/ol>/gi, ' ')
     .replace(/<sup[\s\S]*?<\/sup>/gi, ' ')
     .replace(/<table[\s\S]*?<\/table>/gi, ' ')
