@@ -35,6 +35,13 @@ test('canonicalTitle handles titles with multiple underscores', () => {
 test('canonicalTitle preserves case after the first character', () => {
   assert.equal(canonicalTitle('zürich'), 'Zürich')
   assert.equal(canonicalTitle('Zürich'), 'Zürich')
+  // The initial itself must be non-ASCII, or the assertion proves nothing
+  // about \w — which is exactly how the first version of this test passed
+  // while accented titles silently resolved to no QID at all.
+  assert.equal(canonicalTitle('émile durkheim'), 'Émile durkheim')
+  // Only the initial changes; MediaWiki resolves the rest, so this must not
+  // try to title-case anything else.
+  assert.equal(canonicalTitle('île-de-france'), 'Île-de-france')
 })
 
 // ---- proseLinks -----------------------------------------------------------

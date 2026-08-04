@@ -98,10 +98,15 @@ const server = createServer(async (req, res) => {
   const page = decodeURIComponent(m[1]).replace(/_/g, ' ')
   const started = Date.now()
   let streaming = false
+  // The article discovery actually read, once redirects resolve — set from the
+  // spine event, which fires before any header goes out. `page` stays the
+  // reader's request; `title` is what the page may truthfully call itself.
+  let title = page
   try {
     const { bands, stats } = await discover(page, {
       async emit(type, data) {
         if (type === 'spine') {
+          title = data.page
           res.writeHead(200, {
             'Content-Type': 'text/html; charset=utf-8',
             // Every view re-runs discovery (the disk cache is the cache);
@@ -110,7 +115,7 @@ const server = createServer(async (req, res) => {
           })
           res.write(
             streamOpen({
-              title: page,
+              title,
               units: data.units,
               inline: icons,
               home: process.env.SITE_HOME ?? '/',
@@ -134,13 +139,13 @@ const server = createServer(async (req, res) => {
       streamClose({
         provenance:
           `Discovered live from the English Wikipedia article ` +
-          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(page.replace(/ /g, '_'))}">` +
-          `${escapeHtml(page)}</a> — no curated dataset, streamed as it was found.`,
+          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
+          `${escapeHtml(title)}</a> — no curated dataset, streamed as it was found.`,
       }),
     )
     res.end()
     console.error(
-      `${page}: ${stats.sections} sections in ${((Date.now() - started) / 1000).toFixed(1)}s`,
+      `${title}: ${stats.sections} sections in ${((Date.now() - started) / 1000).toFixed(1)}s`,
     )
   } catch (e) {
     console.error(`${page}: ${e.message}`)

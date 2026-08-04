@@ -36,7 +36,7 @@ function fromTocdata(sections) {
 }
 
 export async function fetchSections(cacheDir, page) {
-  const body = await cachedGet(cacheDir, { action: 'parse', page, prop: 'tocdata' })
+  const body = await cachedGet(cacheDir, { action: 'parse', page, prop: 'tocdata', redirects: '1' })
   return sectionOutline(fromTocdata(body.parse.tocdata?.sections))
 }
 
@@ -73,6 +73,7 @@ export async function fetchSection(cacheDir, page, index) {
     // Without this the HTML carries an [edit] link after every heading.
     disableeditsection: '1',
     disabletoc: '1',
+    redirects: '1',
   })
   const links = (body.parse.links ?? [])
     .filter((l) => l.ns === 0 && l.exists)
@@ -85,7 +86,13 @@ export async function fetchSection(cacheDir, page, index) {
  * section's citations live here, inline, so a section owns its own evidence.
  */
 export async function fetchSectionWikitext(cacheDir, page, index) {
-  const body = await cachedGet(cacheDir, { action: 'parse', page, section: String(index), prop: 'wikitext' })
+  const body = await cachedGet(cacheDir, {
+    action: 'parse',
+    page,
+    section: String(index),
+    prop: 'wikitext',
+    redirects: '1',
+  })
   return body.parse.wikitext
 }
 
@@ -102,8 +109,14 @@ export async function fetchArticle(cacheDir, page) {
     prop: 'tocdata|text|wikitext',
     disableeditsection: '1',
     disabletoc: '1',
+    // Without this a redirect title (e.g. "Coral Gables") parses as its own
+    // one-line stub instead of the article it points at.
+    redirects: '1',
   })
   return {
+    // The API's own title once redirects are resolved — never the caller's
+    // input, which may be the redirect source.
+    title: body.parse.title,
     sections: fromTocdata(body.parse.tocdata?.sections),
     html: body.parse.text,
     wikitext: body.parse.wikitext,

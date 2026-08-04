@@ -8,9 +8,11 @@
 // stays serial. discover() reports progress through an async `emit` callback:
 //
 //   emit('spine', { page, units, dropped })   — prose extracted, before pivots
+//     `page` here is the RESOLVED article title, after redirects — render that,
+//     not the caller's input, or a redirect names a page that has no article.
 //   emit('band', band)                        — one band, in COMPLETION order
 //
-// and resolves to { bands, stats, dropped } with bands in ARTICLE order. A
+// and resolves to { title, bands, stats, dropped } with bands in ARTICLE order. A
 // batch caller can ignore the events entirely; a streaming caller writes the
 // spine skeleton on the first event and a rail fragment per band event. Band
 // assembly runs as one task per unit, so a band waits only on its own
@@ -517,7 +519,10 @@ export function canonicalTitle(title) {
   if (typeof title !== 'string') return ''
   return title
     .replace(/_/g, ' ')    // Underscores to spaces
-    .replace(/^\w/, (c) => c.toUpperCase())  // Uppercase first char
+    // `/^./u` and not `/^\w/`: \w is [A-Za-z0-9_], so an accented initial —
+    // "émile durkheim", "île-de-france" — would pass through uncapitalized and
+    // miss the QID map entirely, silently costing the page its whole lede.
+    .replace(/^./u, (c) => c.toUpperCase())
 }
 
 /**
@@ -528,10 +533,13 @@ export function canonicalTitle(title) {
  */
 export async function discover(page, { emit = async () => {} } = {}) {
   // ---- Spine: the whole article in one parse call, split locally. ----------
-  // Normalize the page title at entry so downstream uses of `page` for lookups
-  // match the canonical title Wikipedia's API returns.
-  const normalizedPage = canonicalTitle(page)
-  const article = await fetchArticle(CACHE, normalizedPage)
+  // Normalize the page title at entry, then resolve to the API's own title —
+  // fetchArticle follows redirects, so a redirect source (e.g. "Coral Gables")
+  // must not linger in `page`/`normalizedPage` or every downstream lookup and
+  // display string would still name the redirect, not the article it targets.
+  const article = await fetchArticle(CACHE, canonicalTitle(page))
+  const normalizedPage = article.title
+  page = normalizedPage
   const outline = sectionOutline(article.sections)
   const bodySections = outline.filter((s) => !SKIP.test(s.title))
   const sections = bodySections.slice(0, MAX_SECTIONS)
@@ -657,7 +665,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // batch — measured on Prandtl: +89ms for subject, +81ms for statements
   // (each scales ~10ms per batch). This is acceptable because subject pivots
   // enrich only the lede (no critical path to bands), and the savings (Prandtl
-  // 5→4 requests, Dapples 3→2) outweigh the latency. Task 3 will place
+  // and Dapples both 4→3 en.wikipedia.org requests) outweigh the latency. Task 3 will place
   // `categoryFilesPromise = subjectPromise.then(...)` on EVERY band's depicts
   // chain, making this latency load-bearing per-band, so the dependency must
   // not grow further.
@@ -1047,5 +1055,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
   })
 
   const bands = await Promise.all(bandTasks)
-  return { bands, stats, dropped, opinion: (await ledeExtrasPromise).opinion }
+  // `title` is the article we actually read, which is not always the one we
+  // were asked for: "Coral Gables" is a redirect to "Coral Gables, Florida".
+  // A caller that renders its own input would title the page after a redirect
+  // that has no article behind it.
+  return { title: normalizedPage, bands, stats, dropped, opinion: (await ledeExtrasPromise).opinion }
 }
