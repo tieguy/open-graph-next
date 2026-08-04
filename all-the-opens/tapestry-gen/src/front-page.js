@@ -228,7 +228,7 @@ ${cards}
     </div>
   </div></section>
   <section class="section"><div class="wrap">
-    <span class="eyebrow">Current friends, and what they bring</span>
+    <span class="eyebrow">Current friends, what they bring, and how they’re licensed</span>
     <div class="friends">
 ${friends}
       <div class="friend host">
