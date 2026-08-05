@@ -31,7 +31,7 @@ test('a Wayback link is a rescued citation, not the Archive appearing in the art
   assert.equal(report[0].tier, 'invisible')
 })
 
-test('hostOf normalises www and refuses what will not parse', () => {
+test('hostOf normalizes www and refuses what will not parse', () => {
   assert.equal(hostOf('https://WWW.GBIF.org/species/1'), 'gbif.org')
   // A hostless URL parses but has no host to compare — `mailto:` shows up in
   // reference lists often enough to matter.

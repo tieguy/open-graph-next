@@ -99,7 +99,7 @@ function normalizeIsbn(value) {
 }
 
 /**
- * An ISBN only if it is one. A malformed value costs a catalogue lookup and
+ * An ISBN only if it is one. A malformed value costs a catalog lookup and
  * returns nothing, so it is dropped here rather than searched for.
  */
 function validIsbn(value) {
@@ -319,7 +319,7 @@ export function openLibraryAccess(volume) {
   if (ebook?.availability === 'borrow') {
     return { availability: 'borrow', label: 'Borrow · Internet Archive', url: ebook.preview_url ?? catalog }
   }
-  if (catalog) return { availability: 'catalog', label: 'Catalogued · Open Library', url: catalog }
+  if (catalog) return { availability: 'catalog', label: 'Cataloged · Open Library', url: catalog }
   return null
 }
 
@@ -344,14 +344,14 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
   const open = candidates.filter(
     (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
   ).length
-  const catalogued = candidates.filter((c) => c.access?.availability === 'catalog').length
+  const cataloged = candidates.filter((c) => c.access?.availability === 'catalog').length
   const linked = candidates.filter(
     (c) => !c.access && !isUnchecked(c) && (c.archiveUrl || c.doi || c.url),
   ).length
   return {
     total: candidates.length,
     open,
-    catalogued,
+    cataloged,
     linked,
     unchecked: candidates.filter(isUnchecked).length,
   }
@@ -360,7 +360,7 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
 /**
  * The coverage line, phrased so an absence reads as a fact about the ecosystem
  * rather than as a thin section — and so every bucket says where it points:
- * "readable" means the Internet Archive links on the notes above, "catalogue"
+ * "readable" means the Internet Archive links on the notes above, "catalog"
  * means OpenLibrary knows the book but holds no scan, and works we add nothing
  * to are said to be exactly that. Says nothing when there is nothing to say.
  */
@@ -376,7 +376,7 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
  * these notes cite" no longer share a box and read as a contradiction.
  */
 export function pageCitations(bands) {
-  const sum = { total: 0, open: 0, catalogued: 0, linked: 0, unchecked: 0 }
+  const sum = { total: 0, open: 0, cataloged: 0, linked: 0, unchecked: 0 }
   const papers = { total: 0, open: 0 }
   for (const b of bands ?? []) {
     for (const k of Object.keys(sum)) sum[k] += b.citations?.[k] ?? 0
@@ -395,7 +395,7 @@ const spell = (n) => WORDS[n] ?? n.toLocaleString()
  * two. The same finding as the visibility tiers, measured on citations rather
  * than institutions, which is why it belongs in the same panel.
  */
-export function citationHeadline({ total, open, catalogued, unchecked = 0, papers } = {}) {
+export function citationHeadline({ total, open, cataloged, unchecked = 0, papers } = {}) {
   if (!total) return null
   // "This article" would read as the page in front of the reader. It means
   // the one on Wikipedia, and has to say so.
@@ -409,13 +409,13 @@ export function citationHeadline({ total, open, catalogued, unchecked = 0, paper
         `We could not find a free copy of any of them.`,
   )
   // "More" only reads if something came before it. With nothing readable, the
-  // catalogued ones are not "more" — they are the whole of what was found.
-  if (catalogued)
+  // cataloged ones are not "more" — they are the whole of what was found.
+  if (cataloged)
     out.push(
       open
-        ? `Open Library has catalogued ${spell(catalogued)} more that nobody has scanned.`
-        : `Open Library has catalogued ${spell(catalogued)} of them, but nobody has scanned ` +
-          `${catalogued === 1 ? 'it' : 'them'}.`,
+        ? `Open Library has cataloged ${spell(cataloged)} more that nobody has scanned.`
+        : `Open Library has cataloged ${spell(cataloged)} of them, but nobody has scanned ` +
+          `${cataloged === 1 ? 'it' : 'them'}.`,
     )
   // "We could not look" must never be left to read as "there is nothing there".
   if (unchecked)
@@ -442,7 +442,7 @@ function reachabilityRank(cite) {
   if (availability === 'full' || availability === 'borrow') return 0 // open the whole thing
   if (cite.archiveUrl) return 1 // archived — will still resolve
   if (cite.doi) return 2 // a stable scholarly landing page
-  if (availability === 'catalog') return 3 // findable in a catalogue, not readable
+  if (availability === 'catalog') return 3 // findable in a catalog, not readable
   if (cite.url) return 4 // a live link that may rot
   return 5 // nothing to open
 }

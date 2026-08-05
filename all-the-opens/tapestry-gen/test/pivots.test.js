@@ -54,7 +54,7 @@ test('openAlexEntry only exists when the work is actually open', () => {
   )
   assert.equal(open.href, 'https://x.test/pdf')
   assert.equal(open.description, 'A. Author et al. · 2020')
-  // The reason class, so a cited paper never shares an unlabelled strip with
+  // The reason class, so a cited paper never shares an unlabeled strip with
   // the subject's own ORCID shelf in the lede.
   assert.equal(open.topic, 'Cited in this section')
   assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
@@ -177,10 +177,10 @@ test('only openly licensed photos illustrate a taxon; reserved-rights sets say s
     default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A', license_code: null },
   })
   assert.equal(reserved.imageUrl, null)
-  assert.match(reserved.attribution.author, /none under an open licence/)
+  assert.match(reserved.attribution.author, /none under an open license/)
 })
 
-test('an open paper card names the licence of its open copy, or admits read-only', () => {
+test('an open paper card names the license of its open copy, or admits read-only', () => {
   const base = {
     title: 'T',
     open_access: { is_oa: true, oa_status: 'gold', oa_url: 'https://x.test/pdf' },
@@ -188,11 +188,11 @@ test('an open paper card names the licence of its open copy, or admits read-only
   }
   const ccby = openAlexEntry({ ...base, best_oa_location: { license: 'cc-by' } }, 'doi')
   assert.equal(ccby.attribution.author, 'Free to read · CC BY')
-  // No licence known: say only what is true. `oa_status` ("gold", "green")
+  // No license known: say only what is true. `oa_status` ("gold", "green")
   // is publisher-workflow jargon and told a reader nothing.
   const bronze = openAlexEntry(base, 'doi')
   assert.equal(bronze.attribution.author, 'Free to read')
-  // `other-oa` is not a licence and must never be printed as one.
+  // `other-oa` is not a license and must never be printed as one.
   const vague = openAlexEntry({ ...base, best_oa_location: { license: 'other-oa' } }, 'doi')
   assert.equal(vague.attribution.author, 'Free to read · terms not stated')
 })

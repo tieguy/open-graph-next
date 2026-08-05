@@ -8,7 +8,7 @@ import { escapeHtml } from './html.js'
 // around and below floated media/citation rails — so the layout costs nothing to
 // balance. This is a comparison spike, not the finished thing.
 
-// Each source identified by its own site's icon, not a colour key. The two logos
+// Each source identified by its own site's icon, not a color key. The two logos
 // hosted on Wikimedia are pulled at a width its thumbnail allowlist still serves
 // (32px is rejected now — the same restriction that broke the dataset thumbnails).
 const SOURCE = {
@@ -49,7 +49,7 @@ const iaEmbed = (source) => {
  *
  * Never a live hotlink. Two of these sites refuse them — CourtListener answers
  * 403, GBIF varies by referrer — so a page built on live URLs shows broken
- * images for exactly the sources a reader is least likely to recognise by name.
+ * images for exactly the sources a reader is least likely to recognize by name.
  * The generator fetches what it can into `inline`; whatever failed renders as a
  * named entry with no picture, which is the honest degradation.
  */
@@ -133,10 +133,10 @@ function gapLead({ total, shown, link, invisible }) {
   // Not "everything here was published openly": the Met answers with
   // rights-reserved objects as well as CC0 ones, the Internet Archive lends
   // books that are still in copyright, and a IIIF manifest sets its own terms.
-  // Licence claims belong on the cards, per item, where they are true. The
-  // panel counts organisations, which it can count exactly.
+  // License claims belong on the cards, per item, where they are true. The
+  // panel counts organizations, which it can count exactly.
   const out = [
-    `${Cap(spell(total))} ${total === 1 ? 'organisation' : 'organisations'} outside Wikipedia ` +
+    `${Cap(spell(total))} ${total === 1 ? 'organization' : 'organizations'} outside Wikipedia ` +
       `contributed rich content to this enhanced version of the article.`,
   ]
   // With nothing shown AND nothing linked there is no contrast to draw, so the
@@ -303,7 +303,7 @@ function card(entry, inline) {
   )
 }
 
-// One horizontal, scroll-snapping carousel per source: the strip is labelled with
+// One horizontal, scroll-snapping carousel per source: the strip is labeled with
 // the source's own icon, and its items scroll sideways rather than stacking into a
 // tall column. When a band draws one source's media through several anchors, the
 // renderer splits it into one carousel per topic (the anchor's label) — a strip
@@ -312,7 +312,7 @@ function carousel(source, items, inline, topic = null) {
   // Only badge the count when there is more than one — "1" in the corner is noise.
   const count = items.length > 1 ? `<span class="count">${items.length}</span>` : ''
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
-  // A topic-labelled strip whose cards all share one why line says it once,
+  // A topic-labeled strip whose cards all share one why line says it once,
   // under the head — four cards each repeating "Depicts X" is noise.
   let shared = ''
   if (topic && items.length > 1 && items[0].why && items.every((e) => e.why === items[0].why)) {
@@ -382,7 +382,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // Group the band's media by source, in first-appearance order — then, within
   // a source, by topic (the anchor that asked for each item). A source whose
   // items all share one topic keeps a single plain carousel; one that mixes
-  // topics gets one labelled carousel per topic, so "suspension bridge" media
+  // topics gets one labeled carousel per topic, so "suspension bridge" media
   // never shares an undifferentiated box with "Golden Gate" media.
   const bySource = new Map()
   for (const e of b.entries ?? []) {
@@ -526,7 +526,7 @@ ${body}
 </main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
-  media under their own licences, shown on each item.</p>
+  media under their own licenses, shown on each item.</p>
 </footer>
 </body>
 </html>
@@ -657,7 +657,7 @@ export function streamClose({ provenance = '' } = {}) {
 </main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
-  media under their own licences, shown on each item.</p>
+  media under their own licenses, shown on each item.</p>
 </footer>
 </body>
 </html>

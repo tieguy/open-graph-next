@@ -19,7 +19,7 @@ const coverUrl = (covers) => {
  * An author's works as renderable entries, best-presented first.
  *
  * Covered works lead: these render as a shelf, and a row of blank cards reads as
- * a broken page rather than as a catalogue. Coverless works still appear — the
+ * a broken page rather than as a catalog. Coverless works still appear — the
  * point is what the person wrote, not what happens to be photographed — they
  * simply come after.
  *

@@ -44,7 +44,7 @@ test('a cite web becomes a webpage-kind citation with url and title', () => {
 test('a cite book carries its ISBN and author, markup stripped from the title', () => {
   const c = parseCitation('{{cite book |title=[[First Man (book)|First Man]] |isbn=978-0-7432-5751-0 |last=Hansen |first=James}}')
   assert.equal(c.kind, 'book')
-  assert.equal(c.isbn, '9780743257510', 'ISBN normalised to digits')
+  assert.equal(c.isbn, '9780743257510', 'ISBN normalized to digits')
   assert.equal(c.title, 'First Man', 'wiki markup stripped')
   assert.equal(c.author, 'James Hansen', 'byline uses the full stated name')
 })
@@ -123,7 +123,7 @@ test('prioritization prefers reachable sources: readable book, then archived, th
   assert.deepEqual(out.map((c) => c.title), ['readable', 'archived', 'doi', 'live'])
 })
 
-test('a book OpenLibrary only catalogues ranks below a readable archived page', () => {
+test('a book OpenLibrary only catalogs ranks below a readable archived page', () => {
   const cites = [
     { kind: 'book', isbn: '1', title: 'catalog-only', access: { availability: 'catalog', url: 'https://openlibrary.org/x' } },
     { kind: 'news', url: 'https://n.test', archiveUrl: 'https://web.archive.org/n', title: 'archived' },
@@ -221,32 +221,32 @@ test('citationCoverage buckets unchecked ISBNs instead of calling them closed', 
   assert.equal(cov.open, 1)
   assert.equal(cov.unchecked, 2)
   assert.equal(cov.linked, 1) // only the no-isbn linked cite; 222 must NOT land here
-  assert.equal(cov.catalogued, 0)
+  assert.equal(cov.cataloged, 0)
 })
 
 test('pageCitations sums the per-band tallies the bands now carry', () => {
   const bands = [
-    { citations: { total: 10, open: 2, catalogued: 1, linked: 6, unchecked: 1 }, papers: { total: 3, open: 1 } },
-    { citations: { total: 5, open: 0, catalogued: 2, linked: 3, unchecked: 0 }, papers: { total: 2, open: 2 } },
+    { citations: { total: 10, open: 2, cataloged: 1, linked: 6, unchecked: 1 }, papers: { total: 3, open: 1 } },
+    { citations: { total: 5, open: 0, cataloged: 2, linked: 3, unchecked: 0 }, papers: { total: 2, open: 2 } },
     {}, // a band that cited nothing must not break the sum
   ]
   assert.deepEqual(pageCitations(bands), {
-    total: 15, open: 2, catalogued: 3, linked: 9, unchecked: 1, papers: { total: 5, open: 3 },
+    total: 15, open: 2, cataloged: 3, linked: 9, unchecked: 1, papers: { total: 5, open: 3 },
   })
 })
 
 test('citationHeadline says the unchecked bucket and never claims nothing exists', () => {
-  const text = citationHeadline({ total: 15, open: 2, catalogued: 3, unchecked: 1, papers: { total: 5, open: 3 } })
+  const text = citationHeadline({ total: 15, open: 2, cataloged: 3, unchecked: 1, papers: { total: 5, open: 3 } })
   assert.match(text, /The original Wikipedia article cites 15 works\./)
   assert.match(text, /Two of them you can read or borrow right now\./)
-  assert.match(text, /catalogued three more that nobody has scanned/)
+  assert.match(text, /cataloged three more that nobody has scanned/)
   // "We could not look" must never be left reading as "there is nothing there".
   assert.match(text, /One we could not check this time\./)
   assert.match(text, /three are free to read/)
 })
 
 test('citationHeadline reports a search that found nothing as a search, not a fact', () => {
-  const text = citationHeadline({ total: 620, open: 0, catalogued: 0, papers: { total: 0, open: 0 } })
+  const text = citationHeadline({ total: 620, open: 0, cataloged: 0, papers: { total: 0, open: 0 } })
   assert.match(text, /We could not find a free copy of any of them\./)
   assert.doesNotMatch(text, /no free copy exists/i)
   // Thousands separators, because 620 works is a number a reader reads.

@@ -49,9 +49,9 @@ const SHOWCASE = [
 
 // The friends, each with its gift — the page's actual subject. Order is
 // roughly a reader's journey: books, papers, museums, nature, place, law,
-// media; the hosts close the list. The licence line states the terms of the
+// media; the hosts close the list. The license line states the terms of the
 // gift, because the terms ARE part of the story — and it must stay true of
-// the data this demo actually uses, not of the organisation in general.
+// the data this demo actually uses, not of the organization in general.
 const FRIENDS = [
   ['internet_archive', 'Internet Archive',
     'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.',
@@ -61,10 +61,10 @@ const FRIENDS = [
     'Open bibliographic data, downloadable in bulk.'],
   ['openalex', 'OpenAlex',
     'Finds the free, legal copy of the paper behind the citation.',
-    'Catalog CC0. Only papers with an open copy are shown — each card names its licence; closed ones are counted, not carded.'],
+    'Catalog CC0. Only papers with an open copy are shown — each card names its license; closed ones are counted, not carded.'],
   ['arxiv', 'arXiv',
     'Keeps whole sciences open by construction — the preprint is the publication.',
-    'Metadata CC0; each paper names its own licence.'],
+    'Metadata CC0; each paper names its own license.'],
   ['met', 'The Met',
     'Shares its own record of its own objects, public domain wherever it can be.',
     'Public-domain works released CC0, images included.'],
@@ -79,10 +79,10 @@ const FRIENDS = [
     'Metadata CC0; each item’s rights stated by its holder.'],
   ['europeana', 'Europeana',
     'Europe’s answer: three thousand museums, libraries and archives behind one door.',
-    'Only openly licensed items are shown; each card names its licence.'],
+    'Only openly licensed items are shown; each card names its license.'],
   ['inaturalist', 'iNaturalist',
     'A community’s living field guide — photographs with the observer’s name on them.',
-    'Each photo carries its observer’s chosen licence; only openly licensed ones are shown here.'],
+    'Each photo carries its observer’s chosen license; only openly licensed ones are shown here.'],
   ['gbif', 'GBIF',
     'Draws where a species has been seen, from hundreds of millions of records.',
     'Records CC0 or CC BY, stated per dataset.'],
@@ -262,7 +262,7 @@ ${friends}
         <p>Wikidata states the connection outright — this painting is Met object 11417, this species
         is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
         <p>Each shelf says <i>who asked</i>, too: when one friend answers several of the
-        article&rsquo;s links, its cards split into one labelled shelf per link — and in the opening
+        article&rsquo;s links, its cards split into one labeled shelf per link — and in the opening
         section, works <i>by</i> the subject never share a shelf with works merely <i>cited</i>
         there.</p>
       </div>
@@ -314,7 +314,7 @@ ${friends}
     streamed as it is found — this server fetches politely, a few pages at a time, and caches what
     it has seen.</p>
   <p>Code is public domain (CC0) in <a href="https://github.com/tieguy/open-graph-next">open-graph-next</a>.
-    Article text CC BY-SA 4.0; every item carries its own licence and credit.</p>
+    Article text CC BY-SA 4.0; every item carries its own license and credit.</p>
   <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>
     about cooperative knowledge infrastructure and the future of libraries, and by the work of the
     <a href="https://tapestries.media">tapestries.media</a> team.</p>

@@ -50,7 +50,7 @@ export function scholarlyIdentifiers(wikitext) {
 }
 
 /** One batched OpenAlex works query. `select` keeps the response small;
- * `best_oa_location` rides along because it names the open copy's licence. */
+ * `best_oa_location` rides along because it names the open copy's license. */
 export function openAlexUrl(filterField, values, contact) {
   return (
     'https://api.openalex.org/works?filter=' +
@@ -64,12 +64,12 @@ export function openAlexUrl(filterField, values, contact) {
 const normDoi = (d) => d?.toLowerCase().replace(/^https:\/\/doi\.org\//, '') ?? null
 
 /**
-  * OpenAlex licence slugs as readers know them: cc-by → CC BY. Two slugs are
-  * not licences at all and must not be printed as though they were —
+  * OpenAlex license slugs as readers know them: cc-by → CC BY. Two slugs are
+  * not licenses at all and must not be printed as though they were —
   * `other-oa` means OpenAlex knows the copy is free but not on what terms,
-  * which is a different and weaker promise than any CC licence.
+  * which is a different and weaker promise than any CC license.
   */
-const licenceName = (slug) => {
+const licenseName = (slug) => {
   if (!slug) return null
   if (slug === 'other-oa') return 'terms not stated'
   if (slug === 'public-domain') return 'public domain'
@@ -77,7 +77,7 @@ const licenceName = (slug) => {
 }
 
 /** An OpenAlex work as a page entry — only when it is actually open. The
- * credit carries the open copy's licence when OpenAlex knows it; "open
+ * credit carries the open copy's license when OpenAlex knows it; "open
  * access" alone promises readability, not reuse, and the difference between
  * CC BY and merely free-to-read belongs on the card. */
 export function openAlexEntry(work, via) {
@@ -85,7 +85,7 @@ export function openAlexEntry(work, via) {
   if (!oa.is_oa || !oa.oa_url) return null
   const first = work.authorships?.[0]?.author?.display_name ?? null
   const more = (work.authorships?.length ?? 0) > 1 ? ' et al.' : ''
-  const licence = licenceName(work.best_oa_location?.license)
+  const license = licenseName(work.best_oa_location?.license)
   return {
     source: 'openalex',
     title: work.title ?? 'Untitled work',
@@ -94,7 +94,7 @@ export function openAlexEntry(work, via) {
       .join(' · '),
     href: oa.oa_url,
     attribution: {
-      author: ['Free to read', licence].filter(Boolean).join(' · '),
+      author: ['Free to read', license].filter(Boolean).join(' · '),
       license: null,
     },
     why: `Cited here — and there is a copy you can read for free`,
@@ -176,14 +176,14 @@ export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
     total: body.meta?.count ?? open.length,
     entries: open.slice(0, cap).map((w) => {
       const oa = w.open_access
-      const licence = licenceName(w.best_oa_location?.license)
+      const license = licenseName(w.best_oa_location?.license)
       return {
         source: 'openalex',
         title: w.title ?? 'Untitled work',
         description: [w.publication_year, 'open access'].filter(Boolean).join(' · '),
         href: oa.oa_url,
         attribution: {
-          author: ['Free to read', licence].filter(Boolean).join(' · '),
+          author: ['Free to read', license].filter(Boolean).join(' · '),
           license: null,
         },
         _via: 'P496',

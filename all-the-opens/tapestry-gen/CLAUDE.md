@@ -132,7 +132,7 @@ Wikipedia*. Say "the Wikipedia article" every time (`THE_ARTICLE` in
 
 The flat "Today, help came from:" credit bar stays, and is what the masthead
 leads with. It was briefly merged into the panel — the two named the same
-organisations — but once the panel folded shut the duplication stopped costing
+organizations — but once the panel folded shut the duplication stopped costing
 anything and the bar is the friendlier opening.
 
 **Wikimedia Commons is no longer a partner on article pages.** It was ~85% of
@@ -222,14 +222,14 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   OpenStreetMap map cards for locatable, extant places only (one per section max;
   non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
-  band on its most prominent labelled anchor; the anchor is a *cataloger's*
+  band on its most prominent labeled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
   pivot silently skips, so clones run keyless.
 - **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
   through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
-  card names its item's licence. Gated on `EUROPEANA_API_KEY`, same keyless-
+  card names its item's license. Gated on `EUROPEANA_API_KEY`, same keyless-
   skip rule. The
   subject's own statements enrich the lede. Map images are single OSM tiles
   fetched server-side and inlined as data URIs — **never**

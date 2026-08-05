@@ -152,7 +152,7 @@ test('the work’s own language is next when there is no English label', () => {
   assert.equal(preferredLabel({ de: { value: 'Kipp-Erscheinungen' } }), 'Kipp-Erscheinungen')
 })
 
-test('any label beats none — a Catalan cataloguer still named the thing', () => {
+test('any label beats none — a Catalan catalogr still named the thing', () => {
   assert.equal(preferredLabel({ ca: { value: 'Tesi' } }), 'Tesi')
 })
 

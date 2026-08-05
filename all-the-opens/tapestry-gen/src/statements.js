@@ -124,7 +124,7 @@ export function classesUrl(classes) {
  * of the deleted design that asked WDQS the question directly and got xsd
  * booleans on the wire. mergePlaceDefunct writes them in JS now, so the
  * convention is purely internal; it is kept only because changing it would
- * touch every call site for no behavioural gain. An item nothing answered for
+ * touch every call site for no behavioral gain. An item nothing answered for
  * stays unmappable — refusal over wrongness, the same stance parseEarthPoint
  * takes for non-Earth globes.
  */
@@ -364,7 +364,7 @@ export async function aicEntry(id) {
 
 /**
  * The taxon's photo, but only an openly licensed one. Observers choose their
- * own licence and some reserve all rights; this page shows only what its
+ * own license and some reserve all rights; this page shows only what its
  * reader may reuse, so the default photo yields to the first CC-licensed one
  * (`license_code` is null on all-rights-reserved photos), and a taxon whose
  * photos are all reserved renders unillustrated — with the credit saying so,
@@ -395,7 +395,7 @@ export function inatEntryFrom(taxon) {
     attribution: {
       author:
         photo?.attribution ??
-        (hadAny ? 'photos exist, but none under an open licence — shown unillustrated' : null),
+        (hadAny ? 'photos exist, but none under an open license — shown unillustrated' : null),
       license: null,
     },
     _via: 'P3151',
@@ -510,7 +510,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
         : `About ${label}, which this section links to`
       : 'Connected to something this section links to'
     // The renderer splits one source's carousel by topic, so two anchors'
-    // objects from the same museum never share an unlabelled box.
+    // objects from the same museum never share an unlabeled box.
     e.topic = label ?? null
   }
   // A map is only built for a locatable, extant place: a language with a

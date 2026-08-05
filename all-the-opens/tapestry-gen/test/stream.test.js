@@ -125,7 +125,7 @@ test('a card with a trace grows an ⓘ fold: the exact chain, and the door to th
   assert.doesNotMatch(bandRail(BAND), /class="prov"/)
 })
 
-test('one source, two topics: the carousel splits, one labelled strip per topic', () => {
+test('one source, two topics: the carousel splits, one labeled strip per topic', () => {
   const mk = (title, topic) => ({
     source: 'met',
     title,

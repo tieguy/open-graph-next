@@ -55,7 +55,7 @@ async function main() {
   // Source icons travel too, and for a sharper reason than the covers: several
   // of these sites refuse cross-origin hotlinks outright (CourtListener answers
   // 403), so a live <img> is a guaranteed broken image for the sources readers
-  // are least likely to recognise unaided. Only the icons this page will show
+  // are least likely to recognize unaided. Only the icons this page will show
   // are fetched, and anything that fails simply renders as a name.
   for (const url of iconUrls()) {
     if (inline.has(url)) continue

@@ -20,7 +20,7 @@ function cachedGet(cacheDir, params) {
 /**
  * `prop=tocdata` sections, renamed to the fields the rest of this module has
  * always used. The API renamed `byteoffset` to `codepointOffset` in the move —
- * confirming empirically-discovered behaviour: it was never bytes. (It counts
+ * confirming empirically-discovered behavior: it was never bytes. (It counts
  * code points; JS slicing counts UTF-16 units, which diverge only on astral
  * characters — accepted, as before.)
  */
@@ -232,7 +232,7 @@ export function commonsFileTitle(url) {
   const match = /upload\.wikimedia\.org\/wikipedia\/[^/]+\/thumb\/[0-9a-f]\/[0-9a-f]{2}\/([^/]+)\//.exec(
     url ?? '',
   )
-  // Underscores are normalised to spaces because that is how the API returns
+  // Underscores are normalized to spaces because that is how the API returns
   // titles; keying on the raw URL form silently misses every lookup.
   return match ? `File:${decodeURIComponent(match[1]).replace(/_/g, ' ')}` : null
 }
@@ -247,7 +247,7 @@ export function commonsFileTitle(url) {
  * why the dataset's stored 200px and 220px URLs are all dead. Asking for
  * `iiurlwidth` returns a `thumburl` that is valid by construction.
  *
- * `extmetadata` comes back in the same call, so licence and author cost no extra
+ * `extmetadata` comes back in the same call, so license and author cost no extra
  * request. A demo arguing for cooperative knowledge infrastructure should carry
  * the credit, not strip it.
  */
@@ -280,7 +280,7 @@ export async function fetchImageInfo(cacheDir, fileTitles, width = 1280) {
 }
 
 /**
- * Licence and author from a Commons file's `extmetadata`, or null when the file
+ * License and author from a Commons file's `extmetadata`, or null when the file
  * carries neither. Both values arrive as HTML (the Artist field is often an
  * anchor), so markup is stripped to plain text.
  */

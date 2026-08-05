@@ -74,7 +74,7 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
 }
 
 /**
- * Items DPLA's partners catalogued under an anchor's authorized heading.
+ * Items DPLA's partners cataloged under an anchor's authorized heading.
  * @returns {{entries: object[], total: number, heading: string}|null}
  */
 export async function dplaEntries(lcId, anchorLabel, key) {

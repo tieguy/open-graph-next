@@ -214,7 +214,7 @@ const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null
 
 /**
  * OpenLibrary's holdings for a run of ISBNs, one Books API request per 40 —
- * what used to be a throttled request per ISBN. Catalogued is not the same as
+ * what used to be a throttled request per ISBN. Cataloged is not the same as
  * scanned: most cited books have no Internet Archive copy, and for those this
  * is the difference between the rail saying nothing and the rail saying where
  * the book is. The 1.1s throttle is still honoured per request; there are just
@@ -808,7 +808,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
             e.trace =
               `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
               `authority ID (P244), whose authorized heading is “${hit.heading}” — DPLA’s ` +
-              `partners catalogue this item under that heading.`
+              `partners catalog this item under that heading.`
             e.fix = {
               url: `https://www.wikidata.org/wiki/${qid}#P244`,
               label: 'Check or fix it on Wikidata',
@@ -819,7 +819,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
           if (hit.total > hit.entries.length)
             partnerNotes.push(
               `${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s partner institutions ` +
-                `catalogue under the Library of Congress heading “${hit.heading}”`,
+                `catalog under the Library of Congress heading “${hit.heading}”`,
             )
         } catch (e) {
           console.error(`  dpla lookup failed (${lc}): ${e.message}`)

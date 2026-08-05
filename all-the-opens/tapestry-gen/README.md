@@ -42,7 +42,7 @@ gitignored.
 
 A single scrolling page: a two-column reading spine (article left; the
 ecosystem's media and cited sources in a right rail), media grouped into
-per-source horizontal carousels labelled with each source's own favicon, and
+per-source horizontal carousels labeled with each source's own favicon, and
 the section's selected sources ranked by reachability — a borrowable or
 readable book first, then an archived page, then a DOI, then a bare live link.
 Cited books link to their Internet Archive copy; OpenLibrary covers are inlined
