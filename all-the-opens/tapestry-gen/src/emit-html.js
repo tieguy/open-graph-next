@@ -1,5 +1,6 @@
 import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
+import { pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
 
 // A second rendering of the same model (bands, entries, citations) as a single
@@ -275,32 +276,122 @@ function card(entry, inline) {
   const heading = entry.href
     ? `<h4 title="${escapeHtml(entry.title)}"><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
     : `<h4 title="${escapeHtml(entry.title)}">${escapeHtml(entry.title)}</h4>`
-  // Why this item is in THIS article: the anchor that asked for it. A
-  // Valencia opera house in the Golden Gate Bridge article reads as a
-  // mistake until the card says which link brought it here.
-  const why = entry.why ? `<p class="why">${escapeHtml(entry.why)}</p>` : ''
-  // The exact chain, behind an ⓘ: which statement, on which record, produced
-  // this card — with the door to the statement itself when the load-bearing
-  // link is editable. Wrong metadata upstream is a finding, and the reader
-  // who spotted it should land one click from the fix.
-  const trace = entry.trace
-    ? `<details class="prov"><summary title="How this card got here">ⓘ</summary>` +
-      `<p>${escapeHtml(entry.trace)}${
-        entry.fix
-          ? ` <a href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
-          : ''
-      }</p></details>`
-    : ''
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
     credit +
-    why +
-    trace +
+    provenance(entry) +
     `</figcaption></figure>`
   )
+}
+
+/**
+ * Why this item is here, and how we know — one control, not two.
+ *
+ * These were separate until 2026-08-05: a `why` line ("This is American
+ * Gothic's own record of it") and, under it, a 12px grey ⓘ that opened the
+ * exact chain behind the card and the door to fix it on Wikidata. Three
+ * quarters of the cards on a showcase page carry that chain and a "Check or
+ * fix it on Wikidata" link, which makes it the most useful thing on the card
+ * and it was the least visible.
+ *
+ * They answer the same question at two depths, so the line that states the
+ * answer is now the thing you click for the working. That costs no vertical
+ * space, turns a 12px target into a full-width one, and puts the affordance
+ * where a reader who has just read "why" is already looking.
+ *
+ * The three shapes are all real. A card in a topic-labeled shelf has its why
+ * hoisted to the shelf head (see `carousel`) and keeps only the chain, so the
+ * bare form has to name itself rather than relying on a glyph alone.
+ */
+function provenance(entry) {
+  const why = entry.why ? escapeHtml(entry.why) : ''
+  if (!entry.trace) return why ? `<p class="why">${why}</p>` : ''
+  const fix = entry.fix
+    ? ` <a class="fixlink" href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
+    : ''
+  const body = `<p>${escapeHtml(entry.trace)}${fix}</p>`
+  const summary = why
+    ? `<summary class="why" title="How this got here">${why}<span class="info">ⓘ</span></summary>`
+    : `<summary class="why bare" title="How this got here"><span class="info">ⓘ</span>How we know</summary>`
+  return `<details class="prov">${summary}${body}</details>`
+}
+
+/**
+ * The section's single best find, in the slot the references used to occupy.
+ *
+ * Bigger than a deck card because it is doing a different job: the deck is a
+ * shelf to browse, this is the one thing the section wants a passing reader to
+ * see. It keeps the same caption apparatus — title, description, credit, the
+ * merged why/ⓘ — so nothing about a card becomes untrue when it is hoisted.
+ */
+function heroCard(entry, inline) {
+  const embed = entry.media ? iaEmbed(entry.media.source) : null
+  let visual = ''
+  if (embed) {
+    const tall = entry.media.webpageType === 'iaAudio' ? ' audio' : ''
+    visual =
+      `<div class="frame${tall}"><iframe src="${escapeHtml(embed)}" loading="lazy" ` +
+      `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`
+  } else if (entry.imageUrl) {
+    const src = inline.get(entry.imageUrl) ?? entry.imageUrl
+    visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
+  }
+  const heading = entry.href
+    ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
+    : `<h4>${escapeHtml(entry.title)}</h4>`
+  const credit = entry.attribution
+    ? `<p class="credit">${escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))}</p>`
+    : ''
+  return (
+    `<figure class="card hero-card">${visual}<figcaption>` +
+    `<div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
+    heading +
+    (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
+    credit +
+    provenance(entry) +
+    `</figcaption></figure>`
+  )
+}
+
+/**
+ * An anchor whose holdings are too broad to sample, said rather than shown.
+ *
+ * The count is the finding — six thousand openly licensed oil paintings is a
+ * fact about how much is out there, which is the page's whole argument — and
+ * the link is the browse this page declined to fake with four arbitrary
+ * thumbnails. See src/breadth.js for why the shelf is not simply dropped.
+ */
+function broadNotes(notes, inline) {
+  if (!notes?.length) return ''
+  return notes
+    .map((n) => {
+      const name = SOURCE[n.source]?.name ?? n.source
+      const total = n.total.toLocaleString()
+      // Each partner's count means a different thing and has to say which:
+      // DPLA's is everything its partners cataloged under an authorized
+      // heading, Europeana's is only the openly licensed items — the API asks
+      // for `reusability=open` and the browse link carries that filter, so
+      // dropping the word here would misdescribe the number and the link both.
+      // The phrasing deliberately matches the disclosure line these replace.
+      const what =
+        n.source === 'europeana'
+          ? `Europeana’s partners link ${total} openly licensed items to ` +
+            `“${n.label ?? 'this'}”`
+          : n.heading
+            ? `${name}’s partner institutions catalog ${total} items under the heading “${n.heading}”`
+            : `${name} holds ${total} items under “${n.label ?? 'this'}”`
+      return (
+        `<p class="broad">${favicon(n.source, inline)}` +
+        `<span class="broad-text">${escapeHtml(what)} — too many, and too general, ` +
+        `for this page to choose four that belong here. ` +
+        `<a href="${escapeHtml(n.url)}" target="_blank" rel="noopener">Browse them at ${escapeHtml(name)} ↗</a>` +
+        `</span></p>`
+      )
+    })
+    .join('')
 }
 
 // One horizontal, scroll-snapping carousel per source: the strip is labeled with
@@ -372,20 +463,30 @@ function footnoteList(fns, wikiBase) {
 }
 
 /**
- * A band's enrichment in two parts: the references as a floated right rail
- * (they pace the prose), and the media shelves as a full-width deck below it
- * (they need the page's width — stacked in a narrow rail they build a column
- * two or three times taller than the text, and everything left of it is
- * blank). Each part is '' when the band has nothing for it.
+ * A band's enrichment in three parts: the section's best find as a floated
+ * right rail, the media shelves as a full-width deck below it (they need the
+ * page's width — stacked in a narrow rail they build a column two or three
+ * times taller than the text, and everything left of it is blank), and the
+ * references at the foot. Each part is '' when the band has nothing for it.
+ *
+ * The rail held the references until 2026-08-05, which meant the most
+ * prominent place in every section was a closed fold reading "REFERENCES IN
+ * THIS SECTION · 18", with the prose indenting around it for a line and a
+ * half. References belong where a reader goes looking for them, which is the
+ * bottom; the slot belongs to whatever the section actually found.
  */
 export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
+  // The hero comes out of the entries before they are shelved, so it is never
+  // both hoisted and carded. A section whose only find becomes its hero has no
+  // deck at all, which is the right rendering of one good thing.
+  const { hero, rest } = pickHero(b.entries)
   // Group the band's media by source, in first-appearance order — then, within
   // a source, by topic (the anchor that asked for each item). A source whose
   // items all share one topic keeps a single plain carousel; one that mixes
   // topics gets one labeled carousel per topic, so "suspension bridge" media
   // never shares an undifferentiated box with "Golden Gate" media.
   const bySource = new Map()
-  for (const e of b.entries ?? []) {
+  for (const e of rest) {
     if (!bySource.has(e.source)) bySource.set(e.source, new Map())
     const byTopic = bySource.get(e.source)
     const topic = e.topic ?? null
@@ -415,16 +516,19 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const disclosure = b.disclosure
     ? `<p class="disclosure"><b>A sample, not the whole shelf:</b> ${escapeHtml(b.disclosure)}</p>`
     : ''
+  const broad = broadNotes(b.broad, inline)
+  const deckBody = disclosure + broad + media
   return {
-    rail: sources || (disclosure && !media) ? `<aside class="rail">${media ? '' : disclosure}${sources}</aside>` : '',
-    deck: media ? `<div class="deck">${disclosure}${media}</div>` : '',
+    rail: hero ? `<aside class="rail">${heroCard(hero, inline)}</aside>` : '',
+    deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
+    refs: sources,
   }
 }
 
-/** Both parts as one fragment — what the stream ships and the tests read. */
+/** All three parts as one fragment — what the stream ships and the tests read. */
 export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
-  const { rail, deck } = bandParts(b, inline, wikiBase)
-  return rail + deck
+  const { rail, deck, refs } = bandParts(b, inline, wikiBase)
+  return rail + deck + refs
 }
 
 function band(b, inline, wikiBase = '/wiki/') {
@@ -440,15 +544,15 @@ function band(b, inline, wikiBase = '/wiki/') {
         })
         .join('')
     : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
-  // The references float right and the prose wraps them — they pace each
-  // other. The media deck comes after, full-width: shelves pack side by side
-  // and wrap, instead of stacking into a tall narrow column beside blank page.
-  const { rail, deck } = bandParts(b, inline, wikiBase)
+  // The hero floats right and the prose wraps it. The media deck comes after,
+  // full-width: shelves pack side by side and wrap, instead of stacking into a
+  // tall narrow column beside blank page. The references close the section.
+  const { rail, deck, refs } = bandParts(b, inline, wikiBase)
   const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
     `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>` +
-    `<div class="band-body">${rail}<div class="prose">${prose}</div>${deck}</div>` +
+    `<div class="band-body">${rail}<div class="prose">${prose}</div>${deck}${refs}</div>` +
     `</section>`
   )
 }
@@ -553,8 +657,11 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 </script>`
 
 // The relocation helpers, inlined into the head so they exist before the
-// first fragment arrives. `__thb` mounts a band's rail; `__fill`/`__append`
-// place the hero's legend and notes once the page knows its sources.
+// first fragment arrives. `__thb` mounts a band's enrichment — the floated
+// hero goes before the prose, everything after it (deck, then references)
+// appends in template order, which is why the fragment's own order is the
+// rendered order. `__fill`/`__append` place the masthead's legend and notes
+// once the page knows its sources.
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
@@ -742,12 +849,25 @@ sup.ref a:hover{text-decoration:underline}
   color:var(--head);margin:1.8em 0 .5em}
 .note-lead{font-size:1.15rem;font-style:italic;color:#3a3f45;max-width:46em}
 
-/* The rail (references only) narrows in steps so the two-column layout survives
-   well below a full desktop width — a hi-DPI laptop at default scaling reports a
-   narrow CSS width, and it should still read as article + margin, not stack. */
-.rail{float:right;width:404px;margin:6px 0 24px 46px}
-@media(max-width:1040px){.rail{width:344px;margin-left:38px}}
-@media(max-width:860px){.rail{width:290px;margin-left:28px}}
+/* The rail (the section's best find) narrows in steps so the two-column layout
+   survives well below a full desktop width — a hi-DPI laptop at default scaling
+   reports a narrow CSS width, and it should still read as article + margin. */
+.rail{float:right;width:330px;margin:4px 0 26px 46px}
+@media(max-width:1040px){.rail{width:300px;margin-left:38px}}
+@media(max-width:860px){.rail{width:260px;margin-left:28px}}
+
+/* The hero: the one thing the section wants a passing reader to see. It is a
+   card, so everything true of a card stays true of it — it is just given the
+   room to be looked at rather than scanned past. */
+.hero-card{flex:none;width:100%;margin:0}
+.hero-card .shot{border-radius:5px;box-shadow:0 2px 8px rgba(0,0,0,.16)}
+.hero-card figcaption{padding-top:10px}
+.hero-src{margin:0 0 6px}
+/* No line clamp here: the hero has the room, and a hero whose title is cut off
+   mid-word is a worse advertisement for the find than a title on three lines. */
+.hero-card h4{font-size:1.08rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
+.hero-card .desc{font-size:.8rem;-webkit-line-clamp:3}
+.hero-card .credit{font-size:.72rem;-webkit-line-clamp:3}
 
 /* The media deck: full-width, below the prose. Shelves size to their cards and
    pack side by side, wrapping — a one-card shelf shares its row with the next
@@ -836,24 +956,47 @@ sup.ref a:hover{text-decoration:underline}
 .card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#a0a4a9}
 .card .sig-pair{color:#4a4f55}
 .card .sig-vs{color:#a0a4a9;margin:0 4px}
+/* Why this item is here — and, where there is a chain behind it, the control
+   that opens the chain. One line doing both jobs: the ⓘ used to sit under this
+   line as its own 12px target and was the least visible thing on the card
+   despite opening the most useful. */
 .card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
-/* The provenance fold: an ⓘ that opens into the exact chain behind the card. */
-.card .prov summary{list-style:none;width:fit-content;cursor:pointer;font-size:.75rem;
-  color:#9aa0a6;margin-top:4px}
+.card .prov{margin:0}
+.card .prov summary.why{list-style:none;cursor:pointer;display:block;margin:0}
 .card .prov summary::-webkit-details-marker{display:none}
-.card .prov summary:hover{color:var(--link)}
+.card .prov summary.why:hover,.card .prov[open] summary.why{color:var(--link)}
+/* The affordance, in the link color and heavier than the line it ends: a grey
+   ⓘ reads as decoration, a blue one reads as a control. */
+.card .prov .info{color:var(--link);font-weight:700;font-size:.82rem;margin-left:5px;
+  vertical-align:-1px;line-height:1}
+.card .prov summary.bare .info{margin:0 4px 0 0}
+.card .prov[open] .info{opacity:.55}
 .card .prov p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
-  border-radius:4px;padding:6px 8px;margin:4px 0 0}
+  border-radius:4px;padding:6px 8px;margin:5px 0 0}
 .card .prov a{font-weight:600}
+/* The one link on the card a reader can act on, rather than merely follow. */
+.card .prov .fixlink{display:inline-block;margin-top:3px}
+.hero-card .why,.hero-card .prov summary.why{font-size:.72rem}
+.hero-card .prov p{font-size:.68rem}
+
+/* An anchor too broad to sample: the count, and the door. Sits in the deck
+   where its shelf would have been, so a reader sees what was declined and not
+   merely an absence. */
+.broad{display:flex;gap:9px;align-items:baseline;flex:1 1 100%;font-family:var(--sans);
+  font-size:.7rem;line-height:1.5;color:var(--muted);margin:0 0 12px;padding:8px 10px;
+  background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
+.broad .fav{flex:none;width:14px;height:14px;transform:translateY(2px)}
+.broad-text{min-width:0}
+.broad a{font-weight:600;white-space:nowrap}
 
 .disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
   margin:0 0 14px;padding:7px 9px;background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
-/* The right-gutter references: Wikipedia's own footnotes, marginal instead of
-   bottom-of-page. Small, hanging-numbered, with the marker's number so the
-   prose and the gutter agree. */
-.refs{margin-top:26px;padding-top:20px;border-top:1px solid var(--rule)}
-/* With media on the deck, the refs usually open the rail — no divider against nothing. */
-.rail .refs:first-child{margin-top:0;padding-top:0;border-top:0}
+/* The references: Wikipedia's own footnotes, at the foot of the section they
+   belong to. Small, hanging-numbered, with the marker's number so the prose
+   and the notes agree. They floated at the TOP RIGHT of every section until
+   2026-08-05, which put a closed fold in the most prominent slot on the page
+   and made the prose indent around one line of small caps. */
+.refs{clear:both;margin-top:30px;padding-top:16px;border-top:1px solid var(--rule)}
 .fnlist{list-style:none;margin:0;padding:0;font-family:var(--sans)}
 .fn{display:flex;gap:7px;font-size:.73rem;line-height:1.5;color:#54595d;margin:0 0 9px}
 .fn:target{background:#eaf3ff;outline:4px solid #eaf3ff;border-radius:2px}
@@ -884,11 +1027,16 @@ sup.ref a:hover{text-decoration:underline}
 @media(max-width:640px){
   .hero{padding:26px 20px 20px}
   main{padding:0 20px}
-  /* Stacked order: the article first, then its references, then the media —
-     the DOM keeps the rail first for the floated layout, so flex reorders. */
+  /* Stacked order: the section's best find, the article, the rest of the
+     media, then the references. The DOM order already says this, but the
+     float has to be undone and the flex order stated so a future DOM change
+     cannot silently reshuffle a one-column page. */
   .band-body{display:flex;flex-direction:column}
-  .rail{float:none;width:auto;margin:26px 0 0;order:2}
-  .prose{order:1}
+  .rail{float:none;width:auto;margin:0 0 22px;order:1}
+  .prose{order:2}
   .deck{order:3}
+  .refs{order:4}
+  .broad{display:block}
+  .broad .fav{display:inline-block;margin-right:6px}
 }
 `

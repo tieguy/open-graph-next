@@ -430,40 +430,11 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
-/**
- * How openly reachable a citation is — the lower the number, the more surely a
- * reader can open it. A book you can borrow or read is the richest thing the
- * gutter can offer; an archived page always resolves; a bare live link may have
- * rotted. Requires book citations to have their `.access` attached first (from
- * openLibraryAccess); everything else is decided by the citation alone.
- */
-function reachabilityRank(cite) {
-  const availability = cite.access?.availability
-  if (availability === 'full' || availability === 'borrow') return 0 // open the whole thing
-  if (cite.archiveUrl) return 1 // archived — will still resolve
-  if (cite.doi) return 2 // a stable scholarly landing page
-  if (availability === 'catalog') return 3 // findable in a catalog, not readable
-  if (cite.url) return 4 // a live link that may rot
-  return 5 // nothing to open
-}
-
-/**
- * Choose which of a section's citations to show, capped — preferring the sources
- * a reader can actually reach. De-duplicated, and stable within each rank so
- * article order breaks ties.
- */
-export function prioritizeCitations(cites, cap = 3) {
-  const seen = new Set()
-  const unique = []
-  for (const c of cites) {
-    const key = c.isbn ?? citationHref(c) ?? c.title ?? JSON.stringify(c)
-    if (seen.has(key)) continue
-    seen.add(key)
-    unique.push(c)
-  }
-  return unique
-    .map((c, i) => [c, i])
-    .sort((a, b) => reachabilityRank(a[0]) - reachabilityRank(b[0]) || a[1] - b[1])
-    .slice(0, cap)
-    .map(([c]) => c)
-}
+// `prioritizeCitations` and `reachabilityRank` were retired here on
+// 2026-08-05. They chose which few of a section's citations to show, ranked by
+// how surely a reader could open each one — and they stopped running when the
+// gutter switched to rendering Wikipedia's own footnotes in full, which needs
+// no shortlist and no ranking. They survived that change for weeks because
+// four tests kept them green: a passing test is not evidence of a caller.
+// Ranking now happens where the page actually chooses — over finds, not
+// citations. See src/hero.js.

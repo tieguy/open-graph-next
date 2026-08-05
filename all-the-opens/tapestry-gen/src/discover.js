@@ -42,8 +42,8 @@ import {
   templateParams,
 } from './citations.js'
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
-import { dplaEntries } from './dpla.js'
-import { europeanaEntries } from './europeana.js'
+import { dplaBrowseUrl, dplaEntries } from './dpla.js'
+import { europeanaBrowseUrl, europeanaEntries } from './europeana.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
@@ -51,7 +51,8 @@ import { articleReach } from './gap.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import { entityStatements, statementEntries } from './statements.js'
-import { claimAnchors } from './dedup.js'
+import { claimAnchors, preferRelated, subjectAnchors } from './dedup.js'
+import { broadNote, tooBroad } from './breadth.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -569,26 +570,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const qidsPromise = fetchQids(CACHE, [
     ...new Set([normalizedPage, ...units.flatMap((u) => u.linkCandidates)]),
   ])
-  const pickedPromise = qidsPromise.then((qids) => {
-    // Every unit's candidates in article order; ownership is decided here,
-    // before any pivot runs, so streaming's completion-order emission can
-    // never reassign an anchor between runs. The subject QID is seeded to
-    // the lede: its own statements belong there by design.
-    const seeded = new Map()
-    const ledeAt = units.findIndex((u) => u.index === '0')
-    const subjectQid = qids.get(normalizedPage)
-    if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
-    const owned = claimAnchors(
-      units.map((u) => u.linkCandidates.map((t) => qids.get(t))),
-      { perUnit: QIDS_PER_SECTION, seeded },
-    )
-    const picked = new Map()
-    units.forEach((unit, i) => {
-      stats.anchorsQid += owned[i].length
-      picked.set(unit, owned[i])
-    })
-    return picked
-  })
 
   // The subject's QID, resolved via wikidata. `subjectPromise` waits on all N
   // batches of `qidsPromise` (one per 50 titles), not just a single 50-title
@@ -596,9 +577,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // unit's link candidates, pooling one WMF request. The tradeoff: subject
   // claims arrive after ALL title batches complete instead of after the first
   // batch — measured on Prandtl: +89ms for subject, +81ms for statements
-  // (each scales ~10ms per batch). This is acceptable because subject pivots
-  // enrich only the lede (no critical path to bands), and the savings (Prandtl
-  // and Dapples both 4→3 en.wikipedia.org requests) outweigh the latency.
+  // (each scales ~10ms per batch). This is acceptable because the subject's
+  // claims were already on every band's critical path through
+  // `statementsPromise`, which has always awaited them.
   const subjectPromise = (async () => {
     const qid = (await qidsPromise).get(normalizedPage)
     if (!qid) return { qid: null, claims: {} }
@@ -611,6 +592,38 @@ export async function discover(page, { emit = async () => {} } = {}) {
       return { qid, claims: {} }
     }
   })()
+
+  const pickedPromise = Promise.all([qidsPromise, subjectPromise]).then(([qids, subject]) => {
+    // Every unit's candidates in article order; ownership is decided here,
+    // before any pivot runs, so streaming's completion-order emission can
+    // never reassign an anchor between runs. The subject QID is seeded to
+    // the lede: its own statements belong there by design.
+    const seeded = new Map()
+    const ledeAt = units.findIndex((u) => u.index === '0')
+    const subjectQid = qids.get(normalizedPage)
+    if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
+    // The lede alone ranks its candidates before claiming: the entities the
+    // subject's own Wikidata statements name most specifically go first, so
+    // the article about a painting anchors on its painter and the museum that
+    // owns it rather than on the words "oil painting" and "beaverboard". See
+    // preferRelated. Every other unit keeps document order, which is all there
+    // is to go on there.
+    const related = subjectAnchors(subject.claims)
+    const owned = claimAnchors(
+      units.map((u) => {
+        const qs = u.linkCandidates.map((t) => qids.get(t))
+        return u.index === '0' ? preferRelated(qs, related) : qs
+      }),
+      { perUnit: QIDS_PER_SECTION, seeded },
+    )
+    const picked = new Map()
+    units.forEach((unit, i) => {
+      stats.anchorsQid += owned[i].length
+      picked.set(unit, owned[i])
+    })
+    return picked
+  })
+
   const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
@@ -671,7 +684,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // the card states the claim.
     // The subject's own output is its own reason class: in the lede an ORCID
     // paper or the thesis must not share a strip with works merely cited there.
-    if (thesis) thesis.topic = `By ${page}`
+    // `standing` is the same fact stated for the hero picker (src/hero.js):
+    // where the article is ABOUT a document, that document leads the section,
+    // ahead of any illustrated record of it.
+    if (thesis) {
+      thesis.topic = `By ${page}`
+      thesis.standing = 'subject-document'
+    }
+    if (opinion) opinion.standing = 'subject-document'
     const fixOn = (prop) => ({
       url: `https://www.wikidata.org/wiki/${subjectQid}#${prop}`,
       label: 'Check or fix it on Wikidata',
@@ -679,6 +699,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     for (const e of works.entries) {
       e.why = `Written by ${page}`
       e.topic = `By ${page}`
+      e.standing = 'subject-work'
       e.trace =
         `Wikidata — the shared database behind Wikipedia’s infoboxes — records an Open Library ` +
         `author ID (P648) for ${page}. These are the books Open Library files under that author.`
@@ -687,6 +708,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     for (const e of scholarship.entries) {
       e.why = `A paper by ${page}, free to read`
       e.topic = `By ${page}`
+      e.standing = 'subject-work'
       e.trace =
         `Wikidata records an ORCID iD (P496) for ${page} — the number researchers use to keep ` +
         `their own name attached to their work. OpenAlex lists this paper under it.`
@@ -779,6 +801,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
       const found = (
         await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0, subject: isSubject })
       ).slice(0, statementsLeft)
+      // A partner's own record of what this article is about — the Art
+      // Institute's American Gothic, iNaturalist's monarch. The hero picker
+      // ranks these above any record of something merely linked here.
+      if (isSubject) for (const e of found) e.standing = 'subject-record'
       if (found.some((e) => e.source === 'openstreetmap')) mapsLeft--
       statementsLeft -= found.length
       entries.push(...found)
@@ -792,6 +818,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Without DPLA_API_KEY the pivot is simply absent: the demo must run
     // keyless for anyone who clones it.
     const partnerNotes = []
+    // Anchors whose holdings are too broad to sample: shown as one sentence
+    // and a browse link instead of four arbitrary cards. See src/breadth.js.
+    const broad = []
     if (process.env.DPLA_API_KEY) {
       const anchored = statementQids
         .map((q) => ({ lc: statements.get(q)?.lc, label: labels.get(q) ?? null, qid: q }))
@@ -801,10 +830,24 @@ export async function discover(page, { emit = async () => {} } = {}) {
         .filter((a) => a.lc)
         .slice(0, 2)
       for (const { lc, label, qid } of anchored) {
+        const isSubject = unit.index === '0' && qid === extras?.subjectQid
         try {
           const hit = await dplaEntries(lc, label, process.env.DPLA_API_KEY)
           if (!hit) continue
+          if (tooBroad(hit.total, { isSubject })) {
+            broad.push(
+              broadNote({
+                source: 'dpla',
+                label,
+                heading: hit.heading,
+                total: hit.total,
+                url: dplaBrowseUrl(hit.heading),
+              }),
+            )
+            continue
+          }
           for (const e of hit.entries) {
+            if (isSubject) e.standing = 'subject-record'
             e.trace =
               `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
               `authority ID (P244), whose authorized heading is “${hit.heading}” — DPLA’s ` +
@@ -839,9 +882,22 @@ export async function discover(page, { emit = async () => {} } = {}) {
         .filter((a) => a.eu)
         .slice(0, 2)
       for (const { eu, label, qid } of anchored) {
+        const isSubject = unit.index === '0' && qid === extras?.subjectQid
         try {
           const hit = await europeanaEntries(eu, label, process.env.EUROPEANA_API_KEY)
+          if (tooBroad(hit.total, { isSubject })) {
+            broad.push(
+              broadNote({
+                source: 'europeana',
+                label,
+                total: hit.total,
+                url: europeanaBrowseUrl(eu),
+              }),
+            )
+            continue
+          }
           for (const e of hit.entries) {
+            if (isSubject) e.standing = 'subject-record'
             e.trace =
               `Wikidata’s item for ${label ?? qid} (${qid}) states its Europeana entity ID ` +
               `(P7704) — Europeana’s partner records link this item to that entity.`
@@ -892,6 +948,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       citations: coverage,
       papers: { total: unit.scholarly.length, open: openPapers },
       disclosure: fullDisclosure,
+      broad,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)

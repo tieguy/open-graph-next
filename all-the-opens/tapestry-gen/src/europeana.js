@@ -29,6 +29,24 @@ export function europeanaUrl(entityId, key) {
   )
 }
 
+/**
+ * Where a reader goes to browse an entity this page declined to sample.
+ *
+ * Deliberately the SAME query the API ran, `reusability=open` and all, rather
+ * than Europeana's prettier `/collections/topic/<id>` landing page: the page
+ * states a count of openly licensed items, and the link a reader clicks to
+ * check that count has to be the query it came from. The topic page shows
+ * everything, open or not, and would quietly contradict the sentence above it.
+ */
+export function europeanaBrowseUrl(entityId) {
+  const canonical = entityId.replace(/^(agent|concept|place|timespan)\/base\//, '$1/')
+  return (
+    'https://www.europeana.eu/en/search?query=' +
+    encodeURIComponent(`"http://data.europeana.eu/${canonical}"`) +
+    '&reusability=open'
+  )
+}
+
 /** A rights URI as the short name a reader knows. */
 export function rightsName(uri) {
   if (!uri) return null

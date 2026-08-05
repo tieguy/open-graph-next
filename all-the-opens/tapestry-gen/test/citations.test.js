@@ -9,7 +9,6 @@ import {
   pageCitations,
   openLibraryAccess,
   parseCitation,
-  prioritizeCitations,
   sectionCitations,
   templateParams,
 } from '../src/citations.js'
@@ -110,33 +109,6 @@ test('a book citation with an ISBN yields an OpenLibrary cover url', () => {
     'https://covers.openlibrary.org/b/isbn/9780743257510-M.jpg',
   )
   assert.equal(citationCoverUrl({ isbn: null }), null)
-})
-
-test('prioritization prefers reachable sources: readable book, then archived, then DOI, then a bare link', () => {
-  const cites = [
-    { kind: 'web', url: 'https://live.test', title: 'live' },
-    { kind: 'journal', doi: '10.1/x', title: 'doi' },
-    { kind: 'book', isbn: '1', title: 'readable', access: { availability: 'borrow', url: 'https://archive.org/details/x' } },
-    { kind: 'news', url: 'https://n.test', archiveUrl: 'https://web.archive.org/n', title: 'archived' },
-  ]
-  const out = prioritizeCitations(cites, 4)
-  assert.deepEqual(out.map((c) => c.title), ['readable', 'archived', 'doi', 'live'])
-})
-
-test('a book OpenLibrary only catalogs ranks below a readable archived page', () => {
-  const cites = [
-    { kind: 'book', isbn: '1', title: 'catalog-only', access: { availability: 'catalog', url: 'https://openlibrary.org/x' } },
-    { kind: 'news', url: 'https://n.test', archiveUrl: 'https://web.archive.org/n', title: 'archived' },
-  ]
-  assert.equal(prioritizeCitations(cites, 2)[0].title, 'archived')
-})
-
-test('prioritization de-dupes repeated citations', () => {
-  const cites = [
-    { kind: 'web', url: 'https://a.test', title: 'A' },
-    { kind: 'web', url: 'https://a.test', title: 'A again' },
-  ]
-  assert.equal(prioritizeCitations(cites, 5).length, 1)
 })
 
 // --- OpenLibrary access (a book you can actually read/borrow) ----------------

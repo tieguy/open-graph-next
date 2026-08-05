@@ -29,12 +29,22 @@ const BAND = {
   id: 's3',
   title: 'One',
   blocks: UNITS[1].blocks,
+  // Two entries, because one of a band's finds is hoisted into the rail as the
+  // section's hero and the rest are shelved — a one-entry band has no deck at
+  // all, which is correct but tests nothing about shelving.
   entries: [
     {
       source: 'met',
       title: 'A photo',
       imageUrl: 'https://example.test/x.jpg',
       attribution: { author: 'Someone', license: 'CC0' },
+      why: 'About Santiago Calatrava, which this section links to',
+    },
+    {
+      source: 'met',
+      title: 'Another photo',
+      imageUrl: 'https://example.test/y.jpg',
+      attribution: { author: 'Someone Else', license: 'CC0' },
       why: 'About Santiago Calatrava, which this section links to',
     },
   ],
@@ -76,30 +86,91 @@ test('streamClose marks the stream as complete on purpose', () => {
   assert.match(streamClose({}), /window\.__tapdone=1/)
 })
 
-test('references float in the rail; media shelves ride the full-width deck', () => {
-  const { rail, deck } = bandParts(BAND)
-  // The rail carries the references and nothing visual.
-  assert.match(rail, /^<aside class="rail">/)
-  assert.match(rail, /References in this section/)
+test('the best find floats in the rail, media rides the deck, references close the section', () => {
+  const { rail, deck, refs } = bandParts(BAND)
+  // The rail carries the section's hero and nothing bibliographic. It held the
+  // references until 2026-08-05, which spent the page's most prominent slot on
+  // a closed fold.
+  assert.match(rail, /^<aside class="rail"><figure class="card hero-card">/)
+  assert.doesNotMatch(rail, /References in this section/)
   assert.doesNotMatch(rail, /<div class="carousel"/)
-  // The deck carries the media and nothing bibliographic.
+  // The deck carries the remaining media and nothing bibliographic.
   assert.match(deck, /^<div class="deck">/)
   assert.match(deck, /<div class="carousel"/)
   assert.doesNotMatch(deck, /References in this section/)
-  // A disclosure describes the media, so it opens the deck when one exists.
+  // The references are their own part now, and last.
+  assert.match(refs, /^<div class="refs">/)
+  assert.match(refs, /References in this section/)
+  // The hoisted find is NOT also shelved: two entries in, one hero and one card.
+  assert.match(rail, /A photo/)
+  assert.doesNotMatch(deck, /A photo</)
+  assert.match(deck, /Another photo/)
+  // A disclosure describes the media, so it opens the deck.
   const disclosed = bandParts({ ...BAND, disclosure: 'Media anchored on X' })
   assert.match(
     disclosed.deck,
     /^<div class="deck"><p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
   )
   assert.doesNotMatch(disclosed.rail, /disclosure/)
-  // …and falls back to the rail when the band has notes but no media.
+  // …and still lands in the deck, full width, when there is no media to
+  // describe: a note about what was left out is prose, not a floated card.
   const noMedia = bandParts({ ...BAND, entries: [], disclosure: 'Media anchored on X' })
+  assert.equal(noMedia.rail, '')
   assert.match(
-    noMedia.rail,
+    noMedia.deck,
     /<p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
   )
-  assert.equal(noMedia.deck, '')
+})
+
+test('a band with nothing worth leading with gets no float at all', () => {
+  // A text-only citation card blown up to a 330px float is the thin box the
+  // references fold used to be. Better to have no rail and full-width prose.
+  const { rail, deck } = bandParts({
+    ...BAND,
+    entries: [{ source: 'internet_archive', title: 'A cited scan', why: 'Cited here' }],
+  })
+  assert.equal(rail, '')
+  assert.match(deck, /A cited scan/)
+})
+
+test('an anchor too broad to sample becomes a sentence and a browse link', () => {
+  const { deck } = bandParts({
+    ...BAND,
+    broad: [
+      {
+        source: 'europeana',
+        label: 'oil painting',
+        heading: null,
+        total: 6123,
+        url: 'https://www.europeana.eu/en/search?query=x',
+      },
+    ],
+  })
+  assert.match(deck, /<p class="broad">/)
+  // "openly licensed" is not decoration: the count and the browse link both
+  // carry Europeana's reusability=open filter, so the sentence must too.
+  assert.match(deck, /Europeana’s partners link 6,123 openly licensed items to “oil painting”/)
+  assert.match(deck, /too many, and too general, for this page to choose four/)
+  assert.match(deck, /Browse them at Europeana ↗/)
+  // No cards were invented to stand in for the ones that were not shown.
+  assert.doesNotMatch(deck, /öljymaalaus/)
+})
+
+test('DPLA’s broad note counts what its partners cataloged, under the authorized heading', () => {
+  const { deck } = bandParts({
+    ...BAND,
+    broad: [
+      {
+        source: 'dpla',
+        label: 'spaceflight',
+        heading: 'Space flight',
+        total: 3016,
+        url: 'https://dp.la/search?subject=%22Space%20flight%22',
+      },
+    ],
+  })
+  assert.match(deck, /DPLA’s partner institutions catalog 3,016 items under the heading “Space flight”/)
+  assert.doesNotMatch(deck, /openly licensed/)
 })
 
 test('a card says which anchor brought it here', () => {
@@ -118,11 +189,37 @@ test('a card with a trace grows an ⓘ fold: the exact chain, and the door to th
       },
     ],
   })
-  assert.match(rail, /<details class="prov"><summary title="How this card got here">ⓘ<\/summary>/)
+  // The why line IS the control: one target, not a line plus a 12px glyph.
+  assert.match(
+    rail,
+    /<summary class="why" title="How this got here">About Santiago Calatrava, which this section links to<span class="info">ⓘ<\/span><\/summary>/,
+  )
   assert.match(rail, /states its Met object ID \(P3634\)/)
-  assert.match(rail, /<a href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener">Check or fix it on Wikidata ↗<\/a>/)
+  assert.match(rail, /<a class="fixlink" href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener">Check or fix it on Wikidata ↗<\/a>/)
   // A card with no trace shows no fold — an empty ⓘ is a broken promise.
   assert.doesNotMatch(bandRail(BAND), /class="prov"/)
+})
+
+test('a card whose why was hoisted to the shelf head still names its ⓘ', () => {
+  // In a topic-labeled shelf the shared why moves to the head, so the fold has
+  // no line to hang on and a bare glyph would be unlabeled. It says what it is.
+  // The hoist only fires on a SPLIT source (more than one topic), so the
+  // fixture needs a second topic as well as two cards left in the first.
+  const mk = (title, topic) => ({
+    source: 'met',
+    title,
+    imageUrl: `https://example.test/${title}.jpg`,
+    topic,
+    why: `About ${topic}, which this section links to`,
+    trace: 'Wikidata’s item for X (Q1) states its Met object ID (P3634).',
+  })
+  const { deck } = bandParts({
+    ...BAND,
+    footnotes: [],
+    entries: [mk('A', 'bridge'), mk('B', 'bridge'), mk('C', 'bridge'), mk('D', 'strait')],
+  })
+  assert.match(deck, /<p class="carousel-why">About bridge, which this section links to<\/p>/)
+  assert.match(deck, /<summary class="why bare" title="How this got here"><span class="info">ⓘ<\/span>How we know<\/summary>/)
 })
 
 test('one source, two topics: the carousel splits, one labeled strip per topic', () => {
@@ -133,28 +230,35 @@ test('one source, two topics: the carousel splits, one labeled strip per topic',
     topic,
     why: `About ${topic}, which this section links to`,
   })
-  const rail = bandRail({
+  // Four, not three: the first is hoisted into the rail as the section's hero,
+  // and the shared-why hoist below needs two cards left in one topic to fire.
+  const { rail, deck } = bandParts({
     ...BAND,
     footnotes: [],
     entries: [
       mk('Bridge deck', 'suspension bridge'),
       mk('Towers', 'suspension bridge'),
+      mk('Cables', 'suspension bridge'),
       mk('The strait', 'Golden Gate'),
     ],
   })
-  const carousels = rail.match(/<div class="carousel"/g) ?? []
+  const carousels = deck.match(/<div class="carousel"/g) ?? []
   assert.equal(carousels.length, 2)
-  assert.match(rail, /<span class="topic">suspension bridge<\/span>/)
-  assert.match(rail, /<span class="topic">Golden Gate<\/span>/)
+  assert.match(deck, /<span class="topic">suspension bridge<\/span>/)
+  assert.match(deck, /<span class="topic">Golden Gate<\/span>/)
   // The shared why line is said once under the head, not on every card.
   assert.match(
-    rail,
+    deck,
     /<p class="carousel-why">About suspension bridge, which this section links to<\/p>/,
   )
   assert.doesNotMatch(
-    rail,
+    deck,
     /<p class="why">About suspension bridge, which this section links to<\/p>/,
   )
+  // The hero is not in a shelf, so nothing hoisted ITS why — it keeps its own
+  // line. Scoping this assertion to the deck is the point: the same why text
+  // legitimately appears once in the rail and never on a shelved card.
+  assert.match(rail, /<p class="why">About suspension bridge, which this section links to<\/p>/)
 })
 
 test('one source, one topic: a single carousel with no topic label, as before', () => {
