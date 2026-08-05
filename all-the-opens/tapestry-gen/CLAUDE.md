@@ -28,6 +28,16 @@ does not help generate the website, it belongs in the attic.
   streaming server.
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
+- **`.cache/fact-<kind>-<key>.json`** (`readFacts`/`writeFacts` in `src/http.js`,
+  2026-08-05) is the same cache holding *derived* answers rather than response
+  bodies — today `fact-class-Q….json`, two booleans per Wikidata class. It is
+  **cache, not data**: everything in it is re-derivable from the network, and
+  deleting `.cache/` is still the whole reset. The "reads nothing on disk"
+  contract above targets baked results and non-algorithmic editorial judgment,
+  and a cache is neither — but the files sit beside the request cache and look
+  like a dataset, so they are named here to stop that mistake. A cache may make
+  a page faster and must **never** make it different (three showcase renders
+  are byte-identical across the change, which is how that is checked).
 
 ## Two entry points
 
@@ -47,8 +57,11 @@ does not help generate the website, it belongs in the attic.
 - **`serve.js`** — **streaming** live discovery (design-plan Phase 7, added
   2026-08-03): `npm run serve` then visit `/wiki/<Article_Title>`. One chunked
   HTML response: the article spine renders in ~1s (one parse call), and each
-  band's rail follows as a `<template>` + one-line mount script the moment its
-  own pivots answer. No client framework; the stream is the page. Same
+  band's enrichment follows as a `<template>` + one-line mount script the moment
+  its own pivots answer (`bandRail` ships all three parts — hero float, media
+  deck and references — and `__thb` mounts each where it belongs: float before
+  `.prose`, deck and refs after).
+  No client framework; the stream is the page. Same
   pipeline, budgets, cache and politeness as batch — only the byte timing
   differs. Byte-reproducibility is a batch-only invariant; streamed pages are
   expected to vary with live data.
@@ -67,15 +80,18 @@ every parse call sends `redirects=1`, `fetchArticle` returns the API's own
 resolved title. A redirect that lingered in the caller's string would name an
 article the page is not.
 
-Streaming profile: **stale, and the shape has changed** (2026-08-04). The old
-figures (spine 0.9s, first rail 4.5s, complete ~9s) were dominated by the
-Commons queue, serial by etiquette, and by the depicts chain that put
-`categoryFilesPromise` on every band's path. Both are gone with Commons, and
-with them the only cross-band dependency — a band now waits solely on the
-global batches it will actually read. Cold McClintock measured 62.8s / 21
-requests on 2026-08-04 after the change; warm reruns are offline. Re-measure
-before quoting anything. The property that matters is that the first rail
-still arrives far ahead of completion, not the absolute seconds.
+Streaming profile: a band waits solely on the global batches it will actually
+read — the last cross-band dependency (Commons' depicts chain) went with
+Commons on 2026-08-04. **The lede is exempt and goes first** (2026-08-05): it
+gets its own turn at the front of every per-host queue rather than sharing the
+page-wide batches, because it was arriving *last*. Cold Brown v. Board before
+that change: spine 0.6s, nothing until 2.6s, then eight bands at once and nine
+more at 3.5s — the lede, which carries the hero card and the Free Law opinion,
+seventeenth of seventeen. After: first band 1.9s, lede 2.5s and ninth. Its
+remaining floor is the WDQS mappability chain, not its citations.
+
+The property that matters is that the first band arrives far ahead of
+completion, not the absolute seconds — see the warning under Request shape.
 
 ## Deployed demo
 
@@ -88,7 +104,12 @@ Experiment"*. Deliberately **one machine** (scaled down 2026-08-03; use
 is per-machine, and Fly's default second "HA" machine made requests alternate
 between two independent cold caches — every page felt cold forever. One
 machine = one cache that accrues (18s cold → 0.3s warm); deploys still wipe
-it, which is the accepted trade.
+it, which is the accepted trade. Since 2026-08-05 part of what accrues is
+**shared across articles**: the `fact-class-*` verdicts are a small, near-static
+vocabulary that articles draw on the same corner of (25–72% of a page's classes
+were already answered for an earlier one, measured across seven articles), so
+warming the showcase also warms the class walk for articles nobody has asked
+for yet.
 
 **Deploy with `npm run deploy`** from this directory — `flyctl deploy
 --remote-only && node warm.js`. The second half matters: a deploy takes the
@@ -183,7 +204,7 @@ conflating them would overstate what the page knows:
   path are kept intact for revival if a genuinely unidentified work warrants
   it.
 
-## Request shape (Tier-1 performance work, 2026-08-03)
+## Request shape (Tier-1 work 2026-08-03; WDQS and caching through 2026-08-05)
 
 The spike fetches the whole article in ONE parse call (`fetchArticle`:
 sections + HTML + wikitext) and reproduces the per-section views locally —
@@ -195,21 +216,28 @@ and labels at 50 per request. Pivots run concurrently across hosts over the
 per-host serial queue. Cold Prandtl: 33.6s/72 requests before the Tier-1 work,
 9.0s/39 after (2026-08-03); warm reruns are 100% offline.
 
-Re-measured cold on 2026-08-04 (empty `.cache`, isolated clone): **61.1s/47
-requests**. Two of the eight extra requests are the mappability follow-ups
-(`query.wikidata.org` is 3 per page now, not 1); the rest are partner pivots
-this profile never separated out. Two changes push the other way — batching the
-subject lookup into the title batch costs one fewer en.wikipedia.org request
-per page (Prandtl and Dapples both 4→3).
+Cold McClintock measured **21 requests** on 2026-08-04 after Commons left (it
+had been the largest single block on every page; the 47-request before-picture
+is in git history). Treat ~21 as the order of magnitude for a modest page.
 
-**That 47 is superseded by the Commons removal** (2026-08-04):
-commons.wikimedia.org is no longer called at all, and it was the largest single
-block of requests on every page — cold McClintock measured **21 requests** after
-the change. Treat ~21 as the current order of magnitude and 47 as the
-before-picture. The wall-clock in either figure is **not** comparable across
-dates: cold runs are dominated by live upstream latency, and a review the same
-day measured cold pages at 55–67s on code that predates this branch. Seconds are
-weather; re-measure before quoting any.
+**WDQS is the part worth counting, because it is on the lede's critical path.**
+Cold Brown v. Board, 2026-08-05: **7 requests before the class cache, 5 after**,
+and the lede's mappability step 0.7s → 0.1s. The count comes from three query
+kinds, each asked twice because the lede goes ahead of the page — partner
+statements, item→classes, then classes→ancestors — and it is the third that the
+`fact-class-*` cache removes on a warm machine. Query-then-pick raised the
+partner half deliberately (Monarch butterfly 3 → 6 WDQS, +0.6s measured) and
+that is the cheap half; see Partner pivots.
+
+**Wall-clock here is not quotable.** Same code, same article, same warm class
+cache: Monarch butterfly cold measured **26.2s once and 10.7s another time on
+identical work** (2026-08-05). The variance is upstream weather — every page
+fans out dozens of serial-per-host requests to partners whose latency nobody
+here controls — and it swamps the effect of any change this repo can make.
+Count requests, which are deterministic; re-measure seconds before quoting any,
+and never compare a number across dates. (Cold pages measured 55–67s on
+2026-08-04 on code predating that branch, which proves nothing about that
+branch.)
 
 ## Partner pivots (2026-08-03)
 
@@ -221,17 +249,26 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
   OpenLibrary author pivot.
-- **Statements** (`src/statements.js`) — THREE WDQS queries per page: one
-  answers every anchor's partner statements, and two more answer the
-  place/defunct gates (Phase 2, 2026-08-04):
-  (1) Main query answers Met objects (P3634), Art Institute of Chicago (P4610),
+- **Statements** (`src/statements.js`) — WDQS, split into a CHEAP half asked of
+  everything and an EXPENSIVE half asked of almost nothing (2026-08-05). The
+  split is the load-bearing part; see Query, then pick under Key Decisions.
+  `entityStatements` still exists as the both-halves wrapper it always was, but
+  **the pipeline no longer calls it** — it needs the halves apart so it can pick
+  anchors between them.
+  (1) `partnerStatements` — the cheap OPTIONAL query, one per 100 candidates,
+  now asked of EVERY candidate anchor on the page rather than the two per
+  section picked blind. Answers Met objects (P3634), Art Institute of Chicago (P4610),
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
   (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution
   with no per-partner code; Presentation v2 and v3 both parsed; best coverage
   today is SMK Denmark and BnF Gallica, and stale manifest URLs (e.g. Trinity
   College Dublin's platform move) degrade to no card — and P625 coordinates.
-  (2) Mappability (place/defunct), asked only of location-bearing anchors, as
-  two small follow-ups: direct P31/P576 on the items (no closure), then a plain
+  (2) `resolveMappability` — place/defunct, asked only of location-bearing
+  anchors among the ones a section actually PICKED, never of every candidate.
+  Keeping this half narrow is what makes widening the first half affordable:
+  widening both would take Apollo 11 from 16 location-bearing items to 95 and
+  its class walk from 0.63s to 1.11s, for maps no section will ever render.
+  Two small follow-ups: direct P31/P576 on the items (no closure), then a plain
   `?class wdt:P279* ?super` ancestor walk over just the distinct classes that
   came back, intersected against the allowset **in JS**. Both the shape and the
   order matter and are load-bearing. Asking the closure of *items* cost 16–37s
@@ -243,6 +280,22 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   on the place/defunct booleans), never the partner pivots. Result: P625 →
   OpenStreetMap map cards for locatable, extant places only (one per section max;
   non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
+  The ancestor walk is cached per class (`fact-class-*`, see Contracts):
+  `mergePlaceDefunct` split into `classVerdicts` (rows → verdicts) and
+  `applyVerdicts` (verdicts → items) so the class half can come from disk, and
+  the old signature and its tests survive the split. **A class the walk
+  returned no row for is a real answer — "reaches nothing" — and is cached as
+  one**, or it is re-asked forever. Not extended to item→classes (P31/P576) on
+  purpose: an item's own statements change far more often than the class
+  hierarchy above them, a poor trade for a cache whose only invalidation is
+  deleting `.cache/`.
+  **`applyVerdicts` must be handed exactly what this pass queried, never a
+  wider map** — it writes `place='false'` onto any location-bearing item with no
+  class binding in the current batch, so a wider map does not leave already
+  resolved items alone, it OVERWRITES them. With the lede resolving ahead of the
+  page (see Streaming profile) that was a live race: the page-wide pass stomped
+  "Supreme Court of the United States" back to unmappable while the lede band
+  was still reading that object, and Brown v. Board lost its lede map.
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
   band on its most prominent labeled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
@@ -267,9 +320,11 @@ card with no visual is just a link, and links are already inline).
 
 `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox links,
 section wikitext) → `discover` (anchors, pivots, budgets) → `dedup` (article-
-order anchor ownership and page-wide file dedup, between the QID map and the
-pivots) + `citations` (per-section `<ref>` templates, and the coverage
-tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
+order anchor ownership AND candidate ranking, between the cheap partner query
+and the expensive one — see Query, then pick) + `breadth` (is this anchor a
+category?) + `citations` (per-section `<ref>` templates, and the coverage
+tally/line — moved here from `discover.js` 2026-08-04) → `hero` (which find
+leads the section) → `emit-html`.
 `src/html.js` holds `escapeHtml`, the one rule every renderer shares.
 
 ## Key Decisions
@@ -279,23 +334,57 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
   squashed images, non-responsive — so the Tapestry emitter
   (`layout`/`emit`/`zip`/`vendor/parse-root.mjs`) retired to the attic with the
   generator that drove it. It still ran when it was retired; nothing used it.
-- **References float right; media rides a full-width deck** (2026-08-03
-  evening): the floated `.rail` carries only the section's references — they
-  pace the prose — while the media shelves render as a `.deck` below it:
-  full-width, flex-wrapped, each shelf's flex-basis sized to its cards
-  (capped at three) so small shelves share a row. Stacking shelves in the
-  404px rail built columns 2–4× taller than the text, leaving the whole left
-  half of a band blank. `__thb` mounts both parts (rail before `.prose`,
-  deck after); at ≤640px the band-body turns flex so the order becomes
-  prose → refs → media.
-- **The gutter shows Wikipedia's own footnotes** (2026-08-03, replacing the
-  earlier curated three-source shortlist): each band's rail renders the
+- **The float holds the section's best find; references sit at the foot**
+  (2026-08-05, superseding the 2026-08-03 arrangement in which the floated
+  `.rail` carried the references). The rail had held the references fold,
+  closed, so the most prominent slot on the page — the top right of every
+  section — read "REFERENCES IN THIS SECTION · 18" and the prose indented
+  around one line of small caps. References belong where a reader goes looking
+  for them, which is the bottom. `bandParts` now returns **`{rail, deck,
+  refs}`**: `rail` is the hero card (or empty), `deck` the media shelves,
+  `refs` the fold at the section foot. Media still rides a full-width deck
+  below the float — flex-wrapped, each shelf's flex-basis sized to its cards
+  (capped at three) so small shelves share a row — because stacking shelves in
+  the 404px rail built columns 2–4× taller than the text and left the whole
+  left half of a band blank. At ≤640px the band-body turns flex, the float is
+  undone and the order is stated explicitly (hero → prose → media → refs) so a
+  future DOM change cannot silently reorder it.
+- **The hero is picked by how directly it answers the section**, not by
+  quality (`src/hero.js`, `pickHero`/`heroRank`, 2026-08-05). Tiers: the
+  subject AS a document (Brown v. Board's opinion must not lose to a
+  thumbnail) → a partner's record of the subject, illustrated → the same
+  unillustrated → something the subject made → any illustrated record of
+  something merely linked → a map (it locates rather than shows) → text-only
+  records of things merely mentioned. `standing` is set where the entry is
+  made, by the code that knows whether the anchor was the subject, and is
+  never re-derived by reading prose. **A section whose best find has neither a
+  picture nor the standing of a primary document gets NO float** and its prose
+  runs full width — a lone text card blown up to 404px is the thin box this
+  change exists to remove. The hero comes out of the entries before they are
+  shelved, so nothing is both hoisted and carded.
+- **A partner holding more than 300 items under a non-subject anchor gets a
+  sentence and a browse link, not four cards** (`src/breadth.js`, `tooBroad` /
+  `BROAD_ABOVE` / `broadNote`, 2026-08-05). The signal was already on the page
+  and unread as a diagnostic: the DENOMINATOR. Every shelf worth showing came
+  from a heading holding tens or low hundreds (54, 83, 126, 190); every shelf
+  worth dropping from one holding thousands (465, 652, 831, 1,409, 3,016,
+  6,123). **The subject's own heading is exempt at any size** — a thousand
+  items filed under this article's subject are about this article's subject;
+  a thousand filed under the category it belongs to are about a thousand other
+  things. Deliberately no card, no thumbnail, no title: the point is that the
+  pipeline cannot tell which four of six thousand belong here, and inventing
+  four would claim it can. A threshold fitted to twelve observations from six
+  articles — read it as the heuristic it is; the cost of either mistake is
+  bounded (a shelf becomes a sentence, or a sentence stays a shelf).
+- **The section shows Wikipedia's own footnotes** (2026-08-03, replacing the
+  earlier curated three-source shortlist): each band renders the
   actual `reference-text` bodies the section's markers point at, numbered as
   the prose numbers them — closed by default behind a one-line `<details>`
   summary (2026-08-03 late: a wall of citations must never be a section's
-  first block; `__open` expands the fold when a marker is clicked). The rail
-  now holds the references and nothing else — the per-section coverage line
-  that used to sit outside the fold became one page-level sentence in the
+  first block; `__open` expands the fold when a marker is clicked). The fold
+  moved from the floated rail to the section foot on 2026-08-05 (see above);
+  it holds the references and nothing else — the per-section coverage line
+  that used to sit outside it became one page-level sentence in the
   visibility panel (2026-08-04). Where a note cites a
   book OpenLibrary says is readable/borrowable, the access link rides on the
   note. Prose keeps its wikilinks — rewritten to `/wiki/…` on this site, so
@@ -303,10 +392,18 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
   No section numbering: Wikipedia doesn't number, so neither do we.
   `sanitizeFragment` in `src/wikipedia.js` is the only thing that lets
   article HTML through; everything else is still escaped.
-- **Every Wikidata-backed card carries a provenance fold** (2026-08-03 late):
-  an ⓘ `<details>` whose text states the exact chain (`entry.trace`) and links
+- **Every Wikidata-backed card carries a provenance fold, and the why line is
+  what opens it** (2026-08-03 late; merged 2026-08-05): a `<details>` whose
+  text states the exact chain (`entry.trace`) and links
   the statement it rests on (`entry.fix` — `wikidata.org/wiki/Q…#P…`), because
-  Wikidata's statement anchor IS the edit button. Stamped where the qid is in
+  Wikidata's statement anchor IS the edit button. The why line and the ⓘ were
+  separate until 2026-08-05, which put the most useful thing on the card — a
+  "Check or fix it on Wikidata" link, present on 76% of them — in a 12px grey
+  glyph below the fold of a 178px caption. The line that says why a card is
+  here is now the `<summary>` that opens the working: link-colored, no extra
+  height. Three shapes are all real (`provenance()` in `emit-html.js`): why +
+  fold, a bare "How we know" fold where the shelf head already said the why,
+  and a plain why line where there is no trace. Stamped where the qid is in
   scope: `statementEntries` (Met/AIC/IIIF/iNat/GBIF/maps), lede extras
   (P648/P496), DPLA (P244), Europeana (P7704). Citation-derived cards
   (OpenAlex/arXiv/IA) have no fold — nothing there is editable on Wikidata.
@@ -323,10 +420,85 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
   companion `dropSeenFiles` and its unit-to-unit `seen` chain went with
   Commons on 2026-08-04; if page-wide dedup is ever needed again, read that
   deleted code first — the purity argument is why it looked the way it did.
-  Nothing
-  vanishes silently: the disclosure line says "N shown earlier on this page".
-- **True image dimensions** are read from JPEG/PNG headers (`imagesize`) so covers
-  and photos are never squashed by a guessed aspect.
+  Its "N shown earlier on this page" disclosure went with it — nothing is
+  dropped as a duplicate any more, so there is nothing left to disclose. The
+  rule that a page must never quietly drop what it found survives in the sample
+  and broad notes below.
+- **Query, then pick — a section chooses anchors that hold something**
+  (2026-08-05). Anchor selection used to run *before* the pipeline knew what
+  any anchor held: each section took two prose links on document order, asked
+  WDQS about those two, and if neither held anything the section rendered
+  nothing while its third and fourth links held a Met object or a taxon. On
+  Apollo 11 that left 11 of 36 sections empty, 9 with usable material one link
+  further down. Measured across that page's 331 candidates: 23% carry an
+  item-level identifier, 26% only a subject heading, **50% nothing at all** —
+  so picking two blind misses about half the time. Now every candidate is asked
+  about first (the cheap half only) and `preferYielding` (`src/dedup.js`) orders
+  each section's candidates by `hookRank`: item-level identifier → any other
+  hook → nothing. **Tier 1 is deliberately not subdivided.** Ranking headings
+  above coordinates cost American Gothic's lede the map of the actual house in
+  the painting; ranking coordinates above headings turns Apollo 11's 95
+  location-bearing candidates into wallpaper. Neither is defensible from what
+  is known at pick time, so document order breaks the tie and `src/breadth.js`
+  catches the headings that turn out to be boxes. Cost on Monarch butterfly:
+  empty sections 6 → 5, cards 72 → 96 — and the time is not the extra WDQS
+  (+0.6s) but the 24 extra partner objects the better anchors earn, fetched
+  serially per host as etiquette requires.
+- **The lede anchors on what the article is ABOUT, not what it is made of**
+  (`subjectAnchors`/`preferRelated` in `src/dedup.js`, 2026-08-05). An
+  encyclopedia's first sentence is a definition, so the earliest links in a
+  lede name the class the subject belongs to. "American Gothic is a 1930 oil
+  painting on beaverboard by Grant Wood" gave the lede `oil painting` and
+  `beaverboard`, and four of Europeana's 6,123 openly licensed oil paintings —
+  all four Finnish, all four titled "öljymaalaus". Every unhelpful shelf on
+  every showcase page came from an anchor of that kind. The lede now ranks
+  candidates by the subject's own Wikidata claims, **already fetched for the
+  subject pivots, so no new request**. THREE tiers, and the middle one is
+  load-bearing: ranking by MEMBERSHIP is not enough, because the item does name
+  beaverboard (P186 material used) and a flat test still puts it first. Ranking
+  by WHICH PROPERTY names it puts particular things (P170 creator, P195
+  collection, P180 depicts) above categories (P186, P135, P31) above
+  never-mentioned. `NAMES_A_THING` is deliberately incomplete and safely so —
+  a missing property costs a little ordering, never a wrong answer.
+  **Lede only**: the subject's claims are the only ones fetched, and no
+  statement says what §"Cultural significance" is about, so guessing one would
+  be worse than document order. The lede composes both rankings — yield first,
+  relevance second — sorting by (subject tier, hook rank).
+- **The lede-first ordering must not change the page, only its timing**
+  (2026-08-05). It is sound because the lede is unit 0: `claimAnchors` walks
+  units in article order, so nothing upstream can take an anchor from it and
+  its picks are a function of its own candidates alone. Those picks are seeded
+  into the page-wide claim, which therefore reaches an identical result. Three
+  showcase renders byte-identical to the previous commit is how that is
+  checked, and a test asserts the seeding.
+- **A claim about a sample rides the shelf it describes; a note about an
+  absence closes the deck in a different voice** (2026-08-05). Bands carry
+  `samples` (one record per `(source, topic)` — the same key the renderer
+  groups shelves by) and `broad`, replacing the old single joined `disclosure`
+  string printed atop the deck. That string put "4 of the 54 items DPLA
+  catalogs under…" two shelves above the DPLA cards it counted, with Internet
+  Archive and OpenStreetMap in between — a claim a reader cannot attach to
+  anything, which is worse than no claim. Each sample now lands on its own
+  shelf head as the count badge ("4 of 54" where a bare "4" sat), full sentence
+  on the `title`. **A claim whose shelf never rendered — capped away, or
+  hoisted into the hero — falls back to the old deck-level paragraph, because a
+  disclosure that can silently vanish is not a disclosure.** The broad note
+  (above) leads with "Not shown here:" and sits at the END of the deck, with a
+  hairline instead of a filled slab: the phrasing collision with "A sample, not
+  the whole shelf:" was deliberate, right for continuity with the retired
+  coverage line, and wrong the moment both could appear at once — one describes
+  cards the reader can see and the other describes cards that are not there.
+  The shared-why hoist fires on any shelf whose cards agree, not only on a
+  source split across anchors, because a badge with no sentence beneath it
+  needs something to say what the 54 ARE.
+- **Images are sized by CSS, not by measurement** — `.shot` is `width:100%` and
+  lets the intrinsic aspect stand; `.frame` fixes 16/9 only for embeds, which
+  have no intrinsic size. Reading true dimensions from JPEG/PNG headers
+  (`imagesize`) was a requirement of the hand-computed `.tapestry` geometry and
+  went to the attic with it on 2026-08-04; nothing in the live tree reads image
+  headers, and no `<img>` here carries width/height. If a layout ever needs to
+  reserve space before load, that code is in
+  `../../attic/all-the-opens/tapestry-gen-curated/`.
 - **OpenLibrary covers are inlined** as data URIs — they redirect through
   archive.org, so a live dependency would break whenever IA is down.
 
@@ -334,7 +506,8 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
 
 - Pipeline modules never assume an output format; the renderer is the only
   format-specific layer.
-- Every rendered image is sized from real dimensions (API or header), not a guess.
+- No rendered image is squashed by a guessed aspect: the renderer states no
+  dimensions and lets the file's own aspect stand (see Key Decisions).
 - **The footer's provenance is the caller's to state**, via `buildHtml({provenance})`.
   It was once hardcoded to the curated dataset, which made every live-discovery
   page contradict its own opening claim. Whatever goes there must be true of the
@@ -398,16 +571,36 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 ## Key Files
 
 - `src/discover.js` — the live-discovery pipeline both entry points share.
-- `src/citations.js` — citation extraction, reachability ranking, OpenLibrary
+- `src/citations.js` — citation extraction, OpenLibrary
   access, and the citation tally (`citationCoverage` per band → `pageCitations`
-  summed → `citationHeadline`). Said **once per page**, in the visibility
+  summed → `citationHeadline`). `prioritizeCitations` and `reachabilityRank`
+  were **deleted 2026-08-05**, dead since the gutter switched to rendering
+  Wikipedia's own footnotes; four passing tests kept them looking live for
+  weeks, and a green test is not a caller. Said **once per page**, in the visibility
   panel: per section it fired 36 times on San Francisco and 26 of those
   reported nothing but a failure to find, and its "27 works" sat directly under
   the fold's "18 notes" — two totals of different things reading as a
   contradiction (2026-08-04 review).
-- `src/dedup.js` — `claimAnchors`, its only export since `dropSeenFiles` left
-  with Commons: page-wide, article-ordered, pure. See Key Decisions for why
-  purity is load-bearing.
+- `src/dedup.js` — anchor ownership AND anchor ranking; five exports, all pure
+  over article-ordered input (see Key Decisions for why purity is
+  load-bearing). `claimAnchors` assigns each QID to the band of its first
+  mention. `subjectAnchors` + `preferRelated` rank the LEDE's candidates by
+  which property of the subject's item names them; `hookRank` +
+  `preferYielding` rank ANY section's candidates by what its partner
+  statements turn out to hold. `dropSeenFiles` left with Commons 2026-08-04.
+- `src/hero.js` — `pickHero`/`heroRank`: which of a section's finds is hoisted
+  into the floated rail, and when a section gets no float at all.
+- `src/breadth.js` — `tooBroad`/`broadNote`/`BROAD_ABOVE`: when a partner's
+  holdings under an anchor are a category rather than a subject, so the shelf
+  becomes a sentence and a browse link.
+- `src/http.js` — the URL-keyed request cache, plus `readFacts`/`writeFacts`,
+  the key→JSON cache for derived answers (see Contracts). Keys must be
+  filename-safe and are **REFUSED, never sanitized** — a sanitized key can
+  collide with another and return the wrong fact. One file per key, not per
+  kind, because the deployed server runs up to `MAX_CONCURRENT` discoveries at
+  once and a read-modify-write of a shared file would lose entries; two writers
+  racing on one key write the same bytes. A cache that cannot write logs and
+  continues: it makes the page slow, never wrong.
 - `src/gap.js` — pure: what the ARTICLE reaches, and each partner's visibility
   tier against it. See the visibility panel above.
 - `src/emit-html.js` — the HTML render, batch and streaming.
