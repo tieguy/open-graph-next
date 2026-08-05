@@ -1,6 +1,6 @@
 # Jenifesto - the article, enriched
 
-Last verified: 2026-08-03
+Last verified: 2026-08-05
 
 ## Purpose
 
@@ -8,8 +8,11 @@ Speculative design prototypes for cooperative knowledge infrastructure. The one
 active project is **`tapestry-gen/`** — a generator that renders a Wikipedia
 article as *"the article, enriched"*: the article as a spine, with the open
 ecosystem's media and cited sources placed by the article's own wikilinks and
-citations (resolved through Wikidata QIDs and authority identifiers). Primary
-output is a self-contained HTML page. See `tapestry-gen/CLAUDE.md`.
+citations (resolved through Wikidata QIDs and authority identifiers). It is a
+live website before it is a generator — <https://help-from-our-friends.fly.dev/>
+renders any English Wikipedia article on demand — and every page it renders also
+*measures* how little of what it found the original Wikipedia article can show.
+See `tapestry-gen/CLAUDE.md`.
 
 Earlier renderings — the D3.js force-directed graph (`web-demo/`), the Firefox
 extension, and the Netlify site build — were retired to the repo-root `attic/`
@@ -29,6 +32,9 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 - `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com npm run serve` —
   streaming server: `http://localhost:8787/wiki/<Article_Title>` renders the
   spine in ~1s and streams enrichment in behind it.
+- `cd tapestry-gen && npm run deploy` — Fly deploy, then `warm.js`. The second
+  half is not optional: a deploy takes the machine's cache with it, so without
+  it the front page's six showcase links are each a cold minute.
 
 ## Project Structure
 
@@ -44,40 +50,44 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 
 ## Data Contracts
 
-**Historical.** The curated dataset retired to
-`../attic/all-the-opens/tapestry-gen-curated/data-apollo-11/` on 2026-08-04 and
-has no reader in the live tree. The shape it used, for anyone reading the
-attic:
-
-**Node** (`items/*.json`): `{id, source, title, description, thumbnail?, url,
-identifiers?, potential?}` — `source` is one of the eight source slugs; IDs are
-prefixed with a source abbreviation (`wiki-`, `ia-`, `ol-`, `commons-`,
-`smithsonian-`, `osm-`, …).
-
-**Connections** (`connections.json`): `{[nodeId]: [{targetId, type, label,
-linkedVia?}]}` — `type` ∈ `person|subject|location|time|creator`; `linkedVia` is
-the authority systems backing the edge (line thickness = array length).
-
-**Seed** (`seed.json`): the starting node.
+**None.** Nothing in the live tree reads a dataset — every page is discovered
+from the article title. The curated Apollo 11 dataset and the node/connection
+shapes it used retired to
+`../attic/all-the-opens/tapestry-gen-curated/data-apollo-11/` on 2026-08-04,
+where that README still documents them.
 
 ## Key Decisions
 
-- Pre-cached data over live APIs for the curated render — reliability in demos,
-  no rate limits. `spike.js` is the live-discovery path.
-- The HTML render is the primary output: CSS handles layout that hand-computed
-  `.tapestry` pixel geometry could not (no dead whitespace, no squashed images,
-  responsive). The `.tapestry` emitter is retained but secondary.
+- **The website is the product** (2026-08-04). Live discovery renders the same
+  article denser than the hand-curated dataset did, with no dataset and no
+  per-article code, so the curated generator, its data, the placement rules and
+  the Internet Archive `.tapestry` emitter went to the attic. If something does
+  not help generate the website, it belongs there too.
+- **HTML is the only output.** CSS reflow solved what hand-computed `.tapestry`
+  pixel geometry could not — dead whitespace, squashed images, nothing
+  responsive. The emitter still ran when it was retired; nothing used it.
+- **Wikimedia Commons is not one of the partners** (2026-08-04). It was ~85% of
+  every page's cards, which drowned out the non-Wikimedia partners the demo
+  exists to show — and it argued against the thesis, because Commons is the
+  single door an outside institution's work must pass through to be seen on
+  Wikipedia, so shelving it beside the Met implied the two were peers. Article
+  pages no longer call commons.wikimedia.org at all; Commons appears only in
+  the visibility panel, named as the door. Density was the price, paid
+  deliberately (Angkor Wat 107 cards → 15).
+- **The gap is the finding, so it is measured** (2026-08-04, LUI-122). Every
+  page reports how much of what it found the *original Wikipedia article*
+  actually surfaces — shown and credited, a link only, or invisible. It is a
+  measurement and never a request: a request walks straight into WP:ELBURDEN, a
+  report does not. The copy rules that follow from this are in
+  `tapestry-gen/CLAUDE.md` and are arguments, not style preferences.
 
 ## Invariants
 
-- Node IDs are unique and source-prefixed; every node has at least `id, source, title`.
-- Connections reference only IDs present in `items/` (except the seed `wiki-apollo-11`,
-  which has no item file — a known latent bug the generator must tolerate).
+- American English throughout this subtree (2026-08-04).
+- `WIKIMEDIA_UA_CONTACT` has no default and must name whoever is *running* the
+  code, not whoever wrote it. The full Wikimedia compliance rules are in
+  `tapestry-gen/CLAUDE.md` and are not optional — a block lands on the operator.
 
 ## Gotchas
 
-- The dataset's external identifiers were once fabricated (IA / OpenLibrary /
-  Smithsonian) and have been re-curated to verified real ones. Wikipedia and
-  Commons items were always genuine.
-- `potential` counts are fictional; never use them as a ranking/sizing signal.
 - Issue tracking moved from chainlink to Linear (2026-07-15).

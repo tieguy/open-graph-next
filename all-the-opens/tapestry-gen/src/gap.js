@@ -16,9 +16,10 @@
 //   invisible  the article does not reach them at all.
 //
 // Nothing here costs a request. `fetchArticle` already parses the whole
-// article; this reads three more fields off the SAME response (the templates
-// it transcludes, the pictures it shows, the sites it links) and compares them
-// against what the pivots found. See LUI-122.
+// article; this reads two more fields off the SAME response (the templates it
+// transcludes and the sites it links) and compares them against what the
+// pivots found. NOT `prop=images` — see the note on `fetchArticle` for why it
+// is the wrong instrument for counting what an article shows. See LUI-122.
 
 /**
  * The sites that ARE a partner, for the purpose of asking whether the article

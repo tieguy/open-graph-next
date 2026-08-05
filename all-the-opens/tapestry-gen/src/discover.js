@@ -12,7 +12,7 @@
 //     not the caller's input, or a redirect names a page that has no article.
 //   emit('band', band)                        — one band, in COMPLETION order
 //
-// and resolves to { title, bands, stats, dropped, reach } with bands in ARTICLE
+// and resolves to { title, bands, stats, dropped, opinion, reach } with bands in ARTICLE
 // order. A batch caller can ignore the events entirely; a streaming caller
 // writes the spine skeleton on the first event and a rail fragment per band
 // event. Band assembly runs as one task per unit, so a band waits only on its
@@ -217,7 +217,7 @@ const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null
  * what used to be a throttled request per ISBN. Cataloged is not the same as
  * scanned: most cited books have no Internet Archive copy, and for those this
  * is the difference between the rail saying nothing and the rail saying where
- * the book is. The 1.1s throttle is still honoured per request; there are just
+ * the book is. The 1.1s throttle is still honored per request; there are just
  * far fewer of them. Each hit is wrapped in the volumes/brief record shape so
  * `openLibraryAccess` reads both eras' caches identically.
  *

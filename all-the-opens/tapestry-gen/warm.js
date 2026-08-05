@@ -17,7 +17,7 @@
  * dozens of upstream requests, the server caps concurrent discoveries at
  * MAX_CONCURRENT (then answers 503), and the whole point of the per-host queues
  * is that this project does not open parallel connections to other people's
- * APIs. Warming is ordinary traffic and gets no special licence.
+ * APIs. Warming is ordinary traffic and gets no special license.
  */
 import { showcaseTitles } from './src/front-page.js'
 

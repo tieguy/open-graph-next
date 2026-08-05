@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-04
+Last verified: 2026-08-05
 
 ## Purpose
 
@@ -122,11 +122,18 @@ this page) against *On Wikipedia* (`shown, and credited` / `a link only` /
 here" — because a request walks straight into WP:ELBURDEN and a report does
 not. Two columns because they answer two different questions and prose kept
 running them together; shut by default because a reader who has not yet
-wondered whether Wikipedia shows any of this should meet a line, not a table. Built by `src/gap.js` (pure) from three
-extra `prop=` fields on the parse call the spine already makes
-(`templates|images|externallinks`), so it costs **zero** requests. Only
-Kartographer reaches the `shown` tier; detection is `mw-kartographer` in the
-rendered HTML, not a template name, because a dozen infoboxes embed a map.
+wondered whether Wikipedia shows any of this should meet a line, not a table.
+Built by `src/gap.js` (pure) from two extra `prop=` fields on the parse call the
+spine already makes (`templates|externallinks`), so it costs **zero** requests.
+Only Kartographer reaches the `shown` tier; detection is `mw-kartographer` in
+the rendered HTML, not a template name, because a dozen infoboxes embed a map.
+
+**`prop=images` is deliberately not the third field, and must not be added back**
+as a way of counting what an article shows: on San Francisco it returns 108
+files, of which one is a pronunciation recording, one is the red pushpin dot,
+three are relief-map base layers behind a single visible map, and a couple of
+dozen are template icons — against 92 the article actually displays. Count the
+rendered HTML instead (`fetchArticle` in `src/wikipedia.js` says the same).
 
 **Never write "there is no route."** A bare external link is always possible.
 The defensible claim is that no *established* route preserves the content
@@ -193,14 +200,16 @@ requests**. Two of the eight extra requests are the mappability follow-ups
 (`query.wikidata.org` is 3 per page now, not 1); the rest are partner pivots
 this profile never separated out. Two changes push the other way — batching the
 subject lookup into the title batch costs one fewer en.wikipedia.org request
-per page (Prandtl and Dapples both 4→3). **Superseded by the Commons removal**
-(2026-08-04): commons.wikimedia.org is no longer called at all, which was the
-largest single block of requests on every page — cold McClintock is 21
-requests now. The wall-clock is
-**not** comparable across dates: cold runs are dominated by live upstream
-latency, and a review the same day measured cold pages at 55–67s on code that
-predates this branch. Treat 47 as the current request count and the seconds as
-weather.
+per page (Prandtl and Dapples both 4→3).
+
+**That 47 is superseded by the Commons removal** (2026-08-04):
+commons.wikimedia.org is no longer called at all, and it was the largest single
+block of requests on every page — cold McClintock measured **21 requests** after
+the change. Treat ~21 as the current order of magnitude and 47 as the
+before-picture. The wall-clock in either figure is **not** comparable across
+dates: cold runs are dominated by live upstream latency, and a review the same
+day measured cold pages at 55–67s on code that predates this branch. Seconds are
+weather; re-measure before quoting any.
 
 ## Partner pivots (2026-08-03)
 
@@ -284,8 +293,10 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
   actual `reference-text` bodies the section's markers point at, numbered as
   the prose numbers them — closed by default behind a one-line `<details>`
   summary (2026-08-03 late: a wall of citations must never be a section's
-  first block; `__open` expands the fold when a marker is clicked, and the
-  coverage line stays visible outside it). Where a note cites a
+  first block; `__open` expands the fold when a marker is clicked). The rail
+  now holds the references and nothing else — the per-section coverage line
+  that used to sit outside the fold became one page-level sentence in the
+  visibility panel (2026-08-04). Where a note cites a
   book OpenLibrary says is readable/borrowable, the access link rides on the
   note. Prose keeps its wikilinks — rewritten to `/wiki/…` on this site, so
   readers click through to more enriched renders — and its footnote markers.
@@ -347,7 +358,7 @@ keep the hand-rolled client in `spike.js`.
   `src/mw.js`) — nothing here is a human waiting on a response, so this batch
   traffic yields to interactive users. `withMaxlag()` remains for the
   hand-rolled client, where it no-ops on non-Wikimedia URLs.
-- 429/503 honour `Retry-After`; other 4xx are **never** retried — a 404 is our
+- 429/503 honor `Retry-After`; other 4xx are **never** retried — a 404 is our
   bad identifier, not the server's bad day.
 - Requests are **serial per host** by construction: every request rides the
   per-host queue in `src/mw.js` (`enqueue`). Different hosts run concurrently —
@@ -364,7 +375,7 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 ## Gotchas
 
 - **Sandboxed runs need `NODE_USE_ENV_PROXY=1`.** The sandbox routes egress
-  through an HTTP proxy; `curl` honours `HTTP_PROXY` automatically but Node's
+  through an HTTP proxy; `curl` honors `HTTP_PROXY` automatically but Node's
   `fetch` does not, so every request fails with `EAI_AGAIN` without it. Set in
   `../../.claude/settings.local.json` along with the host allowlist (Wikipedia,
   Wikidata, Commons, archive.org, OpenLibrary, CourtListener, upload/maps
@@ -376,13 +387,13 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
   backoff. A whole batch that still fails retries once after 2s, and whatever
   fails again comes back in `openLibraryVolumes`' `unchecked` set (it returns
   `{volumes, unchecked}`, not a bare Map). Those ISBNs get **no** access verdict
-  and the coverage line says "N could not be checked this run" — "we could not
-  look" must never render as "there is no copy".
+  and `citationHeadline` says "N we could not check this time" in the visibility
+  panel — "we could not look" must never render as "there is no copy".
 - **A redirect title is not the article.** Without `redirects=1` the API parses
   e.g. "Coral Gables" as its own one-line stub, so the page rendered 1 section
   of redirect syntax instead of a city. Every parse call now sends it; the cost
-  is that the caller's input and the article's title can differ (see Three
-  entry points).
+  is that the caller's input and the article's title can differ (see Two entry
+  points).
 
 ## Key Files
 
@@ -394,8 +405,9 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
   reported nothing but a failure to find, and its "27 works" sat directly under
   the fold's "18 notes" — two totals of different things reading as a
   contradiction (2026-08-04 review).
-- `src/dedup.js` — `claimAnchors` / `dropSeenFiles`: page-wide, article-ordered,
-  pure. See Key Decisions for why purity is load-bearing.
+- `src/dedup.js` — `claimAnchors`, its only export since `dropSeenFiles` left
+  with Commons: page-wide, article-ordered, pure. See Key Decisions for why
+  purity is load-bearing.
 - `src/gap.js` — pure: what the ARTICLE reaches, and each partner's visibility
   tier against it. See the visibility panel above.
 - `src/emit-html.js` — the HTML render, batch and streaming.

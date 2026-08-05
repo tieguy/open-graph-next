@@ -2,12 +2,20 @@
 
 Using LLMs to improve the open, human-readable knowledge graph.
 
+Last verified: 2026-08-05
+
 ## Structure
 
 The repo's one active project is **`all-the-opens/tapestry-gen/`** — *"the
 article, enriched"*: rendering a Wikipedia article with the open ecosystem's
-media and cited sources placed by the article's own anchors. See
+media and cited sources placed by the article's own anchors, and measuring how
+little of that the Wikipedia article itself can show. It is a deployed website
+(<https://help-from-our-friends.fly.dev/>) before it is a generator. See
 `all-the-opens/CLAUDE.md` and `all-the-opens/tapestry-gen/CLAUDE.md`.
+
+Anything touching a Wikimedia API must follow `tapestry-gen/CLAUDE.md`'s
+compliance section — `WIKIMEDIA_UA_CONTACT` names the operator, and there is no
+default.
 
 - `attic/` - retired work (accords, the D3 web-demo, the Firefox extension, the
   Netlify site build, legal-graph, and — as of 2026-08-04 — tapestry-gen's

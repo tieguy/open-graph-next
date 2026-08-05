@@ -436,7 +436,7 @@ export function articleBlocks(html, { notePrefix = null } = {}) {
  * server they resolve to more of these renders — the renderer may re-base
  * them), footnote markers re-anchored under `notePrefix`, external links, and
  * inline emphasis. Everything else is unwrapped to its text. Anchors whose
- * target this page cannot honour — namespace links, `#CITEREF` biblio jumps —
+ * target this page cannot honor — namespace links, `#CITEREF` biblio jumps —
  * are unwrapped rather than left to 404.
  */
 export function sanitizeFragment(html, { notePrefix = null } = {}) {
