@@ -5,7 +5,8 @@ import {
   citationCoverUrl,
   citationCoverage,
   citationHref,
-  coverageText,
+  citationHeadline,
+  pageCitations,
   openLibraryAccess,
   parseCitation,
   prioritizeCitations,
@@ -166,7 +167,7 @@ test('a book OpenLibrary catalogs but has no scan links to the OpenLibrary page,
   const a = openLibraryAccess(olVolume(null))
   assert.equal(a.availability, 'catalog')
   assert.equal(a.url, 'https://openlibrary.org/books/OL1M/A_Book')
-  assert.match(a.label, /OpenLibrary/)
+  assert.match(a.label, /Open Library/)
 })
 
 test('a book OpenLibrary does not have yields no access', () => {
@@ -223,14 +224,36 @@ test('citationCoverage buckets unchecked ISBNs instead of calling them closed', 
   assert.equal(cov.catalogued, 0)
 })
 
-test('coverageText names the unchecked bucket and never counts it as unreached', () => {
-  const text = coverageText({ total: 5, open: 1, catalogued: 0, linked: 1, unchecked: 2 })
-  assert.match(text, /2 could not be checked this run/)
-  assert.match(text, /1 not held anywhere/)
-  assert.doesNotMatch(text, /3 not held/)
+test('pageCitations sums the per-band tallies the bands now carry', () => {
+  const bands = [
+    { citations: { total: 10, open: 2, catalogued: 1, linked: 6, unchecked: 1 }, papers: { total: 3, open: 1 } },
+    { citations: { total: 5, open: 0, catalogued: 2, linked: 3, unchecked: 0 }, papers: { total: 2, open: 2 } },
+    {}, // a band that cited nothing must not break the sum
+  ]
+  assert.deepEqual(pageCitations(bands), {
+    total: 15, open: 2, catalogued: 3, linked: 9, unchecked: 1, papers: { total: 5, open: 3 },
+  })
 })
 
-test('coverageText omits the unchecked part when everything was checked', () => {
-  const text = coverageText({ total: 2, open: 1, catalogued: 0, linked: 1, unchecked: 0 })
-  assert.doesNotMatch(text, /could not be checked/)
+test('citationHeadline says the unchecked bucket and never claims nothing exists', () => {
+  const text = citationHeadline({ total: 15, open: 2, catalogued: 3, unchecked: 1, papers: { total: 5, open: 3 } })
+  assert.match(text, /The original Wikipedia article cites 15 works\./)
+  assert.match(text, /Two of them you can read or borrow right now\./)
+  assert.match(text, /catalogued three more that nobody has scanned/)
+  // "We could not look" must never be left reading as "there is nothing there".
+  assert.match(text, /One we could not check this time\./)
+  assert.match(text, /three are free to read/)
+})
+
+test('citationHeadline reports a search that found nothing as a search, not a fact', () => {
+  const text = citationHeadline({ total: 620, open: 0, catalogued: 0, papers: { total: 0, open: 0 } })
+  assert.match(text, /We could not find a free copy of any of them\./)
+  assert.doesNotMatch(text, /no free copy exists/i)
+  // Thousands separators, because 620 works is a number a reader reads.
+  assert.match(citationHeadline({ total: 1620, open: 0 }), /cites 1,620 works/)
+})
+
+test('citationHeadline says nothing at all when the article cites nothing', () => {
+  assert.equal(citationHeadline({ total: 0 }), null)
+  assert.equal(citationHeadline(), null)
 })

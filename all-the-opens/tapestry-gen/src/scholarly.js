@@ -63,9 +63,18 @@ export function openAlexUrl(filterField, values, contact) {
 
 const normDoi = (d) => d?.toLowerCase().replace(/^https:\/\/doi\.org\//, '') ?? null
 
-/** OpenAlex licence slugs as readers know them: cc-by → CC BY. */
-const licenceName = (slug) =>
-  slug ? slug.toUpperCase().replace(/^CC-/, 'CC ').replace(/-/g, ' ') : null
+/**
+  * OpenAlex licence slugs as readers know them: cc-by → CC BY. Two slugs are
+  * not licences at all and must not be printed as though they were —
+  * `other-oa` means OpenAlex knows the copy is free but not on what terms,
+  * which is a different and weaker promise than any CC licence.
+  */
+const licenceName = (slug) => {
+  if (!slug) return null
+  if (slug === 'other-oa') return 'terms not stated'
+  if (slug === 'public-domain') return 'public domain'
+  return slug.toUpperCase().replace(/^CC-/, 'CC ').replace(/-/g, ' ')
+}
 
 /** An OpenAlex work as a page entry — only when it is actually open. The
  * credit carries the open copy's licence when OpenAlex knows it; "open
@@ -85,10 +94,10 @@ export function openAlexEntry(work, via) {
       .join(' · '),
     href: oa.oa_url,
     attribution: {
-      author: ['open access', oa.oa_status ?? 'oa', licence ?? 'free to read'].join(' · '),
-      license: `via ${via}`,
+      author: ['Free to read', licence].filter(Boolean).join(' · '),
+      license: null,
     },
-    why: `Cited in this section — matched by ${via.toUpperCase()}`,
+    why: `Cited here — and there is a copy you can read for free`,
     // The reason class, not the citation: per-item topics would split the
     // strip into one-card carousels; what must not mix is cited work with
     // the subject's own shelf (see subject topics in discover.js).
@@ -104,8 +113,8 @@ export function arxivEntry(cite) {
     title: cite.title ?? `arXiv:${cite.arxiv}`,
     description: `arXiv:${cite.arxiv}`,
     href: `https://arxiv.org/abs/${cite.arxiv}`,
-    attribution: { author: 'open access · arXiv', license: 'via arXiv id' },
-    why: 'Cited in this section — matched by arXiv ID',
+    attribution: { author: 'Free to read · arXiv', license: null },
+    why: 'Cited here — every arXiv paper is free to read by design',
     topic: 'Cited in this section',
     _via: 'arxiv',
   }
@@ -174,8 +183,8 @@ export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
         description: [w.publication_year, 'open access'].filter(Boolean).join(' · '),
         href: oa.oa_url,
         attribution: {
-          author: ['open access', oa.oa_status, licence ?? 'free to read'].filter(Boolean).join(' · '),
-          license: 'via P496 ORCID',
+          author: ['Free to read', licence].filter(Boolean).join(' · '),
+          license: null,
         },
         _via: 'P496',
       }

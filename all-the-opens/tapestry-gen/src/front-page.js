@@ -56,7 +56,7 @@ const FRIENDS = [
   ['internet_archive', 'Internet Archive',
     'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.',
     'Public-domain scans free to read; in-copyright books lent, not copied.'],
-  ['openlibrary', 'OpenLibrary',
+  ['openlibrary', 'Open Library',
     'Knows every edition of every book — and which ones are actually open.',
     'Open bibliographic data, downloadable in bulk.'],
   ['openalex', 'OpenAlex',
@@ -92,10 +92,17 @@ const FRIENDS = [
   ['free_law', 'Free Law Project',
     'Publishes the law itself. The opinion, not a paywall.',
     'Court opinions are public domain: nobody owns the law.'],
-  ['wikimedia_commons', 'Wikimedia Commons',
-    'Brings the photographs, freely licensed, of very nearly everything.',
-    'Every file free-licensed or public domain, credit shown on the file.'],
 ]
+
+// Wikimedia Commons is deliberately not on this list (2026-08-04). It is not
+// a friend of Wikipedia's, it is part of Wikipedia's own household — and on
+// these pages it was drowning everyone else out, ~85% of every page's cards.
+// Worse, it undercut the argument the pages exist to make: Commons is the
+// single door through which an outside institution's work must pass to be
+// seen here, and it arrives on the other side as a Commons file rather than
+// as theirs. Shelving it beside the Met implied the two were peers. It now
+// appears on an article page only where it truthfully belongs — named in the
+// visibility panel as the door. See LUI-122 and src/gap.js.
 
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
 
@@ -262,6 +269,22 @@ ${friends}
       <div class="box">
         <h3>Challenges and future opportunities</h3>
         <p>This is a demo and not intended for production. Among other challenges:</p>
+        <h4>There is nowhere for most of this to go</h4>
+        <p>Each article page carries a fold — <i>Who helped, and who Wikipedia doesn’t show</i> —
+        sorting the friends who filled it into three states: shown and credited, a link only, or
+        invisible. Almost everyone lands in the last two, and the reason is the same every time, so
+        it is written here once rather than on every page.</p>
+        <p>Today, Wikipedia has one established route for putting an outside picture in an article:
+        the file must first be handed to Wikimedia, and from then on it is a Wikimedia file rather
+        than theirs. Every picture in every article arrived that way. Maps are the single
+        exception — OpenStreetMap is the only project outside Wikimedia that a Wikipedia article
+        puts on the page and credits by name. Everyone else chooses between handing the work over
+        and losing the relationship, or taking a line of text at the bottom. No established route
+        lets them show you what they hold <i>and</i> say it is theirs.</p>
+        <p>Note what is <i>not</i> being claimed: there is always a route, because a bare external
+        link is always possible. What is missing is a route that keeps the content and the credit
+        together. And nothing here says Wikipedia <i>cannot</i> — only that it does not. That is a
+        fact about established practice, and practice can change.</p>
         <h4>Page layout</h4>
         <p>Arbitrary content means great layout is somewhere between difficult and impossible. Work
         with designers on this challenge would be necessary (though even rudimentary implementations

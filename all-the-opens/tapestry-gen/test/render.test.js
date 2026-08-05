@@ -155,7 +155,7 @@ test('a source with no fetchable icon still gets a legend entry, without a broke
 
 test('a source reached only through footnote links still makes the legend', () => {
   // Footnotes carry no source slug — they are links. Apollo 11's references
-  // borrow through OpenLibrary and the Archive twenty times, and both would
+  // borrow through the Archive and Open Library twenty times, and both would
   // otherwise vanish from the page's own legend.
   const bands = [
     {
@@ -170,5 +170,14 @@ test('a source reached only through footnote links still makes the legend', () =
       ],
     },
   ]
-  assert.deepEqual(sourcesUsed(bands), ['internet_archive', 'openlibrary'])
+  // Only the borrow link we added counts. The article's OWN link to
+  // openlibrary.org is the article citing a catalogue, not Open Library
+  // helping — and crediting it would also make every partner the article
+  // already links look like a contributor in the visibility panel.
+  assert.deepEqual(sourcesUsed(bands), ['internet_archive'])
+  const withCatalogue = [
+    { ...bands[0], footnotes: [{ ...bands[0].footnotes[0],
+      access: { url: 'https://openlibrary.org/books/OL1M', label: 'Catalogued · Open Library' } }] },
+  ]
+  assert.deepEqual(sourcesUsed(withCatalogue), ['openlibrary'])
 })

@@ -1,3 +1,5 @@
+import { citationHeadline, pageCitations } from './citations.js'
+import { gapCounts, partnerTally, visibilityReport } from './gap.js'
 import { escapeHtml } from './html.js'
 
 // A second rendering of the same model (bands, entries, citations) as a single
@@ -12,8 +14,7 @@ import { escapeHtml } from './html.js'
 const SOURCE = {
   internet_archive: { name: 'Internet Archive', icon: 'https://archive.org/favicon.ico' },
   wikipedia: { name: 'Wikipedia', icon: 'https://en.wikipedia.org/favicon.ico' },
-  wikimedia_commons: { name: 'Wikimedia Commons', icon: 'https://commons.wikimedia.org/favicon.ico' },
-  openlibrary: { name: 'OpenLibrary', icon: 'https://openlibrary.org/favicon.ico' },
+  openlibrary: { name: 'Open Library', icon: 'https://openlibrary.org/favicon.ico' },
   smithsonian: {
     name: 'Smithsonian',
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/120px-Smithsonian_sun_logo_no_text.svg.png',
@@ -75,31 +76,16 @@ function sourceTag(source, inline = new Map()) {
   return `<span class="src">${favicon(source, inline)}${escapeHtml(meta.name)}</span>`
 }
 
-// A footnote is a link, not an item, so it carries no source slug — but a page
-// whose references borrow through OpenLibrary twenty times is using
-// OpenLibrary, and a legend that omits it is describing the carousels rather
-// than the page.
-const CITED_HOST = [
-  [/(^|\.)openlibrary\.org/, 'openlibrary'],
-  [/(^|\.)archive\.org/, 'internet_archive'],
-  [/(^|\.)courtlistener\.com/, 'free_law'],
-]
-
-/** The source slugs this page actually shows, in the order SOURCE declares them. */
+/**
+ * The source slugs this page actually shows, in the order SOURCE declares them.
+ * Counted by `partnerTally`, which also credits a partner whose contribution is
+ * a footnote's borrow link rather than a card — a page whose references borrow
+ * through Open Library twenty times is using Open Library, and a legend that
+ * omits it is describing the carousels rather than the page.
+ */
 export function sourcesUsed(bands) {
-  const seen = new Set()
-  const noteHost = (url) => {
-    const host = URL.canParse?.(url) ? new URL(url).hostname : null
-    if (host) for (const [re, slug] of CITED_HOST) if (re.test(host)) seen.add(slug)
-  }
-  for (const b of bands ?? []) {
-    for (const e of b.entries ?? []) if (e.source) seen.add(e.source)
-    for (const f of b.footnotes ?? []) {
-      if (f.access?.url) noteHost(f.access.url)
-      for (const m of (f.html ?? '').matchAll(/href="(https?:[^"]+)"/g)) noteHost(m[1])
-    }
-  }
-  return Object.keys(SOURCE).filter((s) => seen.has(s))
+  const tally = partnerTally(bands)
+  return Object.keys(SOURCE).filter((s) => tally.has(s))
 }
 
 /** Every icon URL a page will need, so the generator can prefetch them. */
@@ -116,6 +102,135 @@ export function sourceLegend(inline = new Map()) {
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
   return { html: keys, style: faviconStyle(Object.keys(SOURCE), inline) }
+}
+
+// Small numbers read better as words in a sentence about a handful of
+// institutions; past a dozen the digit is clearer than the word.
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve']
+const spell = (n) => WORDS[n] ?? String(n)
+const Cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
+
+const TIER_LABEL = {
+  shown: 'shown, and credited',
+  link: 'a link only',
+  invisible: 'invisible',
+}
+
+/**
+ * The finding, in a sentence. Built clause by clause because the zero cases
+ * are real — an article with no map has nothing in the `shown` tier, and a
+ * stock sentence with a "0" in it would read as a bug rather than a result.
+ */
+// Never the bare phrase "the article" in this panel. A reader is looking at a
+// page that shows all of these partners, so "the article shows you one of them"
+// reads as a flat contradiction until you know which article is meant.
+// "Original" is the word that does it: it pairs with "this page" a sentence
+// earlier and names the thing on Wikipedia without a second clause.
+const THE_ARTICLE = 'the original Wikipedia article'
+
+function gapLead({ total, shown, link, invisible }) {
+  // Not "everything here was published openly": the Met answers with
+  // rights-reserved objects as well as CC0 ones, the Internet Archive lends
+  // books that are still in copyright, and a IIIF manifest sets its own terms.
+  // Licence claims belong on the cards, per item, where they are true. The
+  // panel counts organisations, which it can count exactly.
+  const out = [
+    `${Cap(spell(total))} ${total === 1 ? 'organisation' : 'organisations'} outside Wikipedia ` +
+      `contributed rich content to this enhanced version of the article.`,
+  ]
+  // With nothing shown AND nothing linked there is no contrast to draw, so the
+  // blunt sentence beats the clause list.
+  if (!shown && !link) {
+    const none =
+      total === 1 ? 'It does not reach' : total === 2 ? 'Neither reaches' : 'None of them reaches'
+    out.push(`${none} ${THE_ARTICLE} at all — not a picture, not a link, not a mention.`)
+    return out.join(' ')
+  }
+  // All three tiers in one sentence. They were dropped from the lead once as
+  // duplicating the table, and put back when the panel folded shut: opening it
+  // now, this is the first line, and it should carry the whole finding before
+  // the reader starts on rows. Verbs, not capability — "credits", "links to",
+  // "does not surface" — because the premise is that Wikipedia could do more
+  // and does not. "The rest" only reads after a clause it can be the rest OF,
+  // and "more" likewise, so a first clause never uses either.
+  const parts = []
+  if (shown) parts.push(`credits ${spell(shown)} of them`)
+  if (link)
+    parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
+  if (invisible)
+    parts.push(
+      parts.length
+        ? 'does not surface the rest'
+        : `does not surface ${invisible === 1 ? 'it' : 'any of them'}`,
+    )
+  const list =
+    parts.length > 2
+      ? `${parts.slice(0, -1).join(', ')}, and ${parts[parts.length - 1]}`
+      : parts.join(' and ')
+  out.push(`${Cap(THE_ARTICLE)} ${list}.`)
+  return out.join(' ')
+}
+
+/**
+ * Who this article can and cannot show — the page's own headline finding, made
+ * where the reader is already looking at what is missing.
+ *
+ * Nothing here is a request or a to-do. It is a report: these collections
+ * exist, they are open, Wikidata records them, and no established route puts
+ * them in front of a reader on this page. A request would walk straight into
+ * Wikipedia's rule that a disputed external link stays out until someone
+ * argues it in; a measurement does not.
+ */
+export function gapPanel(bands, reach, inline = new Map()) {
+  if (!reach) return ''
+  const report = visibilityReport(bands, reach)
+  if (!report.length) return ''
+  const counts = gapCounts(report)
+  // Two columns, because there are two different questions and running them
+  // together in prose is exactly what confused a reader: what did this partner
+  // give the page in front of you, and how much of it can Wikipedia show? The
+  // column headings carry the distinction so the cells do not have to.
+  const rows = report
+    .map((r) => {
+      const name = SOURCE[r.slug]?.name ?? r.slug.replace(/_/g, ' ')
+      // Two countable things, never added together — a reader looking at six
+      // cards must not be told there are thirteen. Each number names what it
+      // counts, so both can be checked against the page.
+      const items = [
+        r.count.cards && `${r.count.cards} ${r.count.cards === 1 ? 'card' : 'cards'}`,
+        r.count.notes && `${r.count.notes} footnote${r.count.notes === 1 ? '' : 's'}`,
+      ]
+        .filter(Boolean)
+        .join('<br>')
+      const where = r.where ? `<span class="gap-where">${escapeHtml(r.where)}</span>` : ''
+      return (
+        `<tr class="gap-${r.tier}">` +
+        `<th scope="row" class="gap-who">${favicon(r.slug, inline)}${escapeHtml(name)}</th>` +
+        `<td class="gap-gave">${items}</td>` +
+        `<td class="gap-seen"><span class="gap-tier">${TIER_LABEL[r.tier]}</span>${where}</td></tr>`
+      )
+    })
+    .join('')
+  // The same finding measured on citations instead of institutions, said once
+  // for the whole page. It sits under the table because it is the second half
+  // of one argument, not a separate box.
+  const cites = citationHeadline(pageCitations(bands))
+  // Shut by default (2026-08-04 review). The masthead's job is to say what the
+  // page is and credit the friends who filled it; the measurement answers a
+  // question a reader has to ask first, and one who has not asked it should
+  // meet a single quiet line rather than a table. The "why" is plain prose
+  // inside — a second fold nested in a fold nobody has opened buys nothing.
+  return (
+    `<details class="gap"><summary>Who helped, and who Wikipedia doesn’t show</summary>` +
+    `<div class="gap-body">` +
+    `<p class="gap-lead">${escapeHtml(gapLead(counts))}</p>` +
+    `<table class="gap-list"><thead><tr><th scope="col">Who</th>` +
+    `<th scope="col">Helping here</th><th scope="col">On Wikipedia</th></tr></thead>` +
+    `<tbody>${rows}</tbody></table>` +
+    (cites ? `<p class="gap-cites">${escapeHtml(cites)}</p>` : '') +
+    `</div></details>`
+  )
 }
 
 // A compact card for a horizontal carousel. The source is not repeated here — it
@@ -155,7 +270,7 @@ function card(entry, inline) {
           .join('')}</ul>`
       : ''
   // A card with an href is an open door, and the whole card says so: the
-  // title links out. Cards without one (most Commons media) stay as they were.
+  // title links out. Cards without one stay as they were.
   // The clamp can ellipsize the visible title; the tooltip always has all of it.
   const heading = entry.href
     ? `<h4 title="${escapeHtml(entry.title)}"><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
@@ -285,21 +400,20 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
       )
     })
     .join('')
-  // The references go with their coverage line: the notes are what this
-  // section cites, in Wikipedia's own words; the line beneath is how much of
-  // that the open ecosystem holds.
-  const coverage = b.coverage ? `<p class="coverage">${escapeHtml(b.coverage)}</p>` : ''
+  // The section's references, and nothing else. The coverage line that used to
+  // sit under them is now one page-level sentence in the visibility panel: per
+  // section it repeated a negative far more often than it reported a find, and
+  // its total ("27 works") sat directly under a different total ("18 notes")
+  // counting a different thing, which read as a contradiction.
   const sources = (b.footnotes ?? []).length
-    ? `<div class="refs">${footnoteList(b.footnotes, wikiBase)}${coverage}</div>`
-    : coverage
-      ? `<div class="refs">${coverage}</div>`
-      : ''
-  // An optional line stating how this band's media was selected. Used when the
-  // anchor that produced it is broad enough that the selection is arbitrary —
-  // the prototype discloses that rather than filtering it out of sight. It
-  // describes the media, so it travels with the deck when there is one.
+    ? `<div class="refs">${footnoteList(b.footnotes, wikiBase)}</div>`
+    : ''
+  // What was left out. Every shelf here is a sample of something larger, and a
+  // page that shows six of six hundred without saying so is claiming a
+  // selection it never made. It describes the media, so it travels with the
+  // deck when there is one.
   const disclosure = b.disclosure
-    ? `<p class="disclosure">${escapeHtml(b.disclosure)}</p>`
+    ? `<p class="disclosure"><b>A sample, not the whole shelf:</b> ${escapeHtml(b.disclosure)}</p>`
     : ''
   return {
     rail: sources || (disclosure && !media) ? `<aside class="rail">${media ? '' : disclosure}${sources}</aside>` : '',
@@ -345,7 +459,7 @@ function band(b, inline, wikiBase = '/wiki/') {
  * sentence that hands the credit to the sources — then the article. The
  * verbiage about how it all works lives on the main page, not here.
  */
-function hero({ title, home, legend, extras = '' }) {
+function hero({ title, home, legend, panel = '', extras = '' }) {
   const name = 'Help From Our Friends: An Open Knowledge Web Experiment'
   const kicker = home
     ? `<a href="${escapeHtml(home)}">${name}</a>`
@@ -357,9 +471,11 @@ function hero({ title, home, legend, extras = '' }) {
   return `<header class="hero">
   <p class="kicker">${kicker}</p>
   <h1>${escapeHtml(title)}</h1>
-  <p class="thesis">Using openly-licensed knowledge to enhance a Wikipedia article,
-    with API-driven help from our friends at:</p>
+  <p class="thesis">A Wikipedia article, with what the rest of the open web holds about it
+    alongside — found while you waited, by following the article’s own links and footnotes
+    out to the collections that published it. Today, help came from:</p>
   <div class="legend">${legend}</div>
+  <div class="gap-slot">${panel}</div>
   ${note}
   ${extras}
 </header>`
@@ -368,7 +484,7 @@ function hero({ title, home, legend, extras = '' }) {
 // `inline` maps a fragile image URL (OpenLibrary covers, which redirect through
 // archive.org) to a pre-fetched data: URI, so those covers render without a live
 // dependency on the Internet Archive being up.
-export function buildHtml({ title, bands, inline = new Map(), provenance = '', home = '' }) {
+export function buildHtml({ title, bands, inline = new Map(), provenance = '', home = '', reach = null }) {
   // Intra-wiki links in a batch file re-base onto the deployed demo (or
   // whatever `home` names), so clicking through to another article still
   // lands on an enriched render rather than a broken relative path.
@@ -404,7 +520,7 @@ ${STYLE}${faviconStyle(used, inline)}
 ${FOLD_JS}
 </head>
 <body>
-${hero({ title, home, legend, extras: evidenceKey })}
+${hero({ title, home, legend, panel: gapPanel(bands, reach, inline), extras: evidenceKey })}
 <main>
 ${body}
 </main>
@@ -447,6 +563,8 @@ function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
+function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
 window.addEventListener("load",function(){if(!window.__tapdone){
 document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream was interrupted before every section finished — what you see is real but incomplete. <a href="javascript:location.reload()">Reload</a> to run it again.</div>')}})
 </script>`
@@ -498,21 +616,35 @@ export function streamBand(b, inline = new Map()) {
  * only then does the page know which sources it used and whether any anchor
  * drew arbitrarily.
  */
-export function streamHeroExtras(bands, { inline = new Map(), home = '' } = {}) {
+export function streamHeroExtras(bands, { inline = new Map(), home = '', reach = null } = {}) {
   const used = sourcesUsed(bands)
   const legend = used
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
-  const notes = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
+  const evidenceKey = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
     ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
       `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
       `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
       `values are printed on the card, because a description that agrees is a weaker claim than an ` +
       `identifier that matches, and must not be read as one.</p>`
     : ''
+  // The visibility panel can only be built once every band has landed: it is a
+  // statement about the whole page, and a partial one would undercount who is
+  // missing — the one number on the page that must never be flattering. It
+  // mounts into `.hero-body`, the masthead's second column — beside what the
+  // page says about itself, never ahead of it. A finding about the page must
+  // not be the first thing a reader meets, before they know what the page is.
+  const panel = gapPanel(bands, reach, inline)
   return (
     `<template id="tpl-legend">${legend}</template><script>__fill("tpl-legend",".legend")</script>\n` +
-    (notes ? `<template id="tpl-notes">${notes}</template><script>__append("tpl-notes",".hero")</script>\n` : '')
+    // Into its own slot, which the shell already carries empty. The panel is
+    // shut by default, so where it lands costs the masthead no height.
+    (panel
+      ? `<template id="tpl-gap">${panel}</template><script>__fill("tpl-gap",".gap-slot")</script>\n`
+      : '') +
+    (evidenceKey
+      ? `<template id="tpl-notes">${evidenceKey}</template><script>__append("tpl-notes",".hero")</script>\n`
+      : '')
   )
 }
 
@@ -631,13 +763,47 @@ sup.ref a:hover{text-decoration:underline}
 .card h4 a:hover{color:var(--link);border-bottom-color:var(--link)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-/* Some Commons credits are whole paragraphs of reuse instructions; the card
-   shows two lines and keeps the rest in the DOM (and on the linked page). */
+/* Some credits are whole paragraphs of reuse instructions; the card shows two
+   lines and keeps the rest in the DOM (and on the linked page). */
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+/* The visibility panel, shut by default: one quiet line under the credit bar,
+   opening into the measurement. A reader who has not yet wondered whether
+   Wikipedia can show any of this should not be handed a table about it, and a
+   measurement that shouts reads as a campaign either way.
+   (No backticks in this stylesheet: it is a JS template literal.) */
+.gap-slot:empty{display:none}
+.gap{max-width:640px;margin:0 0 12px}
+.gap summary{font-family:var(--sans);font-size:.72rem;letter-spacing:.04em;font-weight:700;
+  color:var(--muted);cursor:pointer;width:fit-content}
+.gap summary:hover{color:var(--link)}
+.gap[open] summary{margin:0 0 12px;color:var(--head)}
+.gap-body{padding:14px 16px;background:var(--paper);border:1px solid var(--rule);border-radius:5px}
+.gap-lead{font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--ink);margin:0 0 11px}
+/* Two questions, two columns: what this partner gave the page in front of you,
+   and how much of it Wikipedia can show. Running them together in prose is
+   what made "the article can show you one of them" read as a contradiction. */
+.gap-list{width:100%;border-collapse:collapse;margin:0 0 10px;font-family:var(--sans)}
+.gap-list thead th{font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:#9aa0a6;
+  font-weight:700;text-align:left;padding:0 0 5px 10px;border-bottom:1px solid var(--rule)}
+.gap-list tbody tr{border-left:3px solid var(--rule)}
+.gap-list td,.gap-list tbody th{vertical-align:top;padding:6px 8px 6px 10px;text-align:left}
+.gap-list tbody tr+tr th,.gap-list tbody tr+tr td{border-top:1px dotted var(--faint)}
+.gap-who{font-size:.72rem;font-weight:700;color:var(--head);line-height:1.35}
+/* The icon rides inline with the name so a wrapped name keeps its hanging edge. */
+.gap-who .fav{width:14px;height:14px;margin-right:5px;vertical-align:-2px}
+.gap-gave{color:var(--muted);font-size:.66rem;line-height:1.45;white-space:nowrap}
+.gap-seen{font-size:.66rem;line-height:1.4}
+.gap-tier{display:block;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+.gap-where{display:block;color:var(--muted);margin-top:2px}
+.gap-shown{border-left-color:#2a7d4f}.gap-shown .gap-tier{color:#2a7d4f}
+.gap-link{border-left-color:#9aa0a6}.gap-link .gap-tier{color:#6e7378}
+.gap-invisible{border-left-color:#b32424}.gap-invisible .gap-tier{color:#b32424}
+.gap-cites{font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--ink);
+  margin:0;padding-top:9px;border-top:1px dotted var(--rule)}
+@media(max-width:640px){.gap-gave{white-space:normal}}
 .evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
 .evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
-.coverage{font-family:var(--sans);font-size:.66rem;line-height:1.5;color:#8a8f95;margin:12px 0 0;padding-top:9px;border-top:1px dotted var(--rule)}
 /* Corroborated edges read differently on purpose: a dashed rule and a stated
    reason, so a described-object match is never mistaken for a shared identifier. */
 .card.corroborated{border:1px dashed #c9a227;border-radius:4px;padding:6px;background:#fffdf5}

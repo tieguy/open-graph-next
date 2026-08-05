@@ -97,16 +97,28 @@ export async function fetchSectionWikitext(cacheDir, page, index) {
 }
 
 /**
- * The whole article in one request: section list, rendered HTML, and raw
- * wikitext together. This is the spine — what used to cost two requests per
- * section costs one per article, and the splitters below reproduce the
- * per-section views from it exactly.
+ * The whole article in one request: section list, rendered HTML, raw wikitext,
+ * and what the article already contains. This is the spine — what used to cost
+ * two requests per section costs one per article, and the splitters below
+ * reproduce the per-section views from it exactly.
+ *
+ * `templates|externallinks` ride along for free. They answer a question no
+ * pivot can: not what the open web holds, but how much of it this article is
+ * able to show (see `src/gap.js`). The house rule is to batch onto a request
+ * already being made rather than add one, and this is that rule paying out —
+ * two more fields on a response we were fetching anyway.
+ *
+ * `images` is deliberately NOT among them, and should not be added back as a
+ * way of counting what an article shows: on San Francisco it returns 108 files,
+ * of which one is a pronunciation recording, one is the red pushpin dot, three
+ * are relief-map base layers behind a single visible map, and a couple of dozen
+ * are template icons. The article displays 92. Count the rendered HTML.
  */
 export async function fetchArticle(cacheDir, page) {
   const body = await cachedGet(cacheDir, {
     action: 'parse',
     page,
-    prop: 'tocdata|text|wikitext',
+    prop: 'tocdata|text|wikitext|templates|externallinks',
     disableeditsection: '1',
     disabletoc: '1',
     // Without this a redirect title (e.g. "Coral Gables") parses as its own
@@ -120,6 +132,8 @@ export async function fetchArticle(cacheDir, page) {
     sections: fromTocdata(body.parse.tocdata?.sections),
     html: body.parse.text,
     wikitext: body.parse.wikitext,
+    templates: body.parse.templates ?? [],
+    externallinks: body.parse.externallinks ?? [],
   }
 }
 

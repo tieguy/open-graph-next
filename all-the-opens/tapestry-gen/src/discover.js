@@ -12,12 +12,17 @@
 //     not the caller's input, or a redirect names a page that has no article.
 //   emit('band', band)                        — one band, in COMPLETION order
 //
-// and resolves to { title, bands, stats, dropped } with bands in ARTICLE order. A
-// batch caller can ignore the events entirely; a streaming caller writes the
-// spine skeleton on the first event and a rail fragment per band event. Band
-// assembly runs as one task per unit, so a band waits only on its own
-// dependencies: its Commons lookups, the article-global identifier batches,
-// and — for the lede alone — the subject-level pivots.
+// and resolves to { title, bands, stats, dropped, reach } with bands in ARTICLE
+// order. A batch caller can ignore the events entirely; a streaming caller
+// writes the spine skeleton on the first event and a rail fragment per band
+// event. Band assembly runs as one task per unit, so a band waits only on its
+// own dependencies: the article-global identifier batches, the partner
+// statements, and — for the lede alone — the subject-level pivots.
+//
+// `reach` is what the ARTICLE ITSELF already contains — the templates it
+// transcludes, the pictures it shows, the sites it links. Every partner this
+// pipeline finds is measured against it, which is how the page can say who
+// Wikipedia is able to show and who it isn't. See src/gap.js.
 import {
   articleBlocks,
   fetchArticle,
@@ -32,7 +37,6 @@ import {
 import {
   bibliographyIdentifiers,
   citationCoverage,
-  coverageText,
   resolveShortCites,
   sectionCitations,
   templateParams,
@@ -43,24 +47,21 @@ import { europeanaEntries } from './europeana.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
+import { articleReach } from './gap.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import { entityStatements, statementEntries } from './statements.js'
-import { claimAnchors, dropSeenFiles } from './dedup.js'
+import { claimAnchors } from './dedup.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
 // caps and says what it dropped rather than pretending it covered everything.
 const MAX_SECTIONS = Number(process.env.MAX_SECTIONS ?? Infinity)
 const QIDS_PER_SECTION = Number(process.env.QIDS_PER_SECTION ?? 2)
-const COMMONS_PER_ANCHOR = 4
 const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
-// Above this many depictions, showing four of them is an arbitrary draw.
-const BROAD_ANCHOR = Number(process.env.BROAD_ANCHOR ?? 40)
 // Subject-level pivots answer "what does the ecosystem hold about this subject?"
 // rather than "what did this section cite?", so they land in the lede.
 const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
-const CATEGORY_FILES = Number(process.env.CATEGORY_FILES ?? 6)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
 const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
 // OpenAlex's `mailto` politeness parameter carries the same operator contact
@@ -79,11 +80,6 @@ const BIBLIOGRAPHY = /^(sources|bibliography|works cited|primary sources|referen
 /** A Wikidata Action API request through the shared cache and host queue. */
 function wikidata(params) {
   return cachedRequest(CACHE, 'www.wikidata.org', params, { prefix: 'spike-' })
-}
-
-/** A Commons Action API request through the shared cache and host queue. */
-function commons(params) {
-  return cachedRequest(CACHE, 'commons.wikimedia.org', params, { prefix: 'spike-' })
 }
 
 /**
@@ -155,7 +151,8 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
           .filter(Boolean)
           .join(' · '),
         imageUrl: `https://archive.org/services/img/${statedId}`,
-        attribution: { author: `archive.org/details/${statedId}`, license: 'stated by Wikidata' },
+        href: `https://archive.org/details/${statedId}`,
+        attribution: { author: 'Internet Archive', license: null },
         evidence: 'identifier',
         _via: 'P1026 → P724',
       }
@@ -289,8 +286,11 @@ function iaEntry(doc, cite, via) {
       .filter(Boolean)
       .join(' · '),
     imageUrl: `https://archive.org/services/img/${doc.identifier}`,
-    attribution: { author: `archive.org/details/${doc.identifier}`, license: `via ${via}` },
-    why: `Cited in this section — matched by ${via.toUpperCase()}`,
+    // The card links to the scan itself. It used to print the details path as
+    // the credit instead, which named the place without opening the door.
+    href: `https://archive.org/details/${doc.identifier}`,
+    attribution: { author: 'Internet Archive', license: null },
+    why: `Cited here — the Internet Archive holds a copy, matched on its ${via.toUpperCase()}`,
     // The reason class, not the citation: what must not mix in the lede's IA
     // box is cited scans with the subject's own thesis, not scan with scan.
     topic: 'Cited in this section',
@@ -365,86 +365,10 @@ function freeLawByCitation(citations) {
     description: 'Full text of the decision, from the Free Law Project',
     attribution: {
       author: `courtlistener.com/c/${best.reporter}/${best.volume}/${best.page}/`,
-      license: 'via P1031 legal citation',
+      license: 'Public domain — nobody owns the law',
     },
     _via: 'P1031',
   }
-}
-
-/** Commons files depicting an entity, via Structured Data on Commons. */
-async function commonsDepicting(qid) {
-  const body = await commons({
-    action: 'query',
-    generator: 'search',
-    gsrsearch: `haswbstatement:P180=${qid}`,
-    gsrnamespace: '6',
-    gsrlimit: String(COMMONS_PER_ANCHOR),
-    gsrinfo: 'totalhits',
-    prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
-    iiurlwidth: '640',
-  })
-  const pages = body.query?.pages ?? []
-  // How many depictions exist in total. When this is large the four we show are
-  // an arbitrary draw, and the page says so rather than implying a selection.
-  // `generator=search` omits searchinfo unless gsrinfo asks for it. Never
-  // substitute the returned count here: a fabricated total is worse than none.
-  const totalhits = body.query?.searchinfo?.totalhits ?? null
-  const files = pages
-    .map((p) => {
-      const info = p.imageinfo?.[0]
-      if (!info) return null
-      const meta = info.extmetadata ?? {}
-      const plain = (v) => v?.value?.replace(/<[^>]+>/g, '').trim() || null
-      return {
-        source: 'wikimedia_commons',
-        title: p.title.replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
-        imageUrl: info.thumburl ?? info.url,
-        attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
-        // The file page holds the depicts statement this card rests on —
-        // kept so the provenance fold can point a reader at it.
-        _file: p.title,
-        _via: 'P180',
-      }
-    })
-    .filter(Boolean)
-  return { files, totalhits }
-}
-
-/**
- * Media from the subject's own Commons category. `P180 depicts` finds only what
- * somebody thought to tag; a category is curated, so on a well-kept subject it
- * reaches further and is better selected than an arbitrary draw from a large
- * depiction set.
- */
-async function commonsCategoryFiles(category, limit) {
-  const body = await commons({
-    action: 'query',
-    generator: 'categorymembers',
-    gcmtitle: `Category:${category}`,
-    gcmtype: 'file',
-    gcmlimit: String(limit),
-    prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
-    iiurlwidth: '640',
-  })
-  return (body.query?.pages ?? [])
-    .map((p) => {
-      const info = p.imageinfo?.[0]
-      if (!info) return null
-      const meta = info.extmetadata ?? {}
-      const plain = (v) => v?.value?.replace(/<[^>]+>/g, '').trim() || null
-      return {
-        source: 'wikimedia_commons',
-        title: p.title.replace(/^File:/, '').replace(/\.[a-z0-9]+$/i, '').replace(/_/g, ' '),
-        imageUrl: info.thumburl ?? info.url,
-        attribution: { author: plain(meta.Artist), license: plain(meta.LicenseShortName) },
-        why: 'From the subject’s own Commons category',
-        _via: 'P373',
-        _file: p.title,
-      }
-    })
-    .filter(Boolean)
 }
 
 /** The subject's own works, via the OpenLibrary author identifier P648. */
@@ -480,8 +404,9 @@ async function entityLabels(qids) {
 }
 
 // Citation apparatus that `prop=links` reports as ordinary wikilinks. These are
-// how the article cites, not what it is about, and left in they become anchors:
-// "ISBN" resolves to a QID whose Commons depictions are barcode diagrams.
+// how the article cites, not what it is about, and left in they become anchors
+// in their own right — a section would pivot on "ISBN" as though the article
+// were about barcodes.
 const APPARATUS =
   /^(ISBN|ISSN|OCLC|Doi|Digital object identifier|Wayback Machine|JSTOR|Bibcode|LCCN|International Standard|Library of Congress Control Number|PMID|S2CID|Google Books)/i
 
@@ -576,7 +501,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
 
   // ---- Everything the pivots need, extracted locally before any of them run.
   const stats = {
-    commons: 0,
     ia: 0,
     scholar: 0,
     statements: 0,
@@ -635,11 +559,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
   await emit('spine', { page, units, dropped })
 
   // ---- The pivots, concurrent across hosts, serial within each. -----------
-  // Article-global batches resolve once; per-unit Commons work rides the
-  // commons queue. Labels are batched for every picked QID the moment the QID
-  // map lands, concurrent with the Commons lookups they describe. The
-  // subject's own claims — a case citation, a thesis, an author identifier —
-  // enrich only the lede, so nothing about them may sit ahead of the spine.
+  // Article-global batches resolve once. Labels are batched for every picked
+  // QID the moment the QID map lands, concurrent with the partner lookups they
+  // describe. The subject's own claims — a case citation, a thesis, an author
+  // identifier — enrich only the lede, so nothing about them may sit ahead of
+  // the spine.
   // The page's own title rides the same batch: its QID seeds the anchor
   // registry below without waiting on the subject's claims fetch.
   const qidsPromise = fetchQids(CACHE, [
@@ -649,7 +573,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Every unit's candidates in article order; ownership is decided here,
     // before any pivot runs, so streaming's completion-order emission can
     // never reassign an anchor between runs. The subject QID is seeded to
-    // the lede: its statements and category belong there by design.
+    // the lede: its own statements belong there by design.
     const seeded = new Map()
     const ledeAt = units.findIndex((u) => u.index === '0')
     const subjectQid = qids.get(normalizedPage)
@@ -674,10 +598,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // batch — measured on Prandtl: +89ms for subject, +81ms for statements
   // (each scales ~10ms per batch). This is acceptable because subject pivots
   // enrich only the lede (no critical path to bands), and the savings (Prandtl
-  // and Dapples both 4→3 en.wikipedia.org requests) outweigh the latency. Task 3 will place
-  // `categoryFilesPromise = subjectPromise.then(...)` on EVERY band's depicts
-  // chain, making this latency load-bearing per-band, so the dependency must
-  // not grow further.
+  // and Dapples both 4→3 en.wikipedia.org requests) outweigh the latency.
   const subjectPromise = (async () => {
     const qid = (await qidsPromise).get(normalizedPage)
     if (!qid) return { qid: null, claims: {} }
@@ -718,30 +639,13 @@ export async function discover(page, { emit = async () => {} } = {}) {
       entityStatements([...[...picked.values()].flat(), subject.qid]),
     ),
   )
-  // The subject's Commons category, as its own promise: the depicts chain
-  // seeds from it, and waiting there for ALL the lede's pivots (thesis, IA)
-  // would stall every band's rail behind the slowest one. The catch is
-  // load-bearing: this promise now sits on EVERY band's critical path, and
-  // a failed category fetch is cosmetic, not fatal — without the catch it
-  // would reject the whole chain and take down discover() entirely.
-  const categoryFilesPromise = subjectPromise.then(({ claims }) => {
-    const categoryName = claims.P373?.[0]?.mainsnak?.datavalue?.value
-    return typeof categoryName === 'string'
-      ? commonsCategoryFiles(categoryName, CATEGORY_FILES).catch((e) => {
-          console.error(`  commons category failed: ${e.message}`)
-          return []
-        })
-      : []
-  })
-
   const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
     const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
-    const categoryName = subjectClaims.P373?.[0]?.mainsnak?.datavalue?.value
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
-    const [thesis, works, categoryFiles, scholarship] = await Promise.all([
+    const [thesis, works, scholarship] = await Promise.all([
       // The thesis pivot can spend eight serial archive.org requests, and it
       // enriches only the lede — so it waits for the identifier batches that
       // every band needs before taking its turn on that host's queue.
@@ -755,7 +659,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
         console.error(`  author works failed: ${e.message}`)
         return { entries: [], total: 0 }
       }),
-      categoryFilesPromise,
       typeof orcid === 'string'
         ? openAlexAuthorWorks(orcid, { contact: CONTACT(), cap: WORKS_BY_SUBJECT }).catch((e) => {
             console.error(`  openalex author works failed: ${e.message}`)
@@ -774,29 +677,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
       label: 'Check or fix it on Wikidata',
     })
     for (const e of works.entries) {
-      e.why = `By ${page} — from their OpenLibrary author record`
+      e.why = `Written by ${page}`
       e.topic = `By ${page}`
       e.trace =
-        `Wikidata’s item for ${page} (${subjectQid}) states their OpenLibrary author ID (P648) — ` +
-        `these are the works OpenLibrary files under that author.`
+        `Wikidata — the shared database behind Wikipedia’s infoboxes — records an Open Library ` +
+        `author ID (P648) for ${page}. These are the books Open Library files under that author.`
       e.fix = fixOn('P648')
     }
     for (const e of scholarship.entries) {
-      e.why = `By ${page} — from their ORCID publication record`
+      e.why = `A paper by ${page}, free to read`
       e.topic = `By ${page}`
       e.trace =
-        `Wikidata’s item for ${page} (${subjectQid}) states their ORCID iD (P496) — ` +
-        `OpenAlex lists this work under that iD.`
+        `Wikidata records an ORCID iD (P496) for ${page} — the number researchers use to keep ` +
+        `their own name attached to their work. OpenAlex lists this paper under it.`
       e.fix = fixOn('P496')
-    }
-    // The subject's own category files are their own topic, so the lede's
-    // Commons box never mixes them with files drawn in by other anchors.
-    for (const e of categoryFiles) {
-      e.topic = page
-      e.trace =
-        `Wikidata’s item for ${page} (${subjectQid}) names its Commons category ` +
-        `(P373: “${categoryName}”) — this file is in that category.`
-      e.fix = fixOn('P373')
     }
     if (thesis)
       console.error(
@@ -810,78 +704,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
       console.error(`works by subject: ${works.entries.length} of ${works.total}`)
     if (scholarship.entries.length)
       console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
-    if (categoryFiles.length) console.error(`commons category: ${categoryFiles.length} files`)
-    return { opinion, thesis, works, categoryFiles, scholarship, subjectQid }
+    return { opinion, thesis, works, scholarship, subjectQid }
   })
-
-  // Commons depicts, deduped page-wide in ARTICLE order via a unit-to-unit
-  // chain: band i's rail waits only on bands 0..i-1's Commons work — which
-  // the serial commons host queue imposes anyway — never on later bands and
-  // never on the lede's slow pivots. Inside the band tasks this state would
-  // be first-come in completion order, i.e. nondeterministic streaming.
-  // The chain seeds from the subject's category files: its own media
-  // outranks an anchor's claim to the same file.
-  const depictsByUnit = new Map()
-  {
-    // Only the category files gate the seed. Each unit awaits pickedPromise
-    // itself, so naming it here would put a promise on the seed's path for a
-    // value the seed never reads.
-    let seenSoFar = categoryFilesPromise.then((catFiles) => {
-      // The subject's own media claims its keys before any anchor can: a file
-      // that is both in the subject's category and depicted by an anchor
-      // belongs to the lede's own shelf. If an article ever had no lede unit,
-      // these keys would still be claimed while nothing rendered them — the
-      // same -1 case pickedPromise guards above, and impossible today because
-      // section index '0' is always the lede.
-      const seen = new Set()
-      for (const f of catFiles) if (f._file) seen.add(f._file)
-      return seen
-    })
-    for (const unit of units) {
-      const result = seenSoFar.then(async (seen) => {
-        const commonsEntries = []
-        const breadth = []
-        for (const qid of (await pickedPromise).get(unit)) {
-          try {
-            const { files, totalhits } = await commonsDepicting(qid)
-            for (const f of files) f._qid = qid
-            const [kept] = dropSeenFiles([files], (f) => f._file, seen)
-            commonsEntries.push(...kept)
-            stats.commons += kept.length
-            // Deduped files stay disclosed: an anchor whose whole carousel
-            // rendered earlier on the page must not silently vanish from
-            // the band's own accounting.
-            if (files.length)
-              breadth.push({ qid, shown: kept.length, dropped: files.length - kept.length, totalhits })
-          } catch (e) {
-            console.error(`  commons lookup failed (${qid}): ${e.message}`)
-          }
-        }
-        // `seen` is ONE Set shared by every unit and mutated in place, not a
-        // per-unit snapshot — it is returned only to thread the chain to the
-        // next unit. The band task must never read it: consulting page-wide
-        // state from inside a band would decide dedup in completion order,
-        // which is exactly what this chain exists to prevent.
-        return { commonsEntries, breadth, seen }
-      })
-      depictsByUnit.set(unit, result)
-      // The last unit's assignment has no consumer, so if it ever rejects the
-      // rejection is unhandled. One source can reach here: fetchQids does not
-      // catch, so a failed title batch rejects qidsPromise → subjectPromise
-      // (whose try/catch covers only the wbgetentities call) →
-      // categoryFilesPromise → every result. That case already kills the run,
-      // since the band tasks await the same promises — the warning is noise on
-      // top of a fatal error, not a new failure. Everything else is caught:
-      // commonsCategoryFiles has its own .catch, commonsDepicting is caught
-      // per-QID below. Add a rejecting step to this chain and this line is
-      // where it surfaces.
-      seenSoFar = result.then((r) => r.seen)
-    }
-  }
 
   // ---- One task per unit: a band completes when ITS dependencies do. -------
   const bandTasks = units.map(async (unit) => {
-    const { commonsEntries, breadth } = await depictsByUnit.get(unit)
     // A band waits only on the global batches it will actually read: a
     // section with no book citations must not stall behind OpenLibrary, nor a
     // section with no identifiers behind archive.org. That is what lets the
@@ -892,7 +719,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       unit.railCandidates.some((c) => c.isbn)
         ? volumesPromise
         : { volumes: new Map(), unchecked: new Set() },
-      breadth.length || picked.length ? labelsPromise : new Map(),
+      picked.length ? labelsPromise : new Map(),
       unit.scholarly.length ? scholarPromise : new Map(),
       picked.length || unit.index === '0' ? statementsPromise : new Map(),
     ])
@@ -936,16 +763,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
         stats.scholar++
       }
     }
-    // Phrased to dodge the number-agreement trap "0 of 1 … resolve" falls into.
-    const scholarNote = !unit.scholarly.length
-      ? null
-      : openPapers === 0
-        ? unit.scholarly.length === 1
-          ? 'its 1 scholarly citation has no open copy'
-          : `none of its ${unit.scholarly.length} scholarly citations resolves to an open copy`
-        : `${openPapers} of its ${unit.scholarly.length} scholarly citation${unit.scholarly.length === 1 ? '' : 's'} ` +
-          `resolve${openPapers === 1 ? 's' : ''} to an open copy`
-
     // Anchored entities' partner statements: museum objects, taxa,
     // occurrence maps, place maps. The subject's own statements belong to the
     // lede; one map per section, or every place-heavy section becomes
@@ -1046,68 +863,22 @@ export async function discover(page, { emit = async () => {} } = {}) {
       }
     }
 
-    // Wikilink anchors -> QID -> Commons — deliberately LAST. The demo's
-    // point is the breadth of the ecosystem's partners; Wikimedia's own
-    // media should not outrank the museum's record of its own painting.
-    // Each card says which anchor asked for it: a Valencia opera house in
-    // the Golden Gate Bridge article is baffling until the card admits it
-    // arrived through the section's link to Santiago Calatrava.
-    for (const e of commonsEntries) {
-      const label = labels.get(e._qid)
-      e.why = label ? `Depicts ${label}, a link in this section` : null
-      // The renderer splits one source's carousel by topic, so files depicting
-      // the suspension-bridge anchor never share a box with the strait's.
-      e.topic = label ?? null
-      // The chain: section link → Wikidata item → Commons files whose own
-      // structured data claim they depict it. A wrong depiction is fixed on
-      // the file page, so that is where the fold points.
-      e.trace =
-        `This section links to ${label ?? e._qid}; this file’s structured data on Commons ` +
-        `states it depicts that (P180 = ${e._qid}).`
-      if (e._file)
-        e.fix = {
-          url: `https://commons.wikimedia.org/wiki/${encodeURIComponent(e._file)}`,
-          label: 'Check or fix it on Commons',
-        }
-    }
-    entries.push(...commonsEntries)
-    if (extras) entries.push(...extras.categoryFiles)
-
-    // Disclose how each anchor's media was drawn, in words that name the
-    // mechanism: the links were followed, the counts are files shown of files
-    // held. Above the threshold the four shown are arbitrary, and saying so
-    // is the honest rendering. These notes only ever fire on the lede, where
-    // unit.title is the article's own title — so "the subject" has a name.
+    // Say how much was left on the table. Every shelf here is a sample of
+    // something larger, and a page that shows six of six hundred without
+    // saying so is claiming a selection it never made. These notes only ever
+    // fire on the lede, where unit.title is the article's own title.
     const subjectNotes = []
     if (extras?.works.entries.length)
       subjectNotes.push(
-        `${extras.works.entries.length} of ${extras.works.total} work${extras.works.total === 1 ? '' : 's'} by ${unit.title} ` +
-          'in OpenLibrary, matched by their author identifier',
+        `${extras.works.entries.length} of ${extras.works.total} book${extras.works.total === 1 ? '' : 's'} ` +
+          `Open Library files under ${unit.title}`,
       )
     if (extras?.scholarship.entries.length)
       subjectNotes.push(
-        `${extras.scholarship.entries.length} openly readable of ${extras.scholarship.total} scholarly works by ${unit.title}, ` +
-          'matched by their ORCID iD',
+        `${extras.scholarship.entries.length} free to read of ${extras.scholarship.total} papers ` +
+          `OpenAlex files under ${unit.title}’s ORCID record`,
       )
-    if (extras?.categoryFiles.length)
-      subjectNotes.push(
-        `${extras.categoryFiles.length} files from the Commons category for ${unit.title}`,
-      )
-    const disclosure = breadth.length
-      ? 'Commons media follows this section’s links: ' +
-        breadth
-          .map(
-            (b) =>
-              b.totalhits == null
-                ? `${labels.get(b.qid) ?? b.qid} (showing ${b.shown}; total unknown` +
-                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`
-                : `${labels.get(b.qid) ?? b.qid} (showing ${b.shown} of ${b.totalhits.toLocaleString()}` +
-                  `${b.dropped ? `; ${b.dropped} shown earlier on this page` : ''})`,
-          )
-          .join('; ')
-      : null
-    const fullDisclosure =
-      [disclosure, ...subjectNotes, ...partnerNotes].filter(Boolean).join('. ') || null
+    const fullDisclosure = [...subjectNotes, ...partnerNotes].filter(Boolean).join('. ') || null
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,
@@ -1115,12 +886,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
       blocks: unit.blocks,
       entries,
       footnotes,
-      coverage: [coverageText(coverage), scholarNote].filter(Boolean).join(' · ') || null,
+      // The raw tallies, not a sentence. They are summed page-wide and said
+      // ONCE, in the visibility panel — per section this was 36 lines on San
+      // Francisco, 26 of them reporting nothing but a failure to find.
+      citations: coverage,
+      papers: { total: unit.scholarly.length, open: openPapers },
       disclosure: fullDisclosure,
-      // Set when any anchor here drew from more than BROAD_ANCHOR candidates.
-      // The renderer states what that means once per page rather than appending
-      // "arbitrarily selected" to every ratio.
-      broad: breadth.some((b) => b.totalhits > BROAD_ANCHOR),
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)
@@ -1132,5 +903,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // were asked for: "Coral Gables" is a redirect to "Coral Gables, Florida".
   // A caller that renders its own input would title the page after a redirect
   // that has no article behind it.
-  return { title: normalizedPage, bands, stats, dropped, opinion: (await ledeExtrasPromise).opinion }
+  return {
+    title: normalizedPage,
+    bands,
+    stats,
+    dropped,
+    opinion: (await ledeExtrasPromise).opinion,
+    // What the article can reach on its own, for the visibility panel. Read
+    // off the spine's parse response — no request of its own.
+    reach: articleReach(article),
+  }
 }

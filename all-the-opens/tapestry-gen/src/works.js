@@ -38,9 +38,9 @@ export function authorWorkEntries(response, { cap }) {
     .map(({ w, cover }) => ({
       source: 'openlibrary',
       title: w.title,
-      description: ['Work', w.first_publish_date].filter(Boolean).join(' · '),
+      description: ['Book', w.first_publish_date].filter(Boolean).join(' · '),
       imageUrl: cover,
-      attribution: { author: 'openlibrary.org', license: 'via P648 author identifier' },
+      attribution: { author: 'Open Library', license: null },
       _via: 'P648',
     }))
   return { entries, total: response?.size ?? all.length }

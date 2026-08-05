@@ -319,7 +319,7 @@ export function openLibraryAccess(volume) {
   if (ebook?.availability === 'borrow') {
     return { availability: 'borrow', label: 'Borrow · Internet Archive', url: ebook.preview_url ?? catalog }
   }
-  if (catalog) return { availability: 'catalog', label: 'Find in OpenLibrary', url: catalog }
+  if (catalog) return { availability: 'catalog', label: 'Catalogued · Open Library', url: catalog }
   return null
 }
 
@@ -364,21 +364,71 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
  * means OpenLibrary knows the book but holds no scan, and works we add nothing
  * to are said to be exactly that. Says nothing when there is nothing to say.
  */
-export function coverageText({ total, open, catalogued, linked, unchecked = 0 }) {
-  if (!total) return null
-  const parts = []
-  if (open)
-    parts.push(`${open} readable or borrowable at the Internet Archive — the links on the notes above`)
-  if (catalogued)
-    parts.push(`${catalogued} in OpenLibrary’s catalogue, but with no scan to open yet`)
-  if (linked)
-    parts.push(`${linked} with no open copy — the citation’s own links are all there is`)
-  if (unchecked) parts.push(`${unchecked} could not be checked this run`)
-  const unreached = total - open - catalogued - linked - unchecked
-  if (unreached > 0) parts.push(`${unreached} not held anywhere in the open ecosystem`)
-  if (!parts.length) return null
-  return `Of the ${total} work${total === 1 ? '' : 's'} cited here: ${parts.join(' · ')}`
+/**
+ * The whole page's citation tally, summed from the per-band ones.
+ *
+ * This used to be said per section and is now said once (2026-08-04, review).
+ * On San Francisco the per-section line fired 36 times and 26 of those said
+ * nothing but a variation of "we found no free copy" — 26 repetitions of a
+ * negative to deliver 21 positives. Summed, the same data is one sharp
+ * sentence: 620 works cited, 6 you can read right now. It also ends a
+ * collision, since "References in this section · 18" and "Of the 27 works
+ * these notes cite" no longer share a box and read as a contradiction.
+ */
+export function pageCitations(bands) {
+  const sum = { total: 0, open: 0, catalogued: 0, linked: 0, unchecked: 0 }
+  const papers = { total: 0, open: 0 }
+  for (const b of bands ?? []) {
+    for (const k of Object.keys(sum)) sum[k] += b.citations?.[k] ?? 0
+    papers.total += b.papers?.total ?? 0
+    papers.open += b.papers?.open ?? 0
+  }
+  return { ...sum, papers }
 }
+
+const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
+  'eleven', 'twelve']
+const spell = (n) => WORDS[n] ?? n.toLocaleString()
+
+/**
+ * What the open ecosystem holds of what this article cites, in a sentence or
+ * two. The same finding as the visibility tiers, measured on citations rather
+ * than institutions, which is why it belongs in the same panel.
+ */
+export function citationHeadline({ total, open, catalogued, unchecked = 0, papers } = {}) {
+  if (!total) return null
+  // "This article" would read as the page in front of the reader. It means
+  // the one on Wikipedia, and has to say so.
+  const out = [
+    `The original Wikipedia article cites ${total.toLocaleString()} work${total === 1 ? '' : 's'}.`,
+  ]
+  out.push(
+    open
+      ? `${cap(spell(open))} of them you can read or borrow right now.`
+      : // Never "no free copy exists" — we searched, we did not survey the world.
+        `We could not find a free copy of any of them.`,
+  )
+  // "More" only reads if something came before it. With nothing readable, the
+  // catalogued ones are not "more" — they are the whole of what was found.
+  if (catalogued)
+    out.push(
+      open
+        ? `Open Library has catalogued ${spell(catalogued)} more that nobody has scanned.`
+        : `Open Library has catalogued ${spell(catalogued)} of them, but nobody has scanned ` +
+          `${catalogued === 1 ? 'it' : 'them'}.`,
+    )
+  // "We could not look" must never be left to read as "there is nothing there".
+  if (unchecked)
+    out.push(`${cap(spell(unchecked))} we could not check this time.`)
+  if (papers?.total)
+    out.push(
+      `Of the ${papers.total.toLocaleString()} research paper${papers.total === 1 ? '' : 's'} among them, ` +
+        `${papers.open ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read` : 'we found none free to read'}.`,
+    )
+  return out.join(' ')
+}
+
+const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
 
 /**
  * How openly reachable a citation is — the lower the number, the more surely a
