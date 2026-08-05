@@ -88,6 +88,66 @@ export function preferRelated(qids, ranks) {
   return tiers.flat()
 }
 
+// What a candidate's partner statements promise, best first. The sections have
+// no equivalent of the subject's Wikidata item — nothing states what §"Cultural
+// significance" is about — so where the lede ranks by which property names a
+// link, a section can only rank by what the link turns out to HOLD.
+//
+// Measured on Apollo 11 (2026-08-05): of 331 candidate anchors, 23% name a
+// particular thing, 26% name only a heading, and 50% have no partner hook at
+// all. Picking two per section blind therefore lands on nothing about half the
+// time, which is why 11 of 36 sections rendered no cards while their own later
+// links held Met objects and taxa.
+// An identifier that points at ONE object: whatever comes back is the thing
+// the article linked, by construction. Nothing else on this list offers that.
+const ITEM_LEVEL = ['met', 'aic', 'iiif', 'inat', 'gbif']
+const SOME_HOOK = [...ITEM_LEVEL, 'lc', 'eu', 'coord', 'osmr', 'osmw', 'osmn']
+
+/**
+ * How likely an anchor is to yield something that belongs, lowest first.
+ *
+ * THREE tiers, and the shortness of the list is deliberate:
+ *
+ * 0. An item-level identifier — a Met object, an Art Institute artwork, a IIIF
+ *    manifest, a taxon. A guarantee, and the only one available here.
+ * 1. Any other hook: a subject heading, a Europeana entity, a coordinate.
+ * 2. Nothing at all.
+ *
+ * Tier 1 is deliberately NOT subdivided. A first attempt ranked headings above
+ * coordinates, reasoning that a heading always returns items while a
+ * coordinate may fail `mappable()` — and it immediately cost American Gothic's
+ * lede the map of the actual house in the painting, promoting Nan Wood Graham
+ * (a heading, contents unknown) over the American Gothic House (a coordinate
+ * on a place the subject explicitly names). The reverse ordering fails just as
+ * badly the other way: Apollo 11 has 95 location-bearing candidates, and a
+ * page of maps of Houston, Canberra and Seattle is wallpaper.
+ *
+ * Neither ordering is defensible from what is known at pick time, so document
+ * order — the article's own emphasis — breaks the tie, and src/breadth.js
+ * catches the headings that turn out to be boxes. Prefer something over
+ * nothing; do not pretend to know more than that.
+ */
+export function hookRank(statements) {
+  if (!statements) return 2
+  if (ITEM_LEVEL.some((k) => statements[k])) return 0
+  return SOME_HOOK.some((k) => statements[k]) ? 1 : 2
+}
+
+/**
+ * A unit's candidates, best-yielding first, article order inside each tier.
+ *
+ * This is what "query then pick" buys. The pipeline used to pick two anchors
+ * per section and only then ask what they held; now it asks about every
+ * candidate first — one cheap WDQS query per hundred — and picks anchors that
+ * have something. The ordering is stable and pure over article-ordered input,
+ * so streaming's completion-order emission still cannot change an assignment.
+ */
+export function preferYielding(qids, statements) {
+  const tiers = [[], [], []]
+  for (const q of qids) tiers[q ? hookRank(statements.get(q)) : 2].push(q)
+  return tiers.flat()
+}
+
 /**
  * Assign each anchor QID to the first unit (article order) whose prose
  * mentions it, capping each unit at `perUnit` owned anchors; a unit whose

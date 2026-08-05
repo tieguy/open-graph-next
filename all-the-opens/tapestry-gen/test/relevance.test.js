@@ -3,7 +3,8 @@ import assert from 'node:assert/strict'
 
 import { heroRank, pickHero } from '../src/hero.js'
 import { BROAD_ABOVE, broadNote, tooBroad } from '../src/breadth.js'
-import { claimAnchors, preferRelated, subjectAnchors } from '../src/dedup.js'
+import { claimAnchors, hookRank, preferRelated, preferYielding, subjectAnchors } from '../src/dedup.js'
+import { mappable, resolveMappability } from '../src/statements.js'
 import { dplaBrowseUrl } from '../src/dpla.js'
 import { europeanaBrowseUrl } from '../src/europeana.js'
 
@@ -180,6 +181,103 @@ test('with nothing related, the order is exactly document order', () => {
 
 test('nulls survive the reordering, because claimAnchors is what skips them', () => {
   assert.deepEqual(preferRelated(['Q1', null, 'Q2'], new Map([['Q2', 0]])), ['Q2', 'Q1', null])
+})
+
+// --- the expensive half stays bounded ---------------------------------------
+
+test('mappability is decided only for the anchors asked about, and answers nobody asked stay unset', async () => {
+  // The partner query now covers every candidate on the page; the class walk
+  // must NOT follow it. On Apollo 11 that is the difference between 16
+  // location-bearing items and 95. An item outside the subset is left with
+  // place/defunct undefined, which mappable() reads as a refusal — the honest
+  // state for a question nobody put. No network: with an empty subset there is
+  // nothing to ask.
+  const asked = { coord: 'Point(-87.62 41.87)', lc: 'n78096940' }
+  const notAsked = { coord: 'Point(2.35 48.85)' }
+  const map = new Map([['Q239303', asked], ['Q90', notAsked]])
+  const out = await resolveMappability(map, [])
+  assert.equal(out, map) // the same map, enriched in place
+  assert.equal(asked.place, undefined)
+  assert.equal(notAsked.place, undefined)
+  assert.equal(mappable(notAsked), false)
+})
+
+// --- which of a section's links is worth asking about --------------------
+
+test('an item-level identifier outranks every other hook, which outrank nothing', () => {
+  assert.equal(hookRank({ met: '1' }), 0)
+  assert.equal(hookRank({ aic: '1' }), 0)
+  assert.equal(hookRank({ iiif: 'x' }), 0)
+  assert.equal(hookRank({ inat: '1' }), 0)
+  assert.equal(hookRank({ gbif: '1' }), 0)
+  assert.equal(hookRank({ lc: 'sh1' }), 1)
+  assert.equal(hookRank({ eu: 'concept/1' }), 1)
+  assert.equal(hookRank({ coord: 'Point(0 0)' }), 1)
+  assert.equal(hookRank({ osmr: '1' }), 1)
+  assert.equal(hookRank({}), 2)
+  assert.equal(hookRank(undefined), 2)
+})
+
+test('a heading and a coordinate are NOT ranked against each other', () => {
+  // Ranking headings above coordinates cost American Gothic's lede the map of
+  // the house in the painting — Nan Wood Graham (a heading, contents unknown)
+  // displaced the American Gothic House (a coordinate on a place the subject
+  // names). Ranking coordinates above headings turns Apollo 11, which has 95
+  // location-bearing candidates, into wallpaper. Document order breaks the tie.
+  assert.equal(hookRank({ lc: 'sh1' }), hookRank({ coord: 'Point(0 0)' }))
+  const heading = 'Q_heading'
+  const place = 'Q_place'
+  const stmts = new Map([
+    [heading, { lc: 'sh1' }],
+    [place, { coord: 'Point(0 0)' }],
+  ])
+  assert.deepEqual(preferYielding([heading, place], stmts), [heading, place])
+  assert.deepEqual(preferYielding([place, heading], stmts), [place, heading])
+})
+
+test('candidates that hold something come first, article order inside each tier', () => {
+  const stmts = new Map([
+    ['Q2', { lc: 'sh1' }],
+    ['Q3', { met: '4' }],
+    ['Q5', { coord: 'Point(0 0)' }],
+  ])
+  // Q1 and Q4 are absent from the map entirely — nothing was found for them.
+  assert.deepEqual(preferYielding(['Q1', 'Q2', 'Q3', 'Q4', 'Q5'], stmts), [
+    'Q3', // the only item-level identifier
+    'Q2', // has a hook, and precedes Q5 in the article
+    'Q5',
+    'Q1', // nothing, in article order
+    'Q4',
+  ])
+})
+
+test('nulls sink with the empty-handed, because claimAnchors is what skips them', () => {
+  assert.deepEqual(preferYielding(['Q1', null, 'Q2'], new Map([['Q2', { met: '1' }]])), [
+    'Q2',
+    'Q1',
+    null,
+  ])
+})
+
+test('the lede composes both rankings: relevance dominates, yield breaks ties', () => {
+  // The composition order is load-bearing. preferYielding runs FIRST and
+  // preferRelated SECOND, so the result is sorted by (subject tier, hook rank)
+  // — not the reverse, which would let an unrelated anchor that happens to
+  // hold something outrank the painter.
+  const stmts = new Map([
+    ['Q_wood', { lc: 'n50014999' }], // named by the subject, holds something
+    ['Q_nan', {}], // named by the subject, holds nothing
+    ['Q_oil', { eu: 'concept/222' }], // never named, holds something
+  ])
+  const related = new Map([['Q_wood', 0], ['Q_nan', 0]])
+  const order = preferRelated(preferYielding(['Q_oil', 'Q_nan', 'Q_wood'], stmts), related)
+  assert.deepEqual(order, ['Q_wood', 'Q_nan', 'Q_oil'])
+  // The reverse composition would promote the thing nobody named.
+  assert.deepEqual(preferYielding(preferRelated(['Q_oil', 'Q_nan', 'Q_wood'], related), stmts), [
+    'Q_wood',
+    'Q_oil',
+    'Q_nan',
+  ])
 })
 
 test('reordering the lede changes which section owns an anchor, and the lede wins', () => {

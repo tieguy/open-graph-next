@@ -50,8 +50,8 @@ import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
 import { authorWorkEntries } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
-import { entityStatements, statementEntries } from './statements.js'
-import { claimAnchors, preferRelated, subjectAnchors } from './dedup.js'
+import { partnerStatements, resolveMappability, statementEntries } from './statements.js'
+import { claimAnchors, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 
 
@@ -593,39 +593,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }
   })()
 
-  const pickedPromise = Promise.all([qidsPromise, subjectPromise]).then(([qids, subject]) => {
-    // Every unit's candidates in article order; ownership is decided here,
-    // before any pivot runs, so streaming's completion-order emission can
-    // never reassign an anchor between runs. The subject QID is seeded to
-    // the lede: its own statements belong there by design.
-    const seeded = new Map()
-    const ledeAt = units.findIndex((u) => u.index === '0')
-    const subjectQid = qids.get(normalizedPage)
-    if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
-    // The lede alone ranks its candidates before claiming: the entities the
-    // subject's own Wikidata statements name most specifically go first, so
-    // the article about a painting anchors on its painter and the museum that
-    // owns it rather than on the words "oil painting" and "beaverboard". See
-    // preferRelated. Every other unit keeps document order, which is all there
-    // is to go on there.
-    const related = subjectAnchors(subject.claims)
-    const owned = claimAnchors(
-      units.map((u) => {
-        const qs = u.linkCandidates.map((t) => qids.get(t))
-        return u.index === '0' ? preferRelated(qs, related) : qs
-      }),
-      { perUnit: QIDS_PER_SECTION, seeded },
-    )
-    const picked = new Map()
-    units.forEach((unit, i) => {
-      stats.anchorsQid += owned[i].length
-      picked.set(unit, owned[i])
-    })
-    return picked
-  })
-
-  const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
-
   // Stderr diagnostics: which global batch is the long pole. A streaming
   // reader sees rails arrive when the slowest batch a band needs settles, so
   // when a page feels slow this line says which host to blame.
@@ -633,6 +600,67 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const t0 = Date.now()
     return p.finally(() => console.error(`  ${name} settled in ${((Date.now() - t0) / 1000).toFixed(1)}s`))
   }
+
+  // ---- Query, THEN pick. --------------------------------------------------
+  // What every candidate on the page holds, before any of them is chosen. The
+  // pipeline used to do this the other way around: each section picked two
+  // anchors on document order, asked about those two, and if neither held
+  // anything the section rendered nothing — while its own third and fourth
+  // links held a Met object or a taxon. On Apollo 11 that left 11 of 36
+  // sections empty, 9 of them with usable material one link further down.
+  //
+  // Costs one cheap WDQS query per hundred candidates instead of one per page:
+  // measured on Apollo 11, 49 anchors in 0.37s becomes 331 in 0.93s. The
+  // expensive class walk does NOT widen with it — see statementsPromise.
+  const partnersPromise = timed(
+    'wdqs partners',
+    qidsPromise.then((qids) =>
+      partnerStatements([
+        ...new Set([
+          ...units.flatMap((u) => u.linkCandidates.map((t) => qids.get(t))),
+          qids.get(normalizedPage),
+        ]),
+      ]),
+    ),
+  )
+
+  const pickedPromise = Promise.all([qidsPromise, subjectPromise, partnersPromise]).then(
+    ([qids, subject, partners]) => {
+      // Every unit's candidates in article order; ownership is decided here,
+      // before any partner is fetched, so streaming's completion-order
+      // emission can never reassign an anchor between runs. The subject QID is
+      // seeded to the lede: its own statements belong there by design.
+      const seeded = new Map()
+      const ledeAt = units.findIndex((u) => u.index === '0')
+      const subjectQid = qids.get(normalizedPage)
+      if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
+      const related = subjectAnchors(subject.claims)
+      const owned = claimAnchors(
+        units.map((u) => {
+          const qs = u.linkCandidates.map((t) => qids.get(t))
+          // Every unit prefers candidates that actually hold something.
+          const yielding = preferYielding(qs, partners)
+          // The lede then re-sorts by how specifically the subject's own
+          // Wikidata statements name each one — applied SECOND, so relevance
+          // dominates and yield breaks ties within it. Grant Wood and the Art
+          // Institute (named, and holding something) come before Nan Wood
+          // Graham (named, holding nothing) and before oil painting (holding
+          // something, never named). Other units have no such signal: nothing
+          // states what §"Cultural significance" is about.
+          return u.index === '0' ? preferRelated(yielding, related) : yielding
+        }),
+        { perUnit: QIDS_PER_SECTION, seeded },
+      )
+      const picked = new Map()
+      units.forEach((unit, i) => {
+        stats.anchorsQid += owned[i].length
+        picked.set(unit, owned[i])
+      })
+      return picked
+    },
+  )
+
+  const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
 
   const iaPromise = timed('ia batch', iaLookups(units.flatMap((u) => u.identified)))
   const volumesPromise = timed(
@@ -643,13 +671,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
     'openalex batch',
     openAlexLookups(units.flatMap((u) => u.scholarly), { contact: CONTACT() }),
   )
-  // Partner statements for every anchor on the page — and the subject itself,
-  // whose statements (a museum ID on an artwork article, a taxon ID on a
-  // species article, coordinates on a place) belong to the lede.
+  // Mappability, for the anchors that were actually picked and nothing else.
+  // The partner statements are already in hand; this is the transitive class
+  // walk that decides whether a coordinate may become a map, and it is the
+  // expensive half. Widening it alongside the partner query would take Apollo
+  // 11 from 16 location-bearing items to 95 and 0.63s to 1.11s, to answer the
+  // question for anchors no section will render. See src/statements.js.
   const statementsPromise = timed(
-    'wdqs statements',
-    Promise.all([pickedPromise, subjectPromise]).then(([picked, subject]) =>
-      entityStatements([...[...picked.values()].flat(), subject.qid]),
+    'wdqs mappability',
+    Promise.all([partnersPromise, pickedPromise, subjectPromise]).then(
+      ([partners, picked, subject]) =>
+        resolveMappability(partners, [...[...picked.values()].flat(), subject.qid]),
     ),
   )
   const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {

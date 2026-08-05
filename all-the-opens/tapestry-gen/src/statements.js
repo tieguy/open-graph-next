@@ -221,17 +221,24 @@ export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnde
 }
 
 /**
- * Every anchored entity's partner statements, in one query per 100 anchors,
- * followed by the two small mappability queries described above — which run
- * only for the anchors that carry a coordinate or an OSM identifier.
- * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, place?, defunct?}>}
+ * Every candidate's partner statements, in one query per 100 — the CHEAP half.
+ *
+ * Split out from `entityStatements` on 2026-08-05 so the pipeline can ask this
+ * of every anchor a page could use, rather than only the two per section it
+ * picked blind. That inversion is the point: a section used to choose two
+ * anchors before knowing whether either had anything, and if both came back
+ * empty the section stayed empty even when its third link held a Met object.
+ * Measured on Apollo 11: 49 anchors in 0.37s becomes 331 in 0.93s — four
+ * chunks instead of one, on a page that takes tens of seconds cold.
+ *
+ * The expensive half (the class walk) deliberately does NOT widen with it;
+ * see resolveMappability.
+ *
+ * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, lc?, eu?, iiif?}>}
  */
-export async function entityStatements(qids) {
+export async function partnerStatements(qids) {
   const map = new Map()
-  const uniqueQids = [...new Set(qids)].filter(Boolean)
-
-  // First query: partner statements
-  for (const group of chunk(uniqueQids, 100)) {
+  for (const group of chunk([...new Set(qids)].filter(Boolean), 100)) {
     let rows = []
     try {
       rows = (await getJson(wdqsUrl(group))).results?.bindings ?? []
@@ -247,10 +254,31 @@ export async function entityStatements(qids) {
       map.set(qid, cur)
     }
   }
+  return map
+}
 
-  // Second query (phase 2a): item classes and end dates, only for QIDs with
-  // location data. Group by 100 like the main query — same host queue, same politeness.
-  const needsPlaceDefunct = [...map].filter(([, s]) => needsPlaceDefunctQuery(s)).map(([q]) => q)
+/**
+ * Decide mappability for a SUBSET of an already-fetched statement map — the
+ * expensive half, and the reason the two are separate.
+ *
+ * `only` is the anchors actually picked. Widening the partner query to every
+ * candidate would otherwise drag this along with it: Apollo 11 goes from 16
+ * location-bearing items to 95, and its class walk from 0.63s to 1.11s, for
+ * maps on anchors no section will ever render. Measured 2026-08-05.
+ *
+ * The sub-map holds the SAME statement objects as the parent, and
+ * mergePlaceDefunct writes into those objects, so the parent map sees the
+ * result without this function reaching into it. Items outside `only` are left
+ * with place/defunct unset, which mappable() reads as a refusal — the honest
+ * state for a question nobody asked.
+ */
+export async function resolveMappability(map, only) {
+  const subset = new Map()
+  for (const qid of new Set(only)) {
+    const s = map.get(qid)
+    if (s) subset.set(qid, s)
+  }
+  const needsPlaceDefunct = [...subset].filter(([, s]) => needsPlaceDefunctQuery(s)).map(([q]) => q)
   const itemClasses = new Map() // QID → Set of its P31 class QIDs
   const itemsWithEnded = new Set() // QIDs that have P576 bindings
 
@@ -297,13 +325,16 @@ export async function entityStatements(qids) {
     }
   }
 
-  // Merge class hierarchy results into item statements once, with all data collected.
+  // Merge class hierarchy results into item statements once, with all data
+  // collected. `subset`, not `map`: an item nobody picked was never asked
+  // about, and writing place='false' onto it would state an answer we do not
+  // have. mappable() refuses on unset, which is the same outcome honestly.
   if (allClassRows.length > 0) {
-    mergePlaceDefunct(map, allClassRows, itemClasses, itemsWithEnded)
+    mergePlaceDefunct(subset, allClassRows, itemClasses, itemsWithEnded)
   } else if (needsPlaceDefunct.length > 0) {
     // If class query failed or returned nothing, mark location items as unmappable
     // to avoid rendering maps when place/defunct status is unknown.
-    for (const [qid, statements] of map.entries()) {
+    for (const [, statements] of subset.entries()) {
       if (needsPlaceDefunctQuery(statements)) {
         statements.place = 'false'
         statements.defunct = 'false'
@@ -312,6 +343,16 @@ export async function entityStatements(qids) {
   }
 
   return map
+}
+
+/**
+ * Both halves, for callers that want every anchor resolved end to end — the
+ * shape this module exposed before the split. The pipeline no longer uses it:
+ * it needs the halves apart, so it can pick anchors between them.
+ */
+export async function entityStatements(qids) {
+  const map = await partnerStatements(qids)
+  return resolveMappability(map, [...map.keys()])
 }
 
 // ---- per-partner object fetchers → entries --------------------------------
