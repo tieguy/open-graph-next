@@ -116,6 +116,31 @@ test('the best find floats in the rail, media rides the deck, references close t
   assert.match(deck, /Another photo/)
 })
 
+test('a shared why hoists to the head even on a shelf with no topic label', () => {
+  // The badge says "6 of 10"; this is the line that says ten of WHAT. It used
+  // to hoist only on topic-split shelves, so the common case — one source, one
+  // anchor — repeated the line on every card and left the badge unexplained.
+  // Three entries: one is hoisted into the hero, leaving two on the shelf —
+  // the hoist needs more than one card to be worth doing.
+  const { deck } = bandParts({
+    ...BAND,
+    entries: [
+      ...BAND.entries,
+      {
+        source: 'met',
+        title: 'A third photo',
+        imageUrl: 'https://example.test/z.jpg',
+        why: 'About Santiago Calatrava, which this section links to',
+      },
+    ],
+    samples: [MET_SAMPLE],
+  })
+  assert.match(deck, /<span class="count"[^>]*>2 of 9<\/span><\/div><p class="carousel-why">About Santiago Calatrava, which this section links to<\/p>/)
+  assert.doesNotMatch(deck, /<span class="topic">/)
+  // Said once under the head, not again on the card below it.
+  assert.doesNotMatch(deck, /<p class="why">About Santiago Calatrava/)
+})
+
 test('a sample claim rides on the head of the shelf it is a sample of', () => {
   // It used to be a paragraph atop the deck, which on Brown v. Board counted
   // the DPLA shelf from above the Internet Archive and OpenStreetMap shelves.

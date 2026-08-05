@@ -422,10 +422,17 @@ function carousel(source, items, inline, topic = null, sample = null) {
       ? `<span class="count">${items.length}</span>`
       : ''
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
-  // A topic-labeled strip whose cards all share one why line says it once,
-  // under the head — four cards each repeating "Depicts X" is noise.
+  // A strip whose cards all share one why line says it once, under the head —
+  // four cards each repeating "Depicts X" is noise.
+  //
+  // This used to require a topic label too, so it only ever fired on a source
+  // split across several anchors. That left the common case — one source, one
+  // anchor — repeating the same line on every card AND left the count badge
+  // ("6 of 10") with nothing beside it saying ten of WHAT. Hoisting whenever
+  // the line is shared fixes both: the head now reads "Open Library · 6 of 10"
+  // over "Written by Ludwig Prandtl".
   let shared = ''
-  if (topic && items.length > 1 && items[0].why && items.every((e) => e.why === items[0].why)) {
+  if (items.length > 1 && items[0].why && items.every((e) => e.why === items[0].why)) {
     shared = `<p class="carousel-why">${escapeHtml(items[0].why)}</p>`
     items = items.map((e) => ({ ...e, why: null }))
   }
