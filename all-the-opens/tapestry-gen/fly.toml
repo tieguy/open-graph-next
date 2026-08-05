@@ -14,11 +14,22 @@ kill_timeout = "45s"
 [http_service]
   internal_port = 8080
   force_https = true
-  # Scale to zero when idle: a demo should cost nothing while nobody looks at
-  # it. The first visitor after a quiet spell pays a cold start, not a bill.
+  # Always one machine up (2026-08-05, replacing scale-to-zero).
+  #
+  # Scaling to zero traded a cold start for a bill, and the trade stopped being
+  # a good one once the cold start was measured: 6.8s to the FRONT PAGE, which
+  # involves no discovery at all — 1.2s of Fly boot and ~4s of Node starting
+  # off a cold rootfs, against 180ms of this application's own startup. There
+  # is nothing left to optimize in the code; the only way not to pay it is not
+  # to stop. A demo whose whole argument is what the open ecosystem can show you
+  # should not open with seven seconds of nothing.
+  #
+  # `auto_stop_machines` stays "stop" rather than "off": with one machine and a
+  # minimum of one it never fires, and it keeps doing the right thing if a
+  # second machine is ever added.
   auto_stop_machines = "stop"
   auto_start_machines = true
-  min_machines_running = 0
+  min_machines_running = 1
 
 # ONE machine, on purpose (scaled 2026-08-03; recreate with `--ha=false`).
 # The disk cache is per-machine: with two, requests alternate between two

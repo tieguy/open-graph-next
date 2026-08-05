@@ -114,7 +114,8 @@ completion, not the absolute seconds — see the warning under Request shape.
 
 `serve.js` runs publicly at **https://help-from-our-friends.fly.dev/**
 (Fly.io app `help-from-our-friends` — renamed from `article-tapestry`
-2026-08-03; personal org, sjc, scale-to-zero; `Dockerfile` + `fly.toml`
+2026-08-03; personal org, sjc, one machine always up since 2026-08-05 —
+scale-to-zero until then; `Dockerfile` + `fly.toml`
 here). The public name is *"Help From Our Friends: An Open Knowledge Web
 Experiment"*. Deliberately **one machine** (scaled down 2026-08-03; use
 `flyctl deploy --remote-only --ha=false` if ever recreating): the disk cache
@@ -176,9 +177,16 @@ and everything else is single-digit milliseconds. So the icon loop was worth
 roughly 3s, and **the remaining ~4s is Node itself starting off a cold rootfs**,
 not this code. Front page cold: 9.9s → 6.8s.
 
-That residual is a platform cost with only platform answers — a smaller base
-image, or `min_machines_running = 1` so there is no cold start to pay. Do not go
-looking for it in `serve.js`; there is 180ms there in total.
+That residual is a platform cost with only platform answers, and the answer
+taken was **`min_machines_running = 1`** (2026-08-05): the machine no longer
+stops, so there is no cold start to pay. Do not go looking for it in `serve.js`;
+there is 180ms there in total. The remaining lever, if a cold start ever matters
+again, is a smaller base image.
+
+The demo is therefore no longer scale-to-zero, and costs a few dollars a month
+rather than nothing. That was a deliberate trade against a **6.8s front page** —
+a page that does no discovery at all — for a site whose argument is what the
+open ecosystem can show you.
 
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
