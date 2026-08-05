@@ -88,8 +88,21 @@ Experiment"*. Deliberately **one machine** (scaled down 2026-08-03; use
 is per-machine, and Fly's default second "HA" machine made requests alternate
 between two independent cold caches — every page felt cold forever. One
 machine = one cache that accrues (18s cold → 0.3s warm); deploys still wipe
-it, which is the accepted trade. Deploy with `flyctl deploy --remote-only` from this
-directory. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
+it, which is the accepted trade.
+
+**Deploy with `npm run deploy`** from this directory — `flyctl deploy
+--remote-only && node warm.js`. The second half matters: a deploy takes the
+machine's cache with it, so without it the six showcase links on the front page
+— the first thing anyone clicks — are each a cold minute at exactly the wrong
+moment. `warm.js` walks them once, **serially** (every page fans out dozens of
+upstream requests, `MAX_CONCURRENT` 503s past four, and warming earns no
+exemption from the per-host queues). Its titles come from `showcaseTitles()`,
+the list the front page renders its own cards from; a test asserts the two
+agree, because drift would show up as a slow demo link rather than an error. It
+exits non-zero if a page did not finish — checked via `window.__tapdone`, the
+flag `streamClose` writes last — but a failure there means the site is slow,
+not broken, and the deploy itself already succeeded. `npm run warm [url]`
+re-runs it alone. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
 never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
 `/wiki/`, and the per-host queues already bounding upstream traffic globally.

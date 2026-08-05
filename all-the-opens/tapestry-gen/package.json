@@ -6,6 +6,8 @@
   "scripts": {
     "spike": "node spike.js",
     "serve": "node serve.js",
+    "warm": "node warm.js",
+    "deploy": "flyctl deploy --remote-only && node warm.js",
     "test": "node --test 'test/*.test.js'"
   },
   "dependencies": {

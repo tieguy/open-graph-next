@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, sourcesUsed } from '../src/emit-html.js'
+import { frontPage, showcaseTitles } from '../src/front-page.js'
 
 // What the shipped renderer and its article extraction promise. The curated
 // generator's own tests — placement, Tapestry geometry, zip — retired with it
@@ -180,4 +181,16 @@ test('a source reached only through footnote links still makes the legend', () =
       access: { url: 'https://openlibrary.org/books/OL1M', label: 'Cataloged · Open Library' } }] },
   ]
   assert.deepEqual(sourcesUsed(withCatalog), ['openlibrary'])
+})
+
+test('the warmer and the front page read the same showcase list', () => {
+  // warm.js re-warms exactly the pages the front page links to. A second,
+  // hand-kept copy of the titles would drift the first time one changed, and
+  // the symptom would be a slow demo link rather than an error.
+  const html = frontPage({})
+  for (const title of showcaseTitles()) {
+    const href = `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
+    assert.ok(html.includes(`href="${href}"`), `front page links ${title}`)
+  }
+  assert.equal(showcaseTitles().length, (html.match(/<a class="show"/g) ?? []).length)
 })

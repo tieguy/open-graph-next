@@ -106,6 +106,14 @@ const FRIENDS = [
 
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
 
+/**
+ * The articles the front page links to, for anything that needs the same list.
+ * Derived from SHOWCASE rather than written out again: `warm.js` re-warms
+ * exactly these after a deploy, and a second hand-maintained copy would drift
+ * the first time a showcase article changed.
+ */
+export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
+
 export function frontPage({ inline = new Map() } = {}) {
   const legend = sourceLegend(inline)
   const cards = SHOWCASE.map(
