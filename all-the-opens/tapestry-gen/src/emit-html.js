@@ -566,6 +566,7 @@ if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
 function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
 window.addEventListener("load",function(){if(!window.__tapdone){
+var f=document.querySelector(".finding");if(f)f.textContent="Stopped before the search finished.";
 document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream was interrupted before every section finished — what you see is real but incomplete. <a href="javascript:location.reload()">Reload</a> to run it again.</div>')}})
 </script>`
 
@@ -575,6 +576,22 @@ document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream
  * styles for ALL sources are emitted up front — a streaming page cannot know
  * yet which it will use, and the unused rules cost bytes, not correctness.
  */
+/**
+ * What stands in the legend's place while the pivots are still answering.
+ *
+ * A streamed page knows its sources only when every band has landed, so
+ * between the spine (~1s) and the last rail (up to a minute cold) the masthead
+ * said "Today, help came from:" above an empty strip — which reads as broken
+ * rather than busy. `__fill` replaces the legend's children when the real list
+ * arrives, so this needs no teardown of its own.
+ *
+ * No counter and no percentage: the page cannot know how many friends it will
+ * find until it has found them, and a progress bar that invents a denominator
+ * is a lie told in the one place this project is about not telling them.
+ */
+const FINDING =
+  '<span class="finding" role="status">Asking libraries, museums, archives and mapmakers…</span>'
+
 export function streamOpen({ title, units, inline = new Map(), home = '/' }) {
   const spine = units
     .map((u) =>
@@ -594,7 +611,7 @@ ${FOLD_JS}
 ${RELOCATE_JS}
 </head>
 <body>
-${hero({ title, home, legend: '' })}
+${hero({ title, home, legend: FINDING })}
 <main>
 ${spine}
 `
@@ -690,6 +707,12 @@ img{max-width:100%;display:block}
   min-height:16px;margin:0 0 12px}
 .hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
 .key{display:inline-flex;align-items:center;gap:8px}
+/* The legend's stand-in while the pivots answer. A slow pulse, not a spinner:
+   the work is a polite serial crawl of other people's APIs, and it should look
+   like patience rather than a progress bar counting to a number nobody knows. */
+.finding{font-style:italic;animation:finding 1.9s ease-in-out infinite}
+@keyframes finding{0%,100%{opacity:.45}50%{opacity:1}}
+@media(prefers-reduced-motion:reduce){.finding{animation:none;opacity:.7}}
 .fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;background-size:contain;display:inline-block}
 
 main{max-width:1180px;margin:0 auto;padding:0 40px}

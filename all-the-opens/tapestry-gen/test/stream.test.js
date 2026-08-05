@@ -255,3 +255,21 @@ test('open + fragments + close compose a complete document', () => {
   const templates = [...page.matchAll(/<template id="([^"]+)"/g)].map((m) => m[1])
   for (const t of templates) assert.ok(page.includes(`"${t}"`), `no mount for ${t}`)
 })
+
+test('the streamed shell says it is still looking until the legend arrives', () => {
+  // Between the spine and the last rail the page knows none of its sources, so
+  // the masthead used to show "Today, help came from:" above an empty strip.
+  const open = streamOpen({ title: 'T', units: UNITS, home: '/' })
+  assert.match(open, /<span class="finding" role="status">Asking libraries/)
+  // No invented denominator: the page cannot know how many it will find, so
+  // the stand-in carries no number at all. (Scoped to the span — the
+  // stylesheet is full of legitimate percentages.)
+  const finding = /<span class="finding"[^>]*>([^<]*)</.exec(open)[1]
+  assert.doesNotMatch(finding, /\d|%/)
+  // __fill replaces the legend's children, so the stand-in needs no teardown.
+  const extras = streamHeroExtras([BAND])
+  assert.match(extras, /__fill\("tpl-legend",".legend"\)/)
+  assert.doesNotMatch(extras, /class="finding"/)
+  // A cut stream must stop claiming to still be looking.
+  assert.match(open, /Stopped before the search finished/)
+})

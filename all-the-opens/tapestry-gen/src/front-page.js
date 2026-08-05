@@ -220,7 +220,7 @@ ${legend.style}
   <p class="lede">Alongside every Wikipedia article there is a wider open world: libraries that lend,
     museums that publish their own collections, scientists who post their papers openly, mappers and
     naturalists who chart the planet for free. This experiment invites them in.
-    <b>Pick an article, and watch its friends arrive.</b></p>
+    <b>Pick an article, and see who else is out there.</b></p>
   <form class="ask" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
     <input name="q" placeholder="Any article title — try your hometown" autofocus
       aria-label="English Wikipedia article title">
