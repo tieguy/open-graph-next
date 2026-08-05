@@ -252,9 +252,9 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
 - **Statements** (`src/statements.js`) — WDQS, split into a CHEAP half asked of
   everything and an EXPENSIVE half asked of almost nothing (2026-08-05). The
   split is the load-bearing part; see Query, then pick under Key Decisions.
-  `entityStatements` still exists as the both-halves wrapper it always was, but
-  **the pipeline no longer calls it** — it needs the halves apart so it can pick
-  anchors between them.
+  There is no both-halves wrapper: `entityStatements` was kept for a day after
+  the split and deleted 2026-08-05, never having had a caller or a test. Call
+  `partnerStatements`, pick anchors, then `resolveMappability`.
   (1) `partnerStatements` — the cheap OPTIONAL query, one per 100 candidates,
   now asked of EVERY candidate anchor on the page rather than the two per
   section picked blind. Answers Met objects (P3634), Art Institute of Chicago (P4610),

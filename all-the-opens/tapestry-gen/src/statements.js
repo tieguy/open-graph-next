@@ -404,15 +404,14 @@ export async function resolveMappability(map, only) {
   return map
 }
 
-/**
- * Both halves, for callers that want every anchor resolved end to end — the
- * shape this module exposed before the split. The pipeline no longer uses it:
- * it needs the halves apart, so it can pick anchors between them.
- */
-export async function entityStatements(qids) {
-  const map = await partnerStatements(qids)
-  return resolveMappability(map, [...map.keys()])
-}
+// `entityStatements` — both halves in one call — was kept here for a day after
+// the split as "the shape this module exposed before", and deleted 2026-08-05
+// with no caller and no test ever having referenced it. The same commit that
+// made the split retired `prioritizeCitations` for being dead while four tests
+// kept it looking alive; keeping this one on the weaker excuse of a doc comment
+// was the same mistake with better manners. `partnerStatements` then
+// `resolveMappability` is the only way this is used, because picking anchors
+// happens between them.
 
 // ---- per-partner object fetchers → entries --------------------------------
 
