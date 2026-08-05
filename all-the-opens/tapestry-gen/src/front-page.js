@@ -152,9 +152,14 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 /* The search field is the thesis: an encyclopedia headword waiting to be
    written. Serif, oversized, underlined like an entry — not a widget. */
 .ask{margin:44px 0 10px;max-width:44rem}
+/* appearance:none and the two ::-webkit-search-* rules undo what type=search
+   brings with it — Safari's inset chrome and the little grey clear button —
+   so the field keeps reading as an encyclopedia headword rather than a widget. */
 .ask input{width:100%;background:transparent;border:0;border-bottom:2px solid var(--ink);
   font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.3rem);color:var(--head);
-  padding:6px 2px 10px;border-radius:0}
+  padding:6px 2px 10px;border-radius:0;appearance:none;-webkit-appearance:none}
+.ask input::-webkit-search-decoration,
+.ask input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
 .ask input::placeholder{color:#b6babf;font-style:italic}
 .ask input:focus{outline:none;border-bottom-color:var(--link)}
 .ask input:focus-visible{outline:2px solid var(--link);outline-offset:6px}
@@ -221,8 +226,15 @@ ${legend.style}
     museums that publish their own collections, scientists who post their papers openly, mappers and
     naturalists who chart the planet for free. This experiment invites them in.
     <b>Pick an article, and see who else is out there.</b></p>
-  <form class="ask" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
-    <input name="q" placeholder="Any article title — try your hometown" autofocus
+  <form class="ask" role="search" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
+    <!-- type=search and role=search are the standards-based half of telling a
+         password manager this is not a login: a lone untyped input in a form,
+         with autofocus, is exactly the shape they read as a username box. The
+         data- attributes are the vendor opt-outs (1Password, LastPass,
+         Bitwarden, Dashlane), inert everywhere else. -->
+    <input name="q" type="search" placeholder="Any article title — try your hometown" autofocus
+      autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
+      data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other"
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
