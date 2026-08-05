@@ -375,18 +375,17 @@ function broadNotes(notes, inline) {
       // heading, Europeana's is only the openly licensed items — the API asks
       // for `reusability=open` and the browse link carries that filter, so
       // dropping the word here would misdescribe the number and the link both.
-      // The phrasing deliberately matches the disclosure line these replace.
       const what =
         n.source === 'europeana'
-          ? `Europeana’s partners link ${total} openly licensed items to ` +
+          ? `the ${total} openly licensed items Europeana’s partners link to ` +
             `“${n.label ?? 'this'}”`
           : n.heading
-            ? `${name}’s partner institutions catalog ${total} items under the heading “${n.heading}”`
-            : `${name} holds ${total} items under “${n.label ?? 'this'}”`
+            ? `the ${total} items ${name}’s partners catalog under “${n.heading}”`
+            : `the ${total} items ${name} holds under “${n.label ?? 'this'}”`
       return (
         `<p class="broad">${favicon(n.source, inline)}` +
-        `<span class="broad-text">${escapeHtml(what)} — too many, and too general, ` +
-        `for this page to choose four that belong here. ` +
+        `<span class="broad-text"><b>Not shown here:</b> ${escapeHtml(what)} — a heading ` +
+        `too broad for this page to choose four that would belong. ` +
         `<a href="${escapeHtml(n.url)}" target="_blank" rel="noopener">Browse them at ${escapeHtml(name)} ↗</a>` +
         `</span></p>`
       )
@@ -516,8 +515,15 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const disclosure = b.disclosure
     ? `<p class="disclosure"><b>A sample, not the whole shelf:</b> ${escapeHtml(b.disclosure)}</p>`
     : ''
+  // The broad notes close the deck, after the shelves. They are statements
+  // about an ABSENCE, and putting them above the shelves made a reader meet a
+  // paragraph about cards that are not there before reaching the cards that
+  // are — on Brown v. Board it landed directly under the disclosure, so two
+  // grey boxes sat side by side saying "here is a sample of 54" and "1,409 is
+  // too many to sample", with the DPLA shelf one of them described two shelves
+  // further down. Last, and in a different voice, they cannot be confused.
   const broad = broadNotes(b.broad, inline)
-  const deckBody = disclosure + broad + media
+  const deckBody = disclosure + media + broad
   return {
     rail: hero ? `<aside class="rail">${heroCard(hero, inline)}</aside>` : '',
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
@@ -979,13 +985,17 @@ sup.ref a:hover{text-decoration:underline}
 .hero-card .why,.hero-card .prov summary.why{font-size:.72rem}
 .hero-card .prov p{font-size:.68rem}
 
-/* An anchor too broad to sample: the count, and the door. Sits in the deck
-   where its shelf would have been, so a reader sees what was declined and not
-   merely an absence. */
+/* An anchor too broad to sample: the count, and the door. Deliberately NOT a
+   filled slab like .disclosure — that one describes shelves the reader can
+   see, this one describes shelves that are not there, and rendering the two
+   alike made them read as contradicting each other. A hairline above and open
+   air behind it: a note about an absence, closing the deck. */
 .broad{display:flex;gap:9px;align-items:baseline;flex:1 1 100%;font-family:var(--sans);
-  font-size:.7rem;line-height:1.5;color:var(--muted);margin:0 0 12px;padding:8px 10px;
-  background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
-.broad .fav{flex:none;width:14px;height:14px;transform:translateY(2px)}
+  font-size:.7rem;line-height:1.5;color:var(--muted);margin:4px 0 0;padding:9px 0 0;
+  border-top:1px dotted var(--rule)}
+.broad+.broad{margin-top:0}
+.broad b{color:var(--ink);font-weight:700}
+.broad .fav{flex:none;width:14px;height:14px;transform:translateY(2px);opacity:.75}
 .broad-text{min-width:0}
 .broad a{font-weight:600;white-space:nowrap}
 

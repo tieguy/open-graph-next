@@ -149,8 +149,8 @@ test('an anchor too broad to sample becomes a sentence and a browse link', () =>
   assert.match(deck, /<p class="broad">/)
   // "openly licensed" is not decoration: the count and the browse link both
   // carry Europeana's reusability=open filter, so the sentence must too.
-  assert.match(deck, /Europeana’s partners link 6,123 openly licensed items to “oil painting”/)
-  assert.match(deck, /too many, and too general, for this page to choose four/)
+  assert.match(deck, /<b>Not shown here:<\/b> the 6,123 openly licensed items Europeana’s partners link to “oil painting”/)
+  assert.match(deck, /a heading too broad for this page to choose four that would belong/)
   assert.match(deck, /Browse them at Europeana ↗/)
   // No cards were invented to stand in for the ones that were not shown.
   assert.doesNotMatch(deck, /öljymaalaus/)
@@ -169,8 +169,19 @@ test('DPLA’s broad note counts what its partners cataloged, under the authoriz
       },
     ],
   })
-  assert.match(deck, /DPLA’s partner institutions catalog 3,016 items under the heading “Space flight”/)
+  assert.match(deck, /<b>Not shown here:<\/b> the 3,016 items DPLA’s partners catalog under “Space flight”/)
   assert.doesNotMatch(deck, /openly licensed/)
+  // It must not open with the disclosure's words. On Brown v. Board the two
+  // land in one deck — "a sample of 54" and "1,409 is too many to sample" —
+  // and phrasing them alike made them read as contradicting each other.
+  const both = bandParts({
+    ...BAND,
+    disclosure: '4 of the 54 items DPLA’s partner institutions catalog under X',
+    broad: [{ source: 'dpla', label: 'the court', heading: 'United States. Supreme Court', total: 1409, url: 'https://dp.la/x' }],
+  }).deck
+  // The sample line comes first, the shelves next, the absence last.
+  assert.ok(both.indexOf('A sample, not the whole shelf') < both.indexOf('<div class="carousel"'))
+  assert.ok(both.indexOf('<div class="carousel"') < both.indexOf('Not shown here'))
 })
 
 test('a card says which anchor brought it here', () => {
