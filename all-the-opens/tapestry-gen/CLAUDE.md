@@ -58,7 +58,8 @@ through an async `emit('spine'|'band', …)` callback — batch ignores the
 events, streaming writes fragments from them. `emit('spine', {page, units,
 dropped})` fires before any pivot; `emit('band', band)` fires per band in
 COMPLETION order. `discover()` resolves to `{title, bands, stats, dropped,
-opinion}`, bands in ARTICLE order.
+opinion, reach}`, bands in ARTICLE order. `reach` is what the article itself
+already contains — see the visibility panel below.
 
 **Callers must render the resolved title, never their own input** (2026-08-04):
 every parse call sends `redirects=1`, `fetchArticle` returns the API's own
@@ -66,14 +67,15 @@ every parse call sends `redirects=1`, `fetchArticle` returns the API's own
 resolved title. A redirect that lingered in the caller's string would name an
 article the page is not.
 
-Streaming profile (Barbara McClintock, **2026-08-03, before this branch**):
-spine 0.9s, first rail 4.5s, complete ~9s; the tail is the Commons queue,
-serial by etiquette. Phase 3 moved the first rail deliberately — the depicts
-chain seeds from `categoryFilesPromise`, which sits on every band's path — so
-treat these as the pre-branch shape, not current. A cold spot-check on
-2026-08-04 put first rail at ~4.7s against a ~55s completion on this page, and
-*earlier* than baseline on another; the property that matters is that the
-first rail still arrives far ahead of completion, not the absolute seconds.
+Streaming profile: **stale, and the shape has changed** (2026-08-04). The old
+figures (spine 0.9s, first rail 4.5s, complete ~9s) were dominated by the
+Commons queue, serial by etiquette, and by the depicts chain that put
+`categoryFilesPromise` on every band's path. Both are gone with Commons, and
+with them the only cross-band dependency — a band now waits solely on the
+global batches it will actually read. Cold McClintock measured 62.8s / 21
+requests on 2026-08-04 after the change; warm reruns are offline. Re-measure
+before quoting anything. The property that matters is that the first rail
+still arrives far ahead of completion, not the absolute seconds.
 
 ## Deployed demo
 
@@ -96,13 +98,62 @@ The container cache is ephemeral by design.
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 
+## The visibility panel — and why Commons left (2026-08-04, LUI-122)
+
+Under the masthead's credit bar sits one quiet line — *"Who helped, and who
+Wikipedia doesn't show"* — **shut by default**, opening into a two-column table
+of the partners this page drew on: *Helping here* (cards and footnotes it gave
+this page) against *On Wikipedia* (`shown, and credited` / `a link only` /
+`invisible`), then the page's citation tally and the explanation. It is a
+*measurement*, not a request — "these exist, no established route surfaces them
+here" — because a request walks straight into WP:ELBURDEN and a report does
+not. Two columns because they answer two different questions and prose kept
+running them together; shut by default because a reader who has not yet
+wondered whether Wikipedia shows any of this should meet a line, not a table. Built by `src/gap.js` (pure) from three
+extra `prop=` fields on the parse call the spine already makes
+(`templates|images|externallinks`), so it costs **zero** requests. Only
+Kartographer reaches the `shown` tier; detection is `mw-kartographer` in the
+rendered HTML, not a template name, because a dozen infoboxes embed a map.
+
+**Never write "there is no route."** A bare external link is always possible.
+The defensible claim is that no *established* route preserves the content
+*and* the credit.
+
+**Never write "Wikipedia can't show."** It could; it doesn't. "Can't" asserts
+an impossibility and so argues against the whole point of the exercise —
+nothing stops Wikipedia showing these things but established practice, which
+is a thing that can change. Say "doesn't" (caught in review, 2026-08-04).
+
+**Never write the bare phrase "the article" in reader-facing copy.** The reader
+is looking at a page that shows every partner, so "the article can show you one
+of them" reads as a flat contradiction until you know it means the article *on
+Wikipedia*. Say "the Wikipedia article" every time (`THE_ARTICLE` in
+`emit-html.js`). Caught in review, 2026-08-04.
+
+The flat "Today, help came from:" credit bar stays, and is what the masthead
+leads with. It was briefly merged into the panel — the two named the same
+organizations — but once the panel folded shut the duplication stopped costing
+anything and the bar is the friendlier opening.
+
+**Wikimedia Commons is no longer a partner on article pages.** It was ~85% of
+every page's cards (Angkor Wat 92/107, Coral Gables 88/102), which drowned out
+the non-Wikimedia partners the demo exists to show — and worse, it argued
+against the page's own thesis: Commons is the single door through which an
+outside institution's work must pass to be seen here, arriving as a Commons
+file rather than as theirs, so shelving it beside the Met implied they were
+peers. Removing it took the P180 depicts pivot, the P373 category pivot,
+`dropSeenFiles`, and the whole unit-to-unit `seen` chain with it — that
+machinery existed for Commons alone. Commons now appears only in the
+visibility panel, named as the door. Page density is the cost, paid
+deliberately: Angkor Wat 107 cards → 15, Coral Gables 102 → 14.
+
 ## Evidence classes (spike)
 
 An edge is one of two live things, and the render distinguishes them because
 conflating them would overstate what the page knows:
 
 - **identifier** — a shared authority ID (ISBN/OCLC/LCCN → Internet Archive).
-- **statement** — a Wikidata claim (`P180 depicts` → Commons).
+- **statement** — a Wikidata claim (`P3634` → the Met's own record of the object).
 - **corroborated** — *retired 2026-08-03 (front-page review)*: the
   described-object search fallback (`P1026` → author + year + institution) is
   commented out in `src/discover.js`. Its one exemplar was closed the right
@@ -129,8 +180,10 @@ requests**. Two of the eight extra requests are the mappability follow-ups
 (`query.wikidata.org` is 3 per page now, not 1); the rest are partner pivots
 this profile never separated out. Two changes push the other way — batching the
 subject lookup into the title batch costs one fewer en.wikipedia.org request
-per page (Prandtl and Dapples both 4→3), and page-wide depicts dedup drops
-Commons requests with the duplicate files (Dapples 14→13). The wall-clock is
+per page (Prandtl and Dapples both 4→3). **Superseded by the Commons removal**
+(2026-08-04): commons.wikimedia.org is no longer called at all, which was the
+largest single block of requests on every page — cold McClintock is 21
+requests now. The wall-clock is
 **not** comparable across dates: cold runs are dominated by live upstream
 latency, and a review the same day measured cold pages at 55–67s on code that
 predates this branch. Treat 47 as the current request count and the seconds as
@@ -138,7 +191,7 @@ weather.
 
 ## Partner pivots (2026-08-03)
 
-Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
+Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
 
 - **Scholarly** (`src/scholarly.js`) — citation anchors carrying a DOI or PMID
   batch through **OpenAlex** (no key; `mailto` carries the operator contact);
@@ -169,21 +222,20 @@ Beyond IA/OpenLibrary/Commons, two pivot families (both budgeted per section):
   OpenStreetMap map cards for locatable, extant places only (one per section max;
   non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
-  band on its most prominent labelled anchor; the anchor is a *cataloger's*
+  band on its most prominent labeled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
   pivot silently skips, so clones run keyless.
 - **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
   through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
-  card names its item's licence. Gated on `EUROPEANA_API_KEY`, same keyless-
+  card names its item's license. Gated on `EUROPEANA_API_KEY`, same keyless-
   skip rule. The
   subject's own statements enrich the lede. Map images are single OSM tiles
   fetched server-side and inlined as data URIs — **never**
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
-  and never browser-hotlinked (OSMF tile policy). Ordering is deliberate:
-  Commons carousels come LAST in every band — the demo's point is the
-  breadth of non-Wikimedia partners.
+  and never browser-hotlinked (OSMF tile policy). Every partner here is
+  outside Wikimedia by design — that breadth IS the demo.
 
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
@@ -227,25 +279,27 @@ tally/line — moved here from `discover.js` 2026-08-04) → `emit-html`.
   No section numbering: Wikipedia doesn't number, so neither do we.
   `sanitizeFragment` in `src/wikipedia.js` is the only thing that lets
   article HTML through; everything else is still escaped.
-- **Every Wikidata- or Commons-backed card carries a provenance fold**
-  (2026-08-03 late): an ⓘ `<details>` whose text states the exact chain
-  (`entry.trace`) and links the statement it rests on (`entry.fix` —
-  `wikidata.org/wiki/Q…#P…`, or the Commons file page for P180 depicts),
-  because Wikidata's statement anchor IS the edit button. Stamped where the
-  qid is in scope: `statementEntries` (Met/AIC/IIIF/iNat/GBIF/maps),
-  discover's Commons-depicts loop, lede extras (P648/P496/P373), DPLA
-  (P244), Europeana (P7704). Citation-derived cards (OpenAlex/arXiv/IA) have
-  no fold — nothing there is editable on Wikidata.
+- **Every Wikidata-backed card carries a provenance fold** (2026-08-03 late):
+  an ⓘ `<details>` whose text states the exact chain (`entry.trace`) and links
+  the statement it rests on (`entry.fix` — `wikidata.org/wiki/Q…#P…`), because
+  Wikidata's statement anchor IS the edit button. Stamped where the qid is in
+  scope: `statementEntries` (Met/AIC/IIIF/iNat/GBIF/maps), lede extras
+  (P648/P496), DPLA (P244), Europeana (P7704). Citation-derived cards
+  (OpenAlex/arXiv/IA) have no fold — nothing there is editable on Wikidata.
+  The fold's text is written for a reader who has never heard of Wikidata: it
+  says what Wikidata is on first mention, and the P-number rides along in
+  parentheses rather than standing in for the explanation.
 - **Nothing enriches twice, and article order decides who owns it**
   (`src/dedup.js`, 2026-08-04). An anchor QID belongs to the band of its
   *first* mention (`claimAnchors`; a band whose early candidates were claimed
   upstream backfills from its later ones, and the subject QID is seeded to the
-  lede), and a Commons file renders once per page (`dropSeenFiles`, threaded
-  unit-to-unit as one chained `seen` Set, seeded from the subject's category
-  files). Both are **pure over article-ordered input** because bands run and
-  emit in COMPLETION order — any first-come-wins state read at band-run time
-  would make the page nondeterministic and break batch byte-reproducibility.
-  A band task must therefore never read the shared `seen` Set itself. Nothing
+  lede). It is **pure over article-ordered input** because bands run and emit
+  in COMPLETION order — any first-come-wins state read at band-run time would
+  make the page nondeterministic and break batch byte-reproducibility. The
+  companion `dropSeenFiles` and its unit-to-unit `seen` chain went with
+  Commons on 2026-08-04; if page-wide dedup is ever needed again, read that
+  deleted code first — the purity argument is why it looked the way it did.
+  Nothing
   vanishes silently: the disclosure line says "N shown earlier on this page".
 - **True image dimensions** are read from JPEG/PNG headers (`imagesize`) so covers
   and photos are never squashed by a guessed aspect.
@@ -321,9 +375,16 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 
 - `src/discover.js` — the live-discovery pipeline both entry points share.
 - `src/citations.js` — citation extraction, reachability ranking, OpenLibrary
-  access, and the coverage tally/line (`citationCoverage` / `coverageText`).
+  access, and the citation tally (`citationCoverage` per band → `pageCitations`
+  summed → `citationHeadline`). Said **once per page**, in the visibility
+  panel: per section it fired 36 times on San Francisco and 26 of those
+  reported nothing but a failure to find, and its "27 works" sat directly under
+  the fold's "18 notes" — two totals of different things reading as a
+  contradiction (2026-08-04 review).
 - `src/dedup.js` — `claimAnchors` / `dropSeenFiles`: page-wide, article-ordered,
   pure. See Key Decisions for why purity is load-bearing.
+- `src/gap.js` — pure: what the ARTICLE reaches, and each partner's visibility
+  tier against it. See the visibility panel above.
 - `src/emit-html.js` — the HTML render, batch and streaming.
   `src/html.js` — `escapeHtml`, shared by every renderer.
 - `spike.js` — the batch live-discovery entry point (see Two entry points).

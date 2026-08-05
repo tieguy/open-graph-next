@@ -33,7 +33,7 @@ async function main() {
   // Everything below names the article discovery actually read, not argv:
   // `node spike.js "Coral_Gables"` renders Coral Gables, Florida, and the
   // file, the <h1> and the footer must all say so.
-  const { title, bands, stats, dropped, opinion } = await discover(page)
+  const { title, bands, stats, dropped, opinion, reach } = await discover(page)
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   const out = join(HERE, 'demo', `spike-${slug}.html`)
 
@@ -55,7 +55,7 @@ async function main() {
   // Source icons travel too, and for a sharper reason than the covers: several
   // of these sites refuse cross-origin hotlinks outright (CourtListener answers
   // 403), so a live <img> is a guaranteed broken image for the sources readers
-  // are least likely to recognise unaided. Only the icons this page will show
+  // are least likely to recognize unaided. Only the icons this page will show
   // are fetched, and anything that fails simply renders as a name.
   for (const url of iconUrls()) {
     if (inline.has(url)) continue
@@ -67,6 +67,8 @@ async function main() {
     title,
     bands,
     inline,
+    // What the article itself already reaches, for the visibility panel.
+    reach,
     // The page opens by saying it used no curated dataset; the footer has to
     // agree with it. No timestamp — a rerun off the same cache must produce the
     // same bytes.
@@ -87,7 +89,7 @@ async function main() {
     `\n${title}: ${stats.sections} sections, ${stats.anchorsCite} citation anchors ` +
       `(${stats.viaShortCite} via the bibliography), ${stats.anchorsScholar} scholarly anchors, ` +
       `${stats.anchorsQid} entity anchors -> ${stats.ia} IA + ${stats.scholar} open papers + ` +
-      `${stats.commons} Commons + ${stats.statements} partner-statement items` +
+      `${stats.statements} partner-statement items` +
       (opinion ? ' + 1 Free Law opinion' : '') +
       (dropped > 0 ? ` (${dropped} sections dropped by MAX_SECTIONS)` : ''),
   )

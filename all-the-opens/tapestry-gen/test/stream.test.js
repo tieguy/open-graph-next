@@ -31,11 +31,11 @@ const BAND = {
   blocks: UNITS[1].blocks,
   entries: [
     {
-      source: 'wikimedia_commons',
+      source: 'met',
       title: 'A photo',
       imageUrl: 'https://example.test/x.jpg',
       attribution: { author: 'Someone', license: 'CC0' },
-      why: 'Depicts Santiago Calatrava, a link in this section',
+      why: 'About Santiago Calatrava, which this section links to',
     },
   ],
   footnotes: [
@@ -46,9 +46,7 @@ const BAND = {
       access: { url: 'https://archive.org/details/abook', label: 'Borrow at the Internet Archive' },
     },
   ],
-  coverage: '1 work cited here',
   disclosure: null,
-  broad: false,
 }
 
 test('streamOpen carries the whole spine with band ids, no numbering, and no rails', () => {
@@ -90,17 +88,23 @@ test('references float in the rail; media shelves ride the full-width deck', () 
   assert.doesNotMatch(deck, /References in this section/)
   // A disclosure describes the media, so it opens the deck when one exists.
   const disclosed = bandParts({ ...BAND, disclosure: 'Media anchored on X' })
-  assert.match(disclosed.deck, /^<div class="deck"><p class="disclosure">Media anchored on X<\/p>/)
+  assert.match(
+    disclosed.deck,
+    /^<div class="deck"><p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
+  )
   assert.doesNotMatch(disclosed.rail, /disclosure/)
   // …and falls back to the rail when the band has notes but no media.
   const noMedia = bandParts({ ...BAND, entries: [], disclosure: 'Media anchored on X' })
-  assert.match(noMedia.rail, /<p class="disclosure">Media anchored on X<\/p>/)
+  assert.match(
+    noMedia.rail,
+    /<p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
+  )
   assert.equal(noMedia.deck, '')
 })
 
 test('a card says which anchor brought it here', () => {
   const rail = bandRail(BAND)
-  assert.match(rail, /<p class="why">Depicts Santiago Calatrava, a link in this section<\/p>/)
+  assert.match(rail, /<p class="why">About Santiago Calatrava, which this section links to<\/p>/)
 })
 
 test('a card with a trace grows an ⓘ fold: the exact chain, and the door to the fix', () => {
@@ -121,13 +125,13 @@ test('a card with a trace grows an ⓘ fold: the exact chain, and the door to th
   assert.doesNotMatch(bandRail(BAND), /class="prov"/)
 })
 
-test('one source, two topics: the carousel splits, one labelled strip per topic', () => {
+test('one source, two topics: the carousel splits, one labeled strip per topic', () => {
   const mk = (title, topic) => ({
-    source: 'wikimedia_commons',
+    source: 'met',
     title,
     imageUrl: `https://example.test/${title}.jpg`,
     topic,
-    why: `Depicts ${topic}, a link in this section`,
+    why: `About ${topic}, which this section links to`,
   })
   const rail = bandRail({
     ...BAND,
@@ -145,9 +149,12 @@ test('one source, two topics: the carousel splits, one labelled strip per topic'
   // The shared why line is said once under the head, not on every card.
   assert.match(
     rail,
-    /<p class="carousel-why">Depicts suspension bridge, a link in this section<\/p>/,
+    /<p class="carousel-why">About suspension bridge, which this section links to<\/p>/,
   )
-  assert.doesNotMatch(rail, /<p class="why">Depicts suspension bridge, a link in this section<\/p>/)
+  assert.doesNotMatch(
+    rail,
+    /<p class="why">About suspension bridge, which this section links to<\/p>/,
+  )
 })
 
 test('one source, one topic: a single carousel with no topic label, as before', () => {
@@ -164,10 +171,9 @@ test('the rail shows the actual footnotes, numbered as the prose numbers them', 
   assert.match(rail, /A Book/)
   // The open ecosystem's access link rides on the note itself.
   assert.match(rail, /Borrow at the Internet Archive/)
-  assert.match(rail, /1 work cited here/)
 })
 
-test('the references fold closed; the coverage line stays out in the open', () => {
+test('the references fold closed, with nothing else in the rail beside it', () => {
   const fns = Array.from({ length: 14 }, (_, i) => ({
     id: `s3-note-${i}`,
     num: String(i + 1),
@@ -178,8 +184,9 @@ test('the references fold closed; the coverage line stays out in the open', () =
   // Every note lives inside the fold, whose one-line summary counts them…
   assert.match(rail, /<details class="fn-fold"><summary>References in this section · 14<\/summary>/)
   assert.match(rail, /s3-note-13/)
-  // …and the coverage line is a sibling of the fold, visible while it is shut.
-  assert.match(rail, /<\/details><p class="coverage">1 work cited here<\/p>/)
+  // The coverage line that used to sit beneath the fold is gone: it is now one
+  // page-level sentence in the visibility panel (2026-08-04 review).
+  assert.doesNotMatch(rail, /class="coverage"/)
 })
 
 test('streamBand wraps the same rail band() would embed, targeted at its band', () => {
@@ -195,12 +202,44 @@ test('a band with nothing to show streams nothing', () => {
 
 test('hero extras fill the legend from the sources actually used', () => {
   const extras = streamHeroExtras([BAND])
-  assert.match(extras, /Wikimedia Commons/)
+  assert.match(extras, /The Met/)
   // The access link makes the page an Internet Archive page too.
   assert.match(extras, /Internet Archive/)
   assert.match(extras, /__fill\("tpl-legend",".legend"\)/)
-  // No corroborated cards → no notes fragment at all.
+  // Without `reach` there is no visibility panel and no corroborated cards,
+  // so neither extra fragment is emitted at all.
   assert.doesNotMatch(extras, /tpl-notes/)
+  assert.doesNotMatch(extras, /tpl-gap/)
+  // The credit bar is always filled — it is what the masthead leads with.
+  assert.match(extras, /tpl-legend/)
+})
+
+test('hero extras carry the visibility panel once the page knows what it found', () => {
+  const reach = {
+    hosts: new Set(['archive.org']),
+    templates: new Set(),
+    images: 3,
+    kartographer: false,
+    identifierBar: false,
+  }
+  const extras = streamHeroExtras([BAND], { reach })
+  // Mounted into the masthead's second column — beside what the page says
+  // about itself, never above it.
+  assert.match(extras, /__fill\("tpl-gap",".gap-slot"\)/)
+  // Shut by default: a reader meets one quiet line, not a table.
+  assert.match(extras, /<details class="gap"><summary>Who helped, and who Wikipedia doesn’t show<\/summary>/)
+  // The Archive is linked from the article; the Met is nowhere in it.
+  // Two columns, so the two frames are structural rather than left to prose:
+  // what the partner gave THIS page, and what Wikipedia can show of it.
+  assert.match(extras, /<th scope="col">Helping here<\/th><th scope="col">On Wikipedia<\/th>/)
+  assert.match(extras, /<tr class="gap-link"><th scope="row" class="gap-who">Internet Archive/)
+  assert.match(extras, /<tr class="gap-invisible"><th scope="row" class="gap-who">The Met/)
+  // "the article" alone reads as THIS page, which does show all of them.
+  assert.match(extras, /The original Wikipedia article links to one of them and does not surface the rest/)
+  // Never "can't": the premise is that Wikipedia could, and does not.
+  assert.doesNotMatch(extras, /can(no|’)t show/)
+  // Never "there is no route" — a bare external link always exists.
+  assert.doesNotMatch(extras, /no route/i)
 })
 
 test('open + fragments + close compose a complete document', () => {
@@ -215,4 +254,22 @@ test('open + fragments + close compose a complete document', () => {
   // Every template the page opens is mounted by a matching script call.
   const templates = [...page.matchAll(/<template id="([^"]+)"/g)].map((m) => m[1])
   for (const t of templates) assert.ok(page.includes(`"${t}"`), `no mount for ${t}`)
+})
+
+test('the streamed shell says it is still looking until the legend arrives', () => {
+  // Between the spine and the last rail the page knows none of its sources, so
+  // the masthead used to show "Today, help came from:" above an empty strip.
+  const open = streamOpen({ title: 'T', units: UNITS, home: '/' })
+  assert.match(open, /<span class="finding" role="status">Asking libraries/)
+  // No invented denominator: the page cannot know how many it will find, so
+  // the stand-in carries no number at all. (Scoped to the span — the
+  // stylesheet is full of legitimate percentages.)
+  const finding = /<span class="finding"[^>]*>([^<]*)</.exec(open)[1]
+  assert.doesNotMatch(finding, /\d|%/)
+  // __fill replaces the legend's children, so the stand-in needs no teardown.
+  const extras = streamHeroExtras([BAND])
+  assert.match(extras, /__fill\("tpl-legend",".legend"\)/)
+  assert.doesNotMatch(extras, /class="finding"/)
+  // A cut stream must stop claiming to still be looking.
+  assert.match(open, /Stopped before the search finished/)
 })

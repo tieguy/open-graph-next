@@ -54,7 +54,7 @@ test('openAlexEntry only exists when the work is actually open', () => {
   )
   assert.equal(open.href, 'https://x.test/pdf')
   assert.equal(open.description, 'A. Author et al. · 2020')
-  // The reason class, so a cited paper never shares an unlabelled strip with
+  // The reason class, so a cited paper never shares an unlabeled strip with
   // the subject's own ORCID shelf in the lede.
   assert.equal(open.topic, 'Cited in this section')
   assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
@@ -177,19 +177,24 @@ test('only openly licensed photos illustrate a taxon; reserved-rights sets say s
     default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A', license_code: null },
   })
   assert.equal(reserved.imageUrl, null)
-  assert.match(reserved.attribution.author, /none under an open licence/)
+  assert.match(reserved.attribution.author, /none under an open license/)
 })
 
-test('an open paper card names the licence of its open copy, or admits read-only', () => {
+test('an open paper card names the license of its open copy, or admits read-only', () => {
   const base = {
     title: 'T',
     open_access: { is_oa: true, oa_status: 'gold', oa_url: 'https://x.test/pdf' },
     authorships: [{ author: { display_name: 'A' } }],
   }
   const ccby = openAlexEntry({ ...base, best_oa_location: { license: 'cc-by' } }, 'doi')
-  assert.equal(ccby.attribution.author, 'open access · gold · CC BY')
+  assert.equal(ccby.attribution.author, 'Free to read · CC BY')
+  // No license known: say only what is true. `oa_status` ("gold", "green")
+  // is publisher-workflow jargon and told a reader nothing.
   const bronze = openAlexEntry(base, 'doi')
-  assert.equal(bronze.attribution.author, 'open access · gold · free to read')
+  assert.equal(bronze.attribution.author, 'Free to read')
+  // `other-oa` is not a license and must never be printed as one.
+  const vague = openAlexEntry({ ...base, best_oa_location: { license: 'other-oa' } }, 'doi')
+  assert.equal(vague.attribution.author, 'Free to read · terms not stated')
 })
 
 test('entries with no image still render as named cards (no fabricated visuals)', () => {
@@ -206,7 +211,9 @@ test('a mapped OSM feature beats a bare pin: link, zoom, and evidence follow it'
   const card = mapEntry({ lat: 41.8794, lon: -87.6239 }, 'Art Institute of Chicago', feature)
   assert.equal(card.href, 'https://www.openstreetmap.org/way/388436810')
   assert.match(card.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/15\//)
-  assert.match(card.description, /Mapped in OpenStreetMap as way 388436810/)
+  // The object id belongs in the ⓘ fold, not in a caption a reader must decode.
+  assert.match(card.description, /Traced by OpenStreetMap’s volunteer mappers/)
+  assert.doesNotMatch(card.description, /388436810/)
   assert.equal(card._via, 'P10689')
   // A relation alone still zooms to district scale, not a whole region.
   assert.equal(osmFeature({ osmr: '1870546' }).zoom, 11)

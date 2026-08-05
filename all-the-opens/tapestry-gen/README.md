@@ -42,7 +42,7 @@ gitignored.
 
 A single scrolling page: a two-column reading spine (article left; the
 ecosystem's media and cited sources in a right rail), media grouped into
-per-source horizontal carousels labelled with each source's own favicon, and
+per-source horizontal carousels labeled with each source's own favicon, and
 the section's selected sources ranked by reachability — a borrowable or
 readable book first, then an archived page, then a DOI, then a bare live link.
 Cited books link to their Internet Archive copy; OpenLibrary covers are inlined
@@ -50,9 +50,19 @@ as data URIs (they redirect through archive.org, so a live link would break
 whenever IA is down); map tiles are fetched server-side and inlined, never
 hotlinked. Built by `src/emit-html.js`.
 
-Every Wikidata- or Commons-backed card carries a provenance fold stating the
-exact chain that produced it and linking the statement it rests on — because
-Wikidata's statement anchor is also its edit button.
+Every Wikidata-backed card carries a provenance fold stating the exact chain
+that produced it and linking the statement it rests on — because Wikidata's
+statement anchor is also its edit button.
+
+Above the article, a panel says which of the partners on the page the article
+itself can show, which get a link, and which are invisible — measured against
+the article's own templates, pictures and external links, which ride along on
+the parse request the spine already makes. `src/gap.js`; the argument is
+LUI-122. **Wikimedia Commons is not one of the partners** (2026-08-04): it is
+Wikipedia's own household rather than a friend, it was ~85% of every page's
+cards, and shelving it beside the Met implied the two were peers when Commons
+is in fact the single door an outside institution's work must pass through to
+be seen at all. It now appears only in that panel, named as the door.
 
 ## Caching
 

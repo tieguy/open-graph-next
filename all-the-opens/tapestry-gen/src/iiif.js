@@ -78,12 +78,12 @@ export function iiifEntryFrom(manifest, manifestUrl, fallbackTitle) {
   return {
     source: 'iiif',
     title,
-    description: iiifString(manifest.summary ?? manifest.description) ?? 'IIIF digitised object',
+    description: iiifString(manifest.summary ?? manifest.description) ?? 'A digitised object, served by the library or museum that holds it',
     imageUrl,
     href: iiifHomepage(manifest, manifestUrl),
     attribution: {
       author: iiifCredit(manifest),
-      license: 'via P6108 IIIF manifest',
+      license: null,
     },
     _via: 'P6108',
   }

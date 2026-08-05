@@ -96,7 +96,7 @@ test('card text is escaped so titles cannot inject markup', () => {
 test('a commons file title is recovered from a thumbnail url', () => {
   const url =
     'https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Aldrin_Apollo_11_original.jpg/200px-Aldrin.jpg'
-  // Spaces, not underscores: the API normalises titles this way, and keying on
+  // Spaces, not underscores: the API normalizes titles this way, and keying on
   // the raw URL form makes every dimension lookup silently miss.
   assert.equal(commonsFileTitle(url), 'File:Aldrin Apollo 11 original.jpg')
   assert.equal(commonsFileTitle('https://archive.org/services/img/apollo11'), null)
@@ -116,7 +116,7 @@ test('the footer states the provenance its caller gives it', () => {
 test('a page with no stated provenance claims none', () => {
   const html = buildHtml({ title: 'T', description: 'd', bands: [] })
   assert.doesNotMatch(html, /Generated from/)
-  assert.match(html, /CC BY-SA 4\.0/, 'the licence line survives — it is true of every page')
+  assert.match(html, /CC BY-SA 4\.0/, 'the license line survives — it is true of every page')
 })
 
 // --- the legend describes this page, not the project ------------------------
@@ -155,7 +155,7 @@ test('a source with no fetchable icon still gets a legend entry, without a broke
 
 test('a source reached only through footnote links still makes the legend', () => {
   // Footnotes carry no source slug — they are links. Apollo 11's references
-  // borrow through OpenLibrary and the Archive twenty times, and both would
+  // borrow through the Archive and Open Library twenty times, and both would
   // otherwise vanish from the page's own legend.
   const bands = [
     {
@@ -170,5 +170,14 @@ test('a source reached only through footnote links still makes the legend', () =
       ],
     },
   ]
-  assert.deepEqual(sourcesUsed(bands), ['internet_archive', 'openlibrary'])
+  // Only the borrow link we added counts. The article's OWN link to
+  // openlibrary.org is the article citing a catalog, not Open Library
+  // helping — and crediting it would also make every partner the article
+  // already links look like a contributor in the visibility panel.
+  assert.deepEqual(sourcesUsed(bands), ['internet_archive'])
+  const withCatalog = [
+    { ...bands[0], footnotes: [{ ...bands[0].footnotes[0],
+      access: { url: 'https://openlibrary.org/books/OL1M', label: 'Cataloged · Open Library' } }] },
+  ]
+  assert.deepEqual(sourcesUsed(withCatalog), ['openlibrary'])
 })

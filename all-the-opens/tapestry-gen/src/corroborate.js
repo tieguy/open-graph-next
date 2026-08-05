@@ -100,7 +100,7 @@ function readableDate(value) {
  */
 export function matchesName(creator, personName) {
   if (!creator || !personName) return false
-  // Catalogue form is "Surname, Given"; a person's label is "Given Surname".
+  // Catalog form is "Surname, Given"; a person's label is "Given Surname".
   const parts = fold(creator).split(',')
   const surname = parts[0].trim()
   const given = (parts[1] ?? '').trim().split(/\s+/).filter(Boolean)

@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { claimAnchors, dropSeenFiles } from '../src/dedup.js'
+import { claimAnchors } from '../src/dedup.js'
 
 test('claimAnchors: first band in article order owns an anchor; later bands backfill', () => {
   const picks = claimAnchors(
@@ -29,27 +29,4 @@ test('claimAnchors: a seeded owner keeps its anchor even against earlier units',
 test('claimAnchors: null/undefined QIDs never claim a slot', () => {
   const picks = claimAnchors([[null, 'Q1', undefined]], { perUnit: 2 })
   assert.deepEqual(picks, [['Q1']])
-})
-
-test('dropSeenFiles: a file renders once, at its first article-order appearance', () => {
-  const lists = [
-    [{ _file: 'File:A.jpg' }, { _file: 'File:B.jpg' }],
-    [{ _file: 'File:B.jpg' }, { _file: 'File:C.jpg' }],
-  ]
-  const out = dropSeenFiles(lists, (e) => e._file)
-  assert.deepEqual(out.map((l) => l.map((e) => e._file)), [
-    ['File:A.jpg', 'File:B.jpg'],
-    ['File:C.jpg'],
-  ])
-})
-
-test('dropSeenFiles: entries with no key always pass', () => {
-  const out = dropSeenFiles([[{ title: 'x' }], [{ title: 'x' }]], (e) => e._file)
-  assert.equal(out.flat().length, 2)
-})
-
-test('dropSeenFiles: a pre-seeded set claims files before any list does', () => {
-  const seen = new Set(['File:A.jpg'])
-  const out = dropSeenFiles([[{ _file: 'File:A.jpg' }, { _file: 'File:B.jpg' }]], (e) => e._file, seen)
-  assert.deepEqual(out[0].map((e) => e._file), ['File:B.jpg'])
 })

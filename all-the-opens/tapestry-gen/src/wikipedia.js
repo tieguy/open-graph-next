@@ -20,7 +20,7 @@ function cachedGet(cacheDir, params) {
 /**
  * `prop=tocdata` sections, renamed to the fields the rest of this module has
  * always used. The API renamed `byteoffset` to `codepointOffset` in the move —
- * confirming empirically-discovered behaviour: it was never bytes. (It counts
+ * confirming empirically-discovered behavior: it was never bytes. (It counts
  * code points; JS slicing counts UTF-16 units, which diverge only on astral
  * characters — accepted, as before.)
  */
@@ -97,16 +97,28 @@ export async function fetchSectionWikitext(cacheDir, page, index) {
 }
 
 /**
- * The whole article in one request: section list, rendered HTML, and raw
- * wikitext together. This is the spine — what used to cost two requests per
- * section costs one per article, and the splitters below reproduce the
- * per-section views from it exactly.
+ * The whole article in one request: section list, rendered HTML, raw wikitext,
+ * and what the article already contains. This is the spine — what used to cost
+ * two requests per section costs one per article, and the splitters below
+ * reproduce the per-section views from it exactly.
+ *
+ * `templates|externallinks` ride along for free. They answer a question no
+ * pivot can: not what the open web holds, but how much of it this article is
+ * able to show (see `src/gap.js`). The house rule is to batch onto a request
+ * already being made rather than add one, and this is that rule paying out —
+ * two more fields on a response we were fetching anyway.
+ *
+ * `images` is deliberately NOT among them, and should not be added back as a
+ * way of counting what an article shows: on San Francisco it returns 108 files,
+ * of which one is a pronunciation recording, one is the red pushpin dot, three
+ * are relief-map base layers behind a single visible map, and a couple of dozen
+ * are template icons. The article displays 92. Count the rendered HTML.
  */
 export async function fetchArticle(cacheDir, page) {
   const body = await cachedGet(cacheDir, {
     action: 'parse',
     page,
-    prop: 'tocdata|text|wikitext',
+    prop: 'tocdata|text|wikitext|templates|externallinks',
     disableeditsection: '1',
     disabletoc: '1',
     // Without this a redirect title (e.g. "Coral Gables") parses as its own
@@ -120,6 +132,8 @@ export async function fetchArticle(cacheDir, page) {
     sections: fromTocdata(body.parse.tocdata?.sections),
     html: body.parse.text,
     wikitext: body.parse.wikitext,
+    templates: body.parse.templates ?? [],
+    externallinks: body.parse.externallinks ?? [],
   }
 }
 
@@ -218,7 +232,7 @@ export function commonsFileTitle(url) {
   const match = /upload\.wikimedia\.org\/wikipedia\/[^/]+\/thumb\/[0-9a-f]\/[0-9a-f]{2}\/([^/]+)\//.exec(
     url ?? '',
   )
-  // Underscores are normalised to spaces because that is how the API returns
+  // Underscores are normalized to spaces because that is how the API returns
   // titles; keying on the raw URL form silently misses every lookup.
   return match ? `File:${decodeURIComponent(match[1]).replace(/_/g, ' ')}` : null
 }
@@ -233,7 +247,7 @@ export function commonsFileTitle(url) {
  * why the dataset's stored 200px and 220px URLs are all dead. Asking for
  * `iiurlwidth` returns a `thumburl` that is valid by construction.
  *
- * `extmetadata` comes back in the same call, so licence and author cost no extra
+ * `extmetadata` comes back in the same call, so license and author cost no extra
  * request. A demo arguing for cooperative knowledge infrastructure should carry
  * the credit, not strip it.
  */
@@ -266,7 +280,7 @@ export async function fetchImageInfo(cacheDir, fileTitles, width = 1280) {
 }
 
 /**
- * Licence and author from a Commons file's `extmetadata`, or null when the file
+ * License and author from a Commons file's `extmetadata`, or null when the file
  * carries neither. Both values arrive as HTML (the Artist field is often an
  * anchor), so markup is stripped to plain text.
  */

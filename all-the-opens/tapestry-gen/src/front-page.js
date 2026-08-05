@@ -49,22 +49,22 @@ const SHOWCASE = [
 
 // The friends, each with its gift — the page's actual subject. Order is
 // roughly a reader's journey: books, papers, museums, nature, place, law,
-// media; the hosts close the list. The licence line states the terms of the
+// media; the hosts close the list. The license line states the terms of the
 // gift, because the terms ARE part of the story — and it must stay true of
-// the data this demo actually uses, not of the organisation in general.
+// the data this demo actually uses, not of the organization in general.
 const FRIENDS = [
   ['internet_archive', 'Internet Archive',
     'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.',
     'Public-domain scans free to read; in-copyright books lent, not copied.'],
-  ['openlibrary', 'OpenLibrary',
+  ['openlibrary', 'Open Library',
     'Knows every edition of every book — and which ones are actually open.',
     'Open bibliographic data, downloadable in bulk.'],
   ['openalex', 'OpenAlex',
     'Finds the free, legal copy of the paper behind the citation.',
-    'Catalog CC0. Only papers with an open copy are shown — each card names its licence; closed ones are counted, not carded.'],
+    'Catalog CC0. Only papers with an open copy are shown — each card names its license; closed ones are counted, not carded.'],
   ['arxiv', 'arXiv',
     'Keeps whole sciences open by construction — the preprint is the publication.',
-    'Metadata CC0; each paper names its own licence.'],
+    'Metadata CC0; each paper names its own license.'],
   ['met', 'The Met',
     'Shares its own record of its own objects, public domain wherever it can be.',
     'Public-domain works released CC0, images included.'],
@@ -79,10 +79,10 @@ const FRIENDS = [
     'Metadata CC0; each item’s rights stated by its holder.'],
   ['europeana', 'Europeana',
     'Europe’s answer: three thousand museums, libraries and archives behind one door.',
-    'Only openly licensed items are shown; each card names its licence.'],
+    'Only openly licensed items are shown; each card names its license.'],
   ['inaturalist', 'iNaturalist',
     'A community’s living field guide — photographs with the observer’s name on them.',
-    'Each photo carries its observer’s chosen licence; only openly licensed ones are shown here.'],
+    'Each photo carries its observer’s chosen license; only openly licensed ones are shown here.'],
   ['gbif', 'GBIF',
     'Draws where a species has been seen, from hundreds of millions of records.',
     'Records CC0 or CC BY, stated per dataset.'],
@@ -92,10 +92,17 @@ const FRIENDS = [
   ['free_law', 'Free Law Project',
     'Publishes the law itself. The opinion, not a paywall.',
     'Court opinions are public domain: nobody owns the law.'],
-  ['wikimedia_commons', 'Wikimedia Commons',
-    'Brings the photographs, freely licensed, of very nearly everything.',
-    'Every file free-licensed or public domain, credit shown on the file.'],
 ]
+
+// Wikimedia Commons is deliberately not on this list (2026-08-04). It is not
+// a friend of Wikipedia's, it is part of Wikipedia's own household — and on
+// these pages it was drowning everyone else out, ~85% of every page's cards.
+// Worse, it undercut the argument the pages exist to make: Commons is the
+// single door through which an outside institution's work must pass to be
+// seen here, and it arrives on the other side as a Commons file rather than
+// as theirs. Shelving it beside the Met implied the two were peers. It now
+// appears on an article page only where it truthfully belongs — named in the
+// visibility panel as the door. See LUI-122 and src/gap.js.
 
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
 
@@ -213,7 +220,7 @@ ${legend.style}
   <p class="lede">Alongside every Wikipedia article there is a wider open world: libraries that lend,
     museums that publish their own collections, scientists who post their papers openly, mappers and
     naturalists who chart the planet for free. This experiment invites them in.
-    <b>Pick an article, and watch its friends arrive.</b></p>
+    <b>Pick an article, and see who else is out there.</b></p>
   <form class="ask" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
     <input name="q" placeholder="Any article title — try your hometown" autofocus
       aria-label="English Wikipedia article title">
@@ -255,13 +262,29 @@ ${friends}
         <p>Wikidata states the connection outright — this painting is Met object 11417, this species
         is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
         <p>Each shelf says <i>who asked</i>, too: when one friend answers several of the
-        article&rsquo;s links, its cards split into one labelled shelf per link — and in the opening
+        article&rsquo;s links, its cards split into one labeled shelf per link — and in the opening
         section, works <i>by</i> the subject never share a shelf with works merely <i>cited</i>
         there.</p>
       </div>
       <div class="box">
         <h3>Challenges and future opportunities</h3>
         <p>This is a demo and not intended for production. Among other challenges:</p>
+        <h4>There is nowhere for most of this to go</h4>
+        <p>Each article page carries a fold — <i>Who helped, and who Wikipedia doesn’t show</i> —
+        sorting the friends who filled it into three states: shown and credited, a link only, or
+        invisible. Almost everyone lands in the last two, and the reason is the same every time, so
+        it is written here once rather than on every page.</p>
+        <p>Today, Wikipedia has one established route for putting an outside picture in an article:
+        the file must first be handed to Wikimedia, and from then on it is a Wikimedia file rather
+        than theirs. Every picture in every article arrived that way. Maps are the single
+        exception — OpenStreetMap is the only project outside Wikimedia that a Wikipedia article
+        puts on the page and credits by name. Everyone else chooses between handing the work over
+        and losing the relationship, or taking a line of text at the bottom. No established route
+        lets them show you what they hold <i>and</i> say it is theirs.</p>
+        <p>Note what is <i>not</i> being claimed: there is always a route, because a bare external
+        link is always possible. What is missing is a route that keeps the content and the credit
+        together. And nothing here says Wikipedia <i>cannot</i> — only that it does not. That is a
+        fact about established practice, and practice can change.</p>
         <h4>Page layout</h4>
         <p>Arbitrary content means great layout is somewhere between difficult and impossible. Work
         with designers on this challenge would be necessary (though even rudimentary implementations
@@ -291,7 +314,7 @@ ${friends}
     streamed as it is found — this server fetches politely, a few pages at a time, and caches what
     it has seen.</p>
   <p>Code is public domain (CC0) in <a href="https://github.com/tieguy/open-graph-next">open-graph-next</a>.
-    Article text CC BY-SA 4.0; every item carries its own licence and credit.</p>
+    Article text CC BY-SA 4.0; every item carries its own license and credit.</p>
   <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>
     about cooperative knowledge infrastructure and the future of libraries, and by the work of the
     <a href="https://tapestries.media">tapestries.media</a> team.</p>

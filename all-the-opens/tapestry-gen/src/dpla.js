@@ -63,18 +63,18 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
     href: doc.id ? `https://dp.la/item/${doc.id}` : doc.isShownAt,
     attribution: {
       author: provider,
-      license: 'via P244 LC authority',
+      license: null,
     },
     why:
-      `Catalogued under “${heading}” — the Library of Congress heading ` +
-      `Wikidata states for ${anchorLabel ?? 'this entity'}`,
+      `Filed under “${heading}” — the subject heading American libraries use ` +
+      `for ${anchorLabel ?? 'this'}`,
     topic: anchorLabel ?? heading,
     _via: 'P244',
   }
 }
 
 /**
- * Items DPLA's partners catalogued under an anchor's authorized heading.
+ * Items DPLA's partners cataloged under an anchor's authorized heading.
  * @returns {{entries: object[], total: number, heading: string}|null}
  */
 export async function dplaEntries(lcId, anchorLabel, key) {

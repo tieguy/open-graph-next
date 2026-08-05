@@ -6,8 +6,10 @@
 // statements; two small follow-ups decide which anchors are mappable places,
 // and the per-object fetches then ride each partner's own host queue.
 //
-// These are `statement` evidence — Wikidata states the connection outright —
-// so each card credits the property that made it.
+// These are `statement` evidence — Wikidata states the connection outright.
+// The property that made each card is named in its ⓘ fold, not in the credit
+// line: a reader looking at "The Met · public domain (CC0)" wants to know who
+// holds it and whether they may reuse it, and "via P3634" answers neither.
 
 import { chunk } from './batch.js'
 import { getJson } from './http.js'
@@ -122,7 +124,7 @@ export function classesUrl(classes) {
  * of the deleted design that asked WDQS the question directly and got xsd
  * booleans on the wire. mergePlaceDefunct writes them in JS now, so the
  * convention is purely internal; it is kept only because changing it would
- * touch every call site for no behavioural gain. An item nothing answered for
+ * touch every call site for no behavioral gain. An item nothing answered for
  * stays unmappable — refusal over wrongness, the same stance parseEarthPoint
  * takes for non-Earth globes.
  */
@@ -324,7 +326,7 @@ export function metEntryFrom(obj) {
     href: obj.objectURL ?? null,
     attribution: {
       author: obj.isPublicDomain ? 'The Met · public domain (CC0)' : 'The Met · rights reserved',
-      license: 'via P3634 Met object ID',
+      license: null,
     },
     _via: 'P3634',
   }
@@ -346,7 +348,7 @@ export function aicEntryFrom(body) {
     href: `https://www.artic.edu/artworks/${d.id}`,
     attribution: {
       author: d.is_public_domain ? 'Art Institute of Chicago · public domain' : 'Art Institute of Chicago',
-      license: 'via P4610 AIC artwork ID',
+      license: null,
     },
     _via: 'P4610',
   }
@@ -362,7 +364,7 @@ export async function aicEntry(id) {
 
 /**
  * The taxon's photo, but only an openly licensed one. Observers choose their
- * own licence and some reserve all rights; this page shows only what its
+ * own license and some reserve all rights; this page shows only what its
  * reader may reuse, so the default photo yields to the first CC-licensed one
  * (`license_code` is null on all-rights-reserved photos), and a taxon whose
  * photos are all reserved renders unillustrated — with the credit saying so,
@@ -393,8 +395,8 @@ export function inatEntryFrom(taxon) {
     attribution: {
       author:
         photo?.attribution ??
-        (hadAny ? 'photos exist, but none under an open licence — shown unillustrated' : null),
-      license: 'via P3151 iNaturalist taxon',
+        (hadAny ? 'photos exist, but none under an open license — shown unillustrated' : null),
+      license: null,
     },
     _via: 'P3151',
   }
@@ -416,7 +418,7 @@ export function gbifEntryFrom(species, id) {
     // organism has been observed.
     imageUrl: `https://api.gbif.org/v2/map/occurrence/density/0/0/0@2x.png?taxonKey=${id}&style=purpleYellow.point`,
     href: `https://www.gbif.org/species/${id}`,
-    attribution: { author: 'GBIF occurrence data · CC0/CC BY', license: 'via P846 GBIF taxon' },
+    attribution: { author: 'GBIF occurrence records · CC0 or CC BY', license: null },
     _via: 'P846',
   }
 }
@@ -454,7 +456,11 @@ export function mapEntry(coord, label, osm = null) {
   return {
     source: 'openstreetmap',
     title: label ? `Map: ${label}` : 'Map',
-    description: osm ? `Mapped in OpenStreetMap as ${osm.kind} ${osm.id}` : `${lat}, ${lon}`,
+    // The card says what a reader gets, not which OSM object id backs it —
+    // that is in the ⓘ fold, where a number is useful rather than baffling.
+    description: osm
+      ? 'Traced by OpenStreetMap’s volunteer mappers'
+      : `Placed at ${lat}, ${lon} by OpenStreetMap`,
     imageUrl: `https://tile.openstreetmap.org/${z}/${x}/${y}.png`,
     // The mapped feature itself when OSM knows the thing; a pin when it
     // only knows the place.
@@ -463,7 +469,7 @@ export function mapEntry(coord, label, osm = null) {
       : `https://www.openstreetmap.org/?mlat=${lat}&mlon=${lon}#map=10/${lat}/${lon}`,
     attribution: {
       author: '© OpenStreetMap contributors',
-      license: osm ? `via ${osm.via} OSM ${osm.kind}` : 'via P625 coordinates',
+      license: 'map data ODbL — share alike, credit the mappers',
     },
     _via: osm?.via ?? 'P625',
   }
@@ -500,11 +506,11 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   for (const e of out) {
     e.why = label
       ? subject
-        ? `Stated by Wikidata’s entry for ${label}`
-        : `Stated by Wikidata for ${label}, a link in this section`
-      : 'Stated by Wikidata'
+        ? `This is ${label}’s own record of it`
+        : `About ${label}, which this section links to`
+      : 'Connected to something this section links to'
     // The renderer splits one source's carousel by topic, so two anchors'
-    // objects from the same museum never share an unlabelled box.
+    // objects from the same museum never share an unlabeled box.
     e.topic = label ?? null
   }
   // A map is only built for a locatable, extant place: a language with a
@@ -521,8 +527,8 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
     const prop = /^P\d+$/.exec(e._via)?.[0]
     if (!prop) continue
     e.trace =
-      `Wikidata’s item for ${label ?? qid} (${qid}) states its ${PROP_NAME[prop] ?? prop} — ` +
-      `this card is what that identifier returned.`
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records ${PROP_NAME[prop] ?? prop} ` +
+      `on its entry for ${label ?? qid}. We asked for that record, and this is what came back.`
     e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${prop}`, label: 'Check or fix it on Wikidata' }
   }
   return out

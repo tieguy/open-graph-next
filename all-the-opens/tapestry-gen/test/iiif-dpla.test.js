@@ -125,8 +125,9 @@ test('a DPLA doc becomes a card credited to its holding institution, keyed on P2
   assert.equal(e.description, 'NASA on The Commons')
   // The durable DPLA item page, not the provider host that may have rotted.
   assert.equal(e.href, 'https://dp.la/item/abc123')
-  assert.match(e.why, /Catalogued under “Apollo 11 \(Spacecraft\)” — the Library of Congress heading Wikidata states for Apollo 11/)
-  assert.equal(e.attribution.license, 'via P244 LC authority')
+  assert.match(e.why, /Filed under “Apollo 11 \(Spacecraft\)” — the subject heading American libraries use for Apollo 11/)
+  // The property that found it lives in the ⓘ fold, not the credit line.
+  assert.equal(e.attribution.license, null)
   // Without an id the provider link still opens a door…
   assert.equal(dplaEntryFrom({ ...doc, id: undefined }, 'S', 'S').href, 'https://provider.test/item/1')
   // …but no landing page at all → no card: a dead-end card is not a finding.
@@ -179,6 +180,6 @@ test('europeanaUrl pivots on the stated entity URI and asks only for open items'
   )
   assert.equal(e.source, 'europeana')
   assert.equal(e.attribution.author, 'Rijksmuseum · Public Domain')
-  assert.match(e.why, /Linked to Rembrandt by Europeana/)
+  assert.match(e.why, /Europeana’s member institutions link this to Rembrandt/)
   assert.equal(europeanaEntryFrom({ title: ['no guid'] }, 'X'), null)
 })

@@ -1,7 +1,11 @@
 // Page-level dedup, decided from article order alone. Bands run and emit in
 // COMPLETION order (streaming), so any first-come-wins state consulted at
-// band-run time would be nondeterministic; both functions here are pure over
-// article-ordered input.
+// band-run time would be nondeterministic; this is pure over article-ordered
+// input.
+//
+// `dropSeenFiles` lived here too until 2026-08-04. It existed for one caller —
+// the Commons depicts chain, where the same file could be reached through two
+// anchors — and went with it when Commons left the article pages (LUI-122).
 
 /**
  * Assign each anchor QID to the first unit (article order) whose prose
@@ -27,21 +31,4 @@ export function claimAnchors(candidates, { perUnit, seeded = new Map() }) {
     }
     return own
   })
-}
-
-/**
- * Drop entries whose key already appeared in an earlier list (or in `seen`),
- * so one file never renders twice on a page. Keyless entries always pass —
- * refusing to dedup is safer than dedup-by-accident on a null key.
- */
-export function dropSeenFiles(lists, keyOf, seen = new Set()) {
-  return lists.map((list) =>
-    list.filter((e) => {
-      const key = keyOf(e)
-      if (!key) return true
-      if (seen.has(key)) return false
-      seen.add(key)
-      return true
-    }),
-  )
 }

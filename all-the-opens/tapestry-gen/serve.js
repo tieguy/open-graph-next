@@ -103,7 +103,7 @@ const server = createServer(async (req, res) => {
   // reader's request; `title` is what the page may truthfully call itself.
   let title = page
   try {
-    const { bands, stats } = await discover(page, {
+    const { bands, stats, reach } = await discover(page, {
       async emit(type, data) {
         if (type === 'spine') {
           title = data.page
@@ -134,7 +134,7 @@ const server = createServer(async (req, res) => {
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of await bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
-    res.write(streamHeroExtras(bands, { inline, home: process.env.SITE_HOME ?? '/' }))
+    res.write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
     res.write(
       streamClose({
         provenance:

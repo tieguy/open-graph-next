@@ -19,7 +19,7 @@ const coverUrl = (covers) => {
  * An author's works as renderable entries, best-presented first.
  *
  * Covered works lead: these render as a shelf, and a row of blank cards reads as
- * a broken page rather than as a catalogue. Coverless works still appear — the
+ * a broken page rather than as a catalog. Coverless works still appear — the
  * point is what the person wrote, not what happens to be photographed — they
  * simply come after.
  *
@@ -38,9 +38,9 @@ export function authorWorkEntries(response, { cap }) {
     .map(({ w, cover }) => ({
       source: 'openlibrary',
       title: w.title,
-      description: ['Work', w.first_publish_date].filter(Boolean).join(' · '),
+      description: ['Book', w.first_publish_date].filter(Boolean).join(' · '),
       imageUrl: cover,
-      attribution: { author: 'openlibrary.org', license: 'via P648 author identifier' },
+      attribution: { author: 'Open Library', license: null },
       _via: 'P648',
     }))
   return { entries, total: response?.size ?? all.length }

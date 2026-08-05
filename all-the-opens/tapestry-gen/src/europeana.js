@@ -4,7 +4,7 @@
 // items Europeana's enrichment links to exactly that entity. Only openly
 // licensed items are requested (`reusability=open`) — the demo shows what a
 // reader may reuse, and the disclosure counts what the filter left out is
-// not knowable in one request, so the card credit names each item's licence
+// not knowable in one request, so the card credit names each item's license
 // instead.
 //
 // Requires EUROPEANA_API_KEY; without it the pivot is silently absent — the
@@ -55,9 +55,11 @@ export function europeanaEntryFrom(item, anchorLabel) {
     href: item.guid,
     attribution: {
       author: [provider, rights].filter(Boolean).join(' · ') || null,
-      license: 'via P7704 Europeana entity',
+      // The property that found it is in the ⓘ fold; the credit line is for
+      // the institution and the license, which is what a reuser needs.
+      license: null,
     },
-    why: `Linked to ${anchorLabel ?? 'this entity'} by Europeana’s partner records`,
+    why: `Europeana’s member institutions link this to ${anchorLabel ?? 'something named here'}`,
     topic: anchorLabel ?? null,
     _via: 'P7704',
   }
