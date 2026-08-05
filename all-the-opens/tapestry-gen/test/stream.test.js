@@ -56,7 +56,16 @@ const BAND = {
       access: { url: 'https://archive.org/details/abook', label: 'Borrow at the Internet Archive' },
     },
   ],
-  disclosure: null,
+  samples: [],
+}
+
+// A sample claim matching BAND's single Met shelf (source 'met', no topic).
+const MET_SAMPLE = {
+  source: 'met',
+  topic: null,
+  shown: 1,
+  total: 9,
+  text: 'A sample: 1 of the 9 objects the Met holds',
 }
 
 test('streamOpen carries the whole spine with band ids, no numbering, and no rails', () => {
@@ -105,21 +114,51 @@ test('the best find floats in the rail, media rides the deck, references close t
   assert.match(rail, /A photo/)
   assert.doesNotMatch(deck, /A photo</)
   assert.match(deck, /Another photo/)
-  // A disclosure describes the media, so it opens the deck.
-  const disclosed = bandParts({ ...BAND, disclosure: 'Media anchored on X' })
+})
+
+test('a sample claim rides on the head of the shelf it is a sample of', () => {
+  // It used to be a paragraph atop the deck, which on Brown v. Board counted
+  // the DPLA shelf from above the Internet Archive and OpenStreetMap shelves.
+  const { deck } = bandParts({ ...BAND, samples: [MET_SAMPLE] })
   assert.match(
-    disclosed.deck,
-    /^<div class="deck"><p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
+    deck,
+    /<div class="carousel-head"><span class="src">The Met<\/span><span class="count" title="A sample: 1 of the 9 objects the Met holds">1 of 9<\/span><\/div>/,
   )
-  assert.doesNotMatch(disclosed.rail, /disclosure/)
-  // …and still lands in the deck, full width, when there is no media to
-  // describe: a note about what was left out is prose, not a floated card.
-  const noMedia = bandParts({ ...BAND, entries: [], disclosure: 'Media anchored on X' })
-  assert.equal(noMedia.rail, '')
+  // The floating paragraph is gone entirely when every claim found its shelf.
+  assert.doesNotMatch(deck, /class="disclosure"/)
+})
+
+test('a count with no sample stays a bare number, and 1 alone is not badged', () => {
+  const one = bandParts({ ...BAND, entries: [BAND.entries[0]] }).deck
+  assert.doesNotMatch(one, /class="count"/) // hoisted to hero; nothing left to badge
+  const two = bandParts({
+    ...BAND,
+    entries: [...BAND.entries, { source: 'met', title: 'A third', imageUrl: 'https://example.test/z.jpg' }],
+  }).deck
+  assert.match(two, /<span class="count">2<\/span>/)
+})
+
+test('a sample whose shelf never rendered still gets said, in the old paragraph', () => {
+  // Nothing may be silently dropped: that is the entire point of disclosing.
+  // Here the claim is about Europeana, which has no shelf in this band.
+  const { deck } = bandParts({
+    ...BAND,
+    samples: [{ source: 'europeana', topic: 'X', shown: 4, total: 90, text: '4 of 90 items linked to X' }],
+  })
   assert.match(
-    noMedia.deck,
-    /<p class="disclosure"><b>A sample, not the whole shelf:<\/b> Media anchored on X<\/p>/,
+    deck,
+    /<p class="disclosure"><b>A sample, not the whole shelf:<\/b> 4 of 90 items linked to X<\/p>/,
   )
+})
+
+test('a band with no media at all still says what it sampled', () => {
+  const { rail, deck } = bandParts({
+    ...BAND,
+    entries: [],
+    samples: [{ source: 'met', topic: null, shown: 0, total: 9, text: 'A sample: 0 of 9' }],
+  })
+  assert.equal(rail, '')
+  assert.match(deck, /<p class="disclosure">/)
 })
 
 test('a band with nothing worth leading with gets no float at all', () => {
@@ -171,17 +210,18 @@ test('DPLA’s broad note counts what its partners cataloged, under the authoriz
   })
   assert.match(deck, /<b>Not shown here:<\/b> the 3,016 items DPLA’s partners catalog under “Space flight”/)
   assert.doesNotMatch(deck, /openly licensed/)
-  // It must not open with the disclosure's words. On Brown v. Board the two
-  // land in one deck — "a sample of 54" and "1,409 is too many to sample" —
-  // and phrasing them alike made them read as contradicting each other.
+  // It must not be confusable with the sample claim. On Brown v. Board the two
+  // land in one band — "a sample of 54" and "1,409 is too many to sample" —
+  // and phrasing them alike made them read as contradicting each other. Now
+  // the sample rides its shelf's head and the absence closes the deck.
   const both = bandParts({
     ...BAND,
-    disclosure: '4 of the 54 items DPLA’s partner institutions catalog under X',
+    samples: [MET_SAMPLE],
     broad: [{ source: 'dpla', label: 'the court', heading: 'United States. Supreme Court', total: 1409, url: 'https://dp.la/x' }],
   }).deck
-  // The sample line comes first, the shelves next, the absence last.
-  assert.ok(both.indexOf('A sample, not the whole shelf') < both.indexOf('<div class="carousel"'))
-  assert.ok(both.indexOf('<div class="carousel"') < both.indexOf('Not shown here'))
+  assert.ok(both.indexOf('1 of 9') < both.indexOf('Not shown here'))
+  assert.ok(both.indexOf('<div class="carousel-track"') < both.indexOf('Not shown here'))
+  assert.doesNotMatch(both, /class="disclosure"/)
 })
 
 test('a card says which anchor brought it here', () => {

@@ -398,9 +398,29 @@ function broadNotes(notes, inline) {
 // tall column. When a band draws one source's media through several anchors, the
 // renderer splits it into one carousel per topic (the anchor's label) — a strip
 // mixing the suspension-bridge files with the strait's reads as one confused box.
-function carousel(source, items, inline, topic = null) {
-  // Only badge the count when there is more than one — "1" in the corner is noise.
-  const count = items.length > 1 ? `<span class="count">${items.length}</span>` : ''
+function carousel(source, items, inline, topic = null, sample = null) {
+  // The count badge carries the sample claim when there is one: "4 of 54",
+  // not "4". This IS the disclosure, attached to the thing it discloses.
+  //
+  // It used to be a paragraph at the top of the deck, naming a shelf that
+  // might be two shelves further down — on Brown v. Board it counted the DPLA
+  // cards from above the Internet Archive and OpenStreetMap shelves, which
+  // made it an unattributable claim.
+  //
+  // A badge and nothing else, deliberately: the shelf's own why line already
+  // says what the 54 ARE ("Filed under 'Brown v. Board of Education of
+  // Topeka' — the subject heading American libraries use…"), so a sentence
+  // here would say the heading twice and the number three times. The full
+  // sentence rides on the title for a hover, and any sample whose shelf did
+  // not render falls back to a deck-level line (see bandParts) — nothing is
+  // silently dropped, which is the whole point of disclosing at all.
+  //
+  // "1" alone in the corner is noise, but "1 of 83" is the finding.
+  const count = sample
+    ? `<span class="count" title="${escapeHtml(sample.text)}">${items.length} of ${sample.total.toLocaleString()}</span>`
+    : items.length > 1
+      ? `<span class="count">${items.length}</span>`
+      : ''
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
   // A topic-labeled strip whose cards all share one why line says it once,
   // under the head — four cards each repeating "Depicts X" is noise.
@@ -492,12 +512,21 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
     if (!byTopic.has(topic)) byTopic.set(topic, [])
     byTopic.get(topic).push(e)
   }
+  // Each sample claim, keyed the way shelves are keyed. `unused` is what did
+  // not find a shelf — a partner whose entries were all capped away, or
+  // hoisted into the hero, leaves a claim with nothing to sit on, and that
+  // claim still has to be made somewhere rather than quietly disappearing.
+  const shelfKey = (source, topic) => `${source}::${topic ?? ''}`
+  const sampleFor = new Map((b.samples ?? []).map((s) => [shelfKey(s.source, s.topic), s]))
+  const unused = new Set(sampleFor.keys())
   const media = [...bySource]
     .flatMap(([source, byTopic]) => {
       const split = byTopic.size > 1
-      return [...byTopic].map(([topic, items]) =>
-        carousel(source, items, inline, split ? topic : null),
-      )
+      return [...byTopic].map(([topic, items]) => {
+        const key = shelfKey(source, topic)
+        unused.delete(key)
+        return carousel(source, items, inline, split ? topic : null, sampleFor.get(key) ?? null)
+      })
     })
     .join('')
   // The section's references, and nothing else. The coverage line that used to
@@ -508,12 +537,15 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const sources = (b.footnotes ?? []).length
     ? `<div class="refs">${footnoteList(b.footnotes, wikiBase)}</div>`
     : ''
-  // What was left out. Every shelf here is a sample of something larger, and a
-  // page that shows six of six hundred without saying so is claiming a
-  // selection it never made. It describes the media, so it travels with the
-  // deck when there is one.
-  const disclosure = b.disclosure
-    ? `<p class="disclosure"><b>A sample, not the whole shelf:</b> ${escapeHtml(b.disclosure)}</p>`
+  // The fallback, and ONLY the fallback: sample claims whose shelf is not on
+  // the page. Every shelf here is a sample of something larger, and a page
+  // that shows six of six hundred without saying so is claiming a selection it
+  // never made — so a claim that cannot reach its shelf still gets said, in
+  // the paragraph these all used to live in. In the ordinary case this is
+  // empty and the counts ride on the shelf heads.
+  const orphans = [...unused].map((k) => sampleFor.get(k).text)
+  const disclosure = orphans.length
+    ? `<p class="disclosure"><b>A sample, not the whole shelf:</b> ${escapeHtml(orphans.join('. '))}</p>`
     : ''
   // The broad notes close the deck, after the shelves. They are statements
   // about an ABSENCE, and putting them above the shelves made a reader meet a
@@ -885,7 +917,12 @@ sup.ref a:hover{text-decoration:underline}
 /* One scroll-snapping strip per source; items scroll sideways instead of stacking. */
 .carousel{margin:0 0 22px}
 .carousel-head{display:flex;align-items:center;gap:8px;margin:0 0 10px}
-.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:600;color:#9aa0a6}
+/* "4" is decoration; "4 of 54" is the disclosure — that a shelf is a sample of
+   something larger, said on the shelf rather than in a paragraph above the
+   deck. So it is darker than the old bare count, and it does not wrap. */
+.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:600;
+  color:var(--muted);white-space:nowrap;flex:none}
+.carousel-head .count[title]{cursor:help}
 .carousel-head .topic{font-family:var(--serif);font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}

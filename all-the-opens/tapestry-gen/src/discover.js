@@ -817,7 +817,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // which is what keeps eleven thousand bird photographs off the page.
     // Without DPLA_API_KEY the pivot is simply absent: the demo must run
     // keyless for anyone who clones it.
-    const partnerNotes = []
+    // What each shelf is a sample OF, keyed to the shelf it describes.
+    //
+    // This used to be one string per band, joined with '. ' and printed as a
+    // paragraph at the top of the deck — so on Brown v. Board a reader met
+    // "4 of the 54 items DPLA's partners catalog under…" two shelves before
+    // reaching the DPLA cards it counted, with the Internet Archive and
+    // OpenStreetMap shelves in between. A sample claim has to sit on the thing
+    // it is a sample of. The renderer matches on (source, topic), which is
+    // exactly how it groups entries into shelves.
+    const samples = []
     // Anchors whose holdings are too broad to sample: shown as one sentence
     // and a browse link instead of four arbitrary cards. See src/breadth.js.
     const broad = []
@@ -860,10 +869,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
           entries.push(...hit.entries)
           stats.dpla += hit.entries.length
           if (hit.total > hit.entries.length)
-            partnerNotes.push(
-              `${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s partner institutions ` +
-                `catalog under the Library of Congress heading “${hit.heading}”`,
-            )
+            samples.push({
+              source: 'dpla',
+              // The same value dplaEntryFrom writes as each entry's topic —
+              // that pairing is what lets the renderer find the shelf.
+              topic: label ?? hit.heading,
+              shown: hit.entries.length,
+              total: hit.total,
+              text:
+                `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s ` +
+                `partner institutions catalog under the Library of Congress heading “${hit.heading}”`,
+            })
         } catch (e) {
           console.error(`  dpla lookup failed (${lc}): ${e.message}`)
         }
@@ -909,10 +925,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
           entries.push(...hit.entries)
           stats.europeana += hit.entries.length
           if (hit.total > hit.entries.length)
-            partnerNotes.push(
-              `${hit.entries.length} of ${hit.total.toLocaleString()} openly licensed items ` +
-                `Europeana’s partners link to ${label ?? eu}`,
-            )
+            samples.push({
+              source: 'europeana',
+              topic: label ?? null,
+              shown: hit.entries.length,
+              total: hit.total,
+              text:
+                `A sample: ${hit.entries.length} of ${hit.total.toLocaleString()} openly licensed ` +
+                `items Europeana’s partners link to ${label ?? eu}`,
+            })
         } catch (e) {
           console.error(`  europeana lookup failed (${eu}): ${e.message}`)
         }
@@ -922,19 +943,29 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Say how much was left on the table. Every shelf here is a sample of
     // something larger, and a page that shows six of six hundred without
     // saying so is claiming a selection it never made. These notes only ever
-    // fire on the lede, where unit.title is the article's own title.
-    const subjectNotes = []
+    // fire on the lede, where unit.title is the article's own title — and the
+    // topic is the one ledeExtras stamps on those entries, so each lands on
+    // its own shelf rather than in a paragraph above all of them.
     if (extras?.works.entries.length)
-      subjectNotes.push(
-        `${extras.works.entries.length} of ${extras.works.total} book${extras.works.total === 1 ? '' : 's'} ` +
-          `Open Library files under ${unit.title}`,
-      )
+      samples.push({
+        source: 'openlibrary',
+        topic: `By ${page}`,
+        shown: extras.works.entries.length,
+        total: extras.works.total,
+        text:
+          `A sample: ${extras.works.entries.length} of ${extras.works.total} ` +
+          `book${extras.works.total === 1 ? '' : 's'} Open Library files under ${unit.title}`,
+      })
     if (extras?.scholarship.entries.length)
-      subjectNotes.push(
-        `${extras.scholarship.entries.length} free to read of ${extras.scholarship.total} papers ` +
-          `OpenAlex files under ${unit.title}’s ORCID record`,
-      )
-    const fullDisclosure = [...subjectNotes, ...partnerNotes].filter(Boolean).join('. ') || null
+      samples.push({
+        source: 'openalex',
+        topic: `By ${page}`,
+        shown: extras.scholarship.entries.length,
+        total: extras.scholarship.total,
+        text:
+          `${extras.scholarship.entries.length} free to read, of the ${extras.scholarship.total} ` +
+          `papers OpenAlex files under ${unit.title}’s ORCID record`,
+      })
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,
@@ -947,7 +978,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // Francisco, 26 of them reporting nothing but a failure to find.
       citations: coverage,
       papers: { total: unit.scholarly.length, open: openPapers },
-      disclosure: fullDisclosure,
+      samples,
       broad,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
