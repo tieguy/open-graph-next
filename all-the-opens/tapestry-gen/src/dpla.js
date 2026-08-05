@@ -50,11 +50,11 @@ export function dplaUrl(heading, key) {
  *
  * `subject` is the facet DPLA's own search UI reads, and it is the same field
  * the API query above asks on — so the browse lands on the set the count came
- * from. UNVERIFIED FROM HERE: dp.la answers 202 with an empty body to anything
- * that is not a browser, so this URL was reasoned from the API's facet name
- * and not confirmed by fetching it. If it ever lands on an empty search, the
- * fallback is the plain `?q="<heading>"` phrase search, which finds more than
- * the heading alone and so would need the count sentence softened to match.
+ * from. Confirmed in a browser 2026-08-05; it cannot be checked from a script,
+ * because dp.la answers 202 with an empty body to anything that is not one.
+ * If a future change ever breaks it, the fallback is the plain `?q="<heading>"`
+ * phrase search — which finds more than the heading alone, so the count
+ * sentence in src/breadth.js would have to be softened to match.
  */
 export function dplaBrowseUrl(heading) {
   return `https://dp.la/search?subject=${encodeURIComponent(`"${heading}"`)}`
