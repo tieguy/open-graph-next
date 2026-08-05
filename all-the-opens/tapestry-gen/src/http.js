@@ -74,6 +74,58 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
 }
 
 /**
+ * A key→JSON fact cache, one small file per key, for answers that are NOT a
+ * URL's response body and so cannot ride `getJson`'s per-URL cache.
+ *
+ * The case that needed it: WDQS is asked "for these forty classes, what are
+ * their ancestors?" in one query, so the cache key is the whole set and a
+ * single new class misses on all forty. Measured across seven articles, ~40%
+ * of a page's classes were already answered on an earlier page and every one
+ * of them was re-queried anyway. Keyed per class instead, only the genuinely
+ * new ones cost anything.
+ *
+ * One file per key rather than one file per kind, because the deployed server
+ * runs up to MAX_CONCURRENT discoveries at once and a read-modify-write of a
+ * shared file would lose entries. Two writers racing on the same key write the
+ * same bytes.
+ *
+ * Keys must be filename-safe; callers pass Wikidata QIDs. Anything else is
+ * refused rather than sanitized, because a sanitized key can collide with
+ * another key and return the wrong fact.
+ */
+const SAFE_KEY = /^[A-Za-z0-9_-]{1,64}$/
+const factPath = (kind, key) => join(CACHE, `fact-${kind}-${key}.json`)
+
+export async function readFacts(kind, keys) {
+  const out = new Map()
+  await Promise.all(
+    [...new Set(keys)].filter((k) => SAFE_KEY.test(k)).map(async (k) => {
+      try {
+        out.set(k, JSON.parse(await readFile(factPath(kind, k), 'utf8')))
+      } catch {
+        /* not cached */
+      }
+    }),
+  )
+  return out
+}
+
+export async function writeFacts(kind, entries) {
+  await mkdir(CACHE, { recursive: true })
+  await Promise.all(
+    [...entries].map(async ([k, v]) => {
+      if (!SAFE_KEY.test(k)) return
+      try {
+        await writeFile(factPath(kind, k), JSON.stringify(v))
+      } catch (e) {
+        // A cache that cannot write is slow, never wrong. Say so and continue.
+        console.error(`  fact cache write failed (${kind}/${k}): ${e.message}`)
+      }
+    }),
+  )
+}
+
+/**
  * A cover fetched and base64'd, so the page does not depend on the archive.org
  * redirect OpenLibrary covers resolve through. Null when there is no cover —
  * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and

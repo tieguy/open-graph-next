@@ -12,7 +12,7 @@
 // holds it and whether they may reuse it, and "via P3634" answers neither.
 
 import { chunk } from './batch.js'
-import { getJson } from './http.js'
+import { getJson, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
@@ -177,20 +177,43 @@ export function parseEarthPoint(wkt) {
  * Items with no class binding (no P31) are marked both false to exclude from maps.
  */
 export function mergePlaceDefunct(itemMap, classRows, itemClasses, itemsWithEnded = new Set()) {
-  // The hierarchy query returns one row per (class, ancestor) pair; a class is
-  // mappable if any ancestor is in the allowset, defunct if any is Q3024240.
-  // P279* includes the class itself, so a class that IS an allowset member
-  // qualifies without a special case.
-  const placeClasses = new Set()
-  const defunctClasses = new Set()
+  return applyVerdicts(itemMap, classVerdicts(classRows), itemClasses, itemsWithEnded)
+}
 
+/**
+ * The hierarchy query's rows reduced to one verdict per class — which is the
+ * only part of a 237KB answer worth keeping, and small enough to cache.
+ *
+ * A class is mappable if any ancestor is in the allowset, defunct if any is
+ * Q3024240. `P279*` includes the class itself, so a class that IS an allowset
+ * member qualifies without a special case — and, usefully here, every class
+ * asked about appears in at least one row, so a class that reaches nothing
+ * still gets an explicit `{place:false}` rather than being indistinguishable
+ * from one nobody asked about.
+ *
+ * @returns {Map<string, {place: boolean, defunct: boolean}>}
+ */
+export function classVerdicts(classRows) {
+  const out = new Map()
   for (const row of classRows) {
     const classQid = row.class?.value?.split('/').pop()
     const superQid = row.super?.value?.split('/').pop()
     if (!classQid || !superQid) continue
-    if (LOCATABLE_CLASSES.has(superQid)) placeClasses.add(classQid)
-    if (superQid === HISTORICAL_COUNTRY) defunctClasses.add(classQid)
+    const cur = out.get(classQid) ?? { place: false, defunct: false }
+    if (LOCATABLE_CLASSES.has(superQid)) cur.place = true
+    if (superQid === HISTORICAL_COUNTRY) cur.defunct = true
+    out.set(classQid, cur)
   }
+  return out
+}
+
+/**
+ * Item verdicts from class verdicts. Split from `mergePlaceDefunct` so the
+ * class half can come from a cache instead of a query — see resolveMappability.
+ */
+export function applyVerdicts(itemMap, verdicts, itemClasses, itemsWithEnded = new Set()) {
+  const placeClasses = { has: (c) => verdicts.get(c)?.place === true }
+  const defunctClasses = { has: (c) => verdicts.get(c)?.defunct === true }
 
   // For each item with location data, mark place/defunct based on class membership.
   for (const [qid, statements] of itemMap.entries()) {
@@ -320,13 +343,26 @@ export async function resolveMappability(map, only) {
     }
   }
 
-  // Third query (phase 2b): resolve the distinct classes against place/defunct hierarchies.
-  // Collect distinct classes from all item bindings — typically 10–30 per page.
+  // Third query (phase 2b): resolve the distinct classes against place/defunct
+  // hierarchies — but only the ones no earlier page has already resolved.
+  //
+  // Wikidata's class hierarchy is a small, near-static vocabulary and articles
+  // draw on the same corner of it: measured across seven articles, 25–72% of a
+  // page's classes had already been answered for an earlier one. None of that
+  // was reused, because `getJson` keys on the URL and `classesUrl` embeds the
+  // whole set, so one new class re-queried all forty. Keyed per class, a warm
+  // machine skips the query entirely — worth ~0.43s of the 0.63s mappability
+  // costs, on the lede's critical path.
+  //
+  // Only the verdict is stored, not the rows: the walk returns 237KB for
+  // twenty classes and all that survives is two booleans each.
   const distinctClasses = [...new Set([...itemClasses.values()].flatMap((s) => [...s]))]
-  let allClassRows = []
+  const verdicts = await readFacts('class', distinctClasses)
+  const unknown = distinctClasses.filter((c) => !verdicts.has(c))
 
-  if (distinctClasses.length > 0) {
-    for (const group of chunk(distinctClasses, 100)) {
+  if (unknown.length > 0) {
+    const learned = new Map()
+    for (const group of chunk(unknown, 100)) {
       let rows = []
       try {
         rows = (await getJson(classesUrl(group))).results?.bindings ?? []
@@ -334,8 +370,13 @@ export async function resolveMappability(map, only) {
         console.error(`  wdqs class hierarchy query failed (${group.length} classes): ${e.message}`)
         continue
       }
-      allClassRows = allClassRows.concat(rows)
+      const answered = classVerdicts(rows)
+      // A class the walk returned no row for reaches nothing, which is a real
+      // answer and must be cached as one — otherwise it is re-asked forever.
+      for (const c of group) learned.set(c, answered.get(c) ?? { place: false, defunct: false })
     }
+    for (const [c, v] of learned) verdicts.set(c, v)
+    await writeFacts('class', learned)
   }
 
   // Merge class hierarchy results into item statements once, with all data
@@ -349,8 +390,8 @@ export async function resolveMappability(map, only) {
   // lede resolves its own anchors first so it can render first, then the
   // page-wide call stomped "Supreme Court of the United States" back to
   // place='false' while the lede band was still reading the same object.
-  if (allClassRows.length > 0) {
-    mergePlaceDefunct(pending, allClassRows, itemClasses, itemsWithEnded)
+  if (verdicts.size > 0) {
+    applyVerdicts(pending, verdicts, itemClasses, itemsWithEnded)
   } else if (needsPlaceDefunct.length > 0) {
     // If class query failed or returned nothing, mark location items as unmappable
     // to avoid rendering maps when place/defunct status is unknown.

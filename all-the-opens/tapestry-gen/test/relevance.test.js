@@ -4,7 +4,14 @@ import assert from 'node:assert/strict'
 import { heroRank, pickHero } from '../src/hero.js'
 import { BROAD_ABOVE, broadNote, tooBroad } from '../src/breadth.js'
 import { claimAnchors, hookRank, preferRelated, preferYielding, subjectAnchors } from '../src/dedup.js'
-import { mappable, mergePlaceDefunct, resolveMappability } from '../src/statements.js'
+import {
+  applyVerdicts,
+  classVerdicts,
+  mappable,
+  mergePlaceDefunct,
+  resolveMappability,
+} from '../src/statements.js'
+import { readFacts, writeFacts } from '../src/http.js'
 import { dplaBrowseUrl } from '../src/dpla.js'
 import { europeanaBrowseUrl } from '../src/europeana.js'
 
@@ -200,6 +207,52 @@ test('mappability is decided only for the anchors asked about, and answers nobod
   assert.equal(asked.place, undefined)
   assert.equal(notAsked.place, undefined)
   assert.equal(mappable(notAsked), false)
+})
+
+test('a class verdict keeps only the two booleans, and says so even when nothing matched', () => {
+  const row = (c, s) => ({
+    class: { value: `http://www.wikidata.org/entity/${c}` },
+    super: { value: `http://www.wikidata.org/entity/${s}` },
+  })
+  const v = classVerdicts([
+    row('Q515', 'Q515'), // a city, which is itself
+    row('Q515', 'Q486972'), // …and a human settlement — locatable
+    row('Q3024240', 'Q3024240'), // the historical-country class itself
+    row('Q7889', 'Q7889'), // video game: reaches neither
+    row('Q7889', 'Q386724'),
+  ])
+  assert.deepEqual(v.get('Q515'), { place: true, defunct: false })
+  assert.deepEqual(v.get('Q3024240'), { place: false, defunct: true })
+  // The point of caching: a class that reaches nothing is an ANSWER, not an
+  // absence. Stored as false it is never asked about again.
+  assert.deepEqual(v.get('Q7889'), { place: false, defunct: false })
+})
+
+test('items are judged from verdicts, however those verdicts were obtained', () => {
+  // applyVerdicts is what lets the class half come from a cache rather than a
+  // query; mergePlaceDefunct is now just this with the rows parsed first.
+  const city = { coord: 'Point(0 0)' }
+  const empire = { coord: 'Point(1 1)' }
+  const items = new Map([['Q_city', city], ['Q_empire', empire]])
+  applyVerdicts(
+    items,
+    new Map([['Q515', { place: true, defunct: false }], ['Q3024240', { place: true, defunct: true }]]),
+    new Map([['Q_city', new Set(['Q515'])], ['Q_empire', new Set(['Q3024240'])]]),
+    new Set(),
+  )
+  assert.equal(mappable(city), true)
+  assert.equal(mappable(empire), false) // locatable, but ended
+})
+
+test('the fact cache round-trips, and refuses a key it cannot store safely', async () => {
+  // Keys become filenames. A sanitized key could collide with another key and
+  // hand back the wrong fact, so anything unsafe is refused outright.
+  await writeFacts('testkind', new Map([['Q999999901', { place: true, defunct: false }]]))
+  const got = await readFacts('testkind', ['Q999999901', 'Q999999902'])
+  assert.deepEqual(got.get('Q999999901'), { place: true, defunct: false })
+  assert.equal(got.has('Q999999902'), false) // never written
+  await writeFacts('testkind', new Map([['../escape', { place: true }]]))
+  assert.equal((await readFacts('testkind', ['../escape'])).size, 0)
 })
 
 test('a later, wider mappability pass never undoes an earlier verdict', () => {
