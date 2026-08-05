@@ -278,7 +278,20 @@ export async function resolveMappability(map, only) {
     const s = map.get(qid)
     if (s) subset.set(qid, s)
   }
-  const needsPlaceDefunct = [...subset].filter(([, s]) => needsPlaceDefunctQuery(s)).map(([q]) => q)
+  // Exactly the items this call will ask about — carried as a map, not a list
+  // of ids, because it is also what gets written back to. Nothing outside it
+  // may be touched.
+  //
+  // `s.place === undefined` skips anything a previous call already settled.
+  // The lede resolves its own anchors ahead of the page so its band can render
+  // first, and the page-wide call that follows covers those anchors again;
+  // re-walking their classes would spend two more queries to learn what is
+  // already written on the very same statement objects.
+  const pending = new Map()
+  for (const [qid, s] of subset) {
+    if (needsPlaceDefunctQuery(s) && s.place === undefined) pending.set(qid, s)
+  }
+  const needsPlaceDefunct = [...pending.keys()]
   const itemClasses = new Map() // QID → Set of its P31 class QIDs
   const itemsWithEnded = new Set() // QIDs that have P576 bindings
 
@@ -326,19 +339,24 @@ export async function resolveMappability(map, only) {
   }
 
   // Merge class hierarchy results into item statements once, with all data
-  // collected. `subset`, not `map`: an item nobody picked was never asked
-  // about, and writing place='false' onto it would state an answer we do not
-  // have. mappable() refuses on unset, which is the same outcome honestly.
+  // collected. `pending`, never `subset` and never `map`: mergePlaceDefunct
+  // writes place='false' onto every location-bearing item it is handed that
+  // has no class binding, and an item this call did not ask about has none —
+  // so handing it the wider map does not leave that item alone, it OVERWRITES
+  // a verdict some earlier call already reached.
+  //
+  // That cost Brown v. Board its lede map, and worse, did it as a race: the
+  // lede resolves its own anchors first so it can render first, then the
+  // page-wide call stomped "Supreme Court of the United States" back to
+  // place='false' while the lede band was still reading the same object.
   if (allClassRows.length > 0) {
-    mergePlaceDefunct(subset, allClassRows, itemClasses, itemsWithEnded)
+    mergePlaceDefunct(pending, allClassRows, itemClasses, itemsWithEnded)
   } else if (needsPlaceDefunct.length > 0) {
     // If class query failed or returned nothing, mark location items as unmappable
     // to avoid rendering maps when place/defunct status is unknown.
-    for (const [, statements] of subset.entries()) {
-      if (needsPlaceDefunctQuery(statements)) {
-        statements.place = 'false'
-        statements.defunct = 'false'
-      }
+    for (const [, statements] of pending) {
+      statements.place = 'false'
+      statements.defunct = 'false'
     }
   }
 

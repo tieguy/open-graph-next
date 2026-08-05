@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { heroRank, pickHero } from '../src/hero.js'
 import { BROAD_ABOVE, broadNote, tooBroad } from '../src/breadth.js'
 import { claimAnchors, hookRank, preferRelated, preferYielding, subjectAnchors } from '../src/dedup.js'
-import { mappable, resolveMappability } from '../src/statements.js'
+import { mappable, mergePlaceDefunct, resolveMappability } from '../src/statements.js'
 import { dplaBrowseUrl } from '../src/dpla.js'
 import { europeanaBrowseUrl } from '../src/europeana.js'
 
@@ -200,6 +200,28 @@ test('mappability is decided only for the anchors asked about, and answers nobod
   assert.equal(asked.place, undefined)
   assert.equal(notAsked.place, undefined)
   assert.equal(mappable(notAsked), false)
+})
+
+test('a later, wider mappability pass never undoes an earlier verdict', () => {
+  // The lede resolves its own anchors first so its band can render first; the
+  // page-wide pass that follows covers those anchors again. mergePlaceDefunct
+  // writes place='false' onto any location-bearing item it is handed with no
+  // class binding — and a previously-settled item has none in the new batch —
+  // so handing it anything wider than what THIS pass queried silently reverses
+  // the earlier answer. It cost Brown v. Board the map in its lede, as a race
+  // against the band still reading the object.
+  const court = { coord: 'Point(-77.00 38.89)', place: 'true', defunct: 'false' }
+  const fresh = { coord: 'Point(2.35 48.85)' }
+  const pending = new Map([['Q_fresh', fresh]]) // only what this pass asked about
+  mergePlaceDefunct(
+    pending,
+    [{ class: { value: 'http://www.wikidata.org/entity/Q515' }, super: { value: 'http://www.wikidata.org/entity/Q486972' } }],
+    new Map([['Q_fresh', new Set(['Q515'])]]),
+    new Set(),
+  )
+  assert.equal(fresh.place, 'true') // newly decided
+  assert.equal(court.place, 'true') // untouched, because it was not handed over
+  assert.equal(mappable(court), true)
 })
 
 // --- which of a section's links is worth asking about --------------------

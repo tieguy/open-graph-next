@@ -601,7 +601,30 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return p.finally(() => console.error(`  ${name} settled in ${((Date.now() - t0) / 1000).toFixed(1)}s`))
   }
 
-  // ---- Query, THEN pick. --------------------------------------------------
+  // ---- The lede goes first, at every queue. -------------------------------
+  //
+  // Measured cold on Brown v. Board (2026-08-05): spine at 0.6s, then NOTHING
+  // until 2.6s, when eight bands landed at once, and 3.5s, when the remaining
+  // nine did — including the lede, dead last of seventeen. Two step functions,
+  // not a stream, because "a band waits only on the batches it will read" is
+  // true and unhelpful when nearly every band reads the same two batches.
+  //
+  // So the lede gets its own turn at the front of each host's FIFO queue: its
+  // candidates are asked about first, its anchors decided from that answer
+  // alone, and its citations looked up before the rest of the page's. The cost
+  // is one extra request per batch — a Solr query, an OpenLibrary volumes
+  // call, a WDQS chunk — spent so the band carrying the hero card arrives
+  // first instead of last.
+  const lede = units.find((u) => u.index === '0') ?? null
+  const others = units.filter((u) => u !== lede)
+  // `first` runs before `rest` because enqueue() is FIFO per host: whichever
+  // call is made first takes that host's turn first. Nothing here enforces the
+  // order beyond that, and nothing needs to.
+  const ledeFirst = (name, first, rest, merge) => {
+    const firstPromise = timed(`${name} (lede)`, first())
+    return [firstPromise, timed(name, firstPromise.then(async (a) => merge(a, await rest())))]
+  }
+
   // What every candidate on the page holds, before any of them is chosen. The
   // pipeline used to do this the other way around: each section picked two
   // anchors on document order, asked about those two, and if neither held
@@ -612,60 +635,110 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // Costs one cheap WDQS query per hundred candidates instead of one per page:
   // measured on Apollo 11, 49 anchors in 0.37s becomes 331 in 0.93s. The
   // expensive class walk does NOT widen with it — see statementsPromise.
-  const partnersPromise = timed(
+  const candidatesOf = (us, qids) => us.flatMap((u) => u.linkCandidates.map((t) => qids.get(t)))
+  const [ledePartnersPromise, partnersPromise] = ledeFirst(
     'wdqs partners',
-    qidsPromise.then((qids) =>
-      partnerStatements([
-        ...new Set([
-          ...units.flatMap((u) => u.linkCandidates.map((t) => qids.get(t))),
-          qids.get(normalizedPage),
-        ]),
-      ]),
-    ),
+    () =>
+      qidsPromise.then((qids) =>
+        partnerStatements([...(lede ? candidatesOf([lede], qids) : []), qids.get(normalizedPage)]),
+      ),
+    async () => partnerStatements(candidatesOf(others, await qidsPromise)),
+    // Same statement OBJECTS in both maps where a qid appears twice, which is
+    // what lets resolveMappability enrich one and be seen by the other.
+    (a, b) => new Map([...b, ...a]),
   )
 
-  const pickedPromise = Promise.all([qidsPromise, subjectPromise, partnersPromise]).then(
+  /**
+   * The lede's own anchors, decided from the lede's own answer.
+   *
+   * Sound because the lede is unit 0: `claimAnchors` walks units in article
+   * order, so nothing upstream can have taken an anchor from it, and its picks
+   * are a function of its own candidates alone. Seeding them into the
+   * page-wide claim below therefore reproduces exactly what that claim would
+   * have chosen — the batch renderer's byte-reproducibility depends on it, and
+   * a test asserts it.
+   */
+  const ledePickedPromise = Promise.all([qidsPromise, subjectPromise, ledePartnersPromise]).then(
     ([qids, subject, partners]) => {
-      // Every unit's candidates in article order; ownership is decided here,
-      // before any partner is fetched, so streaming's completion-order
-      // emission can never reassign an anchor between runs. The subject QID is
-      // seeded to the lede: its own statements belong there by design.
-      const seeded = new Map()
-      const ledeAt = units.findIndex((u) => u.index === '0')
-      const subjectQid = qids.get(normalizedPage)
-      if (subjectQid && ledeAt !== -1) seeded.set(subjectQid, ledeAt)
-      const related = subjectAnchors(subject.claims)
-      const owned = claimAnchors(
-        units.map((u) => {
-          const qs = u.linkCandidates.map((t) => qids.get(t))
-          // Every unit prefers candidates that actually hold something.
-          const yielding = preferYielding(qs, partners)
-          // The lede then re-sorts by how specifically the subject's own
-          // Wikidata statements name each one — applied SECOND, so relevance
-          // dominates and yield breaks ties within it. Grant Wood and the Art
-          // Institute (named, and holding something) come before Nan Wood
-          // Graham (named, holding nothing) and before oil painting (holding
-          // something, never named). Other units have no such signal: nothing
-          // states what §"Cultural significance" is about.
-          return u.index === '0' ? preferRelated(yielding, related) : yielding
-        }),
-        { perUnit: QIDS_PER_SECTION, seeded },
+      if (!lede) return []
+      const ordered = preferRelated(
+        preferYielding(candidatesOf([lede], qids), partners),
+        subjectAnchors(subject.claims),
       )
-      const picked = new Map()
-      units.forEach((unit, i) => {
-        stats.anchorsQid += owned[i].length
-        picked.set(unit, owned[i])
-      })
-      return picked
+      const own = []
+      for (const q of ordered) {
+        if (own.length >= QIDS_PER_SECTION) break
+        if (!q || own.includes(q)) continue
+        own.push(q)
+      }
+      return own
     },
   )
 
+  const pickedPromise = Promise.all([
+    qidsPromise,
+    subjectPromise,
+    partnersPromise,
+    ledePickedPromise,
+  ]).then(([qids, subject, partners, ledeOwn]) => {
+    // Every unit's candidates in article order; ownership is decided here,
+    // before any partner is fetched, so streaming's completion-order
+    // emission can never reassign an anchor between runs. The subject QID is
+    // seeded to the lede: its own statements belong there by design, and so
+    // are the anchors the lede already committed to above.
+    const seeded = new Map()
+    const ledeAt = units.findIndex((u) => u.index === '0')
+    const subjectQid = qids.get(normalizedPage)
+    if (ledeAt !== -1) {
+      if (subjectQid) seeded.set(subjectQid, ledeAt)
+      for (const q of ledeOwn) seeded.set(q, ledeAt)
+    }
+    const related = subjectAnchors(subject.claims)
+    const owned = claimAnchors(
+      units.map((u) => {
+        const qs = u.linkCandidates.map((t) => qids.get(t))
+        // Every unit prefers candidates that actually hold something.
+        const yielding = preferYielding(qs, partners)
+        // The lede then re-sorts by how specifically the subject's own
+        // Wikidata statements name each one — applied SECOND, so relevance
+        // dominates and yield breaks ties within it. Grant Wood and the Art
+        // Institute (named, and holding something) come before Nan Wood
+        // Graham (named, holding nothing) and before oil painting (holding
+        // something, never named). Other units have no such signal: nothing
+        // states what §"Cultural significance" is about.
+        return u.index === '0' ? preferRelated(yielding, related) : yielding
+      }),
+      { perUnit: QIDS_PER_SECTION, seeded },
+    )
+    const picked = new Map()
+    units.forEach((unit, i) => {
+      stats.anchorsQid += owned[i].length
+      picked.set(unit, owned[i])
+    })
+    return picked
+  })
+
+  // Declared before the page-wide one so it takes wikidata's turn first — the
+  // lede's two anchors are one small request, and without this the lede would
+  // still be waiting on the page-wide pick just to learn their names.
+  const ledeLabelsPromise = ledePickedPromise.then((own) => entityLabels(own))
   const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
 
-  const iaPromise = timed('ia batch', iaLookups(units.flatMap((u) => u.identified)))
-  const volumesPromise = timed(
+  const [ledeIaPromise, iaPromise] = ledeFirst(
+    'ia batch',
+    async () => iaLookups(lede?.identified ?? []),
+    async () => iaLookups(others.flatMap((u) => u.identified)),
+    (a, b) => new Map([...b, ...a]),
+  )
+  const isbnsOf = (us) => us.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean)
+  const [ledeVolumesPromise, volumesPromise] = ledeFirst(
     'openlibrary volumes',
-    openLibraryVolumes(units.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean)),
+    async () => openLibraryVolumes(lede ? isbnsOf([lede]) : []),
+    async () => openLibraryVolumes(isbnsOf(others)),
+    (a, b) => ({
+      volumes: new Map([...b.volumes, ...a.volumes]),
+      unchecked: new Set([...b.unchecked, ...a.unchecked]),
+    }),
   )
   const scholarPromise = timed(
     'openalex batch',
@@ -677,10 +750,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // expensive half. Widening it alongside the partner query would take Apollo
   // 11 from 16 location-bearing items to 95 and 0.63s to 1.11s, to answer the
   // question for anchors no section will render. See src/statements.js.
+  const ledeStatementsPromise = timed(
+    'wdqs mappability (lede)',
+    Promise.all([ledePartnersPromise, ledePickedPromise, subjectPromise]).then(
+      ([partners, own, subject]) => resolveMappability(partners, [...own, subject.qid]),
+    ),
+  )
   const statementsPromise = timed(
     'wdqs mappability',
-    Promise.all([partnersPromise, pickedPromise, subjectPromise]).then(
-      ([partners, picked, subject]) =>
+    Promise.all([ledeStatementsPromise, partnersPromise, pickedPromise, subjectPromise]).then(
+      ([, partners, picked, subject]) =>
         resolveMappability(partners, [...[...picked.values()].flat(), subject.qid]),
     ),
   )
@@ -691,15 +770,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
     const [thesis, works, scholarship] = await Promise.all([
-      // The thesis pivot can spend eight serial archive.org requests, and it
-      // enriches only the lede — so it waits for the identifier batches that
-      // every band needs before taking its turn on that host's queue.
-      Promise.allSettled([iaPromise])
-        .then(() => collectionByDescribedThesis(subjectClaims, normalizedPage))
-        .catch((e) => {
-          console.error(`  thesis pivot failed: ${e.message}`)
-          return null
-        }),
+      // No longer waits for the page-wide identifier batch. That gate was
+      // written when this pivot could spend eight serial archive.org requests
+      // searching for a thesis by description — a cost worth deferring behind
+      // work every band needed. The search fallback was retired on 2026-08-03
+      // (see collectionByDescribedThesis), leaving at most ONE metadata read
+      // for an identifier Wikidata states outright, while the gate went on
+      // holding the lede behind every ISBN on the page. Measured on Brown v.
+      // Board, that helped make the lede the last band of seventeen.
+      collectionByDescribedThesis(subjectClaims, normalizedPage).catch((e) => {
+        console.error(`  thesis pivot failed: ${e.message}`)
+        return null
+      }),
       subjectAuthorWorks(subjectClaims).catch((e) => {
         console.error(`  author works failed: ${e.message}`)
         return { entries: [], total: 0 }
@@ -765,17 +847,25 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const bandTasks = units.map(async (unit) => {
     // A band waits only on the global batches it will actually read: a
     // section with no book citations must not stall behind OpenLibrary, nor a
-    // section with no identifiers behind archive.org. That is what lets the
-    // early rails stream while the slow batches are still answering.
-    const picked = (await pickedPromise).get(unit)
+    // section with no identifiers behind archive.org.
+    //
+    // The lede reads the lede-only half of each batch — the half that took its
+    // host's first turn — so it is not held behind the rest of the page. Every
+    // other band reads the merged result, which resolves no later than it did
+    // before. `labelsPromise` is the one thing the lede still shares, because
+    // labels are one batched request for the whole page and cheap.
+    const first = unit === lede
+    const picked = first ? await ledePickedPromise : (await pickedPromise).get(unit)
     const [iaHits, ol, labels, scholarHits, statements] = await Promise.all([
-      unit.identified.length ? iaPromise : new Map(),
+      unit.identified.length ? (first ? ledeIaPromise : iaPromise) : new Map(),
       unit.railCandidates.some((c) => c.isbn)
-        ? volumesPromise
+        ? first
+          ? ledeVolumesPromise
+          : volumesPromise
         : { volumes: new Map(), unchecked: new Set() },
-      picked.length ? labelsPromise : new Map(),
+      picked.length ? (first ? ledeLabelsPromise : labelsPromise) : new Map(),
       unit.scholarly.length ? scholarPromise : new Map(),
-      picked.length || unit.index === '0' ? statementsPromise : new Map(),
+      picked.length || first ? (first ? ledeStatementsPromise : statementsPromise) : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
