@@ -21,13 +21,17 @@ does not help generate the website, it belongs in the attic.
 
 ## Contracts
 
-- **Reads** nothing on disk but its own cache. Every page is discovered live
-  from the article title.
+- **Reads** nothing on disk but its own cache and `src/icons.js` — the partner
+  favicons, which are page furniture rather than findings and are generated, not
+  authored (`tools/build-icons.mjs`). Every page is discovered live from the
+  article title.
 - **Writes** `demo/spike-<resolved-title>.html` from `spike.js` — gitignored
   since 2026-08-03: no render output is committed; the demo is the live
   streaming server.
 - **Network** all goes through `.cache/` (gitignored), keyed by request URL —
-  reruns are offline and byte-reproducible. Delete `.cache/` to refetch.
+  reruns are offline and byte-reproducible. Delete `.cache/` to refetch. On the
+  deployed server this directory is a **Fly volume**, not container scratch (see
+  Deployed demo), and `src/sweep.js` bounds its size.
 - **`.cache/fact-<kind>-<key>.json`** (`readFacts`/`writeFacts` in `src/http.js`,
   2026-08-05) is the same cache holding *derived* answers rather than response
   bodies — today `fact-class-Q….json`, two booleans per Wikidata class. It is
@@ -65,6 +69,19 @@ does not help generate the website, it belongs in the attic.
   pipeline, budgets, cache and politeness as batch — only the byte timing
   differs. Byte-reproducibility is a batch-only invariant; streamed pages are
   expected to vary with live data.
+  **Images are the one place the two renderers genuinely differ** (2026-08-05).
+  Batch inlines them as `data:` URIs because its output must be one
+  self-contained file; streaming serves them from `/img/<sha1-of-url>` instead.
+  Inlining cost the streamed page three ways: every cover and tile was fetched
+  serially *before* its band's fragment could be written, base64 was a third of
+  the bytes (164 KB of Angkor Wat's 494 KB), and the same fifteen icons were
+  re-embedded in every page so a browser could never cache one across two
+  articles. Measured after: front page 111 KB → 19 KB, an article 252 KB → 62
+  KB. The fetch is still server-side under our User-Agent, which is all the OSMF
+  tile policy and the OpenLibrary-redirect argument ever required — neither
+  asked for the bytes to be *in the HTML*. The `/img/` registry only holds URLs
+  the server itself chose: an image proxy that fetches whatever a caller names
+  is an open proxy.
 
 Both entry points share `src/discover.js`, which reports progress
 through an async `emit('spine'|'band', …)` callback — batch ignores the
@@ -103,19 +120,35 @@ Experiment"*. Deliberately **one machine** (scaled down 2026-08-03; use
 `flyctl deploy --remote-only --ha=false` if ever recreating): the disk cache
 is per-machine, and Fly's default second "HA" machine made requests alternate
 between two independent cold caches — every page felt cold forever. One
-machine = one cache that accrues (18s cold → 0.3s warm); deploys still wipe
-it, which is the accepted trade. Since 2026-08-05 part of what accrues is
-**shared across articles**: the `fact-class-*` verdicts are a small, near-static
-vocabulary that articles draw on the same corner of (25–72% of a page's classes
-were already answered for an earlier one, measured across seven articles), so
-warming the showcase also warms the class walk for articles nobody has asked
-for yet.
+machine = one cache that accrues. Part of what accrues is **shared across
+articles**: the `fact-class-*` verdicts are a small, near-static vocabulary that
+articles draw on the same corner of (25–72% of a page's classes were already
+answered for an earlier one, measured across seven articles), and Library of
+Congress authorized headings behave the same way — so warming the showcase also
+warms articles nobody has asked for yet.
+
+**The cache is on a Fly volume as of 2026-08-05, and "accrues" was not true
+before that.** A Fly machine's rootfs is rebuilt from the image on every START,
+not merely on deploy, so `auto_stop_machines = "stop"` emptied the cache a few
+minutes after the last visitor left. Measured: after a forced stop/start the
+machine held **107 cache files / 2.0 MB** against 968 / 40 MB in a warm local
+one, and Angkor Wat — rendered cold minutes earlier — cost 5.9s again rather
+than 0.3s. On a low-traffic demo that meant nearly every visitor was a cold
+visitor and `warm.js` was warming something that evaporated on the next idle
+timeout. The earlier claim here that deploys wiping the cache was "the accepted
+trade" was an argument about deploys that never checked what idling did.
+`[[mounts]]` in `fly.toml` now maps `tapestry_cache` to `/app/.cache`; the
+volume is 3 GB, `serve.js` caps usage at `CACHE_MAX_MB` (default 2048) and
+evicts least-recently-**read** files above that (`src/sweep.js` — read time, not
+write time, because the oldest entries here are the most shared and so the most
+valuable). A full volume fails cache *writes* while reads keep working, which
+presents as the demo mysteriously being slow again.
 
 **Deploy with `npm run deploy`** from this directory — `flyctl deploy
---remote-only && node warm.js`. The second half matters: a deploy takes the
-machine's cache with it, so without it the six showcase links on the front page
-— the first thing anyone clicks — are each a cold minute at exactly the wrong
-moment. `warm.js` walks them once, **serially** (every page fans out dozens of
+--remote-only && node warm.js`. The second half is no longer the per-deploy tax
+it was, since the volume survives the deploy; it now matters on a fresh volume
+or after an eviction sweep, and is cheap and idempotent otherwise.
+`warm.js` walks the showcase, **serially** (every page fans out dozens of
 upstream requests, `MAX_CONCURRENT` 503s past four, and warming earns no
 exemption from the per-host queues). Its titles come from `showcaseTitles()`,
 the list the front page renders its own cards from; a test asserts the two
@@ -127,7 +160,12 @@ re-runs it alone. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operato
 never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
 `/wiki/`, and the per-host queues already bounding upstream traffic globally.
-The container cache is ephemeral by design.
+
+**Nothing may touch the network before `server.listen()`.** The source icons
+used to be fetched at startup — fifteen hosts, serial, at module top level —
+which cost **6.3–8.4s of every cold start** while Fly booted the VM in 1.2s and
+the visitor waited on a port that was not yet open. They are committed bytes now
+(`src/icons.js`, regenerated by `tools/build-icons.mjs`); startup is ~135ms.
 
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
@@ -229,6 +267,18 @@ statements, item→classes, then classes→ancestors — and it is the third tha
 partner half deliberately (Monarch butterfly 3 → 6 WDQS, +0.6s measured) and
 that is the cheap half; see Partner pivots.
 
+**Where a cold page's time actually went, measured 2026-08-05.** The `settled in
+Xs` stderr lines only wrap the article-global batches, and by this date those
+were no longer the problem: on production, every batch settled by **1.8–2.0s**
+while the pages finished at **9.5s** (Angkor Wat) and **13.6s** (Hedy Lamarr) —
+79–87% of the page in a tail nothing measured. That tail is the per-band partner
+work, and almost all of it was two hosts: `id.loc.gov` 27 requests / 5.1s serial
+and `api.dp.la` 21 / 3.9s, against 73 requests and 15.1s of total network time
+for the whole page. If a cold page feels slow again, count requests per host
+before believing the `settled` lines — they describe a part of the page that was
+already fast. `requestTally` and `peakConcurrency` in `src/mw.js` are the
+instruments; `spike.js` prints the tally at the end of a run.
+
 **Wall-clock here is not quotable.** Same code, same article, same warm class
 cache: Monarch butterfly cold measured **26.2s once and 10.7s another time on
 identical work** (2026-08-05). The variance is upstream weather — every page
@@ -301,6 +351,25 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   LCSH subject heading, not a Wikidata statement, and the cards say so.
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
   pivot silently skips, so clones run keyless.
+  **This is the most expensive pivot on the page and the most productive** — 40
+  of Angkor Wat's 56 cards — so it is tuned rather than trimmed. Three fixes
+  landed 2026-08-05, and two of them were correctness, not speed:
+  (1) `lcHeadingFromGraph` matched `@id.endsWith('/' + id)`, but LC ships the
+  identifier **twice** — the authority record, which carries the heading, and
+  `id.loc.gov/rwo/agents/<id>` for the real-world thing it names, which does
+  not. `find` took whichever came first and **that order varies per record**, so
+  n80014970 (Cambodia) resolved and n79006404 (France) returned null; 8 of 14
+  sampled ids lost that coin flip, each *after* the fetch was paid for. It
+  matches the whole authority URI now.
+  (2) The heading arrives from a **HEAD** request (`getHeader` in `src/http.js`)
+  reading `x-preflabel-encoded`, not from the 88–120 KB JSON-LD body. Use the
+  *encoded* variant: HTTP headers are Latin-1 and LC writes UTF-8, so the plain
+  `x-preflabel` gives "CÅdÃ¨s, George", which then goes to DPLA as a subject
+  query matching nothing — a silent empty shelf indistinguishable from an anchor
+  nobody holds anything under. `redirect: 'manual'` is required, because the
+  header rides a 303 whose target LC's CDN refuses to non-browser clients.
+  (3) `api.dp.la` runs 4 at a time; `id.loc.gov` stays at 1. See the partner
+  limits section under Wikimedia compliance for why those two differ.
 - **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
   through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
@@ -533,17 +602,56 @@ keep the hand-rolled client in `spike.js`.
   hand-rolled client, where it no-ops on non-Wikimedia URLs.
 - 429/503 honor `Retry-After`; other 4xx are **never** retried — a 404 is our
   bad identifier, not the server's bad day.
-- Requests are **serial per host** by construction: every request rides the
-  per-host queue in `src/mw.js` (`enqueue`). Different hosts run concurrently —
-  that is where the Tier-1 speedup lives — but never two in-flight requests to
-  the same API. Batch with `titles=A|B|C` (and the batched pivots in
-  `src/batch.js`) instead of adding parallelism.
+- Requests are **serial at every Wikimedia host** by construction: every request
+  rides the per-host queue in `src/mw.js` (`enqueue`). Different hosts run
+  concurrently — that is where the Tier-1 speedup lives — but never two
+  in-flight requests to the same Wikimedia API. Batch with `titles=A|B|C` (and
+  the batched pivots in `src/batch.js`) instead of adding parallelism.
+  `hostLimit()` returns 1 for every `wikipedia|wikimedia|wikidata|…` host and
+  that is not a tuning knob.
 - The browser extension must use **`Api-User-Agent`** — browsers silently drop a
   script-set `User-Agent` — and takes its contact from extension storage, since
   the installer is the operator.
 
 Policy: <https://foundation.wikimedia.org/wiki/Policy:Wikimedia_Foundation_User-Agent_Policy>
 Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
+
+## Non-Wikimedia partners: what each one actually permits (2026-08-05)
+
+Serial-per-host was applied uniformly to every host in the project, and by
+2026-08-05 that generalization — not the Wikimedia half of it — was where most
+of a cold page's wall clock lived. `hostLimit()` in `src/mw.js` is now the one
+place that says how wide a host may go, and **nothing goes in it without a
+published statement quoted at the call site.** The default is 1. Staying at 1
+costs only time; guessing wrong spends someone else's capacity.
+
+- **`api.dp.la` → 4.** DPLA's developer policy is explicit: *"Consistent with
+  its philosophical presumption of openness, in general, the DPLA will not
+  restrict or rate-limit the use of its API."* The only reservation is against
+  activity "denying or unduly degrading service to other API users". This was
+  the second-longest chain on a cold page — 21 requests, 3.9s serial.
+  (`pro.dp.la/developers/policies` answers 403 to non-browser clients; read it
+  through the Wayback Machine.)
+- **`id.loc.gov` → 1, permanently.** Its `robots.txt` sets `Crawl-delay: 3` for
+  `User-agent: *` under a notice that irresponsible clients get blocked. It was
+  the *longest* chain (27 requests, 5.1s), and the answer was to make each
+  request cheap and then rare, never to open more sockets: `lcHeading` now reads
+  the heading from a **HEAD** response header instead of downloading 88–120 KB
+  of JSON-LD, and the durable cache means a heading is asked for about once ever
+  — which is what LC's own `cache-control: max-age=2419200` (28 days) asks for.
+  **Be honest about the residual gap:** serial-at-~130ms is still far faster
+  than a literal 3-second crawl delay. The defensible reading is that a
+  reader-initiated dereference of a specific identifier is not a crawl, and the
+  request volume is falling toward zero as the cache fills — not that the
+  published number is being honored.
+- **`openlibrary.org` → 1** — it rate-limits back-to-back requests already (see
+  the gotcha below).
+- **`tile.openstreetmap.org` → 1** — the OSMF tile policy is explicit about
+  heavy use, and it is four requests a page.
+- **Everything else → 1**, because nobody has read their terms.
+
+`peakConcurrency` in `src/mw.js` records the widest any host actually ran, so
+the politeness claim is checkable after a run rather than merely asserted here.
 
 ## Gotchas
 
@@ -593,7 +701,20 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 - `src/breadth.js` — `tooBroad`/`broadNote`/`BROAD_ABOVE`: when a partner's
   holdings under an anchor are a category rather than a subject, so the shelf
   becomes a sentence and a browse link.
-- `src/http.js` — the URL-keyed request cache, plus `readFacts`/`writeFacts`,
+- `src/sweep.js` — the cache's ceiling: `chooseEvictions` (pure) picks
+  least-recently-**read** files, `startSweeping` runs it after `listen()`.
+  Needed only because the cache became durable; see Deployed demo.
+- `src/icons.js` — **generated**, by `tools/build-icons.mjs`. The partner
+  favicons as committed bytes. Regenerate when `SOURCE` gains a partner or an
+  icon rots. The generator refuses anything that is not `data:image/…`:
+  `openalex.org/favicon.ico` answers **200** with a 2.8 KB HTML error page,
+  which cleared the old size-only check and shipped as OpenAlex's icon — a
+  broken image on every page citing an open paper, for as long as nobody
+  looked. `free.law` and a Commons-hosted Europeana logo replaced two other
+  URLs that had quietly stopped serving images.
+- `src/http.js` — the URL-keyed request cache, plus `getHeader` (a HEAD's
+  response header, cached — see the DPLA pivot), `fromDataUri`, and
+  `readFacts`/`writeFacts`,
   the key→JSON cache for derived answers (see Contracts). Keys must be
   filename-safe and are **REFUSED, never sanitized** — a sanitized key can
   collide with another and return the wrong fact. One file per key, not per

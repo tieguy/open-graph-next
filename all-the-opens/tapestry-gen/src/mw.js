@@ -43,23 +43,81 @@ const queues = new Map()
 export const requestTally = new Map()
 
 /**
- * Run `task` after every earlier task enqueued for `host` has settled.
- * Rejections propagate to the caller but do not poison the queue.
+ * The most requests this run ever had in flight at one host. The politeness
+ * rule is otherwise only a claim in a comment; this is what makes it checkable
+ * after the fact, and what a widened limit has to be audited against.
+ */
+export const peakConcurrency = new Map()
+
+/** Wikimedia projects, where serial-per-host is policy and not a tuning knob. */
+const WIKIMEDIA = /(^|\.)(wikipedia|wikimedia|wikidata|wiktionary|wikisource|wikibooks|wikiquote|wikiversity|wikivoyage|mediawiki)\.org$/i
+
+/**
+ * Hosts allowed more than one request in flight, each with the published
+ * statement that permits it. Nothing goes in this map on the grounds that it
+ * "seems fine" — the default is serial, and staying out of it costs only time.
+ *
+ * - `api.dp.la` — DPLA's developer policy (pro.dp.la/developers/policies):
+ *   "Consistent with its philosophical presumption of openness, in general,
+ *   the DPLA will not restrict or rate-limit the use of its API." The only
+ *   reservation is against activity "denying or unduly degrading service to
+ *   other API users", which a demo answering a few pageviews is not. This was
+ *   the second-longest chain on a cold page: 21 requests, 3.9s serial.
+ *
+ * Deliberately NOT here, with reasons, so nobody has to re-derive them:
+ * - `id.loc.gov` publishes `Crawl-delay: 3` for `User-agent: *` under a notice
+ *   that irresponsible clients get blocked. It was the LONGEST chain, and the
+ *   answer was to make each request cheap (a HEAD that reads `x-preflabel`,
+ *   see src/dpla.js) and then rare (the cache is durable now), never to open
+ *   more sockets to it.
+ * - `openlibrary.org` rate-limits back-to-back requests already (CLAUDE.md).
+ * - `tile.openstreetmap.org` — the OSMF tile policy is explicit about heavy
+ *   use, and it is four requests a page anyway.
+ * - Everything else — nobody has read their terms, and the safe answer to an
+ *   unread policy is one.
+ */
+const WIDENED = new Map([['api.dp.la', 4]])
+
+/** How many requests may be in flight at `host` at once. One unless argued otherwise. */
+export function hostLimit(host) {
+  if (WIKIMEDIA.test(host)) return 1
+  return WIDENED.get(host) ?? 1
+}
+
+/**
+ * Run `task` on `host`'s queue, which admits `hostLimit(host)` at a time and
+ * starts them in the order they were enqueued. At the default limit of one this
+ * is exactly the old strict chain — including the property the lede-first
+ * ordering depends on, that whichever call is made first takes the host's turn
+ * first (see the `ledeFirst` comment in src/discover.js).
+ *
+ * Rejections propagate to the caller but do not poison the queue: a failed task
+ * frees its slot like any other.
  */
 export function enqueue(host, task) {
-  const prev = queues.get(host) ?? Promise.resolve()
-  const run = prev.then(() => {
-    requestTally.set(host, (requestTally.get(host) ?? 0) + 1)
-    return task()
+  let q = queues.get(host)
+  if (!q) queues.set(host, (q = { active: 0, waiting: [] }))
+  return new Promise((resolve, reject) => {
+    q.waiting.push({ task, resolve, reject })
+    pump(host, q)
   })
-  queues.set(
-    host,
-    run.then(
-      () => undefined,
-      () => undefined,
-    ),
-  )
-  return run
+}
+
+function pump(host, q) {
+  const limit = hostLimit(host)
+  while (q.active < limit && q.waiting.length) {
+    const { task, resolve, reject } = q.waiting.shift()
+    q.active++
+    requestTally.set(host, (requestTally.get(host) ?? 0) + 1)
+    peakConcurrency.set(host, Math.max(peakConcurrency.get(host) ?? 0, q.active))
+    Promise.resolve()
+      .then(task)
+      .then(resolve, reject)
+      .finally(() => {
+        q.active--
+        pump(host, q)
+      })
+  }
 }
 
 const sessions = new Map()

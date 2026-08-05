@@ -15,7 +15,8 @@ import { discover } from './src/discover.js'
 import { coverDataUri } from './src/http.js'
 import { requestTally } from './src/mw.js'
 import { userAgent } from './src/wmf.js'
-import { buildHtml, iconUrls } from './src/emit-html.js'
+import { buildHtml } from './src/emit-html.js'
+import { ICONS } from './src/icons.js'
 import { escapeHtml } from './src/html.js'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
@@ -55,13 +56,10 @@ async function main() {
   // Source icons travel too, and for a sharper reason than the covers: several
   // of these sites refuse cross-origin hotlinks outright (CourtListener answers
   // 403), so a live <img> is a guaranteed broken image for the sources readers
-  // are least likely to recognize unaided. Only the icons this page will show
-  // are fetched, and anything that fails simply renders as a name.
-  for (const url of iconUrls()) {
-    if (inline.has(url)) continue
-    const uri = await coverDataUri(url, { minBytes: 64 })
-    if (uri) inline.set(url, uri)
-  }
+  // are least likely to recognize unaided. They come from src/icons.js now —
+  // committed bytes rather than fifteen fetches per run, which also makes a
+  // batch render one fewer thing that can differ between two runs.
+  for (const [url, uri] of ICONS) if (!inline.has(url)) inline.set(url, uri)
 
   const html = buildHtml({
     title,

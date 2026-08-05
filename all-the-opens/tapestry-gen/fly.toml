@@ -22,9 +22,33 @@ kill_timeout = "45s"
 
 # ONE machine, on purpose (scaled 2026-08-03; recreate with `--ha=false`).
 # The disk cache is per-machine: with two, requests alternate between two
-# independent cold caches and every page feels cold forever. One machine is
-# one cache that actually accrues — 18s cold, 0.3s warm.
+# independent cold caches and every page feels cold forever. One machine is one
+# cache that actually accrues. The volume below is what makes "accrues" true —
+# a machine's rootfs is rebuilt from the image on every start, so before it,
+# scale-to-zero emptied the cache several minutes after the last visitor left
+# and nearly every arrival was a cold one.
 
 [[vm]]
   size = "shared-cpu-1x"
   memory = "1gb"
+
+# The disk cache, made durable (2026-08-05). Measured: after a stop/start the
+# cache held 107 files where a warm one holds thousands, and a page rendered
+# minutes earlier cost 5.9s again instead of 0.3s. `warm.js` was warming
+# something that evaporated on the next idle timeout.
+#
+# What accrues here is mostly shared between articles rather than specific to
+# one: Library of Congress authorized headings (which LC itself serves with
+# `cache-control: max-age=2419200` — 28 days), the `fact-class-*` Wikidata
+# verdicts, and partner records. So this makes articles nobody has asked for
+# yet faster too, and it is the reason the LC pivot can stay strictly serial
+# under that host's published `Crawl-delay: 3`.
+#
+# Created with:
+#   fly volumes create tapestry_cache --region sjc --size 3 --yes
+# serve.js caps it at CACHE_MAX_MB (default 2048) and evicts least-recently-read
+# files above that — see src/sweep.js. A full volume would fail cache WRITES
+# while reads kept working, which looks exactly like the demo being slow again.
+[[mounts]]
+  source = "tapestry_cache"
+  destination = "/app/.cache"

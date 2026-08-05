@@ -21,10 +21,18 @@ const SOURCE = {
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/c/c4/Smithsonian_sun_logo_no_text.svg/120px-Smithsonian_sun_logo_no_text.svg.png',
   },
   openstreetmap: { name: 'OpenStreetMap', icon: 'https://www.openstreetmap.org/favicon.ico' },
-  free_law: { name: 'Free Law Project', icon: 'https://www.courtlistener.com/favicon.ico' },
+  // free.law, not courtlistener.com: CourtListener's favicon answers 403 to
+  // every non-browser fetch, so the partner this page names most confidently
+  // was the one arriving with no picture. Free Law Project is the organization
+  // the credit line already says, and its own site serves the icon.
+  free_law: { name: 'Free Law Project', icon: 'https://free.law/favicon.ico' },
   inaturalist: { name: 'iNaturalist', icon: 'https://www.inaturalist.org/favicon.ico' },
   gbif: { name: 'GBIF', icon: 'https://www.gbif.org/favicon.ico' },
-  openalex: { name: 'OpenAlex', icon: 'https://openalex.org/favicon.ico' },
+  // favicon.ico here answers 200 with an HTML error page, which passed the old
+  // size-only check and shipped a 4 KB text/html blob as OpenAlex's icon — a
+  // broken image on every page that cited an open paper. This is the file the
+  // site's own <link rel="icon"> names.
+  openalex: { name: 'OpenAlex', icon: 'https://openalex.org/favicon.png' },
   arxiv: { name: 'arXiv', icon: 'https://arxiv.org/favicon.ico' },
   met: {
     name: 'The Met',
@@ -37,7 +45,14 @@ const SOURCE = {
   // arrive from whichever library or museum holds the object.
   iiif: { name: 'IIIF collections', icon: 'https://iiif.io/favicon.ico' },
   dpla: { name: 'DPLA', icon: 'https://dp.la/favicon.ico' },
-  europeana: { name: 'Europeana', icon: 'https://www.europeana.eu/favicon.ico' },
+  europeana: {
+    name: 'Europeana',
+    // europeana.eu's own favicon now 404s and the live one sits behind a
+    // content-hashed Nuxt path that changes on every redeploy of their site.
+    // The logo on Commons is stable and serves at an allowlisted thumb width —
+    // the same reason the Met and Smithsonian icons come from there.
+    icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Europeana_logo_2015_basic.svg/120px-Europeana_logo_2015_basic.svg.png',
+  },
 }
 
 const iaEmbed = (source) => {

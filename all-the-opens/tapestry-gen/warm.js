@@ -4,11 +4,14 @@
  *
  *   node warm.js [base-url]
  *
- * A deploy replaces the machine's image and takes its `.cache/` with it (see
- * CLAUDE.md, "Deployed demo"), so the six showcase links — the first thing a
- * visitor clicks — are cold immediately after every deploy, which is the worst
- * possible moment for them to take a minute each. This walks them once so the
- * next person to arrive gets the warm page.
+ * The cache lives on a Fly volume as of 2026-08-05, so it survives both deploys
+ * and the scale-to-zero idle stop and this is no longer the per-deploy tax it
+ * once was — a showcase page warmed today is still warm next month. What it is
+ * now is the first fill: on a fresh volume, or after an eviction sweep, the six
+ * showcase links are the first thing a visitor clicks and the worst possible
+ * place for them to be cold. Cheap and idempotent, so `npm run deploy` still
+ * runs it; on an already-warm volume it costs six fast requests and proves the
+ * deploy serves pages.
  *
  * The titles come from `showcaseTitles()`, the same list the front page renders
  * its cards from. There is deliberately no second copy to keep in step.

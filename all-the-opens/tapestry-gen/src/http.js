@@ -74,6 +74,70 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
 }
 
 /**
+ * `data:<type>[;params][;base64],<bytes>` split back into something writable to
+ * a socket. The media type may carry parameters — `image/svg+xml;charset=utf-8`
+ * — so everything between the scheme and the comma is the type, and `;base64`
+ * is only the last of those segments.
+ */
+export function fromDataUri(uri) {
+  const m = /^data:([^,]*),([\s\S]*)$/.exec(uri ?? '')
+  if (!m) return null
+  const params = m[1].split(';')
+  const base64 = params[params.length - 1].trim().toLowerCase() === 'base64'
+  if (base64) params.pop()
+  return {
+    type: params.join(';').trim() || 'text/plain;charset=US-ASCII',
+    body: Buffer.from(m[2], base64 ? 'base64' : 'utf8'),
+  }
+}
+
+/**
+ * One response HEADER, by HEAD request, disk-cached like everything else.
+ *
+ * Some services answer the question in a header and put a large document in the
+ * body. id.loc.gov is the case that needed this: it returns the authorized
+ * heading as `x-preflabel` (and names it in `access-control-expose-headers`, so
+ * it is an interface, not an accident) on a record whose JSON-LD is 88–120 KB.
+ * Measured 2026-08-05: 0 bytes and ~0.13s against ~0.25–0.50s for the body.
+ *
+ * `redirect: 'manual'` is load-bearing and not a preference. id.loc.gov answers
+ * **303** with the header on the redirect itself, pointing at an `.html` page
+ * that its CDN refuses to non-browser clients — so following the redirect
+ * throws away the answer and lands on a 403. Node exposes the 3xx response
+ * where a browser would not; that is the whole reason this works.
+ *
+ * An empty file means "asked, and there was no such header" — a real answer,
+ * cached as one, or it is re-asked forever.
+ */
+export async function getHeader(url, name, { timeoutMs = 15000 } = {}) {
+  const key = createHash('sha1').update(`head:${name}:${url}`).digest('hex').slice(0, 16)
+  const path = join(CACHE, `header-${key}.txt`)
+  try {
+    return (await readFile(path, 'utf8')) || null
+  } catch {
+    /* not asked yet */
+  }
+  const value = await enqueue(new URL(url).host, async () => {
+    try {
+      const res = await fetch(url, {
+        method: 'HEAD',
+        redirect: 'manual',
+        headers: { 'User-Agent': UA() },
+        signal: AbortSignal.timeout(timeoutMs),
+      })
+      return res.headers.get(name) ?? ''
+    } catch {
+      // A header we could not read is not a header that is absent, but the
+      // caller's fallback covers both and a failed HEAD must not fail a page.
+      return ''
+    }
+  })
+  await mkdir(CACHE, { recursive: true })
+  await writeFile(path, value)
+  return value || null
+}
+
+/**
  * A key→JSON fact cache, one small file per key, for answers that are NOT a
  * URL's response body and so cannot ride `getJson`'s per-URL cache.
  *

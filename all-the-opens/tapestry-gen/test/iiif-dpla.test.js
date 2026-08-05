@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
 import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
-import { lcHeadingFromGraph } from '../src/dpla.js'
+import { decodeLcHeading, lcHeadingFromGraph } from '../src/dpla.js'
 
 // ---- IIIF (P6108) -----------------------------------------------------------
 
@@ -103,6 +103,62 @@ test('the LC graph yields the authorized heading for exactly the asked id', () =
   assert.equal(lcHeadingFromGraph(graph, 'n79000001'), 'Armstrong, Neil, 1930-2012')
   assert.equal(lcHeadingFromGraph([], 'n79000001'), null)
   assert.equal(lcHeadingFromGraph('not a graph', 'x'), null)
+})
+
+// LC ships the same identifier twice: the authority record, which carries the
+// heading, and an `rwo/agents` node for the real-world thing it names, which
+// carries none. Matching on "@id ends with /<id>" hits both, and the order is
+// NOT stable — n80014970 (Cambodia) lists the authority first and resolved;
+// n79006404 (France) lists rwo first and silently resolved to null, costing the
+// page every DPLA card under that anchor after the fetch was already paid for.
+// Measured 2026-08-05: 8 of 14 sampled ids lost this coin flip.
+test('the rwo/agents twin never stands in for the authority record', () => {
+  const nodes = {
+    rwo: { '@id': 'http://id.loc.gov/rwo/agents/n79006404' },
+    authority: {
+      '@id': 'http://id.loc.gov/authorities/names/n79006404',
+      'http://www.w3.org/2004/02/skos/core#prefLabel': [{ '@value': 'France' }],
+    },
+  }
+  // Either order, same answer.
+  assert.equal(lcHeadingFromGraph([nodes.rwo, nodes.authority], 'n79006404'), 'France')
+  assert.equal(lcHeadingFromGraph([nodes.authority, nodes.rwo], 'n79006404'), 'France')
+  // Subject headings live under a different branch and must resolve too.
+  assert.equal(
+    lcHeadingFromGraph(
+      [
+        { '@id': 'http://id.loc.gov/rwo/agents/sh85005249' },
+        {
+          '@id': 'http://id.loc.gov/authorities/subjects/sh85005249',
+          'http://www.loc.gov/mads/rdf/v1#authoritativeLabel': [{ '@value': 'Animals' }],
+        },
+      ],
+      'sh85005249',
+    ),
+    'Animals',
+  )
+  // An id that appears ONLY as an rwo node has no authorized heading to report.
+  assert.equal(lcHeadingFromGraph([nodes.rwo], 'n79006404'), null)
+})
+
+// HTTP headers are Latin-1, and LC sends UTF-8 bytes — so the plain
+// `x-preflabel` arrives as "CÅdÃ¨s, George" and would go on to DPLA as a
+// subject-name query matching nothing at all. That is why LC ships
+// `x-preflabel-encoded` beside it. A silent zero-result search is exactly the
+// failure this pivot must not have, since it is indistinguishable from an
+// anchor the partners genuinely hold nothing under.
+test('the encoded heading survives the trip through a Latin-1 header', () => {
+  assert.equal(decodeLcHeading('C%C5%93d%C3%A8s%2C%20George'), 'Cœdès, George')
+  assert.equal(decodeLcHeading('Champ%C4%81%20%28Kingdom%29'), 'Champā (Kingdom)')
+  assert.equal(
+    decodeLcHeading('%C3%89cole%20fran%C3%A7aise%20d%27Extr%C3%AAme-Orient'),
+    "École française d'Extrême-Orient",
+  )
+  assert.equal(decodeLcHeading('Animals'), 'Animals')
+  // A malformed sequence is not a heading; it must not throw mid-page.
+  assert.equal(decodeLcHeading('%E0%A4%A'), null)
+  assert.equal(decodeLcHeading(''), null)
+  assert.equal(decodeLcHeading(null), null)
 })
 
 test('dplaUrl asks for the exact authorized heading and only the fields the card reads', () => {
