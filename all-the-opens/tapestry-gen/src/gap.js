@@ -36,6 +36,7 @@ export const PARTNER_HOSTS = {
   openstreetmap: ['openstreetmap.org', 'osm.org'],
   met: ['metmuseum.org'],
   artic: ['artic.edu'],
+  rijks: ['rijksmuseum.nl'],
   inaturalist: ['inaturalist.org'],
   gbif: ['gbif.org'],
   dpla: ['dp.la'],

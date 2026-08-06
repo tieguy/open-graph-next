@@ -1,6 +1,7 @@
 // The statement pivots: an anchored entity's Wikidata statements name an
 // object in a partner collection, and the partner's open API supplies the
-// object itself. Museums (Met P3634, Art Institute of Chicago P4610),
+// object itself. Museums (Met P3634, Art Institute of Chicago P4610,
+// Rijksmuseum P13234),
 // biodiversity (iNaturalist P3151, GBIF P846), and place (P625 coordinates →
 // OpenStreetMap render). One WDQS query answers every anchor's partner
 // statements; two small follow-ups decide which anchors are mappable places,
@@ -15,15 +16,20 @@ import { chunk } from './batch.js'
 import { getJson, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
+import { rijksEntry } from './rijks.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
+const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?rijks ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
+    // P13234: the Rijksmuseum's own object id (added 2026-08-06) — same
+    // object-level shape as the Met and AIC ids above, and the best-answering
+    // of the three on art-heavy articles. See src/rijks.js.
+    'OPTIONAL { ?item wdt:P13234 ?rijks } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
     'OPTIONAL { ?item wdt:P402 ?osmr } OPTIONAL { ?item wdt:P10689 ?osmw } ' +
@@ -73,7 +79,7 @@ export function needsPlaceDefunctQuery(statements) {
  * about the wrong thing.
  */
 export function needsRightsQuery(statements) {
-  return Boolean(statements?.met || statements?.aic || statements?.iiif)
+  return Boolean(statements?.met || statements?.aic || statements?.rijks || statements?.iiif)
 }
 
 /**
@@ -635,6 +641,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   const jobs = [
     statements.met && metEntry(statements.met),
     statements.aic && aicEntry(statements.aic),
+    statements.rijks && rijksEntry(statements.rijks),
     // The manifest host is whichever institution holds the object; the
     // fetch rides that host's own queue like every other partner call.
     statements.iiif && iiifEntry(statements.iiif, label),
@@ -688,6 +695,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
 const PROP_NAME = {
   P3634: 'Met object ID (P3634)',
   P4610: 'Art Institute of Chicago artwork ID (P4610)',
+  P13234: 'Rijksmuseum object ID (P13234)',
   P6108: 'IIIF manifest URL (P6108)',
   P3151: 'iNaturalist taxon ID (P3151)',
   P846: 'GBIF taxon ID (P846)',

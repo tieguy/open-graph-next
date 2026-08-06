@@ -191,6 +191,16 @@ open ecosystem can show you.
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 
+**Rembrandt replaced American Gothic as the art showcase on 2026-08-06**, and
+the swap is what drove the artworks pivot: the Met and the Rijksmuseum were
+both landmark open-access releases, and an artist article shows them together
+where a single painting shows one museum. An article ABOUT a painting gets
+nothing from `src/artworks.js` — The Night Watch fired the pivot zero times,
+because P170 points *from* the painting *to* Rembrandt and not the other way.
+Johannes Vermeer is the tighter alternative if the page is ever felt to be too
+busy: 2 museums and 60 cards against Rembrandt's 3 and 116, with the nicer
+disclosure ("3 of 5 works ... the Met", "3 of 4 ... the Rijksmuseum").
+
 ## The visibility panel — and why Commons left (2026-08-04, LUI-122)
 
 Under the masthead's credit bar sits one quiet line — *"Who helped, and who
@@ -449,6 +459,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenAlex | `best_oa_location.license` | read |
 | The Met | `isPublicDomain` (its CC0 flag) | read |
 | Art Institute | `is_public_domain` | read |
+| Rijksmuseum | `subject_to` on the VisualItem | read — see the trap below |
 | iNaturalist | `license_code` per photo | read |
 | Free Law | none needed — 17 USC §105 | public-domain mark, stated |
 | Open Library | `ebook_access` per work | read; overrides creator status |
@@ -458,6 +469,10 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
 | Smithsonian | n/a | no pivot builds cards; visibility panel only |
+
+The Rijksmuseum trap is the one to remember, because the record hands you the
+wrong answer first: it states TWO Creative Commons URIs, and the CC0 licenses
+the catalogue text rather than the image. See `src/rijks.js` under Key Files.
 
 Three real defects came out of it, and all three predate the rights work:
 
@@ -533,6 +548,7 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   (1) `partnerStatements` — the cheap OPTIONAL query, one per 100 candidates,
   now asked of EVERY candidate anchor on the page rather than the two per
   section picked blind. Answers Met objects (P3634), Art Institute of Chicago (P4610),
+  **Rijksmuseum objects (P13234, `src/rijks.js`, added 2026-08-06)**,
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
   (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution
   with no per-partner code; Presentation v2 and v3 both parsed; best coverage
@@ -571,6 +587,60 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   page (see Streaming profile) that was a live race: the page-wide pass stomped
   "Supreme Court of the United States" back to unmappable while the lede band
   was still reading that object, and Brown v. Board lost its lede map.
+- **The subject's own artworks** (`src/artworks.js`, added 2026-08-06) — the
+  third case of a pattern the project already had twice: `src/works.js` asks
+  OpenLibrary for the books the subject wrote, the ORCID pivot asks OpenAlex
+  for their papers, and this asks Wikidata for the artworks they made
+  (`?work wdt:P170 ?subject`, UNION over P3634/P13234/P4610/P6108). One WDQS
+  request; the picked works then ride their own partners' fetchers, so a
+  painting reached this way renders identically to one reached through a
+  wikilink.
+
+  **It exists because the article's own links could not carry the question,
+  and that is a structural fact rather than a ranking bug.** `proseLinks`
+  strips `<table>` blocks, and on an artist article the links to individual
+  paintings live in galleries and works-tables. Measured on enwiki's
+  Rembrandt, 2026-08-06:
+
+  | stage | anchors carrying a museum id |
+  |---|---|
+  | all links in the article | **35** (Met 11 · Rijks 14 · AIC 1 · IIIF 9) |
+  | survive the `<table>` strip | 14 (Met 2 · Rijks 5 · AIC 1 · IIIF 6) |
+  | reach the partner pivot | 3 |
+  | rendered as cards | **2** |
+
+  The strip is load-bearing — it is what keeps navboxes, infoboxes and
+  succession boxes off every page — so the fix was to stop routing this
+  question through links at all, **not** to loosen the strip. Asking the graph
+  instead answers 553 works for Rembrandt, 218 Monet, 141 Hokusai, 96 Van
+  Gogh, 35 Tissot, 12 Vermeer, and works on every artist article rather than
+  only ones with tidy galleries. Rembrandt's museum cards went 2 → 11.
+
+  **Diversity is the whole point and is enforced.** Rembrandt's 551 break down
+  as 481 IIIF, 39 Met, 29 Rijksmuseum, 2 AIC, so any natural order gives six
+  IIIF cards on the page whose argument is how many different friends hold
+  this material; `pickDiverse` round-robins across partners first. It
+  over-picks and walks the list until `cap` cards actually exist, because a
+  403 from one manifest must cost its own card and not a SLOT — IIIF manifests
+  really do 403, three did across Rembrandt and Vermeer.
+
+  **Gated on the subject being a person** (`needsArtworksQuery`, P31 → Q5),
+  the same shape of gate as `needsPlaceDefunctQuery`: without it the pivot
+  spends one WDQS request per page asking what paintings a butterfly or a court
+  case produced, and WDQS is on the lede's critical path. Verified after: Brown
+  v. Board pays nothing, Rembrandt is unchanged. Deliberately narrow — a
+  workshop or collective is not Q5 and gets no shelf, which is a trade against
+  the transitive class walk that CLAUDE.md already records as costing 16–37s.
+
+  Two correctness notes worth keeping: the row `LIMIT` is 1000 because the row
+  count IS the shelf's disclosure ("6 of 551") and a silently truncated total
+  would print a false claim (`truncated` is reported so the caller can say "at
+  least"); and a work whose English label is missing is dropped, because WDQS's
+  label service falls back to the bare QID and a card titled "Q123456" is not a
+  card. These shelves carry the subject's creator-level status as well as the
+  museum's own `copy` statement — permitted by the rule that a `subject-work`
+  shelf is the subject's own output, and NOT the Kafka-anthology case, since a
+  painting with P170 pointing at the subject is that subject's own work.
 - **DPLA** (`src/dpla.js`, added 2026-08-03) — one subject-heading lookup per
   band on its most prominent labeled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
@@ -871,6 +941,12 @@ costs only time; guessing wrong spends someone else's capacity.
   published number is being honored.
 - **`openlibrary.org` → 1** — it rate-limits back-to-back requests already (see
   the gotcha below).
+- **`id.rijksmuseum.nl` → 1**, the default, because nobody has read their terms
+  — but note it is the one partner that costs **three serial requests per
+  object** (the Linked Art walk), so a shelf of four Rijksmuseum cards is
+  twelve requests on one host. That is bounded by the artworks cap and by the
+  cache, and it is the reason `subjectArtworks` fetches serially rather than
+  fanning out.
 - **`tile.openstreetmap.org` → 1** — the OSMF tile policy is explicit about
   heavy use, and it is four requests a page.
 - **Everything else → 1**, because nobody has read their terms.
@@ -947,6 +1023,26 @@ the politeness claim is checkable after a run rather than merely asserted here.
   Metamorphosis, Der Proceß and Das Schloß, where works.json led with
   "Gezar-ha-din" and a Russian edition of the diaries), and `first_publish_year`
   is populated where `first_publish_date` mostly was not.
+- `src/rijks.js` — the Rijksmuseum (P13234), added 2026-08-06. **No API key**:
+  the keyed `api.rijksmuseum.nl` was shut down 2026-01-05 and 404s;
+  `id.rijksmuseum.nl` (Linked Art) needs no auth, so unlike DPLA and Europeana
+  a clone of this repo can use it. Three requests per object, because Linked
+  Art models the object, its visual content and the file separately:
+  HumanMadeObject (~30 KB, title/date/`shows`) → VisualItem (~2 KB, rights and
+  `digitally_shown_by`) → DigitalObject (~0.6 KB, `access_point`), which is a
+  plain IIIF Image API base. The VisualItem id is derivable from the object id
+  (third digit `0`→`2`, held 6/6 on 2026-08-06 across both id lengths) but that
+  is UNDOCUMENTED and is used only as a fallback when hop 1 omits `shows`.
+  **The CC0 in this record is not about the picture** — `subject_to` carries
+  `publicdomain/mark` over the visual content while `subject_of.subject_to`
+  carries CC0 over the catalogue TEXT (AAT 300379475, "descriptions"). Printing
+  the second as the card's licence would promise CC0 over an image the museum
+  marked public-domain instead; `rijksRights` reads `subject_to` only. Titles
+  come from the name the museum tags primary (AAT 300404670) in English (AAT
+  300388277): a record carries the same work under a long curatorial sentence
+  and a short display title, both English and both true.
+- `src/artworks.js` — the subject's own artworks; see Partner pivots for the
+  measured funnel that made it a query rather than an anchor pivot.
 - `src/rights.js` — pure except one fetch: license/status vocabularies, the
   WDQS rights query, and `rightsView`, which decides what a card says. See the
   copyright section above for the rules it encodes.

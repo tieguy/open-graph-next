@@ -49,8 +49,18 @@ import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
 import { authorWorkEntries, authorWorksUrl } from './works.js'
+import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
-import { needsRightsQuery, partnerStatements, resolveMappability, statementEntries } from './statements.js'
+import {
+  aicEntry,
+  metEntry,
+  needsRightsQuery,
+  partnerStatements,
+  resolveMappability,
+  statementEntries,
+} from './statements.js'
+import { iiifEntry } from './iiif.js'
+import { rijksEntry } from './rijks.js'
 import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
 import { claimAnchors, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
@@ -383,6 +393,21 @@ function freeLawByCitation(citations) {
     rights: { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/mark/1.0/')) },
     _via: 'P1031',
   }
+}
+
+/**
+ * Which partner to ask for a picked artwork, and how.
+ *
+ * The same per-object fetchers the anchor pivot uses, so a painting reached
+ * through the subject's own statements renders identically to one reached
+ * through a wikilink — same card, same credit, same rights reading. Only the
+ * reason it is on the page differs, and that is what `why` and the ⓘ fold say.
+ */
+const artworkFetcher = (via, id, label) => {
+  if (via === 'met') return metEntry(id)
+  if (via === 'rijks') return rijksEntry(id)
+  if (via === 'aic') return aicEntry(id)
+  return iiifEntry(id, label)
 }
 
 /** The subject's own works, via the OpenLibrary author identifier P648. */
@@ -812,13 +837,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     ),
   )
 
-  const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
+  const ledeExtrasPromise = Promise.all([subjectPromise, ledePickedPromise]).then(async ([
+    { qid: subjectQid, claims: subjectClaims },
+    ledeOwn,
+  ]) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
     const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
-    const [thesis, works, scholarship] = await Promise.all([
+    const [thesis, works, scholarship, artworks] = await Promise.all([
       // No longer waits for the page-wide identifier batch. That gate was
       // written when this pivot could spend eight serial archive.org requests
       // searching for a thesis by description — a cost worth deferring behind
@@ -841,6 +869,23 @@ export async function discover(page, { emit = async () => {} } = {}) {
             return { entries: [], total: 0 }
           })
         : Promise.resolve({ entries: [], total: 0 }),
+      // The subject's own artworks, held by partner museums. Asked of the
+      // graph rather than of the article's links, because on an artist article
+      // the paintings are linked from galleries and works-tables and
+      // `proseLinks` strips tables — see the header of src/artworks.js for the
+      // measured funnel that made this its own pivot. Excludes anchors the
+      // lede already owns, so a painting the lede is already carding does not
+      // arrive a second time on the subject's shelf.
+      needsArtworksQuery(subjectClaims)
+        ? subjectArtworks(subjectQid, {
+            cap: WORKS_BY_SUBJECT,
+            exclude: new Set(ledeOwn),
+            fetchEntry: artworkFetcher,
+          }).catch((e) => {
+            console.error(`  subject artworks failed: ${e.message}`)
+            return { entries: [], totals: {}, total: 0 }
+          })
+        : Promise.resolve({ entries: [], totals: {}, total: 0 }),
     ])
     // The shelves of the subject's own output say whose output and which
     // identifier vouches for that — the band's disclosure states the counts,
@@ -877,6 +922,22 @@ export async function discover(page, { emit = async () => {} } = {}) {
         `their own name attached to their work. OpenAlex lists this paper under it.`
       e.fix = fixOn('P496')
     }
+    for (const e of artworks.entries) {
+      const holder = MUSEUM_NAME[e.source] ?? 'a partner museum'
+      e.why = `Made by ${page}, held by ${holder}`
+      e.topic = `By ${page}`
+      e.standing = 'subject-work'
+      e.trace =
+        `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${page} ` +
+        `created this work (P170), and that ${holder} holds it. ` +
+        `We asked the museum for its own record of it, and this is what came back.`
+      // The work's own Wikidata entry, not the subject's: that is where both
+      // halves of this claim — who made it and who holds it — are stated, and
+      // so where a reader who spots either being wrong would fix it.
+      e.fix = e._qid
+        ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
+        : fixOn('P170')
+    }
     if (thesis)
       console.error(
         `thesis: ${thesis.title} (` +
@@ -889,7 +950,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
       console.error(`works by subject: ${works.entries.length} of ${works.total}`)
     if (scholarship.entries.length)
       console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
-    return { opinion, thesis, works, scholarship, subjectQid }
+    if (artworks.entries.length)
+      console.error(
+        `artworks by subject: ${artworks.entries.length} of ` +
+          `${artworks.truncated ? `${artworks.total}+` : artworks.total} ` +
+          `(${Object.entries(artworks.totals)
+            .filter(([k, n]) => k !== 'works' && n)
+            .map(([k, n]) => `${k} ${n}`)
+            .join(', ')})`,
+      )
+    return { opinion, thesis, works, scholarship, artworks, subjectQid }
   })
 
   // ---- One task per unit: a band completes when ITS dependencies do. -------
@@ -934,7 +1004,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
-    if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries)
+    if (extras)
+      entries.push(
+        ...extras.works.entries,
+        ...extras.scholarship.entries,
+        ...extras.artworks.entries,
+      )
     // The subject's own output — books Open Library files under them, papers
     // their ORCID vouches for, their thesis. Here the article's subject is the
     // AUTHOR, so what applies is their creator-level status: CopyClear's bots
@@ -948,7 +1023,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
         kind: 'author',
         label: unit.title,
       })
-      for (const e of [extras.thesis, ...extras.works.entries, ...extras.scholarship.entries]) {
+      // The artworks belong in this loop for the reason CLAUDE.md gives for
+      // the shelf class: these are works the subject MADE, so the creator's
+      // status is a status of the right thing. This is the case the Kafka
+      // anthology was not — a 1991 compilation filed under a long-dead author
+      // is a new work, whereas a painting with P170 pointing at the subject is
+      // that subject's own. The museum's own `copy` statement is untouched;
+      // the two answer different questions and both ride the card.
+      for (const e of [
+        extras.thesis,
+        ...extras.works.entries,
+        ...extras.scholarship.entries,
+        ...extras.artworks.entries,
+      ]) {
         // The opinion is deliberately absent: a court's own words are public
         // domain because nobody may own the law, which is a stronger and
         // different reason than anything an author's status could supply.
@@ -1201,6 +1288,27 @@ export async function discover(page, { emit = async () => {} } = {}) {
           `${extras.scholarship.entries.length} free to read, of the ${extras.scholarship.total} ` +
           `papers OpenAlex files under ${unit.title}’s ORCID record`,
       })
+    // One note per MUSEUM, not one for the whole artworks pivot: the renderer
+    // groups shelves by (source, topic), so these cards arrive as a Met shelf
+    // beside a Rijksmuseum shelf, and a single note counting all of them would
+    // be the free-floating claim this page keeps deleting. Each museum's note
+    // counts that museum's own holdings.
+    for (const [key, count] of Object.entries(extras?.artworks.totals ?? {})) {
+      if (key === 'works' || !count) continue
+      const source = key === 'aic' ? 'artic' : key
+      const shown = extras.artworks.entries.filter((e) => e.source === source).length
+      if (!shown) continue
+      const holder = MUSEUM_NAME[source] ?? 'this collection'
+      samples.push({
+        source,
+        topic: `By ${page}`,
+        shown,
+        total: count,
+        text:
+          `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${unit.title} ` +
+          `that Wikidata records ${holder} as holding`,
+      })
+    }
 
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,

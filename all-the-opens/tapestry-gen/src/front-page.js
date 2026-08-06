@@ -35,9 +35,9 @@ const SHOWCASE = [
   },
   {
     domain: 'Art',
-    title: 'American Gothic',
+    title: 'Rembrandt',
     watch:
-      'The Art Institute of Chicago’s own record of the painting, beside the article about it.',
+      'His paintings are scattered across the Met, the Rijksmuseum and the Art Institute — each museum’s own record of what it holds, gathered in one place.',
   },
   {
     domain: 'Open science',
@@ -52,45 +52,77 @@ const SHOWCASE = [
 // media; the hosts close the list. The license line states the terms of the
 // gift, because the terms ARE part of the story — and it must stay true of
 // the data this demo actually uses, not of the organization in general.
+//
+// **The register was lowered deliberately on 2026-08-06.** The gift lines had
+// drifted into advertising — "Gave away the Dutch Golden Age", "Europe's
+// answer", "the opinion, not a paywall", "a copy you can borrow tonight" —
+// and a page whose whole argument is that these institutions are worth taking
+// seriously undercuts itself by selling them. Each line now says plainly what
+// the partner contributes to THIS page. Warmth is fine; a pitch is not.
+//
+// The optional fifth element is a link to the partner's own statement of its
+// terms, so the license claim beside it is checkable rather than merely
+// asserted — the same ethic as the ⓘ fold on a card, which links the Wikidata
+// statement it rests on. Only added where the page has actually been read;
+// an unlinked license line means nobody has verified one yet, NOT that the
+// partner publishes nothing.
 const FRIENDS = [
   ['internet_archive', 'Internet Archive',
-    'Lends the books. A footnote’s ISBN becomes a copy you can borrow tonight.',
+    'Lends the books. A footnote’s ISBN becomes a copy you can borrow.',
     'Public-domain scans free to read; in-copyright books lent, not copied.'],
   ['openlibrary', 'Open Library',
-    'Knows every edition of every book — and which ones are actually open.',
+    'Catalogs the editions of a book, and records which ones are free to read.',
     'Open bibliographic data, downloadable in bulk.'],
   ['openalex', 'OpenAlex',
-    'Finds the free, legal copy of the paper behind the citation.',
+    'Finds a free, legal copy of the paper behind a citation.',
     'Catalog CC0. Only papers with an open copy are shown — each card names its license; closed ones are counted, not carded.'],
   ['arxiv', 'arXiv',
-    'Keeps whole sciences open by construction — the preprint is the publication.',
-    'Metadata CC0; each paper names its own license.'],
+    'Preprints in physics, maths and computing, open from the day they are posted.',
+    'Metadata CC0; each paper names its own license.',
+    // Their license help page: the submitter picks a license per paper and the
+    // choice is irrevocable, which is the half of our claim that matters here.
+    'https://arxiv.org/help/license'],
   ['met', 'The Met',
-    'Shares its own record of its own objects, public domain wherever it can be.',
+    'Publishes its own record of each object it holds.',
     'Public-domain works released CC0, images included.'],
   ['artic', 'Art Institute of Chicago',
-    'The painting’s home, telling you about the painting.',
-    'Public-domain images CC0, served over open IIIF.'],
+    'Describes the paintings it holds in its own words.',
+    'Public-domain images CC0, served over open IIIF.',
+    // States the CC0 designation outright, and that the object data is CC0 too.
+    'https://www.artic.edu/open-access/open-access-images'],
+  ['rijks', 'Rijksmuseum',
+    'Publishes its own photographs of its collection at full resolution.',
+    'Works out of copyright carry the public-domain mark; images served over open IIIF, catalog data CC0.',
+    // Their own announcement of Collection Online, which is the infrastructure
+    // this demo actually reads: it states that the data is released as Linked
+    // Open Data "in the public domain", links their Information and Data
+    // Policy, and recaps the 2012 Rijksstudio release that started it.
+    'https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-launches-collection-online'],
   ['iiif', 'IIIF collections',
-    'One protocol, many doors: manuscripts and artworks served by whichever institution holds them.',
+    'A shared protocol: manuscripts and artworks served by whichever institution holds them.',
     'Terms set per object by its holding institution, stated in each manifest.'],
   ['dpla', 'DPLA',
-    'America’s union catalog — tens of millions of items from local libraries, archives and museums.',
+    'A union catalog of tens of millions of items from US libraries, archives and museums.',
     'Metadata CC0; each item’s rights stated by its holder.'],
   ['europeana', 'Europeana',
-    'Europe’s answer: three thousand museums, libraries and archives behind one door.',
+    'Around three thousand European museums, libraries and archives, searchable together.',
     'Only openly licensed items are shown; each card names its license.'],
   ['inaturalist', 'iNaturalist',
-    'A community’s living field guide — photographs with the observer’s name on them.',
+    'Photographs of species taken by naturalists, each credited to the observer.',
     'Each photo carries its observer’s chosen license; only openly licensed ones are shown here.'],
   ['gbif', 'GBIF',
-    'Draws where a species has been seen, from hundreds of millions of records.',
-    'Records CC0 or CC BY, stated per dataset.'],
+    'Maps where a species has been recorded, from hundreds of millions of observations.',
+    'Records CC BY-NC, CC BY or CC0, stated per dataset.',
+    // Names all three licenses, including the CC BY-NC that our line used to
+    // omit and that most occurrence records actually carry.
+    'https://www.gbif.org/terms'],
   ['openstreetmap', 'OpenStreetMap',
-    'Maps the world down to the building — by hand, by volunteers.',
-    'Map data ODbL: share-alike, credit the contributors.'],
+    'A map of the world built by volunteers, detailed down to individual buildings.',
+    'Map data ODbL: share-alike, credit the contributors.',
+    // Says share-alike and credit in almost the same words we do.
+    'https://www.openstreetmap.org/copyright'],
   ['free_law', 'Free Law Project',
-    'Publishes the law itself. The opinion, not a paywall.',
+    'Publishes court opinions in full, free to read.',
     'Court opinions are public domain: nobody owns the law.'],
 ]
 
@@ -124,10 +156,14 @@ export function frontPage({ inline = new Map() } = {}) {
 </a>`,
   ).join('\n')
   const friends = FRIENDS.map(
-    ([slug, name, gift, lic]) => `<div class="friend">
+    ([slug, name, gift, lic, licHref]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
-  <p class="lic"><span class="lic-mark">openness?</span> ${escapeHtml(lic)}</p>
+  <p class="lic"><span class="lic-mark">openness?</span> ${escapeHtml(lic)}${
+    licHref
+      ? ` <a class="lic-src" href="${escapeHtml(licHref)}">in their words</a>`
+      : ''
+  }</p>
 </div>`,
   ).join('\n')
 
@@ -203,6 +239,9 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
 .lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8f95;margin-right:3px}
+/* The source of the license claim beside it. Deliberately quiet — it is
+   evidence for a line the reader may not have doubted, not a call to action. */
+.lic-src{white-space:nowrap}
 .friend.host{grid-column:1/-1}
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
@@ -240,7 +279,14 @@ ${legend.style}
          with autofocus, is exactly the shape they read as a username box. The
          data- attributes are the vendor opt-outs (1Password, LastPass,
          Bitwarden, Dashlane), inert everywhere else. -->
-    <input name="q" type="search" placeholder="Any article title — try your hometown" autofocus
+    <!-- "try your hometown" was the invitation until 2026-08-06, and it pointed
+         readers at the THINNEST page this site makes. A town resolves to a map,
+         a subject heading and little else — Coral Gables renders ~14 cards —
+         while a species renders 96 and an artist 116, because both have
+         partners holding item-level records of the thing itself. The first
+         thing a visitor types decides what they think this is, so it should
+         name the cases that answer best. -->
+    <input name="q" type="search" placeholder="Any article title — try a species, or an artist" autofocus
       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
       data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other"
       aria-label="English Wikipedia article title">

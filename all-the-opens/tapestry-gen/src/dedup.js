@@ -100,7 +100,7 @@ export function preferRelated(qids, ranks) {
 // links held Met objects and taxa.
 // An identifier that points at ONE object: whatever comes back is the thing
 // the article linked, by construction. Nothing else on this list offers that.
-const ITEM_LEVEL = ['met', 'aic', 'iiif', 'inat', 'gbif']
+const ITEM_LEVEL = ['met', 'aic', 'rijks', 'iiif', 'inat', 'gbif']
 const SOME_HOOK = [...ITEM_LEVEL, 'lc', 'eu', 'coord', 'osmr', 'osmw', 'osmn']
 
 /**

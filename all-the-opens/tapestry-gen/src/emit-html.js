@@ -42,6 +42,9 @@ const SOURCE = {
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/The_Metropolitan_Museum_of_Art_Logo.svg/120px-The_Metropolitan_Museum_of_Art_Logo.svg.png',
   },
   artic: { name: 'Art Institute of Chicago', icon: 'https://www.artic.edu/favicon.ico' },
+  // Unlike the Met's, the Rijksmuseum's own favicon serves 200 to non-browser
+  // clients, so this one needs no Commons stand-in.
+  rijks: { name: 'Rijksmuseum', icon: 'https://www.rijksmuseum.nl/favicon.ico' },
   // Not one institution but a door many institutions share: P6108 manifests
   // arrive from whichever library or museum holds the object.
   iiif: { name: 'IIIF collections', icon: 'https://iiif.io/favicon.ico' },
