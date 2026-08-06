@@ -504,9 +504,9 @@ function titleRow(entry, tag = 'h4') {
   if (!working) return `<div class="title-row"><h4${attr}>${name}${marks}</h4></div>`
   return (
     `<div class="title-row"><h4${attr}>${name}</h4>` +
-    `<details class="rwhy"><summary title="Why these terms?">${marks}` +
-    `<span class="qmark" aria-hidden="true">?</span>` +
-    `<span class="vh">Why these terms?</span></summary>${working}</details></div>`
+    `<details class="rwhy"><summary title="Where these terms come from">${marks}` +
+    `<span class="rinfo" aria-hidden="true">ⓘ</span>` +
+    `<span class="vh">Where these terms come from</span></summary>${working}</details></div>`
   )
 }
 
@@ -1241,11 +1241,14 @@ sup.ref a:hover{text-decoration:underline}
 .rwhy>summary:hover,.rwhy[open]>summary{color:var(--link)}
 .rwhy>summary .ccrow{margin:0}
 .rwhy .ccmark{width:1em;height:1em}
-/* The question mark, not another circled i: the fold below already uses that,
-   and two identical glyphs on one card would read as the same control twice
-   when they answer entirely different questions. */
-.qmark{font-weight:700;font-size:.82rem;color:var(--link);line-height:1}
-.rwhy[open] .qmark{opacity:.55}
+/* A circled i, matching the connection fold below rather than avoiding it. A
+   question mark was tried first, on the reasoning that two identical glyphs
+   would read as one control — but "?" beside a licence mark reads as doubt
+   ABOUT the licence, and casting doubt on the claim is a far worse cost than
+   repeating an icon. Both controls offer more information; that they look
+   alike is honest. */
+.rinfo{font-weight:700;font-size:.82rem;color:var(--link);line-height:1}
+.rwhy[open] .rinfo{opacity:.55}
 .rwhy[open]{flex:1 1 100%}
 .rwhy p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
   border-radius:3px;padding:6px 8px;margin:6px 0 0}

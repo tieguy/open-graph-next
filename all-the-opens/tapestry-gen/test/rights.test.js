@@ -238,9 +238,29 @@ test('a creator-level answer is trusted for its mark, and still says whose it is
   ]).get('Q217434')
   const view = rightsView(rec, { qid: 'Q217434', kind: 'author', label: 'Grant Wood' })
   assert.deepEqual(view.marks, ['pd'])
-  assert.equal(view.line, 'Grant Wood: copyrights on works have expired')
+  // No visible LINE, though: on a card whose mark already says public domain, a
+  // line reading "Grant Wood: copyrights on works have expired" is the same
+  // fact in a second container, and that is how it read on a live card.
+  assert.equal(view.line, null)
+  // The attribution survives in two places that cost nothing: the mark's own
+  // label (its tooltip and screen-reader text) and the panel behind it.
+  assert.equal(view.label, 'Grant Wood: copyrights on works have expired')
   assert.match(view.detail.join(' '), /Grant Wood/)
   assert.match(view.paulina.url, /paulina\.toolforge\.org\/author\/Q217434$/)
+})
+
+test('a line survives only when it says what the mark cannot', () => {
+  // Jurisdiction is the case that earns one — no glyph can say "here but not
+  // there", and that contrast is the whole finding.
+  const split = rightsView(
+    parseRightsRows([
+      { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q30'), jurisLabel: lit('United States') },
+      { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q183'), jurisLabel: lit('Germany') },
+    ]).get('Q1'),
+    { qid: 'Q1' },
+  )
+  assert.match(split.line, /public domain in the United States/)
+  assert.match(split.line, /still in copyright in Germany/)
 })
 
 test('a work-level answer still gets its glyph even when the author is known too', () => {

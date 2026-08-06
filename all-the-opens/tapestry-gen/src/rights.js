@@ -483,7 +483,13 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
       ? leadLicense.marks
       : lead.status.marks
 
-  const shortLabel = leadLicense?.label ?? lead?.status.label ?? creator?.status.label ?? null
+  // For a creator-derived mark the label names whose ruling it is, because it
+  // is now the only place a reader meets that attribution without clicking:
+  // it is the glyph's tooltip and its screen-reader text.
+  const creatorLabel = creator
+    ? `${creator.label ?? label ?? 'This author'}: ${creator.status.label}`
+    : null
+  const shortLabel = leadLicense?.label ?? lead?.status.label ?? creatorLabel
 
   // The line. Two cases earn it, and both are cases where the glyph alone
   // would say more than the graph does.
@@ -525,12 +531,14 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   } else if (lead?.jurisdiction) {
     const leadWhere = where(lead.status.free ? free : bound)
     line = `${lead.status.label} in ${leadWhere}`
-  } else if (!aboutThisThing && creator) {
-    // Creator-only: the sentence the glyph is not allowed to be. It names the
-    // person, so it cannot be read as a verdict on the item beside it.
-    const who = creator.label ?? label ?? 'This author'
-    line = `${who}: ${creator.status.label}`
   }
+  // A creator-only answer gets NO visible line. It used to get one, and on a
+  // card whose mark already says "public domain" a line reading "José Rizal:
+  // copyrights on works have expired" is the same fact in a second container —
+  // which is exactly how it read. The sentence still exists, in `detail`, one
+  // click away, where it keeps attributing the claim to the person it is
+  // actually about. A line survives only when it says something the mark
+  // cannot: which countries, or that a copy is lent rather than given.
 
   // The fold: why anybody thinks so, and what is known about the author. This
   // is the part a reader who wants to check the reasoning opens, and it is the
