@@ -119,6 +119,18 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
     // DPLA's own item page, not the provider's isShownAt: partner hosts rot
     // out from under the aggregator, while the dp.la page always resolves
     // and carries the onward link itself.
+    //
+    // **A link check cannot confirm that, and the failure is benign.** dp.la
+    // sits behind an AWS WAF JS challenge: every /item/ and /search path
+    // answers `202` with an EMPTY BODY and `x-amzn-waf-action: challenge`, to
+    // a browser User-Agent as readily as to a script, and for an id that
+    // cannot exist as readily as a real one. Only the homepage answers
+    // normally. An audit on 2026-08-06 found 494 dp.la links across the six
+    // showcase pages in exactly that state; the links were then confirmed by
+    // hand in a real browser, which solves the challenge and lands on the
+    // record. So a future audit reporting several hundred dead DPLA links has
+    // most likely rediscovered the WAF, not a bug — check one by hand before
+    // touching this line.
     href: doc.id ? `https://dp.la/item/${doc.id}` : doc.isShownAt,
     attribution: {
       author: provider,
