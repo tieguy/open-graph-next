@@ -280,24 +280,45 @@ export function rightsMarks(marks, label) {
 }
 
 /**
- * The credit line, with the glyphs in front of the words it illustrates.
- *
- * The words stay. A glyph row is a summary a reader has to already know how to
- * read, and "The Met · public domain (CC0)" is the sentence that teaches them —
- * so this shows both rather than replacing text that already worked.
+ * Which verdict the card leads with: the copy's own license, else the work's
+ * status. The copy's is a promise the host actually made about these bytes.
  */
-function credit(entry) {
-  if (!entry.attribution && !entry.rights) return ''
-  const rights = entry.rights ?? {}
-  // The copy's own license leads: it is a promise the host actually made about
-  // the bytes on this card. The work's status is the fallback.
-  const shown = rights.copy ?? rights.work ?? null
-  const marks = shown ? rightsMarks(shown.marks, shown.label) : ''
-  const words = entry.attribution
-    ? escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))
-    : ''
-  if (!marks && !words) return ''
-  return `<p class="credit">${marks}${words}</p>`
+function shownRights(entry) {
+  const r = entry.rights ?? {}
+  return r.copy ?? r.work ?? null
+}
+
+/**
+ * The licence marks, on the ITEM — beside its title, not beside its source.
+ *
+ * They used to lead the credit line, which put them immediately before the
+ * institution's name: "⊘ Open Library" reads as a claim about Open Library, and
+ * the one thing the mark is never about is who handed you the bytes. Beside the
+ * title it sits on the thing it describes.
+ */
+function itemMarks(entry) {
+  const shown = shownRights(entry)
+  return shown ? rightsMarks(shown.marks, shown.label) : ''
+}
+
+/**
+ * The credit line: who to thank, followed by their own icon.
+ *
+ * The icon trails the name for the same reason the licence mark trails the
+ * title — both are marks ON a thing, and a card whose every line opens with a
+ * glyph has a column of glyphs down its left edge and no obvious place to start
+ * reading. Name first, then the badge that qualifies it.
+ */
+function credit(entry, inline = new Map(), withSource = true) {
+  if (!entry.attribution) return ''
+  const words = escapeHtml(
+    [entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '),
+  )
+  if (!words) return ''
+  // The hero already carries a full source tag of its own; a second icon on the
+  // line below it would be the same fact twice.
+  const icon = withSource ? favicon(entry.source, inline) : ''
+  return `<p class="credit">${words}${icon}</p>`
 }
 
 /**
@@ -363,15 +384,15 @@ function card(entry, inline) {
   // A card with an href is an open door, and the whole card says so: the
   // title links out. Cards without one stay as they were.
   // The clamp can ellipsize the visible title; the tooltip always has all of it.
-  const heading = entry.href
-    ? `<h4 title="${escapeHtml(entry.title)}"><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
-    : `<h4 title="${escapeHtml(entry.title)}">${escapeHtml(entry.title)}</h4>`
+  // Name, licence mark, and the mark's own "why" — see titleRow. The clamp can
+  // ellipsize the visible title; the tooltip always has all of it.
+  const heading = titleRow(entry)
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
-    credit(entry) +
+    credit(entry, inline) +
     rightsLine(entry) +
     provenance(entry) +
     `</figcaption></figure>`
@@ -425,10 +446,25 @@ function rightsDetail(entry) {
         `, stated by whoever is serving it.</p>`,
     )
   }
-  if (work?.detail?.length) {
+  // Anything the card already says out loud is dropped here. On a creator-level
+  // card the only detail IS the visible line ("Franz Kafka: copyrights on works
+  // have expired"), so without this the panel opened by repeating, word for
+  // word, the sentence sitting two lines above it.
+  const said = (work?.line ?? '').replace(/[.\s]+$/, '')
+  const detail = (work?.detail ?? []).filter((d) => d.replace(/[.\s]+$/, '') !== said)
+  if (detail.length) {
     parts.push(
-      `<p class="rd-work">${work.detail.map((d) => escapeHtml(d)).join(' ')} ` +
+      `<p class="rd-work">${detail.map((d) => escapeHtml(d)).join(' ')} ` +
         `<span class="rd-src">Copyright status from Wikidata, where it is maintained by ` +
+        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener">CopyClear</a>` +
+        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener">Dominio Público en América Latina</a> project.</span></p>`,
+    )
+  }
+  // The maintainers are credited wherever their data is used, including on a
+  // card whose only detail was deduped away above.
+  if (work && !detail.length && work.line) {
+    parts.push(
+      `<p class="rd-work"><span class="rd-src">Copyright status from Wikidata, where it is maintained by ` +
         `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener">CopyClear</a>` +
         ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener">Dominio Público en América Latina</a> project.</span></p>`,
     )
@@ -442,19 +478,51 @@ function rightsDetail(entry) {
   return parts.join('')
 }
 
+/**
+ * The title line: the item's name, its licence mark, and the mark's own "why".
+ *
+ * The working belongs HERE rather than in the connection fold below, and that
+ * is the point of the arrangement: a reader who wants to know why a card claims
+ * public domain should find the answer beside the claim, not inside a disclosure
+ * about how the item reached the page. Two different questions, two controls.
+ *
+ * A flex row rather than markup inside the `<h4>`: `<details>` is flow content
+ * and is not valid inside a heading. `.rwhy[open]` takes the full basis so the
+ * panel drops below the title instead of squeezing it.
+ */
+function titleRow(entry, tag = 'h4') {
+  const attr = tag === 'h4' && entry.title ? ` title="${escapeHtml(entry.title)}"` : ''
+  const name = entry.href
+    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a>`
+    : escapeHtml(entry.title)
+  const marks = itemMarks(entry)
+  const working = rightsDetail(entry)
+  // No marks and nothing to explain: the plain heading, exactly as before.
+  if (!marks && !working) return `<div class="title-row"><h4${attr}>${name}</h4></div>`
+  // Marks but no working — a partner stated a licence and gave no reasoning —
+  // so the marks ride the heading and there is no control to offer.
+  if (!working) return `<div class="title-row"><h4${attr}>${name}${marks}</h4></div>`
+  return (
+    `<div class="title-row"><h4${attr}>${name}</h4>` +
+    `<details class="rwhy"><summary title="Why these terms?">${marks}` +
+    `<span class="qmark" aria-hidden="true">?</span>` +
+    `<span class="vh">Why these terms?</span></summary>${working}</details></div>`
+  )
+}
+
 function provenance(entry) {
   const why = entry.why ? escapeHtml(entry.why) : ''
-  const rights = rightsDetail(entry)
-  // Rights working alone is reason enough to open a fold. Before this, a card
-  // with no trace returned early and the working had nowhere to go.
-  if (!entry.trace && !rights) return why ? `<p class="why">${why}</p>` : ''
+  if (!entry.trace) return why ? `<p class="why">${why}</p>` : ''
   const fix = entry.fix
     ? ` <a class="fixlink" href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
     : ''
-  const body = (entry.trace ? `<p>${escapeHtml(entry.trace)}${fix}</p>` : '') + rights
+  const body = `<p>${escapeHtml(entry.trace)}${fix}</p>`
+  // "How we know" named the act and not the subject — it never said WHAT is
+  // known. What this fold actually answers is how the item reached the page:
+  // which identifier or statement tied it to this article.
   const summary = why
     ? `<summary class="why" title="How this got here">${why}<span class="info">ⓘ</span></summary>`
-    : `<summary class="why bare" title="How this got here"><span class="info">ⓘ</span>How we know</summary>`
+    : `<summary class="why bare" title="How this got here"><span class="info">ⓘ</span>How is it connected?</summary>`
   return `<details class="prov">${summary}${body}</details>`
 }
 
@@ -478,15 +546,13 @@ function heroCard(entry, inline) {
     const src = inline.get(entry.imageUrl) ?? entry.imageUrl
     visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
   }
-  const heading = entry.href
-    ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
-    : `<h4>${escapeHtml(entry.title)}</h4>`
+  const heading = titleRow(entry, 'hero')
   return (
     `<figure class="card hero-card">${visual}<figcaption>` +
     `<div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
-    credit(entry) +
+    credit(entry, inline, false) +
     rightsLine(entry) +
     provenance(entry) +
     `</figcaption></figure>`
@@ -1151,9 +1217,40 @@ sup.ref a:hover{text-decoration:underline}
    glyphs, which needs the card's background rather than a fixed white.
    (No backticks in this stylesheet: it is a JS template literal.) */
 .ccrow{--ccmark-hole:#fff;display:inline-flex;align-items:center;gap:2px;
-  vertical-align:-2px;margin-right:5px}
+  vertical-align:-1px;margin-right:5px}
 .ccmark{width:1.05em;height:1.05em;flex:0 0 auto;fill:currentColor}
-.hero-card .ccmark{width:1.15em;height:1.15em}
+/* On the title the marks sit in the heading's own size and weight, but not in
+   its ink: full-strength black glyphs would compete with the title for the
+   first look, and the title is what a reader came for. Both badges TRAIL their
+   text, so the margin is on the left — a leading glyph put a column of icons
+   down the card's left edge with no obvious place to start reading. */
+.card h4 .ccrow{color:#7a7f85;vertical-align:-2px;margin:0 0 0 6px}
+.card h4 .ccmark{width:.9em;height:.9em}
+.card .credit .fav{width:13px;height:13px;vertical-align:-2px;margin-left:5px}
+
+/* Title, mark and the mark's own control on one line. A flex row because
+   <details> is flow content and is not valid inside a heading; when it opens it
+   claims the full basis so the panel drops BELOW the title rather than
+   squeezing it into a column. */
+.title-row{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:6px}
+.title-row>h4{margin:0}
+.rwhy{min-width:0}
+.rwhy>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;
+  gap:3px;color:#7a7f85}
+.rwhy>summary::-webkit-details-marker{display:none}
+.rwhy>summary:hover,.rwhy[open]>summary{color:var(--link)}
+.rwhy>summary .ccrow{margin:0}
+.rwhy .ccmark{width:1em;height:1em}
+/* The question mark, not another circled i: the fold below already uses that,
+   and two identical glyphs on one card would read as the same control twice
+   when they answer entirely different questions. */
+.qmark{font-weight:700;font-size:.82rem;color:var(--link);line-height:1}
+.rwhy[open] .qmark{opacity:.55}
+.rwhy[open]{flex:1 1 100%}
+.rwhy p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
+  border-radius:3px;padding:6px 8px;margin:6px 0 0}
+.rwhy a{font-weight:600}
+.rwhy .rd-src{color:#8b9096}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
    words. Clipped rather than display:none, which would take it out of the
    accessibility tree along with the visual. */

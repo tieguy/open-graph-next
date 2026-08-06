@@ -32,14 +32,37 @@ export function authorWorksUrl(olid, limit = 40) {
   return (
     'https://openlibrary.org/search.json?author_key=' +
     encodeURIComponent(olid) +
-    '&fields=key,title,ebook_access,first_publish_year,cover_i' +
+    '&fields=key,title,ebook_access,first_publish_year,cover_i,ia' +
     `&limit=${limit}`
   )
 }
 
-/** OpenLibrary omits `cover_i` entirely when a work has no cover. */
-const coverUrl = (id) =>
-  typeof id === 'number' && id > 0 ? `https://covers.openlibrary.org/b/id/${id}-M.jpg` : null
+/**
+ * The cover to show — and it must depict the same object the card's rights
+ * claim is about.
+ *
+ * `cover_i` is OpenLibrary's REPRESENTATIVE cover for a work, chosen across
+ * every edition of it, while `ebook_access` is a work-level rollup meaning
+ * "some edition is free". Pair the two blindly and you get the bug this
+ * function exists to fix: Macbeth has **1,867 editions**, so the card came out
+ * as a public-domain mark over the jacket of Harold Bloom's 1999 critical
+ * edition — a book that is emphatically not public domain. Neither field was
+ * wrong; pairing them was.
+ *
+ * So whenever the access verdict came from a SCAN, the cover comes from that
+ * same scan: `ia` names it, and `archive.org/services/img/<id>` is the
+ * thumbnail this project already uses for Internet Archive cards. Macbeth then
+ * shows `macbethfacsimile0000will` — an old edition that genuinely is free.
+ * A work with no scan at all keeps the representative cover, because there is
+ * no better one and its card makes no claim about an edition.
+ */
+const coverUrl = (w) => {
+  const scanned = w?.ebook_access && w.ebook_access !== 'no_ebook'
+  const ia = Array.isArray(w?.ia) ? w.ia[0] : w?.ia
+  if (scanned && typeof ia === 'string' && ia) return `https://archive.org/services/img/${ia}`
+  const id = w?.cover_i
+  return typeof id === 'number' && id > 0 ? `https://covers.openlibrary.org/b/id/${id}-M.jpg` : null
+}
 
 /**
  * An author's works as renderable entries, best-presented first.
@@ -61,7 +84,7 @@ const coverUrl = (id) =>
 export function authorWorkEntries(response, { cap }) {
   const all = (response?.docs ?? []).filter((w) => w?.title)
   const entries = all
-    .map((w, i) => ({ w, i, cover: coverUrl(w.cover_i) }))
+    .map((w, i) => ({ w, i, cover: coverUrl(w) }))
     // Stable within each group, so OpenLibrary's own order breaks ties.
     .sort((a, b) => Number(Boolean(b.cover)) - Number(Boolean(a.cover)) || a.i - b.i)
     .slice(0, cap)

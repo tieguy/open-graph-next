@@ -53,22 +53,62 @@ test('the sprite defines a symbol for every mark rights.js can emit', () => {
 
 // ----------------------------------------------------------------- the card
 
-test('a copy license puts its glyphs in front of the credit it illustrates', () => {
+test('the marks sit on the item, never in front of its source', () => {
+  // Reported from a live card: the marks used to lead the credit line, which
+  // rendered "\u2298 Open Library" — a public-domain glyph immediately before the
+  // institution's name, reading as a claim about Open Library. The one thing a
+  // licence mark is never about is who handed you the bytes.
   const html = bandRail(
     bandOf({
       entries: [
         entry({
           imageUrl: 'https://example.org/a.jpg',
+          // A linked card, which is the ordinary case and the one where the
+          // mark must stay OUTSIDE the anchor.
+          href: 'https://example.org/item',
           rights: { copy: { marks: ['cc', 'zero'], label: 'CC0', code: 'CC0', url: 'https://creativecommons.org/publicdomain/zero/1.0/' } },
         }),
       ],
     }),
   )
-  assert.match(html, /<p class="credit"><span class="ccrow"/)
+  // On the title line, after the name — the first thing read on a card is what
+  // the thing IS, and the licence qualifies that name rather than introducing it.
+  assert.match(html, /<\/h4><details class="rwhy"><summary[^>]*><span class="ccrow"/)
   assert.match(html, /href="#cc-zero"/)
-  // The words stay. The glyph row is a summary a reader has to know how to
-  // read, and the credit line is what teaches them.
+  assert.doesNotMatch(html, /class="credit">[^<]*<span class="ccrow"/, 'and never the credit')
+  // Outside the anchor: they describe the item, they are not part of its name,
+  // and they must not become click target.
+  assert.doesNotMatch(html, /<a [^>]*>[^<]*<span class="ccrow"/)
+  // <details> is flow content and is not valid inside a heading — scoped to a
+  // single h4, or the check would trip on any details anywhere after one.
+  assert.doesNotMatch(html, /<h4[^>]*>(?:(?!<\/h4>)[\s\S])*<details/)
+  // The words stay.
   assert.match(html, /Art Institute of Chicago/)
+})
+
+test('the credit line is followed by the partner’s own icon — on deck cards only', () => {
+  const inline = new Map([['https://www.artic.edu/favicon.ico', 'data:image/x-icon;base64,AAA']])
+  // Two entries, so one is hoisted to the hero and one stays in the deck.
+  const html = bandRail(
+    bandOf({
+      entries: [
+        entry({ title: 'Hoisted', imageUrl: 'https://example.org/a.jpg' }),
+        entry({ title: 'Shelved', imageUrl: 'https://example.org/b.jpg' }),
+      ],
+    }),
+    inline,
+  )
+  const deck = html.slice(html.indexOf('<div class="deck">'))
+  assert.match(
+    deck,
+    /<p class="credit">Art Institute of Chicago<span class="fav fav-artic"/,
+    'the icon trails the name it belongs to',
+  )
+  // The hero already carries a full source tag above its title, so a second
+  // icon on the line below would be the same fact twice.
+  const hero = html.slice(0, html.indexOf('<div class="deck">'))
+  assert.match(hero, /class="hero-src"/)
+  assert.doesNotMatch(hero, /<p class="credit">[^<]*<span class="fav/)
 })
 
 test('a card with no rights at all renders exactly what it did before', () => {
@@ -121,9 +161,10 @@ test('the fold carries the determination method, the maintainers, and Paulina', 
   assert.match(html, /paulina\.toolforge\.org\/work\/Q464782/)
 })
 
-test('a card whose only extra is rights still opens a fold to hold it', () => {
-  // Before this, a card with no `trace` returned early and the rights working
-  // had nowhere to go.
+test('the rights working sits beside the claim, not in the connection fold', () => {
+  // Two different questions get two different controls: why these terms, and
+  // how did this item reach the page. Burying the first inside the second is
+  // what made the reasoning hard to find.
   const view = rightsView(
     parseRightsRows([
       { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), how: uri('Q2'), howLabel: lit('copyright not renewed') },
@@ -135,8 +176,11 @@ test('a card whose only extra is rights still opens a fold to hold it', () => {
       entries: [entry({ imageUrl: 'https://example.org/a.jpg', rights: { work: view }, trace: undefined })],
     }),
   )
-  assert.match(html, /<details class="prov">/)
+  assert.match(html, /<details class="rwhy">/)
   assert.match(html, /determined by: copyright not renewed/)
+  // A card with no trace has nothing to say about connection, so it opens no
+  // second fold at all.
+  assert.doesNotMatch(html, /<details class="prov">/)
 })
 
 // -------------------------------------------------------- the subject's own

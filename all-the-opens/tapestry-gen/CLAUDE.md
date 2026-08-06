@@ -405,6 +405,28 @@ none; they are credited in the rights copy, which is where their work is used.
   items merely filed UNDER an anchor and carry `copy` only. The subject's own
   shelves (`subject-work`) carry the subject's creator-level status, because
   there the subject is the author.
+- **A mark rides the ITEM, and the partner icon rides the credit** (2026-08-06,
+  from a live card). The marks used to lead the credit line, which put them
+  immediately before the institution's name: "⊘ Open Library" reads as a claim
+  about Open Library, and the one thing a licence mark is never about is who
+  handed you the bytes. They now lead the title, outside its anchor — they
+  describe the item, they are not part of its name. The vacated slot took the
+  partner's own favicon, which suited a source all along. The hero is exempt: it
+  already carries a full source tag above its title.
+- **The picture must depict the thing the claim is about** (`coverUrl` in
+  `src/works.js`, 2026-08-06). `cover_i` is OpenLibrary's REPRESENTATIVE cover
+  across every edition of a work; `ebook_access` is a work-level rollup meaning
+  "some edition is free". Pairing them blindly produced the reported bug:
+  **Macbeth has 1,867 editions**, so the card rendered a public-domain mark over
+  the jacket of Harold Bloom's 1999 critical edition. Neither field was wrong —
+  pairing them was. When the access verdict came from a scan, the cover now
+  comes from that same scan (`ia` → `archive.org/services/img/<id>`), so Macbeth
+  shows `macbethfacsimile0000will`, which genuinely is free. A work with no scan
+  keeps the representative cover and makes no edition-level claim.
+  **Not fixed, because it is theirs:** OpenLibrary reports Macbeth's
+  `first_publish_year` as **1508**, about a century before it was written. A
+  work with 1,867 editions has unreliable first-publication data and nothing
+  here can know better.
 - **The article's own status goes at the head of the lede** (`subjectRights`,
   chosen 2026-08-06). An article ABOUT a work — The Great Gatsby — often has the
   richest rights data on the site and, before this, nowhere to put it: no

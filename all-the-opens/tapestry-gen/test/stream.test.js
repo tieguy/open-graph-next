@@ -295,7 +295,9 @@ test('a card whose why was hoisted to the shelf head still names its ⓘ', () =>
     entries: [mk('A', 'bridge'), mk('B', 'bridge'), mk('C', 'bridge'), mk('D', 'strait')],
   })
   assert.match(deck, /<p class="carousel-why">About bridge, which this section links to<\/p>/)
-  assert.match(deck, /<summary class="why bare" title="How this got here"><span class="info">ⓘ<\/span>How we know<\/summary>/)
+  // "How we know" named the act and never the subject — it did not say WHAT is
+  // known. This fold answers how the item reached the page.
+  assert.match(deck, /<summary class="why bare" title="How this got here"><span class="info">ⓘ<\/span>How is it connected\?<\/summary>/)
 })
 
 test('one source, two topics: the carousel splits, one labeled strip per topic', () => {

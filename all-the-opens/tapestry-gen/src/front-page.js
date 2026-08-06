@@ -22,10 +22,10 @@ const SHOWCASE = [
       'Free Law Project delivers the opinion itself first — the primary document before any book about it.',
   },
   {
-    domain: 'A scientist’s life',
-    title: 'Ludwig Prandtl',
+    domain: 'A writer’s life',
+    title: 'José Rizal',
     watch:
-      'His 1899 dissertation carries no ISBN, OCLC or LCCN — but Wikidata knows which scan it is, and says so.',
+      'Noli Me Tangere and five more, every one free to read — Wikidata records that his copyrights expired, and each card shows the scan you can open.',
   },
   {
     domain: 'Ecology',
