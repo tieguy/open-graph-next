@@ -415,7 +415,10 @@ async function subjectAuthorWorks(subjectClaims) {
   const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
   if (typeof olid !== 'string' || !/^OL\d+A$/.test(olid)) return { entries: [], total: 0 }
   const body = await getJson(authorWorksUrl(olid, 40), { throttleMs: 1100 })
-  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT })
+  // `olid` goes in so a work can be tested for co-authors: the subject's
+  // creator-level status covers what the subject wrote, not what somebody
+  // wrote with them. See `soleAuthor`.
+  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid })
 }
 
 /** Labels of the entities we anchored on, batched at the API's 50-id limit. */

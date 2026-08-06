@@ -1,7 +1,51 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { authorWorkEntries, authorWorksUrl } from '../src/works.js'
+import { authorWorkEntries, authorWorksUrl, soleAuthor } from '../src/works.js'
+
+// The live card that exposed this, verbatim from search.json on 2026-08-06:
+// a 1991 scholarly catalogue filed under the painter it is ABOUT, with three
+// living co-authors, and no scan for `ebook_access` to object with.
+const catalogue = {
+  key: '/works/OL18415197W',
+  title: 'Rembrandt, the master & his workshop',
+  ebook_access: 'no_ebook',
+  first_publish_year: 1991,
+  cover_i: 5051657,
+  author_key: ['OL18362A', 'OL291682A', 'OL1305770A', 'OL681671A'],
+}
+
+test('a work the subject merely co-wrote does not inherit their expired copyright', () => {
+  const [entry] = authorWorkEntries({ docs: [catalogue] }, { cap: 4, olid: 'OL18362A' }).entries
+  assert.equal(entry.access.trustsCreator, false)
+  // And nothing is asserted in its place: Open Library said `no_ebook`, which
+  // is silence, not a statement about copyright.
+  assert.equal(entry.access.copy, null)
+})
+
+test('the sole-author test is about WHO, not how many names are listed', () => {
+  assert.equal(soleAuthor({ author_key: ['OL18362A'] }, 'OL18362A'), true)
+  assert.equal(soleAuthor(catalogue, 'OL18362A'), false)
+  // A translator is a co-author for this purpose, and deliberately so: an
+  // English Kafka is a new work with its own living rights holder.
+  assert.equal(soleAuthor({ author_key: ['OL33146A', 'OL7356871A'] }, 'OL33146A'), false)
+  // Missing or empty author data must not be read as "somebody else helped".
+  assert.equal(soleAuthor({}, 'OL18362A'), true)
+  assert.equal(soleAuthor({ author_key: [] }, 'OL18362A'), true)
+})
+
+test('a lent co-authored book still says it is lent — copy describes the object', () => {
+  const lent = { ...catalogue, ebook_access: 'borrowable' }
+  const [entry] = authorWorkEntries({ docs: [lent] }, { cap: 4, olid: 'OL18362A' }).entries
+  assert.equal(entry.access.trustsCreator, false)
+  assert.equal(entry.access.copy.code, 'LENT')
+})
+
+test('a sole-authored public work still trusts the creator ruling', () => {
+  const own = { key: '/works/OL9W', title: 'Drawings', ebook_access: 'public', author_key: ['OL18362A'] }
+  const [entry] = authorWorkEntries({ docs: [own] }, { cap: 4, olid: 'OL18362A' }).entries
+  assert.equal(entry.access.trustsCreator, true)
+})
 
 // The response shape is OpenLibrary's `search.json`, not `/authors/<id>/works.json`
 // (changed 2026-08-06). Both see the same corpus; only search.json carries

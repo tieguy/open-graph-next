@@ -32,10 +32,43 @@ export function authorWorksUrl(olid, limit = 40) {
   return (
     'https://openlibrary.org/search.json?author_key=' +
     encodeURIComponent(olid) +
-    '&fields=key,title,ebook_access,first_publish_year,cover_i,ia' +
+    // `author_key` rides along for `soleAuthor` — see below. Adding it was a
+    // one-time cache miss at an unchanged request count, the same trade as the
+    // `ebook_access` change that brought this pivot to search.json.
+    '&fields=key,title,ebook_access,first_publish_year,cover_i,ia,author_key' +
     `&limit=${limit}`
   )
 }
+
+/**
+ * Whether the article's subject is this work's ONLY author.
+ *
+ * A creator-level copyright ruling — CopyClear's "this person's copyrights have
+ * expired" — is a ruling about what that person made. It says nothing about
+ * what somebody else made with them, and Open Library files plenty of such
+ * books under the historical figure they are ABOUT.
+ *
+ * Found on a live card 2026-08-06: *Rembrandt, the Master & His Workshop*
+ * (1991) lists Rembrandt Harmenszoon van Rijn alongside Holm Bevers, Peter
+ * Schatborn and Barbara Welzel, so a modern scholarly catalogue by three living
+ * authors came out wearing a public-domain mark. `ebook_access` could not save
+ * it — Open Library answers `no_ebook`, which is silence, not a statement, and
+ * the rule is that silence changes nothing.
+ *
+ * **This generalizes the Kafka fix rather than duplicating it.** That case
+ * (a 1991 anthology) was caught only because the edition happened to be
+ * borrowable; the test here catches the same class structurally, whether or
+ * not anyone digitized it.
+ *
+ * **A translator counts, and that is the point, not a side effect.** Kafka's
+ * 1915 *Metamorphosis* is co-credited because the English translation is a new
+ * work with its own living rights holder — exactly the case where the author's
+ * expired copyright settles nothing. Measured across three authors, co-authored
+ * works are about 20% of a shelf, and only those with no lending statement
+ * change at all.
+ */
+export const soleAuthor = (work, olid) =>
+  !(work?.author_key ?? []).some((k) => k && k !== olid)
 
 /**
  * The cover to show — and it must depict the same object the card's rights
@@ -81,7 +114,7 @@ const coverUrl = (w) => {
  * @returns {{entries: Array<object>, total: number}} `total` is everything held,
  *   not everything shown, so the page can disclose the difference.
  */
-export function authorWorkEntries(response, { cap }) {
+export function authorWorkEntries(response, { cap, olid }) {
   const all = (response?.docs ?? []).filter((w) => w?.title)
   const entries = all
     .map((w, i) => ({ w, i, cover: coverUrl(w) }))
@@ -97,7 +130,14 @@ export function authorWorkEntries(response, { cap }) {
       // a mention — the same argument the Internet Archive cards settled.
       href: typeof w.key === 'string' ? `https://openlibrary.org${w.key}` : null,
       attribution: { author: 'Open Library', license: null },
-      access: accessRights(w.ebook_access),
+      // Two independent reasons to withhold the subject's creator status, and
+      // either one is enough: the edition is lent rather than free, or somebody
+      // else helped write it. `copy` is untouched — a lent co-authored book
+      // still says it is lent, because that describes the object on the card.
+      access: (() => {
+        const access = accessRights(w.ebook_access)
+        return soleAuthor(w, olid) ? access : { ...access, trustsCreator: false }
+      })(),
       _via: 'P648',
     }))
   return { entries, total: response?.numFound ?? all.length }

@@ -409,6 +409,27 @@ none; they are credited in the rights copy, which is where their work is used.
   creator ruling stand. `no_ebook` and any unrecognized value change nothing —
   nobody digitizing an edition is evidence of nothing, the same stance
   `openLibraryVolumes` takes when a batch fails.
+- **A creator-level ruling covers a work only if the creator is its SOLE
+  author** (`soleAuthor` in `src/works.js`, 2026-08-06). Found on a live card:
+  *Rembrandt, the Master & His Workshop* (1991) is filed by Open Library under
+  Rembrandt Harmenszoon van Rijn **alongside Holm Bevers, Peter Schatborn and
+  Barbara Welzel**, so a modern scholarly catalogue by three living authors
+  rendered a public-domain mark. CopyClear's ruling was not wrong; it was about
+  what Rembrandt made, and this is not that.
+  **`ebook_access` could not catch it**: Open Library answers `no_ebook`, which
+  is silence rather than a statement, and silence correctly changes nothing —
+  so there was no OpenLibrary claim being overridden, only a creator ruling
+  reaching somewhere it does not go. This **generalizes the Kafka fix below**
+  rather than duplicating it: that case was caught only because the edition
+  happened to be borrowable, while the sole-author test catches the whole class
+  whether or not anyone digitized it.
+  **A translator counts as a co-author, deliberately.** Kafka's 1915
+  *Metamorphosis* is co-credited because an English translation is a new work
+  with its own living rights holder — precisely where an author's expired
+  copyright settles nothing. Cost, measured across three authors: co-authored
+  works are ~20% of a shelf and only those without a lending statement change
+  (6 of 40 for Rembrandt, 2 for Kafka). `copy` is never touched — a lent
+  co-authored book still says it is lent, because that describes the object.
 - **Wikidata's status attaches only to cards that ARE the entity.** Every entry
   `statementEntries` returns is the partner's own record of its QID, so the
   status is the status of the thing on the card. DPLA and Europeana shelves are
