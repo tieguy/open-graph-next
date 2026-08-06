@@ -335,6 +335,11 @@ ${friends}
     it has seen.</p>
   <p>Code is public domain (CC0) in <a href="https://github.com/tieguy/open-graph-next">open-graph-next</a>.
     Article text CC BY-SA 4.0; every item carries its own license and credit.</p>
+  <p>Copyright status comes from
+    <a href="https://www.wikidata.org/wiki/Wikidata:CopyClear">CopyClear</a> and
+    <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina">Dominio
+    Público en América Latina</a>, via Wikidata and
+    <a href="https://paulina.toolforge.org">Paulina</a>.</p>
   <p>Inspired by conversations with <a href="https://jennierosehalperin.me">Jennie Rose Halperin</a>
     about cooperative knowledge infrastructure and the future of libraries, and by the work of the
     <a href="https://tapestries.media">tapestries.media</a> team.</p>

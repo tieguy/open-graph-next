@@ -48,9 +48,10 @@ import { corroborate, describedThesisArchiveId, preferredLabel } from './corrobo
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
-import { authorWorkEntries } from './works.js'
+import { authorWorkEntries, authorWorksUrl } from './works.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
-import { partnerStatements, resolveMappability, statementEntries } from './statements.js'
+import { needsRightsQuery, partnerStatements, resolveMappability, statementEntries } from './statements.js'
+import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
 import { claimAnchors, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 
@@ -154,6 +155,7 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
         imageUrl: `https://archive.org/services/img/${statedId}`,
         href: `https://archive.org/details/${statedId}`,
         attribution: { author: 'Internet Archive', license: null },
+        rights: { copy: licenseView(ccFromUri(first(meta.licenseurl))) },
         evidence: 'identifier',
         _via: 'P1026 → P724',
       }
@@ -212,6 +214,9 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
 }
 
 const yearText = (d) => (typeof d === 'string' ? (/(\d{4})/.exec(d)?.[1] ?? null) : null)
+
+/** archive.org returns some fields as a bare string and some as an array. */
+const first = (v) => (Array.isArray(v) ? v[0] : v)
 
 /**
  * OpenLibrary's holdings for a run of ISBNs, one Books API request per 40 —
@@ -291,6 +296,10 @@ function iaEntry(doc, cite, via) {
     // the credit instead, which named the place without opening the door.
     href: `https://archive.org/details/${doc.identifier}`,
     attribution: { author: 'Internet Archive', license: null },
+    // Uploader-supplied, so present on well under half of items and messy where
+    // it is present — a sample carried a GPL URL on a novel. ccFromUri refuses
+    // what it does not recognize, which is what makes reading it at all safe.
+    rights: { copy: licenseView(ccFromUri(first(doc.licenseurl))) },
     why: `Cited here — the Internet Archive holds a copy, matched on its ${via.toUpperCase()}`,
     // The reason class, not the citation: what must not mix in the lede's IA
     // box is cited scans with the subject's own thesis, not scan with scan.
@@ -368,6 +377,10 @@ function freeLawByCitation(citations) {
       author: `courtlistener.com/c/${best.reporter}/${best.volume}/${best.page}/`,
       license: 'Public domain — nobody owns the law',
     },
+    // Not a license anybody granted: a work of the US federal government has
+    // no copyright to grant. The public-domain mark is the accurate glyph and
+    // the CC circle would be the wrong one.
+    rights: { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/mark/1.0/')) },
     _via: 'P1031',
   }
 }
@@ -376,9 +389,7 @@ function freeLawByCitation(citations) {
 async function subjectAuthorWorks(subjectClaims) {
   const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
   if (typeof olid !== 'string' || !/^OL\d+A$/.test(olid)) return { entries: [], total: 0 }
-  const body = await getJson(`https://openlibrary.org/authors/${olid}/works.json?limit=40`, {
-    throttleMs: 1100,
-  })
+  const body = await getJson(authorWorksUrl(olid, 40), { throttleMs: 1100 })
   return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT })
 }
 
@@ -763,6 +774,44 @@ export async function discover(page, { emit = async () => {} } = {}) {
         resolveMappability(partners, [...[...picked.values()].flat(), subject.qid]),
     ),
   )
+  /**
+   * Copyright status, for the anchors a card could honestly carry it on.
+   *
+   * Narrow by construction: the article's own subject (always — it is one item
+   * and it is where a reader most wants the answer) plus any picked anchor
+   * whose partner statements say it is an object rather than a place or an
+   * event (`needsRightsQuery`). On a normal page that is one to three QIDs, so
+   * this is a small query, not a second copy of the partner one.
+   *
+   * Split lede-first for the same reason mappability is: the subject's card
+   * lives in the lede, and the lede goes ahead of the page.
+   *
+   * Failure semantic, deliberately identical to mappability: a failed query
+   * costs the page its rights marks and never a card. `entityRights` swallows
+   * the error and returns what it has, because a missing mark says nothing
+   * while a wrong one tells a reader they may reuse something they may not.
+   */
+  const rightsFor = async (partners, qids, subjectQid) =>
+    entityRights([
+      subjectQid,
+      ...qids.filter((q) => needsRightsQuery(partners.get(q))),
+    ])
+  const ledeRightsPromise = timed(
+    'wdqs rights (lede)',
+    Promise.all([ledePartnersPromise, ledePickedPromise, subjectPromise]).then(
+      ([partners, own, subject]) => rightsFor(partners, own, subject.qid),
+    ),
+  )
+  const rightsPromise = timed(
+    'wdqs rights',
+    Promise.all([ledeRightsPromise, partnersPromise, pickedPromise, subjectPromise]).then(
+      ([ledeRights, partners, picked, subject]) =>
+        rightsFor(partners, [...picked.values()].flat(), subject.qid).then(
+          (rights) => new Map([...rights, ...ledeRights]),
+        ),
+    ),
+  )
+
   const ledeExtrasPromise = subjectPromise.then(async ({ qid: subjectQid, claims: subjectClaims }) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
@@ -856,7 +905,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // labels are one batched request for the whole page and cheap.
     const first = unit === lede
     const picked = first ? await ledePickedPromise : (await pickedPromise).get(unit)
-    const [iaHits, ol, labels, scholarHits, statements] = await Promise.all([
+    const [iaHits, ol, labels, scholarHits, statements, rights] = await Promise.all([
       unit.identified.length ? (first ? ledeIaPromise : iaPromise) : new Map(),
       unit.railCandidates.some((c) => c.isbn)
         ? first
@@ -866,6 +915,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       picked.length ? (first ? ledeLabelsPromise : labelsPromise) : new Map(),
       unit.scholarly.length ? scholarPromise : new Map(),
       picked.length || first ? (first ? ledeStatementsPromise : statementsPromise) : new Map(),
+      picked.length || first ? (first ? ledeRightsPromise : rightsPromise) : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
@@ -885,6 +935,39 @@ export async function discover(page, { emit = async () => {} } = {}) {
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
     if (extras) entries.push(...extras.works.entries, ...extras.scholarship.entries)
+    // The subject's own output — books Open Library files under them, papers
+    // their ORCID vouches for, their thesis. Here the article's subject is the
+    // AUTHOR, so what applies is their creator-level status: CopyClear's bots
+    // rule on a body of work, and that ruling covers these shelves. The view
+    // built with `kind: 'author'` states whose status it is and links to
+    // Paulina's author page rather than a work page, so the claim on the card
+    // stays attached to the person it is actually about.
+    if (extras?.subjectQid) {
+      const authorRights = rightsView(rights.get(extras.subjectQid), {
+        qid: extras.subjectQid,
+        kind: 'author',
+        label: unit.title,
+      })
+      for (const e of [extras.thesis, ...extras.works.entries, ...extras.scholarship.entries]) {
+        // The opinion is deliberately absent: a court's own words are public
+        // domain because nobody may own the law, which is a stronger and
+        // different reason than anything an author's status could supply.
+        if (!e) continue
+        // Open Library's lending status, where there is one, is about THIS
+        // EDITION and therefore beats a ruling about the author's whole body of
+        // work. A lent book gets the lending statement and no creator claim at
+        // all: the two would contradict each other on the same card, and the
+        // one describing the actual object wins. See accessRights.
+        const access = e.access
+        if (access?.copy) {
+          e.rights = { ...e.rights, copy: access.copy }
+          continue
+        }
+        if (authorRights && access?.trustsCreator !== false) {
+          e.rights = { ...e.rights, work: authorRights }
+        }
+      }
+    }
 
     // Citation anchors -> Internet Archive. The gutter's footnotes are text;
     // a cover card is the complementary visual, so cards no longer yield to
@@ -927,6 +1010,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // Institute's American Gothic, iNaturalist's monarch. The hero picker
       // ranks these above any record of something merely linked here.
       if (isSubject) for (const e of found) e.standing = 'subject-record'
+      // Wikidata's copyright status for THIS entity, on the cards that are a
+      // record of it. Sound because every entry `statementEntries` returns is
+      // the partner's own record of `qid` — the Met's object, the taxon, the
+      // manifest — so the status of `qid` is the status of the thing on the
+      // card. It is emphatically not sound one shelf over, where DPLA and
+      // Europeana return items merely filed *under* an anchor; those carry
+      // only the license their host states for the copy.
+      const workRights = rightsView(rights.get(qid), { qid, kind: 'work', label })
+      if (workRights) for (const e of found) e.rights = { ...e.rights, work: workRights }
       if (found.some((e) => e.source === 'openstreetmap')) mapsLeft--
       statementsLeft -= found.length
       entries.push(...found)
@@ -1068,6 +1160,27 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // fire on the lede, where unit.title is the article's own title — and the
     // topic is the one ledeExtras stamps on those entries, so each lands on
     // its own shelf rather than in a paragraph above all of them.
+    // The article's own copyright status, when nothing else on this band said
+    // it. Only the lede: the claim is about the article's subject, and the
+    // lede is where the subject is named. The `some` guard is what keeps a
+    // page from saying it twice — where a partner holds a record OF the
+    // subject, that card already carries the same view, and a box above the
+    // prose repeating it would be the duplicate disclosure this page keeps
+    // deleting.
+    let subjectRights = null
+    if (extras?.subjectQid && !entries.some((e) => e.rights?.work)) {
+      const rec = rights.get(extras.subjectQid)
+      // Which route Paulina should take is decided by what the graph holds:
+      // P6216 is a property of works, P7763 of the people who make them.
+      const kind = rec?.work?.length ? 'work' : 'author'
+      const view = rightsView(rec, { qid: extras.subjectQid, kind, label: unit.title })
+      // A view with neither marks nor a sentence is nothing to show. That
+      // happens when the only statement is "not yet determined", which is a
+      // real answer about the state of the graph and not an answer about the
+      // work — see the status vocabulary in src/rights.js.
+      if (view && (view.marks.length || view.line)) subjectRights = view
+    }
+
     if (extras?.works.entries.length)
       samples.push({
         source: 'openlibrary',
@@ -1102,6 +1215,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
       papers: { total: unit.scholarly.length, open: openPapers },
       samples,
       broad,
+      // Null on every band but the lede, and on a lede whose cards already
+      // carry the claim. `bandParts` renders nothing for a null.
+      subjectRights,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)

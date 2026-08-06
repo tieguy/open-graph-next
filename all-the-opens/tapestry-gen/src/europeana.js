@@ -11,6 +11,7 @@
 // demo must run for anyone who clones it, keyless.
 
 import { getJson } from './http.js'
+import { ccFromUri, licenseView } from './rights.js'
 
 export const EUROPEANA_PER_ANCHOR = 4
 
@@ -64,7 +65,8 @@ export function europeanaEntryFrom(item, anchorLabel) {
   const title = first(item?.title)
   if (!title || !item?.guid) return null
   const provider = first(item.dataProvider) ?? null
-  const rights = rightsName(first(item.rights))
+  const rightsUri = first(item.rights)
+  const rights = rightsName(rightsUri)
   return {
     source: 'europeana',
     title,
@@ -77,6 +79,10 @@ export function europeanaEntryFrom(item, anchorLabel) {
       // the institution and the license, which is what a reuser needs.
       license: null,
     },
+    // The same rights URI again, structured, so the card can show the glyphs
+    // as well as the words. `copy`, not `work`: Europeana states the terms its
+    // partner serves THIS record under, which is not a ruling on the object.
+    rights: { copy: licenseView(ccFromUri(rightsUri)) },
     why: `Europeana’s member institutions link this to ${anchorLabel ?? 'something named here'}`,
     topic: anchorLabel ?? null,
     _via: 'P7704',

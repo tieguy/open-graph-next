@@ -12,6 +12,7 @@
 // demo must run for anyone who clones it, keyless.
 
 import { getHeader, getJson } from './http.js'
+import { ccFromUri, licenseView } from './rights.js'
 
 export const DPLA_PER_ANCHOR = 4
 
@@ -83,7 +84,7 @@ export function dplaUrl(heading, key) {
   return (
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
     `"${encodeURIComponent(heading)}"` +
-    '&fields=id,sourceResource.title,dataProvider,object,isShownAt' +
+    '&fields=id,sourceResource.title,dataProvider,object,isShownAt,sourceResource.rights,rights' +
     `&page_size=${DPLA_PER_ANCHOR}&api_key=${key}`
   )
 }
@@ -122,6 +123,16 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
     attribution: {
       author: provider,
       license: null,
+    },
+    // DPLA aggregates whatever its contributors state, and most of them state
+    // free text — "No known copyright restrictions", or a paragraph of local
+    // terms. Only a real rights URI becomes a glyph; everything else yields
+    // null, which is the difference between marking a card and inventing a
+    // permission for it. Both field spellings are read because contributors
+    // use both, `edm:rights` at the top level and the descriptive one under
+    // sourceResource.
+    rights: {
+      copy: licenseView(ccFromUri(first(doc.rights)) ?? ccFromUri(first(doc['sourceResource.rights']))),
     },
     why:
       `Filed under “${heading}” — the subject heading American libraries use ` +

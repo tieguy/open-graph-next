@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-05
+Last verified: 2026-08-06
 
 ## Purpose
 
@@ -316,6 +316,181 @@ Count requests, which are deterministic; re-measure seconds before quoting any,
 and never compare a number across dates. (Cold pages measured 55–67s on
 2026-08-04 on code predating that branch, which proves nothing about that
 branch.)
+
+## Copyright, and who actually knows it (2026-08-06)
+
+Every card can now say what a reader may DO with the thing on it, and the page
+distinguishes two questions that look like one:
+
+- **`rights.copy`** — the license the HOST serves this copy under. Europeana's
+  rights URI, OpenAlex's slug, iNaturalist's `license_code`, DPLA's contributor
+  statement, the Met's and the Art Institute's public-domain flags, a US court
+  opinion. A promise somebody made about these bytes.
+- **`rights.work`** — the copyright status of the WORK, from Wikidata `P6216`,
+  qualified by jurisdiction (`P1001`) and by how anyone decided (`P459`), plus
+  the creator-level `P7763`.
+
+**They can disagree, and the disagreement is the point.** An institution
+asserting terms over a photograph of a painting whose copyright expired is
+exactly the situation the public-domain community built tooling to expose, so
+the two are separate fields all the way to the renderer and neither is ever
+printed as the other.
+
+The work half is not an API. It is Wikidata, where **CopyClear**
+(`Wikidata:CopyClear`, Dutch) runs bots — dodbot, lifesignbot, DACSbot,
+ADAGPbot — establishing the copyright status of creators and of works in museum
+collections, and where **Dominio Público en América Latina** maps Latin American
+terms. Counted 2026-08-06: `P6216` on **2,004,830** items, `P7763` on
+**473,320**, `P275` on **117,243**. **Paulina** (`paulina.toolforge.org`, 2025
+Coolest Tool Award) is the tool that turns a status into a per-country answer;
+it takes deep links by QID on `/work/`, `/author/` and `/term/`. Its funded
+2026/27 work is a public-domain calculator meant to be reusable by other tools —
+when that ships, `src/rights.js` is where it would be called from. Until then a
+link is the honest integration: we do not reimplement a term calculation we
+would get wrong. Neither is a "friend" in the front-page list or the visibility
+panel, because both count collections that contribute cards and these contribute
+none; they are credited in the rights copy, which is where their work is used.
+
+### The rules, which are arguments and not preferences
+
+- **The freest answer leads** (chosen 2026-08-06). Where a work is public domain
+  somewhere and in copyright elsewhere, the card says so in that order. The cost
+  is real and named: a reader in a longer-term country could take the first
+  clause and stop. It is mitigated structurally — `rightsView` never emits the
+  free clause alone, and the Paulina link answers for where the reader actually
+  is.
+- **A qualified status is shown qualified.** The rights line appears when the
+  answers disagree AND when the only answer is free but names a jurisdiction.
+  The second case came from a real card: American Gothic is public domain in
+  countries whose terms run 70 years or less from the author's death, Wikidata
+  records no contrary status, so the disagreement test found nothing and the
+  card rendered a bare public-domain mark beside the Art Institute's name. That
+  reads as a worldwide answer. An UNqualified status still gets no line — there
+  is nothing to narrow.
+- **A creator-level status gets a mark, and always says whose it is.** Trusting
+  CopyClear's determination was a deliberate call (2026-08-06): it is a ruling
+  on a body of work, recorded where anyone can check it. What it may not do is
+  stand alone, so `line` names the author on any card whose answer came from the
+  creator rather than the work.
+- **A mark is never a guess.** `ccFromUri`/`ccFromSlug`/`ccFromLabel` return
+  null for anything unrecognized. `other-oa` is the case worth remembering:
+  OpenAlex knows the copy is free to read and does NOT know on what terms, and
+  free to read is not a license. A rights-reserved Met object gets no © either —
+  the Met asserting rights over its photograph says nothing about the object.
+- **The rightsstatements.org vocabulary is read only where it is unambiguous.**
+  Sampled across DPLA 2026-08-06 it outnumbered CC roughly three to one, so
+  dropping it wholesale left most DPLA cards silent. `NoC-US` and `NKC` are
+  genuine free statements and get the public-domain mark; `InC*` gets the ©.
+  **`NoC-OKLR`, `NoC-CR` and `NoC-NC` deliberately get nothing** — all three mean
+  "the copyright expired, and a contract or donor agreement or non-commercial
+  condition still restricts you", so a public-domain mark would promise exactly
+  what the statement withholds. `CNE` and `UND` also get nothing: they are the
+  rightsstatements twins of "not yet determined".
+- **Open Library's lending status beats a ruling about the author** (2026-08-06,
+  `accessRights`). Found on a real card: Open Library files *Prentice Hall
+  Literature — World Masterpieces* (1991) under Franz Kafka, and CopyClear's
+  ruling on Kafka is "copyrights on works have expired", so a modern classroom
+  anthology came out wearing a public-domain mark. The ruling was not wrong; it
+  was about the wrong thing — Kafka's texts are free, a 1991 compilation of them
+  is a new work. `ebook_access` fixes it because it describes **the edition the
+  card is showing**: the Internet Archive lends one copy at a time precisely for
+  books still in copyright, so `borrowable`/`printdisabled` replaces the creator
+  claim with "Lent, not free — one copy at a time" and the ©. `public` lets the
+  creator ruling stand. `no_ebook` and any unrecognized value change nothing —
+  nobody digitizing an edition is evidence of nothing, the same stance
+  `openLibraryVolumes` takes when a batch fails.
+- **Wikidata's status attaches only to cards that ARE the entity.** Every entry
+  `statementEntries` returns is the partner's own record of its QID, so the
+  status is the status of the thing on the card. DPLA and Europeana shelves are
+  items merely filed UNDER an anchor and carry `copy` only. The subject's own
+  shelves (`subject-work`) carry the subject's creator-level status, because
+  there the subject is the author.
+- **The article's own status goes at the head of the lede** (`subjectRights`,
+  chosen 2026-08-06). An article ABOUT a work — The Great Gatsby — often has the
+  richest rights data on the site and, before this, nowhere to put it: no
+  partner here holds a record of a novel. It renders above the first paragraph,
+  full width, never floated, and ONLY when no card on the lede already carries
+  the same claim, so a page never says it twice.
+- **"Not yet determined" (Q59496158) is not an answer and not an absence.** It
+  renders as nothing. It is somebody having looked and recorded that the
+  question is open.
+
+### Partner audit, 2026-08-06
+
+Every card-producing partner was checked against its own API rather than only
+the ones already wired. What each one actually offers, and what we now do:
+
+| partner | rights data available | status |
+|---|---|---|
+| Europeana | `rights` URI per item | read |
+| DPLA | `rights` + `sourceResource.rights` | read (fields added to the query) |
+| OpenAlex | `best_oa_location.license` | read |
+| The Met | `isPublicDomain` (its CC0 flag) | read |
+| Art Institute | `is_public_domain` | read |
+| iNaturalist | `license_code` per photo | read |
+| Free Law | none needed — 17 USC §105 | public-domain mark, stated |
+| Open Library | `ebook_access` per work | read; overrides creator status |
+| **IIIF** | **`rights` (v3) / `license` (v2)** | **was ignored — now read** |
+| **Internet Archive** | **`licenseurl` in the search index** | **was not requested — now is** |
+| GBIF | per-record `license`, but mixed | words only, corrected (see below) |
+| OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
+| arXiv | **nothing** | genuine dead end, see below |
+| Smithsonian | n/a | no pivot builds cards; visibility panel only |
+
+Three real defects came out of it, and all three predate the rights work:
+
+- **`ccFromUri` dropped 81% of the licenses archive.org states.** In a 400-item
+  sample the two commonest values were `creativecommons.org/licenses/publicdomain/`
+  (33) — CC's RETIRED pre-CC0 dedication, which the general
+  `/licenses/<elements>/` branch read as an element list, found no `by` in, and
+  discarded — and `usa.gov/government-works` (22), which is not a Creative
+  Commons URL at all. Both now map to the public-domain mark, and both are
+  tested against the literal strings archive.org returns.
+- **IIIF manifests state their terms and nobody read them.** Sampled across real
+  P6108 manifests, SMK answers `publicdomain/mark` and Yale `publicdomain/zero`.
+  Presentation 3.0 requires the value to come from CC or rightsstatements.org —
+  precisely the vocabulary `ccFromUri` already parses — so this was a partner
+  handing us clean data into `license: null`.
+- **The GBIF credit line named the wrong licenses.** It read "CC0 or CC BY".
+  Sampled across four taxa, **85–94% of the occurrence records behind those maps
+  are CC BY-NC**, with CC0 and CC BY the small remainder. The line omitted the
+  commonest license and the omitted one was the restrictive one. Now "CC BY-NC,
+  CC BY or CC0", still with no glyph: a tile aggregates records under all three,
+  so any single mark would be a guess about which record a reader is looking at.
+
+Two partners are deliberately left with words and no mark, and neither is a gap:
+
+- **arXiv states no license anywhere in its API.** The Atom feed has no license
+  element at all (checked 2026-08-06). The card claims only "Free to read", which
+  is exactly what is known; anything more would need a request per citation
+  against a source that is not arXiv. Where an arXiv paper is also cited with a
+  DOI, OpenAlex supplies the license and that card carries it.
+- **OpenStreetMap is ODbL**, which is not a Creative Commons license and has no
+  glyph in this sprite. "map data ODbL — share alike, credit the mappers" says
+  more than any mark could.
+
+Also worth knowing: `possible-copyright-status` on archive.org looked promising
+and is not usable. In a 400-item sample it was **absent 399 times**, and the one
+value present was free prose ("In copyright. Digitized with the permission of
+the rights holder."), not a code. It is set by some collections (Gutenberg items
+carry `NOT_IN_COPYRIGHT`) and by almost nothing else.
+
+### Cost, measured 2026-08-06
+
+**+1 WDQS request per cold page, 0 warm.** `needsRightsQuery` gates on
+met/aic/iiif — properties only an object has — so the query asks about the
+subject QID and almost nothing else: on American Gothic, The Great Gatsby,
+Monarch butterfly, Franz Kafka and Barbara McClintock it asked about **exactly
+one QID** each, and the lede and page-wide calls built the same URL, so the
+second was a cache hit. Failure semantic is mappability's: a failed query costs
+the page its rights marks and never a card.
+
+The query uses **UNION, not stacked OPTIONALs**. Every property here is
+multi-valued and the qualifiers multiply again, so OPTIONALs would return their
+cross product — one work with four jurisdictions and two licenses as eight rows
+saying nothing the four and the two did not. Branches answering alone keep the
+row count additive. No transitive walk is asked of items (see the mappability
+note above for what that cost when it was).
 
 ## Partner pivots (2026-08-03)
 
@@ -692,6 +867,15 @@ the politeness claim is checkable after a run rather than merely asserted here.
   generator can reach a host. m3api's own cookie dispatcher would bypass that
   proxy and hang — `src/mw.js` drops it whenever `NODE_USE_ENV_PROXY` is set.
 - First run needs network (fills `.cache`); reruns are offline.
+- **The DPLA query gained two fields on 2026-08-06** (`sourceResource.rights`,
+  `rights`), so every cached DPLA response predating that is keyed to the old
+  URL and will be refetched once. Same request COUNT — the fields ride the
+  request DPLA was already answering — but a warm cache goes cold for that
+  pivot exactly once.
+- **Same for the archive.org search on 2026-08-06** (`licenseurl`) and the
+  author-works pivot (`works.json` → `search.json`). Both are one-time cache
+  misses at unchanged request counts, for the same reason: the field rides a
+  request that was already being made.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
   backoff. A whole batch that still fails retries once after 2s, and whatever
   fails again comes back in `openLibraryVolumes`' `unchecked` set (it returns
@@ -732,6 +916,28 @@ the politeness claim is checkable after a run rather than merely asserted here.
 - `src/sweep.js` — the cache's ceiling: `chooseEvictions` (pure) picks
   least-recently-**read** files, `startSweeping` runs it after `listen()`.
   Needed only because the cache became durable; see Deployed demo.
+- `src/works.js` — the subject's own books. Reads OpenLibrary **`search.json`**,
+  not `/authors/<id>/works.json` (changed 2026-08-06). Same corpus — Kafka's
+  OL33146A reports 1,852 either way, same request count — but search.json
+  carries `ebook_access`, which is the whole reason: see the lending rule above.
+  Two side effects worth knowing, because they change what the shelf looks like:
+  the order is by relevance rather than catalog accident (Kafka now opens with
+  Metamorphosis, Der Proceß and Das Schloß, where works.json led with
+  "Gezar-ha-din" and a Russian edition of the diaries), and `first_publish_year`
+  is populated where `first_publish_date` mostly was not.
+- `src/rights.js` — pure except one fetch: license/status vocabularies, the
+  WDQS rights query, and `rightsView`, which decides what a card says. See the
+  copyright section above for the rules it encodes.
+- `src/cc-icons.js` — **generated**, by `tools/build-cc-icons.mjs`. The Creative
+  Commons element glyphs as ONE inline `<symbol>` sprite, sourced from Commons
+  and normalized (ids namespaced per glyph, ink → `currentColor`, knock-outs →
+  `--ccmark-hole`, namespaced editor attributes stripped). A sprite rather than
+  data URIs — the opposite of the favicons, deliberately: a license glyph
+  appears on nearly every card, three or four at a time, so data URIs would
+  re-embed the same path data forty times per document. ~9 KB once per page.
+  The generator refuses anything that is not SVG, for the same reason
+  `build-icons.mjs` refuses non-images. Regenerate when the mark vocabulary in
+  `src/rights.js` changes; a test asserts the two vocabularies have not drifted.
 - `src/icons.js` — **generated**, by `tools/build-icons.mjs`. The partner
   favicons as committed bytes. Regenerate when `SOURCE` gains a partner or an
   icon rots. The generator refuses anything that is not `data:image/…`:

@@ -6,6 +6,7 @@
 // per-partner code at all. Presentation API v2 and v3 both arrive here.
 
 import { getJson } from './http.js'
+import { ccFromUri, licenseView } from './rights.js'
 
 /** The first human-readable string in any of IIIF's label shapes:
  * "x", ["x"], {"@value":"x"}, {en:["x"]}, {none:["x"]}. */
@@ -62,6 +63,22 @@ export function iiifCredit(manifest) {
   )
 }
 
+/**
+ * The terms the holding institution states in its own manifest.
+ *
+ * IIIF Presentation 3.0 calls this `rights` and requires a single URI from CC or
+ * rightsstatements.org — which is exactly the vocabulary `ccFromUri` reads. 2.1
+ * called it `license` and was looser about the value, so an unrecognized one
+ * yields null rather than a guess. Sampled 2026-08-06 across real P6108
+ * manifests, SMK answered `publicdomain/mark` and Yale `publicdomain/zero`:
+ * this is a partner that states its terms cleanly and was simply not being read.
+ */
+export function iiifRights(manifest) {
+  const v3 = Array.isArray(manifest?.rights) ? manifest.rights[0] : manifest?.rights
+  const v2 = Array.isArray(manifest?.license) ? manifest.license[0] : manifest?.license
+  return ccFromUri(typeof v3 === 'string' ? v3 : null) ?? ccFromUri(typeof v2 === 'string' ? v2 : null)
+}
+
 /** Where a reader lands: the object's own page when the manifest names one. */
 function iiifHomepage(manifest, manifestUrl) {
   const home = Array.isArray(manifest.homepage) ? manifest.homepage[0] : manifest.homepage
@@ -85,6 +102,7 @@ export function iiifEntryFrom(manifest, manifestUrl, fallbackTitle) {
       author: iiifCredit(manifest),
       license: null,
     },
+    rights: { copy: licenseView(iiifRights(manifest)) },
     _via: 'P6108',
   }
 }

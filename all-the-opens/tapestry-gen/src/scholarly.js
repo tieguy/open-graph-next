@@ -13,6 +13,7 @@
 import { templateParams } from './citations.js'
 import { chunk } from './batch.js'
 import { getJson } from './http.js'
+import { ccFromSlug, licenseView } from './rights.js'
 
 /**
  * Scholarly identifiers a section's citations state: one record per cited
@@ -97,6 +98,10 @@ export function openAlexEntry(work, via) {
       author: ['Free to read', license].filter(Boolean).join(' · '),
       license: null,
     },
+    // `other-oa` deliberately yields no glyph: OpenAlex knows the copy is free
+    // to read and does not know on what terms, and free to read is not a
+    // license. See ccFromSlug.
+    rights: { copy: licenseView(ccFromSlug(work.best_oa_location?.license)) },
     why: `Cited here — and there is a copy you can read for free`,
     // The reason class, not the citation: per-item topics would split the
     // strip into one-card carousels; what must not mix is cited work with
@@ -186,6 +191,7 @@ export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
           author: ['Free to read', license].filter(Boolean).join(' · '),
           license: null,
         },
+        rights: { copy: licenseView(ccFromSlug(w.best_oa_location?.license)) },
         _via: 'P496',
       }
     }),

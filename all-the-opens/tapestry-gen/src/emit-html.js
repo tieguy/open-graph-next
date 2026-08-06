@@ -2,6 +2,7 @@ import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
 import { pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
+import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 
 // A second rendering of the same model (bands, entries, citations) as a single
 // scrolling HTML page. Where the Tapestry emitter reserves fixed pixel lanes and
@@ -249,6 +250,83 @@ export function gapPanel(bands, reach, inline = new Map()) {
   )
 }
 
+/**
+ * The license glyphs, as a row of `<use>` references into the sprite.
+ *
+ * Marks are validated against the sprite's own vocabulary rather than trusted:
+ * a mark id with no symbol renders as an empty box, and an empty box beside a
+ * credit line reads as "there is a license here" while saying nothing. Better
+ * to drop it.
+ *
+ * The row carries the words too, in a visually-hidden span. A screen reader
+ * that met four unlabeled icons would get nothing, and the whole point of the
+ * row is to say what a reader may do with the thing.
+ */
+export function rightsMarks(marks, label) {
+  const known = (marks ?? []).filter((m) => CC_MARKS.includes(m))
+  if (!known.length) return ''
+  const glyphs = known
+    .map(
+      (m) =>
+        `<svg class="ccmark" role="img" aria-hidden="true" focusable="false">` +
+        `<use href="#cc-${m}"></use></svg>`,
+    )
+    .join('')
+  const words = label ?? known.map((m) => CC_TITLES[m]).filter(Boolean).join(', ')
+  return (
+    `<span class="ccrow" title="${escapeHtml(words)}">${glyphs}` +
+    `<span class="vh">${escapeHtml(words)}</span></span>`
+  )
+}
+
+/**
+ * The credit line, with the glyphs in front of the words it illustrates.
+ *
+ * The words stay. A glyph row is a summary a reader has to already know how to
+ * read, and "The Met · public domain (CC0)" is the sentence that teaches them —
+ * so this shows both rather than replacing text that already worked.
+ */
+function credit(entry) {
+  if (!entry.attribution && !entry.rights) return ''
+  const rights = entry.rights ?? {}
+  // The copy's own license leads: it is a promise the host actually made about
+  // the bytes on this card. The work's status is the fallback.
+  const shown = rights.copy ?? rights.work ?? null
+  const marks = shown ? rightsMarks(shown.marks, shown.label) : ''
+  const words = entry.attribution
+    ? escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))
+    : ''
+  if (!marks && !words) return ''
+  return `<p class="credit">${marks}${words}</p>`
+}
+
+/**
+ * The rights line: shown ONLY when the answer is not the same everywhere, or
+ * when it came from the creator rather than from the work.
+ *
+ * A card whose answer is simple does not get this — the glyphs and the credit
+ * already said it, and a line repeating them would be the thin box this page
+ * keeps deleting. What earns the space is a disagreement: public domain in one
+ * country and in copyright in another is a fact the article it sits beside
+ * cannot tell you, and it is the reason this feature exists.
+ *
+ * The free clause leads. That is a deliberate editorial choice with a cost — a
+ * reader in a longer-term country could stop after the first clause — and the
+ * mitigation is structural: `src/rights.js` never emits the free clause alone,
+ * and the Paulina link in the fold is how a reader gets the answer for where
+ * they actually are.
+ */
+function rightsLine(entry) {
+  // A copy-level NOTE is the lending case, and it earns the same line a
+  // work-level contrast does: "lent, not free" is the whole substance of what
+  // the card knows, and a glyph alone would leave the reader to infer it. Most
+  // copy verdicts have no note — their license is already in the credit words
+  // beside the glyphs, and repeating it would be the thin box this page keeps
+  // deleting.
+  const line = entry.rights?.work?.line ?? entry.rights?.copy?.note
+  return line ? `<p class="rights-line">${escapeHtml(line)}</p>` : ''
+}
+
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
 function card(entry, inline) {
@@ -266,9 +344,6 @@ function card(entry, inline) {
     // card, so a thumbnail that fails to load takes itself off the page.
     visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
   }
-  const credit = entry.attribution
-    ? `<p class="credit">${escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))}</p>`
-    : ''
   // An edge made by matching a description is a weaker claim than one made by a
   // shared identifier, and must not look the same. The card says so and shows
   // the agreeing signals, so a reader can judge the match rather than trust it.
@@ -296,7 +371,8 @@ function card(entry, inline) {
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
-    credit +
+    credit(entry) +
+    rightsLine(entry) +
     provenance(entry) +
     `</figcaption></figure>`
   )
@@ -321,13 +397,61 @@ function card(entry, inline) {
  * hoisted to the shelf head (see `carousel`) and keeps only the chain, so the
  * bare form has to name itself rather than relying on a glyph alone.
  */
+/**
+ * The rights working, for the fold: why anybody says the status is what it is,
+ * and where to get the answer for the country the reader is actually in.
+ *
+ * This is the part that was asked for explicitly — the determination method,
+ * not just the verdict. `P459` on a copyright statement holds phrases like
+ * "copyright not renewed" and "70 years or more after author(s) death", which
+ * are the whole argument compressed to five words, and they are the difference
+ * between a page asserting a status and a page showing its working.
+ *
+ * Named sources, because the words are theirs: the statuses are maintained in
+ * Wikidata by CopyClear and by the Dominio Público en América Latina project,
+ * and Paulina is the tool that turns them into a per-country answer. None of
+ * them is a content partner — they contribute no cards — so they are credited
+ * here, where their work is actually being used, rather than in the friends
+ * list, which counts collections.
+ */
+function rightsDetail(entry) {
+  const work = entry.rights?.work
+  const copy = entry.rights?.copy
+  const parts = []
+  if (copy?.url) {
+    parts.push(
+      `<p class="rd-lic">This copy is offered under ` +
+        `<a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener">${escapeHtml(copy.label)}</a>` +
+        `, stated by whoever is serving it.</p>`,
+    )
+  }
+  if (work?.detail?.length) {
+    parts.push(
+      `<p class="rd-work">${work.detail.map((d) => escapeHtml(d)).join(' ')} ` +
+        `<span class="rd-src">Copyright status from Wikidata, where it is maintained by ` +
+        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener">CopyClear</a>` +
+        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener">Dominio Público en América Latina</a> project.</span></p>`,
+    )
+  }
+  if (work?.paulina) {
+    parts.push(
+      `<p class="rd-ask"><a class="fixlink" href="${escapeHtml(work.paulina.url)}" target="_blank" rel="noopener">` +
+        `${escapeHtml(work.paulina.label)} ↗</a></p>`,
+    )
+  }
+  return parts.join('')
+}
+
 function provenance(entry) {
   const why = entry.why ? escapeHtml(entry.why) : ''
-  if (!entry.trace) return why ? `<p class="why">${why}</p>` : ''
+  const rights = rightsDetail(entry)
+  // Rights working alone is reason enough to open a fold. Before this, a card
+  // with no trace returned early and the working had nowhere to go.
+  if (!entry.trace && !rights) return why ? `<p class="why">${why}</p>` : ''
   const fix = entry.fix
     ? ` <a class="fixlink" href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
     : ''
-  const body = `<p>${escapeHtml(entry.trace)}${fix}</p>`
+  const body = (entry.trace ? `<p>${escapeHtml(entry.trace)}${fix}</p>` : '') + rights
   const summary = why
     ? `<summary class="why" title="How this got here">${why}<span class="info">ⓘ</span></summary>`
     : `<summary class="why bare" title="How this got here"><span class="info">ⓘ</span>How we know</summary>`
@@ -357,15 +481,13 @@ function heroCard(entry, inline) {
   const heading = entry.href
     ? `<h4><a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a></h4>`
     : `<h4>${escapeHtml(entry.title)}</h4>`
-  const credit = entry.attribution
-    ? `<p class="credit">${escapeHtml([entry.attribution.author, entry.attribution.license].filter(Boolean).join(' · '))}</p>`
-    : ''
   return (
     `<figure class="card hero-card">${visual}<figcaption>` +
     `<div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
-    credit +
+    credit(entry) +
+    rightsLine(entry) +
     provenance(entry) +
     `</figcaption></figure>`
   )
@@ -579,10 +701,45 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const broad = broadNotes(b.broad, inline)
   const deckBody = disclosure + media + broad
   return {
-    rail: hero ? `<aside class="rail">${heroCard(hero, inline)}</aside>` : '',
+    // Both go before the prose, the status first: it is about the whole
+    // article, while the hero is about one find inside it.
+    rail: subjectRights(b) + (hero ? `<aside class="rail">${heroCard(hero, inline)}</aside>` : ''),
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
     refs: sources,
   }
+}
+
+/**
+ * The article's OWN copyright status, for the case where no card can carry it.
+ *
+ * A page about The Great Gatsby has the richest rights data on the site —
+ * public domain in the United States, still in copyright where terms run 70
+ * years from the author's death — and, before this, nowhere to put it. The
+ * cards that carry a work-level status are records OF a work: the Met's object,
+ * a taxon, an author's own shelves. A novel has no such partner record here, so
+ * the best data on the page rendered as nothing at all.
+ *
+ * It goes at the head of the lede, above the article's first paragraph, because
+ * that is the one place a statement about "this article's subject" is not
+ * free-floating — the subject is named directly above it and its prose begins
+ * directly below. `discover.js` sets it ONLY when no card on the lede already
+ * carries the same claim, so an article whose subject a museum does hold (where
+ * the hero card already says it) never says it twice.
+ */
+function subjectRights(b) {
+  const r = b.subjectRights
+  if (!r) return ''
+  const marks = rightsMarks(r.marks, r.label)
+  const words = r.line ?? r.label
+  if (!marks && !words) return ''
+  const detail = rightsDetail({ rights: { work: r } })
+  const body = detail
+    ? `<details class="sr-why"><summary>Why, and what it means where you are</summary>${detail}</details>`
+    : ''
+  return (
+    `<div class="subject-rights">` +
+    `<p class="sr-line">${marks}${escapeHtml(words ?? '')}</p>${body}</div>`
+  )
 }
 
 /** All three parts as one fragment — what the stream ships and the tests read. */
@@ -684,13 +841,18 @@ ${STYLE}${faviconStyle(used, inline)}
 ${FOLD_JS}
 </head>
 <body>
+${CC_SPRITE}
 ${hero({ title, home, legend, panel: gapPanel(bands, reach, inline), extras: evidenceKey })}
 <main>
 ${body}
 </main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
-  media under their own licenses, shown on each item.</p>
+  media under their own licenses, shown on each item. Copyright status from Wikidata, maintained
+  there by <a href="https://www.wikidata.org/wiki/Wikidata:CopyClear">CopyClear</a> and the
+  <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina">Dominio
+  Público en América Latina</a> project; per-country answers from
+  <a href="https://paulina.toolforge.org">Paulina</a>.</p>
 </footer>
 </body>
 </html>
@@ -725,7 +887,7 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
-while((e=p.content.firstElementChild)){if(e.classList.contains("rail"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
+while((e=p.content.firstElementChild)){if(e.classList.contains("rail")||e.classList.contains("subject-rights"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
 function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
@@ -778,6 +940,7 @@ ${FOLD_JS}
 ${RELOCATE_JS}
 </head>
 <body>
+${CC_SPRITE}
 ${hero({ title, home, legend: FINDING })}
 <main>
 ${spine}
@@ -841,7 +1004,11 @@ export function streamClose({ provenance = '' } = {}) {
 </main>
 <footer class="foot">
   <p>${provenance ? `${provenance} ` : ''}Article text CC BY-SA 4.0;
-  media under their own licenses, shown on each item.</p>
+  media under their own licenses, shown on each item. Copyright status from Wikidata, maintained
+  there by <a href="https://www.wikidata.org/wiki/Wikidata:CopyClear">CopyClear</a> and the
+  <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina">Dominio
+  Público en América Latina</a> project; per-country answers from
+  <a href="https://paulina.toolforge.org">Paulina</a>.</p>
 </footer>
 </body>
 </html>
@@ -975,6 +1142,52 @@ sup.ref a:hover{text-decoration:underline}
    lines and keeps the rest in the DOM (and on the linked page). */
 .card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* License marks. They ride INSIDE the credit line rather than above it, so the
+   glyphs and the institution that granted them are one statement — a floating
+   row of icons is a claim with no subject. currentColor is why the sprite was
+   normalized: the marks take the credit's own grey and sit in the type instead
+   of shouting over it. --ccmark-hole is the knocked-out center of the ring
+   glyphs, which needs the card's background rather than a fixed white.
+   (No backticks in this stylesheet: it is a JS template literal.) */
+.ccrow{--ccmark-hole:#fff;display:inline-flex;align-items:center;gap:2px;
+  vertical-align:-2px;margin-right:5px}
+.ccmark{width:1.05em;height:1.05em;flex:0 0 auto;fill:currentColor}
+.hero-card .ccmark{width:1.15em;height:1.15em}
+/* The glyphs are a summary of the words beside them; a screen reader gets the
+   words. Clipped rather than display:none, which would take it out of the
+   accessibility tree along with the visual. */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
+
+/* The rights line: only ever present when the answer differs by country, or
+   when it is the author's status rather than the work's. It is allowed to wrap
+   to three lines where the credit is clamped to two, because the whole content
+   of it is a distinction that a truncated sentence would invert — "public
+   domain in the United States" with the second clause cut off is worse than
+   not saying it. The left rule marks it as a different kind of claim from the
+   credit above without adding a heading nobody asked for. */
+.card .rights-line{font-size:.68rem;color:#5d6469;margin:0 0 4px;
+  padding-left:6px;border-left:2px solid #d8dcdf;line-height:1.35}
+.hero-card .rights-line{font-size:.72rem}
+
+/* The article's own copyright status, at the head of the lede. Full width and
+   above the prose, never floated: it is a statement about the whole subject,
+   and a floated one would read as a caption for whatever wrapped around it.
+   It clears the hero so the two never collide on a narrow column.
+   (No backticks in this stylesheet: it is a JS template literal.) */
+.subject-rights{clear:both;margin:0 0 14px;padding:9px 12px;
+  background:#f6f8f8;border-left:3px solid #b9c4c6;border-radius:2px}
+.subject-rights .sr-line{margin:0;font-size:.86rem;line-height:1.45;color:#3c4448}
+.subject-rights .ccrow{--ccmark-hole:#f6f8f8}
+.subject-rights .ccmark{width:1.25em;height:1.25em}
+.sr-why{margin:5px 0 0}
+.sr-why>summary{font-size:.74rem;color:#6a7176;cursor:pointer}
+.sr-why p{font-size:.74rem;color:#5d6469;line-height:1.45}
+
+/* The rights working, inside the ⓘ fold. */
+.prov .rd-lic,.prov .rd-work,.prov .rd-ask{margin:6px 0 0}
+.prov .rd-src{color:#8b9096}
 /* The visibility panel, shut by default: one quiet line under the credit bar,
    opening into the measurement. A reader who has not yet wondered whether
    Wikipedia can show any of this should not be handed a table about it, and a

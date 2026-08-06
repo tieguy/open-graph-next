@@ -32,7 +32,10 @@ export function iaSearchUrl(isbns, { rowsPer = 8 } = {}) {
   return (
     'https://archive.org/advancedsearch.php?q=' +
     encodeURIComponent(q) +
-    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn' +
+    // `licenseurl` rides the request the search was already making. Uploader-
+    // supplied and messy — a 400-item sample carried a GPL URL on a novel — so
+    // it is read through ccFromUri, which refuses anything it does not know.
+    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn&fl%5B%5D=licenseurl' +
     `&rows=${isbns.length * rowsPer}&output=json`
   )
 }

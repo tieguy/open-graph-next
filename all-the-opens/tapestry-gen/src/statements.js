@@ -14,6 +14,7 @@
 import { chunk } from './batch.js'
 import { getJson, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
+import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
 const VARS = ['met', 'aic', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
@@ -48,6 +49,31 @@ export function wdqsUrl(qids) {
  */
 export function needsPlaceDefunctQuery(statements) {
   return Boolean(statements.coord || statements.osmr || statements.osmw || statements.osmn)
+}
+
+/**
+ * Whether it is worth asking Wikidata for this anchor's copyright status.
+ *
+ * The same shape of gate as `needsPlaceDefunctQuery`, and for the same reason:
+ * a page's picked anchors are mostly people, places, concepts and events, and
+ * a copyright status is a property of a **work**. Asking about all of them
+ * would spend a WDQS query answering "no" for a battle and a river.
+ *
+ * The three properties admitted here are the ones that only an object has —
+ * the Met's record of it, the Art Institute's, or its own IIIF manifest. That
+ * is deliberately narrower than "anything that might be a work": a false
+ * negative costs one card its rights marks, a wider gate costs every page a
+ * slower lede. The subject QID is asked about unconditionally by the caller,
+ * because the article's own subject is where a reader most wants the answer
+ * and it is one item.
+ *
+ * Notably NOT admitted: `eu` (Europeana). A Europeana entity URI names a
+ * person or a topic, and the items returned under it are *about* that entity
+ * rather than being it — so the anchor's copyright status would be a claim
+ * about the wrong thing.
+ */
+export function needsRightsQuery(statements) {
+  return Boolean(statements?.met || statements?.aic || statements?.iiif)
 }
 
 /**
@@ -427,6 +453,13 @@ export function metEntryFrom(obj) {
       author: obj.isPublicDomain ? 'The Met · public domain (CC0)' : 'The Met · rights reserved',
       license: null,
     },
+    // The Met's Open Access flag IS a CC0 dedication of the image, stated by
+    // the Met — so it is `copy`. A rights-reserved object gets no mark at all
+    // rather than a © it did not claim: the Met asserting rights over its
+    // photograph says nothing about the object's own status.
+    rights: obj.isPublicDomain
+      ? { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/zero/1.0/')) }
+      : undefined,
     _via: 'P3634',
   }
 }
@@ -449,6 +482,11 @@ export function aicEntryFrom(body) {
       author: d.is_public_domain ? 'Art Institute of Chicago · public domain' : 'Art Institute of Chicago',
       license: null,
     },
+    // The AIC publishes public-domain images under CC0 and says so in its own
+    // terms; `is_public_domain` is the flag it exposes for exactly that.
+    rights: d.is_public_domain
+      ? { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/zero/1.0/')) }
+      : undefined,
     _via: 'P4610',
   }
 }
@@ -497,6 +535,11 @@ export function inatEntryFrom(taxon) {
         (hadAny ? 'photos exist, but none under an open license — shown unillustrated' : null),
       license: null,
     },
+    // The photo's own license, chosen by the observer who took it — the card
+    // shows a photo only when that license exists, so a mark here is never a
+    // guess. iNaturalist's codes are the same slugs OpenAlex uses (`cc-by-nc`
+    // is by far the commonest on the site), so one parser serves both.
+    rights: { copy: licenseView(ccFromSlug(photo?.license_code)) },
     _via: 'P3151',
   }
 }
@@ -517,7 +560,14 @@ export function gbifEntryFrom(species, id) {
     // organism has been observed.
     imageUrl: `https://api.gbif.org/v2/map/occurrence/density/0/0/0@2x.png?taxonKey=${id}&style=purpleYellow.point`,
     href: `https://www.gbif.org/species/${id}`,
-    attribution: { author: 'GBIF occurrence records · CC0 or CC BY', license: null },
+    // NOT "CC0 or CC BY", which this said until the 2026-08-06 partner audit
+    // and which was simply false: sampled across four taxa, 85–94% of the
+    // occurrence records behind these maps are **CC BY-NC**, with CC0 and CC BY
+    // the small remainder. The line omitted the commonest license, and the
+    // omitted one is the restrictive one — the worst direction to be wrong in.
+    // No glyph: a tile aggregates records under all three licenses, so any
+    // single mark would be a guess about which record a reader is looking at.
+    attribution: { author: 'GBIF occurrence records · CC BY-NC, CC BY or CC0', license: null },
     _via: 'P846',
   }
 }
