@@ -351,6 +351,50 @@ function rightsLine(entry) {
   return line ? `<p class="rights-line">${escapeHtml(line)}</p>` : ''
 }
 
+/**
+ * What stands where the picture would be, when there is no picture.
+ *
+ * Cards with no thumbnail used to render as a caption floating under nothing,
+ * which reads as an image that failed rather than as an item that has none —
+ * and the difference matters, because these are overwhelmingly TEXTS. A link
+ * audit on 2026-08-06 measured it: 229 of 435 DPLA cards across the six
+ * showcase pages carry no thumbnail (53%), and 168 of those 229 are HathiTrust
+ * books. On Brown v. Board the Free Law opinion — the HERO card, the article
+ * whose subject IS a public-domain document — was one of them.
+ *
+ * Why this is a design answer and not a data one: DPLA has no thumbnail for
+ * those items to give. Open Library's cover service, keyed on the OCLC numbers
+ * those records carry, missed 7 out of 7 — they are 1914 municipal reports, not
+ * trade books. HathiTrust does serve a page-1 scan, keylessly, at
+ * /cgi/imgsrv/thumbnail — and its robots.txt says `Disallow: /cgi/` for
+ * `User-agent: *`, granting /cgi/imgsrv to Twitterbot alone. So the images that
+ * would fill 73% of this gap are ones HathiTrust has asked us not to take, and
+ * a project whose whole argument is about respecting what institutions publish
+ * does not help itself to them. (They allow it for link previews, so they may
+ * well say yes if asked. Asking is the move, not taking.)
+ *
+ * So the plate asserts NOTHING it was not given. When an entry supplies its own
+ * short identifying string it is set large, like a spine label — the reporter
+ * citation on an opinion is a better emblem of the thing than any photograph
+ * would be. With no such string it is a plain tinted panel: quiet, obviously
+ * intentional, and making no claim about an object it cannot see. No stock
+ * imagery, no generic "document" icon standing in for a specific book.
+ */
+function plate(entry) {
+  const label = typeof entry.plate === 'string' && entry.plate.trim() ? entry.plate.trim() : null
+  // A bare plate is decorative and stays that way: it carries no information, so
+  // it is hidden from assistive technology and is NOT wrapped in a link. An
+  // anchor around an aria-hidden panel is a link with no accessible name, and
+  // the title directly beneath already opens the same door.
+  if (!label) return `<div class="plate bare" aria-hidden="true"></div>`
+  const body = `<div class="plate"><span class="plate-mark">${escapeHtml(label)}</span></div>`
+  // A plate that says something is worth clicking, and it has text, so the link
+  // has a name. Same door as the title and the image.
+  return entry.href
+    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${body}</a>`
+    : body
+}
+
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
 function card(entry, inline) {
@@ -373,6 +417,8 @@ function card(entry, inline) {
     visual = entry.href
       ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${img}</a>`
       : img
+  } else {
+    visual = plate(entry)
   }
   // An edge made by matching a description is a weaker claim than one made by a
   // shared identifier, and must not look the same. The card says so and shows
@@ -554,6 +600,12 @@ function heroCard(entry, inline) {
   } else if (entry.imageUrl) {
     const src = inline.get(entry.imageUrl) ?? entry.imageUrl
     visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
+  } else {
+    // The hero needs this more than a deck card does, not less: it is the one
+    // thing the section is pointing at, and on Brown v. Board the hero was the
+    // Free Law opinion — hoisted to the top of the page with nothing above its
+    // caption at all.
+    visual = plate(entry)
   }
   const heading = titleRow(entry, 'hero')
   return (
@@ -1202,6 +1254,27 @@ sup.ref a:hover{text-decoration:underline}
 .frame.audio iframe{position:static;height:52px}
 .shot{width:100%;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,.14);background:var(--faint)}
 a:has(> .shot){display:block}
+/* Where a card has no picture. Deliberately NOT image-shaped: a 4/3 grey box is
+   exactly what a failed thumbnail looks like. This is shorter, ruled at the
+   foot like a card in a catalog drawer, and set in the serif — it should read
+   as a label, which is what it is. See plate(). */
+.plate{aspect-ratio:5/2;border-radius:5px;background:linear-gradient(180deg,#fbfbfa,var(--faint));
+  border:1px solid var(--rule);border-bottom-width:3px;display:flex;align-items:center;
+  justify-content:center;padding:6px 10px;box-sizing:border-box;overflow:hidden}
+.plate-mark{font-family:var(--serif);font-size:1.02rem;line-height:1.15;font-weight:600;
+  color:#4a5058;text-align:center;letter-spacing:.01em;
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
+/* Nothing to say: no glyph, no stock icon, just a quiet panel that is plainly
+   on purpose. The carousel already names the source above it. */
+.plate.bare{background:var(--faint);border-bottom-width:1px;aspect-ratio:5/1.4}
+a:has(> .plate){display:block;text-decoration:none}
+a:hover > .plate{border-color:var(--link)}
+a:hover > .plate .plate-mark{color:var(--link)}
+/* The hero has room, so its plate can carry the label at reading size rather
+   than shrinking it into the same 178px slot the carousel cards use. */
+.hero-card .plate{aspect-ratio:auto;min-height:96px;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.hero-card .plate-mark{font-size:1.55rem;-webkit-line-clamp:3}
+.hero-card .plate.bare{min-height:60px}
 .card figcaption{padding-top:8px;font-family:var(--sans)}
 /* Three lines before the ellipsis: archival titles spend their first line on
    throat-clearing ("Tentative statement of philosophy for the…"), and the

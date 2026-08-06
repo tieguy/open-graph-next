@@ -194,3 +194,54 @@ test('the warmer and the front page read the same showcase list', () => {
   }
   assert.equal(showcaseTitles().length, (html.match(/<a class="show"/g) ?? []).length)
 })
+
+// ---- the plate: what stands in for a picture that does not exist -----------
+//
+// 229 of 435 DPLA cards on the six showcase pages have no thumbnail, and on
+// Brown v. Board the imageless card was the HERO. A caption under nothing reads
+// as a broken image; these assertions pin the difference.
+
+const oneCard = (entry) =>
+  buildHtml({
+    title: 'T', description: 'd', inline: new Map(),
+    bands: [{ id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }], entries: [entry] }],
+  })
+
+test('a card with no image renders a plate rather than a caption under nothing', () => {
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla' })
+  assert.match(html, /class="plate bare"/)
+})
+
+test('an entry that supplies a label gets it set as the plate’s mark', () => {
+  const html = oneCard({ id: 'x', title: 'Opinion', source: 'free_law', plate: '347 U.S. 483' })
+  assert.match(html, /<span class="plate-mark">347 U\.S\. 483<\/span>/)
+  assert.doesNotMatch(html, /class="plate bare"/)
+})
+
+test('the plate opens the same door the title does', () => {
+  const html = oneCard({
+    id: 'x', title: 'Opinion', source: 'free_law', plate: '347 U.S. 483',
+    href: 'https://www.courtlistener.com/c/U.S./347/483/',
+  })
+  assert.match(html, /<a href="https:\/\/www\.courtlistener\.com\/c\/U\.S\.\/347\/483\/"[^>]*><div class="plate"/)
+})
+
+test('a plate label is escaped, never injected', () => {
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', plate: '<script>alert(1)</script>' })
+  assert.doesNotMatch(html, /<script>alert\(1\)<\/script>/)
+  assert.match(html, /&lt;script&gt;/)
+})
+
+test('a card WITH an image is untouched — no plate competes with the picture', () => {
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' })
+  assert.doesNotMatch(html, /class="plate/)
+  assert.match(html, /<img class="shot"/)
+})
+
+test('a bare plate is decorative — hidden from assistive tech, and never a link', () => {
+  // An anchor wrapping an aria-hidden panel is a link with no accessible name.
+  // The title beneath already opens the same door.
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', href: 'https://dp.la/item/abc' })
+  assert.match(html, /<div class="plate bare" aria-hidden="true"><\/div>/)
+  assert.doesNotMatch(html, /<a href="https:\/\/dp\.la\/item\/abc"[^>]*><div class="plate bare"/)
+})

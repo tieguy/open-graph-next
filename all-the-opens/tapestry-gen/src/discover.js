@@ -396,6 +396,10 @@ export function freeLawByCitation(citations) {
     source: 'free_law',
     title: `Opinion of the Court — ${cite}`,
     description: 'Full text of the decision, from the Free Law Project',
+    // There is no photograph of an opinion, and the reporter citation is a
+    // better emblem of it than one would be: it is how the thing is actually
+    // referred to, cited and shelved. See plate() in emit-html.js.
+    plate: cite,
     href:
       `https://www.courtlistener.com/c/${encodeURIComponent(best.reporter)}/` +
       `${best.volume}/${best.page}/`,
