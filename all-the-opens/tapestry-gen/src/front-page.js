@@ -187,6 +187,8 @@ a{color:var(--link)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 40px;min-width:0}
 .kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--muted);margin:0 0 28px}
+.kicker a{color:inherit;text-decoration:none}
+.kicker a:hover{color:var(--link)}
 .hero{padding:96px 0 40px}
 h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
   margin:0 0 24px;color:var(--head);font-weight:600;max-width:16ch}
@@ -267,7 +269,7 @@ ${legend.style}
 </head>
 <body>
 <header class="hero"><div class="wrap">
-  <p class="kicker">Help From Our Friends · an open knowledge web experiment</p>
+  <p class="kicker">Help From Our Friends · an experiment in visualizing open knowledge, by <a href="https://lu.is">Luis Villa</a></p>
   <h1>Wikipedia is not alone.</h1>
   <p class="lede">Alongside every Wikipedia article there is a wider open world: libraries that lend,
     museums that publish their own collections, scientists who post their papers openly, mappers and

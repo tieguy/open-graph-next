@@ -856,10 +856,9 @@ function band(b, inline, wikiBase = '/wiki/') {
  * verbiage about how it all works lives on the main page, not here.
  */
 function hero({ title, home, legend, panel = '', extras = '' }) {
-  const name = 'Help From Our Friends: An Open Knowledge Web Experiment'
-  const kicker = home
-    ? `<a href="${escapeHtml(home)}">${name}</a>`
-    : name
+  const name = 'Help From Our Friends · an experiment in visualizing open knowledge, by'
+  const byline = `<a href="https://lu.is">Luis Villa</a>`
+  const kicker = home ? `<a href="${escapeHtml(home)}">${name}</a> ${byline}` : `${name} ${byline}`
   const note = home
     ? `<p class="hero-note">This is an experiment — for more detail, including the hard problems,
   see <a href="${escapeHtml(home)}">the main page</a>.</p>`
