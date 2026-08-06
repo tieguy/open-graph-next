@@ -47,6 +47,17 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   stale `.tapestry` artifacts. Nothing emits them any more — the emitter
   retired to the attic 2026-08-04 with the generator that drove it.
 - `docs/design-plans/`, `docs/implementation-plans/` — design documentation.
+- **Two running logs, appended to as things are found.** Both date every claim
+  and show the command that produced it, because these findings decay — an
+  undated "partner X blocks us" is worthless within months.
+  - `docs/reaching-open-collections.md` — openly licensed material that is hard
+    to *reach*: bot mitigation, retired endpoints, robots rules, missing
+    metadata. Read the two rules at its head before adding an entry; in
+    particular, run the real-id/bogus-id control before recording a failure,
+    because a host that answers both identically is refusing to talk to you,
+    not reporting a broken link.
+  - `docs/internet-archive-issues.md` — data-quality problems in one partner's
+    index, in the same form.
 
 ## Data Contracts
 
