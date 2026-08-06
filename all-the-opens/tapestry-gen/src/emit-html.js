@@ -366,7 +366,13 @@ function card(entry, inline) {
     // Partner thumbnails rot and hotlink-block (DPLA's `object` URLs point at
     // the provider, not at DPLA). A broken-icon card is worse than a text
     // card, so a thumbnail that fails to load takes itself off the page.
-    visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
+    const img = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
+    // The title already opens the same door (see titleRow); the image is the
+    // larger target and a reader's first instinct to click, so it opens the
+    // same door rather than doing nothing.
+    visual = entry.href
+      ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${img}</a>`
+      : img
   }
   // An edge made by matching a description is a weaker claim than one made by a
   // shared identifier, and must not look the same. The card says so and shows
@@ -1196,6 +1202,7 @@ sup.ref a:hover{text-decoration:underline}
 .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .frame.audio iframe{position:static;height:52px}
 .shot{width:100%;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,.14);background:var(--faint)}
+a:has(> .shot){display:block}
 .card figcaption{padding-top:8px;font-family:var(--sans)}
 /* Three lines before the ellipsis: archival titles spend their first line on
    throat-clearing ("Tentative statement of philosophy for the…"), and the
