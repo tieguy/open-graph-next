@@ -1062,6 +1062,18 @@ the politeness claim is checkable after a run rather than merely asserted here.
   come from the name the museum tags primary (AAT 300404670) in English (AAT
   300388277): a record carries the same work under a long curatorial sentence
   and a short display title, both English and both true.
+  **The object's web page is keyed by ACCESSION NUMBER, not by the Linked Art
+  id** (`rijksPageUrl`, fixed 2026-08-06 after a reported 404). The numeric id
+  addresses the *data* — `id.rijksmuseum.nl/200107928` serves JSON — while the
+  page is `/en/collection/SK-C-5`, with no `/object/` segment. The museum also
+  states a canonical page URL of its own, and it is worse for linking: Dutch,
+  with an underivable hash (`/nl/collectie/object/SK-C-5--3137deb45cd77…`); it
+  is the locale-swapped fallback where no accession number is stated. The
+  accession form was verified 9/9 across paintings (SK-*) and prints (RP-P-*).
+  Note also that **P13234 is not always the numeric id**: 4 of 5,557 values are
+  accession numbers or handles, which 400/404 and are dropped by the pivot's
+  own error handling. That is correct — a bad identifier is our problem, not
+  the museum's — and too rare to special-case.
 - `src/artworks.js` — the subject's own artworks; see Partner pivots for the
   measured funnel that made it a query rather than an anchor pivot.
 - `src/rights.js` — pure except one fetch: license/status vocabularies, the

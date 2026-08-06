@@ -8,6 +8,8 @@ import {
   rijksDate,
   rijksEntryFrom,
   rijksIdFrom,
+  rijksObjectNumber,
+  rijksPageUrl,
   rijksRights,
   rijksTitle,
   visualItemId,
@@ -44,6 +46,13 @@ const object = {
       content: 'Old Woman Reading, Probably the Prophetess Anna',
       language: [ENGLISH],
       classified_as: [PRIMARY],
+    },
+    // Every real record carries one, and it is what the object's web page is
+    // keyed by — see `rijksPageUrl`.
+    {
+      type: 'Identifier',
+      content: 'SK-A-3066',
+      classified_as: [{ id: 'http://vocab.getty.edu/aat/300312355' }],
     },
   ],
   produced_by: {
@@ -147,13 +156,63 @@ test('the IIIF base is taken from access_point, and a non-IIIF URL is refused', 
   assert.equal(imageBaseFrom({}), null)
 })
 
+// The Night Watch's real record, trimmed — the card that was reported 404ing.
+const nightWatch = {
+  identified_by: [
+    { type: 'Name', content: 'The Night Watch', language: [ENGLISH], classified_as: [PRIMARY] },
+    { type: 'Identifier', content: 'SK-C-5', classified_as: [{ id: 'http://vocab.getty.edu/aat/300312355' }] },
+  ],
+  subject_of: [
+    {
+      type: 'LinguisticObject',
+      digitally_carried_by: [
+        {
+          type: 'DigitalObject',
+          format: 'text/html',
+          access_point: [
+            { id: 'https://www.rijksmuseum.nl/nl/collectie/object/SK-C-5--3137deb45cd7765f9a76084a16c99544' },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+test('the object page is keyed by accession number, not by the Linked Art id', () => {
+  // The reported bug: /en/collection/object/200107928 is not a URL that exists.
+  // The numeric id addresses the DATA; the accession number addresses the page.
+  assert.equal(rijksPageUrl(nightWatch, '200107928'), 'https://www.rijksmuseum.nl/en/collection/SK-C-5')
+  assert.equal(rijksObjectNumber(nightWatch), 'SK-C-5')
+})
+
+test('a record with no accession number falls back to the museum’s stated page, in English', () => {
+  const noNumber = { ...nightWatch, identified_by: [nightWatch.identified_by[0]] }
+  assert.equal(
+    rijksPageUrl(noNumber, '200107928'),
+    'https://www.rijksmuseum.nl/en/collection/object/SK-C-5--3137deb45cd7765f9a76084a16c99544',
+  )
+})
+
+test('with neither, the href is the identifier Wikidata actually stated', () => {
+  assert.equal(rijksPageUrl({}, '200107928'), 'https://id.rijksmuseum.nl/200107928')
+})
+
+test('an accession number with characters needing escaping is encoded', () => {
+  const odd = {
+    identified_by: [
+      { type: 'Identifier', content: 'RP-P-OB-60.797', classified_as: [{ id: 'http://vocab.getty.edu/aat/300312355' }] },
+    ],
+  }
+  assert.equal(rijksPageUrl(odd, '1'), 'https://www.rijksmuseum.nl/en/collection/RP-P-OB-60.797')
+})
+
 test('the three resources become one card the renderer can place', () => {
   const e = rijksEntryFrom(object, visual, digital, '200107947')
   assert.equal(e.source, 'rijks')
   assert.equal(e.title, 'Old Woman Reading, Probably the Prophetess Anna')
   assert.equal(e.description, 'Rijksmuseum, Amsterdam · 1631')
   assert.equal(e.imageUrl, 'https://iiif.micr.io/CNSQg/full/400,/0/default.jpg')
-  assert.match(e.href, /rijksmuseum\.nl\/en\/collection\/object\/200107947/)
+  assert.equal(e.href, 'https://www.rijksmuseum.nl/en/collection/SK-A-3066')
   assert.equal(e.attribution.author, 'Rijksmuseum · public domain')
   assert.equal(e._via, 'P13234')
   assert.equal(e.rights.copy.url, 'https://creativecommons.org/publicdomain/mark/1.0/')

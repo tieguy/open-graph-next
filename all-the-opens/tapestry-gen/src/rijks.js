@@ -56,6 +56,7 @@ import { ccFromUri, licenseView } from './rights.js'
 /** Getty AAT vocabulary ids this record uses to tag its own strings. */
 const ENGLISH = 'http://vocab.getty.edu/aat/300388277'
 const PRIMARY_NAME = 'http://vocab.getty.edu/aat/300404670'
+const ACCESSION_NUMBER = 'http://vocab.getty.edu/aat/300312355'
 
 /** The trailing id of a `https://id.rijksmuseum.nl/<id>` reference, or null. */
 export function rijksIdFrom(ref) {
@@ -104,6 +105,62 @@ export function rijksDate(obj) {
   )
   const pick = names.find((n) => tagged(n, 'language', ENGLISH)) ?? names[0]
   return pick?.content.trim() ?? null
+}
+
+/**
+ * The museum's own accession number for the object — "SK-C-5", "RP-P-OB-60.797".
+ *
+ * AAT 300312355 is "accession numbers", which the record tags explicitly, so
+ * this is read rather than guessed at among the several identifiers a record
+ * carries.
+ */
+export function rijksObjectNumber(obj) {
+  const found = (obj?.identified_by ?? []).find(
+    (n) =>
+      n?.type === 'Identifier' &&
+      typeof n.content === 'string' &&
+      n.content.trim() &&
+      tagged(n, 'classified_as', ACCESSION_NUMBER),
+  )
+  return found?.content.trim() ?? null
+}
+
+/**
+ * Where a reader lands — and it is NOT built from the Linked Art id.
+ *
+ * Reported as a 404 on a live card 2026-08-06: this used to construct
+ * `www.rijksmuseum.nl/en/collection/object/<numericId>`, a URL shape that does
+ * not exist. The museum's real page for The Night Watch is
+ * `/en/collection/SK-C-5` — keyed by ACCESSION NUMBER, with no `/object/`
+ * segment. The numeric id addresses the data (`id.rijksmuseum.nl/200107928`,
+ * which serves JSON), never the web page.
+ *
+ * The museum also states a canonical page URL of its own, and it is worse for
+ * this purpose: `/nl/collectie/object/SK-C-5--3137deb45cd7765f9a76084a16c99544`
+ * is Dutch and carries an opaque hash that cannot be derived. It is kept as the
+ * fallback — locale-swapped, since the English path is the same shape — for a
+ * record that states no accession number.
+ *
+ * The accession-number form was verified 9/9 on 2026-08-06 across both
+ * paintings (SK-C-5, SK-A-3066, SK-A-2391, SK-A-3340, SK-A-3934) and prints
+ * (RP-P-1912-2395, RP-P-1906-695, RP-P-2004-957, RP-P-OB-60.797), so it is not
+ * a pattern fitted to one department's numbering.
+ */
+export function rijksPageUrl(obj, id) {
+  const number = rijksObjectNumber(obj)
+  if (number) {
+    return `https://www.rijksmuseum.nl/en/collection/${encodeURIComponent(number)}`
+  }
+  for (const lo of obj?.subject_of ?? []) {
+    for (const carrier of lo?.digitally_carried_by ?? []) {
+      if (carrier?.format !== 'text/html') continue
+      const url = first(carrier.access_point)?.id
+      if (typeof url === 'string' && url) return url.replace('/nl/collectie/', '/en/collection/')
+    }
+  }
+  // The data URL is a poor page but an honest one: it resolves, and it is the
+  // identifier Wikidata actually stated.
+  return `https://id.rijksmuseum.nl/${encodeURIComponent(id)}`
 }
 
 /** The VisualItem this object `shows`, as an id, or null. */
@@ -164,7 +221,7 @@ export function rijksEntryFrom(obj, vis, digital, id) {
     imageUrl: base ? `${base}/full/400,/0/default.jpg` : null,
     // The museum's own object page, so the card is a door rather than a
     // mention — the same argument the Internet Archive cards settled.
-    href: `https://www.rijksmuseum.nl/en/collection/object/${id}`,
+    href: rijksPageUrl(obj, id),
     attribution: {
       author: copy ? 'Rijksmuseum · public domain' : 'Rijksmuseum',
       license: null,
