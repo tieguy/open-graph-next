@@ -369,8 +369,21 @@ async function iaLookups(cites) {
  * document — for a court case, the opinion outranks any book about it.
  * CourtListener's /c/ path is an identifier-addressed permalink, so this needs no
  * request at all: the citation resolves by construction.
+ *
+ * **And it must be a link.** Until 2026-08-06 this card carried the permalink as
+ * TEXT in the credit line and no `href` at all, so the one page whose subject is
+ * a public-domain document showed the reader its address and gave them nothing to
+ * click. A link audit found it: zero courtlistener.com hrefs on Brown v. Board,
+ * beside a card naming courtlistener.com/c/U.S./347/483/.
+ *
+ * The shape was verified the same day rather than assumed — the mistake that put
+ * a 404 on the Rijksmuseum cards. `347 U.S. 483` redirects to
+ * /opinion/105221/brown-v-board-of-education/, the parallel `74 S. Ct. 686`
+ * reaches the same opinion, `F.2d` resolves, and a citation to a volume that does
+ * not exist 404s — so the server distinguishes a real citation from a bogus one.
+ * Reporters carry spaces and periods ("S. Ct."), hence the per-segment encoding.
  */
-function freeLawByCitation(citations) {
+export function freeLawByCitation(citations) {
   // Prefer the official reporter (U.S.) over parallel commercial ones.
   const parsed = citations
     .map((c) => /^(\d+)\s+(.+?)\s+(\d+)$/.exec(c.trim()))
@@ -383,8 +396,13 @@ function freeLawByCitation(citations) {
     source: 'free_law',
     title: `Opinion of the Court — ${cite}`,
     description: 'Full text of the decision, from the Free Law Project',
+    href:
+      `https://www.courtlistener.com/c/${encodeURIComponent(best.reporter)}/` +
+      `${best.volume}/${best.page}/`,
     attribution: {
-      author: `courtlistener.com/c/${best.reporter}/${best.volume}/${best.page}/`,
+      // The destination, not the URL: the address is the link's job now, and
+      // repeating it here was only ever a substitute for being one.
+      author: 'CourtListener',
       license: 'Public domain — nobody owns the law',
     },
     // Not a license anybody granted: a work of the US federal government has

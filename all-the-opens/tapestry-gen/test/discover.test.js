@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { canonicalTitle, proseLinks } from '../src/discover.js'
+import { canonicalTitle, freeLawByCitation, proseLinks } from '../src/discover.js'
 
 // ---- canonicalTitle -------------------------------------------------------
 
@@ -59,4 +59,45 @@ test('prose links survive alongside a stripped hatnote', () => {
     '<div class="hatnote">For other uses, see <a href="/wiki/Foo_(disambiguation)">Foo (disambiguation)</a>.</div>' +
     '<p>See also <a href="/wiki/Bar">Bar</a> and <a href="/wiki/Baz">Baz</a>.</p>'
   assert.deepEqual(proseLinks(html), ['Bar', 'Baz'])
+})
+
+// ---- freeLawByCitation ----------------------------------------------------
+//
+// Every URL asserted here was resolved against CourtListener on 2026-08-06 —
+// these are not guesses at a shape. The card carried the address as plain text
+// and no link at all until that day, which is why the link itself is asserted
+// first and hardest.
+
+test('the opinion card is a link, not an address printed in the credit line', () => {
+  const e = freeLawByCitation(['347 U.S. 483'])
+  // Resolves to /opinion/105221/brown-v-board-of-education/ — verified live.
+  assert.equal(e.href, 'https://www.courtlistener.com/c/U.S./347/483/')
+  // The credit names where the reader lands; repeating the URL was a substitute
+  // for being a link, and there is one now.
+  assert.equal(e.attribution.author, 'CourtListener')
+  assert.match(e.title, /347 U\.S\. 483/)
+})
+
+test('a reporter with a space is encoded rather than shipped raw', () => {
+  // "74 S. Ct. 686" is Brown's parallel citation and reaches the same opinion.
+  const e = freeLawByCitation(['74 S. Ct. 686'])
+  assert.equal(e.href, 'https://www.courtlistener.com/c/S.%20Ct./74/686/')
+})
+
+test('the official reporter wins over a parallel commercial one', () => {
+  // Both cite the same case; U.S. is the one a reader should be sent to.
+  const e = freeLawByCitation(['74 S. Ct. 686', '347 U.S. 483'])
+  assert.equal(e.href, 'https://www.courtlistener.com/c/U.S./347/483/')
+})
+
+test('with no parsable reporter citation there is no card', () => {
+  assert.equal(freeLawByCitation(['not a citation']), null)
+  assert.equal(freeLawByCitation([]), null)
+})
+
+test('the decision is marked public domain, never CC-licensed', () => {
+  // Nobody granted this: a work of the US federal government has no copyright
+  // to grant, so the mark is correct and a CC circle would not be.
+  const e = freeLawByCitation(['347 U.S. 483'])
+  assert.equal(e.rights.copy.url, 'https://creativecommons.org/publicdomain/mark/1.0/')
 })
