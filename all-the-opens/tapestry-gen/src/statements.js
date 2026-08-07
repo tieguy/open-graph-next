@@ -525,20 +525,39 @@ export async function aicEntry(id) {
   )
 }
 
+// Wikipedia's own bar (Commons' licensing policy): CC0, public domain, CC BY,
+// and CC BY-SA are free content; CC BY-NC and CC BY-ND are not — NC and ND
+// are each a stronger restriction than the -SA Wikipedia itself runs under.
+// A photo licensed either is real and citable, and is PREFERRED over an
+// NC/ND one below, but is not excluded outright: the mark on the card states
+// the true license either way (see `rights.copy` below), so a reader is never
+// told an NC photo is free — an NC photo shown truthfully is a better outcome
+// than no photo where nothing freer exists for this taxon.
+const OPEN_PHOTO_LICENSES = new Set(['cc0', 'pd', 'cc-by', 'cc-by-sa'])
+
 /**
- * The taxon's photo, but only an openly licensed one. Observers choose their
- * own license and some reserve all rights; this page shows only what its
- * reader may reuse, so the default photo yields to the first CC-licensed one
- * (`license_code` is null on all-rights-reserved photos), and a taxon whose
- * photos are all reserved renders unillustrated — with the credit saying so,
- * because "no open photo exists" is a different fact from "no photo exists".
+ * The taxon's photo: the first one licensed no more restrictively than
+ * Wikipedia's own CC BY-SA, or — failing that — the first one carrying ANY
+ * license, so a taxon photographed only under NC/ND terms still gets its
+ * picture rather than going unillustrated for a restriction the card marks
+ * honestly anyway. Observers choose their own license per photo, and
+ * `taxon_photos` arrives in iNaturalist's own order — not raw upload order,
+ * and not something this pipeline can second-guess — so both passes walk
+ * that order rather than re-ranking it. A taxon whose photos are all
+ * reserved (no license at all) renders unillustrated, with the credit saying
+ * so, because "no licensed photo exists" is a different fact from "no photo
+ * exists".
  */
 function openPhoto(taxon) {
   const candidates = [
     taxon.default_photo,
     ...(taxon.taxon_photos ?? []).map((tp) => tp.photo),
   ].filter(Boolean)
-  return candidates.find((p) => p.license_code && p.medium_url) ?? null
+  return (
+    candidates.find((p) => OPEN_PHOTO_LICENSES.has(p.license_code) && p.medium_url) ??
+    candidates.find((p) => p.license_code && p.medium_url) ??
+    null
+  )
 }
 
 export function inatEntryFrom(taxon) {

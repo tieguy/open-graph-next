@@ -156,24 +156,46 @@ test('partner entries carry image, link, and the property that made them', () =>
   assert.equal(map.title, 'Map: Kennedy Space Center')
 })
 
-test('only openly licensed photos illustrate a taxon; reserved-rights sets say so', () => {
+test('Wikipedia-free-licensed photos are preferred; NC/ND is a fallback, not excluded', () => {
   // The all-rights-reserved default photo (license_code null) yields to the
-  // first CC-licensed photo in the taxon's set.
-  const fallback = inatEntryFrom({
+  // first photo in iNaturalist's own order that clears Wikipedia's own bar —
+  // CC BY-SA or freer. It does NOT stop at the first CC-anything: CC BY-NC
+  // is a real Creative Commons license, but a stronger restriction than the
+  // -SA Wikipedia itself runs under, so a later CC BY-SA candidate is
+  // preferred over an earlier CC BY-NC one.
+  const preferred = inatEntryFrom({
     id: 1,
     name: 'X',
     default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A, all rights reserved', license_code: null },
     taxon_photos: [
       { photo: { medium_url: 'https://inat.test/arr2.jpg', attribution: '(c) B, all rights reserved', license_code: null } },
-      { photo: { medium_url: 'https://inat.test/open.jpg', attribution: '(c) C, CC BY-NC', license_code: 'cc-by-nc' } },
+      { photo: { medium_url: 'https://inat.test/nc.jpg', attribution: '(c) C, CC BY-NC', license_code: 'cc-by-nc' } },
+      { photo: { medium_url: 'https://inat.test/open.jpg', attribution: '(c) D, CC BY-SA', license_code: 'cc-by-sa' } },
     ],
   })
-  assert.equal(fallback.imageUrl, 'https://inat.test/open.jpg')
-  assert.equal(fallback.attribution.author, '(c) C, CC BY-NC')
-  // Every photo reserved → unillustrated, and the credit states the fact.
-  const reserved = inatEntryFrom({
+  assert.equal(preferred.imageUrl, 'https://inat.test/open.jpg')
+  assert.equal(preferred.attribution.author, '(c) D, CC BY-SA')
+  // No photo clears the bar, but one is licensed NC or ND: shown anyway,
+  // because a reader still sees a real photo and the mark states the true
+  // (restrictive) terms honestly — better than no photo where nothing freer
+  // exists for this taxon. The FIRST such candidate wins, same as the open
+  // case: iNaturalist's own order is respected either way.
+  const ncFallback = inatEntryFrom({
     id: 2,
     name: 'Y',
+    default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A', license_code: null },
+    taxon_photos: [
+      { photo: { medium_url: 'https://inat.test/nc.jpg', attribution: '(c) B, CC BY-NC', license_code: 'cc-by-nc' } },
+      { photo: { medium_url: 'https://inat.test/nd.jpg', attribution: '(c) C, CC BY-ND', license_code: 'cc-by-nd' } },
+    ],
+  })
+  assert.equal(ncFallback.imageUrl, 'https://inat.test/nc.jpg')
+  assert.equal(ncFallback.attribution.author, '(c) B, CC BY-NC')
+  // Every photo reserved (no license at all) → unillustrated, and the credit
+  // states the fact — this is the only case with no photo to fall back to.
+  const reserved = inatEntryFrom({
+    id: 3,
+    name: 'Z',
     default_photo: { medium_url: 'https://inat.test/arr.jpg', attribution: '(c) A', license_code: null },
   })
   assert.equal(reserved.imageUrl, null)
