@@ -17,14 +17,15 @@ import { getJson, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
+import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
 
 /** Properties this pivot reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu']
+const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?rijks ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?rijks ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?sicoll ?siinv WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     // P13234: the Rijksmuseum's own object id (added 2026-08-06) — same
     // object-level shape as the Met and AIC ids above, and the best-answering
@@ -39,7 +40,15 @@ export function wdqsUrl(qids) {
     // P244: the LC authority behind the DPLA subject-heading pivot.
     'OPTIONAL { ?item wdt:P244 ?lc } ' +
     // P7704: the Europeana entity behind the Europeana pivot.
-    'OPTIONAL { ?item wdt:P7704 ?eu } }'
+    'OPTIONAL { ?item wdt:P7704 ?eu } ' +
+    // The Smithsonian, alone among the museums here, states no external-id
+    // property on its objects — Columbia, the Apollo 11 command module, carries
+    // none of P3634/P4610/P13234/P6108. It carries P195 (which museum holds it)
+    // and P217 (that museum's accession number), and the Open Access API
+    // indexes the accession number. The pair must come from ONE optional block:
+    // read separately, an object in a Smithsonian collection could be paired
+    // with another museum's inventory number. See src/smithsonian.js.
+    'OPTIONAL { ?item wdt:P195 ?sicoll ; wdt:P217 ?siinv } }'
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
 }
 
@@ -306,6 +315,17 @@ export async function partnerStatements(qids) {
       if (!qid) continue
       const cur = map.get(qid) ?? {}
       for (const v of VARS) if (row[v] && cur[v] == null) cur[v] = row[v].value
+      // `si` is the inventory number ONLY when the collection holding it is a
+      // Smithsonian one, collapsed here so everything downstream can treat it
+      // as an ordinary item-level identifier. Read separately, `siinv` is no
+      // such thing — the Rijksmuseum states P217 on its objects too, and a bare
+      // accession number belongs to whichever museum assigned it. Taken from
+      // this row, so the pair cannot be crossed between two rows of the same
+      // item (one museum's collection with another's number).
+      if (cur.si == null && row.sicoll && row.siinv && isSmithsonianCollection(row.sicoll.value)) {
+        cur.si = row.siinv.value
+        cur.siName = siCollectionName(row.sicoll.value)
+      }
       map.set(qid, cur)
     }
   }
@@ -647,6 +667,14 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
     statements.iiif && iiifEntry(statements.iiif, label),
     statements.inat && inatEntry(statements.inat),
     statements.gbif && gbifEntry(statements.gbif),
+    // Keyed, so absent for a clone with no SMITHSONIAN_API_KEY — the same
+    // silent degradation DPLA and Europeana take, and for the same reason: the
+    // demo must run for anyone who checks it out. The collection gate keeps
+    // this from firing on every museum object with an inventory number; the
+    // Rijksmuseum states P217 too, and its objects are not the Smithsonian's.
+    process.env.SMITHSONIAN_API_KEY &&
+      statements.si &&
+      smithsonianEntry(statements.si, statements.siName, process.env.SMITHSONIAN_API_KEY),
   ].filter(Boolean)
   for (const job of jobs) {
     try {
@@ -703,4 +731,9 @@ const PROP_NAME = {
   P402: 'OpenStreetMap relation ID (P402)',
   P11693: 'OpenStreetMap node ID (P11693)',
   P10689: 'OpenStreetMap way ID (P10689)',
+  // Not an external-id property like the rest: the Smithsonian states none on
+  // its objects, so the card is found by which museum holds the thing and that
+  // museum's own accession number. Named as the pair, because either alone
+  // would be a different and weaker claim.
+  P217: 'collection (P195) and inventory number (P217)',
 }

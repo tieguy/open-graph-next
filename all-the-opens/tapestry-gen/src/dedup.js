@@ -100,7 +100,10 @@ export function preferRelated(qids, ranks) {
 // links held Met objects and taxa.
 // An identifier that points at ONE object: whatever comes back is the thing
 // the article linked, by construction. Nothing else on this list offers that.
-const ITEM_LEVEL = ['met', 'aic', 'rijks', 'iiif', 'inat', 'gbif']
+// `si` and not `siinv`: the collapsed field is set only when the museum holding
+// the object is a Smithsonian one, which is what makes it a guarantee. A bare
+// P217 inventory number is not — other museums state it too. See statements.js.
+const ITEM_LEVEL = ['met', 'aic', 'rijks', 'iiif', 'inat', 'gbif', 'si']
 const SOME_HOOK = [...ITEM_LEVEL, 'lc', 'eu', 'coord', 'osmr', 'osmw', 'osmn']
 
 /**

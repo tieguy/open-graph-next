@@ -1044,6 +1044,36 @@ the politeness claim is checkable after a run rather than merely asserted here.
   Metamorphosis, Der Proceß and Das Schloß, where works.json led with
   "Gezar-ha-din" and a Russian edition of the diaries), and `first_publish_year`
   is populated where `first_publish_date` mostly was not.
+- `src/smithsonian.js` — the Smithsonian (P195 + P217), added 2026-08-06. The
+  only partner here found by a PAIR of properties rather than an external id,
+  because the Smithsonian states none on its objects: Columbia (Q85753536), the
+  Apollo 11 command module, carries no P3634/P4610/P13234/P6108. It carries
+  which museum holds it and that museum's accession number, and Open Access
+  indexes the accession number. `SI_COLLECTIONS` lists the 21 collection QIDs
+  (41,202 items) — an explicit map rather than a SPARQL property path, because
+  the path costs every page a graph walk to learn something that changes once a
+  decade, and the map doubles as the credit line. The pair is collapsed to `si`
+  in `partnerStatements` **from a single row**: read separately, one museum's
+  collection could be crossed with another museum's inventory number, and the
+  Rijksmuseum states P217 too.
+  **The record id is verified, never constructed.** `edanmdm:nasm_A19700102000`
+  looks like `<unitcode>_<inventory>` and building it is a trap — unit codes do
+  not follow from the collection (Natural History alone has several, by
+  department) and accession punctuation is normalized unpredictably. So this
+  searches the number and accepts a row only when the row's own stated id ends
+  with it. Coverage measured 2026-08-06, not assumed: SAAM 12/20, NASM 4/6 —
+  the Enola Gay's `A19500100000` resolves to nothing, because the aircraft is
+  not in Open Access even though exhibition records about it are.
+  **The href is the ARK the museum states** (`n2t.net/ark:/65665/…`), which
+  resolves to the object page and 404s for an ARK that does not exist. The
+  prettier `3d.si.edu/object/3d/<slug>:<uuid>` form is deliberately NOT built:
+  its slug cannot be derived from anything the API returns. That is the
+  Rijksmuseum 404 rule (see `rijksPageUrl`).
+  **Keyed** (`SMITHSONIAN_API_KEY`, free from api.data.gov), so silently absent
+  for a clone, like DPLA and Europeana. This is the one partner that ships a
+  rotatable 3D scan: `media3d` carries the Voyager package URL and the renderer
+  embeds it, because 3d-api.si.edu sets neither X-Frame-Options nor a
+  frame-ancestors CSP. An object with several scans takes the museum's first.
 - `src/rijks.js` — the Rijksmuseum (P13234), added 2026-08-06. **No API key**:
   the keyed `api.rijksmuseum.nl` was shut down 2026-01-05 and 404s;
   `id.rijksmuseum.nl` (Linked Art) needs no auth, so unlike DPLA and Europeana

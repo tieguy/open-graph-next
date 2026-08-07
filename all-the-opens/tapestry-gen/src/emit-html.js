@@ -59,6 +59,12 @@ const SOURCE = {
   },
 }
 
+// A Smithsonian object with a 3D scan carries `media3d` — the Voyager package
+// URL the museum states. It is embedded rather than linked because the scan IS
+// the thing worth seeing, and 3d-api.si.edu sets neither X-Frame-Options nor a
+// frame-ancestors CSP (checked 2026-08-06), so it is embeddable by design. This
+// is the only partner here that ships a rotatable object; a still of it would
+// be a worse card than the Met's still of a painting.
 const iaEmbed = (source) => {
   const m = /archive\.org\/(?:details|embed)\/([^/?#]+)/.exec(source ?? '')
   return m ? `https://archive.org/embed/${m[1]}` : null
@@ -398,10 +404,10 @@ function plate(entry) {
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
 function card(entry, inline) {
-  const embed = entry.media ? iaEmbed(entry.media.source) : null
+  const embed = entry.media3d ?? (entry.media ? iaEmbed(entry.media.source) : null)
   let visual = ''
   if (embed) {
-    const tall = entry.media.webpageType === 'iaAudio' ? ' audio' : ''
+    const tall = entry.media?.webpageType === 'iaAudio' ? ' audio' : ''
     visual =
       `<div class="frame${tall}"><iframe src="${escapeHtml(embed)}" loading="lazy" ` +
       `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`
@@ -590,10 +596,10 @@ function provenance(entry) {
  * merged why/ⓘ — so nothing about a card becomes untrue when it is hoisted.
  */
 function heroCard(entry, inline) {
-  const embed = entry.media ? iaEmbed(entry.media.source) : null
+  const embed = entry.media3d ?? (entry.media ? iaEmbed(entry.media.source) : null)
   let visual = ''
   if (embed) {
-    const tall = entry.media.webpageType === 'iaAudio' ? ' audio' : ''
+    const tall = entry.media?.webpageType === 'iaAudio' ? ' audio' : ''
     visual =
       `<div class="frame${tall}"><iframe src="${escapeHtml(embed)}" loading="lazy" ` +
       `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`

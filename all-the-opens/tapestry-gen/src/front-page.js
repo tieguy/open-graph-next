@@ -124,6 +124,18 @@ const FRIENDS = [
   ['free_law', 'Free Law Project',
     'Publishes court opinions in full, free to read.',
     'Court opinions are public domain: nobody owns the law.'],
+  ['smithsonian', 'the Smithsonian',
+    'Nineteen museums, and 3D scans you can turn around of things like the Apollo 11 command module.',
+    'Open Access items are CC0: no rights reserved at all.',
+    // NOT si.edu's own announcement of the release, which would be the better
+    // citation: www.si.edu is challenge-gated, and a real page and an invented
+    // one come back indistinguishable (46,677 vs 46,728 bytes of "Smithsonian
+    // request verification", 2026-08-06), so it cannot be verified from here.
+    // This is the Smithsonian's own Open Access data repository, which states
+    // CC0-1.0 as its licence and which does resolve — 200 for the repo, 404 for
+    // one that does not exist. A claim we can check beats a better-worded one
+    // we cannot. See LUI-128.
+    'https://github.com/Smithsonian/OpenAccess'],
 ]
 
 // Wikimedia Commons is deliberately not on this list (2026-08-04). It is not
