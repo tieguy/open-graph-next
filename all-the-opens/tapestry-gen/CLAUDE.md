@@ -458,6 +458,40 @@ none; they are credited in the rights copy, which is where their work is used.
   `first_publish_year` as **1508**, about a century before it was written. A
   work with 1,867 editions has unreliable first-publication data and nothing
   here can know better.
+- **A scan's word is checked before the shelf takes it** (`scanMatchesWork` in
+  `src/works.js`, 2026-08-07). The Macbeth rule trusts Open Library's
+  edition→scan link, and that link is sometimes somebody else's book: von
+  Braun's *Das Marsprojekt* wore an 1874 railroad pamphlet as its cover, free-
+  to-read claim and all (`docs/internet-archive-issues.md` #8). Each scan the
+  shelf will show costs one cached `archive.org/metadata/<id>/metadata` request
+  (≤ `WORKS_BY_SUBJECT`); the scan stays if the item's `openlibrary_work`
+  backlink names the work OR the titles overlap — either alone, because the
+  backlink goes stale on genuine scans too. Disowned means reverting to the
+  no-scan posture: representative cover, no edition-level claim. Rejection only
+  withholds, so a false one understates a card rather than misstating it. A
+  KEPT scan whose own title reads differently gets a `scanned as “…”` caption —
+  Rizal's *Noli Me Tangere* is scanned as its English translation *The Social
+  Cancer*, and the card owns that instead of hoping nobody notices. "Reads
+  differently" means neither folded title contains the other: Kafka's
+  Tagebücher scanned as "TAGEBUCHER 1910-1923 (GESAMMELTE WERKE …)" is the same
+  title wearing cataloging residue, and quoting it at the reader is not a
+  disclosure.
+- **A shelf ranks by edition count and folds shard records** (`authorWorksUrl`
+  `sort=editions` + `dedupeShards` in `src/works.js`, 2026-08-07). Open Library
+  answers "what did Rizal write?" with **186 works** for a man with a shelf of
+  ten — the same book resurfaces as work records split by article, spelling, or
+  diacritic (*El filibusterismo* / *Filibusterismo* / *El Filibusterismo*…),
+  each with a sliver of the editions. The genuine record beats its shards by
+  one or two orders of magnitude (Noli: 134 editions; shards: 1–12), so the
+  server-side editions sort guarantees the real books are inside the 40-work
+  fetch window, and a leading-article-and-diacritics title fold keeps one
+  record per group — the one with the most editions, chosen explicitly so
+  cached relevance-era responses fold correctly too. Translations filed as
+  their own works under their own titles (*An eagle flight*, *The Social
+  Cancer*) are beyond a title fold and stay, ranked down by their own edition
+  counts; merging them would take external knowledge, not string logic.
+  Kafka, the control: editions order agrees with the relevance order this
+  pivot used before.
 - **The article's own status goes at the head of the lede** (`subjectRights`,
   chosen 2026-08-06). An article ABOUT a work — The Great Gatsby — often has the
   richest rights data on the site and, before this, nowhere to put it: no

@@ -48,7 +48,7 @@ import { corroborate, describedThesisArchiveId, preferredLabel } from './corrobo
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
-import { authorWorkEntries, authorWorksUrl } from './works.js'
+import { authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import {
@@ -437,10 +437,25 @@ async function subjectAuthorWorks(subjectClaims) {
   const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
   if (typeof olid !== 'string' || !/^OL\d+A$/.test(olid)) return { entries: [], total: 0 }
   const body = await getJson(authorWorksUrl(olid, 40), { throttleMs: 1100 })
+  // Ask the archive about each scan the shelf is about to show — one cached
+  // request per scan, serial on the archive.org queue — because Open Library's
+  // edition→scan link is sometimes somebody else's book, and the cover-from-
+  // the-scan rule then amplifies that into the whole card. See
+  // `scanMatchesWork` in src/works.js for the live card that proved it.
+  const iaMeta = {}
+  for (const id of scanIdsToVerify(body, { cap: WORKS_BY_SUBJECT })) {
+    try {
+      iaMeta[id] = (await getJson(iaMetadataUrl(id)))?.result ?? null
+    } catch (e) {
+      // Unfetched is not disproven: the scan stays, exactly as before this
+      // check existed. Cosmetic, so it logs rather than fails the shelf.
+      console.error(`  scan check failed for ${id}: ${e.message}`)
+    }
+  }
   // `olid` goes in so a work can be tested for co-authors: the subject's
   // creator-level status covers what the subject wrote, not what somebody
   // wrote with them. See `soleAuthor`.
-  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid })
+  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid, iaMeta })
 }
 
 /** Labels of the entities we anchored on, batched at the API's 50-id limit. */

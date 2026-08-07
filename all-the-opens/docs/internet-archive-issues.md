@@ -109,6 +109,79 @@ independently re-verified here.
 
 ---
 
+## 8. An Open Library edition's `ocaid` can name somebody else's scan `[ours]`
+
+Open Library's edition of von Braun's *Das Marsprojekt* (OL1869208M, the 1991
+Illini Books reprint) carries `ocaid: reviewshowingwhy00unse` — an 1874
+pamphlet against a railroad franchise in Washington, D.C. The edition's
+`source_records` lists both `ia:reviewshowingwhy00unse` and
+`ia:marsproject0000vonb` (the real scan), so an automated match bound the wrong
+one. search.json then rolls the pamphlet up into the work (2026-08-07):
+
+```
+https://openlibrary.org/search.json?q=key:"/works/OL4460018W"&fields=key,title,ebook_access,ia
+→ ebook_access "public", ia ["reviewshowingwhy00unse"]
+https://archive.org/metadata/reviewshowingwhy00unse/metadata
+→ title "A review, showing why the franchise applied for by the Washington
+   city and Point Lookout Railroad Company … should not be granted",
+   openlibrary_work "OL4460024W"
+```
+
+A consumer that shows the scan (`archive.org/services/img/<ia>`) wears the
+pamphlet as the work's cover, with a free-to-read claim resting on it — seen
+live on third-party cards built from this work.
+
+The error is mirrored and *worse* on the IA side: **both** items —
+the pamphlet and the genuine `marsproject0000vonb` — claim
+`openlibrary_edition: OL1869208M` and `openlibrary_work: OL4460024W`, a work
+key that no longer resolves. So a stale `openlibrary_work` backlink alone does
+not prove a scan wrong; only a backlink mismatch *and* no title overlap does.
+
+**Workaround:** before taking a scan's word for a work's cover and access,
+fetch `/metadata/<id>/metadata` and require either the `openlibrary_work`
+backlink or a title overlap (`scanMatchesWork` in `tapestry-gen/src/works.js`,
+2026-08-07). Rejection only withholds — falls back to `cover_i`, drops the
+scan-derived access verdict — so a false rejection understates rather than
+misstates.
+
+**Suggested fix:** edit OL1869208M's Internet Archive ID to
+`marsproject0000vonb` (Open Library records are wiki-editable), and report the
+double-sided backlink to IA; the orphaned `OL4460024W` pointers suggest a
+botched merge worth an audit of `source_records` with two `ia:` entries and a
+single `ocaid`.
+
+---
+
+## 9. One book, many Open Library work records `[ours]`
+
+`search.json?author_key=OL178062A` (José Rizal) answers **186 works** for an
+author whose bibliography is roughly ten titles (2026-08-07). The same book
+recurs as separate work records split by leading article, spelling, or
+diacritic — *El filibusterismo* (84 editions) alongside *Filibusterismo* (12),
+*Filibusterismo* (7), *El Filibusterismo* (2); *Noli Me Tangere* (134) alongside
+*Noli me tángere* (4) — plus each translation filed as its own work under its
+own title (*The Social Cancer* ×4, *Reign of Greed* ×5, *An eagle flight*,
+*Friars and Filipinos*).
+
+```
+https://openlibrary.org/search.json?author_key=OL178062A&fields=key,title,edition_count&sort=editions
+→ 186 works; the genuine records lead the editions sort by 1–2 orders of magnitude
+```
+
+**Workaround:** `sort=editions` server-side (so the real books cannot fall
+outside a limited fetch window), then fold shard records client-side by
+normalized title with leading articles stripped, keeping the record with the
+most editions per group (`dedupeShards` in `tapestry-gen/src/works.js`,
+2026-08-07). Same-language shards fold cleanly; cross-language translation
+records are beyond string logic and are left ranked by their own edition
+counts.
+
+**Suggested fix:** these are merge candidates Open Library's own librarians
+handle via work-merge requests; an author whose work count exceeds their
+plausible bibliography by 10× is a good audit heuristic.
+
+---
+
 ## Working well (worth saying)
 
 - `openlibrary_edition` / `openlibrary_work` are **returned** in search results, not
