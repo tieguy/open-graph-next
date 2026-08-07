@@ -656,17 +656,33 @@ export function mapEntry(coord, label, osm = null) {
  * still has room for one (`withMap`) — a map per anchor per section reads as
  * wallpaper, not discovery.
  */
+/**
+ * Every partner here whose object is named by ONE statement, bound straight
+ * to a WDQS var in `VARS` above and fetched with no other input than that
+ * value (and, for IIIF, the label a manifest's own metadata can't supply).
+ * This is the list to extend for a new museum/collection/taxon partner: add
+ * the property to `VARS`/`wdqsUrl`'s OPTIONAL clauses, a row to `PROP_NAME`,
+ * a fetcher module, and one entry here. It is NOT the list for a partner
+ * found by a pair of properties (Smithsonian, below) or reached by search
+ * rather than direct id (DPLA/Europeana, in `discover.js`) — see
+ * `tapestry-gen/CLAUDE.md`'s "Adding a data source" section for which shape
+ * fits.
+ */
+const MUSEUM_PIVOTS = [
+  { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },
+  { var: 'aic', property: 'P4610', fetch: (v) => aicEntry(v) },
+  { var: 'rijks', property: 'P13234', fetch: (v) => rijksEntry(v) },
+  // The manifest host is whichever institution holds the object; the
+  // fetch rides that host's own queue like every other partner call.
+  { var: 'iiif', property: 'P6108', fetch: (v, label) => iiifEntry(v, label) },
+  { var: 'inat', property: 'P3151', fetch: (v) => inatEntry(v) },
+  { var: 'gbif', property: 'P846', fetch: (v) => gbifEntry(v) },
+]
+
 export async function statementEntries(qid, statements, { label, withMap, subject = false }) {
   const out = []
   const jobs = [
-    statements.met && metEntry(statements.met),
-    statements.aic && aicEntry(statements.aic),
-    statements.rijks && rijksEntry(statements.rijks),
-    // The manifest host is whichever institution holds the object; the
-    // fetch rides that host's own queue like every other partner call.
-    statements.iiif && iiifEntry(statements.iiif, label),
-    statements.inat && inatEntry(statements.inat),
-    statements.gbif && gbifEntry(statements.gbif),
+    ...MUSEUM_PIVOTS.map((p) => statements[p.var] && p.fetch(statements[p.var], label)),
     // Keyed, so absent for a clone with no SMITHSONIAN_API_KEY — the same
     // silent degradation DPLA and Europeana take, and for the same reason: the
     // demo must run for anyone who checks it out. The collection gate keeps

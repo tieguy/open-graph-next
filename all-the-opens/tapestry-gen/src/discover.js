@@ -522,6 +522,111 @@ export function canonicalTitle(title) {
 }
 
 /**
+ * A partner reached by SEARCH rather than by direct object id: an anchor
+ * states one property (a subject heading, an entity id), the partner is
+ * asked to look things up FILED UNDER that value, and what comes back is a
+ * sample of a shelf rather than the shelf's own record. DPLA and Europeana
+ * are the two live cases and share this whole shape — see `tapestry-gen/
+ * CLAUDE.md`'s "Adding a data source" section for how this differs from the
+ * direct-id shape in `statements.js`'s `MUSEUM_PIVOTS`.
+ *
+ * `spec.fetch` may resolve to null (DPLA does, when the LC heading lookup
+ * itself fails); a spec whose fetch never returns null is unaffected by the
+ * check.
+ */
+async function bandPropertyPivot(
+  { unit, extras, statementQids, statements, labels, entries, stats, samples, broad },
+  spec,
+) {
+  if (!process.env[spec.envKey]) return
+  const anchored = statementQids
+    .map((q) => ({ id: statements.get(q)?.[spec.field], label: labels.get(q) ?? null, qid: q }))
+    .map((a) => (unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a))
+    .filter((a) => a.id)
+    .slice(0, 2)
+  for (const { id, label, qid } of anchored) {
+    const isSubject = unit.index === '0' && qid === extras?.subjectQid
+    try {
+      const hit = await spec.fetch(id, label, process.env[spec.envKey])
+      if (!hit) continue
+      if (tooBroad(hit.total, { isSubject })) {
+        broad.push(
+          broadNote({ source: spec.source, label, total: hit.total, url: spec.browseUrl(hit, id), ...spec.broadExtra?.(hit) }),
+        )
+        continue
+      }
+      for (const e of hit.entries) {
+        if (isSubject) e.standing = 'subject-record'
+        e.trace = spec.trace(label, qid, hit)
+        e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${spec.property}`, label: 'Check or fix it on Wikidata' }
+      }
+      entries.push(...hit.entries)
+      stats[spec.statsKey] += hit.entries.length
+      if (hit.total > hit.entries.length) samples.push(spec.sample(hit, label, id))
+    } catch (e) {
+      console.error(`  ${spec.source} lookup failed (${id}): ${e.message}`)
+    }
+  }
+}
+
+// DPLA, keyed on a real identifier: only anchors whose Wikidata entry states
+// an LC authority (P244) pivot, via the authorized heading — "Eagle" the
+// lunar module either has its own authority or stays out, which is what
+// keeps eleven thousand bird photographs off the page. Without
+// DPLA_API_KEY the pivot is simply absent: the demo must run keyless for
+// anyone who clones it.
+const DPLA_PIVOT = {
+  source: 'dpla',
+  envKey: 'DPLA_API_KEY',
+  field: 'lc',
+  property: 'P244',
+  statsKey: 'dpla',
+  fetch: (lc, label, key) => dplaEntries(lc, label, key),
+  browseUrl: (hit) => dplaBrowseUrl(hit.heading),
+  broadExtra: (hit) => ({ heading: hit.heading }),
+  trace: (label, qid, hit) =>
+    `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
+    `authority ID (P244), whose authorized heading is “${hit.heading}” — DPLA’s ` +
+    `partners catalog this item under that heading.`,
+  sample: (hit, label) => ({
+    source: 'dpla',
+    // The same value dplaEntryFrom writes as each entry's topic — that
+    // pairing is what lets the renderer find the shelf.
+    topic: label ?? hit.heading,
+    shown: hit.entries.length,
+    total: hit.total,
+    text:
+      `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s ` +
+      `partner institutions catalog under the Library of Congress heading “${hit.heading}”`,
+  }),
+}
+
+// Europeana, keyed the same way: only anchors whose Wikidata entry states a
+// Europeana entity (P7704) pivot, and only openly licensed items come back.
+// Keyless clones skip it silently.
+const EUROPEANA_PIVOT = {
+  source: 'europeana',
+  envKey: 'EUROPEANA_API_KEY',
+  field: 'eu',
+  property: 'P7704',
+  statsKey: 'europeana',
+  fetch: (eu, label, key) => europeanaEntries(eu, label, key),
+  browseUrl: (hit, eu) => europeanaBrowseUrl(eu),
+  trace: (label, qid) =>
+    `Wikidata’s item for ${label ?? qid} (${qid}) states its Europeana entity ID ` +
+    `(P7704) — Europeana’s partner records link this item to that entity.`,
+  sample: (hit, label, eu) => ({
+    source: 'europeana',
+    topic: label ?? null,
+    shown: hit.entries.length,
+    total: hit.total,
+    text:
+      `A sample: ${hit.entries.length} of ${hit.total.toLocaleString()} openly licensed ` +
+      `items Europeana’s partners link to ${label ?? eu}`,
+  }),
+}
+
+/**
  * Discover the enriched page for one article. See the module comment for the
  * emit protocol. `emit` may be async; each band's fragment is awaited before
  * the next event for the same band-task fires, so a streaming caller can
@@ -1137,12 +1242,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
       stats.statements += found.length
     }
 
-    // DPLA, keyed on a real identifier: only anchors whose Wikidata entry
-    // states an LC authority (P244) pivot, via the authorized heading —
-    // "Eagle" the lunar module either has its own authority or stays out,
-    // which is what keeps eleven thousand bird photographs off the page.
-    // Without DPLA_API_KEY the pivot is simply absent: the demo must run
-    // keyless for anyone who clones it.
     // What each shelf is a sample OF, keyed to the shelf it describes.
     //
     // This used to be one string per band, joined with '. ' and printed as a
@@ -1156,115 +1255,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Anchors whose holdings are too broad to sample: shown as one sentence
     // and a browse link instead of four arbitrary cards. See src/breadth.js.
     const broad = []
-    if (process.env.DPLA_API_KEY) {
-      const anchored = statementQids
-        .map((q) => ({ lc: statements.get(q)?.lc, label: labels.get(q) ?? null, qid: q }))
-        .map((a) =>
-          unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a,
-        )
-        .filter((a) => a.lc)
-        .slice(0, 2)
-      for (const { lc, label, qid } of anchored) {
-        const isSubject = unit.index === '0' && qid === extras?.subjectQid
-        try {
-          const hit = await dplaEntries(lc, label, process.env.DPLA_API_KEY)
-          if (!hit) continue
-          if (tooBroad(hit.total, { isSubject })) {
-            broad.push(
-              broadNote({
-                source: 'dpla',
-                label,
-                heading: hit.heading,
-                total: hit.total,
-                url: dplaBrowseUrl(hit.heading),
-              }),
-            )
-            continue
-          }
-          for (const e of hit.entries) {
-            if (isSubject) e.standing = 'subject-record'
-            e.trace =
-              `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
-              `authority ID (P244), whose authorized heading is “${hit.heading}” — DPLA’s ` +
-              `partners catalog this item under that heading.`
-            e.fix = {
-              url: `https://www.wikidata.org/wiki/${qid}#P244`,
-              label: 'Check or fix it on Wikidata',
-            }
-          }
-          entries.push(...hit.entries)
-          stats.dpla += hit.entries.length
-          if (hit.total > hit.entries.length)
-            samples.push({
-              source: 'dpla',
-              // The same value dplaEntryFrom writes as each entry's topic —
-              // that pairing is what lets the renderer find the shelf.
-              topic: label ?? hit.heading,
-              shown: hit.entries.length,
-              total: hit.total,
-              text:
-                `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DPLA’s ` +
-                `partner institutions catalog under the Library of Congress heading “${hit.heading}”`,
-            })
-        } catch (e) {
-          console.error(`  dpla lookup failed (${lc}): ${e.message}`)
-        }
-      }
-    }
-
-    // Europeana, keyed the same way: only anchors whose Wikidata entry
-    // states a Europeana entity (P7704) pivot, and only openly licensed
-    // items come back. Keyless clones skip it silently.
-    if (process.env.EUROPEANA_API_KEY) {
-      const anchored = statementQids
-        .map((q) => ({ eu: statements.get(q)?.eu, label: labels.get(q) ?? null, qid: q }))
-        .map((a) =>
-          unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a,
-        )
-        .filter((a) => a.eu)
-        .slice(0, 2)
-      for (const { eu, label, qid } of anchored) {
-        const isSubject = unit.index === '0' && qid === extras?.subjectQid
-        try {
-          const hit = await europeanaEntries(eu, label, process.env.EUROPEANA_API_KEY)
-          if (tooBroad(hit.total, { isSubject })) {
-            broad.push(
-              broadNote({
-                source: 'europeana',
-                label,
-                total: hit.total,
-                url: europeanaBrowseUrl(eu),
-              }),
-            )
-            continue
-          }
-          for (const e of hit.entries) {
-            if (isSubject) e.standing = 'subject-record'
-            e.trace =
-              `Wikidata’s item for ${label ?? qid} (${qid}) states its Europeana entity ID ` +
-              `(P7704) — Europeana’s partner records link this item to that entity.`
-            e.fix = {
-              url: `https://www.wikidata.org/wiki/${qid}#P7704`,
-              label: 'Check or fix it on Wikidata',
-            }
-          }
-          entries.push(...hit.entries)
-          stats.europeana += hit.entries.length
-          if (hit.total > hit.entries.length)
-            samples.push({
-              source: 'europeana',
-              topic: label ?? null,
-              shown: hit.entries.length,
-              total: hit.total,
-              text:
-                `A sample: ${hit.entries.length} of ${hit.total.toLocaleString()} openly licensed ` +
-                `items Europeana’s partners link to ${label ?? eu}`,
-            })
-        } catch (e) {
-          console.error(`  europeana lookup failed (${eu}): ${e.message}`)
-        }
-      }
-    }
+    const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad }
+    await bandPropertyPivot(pivotCtx, DPLA_PIVOT)
+    await bandPropertyPivot(pivotCtx, EUROPEANA_PIVOT)
 
     // Say how much was left on the table. Every shelf here is a sample of
     // something larger, and a page that shows six of six hundred without

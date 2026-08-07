@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-06
+Last verified: 2026-08-07
 
 ## Purpose
 
@@ -700,6 +700,76 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
 card with no visual is just a link, and links are already inline).
+
+## Adding a data source (2026-08-07)
+
+Not config-driven, and a full audit concluded it shouldn't try to be: every
+partner still needs its own fetcher and its own rights mapping, so a registry
+can remove wiring duplication but not the partner-specific knowledge. What it
+CAN remove is what to hand-edit and where, which is what this section answers.
+There are three shapes, not one — picking the wrong one produces code that
+fights the pipeline rather than fitting it:
+
+1. **Direct-id shape** — the object is named by ONE Wikidata property, bound
+   straight to a WDQS var. `MUSEUM_PIVOTS` in `src/statements.js` is the
+   registry: Met, AIC, Rijksmuseum, iNaturalist, GBIF, IIIF are its six rows.
+   Adding a partner here means four edits, in this order: an `OPTIONAL`
+   clause and var in `wdqsUrl` (`statements.js:25-52`), a row in `PROP_NAME`
+   (`statements.js:723-739`, the ⓘ-fold explanation), a fetcher module (see
+   `metEntry`/`aicEntry` for the plain case, `rijks.js`/`iiif.js` for ones
+   that need more than one request), and one entry in `MUSEUM_PIVOTS`. Do
+   NOT hand-edit `statementEntries`'s job list directly — that list is now
+   generated from the registry, and a new job spliced in beside it would
+   run outside the registry's bookkeeping.
+2. **Search shape** — no direct object id, but a Wikidata property names
+   something searchable (a subject heading, an entity id), and what comes
+   back is a SAMPLE of a larger holding, not the partner's own record of the
+   anchor. `DPLA_PIVOT` and `EUROPEANA_PIVOT` (`src/discover.js`, just above
+   `discover()`) are the two live cases, both run through the shared
+   `bandPropertyPivot()` loop. A new partner of this shape is one new spec
+   object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
+   `sample` (and `broadExtra` only if a `broadNote` needs a field beyond
+   `label`/`total`/`url` — DPLA's does, for the heading), passed to
+   `bandPropertyPivot()` alongside the other two. Do NOT copy the block and
+   modify it — that is exactly the duplication DPLA and Europeana had between
+   2026-08-03 and this date, two near-identical blocks in `discover.js` that
+   this refactor collapsed into one loop plus two specs.
+3. **Neither shape — read the precedent, don't force it.** Some partners are
+   real exceptions and stay hand-written: the Smithsonian is found by a PAIR
+   of properties read from one row, never two (`smithsonian.js`, and the
+   `OPTIONAL` comment at `statements.js:44-51` on why splitting it is wrong);
+   the Rijksmuseum needs three serial requests per object because Linked Art
+   models the object, its visual content and its file as three resources
+   (`rijks.js`); and the subject's own artworks are reached by asking the
+   GRAPH what the subject made, not by pivoting off a wikilink at all
+   (`artworks.js`, and the "Rembrandt" funnel table above showing why prose
+   links couldn't carry that question). If a new partner needs multiple
+   properties, multiple hops, or a question the article's own links can't
+   phrase, it likely belongs here — a fourth shape forced through 1 or 2 for
+   the sake of uniformity is a worse outcome than one more hand-written case.
+
+Before writing any fetch code, in this order:
+
+- **Read the host's own published rate-limit or crawl-delay policy**, and
+  only then decide `hostLimit()`'s value for it in `src/mw.js`. The default
+  is 1 and stays 1 without a citation — "nothing goes in it without a
+  published statement quoted at the call site" (see the Non-Wikimedia
+  partners section above). This is the step every partner audit here has
+  found skipped when something went wrong.
+- **Check what the API exposes for rights**, against the vocabulary
+  `ccFromUri`/`ccFromSlug`/`ccFromLabel` already read (`rights.js`) — the
+  Partner audit table above is the map of what's already handled per
+  partner; extend it, don't restate it, and add a row for the new partner
+  whether or not it turns out to have a mark.
+- **Give every Wikidata-backed card a `why`/`trace`/`fix` triple**, so a
+  reader can check or correct the statement the card rests on (see the
+  provenance note under Key Decisions). A card with no trace is legitimate
+  only for citation-derived cards, where nothing is editable on Wikidata.
+- **Verify with `spike.js`, not with reasoning about the diff.** Byte-
+  reproducibility off a warm cache is the project's only real test of the
+  discovery path (see Two entry points) — render Apollo 11, Brown v. Board
+  of Education and Ludwig Prandtl before and after, and add a fourth fixture
+  that actually exercises the new partner if none of the three does.
 
 ## Pipeline (output-agnostic core → renderer)
 
