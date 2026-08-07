@@ -231,6 +231,71 @@ it is the reason this project renders a typographic plate instead (`5a86407`).
 
 ---
 
+## 7. One museum, six objects, four different reasons you cannot see them `[ours]`
+
+*Observed 2026-08-06. The most useful entry here, because nothing in it is a
+blocked request — every failure is a gap in a chain, and each one is fixed by a
+different party.*
+
+The Smithsonian pivot (`tapestry-gen/src/smithsonian.js`) finds an object when
+three things all hold: Wikipedia links it, Wikidata records its accession
+number, and the Smithsonian publishes it in Open Access. **Wikidata knows only
+six National Air and Space Museum objects by accession number in total**, so the
+whole population is small enough to check by hand:
+
+```sparql
+SELECT ?item ?itemLabel ?inv WHERE {
+  ?item wdt:P195 wd:Q752669 ; wdt:P217 ?inv .
+  SERVICE wikibase:label { bd:serviceParam wikibase:language "en" } }
+```
+
+| Object | In Wikidata | enwiki article | In Open Access | Result |
+|---|---|---|---|---|
+| Columbia (Apollo 11 CM) | ✅ A19700102000 | ✅ | ✅ + 2 CC0 3D scans | **renders** |
+| Flyer I | ✅ A19610048000 | ✅ | ✅ + 1 CC0 3D scan | **renders** |
+| Apollo 11 sample container | ✅ A19710814000 | ❌ none | ✅ 1 row | invisible |
+| Concorde 205 | ✅ A20030139000 | ❌ none | ❌ 0 rows | invisible |
+| Enola Gay | ✅ A19500100000 | ✅ | ❌ 0 rows¹ | invisible |
+| Apollo 11 crew hatch, Armstrong's suit, the V-2 | ❌ no P217 | — | ✅ (3D scans exist) | invisible |
+
+¹ Searching `"Enola Gay"` returns 76 rows — exhibition records, comment cards,
+archival finding aids — but not the aircraft. Records *about* the object, not
+the object.
+
+**Four distinct failure modes, and the fix for each sits with someone else:**
+
+1. **No accession number in Wikidata** (crew hatch, space suit, V-2). These were
+   on this project's Apollo 11 page when it was hand-curated, because a person
+   went to si.edu and copied what they saw. The 3D scans exist and are CC0. The
+   only thing missing is a `P217` statement. **Fix: three Wikidata edits**, and
+   the objects reappear on every article that links them, for every consumer —
+   not just here.
+2. **No English Wikipedia article** (sample container, Concorde 205). The pivot
+   runs on the article's own links, so an object no article names can never be
+   an anchor no matter how well the museum publishes it. **Fix: a Wikipedia
+   article**, which is a much larger ask than an edit and may simply not be
+   warranted.
+3. **Not in the museum's Open Access** (Enola Gay, Concorde 205). The museum
+   holds it, Wikipedia covers it, Wikidata has the number — and the API returns
+   nothing, because the object record has not been released. **Fix: the
+   Smithsonian.**
+4. **Everything present** (Columbia, Flyer I) — which is what it takes.
+
+**Why this entry matters more than the blocked-request ones.** Entries 1–4 are
+about servers refusing to answer. This is about a chain of three independent
+institutions each holding one link, where any single missing link makes an
+openly licensed, CC0, already-3D-scanned object invisible. Nobody refused
+anything. The Apollo 11 crew hatch is fully open, fully digitised, and
+unreachable for want of one statement.
+
+It also cuts against the reflex to blame the ranking. The curated page showed
+five Smithsonian items; live discovery shows two. That reads like a regression
+until you look — and then four of the five turn out to be unreachable for
+reasons no amount of tuning would touch. **Check which link is missing before
+concluding the algorithm dropped something.**
+
+---
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
