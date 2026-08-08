@@ -334,6 +334,29 @@ export async function fetchPageImages(cacheDir, titles, size = 1280) {
 }
 
 /**
+ * Where the infobox table starts and ends, walking table open/close tags so a
+ * nested table (a crew list, say) does not cut the scan short at its inner
+ * </table>. Null when the page has no infobox.
+ */
+function infoboxExtent(source) {
+  const start = source.search(/<table[^>]*class="[^"]*infobox[^"]*"/i)
+  if (start < 0) return null
+  const tag = /<(\/?)table\b/gi
+  tag.lastIndex = start
+  let depth = 0
+  let match
+  while ((match = tag.exec(source))) {
+    depth += match[1] ? -1 : 1
+    if (depth === 0) {
+      // lastIndex sits after "</table"; the extent runs through its ">".
+      const close = source.indexOf('>', tag.lastIndex)
+      return [start, close < 0 ? source.length : close + 1]
+    }
+  }
+  return [start, source.length]
+}
+
+/**
  * Article wikilinks inside the lede's infobox.
  *
  * The infobox is structurally part of section 0, but the article body often
@@ -344,26 +367,9 @@ export async function fetchPageImages(cacheDir, titles, size = 1280) {
  * while recovering the links the prose leaves to the box.
  */
 export function infoboxLinks(html) {
-  const source = html ?? ''
-  const start = source.search(/<table[^>]*class="[^"]*infobox[^"]*"/i)
-  if (start < 0) return []
-
-  // Walk table open/close tags to find the infobox's real end, so a nested table
-  // (a crew list, say) does not cut the scan short at its inner </table>.
-  const tag = /<(\/?)table\b/gi
-  tag.lastIndex = start
-  let depth = 0
-  let end = source.length
-  let match
-  while ((match = tag.exec(source))) {
-    depth += match[1] ? -1 : 1
-    if (depth === 0) {
-      end = tag.lastIndex
-      break
-    }
-  }
-
-  const block = source.slice(start, end)
+  const extent = infoboxExtent(html ?? '')
+  if (!extent) return []
+  const block = (html ?? '').slice(extent[0], extent[1])
   const titles = []
   const seen = new Set()
   const link = /<a\b[^>]*\bhref="\/wiki\/([^"#?]+)"/gi
@@ -381,6 +387,78 @@ export function infoboxLinks(html) {
     titles.push(title)
   }
   return titles
+}
+
+// What must not survive extraction. Each is apparatus that either cannot work
+// off-wiki (Kartographer needs its JS; a footnote marker points at an anchor
+// this page renders under a different id) or should not (the v·t·e navbar
+// links template pages; hidden rows are hidden on Wikipedia's own desktop).
+const INFOBOX_STRIP = [
+  /<tr[^>]*class="[^"]*\binfobox-hiddenrow\b[^"]*"[\s\S]*?<\/tr>/gi,
+  /<tr[^>]*>\s*<t[dh][^>]*class="[^"]*\binfobox-navbar\b[\s\S]*?<\/tr>/gi,
+  /<div[^>]*class="[^"]*\bnavbar\b[^"]*"[\s\S]*?<\/div>/gi,
+  /<div[^>]*class="[^"]*mw-kartographer[^"]*"[\s\S]*?<\/div>/gi,
+  /<a[^>]*class="[^"]*mw-kartographer[^"]*"[^>]*>[\s\S]*?<\/a>/gi,
+  /<span[^>]*class="[^"]*mw-editsection[^"]*"[\s\S]*?<\/span>/gi,
+  /<sup[^>]*class="[^"]*\breference\b[^"]*"[\s\S]*?<\/sup>/gi,
+  /<style[\s\S]*?<\/style>/gi,
+  /<link[^>]*\/?>/gi,
+  /\s+srcset="[^"]*"/gi,
+]
+
+/** An image URL as this page will serve it: scheme'd, no tracking params. */
+function cleanImageUrl(raw) {
+  const url = raw.startsWith('//') ? `https:${raw}` : raw
+  const [path, query] = url.split('?')
+  if (!query) return url
+  const kept = query
+    .split(/&(?:amp;)?/)
+    .filter((p) => p && !p.startsWith('utm_'))
+    .join('&')
+  return kept ? `${path}?${kept}` : path
+}
+
+/**
+ * The article's own infobox, sanitized for this page, or null when the
+ * article has none. This is the lede rail's fallback when no find with
+ * subject standing earns the slot (design:
+ * docs/design-plans/2026-08-08-infobox-retention.md).
+ *
+ * Links: article links stay root-relative — the renderer's `relink` re-bases
+ * them onto the demo like every prose link, so clicking through lands on
+ * another enriched render. Namespace links (`File:` above all — the image's
+ * attribution trail) go absolute to en.wikipedia.org instead, because relink
+ * would otherwise point them at pages this server does not have.
+ *
+ * `images` reports every cleaned image URL in document order, deduplicated,
+ * so batch can inline them and streaming can register them — the same two
+ * paths every other picture on the page already rides.
+ */
+export function extractInfobox(html) {
+  const source = html ?? ''
+  const extent = infoboxExtent(source)
+  if (!extent) return null
+  let block = source.slice(extent[0], extent[1])
+  for (const pattern of INFOBOX_STRIP) block = block.replace(pattern, '')
+
+  const images = []
+  block = block.replace(/(<img\b[^>]*\ssrc=")([^"]+)(")/gi, (_, pre, raw, post) => {
+    const url = cleanImageUrl(raw.replace(/&amp;/g, '&'))
+    if (!images.includes(url)) images.push(url)
+    return `${pre}${url}${post}`
+  })
+
+  block = block.replace(/href="\/wiki\/([^"]+)"/gi, (whole, target) => {
+    let decoded
+    try {
+      decoded = decodeURIComponent(target)
+    } catch {
+      decoded = target
+    }
+    return decoded.includes(':') ? `href="https://en.wikipedia.org/wiki/${target}"` : whole
+  })
+
+  return { html: block, images }
 }
 
 // Apparatus that would be noise on a canvas: infoboxes, navboxes, figures,
