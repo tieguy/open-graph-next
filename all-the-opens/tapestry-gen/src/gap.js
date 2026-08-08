@@ -41,6 +41,7 @@ export const PARTNER_HOSTS = {
   gbif: ['gbif.org'],
   dpla: ['dp.la'],
   europeana: ['europeana.eu'],
+  digitalnz: ['digitalnz.org'],
   // An article never links OpenAlex; what it links is the paper's DOI. That IS
   // the reach question for this partner — the citation is present, and what a
   // reader cannot tell from it is that a free copy exists.

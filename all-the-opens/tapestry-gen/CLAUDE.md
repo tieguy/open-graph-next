@@ -524,6 +524,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
 | Smithsonian | n/a | no pivot builds cards; visibility panel only |
+| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; the rest (including the fully-open combination) words only, same stance as GBIF/OSM below — added LUI-145, 2026-08-08, unverified against a live response, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
 wrong answer first: it states TWO Creative Commons URIs, and the CC0 licenses
@@ -730,6 +731,37 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
   and never browser-hotlinked (OSMF tile policy). Every partner here is
   outside Wikimedia by design — that breadth IS the demo.
+- **DigitalNZ** (`src/digitalnz.js`, added 2026-08-08, LUI-145) — the demo's
+  first non-US/EU partner: 150+ New Zealand libraries, archives and museums
+  (Turnbull/NLNZ, Massey, VUW, Auckland Museum, Ngā Taonga, Papers Past) behind
+  one API. Same search shape as DPLA and keyed on the same property (P244):
+  NLNZ is not an independent VIAF contributor and catalogs through LC/NACO
+  (checked on VIAF's contributor list 2026-08-08), so DPLA's own
+  `lcHeading` — one `id.loc.gov` HEAD request, cached — resolves the search
+  string for both pivots, and running DigitalNZ's pivot after DPLA's in
+  `discover.js` means the second call is always a cache hit. Gated on
+  `DIGITALNZ_API_KEY`, same keyless-skip rule as DPLA/Europeana — chosen even
+  though a keyless request answered live on 2026-08-08, for the same
+  higher-limit-on-request reason DPLA and Europeana require one.
+  **Not yet verified against a live response**: this was implemented in a
+  sandboxed session with no outbound network access at all (confirmed:
+  `api.dp.la` and `example.com` were both unreachable through the egress
+  proxy, not just `digitalnz.org`), so the field names in `digitalnzUrl`/
+  `digitalnzEntryFrom` (`search.results`, `content_partner`, `landing_url`,
+  `thumbnail_url`, `usage`) follow the v3 Records API's published shape as
+  best known and are cross-checked only against the `usage` values LUI-145
+  quotes from a real query, not a full response body. No published numeric
+  rate limit was found either, so `hostLimit()` in `src/mw.js` needs no
+  change — it already defaults to 1 for an unlisted host, and stays there
+  until a citation exists. **Before this ships**: render a page through
+  `spike.js` (John Stuart Yeates is the obvious fixture — see LUI-145) and
+  fix whatever the real response shape disagrees with; add it to `FRIENDS` in
+  `src/front-page.js` only once that render has been read, per the front
+  page's own rule that an unlinked license line means nobody has verified one
+  yet.
+  The rights mapping deliberately does not glyph DigitalNZ's own
+  `Share`/`Modify`/`Use commercially` rollup — see the partner audit table
+  above.
 
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
@@ -758,13 +790,17 @@ fights the pipeline rather than fitting it:
 2. **Search shape** — no direct object id, but a Wikidata property names
    something searchable (a subject heading, an entity id), and what comes
    back is a SAMPLE of a larger holding, not the partner's own record of the
-   anchor. `DPLA_PIVOT` and `EUROPEANA_PIVOT` (`src/discover.js`, just above
-   `discover()`) are the two live cases, both run through the shared
-   `bandPropertyPivot()` loop. A new partner of this shape is one new spec
+   anchor. `DPLA_PIVOT`, `EUROPEANA_PIVOT` and `DIGITALNZ_PIVOT`
+   (`src/discover.js`, just above `discover()`) are the three live cases, all
+   run through the shared `bandPropertyPivot()` loop — `DIGITALNZ_PIVOT`
+   reuses DPLA's own `field: 'lc'`/P244 heading rather than adding a fourth
+   WDQS var, because both partners answer to the same Library of Congress
+   authorized heading (see Partner pivots below). A new partner of this shape
+   is one new spec
    object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
    `sample` (and `broadExtra` only if a `broadNote` needs a field beyond
    `label`/`total`/`url` — DPLA's does, for the heading), passed to
-   `bandPropertyPivot()` alongside the other two. Do NOT copy the block and
+   `bandPropertyPivot()` alongside the others. Do NOT copy the block and
    modify it — that is exactly the duplication DPLA and Europeana had between
    2026-08-03 and this date, two near-identical blocks in `discover.js` that
    this refactor collapsed into one loop plus two specs.

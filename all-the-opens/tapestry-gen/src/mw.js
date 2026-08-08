@@ -73,6 +73,10 @@ const WIKIMEDIA = /(^|\.)(wikipedia|wikimedia|wikidata|wiktionary|wikisource|wik
  * - `openlibrary.org` rate-limits back-to-back requests already (CLAUDE.md).
  * - `tile.openstreetmap.org` — the OSMF tile policy is explicit about heavy
  *   use, and it is four requests a page anyway.
+ * - `api.digitalnz.org` — its docs describe a shared cap on unauthenticated
+ *   traffic and say keyed users can negotiate a higher one, but state no
+ *   number either way (checked 2026-08-08, LUI-145). No citable figure means
+ *   no entry here, same as everything below.
  * - Everything else — nobody has read their terms, and the safe answer to an
  *   unread policy is one.
  */

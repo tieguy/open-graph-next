@@ -44,6 +44,7 @@ import {
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { dplaBrowseUrl, dplaEntries } from './dpla.js'
 import { europeanaBrowseUrl, europeanaEntries } from './europeana.js'
+import { digitalnzBrowseUrl, digitalnzEntries } from './digitalnz.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
@@ -641,6 +642,36 @@ const EUROPEANA_PIVOT = {
   }),
 }
 
+// DigitalNZ, the first non-US/EU partner (LUI-145): 150+ NZ GLAM
+// institutions behind one API, anchored the same way as DPLA — NLNZ catalogs
+// through LC/NACO rather than running its own VIAF contribution, so the same
+// P244 authorized heading DPLA already resolves (`lcHeading`, reused rather
+// than reimplemented) is also the right search string here. Keyless clones
+// skip it silently, same as DPLA/Europeana.
+const DIGITALNZ_PIVOT = {
+  source: 'digitalnz',
+  envKey: 'DIGITALNZ_API_KEY',
+  field: 'lc',
+  property: 'P244',
+  statsKey: 'digitalnz',
+  fetch: (lc, label, key) => digitalnzEntries(lc, label, key),
+  browseUrl: (hit) => digitalnzBrowseUrl(hit.heading),
+  broadExtra: (hit) => ({ heading: hit.heading }),
+  trace: (label, qid, hit) =>
+    `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
+    `authority ID (P244), whose authorized heading is “${hit.heading}” — DigitalNZ’s ` +
+    `partners catalog this item under that heading.`,
+  sample: (hit, label) => ({
+    source: 'digitalnz',
+    topic: label ?? hit.heading,
+    shown: hit.entries.length,
+    total: hit.total,
+    text:
+      `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DigitalNZ’s ` +
+      `partner institutions catalog under the Library of Congress heading “${hit.heading}”`,
+  }),
+}
+
 /**
  * Discover the enriched page for one article. See the module comment for the
  * emit protocol. `emit` may be async; each band's fragment is awaited before
@@ -688,6 +719,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     statements: 0,
     dpla: 0,
     europeana: 0,
+    digitalnz: 0,
     anchorsQid: 0,
     anchorsCite: 0,
     anchorsScholar: 0,
@@ -1272,6 +1304,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const broad = []
     const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad }
     await bandPropertyPivot(pivotCtx, DPLA_PIVOT)
+    // Runs after DPLA, not before: both key on the same P244 heading, and
+    // `lcHeading`'s disk cache means DPLA's id.loc.gov request (the page's
+    // longest serial chain, see src/mw.js) already paid for this lookup.
+    await bandPropertyPivot(pivotCtx, DIGITALNZ_PIVOT)
     await bandPropertyPivot(pivotCtx, EUROPEANA_PIVOT)
 
     // Say how much was left on the table. Every shelf here is a sample of
