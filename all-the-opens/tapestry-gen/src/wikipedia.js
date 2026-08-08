@@ -462,7 +462,10 @@ export function extractInfobox(html) {
 }
 
 // Apparatus that would be noise on a canvas: infoboxes, navboxes, figures,
-// footnote markers, hatnotes, coordinates, and edit links.
+// footnote markers, hatnotes, coordinates, and edit links. The lede's infobox
+// is the one piece retained on a separate path (`extractInfobox`, 2026-08-08)
+// — stripped from the PROSE here, it stands in the lede rail when no find
+// with subject standing earns that slot.
 const STRIP_BLOCKS = [
   /<table[\s\S]*?<\/table>/gi,
   /<figure[\s\S]*?<\/figure>/gi,

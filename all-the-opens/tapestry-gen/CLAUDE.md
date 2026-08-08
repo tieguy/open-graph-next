@@ -879,8 +879,24 @@ leads the section) → `emit-html`.
   note. Prose keeps its wikilinks — rewritten to `/wiki/…` on this site, so
   readers click through to more enriched renders — and its footnote markers.
   No section numbering: Wikipedia doesn't number, so neither do we.
-  `sanitizeFragment` in `src/wikipedia.js` is the only thing that lets
-  article HTML through; everything else is still escaped.
+  `sanitizeFragment` in `src/wikipedia.js` and `extractInfobox` (below) are
+  the only two things that let article HTML through; everything else is still
+  escaped.
+- **The lede rail falls back to the Wikipedia article's own infobox**
+  (2026-08-08, wiki-skin branch;
+  `../docs/design-plans/2026-08-08-infobox-retention.md`). A find ABOUT the
+  subject (`heroRank ≤ 3`) keeps the rail; a weaker hero — a map, a picture
+  of something merely linked — yields to the box and leads its shelf instead,
+  and a lede with no find at all (John Stuart Yeates, the fixture) gets the
+  box where it previously got nothing. `extractInfobox` in `src/wikipedia.js`
+  sanitizes it (navbar, hidden rows, Kartographer, footnote markers, styles
+  all dropped; `File:` links held absolute to en.wikipedia.org as the
+  attribution trail); the box is **furniture, not a find** — no source tag,
+  absent from `sourcesUsed`, the legend and the visibility panel, with an
+  ⓘ-fold explaining the slot in the house voice ("no friend has one yet").
+  Exempt from `FLOAT_MIN_PROSE`: a stub's short prose wrapping under its
+  infobox is what a real stub looks like. Images hotlink in both renderers —
+  Commons permits it — per the inline-only-what-breaks rule.
 - **Every Wikidata-backed card carries a provenance fold, and the why line is
   what opens it** (2026-08-03 late; merged 2026-08-05): a `<details>` whose
   text states the exact chain (`entry.trace`) and links
