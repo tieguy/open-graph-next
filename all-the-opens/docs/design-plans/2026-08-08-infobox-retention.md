@@ -241,6 +241,17 @@ frame along with everything else.
 walker cannot bound) costs the page its fallback and nothing else — the lede
 simply renders as today. Rejection only withholds.
 
+**Image handling, corrected during Phase 3 (2026-08-08):** the Architecture
+section above said batch inlines the infobox images and streaming proxies
+them through `/img`. The codebase's actual rule is narrower — both renderers
+inline/proxy ONLY what breaks when hotlinked (OpenLibrary covers behind the
+archive.org redirect, OSM tiles per tile policy) and hotlink every other
+partner thumbnail directly. Commons permits hotlinking and serves open CORS,
+so the infobox portrait follows the Met-thumbnail precedent: hotlinked in
+both renderers, zero changes to either image path. The `images` list and the
+inline-map swap in `infoboxAside` remain, so inlining stays one decision
+away if Commons hotlinking ever becomes a problem.
+
 **CLAUDE.md updates on landing:** the `STRIP_BLOCKS` comment ("infoboxes …
 would be noise") and the pipeline section both describe the pre-retention
 world; the landing commit should note the lede exception where they live.

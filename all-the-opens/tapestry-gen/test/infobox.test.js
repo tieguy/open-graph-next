@@ -211,3 +211,14 @@ test('a standalone batch render keeps the fold copy but drops the dead link', ()
   assert.match(rail, /the collections this page draws on/)
   assert.doesNotMatch(rail, /href="https:\/\/en\.wikipedia\.org\/"/)
 })
+
+test('the streamed lede fragment carries the box, so the mount script places it', async () => {
+  // serve.js ships bandRail's output verbatim inside the lede band's
+  // <template>; if the box is in the fragment, __thb mounts it before the
+  // prose like any hero float. No serve.js change is needed for that, which
+  // is what this pins.
+  const { bandRail } = await import('../src/emit-html.js')
+  const fragment = bandRail(ledeBand(), new Map(), '/wiki/')
+  assert.match(fragment, /<aside class="rail"><div class="ib-slot">/)
+  assert.match(fragment, /<table class="infobox"/)
+})

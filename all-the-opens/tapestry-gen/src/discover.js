@@ -25,6 +25,7 @@
 // Wikipedia is able to show and who it isn't. See src/gap.js.
 import {
   articleBlocks,
+  extractInfobox,
   fetchArticle,
   fetchQids,
   fetchSectionWikitext,
@@ -697,6 +698,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // The footnote bodies, once for the whole page: each band's gutter shows
   // the notes its own prose points at, joined here by note name.
   const noteMap = referenceNotes(article.html)
+  // The article's own infobox, held for the lede band: its fallback when no
+  // find with subject standing earns the rail (the gate lives in bandParts —
+  // design: ../docs/design-plans/2026-08-08-infobox-retention.md). Extracted
+  // from the parse response the spine already paid for; null costs the page
+  // its fallback and nothing else.
+  const infobox = extractInfobox(article.html)
 
   const units = []
   for (const s of [{ index: '0', title: page }, ...sections]) {
@@ -1359,6 +1366,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // Null on every band but the lede, and on a lede whose cards already
       // carry the claim. `bandParts` renders nothing for a null.
       subjectRights,
+      // Also lede-only: the article's own infobox, `bandParts`' fallback for
+      // a rail no subject-standing find claimed. Null elsewhere on purpose —
+      // only the lede band may trip the gate.
+      infobox: unit.index === '0' ? infobox : null,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)
