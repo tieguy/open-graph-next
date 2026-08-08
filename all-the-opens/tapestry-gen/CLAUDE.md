@@ -791,17 +791,15 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   DigitalNZ metadata"), and the terms' carve-out for metadata with existing
   open licenses names Europeana (CC0), DPLA (CC0) and data.govt.nz (CC BY 3.0
   NZ) — i.e. sources this demo already reads directly — **not the NZ
-  collections themselves**. The demo happens to be non-commercial and can run
-  inside the default terms — but per VALUES.md (2026-08-08), that states the
-  problem rather than solving it: the goal is adoption by Wikipedia or
-  something Wikipedia-like, which must be free for anyone to reuse,
-  commercial use included, so **an NC condition on the pipe is a named
-  blocker, never a condition met** — "we are non-commercial so it's fine" is
-  the wrong sentence anywhere in this repo. Flagged on the front page's
+  collections themselves**. The demo makes no money, so it can run inside
+  the default terms — but the goal can't. Per VALUES.md (2026-08-08):
+  adoption by Wikipedia or something Wikipedia-like requires that anyone may
+  reuse the result, commercially included, so **an NC condition on the pipe
+  is a blocker, never a box ticked** — "we are non-commercial so it's fine"
+  is the wrong sentence anywhere in this repo. Flagged on the front page's
   challenges list as "Terms on the pipes, not just the items"; DigitalNZ's
-  FRIENDS entry links the terms. Opening this pipe (an agreement, or a change
-  of terms) is what adoption would require — worth raising if a DigitalNZ
-  relationship ever forms.
+  FRIENDS entry links the terms. If a DigitalNZ relationship ever forms, the
+  thing to ask for is new terms or an agreement that opens this pipe.
   The rights mapping deliberately does not glyph DigitalNZ's own
   `Share`/`Modify`/`Use commercially` rollup — see the partner audit table
   above.

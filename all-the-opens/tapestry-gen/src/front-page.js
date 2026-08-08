@@ -424,18 +424,16 @@ ${friends}
         kind CopyClear and Dominio Público en América Latina do on Wikidata; a demo can only keep
         the question visible.</p>
         <h4>Terms on the pipes, not just the items</h4>
-        <p>An item can be openly licensed while the API that serves its record is not. DigitalNZ is
-        the first example here: its developer terms make API metadata non-commercial by default,
-        with a separate keyed track for commercial use that covers only a selection — and the
-        carve-out for already-open metadata names Europeana, DPLA and data.govt.nz, not the New
-        Zealand collections themselves. This demo happens to be non-commercial, so it can run
-        today — but that states the problem rather than solving it. The goal is adoption by
-        Wikipedia or something Wikipedia-like, and everything Wikipedia ships must be free for
-        anyone to reuse, commercial use included; a pipe whose default terms forbid that cannot
-        feed it. So a non-commercial condition is named here as a blocker, not a condition met:
-        the demo shows what the New Zealand collections could bring, and the pipe would need
-        opening — by agreement, or by a change of terms — before anything Wikipedia-like could
-        drink from it. Each friend added makes this ledger longer.</p>
+        <p>An item can be openly licensed while the API that serves it is not. DigitalNZ, for
+        example: its developer terms make the API&rsquo;s metadata non-commercial by default.
+        (There is a commercial tier, but it needs a key and covers only some of the metadata. The
+        exceptions for already-open metadata are Europeana, DPLA and data.govt.nz — everything
+        except the New Zealand collections themselves.) That&rsquo;s fine for this demo, which
+        makes no money. It&rsquo;s a real problem for the goal. Wikipedia lets anyone reuse what
+        it publishes, commercially included, so nothing built on a non-commercial API can ever
+        become part of Wikipedia — or of anything Wikipedia-like. Getting there would take new
+        terms, or an agreement, negotiated source by source. And every source we add makes that
+        list longer.</p>
         <h4>Bot volume and caching</h4>
         <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
         likely need extensive caching and likely formal agreements with the other data providers.</p>
