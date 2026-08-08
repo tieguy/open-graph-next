@@ -2,7 +2,15 @@
 
 Using LLMs to improve the open, human-readable knowledge graph.
 
-Last verified: 2026-08-05
+Last verified: 2026-08-07
+
+## Values
+
+`VALUES.md` lists the project's deliberate principles — dated, sourced — and
+the rule behind them: **an absence is not a decision.** A capability the code
+lacks is "not yet built" or "tried and blocked" unless a written decision
+(VALUES.md, a CLAUDE.md *Key Decisions* / *Deliberately excluded* entry, or a
+Linear issue) says it was declined. Never present an absence as a principle.
 
 ## Structure
 
