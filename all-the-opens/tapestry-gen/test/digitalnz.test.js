@@ -84,8 +84,15 @@ test('digitalnzRights reads All rights reserved as the InC mark, via the shared 
   assert.deepEqual(r.marks, ['copyright'])
 })
 
-test('digitalnzRights gives no mark to Unknown — a real non-answer, not a gap to fill', () => {
-  assert.equal(digitalnzRights(['Unknown']), null)
+test('digitalnzRights shows Unknown as the ? mark — a real non-answer, said out loud', () => {
+  // Until 2026-08-08 this returned null and the card stayed silent, which was
+  // indistinguishable from a partner that publishes no rights fields at all.
+  // An honestly recorded open question now surfaces as one — the ? mark and
+  // the words, never a license glyph.
+  const r = digitalnzRights(['Unknown'])
+  assert.equal(r.code, 'UNKNOWN')
+  assert.deepEqual(r.marks, ['unknown'])
+  assert.equal(r.label, 'rights unknown')
 })
 
 test('digitalnzRights gives no mark to Share/Modify/Use commercially — a permission, not a license', () => {
@@ -122,10 +129,10 @@ test('a matched record becomes a card credited to the CONTRIBUTING institution, 
   // DigitalNZ's own durable record page, not the partner host that may rot —
   // the same choice dplaEntryFrom makes for dp.la/item/… over isShownAt.
   assert.equal(e.href, 'https://digitalnz.org/records/22887492')
-  // Usage Unknown: a card, no rights mark, no usage words — the institution
-  // alone carries the credit.
-  assert.equal(e.rights.copy, null)
-  assert.equal(e.attribution.author, 'Alexander Turnbull Library')
+  // Usage Unknown: the ? mark on the title, "rights unknown" in the credit —
+  // the honest open question said out loud, never a license glyph.
+  assert.deepEqual(e.rights.copy.marks, ['unknown'])
+  assert.equal(e.attribution.author, 'Alexander Turnbull Library · rights unknown')
   assert.match(e.why, /Filed under “Yeates, John Stuart, 1900-1986”/)
   assert.equal(e.topic, 'John Stuart Yeates')
   assert.equal(e._via, 'P244')

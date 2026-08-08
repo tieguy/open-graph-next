@@ -397,8 +397,10 @@ none; they are credited in the rights copy, which is where their work is used.
   **`NoC-OKLR`, `NoC-CR` and `NoC-NC` deliberately get nothing** — all three mean
   "the copyright expired, and a contract or donor agreement or non-commercial
   condition still restricts you", so a public-domain mark would promise exactly
-  what the statement withholds. `CNE` and `UND` also get nothing: they are the
-  rightsstatements twins of "not yet determined".
+  what the statement withholds. `CNE` and `UND` — the rightsstatements twins
+  of "not yet determined" — got nothing until 2026-08-08 and now carry the
+  **? mark** (see the honest-unknowns rule below), with labels that keep them
+  apart: CNE is "nobody has looked", UND is "looked, and could not tell".
 - **Open Library's lending status beats a ruling about the author** (2026-08-06,
   `accessRights`). Found on a real card: Open Library files *Prentice Hall
   Literature — World Masterpieces* (1991) under Franz Kafka, and CopyClear's
@@ -501,9 +503,22 @@ none; they are credited in the rights copy, which is where their work is used.
   partner here holds a record of a novel. It renders above the first paragraph,
   full width, never floated, and ONLY when no card on the lede already carries
   the same claim, so a page never says it twice.
-- **"Not yet determined" (Q59496158) is not an answer and not an absence.** It
-  renders as nothing. It is somebody having looked and recorded that the
-  question is open.
+- **An honestly recorded unknown is shown as one — the ? mark** (2026-08-08,
+  revising the earlier renders-as-nothing rule; decided during the DigitalNZ
+  review). "Not yet determined" (Q59496158), rightsstatements' `CNE`/`UND`,
+  and DigitalNZ's `Unknown` are all somebody having looked and recorded that
+  the question is open — which is not an answer and not an absence, and
+  silence made it indistinguishable from a partner that publishes no rights
+  fields at all. All three vocabularies now render the `unknown` glyph (a ?
+  in a circle, `src/cc-icons.js`), whose click-fold says exactly which
+  non-answer was recorded (`UNKNOWN_COPY` in `emit-html.js`, and
+  `rightsView`'s open-question branch for the Wikidata case). The rules that
+  keep it honest: it is never composed with a license mark, it never
+  competes with a real answer (the Wikidata unknown surfaces only when it is
+  the only thing recorded; `known: false` still keeps it out of the
+  freest-leads ordering), and the stance — an honest unknown is a peer to
+  the open statements, for now — is stated on the front page's challenges
+  list, where its scaling cost is named.
 
 ### Partner audit, 2026-08-06
 
@@ -527,7 +542,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
 | Smithsonian | n/a | no pivot builds cards; visibility panel only |
-| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; the rest (including the fully-open combination) words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
+| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; `Unknown` gets the ? mark (honest-unknowns rule above); the fully-open combination words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
 wrong answer first: it states TWO Creative Commons URIs, and the CC0 licenses

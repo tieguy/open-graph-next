@@ -81,27 +81,36 @@ export function subjectMatch(record, forms) {
  * DigitalNZ's own usage rollup: plain-English capability words
  * (`Share`/`Modify`/`Use commercially`/`All rights reserved`/`Unknown`), not
  * a URI or slug, so it needs its own reading rather than an extension of
- * `ccFromUri`. Only the two unambiguous ends of it are read, per LUI-145's
- * explicit rule ("`Unknown` gets nothing; a mark is never a guess"):
+ * `ccFromUri`. Three values are read; a LICENSE mark is still never a guess:
  *
  * - `All rights reserved` says plainly what `rightsstatements.org`'s InC
  *   vocabulary already says, so it is routed through `ccFromUri` with that
  *   literal URI rather than adding a new entry to rights.js's license
  *   table — the same reuse `metEntryFrom`/`aicEntryFrom` already do for a
  *   fixed CC0 URI.
- * - `Unknown` and anything else, including the affirmative combination
- *   (`Share`+`Modify`+`Use commercially`) alone, get no mark. DigitalNZ
- *   states what a reader MAY DO, not which license grants it or whether
- *   attribution is required — a CC0/public-domain glyph there would assert a
- *   permission nobody stated. That combination is instead said in words in
- *   the card's credit line, the same choice already made for GBIF and
- *   OpenStreetMap, whose vocabularies don't map onto a glyph honestly
- *   either (see the partner audit in tapestry-gen/CLAUDE.md).
+ * - `Unknown` carries the ? mark (2026-08-08, with CNE/UND and Wikidata's
+ *   "not yet determined"): the aggregator honestly recorded an open
+ *   question, and the card says so instead of staying silent — silence here
+ *   was indistinguishable from a partner that publishes no rights fields at
+ *   all. The Turnbull hero on the Yeates fixture is exactly this case.
+ * - The affirmative combination (`Share`+`Modify`+`Use commercially`) alone
+ *   still gets no mark. DigitalNZ states what a reader MAY DO, not which
+ *   license grants it or whether attribution is required — a CC0/
+ *   public-domain glyph there would assert a permission nobody stated. It is
+ *   said in words in the card's credit line, the same choice already made
+ *   for GBIF and OpenStreetMap, whose vocabularies don't map onto a glyph
+ *   honestly either (see the partner audit in tapestry-gen/CLAUDE.md).
  */
 export function digitalnzRights(usage) {
   const set = new Set(Array.isArray(usage) ? usage : [])
   if (set.has('All rights reserved')) {
     return licenseView(ccFromUri('http://rightsstatements.org/vocab/InC/1.0/'))
+  }
+  if (set.has('Unknown')) {
+    // Not a LICENSES entry: this is DigitalNZ's own vocabulary, and there is
+    // no URI to link — the fold's text (rightsDetail in emit-html.js) is
+    // keyed on the code and says whose non-answer it is.
+    return { code: 'UNKNOWN', label: 'rights unknown', marks: ['unknown'], url: null }
   }
   return null
 }

@@ -385,6 +385,15 @@ ${friends}
         context, but very little of it has metadata yet. Ideally the fix is to deploy Wikipedian
         energy to other repositories to improve the metadata, not have it curated only inside
         Wikipedia.</p>
+        <h4>Rights nobody has determined</h4>
+        <p>Some items arrive with an honest non-answer: the institution has recorded that the
+        rights status is unknown, or not yet evaluated. These render here with a small ? mark and
+        the institution’s own words behind a click — treated, for now, as peers of the openly
+        licensed material, because a recorded open question is a fact about the collection and
+        silence would hide it. At scale this is a real challenge: a reader wants to know what they
+        may do, and “nobody knows” satisfies no one. The durable fix is rights-clearing work of the
+        kind CopyClear and Dominio Público en América Latina do on Wikidata; a demo can only keep
+        the question visible.</p>
         <h4>Bot volume and caching</h4>
         <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
         likely need extensive caching and likely formal agreements with the other data providers.</p>
