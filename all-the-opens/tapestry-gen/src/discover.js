@@ -45,6 +45,7 @@ import {
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
 import { dplaBrowseUrl, dplaEntries } from './dpla.js'
 import { europeanaBrowseUrl, europeanaEntries } from './europeana.js'
+import { digitalnzBrowseUrl, digitalnzEntries } from './digitalnz.js'
 import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
@@ -554,7 +555,10 @@ async function bandPropertyPivot(
   { unit, extras, statementQids, statements, labels, entries, stats, samples, broad },
   spec,
 ) {
-  if (!process.env[spec.envKey]) return
+  // `keyOptional` marks a partner whose API answers keyless requests
+  // (DigitalNZ, verified 2026-08-08); its env key is used when present and
+  // its absence skips nothing. DPLA and Europeana genuinely require theirs.
+  if (!process.env[spec.envKey] && !spec.keyOptional) return
   const anchored = statementQids
     .map((q) => ({ id: statements.get(q)?.[spec.field], label: labels.get(q) ?? null, qid: q }))
     .map((a) => (unit.index === '0' && a.qid === extras?.subjectQid ? { ...a, label: unit.title } : a))
@@ -642,6 +646,43 @@ const EUROPEANA_PIVOT = {
   }),
 }
 
+// DigitalNZ, the first non-US/EU partner (LUI-145): 150+ NZ GLAM
+// institutions behind one API, anchored the same way as DPLA — NLNZ catalogs
+// through LC/NACO rather than running its own VIAF contribution, so LC's
+// record of a P244 authority carries the heading form NZ catalogers use
+// (as a VARIANT, not the authorized form — see src/lc.js and src/digitalnz.js
+// for the live findings behind that). Strict by decision (2026-08-08): only
+// records whose own subject field states one of LC's forms become cards.
+// Keyless is fine here — the API answers without a key (`keyOptional`) — and
+// a key, when set, rides along.
+const DIGITALNZ_PIVOT = {
+  source: 'digitalnz',
+  envKey: 'DIGITALNZ_API_KEY',
+  keyOptional: true,
+  field: 'lc',
+  property: 'P244',
+  statsKey: 'digitalnz',
+  fetch: (lc, label, key) => digitalnzEntries(lc, label, key),
+  browseUrl: (hit) => digitalnzBrowseUrl(hit.heading),
+  broadExtra: (hit) => ({ heading: hit.heading }),
+  // `hit.heading` is the LC form the records' own subject fields matched —
+  // usually LC's variant, so this says "a form of that name", never
+  // "authorized heading", which for NZ material would be false.
+  trace: (label, qid, hit) =>
+    `Wikidata’s item for ${label ?? qid} (${qid}) states its Library of Congress ` +
+    `authority ID (P244). “${hit.heading}” is a form of that name in the Library of ` +
+    `Congress record, and this item’s own catalog entry files it under that heading.`,
+  sample: (hit, label) => ({
+    source: 'digitalnz',
+    topic: label ?? hit.heading,
+    shown: hit.entries.length,
+    total: hit.total,
+    text:
+      `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DigitalNZ’s ` +
+      `partner institutions catalog under the heading “${hit.heading}”`,
+  }),
+}
+
 /**
  * Discover the enriched page for one article. See the module comment for the
  * emit protocol. `emit` may be async; each band's fragment is awaited before
@@ -689,6 +730,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     statements: 0,
     dpla: 0,
     europeana: 0,
+    digitalnz: 0,
     anchorsQid: 0,
     anchorsCite: 0,
     anchorsScholar: 0,
@@ -1279,6 +1321,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const broad = []
     const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad }
     await bandPropertyPivot(pivotCtx, DPLA_PIVOT)
+    // Runs after DPLA. Both pivot on P244, but they no longer share a
+    // request: DPLA HEADs for the authorized heading, this GETs the record
+    // for its variant forms (src/lc.js says why) — two id.loc.gov URLs, each
+    // once ever per identifier given the durable cache. Folding DPLA's HEAD
+    // into the GET would save one request per anchor and is noted in the
+    // DigitalNZ section of CLAUDE.md as a follow-up, not done here because it
+    // touches the DPLA pivot's hot path.
+    await bandPropertyPivot(pivotCtx, DIGITALNZ_PIVOT)
     await bandPropertyPivot(pivotCtx, EUROPEANA_PIVOT)
 
     // Say how much was left on the table. Every shelf here is a sample of

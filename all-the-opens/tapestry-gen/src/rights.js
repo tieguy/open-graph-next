@@ -41,8 +41,12 @@ import { getJson } from './http.js'
  * The glyph vocabulary, matching the symbol ids in `src/cc-icons.js`.
  * `copyright` and `pd` are not Creative Commons marks and must never be
  * composed with `cc` — a © next to the CC circle would read as a CC license.
+ * `unknown` (2026-08-08) is the ? mark for an HONESTLY RECORDED open
+ * question — DigitalNZ's `Unknown`, rightsstatements' CNE/UND, Wikidata's
+ * "not yet determined" — and it always stands alone: composing it with any
+ * license mark would read as doubt about that license.
  */
-export const MARKS = ['cc', 'by', 'sa', 'nc', 'nd', 'zero', 'pd', 'copyright']
+export const MARKS = ['cc', 'by', 'sa', 'nc', 'nd', 'zero', 'pd', 'copyright', 'unknown']
 
 /**
  * Licenses, canonicalized. `rank` orders by how much a reuser may do, freest
@@ -74,6 +78,13 @@ const LICENSES = {
   NOCUS: { label: 'no copyright in the United States', marks: ['pd'], rank: 0, url: 'http://rightsstatements.org/vocab/NoC-US/1.0/' },
   NKC: { label: 'no known copyright', marks: ['pd'], rank: 1, url: 'http://rightsstatements.org/vocab/NKC/1.0/' },
   INC: { label: 'in copyright', marks: ['copyright'], rank: 9, url: 'http://rightsstatements.org/vocab/InC/1.0/' },
+  // The two honest non-answers, surfaced since 2026-08-08 (they rendered as
+  // nothing before — see the ? mark's comment on MARKS). Ranked below
+  // everything: an open question never leads a card that also has an answer.
+  // The labels keep the statements' own distinction — CNE is "nobody has
+  // looked", UND is "looked, and could not tell".
+  CNE: { label: 'copyright not evaluated', marks: ['unknown'], rank: 10, url: 'http://rightsstatements.org/vocab/CNE/1.0/' },
+  UND: { label: 'copyright undetermined', marks: ['unknown'], rank: 10, url: 'http://rightsstatements.org/vocab/UND/1.0/' },
 }
 
 /** The CC element order is fixed by CC's own marking guidance, not by us. */
@@ -123,7 +134,13 @@ export function ccFromUri(uri) {
   if (/rightsstatements\.org\/vocab\/NKC/.test(uri)) return verdict('NKC')
   // CNE (Copyright Not Evaluated) and UND (Undetermined) are the
   // rightsstatements twins of Wikidata's "not yet determined": somebody looked
-  // and recorded that nobody knows. They must render as nothing.
+  // and recorded that nobody knows. They rendered as nothing until 2026-08-08;
+  // now they carry the ? mark, on the decision that an honestly recorded open
+  // question is a peer to the open statements — a fact about the record, not a
+  // gap in it — and the card's fold says which non-answer it is. A LICENSE
+  // mark for either would still be a guess and still never happens.
+  if (/rightsstatements\.org\/vocab\/CNE/.test(uri)) return verdict('CNE')
+  if (/rightsstatements\.org\/vocab\/UND/.test(uri)) return verdict('UND')
   return null
 }
 
@@ -167,8 +184,12 @@ export function ccFromLabel(label) {
  * The copyright-status vocabulary — closed, and taken from the allowed-values
  * constraints on `P6216` (work) and `P7763` (creator) rather than invented
  * here. `known: false` is its own state and not a synonym for absent: "not yet
- * determined" is somebody having looked and recorded that the answer is open,
- * which must render as nothing rather than as either an answer or a gap.
+ * determined" is somebody having looked and recorded that the answer is open.
+ * Since 2026-08-08 that state is SHOWN — the ? mark, via `rightsView`'s
+ * open-question branch — rather than rendered as nothing, but it still never
+ * competes with an answer: `known: false` keeps it out of the freest-leads
+ * ordering and the disagreement line, and it surfaces only when it is the
+ * only thing anybody recorded.
  */
 const STATUS = {
   // P6216 — the work.
@@ -179,7 +200,7 @@ const STATUS = {
   Q139041128: { code: 'CCLICENSED', label: 'licensed under Creative Commons', free: true, rank: 2, marks: ['cc'] },
   Q1546053: { code: 'ORPHAN', label: 'an orphan work — in copyright, with no findable holder', free: false, rank: 8, marks: ['copyright'] },
   Q50423863: { code: 'INC', label: 'in copyright', free: false, rank: 9, marks: ['copyright'] },
-  Q59496158: { code: 'UNKNOWN', label: 'not yet determined', free: false, rank: 99, marks: [], known: false },
+  Q59496158: { code: 'UNKNOWN', label: 'copyright not yet determined', free: false, rank: 99, marks: ['unknown'], known: false },
 
   // P7763 — the creator, which is what CopyClear's bots write.
   Q71887839: { code: 'EXPIRED', label: 'copyrights on works have expired', free: true, rank: 0, marks: ['pd'] },
@@ -454,9 +475,31 @@ const sentenceList = (parts) =>
 export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   if (!rec) return null
   const work = (rec.work ?? []).filter((w) => w.status.known !== false)
+  const open = (rec.work ?? []).filter((w) => w.status.known === false)
   const licenses = rec.licenses ?? []
   const creator = rec.creator ?? rec.self ?? null
-  if (!work.length && !licenses.length && !creator) return null
+  if (!work.length && !licenses.length && !creator) {
+    // Nothing anybody KNOWS — but "not yet determined" is something somebody
+    // RECORDED, and since 2026-08-08 that surfaces as the ? mark instead of
+    // rendering as nothing (see STATUS). Only here, where it is the sole
+    // recorded fact: the moment any real answer exists, the open question
+    // stays out of its way — an unknown beside an answer reads as doubt.
+    if (!open.length) return null
+    const paulinaHref = paulinaUrl(qid, kind)
+    return {
+      marks: ['unknown'],
+      label: 'copyright not yet determined',
+      line: null,
+      detail: [
+        'Wikidata records this work’s copyright status as not yet determined — ' +
+          'someone looked, and wrote down that the question is open. ' +
+          'That is not a permission and not a restriction.',
+      ],
+      paulina: paulinaHref
+        ? { url: paulinaHref, label: 'Is it free where you are? — Paulina' }
+        : null,
+    }
+  }
 
   // Freest first, and stable within a rank so two runs of the same data render
   // the same bytes — the batch renderer's reproducibility depends on it.

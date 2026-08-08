@@ -14,6 +14,14 @@
  * Run it when `SOURCE` in src/emit-html.js gains a partner, or when an icon
  * visibly rots. It is not part of the build: a deploy must never depend on
  * seventeen third-party hosts being up.
+ *
+ * Some hosts refuse Node's fetch stack while serving the identical
+ * User-Agent via curl — observed 2026-08-08: `www.artic.edu` 403s and
+ * `digitalnz.org` answers a 202 challenge page. For those, fetch the bytes
+ * with curl (same UA — the identity is declared either way; it is the HTTP
+ * fingerprint they dislike) and prime `.cache/datauri-<sha1(datauri:url)
+ * .slice(0,16)>.txt` with the finished data URI before running this. The
+ * isImage check below still guards what ships either way.
  */
 import { writeFile } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'

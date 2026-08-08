@@ -94,6 +94,17 @@ Each dated or sourced; the place the full argument lives is named.
   (2026-08-03/05). Commit before deploying; pause before partner-facing copy
   so *he* can read it — there is no other reviewer and no PR ceremony to
   perform.
+- **A learning generalizes across sources, or it waits** (2026-08-08, stated
+  during PR #11's review). It is too early to be doing hacks for specific
+  data providers, especially small ones: a mechanism is implemented when it
+  can be stated once across multiple partners (the strict subject-heading
+  rule is one statement across DPLA and DigitalNZ; `bandPropertyPivot` is one
+  loop across three), and a single-partner improvement is filed as a
+  question instead — LUI-146, the loose-match exploration, is the standing
+  example. The "Neither shape" escape hatch in *Adding a data source* is the
+  deliberate exception for partners whose APIs genuinely are exceptional,
+  which is different from special-casing one partner's quirks inside a
+  shared mechanism.
 
 ## Explicitly not values
 

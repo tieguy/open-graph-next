@@ -34,7 +34,10 @@ does not help generate the website, it belongs in the attic.
   Deployed demo), and `src/sweep.js` bounds its size.
 - **`.cache/fact-<kind>-<key>.json`** (`readFacts`/`writeFacts` in `src/http.js`,
   2026-08-05) is the same cache holding *derived* answers rather than response
-  bodies — today `fact-class-Q….json`, two booleans per Wikidata class. It is
+  bodies — today `fact-class-Q….json`, two booleans per Wikidata class, and
+  `fact-lc-labels-….json` (2026-08-08), the LC label set per P244 id — null
+  included, because a permanent 404 re-asked every render would break the
+  once-ever promise to id.loc.gov (see `lcLabels` in `src/lc.js`). It is
   **cache, not data**: everything in it is re-derivable from the network, and
   deleting `.cache/` is still the whole reset. The "reads nothing on disk"
   contract above targets baked results and non-algorithmic editorial judgment,
@@ -394,8 +397,10 @@ none; they are credited in the rights copy, which is where their work is used.
   **`NoC-OKLR`, `NoC-CR` and `NoC-NC` deliberately get nothing** — all three mean
   "the copyright expired, and a contract or donor agreement or non-commercial
   condition still restricts you", so a public-domain mark would promise exactly
-  what the statement withholds. `CNE` and `UND` also get nothing: they are the
-  rightsstatements twins of "not yet determined".
+  what the statement withholds. `CNE` and `UND` — the rightsstatements twins
+  of "not yet determined" — got nothing until 2026-08-08 and now carry the
+  **? mark** (see the honest-unknowns rule below), with labels that keep them
+  apart: CNE is "nobody has looked", UND is "looked, and could not tell".
 - **Open Library's lending status beats a ruling about the author** (2026-08-06,
   `accessRights`). Found on a real card: Open Library files *Prentice Hall
   Literature — World Masterpieces* (1991) under Franz Kafka, and CopyClear's
@@ -498,9 +503,22 @@ none; they are credited in the rights copy, which is where their work is used.
   partner here holds a record of a novel. It renders above the first paragraph,
   full width, never floated, and ONLY when no card on the lede already carries
   the same claim, so a page never says it twice.
-- **"Not yet determined" (Q59496158) is not an answer and not an absence.** It
-  renders as nothing. It is somebody having looked and recorded that the
-  question is open.
+- **An honestly recorded unknown is shown as one — the ? mark** (2026-08-08,
+  revising the earlier renders-as-nothing rule; decided during the DigitalNZ
+  review). "Not yet determined" (Q59496158), rightsstatements' `CNE`/`UND`,
+  and DigitalNZ's `Unknown` are all somebody having looked and recorded that
+  the question is open — which is not an answer and not an absence, and
+  silence made it indistinguishable from a partner that publishes no rights
+  fields at all. All three vocabularies now render the `unknown` glyph (a ?
+  in a circle, `src/cc-icons.js`), whose click-fold says exactly which
+  non-answer was recorded (`UNKNOWN_COPY` in `emit-html.js`, and
+  `rightsView`'s open-question branch for the Wikidata case). The rules that
+  keep it honest: it is never composed with a license mark, it never
+  competes with a real answer (the Wikidata unknown surfaces only when it is
+  the only thing recorded; `known: false` still keeps it out of the
+  freest-leads ordering), and the stance — an honest unknown is a peer to
+  the open statements, for now — is stated on the front page's challenges
+  list, where its scaling cost is named.
 
 ### Partner audit, 2026-08-06
 
@@ -524,6 +542,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
 | Smithsonian | n/a | no pivot builds cards; visibility panel only |
+| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; `Unknown` gets the ? mark (honest-unknowns rule above); the fully-open combination words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
 wrong answer first: it states TWO Creative Commons URIs, and the CC0 licenses
@@ -730,6 +749,55 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
   and never browser-hotlinked (OSMF tile policy). Every partner here is
   outside Wikimedia by design — that breadth IS the demo.
+- **DigitalNZ** (`src/digitalnz.js`, added 2026-08-08, LUI-145; live-verified
+  and made strict the same day) — the demo's first non-US/EU partner: 150+
+  New Zealand libraries, archives and museums (Turnbull/NLNZ, Massey, VUW,
+  Auckland Museum, Ngā Taonga, Papers Past) behind one API. Same search shape
+  as DPLA and keyed on the same property (P244): NLNZ is not an independent
+  VIAF contributor and catalogs through LC/NACO (checked on VIAF's
+  contributor list 2026-08-08), so LC's record of the authority carries the
+  heading NZ catalogers use.
+  **It carries it as a VARIANT, and that finding is the whole design** (all
+  live-verified 2026-08-08, recorded on LUI-145). The first draft reused
+  DPLA's `lcHeading` and quoted the authorized heading into DigitalNZ's
+  `text=` search; that returned ZERO records for its own fixture, because
+  `text=` is full text over titles/descriptions while DPLA queries a subject
+  field, and because LC's authorized form ("Yeates, J. S. (John Stuart),
+  1900-1986") is not the form NZ records state ("Yeates, John Stuart,
+  1900-1986" — LC's variant). So `src/lc.js` GETs the full LC record for
+  authorized + variant forms (the one place the HEAD trick is not enough —
+  see the comment there for why DPLA's HEAD could be folded into this GET as
+  a follow-up), the query is `or[subject][]=` across all forms, and a record
+  becomes a card ONLY if its own `subject` field states one of them — so
+  every card's "filed under this heading" claim is verifiably true of that
+  record. **Strict by decision** (2026-08-08): the cost is that records with
+  no person-level subject never surface, and on the Yeates fixture that is 7
+  of 8 — including Massey's three openly licensed images, whose only subject
+  is a collection name, and (usefully) the enwiki article itself, which
+  DigitalNZ indexes with `content_partner: ["Wikipedia"]` and no subjects. A
+  looser name-match would reach them but could no longer say "cataloged
+  under"; per VALUES.md's generalization principle it is filed to be
+  explored ACROSS sources or not at all — see the loose-match Linear issue —
+  not hacked in for one partner.
+  **A key is optional, unlike DPLA/Europeana**: the v3 API answers keyless
+  (verified), `DIGITALNZ_API_KEY` rides along when set (`keyOptional` in the
+  spec), and `api_key=` with an empty or bogus value is a **403** — keyless
+  means omitting the parameter. No published numeric rate limit, so
+  `hostLimit()` stays at the default 1.
+  **The API's metadata terms are NON-COMMERCIAL by default** (Developer API
+  terms read 2026-08-08 — via the Wayback Machine, because the live page
+  challenge-gates non-browser clients; capture 2026-05-05). A separate keyed
+  commercial track exists ("get in touch", covers "only a selection of
+  DigitalNZ metadata"), and the terms' carve-out for metadata with existing
+  open licenses names Europeana (CC0), DPLA (CC0) and data.govt.nz (CC BY 3.0
+  NZ) — i.e. sources this demo already reads directly — **not the NZ
+  collections themselves**. This demo is non-commercial and sits inside the
+  default terms; the general pattern (open items behind non-open API terms)
+  is flagged on the front page's challenges list as "Terms on the pipes, not
+  just the items", and DigitalNZ's FRIENDS entry links the terms.
+  The rights mapping deliberately does not glyph DigitalNZ's own
+  `Share`/`Modify`/`Use commercially` rollup — see the partner audit table
+  above.
 
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
@@ -758,13 +826,18 @@ fights the pipeline rather than fitting it:
 2. **Search shape** — no direct object id, but a Wikidata property names
    something searchable (a subject heading, an entity id), and what comes
    back is a SAMPLE of a larger holding, not the partner's own record of the
-   anchor. `DPLA_PIVOT` and `EUROPEANA_PIVOT` (`src/discover.js`, just above
-   `discover()`) are the two live cases, both run through the shared
-   `bandPropertyPivot()` loop. A new partner of this shape is one new spec
-   object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
-   `sample` (and `broadExtra` only if a `broadNote` needs a field beyond
-   `label`/`total`/`url` — DPLA's does, for the heading), passed to
-   `bandPropertyPivot()` alongside the other two. Do NOT copy the block and
+   anchor. `DPLA_PIVOT`, `EUROPEANA_PIVOT` and `DIGITALNZ_PIVOT`
+   (`src/discover.js`, just above `discover()`) are the three live cases, all
+   run through the shared `bandPropertyPivot()` loop — `DIGITALNZ_PIVOT`
+   reuses DPLA's own `field: 'lc'`/P244 rather than adding a fourth WDQS var,
+   though the two resolve the heading differently (authorized form via HEAD
+   vs. the full record for variant forms — see Partner pivots below for why
+   that difference is load-bearing). A new partner of this shape is one new
+   spec object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
+   `sample` (plus `keyOptional: true` if the API verifiably answers keyless —
+   DigitalNZ does — and `broadExtra` only if a `broadNote` needs a field
+   beyond `label`/`total`/`url` — DPLA's does, for the heading), passed to
+   `bandPropertyPivot()` alongside the others. Do NOT copy the block and
    modify it — that is exactly the duplication DPLA and Europeana had between
    2026-08-03 and this date, two near-identical blocks in `discover.js` that
    this refactor collapsed into one loop plus two specs.

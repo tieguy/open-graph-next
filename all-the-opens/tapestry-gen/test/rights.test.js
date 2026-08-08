@@ -276,11 +276,31 @@ test('a work-level answer still gets its glyph even when the author is known too
   assert.match(view.detail.join(' '), /Grant Wood: copyrights on works have expired/)
 })
 
-test('a status nobody has determined renders nothing at all', () => {
+test('a status nobody has determined surfaces as the ? mark when it is all anyone recorded', () => {
+  // Until 2026-08-08 this rendered as nothing; now an honestly recorded open
+  // question is shown as one — the ? mark, a label that says so, and never a
+  // license glyph.
   const rec = parseRightsRows([
     { item: uri('Q1'), cs: uri('Q59496158'), csLabel: lit('not yet determined') },
   ]).get('Q1')
-  assert.equal(rightsView(rec, { qid: 'Q1' }), null)
+  const v = rightsView(rec, { qid: 'Q1' })
+  assert.deepEqual(v.marks, ['unknown'])
+  assert.equal(v.label, 'copyright not yet determined')
+  assert.equal(v.line, null)
+  assert.match(v.detail.join(' '), /not yet determined/)
+  assert.match(v.detail.join(' '), /not a permission and not a restriction/)
+})
+
+test('an open question never competes with an answer', () => {
+  // The same "not yet determined" beside a real status adds nothing: the
+  // known answer's view is unchanged, no ? mark anywhere.
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q59496158'), csLabel: lit('not yet determined') },
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain') },
+  ]).get('Q1')
+  const v = rightsView(rec, { qid: 'Q1' })
+  assert.deepEqual(v.marks, ['pd'])
+  assert.ok(!v.marks.includes('unknown'))
 })
 
 test('an empty record is not a view', () => {
@@ -350,9 +370,21 @@ test('a status that withholds a freedom never gets a public-domain mark', () => 
   assert.equal(ccFromUri('http://rightsstatements.org/vocab/NoC-OKLR/1.0/'), null)
   assert.equal(ccFromUri('http://rightsstatements.org/vocab/NoC-CR/1.0/'), null)
   assert.equal(ccFromUri('http://rightsstatements.org/vocab/NoC-NC/1.0/'), null)
-  // CNE and UND mean nobody evaluated it. Not an answer, not an absence.
-  assert.equal(ccFromUri('http://rightsstatements.org/vocab/CNE/1.0/'), null)
-  assert.equal(ccFromUri('http://rightsstatements.org/vocab/UND/1.0/'), null)
+})
+
+test('CNE and UND carry the ? mark and keep their own distinction', () => {
+  // The rightsstatements twins of "not yet determined". They rendered as
+  // nothing until 2026-08-08; now each is shown as the honest non-answer it
+  // is — the ? mark, never a license glyph, and labels that keep CNE
+  // ("nobody has looked") apart from UND ("looked, and could not tell").
+  const cne = ccFromUri('http://rightsstatements.org/vocab/CNE/1.0/')
+  assert.equal(cne.code, 'CNE')
+  assert.deepEqual(cne.marks, ['unknown'])
+  assert.equal(cne.label, 'copyright not evaluated')
+  const und = ccFromUri('http://rightsstatements.org/vocab/UND/1.0/')
+  assert.equal(und.code, 'UND')
+  assert.deepEqual(und.marks, ['unknown'])
+  assert.equal(und.label, 'copyright undetermined')
 })
 
 // ------------------------------------------------- partner audit, 2026-08-06

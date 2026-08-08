@@ -42,6 +42,9 @@ const GLYPHS = {
   zero: ['https://upload.wikimedia.org/wikipedia/commons/5/52/Cc-zero.svg', 'No rights reserved'],
   pd: ['https://upload.wikimedia.org/wikipedia/commons/6/62/PD-icon.svg', 'Public domain'],
   copyright: ['https://upload.wikimedia.org/wikipedia/commons/b/b0/Copyright.svg', 'In copyright'],
+  // The honest-open-question mark (2026-08-08): a stroked ?-in-circle, PD on
+  // Commons, visually of a family with the outline CC marks.
+  unknown: ['https://upload.wikimedia.org/wikipedia/commons/9/98/Question_Circle.svg', 'Rights status unknown — recorded as an open question'],
 }
 
 /** The outer `<svg>`'s box, from its viewBox or from its width/height. */
@@ -102,10 +105,11 @@ function normalize(svg, id) {
     .replace(/\bid="([^"]+)"/g, (_, v) => `id="cc-${id}-${v}"`)
     .replace(/\b(xlink:href|href)="#([^"]+)"/g, (_, a, v) => `${a}="#cc-${id}-${v}"`)
 
-  // Ink → currentColor. `#808080` is PD-icon's grey, which is that design's
-  // ink and not a shade of anything.
+  // Ink → currentColor. `#808080` is PD-icon's grey and `#0AD` is
+  // Question_Circle's cyan stroke — each is that design's ink and not a shade
+  // of anything.
   body = body
-    .replace(/\b(fill|stroke)="(#000000|#000|black|#808080)"/gi, '$1="currentColor"')
+    .replace(/\b(fill|stroke)="(#000000|#000|black|#808080|#0AD)"/gi, '$1="currentColor"')
     .replace(/fill:\s*#000000/gi, 'fill:currentColor')
     // Knock-outs → a variable defaulting to the card's own background.
     .replace(/\b(fill|stroke)="(#ffffff|#fff|white)"/gi, '$1="var(--ccmark-hole,#fff)"')

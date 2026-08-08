@@ -57,6 +57,12 @@ const SOURCE = {
     // the same reason the Met and Smithsonian icons come from there.
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Europeana_logo_2015_basic.svg/120px-Europeana_logo_2015_basic.svg.png',
   },
+  // NOT `/favicon.ico`, which 302s to a 404 error page (checked 2026-08-08);
+  // this is the path the site's own <link rel="icon"> declares. It serves
+  // image/png to curl but a 202 challenge page to Node's fetch — see the
+  // cache-priming note in tools/build-icons.mjs, which is how its bytes got
+  // into src/icons.js.
+  digitalnz: { name: 'DigitalNZ', icon: 'https://digitalnz.org/favicons/favicon-32x32.png' },
 }
 
 // A Smithsonian object with a 3D scan carries `media3d` — the Voyager package
@@ -496,11 +502,37 @@ function card(entry, inline) {
  * here, where their work is actually being used, rather than in the friends
  * list, which counts collections.
  */
+// The ? mark's fold, one sentence per vocabulary — each names exactly which
+// non-answer was recorded, because CNE ("nobody has looked") and UND
+// ("looked, and could not tell") are different facts and flattening them
+// would lose the honesty the mark exists to show. All three end the same
+// way: an open question is not a permission and not a restriction.
+const UNKNOWN_COPY = {
+  UNKNOWN:
+    'The institution holding this item records its rights as unknown — an open ' +
+    'question, honestly recorded. That is not a permission and not a restriction; ' +
+    'ask the holder before reusing it.',
+  CNE:
+    'The institution serving this copy states that its copyright has not been ' +
+    'evaluated — nobody has looked yet. That is not a permission and not a ' +
+    'restriction; ask the holder before reusing it.',
+  UND:
+    'The institution serving this copy states that its copyright is undetermined — ' +
+    'someone looked, and could not tell. That is not a permission and not a ' +
+    'restriction; ask the holder before reusing it.',
+}
+
 function rightsDetail(entry) {
   const work = entry.rights?.work
   const copy = entry.rights?.copy
   const parts = []
-  if (copy?.url) {
+  if (copy?.marks?.includes('unknown')) {
+    const said = UNKNOWN_COPY[copy.code] ?? UNKNOWN_COPY.UNKNOWN
+    const link = copy.url
+      ? ` <a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener">${escapeHtml(copy.label)} ↗</a>`
+      : ''
+    parts.push(`<p class="rd-lic">${escapeHtml(said)}${link}</p>`)
+  } else if (copy?.url) {
     parts.push(
       `<p class="rd-lic">This copy is offered under ` +
         `<a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener">${escapeHtml(copy.label)}</a>` +
