@@ -481,3 +481,15 @@ test('the streamed shell says it is still looking until the legend arrives', () 
   // A cut stream must stop claiming to still be looking.
   assert.match(open, /Stopped before the search finished/)
 })
+
+test('the lede band has no h2 — the masthead already says the title, Vector never repeats it', () => {
+  // Before this, a phone showed the title three deep: the masthead h1, the
+  // lede band's h2, and the infobox's own title row. A real article page
+  // starts its lede under the firstHeading with no repeated heading, so ours
+  // does too. Section bands keep theirs.
+  const open = streamOpen({ title: 'Test Article', units: UNITS, home: '/' })
+  const lede = open.slice(open.indexOf('id="slede"'), open.indexOf('id="s3"'))
+  assert.doesNotMatch(lede, /<h2>/)
+  const s3 = open.slice(open.indexOf('id="s3"'))
+  assert.match(s3, /<header class="band-head"><h2>One<\/h2><\/header>/)
+})

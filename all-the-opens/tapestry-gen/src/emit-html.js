@@ -1069,9 +1069,15 @@ function band(b, inline, wikiBase = '/wiki/') {
   // tall narrow column beside blank page. The references close the section.
   const { rail, deck, refs } = bandParts(b, inline, wikiBase)
   const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
+  // The lede gets no heading of its own (2026-08-08, mobile review): the
+  // masthead's h1 already says the title, and on a phone the repetition
+  // stacked three deep — h1, band h2, then the infobox's own title row. A
+  // real article page starts its lede directly under the firstHeading.
+  const head =
+    b.id === 'slede' ? '' : `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>`
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
-    `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>` +
+    head +
     `<div class="band-body">${rail}<div class="prose">${prose}</div>${deck}${refs}</div>` +
     `</section>`
   )
@@ -1832,10 +1838,23 @@ a:hover > .plate .plate-mark{color:var(--link)}
      float has to be undone and the flex order stated so a future DOM change
      cannot silently reshuffle a one-column page. */
   .band-body{display:flex;flex-direction:column}
-  .rail{float:none;width:auto;margin:0 0 22px;order:1}
+  /* The first-child override must be restated: a media query adds no
+     specificity, so without this the lede rail (infobox or hero) stays a
+     fixed 330px inside the one-column stack — masked at 390px, a growing
+     dead right margin anywhere between ~420 and 640px. */
+  .rail,.band:first-child .rail{float:none;width:auto;margin:0 0 22px;order:1}
   .prose{order:2}
   .deck{order:3}
   .refs{order:4}
+  /* One column means shelves and cards take the column. The shelf's flex
+     basis arrives as an inline style (sized for the desktop deck), so the
+     stylesheet needs !important to beat it here — the one place this sheet
+     does that, and why. Cards go two-up: 178px singles left half the column
+     as dead margin, and full-width cards blow a 16:9 thumbnail to 360px for
+     three lines of caption. */
+  .carousel{flex:1 1 100%!important}
+  .carousel-head .topic{white-space:normal}
+  .card{flex:1 1 calc(50% - 7px)}
   .broad{display:block}
   .broad .fav{display:inline-block;margin-right:6px}
 }
