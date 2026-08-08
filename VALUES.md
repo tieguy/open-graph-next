@@ -46,7 +46,18 @@ Each dated or sourced; the place the full argument lives is named.
   the front page's "open" includes CC BY-NC, and 85–94% of the records behind
   GBIF map tiles are NC — whether NC counts as open here is LUI-142, and this
   bullet should be updated to whatever that decides.
-- **A license claim is checkable, and unverified is not unlicensed.** Each
+- **The goal is adoption by Wikipedia or something Wikipedia-like, so
+  non-commercial is not an acceptable condition** (Luis, 2026-08-08, during
+  the DigitalNZ API-terms review). The demo itself is non-commercial and can
+  operate inside NC terms; the thing it argues for cannot — everything
+  Wikipedia ships must be free for anyone to reuse, commercial use included.
+  So an NC condition anywhere in the chain — on a pipe (DigitalNZ's default
+  API terms, the first case) or on items — is framed as a **blocker to be
+  cleared**, never as a condition comfortably met; "we are non-commercial so
+  it's fine" is the wrong sentence in any copy here. Stated on the front
+  page's challenges list ("Terms on the pipes, not just the items"). This
+  sharpens but does not close LUI-142 (whether NC items count as "open" on
+  the front page). Each
   friend's license line links the partner's own statement of terms, "checkable
   rather than merely asserted" — and per the same file, "an unlinked license
   line means nobody has verified one yet, NOT that the claim is false"
