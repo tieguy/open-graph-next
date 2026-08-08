@@ -18,7 +18,12 @@ const entry = (over = {}) => ({
   ...over,
 })
 
-const bandOf = (over = {}) => ({ id: 'slede', title: 'Lede', blocks: [{ kind: 'p', html: '<p>x</p>' }], entries: [], ...over })
+// The prose is long on purpose: `bandParts` demotes a section's hero into the
+// deck below FLOAT_MIN_PROSE (700 characters), since a float with no text
+// beside it leaves the left column blank. These tests are about what a card
+// says, not about where it sits, so the fixture stays above that line.
+const PROSE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.repeat(14)
+const bandOf = (over = {}) => ({ id: 'slede', title: 'Lede', blocks: [{ kind: 'p', html: `<p>${PROSE}</p>` }], entries: [], ...over })
 
 // --------------------------------------------------------------- the glyphs
 

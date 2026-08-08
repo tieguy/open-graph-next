@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { extractInfobox } from '../src/wikipedia.js'
+import { bandParts } from '../src/emit-html.js'
 
 // Markup shapes are taken from a real parse response (John Stuart Yeates,
 // cached 2026-08-08): `infobox biography vcard`, an unscaled protocol-relative
@@ -114,4 +115,99 @@ test('image URLs normalize to https, lose tracking params and srcset, and are re
   assert.deepEqual(out.images, [clean])
   // The caption is content, not apparatus.
   assert.match(out.html, /Yeates in 1929/)
+})
+
+// ------------------------------------------------- the lede rail's fallback
+
+// Enough prose that a hero is allowed to float (FLOAT_MIN_PROSE) — the gate
+// tests must not trip the prose rule by accident. The infobox itself is
+// exempt, and there is a dedicated test for that below.
+const PROSE = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '.repeat(14)
+
+const INFOBOX = {
+  html: '<table class="infobox"><tbody><tr><th class="infobox-above">Yeates</th></tr></tbody></table>',
+  images: ['https://upload.wikimedia.org/x.jpg'],
+}
+
+const ledeBand = (over = {}) => ({
+  id: 'slede',
+  title: 'John Stuart Yeates',
+  blocks: [{ kind: 'p', text: PROSE, html: `<p>${PROSE}</p>` }],
+  entries: [],
+  infobox: INFOBOX,
+  ...over,
+})
+
+const subjectFind = {
+  source: 'rijksmuseum',
+  standing: 'subject-record',
+  title: 'Their own record of the subject',
+  imageUrl: 'https://example.test/subject.jpg',
+}
+
+const weakFind = {
+  source: 'met',
+  title: 'A picture of something merely linked',
+  imageUrl: 'https://example.test/linked.jpg',
+}
+
+test('a lede with no find renders the infobox in the rail, with the i-fold', () => {
+  const { rail } = bandParts(ledeBand(), new Map(), '/wiki/')
+  assert.match(rail, /<table class="infobox"/)
+  assert.match(rail, /the Wikipedia article/, 'the fold names whose box this is')
+  assert.match(rail, /yet/, 'the absence is a measurement, not a verdict')
+  assert.match(rail, /href="\/"/, 'the partner list link points at the front page')
+  assert.doesNotMatch(rail, /class="src"/, 'furniture, not a find: no source tag')
+})
+
+test('a find about the subject keeps the rail; the infobox stands down', () => {
+  const { rail } = bandParts(ledeBand({ entries: [subjectFind] }), new Map(), '/wiki/')
+  assert.match(rail, /Their own record of the subject/)
+  assert.doesNotMatch(rail, /<table class="infobox"/)
+})
+
+test('a weak hero yields to the infobox and leads its shelf instead', () => {
+  const { rail, deck } = bandParts(ledeBand({ entries: [weakFind] }), new Map(), '/wiki/')
+  assert.match(rail, /<table class="infobox"/)
+  assert.doesNotMatch(rail, /merely linked/)
+  assert.match(deck, /merely linked/, 'demoted, not dropped')
+})
+
+test('the infobox floats even beside a stub\'s worth of prose', () => {
+  // FLOAT_MIN_PROSE demotes a HERO below 700 characters; a stub's short prose
+  // wrapping beneath its infobox is what a real stub looks like, so the box is
+  // exempt.
+  const short = ledeBand({ blocks: [{ kind: 'p', text: 'Born. Died.', html: '<p>Born. Died.</p>' }] })
+  const { rail } = bandParts(short, new Map(), '/wiki/')
+  assert.match(rail, /<table class="infobox"/)
+})
+
+test('a band with no infobox field renders exactly as before', () => {
+  const { rail, deck } = bandParts(ledeBand({ infobox: undefined, entries: [weakFind] }), new Map(), '/wiki/')
+  assert.match(rail, /merely linked/, 'the weak hero keeps the slot when there is nothing to yield to')
+  assert.doesNotMatch(deck, /merely linked/)
+})
+
+test('batch inlining swaps the infobox image; the demo base does not eat the File: link', () => {
+  const box = {
+    html:
+      '<table class="infobox"><tbody><tr><td class="infobox-image">' +
+      '<a href="https://en.wikipedia.org/wiki/File:X.jpg"><img src="https://upload.wikimedia.org/x.jpg" /></a>' +
+      '<a href="/wiki/Palmerston_North">Palmerston North</a></td></tr></tbody></table>',
+    images: ['https://upload.wikimedia.org/x.jpg'],
+  }
+  const inline = new Map([['https://upload.wikimedia.org/x.jpg', 'data:image/jpeg;base64,ZZ']])
+  const { rail } = bandParts(ledeBand({ infobox: box }), inline, 'https://demo.test/wiki/')
+  assert.match(rail, /src="data:image\/jpeg;base64,ZZ"/)
+  assert.match(rail, /href="https:\/\/en\.wikipedia\.org\/wiki\/File:X\.jpg"/)
+  assert.match(rail, /href="https:\/\/demo\.test\/wiki\/Palmerston_North"/)
+  assert.match(rail, /href="https:\/\/demo\.test\/"/, 'front-page link derived from the demo base')
+})
+
+test('a standalone batch render keeps the fold copy but drops the dead link', () => {
+  // Batch with no home renders against the en.wikipedia.org base; a front-page
+  // link would point at Wikipedia, which is not where the partner list lives.
+  const { rail } = bandParts(ledeBand(), new Map(), 'https://en.wikipedia.org/wiki/')
+  assert.match(rail, /the collections this page draws on/)
+  assert.doesNotMatch(rail, /href="https:\/\/en\.wikipedia\.org\/"/)
 })

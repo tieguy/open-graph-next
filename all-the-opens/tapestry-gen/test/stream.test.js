@@ -10,6 +10,14 @@ import {
   streamOpen,
 } from '../src/emit-html.js'
 
+// Enough prose that the section's best find is allowed to float. `bandParts`
+// demotes a hero into the deck below FLOAT_MIN_PROSE (700 characters), because
+// a float with no text beside it leaves the left column blank — so a fixture
+// short enough to trip that rule would be testing the rule rather than the
+// shelving these tests are about. Do not trim this to taste; the length is the
+// point. The dedicated test for the rule itself builds its own short band.
+const ENOUGH_PROSE = ' Lorem ipsum dolor sit amet, consectetur adipiscing elit.'.repeat(14)
+
 const UNITS = [
   { index: '0', title: 'Test Article', blocks: [{ kind: 'p', text: 'Lede prose.' }] },
   {
@@ -18,8 +26,8 @@ const UNITS = [
     blocks: [
       {
         kind: 'p',
-        text: 'Alpha.',
-        html: 'Alpha <a class="wl" href="/wiki/Beta">Beta</a>.<sup class="ref"><a href="#s3-note-x">[1]</a></sup>',
+        text: `Alpha.${ENOUGH_PROSE}`,
+        html: `Alpha <a class="wl" href="/wiki/Beta">Beta</a>.<sup class="ref"><a href="#s3-note-x">[1]</a></sup>${ENOUGH_PROSE}`,
       },
     ],
   },
@@ -114,6 +122,23 @@ test('the best find floats in the rail, media rides the deck, references close t
   assert.match(rail, /A photo/)
   assert.doesNotMatch(deck, /A photo</)
   assert.match(deck, /Another photo/)
+})
+
+test('a section with too little prose to wrap a float gets no float', () => {
+  // Apollo 11's "Multimedia" section is the case: ten characters of prose and a
+  // floated thumbnail, leaving 365px of blank left column until the deck
+  // cleared it. The find is not dropped — it is shelved as an ordinary card,
+  // and it leads its shelf, because it is still the section's best find.
+  const short = { ...BAND, blocks: [{ kind: 'p', text: 'Media.', html: 'Media.' }] }
+  const { rail, deck } = bandParts(short)
+  assert.doesNotMatch(rail, /class="rail"/, 'no float beside three words of prose')
+  assert.match(deck, /A photo/, 'the hero is shelved rather than lost')
+  assert.match(deck, /Another photo/)
+  // Order is preserved: the would-be hero still leads its shelf.
+  assert.ok(deck.indexOf('A photo') < deck.indexOf('Another photo'))
+  // And the same band with real prose keeps its float, so the rule is the
+  // prose length and nothing else about these entries.
+  assert.match(bandParts(BAND).rail, /class="rail"/)
 })
 
 test('a shared why hoists to the head even on a shelf with no topic label', () => {

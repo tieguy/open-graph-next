@@ -1,6 +1,6 @@
 import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
-import { pickHero } from './hero.js'
+import { heroRank, pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 
@@ -709,10 +709,22 @@ function carousel(source, items, inline, topic = null, sample = null) {
   // The shelf's flex-basis is what its cards actually need (capped at three) —
   // so a one-card shelf shares its deck row with the next shelf instead of
   // claiming the whole width; wider shelves grow into whatever is left and
-  // scroll for the rest.
-  const basis = Math.min(items.length, 3) * 192
+  // wrap to a second row for the rest.
+  //
+  // 200 = the card's own 178px, plus the 3px padding and 1px border on each
+  // side that the wiki skin's thumb frame added (2026-08-07), plus the 14px
+  // gap. It was 192 while the cards were unframed and the track scrolled, and
+  // 8px short is not cosmetic now that shelves wrap: a three-card shelf whose
+  // basis is under its cards' real width drops the third card to its own row.
+  const basis = Math.min(items.length, 3) * 200
   return (
-    `<div class="carousel" style="flex:1 1 ${basis}px"><div class="carousel-head">${sourceTag(source, inline)}${topicTag}${count}</div>` +
+    // No flex-grow (changed 2026-08-07). A stretched shelf keeps its cards
+    // left-aligned, so a row's leftover width opened as a hole INSIDE each
+    // shelf — a one-card shelf stretched to 446px showed 246px of white between
+    // its card and the next shelf. At grow 0 the shelves sit at their true
+    // width and the leftover collects at the right margin, where it reads as
+    // page margin rather than as gaps in a gallery.
+    `<div class="carousel" style="flex:0 1 ${basis}px"><div class="carousel-head">${sourceTag(source, inline)}${topicTag}${count}</div>` +
     shared +
     `<div class="carousel-track">${items.map((e) => card(e, inline)).join('')}</div></div>`
   )
@@ -771,11 +783,72 @@ function footnoteList(fns, wikiBase) {
  * half. References belong where a reader goes looking for them, which is the
  * bottom; the slot belongs to whatever the section actually found.
  */
+/** Characters of prose a section needs before its best find may float. */
+const FLOAT_MIN_PROSE = 700
+
+/**
+ * The section's prose as plain text length — tags stripped, because a paragraph
+ * that is mostly wikilink markup has far fewer characters on the page than in
+ * the source. Headings count: they occupy a line beside the float too.
+ */
+function proseLength(b) {
+  if (!b.blocks) return (b.text ?? '').length
+  return b.blocks.reduce(
+    (n, x) => n + (x.html ? x.html.replace(/<[^>]*>/g, '').length : (x.text ?? '').length),
+    0,
+  )
+}
+
 export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // The hero comes out of the entries before they are shelved, so it is never
   // both hoisted and carded. A section whose only find becomes its hero has no
   // deck at all, which is the right rendering of one good thing.
-  const { hero, rest } = pickHero(b.entries)
+  let { hero, rest } = pickHero(b.entries)
+  // A float needs text beside it, or it is not a float — it is an ornament
+  // stuck to a heading, with the whole left column blank beneath it until the
+  // deck clears. Apollo 11's "Multimedia" section is the case that forced this
+  // (2026-08-07): ten characters of prose against a floated thumbnail, 365px of
+  // dead column, and no width tweak can fix a section that has no text.
+  //
+  // The arithmetic: beside a 220px thumb the text column runs about 96
+  // characters a line, so 700 characters is roughly seven lines — about the
+  // height of a thumbnail with its caption. Below that the hole is bigger than
+  // the picture.
+  //
+  // This is the same rule pickHero already applies for a different reason (a
+  // find with no picture and no standing gets no float), and it is deliberately
+  // implemented the same way: the hero goes back into `rest` and is shelved as
+  // an ordinary card, so there is no third rendering to maintain. It leads its
+  // shelf because it was the section's best find and still is.
+  //
+  // A heuristic, fitted to one article's distribution, and safely so: the cost
+  // either way is bounded — a float becomes a card, or a short section keeps a
+  // small hole. Real Wikipedia sections do keep small holes, and the residual
+  // ones here are that, not a defect.
+  if (hero && proseLength(b) < FLOAT_MIN_PROSE) {
+    rest = [hero, ...rest]
+    hero = null
+  }
+  // The lede's fallback: the Wikipedia article's own infobox, standing in
+  // when no find with subject standing earned the slot (design:
+  // docs/design-plans/2026-08-08-infobox-retention.md). Only the lede band
+  // carries `infobox`, so no other section can trip this. A find ABOUT the
+  // subject (heroRank <= 3: the subject as a document, a partner's record of
+  // it, something it made) beats the box; anything weaker — a map, a picture
+  // of something merely linked — yields and leads its shelf instead, the same
+  // demotion the prose rule above uses. The box is deliberately NOT exempt
+  // from losing to a subject find, and deliberately IS exempt from
+  // FLOAT_MIN_PROSE: a stub's short prose wrapping beneath its infobox is
+  // exactly what a real stub looks like.
+  let infobox = b.infobox ?? null
+  if (infobox && hero) {
+    if (heroRank(hero) <= 3) {
+      infobox = null
+    } else {
+      rest = [hero, ...rest]
+      hero = null
+    }
+  }
   // Group the band's media by source, in first-appearance order — then, within
   // a source, by topic (the anchor that asked for each item). A source whose
   // items all share one topic keeps a single plain carousel; one that mixes
@@ -833,13 +906,57 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // further down. Last, and in a different voice, they cannot be confused.
   const broad = broadNotes(b.broad, inline)
   const deckBody = disclosure + media + broad
+  const float = hero
+    ? `<aside class="rail">${heroCard(hero, inline)}</aside>`
+    : infobox
+      ? infoboxAside(infobox, inline, wikiBase)
+      : ''
   return {
     // Both go before the prose, the status first: it is about the whole
     // article, while the hero is about one find inside it.
-    rail: subjectRights(b) + (hero ? `<aside class="rail">${heroCard(hero, inline)}</aside>` : ''),
+    rail: subjectRights(b) + float,
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
     refs: sources,
   }
+}
+
+/**
+ * Where the partner list lives, derived from the wiki base — or null when
+ * there is no answer. `/wiki/` (the streaming server) and a demo base
+ * (`https://friendsof.wiki/wiki/`) both have a front page one level up; the
+ * batch default is en.wikipedia.org, whose front page is NOT where the
+ * partner list lives, so a standalone file keeps the words and drops the
+ * link rather than pointing a reader at Wikipedia for our own roster.
+ */
+function frontPage(wikiBase) {
+  if (wikiBase === '/wiki/') return '/'
+  const m = /^(.*\/)wiki\/$/.exec(wikiBase ?? '')
+  return m && !m[1].includes('en.wikipedia.org') ? m[1] : null
+}
+
+/**
+ * The Wikipedia article's own infobox, standing in the lede rail. Furniture,
+ * not a find: no source tag, no favicon, never counted in `sourcesUsed` — the
+ * footer's CC BY-SA line credits it like the prose it sits beside. The ⓘ-fold
+ * explains the SLOT, in the house voice: an absence is a measurement ("no
+ * friend has one yet"), never a verdict.
+ */
+function infoboxAside(box, inline, wikiBase) {
+  let html = relink(box.html, wikiBase)
+  for (const url of box.images ?? []) {
+    const swapped = inline.get(url)
+    if (swapped) html = html.replaceAll(`src="${url}"`, `src="${escapeHtml(swapped)}"`)
+  }
+  const front = frontPage(wikiBase)
+  const list = front
+    ? `<a href="${escapeHtml(front)}">the collections this page draws on</a>`
+    : 'the collections this page draws on'
+  const fold =
+    `<details class="ib-why"><summary><span class="rinfo">ⓘ</span></summary>` +
+    `<p>This is the Wikipedia article’s own infobox. This slot usually holds a friend’s ` +
+    `record of the subject — none of ${list} has one for this subject yet, so the ` +
+    `article’s own summary stands in.</p></details>`
+  return `<aside class="rail"><div class="ib-slot">${fold}${html}</div></aside>`
 }
 
 /**
@@ -1147,28 +1264,66 @@ export function streamClose({ provenance = '' } = {}) {
 `
 }
 
+/* The page wears MediaWiki's Vector skin, deliberately (2026-08-07).
+   The argument this render makes is "here is the article, and here is what the
+   open ecosystem holds about it that the article does not show" — which lands
+   only if the first half LOOKS like the article. An editorial magazine skin
+   made the whole page read as somebody's essay ABOUT Wikipedia; Vector's own
+   furniture makes it read as the encyclopedia page plus additions, and the
+   additions are then the thing a reader notices.
+
+   What is borrowed is the DESIGN LANGUAGE, which is MediaWiki's and is worn by
+   thousands of wikis: the type scale, the hairline-ruled serif headings, the
+   #36c links, the bordered thumb and infobox frames. What is NOT borrowed is
+   anybody's identity — no Wikipedia wordmark, no globe, no article/talk tabs,
+   and the masthead still says whose experiment this is in the first line. A
+   page that looked like Wikipedia AND claimed to be it would be a forgery, and
+   the whole project depends on being trusted about what it found. */
 const STYLE = `
 :root{
-  --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#0b0d0f; --muted:#54595d;
-  --rule:#d5d8dc; --faint:#eceef0; --link:#3366cc;
-  --serif:Charter,"Bitstream Charter","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#000000; --muted:#54595d;
+  /* MediaWiki's two border weights, and they are used for different jobs:
+     base rules structure (heading underlines, the content edge, infoboxes),
+     subtle rules frame content (thumbnails, table hairlines). */
+  --rule:#c8ccd1; --rule-strong:#a2a9b1; --faint:#eaecf0; --link:#3366cc;
+  --link-visited:#6b4ba1;
+  --serif:"Linux Libertine","Georgia","Times New Roman",Times,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
-  font-size:19px;line-height:1.7;text-rendering:optimizeLegibility}
-a{color:var(--link)}
+/* Sans body, serif headings — the inversion of the old skin, and the single
+   change that does most of the work. 15px sits between MediaWiki's 14px content
+   default and the 16px its larger reading preference serves; both ship, and
+   neither is worth matching to the pixel at the cost of legibility here. */
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.65}
+a{color:var(--link);text-decoration:none}
+a:visited{color:var(--link-visited)}
+a:hover{text-decoration:underline}
 img{max-width:100%;display:block}
 
-.hero{max-width:1180px;margin:0 auto;padding:40px 40px 30px;border-bottom:1px solid var(--rule)}
-.kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 18px}
-.kicker a{color:inherit;text-decoration:none}
-.kicker a:hover{color:var(--link)}
-.hero h1{font-size:clamp(2.1rem,4.5vw,3.4rem);line-height:1.05;letter-spacing:-.02em;
-  margin:0 0 14px;color:var(--head);font-weight:600}
-.hero .thesis{font-family:var(--sans);font-size:.95rem;line-height:1.6;max-width:70ch;color:var(--muted);margin:0 0 12px}
+/* The content block: white, on the grey page, at roughly Vector's own content
+   width. 1000px against Vector 2022's 960px — the extra 40px is what keeps a
+   media shelf from dropping a card, and at this width the floated rail below
+   (330px) is 22em, which is exactly an infobox. */
+.hero{max-width:1000px;margin:0 auto;padding:0 32px 12px;background:var(--paper);
+  border:1px solid var(--rule-strong);border-bottom:1px solid var(--rule-strong);border-width:0 1px 1px}
+/* The site strip: who made this and where to read about it. It stands where a
+   wiki's header sits and is styled as chrome rather than as a kicker — small,
+   grey, ruled off — because everything below it is pretending to be an article
+   and this line is the one that must not. */
+.kicker{font-size:.8rem;line-height:1.5;color:var(--muted);margin:0 -32px 18px;
+  padding:9px 32px;border-bottom:1px solid var(--rule);background:var(--bg)}
+.kicker a{color:var(--link)}
+/* Serif, normal weight, no tightened tracking: MediaWiki's firstHeading. The
+   old skin set this in a 3.4rem semibold sans, which is a magazine cover. */
+.hero h1{font-family:var(--serif);font-size:1.9rem;line-height:1.25;
+  margin:0 0 .15em;color:var(--head);font-weight:400}
+/* The tagline slot — where an article says "From Wikipedia, the free
+   encyclopedia", this says what the page actually is. Same size, same grey,
+   same place, and it is doing the same job. */
+.hero .thesis{font-size:.82rem;line-height:1.55;max-width:80ch;color:var(--muted);margin:0 0 12px}
 .legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--muted);
   min-height:16px;margin:0 0 12px}
 .hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
@@ -1181,52 +1336,120 @@ img{max-width:100%;display:block}
 @media(prefers-reduced-motion:reduce){.finding{animation:none;opacity:.7}}
 .fav{width:16px;height:16px;flex:none;border-radius:2px;background:#fff no-repeat center;background-size:contain;display:inline-block}
 
-main{max-width:1180px;margin:0 auto;padding:0 40px}
-.band{padding:32px 0}
-.band+.band{border-top:1px solid var(--rule)}
-.band:first-child{padding-top:28px}
-.band-head{margin:0 0 22px}
-.band-head h2{font-size:clamp(1.6rem,2.8vw,2.2rem);line-height:1.1;letter-spacing:-.01em;
-  margin:0;color:var(--head);font-weight:600}
+main{max-width:1000px;margin:0 auto;padding:4px 32px 0;background:var(--paper);
+  border:1px solid var(--rule-strong);border-width:0 1px}
+.band{padding:8px 0 18px}
+/* No rule BETWEEN sections: the heading's own underline is the separator, which
+   is how a wiki page divides itself. Two rules a few pixels apart was the first
+   thing that looked wrong when the h2 gained its border. */
+.band:first-child{padding-top:4px}
+.band-head{margin:0 0 14px}
+/* MediaWiki's section heading, and the detail that carries most of the
+   resemblance: serif, normal weight, and a hairline the full width of the
+   content. */
+.band-head h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;
+  margin:1em 0 0;padding-bottom:.17em;color:var(--head);font-weight:400;
+  border-bottom:1px solid var(--rule-strong)}
+.band:first-child .band-head h2{margin-top:.4em}
 .note .band-head h2{font-style:italic}
 
-/* Wikipedian inline apparatus: quiet blue links, superscript footnote markers. */
-.prose a{color:var(--link);text-decoration:none}
-.prose a:hover{text-decoration:underline}
-.prose a.ext::after{content:"\\2197";font-size:.7em;margin-left:2px;color:#8a8f95}
-sup.ref{font-size:.72em;line-height:0}
-sup.ref a{color:var(--link);text-decoration:none}
-sup.ref a:hover{text-decoration:underline}
+/* Wikipedian inline apparatus: quiet blue links, superscript footnote markers.
+   The external-link arrow stands in for MediaWiki's own 12px glyph — same
+   convention, no sprite to ship. */
+.prose a{color:var(--link)}
+.prose a:visited{color:var(--link-visited)}
+.prose a.ext::after{content:"\\2197";font-size:.75em;margin-left:1px;color:#3366cc}
+sup.ref{font-size:.8em;line-height:1}
+sup.ref a{color:var(--link)}
 
 /* The load-bearing layout choice: the body is a flow-root, media and citations
    float to the rails, and the prose reflows around and below them — no reserved
    empty column, so a long section with sparse media has no dead space. */
 .band-body{display:flow-root}
 .prose{}
-.prose p{margin:0 0 1.05em;max-width:42em}
-.prose h3{font-family:var(--sans);font-size:1.05rem;letter-spacing:.01em;font-weight:700;
-  color:var(--head);margin:1.8em 0 .5em}
-.note-lead{font-size:1.15rem;font-style:italic;color:#3a3f45;max-width:46em}
+/* No measure cap. MediaWiki does not set one, and an article's text running the
+   full column and wrapping under the infobox is part of what the page is
+   imitating — a 42em ribbon down the left was the old editorial skin. */
+.prose p{margin:0 0 .5em}
+/* h3 and below are sans and bold in Vector, and carry no rule — only h1 and h2
+   are serif. */
+.prose h3{font-size:1.13rem;font-weight:700;color:var(--head);margin:1em 0 .3em}
+.note-lead{font-style:italic;color:#3a3f45}
 
 /* The rail (the section's best find) narrows in steps so the two-column layout
    survives well below a full desktop width — a hi-DPI laptop at default scaling
    reports a narrow CSS width, and it should still read as article + margin. */
-.rail{float:right;width:330px;margin:4px 0 26px 46px}
-@media(max-width:1040px){.rail{width:300px;margin-left:38px}}
-@media(max-width:860px){.rail{width:260px;margin-left:28px}}
+/* Two widths, because MediaWiki has two things here and we had been rendering
+   both as the wider one (fixed 2026-08-07, after Apollo 11 measured 365px of
+   dead column in one section).
+
+   220px is MediaWiki's DEFAULT THUMBNAIL, which is what a picture in a section
+   is. 330px is 22em, the INFOBOX, and an article gets one of those, at the top.
+   Every section rail was wearing infobox width, which cost twice: the card was
+   taller, and the prose beside it was 110px narrower and so ran out sooner. A
+   float taller than the text it displaces leaves the whole left column blank
+   until the deck clears it, and on a 36-section article that adds up to the
+   page reading as mostly margin.
+
+   Margins are the thumb's: 0.5em top, 1.4em against the text it displaces. */
+.rail{float:right;width:220px;margin:.5em 0 1.3em 1.4em}
+.band:first-child .rail{width:330px}
+@media(max-width:1040px){.band:first-child .rail{width:300px}}
+@media(max-width:860px){.band:first-child .rail{width:260px}}
+
+/* The Wikipedia article's own infobox, standing in the lede rail when no
+   friend's record of the subject earned the slot (design:
+   docs/design-plans/2026-08-08-infobox-retention.md). Hand-written imitation
+   of Vector's infobox, like every other wiki-looking element in this sheet —
+   TemplateStyles are never passed through. Colored header bands arrive as
+   inline style attributes on the rows and survive on their own. */
+.infobox{width:100%;border:1px solid var(--rule-strong);background:var(--bg);
+  border-collapse:collapse;font-size:.8rem;line-height:1.45}
+.infobox td,.infobox th{vertical-align:top;padding:2px 8px;text-align:left;border:0}
+.infobox th[scope="row"].infobox-label{font-weight:700;padding-right:6px}
+.infobox .infobox-above{font-size:1.05rem;font-weight:700;text-align:center;padding:5px 8px}
+.infobox .infobox-header,.infobox .infobox-subheader,.infobox .infobox-full-data,
+.infobox .infobox-below{text-align:center}
+.infobox .infobox-header,.infobox .infobox-subheader{font-weight:700}
+.infobox .infobox-image{text-align:center;padding:4px 8px}
+.infobox .infobox-image img{margin:0 auto;height:auto}
+.infobox .infobox-caption{font-size:.75rem;line-height:1.4;padding-top:3px}
+.infobox .infobox-below{font-size:.75rem}
+/* Nested sub-boxes (an infobox inside an infobox) flatten to full width. */
+.infobox .infobox-subbox{width:100%;border:0;background:transparent;font-size:100%}
+/* The i-fold above the box: the slot's explanation, in the quiet grey the
+   card folds use. It must not read as part of the box, so it sits outside
+   the border, small and right-aligned. */
+.ib-why{text-align:right;margin:0 0 3px}
+.ib-why summary{list-style:none;cursor:pointer;display:inline-block}
+.ib-why summary::-webkit-details-marker{display:none}
+.ib-why[open] .rinfo{opacity:.55}
+.ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
+  background:var(--faint);border:1px solid var(--rule);padding:6px 8px;margin:4px 0 6px}
 
 /* The hero: the one thing the section wants a passing reader to see. It is a
    card, so everything true of a card stays true of it — it is just given the
    room to be looked at rather than scanned past. */
-.hero-card{flex:none;width:100%;margin:0}
-.hero-card .shot{border-radius:5px;box-shadow:0 2px 8px rgba(0,0,0,.16)}
-.hero-card figcaption{padding-top:10px}
+/* The thumb frame: hairline border, grey ground, 3px of padding around the
+   picture, caption inside the box. No radius and no shadow — MediaWiki content
+   has neither, and they were what made these read as cards from another site
+   pasted onto a wiki page. */
+.hero-card{flex:none;width:100%;margin:0;border:1px solid var(--rule);
+  background:var(--bg);padding:3px}
+.hero-card .shot{border-radius:0;box-shadow:none}
+.hero-card figcaption{padding:6px 4px 3px}
 .hero-src{margin:0 0 6px}
 /* No line clamp here: the hero has the room, and a hero whose title is cut off
    mid-word is a worse advertisement for the find than a title on three lines. */
-.hero-card h4{font-size:1.08rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
-.hero-card .desc{font-size:.8rem;-webkit-line-clamp:3}
-.hero-card .credit{font-size:.72rem;-webkit-line-clamp:3}
+.hero-card h4{font-size:1rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
+.hero-card .desc{font-size:.78rem;-webkit-line-clamp:2}
+.hero-card .credit{font-size:.72rem;-webkit-line-clamp:2}
+/* The lede's hero is the infobox and keeps the roomier caption; a section's is
+   a 220px thumb, where a three-line description and a three-line credit are
+   most of the card's height and all of the dead column beside it. */
+.band:first-child .hero-card h4{font-size:1.08rem}
+.band:first-child .hero-card .desc{font-size:.8rem;-webkit-line-clamp:3}
+.band:first-child .hero-card .credit{-webkit-line-clamp:3}
 
 /* The media deck: full-width, below the prose. Shelves size to their cards and
    pack side by side, wrapping — a one-card shelf shares its row with the next
@@ -1244,29 +1467,58 @@ sup.ref a:hover{text-decoration:underline}
 .carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:600;
   color:var(--muted);white-space:nowrap;flex:none}
 .carousel-head .count[title]{cursor:help}
-.carousel-head .topic{font-family:var(--serif);font-size:.8rem;font-weight:600;color:var(--head);
+.carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}
-.carousel-track{display:flex;gap:14px;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x proximity;
-  padding-bottom:10px;scrollbar-width:thin;scrollbar-color:#c1c6cc transparent;overscroll-behavior-x:contain}
-.carousel-track::-webkit-scrollbar{height:8px}
-.carousel-track::-webkit-scrollbar-thumb{background:#c1c6cc;border-radius:4px}
-.card{flex:0 0 178px;scroll-snap-align:start}
+/* A wrapping grid of framed boxes, which IS MediaWiki's gallery — ul.gallery
+   with li.gallerybox, each box a thumb frame. It replaced a horizontally
+   scrolling strip on 2026-08-07: MediaWiki has no scrolling-strip idiom and no
+   arrow-carousel idiom either, so scrolling was not a departure that arrows
+   would have fixed — both are inventions, and only one of them is also a
+   hidden-content problem. Wrapping costs nothing here because a shelf holds at
+   most six cards (WORKS_BY_SUBJECT) and usually three or four, so nothing was
+   ever off-screen enough to need a control; the shelf's flex-basis still sizes
+   it to three across, and a longer shelf now grows a second row instead of
+   hiding its tail behind a scrollbar. */
+/* stretch, not flex-start: cards in a row share a height, so a text-only card
+   beside a tall picture reads as a tile in a grid rather than as a short box
+   with a hole under it. Card content stays top-aligned inside the box. */
+.carousel-track{display:flex;flex-wrap:wrap;align-items:stretch;gap:14px}
+/* Every card is a MediaWiki thumbnail, and that IS the argument: these are
+   shaped exactly like the pictures an article already carries, so what a reader
+   notices is not a foreign widget but that the article does not have them. The
+   one thing kept deliberately un-wiki is .src — the uppercase partner line
+   with its favicon, which has no MediaWiki analogue and is what says this came
+   from outside. */
+/* margin:0 is load-bearing, not tidying (2026-08-07). A card is a <figure>, and
+   the UA default for figure is margin:1em 40px — so every card carried 80px of
+   horizontal margin nobody wrote. .hero-card had always reset it; deck cards
+   never did. It was invisible while the tracks scrolled horizontally, because
+   the extra width just made a scrolling strip scroll a little more. The moment
+   the tracks wrapped it became the dominant whitespace bug on the page: three
+   186px cards need 586px and were claiming 826px, so a shelf sized for three
+   fitted two, wrapped the third onto a row of its own, and left the ragged
+   holes that made a wide page look mostly empty. */
+.card{flex:0 0 178px;margin:0;border:1px solid var(--rule);background:var(--bg);padding:3px}
 .src{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;letter-spacing:.08em;
   text-transform:uppercase;font-weight:700;color:var(--muted)}
-.frame{position:relative;aspect-ratio:16/9;background:#111;border-radius:5px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.14)}
-.frame.audio{aspect-ratio:auto;height:52px;background:#1d1d20;border-radius:5px}
+.frame{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
+.frame.audio{aspect-ratio:auto;height:52px;background:#1d1d20}
 .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .frame.audio iframe{position:static;height:52px}
-.shot{width:100%;border-radius:5px;box-shadow:0 1px 3px rgba(0,0,0,.14);background:var(--faint)}
+.shot{width:100%;background:var(--faint)}
 a:has(> .shot){display:block}
 /* Where a card has no picture. Deliberately NOT image-shaped: a 4/3 grey box is
    exactly what a failed thumbnail looks like. This is shorter, ruled at the
    foot like a card in a catalog drawer, and set in the serif — it should read
    as a label, which is what it is. See plate(). */
-.plate{aspect-ratio:5/2;border-radius:5px;background:linear-gradient(180deg,#fbfbfa,var(--faint));
+.plate{aspect-ratio:5/2;background:linear-gradient(180deg,#fbfbfa,var(--faint));
   border:1px solid var(--rule);border-bottom-width:3px;display:flex;align-items:center;
   justify-content:center;padding:6px 10px;box-sizing:border-box;overflow:hidden}
+/* Serif is kept here on purpose. It was chosen so a plate reads as a catalog
+   label rather than a failed image, and under the wiki skin it now shares the
+   headings' family, so it reads as of a piece with the page instead of as a
+   stray face. */
 .plate-mark{font-family:var(--serif);font-size:1.02rem;line-height:1.15;font-weight:600;
   color:#4a5058;text-align:center;letter-spacing:.01em;
   display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden}
@@ -1278,18 +1530,21 @@ a:hover > .plate{border-color:var(--link)}
 a:hover > .plate .plate-mark{color:var(--link)}
 /* The hero has room, so its plate can carry the label at reading size rather
    than shrinking it into the same 178px slot the carousel cards use. */
-.hero-card .plate{aspect-ratio:auto;min-height:96px;box-shadow:0 2px 8px rgba(0,0,0,.10)}
+.hero-card .plate{aspect-ratio:auto;min-height:96px}
 .hero-card .plate-mark{font-size:1.55rem;-webkit-line-clamp:3}
 .hero-card .plate.bare{min-height:60px}
-.card figcaption{padding-top:8px;font-family:var(--sans)}
+/* The caption sits inside the frame, as a thumbcaption does. */
+.card figcaption{padding:6px 4px 3px;font-family:var(--sans)}
 /* Three lines before the ellipsis: archival titles spend their first line on
    throat-clearing ("Tentative statement of philosophy for the…"), and the
    deck has the vertical room the old narrow rail did not. The full title
    rides on the tooltip. */
-.card h4{font-family:var(--serif);font-size:.95rem;line-height:1.22;margin:0 0 4px;color:var(--head);font-weight:600;
+.card h4{font-size:.92rem;line-height:1.3;margin:0 0 4px;color:var(--head);font-weight:400;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.card h4 a{color:inherit;text-decoration:none;border-bottom:1px solid var(--rule)}
-.card h4 a:hover{color:var(--link);border-bottom-color:var(--link)}
+/* A thumbcaption's link is an ordinary blue wikilink — the underlined-on-hover
+   kind — not a bordered title treatment. */
+.card h4 a{color:var(--link)}
+.card h4 a:visited{color:var(--link-visited)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* Some credits are whole paragraphs of reuse instructions; the card shows two
@@ -1338,8 +1593,8 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .rinfo{font-weight:700;font-size:.82rem;color:var(--link);line-height:1}
 .rwhy[open] .rinfo{opacity:.55}
 .rwhy[open]{flex:1 1 100%}
-.rwhy p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
-  border-radius:3px;padding:6px 8px;margin:6px 0 0}
+.rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
+  border:1px solid var(--rule);padding:6px 8px;margin:6px 0 0}
 .rwhy a{font-weight:600}
 .rwhy .rd-src{color:#8b9096}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
@@ -1365,7 +1620,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    It clears the hero so the two never collide on a narrow column.
    (No backticks in this stylesheet: it is a JS template literal.) */
 .subject-rights{clear:both;margin:0 0 14px;padding:9px 12px;
-  background:#f6f8f8;border-left:3px solid #b9c4c6;border-radius:2px}
+  background:#f6f8f8;border:1px solid var(--rule-strong);border-left:8px solid #b9c4c6}
 .subject-rights .sr-line{margin:0;font-size:.86rem;line-height:1.45;color:#3c4448}
 .subject-rights .ccrow{--ccmark-hole:#f6f8f8}
 .subject-rights .ccmark{width:1.25em;height:1.25em}
@@ -1387,14 +1642,17 @@ a:hover > .plate .plate-mark{color:var(--link)}
   color:var(--muted);cursor:pointer;width:fit-content}
 .gap summary:hover{color:var(--link)}
 .gap[open] summary{margin:0 0 12px;color:var(--head)}
-.gap-body{padding:14px 16px;background:var(--paper);border:1px solid var(--rule);border-radius:5px}
-.gap-lead{font-family:var(--sans);font-size:.78rem;line-height:1.5;color:var(--ink);margin:0 0 11px}
+.gap-body{padding:14px 16px;background:var(--bg);border:1px solid var(--rule-strong)}
+.gap-lead{font-size:.8rem;line-height:1.55;color:var(--ink);margin:0 0 11px}
 /* Two questions, two columns: what this partner gave the page in front of you,
    and how much of it Wikipedia can show. Running them together in prose is
    what made "the article can show you one of them" read as a contradiction. */
-.gap-list{width:100%;border-collapse:collapse;margin:0 0 10px;font-family:var(--sans)}
-.gap-list thead th{font-size:.58rem;letter-spacing:.09em;text-transform:uppercase;color:#9aa0a6;
-  font-weight:700;text-align:left;padding:0 0 5px 10px;border-bottom:1px solid var(--rule)}
+/* A wikitable: hairline grid, grey header band. */
+.gap-list{width:100%;border-collapse:collapse;margin:0 0 10px;background:var(--paper);
+  border:1px solid var(--rule-strong)}
+.gap-list thead th{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+  font-weight:700;text-align:left;padding:5px 8px 5px 10px;background:var(--faint);
+  border-bottom:1px solid var(--rule-strong)}
 .gap-list tbody tr{border-left:3px solid var(--rule)}
 .gap-list td,.gap-list tbody th{vertical-align:top;padding:6px 8px 6px 10px;text-align:left}
 .gap-list tbody tr+tr th,.gap-list tbody tr+tr td{border-top:1px dotted var(--faint)}
@@ -1437,8 +1695,8 @@ a:hover > .plate .plate-mark{color:var(--link)}
   vertical-align:-1px;line-height:1}
 .card .prov summary.bare .info{margin:0 4px 0 0}
 .card .prov[open] .info{opacity:.55}
-.card .prov p{font-size:.65rem;line-height:1.5;color:var(--muted);background:var(--faint);
-  border-radius:4px;padding:6px 8px;margin:5px 0 0}
+.card .prov p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
+  border:1px solid var(--rule);padding:6px 8px;margin:5px 0 0}
 .card .prov a{font-weight:600}
 /* The one link on the card a reader can act on, rather than merely follow. */
 .card .prov .fixlink{display:inline-block;margin-top:3px}
@@ -1459,21 +1717,32 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .broad-text{min-width:0}
 .broad a{font-weight:600;white-space:nowrap}
 
-.disclosure{font-family:var(--sans);font-size:.68rem;line-height:1.45;color:var(--muted);
-  margin:0 0 14px;padding:7px 9px;background:var(--faint);border-left:2px solid var(--rule);border-radius:3px}
+/* A claim about a sample, in the shape of a MediaWiki message box: hairline
+   border, near-white ground, a thick colored bar on the left. It must stay
+   visually unlike .broad below — one describes cards the reader can see and
+   (no backticks in this stylesheet: it is a JS template literal)
+   the other describes cards that are not there — and the ambox/hairline split
+   keeps that distinction while both gain the wiki's own vocabulary. */
+.disclosure{font-size:.75rem;line-height:1.5;color:var(--ink);
+  margin:0 0 14px;padding:7px 10px;background:#fbfbfb;
+  border:1px solid var(--rule-strong);border-left:8px solid #36c}
 /* The references: Wikipedia's own footnotes, at the foot of the section they
    belong to. Small, hanging-numbered, with the marker's number so the prose
    and the notes agree. They floated at the TOP RIGHT of every section until
    2026-08-05, which put a closed fold in the most prominent slot on the page
    and made the prose indent around one line of small caps. */
-.refs{clear:both;margin-top:30px;padding-top:16px;border-top:1px solid var(--rule)}
-.fnlist{list-style:none;margin:0;padding:0;font-family:var(--sans)}
-.fn{display:flex;gap:7px;font-size:.73rem;line-height:1.5;color:#54595d;margin:0 0 9px}
-.fn:target{background:#eaf3ff;outline:4px solid #eaf3ff;border-radius:2px}
-.fn-num{flex:none;min-width:1.7em;text-align:right;color:#8a8f95}
+/* MediaWiki's reflist: 90% of body size, hanging numbers in the link color
+   (the "^" backlink is blue on Wikipedia, and the number is doing that job
+   here), notes tight together. No top rule — the fold's summary already
+   separates it from the prose, and the h2 below starts the next section. */
+.refs{clear:both;margin-top:22px}
+.fnlist{list-style:none;margin:0;padding:0}
+.fn{display:flex;gap:7px;font-size:.9em;line-height:1.5;color:var(--ink);margin:0 0 4px}
+.fn:target{background:#eaf3ff;outline:4px solid #eaf3ff}
+.fn-num{flex:none;min-width:1.7em;text-align:right;color:var(--link)}
 .fn-text{min-width:0;overflow-wrap:break-word}
-.fn-text a{color:var(--link);text-decoration:none}
-.fn-text a:hover{text-decoration:underline}
+.fn-text a{color:var(--link)}
+.fn-text a:visited{color:var(--link-visited)}
 .fn-text cite{font-style:italic}
 /* A book you can actually borrow or read gets a quiet but firm call. */
 .fn-access{white-space:nowrap;font-weight:600}
@@ -1489,14 +1758,21 @@ a:hover > .plate .plate-mark{color:var(--link)}
   padding:10px 20px;text-align:center}
 .stream-cut a{color:#5c4a03;font-weight:600}
 
-.foot{max-width:1180px;margin:0 auto;padding:40px;border-top:1px solid var(--rule);
-  font-family:var(--sans);font-size:.8rem;color:var(--muted)}
-.foot code{background:var(--faint);padding:1px 5px;border-radius:3px}
+/* The site footer, in Vector's own key: inside the content block, above a
+   hairline, small and grey. */
+.foot{max-width:1000px;margin:0 auto;padding:14px 32px 26px;background:var(--paper);
+  border:1px solid var(--rule-strong);border-width:0 1px 1px;
+  font-size:.78rem;line-height:1.6;color:var(--muted)}
+.foot p{margin:0;padding-top:14px;border-top:1px solid var(--rule)}
+.foot code{background:var(--faint);padding:1px 5px}
 
-@media(max-width:900px){main{padding:0 26px}.hero{padding:32px 26px 24px}}
+@media(max-width:900px){main{padding:4px 20px 0}.hero{padding:0 20px 12px}
+  .kicker{margin:0 -20px 18px;padding:9px 20px}.foot{padding:14px 20px 26px}}
 @media(max-width:640px){
-  .hero{padding:26px 20px 20px}
-  main{padding:0 20px}
+  main{padding:4px 14px 0}
+  .hero{padding:0 14px 12px}
+  .kicker{margin:0 -14px 16px;padding:8px 14px}
+  .foot{padding:14px 14px 22px}
   /* Stacked order: the section's best find, the article, the rest of the
      media, then the references. The DOM order already says this, but the
      float has to be undone and the flex order stated so a future DOM change
