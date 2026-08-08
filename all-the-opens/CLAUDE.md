@@ -47,6 +47,13 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   stale `.tapestry` artifacts. Nothing emits them any more — the emitter
   retired to the attic 2026-08-04 with the generator that drove it.
 - `docs/design-plans/`, `docs/implementation-plans/` — design documentation.
+- `docs/adding-a-data-source.md` — the playbook for wiring a new open-data
+  partner into `tapestry-gen`: which of three shapes it fits, every file it
+  touches (not just the pivot registration — the icon, the visibility panel,
+  a test file, the front page), and the order to do it in. Split out of
+  `tapestry-gen/CLAUDE.md` 2026-08-08 (LUI-140) so it can be linked and read
+  on its own; `tapestry-gen/CLAUDE.md`'s own "Adding a data source" section
+  keeps a short pointer plus the shape summary.
 - **Two running logs, appended to as things are found.** Both date every claim
   and show the command that produced it, because these findings decay — an
   undated "partner X blocks us" is worthless within months.

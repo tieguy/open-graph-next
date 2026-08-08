@@ -683,9 +683,8 @@ export function mapEntry(coord, label, osm = null) {
  * the property to `VARS`/`wdqsUrl`'s OPTIONAL clauses, a row to `PROP_NAME`,
  * a fetcher module, and one entry here. It is NOT the list for a partner
  * found by a pair of properties (Smithsonian, below) or reached by search
- * rather than direct id (DPLA/Europeana, in `discover.js`) — see
- * `tapestry-gen/CLAUDE.md`'s "Adding a data source" section for which shape
- * fits.
+ * rather than direct id (DPLA/Europeana/DigitalNZ, in `discover.js`) — see
+ * `docs/adding-a-data-source.md` for which shape fits.
  */
 const MUSEUM_PIVOTS = [
   { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },

@@ -541,10 +541,10 @@ export function canonicalTitle(title) {
  * A partner reached by SEARCH rather than by direct object id: an anchor
  * states one property (a subject heading, an entity id), the partner is
  * asked to look things up FILED UNDER that value, and what comes back is a
- * sample of a shelf rather than the shelf's own record. DPLA and Europeana
- * are the two live cases and share this whole shape — see `tapestry-gen/
- * CLAUDE.md`'s "Adding a data source" section for how this differs from the
- * direct-id shape in `statements.js`'s `MUSEUM_PIVOTS`.
+ * sample of a shelf rather than the shelf's own record. DPLA, Europeana and
+ * DigitalNZ are the three live cases and share this whole shape — see
+ * `docs/adding-a-data-source.md` for how this differs from the direct-id
+ * shape in `statements.js`'s `MUSEUM_PIVOTS`.
  *
  * `spec.fetch` may resolve to null (DPLA does, when the LC heading lookup
  * itself fails); a spec whose fetch never returns null is unaffected by the
