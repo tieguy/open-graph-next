@@ -771,11 +771,13 @@ card with no visual is just a link, and links are already inline).
 **Full playbook: `../docs/adding-a-data-source.md`.** Not config-driven, and a
 full audit concluded it shouldn't try to be: every partner still needs its own
 fetcher and its own rights mapping, so a registry can remove wiring
-duplication but not the partner-specific knowledge. That document covers the
-complete checklist — every file a new source touches, not just the pivot
-registration — and is written to stand alone for a reader who has not read the
-rest of this file. The shape summary below is kept here too, because it is
-what most changes actually need and this file is what loads automatically:
+duplication but not the partner-specific knowledge. That document is the one
+to open before adding a partner. It carries the nine-file checklist (the
+pivot is one of the nine — `icons.js`, `dedup.js`, `gap.js` and the rest are
+the ones that get forgotten), eleven pitfalls each with the commit or command
+behind it, and the commentary half. The shape summary below is kept here too,
+because it is what most changes actually need and this file is what loads
+automatically:
 
 1. **Direct-id shape** — the object is named by ONE Wikidata property, bound
    straight to a WDQS var. `MUSEUM_PIVOTS` in `src/statements.js` is the
