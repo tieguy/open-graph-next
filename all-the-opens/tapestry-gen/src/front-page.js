@@ -66,7 +66,13 @@ const SHOWCASE = [
 // statement it rests on. Only added where the page has actually been read;
 // an unlinked license line means nobody has verified one yet, NOT that the
 // partner publishes nothing.
+// Grouped since 2026-08-08, when the sixteenth friend made one long run of
+// cards unreadable. The groups are reading aids, not taxonomy — a friend that
+// could live in two (IIIF serves libraries too) sits where a first-time
+// reader would look for it, and the group line makes no claim a card
+// doesn't.
 const FRIENDS = [
+  { group: 'Books and papers', friends: [
   ['internet_archive', 'Internet Archive',
     'Lends the books. A footnote’s ISBN becomes a copy you can borrow.',
     'Public-domain scans free to read; in-copyright books lent, not copied.'],
@@ -82,6 +88,8 @@ const FRIENDS = [
     // Their license help page: the submitter picks a license per paper and the
     // choice is irrevocable, which is the half of our claim that matters here.
     'https://arxiv.org/help/license'],
+  ]},
+  { group: 'Museums and image collections', friends: [
   ['met', 'The Met',
     'Publishes its own record of each object it holds.',
     'Public-domain works released CC0, images included.'],
@@ -101,6 +109,20 @@ const FRIENDS = [
   ['iiif', 'IIIF collections',
     'A shared protocol: manuscripts and artworks served by whichever institution holds them.',
     'Terms set per object by its holding institution, stated in each manifest.'],
+  ['smithsonian', 'the Smithsonian',
+    'Nineteen museums, and 3D scans you can turn around of things like the Apollo 11 command module.',
+    'Open Access items are CC0: no rights reserved at all.',
+    // NOT si.edu's own announcement of the release, which would be the better
+    // citation: www.si.edu is challenge-gated, and a real page and an invented
+    // one come back indistinguishable (46,677 vs 46,728 bytes of "Smithsonian
+    // request verification", 2026-08-06), so it cannot be verified from here.
+    // This is the Smithsonian's own Open Access data repository, which states
+    // CC0-1.0 as its licence and which does resolve — 200 for the repo, 404 for
+    // one that does not exist. A claim we can check beats a better-worded one
+    // we cannot. See LUI-128.
+    'https://github.com/Smithsonian/OpenAccess'],
+  ]},
+  { group: 'Union catalogs', friends: [
   ['dpla', 'DPLA',
     'A union catalog of tens of millions of items from US libraries, archives and museums.',
     'Metadata CC0; each item’s rights stated by its holder.'],
@@ -109,7 +131,15 @@ const FRIENDS = [
     'Only openly licensed items are shown; each card names its license.'],
   ['digitalnz', 'DigitalNZ',
     'More than 150 New Zealand libraries, archives and museums, searchable together.',
-    'Each item states in plain words what a reader may do with it; a card claims no more than its record states.'],
+    'Each item states in plain words what a reader may do with it — but the API’s metadata is non-commercial by default; see the challenges list below.',
+    // Their Developer API terms, read 2026-08-08 (via the Wayback Machine —
+    // the live page challenge-gates non-browser clients): metadata is NC by
+    // default, a keyed commercial track covers "a selection", and the
+    // open-license carve-out names only Europeana, DPLA and data.govt.nz —
+    // not the NZ collections themselves.
+    'https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use'],
+  ]},
+  { group: 'The living world and the map', friends: [
   ['inaturalist', 'iNaturalist',
     'Photographs of species taken by naturalists, each credited to the observer.',
     'Each photo carries its observer’s chosen license; only openly licensed ones are shown here.'],
@@ -124,21 +154,12 @@ const FRIENDS = [
     'Map data ODbL: share-alike, credit the contributors.',
     // Says share-alike and credit in almost the same words we do.
     'https://www.openstreetmap.org/copyright'],
+  ]},
+  { group: 'The public record', friends: [
   ['free_law', 'Free Law Project',
     'Publishes court opinions in full, free to read.',
     'Court opinions are public domain: nobody owns the law.'],
-  ['smithsonian', 'the Smithsonian',
-    'Nineteen museums, and 3D scans you can turn around of things like the Apollo 11 command module.',
-    'Open Access items are CC0: no rights reserved at all.',
-    // NOT si.edu's own announcement of the release, which would be the better
-    // citation: www.si.edu is challenge-gated, and a real page and an invented
-    // one come back indistinguishable (46,677 vs 46,728 bytes of "Smithsonian
-    // request verification", 2026-08-06), so it cannot be verified from here.
-    // This is the Smithsonian's own Open Access data repository, which states
-    // CC0-1.0 as its licence and which does resolve — 200 for the repo, 404 for
-    // one that does not exist. A claim we can check beats a better-worded one
-    // we cannot. See LUI-128.
-    'https://github.com/Smithsonian/OpenAccess'],
+  ]},
 ]
 
 // Wikimedia Commons is deliberately not on this list (2026-08-04). It is not
@@ -170,8 +191,7 @@ export function frontPage({ inline = new Map() } = {}) {
   <span class="watch">${escapeHtml(c.watch)}</span>
 </a>`,
   ).join('\n')
-  const friends = FRIENDS.map(
-    ([slug, name, gift, lic, licHref]) => `<div class="friend">
+  const friendCard = ([slug, name, gift, lic, licHref]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
   <p class="lic"><span class="lic-mark">openness?</span> ${escapeHtml(lic)}${
@@ -179,7 +199,13 @@ export function frontPage({ inline = new Map() } = {}) {
       ? ` <a class="lic-src" href="${escapeHtml(licHref)}">in their words</a>`
       : ''
   }</p>
-</div>`,
+</div>`
+  // Group headings are full-width rows INSIDE the one grid, so the card
+  // columns stay aligned from group to group instead of each group finding
+  // its own widths.
+  const friends = FRIENDS.map(
+    ({ group, friends: list }) =>
+      `<h3 class="friends-cat">${escapeHtml(group)}</h3>\n${list.map(friendCard).join('\n')}`,
   ).join('\n')
 
   return `<!doctype html>
@@ -247,6 +273,9 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
   max-width:38ch}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
+.friends-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;
+  text-transform:uppercase;color:var(--muted);font-weight:700;margin:34px 0 6px}
+.friends-cat:first-child{margin-top:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
 .friend .who{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:700;
   font-size:1rem;color:var(--head);margin:0 0 8px}
@@ -394,6 +423,15 @@ ${friends}
         may do, and “nobody knows” satisfies no one. The durable fix is rights-clearing work of the
         kind CopyClear and Dominio Público en América Latina do on Wikidata; a demo can only keep
         the question visible.</p>
+        <h4>Terms on the pipes, not just the items</h4>
+        <p>An item can be openly licensed while the API that serves its record is not. DigitalNZ is
+        the first example here: its developer terms make API metadata non-commercial by default,
+        with a separate keyed track for commercial use that covers only a selection — and the
+        carve-out for already-open metadata names Europeana, DPLA and data.govt.nz, not the New
+        Zealand collections themselves. This site is non-commercial and sits inside those terms.
+        But each friend added makes this ledger longer, and any route Wikipedia itself could adopt
+        — or any commercial reuse of this approach — has to clear every line of it. The terms of
+        the pipe are becoming as much of the challenge as the license on the item.</p>
         <h4>Bot volume and caching</h4>
         <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
         likely need extensive caching and likely formal agreements with the other data providers.</p>

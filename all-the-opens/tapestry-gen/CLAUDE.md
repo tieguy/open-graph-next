@@ -784,6 +784,17 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   spec), and `api_key=` with an empty or bogus value is a **403** — keyless
   means omitting the parameter. No published numeric rate limit, so
   `hostLimit()` stays at the default 1.
+  **The API's metadata terms are NON-COMMERCIAL by default** (Developer API
+  terms read 2026-08-08 — via the Wayback Machine, because the live page
+  challenge-gates non-browser clients; capture 2026-05-05). A separate keyed
+  commercial track exists ("get in touch", covers "only a selection of
+  DigitalNZ metadata"), and the terms' carve-out for metadata with existing
+  open licenses names Europeana (CC0), DPLA (CC0) and data.govt.nz (CC BY 3.0
+  NZ) — i.e. sources this demo already reads directly — **not the NZ
+  collections themselves**. This demo is non-commercial and sits inside the
+  default terms; the general pattern (open items behind non-open API terms)
+  is flagged on the front page's challenges list as "Terms on the pipes, not
+  just the items", and DigitalNZ's FRIENDS entry links the terms.
   The rights mapping deliberately does not glyph DigitalNZ's own
   `Share`/`Modify`/`Use commercially` rollup — see the partner audit table
   above.
