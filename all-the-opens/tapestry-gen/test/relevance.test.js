@@ -373,3 +373,121 @@ test('reordering the lede changes which section owns an anchor, and the lede win
   assert.deepEqual(owned[1], ['Q186499'])
   assert.deepEqual(owned[2], ['Q5095587'])
 })
+
+// --- corroboration: about the article, or about one thing it mentions -------
+
+import { anchorsTouched, corroborated, nameTokens, subjectNamesAnchor, topicSpace } from '../src/relevance.js'
+
+// The Apollo 11 topic space, abridged: LC-bearing anchors and their labels,
+// exactly what topicSpace() builds from the maps a band already holds.
+const TOPIC = [
+  { qid: 'Q2252', name: 'Buzz Aldrin', place: false },
+  { qid: 'Q1615', name: 'Neil Armstrong', place: false },
+  // The Moon's P625 is on the lunar globe, which parseEarthPoint refuses —
+  // so it is NOT a place here, and stays the best corroborator on the page.
+  { qid: 'Q405', name: 'Moon', place: false },
+  { qid: 'Q5916', name: 'Spaceflight', place: false },
+  { qid: 'Q11631', name: 'Astronaut', place: false },
+  { qid: 'Q131626', name: 'Smithsonian Institution', place: true },
+  { qid: 'Q1297', name: 'Chicago', place: true },
+  { qid: 'Q30', name: 'United States', place: true },
+  { qid: 'Q61', name: 'Washington, D.C.', place: true },
+]
+
+test('nameTokens folds case, punctuation, diacritics and plurals', () => {
+  assert.deepEqual(nameTokens('Armstrong, Neil Alden, 1930-2012'), [
+    'armstrong', 'neil', 'alden', '1930', '2012',
+  ])
+  assert.deepEqual(nameTokens('Astronauts'), ['astronaut'])
+  // A ligature is not a combining mark, so œ splits the token — a known
+  // limit, harmless because both sides of every comparison fold the same way.
+  assert.deepEqual(nameTokens('Cœdès, George'), ['c', 'des', 'george'])
+  assert.deepEqual(nameTokens(null), [])
+})
+
+test('a subject names an anchor when the anchor’s tokens are inside it, in any order', () => {
+  // The NZ partners' own fuller form — 'Alden' appears in LC's record only as
+  // a fullerName, so exact-form matching can never connect these two.
+  assert.ok(subjectNamesAnchor('Armstrong, Neil Alden, 1930-2012', 'Neil Armstrong'))
+  assert.ok(subjectNamesAnchor('Aldrin, Buzz', 'Buzz Aldrin'))
+  assert.ok(subjectNamesAnchor('Moon--Exploration', 'Moon'))
+})
+
+test('compounding works both ways: “Space flight” names Spaceflight and vice versa', () => {
+  assert.ok(subjectNamesAnchor('Space flight', 'Spaceflight'))
+  assert.ok(subjectNamesAnchor('Spaceflight', 'Space flight'))
+  assert.ok(subjectNamesAnchor('Space flight to the moon', 'Spaceflight'))
+})
+
+test('a near-miss is not a match: Apollo 12 does not name Apollo 11', () => {
+  assert.ok(!subjectNamesAnchor('Apollo 12 (Spacecraft)', 'Apollo 11'))
+  assert.ok(!subjectNamesAnchor('', 'Moon'))
+  assert.ok(!subjectNamesAnchor('Moon', ''))
+})
+
+test('the Turnbull moon-landing photo corroborates: its subjects touch the article past its own anchor', () => {
+  // Verbatim from the live record under "Aldrin, Buzz" (2026-08-08).
+  const subjects = ['Moon', 'Space flight', 'Aldrin, Buzz', 'Spaceships', 'Astronauts']
+  const touched = anchorsTouched(subjects, TOPIC).map((t) => t.name)
+  assert.ok(touched.includes('Moon'))
+  assert.ok(touched.includes('Spaceflight'))
+  assert.ok(touched.includes('Astronaut'))
+  assert.ok(corroborated(subjects, TOPIC, 'Q2252'))
+})
+
+test('the lunch box does not: about its anchor, about the article nowhere', () => {
+  // The record filed under "Smithsonian Institution" whose subjects touch
+  // Apollo 11's article at exactly one point — the anchor that fetched it.
+  assert.ok(!corroborated(['Smithsonian Institution', 'Lunch boxes'], TOPIC, 'Q131626'))
+  // And an anchor's own touch never counts for another shelf either.
+  assert.ok(!corroborated(['Chicago (Ill.)'], TOPIC, 'Q1297'))
+})
+
+test('topicSpace takes every LC-bearing anchor with a label, and marks the Earthbound as places', () => {
+  const statements = new Map([
+    // The Moon: coordinates on another globe, which is not a place here.
+    ['Q405', { lc: 'sh85087107', coord: '<http://www.wikidata.org/entity/Q405> Point(0 0)' }],
+    ['Q2252', { lc: 'n88056905' }],
+    ['Q61', { lc: 'n79018774', coord: 'Point(-77.03 38.9)' }],
+    ['Q_nolc', { met: '123', coord: 'Point(1 2)' }],
+    ['Q_nolabel', { lc: 'n00000000' }],
+  ])
+  const labels = new Map([
+    ['Q405', 'Moon'],
+    ['Q2252', 'Buzz Aldrin'],
+    ['Q61', 'Washington, D.C.'],
+    ['Q_nolc', 'A Museum Piece'],
+  ])
+  assert.deepEqual(topicSpace(statements, labels), [
+    { qid: 'Q405', name: 'Moon', place: false },
+    { qid: 'Q2252', name: 'Buzz Aldrin', place: false },
+    { qid: 'Q61', name: 'Washington, D.C.', place: true },
+  ])
+})
+
+test('the article’s own subject corroborates even when it is a place', () => {
+  // Angkor Wat's page: a record filed under "Cambodia" whose subjects also
+  // state the temple is about the article, coordinates and all.
+  const statements = new Map([
+    ['Q43473', { lc: 'sh85004955', coord: 'Point(103.86 13.41)' }],
+    ['Q424', { lc: 'n80014970', coord: 'Point(104.9 12.5)' }],
+  ])
+  const labels = new Map([
+    ['Q43473', 'Angkor Wat'],
+    ['Q424', 'Cambodia'],
+  ])
+  const topic = topicSpace(statements, labels, { subjectQid: 'Q43473' })
+  assert.deepEqual(topic.find((t) => t.qid === 'Q43473'), { qid: 'Q43473', name: 'Angkor Wat', place: false })
+  assert.ok(corroborated(['Cambodia', 'Angkor Wat (Angkor)'], topic, 'Q424'))
+  // ...while Cambodia alone — the own anchor plus nothing — does not.
+  assert.ok(!corroborated(['Cambodia'], topic, 'Q424'))
+})
+
+test('places don’t corroborate: the survivors of the first version stay dead', () => {
+  // Verbatim subject lists from the records that corroborated through
+  // places before the place rule existed (2026-08-08).
+  const hamas = ['Bush, George Walker, 1946-', 'Hamas', 'Elections', 'United States', 'White House (Washington, D.C.)']
+  assert.ok(!corroborated(hamas, TOPIC, 'Q61'))
+  const holyoake = ['Holyoake, Keith Jacka (Sir), 1904-1983', 'Johnson, Lyndon Baines, 1908-1973', 'New Zealand', 'United States', 'Washington (D.C.)']
+  assert.ok(!corroborated(holyoake, TOPIC, 'Q_lbj'))
+})

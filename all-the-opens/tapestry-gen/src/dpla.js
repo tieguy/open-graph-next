@@ -13,6 +13,7 @@
 
 import { getHeader, getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
+import { corroborated } from './relevance.js'
 
 export const DPLA_PER_ANCHOR = 4
 
@@ -99,7 +100,11 @@ export function dplaUrl(heading, key) {
   return (
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
     `"${encodeURIComponent(heading)}"` +
-    '&fields=id,sourceResource.title,dataProvider,object,isShownAt,sourceResource.rights,rights' +
+    // `sourceResource.subject` bare is "not an allowable value for 'fields'"
+    // (a bad_request that costs the whole shelf) — the projection wants the
+    // leaf, and flattens it to a string when a record has one subject and an
+    // array when it has several. Verified live 2026-08-08.
+    '&fields=id,sourceResource.title,sourceResource.subject.name,dataProvider,object,isShownAt,sourceResource.rights,rights' +
     `&page_size=${DPLA_FETCH_WINDOW}&api_key=${key}`
   )
 }
@@ -250,23 +255,44 @@ export function dplaEntryFrom(doc, heading, anchorLabel) {
       `for ${anchorLabel ?? 'this'}`,
     topic: anchorLabel ?? heading,
     _via: 'P244',
+    // The record's own subject headings, for the corroboration test only —
+    // never rendered. The flattened projection is a bare string for a
+    // single-subject record, an array for the rest.
+    _subjects: [doc['sourceResource.subject.name'] ?? []]
+      .flat()
+      .filter((s) => typeof s === 'string'),
   }
 }
 
 /**
  * Items DPLA's partners cataloged under an anchor's authorized heading.
+ *
+ * `ctx` is the corroboration context (src/relevance.js). When present and
+ * the anchor is not the article's own subject, records whose subjects touch
+ * the article nowhere beyond this anchor are dropped BEFORE ranking — they
+ * are about the anchor, not about the article, and ranking cannot rescue
+ * them because their titles were never going to share the anchor's tokens.
+ * LUI-144's "reorders and dedupes; never filters" rule is about the
+ * DENOMINATOR, and it stands: `total` is untouched, the shelf still says
+ * "N of 60", and 60 is still true. What changed is that the sample is now
+ * chosen from the records that connect to the article, and a heading none
+ * of whose fetched records connect yields no shelf at all.
  * @returns {{entries: object[], total: number, heading: string}|null}
  */
-export async function dplaEntries(lcId, anchorLabel, key) {
+export async function dplaEntries(lcId, anchorLabel, key, ctx) {
   const heading = await lcHeading(lcId)
   if (!heading) return null
   const body = await getJson(dplaUrl(heading, key))
   const docs = body.docs ?? []
-  // Map, fold exact repeats, then rank and cap. `total` is the heading's own
-  // count and is deliberately NOT the number ranked over: the shelf says "4 of
-  // 60", and 60 is how many DPLA holds, not how many rows this request read.
-  const all = uniqueEntries(docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean))
-  const entries = rankDplaEntries(all, { heading, anchorLabel })
+  // Map, corroborate, fold exact repeats, then rank and cap. `total` is the
+  // heading's own count and is deliberately NOT the number ranked over: the
+  // shelf says "4 of 60", and 60 is how many DPLA holds, not how many rows
+  // this request read.
+  let all = docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean)
+  if (ctx?.topic && !ctx.isSubject) {
+    all = all.filter((e) => corroborated(e._subjects, ctx.topic, ctx.ownQid))
+  }
+  const entries = rankDplaEntries(uniqueEntries(all), { heading, anchorLabel })
   return { heading, total: body.count ?? docs.length, entries }
 }
 

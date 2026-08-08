@@ -34,8 +34,19 @@
 import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
 import { lcLabels } from './lc.js'
+import { corroborated } from './relevance.js'
 
 export const DIGITALNZ_PER_ANCHOR = 4
+
+/**
+ * How many rows the one request asks for, so the corroboration test
+ * (src/relevance.js) has records to choose among — DPLA_FETCH_WINDOW's
+ * pattern, at DigitalNZ's scale. Same request count, bigger body. With
+ * `per_page=4` a heading whose first four records were about the anchor but
+ * not the article yielded either junk or nothing, while corroborable records
+ * sat on rows five through nine.
+ */
+export const DIGITALNZ_FETCH_WINDOW = 20
 
 /** The subject-filter query for a set of heading forms; key omitted when absent. */
 export function digitalnzUrl(forms, key) {
@@ -44,7 +55,7 @@ export function digitalnzUrl(forms, key) {
     'https://api.digitalnz.org/v3/records.json?' +
     filters +
     '&fields=id,title,content_partner,landing_url,thumbnail_url,large_thumbnail_url,usage,subject' +
-    `&per_page=${DIGITALNZ_PER_ANCHOR}` +
+    `&per_page=${DIGITALNZ_FETCH_WINDOW}` +
     (key ? `&api_key=${key}` : '')
   )
 }
@@ -156,14 +167,29 @@ export function digitalnzEntryFrom(record, heading, anchorLabel) {
     why: `Filed under “${heading}” — the heading this record’s own catalog entry states for ${anchorLabel ?? 'this subject'}`,
     topic: anchorLabel ?? heading,
     _via: 'P244',
+    // The record's own subject list, for the corroboration test only —
+    // never rendered.
+    _subjects: Array.isArray(record?.subject) ? record.subject.filter((s) => typeof s === 'string') : [],
   }
 }
 
 /**
  * Items DigitalNZ's partners cataloged under an anchor's LC heading forms.
+ *
+ * `ctx` is the corroboration context (src/relevance.js): unless this anchor
+ * is the article's own subject, a record must touch the article at least
+ * once beyond it or it does not become a card. This is what keeps New
+ * Zealand's holdings honest on articles about everywhere else — the anchors
+ * "Soviet Union", "Tokyo" and "Smithsonian Institution" all genuinely
+ * appear in Apollo 11, and DigitalNZ genuinely holds items filed under each,
+ * and none of Trotsky's May Day address, Empire Day in Japan or a Fraggle
+ * Rock lunch box belongs on that page. The Turnbull moon-landing photos
+ * pass the same test on their own subjects: "Moon", "Space flight",
+ * "Astronauts" are all anchors of that article. `total` stays the heading's
+ * own count either way — the filter chooses the sample, never the number.
  * @returns {{entries: object[], total: number, heading: string}|null}
  */
-export async function digitalnzEntries(lcId, anchorLabel, key) {
+export async function digitalnzEntries(lcId, anchorLabel, key, ctx) {
   const labels = await lcLabels(lcId)
   if (!labels) return null
   const forms = [labels.heading, ...labels.variants]
@@ -172,8 +198,10 @@ export async function digitalnzEntries(lcId, anchorLabel, key) {
   const entries = []
   let heading = null
   for (const record of results) {
+    if (entries.length >= DIGITALNZ_PER_ANCHOR) break
     const form = subjectMatch(record, forms)
     if (!form) continue
+    if (ctx?.topic && !ctx.isSubject && !corroborated(record.subject, ctx.topic, ctx.ownQid)) continue
     heading ??= form
     const entry = digitalnzEntryFrom(record, form, anchorLabel)
     if (entry) entries.push(entry)

@@ -733,12 +733,20 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   count, bigger body) and the pick is scored locally: `2 x` distinct
   anchor/heading tokens in the title, `+1` for a thumbnail, ties broken by
   DPLA's own order.
-  **It reorders and dedupes; it never filters** — `total` stays the heading's
-  own count, so "4 of 60" stays true. That is why `q=` was rejected rather than
-  adopted: `q="Neil Armstrong"` cuts the count 60 → 23, silently shrinking a
-  denominator this project prints on every shelf, and still ranked "Bussed
-  balloonist" fourth. Worst case, where no title shares a token, every score is
-  0 or 1 and the order is DPLA's own — no worse than before.
+  **The denominator is a promise; the sample is a judgment** (the LUI-144
+  rule as revised 2026-08-08). `total` stays the heading's own count, always —
+  that is why `q=` was rejected: `q="Neil Armstrong"` cuts the count 60 → 23,
+  silently shrinking a denominator this project prints on every shelf, and
+  still ranked "Bussed balloonist" fourth. But the sample itself is now
+  FILTERED as well as ranked: records failing the corroboration test (next
+  bullet) never reach the ranker, and "4 of 60" stays true because 60 never
+  moves. Worst case, where no title shares a token, every score is 0 or 1 and
+  the order is DPLA's own.
+  **The subject field rides the same request** (2026-08-08): the fields
+  projection wants the LEAF, `sourceResource.subject.name` — the bare
+  `sourceResource.subject` is a `bad_request` that costs the whole shelf, and
+  the flattened value is a bare string for single-subject records and an
+  array otherwise. Verified live; see `dplaUrl`.
   **Dedup is part of the same fix, not a tidy-up.** Those 60 items hold only 42
   distinct title-prefixes (one group repeats **ten** times), so ranking alone
   would have filled the shelf with four copies of one ceremony photograph — a
@@ -769,6 +777,66 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   header rides a 303 whose target LC's CDN refuses to non-browser clients.
   (3) `api.dp.la` runs 4 at a time; `id.loc.gov` stays at 1. See the partner
   limits section under Wikimedia compliance for why those two differ.
+- **Corroboration** (`src/relevance.js`, 2026-08-08, out of LUI-145's Apollo
+  11 review) — the second gate on every search-shape shelf, answering a
+  question the breadth gate cannot: not "is this anchor a box?" but **"is
+  this record about the article, or merely about one thing the article
+  mentions?"** The strict subject match makes every card's claim TRUE — the
+  record really is filed under that heading — and Apollo 11 proved truth is
+  not relevance: a Fraggle Rock lunch box under "Smithsonian Institution",
+  Trotsky under "Soviet Union", iPhone cartoons under "Adam (Biblical
+  figure)". Every anchor genuinely in the article, every shelf genuinely
+  about its anchor, none of it about Apollo 11.
+  **Why `tooBroad` missed it, and always will**: its threshold is an absolute
+  item count, and an absolute count is partner-relative. DPLA holds tens of
+  thousands under "New York (N.Y.)" — folded to a sentence; DigitalNZ holds
+  eleven — four junk cards sailed under the gate. And within DigitalNZ no
+  threshold exists: the good shelves (Aldrin 9, Apollo 11 14) and the junk
+  (Chicago 5, Tokyo 5, New York 11) have the same counts. The count proxies
+  "anchor is a box" only when the partner's catalog is large and local to
+  the article's geography; a distant partner breaks it in both directions.
+  This is what "the DigitalNZ results on Apollo 11 are bad" turned out to
+  mean, and the fix is deliberately NOT a geographic gate on the partner —
+  per the generalization value, one mechanism for every search-shape source.
+  **The rule**: a record earns its card only if its own subject field touches
+  the article at least once BEYOND the anchor that fetched it. The topic
+  space is every candidate anchor holding an LC authority, with its label
+  (`topicSpace`, built from maps each band already holds — deterministic, so
+  byte-reproducibility survives). Matching is normalized token containment
+  (`subjectNamesAnchor`): loose enough to catch "Armstrong, Neil Alden,
+  1930-2012" against the label "Neil Armstrong" — a form LC's record carries
+  only as a fullerName — and honest because corroboration is an internal
+  filter, never a printed claim; the card still prints only the verified
+  heading. The Turnbull moon-landing photos pass on "Moon", "Space flight",
+  "Astronauts"; the lunch box touches the article exactly once and dies.
+  **Places don't corroborate** — measured into the rule the same day: every
+  junk record that survived the first version had corroborated through a
+  place ("White House", "Japan", "United States"). A place subject says
+  where, not what. `place` is "has an Earth coordinate" via the same
+  `parseEarthPoint` the map cards use — so the Moon, whose P625 is lunar,
+  remains the best corroborator on the Apollo page. Two exemptions: the
+  article's own subject corroborates even as a place (a record touching
+  Angkor Wat on the Angkor Wat page IS about the article), and subject-anchor
+  shelves skip the test entirely, same as `tooBroad`.
+  **A shelf with no corroborated records is skipped whole** — no cards, no
+  sample line. "0 of 48" would dress an absence as a disclosure.
+  **What it costs, measured 2026-08-08**: the labels request widens to every
+  LC-bearing candidate (~1 extra batched wbgetentities per page; both label
+  promises already waited on the partners map, so nothing waits longer), and
+  DigitalNZ reads a 20-row window (`DIGITALNZ_FETCH_WINDOW`) instead of 4 —
+  same request count. What it trades, deliberately: pages get sparser, and
+  shelves must now be about the article, not about something it mentions.
+  Angkor Wat's DPLA went 40 → 22 cards and the survivors read curated
+  (Vishnu, Brahma, Theravāda, Khmer language, graywacke); Yeates kept his
+  Turnbull hero and lost the tangential Massey/Taranaki shelves; Prandtl
+  lost the Auckland "Kick Hitler" WWII pennants. What still passes, known
+  and accepted at the LUI-144 trade level: records tangential to the
+  article but genuinely connected through a non-place anchor — NZ Obama
+  cartoons ride the anniversary section's Obama link, a Tokyo bus thesis
+  rides "fuel cell". Europeana does not read the context yet: its records
+  arrive entity-linked rather than heading-searched, so its relevance
+  failure mode is different, and opting it in is a field mapping plus
+  `_subjects`, not new machinery.
 - **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
   through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
@@ -809,6 +877,15 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   under"; per VALUES.md's generalization principle it is filed to be
   explored ACROSS sources or not at all — see the loose-match Linear issue —
   not hacked in for one partner.
+  **Strict-about-the-anchor turned out not to mean relevant-to-the-article**
+  (2026-08-08, the Apollo 11 review): every card was true and a third of
+  them were junk. The corroboration gate under Partner pivots is the answer,
+  and it is shared with DPLA, not DigitalNZ-specific. Same day, `src/lc.js`
+  stopped hardcoding `/authorities/names/` — topical anchors (sh ids: Moon,
+  Astronauts, Space flight) had been 404ing silently and getting fact-cached
+  as null, so the pivot never fired on a topical heading; they now branch to
+  `/authorities/subjects/` via `lcBranch`, and a pre-fix cache may hold
+  stale nulls for sh ids (deleting `.cache/` is, as ever, the whole reset).
   **A key is optional, unlike DPLA/Europeana**: the v3 API answers keyless
   (verified), `DIGITALNZ_API_KEY` rides along when set (`keyOptional` in the
   spec), and `api_key=` with an empty or bogus value is a **403** — keyless

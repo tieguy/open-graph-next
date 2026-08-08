@@ -18,6 +18,7 @@
 // what makes this affordable.
 
 import { getJson, readFacts, writeFacts } from './http.js'
+import { lcBranch } from './dpla.js'
 
 const PREF = 'http://www.w3.org/2004/02/skos/core#prefLabel'
 const ALT = 'http://www.w3.org/2004/02/skos/core#altLabel'
@@ -33,7 +34,7 @@ export function lcLabelsFromGraph(graph, id) {
   // real-world thing it names) and which comes first varies per record. The
   // same coin flip cost `lcHeadingFromGraph` 8 of 14 sampled ids before its
   // 2026-08-05 fix.
-  const uri = `http://id.loc.gov/authorities/names/${id}`
+  const uri = `http://id.loc.gov/authorities/${lcBranch(id)}/${id}`
   const record = (Array.isArray(graph) ? graph : []).find((n) => n['@id'] === uri)
   if (!record) return null
   const value = (v) => (v && typeof v === 'object' ? v['@value'] : v)
@@ -49,13 +50,20 @@ export function lcLabelsFromGraph(graph, id) {
  * error that costs the page.
  *
  * A PERMANENT failure is cached as a null fact, because `getJson` caches only
- * bodies and a P244 value that is not a name authority (a subject id lives
- * under `/authorities/subjects/`, not `/names/`) would otherwise re-404 on
+ * bodies and a retracted or malformed P244 value would otherwise re-404 on
  * every render — the one host this repo promises to ask about once ever.
  * Found live on the Yeates fixture: one warm re-render still made exactly
  * one id.loc.gov request. Same rule as the class walk's "reaches nothing is
  * a real answer, or it is re-asked forever." Transient failures (timeouts,
  * 5xx) stay uncached and are retried next run.
+ *
+ * Topical ids (sh…) branch to `/authorities/subjects/` via `lcBranch`, the
+ * same routing `lcHeading` already does. Until 2026-08-08 this module
+ * hardcoded `/names/`, so every topical anchor — Moon, Astronauts, Space
+ * flight — 404ed silently and was fact-cached as null: the DigitalNZ pivot
+ * never fired on a topical heading at all, and nobody saw it fail. A stale
+ * null for an sh id may linger in a pre-fix cache; deleting `.cache/` is,
+ * as ever, the whole reset.
  */
 export async function lcLabels(id) {
   try {
@@ -63,7 +71,7 @@ export async function lcLabels(id) {
     if (known.has(id)) return known.get(id)
     let labels = null
     try {
-      labels = lcLabelsFromGraph(await getJson(`https://id.loc.gov/authorities/names/${id}.json`), id)
+      labels = lcLabelsFromGraph(await getJson(`https://id.loc.gov/authorities/${lcBranch(id)}/${id}.json`), id)
     } catch (e) {
       if (!e.permanent) return null
     }

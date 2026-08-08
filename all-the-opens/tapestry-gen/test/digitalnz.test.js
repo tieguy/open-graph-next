@@ -26,7 +26,10 @@ test('digitalnzUrl asks the subject filter for every LC form, keyless by omissio
   assert.match(url, /or\[subject\]\[\]=Yeates%2C%20John%20Stuart%2C%201900-1986/)
   // The record's own subject field rides back for the strict per-record check.
   assert.match(url, /fields=[^&]*subject/)
-  assert.match(url, /per_page=4/)
+  // The window is wider than the shelf (DIGITALNZ_FETCH_WINDOW vs
+  // DIGITALNZ_PER_ANCHOR) so the corroboration test has records to choose
+  // among — same request count, bigger body, DPLA's own pattern.
+  assert.match(url, /per_page=20/)
   // `api_key=` with an empty value is a 403 (verified 2026-08-08) — keyless
   // means the parameter is ABSENT, never empty.
   assert.ok(!url.includes('api_key'))

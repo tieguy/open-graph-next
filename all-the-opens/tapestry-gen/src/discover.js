@@ -66,6 +66,7 @@ import { rijksEntry } from './rijks.js'
 import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
 import { claimAnchors, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
+import { topicSpace } from './relevance.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -550,9 +551,18 @@ export function canonicalTitle(title) {
  * `spec.fetch` may resolve to null (DPLA does, when the LC heading lookup
  * itself fails); a spec whose fetch never returns null is unaffected by the
  * check.
+ *
+ * The fourth argument to `spec.fetch` is the corroboration context —
+ * `{topic, ownQid, isSubject}`, see src/relevance.js — with which a fetcher
+ * may drop records that are about the anchor but touch the article nowhere
+ * else. DPLA and DigitalNZ read it; a fetcher that ignores it (Europeana,
+ * whose records arrive entity-linked rather than heading-searched) behaves
+ * exactly as before. A hit whose entries all failed corroboration is skipped
+ * whole: no cards, no sample line — the shelf's absence IS the verdict, and
+ * a "0 of 48" sentence would dress it as a disclosure.
  */
 async function bandPropertyPivot(
-  { unit, extras, statementQids, statements, labels, entries, stats, samples, broad },
+  { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic },
   spec,
 ) {
   // `keyOptional` marks a partner whose API answers keyless requests
@@ -567,7 +577,11 @@ async function bandPropertyPivot(
   for (const { id, label, qid } of anchored) {
     const isSubject = unit.index === '0' && qid === extras?.subjectQid
     try {
-      const hit = await spec.fetch(id, label, process.env[spec.envKey])
+      const hit = await spec.fetch(id, label, process.env[spec.envKey], {
+        topic,
+        ownQid: qid,
+        isSubject,
+      })
       if (!hit) continue
       if (tooBroad(hit.total, { isSubject })) {
         broad.push(
@@ -575,6 +589,7 @@ async function bandPropertyPivot(
         )
         continue
       }
+      if (!hit.entries.length) continue
       for (const e of hit.entries) {
         if (isSubject) e.standing = 'subject-record'
         e.trace = spec.trace(label, qid, hit)
@@ -601,7 +616,7 @@ const DPLA_PIVOT = {
   field: 'lc',
   property: 'P244',
   statsKey: 'dpla',
-  fetch: (lc, label, key) => dplaEntries(lc, label, key),
+  fetch: (lc, label, key, ctx) => dplaEntries(lc, label, key, ctx),
   browseUrl: (hit) => dplaBrowseUrl(hit.heading),
   broadExtra: (hit) => ({ heading: hit.heading }),
   trace: (label, qid, hit) =>
@@ -662,7 +677,7 @@ const DIGITALNZ_PIVOT = {
   field: 'lc',
   property: 'P244',
   statsKey: 'digitalnz',
-  fetch: (lc, label, key) => digitalnzEntries(lc, label, key),
+  fetch: (lc, label, key, ctx) => digitalnzEntries(lc, label, key, ctx),
   browseUrl: (hit) => digitalnzBrowseUrl(hit.heading),
   broadExtra: (hit) => ({ heading: hit.heading }),
   // `hit.heading` is the LC form the records' own subject fields matched —
@@ -951,8 +966,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // Declared before the page-wide one so it takes wikidata's turn first — the
   // lede's two anchors are one small request, and without this the lede would
   // still be waiting on the page-wide pick just to learn their names.
-  const ledeLabelsPromise = ledePickedPromise.then((own) => entityLabels(own))
-  const labelsPromise = pickedPromise.then((picked) => entityLabels([...picked.values()].flat()))
+  // Labels cover every LC-bearing candidate, not only the picked anchors,
+  // because the corroboration topic space (src/relevance.js) needs a name for
+  // each anchor a record's subjects might touch — "Moon", "Astronauts",
+  // "Space flight" are rarely picked by their sections but are exactly what
+  // the good records under "Aldrin, Buzz" are also filed under. Costs at most
+  // one more batched wbgetentities request per page; both promises already
+  // depend on the partners map, so nothing waits longer.
+  const lcBearing = (partners) => [...partners.entries()].filter(([, st]) => st?.lc).map(([q]) => q)
+  const ledeLabelsPromise = Promise.all([ledePickedPromise, ledePartnersPromise]).then(
+    ([own, partners]) => entityLabels([...own, ...lcBearing(partners)].filter(Boolean)),
+  )
+  const labelsPromise = Promise.all([pickedPromise, partnersPromise]).then(([picked, partners]) =>
+    entityLabels([...[...picked.values()].flat(), ...lcBearing(partners)].filter(Boolean)),
+  )
 
   const [ledeIaPromise, iaPromise] = ledeFirst(
     'ia batch',
@@ -1319,7 +1346,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Anchors whose holdings are too broad to sample: shown as one sentence
     // and a browse link instead of four arbitrary cards. See src/breadth.js.
     const broad = []
-    const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad }
+    // The corroboration topic space: every LC-bearing anchor this band's maps
+    // know, with its label. Deterministic per band — the lede's maps are the
+    // lede-only halves, so its space is smaller, which only ever withholds.
+    // The subject QID comes from the qid map rather than `extras` because
+    // every band needs it (extras is lede-only): the subject is the one
+    // anchor that corroborates even as a place.
+    const subjectQid = (await qidsPromise).get(normalizedPage)
+    const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic: topicSpace(statements, labels, { subjectQid }) }
     await bandPropertyPivot(pivotCtx, DPLA_PIVOT)
     // Runs after DPLA. Both pivot on P244, but they no longer share a
     // request: DPLA HEADs for the authorized heading, this GETs the record
