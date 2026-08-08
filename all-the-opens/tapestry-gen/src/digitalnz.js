@@ -21,8 +21,8 @@
 // records without a person-level subject — including openly licensed images
 // where the name appears only in the title — never surface. Whether a
 // looser, honestly-weaker match is worth it is deliberately NOT decided
-// per-partner; it is filed to be answered across sources or not at all (see
-// the Linear issue named in CLAUDE.md's DigitalNZ section).
+// per-partner; it is filed to be answered across sources or not at all
+// (LUI-146, and the generalization value in VALUES.md).
 //
 // **A key is optional here, unlike DPLA and Europeana** (verified 2026-08-08):
 // the v3 API answers keyless requests, under a shared unauthenticated cap
