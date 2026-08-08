@@ -8,6 +8,12 @@ actually fetch a public-domain page image.
 Sibling to `internet-archive-issues.md`, which logs data-quality problems in one
 partner's index. This file logs **reachability** across all of them.
 
+`adding-a-data-source.md` is where these findings get *used*: several entries
+here are cited there as pitfalls with a rule attached — the real-id/bogus-id
+control below is its Pitfall 6, and the HathiTrust robots rule its Pitfall 7.
+If you are about to wire up a partner, read that first; if you have just been
+defeated by one, the entry probably belongs here.
+
 **Provenance:** `[ours]` = reproduced directly in this project, with the command
 shown. `[research]` = reported elsewhere and not independently re-verified here.
 

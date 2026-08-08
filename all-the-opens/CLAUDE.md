@@ -48,10 +48,12 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   retired to the attic 2026-08-04 with the generator that drove it.
 - `docs/design-plans/`, `docs/implementation-plans/` — design documentation.
 - `docs/adding-a-data-source.md` — the playbook for wiring a new open-data
-  partner into `tapestry-gen`, and the third of the running logs in spirit:
-  which of three shapes a partner fits, the nine files it touches, eleven
-  pitfalls each with the commit or command behind it, and a commentary half
-  on what the ecosystem would have to publish for this to be a 30-minute job.
+  partner into `tapestry-gen`: which of three shapes a partner fits, the nine
+  files it touches, eleven pitfalls each with the commit or command behind
+  it, and a commentary half on what the ecosystem would have to publish for
+  this to be a 30-minute job. It draws heavily on the two logs below and
+  holds itself to their evidence standard, but it is a procedure rather than
+  a log — read it before adding a partner, append to them as things break.
   Split out of `tapestry-gen/CLAUDE.md` 2026-08-08 (LUI-140) so it can be
   linked and read on its own; that file keeps a pointer plus the shape
   summary. Written for two audiences — read Part 3 before publishing any of
