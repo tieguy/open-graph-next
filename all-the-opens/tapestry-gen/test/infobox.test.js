@@ -151,13 +151,19 @@ const weakFind = {
   imageUrl: 'https://example.test/linked.jpg',
 }
 
-test('a lede with no find renders the infobox in the rail, with the i-fold', () => {
+test('a lede with no find renders the infobox in the rail, with the lens-fold', () => {
   const { rail } = bandParts(ledeBand(), new Map(), '/wiki/')
   assert.match(rail, /<table class="infobox"/)
   assert.match(rail, /the Wikipedia article/, 'the fold names whose box this is')
   assert.match(rail, /yet/, 'the absence is a measurement, not a verdict')
   assert.match(rail, /href="\/"/, 'the partner list link points at the front page')
   assert.doesNotMatch(rail, /class="src"/, 'furniture, not a find: no source tag')
+  // The fold rides INSIDE the box — its last row, where the navbar sat —
+  // never above it, and its glyph is the LENS magnifier, not a ⓘ.
+  const table = rail.slice(rail.indexOf('<table class="infobox"'), rail.indexOf('</table>'))
+  assert.match(table, /<tr class="ib-why-row"><td colspan="2"><details class="ib-why">/)
+  assert.match(table, /<svg class="rinfo"/)
+  assert.doesNotMatch(rail, /ⓘ/)
 })
 
 test('a find about the subject keeps the rail; the infobox stands down', () => {

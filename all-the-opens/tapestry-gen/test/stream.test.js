@@ -291,9 +291,10 @@ test('a card with a trace grows an ⓘ fold: the exact chain, and the door to th
     ],
   })
   // The why line IS the control: one target, not a line plus a 12px glyph.
+  // The glyph is the LENS magnifier (an SVG, class "info"), not a ⓘ.
   assert.match(
     rail,
-    /<summary class="why" title="How this got here">About Santiago Calatrava, which this section links to<span class="info">ⓘ<\/span><\/summary>/,
+    /<summary class="why" title="How this got here">About Santiago Calatrava, which this section links to<svg class="info"[^>]*>/,
   )
   assert.match(rail, /states its Met object ID \(P3634\)/)
   assert.match(rail, /<a class="fixlink" href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener">Check or fix it on Wikidata ↗<\/a>/)
@@ -322,7 +323,7 @@ test('a card whose why was hoisted to the shelf head still names its ⓘ', () =>
   assert.match(deck, /<p class="carousel-why">About bridge, which this section links to<\/p>/)
   // "How we know" named the act and never the subject — it did not say WHAT is
   // known. This fold answers how the item reached the page.
-  assert.match(deck, /<summary class="why bare" title="How this got here"><span class="info">ⓘ<\/span>How is it connected\?<\/summary>/)
+  assert.match(deck, /<summary class="why bare" title="How this got here"><svg class="info"[^>]*>.*?<\/svg>How is it connected\?<\/summary>/)
 })
 
 test('one source, two topics: the carousel splits, one labeled strip per topic', () => {

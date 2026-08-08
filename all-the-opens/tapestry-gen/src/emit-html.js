@@ -540,6 +540,18 @@ function rightsDetail(entry) {
 }
 
 /**
+ * The "look closer" mark on every disclosure fold: a small magnifying glass,
+ * inline SVG so it takes the surrounding text color rather than rendering as
+ * a platform emoji. It replaced the ⓘ on 2026-08-08 (review): a magnifier
+ * says "examine this" where an i said "information", and examining — the
+ * chain, the statement, the terms — is what each of these folds offers.
+ */
+const LENS = (cls) =>
+  `<svg class="${cls}" aria-hidden="true" viewBox="0 0 12 12" width="12" height="12">` +
+  `<circle cx="4.8" cy="4.8" r="3.3" fill="none" stroke="currentColor" stroke-width="1.5"/>` +
+  `<line x1="7.4" y1="7.4" x2="10.9" y2="10.9" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>`
+
+/**
  * The title line: the item's name, its licence mark, and the mark's own "why".
  *
  * The working belongs HERE rather than in the connection fold below, and that
@@ -553,6 +565,7 @@ function rightsDetail(entry) {
  */
 function titleRow(entry, tag = 'h4') {
   const attr = tag === 'h4' && entry.title ? ` title="${escapeHtml(entry.title)}"` : ''
+  const rlens = LENS('rinfo')
   const name = entry.href
     ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a>`
     : escapeHtml(entry.title)
@@ -566,7 +579,7 @@ function titleRow(entry, tag = 'h4') {
   return (
     `<div class="title-row"><h4${attr}>${name}</h4>` +
     `<details class="rwhy"><summary title="Where these terms come from">${marks}` +
-    `<span class="rinfo" aria-hidden="true">ⓘ</span>` +
+    rlens +
     `<span class="vh">Where these terms come from</span></summary>${working}</details></div>`
   )
 }
@@ -582,8 +595,8 @@ function provenance(entry) {
   // known. What this fold actually answers is how the item reached the page:
   // which identifier or statement tied it to this article.
   const summary = why
-    ? `<summary class="why" title="How this got here">${why}<span class="info">ⓘ</span></summary>`
-    : `<summary class="why bare" title="How this got here"><span class="info">ⓘ</span>How is it connected?</summary>`
+    ? `<summary class="why" title="How this got here">${why}${LENS('info')}</summary>`
+    : `<summary class="why bare" title="How this got here">${LENS('info')}How is it connected?</summary>`
   return `<details class="prov">${summary}${body}</details>`
 }
 
@@ -952,11 +965,19 @@ function infoboxAside(box, inline, wikiBase) {
     ? `<a href="${escapeHtml(front)}">the collections this page draws on</a>`
     : 'the collections this page draws on'
   const fold =
-    `<details class="ib-why"><summary><span class="rinfo">ⓘ</span></summary>` +
+    `<details class="ib-why"><summary>${LENS('rinfo')}` +
+    `<span class="vh">Why this box is here</span></summary>` +
     `<p>This is the Wikipedia article’s own infobox. This slot usually holds a friend’s ` +
     `record of the subject — none of ${list} has one for this subject yet, so the ` +
     `article’s own summary stands in.</p></details>`
-  return `<aside class="rail"><div class="ib-slot">${fold}${html}</div></aside>`
+  // The fold rides INSIDE the box, as its last row — the seat the v·t·e
+  // navbar held before extraction stripped it, which is where a wiki reader
+  // already expects a box's own apparatus to sit.
+  const row = `<tr class="ib-why-row"><td colspan="2">${fold}</td></tr>`
+  const seated = /<\/tbody>\s*<\/table>\s*$/.test(html)
+    ? html.replace(/<\/tbody>\s*<\/table>\s*$/, `${row}</tbody></table>`)
+    : html.replace(/<\/table>\s*$/, `${row}</table>`)
+  return `<aside class="rail"><div class="ib-slot">${seated}</div></aside>`
 }
 
 /**
@@ -1417,15 +1438,17 @@ sup.ref a{color:var(--link)}
 .infobox .infobox-below{font-size:.75rem}
 /* Nested sub-boxes (an infobox inside an infobox) flatten to full width. */
 .infobox .infobox-subbox{width:100%;border:0;background:transparent;font-size:100%}
-/* The i-fold above the box: the slot's explanation, in the quiet grey the
-   card folds use. It must not read as part of the box, so it sits outside
-   the border, small and right-aligned. */
-.ib-why{text-align:right;margin:0 0 3px}
+/* The magnifier-fold rides INSIDE the box, as its last row — the seat the
+   v·t·e navbar held before extraction stripped it, which is where a wiki
+   reader already expects a box's own apparatus. Quiet grey like the card
+   folds; the panel opens leftward-aligned inside the same cell. */
+.ib-why-row td{text-align:right;padding:2px 6px 3px}
+.ib-why{margin:0}
 .ib-why summary{list-style:none;cursor:pointer;display:inline-block}
 .ib-why summary::-webkit-details-marker{display:none}
 .ib-why[open] .rinfo{opacity:.55}
 .ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
-  background:var(--faint);border:1px solid var(--rule);padding:6px 8px;margin:4px 0 6px}
+  background:var(--paper);border:1px solid var(--rule);padding:6px 8px;margin:4px 0 2px}
 
 /* The hero: the one thing the section wants a passing reader to see. It is a
    card, so everything true of a card stays true of it — it is just given the
@@ -1584,13 +1607,13 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .rwhy>summary:hover,.rwhy[open]>summary{color:var(--link)}
 .rwhy>summary .ccrow{margin:0}
 .rwhy .ccmark{width:1em;height:1em}
-/* A circled i, matching the connection fold below rather than avoiding it. A
-   question mark was tried first, on the reasoning that two identical glyphs
-   would read as one control — but "?" beside a licence mark reads as doubt
-   ABOUT the licence, and casting doubt on the claim is a far worse cost than
-   repeating an icon. Both controls offer more information; that they look
-   alike is honest. */
-.rinfo{font-weight:700;font-size:.82rem;color:var(--link);line-height:1}
+/* The magnifier (LENS), matching the connection fold below rather than
+   avoiding it. A question mark was tried first, on the reasoning that two
+   identical glyphs would read as one control — but "?" beside a licence mark
+   reads as doubt ABOUT the licence, and casting doubt on the claim is a far
+   worse cost than repeating an icon. Both controls offer a closer look; that
+   they look alike is honest. (Was a circled i until 2026-08-08.) */
+.rinfo{color:var(--link);vertical-align:-1px}
 .rwhy[open] .rinfo{opacity:.55}
 .rwhy[open]{flex:1 1 100%}
 .rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
@@ -1628,7 +1651,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .sr-why>summary{font-size:.74rem;color:#6a7176;cursor:pointer}
 .sr-why p{font-size:.74rem;color:#5d6469;line-height:1.45}
 
-/* The rights working, inside the ⓘ fold. */
+/* The rights working, inside the lens fold. */
 .prov .rd-lic,.prov .rd-work,.prov .rd-ask{margin:6px 0 0}
 .prov .rd-src{color:#8b9096}
 /* The visibility panel, shut by default: one quiet line under the credit bar,
@@ -1691,8 +1714,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .card .prov summary.why:hover,.card .prov[open] summary.why{color:var(--link)}
 /* The affordance, in the link color and heavier than the line it ends: a grey
    ⓘ reads as decoration, a blue one reads as a control. */
-.card .prov .info{color:var(--link);font-weight:700;font-size:.82rem;margin-left:5px;
-  vertical-align:-1px;line-height:1}
+.card .prov .info{color:var(--link);margin-left:5px;vertical-align:-1px}
 .card .prov summary.bare .info{margin:0 4px 0 0}
 .card .prov[open] .info{opacity:.55}
 .card .prov p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
