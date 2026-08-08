@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
-import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
+import { dplaEntryFrom, dplaUrl, rankDplaEntries } from '../src/dpla.js'
 import { decodeLcHeading, lcHeadingFromGraph } from '../src/dpla.js'
 
 // ---- IIIF (P6108) -----------------------------------------------------------
@@ -165,7 +165,62 @@ test('dplaUrl asks for the exact authorized heading and only the fields the card
   const url = dplaUrl('Apollo 11 (Spacecraft)', 'KEY')
   assert.match(url, /sourceResource\.subject\.name="Apollo%2011%20\(Spacecraft\)"/)
   assert.match(url, /api_key=KEY/)
-  assert.match(url, /page_size=4/)
+  // The window, not the shelf size: one request reads 50 rows so the pick can
+  // be ranked here instead of taken from the top of DPLA's unordered index.
+  // Same request count, bigger body. See rankDplaEntries.
+  assert.match(url, /page_size=50/)
+})
+
+test('the shelf is ranked and deduped locally, and never filtered', () => {
+  // The real shape of the Armstrong heading: the items DPLA returns first are
+  // unrelated, the good ones are further down, and one group repeats.
+  const e = (title, imageUrl = null) => ({ title, imageUrl })
+  const picked = rankDplaEntries(
+    [
+      e('Ricci Poster 143', 'https://t/1.jpg'),
+      e('Kristina McNeill', 'https://t/2.jpg'),
+      e('Bussed balloonist', 'https://t/3.jpg'),
+      e("The World's Columbian exposition"),
+      e('Astronaut Neil Armstrong, Cincinnati, Ohio', 'https://t/4.jpg'),
+      e('Ceremony for Apollo 11 astronauts Armstrong, Aldrin, and Collins', 'https://t/5.jpg'),
+      e('Ceremony for Apollo 11 astronauts Armstrong, Aldrin, and Collins arrive', 'https://t/6.jpg'),
+      e('The lunar module, with astronauts Neil A. Armstrong aboard', 'https://t/7.jpg'),
+      e('Neil Armstrong and Buzz Aldrin plant the flag', 'https://t/8.jpg'),
+    ],
+    { heading: 'Armstrong, Neil, 1930-2012', anchorLabel: 'Neil Armstrong' },
+  )
+  const titles = picked.map((p) => p.title)
+  // Titles naming the subject lead; the index-order junk is gone.
+  assert.match(titles[0], /Astronaut Neil Armstrong/)
+  assert.ok(!titles.some((t) => /Ricci Poster|Kristina McNeill|balloonist/.test(t)))
+  // The near-identical ceremony records contribute at most ONE card. (Here
+  // they score below four better matches and contribute none — the point is
+  // that they can never fill the shelf with copies of one photograph.)
+  assert.ok(titles.filter((t) => /^Ceremony for Apollo 11/.test(t)).length <= 1)
+  // Capped at the shelf size.
+  assert.equal(picked.length, 4)
+})
+
+test('ranking degrades to DPLA’s own order rather than emptying a shelf', () => {
+  // No title shares a token with the anchor: every score is 0 or 1, so the
+  // shelf is what it always was. A ranker that filtered would show nothing.
+  const e = (title) => ({ title, imageUrl: null })
+  const input = [e('Alpha'), e('Beta'), e('Gamma'), e('Delta'), e('Epsilon')]
+  const picked = rankDplaEntries(input, { heading: 'Cambodia', anchorLabel: 'Cambodia' })
+  assert.deepEqual(
+    picked.map((p) => p.title),
+    ['Alpha', 'Beta', 'Gamma', 'Delta'],
+  )
+})
+
+test('a thumbnail breaks a tie but never outranks being about the subject', () => {
+  const e = (title, imageUrl = null) => ({ title, imageUrl })
+  const picked = rankDplaEntries(
+    [e('A picture of nothing relevant', 'https://t/1.jpg'), e('Cambodia', null)],
+    { heading: 'Cambodia', anchorLabel: 'Cambodia' },
+  )
+  // One matching token (2) beats a thumbnail (1), even unillustrated.
+  assert.equal(picked[0].title, 'Cambodia')
 })
 
 test('a DPLA doc becomes a card credited to its holding institution, keyed on P244', () => {

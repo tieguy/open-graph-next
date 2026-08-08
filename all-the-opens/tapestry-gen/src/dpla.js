@@ -16,6 +16,21 @@ import { ccFromUri, licenseView } from './rights.js'
 
 export const DPLA_PER_ANCHOR = 4
 
+/**
+ * How many rows the ONE DPLA request asks for, so the pick can be made here
+ * rather than taken from the top of the index (2026-08-08, LUI-144).
+ *
+ * The request count is unchanged — this is a bigger response to a call already
+ * being made, and it is the whole reason ranking is affordable. Measured on
+ * "Armstrong, Neil, 1930-2012": the heading holds 60 items, about 50 of them
+ * genuinely Apollo 11 (the flag and footprints on the Moon, the P30 maneuver
+ * card carried on the mission), and the four DPLA returns first are the only
+ * junk in the set — a Ricci poster, a portrait, a balloonist, a Columbian
+ * exposition record. Nothing was wrong with the heading; we were reading the
+ * first page of an unordered list.
+ */
+export const DPLA_FETCH_WINDOW = 50
+
 /** Subject ids (sh…, sj…, gf…) live under /subjects/, name authorities under /names/. */
 export const lcBranch = (id) => (/^(sh|sj|gf)/.test(id) ? 'subjects' : 'names')
 
@@ -85,8 +100,92 @@ export function dplaUrl(heading, key) {
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
     `"${encodeURIComponent(heading)}"` +
     '&fields=id,sourceResource.title,dataProvider,object,isShownAt,sourceResource.rights,rights' +
-    `&page_size=${DPLA_PER_ANCHOR}&api_key=${key}`
+    `&page_size=${DPLA_FETCH_WINDOW}&api_key=${key}`
   )
+}
+
+// Words too common to tell one record from another. Deliberately tiny: this
+// is not a stoplist for English, only for the handful of tokens that appear in
+// so many headings and titles that scoring on them says nothing.
+const STOP = new Set(['the', 'and', 'of', 'in', 'a', 'an', 'for', 'to', 'on', 'at'])
+
+/** Significant lowercase word tokens: no punctuation, no short words, no years. */
+const tokens = (s) =>
+  String(s ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .split(' ')
+    .filter((w) => w.length > 2 && !STOP.has(w) && !/^\d{4}$/.test(w))
+
+/**
+ * The fold key for near-duplicates: a normalized title prefix, across holders.
+ *
+ * `uniqueEntries` below folds an exact title per holder, which is not enough.
+ * The Armstrong heading returns TEN records titled "Ceremony for Apollo 11
+ * astronauts Armstrong, Aldrin, and Coll…" and five "Hollywood Blvd. and Vine
+ * Street" — 60 items hold only 42 distinct title-prefixes — so ranking alone
+ * would have filled the shelf with four copies of one ceremony photo, which is
+ * a worse shelf than the arbitrary one it replaced. Cross-holder because the
+ * duplicates genuinely arrive from different contributors: Angkor Wat's
+ * Cambodia shelf has been shipping two identical "Inventaire descriptif des
+ * monuments du Cambodge" records from two providers.
+ *
+ * 40 characters is a judgment call with a known failure: two genuinely
+ * different items sharing a long prefix fold into one. That direction is the
+ * safe one — the shelf shows one of them instead of both, and the count beside
+ * it still says how many exist.
+ */
+const foldKey = (title) =>
+  String(title ?? '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+    .slice(0, 40)
+
+/**
+ * Which of a heading's items the shelf shows — the pick DPLA's index order was
+ * making for us until 2026-08-08 (LUI-144).
+ *
+ * Score is `2 x (distinct anchor/heading tokens present in the title) + 1 if
+ * the item has a thumbnail`, ties broken by DPLA's own order, then folded for
+ * near-duplicates and capped.
+ *
+ * **It reorders and dedupes; it never filters.** The caller's `total` stays the
+ * heading's true count, so "4 of 60" remains true — which is why this is not
+ * done with DPLA's `q=` parameter. Measured on the same heading: `q="Neil
+ * Armstrong"` cuts the count from 60 to 23, so the denominator in a disclosure
+ * this project makes on every shelf would silently shrink, and it still ranked
+ * "Bussed balloonist" fourth. Every item in a facet carries the heading
+ * equally, so DPLA relevance has nothing to discriminate on; the signal has to
+ * come from the fields we already ask for.
+ *
+ * The thumbnail is worth less than one matching token, deliberately: an
+ * illustrated near-miss beats a text-only near-miss, but no amount of picture
+ * outranks actually being about the subject. The cost is real and named — the
+ * US Government Publishing Office's text records ("Here men from the planet
+ * Earth first set foot upon the Moon") rank below illustrated ones, and they
+ * are some of the best items under the heading.
+ *
+ * Worst case, where no title shares a token with the anchor, every score is 0
+ * or 1 and the order falls back to DPLA's own — no worse than before.
+ */
+export function rankDplaEntries(entries, { heading, anchorLabel, cap = DPLA_PER_ANCHOR } = {}) {
+  const want = new Set([...tokens(anchorLabel), ...tokens(heading)])
+  const scored = entries.map((e, i) => {
+    const hits = new Set(tokens(e.title).filter((w) => want.has(w))).size
+    return { e, i, score: hits * 2 + (e.imageUrl ? 1 : 0) }
+  })
+  scored.sort((a, b) => b.score - a.score || a.i - b.i)
+  const seen = new Set()
+  const picked = []
+  for (const { e } of scored) {
+    const k = foldKey(e.title)
+    if (seen.has(k)) continue
+    seen.add(k)
+    picked.push(e)
+    if (picked.length >= cap) break
+  }
+  return picked
 }
 
 /**
@@ -163,7 +262,11 @@ export async function dplaEntries(lcId, anchorLabel, key) {
   if (!heading) return null
   const body = await getJson(dplaUrl(heading, key))
   const docs = body.docs ?? []
-  const entries = uniqueEntries(docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean))
+  // Map, fold exact repeats, then rank and cap. `total` is the heading's own
+  // count and is deliberately NOT the number ranked over: the shelf says "4 of
+  // 60", and 60 is how many DPLA holds, not how many rows this request read.
+  const all = uniqueEntries(docs.map((d) => dplaEntryFrom(d, heading, anchorLabel)).filter(Boolean))
+  const entries = rankDplaEntries(all, { heading, anchorLabel })
   return { heading, total: body.count ?? docs.length, entries }
 }
 

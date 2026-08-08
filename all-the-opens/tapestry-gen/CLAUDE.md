@@ -721,8 +721,38 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
   pivot silently skips, so clones run keyless.
   **This is the most expensive pivot on the page and the most productive** — 40
-  of Angkor Wat's 56 cards — so it is tuned rather than trimmed. Three fixes
-  landed 2026-08-05, and two of them were correctness, not speed:
+  of Angkor Wat's 56 cards — so it is tuned rather than trimmed.
+  **The shelf is ranked here, not by DPLA** (`rankDplaEntries`, 2026-08-08,
+  LUI-144). The query is a facet filter, and a facet has no relevance gradient:
+  every item carries the heading equally, so the first rows are an arbitrary
+  page of an unordered list. Measured on "Armstrong, Neil, 1930-2012" — 60
+  items, about 50 genuinely Apollo 11, and the four DPLA returned first were the
+  only junk in the set (a Ricci poster, a portrait, a balloonist, a Columbian
+  exposition record), which is exactly what the page had been showing. So one
+  request now reads a **50-row window** (`DPLA_FETCH_WINDOW`; same request
+  count, bigger body) and the pick is scored locally: `2 x` distinct
+  anchor/heading tokens in the title, `+1` for a thumbnail, ties broken by
+  DPLA's own order.
+  **It reorders and dedupes; it never filters** — `total` stays the heading's
+  own count, so "4 of 60" stays true. That is why `q=` was rejected rather than
+  adopted: `q="Neil Armstrong"` cuts the count 60 → 23, silently shrinking a
+  denominator this project prints on every shelf, and still ranked "Bussed
+  balloonist" fourth. Worst case, where no title shares a token, every score is
+  0 or 1 and the order is DPLA's own — no worse than before.
+  **Dedup is part of the same fix, not a tidy-up.** Those 60 items hold only 42
+  distinct title-prefixes (one group repeats **ten** times), so ranking alone
+  would have filled the shelf with four copies of one ceremony photograph — a
+  worse shelf than the arbitrary one. `uniqueEntries` (exact title per holder)
+  was never enough; the fold is a normalized 40-char prefix, **across** holders,
+  because the duplicates arrive from different contributors.
+  **Known limit: the fold is per shelf, not per page.** Angkor Wat still renders
+  "Ancient Angkor" three times, from three different headings' shelves. Page-wide
+  dedup is a separate question with history — `dropSeenFiles` and the unit-to-unit
+  `seen` chain were deleted with Commons on 2026-08-04, and the purity argument
+  under Key Decisions is why they looked the way they did. Read that before
+  reviving anything page-wide.
+  Three earlier fixes landed 2026-08-05, and two of them were correctness, not
+  speed:
   (1) `lcHeadingFromGraph` matched `@id.endsWith('/' + id)`, but LC ships the
   identifier **twice** — the authority record, which carries the heading, and
   `id.loc.gov/rwo/agents/<id>` for the real-world thing it names, which does
@@ -1203,6 +1233,10 @@ the politeness claim is checkable after a run rather than merely asserted here.
   URL and will be refetched once. Same request COUNT — the fields ride the
   request DPLA was already answering — but a warm cache goes cold for that
   pivot exactly once.
+- **And again on 2026-08-08**, when `page_size` went 4 → 50 for the ranking
+  window: same request count, new URL, so every cached DPLA response is refetched
+  exactly once. Apollo 11 cold-fetched 50 DPLA responses on the first render
+  after the change and was warm again immediately.
 - **Same for the archive.org search on 2026-08-06** (`licenseurl`) and the
   author-works pivot (`works.json` → `search.json`). Both are one-time cache
   misses at unchanged request counts, for the same reason: the field rides a

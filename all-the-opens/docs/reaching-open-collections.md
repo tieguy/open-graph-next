@@ -296,6 +296,61 @@ concluding the algorithm dropped something.**
 
 ---
 
+## 8. BHL: the reading room is challenge-gated, the scans themselves are an open S3 bucket `[ours]`
+
+*Observed 2026-08-07.*
+
+The Biodiversity Heritage Library's page viewer refuses non-browser clients
+outright — a Cloudflare JS challenge, not a WAF rule you can satisfy:
+
+```
+curl -H "User-Agent: tapestry-gen-lab/0.1 (https://friendsof.wiki; luis@lu.is)" \
+  https://www.biodiversitylibrary.org/page/726886
+→ 403, "Just a moment...", challenges.cloudflare.com
+```
+
+But the image endpoints answer the same client happily, and the real/bogus
+control distinguishes cleanly — this endpoint is *talking*:
+
+```
+/pagethumb/726886   → 302 → https://bhl-open-data.s3.us-east-2.amazonaws.com/
+                              web/mobot31753000798865/mobot31753000798865_0003_thumb.webp
+/pagethumb/999999999 → 302 → /images/image_not_found_thumb.jpg
+/pageimage/727382   → 302 → (full 1650×2383 webp of the same item, page _0499)
+```
+
+The bucket is literally named `bhl-open-data`. So: page *images* — including
+the 1758 *Systema Naturae* page where the monarch butterfly was named — are
+keyless, redirect-stable, and served from an S3 bucket labeled open, while
+the HTML page a human would cite is behind a challenge. Page-level *metadata*
+(rights, OCR, printed-page mapping) is API-only, and the API wants a key —
+so a keyless client can fetch the scan but cannot ask what it is allowed to
+do with it.
+
+robots.txt (same date) is Cloudflare's managed "content signals" template:
+`User-agent: * / Allow: /` with `Content-Signal: search=yes, ai-train=no,
+use=reference`, plus blanket disallows for nine named AI crawlers
+(GPTBot, ClaudeBot, CCBot, …). The maximally-open public-domain library now
+ships the drawbridge template — aimed at trainers, but the JS challenge above
+lands on everyone without a browser.
+
+**Impact:** a species-box "original description" card can render (thumbnail +
+link out) entirely from the keyless image path — and citation→page
+resolution is keyless too, via the OpenURL resolver on the same otherwise
+challenge-gated host (observed 2026-08-07):
+
+```
+/openurl?genre=book&title=Systema naturae…&date=1758&spage=471&format=json
+→ 200, {"citations":[{"Url":"https://www.biodiversitylibrary.org/page/727382", …}]}
+```
+
+(that page ID independently matches a visual probe of the scan — it is the
+1758 *Systema Naturae* p. 471, where the monarch butterfly is named). Only
+per-item rights fields and OCR require the keyed API. Same host, three
+postures: HTML challenge-gated, images and OpenURL open, metadata keyed.
+
+---
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
