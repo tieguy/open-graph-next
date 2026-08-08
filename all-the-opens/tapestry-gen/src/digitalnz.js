@@ -4,48 +4,59 @@
 // as DPLA: the anchor is a real key, not a label. Wikidata states the
 // entity's Library of Congress authority (P244); NLNZ is not an independent
 // VIAF contributor and catalogs through LC/NACO (checked on VIAF's
-// contributor list 2026-08-08), so the same authorized heading DPLA already
-// resolves is also the right search string here — `lcHeading` is reused
-// rather than reimplemented. An anchor with no LC authority does not pivot.
+// contributor list 2026-08-08), so LC's record carries the NZ heading. An
+// anchor with no LC authority does not pivot.
 //
-// Verified live 2026-08-08 (see LUI-145): `text="John Stuart Yeates"`
-// answered a KEYLESS request with 8 records, so — unlike DPLA and Europeana —
-// this API may not strictly require a key. This module still gates on
-// DIGITALNZ_API_KEY, for the same reason DPLA/Europeana do: a registered key
-// can negotiate a higher rate than unauthenticated traffic (DigitalNZ's own
-// stated policy — see hostLimit's comment in src/mw.js), and the demo must
-// still run keyless for anyone who clones it, silently absent without one.
+// **The search is a subject filter, strictly — not full text** (live-verified
+// 2026-08-08, LUI-145). The DPLA analogy holds only if the heading lands on a
+// subject field: DPLA queries `sourceResource.subject.name`, where LCSH
+// headings actually live, but DigitalNZ's `text=` is generic full text over
+// titles and descriptions, and quoting the authorized heading into it
+// returned ZERO records for the very article this pivot was built for. What
+// works is `and/or[subject][]=` with the heading form NZ catalogers actually
+// use — which is LC's *variant*, not its authorized form (see src/lc.js). So
+// this asks the API only for records whose own subject field states one of
+// LC's forms, and every card's claim ("cataloged under this heading") is
+// verifiably true of that record. The cost is real and accepted for now:
+// records without a person-level subject — including openly licensed images
+// where the name appears only in the title — never surface. Whether a
+// looser, honestly-weaker match is worth it is deliberately NOT decided
+// per-partner; it is filed to be answered across sources or not at all (see
+// the Linear issue named in CLAUDE.md's DigitalNZ section).
 //
-// **Unverified against a live response as of this commit.** This session had
-// no outbound network access at all (confirmed: even api.dp.la and
-// example.com were unreachable through the egress proxy), so the field
-// names below — `search.results`, `content_partner`, `landing_url`,
-// `thumbnail_url`, `usage` — follow the DigitalNZ v3 Records API's published
-// shape and the Metadata Dictionary as best known, cross-checked only
-// against the `usage` values LUI-145 quotes from a real query. Confirm
-// against a real response before this ships, per CLAUDE.md's "verify with
-// spike.js, not with reasoning about the diff."
+// **A key is optional here, unlike DPLA and Europeana** (verified 2026-08-08):
+// the v3 API answers keyless requests, under a shared unauthenticated cap
+// DigitalNZ's docs describe without numbering (see hostLimit's comment in
+// src/mw.js — the default of 1 stands). One sharp edge the first draft of
+// this module got wrong: `api_key=` with an EMPTY or invalid value is a 403,
+// so keyless means omitting the parameter entirely, never passing ''.
 
 import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
-import { lcHeading } from './dpla.js'
+import { lcLabels } from './lc.js'
 
 export const DIGITALNZ_PER_ANCHOR = 4
 
-export function digitalnzUrl(heading, key) {
+/** The subject-filter query for a set of heading forms; key omitted when absent. */
+export function digitalnzUrl(forms, key) {
+  const filters = forms.map((f) => `or[subject][]=${encodeURIComponent(f)}`).join('&')
   return (
-    'https://api.digitalnz.org/v3/records.json' +
-    `?text=${encodeURIComponent(`"${heading}"`)}` +
-    '&fields=id,title,content_partner,landing_url,thumbnail_url,large_thumbnail_url,usage' +
-    `&per_page=${DIGITALNZ_PER_ANCHOR}&api_key=${key}`
+    'https://api.digitalnz.org/v3/records.json?' +
+    filters +
+    '&fields=id,title,content_partner,landing_url,thumbnail_url,large_thumbnail_url,usage,subject' +
+    `&per_page=${DIGITALNZ_PER_ANCHOR}` +
+    (key ? `&api_key=${key}` : '')
   )
 }
 
 /**
  * Where a reader goes to browse a heading this page declined to sample —
- * DPLA's `dplaBrowseUrl` twin. Deliberately the same `text=` query the API
- * ran, quoted the same way, so the count sentence in src/breadth.js names the
- * set the link actually opens.
+ * DPLA's `dplaBrowseUrl` twin. The website exposes no subject-filter URL that
+ * a script can verify, so this opens the site's own search for the exact
+ * quoted heading; for the fixture (Yeates) the API answers the same single
+ * record for both, but in general a full-text phrase search can find MORE
+ * than the subject field alone — a browse that over-shows is acceptable
+ * where one that under-shows would not be.
  */
 export function digitalnzBrowseUrl(heading) {
   return `https://digitalnz.org/records?text=${encodeURIComponent(`"${heading}"`)}`
@@ -54,12 +65,24 @@ export function digitalnzBrowseUrl(heading) {
 const first = (v) => (Array.isArray(v) ? v[0] : v)
 
 /**
+ * The strict test a record must pass to become a card: its OWN subject field
+ * states one of the LC record's heading forms. The or[subject][] query
+ * already asked for exactly this, so a miss here should not happen — it is
+ * kept because the claim each card makes rests on it, and a filter that
+ * merely trusts the query would let an API quirk turn into a false sentence.
+ * Returns the form that matched, which is the heading the card names.
+ */
+export function subjectMatch(record, forms) {
+  const subjects = Array.isArray(record?.subject) ? record.subject : []
+  return forms.find((f) => subjects.includes(f)) ?? null
+}
+
+/**
  * DigitalNZ's own usage rollup: plain-English capability words
- * (`Share`/`Modify`/`Use commercially`/`Attribution`/`NonCommercial`/
- * `NoDerivatives`), not a URI or slug, so it needs its own reading rather
- * than an extension of `ccFromUri`. Only the two unambiguous ends of it are
- * read, per LUI-145's explicit rule ("`Unknown` gets nothing; a mark is
- * never a guess"):
+ * (`Share`/`Modify`/`Use commercially`/`All rights reserved`/`Unknown`), not
+ * a URI or slug, so it needs its own reading rather than an extension of
+ * `ccFromUri`. Only the two unambiguous ends of it are read, per LUI-145's
+ * explicit rule ("`Unknown` gets nothing; a mark is never a guess"):
  *
  * - `All rights reserved` says plainly what `rightsstatements.org`'s InC
  *   vocabulary already says, so it is routed through `ccFromUri` with that
@@ -94,7 +117,10 @@ function usageWords(usage) {
   return words.length ? `May be ${words.join(', ')}` : null
 }
 
-/** One DigitalNZ record as a page entry; null when it cannot be shown honestly. */
+/**
+ * One DigitalNZ record as a page entry; null when it cannot be shown
+ * honestly. `heading` is the LC form this record's own subject field matched.
+ */
 export function digitalnzEntryFrom(record, heading, anchorLabel) {
   const title = record?.title
   if (!title || !(record?.id || record?.landing_url)) return null
@@ -118,21 +144,31 @@ export function digitalnzEntryFrom(record, heading, anchorLabel) {
       license: null,
     },
     rights: { copy: rights },
-    why: `Filed under “${heading}” — the subject heading libraries catalog ${anchorLabel ?? 'this'} under`,
+    why: `Filed under “${heading}” — the heading this record’s own catalog entry states for ${anchorLabel ?? 'this subject'}`,
     topic: anchorLabel ?? heading,
     _via: 'P244',
   }
 }
 
 /**
- * Items DigitalNZ's partners cataloged under an anchor's authorized heading.
+ * Items DigitalNZ's partners cataloged under an anchor's LC heading forms.
  * @returns {{entries: object[], total: number, heading: string}|null}
  */
 export async function digitalnzEntries(lcId, anchorLabel, key) {
-  const heading = await lcHeading(lcId)
-  if (!heading) return null
-  const body = await getJson(digitalnzUrl(heading, key))
+  const labels = await lcLabels(lcId)
+  if (!labels) return null
+  const forms = [labels.heading, ...labels.variants]
+  const body = await getJson(digitalnzUrl(forms, key))
   const results = body.search?.results ?? []
-  const entries = results.map((r) => digitalnzEntryFrom(r, heading, anchorLabel)).filter(Boolean)
+  const entries = []
+  let heading = null
+  for (const record of results) {
+    const form = subjectMatch(record, forms)
+    if (!form) continue
+    heading ??= form
+    const entry = digitalnzEntryFrom(record, form, anchorLabel)
+    if (entry) entries.push(entry)
+  }
+  if (!entries.length) return null
   return { heading, total: body.search?.result_count ?? results.length, entries }
 }

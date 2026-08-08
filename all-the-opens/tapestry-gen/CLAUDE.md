@@ -34,7 +34,10 @@ does not help generate the website, it belongs in the attic.
   Deployed demo), and `src/sweep.js` bounds its size.
 - **`.cache/fact-<kind>-<key>.json`** (`readFacts`/`writeFacts` in `src/http.js`,
   2026-08-05) is the same cache holding *derived* answers rather than response
-  bodies — today `fact-class-Q….json`, two booleans per Wikidata class. It is
+  bodies — today `fact-class-Q….json`, two booleans per Wikidata class, and
+  `fact-lc-labels-….json` (2026-08-08), the LC label set per P244 id — null
+  included, because a permanent 404 re-asked every render would break the
+  once-ever promise to id.loc.gov (see `lcLabels` in `src/lc.js`). It is
   **cache, not data**: everything in it is re-derivable from the network, and
   deleting `.cache/` is still the whole reset. The "reads nothing on disk"
   contract above targets baked results and non-algorithmic editorial judgment,
@@ -524,7 +527,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
 | Smithsonian | n/a | no pivot builds cards; visibility panel only |
-| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; the rest (including the fully-open combination) words only, same stance as GBIF/OSM below — added LUI-145, 2026-08-08, unverified against a live response, see `src/digitalnz.js` |
+| DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; the rest (including the fully-open combination) words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
 wrong answer first: it states TWO Creative Commons URIs, and the CC0 licenses
@@ -731,34 +734,41 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   `maps.wikimedia.org` (Wikimedia-projects-only; refuses outside referrers)
   and never browser-hotlinked (OSMF tile policy). Every partner here is
   outside Wikimedia by design — that breadth IS the demo.
-- **DigitalNZ** (`src/digitalnz.js`, added 2026-08-08, LUI-145) — the demo's
-  first non-US/EU partner: 150+ New Zealand libraries, archives and museums
-  (Turnbull/NLNZ, Massey, VUW, Auckland Museum, Ngā Taonga, Papers Past) behind
-  one API. Same search shape as DPLA and keyed on the same property (P244):
-  NLNZ is not an independent VIAF contributor and catalogs through LC/NACO
-  (checked on VIAF's contributor list 2026-08-08), so DPLA's own
-  `lcHeading` — one `id.loc.gov` HEAD request, cached — resolves the search
-  string for both pivots, and running DigitalNZ's pivot after DPLA's in
-  `discover.js` means the second call is always a cache hit. Gated on
-  `DIGITALNZ_API_KEY`, same keyless-skip rule as DPLA/Europeana — chosen even
-  though a keyless request answered live on 2026-08-08, for the same
-  higher-limit-on-request reason DPLA and Europeana require one.
-  **Not yet verified against a live response**: this was implemented in a
-  sandboxed session with no outbound network access at all (confirmed:
-  `api.dp.la` and `example.com` were both unreachable through the egress
-  proxy, not just `digitalnz.org`), so the field names in `digitalnzUrl`/
-  `digitalnzEntryFrom` (`search.results`, `content_partner`, `landing_url`,
-  `thumbnail_url`, `usage`) follow the v3 Records API's published shape as
-  best known and are cross-checked only against the `usage` values LUI-145
-  quotes from a real query, not a full response body. No published numeric
-  rate limit was found either, so `hostLimit()` in `src/mw.js` needs no
-  change — it already defaults to 1 for an unlisted host, and stays there
-  until a citation exists. **Before this ships**: render a page through
-  `spike.js` (John Stuart Yeates is the obvious fixture — see LUI-145) and
-  fix whatever the real response shape disagrees with; add it to `FRIENDS` in
-  `src/front-page.js` only once that render has been read, per the front
-  page's own rule that an unlinked license line means nobody has verified one
-  yet.
+- **DigitalNZ** (`src/digitalnz.js`, added 2026-08-08, LUI-145; live-verified
+  and made strict the same day) — the demo's first non-US/EU partner: 150+
+  New Zealand libraries, archives and museums (Turnbull/NLNZ, Massey, VUW,
+  Auckland Museum, Ngā Taonga, Papers Past) behind one API. Same search shape
+  as DPLA and keyed on the same property (P244): NLNZ is not an independent
+  VIAF contributor and catalogs through LC/NACO (checked on VIAF's
+  contributor list 2026-08-08), so LC's record of the authority carries the
+  heading NZ catalogers use.
+  **It carries it as a VARIANT, and that finding is the whole design** (all
+  live-verified 2026-08-08, recorded on LUI-145). The first draft reused
+  DPLA's `lcHeading` and quoted the authorized heading into DigitalNZ's
+  `text=` search; that returned ZERO records for its own fixture, because
+  `text=` is full text over titles/descriptions while DPLA queries a subject
+  field, and because LC's authorized form ("Yeates, J. S. (John Stuart),
+  1900-1986") is not the form NZ records state ("Yeates, John Stuart,
+  1900-1986" — LC's variant). So `src/lc.js` GETs the full LC record for
+  authorized + variant forms (the one place the HEAD trick is not enough —
+  see the comment there for why DPLA's HEAD could be folded into this GET as
+  a follow-up), the query is `or[subject][]=` across all forms, and a record
+  becomes a card ONLY if its own `subject` field states one of them — so
+  every card's "filed under this heading" claim is verifiably true of that
+  record. **Strict by decision** (2026-08-08): the cost is that records with
+  no person-level subject never surface, and on the Yeates fixture that is 7
+  of 8 — including Massey's three openly licensed images, whose only subject
+  is a collection name, and (usefully) the enwiki article itself, which
+  DigitalNZ indexes with `content_partner: ["Wikipedia"]` and no subjects. A
+  looser name-match would reach them but could no longer say "cataloged
+  under"; per VALUES.md's generalization principle it is filed to be
+  explored ACROSS sources or not at all — see the loose-match Linear issue —
+  not hacked in for one partner.
+  **A key is optional, unlike DPLA/Europeana**: the v3 API answers keyless
+  (verified), `DIGITALNZ_API_KEY` rides along when set (`keyOptional` in the
+  spec), and `api_key=` with an empty or bogus value is a **403** — keyless
+  means omitting the parameter. No published numeric rate limit, so
+  `hostLimit()` stays at the default 1.
   The rights mapping deliberately does not glyph DigitalNZ's own
   `Share`/`Modify`/`Use commercially` rollup — see the partner audit table
   above.
@@ -793,13 +803,14 @@ fights the pipeline rather than fitting it:
    anchor. `DPLA_PIVOT`, `EUROPEANA_PIVOT` and `DIGITALNZ_PIVOT`
    (`src/discover.js`, just above `discover()`) are the three live cases, all
    run through the shared `bandPropertyPivot()` loop — `DIGITALNZ_PIVOT`
-   reuses DPLA's own `field: 'lc'`/P244 heading rather than adding a fourth
-   WDQS var, because both partners answer to the same Library of Congress
-   authorized heading (see Partner pivots below). A new partner of this shape
-   is one new spec
-   object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
-   `sample` (and `broadExtra` only if a `broadNote` needs a field beyond
-   `label`/`total`/`url` — DPLA's does, for the heading), passed to
+   reuses DPLA's own `field: 'lc'`/P244 rather than adding a fourth WDQS var,
+   though the two resolve the heading differently (authorized form via HEAD
+   vs. the full record for variant forms — see Partner pivots below for why
+   that difference is load-bearing). A new partner of this shape is one new
+   spec object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
+   `sample` (plus `keyOptional: true` if the API verifiably answers keyless —
+   DigitalNZ does — and `broadExtra` only if a `broadNote` needs a field
+   beyond `label`/`total`/`url` — DPLA's does, for the heading), passed to
    `bandPropertyPivot()` alongside the others. Do NOT copy the block and
    modify it — that is exactly the duplication DPLA and Europeana had between
    2026-08-03 and this date, two near-identical blocks in `discover.js` that

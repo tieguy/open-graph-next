@@ -57,12 +57,12 @@ const SOURCE = {
     // the same reason the Met and Smithsonian icons come from there.
     icon: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/02/Europeana_logo_2015_basic.svg/120px-Europeana_logo_2015_basic.svg.png',
   },
-  // Unverified (LUI-145, 2026-08-08): this session had no network access to
-  // confirm digitalnz.org/favicon.ico serves to a non-browser fetch, the same
-  // check that sent the Met's and Europeana's icons to a Commons stand-in
-  // instead. Confirm before this ships; swap for a Commons-hosted logo if it
-  // 403s or 429s the way theirs did.
-  digitalnz: { name: 'DigitalNZ', icon: 'https://digitalnz.org/favicon.ico' },
+  // NOT `/favicon.ico`, which 302s to a 404 error page (checked 2026-08-08);
+  // this is the path the site's own <link rel="icon"> declares. It serves
+  // image/png to curl but a 202 challenge page to Node's fetch — see the
+  // cache-priming note in tools/build-icons.mjs, which is how its bytes got
+  // into src/icons.js.
+  digitalnz: { name: 'DigitalNZ', icon: 'https://digitalnz.org/favicons/favicon-32x32.png' },
 }
 
 // A Smithsonian object with a 3D scan carries `media3d` — the Voyager package

@@ -6,24 +6,74 @@ import {
   digitalnzEntryFrom,
   digitalnzRights,
   digitalnzUrl,
+  subjectMatch,
 } from '../src/digitalnz.js'
 
-// Fixtures drawn from LUI-145's live-verified query (2026-08-08):
-// `https://api.digitalnz.org/v3/records.json?text="John Stuart Yeates"`,
-// four of the eight records that answered it.
+// Fixtures drawn from the live-verified queries of 2026-08-08 (LUI-145 and
+// its PR-#11 test comment): the John Stuart Yeates record set, whose subject
+// fields and usage values are quoted verbatim from real v3 responses.
 
-test('digitalnzUrl asks for the exact quoted heading and the fields the card reads', () => {
-  const url = digitalnzUrl('Yeates, John Stuart', 'KEY')
-  assert.match(url, /text=%22Yeates%2C%20John%20Stuart%22/)
-  assert.match(url, /api_key=KEY/)
+const FORMS = [
+  'Yeates, J. S. (John Stuart), 1900-1986', // LC's authorized form — matches nothing in DigitalNZ
+  'Yeates, John Stuart, 1900-1986', // LC's variant, NLNZ's own form — the one that matches
+  'Yeates, Jack, 1900-1986',
+]
+
+test('digitalnzUrl asks the subject filter for every LC form, keyless by omission', () => {
+  const url = digitalnzUrl(FORMS, undefined)
+  // One or[subject][] per form — the union is the "cataloged under" set.
+  assert.equal((url.match(/or\[subject\]\[\]=/g) ?? []).length, 3)
+  assert.match(url, /or\[subject\]\[\]=Yeates%2C%20John%20Stuart%2C%201900-1986/)
+  // The record's own subject field rides back for the strict per-record check.
+  assert.match(url, /fields=[^&]*subject/)
   assert.match(url, /per_page=4/)
+  // `api_key=` with an empty value is a 403 (verified 2026-08-08) — keyless
+  // means the parameter is ABSENT, never empty.
+  assert.ok(!url.includes('api_key'))
 })
 
-test('digitalnzBrowseUrl quotes the same heading the query asked for', () => {
+test('digitalnzUrl carries the key when one is set', () => {
+  assert.match(digitalnzUrl(FORMS, 'KEY'), /&api_key=KEY$/)
+})
+
+test('digitalnzBrowseUrl quotes the exact heading the cards were matched on', () => {
   assert.equal(
-    digitalnzBrowseUrl('Yeates, John Stuart'),
-    'https://digitalnz.org/records?text=%22Yeates%2C%20John%20Stuart%22',
+    digitalnzBrowseUrl('Yeates, John Stuart, 1900-1986'),
+    'https://digitalnz.org/records?text=%22Yeates%2C%20John%20Stuart%2C%201900-1986%22',
   )
+})
+
+// ---- the strict test: a record's own subject must state the heading --------
+
+test('subjectMatch returns the LC form the record itself states — the variant, not the authorized form', () => {
+  // The Alexander Turnbull Library photo, the one Yeates record that carries
+  // a person-level subject (quoted verbatim from the live response).
+  const turnbull = {
+    id: 22887492,
+    subject: [
+      'Massey Agricultural College',
+      'Yeates, John Stuart, 1900-1986',
+      'Botanists',
+      'Botany',
+      'New Zealand',
+      'Plants',
+      'Palmerston North',
+    ],
+  }
+  assert.equal(subjectMatch(turnbull, FORMS), 'Yeates, John Stuart, 1900-1986')
+})
+
+test('subjectMatch refuses records whose subjects never name the person — the Massey images and the Wikipedia self-reference', () => {
+  // Massey's openly licensed images of Yeates carry only a collection-name
+  // subject; strict matching deliberately forfeits them (the loose-match
+  // question is filed, not decided here).
+  assert.equal(subjectMatch({ subject: ['Massey University Archives Photograph Collection'] }, FORMS), null)
+  // DigitalNZ indexes Wikipedia itself as a content partner, and the enwiki
+  // article is the FIRST full-text result for Yeates — a card pointing back
+  // at Wikipedia on this site would be a self-reference. Its record carries
+  // no subjects at all, so the strict test excludes it with no special case.
+  assert.equal(subjectMatch({ subject: [] }, FORMS), null)
+  assert.equal(subjectMatch({}, FORMS), null)
 })
 
 // ---- rights: "a mark is never a guess" -------------------------------------
@@ -54,59 +104,59 @@ test('digitalnzRights recognizes nothing from an empty or malformed usage array'
 
 // ---- entries ------------------------------------------------------------
 
-test('a fully-open DigitalNZ record becomes a card credited to the CONTRIBUTING institution, not DigitalNZ', () => {
-  // Massey University's images of Yeates, usage Share/Modify/Use commercially.
+test('a matched record becomes a card credited to the CONTRIBUTING institution, not DigitalNZ', () => {
+  // The Turnbull photo as the live API returns it (thumbnails come from
+  // NLNZ's delivery host; `id` is a NUMBER in the real response).
   const record = {
-    id: '22887493',
-    title: 'John Stuart Yeates, citation, 1977',
-    content_partner: ['Massey University'],
-    landing_url: 'https://massey.recollect.co.nz/nodes/view/22887493',
-    thumbnail_url: 'https://massey.recollect.co.nz/thumb/22887493.jpg',
-    usage: ['Share', 'Modify', 'Use commercially'],
+    id: 22887492,
+    title: 'John Stuart Yeates, Massey College',
+    content_partner: ['Alexander Turnbull Library'],
+    landing_url: 'http://natlib.govt.nz/records/22887492',
+    thumbnail_url: 'https://ndhadeliver.natlib.govt.nz/delivery/DeliveryManagerServlet?dps_pid=IE442161&dps_func=thumbnail',
+    usage: ['Unknown'],
+    subject: ['Yeates, John Stuart, 1900-1986', 'Botanists'],
   }
-  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart', 'John Stuart Yeates')
+  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart, 1900-1986', 'John Stuart Yeates')
   assert.equal(e.source, 'digitalnz')
-  assert.equal(e.description, 'Massey University')
+  assert.equal(e.description, 'Alexander Turnbull Library')
   // DigitalNZ's own durable record page, not the partner host that may rot —
   // the same choice dplaEntryFrom makes for dp.la/item/… over isShownAt.
-  assert.equal(e.href, 'https://digitalnz.org/records/22887493')
-  assert.equal(e.imageUrl, 'https://massey.recollect.co.nz/thumb/22887493.jpg')
+  assert.equal(e.href, 'https://digitalnz.org/records/22887492')
+  // Usage Unknown: a card, no rights mark, no usage words — the institution
+  // alone carries the credit.
   assert.equal(e.rights.copy, null)
-  // The credit line names the institution AND states the usage words plainly
-  // in place of a glyph this vocabulary cannot honestly support.
-  assert.equal(e.attribution.author, 'Massey University · May be shared, modified, used commercially')
-  assert.match(e.why, /Filed under “Yeates, John Stuart” — the subject heading libraries catalog John Stuart Yeates under/)
+  assert.equal(e.attribution.author, 'Alexander Turnbull Library')
+  assert.match(e.why, /Filed under “Yeates, John Stuart, 1900-1986”/)
   assert.equal(e.topic, 'John Stuart Yeates')
   assert.equal(e._via, 'P244')
 })
 
 test('an all-rights-reserved record carries the © mark and still names its institution', () => {
-  // Victoria University of Wellington's copy of Yeates' PhD certificate.
   const record = {
-    id: '30112233',
+    id: 30112233,
     title: 'University of New Zealand PhD certificate — John Stuart Yeates',
     content_partner: ['Victoria University of Wellington'],
     landing_url: 'https://forms.wgtn.ac.nz/x',
     usage: ['All rights reserved'],
+    subject: ['Yeates, John Stuart, 1900-1986'],
   }
-  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart', 'John Stuart Yeates')
+  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart, 1900-1986', 'John Stuart Yeates')
   assert.equal(e.rights.copy.code, 'INC')
   assert.equal(e.attribution.author, 'Victoria University of Wellington · in copyright')
 })
 
-test('a record with usage Unknown gets a card but no rights mark', () => {
-  // The Alexander Turnbull Library photo, already linked from the article's
-  // own External links — usage Unknown per LUI-145.
+test('affirmative usage terms are said in words on the credit line, in place of a glyph', () => {
   const record = {
-    id: '22887492',
-    title: 'John Stuart Yeates, Massey College',
-    content_partner: ['Alexander Turnbull Library'],
-    thumbnail_url: 'https://ndhadeliver.natlib.govt.nz/thumb/22887492.jpg',
-    usage: ['Unknown'],
+    id: 1,
+    title: 'T',
+    content_partner: ['Massey University'],
+    landing_url: 'https://x.test/1',
+    usage: ['Share', 'Modify', 'Use commercially'],
+    subject: ['Yeates, John Stuart, 1900-1986'],
   }
-  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart', 'John Stuart Yeates')
+  const e = digitalnzEntryFrom(record, 'Yeates, John Stuart, 1900-1986', 'John Stuart Yeates')
   assert.equal(e.rights.copy, null)
-  assert.equal(e.attribution.author, 'Alexander Turnbull Library')
+  assert.equal(e.attribution.author, 'Massey University · May be shared, modified, used commercially')
 })
 
 test('no title or no landing page/id at all → no card, same refusal as DPLA', () => {
