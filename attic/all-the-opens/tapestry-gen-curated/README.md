@@ -5,7 +5,7 @@ enriched."* Two outputs from one run: `demo/apollo-11.html` (self-contained
 render) and `../tapestry/apollo-11.tapestry` (the Internet Archive Tapestry
 format — retained but secondary). All render output is gitignored — the public
 demo is the **live streaming server** (`npm run serve`, deployed at
-help-from-our-friends.fly.dev); nothing pre-generated is committed.
+friendsof.wiki); nothing pre-generated is committed.
 Design: `docs/design-plans/2026-07-23-article-tapestry.md`. Intent and contracts:
 `CLAUDE.md`.
 

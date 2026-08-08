@@ -9,7 +9,7 @@ active project is **`tapestry-gen/`** — a generator that renders a Wikipedia
 article as *"the article, enriched"*: the article as a spine, with the open
 ecosystem's media and cited sources placed by the article's own wikilinks and
 citations (resolved through Wikidata QIDs and authority identifiers). It is a
-live website before it is a generator — <https://help-from-our-friends.fly.dev/>
+live website before it is a generator — <https://friendsof.wiki/>
 renders any English Wikipedia article on demand — and every page it renders also
 *measures* how little of what it found the original Wikipedia article can show.
 See `tapestry-gen/CLAUDE.md`.
