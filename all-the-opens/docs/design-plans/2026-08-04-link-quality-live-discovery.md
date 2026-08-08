@@ -8,7 +8,7 @@ The implementation approach leans on patterns already established in the codebas
 
 ## Definition of Done
 
-Overnight review of the deployed demo (help-from-our-friends.fly.dev) against
+Overnight review of the deployed demo (friendsof.wiki) against
 "Dapples" and "Angkor Wat" found that most cards truthfully answer their
 *anchor* but not the *article*. This design is done when:
 

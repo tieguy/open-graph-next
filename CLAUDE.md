@@ -18,7 +18,7 @@ The repo's one active project is **`all-the-opens/tapestry-gen/`** — *"the
 article, enriched"*: rendering a Wikipedia article with the open ecosystem's
 media and cited sources placed by the article's own anchors, and measuring how
 little of that the Wikipedia article itself can show. It is a deployed website
-(<https://help-from-our-friends.fly.dev/>) before it is a generator. See
+(<https://friendsof.wiki/>) before it is a generator. See
 `all-the-opens/CLAUDE.md` and `all-the-opens/tapestry-gen/CLAUDE.md`.
 
 Anything touching a Wikimedia API must follow `tapestry-gen/CLAUDE.md`'s

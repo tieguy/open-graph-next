@@ -6,7 +6,7 @@ the article's own cited sources placed by the article's own anchors — its
 wikilinks and footnotes, resolved through Wikidata QIDs and authority
 identifiers. No dataset, no per-article code.
 
-The demo is live at **https://help-from-our-friends.fly.dev/**.
+The demo is live at **https://friendsof.wiki/**.
 
 One dependency: [m3api](https://www.npmjs.com/package/m3api), the minimal
 MediaWiki API client, which owns the User-Agent, maxlag and retry rules for

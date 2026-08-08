@@ -24,7 +24,7 @@
  */
 import { showcaseTitles } from './src/front-page.js'
 
-const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://help-from-our-friends.fly.dev')
+const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki')
   .replace(/\/+$/, '')
 // A genuinely cold page can take a minute; the timeout only has to be longer
 // than the slowest honest run, not tight.

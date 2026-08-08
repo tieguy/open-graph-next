@@ -73,7 +73,7 @@ async function main() {
     // Where the index that discusses these trade-offs is published. Overridable
     // because anyone can run this; unset it and the page simply states the rule
     // without pointing anywhere, which is right for a file opened off disk.
-    home: process.env.SITE_HOME ?? 'https://help-from-our-friends.fly.dev/',
+    home: process.env.SITE_HOME ?? 'https://friendsof.wiki/',
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +

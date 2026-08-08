@@ -112,7 +112,7 @@ completion, not the absolute seconds — see the warning under Request shape.
 
 ## Deployed demo
 
-`serve.js` runs publicly at **https://help-from-our-friends.fly.dev/**
+`serve.js` runs publicly at **https://friendsof.wiki/**
 (Fly.io app `help-from-our-friends` — renamed from `article-tapestry`
 2026-08-03; personal org, sjc, one machine always up since 2026-08-05 —
 scale-to-zero until then; `Dockerfile` + `fly.toml`
