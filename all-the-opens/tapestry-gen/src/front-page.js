@@ -216,8 +216,9 @@ export function frontPage({ inline = new Map() } = {}) {
 <title>Help From Our Friends — an open knowledge web experiment</title>
 <style>
 :root{
-  --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#0b0d0f; --muted:#54595d;
-  --rule:#d5d8dc; --faint:#eceef0; --link:#3366cc;
+  --bg:#faf9f6; --paper:#fffefb; --ink:#202122; --head:#101210; --muted:#555a55;
+  --rule:#cfcac0; --faint:#f0ede6; --link:#33684b;
+  --manila:#f2e8d5; --manila-rule:#d8c9a4; --manila-ink:#5c5233;
   --serif:Charter,"Bitstream Charter","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
@@ -284,7 +285,9 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .friend .gift{font-size:1.02rem;line-height:1.5;color:#3a3f45;margin:0;max-width:34ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
-.lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:#8a8f95;margin-right:3px}
+.lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
+  border-radius:8px;padding:0 7px;margin-right:5px}
 /* The source of the license claim beside it. Deliberately quiet — it is
    evidence for a line the reader may not have doubted, not a call to action. */
 .lic-src{white-space:nowrap}

@@ -1346,6 +1346,16 @@ const STYLE = `
      subtle rules frame content (thumbnails, table hairlines). */
   --rule:#c8ccd1; --rule-strong:#a2a9b1; --faint:#eaecf0; --link:#3366cc;
   --link-visited:#6b4ba1;
+  /* The experiment's own voice (2026-08-08, "Wikipedian but friendly"):
+     everything that is THE ARTICLE stays in the Vector values above — gray
+     ground, #36c wikilinks, square frames — and everything that is OURS (the
+     kicker, the folds, badges, the visibility panel, the footer) speaks in
+     warm paper, reading-room lamp green, and catalog-card manila. Color marks
+     whose voice is speaking. Deliberately not WMF's palette: the green is
+     yellow-cast, apart from Codex #14866d and logo #339966; no red at all. */
+  --warm:#faf9f6; --accent:#33684b; --accent-ink:#4d5a51;
+  --manila:#f2e8d5; --manila-rule:#d8c9a4; --manila-ink:#5c5233;
+  --warm-rule:#cfcac0;
   --serif:"Linux Libertine","Georgia","Times New Roman",Times,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
@@ -1355,7 +1365,7 @@ html{-webkit-text-size-adjust:100%}
    change that does most of the work. 15px sits between MediaWiki's 14px content
    default and the 16px its larger reading preference serves; both ship, and
    neither is worth matching to the pixel at the cost of legibility here. */
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+body{margin:0;background:var(--warm);color:var(--ink);font-family:var(--sans);
   font-size:15px;line-height:1.65}
 a{color:var(--link);text-decoration:none}
 a:visited{color:var(--link-visited)}
@@ -1372,9 +1382,9 @@ img{max-width:100%;display:block}
    wiki's header sits and is styled as chrome rather than as a kicker — small,
    grey, ruled off — because everything below it is pretending to be an article
    and this line is the one that must not. */
-.kicker{font-size:.8rem;line-height:1.5;color:var(--muted);margin:0 -32px 18px;
-  padding:9px 32px;border-bottom:1px solid var(--rule);background:var(--bg)}
-.kicker a{color:var(--link)}
+.kicker{font-size:.8rem;line-height:1.5;color:var(--accent-ink);margin:0 -32px 18px;
+  padding:9px 32px;border-bottom:1px solid var(--warm-rule);background:var(--warm)}
+.kicker a{color:var(--accent);font-weight:600}
 /* Serif, normal weight, no tightened tracking: MediaWiki's firstHeading. The
    old skin set this in a 3.4rem semibold sans, which is a magazine cover. */
 .hero h1{font-family:var(--serif);font-size:1.9rem;line-height:1.25;
@@ -1383,7 +1393,7 @@ img{max-width:100%;display:block}
    encyclopedia", this says what the page actually is. Same size, same grey,
    same place, and it is doing the same job. */
 .hero .thesis{font-size:.82rem;line-height:1.55;max-width:80ch;color:var(--muted);margin:0 0 12px}
-.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--muted);
+.legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--accent-ink);
   min-height:16px;margin:0 0 12px}
 .hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
 .key{display:inline-flex;align-items:center;gap:8px}
@@ -1486,7 +1496,7 @@ sup.ref a{color:var(--link)}
 .ib-why summary::-webkit-details-marker{display:none}
 .ib-why[open] .rinfo{opacity:.55}
 .ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
-  background:var(--paper);border:1px solid var(--rule);padding:6px 8px;margin:4px 0 2px}
+  background:var(--warm);border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:4px 0 2px}
 
 /* The hero: the one thing the section wants a passing reader to see. It is a
    card, so everything true of a card stays true of it — it is just given the
@@ -1525,8 +1535,9 @@ sup.ref a{color:var(--link)}
 /* "4" is decoration; "4 of 54" is the disclosure — that a shelf is a sample of
    something larger, said on the shelf rather than in a paragraph above the
    deck. So it is darker than the old bare count, and it does not wrap. */
-.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.7rem;font-weight:600;
-  color:var(--muted);white-space:nowrap;flex:none}
+.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.66rem;font-weight:600;
+  color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
+  border-radius:8px;padding:1px 8px;white-space:nowrap;flex:none}
 .carousel-head .count[title]{cursor:help}
 .carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -1642,7 +1653,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .rwhy>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;
   gap:3px;color:#7a7f85}
 .rwhy>summary::-webkit-details-marker{display:none}
-.rwhy>summary:hover,.rwhy[open]>summary{color:var(--link)}
+.rwhy>summary:hover,.rwhy[open]>summary{color:var(--accent)}
 .rwhy>summary .ccrow{margin:0}
 .rwhy .ccmark{width:1em;height:1em}
 /* The magnifier (LENS), matching the connection fold below rather than
@@ -1651,11 +1662,11 @@ a:hover > .plate .plate-mark{color:var(--link)}
    reads as doubt ABOUT the licence, and casting doubt on the claim is a far
    worse cost than repeating an icon. Both controls offer a closer look; that
    they look alike is honest. (Was a circled i until 2026-08-08.) */
-.rinfo{color:var(--link);vertical-align:-1px}
+.rinfo{color:var(--accent);vertical-align:-1px}
 .rwhy[open] .rinfo{opacity:.55}
 .rwhy[open]{flex:1 1 100%}
-.rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
-  border:1px solid var(--rule);padding:6px 8px;margin:6px 0 0}
+.rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--warm);
+  border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:6px 0 0}
 .rwhy a{font-weight:600}
 .rwhy .rd-src{color:#8b9096}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
@@ -1680,7 +1691,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    and a floated one would read as a caption for whatever wrapped around it.
    It clears the hero so the two never collide on a narrow column.
    (No backticks in this stylesheet: it is a JS template literal.) */
-.subject-rights{clear:both;margin:0 0 14px;padding:9px 12px;
+.subject-rights{clear:both;margin:0 0 14px;padding:9px 12px;border-radius:4px;
   background:#f6f8f8;border:1px solid var(--rule-strong);border-left:8px solid #b9c4c6}
 .subject-rights .sr-line{margin:0;font-size:.86rem;line-height:1.45;color:#3c4448}
 .subject-rights .ccrow{--ccmark-hole:#f6f8f8}
@@ -1701,9 +1712,9 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .gap{max-width:640px;margin:0 0 12px}
 .gap summary{font-family:var(--sans);font-size:.72rem;letter-spacing:.04em;font-weight:700;
   color:var(--muted);cursor:pointer;width:fit-content}
-.gap summary:hover{color:var(--link)}
+.gap summary:hover{color:var(--accent)}
 .gap[open] summary{margin:0 0 12px;color:var(--head)}
-.gap-body{padding:14px 16px;background:var(--bg);border:1px solid var(--rule-strong)}
+.gap-body{padding:14px 16px;background:var(--warm);border:1px solid var(--warm-rule);border-radius:4px}
 .gap-lead{font-size:.8rem;line-height:1.55;color:var(--ink);margin:0 0 11px}
 /* Two questions, two columns: what this partner gave the page in front of you,
    and how much of it Wikipedia can show. Running them together in prose is
@@ -1749,10 +1760,10 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .card .prov{margin:0}
 .card .prov summary.why{list-style:none;cursor:pointer;display:block;margin:0}
 .card .prov summary::-webkit-details-marker{display:none}
-.card .prov summary.why:hover,.card .prov[open] summary.why{color:var(--link)}
+.card .prov summary.why:hover,.card .prov[open] summary.why{color:var(--accent)}
 /* The affordance, in the link color and heavier than the line it ends: a grey
    ⓘ reads as decoration, a blue one reads as a control. */
-.card .prov .info{color:var(--link);margin-left:5px;vertical-align:-1px}
+.card .prov .info{color:var(--accent);margin-left:5px;vertical-align:-1px}
 .card .prov summary.bare .info{margin:0 4px 0 0}
 .card .prov[open] .info{opacity:.55}
 .card .prov p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
@@ -1823,7 +1834,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .foot{max-width:1000px;margin:0 auto;padding:14px 32px 26px;background:var(--paper);
   border:1px solid var(--rule-strong);border-width:0 1px 1px;
   font-size:.78rem;line-height:1.6;color:var(--muted)}
-.foot p{margin:0;padding-top:14px;border-top:1px solid var(--rule)}
+.foot p{margin:0;padding-top:14px;border-top:1px solid var(--warm-rule)}
 .foot code{background:var(--faint);padding:1px 5px}
 
 @media(max-width:900px){main{padding:4px 20px 0}.hero{padding:0 20px 12px}
