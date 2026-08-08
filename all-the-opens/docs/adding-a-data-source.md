@@ -23,6 +23,12 @@ directly.
 > `[research]` means reported elsewhere and not independently re-verified here.
 > Everything decays — an undated "partner X blocks us" is worthless within
 > months — so every claim below carries a date.
+>
+> **Every pitfall in Part 2 is currently `[ours]`**, and that is deliberate: a
+> document whose whole argument is "check it before you ship it" cannot itself
+> run on claims nobody reproduced. Unverified leads go to an issue and come
+> back here once someone has run them. The convention stays because a future
+> entry may legitimately be `[research]` — it just has to say so.
 
 **Not config-driven, and an audit concluded it shouldn't try to be.** Every
 partner needs its own fetcher and its own rights mapping, because every
@@ -257,25 +263,47 @@ went 2 → 11.
 > five Smithsonian items and live discovery showed two — and four of the five
 > turned out to be unreachable for reasons no ranking change would touch.
 
-### 4. Wrong Wikidata modeling, not missing data `[research]`
+### 4. Wrong modeling assumption, not missing data `[ours]`
 
-*Recorded in LUI-140; not independently re-verified in this repo as of
-2026-08-08.* The Corpus Vitrearum (CVMA) has **28,135 entries and produced 0
-matches**, because the material was stated in `P31` (instance of) rather than
-`P186` (made from material). The data was there, under a property nobody
-checked.
+The graph usually has it — under a property, or in a direction, you did not
+check. Two verified cases here, and they fail in different ways.
 
-The in-repo cousin is `needsArtworksQuery` keying on `P31 → Q5`
-(`src/artworks.js`): deliberately narrow, and it means a workshop, a studio or
-an artists' collective gets no shelf, because none of them is Q5. That is a
-documented trade against the transitive class walk that cost 16–37s and blew
-the WDQS timeout when mappability tried it — not an oversight.
+**The Smithsonian states no object-id property at all.** Columbia, the Apollo
+11 command module, carries none of P3634/P4610/P13234/P6108 — the four
+properties every other museum partner here is found by. A pivot built on the
+assumption "a museum states an id for its objects" finds nothing and concludes
+the Smithsonian has not published. It has: the object carries **P195**
+(collection) and **P217** (inventory number), and the Open Access API indexes
+the accession number. The pair has to be read from ONE `OPTIONAL` block, too,
+or an object in a Smithsonian collection could be paired with another museum's
+inventory number — the Rijksmuseum states P217 on its objects as well
+(`src/smithsonian.js`, and the comment at `statements.js:44-51`).
 
-> **Margin note.** "The graph doesn't have it" is almost always "the graph has
-> it under a property I didn't check." Before concluding a dataset is absent,
-> query for the entity by any route and read what it actually states. The cost
-> of the wrong conclusion is high and silent: you write off a 28,000-item
-> collection and nothing anywhere reports an error.
+**A property has a direction, and it may not be yours.** `src/artworks.js`
+asks `?work wdt:P170 ?subject` — what did this person make. An article *about*
+a painting therefore gets nothing from it: The Night Watch fires the pivot
+**zero** times, because P170 points from the painting to Rembrandt and not the
+other way. That is not a bug and not missing data; it is one direction of one
+statement, and the pivot that wants the other direction is a different query.
+
+The deliberate cousin is `needsArtworksQuery` keying on `P31 → Q5`: a
+workshop, a studio or an artists' collective is not Q5 and so gets no shelf.
+Documented as a trade against the transitive class walk that cost 16–37s and
+blew the WDQS timeout when mappability tried it — an accepted narrowness
+rather than an oversight, which is a third distinct thing from the two above.
+
+> **Margin note.** "The graph doesn't have it" is very often "the graph has it
+> under a property, or in a direction, I didn't check." Before concluding a
+> dataset is absent, query the entity by any route and read what it actually
+> states. The cost of the wrong conclusion is high and silent: you write off a
+> collection, and nothing anywhere reports an error.
+>
+> An unresolved case of exactly this shape is tracked in **LUI-147** (the
+> Corpus Vitrearum's medieval stained glass, reportedly ~28k entries returning
+> no matches because the material is stated through `P31` rather than `P186`).
+> It is *not* written up as a pitfall here, because nobody has reproduced it in
+> this repo — and a playbook that cites an unverified incident is doing the
+> thing it warns against in Pitfall 2.
 
 ### 5. `rights.copy` versus `rights.work` — printing the wrong one promises a license nobody granted `[ours]`
 
