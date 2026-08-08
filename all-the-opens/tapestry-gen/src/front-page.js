@@ -428,10 +428,14 @@ ${friends}
         the first example here: its developer terms make API metadata non-commercial by default,
         with a separate keyed track for commercial use that covers only a selection — and the
         carve-out for already-open metadata names Europeana, DPLA and data.govt.nz, not the New
-        Zealand collections themselves. This site is non-commercial and sits inside those terms.
-        But each friend added makes this ledger longer, and any route Wikipedia itself could adopt
-        — or any commercial reuse of this approach — has to clear every line of it. The terms of
-        the pipe are becoming as much of the challenge as the license on the item.</p>
+        Zealand collections themselves. This demo happens to be non-commercial, so it can run
+        today — but that states the problem rather than solving it. The goal is adoption by
+        Wikipedia or something Wikipedia-like, and everything Wikipedia ships must be free for
+        anyone to reuse, commercial use included; a pipe whose default terms forbid that cannot
+        feed it. So a non-commercial condition is named here as a blocker, not a condition met:
+        the demo shows what the New Zealand collections could bring, and the pipe would need
+        opening — by agreement, or by a change of terms — before anything Wikipedia-like could
+        drink from it. Each friend added makes this ledger longer.</p>
         <h4>Bot volume and caching</h4>
         <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
         likely need extensive caching and likely formal agreements with the other data providers.</p>
