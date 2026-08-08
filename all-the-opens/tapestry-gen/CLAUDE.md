@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-07
+Last verified: 2026-08-08
 
 ## Purpose
 
@@ -891,6 +891,20 @@ leads the section) → `emit-html`.
 
 ## Key Decisions
 
+- **The page wears MediaWiki's design language, hand-written** (2026-08-07/08,
+  the wiki-skin branch; the long argument is the comment block above `STYLE`
+  in `src/emit-html.js`). The render's claim — "here is the article, and here
+  is what the open ecosystem holds that it does not show" — lands only if the
+  first half LOOKS like the article, so the skin imitates Vector: sans body,
+  serif hairline-ruled headings, #36c links, thumb-framed cards, wrapping
+  galleries instead of scrolling strips, wikitable panels. What is borrowed
+  is the design language thousands of wikis wear; what is NOT borrowed is
+  identity (no wordmark, no tabs, the masthead names the experiment first)
+  or CSS (every rule is hand-written in `STYLE`; TemplateStyles are never
+  passed through). Disclosure folds open under one shared LENS magnifier SVG
+  (2026-08-08; replaced the circled i). A differentiation pass — small
+  deliberate departures from Vector so the page cannot be mistaken for
+  enwiki — is requested and pending.
 - **HTML is the only output** (2026-08-04). CSS reflow solved what
   hand-computed `.tapestry` pixel geometry could not — dead whitespace,
   squashed images, non-responsive — so the Tapestry emitter
