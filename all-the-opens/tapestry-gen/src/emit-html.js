@@ -407,6 +407,27 @@ function plate(entry) {
     : body
 }
 
+/**
+ * The description line — unless the credit already says all of it.
+ *
+ * DPLA, Europeana and DigitalNZ all fill `description` with the holding
+ * institution, the same name their credit line leads with, so a text-only
+ * card spent four of its lines naming the holder twice (both clamped) while
+ * the title — the only text that says what the ITEM is — clipped at three
+ * (2026-08-09, from an Apollo 11 DPLA shelf review). The rule is
+ * containment, not a partner list: a description the credit line contains
+ * IN FULL adds nothing and is dropped; one that says anything more
+ * survives. So does the no-provider fallback ("A DPLA partner
+ * institution"): with no provider named the credit renders empty, the
+ * prefix test fails, and the description stays the card's only naming.
+ */
+function descLine(entry) {
+  if (!entry.description) return ''
+  const author = entry.attribution?.author ?? ''
+  if (author.startsWith(entry.description)) return ''
+  return `<p class="desc">${escapeHtml(entry.description)}</p>`
+}
+
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
 function card(entry, inline, { head = '' } = {}) {
@@ -458,7 +479,7 @@ function card(entry, inline, { head = '' } = {}) {
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
     head +
     heading +
-    (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
+    descLine(entry) +
     evidence +
     credit(entry, inline) +
     rightsLine(entry) +
@@ -664,7 +685,7 @@ function heroCard(entry, inline) {
     `<figure class="card hero-card">${visual}<figcaption>` +
     `<div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
     heading +
-    (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
+    descLine(entry) +
     credit(entry, inline, false) +
     rightsLine(entry) +
     provenance(entry) +
@@ -1700,6 +1721,13 @@ a:hover > .plate .plate-mark{color:var(--link)}
    rides on the tooltip. */
 .card h4{font-size:.92rem;line-height:1.3;margin:0 0 4px;color:var(--head);font-weight:400;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+/* A card with no picture gets six title lines, not three (2026-08-09). The
+   three-line clamp is fitted to cards where an image takes most of the
+   height; on a text-only card the title is the only thing that says what the
+   item is, nothing else wants the room, and archival titles clipped at three
+   lines were unreadable on a real shelf. The hero is excluded — it has its
+   own no-clamp rule, and this selector would out-rank it. */
+.card:not(.hero-card):has(.plate) h4{-webkit-line-clamp:6}
 /* A thumbcaption's link is an ordinary blue wikilink — the underlined-on-hover
    kind — not a bordered title treatment. */
 .card h4 a{color:var(--link)}
