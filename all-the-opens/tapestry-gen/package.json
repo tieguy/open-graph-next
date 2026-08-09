@@ -8,6 +8,7 @@
     "serve": "node serve.js",
     "warm": "node warm.js",
     "deploy": "flyctl deploy --remote-only && node warm.js",
+    "deploy:staging": "flyctl deploy --config fly.staging.toml --remote-only",
     "test": "node --test 'test/*.test.js'"
   },
   "dependencies": {

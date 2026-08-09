@@ -1,0 +1,42 @@
+# Fly.io config for the STAGING copy of the demo — review-before-deploy.
+#
+# Same image, same Dockerfile, same mount shape as production (fly.toml); the
+# differences are exactly the ones a staging app wants:
+#   - its own app name and volume (nothing shared with production),
+#   - scale-to-zero (min_machines_running = 0): a cold start on a reviewer is
+#     fine, an always-on second machine's bill is not,
+#   - ROBOTS_DISALLOW_ALL, so crawlers never index a staging render,
+#   - no custom domain — the fly.dev hostname is the point.
+#
+# Deploy with `npm run deploy:staging` — flyctl only, deliberately no warm.js:
+# staging has no visitors to keep warm for, and warming spends partner API
+# capacity twice for one review.
+#
+# WIKIMEDIA_UA_CONTACT is a secret on this app too, set separately from
+# production (`fly secrets set WIKIMEDIA_UA_CONTACT=you@example.com --app
+# help-from-our-friends-staging`) — the server refuses to start without it.
+
+app = "help-from-our-friends-staging"
+primary_region = "sjc"
+kill_timeout = "45s"
+
+[env]
+  ROBOTS_DISALLOW_ALL = "1"
+
+[http_service]
+  internal_port = 8080
+  force_https = true
+  auto_stop_machines = "stop"
+  auto_start_machines = true
+  min_machines_running = 0
+
+[[vm]]
+  size = "shared-cpu-1x"
+  memory = "1gb"
+
+# Staging's own cache volume, same name in its own app's namespace. Created:
+#   fly volumes create tapestry_cache --app help-from-our-friends-staging \
+#     --region sjc --size 3 --yes
+[[mounts]]
+  source = "tapestry_cache"
+  destination = "/app/.cache"

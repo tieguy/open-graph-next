@@ -148,8 +148,14 @@ const server = createServer(async (req, res) => {
   }
   if (url.pathname === '/robots.txt') {
     // Every /wiki/ visit spends upstream API capacity; crawlers must not.
+    // Staging (ROBOTS_DISALLOW_ALL) refuses crawlers entirely: it exists for
+    // one reviewer, and an indexed staging page is a wrong answer forever.
     res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end('User-agent: *\nDisallow: /wiki/\n')
+    res.end(
+      process.env.ROBOTS_DISALLOW_ALL
+        ? 'User-agent: *\nDisallow: /\n'
+        : 'User-agent: *\nDisallow: /wiki/\n',
+    )
     return
   }
   const m = /^\/wiki\/(.+)$/.exec(url.pathname)
