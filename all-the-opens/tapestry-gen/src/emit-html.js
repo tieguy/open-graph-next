@@ -947,7 +947,20 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // their text. Group order is article order, so the earliest singles float
   // first, and a floated shelf's sample claim rides its caption — the
   // disclosure moves WITH the card, never dropped.
-  const budget = Math.floor(proseLength(b) / FLOAT_MIN_PROSE)
+  // No gutter in the LEDE (2026-08-09, from a hole on Apollo 11). The
+  // seven-lines-per-700-characters arithmetic above is fitted to the 220px
+  // rail the sections use; the lede's rail is 330px — a wider float is a
+  // TALLER card and a narrower text column at once, so both sides of the
+  // ratio move against it. Measured on the day's render: Apollo 11's lede
+  // runs 3,264 characters, among the longest this site draws, and a
+  // launch-photo hero (natural aspect, portrait at 330px) plus the
+  // subject-rights box left no wrap room at all — the one gutter thumb (a
+  // map) cleared to below the last line and left its full height as a blank
+  // column. If the longest lede holes, shorter ones only hole worse; the
+  // lede's margin has exactly one slot, and the hero or the infobox already
+  // owns it. Singles stay shelved in the deck there, which is the same
+  // demotion the FLOAT_MIN_PROSE rule applies to a short section's hero.
+  const budget = b.id === 'slede' ? 0 : Math.floor(proseLength(b) / FLOAT_MIN_PROSE)
   let floats = hero || infobox ? 1 : 0
   const gutter = []
   for (const [source, byTopic] of bySource) {
