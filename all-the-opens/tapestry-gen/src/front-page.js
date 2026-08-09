@@ -223,28 +223,35 @@ export function frontPage({ inline = new Map() } = {}) {
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--serif);
-  font-size:19px;line-height:1.7;text-rendering:optimizeLegibility}
+/* The article skin's bones (2026-08-08 rebuild): 15px sans body, serif
+   headings, one white column on the warm ground — the cover of the same
+   publication the article pages belong to, not a separate magazine. */
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.65}
 a{color:var(--link)}
-.wrap{max-width:1180px;margin:0 auto;padding:0 40px;min-width:0}
-.kicker{font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;
-  color:var(--muted);margin:0 0 28px}
-.kicker a{color:inherit;text-decoration:none}
-.kicker a:hover{color:var(--link)}
-.hero{padding:96px 0 40px}
-h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
-  margin:0 0 24px;color:var(--head);font-weight:600;max-width:16ch}
-.lede{font-size:clamp(1.1rem,2vw,1.35rem);line-height:1.55;max-width:54ch;margin:0 0 14px;color:#333}
+a:hover{text-decoration:underline}
+.page{max-width:1000px;margin:0 auto;background:var(--paper);
+  border:1px solid var(--rule);border-width:0 1px}
+.wrap{padding:0 32px;min-width:0}
+/* The same site strip the article pages open with — chrome, in our voice. */
+.kicker{font-size:.8rem;line-height:1.5;color:var(--muted);margin:0 -32px 20px;
+  padding:9px 32px;border-bottom:1px solid var(--rule);background:var(--bg)}
+.kicker a{color:var(--link);font-weight:600;text-decoration:none}
+.kicker a:hover{text-decoration:underline}
+.hero{padding:0 0 8px}
+h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
+  margin:.3em 0 12px;color:var(--head);font-weight:400}
+.lede{font-size:.95rem;line-height:1.6;max-width:74ch;margin:0 0 6px;color:#3a3f45}
 .lede b{color:var(--head)}
 
 /* The search field is the thesis: an encyclopedia headword waiting to be
    written. Serif, oversized, underlined like an entry — not a widget. */
-.ask{margin:44px 0 10px;max-width:44rem}
+.ask{margin:20px 0 6px;max-width:44rem}
 /* appearance:none and the two ::-webkit-search-* rules undo what type=search
    brings with it — Safari's inset chrome and the little grey clear button —
    so the field keeps reading as an encyclopedia headword rather than a widget. */
 .ask input{width:100%;background:transparent;border:0;border-bottom:2px solid var(--ink);
-  font-family:var(--serif);font-size:clamp(1.5rem,3.4vw,2.3rem);color:var(--head);
+  font-family:var(--serif);font-size:clamp(1.3rem,2.8vw,1.9rem);color:var(--head);
   padding:6px 2px 10px;border-radius:0;appearance:none;-webkit-appearance:none}
 .ask input::-webkit-search-decoration,
 .ask input::-webkit-search-cancel-button{-webkit-appearance:none;appearance:none}
@@ -255,34 +262,41 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .hint kbd{font-family:var(--sans);border:1px solid var(--rule);border-bottom-width:2px;
   border-radius:4px;padding:0 5px;background:var(--paper);font-size:.72rem}
 
-.section{border-top:1px solid var(--rule);padding:52px 0}
-.eyebrow{font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--muted);display:block;margin:0 0 26px}
+.section{padding:6px 0 22px}
+.section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
+  color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
+/* The ready line: the six warm pages, named as such. A manila chip because a
+   statement about availability is the friends' voice, not the article's. */
+.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
+.ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
+  border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
+  vertical-align:1px}
 
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
-.show{display:block;text-decoration:none;color:inherit;border-top:1px solid var(--rule);
-  padding:20px 0 26px;min-width:0}
-.show:hover .art,.show:focus-visible .art{color:var(--link)}
-.show:focus-visible{outline:2px solid var(--link);outline-offset:4px}
-.dom{display:block;font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:8px}
-.art{display:block;font-size:1.45rem;line-height:1.15;font-weight:600;color:var(--head);
-  margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;margin:0 0 8px}
+.show{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);
+  border-radius:4px;background:var(--bg);padding:10px 12px 12px;min-width:0}
+.show:hover,.show:focus-visible{border-color:var(--link)}
+.show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
+.show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.dom{display:block;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
+  margin-bottom:5px}
 .art::after{content:" →";color:var(--rule)}
 .show:hover .art::after{color:var(--link)}
-.watch{display:block;font-family:var(--sans);font-size:.82rem;line-height:1.6;color:var(--muted);
-  max-width:38ch}
+.watch{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
 .friends-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:34px 0 6px}
 .friends-cat:first-child{margin-top:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
-.friend .who{display:flex;align-items:center;gap:10px;font-family:var(--sans);font-weight:700;
-  font-size:1rem;color:var(--head);margin:0 0 8px}
+.friend .who{display:flex;align-items:center;gap:10px;font-weight:700;
+  font-size:.92rem;color:var(--head);margin:0 0 6px}
 .fav{width:18px;height:18px;flex:none;border-radius:3px;background:#fff no-repeat center;
   background-size:contain;display:inline-block}
-.friend .gift{font-size:1.02rem;line-height:1.5;color:#3a3f45;margin:0;max-width:34ch}
+.friend .gift{font-size:.88rem;line-height:1.55;color:#3a3f45;margin:0;max-width:36ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
 .lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
@@ -295,26 +309,30 @@ h1{font-size:clamp(2.7rem,6vw,4.6rem);line-height:1.02;letter-spacing:-.02em;
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
 .boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.box{background:var(--paper);border:1px solid var(--rule);border-radius:8px;padding:22px 26px;min-width:0}
+.box{background:var(--bg);border:1px solid var(--rule);border-radius:4px;padding:20px 24px;min-width:0}
 .box h3{font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--head);margin:0 0 10px}
 .box p{font-family:var(--sans);font-size:.88rem;line-height:1.65;color:#3a3f45;margin:0 0 10px}
 .box p:last-child{margin-bottom:0}
 .box h4{font-family:var(--serif);font-size:1.02rem;margin:16px 0 4px;color:var(--head)}
 
-.foot{border-top:1px solid var(--rule);padding:40px 0 60px;font-family:var(--sans);
-  font-size:.8rem;color:var(--muted)}
-.foot p{max-width:70ch;margin:0 0 8px}
+.foot{font-size:.8rem;color:var(--muted)}
+.foot-wrap{padding-top:14px;padding-bottom:40px;border-bottom:1px solid var(--rule)}
+.foot p{max-width:80ch;margin:0 0 8px;padding-top:0}
+.foot p:first-child{border-top:1px solid var(--rule);padding-top:14px}
 
 @media(max-width:960px){.grid,.friends{grid-template-columns:repeat(2,minmax(0,1fr))}.boxes{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:900px){.wrap{padding:0 20px}.kicker{margin:0 -20px 18px;padding:9px 20px}}
 @media(max-width:640px){
-  .wrap{padding:0 20px}
-  .hero{padding:56px 0 30px}
+  .wrap{padding:0 14px}
+  .kicker{margin:0 -14px 16px;padding:8px 14px}
+  .hero{padding:0 0 8px}
   .grid,.friends{grid-template-columns:minmax(0,1fr)}
 }
 </style>
 </head>
 <body>
+<div class="page">
 <header class="hero"><div class="wrap">
   <p class="kicker">Help From Our Friends · an experiment in visualizing open knowledge, by <a href="https://lu.is">Luis Villa</a></p>
   <h1>Wikipedia is not alone.</h1>
@@ -341,16 +359,14 @@ ${legend.style}
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
+  <p class="ready"><span class="chip">ready now</span>Six articles are already rendered and cached — they open at once:</p>
+  <div class="grid">
+${cards}
+  </div>
 </div></header>
 <main>
   <section class="section"><div class="wrap">
-    <span class="eyebrow">Or start with one of these</span>
-    <div class="grid">
-${cards}
-    </div>
-  </div></section>
-  <section class="section"><div class="wrap">
-    <span class="eyebrow">Current friends, what they bring, and how they’re licensed</span>
+    <h2>Current friends, what they bring, and how they’re licensed</h2>
     <div class="friends">
 ${friends}
       <div class="friend host">
@@ -362,6 +378,7 @@ ${friends}
     </div>
   </div></section>
   <section class="section"><div class="wrap">
+    <h2>How it works, and where it strains</h2>
     <div class="boxes">
       <div class="box">
         <h3>How it works</h3>
@@ -444,7 +461,7 @@ ${friends}
     </div>
   </div></section>
 </main>
-<footer class="foot"><div class="wrap">
+<footer class="foot"><div class="wrap foot-wrap">
   <p>Generated, not authored. Every page is discovered live from the article’s own anchors and
     streamed as it is found — this server fetches politely, a few pages at a time, and caches what
     it has seen.</p>
@@ -459,6 +476,7 @@ ${friends}
     about cooperative knowledge infrastructure and the future of libraries, and by the work of the
     <a href="https://tapestries.media">tapestries.media</a> team.</p>
 </div></footer>
+</div>
 </body>
 </html>
 `
