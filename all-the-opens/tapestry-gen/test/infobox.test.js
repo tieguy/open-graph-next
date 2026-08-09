@@ -228,3 +228,52 @@ test('the streamed lede fragment carries the box, so the mount script places it'
   assert.match(fragment, /<aside class="rail"><div class="ib-slot">/)
   assert.match(fragment, /<table class="infobox"/)
 })
+
+// ------------------------------------------------- the prose-budgeted gutter
+
+test('singles float into the gutter while the prose can wrap them; overflow stays in the deck', () => {
+  // One float per FLOAT_MIN_PROSE (700) characters of prose, hero included —
+  // the guard that keeps the 2026-08-05 blank-column problem from returning.
+  // 2100+ characters = budget 3: the hero, then two singles; the third single
+  // stays shelved in the deck.
+  const prose = 'x'.repeat(2200)
+  const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
+  const { rail, deck } = bandParts({
+    id: 's5',
+    title: 'Section',
+    blocks: [{ kind: 'p', text: prose, html: `<p>${prose}</p>` }],
+    entries: [
+      mk('met', 'Hero'),
+      mk('openstreetmap', 'Map: Somewhere'),
+      mk('inaturalist', 'A taxon'),
+      mk('gbif', 'Recorded'),
+      mk('dpla', 'Paper A'), mk('dpla', 'Paper B'),
+    ],
+  }, new Map(), '/wiki/')
+  assert.match(rail, /hero-card/)
+  const more = rail.match(/<aside class="rail-more">([\s\S]*)<\/aside>/)?.[1] ?? ''
+  assert.match(more, /Map: Somewhere/, 'first single floats')
+  assert.match(more, /A taxon/, 'second single floats')
+  assert.doesNotMatch(more, /Recorded/, 'budget spent — third single stays in the deck')
+  assert.match(deck, /Recorded/)
+  assert.match(deck, /Paper A/, 'galleries never float')
+})
+
+test('a short section floats nothing extra, and a floated single still carries its claim', () => {
+  const prose = 'x'.repeat(1500) // budget 2: hero + one single
+  const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
+  const band = {
+    id: 's6',
+    title: 'Section',
+    blocks: [{ kind: 'p', text: prose, html: `<p>${prose}</p>` }],
+    entries: [mk('met', 'Hero'), mk('openstreetmap', 'Map: Somewhere')],
+    samples: [{ source: 'openstreetmap', topic: null, shown: 1, total: 83, text: 'A sample: 1 of 83 mapped places' }],
+  }
+  const { rail, deck } = bandParts(band, new Map(), '/wiki/')
+  assert.match(rail, /rail-more[\s\S]*1 of 83/, 'the claim rides the floated caption')
+  assert.doesNotMatch(deck, /class="disclosure"/, 'nothing fell to the orphan paragraph')
+  // The same band with stub prose keeps the deck arrangement entirely.
+  const stub = bandParts({ ...band, blocks: [{ kind: 'p', text: 'Short.', html: '<p>Short.</p>' }] }, new Map(), '/wiki/')
+  assert.doesNotMatch(stub.rail, /rail-more/)
+  assert.match(stub.deck, /Map: Somewhere/)
+})

@@ -111,9 +111,10 @@ test('the best find floats in the rail, media rides the deck, references close t
   assert.match(rail, /^<aside class="rail"><figure class="card hero-card">/)
   assert.doesNotMatch(rail, /References in this section/)
   assert.doesNotMatch(rail, /<div class="carousel"/)
-  // The deck carries the remaining media and nothing bibliographic.
+  // The deck carries the remaining media and nothing bibliographic. One
+  // card survived the hero hoist, so it rides as a single thumb (2026-08-08).
   assert.match(deck, /^<div class="deck">/)
-  assert.match(deck, /<div class="carousel"/)
+  assert.match(deck, /<div class="carousel single"/)
   assert.doesNotMatch(deck, /References in this section/)
   // The references are their own part now, and last.
   assert.match(refs, /^<div class="refs">/)
@@ -170,9 +171,11 @@ test('a sample claim rides on the head of the shelf it is a sample of', () => {
   // It used to be a paragraph atop the deck, which on Brown v. Board counted
   // the DPLA shelf from above the Internet Archive and OpenStreetMap shelves.
   const { deck } = bandParts({ ...BAND, samples: [MET_SAMPLE] })
+  // One card left after the hero hoist, so the shelf is a single thumb and
+  // the claim rides its caption head instead of a gallery head (2026-08-08).
   assert.match(
     deck,
-    /<div class="carousel-head"><span class="src">The Met<\/span><span class="count" title="A sample: 1 of the 9 objects the Met holds">1 of 9<\/span><\/div>/,
+    /<div class="single-head"><span class="src">The Met<\/span><span class="count" title="A sample: 1 of the 9 objects the Met holds">1 of 9<\/span><\/div>/,
   )
   // The floating paragraph is gone entirely when every claim found its shelf.
   assert.doesNotMatch(deck, /class="disclosure"/)
@@ -346,8 +349,9 @@ test('one source, two topics: the carousel splits, one labeled strip per topic',
       mk('The strait', 'Golden Gate'),
     ],
   })
-  const carousels = deck.match(/<div class="carousel"/g) ?? []
-  assert.equal(carousels.length, 2)
+  // The two-card topic keeps its gallery; the one-card topic is a thumb.
+  assert.equal((deck.match(/<div class="carousel"/g) ?? []).length, 1)
+  assert.equal((deck.match(/<div class="carousel single"/g) ?? []).length, 1)
   assert.match(deck, /<span class="topic">suspension bridge<\/span>/)
   assert.match(deck, /<span class="topic">Golden Gate<\/span>/)
   // The shared why line is said once under the head, not on every card.
@@ -365,9 +369,9 @@ test('one source, two topics: the carousel splits, one labeled strip per topic',
   assert.match(rail, /<p class="why">About suspension bridge, which this section links to<\/p>/)
 })
 
-test('one source, one topic: a single carousel with no topic label, as before', () => {
+test('one source, one topic: the lone surviving card is a thumb with no topic label', () => {
   const rail = bandRail(BAND)
-  assert.equal((rail.match(/<div class="carousel"/g) ?? []).length, 1)
+  assert.equal((rail.match(/<div class="carousel single"/g) ?? []).length, 1)
   assert.doesNotMatch(rail, /<span class="topic">/)
 })
 
@@ -492,4 +496,30 @@ test('the lede band has no h2 — the masthead already says the title, Vector ne
   assert.doesNotMatch(lede, /<h2>/)
   const s3 = open.slice(open.indexOf('id="s3"'))
   assert.match(s3, /<header class="band-head"><h2>One<\/h2><\/header>/)
+})
+
+test('a one-card source is a thumb, not a gallery of one', () => {
+  // MediaWiki's own idiom: one image is a thumb with a caption, a group is a
+  // gallery. A single find wearing a full shelf head read as a crate. The
+  // source tag and any sample claim move INTO the card's caption; multi-card
+  // shelves keep the box.
+  const { deck } = bandParts({
+    ...BAND,
+    footnotes: [],
+    entries: [
+      { source: 'met', title: 'A photo', imageUrl: 'https://example.test/x.jpg' },
+      { source: 'met', title: 'Another photo', imageUrl: 'https://example.test/y.jpg' },
+      { source: 'openstreetmap', title: 'Map: Somewhere', imageUrl: 'https://example.test/m.png' },
+    ],
+    samples: [{ source: 'openstreetmap', topic: null, shown: 1, total: 83, text: 'A sample: 1 of 83 mapped places' }],
+  })
+  // Two met cards: one is hoisted as the hero, the survivor joins... no —
+  // heroes leave the entries first, so the met shelf has one card left and
+  // would ALSO be a single. Assert both shapes directly instead.
+  const singles = deck.match(/class="carousel single"/g) ?? []
+  assert.ok(singles.length >= 1, 'the map renders as a single thumb')
+  // The single carries its source and claim inside the caption, not a head.
+  assert.match(deck, /<div class="single-head">.*?OpenStreetMap.*?1 of 83/s)
+  // A single never wears the gallery head.
+  assert.doesNotMatch(deck, /<div class="carousel-head">(?:(?!<\/div>).)*OpenStreetMap/s)
 })

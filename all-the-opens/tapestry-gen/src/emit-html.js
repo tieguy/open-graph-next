@@ -409,7 +409,7 @@ function plate(entry) {
 
 // A compact card for a horizontal carousel. The source is not repeated here — it
 // labels the whole carousel — so the card carries only the item and why it landed.
-function card(entry, inline) {
+function card(entry, inline, { head = '' } = {}) {
   const embed = entry.media3d ?? (entry.media ? iaEmbed(entry.media.source) : null)
   let visual = ''
   if (embed) {
@@ -456,6 +456,7 @@ function card(entry, inline) {
   const heading = titleRow(entry)
   return (
     `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
+    head +
     heading +
     (entry.description ? `<p class="desc">${escapeHtml(entry.description)}</p>` : '') +
     evidence +
@@ -713,7 +714,26 @@ function broadNotes(notes, inline) {
 // tall column. When a band draws one source's media through several anchors, the
 // renderer splits it into one carousel per topic (the anchor's label) — a strip
 // mixing the suspension-bridge files with the strait's reads as one confused box.
+/** One find as a framed thumb: source tag, topic and sample claim in the caption. */
+function singleThumb(source, entry, inline, topic = null, sample = null) {
+  const claim = sample
+    ? `<span class="count" title="${escapeHtml(sample.text)}">1 of ${sample.total.toLocaleString()}</span>`
+    : ''
+  const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
+  const head = `<div class="single-head">${sourceTag(source, inline)}${topicTag}${claim}</div>`
+  return card(entry, inline, { head })
+}
+
 function carousel(source, items, inline, topic = null, sample = null) {
+  // One card is a THUMB, not a gallery of one (2026-08-08, deck review).
+  // MediaWiki's idiom draws exactly this line — a single image gets a frame
+  // and a caption, a group gets a gallery — and a one-card shelf wearing a
+  // full shelf head read as a crate beside the real galleries. The source
+  // tag and any sample claim move INTO the caption (the hero's move), so
+  // the disclosure still rides the thing it describes.
+  if (items.length === 1) {
+    return `<div class="carousel single" style="flex:0 1 200px">${singleThumb(source, items[0], inline, topic, sample)}</div>`
+  }
   // The count badge carries the sample claim when there is one: "4 of 54",
   // not "4". This IS the disclosure, attached to the thing it discloses.
   //
@@ -914,6 +934,35 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const shelfKey = (source, topic) => `${source}::${topic ?? ''}`
   const sampleFor = new Map((b.samples ?? []).map((s) => [shelfKey(s.source, s.topic), s]))
   const unused = new Set(sampleFor.keys())
+  // The gutter (2026-08-08, deck review): single finds float right beneath
+  // the hero, the way thumbs run down a real article's margin — but only
+  // while the prose can wrap them. One float per FLOAT_MIN_PROSE characters,
+  // the hero (or the infobox) counted first; singles past the budget stay
+  // shelved in the deck. This is the guard that keeps the 2026-08-05
+  // blank-column problem from returning: that change moved ALL media out of
+  // the rail because media-heavy short sections grew floats 2–4× taller than
+  // their text. Group order is article order, so the earliest singles float
+  // first, and a floated shelf's sample claim rides its caption — the
+  // disclosure moves WITH the card, never dropped.
+  const budget = Math.floor(proseLength(b) / FLOAT_MIN_PROSE)
+  let floats = hero || infobox ? 1 : 0
+  const gutter = []
+  for (const [source, byTopic] of bySource) {
+    const split = byTopic.size > 1
+    for (const [topic, items] of byTopic) {
+      if (items.length !== 1 || floats >= budget) continue
+      // Only something to LOOK at earns a float — the same rule pickHero
+      // applies to the hero slot: a text-only card in the margin is a thin
+      // box displacing prose. It stays shelved in the deck.
+      if (!(items[0].imageUrl || items[0].media)) continue
+      const key = shelfKey(source, topic)
+      gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
+      unused.delete(key)
+      byTopic.delete(topic)
+      floats++
+    }
+    if (!byTopic.size) bySource.delete(source)
+  }
   const media = [...bySource]
     .flatMap(([source, byTopic]) => {
       const split = byTopic.size > 1
@@ -956,10 +1005,11 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
     : infobox
       ? infoboxAside(infobox, inline, wikiBase)
       : ''
+  const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
   return {
     // Both go before the prose, the status first: it is about the whole
     // article, while the hero is about one find inside it.
-    rail: subjectRights(b) + float,
+    rail: subjectRights(b) + float + more,
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
     refs: sources,
   }
@@ -1461,10 +1511,14 @@ sup.ref a{color:var(--link)}
    page reading as mostly margin.
 
    Margins are the thumb's: 0.5em top, 1.4em against the text it displaces. */
-.rail{float:right;width:220px;margin:.5em 0 1.3em 1.4em}
-.band:first-child .rail{width:330px}
-@media(max-width:1040px){.band:first-child .rail{width:300px}}
-@media(max-width:860px){.band:first-child .rail{width:260px}}
+.rail,.rail-more{float:right;width:220px;margin:.5em 0 1.3em 1.4em}
+/* The gutter clears the rail so it stacks beneath the hero, one column of
+   thumbs down the right margin — a real article's arrangement. */
+.rail-more{clear:right;margin-top:.2em;display:flex;flex-direction:column;gap:14px}
+.rail-more .card{width:100%;flex:none}
+.band:first-child .rail,.band:first-child .rail-more{width:330px}
+@media(max-width:1040px){.band:first-child .rail,.band:first-child .rail-more{width:300px}}
+@media(max-width:860px){.band:first-child .rail,.band:first-child .rail-more{width:260px}}
 
 /* The Wikipedia article's own infobox, standing in the lede rail when no
    friend's record of the subject earned the slot (design:
@@ -1539,6 +1593,16 @@ sup.ref a{color:var(--link)}
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:1px 8px;white-space:nowrap;flex:none}
 .carousel-head .count[title]{cursor:help}
+/* A single thumb's caption head: the same source tag and manila claim the
+   gallery head carries, at caption scale, inside the frame. */
+.single-head{display:flex;align-items:center;gap:7px;margin:1px 1px 6px;min-width:0}
+.single-head .topic{font-size:.72rem;font-weight:600;color:var(--head);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.single-head .count{margin-left:auto;font-family:var(--sans);font-size:.62rem;font-weight:600;
+  color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
+  border-radius:8px;padding:0 7px;white-space:nowrap;flex:none}
+.single-head .count[title]{cursor:help}
+.carousel.single .card{width:100%;flex:none}
 .carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}
@@ -1855,8 +1919,11 @@ a:hover > .plate .plate-mark{color:var(--link)}
      dead right margin anywhere between ~420 and 640px. */
   .rail,.band:first-child .rail{float:none;width:auto;margin:0 0 22px;order:1}
   .prose{order:2}
-  .deck{order:3}
-  .refs{order:4}
+  /* Gutter thumbs stack AFTER the prose on a phone — a column of images
+     before any text is not an article. */
+  .rail-more,.band:first-child .rail-more{float:none;width:auto;margin:0 0 22px;order:3}
+  .deck{order:4}
+  .refs{order:5}
   /* One column means shelves and cards take the column. The shelf's flex
      basis arrives as an inline style (sized for the desktop deck), so the
      stylesheet needs !important to beat it here — the one place this sheet

@@ -591,6 +591,13 @@ async function bandPropertyPivot(
       }
       if (!hit.entries.length) continue
       for (const e of hit.entries) {
+        // Reviewed and kept 2026-08-08: a search hit filed under the
+        // subject's own heading keeps full subject-record standing, even
+        // though it is not the partner's record OF the subject (the
+        // distinction the rights rules draw). A photo of the Apollo 11
+        // launch is the best non-document answer the lede can get, whatever
+        // catalog relationship produced it — so the Atlanta History Center
+        // shot outranks the article's own infobox, deliberately.
         if (isSubject) e.standing = 'subject-record'
         e.trace = spec.trace(label, qid, hit)
         e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${spec.property}`, label: 'Check or fix it on Wikidata' }
