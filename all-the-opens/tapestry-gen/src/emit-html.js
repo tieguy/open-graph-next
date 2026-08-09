@@ -781,7 +781,10 @@ function carousel(source, items, inline, topic = null, sample = null) {
   // gap. It was 192 while the cards were unframed and the track scrolled, and
   // 8px short is not cosmetic now that shelves wrap: a three-card shelf whose
   // basis is under its cards' real width drops the third card to its own row.
-  const basis = Math.min(items.length, 3) * 200
+  // Capped at FOUR since 2026-08-08 (was three): the commonest shelf size is
+  // exactly four (DPLA's and DigitalNZ's pick), and a cap of three orphaned
+  // every fourth card onto a row of its own beside 400px of nothing.
+  const basis = Math.min(items.length, 4) * 200
   return (
     // No flex-grow (changed 2026-08-07). A stretched shelf keeps its cards
     // left-aligned, so a row's leftover width opened as a hole INSIDE each
@@ -1616,10 +1619,11 @@ sup.ref a{color:var(--link)}
    ever off-screen enough to need a control; the shelf's flex-basis still sizes
    it to three across, and a longer shelf now grows a second row instead of
    hiding its tail behind a scrollbar. */
-/* stretch, not flex-start: cards in a row share a height, so a text-only card
-   beside a tall picture reads as a tile in a grid rather than as a short box
-   with a hole under it. Card content stays top-aligned inside the box. */
-.carousel-track{display:flex;flex-wrap:wrap;align-items:stretch;gap:14px}
+/* flex-start since 2026-08-08 (was stretch, 2026-08-07). Stretch made cards
+   in a row share the tallest card's height, which did not remove the hole
+   under a short card — it moved the hole INSIDE the card's border, where it
+   reads as a broken caption. Ragged bottoms are what a real gallery has. */
+.carousel-track{display:flex;flex-wrap:wrap;align-items:flex-start;gap:14px}
 /* Every card is a MediaWiki thumbnail, and that IS the argument: these are
    shaped exactly like the pictures an article already carries, so what a reader
    notices is not a foreign widget but that the article does not have them. The
@@ -1643,6 +1647,12 @@ sup.ref a{color:var(--link)}
 .frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
 .frame.audio iframe{position:static;height:52px}
 .shot{width:100%;background:var(--faint)}
+/* Gallery images share one height, letterboxed, never cropped or squashed —
+   MediaWiki's own gallery normalizes exactly this way (2026-08-08). Mixed
+   portrait covers were growing rows to the tallest scan on the shelf. The
+   hero and the gutter thumbs keep natural aspect: they are thumbs, and a
+   thumb's shape IS its content's shape. */
+.carousel:not(.single) .card .shot{height:150px;object-fit:contain}
 a:has(> .shot){display:block}
 /* Where a card has no picture. Deliberately NOT image-shaped: a 4/3 grey box is
    exactly what a failed thumbnail looks like. This is shorter, ruled at the
