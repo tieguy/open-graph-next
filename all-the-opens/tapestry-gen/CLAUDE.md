@@ -165,6 +165,17 @@ never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
 `/wiki/`, and the per-host queues already bounding upstream traffic globally.
 
+**Staging: `npm run deploy:staging`** (2026-08-09) deploys the same image to
+**help-from-our-friends-staging.fly.dev** (`fly.staging.toml`) for
+review-before-deploy — the answer to UI work piling up on main with prod
+withheld. It differs from production exactly where staging should: its own
+3 GB `tapestry_cache` volume, scale-to-zero (a reviewer can eat the cold
+start), no custom domain, no `warm.js` (nobody to keep warm for; warming
+would spend partner API capacity twice per review), and
+`ROBOTS_DISALLOW_ALL=1`, which flips `robots.txt` to `Disallow: /` so no
+staging render is ever indexed. `WIKIMEDIA_UA_CONTACT` is a separate secret
+on the staging app, same no-default rule.
+
 **Nothing may touch the network before `server.listen()`.** The source icons
 used to be fetched at startup — fifteen hosts, serial, at module top level — on
 a machine whose cache had just been wiped, so they were real requests every
