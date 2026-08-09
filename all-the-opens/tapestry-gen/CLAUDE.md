@@ -177,8 +177,16 @@ hand ONCE on a fresh volume with `node warm.js https://staging.friendsof.wiki`
 and the volume keeps it), and `ROBOTS_DISALLOW_ALL=1`, which flips
 `robots.txt` to `Disallow: /` so no staging render is ever indexed.
 `WIKIMEDIA_UA_CONTACT` is a separate secret on the staging app, same
-no-default rule. Deploying to staging never touches production; promoting is
-the ordinary `npm run deploy`, a separate decision.
+no-default rule — as are the partner keys (`DPLA_API_KEY`,
+`EUROPEANA_API_KEY`, `SMITHSONIAN_API_KEY`), without which those pivots
+silently skip and staging renders sparser than the same commit would on
+prod. Fly secrets are write-only, so they cannot be copied app-to-app
+through the API; the working route (2026-08-09) is reading them off the
+running prod machine — `fly ssh console --app help-from-our-friends -C
+printenv` — piping into `fly secrets set` on staging, and verifying by
+digest match in `fly secrets list` (the digest hashes the value). Deploying
+to staging never touches production; promoting is the ordinary
+`npm run deploy`, a separate decision.
 
 **Nothing may touch the network before `server.listen()`.** The source icons
 used to be fetched at startup — fifteen hosts, serial, at module top level — on
