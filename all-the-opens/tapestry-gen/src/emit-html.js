@@ -1742,9 +1742,14 @@ a:hover > .plate .plate-mark{color:var(--link)}
    three-line clamp is fitted to cards where an image takes most of the
    height; on a text-only card the title is the only thing that says what the
    item is, nothing else wants the room, and archival titles clipped at three
-   lines were unreadable on a real shelf. The hero is excluded — it has its
-   own no-clamp rule, and this selector would out-rank it. */
-.card:not(.hero-card):has(.plate) h4{-webkit-line-clamp:6}
+   lines were unreadable on a real shelf. Keyed on the ABSENCE of a visual,
+   not the presence of a plate, because "no picture" is a runtime state: a
+   partner thumbnail that hotlink-blocks removes itself via onerror, and that
+   card — markup says image, reader sees text — is exactly the one that needs
+   the room. :has() is live, so the clamp loosens the moment the broken image
+   leaves. The hero is excluded — it has its own no-clamp rule, and this
+   selector would out-rank it. */
+.card:not(.hero-card):not(:has(.shot,.frame)) h4{-webkit-line-clamp:6}
 /* A thumbcaption's link is an ordinary blue wikilink — the underlined-on-hover
    kind — not a bordered title treatment. */
 .card h4 a{color:var(--link)}
