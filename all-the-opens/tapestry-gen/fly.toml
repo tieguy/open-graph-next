@@ -7,6 +7,14 @@
 
 app = "help-from-our-friends"
 primary_region = "sjc"
+
+# The server warms its own showcase after listen() (serve.js → src/warming.js),
+# so a deploy or a fresh volume refills without anything running on an
+# operator's machine. Production only: fly.staging.toml deliberately omits this
+# — staging has nobody to keep warm for, and warming per review round would
+# spend partner API capacity to save no reader any time.
+[env]
+  WARM_ON_START = "1"
 # Give the drain handler in serve.js time to finish in-flight streams before
 # the platform kills the machine — a deploy must not cut a page mid-render.
 kill_timeout = "45s"

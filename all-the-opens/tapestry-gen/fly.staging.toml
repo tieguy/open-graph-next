@@ -22,6 +22,10 @@ kill_timeout = "45s"
 
 [env]
   ROBOTS_DISALLOW_ALL = "1"
+  # No WARM_ON_START here, deliberately: staging has nobody to keep warm for,
+  # and self-warming on every review round's deploy would spend partner API
+  # capacity to save no reader any time. Warm a fresh staging volume once, by
+  # hand: node warm.js https://staging.friendsof.wiki
 
 [http_service]
   internal_port = 8080

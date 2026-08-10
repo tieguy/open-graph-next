@@ -21,7 +21,7 @@ import { createServer } from 'node:http'
 import { admits, isShowcase } from './src/admission.js'
 import { coolingHosts } from './src/cooloff.js'
 import { discover } from './src/discover.js'
-import { busyPage, frontPage } from './src/front-page.js'
+import { busyPage, frontPage, showcaseTitles } from './src/front-page.js'
 import {
   CACHE,
   coverDataUri,
@@ -33,6 +33,7 @@ import {
 } from './src/http.js'
 import { buildId, purgeStalePages, readPage, writePage } from './src/page-cache.js'
 import { robotsTxt } from './src/robots.js'
+import { thinMarker, warmAll } from './src/warming.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -340,6 +341,13 @@ const server = createServer(async (req, res) => {
     for (const b of bands) for (const [k, v] of bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
     write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
+    // One snapshot answers two questions: whether this render carries the thin
+    // marker, and whether it is stored thin below. Taken before streamClose so
+    // the marker lands before `__tapdone` — only complete pages can say they
+    // are thin, and the stored bytes say it to whoever reads them back,
+    // src/warming.js included.
+    const refused = coolingHosts(Date.now())
+    if (refused.length) write(thinMarker(refused))
     write(
       streamClose({
         // Dated, because this page is about to become the answer to every later
@@ -372,7 +380,6 @@ const server = createServer(async (req, res) => {
     // it plain froze five minutes of someone's rate limit into days of a
     // thinner article, and not storing it at all suspended the page cache
     // site-wide for the length of every cool-off.
-    const refused = coolingHosts(Date.now())
     if (refused.length) {
       console.error(`${page}: stored thin — ${refused.join(', ')} rate-limited this render`)
     }
@@ -413,6 +420,22 @@ server.listen(PORT, '0.0.0.0', () => {
   // it grows without bound (~4 MB a page) and needs a ceiling — but a visitor
   // must never wait on housekeeping. Default 2 GB against a 3 GB volume.
   startSweeping(CACHE, { capBytes: Number(process.env.CACHE_MAX_MB ?? 2048) * 1024 * 1024 })
+  // The server warms its own showcase (WARM_ON_START — prod's fly.toml sets
+  // it; staging deliberately does not, and neither does local dev). This used
+  // to be the deploy script's last step, `node warm.js` on the operator's
+  // machine — meaning every deploy ended attached to somebody's shell, and a
+  // fresh volume stayed cold until someone remembered. The machine that just
+  // booted over an empty page cache is the one that knows it needs warming.
+  // Through its own front door, after listen(), serially: warming is ordinary
+  // traffic (src/warming.js), and a visitor arriving mid-warm outranks it at
+  // the admission gate exactly as they outrank any other discovery in flight.
+  // Idempotent by construction — a stored page replays in milliseconds — so a
+  // restart with a warm volume pays six local reads and touches nobody.
+  if (process.env.WARM_ON_START) {
+    warmAll(`http://127.0.0.1:${PORT}`, showcaseTitles()).catch((e) =>
+      console.error(`startup warming failed: ${e.message}`),
+    )
+  }
 })
 
 // A deploy or scale-down stops this machine with a signal. A streamed page

@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-09
+Last verified: 2026-08-10
 
 ## Purpose
 
@@ -165,22 +165,28 @@ write time, because the oldest entries here are the most shared and so the most
 valuable). A full volume fails cache *writes* while reads keep working, which
 presents as the demo mysteriously being slow again.
 
-**Deploy with `npm run deploy`** from this directory — `flyctl deploy
---remote-only && node warm.js`. The second half is no longer the per-deploy tax
-it was, since the volume survives the deploy; it now matters on a fresh volume
-or after an eviction sweep, and is cheap and idempotent otherwise.
-`warm.js` walks the showcase, **serially** (every page fans out dozens of
-upstream requests, `MAX_CONCURRENT` 503s past four, and warming earns no
-exemption from the per-host queues). Its titles come from `showcaseTitles()`,
-the list the front page renders its own cards from; a test asserts the two
-agree, because drift would show up as a slow demo link rather than an error. It
-exits non-zero if a page did not finish — checked via `window.__tapdone`, the
-flag `streamClose` writes last — but a failure there means the site is slow,
-not broken, and the deploy itself already succeeded. `npm run warm [url]`
-re-runs it alone. `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to the operator),
-never in `fly.toml` — a fork must set its own. Guards for public exposure:
-`MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
-`/wiki/`, and the per-host queues already bounding upstream traffic globally.
+**Deploy with `npm run deploy`** from this directory — just `flyctl deploy
+--remote-only` since 2026-08-10. **The server warms its own showcase**: after
+`listen()`, when `WARM_ON_START` is set (prod's `fly.toml` sets it; staging and
+local dev deliberately do not), it walks the six showcase pages through its own
+front door (`src/warming.js`) — **serially**, as ordinary traffic with no
+exemption from the per-host queues or the admission gate. Before this the walk
+was `node warm.js` appended to the deploy script, which meant every deploy
+ended attached to the operator's shell and a fresh volume stayed cold until
+someone remembered. Now the machine that boots over an empty page cache is the
+one that fills it, and a restart on a warm volume pays six local replays.
+Titles come from `showcaseTitles()`, the list the front page renders its own
+cards from; a test asserts the two agree, because drift would show up as a slow
+demo link rather than an error. `npm run warm [url]` is the same walk by hand —
+refill after an eviction sweep, warm a staging volume once, or verify a deploy
+serves pages. It exits non-zero if a page did not finish (`window.__tapdone`,
+the flag `streamClose` writes last — the site is slow, not broken), and reports
+**thin** pages separately: warm but provisional, rendered while a source was
+refusing us (next section). `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to
+the operator), never in `fly.toml` — a fork must set its own. Guards for public
+exposure: `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt`
+offering crawlers nothing but the front page (`src/robots.js`), and the
+per-host queues already bounding upstream traffic globally.
 
 ### The page cache (2026-08-10)
 
@@ -244,7 +250,7 @@ is full.
 **The page cache shrank this job but did not retire it.** A stored showcase page
 never reaches the gate at all now, so the reserve covers only the windows where
 the showcase is genuinely cold: a fresh volume, the minutes after a deploy while
-`warm.js` refills, an eviction sweep. Deleting it would make the busy page's
+the startup warm refills, an eviction sweep. Deleting it would make the busy page's
 offer false in exactly those windows, which is the one thing that page must not
 be.
 **The busy page and the reserve are one change.** The 503 was a single sentence
@@ -256,14 +262,47 @@ anything), sharing the showcase cards and their CSS with the front page so the
 that would themselves answer 503 would be worse than the dead end it replaced,
 which is why the two must not be separated.
 
+### When a source refuses us (2026-08-10)
+
+Measured on production the day the page cache shipped: every render cost
+214–240s, and all of it was one pivot — OpenAlex answering 429 to chunk after
+chunk of one page's DOI lookups, each chunk honoring `Retry-After` with its own
+minute of sleep inside a reader's request. Correct per request, wrong per page.
+From the operator's own IP the same query answered 200 in 0.39s at the same
+moment: rate limits are per-client, and the fix must not be "try harder."
+
+**`src/cooloff.js` remembers a refusal per host.** A 429 arms a cool-off; every
+later request to that host inside the interval fails immediately instead of
+queueing behind another sleep (measured: three chunks, one upstream request,
+30ms). Declining to send a request honors `Retry-After` more strictly than
+sleeping-and-retrying ever did. **503 keeps the old wait-and-retry** — that is
+"busy, come back shortly", the shape MediaWiki's maxlag protocol uses, and a
+lagging Wikimedia must make this site slow, never blank. Only 429 — "you,
+specifically, are asking too much" — arms a cool-off, capped at 15 minutes
+because `Retry-After` is whatever the other end says.
+
+**A render made during a cool-off is whole and missing things at once**, so it
+is stored *marked* — `page-<build>-<hash>.thin.html`, with
+`window.__tapthin=[hosts]` written into its bytes just before `__tapdone`. It
+replays for exactly as long as the refusal stands (re-rendering sooner would
+reproduce it and burn a discovery slot doing so) and is replaced by the first
+render after everyone answers; writing either kind of page retires the other.
+Both simpler policies were measured wrong first: storing it plain froze five
+minutes of someone's rate limit into days of a thinner article, and not storing
+it at all suspended the page cache site-wide for the length of every cool-off.
+A re-render touches no other provider — 0 upstream requests on a repeat view,
+the request cache absorbs all of it — so the only costs in play are CPU,
+latency, and staleness, and the thin mark trades them deliberately.
+
 **Staging: `npm run deploy:staging`** (2026-08-09) deploys the same image to
 **https://staging.friendsof.wiki/** (Fly app `help-from-our-friends-staging`,
 `fly.staging.toml`; a Hover CNAME points the subdomain at the fly.dev host)
 for review-before-deploy — the answer to UI work piling up on main with prod
 withheld. It differs from production exactly where staging should: its own
 3 GB `tapestry_cache` volume, scale-to-zero (a reviewer can eat the cold
-start), no `warm.js` in the deploy script (nobody to keep warm for; warming
-per deploy would spend partner API capacity once per review round — warm by
+start), no self-warming (`WARM_ON_START` is deliberately absent from
+`fly.staging.toml` — nobody to keep warm for, and warming per review round's
+deploy would spend partner API capacity to save no reader any time; warm by
 hand ONCE on a fresh volume with `node warm.js https://staging.friendsof.wiki`
 and the volume keeps it), and `ROBOTS_DISALLOW_ALL=1`, which flips
 `robots.txt` to `Disallow: /` so no staging render is ever indexed.

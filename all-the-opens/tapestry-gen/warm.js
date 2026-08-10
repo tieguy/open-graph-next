@@ -1,30 +1,26 @@
 #!/usr/bin/env node
 /**
- * Re-warm the deployed disk cache for the articles the front page links to.
+ * Re-warm a deployed server's page cache for the articles the front page links
+ * to, by hand.
  *
  *   node warm.js [base-url]
  *
- * The cache lives on a Fly volume as of 2026-08-05, so it survives both deploys
- * and the scale-to-zero idle stop and this is no longer the per-deploy tax it
- * once was — a showcase page warmed today is still warm next month. What it is
- * now is the first fill: on a fresh volume, or after an eviction sweep, the six
- * showcase links are the first thing a visitor clicks and the worst possible
- * place for them to be cold. Cheap and idempotent, so `npm run deploy` still
- * runs it; on an already-warm volume it costs six fast requests and proves the
- * deploy serves pages.
+ * The walk itself lives in src/warming.js, because the deployed server now
+ * does its own warming at startup (serve.js, WARM_ON_START) — a deploy no
+ * longer ends with this script running on the operator's machine. What is left
+ * here is the by-hand form: point it at any base URL to refill a showcase
+ * after an eviction sweep, to warm staging's volume once, or to verify that a
+ * deploy actually serves pages.
  *
  * The titles come from `showcaseTitles()`, the same list the front page renders
  * its cards from. There is deliberately no second copy to keep in step.
  *
- * SERIAL, one page at a time, and that is not incidental: every page fans out
- * dozens of upstream requests, the server caps concurrent discoveries at
- * MAX_CONCURRENT (then answers 503), and the whole point of the per-host queues
- * is that this project does not open parallel connections to other people's
- * APIs. Warming is ordinary traffic and gets no special license — the showcase
- * reserve these titles ride (src/admission.js) is capacity kept for READERS of
- * warm pages, and warming happens to travel in the same lane.
+ * Exits non-zero when a page did not finish — the site is slow, not broken. A
+ * page reported "thin" is warm but provisional: it was rendered while a source
+ * was refusing us, and the server re-renders it once that source answers.
  */
 import { showcaseTitles } from './src/front-page.js'
+import { warmAll } from './src/warming.js'
 
 const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki')
   .replace(/\/+$/, '')
@@ -32,56 +28,5 @@ const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki
 // than the slowest honest run, not tight.
 const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)
 
-const path = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
-const secs = (ms) => `${(ms / 1000).toFixed(1)}s`
-
-/**
- * Fetch one page and read it to the end.
- *
- * Draining the body is the whole job: the response is a chunked stream that the
- * server writes as each band's pivots answer, so hanging up early would cut the
- * discovery partway and cache only what had landed. `window.__tapdone` is the
- * flag `streamClose` writes last — its presence is the server's own statement
- * that the run finished rather than being interrupted.
- */
-async function warm(title) {
-  const url = `${BASE}${path(title)}`
-  const started = Date.now()
-  const res = await fetch(url, { signal: AbortSignal.timeout(TIMEOUT_MS) })
-  const body = await res.text()
-  return {
-    ok: res.ok && body.includes('__tapdone'),
-    status: res.status,
-    // A page can be served whole and still be a short one; the byte count is
-    // here so an unexpectedly thin result is visible rather than silent.
-    bytes: body.length,
-    ms: Date.now() - started,
-    complete: body.includes('__tapdone'),
-  }
-}
-
-const titles = showcaseTitles()
-console.error(`warming ${titles.length} showcase pages at ${BASE}`)
-let failed = 0
-for (const title of titles) {
-  try {
-    const r = await warm(title)
-    if (r.ok) {
-      console.error(`  ✓ ${title} — ${secs(r.ms)}, ${(r.bytes / 1024).toFixed(0)}KB`)
-    } else {
-      failed++
-      // 503 is the server saying it is already busy discovering, which is a
-      // real answer and not a broken deploy — name it rather than lumping it in.
-      const why = r.status === 503 ? 'busy (503)' : !r.complete ? 'stream cut short' : `HTTP ${r.status}`
-      console.error(`  ✗ ${title} — ${why} after ${secs(r.ms)}`)
-    }
-  } catch (e) {
-    failed++
-    console.error(`  ✗ ${title} — ${e.name === 'TimeoutError' ? `no answer in ${secs(TIMEOUT_MS)}` : e.message}`)
-  }
-}
-console.error(failed ? `${failed} of ${titles.length} did not warm` : 'all warm')
-// Non-zero on failure so `npm run deploy` cannot report success over a half-warmed
-// site — but the deploy itself already succeeded, and a failure here means the
-// pages are slow, not broken.
+const { failed } = await warmAll(BASE, showcaseTitles(), { timeoutMs: TIMEOUT_MS })
 process.exit(failed ? 1 : 0)

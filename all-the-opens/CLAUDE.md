@@ -1,6 +1,6 @@
 # Jenifesto - the article, enriched
 
-Last verified: 2026-08-09
+Last verified: 2026-08-10
 
 ## Purpose
 
@@ -33,7 +33,7 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   streaming server: `http://localhost:8787/wiki/<Article_Title>` renders the
   spine in ~1s and streams enrichment in behind it.
 - `cd tapestry-gen && npm run deploy` — Fly deploy to **production**
-  (friendsof.wiki), then `warm.js`.
+  (friendsof.wiki); the server warms its own showcase on startup.
 - `cd tapestry-gen && npm run deploy:staging` — Fly deploy to **staging**
   (staging.friendsof.wiki), no warming. Review here first; prod is a separate,
   deliberate `npm run deploy`. Details in `tapestry-gen/CLAUDE.md`.
