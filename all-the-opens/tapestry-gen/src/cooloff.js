@@ -82,6 +82,28 @@ export function coolingFor(host, now) {
   return until - now
 }
 
+/**
+ * Every host currently refusing us.
+ *
+ * This is what lets a render say it was degraded, which the page cache needs to
+ * know: a page rendered while a source was rate-limited is missing whatever
+ * that source would have contributed, and storing it would make the thin
+ * version the answer to every later request until the next deploy. A five
+ * minute rate limit should not cost an article its open-access copies for a
+ * week. Serve the page, decline to enshrine it.
+ *
+ * Deliberately global rather than per-render: attributing a refusal to the one
+ * request that earned it would need a context threaded through every pivot, and
+ * the conservative reading — if anybody is refusing us right now, this render
+ * may be thin — errs toward rendering again, which is only ever a cost in time.
+ *
+ * @param {number} now epoch ms
+ * @returns {string[]} hosts, empty when everyone is answering
+ */
+export function coolingHosts(now) {
+  return [...cooling.keys()].filter((host) => coolingFor(host, now) > 0)
+}
+
 /** Tests only. The server's cool-offs expire on their own. */
 export function resetCooloffs() {
   cooling.clear()

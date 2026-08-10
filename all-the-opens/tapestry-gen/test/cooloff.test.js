@@ -1,7 +1,13 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { MAX_COOLOFF_MS, coolingFor, noteRateLimited, resetCooloffs } from '../src/cooloff.js'
+import {
+  MAX_COOLOFF_MS,
+  coolingFor,
+  coolingHosts,
+  noteRateLimited,
+  resetCooloffs,
+} from '../src/cooloff.js'
 import { retryAfterMs } from '../src/wmf.js'
 
 const HOST = 'api.openalex.org'
@@ -65,6 +71,27 @@ test('a fresh refusal replaces the standing one', (t) => {
   noteRateLimited(HOST, 600_000, T)
   noteRateLimited(HOST, 30_000, T + 1_000)
   assert.equal(coolingFor(HOST, T + 1_000), 30_000)
+})
+
+// A page rendered while a source was refusing us is missing whatever that
+// source would have contributed. Serving it is right — it is a real page. But
+// the page cache would make it the answer to every later request for that
+// article until the next deploy, so a five-minute rate limit becomes a
+// permanently thinner page. The render has to be able to say it was degraded.
+test('a render can tell whether any source refused it', (t) => {
+  t.after(resetCooloffs)
+  assert.deepEqual(coolingHosts(T), [])
+  noteRateLimited('api.openalex.org', 60_000, T)
+  assert.deepEqual(coolingHosts(T), ['api.openalex.org'])
+})
+
+test('every refusing source is named, and only while it is refusing', (t) => {
+  t.after(resetCooloffs)
+  noteRateLimited('api.openalex.org', 60_000, T)
+  noteRateLimited('api.dp.la', 30_000, T)
+  assert.deepEqual(coolingHosts(T).sort(), ['api.dp.la', 'api.openalex.org'])
+  assert.deepEqual(coolingHosts(T + 30_000), ['api.openalex.org'])
+  assert.deepEqual(coolingHosts(T + 60_000), [])
 })
 
 // The sleep cap and the cool-off cap are different questions — how long a

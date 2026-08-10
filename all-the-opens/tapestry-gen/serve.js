@@ -19,6 +19,7 @@
 import { createServer } from 'node:http'
 
 import { admits, isShowcase } from './src/admission.js'
+import { coolingHosts } from './src/cooloff.js'
 import { discover } from './src/discover.js'
 import { busyPage, frontPage } from './src/front-page.js'
 import {
@@ -356,7 +357,20 @@ const server = createServer(async (req, res) => {
     // cut short by an upstream failure is a page that must be discovered again,
     // not one to serve to everybody who asks next. Keyed by the title the
     // reader asked for; a redirect earns its own entry under its own name.
-    await writePage(CACHE, BUILD, page, sent.join(''))
+    //
+    // "Finished" has to mean finished with everybody answering. A source that
+    // was rate-limiting us during this render (src/cooloff.js) contributed
+    // nothing to it, and storing the result would make that thin page the answer
+    // to every later request for this article until the next deploy — a five
+    // minute rate limit costing an article its open-access copies for days. The
+    // reader in front of us still gets the page; the next one gets a fresh
+    // attempt, which is what they would have got before this cache existed.
+    const refused = coolingHosts(Date.now())
+    if (refused.length) {
+      console.error(`${page}: not stored — ${refused.join(', ')} rate-limited this render`)
+    } else {
+      await writePage(CACHE, BUILD, page, sent.join(''))
+    }
   } catch (e) {
     console.error(`${page}: ${e.message}`)
     if (!streaming) {
