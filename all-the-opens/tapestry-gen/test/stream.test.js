@@ -206,6 +206,43 @@ test('a count with no sample stays a bare number, and 1 alone is not badged', ()
   assert.match(two, /<span class="count">2<\/span>/)
 })
 
+test('a hoisted hero carries its own shelf’s claim, and never says it twice', () => {
+  // Apollo 11's "Apollo program", 2026-08-10: a one-entry DPLA shelf was
+  // hoisted whole into the hero, so the claim about it fell to the deck-level
+  // paragraph — a grey slab below the prose describing a card floating at the
+  // top right, with nothing tying the two together.
+  const sample = { source: 'dpla', topic: 'Apollo 15', shown: 1, total: 17, text: 'A sample: 1 of the 17 items' }
+  const only = { source: 'dpla', topic: 'Apollo 15', title: 'Koslow', imageUrl: 'https://example.test/k.jpg' }
+  const { rail, deck } = bandParts({ ...BAND, entries: [only], samples: [sample] })
+  assert.match(rail, /<div class="hero-src">.*<span class="count" title="A sample: 1 of the 17 items">1 of 17<\/span><\/div>/)
+  assert.doesNotMatch(deck, /class="disclosure"/)
+
+  // A hero hoisted off a shelf whose other cards DID render leaves the claim
+  // on the shelf head, where it counts what the reader can actually see.
+  const withShelf = bandParts({
+    ...BAND,
+    entries: [only, { ...only, title: 'Second' }, { ...only, title: 'Third' }],
+    samples: [sample],
+  })
+  assert.doesNotMatch(withShelf.rail, /class="count"/)
+  assert.match(withShelf.deck, /<span class="count" title="A sample: 1 of the 17 items">2 of 17<\/span>/)
+})
+
+test('the badge is the door when the partner has one, and stays a plain slug when it does not', () => {
+  // "4 of 54" says fifty exist that the reader cannot see; the browse link was
+  // already built for the shelves this page FOLDS, so it was being offered
+  // exactly when there was nothing to look at first.
+  const linked = { ...MET_SAMPLE, url: 'https://dp.la/search?subject=%22Apollo%22' }
+  const { deck } = bandParts({ ...BAND, samples: [linked] })
+  assert.match(
+    deck + bandParts({ ...BAND, samples: [linked] }).rail,
+    /<a class="count" href="https:\/\/dp\.la\/search\?subject=%22Apollo%22" target="_blank" rel="noopener" title="A sample: 1 of the 9 objects the Met holds — see the rest">1 of 9 ↗<\/a>/,
+  )
+  // A sample with no verifiable browse page keeps the hover-only slug: the
+  // page never invents a door (see the OpenAlex and museum notes in discover).
+  assert.match(bandParts({ ...BAND, samples: [MET_SAMPLE] }).rail, /<span class="count" title=/)
+})
+
 test('a sample whose shelf never rendered still gets said, in the old paragraph', () => {
   // Nothing may be silently dropped: that is the entire point of disclosing.
   // Here the claim is about Europeana, which has no shelf in this band.

@@ -51,6 +51,22 @@ export function authorWorksUrl(olid, limit = 40) {
 }
 
 /**
+ * The human page behind `authorWorksUrl` — where a reader goes when the shelf
+ * says "6 of 1,853" and they want the 1,853.
+ *
+ * The site's own SEARCH, not `/authors/<olid>`: it takes the same
+ * `author_key` and `sort` this pivot asks the API for, so the page shows the
+ * shelf's own denominator rather than a number a reader has to reconcile.
+ * Verified 2026-08-10 — Kafka's OL33146A reports "1,853 hits" on the page and
+ * `numFound: 1853` from search.json. (`/authors/<olid>` 301s to a slugged URL
+ * and counts differently; the badge's number is a claim, so the link has to
+ * land on the page that makes it.)
+ */
+export function authorBrowseUrl(olid) {
+  return `https://openlibrary.org/search?author_key=${encodeURIComponent(olid)}&sort=editions`
+}
+
+/**
  * Whether the article's subject is this work's ONLY author.
  *
  * A creator-level copyright ruling — CopyClear's "this person's copyrights have

@@ -1,7 +1,14 @@
 import { test } from 'node:test'
 import assert from 'node:assert/strict'
 
-import { authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify, soleAuthor } from '../src/works.js'
+import {
+  authorBrowseUrl,
+  authorWorkEntries,
+  authorWorksUrl,
+  iaMetadataUrl,
+  scanIdsToVerify,
+  soleAuthor,
+} from '../src/works.js'
 
 // The live card that exposed this, verbatim from search.json on 2026-08-06:
 // a 1991 scholarly catalogue filed under the painter it is ABOUT, with three
@@ -60,6 +67,20 @@ const response = {
     { key: '/works/OL4W', title: 'Führer durch die Strömungslehre', cover_i: 8651818, first_publish_year: 1942, ebook_access: 'no_ebook' },
   ],
 }
+
+test('the browse link lands on the page that makes the badge’s claim', () => {
+  // The badge says "6 of 1,853" and links here, so this page has to report the
+  // same 1,853 — the site's own search takes the pivot's own author_key and
+  // sort, and answered "1,853 hits" against search.json's numFound of 1853 on
+  // 2026-08-10. /authors/<olid> is the tempting URL and the wrong one: it 301s
+  // to a slugged path and counts differently.
+  const url = authorBrowseUrl('OL33146A')
+  assert.match(url, /^https:\/\/openlibrary\.org\/search\?author_key=OL33146A&sort=editions$/)
+  assert.doesNotMatch(url, /\/authors\//)
+  // Same filter and same order as the request whose total it is explaining.
+  const api = authorWorksUrl('OL33146A', 40)
+  for (const part of ['author_key=OL33146A', 'sort=editions']) assert.ok(api.includes(part) && url.includes(part))
+})
 
 test('the query asks for the access field the rights code depends on', () => {
   const url = authorWorksUrl('OL33146A', 40)

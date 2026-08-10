@@ -1063,7 +1063,11 @@ fights the pipeline rather than fitting it:
    `sample` (plus `keyOptional: true` if the API verifiably answers keyless —
    DigitalNZ does — and `broadExtra` only if a `broadNote` needs a field
    beyond `label`/`total`/`url` — DPLA's does, for the heading), passed to
-   `bandPropertyPivot()` alongside the others. Do NOT copy the block and
+   `bandPropertyPivot()` alongside the others. **`browseUrl` now pays twice**
+   (2026-08-10): it is the "Browse them at X ↗" of a folded shelf AND the
+   href behind a sampled shelf's count badge, so it must land on a page that
+   reports the same total the badge prints — check that before writing one, the
+   way `authorBrowseUrl` was checked. Do NOT copy the block and
    modify it — that is exactly the duplication DPLA and Europeana had between
    2026-08-03 and this date, two near-identical blocks in `discover.js` that
    this refactor collapsed into one loop plus two specs.
@@ -1298,9 +1302,44 @@ leads the section) → `emit-html`.
   Archive and OpenStreetMap in between — a claim a reader cannot attach to
   anything, which is worse than no claim. Each sample now lands on its own
   shelf head as the count badge ("4 of 54" where a bare "4" sat), full sentence
-  on the `title`. **A claim whose shelf never rendered — capped away, or
-  hoisted into the hero — falls back to the old deck-level paragraph, because a
-  disclosure that can silently vanish is not a disclosure.** The broad note
+  on the `title`. **Three heads can carry a badge, and the hero is one of them
+  as of 2026-08-10**: the shelf head, a floated single's caption head, and now
+  the hero's source bar. The hero was the biggest remaining hole, because
+  `pickHero` removes its entry from the list *before* anything is grouped, so a
+  one-entry shelf that got hoisted always orphaned its claim — on Apollo 11's
+  "Apollo program" section the reader met "A sample: 1 of the 17 items DPLA's
+  partners catalog under 'Apollo 15 (Spacecraft)'" as a grey slab below the
+  prose, describing a card floating at the top right, with nothing tying the two
+  together. The hero takes the badge only when the key is still unused: a hero
+  hoisted off a shelf whose other cards *did* render must not make the claim
+  twice, and the shelf's own head counts what the reader can actually see.
+  **A claim whose shelf genuinely never rendered — capped away, or dropped —
+  still falls back to the deck-level paragraph, because a disclosure that can
+  silently vanish is not a disclosure.**
+  **And the badge is the DOOR where one can be named** (2026-08-10,
+  `sampleBadge`). "4 of 54" states that fifty items exist somewhere the reader
+  cannot see, and the page had a browse link for exactly that and spent it only
+  on the shelves it FOLDS — so a reader was handed the door precisely when
+  there was nothing to look at first. The number itself is now the link, which
+  adds no furniture to a 178px card, and it stays a manila slug rather than
+  becoming blue and underlined: the claim is still the point, the ↗ and a
+  hover fill are the affordance. `url` rides the sample record, set at the one
+  push site in `bandPropertyPivot` from **`spec.browseUrl`, the same builder
+  the broad note uses** — a second copy of that logic could drift so a folded
+  shelf and a sampled one sent readers to different pages.
+  **A badge links only where this project can name a page making the SAME
+  claim as the number**, which is the `authorBrowseUrl` test and is why two
+  sample kinds stay plain (both reasoned at their push sites in
+  `discover.js`): OpenAlex's denominator counts papers under an ORCID while
+  the shelf shows only the open ones, so a link showing all of them would sell
+  the paywalled ones as part of the find; and the museum artwork counts are
+  *Wikidata's* count of works the graph records a museum as holding, a
+  question no museum publishes a browse for — the Rijksmuseum-404 rule (a href
+  is verified, never constructed) applied to a count. DigitalNZ's link is the
+  one loose case and knowingly so: its browse is a full-text phrase search, so
+  it can over-show against a subject-filtered denominator — the trade
+  `digitalnzBrowseUrl` already documents for the broad note.
+  The broad note
   (above) leads with "Not shown here:" and sits at the END of the deck, with a
   hairline instead of a filled slab: the phrasing collision with "A sample, not
   the whole shelf:" was deliberate, right for continuity with the retired

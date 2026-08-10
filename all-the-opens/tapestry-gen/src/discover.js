@@ -51,7 +51,7 @@ import { corroborate, describedThesisArchiveId, preferredLabel } from './corrobo
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
-import { authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
+import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
 import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
 import {
@@ -459,7 +459,7 @@ async function subjectAuthorWorks(subjectClaims) {
   // `olid` goes in so a work can be tested for co-authors: the subject's
   // creator-level status covers what the subject wrote, not what somebody
   // wrote with them. See `soleAuthor`.
-  return authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid, iaMeta })
+  return { ...authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid, iaMeta }), browse: authorBrowseUrl(olid) }
 }
 
 /** Labels of the entities we anchored on, batched at the API's 50-id limit. */
@@ -605,7 +605,13 @@ async function bandPropertyPivot(
       }
       entries.push(...hit.entries)
       stats[spec.statsKey] += hit.entries.length
-      if (hit.total > hit.entries.length) samples.push(spec.sample(hit, label, id))
+      // The browse URL comes from `spec.browseUrl`, the same builder the broad
+      // note uses, rather than from `spec.sample` — the two make the same offer
+      // ("the rest of this shelf is over there") and a second copy of the URL
+      // logic could drift so that a folded shelf and a sampled one sent readers
+      // to different pages.
+      if (hit.total > hit.entries.length)
+        samples.push({ ...spec.sample(hit, label, id), url: spec.browseUrl(hit, id) })
     } catch (e) {
       console.error(`  ${spec.source} lookup failed (${id}): ${e.message}`)
     }
@@ -1435,10 +1441,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
         topic: `By ${page}`,
         shown: extras.works.entries.length,
         total: extras.works.total,
+        url: extras.works.browse ?? null,
         text:
           `A sample: ${extras.works.entries.length} of ${extras.works.total} ` +
           `book${extras.works.total === 1 ? '' : 's'} Open Library files under ${unit.title}`,
       })
+    // No `url` here, and the omission is a decision (2026-08-10). The badge's
+    // number is a claim, so its link has to land on a page that makes the SAME
+    // claim — that is the whole test `authorBrowseUrl` was written against.
+    // OpenAlex's own site is a React app whose filter URLs this project has
+    // not verified answer to a plain reader, and this denominator is the
+    // subtler one anyway: it counts papers filed under an ORCID, of which the
+    // shelf shows only the open ones. A link that quietly shows all of them
+    // would sell the paywalled ones as part of the find.
     if (extras?.scholarship.entries.length)
       samples.push({
         source: 'openalex',
@@ -1454,6 +1469,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // beside a Rijksmuseum shelf, and a single note counting all of them would
     // be the free-floating claim this page keeps deleting. Each museum's note
     // counts that museum's own holdings.
+    //
+    // No `url` on these either, for a harder reason than OpenAlex's: this total
+    // is WIKIDATA's count of works by the subject that the graph records this
+    // museum as holding, and no museum publishes a browse for that question.
+    // Its own collection search would answer a different one and return a
+    // different number — the Rijksmuseum-404 rule (a href is verified, never
+    // constructed) applied to a count rather than an id. A WDQS permalink is
+    // technically available and is not a browse a reader wants.
     for (const [key, count] of Object.entries(extras?.artworks.totals ?? {})) {
       if (key === 'works' || !count) continue
       const source = key === 'aic' ? 'artic' : key

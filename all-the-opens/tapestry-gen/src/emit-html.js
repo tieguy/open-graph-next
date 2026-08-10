@@ -664,8 +664,16 @@ function provenance(entry) {
  * shelf to browse, this is the one thing the section wants a passing reader to
  * see. It keeps the same caption apparatus — title, description, credit, the
  * merged why/ⓘ — so nothing about a card becomes untrue when it is hoisted.
+ *
+ * That is also why it takes a `sample`: the hoist REMOVES a shelf from the
+ * deck, so a claim about that shelf had nowhere to sit and fell to the
+ * deck-level paragraph — on Apollo 11's "Apollo program" section, "A sample:
+ * 1 of the 17 items DPLA's partners catalog under 'Apollo 15 (Spacecraft)'"
+ * sat in a grey slab below the prose while the card it described floated at
+ * the top right, with nothing tying the two together. Same badge the shelf
+ * head and the gutter thumb carry, for the same reason.
  */
-function heroCard(entry, inline) {
+function heroCard(entry, inline, sample = null) {
   const embed = entry.media3d ?? (entry.media ? iaEmbed(entry.media.source) : null)
   let visual = ''
   if (embed) {
@@ -684,9 +692,10 @@ function heroCard(entry, inline) {
     visual = plate(entry)
   }
   const heading = titleRow(entry, 'hero')
+  const claim = sampleBadge(sample, 1)
   // Source tag first, same as card(): the friend opens every box.
   return (
-    `<figure class="card hero-card"><div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
+    `<figure class="card hero-card"><div class="hero-src">${sourceTag(entry.source, inline)}${claim}</div>` +
     `${visual}<figcaption>` +
     heading +
     descLine(entry) +
@@ -739,11 +748,38 @@ function broadNotes(notes, inline) {
 // tall column. When a band draws one source's media through several anchors, the
 // renderer splits it into one carousel per topic (the anchor's label) — a strip
 // mixing the suspension-bridge files with the strait's reads as one confused box.
+/**
+ * The manila sample badge, the one shape all three heads share — a shelf head,
+ * a floated single's caption head, the hero's source bar.
+ *
+ * **The badge is the door when there is one** (2026-08-10). "4 of 54" states
+ * that fifty of these exist somewhere the reader cannot see, and until now the
+ * page said so and offered no way there — the browse link existed on the
+ * partner's side and was spent only on the shelves this page FOLDS ("Not shown
+ * here: 1,409 items … Browse them at DPLA ↗"), so a reader was handed the door
+ * exactly when there was nothing to look at first. Making the number itself
+ * the link adds no furniture to a 178px card: the badge was already there, and
+ * it was already the thing making the claim.
+ *
+ * `sample.url` is absent wherever this project cannot name a page that makes
+ * the SAME claim as the number — see the two comments in `discover.js` on
+ * OpenAlex and the museum artwork counts. Those badges stay plain, which is
+ * the honest render of "the rest exists and we cannot point at it".
+ */
+function sampleBadge(sample, shown) {
+  if (!sample) return ''
+  const text = `${shown} of ${sample.total.toLocaleString()}`
+  const title = escapeHtml(sample.text)
+  if (!sample.url) return `<span class="count" title="${title}">${text}</span>`
+  return (
+    `<a class="count" href="${escapeHtml(sample.url)}" target="_blank" rel="noopener" ` +
+    `title="${title} — see the rest">${text} ↗</a>`
+  )
+}
+
 /** One find as a framed thumb: source tag, topic and sample claim in the caption. */
 function singleThumb(source, entry, inline, topic = null, sample = null) {
-  const claim = sample
-    ? `<span class="count" title="${escapeHtml(sample.text)}">1 of ${sample.total.toLocaleString()}</span>`
-    : ''
+  const claim = sampleBadge(sample, 1)
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
   const head = `<div class="single-head">${sourceTag(source, inline)}${topicTag}${claim}</div>`
   return card(entry, inline, { head })
@@ -777,7 +813,7 @@ function carousel(source, items, inline, topic = null, sample = null) {
   //
   // "1" alone in the corner is noise, but "1 of 83" is the finding.
   const count = sample
-    ? `<span class="count" title="${escapeHtml(sample.text)}">${items.length} of ${sample.total.toLocaleString()}</span>`
+    ? sampleBadge(sample, items.length)
     : items.length > 1
       ? `<span class="count">${items.length}</span>`
       : ''
@@ -1016,6 +1052,16 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
       })
     })
     .join('')
+  // The hero is the last shelf a claim can ride, and until 2026-08-10 it was
+  // the biggest hole: `pickHero` takes its entry out of `rest` BEFORE anything
+  // is grouped, so a one-entry shelf that got hoisted left its sample with no
+  // head to sit on and it fell to the paragraph below. Only when the key is
+  // still unused — a hero hoisted off a shelf whose other cards did render
+  // must not make the same claim twice, once on the float and once on the
+  // shelf head three inches below it.
+  const heroKey = hero ? shelfKey(hero.source, hero.topic) : null
+  const heroSample = heroKey && unused.has(heroKey) ? sampleFor.get(heroKey) : null
+  if (heroSample) unused.delete(heroKey)
   // The section's references, and nothing else. The coverage line that used to
   // sit under them is now one page-level sentence in the visibility panel: per
   // section it repeated a negative far more often than it reported a find, and
@@ -1044,7 +1090,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const broad = broadNotes(b.broad, inline)
   const deckBody = disclosure + media + broad
   const float = hero
-    ? `<aside class="rail">${heroCard(hero, inline)}</aside>`
+    ? `<aside class="rail">${heroCard(hero, inline, heroSample)}</aside>`
     : infobox
       ? infoboxAside(infobox, inline, wikiBase)
       : ''
@@ -1612,7 +1658,10 @@ sup.ref a{color:var(--link)}
   background:var(--bg);padding:3px}
 .hero-card .shot{border-radius:0;box-shadow:none}
 .hero-card figcaption{padding:6px 4px 3px}
-.hero-src{margin:0 0 6px}
+/* Flex, not because the tag needs it, but because the hero can carry the same
+   manila sample badge a shelf head does — pushed to the right edge of the
+   frame, where every other head on the page puts it. */
+.hero-src{display:flex;align-items:center;gap:7px;margin:0 0 6px;min-width:0}
 /* No line clamp here: the hero has the room, and a hero whose title is cut off
    mid-word is a worse advertisement for the find than a title on three lines. */
 .hero-card h4{font-size:1rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
@@ -1647,10 +1696,19 @@ sup.ref a{color:var(--link)}
 .single-head{display:flex;align-items:center;gap:7px;margin:1px 1px 6px;min-width:0}
 .single-head .topic{font-size:.72rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.single-head .count{margin-left:auto;font-family:var(--sans);font-size:.62rem;font-weight:600;
+.single-head .count,.hero-src .count{margin-left:auto;font-family:var(--sans);font-size:.62rem;font-weight:600;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;white-space:nowrap;flex:none}
-.single-head .count[title]{cursor:help}
+.single-head .count[title],.hero-src .count[title]{cursor:help}
+/* The badge as the door (2026-08-10). It keeps the manila slug exactly — the
+   number is still the claim, and a blue underlined "4 of 54" would read as one
+   more link in a page already dense with them — and earns its affordance from
+   the ↗ it now carries plus a hover that fills the chip. The pointer cursor
+   overrides the help cursor the [title] rule above sets, which is right for a
+   hover-only sentence and wrong for something you can click. */
+a.count{text-decoration:none;cursor:pointer;transition:background-color .12s,border-color .12s}
+a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila-rule);
+  border-color:var(--manila-ink)}
 /* Both heads sit above the visual now, outside the figcaption's padding, so
    they carry their own: the friend's name opens every box (2026-08-09). */
 .card > .single-head,.card > .hero-src{margin:3px 4px 7px}
