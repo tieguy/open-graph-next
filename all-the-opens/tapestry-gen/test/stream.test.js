@@ -111,18 +111,20 @@ test('the best find floats in the rail, media rides the deck, references close t
   assert.match(rail, /^<aside class="rail"><figure class="card hero-card">/)
   assert.doesNotMatch(rail, /References in this section/)
   assert.doesNotMatch(rail, /<div class="carousel"/)
-  // The deck carries the remaining media and nothing bibliographic. One
-  // card survived the hero hoist, so it rides as a single thumb (2026-08-08).
-  assert.match(deck, /^<div class="deck">/)
-  assert.match(deck, /<div class="carousel single"/)
-  assert.doesNotMatch(deck, /References in this section/)
+  // The surviving single is an image card, so it floats into the gutter
+  // (2026-08-09: singles in the margin, galleries in the deck) — and this
+  // band has no gallery, so it has no deck at all.
+  assert.match(rail, /<aside class="rail-more">/)
+  assert.equal(deck, '')
   // The references are their own part now, and last.
   assert.match(refs, /^<div class="refs">/)
   assert.match(refs, /References in this section/)
-  // The hoisted find is NOT also shelved: two entries in, one hero and one card.
+  // The hoisted find is NOT also in the gutter: two entries in, one hero and
+  // one gutter thumb.
+  const more = rail.match(/<aside class="rail-more">([\s\S]*)<\/aside>/)[1]
   assert.match(rail, /A photo/)
-  assert.doesNotMatch(deck, /A photo</)
-  assert.match(deck, /Another photo/)
+  assert.match(more, /Another photo/)
+  assert.doesNotMatch(more, /A photo</)
 })
 
 test('a section with too little prose to wrap a float gets no float', () => {
@@ -170,11 +172,12 @@ test('a shared why hoists to the head even on a shelf with no topic label', () =
 test('a sample claim rides on the head of the shelf it is a sample of', () => {
   // It used to be a paragraph atop the deck, which on Brown v. Board counted
   // the DPLA shelf from above the Internet Archive and OpenStreetMap shelves.
-  const { deck } = bandParts({ ...BAND, samples: [MET_SAMPLE] })
-  // One card left after the hero hoist, so the shelf is a single thumb and
-  // the claim rides its caption head instead of a gallery head (2026-08-08).
+  const { rail, deck } = bandParts({ ...BAND, samples: [MET_SAMPLE] })
+  // One image card left after the hero hoist, so it floats (2026-08-09) —
+  // and the claim rides its caption head INTO the gutter with it: the
+  // disclosure moves with the card, never dropped.
   assert.match(
-    deck,
+    rail,
     /<div class="single-head"><span class="src">The Met<\/span><span class="count" title="A sample: 1 of the 9 objects the Met holds">1 of 9<\/span><\/div>/,
   )
   // The floating paragraph is gone entirely when every claim found its shelf.
@@ -349,11 +352,16 @@ test('one source, two topics: the carousel splits, one labeled strip per topic',
       mk('The strait', 'Golden Gate'),
     ],
   })
-  // The two-card topic keeps its gallery; the one-card topic is a thumb.
+  // The two-card topic keeps its gallery in the deck; the one-card topic
+  // floats into the gutter (2026-08-09) wearing its topic label, since it
+  // left a source that still shelves another topic. The surviving gallery,
+  // now its source's ONLY topic, drops the label — a label distinguishes
+  // strips within a source, and there is nothing left to distinguish from;
+  // its hoisted why line still names the topic.
   assert.equal((deck.match(/<div class="carousel"/g) ?? []).length, 1)
-  assert.equal((deck.match(/<div class="carousel single"/g) ?? []).length, 1)
-  assert.match(deck, /<span class="topic">suspension bridge<\/span>/)
-  assert.match(deck, /<span class="topic">Golden Gate<\/span>/)
+  assert.equal((deck.match(/<div class="carousel single"/g) ?? []).length, 0)
+  assert.match(rail, /<aside class="rail-more">[\s\S]*<span class="topic">Golden Gate<\/span>/)
+  assert.doesNotMatch(deck, /<span class="topic">/)
   // The shared why line is said once under the head, not on every card.
   assert.match(
     deck,
@@ -369,9 +377,12 @@ test('one source, two topics: the carousel splits, one labeled strip per topic',
   assert.match(rail, /<p class="why">About suspension bridge, which this section links to<\/p>/)
 })
 
-test('one source, one topic: the lone surviving card is a thumb with no topic label', () => {
+test('one source, one topic: the lone surviving card floats, with no topic label', () => {
   const rail = bandRail(BAND)
-  assert.equal((rail.match(/<div class="carousel single"/g) ?? []).length, 1)
+  // The single is an image card, so it is a gutter thumb now (2026-08-09),
+  // not a deck carousel — and a source's only topic still labels nothing.
+  assert.match(rail, /<aside class="rail-more"><figure class="card">/)
+  assert.equal((rail.match(/<div class="carousel single"/g) ?? []).length, 0)
   assert.doesNotMatch(rail, /<span class="topic">/)
 })
 
@@ -503,23 +514,25 @@ test('a one-card source is a thumb, not a gallery of one', () => {
   // gallery. A single find wearing a full shelf head read as a crate. The
   // source tag and any sample claim move INTO the card's caption; multi-card
   // shelves keep the box.
-  const { deck } = bandParts({
+  const { rail, deck } = bandParts({
     ...BAND,
     footnotes: [],
     entries: [
       { source: 'met', title: 'A photo', imageUrl: 'https://example.test/x.jpg' },
       { source: 'met', title: 'Another photo', imageUrl: 'https://example.test/y.jpg' },
       { source: 'openstreetmap', title: 'Map: Somewhere', imageUrl: 'https://example.test/m.png' },
+      // Text-only, so it CANNOT float (the margin is for things to look at)
+      // and exercises the deck's own single-thumb shape.
+      { source: 'dpla', title: 'A finding aid' },
     ],
     samples: [{ source: 'openstreetmap', topic: null, shown: 1, total: 83, text: 'A sample: 1 of 83 mapped places' }],
   })
-  // Two met cards: one is hoisted as the hero, the survivor joins... no —
-  // heroes leave the entries first, so the met shelf has one card left and
-  // would ALSO be a single. Assert both shapes directly instead.
-  const singles = deck.match(/class="carousel single"/g) ?? []
-  assert.ok(singles.length >= 1, 'the map renders as a single thumb')
-  // The single carries its source and claim inside the caption, not a head.
-  assert.match(deck, /<div class="single-head">.*?OpenStreetMap.*?1 of 83/s)
-  // A single never wears the gallery head.
-  assert.doesNotMatch(deck, /<div class="carousel-head">(?:(?!<\/div>).)*OpenStreetMap/s)
+  // The image singles float (2026-08-09); each is a thumb whose source and
+  // claim ride inside the caption, never a gallery head.
+  assert.match(rail, /<aside class="rail-more">[\s\S]*<div class="single-head">.*?OpenStreetMap.*?1 of 83/s)
+  // The text single stays in the deck, as a thumb and not a gallery of one.
+  assert.equal((deck.match(/class="carousel single"/g) ?? []).length, 1)
+  assert.match(deck, /<div class="single-head">.*?DPLA/s)
+  // A single never wears the gallery head, wherever it renders.
+  assert.doesNotMatch(deck + rail, /<div class="carousel-head">/)
 })

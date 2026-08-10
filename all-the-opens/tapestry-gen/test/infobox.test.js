@@ -231,12 +231,11 @@ test('the streamed lede fragment carries the box, so the mount script places it'
 
 // ------------------------------------------------- the prose-budgeted gutter
 
-test('singles float into the gutter while the prose can wrap them; overflow stays in the deck', () => {
-  // One float per FLOAT_MIN_PROSE (700) characters of prose, the hero charged
-  // TWO slots (2026-08-09 — its caption and portrait run about twice a
-  // thumb's height) — the guard that keeps the 2026-08-05 blank-column
-  // problem from returning. 2800+ characters = budget 4: the hero's two,
-  // then two singles; the third single stays shelved in the deck.
+test('every image-bearing single floats into the gutter; galleries stay in the deck', () => {
+  // The whole rule (2026-08-09, Prime crew review): singles in the margin,
+  // galleries under the section. The per-700-characters budget that briefly
+  // rationed the gutter was fitted against the section-duplication bug's
+  // phantom prose and is gone.
   const prose = 'x'.repeat(2900)
   const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
   const { rail, deck } = bandParts({
@@ -255,13 +254,13 @@ test('singles float into the gutter while the prose can wrap them; overflow stay
   const more = rail.match(/<aside class="rail-more">([\s\S]*)<\/aside>/)?.[1] ?? ''
   assert.match(more, /Map: Somewhere/, 'first single floats')
   assert.match(more, /A taxon/, 'second single floats')
-  assert.doesNotMatch(more, /Recorded/, 'budget spent — third single stays in the deck')
-  assert.match(deck, /Recorded/)
+  assert.match(more, /Recorded/, 'third single floats too — no budget')
+  assert.doesNotMatch(deck, /Recorded/)
   assert.match(deck, /Paper A/, 'galleries never float')
 })
 
 test('a short section floats nothing extra, and a floated single still carries its claim', () => {
-  const prose = 'x'.repeat(2200) // budget 3: the hero's two slots + one single
+  const prose = 'x'.repeat(2200) // above FLOAT_MIN_PROSE, so the gutter is open
   const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
   const band = {
     id: 's6',

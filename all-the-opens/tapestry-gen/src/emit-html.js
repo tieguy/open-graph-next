@@ -962,57 +962,49 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const shelfKey = (source, topic) => `${source}::${topic ?? ''}`
   const sampleFor = new Map((b.samples ?? []).map((s) => [shelfKey(s.source, s.topic), s]))
   const unused = new Set(sampleFor.keys())
-  // The gutter (2026-08-08, deck review): single finds float right beneath
-  // the hero, the way thumbs run down a real article's margin — but only
-  // while the prose can wrap them. One float per FLOAT_MIN_PROSE characters,
-  // the hero (or the infobox) counted first; singles past the budget stay
-  // shelved in the deck. This is the guard that keeps the 2026-08-05
-  // blank-column problem from returning: that change moved ALL media out of
-  // the rail because media-heavy short sections grew floats 2–4× taller than
-  // their text. Group order is article order, so the earliest singles float
-  // first, and a floated shelf's sample claim rides its caption — the
-  // disclosure moves WITH the card, never dropped.
-  // No gutter in the LEDE (2026-08-09, from a hole on Apollo 11). The
-  // seven-lines-per-700-characters arithmetic above is fitted to the 220px
-  // rail the sections use; the lede's rail is 330px — a wider float is a
-  // TALLER card and a narrower text column at once, so both sides of the
-  // ratio move against it. Measured on the day's render: Apollo 11's lede
-  // runs 3,264 characters, among the longest this site draws, and a
-  // launch-photo hero (natural aspect, portrait at 330px) plus the
-  // subject-rights box left no wrap room at all — the one gutter thumb (a
-  // map) cleared to below the last line and left its full height as a blank
-  // column. If the longest lede holes, shorter ones only hole worse; the
-  // lede's margin has exactly one slot, and the hero or the infobox already
-  // owns it. Singles stay shelved in the deck there, which is the same
-  // demotion the FLOAT_MIN_PROSE rule applies to a short section's hero.
-  const budget = b.id === 'slede' ? 0 : Math.floor(proseLength(b) / FLOAT_MIN_PROSE)
-  // The hero charges the budget TWO slots (2026-08-09, same review that
-  // found the slicing bug). Its caption alone — source tag, title, desc,
-  // credit, rights, fold — runs about twice a thumb's, and a portrait image
-  // at the rail's width can double the card again; charging it one slot let
-  // a 1,500-character section float a single beside a hero whose own height
-  // already outran the prose, and the single sat beside blank margin below
-  // the last line (Insignia and Prime crew, on the day's Apollo 11 render).
-  // Same epistemic status as FLOAT_MIN_PROSE: a heuristic fitted to observed
-  // holes, and the cost of a wrong guess is bounded — a single becomes a
-  // deck card, or a long section keeps a slightly emptier margin.
-  let floats = hero || infobox ? 2 : 0
+  // The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
+  // float right beneath the hero, the way thumbs run down a real article's
+  // margin; GALLERIES go in the deck below the section. A per-700-characters
+  // float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
+  // revision sent "Carrying the Fire" — one of Prime crew's two cited
+  // books — to the deck as a lone card beside blank space while its twin
+  // floated: an arbitrary-looking difference, because it was one. The
+  // budget had been fitted against the phantom prose of the
+  // section-duplication bug (parent bands carrying their whole subtree);
+  // with real bands a section holds a few image-bearing singles at most,
+  // and the operator chose the simple rule over the arithmetic, knowing the
+  // cost: a stack can trail somewhat below a short section's last line,
+  // which real articles' margins also do.
+  //
+  // What stays gated, stays for its own measured reason. A section under
+  // FLOAT_MIN_PROSE floats nothing — the Multimedia hole above; ten
+  // characters of prose cannot wrap anything. A text-only single stays
+  // shelved: the margin is for things to LOOK at, the same rule pickHero
+  // applies to the hero slot. And the LEDE takes no gutter (2026-08-09,
+  // from a hole on Apollo 11): its rail is 330px against the sections'
+  // 220px — a wider float is a TALLER card and a narrower text column at
+  // once — and the longest lede this site draws (3,264 characters,
+  // measured) could not wrap a portrait hero plus one map thumb. The lede's
+  // margin has exactly one slot, and the hero or the infobox already owns
+  // it.
+  //
+  // Group order is article order, so the earliest singles float first, and
+  // a floated shelf's sample claim rides its caption — the disclosure moves
+  // WITH the card, never dropped.
   const gutter = []
-  for (const [source, byTopic] of bySource) {
-    const split = byTopic.size > 1
-    for (const [topic, items] of byTopic) {
-      if (items.length !== 1 || floats >= budget) continue
-      // Only something to LOOK at earns a float — the same rule pickHero
-      // applies to the hero slot: a text-only card in the margin is a thin
-      // box displacing prose. It stays shelved in the deck.
-      if (!(items[0].imageUrl || items[0].media)) continue
-      const key = shelfKey(source, topic)
-      gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
-      unused.delete(key)
-      byTopic.delete(topic)
-      floats++
+  if (b.id !== 'slede' && proseLength(b) >= FLOAT_MIN_PROSE) {
+    for (const [source, byTopic] of bySource) {
+      const split = byTopic.size > 1
+      for (const [topic, items] of byTopic) {
+        if (items.length !== 1) continue
+        if (!(items[0].imageUrl || items[0].media)) continue
+        const key = shelfKey(source, topic)
+        gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
+        unused.delete(key)
+        byTopic.delete(topic)
+      }
+      if (!byTopic.size) bySource.delete(source)
     }
-    if (!byTopic.size) bySource.delete(source)
   }
   const media = [...bySource]
     .flatMap(([source, byTopic]) => {
