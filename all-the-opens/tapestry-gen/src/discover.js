@@ -65,7 +65,7 @@ import {
 import { iiifEntry } from './iiif.js'
 import { rijksEntry } from './rijks.js'
 import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
-import { claimAnchors, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
+import { claimAnchors, claimCitations, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
 
@@ -773,6 +773,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const infobox = extractInfobox(article.html)
 
   const units = []
+  // One page-wide ownership set for cited works, threaded through the loop
+  // below in article order — see the claimCitations comment there.
+  const citedOnPage = new Set()
   for (const s of [{ index: '0', title: page }, ...sections]) {
     // stopAt: a band holds only its OWN text. Every outline section becomes a
     // band, so a parent that kept its children's text (parse&section
@@ -799,11 +802,28 @@ export async function discover(page, { emit = async () => {} } = {}) {
       ...sectionCitations(wikitext),
       ...shortCites.map((w) => ({ kind: 'book', ...w })),
     ]
-    const identified = dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]).slice(
-      0,
+    // A cited WORK belongs to the first section that cites it, page-wide
+    // (claimCitations, 2026-08-09): Apollo 11 cites Carrying the Fire in
+    // eight sections through the bibliography, and once singles floated,
+    // the same cover marched down the whole page's margin. Decided HERE, in
+    // the units loop, because this loop runs in article order before any
+    // pivot — band completion order can never change who shows the book.
+    // The lede claims first because it is first in this loop, the same
+    // privilege claimAnchors seeds it. Footnotes are untouched: every
+    // section's references still carry their own borrow links; only the
+    // CARD belongs to one section.
+    const identified = claimCitations(
+      dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]),
+      citedOnPage,
       CITES_PER_SECTION,
+      (c) => c.isbn ?? c.oclc ?? c.lccn ?? c.title,
     )
-    const scholarly = scholarlyIdentifiers(wikitext).slice(0, SCHOLARLY_PER_SECTION)
+    const scholarly = claimCitations(
+      scholarlyIdentifiers(wikitext),
+      citedOnPage,
+      SCHOLARLY_PER_SECTION,
+      (c) => c.doi ?? c.pmid ?? c.arxiv,
+    )
     stats.anchorsCite += identified.length
     stats.viaShortCite += identified.filter((c) => shortCites.includes(c)).length
     stats.anchorsScholar += scholarly.length

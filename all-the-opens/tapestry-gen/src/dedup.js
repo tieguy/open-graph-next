@@ -176,3 +176,34 @@ export function claimAnchors(candidates, { perUnit, seeded = new Map() }) {
     return own
   })
 }
+
+/**
+ * The citations twin of claimAnchors (2026-08-09): a cited WORK belongs to
+ * the first section that cites it, page-wide. Apollo 11 cites Carrying the
+ * Fire in eight sections through the bibliography, and once singles floated
+ * (the gutter rule) the same cover marched down the whole page's margin.
+ *
+ * Pure over article-ordered calls, like everything in this module: the units
+ * loop runs sections in ARTICLE order and threads one `claimed` set through
+ * these calls, so ownership is decided before any pivot runs — a band's
+ * completion order can never change who shows the book, which is the same
+ * argument that shaped claimAnchors and the deleted dropSeenFiles.
+ *
+ * The cap applies AFTER the page-wide drop (a section whose early cites were
+ * claimed upstream backfills from its later ones), and only what a section
+ * actually keeps is claimed — a cite squeezed out by the cap must stay
+ * unclaimed, or a section that never rendered the book would own it and it
+ * would appear nowhere. A keyless cite passes and claims nothing: refusing
+ * to dedup is safer than dedup-by-accident on a null key.
+ */
+export function claimCitations(cites, claimed, cap, keyOf) {
+  const kept = []
+  for (const c of cites) {
+    if (kept.length >= cap) break
+    const key = keyOf(c)
+    if (key && claimed.has(key)) continue
+    if (key) claimed.add(key)
+    kept.push(c)
+  }
+  return kept
+}
