@@ -87,6 +87,39 @@ test('wikitext slices reproduce parse&section semantics, including subsections',
   assert.equal(sliceSectionWikitext(WIKITEXT, SECTIONS, '3'), '== Two ==\nGamma.')
 })
 
+test('stopAt slices a parent to its OWN text — the fix for every subsection rendering twice', () => {
+  // With stopAt at the outline depth, a level-1 parent ends at its first
+  // child instead of swallowing it: the child's text belongs to the child's
+  // band, and before this option every h3 on a page rendered twice — once
+  // inside its parent's band, once as its own (found on Apollo 11's
+  // Preparations, 2026-08-09; shipping since the original generator).
+  assert.equal(sliceSectionWikitext(WIKITEXT, SECTIONS, '1', { stopAt: 2 }), '== One ==\nAlpha.')
+  // A leaf is unchanged by it.
+  assert.equal(
+    sliceSectionWikitext(WIKITEXT, SECTIONS, '2', { stopAt: 2 }),
+    '=== One point five ===\nBeta.',
+  )
+  // A level BELOW the outline depth is not a band, so its text must stay
+  // with its nearest outline ancestor or it would fall off the page.
+  const wt = '== One ==\nAlpha.\n=== Mid ===\nBeta.\n==== Deep ====\nDelta.\n== Two ==\nGamma.\n'
+  const secs = [
+    { index: '1', toclevel: 1, line: 'One', anchor: 'One', byteoffset: wt.indexOf('== One ==') },
+    { index: '2', toclevel: 2, line: 'Mid', anchor: 'Mid', byteoffset: wt.indexOf('=== Mid ===') },
+    { index: '3', toclevel: 3, line: 'Deep', anchor: 'Deep', byteoffset: wt.indexOf('==== Deep ====') },
+    { index: '4', toclevel: 1, line: 'Two', anchor: 'Two', byteoffset: wt.indexOf('== Two ==') },
+  ]
+  assert.equal(
+    sliceSectionWikitext(wt, secs, '2', { stopAt: 2 }),
+    '=== Mid ===\nBeta.\n==== Deep ====\nDelta.',
+  )
+})
+
+test('html slices honor stopAt the same way', () => {
+  const one = sliceSectionHtml(HTML, SECTIONS, '1', { stopAt: 2 })
+  assert.match(one, /Alpha/)
+  assert.doesNotMatch(one, /Beta/)
+})
+
 test('a template-transcluded section (null byteoffset) slices to null, not to someone else’s text', () => {
   const withTemplate = [...SECTIONS, { index: 'T-1', toclevel: 1, line: 'Notes', anchor: 'Notes', byteoffset: null }]
   assert.equal(sliceSectionWikitext(WIKITEXT, withTemplate, 'T-1'), null)
@@ -117,16 +150,18 @@ test('a section whose anchor is missing from the html yields null', () => {
 })
 
 test('sectionOutline matches what fetchSections always produced', () => {
+  // hasChildren left with the trim it promised (2026-08-09): the slicers'
+  // stopAt now performs it, and a flag with no consumer is a trap.
   const outline = sectionOutline([
     ...SECTIONS,
     { index: '4', toclevel: 3, number: '2.1.1', line: 'Deep', anchor: 'Deep', byteoffset: 99 },
   ])
   assert.deepEqual(
-    outline.map((s) => [s.index, s.level, s.title, s.hasChildren]),
+    outline.map((s) => [s.index, s.level, s.title]),
     [
-      ['1', 1, 'One', true],
-      ['2', 2, 'One point five', false],
-      ['3', 1, 'Two', false],
+      ['1', 1, 'One'],
+      ['2', 2, 'One point five'],
+      ['3', 1, 'Two'],
     ],
   )
 })

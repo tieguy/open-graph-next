@@ -40,18 +40,23 @@ export async function fetchSections(cacheDir, page) {
   return sectionOutline(fromTocdata(body.parse.tocdata?.sections))
 }
 
+/**
+ * How deep the outline goes: h2 and h3 become bands, anything deeper stays
+ * inside its parent's prose. Also the `stopAt` a unit's slice must use — a
+ * band at this depth holds only its OWN text, because its children are bands
+ * too and their text renders with them (see sliceSectionWikitext).
+ */
+export const OUTLINE_DEPTH = 2
+
 /** The same outline, derived from an already-fetched section list. */
 export function sectionOutline(sections) {
   return sections
-    .filter((s) => s.toclevel <= 2)
-    .map((s, i, all) => ({
+    .filter((s) => s.toclevel <= OUTLINE_DEPTH)
+    .map((s) => ({
       index: s.index,
       level: s.toclevel,
       number: s.number,
       title: s.line.replace(/<[^>]+>/g, '').trim(),
-      // A parent's own fetch includes all of its subsections, so its prose must
-      // be trimmed to the intro or the text appears twice.
-      hasChildren: all[i + 1]?.toclevel === 2 && s.toclevel === 1,
     }))
 }
 
@@ -142,6 +147,17 @@ export async function fetchArticle(cacheDir, page) {
  * `action=parse&section=N` returns: the section *including its subsections*,
  * i.e. from its own heading to the next heading at its level or above.
  *
+ * `stopAt` (2026-08-09) narrows that: a section ends at the next heading at
+ * `stopAt` OR ABOVE, so a parent sliced with the outline's own depth keeps
+ * only its intro — its children's text belongs to their own slices. This is
+ * the trim the `hasChildren` comment in sectionOutline promised and nothing
+ * ever performed: without it every subsection on every page rendered twice,
+ * once inside its parent's band and once as its own (found on Apollo 11's
+ * Preparations; shipping since the original generator). Headings BELOW
+ * `stopAt` still travel with their nearest sliced ancestor — they are not
+ * bands, and text that stopped at them would fall off the page. Default
+ * behavior is unchanged and stays byte-identical to parse&section=N.
+ *
  * Despite its name, `byteoffset` lines up with JS string indices, not UTF-8
  * bytes — measured empirically on a page full of multi-byte umlauts, where
  * byte-wise slicing drifted by exactly the multi-byte character count and
@@ -149,7 +165,7 @@ export async function fetchArticle(cacheDir, page) {
  * carry a null byteoffset and a `T-` index; they cannot be sliced, and callers
  * get null back rather than someone else's text.
  */
-export function sliceSectionWikitext(wikitext, sections, index) {
+export function sliceSectionWikitext(wikitext, sections, index, { stopAt } = {}) {
   if (String(index) === '0') {
     const end = sections.find((s) => s.byteoffset != null)?.byteoffset ?? wikitext.length
     return wikitext.slice(0, end).replace(/\s+$/, '')
@@ -157,9 +173,10 @@ export function sliceSectionWikitext(wikitext, sections, index) {
   const at = sections.findIndex((s) => String(s.index) === String(index))
   const own = sections[at]
   if (!own || own.byteoffset == null) return null
+  const boundary = Math.max(stopAt ?? own.toclevel, own.toclevel)
   const next = sections
     .slice(at + 1)
-    .find((s) => s.byteoffset != null && s.toclevel <= own.toclevel)
+    .find((s) => s.byteoffset != null && s.toclevel <= boundary)
   // parse&section=N returns the section without its trailing blank lines;
   // matching that exactly is what lets the slicer claim equivalence.
   return wikitext.slice(own.byteoffset, next?.byteoffset ?? wikitext.length).replace(/\s+$/, '')
@@ -167,12 +184,13 @@ export function sliceSectionWikitext(wikitext, sections, index) {
 
 /**
  * One section's HTML cut from the whole rendered page, on the same
- * include-subsections rule as the wikitext slicer. Headings are located by the
+ * include-subsections rule as the wikitext slicer — and the same `stopAt`
+ * narrowing (see sliceSectionWikitext). Headings are located by the
  * anchor ids the section list states. The fragments are not balanced HTML — a
  * heading's wrapper div is cut mid-element — which the regex-based consumers
  * (articleBlocks, proseLinks) never notice.
  */
-export function sliceSectionHtml(html, sections, index) {
+export function sliceSectionHtml(html, sections, index, { stopAt } = {}) {
   const headingStart = (s) => {
     const id = html.indexOf(`id="${s.anchor}"`)
     if (id < 0) return -1
@@ -187,9 +205,10 @@ export function sliceSectionHtml(html, sections, index) {
   if (!own) return null
   const start = headingStart(own)
   if (start < 0) return null
+  const boundary = Math.max(stopAt ?? own.toclevel, own.toclevel)
   const next = sections
     .slice(at + 1)
-    .filter((s) => s.toclevel <= own.toclevel)
+    .filter((s) => s.toclevel <= boundary)
     .map(headingStart)
     .find((p) => p >= 0)
   return html.slice(start, next ?? html.length)

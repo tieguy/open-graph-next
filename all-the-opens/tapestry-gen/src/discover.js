@@ -34,6 +34,7 @@ import {
   sectionOutline,
   sliceSectionHtml,
   sliceSectionWikitext,
+  OUTLINE_DEPTH,
 } from './wikipedia.js'
 import {
   bibliographyIdentifiers,
@@ -725,10 +726,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const sections = bodySections.slice(0, MAX_SECTIONS)
   const dropped = bodySections.length - sections.length
 
-  const sectionWikitext = async (index) =>
-    sliceSectionWikitext(article.wikitext, article.sections, index) ??
+  const sectionWikitext = async (index, opts) =>
+    sliceSectionWikitext(article.wikitext, article.sections, index, opts) ??
     // A template-transcluded section has no byteoffset to slice by; fetching
-    // it individually is the rare fallback, not the rule.
+    // it individually is the rare fallback, not the rule. (The fetch has
+    // parse&section semantics — a transcluded parent would arrive with its
+    // children — accepted as the rare case rather than paid for everywhere.)
     (await fetchSectionWikitext(CACHE, normalizedPage, index))
 
   // The apparatus sections are not rendered, but on an {{sfn}}-style article
@@ -771,12 +774,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
 
   const units = []
   for (const s of [{ index: '0', title: page }, ...sections]) {
-    const html = sliceSectionHtml(article.html, article.sections, s.index) ?? ''
+    // stopAt: a band holds only its OWN text. Every outline section becomes a
+    // band, so a parent that kept its children's text (parse&section
+    // semantics, the slicers' default) put every h3 on the page twice — its
+    // words, its links, its citations, and therefore its cards. Found on
+    // Apollo 11 (2026-08-09): the Preparations band carried all six
+    // subsections' prose and a gutter of floats earned by their citations,
+    // stacked beside whitespace; every phrase in the subtree appeared twice.
+    const html = sliceSectionHtml(article.html, article.sections, s.index, { stopAt: OUTLINE_DEPTH }) ?? ''
     const bandId = s.index === '0' ? 'slede' : `s${s.index}`
     const blocks = articleBlocks(html, { notePrefix: bandId })
     if (!blocks.length) continue
     stats.sections++
-    const wikitext = await sectionWikitext(s.index)
+    const wikitext = await sectionWikitext(s.index, { stopAt: OUTLINE_DEPTH })
     // Both citation styles, in that order: identifiers the section states
     // outright, then the ones it points at through the bibliography. Direct
     // refs come first only because they cost no join to trust.
