@@ -85,8 +85,11 @@ function imgPath(url) {
     proxied.set(key, url)
     // Fire and forget: a failed write costs this image a thumbnail on a
     // replayed page after a restart, and the card's onerror already handles a
-    // missing image. writeFacts says so itself when it fails.
-    writeFacts('img', [[key, url]])
+    // missing image. writeFacts says so itself when it fails, and does not
+    // reject — the catch here is because an unawaited promise is the one place
+    // where "does not reject" being wrong would end the process, and this is a
+    // path that runs while a reader is waiting on bytes.
+    writeFacts('img', [[key, url]]).catch(() => {})
   }
   return `/img/${key}`
 }

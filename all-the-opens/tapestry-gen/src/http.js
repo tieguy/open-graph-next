@@ -175,7 +175,17 @@ export async function readFacts(kind, keys) {
 }
 
 export async function writeFacts(kind, entries) {
-  await mkdir(CACHE, { recursive: true })
+  try {
+    await mkdir(CACHE, { recursive: true })
+  } catch (e) {
+    // Same rule as the per-entry writes below, and it has to hold here too: a
+    // cache that cannot write is slow, never wrong. Unguarded, this rejected —
+    // and one caller (serve.js's imgPath) writes without awaiting, where a
+    // rejection with no handler takes the whole server down rather than costing
+    // one thumbnail.
+    console.error(`  fact cache dir unavailable (${kind}): ${e.message}`)
+    return
+  }
   await Promise.all(
     [...entries].map(async ([k, v]) => {
       if (!SAFE_KEY.test(k)) return
