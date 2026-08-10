@@ -1280,15 +1280,21 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 </script>`
 
 // The relocation helpers, inlined into the head so they exist before the
-// first fragment arrives. `__thb` mounts a band's enrichment — the floated
-// hero goes before the prose, everything after it (deck, then references)
-// appends in template order, which is why the fragment's own order is the
-// rendered order. `__fill`/`__append` place the masthead's legend and notes
-// once the page knows its sources.
+// first fragment arrives. `__thb` mounts a band's enrichment — every float
+// (the rail's hero, the rail-more gutter thumbs, the subject-rights box)
+// goes BEFORE the prose, everything else (deck, then references) appends in
+// template order, which is why the fragment's own order is the rendered
+// order. rail-more was missing from the before-prose list until 2026-08-09,
+// and the miss was invisible in every batch render: a right float anchored
+// AFTER the prose can only sit below its last line, so on streamed pages —
+// the deployed site — every gutter thumb stacked under the section beside
+// blank margin while spike output put the same thumb beside the text. The
+// two renderers must place these identically or neither can vouch for the
+// other.
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
-while((e=p.content.firstElementChild)){if(e.classList.contains("rail")||e.classList.contains("subject-rights"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
+while((e=p.content.firstElementChild)){if(e.classList.contains("rail")||e.classList.contains("rail-more")||e.classList.contains("subject-rights"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
 function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);

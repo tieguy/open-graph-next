@@ -99,6 +99,18 @@ test('streamOpen carries the whole spine with band ids, no numbering, and no rai
   assert.doesNotMatch(open, /<\/html>/)
 })
 
+test('the mount script floats the gutter before the prose, as batch does', () => {
+  // A right float anchored after the prose can only sit below its last line.
+  // __thb's before-prose list missed rail-more until 2026-08-09, so streamed
+  // pages stacked every gutter thumb under the section while batch renders
+  // put the same thumb beside the text — and every measurement made on spike
+  // output silently vouched for a layout the deployed site was not showing.
+  const open = streamOpen({ title: 'T', units: UNITS, home: '/' })
+  for (const cls of ['"rail"', '"rail-more"', '"subject-rights"']) {
+    assert.ok(open.includes(`e.classList.contains(${cls})`), `${cls} mounts before the prose`)
+  }
+})
+
 test('streamClose marks the stream as complete on purpose', () => {
   assert.match(streamClose({}), /window\.__tapdone=1/)
 })
