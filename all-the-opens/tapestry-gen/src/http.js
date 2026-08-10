@@ -9,6 +9,7 @@ import { createHash } from 'node:crypto'
 import { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
+import { MAX_COOLOFF_MS, coolingFor, noteRateLimited } from './cooloff.js'
 import { enqueue } from './mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
 
@@ -38,7 +39,17 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
   } catch {
     /* not cached */
   }
-  const body = await enqueue(new URL(url).host, async () => {
+  const host = new URL(url).host
+  const body = await enqueue(host, async () => {
+    // Checked here rather than before queueing, because that is the point: the
+    // chunks of one page's lookups queue together, and the second must see the
+    // refusal the first earned instead of sleeping its own minute for it.
+    const quiet = coolingFor(host, Date.now())
+    if (quiet) {
+      throw Object.assign(new Error(`${host} asked for ${Math.ceil(quiet / 1000)}s of quiet`), {
+        permanent: true,
+      })
+    }
     let lastError
     for (let attempt = 1; attempt <= tries; attempt++) {
       // Only ever paid on a cache miss, and only by sources that ask for it.
@@ -54,6 +65,22 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
           // A 404 is our bad identifier, not the server's bad day: retrying it
           // spends someone else's capacity to get the same answer twice.
           if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
+          // 429 is about US — this client is asking for more than this host will
+          // give. Sleeping and retrying inside a reader's request answers it
+          // once and re-earns it on the next chunk; arming a cool-off answers it
+          // for the page (src/cooloff.js). 503 keeps the wait below: that is
+          // "busy, come back shortly", the shape maxlag uses, and waiting is the
+          // right answer to it.
+          if (res.status === 429) {
+            const until = noteRateLimited(host, retryAfterMs(res.headers, MAX_COOLOFF_MS), Date.now())
+            throw Object.assign(
+              new Error(
+                `429 Too Many Requests — not asking ${host} again for ` +
+                  `${Math.ceil((until - Date.now()) / 1000)}s`,
+              ),
+              { permanent: true },
+            )
+          }
           const wait = retryAfterMs(res.headers)
           if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
           throw new Error(`${res.status} ${res.statusText}`)

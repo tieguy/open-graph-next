@@ -66,13 +66,19 @@ const MAX_RETRY_AFTER_MS = 60000
  * How long a 429 or 503 asked us to wait, in milliseconds, or null when it did
  * not say or said something unusable. Capped: a broken or hostile header must
  * not park a run for a day.
+ *
+ * The cap is a parameter because two different questions read this header. How
+ * long may a request BLOCK while a reader waits — that is the default, and it
+ * is short. How long should we stay away from a host that refused us — that is
+ * src/cooloff.js, which asks for a longer cap, because declining to send a
+ * request costs the reader nothing and honors the interval more fully.
  */
-export function retryAfterMs(headers) {
+export function retryAfterMs(headers, capMs = MAX_RETRY_AFTER_MS) {
   const raw = headers?.get?.('retry-after')
   if (!raw) return null
   const seconds = Number(String(raw).trim())
   if (!Number.isFinite(seconds) || seconds < 0) return null
-  return Math.min(seconds * 1000, MAX_RETRY_AFTER_MS)
+  return Math.min(seconds * 1000, capMs)
 }
 
 /** Status codes worth trying again. Everything else 4xx is our bug, not theirs. */

@@ -31,6 +31,7 @@ import {
   writeFacts,
 } from './src/http.js'
 import { buildId, purgeStalePages, readPage, writePage } from './src/page-cache.js'
+import { robotsTxt } from './src/robots.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -141,6 +142,10 @@ const INDEX = frontPage({ inline: icons })
 // makes true.
 const BUSY = busyPage()
 
+// Staging refuses crawlers outright (ROBOTS_DISALLOW_ALL); production offers the
+// front page and nothing else. Read once — the answer cannot change at runtime.
+const ROBOTS = robotsTxt({ disallowAll: Boolean(process.env.ROBOTS_DISALLOW_ALL) })
+
 // Each discovery fans out dozens of upstream requests (politely — the
 // per-host queues serialize them globally), so inbound load must be capped
 // where it arrives: a few pages at a time is a demo, an unbounded queue of
@@ -222,15 +227,11 @@ const server = createServer(async (req, res) => {
     return
   }
   if (url.pathname === '/robots.txt') {
-    // Every /wiki/ visit spends upstream API capacity; crawlers must not.
-    // Staging (ROBOTS_DISALLOW_ALL) refuses crawlers entirely: it exists for
-    // one reviewer, and an indexed staging page is a wrong answer forever.
+    // The policy and its reasoning are in src/robots.js: everything is closed to
+    // crawlers except the front page, which costs nothing to serve. It used to
+    // disallow /wiki/ alone, which left every other path open by default.
     res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end(
-      process.env.ROBOTS_DISALLOW_ALL
-        ? 'User-agent: *\nDisallow: /\n'
-        : 'User-agent: *\nDisallow: /wiki/\n',
-    )
+    res.end(ROBOTS)
     return
   }
   const m = /^\/wiki\/(.+)$/.exec(url.pathname)
