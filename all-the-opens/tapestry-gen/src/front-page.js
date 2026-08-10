@@ -182,15 +182,44 @@ const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_')
  */
 export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
 
-export function frontPage({ inline = new Map() } = {}) {
-  const legend = sourceLegend(inline)
-  const cards = SHOWCASE.map(
+/**
+ * The showcase as cards. Written once because two pages make the same promise:
+ * the front page's "ready now" grid and the busy page's (below), which is the
+ * one place a reader meets that promise while the demo is refusing everything
+ * else.
+ */
+const showcaseCards = () =>
+  SHOWCASE.map(
     (c) => `<a class="show" href="${wikiHref(c.title)}">
   <span class="dom">${escapeHtml(c.domain)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="watch">${escapeHtml(c.watch)}</span>
 </a>`,
   ).join('\n')
+
+/** The grid those cards sit in, shared for the same reason they are. */
+const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
+.ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
+  border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
+  vertical-align:1px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;margin:0 0 8px}
+.show{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);
+  border-radius:4px;background:var(--bg);padding:10px 12px 12px;min-width:0}
+.show:hover,.show:focus-visible{border-color:var(--link)}
+.show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
+.show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
+.dom{display:block;font-size:.62rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+.art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
+  margin-bottom:5px}
+.art::after{content:" →";color:var(--rule)}
+.show:hover .art::after{color:var(--link)}
+.watch{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}`
+
+export function frontPage({ inline = new Map() } = {}) {
+  const legend = sourceLegend(inline)
+  const cards = showcaseCards()
   const friendCard = ([slug, name, gift, lic, licHref]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
@@ -266,26 +295,9 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
   color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
 /* The ready line: the six warm pages, named as such. A manila chip because a
-   statement about availability is the friends' voice, not the article's. */
-.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
-.ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
-  border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
-  vertical-align:1px}
-
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;margin:0 0 8px}
-.show{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);
-  border-radius:4px;background:var(--bg);padding:10px 12px 12px;min-width:0}
-.show:hover,.show:focus-visible{border-color:var(--link)}
-.show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
-.show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
-.dom{display:block;font-size:.62rem;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-.art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
-  margin-bottom:5px}
-.art::after{content:" →";color:var(--rule)}
-.show:hover .art::after{color:var(--link)}
-.watch{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}
+   statement about availability is the friends' voice, not the article's.
+   Shared with the busy page — see CARD_STYLE. */
+${CARD_STYLE}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
 .friends-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;
@@ -477,6 +489,81 @@ ${friends}
     <a href="https://tapestries.media">tapestries.media</a> team.</p>
 </div></footer>
 </div>
+</body>
+</html>
+`
+}
+
+/**
+ * The page a visitor gets when every discovery slot is taken (serve.js, 503).
+ *
+ * It used to be one sentence of system-ui on a blank page — true, and a dead
+ * end: a reader who wanted to see what this demo does was told to come back
+ * later by a site that had six finished pages sitting warm on disk. It now
+ * makes the same "ready now" offer the front page makes, with the same cards,
+ * and that offer is not decoration — `src/admission.js` keeps a reserve of
+ * slots for exactly these six, so the links here are open when this page is
+ * being served. A busy page linking to pages that would also answer 503 would
+ * be worse than the dead end it replaced.
+ *
+ * Rendered once at startup, like the front page: the moment this page is
+ * needed is the moment the server has no capacity to build anything.
+ */
+export function busyPage() {
+  return `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Busy just now — Help From Our Friends</title>
+<style>
+:root{
+  --bg:#faf9f6; --paper:#fffefb; --ink:#202122; --head:#101210; --muted:#555a55;
+  --rule:#cfcac0; --link:#33684b;
+  --manila:#f2e8d5; --manila-rule:#d8c9a4; --manila-ink:#5c5233;
+  --serif:Charter,"Bitstream Charter","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+  font-size:15px;line-height:1.65}
+a{color:var(--link)}
+a:hover{text-decoration:underline}
+.page{max-width:1000px;margin:0 auto;background:var(--paper);
+  border:1px solid var(--rule);border-width:0 1px;padding-bottom:40px}
+.wrap{padding:0 32px;min-width:0}
+.kicker{font-size:.8rem;line-height:1.5;color:var(--muted);margin:0 -32px 20px;
+  padding:9px 32px;border-bottom:1px solid var(--rule);background:var(--bg)}
+.kicker a{color:var(--link);font-weight:600;text-decoration:none}
+.kicker a:hover{text-decoration:underline}
+h1{font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.15;
+  margin:.4em 0 12px;color:var(--head);font-weight:400}
+.lede{font-size:.95rem;line-height:1.6;max-width:74ch;margin:0 0 6px;color:#3a3f45}
+${CARD_STYLE}
+.after{font-size:.8rem;color:var(--muted);margin:18px 0 0;max-width:74ch}
+@media(max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:900px){.wrap{padding:0 20px}.kicker{margin:0 -20px 18px;padding:9px 20px}}
+@media(max-width:640px){
+  .wrap{padding:0 14px}
+  .kicker{margin:0 -14px 16px;padding:8px 14px}
+  .grid{grid-template-columns:minmax(0,1fr)}
+}
+</style>
+</head>
+<body>
+<div class="page"><div class="wrap">
+  <p class="kicker"><a href="/">Help From Our Friends</a> · an experiment in visualizing open knowledge</p>
+  <h1>Busy discovering, just now.</h1>
+  <p class="lede">The demo is busy discovering other pages right now — it fetches politely, a few at a
+    time. Try again in a moment.</p>
+  <p class="ready"><span class="chip">ready now</span>These six are already rendered and cached, and
+    the demo keeps room for them even while it is busy:</p>
+  <div class="grid">
+${showcaseCards()}
+  </div>
+  <p class="after">Everything else — who the friends are, what each one gives, and how any of this
+    works — is on <a href="/">the front page</a>, which needs no discovery at all.</p>
+</div></div>
 </body>
 </html>
 `

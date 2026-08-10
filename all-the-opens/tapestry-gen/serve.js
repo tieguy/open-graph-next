@@ -16,8 +16,9 @@
 import { createServer } from 'node:http'
 import { createHash } from 'node:crypto'
 
+import { admits, isShowcase } from './src/admission.js'
 import { discover } from './src/discover.js'
-import { frontPage } from './src/front-page.js'
+import { busyPage, frontPage } from './src/front-page.js'
 import { CACHE, coverDataUri, fromDataUri, hotlinkUnsafe } from './src/http.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
@@ -93,11 +94,22 @@ function bandInline(b) {
 // article has already cached every one of them.
 const INDEX = frontPage({ inline: icons })
 
+// The busy page, built once for the same reason the front page is — and here
+// the reason is sharper: the moment it is needed is the moment this server has
+// no capacity to spare. It offers the showcase, which the reserve below is what
+// makes true.
+const BUSY = busyPage()
+
 // Each discovery fans out dozens of upstream requests (politely — the
 // per-host queues serialize them globally), so inbound load must be capped
 // where it arrives: a few pages at a time is a demo, an unbounded queue of
 // them is someone else's traffic problem.
 const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
+// Slots general traffic cannot take, kept for the six pages the front page
+// promises are ready — a warm one of those makes no upstream request at all,
+// which is the thing the cap exists to bound. The argument, and why this does
+// not widen anything anyone else sees, is in src/admission.js.
+const SHOWCASE_RESERVE = Number(process.env.SHOWCASE_RESERVE ?? 2)
 let inFlight = 0
 
 const server = createServer(async (req, res) => {
@@ -164,17 +176,29 @@ const server = createServer(async (req, res) => {
     res.end('not found\n')
     return
   }
-  if (inFlight >= MAX_CONCURRENT) {
+  // Decoded before the gate, because which lane this request may use depends on
+  // which article it asks for. A malformed escape throws here rather than
+  // inside the handler's try, so it answers for itself: it is a bad request,
+  // and it must not take a slot on the way out.
+  let page
+  try {
+    page = decodeURIComponent(m[1]).replace(/_/g, ' ')
+  } catch {
+    res.writeHead(400, { 'Content-Type': 'text/plain' })
+    res.end('bad title encoding\n')
+    return
+  }
+  if (!admits({
+    inFlight,
+    showcase: isShowcase(page),
+    max: MAX_CONCURRENT,
+    reserve: SHOWCASE_RESERVE,
+  })) {
     res.writeHead(503, { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '15' })
-    res.end(
-      '<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">' +
-        'The demo is busy discovering other pages right now — it fetches politely, a few at a time. ' +
-        'Try again in a moment.</p>\n',
-    )
+    res.end(BUSY)
     return
   }
   inFlight++
-  const page = decodeURIComponent(m[1]).replace(/_/g, ' ')
   const started = Date.now()
   let streaming = false
   // The article discovery actually read, once redirects resolve — set from the

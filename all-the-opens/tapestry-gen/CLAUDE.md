@@ -178,6 +178,29 @@ never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
 `/wiki/`, and the per-host queues already bounding upstream traffic globally.
 
+**The showcase has a reserve past that cap** (`src/admission.js`, 2026-08-10).
+`MAX_CONCURRENT` used to be applied to every `/wiki/` request alike, which broke
+the promise the front page prints — the six showcase articles are "already
+rendered and cached", and a reader arriving while four cold discoveries were in
+flight got the busy page for a page that would have been served entirely off
+disk. `SHOWCASE_RESERVE` (default 2) is slots only those six may take, admitted
+on the reader's own requested title (a redirect *to* a showcase article is not
+known to be one until the parse call answers, so it rides the general lane).
+The justification is what warm means: a warm page's discovery is 100% offline,
+and upstream requests are the thing the cap exists to bound. **It widens nothing
+anyone else sees** — `hostLimit()` bounds upstream concurrency globally and knows
+nothing about in-flight discoveries; the worst case, a cold volume, is two more
+discoveries waiting on those same per-host queues. The reserve is finite on
+purpose: a showcase page is refused too once it is full.
+**The busy page and the reserve are one change.** The 503 was a single sentence
+of system-ui on a blank page — a dead end offered by a site with six finished
+pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
+startup (the moment it is needed is the moment there is no capacity to build
+anything), sharing the showcase cards and their CSS with the front page so the
+"ready now" promise reads the same in both places. A busy page linking to pages
+that would themselves answer 503 would be worse than the dead end it replaced,
+which is why the two must not be separated.
+
 **Staging: `npm run deploy:staging`** (2026-08-09) deploys the same image to
 **https://staging.friendsof.wiki/** (Fly app `help-from-our-friends-staging`,
 `fly.staging.toml`; a Hover CNAME points the subdomain at the fly.dev host)
