@@ -214,6 +214,18 @@ export function hotlinkUnsafe(entry) {
 }
 
 /**
+ * The `/img/` path key for a URL the streaming server has decided to serve.
+ *
+ * Lives here, beside the caches, because it is now used twice: to MINT a path
+ * while rendering, and to CHECK one remembered on the volume from a render this
+ * process did not do (stored pages outlive the process that made them — see
+ * src/page-cache.js). The key being a hash of the URL is what makes the second
+ * possible: a remembered entry that does not hash back to its own key was not
+ * written by this server, and is not fetched.
+ */
+export const imgKey = (url) => createHash('sha1').update(url).digest('hex').slice(0, 16)
+
+/**
  * A cover fetched and base64'd, so the page does not depend on the archive.org
  * redirect OpenLibrary covers resolve through. Null when there is no cover —
  * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and

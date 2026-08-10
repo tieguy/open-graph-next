@@ -399,6 +399,10 @@ ${friends}
         script on our server pulls existing linking information (from citations and Wikidata) and
         then grabs context from those sources to enrich the article — in one of two ways, and each
         card says which.</p>
+        <p>That happens once per article. The finished page is kept and handed to whoever asks for
+        it next, so what you see is that discovery rather than a fresh one — the foot of every
+        article says which day it was made. Asking our friends the same question every time anyone
+        reloads would spend their capacity to learn nothing new.</p>
         <h4>Identifier</h4>
         <p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a collection answers to
         exactly it. The strongest claim a card can make.</p>
@@ -475,8 +479,8 @@ ${friends}
 </main>
 <footer class="foot"><div class="wrap foot-wrap">
   <p>Generated, not authored. Every page is discovered live from the article’s own anchors and
-    streamed as it is found — this server fetches politely, a few pages at a time, and caches what
-    it has seen.</p>
+    streamed as it is found — this server fetches politely, a few pages at a time, and keeps both
+    what it was told and the page it made of it.</p>
   <p>Code is public domain (CC0) in <a href="https://github.com/tieguy/open-graph-next">open-graph-next</a>.
     Article text CC BY-SA 4.0; every item carries its own license and credit.</p>
   <p>Copyright status comes from
@@ -501,10 +505,14 @@ ${friends}
  * end: a reader who wanted to see what this demo does was told to come back
  * later by a site that had six finished pages sitting warm on disk. It now
  * makes the same "ready now" offer the front page makes, with the same cards,
- * and that offer is not decoration — `src/admission.js` keeps a reserve of
- * slots for exactly these six, so the links here are open when this page is
- * being served. A busy page linking to pages that would also answer 503 would
- * be worse than the dead end it replaced.
+ * and that offer is not decoration: a stored render is replayed from disk
+ * before the concurrency gate is consulted at all (`src/page-cache.js`), so
+ * these links do not queue behind the discoveries that caused this page. For
+ * the windows where the showcase is genuinely cold — a fresh volume, the
+ * minutes after a deploy — `src/admission.js` keeps a reserve of slots for
+ * exactly these six, so the offer holds there too. A busy page linking to
+ * pages that would also answer 503 would be worse than the dead end it
+ * replaced.
  *
  * Rendered once at startup, like the front page: the moment this page is
  * needed is the moment the server has no capacity to build anything.
@@ -556,8 +564,8 @@ ${CARD_STYLE}
   <h1>Busy discovering, just now.</h1>
   <p class="lede">The demo is busy discovering other pages right now — it fetches politely, a few at a
     time. Try again in a moment.</p>
-  <p class="ready"><span class="chip">ready now</span>These six are already rendered and cached, and
-    the demo keeps room for them even while it is busy:</p>
+  <p class="ready"><span class="chip">ready now</span>These six are already rendered and stored, so
+    they are served from disk without waiting for the demo to be free:</p>
   <div class="grid">
 ${showcaseCards()}
   </div>

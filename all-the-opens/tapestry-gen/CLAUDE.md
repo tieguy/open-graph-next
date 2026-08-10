@@ -32,10 +32,14 @@ does not help generate the website, it belongs in the attic.
   reruns are offline and byte-reproducible. Delete `.cache/` to refetch. On the
   deployed server this directory is a **Fly volume**, not container scratch (see
   Deployed demo), and `src/sweep.js` bounds its size.
+- **`.cache/page-<build>-<title>.html`** (`src/page-cache.js`, 2026-08-10) is the
+  streaming server's finished renders — see The page cache under Deployed demo.
 - **`.cache/fact-<kind>-<key>.json`** (`readFacts`/`writeFacts` in `src/http.js`,
   2026-08-05) is the same cache holding *derived* answers rather than response
-  bodies — today `fact-class-Q….json`, two booleans per Wikidata class, and
-  `fact-lc-labels-….json` (2026-08-08), the LC label set per P244 id — null
+  bodies — today `fact-class-Q….json`, two booleans per Wikidata class,
+  `fact-lc-labels-….json` (2026-08-08), the LC label set per P244 id, and
+  `fact-img-<key>.json` (2026-08-10), the `/img/` registry the streaming server
+  reads back after a restart so a replayed page's images resolve — null
   included, because a permanent 404 re-asked every render would break the
   once-ever promise to id.loc.gov (see `lcLabels` in `src/lc.js`). It is
   **cache, not data**: everything in it is re-derivable from the network, and
@@ -178,6 +182,51 @@ never in `fly.toml` — a fork must set its own. Guards for public exposure:
 `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt` disallowing
 `/wiki/`, and the per-host queues already bounding upstream traffic globally.
 
+### The page cache (2026-08-10)
+
+**A page is discovered once.** `.cache/` was only ever a REQUEST cache, so every
+view re-ran `discover()` — parse the cached article, slice the sections, run
+every pivot, rank, render — about a quarter-second of work to re-derive an
+answer that could not have changed, because **nothing in this cache expires**.
+Repeat views never bought freshness; they bought a recomputation. `serve.js` now
+stores the bytes a finished stream actually sent and replays them: a repeat view
+is one file read, taken **before the concurrency gate**, since a replay is not a
+discovery and the cap exists to bound discoveries.
+
+Four things it has to get right, all of them in `src/page-cache.js`:
+
+- **Keyed by a build id**, a fingerprint of the exact files the Dockerfile ships
+  (`src/*.js` + `serve.js`; `BUILD_ID` overrides). Without it a deploy would
+  serve the previous build's markup forever, silently — the worst failure a
+  cache has available. Earlier builds' renders are purged at startup (after
+  `listen()`, like the sweep) rather than left to age out. Verified live: one
+  appended comment moved the id and the stored page stopped being served.
+- **Keyed by the title as the reader spelled it**, via `titleKey` shared with
+  `src/admission.js`, so `apollo_11` and `Apollo 11` replay one render. A
+  redirect earns its own entry under its own name — a duplicate render, never
+  the wrong article.
+- **Never a partial page**: temp file then rename, and written only on the path
+  where discovery finished. A page cut short by an upstream failure must be
+  discovered again, not served to everyone who asks next.
+- **The `/img/` registry has to survive the process.** It was an in-memory Map,
+  and a replayed page names paths a later process never minted, so every image
+  on it would have 404'd after a restart. It writes through to
+  `fact-img-<key>.json` now. This does **not** open the proxy: an entry exists
+  only where `imgPath` put one, and because the key IS the hash of the URL a
+  remembered entry is *verified* rather than trusted — anything that does not
+  hash back to its own key is refused. Both halves verified live (a remembered
+  key resolves; a planted mismatched one 404s).
+
+**The footer now dates the render**, and that disclosure was owed before this
+change and not made: with a never-expiring request cache, a "live" repeat view
+has always shown the ecosystem as it stood when someone first asked. The line
+says so — "Discovered live from … on August 10, 2026 … Later visits are served
+this same render". `no-store` stays on the response deliberately: the volume
+holds the copy, and a browser's copy could not be retired by a deploy.
+
+Storage is cheap next to what it replaces: a streamed article is ~62 KB against
+~4 MB of request cache per page, and these files ride the same LRU sweep.
+
 **The showcase has a reserve past that cap** (`src/admission.js`, 2026-08-10).
 `MAX_CONCURRENT` used to be applied to every `/wiki/` request alike, which broke
 the promise the front page prints — the six showcase articles are "already
@@ -186,12 +235,18 @@ flight got the busy page for a page that would have been served entirely off
 disk. `SHOWCASE_RESERVE` (default 2) is slots only those six may take, admitted
 on the reader's own requested title (a redirect *to* a showcase article is not
 known to be one until the parse call answers, so it rides the general lane).
-The justification is what warm means: a warm page's discovery is 100% offline,
-and upstream requests are the thing the cap exists to bound. **It widens nothing
-anyone else sees** — `hostLimit()` bounds upstream concurrency globally and knows
-nothing about in-flight discoveries; the worst case, a cold volume, is two more
-discoveries waiting on those same per-host queues. The reserve is finite on
-purpose: a showcase page is refused too once it is full.
+**It widens nothing anyone else sees** — `hostLimit()` bounds upstream
+concurrency globally and knows nothing about in-flight discoveries; the worst
+case, a cold volume, is two more discoveries waiting on those same per-host
+queues. The reserve is finite on purpose: a showcase page is refused too once it
+is full.
+
+**The page cache shrank this job but did not retire it.** A stored showcase page
+never reaches the gate at all now, so the reserve covers only the windows where
+the showcase is genuinely cold: a fresh volume, the minutes after a deploy while
+`warm.js` refills, an eviction sweep. Deleting it would make the busy page's
+offer false in exactly those windows, which is the one thing that page must not
+be.
 **The busy page and the reserve are one change.** The 503 was a single sentence
 of system-ui on a blank page — a dead end offered by a site with six finished
 pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at

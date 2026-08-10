@@ -8,18 +8,29 @@
  * One chunked HTML response per page; no client framework, no polling. The
  * discovery pipeline, its budgets and its per-host politeness are exactly the
  * batch ones (src/discover.js) — the only difference is when the bytes leave.
- * Repeat views ride the same disk cache as spike.js, so a page you have seen
- * before arrives essentially at once.
+ *
+ * A page is discovered ONCE. The bytes of a finished stream are stored under
+ * this build's id (src/page-cache.js) and replayed to everyone who asks next,
+ * so a repeat view is a file read rather than a rerun of the pipeline over a
+ * request cache that never expires anyway.
  *
  *   WIKIMEDIA_UA_CONTACT=you@example.com node serve.js [port]
  */
 import { createServer } from 'node:http'
-import { createHash } from 'node:crypto'
 
 import { admits, isShowcase } from './src/admission.js'
 import { discover } from './src/discover.js'
 import { busyPage, frontPage } from './src/front-page.js'
-import { CACHE, coverDataUri, fromDataUri, hotlinkUnsafe } from './src/http.js'
+import {
+  CACHE,
+  coverDataUri,
+  fromDataUri,
+  hotlinkUnsafe,
+  imgKey,
+  readFacts,
+  writeFacts,
+} from './src/http.js'
+import { buildId, purgeStalePages, readPage, writePage } from './src/page-cache.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -58,11 +69,38 @@ const PORT = Number(process.argv[2] ?? process.env.PORT ?? 8787)
 // serve are in the registry: an image proxy that will fetch whatever a caller
 // names is an open proxy, and this one cannot be asked for a URL it did not
 // choose.
+//
+// The registry is written through to disk as well as held in memory, because
+// stored pages outlive the process that rendered them (src/page-cache.js): a
+// replayed page names `/img/` paths this process never minted, and without the
+// disk half every image on it would 404 after a restart. It stays closed
+// against the open-proxy problem for the same reason it always was — an entry
+// exists only where `imgPath` put it, so the set of URLs this server will fetch
+// is still exactly the set it chose itself, and the key is verified against the
+// URL on the way back out.
 const proxied = new Map()
 function imgPath(url) {
-  const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
-  proxied.set(key, url)
+  const key = imgKey(url)
+  if (!proxied.has(key)) {
+    proxied.set(key, url)
+    // Fire and forget: a failed write costs this image a thumbnail on a
+    // replayed page after a restart, and the card's onerror already handles a
+    // missing image. writeFacts says so itself when it fails.
+    writeFacts('img', [[key, url]])
+  }
   return `/img/${key}`
+}
+
+/** The URL behind an `/img/` key: this process's memory, then the volume. */
+async function proxiedUrl(key) {
+  if (proxied.has(key)) return proxied.get(key)
+  const url = (await readFacts('img', [key])).get(key)
+  // The path IS the hash of the URL, so a remembered entry can be checked
+  // rather than trusted: anything that does not hash back to its own key was
+  // not written by imgPath, and this server does not fetch it.
+  if (typeof url !== 'string' || imgKey(url) !== key) return null
+  proxied.set(key, url)
+  return url
 }
 
 // Source icons are page furniture, not findings, and arrive as committed bytes
@@ -106,11 +144,33 @@ const BUSY = busyPage()
 // them is someone else's traffic problem.
 const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
 // Slots general traffic cannot take, kept for the six pages the front page
-// promises are ready — a warm one of those makes no upstream request at all,
-// which is the thing the cap exists to bound. The argument, and why this does
-// not widen anything anyone else sees, is in src/admission.js.
+// promises are ready. Since the page cache landed this covers a much smaller
+// job than it did: a stored render needs no slot at all, so the reserve now
+// only matters in the windows where the showcase is genuinely cold — a fresh
+// volume, the minutes after a deploy while `warm.js` refills, an eviction
+// sweep. It survives because the busy page's offer has to stay true in those
+// windows too. The argument, and why it widens nothing anyone else sees, is in
+// src/admission.js.
 const SHOWCASE_RESERVE = Number(process.env.SHOWCASE_RESERVE ?? 2)
 let inFlight = 0
+
+// Which rendering this process does. Stored pages are keyed by it, so a deploy
+// retires every one of them rather than serving last build's markup forever.
+const BUILD = buildId()
+
+/**
+ * The day a render was discovered, for the line at the foot of the page.
+ *
+ * A stored page carries the date it was made, which is the disclosure this
+ * site owed its readers before the page cache existed and did not make: the
+ * request cache has never expired, so a "warm" page has always been showing
+ * the ecosystem as it stood when someone first asked for it. Now the page
+ * says so. UTC and long-form American English, per the subtree's invariant.
+ */
+const discoveredOn = () =>
+  new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric',
+  }).format(new Date())
 
 const server = createServer(async (req, res) => {
   const url = new URL(req.url, 'http://localhost')
@@ -121,9 +181,9 @@ const server = createServer(async (req, res) => {
   }
   const img = /^\/img\/([0-9a-f]{16})$/.exec(url.pathname)
   if (img) {
-    const target = proxied.get(img[1])
-    // A key this process never minted — a page cached in someone's browser
-    // from before a restart. The image is missing; the page is not broken.
+    const target = await proxiedUrl(img[1])
+    // A key nothing ever minted — or one whose registry entry has been swept.
+    // The image is missing; the page is not broken.
     if (!target) {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
       res.end('unknown image\n')
@@ -176,16 +236,37 @@ const server = createServer(async (req, res) => {
     res.end('not found\n')
     return
   }
-  // Decoded before the gate, because which lane this request may use depends on
-  // which article it asks for. A malformed escape throws here rather than
-  // inside the handler's try, so it answers for itself: it is a bad request,
-  // and it must not take a slot on the way out.
+  const started = Date.now()
+  // Decoded before the gate, because both what may be replayed and which lane
+  // this request may use depend on which article it asks for. A malformed
+  // escape throws here rather than inside the handler's try, so it answers for
+  // itself: it is a bad request, and it must not take a slot on the way out.
   let page
   try {
     page = decodeURIComponent(m[1]).replace(/_/g, ' ')
   } catch {
     res.writeHead(400, { 'Content-Type': 'text/plain' })
     res.end('bad title encoding\n')
+    return
+  }
+  // A page this build has already rendered is replayed whole, before the gate
+  // and without taking a slot — it is a file read, not a discovery, and the cap
+  // exists to bound discoveries. This is also the answer to a question the
+  // server could not previously ask: whether a page is warm was a property of a
+  // few hundred cache files and unknowable before running it; now it is one
+  // lookup.
+  const stored = await readPage(CACHE, BUILD, page)
+  if (stored) {
+    res.writeHead(200, {
+      'Content-Type': 'text/html; charset=utf-8',
+      'Content-Length': Buffer.byteLength(stored),
+      // Still no-store, deliberately: the volume is the cache now, and letting
+      // browsers hold their own copies is a separate decision with its own
+      // invalidation problem (a build id they never see).
+      'Cache-Control': 'no-store',
+    })
+    res.end(stored)
+    console.error(`${page}: replayed in ${Date.now() - started}ms`)
     return
   }
   if (!admits({
@@ -199,8 +280,16 @@ const server = createServer(async (req, res) => {
     return
   }
   inFlight++
-  const started = Date.now()
   let streaming = false
+  // Every byte this response sends, kept so the finished page can be stored and
+  // replayed. The bytes SENT are the artifact — bands stream in completion
+  // order, so a later re-render is not obliged to reproduce them, and the
+  // concatenation is the same standalone document `warm.js` reads today.
+  const sent = []
+  const write = (chunk) => {
+    sent.push(chunk)
+    res.write(chunk)
+  }
   // The article discovery actually read, once redirects resolve — set from the
   // spine event, which fires before any header goes out. `page` stays the
   // reader's request; `title` is what the page may truthfully call itself.
@@ -212,11 +301,12 @@ const server = createServer(async (req, res) => {
           title = data.page
           res.writeHead(200, {
             'Content-Type': 'text/html; charset=utf-8',
-            // Every view re-runs discovery (the disk cache is the cache);
-            // a stale copy of a streaming page is worth less than a fresh run.
+            // The volume holds the copy, not the reader's browser: this render
+            // is about to be stored under this build's id, where it can be
+            // retired by a deploy. A browser copy could not be.
             'Cache-Control': 'no-store',
           })
-          res.write(
+          write(
             streamOpen({
               title,
               units: data.units,
@@ -231,26 +321,38 @@ const server = createServer(async (req, res) => {
           // band tasks never interleave bytes. Nothing here awaits the network
           // any more — images are named, not fetched (see imgPath above).
           const fragment = streamBand(data, bandInline(data))
-          if (fragment) res.write(fragment)
+          if (fragment) write(fragment)
         }
       },
     })
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
-    res.write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
-    res.write(
+    write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
+    write(
       streamClose({
+        // Dated, because this page is about to become the answer to every later
+        // request for it. The date was owed before the page cache existed —
+        // nothing in `.cache/` expires, so a repeat view has always been the
+        // ecosystem as it stood when someone first asked — and "streamed as it
+        // was found" quietly implied otherwise.
         provenance:
           `Discovered live from the English Wikipedia article ` +
           `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
-          `${escapeHtml(title)}</a> — no curated dataset, streamed as it was found.`,
+          `${escapeHtml(title)}</a> on ${discoveredOn()} — no curated dataset. ` +
+          `Later visits are served this same render, so what you see is the open ` +
+          `ecosystem as it was that day.`,
       }),
     )
     res.end()
     console.error(
       `${title}: ${stats.sections} sections in ${((Date.now() - started) / 1000).toFixed(1)}s`,
     )
+    // Stored only here, on the path where discovery actually finished: a page
+    // cut short by an upstream failure is a page that must be discovered again,
+    // not one to serve to everybody who asks next. Keyed by the title the
+    // reader asked for; a redirect earns its own entry under its own name.
+    await writePage(CACHE, BUILD, page, sent.join(''))
   } catch (e) {
     console.error(`${page}: ${e.message}`)
     if (!streaming) {
@@ -277,7 +379,12 @@ const server = createServer(async (req, res) => {
 })
 
 server.listen(PORT, '0.0.0.0', () => {
-  console.error(`live discovery on http://localhost:${PORT}/ — try /wiki/Ludwig_Prandtl`)
+  console.error(`live discovery on http://localhost:${PORT}/ (build ${BUILD}) — try /wiki/Ludwig_Prandtl`)
+  // Renders from a build this process is not serving can never be served
+  // again; dropping them here rather than leaving them to the LRU sweep keeps
+  // a deploy's worth of dead pages off the volume. After listen(), like the
+  // sweep: a visitor must never wait on housekeeping.
+  purgeStalePages(CACHE, BUILD)
   // Only after the port is open: the cache lives on a durable volume now, so
   // it grows without bound (~4 MB a page) and needs a ceiling — but a visitor
   // must never wait on housekeeping. Default 2 GB against a 3 GB volume.
