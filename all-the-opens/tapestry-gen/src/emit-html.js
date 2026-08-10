@@ -475,9 +475,12 @@ function card(entry, inline, { head = '' } = {}) {
   // Name, licence mark, and the mark's own "why" — see titleRow. The clamp can
   // ellipsize the visible title; the tooltip always has all of it.
   const heading = titleRow(entry)
+  // The head rides ABOVE the visual (2026-08-09, review): galleries lead
+  // with the friend's icon and name, and a singleton that led with the
+  // object instead made the same fact land in a different place on every
+  // card shape. The friend now opens every box; the object follows.
   return (
-    `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${visual}<figcaption>` +
-    head +
+    `<figure class="card${entry.evidence === 'corroborated' ? ' corroborated' : ''}">${head}${visual}<figcaption>` +
     heading +
     descLine(entry) +
     evidence +
@@ -681,9 +684,10 @@ function heroCard(entry, inline) {
     visual = plate(entry)
   }
   const heading = titleRow(entry, 'hero')
+  // Source tag first, same as card(): the friend opens every box.
   return (
-    `<figure class="card hero-card">${visual}<figcaption>` +
-    `<div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
+    `<figure class="card hero-card"><div class="hero-src">${sourceTag(entry.source, inline)}</div>` +
+    `${visual}<figcaption>` +
     heading +
     descLine(entry) +
     credit(entry, inline, false) +
@@ -982,7 +986,17 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // owns it. Singles stay shelved in the deck there, which is the same
   // demotion the FLOAT_MIN_PROSE rule applies to a short section's hero.
   const budget = b.id === 'slede' ? 0 : Math.floor(proseLength(b) / FLOAT_MIN_PROSE)
-  let floats = hero || infobox ? 1 : 0
+  // The hero charges the budget TWO slots (2026-08-09, same review that
+  // found the slicing bug). Its caption alone — source tag, title, desc,
+  // credit, rights, fold — runs about twice a thumb's, and a portrait image
+  // at the rail's width can double the card again; charging it one slot let
+  // a 1,500-character section float a single beside a hero whose own height
+  // already outran the prose, and the single sat beside blank margin below
+  // the last line (Insignia and Prime crew, on the day's Apollo 11 render).
+  // Same epistemic status as FLOAT_MIN_PROSE: a heuristic fitted to observed
+  // holes, and the cost of a wrong guess is bounded — a single becomes a
+  // deck card, or a long section keeps a slightly emptier margin.
+  let floats = hero || infobox ? 2 : 0
   const gutter = []
   for (const [source, byTopic] of bySource) {
     const split = byTopic.size > 1
@@ -1639,6 +1653,9 @@ sup.ref a{color:var(--link)}
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;white-space:nowrap;flex:none}
 .single-head .count[title]{cursor:help}
+/* Both heads sit above the visual now, outside the figcaption's padding, so
+   they carry their own: the friend's name opens every box (2026-08-09). */
+.card > .single-head,.card > .hero-src{margin:3px 4px 7px}
 .carousel.single .card{width:100%;flex:none}
 .carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

@@ -232,11 +232,12 @@ test('the streamed lede fragment carries the box, so the mount script places it'
 // ------------------------------------------------- the prose-budgeted gutter
 
 test('singles float into the gutter while the prose can wrap them; overflow stays in the deck', () => {
-  // One float per FLOAT_MIN_PROSE (700) characters of prose, hero included —
-  // the guard that keeps the 2026-08-05 blank-column problem from returning.
-  // 2100+ characters = budget 3: the hero, then two singles; the third single
-  // stays shelved in the deck.
-  const prose = 'x'.repeat(2200)
+  // One float per FLOAT_MIN_PROSE (700) characters of prose, the hero charged
+  // TWO slots (2026-08-09 — its caption and portrait run about twice a
+  // thumb's height) — the guard that keeps the 2026-08-05 blank-column
+  // problem from returning. 2800+ characters = budget 4: the hero's two,
+  // then two singles; the third single stays shelved in the deck.
+  const prose = 'x'.repeat(2900)
   const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
   const { rail, deck } = bandParts({
     id: 's5',
@@ -260,7 +261,7 @@ test('singles float into the gutter while the prose can wrap them; overflow stay
 })
 
 test('a short section floats nothing extra, and a floated single still carries its claim', () => {
-  const prose = 'x'.repeat(1500) // budget 2: hero + one single
+  const prose = 'x'.repeat(2200) // budget 3: the hero's two slots + one single
   const mk = (source, title) => ({ source, title, imageUrl: `https://example.test/${source}.jpg` })
   const band = {
     id: 's6',
