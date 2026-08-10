@@ -90,33 +90,52 @@ export function buildId() {
   }
 }
 
-const PAGE = /^page-([0-9a-f]{16})-[0-9a-f]{16}\.html$/
+const PAGE = /^page-([0-9a-f]{16})-[0-9a-f]{16}(?:\.thin)?\.html$/
 
-export const pagePath = (dir, build, title) => join(dir, `page-${build}-${sha(titleKey(title))}.html`)
+/**
+ * `degraded` marks a render made while some source was refusing us
+ * (src/cooloff.js): whole — the stream finished — and missing whatever that
+ * source would have contributed. It is a different FILE rather than metadata
+ * inside the page, because the page's bytes are the artifact and must replay
+ * exactly as sent; the name is the one place a fact about the render can live
+ * without touching them.
+ */
+export const pagePath = (dir, build, title, degraded = false) =>
+  join(dir, `page-${build}-${sha(titleKey(title))}${degraded ? '.thin' : ''}.html`)
 
-/** The stored render, or null if this title has none for this build. */
+/**
+ * The stored render as `{html, degraded}`, or null if this title has none for
+ * this build. A full render outranks a thin one, though both should never
+ * exist — writePage retires the counterpart.
+ */
 export async function readPage(dir, build, title) {
-  try {
-    return await readFile(pagePath(dir, build, title), 'utf8')
-  } catch {
-    return null
+  for (const degraded of [false, true]) {
+    try {
+      return { html: await readFile(pagePath(dir, build, title, degraded), 'utf8'), degraded }
+    } catch {
+      /* try the other kind */
+    }
   }
+  return null
 }
 
 /**
  * Store a finished render. Temp file then rename, so a concurrent reader sees
- * either the whole previous page or the whole new one and never a prefix.
+ * either the whole previous page or the whole new one and never a prefix. One
+ * stored answer per title: writing either kind retires the other, so the full
+ * render that follows a recovery replaces the thin one instead of shadowing it.
  *
  * Never throws: a page cache that cannot write makes the demo slow, exactly as
  * it was before this existed, and never wrong.
  */
-export async function writePage(dir, build, title, html) {
-  const path = pagePath(dir, build, title)
+export async function writePage(dir, build, title, html, degraded = false) {
+  const path = pagePath(dir, build, title, degraded)
   const tmp = `${path}.${process.pid}.tmp`
   try {
     await mkdir(dir, { recursive: true })
     await writeFile(tmp, html)
     await rename(tmp, path)
+    await unlink(pagePath(dir, build, title, !degraded)).catch(() => {})
     return true
   } catch (e) {
     console.error(`  page cache write failed (${title}): ${e.message}`)

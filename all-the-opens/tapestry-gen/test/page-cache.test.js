@@ -61,9 +61,35 @@ test('a stored render comes back byte-identical, and only to its own build', asy
   const d = await dir()
   const html = '<!doctype html><p>whole page</p>'
   assert.equal(await writePage(d, BUILD, 'Apollo 11', html), true)
-  assert.equal(await readPage(d, BUILD, 'apollo_11'), html)
+  assert.deepEqual(await readPage(d, BUILD, 'apollo_11'), { html, degraded: false })
   assert.equal(await readPage(d, OTHER, 'Apollo 11'), null)
   assert.equal(await readPage(d, BUILD, 'Never rendered'), null)
+})
+
+// ---- renders made while a source was refusing us --------------------------
+//
+// A page rendered during someone's rate limit is whole and missing things at
+// once. Storing it buys the replay speed the page cache exists for; marking it
+// lets serve.js stop replaying it the moment the refusal expires, so five
+// minutes of rate limit never becomes days of a thinner article.
+
+test('a degraded render is stored, and says so when read back', async () => {
+  const d = await dir()
+  assert.equal(await writePage(d, BUILD, 'Apollo 11', '<p>thin</p>', true), true)
+  assert.deepEqual(await readPage(d, BUILD, 'Apollo 11'), { html: '<p>thin</p>', degraded: true })
+})
+
+// One stored answer per title: the full render that follows a recovery must
+// retire the thin one it replaces, and never leave both for a reader to race.
+test('a full render replaces the thin one, in both directions', async () => {
+  const d = await dir()
+  await writePage(d, BUILD, 'Apollo 11', '<p>thin</p>', true)
+  await writePage(d, BUILD, 'Apollo 11', '<p>whole</p>')
+  assert.deepEqual(await readPage(d, BUILD, 'Apollo 11'), { html: '<p>whole</p>', degraded: false })
+  assert.equal((await readdir(d)).length, 1, 'the thin file is gone, not shadowed')
+  await writePage(d, BUILD, 'Apollo 11', '<p>thin again</p>', true)
+  assert.deepEqual(await readPage(d, BUILD, 'Apollo 11'), { html: '<p>thin again</p>', degraded: true })
+  assert.equal((await readdir(d)).length, 1)
 })
 
 test('a write leaves no temp file behind for the sweep to count', async () => {
@@ -86,13 +112,18 @@ test('an unwritable cache reports false rather than throwing', async () => {
 test('the purge takes other builds’ pages and nothing else', () => {
   const names = [
     `page-${OTHER}-${'1'.repeat(16)}.html`,
+    `page-${OTHER}-${'1'.repeat(16)}.thin.html`,
     `page-${BUILD}-${'1'.repeat(16)}.html`,
+    `page-${BUILD}-${'4'.repeat(16)}.thin.html`,
     `spike-${'2'.repeat(16)}.json`,
     `fact-class-Q42.json`,
     `datauri-${'3'.repeat(16)}.txt`,
     'page-not-a-build.html',
   ]
-  assert.deepEqual(chooseStalePages(names, BUILD), [`page-${OTHER}-${'1'.repeat(16)}.html`])
+  assert.deepEqual(chooseStalePages(names, BUILD), [
+    `page-${OTHER}-${'1'.repeat(16)}.html`,
+    `page-${OTHER}-${'1'.repeat(16)}.thin.html`,
+  ])
 })
 
 test('the purge deletes them on disk and leaves the request cache alone', async () => {
@@ -105,5 +136,5 @@ test('the purge deletes them on disk and leaves the request cache alone', async 
   assert.equal(left.length, 2)
   assert.ok(left.some((n) => n.startsWith(`page-${BUILD}-`)), 'this build survives')
   assert.ok(left.some((n) => n.startsWith('spike-')), 'the request cache is untouched')
-  assert.equal(await readPage(d, BUILD, 'Apollo 11'), '<p>current</p>')
+  assert.deepEqual(await readPage(d, BUILD, 'Apollo 11'), { html: '<p>current</p>', degraded: false })
 })

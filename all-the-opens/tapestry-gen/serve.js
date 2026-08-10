@@ -261,17 +261,23 @@ const server = createServer(async (req, res) => {
   // few hundred cache files and unknowable before running it; now it is one
   // lookup.
   const stored = await readPage(CACHE, BUILD, page)
-  if (stored) {
+  // A thin render — made while some source was refusing us — is authoritative
+  // for exactly as long as the conditions that produced it persist. While a
+  // cool-off stands, re-rendering would reproduce the same thin page and burn a
+  // discovery slot to do it, so replay. The moment everyone answers, the thin
+  // page stops being the answer: fall through to a fresh discovery, whose
+  // writePage retires it.
+  if (stored && (!stored.degraded || coolingHosts(Date.now()).length)) {
     res.writeHead(200, {
       'Content-Type': 'text/html; charset=utf-8',
-      'Content-Length': Buffer.byteLength(stored),
+      'Content-Length': Buffer.byteLength(stored.html),
       // Still no-store, deliberately: the volume is the cache now, and letting
       // browsers hold their own copies is a separate decision with its own
       // invalidation problem (a build id they never see).
       'Cache-Control': 'no-store',
     })
-    res.end(stored)
-    console.error(`${page}: replayed in ${Date.now() - started}ms`)
+    res.end(stored.html)
+    console.error(`${page}: replayed in ${Date.now() - started}ms${stored.degraded ? ' (thin)' : ''}`)
     return
   }
   if (!admits({
@@ -358,19 +364,19 @@ const server = createServer(async (req, res) => {
     // not one to serve to everybody who asks next. Keyed by the title the
     // reader asked for; a redirect earns its own entry under its own name.
     //
-    // "Finished" has to mean finished with everybody answering. A source that
-    // was rate-limiting us during this render (src/cooloff.js) contributed
-    // nothing to it, and storing the result would make that thin page the answer
-    // to every later request for this article until the next deploy — a five
-    // minute rate limit costing an article its open-access copies for days. The
-    // reader in front of us still gets the page; the next one gets a fresh
-    // attempt, which is what they would have got before this cache existed.
+    // A render made while a source was rate-limiting us (src/cooloff.js) is
+    // whole and missing things at once, so it is stored MARKED: replayed while
+    // the refusal stands — recomputing it sooner would only reproduce it — and
+    // replaced by the first render after everyone answers again. Measured
+    // before the mark existed, both simpler policies were wrong ways: storing
+    // it plain froze five minutes of someone's rate limit into days of a
+    // thinner article, and not storing it at all suspended the page cache
+    // site-wide for the length of every cool-off.
     const refused = coolingHosts(Date.now())
     if (refused.length) {
-      console.error(`${page}: not stored — ${refused.join(', ')} rate-limited this render`)
-    } else {
-      await writePage(CACHE, BUILD, page, sent.join(''))
+      console.error(`${page}: stored thin — ${refused.join(', ')} rate-limited this render`)
     }
+    await writePage(CACHE, BUILD, page, sent.join(''), refused.length > 0)
   } catch (e) {
     console.error(`${page}: ${e.message}`)
     if (!streaming) {
