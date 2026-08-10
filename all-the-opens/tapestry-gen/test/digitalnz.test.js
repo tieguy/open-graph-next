@@ -6,6 +6,7 @@ import {
   digitalnzEntryFrom,
   digitalnzRights,
   digitalnzUrl,
+  pickDigitalnzEntries,
   subjectMatch,
 } from '../src/digitalnz.js'
 
@@ -113,6 +114,54 @@ test('digitalnzRights recognizes nothing from an empty or malformed usage array'
 })
 
 // ---- entries ------------------------------------------------------------
+
+test('a shelf never shows the same title twice — DPLA’s fold, applied to DigitalNZ', () => {
+  // Live case, 2026-08-09: Auckland Libraries holds four DISTINCT photographs
+  // all cataloged "Apollo 11 moon landing, 1969", and the shelf showed all
+  // four — four cards a reader cannot tell apart. The pick now rides
+  // rankDplaEntries, so identical-title records fold to their first and the
+  // cap is filled from what remains, exactly as DPLA's shelves have worked
+  // since LUI-144.
+  const mk = (id, title) => ({
+    id,
+    title,
+    content_partner: ['Auckland Libraries'],
+    landing_url: `http://example.test/${id}`,
+    usage: ['Share'],
+    subject: ['Aldrin, Buzz'],
+  })
+  const results = [
+    mk(1, 'Apollo 11 moon landing, 1969'),
+    mk(2, 'Apollo 11 moon landing, 1969'),
+    mk(3, 'Apollo 11 moon landing, 1969'),
+    mk(4, 'Apollo 11 moon landing, 1969'),
+    mk(5, 'Aldrin on the ladder'),
+    mk(6, 'Parade for the astronauts'),
+  ]
+  const picked = pickDigitalnzEntries(results, ['Aldrin, Buzz'], 'Buzz Aldrin')
+  const titles = picked.entries.map((e) => e.title)
+  assert.equal(new Set(titles).size, titles.length, 'every card distinct')
+  assert.equal(titles.filter((t) => t.startsWith('Apollo 11 moon landing')).length, 1)
+  assert.ok(titles.includes('Aldrin on the ladder'))
+  assert.ok(titles.includes('Parade for the astronauts'))
+})
+
+test('the pick still corroborates and still reports the matched heading', () => {
+  const record = {
+    id: 9,
+    title: 'Empire Day in Japan',
+    content_partner: ['Somewhere'],
+    landing_url: 'http://example.test/9',
+    usage: ['Share'],
+    subject: ['Tokyo (Japan)'],
+  }
+  // No corroboration context: the match alone decides, and the heading is the
+  // form the record itself stated.
+  const picked = pickDigitalnzEntries([record], ['Tokyo (Japan)'], 'Tokyo')
+  assert.equal(picked.heading, 'Tokyo (Japan)')
+  // A window with no matching record is null, not an empty shelf.
+  assert.equal(pickDigitalnzEntries([record], ['Aldrin, Buzz'], 'Buzz Aldrin'), null)
+})
 
 test('a matched record becomes a card credited to the CONTRIBUTING institution, not DigitalNZ', () => {
   // The Turnbull photo as the live API returns it (thumbnails come from

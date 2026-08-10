@@ -35,6 +35,9 @@ import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
 import { lcLabels } from './lc.js'
 import { corroborated } from './relevance.js'
+// The shared search-shape ranker, living beside its first user — the same
+// borrowing DIGITALNZ_PIVOT already does for DPLA's field and property.
+import { rankDplaEntries, uniqueEntries } from './dpla.js'
 
 export const DIGITALNZ_PER_ANCHOR = 4
 
@@ -194,18 +197,39 @@ export async function digitalnzEntries(lcId, anchorLabel, key, ctx) {
   if (!labels) return null
   const forms = [labels.heading, ...labels.variants]
   const body = await getJson(digitalnzUrl(forms, key))
-  const results = body.search?.results ?? []
-  const entries = []
+  const picked = pickDigitalnzEntries(body.search?.results ?? [], forms, anchorLabel, ctx)
+  if (!picked) return null
+  return { ...picked, total: body.search?.result_count ?? 0 }
+}
+
+/**
+ * The pick, pure over a fetched window: match, corroborate, then DPLA's own
+ * rank-and-fold. Until 2026-08-09 this took the first DIGITALNZ_PER_ANCHOR
+ * matches in API order, and Auckland Libraries showed why that is not a
+ * shelf: four DISTINCT photographs, every one cataloged "Apollo 11 moon
+ * landing, 1969" — four cards a reader cannot tell apart. rankDplaEntries
+ * already answers exactly this for DPLA (LUI-144: score by anchor tokens
+ * and a thumbnail, fold identical title-prefixes across holders, fill the
+ * cap from what remains), and the two partners share the search shape, the
+ * P244 anchor, and the corroboration gate — so they share the ranker too,
+ * rather than growing a second one that drifts.
+ */
+export function pickDigitalnzEntries(results, forms, anchorLabel, ctx) {
+  const all = []
   let heading = null
   for (const record of results) {
-    if (entries.length >= DIGITALNZ_PER_ANCHOR) break
     const form = subjectMatch(record, forms)
     if (!form) continue
     if (ctx?.topic && !ctx.isSubject && !corroborated(record.subject, ctx.topic, ctx.ownQid)) continue
     heading ??= form
     const entry = digitalnzEntryFrom(record, form, anchorLabel)
-    if (entry) entries.push(entry)
+    if (entry) all.push(entry)
   }
-  if (!entries.length) return null
-  return { heading, total: body.search?.result_count ?? results.length, entries }
+  if (!all.length) return null
+  const entries = rankDplaEntries(uniqueEntries(all), {
+    heading,
+    anchorLabel,
+    cap: DIGITALNZ_PER_ANCHOR,
+  })
+  return { heading, entries }
 }
