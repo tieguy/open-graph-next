@@ -18,7 +18,7 @@ import { createHash } from 'node:crypto'
 
 import { discover } from './src/discover.js'
 import { frontPage } from './src/front-page.js'
-import { CACHE, coverDataUri, fromDataUri } from './src/http.js'
+import { CACHE, coverDataUri, fromDataUri, hotlinkUnsafe } from './src/http.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -78,10 +78,10 @@ const icons = new Map([...ICONS.keys()].map((url) => [url, imgPath(url)]))
 function bandInline(b) {
   const inline = new Map(icons)
   for (const e of b.entries ?? []) {
-    // OpenLibrary covers redirect through archive.org; OSM tiles must not be
-    // hotlinked from readers' browsers (tile policy). Everything else is a
-    // partner's own thumbnail URL and is linked directly, as before.
-    if (!/covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(e.imageUrl ?? '')) continue
+    // Which images must not be hotlinked — the shared predicate in src/http.js
+    // says why each class is here. Everything else is a partner's own
+    // thumbnail URL and is linked directly, as before.
+    if (!hotlinkUnsafe(e)) continue
     if (inline.has(e.imageUrl)) continue
     inline.set(e.imageUrl, imgPath(e.imageUrl))
   }

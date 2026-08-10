@@ -12,7 +12,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { discover } from './src/discover.js'
-import { coverDataUri } from './src/http.js'
+import { coverDataUri, hotlinkUnsafe } from './src/http.js'
 import { requestTally } from './src/mw.js'
 import { userAgent } from './src/wmf.js'
 import { buildHtml } from './src/emit-html.js'
@@ -38,15 +38,12 @@ async function main() {
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   const out = join(HERE, 'demo', `spike-${slug}.html`)
 
-  // Images that must travel with the page: works by the subject carry
-  // OpenLibrary covers on the entry itself (they resolve through the
-  // archive.org redirect, so a live dependency would blank the rail whenever
-  // the Internet Archive is down); OSM map tiles must not be hotlinked from
-  // readers' browsers (tile policy).
+  // Images that must travel with the page — the shared predicate in
+  // src/http.js says why each class is fetched by us rather than hotlinked.
   const inline = new Map()
   for (const b of bands) {
     for (const e of b.entries ?? []) {
-      if (!/covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(e.imageUrl ?? '')) continue
+      if (!hotlinkUnsafe(e)) continue
       if (inline.has(e.imageUrl)) continue
       const uri = await coverDataUri(e.imageUrl)
       if (uri) inline.set(e.imageUrl, uri)

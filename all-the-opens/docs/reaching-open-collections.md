@@ -351,6 +351,42 @@ postures: HTML challenge-gated, images and OpenURL open, metadata keyed.
 
 ---
 
+## 9. The thumbnails DPLA does hold ride hostnames its providers retire `[ours]`
+
+*Observed 2026-08-09.* Companion to entry 5: that one counts the items DPLA
+has no thumbnail for; this one is about the thumbnails it HAS, whose `object`
+URLs point at the provider's own host — and stay pointed there after the
+provider moves. Found when tapestry-gen started fetching these server-side
+(they hotlink-block or rot in readers' browsers; `hotlinkUnsafe` in
+`tapestry-gen/src/http.js`): on one Apollo 11 render, 54 of ~66 aggregator
+thumbnails fetched clean and three hosts failed three different ways, all
+commands run with our UA (`tapestry-gen/0.1 (…; luis@lu.is)`):
+
+```
+# NXDOMAIN — the thumbnail hostname is retired while the site's apex lives.
+# Same class as api.bl.uk. curl exit 6; apex resolves:
+curl https://thumbnails.calisphere.org/clip/150x150/61cf6557e2905be88a68cf99301a4c33
+getent hosts thumbnails.calisphere.org   → (nothing)
+getent hosts calisphere.org              → 18.155.192.75
+
+# Bot mitigation, per the control rule — real and bogus ids answer alike:
+curl …digital.lib.uiowa.edu/_foxml/datastream/ui%3Atestposters4_176%2BTN%2BTN.0 → 403
+curl …digital.lib.uiowa.edu/_foxml/datastream/ui%3Abogus0000_000%2BTN%2BTN.0    → 403
+
+# Indistinguishable — real and bogus both 404 (an HTML error page), which the
+# control rule says is a host refusing to say which links are broken:
+curl …digitalcollections.museumofflight.org/files/thumbnails/ad23722d….jpg      → 404
+curl …digitalcollections.museumofflight.org/files/thumbnails/00000000…dead.jpg  → 404
+```
+
+The consequence for a reuser: DPLA's index is durable but its images are only
+as reachable as each provider's platform-of-the-decade, so any consumer that
+hotlinks them inherits every migration. Server-side fetching converts the
+failures from silently-broken images into an honest text card; it cannot
+convert a retired hostname back into a picture.
+
+---
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:

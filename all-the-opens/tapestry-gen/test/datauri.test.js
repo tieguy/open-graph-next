@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { fromDataUri } from '../src/http.js'
+import { fromDataUri, hotlinkUnsafe } from '../src/http.js'
 
 // The streaming server serves partner images from its own /img/ path rather
 // than inlining them, so this is the step that turns a cached data: URI back
@@ -34,4 +34,21 @@ test('anything that is not a data URI is refused rather than guessed at', () => 
   assert.equal(fromDataUri(''), null)
   assert.equal(fromDataUri(null), null)
   assert.equal(fromDataUri(undefined), null)
+})
+
+// Which card images both renderers must fetch themselves — batch by inlining,
+// streaming through /img/ — instead of letting a reader's browser hotlink them.
+test('aggregator thumbnails and policy-bound hosts are ours to fetch; museum CDNs hotlink', () => {
+  // DPLA and DigitalNZ point at hundreds of provider hosts that rot and
+  // hotlink-block; the source decides, whatever the host.
+  assert.equal(hotlinkUnsafe({ source: 'dpla', imageUrl: 'https://digitalcollections.museumofflight.org/x.jpg' }), true)
+  assert.equal(hotlinkUnsafe({ source: 'digitalnz', imageUrl: 'https://ndhadeliver.natlib.govt.nz/x.jpg' }), true)
+  // The original two host rules survive: the OpenLibrary redirect and the
+  // OSMF tile policy.
+  assert.equal(hotlinkUnsafe({ source: 'openlibrary', imageUrl: 'https://covers.openlibrary.org/b/id/1-M.jpg' }), true)
+  assert.equal(hotlinkUnsafe({ source: 'openstreetmap', imageUrl: 'https://tile.openstreetmap.org/1/2/3.png' }), true)
+  // A museum's own CDN serves its own images; hotlinking is the cheap path.
+  assert.equal(hotlinkUnsafe({ source: 'met', imageUrl: 'https://images.metmuseum.org/x.jpg' }), false)
+  assert.equal(hotlinkUnsafe({ source: 'ia', imageUrl: 'https://archive.org/services/img/x' }), false)
+  assert.equal(hotlinkUnsafe({ source: 'dpla', imageUrl: null }), false)
 })

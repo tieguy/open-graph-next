@@ -190,10 +190,41 @@ export async function writeFacts(kind, entries) {
 }
 
 /**
+ * Card images both renderers must fetch THEMSELVES — batch by inlining a
+ * data: URI, streaming by serving from /img/ — rather than letting a
+ * reader's browser hotlink the partner's host. One predicate, because the
+ * two renderers kept two copies of the same regex and a reason added to one
+ * was a reason silently missing from the other.
+ *
+ * Three reasons, each earning its line: OpenLibrary covers resolve through
+ * an archive.org redirect, so a live dependency blanks the rail whenever IA
+ * is down; OSM tiles must never be hotlinked from readers' browsers (OSMF
+ * tile policy); and DPLA's and DigitalNZ's thumbnails point at hundreds of
+ * PROVIDER hosts — ContentDM instances, Calisphere, NLNZ delivery — that
+ * rot and hotlink-block (found 2026-08-09: Museum of Flight answered the
+ * browser nothing and every DPLA letter card rendered as text). For the
+ * aggregators the SOURCE decides, whatever the host: the long tail is the
+ * point. A museum's own CDN (the Met, ids.si.edu, archive.org itself)
+ * serves its own images fine, and hotlinking stays the cheap path.
+ */
+export function hotlinkUnsafe(entry) {
+  if (!entry?.imageUrl) return false
+  if (entry.source === 'dpla' || entry.source === 'digitalnz') return true
+  return /covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(entry.imageUrl)
+}
+
+/**
  * A cover fetched and base64'd, so the page does not depend on the archive.org
  * redirect OpenLibrary covers resolve through. Null when there is no cover —
  * OpenLibrary answers a coverless ISBN with a placeholder a few bytes long, and
  * a broken image in the rail is worse than no image.
+ *
+ * A REAL non-answer is cached (a 404, a placeholder: asking again gets the
+ * same nothing), but a transient failure — timeout, connection reset — is
+ * NOT (2026-08-09): it used to be written to disk as the permanent empty
+ * answer, so one slow upstream moment cost a card its picture on every
+ * future render until someone deleted the cache. A cache may make a page
+ * faster, never different.
  */
 export async function coverDataUri(url, { minBytes = 1024 } = {}) {
   const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
@@ -213,9 +244,10 @@ export async function coverDataUri(url, { minBytes = 1024 } = {}) {
       // favicon is legitimately smaller, so callers can lower it.
       return bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
     } catch {
-      return ''
+      return null
     }
   })
+  if (uri == null) return null
   await mkdir(CACHE, { recursive: true })
   await writeFile(path, uri)
   return uri || null

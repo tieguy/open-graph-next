@@ -85,6 +85,19 @@ does not help generate the website, it belongs in the attic.
   asked for the bytes to be *in the HTML*. The `/img/` registry only holds URLs
   the server itself chose: an image proxy that fetches whatever a caller names
   is an open proxy.
+  **Which images both renderers fetch themselves is one predicate** —
+  `hotlinkUnsafe` in `src/http.js` (2026-08-09; the two copies of the host
+  regex it replaced had already begun to drift in comments). Three classes:
+  OpenLibrary covers (the archive.org redirect), OSM tiles (tile policy), and
+  DPLA/DigitalNZ thumbnails, which point at hundreds of PROVIDER hosts that
+  rot and hotlink-block — decided by SOURCE, not host, because the long tail
+  is the point (log entry 9 in `../docs/reaching-open-collections.md`: one
+  Apollo 11 render met an NXDOMAIN'd thumbnail hostname, a 403-to-bots host,
+  and a both-ids-404 host). A thumbnail the server cannot fetch 404s from
+  `/img/`, the card's `onerror` drops the image, and the six-line text clamp
+  takes over — an honest text card, never a broken-image icon. `coverDataUri`
+  caches real non-answers (404, placeholder) but not transient failures
+  (2026-08-09) — one upstream timeout must not blank a card forever.
 
 Both entry points share `src/discover.js`, which reports progress
 through an async `emit('spine'|'band', …)` callback — batch ignores the
