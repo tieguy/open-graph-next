@@ -6,7 +6,12 @@
 // above the footer.
 
 import { escapeHtml } from './html.js'
-import { sourceLegend } from './emit-html.js'
+import { ogMeta, sourceLegend } from './emit-html.js'
+
+const OG_DESCRIPTION =
+  'Alongside every Wikipedia article there is a wider open world: libraries that lend, ' +
+  'museums that publish their own collections, scientists who post their papers openly, ' +
+  'and mappers and naturalists who chart the planet for free.'
 
 const SHOWCASE = [
   {
@@ -217,7 +222,7 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 .show:hover .art::after{color:var(--link)}
 .watch{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}`
 
-export function frontPage({ inline = new Map() } = {}) {
+export function frontPage({ inline = new Map(), siteOrigin = '' } = {}) {
   const legend = sourceLegend(inline)
   const cards = showcaseCards()
   const friendCard = ([slug, name, gift, lic, licHref]) => `<div class="friend">
@@ -243,6 +248,12 @@ export function frontPage({ inline = new Map() } = {}) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Help From Our Friends — an open knowledge web experiment</title>
+${ogMeta({
+    title: 'Help From Our Friends — an open knowledge web experiment',
+    description: OG_DESCRIPTION,
+    path: '/',
+    siteOrigin,
+  })}
 <style>
 :root{
   --bg:#faf9f6; --paper:#fffefb; --ink:#202122; --head:#101210; --muted:#555a55;
@@ -517,13 +528,24 @@ ${friends}
  * Rendered once at startup, like the front page: the moment this page is
  * needed is the moment the server has no capacity to build anything.
  */
-export function busyPage() {
+export function busyPage({ siteOrigin = '' } = {}) {
+  // Share scrapers arrive exactly when a link gets popular — which is when
+  // this server is busiest — and platforms cache a tagless scrape for days.
+  // So the busy page carries the site's card (title, description, image)
+  // with NO og:url: it answers for many article URLs at once, and a
+  // canonical claim here would misdirect every one of them (2026-08-11).
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Busy just now — Help From Our Friends</title>
+${ogMeta({
+    title: 'Help From Our Friends — an open knowledge web experiment',
+    description: OG_DESCRIPTION,
+    path: null,
+    siteOrigin,
+  })}
 <style>
 :root{
   --bg:#faf9f6; --paper:#fffefb; --ink:#202122; --head:#101210; --muted:#555a55;

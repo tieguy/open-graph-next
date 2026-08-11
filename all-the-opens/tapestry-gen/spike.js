@@ -71,6 +71,11 @@ async function main() {
     // because anyone can run this; unset it and the page simply states the rule
     // without pointing anywhere, which is right for a file opened off disk.
     home: process.env.SITE_HOME ?? 'https://friendsof.wiki/',
+    // No default, unlike `home`: og:url is a CANONICAL claim, and a batch
+    // file hosted anywhere else would redirect its shares to friendsof.wiki
+    // (ogMeta's contract: no origin, no og:url/og:image). Defaulting it also
+    // made batch bytes depend on an env var, against byte-reproducibility.
+    siteOrigin: process.env.SITE_ORIGIN,
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +

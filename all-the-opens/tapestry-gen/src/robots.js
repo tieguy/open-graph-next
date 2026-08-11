@@ -28,5 +28,9 @@ export function robotsTxt({ disallowAll = false } = {}) {
   // is an extension rather than part of the original standard, so a crawler
   // that does not understand it reads only `Disallow: /` and indexes nothing.
   // That is the right way for this to fail.
-  return 'User-agent: *\nAllow: /$\nDisallow: /\n'
+  // `/og-cover.png` is the share-card image (2026-08-11): committed bytes,
+  // zero upstream cost, and the robots-honoring share crawlers (Twitterbot,
+  // LinkedIn) refuse a disallowed og:image — without this line even the
+  // front page's card renders imageless on those platforms.
+  return 'User-agent: *\nAllow: /$\nAllow: /og-cover.png\nDisallow: /\n'
 }

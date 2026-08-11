@@ -15,6 +15,9 @@ primary_region = "sjc"
 # spend partner API capacity to save no reader any time.
 [env]
   WARM_ON_START = "1"
+  # Absolute origin for Open Graph tags (og:image, og:url) — see SITE_ORIGIN in
+  # serve.js. Plain env, not a secret: it is the app's own public URL.
+  SITE_ORIGIN = "https://friendsof.wiki"
 # Give the drain handler in serve.js time to finish in-flight streams before
 # the platform kills the machine — a deploy must not cut a page mid-render.
 kill_timeout = "45s"

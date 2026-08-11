@@ -17,6 +17,8 @@
  *   WIKIMEDIA_UA_CONTACT=you@example.com node serve.js [port]
  */
 import { createServer } from 'node:http'
+import { readFileSync } from 'node:fs'
+import { fileURLToPath } from 'node:url'
 
 import { admits, isShowcase } from './src/admission.js'
 import { coolingHosts } from './src/cooloff.js'
@@ -49,6 +51,21 @@ import { escapeHtml } from './src/html.js'
 userAgent('tapestry-gen')
 
 const PORT = Number(process.argv[2] ?? process.env.PORT ?? 8787)
+
+// The absolute origin the Open Graph tags need (og:image and og:url must be
+// full URLs, not paths) — plain [env] in fly.toml / fly.staging.toml, NOT a
+// Fly secret: it is public by definition, and `fly secrets set` mints a
+// release without a fresh image (see the fly gotchas memory). Unset means
+// unset: ogMeta's documented graceful path emits no og:url/og:image at all,
+// which is right for `npm run serve` on a laptop — a localhost fallback here
+// would bake `http://localhost:8787` into share tags (and into stored pages)
+// on any deployment that lost the env var.
+const SITE_ORIGIN = process.env.SITE_ORIGIN ?? ''
+
+// The one share-card image for the whole site, read once at startup like the
+// partner favicons in src/icons.js — see the comment on ogMeta in
+// src/emit-html.js for why every page, front and article alike, shares it.
+const OG_COVER = readFileSync(fileURLToPath(new URL('./src/og-cover.png', import.meta.url)))
 
 // ---- Images: proxied by this server, not inlined into the HTML -------------
 //
@@ -136,13 +153,13 @@ function bandInline(b) {
 // The front page: rendered once at startup, pointing at the same served source
 // icons the article pages use — so a visitor who arrives here and then opens an
 // article has already cached every one of them.
-const INDEX = frontPage({ inline: icons })
+const INDEX = frontPage({ inline: icons, siteOrigin: SITE_ORIGIN })
 
 // The busy page, built once for the same reason the front page is — and here
 // the reason is sharper: the moment it is needed is the moment this server has
 // no capacity to spare. It offers the showcase, which the reserve below is what
 // makes true.
-const BUSY = busyPage()
+const BUSY = busyPage({ siteOrigin: SITE_ORIGIN })
 
 // Staging refuses crawlers outright (ROBOTS_DISALLOW_ALL); production offers the
 // front page and nothing else. Read once — the answer cannot change at runtime.
@@ -187,6 +204,17 @@ const server = createServer(async (req, res) => {
   if (url.pathname === '/' || url.pathname === '/index.html') {
     res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
     res.end(INDEX)
+    return
+  }
+  if (url.pathname === '/og-cover.png') {
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Content-Length': OG_COVER.length,
+      // Committed bytes that only change when this file is redeployed — same
+      // week-long cache as the proxied partner images.
+      'Cache-Control': 'public, max-age=604800',
+    })
+    res.end(OG_COVER)
     return
   }
   const img = /^\/img\/([0-9a-f]{16})$/.exec(url.pathname)
@@ -324,6 +352,7 @@ const server = createServer(async (req, res) => {
               units: data.units,
               inline: icons,
               home: process.env.SITE_HOME ?? '/',
+              siteOrigin: SITE_ORIGIN,
             }),
           )
           streaming = true
