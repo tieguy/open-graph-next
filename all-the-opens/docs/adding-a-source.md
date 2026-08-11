@@ -1,29 +1,50 @@
 # Adding a data source
 
-Last verified: 2026-08-10. Moved out of `tapestry-gen/CLAUDE.md` on this date and
-**this file is now canonical** — CLAUDE.md keeps a pointer and the two rules an
-agent must not miss. A PR that adds a source is expected to update this file in
-the same commit; that is the whole reason it lives in git rather than in a post.
+[friendsof.wiki](https://friendsof.wiki) renders any English Wikipedia article
+"enriched": the article as a spine, with media and sources from the open
+ecosystem — museums, libraries, archives, aggregators — placed alongside it,
+found live by following the article's own links and identifiers outward. Each of
+those collections is a **data source** (on the site itself, a "friend"): the
+Met, DPLA, Open Library, DigitalNZ, a dozen more.
 
-Written for whoever adds the next partner — usually an agent, sometimes a human
-reading to understand what integrating an open collection costs. Every step is
-an instruction; the indented line under it is the incident that put it there.
-Skip the indented lines if you only need the path.
+This document is the complete path for connecting the next one — every file the
+work touches, every check that has to pass before it ships, and the real
+incident behind each rule. It is written for whoever does the work, which is
+usually a coding agent and sometimes a person; either way it assumes the code is
+open beside it. A reader who will never add a source here can still get an
+honest picture of what integrating an open collection costs in 2026 by reading
+only the indented incident lines.
 
-Paths are given as **symbols**, not line numbers, because line numbers drift.
+**How to read it:** every step is an instruction; the indented line under it is
+the incident that put it there. Skip the indented lines if you only need the
+path. All code paths are relative to [`../tapestry-gen/`](../tapestry-gen/),
+and name **symbols**, not line numbers, because line numbers drift.
+
+**Four words this document uses constantly:** an **anchor** is something the
+article names that carries a usable identifier — a wikilink resolved to its
+Wikidata item, a citation's ISBN or DOI. A **pivot** asks one partner what it
+holds for an anchor. What comes back renders as **cards**, grouped into
+per-partner **shelves**. And the **visibility panel** is each page's measurement
+of how much of what was found the Wikipedia article itself shows.
 
 **Adding one source touches 10–13 files, depending on its shape — and that is
 the count AFTER the wiring was refactored once.** The 2026-08-07 registry
 refactor (`99116e8`) already collapsed the hand-edited job list into
-`MUSEUM_PIVOTS` and the duplicated per-partner band blocks into
+`MUSEUM_PIVOTS` and the duplicated per-partner blocks into
 `bandPropertyPivot()` + specs; its audit concluded a registry removes wiring
 duplication but not partner-specific knowledge — rights vocabulary, icon
 sourcing, host policy, the friend blurb — so what this document walks through is
 the part that resisted. Do not re-attempt that refactor expecting the count to
 drop; a missed step here is a partner that fetches correctly and is never
 credited, which is why §4 is a checklist and not a formality. Keep the number
-accurate rather than tidy: it was nine when first counted from the Rijksmuseum
+accurate rather than tidy: it was nine when first counted, from the Rijksmuseum
 integration (2026-08-06).
+
+*Housekeeping: last verified 2026-08-11. This file is canonical —
+`tapestry-gen/CLAUDE.md` (the repo's agent-facing context file) keeps a pointer
+plus the two rules that cost the most when skipped. A PR that adds a source
+updates this file in the same commit; that is why it lives in git rather than in
+a blog post.*
 
 ---
 
@@ -77,8 +98,8 @@ In this order.
    > (`usage`), not a URI or a slug, so its affirmative combination gets words and
    > no glyph — a CC0 mark there would assert a permission nobody granted.
 
-4. **Decide keyed vs keyless.** Prefer keyless; the demo must run for anyone who
-   clones it. If a key is required, the pivot skips silently without one
+4. **Decide keyed vs keyless.** Prefer keyless; the site must run for anyone who
+   clones the repo. If a key is required, the pivot skips silently without one
    (`envKey`), and that degradation gets stated.
    > Keyless-skip is graceful degradation, never a policy against free keys —
    > DPLA, Europeana, Smithsonian and DigitalNZ all run keyed in production. Set
@@ -126,9 +147,11 @@ point at many provider hosts. The predicate decides for both renderers at once.
 
 ### 2a. Direct-id shape — four more edits, in this order
 
-1. An `OPTIONAL` clause and a var in `wdqsUrl` (`src/statements.js`), and the
-   var name in `VARS`.
-2. A row in `PROP_NAME` (`src/statements.js`) — the ⓘ-fold explanation.
+1. An `OPTIONAL` clause and a var in `wdqsUrl` (`src/statements.js`) — the one
+   query to WDQS, the Wikidata Query Service, that asks every partner-identifier
+   question at once — and the var name in `VARS`.
+2. A row in `PROP_NAME` (`src/statements.js`) — the text behind each card's ⓘ
+   fold, which tells a reader which Wikidata property put the card on the page.
 3. The fetcher module. See `metEntry` / `aicEntry` for the plain case,
    `rijks.js` / `iiif.js` for partners needing more than one request.
 4. One entry in `MUSEUM_PIVOTS` (`src/statements.js`).
@@ -173,8 +196,9 @@ deliberately:
 > 1900-1986" matches nothing in DigitalNZ at all.
 
 **Reuse the anchor resolution rather than reimplementing it.** `DIGITALNZ_PIVOT`
-shares DPLA's `field: 'lc'` / P244 instead of adding a fourth WDQS var, because
-NLNZ catalogs through LC/NACO.
+shares DPLA's `field: 'lc'` / P244 (the anchor's Library of Congress authority
+ID) instead of adding a fourth WDQS var, because New Zealand's national library
+catalogs through LC/NACO.
 > This is VALUES.md's *"a learning generalizes across sources, or it waits"* in
 > practice: the strict subject-heading rule is one statement across two partners.
 
@@ -319,10 +343,15 @@ done.
 surfaces.
 
 ```
+cd tapestry-gen
 WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Apollo 11"
 WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Brown v. Board of Education"
 WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Ludwig Prandtl"
 ```
+
+(`WIKIMEDIA_UA_CONTACT` must be *your* address — it identifies whoever is
+actually running the code to the Wikimedia Foundation, and there is deliberately
+no default.)
 
 Render all three before and after, **and add a fourth fixture that actually
 exercises the new partner** if none of the three does. Then read the cards.
