@@ -53,9 +53,14 @@ userAgent('tapestry-gen')
 const PORT = Number(process.argv[2] ?? process.env.PORT ?? 8787)
 
 // The absolute origin the Open Graph tags need (og:image and og:url must be
-// full URLs, not paths) — a Fly secret per app (fly.toml / fly.staging.toml),
-// falling back to localhost for `npm run serve` on a laptop.
-const SITE_ORIGIN = process.env.SITE_ORIGIN ?? `http://localhost:${PORT}`
+// full URLs, not paths) — plain [env] in fly.toml / fly.staging.toml, NOT a
+// Fly secret: it is public by definition, and `fly secrets set` mints a
+// release without a fresh image (see the fly gotchas memory). Unset means
+// unset: ogMeta's documented graceful path emits no og:url/og:image at all,
+// which is right for `npm run serve` on a laptop — a localhost fallback here
+// would bake `http://localhost:8787` into share tags (and into stored pages)
+// on any deployment that lost the env var.
+const SITE_ORIGIN = process.env.SITE_ORIGIN ?? ''
 
 // The one share-card image for the whole site, read once at startup like the
 // partner favicons in src/icons.js — see the comment on ogMeta in
@@ -154,7 +159,7 @@ const INDEX = frontPage({ inline: icons, siteOrigin: SITE_ORIGIN })
 // the reason is sharper: the moment it is needed is the moment this server has
 // no capacity to spare. It offers the showcase, which the reserve below is what
 // makes true.
-const BUSY = busyPage()
+const BUSY = busyPage({ siteOrigin: SITE_ORIGIN })
 
 // Staging refuses crawlers outright (ROBOTS_DISALLOW_ALL); production offers the
 // front page and nothing else. Read once — the answer cannot change at runtime.

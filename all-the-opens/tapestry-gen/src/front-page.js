@@ -528,13 +528,24 @@ ${friends}
  * Rendered once at startup, like the front page: the moment this page is
  * needed is the moment the server has no capacity to build anything.
  */
-export function busyPage() {
+export function busyPage({ siteOrigin = '' } = {}) {
+  // Share scrapers arrive exactly when a link gets popular — which is when
+  // this server is busiest — and platforms cache a tagless scrape for days.
+  // So the busy page carries the site's card (title, description, image)
+  // with NO og:url: it answers for many article URLs at once, and a
+  // canonical claim here would misdirect every one of them (2026-08-11).
   return `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Busy just now — Help From Our Friends</title>
+${ogMeta({
+    title: 'Help From Our Friends — an open knowledge web experiment',
+    description: OG_DESCRIPTION,
+    path: null,
+    siteOrigin,
+  })}
 <style>
 :root{
   --bg:#faf9f6; --paper:#fffefb; --ink:#202122; --head:#101210; --muted:#555a55;

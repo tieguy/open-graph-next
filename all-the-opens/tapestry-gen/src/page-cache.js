@@ -80,6 +80,11 @@ export function buildId() {
       .filter((n) => n.endsWith('.js'))
       .map((n) => ({ name: `src/${n}`, bytes: readFileSync(join(HERE, n), 'utf8') }))
     files.push({ name: 'serve.js', bytes: readFileSync(join(HERE, '..', 'serve.js'), 'utf8') })
+    // Environment that is BAKED INTO stored page bytes belongs in the key
+    // (2026-08-11): og:url/og:image carry SITE_ORIGIN absolutely, so an
+    // origin change with unchanged source must retire the stored pages too,
+    // or they replay the old origin forever.
+    files.push({ name: 'env:SITE_ORIGIN', bytes: process.env.SITE_ORIGIN ?? '' })
     return sourceFingerprint(files)
   } catch (e) {
     // Unreadable source is not a reason to refuse to serve; it is a reason not

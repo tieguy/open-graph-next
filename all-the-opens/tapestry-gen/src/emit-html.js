@@ -17,7 +17,14 @@ import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
  * og:image rather than a broken relative one.
  */
 export function ogMeta({ title, description, path = '/', siteOrigin = '' }) {
-  const url = siteOrigin ? `${siteOrigin}${path}` : ''
+  // A trailing slash on the origin would emit `https://host//wiki/…`, which
+  // the server's route regex 404s — and the sibling SITE_HOME default DOES
+  // end in a slash, so the copy mistake is one an operator will make.
+  siteOrigin = siteOrigin.replace(/\/+$/, '')
+  // `path: null` is the busy page's case: it stands in for MANY urls, so a
+  // canonical og:url would misdirect the share to the front page — it gets
+  // the title, description and image, and no canonical claim.
+  const url = siteOrigin && path ? `${siteOrigin}${path}` : ''
   const image = siteOrigin ? `${siteOrigin}/og-cover.png` : ''
   return `<meta property="og:type" content="website">
 <meta property="og:site_name" content="Help From Our Friends">
