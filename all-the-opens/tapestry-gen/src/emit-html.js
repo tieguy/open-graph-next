@@ -4,6 +4,41 @@ import { heroRank, pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 
+/**
+ * Open Graph / Twitter Card tags, shared by the front page and every article
+ * page. One image for the whole site — the sheet-music cover of "With a
+ * Little Help From My Friends", src/og-cover.png, served at `/og-cover.png` —
+ * rather than a per-article render: a share card is read at thumbnail size on
+ * someone else's timeline, where a generated collage would be illegible
+ * anyway, and one recognizable image makes every shared link read as the same
+ * project. `siteOrigin` (e.g. `https://friendsof.wiki`) makes the image and
+ * page URLs absolute, which the Open Graph spec requires; callers with no
+ * known origin (an offline batch render) omit it and get a page with no
+ * og:image rather than a broken relative one.
+ */
+export function ogMeta({ title, description, path = '/', siteOrigin = '' }) {
+  const url = siteOrigin ? `${siteOrigin}${path}` : ''
+  const image = siteOrigin ? `${siteOrigin}/og-cover.png` : ''
+  return `<meta property="og:type" content="website">
+<meta property="og:site_name" content="Help From Our Friends">
+<meta property="og:title" content="${escapeHtml(title)}">
+<meta property="og:description" content="${escapeHtml(description)}">
+${url ? `<meta property="og:url" content="${escapeHtml(url)}">\n` : ''}${
+    image
+      ? `<meta property="og:image" content="${escapeHtml(image)}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+`
+      : ''
+  }`
+}
+
+/** The description every article page's share card carries — the project's
+ * own words for what it did to the page, not the article's own subject. */
+const ogArticleDescription = (title) =>
+  `A version of the Wikipedia page for ${title}, enhanced by links to other open knowledge.`
+
 // A second rendering of the same model (bands, entries, citations) as a single
 // scrolling HTML page. Where the Tapestry emitter reserves fixed pixel lanes and
 // leaves dead canvas when the prose dwarfs the media, HTML lets the prose reflow
@@ -1252,7 +1287,15 @@ function hero({ title, home, legend, panel = '', extras = '' }) {
 // `inline` maps a fragile image URL (OpenLibrary covers, which redirect through
 // archive.org) to a pre-fetched data: URI, so those covers render without a live
 // dependency on the Internet Archive being up.
-export function buildHtml({ title, bands, inline = new Map(), provenance = '', home = '', reach = null }) {
+export function buildHtml({
+  title,
+  bands,
+  inline = new Map(),
+  provenance = '',
+  home = '',
+  reach = null,
+  siteOrigin = '',
+}) {
   // Intra-wiki links in a batch file re-base onto the deployed demo (or
   // whatever `home` names), so clicking through to another article still
   // lands on an enriched render rather than a broken relative path.
@@ -1282,6 +1325,7 @@ export function buildHtml({ title, bands, inline = new Map(), provenance = '', h
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(used, inline)}
 </style>
@@ -1374,7 +1418,7 @@ document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream
 const FINDING =
   '<span class="finding" role="status">Asking libraries, museums, archives and mapmakers…</span>'
 
-export function streamOpen({ title, units, inline = new Map(), home = '/' }) {
+export function streamOpen({ title, units, inline = new Map(), home = '/', siteOrigin = '' }) {
   const spine = units
     .map((u) =>
       band({ id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks }, inline),
@@ -1386,6 +1430,7 @@ export function streamOpen({ title, units, inline = new Map(), home = '/' }) {
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
 </style>

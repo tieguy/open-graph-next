@@ -71,6 +71,7 @@ async function main() {
     // because anyone can run this; unset it and the page simply states the rule
     // without pointing anywhere, which is right for a file opened off disk.
     home: process.env.SITE_HOME ?? 'https://friendsof.wiki/',
+    siteOrigin: process.env.SITE_ORIGIN ?? 'https://friendsof.wiki',
     provenance:
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
