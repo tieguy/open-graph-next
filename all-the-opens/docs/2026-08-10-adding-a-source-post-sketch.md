@@ -1,7 +1,8 @@
 # What it costs to add an open collection (2026): a playbook, with commentary
 
 *Sketch only — outline and bullets, no prose yet. Companion issue: LUI-140
-(blocked on LUI-147, the CVMA verification). The mechanical playbook itself
+(LUI-147, the CVMA verification, resolved 2026-08-11 — see the corrected
+pitfall below). The mechanical playbook itself
 lives in git (`docs/adding-a-source.md`, canonical as of `ac00fa8`) and this
 post deliberately does NOT restate it — the post is the commentary, the doc is
 the checklist. First of the current queue; LUI-153 (collaborating on an
@@ -57,9 +58,18 @@ Order them as an escalation: URL → identity → data → law → layers.*
 - **The problem is often anchor supply, not the API.** The Met funnel on
   Rembrandt: 35 museum-bearing anchors → 14 survive the table-strip → 3 reach
   the pivot → 2 render. Diagnose the funnel before blaming the partner.
-- **The graph has it, under a property you didn't check.** CVMA: 28k entries,
-  0 matches — material stated in P31 not P186. *(BLOCKED: verify via LUI-147
-  or cut — do not publish unverified.)*
+- **The visible modeling error is not always the binding constraint.** CVMA GB:
+  28,135 photos, 0 matches. The P31/P186 mix-up is real — and fixing it yields
+  ~nothing, because the UK has 87 window items against 28,135 photographs, and
+  the material vocabulary splinters (clear glass 2,555 / lead 699 / "stained
+  glass" itself 84). Verified 2026-08-11; the pre-verification draft of this
+  bullet had the diagnosis wrong, which is itself post material: the plausible
+  explanation survived two months because it was never counted.
+  - Bonus, for the ecosystem pile: cvma.ac.uk is now a tombstone — the archive
+    moved to ADS York under CC BY 4.0, all 28,135 catalogued URLs 404 (real and
+    bogus ids identically), no redirect, no Wikidata property to record new
+    ids in. MORE open than before and LESS reachable: orphaned by its own
+    migration. (reaching-open-collections.md entry 10.)
 - **An index with no ranking hands you its first page.** DPLA/Armstrong: 60
   items, ~50 right, the 4 shown were the only junk. One line + link forward to
   LUI-153, which is this incident grown into its own post. *(Boundary decision:
@@ -114,7 +124,7 @@ Order them as an escalation: URL → identity → data → law → layers.*
 
 ## Before writing prose
 
-- [ ] LUI-147: verify or cut the CVMA claim
+- [x] LUI-147: verified 2026-08-11 — diagnosis corrected, see Part 2 bullet
 - [ ] Decide the DigitalNZ incident's home (here vs. LUI-153) — one place only
 - [ ] Pull exact dates/commits for each incident from CLAUDE.md + git log
 - [ ] Re-render the funnel numbers (Met/Rembrandt) on current code before

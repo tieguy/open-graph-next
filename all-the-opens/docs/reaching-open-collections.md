@@ -387,6 +387,43 @@ convert a retired hostname back into a picture.
 
 ---
 
+## 10. CVMA GB: 28,135 catalogued URLs, every one dead — the archive moved and nothing points at the new home `[ours]` <!-- LUI-147 -->
+
+*Observed 2026-08-11.*
+
+The Corpus Vitrearum Medii Aevi (GB) picture archive — the international
+project documenting medieval stained glass — is indexed in Mix'n'Match as
+catalog 1020: 28,135 entries scraped from `cvma.ac.uk`, dormant since 2022,
+zero matches ever.
+
+```
+https://mix-n-match.toolforge.org/api.php?query=get_catalog_info&catalog=1020
+→ {"name":"CVMA GB","url":"http://www.cvma.ac.uk","wd_prop":null, ...}
+```
+
+Every scraped record URL is dead, and the control proves it is rot rather than
+refusal — a real id and an impossible one answer identically:
+
+```
+http://www.cvma.ac.uk/jsp/record.do?photodataKey=005722&mode=CVMA_INV_NO&recordView=DETAIL  → 404
+http://www.cvma.ac.uk/jsp/record.do?photodataKey=999999999&mode=CVMA_INV_NO&recordView=DETAIL → 404
+```
+
+`cvma.ac.uk` itself is a tombstone page announcing the move: the archive now
+lives at the **Archaeology Data Service**, University of York, as the "Corpus
+Vitrearum Medii Aevi Digital Archive" (collection 1006150,
+`doi:10.5284/1132566`), under **CC BY 4.0** with data copyright © CVMA — stated
+on the collection's own metadata page, 2026-08-11. So the material is more open
+than before and *less* reachable: the old URLs do not redirect, the Mix'n'Match
+catalog still points at the dead host, and the ADS pages are a `.cfm` website
+with search, map and county browse but no visible API.
+
+The double bind for anyone wanting to link it: no CVMA Wikidata property
+exists (0 hits in the property namespace for "Corpus Vitrearum", checked
+2026-08-11), so there is nowhere to record the new identifiers even if someone
+re-scraped them. A DOI-registered, CC BY, 28,000-image national corpus is —
+for machine purposes — orphaned by its own migration.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:

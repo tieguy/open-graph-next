@@ -270,10 +270,21 @@ more hand-written case.**
   > `proseLinks` strips `<table>`, and artist articles link their paintings from
   > gallery tables. 35 museum-bearing anchors → 14 survived the strip → 3 reached
   > the pivot → 2 rendered.
-- **The graph usually has it, under a property you did not check.**
-  > CVMA: 28,135 entries, 0 matches, because the material was stated in P31
-  > rather than P186. *(Unverified — LUI-147 exists to confirm this before it is
-  > repeated in public.)*
+- **The modeling error you can see is not always the constraint that binds —
+  count the targets before diagnosing.** Verified 2026-08-11 (LUI-147), and the
+  verification overturned the diagnosis this bullet used to carry.
+  > CVMA GB — 28,135 medieval stained-glass photographs in Mix'n'Match, zero
+  > matches ever — LOOKS like a modeling bug, and one exists: the catalog types
+  > every entry as stained glass the MATERIAL (Q1473346) where the settled
+  > pattern is window (P31=Q21061279) + material (P186), and 523 Wikidata items
+  > make the same P31 mistake. But fixing it would produce almost nothing,
+  > because the targets do not exist: the UK has **87** stained-glass-window
+  > items against those 28,135 photographs (France: 3,300). And the vocabulary
+  > is a third layer — windows state P186 as clear glass (2,555), lead (699),
+  > plain glass (693); "stained glass" itself appears just 84 times, so even the
+  > correct property queried with the obvious value misses nearly everything.
+  > Diagnosis order that would have caught this in one pass: count the target
+  > items first, then check the property, then the value vocabulary.
 - **Layer discipline: pipeline modules must not import the renderer's types.**
   > Reaching into `emit-html.js`'s `SOURCE` map from `discover.js` broke this and
   > had to be moved to `MUSEUM_NAME` in `artworks.js`.
