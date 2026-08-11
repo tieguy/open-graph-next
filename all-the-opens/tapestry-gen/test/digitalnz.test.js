@@ -115,13 +115,13 @@ test('digitalnzRights recognizes nothing from an empty or malformed usage array'
 
 // ---- entries ------------------------------------------------------------
 
-test('a shelf never shows the same title twice — DPLA’s fold, applied to DigitalNZ', () => {
+test('a shelf never shows the same title twice — the shared fold, on DigitalNZ', () => {
   // Live case, 2026-08-09: Auckland Libraries holds four DISTINCT photographs
   // all cataloged "Apollo 11 moon landing, 1969", and the shelf showed all
   // four — four cards a reader cannot tell apart. The pick now rides
-  // rankDplaEntries, so identical-title records fold to their first and the
-  // cap is filled from what remains, exactly as DPLA's shelves have worked
-  // since LUI-144.
+  // rankShelfEntries (src/relevance.js, shared with DPLA), so identical-title
+  // records fold to their first and the cap is filled from what remains,
+  // exactly as DPLA's shelves have worked since LUI-144.
   const mk = (id, title) => ({
     id,
     title,

@@ -136,3 +136,110 @@ export function topicSpace(statements, labels, { subjectQid } = {}) {
   }
   return topic
 }
+
+// ---------------------------------------------------------------------------
+// Composing the shelf: which of a heading's records are shown, and in what
+// order. `corroborated` above decides whether a record may appear at all;
+// these decide which of the survivors a reader actually sees.
+//
+// Shared across every search-shape partner (DPLA, DigitalNZ), which is why
+// they live here rather than in one partner's module. They were written in
+// `dpla.js` on 2026-08-08 and imported from there by `digitalnz.js` until
+// 2026-08-10 — a shared mechanism carrying one partner's name while ranking
+// another's shelves. Extracted, not rewritten; behavior is unchanged and the
+// tests that pinned it still pass.
+
+// Words too common to tell one record from another. Deliberately tiny: not a
+// stoplist for English, only for the tokens that appear in so many headings and
+// titles that scoring on them says nothing.
+const STOP = new Set(['the', 'and', 'of', 'in', 'a', 'an', 'for', 'to', 'on', 'at'])
+
+/**
+ * Scoring tokens: `nameTokens` (diacritics folded, plurals folded) minus the
+ * words and bare years that carry no signal.
+ *
+ * Years are dropped deliberately. The heading "Armstrong, Neil, 1930-2012"
+ * tokenizes to include 1930 and 2012, and a photograph captioned "Street scene,
+ * 1930" would otherwise score as if it were about the man.
+ */
+const scoreTokens = (s) => nameTokens(s).filter((w) => w.length > 2 && !STOP.has(w) && !/^\d{4}$/.test(w))
+
+/**
+ * The fold key for near-duplicates: a normalized title prefix, across holders.
+ *
+ * `uniqueEntries` folds an exact title per holder, which is not enough. The
+ * Armstrong heading returns TEN records titled "Ceremony for Apollo 11
+ * astronauts Armstrong, Aldrin, and Coll…" and five "Hollywood Blvd. and Vine
+ * Street" — 60 items hold only 42 distinct title-prefixes — so ranking alone
+ * would fill a shelf with four copies of one ceremony photo, which is a worse
+ * shelf than the arbitrary one it replaced. Cross-holder because the duplicates
+ * genuinely arrive from different contributors: Angkor Wat's Cambodia shelf was
+ * shipping two identical "Inventaire descriptif des monuments du Cambodge"
+ * records from two providers.
+ *
+ * 40 characters is a judgment call with a known failure: two genuinely different
+ * items sharing a long prefix fold into one. That direction is the safe one —
+ * the shelf shows one of them instead of both, and the count beside it still
+ * says how many exist.
+ */
+const foldKey = (title) => nameTokens(title).join(' ').slice(0, 40)
+
+/**
+ * Multi-part records (an interview's reels, a scrapbook's pages) come back as
+ * near-identical docs; one shelf showing the same title twice reads as a bug,
+ * so only the first of each title-per-holder is kept.
+ */
+export function uniqueEntries(entries) {
+  const seen = new Set()
+  return entries.filter((e) => {
+    const k = `${e.title}|${e.description}`
+    if (seen.has(k)) return false
+    seen.add(k)
+    return true
+  })
+}
+
+/**
+ * Which of a heading's records the shelf shows — the pick the partner's own
+ * index order was making for us until 2026-08-08 (LUI-144).
+ *
+ * Score is `2 x (distinct anchor/heading tokens present in the title) + 1 if the
+ * record has a thumbnail`, ties broken by the partner's own order, then folded
+ * for near-duplicates and capped.
+ *
+ * **It reorders and dedupes; it never filters.** The caller's `total` stays the
+ * heading's true count, so "4 of 60" remains true — which is why this is not
+ * done with DPLA's `q=` parameter. Measured: `q="Neil Armstrong"` cuts that
+ * count from 60 to 23, silently shrinking a denominator this project prints on
+ * every shelf, and it still ranked "Bussed balloonist" fourth. Every record in a
+ * facet carries the heading equally, so the partner's relevance has nothing to
+ * discriminate on; the signal has to come from fields we already ask for.
+ *
+ * The thumbnail is worth less than one matching token, deliberately: an
+ * illustrated near-miss beats a text-only near-miss, but no amount of picture
+ * outranks being about the subject. The cost is real and named — the US
+ * Government Publishing Office's text records ("Here men from the planet Earth
+ * first set foot upon the Moon") rank below illustrated ones, and they are some
+ * of the best items under that heading.
+ *
+ * Worst case, where no title shares a token with the anchor, every score is 0 or
+ * 1 and the order falls back to the partner's own — no worse than before.
+ */
+export function rankShelfEntries(entries, { heading, anchorLabel, cap = 4 } = {}) {
+  const want = new Set([...scoreTokens(anchorLabel), ...scoreTokens(heading)])
+  const scored = entries.map((e, i) => {
+    const hits = new Set(scoreTokens(e.title).filter((w) => want.has(w))).size
+    return { e, i, score: hits * 2 + (e.imageUrl ? 1 : 0) }
+  })
+  scored.sort((a, b) => b.score - a.score || a.i - b.i)
+  const seen = new Set()
+  const picked = []
+  for (const { e } of scored) {
+    const k = foldKey(e.title)
+    if (seen.has(k)) continue
+    seen.add(k)
+    picked.push(e)
+    if (picked.length >= cap) break
+  }
+  return picked
+}

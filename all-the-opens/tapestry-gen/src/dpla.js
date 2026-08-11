@@ -11,9 +11,12 @@
 // and it arrives by mail). Without it the pivot is silently absent — the
 // demo must run for anyone who clones it, keyless.
 
-import { getHeader, getJson } from './http.js'
+import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
-import { corroborated } from './relevance.js'
+import { corroborated, rankShelfEntries, uniqueEntries } from './relevance.js'
+// LC authority lookup is shared with DigitalNZ and lives in its own module.
+// This pivot wants the cheap authorized form; see lc.js for why there are two.
+import { lcHeading } from './lc.js'
 
 export const DPLA_PER_ANCHOR = 4
 
@@ -32,70 +35,6 @@ export const DPLA_PER_ANCHOR = 4
  */
 export const DPLA_FETCH_WINDOW = 50
 
-/** Subject ids (sh…, sj…, gf…) live under /subjects/, name authorities under /names/. */
-export const lcBranch = (id) => (/^(sh|sj|gf)/.test(id) ? 'subjects' : 'names')
-
-const lcUrl = (id) => `https://id.loc.gov/authorities/${lcBranch(id)}/${id}`
-
-/**
- * The authorized heading for an LC authority id, read off the JSON-LD graph.
- * Returns null when the service answers strangely — a missing heading just
- * means no pivot, never a guessed one.
- *
- * Matched on the WHOLE authority URI, never on "@id ends with /<id>". LC ships
- * the identifier twice: once as the authority record, which carries the
- * heading, and once as `id.loc.gov/rwo/agents/<id>` for the real-world thing it
- * names, which carries none. The loose match hit both and `find` took whichever
- * came first — and that order varies per record, so n80014970 (Cambodia)
- * resolved while n79006404 (France) returned null, silently costing the page
- * every DPLA card under that anchor. 8 of 14 sampled ids lost that coin flip.
- */
-export function lcHeadingFromGraph(graph, id) {
-  if (!Array.isArray(graph) || typeof id !== 'string') return null
-  const uri = `/authorities/${lcBranch(id)}/${id}`
-  const node = graph.find((n) => typeof n?.['@id'] === 'string' && n['@id'].endsWith(uri))
-  const label =
-    node?.['http://www.w3.org/2004/02/skos/core#prefLabel']?.[0]?.['@value'] ??
-    node?.['http://www.loc.gov/mads/rdf/v1#authoritativeLabel']?.[0]?.['@value'] ??
-    null
-  return typeof label === 'string' ? label : null
-}
-
-/**
- * The percent-encoded heading LC sends beside the plain one, as text.
- *
- * `x-preflabel` is unusable for anything but ASCII: HTTP headers are Latin-1
- * and LC writes UTF-8 bytes, so "Cœdès, George" arrives as "CÅdÃ¨s, George"
- * and would go to DPLA as a subject-name query matching nothing — a silent
- * empty shelf that reads exactly like an anchor nobody holds anything under.
- * `x-preflabel-encoded` is LC's own answer to that, and round-trips exactly.
- */
-export function decodeLcHeading(encoded) {
-  if (typeof encoded !== 'string' || !encoded) return null
-  try {
-    return decodeURIComponent(encoded)
-  } catch {
-    // A malformed sequence is not a heading, and must not throw mid-page.
-    return null
-  }
-}
-
-/**
- * The authorized heading, asked the cheap way first.
- *
- * id.loc.gov answers a HEAD with the heading in a header, on a 303, so the
- * usual 88–120 KB of JSON-LD buys nothing this caller reads. That matters
- * because the LC lookup is the single longest serial chain on a cold page (27
- * requests on Angkor Wat) and `id.loc.gov` publishes `Crawl-delay: 3` — the
- * request has to get cheaper rather than more concurrent. The body is fetched
- * only when the header is missing, which is the rare case.
- */
-export async function lcHeading(id) {
-  const fromHeader = decodeLcHeading(await getHeader(lcUrl(id), 'x-preflabel-encoded'))
-  if (fromHeader) return fromHeader
-  return lcHeadingFromGraph(await getJson(`${lcUrl(id)}.json`), id)
-}
-
 export function dplaUrl(heading, key) {
   return (
     'https://api.dp.la/v2/items?sourceResource.subject.name=' +
@@ -107,90 +46,6 @@ export function dplaUrl(heading, key) {
     '&fields=id,sourceResource.title,sourceResource.subject.name,dataProvider,object,isShownAt,sourceResource.rights,rights' +
     `&page_size=${DPLA_FETCH_WINDOW}&api_key=${key}`
   )
-}
-
-// Words too common to tell one record from another. Deliberately tiny: this
-// is not a stoplist for English, only for the handful of tokens that appear in
-// so many headings and titles that scoring on them says nothing.
-const STOP = new Set(['the', 'and', 'of', 'in', 'a', 'an', 'for', 'to', 'on', 'at'])
-
-/** Significant lowercase word tokens: no punctuation, no short words, no years. */
-const tokens = (s) =>
-  String(s ?? '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .split(' ')
-    .filter((w) => w.length > 2 && !STOP.has(w) && !/^\d{4}$/.test(w))
-
-/**
- * The fold key for near-duplicates: a normalized title prefix, across holders.
- *
- * `uniqueEntries` below folds an exact title per holder, which is not enough.
- * The Armstrong heading returns TEN records titled "Ceremony for Apollo 11
- * astronauts Armstrong, Aldrin, and Coll…" and five "Hollywood Blvd. and Vine
- * Street" — 60 items hold only 42 distinct title-prefixes — so ranking alone
- * would have filled the shelf with four copies of one ceremony photo, which is
- * a worse shelf than the arbitrary one it replaced. Cross-holder because the
- * duplicates genuinely arrive from different contributors: Angkor Wat's
- * Cambodia shelf has been shipping two identical "Inventaire descriptif des
- * monuments du Cambodge" records from two providers.
- *
- * 40 characters is a judgment call with a known failure: two genuinely
- * different items sharing a long prefix fold into one. That direction is the
- * safe one — the shelf shows one of them instead of both, and the count beside
- * it still says how many exist.
- */
-const foldKey = (title) =>
-  String(title ?? '')
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, ' ')
-    .trim()
-    .slice(0, 40)
-
-/**
- * Which of a heading's items the shelf shows — the pick DPLA's index order was
- * making for us until 2026-08-08 (LUI-144).
- *
- * Score is `2 x (distinct anchor/heading tokens present in the title) + 1 if
- * the item has a thumbnail`, ties broken by DPLA's own order, then folded for
- * near-duplicates and capped.
- *
- * **It reorders and dedupes; it never filters.** The caller's `total` stays the
- * heading's true count, so "4 of 60" remains true — which is why this is not
- * done with DPLA's `q=` parameter. Measured on the same heading: `q="Neil
- * Armstrong"` cuts the count from 60 to 23, so the denominator in a disclosure
- * this project makes on every shelf would silently shrink, and it still ranked
- * "Bussed balloonist" fourth. Every item in a facet carries the heading
- * equally, so DPLA relevance has nothing to discriminate on; the signal has to
- * come from the fields we already ask for.
- *
- * The thumbnail is worth less than one matching token, deliberately: an
- * illustrated near-miss beats a text-only near-miss, but no amount of picture
- * outranks actually being about the subject. The cost is real and named — the
- * US Government Publishing Office's text records ("Here men from the planet
- * Earth first set foot upon the Moon") rank below illustrated ones, and they
- * are some of the best items under the heading.
- *
- * Worst case, where no title shares a token with the anchor, every score is 0
- * or 1 and the order falls back to DPLA's own — no worse than before.
- */
-export function rankDplaEntries(entries, { heading, anchorLabel, cap = DPLA_PER_ANCHOR } = {}) {
-  const want = new Set([...tokens(anchorLabel), ...tokens(heading)])
-  const scored = entries.map((e, i) => {
-    const hits = new Set(tokens(e.title).filter((w) => want.has(w))).size
-    return { e, i, score: hits * 2 + (e.imageUrl ? 1 : 0) }
-  })
-  scored.sort((a, b) => b.score - a.score || a.i - b.i)
-  const seen = new Set()
-  const picked = []
-  for (const { e } of scored) {
-    const k = foldKey(e.title)
-    if (seen.has(k)) continue
-    seen.add(k)
-    picked.push(e)
-    if (picked.length >= cap) break
-  }
-  return picked
 }
 
 /**
@@ -292,21 +147,11 @@ export async function dplaEntries(lcId, anchorLabel, key, ctx) {
   if (ctx?.topic && !ctx.isSubject) {
     all = all.filter((e) => corroborated(e._subjects, ctx.topic, ctx.ownQid))
   }
-  const entries = rankDplaEntries(uniqueEntries(all), { heading, anchorLabel })
+  const entries = rankShelfEntries(uniqueEntries(all), {
+    heading,
+    anchorLabel,
+    cap: DPLA_PER_ANCHOR,
+  })
   return { heading, total: body.count ?? docs.length, entries }
 }
 
-/**
- * Multi-part records (an interview's reels, a scrapbook's pages) come back as
- * near-identical docs; one shelf showing the same title twice reads as a bug,
- * so only the first of each title-per-holder is kept.
- */
-export function uniqueEntries(entries) {
-  const seen = new Set()
-  return entries.filter((e) => {
-    const k = `${e.title}|${e.description}`
-    if (seen.has(k)) return false
-    seen.add(k)
-    return true
-  })
-}

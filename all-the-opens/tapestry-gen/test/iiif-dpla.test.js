@@ -2,8 +2,13 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
-import { dplaEntryFrom, dplaUrl, rankDplaEntries } from '../src/dpla.js'
-import { decodeLcHeading, lcHeadingFromGraph } from '../src/dpla.js'
+import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
+// Shared across every search-shape partner, so it lives in relevance.js beside
+// the corroboration gate rather than in one partner's module (moved 2026-08-10).
+import { rankShelfEntries, uniqueEntries } from '../src/relevance.js'
+// LC authority helpers moved to src/lc.js on 2026-08-10 — one home for the
+// two lookups (cheap authorized form vs. full record with variants).
+import { decodeLcHeading, lcHeadingFromGraph } from '../src/lc.js'
 
 // ---- IIIF (P6108) -----------------------------------------------------------
 
@@ -167,7 +172,7 @@ test('dplaUrl asks for the exact authorized heading and only the fields the card
   assert.match(url, /api_key=KEY/)
   // The window, not the shelf size: one request reads 50 rows so the pick can
   // be ranked here instead of taken from the top of DPLA's unordered index.
-  // Same request count, bigger body. See rankDplaEntries.
+  // Same request count, bigger body. See rankShelfEntries.
   assert.match(url, /page_size=50/)
 })
 
@@ -175,7 +180,7 @@ test('the shelf is ranked and deduped locally, and never filtered', () => {
   // The real shape of the Armstrong heading: the items DPLA returns first are
   // unrelated, the good ones are further down, and one group repeats.
   const e = (title, imageUrl = null) => ({ title, imageUrl })
-  const picked = rankDplaEntries(
+  const picked = rankShelfEntries(
     [
       e('Ricci Poster 143', 'https://t/1.jpg'),
       e('Kristina McNeill', 'https://t/2.jpg'),
@@ -206,7 +211,7 @@ test('ranking degrades to DPLA’s own order rather than emptying a shelf', () =
   // shelf is what it always was. A ranker that filtered would show nothing.
   const e = (title) => ({ title, imageUrl: null })
   const input = [e('Alpha'), e('Beta'), e('Gamma'), e('Delta'), e('Epsilon')]
-  const picked = rankDplaEntries(input, { heading: 'Cambodia', anchorLabel: 'Cambodia' })
+  const picked = rankShelfEntries(input, { heading: 'Cambodia', anchorLabel: 'Cambodia' })
   assert.deepEqual(
     picked.map((p) => p.title),
     ['Alpha', 'Beta', 'Gamma', 'Delta'],
@@ -215,7 +220,7 @@ test('ranking degrades to DPLA’s own order rather than emptying a shelf', () =
 
 test('a thumbnail breaks a tie but never outranks being about the subject', () => {
   const e = (title, imageUrl = null) => ({ title, imageUrl })
-  const picked = rankDplaEntries(
+  const picked = rankShelfEntries(
     [e('A picture of nothing relevant', 'https://t/1.jpg'), e('Cambodia', null)],
     { heading: 'Cambodia', anchorLabel: 'Cambodia' },
   )
@@ -246,7 +251,6 @@ test('a DPLA doc becomes a card credited to its holding institution, keyed on P2
 })
 
 test('near-identical multi-part docs collapse to one card per title and holder', async () => {
-  const { uniqueEntries } = await import('../src/dpla.js')
   const e = (title, description) => ({ title, description })
   const out = uniqueEntries([
     e('Interview, reel 1', 'Russell Library'),

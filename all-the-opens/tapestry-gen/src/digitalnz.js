@@ -34,10 +34,7 @@
 import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
 import { lcLabels } from './lc.js'
-import { corroborated } from './relevance.js'
-// The shared search-shape ranker, living beside its first user — the same
-// borrowing DIGITALNZ_PIVOT already does for DPLA's field and property.
-import { rankDplaEntries, uniqueEntries } from './dpla.js'
+import { corroborated, rankShelfEntries, uniqueEntries } from './relevance.js'
 
 export const DIGITALNZ_PER_ANCHOR = 4
 
@@ -203,16 +200,15 @@ export async function digitalnzEntries(lcId, anchorLabel, key, ctx) {
 }
 
 /**
- * The pick, pure over a fetched window: match, corroborate, then DPLA's own
- * rank-and-fold. Until 2026-08-09 this took the first DIGITALNZ_PER_ANCHOR
- * matches in API order, and Auckland Libraries showed why that is not a
- * shelf: four DISTINCT photographs, every one cataloged "Apollo 11 moon
- * landing, 1969" — four cards a reader cannot tell apart. rankDplaEntries
- * already answers exactly this for DPLA (LUI-144: score by anchor tokens
- * and a thumbnail, fold identical title-prefixes across holders, fill the
- * cap from what remains), and the two partners share the search shape, the
- * P244 anchor, and the corroboration gate — so they share the ranker too,
- * rather than growing a second one that drifts.
+ * The pick, pure over a fetched window: match, corroborate, then rank and fold.
+ * Until 2026-08-09 this took the first DIGITALNZ_PER_ANCHOR matches in API
+ * order, and Auckland Libraries showed why that is not a shelf: four DISTINCT
+ * photographs, every one cataloged "Apollo 11 moon landing, 1969" — four cards
+ * a reader cannot tell apart. `rankShelfEntries` answers exactly this (LUI-144:
+ * score by anchor tokens and a thumbnail, fold identical title-prefixes across
+ * holders, fill the cap from what remains); it is shared with DPLA in
+ * `relevance.js`, as the two partners share the search shape, the P244 anchor,
+ * and the corroboration gate.
  */
 export function pickDigitalnzEntries(results, forms, anchorLabel, ctx) {
   const all = []
@@ -226,7 +222,7 @@ export function pickDigitalnzEntries(results, forms, anchorLabel, ctx) {
     if (entry) all.push(entry)
   }
   if (!all.length) return null
-  const entries = rankDplaEntries(uniqueEntries(all), {
+  const entries = rankShelfEntries(uniqueEntries(all), {
     heading,
     anchorLabel,
     cap: DIGITALNZ_PER_ANCHOR,

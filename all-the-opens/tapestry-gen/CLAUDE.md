@@ -1068,84 +1068,25 @@ Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
 card with no visual is just a link, and links are already inline).
 
-## Adding a data source (2026-08-07)
+## Adding a data source
 
-Not config-driven, and a full audit concluded it shouldn't try to be: every
-partner still needs its own fetcher and its own rights mapping, so a registry
-can remove wiring duplication but not the partner-specific knowledge. What it
-CAN remove is what to hand-edit and where, which is what this section answers.
-There are three shapes, not one — picking the wrong one produces code that
-fights the pipeline rather than fitting it:
+**Moved 2026-08-10 to `../docs/adding-a-source.md`, which is canonical.** Read it
+before adding a partner; it carries the three shapes (direct-id / search /
+hand-written), every file a new source touches, the pitfalls with the incidents
+behind them, and a definition of done. Update it in the same commit as the
+partner — that is why it lives in git rather than in a blog post.
 
-1. **Direct-id shape** — the object is named by ONE Wikidata property, bound
-   straight to a WDQS var. `MUSEUM_PIVOTS` in `src/statements.js` is the
-   registry: Met, AIC, Rijksmuseum, iNaturalist, GBIF, IIIF are its six rows.
-   Adding a partner here means four edits, in this order: an `OPTIONAL`
-   clause and var in `wdqsUrl` (`statements.js:25-52`), a row in `PROP_NAME`
-   (`statements.js:723-739`, the ⓘ-fold explanation), a fetcher module (see
-   `metEntry`/`aicEntry` for the plain case, `rijks.js`/`iiif.js` for ones
-   that need more than one request), and one entry in `MUSEUM_PIVOTS`. Do
-   NOT hand-edit `statementEntries`'s job list directly — that list is now
-   generated from the registry, and a new job spliced in beside it would
-   run outside the registry's bookkeeping.
-2. **Search shape** — no direct object id, but a Wikidata property names
-   something searchable (a subject heading, an entity id), and what comes
-   back is a SAMPLE of a larger holding, not the partner's own record of the
-   anchor. `DPLA_PIVOT`, `EUROPEANA_PIVOT` and `DIGITALNZ_PIVOT`
-   (`src/discover.js`, just above `discover()`) are the three live cases, all
-   run through the shared `bandPropertyPivot()` loop — `DIGITALNZ_PIVOT`
-   reuses DPLA's own `field: 'lc'`/P244 rather than adding a fourth WDQS var,
-   though the two resolve the heading differently (authorized form via HEAD
-   vs. the full record for variant forms — see Partner pivots below for why
-   that difference is load-bearing). A new partner of this shape is one new
-   spec object with `envKey`/`field`/`property`/`fetch`/`browseUrl`/`trace`/
-   `sample` (plus `keyOptional: true` if the API verifiably answers keyless —
-   DigitalNZ does — and `broadExtra` only if a `broadNote` needs a field
-   beyond `label`/`total`/`url` — DPLA's does, for the heading), passed to
-   `bandPropertyPivot()` alongside the others. **`browseUrl` now pays twice**
-   (2026-08-10): it is the "Browse them at X ↗" of a folded shelf AND the
-   href behind a sampled shelf's count badge, so it must land on a page that
-   reports the same total the badge prints — check that before writing one, the
-   way `authorBrowseUrl` was checked. Do NOT copy the block and
-   modify it — that is exactly the duplication DPLA and Europeana had between
-   2026-08-03 and this date, two near-identical blocks in `discover.js` that
-   this refactor collapsed into one loop plus two specs.
-3. **Neither shape — read the precedent, don't force it.** Some partners are
-   real exceptions and stay hand-written: the Smithsonian is found by a PAIR
-   of properties read from one row, never two (`smithsonian.js`, and the
-   `OPTIONAL` comment at `statements.js:44-51` on why splitting it is wrong);
-   the Rijksmuseum needs three serial requests per object because Linked Art
-   models the object, its visual content and its file as three resources
-   (`rijks.js`); and the subject's own artworks are reached by asking the
-   GRAPH what the subject made, not by pivoting off a wikilink at all
-   (`artworks.js`, and the "Rembrandt" funnel table above showing why prose
-   links couldn't carry that question). If a new partner needs multiple
-   properties, multiple hops, or a question the article's own links can't
-   phrase, it likely belongs here — a fourth shape forced through 1 or 2 for
-   the sake of uniformity is a worse outcome than one more hand-written case.
+Two rules from it are repeated here because skipping them has cost this project
+a block risk and a shipped 404, and because an agent may not open a second file:
 
-Before writing any fetch code, in this order:
-
-- **Read the host's own published rate-limit or crawl-delay policy**, and
-  only then decide `hostLimit()`'s value for it in `src/mw.js`. The default
-  is 1 and stays 1 without a citation — "nothing goes in it without a
-  published statement quoted at the call site" (see the Non-Wikimedia
-  partners section above). This is the step every partner audit here has
+- **`hostLimit()` in `src/mw.js` defaults to 1 and stays 1 without a published
+  policy quoted at the call site.** Read the host's own rate-limit or
+  crawl-delay statement first. This is the step every partner audit here has
   found skipped when something went wrong.
-- **Check what the API exposes for rights**, against the vocabulary
-  `ccFromUri`/`ccFromSlug`/`ccFromLabel` already read (`rights.js`) — the
-  Partner audit table above is the map of what's already handled per
-  partner; extend it, don't restate it, and add a row for the new partner
-  whether or not it turns out to have a mark.
-- **Give every Wikidata-backed card a `why`/`trace`/`fix` triple**, so a
-  reader can check or correct the statement the card rests on (see the
-  provenance note under Key Decisions). A card with no trace is legitimate
-  only for citation-derived cards, where nothing is editable on Wikidata.
-- **Verify with `spike.js`, not with reasoning about the diff.** Byte-
-  reproducibility off a warm cache is the project's only real test of the
-  discovery path (see Two entry points) — render Apollo 11, Brown v. Board
-  of Education and Ludwig Prandtl before and after, and add a fourth fixture
-  that actually exercises the new partner if none of the three does.
+- **Resolve a real identifier AND a deliberately bogus one before shipping.**
+  The bogus one is the test: it proves the server distinguishes them. Guessing a
+  URL shape put `/en/collection/object/<numericId>` on live Rijksmuseum cards,
+  and bot mitigation makes four partners answer both ids identically.
 
 ## Pipeline (output-agnostic core → renderer)
 
@@ -1417,7 +1358,8 @@ block lands on whoever ran the code. `src/wmf.js` is the **single** UA definitio
 for the whole repo — never write a User-Agent string anywhere else. MediaWiki
 requests go through **m3api** via `src/mw.js`, which owns maxlag, Retry-After
 and retries; non-MediaWiki sources (archive.org, OpenLibrary, CourtListener)
-keep the hand-rolled client in `spike.js`.
+use the hand-rolled client in `src/http.js` (`getJson`), which rides the same
+per-host queues.
 
 - **`WIKIMEDIA_UA_CONTACT` must be set** or `userAgent()` throws at startup. There
   is no default on purpose: anyone can clone this, and a baked-in address would
@@ -1427,8 +1369,12 @@ keep the hand-rolled client in `spike.js`.
   `src/mw.js`) — nothing here is a human waiting on a response, so this batch
   traffic yields to interactive users. `withMaxlag()` remains for the
   hand-rolled client, where it no-ops on non-Wikimedia URLs.
-- 429/503 honor `Retry-After`; other 4xx are **never** retried — a 404 is our
-  bad identifier, not the server's bad day.
+- 503 honors `Retry-After` by waiting and retrying — maxlag's shape, "busy,
+  come back shortly." 429 honors it by **not asking again**: it arms a per-host
+  cool-off (`src/cooloff.js`, 2026-08-10) and every request to that host inside
+  the interval fails at once instead of sleeping in a reader's request. Other
+  4xx are **never** retried — a 404 is our bad identifier, not the server's
+  bad day.
 - Requests are **serial at every Wikimedia host** by construction: every request
   rides the per-host queue in `src/mw.js` (`enqueue`). Different hosts run
   concurrently — that is where the Tier-1 speedup lives — but never two
