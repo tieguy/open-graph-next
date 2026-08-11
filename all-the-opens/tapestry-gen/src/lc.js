@@ -22,7 +22,7 @@
 // Stuart, 1900-1986" is exactly the subject Alexander Turnbull Library's
 // records state, while the authorized "Yeates, J. S. (John Stuart), 1900-1986"
 // matches nothing in DigitalNZ at all (LUI-145). Variants ride only in the
-// body, so this pays the GET the DPLA pivot avoids — about once per
+// body, so this pays the GET the DPLA lookup avoids — about once per
 // identifier ever, given the URL-keyed cache and LC's own 28-day max-age.
 //
 // `id.loc.gov` stays at hostLimit 1 (its robots.txt asks Crawl-delay 3 — see
@@ -42,7 +42,7 @@ const lcUrl = (id) => `https://id.loc.gov/authorities/${lcBranch(id)}/${id}`
 /**
  * The authorized heading for an LC authority id, read off the JSON-LD graph.
  * Returns null when the service answers strangely — a missing heading just
- * means no pivot, never a guessed one.
+ * means no lookup, never a guessed one.
  *
  * Matched on the WHOLE authority URI, never on "@id ends with /<id>". LC ships
  * the identifier twice: once as the authority record, which carries the
@@ -121,7 +121,7 @@ export function lcLabelsFromGraph(graph, id) {
 
 /**
  * Fetch + parse. Null on any failure — same semantic as `lcHeading`: a
- * heading that cannot be resolved is an anchor that does not pivot, never an
+ * heading that cannot be resolved is an anchor that is not looked up, never an
  * error that costs the page.
  *
  * A PERMANENT failure is cached as a null fact, because `getJson` caches only
@@ -135,7 +135,7 @@ export function lcLabelsFromGraph(graph, id) {
  * Topical ids (sh…) branch to `/authorities/subjects/` via `lcBranch`, the
  * same routing `lcHeading` already does. Until 2026-08-08 this module
  * hardcoded `/names/`, so every topical anchor — Moon, Astronauts, Space
- * flight — 404ed silently and was fact-cached as null: the DigitalNZ pivot
+ * flight — 404ed silently and was fact-cached as null: the DigitalNZ lookup
  * never fired on a topical heading at all, and nobody saw it fail. A stale
  * null for an sh id may linger in a pre-fix cache; deleting `.cache/` is,
  * as ever, the whole reset.

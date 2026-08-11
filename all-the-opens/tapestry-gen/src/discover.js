@@ -3,11 +3,11 @@
 // (streaming — Phase 7: the spine renders before enrichment arrives).
 //
 // The pipeline is the Tier-1 shape: the whole article in ONE parse call, split
-// locally; identifier pivots batched per source; everything riding the
+// locally; identifier lookups batched per source; everything riding the
 // per-host serial queue in mw.js so hosts run concurrently while each API
 // stays serial. discover() reports progress through an async `emit` callback:
 //
-//   emit('spine', { page, units, dropped })   — prose extracted, before pivots
+//   emit('spine', { page, units, dropped })   — prose extracted, before lookups
 //     `page` here is the RESOLVED article title, after redirects — render that,
 //     not the caller's input, or a redirect names a page that has no article.
 //   emit('band', band)                        — one band, in COMPLETION order
@@ -17,7 +17,7 @@
 // writes the spine skeleton on the first event and a rail fragment per band
 // event. Band assembly runs as one task per unit, so a band waits only on its
 // own dependencies: the article-global identifier batches, the partner
-// statements, and — for the lede alone — the subject-level pivots.
+// statements, and — for the lede alone — the subject-level lookups.
 //
 // `reach` is what the ARTICLE ITSELF already contains — the templates it
 // transcludes, the pictures it shows, the sites it links. Every partner this
@@ -75,7 +75,7 @@ import { topicSpace } from './relevance.js'
 const MAX_SECTIONS = Number(process.env.MAX_SECTIONS ?? Infinity)
 const QIDS_PER_SECTION = Number(process.env.QIDS_PER_SECTION ?? 2)
 const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
-// Subject-level pivots answer "what does the ecosystem hold about this subject?"
+// Subject-level lookups answer "what does the ecosystem hold about this subject?"
 // rather than "what did this section cite?", so they land in the lede.
 const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
@@ -142,7 +142,7 @@ async function collectionByDescribedThesis(subjectClaims, personName) {
   if (!thesisQid || !personName) return null
 
   // Labels come along in the same request as the claims. They are what lets the
-  // pivot name the work from the Wikidata side rather than from whatever the
+  // lookup name the work from the Wikidata side rather than from whatever the
   // holding archive happened to file it under.
   const body = await wikidata({
     action: 'wbgetentities',
@@ -424,7 +424,7 @@ export function freeLawByCitation(citations) {
 /**
  * Which partner to ask for a picked artwork, and how.
  *
- * The same per-object fetchers the anchor pivot uses, so a painting reached
+ * The same per-object fetchers the anchor lookup uses, so a painting reached
  * through the subject's own statements renders identically to one reached
  * through a wikilink — same card, same credit, same rights reading. Only the
  * reason it is on the page differs, and that is what `why` and the ⓘ fold say.
@@ -486,7 +486,7 @@ async function entityLabels(qids) {
 
 // Citation apparatus that `prop=links` reports as ordinary wikilinks. These are
 // how the article cites, not what it is about, and left in they become anchors
-// in their own right — a section would pivot on "ISBN" as though the article
+// in their own right — a section would lookup on "ISBN" as though the article
 // were about barcodes.
 const APPARATUS =
   /^(ISBN|ISSN|OCLC|Doi|Digital object identifier|Wayback Machine|JSTOR|Bibcode|LCCN|International Standard|Library of Congress Control Number|PMID|S2CID|Google Books)/i
@@ -547,7 +547,7 @@ export function canonicalTitle(title) {
  * sample of a shelf rather than the shelf's own record. DPLA and Europeana
  * are the two live cases and share this whole shape — see `tapestry-gen/
  * CLAUDE.md`'s "Adding a data source" section for how this differs from the
- * direct-id shape in `statements.js`'s `MUSEUM_PIVOTS`.
+ * direct-id shape in `statements.js`'s `MUSEUM_LOOKUPS`.
  *
  * `spec.fetch` may resolve to null (DPLA does, when the LC heading lookup
  * itself fails); a spec whose fetch never returns null is unaffected by the
@@ -562,7 +562,7 @@ export function canonicalTitle(title) {
  * whole: no cards, no sample line — the shelf's absence IS the verdict, and
  * a "0 of 48" sentence would dress it as a disclosure.
  */
-async function bandPropertyPivot(
+async function bandPropertyLookup(
   { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic },
   spec,
 ) {
@@ -619,12 +619,12 @@ async function bandPropertyPivot(
 }
 
 // DPLA, keyed on a real identifier: only anchors whose Wikidata entry states
-// an LC authority (P244) pivot, via the authorized heading — "Eagle" the
+// an LC authority (P244) are looked up, via the authorized heading — "Eagle" the
 // lunar module either has its own authority or stays out, which is what
 // keeps eleven thousand bird photographs off the page. Without
-// DPLA_API_KEY the pivot is simply absent: the demo must run keyless for
+// DPLA_API_KEY the lookup is simply absent: the demo must run keyless for
 // anyone who clones it.
-const DPLA_PIVOT = {
+const DPLA_LOOKUP = {
   source: 'dpla',
   envKey: 'DPLA_API_KEY',
   field: 'lc',
@@ -651,9 +651,9 @@ const DPLA_PIVOT = {
 }
 
 // Europeana, keyed the same way: only anchors whose Wikidata entry states a
-// Europeana entity (P7704) pivot, and only openly licensed items come back.
+// Europeana entity (P7704) are looked up, and only openly licensed items come back.
 // Keyless clones skip it silently.
-const EUROPEANA_PIVOT = {
+const EUROPEANA_LOOKUP = {
   source: 'europeana',
   envKey: 'EUROPEANA_API_KEY',
   field: 'eu',
@@ -684,7 +684,7 @@ const EUROPEANA_PIVOT = {
 // records whose own subject field states one of LC's forms become cards.
 // Keyless is fine here — the API answers without a key (`keyOptional`) — and
 // a key, when set, rides along.
-const DIGITALNZ_PIVOT = {
+const DIGITALNZ_LOOKUP = {
   source: 'digitalnz',
   envKey: 'DIGITALNZ_API_KEY',
   keyOptional: true,
@@ -754,7 +754,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
   }
   if (bibliography.size) console.error(`bibliography: ${bibliography.size} identified works`)
 
-  // ---- Everything the pivots need, extracted locally before any of them run.
+  // ---- Everything the lookups need, extracted locally before any of them run.
   const stats = {
     ia: 0,
     scholar: 0,
@@ -813,7 +813,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // eight sections through the bibliography, and once singles floated,
     // the same cover marched down the whole page's margin. Decided HERE, in
     // the units loop, because this loop runs in article order before any
-    // pivot — band completion order can never change who shows the book.
+    // lookup — band completion order can never change who shows the book.
     // The lede claims first because it is first in this loop, the same
     // privilege claimAnchors seeds it. Footnotes are untouched: every
     // section's references still carry their own borrow links; only the
@@ -847,7 +847,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
 
   await emit('spine', { page, units, dropped })
 
-  // ---- The pivots, concurrent across hosts, serial within each. -----------
+  // ---- The lookups, concurrent across hosts, serial within each. -----------
   // Article-global batches resolve once. Labels are batched for every picked
   // QID the moment the QID map lands, concurrent with the partner lookups they
   // describe. The subject's own claims — a case citation, a thesis, an author
@@ -1112,7 +1112,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
     const [thesis, works, scholarship, artworks] = await Promise.all([
       // No longer waits for the page-wide identifier batch. That gate was
-      // written when this pivot could spend eight serial archive.org requests
+      // written when this lookup could spend eight serial archive.org requests
       // searching for a thesis by description — a cost worth deferring behind
       // work every band needed. The search fallback was retired on 2026-08-03
       // (see collectionByDescribedThesis), leaving at most ONE metadata read
@@ -1120,7 +1120,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // holding the lede behind every ISBN on the page. Measured on Brown v.
       // Board, that helped make the lede the last band of seventeen.
       collectionByDescribedThesis(subjectClaims, normalizedPage).catch((e) => {
-        console.error(`  thesis pivot failed: ${e.message}`)
+        console.error(`  thesis lookup failed: ${e.message}`)
         return null
       }),
       subjectAuthorWorks(subjectClaims).catch((e) => {
@@ -1137,7 +1137,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // graph rather than of the article's links, because on an artist article
       // the paintings are linked from galleries and works-tables and
       // `proseLinks` strips tables — see the header of src/artworks.js for the
-      // measured funnel that made this its own pivot. Excludes anchors the
+      // measured funnel that made this its own lookup. Excludes anchors the
       // lede already owns, so a painting the lede is already carding does not
       // arrive a second time on the subject's shelf.
       needsArtworksQuery(subjectClaims)
@@ -1396,17 +1396,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // every band needs it (extras is lede-only): the subject is the one
     // anchor that corroborates even as a place.
     const subjectQid = (await qidsPromise).get(normalizedPage)
-    const pivotCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic: topicSpace(statements, labels, { subjectQid }) }
-    await bandPropertyPivot(pivotCtx, DPLA_PIVOT)
-    // Runs after DPLA. Both pivot on P244, but they no longer share a
+    const lookupCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic: topicSpace(statements, labels, { subjectQid }) }
+    await bandPropertyLookup(lookupCtx, DPLA_LOOKUP)
+    // Runs after DPLA. Both lookup on P244, but they no longer share a
     // request: DPLA HEADs for the authorized heading, this GETs the record
     // for its variant forms (src/lc.js says why) — two id.loc.gov URLs, each
     // once ever per identifier given the durable cache. Folding DPLA's HEAD
     // into the GET would save one request per anchor and is noted in the
     // DigitalNZ section of CLAUDE.md as a follow-up, not done here because it
-    // touches the DPLA pivot's hot path.
-    await bandPropertyPivot(pivotCtx, DIGITALNZ_PIVOT)
-    await bandPropertyPivot(pivotCtx, EUROPEANA_PIVOT)
+    // touches the DPLA lookup's hot path.
+    await bandPropertyLookup(lookupCtx, DIGITALNZ_LOOKUP)
+    await bandPropertyLookup(lookupCtx, EUROPEANA_LOOKUP)
 
     // Say how much was left on the table. Every shelf here is a sample of
     // something larger, and a page that shows six of six hundred without
@@ -1464,7 +1464,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
           `${extras.scholarship.entries.length} free to read, of the ${extras.scholarship.total} ` +
           `papers OpenAlex files under ${unit.title}’s ORCID record`,
       })
-    // One note per MUSEUM, not one for the whole artworks pivot: the renderer
+    // One note per MUSEUM, not one for the whole artworks lookup: the renderer
     // groups shelves by (source, topic), so these cards arrive as a Met shelf
     // beside a Rijksmuseum shelf, and a single note counting all of them would
     // be the free-floating claim this page keeps deleting. Each museum's note

@@ -1,4 +1,4 @@
-// The Europeana pivot: ~3,000 European museums, libraries and archives
+// The Europeana lookup: ~3,000 European museums, libraries and archives
 // behind one API. The anchor is a stated identifier, not a label match:
 // Wikidata's P7704 names the entity's Europeana URI, and the search asks for
 // items Europeana's enrichment links to exactly that entity. Only openly
@@ -7,7 +7,7 @@
 // not knowable in one request, so the card credit names each item's license
 // instead.
 //
-// Requires EUROPEANA_API_KEY; without it the pivot is silently absent — the
+// Requires EUROPEANA_API_KEY; without it the lookup is silently absent — the
 // demo must run for anyone who clones it, keyless.
 
 import { getJson } from './http.js'

@@ -4,7 +4,7 @@
 // warm page's discovery is 100% offline. What it never was is a PAGE cache — so
 // every view re-ran `discover()` from scratch, re-deriving the same page from
 // the same frozen bytes: parse the cached article, slice the sections, run every
-// pivot, rank, render. About a quarter-second of work per view for an answer
+// lookup, rank, render. About a quarter-second of work per view for an answer
 // that could not have changed, because nothing in this cache expires. Repeat
 // views bought no freshness; they bought a recomputation.
 //

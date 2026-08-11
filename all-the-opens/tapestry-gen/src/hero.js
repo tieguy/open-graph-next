@@ -54,7 +54,7 @@ export function heroRank(entry) {
  * found nothing worth leading with".
  *
  * Ties break on article order, which is already the order the pipeline pushes
- * entries in: subject pivots first, then citations, then anchored statements.
+ * entries in: subject lookups first, then citations, then anchored statements.
  */
 export function pickHero(entries) {
   const list = entries ?? []

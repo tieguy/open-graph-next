@@ -1,7 +1,7 @@
 // When a source says "too many requests", stop asking it.
 //
 // Measured on production, 2026-08-10: every render cost 214–240s, and the whole
-// of it was one pivot — `openalex batch settled in 234.1s`, while every other
+// of it was one lookup — `openalex batch settled in 234.1s`, while every other
 // source settled in under 1.6s. OpenAlex was answering 429, and the client did
 // the textbook thing with it: honor `Retry-After`, sleep, try again. Correct per
 // request and wrong per page, because a page's identifiers are chunked forty at
@@ -93,7 +93,7 @@ export function coolingFor(host, now) {
  * week. Serve the page, decline to enshrine it.
  *
  * Deliberately global rather than per-render: attributing a refusal to the one
- * request that earned it would need a context threaded through every pivot, and
+ * request that earned it would need a context threaded through every lookup, and
  * the conservative reading — if anybody is refusing us right now, this render
  * may be thin — errs toward rendering again, which is only ever a cost in time.
  *

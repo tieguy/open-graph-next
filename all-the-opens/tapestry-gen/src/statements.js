@@ -1,4 +1,4 @@
-// The statement pivots: an anchored entity's Wikidata statements name an
+// The statement lookups: an anchored entity's Wikidata statements name an
 // object in a partner collection, and the partner's open API supplies the
 // object itself. Museums (Met P3634, Art Institute of Chicago P4610,
 // Rijksmuseum P13234),
@@ -19,7 +19,7 @@ import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
 import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
 
-/** Properties this pivot reads, and the shape they come back in. */
+/** Properties this lookup reads, and the shape they come back in. */
 const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
 
 export function wdqsUrl(qids) {
@@ -37,9 +37,9 @@ export function wdqsUrl(qids) {
     'OPTIONAL { ?item wdt:P11693 ?osmn } ' +
     // P6108: the item's own IIIF manifest — any institution, one property.
     'OPTIONAL { ?item wdt:P6108 ?iiif } ' +
-    // P244: the LC authority behind the DPLA subject-heading pivot.
+    // P244: the LC authority behind the DPLA subject-heading lookup.
     'OPTIONAL { ?item wdt:P244 ?lc } ' +
-    // P7704: the Europeana entity behind the Europeana pivot.
+    // P7704: the Europeana entity behind the Europeana lookup.
     'OPTIONAL { ?item wdt:P7704 ?eu } ' +
     // The Smithsonian, alone among the museums here, states no external-id
     // property on its objects — Columbia, the Apollo 11 command module, carries
@@ -96,7 +96,7 @@ export function needsRightsQuery(statements) {
  * enriching the partner-statement query, because the transitive walk is what
  * costs: asked of the items, `P31/P279*` over a real page's anchors measured
  * 16–37s cold and blew the 15s timeout every time; and because that walk rode
- * the query answering EVERY partner pivot, a timeout cost the page its Met,
+ * the query answering EVERY partner lookup, a timeout cost the page its Met,
  * AIC, GBIF, iNat, IIIF, DPLA and Europeana cards as well as its maps.
  *
  * Query 1 (itemClassesUrl) asks only direct P31/P576 of the location-bearing
@@ -112,7 +112,7 @@ export function needsRightsQuery(statements) {
  * P279 and query 2 contains no EXISTS.
  *
  * Failure semantic: either query failing leaves place/defunct unset, mappable()
- * refuses, and the page loses maps only — never a partner pivot.
+ * refuses, and the page loses maps only — never a partner lookup.
  */
 // Q618123 geographical feature · Q486972 human settlement · Q56061
 // administrative territorial entity · Q41176 building · Q811979 architectural
@@ -687,7 +687,7 @@ export function mapEntry(coord, label, osm = null) {
  * `tapestry-gen/CLAUDE.md`'s "Adding a data source" section for which shape
  * fits.
  */
-const MUSEUM_PIVOTS = [
+const MUSEUM_LOOKUPS = [
   { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },
   { var: 'aic', property: 'P4610', fetch: (v) => aicEntry(v) },
   { var: 'rijks', property: 'P13234', fetch: (v) => rijksEntry(v) },
@@ -701,7 +701,7 @@ const MUSEUM_PIVOTS = [
 export async function statementEntries(qid, statements, { label, withMap, subject = false }) {
   const out = []
   const jobs = [
-    ...MUSEUM_PIVOTS.map((p) => statements[p.var] && p.fetch(statements[p.var], label)),
+    ...MUSEUM_LOOKUPS.map((p) => statements[p.var] && p.fetch(statements[p.var], label)),
     // Keyed, so absent for a clone with no SMITHSONIAN_API_KEY — the same
     // silent degradation DPLA and Europeana take, and for the same reason: the
     // demo must run for anyone who checks it out. The collection gate keeps
@@ -716,7 +716,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
       const entry = await job
       if (entry) out.push(entry)
     } catch (e) {
-      console.error(`  statement pivot failed (${qid}): ${e.message}`)
+      console.error(`  statement lookup failed (${qid}): ${e.message}`)
     }
   }
   // Each card names the anchor whose Wikidata entry stated the connection —
@@ -753,7 +753,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   return out
 }
 
-// The properties this pivot follows, in reader's words — an ⓘ fold that says
+// The properties this lookup follows, in reader's words — an ⓘ fold that says
 // "P3634" and nothing else has explained nothing.
 const PROP_NAME = {
   P3634: 'Met object ID (P3634)',

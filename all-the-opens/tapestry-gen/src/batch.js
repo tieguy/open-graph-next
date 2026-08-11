@@ -1,4 +1,4 @@
-// Batched forms of the citation pivots. archive.org's Solr and OpenLibrary's
+// Batched forms of the citation lookups. archive.org's Solr and OpenLibrary's
 // volumes API both answer many identifiers in one request; these helpers build
 // those requests and re-associate the combined answer to the citation that
 // asked, so the per-citation semantics (and guards) stay exactly what the

@@ -1,18 +1,18 @@
-// The DigitalNZ pivot: 150+ New Zealand libraries, archives and museums
+// The DigitalNZ lookup: 150+ New Zealand libraries, archives and museums
 // (Turnbull/NLNZ, Massey, VUW, Auckland Museum, Ngā Taonga, Papers Past)
 // behind one API — this demo's first non-US/EU partner (LUI-145). Same shape
 // as DPLA: the anchor is a real key, not a label. Wikidata states the
 // entity's Library of Congress authority (P244); NLNZ is not an independent
 // VIAF contributor and catalogs through LC/NACO (checked on VIAF's
 // contributor list 2026-08-08), so LC's record carries the NZ heading. An
-// anchor with no LC authority does not pivot.
+// anchor with no LC authority is not looked up.
 //
 // **The search is a subject filter, strictly — not full text** (live-verified
 // 2026-08-08, LUI-145). The DPLA analogy holds only if the heading lands on a
 // subject field: DPLA queries `sourceResource.subject.name`, where LCSH
 // headings actually live, but DigitalNZ's `text=` is generic full text over
 // titles and descriptions, and quoting the authorized heading into it
-// returned ZERO records for the very article this pivot was built for. What
+// returned ZERO records for the very article this lookup was built for. What
 // works is `and/or[subject][]=` with the heading form NZ catalogers actually
 // use — which is LC's *variant*, not its authorized form (see src/lc.js). So
 // this asks the API only for records whose own subject field states one of

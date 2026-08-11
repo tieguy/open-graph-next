@@ -46,7 +46,7 @@ function thinHosts(body) {
  * Fetch one page and read it to the end.
  *
  * Draining the body is the whole job: the response is a chunked stream that the
- * server writes as each band's pivots answer, so hanging up early would cut the
+ * server writes as each band's lookups answer, so hanging up early would cut the
  * discovery partway and cache only what had landed. `window.__tapdone` is the
  * flag `streamClose` writes last — its presence is the server's own statement
  * that the run finished rather than being interrupted.

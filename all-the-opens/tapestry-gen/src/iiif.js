@@ -1,4 +1,4 @@
-// The P6108 pivot: Wikidata states an item's IIIF manifest outright, and the
+// The P6108 lookup: Wikidata states an item's IIIF manifest outright, and the
 // manifest — served by whatever institution holds the object — supplies the
 // image, the label, and the credit. IIIF has no cross-institution search;
 // this is the demo's answer to that gap: the graph is the directory, the

@@ -166,7 +166,7 @@ test('sectionOutline matches what fetchSections always produced', () => {
   )
 })
 
-// ---- batched pivots ---------------------------------------------------------
+// ---- batched lookups ---------------------------------------------------------
 
 test('chunk preserves order and covers everything', () => {
   assert.deepEqual(chunk([1, 2, 3, 4, 5], 2), [[1, 2], [3, 4], [5]])

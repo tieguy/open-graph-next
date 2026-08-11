@@ -131,7 +131,7 @@ test('no stated id leaves the corroborated path to do its job', () => {
 })
 
 test('an empty or malformed id is not an identifier', () => {
-  // A blank string would send the pivot to archive.org/metadata/ and 404 there,
+  // A blank string would send the lookup to archive.org/metadata/ and 404 there,
   // losing an item the corroborated path would have found.
   assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: { datavalue: { value: '  ' } } }] }), null)
   assert.equal(describedThesisArchiveId({ P724: [{ mainsnak: {} }] }), null)

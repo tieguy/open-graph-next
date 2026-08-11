@@ -65,11 +65,11 @@ export function subjectAnchors(claims) {
  * the lede is where the two come apart hardest. "American Gothic is a 1930 oil
  * painting on beaverboard by Grant Wood" links the medium and the board before
  * it links the painter, and the Art Institute that owns it comes last of
- * seventeen — so the lede of the article about the painting used to pivot on
+ * seventeen — so the lede of the article about the painting used to look up on
  * `oil painting` and `beaverboard`, and got four Finnish oil paintings for it.
  *
  * Wikidata already knows better and costs nothing to ask: the claims are
- * already fetched for the subject pivots, so this reorders a list the pipeline
+ * already fetched for the subject lookups, so this reorders a list the pipeline
  * already has rather than looking anything up.
  *
  * THREE tiers, not two, and the middle one is load-bearing. A flat "does the
@@ -185,7 +185,7 @@ export function claimAnchors(candidates, { perUnit, seeded = new Map() }) {
  *
  * Pure over article-ordered calls, like everything in this module: the units
  * loop runs sections in ARTICLE order and threads one `claimed` set through
- * these calls, so ownership is decided before any pivot runs — a band's
+ * these calls, so ownership is decided before any lookup runs — a band's
  * completion order can never change who shows the book, which is the same
  * argument that shaped claimAnchors and the deleted dropSeenFiles.
  *

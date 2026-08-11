@@ -3,7 +3,7 @@
  * Streaming entry point for live discovery — Phase 7 of the design plan, the
  * "actually dynamic" experiment: visit /wiki/<Article Title> and the article
  * spine renders in the time one parse call takes, with the ecosystem's media
- * and sources streaming into the margins as each pivot answers.
+ * and sources streaming into the margins as each lookup answers.
  *
  * One chunked HTML response per page; no client framework, no polling. The
  * discovery pipeline, its budgets and its per-host politeness are exactly the

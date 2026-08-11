@@ -62,7 +62,7 @@ test('a Smithsonian collection is recognized through the URI WDQS actually binds
   assert.ok(isSmithsonianCollection('http://www.wikidata.org/entity/Q1192305'))
 })
 
-test('a museum that is not the Smithsonian does not pivot', () => {
+test('a museum that is not the Smithsonian is not looked up', () => {
   // The Rijksmuseum states P217 on its objects too. An inventory number belongs
   // to whichever museum assigned it, so the collection is what makes it askable.
   assert.equal(isSmithsonianCollection('http://www.wikidata.org/entity/Q190804'), false)

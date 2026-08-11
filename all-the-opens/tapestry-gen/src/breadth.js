@@ -1,10 +1,10 @@
 // When an anchor is a category rather than a subject.
 //
-// The anchors a section pivots on are its prose links, and an encyclopedia's
+// The anchors a section lookups on are its prose links, and an encyclopedia's
 // first sentence is a definition — so the earliest links in a lede are very
 // often the class the subject belongs to, not the subject. "American Gothic is
 // a 1930 oil painting on beaverboard by Grant Wood" offers `oil painting` and
-// `beaverboard` before it offers Grant Wood. Pivoting on those asks a partner
+// `beaverboard` before it offers Grant Wood. Looking up those asks a partner
 // "what do you hold about oil painting?", and the partner answers honestly and
 // uselessly: four of Europeana's 6,123 openly licensed oil paintings, all four
 // Finnish, all four titled "öljymaalaus", in the lede of an article about an

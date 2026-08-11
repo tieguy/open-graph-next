@@ -22,7 +22,7 @@ and name **symbols**, not line numbers, because line numbers drift.
 
 **Four words this document uses constantly:** an **anchor** is something the
 article names that carries a usable identifier — a wikilink resolved to its
-Wikidata item, a citation's ISBN or DOI. A **pivot** asks one partner what it
+Wikidata item, a citation's ISBN or DOI. A **lookup** asks one partner what it
 holds for an anchor. What comes back renders as **cards**, grouped into
 per-partner **shelves**. And the **visibility panel** is each page's measurement
 of how much of what was found the Wikipedia article itself shows.
@@ -30,8 +30,8 @@ of how much of what was found the Wikipedia article itself shows.
 **Adding one source touches 10–13 files, depending on its shape — and that is
 the count AFTER the wiring was refactored once.** The 2026-08-07 registry
 refactor (`99116e8`) already collapsed the hand-edited job list into
-`MUSEUM_PIVOTS` and the duplicated per-partner blocks into
-`bandPropertyPivot()` + specs; its audit concluded a registry removes wiring
+`MUSEUM_LOOKUPS` and the duplicated per-partner blocks into
+`bandPropertyLookup()` + specs; its audit concluded a registry removes wiring
 duplication but not partner-specific knowledge — rights vocabulary, icon
 sourcing, host policy, the friend blurb — so what this document walks through is
 the part that resisted. Do not re-attempt that refactor expecting the count to
@@ -99,7 +99,7 @@ In this order.
    > no glyph — a CC0 mark there would assert a permission nobody granted.
 
 4. **Decide keyed vs keyless.** Prefer keyless; the site must run for anyone who
-   clones the repo. If a key is required, the pivot skips silently without one
+   clones the repo. If a key is required, the lookup skips silently without one
    (`envKey`), and that degradation gets stated.
    > Keyless-skip is graceful degradation, never a policy against free keys —
    > DPLA, Europeana, Smithsonian and DigitalNZ all run keyed in production. Set
@@ -154,19 +154,19 @@ point at many provider hosts. The predicate decides for both renderers at once.
    fold, which tells a reader which Wikidata property put the card on the page.
 3. The fetcher module. See `metEntry` / `aicEntry` for the plain case,
    `rijks.js` / `iiif.js` for partners needing more than one request.
-4. One entry in `MUSEUM_PIVOTS` (`src/statements.js`).
+4. One entry in `MUSEUM_LOOKUPS` (`src/statements.js`).
 
 Then, if the partner is item-keyed, add it to `ITEM_LEVEL` in `src/dedup.js`,
 and to `needsRightsQuery` if it is an object-level property.
 
 **Do NOT hand-edit `statementEntries`'s job list.** It is generated from
-`MUSEUM_PIVOTS`; a job spliced in beside it runs outside the registry's
+`MUSEUM_LOOKUPS`; a job spliced in beside it runs outside the registry's
 bookkeeping.
 
 ### 2b. Search shape — one spec object
 
-Write one spec and pass it to `bandPropertyPivot()` in `src/discover.js`,
-alongside `DPLA_PIVOT`, `EUROPEANA_PIVOT` and `DIGITALNZ_PIVOT`.
+Write one spec and pass it to `bandPropertyLookup()` in `src/discover.js`,
+alongside `DPLA_LOOKUP`, `EUROPEANA_LOOKUP` and `DIGITALNZ_LOOKUP`.
 
 Fields: `envKey` / `field` / `property` / `fetch` / `browseUrl` / `trace` /
 `sample`, plus `keyOptional: true` if the API verifiably answers keyless, and
@@ -195,7 +195,7 @@ deliberately:
 > Turnbull's records state, while the authorized "Yeates, J. S. (John Stuart),
 > 1900-1986" matches nothing in DigitalNZ at all.
 
-**Reuse the anchor resolution rather than reimplementing it.** `DIGITALNZ_PIVOT`
+**Reuse the anchor resolution rather than reimplementing it.** `DIGITALNZ_LOOKUP`
 shares DPLA's `field: 'lc'` / P244 (the anchor's Library of Congress authority
 ID) instead of adding a fourth WDQS var, because New Zealand's national library
 catalogs through LC/NACO.
@@ -263,7 +263,7 @@ Real exceptions stay hand-written:
   models the object, its visual content and its file as three resources
   (`rijks.js`).
 - The **subject's own artworks** are reached by asking the graph what the subject
-  made, not by pivoting off a wikilink at all (`artworks.js`).
+  made, not by lookuping off a wikilink at all (`artworks.js`).
 
 If a partner needs multiple properties, multiple hops, or a question the
 article's own links cannot phrase, it likely belongs here. **A fourth shape
@@ -293,7 +293,7 @@ more hand-written case.**
   > The Met rendered one card on Rembrandt with a perfectly healthy API:
   > `proseLinks` strips `<table>`, and artist articles link their paintings from
   > gallery tables. 35 museum-bearing anchors → 14 survived the strip → 3 reached
-  > the pivot → 2 rendered.
+  > the lookup → 2 rendered.
 - **The modeling error you can see is not always the constraint that binds —
   count the targets before diagnosing.** Verified 2026-08-11 (LUI-147), and the
   verification overturned the diagnosis this bullet used to carry.

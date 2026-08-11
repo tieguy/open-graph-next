@@ -108,7 +108,7 @@ export async function fetchSectionWikitext(cacheDir, page, index) {
  * reproduce the per-section views from it exactly.
  *
  * `templates|externallinks` ride along for free. They answer a question no
- * pivot can: not what the open web holds, but how much of it this article is
+ * lookup can: not what the open web holds, but how much of it this article is
  * able to show (see `src/gap.js`). The house rule is to batch onto a request
  * already being made rather than add one, and this is that rule paying out —
  * two more fields on a response we were fetching anyway.

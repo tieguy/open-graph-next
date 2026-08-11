@@ -69,7 +69,7 @@ does not help generate the website, it belongs in the attic.
   2026-08-03): `npm run serve` then visit `/wiki/<Article_Title>`. One chunked
   HTML response: the article spine renders in ~1s (one parse call), and each
   band's enrichment follows as a `<template>` + one-line mount script the moment
-  its own pivots answer (`bandRail` ships all three parts — hero float, media
+  its own lookups answer (`bandRail` ships all three parts — hero float, media
   deck and references — and `__thb` mounts each where it belongs: float before
   `.prose`, deck and refs after).
   No client framework; the stream is the page. Same
@@ -106,7 +106,7 @@ does not help generate the website, it belongs in the attic.
 Both entry points share `src/discover.js`, which reports progress
 through an async `emit('spine'|'band', …)` callback — batch ignores the
 events, streaming writes fragments from them. `emit('spine', {page, units,
-dropped})` fires before any pivot; `emit('band', band)` fires per band in
+dropped})` fires before any lookup; `emit('band', band)` fires per band in
 COMPLETION order. `discover()` resolves to `{title, bands, stats, dropped,
 opinion, reach}`, bands in ARTICLE order. `reach` is what the article itself
 already contains — see the visibility panel below.
@@ -192,7 +192,7 @@ per-host queues already bounding upstream traffic globally.
 
 **A page is discovered once.** `.cache/` was only ever a REQUEST cache, so every
 view re-ran `discover()` — parse the cached article, slice the sections, run
-every pivot, rank, render — about a quarter-second of work to re-derive an
+every lookup, rank, render — about a quarter-second of work to re-derive an
 answer that could not have changed, because **nothing in this cache expires**.
 Repeat views never bought freshness; they bought a recomputation. `serve.js` now
 stores the bytes a finished stream actually sent and replays them: a repeat view
@@ -265,7 +265,7 @@ which is why the two must not be separated.
 ### When a source refuses us (2026-08-10)
 
 Measured on production the day the page cache shipped: every render cost
-214–240s, and all of it was one pivot — OpenAlex answering 429 to chunk after
+214–240s, and all of it was one lookup — OpenAlex answering 429 to chunk after
 chunk of one page's DOI lookups, each chunk honoring `Retry-After` with its own
 minute of sleep inside a reader's request. Correct per request, wrong per page.
 From the operator's own IP the same query answered 200 in 0.39s at the same
@@ -308,7 +308,7 @@ and the volume keeps it), and `ROBOTS_DISALLOW_ALL=1`, which flips
 `robots.txt` to `Disallow: /` so no staging render is ever indexed.
 `WIKIMEDIA_UA_CONTACT` is a separate secret on the staging app, same
 no-default rule — as are the partner keys (`DPLA_API_KEY`,
-`EUROPEANA_API_KEY`, `SMITHSONIAN_API_KEY`), without which those pivots
+`EUROPEANA_API_KEY`, `SMITHSONIAN_API_KEY`), without which those lookups
 silently skip and staging renders sparser than the same commit would on
 prod. Fly secrets are write-only, so they cannot be copied app-to-app
 through the API; the working route (2026-08-09) is reading them off the
@@ -348,10 +348,10 @@ Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 
 **Rembrandt replaced American Gothic as the art showcase on 2026-08-06**, and
-the swap is what drove the artworks pivot: the Met and the Rijksmuseum were
+the swap is what drove the artworks lookup: the Met and the Rijksmuseum were
 both landmark open-access releases, and an artist article shows them together
 where a single painting shows one museum. An article ABOUT a painting gets
-nothing from `src/artworks.js` — The Night Watch fired the pivot zero times,
+nothing from `src/artworks.js` — The Night Watch fired the lookup zero times,
 because P170 points *from* the painting *to* Rembrandt and not the other way.
 Johannes Vermeer is the tighter alternative if the page is ever felt to be too
 busy: 2 museums and 60 cards against Rembrandt's 3 and 116, with the nicer
@@ -407,7 +407,7 @@ the non-Wikimedia partners the demo exists to show — and worse, it argued
 against the page's own thesis: Commons is the single door through which an
 outside institution's work must pass to be seen here, arriving as a Commons
 file rather than as theirs, so shelving it beside the Met implied they were
-peers. Removing it took the P180 depicts pivot, the P373 category pivot,
+peers. Removing it took the P180 depicts lookup, the P373 category lookup,
 `dropSeenFiles`, and the whole unit-to-unit `seen` chain with it — that
 machinery existed for Commons alone. Commons now appears only in the
 visibility panel, named as the door. Page density is the cost, paid
@@ -435,9 +435,9 @@ The spike fetches the whole article in ONE parse call (`fetchArticle`:
 sections + HTML + wikitext) and reproduces the per-section views locally —
 `sliceSectionWikitext` / `sliceSectionHtml` are verified byte-identical to
 `parse&section=N` (note: the API's `byteoffset` is a string index, not bytes).
-Identifier pivots are batched (`src/batch.js`): one archive.org Solr OR-query
+Identifier lookups are batched (`src/batch.js`): one archive.org Solr OR-query
 per run of ISBNs, one OpenLibrary volumes request per 40 (`|`-separated), QIDs
-and labels at 50 per request. Pivots run concurrently across hosts over the
+and labels at 50 per request. Lookups run concurrently across hosts over the
 per-host serial queue. Cold Prandtl: 33.6s/72 requests before the Tier-1 work,
 9.0s/39 after (2026-08-03); warm reruns are 100% offline.
 
@@ -452,7 +452,7 @@ kinds, each asked twice because the lede goes ahead of the page — partner
 statements, item→classes, then classes→ancestors — and it is the third that the
 `fact-class-*` cache removes on a warm machine. Query-then-pick raised the
 partner half deliberately (Monarch butterfly 3 → 6 WDQS, +0.6s measured) and
-that is the cheap half; see Partner pivots.
+that is the cheap half; see Partner lookups.
 
 **Where a cold page's time actually went, measured 2026-08-05.** The `settled in
 Xs` stderr lines only wrap the article-global batches, and by this date those
@@ -649,7 +649,7 @@ none; they are credited in the rights copy, which is where their work is used.
   Cancer*) are beyond a title fold and stay, ranked down by their own edition
   counts; merging them would take external knowledge, not string logic.
   Kafka, the control: editions order agrees with the relevance order this
-  pivot used before.
+  lookup used before.
 - **The article's own status goes at the head of the lede** (`subjectRights`,
   chosen 2026-08-06). An article ABOUT a work — The Great Gatsby — often has the
   richest rights data on the site and, before this, nowhere to put it: no
@@ -694,7 +694,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | GBIF | per-record `license`, but mixed | words only, corrected (see below) |
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
-| Smithsonian | n/a | no pivot builds cards; visibility panel only |
+| Smithsonian | n/a | no lookup builds cards; visibility panel only |
 | DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; `Unknown` gets the ? mark (honest-unknowns rule above); the fully-open combination words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
@@ -756,16 +756,16 @@ saying nothing the four and the two did not. Branches answering alone keep the
 row count additive. No transitive walk is asked of items (see the mappability
 note above for what that cost when it was).
 
-## Partner pivots (2026-08-03)
+## Partner lookups (2026-08-03)
 
-Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
+Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
 
 - **Scholarly** (`src/scholarly.js`) — citation anchors carrying a DOI or PMID
   batch through **OpenAlex** (no key; `mailto` carries the operator contact);
   a card exists only when the work is genuinely open. **arXiv** citations are
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
-  OpenLibrary author pivot.
+  OpenLibrary author lookup.
 - **Statements** (`src/statements.js`) — WDQS, split into a CHEAP half asked of
   everything and an EXPENSIVE half asked of almost nothing (2026-08-05). The
   split is the load-bearing part; see Query, then pick under Key Decisions.
@@ -793,9 +793,9 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   cold and blew the 15s timeout; asking WDQS the membership question directly
   (`EXISTS` with a nested `VALUES`) cost 11–24s where the plain ancestor
   walk costs 0.32–0.50s. And because the first version rode the query answering
-  every partner pivot, its timeout cost the page Met/AIC/GBIF/iNat/IIIF/DPLA/
+  every partner lookup, its timeout cost the page Met/AIC/GBIF/iNat/IIIF/DPLA/
   Europeana too. Now failure of either follow-up costs only maps (they are gated
-  on the place/defunct booleans), never the partner pivots. Result: P625 →
+  on the place/defunct booleans), never the partner lookups. Result: P625 →
   OpenStreetMap map cards for locatable, extant places only (one per section max;
   non-Earth globes are refused — Tranquility Base gets no map of the Atlantic).
   The ancestor walk is cached per class (`fact-class-*`, see Contracts):
@@ -816,7 +816,7 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   was still reading that object, and Brown v. Board lost its lede map.
 - **The subject's own artworks** (`src/artworks.js`, added 2026-08-06) — the
   third case of a pattern the project already had twice: `src/works.js` asks
-  OpenLibrary for the books the subject wrote, the ORCID pivot asks OpenAlex
+  OpenLibrary for the books the subject wrote, the ORCID lookup asks OpenAlex
   for their papers, and this asks Wikidata for the artworks they made
   (`?work wdt:P170 ?subject`, UNION over P3634/P13234/P4610/P6108). One WDQS
   request; the picked works then ride their own partners' fetchers, so a
@@ -833,7 +833,7 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   |---|---|
   | all links in the article | **35** (Met 11 · Rijks 14 · AIC 1 · IIIF 9) |
   | survive the `<table>` strip | 14 (Met 2 · Rijks 5 · AIC 1 · IIIF 6) |
-  | reach the partner pivot | 3 |
+  | reach the partner lookup | 3 |
   | rendered as cards | **2** |
 
   The strip is load-bearing — it is what keeps navboxes, infoboxes and
@@ -852,7 +852,7 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   really do 403, three did across Rembrandt and Vermeer.
 
   **Gated on the subject being a person** (`needsArtworksQuery`, P31 → Q5),
-  the same shape of gate as `needsPlaceDefunctQuery`: without it the pivot
+  the same shape of gate as `needsPlaceDefunctQuery`: without it the lookup
   spends one WDQS request per page asking what paintings a butterfly or a court
   case produced, and WDQS is on the lede's critical path. Verified after: Brown
   v. Board pays nothing, Rembrandt is unchanged. Deliberately narrow — a
@@ -872,8 +872,8 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   band on its most prominent labeled anchor; the anchor is a *cataloger's*
   LCSH subject heading, not a Wikidata statement, and the cards say so.
   Requires the `DPLA_API_KEY` env var (free by mail); absent the key the
-  pivot silently skips, so clones run keyless.
-  **This is the most expensive pivot on the page and the most productive** — 40
+  lookup silently skips, so clones run keyless.
+  **This is the most expensive lookup on the page and the most productive** — 40
   of Angkor Wat's 56 cards — so it is tuned rather than trimmed.
   **The shelf is ranked here, not by DPLA** (`rankDplaEntries`, 2026-08-08,
   LUI-144). The query is a facet filter, and a facet has no relevance gradient:
@@ -990,8 +990,8 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   arrive entity-linked rather than heading-searched, so its relevance
   failure mode is different, and opting it in is a field mapping plus
   `_subjects`, not new machinery.
-- **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors pivot only
-  through their stated Europeana entity (P7704); the search asks for items
+- **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors are looked up
+  only through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
   card names its item's license. Gated on `EUROPEANA_API_KEY`, same keyless-
   skip rule. The
@@ -1032,11 +1032,11 @@ Beyond IA/OpenLibrary, two pivot families (both budgeted per section):
   not hacked in for one partner.
   **Strict-about-the-anchor turned out not to mean relevant-to-the-article**
   (2026-08-08, the Apollo 11 review): every card was true and a third of
-  them were junk. The corroboration gate under Partner pivots is the answer,
+  them were junk. The corroboration gate under Partner lookups is the answer,
   and it is shared with DPLA, not DigitalNZ-specific. Same day, `src/lc.js`
   stopped hardcoding `/authorities/names/` — topical anchors (sh ids: Moon,
   Astronauts, Space flight) had been 404ing silently and getting fact-cached
-  as null, so the pivot never fired on a topical heading; they now branch to
+  as null, so the lookup never fired on a topical heading; they now branch to
   `/authorities/subjects/` via `lcBranch`, and a pre-fix cache may hold
   stale nulls for sh ids (deleting `.cache/` is, as ever, the whole reset).
   **A key is optional, unlike DPLA/Europeana**: the v3 API answers keyless
@@ -1091,7 +1091,7 @@ a block risk and a shipped 404, and because an agent may not open a second file:
 ## Pipeline (output-agnostic core → renderer)
 
 `wikipedia` (sections, prose, wikilinks, QIDs, lead images, infobox links,
-section wikitext) → `discover` (anchors, pivots, budgets) → `dedup` (article-
+section wikitext) → `discover` (anchors, lookups, budgets) → `dedup` (article-
 order anchor ownership AND candidate ranking, between the cheap partner query
 and the expensive one — see Query, then pick) + `breadth` (is this anchor a
 category?) + `citations` (per-section `<ref>` templates, and the coverage
@@ -1255,7 +1255,7 @@ leads the section) → `emit-html`.
   all four Finnish, all four titled "öljymaalaus". Every unhelpful shelf on
   every showcase page came from an anchor of that kind. The lede now ranks
   candidates by the subject's own Wikidata claims, **already fetched for the
-  subject pivots, so no new request**. THREE tiers, and the middle one is
+  subject lookups, so no new request**. THREE tiers, and the middle one is
   load-bearing: ranking by MEMBERSHIP is not enough, because the item does name
   beaverboard (P186 material used) and a flat test still puts it first. Ranking
   by WHICH PROPERTY names it puts particular things (P170 creator, P195
@@ -1304,7 +1304,7 @@ leads the section) → `emit-html`.
   adds no furniture to a 178px card, and it stays a manila slug rather than
   becoming blue and underlined: the claim is still the point, the ↗ and a
   hover fill are the affordance. `url` rides the sample record, set at the one
-  push site in `bandPropertyPivot` from **`spec.browseUrl`, the same builder
+  push site in `bandPropertyLookup` from **`spec.browseUrl`, the same builder
   the broad note uses** — a second copy of that logic could drift so a folded
   shelf and a sampled one sent readers to different pages.
   **A badge links only where this project can name a page making the SAME
@@ -1379,7 +1379,7 @@ per-host queues.
   rides the per-host queue in `src/mw.js` (`enqueue`). Different hosts run
   concurrently — that is where the Tier-1 speedup lives — but never two
   in-flight requests to the same Wikimedia API. Batch with `titles=A|B|C` (and
-  the batched pivots in `src/batch.js`) instead of adding parallelism.
+  the batched lookups in `src/batch.js`) instead of adding parallelism.
   `hostLimit()` returns 1 for every `wikipedia|wikimedia|wikidata|…` host and
   that is not a tuning knob.
 - The browser extension must use **`Api-User-Agent`** — browsers silently drop a
@@ -1447,13 +1447,13 @@ the politeness claim is checkable after a run rather than merely asserted here.
   `rights`), so every cached DPLA response predating that is keyed to the old
   URL and will be refetched once. Same request COUNT — the fields ride the
   request DPLA was already answering — but a warm cache goes cold for that
-  pivot exactly once.
+  lookup exactly once.
 - **And again on 2026-08-08**, when `page_size` went 4 → 50 for the ranking
   window: same request count, new URL, so every cached DPLA response is refetched
   exactly once. Apollo 11 cold-fetched 50 DPLA responses on the first render
   after the change and was warm again immediately.
 - **Same for the archive.org search on 2026-08-06** (`licenseurl`) and the
-  author-works pivot (`works.json` → `search.json`). Both are one-time cache
+  author-works lookup (`works.json` → `search.json`). Both are one-time cache
   misses at unchanged request counts, for the same reason: the field rides a
   request that was already being made.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
@@ -1562,11 +1562,11 @@ the politeness claim is checkable after a run rather than merely asserted here.
   is the locale-swapped fallback where no accession number is stated. The
   accession form was verified 9/9 across paintings (SK-*) and prints (RP-P-*).
   Note also that **P13234 is not always the numeric id**: 4 of 5,557 values are
-  accession numbers or handles, which 400/404 and are dropped by the pivot's
+  accession numbers or handles, which 400/404 and are dropped by the lookup's
   own error handling. That is correct — a bad identifier is our problem, not
   the museum's — and too rare to special-case.
-- `src/artworks.js` — the subject's own artworks; see Partner pivots for the
-  measured funnel that made it a query rather than an anchor pivot.
+- `src/artworks.js` — the subject's own artworks; see Partner lookups for the
+  measured funnel that made it a query rather than an anchor lookup.
 - `src/rights.js` — pure except one fetch: license/status vocabularies, the
   WDQS rights query, and `rightsView`, which decides what a card says. See the
   copyright section above for the rules it encodes.
@@ -1589,7 +1589,7 @@ the politeness claim is checkable after a run rather than merely asserted here.
   looked. `free.law` and a Commons-hosted Europeana logo replaced two other
   URLs that had quietly stopped serving images.
 - `src/http.js` — the URL-keyed request cache, plus `getHeader` (a HEAD's
-  response header, cached — see the DPLA pivot), `fromDataUri`, and
+  response header, cached — see the DPLA lookup), `fromDataUri`, and
   `readFacts`/`writeFacts`,
   the key→JSON cache for derived answers (see Contracts). Keys must be
   filename-safe and are **REFUSED, never sanitized** — a sanitized key can

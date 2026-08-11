@@ -1,4 +1,4 @@
-// The P13234 pivot: the Rijksmuseum's own record of its own object.
+// The P13234 lookup: the Rijksmuseum's own record of its own object.
 //
 // Added 2026-08-06. The Rijksmuseum belongs here for the same reason the Met
 // does — its 2013 Rijksstudio release was one of the launch events of museum

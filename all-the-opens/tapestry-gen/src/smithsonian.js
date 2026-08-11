@@ -1,4 +1,4 @@
-// The Smithsonian pivot: P195 (collection) + P217 (inventory number).
+// The Smithsonian lookup: P195 (collection) + P217 (inventory number).
 //
 // Added 2026-08-06. Unlike every other museum partner here, the Smithsonian has
 // **no external-id property on the objects that matter**. The Met has P3634, the
@@ -10,7 +10,7 @@
 //
 // This module exists because of a specific regression. The command module's 3D
 // scan was on the Apollo 11 page when that page was hand-curated; the curated
-// dataset retired 2026-08-04 and live discovery had no Smithsonian pivot at all,
+// dataset retired 2026-08-04 and live discovery had no Smithsonian lookup at all,
 // so it silently vanished. The anchor was never the problem — the article links
 // "Command module Columbia" from its prose several times and the QID resolves —
 // the problem was that the QID carried no question this project knew how to ask.
@@ -25,7 +25,7 @@
 //   SAAM   12/20 sampled resolved (60%), all with images, none with 3D
 //   NASM    4/6  resolved,             4 with images, **2 with CC0 3D models**
 //
-// A 60% pivot is worth having; the misses cost one anchor its card and nothing
+// A 60% lookup is worth having; the misses cost one anchor its card and nothing
 // else. The 3D models are the reason NASM punches above its six items.
 //
 // ## Why the id is verified rather than constructed
@@ -60,7 +60,7 @@ import { ccFromUri, licenseView } from './rights.js'
  * An explicit map rather than a SPARQL property path walking P361/P749 up to
  * wd:Q131626: the path costs every page's anchor query a graph walk to learn
  * something that changes about once a decade, and the map doubles as the credit
- * line. An unlisted collection simply does not pivot.
+ * line. An unlisted collection is simply not looked up.
  */
 export const SI_COLLECTIONS = {
   Q1192305: 'Smithsonian American Art Museum', // 16,237

@@ -150,7 +150,7 @@ test('the rwo/agents twin never stands in for the authority record', () => {
 // `x-preflabel` arrives as "CÅdÃ¨s, George" and would go on to DPLA as a
 // subject-name query matching nothing at all. That is why LC ships
 // `x-preflabel-encoded` beside it. A silent zero-result search is exactly the
-// failure this pivot must not have, since it is indistinguishable from an
+// failure this lookup must not have, since it is indistinguishable from an
 // anchor the partners genuinely hold nothing under.
 test('the encoded heading survives the trip through a Latin-1 header', () => {
   assert.equal(decodeLcHeading('C%C5%93d%C3%A8s%2C%20George'), 'Cœdès, George')
@@ -270,7 +270,7 @@ test('near-identical multi-part docs collapse to one card per title and holder',
 
 // ---- Europeana --------------------------------------------------------------
 
-test('europeanaUrl pivots on the stated entity URI and asks only for open items', async () => {
+test('europeanaUrl lookups on the stated entity URI and asks only for open items', async () => {
   const { europeanaUrl, rightsName, europeanaEntryFrom } = await import('../src/europeana.js')
   // P7704 values carry a legacy /base/ segment the search index dropped.
   const url = europeanaUrl('agent/base/59904', 'KEY')

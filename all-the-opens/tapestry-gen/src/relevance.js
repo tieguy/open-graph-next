@@ -116,7 +116,7 @@ export function corroborated(subjects, topic, ownQid) {
 /**
  * The page's topic space, from maps the band already holds: every anchor
  * whose Wikidata entry states an LC authority (the same property the
- * search-shape pivots key on) and whose label is known. Pure and
+ * search-shape lookups key on) and whose label is known. Pure and
  * deterministic — byte-reproducibility rides on that.
  *
  * `place` is "has an Earth coordinate": the same `parseEarthPoint` the map

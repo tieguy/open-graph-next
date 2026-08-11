@@ -2,12 +2,12 @@
 //
 // Added 2026-08-06. This is the third case of a pattern the project already
 // had twice: `src/works.js` asks OpenLibrary for the books the subject wrote,
-// and the ORCID pivot asks OpenAlex for the papers they published. An artist's
+// and the ORCID lookup asks OpenAlex for the papers they published. An artist's
 // paintings were the obvious missing third, and their absence was measurable.
 //
 // ## Why a query and not an anchor
 //
-// Every other visual pivot here follows the article's own wikilinks outward.
+// Every other visual lookup here follows the article's own wikilinks outward.
 // On an artist's article that route very nearly fails, and the reason is
 // structural rather than fixable in the ranking: **`proseLinks` strips
 // `<table>` blocks**, and on an artist article the links to individual
@@ -16,14 +16,14 @@
 //
 //   all links in the article        35 carry a museum id  (Met 11 · Rijks 14 · AIC 1 · IIIF 9)
 //   survive the <table> strip       14                    (Met  2 · Rijks  5 · AIC 1 · IIIF 6)
-//   reach the partner pivot          3
+//   reach the partner lookup          3
 //   rendered as cards                2
 //
 // The strip is not a bug — it is what keeps navboxes, infoboxes and succession
 // boxes from flooding every page — so the answer is to stop routing this
 // question through the article's links at all. Wikidata already knows what the
 // subject made and who holds it: `?work wdt:P170 ?subject` plus the same
-// object-level identifiers the anchor pivot reads. Asked of the same six
+// object-level identifiers the anchor lookup reads. Asked of the same six
 // artists, that question answers 553 works for Rembrandt, 218 for Monet, 141
 // for Hokusai, 96 for Van Gogh, 35 for Tissot and 12 for Vermeer.
 //
@@ -65,10 +65,10 @@ const PARTNERS = [
  * Who holds it, in a reader's words, for the card's why line and ⓘ fold.
  *
  * Here rather than in the renderer's SOURCE map on purpose: this is the
- * pivot's own knowledge of which partner it asked, and a pipeline module that
+ * lookup's own knowledge of which partner it asked, and a pipeline module that
  * imported the renderer would break the one invariant every module here keeps.
  * The entry's `source` still drives the icon and the credit; this only names
- * the institution inside a sentence the pivot itself writes.
+ * the institution inside a sentence the lookup itself writes.
  */
 // Keyed by the entry's `source`, not by the partner key above: the Art
 // Institute answers to `aic` in Wikidata and renders as `artic` on a card.
@@ -86,7 +86,7 @@ export const MUSEUM_NAME = {
  *
  * The same shape of gate as `needsPlaceDefunctQuery` and `needsRightsQuery` in
  * src/statements.js, and for the same reason: WDQS sits on the lede's critical
- * path, and without this the pivot spends one request per page asking what
+ * path, and without this the lookup spends one request per page asking what
  * paintings a butterfly, a river or a court case produced. Only a person
  * creates artworks, so P31 → Q5 is the whole test, and the subject's claims
  * are already in hand — this costs nothing to ask.
@@ -238,7 +238,7 @@ export async function subjectArtworks(qid, { cap, exclude, fetchEntry }) {
       const entry = await fetchEntry(rec.via, rec.ids[rec.via], rec.label)
       if (entry) entries.push({ ...entry, _qid: rec.qid })
     } catch (e) {
-      console.error(`  artwork pivot failed (${rec.qid} via ${rec.via}): ${e.message}`)
+      console.error(`  artwork lookup failed (${rec.qid} via ${rec.via}): ${e.message}`)
     }
   }
   return {

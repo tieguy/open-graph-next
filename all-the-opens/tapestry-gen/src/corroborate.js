@@ -1,4 +1,4 @@
-// Phase 6: the corroborated pivot — reaching material that carries no shared
+// Phase 6: the corroborated lookup — reaching material that carries no shared
 // identifier at all.
 //
 // Most of this project's edges are made of identifiers: an ISBN is an ISBN on

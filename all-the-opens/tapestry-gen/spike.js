@@ -2,7 +2,7 @@
 /**
  * Batch entry point for live discovery: one self-contained HTML file per
  * article, byte-reproducible off its cache. The discovery itself — anchors,
- * pivots, budgets, the per-host queue — lives in src/discover.js and is
+ * lookups, budgets, the per-host queue — lives in src/discover.js and is
  * shared with serve.js, the streaming entry point.
  *
  *   node spike.js "Brown v. Board of Education"

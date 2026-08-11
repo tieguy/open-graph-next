@@ -1,21 +1,21 @@
-// The DPLA pivot: America's union catalog — tens of millions of items from
+// The DPLA lookup: America's union catalog — tens of millions of items from
 // libraries, archives and museums, one API. The anchor is a real key, not a
 // label: Wikidata states the entity's Library of Congress authority (P244),
 // id.loc.gov turns that into the AUTHORIZED heading string, and DPLA is
 // asked for items its partner catalogers filed under exactly that heading.
-// An anchor without an LC authority simply does not pivot — that is the
+// An anchor without an LC authority is simply not looked up — that is the
 // difference between "items about Eagle, the lunar module" and eleven
 // thousand photographs of birds.
 //
 // Requires DPLA_API_KEY (free: POST to https://api.dp.la/v2/api_key/{email}
-// and it arrives by mail). Without it the pivot is silently absent — the
+// and it arrives by mail). Without it the lookup is silently absent — the
 // demo must run for anyone who clones it, keyless.
 
 import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
 import { corroborated, rankShelfEntries, uniqueEntries } from './relevance.js'
 // LC authority lookup is shared with DigitalNZ and lives in its own module.
-// This pivot wants the cheap authorized form; see lc.js for why there are two.
+// This lookup wants the cheap authorized form; see lc.js for why there are two.
 import { lcHeading } from './lc.js'
 
 export const DPLA_PER_ANCHOR = 4

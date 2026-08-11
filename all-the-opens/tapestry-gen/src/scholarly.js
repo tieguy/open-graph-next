@@ -1,4 +1,4 @@
-// The scholarly pivot: citation anchors that carry a DOI, PMID or arXiv id,
+// The scholarly lookup: citation anchors that carry a DOI, PMID or arXiv id,
 // resolved to open-access copies. This is the papers' twin of the ISBN →
 // Internet Archive route — the article states the identifier, and the
 // question is only whether the open ecosystem holds a readable copy.
@@ -162,7 +162,7 @@ export async function openAlexLookups(cites, { contact }) {
 
 /**
  * The subject's own scholarship, via its ORCID (P496) — the papers' twin of
- * the OpenLibrary author pivot. Top-cited first, and OPEN ONLY (2026-08-03):
+ * the OpenLibrary author lookup. Top-cited first, and OPEN ONLY (2026-08-03):
  * a closed work gets no card, and the caller's disclosure states how many of
  * the subject's works that leaves out — the note is honest where a paywalled
  * card would just be a dead end wearing a shelf.

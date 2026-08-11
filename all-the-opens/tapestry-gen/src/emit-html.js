@@ -1308,7 +1308,7 @@ ${body}
 
 // ---------------------------------------------------------------------------
 // Streaming (Phase 7): the same page, delivered as one chunked response. The
-// shell and full spine go out first — the article renders before any pivot
+// shell and full spine go out first — the article renders before any lookup
 // answers — and each band's rail follows as a <template> plus a one-line
 // script that moves it into place as the browser parses it. No framework, no
 // client round-trips: the stream IS the page.
@@ -1359,7 +1359,7 @@ document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream
  * yet which it will use, and the unused rules cost bytes, not correctness.
  */
 /**
- * What stands in the legend's place while the pivots are still answering.
+ * What stands in the legend's place while the lookups are still answering.
  *
  * A streamed page knows its sources only when every band has landed, so
  * between the spine (~1s) and the last rail (up to a minute cold) the masthead
@@ -1542,7 +1542,7 @@ img{max-width:100%;display:block}
   min-height:16px;margin:0 0 12px}
 .hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
 .key{display:inline-flex;align-items:center;gap:8px}
-/* The legend's stand-in while the pivots answer. A slow pulse, not a spinner:
+/* The legend's stand-in while the lookups answer. A slow pulse, not a spinner:
    the work is a polite serial crawl of other people's APIs, and it should look
    like patience rather than a progress bar counting to a number nobody knows. */
 .finding{font-style:italic;animation:finding 1.9s ease-in-out infinite}

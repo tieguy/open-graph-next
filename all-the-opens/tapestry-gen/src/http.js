@@ -1,4 +1,4 @@
-// The non-MediaWiki HTTP client, shared by every pivot: disk-cached, riding
+// The non-MediaWiki HTTP client, shared by every lookup: disk-cached, riding
 // the same per-host serial queue as the MediaWiki traffic (src/mw.js), with a
 // timeout a bare fetch lacks. MediaWiki hosts use m3api via mw.js instead;
 // everything else — archive.org, OpenLibrary, OpenAlex, WDQS, museum and

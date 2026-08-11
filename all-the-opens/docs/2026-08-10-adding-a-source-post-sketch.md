@@ -57,7 +57,7 @@ Order them as an escalation: URL → identity → data → law → layers.*
   link-checker audit of open collections would be mostly wrong.)
 - **The problem is often anchor supply, not the API.** The Met funnel on
   Rembrandt: 35 museum-bearing anchors → 14 survive the table-strip → 3 reach
-  the pivot → 2 render. Diagnose the funnel before blaming the partner.
+  the lookup → 2 render. Diagnose the funnel before blaming the partner.
 - **The visible modeling error is not always the binding constraint.** CVMA GB:
   28,135 photos, 0 matches. The P31/P186 mix-up is real — and fixing it yields
   ~nothing, because the UK has 87 window items against 28,135 photographs, and

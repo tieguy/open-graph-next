@@ -1,12 +1,12 @@
 // Works *by* the subject, rather than works that cite the subject.
 //
-// Every other pivot in this project answers "what did this article cite?" — it
+// Every other lookup in this project answers "what did this article cite?" — it
 // follows the article outward through its own references. For a person that
 // leaves the most obvious thing missing: what they wrote. A biography's page can
 // end up showing a shelf of books about the subject and none by them.
 //
 // Wikidata's P648 is an OpenLibrary author identifier, so this is an identifier
-// pivot like the ISBN ones, not a name search: no disambiguation, no guessing
+// lookup like the ISBN ones, not a name search: no disambiguation, no guessing
 // between people who share a name.
 //
 // **Read from `search.json`, not `/authors/<id>/works.json` (2026-08-06).**
@@ -37,7 +37,7 @@ export function authorWorksUrl(olid, limit = 40) {
     // `author_key` rides along for `soleAuthor`, `edition_count` for the shard
     // fold — see below. Each was a one-time cache miss at an unchanged request
     // count, the same trade as the `ebook_access` change that brought this
-    // pivot to search.json.
+    // lookup to search.json.
     '&fields=key,title,ebook_access,first_publish_year,cover_i,ia,author_key,edition_count' +
     // Sorted by edition count rather than relevance (2026-08-07): the books
     // the world kept printing are the books the shelf is for, and the sort
@@ -55,7 +55,7 @@ export function authorWorksUrl(olid, limit = 40) {
  * says "6 of 1,853" and they want the 1,853.
  *
  * The site's own SEARCH, not `/authors/<olid>`: it takes the same
- * `author_key` and `sort` this pivot asks the API for, so the page shows the
+ * `author_key` and `sort` this lookup asks the API for, so the page shows the
  * shelf's own denominator rather than a number a reader has to reconcile.
  * Verified 2026-08-10 — Kafka's OL33146A reports "1,853 hits" on the page and
  * `numFound: 1853` from search.json. (`/authors/<olid>` 301s to a slugged URL

@@ -70,7 +70,7 @@ const response = {
 
 test('the browse link lands on the page that makes the badge’s claim', () => {
   // The badge says "6 of 1,853" and links here, so this page has to report the
-  // same 1,853 — the site's own search takes the pivot's own author_key and
+  // same 1,853 — the site's own search takes the lookup's own author_key and
   // sort, and answered "1,853 hits" against search.json's numFound of 1853 on
   // 2026-08-10. /authors/<olid> is the tempting URL and the wrong one: it 301s
   // to a slugged path and counts differently.
@@ -87,7 +87,7 @@ test('the query asks for the access field the rights code depends on', () => {
   assert.match(url, /author_key=OL33146A/)
   assert.match(url, /ebook_access/)
   assert.match(url, /limit=40/)
-  // An identifier pivot, never a name search: no disambiguation, no guessing
+  // An identifier lookup, never a name search: no disambiguation, no guessing
   // between people who share a name.
   assert.doesNotMatch(url, /[?&]q=/)
 })
