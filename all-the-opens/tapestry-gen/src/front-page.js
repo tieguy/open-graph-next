@@ -56,8 +56,12 @@ const SHOWCASE = [
   {
     domain: 'Ecology',
     title: 'Monarch butterfly',
-    adds: 'photographs from iNaturalist',
-    friends: ['gbif', 'dpla'],
+    adds:
+      'photographs from iNaturalist and observation maps from Global Biodiversity ' +
+      'Information Facility',
+    // GBIF moves out of this row because the line above now names it — see the
+    // rule at the head of SHOWCASE.
+    friends: ['dpla'],
   },
   {
     domain: 'Art',
