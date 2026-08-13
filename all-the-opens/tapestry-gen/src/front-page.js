@@ -2,8 +2,14 @@
 // article pages belong to. Same serif, same hairline rules — recentered on
 // the FRIENDS (2026-08-03 review): the partners and what each one gives, not
 // the pipeline. The search field stays the one bold element, because "type
-// anything" is still the invitation; the mechanism lives in two quiet boxes
-// above the footer.
+// anything" is still the invitation.
+//
+// Everything below the showcase is an FAQ as of 2026-08-13. The friends list
+// and the two mechanism boxes were three blocks of prose under headings
+// nobody had asked for; the same words behind a question let a reader spend
+// their attention where their curiosity already is — and the two questions
+// that had no answer here at all, why this exists and what it has to do with
+// LLMs, are now the first two.
 
 import { escapeHtml } from './html.js'
 import { ogMeta, sourceLegend } from './emit-html.js'
@@ -13,42 +19,57 @@ const OG_DESCRIPTION =
   'museums that publish their own collections, scientists who post their papers openly, ' +
   'and mappers and naturalists who chart the planet for free.'
 
+// The showcase, compressed (2026-08-13). Each card used to carry a sentence
+// describing a page the reader had not opened yet; six of those is an essay
+// standing between a visitor and the first click. A card now says three
+// things — the article, the one addition worth arriving for, and who else
+// turned up — so the six can be scanned instead of read.
+//
+// `friends` is HAND-WRITTEN, and this file cannot check it. The front page is
+// built once at startup, before any showcase page has been discovered, so the
+// only way to derive the row would be six discoveries' worth of partner
+// requests at boot — spending their capacity to draw logos. It is therefore a
+// claim to re-check by eye whenever the showcase changes or a partner stops
+// answering; a live page is the authority, not this list. A test does assert
+// that every slug names a friend this page lists, which catches a rename but
+// cannot catch drift. Each row deliberately OMITS the partner named in
+// `adds` — "other friends" means the ones the headline did not already say.
 const SHOWCASE = [
   {
     domain: 'Spaceflight',
     title: 'Apollo 11',
-    watch:
-      'Fifty-seven books hide in a pooled bibliography. The Archive lends them back — with maps of the launch and recovery sites.',
+    adds: 'books from the Internet Archive',
+    friends: ['openlibrary', 'smithsonian', 'dpla', 'digitalnz', 'openstreetmap'],
   },
   {
     domain: 'Law',
     title: 'Brown v. Board of Education',
-    watch:
-      'Free Law Project delivers the opinion itself first — the primary document before any book about it.',
+    adds: 'case text from Free Law Project',
+    friends: ['internet_archive', 'openlibrary', 'dpla', 'openstreetmap'],
   },
   {
     domain: 'A writer’s life',
     title: 'José Rizal',
-    watch:
-      'Noli Me Tangere and five more, every one free to read — Wikidata records that his copyrights expired, and each card shows the scan you can open.',
+    adds: 'books from Open Library',
+    friends: ['internet_archive', 'dpla'],
   },
   {
     domain: 'Ecology',
     title: 'Monarch butterfly',
-    watch:
-      'iNaturalist’s photographs, and GBIF drawing everywhere a monarch has ever been recorded.',
+    adds: 'photographs from iNaturalist',
+    friends: ['gbif', 'dpla'],
   },
   {
     domain: 'Art',
     title: 'Rembrandt',
-    watch:
-      'His paintings are scattered across the Met, the Rijksmuseum and the Art Institute — each museum’s own record of what it holds, gathered in one place.',
+    adds: 'paintings from the Met, the Rijksmuseum and the Art Institute',
+    friends: ['iiif', 'openlibrary', 'internet_archive'],
   },
   {
     domain: 'Open science',
     title: 'CRISPR gene editing',
-    watch:
-      'Forty-two cited papers resolve to readable copies through OpenAlex and arXiv.',
+    adds: 'open copies of cited papers from OpenAlex',
+    friends: ['arxiv', 'internet_archive'],
   },
 ]
 
@@ -180,6 +201,35 @@ const FRIENDS = [
 const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
 
 /**
+ * Slug → the name this page calls that friend, read off FRIENDS rather than
+ * written again: the showcase rows and the friends list must say the same
+ * name for the same partner, and the icon row's accessible label is that name.
+ */
+const FRIEND_NAMES = new Map(
+  FRIENDS.flatMap(({ friends }) => friends.map(([slug, name]) => [slug, name])),
+)
+
+/**
+ * A showcase card's "other friends" row: logos, because the row's job is to
+ * show at a glance how MANY different institutions turn up on one article —
+ * six names in 11px grey would be read as a list and skipped.
+ *
+ * The logos are decoration to a screen reader (`aria-hidden` rides the class
+ * used everywhere else on this page), so the row carries the names as one
+ * label. `title` gives the same answer to a mouse.
+ */
+const friendIcons = (slugs) => {
+  const names = slugs.map((s) => FRIEND_NAMES.get(s) ?? s)
+  const marks = slugs
+    .map(
+      (s, i) =>
+        `<span class="fav fav-${s}" title="${escapeHtml(names[i])}" aria-hidden="true"></span>`,
+    )
+    .join('')
+  return `<span class="favs" role="img" aria-label="${escapeHtml(names.join(', '))}">${marks}</span>`
+}
+
+/**
  * The articles the front page links to, for anything that needs the same list.
  * Derived from SHOWCASE rather than written out again: `warm.js` re-warms
  * exactly these after a deploy, and a second hand-maintained copy would drift
@@ -198,7 +248,8 @@ const showcaseCards = () =>
     (c) => `<a class="show" href="${wikiHref(c.title)}">
   <span class="dom">${escapeHtml(c.domain)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
-  <span class="watch">${escapeHtml(c.watch)}</span>
+  <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
+  <span class="also"><b>Other friends:</b>${friendIcons(c.friends)}</span>
 </a>`,
   ).join('\n')
 
@@ -209,8 +260,11 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
   border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
   vertical-align:1px}
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 14px;margin:0 0 8px}
-.show{display:block;text-decoration:none;color:inherit;border:1px solid var(--rule);
-  border-radius:4px;background:var(--bg);padding:10px 12px 12px;min-width:0}
+/* A column, so the logo rows line up across a row of cards however long the
+   "Adds:" line runs — six ragged icon rows read as six unrelated cards. */
+.show{display:flex;flex-direction:column;text-decoration:none;color:inherit;
+  border:1px solid var(--rule);border-radius:4px;background:var(--bg);
+  padding:10px 12px 12px;min-width:0}
 .show:hover,.show:focus-visible{border-color:var(--link)}
 .show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
 .show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
@@ -220,7 +274,16 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
   margin-bottom:5px}
 .art::after{content:" →";color:var(--rule)}
 .show:hover .art::after{color:var(--link)}
-.watch{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}`
+.adds{display:block;font-size:.75rem;line-height:1.5;color:var(--muted)}
+.adds b,.also b{font-weight:600;color:#3a3f45}
+.also{display:flex;align-items:center;flex-wrap:wrap;gap:4px 7px;font-size:.75rem;
+  color:var(--muted);margin-top:auto;padding-top:9px}
+.favs{display:flex;align-items:center;gap:5px}
+/* Shared with the friends list below, and needed here too: the busy page
+   renders these cards with no friends list under them. */
+.fav{width:18px;height:18px;flex:none;border-radius:3px;background:#fff no-repeat center;
+  background-size:contain;display:inline-block}
+.also .fav{width:16px;height:16px}`
 
 export function frontPage({ inline = new Map(), siteOrigin = '' } = {}) {
   const legend = sourceLegend(inline)
@@ -317,8 +380,6 @@ ${CARD_STYLE}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
 .friend .who{display:flex;align-items:center;gap:10px;font-weight:700;
   font-size:.92rem;color:var(--head);margin:0 0 6px}
-.fav{width:18px;height:18px;flex:none;border-radius:3px;background:#fff no-repeat center;
-  background-size:contain;display:inline-block}
 .friend .gift{font-size:.88rem;line-height:1.55;color:#3a3f45;margin:0;max-width:36ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
@@ -331,20 +392,32 @@ ${CARD_STYLE}
 .friend.host{grid-column:1/-1}
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
-.boxes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
-.box{background:var(--bg);border:1px solid var(--rule);border-radius:4px;padding:20px 24px;min-width:0}
-.box h3{font-family:var(--sans);font-size:.78rem;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--head);margin:0 0 10px}
-.box p{font-family:var(--sans);font-size:.88rem;line-height:1.65;color:#3a3f45;margin:0 0 10px}
-.box p:last-child{margin-bottom:0}
-.box h4{font-family:var(--serif);font-size:1.02rem;margin:16px 0 4px;color:var(--head)}
+/* The questions. Everything below the showcase is somebody's question about
+   this experiment, answered — which is what the two side-by-side boxes were
+   already doing without saying so, and what the friends list was doing under
+   a heading nobody had asked for. A question makes the answer optional: a
+   reader can decide, in six words, whether the next four paragraphs are for
+   them. The index is here for the same reason and does the same work a
+   contents list does on an article page. */
+.qindex{list-style:none;margin:20px 0 0;padding:0;font-size:.85rem;
+  border-top:1px solid var(--rule)}
+.qindex li{border-bottom:1px solid var(--faint);padding:7px 0}
+.qindex a{text-decoration:none}
+.qindex a:hover{text-decoration:underline}
+.faq h2{margin-top:1.6em}
+.faq h3{font-family:var(--serif);font-size:1.06rem;font-weight:400;margin:20px 0 4px;
+  color:var(--head)}
+.faq p{font-size:.9rem;line-height:1.7;color:#3a3f45;margin:0 0 11px;max-width:74ch}
+.faq ul.why{margin:0 0 12px;padding-left:1.15em;max-width:74ch}
+.faq ul.why li{font-size:.9rem;line-height:1.7;color:#3a3f45;margin:0 0 10px}
+.faq ul.why b{color:var(--head)}
 
 .foot{font-size:.8rem;color:var(--muted)}
 .foot-wrap{padding-top:14px;padding-bottom:40px;border-bottom:1px solid var(--rule)}
 .foot p{max-width:80ch;margin:0 0 8px;padding-top:0}
 .foot p:first-child{border-top:1px solid var(--rule);padding-top:14px}
 
-@media(max-width:960px){.grid,.friends{grid-template-columns:repeat(2,minmax(0,1fr))}.boxes{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:960px){.grid,.friends{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.wrap{padding:0 20px}.kicker{margin:0 -20px 18px;padding:9px 20px}}
 @media(max-width:640px){
   .wrap{padding:0 14px}
@@ -388,8 +461,38 @@ ${cards}
   </div>
 </div></header>
 <main>
-  <section class="section"><div class="wrap">
-    <h2>Current friends, what they bring, and how they’re licensed</h2>
+  <section class="section faq"><div class="wrap">
+    <ul class="qindex">
+      <li><a href="#why">Why did you build this?</a></li>
+      <li><a href="#llms">How might this help protect Wikipedia from LLMs?</a></li>
+      <li><a href="#friends">Who are the friends, and how is their work licensed?</a></li>
+      <li><a href="#how">How does it work?</a></li>
+      <li><a href="#challenges">What are the challenges?</a></li>
+    </ul>
+
+    <h2 id="why">Why did you build this?</h2>
+    <p>Many different things, which makes it hard to explain. But among others:</p>
+    <ul class="why">
+      <li><b>&ldquo;Open knowledge&rdquo; has become such a diffuse thing</b> that it is hard even
+      for its advocates to visualize it. I wanted something that shows it whole.</li>
+      <li><b>Wikipedia has become isolationist, and that needs to be fixed</b> as a critical goal
+      for it to survive — and the best way to do that is to start demonstrating the opportunity
+      instead of just whining about it.</li>
+      <li><b>I wanted to understand better what is possible</b> — and learning-by-doing is very
+      fun right now.</li>
+    </ul>
+
+    <h2 id="llms">How might this help protect Wikipedia from LLMs?</h2>
+    <p>This is a hypothesis, and an untestable one, so take it as that. What machines cannot
+    cheaply make more of is <b>human curation</b> — and one way to tackle the problem is to
+    increase the interconnection of the nodes of human curation that do exist.</p>
+    <p>If the Met has curators, we should use tooling to make them simultaneously Wikipedia
+    curators, instead of reinventing their wheels. Every friend listed below is a place where
+    people are already doing that curatorial work, and today almost none of it reaches a
+    Wikipedia reader. This experiment is a small demonstration of what connecting them could
+    look like.</p>
+
+    <h2 id="friends">Who are the friends, and how is their work licensed?</h2>
     <div class="friends">
 ${friends}
       <div class="friend host">
@@ -399,93 +502,86 @@ ${friends}
   <p class="lic"><span class="lic-mark">openness?</span> Article text CC BY-SA 4.0; Wikidata CC0.</p>
 </div>
     </div>
-  </div></section>
-  <section class="section"><div class="wrap">
-    <h2>How it works, and where it strains</h2>
-    <div class="boxes">
-      <div class="box">
-        <h3>How it works</h3>
-        <p>The goal of this experiment is to demonstrate that open knowledge is not just hugely
-        successful, but also increasingly hugely interlinked. So when you load an article, a small
-        script on our server pulls existing linking information (from citations and Wikidata) and
-        then grabs context from those sources to enrich the article — in one of two ways, and each
-        card says which.</p>
-        <p>That happens once per article. The finished page is kept and handed to whoever asks for
-        it next, so what you see is that discovery rather than a fresh one — the foot of every
-        article says which day it was made. Asking our friends the same question every time anyone
-        reloads would spend their capacity to learn nothing new.</p>
-        <h4>Identifier</h4>
-        <p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a collection answers to
-        exactly it. The strongest claim a card can make.</p>
-        <h4>Statement</h4>
-        <p>Wikidata states the connection outright — this painting is Met object 11417, this species
-        is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
-        <p>Each shelf says <i>who asked</i>, too: when one friend answers several of the
-        article&rsquo;s links, its cards split into one labeled shelf per link — and in the opening
-        section, works <i>by</i> the subject never share a shelf with works merely <i>cited</i>
-        there.</p>
-      </div>
-      <div class="box">
-        <h3>Challenges and future opportunities</h3>
-        <p>This is a demo and not intended for production. Among other challenges:</p>
-        <h4>There is nowhere for most of this to go</h4>
-        <p>Each article page carries a fold — <i>Who helped, and who Wikipedia doesn’t show</i> —
-        sorting the friends who filled it into three states: shown and credited, a link only, or
-        invisible. Almost everyone lands in the last two, and the reason is the same every time, so
-        it is written here once rather than on every page.</p>
-        <p>Today, Wikipedia has one established route for putting an outside picture in an article:
-        the file must first be handed to Wikimedia, and from then on it is a Wikimedia file rather
-        than theirs. Every picture in every article arrived that way. Maps are the single
-        exception — OpenStreetMap is the only project outside Wikimedia that a Wikipedia article
-        puts on the page and credits by name. Everyone else chooses between handing the work over
-        and losing the relationship, or taking a line of text at the bottom. No established route
-        lets them show you what they hold <i>and</i> say it is theirs.</p>
-        <p>Note what is <i>not</i> being claimed: there is always a route, because a bare external
-        link is always possible. What is missing is a route that keeps the content and the credit
-        together. And nothing here says Wikipedia <i>cannot</i> — only that it does not. That is a
-        fact about established practice, and practice can change.</p>
-        <h4>Page layout</h4>
-        <p>Arbitrary content means great layout is somewhere between difficult and impossible. Work
-        with designers on this challenge would be necessary (though even rudimentary implementations
-        would likely be very enjoyable for certain types of data nerds!)</p>
-        <h4>Content curation</h4>
-        <p>Sources can return thousands of responses. (Think the Smithsonian on the Apollo Program,
-        for example.) A gallery with a thousand items is not very helpful to the reader, so some
-        sort of curation (or at least ability to tune algorithmic prioritization) would be necessary
-        before widespread deployment.</p>
-        <h4>Source curation</h4>
-        <p>Similarly, there are many collections of open content these days. Picking and
-        prioritizing them would be an important challenge if we wanted to expand this.</p>
-        <h4>Metadata gaps</h4>
-        <p>The recent scan of thousands of theses from historical figures will be nice sources of
-        context, but very little of it has metadata yet. Ideally the fix is to deploy Wikipedian
-        energy to other repositories to improve the metadata, not have it curated only inside
-        Wikipedia.</p>
-        <h4>Rights nobody has determined</h4>
-        <p>Some items arrive with an honest non-answer: the institution has recorded that the
-        rights status is unknown, or not yet evaluated. These render here with a small ? mark and
-        the institution’s own words behind a click — treated, for now, as peers of the openly
-        licensed material, because a recorded open question is a fact about the collection and
-        silence would hide it. At scale this is a real challenge: a reader wants to know what they
-        may do, and “nobody knows” satisfies no one. The durable fix is rights-clearing work of the
-        kind CopyClear and Dominio Público en América Latina do on Wikidata; a demo can only keep
-        the question visible.</p>
-        <h4>Terms on the pipes, not just the items</h4>
-        <p>An item can be openly licensed while the API that serves it is not. DigitalNZ, for
-        example: its developer terms make the API&rsquo;s metadata non-commercial by default.
-        (There is a commercial tier, but it needs a key and covers only some of the metadata. The
-        exceptions for already-open metadata are Europeana, DPLA and data.govt.nz — everything
-        except the New Zealand collections themselves.) That&rsquo;s fine for this demo, which
-        makes no money. It&rsquo;s a real problem for the goal. Wikipedia lets anyone reuse what
-        it publishes, commercially included, so nothing built on a non-commercial API can ever
-        become part of Wikipedia — or of anything Wikipedia-like. Getting there would take new
-        terms, or an agreement, negotiated source by source. And every source we add makes that
-        list longer.</p>
-        <h4>Bot volume and caching</h4>
-        <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
-        likely need extensive caching and likely formal agreements with the other data providers.</p>
-      </div>
-    </div>
+
+    <h2 id="how">How does it work?</h2>
+    <p>The goal of this experiment is to demonstrate that open knowledge is not just hugely
+    successful, but also increasingly hugely interlinked. So when you load an article, a small
+    script on our server pulls existing linking information (from citations and Wikidata) and
+    then grabs context from those sources to enrich the article — in one of two ways, and each
+    card says which.</p>
+    <p>That happens once per article. The finished page is kept and handed to whoever asks for
+    it next, so what you see is that discovery rather than a fresh one — the foot of every
+    article says which day it was made. Asking our friends the same question every time anyone
+    reloads would spend their capacity to learn nothing new.</p>
+    <h3>Identifier</h3>
+    <p>The article states an ISBN, DOI, OCLC, LCCN, PMID or arXiv id, and a collection answers to
+    exactly it. The strongest claim a card can make.</p>
+    <h3>Statement</h3>
+    <p>Wikidata states the connection outright — this painting is Met object 11417, this species
+    is iNaturalist taxon 48662, this place is here. The card credits the property.</p>
+    <p>Each shelf says <i>who asked</i>, too: when one friend answers several of the
+    article&rsquo;s links, its cards split into one labeled shelf per link — and in the opening
+    section, works <i>by</i> the subject never share a shelf with works merely <i>cited</i>
+    there.</p>
+
+    <h2 id="challenges">What are the challenges?</h2>
+    <p>This is a demo and not intended for production. Among other challenges:</p>
+    <h3>There is nowhere for most of this to go</h3>
+    <p>Each article page carries a fold — <i>Who helped, and who Wikipedia doesn’t show</i> —
+    sorting the friends who filled it into three states: shown and credited, a link only, or
+    invisible. Almost everyone lands in the last two, and the reason is the same every time, so
+    it is written here once rather than on every page.</p>
+    <p>Today, Wikipedia has one established route for putting an outside picture in an article:
+    the file must first be handed to Wikimedia, and from then on it is a Wikimedia file rather
+    than theirs. Every picture in every article arrived that way. Maps are the single
+    exception — OpenStreetMap is the only project outside Wikimedia that a Wikipedia article
+    puts on the page and credits by name. Everyone else chooses between handing the work over
+    and losing the relationship, or taking a line of text at the bottom. No established route
+    lets them show you what they hold <i>and</i> say it is theirs.</p>
+    <p>Note what is <i>not</i> being claimed: there is always a route, because a bare external
+    link is always possible. What is missing is a route that keeps the content and the credit
+    together. And nothing here says Wikipedia <i>cannot</i> — only that it does not. That is a
+    fact about established practice, and practice can change.</p>
+    <h3>Page layout</h3>
+    <p>Arbitrary content means great layout is somewhere between difficult and impossible. Work
+    with designers on this challenge would be necessary (though even rudimentary implementations
+    would likely be very enjoyable for certain types of data nerds!)</p>
+    <h3>Content curation</h3>
+    <p>Sources can return thousands of responses. (Think the Smithsonian on the Apollo Program,
+    for example.) A gallery with a thousand items is not very helpful to the reader, so some
+    sort of curation (or at least ability to tune algorithmic prioritization) would be necessary
+    before widespread deployment.</p>
+    <h3>Source curation</h3>
+    <p>Similarly, there are many collections of open content these days. Picking and
+    prioritizing them would be an important challenge if we wanted to expand this.</p>
+    <h3>Metadata gaps</h3>
+    <p>The recent scan of thousands of theses from historical figures will be nice sources of
+    context, but very little of it has metadata yet. Ideally the fix is to deploy Wikipedian
+    energy to other repositories to improve the metadata, not have it curated only inside
+    Wikipedia.</p>
+    <h3>Rights nobody has determined</h3>
+    <p>Some items arrive with an honest non-answer: the institution has recorded that the
+    rights status is unknown, or not yet evaluated. These render here with a small ? mark and
+    the institution’s own words behind a click — treated, for now, as peers of the openly
+    licensed material, because a recorded open question is a fact about the collection and
+    silence would hide it. At scale this is a real challenge: a reader wants to know what they
+    may do, and “nobody knows” satisfies no one. The durable fix is rights-clearing work of the
+    kind CopyClear and Dominio Público en América Latina do on Wikidata; a demo can only keep
+    the question visible.</p>
+    <h3>Terms on the pipes, not just the items</h3>
+    <p>An item can be openly licensed while the API that serves it is not. DigitalNZ, for
+    example: its developer terms make the API&rsquo;s metadata non-commercial by default.
+    (There is a commercial tier, but it needs a key and covers only some of the metadata. The
+    exceptions for already-open metadata are Europeana, DPLA and data.govt.nz — everything
+    except the New Zealand collections themselves.) That&rsquo;s fine for this demo, which
+    makes no money. It&rsquo;s a real problem for the goal. Wikipedia lets anyone reuse what
+    it publishes, commercially included, so nothing built on a non-commercial API can ever
+    become part of Wikipedia — or of anything Wikipedia-like. Getting there would take new
+    terms, or an agreement, negotiated source by source. And every source we add makes that
+    list longer.</p>
+    <h3>Bot volume and caching</h3>
+    <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
+    likely need extensive caching and likely formal agreements with the other data providers.</p>
   </div></section>
 </main>
 <footer class="foot"><div class="wrap foot-wrap">
@@ -528,7 +624,12 @@ ${friends}
  * Rendered once at startup, like the front page: the moment this page is
  * needed is the moment the server has no capacity to build anything.
  */
-export function busyPage({ siteOrigin = '' } = {}) {
+// `inline` matters here for one reason: the showcase cards carry the partner
+// logos now, and those bytes live in the stylesheet (`faviconStyle`). A busy
+// page built without them would render six rows of blank squares — the offer
+// still works, but it would look broken exactly where the site is claiming a
+// friend showed up.
+export function busyPage({ inline = new Map(), siteOrigin = '' } = {}) {
   // Share scrapers arrive exactly when a link gets popular — which is when
   // this server is busiest — and platforms cache a tagless scrape for days.
   // So the busy page carries the site's card (title, description, image)
@@ -570,6 +671,7 @@ h1{font-family:var(--serif);font-size:clamp(1.7rem,3.4vw,2.3rem);line-height:1.1
   margin:.4em 0 12px;color:var(--head);font-weight:400}
 .lede{font-size:.95rem;line-height:1.6;max-width:74ch;margin:0 0 6px;color:#3a3f45}
 ${CARD_STYLE}
+${sourceLegend(inline).style}
 .after{font-size:.8rem;color:var(--muted);margin:18px 0 0;max-width:74ch}
 @media(max-width:960px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:900px){.wrap{padding:0 20px}.kicker{margin:0 -20px 18px;padding:9px 20px}}

@@ -261,6 +261,29 @@ anything), sharing the showcase cards and their CSS with the front page so the
 "ready now" promise reads the same in both places. A busy page linking to pages
 that would themselves answer 503 would be worse than the dead end it replaced,
 which is why the two must not be separated.
+**It therefore needs the icon bytes too** (2026-08-13): a showcase card carries
+its page's other friends as logos, and those bytes live in the stylesheet
+(`faviconStyle`), so `busyPage({inline: icons})` — not `busyPage({})` — is what
+`serve.js` must call, or every card renders a row of blank white squares.
+
+### The front page is an FAQ below the showcase (2026-08-13)
+
+Two questions readers actually asked — *why did you build this* and *how might
+this help protect Wikipedia from LLMs* — had no answer anywhere on the site,
+while the friends list, "How it works" and "Challenges" sat under headings
+nobody had asked for. All five are questions now, with an index above them, and
+the two new ones lead. The showcase cards were compressed in the same change:
+article, one `Adds:` line naming the best single addition, and the page's other
+friends as a row of logos, replacing a sentence per card that described a page
+the reader had not opened yet.
+
+**The `friends` slugs in `SHOWCASE` are hand-written and unverifiable from the
+code.** The front page is built once at startup, before any of those pages has
+been discovered, so deriving the row would mean six discoveries' worth of
+partner requests at boot to draw logos. A live page is the authority; re-eyeball
+the rows whenever the showcase changes or a partner stops answering. A test
+asserts only that each slug names a friend the page lists — it catches a rename,
+never drift.
 
 ### When a source refuses us (2026-08-10)
 

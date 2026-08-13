@@ -159,7 +159,7 @@ const INDEX = frontPage({ inline: icons, siteOrigin: SITE_ORIGIN })
 // the reason is sharper: the moment it is needed is the moment this server has
 // no capacity to spare. It offers the showcase, which the reserve below is what
 // makes true.
-const BUSY = busyPage({ siteOrigin: SITE_ORIGIN })
+const BUSY = busyPage({ inline: icons, siteOrigin: SITE_ORIGIN })
 
 // Staging refuses crawlers outright (ROBOTS_DISALLOW_ALL); production offers the
 // front page and nothing else. Read once — the answer cannot change at runtime.
