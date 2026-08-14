@@ -1202,8 +1202,9 @@ partner — that is why it lives in git rather than in a blog post.
 Two rules from it are repeated here because skipping them has cost this project
 a block risk and a shipped 404, and because an agent may not open a second file:
 
-- **`hostLimit()` in `src/mw.js` defaults to 1 and stays 1 without a published
-  policy quoted at the call site.** Read the host's own rate-limit or
+- **`hostLimit()` defaults to 1 and stays 1 without a published policy quoted
+  beside the entry** — widened entries live in the partner manifest
+  (`hostLimits` in `src/partners.js`). Read the host's own rate-limit or
   crawl-delay statement first. This is the step every partner audit here has
   found skipped when something went wrong.
 - **Resolve a real identifier AND a deliberately bogus one before shipping.**
@@ -1516,9 +1517,10 @@ Etiquette: <https://www.mediawiki.org/wiki/API:Etiquette>
 
 Serial-per-host was applied uniformly to every host in the project, and by
 2026-08-05 that generalization — not the Wikimedia half of it — was where most
-of a cold page's wall clock lived. `hostLimit()` in `src/mw.js` is now the one
-place that says how wide a host may go, and **nothing goes in it without a
-published statement quoted at the call site.** The default is 1. Staying at 1
+of a cold page's wall clock lived. `hostLimit()` in `src/mw.js` is the one
+place that says how wide a host may go — its widened entries derive from
+`hostLimits` in the partner manifest (`src/partners.js`) — and **nothing goes
+in without a published statement quoted beside the entry.** The default is 1. Staying at 1
 costs only time; guessing wrong spends someone else's capacity.
 
 - **`api.dp.la` → 4.** DPLA's developer policy is explicit: *"Consistent with
@@ -1714,6 +1716,15 @@ the politeness claim is checkable after a run rather than merely asserted here.
   the museum's — and too rare to special-case.
 - `src/artworks.js` — the subject's own artworks; see Partner lookups for the
   measured funnel that made it a query rather than an anchor lookup.
+- `src/partners.js` — the partner manifest (2026-08-14): one descriptor per
+  partner holding every partner fact that is data rather than logic — display
+  name, icon URL, visibility-panel hosts, the front-page friend entry,
+  the hotlink-unsafe flag, and any widened host limit with its policy quoted.
+  `gap.js`, `emit-html.js`, `front-page.js`, `http.js` and `mw.js` derive
+  their tables from it; `test/partners.test.js` asserts completeness (icon
+  bytes committed, friend entry present), so an uncredited partner is a red
+  test rather than a silent state. Imports nothing, ever — that is also
+  tested. Verified byte-identical renders across the refactor.
 - `src/rights.js` — pure except one fetch: license/status vocabularies, the
   WDQS rights query, and `rightsView`, which decides what a card says. See the
   copyright section above for the rules it encodes.
@@ -1728,7 +1739,7 @@ the politeness claim is checkable after a run rather than merely asserted here.
   `build-icons.mjs` refuses non-images. Regenerate when the mark vocabulary in
   `src/rights.js` changes; a test asserts the two vocabularies have not drifted.
 - `src/icons.js` — **generated**, by `tools/build-icons.mjs`. The partner
-  favicons as committed bytes. Regenerate when `SOURCE` gains a partner or an
+  favicons as committed bytes. Regenerate when the partner manifest gains a partner or an
   icon rots. The generator refuses anything that is not `data:image/…`:
   `openalex.org/favicon.ico` answers **200** with a 2.8 KB HTML error page,
   which cleared the old size-only check and shipped as OpenAlex's icon — a

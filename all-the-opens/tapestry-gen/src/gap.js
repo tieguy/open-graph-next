@@ -1,3 +1,5 @@
+import { PARTNERS } from './partners.js'
+
 // What the article itself can and cannot show.
 //
 // Every other module here answers "what does the open web hold about this
@@ -24,33 +26,14 @@
 /**
  * The sites that ARE a partner, for the purpose of asking whether the article
  * already reaches them. Matched on the registrable host and any subdomain, so
- * `www.gbif.org` and `api.gbif.org` both count as GBIF.
- *
- * `iiif` has no entry on purpose: a IIIF manifest is served by whichever
- * library or museum holds the object, so its hosts can only come from the
- * cards themselves (see `partnerHosts`).
+ * `www.gbif.org` and `api.gbif.org` both count as GBIF. Derived from the
+ * partner manifest — the hosts themselves, and the notes on the odd ones
+ * (OpenAlex reached through doi.org, IIIF with no fixed host), live in
+ * src/partners.js.
  */
-export const PARTNER_HOSTS = {
-  internet_archive: ['archive.org'],
-  openlibrary: ['openlibrary.org'],
-  openstreetmap: ['openstreetmap.org', 'osm.org'],
-  met: ['metmuseum.org'],
-  artic: ['artic.edu'],
-  rijks: ['rijksmuseum.nl'],
-  inaturalist: ['inaturalist.org'],
-  gbif: ['gbif.org'],
-  dpla: ['dp.la'],
-  europeana: ['europeana.eu'],
-  digitalnz: ['digitalnz.org'],
-  // An article never links OpenAlex; what it links is the paper's DOI. That IS
-  // the reach question for this partner — the citation is present, and what a
-  // reader cannot tell from it is that a free copy exists.
-  openalex: ['openalex.org', 'doi.org'],
-  arxiv: ['arxiv.org'],
-  free_law: ['courtlistener.com'],
-  smithsonian: ['si.edu'],
-  iiif: [],
-}
+export const PARTNER_HOSTS = Object.fromEntries(
+  Object.entries(PARTNERS).map(([slug, p]) => [slug, p.hosts]),
+)
 
 // A Wayback link is a rescued dead citation, not the Internet Archive's own
 // collection appearing in the article. Counting it would let the page claim

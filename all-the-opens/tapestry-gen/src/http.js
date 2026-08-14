@@ -12,6 +12,7 @@ import { fileURLToPath } from 'node:url'
 import { MAX_COOLOFF_MS, coolingFor, noteRateLimited } from './cooloff.js'
 import { enqueue } from './mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
+import { PARTNERS } from './partners.js'
 
 const HERE = fileURLToPath(new URL('.', import.meta.url))
 export const CACHE = join(HERE, '..', '.cache')
@@ -246,7 +247,11 @@ export async function writeFacts(kind, entries) {
  */
 export function hotlinkUnsafe(entry) {
   if (!entry?.imageUrl) return false
-  if (entry.source === 'dpla' || entry.source === 'digitalnz') return true
+  // The aggregators are flagged in the partner manifest, because which
+  // partners have the long-tail-of-provider-hosts problem is a fact about
+  // the partner; the two host regexes below are about specific URLs, not
+  // sources, and stay here.
+  if (PARTNERS[entry.source]?.hotlinkUnsafe) return true
   return /covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(entry.imageUrl)
 }
 

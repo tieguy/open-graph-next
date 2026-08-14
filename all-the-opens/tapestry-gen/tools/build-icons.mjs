@@ -11,7 +11,7 @@
  * that change on nobody's schedule but their owners', so the right time to
  * fetch them is once, here, by hand.
  *
- * Run it when `SOURCE` in src/emit-html.js gains a partner, or when an icon
+ * Run it when the partner manifest (src/partners.js) gains a partner, or when an icon
  * visibly rots. It is not part of the build: a deploy must never depend on
  * seventeen third-party hosts being up.
  *

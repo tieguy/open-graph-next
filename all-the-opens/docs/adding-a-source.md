@@ -12,8 +12,9 @@ written for whoever does the work — usually a coding agent, sometimes a
 person — and it assumes the code is open beside it.
 
 **How to read it:** every step is an instruction. An indented `Why:` line
-under a rule states the reason behind the rule there. If a `Why:` stops being true, we should correct the rule — that has happened once already
-(§3, the CVMA entry). All code paths are relative to
+under a rule states the reason behind the rule. If a `Why:` stops being
+true, we should correct the rule — that has happened twice already (§3's
+CVMA entry, and the file-count paragraph below). All code paths are relative to
 [`../tapestry-gen/`](../tapestry-gen/). They name **symbols**, not line
 numbers, because line numbers drift.
 
@@ -24,11 +25,16 @@ it holds for an anchor. The results render as **cards**, grouped into
 per-partner **shelves**. The **visibility panel** measures how much of what
 the page found the Wikipedia article itself shows.
 
-**Despite some refactoring, adding one source touches 10–13 files, depending on its shape.** A missed
-step is a partner that fetches correctly while the page never credits it. That
-is why §4 is a checklist and not a formality.
+**Adding one source touches five code files, one generated file, and two
+docs.** It touched 10–13 until the partner manifest (`src/partners.js`,
+2026-08-14) gathered the per-partner data — name, icon, hosts, friend entry,
+host limits — into one descriptor the concern files derive from; what remains
+per-partner is logic (the fetcher, the rights mapping, the lookup
+registration). A missed descriptor field is a failing test
+(`test/partners.test.js`), not a partner that fetches correctly while the
+page never credits it.
 
-*Housekeeping: last verified 2026-08-13. This file is canonical.
+*Housekeeping: last verified 2026-08-14. This file is canonical.
 `tapestry-gen/CLAUDE.md` keeps a pointer plus the two rules that cost the most
 when they are skipped. A PR that adds a source updates this file in the same
 commit.*
@@ -57,9 +63,10 @@ pipeline.** Answer this question before you write anything:
 
 Do these five steps in this order.
 
-1. **Read the host's published rate-limit or crawl-delay policy. Then set
-   `hostLimit()` in `src/mw.js`.** The default is 1 and stays 1 without a
-   published statement quoted at the call site.
+1. **Read the host's published rate-limit or crawl-delay policy. Then state
+   any widened limit in your descriptor's `hostLimits` (`src/partners.js`),
+   with the policy quoted beside it.** The default is 1 and stays 1 without a
+   published statement.
    > Why: every audit of a misbehaving partner found this step skipped.
    > `id.loc.gov` publishes `Crawl-delay: 3` and `api.dp.la` publishes that it
    > does not rate-limit — one earned a 4, the other a permanent 1.
@@ -101,29 +108,37 @@ Do these five steps in this order.
 | # | File | What to add |
 |---|---|---|
 | 1 | `src/<partner>.js` | The provider module: fetch, parse, entry shape |
-| 2 | `src/mw.js` | `hostLimit()` entry, with the policy quoted (see §1.1) |
+| 2 | `src/partners.js` | The descriptor: name, icon URL, hosts, friend entry, and the conditional flags below |
 | 3 | `src/rights.js` | Only if `rights.js` does not already parse the partner's rights vocabulary |
-| 4 | `src/gap.js` | The partner's hosts in `PARTNER_HOSTS`, for the visibility panel |
-| 5 | `src/emit-html.js` | The `SOURCE` entry — display name + icon |
+| 4 | `test/<partner>.test.js` | Pure tests over fixture responses |
+| 5 | `test/layering.test.js` | Your module's name in `PARTNERS` |
 | 6 | `src/icons.js` | **Regenerate**, do not hand-edit: `node tools/build-icons.mjs` |
-| 7 | `src/front-page.js` | The `FRIENDS` entry and its licence link |
-| 8 | `src/http.js` | `hotlinkUnsafe()` — see below. Aggregators only |
-| 9 | `test/<partner>.test.js` | Pure tests over fixture responses |
-| 10 | `CLAUDE.md` | The rationale, so the next person inherits the reasoning |
-| 11 | `test/layering.test.js` | Your module's name in `PARTNERS` |
-| 12 | **this file** | Anything you learned that contradicts it |
+| 7 | `CLAUDE.md` | The rationale, so the next person inherits the reasoning |
+| 8 | **this file** | Anything you learned that contradicts it |
+
+**On #2, the descriptor:** `gap.js` (visibility hosts), `emit-html.js`
+(name + icon), `front-page.js` (the friends list), `http.js` (hotlink
+safety) and `mw.js` (host limits) all derive from it. `test/partners.test.js`
+asserts every descriptor is complete, its icon bytes are committed, and the
+front page credits it.
+> Why the test exists: DigitalNZ's first commit deferred the friends entry
+> and the icon — the partner did the work and got none of the credit, and
+> nothing failed.
+
+Two descriptor flags are conditional:
+
+- **`hotlinkUnsafe: true`** — for *aggregators* whose thumbnails point at
+  many provider hosts. One predicate (`hotlinkUnsafe` in `src/http.js`)
+  decides for both renderers.
+  > Why: aggregator thumbnails resolve to hundreds of provider hosts, which
+  > rot and hotlink-block (2026-08-09: every DPLA card on a page rendered as
+  > text). A museum's own CDN is stable — hotlink those.
+- **`hostLimits`** — only with the published policy quoted beside it (§1.1).
 
 **On #6, icons:** the generator refuses anything that is not `data:image/…`.
 > Why: favicon endpoints lie. `openalex.org/favicon.ico` answers 200 with an
 > HTML error page, which shipped as a broken icon on every page that cites an
 > open paper. Other partners 429, 403 or 404 on their favicons.
-
-**On #8, `hotlinkUnsafe()`:** return true for *aggregators* whose thumbnails
-point at many provider hosts. The predicate decides for both renderers at
-once.
-> Why: aggregator thumbnails resolve to hundreds of provider hosts, which rot
-> and hotlink-block (2026-08-09: every DPLA card on a page rendered as text).
-> A museum's own CDN is stable — hotlink those.
 
 ### 2a. Direct-id shape — four more edits, in this order
 
@@ -275,18 +290,18 @@ hand-written case beats a fourth shape forced through §2a or §2b.**
 The pipeline works long before the page credits anyone, so "cards render" is
 not done.
 
-- [ ] `hostLimit()` set, with the published policy quoted at the call site
+- [ ] Any widened host limit stated in the descriptor, with the policy quoted
 - [ ] A real id and a bogus id resolved by hand, and the results differ
 - [ ] Rights mapped, or explicitly given words and no glyph
-- [ ] `SOURCE` entry, icon regenerated, **`FRIENDS` entry on the front page**
-- [ ] `PARTNER_HOSTS` entry, so the visibility panel counts the partner
+- [ ] Descriptor complete and icon regenerated — `test/partners.test.js` green
 - [ ] Search shape: ranked, folded, and corroborated
 - [ ] Tests over fixture responses, and `npm test` green
 - [ ] Rendered — see §5 — not reasoned about
 - [ ] CLAUDE.md rationale, and this file updated
 
-> Why the last four boxes: DigitalNZ's first commit deferred the friends entry
-> and the icon — the partner did the work and got none of the credit.
+> Why the credit box is a test now: DigitalNZ's first commit deferred the
+> friends entry and the icon — the partner did the work and got none of the
+> credit, and nothing failed. `test/partners.test.js` fails on exactly that.
 
 ---
 

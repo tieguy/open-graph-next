@@ -67,7 +67,9 @@ test('a partner module never imports another partner module', () => {
 // so DigitalNZ's heading lookup depended on DPLA's file, and LC authority code
 // lived in two places at once. Nothing broke; it just meant a reader had to
 // know both modules to know which of the two lookups they wanted.
-const SHARED = new Set(['relevance', 'rights', 'http', 'lc', 'batch', 'citations', 'html'])
+// `partners` is the data manifest — its own test asserts it imports nothing
+// at all, but it belongs in this set too: shared, and never partner code.
+const SHARED = new Set(['relevance', 'rights', 'http', 'lc', 'batch', 'citations', 'html', 'partners'])
 
 test('shared infrastructure never imports a partner module', () => {
   const offenders = []

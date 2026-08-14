@@ -21,6 +21,7 @@ import { join } from 'node:path'
 
 import Session from 'm3api/node.js'
 import { userAgent } from './wmf.js'
+import { PARTNERS } from './partners.js'
 
 /**
  * m3api's Node session routes every request through its own undici cookie
@@ -57,12 +58,8 @@ const WIKIMEDIA = /(^|\.)(wikipedia|wikimedia|wikidata|wiktionary|wikisource|wik
  * statement that permits it. Nothing goes in this map on the grounds that it
  * "seems fine" — the default is serial, and staying out of it costs only time.
  *
- * - `api.dp.la` — DPLA's developer policy (pro.dp.la/developers/policies):
- *   "Consistent with its philosophical presumption of openness, in general,
- *   the DPLA will not restrict or rate-limit the use of its API." The only
- *   reservation is against activity "denying or unduly degrading service to
- *   other API users", which a demo answering a few pageviews is not. This was
- *   the second-longest chain on a cold page: 21 requests, 3.9s serial.
+ * - `api.dp.la` → 4, stated in the partner manifest (src/partners.js, where
+ *   every widened entry now lives with its policy quoted beside it).
  *
  * Deliberately NOT here, with reasons, so nobody has to re-derive them:
  * - `id.loc.gov` publishes `Crawl-delay: 3` for `User-agent: *` under a notice
@@ -80,7 +77,9 @@ const WIKIMEDIA = /(^|\.)(wikipedia|wikimedia|wikidata|wiktionary|wikisource|wik
  * - Everything else — nobody has read their terms, and the safe answer to an
  *   unread policy is one.
  */
-const WIDENED = new Map([['api.dp.la', 4]])
+const WIDENED = new Map(
+  Object.values(PARTNERS).flatMap((p) => Object.entries(p.hostLimits ?? {})),
+)
 
 /** How many requests may be in flight at `host` at once. One unless argued otherwise. */
 export function hostLimit(host) {
