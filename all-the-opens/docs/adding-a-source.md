@@ -34,24 +34,6 @@ commit.*
 
 ---
 
-## 0. Pick the shape first
-
-There are three "shapes" of partner. **The wrong shape produces code that fights the
-pipeline.** Answer this question before you write anything:
-
-> Take a thing the article links — a painting, a species, a book. Does ONE
-> Wikidata property name the partner's own record of that thing?
->
-> - **Yes** → *direct-id shape* (§2a). The Met, the Art Institute of Chicago,
->   the Rijksmuseum, iNaturalist, GBIF, and IIIF (institutions publishing
->   image manifests under that shared standard).
-> - **No, but a property names something searchable** (a library subject
->   heading, the partner's own entity id) and what comes back is a SAMPLE of
->   a larger holding → *search shape* (§2b). DPLA, Europeana, DigitalNZ.
-> - **Neither** → *hand-written* (§2c). Read the precedents. Do not force it.
-
----
-
 ## 1. Investigate the partner before you write any code
 
 Answer these six questions first. Nothing is written yet — each answer lands
@@ -61,8 +43,9 @@ it.
 
 1. **Can you resolve one of the partner's records by hand, and does the
    server refuse an invented one?** An identifier here is the key the
-   partner uses for one record: a value of the Wikidata property from §0,
-   or a record id copied from a page on the partner's own site. Resolve a
+   partner uses for one record: a record id copied from a page on the
+   partner's own site, or the value of a Wikidata property that names the
+   partner's records (§2 starts by asking whether one exists). Resolve a
    real one by hand. Then change a few digits so that it names no record,
    and resolve that too. The invented one is the actual test. A host that
    answers both identically is refusing to talk to you, not reporting a
@@ -115,6 +98,20 @@ it.
 ---
 
 ## 2. The touchpoints
+
+**Pick the shape before you write anything.** There are three "shapes" of
+partner, and the wrong one produces code that fights the pipeline:
+
+> Take a thing the article links — a painting, a species, a book. Does ONE
+> Wikidata property name the partner's own record of that thing?
+>
+> - **Yes** → *direct-id shape* (§2a). The Met, the Art Institute of Chicago,
+>   the Rijksmuseum, iNaturalist, GBIF, and IIIF (institutions publishing
+>   image manifests under that shared standard).
+> - **No, but a property names something searchable** (a library subject
+>   heading, the partner's own entity id) and what comes back is a SAMPLE of
+>   a larger holding → *search shape* (§2b). DPLA, Europeana, DigitalNZ.
+> - **Neither** → *hand-written* (§2c). Read the precedents. Do not force it.
 
 The first thing written is the descriptor: choose the slug, create the
 `src/partners.js` entry, and fill it from what §1 found.
