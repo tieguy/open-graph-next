@@ -55,8 +55,12 @@ Answer these six questions first. Nothing is written yet — each answer lands
 in a specific place in §2, and some answers change the shape of the work or
 stop it.
 
-1. **Does the server distinguish a real identifier from a bogus one?**
-   Resolve both by hand. The bogus one is the actual test. A host that
+1. **Can you resolve one of the partner's records by hand, and does the
+   server refuse an invented one?** An identifier here is the key the
+   partner uses for one record: a value of the Wikidata property from §0,
+   or a record id copied from a page on the partner's own site. Resolve a
+   real one by hand. Then change a few digits so that it names no record,
+   and resolve that too. The invented one is the actual test. A host that
    answers both identically is refusing to talk to you, not reporting a
    broken link — record that in `reaching-open-collections.md` (this rule is
    stated at its head) and stop.
