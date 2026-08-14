@@ -860,6 +860,38 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   top-cited OPEN works directly (`openOnly` in `openAlexAuthorWorksUrl`); the
   printed denominator stays the unfiltered count, which is what the shelf's
   sentence promises.
+  **A retracted cited paper shelves under its own head — "Retracted
+  papers"** (2026-08-14). "The journal took this back" is the strongest
+  claim any card on the page makes about a cited work and exactly what the
+  Wikipedia article rarely shows, so it is named plainly rather than
+  scattered through the ordinary citation strip: retracted papers do not
+  compete for the section's `SCHOLARLY_PER_SECTION` slots and answer to no
+  cap (a page has none or one, not a shelf-full — and losing Wakefield to a
+  cap because a section also cites three sound open papers would drop the
+  page's best finding). **A closed retracted paper is the one closed paper
+  that IS a finding**: its card links the paper's own DOI, the credit says
+  `Retracted`, and the why line says no free copy was found — while the
+  visibility panel's "M are free to read" excludes it (`noFreeCopy`). The
+  fold links the retraction notice itself, and the ORCID shelf's stamping
+  in `discover.js` words the same fact for the subject's own papers.
+  **The flag prints only corroborated** (`retractionNotices` /
+  `noticeRetracts` in `src/scholarly.js`): the paper's own Crossref record
+  must carry a Retraction Watch-curated `updated-by` retraction entry
+  (`source: 'retraction-watch'` — publisher-deposited entries are refused),
+  AND the named notice's `update-to` must point back at the paper. Both
+  filters are measured, not cautious defaults: OpenAlex's most-cited
+  `is_retracted:true` work, the 2020 Lancet Commission dementia report, is
+  not retracted — a publisher-deposited entry ties it to another paper's
+  notice, and the bad link is symmetric, so the back-link test alone passes
+  it and the source filter is load-bearing; all four famous retractions
+  sampled (Wakefield, Surgisphere, STAP, the NEJM Mediterranean diet) pass
+  both. An expression of concern never prints as a retraction (Gautret's
+  hydroxychloroquine paper is the live case). An uncorroborated claim is
+  withheld — the scan rule's failure semantics. Cost: two cached
+  `api.crossref.org` requests per work OpenAlex flags, usually zero per
+  page. Acceptance fixture: the Lancet MMR vaccine-autism report article
+  renders Wakefield's paper on the shelf, notice link and all, and warm
+  re-renders stay byte-identical.
 - **Statements** (`src/statements.js`) — WDQS, split into a CHEAP half asked of
   everything and an EXPENSIVE half asked of almost nothing (2026-08-05). The
   split is the load-bearing part; see Query, then pick under Key Decisions.
@@ -1552,6 +1584,10 @@ costs only time; guessing wrong spends someone else's capacity.
   fanning out.
 - **`tile.openstreetmap.org` → 1** — the OSMF tile policy is explicit about
   heavy use, and it is four requests a page.
+- **`api.crossref.org` → 1**, the default — far under its published limits
+  (December 2025 policy: polite pool via `mailto`, 10 req/s for single-record
+  requests). Reached only to corroborate a retraction claim: two cached
+  requests per work OpenAlex flags, usually zero per page.
 - **Everything else → 1**, because nobody has read their terms.
 
 `peakConcurrency` in `src/mw.js` records the widest any host actually ran, so
@@ -1581,6 +1617,10 @@ the politeness claim is checkable after a run rather than merely asserted here.
   author-works lookup (`works.json` → `search.json`). Both are one-time cache
   misses at unchanged request counts, for the same reason: the field rides a
   request that was already being made.
+- **The OpenAlex `select` gained `is_retracted` on 2026-08-14** (both the
+  citation batches and the author-works query), so every cached OpenAlex
+  response is refetched once — same request count, the field rides requests
+  already being made, same shape as the DPLA field additions above.
 - **The OpenAlex batches are re-keyed by the 2026-08-14 pick change**, and this
   one is NOT at an unchanged request count. The `select` is untouched —
   `open_access` was always requested, `oa_status` was simply being dropped on

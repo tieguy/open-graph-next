@@ -501,6 +501,18 @@ ${friends}
     kind <a href="https://www.wikidata.org/wiki/Wikidata:CopyClear">CopyClear</a> and
     <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina">Dominio
     Público en América Latina</a> do on Wikidata; a demo can only keep the question visible.</p>
+    <h3>Open data increasingly arrives through priced pipes</h3>
+    <p>The catalog behind every paper card here — OpenAlex — is free to download and openly
+    licensed, but as of February 2026 the convenient way to read it, its API,
+    <a href="https://blog.openalex.org/openalex-api-new-features-and-usage-based-pricing/">requires
+    a key and bills by usage</a>. A demo like this fits comfortably inside the free daily
+    allowance, and charging for a service while keeping the data open is a defensible way to
+    keep the lights on. But expect more of this: running an API costs money that open licenses
+    do not pay, so even institutions with genuinely open data will increasingly meter or put
+    terms on the pipe — DigitalNZ&rsquo;s metadata API, non-commercial by default, is the same
+    problem in a different shape. Anything Wikipedia-scale built on lookups like these would
+    need formal agreements, or its own copies of the open datasets, rather than goodwill rate
+    limits.</p>
     <h3>Bot volume and caching</h3>
     <p>Because of the volume of Wikipedia, to be deployable at any sort of scale, this would
     likely need extensive caching and likely formal agreements with the other data providers.</p>

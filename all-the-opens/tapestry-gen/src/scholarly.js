@@ -3,12 +3,14 @@
 // Internet Archive route — the article states the identifier, and the
 // question is only whether the open ecosystem holds a readable copy.
 //
-// One partner answers the whole group: OpenAlex (open catalog, no key, its
-// `mailto` politeness parameter carrying the same operator contact as the
-// User-Agent). DOIs and PMIDs are batched through its works filter. arXiv
-// papers are not looked up at all: arXiv is open by construction, so a cited
-// arXiv id IS an open copy, and the card is built from the citation alone —
-// zero requests.
+// One partner answers the whole group: OpenAlex (open catalog, its `mailto`
+// politeness parameter carrying the same operator contact as the User-Agent).
+// It runs keyless on OpenAlex's grace tier — production use requires a free
+// API key since February 2026, and shipping one is LUI-163. DOIs and PMIDs
+// are batched through its works filter. arXiv papers are not looked up at
+// all: arXiv is open by construction, so a cited arXiv id IS an open copy,
+// and the card is built from the citation alone — zero requests. Crossref
+// enters only to corroborate retraction claims (see retractionNotices).
 
 import { templateParams } from './citations.js'
 import { chunk } from './batch.js'
@@ -64,7 +66,7 @@ export function openAlexUrl(filterField, values, contact) {
   return (
     'https://api.openalex.org/works?filter=' +
     encodeURIComponent(`${filterField}:${values.join('|')}`) +
-    '&select=id,doi,ids,title,publication_year,open_access,authorships,best_oa_location' +
+    '&select=id,doi,ids,title,publication_year,open_access,authorships,best_oa_location,is_retracted' +
     // A flat page far above the batch size (40), not values.length: OpenAlex
     // occasionally holds two work records for one DOI, and a page sized
     // exactly to the request would silently truncate the last match.
@@ -74,6 +76,90 @@ export function openAlexUrl(filterField, values, contact) {
 }
 
 const normDoi = (d) => d?.toLowerCase().replace(/^https:\/\/doi\.org\//, '') ?? null
+
+/**
+ * One Crossref record, for corroborating a retraction claim. Crossref's
+ * polite pool is entered by the same mailto etiquette OpenAlex uses (its
+ * December 2025 policy: 10 req/s for single-record requests in the polite
+ * pool; this code stays serial on the host regardless — hostLimit's default).
+ */
+export function crossrefWorkUrl(doi, contact) {
+  return `https://api.crossref.org/works/${encodeURIComponent(doi)}?mailto=${encodeURIComponent(contact)}`
+}
+
+/**
+ * The retraction-notice DOIs a paper's own Crossref record states — but
+ * only the entries the Retraction Watch database curated. Crossref carries
+ * two kinds of `updated-by` entry and they are not equally trustworthy,
+ * measured 2026-08-14: every famous retraction sampled (Wakefield,
+ * Surgisphere, STAP, the NEJM Mediterranean diet) carries a
+ * `source: 'retraction-watch'` retraction entry, while the one false
+ * positive found — the 2020 Lancet Commission dementia report, which is not
+ * retracted — carries only a `source: 'publisher'` entry, deposited onto
+ * the wrong record. Human curation is the signal; bulk publisher metadata
+ * is where the garbage lives. Only `type: 'retraction'` counts — an
+ * expression of concern or a correction is not a retraction, and the card
+ * must not use the stronger word (the Gautret hydroxychloroquine paper is
+ * the live case: OpenAlex flags it, its RW entry says only a concern).
+ */
+export function retractionNotices(body) {
+  const updates = body?.message?.['updated-by']
+  if (!Array.isArray(updates)) return []
+  return updates
+    .filter((u) => u?.type === 'retraction' && u?.source === 'retraction-watch' && u.DOI)
+    .map((u) => u.DOI)
+}
+
+/**
+ * Does the retraction NOTICE itself say it retracts this paper? The
+ * one-hop check — "the paper's record names a retraction notice" — is not
+ * enough, and the live case is why (found 2026-08-14): the 2020 Lancet
+ * Commission dementia report's Crossref record carries an `updated-by`
+ * retraction entry, but the notice it names is the retraction of a
+ * DIFFERENT paper ("Addressing hearing loss at all ages"), deposited onto
+ * the wrong record by the publisher — and OpenAlex's `is_retracted` flag
+ * inherits the error. A genuine notice states its target in `update-to`
+ * (the NEJM Mediterranean-diet retraction names its paper exactly), so the
+ * claim stands only when the notice points back.
+ */
+export function noticeRetracts(noticeBody, doi) {
+  const updates = noticeBody?.message?.['update-to']
+  return (
+    Array.isArray(updates) &&
+    updates.some((u) => u?.type === 'retraction' && normDoi(u.DOI) === normDoi(doi))
+  )
+}
+
+/** OpenAlex's retraction flag, corroborated in two hops: the paper's own
+ * Crossref record names its retraction notices, and a notice must name the
+ * paper back. Returns the confirming notice's DOI, or null — the caller
+ * writes both onto the work (`is_retracted`, `_retractionNotice`) so the
+ * card can link the notice itself. Failure semantics are the scan rule's
+ * ("a scan's word is checked before the shelf takes it"): a claim that
+ * cannot be corroborated is withheld, so a Crossref hiccup understates a
+ * card and never misstates one. Cost: two cached requests per work OpenAlex
+ * flags — near zero per page, since retracted cited papers are rare. */
+async function confirmedRetraction(work, contact) {
+  if (work.is_retracted !== true) return null
+  const doi = normDoi(work.doi)
+  if (!doi) return null
+  try {
+    const notices = retractionNotices(await getJson(crossrefWorkUrl(doi, contact)))
+    for (const notice of notices)
+      if (noticeRetracts(await getJson(crossrefWorkUrl(notice, contact)), doi)) return notice
+    return null
+  } catch (e) {
+    console.error(`  crossref retraction check failed (${doi}): ${e.message}`)
+    return null
+  }
+}
+
+/** Corroborate-and-stamp, shared by both lookups. */
+async function stampRetraction(work, contact) {
+  if (!work?.is_retracted) return
+  work._retractionNotice = await confirmedRetraction(work, contact)
+  work.is_retracted = Boolean(work._retractionNotice)
+}
 
 /**
   * OpenAlex license slugs as readers know them: cc-by → CC BY. Two slugs are
@@ -88,22 +174,76 @@ const licenseName = (slug) => {
   return slug.toUpperCase().replace(/^CC-/, 'CC ').replace(/-/g, ' ')
 }
 
-/** An OpenAlex work as a page entry — only when it is actually open. The
- * credit carries the open copy's license when OpenAlex knows it; "open
- * access" alone promises readability, not reuse, and the difference between
- * CC BY and merely free-to-read belongs on the card. */
+/** The retraction working, for the fold a retracted card's why line opens.
+ * It names the chain because "retracted" is the strongest claim any card on
+ * the page makes about a cited work, and a claim that strong owes the reader
+ * its source. (2026-08-14: Retraction Watch's database has fed Crossref's
+ * production API since January 2025, and OpenAlex reads it from there.) */
+const RETRACTION_TRACE =
+  'OpenAlex, the open catalog this card came from, marks this paper as ' +
+  'retracted, and we checked that claim against Crossref — the DOI ' +
+  'registry, where the Retraction Watch database files retraction notices. ' +
+  'Both agree: the paper carries a formal retraction.'
+
+/** An OpenAlex work as a page entry — when it is actually open, or when it
+ * is RETRACTED (the caller has corroborated the flag and put the notice DOI
+ * on `_retractionNotice`). A retracted paper keeps its card whether or not a
+ * free copy exists — the citation is in the article either way, and "the
+ * journal took this back" is exactly the kind of thing the Wikipedia article
+ * rarely shows. Every retracted card shelves under its own head, `Retracted
+ * papers`, so the page names the group plainly instead of scattering the
+ * strongest claim it makes through a strip of ordinary citations; the fold
+ * links the retraction notice itself. The credit on an open copy carries its
+ * license when OpenAlex knows it; "open access" alone promises readability,
+ * not reuse, and the difference belongs on the card. */
 export function openAlexEntry(work, via) {
   const oa = work.open_access ?? {}
-  if (!oa.is_oa || !oa.oa_url) return null
+  const retracted = work.is_retracted === true
   const first = work.authorships?.[0]?.author?.display_name ?? null
   const more = (work.authorships?.length ?? 0) > 1 ? ' et al.' : ''
-  const license = licenseName(work.best_oa_location?.license)
-  return {
+  const common = {
     source: 'openalex',
     title: work.title ?? 'Untitled work',
     description: [first ? `${first}${more}` : null, work.publication_year]
       .filter(Boolean)
       .join(' · '),
+    retracted,
+    ...(retracted && { trace: RETRACTION_TRACE }),
+    ...(retracted &&
+      work._retractionNotice && {
+        // The notice DOI came off the paper's own Crossref record and named
+        // this paper back, so the link is verified, never constructed.
+        fix: {
+          url: `https://doi.org/${work._retractionNotice}`,
+          label: 'Read the retraction notice',
+        },
+      }),
+    // The reason class, not the citation: per-item topics would split the
+    // strip into one-card carousels; what must not mix is cited work with
+    // the subject's own shelf (see subject topics in discover.js).
+    topic: retracted ? 'Retracted papers' : 'Cited in this section',
+    _via: via,
+  }
+  if (!oa.is_oa || !oa.oa_url) {
+    // A closed paper is not a finding — except a retracted one, which is the
+    // finding regardless of access: Wakefield's Lancet paper is closed, and a
+    // page about the fraud that shows nothing would be hiding what it knows.
+    // The card links the paper's own DOI (OpenAlex states it in doi.org
+    // form) and promises no free copy anywhere on it.
+    if (!retracted || !work.doi) return null
+    return {
+      ...common,
+      href: work.doi,
+      noFreeCopy: true,
+      attribution: { author: 'Retracted', license: null },
+      rights: { copy: licenseView(null) },
+      oa: { status: null },
+      why: `Cited here — and later retracted. We found no free copy to read`,
+    }
+  }
+  const license = licenseName(work.best_oa_location?.license)
+  return {
+    ...common,
     href: oa.oa_url,
     attribution: {
       author: ['Free to read', license].filter(Boolean).join(' · '),
@@ -121,12 +261,9 @@ export function openAlexEntry(work, via) {
     // future reader can see it; the rule against printing an inference as a
     // claim is why nothing does. See openRank in src/dedup.js.
     oa: { status: oa.oa_status ?? null },
-    why: `Cited here — and there is a copy you can read for free`,
-    // The reason class, not the citation: per-item topics would split the
-    // strip into one-card carousels; what must not mix is cited work with
-    // the subject's own shelf (see subject topics in discover.js).
-    topic: 'Cited in this section',
-    _via: via,
+    why: retracted
+      ? `Cited here — and later retracted. There is still a copy you can read for free`
+      : `Cited here — and there is a copy you can read for free`,
   }
 }
 
@@ -171,6 +308,7 @@ export async function openAlexLookups(cites, { contact }) {
         const work = results.find((w) =>
           field === 'doi' ? normDoi(w.doi) === normDoi(cite.doi) : w.ids?.pmid?.endsWith(`/${cite.pmid}`),
         )
+        await stampRetraction(work, contact)
         const entry = work && openAlexEntry(work, field)
         if (entry) hits.set(cite, entry)
       }
@@ -195,7 +333,7 @@ export function openAlexAuthorWorksUrl(orcid, contact, { openOnly = false } = {}
     encodeURIComponent(`authorships.author.orcid:${orcid}${openOnly ? ',open_access.is_oa:true' : ''}`) +
     '&sort=cited_by_count:desc' +
     '&per-page=25' +
-    '&select=id,doi,title,publication_year,open_access,authorships,best_oa_location' +
+    '&select=id,doi,title,publication_year,open_access,authorships,best_oa_location,is_retracted' +
     `&mailto=${encodeURIComponent(contact)}`
   )
 }
@@ -222,15 +360,20 @@ export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
       console.error(`  openalex author follow-up failed (${orcid}): ${e.message}`)
     }
   }
+  const shown = open.slice(0, cap)
+  for (const w of shown) await stampRetraction(w, contact)
   return {
     total: body.meta?.count ?? open.length,
-    entries: open.slice(0, cap).map((w) => {
+    entries: shown.map((w) => {
       const oa = w.open_access
       const license = licenseName(w.best_oa_location?.license)
       return {
         source: 'openalex',
         title: w.title ?? 'Untitled work',
         description: [w.publication_year, 'open access'].filter(Boolean).join(' · '),
+        // The caller stamps why/trace over these entries (see discover.js),
+        // so the shelf carries the fact and the stamping site words it.
+        retracted: w.is_retracted === true,
         href: oa.oa_url,
         attribution: {
           author: ['Free to read', license].filter(Boolean).join(' · '),

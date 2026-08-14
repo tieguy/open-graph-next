@@ -1167,15 +1167,33 @@ export async function discover(page, { emit = async () => {} } = {}) {
         return true
       })
       const kept = claimCitations(
-        preferOpen(unit.scholarly, entryOf),
+        preferOpen(unit.scholarly.filter((c) => !entryOf(c)?.retracted), entryOf),
         carded,
         SCHOLARLY_PER_SECTION,
         scholarKey,
       )
-      stats.anchorsScholar += kept.length
+      // Retracted papers neither compete for the section's slots nor answer
+      // to its cap: they shelve under their own head ('Retracted papers' in
+      // src/scholarly.js), and losing Wakefield to a cap because the section
+      // also cites three sound open papers would silently drop the strongest
+      // claim the page can make. Uncapped is safe because corroborated
+      // retractions are rare — a page has none or one, not a shelf-full.
+      // Same `carded` set, so a paper cited in eight sections says it once.
+      const retractedHere = claimCitations(
+        unit.scholarly.filter((c) => entryOf(c)?.retracted),
+        carded,
+        Infinity,
+        scholarKey,
+      )
+      stats.anchorsScholar += kept.length + retractedHere.length
       picks.set(unit, {
-        entries: kept.map(entryOf),
-        papers: { total: mine.length, open: mine.filter((c) => entryOf(c)).length },
+        entries: [...kept.map(entryOf), ...retractedHere.map(entryOf)],
+        // `open` means READABLE: a closed retracted paper has a card and no
+        // free copy, and the panel's "M are free to read" must not count it.
+        papers: {
+          total: mine.length,
+          open: mine.filter((c) => entryOf(c) && !entryOf(c).noFreeCopy).length,
+        },
       })
     }
     return picks
@@ -1314,12 +1332,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
       e.fix = fixOn('P648')
     }
     for (const e of scholarship.entries) {
-      e.why = `A paper by ${page}, free to read`
+      e.why = e.retracted
+        ? `A paper by ${page} — later retracted, still free to read`
+        : `A paper by ${page}, free to read`
       e.topic = `By ${page}`
       e.standing = 'subject-work'
       e.trace =
         `Wikidata records an ORCID iD (P496) for ${page} — the number researchers use to keep ` +
-        `their own name attached to their work. OpenAlex lists this paper under it.`
+        `their own name attached to their work. OpenAlex lists this paper under it.` +
+        (e.retracted
+          ? ` OpenAlex also marks the paper as retracted, and Crossref — the DOI registry, ` +
+            `where the Retraction Watch database files retraction notices — confirms it.`
+          : ``)
       e.fix = fixOn('P496')
     }
     for (const e of artworks.entries) {

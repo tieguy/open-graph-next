@@ -3,6 +3,9 @@ import assert from 'node:assert/strict'
 
 import {
   arxivEntry,
+  crossrefWorkUrl,
+  noticeRetracts,
+  retractionNotices,
   openAlexEntry,
   openAlexUrl,
   openAlexAuthorWorksUrl,
@@ -89,6 +92,96 @@ test('openAlexUrl batches values and carries the polite mailto', () => {
   const url = openAlexUrl('doi', ['10.1/a', '10.2/b'], 'op@example.test')
   assert.match(url, /filter=doi%3A10\.1%2Fa%7C10\.2%2Fb/)
   assert.match(url, /mailto=op%40example\.test/)
+})
+
+test('crossrefWorkUrl addresses one record and carries the polite mailto', () => {
+  const url = crossrefWorkUrl('10.1056/nejmoa1200303', 'op@example.test')
+  assert.match(url, /^https:\/\/api\.crossref\.org\/works\/10\.1056%2Fnejmoa1200303\?/)
+  assert.match(url, /mailto=op%40example\.test/)
+})
+
+test('retractionNotices takes only Retraction Watch-curated retraction entries', () => {
+  const wrap = (updates) => ({ message: { 'updated-by': updates } })
+  const rw = { type: 'retraction', source: 'retraction-watch', DOI: '10.1/r' }
+  assert.deepEqual(retractionNotices(wrap([rw, { type: 'erratum', source: 'retraction-watch', DOI: '10.1/e' }])), ['10.1/r'])
+  // A publisher-deposited entry is where the measured garbage lives (the
+  // dementia-report shape), and is not enough on its own.
+  assert.deepEqual(retractionNotices(wrap([{ type: 'retraction', source: 'publisher', DOI: '10.1/x' }])), [])
+  // An expression of concern is not a retraction, and the card must not say it is.
+  assert.deepEqual(retractionNotices(wrap([{ type: 'expression_of_concern', source: 'retraction-watch', DOI: '10.1/c' }])), [])
+  assert.deepEqual(retractionNotices(wrap([])), [])
+  assert.deepEqual(retractionNotices({ message: {} }), [])
+  assert.deepEqual(retractionNotices({}), [])
+})
+
+test('noticeRetracts requires the notice itself to name the paper', () => {
+  const notice = { message: { 'update-to': [{ type: 'retraction', DOI: '10.1056/NEJMoa1200303' }] } }
+  assert.equal(noticeRetracts(notice, '10.1056/nejmoa1200303'), true)
+  // The Lancet dementia-report shape: a notice deposited onto the wrong
+  // paper's record names OTHER DOIs, and must not retract this one.
+  assert.equal(noticeRetracts(notice, '10.1016/s0140-6736(20)30367-6'), false)
+  assert.equal(noticeRetracts({ message: {} }, '10.1/x'), false)
+  assert.equal(noticeRetracts({}, '10.1/x'), false)
+})
+
+test('both OpenAlex queries ask for the retraction flag', () => {
+  assert.match(openAlexUrl('doi', ['10.1/a'], 'op@example.test'), /is_retracted/)
+  assert.match(openAlexAuthorWorksUrl('0000-0002-1825-0097', 'op@example.test'), /is_retracted/)
+})
+
+test('a retracted paper is shelved under its own title, open or not', () => {
+  const base = {
+    title: 'T',
+    doi: 'https://doi.org/10.1056/nejmoa1200303',
+    publication_year: 2013,
+    is_retracted: true,
+    _retractionNotice: '10.1056/nejmc1806491',
+    authorships: [{ author: { display_name: 'A. Author' } }],
+  }
+  const open = openAlexEntry(
+    { ...base, open_access: { is_oa: true, oa_url: 'https://x.test/pdf' } },
+    'doi',
+  )
+  assert.equal(open.topic, 'Retracted papers')
+  assert.equal(open.href, 'https://x.test/pdf')
+  assert.equal(open.fix.url, 'https://doi.org/10.1056/nejmc1806491')
+
+  // A closed retracted paper is the one closed paper that IS a finding: the
+  // card exists, links the paper's own DOI, and promises no free copy.
+  const closed = openAlexEntry({ ...base, open_access: { is_oa: false } }, 'doi')
+  assert.equal(closed.topic, 'Retracted papers')
+  assert.equal(closed.retracted, true)
+  assert.equal(closed.noFreeCopy, true)
+  assert.equal(closed.href, 'https://doi.org/10.1056/nejmoa1200303')
+  assert.match(closed.why, /retracted/i)
+  assert.match(closed.trace, /Retraction Watch/)
+  assert.equal(closed.fix.url, 'https://doi.org/10.1056/nejmc1806491')
+  assert.doesNotMatch(closed.attribution.author, /free to read/i)
+
+  // A closed paper that is NOT retracted is still not a finding.
+  assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
+})
+
+test('a retracted open work says so, and says where the claim comes from', () => {
+  const work = {
+    title: 'T',
+    publication_year: 1998,
+    open_access: { is_oa: true, oa_url: 'https://x.test/pdf' },
+    authorships: [{ author: { display_name: 'A. Author' } }],
+  }
+  const sound = openAlexEntry(work, 'doi')
+  assert.equal(sound.retracted, false)
+  assert.equal(sound.why, 'Cited here — and there is a copy you can read for free')
+  assert.equal(sound.trace, undefined)
+
+  const retracted = openAlexEntry({ ...work, is_retracted: true }, 'doi')
+  assert.equal(retracted.retracted, true)
+  assert.match(retracted.why, /retracted/i)
+  // Still a card: the open copy is real, and the retraction is the finding.
+  assert.equal(retracted.href, 'https://x.test/pdf')
+  // The claim's source is stated, in the fold the why line opens.
+  assert.match(retracted.trace, /Retraction Watch/)
+  assert.match(retracted.trace, /Crossref/)
 })
 
 // ---- statements ---------------------------------------------------------
