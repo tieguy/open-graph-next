@@ -24,7 +24,7 @@ it holds for an anchor. The results render as **cards**, grouped into
 per-partner **shelves**. The **visibility panel** measures how much of what
 the page found the Wikipedia article itself shows.
 
-**Adding one source touches five code files, one generated file, and two
+**Adding one source touches six code files, one generated file, and two
 docs.** It is recommended using an LLM to partner with you on this.
 
 *Housekeeping: last verified 2026-08-14. This file is canonical.
@@ -55,8 +55,8 @@ Do these five steps in this order.
 
 1. **Read the host's published rate-limit or crawl-delay policy. Then state
    any widened limit in your descriptor's `hostLimits` (`src/partners.js`),
-   with the policy quoted beside it.** The default is 1 and stays 1 without a
-   published statement.
+   with the policy quoted beside it.** The worked descriptor in §2 shows the
+   shape. The default is 1 and stays 1 without a published statement.
    > Why: every audit of a misbehaving partner found this step skipped.
    > `id.loc.gov` publishes `Crawl-delay: 3` and `api.dp.la` publishes that it
    > does not rate-limit — one earned a 4, the other a permanent 1.
@@ -98,13 +98,14 @@ Do these five steps in this order.
 | # | File | What to add |
 |---|---|---|
 | 1 | `src/<partner>.js` | The provider module: fetch, parse, entry shape |
-| 2 | `src/partners.js` | The descriptor: name, icon URL, hosts, friend entry, and the conditional flags below |
-| 3 | `src/rights.js` | Only if `rights.js` does not already parse the partner's rights vocabulary |
-| 4 | `test/<partner>.test.js` | Pure tests over fixture responses |
-| 5 | `test/layering.test.js` | Your module's name in `PARTNERS` |
-| 6 | `src/icons.js` | **Regenerate**, do not hand-edit: `node tools/build-icons.mjs` |
-| 7 | `CLAUDE.md` | The rationale, so the next person inherits the reasoning |
-| 8 | **this file** | Anything you learned that contradicts it |
+| 2 | `src/partners.js` | The descriptor — the worked example below |
+| 3 | `src/front-page.js` | Your slug in one `FRIEND_GROUPS` list (which group is editorial) |
+| 4 | `src/rights.js` | Only if `rights.js` does not already parse the partner's rights vocabulary |
+| 5 | `test/<partner>.test.js` | Pure tests over fixture responses |
+| 6 | `test/layering.test.js` | Your module's name in `PARTNERS` |
+| 7 | `src/icons.js` | **Regenerate**, do not hand-edit: `node tools/build-icons.mjs` |
+| 8 | `CLAUDE.md` | The rationale, so the next person inherits the reasoning |
+| 9 | **this file** | Anything you learned that contradicts it |
 
 **On #2, the descriptor:** `gap.js` (visibility hosts), `emit-html.js`
 (name + icon), `front-page.js` (the friends list), `http.js` (hotlink
@@ -115,17 +116,46 @@ front page credits it.
 > and the icon — the partner did the work and got none of the credit, and
 > nothing failed.
 
-Two descriptor flags are conditional:
+The key you choose is the partner's **slug**. Every entry your fetcher
+returns must set `source` to this exact string — that is how the renderer
+finds the name and icon, the visibility panel tallies the partner, and the
+hotlink predicate recognizes it. Lowercase, underscores (`free_law`,
+`internet_archive`).
 
-- **`hotlinkUnsafe: true`** — for *aggregators* whose thumbnails point at
-  many provider hosts. One predicate (`hotlinkUnsafe` in `src/http.js`)
-  decides for both renderers.
-  > Why: aggregator thumbnails resolve to hundreds of provider hosts, which
-  > rot and hotlink-block (2026-08-09: every DPLA card on a page rendered as
-  > text). A museum's own CDN is stable — hotlink those.
-- **`hostLimits`** — only with the published policy quoted beside it (§1.1).
+A complete descriptor, with both conditional flags:
 
-**On #6, icons:** the generator refuses anything that is not `data:image/…`.
+```js
+example_org: {
+  name: 'Example Collections', // the legend, credit bars, share cards
+  icon: 'https://example.org/favicon.ico', // then regenerate src/icons.js
+  hosts: ['example.org'], // the visibility panel; subdomains match
+  friend: {
+    gives: 'What it contributes to a page, and through which anchor.',
+    terms: 'Its openness, in our words.',
+    cite: 'https://example.org/terms', // its own statement; omit if unread
+  },
+  // Conditional — aggregators whose thumbnails point at many provider
+  // hosts. One predicate (`hotlinkUnsafe` in src/http.js) decides for both
+  // renderers.
+  hotlinkUnsafe: true,
+  // Conditional — only with the published policy quoted here. Example.org's
+  // API docs (example.org/api#limits): "clients may make up to four
+  // concurrent requests." No quote, no entry: the default is 1.
+  hostLimits: { 'api.example.org': 4 },
+},
+```
+
+**The two host fields answer different questions and match differently.**
+`hostLimits` keys are the exact hostname your fetcher's request URLs carry —
+the per-host queue is keyed by `new URL(url).host`, matched exactly, so
+`api.example.org` and `example.org` are separate queues. `hosts` matches
+subdomains, because it asks whether the article links the partner anywhere.
+
+> Why `hotlinkUnsafe` exists: aggregator thumbnails resolve to hundreds of
+> provider hosts, which rot and hotlink-block (2026-08-09: every DPLA card
+> on a page rendered as text). A museum's own CDN is stable — hotlink those.
+
+**On #7, icons:** the generator refuses anything that is not `data:image/…`.
 > Why: favicon endpoints lie. `openalex.org/favicon.ico` answers 200 with an
 > HTML error page, which shipped as a broken icon on every page that cites an
 > open paper. Other partners 429, 403 or 404 on their favicons.
