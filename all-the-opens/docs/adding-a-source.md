@@ -13,8 +13,7 @@ person — and it assumes the code is open beside it.
 
 **How to read it:** every step is an instruction. An indented `Why:` line
 under a rule states the reason behind the rule. If a `Why:` stops being
-true, we should correct the rule — that has happened twice already (eg §3's
-CVMA entry). All code paths are relative to
+true, we should correct the rule. All code paths are relative to
 [`../tapestry-gen/`](../tapestry-gen/). They name **symbols**, not line
 numbers, because line numbers drift.
 
@@ -267,8 +266,7 @@ hand-written case beats a fourth shape forced through §2a or §2b.**
   > Why: CVMA GB's 28,135 photographs match zero Wikidata items, and a real
   > P31 modeling error looks like the cause. It does not bind — the UK has
   > only 87 stained-glass-window items, and only 84 windows anywhere state
-  > "stained glass" as their material. Verified 2026-08-11 (LUI-147). The
-  > verification overturned this bullet's previous diagnosis.
+  > "stained glass" as their material. Verified 2026-08-11 (LUI-147).
 - **Layer discipline: pipeline modules must not import the renderer's
   types.**
   > Why: `discover.js` once imported `emit-html.js`'s `SOURCE` map. The fix
