@@ -49,42 +49,55 @@ pipeline.** Answer this question before you write anything:
 
 ---
 
-## 1. Before you write any fetch code
+## 1. Investigate the partner before you write any code
 
-Do these five steps in this order.
+Answer these six questions first. Nothing is written yet — each answer lands
+in a specific place in §2, and some answers change the shape of the work or
+stop it.
 
-1. **Read the host's published rate-limit or crawl-delay policy. Then state
-   any widened limit in your descriptor's `hostLimits` (`src/partners.js`),
-   with the policy quoted beside it.** The worked descriptor in §2 shows the
-   shape. The default is 1 and stays 1 without a published statement.
-   > Why: every audit of a misbehaving partner found this step skipped.
+1. **Does the server distinguish a real identifier from a bogus one?**
+   Resolve both by hand. The bogus one is the actual test. A host that
+   answers both identically is refusing to talk to you, not reporting a
+   broken link — record that in `reaching-open-collections.md` (this rule is
+   stated at its head) and stop.
+   > Why: shipped cards once used a URL shape that does not exist, and four
+   > partners answer a real id and a bogus one identically under bot
+   > mitigation — without the control, 431 healthy DPLA links read as dead.
+
+2. **What terms cover the API and its metadata?** Read them. A
+   non-commercial condition anywhere on the pipe is a named blocker, never a
+   box ticked — it goes on the front page's challenges list and shapes the
+   friend entry's `terms` line.
+   > Why: the goal is adoption by Wikipedia or something Wikipedia-like, so
+   > anyone must be able to reuse the result, commercially included
+   > (VALUES.md). DigitalNZ's API metadata is NC by default; the demo runs
+   > inside those terms, and the page says so rather than calling it fine.
+
+3. **What does the host publish about rate limits or crawl delay?** The
+   answer becomes the descriptor's `hostLimits` entry, with the policy
+   quoted (the worked descriptor in §2 shows the shape). No published
+   statement means the default of 1.
+   > Why: every audit of a misbehaving partner found this question skipped.
    > `id.loc.gov` publishes `Crawl-delay: 3` and `api.dp.la` publishes that it
    > does not rate-limit — one earned a 4, the other a permanent 1.
 
-2. **Resolve a real identifier AND a deliberately bogus one, by hand, before
-   you ship.** The bogus one is the actual test: it proves the server
-   distinguishes them.
-   > Why: shipped cards once used a URL shape that does not exist, and four
-   > partners answer a real id and a bogus one identically under bot
-   > mitigation — without the control, 431 healthy DPLA links read as dead
-   > (`reaching-open-collections.md` states this rule at its head).
-
-3. **Check what the API exposes for rights.** Compare it against the
+4. **What does the API expose for rights?** Compare it against the
    vocabulary `ccFromUri` / `ccFromSlug` / `ccFromLabel` already read in
-   `src/rights.js`. Add a row to the Partner audit table in CLAUDE.md, mark or
-   no mark.
+   `src/rights.js`. The answer decides the rights mapping, and adds a row to
+   the Partner audit table in CLAUDE.md — mark or no mark.
    > Why: a mark is never a guess. DigitalNZ publishes capability words, not a
    > license — a CC0 glyph there would assert a permission nobody granted.
 
-4. **Decide keyed vs keyless.** Prefer keyless: the site must run for anyone
-   who clones the repo. If the API requires a key, the lookup skips silently
-   without one (`envKey`). State that degradation. Set `keyOptional: true`
-   only if the API *verifiably* answers keyless.
+5. **Keyed or keyless?** Prefer keyless: the site must run for anyone who
+   clones the repo. The answer becomes `envKey` (and `keyOptional: true`
+   only if the API *verifiably* answers keyless) in the §2b spec; a required
+   key's silent skip gets stated.
    > Why: keyless-skip is graceful degradation, never a policy against free
    > keys — DPLA, Europeana, Smithsonian and DigitalNZ all run keyed in
    > production.
 
-5. **Check `robots.txt` before you fetch any asset.**
+6. **What does `robots.txt` allow?** Check it before planning to fetch any
+   asset.
    > Why: an open license does not mean an open crawl — HathiTrust serves
    > public-domain scans keylessly and disallows `/cgi/` to everyone but
    > Twitterbot.
@@ -92,6 +105,9 @@ Do these five steps in this order.
 ---
 
 ## 2. The touchpoints
+
+The first thing written is the descriptor: choose the slug, create the
+`src/partners.js` entry, and fill it from what §1 found.
 
 ### Always, whatever the shape
 
