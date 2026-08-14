@@ -38,8 +38,8 @@ const SHOWCASE = [
   {
     domain: 'Spaceflight',
     title: 'Apollo 11',
-    adds: 'books from the Internet Archive',
-    friends: ['openlibrary', 'smithsonian', 'dpla', 'digitalnz', 'openstreetmap'],
+    adds: '3D models from the Smithsonian',
+    friends: ['openlibrary', 'dpla', 'digitalnz', 'openstreetmap'],
   },
   {
     domain: 'Law',
@@ -466,6 +466,7 @@ ${cards}
 </div></header>
 <main>
   <section class="section faq"><div class="wrap">
+    <h2>Frequently asked questions</h2>
     <ul class="qindex">
       <li><a href="#why">Why did you build this?</a></li>
       <li><a href="#how">How does it work?</a></li>
