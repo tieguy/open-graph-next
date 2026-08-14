@@ -195,6 +195,23 @@ test('the warmer and the front page read the same showcase list', () => {
   assert.equal(showcaseTitles().length, (html.match(/<a class="show"/g) ?? []).length)
 })
 
+test('every logo on a showcase card names a friend this page lists', () => {
+  // The "other friends" rows are hand-written (see SHOWCASE) and nothing here
+  // can check that a partner really answers for that article. What this does
+  // check is the failure a rename would cause: a slug with no friend behind it
+  // renders a blank square with no background rule and no accessible name, and
+  // it would ship looking like a broken image rather than like an error.
+  const html = frontPage({})
+  const listed = new Set(
+    [...html.matchAll(/<p class="who"><span class="fav fav-([a-z_]+)"/g)].map((m) => m[1]),
+  )
+  const onCards = new Set(
+    [...html.matchAll(/<span class="fav fav-([a-z_]+)" title=/g)].map((m) => m[1]),
+  )
+  assert.ok(onCards.size > 0, 'the showcase cards carry logos')
+  for (const slug of onCards) assert.ok(listed.has(slug), `${slug} is one of the friends listed`)
+})
+
 // ---- the plate: what stands in for a picture that does not exist -----------
 //
 // 229 of 435 DPLA cards on the six showcase pages have no thumbnail, and on

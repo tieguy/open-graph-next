@@ -37,8 +37,10 @@ import {
   OUTLINE_DEPTH,
 } from './wikipedia.js'
 import {
+  applyAccess,
   bibliographyIdentifiers,
   citationCoverage,
+  citationKey,
   resolveShortCites,
   sectionCitations,
   templateParams,
@@ -53,7 +55,12 @@ import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
 import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
-import { openAlexAuthorWorks, openAlexLookups, scholarlyIdentifiers } from './scholarly.js'
+import {
+  openAlexAuthorWorks,
+  openAlexLookups,
+  scholarKey,
+  scholarlyIdentifiers,
+} from './scholarly.js'
 import {
   aicEntry,
   metEntry,
@@ -65,7 +72,14 @@ import {
 import { iiifEntry } from './iiif.js'
 import { rijksEntry } from './rijks.js'
 import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
-import { claimAnchors, claimCitations, preferRelated, preferYielding, subjectAnchors } from './dedup.js'
+import {
+  claimAnchors,
+  claimCitations,
+  preferOpen,
+  preferRelated,
+  preferYielding,
+  subjectAnchors,
+} from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
 
@@ -779,9 +793,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const infobox = extractInfobox(article.html)
 
   const units = []
-  // One page-wide ownership set for cited works, threaded through the loop
-  // below in article order — see the claimCitations comment there.
-  const citedOnPage = new Set()
+  // The page-wide COUNTER for cited works, threaded through the loop below in
+  // article order: each distinct work is tallied once, in the band that cites
+  // it first. Before 2026-08-14 the visibility panel summed every band's full
+  // candidate list, so a bibliography book cited from eight sections counted
+  // eight times — Apollo 11's panel claimed "cites 216 works" for an article
+  // citing 173 distinct ones, and the "you can read" numerator inflated the
+  // same way. claimCitations with no cap IS the first-occurrence filter, null
+  // keys kept and unclaimed.
+  const countedOnPage = new Set()
   for (const s of [{ index: '0', title: page }, ...sections]) {
     // stopAt: a band holds only its OWN text. Every outline section becomes a
     // band, so a parent that kept its children's text (parse&section
@@ -808,38 +828,32 @@ export async function discover(page, { emit = async () => {} } = {}) {
       ...sectionCitations(wikitext),
       ...shortCites.map((w) => ({ kind: 'book', ...w })),
     ]
-    // A cited WORK belongs to the first section that cites it, page-wide
-    // (claimCitations, 2026-08-09): Apollo 11 cites Carrying the Fire in
-    // eight sections through the bibliography, and once singles floated,
-    // the same cover marched down the whole page's margin. Decided HERE, in
-    // the units loop, because this loop runs in article order before any
-    // lookup — band completion order can never change who shows the book.
-    // The lede claims first because it is first in this loop, the same
-    // privilege claimAnchors seeds it. Footnotes are untouched: every
-    // section's references still carry their own borrow links; only the
-    // CARD belongs to one section.
-    const identified = claimCitations(
-      dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites]),
-      citedOnPage,
-      CITES_PER_SECTION,
-      (c) => c.isbn ?? c.oclc ?? c.lccn ?? c.title,
-    )
-    const scholarly = claimCitations(
-      scholarlyIdentifiers(wikitext),
-      citedOnPage,
-      SCHOLARLY_PER_SECTION,
-      (c) => c.doi ?? c.pmid ?? c.arxiv,
-    )
-    stats.anchorsCite += identified.length
-    stats.viaShortCite += identified.filter((c) => shortCites.includes(c)).length
-    stats.anchorsScholar += scholarly.length
+    // NEITHER citation family is claimed here any more (papers 2026-08-14
+    // morning, books same day): a card exists only if the open ecosystem
+    // holds a copy, and that is knowable before the pick rather than after
+    // it. The whole section's identifiers go to the lookups, and the picks —
+    // `scholarPickedPromise` for papers, `iaPickedPromise` for books — claim
+    // in article order once the lookups have answered, so a scanless book or
+    // a paywalled paper no longer spends a slot rendering nothing. See
+    // "Query, then pick" in CLAUDE.md. The 2026-08-09 rule survives inside
+    // those picks: a cited WORK still belongs to the first section that
+    // cites it, page-wide, and footnotes are untouched — every section's
+    // references carry their own borrow links; only the CARD belongs to one
+    // section.
+    const identified = dedupeIdentifiers([...citationIdentifiers(wikitext), ...shortCites])
+    const scholarly = scholarlyIdentifiers(wikitext)
     units.push({
       index: s.index,
       title: s.title,
       blocks,
       footnotes: footnotesFor(blocks, noteMap, bandId),
       railCandidates,
+      // The band's share of the page tally: its rail, minus works an earlier
+      // band already counted. Decided here because this loop runs in article
+      // order; see countedOnPage above.
+      counted: claimCitations(railCandidates, countedOnPage, Infinity, citationKey),
       identified,
+      shortCites,
       scholarly,
       linkCandidates: proseLinks(html).slice(0, 24),
     })
@@ -1024,12 +1038,66 @@ export async function discover(page, { emit = async () => {} } = {}) {
     entityLabels([...[...picked.values()].flat(), ...lcBearing(partners)].filter(Boolean)),
   )
 
+  // Each batch asks about one object per identifier: sections cite the same
+  // bibliography entry as the same shared object, and a direct re-cite is a
+  // fresh object with the same key — either way one answer serves them all,
+  // and the pick below reads hits by key, not by object.
+  const distinctCites = (cites) => {
+    const seen = new Set()
+    return cites.filter((c) => {
+      const k = citationKey(c)
+      if (!k || seen.has(k)) return false
+      seen.add(k)
+      return true
+    })
+  }
   const [ledeIaPromise, iaPromise] = ledeFirst(
     'ia batch',
-    async () => iaLookups(lede?.identified ?? []),
-    async () => iaLookups(others.flatMap((u) => u.identified)),
+    async () => iaLookups(distinctCites(lede?.identified ?? [])),
+    async () => iaLookups(distinctCites(others.flatMap((u) => u.identified))),
     (a, b) => new Map([...b, ...a]),
   )
+  /**
+   * Query, then pick — the books twin of `scholarPickedPromise` below
+   * (2026-08-14). The section used to claim its three book identifiers on
+   * document order in the units loop, then ask the Internet Archive which
+   * were scanned, so an unscanned book spent a slot and rendered nothing
+   * (measured: Apollo 11 held scans for 7 of its 29 identified works and the
+   * blind cap cost one of the 7 its card). Now only books IA actually holds
+   * compete for the section's slots, article order unbroken — no license
+   * tiers here, a scan is a scan — and the 2026-08-09 ownership rule is
+   * applied at the same moment: only what a section keeps is claimed.
+   *
+   * The lede picks off its own batch alone — it is unit 0, so nothing
+   * upstream can have claimed before it, the same argument as
+   * `ledePickedPromise` — which preserves lede-first: its cards need never
+   * wait on the page-wide batch. The page-wide pick then seeds the lede's
+   * claims and walks the other units in article order, so band completion
+   * order still cannot move a book between sections.
+   */
+  const pickIaCards = (us, hits, claimed) => {
+    const byKey = new Map()
+    for (const [cite, entry] of hits) byKey.set(citationKey(cite), entry)
+    const picks = new Map()
+    for (const unit of us) {
+      const kept = claimCitations(
+        unit.identified.filter((c) => byKey.has(citationKey(c))),
+        claimed,
+        CITES_PER_SECTION,
+        citationKey,
+      )
+      stats.anchorsCite += kept.length
+      stats.viaShortCite += kept.filter((c) => unit.shortCites.includes(c)).length
+      picks.set(unit, { cites: kept, hits: new Map(kept.map((c) => [c, byKey.get(citationKey(c))])) })
+    }
+    return { picks, claimed }
+  }
+  const ledeIaPickedPromise = ledeIaPromise.then((hits) => pickIaCards(lede ? [lede] : [], hits, new Set()))
+  const ledeIaPicksPromise = ledeIaPickedPromise.then((r) => r.picks)
+  const iaPickedPromise = Promise.all([ledeIaPickedPromise, iaPromise]).then(([l, hits]) => {
+    const r = pickIaCards(others, hits, new Set(l.claimed))
+    return new Map([...l.picks, ...r.picks])
+  })
   const isbnsOf = (us) => us.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean)
   const [ledeVolumesPromise, volumesPromise] = ledeFirst(
     'openlibrary volumes',
@@ -1040,10 +1108,78 @@ export async function discover(page, { emit = async () => {} } = {}) {
       unchecked: new Set([...b.unchecked, ...a.unchecked]),
     }),
   )
+  // Every distinct paper the article cites, asked about ONCE. The lookup used
+  // to be handed the three-per-section survivors of a blind pick; it is handed
+  // the whole page now, which is what lets `preferOpen` choose among papers
+  // that can actually become cards. Deduplicated by identifier here rather
+  // than by the claim, because the same DOI in eight sections is one work and
+  // was one lookup before this change too.
+  const scholarCandidates = []
+  const askedScholar = new Set()
+  for (const u of units) {
+    for (const c of u.scholarly) {
+      const k = scholarKey(c)
+      if (askedScholar.has(k)) continue
+      askedScholar.add(k)
+      scholarCandidates.push(c)
+    }
+  }
   const scholarPromise = timed(
     'openalex batch',
-    openAlexLookups(units.flatMap((u) => u.scholarly), { contact: CONTACT() }),
+    openAlexLookups(scholarCandidates, { contact: CONTACT() }),
   )
+  /**
+   * Query, then pick — the citations twin (2026-08-14), the same shape as
+   * `pickedPromise` above and for the same reason. Two things are decided
+   * here, and they are deliberately NOT the same set:
+   *
+   * - **Which papers get cards.** Only ones with an open copy compete, stated
+   *   terms first (`preferOpen`), then the section's own citation order, then
+   *   `claimCitations` so a work cited in eight sections is carded in one.
+   *   Only what a section KEEPS is claimed — a paper squeezed out by the cap
+   *   stays available to a later section, the rule claimCitations already had.
+   * - **What the visibility panel counts.** Every distinct paper is counted
+   *   once, in the band that cites it first, whether or not it earned a card.
+   *   The panel's sentence is "Of the N research papers among them, M are
+   *   free to read", and until now N was the number that SURVIVED the pick —
+   *   at most three per section — so the page understated the Wikipedia
+   *   article's own scholarship. `open` likewise means readable, not carded.
+   *
+   * Pure over `units`, which is in article order, and resolved once, so the
+   * bands' completion order still cannot move a card between sections.
+   */
+  const scholarPickedPromise = scholarPromise.then((hits) => {
+    const byKey = new Map()
+    for (const [cite, entry] of hits) byKey.set(scholarKey(cite), entry)
+    const entryOf = (c) => byKey.get(scholarKey(c))
+    // Papers claim in their own namespace: `citedOnPage` holds ISBNs, OCLCs
+    // and bare titles, this holds DOIs, PMIDs and arXiv ids, and the two
+    // never met. Separate sets also mean the book claims (decided in the
+    // units loop) and the paper claims (decided here, later) cannot race.
+    const carded = new Set()
+    const counted = new Set()
+    const picks = new Map()
+    for (const unit of units) {
+      const mine = unit.scholarly.filter((c) => {
+        const k = scholarKey(c)
+        if (counted.has(k)) return false
+        counted.add(k)
+        return true
+      })
+      const kept = claimCitations(
+        preferOpen(unit.scholarly, entryOf),
+        carded,
+        SCHOLARLY_PER_SECTION,
+        scholarKey,
+      )
+      stats.anchorsScholar += kept.length
+      picks.set(unit, {
+        entries: kept.map(entryOf),
+        papers: { total: mine.length, open: mine.filter((c) => entryOf(c)).length },
+      })
+    }
+    return picks
+  })
   // Mappability, for the anchors that were actually picked and nothing else.
   // The partner statements are already in hand; this is the transitive class
   // walk that decides whether a coordinate may become a map, and it is the
@@ -1239,21 +1375,26 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // labels are one batched request for the whole page and cheap.
     const first = unit === lede
     const picked = first ? await ledePickedPromise : (await pickedPromise).get(unit)
-    const [iaHits, ol, labels, scholarHits, statements, rights] = await Promise.all([
-      unit.identified.length ? (first ? ledeIaPromise : iaPromise) : new Map(),
+    const [iaPicks, ol, labels, scholarHits, statements, rights] = await Promise.all([
+      unit.identified.length ? (first ? ledeIaPicksPromise : iaPickedPromise) : new Map(),
       unit.railCandidates.some((c) => c.isbn)
         ? first
           ? ledeVolumesPromise
           : volumesPromise
         : { volumes: new Map(), unchecked: new Set() },
       picked.length ? (first ? ledeLabelsPromise : labelsPromise) : new Map(),
-      unit.scholarly.length ? scholarPromise : new Map(),
+      unit.scholarly.length ? scholarPickedPromise : new Map(),
       picked.length || first ? (first ? ledeStatementsPromise : statementsPromise) : new Map(),
       picked.length || first ? (first ? ledeRightsPromise : rightsPromise) : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 
-    const coverage = citationCoverage(unit.railCandidates, ol.volumes, ol.unchecked)
+    // Access verdicts land on EVERY rail candidate — the footnotes read them
+    // off this band's own objects below — while the tally counts only this
+    // band's first-on-the-page works, so the panel's sum names each distinct
+    // work once (see countedOnPage in the units loop).
+    applyAccess(unit.railCandidates, ol.volumes)
+    const coverage = citationCoverage(unit.counted, ol.volumes, ol.unchecked)
     // The gutter shows Wikipedia's own footnotes; where one cites a book the
     // open ecosystem holds, the access link rides along on the note itself.
     const accessByIsbn = new Map(
@@ -1322,8 +1463,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
 
     // Citation anchors -> Internet Archive. The gutter's footnotes are text;
     // a cover card is the complementary visual, so cards no longer yield to
-    // them — only two citations resolving to one scan still collapse.
-    for (const hit of dedupedIaEntries(unit.identified, iaHits, [])) {
+    // them — only two citations resolving to one scan still collapse. Which
+    // books, and who shows them, was settled in the pick above.
+    const iaPick = iaPicks.get?.(unit) ?? null
+    for (const hit of dedupedIaEntries(iaPick?.cites ?? [], iaPick?.hits ?? new Map(), [])) {
       entries.push(hit)
       stats.ia++
     }
@@ -1331,15 +1474,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // Citation anchors -> open-access scholarship (OpenAlex / arXiv). Papers
     // with no open copy get no card — and the coverage line says how many
     // were filtered, because a shelf that shows only the open ones must not
-    // imply the section cited only open ones.
-    let openPapers = 0
-    for (const cite of unit.scholarly) {
-      const hit = scholarHits.get(cite)
-      if (hit) {
-        entries.push(hit)
-        openPapers++
-        stats.scholar++
-      }
+    // imply the section cited only open ones. Which three, and the tally the
+    // panel prints, were both settled in `scholarPickedPromise`.
+    const scholarPick = scholarHits.get?.(unit) ?? null
+    for (const hit of scholarPick?.entries ?? []) {
+      entries.push(hit)
+      stats.scholar++
     }
     // Anchored entities' partner statements: museum objects, taxa,
     // occurrence maps, place maps. The subject's own statements belong to the
@@ -1504,7 +1644,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // ONCE, in the visibility panel — per section this was 36 lines on San
       // Francisco, 26 of them reporting nothing but a failure to find.
       citations: coverage,
-      papers: { total: unit.scholarly.length, open: openPapers },
+      papers: scholarPick?.papers ?? { total: 0, open: 0 },
       samples,
       broad,
       // Null on every band but the lede, and on a lede whose cards already

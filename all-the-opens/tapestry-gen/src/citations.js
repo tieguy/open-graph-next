@@ -335,11 +335,34 @@ export function openLibraryAccess(volume) {
  * access verdict at all, because "we could not look" must never render as
  * "there is no copy".
  */
-export function citationCoverage(candidates, volumes, unchecked = new Set()) {
+/**
+ * The identity a cited work is counted and claimed under, page-wide. Strongest
+ * identifier first — bibliography entries carry isbn/oclc/lccn, direct cites
+ * carry isbn/doi/url — and title as the last resort. Null when the citation
+ * states nothing usable: the callers (claimCitations, the page-wide counter)
+ * treat a null key as "keep, claim nothing", because folding two
+ * unidentifiable works into one would miscount the other way.
+ */
+export const citationKey = (c) =>
+  c.isbn ?? c.oclc ?? c.lccn ?? c.doi ?? c.url ?? (c.title || null) ?? null
+
+/**
+ * Access verdicts onto the candidates — split out of citationCoverage
+ * (2026-08-14) because the side effect and the count now cover DIFFERENT
+ * sets. Access must land on every section's own candidate objects: the
+ * footnotes read `cite.access` by ISBN from their band's railCandidates, and
+ * a later section's copy of a twice-cited book is a distinct object. The
+ * TALLY, by contrast, counts each distinct work once (see pageCitations).
+ */
+export function applyAccess(candidates, volumes) {
   for (const cite of candidates) {
     if (!cite.isbn) continue
     cite.access = openLibraryAccess(volumes.get(cite.isbn))
   }
+}
+
+export function citationCoverage(candidates, volumes, unchecked = new Set()) {
+  applyAccess(candidates, volumes)
   const isUnchecked = (c) => c.isbn && !c.access && unchecked.has(c.isbn)
   const open = candidates.filter(
     (c) => c.access?.availability === 'full' || c.access?.availability === 'borrow',
@@ -397,14 +420,20 @@ const spell = (n) => WORDS[n] ?? n.toLocaleString()
  */
 export function citationHeadline({ total, open, cataloged, unchecked = 0, papers } = {}) {
   if (!total) return null
+  // What a reader can actually open: the OpenLibrary verdicts AND the open
+  // papers. `open` alone is books, and counting only books rendered a flat
+  // self-contradiction on Monarch butterfly (2026-08-14): "We could not find
+  // a free copy of any of them" three sentences before "34 are free to
+  // read". The papers clause below remains as this number's breakdown.
+  const readable = open + (papers?.open ?? 0)
   // "This article" would read as the page in front of the reader. It means
   // the one on Wikipedia, and has to say so.
   const out = [
     `The original Wikipedia article cites ${total.toLocaleString()} work${total === 1 ? '' : 's'}.`,
   ]
   out.push(
-    open
-      ? `${cap(spell(open))} of them you can read or borrow right now.`
+    readable
+      ? `${cap(spell(readable))} of them you can read or borrow right now.`
       : // Never "no free copy exists" — we searched, we did not survey the world.
         `We could not find a free copy of any of them.`,
   )
@@ -412,7 +441,7 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
   // cataloged ones are not "more" — they are the whole of what was found.
   if (cataloged)
     out.push(
-      open
+      readable
         ? `Open Library has cataloged ${spell(cataloged)} more that nobody has scanned.`
         : `Open Library has cataloged ${spell(cataloged)} of them, but nobody has scanned ` +
           `${cataloged === 1 ? 'it' : 'them'}.`,

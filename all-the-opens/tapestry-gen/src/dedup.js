@@ -152,6 +152,59 @@ export function preferYielding(qids, statements) {
 }
 
 /**
+ * How openly a cited paper can be shown: `0` a free copy on stated terms, `1`
+ * a free copy on terms nobody stated, `2` no free copy at all.
+ *
+ * The predicate for tier 0 is `rights.copy`, which is `ccFromSlug`'s verdict
+ * and therefore already carries this project's "a mark is never a guess" rule
+ * — OpenAlex's `other-oa` and a missing slug both land in tier 1, where the
+ * card says "Free to read" and claims nothing about reuse.
+ *
+ * Deliberately NOT ranked on `open_access.oa_status` (checked 2026-08-14).
+ * Its `diamond` value is inferred from an ABSENT article-processing charge
+ * rather than a stated one — OpenAlex holds no fee figure for 17,904 of the
+ * 23,235 DOAJ journals it knows, so "charges authors nothing" and "nobody
+ * told us" arrive as the same word. It is also the weaker signal on the axis
+ * this project actually cares about: of 200 diamond works sampled, 99 state
+ * no license at all against 27 of 200 gold, so promoting diamond would push
+ * a CC BY paper off the shelf in favor of one that may reserve every right.
+ * The status is carried on the entry as data (`entry.oa.status`) and printed
+ * nowhere. Wikidata's diamond class is not a substitute: better asserted,
+ * zero recall on real citation graphs. Full measurements and commands:
+ * ../../docs/2026-08-14-oa-tier-data-quality.md.
+ */
+export function openRank(entry) {
+  if (!entry) return 2
+  return entry.rights?.copy ? 0 : 1
+}
+
+/**
+ * A section's cited papers, best-shown first, article order inside each tier
+ * — and WITHOUT the ones that have no open copy.
+ *
+ * The citations twin of `preferYielding` (2026-08-14), fixing the same bug in
+ * the same way. Each section took its first three cited DOIs on document
+ * order and only then asked OpenAlex what was readable, so a closed paper
+ * spent a slot and rendered nothing: 32 of Monarch butterfly's 82 cited DOIs
+ * are closed, about a third of every section's budget. Dropping them here
+ * rather than letting the cap discard them is the point — a closed paper can
+ * never become a card, so keeping it in the running is not caution, it is the
+ * blind pick this replaces.
+ *
+ * Pure over article-ordered input, like everything in this module: the pick
+ * is a function of the page-wide lookup and the section's own citation order,
+ * so a band's completion order still cannot change who shows which paper.
+ */
+export function preferOpen(cites, entryOf) {
+  const tiers = [[], []]
+  for (const c of cites) {
+    const rank = openRank(entryOf(c))
+    if (rank < 2) tiers[rank].push(c)
+  }
+  return tiers.flat()
+}
+
+/**
  * Assign each anchor QID to the first unit (article order) whose prose
  * mentions it, capping each unit at `perUnit` owned anchors; a unit whose
  * early candidates were claimed upstream backfills from its later ones.
