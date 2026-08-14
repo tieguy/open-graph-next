@@ -78,8 +78,7 @@ it.
    front page and shapes the friend entry's `terms` line (§2).
    > Why: the goal is adoption by Wikipedia or something Wikipedia-like, so
    > anyone must be able to reuse the result, commercially included
-   > (VALUES.md). DigitalNZ's API metadata is NC by default; the demo runs
-   > inside those terms, and the page says so rather than calling it fine.
+   > (VALUES.md). For demo purposes, we accept that DigitalNZ's API metadata is NC by default, but we call it out and want to wrestle with that going forward.
 
 3. **What does the host publish about rate limits or crawl delay?** The
    answer becomes the descriptor's `hostLimits` entry, with the policy
