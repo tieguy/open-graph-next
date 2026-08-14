@@ -5,16 +5,14 @@
 ecosystem — museums, libraries, archives, aggregators — appear alongside it,
 found live by following the article's own links and identifiers outward. Each
 of those collections is a **data source** (on the site itself, a "friend"):
-the Met, DPLA, Open Library, DigitalNZ, a dozen more.
+the Met, DPLA, Open Library, DigitalNZ, and currently about a dozen more.
 
-This document is the complete path for connecting the next one: every file the
-work touches, and every check that must pass before the change ships. It is
+This document explains how to add a new data source. It is
 written for whoever does the work — usually a coding agent, sometimes a
 person — and it assumes the code is open beside it.
 
 **How to read it:** every step is an instruction. An indented `Why:` line
-under a rule states the dated, checkable fact that put the rule there. If a
-`Why:` stops being true, correct the rule — that has happened once already
+under a rule states the reason behind the rule there. If a `Why:` stops being true, we should correct the rule — that has happened once already
 (§3, the CVMA entry). All code paths are relative to
 [`../tapestry-gen/`](../tapestry-gen/). They name **symbols**, not line
 numbers, because line numbers drift.
@@ -26,10 +24,7 @@ it holds for an anchor. The results render as **cards**, grouped into
 per-partner **shelves**. The **visibility panel** measures how much of what
 the page found the Wikipedia article itself shows.
 
-**Adding one source touches 10–13 files, depending on its shape.** A registry
-refactor (2026-08-07, `99116e8`) already removed the wiring duplication. What
-remains is partner-specific knowledge — rights vocabulary, icon sourcing, host
-policy, the friend blurb — and a second refactor will not shrink it. A missed
+**Despite some refactoring, adding one source touches 10–13 files, depending on its shape.** A missed
 step is a partner that fetches correctly while the page never credits it. That
 is why §4 is a checklist and not a formality.
 
