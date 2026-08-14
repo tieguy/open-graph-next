@@ -13,8 +13,8 @@ person — and it assumes the code is open beside it.
 
 **How to read it:** every step is an instruction. An indented `Why:` line
 under a rule states the reason behind the rule. If a `Why:` stops being
-true, we should correct the rule — that has happened twice already (§3's
-CVMA entry, and the file-count paragraph below). All code paths are relative to
+true, we should correct the rule — that has happened twice already (eg §3's
+CVMA entry). All code paths are relative to
 [`../tapestry-gen/`](../tapestry-gen/). They name **symbols**, not line
 numbers, because line numbers drift.
 
@@ -26,13 +26,7 @@ per-partner **shelves**. The **visibility panel** measures how much of what
 the page found the Wikipedia article itself shows.
 
 **Adding one source touches five code files, one generated file, and two
-docs.** It touched 10–13 until the partner manifest (`src/partners.js`,
-2026-08-14) gathered the per-partner data — name, icon, hosts, friend entry,
-host limits — into one descriptor the concern files derive from; what remains
-per-partner is logic (the fetcher, the rights mapping, the lookup
-registration). A missed descriptor field is a failing test
-(`test/partners.test.js`), not a partner that fetches correctly while the
-page never credits it.
+docs.** It is recommended using an LLM to partner with you on this.
 
 *Housekeeping: last verified 2026-08-14. This file is canonical.
 `tapestry-gen/CLAUDE.md` keeps a pointer plus the two rules that cost the most
@@ -43,10 +37,7 @@ commit.*
 
 ## 0. Pick the shape first
 
-The pipeline is not config-driven, and an audit concluded it should not try to
-be. Every partner needs its own fetcher and its own rights mapping.
-
-There are three shapes. **The wrong shape produces code that fights the
+There are three "shapes" of partner. **The wrong shape produces code that fights the
 pipeline.** Answer this question before you write anything:
 
 > Does ONE Wikidata property name the partner's own record of the object?
