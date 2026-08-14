@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-10
+Last verified: 2026-08-14
 
 ## Purpose
 
@@ -789,6 +789,77 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   open by construction and become cards with zero requests. Subject-level:
   ORCID (P496) → the subject's top-cited scholarship, the papers' twin of the
   OpenLibrary author lookup.
+  **Query, then pick applies here too** (2026-08-14, `preferOpen` in
+  `src/dedup.js`). The section used to claim its three cited papers on
+  DOCUMENT ORDER in the units loop and only then ask OpenAlex what was
+  readable, so a closed paper spent a slot and rendered nothing — the exact
+  anchors bug of 2026-08-05, in the other citation family. The whole page's
+  distinct identifiers go to the lookup now, and `scholarPickedPromise` picks
+  afterwards: only papers with an open copy compete, ones whose copy states a
+  license lead, and the article's own citation order breaks ties. Measured:
+  Monarch butterfly 41 claimed anchors → 26 cards became 30 → **30**, and
+  Drosophila melanogaster 54 → 36 became 44 → **44** — every claimed slot now
+  becomes a card, which is the whole of the fix. Cards that can name a license
+  rose from 12 of 36 to 29 of 44 on Drosophila. Cost is one batch of 40 more
+  or less: Monarch is unchanged at 2 OpenAlex requests, Drosophila goes 2 → 4.
+  **Ranking is on the stated license, never on `open_access.oa_status`**
+  (measured 2026-08-14, and the reasoning is on `openRank`). OpenAlex's
+  `diamond` reads as "fully open journal with no article fee recorded", and
+  OpenAlex holds no fee figure for **17,904 of the 23,235 DOAJ journals** it
+  knows — so "charges authors nothing" and "nobody told us what it charges"
+  arrive as the same word, which is an inference and not a statement. It is
+  also the weaker signal on reuse: of 200 diamond works sampled **99 state no
+  license at all**, against 27 of 200 gold, so promoting diamond would push a
+  CC BY paper off a three-card shelf in favour of one that may reserve every
+  right. The status is carried on the entry as `oa.status` and **printed
+  nowhere**: an inference drawn from missing data is exactly what "a mark is
+  never a guess" refuses, and this project has no slot for a claim it cannot
+  stand behind. Wikidata's diamond class was measured the same day as the
+  alternative — better asserted (ZooKeys correctly not-diamond, Zootaxa
+  marked hybrid), but 1,572 journals, 7% referenced, and **zero recall**
+  against the 113 venues two real articles cite. Full numbers and commands:
+  `../docs/2026-08-14-oa-tier-data-quality.md`. Wikispecies was surveyed for
+  its DOIs on the same day and declined — see Deliberately excluded below.
+  **The visibility panel's paper count was wrong and is fixed by the same
+  change.** "Of the N research papers among them, M are free to read" summed
+  the per-band `papers` tally, which counted only the ≤3 per section that
+  SURVIVED the blind pick; N is now every distinct paper the article cites,
+  counted once in the band that cites it first, and M means readable rather
+  than carded. Drosophila went from "54 papers, 36 free to read" to
+  **"118 papers, 83 free to read"** — the same article, honestly counted.
+  **The same-day audit found and fixed the books half of both bugs** (the
+  full sweep is in the session notes; every other backend came back clean or
+  already-documented):
+  - *Counting*: "The original Wikipedia article cites N works" summed each
+    band's full candidate list, and `resolveShortCites` dedupes per section —
+    so a bibliography book cited from eight sections counted eight times.
+    Apollo 11's panel claimed 216 works for 167 distinct ones, numerator
+    inflated alike. Each unit now carries `counted` — its rail minus works an
+    earlier band already counted (`claimCitations` with no cap IS the
+    first-occurrence filter; `citationKey` in `src/citations.js` is the
+    identity) — and `applyAccess` was split out of `citationCoverage` so
+    access verdicts still land on EVERY band's own candidate objects for the
+    footnote borrow links while the tally counts the subset.
+  - *Blind pick*: books claimed three per section on document order and only
+    then asked the Internet Archive which were scanned, so a scanless book
+    spent a slot rendering nothing (Apollo 11: scans for 7 of 29 identified
+    works, one lost to the cap). `pickIaCards` in `src/discover.js` is the
+    books twin of `scholarPickedPromise` — only IA-held books compete, no
+    license tiers (a scan is a scan), lede picks off its own batch so
+    lede-first survives.
+  - *Coherence*: `citationHeadline` counted only BOOK access in "M of them
+    you can read", so Monarch butterfly read "We could not find a free copy
+    of any of them" three sentences before "34 are free to read". The
+    readable count now folds in the open papers; the papers clause stays as
+    its breakdown.
+  **The ORCID shelf got the same medicine** (`openAlexAuthorWorks`): it
+  filtered openness AFTER a top-25-by-citations window, so an author whose
+  most-cited work is paywalled showed an empty shelf while open papers sat
+  past row 25. When the window yields fewer than `cap` open works and the
+  catalog holds more than the window saw, one follow-up asks OpenAlex for the
+  top-cited OPEN works directly (`openOnly` in `openAlexAuthorWorksUrl`); the
+  printed denominator stays the unfiltered count, which is what the shelf's
+  sentence promises.
 - **Statements** (`src/statements.js`) — WDQS, split into a CHEAP half asked of
   everything and an EXPENSIVE half asked of almost nothing (2026-08-05). The
   split is the load-bearing part; see Query, then pick under Key Decisions.
@@ -1012,7 +1083,11 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   rides "fuel cell". Europeana does not read the context yet: its records
   arrive entity-linked rather than heading-searched, so its relevance
   failure mode is different, and opting it in is a field mapping plus
-  `_subjects`, not new machinery.
+  `_subjects` — **plus a wider fetch window** (2026-08-14 audit): Europeana
+  fetches `rows=4` against a display cap of 4, the pre-fix DPLA shape, so
+  today a ranker or corroborator would have nothing to choose among. Widen
+  `EUROPEANA_PER_ANCHOR`'s fetch side in the same change or the gate is a
+  no-op.
 - **Europeana** (`src/europeana.js`, added 2026-08-03) — anchors are looked up
   only through their stated Europeana entity (P7704); the search asks for items
   enriched with exactly that entity URI, `reusability=open` only, and each
@@ -1090,6 +1165,31 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
 Deliberately excluded: Wikisource (prefer non-wiki partners in the demo),
 OCLC/loc.gov (overlaps OpenLibrary), Wayback cards (no thumbnail API — a
 card with no visual is just a link, and links are already inline).
+
+**Wikispecies as a source of DOIs, measured and declined 2026-08-14.** The
+aggregate is real — 31% of 150 random mainspace pages carry a `doi.org` link,
+about 0.5 per page across 956,529 pages — but the per-article yield against
+the Wikipedia article this site renders is roughly one. Across 15 flagship
+species articles: enwiki 831 cited DOIs, Wikispecies 18, **14 of them
+net-new**. Across 22 random taxa holding both pages: enwiki 36, Wikispecies
+26, 19 net-new — the ratio flips for stubs and the volume does not. Three
+things kill it as a partner: the DOI-dense pages are taxonomist bibliographies
+(Fabien L. Condamine 13, Tamás Pócs 5), not taxa, so they never line up with
+an article subject; only 22 of 300 random pages had both a DOI and an enwiki
+article; and the densest prefix is `10.11646` — **Zootaxa, which is not open
+at all** (`is_oa: false`, not in DOAJ, 33,014 closed works), with `10.3897`
+Pensoft second at a $754 APC and `10.15468` third being GBIF *dataset* DOIs
+rather than papers. A source whose densest offering is paywalled is the wrong
+shape for this page.
+What Wikispecies does hold a great deal of is **identifiers**, not DOIs —
+per 300 random pages: Catalogue of Life 266, GBIF 245, DOIs 125, Tropicos 118,
+IRMNG 113, iNaturalist 100, IPNI 100, EOL 94, **BHL 93**, POWO 92, NCBI 87,
+WoRMS 66, ITIS 62 — roughly 10:1 over DOIs, and most of those are already
+Wikidata properties this pipeline reads (P846, P815, P830, P850, P961, P3151).
+The one lead that is genuinely not already in hand is **BHL**: open scans of
+original descriptions, which is exactly what a species stub cannot show. That
+is a partner question and belongs with the parked species-box work (LUI-141),
+not with citations.
 
 ## Adding a data source
 
@@ -1479,6 +1579,27 @@ the politeness claim is checkable after a run rather than merely asserted here.
   author-works lookup (`works.json` → `search.json`). Both are one-time cache
   misses at unchanged request counts, for the same reason: the field rides a
   request that was already being made.
+- **The OpenAlex batches are re-keyed by the 2026-08-14 pick change**, and this
+  one is NOT at an unchanged request count. The `select` is untouched —
+  `open_access` was always requested, `oa_status` was simply being dropped on
+  the floor — but the lookup is now handed the whole page's identifiers rather
+  than the three-per-section survivors of a blind pick, so the chunk
+  boundaries move and every cached OpenAlex response is refetched exactly
+  once. A paper-heavy page settles at a slightly higher count afterwards
+  (Drosophila melanogaster 2 → 4 requests; Monarch butterfly unchanged at 2),
+  because the batch is 40 wide and this widens what fills it. Worth watching
+  on the host that caused the 214–240s incident: the count rises by chunks of
+  40, never per paper. (`per-page` also went to a flat 100 the same day —
+  OpenAlex sometimes holds two work records for one DOI and a page sized to
+  the request could truncate the last match — which re-keys those URLs once
+  more; both re-keys ship in the same deploy, so the cache goes cold for this
+  lookup exactly once.) **The books twin re-keys archive.org the same way**:
+  the IA batches now carry every identifier rather than the blind pick's
+  survivors, and — the part that is NOT flat — an OCLC/LCCN-only citation
+  costs one archive.org request each, uncapped where the old cap bounded them
+  at ≤3 per section. Measured: Apollo 11 unchanged, Rembrandt (an OCLC-heavy
+  bibliography) 13 archive.org requests on its first cold render, serial on
+  one host and cached forever after.
 - OpenLibrary rate-limits back-to-back requests — the volume lookup retries with
   backoff. A whole batch that still fails retries once after 2s, and whatever
   fails again comes back in `openLibraryVolumes`' `unchecked` set (it returns
@@ -1504,13 +1625,16 @@ the politeness claim is checkable after a run rather than merely asserted here.
   reported nothing but a failure to find, and its "27 works" sat directly under
   the fold's "18 notes" — two totals of different things reading as a
   contradiction (2026-08-04 review).
-- `src/dedup.js` — anchor ownership AND anchor ranking; five exports, all pure
+- `src/dedup.js` — anchor ownership AND anchor ranking; seven exports, all pure
   over article-ordered input (see Key Decisions for why purity is
   load-bearing). `claimAnchors` assigns each QID to the band of its first
   mention. `subjectAnchors` + `preferRelated` rank the LEDE's candidates by
   which property of the subject's item names them; `hookRank` +
   `preferYielding` rank ANY section's candidates by what its partner
-  statements turn out to hold. `dropSeenFiles` left with Commons 2026-08-04.
+  statements turn out to hold; `openRank` + `preferOpen` do the same job for a
+  section's cited PAPERS, and `openRank` is also where the argument against
+  ranking on OpenAlex's `diamond` is written down. `dropSeenFiles` left with
+  Commons 2026-08-04.
 - `src/hero.js` — `pickHero`/`heroRank`: which of a section's finds is hoisted
   into the floated rail, and when a section gets no float at all.
 - `src/breadth.js` — `tooBroad`/`broadNote`/`BROAD_ABOVE`: when a partner's

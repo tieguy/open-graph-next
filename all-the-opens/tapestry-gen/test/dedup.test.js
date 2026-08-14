@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { claimAnchors, claimCitations } from '../src/dedup.js'
+import { claimAnchors, claimCitations, openRank, preferOpen } from '../src/dedup.js'
 
 test('claimCitations: a cited work belongs to the first section that cites it', () => {
   // The citations twin of claimAnchors (2026-08-09): Carrying the Fire is
@@ -68,4 +68,47 @@ test('claimAnchors: a seeded owner keeps its anchor even against earlier units',
 test('claimAnchors: null/undefined QIDs never claim a slot', () => {
   const picks = claimAnchors([[null, 'Q1', undefined]], { perUnit: 2 })
   assert.deepEqual(picks, [['Q1']])
+})
+
+test('preferOpen: the section picks papers it can actually show, licensed first', () => {
+  // Query, then pick — the citations twin (2026-08-14). A closed paper used to
+  // eat one of the section's three slots and render nothing, because the pick
+  // ran before the lookup; it is dropped here instead. Within the open ones a
+  // stated license leads, and the article's own citation order breaks ties.
+  const cites = [
+    { doi: 'closed/1' },
+    { doi: 'open/unstated' },
+    { doi: 'open/ccby-2' },
+    { doi: 'closed/2' },
+    { doi: 'open/ccby-1' },
+  ]
+  const entries = new Map([
+    ['open/unstated', { rights: { copy: null } }],
+    ['open/ccby-2', { rights: { copy: { code: 'CC BY' } } }],
+    ['open/ccby-1', { rights: { copy: { code: 'CC BY' } } }],
+  ])
+  const entryOf = (c) => entries.get(c.doi)
+  assert.deepEqual(
+    preferOpen(cites, entryOf).map((c) => c.doi),
+    ['open/ccby-2', 'open/ccby-1', 'open/unstated'],
+  )
+  // The rank itself, stated once: no copy at all is neither tier.
+  assert.equal(openRank(undefined), 2)
+  assert.equal(openRank({ rights: { copy: null } }), 1)
+  assert.equal(openRank({ rights: { copy: { code: 'CC0' } } }), 0)
+})
+
+test('preferOpen composes with claimCitations: three cards, page-wide ownership', () => {
+  const entries = new Map(
+    ['a', 'b', 'c', 'd'].map((k) => [k, { rights: { copy: null } }]),
+  )
+  const entryOf = (c) => entries.get(c.doi)
+  const claimed = new Set()
+  const cites = [{ doi: 'x' }, { doi: 'a' }, { doi: 'b' }, { doi: 'c' }, { doi: 'd' }]
+  // 'x' is closed and never competes, so the cap spends all three slots on
+  // cards that exist — the whole point of moving the pick after the lookup.
+  const kept = claimCitations(preferOpen(cites, entryOf), claimed, 3, (c) => c.doi)
+  assert.deepEqual(kept.map((c) => c.doi), ['a', 'b', 'c'])
+  // 'd' stayed unclaimed, so a later section may still show it.
+  assert.deepEqual([...claimed], ['a', 'b', 'c'])
 })

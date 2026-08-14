@@ -1,7 +1,14 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { arxivEntry, openAlexEntry, openAlexUrl, scholarlyIdentifiers } from '../src/scholarly.js'
+import {
+  arxivEntry,
+  openAlexEntry,
+  openAlexUrl,
+  openAlexAuthorWorksUrl,
+  scholarKey,
+  scholarlyIdentifiers,
+} from '../src/scholarly.js'
 import {
   aicEntryFrom,
   classesUrl,
@@ -58,6 +65,16 @@ test('openAlexEntry only exists when the work is actually open', () => {
   // the subject's own ORCID shelf in the lede.
   assert.equal(open.topic, 'Cited in this section')
   assert.equal(openAlexEntry({ title: 'closed', open_access: { is_oa: false } }, 'doi'), null)
+  // OpenAlex's route word is carried and never printed: `diamond` is derived
+  // from a MISSING article fee, so it is data, not a claim. See openRank.
+  assert.equal(open.oa.status, 'gold')
+  assert.equal(open.attribution.author, 'Free to read')
+})
+
+test('scholarKey is the identifier a paper is deduplicated and looked up by', () => {
+  assert.equal(scholarKey({ doi: '10.1/a', pmid: '9', arxiv: null }), '10.1/a')
+  assert.equal(scholarKey({ doi: null, pmid: '9' }), '9')
+  assert.equal(scholarKey({ doi: null, pmid: null, arxiv: '1706.03762' }), '1706.03762')
   assert.equal(openAlexEntry({ title: 'oa but no url', open_access: { is_oa: true } }, 'doi'), null)
 })
 
@@ -378,4 +395,17 @@ test('mergePlaceDefunct: a dead polity is defunct via any historical class', () 
   assert.equal(result.get('Q201705').defunct, 'true')
   // The verdict is what the phase exists for, not the binding.
   assert.equal(mappable(result.get('Q201705')), false)
+})
+
+test('the author-works follow-up filters openness server-side; the first ask never does', () => {
+  // The denominator is a promise: "N papers OpenAlex files under this ORCID"
+  // counts the paywalled ones, so the unfiltered query supplies it. The
+  // openOnly variant exists for the follow-up when the top-cited window
+  // turns out to be paywall-heavy (2026-08-14 audit).
+  const plain = openAlexAuthorWorksUrl('0000-0001-2345-6789', 'op@example.test')
+  const open = openAlexAuthorWorksUrl('0000-0001-2345-6789', 'op@example.test', { openOnly: true })
+  assert.doesNotMatch(plain, /is_oa/)
+  assert.match(open, /open_access\.is_oa%3Atrue/)
+  assert.match(open, /sort=cited_by_count:desc/)
+  assert.match(open, /mailto=op%40example\.test/)
 })

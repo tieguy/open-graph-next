@@ -50,6 +50,14 @@ export function scholarlyIdentifiers(wikitext) {
   return out
 }
 
+/**
+ * The identifier a cited work is deduplicated and looked up by, page-wide.
+ * DOI first because it is the one the article states most often and the one
+ * OpenAlex matches on; a citation with none of the three never reaches here
+ * (`scholarlyIdentifiers` drops it), so this is never null.
+ */
+export const scholarKey = (cite) => cite.doi ?? cite.pmid ?? cite.arxiv
+
 /** One batched OpenAlex works query. `select` keeps the response small;
  * `best_oa_location` rides along because it names the open copy's license. */
 export function openAlexUrl(filterField, values, contact) {
@@ -57,7 +65,10 @@ export function openAlexUrl(filterField, values, contact) {
     'https://api.openalex.org/works?filter=' +
     encodeURIComponent(`${filterField}:${values.join('|')}`) +
     '&select=id,doi,ids,title,publication_year,open_access,authorships,best_oa_location' +
-    `&per-page=${Math.max(values.length, 25)}` +
+    // A flat page far above the batch size (40), not values.length: OpenAlex
+    // occasionally holds two work records for one DOI, and a page sized
+    // exactly to the request would silently truncate the last match.
+    '&per-page=100' +
     `&mailto=${encodeURIComponent(contact)}`
   )
 }
@@ -102,6 +113,14 @@ export function openAlexEntry(work, via) {
     // to read and does not know on what terms, and free to read is not a
     // license. See ccFromSlug.
     rights: { copy: licenseView(ccFromSlug(work.best_oa_location?.license)) },
+    // Carried, never printed (2026-08-14). `oa_status` is OpenAlex's route
+    // word — gold, green, bronze, hybrid, diamond — and the one worth having
+    // is the one worth trusting least: `diamond` is derived from a MISSING
+    // article-processing charge, and OpenAlex has no fee figure for 17,904 of
+    // the 23,235 DOAJ journals it knows. It is here so `preferOpen` and any
+    // future reader can see it; the rule against printing an inference as a
+    // claim is why nothing does. See openRank in src/dedup.js.
+    oa: { status: oa.oa_status ?? null },
     why: `Cited here — and there is a copy you can read for free`,
     // The reason class, not the citation: per-item topics would split the
     // strip into one-card carousels; what must not mix is cited work with
@@ -167,16 +186,42 @@ export async function openAlexLookups(cites, { contact }) {
  * the subject's works that leaves out — the note is honest where a paywalled
  * card would just be a dead end wearing a shelf.
  */
-export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
-  const url =
+/** The author-works query, top-cited first. `openOnly` adds OpenAlex's own
+ * `is_oa` filter — the follow-up below, never the first ask, because the
+ * DENOMINATOR must stay the unfiltered count of everything the ORCID holds. */
+export function openAlexAuthorWorksUrl(orcid, contact, { openOnly = false } = {}) {
+  return (
     'https://api.openalex.org/works?filter=' +
-    encodeURIComponent(`authorships.author.orcid:${orcid}`) +
+    encodeURIComponent(`authorships.author.orcid:${orcid}${openOnly ? ',open_access.is_oa:true' : ''}`) +
     '&sort=cited_by_count:desc' +
     '&per-page=25' +
     '&select=id,doi,title,publication_year,open_access,authorships,best_oa_location' +
     `&mailto=${encodeURIComponent(contact)}`
-  const body = await getJson(url)
-  const open = (body.results ?? []).filter((w) => w.open_access?.is_oa && w.open_access?.oa_url)
+  )
+}
+
+export async function openAlexAuthorWorks(orcid, { contact, cap = 6 }) {
+  const body = await getJson(openAlexAuthorWorksUrl(orcid, contact))
+  let open = (body.results ?? []).filter((w) => w.open_access?.is_oa && w.open_access?.oa_url)
+  // The window used to filter openness AFTER fetching top-25-by-citations, so
+  // an author whose most-cited papers are paywalled showed an empty shelf
+  // while open work sat past row 25 (2026-08-14, the counting/priority
+  // audit). When the window comes up short AND the catalog holds more than
+  // the window saw, one follow-up asks for the top-cited OPEN works
+  // directly — the shelf's question, put as a filter. The total printed on
+  // the shelf stays the FIRST query's count: "N papers OpenAlex files under
+  // this ORCID" must keep counting the paywalled ones, or the disclosure
+  // stops disclosing.
+  if (open.length < cap && (body.meta?.count ?? 0) > (body.results?.length ?? 0)) {
+    try {
+      const followUp = await getJson(openAlexAuthorWorksUrl(orcid, contact, { openOnly: true }))
+      const better = (followUp.results ?? []).filter((w) => w.open_access?.is_oa && w.open_access?.oa_url)
+      if (better.length > open.length) open = better
+    } catch (e) {
+      // The first answer stands; a failed follow-up costs breadth, never the shelf.
+      console.error(`  openalex author follow-up failed (${orcid}): ${e.message}`)
+    }
+  }
   return {
     total: body.meta?.count ?? open.length,
     entries: open.slice(0, cap).map((w) => {

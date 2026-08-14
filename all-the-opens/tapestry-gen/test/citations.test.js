@@ -11,6 +11,8 @@ import {
   parseCitation,
   sectionCitations,
   templateParams,
+  citationKey,
+  applyAccess,
 } from '../src/citations.js'
 
 // --- template params (depth-aware) ------------------------------------------
@@ -210,7 +212,9 @@ test('pageCitations sums the per-band tallies the bands now carry', () => {
 test('citationHeadline says the unchecked bucket and never claims nothing exists', () => {
   const text = citationHeadline({ total: 15, open: 2, cataloged: 3, unchecked: 1, papers: { total: 5, open: 3 } })
   assert.match(text, /The original Wikipedia article cites 15 works\./)
-  assert.match(text, /Two of them you can read or borrow right now\./)
+  // 2 readable books + 3 readable papers: the sentence counts what a reader
+  // can actually open, and the papers clause below is its breakdown.
+  assert.match(text, /Five of them you can read or borrow right now\./)
   assert.match(text, /cataloged three more that nobody has scanned/)
   // "We could not look" must never be left reading as "there is nothing there".
   assert.match(text, /One we could not check this time\./)
@@ -225,7 +229,53 @@ test('citationHeadline reports a search that found nothing as a search, not a fa
   assert.match(citationHeadline({ total: 1620, open: 0 }), /cites 1,620 works/)
 })
 
+test('citationHeadline cannot contradict its own papers clause', () => {
+  // The Monarch butterfly case (2026-08-14): zero readable BOOKS but 34
+  // readable papers rendered "We could not find a free copy of any of them"
+  // three sentences before "34 are free to read". `open` counted only the
+  // OpenLibrary verdicts; readable papers belong in the same claim.
+  const text = citationHeadline({ total: 231, open: 0, cataloged: 5, papers: { total: 56, open: 34 } })
+  assert.doesNotMatch(text, /could not find a free copy of any/)
+  assert.match(text, /34 of them you can read or borrow right now\./)
+  assert.match(text, /34 are free to read/)
+})
+
 test('citationHeadline says nothing at all when the article cites nothing', () => {
   assert.equal(citationHeadline({ total: 0 }), null)
   assert.equal(citationHeadline(), null)
+})
+
+test('citationKey names the work by its strongest identifier, or not at all', () => {
+  // The identity a cited work is COUNTED under, page-wide (2026-08-14): the
+  // panel's "cites N works" used to sum per-section tallies, so a book cited
+  // from eight sections through the bibliography counted eight times — Apollo
+  // 11 read "216 works" for an article citing 173. Bibliography entries carry
+  // isbn/oclc/lccn; direct cites carry isbn/doi/url; title is the last resort.
+  assert.equal(citationKey({ isbn: '9780160506314', url: 'https://x.test' }), '9780160506314')
+  assert.equal(citationKey({ oclc: '1623434' }), '1623434')
+  assert.equal(citationKey({ lccn: '75601623' }), '75601623')
+  assert.equal(citationKey({ doi: '10.1/x', title: 'T' }), '10.1/x')
+  assert.equal(citationKey({ url: 'https://x.test', title: 'T' }), 'https://x.test')
+  assert.equal(citationKey({ title: 'T' }), 'T')
+  // No identity at all: null, so the counter keeps it rather than folding two
+  // unidentifiable works into one — refusing to dedup is safer than
+  // dedup-by-accident, the same stance claimCitations takes on a null key.
+  assert.equal(citationKey({ title: '' }), null)
+  assert.equal(citationKey({}), null)
+})
+
+test('applyAccess lands verdicts on every candidate; the tally can then count a subset', () => {
+  // Split out of citationCoverage (2026-08-14) so the side effect and the
+  // count can cover DIFFERENT sets: access must land on every section's
+  // candidate objects (footnote borrow links read it there), while the tally
+  // counts each distinct work once, page-wide.
+  const volumes = new Map([
+    ['111', { records: { r: { data: { ebooks: [{ availability: 'borrow', preview_url: 'https://a.test' }] } } } }],
+  ])
+  const a = { isbn: '111' }
+  const b = { isbn: '111' } // same work, a later section's own object
+  applyAccess([a, b], volumes)
+  assert.equal(a.access?.availability, b.access?.availability)
+  const tally = citationCoverage([a], volumes)
+  assert.equal(tally.total, 1)
 })
