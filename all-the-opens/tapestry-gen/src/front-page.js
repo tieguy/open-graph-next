@@ -36,10 +36,10 @@ const OG_DESCRIPTION =
 // `adds` — "other friends" means the ones the headline did not already say.
 const SHOWCASE = [
   {
-    domain: 'Spaceflight',
-    title: 'Apollo 11',
+    domain: 'Aviation',
+    title: 'Wright Flyer',
     adds: '3D models from the Smithsonian',
-    friends: ['openlibrary', 'dpla', 'digitalnz', 'openstreetmap'],
+    friends: ['dpla', 'europeana', 'digitalnz', 'openstreetmap'],
   },
   {
     domain: 'Law',
