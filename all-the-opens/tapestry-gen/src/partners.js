@@ -95,6 +95,12 @@ export const PARTNERS = {
     friend: {
       gives: 'The court’s opinion in full, discovered through the case citation already in the article.',
       terms: 'Court opinions are public domain: nobody owns the law.',
+      // "Our bulk data files are free of known copyright restrictions" — their
+      // own words about the data itself, read 2026-08-14 via the Wayback
+      // Machine (the live site answers 403 to non-browser clients; capture
+      // 2026-04-12). NOT /terms/, the issue's first candidate: that page is a
+      // DMCA takedown policy and never states the opinions' status.
+      cite: 'https://www.courtlistener.com/help/api/bulk-data/',
     },
   },
   inaturalist: {
@@ -104,6 +110,13 @@ export const PARTNERS = {
     friend: {
       gives: 'Photographs of species, discovered through a Wikidata statement naming the species’ iNaturalist taxon.',
       terms: 'Each photo carries its observer’s chosen license; only openly licensed ones are shown here.',
+      // States that contributors license their content under a license of
+      // their own choosing (CC BY-NC unless they specify otherwise) — the
+      // observer's-choice half of our line; the only-openly-licensed half is
+      // our filter, not their promise. Read 2026-08-14 via the Wayback
+      // Machine (the live page answers 403 to non-browser clients; capture
+      // 2026-07-22).
+      cite: 'https://www.inaturalist.org/pages/terms',
     },
   },
   gbif: {
@@ -157,6 +170,16 @@ export const PARTNERS = {
       gives:
         'The museum’s own record of an object — title, artist, date, and often an image — discovered through a Wikidata statement naming it.',
       terms: 'Public-domain works released CC0, images included.',
+      // The museum's own Open Access page: "all images of public-domain
+      // artworks and basic data on all accessioned works in its collection
+      // available for unrestricted use under Creative Commons Zero (CC0)" —
+      // both halves of our line, and it names the API this demo reads. Read
+      // 2026-08-14 via the Wayback Machine (the live site answers 429 to
+      // non-browser clients; capture 2025-11-24). The github.com/metmuseum
+      // /openaccess repo also states CC0 and does answer non-browser clients,
+      // but its dataset explicitly excludes images, so it cannot carry the
+      // "images included" half.
+      cite: 'https://www.metmuseum.org/about-the-met/policies-and-documents/open-access',
     },
   },
   artic: {
@@ -212,6 +235,14 @@ export const PARTNERS = {
       gives:
         'Items from US libraries, archives and museums, discovered through the subject heading a cataloger filed them under.',
       terms: 'Metadata CC0; each item’s rights stated by its holder.',
+      // Their Terms & Conditions: the Metadata is "dedicated to the public
+      // pursuant to Creative Commons' CC0 public domain dedication, and is
+      // available for download through DPLA's Metadata API" — our line, about
+      // the API this demo reads. Read 2026-08-14 via the Wayback Machine
+      // (dp.la answers a WAF challenge to non-browser clients; capture
+      // 2026-06-26). NOT pro.dp.la/developers/policies, the issue's first
+      // candidate: even its Wayback captures are the 202 challenge page.
+      cite: 'https://dp.la/about/terms-conditions',
     },
     hotlinkUnsafe: true,
     hostLimits: {
