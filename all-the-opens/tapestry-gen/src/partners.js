@@ -267,7 +267,16 @@ export const PARTNERS = {
     friend: {
       gives:
         'Items from European museums, libraries and archives, discovered through a Wikidata statement naming Europeana’s own entity for the subject.',
-      terms: 'Only openly licensed items are shown; each card names its license.',
+      terms: 'Metadata CC0; only openly licensed items are shown, and each card names its license.',
+      // States that Europeana publishes its aggregated metadata "under the
+      // terms of the Creative Commons CC0 1.0 Universal Public Domain
+      // Dedication" — the first clause of our line; the other two clauses are
+      // our filter and our rendering, not their promise. Read in a browser by
+      // the operator 2026-08-14: the live page challenge-gates non-browser
+      // clients AND its Wayback captures are a client-rendered shell with no
+      // rights text, so this is the one cite that could not be verified from
+      // a script at all.
+      cite: 'https://www.europeana.eu/en/rights',
     },
   },
   digitalnz: {
