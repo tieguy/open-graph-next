@@ -383,6 +383,37 @@ test('classesUrl walks P279* over classes only, and asks no EXISTS question', ()
   assert.ok(!url.includes('EXISTS'))
 })
 
+// Every property binding below reads `wdt:`, and the prefix is the whole point:
+// `wdt:` serves a property's BEST-RANK values, so a deprecated identifier never
+// reaches a card. Nothing in the query's shape enforces that. The natural way to
+// reach a statement's qualifiers or references — P141's IUCN sourcing, which the
+// species-box work would want — is to switch a binding to `p:`/`ps:`, which
+// returns every rank including deprecated; that edit fails no test, raises no
+// error, and quietly starts serving retired identifiers.
+//
+// The exposure is live, not theoretical: Wikidata holds 866 deprecated P3151
+// statements (measured 2026-08-15), and the LUI-125 census of 2026-08-08 found
+// ~104k more stale enough to deserve deprecation.
+//
+// A lookup that genuinely needs `p:`/`ps:` must filter on `wikibase:rank`
+// itself and say so where the binding is written. `rightsUrl` in src/rights.js
+// is the one place in the repo that reads qualifiers, and test/rights.test.js
+// pins its exception to exactly the bindings it needs.
+test('every property in the statement queries is read at best rank, through wdt:', () => {
+  for (const url of [wdqsUrl(['Q1']), itemClassesUrl(['Q1']), classesUrl(['Q5'])]) {
+    const query = decodeURIComponent(url)
+    const bindings = [...query.matchAll(/([a-z]+):(P\d+)/g)]
+    assert.ok(bindings.length > 0, 'the query binds no property at all')
+    for (const [binding, prefix, property] of bindings) {
+      assert.equal(
+        prefix,
+        'wdt',
+        `${binding} reads statements of every rank — write wdt:${property}, or filter on wikibase:rank at the call site`,
+      )
+    }
+  }
+})
+
 test('mergePlaceDefunct: marks location items as mappable/defunct based on class hierarchy', () => {
   // Mock item map with location data
   const itemMap = new Map([

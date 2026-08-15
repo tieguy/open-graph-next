@@ -246,6 +246,13 @@ export function rightsUrl(qids) {
     // The work's own status, with the two qualifiers that make it readable:
     // which country it is true in (P1001) and why anybody thinks so (P459).
     '?item p:P6216 ?st . ?st ps:P6216 ?cs . ' +
+    // Deprecated rank is an editor's record that this copyright claim is WRONG,
+    // so it is refused here rather than ranked with the rest. Every other
+    // branch below reads `wdt:`, which serves best-rank values and can never
+    // return one; this branch reaches the statement node for its qualifiers,
+    // so it must say no itself. Skipping the filter lets the freest-answer-
+    // leads rule print a disproven claim first, or as the only claim.
+    '?st wikibase:rank ?rank . FILTER(?rank != wikibase:DeprecatedRank) ' +
     'OPTIONAL { ?st pq:P1001 ?juris } OPTIONAL { ?st pq:P459 ?how } ' +
     '} UNION { ?item wdt:P275 ?lic ' +
     '} UNION { ?item wdt:P170 ?creator . ?creator wdt:P7763 ?ccs ' +

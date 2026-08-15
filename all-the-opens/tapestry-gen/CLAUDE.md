@@ -1501,6 +1501,36 @@ leads the section) → `emit-html`.
   format-specific layer.
 - No rendered image is squashed by a guessed aspect: the renderer states no
   dimensions and lets the file's own aspect stand (see Key Decisions).
+- **Every lookup reads a Wikidata property at best rank, through `wdt:`.**
+  `wdt:` serves best-rank values only, so no card rests on a deprecated
+  identifier — the load-bearing fact behind this project's claim to be a reuser
+  that reads ranks. The rule holds by convention, and breaking it is ordinary
+  work: a statement's qualifiers and references are reachable only through
+  `p:`/`ps:`, which return every rank, and species-box work (LUI-141) wants
+  exactly that in order to read P141's IUCN sourcing. Such an edit raises no
+  error. The site simply starts serving identifiers whose own catalogs retired
+  them. The exposure is live — Wikidata holds 866 deprecated P3151 statements
+  (2026-08-15), and the LUI-125 census of 2026-08-08 counted ~104k more stale
+  enough to deserve deprecation. A lookup that needs the statement node must
+  filter on `wikibase:rank`, and must say so where the binding is written. A
+  test over `statements.js`'s three query builders guards the rule.
+  **`rightsUrl` in `src/rights.js` is the single exception**, and it must stay
+  single: a copyright status is readable only with its jurisdiction (P1001) and
+  determination-method (P459) qualifiers, which hang off the statement node.
+  It therefore refuses deprecated rank in the query itself —
+  `FILTER(?rank != wikibase:DeprecatedRank)` — which every other branch gets
+  free from `wdt:`. A deprecated P6216 is an editor's record that a copyright
+  claim is **wrong**, not that it is old, and Wikidata holds 50 of them across
+  47 items (2026-08-15). Without the filter the freest-answer-leads rule ranks
+  a disproven claim beside a real one and the page contradicts itself: *Happy
+  Birthday to You* reads "public domain in the United States … · still in
+  copyright in the United States", the second clause being what a 2016 US
+  settlement disproved, and *Steamboat Willie* does the same. On *Ghidra* the
+  deprecated public-domain claim leads outright. The reach is the lede's rights
+  line rather than a partner card, because the subject QID is queried
+  unconditionally and none of the 47 items carries a Met/AIC/Rijksmuseum/IIIF
+  identifier. Two tests hold this: one pins the exception to those four
+  bindings, one asserts the filter.
 - **The footer's provenance is the caller's to state**, via `buildHtml({provenance})`.
   It was once hardcoded to the curated dataset, which made every live-discovery
   page contradict its own opening claim. Whatever goes there must be true of the
@@ -1617,6 +1647,11 @@ the politeness claim is checkable after a run rather than merely asserted here.
   author-works lookup (`works.json` → `search.json`). Both are one-time cache
   misses at unchanged request counts, for the same reason: the field rides a
   request that was already being made.
+- **`rightsUrl` gained its deprecated-rank filter on 2026-08-15**, so every
+  cached WDQS rights response is refetched exactly once — same request count,
+  the filter rides a query already being made, the same shape as the field
+  additions below. Pages whose subject carries a deprecated P6216 render
+  differently afterwards, which is the point; every other page is byte-identical.
 - **The OpenAlex `select` gained `is_retracted` on 2026-08-14** (both the
   citation batches and the author-works query), so every cached OpenAlex
   response is refetched once — same request count, the field rides requests

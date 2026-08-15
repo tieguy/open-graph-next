@@ -115,6 +115,49 @@ test('the query asks one narrow question per branch, never a cross product', () 
   assert.doesNotMatch(q, /P279/, 'no transitive walk is ever asked of items')
 })
 
+test('a copyright status Wikidata has deprecated is refused, not ranked', () => {
+  // A deprecated statement is an editor's record that a claim is WRONG — not
+  // that it is old. Every other property here is bound through `wdt:`, which
+  // serves best-rank values and so cannot return one; this branch reaches the
+  // statement node directly for its qualifiers, so it has to say no itself.
+  //
+  // Without the filter the freest-answer-leads rule ranks disproven claims
+  // alongside real ones, and a page contradicts itself: `Happy Birthday to You`
+  // (Q167545) carries both `public domain [United States]` and a deprecated
+  // `in copyright [United States]` — the claim a 2016 US settlement disproved —
+  // and would print them in one sentence. Wikidata holds 50 such statements
+  // across 47 items (measured 2026-08-15). Refusing them withholds rather than
+  // misstates, which is the stance every rights rule here takes.
+  const q = decodeURIComponent(rightsUrl(['Q167545']).split('query=')[1])
+  assert.match(q, /wikibase:rank/)
+  assert.match(q, /DeprecatedRank/)
+})
+
+test('the copyright status is the ONLY thing here read at every rank', () => {
+  // Everywhere else in this repo a property is bound through `wdt:`, which
+  // serves best-rank values and so can never hand back a deprecated statement
+  // (test/lookups.test.js states that invariant for the partner queries). This
+  // query is the single exception, and it has to be: the two qualifiers that
+  // make a copyright status readable — which country it holds in, and how
+  // anyone decided — hang off the statement node, which is reachable only
+  // through `p:`/`ps:`.
+  //
+  // Reaching the statement node costs the rank guarantee `wdt:` gives for
+  // free, which is why the branch buys it back with its own rank filter (the
+  // test above). What THIS test settles is that the exception stays this size:
+  // a new `p:`/`ps:`/`pq:` binding added for some other property fails here,
+  // and has to answer the rank question for itself before it can pass.
+  const q = decodeURIComponent(rightsUrl(['Q1']).split('query=')[1])
+  const everyRank = [...q.matchAll(/([a-z]+):(P\d+)/g)]
+    .filter(([, prefix]) => prefix !== 'wdt')
+    .map(([binding]) => binding)
+  assert.deepEqual(
+    [...new Set(everyRank)].sort(),
+    ['p:P6216', 'pq:P1001', 'pq:P459', 'ps:P6216'],
+    'a new binding reads statements of every rank — filter on wikibase:rank, or read it as wdt:',
+  )
+})
+
 // ---------------------------------------------------------------- row parsing
 
 const uri = (q) => ({ type: 'uri', value: `http://www.wikidata.org/entity/${q}` })
