@@ -21,6 +21,7 @@
  */
 import { showcaseTitles } from './src/front-page.js'
 import { warmAll } from './src/warming.js'
+import { HOLDER_FLAGSHIPS } from './tools/holder-flagships.mjs'
 
 const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki')
   .replace(/\/+$/, '')
@@ -28,5 +29,14 @@ const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki
 // than the slowest honest run, not tight.
 const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)
 
-const { failed } = await warmAll(BASE, showcaseTitles(), { timeoutMs: TIMEOUT_MS })
+// HOLDER_FLAGSHIPS=1 walks the holder-experiment flagships instead of the
+// showcase — an env var, not a flag argument, because argv[2] IS the base
+// URL. Point it at a HOLDER_PAGE=1 server; against a flag-off server it
+// warms the same articles as ordinary pages, which is harmless and useless.
+const titles = process.env.HOLDER_FLAGSHIPS ? HOLDER_FLAGSHIPS : showcaseTitles()
+
+const { failed } = await warmAll(BASE, titles, {
+  timeoutMs: TIMEOUT_MS,
+  label: process.env.HOLDER_FLAGSHIPS ? 'holder-flagship' : 'showcase',
+})
 process.exit(failed ? 1 : 0)
