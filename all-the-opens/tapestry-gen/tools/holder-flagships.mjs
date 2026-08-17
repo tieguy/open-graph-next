@@ -1,7 +1,9 @@
 // The holder-flagship warm list: The Night Watch plus one article per wired
-// museum holder — each lane's acceptance article, hand-picked and verified
-// against its holder property (P4610 on American Gothic checked 2026-08-17;
-// the others are the acceptance articles of the phases that wired them). The
+// museum holder — hand-picked, and verified to CLEAR THE GATE, not merely to
+// carry the property: American Gothic held this slot first, and the Art
+// Institute's own record flags it not-public-domain, so its flagship walk
+// warmed an ordinary page that showed a reviewer nothing (caught on staging
+// 2026-08-17). La Grande Jatte passes every leg in the QA sample. The
 // shared IIIF door has no flagship: it names no single institution, and its
 // gate pass-rate is the QA window's question, not a warm list's.
 //
@@ -16,7 +18,7 @@
 export const HOLDER_FLAGSHIPS = [
   { partner: 'rijks', title: 'The Night Watch' },
   { partner: 'met', title: 'Washington Crossing the Delaware (1851 paintings)' },
-  { partner: 'artic', title: 'American Gothic' },
+  { partner: 'artic', title: 'A Sunday Afternoon on the Island of La Grande Jatte' },
   { partner: 'cleveland', title: 'The Brierwood Pipe' },
   { partner: 'getty', title: 'Irises (painting)' },
 ]
