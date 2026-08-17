@@ -41,6 +41,7 @@ test('metRecordFrom carries the catalog fields and the museum-stated page and im
   assert.equal(record.partner, 'met')
   assert.equal(record.accession, '97.34')
   assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.uri, 'https://creativecommons.org/publicdomain/zero/1.0/')
   // primaryImageSmall (web-large) preferred; the full-res master stays behind the zoom link
   assert.match(record.imageUrl, /web-large/)
   assert.equal(record.href, 'https://www.metmuseum.org/art/collection/search/11417')
@@ -80,6 +81,7 @@ test('aicRecordFrom reads the AIC envelope and builds the record image at width 
   assert.equal(record.partner, 'artic')
   assert.equal(record.accession, '1942.51')
   assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.uri, 'https://creativecommons.org/publicdomain/zero/1.0/')
   assert.match(record.imageUrl, /831a05de/)
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://www.artic.edu/artworks/111628')
@@ -160,6 +162,7 @@ test('rijksRecordFrom composes from existing helpers', () => {
   assert.equal(record.title, 'The Night Watch')
   assert.equal(record.accession, 'SK-C-5')
   assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.uri, 'https://creativecommons.org/publicdomain/mark/1.0/')
   assert.equal(record.href, 'https://www.rijksmuseum.nl/en/collection/SK-C-5')
   assert.equal(record.institution, 'Rijksmuseum')
   assert.match(record.imageUrl, /800/)
@@ -205,6 +208,7 @@ test('iiifRecordFrom passes a v3 manifest with all gate legs', () => {
   assert.equal(record.title, 'A Painting')
   assert.equal(record.institution, 'Example Museum')
   assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.uri, 'https://creativecommons.org/publicdomain/zero/1.0/')
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://example.org/object/123')
   // v3 requiredStatement composes label and value when both exist

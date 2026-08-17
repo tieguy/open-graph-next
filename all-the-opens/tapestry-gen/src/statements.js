@@ -752,7 +752,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
 
 // The properties this lookup follows, in reader's words — an ⓘ fold that says
 // "P3634" and nothing else has explained nothing.
-const PROP_NAME = {
+export const PROP_NAME = {
   P3634: 'Met object ID (P3634)',
   P4610: 'Art Institute of Chicago artwork ID (P4610)',
   P13234: 'Rijksmuseum object ID (P13234)',

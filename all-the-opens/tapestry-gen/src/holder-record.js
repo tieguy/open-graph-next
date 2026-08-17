@@ -99,6 +99,7 @@ export function metRecordFrom(obj) {
     rights: {
       publicDomain: isPublicDomain,
       label: isPublicDomain ? 'CC0' : null,
+      uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl,
     href: nullIfEmpty(obj.objectURL),
@@ -137,6 +138,7 @@ export function aicRecordFrom(body) {
     rights: {
       publicDomain: isPublicDomain,
       label: isPublicDomain ? 'CC0' : null,
+      uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl,
     href: d?.id ? `https://www.artic.edu/artworks/${d.id}` : null,
@@ -175,6 +177,7 @@ export function rijksRecordFrom(obj, vis, digital, id) {
     rights: {
       publicDomain: isPublicDomain,
       label: rights?.label ?? null,
+      uri: rights?.url ?? null,
     },
     imageUrl,
     href: rijksPageUrl(obj, id),
@@ -281,6 +284,7 @@ export function iiifRecordFrom(manifest, manifestUrl) {
     rights: {
       publicDomain: isPublicDomain,
       label: rights?.label ?? null,
+      uri: rightsUri,
     },
     imageUrl,
     href,

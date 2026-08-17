@@ -66,6 +66,7 @@ import {
   metEntry,
   needsRightsQuery,
   partnerStatements,
+  PROP_NAME,
   resolveMappability,
   statementEntries,
 } from './statements.js'
@@ -915,7 +916,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       console.error(`  holder record fails gate (${failure})`)
       return null
     }
-    return { medium, ...holder, record }
+    return { medium, ...holder, record, subjectQid: subject.qid }
   })()
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
@@ -1453,6 +1454,33 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }))
 
     const entries = []
+    // The holder's record of the work comes first on a holder page — the page's reason for existing.
+    const holder = unit.index === '0' ? (await holderPromise) : null
+    if (holder) {
+      const holderCopy = holder.record.rights?.uri ? licenseView(ccFromUri(holder.record.rights.uri)) : null
+      const descParts = [holder.record.creator, holder.record.date]
+        .filter(Boolean)
+      const holderEntry = {
+        source: holder.partner,
+        title: holder.record.title,
+        description: descParts.length ? descParts.join(' · ') : null,
+        imageUrl: holder.record.imageUrl,
+        href: holder.record.href,
+        standing: 'holder-work',
+        attribution: {
+          author: holderCopy ? `${holder.record.institution} · ${holderCopy.label}` : holder.record.institution,
+          license: null,
+        },
+        rights: { copy: holderCopy },
+        why: `${holder.record.institution}’s own record of this ${holder.medium} — Wikidata names it directly.`,
+        trace: `Wikidata — the shared database behind Wikipedia’s infoboxes — records this ${holder.medium}’s ${PROP_NAME[holder.property] ?? holder.property}, and this is the record it points to.`,
+        fix: {
+          url: `https://www.wikidata.org/wiki/${holder.subjectQid}#${holder.property}`,
+          label: 'Check or fix it on Wikidata',
+        },
+      }
+      entries.push(holderEntry)
+    }
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
@@ -1541,9 +1569,14 @@ export async function discover(page, { emit = async () => {} } = {}) {
       if (!stmts) continue
       const isSubject = unit.index === '0' && qid === extras?.subjectQid
       const label = isSubject ? unit.title : (labels.get(qid) ?? null)
-      const found = (
-        await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0, subject: isSubject })
-      ).slice(0, statementsLeft)
+      let found = await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0, subject: isSubject })
+      // The holder's record is the subject's own card for this property. Suppressing
+      // the statement entry here keeps it on the page once — and only for the
+      // subject's QID, so an anchor that happens to carry the same property still cards.
+      if (isSubject && holder?.property) {
+        found = found.filter((e) => e._via !== holder.property)
+      }
+      found = found.slice(0, statementsLeft)
       // A partner's own record of what this article is about — the Art
       // Institute's American Gothic, iNaturalist's monarch. The hero picker
       // ranks these above any record of something merely linked here.
