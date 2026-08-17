@@ -19,6 +19,8 @@
  *
  * The tiers, and why they are ordered this way:
  *
+ * -1. The holding institution's record of the very work this article is about,
+ *     on a single-institution page — the page's reason for existing.
  * 0. The subject IS this document — a court's opinion, a scientist's thesis.
  *    Where the article is about a document, the document outranks every
  *    picture of it and every book about it. This is the front page's promise
@@ -35,6 +37,7 @@
  */
 export function heroRank(entry) {
   const visual = Boolean(entry.imageUrl || entry.media)
+  if (entry.standing === 'holder-work') return -1
   if (entry.standing === 'subject-document') return 0
   if (entry.standing === 'subject-record') return visual ? 1 : 2
   if (entry.standing === 'subject-work') return 3
