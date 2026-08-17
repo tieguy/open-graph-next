@@ -1292,18 +1292,60 @@ function mergedPanelAside(panelHtml, box, inline, wikiBase) {
  */
 function subjectRights(b) {
   const r = b.subjectRights
-  if (!r) return ''
+  const conflict = holderConflict(b)
+  if (!r) {
+    // The says-it-twice guard can hand the status line itself to a card that
+    // IS the subject; a rights disagreement still needs its box, quoting the
+    // graph's answer inline since nothing renders above it.
+    return conflict ? `<div class="subject-rights">${conflict}</div>` : ''
+  }
   const marks = rightsMarks(r.marks, r.label)
   const words = r.line ?? r.label
-  if (!marks && !words) return ''
+  if (!marks && !words) return conflict ? `<div class="subject-rights">${conflict}</div>` : ''
   const detail = rightsDetail({ rights: { work: r } })
   const body = detail
     ? `<details class="sr-why"><summary>Why, and what it means where you are</summary>${detail}</details>`
     : ''
   return (
     `<div class="subject-rights">` +
-    `<p class="sr-line">${marks}${escapeHtml(words ?? '')}</p>${body}</div>`
+    `<p class="sr-line">${marks}${escapeHtml(words ?? '')}</p>${conflict}${body}</div>`
   )
+}
+
+/**
+ * The museum's side of a rights disagreement. `discover.js` attaches
+ * `holderRefusal` only when a museum lane's record was refused on its
+ * rights flag alone AND the graph states a free answer — a refusal
+ * everyone agrees with (a Picasso) stays a plain refusal, because a
+ * one-sided line would imply a controversy the graph does not record.
+ * Both claims are stated, neither is called wrong, and the museum's
+ * record is the labeled door — the reader can check the flag themselves.
+ * When the subject-rights line renders above, "the status above" refers
+ * to it; when a card carries the status instead, the graph's answer is
+ * quoted inline. American Gothic is the living exemplar: PD in the US
+ * since 2026-01-01 by publication age, community-recorded PD by term,
+ * and the Art Institute's is_public_domain still false.
+ */
+function holderConflict(b) {
+  if (b.id !== 'slede' || !b.holderRefusal) return ''
+  const { phrase, href, statusLine } = b.holderRefusal
+  const door = href
+    ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the museum’s record →</a>`
+    : ''
+  const graphSide = b.subjectRights
+    ? 'The status above is what Wikidata records about the work itself'
+    : `Wikidata records the work itself as ${escapeHtml(statusLine ?? 'public domain')}`
+  return (
+    `<p class="sr-conflict">` +
+    `${escapeHtml(sentenceCase(phrase))} holds this work but doesn’t flag its own image ` +
+    `as public domain, so no museum image leads this page. ${graphSide} — the two ` +
+    `answers disagree, and both are shown.${door}</p>`
+  )
+}
+
+/** First letter up, for a phrase that opens a sentence ("the Met" → "The Met"). */
+function sentenceCase(s) {
+  return s ? s[0].toUpperCase() + s.slice(1) : s
 }
 
 /** All three parts as one fragment — what the stream ships and the tests read.
@@ -2055,6 +2097,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .subject-rights{clear:both;margin:0 0 14px;padding:9px 12px;border-radius:4px;
   background:#f6f8f8;border:1px solid var(--rule-strong);border-left:8px solid #b9c4c6}
 .subject-rights .sr-line{margin:0;font-size:.86rem;line-height:1.45;color:#3c4448}
+.subject-rights .sr-conflict{margin:6px 0 0;font-size:.86rem;line-height:1.45;color:#3c4448;border-top:1px solid #dde3e6;padding-top:6px}
 .subject-rights .ccrow{--ccmark-hole:#f6f8f8}
 .subject-rights .ccmark{width:1.25em;height:1.25em}
 .sr-why{margin:5px 0 0}

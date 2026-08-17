@@ -489,6 +489,22 @@ rights leg reads the museum's own per-object flag and nothing else — in the QA
 sample all six museum-lane refusals were modern works (Picasso, de Chirico,
 Klee, Rückriem, Domínguez) whose museums do not flag them public-domain.
 
+**A rights refusal the graph disputes is not silent** (2026-08-17, built on
+the operator's decision that the conflict must ship with the pages — and
+that the graph is never edited to pre-empt it; VALUES.md, same date). When
+a museum lane's record fails the gate on `non-pd-rights` alone AND
+Wikidata states a free answer about the work, the lede renders the
+`sr-conflict` line: both claims named, neither called wrong, the museum's
+record as the labeled door. `discover.js` attaches the refusal only in
+that conjunction — a Picasso refused by everyone stays a plain refusal,
+because a one-sided line would imply a controversy the graph does not
+record. When the says-it-twice guard hands the status line to a card, the
+conflict block stands alone and quotes the graph's words. American Gothic
+is the living exemplar: PD in the US since 2026-01-01 by publication age,
+community-recorded PD by term, and the Art Institute's own flag still
+false — the page shows the disagreement instead of anyone editing
+Wikidata to erase it.
+
 **The holder hero image hotlinks from the museum, and that sits unresolved
 against a stated value.** Museum images follow the inline-only-what-breaks
 rule (`hotlinkUnsafe` is a breakage criterion), so a reader's browser

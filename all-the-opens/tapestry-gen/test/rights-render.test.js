@@ -254,3 +254,46 @@ test('a IIIF manifest states its own terms, in either spec version', async () =>
   )
   assert.equal(junk.rights.copy, null)
 })
+
+// ------------------------------------------- the museum-flag disagreement
+
+const REFUSAL = {
+  partner: 'artic',
+  phrase: 'the Art Institute of Chicago',
+  institution: 'Art Institute of Chicago',
+  href: 'https://www.artic.edu/artworks/6565',
+  statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+}
+
+test('a rights-refused holder with a free graph answer names both sides', () => {
+  // The status renders above (subjectRights present), so the line points at it.
+  const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
+  assert.match(html, /sr-conflict/)
+  assert.match(html, /The Art Institute of Chicago holds this work but doesn’t flag its own image/)
+  assert.match(html, /The status above is what Wikidata records/)
+  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the museum’s record →/)
+})
+
+test('when a card carries the status, the disagreement quotes the graph inline', () => {
+  // subjectRights null — the says-it-twice guard handed the line to a card —
+  // so the conflict block stands alone and quotes the status words it was
+  // handed, rather than pointing at a line that is not there.
+  const html = bandRail(bandOf({ holderRefusal: REFUSAL }))
+  assert.match(html, /<div class="subject-rights"><p class="sr-conflict">/)
+  assert.match(html, /Wikidata records the work itself as public domain in countries where copyright lasts 70 years/)
+  assert.doesNotMatch(html, /The status above/)
+  assert.doesNotMatch(html, /sr-line/)
+})
+
+test('the disagreement is lede-only and absent without a refusal', () => {
+  const s3 = bandRail(bandOf({ id: 's3', holderRefusal: REFUSAL }))
+  assert.doesNotMatch(s3, /sr-conflict/)
+  const plain = bandRail(bandOf({ subjectRights: subjectView() }))
+  assert.doesNotMatch(plain, /sr-conflict/)
+})
+
+test('a refusal without a record page still renders, with no dead door', () => {
+  const html = bandRail(bandOf({ holderRefusal: { ...REFUSAL, href: null } }))
+  assert.match(html, /sr-conflict/)
+  assert.doesNotMatch(html, /See the museum’s record/)
+})

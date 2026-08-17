@@ -477,5 +477,8 @@ test('a non-holder render is byte-stable', async () => {
   const out = buildHtml({ title: 'Fixture', bands })
   const digest = createHash('sha256').update(out).digest('hex')
   // The pinned output includes the stylesheet: the .holder-panel, .infobox-chip, .infobox-conflict and .rail-panel rules are part of it.
-  assert.equal(digest, 'bcccfbeafbe538d032f986a73c474ffead4c45ef8610ad8c6db1ef45238ca444')
+  // Re-pinned 2026-08-17: STYLE gained the .sr-conflict rule (the museum-flag
+  // disagreement line) — a deliberate stylesheet change riding every page,
+  // the same exception shape as the holder panel's rules.
+  assert.equal(digest, '3966bdb8b82ee1440793dbd06e8e291a458d5304a14138b9eccec547e33edae4')
 })

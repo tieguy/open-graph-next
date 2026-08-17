@@ -916,7 +916,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // Single-institution work pages (HOLDER_PAGE=1, experiment): when the
   // article IS a museum-held work, its one holding institution — selected
   // from the subject's own best-rank identifiers, never by search.
-  const holderPromise = (async () => {
+  const holderVerdictPromise = (async () => {
     if (!HOLDER_PAGE) return null
     const subject = await subjectPromise
     const medium = workClass(subject.claims)
@@ -928,10 +928,28 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const failure = gateFailure(record)
     if (failure) {
       console.error(`  holder record fails gate (${failure})`)
+      // A rights refusal is not silent: the record got far enough to name its
+      // institution, and the museum's flag disagreeing with the graph's
+      // answer about the work is a finding this page exists to surface — the
+      // renderer shows it only where the graph actually states a free
+      // answer, so a Picasso refused by everyone stays a plain refusal.
+      if (failure === 'non-pd-rights' && record?.institution) {
+        return {
+          refusal: {
+            partner: holder.partner,
+            // The reader's-words name where one exists; an iiif refusal uses
+            // the manifest's own stated institution, never the generic row.
+            phrase: holder.partner === 'iiif' ? record.institution : (MUSEUM_NAME[holder.partner] ?? record.institution),
+            institution: record.institution,
+            href: record.href ?? null,
+          },
+        }
+      }
       return null
     }
-    return { medium, ...holder, record, subjectQid: subject.qid }
+    return { holder: { medium, ...holder, record, subjectQid: subject.qid } }
   })()
+  const holderPromise = holderVerdictPromise.then((v) => v?.holder ?? null)
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
   // reader sees rails arrive when the slowest batch a band needs settles, so
@@ -1585,6 +1603,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // access lookups sat out on a holder page, so every band's tally must
     // say so.
     const pageHolder = await holderPromise
+    const holderRefusal = (await holderVerdictPromise)?.refusal ?? null
     const coverage = citationCoverage(unit.counted, ol.volumes, ol.unchecked, {
       // On a holder page no access lookup ran; the tally must say "not
       // checked", never let a negative stand.
@@ -1813,7 +1832,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // prose repeating it would be the duplicate disclosure this page keeps
     // deleting.
     let subjectRights = null
-    if (extras?.subjectQid && !entries.some((e) => e.rights?.work)) {
+    let refusalShown = null
+    if (extras?.subjectQid) {
       const rec = rights.get(extras.subjectQid)
       // Which route Paulina should take is decided by what the graph holds:
       // P6216 is a property of works, P7763 of the people who make them.
@@ -1822,8 +1842,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // A view with neither marks nor a sentence is nothing to show. That
       // happens when the only statement is "not yet determined", which is a
       // real answer about the state of the graph and not an answer about the
-      // work — see the status vocabulary in src/rights.js.
-      if (view && (view.marks.length || view.line)) subjectRights = view
+      // work — see the status vocabulary in src/rights.js. The some() guard
+      // is the says-it-twice rule: a lede card that IS the subject already
+      // carries this claim.
+      if (view && (view.marks.length || view.line) && !entries.some((e) => e.rights?.work))
+        subjectRights = view
+      // The museum's side of a rights disagreement travels only where the
+      // graph actually states a free answer: a refusal everyone agrees with
+      // (a Picasso) stays a plain refusal, because a one-sided line would
+      // imply a controversy the graph does not record. The status words ride
+      // along so the renderer can quote the graph's answer even when the
+      // says-it-twice guard hands the status line itself to a card.
+      if (holderRefusal && view?.marks.some((m) => m === 'pd' || m === 'zero'))
+        refusalShown = { ...holderRefusal, statusLine: view.line ?? view.label }
     }
 
     if (extras?.works.entries.length)
@@ -1911,6 +1942,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // page-wide pageHolder above gates the DISPATCHES on every band; the
       // band itself carries holder FURNITURE only on the lede.
       holder: unit.index === '0' ? pageHolder : null,
+      // Lede-only like the holder itself: a museum-lane candidate the gate
+      // refused on rights, where the graph states a free answer the flag
+      // disagrees with. Null on any other leg, and null when the graph
+      // agrees with the museum.
+      holderRefusal: unit.index === '0' ? refusalShown : null,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)

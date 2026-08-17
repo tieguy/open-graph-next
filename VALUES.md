@@ -117,6 +117,20 @@ Each dated or sourced; the place the full argument lives is named.
   which is different from special-casing one partner's quirks inside a
   shared mechanism.
 
+- **Surface the graph's problems; do not fix them ahead of the tool**
+  (2026-08-17, stated while deciding not to correct American Gothic's stale
+  P6216). When a page turns on a defect in Wikidata — a stale qualifier, a
+  missing statement, a museum flag the community's determination has passed
+  by — the project's move is to build the tool that SHOWS the defect, not to
+  edit the graph first: an edit erases the live exemplar the tool exists to
+  surface, and fixes one item where the tool teaches every reader to find
+  the class. Editing Wikidata stays available when absolutely necessary
+  (a defect blocking correctness with no disclosure path), never as the
+  default reflex. The Prandtl P724 edit predates this entry and closed a
+  case the right way for a different reason — the graph learned an
+  identifier no tool could have surfaced; the distinction is between
+  completing the graph and pre-empting the finding.
+
 ## Explicitly not values
 
 Each of these was asserted by a session and corrected; do not resurrect them.
