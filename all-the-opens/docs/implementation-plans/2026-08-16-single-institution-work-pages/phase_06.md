@@ -44,9 +44,9 @@ without a published policy quoted in `hostLimits`.
 
 **What the probe deliberately does NOT test:** artist search. Capability
 (c) — holder-scoped anchor discovery — rides the Wikidata works-by-creator
-query for every holder (Phase 5's documented deviation from the design's
-letter), so no museum search API is probed or needed; the probe's job is
-capabilities (a) record-by-ID and (b) image + license.
+query for every holder (design doc, Decisions 2026-08-16: capability (c)
+rides the graph), so no museum search API is probed or needed; the
+probe's job is capabilities (a) record-by-ID and (b) image + license.
 
 No code. Produce a dated probe note appended to
 `all-the-opens/docs/reaching-open-collections.md` (follow the two rules at

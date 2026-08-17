@@ -307,8 +307,9 @@ values.
 
 ### Phase 5: Single-source discipline + holder-scoped anchors
 **Goal:** Flag-on pages draw every enrichment from the holder: other
-partners suppressed; anchor discovery (capability (c)) searches only the
-holder's collection.
+partners suppressed; the holder's related holdings (capability (c)) come
+from one Wikidata works-by-creator query restricted to the holder's
+property.
 
 **Components:**
 - Partner suppression under the flag in `src/discover.js`

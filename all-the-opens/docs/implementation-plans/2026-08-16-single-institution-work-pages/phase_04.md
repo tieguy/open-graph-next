@@ -145,7 +145,12 @@ design decision):
 ## Task 3: Place the panel on holder pages
 
 **Files:**
-- Modify: `src/emit-html.js` (the infobox-fallback site, `:1126` region)
+- Modify: `src/emit-html.js` — the panel replaces `infobox` where it is
+  CHOSEN, not where it is rendered: the deciding branch is
+  `if (infobox && hero) { if (heroRank(hero) <= 3) infobox = null }` at
+  `:975-983`, and a holder hero (rank −1) always trips it, so on a holder
+  page bypass that suppression and hand the merged panel to the render
+  site (`infoboxAside`, `:1126` region) instead of the plain box.
 
 **Step 1:** On a holder page (context from Phase 3), the lede renders the
 merged panel where the plain infobox would have rendered or been withheld:

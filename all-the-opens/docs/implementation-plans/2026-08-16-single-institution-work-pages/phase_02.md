@@ -304,9 +304,11 @@ baseline. `npm test` green.
 
 ## Phase done when
 
-- Transform tests pass for met, artic, rijks, and iiif (v2 + v3 + the two
-  gate-failure fixtures) with fixture data; URL builders equal the existing
-  fetchers' URLs (AIC's after its one documented field-widening re-key).
+- Transform tests pass for met, artic, rijks, and iiif (one passing v3
+  manifest plus the four gate-failure fixtures: v2-only, no rights, two
+  providers, no object page) with fixture data; URL builders equal the
+  existing fetchers' URLs (AIC's after its one documented field-widening
+  re-key).
 - The manifest inspection window's pass/fail distribution is recorded,
   dated — and if PASS was near zero, the operator was asked before
   proceeding.

@@ -162,9 +162,9 @@ literal is "IIIF collections", which the design forbids): the masthead
 the STREAMING legend — a second copy of the same line inside
 `streamHeroExtras` (`:1435`), the deployed path — the hero card's own
 source bar (`:110`), and the visibility panel's partner rows
-(`visibilityReport` prints `SOURCE[r.slug]?.name`, `:231`, over
-`src/gap.js`'s tally; the panel's COUNTS are untouched — only the display
-name is overridden). Thread one display-name override keyed by the
+(`gapPanel` prints `SOURCE[r.slug]?.name` at `src/emit-html.js:231`, over
+`visibilityReport`'s tally from `src/gap.js`; the panel's COUNTS are
+untouched — only the display name is overridden). Thread one display-name override keyed by the
 holder's source through all five sites, gated on the holder context (for
 streaming, it rides the `holder` option Step 3b adds to
 `streamHeroExtras`). Tests: `test/render.test.js` pins legend, card bar,
