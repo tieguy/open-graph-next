@@ -424,6 +424,131 @@ exists (0 hits in the property namespace for "Corpus Vitrearum", checked
 re-scraped them. A DOI-registered, CC BY, 28,000-image national corpus is —
 for machine purposes — orphaned by its own migration.
 
+## 11. Cleveland Museum of Art: keyless, CC0, every contract field on one record `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P11110 values from WDQS (compliant UA): `1932.313`, `1972.29`,
+`1943.178`, `2003.6.1`, `1943.389`.
+
+```
+curl -s https://openaccess-api.clevelandart.org/api/artworks/1932.313
+# → 200: title "The Four Horsemen, from The Apocalypse", creators[].description
+#   "Albrecht Dürer (German, 1471–1528)", creation_date "c. 1498", technique
+#   "woodcut", measurements, accession_number "1932.313", creditline,
+#   share_license_status "CC0", images.web.url (openaccess-cdn.clevelandart.org),
+#   url "https://clevelandart.org/art/1932.313"
+curl -s https://openaccess-api.clevelandart.org/api/artworks/9999.999
+# → 404: {"detail": "Artwork not found"} — the control passes.
+```
+
+Image HEAD: 200, `image/jpeg`, range support, no anti-hotlink posture seen.
+License, the museum's own words (clevelandart.org/open-access, read
+2026-08-17): "The CMA makes images and metadata available under Creative
+Commons Zero (CC0) … all without fees or restriction." No NC anywhere. No
+published rate policy (API docs and robots.txt silent) — `hostLimit()`
+stays 1. Keyless, verified by an unauthenticated 200.
+
+**IN.** The cleanest surface of the five probed.
+
+## 12. Getty: the Linked Art endpoint answers real and bogus alike; the object page carries the record `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P2582 values from WDQS: `1078D0`, `108NVJ`, `103R3F`, `103R8V`, `108P5B`.
+
+```
+curl -s https://data.getty.edu/museum/collection/object/1078D0 -H 'Accept: application/ld+json'
+curl -s https://data.getty.edu/museum/collection/object/000000X -H 'Accept: application/ld+json'
+# → both 404 {"errors":[{"status":404,"title":"Record Not Found"}]}, byte-identical —
+#   the control rule says this endpoint is refusing to talk, not reporting broken ids.
+curl -s https://www.getty.edu/art/collection/object/1078D0
+# → 200, JSON-LD embedded in the page: title, creator "Washington George Smith
+#   (American, 1828 - 1893)", date 1865–1875, medium "Albumen silver print",
+#   accession "84.XC.873.7796", license CC0 URI, IIIF image URL
+#   (media.getty.edu, level 2, CORS *), own page URL. Bogus id → 200 with
+#   null indexedId and a generic page — distinguishable.
+```
+
+Dimensions not present in the page JSON-LD. License, the Getty's own words
+(getty.edu/projects/open-content-program, read 2026-08-17): "Images … are
+available under CC0 through Getty's Open Content Program." No NC. No
+published rate policy — stays 1. Keyless.
+
+**IN, qualified:** the record surface is the object page's embedded
+JSON-LD, not a JSON API — implementable, but bot mitigation on www.getty.edu
+could bite a server-side fetcher; the live render is the test.
+
+## 13. Paris Musées: CC0 images behind a free token the API refuses to talk without `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P6246 values from WDQS: `111480`, `151559`, `151788`, `152006`, `152133`.
+
+```
+curl -s https://apicollections.parismusees.paris.fr/graphql -X POST   -H 'Content-Type: application/json' -d '{"query":"query { … }"}'
+# → 200 with an HTML "Accès refusé" page, identical for real and bogus ids —
+#   uniform auth refusal, not bot mitigation: the docs say an account-issued
+#   auth token is required (parismuseescollections.paris.fr/en/node/777951).
+```
+
+License: images CC0 since 2020-01-08, the institution's own words
+(parismuseescollections.paris.fr/fr/les-images-sous-droits, read
+2026-08-17): high-definition downloads "without limitation", commercial
+use included. No NC on images or API terms found. No published rate
+policy. Key: free account → token (env var would be
+`PARIS_MUSEES_API_TOKEN`).
+
+**IN, pending an operator-created token.** The contract fields are
+documented but unverifiable keyless; account creation is the operator's
+action, and the record-by-ID control cannot run until then.
+
+## 14. National Gallery of Art: CC0 everywhere, and no door that answers by id `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+```
+curl -sI https://www.nga.gov/artworks/10038-strolling-musicians
+curl -sI https://www.nga.gov/artworks/999999999
+# → both 403, cf-mitigated: challenge — real and bogus indistinguishable, the
+#   control rule's refusing-to-talk shape.
+curl -sI https://images.nga.gov/en/search
+# → 301 into the same Cloudflare-gated site.
+```
+
+What exists instead: the GitHub bulk CSV (`NationalGalleryOfArt/opendata`,
+130k+ records, all contract fields, CC0 waiver in the museum's own words —
+read 2026-08-17) and a `dataServices` repo that is source code, not a
+running endpoint. License is exemplary; the shape is wrong: bulk-only, no
+record-by-ID surface.
+
+**OUT: no confirmed record-by-ID surface.** The data would qualify the
+moment one exists.
+
+## 15. Nationalmuseum Sweden: P2538 names artists, and there is no object property to probe `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe; the plan predicted a likely fail).*
+
+P2538's formatter (P1630) is `collection.nationalmuseum.se/sv/artists/artist/$1/`
+— an ARTIST page. Real id 10038 → 200 (an artist profile), bogus → 404: the
+host distinguishes cleanly, and what it serves is people, not objects.
+
+```
+curl -sI https://collection.nationalmuseum.se/api/object/10038      # 404
+curl -sI https://collection.nationalmuseum.se/oai-pmh               # 404
+curl -sI http://nationalmuseumse.iiifhosting.com/iiif/10038/manifest.json  # 404
+# K-samsök/SOCH probing at kulturarvsdata.se found no NM object surface either.
+```
+
+License (nationalmuseum.se, read 2026-08-17): photographer-copyright images
+CC BY-SA 4.0, PD images marked public domain — no NC. Not a licensing
+problem and not bot mitigation: a genuine capability gap. The museum has no
+object-level Wikidata property at all, so the holder pipeline — which
+detects by the subject's own object identifier — has nothing to detect by.
+
+**OUT: no object identifier property and no object API.** Revisit if either
+appears.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
