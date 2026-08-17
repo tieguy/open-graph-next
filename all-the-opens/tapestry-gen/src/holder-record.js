@@ -1,7 +1,10 @@
 // Catalog records normalized to one shape, gated on the museum's own rights flag.
 //
-// Each transform — metRecordFrom, aicRecordFrom, rijksRecordFrom, iiifRecordFrom —
-// normalizes a partner's catalog response to the holder-record contract shape.
+// Pure transforms (metRecordFrom, aicRecordFrom, rijksRecordFrom, iiifRecordFrom)
+// normalize catalog responses to one shape; URL builders (metRecordUrl, aicRecordUrl)
+// and the fetchHolderRecord dispatcher touch the network.
+//
+// Each transform normalizes a partner's catalog response to the holder-record contract shape.
 // Missing fields are null; a null or non-object response yields null;
 // otherwise the record exists and its gate may fail.
 //
@@ -20,13 +23,29 @@ import {
   rijksPageUrl,
   rijksRights,
   imageBaseFrom,
+  rijksRecordObjects,
 } from './rijks.js'
 import { PARTNERS } from './partners.js'
+import { getJson } from './http.js'
 
 /**
  * Normalize empty string to null.
  */
 const nullIfEmpty = (v) => (typeof v === 'string' && !v.trim() ? null : v ?? null)
+
+/**
+ * Build the URL for fetching a Met catalog record.
+ */
+export function metRecordUrl(id) {
+  return `https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`
+}
+
+/**
+ * Build the URL for fetching an AIC catalog record.
+ */
+export function aicRecordUrl(id) {
+  return `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line`
+}
 
 /**
  * Gate check: returns null if record passes all gate legs, else the name of the first failed leg.
@@ -268,5 +287,28 @@ export function iiifRecordFrom(manifest, manifestUrl) {
     institution,
     requiredStatement: iiifRequiredStatement(manifest),
     _providers: providers.length, // Internal: track provider count for gateFailure
+  }
+}
+
+/**
+ * Fetch a holder's catalog record from the museum's API.
+ * Returns a normalized record (passing or failing the gate), or null on fetch failure.
+ *
+ * Failure semantics:
+ * - A throw on the gate-field path → log to stderr → null.
+ * - rijks: a failed secondary hop leaves those fields null (implemented in rijksRecordObjects);
+ *   this catch is all-or-nothing — it also swallows a transform bug, logged as 'holder record failed'.
+ */
+export async function fetchHolderRecord(holder) {
+  try {
+    if (holder.partner === 'met') return metRecordFrom(await getJson(metRecordUrl(holder.id)))
+    if (holder.partner === 'artic') return aicRecordFrom(await getJson(aicRecordUrl(holder.id)))
+    if (holder.partner === 'rijks') return rijksRecordFrom(...(await rijksRecordObjects(holder.id)))
+    if (holder.partner === 'iiif') return iiifRecordFrom(await getJson(holder.id), holder.id)
+    console.error(`  holder record: no fetcher for partner ${holder.partner}`)
+    return null
+  } catch (e) {
+    console.error(`  holder record failed (${holder.partner} ${holder.id}): ${e.message}`)
+    return null
   }
 }

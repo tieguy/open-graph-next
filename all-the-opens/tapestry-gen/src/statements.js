@@ -18,6 +18,7 @@ import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
 import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
+import { metRecordUrl, aicRecordUrl } from './holder-record.js'
 
 /** Properties this lookup reads, and the shape they come back in. */
 const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
@@ -491,7 +492,7 @@ export function metEntryFrom(obj) {
 }
 
 export async function metEntry(id) {
-  return metEntryFrom(await getJson(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`))
+  return metEntryFrom(await getJson(metRecordUrl(id)))
 }
 
 export function aicEntryFrom(body) {
@@ -518,11 +519,7 @@ export function aicEntryFrom(body) {
 }
 
 export async function aicEntry(id) {
-  return aicEntryFrom(
-    await getJson(
-      `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line`,
-    ),
-  )
+  return aicEntryFrom(await getJson(aicRecordUrl(id)))
 }
 
 // Wikipedia's own bar (Commons' licensing policy): CC0, public domain, CC BY,

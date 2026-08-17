@@ -232,13 +232,17 @@ export function rijksEntryFrom(obj, vis, digital, id) {
 }
 
 /**
- * One object id → one card, in three serial requests on this host's queue.
+ * Fetch the raw objects for a Rijksmuseum record: the object, visual item, and digital object.
+ * Returns a tuple [obj, vis, digital, id] suitable for rijksRecordFrom.
  *
- * Hops 2 and 3 are skipped the moment one of them yields nothing: a record
- * with no reachable image still makes a truthful text card naming what the
- * museum holds, which is better than dropping the object entirely.
+ * Hop 1 throws on fetch error. Hops 2 and 3 degrade to null: a record with no
+ * reachable image still makes a truthful text card naming what the museum holds,
+ * which is better than dropping the object entirely.
+ *
+ * This is the three-hop walk that rijksEntry also performs; it is exported as a helper
+ * so fetchHolderRecord can reuse the same fetch pattern.
  */
-export async function rijksEntry(id) {
+export async function rijksRecordObjects(id) {
   const obj = await getJson(`https://id.rijksmuseum.nl/${id}`)
   const visId = visualItemId(obj) ?? derivedVisualItemId(id)
   let vis = null
@@ -248,5 +252,11 @@ export async function rijksEntry(id) {
     const digId = digitalObjectId(vis)
     if (digId) digital = await getJson(`https://id.rijksmuseum.nl/${digId}`).catch(() => null)
   }
+  return [obj, vis, digital, id]
+}
+
+/** One object id → one card, in three serial requests on this host's queue. */
+export async function rijksEntry(id) {
+  const [obj, vis, digital] = await rijksRecordObjects(id)
   return rijksEntryFrom(obj, vis, digital, id)
 }

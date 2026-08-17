@@ -83,6 +83,7 @@ import {
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
 import { workClass, selectHolder } from './holder.js'
+import { fetchHolderRecord, gateFailure } from './holder-record.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -908,7 +909,13 @@ export async function discover(page, { emit = async () => {} } = {}) {
     const holder = selectHolder(subject.claims)
     if (!holder) return null
     console.error(`  holder page: ${medium} held by ${holder.partner} (${holder.property} ${holder.id})`)
-    return { medium, ...holder }
+    const record = await fetchHolderRecord(holder)
+    const failure = gateFailure(record)
+    if (failure) {
+      console.error(`  holder record fails gate (${failure})`)
+      return null
+    }
+    return { medium, ...holder, record }
   })()
 
   // Stderr diagnostics: which global batch is the long pole. A streaming

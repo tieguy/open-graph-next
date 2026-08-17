@@ -6,7 +6,22 @@ import {
   rijksRecordFrom,
   iiifRecordFrom,
   gateFailure,
+  metRecordUrl,
+  aicRecordUrl,
 } from '../src/holder-record.js'
+
+test('metRecordUrl builds the URL the existing entry fetcher requests', () => {
+  const url = metRecordUrl('11417')
+  assert.equal(url, 'https://collectionapi.metmuseum.org/public/collection/v1/objects/11417')
+})
+
+test('aicRecordUrl builds the URL the existing entry fetcher requests', () => {
+  const url = aicRecordUrl('111628')
+  assert.equal(
+    url,
+    'https://api.artic.edu/api/v1/artworks/111628?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line',
+  )
+})
 
 test('metRecordFrom carries the catalog fields and the museum-stated page and image', () => {
   const record = metRecordFrom({
