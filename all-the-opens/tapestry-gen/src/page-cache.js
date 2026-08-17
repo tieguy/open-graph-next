@@ -85,6 +85,7 @@ export function buildId() {
     // origin change with unchanged source must retire the stored pages too,
     // or they replay the old origin forever.
     files.push({ name: 'env:SITE_ORIGIN', bytes: process.env.SITE_ORIGIN ?? '' })
+    files.push({ name: 'env:HOLDER_PAGE', bytes: process.env.HOLDER_PAGE ?? '' })
     return sourceFingerprint(files)
   } catch (e) {
     // Unreadable source is not a reason to refuse to serve; it is a reason not
