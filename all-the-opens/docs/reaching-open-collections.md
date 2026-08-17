@@ -578,8 +578,10 @@ curl -s --insecure …objects!805/manifest.json   # one-shot diagnosis only
 
 Strict TLS clients (curl, Node fetch — our pipeline) fail; Chrome-family
 browsers typically load it anyway (AIA chasing fetches the missing
-intermediate), Firefox typically does not. 184 of the census's 686 P6108
-rows — 27% of the IIIF lane — sit behind this one misconfiguration.
+intermediate), Firefox typically does not. Confirmed in the operator's own
+browser 2026-08-17: the manifest loads, flagged as a broken certificate.
+184 of the census's 686 P6108 rows — 27% of the IIIF lane — sit behind
+this one misconfiguration.
 
 **The fix is the museum's (or its vendor's): serve the intermediate.** One
 report to Orsay/ephoto could open the second-largest block of the lane.
@@ -601,11 +603,30 @@ curl -sI "…manifest.json?cultObj:id=999999999"
 #   real and bogus alike: that host does not serve manifests at all
 ```
 
+Same day, from the operator's browser and the open-data repo, the fuller
+picture — the endpoint is likelier RETIRED than gated:
+
+- A browser also ends at `api.nga.gov` without the query and gets the 404
+  (observed in the operator's browser 2026-08-17, id not recorded; a
+  real-id paste that stays on `www.nga.gov` and shows JSON would overturn
+  this reading).
+- `published_images.csv` in `NationalGalleryOfArt/opendata` (rows modified
+  2026-04) names the CURRENT infrastructure: a IIIF **Image** API at
+  `api.nga.gov/iiif/<uuid>` — and it answers our plain server UA keylessly:
+
+  ```
+  curl -sI "https://api.nga.gov/iiif/00007f61-4922-417b-8f27-893ea328206c/full/!200,200/0/default.jpg"
+  # → 200 image/jpeg, no challenge; info.json answers likewise
+  ```
+
 So the 214 P6108 rows pointing at `www.nga.gov` — 31% of the IIIF lane —
-name an endpoint that exists and challenge-gates non-browser clients. Per
-note 14, the sanctioned door is the open-data CSV on GitHub; a server-side
-challenge workaround would be fingerprint spoofing and is not this
-project's move. Asking NGA for API access is.
+likely name a retired Presentation endpoint: graph rot, not hostility.
+NGA's images and bulk data (uuid↔object mappings, `openaccess` flags,
+reconciled Wikidata Q-ids) are open to servers today. A future NGA lane
+would be the playbook's "neither shape" case — record-by-id answered from
+the published CSV plus the live Image API — not an IIIF-door lane, and
+not a challenge workaround, which would be fingerprint spoofing and is
+not this project's move.
 
 ## Already recorded elsewhere in this repo
 
