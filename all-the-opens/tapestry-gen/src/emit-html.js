@@ -1337,7 +1337,8 @@ function holderConflict(b) {
   // Each clause stays at its own level — the copy/work rule ("neither is
   // ever printed as the other"): what the gate read is the record's flag
   // over the IMAGE it releases (true of every lane — imageUrl is gated on
-  // that flag in every normalizer), and Wikidata's clause says "the work
+  // that flag in every holder normalizer; the card path's entry builders
+  // have their own rules), and Wikidata's clause says "the work
   // itself". "Institution", not "museum": the door lane's holder can be a
   // library or an archive. On a MIXED record the graph itself says "still
   // in copyright" somewhere and the flag may simply agree with that
