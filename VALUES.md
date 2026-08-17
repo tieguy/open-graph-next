@@ -84,6 +84,23 @@ Each dated or sourced; the place the full argument lives is named.
   the Prandtl P724 closure, `tapestry-gen/CLAUDE.md` Evidence classes). A fix
   recorded in Wikidata is inherited by every reuser; a fix here helps only
   this repo.
+- **The reader's browser talks to us, not to the partners** (Luis,
+  2026-08-16, stated during the single-institution work-pages design; the
+  proxy/caching architecture had implemented this deliberately since
+  2026-08-05 without the principle being written down, which was the
+  mistake this entry corrects). Server-side fetching, the `/img/` registry,
+  and link-out-instead-of-embed exist so that reading an enriched page
+  discloses nothing to third parties: a reader reaches a partner's servers
+  only by choosing a labeled link. This is a goal for every future design
+  here, not an implementation accident — and it is load-bearing for
+  adoption: the 2023 Community Wishlist Wikisource-IIIF proposal records
+  "concerns over user data privacy and loading of third-party content" as
+  the community's own blocker for third-party IIIF, so anything handed to
+  WMF on a plate must show this was designed for. Caveat, stated honestly:
+  a hosted tool is never truly private — whoever operates the server (this
+  demo's Fly instance today, Toolforge if it ever moves) still sees the
+  requests; the claim is "no third-party disclosure by default," never
+  "private."
 - **Wikipedia is a friend, not a target.** The gap is *measured*, never
   requested (a request walks into WP:ELBURDEN; a report does not — LUI-122),
   and the constraint is never overstated: not "there is no route" but "no
