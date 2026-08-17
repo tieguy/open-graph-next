@@ -417,12 +417,14 @@ plan validation):**
   viewer (their traffic, their viewer, no tile proxying, works for holders
   without IIIF). IIIF embedding remains possible later as a per-partner
   opt-in — it is the standard's intended use — but round one links out
-  everywhere. The 2023 Community Wishlist Wikisource-IIIF proposal records
-  the community's own objection to embedded third-party IIIF — "concerns
-  over user data privacy and loading of third-party content" — and this
-  architecture avoids it structurally: images proxy server-side, and a
-  reader reaches the museum's servers only by choosing the labeled
-  link out.
+  everywhere. Reader privacy is a stated project value here, not a side
+  effect (VALUES.md, "The reader's browser talks to us, not to the
+  partners", 2026-08-16): images proxy server-side, and a reader reaches
+  the museum's servers only by choosing the labeled link out. The 2023
+  Community Wishlist Wikisource-IIIF proposal records "concerns over user
+  data privacy and loading of third-party content" as the community's own
+  blocker for third-party IIIF — designing for it is part of what makes
+  this experiment handable to WMF.
 - **Work-articles revise the infobox-as-furniture rule** (2026-08-08
   design): on these pages the infobox participates in a merged, per-row
   attributed panel, with conflicts shown side by side. Everywhere else the
@@ -459,9 +461,17 @@ run the servers; that contrast belongs in the demo's story. Parked
 fold-ins from the 2019 Presentation API discussion: emit the census as
 per-institution IIIF Collections (Tom Crane's result-sets-as-Collections
 pattern) so IIIF-native tools can browse what this experiment renders;
-and P2677 (relative position within image) as a panel enrichment.
-Adjacent: wikipedia-to-iiif (Crane) generates manifests from Wikimedia
-content — the inverse direction.
+and P2677 (relative position within image) as a panel enrichment — for
+which a living tool already exists: wd-image-positions.toolforge.org
+(Werkmeister) serves a IIIF v2 manifest with depicts-annotations for any
+QID, The Night Watch included (probed 2026-08-16); consume or link it
+rather than building. The wishlists' other prototypes, probed the same
+day: ZoomViewer — the 2015 labs IIIF Image API prototype (T89552,
+github.com/toollabs/zoomviewer) — has a live repo (last push 2023-08)
+and a dead tool (both endpoints 404); wikipedia-to-iiif (Crane) generates
+manifests FROM Wikimedia content — the inverse direction — and is
+dormant since 2018-06. The umbrella Phabricator task for IIIF in content
+partnerships (T261621) remains open.
 
 **Error handling:** upstream failures use the existing cool-off machinery;
 a degraded render during cool-off is not stored (existing rule). The
