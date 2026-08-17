@@ -703,6 +703,54 @@ without guessing. The fix is theirs and small — v3 manifests with
 world (meemoo is two entries up this lane), where that upgrade is an
 ordinary ask.
 
+## 21. The IIIF lane's tail, swept: every remaining host, one diagnosis each `[ours]`
+
+*Observed 2026-08-17 — one representative manifest per host, fetched with
+the pipeline's own stack and run through the real `gateFailure`; bogus-id
+controls where the host answered. Completes the lane census begun in
+entries 16–20; every one of the lane's 686 P6108 rows now has a named
+root cause.*
+
+| rows | host | verdict |
+|---|---|---|
+| 20 | iiif.harvardartmuseums.org | v2, named only in prose ("Harvard Art Museums"), no license stated |
+| 12 | sammlung.belvedere.at | v2 shell — attribution null, nobody named |
+| 10 | art.nelson-atkins.org | 404, real and bogus alike — path retired or ids reshaped |
+| 8 | imagehub.mskgent.be | v3, PDM, but no `provider` and no `homepage` — near-miss |
+| 7 | munch.emuseum.com | DNS gone (ENOTFOUND) — dead hostname |
+| 6 | catalogo.museivaticani.va | v2, "Copyright Musei Vaticani" — a correct refusal in any version |
+| 5 | objektkatalog.gnm.de | v2, WissKI boilerplate attribution, nobody named |
+| 5 | damsssl.llgc.org.uk | v2, PDM/CC0-licensed, NLW named only in prose — KMSKA class |
+| 4 | dams.antwerpen.be | v2, no attribution at all |
+| 3 | data.artmuseum.princeton.edu | v3, well-formed, named — rights genuinely reserved (gate correct) |
+| 2 | api.artic.edu (manifests) | v2, courtesy-line prose; these items ride the direct P4610 lane anyway |
+| 2 | gn.biblhertz.it | v3, named — a rights-restricted photo archive, correctly refused |
+| 2 | manifests.collections.yale.edu | **v3, CC0, real homepage — `provider` is the ONLY missing field.** YCBA's new (LUX) service, where entry 18's 53 dead rows should point |
+| 2 | collections.hammer.ucla.edu | 429 on first request — respected, not retried; unknown |
+| 1 | apicollections.parismusees.paris.fr | v2 shell, nobody named |
+| 1 | iiif-manifest.library.vanderbilt.edu | v2, prose credit only |
+| 1 | iiif.lib.harvard.edu | 200 but non-JSON body |
+| 1 | gallerycollections.courtauld.ac.uk | v3, named, homepage — rights reserved, correctly refused |
+| 1 | www.beethoven.de | v3, named only in prose spans, no provider, no license |
+| 1 | ids.si.edu | Image-API-shaped response, prose credit |
+
+The whole lane, classed (686 rows): **dead or retired infrastructure 285**
+(NGA 214, old Yale 53, Nelson-Atkins 10, Munch 7, Harvard lib 1);
+**one transport misconfiguration 184** (Orsay's chain, reported
+2026-08-17); **prose-named v2, the upgrade-ask class 83** (KMSKA 54,
+Harvard Art Museums 20, NLW 5, AIC 2, Vanderbilt 1, ids.si 1 — two of
+them, KMSKA and NLW, already free-licensed); **anonymous shells 72**
+(Nationalmuseum 49, Belvedere 12, GNM 5, Antwerp 4, Paris Musées 1,
+Beethoven-Haus 1); **v3 near-misses 48** (SMK 38 homepage-only, MSK Gent
+8, new-Yale 2 provider-only); **correct rights refusals 6** (Princeton,
+Hertziana, Courtauld); **unknown 2** (UCLA 429); **Vatican 6**, named and
+explicitly copyright, a correct refusal at any version.
+
+Not one host in the lane refuses open access as policy. The 0% gate rate
+decomposes entirely into dead links, one certificate, a decade-old
+manifest format, and museums that never wrote their own name down — each
+fixable by a specific, nameable party, several by a one-field edit.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
