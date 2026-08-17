@@ -48,12 +48,17 @@ v3) in `src/iiif.js`.
                              // ALWAYS a URL the API stated or an existing
                              // verified builder (rijksPageUrl); never a
                              // constructed guess (the Rijksmuseum-404 rule)
+  _providers: number,        // (internal, iiif only) count of provider entries;
+                             // used by gateFailure to distinguish 'no-institution'
+                             // (0 or >1) from 'several-institutions' (>1)
 }
 ```
 
 Every field the holder does not state is `null` — the merged panel renders
 what exists and claims nothing else. `rights.publicDomain` comes from **the
-museum's own per-object flag**, never inferred.
+museum's own per-object flag**, never inferred. The `_providers` field is
+internal to IIIF record processing and does not appear on records from other
+partners.
 
 **The one gate rule (single statement of it — Phases 3–4 rely on it):** a
 holder page exists only when the record has `rights.publicDomain === true`,

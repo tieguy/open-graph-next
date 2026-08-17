@@ -80,8 +80,9 @@ export function iiifRights(manifest) {
 }
 
 /** Where a reader lands: the object's own page when the manifest names one.
- * Note: manifestUrl parameter is optional and should NOT be passed when used by
- * holder-record.js, where the fallback would defeat the no-object-page gate.
+ * When manifestUrl is provided, serves as a fallback only when the manifest
+ * states no homepage or related link. Passing manifestUrl defeats the no-object-page
+ * gate in contexts where an explicitly stated page is required (e.g., holder-record.js).
  */
 export function iiifHomepage(manifest, manifestUrl) {
   const home = Array.isArray(manifest.homepage) ? manifest.homepage[0] : manifest.homepage

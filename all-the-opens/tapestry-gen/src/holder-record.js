@@ -29,10 +29,10 @@ const nullIfEmpty = (v) => (typeof v === 'string' && !v.trim() ? null : v ?? nul
 
 /**
  * Gate check: returns null if record passes all gate legs, else the name of the first failed leg.
- * Gate legs, in order: institution (present and single), public-domain rights, image URL, object page.
+ * Gate legs, in order: record exists, institution (present and single), public-domain rights, image URL, object page.
  */
 export function gateFailure(record) {
-  if (!record) return 'no-institution'
+  if (!record || typeof record !== 'object') return 'no-record'
 
   // Institution must be present
   if (!record.institution) {
@@ -61,6 +61,8 @@ export function gateFailure(record) {
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
  */
 export function metRecordFrom(obj) {
+  if (!obj || typeof obj !== 'object') return null
+
   const isPublicDomain = obj.isPublicDomain === true
   const imageUrl = isPublicDomain ? (obj.primaryImageSmall || obj.primaryImage || null) : null
 
@@ -89,6 +91,8 @@ export function metRecordFrom(obj) {
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
  */
 export function aicRecordFrom(body) {
+  if (!body || typeof body !== 'object') return null
+
   const d = body?.data
 
   const iiif = body.config?.iiif_url ?? 'https://www.artic.edu/iiif/2'
@@ -126,6 +130,8 @@ export function aicRecordFrom(body) {
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
  */
 export function rijksRecordFrom(obj, vis, digital, id) {
+  if (!obj || typeof obj !== 'object') return null
+
   const rights = rijksRights(vis)
   const isPublicDomain = rights?.code === 'CC0' || rights?.code === 'PDM'
 
@@ -140,12 +146,12 @@ export function rijksRecordFrom(obj, vis, digital, id) {
     partner: 'rijks',
     id: String(id ?? ''),
     title: rijksTitle(obj),
-    creator: null,
+    creator: null, // not yet extracted from the Linked Art hops as of 2026-08-16
     date: rijksDate(obj),
-    medium: null,
-    dimensions: null,
+    medium: null, // not yet extracted from the Linked Art hops as of 2026-08-16
+    dimensions: null, // not yet extracted from the Linked Art hops as of 2026-08-16
     accession: rijksObjectNumber(obj),
-    credit: null,
+    credit: null, // not yet extracted from the Linked Art hops as of 2026-08-16
     rights: {
       publicDomain: isPublicDomain,
       label: rights?.label ?? null,
@@ -221,6 +227,8 @@ function iiifRequiredStatement(manifest) {
  * manifestUrl is the P6108 value, used as the record id.
  */
 export function iiifRecordFrom(manifest, manifestUrl) {
+  if (!manifest || typeof manifest !== 'object') return null
+
   // Gate: rights must be CC0 or PDM
   const v3rights = Array.isArray(manifest?.rights) ? manifest.rights[0] : manifest?.rights
   const v2license = Array.isArray(manifest?.license) ? manifest.license[0] : manifest?.license

@@ -192,6 +192,7 @@ test('iiifRecordFrom passes a v3 manifest with all gate legs', () => {
   assert.equal(record.rights.publicDomain, true)
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://example.org/object/123')
+  // v3 requiredStatement composes label and value when both exist
   assert.equal(record.requiredStatement, 'Attribution: Museum of Example')
   assert.equal(gateFailure(record), null)
 })
@@ -223,6 +224,9 @@ test('iiifRecordFrom fails v2-only manifest: no-institution', () => {
   }
   const record = iiifRecordFrom(manifest)
   assert.equal(gateFailure(record), 'no-institution')
+  // v2 attribution is free text and never yields an institution
+  // but v2 does capture requiredStatement from attribution
+  assert.equal(record.requiredStatement, 'Museum of Example')
 })
 
 test('iiifRecordFrom fails v3 manifest with no rights statement', () => {
@@ -322,4 +326,217 @@ test('iiifRecordFrom fails v3 manifest with no homepage', () => {
   }
   const record = iiifRecordFrom(manifest)
   assert.equal(gateFailure(record), 'no-object-page')
+})
+
+test('iiifRecordFrom fails v3 manifest with no image', () => {
+  const manifest = {
+    label: { en: ['A Painting'] },
+    homepage: [{ id: 'https://example.org/object/123' }],
+    provider: [
+      {
+        label: { en: ['Example Museum'] },
+      },
+    ],
+    rights: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    // no items — no image
+  }
+  const record = iiifRecordFrom(manifest)
+  assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'no-image')
+})
+
+test('gateFailure returns no-record for null or non-object input', () => {
+  assert.equal(gateFailure(null), 'no-record')
+  assert.equal(gateFailure(undefined), 'no-record')
+  assert.equal(gateFailure({}), 'no-institution')
+})
+
+test('metRecordFrom with null returns null', () => {
+  const record = metRecordFrom(null)
+  assert.equal(record, null)
+})
+
+test('aicRecordFrom with null returns null', () => {
+  const record = aicRecordFrom(null)
+  assert.equal(record, null)
+})
+
+test('rijksRecordFrom with null returns null', () => {
+  const record = rijksRecordFrom(null)
+  assert.equal(record, null)
+})
+
+test('iiifRecordFrom with null returns null', () => {
+  const record = iiifRecordFrom(null)
+  assert.equal(record, null)
+})
+
+test('metRecordFrom with primaryImageSmall absent uses primaryImage', () => {
+  const record = metRecordFrom({
+    objectID: 11417,
+    title: 'Washington Crossing the Delaware',
+    isPublicDomain: true,
+    primaryImage: 'https://images.metmuseum.org/CRDImages/ad/original/DP215410.jpg',
+    // primaryImageSmall absent
+    objectURL: 'https://www.metmuseum.org/art/collection/search/11417',
+  })
+  assert.equal(record.imageUrl, 'https://images.metmuseum.org/CRDImages/ad/original/DP215410.jpg')
+  assert.equal(gateFailure(record), null)
+})
+
+test('aicRecordFrom with is_public_domain false has no imageUrl', () => {
+  const record = aicRecordFrom({
+    data: {
+      id: 111628,
+      title: 'Nighthawks',
+      is_public_domain: false,
+      image_id: '831a05de-d3f6-f4fa-a460-23008dd58dda',
+    },
+    config: { iiif_url: 'https://www.artic.edu/iiif/2' },
+  })
+  assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
+})
+
+test('aicRecordFrom with data.id absent has href null', () => {
+  const record = aicRecordFrom({
+    data: {
+      // id absent
+      title: 'Nighthawks',
+      is_public_domain: true,
+      image_id: '831a05de-d3f6-f4fa-a460-23008dd58dda',
+    },
+    config: { iiif_url: 'https://www.artic.edu/iiif/2' },
+  })
+  assert.equal(record.href, null)
+})
+
+test('rijksRecordFrom with non-PD rights has no imageUrl', () => {
+  const record = rijksRecordFrom(
+    {
+      identified_by: [
+        {
+          type: 'Name',
+          content: 'The Night Watch',
+          language: [{ id: 'http://vocab.getty.edu/aat/300388277' }],
+          classified_as: [{ id: 'http://vocab.getty.edu/aat/300404670' }],
+        },
+      ],
+      subject_of: [
+        {
+          digitally_carried_by: [
+            {
+              format: 'text/html',
+              access_point: [
+                {
+                  id: 'https://www.rijksmuseum.nl/en/collection/SK-C-5',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      shows: [
+        {
+          id: 'https://id.rijksmuseum.nl/202107928',
+        },
+      ],
+    },
+    {
+      // Non-PD rights: CC0 on the metadata, not the visual content
+      subject_to: [
+        {
+          classified_as: [
+            {
+              id: 'https://creativecommons.org/licenses/by/4.0/',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      access_point: [
+        {
+          id: 'https://iiif.micr.io/rijks/CNSQg/full/max/0/default.jpg',
+        },
+      ],
+    },
+    '200107928'
+  )
+  assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
+})
+
+test('rijksRecordFrom distinguishes public-domain mark from CC0 on catalogue text', () => {
+  const record = rijksRecordFrom(
+    {
+      identified_by: [
+        {
+          type: 'Name',
+          content: 'The Night Watch',
+          language: [{ id: 'http://vocab.getty.edu/aat/300388277' }],
+          classified_as: [{ id: 'http://vocab.getty.edu/aat/300404670' }],
+        },
+      ],
+      subject_of: [
+        {
+          digitally_carried_by: [
+            {
+              format: 'text/html',
+              access_point: [
+                {
+                  id: 'https://www.rijksmuseum.nl/en/collection/SK-C-5',
+                },
+              ],
+            },
+          ],
+        },
+        {
+          // CC0 on the catalogue text (AAT 300379475 description)
+          classified_as: [
+            {
+              id: 'http://vocab.getty.edu/aat/300379475',
+            },
+          ],
+          subject_to: [
+            {
+              classified_as: [
+                {
+                  id: 'https://creativecommons.org/publicdomain/zero/1.0/',
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      shows: [
+        {
+          id: 'https://id.rijksmuseum.nl/202107928',
+        },
+      ],
+    },
+    {
+      // Public-domain mark on the visual item (subject_to)
+      subject_to: [
+        {
+          classified_as: [
+            {
+              id: 'https://creativecommons.org/publicdomain/mark/1.0/',
+            },
+          ],
+        },
+      ],
+    },
+    {
+      access_point: [
+        {
+          id: 'https://iiif.micr.io/rijks/CNSQg/full/max/0/default.jpg',
+        },
+      ],
+    },
+    '200107928'
+  )
+  // Rights should read the public-domain mark, not CC0
+  assert.equal(record.rights.label, 'public domain')
+  assert.equal(gateFailure(record), null)
 })
