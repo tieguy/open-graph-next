@@ -32,7 +32,7 @@ const UA = () => (_ua ??= userAgent('tapestry-gen'))
  * archive.org connection hung an entire run indefinitely. A source that goes
  * quiet must cost one slot, not the whole page.
  */
-export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {}) {
+export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0, as = 'json' } = {}) {
   const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
   const path = join(CACHE, `spike-${key}.json`)
   try {
@@ -86,7 +86,7 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
           if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
           throw new Error(`${res.status} ${res.statusText}`)
         }
-        return await res.json()
+        return as === 'text' ? await res.text() : await res.json()
       } catch (e) {
         lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
         if (e.permanent) break
@@ -99,6 +99,16 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
   await mkdir(CACHE, { recursive: true })
   await writeFile(path, JSON.stringify(body))
   return body
+}
+
+/**
+ * getJson's machinery — cache, per-host queue, cool-off, retries — for a
+ * source whose record surface is a PAGE rather than a JSON API (the Getty's
+ * embedded JSON-LD). The cache entry is the JSON-encoded string, so replayed
+ * runs read it back through the same JSON.parse path as everything else.
+ */
+export async function getText(url, opts = {}) {
+  return getJson(url, { ...opts, as: 'text' })
 }
 
 /**

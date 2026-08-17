@@ -228,6 +228,22 @@ export const PARTNERS = {
       cite: 'https://www.clevelandart.org/open-access',
     },
   },
+  getty: {
+    name: 'J. Paul Getty Museum',
+    // The museum's own favicon serves image/vnd.microsoft.icon to
+    // non-browser clients (checked 2026-08-17).
+    icon: 'https://www.getty.edu/favicon.ico',
+    hosts: ['getty.edu'],
+    friend: {
+      gives:
+        'The museum’s own record of a work — title, date, and a photograph over IIIF — discovered through a Wikidata statement naming it.',
+      terms:
+        'Open Content Program images are CC0; each object page states its own license, and the page’s catalog text is CC BY 4.0.',
+      // The program's own words: "Images … are available under CC0 through
+      // Getty's Open Content Program" (read 2026-08-17). No NC anywhere.
+      cite: 'https://www.getty.edu/projects/open-content-program/',
+    },
+  },
   iiif: {
     // Not one institution but a door many institutions share: P6108 manifests
     // arrive from whichever library or museum holds the object.

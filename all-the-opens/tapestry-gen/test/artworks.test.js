@@ -128,7 +128,7 @@ test('the totals count everything held, which is what the disclosure claims', ()
   const recs = artworkRows(
     body([row('Q1', { met: '1' }), row('Q2', { met: '2' }), row('Q3', { rijks: '3' })]),
   )
-  assert.deepEqual(artworkTotals(recs), { met: 2, rijks: 1, aic: 0, cleveland: 0, iiif: 0, works: 3 })
+  assert.deepEqual(artworkTotals(recs), { met: 2, rijks: 1, aic: 0, cleveland: 0, getty: 0, iiif: 0, works: 3 })
 })
 
 test('the query can be restricted to a single property for holder pages', () => {
@@ -150,6 +150,11 @@ test('the unrestricted query is byte-unchanged — ordinary pages keep their cac
 test('the P11110 restriction binds ?cleveland — same seam, no key mismatch', () => {
   const url = decodeURIComponent(subjectArtworksUrl('Q5598', 1000, { property: 'P11110' }))
   assert.match(url, /wdt:P11110 \?cleveland/)
+})
+
+test('the P2582 restriction binds ?getty — same seam, no key mismatch', () => {
+  const url = decodeURIComponent(subjectArtworksUrl('Q5582', 1000, { property: 'P2582' }))
+  assert.match(url, /wdt:P2582 \?getty/)
 })
 
 test('the P4610 restriction binds ?aic — the seam the partner key never crosses', () => {

@@ -29,6 +29,7 @@ export const HOLDERS = [
   { partner: 'met', property: 'P3634', collection: 'Q160236' },
   { partner: 'artic', property: 'P4610', collection: 'Q239303' },
   { partner: 'cleveland', property: 'P11110', collection: 'Q657415' },
+  { partner: 'getty', property: 'P2582', collection: 'Q731126' },
   { partner: 'iiif', property: 'P6108', collection: null },
 ]
 
@@ -83,6 +84,7 @@ export const HOLDER_STATEMENT_VARS = new Map([
   ['met', 'met'],
   ['artic', 'aic'],
   ['cleveland', 'cleveland'],
+  ['getty', 'getty'],
 ])
 
 export function holderStatements(stmts, holder) {

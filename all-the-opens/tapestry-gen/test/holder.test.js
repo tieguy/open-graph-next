@@ -87,6 +87,23 @@ test('selectHolder: Cleveland is selected by P195 and yields to the Met on bare 
   assert.equal(selectHolder(noCollection).partner, 'met')
 })
 
+test('selectHolder: the Getty is selected by P195 and yields to the Met on bare precedence', () => {
+  const atTheGetty = {
+    P31: [statement(item('Q3305213'))],
+    P3634: [statement('456')],
+    P2582: [statement('103JNH')],
+    P195: [statement(item('Q731126'))],
+  }
+  assert.deepEqual(selectHolder(atTheGetty), {
+    partner: 'getty',
+    property: 'P2582',
+    id: '103JNH',
+  })
+  // Without the collection statement, HOLDERS order decides: met before getty.
+  const noCollection = { P31: [statement(item('Q3305213'))], P3634: [statement('456')], P2582: [statement('103JNH')] }
+  assert.equal(selectHolder(noCollection).partner, 'met')
+})
+
 test('selectHolder: a work with no holder identifier honestly gets none', () => {
   const inventoryOnly = {
     P31: [statement(item('Q3305213'))],

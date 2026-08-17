@@ -10,6 +10,7 @@ import {
   aicRecordUrl,
   clevelandRecordUrl,
   clevelandRecordFrom,
+  gettyRecordFrom,
 } from '../src/holder-record.js'
 
 test('metRecordUrl builds the URL the existing entry fetcher requests', () => {
@@ -628,4 +629,57 @@ test('clevelandRecordFrom with rights reserved has no image and fails the gate',
 test('clevelandRecordFrom with null or an empty envelope returns null', () => {
   assert.equal(clevelandRecordFrom(null), null)
   assert.equal(clevelandRecordFrom({}), null)
+})
+
+test('gettyRecordFrom reads the page JSON-LD and passes every gate leg', () => {
+  // Trimmed from the live JSON-LD of Irises (read 2026-08-17). The page
+  // states its license with the http:// spelling; ccFromUri reads it anyway.
+  const record = gettyRecordFrom({
+    name: 'Irises',
+    identifier: ['90.PA.20'],
+    material: 'Oil on canvas',
+    license: 'http://creativecommons.org/publicdomain/zero/1.0/',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/8c255d80-7382-46db-9fa8-892c0d37247e/full/!300,300/0/default.jpg',
+    url: 'https://www.getty.edu/art/collection/object/103JNH',
+    creator: [{ name: 'Vincent van Gogh', '@type': 'Person' }],
+    temporal: '1889',
+    '@type': 'Painting',
+  })
+  assert.equal(record.partner, 'getty')
+  assert.equal(record.id, '103JNH')
+  assert.equal(record.title, 'Irises')
+  assert.equal(record.creator, 'Vincent van Gogh')
+  assert.equal(record.date, '1889')
+  assert.equal(record.medium, 'Oil on canvas')
+  assert.equal(record.dimensions, null)
+  assert.equal(record.accession, '90.PA.20')
+  assert.equal(record.credit, null)
+  assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.label, 'CC0')
+  assert.equal(
+    record.imageUrl,
+    'https://media.getty.edu/iiif/image/8c255d80-7382-46db-9fa8-892c0d37247e/full/!800,800/0/default.jpg',
+  )
+  assert.equal(record.href, 'https://www.getty.edu/art/collection/object/103JNH')
+  assert.equal(record.institution, 'J. Paul Getty Museum')
+  assert.equal(gateFailure(record), null)
+})
+
+test('gettyRecordFrom with no stated license keeps the record and fails the gate', () => {
+  // A page outside the Open Content Program states no CC0 URI; the record
+  // keeps its catalog fields, loses its photograph, and fails non-pd-rights.
+  const record = gettyRecordFrom({
+    name: 'A modern work',
+    url: 'https://www.getty.edu/art/collection/object/XXXXXX',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/x/full/!300,300/0/default.jpg',
+  })
+  assert.equal(record.rights.publicDomain, false)
+  assert.equal(record.rights.label, null)
+  assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
+})
+
+test('gettyRecordFrom with null or a non-object returns null', () => {
+  assert.equal(gettyRecordFrom(null), null)
+  assert.equal(gettyRecordFrom('html'), null)
 })

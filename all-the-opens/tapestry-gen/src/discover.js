@@ -64,6 +64,7 @@ import {
 import {
   aicEntry,
   clevelandEntry,
+  gettyEntry,
   metEntry,
   needsRightsQuery,
   partnerStatements,
@@ -461,6 +462,7 @@ const artworkFetcher = (via, id, label) => {
   if (via === 'rijks') return rijksEntry(id)
   if (via === 'aic') return aicEntry(id)
   if (via === 'cleveland') return clevelandEntry(id)
+  if (via === 'getty') return gettyEntry(id)
   return iiifEntry(id, label)
 }
 

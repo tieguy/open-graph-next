@@ -65,6 +65,7 @@ const PARTNERS = [
   // artworks shelf, and artworkTotals reports cleveland: 0 there — that zero
   // is this pin, not a bug.
   ['cleveland', 'P11110'],
+  ['getty', 'P2582'],
   ['iiif', 'P6108'],
 ]
 
@@ -84,6 +85,7 @@ export const MUSEUM_NAME = {
   rijks: 'the Rijksmuseum',
   artic: 'the Art Institute of Chicago',
   cleveland: 'the Cleveland Museum of Art',
+  getty: 'the J. Paul Getty Museum',
   // Not one institution: a P6108 manifest arrives from whichever library or
   // museum holds the object, and the manifest itself names which.
   iiif: 'the institution that holds it',

@@ -1,8 +1,9 @@
 // Catalog records normalized to one shape, gated on the museum's own rights flag.
 //
-// Pure transforms (metRecordFrom, aicRecordFrom, clevelandRecordFrom, rijksRecordFrom,
-// iiifRecordFrom) normalize catalog responses to one shape; URL builders (metRecordUrl,
-// aicRecordUrl, clevelandRecordUrl) and the fetchHolderRecord dispatcher touch the network.
+// Pure transforms (metRecordFrom, aicRecordFrom, clevelandRecordFrom, gettyRecordFrom,
+// rijksRecordFrom, iiifRecordFrom) normalize catalog responses to one shape; URL builders
+// (metRecordUrl, aicRecordUrl, clevelandRecordUrl, and getty.js's gettyPageUrl) and the
+// fetchHolderRecord dispatcher touch the network.
 //
 // Each transform normalizes a partner's catalog response to the holder-record contract shape.
 // Missing fields are null; a null or non-object response yields null;
@@ -15,6 +16,7 @@
 // - Institution from PARTNERS[partner].name, never hardcoded display strings.
 
 import { ccFromUri } from './rights.js'
+import { gettyImageUrl, gettyLd, gettyPageUrl } from './getty.js'
 import { iiifString, iiifHomepage } from './iiif.js'
 import {
   rijksTitle,
@@ -26,7 +28,7 @@ import {
   rijksRecordObjects,
 } from './rijks.js'
 import { PARTNERS } from './partners.js'
-import { getJson } from './http.js'
+import { getJson, getText } from './http.js'
 
 /**
  * Normalize empty string to null.
@@ -192,6 +194,43 @@ export function clevelandRecordFrom(body) {
 }
 
 /**
+ * The J. Paul Getty Museum's record as a normalized holder-record shape,
+ * from the object page's embedded JSON-LD (see src/getty.js for why the
+ * page, not the Linked Art endpoint). Gate: rights.publicDomain true,
+ * imageUrl present, href present, institution present. The license is the
+ * page's own per-object URI, read through ccFromUri so the http:// spelling
+ * the page uses parses the same as https://.
+ */
+export function gettyRecordFrom(ld) {
+  if (!ld || typeof ld !== 'object') return null
+
+  const isPublicDomain = ccFromUri(ld.license ?? '')?.code === 'CC0'
+  const href = nullIfEmpty(typeof ld.url === 'string' ? ld.url : null)
+
+  return {
+    partner: 'getty',
+    // The page URL ends with the P2582 value the fetch was addressed by —
+    // the round-trip rule the other transforms keep.
+    id: href ? href.split('/').pop() : '',
+    title: nullIfEmpty(typeof ld.name === 'string' ? ld.name : null),
+    creator: nullIfEmpty(ld.creator?.[0]?.name),
+    date: nullIfEmpty(typeof ld.temporal === 'string' ? ld.temporal : null),
+    medium: nullIfEmpty(typeof ld.material === 'string' ? ld.material : null),
+    dimensions: null,
+    accession: nullIfEmpty(ld.identifier?.[0]),
+    credit: null,
+    rights: {
+      publicDomain: isPublicDomain,
+      label: isPublicDomain ? 'CC0' : null,
+      uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
+    },
+    imageUrl: isPublicDomain ? gettyImageUrl(ld.thumbnailUrl) : null,
+    href,
+    institution: PARTNERS.getty.name,
+  }
+}
+
+/**
  * Rijksmuseum's catalog record as a normalized holder-record shape.
  * Composes from existing exported helpers.
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
@@ -353,6 +392,7 @@ export async function fetchHolderRecord(holder) {
     if (holder.partner === 'met') return metRecordFrom(await getJson(metRecordUrl(holder.id)))
     if (holder.partner === 'artic') return aicRecordFrom(await getJson(aicRecordUrl(holder.id)))
     if (holder.partner === 'cleveland') return clevelandRecordFrom(await getJson(clevelandRecordUrl(holder.id)))
+    if (holder.partner === 'getty') return gettyRecordFrom(gettyLd(await getText(gettyPageUrl(holder.id))))
     if (holder.partner === 'rijks') return rijksRecordFrom(...(await rijksRecordObjects(holder.id)))
     if (holder.partner === 'iiif') return iiifRecordFrom(await getJson(holder.id), holder.id)
     console.error(`  holder record: no fetcher for partner ${holder.partner}`)
