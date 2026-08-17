@@ -101,6 +101,17 @@ Each dated or sourced; the place the full argument lives is named.
   demo's Fly instance today, Toolforge if it ever moves) still sees the
   requests; the claim is "no third-party disclosure by default," never
   "private."
+- **The commons should remain decentralized** (Luis, 2026-08-16, during
+  the T261621 wishlist review). The demo's argument is that institutions
+  can appear *as themselves*, serving their own works from their own
+  infrastructure, with Wikipedia linking out — which is why Commons left
+  the article pages (2026-08-04: it is the single door an outside
+  institution's work must pass through, and shelving it beside the Met
+  implied they were peers). Work that would concentrate more of the
+  commons' infrastructure in one hub — Commons-as-IIIF-provider (T261621's
+  "IIIF SaaS" relay) is the standing example — is out of scope here,
+  whatever its merits for others. Corollary for design work: prefer
+  consuming partners' own infrastructure.
 - **Wikipedia is a friend, not a target.** The gap is *measured*, never
   requested (a request walks into WP:ELBURDEN; a report does not — LUI-122),
   and the constraint is never overstated: not "there is no route" but "no
