@@ -8,8 +8,11 @@
 // page's own URL. A bogus id answers 200 with a generic page and NO JSON-LD
 // block, which is what keeps the two distinguishable.
 //
-// Dimensions and a credit line are not in the page JSON-LD; the record
-// carries null for both and the merged panel simply has no Getty row there.
+// `size` (the dimensions string, the Met/AIC shape) is present on most
+// objects and absent on some — sampled 2026-08-17: present on 103JNH, 108NVJ,
+// 103R3F, absent on 1078D0 — so the record maps it and carries null where the
+// page omits it. A credit line is genuinely absent: `creditText` is the
+// license boilerplate, not an object credit, and stays unread.
 
 /** The object page — both the record surface and the card's link-out. */
 export function gettyPageUrl(id) {

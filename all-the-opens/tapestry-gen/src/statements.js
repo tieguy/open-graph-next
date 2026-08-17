@@ -565,7 +565,7 @@ export function gettyEntryFrom(ld) {
   return {
     source: 'getty',
     title: ld.name,
-    description: [ld.creator?.[0]?.name, typeof ld.temporal === 'string' ? ld.temporal : null]
+    description: [typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null, typeof ld.temporal === 'string' ? ld.temporal : null]
       .filter(Boolean)
       .join(' · '),
     // The record's IIIF thumbnail rewritten to display size — see

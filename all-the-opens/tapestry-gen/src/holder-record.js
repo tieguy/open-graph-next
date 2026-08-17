@@ -211,13 +211,15 @@ export function gettyRecordFrom(ld) {
     partner: 'getty',
     // The page URL ends with the P2582 value the fetch was addressed by —
     // the round-trip rule the other transforms keep.
-    id: href ? href.split('/').pop() : '',
+    id: href ? href.split('/').pop() : null,
     title: nullIfEmpty(typeof ld.name === 'string' ? ld.name : null),
-    creator: nullIfEmpty(ld.creator?.[0]?.name),
+    creator: nullIfEmpty(typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null),
     date: nullIfEmpty(typeof ld.temporal === 'string' ? ld.temporal : null),
     medium: nullIfEmpty(typeof ld.material === 'string' ? ld.material : null),
-    dimensions: null,
-    accession: nullIfEmpty(ld.identifier?.[0]),
+    dimensions: nullIfEmpty(typeof ld.size === 'string' ? ld.size : null),
+    accession: nullIfEmpty(typeof ld.identifier?.[0] === 'string' ? ld.identifier[0] : null),
+    // creditText is the Open Content license boilerplate, not an object
+    // credit line — the one field genuinely absent from this surface.
     credit: null,
     rights: {
       publicDomain: isPublicDomain,

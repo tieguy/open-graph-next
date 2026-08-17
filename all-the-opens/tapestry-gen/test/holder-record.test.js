@@ -638,6 +638,7 @@ test('gettyRecordFrom reads the page JSON-LD and passes every gate leg', () => {
     name: 'Irises',
     identifier: ['90.PA.20'],
     material: 'Oil on canvas',
+    size: 'Unframed: 74.3 × 94.3 cm (29 1/4 × 37 1/8 in.)',
     license: 'http://creativecommons.org/publicdomain/zero/1.0/',
     thumbnailUrl: 'https://media.getty.edu/iiif/image/8c255d80-7382-46db-9fa8-892c0d37247e/full/!300,300/0/default.jpg',
     url: 'https://www.getty.edu/art/collection/object/103JNH',
@@ -651,7 +652,7 @@ test('gettyRecordFrom reads the page JSON-LD and passes every gate leg', () => {
   assert.equal(record.creator, 'Vincent van Gogh')
   assert.equal(record.date, '1889')
   assert.equal(record.medium, 'Oil on canvas')
-  assert.equal(record.dimensions, null)
+  assert.equal(record.dimensions, 'Unframed: 74.3 × 94.3 cm (29 1/4 × 37 1/8 in.)')
   assert.equal(record.accession, '90.PA.20')
   assert.equal(record.credit, null)
   assert.equal(record.rights.publicDomain, true)
@@ -663,6 +664,29 @@ test('gettyRecordFrom reads the page JSON-LD and passes every gate leg', () => {
   assert.equal(record.href, 'https://www.getty.edu/art/collection/object/103JNH')
   assert.equal(record.institution, 'J. Paul Getty Museum')
   assert.equal(gateFailure(record), null)
+})
+
+test('a page that omits size — the 1078D0 shape — carries an honest null, not a guess', () => {
+  const record = gettyRecordFrom({
+    name: 'Leatherstocking\u2019s Cave',
+    license: 'http://creativecommons.org/publicdomain/zero/1.0/',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/x/full/!300,300/0/default.jpg',
+    url: 'https://www.getty.edu/art/collection/object/1078D0',
+  })
+  assert.equal(record.dimensions, null)
+})
+
+test('array-valued fields from the feed never leak through as joined strings', () => {
+  // The same documents carry array-valued names elsewhere (locationCreated.name),
+  // so a shape drift here must yield null, not "a,b" on the panel.
+  const record = gettyRecordFrom({
+    name: 'A work',
+    url: 'https://www.getty.edu/art/collection/object/103JNH',
+    creator: [{ name: ['Vincent', 'van Gogh'] }],
+    identifier: [['90.PA.20']],
+  })
+  assert.equal(record.creator, null)
+  assert.equal(record.accession, null)
 })
 
 test('gettyRecordFrom with no stated license keeps the record and fails the gate', () => {

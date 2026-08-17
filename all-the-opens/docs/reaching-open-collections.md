@@ -470,7 +470,12 @@ curl -s https://www.getty.edu/art/collection/object/1078D0
 #   null indexedId and a generic page — distinguishable.
 ```
 
-Dimensions not present in the page JSON-LD. License, the Getty's own words
+`size` (the dimensions string, in the Met/AIC shape) is present on 3 of 4
+objects sampled 2026-08-17 — `103JNH` "Unframed: 74.3 × 94.3 cm …", `108NVJ`,
+`103R3F`; absent on `1078D0`, the object the first pass of this probe ran
+against, which is how the absence briefly got recorded as a property of the
+surface. A credit line is genuinely absent: `creditText` is the CC0/CC BY
+license boilerplate, not an object credit. License, the Getty's own words
 (getty.edu/projects/open-content-program, read 2026-08-17): "Images … are
 available under CC0 through Getty's Open Content Program." No NC. No
 published rate policy — stays 1. Keyless.
