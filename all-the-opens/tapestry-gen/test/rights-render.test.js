@@ -263,15 +263,21 @@ const REFUSAL = {
   institution: 'Art Institute of Chicago',
   href: 'https://www.artic.edu/artworks/6565',
   statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+  // Always a boolean from discover — and the renderer requires === false for
+  // the verdict, so an absent flag cannot default to the assertion.
+  mixed: false,
 }
 
 test('a rights-refused holder names both records and quotes the graph’s words', () => {
   const html = bandRail(bandOf({ holderRefusal: REFUSAL }))
   assert.match(html, /<div class="subject-rights"><p class="sr-conflict">/)
-  assert.match(html, /The Art Institute of Chicago holds this work; the museum’s catalog record/)
-  assert.match(html, /Wikidata records it as public domain in countries where copyright lasts 70 years/)
+  assert.match(html, /The Art Institute of Chicago holds this work\. The institution’s record/)
+  // The record's clause stays at the image level; Wikidata's names the work
+  // itself — the copy/work rule, kept apart in the words.
+  assert.match(html, /doesn’t release an image of it as public domain/)
+  assert.match(html, /Wikidata records the work itself as public domain in countries where copyright lasts 70 years/)
   assert.match(html, /The two records disagree\./)
-  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the museum’s record →/)
+  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the institution’s record →/)
   // The line claims nothing about the page's layout: the museum's image may
   // legitimately appear on an ordinary card beside it.
   assert.doesNotMatch(html, /no museum image/)
@@ -299,7 +305,7 @@ test('with the subject status rendering above, the same words are quoted — one
   const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
   assert.match(html, /sr-line/)
   assert.match(html, /sr-conflict/)
-  assert.match(html, /Wikidata records it as public domain in countries/)
+  assert.match(html, /Wikidata records the work itself as public domain in countries/)
   assert.doesNotMatch(html, /The status above/)
 })
 
@@ -371,6 +377,17 @@ test('workFreeStatus: a mixed record carries its bound clause — the free claus
       'public domain in countries where copyright lasts 70 years after the author’s death or less · still in copyright in the United States',
     mixed: true,
   })
+})
+
+test('workFreeStatus: an unqualified free status is worldwide — a qualified sibling never narrows it', () => {
+  // rightsView prints no line for this record (nothing to narrow); the
+  // disclosure must quote the same breadth, not shrink the answer to the
+  // qualified sibling's jurisdictions.
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain') },
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q142'), jurisLabel: lit('France') },
+  ]).get('Q1')
+  assert.deepEqual(workFreeStatus(rec), { line: 'public domain', mixed: false })
 })
 
 test('workFreeStatus: unknown-only and empty records withhold', () => {

@@ -386,11 +386,20 @@ export function workFreeStatus(rec) {
       ),
     )
   const lead = [...free].sort((a, b) => a.status.rank - b.status.rank)[0]
-  const freeWhere = where(free)
-  let line = `${lead.status.label}${freeWhere ? ` in ${freeWhere}` : ''}`
+  let line
   if (bound.length) {
+    const freeWhere = where(free)
     const boundWhere = where(bound)
-    line += ` · still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+    line =
+      `${lead.status.label}${freeWhere ? ` in ${freeWhere}` : ''}` +
+      ` · still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+  } else if (lead.jurisdiction) {
+    line = `${lead.status.label} in ${where(free)}`
+  } else {
+    // rightsView's guard, mirrored: an unqualified lead status is worldwide
+    // and there is nothing to narrow — a qualified sibling must not shrink
+    // it to its own jurisdictions.
+    line = lead.status.label
   }
   return { line, mixed: bound.length > 0 }
 }

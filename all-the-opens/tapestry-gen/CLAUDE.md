@@ -496,12 +496,19 @@ a museum lane's record fails the gate on `non-pd-rights` alone AND the
 graph states a free answer ABOUT THE WORK, the lede renders the
 `sr-conflict` line: both records named, neither called wrong, the
 museum's record as the labeled door. Gate and quoted words come from one
-place — `workFreeStatus` in `src/rights.js`, work-level statements only —
-so the line can never attribute a creator ruling or a copy's license to
-the work; a creator-only or license-only free answer is withheld, and a
-Picasso refused by everyone stays a plain refusal. The line claims
-nothing about the page's layout: the museum's image may still appear on
-an ordinary card (the card path has its own rules). American Gothic is
+place — `workFreeStatus` in `src/rights.js`, work-level statements only,
+whole: a mixed record keeps its bound clause (the free clause is never
+printed alone) and gets no verdict sentence, since the flag may simply
+agree with the graph's "still in copyright" somewhere — so the line can
+never attribute a creator ruling or a copy's license to the work; a
+creator-only or license-only free answer is withheld, and a Picasso
+refused by everyone stays a plain refusal. Each clause keeps its level,
+per the copy/work rule: the record's clause is about the image it
+releases (what every lane's flag actually gates), Wikidata's says "the
+work itself", and the holder is "the institution" because the door
+lane's holder can be a library or an archive. The line claims nothing
+about the page's layout: the museum's image may still appear on an
+ordinary card (the card path has its own rules). American Gothic is
 the living exemplar: PD in the US since 2026-01-01 by publication age,
 community-recorded PD by term on work and creator both, and the Art
 Institute's own flag still false — the page shows the disagreement

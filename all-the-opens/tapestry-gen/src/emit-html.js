@@ -1332,18 +1332,23 @@ function holderConflict(b) {
   if (b.id !== 'slede' || !b.holderRefusal) return ''
   const { phrase, href, statusLine, mixed } = b.holderRefusal
   const door = href
-    ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the museum’s record →</a>`
+    ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the institution’s record →</a>`
     : ''
-  // On a MIXED record the graph itself says "still in copyright" somewhere,
-  // and the museum's flag may simply agree with that somewhere — so the
-  // verdict sentence renders only when the graph's work-level answer is
-  // free everywhere it speaks. The mixed line's own contrast does the work.
-  const verdict = mixed ? '' : ' The two records disagree.'
+  // Each clause stays at its own level — the copy/work rule ("neither is
+  // ever printed as the other"): what the gate read is the record's flag
+  // over the IMAGE it releases (true of every lane — imageUrl is gated on
+  // that flag in every normalizer), and Wikidata's clause says "the work
+  // itself". "Institution", not "museum": the door lane's holder can be a
+  // library or an archive. On a MIXED record the graph itself says "still
+  // in copyright" somewhere and the flag may simply agree with that
+  // somewhere, so the verdict renders only on `mixed === false`, strictly —
+  // an absent flag must not default to the assertion.
+  const verdict = mixed === false ? ' The two records disagree.' : ''
   return (
     `<p class="sr-conflict">` +
-    `${escapeHtml(sentenceCase(phrase))} holds this work; the museum’s catalog record ` +
-    `doesn’t flag it as public domain, while Wikidata records it as ` +
-    `${escapeHtml(statusLine)}.${verdict}${door}</p>`
+    `${escapeHtml(sentenceCase(phrase))} holds this work. The institution’s record ` +
+    `doesn’t release an image of it as public domain, while Wikidata records the ` +
+    `work itself as ${escapeHtml(statusLine)}.${verdict}${door}</p>`
   )
 }
 
