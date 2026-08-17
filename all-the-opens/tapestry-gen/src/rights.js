@@ -358,6 +358,27 @@ export async function entityRights(qids) {
  * American term project is adding jurisdiction items — and the shorthand is
  * generated to a fixed form.
  */
+/**
+ * The graph's free answer ABOUT THE WORK, or null — the gate and the words
+ * for the holder-refusal disclosure, taken from one place so the page can
+ * never gate on one branch of the record and quote another. Only work-level
+ * statements count: a creator-level ruling may not stand alone (the rule on
+ * `rightsView`), and a stated license is a promise about a copy, not a
+ * status of the work — either alone yields null, the same withholding
+ * stance the unknown branch takes.
+ */
+export function workFreeStatus(rec) {
+  const free = (rec?.work ?? []).filter((w) => w.status.known !== false && w.status.free)
+  if (!free.length) return null
+  const ranked = [...free].sort((a, b) => a.status.rank - b.status.rank)
+  const where = sentenceList(
+    [...new Set(ranked.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
+      (a, b) => a.length - b.length || a.localeCompare(b),
+    ),
+  )
+  return { line: `${ranked[0].status.label}${where ? ` in ${where}` : ''}` }
+}
+
 export function jurisdictionPhrase(label) {
   if (!label) return null
   const m = /^countries with (\d+) years pma( or shorter)?$/i.exec(label.trim())

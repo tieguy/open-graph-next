@@ -74,12 +74,18 @@ test('a fabricated statement without a rank would vanish — the shape carries r
   assert.equal(selectHolder(claims)?.partner, 'iiif')
 })
 
-test('every wired museum holder has exactly one flagship — completeness is a test', () => {
+test('every wired museum holder has exactly one gate-clearing flagship — completeness is a test', () => {
   // The manifest convention (test/partners.test.js): an uncovered lane is a
   // red test, never a silent state. The iiif door has no flagship on
-  // purpose — it names no single institution.
-  const flagged = HOLDER_FLAGSHIPS.map((f) => f.partner)
-  assert.deepEqual(new Set(flagged).size, flagged.length, 'no lane holds two flagships')
-  assert.deepEqual([...new Set(flagged)].sort(), [...HOLDER_STATEMENT_VARS.keys()].sort())
-  for (const f of HOLDER_FLAGSHIPS) assert.ok(f.title?.length, `${f.partner} flagship has a title`)
+  // purpose — it names no single institution. Entries with a stated `role`
+  // are warmed for what their refusal shows (the rights-disagreement
+  // exemplar) and sit outside the one-per-lane rule, but must still name a
+  // wired lane.
+  const clearing = HOLDER_FLAGSHIPS.filter((f) => !f.role).map((f) => f.partner)
+  assert.deepEqual(new Set(clearing).size, clearing.length, 'no lane holds two gate-clearing flagships')
+  assert.deepEqual([...new Set(clearing)].sort(), [...HOLDER_STATEMENT_VARS.keys()].sort())
+  for (const f of HOLDER_FLAGSHIPS) {
+    assert.ok(f.title?.length, `${f.partner} flagship has a title`)
+    assert.ok(HOLDER_STATEMENT_VARS.has(f.partner), `${f.partner} is a wired lane`)
+  }
 })

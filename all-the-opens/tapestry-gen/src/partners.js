@@ -247,6 +247,10 @@ export const PARTNERS = {
   iiif: {
     // Not one institution but a door many institutions share: P6108 manifests
     // arrive from whichever library or museum holds the object.
+    // Reader-facing copy about a specific object therefore takes the
+    // institution from the object's own record (the manifest's provider),
+    // never from this display name.
+    institutionFromRecord: true,
     name: 'IIIF collections',
     icon: 'https://iiif.io/favicon.ico',
     // No fixed host on purpose: a IIIF manifest is served by whichever

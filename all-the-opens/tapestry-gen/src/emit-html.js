@@ -1315,16 +1315,18 @@ function subjectRights(b) {
 /**
  * The museum's side of a rights disagreement. `discover.js` attaches
  * `holderRefusal` only when a museum lane's record was refused on its
- * rights flag alone AND the graph states a free answer — a refusal
- * everyone agrees with (a Picasso) stays a plain refusal, because a
- * one-sided line would imply a controversy the graph does not record.
- * Both claims are stated, neither is called wrong, and the museum's
- * record is the labeled door — the reader can check the flag themselves.
- * When the subject-rights line renders above, "the status above" refers
- * to it; when a card carries the status instead, the graph's answer is
- * quoted inline. American Gothic is the living exemplar: PD in the US
- * since 2026-01-01 by publication age, community-recorded PD by term,
- * and the Art Institute's is_public_domain still false.
+ * rights flag alone AND the graph states a free answer about the work
+ * itself — gate and quoted words both from `workFreeStatus`, one source,
+ * so this line can never attribute a creator ruling or a copy's license
+ * to the work. A refusal everyone agrees with (a Picasso) stays a plain
+ * refusal. Both claims are stated, neither is called wrong, and the
+ * museum's record is the labeled door — the reader can check the flag
+ * themselves. The line states no consequence for the page's layout: the
+ * museum's image may still appear on an ordinary card (the card path
+ * has its own rules), so the only claims here are the two records'.
+ * American Gothic is the living exemplar: PD in the US since 2026-01-01
+ * by publication age, community-recorded PD by term on work and creator
+ * both, and the Art Institute's is_public_domain still false.
  */
 function holderConflict(b) {
   if (b.id !== 'slede' || !b.holderRefusal) return ''
@@ -1332,14 +1334,11 @@ function holderConflict(b) {
   const door = href
     ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the museum’s record →</a>`
     : ''
-  const graphSide = b.subjectRights
-    ? 'The status above is what Wikidata records about the work itself'
-    : `Wikidata records the work itself as ${escapeHtml(statusLine ?? 'public domain')}`
   return (
     `<p class="sr-conflict">` +
-    `${escapeHtml(sentenceCase(phrase))} holds this work but doesn’t flag its own image ` +
-    `as public domain, so no museum image leads this page. ${graphSide} — the two ` +
-    `answers disagree, and both are shown.${door}</p>`
+    `${escapeHtml(sentenceCase(phrase))} holds this work; its catalog record doesn’t ` +
+    `flag its image as public domain, while Wikidata records the work as ` +
+    `${escapeHtml(statusLine)}. The two records disagree.${door}</p>`
   )
 }
 

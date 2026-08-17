@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { bandRail, buildHtml, rightsMarks, streamOpen } from '../src/emit-html.js'
 import { CC_MARKS, CC_SPRITE } from '../src/cc-icons.js'
-import { parseRightsRows, rightsView } from '../src/rights.js'
+import { parseRightsRows, rightsView, workFreeStatus } from '../src/rights.js'
 
 // How the rights marks and lines actually reach the page. The module tests in
 // rights.test.js cover what is TRUE; these cover what is SHOWN.
@@ -265,24 +265,36 @@ const REFUSAL = {
   statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
 }
 
-test('a rights-refused holder with a free graph answer names both sides', () => {
-  // The status renders above (subjectRights present), so the line points at it.
-  const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
-  assert.match(html, /sr-conflict/)
-  assert.match(html, /The Art Institute of Chicago holds this work but doesn’t flag its own image/)
-  assert.match(html, /The status above is what Wikidata records/)
-  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the museum’s record →/)
-})
-
-test('when a card carries the status, the disagreement quotes the graph inline', () => {
-  // subjectRights null — the says-it-twice guard handed the line to a card —
-  // so the conflict block stands alone and quotes the status words it was
-  // handed, rather than pointing at a line that is not there.
+test('a rights-refused holder names both records and quotes the graph’s words', () => {
   const html = bandRail(bandOf({ holderRefusal: REFUSAL }))
   assert.match(html, /<div class="subject-rights"><p class="sr-conflict">/)
-  assert.match(html, /Wikidata records the work itself as public domain in countries where copyright lasts 70 years/)
+  assert.match(html, /The Art Institute of Chicago holds this work; its catalog record doesn’t/)
+  assert.match(html, /Wikidata records the work as public domain in countries where copyright lasts 70 years/)
+  assert.match(html, /The two records disagree\./)
+  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the museum’s record →/)
+  // The line claims nothing about the page's layout: the museum's image may
+  // legitimately appear on an ordinary card beside it.
+  assert.doesNotMatch(html, /no museum image/)
+})
+
+test('with the subject status rendering above, the same words are quoted — one source', () => {
+  const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
+  assert.match(html, /sr-line/)
+  assert.match(html, /sr-conflict/)
+  assert.match(html, /Wikidata records the work as public domain in countries/)
   assert.doesNotMatch(html, /The status above/)
-  assert.doesNotMatch(html, /sr-line/)
+})
+
+test('phrase and status words are escaped on their way into the paragraph', () => {
+  const html = bandRail(
+    bandOf({
+      holderRefusal: { ...REFUSAL, phrase: 'the M&M <Museum>', statusLine: 'free <everywhere>' },
+    }),
+  )
+  // sentenceCase capitalizes the opening phrase.
+  assert.match(html, /The M&amp;M &lt;Museum&gt; holds this work/)
+  assert.match(html, /free &lt;everywhere&gt;/)
+  assert.doesNotMatch(html, /<Museum>/)
 })
 
 test('the disagreement is lede-only and absent without a refusal', () => {
@@ -296,4 +308,41 @@ test('a refusal without a record page still renders, with no dead door', () => {
   const html = bandRail(bandOf({ holderRefusal: { ...REFUSAL, href: null } }))
   assert.match(html, /sr-conflict/)
   assert.doesNotMatch(html, /See the museum’s record/)
+})
+
+// The gate and the quoted words come from one place: workFreeStatus, over
+// work-level statements only. Pinned against parseRightsRows output — the
+// same shapes the WDQS rights query produces — for every branch the review
+// named: work-free, creator-only, license-over-bound, unknown-only, none.
+test('workFreeStatus: a free work statement gates and supplies its own words', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q464782'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q59542795'), jurisLabel: lit('countries with 70 years pma or shorter') },
+  ]).get('Q464782')
+  assert.deepEqual(workFreeStatus(rec), {
+    line: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+  })
+})
+
+test('workFreeStatus: a creator-only ruling never speaks for the work', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), ccs: uri('Q71887839'), ccsLabel: lit('copyrights on works have expired') },
+  ]).get('Q1')
+  assert.equal(workFreeStatus(rec), null)
+})
+
+test('workFreeStatus: a stated license over an in-copyright work is not the work’s status', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q30'), jurisLabel: lit('United States') },
+    { item: uri('Q1'), lic: uri('Q6938433'), licLabel: lit('CC0') },
+  ]).get('Q1')
+  assert.equal(workFreeStatus(rec), null)
+})
+
+test('workFreeStatus: unknown-only and empty records withhold', () => {
+  const unknown = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q59496158'), csLabel: lit('copyright not yet determined') },
+  ]).get('Q1')
+  assert.equal(workFreeStatus(unknown), null)
+  assert.equal(workFreeStatus(null), null)
+  assert.equal(workFreeStatus({}), null)
 })

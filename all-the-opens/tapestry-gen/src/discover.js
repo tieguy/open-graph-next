@@ -55,6 +55,7 @@ import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
 import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
+import { PARTNERS } from './partners.js'
 import {
   openAlexAuthorWorks,
   openAlexLookups,
@@ -74,7 +75,7 @@ import {
 } from './statements.js'
 import { iiifEntry } from './iiif.js'
 import { rijksEntry } from './rijks.js'
-import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
+import { ccFromUri, entityRights, licenseView, rightsView, workFreeStatus } from './rights.js'
 import {
   claimAnchors,
   claimCitations,
@@ -937,9 +938,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
         return {
           refusal: {
             partner: holder.partner,
-            // The reader's-words name where one exists; an iiif refusal uses
-            // the manifest's own stated institution, never the generic row.
-            phrase: holder.partner === 'iiif' ? record.institution : (MUSEUM_NAME[holder.partner] ?? record.institution),
+            // The reader's-words name where one exists; a door whose manifest
+            // names the institution (partners.js: institutionFromRecord) uses
+            // the record's own name, never the generic display row.
+            phrase: PARTNERS[holder.partner]?.institutionFromRecord
+              ? record.institution
+              : (MUSEUM_NAME[holder.partner] ?? record.institution),
             institution: record.institution,
             href: record.href ?? null,
           },
@@ -1848,13 +1852,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
       if (view && (view.marks.length || view.line) && !entries.some((e) => e.rights?.work))
         subjectRights = view
       // The museum's side of a rights disagreement travels only where the
-      // graph actually states a free answer: a refusal everyone agrees with
-      // (a Picasso) stays a plain refusal, because a one-sided line would
-      // imply a controversy the graph does not record. The status words ride
-      // along so the renderer can quote the graph's answer even when the
-      // says-it-twice guard hands the status line itself to a card.
-      if (holderRefusal && view?.marks.some((m) => m === 'pd' || m === 'zero'))
-        refusalShown = { ...holderRefusal, statusLine: view.line ?? view.label }
+      // graph states a free answer ABOUT THE WORK — gate and words from the
+      // same work-level statements (workFreeStatus), so the page can never
+      // quote a creator ruling or a copy's license as the work's status. A
+      // refusal everyone agrees with (a Picasso) stays a plain refusal, and
+      // a creator-only or license-only free answer is withheld the way the
+      // unknown branch withholds: a one-sided or mis-attributed line is
+      // worse than silence.
+      const workFree = holderRefusal ? workFreeStatus(rec) : null
+      if (workFree) refusalShown = { ...holderRefusal, statusLine: workFree.line }
     }
 
     if (extras?.works.entries.length)
@@ -1943,9 +1949,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // band itself carries holder FURNITURE only on the lede.
       holder: unit.index === '0' ? pageHolder : null,
       // Lede-only like the holder itself: a museum-lane candidate the gate
-      // refused on rights, where the graph states a free answer the flag
-      // disagrees with. Null on any other leg, and null when the graph
-      // agrees with the museum.
+      // refused on rights, where the graph's work-level answer disagrees
+      // with the flag. Null on any other leg, and null when the graph
+      // agrees with the museum. (unit.index === '0' and the renderer's
+      // b.id === 'slede' name the same band — the lede's id is 'slede' by
+      // construction — so the two guards are one predicate, failing closed
+      // if they ever diverged.)
       holderRefusal: unit.index === '0' ? refusalShown : null,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)

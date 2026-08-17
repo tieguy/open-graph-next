@@ -492,18 +492,22 @@ Klee, Rückriem, Domínguez) whose museums do not flag them public-domain.
 **A rights refusal the graph disputes is not silent** (2026-08-17, built on
 the operator's decision that the conflict must ship with the pages — and
 that the graph is never edited to pre-empt it; VALUES.md, same date). When
-a museum lane's record fails the gate on `non-pd-rights` alone AND
-Wikidata states a free answer about the work, the lede renders the
-`sr-conflict` line: both claims named, neither called wrong, the museum's
-record as the labeled door. `discover.js` attaches the refusal only in
-that conjunction — a Picasso refused by everyone stays a plain refusal,
-because a one-sided line would imply a controversy the graph does not
-record. When the says-it-twice guard hands the status line to a card, the
-conflict block stands alone and quotes the graph's words. American Gothic
-is the living exemplar: PD in the US since 2026-01-01 by publication age,
-community-recorded PD by term, and the Art Institute's own flag still
-false — the page shows the disagreement instead of anyone editing
-Wikidata to erase it.
+a museum lane's record fails the gate on `non-pd-rights` alone AND the
+graph states a free answer ABOUT THE WORK, the lede renders the
+`sr-conflict` line: both records named, neither called wrong, the
+museum's record as the labeled door. Gate and quoted words come from one
+place — `workFreeStatus` in `src/rights.js`, work-level statements only —
+so the line can never attribute a creator ruling or a copy's license to
+the work; a creator-only or license-only free answer is withheld, and a
+Picasso refused by everyone stays a plain refusal. The line claims
+nothing about the page's layout: the museum's image may still appear on
+an ordinary card (the card path has its own rules). American Gothic is
+the living exemplar: PD in the US since 2026-01-01 by publication age,
+community-recorded PD by term on work and creator both, and the Art
+Institute's own flag still false — the page shows the disagreement
+instead of anyone editing Wikidata to erase it. It is warmed as the
+flagship list's rights-disagreement exemplar (`tools/holder-flagships.mjs`,
+the one entry with a `role`).
 
 **The holder hero image hotlinks from the museum, and that sits unresolved
 against a stated value.** Museum images follow the inline-only-what-breaks
