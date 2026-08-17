@@ -22,6 +22,11 @@ kill_timeout = "45s"
 
 [env]
   ROBOTS_DISALLOW_ALL = "1"
+  # Staging runs the single-institution work-page experiment ON — this is the
+  # review environment for it. Production's fly.toml deliberately does not set
+  # this; the flag default there is the operator's decision on the QA document
+  # (../docs/2026-08-17-holder-page-qa.md).
+  HOLDER_PAGE = "1"
   # Absolute origin for Open Graph tags (og:image, og:url) — see SITE_ORIGIN in
   # serve.js.
   SITE_ORIGIN = "https://staging.friendsof.wiki"
