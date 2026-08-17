@@ -1,74 +1,35 @@
 # friendsof.wiki: adding an open collection
 
-Since the goal of [Friends Of](https://friendsof.wiki) is to learn about (and
-show) the potential connections between open knowledge, an obvious place for me
-to learn is the process of adding open collections. The site reads from sixteen
-sources so far. This post shares the process and what adding those sixteen
-taught me.
+One key goal of [Friends Of](https://friendsof.wiki) is for me to learn about (and show) the potential connections between open knowledge. One key mechanism for that so far has been the literal process of adding new sources -- sixteen so far.
 
 ## Part 1 — the shape of the job
 
-The full playbook lives [in the
-repo](https://github.com/tieguy/open-graph-next/blob/main/all-the-opens/docs/adding-a-source.md),
-and every commit that adds a source updates the playbook in the same commit. I
-keep the playbook in git rather than in this post because a blog post freezes
-on publish day while the process keeps changing — this post has already been
-wrong about the file count once, and the repo doc corrected itself the same
-day. Here I only summarize the shape:
+If you want a step-by-step guide, full playbook lives [in the repo](https://github.com/tieguy/open-graph-next/blob/main/all-the-opens/docs/adding-a-source.md). TLDR:
 
-1. **Investigate the partner before writing anything.** Six questions, and two
-   of them can end the project: resolve one real record id by hand and one
-   invented id, because a host that answers both identically is refusing to
-   talk to you rather than reporting a broken link; and read the API's terms,
-   because a non-commercial condition on the metadata blocks the goal even
-   when it permits the demo. The other four: what rate limit the host
-   publishes, what rights data the API exposes, whether a key is required, and
-   what robots.txt allows.
-2. **Pick which of three shapes the partner is.** If one Wikidata property
-   names the partner's own record of a thing the article links, the partner is
-   *direct-id* (the Met). If a property names something searchable and the
-   result is a sample of a larger holding, the partner is *search* (DPLA). If
-   neither, the partner gets hand-written code (the Smithsonian), and forcing
-   it into the other two shapes produces worse code than accepting the
-   exception.
-3. **Write six code files, regenerate one, update two docs.** One of the six
-   is a manifest entry that declares the partner's name, icon, hosts, and
-   front-page credit in one place; a test fails if any of it is missing.
-4. **Render real articles and read the cards.** Every partner bug in the
-   playbook was found by a person reading a rendered page. No partner bug was
-   found by a passing test.
+1. **Investigate the partner before writing anything.** There are both technical gotchas (a host that answers a real record id and an invented one identically is refusing robots, not hosting broken links) and legal ones (non-commercial terms on an API block reuse even when they permit a demo).
+2. **Pick which of three shapes the partner is.** There are (so far) three main types of partners: (1) **identifier:** Wikidata stores the partner's own id for a thing the article links, like the Met's id for an individual painting; (2) **search:** Wikidata stores something searchable, like the subject heading a library filed its items under; (3) **custom:** the partner fits neither, and forcing it into the first two shapes produces worse code than accepting the exception.
+3. **Write some code files.** Adding a partner currently touches six to eight files. I'd like to shrink that, but the wiring has already been through two refactorings, and each new partner really does bring its own knowledge: how its records are keyed, what its rights fields mean, what its host permits.
+4. **Render real articles and read the cards.** Every partner bug we have found was found by a person reading a rendered page; none was found by a passing test. So the last step is always rendering real articles and reading them.
 
-## Part 2 — pitfalls, each with the incident that taught it
+## Part 2 — pitfalls
 
-*Rule inherited from the issue: cite the evidence, never abstract into advice.
-Ordered as an escalation: URL → identity → data → law → layers.*
-
-- **You will guess a URL shape, and you will be wrong.** We shipped Rijksmuseum
-  cards that linked `/en/collection/object/<numericId>`. That page does not
-  exist for any object, because the museum keys its pages on accession numbers
-  (`/en/collection/SK-C-5`). Readers got a 404 from a live card. The rule this
-  produced: resolve one real id and one deliberately invented id before
-  shipping, because only the invented id proves the server distinguishes a hit
-  from a miss.
-- **Your test will agree with your bug.** The original Rijksmuseum test
-  asserted the broken URL, because the person who wrote the test held the same
-  wrong assumption as the person who wrote the code — they were the same
-  person. (Short section; it sets up the next post's testing theme.)
 - **Bot mitigation makes healthy links look dead.** A link audit reported 431
   DPLA links dead. All 431 worked in a browser, because DPLA's firewall
   answered our client's real ids and impossible ids with the same page.
   Without the invented-id control, a consumer cannot distinguish a host that
   refuses robots from a link that rotted — which also means a naive
   link-checker audit of open collections would report mostly false rot.
-- **The problem is often anchor supply, not the API.** On the Rembrandt
-  article, 35 links carry a museum identifier, 14 of those 35 survive the step
-  that strips HTML tables, 3 of the 14 reach the museum lookup, and 2 of the 3
-  render as cards. The Met's API answered correctly at every step, so blaming
-  the API would have fixed nothing. Diagnose the funnel before blaming the
-  partner. *(Re-measure these four numbers on current code before publishing;
-  the pipeline has changed since 2026-08-06.)*
-- **The visible modeling error is not always the binding constraint.** CVMA
-  GB's catalog of 28,135 stained-glass photographs has matched zero Wikidata
+- **The problem is often anchor supply, not the API.** When we measured the
+  Rembrandt article (2026-08-06), 35 of its links carried a museum
+  identifier, 14 of those 35 survived the step that strips HTML tables, 3 of
+  the 14 reached the museum lookup, and 2 of the 3 rendered as cards. The
+  Met's API answered correctly at every step, so blaming the API would have
+  fixed nothing. The fix was also not to loosen the table-strip, which keeps
+  navboxes off every page: we stopped routing the question through the
+  article's links and instead ask Wikidata directly what the artist made,
+  which raised Rembrandt's museum cards from 2 to 11. Diagnose the funnel
+  before blaming the partner.
+- **Modeling is complex (good), which makes every new integration complicated and error-prone (bad).** CVMA GB's catalog of 28,135 stained-glass photographs has matched zero Wikidata
   items, and the catalog does contain a real modeling error (it types entries
   as the material rather than as windows). Fixing that error would produce
   almost no matches, because the United Kingdom has 87 stained-glass-window
@@ -81,28 +42,21 @@ Ordered as an escalation: URL → identity → data → law → layers.*
   diagnosis was plausible and nobody counted the targets. The order that
   catches this in one pass: count the target items, then check the property,
   then check the value vocabulary.
-  - For the ecosystem pile: cvma.ac.uk is now a tombstone page. The archive
-    moved to ADS York under CC BY 4.0, all 28,135 catalogued URLs return 404
-    (real ids and invented ids identically), no redirect points to the new
-    home, and no Wikidata property exists to record the new ids. The
-    collection became more open and less reachable in the same migration.
-- **An index with no ranking hands you its first page.** DPLA returned 60
-  items for the heading "Armstrong, Neil, 1930-2012"; about 50 of the 60 were
-  genuinely about Apollo 11; the 4 items we displayed were the only junk in
-  the set, because a facet query has no relevance order and we took the first
-  page. One line here and a link forward — the next post grows this incident
-  into its own argument. *(Boundary decision still open: the DigitalNZ
-  Trotsky/lunch-box incident currently lives in that post, not this one.)*
-- **The pipeline works long before the page credits anyone.** DigitalNZ's
-  first commit fetched records and rendered cards while the front page did not
-  name DigitalNZ and no icon existed, because the credit lived in three files
-  the commit deferred and no test checked them. The partner did the work and
-  received none of the credit, and nothing failed. A manifest completeness
-  test now fails when a partner lacks its name, icon, hosts, or front-page
-  entry.
-- **Rights metadata will try to make you lie.** Three traps with one rule. A
-  Rijksmuseum record states two Creative Commons URIs, and the CC0 one covers
-  the catalog text rather than the picture, so printing it as the picture's
+- **Archiving is a real use case.** cvma.ac.uk is a cool site, and also now dead. The archive moved to ADS York under CC BY 4.0, all 28,135 catalogued URLs return 404
+  (real ids and invented ids identically), no redirect points to the new
+  home, and no Wikidata property exists to record the new ids. The
+  collection became more open and less reachable in the same migration.
+- **Ranking is hard — and a facet query doesn't do it for you.** DPLA
+  returned 60 items for the heading "Armstrong, Neil, 1930-2012", and about
+  50 of the 60 were genuinely about Apollo 11. Because a facet query has no
+  relevance order, and because we initially displayed the first page it
+  returned, the four cards we showed were the only junk in the set — a
+  poster, a portrait, a balloonist, an exposition record, and no moon. We
+  rank and deduplicate locally now.
+- **Rights metadata often describes a different object than the one you
+  show.** Three traps with one rule. A Rijksmuseum record states two Creative
+  Commons URIs, and the CC0 one covers the catalog text rather than the
+  picture, so printing it as the picture's
   license promises more than the museum granted. Open Library files a 1991
   scholarly catalog under Rembrandt, so a creator-level public-domain ruling
   about Rembrandt rendered a public-domain mark on a book with three living
@@ -121,47 +75,23 @@ Ordered as an escalation: URL → identity → data → law → layers.*
   verification: openalex.org answers its favicon URL with HTTP 200 and an
   HTML error page, and that page shipped as OpenAlex's icon because a
   size-only check passed it.
-- **Your own layers will drift.** Our page renderer's source table was
-  imported by pipeline code once; then, in one week, a shelf-ranking function
-  shared by two partners lived in one partner's module, and our shared Library
-  of Congress code imported a function back out of the DPLA module. The
-  instinct behind all three mistakes was correct — a learning should
-  generalize across sources — but the code landed in a file named after one
-  partner. A test now rejects imports in both directions: no partner module
-  may import another partner, and no shared module may import a partner.
 
-## Part 3 — the commentary (the point)
+## Part 3 — the commentary
 
-- **Ours vs. the ecosystem's.** Sort every Part 2 pitfall into two piles.
-  Ours, fixable by better code: guessed URLs, tests that pin bugs, layer
-  drift, missing ranking, missing credit. The ecosystem's, which no code of
-  ours fixes: bot mitigation indistinguishable from rot, migrations that
-  orphan every published URL, rights metadata that answers a different
-  question than the one a reuser asks, keyed APIs that retire. The split is
-  the argument: roughly half the cost of consuming "open" is paid on the
-  consumer side for problems only publishers can fix.
-- **The plugin question, answered twice — and the second answer contradicted
-  the first.** The honest version of "why is there no plugin system": we
-  refactored toward one twice, and the two refactors answered different
-  questions. The first (2026-08-07) removed duplicated wiring by generating
-  the lookup jobs from a registry, and its audit concluded that what remained
-  was partner-specific knowledge, so a written note said a second refactor
-  would not shrink the file count. The second (2026-08-14) shrank the count
-  from thirteen files to six, because the audit had answered "can this be
-  config?" while five of the thirteen files were slug-keyed tables holding
-  one line of partner data each — a question the first audit never asked.
-  The parallel with the CVMA bullet is exact: a plausible conclusion survived
-  because nobody re-counted it, until a reader looked at "13 files" and said
-  that screams drift. What remains per-partner now is logic — the fetcher,
-  the rights mapping, the lookup registration — and I invite disagreement
-  about whether any plugin boundary can absorb rights vocabulary and host
-  policy, which are judgments about a partner rather than wiring.
-- **"Resolve a real one and an invented one" deserves to be a norm.** Every
-  linked-data consumer needs the control; I have not found it written down as
-  practice. It costs two requests, and it catches two distinct failure
-  classes: URL shapes the consumer guessed wrong, and firewalls that answer
-  every id identically. Possible ecosystem ask: a documented always-misses id
-  per API, the way payment APIs document test card numbers.
+- **Roughly half the cost of consuming "open" is paid on the consumer side,
+  for problems only publishers can fix.** Sort the pitfalls above into two
+  piles. One pile is ordinary software cost — picking anchors, ranking a
+  shelf, diagnosing my own funnel. I would pay that pile against any API, and
+  what I fix there stays fixed in my repo. The other pile belongs to the
+  ecosystem: a firewall that answers real and invented ids identically, a
+  migration that breaks all 28,135 published URLs at once, rights fields that
+  describe the catalog entry rather than the picture, thumbnails served from
+  hosts that block hotlinking. My code can detect each of these, and can
+  route around some of them, but it removes none of them — and the workaround
+  I ship helps only this site, while every other consumer rediscovers the
+  same pile by hand. A publisher who fixes one of these fixes it for every
+  consumer at once. These collections are open by license; consuming them
+  stays expensive for reasons the license does not control.
 - **What would partners publish for this to be a 30-minute job?** A stated
   rate limit, even when the statement is "none" (DPLA already does this). A
   rights field in a standard vocabulary (IIIF already requires one). A
@@ -169,16 +99,3 @@ Ordered as an escalation: URL → identity → data → law → layers.*
   thumbnail URL on the partner's own host, because aggregator thumbnails
   point at hundreds of provider hosts that rot and block hotlinking. Praise
   the partners that already do each by name.
-- **Close by handing off.** The playbook keeps living in git, where the next
-  partner corrects it. The next post starts where this one ends: once the
-  plumbing works, the judgment calls begin — which four of sixty items earn
-  a shelf — and today there is nowhere on-wiki to argue about that judgment.
-
-## Before writing final prose
-
-- [ ] Decide the DigitalNZ Trotsky incident's home (here vs. the ranking
-  post) — one place only
-- [ ] Re-render the Met/Rembrandt funnel on current code before quoting the
-  35 → 14 → 3 → 2 numbers
-- [ ] Tone check against the two published posts: measurement, not
-  grievance — "doesn't", never "can't"
