@@ -335,7 +335,7 @@ const server = createServer(async (req, res) => {
   // reader's request; `title` is what the page may truthfully call itself.
   let title = page
   try {
-    const { bands, stats, reach } = await discover(page, {
+    const { bands, stats, reach, holder } = await discover(page, {
       async emit(type, data) {
         if (type === 'spine') {
           title = data.page
@@ -369,7 +369,7 @@ const server = createServer(async (req, res) => {
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
-    write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
+    write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/', holder }))
     // One snapshot answers two questions: whether this render carries the thin
     // marker, and whether it is stored thin below. Taken before streamClose so
     // the marker lands before `__tapdone` — only complete pages can say they

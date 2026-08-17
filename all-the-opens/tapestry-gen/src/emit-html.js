@@ -106,9 +106,24 @@ function faviconStyle(slugs, inline) {
   return rules.length ? `\n${rules.join('\n')}\n` : ''
 }
 
-function sourceTag(source, inline = new Map()) {
-  const meta = SOURCE[source] ?? { name: source.replace(/_/g, ' '), icon: null }
-  return `<span class="src">${favicon(source, inline)}${escapeHtml(meta.name)}</span>`
+function sourceTag(source, inline = new Map(), nameFor = null) {
+  const name = nameFor ? nameFor(source) : (SOURCE[source]?.name ?? source.replace(/_/g, ' '))
+  return `<span class="src">${favicon(source, inline)}${escapeHtml(name)}</span>`
+}
+
+/**
+ * Build a nameFor closure that overrides partner display names for the holder's partner.
+ * If holder is provided and the source matches the holder's partner, returns the institution name.
+ * Otherwise falls back to the standard PARTNERS display name.
+ */
+function buildNameFor(holder) {
+  if (!holder) return null
+  const holderPartner = holder.partner
+  const institutionName = holder.record.institution
+  return (source) => {
+    if (source === holderPartner) return institutionName
+    return SOURCE[source]?.name ?? source.replace(/_/g, ' ')
+  }
 }
 
 /**
@@ -217,7 +232,15 @@ function gapLead({ total, shown, link, invisible }) {
  * Wikipedia's rule that a disputed external link stays out until someone
  * argues it in; a measurement does not.
  */
-export function gapPanel(bands, reach, inline = new Map()) {
+export function gapPanel(bands, reach, inline = new Map(), nameFor = null) {
+  // The holder override reaches this table's iiif row (for the museum
+  // holders the two names are identical, so it changes nothing there). On an
+  // iiif-held page that also carries another institution's manifest card —
+  // live-reachable today through any non-subject anchor's P6108 statement —
+  // the renamed row attributes the merged count to the holder. Accepted
+  // deliberately (2026-08-17) as an interim state: the plan's single-source
+  // suppression (phase 5, not yet built) is what closes it, by rendering no
+  // anchor statement cards at all on an iiif-held page.
   if (!reach) return ''
   const report = visibilityReport(bands, reach)
   if (!report.length) return ''
@@ -228,7 +251,7 @@ export function gapPanel(bands, reach, inline = new Map()) {
   // column headings carry the distinction so the cells do not have to.
   const rows = report
     .map((r) => {
-      const name = SOURCE[r.slug]?.name ?? r.slug.replace(/_/g, ' ')
+      const name = nameFor ? nameFor(r.slug) : (SOURCE[r.slug]?.name ?? r.slug.replace(/_/g, ' '))
       // Two countable things, never added together — a reader looking at six
       // cards must not be told there are thirteen. Each number names what it
       // counts, so both can be checked against the page.
@@ -337,6 +360,21 @@ function credit(entry, inline = new Map(), withSource = true) {
   // line below it would be the same fact twice.
   const icon = withSource ? favicon(entry.source, inline) : ''
   return `<p class="credit">${words}${icon}</p>`
+}
+
+/**
+ * The labeled door to the holder's own viewer. Text names the museum so the
+ * link reads as the partnership gesture it is. Copy is medium-aware: paintings
+ * get brushwork copy, other media get house-voice language.
+ */
+export function zoomLink(entry, institutionName, medium = null) {
+  if (entry.standing !== 'holder-work' || !entry.href) return ''
+  const copy = medium === 'painting'
+    ? `Zoom into the brushwork at ${escapeHtml(institutionName)} →`
+    : `See every detail at ${escapeHtml(institutionName)} →`
+  // New tab like every other outbound link here: the door to the museum must
+  // not discard the enriched render the reader is standing on.
+  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${copy}</a>`
 }
 
 /**
@@ -676,7 +714,7 @@ function provenance(entry) {
  * the top right, with nothing tying the two together. Same badge the shelf
  * head and the gutter thumb carry, for the same reason.
  */
-function heroCard(entry, inline, sample = null) {
+function heroCard(entry, inline, sample = null, holder = null, nameFor = null) {
   const embed = entry.media3d ?? (entry.media ? iaEmbed(entry.media.source) : null)
   let visual = ''
   if (embed) {
@@ -696,13 +734,24 @@ function heroCard(entry, inline, sample = null) {
   }
   const heading = titleRow(entry, 'hero')
   const claim = sampleBadge(sample, 1)
+  const zoom = holder ? zoomLink(entry, holder.record.institution, holder.medium) : ''
+  // The IIIF requiredStatement is a mandatory attribution for THIS resource,
+  // so it renders only on the holder's own card — and in its own element,
+  // never inside `.credit`, whose line clamp may hide exactly the text the
+  // spec obliges a client to show.
+  const statement =
+    holder && entry.standing === 'holder-work' && holder.record.requiredStatement
+      ? `<p class="req-statement">${escapeHtml(holder.record.requiredStatement)}</p>`
+      : ''
   // Source tag first, same as card(): the friend opens every box.
   return (
-    `<figure class="card hero-card"><div class="hero-src">${sourceTag(entry.source, inline)}${claim}</div>` +
+    `<figure class="card hero-card"><div class="hero-src">${sourceTag(entry.source, inline, nameFor)}${claim}</div>` +
     `${visual}<figcaption>` +
     heading +
     descLine(entry) +
     credit(entry, inline, false) +
+    statement +
+    (zoom ? `<p class="zoom-link">${zoom}</p>` : '') +
     rightsLine(entry) +
     provenance(entry) +
     `</figcaption></figure>`
@@ -717,6 +766,10 @@ function heroCard(entry, inline, sample = null) {
  * the link is the browse this page declined to fake with four arbitrary
  * thumbnails. See src/breadth.js for why the shelf is not simply dropped.
  */
+// Deliberately NO display-name override here: broad notes are pushed only by
+// the search-shape partners (DPLA, Europeana, DigitalNZ), never by a holder
+// partner, and the override reaching one would caption another partner's
+// holdings with the holder institution's name.
 function broadNotes(notes, inline) {
   if (!notes?.length) return ''
   return notes
@@ -932,6 +985,13 @@ function proseLength(b) {
 }
 
 export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
+  // Holder context comes off the band itself — discover attaches it to the
+  // lede only — so the holder's furniture (zoom link, requiredStatement,
+  // renamed source bar) can never reach a band that has no holder context.
+  // Both renderers therefore agree by construction; page-level furniture
+  // (masthead, legends, panel) reads the page-level holder instead.
+  const holder = b.holder ?? null
+  const nameFor = buildNameFor(holder)
   // The hero comes out of the entries before they are shelved, so it is never
   // both hoisted and carded. A section whose only find becomes its hero has no
   // deck at all, which is the right rendering of one good thing.
@@ -957,7 +1017,11 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // either way is bounded — a float becomes a card, or a short section keeps a
   // small hole. Real Wikipedia sections do keep small holes, and the residual
   // ones here are that, not a defect.
-  if (hero && proseLength(b) < FLOAT_MIN_PROSE) {
+  // A holder-work entry must float even if the lede is short — the page exists
+  // to show the holder's record of the subject, and a stub wrapping under its
+  // hero is what a real stub with an infobox looks like (see the infobox
+  // precedent nearby).
+  if (hero && proseLength(b) < FLOAT_MIN_PROSE && hero.standing !== 'holder-work') {
     rest = [hero, ...rest]
     hero = null
   }
@@ -1093,7 +1157,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const broad = broadNotes(b.broad, inline)
   const deckBody = disclosure + media + broad
   const float = hero
-    ? `<aside class="rail">${heroCard(hero, inline, heroSample)}</aside>`
+    ? `<aside class="rail">${heroCard(hero, inline, heroSample, holder, nameFor)}</aside>`
     : infobox
       ? infoboxAside(infobox, inline, wikiBase)
       : ''
@@ -1187,7 +1251,10 @@ function subjectRights(b) {
   )
 }
 
-/** All three parts as one fragment — what the stream ships and the tests read. */
+/** All three parts as one fragment — what the stream ships and the tests read.
+ * The holder context rides the band itself (`b.holder`, set by discover on the
+ * lede) because a streamed band arrives through the emit callback before
+ * `discover()` has resolved — there is no outer holder value to thread. */
 export function bandRail(b, inline = new Map(), wikiBase = '/wiki/') {
   const { rail, deck, refs } = bandParts(b, inline, wikiBase)
   return rail + deck + refs
@@ -1231,7 +1298,7 @@ function band(b, inline, wikiBase = '/wiki/') {
  * sentence that hands the credit to the sources — then the article. The
  * verbiage about how it all works lives on the main page, not here.
  */
-function hero({ title, home, legend, panel = '', extras = '' }) {
+function hero({ title, home, legend, panel = '', extras = '', holder = null }) {
   const name = 'Help From Our Friends · an experiment in visualizing open knowledge, by'
   const byline = `<a href="https://lu.is">Luis Villa</a>`
   const kicker = home ? `<a href="${escapeHtml(home)}">${name}</a> ${byline}` : `${name} ${byline}`
@@ -1239,12 +1306,17 @@ function hero({ title, home, legend, panel = '', extras = '' }) {
     ? `<p class="hero-note">This is an experiment — for more detail, including the hard problems,
   see <a href="${escapeHtml(home)}">the main page</a>.</p>`
     : ''
+  // The span is the streaming path's mount point: streamOpen renders this
+  // before the holder record can resolve, and streamHeroExtras fills it late.
+  const creditLine = holder
+    ? `This page: Wikipedia + ${escapeHtml(holder.record.institution)}`
+    : 'Today, help came from:'
   return `<header class="hero">
   <p class="kicker">${kicker}</p>
   <h1>${escapeHtml(title)}</h1>
   <p class="thesis">A Wikipedia article, with what the rest of the open web holds about it
     alongside — found while you waited, by following the article’s own links and footnotes
-    out to the collections that published it. Today, help came from:</p>
+    out to the collections that published it. <span class="credit-line">${creditLine}</span></p>
   <div class="legend">${legend}</div>
   <div class="gap-slot">${panel}</div>
   ${note}
@@ -1263,16 +1335,22 @@ export function buildHtml({
   home = '',
   reach = null,
   siteOrigin = '',
+  holder = null,
 }) {
   // Intra-wiki links in a batch file re-base onto the deployed demo (or
   // whatever `home` names), so clicking through to another article still
   // lands on an enriched render rather than a broken relative path.
   const wikiBase = home ? `${home.replace(/\/$/, '')}/wiki/` : 'https://en.wikipedia.org/wiki/'
+  // `holder` must be the same object discover attached to the lede band —
+  // this page-level copy feeds only the masthead, legend and panel, while
+  // every per-band furniture read comes from `b.holder`. A caller passing a
+  // different value here renames the page furniture but not the cards.
+  const nameFor = buildNameFor(holder)
   const body = bands.map((b) => band(b, inline, wikiBase)).join('\n')
 
   const used = sourcesUsed(bands)
   const legend = used
-    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
+    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(nameFor ? nameFor(s) : SOURCE[s].name)}</span>`)
     .join('')
 
   // Explain the one visual distinction that carries an argument, and only when
@@ -1301,7 +1379,7 @@ ${FOLD_JS}
 </head>
 <body>
 ${CC_SPRITE}
-${hero({ title, home, legend, panel: gapPanel(bands, reach, inline), extras: evidenceKey })}
+${hero({ title, home, legend, panel: gapPanel(bands, reach, inline, nameFor), extras: evidenceKey, holder })}
 <main>
 ${body}
 </main>
@@ -1389,7 +1467,7 @@ const FINDING =
 export function streamOpen({ title, units, inline = new Map(), home = '/', siteOrigin = '' }) {
   const spine = units
     .map((u) =>
-      band({ id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks }, inline),
+      band({ id: u.index === '0' ? 'slede' : `s${u.index}`, title: u.title, blocks: u.blocks }, inline, '/wiki/'),
     )
     .join('\n')
   return `<!doctype html>
@@ -1429,10 +1507,11 @@ export function streamBand(b, inline = new Map()) {
  * only then does the page know which sources it used and whether any anchor
  * drew arbitrarily.
  */
-export function streamHeroExtras(bands, { inline = new Map(), home = '', reach = null } = {}) {
+export function streamHeroExtras(bands, { inline = new Map(), home = '', reach = null, holder = null } = {}) {
+  const nameFor = buildNameFor(holder)
   const used = sourcesUsed(bands)
   const legend = used
-    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
+    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(nameFor ? nameFor(s) : SOURCE[s].name)}</span>`)
     .join('')
   const evidenceKey = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
     ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
@@ -1447,9 +1526,15 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '', reach =
   // mounts into `.hero-body`, the masthead's second column — beside what the
   // page says about itself, never ahead of it. A finding about the page must
   // not be the first thing a reader meets, before they know what the page is.
-  const panel = gapPanel(bands, reach, inline)
+  const panel = gapPanel(bands, reach, inline, nameFor)
   return (
     `<template id="tpl-legend">${legend}</template><script>__fill("tpl-legend",".legend")</script>\n` +
+    // The two-party credit, late-filled into the span the masthead rendered
+    // before the holder record could resolve — the streamed twin of the line
+    // `hero()` prints directly on the batch path.
+    (holder
+      ? `<template id="tpl-credit">This page: Wikipedia + ${escapeHtml(holder.record.institution)}</template><script>__fill("tpl-credit",".credit-line")</script>\n`
+      : '') +
     // Into its own slot, which the shell already carries empty. The panel is
     // shut by default, so where it lands costs the masthead no height.
     (panel
@@ -1686,6 +1771,11 @@ sup.ref a{color:var(--link)}
 .band:first-child .hero-card h4{font-size:1.08rem}
 .band:first-child .hero-card .desc{font-size:.8rem;-webkit-line-clamp:3}
 .band:first-child .hero-card .credit{-webkit-line-clamp:3}
+.zoom-link{margin:6px 0 0}
+a.zoom{color:var(--link);display:inline;font-size:.78rem}
+a.zoom:visited{color:var(--link-visited)}
+a.zoom:hover{text-decoration:underline}
+.req-statement{font-size:.72rem;color:#5d6469;margin:2px 0 0}
 
 /* The media deck: full-width, below the prose. Shelves size to their cards and
    pack side by side, wrapping — a one-card shelf shares its row with the next

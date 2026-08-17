@@ -1702,7 +1702,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       const source = key === 'aic' ? 'artic' : key
       const shown = extras.artworks.entries.filter((e) => e.source === source).length
       if (!shown) continue
-      const holder = MUSEUM_NAME[source] ?? 'this collection'
+      const museumName = MUSEUM_NAME[source] ?? 'this collection'
       samples.push({
         source,
         topic: `By ${page}`,
@@ -1710,7 +1710,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         total: count,
         text:
           `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${unit.title} ` +
-          `that Wikidata records ${holder} as holding`,
+          `that Wikidata records ${museumName} as holding`,
       })
     }
 
@@ -1734,6 +1734,10 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // a rail no subject-standing find claimed. Null elsewhere on purpose —
       // only the lede band may trip the gate.
       infobox: unit.index === '0' ? infobox : null,
+      // Lede-only holder context (null elsewhere): the streamed band renderer
+      // reads it off the band, because a band reaches serve.js through the
+      // emit callback before discover() has resolved a holder to thread.
+      holder,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)
