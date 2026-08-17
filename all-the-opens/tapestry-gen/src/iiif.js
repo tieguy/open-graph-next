@@ -80,7 +80,7 @@ export function iiifRights(manifest) {
 }
 
 /** Where a reader lands: the object's own page when the manifest names one. */
-function iiifHomepage(manifest, manifestUrl) {
+export function iiifHomepage(manifest, manifestUrl) {
   const home = Array.isArray(manifest.homepage) ? manifest.homepage[0] : manifest.homepage
   const related = Array.isArray(manifest.related) ? manifest.related[0] : manifest.related
   return home?.id ?? home?.['@id'] ?? related?.['@id'] ?? related ?? manifestUrl

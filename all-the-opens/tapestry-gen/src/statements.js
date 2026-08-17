@@ -520,7 +520,7 @@ export function aicEntryFrom(body) {
 export async function aicEntry(id) {
   return aicEntryFrom(
     await getJson(
-      `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain`,
+      `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line`,
     ),
   )
 }
