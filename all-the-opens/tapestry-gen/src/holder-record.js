@@ -1,12 +1,26 @@
+// Catalog records normalized to one shape, gated on the museum's own rights flag.
+//
+// Each transform — metRecordFrom, aicRecordFrom, rijksRecordFrom, iiifRecordFrom —
+// normalizes a partner's catalog response to the holder-record contract shape.
+// Missing fields are null; the record is never null but its gate may fail.
+//
+// Traps and constraints worth remembering:
+// - Rijksmuseum subject_to rights (the public-domain mark) not subject_of.subject_to (CC0 metadata);
+// - IIIF iiifHomepage never passed with manifest URL as fallback (would defeat no-object-page gate);
+// - AIC width-800 rule: all IIIF images built at width 800, never the manifest thumbnail;
+// - Institution from PARTNERS[partner].name, never hardcoded display strings.
+
 import { ccFromUri } from './rights.js'
-import { iiifString } from './iiif.js'
+import { iiifString, iiifHomepage } from './iiif.js'
 import {
   rijksTitle,
   rijksDate,
   rijksObjectNumber,
   rijksPageUrl,
   rijksRights,
+  imageBaseFrom,
 } from './rijks.js'
+import { PARTNERS } from './partners.js'
 
 /**
  * Normalize empty string to null.
@@ -14,12 +28,39 @@ import {
 const nullIfEmpty = (v) => (typeof v === 'string' && !v.trim() ? null : v ?? null)
 
 /**
+ * Gate check: returns null if record passes all gate legs, else the name of the first failed leg.
+ * Gate legs, in order: institution (present and single), public-domain rights, image URL, object page.
+ */
+export function gateFailure(record) {
+  if (!record) return 'no-institution'
+
+  // Institution must be present
+  if (!record.institution) {
+    // For IIIF, distinguish "several providers" from "no institution" (v2 or missing)
+    if (record.partner === 'iiif' && record._providers > 1) {
+      return 'several-institutions'
+    }
+    return 'no-institution'
+  }
+
+  // Rights must be public domain
+  if (record.rights?.publicDomain !== true) return 'non-pd-rights'
+
+  // Must have an image URL
+  if (!record.imageUrl) return 'no-image'
+
+  // Must have an object page (homepage/related link)
+  if (!record.href) return 'no-object-page'
+
+  // All gates pass
+  return null
+}
+
+/**
  * The Met's catalog record as a normalized holder-record shape.
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
  */
 export function metRecordFrom(obj) {
-  if (!obj?.title) return null
-
   const isPublicDomain = obj.isPublicDomain === true
   const imageUrl = isPublicDomain ? (obj.primaryImageSmall || obj.primaryImage || null) : null
 
@@ -39,7 +80,7 @@ export function metRecordFrom(obj) {
     },
     imageUrl,
     href: nullIfEmpty(obj.objectURL),
-    institution: 'The Metropolitan Museum of Art',
+    institution: PARTNERS.met.name,
   }
 }
 
@@ -49,34 +90,33 @@ export function metRecordFrom(obj) {
  */
 export function aicRecordFrom(body) {
   const d = body?.data
-  if (!d?.title) return null
 
   const iiif = body.config?.iiif_url ?? 'https://www.artic.edu/iiif/2'
-  const isPublicDomain = d.is_public_domain === true
+  const isPublicDomain = d?.is_public_domain === true
 
   // Build IIIF image URL at width 800 if image_id and public domain
   let imageUrl = null
-  if (isPublicDomain && d.image_id) {
+  if (isPublicDomain && d?.image_id) {
     imageUrl = `${iiif}/${d.image_id}/full/800,/0/default.jpg`
   }
 
   return {
     partner: 'artic',
-    id: String(d.id ?? ''),
-    title: nullIfEmpty(d.title),
-    creator: nullIfEmpty(d.artist_display?.split('\n')[0]),
-    date: nullIfEmpty(d.date_display),
-    medium: nullIfEmpty(d.medium_display),
-    dimensions: nullIfEmpty(d.dimensions),
-    accession: nullIfEmpty(d.main_reference_number),
-    credit: nullIfEmpty(d.credit_line),
+    id: String(d?.id ?? ''),
+    title: nullIfEmpty(d?.title),
+    creator: nullIfEmpty(d?.artist_display?.split('\n')[0]),
+    date: nullIfEmpty(d?.date_display),
+    medium: nullIfEmpty(d?.medium_display),
+    dimensions: nullIfEmpty(d?.dimensions),
+    accession: nullIfEmpty(d?.main_reference_number),
+    credit: nullIfEmpty(d?.credit_line),
     rights: {
       publicDomain: isPublicDomain,
       label: isPublicDomain ? 'CC0' : null,
     },
     imageUrl,
-    href: `https://www.artic.edu/artworks/${d.id}`,
-    institution: 'Art Institute of Chicago',
+    href: d?.id ? `https://www.artic.edu/artworks/${d.id}` : null,
+    institution: PARTNERS.artic.name,
   }
 }
 
@@ -86,45 +126,33 @@ export function aicRecordFrom(body) {
  * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
  */
 export function rijksRecordFrom(obj, vis, digital, id) {
-  const title = rijksTitle(obj)
-  if (!title) return null
-
   const rights = rijksRights(vis)
   const isPublicDomain = rights?.code === 'CC0' || rights?.code === 'PDM'
 
   // Build IIIF image URL at width 800 if digital and public domain
   let imageUrl = null
   if (isPublicDomain && digital) {
-    const url = Array.isArray(digital?.access_point)
-      ? digital.access_point[0]?.id
-      : digital?.access_point?.id
-    if (typeof url === 'string') {
-      const m = /^(https?:\/\/[^\s]+?)\/full\/[^/]+\/[^/]+\/\w+\.\w+$/.exec(url.trim())
-      if (m) {
-        imageUrl = `${m[1]}/full/800,/0/default.jpg`
-      }
-    }
+    const base = imageBaseFrom(digital)
+    imageUrl = base ? `${base}/full/800,/0/default.jpg` : null
   }
-
-  const href = rijksPageUrl(obj, id)
 
   return {
     partner: 'rijks',
     id: String(id ?? ''),
-    title,
-    creator: null, // Rijksmuseum data doesn't provide artist in the shape we have
+    title: rijksTitle(obj),
+    creator: null,
     date: rijksDate(obj),
-    medium: null, // Rijksmuseum data doesn't provide medium in the shape we have
-    dimensions: null, // Rijksmuseum data doesn't provide dimensions in the shape we have
+    medium: null,
+    dimensions: null,
     accession: rijksObjectNumber(obj),
-    credit: null, // Rijksmuseum data doesn't provide credit line in the shape we have
+    credit: null,
     rights: {
       publicDomain: isPublicDomain,
       label: rights?.label ?? null,
     },
     imageUrl,
-    href,
-    institution: 'Rijksmuseum',
+    href: rijksPageUrl(obj, id),
+    institution: PARTNERS.rijks.name,
   }
 }
 
@@ -137,16 +165,6 @@ function iiifInstitution(provider) {
   if (!Array.isArray(provider) || provider.length !== 1) return null
   const label = iiifString(provider[0]?.label)
   return label
-}
-
-/**
- * Extract homepage from IIIF manifest (v3 homepage or v2 related).
- * Never passes manifest URL as fallback (would defeat no-object-page gate).
- */
-function iiifHomepageUrl(manifest) {
-  const home = Array.isArray(manifest.homepage) ? manifest.homepage[0] : manifest.homepage
-  const related = Array.isArray(manifest.related) ? manifest.related[0] : manifest.related
-  return home?.id ?? home?.['@id'] ?? related?.['@id'] ?? related ?? null
 }
 
 /**
@@ -177,12 +195,15 @@ function iiifImageUrl(manifest) {
 
 /**
  * Extract requiredStatement (v3) or attribution (v2) with markup stripped.
+ * Composes label and value when both exist: "label: value"
  */
 function iiifRequiredStatement(manifest) {
   // v3: requiredStatement
   if (manifest.requiredStatement) {
     const label = iiifString(manifest.requiredStatement?.label)
     const value = iiifString(manifest.requiredStatement?.value)
+    // Compose "label: value" when both exist, else return whichever is present
+    if (label && value) return `${label}: ${value}`
     return label || value || null
   }
 
@@ -196,18 +217,10 @@ function iiifRequiredStatement(manifest) {
 
 /**
  * IIIF manifest as a normalized holder-record shape.
- * Gate: v3 only, exactly one provider, CC0 or PDM rights, imageUrl, homepage
+ * Gate: v3 only, exactly one provider, CC0 or PDM rights, imageUrl, homepage.
+ * manifestUrl is the P6108 value, used as the record id.
  */
-export function iiifRecordFrom(manifest) {
-  if (!manifest || typeof manifest !== 'object') return null
-
-  const title = iiifString(manifest.label)
-  if (!title) return null
-
-  // Gate: institution (v3 provider with exactly one entry, v2 fails)
-  const institution = iiifInstitution(manifest.provider)
-  if (!institution) return null
-
+export function iiifRecordFrom(manifest, manifestUrl) {
   // Gate: rights must be CC0 or PDM
   const v3rights = Array.isArray(manifest?.rights) ? manifest.rights[0] : manifest?.rights
   const v2license = Array.isArray(manifest?.license) ? manifest.license[0] : manifest?.license
@@ -215,20 +228,22 @@ export function iiifRecordFrom(manifest) {
   const rights = ccFromUri(rightsUri)
   const isPublicDomain = rights?.code === 'CC0' || rights?.code === 'PDM'
 
-  if (!isPublicDomain) return null
-
   // Gate: imageUrl
   const imageUrl = iiifImageUrl(manifest)
-  if (!imageUrl) return null
 
   // Gate: homepage/related (must be explicitly stated, no manifest URL fallback)
-  const href = iiifHomepageUrl(manifest)
-  if (!href) return null
+  // Never pass manifestUrl to iiifHomepage — its fallback would defeat the no-object-page gate.
+  const href = iiifHomepage(manifest)
+
+  // Gate: institution (v3 provider with exactly one entry, v2 fails)
+  // Track provider count for gateFailure to distinguish no-institution vs several-institutions
+  const providers = Array.isArray(manifest?.provider) ? manifest.provider : manifest?.provider ? [manifest.provider] : []
+  const institution = iiifInstitution(manifest.provider)
 
   return {
     partner: 'iiif',
-    id: '', // P6108's value IS the manifest URL, handled upstream
-    title,
+    id: manifestUrl ?? '',
+    title: iiifString(manifest.label),
     creator: null,
     date: null,
     medium: null,
@@ -236,12 +251,13 @@ export function iiifRecordFrom(manifest) {
     accession: null,
     credit: null,
     rights: {
-      publicDomain: true,
+      publicDomain: isPublicDomain,
       label: rights?.label ?? null,
     },
     imageUrl,
     href,
     institution,
     requiredStatement: iiifRequiredStatement(manifest),
+    _providers: providers.length, // Internal: track provider count for gateFailure
   }
 }

@@ -79,11 +79,14 @@ export function iiifRights(manifest) {
   return ccFromUri(typeof v3 === 'string' ? v3 : null) ?? ccFromUri(typeof v2 === 'string' ? v2 : null)
 }
 
-/** Where a reader lands: the object's own page when the manifest names one. */
+/** Where a reader lands: the object's own page when the manifest names one.
+ * Note: manifestUrl parameter is optional and should NOT be passed when used by
+ * holder-record.js, where the fallback would defeat the no-object-page gate.
+ */
 export function iiifHomepage(manifest, manifestUrl) {
   const home = Array.isArray(manifest.homepage) ? manifest.homepage[0] : manifest.homepage
   const related = Array.isArray(manifest.related) ? manifest.related[0] : manifest.related
-  return home?.id ?? home?.['@id'] ?? related?.['@id'] ?? related ?? manifestUrl
+  return home?.id ?? home?.['@id'] ?? related?.['@id'] ?? related ?? manifestUrl ?? null
 }
 
 /** A manifest as a page entry, or null when it yields nothing showable. */

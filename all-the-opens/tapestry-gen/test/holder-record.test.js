@@ -5,6 +5,7 @@ import {
   aicRecordFrom,
   rijksRecordFrom,
   iiifRecordFrom,
+  gateFailure,
 } from '../src/holder-record.js'
 
 test('metRecordFrom carries the catalog fields and the museum-stated page and image', () => {
@@ -28,9 +29,11 @@ test('metRecordFrom carries the catalog fields and the museum-stated page and im
   // primaryImageSmall (web-large) preferred; the full-res master stays behind the zoom link
   assert.match(record.imageUrl, /web-large/)
   assert.equal(record.href, 'https://www.metmuseum.org/art/collection/search/11417')
+  assert.equal(record.institution, 'The Met')
+  assert.equal(gateFailure(record), null)
 })
 
-test('a rights-reserved object fails the gate: publicDomain false, no image claim', () => {
+test('a rights-reserved object fails the gate on non-pd-rights', () => {
   const record = metRecordFrom({
     objectID: 1,
     title: 'X',
@@ -40,6 +43,7 @@ test('a rights-reserved object fails the gate: publicDomain false, no image clai
   })
   assert.equal(record.rights.publicDomain, false)
   assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
 })
 
 test('aicRecordFrom reads the AIC envelope and builds the record image at width 800', () => {
@@ -64,6 +68,8 @@ test('aicRecordFrom reads the AIC envelope and builds the record image at width 
   assert.match(record.imageUrl, /831a05de/)
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://www.artic.edu/artworks/111628')
+  assert.equal(record.institution, 'Art Institute of Chicago')
+  assert.equal(gateFailure(record), null)
 })
 
 test('rijksRecordFrom composes from existing helpers', () => {
@@ -140,6 +146,9 @@ test('rijksRecordFrom composes from existing helpers', () => {
   assert.equal(record.accession, 'SK-C-5')
   assert.equal(record.rights.publicDomain, true)
   assert.equal(record.href, 'https://www.rijksmuseum.nl/en/collection/SK-C-5')
+  assert.equal(record.institution, 'Rijksmuseum')
+  assert.match(record.imageUrl, /800/)
+  assert.equal(gateFailure(record), null)
 })
 
 test('iiifRecordFrom passes a v3 manifest with all gate legs', () => {
@@ -174,13 +183,17 @@ test('iiifRecordFrom passes a v3 manifest with all gate legs', () => {
       },
     ],
   }
-  const record = iiifRecordFrom(manifest)
+  const manifestUrl = 'https://example.org/manifest/123'
+  const record = iiifRecordFrom(manifest, manifestUrl)
   assert.equal(record.partner, 'iiif')
+  assert.equal(record.id, manifestUrl)
   assert.equal(record.title, 'A Painting')
   assert.equal(record.institution, 'Example Museum')
   assert.equal(record.rights.publicDomain, true)
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://example.org/object/123')
+  assert.equal(record.requiredStatement, 'Attribution: Museum of Example')
+  assert.equal(gateFailure(record), null)
 })
 
 test('iiifRecordFrom fails v2-only manifest: no-institution', () => {
@@ -209,7 +222,7 @@ test('iiifRecordFrom fails v2-only manifest: no-institution', () => {
     ],
   }
   const record = iiifRecordFrom(manifest)
-  assert.equal(record, null)
+  assert.equal(gateFailure(record), 'no-institution')
 })
 
 test('iiifRecordFrom fails v3 manifest with no rights statement', () => {
@@ -241,7 +254,7 @@ test('iiifRecordFrom fails v3 manifest with no rights statement', () => {
     ],
   }
   const record = iiifRecordFrom(manifest)
-  assert.equal(record, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
 })
 
 test('iiifRecordFrom fails v3 manifest with two providers', () => {
@@ -276,7 +289,7 @@ test('iiifRecordFrom fails v3 manifest with two providers', () => {
     ],
   }
   const record = iiifRecordFrom(manifest)
-  assert.equal(record, null)
+  assert.equal(gateFailure(record), 'several-institutions')
 })
 
 test('iiifRecordFrom fails v3 manifest with no homepage', () => {
@@ -308,5 +321,5 @@ test('iiifRecordFrom fails v3 manifest with no homepage', () => {
     ],
   }
   const record = iiifRecordFrom(manifest)
-  assert.equal(record, null)
+  assert.equal(gateFailure(record), 'no-object-page')
 })

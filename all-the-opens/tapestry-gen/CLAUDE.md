@@ -1634,6 +1634,11 @@ the politeness claim is checkable after a run rather than merely asserted here.
   generator can reach a host. m3api's own cookie dispatcher would bypass that
   proxy and hang — `src/mw.js` drops it whenever `NODE_USE_ENV_PROXY` is set.
 - First run needs network (fills `.cache`); reruns are offline.
+- **The AIC `fields` list was widened on 2026-08-16** (`medium_display,
+  dimensions,main_reference_number,credit_line`), so every cached AIC response
+  predating that is keyed to the old URL and will be refetched once. Same
+  request COUNT — the fields ride the request AIC was already answering — but a
+  warm cache goes cold for that lookup exactly once.
 - **The DPLA query gained two fields on 2026-08-06** (`sourceResource.rights`,
   `rights`), so every cached DPLA response predating that is keyed to the old
   URL and will be refetched once. Same request COUNT — the fields ride the
