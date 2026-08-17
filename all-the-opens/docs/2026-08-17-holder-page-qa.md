@@ -52,9 +52,9 @@ lane's fourteen refusals are mostly record and institution failures,
 tallied per leg in its own section below. Every one of the sample's
 twenty refused articles rendered as an ordinary page: no hero image
 from the museum, no two-party masthead, no panel (verified by markup
-grep, `<table class="infobox holder-panel"` and `This page: Wikipedia
-+` both absent). No featured image appears anywhere the museum's own
-flag was not CC0/PD.
+grep, `<table class="infobox holder-panel"` and `This page: Wikipedia +`
+both absent). No featured image appears anywhere the museum's own flag
+was not CC0/PD.
 
 **3. Panel sane.** All 25 panels attribute rows (Wikipedia chip on
 Wikipedia's rows, the institution's name on the museum's), and 19 of 25
@@ -115,6 +115,10 @@ moment the gate fails, the foreign hosts return.
   one institution (`provider`/`logo` absent or plural), and the design
   forbids a masthead reading "Wikipedia + IIIF collections".
 - **non-pd-rights 1** — the manifest states no open rights.
+- **several-institutions 0 · no-image 0 · no-object-page 0** — the
+  Phase 2 window's other three legs, unobserved in this sample: a
+  manifest that got far enough to name one institution also carried an
+  image and a homepage every time here.
 
 This confirms the Phase 2 inspection window (0 of 30) at a second,
 independently drawn sample: the door is real but almost no manifest
