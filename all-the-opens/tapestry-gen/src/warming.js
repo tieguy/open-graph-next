@@ -84,8 +84,8 @@ export async function warmPage(base, title, { timeoutMs = 300_000 } = {}) {
  *
  * @returns {Promise<{failed: number, thin: number}>}
  */
-export async function warmAll(base, titles, { timeoutMs = 300_000, log = console.error, label = 'showcase' } = {}) {
-  log(`warming ${titles.length} ${label} pages at ${base}`)
+export async function warmAll(base, titles, { timeoutMs = 300_000, log = console.error } = {}) {
+  log(`warming ${titles.length} showcase pages at ${base}`)
   let failed = 0
   let thin = 0
   for (const title of titles) {

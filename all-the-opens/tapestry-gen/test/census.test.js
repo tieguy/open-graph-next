@@ -6,7 +6,8 @@ import {
   claimsFromRows,
   subclassControlQuery,
 } from '../tools/census-holder-articles.mjs'
-import { HOLDERS, selectHolder } from '../src/holder.js'
+import { HOLDERS, HOLDER_STATEMENT_VARS, selectHolder } from '../src/holder.js'
+import { HOLDER_FLAGSHIPS } from '../tools/holder-flagships.mjs'
 
 test('the census query carries one UNION branch per HOLDERS row, generated not typed', () => {
   const q = censusQuery()
@@ -54,7 +55,7 @@ test('rows deduplicate the value × collection cross product WDQS returns', () =
 
 test('claims rebuilt from census rows drive the real selectHolder — P195 tiebreak included', () => {
   // The Night Watch shape: rijks id, a second museum id, and P195 naming
-  // the Rijksmuseum. selectHolder must run its actual precedence, not a
+  // the Met. selectHolder must run its actual precedence, not a
   // census-side re-implementation of it.
   const byItem = censusRows([
     binding('Q219831', 'P3634', '456', { collection: 'Q160236' }),
@@ -71,4 +72,14 @@ test('a fabricated statement without a rank would vanish — the shape carries r
   const claims = claimsFromRows(byItem.get('Q2'))
   assert.equal(claims.P6108[0].rank, 'normal')
   assert.equal(selectHolder(claims)?.partner, 'iiif')
+})
+
+test('every wired museum holder has exactly one flagship — completeness is a test', () => {
+  // The manifest convention (test/partners.test.js): an uncovered lane is a
+  // red test, never a silent state. The iiif door has no flagship on
+  // purpose — it names no single institution.
+  const flagged = HOLDER_FLAGSHIPS.map((f) => f.partner)
+  assert.deepEqual(new Set(flagged).size, flagged.length, 'no lane holds two flagships')
+  assert.deepEqual([...new Set(flagged)].sort(), [...HOLDER_STATEMENT_VARS.keys()].sort())
+  for (const f of HOLDER_FLAGSHIPS) assert.ok(f.title?.length, `${f.partner} flagship has a title`)
 })

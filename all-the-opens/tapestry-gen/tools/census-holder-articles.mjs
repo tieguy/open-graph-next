@@ -31,6 +31,7 @@ import { fileURLToPath } from 'node:url'
 
 import { HOLDERS, WORK_CLASSES, selectHolder } from '../src/holder.js'
 import { getJson } from '../src/http.js'
+import { wdqsSparqlUrl } from '../src/statements.js'
 
 const OUT_DIR = fileURLToPath(new URL('../../docs/data/', import.meta.url))
 
@@ -73,8 +74,7 @@ export function subclassControlQuery(holders = HOLDERS, classes = WORK_CLASSES) 
   )
 }
 
-const wdqs = (query) =>
-  `https://query.wikidata.org/sparql?format=json&query=${encodeURIComponent(query)}`
+const wdqs = wdqsSparqlUrl
 
 const qidFromUri = (uri) => uri?.split('/').pop() ?? null
 
@@ -122,7 +122,7 @@ async function main() {
 
   const articles = []
   const perHolder = {}
-  for (const [qid, item] of [...byItem.entries()].sort()) {
+  for (const [qid, item] of [...byItem.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
     const collections = [...item.collections].sort()
     for (const { property, id } of item.pairs.values()) {
       articles.push({ title: item.title, qid, property, id, collections })

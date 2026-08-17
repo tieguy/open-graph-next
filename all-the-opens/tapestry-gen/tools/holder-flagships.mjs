@@ -9,10 +9,14 @@
 // experiment's two checked-in populations, and neither is read at request
 // time. warm.js walks this list only when HOLDER_FLAGSHIPS is set — the
 // production showcase list (showcaseTitles) is untouched.
+// Structured as (partner, title) so completeness is a test, not a comment:
+// test/census.test.js asserts exactly one flagship per wired museum holder
+// (every HOLDER_STATEMENT_VARS key), so a holder joining without a flagship
+// is a red test rather than a silently uncovered lane.
 export const HOLDER_FLAGSHIPS = [
-  'The Night Watch', // rijks
-  'Washington Crossing the Delaware (1851 paintings)', // met
-  'American Gothic', // artic
-  'The Brierwood Pipe', // cleveland
-  'Irises (painting)', // getty
+  { partner: 'rijks', title: 'The Night Watch' },
+  { partner: 'met', title: 'Washington Crossing the Delaware (1851 paintings)' },
+  { partner: 'artic', title: 'American Gothic' },
+  { partner: 'cleveland', title: 'The Brierwood Pipe' },
+  { partner: 'getty', title: 'Irises (painting)' },
 ]

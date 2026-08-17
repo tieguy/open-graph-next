@@ -1,0 +1,368 @@
+{
+ "sampled": "2026-08-17",
+ "from": "2026-08-17-holder-census.json",
+ "rule": "items attributed to a lane by selectHolder over census rows, sorted by QID, evenly spaced per lane; met 10 / iiif 14 / rijks 6 / artic 5 / getty 5 / cleveland 5 (the whole cleveland lane)",
+ "render": "HOLDER_PAGE=1 node spike.js \"<title>\" per row; verdict is holder-page or the gate leg the pipeline printed",
+ "rows": [
+  {
+   "lane": "met",
+   "title": "Rearing Horse and Mounted Warrior",
+   "qid": "Q1000659",
+   "property": "P3634",
+   "id": "195311",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "met",
+   "title": "Northeaster (painting)",
+   "qid": "Q18619431",
+   "property": "P3634",
+   "id": "11130",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Portrait of Talleyrand",
+   "qid": "Q19905615",
+   "property": "P3634",
+   "id": "441969",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Portrait of Edward Miles",
+   "qid": "Q19912217",
+   "property": "P3634",
+   "id": "435630",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Ariadne (Giorgio de Chirico)",
+   "qid": "Q19918956",
+   "property": "P3634",
+   "id": "486740",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "met",
+   "title": "The New Bonnet",
+   "qid": "Q19925768",
+   "property": "P3634",
+   "id": "10843",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "The Writing Master",
+   "qid": "Q20176465",
+   "property": "P3634",
+   "id": "10828",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Radha and Krishna Walk in a Flowering Grove",
+   "qid": "Q28854552",
+   "property": "P3634",
+   "id": "65594",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Woman with a Water Jug",
+   "qid": "Q386453",
+   "property": "P3634",
+   "id": "437881",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "met",
+   "title": "Portrait of a Man (Velázquez)",
+   "qid": "Q6371404",
+   "property": "P3634",
+   "id": "437874",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "iiif",
+   "title": "Interior of a Studio in Paris",
+   "qid": "Q10421191",
+   "property": "P6108",
+   "id": "http://nationalmuseumse.iiifhosting.com/iiif/d35220037ba4baffdb2dfec2cb85605420b61009f8d9a75e962231744129f8a6/manifest.json",
+   "verdict": "gate:no-institution"
+  },
+  {
+   "lane": "iiif",
+   "title": "The Hangover (Suzanne Valadon)",
+   "qid": "Q12899487",
+   "property": "P6108",
+   "id": "https://iiif.harvardartmuseums.org/manifests/object/229060",
+   "verdict": "gate:no-institution"
+  },
+  {
+   "lane": "iiif",
+   "title": "A Cart on the Snowy Road at Honfleur",
+   "qid": "Q17491886",
+   "property": "P6108",
+   "id": "https://iiif.musee-orsay.fr/Manifester/IIIF/3/objects!805/manifest.json",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Mother of Pearl and Silver: The Andalusian",
+   "qid": "Q18154688",
+   "property": "P6108",
+   "id": "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=12197",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "The Psyché (My Studio)",
+   "qid": "Q19973926",
+   "property": "P6108",
+   "id": "https://data.artmuseum.princeton.edu/iiif/objects/65164",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "iiif",
+   "title": "Woman with a Cat (Renoir)",
+   "qid": "Q20188807",
+   "property": "P6108",
+   "id": "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=37637",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Deposition (van Dyck, 1635)",
+   "qid": "Q21614706",
+   "property": "P6108",
+   "id": "https://iiif.kmska.be/iiif/2/31633/manifest.json",
+   "verdict": "gate:no-institution"
+  },
+  {
+   "lane": "iiif",
+   "title": "Lord Anson's Victory off Cape Finisterre",
+   "qid": "Q23699968",
+   "property": "P6108",
+   "id": "https://manifests.britishart.yale.edu/manifest/1040",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Portrait of a Kleptomaniac",
+   "qid": "Q2459266",
+   "property": "P6108",
+   "id": "https://imagehub.mskgent.be/iiif/3/131/manifest.json",
+   "verdict": "gate:no-institution"
+  },
+  {
+   "lane": "iiif",
+   "title": "Colonel Guy Johnson and Karonghyontye (Captain David Hill)",
+   "qid": "Q3135552",
+   "property": "P6108",
+   "id": "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=569",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Self-portrait (van Gogh, Paris)",
+   "qid": "Q3630735",
+   "property": "P6108",
+   "id": "https://iiif.musee-orsay.fr/Manifester/IIIF/3/objects!747/manifest.json",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Portraits at the Stock Exchange",
+   "qid": "Q3937379",
+   "property": "P6108",
+   "id": "https://iiif.musee-orsay.fr/Manifester/IIIF/3/objects!1145/manifest.json",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "iiif",
+   "title": "Self-Portrait (Rubens, Antwerp)",
+   "qid": "Q50303055",
+   "property": "P6108",
+   "id": "https://dams.antwerpen.be/iiif/H1ZNQXINnUOmWBRXJLq7AlLK/manifest",
+   "verdict": "gate:no-institution"
+  },
+  {
+   "lane": "iiif",
+   "title": "Mrs. Richard Brinsley Sheridan (painting)",
+   "qid": "Q6929863",
+   "property": "P6108",
+   "id": "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=99",
+   "verdict": "gate:no-record"
+  },
+  {
+   "lane": "rijks",
+   "title": "Interior of the Sint-Odulphuskerk in Assendelft",
+   "qid": "Q10303119",
+   "property": "P13234",
+   "id": "200107965",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "rijks",
+   "title": "Prometheus Being Chained by Vulcan",
+   "qid": "Q16933788",
+   "property": "P13234",
+   "id": "200108165",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "rijks",
+   "title": "Fishing for Souls",
+   "qid": "Q17320929",
+   "property": "P13234",
+   "id": "200108516",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "rijks",
+   "title": "Nativity (Master of the Brunswick Diptych)",
+   "qid": "Q17330036",
+   "property": "P13234",
+   "id": "20028305",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "rijks",
+   "title": "Company in a Courtyard Behind a House",
+   "qid": "Q17342000",
+   "property": "P13234",
+   "id": "200109390",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "rijks",
+   "title": "Self-Portrait with Dishevelled Hair",
+   "qid": "Q3630753",
+   "property": "P13234",
+   "id": "200107941",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "artic",
+   "title": "A Sunday Afternoon on the Island of La Grande Jatte",
+   "qid": "Q1044742",
+   "property": "P4610",
+   "id": "27992",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "artic",
+   "title": "A Chemist Lifting with Extreme Precaution the Cuticle of a Grand Piano",
+   "qid": "Q20266337",
+   "property": "P4610",
+   "id": "145241",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "artic",
+   "title": "In the Magic Mirror",
+   "qid": "Q20268728",
+   "property": "P4610",
+   "id": "111666",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "artic",
+   "title": "Untitled (Rückriem)",
+   "qid": "Q30603078",
+   "property": "P4610",
+   "id": "197945",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "artic",
+   "title": "Madonna and Child with the Infant John the Baptist (Correggio, Chicago)",
+   "qid": "Q3842518",
+   "property": "P4610",
+   "id": "23972",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "getty",
+   "title": "Herakleides (mummy)",
+   "qid": "Q111417085",
+   "property": "P2582",
+   "id": "103WN2",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "getty",
+   "title": "A Woman Preparing Bread and Butter for a Boy",
+   "qid": "Q19989799",
+   "property": "P2582",
+   "id": "103RFZ",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "getty",
+   "title": "Man with a Hoe",
+   "qid": "Q20180844",
+   "property": "P2582",
+   "id": "103RGZ",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "getty",
+   "title": "Irises (painting)",
+   "qid": "Q2282256",
+   "property": "P2582",
+   "id": "103JNH",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "getty",
+   "title": "Coronation of the Virgin (Gentile da Fabriano)",
+   "qid": "Q3797773",
+   "property": "P2582",
+   "id": "103QS2",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "cleveland",
+   "title": "La Vie (painting)",
+   "qid": "Q1799228",
+   "property": "P11110",
+   "id": "1945.24",
+   "verdict": "gate:non-pd-rights"
+  },
+  {
+   "lane": "cleveland",
+   "title": "Portrait of Agostino Barbarigo",
+   "qid": "Q3937452",
+   "property": "P11110",
+   "id": "1928.16",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "cleveland",
+   "title": "Portrait of Lady Manners",
+   "qid": "Q60465933",
+   "property": "P11110",
+   "id": "1961.220",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "cleveland",
+   "title": "Cleveland Apollo",
+   "qid": "Q680075",
+   "property": "P11110",
+   "id": "2004.30",
+   "verdict": "holder-page"
+  },
+  {
+   "lane": "cleveland",
+   "title": "The Brierwood Pipe",
+   "qid": "Q7720110",
+   "property": "P11110",
+   "id": "1944.524",
+   "verdict": "holder-page"
+  }
+ ]
+}

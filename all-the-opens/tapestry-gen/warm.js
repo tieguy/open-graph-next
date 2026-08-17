@@ -13,7 +13,10 @@
  * deploy actually serves pages.
  *
  * The titles come from `showcaseTitles()`, the same list the front page renders
- * its cards from. There is deliberately no second copy to keep in step.
+ * its cards from — for the showcase there is deliberately no second copy to
+ * keep in step. With HOLDER_FLAGSHIPS set the walk covers the holder
+ * experiment's flagship articles instead (tools/holder-flagships.mjs), one
+ * per wired museum holder, against a HOLDER_PAGE=1 server.
  *
  * Exits non-zero when a page did not finish — the site is slow, not broken. A
  * page reported "thin" is warm but provisional: it was rendered while a source
@@ -33,10 +36,15 @@ const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)
 // showcase — an env var, not a flag argument, because argv[2] IS the base
 // URL. Point it at a HOLDER_PAGE=1 server; against a flag-off server it
 // warms the same articles as ordinary pages, which is harmless and useless.
-const titles = process.env.HOLDER_FLAGSHIPS ? HOLDER_FLAGSHIPS : showcaseTitles()
+const holderWalk = Boolean(process.env.HOLDER_FLAGSHIPS)
+const titles = holderWalk ? HOLDER_FLAGSHIPS.map((f) => f.title) : showcaseTitles()
 
-const { failed } = await warmAll(BASE, titles, {
-  timeoutMs: TIMEOUT_MS,
-  label: process.env.HOLDER_FLAGSHIPS ? 'holder-flagship' : 'showcase',
-})
+// The walk's own announcement says "showcase"; correct it here rather than
+// parameterizing src/warming.js — a src/ edit re-keys the production page
+// cache (buildId fingerprints src/*.js), too high a price for a log word.
+const log = holderWalk
+  ? (line) => console.error(line.replace(' showcase pages ', ' holder-flagship pages '))
+  : console.error
+
+const { failed } = await warmAll(BASE, titles, { timeoutMs: TIMEOUT_MS, log })
 process.exit(failed ? 1 : 0)

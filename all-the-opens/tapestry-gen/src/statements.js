@@ -24,6 +24,11 @@ import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './s
 /** Properties this lookup reads, and the shape they come back in. */
 const VARS = ['met', 'aic', 'rijks', 'cleveland', 'getty', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
 
+/** The one WDQS request URL shape — importable so tools ride the same line. */
+export function wdqsSparqlUrl(query) {
+  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
@@ -55,7 +60,7 @@ export function wdqsUrl(qids) {
     // read separately, an object in a Smithsonian collection could be paired
     // with another museum's inventory number. See src/smithsonian.js.
     'OPTIONAL { ?item wdt:P195 ?sicoll ; wdt:P217 ?siinv } }'
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**
@@ -140,7 +145,7 @@ export function itemClassesUrl(qids) {
     `SELECT ?item ?class ?ended WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P31 ?class } ' +
     'OPTIONAL { ?item wdt:P576 ?ended } }'
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**
@@ -162,7 +167,7 @@ export function classesUrl(classes) {
   // trade: bytes are cheap, Blazegraph CPU is the donated resource, and a
   // query that times out costs every map on the page.
   const query = `SELECT ?class ?super WHERE { VALUES ?class { ${values} } ?class wdt:P279* ?super }`
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**

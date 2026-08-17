@@ -9,6 +9,10 @@ Each was rendered flag-on with the batch renderer
 checked against the five criteria below. Sampling was deterministic:
 census items attributed to a holder by the real `selectHolder` (the
 census file's own rule), sorted by QID, evenly spaced per lane.
+**The full sample — all 45 titles with lane and verdict — is checked in
+beside the census as `docs/data/2026-08-17-holder-qa-sample.json`**, so
+any row here can be re-rendered and re-checked, and the same 45 can be
+re-run after the IIIF-lane decision to see what moved.
 
 ## Per-holder coverage
 
@@ -39,9 +43,10 @@ the graph states (`rijksPageUrl`), so the round-trip there is the
 selection-id match plus the museum-stated page URL, and all 6 held.
 
 **2. Rights honored.** Every gate refusal in the sample is a modern work
-the museum does not flag public-domain — La Vie (Picasso), Ariadne
-(de Chirico), In the Magic Mirror (Klee), Untitled (Rückriem), Rearing
-Horse and Mounted Warrior, A Chemist Lifting… (Domínguez) — and every one
+the museum does not flag public-domain — La Vie (painting) — Picasso, Ariadne (Giorgio de Chirico), In the
+Magic Mirror — Klee, Untitled (Rückriem), Rearing Horse and Mounted
+Warrior, and A Chemist Lifting with Extreme Precaution the Cuticle of
+a Grand Piano — Domínguez — and every one
 rendered as an ordinary page: no hero image from the museum, no
 two-party masthead, no panel (verified by markup grep, `<table
 class="infobox holder-panel"` and `This page: Wikipedia +` both absent).
@@ -59,8 +64,8 @@ field is honestly absent from its record surface).
 
 **4. Clean degradation.** Two articles were rendered with their holder
 record forced to fail (the cached record response replaced by `{}`,
-restored after): Northeaster (met) and Portrait of Lady Manners
-(cleveland). Both fell through the gate (`non-pd-rights` / `no-record`),
+restored after): Northeaster (painting) — met — and Portrait of Lady
+Manners (cleveland). Both fell through the gate (`non-pd-rights` / `no-record`),
 rendered as full ordinary pages — the partner fan-out visibly resumed
 (id.loc.gov, api.dp.la, api.digitalnz.org, api.europeana.eu in the
 tally) — with no holder furniture and exit 0. No error surfaced to the
@@ -72,15 +77,26 @@ Talleyrand, The New Bonnet, all under 230) each carry the holder hero
 float in the lede — `FLOAT_MIN_PROSE` does not suppress it, per the
 Phase 3 exemption.
 
-**5. Single-source discipline.** The legend on every one of the 25
-holder pages names exactly two parties: Wikipedia and the holding
-institution — zero foreign partners across the sample. The
-request-level version of the claim was measured cold on one acceptance
-article per new lane when it was wired (dated in the wiring commits):
-The Night Watch touches en.wikipedia/wikidata/WDQS/id.rijksmuseum.nl
-only; The Brierwood Pipe adds only openaccess-api.clevelandart.org;
-Irises only www.getty.edu. The degradation renders above are the
-control: the moment the gate fails, the foreign hosts return.
+**5. Single-source discipline.** The plan's grep, run over all 25
+holder renders: every partner host from the manifest (`src/partners.js`
+`hosts`), excluding the page's own holder, matched against each
+render's bytes. **42 URL occurrences, and all 42 sit inside the
+article's own footnote bodies (`fn-text`) — zero in enrichment markup**
+(cards, legend, hero, panel, decks; classified by nearest preceding
+structural class, spot-checked by hand: archive.org and doi.org copies
+Wikipedia's own citations link, a getty.edu monograph the Cleveland
+Apollo article cites, and so on). Footnotes render Wikipedia's own
+`reference-text` verbatim by design, so those URLs are the article's,
+not the enrichment's. The legend agrees: every one of the 25 names
+exactly two parties, Wikipedia and the holding institution — and the
+legend is built from `sourcesUsed`, which counts band entries, so the
+grep is the wider instrument and the legend the reader-facing one.
+The request-level version was measured cold on one acceptance article
+per new lane when it was wired (dated in the wiring commits): The
+Night Watch touches en.wikipedia/wikidata/WDQS/id.rijksmuseum.nl only;
+The Brierwood Pipe adds only openaccess-api.clevelandart.org; Irises
+only www.getty.edu. The degradation renders above are the control: the
+moment the gate fails, the foreign hosts return.
 
 ## The iiif lane, measured at sample scale
 
