@@ -554,6 +554,59 @@ detects by the subject's own object identifier — has nothing to detect by.
 **OUT: no object identifier property and no object API.** Revisit if either
 appears.
 
+## 16. Musée d'Orsay: 184 live manifests behind one missing intermediate certificate `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed these
+`no-record`).*
+
+`iiif.musee-orsay.fr` (a CNAME to the museum's DAM vendor,
+`iiif.fr.ephoto-dam.com`) serves ONLY its leaf certificate — a valid,
+current `*.musee-orsay.fr` cert (Thawte TLS RSA CA G1 / DigiCert, NotAfter
+2026-09-19) with no intermediate:
+
+```
+echo | openssl s_client -connect iiif.musee-orsay.fr:443 -servername iiif.musee-orsay.fr
+# → Certificate chain: entry 0 only; Verify return code: 21
+#   (unable to verify the first certificate)
+curl -s https://iiif.musee-orsay.fr/Manifester/IIIF/3/objects!805/manifest.json
+# → TLS failure (curl 60), for real and bogus ids alike — the failure is
+#   below HTTP, so the real/bogus control cannot run at all
+curl -s --insecure …objects!805/manifest.json   # one-shot diagnosis only
+# → valid IIIF Presentation 3 JSON: Monet, "La Charrette. Route sous la
+#   neige à Honfleur", French labels — the content is alive and well
+```
+
+Strict TLS clients (curl, Node fetch — our pipeline) fail; Chrome-family
+browsers typically load it anyway (AIA chasing fetches the missing
+intermediate), Firefox typically does not. 184 of the census's 686 P6108
+rows — 27% of the IIIF lane — sit behind this one misconfiguration.
+
+**The fix is the museum's (or its vendor's): serve the intermediate.** One
+report to Orsay/ephoto could open the second-largest block of the lane.
+Bundling the Thawte intermediate into our own trust path would also work
+and is deliberately not done — per-vendor CA patching in the fetch stack is
+fragile, and the upstream fix repairs it for every strict client, not just
+us.
+
+## 17. NGA's manifests sit behind the same challenge as its object pages `[ours]`
+
+*Observed 2026-08-17; extends note 14, which recorded the object pages.*
+
+```
+curl -sI "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=12197"
+# → 403, cf-mitigated: challenge (an interactive Cloudflare challenge a
+#   browser can pass and a server cannot)
+curl -sI "…manifest.json?cultObj:id=999999999"
+# → 302 to api.nga.gov (query dropped) — and api.nga.gov 404s the path for
+#   real and bogus alike: that host does not serve manifests at all
+```
+
+So the 214 P6108 rows pointing at `www.nga.gov` — 31% of the IIIF lane —
+name an endpoint that exists and challenge-gates non-browser clients. Per
+note 14, the sanctioned door is the open-data CSV on GitHub; a server-side
+challenge workaround would be fingerprint spoofing and is not this
+project's move. Asking NGA for API access is.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
