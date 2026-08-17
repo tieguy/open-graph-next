@@ -14,10 +14,11 @@ export const WORK_CLASSES = new Map([
 
 // Precedence order per the design: museum object-id properties first, the
 // shared IIIF door last. The door is special: "not one institution but a
-// door many institutions share" (src/partners.js), and 679 of 1,362
-// round-one work-articles carry only P6108 — half the population. So an
-// iiif selection is a CANDIDATE, not yet a holder: the record fetch
-// (Phase 2) must resolve the manifest's own stated institution, and a
+// door many institutions share" (src/partners.js), and 680 of 1,424
+// work-articles carry only P6108 — half the population (the checked-in
+// census, ../docs/data/2026-08-17-holder-census.json). So an iiif
+// selection is a CANDIDATE, not yet a holder: fetchHolderRecord must
+// resolve the manifest's own stated institution, and a
 // manifest that does not name exactly one gets no holder page — the
 // masthead must never read "Wikipedia + IIIF collections" (design doc,
 // Decisions, 2026-08-16). `collection` is the museum's Wikidata item,

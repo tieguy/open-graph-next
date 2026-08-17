@@ -60,11 +60,16 @@ was not CC0/PD.
 Wikipedia's rows, the institution's name on the museum's), and 19 of 25
 show at least one visible side-by-side conflict pair (the warm renders
 count 2–8 `infobox-conflict` cells each). Spot-read conflicts are
-genuine two-party disagreements — e.g. Irises: Year "May 1889"
+genuine two-party disagreements — e.g. Irises (painting): Year "May 1889"
 (Wikipedia) beside "1889" (Getty); Dimensions "71 cm × 93 cm…"
 (Wikipedia) beside "Unframed: 74.3 × 94.3 cm…" (Getty). No row claims a
 field neither side stated (Getty rows never claim a credit line — that
-field is honestly absent from its record surface).
+field is deliberately unread there — the page's `creditText` is license
+boilerplate, not an object credit).
+One denominator caveat: the Rijksmuseum record extracts neither creator,
+medium, dimensions nor credit from its Linked Art hops yet, so its six
+pages can conflict only on title or date — the 19-of-25 conflict count is
+partly a function of which museum holds the work.
 
 **4. Clean degradation.** Two articles were rendered with their holder
 record forced to fail (the cached record response replaced by `{}`,
@@ -123,8 +128,11 @@ moment the gate fails, the foreign hosts return.
   past the institution leg stopped at rights, so neither leg was
   evaluated here — no evidence either way.
 
-This confirms the Phase 2 inspection window (0 of 30) at a second,
-independently drawn sample: the door is real but almost no manifest
+This confirms the Phase 2 inspection window's 0-of-30 PASS RATE at a
+second, independently drawn sample. The per-leg tallies of the two windows
+are not comparable — the Phase 2 window's scratch script used its own leg
+ordering and vocabulary (`fetch-error-403` is not a gate leg), so only the
+pass rate carries across: the door is real but almost no manifest
 publishes what a two-party page needs. The cost of leaving the lane
 wired is one manifest fetch per iiif work-article before the page falls
 back to ordinary; the fallback itself is the correct page. The
@@ -151,6 +159,13 @@ decided *before* the default flips is the standing IIIF-lane item
 (0/44 across both windows now: accept, relax, or defer); flipping the
 default without deciding it is safe but bakes the extra manifest fetch
 into half the population (680 of 1,424 census items are iiif-only).
+
+One open values question rides beside the flag decision: the holder hero
+image hotlinks from the museum's own host (the inline-only-what-breaks
+rule), while VALUES.md's 2026-08-16 entry says a reader reaches a
+partner's servers only by choosing a labeled link. No written decision
+exempts images. Narrowing the value's wording or proxying museum images
+through `/img/` are both open; the call is the operator's.
 
 Per the plan, no production default was changed in this phase — the
 decision is the operator's, on this document.

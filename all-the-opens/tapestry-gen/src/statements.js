@@ -38,8 +38,8 @@ export function wdqsUrl(qids) {
     // object-level shape as the Met and AIC ids above, and the best-answering
     // of the three on art-heavy articles. See src/rijks.js.
     'OPTIONAL { ?item wdt:P13234 ?rijks } ' +
-    // P11110: the Cleveland Museum of Art's own object id (added 2026-08-17,
-    // the Phase 6 probe's cleanest surface — keyless, CC0, record-by-ID).
+    // P11110: the Cleveland Museum of Art's own object id — keyless, CC0,
+    // record-by-ID (probe note 11, ../../docs/reaching-open-collections.md).
     'OPTIONAL { ?item wdt:P11110 ?cleveland } ' +
     'OPTIONAL { ?item wdt:P2582 ?getty } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +

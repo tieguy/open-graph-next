@@ -211,7 +211,7 @@ export function gettyRecordFrom(ld) {
     partner: 'getty',
     // The page URL ends with the P2582 value the fetch was addressed by —
     // the round-trip rule the other transforms keep.
-    id: href ? href.split('/').pop() : null,
+    id: href ? href.replace(/\/+$/, '').split('/').pop() : null,
     title: nullIfEmpty(typeof ld.name === 'string' ? ld.name : null),
     creator: nullIfEmpty(typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null),
     date: nullIfEmpty(typeof ld.temporal === 'string' ? ld.temporal : null),
@@ -389,14 +389,25 @@ export function iiifRecordFrom(manifest, manifestUrl) {
  * - rijks: a failed secondary hop leaves those fields null (implemented in rijksRecordObjects);
  *   this catch is all-or-nothing — it also swallows a transform bug, logged as 'holder record failed'.
  */
+/**
+ * One fetch recipe per partner that can hold a page. Keyed by HOLDERS'
+ * partner names and exported so completeness is a test: a HOLDERS row
+ * without a recipe here would log-and-null on every page it selects, a
+ * silent lane rather than a red test.
+ */
+export const RECORD_FETCHERS = {
+  met: async (holder) => metRecordFrom(await getJson(metRecordUrl(holder.id))),
+  artic: async (holder) => aicRecordFrom(await getJson(aicRecordUrl(holder.id))),
+  cleveland: async (holder) => clevelandRecordFrom(await getJson(clevelandRecordUrl(holder.id))),
+  getty: async (holder) => gettyRecordFrom(gettyLd(await getText(gettyPageUrl(holder.id)))),
+  rijks: async (holder) => rijksRecordFrom(...(await rijksRecordObjects(holder.id))),
+  iiif: async (holder) => iiifRecordFrom(await getJson(holder.id), holder.id),
+}
+
 export async function fetchHolderRecord(holder) {
   try {
-    if (holder.partner === 'met') return metRecordFrom(await getJson(metRecordUrl(holder.id)))
-    if (holder.partner === 'artic') return aicRecordFrom(await getJson(aicRecordUrl(holder.id)))
-    if (holder.partner === 'cleveland') return clevelandRecordFrom(await getJson(clevelandRecordUrl(holder.id)))
-    if (holder.partner === 'getty') return gettyRecordFrom(gettyLd(await getText(gettyPageUrl(holder.id))))
-    if (holder.partner === 'rijks') return rijksRecordFrom(...(await rijksRecordObjects(holder.id)))
-    if (holder.partner === 'iiif') return iiifRecordFrom(await getJson(holder.id), holder.id)
+    const fetcher = RECORD_FETCHERS[holder.partner]
+    if (fetcher) return await fetcher(holder)
     console.error(`  holder record: no fetcher for partner ${holder.partner}`)
     return null
   } catch (e) {

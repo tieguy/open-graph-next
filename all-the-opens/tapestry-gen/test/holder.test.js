@@ -2,6 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 import { bestRankValues, workClass, selectHolder, holderStatements, HOLDERS, HOLDER_STATEMENT_VARS } from '../src/holder.js'
 import { MUSEUM_LOOKUPS } from '../src/statements.js'
+import { RECORD_FETCHERS } from '../src/holder-record.js'
 
 // Claims fixtures in wbgetentities shape. nightWatch mirrors Q219831 as read
 // 2026-08-16: P31 painting, Rijksmuseum id, two collections.
@@ -183,4 +184,31 @@ test('every museum holder has a real statement binding, and the manifest door ha
     assert.ok(lookup, `${v} is not a statements.js binding`)
     assert.equal(lookup.property, h.property, `${h.partner}: property mismatch`)
   }
+})
+
+test('every holder has a record-fetch recipe — the last link is completeness-tested too', () => {
+  // fetchHolderRecord log-and-nulls on an unknown partner, which degrades
+  // safely but silently; this makes a HOLDERS row without a recipe a red test.
+  for (const h of HOLDERS) {
+    assert.equal(typeof RECORD_FETCHERS[h.partner], 'function', `${h.partner} has no record fetcher`)
+  }
+  assert.deepEqual(Object.keys(RECORD_FETCHERS).sort(), HOLDERS.map((h) => h.partner).sort())
+})
+
+test('the collection QIDs are pinned to the museums they name', () => {
+  // Independent literals, not HOLDERS constants: a typo edited into the
+  // source would otherwise certify itself through every precedence test.
+  // Verified against Wikidata: Q190804/Q160236/Q239303 at plan review
+  // 2026-08-16; Q657415 and Q731126 against live P195 values 2026-08-17.
+  assert.deepEqual(
+    Object.fromEntries(HOLDERS.map((h) => [h.partner, h.collection])),
+    {
+      rijks: 'Q190804',
+      met: 'Q160236',
+      artic: 'Q239303',
+      cleveland: 'Q657415',
+      getty: 'Q731126',
+      iiif: null,
+    },
+  )
 })

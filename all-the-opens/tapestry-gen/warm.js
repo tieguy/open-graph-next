@@ -36,7 +36,7 @@ const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)
 // showcase — an env var, not a flag argument, because argv[2] IS the base
 // URL. Point it at a HOLDER_PAGE=1 server; against a flag-off server it
 // warms the same articles as ordinary pages, which is harmless and useless.
-const holderWalk = Boolean(process.env.HOLDER_FLAGSHIPS)
+const holderWalk = process.env.HOLDER_FLAGSHIPS === '1'
 const titles = holderWalk ? HOLDER_FLAGSHIPS.map((f) => f.title) : showcaseTitles()
 
 // The walk's own announcement says "showcase"; correct it here rather than

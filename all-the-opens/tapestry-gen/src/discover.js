@@ -1371,7 +1371,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // (fetchEntry), and the person-gate is no impossibility proof —
       // needsArtworksQuery reads raw P31 claims while workClass reads best
       // rank, and P31 is multi-valued, so the two CAN coincide. The gate is
-      // one conjunct; Phase 5 Task 2 adds the holder-scoped shelf.
+      // one conjunct; holderShelfPromise below is the holder-scoped shelf.
       !sitsOut(holder) && needsArtworksQuery(subjectClaims)
         ? subjectArtworks(subjectQid, {
             cap: WORKS_BY_SUBJECT,
@@ -1528,9 +1528,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
         `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${creatorLabel} ` +
         `created this work (P170), and that ${museumName} holds it, stating its ${propName}. ` +
         `We asked the museum for its own record of it, and this is what came back. ${placement}`
+      // artworkRows validates every qid, so the fallback is belt-and-braces:
+      // the subject's own item still carries the claim a reader would check.
       e.fix = e._qid
         ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
-        : fixOn('P170')
+        : { url: `https://www.wikidata.org/wiki/${subject.qid}#P170`, label: 'Check or fix it on Wikidata' }
     }
     console.error(
       `  holder shelf: ${shelf.entries.length} of ${shelf.total} works by ${creatorLabel} (${holder.partner}), band ${owner}`,

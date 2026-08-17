@@ -489,13 +489,29 @@ rights leg reads the museum's own per-object flag and nothing else — in the QA
 sample all six museum-lane refusals were modern works (Picasso, de Chirico,
 Klee, Rückriem, Domínguez) whose museums do not flag them public-domain.
 
+**The holder hero image hotlinks from the museum, and that sits unresolved
+against a stated value.** Museum images follow the inline-only-what-breaks
+rule (`hotlinkUnsafe` is a breakage criterion), so a reader's browser
+fetches the hero from the museum's own host — while VALUES.md (2026-08-16)
+says a reader reaches a partner's servers only by choosing a labeled link.
+No written decision exempts images; the tension is recorded here
+(2026-08-17, final review) and the call — narrow the value's wording, or
+proxy museum images through `/img/` — is the operator's. The QA document
+names it beside the flag recommendation.
+
 **Single-source discipline is enforced before a request is built, not after a
 card is dropped.** `holderStatements` filters an anchor's partner statements
 so no request is made at all: a museum holder keeps only its own property's
 lookup, a manifest holder keeps none, and the Smithsonian pair, taxa,
 occurrence maps and coordinates drop with them. `sitsOut` in `discover.js`
 suspends the rest — the citation access lookups, mappability, DPLA, Europeana,
-DigitalNZ, the scholarly batches, the Free Law opinion. Measured on the 25
+DigitalNZ, the scholarly batches, the Free Law opinion. **`sitsOut` is a
+hand-written conjunct at each dispatch site and those sites ARE the
+enumeration — no completeness test covers them** (the allowlist half,
+`holderStatements`, is completeness-tested; this half is not). A lookup
+added later defaults to LEAKING on holder pages, so a new dispatch site
+must add the conjunct — the adding-a-source playbook says so at its
+touchpoint list. Measured on the 25
 holder pages of the QA window: zero foreign partner URLs anywhere in
 enrichment markup, and the 42 that do appear all sit inside Wikipedia's own
 footnote bodies, which render `reference-text` verbatim by design.
@@ -1652,11 +1668,16 @@ nothing; `holder-record` is where that half's network lives.
   can never select a holder, and a test asserts that. It returns entity- and
   string-valued snaks only; a caller wanting a coordinate, date or quantity
   must read the datavalue itself.
-- **The holder experiment changes nothing with the flag off.** With
-  `HOLDER_PAGE` unset, `src/discover.js` returns no holder before any work is
-  done and every render is byte-identical to one from before the experiment
-  existed. The flag is also part of the page-cache build id, so the two flag
-  states cannot serve each other's stored pages. Holder furniture — the zoom
+- **The holder path is inert with the flag off.** With `HOLDER_PAGE` unset,
+  `src/discover.js` returns no holder before any work is done: no holder
+  furniture renders and no holder dispatch or suppression runs. Flag-off
+  renders are NOT byte-identical to pre-branch ones page-for-page, because
+  the branch also wired Cleveland and Getty as ordinary partners — their
+  lookups run on every page whose anchors carry P11110/P2582, and the WDQS
+  re-key Gotcha below applies; what byte-identity gates guarded at every
+  step was flag-off against the previous commit. The flag is part of the
+  page-cache build id, so the two flag states cannot serve each other's
+  stored pages. Holder furniture — the zoom
   link, the required statement, the renamed source bar, the merged panel — is
   attached to the lede band and read back from `b.holder`, so it can never
   reach a band that has no holder context.

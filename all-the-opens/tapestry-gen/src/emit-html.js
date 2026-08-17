@@ -238,10 +238,10 @@ export function gapPanel(bands, reach, inline = new Map(), nameFor = null) {
   // holders the two names are identical, so it changes nothing there). On an
   // iiif-held page that also carries another institution's manifest card —
   // live-reachable today through any non-subject anchor's P6108 statement —
-  // the renamed row attributes the merged count to the holder. Accepted
-  // deliberately (2026-08-17) as an interim state: the plan's single-source
-  // suppression (phase 5, not yet built) is what closes it, by rendering no
-  // anchor statement cards at all on an iiif-held page.
+  // the renamed row attributes the merged count to the holder. Closed by
+  // the single-source suppression: holderStatements has no iiif entry, so an
+  // iiif-held page renders no anchor statement cards at all and the state
+  // this guarded against cannot occur.
   if (!reach) return ''
   const report = visibilityReport(bands, reach)
   if (!report.length) return ''

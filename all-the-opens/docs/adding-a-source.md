@@ -127,6 +127,7 @@ The first thing written is the descriptor: choose the slug, create the
 | 5 | `test/<partner>.test.js` | Pure tests over fixture responses |
 | 6 | `test/layering.test.js` | Your module's name in `PARTNERS` |
 | 7 | `src/icons.js` | **Regenerate**, do not hand-edit: `node tools/build-icons.mjs`. Two hosts (`www.artic.edu`, `digitalnz.org`) refuse Node's fetch stack and drop out of a bare regen — prime their cache entries first, per the workaround documented in the tool's own header |
+| 7b | holder pages | A new lookup must sit out on single-institution pages: statement-shape lookups are covered by the `holderStatements` allowlist automatically, but any NEW dispatch site in `src/discover.js` (a search-shape shelf, a global batch) must add the `sitsOut(holder)` conjunct by hand — there is no completeness test over those sites, and the default is to leak |
 | 8 | `CLAUDE.md` | The rationale, so the next person inherits the reasoning |
 | 9 | **this file** | Anything you learned that contradicts it |
 

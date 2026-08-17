@@ -33,7 +33,9 @@ const UA = () => (_ua ??= userAgent('tapestry-gen'))
  * quiet must cost one slot, not the whole page.
  */
 export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0, as = 'json' } = {}) {
-  const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
+  // Text-mode responses key separately: sha1(url) alone would let a URL
+  // fetched both ways serve one mode's cached body to the other.
+  const key = createHash('sha1').update(as === 'text' ? `text:${url}` : url).digest('hex').slice(0, 16)
   const path = join(CACHE, `spike-${key}.json`)
   try {
     return JSON.parse(await readFile(path, 'utf8'))
