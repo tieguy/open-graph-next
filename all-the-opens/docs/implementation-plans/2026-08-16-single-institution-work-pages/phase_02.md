@@ -49,8 +49,9 @@ v3) in `src/iiif.js`.
                              // verified builder (rijksPageUrl); never a
                              // constructed guess (the Rijksmuseum-404 rule)
   _providers: number,        // (internal, iiif only) count of provider entries;
-                             // used by gateFailure to distinguish 'no-institution'
-                             // (0 or >1) from 'several-institutions' (>1)
+                             // used by gateFailure to distinguish 'several-institutions'
+                             // (>1) from 'no-institution' (0 or a single provider
+                             // yields no usable label)
 }
 ```
 
@@ -284,7 +285,7 @@ output"). Write a throwaway script in the session scratchpad — not the
 repo — that takes ~30 P6108 values whose items have enwiki articles (one
 WDQS pick, compliant UA), runs each manifest through `iiifRecordFrom`, and
 prints the gate outcome per manifest: PASS, or which leg failed
-(no-institution / several-institutions / no-rights / non-PD-rights /
+(no-record / no-institution / several-institutions / non-pd-rights /
 no-image / no-object-page). Context for expectations: Europeana's 2019
 manifest-harvest analysis found rights information "either completely
 missing or not controlled" across harvested manifests

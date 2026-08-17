@@ -491,23 +491,6 @@ test('rijksRecordFrom distinguishes public-domain mark from CC0 on catalogue tex
             },
           ],
         },
-        {
-          // CC0 on the catalogue text (AAT 300379475 description)
-          classified_as: [
-            {
-              id: 'http://vocab.getty.edu/aat/300379475',
-            },
-          ],
-          subject_to: [
-            {
-              classified_as: [
-                {
-                  id: 'https://creativecommons.org/publicdomain/zero/1.0/',
-                },
-              ],
-            },
-          ],
-        },
       ],
       shows: [
         {
@@ -522,6 +505,25 @@ test('rijksRecordFrom distinguishes public-domain mark from CC0 on catalogue tex
           classified_as: [
             {
               id: 'https://creativecommons.org/publicdomain/mark/1.0/',
+            },
+          ],
+        },
+      ],
+      // The decoy: CC0 over the catalogue text (AAT 300379475), on the SAME VisualItem that carries the public-domain mark above.
+      subject_of: [
+        {
+          classified_as: [
+            {
+              id: 'http://vocab.getty.edu/aat/300379475',
+            },
+          ],
+          subject_to: [
+            {
+              classified_as: [
+                {
+                  id: 'https://creativecommons.org/publicdomain/zero/1.0/',
+                },
+              ],
             },
           ],
         },

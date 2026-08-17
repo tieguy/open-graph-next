@@ -2,7 +2,8 @@
 //
 // Each transform — metRecordFrom, aicRecordFrom, rijksRecordFrom, iiifRecordFrom —
 // normalizes a partner's catalog response to the holder-record contract shape.
-// Missing fields are null; the record is never null but its gate may fail.
+// Missing fields are null; a null or non-object response yields null;
+// otherwise the record exists and its gate may fail.
 //
 // Traps and constraints worth remembering:
 // - Rijksmuseum subject_to rights (the public-domain mark) not subject_of.subject_to (CC0 metadata);
