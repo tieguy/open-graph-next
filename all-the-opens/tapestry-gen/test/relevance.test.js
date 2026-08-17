@@ -80,7 +80,7 @@ test('an Internet Archive embed counts as something to look at', () => {
   assert.equal(pickHero([embed]).hero.title, 'A film')
 })
 
-test("the holder's record of the work outranks every other standing, even a subject document", () => {
+test('the holder’s record of the work outranks every other standing, even a subject document', () => {
   const holder = { standing: 'holder-work', imageUrl: 'x' }
   const doc = { standing: 'subject-document' }
   assert.ok(heroRank(holder) < heroRank(doc))
