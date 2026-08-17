@@ -203,6 +203,7 @@ export function bestRankValues(claims, property) {
     .map((s) => s.mainsnak?.datavalue?.value)
     .filter((v) => v != null)
     .map((v) => (typeof v === 'object' && 'id' in v ? v.id : v))
+    .filter((v) => typeof v !== 'object') // Filter out non-entity objects like quantity/time/globecoordinate
 }
 
 export function workClass(claims) {
@@ -318,8 +319,8 @@ Also verify a Met and an AIC painting select correctly, and a non-work is
 silent (grep for `holder page` finds nothing):
 
 ```bash
-HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "Washington Crossing the Delaware" 2>&1 | grep "holder page"   # met
-HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "Nighthawks" 2>&1 | grep "holder page"                          # artic
+HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "Washington Crossing the Delaware (1851 paintings)" 2>&1 | grep "holder page"   # met
+HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "Nighthawks (Hopper)" 2>&1 | grep "holder page"                                 # artic
 HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "Ludwig Prandtl" 2>&1 | grep -c "holder page"                   # expect 0
 ```
 

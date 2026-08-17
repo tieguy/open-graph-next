@@ -33,6 +33,8 @@ export const HOLDERS = [
 
 // Raw wbgetentities claims carry every rank, and the repo invariant is that
 // nothing rests on a deprecated identifier: preferred if any, else normal.
+// Returns entity-valued and string-valued properties only — a caller needing
+// a coordinate, date or quantity must read the datavalue itself.
 export function bestRankValues(claims, property) {
   const statements = claims?.[property] ?? []
   const live = (rank) => statements.filter((s) => s.rank === rank)
@@ -41,6 +43,7 @@ export function bestRankValues(claims, property) {
     .map((s) => s.mainsnak?.datavalue?.value)
     .filter((v) => v != null)
     .map((v) => (typeof v === 'object' && 'id' in v ? v.id : v))
+    .filter((v) => typeof v !== 'object') // Filter out non-entity objects like quantity/time/globecoordinate
 }
 
 export function workClass(claims) {

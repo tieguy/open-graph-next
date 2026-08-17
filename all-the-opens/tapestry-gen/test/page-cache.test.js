@@ -45,12 +45,16 @@ test('two files trading contents is a different build', () => {
 })
 
 test('the experiment flag changes the build id when set vs unset', () => {
-  process.env.HOLDER_PAGE = '1'
-  const withFlag = buildId()
-  delete process.env.HOLDER_PAGE
-  const withoutFlag = buildId()
-  assert.notEqual(withFlag, withoutFlag)
-  process.env.HOLDER_PAGE = '1'
+  const before = process.env.HOLDER_PAGE
+  try {
+    process.env.HOLDER_PAGE = '1'
+    const withFlag = buildId()
+    delete process.env.HOLDER_PAGE
+    assert.notEqual(withFlag, buildId())
+  } finally {
+    if (before === undefined) delete process.env.HOLDER_PAGE
+    else process.env.HOLDER_PAGE = before
+  }
 })
 
 // ---- what a stored page is keyed by ---------------------------------------

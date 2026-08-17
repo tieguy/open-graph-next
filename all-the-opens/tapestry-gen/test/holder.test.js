@@ -1,6 +1,6 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { bestRankValues, workClass, selectHolder, HOLDERS } from '../src/holder.js'
+import { bestRankValues, workClass, selectHolder } from '../src/holder.js'
 
 // Claims fixtures in wbgetentities shape. nightWatch mirrors Q219831 as read
 // 2026-08-16: P31 painting, Rijksmuseum id, two collections.
@@ -62,7 +62,11 @@ test('selectHolder: no P195 match falls back to precedence order', () => {
     P3634: [statement('456')],
     P4610: [statement('789')],
   }
-  assert.equal(selectHolder(noCollection).partner, 'met')
+  assert.deepEqual(selectHolder(noCollection), {
+    partner: 'met',
+    property: 'P3634',
+    id: '456',
+  })
 })
 
 test('selectHolder: a work with no holder identifier honestly gets none', () => {
@@ -80,6 +84,27 @@ test('selectHolder: a deprecated museum id never selects a holder', () => {
     P13234: [statement('999', 'deprecated')],
   }
   assert.equal(selectHolder(retracted), null)
+})
+
+test('bestRankValues: a statement with no datavalue is filtered out', () => {
+  const claims = {
+    P31: [
+      { mainsnak: { datavalue: { value: item('Q3305213') } }, rank: 'normal' },
+      { mainsnak: {}, rank: 'normal' }, // somevalue or novalue snak
+    ],
+  }
+  assert.deepEqual(bestRankValues(claims, 'P31'), ['Q3305213'])
+})
+
+test('bestRankValues: non-entity object datavalues are filtered out', () => {
+  const claims = {
+    P585: [ // point in time property
+      { mainsnak: { datavalue: { value: { time: '+2000-01-01T00:00:00Z' } } }, rank: 'normal' },
+      { mainsnak: { datavalue: { value: item('Q123') } }, rank: 'normal' },
+    ],
+  }
+  // Only the entity item should be returned; the time object is filtered
+  assert.deepEqual(bestRankValues(claims, 'P585'), ['Q123'])
 })
 
 test('a manifest-only work selects the iiif candidate, which museums always outrank', () => {
