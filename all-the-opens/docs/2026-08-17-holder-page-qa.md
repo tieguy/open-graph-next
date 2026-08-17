@@ -43,17 +43,18 @@ the graph states (`rijksPageUrl`), so the round-trip there is the
 selection-id match plus the museum-stated page URL, and all 6 held.
 
 **2. Rights honored.** Every gate refusal in the museum lanes is a
-modern work the museum does not flag public-domain: La Vie (painting)
-(Picasso), Ariadne (Giorgio de Chirico), In the Magic Mirror (Klee),
-Untitled (Rückriem), Rearing Horse and Mounted Warrior, and A Chemist
-Lifting with Extreme Precaution the Cuticle of a Grand Piano
-(Domínguez). The iiif lane's twenty refusals are mostly record and
-institution failures, tallied per leg in its own section below. Every
-refused article rendered as an ordinary page: no hero image from the
-museum, no two-party masthead, no panel (verified by markup grep,
-`<table class="infobox holder-panel"` and `This page: Wikipedia +`
-both absent). No featured image appears anywhere the museum's own flag
-was not CC0/PD.
+modern work the museum does not flag public-domain: La Vie (painting),
+by Picasso; Ariadne (Giorgio de Chirico); In the Magic Mirror, by
+Klee; Untitled (Rückriem); Rearing Horse and Mounted Warrior; and A
+Chemist Lifting with Extreme Precaution the Cuticle of a Grand Piano,
+by Domínguez — bare parentheses are part of the census title. The iiif
+lane's fourteen refusals are mostly record and institution failures,
+tallied per leg in its own section below. Every one of the sample's
+twenty refused articles rendered as an ordinary page: no hero image
+from the museum, no two-party masthead, no panel (verified by markup
+grep, `<table class="infobox holder-panel"` and `This page: Wikipedia
++` both absent). No featured image appears anywhere the museum's own
+flag was not CC0/PD.
 
 **3. Panel sane.** All 25 panels attribute rows (Wikipedia chip on
 Wikipedia's rows, the institution's name on the museum's), and 19 of 25
@@ -68,8 +69,8 @@ field is honestly absent from its record surface).
 **4. Clean degradation.** Two articles were rendered with their holder
 record forced to fail (the cached record response replaced by `{}`,
 restored after): Northeaster (painting), a Met page, and Portrait of
-Lady Manners, a Cleveland page. Both fell through the gate
-(`non-pd-rights` / `no-record`),
+Lady Manners, a Cleveland page. Both fell through the gate on the legs
+the planted record earns (`non-pd-rights` and `no-record`) and
 rendered as full ordinary pages — the partner fan-out visibly resumed
 (id.loc.gov, api.dp.la, api.digitalnz.org, api.europeana.eu in the
 tally) — with no holder furniture and exit 0. No error surfaced to the
