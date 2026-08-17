@@ -82,6 +82,7 @@ import {
 } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
+import { workClass, selectHolder } from './holder.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -94,6 +95,7 @@ const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
 const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
 const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
+const HOLDER_PAGE = process.env.HOLDER_PAGE === '1'
 // OpenAlex's `mailto` politeness parameter carries the same operator contact
 // as the Wikimedia User-Agent: whoever runs this answers for its traffic.
 const CONTACT = () => process.env.WIKIMEDIA_UA_CONTACT
@@ -893,6 +895,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
       console.error(`  subject claims failed: ${e.message}`)
       return { qid, claims: {} }
     }
+  })()
+
+  // Single-institution work pages (HOLDER_PAGE=1, experiment): when the
+  // article IS a museum-held work, its one holding institution — selected
+  // from the subject's own best-rank identifiers, never by search.
+  const holderPromise = (async () => {
+    if (!HOLDER_PAGE) return null
+    const subject = await subjectPromise
+    const medium = workClass(subject.claims)
+    if (!medium) return null
+    const holder = selectHolder(subject.claims)
+    if (!holder) return null
+    console.error(`  holder page: ${medium} held by ${holder.partner} (${holder.property} ${holder.id})`)
+    return { medium, ...holder }
   })()
 
   // Stderr diagnostics: which global batch is the long pole. A streaming
@@ -1698,5 +1714,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // What the article can reach on its own, for the visibility panel. Read
     // off the spine's parse response — no request of its own.
     reach: articleReach(article),
+    holder: await holderPromise,
   }
 }
