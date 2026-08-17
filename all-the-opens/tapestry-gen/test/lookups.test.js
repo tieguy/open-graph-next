@@ -15,6 +15,7 @@ import {
 import {
   aicEntryFrom,
   classesUrl,
+  clevelandEntryFrom,
   gbifEntryFrom,
   inatEntryFrom,
   itemClassesUrl,
@@ -264,6 +265,51 @@ test('partner entries carry image, link, and the property that made them', () =>
   assert.match(map.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/8\/\d+\/\d+\.png$/)
   assert.match(map.href, /openstreetmap\.org/)
   assert.equal(map.title, 'Map: Kennedy Space Center')
+})
+
+test('a CC0 Cleveland record carries its image, its mark, and the property that made it', () => {
+  // clevelandEntryFrom runs on every ordinary article whose anchors carry
+  // P11110 — not only on holder pages — so its contract is tested beside its
+  // three museum siblings. Fields trimmed from the live Brierwood Pipe
+  // record (read 2026-08-17).
+  const entry = clevelandEntryFrom({
+    data: {
+      title: 'The Brierwood Pipe',
+      creation_date: '1864',
+      share_license_status: 'CC0',
+      url: 'https://clevelandart.org/art/1944.524',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg' } },
+      creators: [{ description: 'Winslow Homer (American, 1836–1910)' }],
+    },
+  })
+  assert.equal(entry.source, 'cleveland')
+  assert.equal(entry._via, 'P11110')
+  assert.equal(entry.title, 'The Brierwood Pipe')
+  assert.equal(entry.description, 'Winslow Homer (American, 1836–1910) · 1864')
+  assert.equal(entry.imageUrl, 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg')
+  assert.equal(entry.href, 'https://clevelandart.org/art/1944.524')
+  assert.match(entry.attribution.author, /public domain/)
+  assert.equal(entry.rights.copy.code, 'CC0')
+})
+
+test('a rights-reserved Cleveland record keeps its card and loses its photograph', () => {
+  const entry = clevelandEntryFrom({
+    data: {
+      title: 'A modern work',
+      share_license_status: 'Copyrighted',
+      url: 'https://clevelandart.org/art/x',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/x_web.jpg' } },
+    },
+  })
+  assert.equal(entry.imageUrl, null)
+  assert.equal(entry.rights, undefined)
+  assert.match(entry.attribution.author, /rights reserved/)
+})
+
+test('a Cleveland response with no record or no title makes no entry', () => {
+  assert.equal(clevelandEntryFrom(null), null)
+  assert.equal(clevelandEntryFrom({}), null)
+  assert.equal(clevelandEntryFrom({ data: { share_license_status: 'CC0' } }), null)
 })
 
 test('Wikipedia-free-licensed photos are preferred; NC/ND is a fallback, not excluded', () => {

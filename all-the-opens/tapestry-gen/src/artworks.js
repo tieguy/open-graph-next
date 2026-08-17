@@ -60,7 +60,10 @@ const PARTNERS = [
   ['aic', 'P4610'],
   // Restricted holder-shelf queries only: the unrestricted UNION string is
   // deliberately untouched (its URL is pinned — widening it re-keys every
-  // ordinary page's cached response, a separate decision).
+  // ordinary page's cached response, a separate decision). The cost: on an
+  // ordinary article, a work held only by Cleveland never reaches the
+  // artworks shelf, and artworkTotals reports cleveland: 0 there — that zero
+  // is this pin, not a bug.
   ['cleveland', 'P11110'],
   ['iiif', 'P6108'],
 ]
@@ -80,10 +83,10 @@ export const MUSEUM_NAME = {
   met: 'the Met',
   rijks: 'the Rijksmuseum',
   artic: 'the Art Institute of Chicago',
+  cleveland: 'the Cleveland Museum of Art',
   // Not one institution: a P6108 manifest arrives from whichever library or
   // museum holds the object, and the manifest itself names which.
   iiif: 'the institution that holds it',
-  cleveland: 'the Cleveland Museum of Art',
 }
 
 /**

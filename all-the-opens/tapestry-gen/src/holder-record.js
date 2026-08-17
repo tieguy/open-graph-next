@@ -1,8 +1,8 @@
 // Catalog records normalized to one shape, gated on the museum's own rights flag.
 //
-// Pure transforms (metRecordFrom, aicRecordFrom, rijksRecordFrom, iiifRecordFrom)
-// normalize catalog responses to one shape; URL builders (metRecordUrl, aicRecordUrl)
-// and the fetchHolderRecord dispatcher touch the network.
+// Pure transforms (metRecordFrom, aicRecordFrom, clevelandRecordFrom, rijksRecordFrom,
+// iiifRecordFrom) normalize catalog responses to one shape; URL builders (metRecordUrl,
+// aicRecordUrl, clevelandRecordUrl) and the fetchHolderRecord dispatcher touch the network.
 //
 // Each transform normalizes a partner's catalog response to the holder-record contract shape.
 // Missing fields are null; a null or non-object response yields null;
@@ -170,7 +170,9 @@ export function clevelandRecordFrom(body) {
 
   return {
     partner: 'cleveland',
-    id: String(d.id ?? ''),
+    // P11110's value IS the accession number, and it is what the URL builder
+    // was called with — the round-trip rule the other three transforms keep.
+    id: String(d.accession_number ?? ''),
     title: nullIfEmpty(d.title),
     creator: nullIfEmpty(d.creators?.[0]?.description),
     date: nullIfEmpty(d.creation_date),

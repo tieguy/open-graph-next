@@ -565,8 +565,9 @@ test('rijksRecordFrom distinguishes public-domain mark from CC0 on catalogue tex
 })
 
 test('clevelandRecordUrl builds the URL the entry fetcher requests', () => {
-  const url = clevelandRecordUrl('94979')
-  assert.equal(url, 'https://openaccess-api.clevelandart.org/api/artworks/94979')
+  // A real P11110 value: the property's values are accession numbers.
+  const url = clevelandRecordUrl('1944.524')
+  assert.equal(url, 'https://openaccess-api.clevelandart.org/api/artworks/1944.524')
 })
 
 test('clevelandRecordFrom reads the {data} envelope and passes every gate leg', () => {
@@ -590,7 +591,7 @@ test('clevelandRecordFrom reads the {data} envelope and passes every gate leg', 
     },
   })
   assert.equal(record.partner, 'cleveland')
-  assert.equal(record.id, '124040')
+  assert.equal(record.id, '1944.524')
   assert.equal(record.title, 'The Brierwood Pipe')
   assert.equal(record.creator, 'Winslow Homer (American, 1836–1910)')
   assert.equal(record.date, '1864')

@@ -63,7 +63,8 @@ import {
 } from './scholarly.js'
 import {
   aicEntry,
-  metEntry, clevelandEntry,
+  clevelandEntry,
+  metEntry,
   needsRightsQuery,
   partnerStatements,
   PROP_NAME,

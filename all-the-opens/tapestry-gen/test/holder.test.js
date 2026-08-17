@@ -70,6 +70,23 @@ test('selectHolder: no P195 match falls back to precedence order', () => {
   })
 })
 
+test('selectHolder: Cleveland is selected by P195 and yields to the Met on bare precedence', () => {
+  const inCleveland = {
+    P31: [statement(item('Q3305213'))],
+    P3634: [statement('456')],
+    P11110: [statement('1944.524')],
+    P195: [statement(item('Q657415'))],
+  }
+  assert.deepEqual(selectHolder(inCleveland), {
+    partner: 'cleveland',
+    property: 'P11110',
+    id: '1944.524',
+  })
+  // Without the collection statement, HOLDERS order decides: met before cleveland.
+  const noCollection = { P31: [statement(item('Q3305213'))], P3634: [statement('456')], P11110: [statement('1944.524')] }
+  assert.equal(selectHolder(noCollection).partner, 'met')
+})
+
 test('selectHolder: a work with no holder identifier honestly gets none', () => {
   const inventoryOnly = {
     P31: [statement(item('Q3305213'))],
