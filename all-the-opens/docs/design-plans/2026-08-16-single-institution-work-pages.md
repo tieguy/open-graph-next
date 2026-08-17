@@ -475,10 +475,14 @@ partnerships (T261621) was closed "Resolved" in July 2021 with the
 closure reason stated outright: the chapter supporting it "no longer has
 any staff members working on providing support" — the WMF platform-team
 implementation it referenced never materialized in the task. Two
-partner-demand facts recorded there (2020, WMSE): Swedish GLAMs wanted
+partner-demand signals recorded there (2020, one WMSE staffer relaying
+"prior talks" with Swedish GLAMs — secondhand, and NOT settled demand):
 Commons as "IIIF SaaS" (upload → IIIF-ified → embeddable on the GLAM's
-own site), and per-institution IIIF Collections were named as the
-GLAM-attractive deliverable — independently converging with the
+own site) — which may reflect genuine desire or merely "if we must
+upload to Commons anyway, we might as well get something back" (the
+operator's caution, 2026-08-16; a question to ask real GLAMs, not a fact
+to build on) — and per-institution IIIF Collections as the
+GLAM-attractive deliverable, which does independently converge with the
 result-sets-as-Collections idea parked above.
 
 **Error handling:** upstream failures use the existing cool-off machinery;
