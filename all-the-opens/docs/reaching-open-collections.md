@@ -672,6 +672,37 @@ from them. 49 rows. The fix is the museum publishing manifests that say
 who they are — nothing on the reading side can conjure an attribution
 that is not there.
 
+## 20. KMSKA: a live, free-licensed, honest v2 host the gate structurally cannot credit `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed it
+`no-institution`).*
+
+The best-behaved host in the lane:
+
+```
+curl -s https://iiif.kmska.be/iiif/2/34343/manifest.json
+# → clean Presentation v2: real bilingual labels (en/nl), metadata,
+#   license: https://creativecommons.org/publicdomain/mark/1.0/  (PDM —
+#   the rights leg would PASS), and an attribution string that names the
+#   museum in prose: "CC0, CC0, Public domain, Koninklijk Museum voor
+#   Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap, …"
+curl -sI https://iiif.kmska.be/iiif/2/99999999/manifest.json
+# → 404 — the real/bogus control PASSES; plain Apache, no CDN games
+```
+
+What blocks its 54 rows is Presentation v2's shape, twice over: v2 has no
+`provider` field, so the institution exists only inside a free-text
+attribution string that also carries license noise — and parsing a name
+out of prose is the fuzzy matching the design forbids (the masthead needs
+the museum's own clean statement of itself). And the manifest states no
+`related`/homepage, so even past the institution leg it would fail
+`no-object-page`. Nothing is broken and nobody is refusing: the museum
+publishes openly in a 2014-era format the two-party gate cannot read
+without guessing. The fix is theirs and small — v3 manifests with
+`provider` and `homepage` — and KMSKA sits in the Flemish digital-heritage
+world (meemoo is two entries up this lane), where that upgrade is an
+ordinary ask.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:
