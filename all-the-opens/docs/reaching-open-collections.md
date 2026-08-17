@@ -584,7 +584,8 @@ browser 2026-08-17: the manifest loads, flagged as a broken certificate.
 this one misconfiguration.
 
 **The fix is the museum's (or its vendor's): serve the intermediate.** One
-report to Orsay/ephoto could open the second-largest block of the lane.
+report to Orsay/ephoto could open the second-largest block of the lane —
+the operator sent that report on 2026-08-17.
 Bundling the Thawte intermediate into our own trust path would also work
 and is deliberately not done — per-vendor CA patching in the fetch stack is
 fragile, and the upstream fix repairs it for every strict client, not just
@@ -604,12 +605,11 @@ curl -sI "…manifest.json?cultObj:id=999999999"
 ```
 
 Same day, from the operator's browser and the open-data repo, the fuller
-picture — the endpoint is likelier RETIRED than gated:
+picture — the endpoint is RETIRED, not gated:
 
-- A browser also ends at `api.nga.gov` without the query and gets the 404
-  (observed in the operator's browser 2026-08-17, id not recorded; a
-  real-id paste that stays on `www.nga.gov` and shows JSON would overturn
-  this reading).
+- The real-id URL, pasted in the operator's browser 2026-08-17, redirects
+  to `api.nga.gov` (query dropped) and 404s — same for everyone, challenge
+  or no challenge.
 - `published_images.csv` in `NationalGalleryOfArt/opendata` (rows modified
   2026-04) names the CURRENT infrastructure: a IIIF **Image** API at
   `api.nga.gov/iiif/<uuid>` — and it answers our plain server UA keylessly:
@@ -627,6 +627,50 @@ would be the playbook's "neither shape" case — record-by-id answered from
 the published CSV plus the live Image API — not an IIIF-door lane, and
 not a challenge workaround, which would be fingerprint spoofing and is
 not this project's move.
+
+## 18. Yale Center for British Art: the manifest service is dead behind a cert that expired in January 2024 `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed it
+`no-record`).*
+
+```
+curl -sv https://manifests.britishart.yale.edu/manifest/4986
+# → SSL certificate verify result: certificate has expired (10)
+#   (GlobalSign OV cert, NotAfter 2024-01-10; served via CloudFront)
+curl -si --insecure https://manifests.britishart.yale.edu/manifest/4986   # one-shot diagnosis
+# → 403 AccessDenied from the S3 origin — the bucket behind the CDN is
+#   gone or private; real and bogus ids fail identically at TLS, so the
+#   control cannot run at the HTTP level
+```
+
+Not a chain problem like Orsay's — the certificate is EXPIRED, browsers
+hard-block it, and behind it the origin denies everything: the service is
+decommissioned, and the cert was never renewed because nothing lives
+there. 53 of the lane's 686 P6108 rows point at it. YCBA's collections
+have since moved platforms (LUX / collection.britishart.yale.edu), so
+these are stale graph values in the LUI-125 decay class — per the
+surface-first value, recorded here rather than mass-edited.
+
+## 19. Nationalmuseum Sweden's manifests are reachable, anonymous shells `[ours]`
+
+*Observed 2026-08-17; extends note 15 (no object property to probe).*
+
+No access problem at all: `nationalmuseumse.iiifhosting.com` — a
+third-party IIIF hosting service, and the census URLs are plain
+`http://` — answers instantly. The failure is the content:
+
+```
+curl -s http://nationalmuseumse.iiifhosting.com/iiif/d3522…f8a6/manifest.json
+# → Presentation v2; attribution: null; provider: null (v2 has no such
+#   field); label: the file hash itself. No institution is named anywhere
+#   in the manifest, not even as prose.
+```
+
+The gate's `no-institution` verdict is exact: these are auto-generated
+shells that name nobody, so no two-party page can ever credit a holder
+from them. 49 rows. The fix is the museum publishing manifests that say
+who they are — nothing on the reading side can conjure an attribution
+that is not there.
 
 ## Already recorded elsewhere in this repo
 
