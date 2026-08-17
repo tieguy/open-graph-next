@@ -155,23 +155,33 @@ credit — the IIIF spec makes displaying it mandatory for a client showing
 the resource (recorded in the design doc's Decisions).
 
 **Step 2b: The institution's name everywhere the page names its partner.**
-Three rendered places name the source, and on a holder page all three must
+FIVE rendered places name the source, and on a holder page every one must
 say `record.institution`, never the PARTNERS display name (for `iiif` that
 literal is "IIIF collections", which the design forbids): the masthead
-(Step 3), the legend chip (`buildHtml` builds the legend from
-`sourcesUsed(bands)` → `SOURCE[s].name`, `src/emit-html.js:1276-1279`),
-and the hero card's own source bar (`:110`). Thread a display-name
-override keyed by the holder's source through both sites, gated on the
-holder context. Test in `test/render.test.js`: a holder page's legend and
-card bar carry the institution name; a non-holder page's output is
-byte-unchanged.
+(Step 3), the batch legend (`buildHtml`, `src/emit-html.js:1273-1276`),
+the STREAMING legend — a second copy of the same line inside
+`streamHeroExtras` (`:1435`), the deployed path — the hero card's own
+source bar (`:110`), and the visibility panel's partner rows
+(`visibilityReport` prints `SOURCE[r.slug]?.name`, `:231`, over
+`src/gap.js`'s tally; the panel's COUNTS are untouched — only the display
+name is overridden). Thread one display-name override keyed by the
+holder's source through all five sites, gated on the holder context (for
+streaming, it rides the `holder` option Step 3b adds to
+`streamHeroExtras`). Tests: `test/render.test.js` pins legend, card bar,
+and panel row on a holder page and byte-unchanged output on a non-holder
+page; `test/stream.test.js` pins the streamed legend chip alongside the
+masthead fill.
 
 **Step 2c: The hero must survive a short lede.** `src/emit-html.js:960-963`
 un-floats any hero when the lede's prose is under `FLOAT_MIN_PROSE` —
 correct for ordinary cards, wrong for the page's reason for existing, and
-painting articles are frequently stubs. Exempt `holder-work` from that
-demotion, exactly as the infobox is already exempted two branches down
-(`:973-975`); record the reasoning in a comment beside the exemption. Add
+painting articles are frequently stubs. The change is one condition: add
+`&& hero.standing !== 'holder-work'` to the `:960` demotion branch. (The
+infobox needs no such branch — it is a different variable the demotion
+never touches — but the comment at `:971-974` records the REASONING
+precedent: a stub wrapping under its infobox is what a real stub looks
+like, and the same holds for the work itself.) Record the reasoning in a
+comment beside the new condition. Add
 a SHORT-lede work-article to the acceptance list (pick one from WDQS: a
 P13234/P3634/P4610 painting item whose enwiki article is a stub) and
 verify the hero still leads it.
@@ -189,8 +199,9 @@ This page: Wikipedia + <institution name>
 using `holder.record.institution` — which is `PARTNERS[partner].name` for
 the museums and the manifest's own stated provider for `iiif` (the gate
 guarantees it exists and names exactly one institution; the masthead must
-never read "Wikipedia + IIIF collections"). The visibility panel is
-untouched — it reports what the article reaches, which has not changed.
+never read "Wikipedia + IIIF collections"). The visibility panel's
+measurements are untouched — what the article reaches has not changed —
+but its partner-row display name is overridden per Step 2b.
 
 **Step 3b — streaming path (the deployed site):** `streamOpen` flushes the
 masthead before the holder record resolves, so the two-party line cannot be

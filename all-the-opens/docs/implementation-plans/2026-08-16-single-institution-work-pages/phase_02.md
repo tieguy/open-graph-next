@@ -66,10 +66,14 @@ page as long as the gate fields survive.
 
 **The `institution` field** (added to the contract): the display name of
 the holding institution. For the three museums it is
-`PARTNERS[partner].name` — always present. For `iiif` it is resolved from
-the manifest's own statement (Presentation v3 `provider[].label`, v2
-`attribution`, stripped of markup): present only when the manifest names
-EXACTLY ONE institution; a manifest naming none or several fails the gate.
+`PARTNERS[partner].name` — always present. For `iiif` it comes from IIIF
+v3's structured `provider` ONLY: present when `provider` has exactly one
+entry (its label, markup-stripped); none or several fails the gate. v2's
+`attribution` is free text and never yields an institution — splitting it
+would be fuzzy matching — so a v2-only manifest fails as
+`no-institution` (design doc, Decisions). Do not reuse `iiifCredit`
+(`src/iiif.js:57-63`) for this field: it deliberately collapses
+requiredStatement/provider/attribution into one display string.
 The operator's stated expectation (2026-08-16) is that many manifests will
 fail one gate leg or another — the inspection window below turns that
 suspicion into a dated number instead of an assumption.
@@ -184,8 +188,8 @@ code must follow:
   (`rijksTitle`/`rijksDate`/`rijksObjectNumber`/`rijksPageUrl`/`rijksRights`);
   do not duplicate their parsing.
 - `iiifRecordFrom(manifest)`: title from the manifest label; `institution`
-  from v3 `provider[].label` / v2 `attribution` (markup-stripped) per the
-  contract rule (exactly one, else gate failure); `rights.publicDomain`
+  per the contract rule (v3 `provider` with exactly one entry, else gate
+  failure — v2 never qualifies); `rights.publicDomain`
   only when the v3 `rights` / v2 `license` URI reads as **`CC0` or the
   public-domain mark (`PDM`)** through the existing vocabulary readers —
   never the NoC family, never `NoC-US`/`NKC`/`USGOV` (`src/rights.js` is
@@ -196,8 +200,11 @@ code must follow:
   or `related` (v2) — a manifest that states neither FAILS the gate
   (`no-object-page`): the zoom affordance must land a reader on the
   institution's page for the object, never on a JSON file. Note
-  `iiifHomepage` exists in `src/iiif.js` but is not exported — export it,
-  as with the rijks raw-object helper. Also capture v3
+  `iiifHomepage` exists in `src/iiif.js` (:83-87) but is not exported —
+  export it, and **never pass it the manifest URL second argument on this
+  path**: its last-resort fallback returns the manifest URL, which would
+  silently defeat the `no-object-page` leg (same trap shape as
+  `iiifThumbnail` above). Also capture v3
   `requiredStatement` / v2 `attribution` verbatim on the record as
   `requiredStatement` (label/value text, markup-stripped): the IIIF spec
   makes displaying it MANDATORY for a client showing the resource, and
@@ -208,9 +215,10 @@ code must follow:
   replace this parsing, but the repo deliberately carries one runtime
   dependency and `src/iiif.js` already parses both versions for a narrow
   field surface — extend it; revisit the library if manifest parsing
-  grows. Test fixtures: one v3 manifest that passes all gate legs, one v2
-  that passes, one with no rights statement (fails), one naming two
-  providers (fails), one with no homepage (fails: `no-object-page`).
+  grows. Test fixtures: one v3 manifest that passes all gate legs, one
+  v2-only manifest (fails: `no-institution` — the recorded decision), one
+  v3 with no rights statement (fails), one naming two providers (fails),
+  one with no homepage (fails: `no-object-page`).
 
 **Step 4: Run tests.** `npm test` — green.
 

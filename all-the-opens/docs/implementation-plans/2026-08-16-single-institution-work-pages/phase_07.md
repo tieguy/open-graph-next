@@ -61,7 +61,7 @@ the compliant WDQS path, and writes:
   "sparql": "<the exact query text>",
   "holders": { "rijks": "P13234", "…": "…" },
   "articles": [
-    { "title": "The Night Watch", "qid": "Q219831", "property": "P13234", "id": "200107928" }
+    { "title": "The Night Watch", "qid": "Q219831", "property": "P13234", "id": "200107928", "collections": ["Q190804", "Q1820897"] }
   ]
 }
 ```
@@ -77,10 +77,14 @@ few items carry more than one round-one property (5 of 1,362 measured
 2026-08-16 across four properties). Whenever the census reports per-holder
 coverage, attribute each ITEM to the holder `selectHolder` would pick —
 import it, don't re-implement it, and reconstruct the minimal claims
-shape it reads from the census rows (the per-item property/value pairs
-plus the `?collection` column the query carries for exactly this), so the
-precedence + P195 tiebreak actually runs and the QA denominators match
-what the pipeline does.
+shape it reads from the census rows — the per-item property/value pairs
+plus the row's `collections` — as statements of the form
+`{ mainsnak: { datavalue: { value } }, rank: 'normal' }`. The rank field
+is load-bearing: `bestRankValues` keeps only `preferred`/`normal`
+statements, so a fabricated statement without one silently yields nothing
+(and `'normal'` is correct — `wdt:` already returned truthy values only).
+With that shape the precedence + P195 tiebreak actually runs and the QA
+denominators match what the pipeline does.
 
 **The narrowing control (one extra query, same run):** detection is direct
 P31, so the census cannot see what an ancestry walk would have added. The
@@ -167,7 +171,9 @@ render flag-on locally and check by hand:
 **Step 2:** Write findings in the QA doc: per-holder coverage (count in
 census vs. count rendering a holder page, dated); **for the iiif lane
 specifically, the gate pass-rate at sample scale** — what fraction of
-manifest-held articles cleared institution/rights/image, per failure leg
+manifest-held articles cleared institution/rights/image/object-page, per
+failure leg (all six legs from the Phase 2 window, `no-object-page`
+included)
 (the scaled-up answer to the Phase 2 inspection window, and to the
 operator's stated expectation that many hosts will not publish what the
 gate needs); every defect found with its article; and the flag

@@ -18,16 +18,18 @@ against a class list to see if it is a painting or sculpture. Second, if it
 is, the subject's own identifier claims are walked in a fixed precedence
 order to find exactly one holding museum — deliberately using only explicit,
 already-linked identifiers rather than any kind of fuzzy or inferred
-matching. Third, that museum supplies the catalog record, the public-domain
-image, and a search scoped to its own collection for the article's other
-linked entities (like the artist). Fourth, the page renders with the
+matching. Third, that museum supplies the catalog record and the
+public-domain image, and one Wikidata query supplies the museum's other
+holdings by the article's creator. Fourth, the page renders with the
 museum's record in the lead visual position, a merged fact panel that shows
 Wikipedia's infobox data and the museum's data side by side (including
 disagreements), and enrichment cards drawn only from that museum. Any
 failure at any stage — not a work, no direct identifier, fetch failure,
-non-public-domain rights — causes the page to fall back to today's ordinary
-multi-partner rendering, and the whole treatment sits behind an experiment
-flag so it can be compared against normal pages.
+non-public-domain rights, or (for manifest-held works) a manifest that
+does not name a single institution or its own object page — causes the
+page to fall back to today's ordinary multi-partner rendering, and the
+whole treatment sits behind an experiment flag so it can be compared
+against normal pages.
 
 ## Definition of Done
 
@@ -159,10 +161,11 @@ Four stages, all inside the existing tapestry-gen pipeline
    **No fuzzy matching** — see Decisions.
 
 3. **Single-source page assembly.** The holder supplies (a) its catalog
-   record for the object, (b) the work's public-domain image, and (c)
-   holder-scoped anchor discovery (the article's anchors — above all the
-   artist — searched only against that museum's collection). All other
-   partners are suppressed on these pages, behind an experiment flag.
+   record for the object and (b) the work's public-domain image; (c) the
+   holder's related holdings — above all, other works by the article's
+   creator — come from one Wikidata works-by-creator query restricted to
+   the holder's identifier property. All other partners are suppressed on
+   these pages, behind an experiment flag.
 
 4. **Rendering.** The work leads the page in the hero position
    (`src/hero.js` gains a standing above today's `subject-document` tier):
@@ -172,13 +175,15 @@ Four stages, all inside the existing tapestry-gen pipeline
    becomes the two-party statement.
 
 **Failure modes all degrade to today's behavior:** not a work, no direct ID,
-holder fetch failed, or rights flag not public-domain → the ordinary
+holder fetch failed, rights flag not public-domain, or (manifest-held) no
+single named institution / no stated object page → the ordinary
 multi-partner page ships unchanged.
 
 ### Holder capability contract
 
-A museum joins this round only if it clears all three, keylessly or with a
-free key, with no NC terms anywhere:
+A museum joins this round only if it clears (a) and (b), keylessly or with
+a free key, with no NC terms anywhere; (c) is served uniformly by the
+graph and is not a per-museum bar:
 
 | Capability | Contract |
 |---|---|
@@ -307,8 +312,9 @@ holder's collection.
 
 **Components:**
 - Partner suppression under the flag in `src/discover.js`
-- Artist/anchor-scoped search for `rijks`, `met`, `artic` in their partner
-  code, rendering into existing bands with shelf-head counts
+- The holder-restricted works-by-creator query (extending
+  `src/artworks.js`), its entries riding the holder partner's existing
+  fetcher, rendering into existing bands with shelf-head counts
 
 **Dependencies:** Phase 3.
 
@@ -323,8 +329,9 @@ Rembrandt anchor.
 playbook.
 
 **Components:** per holder: a capability probe first (record-by-ID, image,
-artist search, licence read from the partner's own terms — NGA's search
-capability is unverified), then the manifest descriptor + partner code.
+licence read from the partner's own terms — artist search is deliberately
+NOT probed; capability (c) rides the graph for every holder), then the
+manifest descriptor + partner code.
 A holder that fails its probe is dropped from the round and the failure
 recorded on the probe's Linear issue.
 
@@ -362,9 +369,14 @@ plan validation):**
   share, not an institution, and 679 of 1,362 round-one work-articles carry
   P6108 and no museum object ID — half the population, too much to drop.
   The two-party claim is kept true by resolution, not exclusion: the
-  manifest's own stated institution (IIIF Presentation v3 `provider`, v2
-  `attribution`) becomes the holder the page names, and a manifest that
-  does not name exactly one institution gets no holder treatment. A page
+  manifest's own stated institution becomes the holder the page names, and
+  a manifest that does not name exactly one institution gets no holder
+  treatment. "Names exactly one" is falsifiable only against IIIF v3's
+  structured `provider` (count its entries); v2's `attribution` is free
+  text, and splitting it into institutions would be exactly the fuzzy
+  matching this design forbids — so v2-only manifests fail the gate as
+  `no-institution`, and the Phase 2 inspection window reports what that
+  costs. A page
   must never read "Wikipedia + IIIF collections" — the door is not the
   friend, and the resolved institution's name is what appears EVERYWHERE
   the page names its partner: masthead, legend, card credit, panel chips.
