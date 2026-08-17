@@ -480,8 +480,9 @@ partner-demand signals recorded there (2020, one WMSE staffer relaying
 Commons as "IIIF SaaS" (upload → IIIF-ified → embeddable on the GLAM's
 own site) — which may reflect genuine desire or merely "if we must
 upload to Commons anyway, we might as well get something back" (the
-operator's caution, 2026-08-16; a question to ask real GLAMs, not a fact
-to build on) — and per-institution IIIF Collections as the
+operator's caution, 2026-08-16), and which is out of scope here
+regardless: the commons should remain decentralized (VALUES.md,
+2026-08-16) — and per-institution IIIF Collections as the
 GLAM-attractive deliverable, which does independently converge with the
 result-sets-as-Collections idea parked above.
 
