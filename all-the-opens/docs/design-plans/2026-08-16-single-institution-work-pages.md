@@ -471,7 +471,15 @@ github.com/toollabs/zoomviewer) — has a live repo (last push 2023-08)
 and a dead tool (both endpoints 404); wikipedia-to-iiif (Crane) generates
 manifests FROM Wikimedia content — the inverse direction — and is
 dormant since 2018-06. The umbrella Phabricator task for IIIF in content
-partnerships (T261621) remains open.
+partnerships (T261621) was closed "Resolved" in July 2021 with the
+closure reason stated outright: the chapter supporting it "no longer has
+any staff members working on providing support" — the WMF platform-team
+implementation it referenced never materialized in the task. Two
+partner-demand facts recorded there (2020, WMSE): Swedish GLAMs wanted
+Commons as "IIIF SaaS" (upload → IIIF-ified → embeddable on the GLAM's
+own site), and per-institution IIIF Collections were named as the
+GLAM-attractive deliverable — independently converging with the
+result-sets-as-Collections idea parked above.
 
 **Error handling:** upstream failures use the existing cool-off machinery;
 a degraded render during cool-off is not stored (existing rule). The
