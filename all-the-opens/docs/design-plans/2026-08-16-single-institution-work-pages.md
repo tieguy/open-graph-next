@@ -151,8 +151,9 @@ Four stages, all inside the existing tapestry-gen pipeline
    identifier claims in precedence order and pick one holding institution.
    Round-one keys, all direct object-ID properties: Rijksmuseum P13234, Met
    P3634, AIC P4610, then the new holders (Phase 6): Cleveland P11110, NGA
-   P4683, Getty P2582, Paris Musées P6246, Nationalmuseum Sweden P2538. A
-   museum's own IIIF manifest URL (P6108) also qualifies. When several IDs
+   P4683, Getty P2582, Paris Musées P6246, Nationalmuseum Sweden P2538. An IIIF
+   manifest (P6108) qualifies last in precedence, its holder being the
+   single institution the manifest itself names — see Decisions. When several IDs
    are present, prefer the one whose museum matches the item's best-rank
    P195 (collection) statement; ties break by partner capability tier.
    **No fuzzy matching** — see Decisions.
@@ -183,7 +184,7 @@ free key, with no NC terms anywhere:
 |---|---|
 | (a) Record by object ID | Catalog fields for the merged panel: title, date, medium, dimensions, accession number, credit line, rights statement |
 | (b) Work image | Hi-res, public domain per the museum's own per-object rights flag (e.g. the Met's `Is Public Domain`, AIC's `is_public_domain`) |
-| (c) Holder-scoped search | Given an artist (or related anchor), return that museum's holdings |
+| (c) Holder-scoped related holdings | Served for every holder by one Wikidata query — works-by-creator restricted to the holder's property — never by a museum search API (see Decisions) |
 
 ### Population (WDQS, measured 2026-08-16)
 
@@ -352,7 +353,42 @@ default decided from the findings.
 
 ## Additional Considerations
 
-**Decisions (2026-08-16, from the design session):**
+**Decisions (2026-08-16, from the design session; amended same day during
+plan validation):**
+
+- **An IIIF manifest selects a holder only through the institution it
+  names** (2026-08-16, plan validation; revised the same day — keeping the
+  door in is the operator's decision). P6108 is a door many institutions
+  share, not an institution, and 679 of 1,362 round-one work-articles carry
+  P6108 and no museum object ID — half the population, too much to drop.
+  The two-party claim is kept true by resolution, not exclusion: the
+  manifest's own stated institution (IIIF Presentation v3 `provider`, v2
+  `attribution`) becomes the holder the page names, and a manifest that
+  does not name exactly one institution gets no holder treatment. A page
+  must never read "Wikipedia + IIIF collections" — the door is not the
+  friend, and the resolved institution's name is what appears EVERYWHERE
+  the page names its partner: masthead, legend, card credit, panel chips.
+  Museum object-ID properties outrank the manifest in precedence.
+- **Capability (c) rides the graph, not museum search APIs** (2026-08-16,
+  planning). Holder-scoped related holdings come from one Wikidata query —
+  works-by-creator (P170) restricted to the holder's own identifier
+  property — for every holder alike. It is the no-fuzzy decision applied
+  to search: the shelf shows works the graph explicitly links to the
+  holder, and no museum search endpoint is probed, integrated, or
+  fuzzy-matched.
+- **Manifest-held pages carry no anchor shelves this round** (2026-08-16,
+  planning). A P6108-scoped works query returns works held by many
+  institutions, and anchor items' own manifests likewise point at
+  arbitrary third institutions — so on an IIIF-held page both the
+  works-by-creator shelf and anchor statement cards are suppressed; the
+  page is hero + merged panel + two-party legend. The extension (admit
+  only works and anchors whose manifests state the same provider — an
+  exact match on the institutions' own statements) is noted, not built.
+- **A stated `requiredStatement` is displayed** (2026-08-16, prior-art
+  review). IIIF Presentation makes displaying `requiredStatement` (v3) /
+  `attribution` (v2) mandatory for any client that shows the resource;
+  the holder page renders it in the work's credit. This is a spec
+  obligation, not a courtesy.
 
 - **No fuzzy matching, ever.** The renderer reads explicit links from the
   graph or reads nothing: direct object-ID properties (or a museum's own
@@ -368,7 +404,12 @@ default decided from the findings.
   viewer (their traffic, their viewer, no tile proxying, works for holders
   without IIIF). IIIF embedding remains possible later as a per-partner
   opt-in — it is the standard's intended use — but round one links out
-  everywhere.
+  everywhere. The 2023 Community Wishlist Wikisource-IIIF proposal records
+  the community's own objection to embedded third-party IIIF — "concerns
+  over user data privacy and loading of third-party content" — and this
+  architecture avoids it structurally: images proxy server-side, and a
+  reader reaches the museum's servers only by choosing the labeled
+  link out.
 - **Work-articles revise the infobox-as-furniture rule** (2026-08-08
   design): on these pages the infobox participates in a merged, per-row
   attributed panel, with conflicts shown side by side. Everywhere else the
@@ -391,6 +432,23 @@ articles carry P973 (described at URL) pointing at collection pages (Tate
 join from their side (the Met's bulk dump has an `Object Wikidata URL`
 column). Both are explicit statements, not fuzzy matches, and could widen
 holder selection later.
+
+**Prior art and the Commons wishlists (reviewed 2026-08-16):** the
+Wikimedia IIIF-consumer space is thin — Toolhub's IIIF shelf is two
+viewer wrappers (Mirador, Universal Viewer; talk to their maintainer,
+LUI-172); the KB's IIIF Manifest Upload Workbench is the one real
+manifest consumer (ingestion side; its corpus test found 2 of 26 of KB's
+own manifests unusable, which corroborates this design's gate). The IIIF
+Image API wish (Community Wishlist 2019) was archived as too big — on
+work-articles this experiment delivers the wished-for deep-zoom
+experience with no Wikimedia infrastructure, because the holders already
+run the servers; that contrast belongs in the demo's story. Parked
+fold-ins from the 2019 Presentation API discussion: emit the census as
+per-institution IIIF Collections (Tom Crane's result-sets-as-Collections
+pattern) so IIIF-native tools can browse what this experiment renders;
+and P2677 (relative position within image) as a panel enrichment.
+Adjacent: wikipedia-to-iiif (Crane) generates manifests from Wikimedia
+content — the inverse direction.
 
 **Error handling:** upstream failures use the existing cool-off machinery;
 a degraded render during cool-off is not stored (existing rule). The
