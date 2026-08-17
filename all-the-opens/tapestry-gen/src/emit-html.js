@@ -1330,15 +1330,20 @@ function subjectRights(b) {
  */
 function holderConflict(b) {
   if (b.id !== 'slede' || !b.holderRefusal) return ''
-  const { phrase, href, statusLine } = b.holderRefusal
+  const { phrase, href, statusLine, mixed } = b.holderRefusal
   const door = href
     ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the museum’s record →</a>`
     : ''
+  // On a MIXED record the graph itself says "still in copyright" somewhere,
+  // and the museum's flag may simply agree with that somewhere — so the
+  // verdict sentence renders only when the graph's work-level answer is
+  // free everywhere it speaks. The mixed line's own contrast does the work.
+  const verdict = mixed ? '' : ' The two records disagree.'
   return (
     `<p class="sr-conflict">` +
-    `${escapeHtml(sentenceCase(phrase))} holds this work; its catalog record doesn’t ` +
-    `flag its image as public domain, while Wikidata records the work as ` +
-    `${escapeHtml(statusLine)}. The two records disagree.${door}</p>`
+    `${escapeHtml(sentenceCase(phrase))} holds this work; the museum’s catalog record ` +
+    `doesn’t flag it as public domain, while Wikidata records it as ` +
+    `${escapeHtml(statusLine)}.${verdict}${door}</p>`
   )
 }
 

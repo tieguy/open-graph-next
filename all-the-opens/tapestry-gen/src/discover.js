@@ -1503,7 +1503,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // museum-holder page pays the coupling, where the exclusion set and the
   // placement decision genuinely need the page-wide pick.
   const holderShelfPromise = Promise.all([subjectPromise, holderPromise]).then(async ([subject, holder]) => {
-    if (!holder || holder.partner === 'iiif') return null
+    // A door whose institution comes from each object's own record
+    // (partners.js: institutionFromRecord) is many institutions, and a
+    // works-by-creator shelf would fetch the OTHER institutions' records —
+    // the single-source rule. Same manifest fact as the refusal's naming.
+    if (!holder || PARTNERS[holder.partner]?.institutionFromRecord) return null
     const [creatorQid] = bestRankValues(subject.claims, 'P170')
     if (!creatorQid) return null
     const [ledeOwn, pickedMap] = await Promise.all([ledePickedPromise, pickedPromise])
@@ -1860,7 +1864,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // unknown branch withholds: a one-sided or mis-attributed line is
       // worse than silence.
       const workFree = holderRefusal ? workFreeStatus(rec) : null
-      if (workFree) refusalShown = { ...holderRefusal, statusLine: workFree.line }
+      if (workFree)
+        refusalShown = { ...holderRefusal, statusLine: workFree.line, mixed: workFree.mixed }
     }
 
     if (extras?.works.entries.length)

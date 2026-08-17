@@ -268,8 +268,8 @@ const REFUSAL = {
 test('a rights-refused holder names both records and quotes the graph’s words', () => {
   const html = bandRail(bandOf({ holderRefusal: REFUSAL }))
   assert.match(html, /<div class="subject-rights"><p class="sr-conflict">/)
-  assert.match(html, /The Art Institute of Chicago holds this work; its catalog record doesn’t/)
-  assert.match(html, /Wikidata records the work as public domain in countries where copyright lasts 70 years/)
+  assert.match(html, /The Art Institute of Chicago holds this work; the museum’s catalog record/)
+  assert.match(html, /Wikidata records it as public domain in countries where copyright lasts 70 years/)
   assert.match(html, /The two records disagree\./)
   assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the museum’s record →/)
   // The line claims nothing about the page's layout: the museum's image may
@@ -277,11 +277,29 @@ test('a rights-refused holder names both records and quotes the graph’s words'
   assert.doesNotMatch(html, /no museum image/)
 })
 
+test('a mixed graph answer keeps its bound clause and asserts no disagreement', () => {
+  // The graph itself says "still in copyright" somewhere, and the museum's
+  // flag may simply agree with that somewhere — the free clause is never
+  // printed alone (rightsView's rule holds here too), and no verdict is
+  // asserted the graph does not record.
+  const html = bandRail(
+    bandOf({
+      holderRefusal: {
+        ...REFUSAL,
+        statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less · still in copyright in the United States',
+        mixed: true,
+      },
+    }),
+  )
+  assert.match(html, /still in copyright in the United States/)
+  assert.doesNotMatch(html, /The two records disagree/)
+})
+
 test('with the subject status rendering above, the same words are quoted — one source', () => {
   const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
   assert.match(html, /sr-line/)
   assert.match(html, /sr-conflict/)
-  assert.match(html, /Wikidata records the work as public domain in countries/)
+  assert.match(html, /Wikidata records it as public domain in countries/)
   assert.doesNotMatch(html, /The status above/)
 })
 
@@ -320,6 +338,7 @@ test('workFreeStatus: a free work statement gates and supplies its own words', (
   ]).get('Q464782')
   assert.deepEqual(workFreeStatus(rec), {
     line: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+    mixed: false,
   })
 })
 
@@ -333,9 +352,25 @@ test('workFreeStatus: a creator-only ruling never speaks for the work', () => {
 test('workFreeStatus: a stated license over an in-copyright work is not the work’s status', () => {
   const rec = parseRightsRows([
     { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q30'), jurisLabel: lit('United States') },
-    { item: uri('Q1'), lic: uri('Q6938433'), licLabel: lit('CC0') },
+    // The label WDQS actually returns for Q6938433 — ccFromLabel does not
+    // recognize the bare "CC0" string, and a fixture it drops would test a
+    // record with no license in it.
+    { item: uri('Q1'), lic: uri('Q6938433'), licLabel: lit('Creative Commons Zero v1.0 Universal') },
   ]).get('Q1')
+  assert.equal(rec.licenses.length, 1, 'the fixture really carries a license')
   assert.equal(workFreeStatus(rec), null)
+})
+
+test('workFreeStatus: a mixed record carries its bound clause — the free clause never stands alone', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q59542795'), jurisLabel: lit('countries with 70 years pma or shorter') },
+    { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q30'), jurisLabel: lit('United States') },
+  ]).get('Q1')
+  assert.deepEqual(workFreeStatus(rec), {
+    line:
+      'public domain in countries where copyright lasts 70 years after the author’s death or less · still in copyright in the United States',
+    mixed: true,
+  })
 })
 
 test('workFreeStatus: unknown-only and empty records withhold', () => {

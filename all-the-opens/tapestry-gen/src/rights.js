@@ -359,24 +359,40 @@ export async function entityRights(qids) {
  * generated to a fixed form.
  */
 /**
- * The graph's free answer ABOUT THE WORK, or null — the gate and the words
+ * The graph's work-level answer, WHOLE, or null — the gate and the words
  * for the holder-refusal disclosure, taken from one place so the page can
  * never gate on one branch of the record and quote another. Only work-level
  * statements count: a creator-level ruling may not stand alone (the rule on
  * `rightsView`), and a stated license is a promise about a copy, not a
  * status of the work — either alone yields null, the same withholding
- * stance the unknown branch takes.
+ * stance the unknown branch takes. A record with no free statement yields
+ * null too: a refusal everyone agrees with needs no disclosure.
+ *
+ * A MIXED record keeps its bound clause — `rightsView`'s rule that the free
+ * clause is never emitted alone holds here too, with the same wording — and
+ * is flagged `mixed`, because where the graph itself records "still in
+ * copyright" somewhere, a museum's flag may simply agree with that
+ * somewhere, and the caller must not assert a disagreement.
  */
 export function workFreeStatus(rec) {
-  const free = (rec?.work ?? []).filter((w) => w.status.known !== false && w.status.free)
+  const work = (rec?.work ?? []).filter((w) => w.status.known !== false)
+  const free = work.filter((w) => w.status.free)
   if (!free.length) return null
-  const ranked = [...free].sort((a, b) => a.status.rank - b.status.rank)
-  const where = sentenceList(
-    [...new Set(ranked.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
-      (a, b) => a.length - b.length || a.localeCompare(b),
-    ),
-  )
-  return { line: `${ranked[0].status.label}${where ? ` in ${where}` : ''}` }
+  const bound = work.filter((w) => !w.status.free)
+  const where = (ws) =>
+    sentenceList(
+      [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
+        (a, b) => a.length - b.length || a.localeCompare(b),
+      ),
+    )
+  const lead = [...free].sort((a, b) => a.status.rank - b.status.rank)[0]
+  const freeWhere = where(free)
+  let line = `${lead.status.label}${freeWhere ? ` in ${freeWhere}` : ''}`
+  if (bound.length) {
+    const boundWhere = where(bound)
+    line += ` · still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+  }
+  return { line, mixed: bound.length > 0 }
 }
 
 export function jurisdictionPhrase(label) {
