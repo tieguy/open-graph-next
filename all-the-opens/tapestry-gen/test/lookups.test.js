@@ -346,6 +346,14 @@ test('a Getty page stating no CC0 keeps its card and loses its photograph', () =
   assert.match(entry.attribution.author, /rights reserved/)
 })
 
+test('an array-valued creator name contributes nothing, never a comma-joined string', () => {
+  // These documents carry array-valued names elsewhere (locationCreated.name),
+  // and this is the ordinary-article path — a shape drift must not put
+  // "Vincent,van Gogh" on a public card.
+  const entry = gettyEntryFrom({ name: 'A work', creator: [{ name: ['Vincent', 'van Gogh'] }], temporal: '1889' })
+  assert.equal(entry.description, '1889')
+})
+
 test('a Getty page with no record or no title makes no entry', () => {
   assert.equal(gettyEntryFrom(null), null)
   assert.equal(gettyEntryFrom({}), null)
