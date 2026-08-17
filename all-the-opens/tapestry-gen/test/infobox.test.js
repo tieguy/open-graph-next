@@ -460,3 +460,20 @@ test('the panel\u2019s Wikipedia rows re-base their article links in standalone 
   const { rail } = bandParts(band, new Map(), 'https://en.wikipedia.org/wiki/')
   assert.match(rail, /href="https:\/\/en\.wikipedia\.org\/wiki\/Rembrandt"/)
 })
+
+test('holder furniture never reaches a non-lede band, whatever the band carries', () => {
+  // Both renderers read b.holder; if a page-wide value ever leaks onto a
+  // section band (it did once \u2014 an await collapse in discover), the panel
+  // must still not render there. The guard lives in bandParts.
+  const band = { ...holderLede(), id: 's3', title: 'Reception' }
+  // The record carries a requiredStatement so all three furniture pieces
+  // are genuinely reachable and each absence assertion can fail.
+  band.holder = {
+    ...band.holder,
+    record: { ...band.holder.record, requiredStatement: 'Photo: SMK Open' },
+  }
+  const { rail } = bandParts(band, new Map(), '/wiki/')
+  assert.doesNotMatch(rail, /holder-panel/)
+  assert.doesNotMatch(rail, /class="zoom"/)
+  assert.doesNotMatch(rail, /<p class="req-statement">/)
+})

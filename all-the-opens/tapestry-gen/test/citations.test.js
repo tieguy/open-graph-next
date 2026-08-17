@@ -200,12 +200,13 @@ test('citationCoverage buckets unchecked ISBNs instead of calling them closed', 
 
 test('pageCitations sums the per-band tallies the bands now carry', () => {
   const bands = [
-    { citations: { total: 10, open: 2, cataloged: 1, linked: 6, unchecked: 1 }, papers: { total: 3, open: 1 } },
-    { citations: { total: 5, open: 0, cataloged: 2, linked: 3, unchecked: 0 }, papers: { total: 2, open: 2 } },
+    { citations: { total: 10, open: 2, cataloged: 1, linked: 6, unchecked: 1, searched: true }, papers: { total: 3, open: 1 } },
+    { citations: { total: 5, open: 0, cataloged: 2, linked: 3, unchecked: 0, searched: true }, papers: { total: 2, open: 2 } },
     {}, // a band that cited nothing must not break the sum
   ]
   assert.deepEqual(pageCitations(bands), {
     total: 15, open: 2, cataloged: 3, linked: 9, unchecked: 1, papers: { total: 5, open: 3 },
+    searched: true,
   })
 })
 
@@ -278,4 +279,34 @@ test('applyAccess lands verdicts on every candidate; the tally can then count a 
   assert.equal(a.access?.availability, b.access?.availability)
   const tally = citationCoverage([a], volumes)
   assert.equal(tally.total, 1)
+})
+
+test('when no access lookup ran, the negative never prints and the whole list is "not checked"', () => {
+  // A holder page\u2019s access lookups sit out entirely: no search happened, so
+  // \u201cWe could not find a free copy\u201d \u2014 which claims one did \u2014 must not stand,
+  // and the could-not-check line speaks for every cited work, not only the
+  // ISBN-carrying ones the unchecked set can name. This is the tally shape
+  // the pipeline actually produces: searched false, unchecked near zero.
+  const text = citationHeadline({ total: 30, open: 0, cataloged: 0, unchecked: 1, papers: { total: 12, open: 0 }, searched: false })
+  assert.doesNotMatch(text, /could not find a free copy/)
+  assert.match(text, /30 we could not check this time\./)
+  // The papers clause claims a search too — "we found none free to read"
+  // must not print when no lookup ran; the line above covers the papers.
+  assert.doesNotMatch(text, /we found none free to read/)
+  assert.doesNotMatch(text, /research paper/)
+})
+
+test('an ordinary page keeps the negative when a search ran and found nothing', () => {
+  const text = citationHeadline({ total: 5, open: 0, cataloged: 0, unchecked: 0, papers: { total: 0, open: 0 } })
+  assert.match(text, /We could not find a free copy of any of them\./)
+})
+
+test('citationCoverage and pageCitations carry the searched fact through', () => {
+  const bands = [
+    { citations: citationCoverage([{ isbn: null }], new Map(), new Set(), { searched: false }) },
+    { citations: citationCoverage([{ isbn: null }], new Map(), new Set(), { searched: false }) },
+  ]
+  assert.equal(pageCitations(bands).searched, false)
+  bands.push({ citations: citationCoverage([], new Map(), new Set()) })
+  assert.equal(pageCitations(bands).searched, true)
 })

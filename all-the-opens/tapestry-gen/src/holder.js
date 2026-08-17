@@ -65,3 +65,27 @@ export function selectHolder(claims) {
   const { _collection, ...picked } = hangsThere ?? present[0]
   return picked
 }
+
+// Which of an anchor’s partner statements a single-institution page may
+// dispatch. Applied BEFORE any request is built — no request is made, not
+// merely no card rendered; politeness is part of the point. A museum holder
+// keeps only its own property’s lookup, so an anchor carrying the holder’s
+// id still cards; a manifest holder keeps none — an anchor’s P6108 points
+// at whatever institution holds THAT object, and a two-party page must not
+// fetch third institutions’ records. Everything else — the Smithsonian’s
+// P195+P217 pair, taxa, occurrence maps, coordinates — drops with them.
+// The values are src/statements.js’s binding names (P4610 binds as ‘aic’
+// there — the documented seam; the partner key stays ‘artic’ everywhere
+// else). No entry for ‘iiif’ is deliberate.
+export const HOLDER_STATEMENT_VARS = new Map([
+  ['rijks', 'rijks'],
+  ['met', 'met'],
+  ['artic', 'aic'],
+])
+
+export function holderStatements(stmts, holder) {
+  if (!holder) return stmts
+  const keep = HOLDER_STATEMENT_VARS.get(holder.partner)
+  if (!keep || !(keep in stmts)) return {}
+  return { [keep]: stmts[keep] }
+}

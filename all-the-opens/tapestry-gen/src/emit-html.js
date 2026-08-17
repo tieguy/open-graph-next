@@ -991,7 +991,12 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // renamed source bar) can never reach a band that has no holder context.
   // Both renderers therefore agree by construction; page-level furniture
   // (masthead, legends, panel) reads the page-level holder instead.
-  const holder = b.holder ?? null
+  // Defense in depth beside discover's lede-only attach: holder furniture
+  // (the zoom link, the requiredStatement, the renamed source bar, the
+  // merged panel) belongs to the lede band alone, whatever a band object
+  // carries — both renderers read b.holder, so anything attached to a band
+  // is page furniture unless this guard says otherwise.
+  const holder = b.id === 'slede' ? (b.holder ?? null) : null
   const nameFor = buildNameFor(holder)
   // The hero comes out of the entries before they are shelved, so it is never
   // both hoisted and carded. A section whose only find becomes its hero has no

@@ -33,7 +33,11 @@ fires it today. Suppression precedent: keyless DPLA/Europeana already
 ## Task 1: Suppress non-holder lookups at their dispatch sites
 
 **Files:**
-- Modify: `src/discover.js`
+- Modify: `src/discover.js`, `src/holder.js` (the dispatch filter),
+  `src/citations.js` (the searched fact), `src/statements.js` (an export
+  for the completeness test), `src/emit-html.js` and `test/infobox.test.js`
+  (the second layer of the lede-only rule: bandParts refuses holder
+  furniture on any non-lede band), their tests, and this plan file
 
 **Step 1:** Thread the resolved holder into the discovery flow (it already
 exists as `holderPromise`; band lookups that must consult it await it — it
@@ -59,6 +63,16 @@ Each gate is one early-return consulting the holder context; follow the
 existing keyless-skip shape so a gated lookup is indistinguishable from an
 absent key downstream.
 
+**The iiif acceptance could not be run (2026-08-17):** no manifest-held
+article passing the Phase 2 gate was found among the candidates tried —
+Laocoön and His Sons fails `no-institution`, Christ as the Suffering
+Redeemer fails `no-object-page`, The Little Mermaid resolves no holder —
+consistent with the Phase 2 inspection window's 0/30 pass rate. The pure
+dispatch filter (holderStatements: iiif keeps nothing) and its integration
+(statementEntries over an empty map builds no jobs) are tested; the live
+request-tally acceptance transfers to the Phase 7 QA window and rides the
+operator's pending decision on the iiif lane.
+
 **The iiif holder's scope rule:** on a manifest-held page the holder's
 "collection" is not enumerable from the graph the way a museum's is — a
 P6108-restricted works-by-creator query returns works held by MANY
@@ -75,7 +89,28 @@ Wikimedia/WDQS hosts plus the manifest's own host(s).
 ```bash
 HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "The Night Watch"
 P=demo/spike-the-night-watch.html
-grep -c 'dp\.la\|digitalnz\|europeana\|openalex\|openlibrary\.org\|archive\.org\|courtlistener\|openstreetmap' $P   # expect 0
+# The search-family partners, by the link shapes their CARDS actually emit
+# (measured on flag-off renders where each partner cards) — an article's own
+# footnotes may cite these institutions' websites (the Milkmaid cites a
+# Europeana whitepaper), and article content always renders. OpenAlex leaves
+# no greppable host in a render; the cold-cache request tally below is its
+# only acceptance.
+grep -o 'dp\.la/item/\|dp\.la/search?subject=\|digitalnz\.org/records\|api\.europeana\.eu\|openlibrary\.org/books\|courtlistener\.com/opinion\|openstreetmap\.org/node/' $P | wc -l   # expect 0
+# The statement-family partners need their CARD link shapes, which article
+# prose never contains — expect 0 for every shape but the holder's own:
+grep -o 'metmuseum\.org/art/collection/search/\|artic\.edu/artworks/\|n2t\.net/ark:/65665/\|inaturalist\.org/taxa/\|gbif\.org/occurrence' $P | wc -l
+# archive.org (and any host the article itself cites, e.g. a museum's own
+# exhibition pages in footnotes) is compared as a URL SET against a flag-off
+# render — article content is identical in both; partner cards are not:
+WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "The Night Watch"   # flag OFF
+grep -o 'archive\.org[^"]*' demo/spike-the-night-watch.html | sort > /tmp/off.urls
+HOLDER_PAGE=1 WIKIMEDIA_UA_CONTACT=luis@lu.is node spike.js "The Night Watch"
+grep -o 'archive\.org[^"]*' demo/spike-the-night-watch.html | sort > /tmp/on.urls
+diff /tmp/off.urls /tmp/on.urls
+# On The Night Watch, which cites no IA-held book, the diff is empty. In
+# general flag-on must be a SUBSET of flag-off, and every URL present only in
+# flag-off must be a suppressed IA card link (details/ or services/img/) —
+# the gate working, not a failure.
 ```
 
 And the request side: `spike.js` prints the per-host tally — flag-on, no
@@ -91,7 +126,7 @@ test exercises it — the spike greps above are the acceptance, per repo
 convention). Also verify the highest-risk regression directly: a flag-on
 render of a NON-work article (Ludwig Prandtl) is byte-identical to its
 flag-off render — the gates must be inert when there is no holder.
-**Commit** (`git add all-the-opens/tapestry-gen/src/discover.js` only).
+**Commit** (explicit paths: `src/discover.js`, `src/holder.js`, `src/citations.js`, `src/statements.js`, `src/emit-html.js`, their tests including `test/infobox.test.js`, and this plan file — the dispatch filter, the honest tally, and the renderer-side lede-only guard live beside the gates).
 
 ## Task 2: Holder-scoped works-by-creator shelf
 

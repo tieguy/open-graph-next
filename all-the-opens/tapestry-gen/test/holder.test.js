@@ -1,6 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
-import { bestRankValues, workClass, selectHolder } from '../src/holder.js'
+import { bestRankValues, workClass, selectHolder, holderStatements, HOLDERS, HOLDER_STATEMENT_VARS } from '../src/holder.js'
+import { MUSEUM_LOOKUPS } from '../src/statements.js'
 
 // Claims fixtures in wbgetentities shape. nightWatch mirrors Q219831 as read
 // 2026-08-16: P31 painting, Rijksmuseum id, two collections.
@@ -115,4 +116,37 @@ test('a manifest-only work selects the iiif candidate, which museums always outr
   assert.equal(selectHolder(manifestOnly).partner, 'iiif')
   const both = { ...manifestOnly, P3634: [statement('456')] }
   assert.equal(selectHolder(both).partner, 'met')
+})
+
+test('holderStatements keeps only the museum holder’s own lookup, before any request is built', () => {
+  const stmts = { met: '11417', aic: '111628', rijks: '200107928', iiif: 'https://x/m.json', inat: '1', gbif: '2', si: 'q', siName: 'NASM', coord: 'Point(1 2)' }
+  // The aic seam: partner ‘artic’ binds as ‘aic’ in statements.js.
+  assert.deepEqual(holderStatements(stmts, { partner: 'artic' }), { aic: '111628' })
+  assert.deepEqual(holderStatements(stmts, { partner: 'rijks' }), { rijks: '200107928' })
+  // A manifest holder dispatches nothing — an anchor’s P6108 points at
+  // whatever institution holds THAT object.
+  assert.deepEqual(holderStatements(stmts, { partner: 'iiif' }), {})
+  // No holder: everything passes through untouched.
+  assert.equal(holderStatements(stmts, null), stmts)
+  // Holder property absent on this anchor: nothing to dispatch.
+  assert.deepEqual(holderStatements({ inat: '1' }, { partner: 'met' }), {})
+})
+
+test('every museum holder has a real statement binding, and the manifest door has none', () => {
+  // Three lists must agree or a holder\u2019s own anchor cards silently vanish:
+  // HOLDERS (who can hold), HOLDER_STATEMENT_VARS (what may dispatch), and
+  // statements.js\u2019s bindings (what CAN dispatch). Completeness is a test,
+  // per the repo convention \u2014 a missing entry is a red test, never a silent
+  // degradation.
+  for (const h of HOLDERS) {
+    if (h.partner === 'iiif') {
+      assert.equal(HOLDER_STATEMENT_VARS.has('iiif'), false, 'iiif deliberately dispatches nothing')
+      continue
+    }
+    const v = HOLDER_STATEMENT_VARS.get(h.partner)
+    assert.ok(v, `${h.partner} missing from HOLDER_STATEMENT_VARS`)
+    const lookup = MUSEUM_LOOKUPS.find((p) => p.var === v)
+    assert.ok(lookup, `${v} is not a statements.js binding`)
+    assert.equal(lookup.property, h.property, `${h.partner}: property mismatch`)
+  }
 })

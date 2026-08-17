@@ -684,7 +684,7 @@ export function mapEntry(coord, label, osm = null) {
  * `tapestry-gen/CLAUDE.md`'s "Adding a data source" section for which shape
  * fits.
  */
-const MUSEUM_LOOKUPS = [
+export const MUSEUM_LOOKUPS = [
   { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },
   { var: 'aic', property: 'P4610', fetch: (v) => aicEntry(v) },
   { var: 'rijks', property: 'P13234', fetch: (v) => rijksEntry(v) },
