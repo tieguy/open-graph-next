@@ -130,3 +130,31 @@ test('the totals count everything held, which is what the disclosure claims', ()
   )
   assert.deepEqual(artworkTotals(recs), { met: 2, rijks: 1, aic: 0, iiif: 0, works: 3 })
 })
+
+test('the query can be restricted to a single property for holder pages', () => {
+  const url = decodeURIComponent(subjectArtworksUrl('Q5598', 1000, { property: 'P13234' }))
+  assert.match(url, /wdt:P13234/)
+  assert.doesNotMatch(url, /P3634|P4610|P6108/)
+  assert.doesNotMatch(url, /UNION/)
+})
+
+test('the unrestricted query is byte-unchanged — ordinary pages keep their cached responses', () => {
+  // The literal URL, pinned. A drift here re-keys every ordinary page's
+  // cached works-by-creator response; change it only with a Gotchas entry.
+  assert.equal(
+    subjectArtworksUrl('Q5598', 1000),
+    'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fwork%20%3FworkLabel%20%3Fmet%20%3Frijks%20%3Faic%20%3Fiiif%20%3Fsitelink%20WHERE%20%7B%20%3Fwork%20wdt%3AP170%20wd%3AQ5598%20.%20%7B%20%3Fwork%20wdt%3AP3634%20%3Fmet%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP13234%20%3Frijks%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP4610%20%3Faic%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP6108%20%3Fiiif%20%7D%20OPTIONAL%20%7B%20%3Fsitelink%20schema%3Aabout%20%3Fwork%20%3B%20schema%3AisPartOf%20%3Chttps%3A%2F%2Fen.wikipedia.org%2F%3E%20%7D%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%20%7D%20ORDER%20BY%20%3Fwork%20LIMIT%201000',
+  )
+})
+
+test('the P4610 restriction binds ?aic — the seam the partner key never crosses', () => {
+  // The boundary passes the PROPERTY (holder.property), never a partner
+  // key, so no artic→aic mapping exists to test; what must hold is that
+  // the restricted query binds the name artworkRows reads for P4610.
+  const url = decodeURIComponent(subjectArtworksUrl('Q5598', 1000, { property: 'P4610' }))
+  assert.match(url, /wdt:P4610 \?aic/)
+})
+
+test('an unknown restriction property throws rather than building an unread binding', () => {
+  assert.throws(() => subjectArtworksUrl('Q5598', 1000, { property: 'P9999' }), /no artworks binding/)
+})

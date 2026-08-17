@@ -150,7 +150,11 @@ pages). **Known seam, do not trip on it:** this module's internal partner
 table keys P4610 as `aic` while the manifest key and the entries' `source`
 are `artic` (`src/artworks.js:57-82`), and Phase 1's `HOLDERS` uses `artic`
 — map the holder's partner key to this module's internal key explicitly at
-the call boundary, with a test pinning the AIC case.
+the call boundary, with a test pinning the AIC case. (Implemented
+differently, deliberately: the boundary passes the PROPERTY, never a
+partner key, so no mapping exists to build — the module derives its
+binding from the property, and the test pins the P4610 restriction
+binding ?aic, the name artworkRows reads.)
 
 **Step 3: Wire in `src/discover.js`:** on a holder page, read the subject's
 creator (`bestRankValues(subject.claims, 'P170')`, first value) and run the

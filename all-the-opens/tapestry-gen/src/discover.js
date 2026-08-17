@@ -83,7 +83,7 @@ import {
 } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
-import { workClass, selectHolder, holderStatements } from './holder.js'
+import { workClass, selectHolder, holderStatements, bestRankValues } from './holder.js'
 import { fetchHolderRecord, gateFailure } from './holder-record.js'
 
 
@@ -1460,6 +1460,89 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return { opinion, thesis, works, scholarship, artworks, subjectQid }
   })
 
+  // The holder-scoped shelf: on a museum-holder page whose subject states a
+  // creator (P170), the creator’s other works at the SAME museum, found
+  // through the graph — the works-by-creator query restricted to the
+  // holder’s own property, no search API (the no-fuzzy rule). Deliberately
+  // separate from the lede extras: these entries’ author is the CREATOR,
+  // not the article’s subject, so they must never ride the subject-level
+  // loops (author rights, subject standings). A manifest holder gets no
+  // shelf — its “collection” is not enumerable from the graph (the recorded
+  // scope rule) — and the shelf lands on the one band that owns the
+  // creator’s anchor, the lede when none does.
+  // Gated BEFORE the page-wide pick is awaited: every band (the lede
+  // included) awaits this promise, and the lede is deliberately routed
+  // around the page-wide batches everywhere else — a non-holder page must
+  // never couple its hero band to the slowest global batch. Only a
+  // museum-holder page pays the coupling, where the exclusion set and the
+  // placement decision genuinely need the page-wide pick.
+  const holderShelfPromise = Promise.all([subjectPromise, holderPromise]).then(async ([subject, holder]) => {
+    if (!holder || holder.partner === 'iiif') return null
+    const [creatorQid] = bestRankValues(subject.claims, 'P170')
+    if (!creatorQid) return null
+    const [ledeOwn, pickedMap] = await Promise.all([ledePickedPromise, pickedPromise])
+    const creatorLabel = (await entityLabels([creatorQid])).get(creatorQid)
+    // entityLabels falls back to the bare QID when no English label exists,
+    // and a shelf headed "works by Q123456" is worse than no shelf — the
+    // same refusal artworkRows makes for the works themselves.
+    if (!creatorLabel || creatorLabel === creatorQid) return null
+    const shelf = await subjectArtworks(creatorQid, {
+      cap: WORKS_BY_SUBJECT,
+      // Every band's picked anchors, not only the lede's: an anchor already
+      // carding through its own band's statements must not card again here.
+      exclude: new Set([...ledeOwn, subject.qid, ...[...pickedMap.values()].flat()]),
+      fetchEntry: artworkFetcher,
+      property: holder.property,
+    }).catch((e) => {
+      console.error(`  holder shelf failed: ${e.message}`)
+      return null
+    })
+    if (!shelf?.entries.length) return null
+    // One placement decision, made once: the band owning the creator’s
+    // anchor, else the lede (or the first band, on a page without one).
+    let owner = units.find((u) => u.index === '0') ? '0' : (units[0]?.index ?? '0')
+    let ownerFound = false
+    for (const [unit, qids] of pickedMap) {
+      if ((qids ?? []).includes(creatorQid)) {
+        owner = unit.index
+        ownerFound = true
+        break
+      }
+    }
+    const museumName = MUSEUM_NAME[shelf.entries[0].source] ?? 'this museum'
+    const propName = PROP_NAME[holder.property] ?? holder.property
+    // Worded to what was computed: the anchor assignment picks at most two
+    // anchors per section, so "anchors on" is the knowable claim — "never
+    // links" would assert an absence nobody verified.
+    const placement = ownerFound
+      ? `The shelf sits beside the section this page anchors on ${creatorLabel}.`
+      : `No section on this page anchors on ${creatorLabel}, so the shelf sits at the top of the page.`
+    for (const e of shelf.entries) {
+      e.topic = `By ${creatorLabel}`
+      e.why = `Made by ${creatorLabel}, held by ${museumName}`
+      e.trace =
+        `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${creatorLabel} ` +
+        `created this work (P170), and that ${museumName} holds it, stating its ${propName}. ` +
+        `We asked the museum for its own record of it, and this is what came back. ${placement}`
+      e.fix = e._qid
+        ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
+        : fixOn('P170')
+    }
+    console.error(
+      `  holder shelf: ${shelf.entries.length} of ${shelf.total} works by ${creatorLabel} (${holder.partner}), band ${owner}`,
+    )
+    return {
+      entries: shelf.entries,
+      shown: shelf.entries.length,
+      total: shelf.total,
+      truncated: Boolean(shelf.truncated),
+      creatorLabel,
+      owner,
+      source: shelf.entries[0].source,
+      museumName,
+    }
+  })
+
   // ---- One task per unit: a band completes when ITS dependencies do. -------
   const bandTasks = units.map(async (unit) => {
     // A band waits only on the global batches it will actually read: a
@@ -1549,6 +1632,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
         ...extras.scholarship.entries,
         ...extras.artworks.entries,
       )
+    // The holder-scoped shelf, on the one band the placement decision named.
+    const holderShelf = await holderShelfPromise
+    if (holderShelf && unit.index === holderShelf.owner) {
+      entries.push(...holderShelf.entries)
+    }
     // The subject's own output — books Open Library files under them, papers
     // their ORCID vouches for, their thesis. Here the article's subject is the
     // AUTHOR, so what applies is their creator-level status: CopyClear's bots
@@ -1669,6 +1757,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // it is a sample of. The renderer matches on (source, topic), which is
     // exactly how it groups entries into shelves.
     const samples = []
+    // The holder shelf’s claim rides the band that shows it. The count is
+    // Wikidata’s and links nowhere (the museum-count badge rule).
+    if (holderShelf && unit.index === holderShelf.owner) {
+      samples.push({
+        source: holderShelf.source,
+        topic: `By ${holderShelf.creatorLabel}`,
+        shown: holderShelf.shown,
+        total: holderShelf.total,
+        text:
+          `A sample: ${holderShelf.shown} of ${holderShelf.total}${holderShelf.truncated ? '+' : ''} ` +
+          `work${holderShelf.total === 1 ? '' : 's'} by ${holderShelf.creatorLabel} ` +
+          `that Wikidata records ${holderShelf.museumName} as holding`,
+      })
+    }
     // Anchors whose holdings are too broad to sample: shown as one sentence
     // and a browse link instead of four arbitrary cards. See src/breadth.js.
     const broad = []

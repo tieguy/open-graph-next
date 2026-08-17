@@ -116,19 +116,54 @@ export function needsArtworksQuery(subjectClaims) {
  * It does NOT mean the work is visible on the article being rendered — that is
  * the whole point, these are the paintings the Wikipedia article does not show.
  */
-export function subjectArtworksUrl(qid, limit = ROW_LIMIT) {
-  const query =
-    `SELECT ?work ?workLabel ?met ?rijks ?aic ?iiif ?sitelink WHERE { ` +
-    `?work wdt:P170 wd:${qid} . ` +
-    `{ ?work wdt:P3634 ?met } UNION { ?work wdt:P13234 ?rijks } ` +
-    `UNION { ?work wdt:P4610 ?aic } UNION { ?work wdt:P6108 ?iiif } ` +
-    `OPTIONAL { ?sitelink schema:about ?work ; schema:isPartOf <https://en.wikipedia.org/> } ` +
-    `SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } } ` +
-    // Stable order so a warm re-render is byte-identical: WDQS makes no
-    // ordering promise of its own, and this shelf must not shuffle between
-    // runs off the same cache.
-    `ORDER BY ?work LIMIT ${limit}`
+export function subjectArtworksUrl(qid, limit = ROW_LIMIT, options = {}) {
+  const { property } = options
+  let query
+  if (property) {
+    // Restricted to a single property for holder pages: no UNION, just the one binding
+    const bindingName = propertyBindingName(property)
+    query =
+      `SELECT ?work ?workLabel ?${bindingName} ?sitelink WHERE { ` +
+      `?work wdt:P170 wd:${qid} . ` +
+      `?work wdt:${property} ?${bindingName} . ` +
+      `OPTIONAL { ?sitelink schema:about ?work ; schema:isPartOf <https://en.wikipedia.org/> } ` +
+      `SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } } ` +
+      `ORDER BY ?work LIMIT ${limit}`
+  } else {
+    // Unrestricted: all four properties via UNION
+    query =
+      `SELECT ?work ?workLabel ?met ?rijks ?aic ?iiif ?sitelink WHERE { ` +
+      `?work wdt:P170 wd:${qid} . ` +
+      `{ ?work wdt:P3634 ?met } UNION { ?work wdt:P13234 ?rijks } ` +
+      `UNION { ?work wdt:P4610 ?aic } UNION { ?work wdt:P6108 ?iiif } ` +
+      `OPTIONAL { ?sitelink schema:about ?work ; schema:isPartOf <https://en.wikipedia.org/> } ` +
+      `SERVICE wikibase:label { bd:serviceParam wikibase:language "en". } } ` +
+      // Stable order so a warm re-render is byte-identical: WDQS makes no
+      // ordering promise of its own, and this shelf must not shuffle between
+      // runs off the same cache.
+      `ORDER BY ?work LIMIT ${limit}`
+  }
   return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
+
+/**
+ * Map a Wikidata property to its binding name in the SPARQL result.
+ * This internal function handles the seam: P4610 uses 'aic' binding internally.
+ */
+function propertyBindingName(property) {
+  // Derived from PARTNERS so the mapping cannot drift from the bindings
+  // artworkRows reads. The documented seam rides along: the partner key is
+  // 'artic' everywhere else but 'aic' here; the boundary passes the
+  // PROPERTY, so no partner-key mapping is needed — the property is
+  // unambiguous.
+  const entry = PARTNERS.find(([, p]) => p === property)
+  if (!entry) {
+    // An unknown property would build a valid query whose binding nothing
+    // reads — an empty shelf with no error. That is a programming error,
+    // not a degradation.
+    throw new Error(`no artworks binding for property ${property}`)
+  }
+  return entry[0]
 }
 
 /**
@@ -212,9 +247,13 @@ export function artworkTotals(records) {
  * `fetchEntry(partnerKey, id, label)` is injected so this module stays free of
  * the per-partner fetchers (and so the pick logic above can be tested without
  * a network). A partner that throws costs its own card and never the shelf.
+ *
+ * On a single-institution holder page, `options.property` restricts the query
+ * to that one property only (e.g., 'P13234' for Rijksmuseum). The unrestricted
+ * default keeps the UNION and matches the pre-change cached responses.
  */
-export async function subjectArtworks(qid, { cap, exclude, fetchEntry }) {
-  const body = await getJson(subjectArtworksUrl(qid))
+export async function subjectArtworks(qid, { cap, exclude, fetchEntry, property }) {
+  const body = await getJson(subjectArtworksUrl(qid, ROW_LIMIT, property ? { property } : {}))
   const records = artworkRows(body)
   // Over-pick, then walk the list until `cap` cards actually exist.
   //
