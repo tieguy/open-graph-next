@@ -115,10 +115,13 @@ moment the gate fails, the foreign hosts return.
   one institution (`provider`/`logo` absent or plural), and the design
   forbids a masthead reading "Wikipedia + IIIF collections".
 - **non-pd-rights 1** — the manifest states no open rights.
-- **several-institutions 0 · no-image 0 · no-object-page 0** — the
-  Phase 2 window's other three legs, unobserved in this sample: a
-  manifest that got far enough to name one institution also carried an
-  image and a homepage every time here.
+- **several-institutions 0** — an observed zero: six manifests parsed
+  and reached the institution leg (14 minus the 8 `no-record`), and
+  none named a plural provider.
+- **no-image 0 · no-object-page 0** — not reached in this sample. The
+  gate stops at the first failing leg, and the one manifest that got
+  past the institution leg stopped at rights, so neither leg was
+  evaluated here — no evidence either way.
 
 This confirms the Phase 2 inspection window (0 of 30) at a second,
 independently drawn sample: the door is real but almost no manifest
