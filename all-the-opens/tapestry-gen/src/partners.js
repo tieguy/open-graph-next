@@ -212,6 +212,22 @@ export const PARTNERS = {
       cite: 'https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-launches-collection-online',
     },
   },
+  cleveland: {
+    name: 'Cleveland Museum of Art',
+    // The museum's own favicon serves 200 to non-browser clients (checked
+    // 2026-08-17), so no Commons stand-in is needed.
+    icon: 'https://www.clevelandart.org/favicon.ico',
+    hosts: ['clevelandart.org'],
+    friend: {
+      gives:
+        'The museum’s own record of a work — title, date, and a photograph — discovered through a Wikidata statement naming it.',
+      terms:
+        'Works out of copyright are released CC0 — data and images both; the per-object share_license_status flag is the museum’s own word.',
+      // The museum's Open Access page: CC0 on both images and data for
+      // public-domain works, announced January 2019 (read 2026-08-17).
+      cite: 'https://www.clevelandart.org/open-access',
+    },
+  },
   iiif: {
     // Not one institution but a door many institutions share: P6108 manifests
     // arrive from whichever library or museum holds the object.

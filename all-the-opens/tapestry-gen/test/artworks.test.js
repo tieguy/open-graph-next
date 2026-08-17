@@ -128,7 +128,7 @@ test('the totals count everything held, which is what the disclosure claims', ()
   const recs = artworkRows(
     body([row('Q1', { met: '1' }), row('Q2', { met: '2' }), row('Q3', { rijks: '3' })]),
   )
-  assert.deepEqual(artworkTotals(recs), { met: 2, rijks: 1, aic: 0, iiif: 0, works: 3 })
+  assert.deepEqual(artworkTotals(recs), { met: 2, rijks: 1, aic: 0, cleveland: 0, iiif: 0, works: 3 })
 })
 
 test('the query can be restricted to a single property for holder pages', () => {
@@ -145,6 +145,11 @@ test('the unrestricted query is byte-unchanged — ordinary pages keep their cac
     subjectArtworksUrl('Q5598', 1000),
     'https://query.wikidata.org/sparql?format=json&query=SELECT%20%3Fwork%20%3FworkLabel%20%3Fmet%20%3Frijks%20%3Faic%20%3Fiiif%20%3Fsitelink%20WHERE%20%7B%20%3Fwork%20wdt%3AP170%20wd%3AQ5598%20.%20%7B%20%3Fwork%20wdt%3AP3634%20%3Fmet%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP13234%20%3Frijks%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP4610%20%3Faic%20%7D%20UNION%20%7B%20%3Fwork%20wdt%3AP6108%20%3Fiiif%20%7D%20OPTIONAL%20%7B%20%3Fsitelink%20schema%3Aabout%20%3Fwork%20%3B%20schema%3AisPartOf%20%3Chttps%3A%2F%2Fen.wikipedia.org%2F%3E%20%7D%20SERVICE%20wikibase%3Alabel%20%7B%20bd%3AserviceParam%20wikibase%3Alanguage%20%22en%22.%20%7D%20%7D%20ORDER%20BY%20%3Fwork%20LIMIT%201000',
   )
+})
+
+test('the P11110 restriction binds ?cleveland — same seam, no key mismatch', () => {
+  const url = decodeURIComponent(subjectArtworksUrl('Q5598', 1000, { property: 'P11110' }))
+  assert.match(url, /wdt:P11110 \?cleveland/)
 })
 
 test('the P4610 restriction binds ?aic — the seam the partner key never crosses', () => {

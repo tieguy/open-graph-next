@@ -48,6 +48,13 @@ export function aicRecordUrl(id) {
 }
 
 /**
+ * Build the URL for fetching a Cleveland Museum of Art catalog record.
+ */
+export function clevelandRecordUrl(id) {
+  return `https://openaccess-api.clevelandart.org/api/artworks/${encodeURIComponent(id)}`
+}
+
+/**
  * Gate check: returns null if record passes all gate legs, else the name of the first failed leg.
  * Gate legs, in order: record exists, institution (present and single), public-domain rights, image URL, object page.
  */
@@ -143,6 +150,42 @@ export function aicRecordFrom(body) {
     imageUrl,
     href: d?.id ? `https://www.artic.edu/artworks/${d.id}` : null,
     institution: PARTNERS.artic.name,
+  }
+}
+
+/**
+ * The Cleveland Museum of Art's catalog record as a normalized holder-record shape.
+ * Gate: rights.publicDomain true, imageUrl present, href present, institution present.
+ * The record rides a {data} wrapper; share_license_status is the museum's own
+ * per-object CC0 flag, and images.web is the ~650px display derivative.
+ */
+export function clevelandRecordFrom(body) {
+  if (!body || typeof body !== 'object') return null
+
+  const d = body?.data
+  if (!d || typeof d !== 'object') return null
+
+  const isPublicDomain = d.share_license_status === 'CC0'
+  const imageUrl = isPublicDomain ? nullIfEmpty(d.images?.web?.url) : null
+
+  return {
+    partner: 'cleveland',
+    id: String(d.id ?? ''),
+    title: nullIfEmpty(d.title),
+    creator: nullIfEmpty(d.creators?.[0]?.description),
+    date: nullIfEmpty(d.creation_date),
+    medium: nullIfEmpty(d.technique),
+    dimensions: nullIfEmpty(d.measurements),
+    accession: nullIfEmpty(d.accession_number),
+    credit: nullIfEmpty(d.creditline),
+    rights: {
+      publicDomain: isPublicDomain,
+      label: isPublicDomain ? 'CC0' : null,
+      uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
+    },
+    imageUrl,
+    href: nullIfEmpty(d.url),
+    institution: PARTNERS.cleveland.name,
   }
 }
 
@@ -307,6 +350,7 @@ export async function fetchHolderRecord(holder) {
   try {
     if (holder.partner === 'met') return metRecordFrom(await getJson(metRecordUrl(holder.id)))
     if (holder.partner === 'artic') return aicRecordFrom(await getJson(aicRecordUrl(holder.id)))
+    if (holder.partner === 'cleveland') return clevelandRecordFrom(await getJson(clevelandRecordUrl(holder.id)))
     if (holder.partner === 'rijks') return rijksRecordFrom(...(await rijksRecordObjects(holder.id)))
     if (holder.partner === 'iiif') return iiifRecordFrom(await getJson(holder.id), holder.id)
     console.error(`  holder record: no fetcher for partner ${holder.partner}`)

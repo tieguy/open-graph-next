@@ -107,7 +107,7 @@ const SHOWCASE = [
 // src/partners.js.
 const FRIEND_GROUPS = [
   { group: 'Books and papers', slugs: ['internet_archive', 'openlibrary', 'openalex', 'arxiv'] },
-  { group: 'Museums and image collections', slugs: ['met', 'artic', 'rijks', 'iiif', 'smithsonian'] },
+  { group: 'Museums and image collections', slugs: ['met', 'artic', 'rijks', 'cleveland', 'iiif', 'smithsonian'] },
   { group: 'Union catalogs', slugs: ['dpla', 'europeana', 'digitalnz'] },
   { group: 'The living world and the map', slugs: ['inaturalist', 'gbif', 'openstreetmap'] },
   { group: 'The public record', slugs: ['free_law'] },

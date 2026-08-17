@@ -709,6 +709,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | The Met | `isPublicDomain` (its CC0 flag) | read |
 | Art Institute | `is_public_domain` | read |
 | Rijksmuseum | `subject_to` on the VisualItem | read — see the trap below |
+| Cleveland Museum of Art | `share_license_status` per object (its CC0 flag) | read |
 | iNaturalist | `license_code` per photo | read |
 | Free Law | none needed — 17 USC §105 | public-domain mark, stated |
 | Open Library | `ebook_access` per work | read; overrides creator status |
@@ -1634,6 +1635,13 @@ the politeness claim is checkable after a run rather than merely asserted here.
   generator can reach a host. m3api's own cookie dispatcher would bypass that
   proxy and hang — `src/mw.js` drops it whenever `NODE_USE_ENV_PROXY` is set.
 - First run needs network (fills `.cache`); reruns are offline.
+- **The partner-statements WDQS query gained `?cleveland` (P11110) on
+  2026-08-17**, so every cached `partnerStatements` response predating that is
+  keyed to the old URL and will be refetched once. Same request COUNT — the
+  branch rides the query WDQS was already answering — but a warm cache goes
+  cold for that lookup exactly once. The works-by-creator query is deliberately
+  NOT widened: its unrestricted URL is pinned by a test, and Cleveland reaches
+  it only through the holder-shelf restriction (`{ property: 'P11110' }`).
 - **The AIC `fields` list was widened on 2026-08-16** (`medium_display,
   dimensions,main_reference_number,credit_line`), so every cached AIC response
   predating that is keyed to the old URL and will be refetched once. Same

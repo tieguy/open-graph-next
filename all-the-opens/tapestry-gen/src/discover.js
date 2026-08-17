@@ -63,7 +63,7 @@ import {
 } from './scholarly.js'
 import {
   aicEntry,
-  metEntry,
+  metEntry, clevelandEntry,
   needsRightsQuery,
   partnerStatements,
   PROP_NAME,
@@ -459,6 +459,7 @@ const artworkFetcher = (via, id, label) => {
   if (via === 'met') return metEntry(id)
   if (via === 'rijks') return rijksEntry(id)
   if (via === 'aic') return aicEntry(id)
+  if (via === 'cleveland') return clevelandEntry(id)
   return iiifEntry(id, label)
 }
 

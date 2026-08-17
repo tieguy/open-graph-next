@@ -18,20 +18,23 @@ import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
 import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
-import { metRecordUrl, aicRecordUrl } from './holder-record.js'
+import { metRecordUrl, clevelandRecordUrl, aicRecordUrl } from './holder-record.js'
 
 /** Properties this lookup reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
+const VARS = ['met', 'aic', 'rijks', 'cleveland', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?rijks ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?sicoll ?siinv WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?rijks ?cleveland ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?sicoll ?siinv WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     // P13234: the Rijksmuseum's own object id (added 2026-08-06) — same
     // object-level shape as the Met and AIC ids above, and the best-answering
     // of the three on art-heavy articles. See src/rijks.js.
     'OPTIONAL { ?item wdt:P13234 ?rijks } ' +
+    // P11110: the Cleveland Museum of Art's own object id (added 2026-08-17,
+    // the Phase 6 probe's cleanest surface — keyless, CC0, record-by-ID).
+    'OPTIONAL { ?item wdt:P11110 ?cleveland } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
     'OPTIONAL { ?item wdt:P402 ?osmr } OPTIONAL { ?item wdt:P10689 ?osmw } ' +
@@ -89,7 +92,7 @@ export function needsPlaceDefunctQuery(statements) {
  * about the wrong thing.
  */
 export function needsRightsQuery(statements) {
-  return Boolean(statements?.met || statements?.aic || statements?.rijks || statements?.iiif)
+  return Boolean(statements?.met || statements?.aic || statements?.rijks || statements?.cleveland || statements?.iiif)
 }
 
 /**
@@ -522,6 +525,35 @@ export async function aicEntry(id) {
   return aicEntryFrom(await getJson(aicRecordUrl(id)))
 }
 
+export function clevelandEntryFrom(body) {
+  const d = body?.data
+  if (!d?.title) return null
+  const pd = d.share_license_status === 'CC0'
+  return {
+    source: 'cleveland',
+    title: d.title,
+    description: [d.creators?.[0]?.description, d.creation_date].filter(Boolean).join(' · '),
+    // The web derivative (~650px), the museum's own display size — the
+    // full-resolution print/full assets stay behind the object-page link.
+    imageUrl: pd ? (d.images?.web?.url ?? null) : null,
+    href: d.url ?? null,
+    attribution: {
+      author: pd ? 'Cleveland Museum of Art · public domain (CC0)' : 'Cleveland Museum of Art · rights reserved',
+      license: null,
+    },
+    // share_license_status IS the museum's own per-object CC0 dedication —
+    // `copy`, stated, never a guess. A non-CC0 object gets no mark at all.
+    rights: pd
+      ? { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/zero/1.0/')) }
+      : undefined,
+    _via: 'P11110',
+  }
+}
+
+export async function clevelandEntry(id) {
+  return clevelandEntryFrom(await getJson(clevelandRecordUrl(id)))
+}
+
 // Wikipedia's own bar (Commons' licensing policy): CC0, public domain, CC BY,
 // and CC BY-SA are free content; CC BY-NC and CC BY-ND are not — NC and ND
 // are each a stronger restriction than the -SA Wikipedia itself runs under.
@@ -688,6 +720,7 @@ export const MUSEUM_LOOKUPS = [
   { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },
   { var: 'aic', property: 'P4610', fetch: (v) => aicEntry(v) },
   { var: 'rijks', property: 'P13234', fetch: (v) => rijksEntry(v) },
+  { var: 'cleveland', property: 'P11110', fetch: (v) => clevelandEntry(v) },
   // The manifest host is whichever institution holds the object; the
   // fetch rides that host's own queue like every other partner call.
   { var: 'iiif', property: 'P6108', fetch: (v, label) => iiifEntry(v, label) },
@@ -768,4 +801,5 @@ export const PROP_NAME = {
   // museum's own accession number. Named as the pair, because either alone
   // would be a different and weaker claim.
   P217: 'collection (P195) and inventory number (P217)',
+  P11110: 'Cleveland Museum of Art id (P11110)',
 }

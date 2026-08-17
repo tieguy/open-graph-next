@@ -188,7 +188,7 @@ test('a retracted open work says so, and says where the claim comes from', () =>
 
 test('wdqsUrl asks for every partner property over the anchor set', () => {
   const url = wdqsUrl(['Q1', 'Q2'])
-  for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
+  for (const p of ['P3634', 'P4610', 'P11110', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
     assert.ok(url.includes(p), p)
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
 })

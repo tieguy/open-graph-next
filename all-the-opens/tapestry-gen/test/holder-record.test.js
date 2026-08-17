@@ -8,6 +8,8 @@ import {
   gateFailure,
   metRecordUrl,
   aicRecordUrl,
+  clevelandRecordUrl,
+  clevelandRecordFrom,
 } from '../src/holder-record.js'
 
 test('metRecordUrl builds the URL the existing entry fetcher requests', () => {
@@ -560,4 +562,69 @@ test('rijksRecordFrom distinguishes public-domain mark from CC0 on catalogue tex
   // Rights should read the public-domain mark, not CC0
   assert.equal(record.rights.label, 'public domain')
   assert.equal(gateFailure(record), null)
+})
+
+test('clevelandRecordUrl builds the URL the entry fetcher requests', () => {
+  const url = clevelandRecordUrl('94979')
+  assert.equal(url, 'https://openaccess-api.clevelandart.org/api/artworks/94979')
+})
+
+test('clevelandRecordFrom reads the {data} envelope and passes every gate leg', () => {
+  // Trimmed from the live record of The Brierwood Pipe (read 2026-08-17):
+  // the API wraps the record in {data}, resolves P11110's accession-number
+  // values directly, and share_license_status is the museum's own per-object
+  // CC0 flag.
+  const record = clevelandRecordFrom({
+    data: {
+      id: 124040,
+      accession_number: '1944.524',
+      share_license_status: 'CC0',
+      title: 'The Brierwood Pipe',
+      creation_date: '1864',
+      technique: 'oil on canvas',
+      measurements: 'Unframed: 42.8 x 37.5 cm (16 7/8 x 14 3/4 in.)',
+      creditline: 'Mr. and Mrs. William H. Marlatt Fund',
+      url: 'https://clevelandart.org/art/1944.524',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg' } },
+      creators: [{ description: 'Winslow Homer (American, 1836–1910)' }],
+    },
+  })
+  assert.equal(record.partner, 'cleveland')
+  assert.equal(record.id, '124040')
+  assert.equal(record.title, 'The Brierwood Pipe')
+  assert.equal(record.creator, 'Winslow Homer (American, 1836–1910)')
+  assert.equal(record.date, '1864')
+  assert.equal(record.medium, 'oil on canvas')
+  assert.equal(record.dimensions, 'Unframed: 42.8 x 37.5 cm (16 7/8 x 14 3/4 in.)')
+  assert.equal(record.accession, '1944.524')
+  assert.equal(record.credit, 'Mr. and Mrs. William H. Marlatt Fund')
+  assert.equal(record.rights.publicDomain, true)
+  assert.equal(record.rights.label, 'CC0')
+  assert.equal(record.imageUrl, 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg')
+  assert.equal(record.href, 'https://clevelandart.org/art/1944.524')
+  assert.equal(record.institution, 'Cleveland Museum of Art')
+  assert.equal(gateFailure(record), null)
+})
+
+test('clevelandRecordFrom with rights reserved has no image and fails the gate', () => {
+  // A non-CC0 record keeps its catalog fields but never its photograph:
+  // the museum's own flag is the gate, same stance as the Met and the AIC.
+  const record = clevelandRecordFrom({
+    data: {
+      id: 1,
+      share_license_status: 'Copyrighted',
+      title: 'A modern work',
+      url: 'https://www.clevelandart.org/art/x',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/x_web.jpg' } },
+    },
+  })
+  assert.equal(record.rights.publicDomain, false)
+  assert.equal(record.rights.label, null)
+  assert.equal(record.imageUrl, null)
+  assert.equal(gateFailure(record), 'non-pd-rights')
+})
+
+test('clevelandRecordFrom with null or an empty envelope returns null', () => {
+  assert.equal(clevelandRecordFrom(null), null)
+  assert.equal(clevelandRecordFrom({}), null)
 })

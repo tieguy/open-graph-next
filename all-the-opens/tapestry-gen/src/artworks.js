@@ -58,6 +58,10 @@ const PARTNERS = [
   ['met', 'P3634'],
   ['rijks', 'P13234'],
   ['aic', 'P4610'],
+  // Restricted holder-shelf queries only: the unrestricted UNION string is
+  // deliberately untouched (its URL is pinned — widening it re-keys every
+  // ordinary page's cached response, a separate decision).
+  ['cleveland', 'P11110'],
   ['iiif', 'P6108'],
 ]
 
@@ -79,6 +83,7 @@ export const MUSEUM_NAME = {
   // Not one institution: a P6108 manifest arrives from whichever library or
   // museum holds the object, and the manifest itself names which.
   iiif: 'the institution that holds it',
+  cleveland: 'the Cleveland Museum of Art',
 }
 
 /**
