@@ -14,7 +14,7 @@
  *
  * The titles come from `showcaseTitles()`, the same list the front page renders
  * its cards from — for the showcase there is deliberately no second copy to
- * keep in step. With HOLDER_FLAGSHIPS set the walk covers the holder
+ * keep in step. With HOLDER_FLAGSHIPS=1 the walk covers the holder
  * experiment's flagship articles instead (tools/holder-flagships.mjs), one
  * per wired museum holder, against a HOLDER_PAGE=1 server.
  *

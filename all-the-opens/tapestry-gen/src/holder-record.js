@@ -381,15 +381,6 @@ export function iiifRecordFrom(manifest, manifestUrl) {
 }
 
 /**
- * Fetch a holder's catalog record from the museum's API.
- * Returns a normalized record (passing or failing the gate), or null on fetch failure.
- *
- * Failure semantics:
- * - A throw on the gate-field path → log to stderr → null.
- * - rijks: a failed secondary hop leaves those fields null (implemented in rijksRecordObjects);
- *   this catch is all-or-nothing — it also swallows a transform bug, logged as 'holder record failed'.
- */
-/**
  * One fetch recipe per partner that can hold a page. Keyed by HOLDERS'
  * partner names and exported so completeness is a test: a HOLDERS row
  * without a recipe here would log-and-null on every page it selects, a
@@ -404,9 +395,20 @@ export const RECORD_FETCHERS = {
   iiif: async (holder) => iiifRecordFrom(await getJson(holder.id), holder.id),
 }
 
+/**
+ * Fetch a holder's catalog record from the museum's API.
+ * Returns a normalized record (passing or failing the gate), or null on fetch failure.
+ *
+ * Failure semantics:
+ * - A throw on the gate-field path → log to stderr → null.
+ * - rijks: a failed secondary hop leaves those fields null (implemented in rijksRecordObjects);
+ *   this catch is all-or-nothing — it also swallows a transform bug, logged as 'holder record failed'.
+ */
 export async function fetchHolderRecord(holder) {
   try {
-    const fetcher = RECORD_FETCHERS[holder.partner]
+    // hasOwn, not a bare lookup: a plain object resolves inherited keys, so
+    // a partner named 'toString' would otherwise pass as a fetcher.
+    const fetcher = Object.hasOwn(RECORD_FETCHERS, holder.partner) ? RECORD_FETCHERS[holder.partner] : null
     if (fetcher) return await fetcher(holder)
     console.error(`  holder record: no fetcher for partner ${holder.partner}`)
     return null

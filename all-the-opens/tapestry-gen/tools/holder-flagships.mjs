@@ -7,7 +7,7 @@
 //
 // Next to the census tool on purpose: this list and the census file are the
 // experiment's two checked-in populations, and neither is read at request
-// time. warm.js walks this list only when HOLDER_FLAGSHIPS is set — the
+// time. warm.js walks this list only when HOLDER_FLAGSHIPS=1 — the
 // production showcase list (showcaseTitles) is untouched.
 // Structured as (partner, title) so completeness is a test, not a comment:
 // test/census.test.js asserts exactly one flagship per wired museum holder

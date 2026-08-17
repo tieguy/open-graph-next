@@ -703,6 +703,14 @@ test('gettyRecordFrom with no stated license keeps the record and fails the gate
   assert.equal(gateFailure(record), 'non-pd-rights')
 })
 
+test('a Getty page URL with a trailing slash still yields the id, never an empty string', () => {
+  const record = gettyRecordFrom({
+    name: 'A work',
+    url: 'https://www.getty.edu/art/collection/object/103JNH/',
+  })
+  assert.equal(record.id, '103JNH')
+})
+
 test('gettyRecordFrom with null or a non-object returns null', () => {
   assert.equal(gettyRecordFrom(null), null)
   assert.equal(gettyRecordFrom('html'), null)

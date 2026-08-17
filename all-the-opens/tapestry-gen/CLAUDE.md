@@ -1791,6 +1791,12 @@ the politeness claim is checkable after a run rather than merely asserted here.
   flagship warm list (`tools/holder-flagships.mjs`, one article per wired
   museum holder, completeness tested in `test/census.test.js`;
   `HOLDER_FLAGSHIPS=1 node warm.js <base>` walks it).
+- **Text-mode responses got their own cache key on 2026-08-17** (`getText` in
+  `src/http.js` hashes `text:` + URL), so every cached Getty object page
+  predating that is keyed to the old hash and will be refetched once. Same
+  request COUNT; the two `getText` callers are `gettyEntry` (ordinary pages
+  whose anchors carry P2582) and the Getty branch of `fetchHolderRecord`
+  (holder pages), so the one-time cold spot shows on `www.getty.edu` only.
 - **The partner-statements WDQS query gained `?cleveland` (P11110) and
   `?getty` (P2582) on 2026-08-17**, so every cached `partnerStatements`
   response predating that is keyed to the old URL and will be refetched once.
