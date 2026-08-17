@@ -229,6 +229,101 @@ test('the streamed lede fragment carries the box, so the mount script places it'
   assert.match(fragment, /<table class="infobox"/)
 })
 
+// ---------------------------------------- holder pages: merged panel in infobox slot
+
+test('on a holder page with an infobox, the lede slot holds the merged panel', () => {
+  const holderRecord = {
+    institution: 'Rijksmuseum',
+    creator: 'Rembrandt van Rijn',
+    date: '1642',
+    medium: 'Oil on canvas',
+    dimensions: '379.5 cm × 453.5 cm',
+    accession: 'SK-C-5',
+    rights: { label: 'Public domain' },
+  }
+  const { rail } = bandParts(
+    ledeBand({
+      infobox: {
+        html: '<table class="infobox"><tbody>' +
+          '<tr><th>Artist</th><td>Rembrandt van Rijn</td></tr>' +
+          '<tr><th>Date</th><td>1642</td></tr>' +
+          '</tbody></table>',
+        images: [],
+      },
+      holder: { record: holderRecord },
+    }),
+    new Map(),
+    '/wiki/',
+  )
+  // The holder panel replaces the plain infobox
+  assert.match(rail, /<table class="infobox holder-panel"/)
+  // Dual-attributed rows should be present (chip for Rijksmuseum)
+  assert.match(rail, /Rijksmuseum/)
+  // Wikipedia-attributed rows also present
+  assert.match(rail, /Wikipedia/)
+})
+
+test('on a holder page with NO infobox, the lede slot holds the record-derived panel', () => {
+  const holderRecord = {
+    institution: 'Rijksmuseum',
+    creator: 'Rembrandt van Rijn',
+    date: '1642',
+    medium: 'Oil on canvas',
+    accession: 'SK-C-5',
+    rights: { label: 'Public domain' },
+  }
+  const { rail } = bandParts(
+    ledeBand({
+      infobox: undefined,
+      holder: { record: holderRecord },
+    }),
+    new Map(),
+    '/wiki/',
+  )
+  // The panel still renders from the record alone
+  assert.match(rail, /<table class="infobox holder-panel"/)
+  assert.match(rail, /Rijksmuseum/)
+  assert.match(rail, /SK-C-5/)
+})
+
+test('on a holder page with an infobox showing a conflict, both values render with source chips', () => {
+  const holderRecord = {
+    institution: 'Rijksmuseum',
+    creator: 'Rembrandt van Rijn',
+    date: '1642',
+    medium: 'Oil on canvas',
+    // Note: dimensions differ from the infobox
+    dimensions: '379.5 cm × 453.5 cm',
+    accession: 'SK-C-5',
+    rights: { label: 'Public domain' },
+  }
+  const { rail } = bandParts(
+    ledeBand({
+      infobox: {
+        html: '<table class="infobox"><tbody>' +
+          '<tr><th>Dimensions</th><td>363 cm × 437 cm</td></tr>' +
+          '</tbody></table>',
+        images: [],
+      },
+      holder: { record: holderRecord },
+    }),
+    new Map(),
+    '/wiki/',
+  )
+  // Both Wikipedia and Rijksmuseum dimensions should be present
+  assert.match(rail, /363 cm/)
+  assert.match(rail, /379\.5 cm/)
+  assert.match(rail, /Wikipedia/)
+  assert.match(rail, /Rijksmuseum/)
+})
+
+test('on a non-holder page, the infobox behavior is unchanged', () => {
+  const { rail } = bandParts(ledeBand(), new Map(), '/wiki/')
+  assert.match(rail, /<table class="infobox"/)
+  assert.doesNotMatch(rail, /holder-panel/)
+  assert.match(rail, /own infobox/, 'the fold is present')
+})
+
 // ------------------------------------------------- the prose-budgeted gutter
 
 test('every image-bearing single floats into the gutter; galleries stay in the deck', () => {
@@ -276,4 +371,92 @@ test('a short section floats nothing extra, and a floated single still carries i
   const stub = bandParts({ ...band, blocks: [{ kind: 'p', text: 'Short.', html: '<p>Short.</p>' }] }, new Map(), '/wiki/')
   assert.doesNotMatch(stub.rail, /rail-more/)
   assert.match(stub.deck, /Map: Somewhere/)
+})
+
+// The real holder-lede shape: the band carries BOTH the holder context and
+// the holder-work entry, exactly as src/discover.js emits them together —
+// the fixture shape that exposed the hero-vs-panel either/or bug.
+const HOLDER_RECORD = {
+  partner: 'rijks', institution: 'Rijksmuseum', title: 'The Night Watch',
+  creator: 'Rembrandt van Rijn', date: '1642', medium: 'Oil on canvas',
+  dimensions: '379.5 cm \u00d7 453.5 cm', accession: 'SK-C-5',
+  imageUrl: 'https://example.test/nw.jpg',
+  href: 'https://www.rijksmuseum.nl/en/collection/SK-C-5',
+  rights: { publicDomain: true, label: 'Public domain' },
+}
+const HOLDER_PROSE = 'The Night Watch is a 1642 painting by Rembrandt van Rijn. '.repeat(30)
+const holderLede = (over = {}) => ({
+  id: 'slede', title: 'The Night Watch',
+  blocks: [{ kind: 'p', text: HOLDER_PROSE, html: `<p>${HOLDER_PROSE}</p>` }],
+  entries: [{ source: 'rijks', title: HOLDER_RECORD.title, imageUrl: HOLDER_RECORD.imageUrl,
+    href: HOLDER_RECORD.href, standing: 'holder-work',
+    attribution: { author: 'Rijksmuseum', license: null }, rights: { copy: null } }],
+  infobox: { html: '<table class="infobox"><tbody><tr><th>Dimensions</th><td>363 cm \u00d7 437 cm</td></tr></tbody></table>', images: [] },
+  holder: { partner: 'rijks', record: HOLDER_RECORD, medium: 'painting', property: 'P13234', subjectQid: 'Q219831' },
+  ...over,
+})
+
+test('a real holder lede shows the hero AND the merged panel, stacked', () => {
+  const { rail } = bandParts(holderLede(), new Map(), '/wiki/')
+  assert.match(rail, /hero-card/, 'the hero float is the work')
+  assert.match(rail, /<table class="infobox holder-panel"/, 'and the merged panel is in the lede slot')
+  assert.match(rail, /class="rail rail-panel"/, 'the panel aside clears the hero float')
+  // The panel shows the conflict: Wikipedia\u2019s dimensions and the museum\u2019s.
+  assert.match(rail, /363 cm/)
+  assert.match(rail, /379\.5 cm/)
+})
+
+test('no box at all and nothing to append renders no panel and no empty shell', () => {
+  // No infobox and a record with no append fields: the hero stands alone;
+  // nothing else renders in the slot.
+  const bare = { institution: 'Rijksmuseum', rights: {} }
+  const band = holderLede({
+    infobox: null,
+    holder: { partner: 'rijks', record: bare, medium: 'painting', property: 'P13234', subjectQid: 'Q219831' },
+  })
+  const { rail } = bandParts(band, new Map(), '/wiki/')
+  assert.match(rail, /hero-card/)
+  assert.doesNotMatch(rail, /holder-panel/)
+  assert.doesNotMatch(rail, /ib-slot/)
+})
+
+test('an empty panel with a box present falls back to the old suppression', () => {
+  // An infobox whose only row is furniture (image + caption) parses to zero
+  // fact rows, so the panel is empty even though `infobox` is present \u2014 the
+  // one shape that reaches the fallthrough. The holder hero (rank -1) then
+  // suppresses the plain box exactly as it did before the panel existed:
+  // ONE rail aside, no ib-slot, no second float. (No gate-passed record
+  // produces this today; every one carries a rights label.)
+  const bare = { institution: 'Rijksmuseum', rights: {} }
+  const band = holderLede({
+    infobox: { html: '<table class="infobox"><tbody><tr><td colspan="2" class="infobox-image"><img src="//u/x.jpg"><div class="infobox-caption">cap</div></td></tr></tbody></table>', images: [] },
+    holder: { partner: 'rijks', record: bare, medium: 'painting', property: 'P13234', subjectQid: 'Q219831' },
+  })
+  const { rail } = bandParts(band, new Map(), '/wiki/')
+  assert.equal((rail.match(/<aside/g) ?? []).length, 1)
+  assert.match(rail, /hero-card/)
+  assert.doesNotMatch(rail, /holder-panel/)
+  assert.doesNotMatch(rail, /ib-slot/)
+})
+
+test('a labelled image row\u2019s src swaps to inline bytes the box recorded', () => {
+  const url = 'https://upload.wikimedia.org/x/portrait.jpg'
+  const band = holderLede({
+    infobox: {
+      html: `<table class="infobox"><tbody><tr><th>Portrait</th><td><img src="${url}"><br>the painting</td></tr></tbody></table>`,
+      images: [url],
+    },
+  })
+  const inline = new Map([[url, 'data:image/jpeg;base64,AAA']])
+  const { rail } = bandParts(band, inline, '/wiki/')
+  assert.match(rail, /src="data:image\/jpeg;base64,AAA"/)
+  assert.doesNotMatch(rail, /src="https:\/\/upload\.wikimedia\.org/)
+})
+
+test('the panel\u2019s Wikipedia rows re-base their article links in standalone renders', () => {
+  const band = holderLede({
+    infobox: { html: '<table class="infobox"><tbody><tr><th>Artist</th><td><a href="/wiki/Rembrandt">Rembrandt van Rijn</a></td></tr></tbody></table>', images: [] },
+  })
+  const { rail } = bandParts(band, new Map(), 'https://en.wikipedia.org/wiki/')
+  assert.match(rail, /href="https:\/\/en\.wikipedia\.org\/wiki\/Rembrandt"/)
 })

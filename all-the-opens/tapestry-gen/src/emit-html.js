@@ -4,6 +4,7 @@ import { heroRank, pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 import { PARTNERS } from './partners.js'
+import { infoboxRows, mergedPanel } from './panel.js'
 
 /**
  * Open Graph / Twitter Card tags, shared by the front page and every article
@@ -1036,8 +1037,30 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // from losing to a subject find, and deliberately IS exempt from
   // FLOAT_MIN_PROSE: a stub's short prose wrapping beneath its infobox is
   // exactly what a real stub looks like.
+  //
+  // On a holder page the hero and the panel are NOT alternatives: the hero
+  // float is the work, the merged panel (Wikipedia infobox facts + holder
+  // record, each row attributed) takes the infobox's seat BELOW it, and both
+  // render — the merge is the point, not a fallback. A panel with nothing to
+  // say renders nothing: the slot behaves exactly as before the panel existed.
   let infobox = b.infobox ?? null
-  if (infobox && hero) {
+  let holderPanelHtml = null
+  if (holder) {
+    // On a holder page: build the merged panel from the infobox (if any) and the record
+    const rows = infoboxRows(infobox?.html)
+    const panel = mergedPanel(rows, holder.record)
+    if (panel) {
+      holderPanelHtml = panel
+      infobox = null // The merged panel takes the box's seat
+    }
+    // A panel with nothing to say falls through to the ordinary suppression
+    // below — the holder hero (rank -1) suppresses the plain box exactly as
+    // it did before the panel existed. (Unreachable today: every gate-passed
+    // record carries a rights label, so the panel always has at least that
+    // row. Kept honest for the partner that changes it.)
+  }
+  if (!holderPanelHtml && infobox && hero) {
+    // The normal rank-based suppression
     if (heroRank(hero) <= 3) {
       infobox = null
     } else {
@@ -1156,11 +1179,19 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // further down. Last, and in a different voice, they cannot be confused.
   const broad = broadNotes(b.broad, inline)
   const deckBody = disclosure + media + broad
-  const float = hero
+  // The hero and the merged panel stack in the rail (the panel aside clears
+  // the float). On non-holder pages hero and infobox are already mutually
+  // exclusive (the suppression branch above), so the concatenation emits
+  // exactly what the old either/or did.
+  const heroAside = hero
     ? `<aside class="rail">${heroCard(hero, inline, heroSample, holder, nameFor)}</aside>`
+    : ''
+  const boxAside = holderPanelHtml
+    ? mergedPanelAside(holderPanelHtml, b.infobox, inline, wikiBase)
     : infobox
       ? infoboxAside(infobox, inline, wikiBase)
       : ''
+  const float = heroAside + boxAside
   const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
   return {
     // Both go before the prose, the status first: it is about the whole
@@ -1216,6 +1247,25 @@ function infoboxAside(box, inline, wikiBase) {
     ? html.replace(/<\/tbody>\s*<\/table>\s*$/, `${row}</tbody></table>`)
     : html.replace(/<\/table>\s*$/, `${row}</table>`)
   return `<aside class="rail"><div class="ib-slot">${seated}</div></aside>`
+}
+
+/**
+ * The merged panel on holder pages: Wikipedia infobox facts + holder record,
+ * each row attributed to its source, conflicts shown side by side. Built from
+ * the sanitized infobox HTML and the holder record using mergedPanel().
+ */
+function mergedPanelAside(panelHtml, box, inline, wikiBase) {
+  // The panel's Wikipedia rows carry the article's own markup, so they get
+  // the same treatment the plain box gets: hrefs re-based for standalone
+  // renders, and a labelled image row's src swapped to inline bytes where
+  // the box recorded one. No fold — every row is already attributed. The
+  // rail-panel class clears the hero float above it so the two stack.
+  let html = relink(panelHtml, wikiBase)
+  for (const url of box?.images ?? []) {
+    const swapped = inline.get(url)
+    if (swapped) html = html.replaceAll(`src="${url}"`, `src="${escapeHtml(swapped)}"`)
+  }
+  return `<aside class="rail rail-panel"><div class="ib-slot">${html}</div></aside>`
 }
 
 /**
@@ -1747,6 +1797,7 @@ sup.ref a{color:var(--link)}
 
 /* Holder panel with merged infobox and record rows, each attributed to its source. */
 .infobox.holder-panel{margin:0 0 12px}
+.rail-panel{clear:right}
 /* Chips on rows: institution and Wikipedia source attribution, small muted labels. */
 .infobox-chip{display:inline-block;font-size:.65rem;font-weight:600;color:var(--manila-ink);
   background:var(--manila);border:1px solid var(--manila-rule);border-radius:4px;

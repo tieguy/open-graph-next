@@ -187,8 +187,13 @@ apart from the shared stylesheet rules;
 
 - `panel.test.js` passes: row parsing, dual attribution, pass-through,
   side-by-side conflict.
-- Flag-on Night Watch renders the merged panel; a real conflicting field
-  shows both values, labeled.
+- Flag-on Night Watch renders the merged panel. The conflict acceptance
+  runs on a Met page — `HOLDER_PAGE=1 node spike.js "Washington Crossing
+  the Delaware (1851 paintings)"` — whose record states dimensions; a real
+  conflicting field shows both values, labeled. (The Rijksmuseum record's
+  creator/medium/dimensions are not yet extracted from the Linked Art hops,
+  so the Night Watch panel has no conflict-capable field beyond the date,
+  which agrees.)
 - Flag-off renders byte-identical apart from the panel's shared stylesheet
   rules (pinned by the render suite's forward-guard hash); flag-on render of
   a non-work article byte-identical to its flag-off render; `npm test` green.
