@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-14
+Last verified: 2026-08-17
 
 ## Purpose
 
@@ -435,6 +435,98 @@ peers. Removing it took the P180 depicts lookup, the P373 category lookup,
 machinery existed for Commons alone. Commons now appears only in the
 visibility panel, named as the door. Page density is the cost, paid
 deliberately: Angkor Wat 107 cards → 15, Coral Gables 102 → 14.
+
+## Single-institution work pages — the holder experiment (2026-08-17)
+
+Where an article IS a museum-held painting or sculpture, the page stops being
+a multi-partner assembly and becomes a **two-party collaboration**: Wikipedia
+plus the one institution that holds the work. The masthead says so ("This
+page: Wikipedia + <institution>"), the work leads in the hero, the museum's
+own record of it merges with the Wikipedia infobox, and **every other partner
+sits out**. Design:
+`../docs/design-plans/2026-08-16-single-institution-work-pages.md`; the QA
+window that measured it: `../docs/2026-08-17-holder-page-qa.md`.
+
+**It is behind `HOLDER_PAGE=1` and off in production**, and flipping the
+default is the operator's decision on that QA document. `HOLDER_PAGE` is part
+of the page-cache build id (`src/page-cache.js`), so a flag-on and a flag-off
+render can never share a stored page.
+
+**Detection and selection are pure and cost nothing** (`src/holder.js`, over
+the subject claims `discover.js` already fetches; the module fetches nothing).
+`WORK_CLASSES` is direct P31 membership — painting (Q3305213), sculpture
+(Q860861) — deliberately WITHOUT the ancestry walk, because the census counted
+the population by direct P31 and the walk would sit on the lede's critical
+path. The measured cost is 35 articles whose subject is P31 of a subclass only
+(~2.4% of the population). `HOLDERS` is the precedence list: Rijksmuseum
+P13234, Met P3634, AIC P4610, Cleveland P11110, Getty P2582, and the IIIF door
+P6108 last. Where a work states several museum ids, the one whose museum
+matches the subject's P195 wins over precedence. **No fuzzy matching, here or
+downstream** — a work whose graph states no holder id gets no holder page.
+`bestRankValues` reads those claims at best rank by hand (preferred if any,
+else normal) because this path reads raw `wbgetentities` claims rather than
+`wdt:` — see Invariants.
+
+**The IIIF door yields a candidate, not a holder.** P6108 arrives from
+whichever institution holds that object, so the record fetch must resolve the
+manifest's own stated institution and a manifest naming none — or several —
+gets no holder page: the masthead must never read "Wikipedia + IIIF
+collections". Measured across two independently drawn windows, **0 of 44
+manifest-held work-articles clear the gate** (30 in the Phase 2 inspection, 14
+in the QA sample), mostly because the stated manifest URL does not answer with
+a parseable manifest or the manifest names no single provider. The lane stays wired at the cost of one
+manifest fetch before the page falls back; whether to accept, relax a leg, or
+retire the lane is a standing item.
+
+**One record shape, one gate** (`src/holder-record.js`). Each museum's catalog
+response normalizes to the same record — title, creator, date, medium,
+dimensions, accession, credit, rights, image, object page, institution — with
+missing fields null rather than invented. `gateFailure` returns the FIRST
+failing leg, in order: `no-record`, `no-institution` / `several-institutions`,
+`non-pd-rights`, `no-image`, `no-object-page`. Every failure ships the ordinary
+multi-partner page unchanged, which is why a refusal is never an error. The
+rights leg reads the museum's own per-object flag and nothing else — in the QA
+sample all six museum-lane refusals were modern works (Picasso, de Chirico,
+Klee, Rückriem, Domínguez) whose museums do not flag them public-domain.
+
+**Single-source discipline is enforced before a request is built, not after a
+card is dropped.** `holderStatements` filters an anchor's partner statements
+so no request is made at all: a museum holder keeps only its own property's
+lookup, a manifest holder keeps none, and the Smithsonian pair, taxa,
+occurrence maps and coordinates drop with them. `sitsOut` in `discover.js`
+suspends the rest — the citation access lookups, mappability, DPLA, Europeana,
+DigitalNZ, the scholarly batches, the Free Law opinion. Measured on the 25
+holder pages of the QA window: zero foreign partner URLs anywhere in
+enrichment markup, and the 42 that do appear all sit inside Wikipedia's own
+footnote bodies, which render `reference-text` verbatim by design.
+
+**"We could not look" must not render as "there is nothing there."**
+`citationCoverage` takes `{searched}` and `pageCitations` carries it up, so on
+a page whose access lookups sat out the visibility panel withholds the negative
+("We could not find a free copy of any of them") and says the works could not
+be checked this time. Carried as a fact rather than inferred from counts,
+because most citations hold no ISBN and a count cannot tell "asked and found
+nothing" from "never asked".
+
+**The hero and the merged panel render together — the merge is the point, not
+a fallback.** `heroRank` gains a tier above `subject-document` for
+`holder-work` (the page's reason for existing), and that entry is exempt from
+`FLOAT_MIN_PROSE` so a stub still leads with the work; the hero carries a
+labeled link out to the museum's own viewer and the museum's required
+statement where it has one. `src/panel.js` (pure) merges the sanitized
+Wikipedia infobox rows with the holder's record into one table, **attributed
+per source and showing disagreements side by side rather than resolving
+them** — 19 of the QA window's 25 panels showed at least one genuine
+two-party conflict. `FIELD_LABELS` is deliberately incomplete: an unmapped
+infobox label passes through unmerged. A conflict is normalized text only, so
+"363 cm × 437 cm" and "363 cm × 437 cm (142.9 in × 172.0 in)" differ — a real
+difference must show.
+
+**The related shelf asks the graph, not a museum search API.**
+`subjectArtworks(qid, {property})` restricts the works-by-creator query to the
+holder's own property, so the shelf is the creator's other works at the same
+museum. The unrestricted UNION URL is untouched and pinned by a test — see
+Gotchas for what that pin costs an ordinary page.
 
 ## Evidence classes (spike)
 
@@ -904,6 +996,11 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   now asked of EVERY candidate anchor on the page rather than the two per
   section picked blind. Answers Met objects (P3634), Art Institute of Chicago (P4610),
   **Rijksmuseum objects (P13234, `src/rijks.js`, added 2026-08-06)**,
+  **Cleveland Museum of Art objects (P11110, added 2026-08-17 — keyless, CC0,
+  record-by-id, the cleanest of five probed surfaces)**, **J. Paul Getty
+  Museum objects (P2582, `src/getty.js`, added 2026-08-17 — the record surface
+  is the object page's embedded JSON-LD, because `data.getty.edu` answers real
+  and bogus ids with the same 404)**,
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
   (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution
   with no per-partner code; Presentation v2 and v3 both parsed; best coverage
@@ -949,7 +1046,12 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   (`?work wdt:P170 ?subject`, UNION over P3634/P13234/P4610/P6108). One WDQS
   request; the picked works then ride their own partners' fetchers, so a
   painting reached this way renders identically to one reached through a
-  wikilink.
+  wikilink. Passing `{property}` builds the RESTRICTED variant instead — one
+  binding, no UNION — which is how a single-institution page gets the
+  creator's other works at its own holder and nowhere else; the binding name
+  is derived from the same `PARTNERS` list `artworkRows` reads, so it cannot
+  drift, and an unknown property throws rather than building a valid query
+  whose binding nothing reads.
 
   **It exists because the article's own links could not carry the question,
   and that is a structural fact rather than a ranking bug.** `proseLinks`
@@ -1257,6 +1359,12 @@ tally/line — moved here from `discover.js` 2026-08-04) → `hero` (which find
 leads the section) → `emit-html`.
 `src/html.js` holds `escapeHtml`, the one rule every renderer shares.
 
+On a single-institution page two more pure modules join the chain: `holder`
+(is this article a museum-held work, and whose?) runs off the subject's claims
+before any lookup and narrows what `discover` may dispatch, and `panel` merges
+the Wikipedia infobox with the holder's record for `emit-html`. Both fetch
+nothing; `holder-record` is where that half's network lives.
+
 ## Key Decisions
 
 - **The page wears MediaWiki's design language, hand-written** (2026-08-07/08,
@@ -1295,6 +1403,8 @@ leads the section) → `emit-html`.
   future DOM change cannot silently reorder it.
 - **The hero is picked by how directly it answers the section**, not by
   quality (`src/hero.js`, `pickHero`/`heroRank`, 2026-08-05). Tiers: the
+  holding institution's record of the very work the article is about, on a
+  single-institution page (2026-08-17 — the page's reason for existing) → the
   subject AS a document (Brown v. Board's opinion must not lose to a
   thumbnail) → a partner's record of the subject, illustrated → the same
   unillustrated → something the subject made → any illustrated record of
@@ -1305,7 +1415,9 @@ leads the section) → `emit-html`.
   picture nor the standing of a primary document gets NO float** and its prose
   runs full width — a lone text card blown up to 404px is the thin box this
   change exists to remove. The hero comes out of the entries before they are
-  shelved, so nothing is both hoisted and carded.
+  shelved, so nothing is both hoisted and carded. A `holder-work` hero is the
+  one entry exempt from `FLOAT_MIN_PROSE`: the page exists to show the
+  holder's record of the subject, so a stub leads with the work.
 - **A partner holding more than 300 items under a non-subject anchor gets a
   sentence and a browse link, not four cards** (`src/breadth.js`, `tooBroad` /
   `BROAD_ABOVE` / `broadNote`, 2026-08-05). The signal was already on the page
@@ -1533,6 +1645,21 @@ leads the section) → `emit-html`.
   unconditionally and none of the 47 items carries a Met/AIC/Rijksmuseum/IIIF
   identifier. Two tests hold this: one pins the exception to those four
   bindings, one asserts the filter.
+  **`bestRankValues` in `src/holder.js` is the one path that reads ranks by
+  hand**, and it obeys the same rule: holder detection reads raw
+  `wbgetentities` claims, where `wdt:`'s filtering is not available, so it
+  takes preferred values if any and normal otherwise — a deprecated museum id
+  can never select a holder, and a test asserts that. It returns entity- and
+  string-valued snaks only; a caller wanting a coordinate, date or quantity
+  must read the datavalue itself.
+- **The holder experiment changes nothing with the flag off.** With
+  `HOLDER_PAGE` unset, `src/discover.js` returns no holder before any work is
+  done and every render is byte-identical to one from before the experiment
+  existed. The flag is also part of the page-cache build id, so the two flag
+  states cannot serve each other's stored pages. Holder furniture — the zoom
+  link, the required statement, the renamed source bar, the merged panel — is
+  attached to the lede band and read back from `b.holder`, so it can never
+  reach a band that has no holder context.
 - **The footer's provenance is the caller's to state**, via `buildHtml({provenance})`.
   It was once hardcoded to the curated dataset, which made every live-discovery
   page contradict its own opening claim. Whatever goes there must be true of the
@@ -1737,6 +1864,32 @@ the politeness claim is checkable after a run rather than merely asserted here.
   Commons 2026-08-04.
 - `src/hero.js` — `pickHero`/`heroRank`: which of a section's finds is hoisted
   into the floated rail, and when a section gets no float at all.
+- `src/holder.js` — the detection and selection halves of the single-institution
+  page: `WORK_CLASSES`, `HOLDERS`, `bestRankValues`, `workClass`,
+  `selectHolder`, and `holderStatements`, the filter that decides which of an
+  anchor's partner lookups may be dispatched at all. Pure over a claims object;
+  fetches nothing. See the holder-experiment section for the reasoning.
+- `src/holder-record.js` — the network half: one normalized record shape per
+  museum (`metRecordFrom`, `aicRecordFrom`, `clevelandRecordFrom`,
+  `gettyRecordFrom`, `rijksRecordFrom`, `iiifRecordFrom`), the URL builders the
+  ordinary partner lookups in `statements.js` now share, `gateFailure` (the
+  first failing leg, or null), and the `fetchHolderRecord` dispatcher. Missing
+  fields are null; a normalizer never judges — the gate does. The institution
+  name comes from `PARTNERS[partner].name`, never a hardcoded display string.
+- `src/panel.js` — pure: the Wikipedia infobox and the holder's record merged
+  into one attributed table, conflicts shown side by side. `FIELD_LABELS` is
+  deliberately incomplete and unmapped labels pass through; holder-only fields
+  (accession, credit line, rights label) append in that order, and other holder
+  facts with no Wikipedia row are not shown.
+- `src/getty.js` — the J. Paul Getty Museum (P2582). The record surface is the
+  object page's embedded schema.org JSON-LD, not `data.getty.edu`, which
+  answers real and bogus ids with the same 404 — the refusing-to-talk shape the
+  probe control exists to catch. A bogus id serves a generic page with no
+  JSON-LD block, which is what keeps the two apart. `size` is genuinely absent
+  on some objects and carried as null; `creditText` is license boilerplate
+  rather than an object credit and stays unread. Images come off the stated
+  IIIF thumbnail with the size segment rewritten to `!800,800` — spec syntax,
+  not a guessed URL shape.
 - `src/breadth.js` — `tooBroad`/`broadNote`/`BROAD_ABOVE`: when a partner's
   holdings under an anchor are a category rather than a subject, so the shelf
   becomes a sentence and a browse link.
