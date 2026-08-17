@@ -15,9 +15,10 @@ fallback float renders today.
 **Scope:** Phase 4 of 7. Depends on Phases 2–3.
 
 **Codebase verified:** 2026-08-16. `extractInfobox` (`src/wikipedia.js:456`)
-returns the sanitized infobox as an HTML `<table>` (navbars, hidden rows,
-Kartographer, footnote markers, styles stripped; images hotlinked to
-Commons). The infobox fallback float renders around `src/emit-html.js:1126`
+returns `{html, images}`, or null when the article has no infobox. `html` is
+the sanitized infobox `<table>` (navbars, hidden rows, Kartographer, footnote
+markers, styles stripped; images hotlinked to Commons). The infobox fallback
+float renders around `src/emit-html.js:1126`
 per the 2026-08-08 infobox-retention design. This phase implements the
 recorded 2026-08-16 revision of that design **for holder pages only** — on
 every other page the furniture rule stands, so all changes are gated on the
@@ -156,8 +157,12 @@ design decision):
 merged panel where the plain infobox would have rendered or been withheld:
 the hero float is the work (Phase 3), and the panel sits as the lede's
 infobox slot — always present on holder pages (the merge is the point, not a
-fallback), built from `infoboxRows(extractInfobox(html))` + `holder.record`.
-Non-holder pages keep the 2026-08-08 behavior byte-for-byte.
+fallback), built from `infoboxRows(extractInfobox(html)?.html)` + `holder.record` —
+`extractInfobox` returns null when the article carries no infobox, and a
+holder page without one renders the panel from `holder.record` alone.
+Non-holder pages keep the 2026-08-08 behavior byte-for-byte, apart from the
+panel's stylesheet rules, which ride the shared STYLE constant on every page
+(the render suite's forward-guard hash pins them).
 
 The panel keeps the infobox's furniture status EXCEPT that its holder rows
 are the partner's data: the holder partner is already in `sourcesUsed` via
@@ -172,7 +177,8 @@ tests pin (the 2026-08-08 behavior).
 **Step 2: Verify:** flag-on Night Watch spike shows one panel with
 dual-attributed rows and a visible dimensions disagreement (Wikipedia says
 363 × 437 cm; the museum's record states its own figures — whatever the live
-values are, both must render when they differ). Flag-off byte-identical;
+values are, both must render when they differ). Flag-off byte-identical
+apart from the shared stylesheet rules;
 `npm test` green.
 
 **Step 3: Commit.**
@@ -183,5 +189,6 @@ values are, both must render when they differ). Flag-off byte-identical;
   side-by-side conflict.
 - Flag-on Night Watch renders the merged panel; a real conflicting field
   shows both values, labeled.
-- Flag-off renders byte-identical; flag-on render of a non-work article
-  byte-identical to its flag-off render; `npm test` green.
+- Flag-off renders byte-identical apart from the panel's shared stylesheet
+  rules (pinned by the render suite's forward-guard hash); flag-on render of
+  a non-work article byte-identical to its flag-off render; `npm test` green.

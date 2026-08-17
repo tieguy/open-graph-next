@@ -1745,6 +1745,15 @@ sup.ref a{color:var(--link)}
 .ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
   background:var(--warm);border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:4px 0 2px}
 
+/* Holder panel with merged infobox and record rows, each attributed to its source. */
+.infobox.holder-panel{margin:0 0 12px}
+/* Chips on rows: institution and Wikipedia source attribution, small muted labels. */
+.infobox-chip{display:inline-block;font-size:.65rem;font-weight:600;color:var(--manila-ink);
+  background:var(--manila);border:1px solid var(--manila-rule);border-radius:4px;
+  padding:1px 6px;margin-left:4px;white-space:nowrap}
+/* A conflict is two stacked rows; the second row's label cell is empty. */
+.infobox td.infobox-conflict{background:var(--faint);padding:3px 8px}
+
 /* The hero: the one thing the section wants a passing reader to see. It is a
    card, so everything true of a card stays true of it — it is just given the
    room to be looked at rather than scanned past. */

@@ -476,5 +476,6 @@ test('a non-holder render is byte-stable', async () => {
   ]
   const out = buildHtml({ title: 'Fixture', bands })
   const digest = createHash('sha256').update(out).digest('hex')
-  assert.equal(digest, '6e72c0e25e952c0ed92b722aa60dca9160805125e0bc6217a217bbb26866eec9')
+  // The pinned output includes the stylesheet: the .holder-panel, .infobox-chip and .infobox-conflict rules are part of it.
+  assert.equal(digest, '991f40680f98335da431795d00aebaca34696d18c0af785640f8154cb38af0ed')
 })
