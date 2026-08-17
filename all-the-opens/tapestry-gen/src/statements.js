@@ -1,7 +1,7 @@
 // The statement lookups: an anchored entity's Wikidata statements name an
 // object in a partner collection, and the partner's open API supplies the
 // object itself. Museums (Met P3634, Art Institute of Chicago P4610,
-// Rijksmuseum P13234),
+// Rijksmuseum P13234, Cleveland Museum of Art P11110),
 // biodiversity (iNaturalist P3151, GBIF P846), and place (P625 coordinates →
 // OpenStreetMap render). One WDQS query answers every anchor's partner
 // statements; two small follow-ups decide which anchors are mappable places,
@@ -13,12 +13,12 @@
 // holds it and whether they may reuse it, and "via P3634" answers neither.
 
 import { chunk } from './batch.js'
+import { aicRecordUrl, clevelandRecordUrl, metRecordUrl } from './holder-record.js'
 import { getJson, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
 import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
-import { metRecordUrl, clevelandRecordUrl, aicRecordUrl } from './holder-record.js'
 
 /** Properties this lookup reads, and the shape they come back in. */
 const VARS = ['met', 'aic', 'rijks', 'cleveland', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
@@ -789,6 +789,7 @@ export const PROP_NAME = {
   P3634: 'Met object ID (P3634)',
   P4610: 'Art Institute of Chicago artwork ID (P4610)',
   P13234: 'Rijksmuseum object ID (P13234)',
+  P11110: 'Cleveland Museum of Art ID (P11110)',
   P6108: 'IIIF manifest URL (P6108)',
   P3151: 'iNaturalist taxon ID (P3151)',
   P846: 'GBIF taxon ID (P846)',
@@ -801,5 +802,4 @@ export const PROP_NAME = {
   // museum's own accession number. Named as the pair, because either alone
   // would be a different and weaker claim.
   P217: 'collection (P195) and inventory number (P217)',
-  P11110: 'Cleveland Museum of Art id (P11110)',
 }
