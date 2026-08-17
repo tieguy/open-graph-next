@@ -1320,7 +1320,7 @@ function subjectRights(b) {
  * so this line can never attribute a creator ruling or a copy's license
  * to the work. A refusal everyone agrees with (a Picasso) stays a plain
  * refusal. Both claims are stated, neither is called wrong, and the
- * museum's record is the labeled door — the reader can check the flag
+ * institution's record is the labeled door — the reader can check the flag
  * themselves. The line states no consequence for the page's layout: the
  * museum's image may still appear on an ordinary card (the card path
  * has its own rules), so the only claims here are the two records'.

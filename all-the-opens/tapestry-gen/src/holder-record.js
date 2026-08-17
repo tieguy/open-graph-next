@@ -345,8 +345,11 @@ export function iiifRecordFrom(manifest, manifestUrl) {
   const rights = ccFromUri(rightsUri)
   const isPublicDomain = rights?.code === 'CC0' || rights?.code === 'PDM'
 
-  // Gate: imageUrl
-  const imageUrl = iiifImageUrl(manifest)
+  // Gate: imageUrl — like every other lane, released only under the
+  // institution's own free statement, so no caller can show an image the
+  // manifest did not open. Behavior-identical for the gate itself: rights
+  // are checked before the image, so a non-free manifest fails there first.
+  const imageUrl = isPublicDomain ? iiifImageUrl(manifest) : null
 
   // Gate: homepage/related (must be explicitly stated, no manifest URL fallback)
   // Never pass manifestUrl to iiifHomepage — its fallback would defeat the no-object-page gate.

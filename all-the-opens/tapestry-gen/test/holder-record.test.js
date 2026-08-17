@@ -281,6 +281,9 @@ test('iiifRecordFrom fails v3 manifest with no rights statement', () => {
   }
   const record = iiifRecordFrom(manifest)
   assert.equal(gateFailure(record), 'non-pd-rights')
+  // The image is released only under the manifest's own free statement,
+  // like every other lane — a non-free manifest carries no image URL.
+  assert.equal(record.imageUrl, null)
 })
 
 test('iiifRecordFrom fails v3 manifest with two providers', () => {

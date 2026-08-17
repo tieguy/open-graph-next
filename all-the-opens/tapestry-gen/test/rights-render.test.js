@@ -331,7 +331,7 @@ test('the disagreement is lede-only and absent without a refusal', () => {
 test('a refusal without a record page still renders, with no dead door', () => {
   const html = bandRail(bandOf({ holderRefusal: { ...REFUSAL, href: null } }))
   assert.match(html, /sr-conflict/)
-  assert.doesNotMatch(html, /See the museum’s record/)
+  assert.doesNotMatch(html, /See the institution’s record/)
 })
 
 // The gate and the quoted words come from one place: workFreeStatus, over
