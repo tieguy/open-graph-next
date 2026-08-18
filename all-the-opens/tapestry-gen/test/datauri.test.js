@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { fromDataUri, hotlinkUnsafe, isImageType, placeholderFloor } from '../src/http.js'
+import { fromDataUri, hotlinkUnsafe, isImageType, placeholderFloor, servableImage } from '../src/http.js'
 
 // The streaming server serves partner images from its own /img/ path rather
 // than inlining them, so this is the step that turns a cached data: URI back
@@ -72,8 +72,22 @@ test('only non-document images pass the type gate — one definition for fetch a
   // though it is an image type; our own SVG glyphs inline into markup and
   // never ride this path.
   assert.equal(isImageType('image/svg+xml'), false)
+  // Bare image/svg is refused too — whether any renderer treats it as SVG
+  // is a question this gate declines to find out.
+  assert.equal(isImageType('image/svg'), false)
+  // A comma-joined duplicate Content-Type is not a media type: the anchored
+  // subtype makes the parameter split load-bearing rather than documentary.
+  assert.equal(isImageType('image/png, text/html'), false)
   assert.equal(isImageType('text/html;charset=utf-8'), false)
   assert.equal(isImageType('application/pdf'), false)
   assert.equal(isImageType(''), false)
   assert.equal(isImageType(null), false)
+})
+
+test('the /img/ decision is a seam: only a servable image leaves the origin', () => {
+  const png = { type: 'image/png', body: Buffer.from([1]) }
+  assert.equal(servableImage(png), png)
+  assert.equal(servableImage({ type: 'image/svg+xml', body: Buffer.from([1]) }), null)
+  assert.equal(servableImage({ type: 'text/html;charset=utf-8', body: Buffer.from([1]) }), null)
+  assert.equal(servableImage(null), null)
 })

@@ -317,7 +317,19 @@ export const placeholderFloor = (url) => (/covers\.openlibrary\.org/.test(url) ?
  * 200 same-origin). Our own SVG glyphs are unaffected: the CC sprite is
  * inlined into page markup and never rides this path.
  */
-export const isImageType = (type) => /^image\/(?!svg\+xml)/i.test((type ?? '').split(';')[0].trim())
+export const isImageType = (type) =>
+  // Anchored subtype: the split is load-bearing (a parameterized type must
+  // still pass; a comma-joined duplicate header must not), and svg is
+  // refused with or without its +xml suffix — the open question of whether
+  // any renderer treats bare image/svg as SVG is closed by not finding out.
+  /^image\/(?!svg(?:\+xml)?$)[a-z0-9!#$&^_.+-]+$/i.test((type ?? '').split(';')[0].trim())
+
+/**
+ * The /img/ decision as a pure seam: a decoded cache entry leaves the
+ * origin only when it is a servable image. serve.js consults this rather
+ * than inlining the gate, so the layer's decision is testable offline.
+ */
+export const servableImage = (decoded) => (decoded && isImageType(decoded.type) ? decoded : null)
 
 export async function coverDataUri(url, { minBytes = null } = {}) {
   minBytes ??= placeholderFloor(url)
