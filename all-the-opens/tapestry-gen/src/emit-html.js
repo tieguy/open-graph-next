@@ -1239,7 +1239,7 @@ function infoboxAside(box, wikiBase) {
   // article's own content never enters the inline map (the never-hotlink
   // rule exempts Wikimedia's own hosts; a swap loop that consulted the map
   // here was dead and left with it, 2026-08-17).
-  let html = relink(box.html, wikiBase)
+  const html = relink(box.html, wikiBase)
   const front = frontPage(wikiBase)
   const list = front
     ? `<a href="${escapeHtml(front)}">the collections this page draws on</a>`

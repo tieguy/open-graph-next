@@ -29,6 +29,7 @@ import {
   coverDataUri,
   fromDataUri,
   hotlinkUnsafe,
+  isImageType,
   imgKey,
   readFacts,
   writeFacts,
@@ -241,9 +242,11 @@ const server = createServer(async (req, res) => {
         return
       }
       // Belt and braces over coverDataUri's own type gate: whatever is on
-      // the volume, this origin serves only images from /img/ — a partner
-      // document with a text/html type must never render same-origin.
-      if (!/^image\//i.test(decoded.type)) {
+      // the volume, this origin serves only non-document images from /img/ —
+      // partner HTML must never render same-origin, and neither may SVG,
+      // the one image type that runs script on navigation (isImageType is
+      // the single shared definition).
+      if (!isImageType(decoded.type)) {
         res.writeHead(404, { 'Content-Type': 'text/plain' })
         res.end('no image\n')
         return

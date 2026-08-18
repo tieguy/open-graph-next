@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { fromDataUri, hotlinkUnsafe, placeholderFloor } from '../src/http.js'
+import { fromDataUri, hotlinkUnsafe, isImageType, placeholderFloor } from '../src/http.js'
 
 // The streaming server serves partner images from its own /img/ path rather
 // than inlining them, so this is the step that turns a cached data: URI back
@@ -61,4 +61,19 @@ test('the placeholder floor is one host’s fact — OpenLibrary covers 1 KB, ev
   assert.equal(placeholderFloor('https://covers.openlibrary.org/b/id/1-M.jpg'), 1024)
   assert.equal(placeholderFloor('https://api.gbif.org/v2/map/occurrence/density/0/0/0@2x.png?taxonKey=1'), 32)
   assert.equal(placeholderFloor('https://images.metmuseum.org/CRDImages/ep/web-large/x.jpg'), 32)
+})
+
+test('only non-document images pass the type gate — one definition for fetch and /img/', () => {
+  assert.equal(isImageType('image/jpeg'), true)
+  assert.equal(isImageType('image/png'), true)
+  // Header parameters are not part of the media type.
+  assert.equal(isImageType('image/jpeg; charset=UTF-8'), true)
+  // An SVG is a document that runs script on navigation — refused even
+  // though it is an image type; our own SVG glyphs inline into markup and
+  // never ride this path.
+  assert.equal(isImageType('image/svg+xml'), false)
+  assert.equal(isImageType('text/html;charset=utf-8'), false)
+  assert.equal(isImageType('application/pdf'), false)
+  assert.equal(isImageType(''), false)
+  assert.equal(isImageType(null), false)
 })

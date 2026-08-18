@@ -306,6 +306,19 @@ export const imgKey = (url) => createHash('sha1').update(url).digest('hex').slic
  */
 export const placeholderFloor = (url) => (/covers\.openlibrary\.org/.test(url) ? 1024 : 32)
 
+/**
+ * Whether a content type may travel as a card image or leave /img/. One
+ * definition for both layers, exported so the gate is a test rather than
+ * two literals that can drift. Parameters are stripped before the check
+ * ("image/jpeg; charset=UTF-8" is an image), and image/svg+xml is refused
+ * even though it is an image type: an SVG is a document that runs script
+ * on top-level navigation, and a partner document must never render from
+ * our origin (caught in review, 2026-08-17 — a planted scripted SVG served
+ * 200 same-origin). Our own SVG glyphs are unaffected: the CC sprite is
+ * inlined into page markup and never rides this path.
+ */
+export const isImageType = (type) => /^image\/(?!svg\+xml)/i.test((type ?? '').split(';')[0].trim())
+
 export async function coverDataUri(url, { minBytes = null } = {}) {
   minBytes ??= placeholderFloor(url)
   // The effective floor is part of the cache key: one URL fetched at two
@@ -331,12 +344,14 @@ export async function coverDataUri(url, { minBytes = null } = {}) {
       // answering HTML or a PDF is a non-answer, cached as one, and the
       // card degrades to text. Without this, /img/ would serve a partner's
       // document from OUR origin (caught in review, 2026-08-17).
-      const type = res.headers.get('content-type') ?? ''
-      if (!/^image\//i.test(type)) return ''
+      const media = (res.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase()
+      if (!isImageType(media)) return ''
       const bytes = Buffer.from(await res.arrayBuffer())
       // Below the floor it is a placeholder, not the thing (placeholderFloor
       // above; explicit callers may still override in either direction).
-      return bytes.length < minBytes ? '' : `data:${type};base64,${bytes.toString('base64')}`
+      // The data URI carries the bare media type: header parameters are not
+      // RFC 2397 URI material, and the gate already ran on the same value.
+      return bytes.length < minBytes ? '' : `data:${media};base64,${bytes.toString('base64')}`
     } catch {
       return null
     }
