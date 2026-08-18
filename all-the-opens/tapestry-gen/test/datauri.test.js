@@ -38,17 +38,21 @@ test('anything that is not a data URI is refused rather than guessed at', () => 
 
 // Which card images both renderers must fetch themselves — batch by inlining,
 // streaming through /img/ — instead of letting a reader's browser hotlink them.
-test('aggregator thumbnails and policy-bound hosts are ours to fetch; museum CDNs hotlink', () => {
-  // DPLA and DigitalNZ point at hundreds of provider hosts that rot and
-  // hotlink-block; the source decides, whatever the host.
+test('no partner image is hotlinked — a reader’s browser talks to us and to Wikimedia only', () => {
+  // The operator’s decision, 2026-08-17: partner hosts bot-block and
+  // hotlink-block unpredictably, and hotlinking cannot scale to the
+  // adoption the project aims at. Every partner image is fetched by us.
   assert.equal(hotlinkUnsafe({ source: 'dpla', imageUrl: 'https://digitalcollections.museumofflight.org/x.jpg' }), true)
   assert.equal(hotlinkUnsafe({ source: 'digitalnz', imageUrl: 'https://ndhadeliver.natlib.govt.nz/x.jpg' }), true)
-  // The original two host rules survive: the OpenLibrary redirect and the
-  // OSMF tile policy.
   assert.equal(hotlinkUnsafe({ source: 'openlibrary', imageUrl: 'https://covers.openlibrary.org/b/id/1-M.jpg' }), true)
   assert.equal(hotlinkUnsafe({ source: 'openstreetmap', imageUrl: 'https://tile.openstreetmap.org/1/2/3.png' }), true)
-  // A museum's own CDN serves its own images; hotlinking is the cheap path.
-  assert.equal(hotlinkUnsafe({ source: 'met', imageUrl: 'https://images.metmuseum.org/x.jpg' }), false)
-  assert.equal(hotlinkUnsafe({ source: 'ia', imageUrl: 'https://archive.org/services/img/x' }), false)
+  // The museums are partners too — the old cheap path is gone.
+  assert.equal(hotlinkUnsafe({ source: 'met', imageUrl: 'https://images.metmuseum.org/x.jpg' }), true)
+  assert.equal(hotlinkUnsafe({ source: 'ia', imageUrl: 'https://archive.org/services/img/x' }), true)
+  assert.equal(hotlinkUnsafe({ source: 'rijksmuseum', imageUrl: 'https://iiif.micr.io/x/full/800,/0/default.jpg' }), true)
+  // Wikipedia’s own images ride Wikimedia infrastructure built for this load.
+  assert.equal(hotlinkUnsafe({ source: 'wikipedia', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/b.jpg' }), false)
+  // Already-travelling bytes and absent images are nobody’s fetch.
+  assert.equal(hotlinkUnsafe({ source: 'met', imageUrl: 'data:image/jpeg;base64,AAAA' }), false)
   assert.equal(hotlinkUnsafe({ source: 'dpla', imageUrl: null }), false)
 })

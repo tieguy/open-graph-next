@@ -218,9 +218,9 @@ test('every logo on a showcase card names a friend this page lists', () => {
 // Brown v. Board the imageless card was the HERO. A caption under nothing reads
 // as a broken image; these assertions pin the difference.
 
-const oneCard = (entry) =>
+const oneCard = (entry, inline = new Map()) =>
   buildHtml({
-    title: 'T', description: 'd', inline: new Map(),
+    title: 'T', description: 'd', inline,
     bands: [{ id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }], entries: [entry] }],
   })
 
@@ -250,9 +250,29 @@ test('a plate label is escaped, never injected', () => {
 })
 
 test('a card WITH an image is untouched — no plate competes with the picture', () => {
-  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' })
+  // The image must be OURS to serve (inline bytes or an /img/ path): under
+  // the never-hotlink rule a bare partner URL no longer counts as having one.
+  const html = oneCard(
+    { id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' },
+    new Map([['https://example.com/a.jpg', 'data:image/jpeg;base64,AAAA']]),
+  )
   assert.doesNotMatch(html, /class="plate/)
-  assert.match(html, /<img class="shot"/)
+  assert.match(html, /<img class="shot" src="data:image\/jpeg;base64,AAAA"/)
+})
+
+test('a partner image our fetch could not deliver renders as a text card, never a hotlink', () => {
+  // The never-hotlink-a-partner rule (2026-08-17) has no failure exemption:
+  // when the inline map holds no bytes for an unsafe image, the raw partner
+  // URL must not reach the page — the reader's browser would otherwise be
+  // aimed at exactly the host that refused ours.
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' })
+  assert.doesNotMatch(html, /example\.com\/a\.jpg/)
+  assert.doesNotMatch(html, /<img class="shot"/)
+})
+
+test('a Wikimedia image still hotlinks — the one exempt host', () => {
+  const html = oneCard({ id: 'x', title: 'X', source: 'wikipedia', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/b.jpg' })
+  assert.match(html, /<img class="shot" src="https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/a\/b\.jpg"/)
 })
 
 test('a bare plate is decorative — hidden from assistive tech, and never a link', () => {

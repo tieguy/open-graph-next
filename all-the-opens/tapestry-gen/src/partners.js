@@ -27,8 +27,6 @@
 //                  those terms — only where the page has actually been
 //                  read), optional `name` where the list's prose style
 //                  differs from the display name
-//   hotlinkUnsafe  true for aggregators whose thumbnails point at many
-//                  provider hosts (see `hotlinkUnsafe` in src/http.js)
 //   hostLimits     host → concurrent-request limit, ONLY with the partner's
 //                  published policy quoted beside it (see `hostLimit` in
 //                  src/mw.js — the default everywhere else is 1)
@@ -280,7 +278,6 @@ export const PARTNERS = {
       // candidate: even its Wayback captures are the 202 challenge page.
       cite: 'https://dp.la/about/terms-conditions',
     },
-    hotlinkUnsafe: true,
     hostLimits: {
       // DPLA's developer policy (pro.dp.la/developers/policies): "Consistent
       // with its philosophical presumption of openness, in general, the DPLA
@@ -336,6 +333,5 @@ export const PARTNERS = {
       // not the NZ collections themselves.
       cite: 'https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use',
     },
-    hotlinkUnsafe: true,
   },
 }

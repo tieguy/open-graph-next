@@ -12,7 +12,6 @@ import { fileURLToPath } from 'node:url'
 import { MAX_COOLOFF_MS, coolingFor, noteRateLimited } from './cooloff.js'
 import { enqueue } from './mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
-import { PARTNERS } from './partners.js'
 
 const HERE = fileURLToPath(new URL('.', import.meta.url))
 export const CACHE = join(HERE, '..', '.cache')
@@ -246,25 +245,26 @@ export async function writeFacts(kind, entries) {
  * two renderers kept two copies of the same regex and a reason added to one
  * was a reason silently missing from the other.
  *
- * Three reasons, each earning its line: OpenLibrary covers resolve through
- * an archive.org redirect, so a live dependency blanks the rail whenever IA
- * is down; OSM tiles must never be hotlinked from readers' browsers (OSMF
- * tile policy); and DPLA's and DigitalNZ's thumbnails point at hundreds of
- * PROVIDER hosts — ContentDM instances, Calisphere, NLNZ delivery — that
- * rot and hotlink-block (found 2026-08-09: Museum of Flight answered the
- * browser nothing and every DPLA letter card rendered as text). For the
- * aggregators the SOURCE decides, whatever the host: the long tail is the
- * point. A museum's own CDN (the Met, ids.si.edu, archive.org itself)
- * serves its own images fine, and hotlinking stays the cheap path.
+ * The answer is EVERY partner image (the operator's decision, 2026-08-17,
+ * resolving the tension recorded against VALUES.md's 2026-08-16 entry: the
+ * reader's browser talks to us, not to the partners). Two reasons, both
+ * structural. Partner hosts bot-block and hotlink-block unpredictably —
+ * DPLA's provider long tail proved it first (2026-08-09: Museum of Flight
+ * answered the browser nothing and every card rendered as text), and the
+ * IIIF-lane diagnosis of 2026-08-17 found the same pattern across hosts.
+ * And hotlinking does not scale to the adoption this project aims at: a
+ * page read at Wikipedia scale would aim every reader's browser at a
+ * museum's image server, where our own fetch is one cached request, ever,
+ * bounded by the per-host queues.
+ *
+ * upload.wikimedia.org stays hotlinked: the article's own images are
+ * Wikipedia's household content on infrastructure built for exactly this
+ * load, and Commons is deliberately not a partner (all-the-opens/CLAUDE.md).
  */
 export function hotlinkUnsafe(entry) {
   if (!entry?.imageUrl) return false
-  // The aggregators are flagged in the partner manifest, because which
-  // partners have the long-tail-of-provider-hosts problem is a fact about
-  // the partner; the two host regexes below are about specific URLs, not
-  // sources, and stay here.
-  if (PARTNERS[entry.source]?.hotlinkUnsafe) return true
-  return /covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(entry.imageUrl)
+  if (entry.imageUrl.startsWith('data:')) return false
+  return !/^https:\/\/upload\.wikimedia\.org\//.test(entry.imageUrl)
 }
 
 /**

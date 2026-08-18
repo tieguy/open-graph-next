@@ -91,13 +91,18 @@ does not help generate the website, it belongs in the attic.
   is an open proxy.
   **Which images both renderers fetch themselves is one predicate** —
   `hotlinkUnsafe` in `src/http.js` (2026-08-09; the two copies of the host
-  regex it replaced had already begun to drift in comments). Three classes:
-  OpenLibrary covers (the archive.org redirect), OSM tiles (tile policy), and
-  DPLA/DigitalNZ thumbnails, which point at hundreds of PROVIDER hosts that
-  rot and hotlink-block — decided by SOURCE, not host, because the long tail
-  is the point (log entry 9 in `../docs/reaching-open-collections.md`: one
-  Apollo 11 render met an NXDOMAIN'd thumbnail hostname, a 403-to-bots host,
-  and a both-ids-404 host). A thumbnail the server cannot fetch 404s from
+  regex it replaced had already begun to drift in comments) — **and the
+  answer is every partner image** (the operator's decision, 2026-08-17,
+  implementing VALUES.md's 2026-08-16 entry that the reader's browser talks
+  to us, not to the partners). Partner hosts bot-block and hotlink-block
+  unpredictably (log entry 9 in `../docs/reaching-open-collections.md`
+  found it in DPLA's provider long tail; entries 16–21 found the pattern
+  across the IIIF hosts), and hotlinking cannot scale to the adoption this
+  project aims at — a page read at Wikipedia scale would aim every reader's
+  browser at a museum's image server, where our own fetch is one cached
+  request bounded by the per-host queues. Only `upload.wikimedia.org`
+  stays hotlinked: the article's own images are Wikipedia's household
+  content on infrastructure built for that load. A thumbnail the server cannot fetch 404s from
   `/img/`, the card's `onerror` drops the image, and the six-line text clamp
   takes over — an honest text card, never a broken-image icon. `coverDataUri`
   caches real non-answers (404, placeholder) but not transient failures
@@ -516,15 +521,12 @@ instead of anyone editing Wikidata to erase it. It is warmed as the
 flagship list's rights-disagreement exemplar (`tools/holder-flagships.mjs`,
 the one entry with a `role`).
 
-**The holder hero image hotlinks from the museum, and that sits unresolved
-against a stated value.** Museum images follow the inline-only-what-breaks
-rule (`hotlinkUnsafe` is a breakage criterion), so a reader's browser
-fetches the hero from the museum's own host — while VALUES.md (2026-08-16)
-says a reader reaches a partner's servers only by choosing a labeled link.
-No written decision exempts images; the tension is recorded here
-(2026-08-17, final review) and the call — narrow the value's wording, or
-proxy museum images through `/img/` — is the operator's. The QA document
-names it beside the flag recommendation.
+**The holder hero is served by us, like every partner image** (the
+operator's decision, 2026-08-17, closing the tension the final review had
+recorded here): `hotlinkUnsafe` answers true for every partner image, so
+the hero rides `/img/` in the streaming renderer and travels as a data:
+URI in batch, and a reader reaches the museum's servers only by choosing
+the labeled links — the zoom door and the museum-record links.
 
 **Single-source discipline is enforced before a request is built, not after a
 card is dropped.** `holderStatements` filters an anchor's partner statements
@@ -1505,8 +1507,9 @@ nothing; `holder-record` is where that half's network lives.
   absent from `sourcesUsed`, the legend and the visibility panel, with an
   ⓘ-fold explaining the slot in the house voice ("no friend has one yet").
   Exempt from `FLOAT_MIN_PROSE`: a stub's short prose wrapping under its
-  infobox is what a real stub looks like. Images hotlink in both renderers —
-  Commons permits it — per the inline-only-what-breaks rule.
+  infobox is what a real stub looks like. Its images hotlink in both
+  renderers because they are `upload.wikimedia.org` images — the article's
+  own content, the one host the never-hotlink-a-partner rule exempts.
 - **Every Wikidata-backed card carries a provenance fold, and the why line is
   what opens it** (2026-08-03 late; merged 2026-08-05): a `<details>` whose
   text states the exact chain (`entry.trace`) and links
@@ -2025,7 +2028,7 @@ the politeness claim is checkable after a run rather than merely asserted here.
 - `src/partners.js` — the partner manifest (2026-08-14): one descriptor per
   partner holding every partner fact that is data rather than logic — display
   name, icon URL, visibility-panel hosts, the front-page friend entry,
-  the hotlink-unsafe flag, and any widened host limit with its policy quoted.
+  and any widened host limit with its policy quoted.
   `gap.js`, `emit-html.js`, `front-page.js`, `http.js` and `mw.js` derive
   their tables from it; `test/partners.test.js` asserts completeness (icon
   bytes committed, friend entry present), so an uncredited partner is a red

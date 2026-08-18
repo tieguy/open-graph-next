@@ -2,6 +2,7 @@ import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
 import { heroRank, pickHero } from './hero.js'
 import { escapeHtml } from './html.js'
+import { hotlinkUnsafe } from './http.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 import { PARTNERS } from './partners.js'
 import { infoboxRows, mergedPanel } from './panel.js'
@@ -480,11 +481,14 @@ function card(entry, inline, { head = '' } = {}) {
     visual =
       `<div class="frame${tall}"><iframe src="${escapeHtml(embed)}" loading="lazy" ` +
       `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`
-  } else if (entry.imageUrl) {
+  } else if (entry.imageUrl && (inline.has(entry.imageUrl) || !hotlinkUnsafe(entry))) {
+    // A partner image OUR fetch could not turn into bytes renders as a text
+    // card, never as a hotlink: the never-hotlink-a-partner rule (2026-08-17)
+    // has no failure exemption — the old raw-URL fallback aimed the reader's
+    // browser at exactly the host that just refused ours.
     const src = inline.get(entry.imageUrl) ?? entry.imageUrl
-    // Partner thumbnails rot and hotlink-block (DPLA's `object` URLs point at
-    // the provider, not at DPLA). A broken-icon card is worse than a text
-    // card, so a thumbnail that fails to load takes itself off the page.
+    // A broken-icon card is worse than a text card, so a thumbnail that
+    // fails to load client-side still takes itself off the page.
     const img = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
     // The title already opens the same door (see titleRow); the image is the
     // larger target and a reader's first instinct to click, so it opens the
@@ -723,7 +727,9 @@ function heroCard(entry, inline, sample = null, holder = null, nameFor = null) {
     visual =
       `<div class="frame${tall}"><iframe src="${escapeHtml(embed)}" loading="lazy" ` +
       `allowfullscreen title="${escapeHtml(entry.title)}"></iframe></div>`
-  } else if (entry.imageUrl) {
+  } else if (entry.imageUrl && (inline.has(entry.imageUrl) || !hotlinkUnsafe(entry))) {
+    // Same never-hotlink rule as the deck cards: no inline bytes for a
+    // partner image means the plate below, never the partner's URL.
     const src = inline.get(entry.imageUrl) ?? entry.imageUrl
     visual = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
   } else {

@@ -160,12 +160,13 @@ decided *before* the default flips is the standing IIIF-lane item
 default without deciding it is safe but bakes the extra manifest fetch
 into half the population (680 of 1,424 census items are iiif-only).
 
-One open values question rides beside the flag decision: the holder hero
-image hotlinks from the museum's own host (the inline-only-what-breaks
-rule), while VALUES.md's 2026-08-16 entry says a reader reaches a
-partner's servers only by choosing a labeled link. No written decision
-exempts images. Narrowing the value's wording or proxying museum images
-through `/img/` are both open; the call is the operator's.
+The open values question this document carried — museum hero images
+hotlinked from museum hosts, against VALUES.md's 2026-08-16 entry — was
+resolved by the operator on 2026-08-17, the day this window ran: no
+partner image is ever hotlinked, because partner hosts bot-block
+unpredictably and hotlinking cannot scale to Wikipedia-scale adoption.
+`hotlinkUnsafe` in `src/http.js` now answers true for every partner
+image; only `upload.wikimedia.org` is exempt.
 
 Per the plan, no production default was changed in this phase — the
 decision is the operator's, on this document.
