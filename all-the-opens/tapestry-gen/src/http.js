@@ -295,16 +295,25 @@ export const imgKey = (url) => createHash('sha1').update(url).digest('hex').slic
  * future render until someone deleted the cache. A cache may make a page
  * faster, never different.
  */
+/**
+ * Below this many bytes the answer is a placeholder, not the thing. A fact
+ * about ONE host: OpenLibrary answers a coverless ISBN with a stub a few
+ * bytes long, so covers need 1 KB. Every other URL keeps only a
+ * refuse-empty-bodies floor — under the never-hotlink rule the cover path
+ * fetches every partner image, and a page-wide 1 KB floor voided
+ * legitimately tiny images and cached the void (caught in review,
+ * 2026-08-17). Exported so the derivation is a test, not a comment.
+ */
+export const placeholderFloor = (url) => (/covers\.openlibrary\.org/.test(url) ? 1024 : 32)
+
 export async function coverDataUri(url, { minBytes = null } = {}) {
-  // The placeholder floor is a fact about ONE host: OpenLibrary answers a
-  // coverless ISBN with a stub a few bytes long, so covers need 1 KB. A
-  // sparse taxon's GBIF tile or a small thumbnail is legitimately tiny, and
-  // under the never-hotlink rule this function now fetches every partner
-  // image — a page-wide 1 KB floor voided real images and cached the void
-  // (caught in review, 2026-08-17). Everything else keeps only a
-  // refuse-empty-bodies floor; callers may still override.
-  minBytes ??= /covers\.openlibrary\.org/.test(url) ? 1024 : 32
-  const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
+  minBytes ??= placeholderFloor(url)
+  // The effective floor is part of the cache key: one URL fetched at two
+  // floors must not share a verdict, or whichever ran first decides for
+  // both — the mechanism that made the wide-floor bug permanent. (This
+  // re-keys every cached data URI once; the refetch also retires verdicts
+  // the pre-2026-08-17 gates cached wrongly.)
+  const key = createHash('sha1').update(`datauri:${minBytes}:${url}`).digest('hex').slice(0, 16)
   const path = join(CACHE, `datauri-${key}.txt`)
   try {
     const cached = await readFile(path, 'utf8')
@@ -316,10 +325,18 @@ export async function coverDataUri(url, { minBytes = null } = {}) {
     try {
       const res = await fetch(url, { headers: { 'User-Agent': UA() }, signal: AbortSignal.timeout(15000) })
       if (!res.ok) return ''
+      // Size is not enough to know a picture arrived — the icon tools
+      // learned it first (openalex.org answered 200 with an HTML error page)
+      // and the DPLA long tail repeated it at page scale: a thumbnail URL
+      // answering HTML or a PDF is a non-answer, cached as one, and the
+      // card degrades to text. Without this, /img/ would serve a partner's
+      // document from OUR origin (caught in review, 2026-08-17).
+      const type = res.headers.get('content-type') ?? ''
+      if (!/^image\//i.test(type)) return ''
       const bytes = Buffer.from(await res.arrayBuffer())
-      // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
-      // favicon is legitimately smaller, so callers can lower it.
-      return bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
+      // Below the floor it is a placeholder, not the thing (placeholderFloor
+      // above; explicit callers may still override in either direction).
+      return bytes.length < minBytes ? '' : `data:${type};base64,${bytes.toString('base64')}`
     } catch {
       return null
     }

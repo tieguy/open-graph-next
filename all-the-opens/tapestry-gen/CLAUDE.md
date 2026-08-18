@@ -1834,6 +1834,12 @@ the politeness claim is checkable after a run rather than merely asserted here.
   article per wired museum holder plus the role-carrying
   rights-disagreement exemplar, completeness tested in `test/census.test.js`;
   `HOLDER_FLAGSHIPS=1 node warm.js <base>` walks it).
+- **The data-URI cache re-keyed on 2026-08-17** (`coverDataUri` folds the
+  effective placeholder floor into the key, so one URL fetched at two floors
+  can never share a verdict), which refetches every cached cover, tile and
+  thumbnail once — and deliberately retires every verdict the pre-2026-08-17
+  gates cached wrongly, including partner HTML and PDF bodies the new
+  image-content-type gate now refuses. Same request COUNT per image.
 - **Text-mode responses got their own cache key on 2026-08-17** (`getText` in
   `src/http.js` hashes `text:` + URL), so every cached Getty object page
   predating that is keyed to the old hash and will be refetched once. Same

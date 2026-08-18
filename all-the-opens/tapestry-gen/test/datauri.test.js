@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { fromDataUri, hotlinkUnsafe } from '../src/http.js'
+import { fromDataUri, hotlinkUnsafe, placeholderFloor } from '../src/http.js'
 
 // The streaming server serves partner images from its own /img/ path rather
 // than inlining them, so this is the step that turns a cached data: URI back
@@ -55,4 +55,10 @@ test('no partner image is hotlinked — a reader’s browser talks to us and to 
   // Already-travelling bytes and absent images are nobody’s fetch.
   assert.equal(hotlinkUnsafe({ source: 'met', imageUrl: 'data:image/jpeg;base64,AAAA' }), false)
   assert.equal(hotlinkUnsafe({ source: 'dpla', imageUrl: null }), false)
+})
+
+test('the placeholder floor is one host’s fact — OpenLibrary covers 1 KB, everything else 32', () => {
+  assert.equal(placeholderFloor('https://covers.openlibrary.org/b/id/1-M.jpg'), 1024)
+  assert.equal(placeholderFloor('https://api.gbif.org/v2/map/occurrence/density/0/0/0@2x.png?taxonKey=1'), 32)
+  assert.equal(placeholderFloor('https://images.metmuseum.org/CRDImages/ep/web-large/x.jpg'), 32)
 })

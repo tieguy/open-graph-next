@@ -240,8 +240,17 @@ const server = createServer(async (req, res) => {
         res.end('no image\n')
         return
       }
+      // Belt and braces over coverDataUri's own type gate: whatever is on
+      // the volume, this origin serves only images from /img/ — a partner
+      // document with a text/html type must never render same-origin.
+      if (!/^image\//i.test(decoded.type)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' })
+        res.end('no image\n')
+        return
+      }
       res.writeHead(200, {
         'Content-Type': decoded.type,
+        'X-Content-Type-Options': 'nosniff',
         'Content-Length': decoded.body.length,
         // The path is a hash of the URL, and these files do not change under
         // theirs. A week is long enough to cache across a reading session and

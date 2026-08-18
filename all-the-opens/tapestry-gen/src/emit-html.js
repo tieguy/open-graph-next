@@ -1198,9 +1198,9 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
     ? `<aside class="rail">${heroCard(hero, inline, heroSample, holder, nameFor)}</aside>`
     : ''
   const boxAside = holderPanelHtml
-    ? mergedPanelAside(holderPanelHtml, b.infobox, inline, wikiBase)
+    ? mergedPanelAside(holderPanelHtml, wikiBase)
     : infobox
-      ? infoboxAside(infobox, inline, wikiBase)
+      ? infoboxAside(infobox, wikiBase)
       : ''
   const float = heroAside + boxAside
   const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
@@ -1234,7 +1234,7 @@ function frontPage(wikiBase) {
  * explains the SLOT, in the house voice: an absence is a measurement ("no
  * friend has one yet"), never a verdict.
  */
-function infoboxAside(box, inline, wikiBase) {
+function infoboxAside(box, wikiBase) {
   // The box's images are upload.wikimedia.org URLs and stay hotlinked — the
   // article's own content never enters the inline map (the never-hotlink
   // rule exempts Wikimedia's own hosts; a swap loop that consulted the map
@@ -1265,13 +1265,14 @@ function infoboxAside(box, inline, wikiBase) {
  * each row attributed to its source, conflicts shown side by side. Built from
  * the sanitized infobox HTML and the holder record using mergedPanel().
  */
-function mergedPanelAside(panelHtml, box, inline, wikiBase) {
-  // The panel's Wikipedia rows carry the article's own markup, so they get
-  // the same treatment the plain box gets: hrefs re-based for standalone
-  // renders, and a labelled image row's src swapped to inline bytes where
-  // the box recorded one. No fold — every row is already attributed. The
-  // rail-panel class clears the hero float above it so the two stack.
-  let html = relink(panelHtml, wikiBase)
+function mergedPanelAside(panelHtml, wikiBase) {
+  // The panel's Wikipedia rows carry the article's own markup, so their
+  // hrefs are re-based for standalone renders — and their images keep their
+  // Wikimedia URLs, like the plain box's (the article's own content is the
+  // exempt host and never enters the inline map). No fold — every row is
+  // already attributed. The rail-panel class clears the hero float above
+  // it so the two stack.
+  const html = relink(panelHtml, wikiBase)
   return `<aside class="rail rail-panel"><div class="ib-slot">${html}</div></aside>`
 }
 
