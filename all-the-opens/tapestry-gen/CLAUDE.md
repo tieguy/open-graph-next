@@ -102,7 +102,16 @@ does not help generate the website, it belongs in the attic.
   browser at a museum's image server, where our own fetch is one cached
   request bounded by the per-host queues. Only `upload.wikimedia.org`
   stays hotlinked: the article's own images are Wikipedia's household
-  content on infrastructure built for that load. A thumbnail the server cannot fetch 404s from
+  content on infrastructure built for that load — and they reach the page
+  through the infobox path, not the card path, so the predicate's
+  Wikimedia exemption is a defensive guard rather than their mechanism.
+  **A known limit rides the flip**: hero picking and relevance scoring
+  read `entry.imageUrl` as "has a picture," and whether OUR fetch will
+  produce bytes is unknowable at pick time in the streaming renderer —
+  the fetch happens later, on `/img/` demand — so a section can float a
+  hero whose image degrades to a plate. Accepted (2026-08-17): the
+  alternative is batch and streaming ranking differently, which
+  byte-reproducibility forbids. A thumbnail the server cannot fetch 404s from
   `/img/`, the card's `onerror` drops the image, and the six-line text clamp
   takes over — an honest text card, never a broken-image icon. `coverDataUri`
   caches real non-answers (404, placeholder) but not transient failures
@@ -1508,8 +1517,11 @@ nothing; `holder-record` is where that half's network lives.
   ⓘ-fold explaining the slot in the house voice ("no friend has one yet").
   Exempt from `FLOAT_MIN_PROSE`: a stub's short prose wrapping under its
   infobox is what a real stub looks like. Its images hotlink in both
-  renderers because they are `upload.wikimedia.org` images — the article's
-  own content, the one host the never-hotlink-a-partner rule exempts.
+  renderers: they are `upload.wikimedia.org` images — the article's own
+  content — and they bypass the card path entirely, so the
+  never-hotlink-a-partner predicate never sees them (its Wikimedia
+  exemption is a defensive guard for any future Wikimedia-hosted entry,
+  not the mechanism here).
 - **Every Wikidata-backed card carries a provenance fold, and the why line is
   what opens it** (2026-08-03 late; merged 2026-08-05): a `<details>` whose
   text states the exact chain (`entry.trace`) and links

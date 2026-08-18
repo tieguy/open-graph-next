@@ -1235,11 +1235,11 @@ function frontPage(wikiBase) {
  * friend has one yet"), never a verdict.
  */
 function infoboxAside(box, inline, wikiBase) {
+  // The box's images are upload.wikimedia.org URLs and stay hotlinked — the
+  // article's own content never enters the inline map (the never-hotlink
+  // rule exempts Wikimedia's own hosts; a swap loop that consulted the map
+  // here was dead and left with it, 2026-08-17).
   let html = relink(box.html, wikiBase)
-  for (const url of box.images ?? []) {
-    const swapped = inline.get(url)
-    if (swapped) html = html.replaceAll(`src="${url}"`, `src="${escapeHtml(swapped)}"`)
-  }
   const front = frontPage(wikiBase)
   const list = front
     ? `<a href="${escapeHtml(front)}">the collections this page draws on</a>`
@@ -1272,10 +1272,6 @@ function mergedPanelAside(panelHtml, box, inline, wikiBase) {
   // the box recorded one. No fold — every row is already attributed. The
   // rail-panel class clears the hero float above it so the two stack.
   let html = relink(panelHtml, wikiBase)
-  for (const url of box?.images ?? []) {
-    const swapped = inline.get(url)
-    if (swapped) html = html.replaceAll(`src="${url}"`, `src="${escapeHtml(swapped)}"`)
-  }
   return `<aside class="rail rail-panel"><div class="ib-slot">${html}</div></aside>`
 }
 

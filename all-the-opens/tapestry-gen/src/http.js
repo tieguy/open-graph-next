@@ -257,9 +257,12 @@ export async function writeFacts(kind, entries) {
  * museum's image server, where our own fetch is one cached request, ever,
  * bounded by the per-host queues.
  *
- * upload.wikimedia.org stays hotlinked: the article's own images are
- * Wikipedia's household content on infrastructure built for exactly this
- * load, and Commons is deliberately not a partner (all-the-opens/CLAUDE.md).
+ * upload.wikimedia.org is exempt as a defensive guard: today no ENTRY
+ * carries such an imageUrl — the article's own infobox images bypass the
+ * card path entirely and hotlink from there — but any future
+ * Wikimedia-hosted entry must keep hotlinking, because that is Wikipedia's
+ * household content on infrastructure built for the load, and Commons is
+ * deliberately not a partner (all-the-opens/CLAUDE.md).
  */
 export function hotlinkUnsafe(entry) {
   if (!entry?.imageUrl) return false
@@ -292,7 +295,15 @@ export const imgKey = (url) => createHash('sha1').update(url).digest('hex').slic
  * future render until someone deleted the cache. A cache may make a page
  * faster, never different.
  */
-export async function coverDataUri(url, { minBytes = 1024 } = {}) {
+export async function coverDataUri(url, { minBytes = null } = {}) {
+  // The placeholder floor is a fact about ONE host: OpenLibrary answers a
+  // coverless ISBN with a stub a few bytes long, so covers need 1 KB. A
+  // sparse taxon's GBIF tile or a small thumbnail is legitimately tiny, and
+  // under the never-hotlink rule this function now fetches every partner
+  // image — a page-wide 1 KB floor voided real images and cached the void
+  // (caught in review, 2026-08-17). Everything else keeps only a
+  // refuse-empty-bodies floor; callers may still override.
+  minBytes ??= /covers\.openlibrary\.org/.test(url) ? 1024 : 32
   const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
   const path = join(CACHE, `datauri-${key}.txt`)
   try {

@@ -194,7 +194,10 @@ test('a band with no infobox field renders exactly as before', () => {
   assert.doesNotMatch(deck, /merely linked/)
 })
 
-test('batch inlining swaps the infobox image; the demo base does not eat the File: link', () => {
+test('the infobox image keeps its Wikimedia URL; the demo base does not eat the File: link', () => {
+  // The article's own images are the exempt host and never enter the inline
+  // map; the swap loop that once consulted it here is gone (2026-08-17), so
+  // even a map that DID hold bytes for the URL must not rewrite the box.
   const box = {
     html:
       '<table class="infobox"><tbody><tr><td class="infobox-image">' +
@@ -204,7 +207,7 @@ test('batch inlining swaps the infobox image; the demo base does not eat the Fil
   }
   const inline = new Map([['https://upload.wikimedia.org/x.jpg', 'data:image/jpeg;base64,ZZ']])
   const { rail } = bandParts(ledeBand({ infobox: box }), inline, 'https://demo.test/wiki/')
-  assert.match(rail, /src="data:image\/jpeg;base64,ZZ"/)
+  assert.match(rail, /src="https:\/\/upload\.wikimedia\.org\/x\.jpg"/)
   assert.match(rail, /href="https:\/\/en\.wikipedia\.org\/wiki\/File:X\.jpg"/)
   assert.match(rail, /href="https:\/\/demo\.test\/wiki\/Palmerston_North"/)
   assert.match(rail, /href="https:\/\/demo\.test\/"/, 'front-page link derived from the demo base')
@@ -439,7 +442,9 @@ test('an empty panel with a box present falls back to the old suppression', () =
   assert.doesNotMatch(rail, /ib-slot/)
 })
 
-test('a labelled image row\u2019s src swaps to inline bytes the box recorded', () => {
+test('a labelled image row keeps its Wikimedia src — the panel never rewrites the box', () => {
+  // Same rule as the plain box: the article's own images hotlink from
+  // Wikimedia and no inline map rewrites them, even one holding their URL.
   const url = 'https://upload.wikimedia.org/x/portrait.jpg'
   const band = holderLede({
     infobox: {
@@ -449,8 +454,8 @@ test('a labelled image row\u2019s src swaps to inline bytes the box recorded', (
   })
   const inline = new Map([[url, 'data:image/jpeg;base64,AAA']])
   const { rail } = bandParts(band, inline, '/wiki/')
-  assert.match(rail, /src="data:image\/jpeg;base64,AAA"/)
-  assert.doesNotMatch(rail, /src="https:\/\/upload\.wikimedia\.org/)
+  assert.match(rail, /src="https:\/\/upload\.wikimedia\.org\/x\/portrait\.jpg"/)
+  assert.doesNotMatch(rail, /data:image\/jpeg;base64,AAA/)
 })
 
 test('the panel\u2019s Wikipedia rows re-base their article links in standalone renders', () => {
