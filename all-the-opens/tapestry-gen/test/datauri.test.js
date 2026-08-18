@@ -75,9 +75,14 @@ test('only non-document images pass the type gate — one definition for fetch a
   // Bare image/svg is refused too — whether any renderer treats it as SVG
   // is a question this gate declines to find out.
   assert.equal(isImageType('image/svg'), false)
-  // A comma-joined duplicate Content-Type is not a media type: the anchored
-  // subtype makes the parameter split load-bearing rather than documentary.
+  // A bare comma-joined duplicate Content-Type is not a media type: the
+  // anchored subtype makes the parameter split load-bearing rather than
+  // documentary.
   assert.equal(isImageType('image/png, text/html'), false)
+  // A PARAMETERIZED join passes, deliberately: the split reduces it to its
+  // one safe leading type, and that split value is what gets stored and
+  // served — pinned so the comment's guarantee cannot drift either way.
+  assert.equal(isImageType('image/png; charset=x, text/html'), true)
   assert.equal(isImageType('text/html;charset=utf-8'), false)
   assert.equal(isImageType('application/pdf'), false)
   assert.equal(isImageType(''), false)

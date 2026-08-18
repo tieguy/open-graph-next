@@ -319,9 +319,14 @@ export const placeholderFloor = (url) => (/covers\.openlibrary\.org/.test(url) ?
  */
 export const isImageType = (type) =>
   // Anchored subtype: the split is load-bearing (a parameterized type must
-  // still pass; a comma-joined duplicate header must not), and svg is
-  // refused with or without its +xml suffix — the open question of whether
-  // any renderer treats bare image/svg as SVG is closed by not finding out.
+  // still pass), and svg is refused with or without its +xml suffix — the
+  // open question of whether any renderer treats bare image/svg as SVG is
+  // closed by not finding out. The guarantee is that whatever PASSES is a
+  // single well-formed media type — and that exact split value is what
+  // gets stored and served. A bare comma-joined duplicate header
+  // ("image/png, text/html") is not one and is refused; a parameterized
+  // join ("image/png; charset=x, text/html") passes because the split
+  // already reduced it to its one safe leading type.
   /^image\/(?!svg(?:\+xml)?$)[a-z0-9!#$&^_.+-]+$/i.test((type ?? '').split(';')[0].trim())
 
 /**
