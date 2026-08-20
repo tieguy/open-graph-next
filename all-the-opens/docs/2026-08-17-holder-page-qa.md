@@ -184,10 +184,16 @@ The removal also reschedules ordinary pages: the citation lanes (Internet
 Archive, OpenLibrary, OpenAlex) now wait for the subject's claims before
 their first request, because a page cannot know whether its partners sit
 out until those claims arrive. Measured 2026-08-20, cold Ludwig Prandtl
-in clean worktrees at the commits before and after, run back to back:
+in clean worktrees before and after the flag removal
+(`133f5f3` and its parent), run back to back:
 request tallies identical host-for-host (54 requests), and wall clock
 unquotable in either direction — the post-change render measured FASTER
 (28.9s vs 53.3s) on identical work, upstream variance swamping any
 scheduling delta, as the request-shape notes in tapestry-gen/CLAUDE.md
-warn. The structural cost is accepted as bounded: each of those lanes
-starts at most one subject-claims round trip later than before.
+warn. The structural cost is accepted, stated as the real gate: each of
+those lanes now starts after `subjectPromise` resolves — the serial
+`fetchQids` batch chain (one enwiki request per 50 titles) plus one
+`wbgetentities` — rather than immediately. On Ludwig Prandtl that chain
+is the ~90ms priced in the `subjectPromise` comment in
+`src/discover.js`; it scales with the article's link count, not with a
+constant.
