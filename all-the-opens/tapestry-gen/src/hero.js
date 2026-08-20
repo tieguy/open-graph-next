@@ -34,7 +34,11 @@
  * 6. Everything else — text-only records of things merely mentioned.
  */
 export function heroRank(entry) {
-  const visual = Boolean(entry.imageUrl || entry.media)
+  // `media3d` counts as something to look at, and has to: 576 of the
+  // Smithsonian's 1,937 scanned objects carry a Voyager package and NO still
+  // image (measured 2026-08-20), so reading only `imageUrl`/`media` calls a
+  // rotatable 3D model nothing and drops it to the text tiers.
+  const visual = Boolean(entry.imageUrl || entry.media || entry.media3d)
   if (entry.standing === 'subject-document') return 0
   if (entry.standing === 'subject-record') return visual ? 1 : 2
   if (entry.standing === 'subject-work') return 3
@@ -69,7 +73,8 @@ export function pickHero(entries) {
     }
   })
   const pick = list[best]
-  const worthIt = Boolean(pick.imageUrl || pick.media) || pick.standing === 'subject-document'
+  const worthIt =
+    Boolean(pick.imageUrl || pick.media || pick.media3d) || pick.standing === 'subject-document'
   if (!worthIt) return { hero: null, rest: list }
   return { hero: pick, rest: list.filter((_, i) => i !== best) }
 }

@@ -4,9 +4,9 @@
   "type": "module",
   "description": "Renders a Wikipedia article enriched with the open ecosystem's media and sources",
   "scripts": {
-    "spike": "node spike.js",
-    "serve": "node serve.js",
-    "warm": "node warm.js",
+    "spike": "node --env-file-if-exists=.env spike.js",
+    "serve": "node --env-file-if-exists=.env serve.js",
+    "warm": "node --env-file-if-exists=.env warm.js",
     "deploy": "flyctl deploy --remote-only",
     "deploy:staging": "flyctl deploy --config fly.staging.toml --remote-only",
     "test": "node --test 'test/*.test.js'"

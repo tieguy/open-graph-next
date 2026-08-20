@@ -11,7 +11,13 @@ import {
   siQid,
   siRights,
   siRowFor,
+  siScanEntryFrom,
+  siSpecimenNumber,
   siSearchUrl,
+  siTaxonRows,
+  siTaxonSearchUrl,
+  SI_TAXON_ROWS,
+  smithsonianScansForTaxon,
 } from '../src/smithsonian.js'
 
 // Trimmed from the live Open Access record for A19700102000 (the Apollo 11
@@ -153,4 +159,166 @@ test('an object with no 3D scan is still a card, just without the embed', () => 
   assert.equal(e.media3d, undefined)
   assert.equal(e.plate, undefined)
   assert.ok(e.imageUrl)
+})
+
+// ---------------------------------------------------------------------------
+// The taxon anchor: P225 → the Smithsonian's 3D scans
+// ---------------------------------------------------------------------------
+
+// Trimmed from the live Open Access record for USNM 143590, fetched
+// 2026-08-20. The ARK, the scientific name, the collection date and the three
+// Voyager packages are the Smithsonian's own; nothing is invented.
+const orangutan = {
+  title: 'Pongo abelii',
+  unitCode: 'NMNHMAMMALS',
+  url: 'edanmdm:nmnhvz_7251575',
+  content: {
+    freetext: {
+      date: [{ label: 'Collection Date', content: '30 Dec 1905' }],
+      identifier: [
+        { label: 'Accession Number', content: '046089' },
+        { label: 'Other Numbers', content: 'Mammals Field Number : 4606' },
+        { label: 'USNM Number', content: '143590' },
+      ],
+    },
+    indexedStructured: { scientific_name: ['Pongo abelii'] },
+    descriptiveNonRepeating: {
+      data_source: 'NMNH - Vertebrate Zoology - Mammals Division',
+      record_link: 'http://n2t.net/ark:/65665/389dc210f-f5b3-4910-ae87-a26700227801',
+      online_media: {
+        media: [
+          {
+            type: 'Images',
+            content: 'https://ids.si.edu/ids/deliveryService/id/ark:/65665/m328a61fcaf4984482951cea45d',
+            usage: { access: 'CC0' },
+          },
+          {
+            type: '3d_voyager',
+            content: 'https://3d-api.si.edu/voyager/3d_package:0047afa8-1ec0-4e3c-a9f5-03330d96cc47',
+            usage: { access: 'CC0' },
+          },
+        ],
+      },
+    },
+  },
+}
+
+/** The same record with its parts swapped out, so each test states one change. */
+const like = (over) => ({
+  ...orangutan,
+  content: {
+    ...orangutan.content,
+    ...(over.indexedStructured ? { indexedStructured: over.indexedStructured } : {}),
+    descriptiveNonRepeating: {
+      ...orangutan.content.descriptiveNonRepeating,
+      ...(over.media
+        ? { online_media: { media: over.media } }
+        : {}),
+    },
+  },
+})
+
+test('the search is a net for the taxon and the scan token, and the name is quoted', () => {
+  // Unquoted, "Pongo abelii" is two words and EDAN matches either.
+  const url = siTaxonSearchUrl('Pongo abelii', 'k3y')
+  assert.ok(url.includes(encodeURIComponent('"Pongo abelii" AND 3d_voyager')))
+  assert.ok(url.includes(`rows=${SI_TAXON_ROWS}`))
+  assert.ok(url.includes('api_key=k3y'))
+})
+
+test('a row is accepted on its OWN stated name, not on the search that found it', () => {
+  // EDAN's free text matches a collector's note as readily as a species, so the
+  // query is never what decides. This row was returned by a Pongo abelii search
+  // and states a different animal: it is somebody else's specimen.
+  const body = {
+    response: {
+      rowCount: 2,
+      rows: [orangutan, like({ indexedStructured: { scientific_name: ['Pongo pygmaeus'] } })],
+    },
+  }
+  const { rows } = siTaxonRows(body, 'Pongo abelii')
+  assert.equal(rows.length, 1)
+  assert.equal(rows[0].content.indexedStructured.scientific_name[0], 'Pongo abelii')
+})
+
+test('a record of the right animal with no scan is not a scan', () => {
+  const body = {
+    response: {
+      rowCount: 1,
+      rows: [like({ media: [{ type: 'Images', content: 'https://ids.si.edu/x', usage: { access: 'CC0' } }] })],
+    },
+  }
+  assert.equal(siTaxonRows(body, 'Pongo abelii').rows.length, 0)
+})
+
+test('names compare on case and interior spacing, and nothing else', () => {
+  const body = { response: { rowCount: 1, rows: [orangutan] } }
+  assert.equal(siTaxonRows(body, 'pongo  ABELII').rows.length, 1)
+  // No genus fallback: a scan of some other orangutan is not a scan of this
+  // species, and a card claiming otherwise would be the guess this project
+  // refuses to make.
+  assert.equal(siTaxonRows(body, 'Pongo').rows.length, 0)
+  assert.equal(siTaxonRows(body, '').rows.length, 0)
+})
+
+test('a full search window makes the count a floor, not a total', () => {
+  const rows = Array.from({ length: 20 }, () => orangutan)
+  assert.equal(siTaxonRows({ response: { rowCount: 81, rows } }, 'Pongo abelii').truncated, true)
+  assert.equal(siTaxonRows({ response: { rowCount: 3, rows } }, 'Pongo abelii').truncated, false)
+})
+
+test('a scan card says the join was a name and shows both sides of it', () => {
+  // The whole disclosure: this edge is not an identifier, and a reader must be
+  // able to see what actually agreed. `emit-html` renders it as the dashed
+  // card with a signal row.
+  const e = siScanEntryFrom(orangutan, 'Pongo abelii')
+  assert.equal(e.evidence, 'corroborated')
+  assert.deepEqual(e.corroboratedBy, [
+    { field: 'scientific name', holding: 'Pongo abelii', claimed: 'Pongo abelii' },
+  ])
+  assert.equal(e._via, 'P225')
+  // A partner's own record of the thing the article is about.
+  assert.equal(e.standing, 'subject-record')
+  assert.equal(e.source, 'smithsonian')
+  assert.equal(e.media3d, 'https://3d-api.si.edu/voyager/3d_package:0047afa8-1ec0-4e3c-a9f5-03330d96cc47')
+  // The ARK the museum states, never a URL we built.
+  assert.equal(e.href, orangutan.content.descriptiveNonRepeating.record_link)
+  assert.equal(e.rights.copy.label, 'CC0')
+})
+
+test('a record with no scan makes no scan card, whatever else it has', () => {
+  const still = like({ media: [{ type: 'Images', content: 'https://ids.si.edu/x', usage: { access: 'CC0' } }] })
+  assert.equal(siScanEntryFrom(still, 'Pongo abelii'), null)
+})
+
+test('the taxon lookup spends nothing without a key or a name', async () => {
+  // Keyless is graceful degradation, not a policy — production runs keyed. What
+  // matters is that it costs no request and claims nothing.
+  assert.deepEqual(await smithsonianScansForTaxon('Pongo abelii', undefined), {
+    entries: [],
+    total: 0,
+    truncated: false,
+  })
+  assert.deepEqual(await smithsonianScansForTaxon('', 'k3y'), {
+    entries: [],
+    total: 0,
+    truncated: false,
+  })
+})
+
+test('a specimen card is told apart by the museum\u2019s number for it', () => {
+  // The museum titles every one of these records with the species, so a shelf
+  // of three reads as one card printed three times. The number leads the
+  // description; the title stays the museum's own, never invented.
+  assert.equal(siSpecimenNumber(orangutan), 'USNM 143590')
+  const e = siScanEntryFrom(orangutan, 'Pongo abelii')
+  assert.equal(e.title, 'Pongo abelii')
+  assert.match(e.description, /^USNM 143590 · NMNH/)
+  // The acquisition event and the field-number grab-bag are not the specimen.
+  assert.equal(siSpecimenNumber(like({})), 'USNM 143590')
+  assert.equal(
+    siSpecimenNumber({ content: { freetext: { identifier: [{ label: 'Accession Number', content: '046089' }] } } }),
+    null,
+  )
+  assert.equal(siSpecimenNumber({}), null)
 })

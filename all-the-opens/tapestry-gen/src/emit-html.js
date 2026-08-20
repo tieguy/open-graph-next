@@ -769,6 +769,40 @@ function broadNotes(notes, inline) {
  * OpenAlex and the museum artwork counts. Those badges stay plain, which is
  * the honest render of "the rest exists and we cannot point at it".
  */
+/**
+ * The key explaining the dashed card, or nothing.
+ *
+ * Rendered only when the page actually holds a corroborated match — a key to a
+ * style nothing uses is noise, and worse, implies a rigour this render did not
+ * exercise.
+ *
+ * The fields are read off the cards rather than written into the sentence. The
+ * text named "an author, a date and an institution" for as long as the thesis
+ * lookup was the only corroborated edge; when the Smithsonian's taxon lookup
+ * arrived, an orangutan page explained its dashed cards by describing an author
+ * and an institution that appear nowhere on it. The disclosure is the one piece
+ * of prose here that must never be approximately true.
+ */
+export function evidenceKey(bands) {
+  const fields = []
+  for (const b of bands ?? [])
+    for (const e of b.entries ?? [])
+      if (e.evidence === 'corroborated')
+        for (const s of e.corroboratedBy ?? [])
+          if (s?.field && !fields.includes(s.field)) fields.push(s.field)
+  if (!fields.length) return ''
+  const named = fields.map((f) => `the ${f}`)
+  const list =
+    named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0]
+  return (
+    `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
+    `No identifier is shared by the two records — none exists on either side — so it was matched on ` +
+    `what both of them state: ${escapeHtml(list)}. The agreeing values are printed on the card, ` +
+    `because a description that agrees is a weaker claim than an identifier that matches, and must ` +
+    `not be read as one.</p>`
+  )
+}
+
 function sampleBadge(sample, shown) {
   if (!sample) return ''
   const text = `${shown} of ${sample.total.toLocaleString()}`
@@ -1036,7 +1070,8 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
       const split = byTopic.size > 1
       for (const [topic, items] of byTopic) {
         if (items.length !== 1) continue
-        if (!(items[0].imageUrl || items[0].media)) continue
+        // `media3d` is a visual too — see the comment on `visual` in hero.js.
+        if (!(items[0].imageUrl || items[0].media || items[0].media3d)) continue
         const key = shelfKey(source, topic)
         gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
         unused.delete(key)
@@ -1275,17 +1310,7 @@ export function buildHtml({
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
 
-  // Explain the one visual distinction that carries an argument, and only when
-  // the page actually uses it — a key to a style nothing on the page has is
-  // noise, and worse, implies a rigour this render did not exercise.
-  const hasCorroborated = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
-  const evidenceKey = hasCorroborated
-    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
-      `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
-      `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
-      `values are printed on the card, because a description that agrees is a weaker claim than an ` +
-      `identifier that matches, and must not be read as one.</p>`
-    : ''
+  const evidenceKeyHtml = evidenceKey(bands)
 
   return `<!doctype html>
 <html lang="en">
@@ -1301,7 +1326,7 @@ ${FOLD_JS}
 </head>
 <body>
 ${CC_SPRITE}
-${hero({ title, home, legend, panel: gapPanel(bands, reach, inline), extras: evidenceKey })}
+${hero({ title, home, legend, panel: gapPanel(bands, reach, inline), extras: evidenceKeyHtml })}
 <main>
 ${body}
 </main>
@@ -1434,13 +1459,7 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '', reach =
   const legend = used
     .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(SOURCE[s].name)}</span>`)
     .join('')
-  const evidenceKey = bands.some((b) => (b.entries ?? []).some((e) => e.evidence === 'corroborated'))
-    ? `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
-      `No identifier is shared by the two records — none exists on either side — so it was matched on the ` +
-      `object Wikidata <i>describes</i>: an author, a date and an institution that all agree. The agreeing ` +
-      `values are printed on the card, because a description that agrees is a weaker claim than an ` +
-      `identifier that matches, and must not be read as one.</p>`
-    : ''
+  const evidenceKeyHtml = evidenceKey(bands)
   // The visibility panel can only be built once every band has landed: it is a
   // statement about the whole page, and a partial one would undercount who is
   // missing — the one number on the page that must never be flattering. It
@@ -1455,8 +1474,8 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '', reach =
     (panel
       ? `<template id="tpl-gap">${panel}</template><script>__fill("tpl-gap",".gap-slot")</script>\n`
       : '') +
-    (evidenceKey
-      ? `<template id="tpl-notes">${evidenceKey}</template><script>__append("tpl-notes",".hero")</script>\n`
+    (evidenceKeyHtml
+      ? `<template id="tpl-notes">${evidenceKeyHtml}</template><script>__append("tpl-notes",".hero")</script>\n`
       : '')
   )
 }

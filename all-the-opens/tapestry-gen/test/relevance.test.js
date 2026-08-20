@@ -51,6 +51,22 @@ test('the subject’s own work ranks below a record OF the subject but above a s
   assert.ok(heroRank(work) < heroRank(stranger))
 })
 
+test('a rotatable scan is something to look at, and can lead a section', () => {
+  // 576 of the Smithsonian's 1,937 scanned objects have a Voyager package and
+  // no still image (measured 2026-08-20). Reading only imageUrl/media dropped
+  // every one of them to the text tiers, where nothing can float or lead.
+  const scan = {
+    source: 'smithsonian',
+    title: 'Pongo abelii',
+    standing: 'subject-record',
+    media3d: 'https://3d-api.si.edu/voyager/3d_package:0047afa8',
+  }
+  const text = { source: 'dpla', title: 'A catalog record' }
+  assert.equal(heroRank(scan), 1)
+  assert.ok(heroRank(scan) < heroRank(text))
+  assert.equal(pickHero([text, scan]).hero.title, 'Pongo abelii')
+})
+
 test('the hoisted find leaves the shelf, and article order breaks ties', () => {
   const a = shot({ source: 'met', title: 'First' })
   const b = shot({ source: 'met', title: 'Second' })

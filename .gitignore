@@ -6,3 +6,11 @@
 # Lavish review sessions — copies of built artifacts, regenerable
 .lavish/
 node_modules/
+
+# Local API keys. Every partner key this repo reads is a per-operator secret
+# (SMITHSONIAN_API_KEY, DPLA_API_KEY, EUROPEANA_API_KEY) and production keeps
+# them as Fly secrets, so nothing here is ever committed. Run with
+# `node --env-file=.env …`.
+.env
+.env.*
+!.env.example

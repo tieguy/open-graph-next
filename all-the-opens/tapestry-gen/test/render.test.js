@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
-import { buildHtml, sourcesUsed } from '../src/emit-html.js'
+import { buildHtml, evidenceKey, sourcesUsed } from '../src/emit-html.js'
 import { frontPage, showcaseTitles } from '../src/front-page.js'
 
 // What the shipped renderer and its article extraction promise. The curated
@@ -261,4 +261,36 @@ test('a bare plate is decorative — hidden from assistive tech, and never a lin
   const html = oneCard({ id: 'x', title: 'X', source: 'dpla', href: 'https://dp.la/item/abc' })
   assert.match(html, /<div class="plate bare" aria-hidden="true"><\/div>/)
   assert.doesNotMatch(html, /<a href="https:\/\/dp\.la\/item\/abc"[^>]*><div class="plate bare"/)
+})
+
+test('the dashed-card key names the fields THIS page matched on', () => {
+  const taxon = {
+    entries: [
+      {
+        evidence: 'corroborated',
+        corroboratedBy: [{ field: 'scientific name', holding: 'Pongo pygmaeus', claimed: 'Pongo pygmaeus' }],
+      },
+    ],
+  }
+  const thesis = {
+    entries: [
+      {
+        evidence: 'corroborated',
+        corroboratedBy: [
+          { field: 'creator', holding: 'Prandtl', claimed: 'Ludwig Prandtl' },
+          { field: 'year', holding: '1899', claimed: '1899' },
+          { field: 'institution', holding: 'LMU', claimed: 'LMU München' },
+        ],
+      },
+    ],
+  }
+  // The bug this replaces: a hardcoded key told an orangutan page its dashed
+  // cards were matched on an author, a date and an institution.
+  const one = evidenceKey([taxon])
+  assert.match(one, /what both of them state: the scientific name\./)
+  assert.doesNotMatch(one, /author|institution/)
+  assert.match(evidenceKey([thesis]), /the creator, the year and the institution\./)
+  // A page with no corroborated card explains no style it does not use.
+  assert.equal(evidenceKey([{ entries: [{ title: 'An ordinary card' }] }]), '')
+  assert.equal(evidenceKey([]), '')
 })

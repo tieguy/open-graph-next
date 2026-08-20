@@ -55,6 +55,7 @@ import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
 import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
+import { smithsonianScansForTaxon } from './smithsonian.js'
 import {
   openAlexAuthorWorks,
   openAlexLookups,
@@ -92,6 +93,9 @@ const CITES_PER_SECTION = Number(process.env.CITES_PER_SECTION ?? 3)
 // Subject-level lookups answer "what does the ecosystem hold about this subject?"
 // rather than "what did this section cite?", so they land in the lede.
 const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
+// Scanned specimens of the article's own species. Three, not six: a shelf of
+// gorilla skulls from one drawer says nothing the first one did not.
+const SCANS_BY_SUBJECT = Number(process.env.SCANS_BY_SUBJECT ?? 3)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
 const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
 // OpenAlex's `mailto` politeness parameter carries the same operator contact
@@ -1264,7 +1268,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
       .filter((v) => typeof v === 'string')
     const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
-    const [thesis, works, scholarship, artworks] = await Promise.all([
+    const taxonName = subjectClaims.P225?.[0]?.mainsnak?.datavalue?.value
+    const [thesis, works, scholarship, artworks, scans] = await Promise.all([
       // No longer waits for the page-wide identifier batch. That gate was
       // written when this lookup could spend eight serial archive.org requests
       // searching for a thesis by description — a cost worth deferring behind
@@ -1304,6 +1309,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
             return { entries: [], totals: {}, total: 0 }
           })
         : Promise.resolve({ entries: [], totals: {}, total: 0 }),
+      // The Smithsonian's 3D scans of the article's own species, joined on the
+      // scientific name rather than on any identifier — see the second half of
+      // src/smithsonian.js for why a specimen can be reached no other way, and
+      // for what the corroborated class is doing on these cards. Gated on the
+      // subject having a P225, so nothing but a taxon article ever spends the
+      // request.
+      typeof taxonName === 'string' && taxonName.trim()
+        ? smithsonianScansForTaxon(taxonName, process.env.SMITHSONIAN_API_KEY, {
+            cap: SCANS_BY_SUBJECT,
+          }).catch((e) => {
+            console.error(`  smithsonian scans failed: ${e.message}`)
+            return { entries: [], total: 0, truncated: false }
+          })
+        : Promise.resolve({ entries: [], total: 0, truncated: false }),
     ])
     // The shelves of the subject's own output say whose output and which
     // identifier vouches for that — the band's disclosure states the counts,
@@ -1362,6 +1381,21 @@ export async function discover(page, { emit = async () => {} } = {}) {
         ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
         : fixOn('P170')
     }
+    for (const e of scans.entries) {
+      e.why = `A Smithsonian specimen of ${page}, scanned in 3D`
+      e.topic = 'Scanned in 3D'
+      // A record OF the subject, not a work BY it: the specimen is one of these
+      // animals, and the museum made the scan. That is `subject-record`, and it
+      // is deliberately kept out of the creator-status loop below — nothing
+      // about who authored what applies to a gorilla.
+      e.standing = 'subject-record'
+      e.trace =
+        `Wikidata — the shared database behind Wikipedia’s infoboxes — records the scientific ` +
+        `name (P225) for ${page}. The Smithsonian’s Open Access catalog states that same name ` +
+        `on this specimen’s own record, and publishes a 3D scan of it. The two are joined by ` +
+        `the name: no identifier is shared, which is why the card says so.`
+      e.fix = fixOn('P225')
+    }
     if (thesis)
       console.error(
         `thesis: ${thesis.title} (` +
@@ -1374,6 +1408,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
       console.error(`works by subject: ${works.entries.length} of ${works.total}`)
     if (scholarship.entries.length)
       console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
+    if (scans.entries.length)
+      console.error(
+        `smithsonian scans by taxon: ${scans.entries.length} of ` +
+          `${scans.truncated ? `${scans.total}+` : scans.total} for ${taxonName}`,
+      )
     if (artworks.entries.length)
       console.error(
         `artworks by subject: ${artworks.entries.length} of ` +
@@ -1383,7 +1422,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
             .map(([k, n]) => `${k} ${n}`)
             .join(', ')})`,
       )
-    return { opinion, thesis, works, scholarship, artworks, subjectQid }
+    return { opinion, thesis, works, scholarship, artworks, scans, subjectQid }
   })
 
   // ---- One task per unit: a band completes when ITS dependencies do. -------
@@ -1438,6 +1477,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         ...extras.works.entries,
         ...extras.scholarship.entries,
         ...extras.artworks.entries,
+        ...extras.scans.entries,
       )
     // The subject's own output — books Open Library files under them, papers
     // their ORCID vouches for, their thesis. Here the article's subject is the
@@ -1655,6 +1695,26 @@ export async function discover(page, { emit = async () => {} } = {}) {
         text:
           `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${unit.title} ` +
           `that Wikidata records ${holder} as holding`,
+      })
+    }
+
+    // The scan shelf's own count, on the shelf head where the cards are. `total`
+    // is what the request actually confirmed as this species AND scanned, so
+    // the number is one that was checked rather than one the API asserted; when
+    // the search window was full it reads "at least", because the rest was
+    // never seen. No `url`, for the artworks reason above — the Smithsonian
+    // publishes no browse that answers this question with this number.
+    if (extras?.scans.entries.length) {
+      const total = extras.scans.total
+      samples.push({
+        source: 'smithsonian',
+        topic: 'Scanned in 3D',
+        shown: extras.scans.entries.length,
+        total,
+        text:
+          `A sample: ${extras.scans.entries.length} of ${extras.scans.truncated ? 'at least ' : ''}` +
+          `${total} specimen${total === 1 ? '' : 's'} of ${unit.title} the Smithsonian has ` +
+          `scanned in 3D and released as CC0`,
       })
     }
 

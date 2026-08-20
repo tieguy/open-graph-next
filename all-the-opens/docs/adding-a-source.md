@@ -27,7 +27,7 @@ the page found the Wikipedia article itself shows.
 **Adding one source touches six code files, one generated file, and two
 docs.** We recommend partnering with an LLM on the work.
 
-*Housekeeping: last verified 2026-08-14. This file is canonical.
+*Housekeeping: last verified 2026-08-20. This file is canonical.
 `tapestry-gen/CLAUDE.md` keeps a pointer plus the two rules that cost the most
 when they are skipped. A PR that adds a source updates this file in the same
 commit.*
@@ -297,6 +297,13 @@ Real exceptions stay hand-written:
   (`rijks.js`).
 - The **subject's own artworks** come from asking Wikidata what the subject
   made, not from any wikilink lookup (`artworks.js`).
+- The **Smithsonian's 3D scans** are reached a second time, by the scientific
+  name the article's subject carries (P225 → `smithsonianScansForTaxon`),
+  because nine in ten of them are natural-history specimens and a specimen has
+  no Wikidata item to hold an identifier — only a species. **A partner can need
+  a second anchor when its best material is not the material its identifier
+  reaches.** That lookup joins a name to a name, so its cards carry
+  `evidence: 'corroborated'` — see the rule below.
 
 If a partner needs multiple properties, multiple hops, or a question the
 article's own links cannot phrase, it likely belongs here. **One more
@@ -333,6 +340,15 @@ hand-written case beats a fourth shape forced through §2a or §2b.**
   > modeling error (P31, instance-of) looks like the cause. It does not bind — the UK has
   > only 87 stained-glass-window items, and only 84 windows anywhere state
   > "stained glass" as their material. Verified 2026-08-11 (LUI-147).
+- **An edge made of a name is not an edge made of an identifier, and the card
+  must not look the same.** Set `evidence: 'corroborated'` and list what agreed
+  in `corroboratedBy`; the renderer draws the dashed card and the signal row.
+  Before writing such a lookup, say why the string is safe to compare: the
+  Smithsonian taxon join rests on a binomial being *governed* by the
+  nomenclature codes and stated in a structured field on both sides, which is
+  not true of a person's name or a title.
+  > Why: a reader can judge a match they can see, and cannot judge one the page
+  > presents as certain.
 - **Layer discipline: pipeline modules must not import the renderer's
   types.**
   > Why: `discover.js` once imported `emit-html.js`'s `SOURCE` map. The fix
@@ -368,13 +384,18 @@ surfaces.
 
 ```
 cd tapestry-gen
-WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Apollo 11"
-WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Brown v. Board of Education"
-WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Ludwig Prandtl"
+cp .env.example .env      # then fill it in — see below
+npm run spike -- "Apollo 11"
+npm run spike -- "Brown v. Board of Education"
+npm run spike -- "Ludwig Prandtl"
 ```
 
-(`WIKIMEDIA_UA_CONTACT` must be *your* address. It identifies whoever runs the
-code to the Wikimedia Foundation, and there is deliberately no default.)
+`.env` holds this working copy's identity and partner keys; it is gitignored,
+and the npm scripts load it with `node --env-file-if-exists=.env`, so a clone
+without one still runs and the keyed lookups skip. `WIKIMEDIA_UA_CONTACT` must
+be *your* address — it identifies whoever runs the code to the Wikimedia
+Foundation, and there is deliberately no default. Production carries the same
+names as Fly secrets.
 
 Render all three before and after. If none of the three exercises the new
 partner, **add a fourth fixture that does**. Then read the cards.

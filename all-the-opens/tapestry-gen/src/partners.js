@@ -60,7 +60,7 @@ export const PARTNERS = {
       // The list's prose style, not the legend's: "the Smithsonian".
       name: 'the Smithsonian',
       gives:
-        '3D scans and museum records, discovered through a pair of Wikidata statements naming the museum and its own accession number.',
+        '3D scans and museum records, discovered through the scientific name Wikidata states for a species, or a pair of statements naming the museum and its own accession number.',
       terms: 'Open Access items are CC0: no rights reserved at all.',
       // NOT si.edu's own announcement of the release, which would be the better
       // citation: www.si.edu is challenge-gated, and a real page and an invented

@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-14
+Last verified: 2026-08-20
 
 ## Purpose
 
@@ -52,11 +52,11 @@ does not help generate the website, it belongs in the attic.
 
 ## Two entry points
 
-- **`spike.js`** — batch live discovery: `node spike.js "Any Article Title"`
+- **`spike.js`** — batch live discovery: `npm run spike -- "Any Article Title"`
   builds a self-contained enriched page for an arbitrary English Wikipedia
   article with no dataset and no per-article code, byte-reproducible off its
   cache. Writes `demo/spike-<slug>.html`, slugged from the **resolved** title,
-  not argv — `node spike.js "Coral_Gables"` writes
+  not argv — `npm run spike -- "Coral_Gables"` writes
   `demo/spike-coral-gables-florida.html`. Thin wrapper over `src/discover.js`.
   **It is also the only test of the discovery path**: no test imports
   `discover()`, so the acceptance checks in `docs/` are spike renders plus
@@ -1759,6 +1759,46 @@ the politeness claim is checkable after a run rather than merely asserted here.
   rotatable 3D scan: `media3d` carries the Voyager package URL and the renderer
   embeds it, because 3d-api.si.edu sets neither X-Frame-Options nor a
   frame-ancestors CSP. An object with several scans takes the museum's first.
+  **A second anchor reaches the scans the pair cannot: a scientific name**
+  (P225, added 2026-08-20). Nine in ten of the Smithsonian's 3D scans are
+  natural-history specimens — 906 invertebrate, 728 vertebrate, 158 paleo of
+  1,937 objects carrying a Voyager package, 1,934 of them plain CC0 (measured
+  2026-08-20). A specimen has no Wikidata item and never will; what it has is
+  the species, which is what the Wikipedia article is about. So
+  `smithsonianScansForTaxon` asks the Open Access catalog for one taxon's
+  scanned specimens, gated in `discover.js` on the article's subject carrying a
+  P225 — one request per species article, none anywhere else. Reach measured
+  the same day: 1,083 distinct taxon names across the specimens, 762 of them
+  Wikidata taxa, **307 with an English Wikipedia article**.
+  **These cards are `evidence: 'corroborated'`, and that is the point.** Every
+  other edge in this project is an identifier on both sides; this one compares
+  a name to a name, so it wears the dashed card and the "no shared identifier"
+  signal row rather than looking like a Met card. What makes the string
+  comparison defensible is that a binomial is *governed* — the ICZN and ICN
+  exist so that one name denotes one taxon — and that both sides are structured
+  machine fields (Wikidata's P225, EDAN's `indexedStructured.scientific_name`),
+  not prose. Exact after folding case and interior whitespace; no genus
+  fallback. The known failure it cannot detect is a cross-code homonym, one
+  binomial used for an animal and a plant; none seen in the 307.
+  **The row's own record decides, never the search.** EDAN's free text matches
+  a collector's note as readily as a species, and its own `online_media_type`
+  facet reports `["Images"]` for rows that plainly carry a `3d_voyager` package
+  — so a fielded query cannot be trusted either. The search is a net
+  (`"<name>" AND 3d_voyager`, 20 rows); `siTaxonRows` accepts a row only when
+  the record states this scientific name AND carries a real Voyager package.
+  A full window makes the shelf's count read "at least", because the rest was
+  never seen.
+  **Why it is worth reaching for at all**: a Voyager package resolves to glTF —
+  three levels of detail at 232/356/515 KB plus a Draco AR variant, served as
+  `model/gltf-binary` with `Access-Control-Allow-Origin: *` (read 2026-08-20) —
+  and Commons cannot hold any of it. Commons allows 24 upload extensions and
+  the only 3D one is `.stl` (`siprop=fileextensions`, read 2026-08-20). Every
+  card this lookup makes is material the encyclopedia's own media repository
+  has no way to store.
+  **`media3d` counts as a visual** in `heroRank`, `pickHero` and the float gate:
+  576 of the 1,937 scanned objects have a Voyager package and no still image, so
+  reading only `imageUrl`/`media` called a rotatable model nothing and dropped
+  every one of them to the text tiers.
 - `src/rijks.js` — the Rijksmuseum (P13234), added 2026-08-06. **No API key**:
   the keyed `api.rijksmuseum.nl` was shut down 2026-01-05 and 404s;
   `id.rijksmuseum.nl` (Linked Art) needs no auth, so unlike DPLA and Europeana

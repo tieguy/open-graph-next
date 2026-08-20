@@ -206,3 +206,196 @@ export async function smithsonianEntry(inventory, collectionName, key) {
   const row = siRowFor(body, inventory)
   return row ? siEntryFrom(row, collectionName) : null
 }
+
+// ---------------------------------------------------------------------------
+// The second anchor: a scientific name (P225) → the Smithsonian's 3D scans
+// ---------------------------------------------------------------------------
+//
+// Added 2026-08-20. The pair lookup above reaches an object because Wikidata
+// states which Smithsonian collection holds it and under what accession number.
+// Almost nothing that has been 3D scanned is reachable that way. Measured
+// 2026-08-20 against the Open Access API, 1,937 objects carry a Voyager 3D
+// package, and they break down by unit as:
+//
+//   NMNH invertebrate zoology   906     NMAH                 32
+//   NMNH vertebrate zoology     728     NMAAHC               32
+//   NMNH paleobiology           158     everything else     ≤11 each
+//
+// So roughly nine in ten scans are natural-history SPECIMENS — one gorilla
+// skull out of a drawer of them. A specimen has no Wikidata item and never
+// will; what it has is the species it belongs to, and the species is what the
+// Wikipedia article is about. 1,934 of the 1,937 are plain CC0.
+//
+// The reach, measured the same day: 1,083 distinct taxon names across those
+// specimens, 762 of which Wikidata knows as a taxon (P225), **307 of which have
+// an English Wikipedia article**. That is the population this lookup serves.
+//
+// ## Why this is worth reaching for at all
+//
+// A Voyager package resolves to glTF. The scene document for USNM 143590 lists
+// three levels of detail — 232 KB, 356 KB and 515 KB — plus a Draco-compressed
+// AR variant, each served as `model/gltf-binary` with `Access-Control-Allow-
+// Origin: *` (read 2026-08-20). Commons cannot hold any of it: its allowed
+// upload extensions are 24 (`action=query&meta=siteinfo&siprop=fileextensions`,
+// read 2026-08-20) and the only 3D one is `.stl`. So every card this lookup
+// makes is a thing the encyclopedia's own media repository has no way to store,
+// which is the argument the page exists to make.
+//
+// ## The join is a NAME, and the card says so
+//
+// Every other edge in this project is an identifier on both sides. This one is
+// not: the Smithsonian's record states a scientific name and Wikidata states a
+// scientific name, and they are compared as strings. That is a weaker claim and
+// the page must not let it look the same, so these entries carry
+// `evidence: 'corroborated'` — the dashed card and the "no shared identifier"
+// signal row that `emit-html.js` already renders.
+//
+// Two things make the string comparison defensible where a person's name would
+// not be. A binomial is governed: the ICZN and ICN exist precisely so that one
+// name denotes one taxon, which is not true of "J. Smith". And both sides are
+// structured fields written for machines — Wikidata's P225, and EDAN's
+// `indexedStructured.scientific_name` — rather than prose either side wrote for
+// a reader. The comparison is exact after folding case and interior whitespace;
+// nothing fuzzy, no genus-only fallback (a scan of *some* Pongo is not a scan
+// of the species this article is about).
+//
+// It remains a name match. Its known failure mode is a homonym across
+// nomenclature codes — the same binomial used for an animal and a plant — which
+// this cannot detect and which would put a beetle on a flower's page. No
+// instance has been seen in the 307; it is stated here rather than defended
+// against, because the honest answer is that the corroborated class is what
+// covers it.
+
+/** The taxon names a record states for itself, as EDAN indexes them. */
+export const siScientificNames = (row) =>
+  row?.content?.indexedStructured?.scientific_name?.filter?.((n) => typeof n === 'string') ?? []
+
+/**
+ * A scientific name folded for comparison — case and interior whitespace only.
+ *
+ * Deliberately not the alphanumerics fold `norm` uses for accession numbers:
+ * that one exists because punctuation in an accession number is cataloguing
+ * noise, whereas here it would make "Gorilla beringei" and "Gorillaberingei"
+ * compare equal, and a name is not a number.
+ */
+const foldTaxon = (s) => (typeof s === 'string' ? s.trim().toLowerCase().replace(/\s+/g, ' ') : '')
+
+/**
+ * How many rows one taxon search reads. EDAN has no field selection, so a row
+ * costs about 12 KB whether or not the card will use it; 20 rows is ~240 KB for
+ * a shelf of three. A taxon with more scanned specimens than this — Pongo
+ * pygmaeus has 81 — reports its count as "at least", never as a total it did
+ * not see.
+ */
+export const SI_TAXON_ROWS = 20
+
+/**
+ * The search for one taxon's scanned specimens.
+ *
+ * Free text rather than a fielded `scientific_name:` query: EDAN's own
+ * `online_media_type` facet reports `["Images"]` for rows that plainly carry a
+ * `3d_voyager` package (checked 2026-08-20), so its fielded vocabulary cannot
+ * be trusted to describe what the record actually holds. The query is a net;
+ * `siTaxonRows` is what decides, out of the record's own structured fields.
+ */
+export function siTaxonSearchUrl(taxon, key) {
+  return (
+    'https://api.si.edu/openaccess/api/v1.0/search?q=' +
+    encodeURIComponent(`"${taxon}" AND 3d_voyager`) +
+    `&rows=${SI_TAXON_ROWS}&api_key=${encodeURIComponent(key)}`
+  )
+}
+
+/**
+ * The rows that are BOTH this taxon and actually scanned, and whether the
+ * search window held everything the API said it had.
+ *
+ * Both halves are checked against the record rather than the query: the free
+ * text matches a collector's note as readily as a species, and `3d_voyager`
+ * appears in rows whose package field is empty.
+ */
+export function siTaxonRows(body, taxon) {
+  const want = foldTaxon(taxon)
+  const rows = body?.response?.rows ?? []
+  const matched = want
+    ? rows.filter(
+        (r) => siScientificNames(r).some((n) => foldTaxon(n) === want) && si3dModels(r).length,
+      )
+    : []
+  const rowCount = Number(body?.response?.rowCount ?? rows.length)
+  return { rows: matched, truncated: rowCount > rows.length }
+}
+
+/**
+ * One scanned specimen as a page entry.
+ *
+ * Built on `siEntryFrom` rather than beside it — the record, its ARK, its CC0
+ * mark and its Voyager package are the same fields read the same way — and then
+ * says the two things that are true here and not there: the join is a name, and
+ * this is a record OF the article's subject rather than of something it merely
+ * mentions.
+ */
+/**
+ * The museum's own catalogue number for a specimen — "USNM 143590" — or null.
+ *
+ * A shelf of specimens is a shelf of records the museum titles identically:
+ * three cards all reading "Pan troglodytes troglodytes" on the chimpanzee page.
+ * The title stays the museum's own (a title is never invented here), so the
+ * number leads the description instead, which is where a reader can tell the
+ * three apart. Present on 1,805 of the 1,807 natural-history scans (measured
+ * 2026-08-20). "Accession Number" is the museum's acquisition event and "Other
+ * Numbers" is a labelled grab-bag of field and legacy ids; neither names the
+ * specimen, so neither is read.
+ */
+export function siSpecimenNumber(row) {
+  const ids = row?.content?.freetext?.identifier ?? []
+  const found = ids.find(
+    (i) =>
+      typeof i?.label === 'string' &&
+      typeof i?.content === 'string' &&
+      i.content.trim() &&
+      /\bnumber$/i.test(i.label.trim()) &&
+      !/^(accession|other)\b/i.test(i.label.trim()),
+  )
+  return found ? `${found.label.trim().replace(/\s*number$/i, '')} ${found.content.trim()}` : null
+}
+
+export function siScanEntryFrom(row, taxon) {
+  const entry = siEntryFrom(row)
+  if (!entry || !entry.media3d) return null
+  const specimen = siSpecimenNumber(row)
+  const holding = siScientificNames(row).find((n) => foldTaxon(n) === foldTaxon(taxon)) ?? taxon
+  return {
+    ...entry,
+    description: [specimen, entry.description].filter(Boolean).join(' · '),
+    // A partner's own record of the thing the article is about — see heroRank.
+    standing: 'subject-record',
+    evidence: 'corroborated',
+    corroboratedBy: [{ field: 'scientific name', holding, claimed: taxon }],
+    _via: 'P225',
+  }
+}
+
+/**
+ * The Smithsonian's 3D scans of one taxon, in a single request.
+ *
+ * Returns `{ entries, total, truncated }`: `total` counts the confirmed rows
+ * this request saw, so a caller printing "3 of 12" is naming something that was
+ * checked. `truncated` says the API reported more rows than the window read,
+ * which makes that count a floor rather than a total.
+ *
+ * Keyless it returns nothing at all, the same graceful degradation the pair
+ * lookup makes — `SMITHSONIAN_API_KEY` is free by mail and production runs with
+ * one.
+ */
+export async function smithsonianScansForTaxon(taxon, key, { cap = 3 } = {}) {
+  const empty = { entries: [], total: 0, truncated: false }
+  if (!taxon || !key) return empty
+  const body = await getJson(siTaxonSearchUrl(taxon, key))
+  const { rows, truncated } = siTaxonRows(body, taxon)
+  const entries = rows
+    .slice(0, cap)
+    .map((r) => siScanEntryFrom(r, taxon))
+    .filter(Boolean)
+  return { entries, total: rows.length, truncated }
+}
