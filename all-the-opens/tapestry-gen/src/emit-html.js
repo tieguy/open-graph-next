@@ -366,17 +366,15 @@ function credit(entry, inline = new Map(), withSource = true) {
 
 /**
  * The labeled door to the holder's own viewer. Text names the museum so the
- * link reads as the partnership gesture it is. Copy is medium-aware: paintings
- * get brushwork copy, other media get house-voice language.
+ * link reads as the partnership gesture it is. The copy is dry and
+ * encyclopedic by the operator's direction (2026-08-18, replacing a
+ * flowery medium-aware pair), so one phrase serves every medium.
  */
-export function zoomLink(entry, institutionName, medium = null) {
+export function zoomLink(entry, institutionName) {
   if (entry.standing !== 'holder-work' || !entry.href) return ''
-  const copy = medium === 'painting'
-    ? `Zoom into the brushwork at ${escapeHtml(institutionName)} →`
-    : `See every detail at ${escapeHtml(institutionName)} →`
   // New tab like every other outbound link here: the door to the museum must
   // not discard the enriched render the reader is standing on.
-  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${copy}</a>`
+  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">High resolution at ${escapeHtml(institutionName)} →</a>`
 }
 
 /**
@@ -741,7 +739,7 @@ function heroCard(entry, inline, sample = null, holder = null, nameFor = null) {
   }
   const heading = titleRow(entry, 'hero')
   const claim = sampleBadge(sample, 1)
-  const zoom = holder ? zoomLink(entry, holder.record.institution, holder.medium) : ''
+  const zoom = holder ? zoomLink(entry, holder.record.institution) : ''
   // The IIIF requiredStatement is a mandatory attribution for THIS resource,
   // so it renders only on the holder's own card — and in its own element,
   // never inside `.credit`, whose line clamp may hide exactly the text the

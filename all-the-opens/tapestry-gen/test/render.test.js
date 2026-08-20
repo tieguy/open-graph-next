@@ -287,12 +287,12 @@ test('a bare plate is decorative — hidden from assistive tech, and never a lin
 
 test('zoomLink emits a link for a holder-work entry with an href', () => {
   const entry = { standing: 'holder-work', href: 'https://rijksmuseum.nl/object' }
-  const result = zoomLink(entry, 'Rijksmuseum', 'painting')
+  const result = zoomLink(entry, 'Rijksmuseum')
   assert.match(result, /<a class="zoom"/)
   assert.match(result, /href="https:\/\/rijksmuseum\.nl\/object"/)
-  assert.match(result, /Zoom into the brushwork at Rijksmuseum/)
-  // No medium stated → the medium-neutral copy, never a brushwork promise.
-  assert.match(zoomLink(entry, 'Rijksmuseum'), /See every detail at Rijksmuseum/)
+  assert.match(result, /High resolution at Rijksmuseum/)
+  // One dry phrase for every medium (the operator's copy, 2026-08-18).
+  assert.match(zoomLink(entry, 'Rijksmuseum'), /High resolution at Rijksmuseum/)
 })
 
 test('zoomLink returns empty string for non-holder-work standing', () => {
@@ -405,16 +405,16 @@ test('the hero card carries the zoom link with the provider name and the record 
   const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
   assert.match(
     result,
-    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener">Zoom into the brushwork at Statens Museum for Kunst →<\/a>/,
+    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener">High resolution at Statens Museum for Kunst →<\/a>/,
   )
 })
 
-test('a sculpture’s zoom link does not promise brushwork', () => {
+test('every medium gets the same dry door — no medium-flavored copy survives', () => {
   const holder = { ...SMK_HOLDER, medium: 'sculpture' }
   const bands = holderBands()
   bands[0].holder = holder
   const result = buildHtml({ title: 'Test', bands, holder })
-  assert.match(result, /See every detail at Statens Museum for Kunst →/)
+  assert.match(result, /High resolution at Statens Museum for Kunst →/)
   assert.doesNotMatch(result, /brushwork/)
 })
 

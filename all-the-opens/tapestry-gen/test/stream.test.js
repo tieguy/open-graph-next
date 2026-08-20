@@ -649,7 +649,7 @@ test('a streamed lede band carries the zoom link and the renamed source bar off 
     holder: STREAM_HOLDER,
   }
   const fragment = streamBand(band)
-  assert.match(fragment, /Zoom into the brushwork at Statens Museum for Kunst →/)
+  assert.match(fragment, /High resolution at Statens Museum for Kunst →/)
   const srcBar = fragment.match(/<div class="hero-src">([\s\S]*?)<\/div>/)[1]
   assert.match(srcBar, /Statens Museum for Kunst/)
   assert.doesNotMatch(srcBar, /IIIF collections/)
