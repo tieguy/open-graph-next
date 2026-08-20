@@ -48,7 +48,8 @@ export function metRecordUrl(id) {
 export function aicRecordUrl(id) {
   // alt_image_ids feeds imageCount; adding it re-keys every cached AIC
   // response once (the CLAUDE.md field-addition gotcha pattern), and this
-  // URL is shared with the ordinary AIC card path in statements.js.
+  // URL is shared with the ordinary AIC card path in statements.js. Field
+  // name live-verified 2026-08-20: artwork 805 answers image_id + 1 alt.
   return `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line,alt_image_ids`
 }
 
@@ -117,6 +118,8 @@ export function metRecordFrom(obj) {
     // How many images the museum's own record states — primary plus
     // additionalImages. A record fact, not a gate leg: the zoom door's
     // "more pages" clause reads it, and only prints when it exceeds one.
+    // Counted regardless of the rights flag — imageUrl is release-gated,
+    // the count is bookkeeping the gate never reads.
     imageCount:
       (obj.primaryImage || obj.primaryImageSmall ? 1 : 0) +
       (Array.isArray(obj.additionalImages) ? obj.additionalImages.length : 0),

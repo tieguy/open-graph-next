@@ -439,13 +439,36 @@ test('the hero card carries the zoom link with the provider name and the record 
   )
 })
 
-test('the zoom door names no medium — a sculpture page carries no brushwork promise', () => {
+test('a sculpture page keeps the plain door — no flowery medium copy', () => {
   const holder = { ...SMK_HOLDER, medium: 'sculpture' }
   const bands = holderBands()
   bands[0].holder = holder
   const result = buildHtml({ title: 'Test', bands, holder })
   assert.match(result, /High resolution at Statens Museum for Kunst →/)
   assert.doesNotMatch(result, /brushwork/)
+})
+
+test('the more-pages door is read from holder.medium and the record count, never the record’s material string', () => {
+  // The genuine case: the WORK_CLASSES medium word plus a stated count.
+  const holder = {
+    ...SMK_HOLDER,
+    medium: 'manuscript',
+    record: { ...SMK_HOLDER.record, medium: 'Tempera and gold on parchment', imageCount: 84 },
+  }
+  const bands = holderBands()
+  bands[0].holder = holder
+  const result = buildHtml({ title: 'Test', bands, holder })
+  assert.match(result, /High resolution and more pages at Statens Museum for Kunst →/)
+  // The decoy: a painting whose free-text material mentions a manuscript
+  // must not fire the clause — holder.record.medium is a different fact.
+  const decoy = {
+    ...SMK_HOLDER,
+    medium: 'painting',
+    record: { ...SMK_HOLDER.record, medium: 'illuminated manuscript on vellum', imageCount: 84 },
+  }
+  const decoyBands = holderBands()
+  decoyBands[0].holder = decoy
+  assert.doesNotMatch(buildHtml({ title: 'Test', bands: decoyBands, holder: decoy }), /more pages/)
 })
 
 test('the IIIF requiredStatement renders in its own element, only when the record carries one', () => {

@@ -202,6 +202,8 @@ test('rijksRecordFrom composes from existing helpers', () => {
   assert.equal(record.href, 'https://www.rijksmuseum.nl/en/collection/SK-C-5')
   assert.equal(record.institution, 'Rijksmuseum')
   assert.match(record.imageUrl, /800/)
+  // not yet extracted from the Linked Art hops — null is "unknown", never 0
+  assert.equal(record.imageCount, null)
   assert.equal(gateFailure(record), null)
 })
 
@@ -783,4 +785,18 @@ test('iiifRecordFrom counts canvases: v3 items, v2 sequence canvases, else null'
   assert.equal(v2.imageCount, 2)
   const bare = iiifRecordFrom({ label: 'x' }, 'https://example.org/m3.json')
   assert.equal(bare.imageCount, null)
+})
+
+test('every holder normalizer emits the imageCount key — null means unknown, absence would mean forgotten', () => {
+  const records = [
+    metRecordFrom({ objectID: 1 }),
+    aicRecordFrom({ data: { id: 1 } }),
+    clevelandRecordFrom({ data: { accession_number: 'x' } }),
+    gettyRecordFrom({ url: 'https://www.getty.edu/art/collection/object/X' }),
+    rijksRecordFrom({ identified_by: [] }, null, null, '1'),
+    iiifRecordFrom({ label: 'x' }, 'https://example.org/m.json'),
+  ]
+  for (const r of records) {
+    assert.ok(Object.hasOwn(r, 'imageCount'), `${r.partner} record carries imageCount`)
+  }
 })

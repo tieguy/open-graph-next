@@ -680,3 +680,19 @@ test('a holder-work hero floats over a stub lede where an ordinary hero demotes'
   const demoted = bandParts(ordinary)
   assert.doesNotMatch(demoted.rail, /hero-card/)
 })
+
+test('a streamed manuscript band reads the more-pages door off its holder record count', () => {
+  const holder = {
+    ...STREAM_HOLDER,
+    medium: 'manuscript',
+    record: { ...STREAM_HOLDER.record, imageCount: 210 },
+  }
+  const band = {
+    id: 'slede',
+    title: 'Lede',
+    blocks: [{ kind: 'text', text: 'Stub.' }],
+    entries: [streamHolderEntry()],
+    holder,
+  }
+  assert.match(streamBand(band), /High resolution and more pages at Statens Museum for Kunst →/)
+})
