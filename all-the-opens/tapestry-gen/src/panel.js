@@ -311,14 +311,14 @@ export function mergedPanel(rows, record) {
   }
 
   // Append holder-only fields (only if not already consumed by an infobox row)
-  // Description before bookkeeping. The original append set was accession
-  // and credit only, sized to Template:Infobox artwork's near-universal
-  // presence on painting articles — the manuscript population broke that
-  // assumption (2026-08-20, caught in review): an infobox-less page dropped
-  // the record's creator, date, medium and dimensions while its hero
-  // printed them, leaving a three-row bookkeeping panel. A field an infobox
-  // row already merged stays merged (consumedFields below); these append
-  // only where Wikipedia offered no counterpart.
+  // Description before bookkeeping: an infobox-less page (the manuscript
+  // population's usual shape — Template:Infobox artwork is near-universal
+  // only on painting articles) must still show the record's creator, date,
+  // medium and dimensions, not a bookkeeping-only panel beside a hero that
+  // prints them. A field an infobox row already merged stays merged
+  // (consumedFields below); these append only where Wikipedia offered no
+  // counterpart, and the list is a closed set — holder facts outside it
+  // are not shown.
   const holderOnlyFields = [
     { key: 'creator', label: 'Creator' },
     { key: 'date', label: 'Date' },

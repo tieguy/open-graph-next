@@ -761,13 +761,16 @@ rendered flag-on the same day: all 17 pass the gate** — eleven Met
 (the Cloisters books of hours, Chinese calligraphy, Mughal and Ottoman
 works, an Armenian gospel, the Cloisters Hebrew Bible), five Getty (the
 Spinola Hours renders with a six-work Horenbout shelf), one AIC (a Book
-of the Dead). The other 204 ITEMS are manifest-only,
-carrying 229 manifest rows between them (a few items state several
-manifests), 176 rows at `gallica.bnf.fr`. One probe per host — four
-full flag-on renders, two record-fetch-plus-gate calls, the code block
-labels which — covering six of the eight hosts and 225 of the 229
-rows; only `api.digitale-sammlungen.de` (2 rows) and `lib.is` (2 rows,
-one item) are unprobed:
+of the Dead). The other 204 items are
+manifest-only, carrying 238 manifest rows across 16 hosts (34 of the
+items state two manifests each; none states more), 176 rows at
+`gallica.bnf.fr`. One probe per major host — four full flag-on
+renders, two record-fetch-plus-gate calls, the code block labels
+which — covers six of the sixteen hosts and 225 of the 238 rows. The
+unprobed tail is ten hosts holding 13 rows: `api.digitale-sammlungen.de`
+and `lib.is` and `www.wdl.org` (2 each), and one row apiece at the GNM,
+the Chester Beatty, Trinity College Dublin, Durham, e-codices, the NLS
+and the University of Chicago:
 
 ```
 HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica (176)
@@ -780,11 +783,12 @@ HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge 
 #   ISOS "Book of Lismore" (www.isos.dias.ie, 11)    → no-institution
 ```
 
-All six are reachable, parseable Presentation v2 manifests — the four
-spike-rendered ones by the gate's own verdict, NLW and ISOS by their
-`@context` read directly the same day (`presentation/2/context.json`,
-no `provider` field, prose attributions: NLW names itself, ISOS states
-"© UCC"). No `provider` field exists to name the library, so the gate
+All six are reachable, parseable Presentation v2 manifests, measured:
+each host's probed manifest had its `@context` read directly on
+2026-08-20 — all six state `presentation/2/context.json` and none
+carries a `provider` field (the gate's `no-institution` verdict alone
+could not have said which; a v3 manifest without a provider fails the
+same way). NLW's prose attribution names itself; ISOS states "© UCC". No `provider` field exists to name the library, so the gate
 cannot credit them — the entry-18/20 pattern with library names on it
 (NLW here is the same host entry 21 classed KMSKA-style in the art
 lane: free-licensed, prose-named). The six probed hosts publish in the

@@ -1,6 +1,6 @@
 // Which single institution holds the work this article is about — the
 // detection and selection halves of the single-institution page
-// (../docs/design-plans/2026-08-16-single-institution-work-pages.md).
+// (../../docs/design-plans/2026-08-16-single-institution-work-pages.md).
 // Pure over a wbgetentities claims object; fetches nothing.
 
 // Direct P31 membership, deliberately without the ancestry walk: the
@@ -28,7 +28,7 @@ export const WORK_CLASSES = new Map([
 // shared IIIF door last. The door is special: "not one institution but a
 // door many institutions share" (src/partners.js), and 884 of 1,645
 // work-articles carry only P6108 — half the population (the checked-in
-// census, ../docs/data/2026-08-20-holder-census.json). So an iiif
+// census, ../../docs/data/2026-08-20-holder-census.json). So an iiif
 // selection is a CANDIDATE, not yet a holder: fetchHolderRecord must
 // resolve the manifest's own stated institution, and a
 // manifest that does not name exactly one gets no holder page — the

@@ -37,11 +37,12 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 - `cd tapestry-gen && npm run deploy:staging` — Fly deploy to **staging**
   (staging.friendsof.wiki), no warming. Review here first; prod is a separate,
   deliberate `npm run deploy`. Details in `tapestry-gen/CLAUDE.md`.
-- `HOLDER_PAGE=1` in front of any of the above turns on the single-institution
-  work-page experiment: an article about a held painting, sculpture, or
-  manuscript renders as Wikipedia plus that one institution, every other
-  partner sitting out. Off by default, and flag-off renders are unchanged. The rules, the gate and
-  the measured population are in `tapestry-gen/CLAUDE.md`.
+- `HOLDER_PAGE=1` in front of any of the above turns on the
+  single-institution work-page experiment: an article about a held
+  painting, sculpture, or manuscript renders as Wikipedia plus that one
+  institution, every other partner sitting out. Off by default, and
+  flag-off renders are unchanged. The rules, the gate and the measured
+  population are in `tapestry-gen/CLAUDE.md`.
 
 ## Project Structure
 

@@ -1972,7 +1972,8 @@ the politeness claim is checkable after a run rather than merely asserted here.
   dimensions, then accession, credit line, rights label — so an infobox-less
   page (the manuscript population's usual shape) still shows the museum's
   description, not only its bookkeeping. A field an infobox row merged is
-  never appended twice.
+  never appended twice, and the append list is a closed set — holder facts
+  outside it are not shown.
 - `src/getty.js` — the J. Paul Getty Museum (P2582). The record surface is the
   object page's embedded schema.org JSON-LD, not `data.getty.edu`, which
   answers real and bogus ids with the same 404 — the refusing-to-talk shape the
