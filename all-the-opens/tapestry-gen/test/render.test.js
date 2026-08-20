@@ -291,8 +291,6 @@ test('zoomLink emits a link for a holder-work entry with an href', () => {
   assert.match(result, /<a class="zoom"/)
   assert.match(result, /href="https:\/\/rijksmuseum\.nl\/object"/)
   assert.match(result, /High resolution at Rijksmuseum/)
-  // One dry phrase for every medium (the operator's copy, 2026-08-18).
-  assert.match(zoomLink(entry, 'Rijksmuseum'), /High resolution at Rijksmuseum/)
 })
 
 test('zoomLink returns empty string for non-holder-work standing', () => {
@@ -409,7 +407,7 @@ test('the hero card carries the zoom link with the provider name and the record 
   )
 })
 
-test('every medium gets the same dry door — no medium-flavored copy survives', () => {
+test('the zoom door names no medium — a sculpture page carries no brushwork promise', () => {
   const holder = { ...SMK_HOLDER, medium: 'sculpture' }
   const bands = holderBands()
   bands[0].holder = holder
