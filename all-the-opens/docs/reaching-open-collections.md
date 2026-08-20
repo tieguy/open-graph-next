@@ -791,11 +791,10 @@ could not have said which; a v3 manifest without a provider fails the
 same way). With no `provider` to name the library — the prose
 attributions do it instead, NLW naming itself and ISOS stating
 "© UCC" — the gate cannot credit any of the six: the entry-18/20
-pattern with library names on it
-(NLW here is the same host entry 21 classed KMSKA-style in the art
-lane: free-licensed, prose-named). The six probed hosts publish in the
-format's first edition; the door opens for them exactly as for KMSKA:
-v3 with `provider` and `homepage`.
+pattern with library names on it (NLW here is the same host entry 21
+classed KMSKA-style in the art lane: free-licensed, prose-named). The
+six probed hosts publish in the format's first edition; the door opens
+for them exactly as for KMSKA: v3 with `provider` and `homepage`.
 
 ## Already recorded elsewhere in this repo
 
