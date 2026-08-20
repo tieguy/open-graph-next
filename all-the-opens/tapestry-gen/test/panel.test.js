@@ -379,3 +379,30 @@ test('two rows mapping to one record field print the holder\u2019s value once', 
   const rows = (html.match(/<tr>/g) ?? []).length
   assert.equal(rows, 2)
 })
+
+test('an infobox-less page still gets the museum’s description, not only its bookkeeping', () => {
+  // The manuscript population's shape (2026-08-20): no infobox at all, a
+  // full museum record. Creator, date, medium and dimensions append ahead
+  // of the bookkeeping fields rather than vanishing.
+  const html = mergedPanel([], {
+    partner: 'met', institution: 'The Met',
+    title: 'Belles Heures', creator: 'The Limbourg Brothers',
+    date: '1405–1408/1409', medium: 'Tempera and gold on vellum',
+    dimensions: '23.8 × 17 cm', accession: '54.1.1',
+    credit: 'The Cloisters Collection', rights: { publicDomain: true, label: 'CC0' },
+  })
+  for (const v of ['The Limbourg Brothers', '1405–1408/1409', 'Tempera and gold on vellum', '23.8 × 17 cm', '54.1.1', 'The Cloisters Collection']) {
+    assert.ok(html.includes(v), v)
+  }
+  const order = ['Creator', 'Date', 'Medium', 'Dimensions', 'Accession', 'Credit line'].map((l) => html.indexOf(`>${l}<`))
+  assert.ok(order.every((i, n) => i >= 0 && (n === 0 || i > order[n - 1])), 'description before bookkeeping, in order')
+})
+
+test('a field an infobox row merged is never appended a second time', () => {
+  const html = mergedPanel(
+    infoboxRows('<table><tbody><tr><th>Artist</th><td>The Limbourg Brothers</td></tr></tbody></table>'),
+    { partner: 'met', institution: 'The Met', creator: 'The Limbourg Brothers', rights: {} },
+  )
+  assert.equal((html.match(/The Limbourg Brothers/g) ?? []).length, 1)
+  assert.doesNotMatch(html, />Creator</)
+})

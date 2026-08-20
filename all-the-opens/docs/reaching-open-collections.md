@@ -756,26 +756,34 @@ fixable by a specific, nameable party, several by a one-field edit.
 *Observed 2026-08-20, the day the manuscript family joined `WORK_CLASSES`.*
 
 The 2026-08-20 census counts 221 manuscript-family items with enwiki
-articles and holder identifiers; 17 reach museum lanes (and render full
-holder pages — the Met's Cloisters books of hours, the Getty's Spinola
-Hours with a six-work Horenbout shelf), while 204 are manifest-only,
-176 of them at `gallica.bnf.fr`. One probe per major host through the
-real gate:
+articles and holder identifiers. 17 carry museum ids, and **all 17 were
+rendered flag-on the same day: all 17 pass the gate** — eleven Met
+(the Cloisters books of hours, Chinese calligraphy, Mughal and Ottoman
+works, an Armenian gospel, the Cloisters Hebrew Bible), five Getty (the
+Spinola Hours renders with a six-work Horenbout shelf), one AIC (a Book
+of the Dead). The other 204 are manifest-only, 176 of them at
+`gallica.bnf.fr`. One probe per host through the real gate, covering
+six of the eight hosts and 225 of the 204 lane rows' manifests — only
+`api.digitale-sammlungen.de` (2) and `lib.is` (2) are unprobed:
 
 ```
-HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica
-HOLDER_PAGE=1 node spike.js "Codex Laudianus"                       # Bodleian
-HOLDER_PAGE=1 node spike.js "Codex Assemanius"                      # digi.vatlib.it
-HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge CUDL
+HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica (176)
+HOLDER_PAGE=1 node spike.js "Codex Laudianus"                       # Bodleian (18)
+HOLDER_PAGE=1 node spike.js "Codex Assemanius"                      # digi.vatlib.it (2)
+HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge CUDL (3)
 # → all four: holder record fails gate (no-institution)
+# and via fetchHolderRecord directly, same day:
+#   NLW "Peniarth 20" (damsssl.llgc.org.uk, 15)      → no-institution, pd=true
+#   ISOS "Book of Lismore" (www.isos.dias.ie, 11)    → no-institution
 ```
 
-All four are reachable, parseable manifests in the Presentation v2
+All six are reachable, parseable manifests in the Presentation v2
 generation — no `provider` field exists to name the library, so the gate
-cannot credit them, the entry-18/20 pattern with library names on it.
-The libraries that built IIIF publish in the format's first edition; the
-door opens for them exactly as for KMSKA: v3 with `provider` and
-`homepage`.
+cannot credit them, the entry-18/20 pattern with library names on it
+(NLW here is the same host entry 21 classed KMSKA-style in the art
+lane: free-licensed, prose-named). The six probed hosts publish in the
+format's first edition; the door opens for them exactly as for KMSKA:
+v3 with `provider` and `homepage`.
 
 ## Already recorded elsewhere in this repo
 

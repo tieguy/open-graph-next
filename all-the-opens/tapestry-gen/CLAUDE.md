@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-17
+Last verified: 2026-08-20
 
 ## Purpose
 
@@ -469,19 +469,22 @@ render can never share a stored page.
 **Detection and selection are pure and cost nothing** (`src/holder.js`, over
 the subject claims `discover.js` already fetches; the module fetches nothing).
 `WORK_CLASSES` is direct P31 membership — painting (Q3305213), sculpture
-(Q860861), and since 2026-08-20 the manuscript family (manuscript,
-illuminated manuscript, book of hours, codex, lectionary; five classes
+(Q860861), and since 2026-08-20 the manuscript family (manuscript Q87167,
+illuminated manuscript Q48498, book of hours Q727715, codex Q213924,
+lectionary Q284465; five classes
 because subclass membership is often the only membership stated, all
 reading "manuscript" in the card prose) — deliberately WITHOUT the
 ancestry walk, because the census counts the population by direct P31 and
 the walk would sit on the lede's critical path. The measured cost is 39
-articles whose subject is P31 of a subclass only (~2.3% of the
-2026-08-20 census's 1,645 items). The manuscript classes pay through the
-MUSEUM lanes today — 17 census items, the Met's Cloisters books of hours
-and the Getty's Spinola Hours among them, render full holder pages — while
-the manuscript iiif door hits the same v2 `no-institution` wall as the art
-lane (Gallica, the Bodleian, digi.vatlib.it and Cambridge all probed
-2026-08-20, log entry 22). `HOLDERS` is the precedence list: Rijksmuseum
+articles whose subject is P31 of a subclass only (2.4% of the 2026-08-20
+census's 1,645 items). The manuscript classes pay through the MUSEUM
+lanes today: all 17 museum-id-carrying manuscripts in that census were
+rendered flag-on on 2026-08-20 and all 17 pass the gate — the Met's
+Cloisters books of hours, the Getty's Spinola Hours (with a six-work
+Horenbout shelf), the AIC's Book of the Dead — while the manuscript iiif
+door hits the same v2 `no-institution` wall as the art lane (Gallica,
+the Bodleian, digi.vatlib.it, Cambridge, the National Library of Wales
+and Irish Script on Screen all probed 2026-08-20, log entry 22). `HOLDERS` is the precedence list: Rijksmuseum
 P13234, Met P3634, AIC P4610, Cleveland P11110, Getty P2582, and the IIIF door
 P6108 last. Where a work states several museum ids, the one whose museum
 matches the subject's P195 wins over precedence. **No fuzzy matching, here or

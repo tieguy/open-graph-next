@@ -1,6 +1,6 @@
 # Jenifesto - the article, enriched
 
-Last verified: 2026-08-17
+Last verified: 2026-08-20
 
 ## Purpose
 
@@ -38,9 +38,9 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   (staging.friendsof.wiki), no warming. Review here first; prod is a separate,
   deliberate `npm run deploy`. Details in `tapestry-gen/CLAUDE.md`.
 - `HOLDER_PAGE=1` in front of any of the above turns on the single-institution
-  work-page experiment: an article about a museum-held painting, sculpture,
-  or manuscript
-  renders as Wikipedia plus that one museum, every other partner sitting out.
+  work-page experiment: an article about a held painting, sculpture, or
+  manuscript renders as Wikipedia plus that one institution, every other
+  partner sitting out.
   Off by default, and flag-off renders are unchanged. The rules, the gate and
   the measured population are in `tapestry-gen/CLAUDE.md`.
 

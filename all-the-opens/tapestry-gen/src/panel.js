@@ -6,8 +6,10 @@
 // A conflict is defined by normalized text (lowercase, whitespace-collapsed);
 // trailing parentheticals are NOT stripped, so "363 cm × 437 cm" differs from
 // "363 cm × 437 cm (142.9 in × 172.0 in)" — a real difference must show.
-// Holder-only fields append in order: accession, credit line, rights.label.
-// Other holder facts without a Wikipedia row are not shown.
+// Holder fields without a Wikipedia counterpart append in order — creator,
+// date, medium, dimensions, then accession, credit line, rights.label — so
+// an infobox-less page still shows the museum's description, not only its
+// bookkeeping.
 
 import { escapeHtml } from './html.js'
 import { decodeEntities } from './wikipedia.js'
@@ -309,7 +311,19 @@ export function mergedPanel(rows, record) {
   }
 
   // Append holder-only fields (only if not already consumed by an infobox row)
+  // Description before bookkeeping. The original append set was accession
+  // and credit only, sized to Template:Infobox artwork's near-universal
+  // presence on painting articles — the manuscript population broke that
+  // assumption (2026-08-20, caught in review): an infobox-less page dropped
+  // the record's creator, date, medium and dimensions while its hero
+  // printed them, leaving a three-row bookkeeping panel. A field an infobox
+  // row already merged stays merged (consumedFields below); these append
+  // only where Wikipedia offered no counterpart.
   const holderOnlyFields = [
+    { key: 'creator', label: 'Creator' },
+    { key: 'date', label: 'Date' },
+    { key: 'medium', label: 'Medium' },
+    { key: 'dimensions', label: 'Dimensions' },
     { key: 'accession', label: 'Accession' },
     { key: 'credit', label: 'Credit line' },
   ]
