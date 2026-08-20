@@ -104,7 +104,6 @@ const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
 const SCANS_BY_SUBJECT = Number(process.env.SCANS_BY_SUBJECT ?? 3)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
 const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
-const HOLDER_PAGE = process.env.HOLDER_PAGE === '1'
 // On a single-institution page every non-holder lookup sits out. Each gated
 // partner is one that can never BE a page's holder (HOLDERS is the museum
 // properties plus the shared manifest door), so the test is simply whether a
@@ -918,11 +917,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }
   })()
 
-  // Single-institution work pages (HOLDER_PAGE=1, experiment): when the
-  // article IS a museum-held work, its one holding institution — selected
-  // from the subject's own best-rank identifiers, never by search.
+  // Single-institution work pages: when the article IS a museum-held work,
+  // its one holding institution — selected from the subject's own best-rank
+  // identifiers, never by search. On for every deployment (the operator's
+  // decision, 2026-08-20, on the QA document).
   const holderVerdictPromise = (async () => {
-    if (!HOLDER_PAGE) return null
     const subject = await subjectPromise
     const medium = workClass(subject.claims)
     if (!medium) return null

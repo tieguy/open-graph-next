@@ -461,10 +461,10 @@ sits out**. Design:
 `../docs/design-plans/2026-08-16-single-institution-work-pages.md`; the QA
 window that measured it: `../docs/2026-08-17-holder-page-qa.md`.
 
-**It is behind `HOLDER_PAGE=1` and off in production**, and flipping the
-default is the operator's decision on that QA document. `HOLDER_PAGE` is part
-of the page-cache build id (`src/page-cache.js`), so a flag-on and a flag-off
-render can never share a stored page.
+**It is on in every deployment** (the operator's decision, 2026-08-20, on
+that QA document — the flag it had lived behind is gone). The cost the QA
+window priced in rides with it: a manifest-held work-article pays one
+manifest fetch before falling back to the ordinary page.
 
 **Detection and selection are pure and cost nothing** (`src/holder.js`, over
 the subject claims `discover.js` already fetches; the module fetches nothing).
@@ -1742,19 +1742,14 @@ nothing; `holder-record` is where that half's network lives.
   can never select a holder, and a test asserts that. It returns entity- and
   string-valued snaks only; a caller wanting a coordinate, date or quantity
   must read the datavalue itself.
-- **The holder path is inert with the flag off.** With `HOLDER_PAGE` unset,
-  `src/discover.js` returns no holder before any work is done: no holder
-  furniture renders and no holder dispatch or suppression runs. Flag-off
-  renders are NOT byte-identical to pre-branch ones page-for-page, because
-  the branch also wired Cleveland and Getty as ordinary partners — their
-  lookups run on every page whose anchors carry P11110/P2582, and the WDQS
-  re-key Gotcha below applies; what byte-identity gates guarded at every
-  step was flag-off against the previous commit. The flag is part of the
-  page-cache build id, so the two flag states cannot serve each other's
-  stored pages. Holder furniture — the zoom
-  link, the required statement, the renamed source bar, the merged panel — is
-  attached to the lede band and read back from `b.holder`, so it can never
-  reach a band that has no holder context.
+- **The holder path runs on every deployment** (the operator's decision,
+  2026-08-20, on the QA document; the `HOLDER_PAGE` flag it had lived
+  behind is gone). A page whose subject is not a held work returns no
+  holder before any record fetch, and renders the ordinary multi-partner
+  page. Holder furniture — the zoom link, the required statement, the
+  renamed source bar, the merged panel — is attached to the lede band and
+  read back from `b.holder`, so it can never reach a band that has no
+  holder context.
 - **The footer's provenance is the caller's to state**, via `buildHtml({provenance})`.
   It was once hardcoded to the curated dataset, which made every live-discovery
   page contradict its own opening claim. Whatever goes there must be true of the

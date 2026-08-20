@@ -170,3 +170,12 @@ image; only `upload.wikimedia.org` is exempt.
 
 Per the plan, no production default was changed in this phase — the
 decision is the operator's, on this document.
+
+## Decision
+
+Taken by the operator on 2026-08-20: **default on, for every deployment.**
+The `HOLDER_PAGE` flag was removed the same day — the holder path now runs
+unconditionally, and the iiif lane's cost (one manifest fetch per
+manifest-held work-article before the ordinary page renders) was accepted
+with it. The IIIF-lane accept/relax/defer question remains open and is
+unchanged by this decision.

@@ -44,19 +44,6 @@ test('two files trading contents is a different build', () => {
   assert.notEqual(sourceFingerprint(a), sourceFingerprint(b))
 })
 
-test('the experiment flag changes the build id when set vs unset', () => {
-  const before = process.env.HOLDER_PAGE
-  try {
-    process.env.HOLDER_PAGE = '1'
-    const withFlag = buildId()
-    delete process.env.HOLDER_PAGE
-    assert.notEqual(withFlag, buildId())
-  } finally {
-    if (before === undefined) delete process.env.HOLDER_PAGE
-    else process.env.HOLDER_PAGE = before
-  }
-})
-
 // ---- what a stored page is keyed by ---------------------------------------
 
 test('the same article asked for in different spellings replays one render', () => {
