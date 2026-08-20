@@ -756,21 +756,21 @@ fixable by a specific, nameable party, several by a one-field edit.
 *Observed 2026-08-20, the day the manuscript family joined `WORK_CLASSES`.*
 
 The 2026-08-20 census counts 221 manuscript-family items with enwiki
-articles and holder identifiers. 17 carry museum ids, and **all 17 were
-rendered flag-on the same day: all 17 pass the gate** — eleven Met
-(the Cloisters books of hours, Chinese calligraphy, Mughal and Ottoman
-works, an Armenian gospel, the Cloisters Hebrew Bible), five Getty (the
-Spinola Hours renders with a six-work Horenbout shelf), one AIC (a Book
-of the Dead). The other 204 items are
-manifest-only, carrying 238 manifest rows across 16 hosts (34 of the
-items state two manifests each; none states more), 176 rows at
-`gallica.bnf.fr`. One probe per major host — four full flag-on
-renders, two record-fetch-plus-gate calls, the code block labels
-which — covers six of the sixteen hosts and 225 of the 238 rows. The
-unprobed tail is ten hosts holding 13 rows: `api.digitale-sammlungen.de`
-and `lib.is` and `www.wdl.org` (2 each), and one row apiece at the GNM,
-the Chester Beatty, Trinity College Dublin, Durham, e-codices, the NLS
-and the University of Chicago:
+articles and holder identifiers. 17 carry museum ids, and **all 17
+were rendered flag-on the same day: all 17 pass the gate** — eleven
+Met (the Cloisters books of hours, Chinese calligraphy, Mughal and
+Ottoman works, an Armenian gospel, the Cloisters Hebrew Bible), five
+Getty (the Spinola Hours renders with a six-work Horenbout shelf), one
+AIC (a Book of the Dead). The other 204 items are manifest-only,
+carrying 238 manifest rows across 16 hosts (34 of the items state two
+manifests each; none states more), 176 rows at `gallica.bnf.fr`. One
+probe per major host — four full flag-on renders, two
+record-fetch-plus-gate calls, the code block labels which — covers six
+of the sixteen hosts and 225 of the 238 rows. The unprobed tail is ten
+hosts holding 13 rows: `api.digitale-sammlungen.de` and `lib.is` and
+`www.wdl.org` (2 each), and one row apiece at the GNM, the Chester
+Beatty, Trinity College Dublin, Durham, e-codices, the NLS and the
+University of Chicago:
 
 ```
 HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica (176)
