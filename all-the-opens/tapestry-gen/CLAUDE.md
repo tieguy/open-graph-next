@@ -484,8 +484,9 @@ Cloisters books of hours, the Getty's Spinola Hours (with a six-work
 Horenbout shelf), the AIC's Book of the Dead — while the manuscript iiif
 door hits the same v2 `no-institution` wall as the art lane (Gallica,
 the Bodleian, digi.vatlib.it, Cambridge, the National Library of Wales
-and Irish Script on Screen all probed 2026-08-20, log entry 22). `HOLDERS` is the precedence list: Rijksmuseum
-P13234, Met P3634, AIC P4610, Cleveland P11110, Getty P2582, and the IIIF door
+and Irish Script on Screen all probed 2026-08-20, log entry 22).
+`HOLDERS` is the precedence list: Rijksmuseum P13234, Met P3634, AIC
+P4610, Cleveland P11110, Getty P2582, and the IIIF door
 P6108 last. Where a work states several museum ids, the one whose museum
 matches the subject's P195 wins over precedence. **No fuzzy matching, here or
 downstream** — a work whose graph states no holder id gets no holder page.
@@ -1966,9 +1967,12 @@ the politeness claim is checkable after a run rather than merely asserted here.
   name comes from `PARTNERS[partner].name`, never a hardcoded display string.
 - `src/panel.js` — pure: the Wikipedia infobox and the holder's record merged
   into one attributed table, conflicts shown side by side. `FIELD_LABELS` is
-  deliberately incomplete and unmapped labels pass through; holder-only fields
-  (accession, credit line, rights label) append in that order, and other holder
-  facts with no Wikipedia row are not shown.
+  deliberately incomplete and unmapped labels pass through; holder fields
+  without a Wikipedia counterpart append in order — creator, date, medium,
+  dimensions, then accession, credit line, rights label — so an infobox-less
+  page (the manuscript population's usual shape) still shows the museum's
+  description, not only its bookkeeping. A field an infobox row merged is
+  never appended twice.
 - `src/getty.js` — the J. Paul Getty Museum (P2582). The record surface is the
   object page's embedded schema.org JSON-LD, not `data.getty.edu`, which
   answers real and bogus ids with the same 404 — the refusing-to-talk shape the

@@ -761,10 +761,13 @@ rendered flag-on the same day: all 17 pass the gate** — eleven Met
 (the Cloisters books of hours, Chinese calligraphy, Mughal and Ottoman
 works, an Armenian gospel, the Cloisters Hebrew Bible), five Getty (the
 Spinola Hours renders with a six-work Horenbout shelf), one AIC (a Book
-of the Dead). The other 204 are manifest-only, 176 of them at
-`gallica.bnf.fr`. One probe per host through the real gate, covering
-six of the eight hosts and 225 of the 204 lane rows' manifests — only
-`api.digitale-sammlungen.de` (2) and `lib.is` (2) are unprobed:
+of the Dead). The other 204 ITEMS are manifest-only,
+carrying 229 manifest rows between them (a few items state several
+manifests), 176 rows at `gallica.bnf.fr`. One probe per host — four
+full flag-on renders, two record-fetch-plus-gate calls, the code block
+labels which — covering six of the eight hosts and 225 of the 229
+rows; only `api.digitale-sammlungen.de` (2 rows) and `lib.is` (2 rows,
+one item) are unprobed:
 
 ```
 HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica (176)
@@ -777,9 +780,12 @@ HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge 
 #   ISOS "Book of Lismore" (www.isos.dias.ie, 11)    → no-institution
 ```
 
-All six are reachable, parseable manifests in the Presentation v2
-generation — no `provider` field exists to name the library, so the gate
-cannot credit them, the entry-18/20 pattern with library names on it
+All six are reachable, parseable Presentation v2 manifests — the four
+spike-rendered ones by the gate's own verdict, NLW and ISOS by their
+`@context` read directly the same day (`presentation/2/context.json`,
+no `provider` field, prose attributions: NLW names itself, ISOS states
+"© UCC"). No `provider` field exists to name the library, so the gate
+cannot credit them — the entry-18/20 pattern with library names on it
 (NLW here is the same host entry 21 classed KMSKA-style in the art
 lane: free-licensed, prose-named). The six probed hosts publish in the
 format's first edition; the door opens for them exactly as for KMSKA:
