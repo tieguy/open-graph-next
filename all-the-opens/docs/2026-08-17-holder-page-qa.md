@@ -190,10 +190,13 @@ request tallies identical host-for-host (54 requests), and wall clock
 unquotable in either direction — the post-change render measured FASTER
 (28.9s vs 53.3s) on identical work, upstream variance swamping any
 scheduling delta, as the request-shape notes in tapestry-gen/CLAUDE.md
-warn. The structural cost is accepted, stated as the real gate: each of
-those lanes now starts after `subjectPromise` resolves — the serial
-`fetchQids` batch chain (one enwiki request per 50 titles) plus one
-`wbgetentities` — rather than immediately. On Ludwig Prandtl that chain
-is the ~90ms priced in the `subjectPromise` comment in
-`src/discover.js`; it scales with the article's link count, not with a
-constant.
+warn. The structural cost is accepted, and here is the real gate. Each of
+those lanes now starts after `subjectPromise` resolves, rather than
+immediately. `subjectPromise` is the serial `fetchQids` batch chain —
+one enwiki request per 50 titles — plus one `wbgetentities`. On Ludwig
+Prandtl the `subjectPromise` comment in `src/discover.js` prices only
+part of that chain: `+89ms` is what waiting on all title batches costs
+over waiting on the first, at ~10ms per 50-title batch. The first
+batch and the `wbgetentities` round trip sit on top of that and were
+not measured. The delay is therefore at least ~90ms, and it scales
+with the article's link count.
