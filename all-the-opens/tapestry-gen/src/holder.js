@@ -10,6 +10,18 @@
 export const WORK_CLASSES = new Map([
   ['Q3305213', 'painting'],
   ['Q860861', 'sculpture'],
+  // The manuscript family (added 2026-08-20, the operator's call): of the
+  // 1,311 items measured that day carrying both P6108 and an enwiki
+  // article, ~250 are manuscript-class — genuinely held works with single
+  // holding institutions, the material IIIF was practically built for.
+  // Five direct-P31 classes because subclass membership is often the only
+  // membership stated; the medium word is reader-facing prose ("this
+  // manuscript"), so all five share it.
+  ['Q87167', 'manuscript'],
+  ['Q48498', 'manuscript'], // illuminated manuscript
+  ['Q727715', 'manuscript'], // book of hours
+  ['Q213924', 'manuscript'], // codex
+  ['Q284465', 'manuscript'], // lectionary
 ])
 
 // Precedence order per the design: museum object-id properties first, the

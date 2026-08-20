@@ -6,7 +6,7 @@ import {
   claimsFromRows,
   subclassControlQuery,
 } from '../tools/census-holder-articles.mjs'
-import { HOLDERS, HOLDER_STATEMENT_VARS, selectHolder } from '../src/holder.js'
+import { HOLDERS, HOLDER_STATEMENT_VARS, WORK_CLASSES, selectHolder } from '../src/holder.js'
 import { HOLDER_FLAGSHIPS } from '../tools/holder-flagships.mjs'
 
 test('the census query carries one UNION branch per HOLDERS row, generated not typed', () => {
@@ -15,7 +15,10 @@ test('the census query carries one UNION branch per HOLDERS row, generated not t
     const branch = `{ ?item wdt:${h.property} ?value . BIND("${h.property}" AS ?property) }`
     assert.equal(q.split(branch).length - 1, 1, `${h.property} exactly once`)
   }
-  assert.match(q, /VALUES \?class \{ wd:Q3305213 wd:Q860861 \}/)
+  // Generated from WORK_CLASSES, so a class joining the map joins the
+  // census with no edit here.
+  const values = [...WORK_CLASSES.keys()].map((c) => `wd:${c}`).join(' ')
+  assert.ok(q.includes(`VALUES ?class { ${values} }`), 'census VALUES from WORK_CLASSES')
   assert.match(q, /schema:isPartOf <https:\/\/en\.wikipedia\.org\/>/)
 })
 
@@ -28,7 +31,8 @@ test('a new holder row grows a new branch with no edit to the builder', () => {
 test('the subclass control excludes direct members and walks P279+', () => {
   const q = subclassControlQuery()
   assert.match(q, /wdt:P31 \?sub \. \?sub wdt:P279\+ \?class/)
-  assert.match(q, /FILTER NOT EXISTS \{ VALUES \?direct \{ wd:Q3305213 wd:Q860861 \} \?item wdt:P31 \?direct \. \}/)
+  const values = [...WORK_CLASSES.keys()].map((c) => `wd:${c}`).join(' ')
+  assert.ok(q.includes(`FILTER NOT EXISTS { VALUES ?direct { ${values} } ?item wdt:P31 ?direct . }`), 'control excludes every direct class')
   assert.match(q, /COUNT\(DISTINCT \?item\)/)
   // The control counts holder-property carriers, same branches as the census.
   for (const h of HOLDERS) assert.match(q, new RegExp(`wdt:${h.property} `))

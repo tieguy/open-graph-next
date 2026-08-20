@@ -751,6 +751,32 @@ decomposes entirely into dead links, one certificate, a decade-old
 manifest format, and museums that never wrote their own name down — each
 fixable by a specific, nameable party, several by a one-field edit.
 
+## 22. The manuscript lane's library manifests hit the same v2 wall `[ours]`
+
+*Observed 2026-08-20, the day the manuscript family joined `WORK_CLASSES`.*
+
+The 2026-08-20 census counts 221 manuscript-family items with enwiki
+articles and holder identifiers; 17 reach museum lanes (and render full
+holder pages — the Met's Cloisters books of hours, the Getty's Spinola
+Hours with a six-work Horenbout shelf), while 204 are manifest-only,
+176 of them at `gallica.bnf.fr`. One probe per major host through the
+real gate:
+
+```
+HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica
+HOLDER_PAGE=1 node spike.js "Codex Laudianus"                       # Bodleian
+HOLDER_PAGE=1 node spike.js "Codex Assemanius"                      # digi.vatlib.it
+HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge CUDL
+# → all four: holder record fails gate (no-institution)
+```
+
+All four are reachable, parseable manifests in the Presentation v2
+generation — no `provider` field exists to name the library, so the gate
+cannot credit them, the entry-18/20 pattern with library names on it.
+The libraries that built IIIF publish in the format's first edition; the
+door opens for them exactly as for KMSKA: v3 with `provider` and
+`homepage`.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:

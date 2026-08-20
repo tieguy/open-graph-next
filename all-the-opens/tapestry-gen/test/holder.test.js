@@ -22,6 +22,11 @@ test('workClass: a painting article is detected as one', () => {
   assert.equal(workClass(nightWatch), 'painting')
 })
 
+test('workClass: every manuscript-family class reads as a manuscript', () => {
+  for (const qid of ['Q87167', 'Q48498', 'Q727715', 'Q213924', 'Q284465'])
+    assert.equal(workClass({ P31: [statement(item(qid))] }), 'manuscript', qid)
+})
+
 test('workClass: a sculpture is a work; a person and an empty item are not', () => {
   assert.equal(workClass({ P31: [statement(item('Q860861'))] }), 'sculpture')
   assert.equal(workClass({ P31: [statement(item('Q5'))] }), null)
