@@ -532,3 +532,19 @@ test('a non-holder render is byte-stable', async () => {
   // the same exception shape as the holder panel's rules.
   assert.equal(digest, '3966bdb8b82ee1440793dbd06e8e291a458d5304a14138b9eccec547e33edae4')
 })
+
+test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {
+  const entry = { standing: 'holder-work', href: 'https://www.metmuseum.org/art/collection/search/470309' }
+  const more = zoomLink(entry, 'The Met', { medium: 'manuscript', imageCount: 210 })
+  assert.match(more, /High resolution and more pages at The Met/)
+  // one stated image: the promise would outrun the destination
+  const single = zoomLink(entry, 'The Met', { medium: 'manuscript', imageCount: 1 })
+  assert.match(single, /High resolution at The Met/)
+  assert.doesNotMatch(single, /more pages/)
+  // unknown count (Getty, Rijksmuseum): the plain phrase, never a guess
+  const unknown = zoomLink(entry, 'J. Paul Getty Museum', { medium: 'manuscript', imageCount: null })
+  assert.doesNotMatch(unknown, /more pages/)
+  // a painting with many detail shots is not "more pages"
+  const painting = zoomLink(entry, 'The Met', { medium: 'painting', imageCount: 12 })
+  assert.doesNotMatch(painting, /more pages/)
+})

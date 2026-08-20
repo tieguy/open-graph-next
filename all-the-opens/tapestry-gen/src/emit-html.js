@@ -368,13 +368,23 @@ function credit(entry, inline = new Map(), withSource = true) {
  * The labeled door to the holder's own viewer. Text names the museum so the
  * link reads as the partnership gesture it is. The copy is dry and
  * encyclopedic by the operator's direction (2026-08-18, replacing a
- * flowery medium-aware pair), so one phrase serves every medium.
+ * flowery medium-aware pair).
+ *
+ * One conditional clause (the operator's direction, 2026-08-20): a
+ * manuscript page whose record itself states more than one image earns
+ * "and more pages" — the record's own count is the evidence, so the
+ * promise can never outrun the destination. A count the surface does not
+ * state (Getty, Rijksmuseum) is null and gets the plain phrase; measured
+ * 2026-08-20, one Met manuscript record states exactly one image, which
+ * is why >1 is the test rather than the medium alone.
  */
-export function zoomLink(entry, institutionName) {
+export function zoomLink(entry, institutionName, { medium, imageCount } = {}) {
   if (entry.standing !== 'holder-work' || !entry.href) return ''
+  const morePages = medium === 'manuscript' && typeof imageCount === 'number' && imageCount > 1
+  const words = morePages ? 'High resolution and more pages at' : 'High resolution at'
   // New tab like every other outbound link here: the door to the museum must
   // not discard the enriched render the reader is standing on.
-  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">High resolution at ${escapeHtml(institutionName)} →</a>`
+  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${words} ${escapeHtml(institutionName)} →</a>`
 }
 
 /**
@@ -739,7 +749,12 @@ function heroCard(entry, inline, sample = null, holder = null, nameFor = null) {
   }
   const heading = titleRow(entry, 'hero')
   const claim = sampleBadge(sample, 1)
-  const zoom = holder ? zoomLink(entry, holder.record.institution) : ''
+  const zoom = holder
+    ? zoomLink(entry, holder.record.institution, {
+        medium: holder.medium,
+        imageCount: holder.record.imageCount,
+      })
+    : ''
   // The IIIF requiredStatement is a mandatory attribution for THIS resource,
   // so it renders only on the holder's own card — and in its own element,
   // never inside `.credit`, whose line clamp may hide exactly the text the

@@ -22,7 +22,7 @@ test('aicRecordUrl builds the URL the existing entry fetcher requests', () => {
   const url = aicRecordUrl('111628')
   assert.equal(
     url,
-    'https://api.artic.edu/api/v1/artworks/111628?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line',
+    'https://api.artic.edu/api/v1/artworks/111628?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line,alt_image_ids',
   )
 })
 
@@ -49,7 +49,25 @@ test('metRecordFrom carries the catalog fields and the museum-stated page and im
   assert.match(record.imageUrl, /web-large/)
   assert.equal(record.href, 'https://www.metmuseum.org/art/collection/search/11417')
   assert.equal(record.institution, 'The Met')
+  // primary and no additionalImages array → the record states one image
+  assert.equal(record.imageCount, 1)
   assert.equal(gateFailure(record), null)
+})
+
+test('metRecordFrom counts primary plus additionalImages as the record-stated image count', () => {
+  const record = metRecordFrom({
+    objectID: 470309,
+    title: "The Hours of Jeanne d'Evreux",
+    isPublicDomain: true,
+    primaryImage: 'https://images.metmuseum.org/CRDImages/cl/original/a.jpg',
+    primaryImageSmall: 'https://images.metmuseum.org/CRDImages/cl/web-large/a.jpg',
+    additionalImages: [
+      'https://images.metmuseum.org/CRDImages/cl/original/b.jpg',
+      'https://images.metmuseum.org/CRDImages/cl/original/c.jpg',
+    ],
+    objectURL: 'https://www.metmuseum.org/art/collection/search/470309',
+  })
+  assert.equal(record.imageCount, 3)
 })
 
 test('a rights-reserved object fails the gate on non-pd-rights', () => {
@@ -89,7 +107,22 @@ test('aicRecordFrom reads the AIC envelope and builds the record image at width 
   assert.match(record.imageUrl, /full\/800/)
   assert.equal(record.href, 'https://www.artic.edu/artworks/111628')
   assert.equal(record.institution, 'Art Institute of Chicago')
+  // image_id present, alt_image_ids absent from this response → 1
+  assert.equal(record.imageCount, 1)
   assert.equal(gateFailure(record), null)
+})
+
+test('aicRecordFrom counts image_id plus alt_image_ids', () => {
+  const record = aicRecordFrom({
+    data: {
+      id: 805,
+      title: 'Funerary Papyrus of Tayuhenutmut',
+      is_public_domain: true,
+      image_id: 'a',
+      alt_image_ids: ['b'],
+    },
+  })
+  assert.equal(record.imageCount, 2)
 })
 
 test('rijksRecordFrom composes from existing helpers', () => {
@@ -717,4 +750,37 @@ test('a Getty page URL with a trailing slash still yields the id, never an empty
 test('gettyRecordFrom with null or a non-object returns null', () => {
   assert.equal(gettyRecordFrom(null), null)
   assert.equal(gettyRecordFrom('html'), null)
+})
+
+test('clevelandRecordFrom counts the web image plus alternate_images', () => {
+  const record = clevelandRecordFrom({
+    data: {
+      accession_number: '1985.32',
+      title: 'The Brierwood Pipe',
+      share_license_status: 'CC0',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/x/web.jpg' } },
+      alternate_images: [{ web: { url: 'https://openaccess-cdn.clevelandart.org/x/alt.jpg' } }],
+      url: 'https://www.clevelandart.org/art/1985.32',
+    },
+  })
+  assert.equal(record.imageCount, 2)
+})
+
+test('gettyRecordFrom carries no image count — the page surface does not state one', () => {
+  const record = gettyRecordFrom({
+    name: 'Spinola Hours',
+    url: 'https://www.getty.edu/art/collection/object/103RVJ',
+    license: 'https://creativecommons.org/publicdomain/zero/1.0/',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/f74ef4bc/full/!300,300/0/default.jpg',
+  })
+  assert.equal(record.imageCount, null)
+})
+
+test('iiifRecordFrom counts canvases: v3 items, v2 sequence canvases, else null', () => {
+  const v3 = iiifRecordFrom({ items: [{}, {}, {}] }, 'https://example.org/m.json')
+  assert.equal(v3.imageCount, 3)
+  const v2 = iiifRecordFrom({ sequences: [{ canvases: [{}, {}] }] }, 'https://example.org/m2.json')
+  assert.equal(v2.imageCount, 2)
+  const bare = iiifRecordFrom({ label: 'x' }, 'https://example.org/m3.json')
+  assert.equal(bare.imageCount, null)
 })

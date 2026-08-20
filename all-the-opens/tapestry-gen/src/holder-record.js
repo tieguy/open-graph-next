@@ -46,7 +46,10 @@ export function metRecordUrl(id) {
  * Build the URL for fetching an AIC catalog record.
  */
 export function aicRecordUrl(id) {
-  return `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line`
+  // alt_image_ids feeds imageCount; adding it re-keys every cached AIC
+  // response once (the CLAUDE.md field-addition gotcha pattern), and this
+  // URL is shared with the ordinary AIC card path in statements.js.
+  return `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain,medium_display,dimensions,main_reference_number,credit_line,alt_image_ids`
 }
 
 /**
@@ -111,6 +114,12 @@ export function metRecordFrom(obj) {
       uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl,
+    // How many images the museum's own record states — primary plus
+    // additionalImages. A record fact, not a gate leg: the zoom door's
+    // "more pages" clause reads it, and only prints when it exceeds one.
+    imageCount:
+      (obj.primaryImage || obj.primaryImageSmall ? 1 : 0) +
+      (Array.isArray(obj.additionalImages) ? obj.additionalImages.length : 0),
     href: nullIfEmpty(obj.objectURL),
     institution: PARTNERS.met.name,
   }
@@ -150,6 +159,10 @@ export function aicRecordFrom(body) {
       uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl,
+    // image_id plus alt_image_ids — the same record-stated count the Met
+    // transform carries.
+    imageCount:
+      (d?.image_id ? 1 : 0) + (Array.isArray(d?.alt_image_ids) ? d.alt_image_ids.length : 0),
     href: d?.id ? `https://www.artic.edu/artworks/${d.id}` : null,
     institution: PARTNERS.artic.name,
   }
@@ -188,6 +201,11 @@ export function clevelandRecordFrom(body) {
       uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl,
+    // images.web is one image in several sizes; alternate_images are the
+    // genuinely distinct others.
+    imageCount:
+      (d.images?.web?.url ? 1 : 0) +
+      (Array.isArray(d.alternate_images) ? d.alternate_images.length : 0),
     href: nullIfEmpty(d.url),
     institution: PARTNERS.cleveland.name,
   }
@@ -227,6 +245,10 @@ export function gettyRecordFrom(ld) {
       uri: isPublicDomain ? 'https://creativecommons.org/publicdomain/zero/1.0/' : null,
     },
     imageUrl: isPublicDomain ? gettyImageUrl(ld.thumbnailUrl) : null,
+    // The page's JSON-LD states one thumbnail and nothing about how many
+    // images exist — the Getty's leaf-by-leaf records hydrate client-side,
+    // beyond this surface (measured 2026-08-20). Unknown, so null.
+    imageCount: null,
     href,
     institution: PARTNERS.getty.name,
   }
@@ -266,6 +288,7 @@ export function rijksRecordFrom(obj, vis, digital, id) {
       uri: rights?.url ?? null,
     },
     imageUrl,
+    imageCount: null, // not yet extracted from the Linked Art hops as of 2026-08-20
     href: rijksPageUrl(obj, id),
     institution: PARTNERS.rijks.name,
   }
@@ -360,6 +383,15 @@ export function iiifRecordFrom(manifest, manifestUrl) {
   const providers = Array.isArray(manifest?.provider) ? manifest.provider : manifest?.provider ? [manifest.provider] : []
   const institution = iiifInstitution(manifest.provider)
 
+  // The manifest states its own page count: canvases. v3 carries them as
+  // items, v2 under the first sequence. Null where neither array exists —
+  // unknown, not zero.
+  const canvases = Array.isArray(manifest.items)
+    ? manifest.items.length
+    : Array.isArray(manifest.sequences?.[0]?.canvases)
+      ? manifest.sequences[0].canvases.length
+      : null
+
   return {
     partner: 'iiif',
     id: manifestUrl ?? '',
@@ -376,6 +408,7 @@ export function iiifRecordFrom(manifest, manifestUrl) {
       uri: rightsUri,
     },
     imageUrl,
+    imageCount: canvases,
     href,
     institution,
     requiredStatement: iiifRequiredStatement(manifest),

@@ -1,9 +1,10 @@
 // The holder-flagship warm list: one gate-clearing article per wired museum
-// holder — a page that renders the two-party treatment — plus one article
-// with a stated `role`, warmed for what its refusal shows. American Gothic
+// holder — a page that renders the two-party treatment — plus role-carrying
+// entries, each warmed for the one behavior it demonstrates. American Gothic
 // is the rights-disagreement exemplar: the Art Institute's record flags it
 // not-public-domain while the graph records the work as public domain, so
 // its page renders the sr-conflict disclosure rather than a holder page.
+// The Hours of Jeanne d'Evreux is the manuscript more-pages exemplar.
 // The shared IIIF door has no flagship: it names no single institution, and
 // its gate pass-rate is the QA window's question, not a warm list's.
 //
@@ -22,4 +23,7 @@ export const HOLDER_FLAGSHIPS = [
   { partner: 'cleveland', title: 'The Brierwood Pipe' },
   { partner: 'getty', title: 'Irises (painting)' },
   { partner: 'artic', title: 'American Gothic', role: 'rights-disagreement exemplar' },
+  // The Met's record states 210 images (read 2026-08-20), the deepest in the
+  // manuscript lane, so its door reads "High resolution and more pages at".
+  { partner: 'met', title: "Hours of Jeanne d'Evreux", role: 'manuscript more-pages exemplar' },
 ]

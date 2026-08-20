@@ -575,6 +575,20 @@ be checked this time. Carried as a fact rather than inferred from counts,
 because most citations hold no ISBN and a count cannot tell "asked and found
 nothing" from "never asked".
 
+**The zoom door's copy is evidence-bound** (2026-08-20). Every record carries
+`imageCount`, the museum's own count of images it states — Met primary +
+`additionalImages`, AIC `image_id` + `alt_image_ids`, Cleveland web +
+`alternate_images`, IIIF canvases; null where the surface states none (the
+Getty page's JSON-LD, the Rijksmuseum hops). A **manuscript** page whose
+record states more than one image reads "High resolution **and more pages**
+at <institution> →"; everything else keeps the plain phrase. The condition
+is the record's own count so the promise can never outrun the destination —
+measured 2026-08-20, one Met manuscript states exactly one image, and the
+Getty's leaf-by-leaf records are real but hydrate client-side where no
+fetch of ours can count them, so Getty manuscripts (the Spinola Hours
+included) stay plain. The Hours of Jeanne d'Evreux (210 stated images) is
+the warm list's manuscript more-pages exemplar.
+
 **The hero and the merged panel render together — the merge is the point, not
 a fallback.** `heroRank` gains a tier above `subject-document` for
 `holder-work` (the page's reason for existing), and that entry is exempt from
@@ -1869,10 +1883,11 @@ the politeness claim is checkable after a run rather than merely asserted here.
   reach it only through the holder-shelf restriction (`{ property: 'P11110' }`
   / `{ property: 'P2582' }`).
 - **The AIC `fields` list was widened on 2026-08-16** (`medium_display,
-  dimensions,main_reference_number,credit_line`), so every cached AIC response
-  predating that is keyed to the old URL and will be refetched once. Same
-  request COUNT — the fields ride the request AIC was already answering — but a
-  warm cache goes cold for that lookup exactly once.
+  dimensions,main_reference_number,credit_line`) **and again on 2026-08-20**
+  (`alt_image_ids`, feeding the record's `imageCount`), so every cached AIC
+  response predating the latest widening is keyed to the old URL and will be
+  refetched once. Same request COUNT — the fields ride the request AIC was
+  already answering — but a warm cache goes cold for that lookup exactly once.
 - **The DPLA query gained two fields on 2026-08-06** (`sourceResource.rights`,
   `rights`), so every cached DPLA response predating that is keyed to the old
   URL and will be refetched once. Same request COUNT — the fields ride the
