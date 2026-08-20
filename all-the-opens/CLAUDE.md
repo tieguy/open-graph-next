@@ -79,7 +79,7 @@ shapes it used retired to
 `../attic/all-the-opens/tapestry-gen-curated/data-apollo-11/` on 2026-08-04,
 where that README still documents them.
 
-The checked-in populations of the holder experiment (`docs/data/`, and
+The checked-in populations of the holder pages (`docs/data/`, and
 `tapestry-gen/tools/holder-flagships.mjs`) are not an exception: they are
 measurement inputs and a warming list, read by tools, never by a render. A
 page that consulted a checked-in file to decide what to show would be the

@@ -179,3 +179,15 @@ unconditionally, and the iiif lane's cost (one manifest fetch per
 manifest-held work-article before the ordinary page renders) was accepted
 with it. The IIIF-lane accept/relax/defer question remains open and is
 unchanged by this decision.
+
+The removal also reschedules ordinary pages: the citation lanes (Internet
+Archive, OpenLibrary, OpenAlex) now wait for the subject's claims before
+their first request, because a page cannot know whether its partners sit
+out until those claims arrive. Measured 2026-08-20, cold Ludwig Prandtl
+in clean worktrees at the commits before and after, run back to back:
+request tallies identical host-for-host (54 requests), and wall clock
+unquotable in either direction — the post-change render measured FASTER
+(28.9s vs 53.3s) on identical work, upstream variance swamping any
+scheduling delta, as the request-shape notes in tapestry-gen/CLAUDE.md
+warn. The structural cost is accepted as bounded: each of those lanes
+starts at most one subject-claims round trip later than before.

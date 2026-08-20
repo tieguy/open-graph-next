@@ -9,7 +9,7 @@
 // its gate pass-rate is the QA window's question, not a warm list's.
 //
 // Next to the census tool on purpose: this list and the census file are the
-// experiment's two checked-in populations, and neither is read at request
+// holder pages' two checked-in populations, and neither is read at request
 // time. warm.js walks this list only when HOLDER_FLAGSHIPS=1 — the
 // production showcase list (showcaseTitles) is untouched.
 // Structured as (partner, title) so completeness is a test, not a comment:
