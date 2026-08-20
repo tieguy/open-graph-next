@@ -336,6 +336,62 @@ export function siTaxonRows(body, taxon) {
  * mentions.
  */
 /**
+ * What the scan actually shows, in the museum's own words — "Pongo pygmaeus:
+ * Cranium" — or null where it names nothing.
+ *
+ * The record's `title` is the species for every one of these specimens, so a
+ * card built on the title alone says an orangutan and shows an ankle bone. The
+ * Voyager package names its own subject on the media entry, in a resource this
+ * module already has in hand: no second request, and no invented title.
+ */
+export function siScanSubject(row) {
+  for (const m of media(row)) {
+    if (m?.type !== '3d_voyager') continue
+    for (const res of m.resources ?? [])
+      if (typeof res?.name === 'string' && res.name.trim()) return foldRepeat(res.name.trim())
+  }
+  return null
+}
+
+/**
+ * The museum's own name with a repeated leading segment collapsed: the
+ * paleobiology packages are named "Bison latifrons: Bison latifrons: Teeth",
+ * which renders as a card that looks broken. Dropping an exact repeat of the
+ * segment before it removes nothing a reader was told — it is the same words
+ * twice — and anything that is not an exact repeat is left alone.
+ */
+const foldRepeat = (name) => {
+  const parts = name.split(':').map((p) => p.trim())
+  const kept = parts.filter((p, i) => i === 0 || p.toLowerCase() !== parts[i - 1].toLowerCase())
+  return kept.join(': ')
+}
+
+// Which scans a reader can recognize, and which are for a morphometrician.
+//
+// The Bornean orangutan's 81 scans include 33 mandibles and 30 crania; the
+// three that reached the page were a right cuneiform 1, a right navicular and
+// a right cuneiform 3, because the catalog returns its rows in no order and
+// this shelf took the first three. That is the unranked-shelf failure
+// `rankShelfEntries` exists to prevent, in a shelf that could not use it.
+//
+// So the pick prefers, in order: a scan of the whole specimen, then one of the
+// head — a skull identifies an animal to anyone, and the museum names 656 of
+// the 1,873 named scans as a cranium or mandible — then everything else, each
+// group keeping the museum's own order inside it. Nothing is dropped: an
+// isolated ankle bone is still a real scan of this species and still shelves,
+// behind the skull rather than in front of it. The vocabulary is a judgment
+// about what a reader recognizes, which is why it is short, listed here, and
+// not dressed up as a relevance score.
+const HEAD_PARTS = /\b(cranium|skull|mandible|jaw|teeth|tooth|dentition)\b/i
+
+/** 0 for a whole specimen, 1 for its head, 2 for anything else. */
+export function siScanRank(row) {
+  const name = siScanSubject(row)
+  if (!name || !name.includes(':')) return 0
+  return HEAD_PARTS.test(name.split(':', 2)[1]) ? 1 : 2
+}
+
+/**
  * The museum's own catalogue number for a specimen — "USNM 143590" — or null.
  *
  * A shelf of specimens is a shelf of records the museum titles identically:
@@ -364,9 +420,13 @@ export function siScanEntryFrom(row, taxon) {
   const entry = siEntryFrom(row)
   if (!entry || !entry.media3d) return null
   const specimen = siSpecimenNumber(row)
+  const subject = siScanSubject(row)
   const holding = siScientificNames(row).find((n) => foldTaxon(n) === foldTaxon(taxon)) ?? taxon
   return {
     ...entry,
+    // What the scan shows, where the package says — otherwise the record's own
+    // title, which is the species and nothing narrower.
+    title: subject ?? entry.title,
     description: [specimen, entry.description].filter(Boolean).join(' · '),
     // A partner's own record of the thing the article is about — see heroRank.
     standing: 'subject-record',
@@ -393,7 +453,12 @@ export async function smithsonianScansForTaxon(taxon, key, { cap = 3 } = {}) {
   if (!taxon || !key) return empty
   const body = await getJson(siTaxonSearchUrl(taxon, key))
   const { rows, truncated } = siTaxonRows(body, taxon)
-  const entries = rows
+  // Stable: equal ranks keep the order the museum returned them in.
+  const ordered = rows
+    .map((r, i) => ({ r, i, rank: siScanRank(r) }))
+    .sort((a, b) => a.rank - b.rank || a.i - b.i)
+    .map((x) => x.r)
+  const entries = ordered
     .slice(0, cap)
     .map((r) => siScanEntryFrom(r, taxon))
     .filter(Boolean)

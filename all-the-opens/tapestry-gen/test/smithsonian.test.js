@@ -12,6 +12,8 @@ import {
   siRights,
   siRowFor,
   siScanEntryFrom,
+  siScanRank,
+  siScanSubject,
   siSpecimenNumber,
   siSearchUrl,
   siTaxonRows,
@@ -196,6 +198,13 @@ const orangutan = {
             type: '3d_voyager',
             content: 'https://3d-api.si.edu/voyager/3d_package:0047afa8-1ec0-4e3c-a9f5-03330d96cc47',
             usage: { access: 'CC0' },
+            resources: [
+              {
+                name: 'Pongo abelii: MT2 Left',
+                type: '3D mesh',
+                filename: 'USNM143590_mt2_left_-200.ply',
+              },
+            ],
           },
         ],
       },
@@ -312,7 +321,9 @@ test('a specimen card is told apart by the museum\u2019s number for it', () => {
   // description; the title stays the museum's own, never invented.
   assert.equal(siSpecimenNumber(orangutan), 'USNM 143590')
   const e = siScanEntryFrom(orangutan, 'Pongo abelii')
-  assert.equal(e.title, 'Pongo abelii')
+  // The title names the scan's own subject — see the test below — so the number
+  // is what separates two scans of the same part of two different specimens.
+  assert.equal(e.title, 'Pongo abelii: MT2 Left')
   assert.match(e.description, /^USNM 143590 · NMNH/)
   // The acquisition event and the field-number grab-bag are not the specimen.
   assert.equal(siSpecimenNumber(like({})), 'USNM 143590')
@@ -321,4 +332,52 @@ test('a specimen card is told apart by the museum\u2019s number for it', () => {
     null,
   )
   assert.equal(siSpecimenNumber({}), null)
+})
+
+test('the card says what the scan shows, not just which animal it came from', () => {
+  // The record's title is the species for every one of these, so a card built
+  // on the title alone said "Pongo abelii" over a picture of an ankle bone.
+  assert.equal(siScanSubject(orangutan), 'Pongo abelii: MT2 Left')
+  assert.equal(siScanEntryFrom(orangutan, 'Pongo abelii').title, 'Pongo abelii: MT2 Left')
+  // Nothing is invented: a package that names no subject leaves the museum's
+  // own record title standing.
+  const quiet = JSON.parse(JSON.stringify(orangutan))
+  for (const m of quiet.content.descriptiveNonRepeating.online_media.media) delete m.resources
+  assert.equal(siScanSubject(quiet), null)
+  assert.equal(siScanEntryFrom(quiet, 'Pongo abelii').title, 'Pongo abelii')
+})
+
+test('a skull leads a shelf of loose bones, and neither is dropped', () => {
+  // Bornean orangutan: 81 scans, 33 mandibles and 30 crania among them, and the
+  // three that reached the page were a cuneiform, a navicular and a cuneiform.
+  const named = (n) => {
+    const r = JSON.parse(JSON.stringify(orangutan))
+    for (const m of r.content.descriptiveNonRepeating.online_media.media)
+      if (m.type === '3d_voyager') m.resources = [{ name: n }]
+    return r
+  }
+  const whole = named('Phyllopteryx taeniolatus')
+  const skull = named('Pongo pygmaeus: Cranium')
+  const foot = named('Pongo pygmaeus: Cuneiform1 Right')
+  assert.equal(siScanRank(whole), 0)
+  assert.equal(siScanRank(skull), 1)
+  assert.equal(siScanRank(foot), 2)
+  assert.deepEqual(
+    [foot, skull, whole].map(siScanRank).sort(),
+    [0, 1, 2],
+  )
+})
+
+test('a name the museum states twice is printed once', () => {
+  // The paleobiology packages are named "Bison latifrons: Bison latifrons:
+  // Teeth", which reads as a rendering bug rather than as a fossil.
+  const doubled = JSON.parse(JSON.stringify(orangutan))
+  for (const m of doubled.content.descriptiveNonRepeating.online_media.media)
+    if (m.type === '3d_voyager') m.resources = [{ name: 'Bison latifrons: Bison latifrons: Teeth' }]
+  assert.equal(siScanSubject(doubled), 'Bison latifrons: Teeth')
+  // Only an exact repeat folds; two different parts both stay.
+  const two = JSON.parse(JSON.stringify(orangutan))
+  for (const m of two.content.descriptiveNonRepeating.online_media.media)
+    if (m.type === '3d_voyager') m.resources = [{ name: 'Pongo abelii: Cranium: Left' }]
+  assert.equal(siScanSubject(two), 'Pongo abelii: Cranium: Left')
 })
