@@ -5,3 +5,8 @@ data
 test
 vendor
 *.md
+# Local secrets. The Dockerfile does not COPY these, but `flyctl deploy`
+# uploads the whole build context to the remote builder, so an unlisted .env
+# leaves this machine even though it never reaches the image.
+.env
+.env.*
