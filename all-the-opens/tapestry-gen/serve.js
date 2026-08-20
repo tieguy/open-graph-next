@@ -171,7 +171,7 @@ const ROBOTS = robotsTxt({ disallowAll: Boolean(process.env.ROBOTS_DISALLOW_ALL)
 // where it arrives: a few pages at a time is a demo, an unbounded queue of
 // them is someone else's traffic problem.
 const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
-// Slots general traffic cannot take, kept for the six pages the front page
+// Slots general traffic cannot take, kept for the pages the front page
 // promises are ready. Since the page cache landed this covers a much smaller
 // job than it did: a stored render needs no slot at all, so the reserve now
 // only matters in the windows where the showcase is genuinely cold — a fresh
@@ -471,7 +471,8 @@ server.listen(PORT, '0.0.0.0', () => {
   // traffic (src/warming.js), and a visitor arriving mid-warm outranks it at
   // the admission gate exactly as they outrank any other discovery in flight.
   // Idempotent by construction — a stored page replays in milliseconds — so a
-  // restart with a warm volume pays six local reads and touches nobody.
+  // restart with a warm volume pays one local read per showcase page and
+  // touches nobody.
   if (process.env.WARM_ON_START) {
     warmAll(`http://127.0.0.1:${PORT}`, showcaseTitles()).catch((e) =>
       console.error(`startup warming failed: ${e.message}`),

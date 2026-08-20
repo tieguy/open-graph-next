@@ -4,14 +4,14 @@
 // capped where it arrives (`MAX_CONCURRENT` in serve.js) and anything past the
 // cap is answered with a 503 that says so in the site's own voice. That cap was
 // applied to every `/wiki/` request alike, which quietly broke the promise the
-// front page makes in print: the six showcase articles are "already rendered
+// front page makes in print: the showcase articles are "already rendered
 // and cached — they open at once", and a reader who arrived while four cold
 // discoveries were in flight got the busy page for a page that would have been
 // served entirely off the disk cache.
 //
 // So the showcase gets a small reserve of slots that general traffic cannot
-// take. The argument for it is what warm means: `warm.js` walks exactly these
-// six after every deploy, and a warm page's discovery is 100% offline — it
+// take. The argument for it is what warm means: `warm.js` walks exactly this
+// list after every deploy, and a warm page's discovery is 100% offline — it
 // makes no upstream request at all, which is the thing `MAX_CONCURRENT` exists
 // to bound. **The reserve does not widen what this server does to anyone
 // else's API**: the per-host queues in `src/mw.js` bound upstream concurrency

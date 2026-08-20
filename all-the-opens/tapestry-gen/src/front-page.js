@@ -21,20 +21,27 @@ const OG_DESCRIPTION =
   'and mappers and naturalists who chart the planet for free.'
 
 // The showcase, compressed (2026-08-13). Each card used to carry a sentence
-// describing a page the reader had not opened yet; six of those is an essay
+// describing a page the reader had not opened yet; a card of prose apiece is an essay
 // standing between a visitor and the first click. A card now says three
 // things — the article, the one addition worth arriving for, and who else
-// turned up — so the six can be scanned instead of read.
+// turned up — so the row can be scanned instead of read.
 //
 // `friends` is HAND-WRITTEN, and this file cannot check it. The front page is
 // built once at startup, before any showcase page has been discovered, so the
-// only way to derive the row would be six discoveries' worth of partner
+// only way to derive the row would be the whole showcase's worth of partner
 // requests at boot — spending their capacity to draw logos. It is therefore a
 // claim to re-check by eye whenever the showcase changes or a partner stops
 // answering; a live page is the authority, not this list. A test does assert
 // that every slug names a friend this page lists, which catches a rename but
 // cannot catch drift. Each row deliberately OMITS the partner named in
 // `adds` — "other friends" means the ones the headline did not already say.
+// The showcase's own size, spelled, for the two sentences that promise these
+// pages are ready. Written out rather than counted, the number went stale the
+// moment a card was added — and it is a promise about how many pages open at
+// once, which is exactly the kind of claim this page must not get wrong.
+const SHOWCASE_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
+const showcaseCount = () => SHOWCASE_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
+
 const SHOWCASE = [
   {
     domain: 'Aviation',
@@ -75,6 +82,13 @@ const SHOWCASE = [
     title: 'CRISPR gene editing',
     adds: 'open copies of cited papers from OpenAlex',
     friends: ['arxiv', 'internet_archive'],
+  },
+  {
+    domain: 'Natural history',
+    title: 'Common seadragon',
+    adds: 'a 3D scan of the museum’s own specimen from the Smithsonian',
+    // Read off the rendered page 2026-08-20, per the hand-written rule above.
+    friends: ['inaturalist', 'gbif', 'dpla', 'internet_archive'],
   },
 ]
 
@@ -301,7 +315,7 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .section{padding:6px 0 22px}
 .section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
   color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
-/* The ready line: the six warm pages, named as such. A manila chip because a
+/* The ready line: the warm showcase pages, named as such. A manila chip because a
    statement about availability is the friends' voice, not the article's.
    Shared with the busy page — see CARD_STYLE. */
 ${CARD_STYLE}
@@ -388,7 +402,8 @@ ${legend.style}
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
-  <p class="ready"><span class="chip">ready now</span>Six articles are already rendered and cached — they open at once:</p>
+  <p class="ready"><span class="chip">ready now</span>${showcaseCount()
+    .replace(/^./, (c) => c.toUpperCase())} articles are already rendered and cached — they open at once:</p>
   <div class="grid">
 ${cards}
   </div>
@@ -541,14 +556,14 @@ ${friends}
  *
  * It used to be one sentence of system-ui on a blank page — true, and a dead
  * end: a reader who wanted to see what this demo does was told to come back
- * later by a site that had six finished pages sitting warm on disk. It now
+ * later by a site that had a showcase of finished pages sitting warm on disk. It now
  * makes the same "ready now" offer the front page makes, with the same cards,
  * and that offer is not decoration: a stored render is replayed from disk
  * before the concurrency gate is consulted at all (`src/page-cache.js`), so
  * these links do not queue behind the discoveries that caused this page. For
  * the windows where the showcase is genuinely cold — a fresh volume, the
  * minutes after a deploy — `src/admission.js` keeps a reserve of slots for
- * exactly these six, so the offer holds there too. A busy page linking to
+ * exactly these pages, so the offer holds there too. A busy page linking to
  * pages that would also answer 503 would be worse than the dead end it
  * replaced.
  *
@@ -557,7 +572,7 @@ ${friends}
  */
 // `inline` matters here for one reason: the showcase cards carry the partner
 // logos now, and those bytes live in the stylesheet (`faviconStyle`). A busy
-// page built without them would render six rows of blank squares — the offer
+// page built without them would render rows of blank squares — the offer
 // still works, but it would look broken exactly where the site is claiming a
 // friend showed up.
 export function busyPage({ inline = new Map(), siteOrigin = '' } = {}) {
@@ -619,7 +634,7 @@ ${sourceLegend(inline).style}
   <h1>Busy discovering, just now.</h1>
   <p class="lede">The demo is busy discovering other pages right now — it fetches politely, a few at a
     time. Try again in a moment.</p>
-  <p class="ready"><span class="chip">ready now</span>These six are already rendered and stored, so
+  <p class="ready"><span class="chip">ready now</span>These ${showcaseCount()} are already rendered and stored, so
     they are served from disk without waiting for the demo to be free:</p>
   <div class="grid">
 ${showcaseCards()}
