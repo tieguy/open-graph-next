@@ -587,10 +587,10 @@ yet extracted from the Linked Art hops. A **manuscript** page whose record
 states more than one image reads "High resolution **and more pages** at
 <institution> →"; everything else keeps the plain phrase, so the promise
 never outruns what the record itself states (measured 2026-08-20, one Met
-manuscript states exactly one image). It is an *images* count: exactly
-canvases — pages — on the IIIF lane, and the nearest machine-readable
-proxy for pages on the museum lanes, where extra images can be detail
-views. Getty manuscripts (the Spinola Hours included) therefore stay
+manuscript states exactly one image). It is an *images* count: on the IIIF
+lane the manifest's own canvas count, the closest thing a manifest states
+to a page count, and on the museum lanes the nearest machine-readable
+proxy for pages, where extra images can be detail views. Getty manuscripts (the Spinola Hours included) therefore stay
 plain. The Hours of Jeanne d'Evreux (210 stated images) is the warm
 list's manuscript more-pages exemplar.
 

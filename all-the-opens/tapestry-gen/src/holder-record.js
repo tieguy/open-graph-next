@@ -116,10 +116,12 @@ export function metRecordFrom(obj) {
     },
     imageUrl,
     // How many images the museum's own record states — primary plus
-    // additionalImages. A record fact, not a gate leg: the zoom door's
-    // "more pages" clause reads it, and only prints when it exceeds one.
-    // Counted regardless of the rights flag — imageUrl is release-gated,
-    // the count is bookkeeping the gate never reads.
+    // additionalImages (field live-verified 2026-08-20: object 470309
+    // answers a primary plus 209 additionalImages). A record fact, not a
+    // gate leg: the zoom door's "more pages" clause reads it, and only
+    // prints when it exceeds one. Counted regardless of the rights flag —
+    // imageUrl is release-gated, the count is bookkeeping the gate never
+    // reads.
     imageCount:
       (obj.primaryImage || obj.primaryImageSmall ? 1 : 0) +
       (Array.isArray(obj.additionalImages) ? obj.additionalImages.length : 0),
@@ -205,7 +207,8 @@ export function clevelandRecordFrom(body) {
     },
     imageUrl,
     // images.web is one image in several sizes; alternate_images are the
-    // genuinely distinct others.
+    // genuinely distinct others (field live-verified 2026-08-20 on artwork
+    // 1985.32, which answers the key with an empty array).
     imageCount:
       (d.images?.web?.url ? 1 : 0) +
       (Array.isArray(d.alternate_images) ? d.alternate_images.length : 0),
@@ -386,9 +389,11 @@ export function iiifRecordFrom(manifest, manifestUrl) {
   const providers = Array.isArray(manifest?.provider) ? manifest.provider : manifest?.provider ? [manifest.provider] : []
   const institution = iiifInstitution(manifest.provider)
 
-  // The manifest states its own page count: canvases. v3 carries them as
-  // items, v2 under the first sequence. Null where neither array exists —
-  // unknown, not zero.
+  // The manifest states its own canvas count — the closest thing a
+  // manifest states to a page count. v3 carries canvases as items; the v2
+  // arm is defensive only (a v2 manifest fails the institution gate above,
+  // so its count never reaches a render). Null where neither array
+  // exists — unknown, not zero.
   const canvases = Array.isArray(manifest.items)
     ? manifest.items.length
     : Array.isArray(manifest.sequences?.[0]?.canvases)

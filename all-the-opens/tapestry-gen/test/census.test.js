@@ -82,9 +82,9 @@ test('every wired museum holder has exactly one gate-clearing flagship — compl
   // The manifest convention (test/partners.test.js): an uncovered lane is a
   // red test, never a silent state. The iiif door has no flagship on
   // purpose — it names no single institution. Entries with a stated `role`
-  // are warmed for what their refusal shows (the rights-disagreement
-  // exemplar) and sit outside the one-per-lane rule, but must still name a
-  // wired lane.
+  // are each warmed for the one behavior they demonstrate (the
+  // rights-disagreement refusal, the manuscript more-pages door) and sit
+  // outside the one-per-lane rule, but must still name a wired lane.
   const clearing = HOLDER_FLAGSHIPS.filter((f) => !f.role).map((f) => f.partner)
   assert.deepEqual(new Set(clearing).size, clearing.length, 'no lane holds two gate-clearing flagships')
   assert.deepEqual([...new Set(clearing)].sort(), [...HOLDER_STATEMENT_VARS.keys()].sort())
