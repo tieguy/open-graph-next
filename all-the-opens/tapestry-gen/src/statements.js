@@ -1,7 +1,7 @@
 // The statement lookups: an anchored entity's Wikidata statements name an
 // object in a partner collection, and the partner's open API supplies the
 // object itself. Museums (Met P3634, Art Institute of Chicago P4610,
-// Rijksmuseum P13234),
+// Rijksmuseum P13234, Cleveland Museum of Art P11110, Getty P2582),
 // biodiversity (iNaturalist P3151, GBIF P846), and place (P625 coordinates →
 // OpenStreetMap render). One WDQS query answers every anchor's partner
 // statements; two small follow-ups decide which anchors are mappable places,
@@ -13,24 +13,35 @@
 // holds it and whether they may reuse it, and "via P3634" answers neither.
 
 import { chunk } from './batch.js'
-import { getJson, readFacts, writeFacts } from './http.js'
+import { gettyImageUrl, gettyLd, gettyPageUrl } from './getty.js'
+import { aicRecordUrl, clevelandRecordUrl, metRecordUrl } from './holder-record.js'
+import { getJson, getText, readFacts, writeFacts } from './http.js'
 import { iiifEntry } from './iiif.js'
 import { ccFromSlug, ccFromUri, licenseView } from './rights.js'
 import { rijksEntry } from './rijks.js'
 import { isSmithsonianCollection, siCollectionName, smithsonianEntry } from './smithsonian.js'
 
 /** Properties this lookup reads, and the shape they come back in. */
-const VARS = ['met', 'aic', 'rijks', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
+const VARS = ['met', 'aic', 'rijks', 'cleveland', 'getty', 'gbif', 'inat', 'coord', 'osmr', 'osmw', 'osmn', 'iiif', 'lc', 'eu', 'sicoll', 'siinv']
+
+/** The one WDQS request URL shape — importable so tools ride the same line. */
+export function wdqsSparqlUrl(query) {
+  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+}
 
 export function wdqsUrl(qids) {
   const values = qids.map((q) => `wd:${q}`).join(' ')
   const query =
-    `SELECT ?item ?met ?aic ?rijks ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?sicoll ?siinv WHERE { VALUES ?item { ${values} } ` +
+    `SELECT ?item ?met ?aic ?rijks ?cleveland ?getty ?gbif ?inat ?coord ?osmr ?osmw ?osmn ?iiif ?lc ?eu ?sicoll ?siinv WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P3634 ?met } OPTIONAL { ?item wdt:P4610 ?aic } ' +
     // P13234: the Rijksmuseum's own object id (added 2026-08-06) — same
     // object-level shape as the Met and AIC ids above, and the best-answering
     // of the three on art-heavy articles. See src/rijks.js.
     'OPTIONAL { ?item wdt:P13234 ?rijks } ' +
+    // P11110: the Cleveland Museum of Art's own object id — keyless, CC0,
+    // record-by-ID (probe note 11, ../../docs/reaching-open-collections.md).
+    'OPTIONAL { ?item wdt:P11110 ?cleveland } ' +
+    'OPTIONAL { ?item wdt:P2582 ?getty } ' +
     'OPTIONAL { ?item wdt:P846 ?gbif } OPTIONAL { ?item wdt:P3151 ?inat } ' +
     'OPTIONAL { ?item wdt:P625 ?coord } ' +
     'OPTIONAL { ?item wdt:P402 ?osmr } OPTIONAL { ?item wdt:P10689 ?osmw } ' +
@@ -49,7 +60,7 @@ export function wdqsUrl(qids) {
     // read separately, an object in a Smithsonian collection could be paired
     // with another museum's inventory number. See src/smithsonian.js.
     'OPTIONAL { ?item wdt:P195 ?sicoll ; wdt:P217 ?siinv } }'
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**
@@ -88,7 +99,7 @@ export function needsPlaceDefunctQuery(statements) {
  * about the wrong thing.
  */
 export function needsRightsQuery(statements) {
-  return Boolean(statements?.met || statements?.aic || statements?.rijks || statements?.iiif)
+  return Boolean(statements?.met || statements?.aic || statements?.rijks || statements?.cleveland || statements?.getty || statements?.iiif)
 }
 
 /**
@@ -134,7 +145,7 @@ export function itemClassesUrl(qids) {
     `SELECT ?item ?class ?ended WHERE { VALUES ?item { ${values} } ` +
     'OPTIONAL { ?item wdt:P31 ?class } ' +
     'OPTIONAL { ?item wdt:P576 ?ended } }'
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**
@@ -156,7 +167,7 @@ export function classesUrl(classes) {
   // trade: bytes are cheap, Blazegraph CPU is the donated resource, and a
   // query that times out costs every map on the page.
   const query = `SELECT ?class ?super WHERE { VALUES ?class { ${values} } ?class wdt:P279* ?super }`
-  return 'https://query.wikidata.org/sparql?format=json&query=' + encodeURIComponent(query)
+  return wdqsSparqlUrl(query)
 }
 
 /**
@@ -491,7 +502,7 @@ export function metEntryFrom(obj) {
 }
 
 export async function metEntry(id) {
-  return metEntryFrom(await getJson(`https://collectionapi.metmuseum.org/public/collection/v1/objects/${id}`))
+  return metEntryFrom(await getJson(metRecordUrl(id)))
 }
 
 export function aicEntryFrom(body) {
@@ -518,11 +529,67 @@ export function aicEntryFrom(body) {
 }
 
 export async function aicEntry(id) {
-  return aicEntryFrom(
-    await getJson(
-      `https://api.artic.edu/api/v1/artworks/${id}?fields=id,title,artist_display,date_display,image_id,is_public_domain`,
-    ),
-  )
+  return aicEntryFrom(await getJson(aicRecordUrl(id)))
+}
+
+export function clevelandEntryFrom(body) {
+  const d = body?.data
+  if (!d?.title) return null
+  const pd = d.share_license_status === 'CC0'
+  return {
+    source: 'cleveland',
+    title: d.title,
+    description: [d.creators?.[0]?.description, d.creation_date].filter(Boolean).join(' · '),
+    // The web derivative (~650px), the museum's own display size — the
+    // full-resolution print/full assets stay behind the object-page link.
+    imageUrl: pd ? (d.images?.web?.url ?? null) : null,
+    href: d.url ?? null,
+    attribution: {
+      author: pd ? 'Cleveland Museum of Art · public domain (CC0)' : 'Cleveland Museum of Art · rights reserved',
+      license: null,
+    },
+    // share_license_status IS the museum's own per-object CC0 dedication —
+    // `copy`, stated, never a guess. A non-CC0 object gets no mark at all.
+    rights: pd
+      ? { copy: licenseView(ccFromUri('https://creativecommons.org/publicdomain/zero/1.0/')) }
+      : undefined,
+    _via: 'P11110',
+  }
+}
+
+export async function clevelandEntry(id) {
+  return clevelandEntryFrom(await getJson(clevelandRecordUrl(id)))
+}
+
+export function gettyEntryFrom(ld) {
+  if (!ld?.name || typeof ld.name !== 'string') return null
+  // The page's own per-object license URI, read through ccFromUri so the
+  // http:// spelling the page uses parses the same as https://.
+  const cc = ccFromUri(ld.license ?? '')
+  const pd = cc?.code === 'CC0'
+  return {
+    source: 'getty',
+    title: ld.name,
+    description: [typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null, typeof ld.temporal === 'string' ? ld.temporal : null]
+      .filter(Boolean)
+      .join(' · '),
+    // The record's IIIF thumbnail rewritten to display size — see
+    // gettyImageUrl for why that construction is spec, not a guess.
+    imageUrl: pd ? gettyImageUrl(ld.thumbnailUrl) : null,
+    href: typeof ld.url === 'string' && ld.url ? ld.url : null,
+    attribution: {
+      author: pd ? 'J. Paul Getty Museum · public domain (CC0)' : 'J. Paul Getty Museum · rights reserved',
+      license: null,
+    },
+    // The license IS the page's own statement — `copy`, stated, never a
+    // guess. A page stating no CC0 gets no mark at all.
+    rights: pd ? { copy: licenseView(cc) } : undefined,
+    _via: 'P2582',
+  }
+}
+
+export async function gettyEntry(id) {
+  return gettyEntryFrom(gettyLd(await getText(gettyPageUrl(id))))
 }
 
 // Wikipedia's own bar (Commons' licensing policy): CC0, public domain, CC BY,
@@ -687,10 +754,12 @@ export function mapEntry(coord, label, osm = null) {
  * `tapestry-gen/CLAUDE.md`'s "Adding a data source" section for which shape
  * fits.
  */
-const MUSEUM_LOOKUPS = [
+export const MUSEUM_LOOKUPS = [
   { var: 'met', property: 'P3634', fetch: (v) => metEntry(v) },
   { var: 'aic', property: 'P4610', fetch: (v) => aicEntry(v) },
   { var: 'rijks', property: 'P13234', fetch: (v) => rijksEntry(v) },
+  { var: 'cleveland', property: 'P11110', fetch: (v) => clevelandEntry(v) },
+  { var: 'getty', property: 'P2582', fetch: (v) => gettyEntry(v) },
   // The manifest host is whichever institution holds the object; the
   // fetch rides that host's own queue like every other partner call.
   { var: 'iiif', property: 'P6108', fetch: (v, label) => iiifEntry(v, label) },
@@ -755,10 +824,12 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
 
 // The properties this lookup follows, in reader's words — an ⓘ fold that says
 // "P3634" and nothing else has explained nothing.
-const PROP_NAME = {
+export const PROP_NAME = {
   P3634: 'Met object ID (P3634)',
   P4610: 'Art Institute of Chicago artwork ID (P4610)',
   P13234: 'Rijksmuseum object ID (P13234)',
+  P11110: 'Cleveland Museum of Art ID (P11110)',
+  P2582: 'J. Paul Getty Museum object ID (P2582)',
   P6108: 'IIIF manifest URL (P6108)',
   P3151: 'iNaturalist taxon ID (P3151)',
   P846: 'GBIF taxon ID (P846)',

@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
-import { buildHtml, evidenceKey, sourcesUsed } from '../src/emit-html.js'
+import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
 import { frontPage, showcaseTitles } from '../src/front-page.js'
 
 // What the shipped renderer and its article extraction promise. The curated
@@ -218,9 +218,9 @@ test('every logo on a showcase card names a friend this page lists', () => {
 // Brown v. Board the imageless card was the HERO. A caption under nothing reads
 // as a broken image; these assertions pin the difference.
 
-const oneCard = (entry) =>
+const oneCard = (entry, inline = new Map()) =>
   buildHtml({
-    title: 'T', description: 'd', inline: new Map(),
+    title: 'T', description: 'd', inline,
     bands: [{ id: 'a', title: 'A', blocks: [{ type: 'p', html: '<p>t</p>' }], entries: [entry] }],
   })
 
@@ -250,9 +250,29 @@ test('a plate label is escaped, never injected', () => {
 })
 
 test('a card WITH an image is untouched — no plate competes with the picture', () => {
-  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' })
+  // The image must be OURS to serve (inline bytes or an /img/ path): under
+  // the never-hotlink rule a bare partner URL no longer counts as having one.
+  const html = oneCard(
+    { id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' },
+    new Map([['https://example.com/a.jpg', 'data:image/jpeg;base64,AAAA']]),
+  )
   assert.doesNotMatch(html, /class="plate/)
-  assert.match(html, /<img class="shot"/)
+  assert.match(html, /<img class="shot" src="data:image\/jpeg;base64,AAAA"/)
+})
+
+test('a partner image our fetch could not deliver renders as a text card, never a hotlink', () => {
+  // The never-hotlink-a-partner rule (2026-08-17) has no failure exemption:
+  // when the inline map holds no bytes for an unsafe image, the raw partner
+  // URL must not reach the page — the reader's browser would otherwise be
+  // aimed at exactly the host that refused ours.
+  const html = oneCard({ id: 'x', title: 'X', source: 'dpla', imageUrl: 'https://example.com/a.jpg' })
+  assert.doesNotMatch(html, /example\.com\/a\.jpg/)
+  assert.doesNotMatch(html, /<img class="shot"/)
+})
+
+test('a Wikimedia image still hotlinks — the one exempt host', () => {
+  const html = oneCard({ id: 'x', title: 'X', source: 'wikipedia', imageUrl: 'https://upload.wikimedia.org/wikipedia/commons/a/b.jpg' })
+  assert.match(html, /<img class="shot" src="https:\/\/upload\.wikimedia\.org\/wikipedia\/commons\/a\/b\.jpg"/)
 })
 
 test('a bare plate is decorative — hidden from assistive tech, and never a link', () => {
@@ -293,4 +313,222 @@ test('the dashed-card key names the fields THIS page matched on', () => {
   // A page with no corroborated card explains no style it does not use.
   assert.equal(evidenceKey([{ entries: [{ title: 'An ordinary card' }] }]), '')
   assert.equal(evidenceKey([]), '')
+})
+
+// --- zoom link for holder pages ----------------------------------------------
+
+test('zoomLink emits a link for a holder-work entry with an href', () => {
+  const entry = { standing: 'holder-work', href: 'https://rijksmuseum.nl/object' }
+  const result = zoomLink(entry, 'Rijksmuseum')
+  assert.match(result, /<a class="zoom"/)
+  assert.match(result, /href="https:\/\/rijksmuseum\.nl\/object"/)
+  assert.match(result, /High resolution at Rijksmuseum/)
+})
+
+test('zoomLink returns empty string for non-holder-work standing', () => {
+  const entry = { standing: 'subject-document', href: 'https://example.com' }
+  assert.equal(zoomLink(entry, 'Museum'), '')
+})
+
+test('zoomLink returns empty string when entry has no href', () => {
+  const entry = { standing: 'holder-work' }
+  assert.equal(zoomLink(entry, 'Museum'), '')
+})
+
+test('zoomLink escapes the institution name in output', () => {
+  const entry = { standing: 'holder-work', href: 'https://example.com' }
+  const result = zoomLink(entry, '<script>alert(1)</script>')
+  assert.doesNotMatch(result, /<script>/)
+  assert.match(result, /&lt;script&gt;/)
+})
+
+test('zoomLink escapes the href in output', () => {
+  const entry = { standing: 'holder-work', href: 'https://example.com?x="y"' }
+  const result = zoomLink(entry, 'Museum')
+  assert.match(result, /href="https:\/\/example\.com\?x=&quot;y&quot;"/)
+})
+
+// Holder-page pins. The fixture is the REAL shape discover() resolves —
+// `partner`, not `source` — and deliberately a manifest-held work whose
+// provider name differs from the PARTNERS display name ("IIIF collections"),
+// because Rijksmuseum's two names coincide and cannot detect an override
+// that silently stopped firing.
+const SMK_HOLDER = {
+  medium: 'painting',
+  partner: 'iiif',
+  property: 'P6108',
+  id: 'https://api.example.org/iiif/manifest/1',
+  subjectQid: 'Q999',
+  record: {
+    partner: 'iiif',
+    id: 'https://api.example.org/iiif/manifest/1',
+    title: 'A Painting',
+    creator: null,
+    date: '1888',
+    medium: null,
+    dimensions: null,
+    accession: null,
+    credit: null,
+    rights: {
+      publicDomain: true,
+      label: 'public domain',
+      uri: 'https://creativecommons.org/publicdomain/mark/1.0/',
+    },
+    imageUrl: 'https://example.org/iiif/full/800,/0/default.jpg',
+    href: 'https://collection.example.org/object/1',
+    institution: 'Statens Museum for Kunst',
+    requiredStatement: 'Photo: SMK Open',
+    _providers: 1,
+  },
+}
+
+const holderWorkEntry = () => ({
+  source: 'iiif',
+  title: 'A Painting',
+  description: '1888',
+  imageUrl: 'https://example.org/iiif/full/800,/0/default.jpg',
+  href: 'https://collection.example.org/object/1',
+  standing: 'holder-work',
+  attribution: { author: 'Statens Museum for Kunst · public domain', license: null },
+  rights: { copy: null },
+  why: 'Statens Museum for Kunst’s own record of this painting — Wikidata names it directly.',
+  trace: 'Wikidata records this painting’s IIIF manifest URL (P6108).',
+  fix: { url: 'https://www.wikidata.org/wiki/Q999#P6108', label: 'Check or fix it on Wikidata' },
+})
+
+// The lede band carries the holder itself, as discover attaches it — the
+// renderers read per-band furniture (zoom, requiredStatement, source bar)
+// from `band.holder`, never from the page-level option.
+const holderBands = () => [
+  {
+    index: '0',
+    id: 'slede',
+    title: 'Lede',
+    blocks: [{ kind: 'text', text: 'A short stub about a painting.' }],
+    entries: [holderWorkEntry()],
+    holder: SMK_HOLDER,
+  },
+]
+
+test('holder page masthead shows the two-party credit line, not the default', () => {
+  const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
+  assert.match(result, /This page: Wikipedia \+ Statens Museum for Kunst/)
+  assert.doesNotMatch(result, /Today, help came from:/)
+})
+
+test('legend chip, hero source bar and gap-panel row all name the provider, never the PARTNERS literal', () => {
+  // A minimal reach so the visibility panel renders its partner rows.
+  const reach = { hosts: new Set(), kartographer: false, identifierBar: false }
+  const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER, reach })
+  const legend = result.match(/<div class="legend">([\s\S]*?)<\/div>/)[1]
+  assert.match(legend, /Statens Museum for Kunst/)
+  assert.doesNotMatch(legend, /IIIF collections/)
+  const srcBar = result.match(/<div class="hero-src">([\s\S]*?)<\/div>/)[1]
+  assert.match(srcBar, /Statens Museum for Kunst/)
+  assert.doesNotMatch(srcBar, /IIIF collections/)
+  const panelRow = result.match(/<th scope="row" class="gap-who">([\s\S]*?)<\/th>/)[1]
+  assert.match(panelRow, /Statens Museum for Kunst/)
+  assert.doesNotMatch(panelRow, /IIIF collections/)
+})
+
+test('the hero card carries the zoom link with the provider name and the record href', () => {
+  const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
+  assert.match(
+    result,
+    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener">High resolution at Statens Museum for Kunst →<\/a>/,
+  )
+})
+
+test('the zoom door names no medium — a sculpture page carries no brushwork promise', () => {
+  const holder = { ...SMK_HOLDER, medium: 'sculpture' }
+  const bands = holderBands()
+  bands[0].holder = holder
+  const result = buildHtml({ title: 'Test', bands, holder })
+  assert.match(result, /High resolution at Statens Museum for Kunst →/)
+  assert.doesNotMatch(result, /brushwork/)
+})
+
+test('the IIIF requiredStatement renders in its own element, only when the record carries one', () => {
+  const withStatement = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
+  assert.match(withStatement, /<p class="req-statement">Photo: SMK Open<\/p>/)
+  const bare = {
+    ...SMK_HOLDER,
+    record: { ...SMK_HOLDER.record, requiredStatement: null },
+  }
+  const bands = holderBands()
+  bands[0].holder = bare
+  const without = buildHtml({ title: 'Test', bands, holder: bare })
+  assert.doesNotMatch(without, /<p class="req-statement">/)
+})
+
+// The property both renderers must agree on: only the holder's own band
+// carries the holder's furniture. A second band holding a DIFFERENT
+// institution's manifest must keep its PARTNERS name, gain no zoom link and
+// no requiredStatement — in the batch render AND the streamed fragment.
+test('another institution’s card on a holder page keeps its own name, in both renderers', async () => {
+  const { bandRail } = await import('../src/emit-html.js')
+  const otherBand = {
+    index: '3',
+    id: 's3',
+    title: 'Reception',
+    blocks: [
+      {
+        kind: 'text',
+        text: 'Prose long enough that a hero would ordinarily be allowed to float beside it. '.repeat(12),
+      },
+    ],
+    entries: [
+      {
+        source: 'iiif',
+        title: 'Some Other Manifest-Held Work',
+        imageUrl: 'https://other.example.org/iiif/full/400,/0/default.jpg',
+        href: 'https://other.example.org/object/9',
+        standing: null,
+      },
+    ],
+  }
+  const batch = buildHtml({ title: 'Test', bands: [...holderBands(), otherBand], holder: SMK_HOLDER })
+  const bandTwo = batch.slice(batch.indexOf('id="s3"'))
+  assert.match(bandTwo, /IIIF collections/)
+  assert.doesNotMatch(bandTwo, /Statens Museum for Kunst/)
+  assert.doesNotMatch(bandTwo, /req-statement/)
+  assert.doesNotMatch(bandTwo, /class="zoom"/)
+  const streamed = bandRail(otherBand)
+  assert.match(streamed, /IIIF collections/)
+  assert.doesNotMatch(streamed, /Statens Museum for Kunst/)
+  assert.doesNotMatch(streamed, /class="zoom"/)
+})
+
+// The standing guard against silent re-typesetting: a fixed non-holder render,
+// pinned by hash. This is a FORWARD guard only — it pins the output as of the
+// commit that set the constant; it does not itself establish any base-vs-HEAD
+// invariant. ANY change to what non-holder pages emit — prose, typography,
+// CSS — moves this hash and must be a deliberate, reviewed regeneration
+// (update the constant in the same commit that changes the output, and say
+// why).
+test('a non-holder render is byte-stable', async () => {
+  const { createHash } = await import('node:crypto')
+  const bands = [
+    {
+      index: '0',
+      id: 'slede',
+      title: 'Lede',
+      blocks: [{ kind: 'text', text: 'Article text about a subject, unremarkable.' }],
+      entries: [
+        {
+          source: 'met',
+          title: 'Work',
+          href: 'https://example.com',
+          imageUrl: 'data:image/png;base64,iVBORw0KGgo=',
+        },
+      ],
+    },
+  ]
+  const out = buildHtml({ title: 'Fixture', bands })
+  const digest = createHash('sha256').update(out).digest('hex')
+  // The pinned output includes the stylesheet: the .holder-panel, .infobox-chip, .infobox-conflict and .rail-panel rules are part of it.
+  // Re-pinned 2026-08-17: STYLE gained the .sr-conflict rule (the museum-flag
+  // disagreement line) — a deliberate stylesheet change riding every page,
+  // the same exception shape as the holder panel's rules.
+  assert.equal(digest, '3966bdb8b82ee1440793dbd06e8e291a458d5304a14138b9eccec547e33edae4')
 })

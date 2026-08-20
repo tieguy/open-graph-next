@@ -56,6 +56,7 @@ import { articleReach } from './gap.js'
 import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
 import { smithsonianScansForTaxon } from './smithsonian.js'
+import { PARTNERS } from './partners.js'
 import {
   openAlexAuthorWorks,
   openAlexLookups,
@@ -64,15 +65,18 @@ import {
 } from './scholarly.js'
 import {
   aicEntry,
+  clevelandEntry,
+  gettyEntry,
   metEntry,
   needsRightsQuery,
   partnerStatements,
+  PROP_NAME,
   resolveMappability,
   statementEntries,
 } from './statements.js'
 import { iiifEntry } from './iiif.js'
 import { rijksEntry } from './rijks.js'
-import { ccFromUri, entityRights, licenseView, rightsView } from './rights.js'
+import { ccFromUri, entityRights, licenseView, rightsView, workFreeStatus } from './rights.js'
 import {
   claimAnchors,
   claimCitations,
@@ -83,6 +87,8 @@ import {
 } from './dedup.js'
 import { broadNote, tooBroad } from './breadth.js'
 import { topicSpace } from './relevance.js'
+import { workClass, selectHolder, holderStatements, bestRankValues } from './holder.js'
+import { fetchHolderRecord, gateFailure } from './holder-record.js'
 
 
 // Budgets. The design streams and never truncates; a spike has to finish, so it
@@ -98,6 +104,15 @@ const WORKS_BY_SUBJECT = Number(process.env.WORKS_BY_SUBJECT ?? 6)
 const SCANS_BY_SUBJECT = Number(process.env.SCANS_BY_SUBJECT ?? 3)
 const SCHOLARLY_PER_SECTION = Number(process.env.SCHOLARLY_PER_SECTION ?? 3)
 const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
+const HOLDER_PAGE = process.env.HOLDER_PAGE === '1'
+// On a single-institution page every non-holder lookup sits out. Each gated
+// partner is one that can never BE a page's holder (HOLDERS is the museum
+// properties plus the shared manifest door), so the test is simply whether a
+// holder resolved; the holder's own record and statement lookups run through
+// their own paths. A gated lookup is indistinguishable from an absent key
+// downstream — except the citation tally, which must say "not checked"
+// rather than let a negative stand (see the volumes gates).
+const sitsOut = (holder) => Boolean(holder)
 // OpenAlex's `mailto` politeness parameter carries the same operator contact
 // as the Wikimedia User-Agent: whoever runs this answers for its traffic.
 const CONTACT = () => process.env.WIKIMEDIA_UA_CONTACT
@@ -451,6 +466,8 @@ const artworkFetcher = (via, id, label) => {
   if (via === 'met') return metEntry(id)
   if (via === 'rijks') return rijksEntry(id)
   if (via === 'aic') return aicEntry(id)
+  if (via === 'cleveland') return clevelandEntry(id)
+  if (via === 'getty') return gettyEntry(id)
   return iiifEntry(id, label)
 }
 
@@ -581,9 +598,11 @@ export function canonicalTitle(title) {
  * a "0 of 48" sentence would dress it as a disclosure.
  */
 async function bandPropertyLookup(
-  { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic },
+  { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic, holder },
   spec,
 ) {
+  // On a holder page the search-shape partners sit out entirely.
+  if (sitsOut(holder)) return
   // `keyOptional` marks a partner whose API answers keyless requests
   // (DigitalNZ, verified 2026-08-08); its env key is used when present and
   // its absence skips nothing. DPLA and Europeana genuinely require theirs.
@@ -899,6 +918,47 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }
   })()
 
+  // Single-institution work pages (HOLDER_PAGE=1, experiment): when the
+  // article IS a museum-held work, its one holding institution — selected
+  // from the subject's own best-rank identifiers, never by search.
+  const holderVerdictPromise = (async () => {
+    if (!HOLDER_PAGE) return null
+    const subject = await subjectPromise
+    const medium = workClass(subject.claims)
+    if (!medium) return null
+    const holder = selectHolder(subject.claims)
+    if (!holder) return null
+    console.error(`  holder page: ${medium} held by ${holder.partner} (${holder.property} ${holder.id})`)
+    const record = await fetchHolderRecord(holder)
+    const failure = gateFailure(record)
+    if (failure) {
+      console.error(`  holder record fails gate (${failure})`)
+      // A rights refusal is not silent: the record got far enough to name its
+      // institution, and the museum's flag disagreeing with the graph's
+      // answer about the work is a finding this page exists to surface — the
+      // renderer shows it only where the graph actually states a free
+      // answer, so a Picasso refused by everyone stays a plain refusal.
+      if (failure === 'non-pd-rights' && record?.institution) {
+        return {
+          refusal: {
+            partner: holder.partner,
+            // The reader's-words name where one exists; a door whose manifest
+            // names the institution (partners.js: institutionFromRecord) uses
+            // the record's own name, never the generic display row.
+            phrase: PARTNERS[holder.partner]?.institutionFromRecord
+              ? record.institution
+              : (MUSEUM_NAME[holder.partner] ?? record.institution),
+            institution: record.institution,
+            href: record.href ?? null,
+          },
+        }
+      }
+      return null
+    }
+    return { holder: { medium, ...holder, record, subjectQid: subject.qid } }
+  })()
+  const holderPromise = holderVerdictPromise.then((v) => v?.holder ?? null)
+
   // Stderr diagnostics: which global batch is the long pole. A streaming
   // reader sees rails arrive when the slowest batch a band needs settles, so
   // when a page feels slow this line says which host to blame.
@@ -1057,8 +1117,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
   }
   const [ledeIaPromise, iaPromise] = ledeFirst(
     'ia batch',
-    async () => iaLookups(distinctCites(lede?.identified ?? [])),
-    async () => iaLookups(distinctCites(others.flatMap((u) => u.identified))),
+    async () => {
+      const holder = await holderPromise
+      return (!sitsOut(holder))
+        ? iaLookups(distinctCites(lede?.identified ?? []))
+        : new Map()
+    },
+    async () => {
+      const holder = await holderPromise
+      return (!sitsOut(holder))
+        ? iaLookups(distinctCites(others.flatMap((u) => u.identified)))
+        : new Map()
+    },
     (a, b) => new Map([...b, ...a]),
   )
   /**
@@ -1105,8 +1175,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
   const isbnsOf = (us) => us.flatMap((u) => u.railCandidates.map((c) => c.isbn)).filter(Boolean)
   const [ledeVolumesPromise, volumesPromise] = ledeFirst(
     'openlibrary volumes',
-    async () => openLibraryVolumes(lede ? isbnsOf([lede]) : []),
-    async () => openLibraryVolumes(isbnsOf(others)),
+    async () => {
+      const holder = await holderPromise
+      return (!sitsOut(holder))
+        ? openLibraryVolumes(lede ? isbnsOf([lede]) : [])
+        : // Not asked, not "not found": the tally must say "could not check".
+          { volumes: new Map(), unchecked: new Set(lede ? isbnsOf([lede]) : []) }
+    },
+    async () => {
+      const holder = await holderPromise
+      return (!sitsOut(holder))
+        ? openLibraryVolumes(isbnsOf(others))
+        : { volumes: new Map(), unchecked: new Set(isbnsOf(others)) }
+    },
     (a, b) => ({
       volumes: new Map([...b.volumes, ...a.volumes]),
       unchecked: new Set([...b.unchecked, ...a.unchecked]),
@@ -1130,7 +1211,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
   }
   const scholarPromise = timed(
     'openalex batch',
-    openAlexLookups(scholarCandidates, { contact: CONTACT() }),
+    holderPromise.then(holder =>
+      !sitsOut(holder)
+        ? openAlexLookups(scholarCandidates, { contact: CONTACT() })
+        : Promise.resolve(new Map())
+    ),
   )
   /**
    * Query, then pick — the citations twin (2026-08-14), the same shape as
@@ -1210,15 +1295,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
   // question for anchors no section will render. See src/statements.js.
   const ledeStatementsPromise = timed(
     'wdqs mappability (lede)',
-    Promise.all([ledePartnersPromise, ledePickedPromise, subjectPromise]).then(
-      ([partners, own, subject]) => resolveMappability(partners, [...own, subject.qid]),
+    Promise.all([ledePartnersPromise, ledePickedPromise, subjectPromise, holderPromise]).then(
+      // On a holder page maps sit out, so the class walk that exists only to
+      // qualify them is not asked; the partner statements pass through as-is.
+      ([partners, own, subject, holder]) =>
+        sitsOut(holder) ? partners : resolveMappability(partners, [...own, subject.qid]),
     ),
   )
   const statementsPromise = timed(
     'wdqs mappability',
-    Promise.all([ledeStatementsPromise, partnersPromise, pickedPromise, subjectPromise]).then(
-      ([, partners, picked, subject]) =>
-        resolveMappability(partners, [...[...picked.values()].flat(), subject.qid]),
+    Promise.all([ledeStatementsPromise, partnersPromise, pickedPromise, subjectPromise, holderPromise]).then(
+      ([, partners, picked, subject, holder]) =>
+        sitsOut(holder) ? partners : resolveMappability(partners, [...[...picked.values()].flat(), subject.qid]),
     ),
   )
   /**
@@ -1259,14 +1347,17 @@ export async function discover(page, { emit = async () => {} } = {}) {
     ),
   )
 
-  const ledeExtrasPromise = Promise.all([subjectPromise, ledePickedPromise]).then(async ([
+  const ledeExtrasPromise = Promise.all([subjectPromise, ledePickedPromise, holderPromise]).then(async ([
     { qid: subjectQid, claims: subjectClaims },
     ledeOwn,
+    holder,
   ]) => {
     const reporterCites = (subjectClaims.P1031 ?? [])
       .map((c) => c.mainsnak?.datavalue?.value)
       .filter((v) => typeof v === 'string')
-    const opinion = reporterCites.length ? freeLawByCitation(reporterCites) : null
+    const opinion = reporterCites.length && (!sitsOut(holder))
+      ? freeLawByCitation(reporterCites)
+      : null
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
     const taxonName = subjectClaims.P225?.[0]?.mainsnak?.datavalue?.value
     const [thesis, works, scholarship, artworks, scans] = await Promise.all([
@@ -1278,15 +1369,19 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // for an identifier Wikidata states outright, while the gate went on
       // holding the lede behind every ISBN on the page. Measured on Brown v.
       // Board, that helped make the lede the last band of seventeen.
-      collectionByDescribedThesis(subjectClaims, normalizedPage).catch((e) => {
-        console.error(`  thesis lookup failed: ${e.message}`)
-        return null
-      }),
-      subjectAuthorWorks(subjectClaims).catch((e) => {
-        console.error(`  author works failed: ${e.message}`)
-        return { entries: [], total: 0 }
-      }),
-      typeof orcid === 'string'
+      (!sitsOut(holder))
+        ? collectionByDescribedThesis(subjectClaims, normalizedPage).catch((e) => {
+            console.error(`  thesis lookup failed: ${e.message}`)
+            return null
+          })
+        : Promise.resolve(null),
+      (!sitsOut(holder))
+        ? subjectAuthorWorks(subjectClaims).catch((e) => {
+            console.error(`  author works failed: ${e.message}`)
+            return { entries: [], total: 0 }
+          })
+        : Promise.resolve({ entries: [], total: 0 }),
+      (!sitsOut(holder)) && typeof orcid === 'string'
         ? openAlexAuthorWorks(orcid, { contact: CONTACT(), cap: WORKS_BY_SUBJECT }).catch((e) => {
             console.error(`  openalex author works failed: ${e.message}`)
             return { entries: [], total: 0 }
@@ -1299,7 +1394,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // measured funnel that made this its own lookup. Excludes anchors the
       // lede already owns, so a painting the lede is already carding does not
       // arrive a second time on the subject's shelf.
-      needsArtworksQuery(subjectClaims)
+      // Gated like every partner dispatch: this path fetches museum records
+      // (fetchEntry), and the person-gate is no impossibility proof —
+      // needsArtworksQuery reads raw P31 claims while workClass reads best
+      // rank, and P31 is multi-valued, so the two CAN coincide. The gate is
+      // one conjunct; holderShelfPromise below is the holder-scoped shelf.
+      !sitsOut(holder) && needsArtworksQuery(subjectClaims)
         ? subjectArtworks(subjectQid, {
             cap: WORKS_BY_SUBJECT,
             exclude: new Set(ledeOwn),
@@ -1425,6 +1525,95 @@ export async function discover(page, { emit = async () => {} } = {}) {
     return { opinion, thesis, works, scholarship, artworks, scans, subjectQid }
   })
 
+  // The holder-scoped shelf: on a museum-holder page whose subject states a
+  // creator (P170), the creator’s other works at the SAME museum, found
+  // through the graph — the works-by-creator query restricted to the
+  // holder’s own property, no search API (the no-fuzzy rule). Deliberately
+  // separate from the lede extras: these entries’ author is the CREATOR,
+  // not the article’s subject, so they must never ride the subject-level
+  // loops (author rights, subject standings). A manifest holder gets no
+  // shelf — its “collection” is not enumerable from the graph (the recorded
+  // scope rule) — and the shelf lands on the one band that owns the
+  // creator’s anchor, the lede when none does.
+  // Gated BEFORE the page-wide pick is awaited: every band (the lede
+  // included) awaits this promise, and the lede is deliberately routed
+  // around the page-wide batches everywhere else — a non-holder page must
+  // never couple its hero band to the slowest global batch. Only a
+  // museum-holder page pays the coupling, where the exclusion set and the
+  // placement decision genuinely need the page-wide pick.
+  const holderShelfPromise = Promise.all([subjectPromise, holderPromise]).then(async ([subject, holder]) => {
+    // A door whose institution comes from each object's own record
+    // (partners.js: institutionFromRecord) is many institutions, and a
+    // works-by-creator shelf would fetch the OTHER institutions' records —
+    // the single-source rule. Same manifest fact as the refusal's naming.
+    if (!holder || PARTNERS[holder.partner]?.institutionFromRecord) return null
+    const [creatorQid] = bestRankValues(subject.claims, 'P170')
+    if (!creatorQid) return null
+    const [ledeOwn, pickedMap] = await Promise.all([ledePickedPromise, pickedPromise])
+    const creatorLabel = (await entityLabels([creatorQid])).get(creatorQid)
+    // entityLabels falls back to the bare QID when no English label exists,
+    // and a shelf headed "works by Q123456" is worse than no shelf — the
+    // same refusal artworkRows makes for the works themselves.
+    if (!creatorLabel || creatorLabel === creatorQid) return null
+    const shelf = await subjectArtworks(creatorQid, {
+      cap: WORKS_BY_SUBJECT,
+      // Every band's picked anchors, not only the lede's: an anchor already
+      // carding through its own band's statements must not card again here.
+      exclude: new Set([...ledeOwn, subject.qid, ...[...pickedMap.values()].flat()]),
+      fetchEntry: artworkFetcher,
+      property: holder.property,
+    }).catch((e) => {
+      console.error(`  holder shelf failed: ${e.message}`)
+      return null
+    })
+    if (!shelf?.entries.length) return null
+    // One placement decision, made once: the band owning the creator’s
+    // anchor, else the lede (or the first band, on a page without one).
+    let owner = units.find((u) => u.index === '0') ? '0' : (units[0]?.index ?? '0')
+    let ownerFound = false
+    for (const [unit, qids] of pickedMap) {
+      if ((qids ?? []).includes(creatorQid)) {
+        owner = unit.index
+        ownerFound = true
+        break
+      }
+    }
+    const museumName = MUSEUM_NAME[shelf.entries[0].source] ?? 'this museum'
+    const propName = PROP_NAME[holder.property] ?? holder.property
+    // Worded to what was computed: the anchor assignment picks at most two
+    // anchors per section, so "anchors on" is the knowable claim — "never
+    // links" would assert an absence nobody verified.
+    const placement = ownerFound
+      ? `The shelf sits beside the section this page anchors on ${creatorLabel}.`
+      : `No section on this page anchors on ${creatorLabel}, so the shelf sits at the top of the page.`
+    for (const e of shelf.entries) {
+      e.topic = `By ${creatorLabel}`
+      e.why = `Made by ${creatorLabel}, held by ${museumName}`
+      e.trace =
+        `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${creatorLabel} ` +
+        `created this work (P170), and that ${museumName} holds it, stating its ${propName}. ` +
+        `We asked the museum for its own record of it, and this is what came back. ${placement}`
+      // artworkRows validates every qid, so the fallback is belt-and-braces:
+      // the subject's own item still carries the claim a reader would check.
+      e.fix = e._qid
+        ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
+        : { url: `https://www.wikidata.org/wiki/${subject.qid}#P170`, label: 'Check or fix it on Wikidata' }
+    }
+    console.error(
+      `  holder shelf: ${shelf.entries.length} of ${shelf.total} works by ${creatorLabel} (${holder.partner}), band ${owner}`,
+    )
+    return {
+      entries: shelf.entries,
+      shown: shelf.entries.length,
+      total: shelf.total,
+      truncated: Boolean(shelf.truncated),
+      creatorLabel,
+      owner,
+      source: shelf.entries[0].source,
+      museumName,
+    }
+  })
+
   // ---- One task per unit: a band completes when ITS dependencies do. -------
   const bandTasks = units.map(async (unit) => {
     // A band waits only on the global batches it will actually read: a
@@ -1457,7 +1646,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // band's first-on-the-page works, so the panel's sum names each distinct
     // work once (see countedOnPage in the units loop).
     applyAccess(unit.railCandidates, ol.volumes)
-    const coverage = citationCoverage(unit.counted, ol.volumes, ol.unchecked)
+    // The page-wide holder, not the lede-only local above: every band's
+    // access lookups sat out on a holder page, so every band's tally must
+    // say so.
+    const pageHolder = await holderPromise
+    const holderRefusal = (await holderVerdictPromise)?.refusal ?? null
+    const coverage = citationCoverage(unit.counted, ol.volumes, ol.unchecked, {
+      // On a holder page no access lookup ran; the tally must say "not
+      // checked", never let a negative stand.
+      searched: !sitsOut(pageHolder),
+    })
     // The gutter shows Wikipedia's own footnotes; where one cites a book the
     // open ecosystem holds, the access link rides along on the note itself.
     const accessByIsbn = new Map(
@@ -1469,6 +1667,34 @@ export async function discover(page, { emit = async () => {} } = {}) {
     }))
 
     const entries = []
+    // The holder's record of the work comes first on a holder page — the page's reason for existing.
+    // Holder is available to all bands for dispatch-site gating (not just the lede card).
+    const holder = pageHolder
+    if (holder && unit.index === '0') {
+      const holderCopy = holder.record.rights?.uri ? licenseView(ccFromUri(holder.record.rights.uri)) : null
+      const descParts = [holder.record.creator, holder.record.date]
+        .filter(Boolean)
+      const holderEntry = {
+        source: holder.partner,
+        title: holder.record.title,
+        description: descParts.length ? descParts.join(' · ') : null,
+        imageUrl: holder.record.imageUrl,
+        href: holder.record.href,
+        standing: 'holder-work',
+        attribution: {
+          author: holderCopy ? `${holder.record.institution} · ${holderCopy.label}` : holder.record.institution,
+          license: null,
+        },
+        rights: { copy: holderCopy },
+        why: `${holder.record.institution}’s own record of this ${holder.medium} — Wikidata names it directly.`,
+        trace: `Wikidata — the shared database behind Wikipedia’s infoboxes — records this ${holder.medium}’s ${PROP_NAME[holder.property] ?? holder.property}, and this is the record it points to.`,
+        fix: {
+          url: `https://www.wikidata.org/wiki/${holder.subjectQid}#${holder.property}`,
+          label: 'Check or fix it on Wikidata',
+        },
+      }
+      entries.push(holderEntry)
+    }
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
@@ -1479,6 +1705,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
         ...extras.artworks.entries,
         ...extras.scans.entries,
       )
+    // The holder-scoped shelf, on the one band the placement decision named.
+    const holderShelf = await holderShelfPromise
+    if (holderShelf && unit.index === holderShelf.owner) {
+      entries.push(...holderShelf.entries)
+    }
     // The subject's own output — books Open Library files under them, papers
     // their ORCID vouches for, their thesis. Here the article's subject is the
     // AUTHOR, so what applies is their creator-level status: CopyClear's bots
@@ -1558,9 +1789,18 @@ export async function discover(page, { emit = async () => {} } = {}) {
       if (!stmts) continue
       const isSubject = unit.index === '0' && qid === extras?.subjectQid
       const label = isSubject ? unit.title : (labels.get(qid) ?? null)
-      const found = (
-        await statementEntries(qid, stmts, { label, withMap: mapsLeft > 0, subject: isSubject })
-      ).slice(0, statementsLeft)
+      // On a holder page the statement dispatch itself is filtered — a museum
+      // holder keeps only its own property's lookup (an anchor carrying the
+      // holder's id still cards), a manifest holder keeps none — so no
+      // request goes to a third institution's host, not merely no card.
+      let found = await statementEntries(qid, holderStatements(stmts, holder), { label, withMap: mapsLeft > 0, subject: isSubject })
+      // The holder's record IS the subject's own card for this property, and
+      // the hero already carries it — the subject's duplicate is dropped;
+      // anchors carrying the property are untouched.
+      if (isSubject && holder?.property) {
+        found = found.filter((e) => e._via !== holder.property)
+      }
+      found = found.slice(0, statementsLeft)
       // A partner's own record of what this article is about — the Art
       // Institute's American Gothic, iNaturalist's monarch. The hero picker
       // ranks these above any record of something merely linked here.
@@ -1590,6 +1830,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // it is a sample of. The renderer matches on (source, topic), which is
     // exactly how it groups entries into shelves.
     const samples = []
+    // The holder shelf’s claim rides the band that shows it. The count is
+    // Wikidata’s and links nowhere (the museum-count badge rule).
+    if (holderShelf && unit.index === holderShelf.owner) {
+      samples.push({
+        source: holderShelf.source,
+        topic: `By ${holderShelf.creatorLabel}`,
+        shown: holderShelf.shown,
+        total: holderShelf.total,
+        text:
+          `A sample: ${holderShelf.shown} of ${holderShelf.total}${holderShelf.truncated ? '+' : ''} ` +
+          `work${holderShelf.total === 1 ? '' : 's'} by ${holderShelf.creatorLabel} ` +
+          `that Wikidata records ${holderShelf.museumName} as holding`,
+      })
+    }
     // Anchors whose holdings are too broad to sample: shown as one sentence
     // and a browse link instead of four arbitrary cards. See src/breadth.js.
     const broad = []
@@ -1600,7 +1854,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // every band needs it (extras is lede-only): the subject is the one
     // anchor that corroborates even as a place.
     const subjectQid = (await qidsPromise).get(normalizedPage)
-    const lookupCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic: topicSpace(statements, labels, { subjectQid }) }
+    const lookupCtx = { unit, extras, statementQids, statements, labels, entries, stats, samples, broad, topic: topicSpace(statements, labels, { subjectQid }), holder }
     await bandPropertyLookup(lookupCtx, DPLA_LOOKUP)
     // Runs after DPLA. Both lookup on P244, but they no longer share a
     // request: DPLA HEADs for the authorized heading, this GETs the record
@@ -1626,7 +1880,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // prose repeating it would be the duplicate disclosure this page keeps
     // deleting.
     let subjectRights = null
-    if (extras?.subjectQid && !entries.some((e) => e.rights?.work)) {
+    let refusalShown = null
+    if (extras?.subjectQid) {
       const rec = rights.get(extras.subjectQid)
       // Which route Paulina should take is decided by what the graph holds:
       // P6216 is a property of works, P7763 of the people who make them.
@@ -1635,8 +1890,22 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // A view with neither marks nor a sentence is nothing to show. That
       // happens when the only statement is "not yet determined", which is a
       // real answer about the state of the graph and not an answer about the
-      // work — see the status vocabulary in src/rights.js.
-      if (view && (view.marks.length || view.line)) subjectRights = view
+      // work — see the status vocabulary in src/rights.js. The some() guard
+      // is the says-it-twice rule: a lede card that IS the subject already
+      // carries this claim.
+      if (view && (view.marks.length || view.line) && !entries.some((e) => e.rights?.work))
+        subjectRights = view
+      // The museum's side of a rights disagreement travels only where the
+      // graph states a free answer ABOUT THE WORK — gate and words from the
+      // same work-level statements (workFreeStatus), so the page can never
+      // quote a creator ruling or a copy's license as the work's status. A
+      // refusal everyone agrees with (a Picasso) stays a plain refusal, and
+      // a creator-only or license-only free answer is withheld the way the
+      // unknown branch withholds: a one-sided or mis-attributed line is
+      // worse than silence.
+      const workFree = holderRefusal ? workFreeStatus(rec) : null
+      if (workFree)
+        refusalShown = { ...holderRefusal, statusLine: workFree.line, mixed: workFree.mixed }
     }
 
     if (extras?.works.entries.length)
@@ -1686,7 +1955,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       const source = key === 'aic' ? 'artic' : key
       const shown = extras.artworks.entries.filter((e) => e.source === source).length
       if (!shown) continue
-      const holder = MUSEUM_NAME[source] ?? 'this collection'
+      const museumName = MUSEUM_NAME[source] ?? 'this collection'
       samples.push({
         source,
         topic: `By ${page}`,
@@ -1694,7 +1963,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
         total: count,
         text:
           `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${unit.title} ` +
-          `that Wikidata records ${holder} as holding`,
+          `that Wikidata records ${museumName} as holding`,
       })
     }
 
@@ -1738,6 +2007,20 @@ export async function discover(page, { emit = async () => {} } = {}) {
       // a rail no subject-standing find claimed. Null elsewhere on purpose —
       // only the lede band may trip the gate.
       infobox: unit.index === '0' ? infobox : null,
+      // Lede-only holder context (null elsewhere): the streamed band renderer
+      // reads it off the band, because a band reaches serve.js through the
+      // emit callback before discover() has resolved a holder to thread. The
+      // page-wide pageHolder above gates the DISPATCHES on every band; the
+      // band itself carries holder FURNITURE only on the lede.
+      holder: unit.index === '0' ? pageHolder : null,
+      // Lede-only like the holder itself: a museum-lane candidate the gate
+      // refused on rights, where the graph's work-level answer disagrees
+      // with the flag. Null on any other leg, and null when the graph
+      // agrees with the museum. (unit.index === '0' and the renderer's
+      // b.id === 'slede' name the same band — the lede's id is 'slede' by
+      // construction — so the two guards are one predicate, failing closed
+      // if they ever diverged.)
+      holderRefusal: unit.index === '0' ? refusalShown : null,
     }
     console.error(`§ ${unit.title} — ${entries.length} items`)
     await emit('band', band)
@@ -1758,5 +2041,6 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // What the article can reach on its own, for the visibility panel. Read
     // off the spine's parse response — no request of its own.
     reach: articleReach(article),
+    holder: await holderPromise,
   }
 }

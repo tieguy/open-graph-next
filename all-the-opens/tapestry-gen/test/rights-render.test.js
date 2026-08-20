@@ -3,7 +3,7 @@ import assert from 'node:assert/strict'
 
 import { bandRail, buildHtml, rightsMarks, streamOpen } from '../src/emit-html.js'
 import { CC_MARKS, CC_SPRITE } from '../src/cc-icons.js'
-import { parseRightsRows, rightsView } from '../src/rights.js'
+import { parseRightsRows, rightsView, workFreeStatus } from '../src/rights.js'
 
 // How the rights marks and lines actually reach the page. The module tests in
 // rights.test.js cover what is TRUE; these cover what is SHOWN.
@@ -253,4 +253,148 @@ test('a IIIF manifest states its own terms, in either spec version', async () =>
     'https://example.org/m',
   )
   assert.equal(junk.rights.copy, null)
+})
+
+// ------------------------------------------- the museum-flag disagreement
+
+const REFUSAL = {
+  partner: 'artic',
+  phrase: 'the Art Institute of Chicago',
+  institution: 'Art Institute of Chicago',
+  href: 'https://www.artic.edu/artworks/6565',
+  statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+  // Always a boolean from discover — and the renderer requires === false for
+  // the verdict, so an absent flag cannot default to the assertion.
+  mixed: false,
+}
+
+test('a rights-refused holder names both records and quotes the graph’s words', () => {
+  const html = bandRail(bandOf({ holderRefusal: REFUSAL }))
+  assert.match(html, /<div class="subject-rights"><p class="sr-conflict">/)
+  assert.match(html, /The Art Institute of Chicago holds this work\. The institution’s record/)
+  // The record's clause stays at the image level; Wikidata's names the work
+  // itself — the copy/work rule, kept apart in the words.
+  assert.match(html, /doesn’t release an image of it as public domain/)
+  assert.match(html, /Wikidata records the work itself as public domain in countries where copyright lasts 70 years/)
+  assert.match(html, /The two records disagree\./)
+  assert.match(html, /href="https:\/\/www\.artic\.edu\/artworks\/6565"[^>]*>See the institution’s record →/)
+  // The line claims nothing about the page's layout: the museum's image may
+  // legitimately appear on an ordinary card beside it.
+  assert.doesNotMatch(html, /no museum image/)
+})
+
+test('a mixed graph answer keeps its bound clause and asserts no disagreement', () => {
+  // The graph itself says "still in copyright" somewhere, and the museum's
+  // flag may simply agree with that somewhere — the free clause is never
+  // printed alone (rightsView's rule holds here too), and no verdict is
+  // asserted the graph does not record.
+  const html = bandRail(
+    bandOf({
+      holderRefusal: {
+        ...REFUSAL,
+        statusLine: 'public domain in countries where copyright lasts 70 years after the author’s death or less · still in copyright in the United States',
+        mixed: true,
+      },
+    }),
+  )
+  assert.match(html, /still in copyright in the United States/)
+  assert.doesNotMatch(html, /The two records disagree/)
+})
+
+test('with the subject status rendering above, the same words are quoted — one source', () => {
+  const html = bandRail(bandOf({ subjectRights: subjectView(), holderRefusal: REFUSAL }))
+  assert.match(html, /sr-line/)
+  assert.match(html, /sr-conflict/)
+  assert.match(html, /Wikidata records the work itself as public domain in countries/)
+  assert.doesNotMatch(html, /The status above/)
+})
+
+test('phrase and status words are escaped on their way into the paragraph', () => {
+  const html = bandRail(
+    bandOf({
+      holderRefusal: { ...REFUSAL, phrase: 'the M&M <Museum>', statusLine: 'free <everywhere>' },
+    }),
+  )
+  // sentenceCase capitalizes the opening phrase.
+  assert.match(html, /The M&amp;M &lt;Museum&gt; holds this work/)
+  assert.match(html, /free &lt;everywhere&gt;/)
+  assert.doesNotMatch(html, /<Museum>/)
+})
+
+test('the disagreement is lede-only and absent without a refusal', () => {
+  const s3 = bandRail(bandOf({ id: 's3', holderRefusal: REFUSAL }))
+  assert.doesNotMatch(s3, /sr-conflict/)
+  const plain = bandRail(bandOf({ subjectRights: subjectView() }))
+  assert.doesNotMatch(plain, /sr-conflict/)
+})
+
+test('a refusal without a record page still renders, with no dead door', () => {
+  const html = bandRail(bandOf({ holderRefusal: { ...REFUSAL, href: null } }))
+  assert.match(html, /sr-conflict/)
+  assert.doesNotMatch(html, /See the institution’s record/)
+})
+
+// The gate and the quoted words come from one place: workFreeStatus, over
+// work-level statements only. Pinned against parseRightsRows output — the
+// same shapes the WDQS rights query produces — for every branch the review
+// named: work-free, creator-only, license-over-bound, unknown-only, none.
+test('workFreeStatus: a free work statement gates and supplies its own words', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q464782'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q59542795'), jurisLabel: lit('countries with 70 years pma or shorter') },
+  ]).get('Q464782')
+  assert.deepEqual(workFreeStatus(rec), {
+    line: 'public domain in countries where copyright lasts 70 years after the author’s death or less',
+    mixed: false,
+  })
+})
+
+test('workFreeStatus: a creator-only ruling never speaks for the work', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), ccs: uri('Q71887839'), ccsLabel: lit('copyrights on works have expired') },
+  ]).get('Q1')
+  assert.equal(workFreeStatus(rec), null)
+})
+
+test('workFreeStatus: a stated license over an in-copyright work is not the work’s status', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q30'), jurisLabel: lit('United States') },
+    // The label WDQS actually returns for Q6938433 — ccFromLabel does not
+    // recognize the bare "CC0" string, and a fixture it drops would test a
+    // record with no license in it.
+    { item: uri('Q1'), lic: uri('Q6938433'), licLabel: lit('Creative Commons Zero v1.0 Universal') },
+  ]).get('Q1')
+  assert.equal(rec.licenses.length, 1, 'the fixture really carries a license')
+  assert.equal(workFreeStatus(rec), null)
+})
+
+test('workFreeStatus: a mixed record carries its bound clause — the free clause never stands alone', () => {
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q59542795'), jurisLabel: lit('countries with 70 years pma or shorter') },
+    { item: uri('Q1'), cs: uri('Q50423863'), csLabel: lit('copyrighted'), juris: uri('Q30'), jurisLabel: lit('United States') },
+  ]).get('Q1')
+  assert.deepEqual(workFreeStatus(rec), {
+    line:
+      'public domain in countries where copyright lasts 70 years after the author’s death or less · still in copyright in the United States',
+    mixed: true,
+  })
+})
+
+test('workFreeStatus: an unqualified free status is worldwide — a qualified sibling never narrows it', () => {
+  // rightsView prints no line for this record (nothing to narrow); the
+  // disclosure must quote the same breadth, not shrink the answer to the
+  // qualified sibling's jurisdictions.
+  const rec = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain') },
+    { item: uri('Q1'), cs: uri('Q19652'), csLabel: lit('public domain'), juris: uri('Q142'), jurisLabel: lit('France') },
+  ]).get('Q1')
+  assert.deepEqual(workFreeStatus(rec), { line: 'public domain', mixed: false })
+})
+
+test('workFreeStatus: unknown-only and empty records withhold', () => {
+  const unknown = parseRightsRows([
+    { item: uri('Q1'), cs: uri('Q59496158'), csLabel: lit('copyright not yet determined') },
+  ]).get('Q1')
+  assert.equal(workFreeStatus(unknown), null)
+  assert.equal(workFreeStatus(null), null)
+  assert.equal(workFreeStatus({}), null)
 })

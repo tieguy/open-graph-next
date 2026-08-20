@@ -15,6 +15,8 @@ import {
 import {
   aicEntryFrom,
   classesUrl,
+  clevelandEntryFrom,
+  gettyEntryFrom,
   gbifEntryFrom,
   inatEntryFrom,
   itemClassesUrl,
@@ -188,7 +190,7 @@ test('a retracted open work says so, and says where the claim comes from', () =>
 
 test('wdqsUrl asks for every partner property over the anchor set', () => {
   const url = wdqsUrl(['Q1', 'Q2'])
-  for (const p of ['P3634', 'P4610', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
+  for (const p of ['P3634', 'P4610', 'P11110', 'P2582', 'P846', 'P3151', 'P625', 'P402', 'P10689', 'P11693'])
     assert.ok(url.includes(p), p)
   assert.match(url, /VALUES%20%3Fitem%20%7B%20wd%3AQ1%20wd%3AQ2%20%7D/)
 })
@@ -264,6 +266,98 @@ test('partner entries carry image, link, and the property that made them', () =>
   assert.match(map.imageUrl, /^https:\/\/tile\.openstreetmap\.org\/8\/\d+\/\d+\.png$/)
   assert.match(map.href, /openstreetmap\.org/)
   assert.equal(map.title, 'Map: Kennedy Space Center')
+})
+
+test('a CC0 Cleveland record carries its image, its mark, and the property that made it', () => {
+  // clevelandEntryFrom runs on every ordinary article whose anchors carry
+  // P11110 — not only on holder pages — so its contract is tested beside its
+  // three museum siblings. Fields trimmed from the live Brierwood Pipe
+  // record (read 2026-08-17).
+  const entry = clevelandEntryFrom({
+    data: {
+      title: 'The Brierwood Pipe',
+      creation_date: '1864',
+      share_license_status: 'CC0',
+      url: 'https://clevelandart.org/art/1944.524',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg' } },
+      creators: [{ description: 'Winslow Homer (American, 1836–1910)' }],
+    },
+  })
+  assert.equal(entry.source, 'cleveland')
+  assert.equal(entry._via, 'P11110')
+  assert.equal(entry.title, 'The Brierwood Pipe')
+  assert.equal(entry.description, 'Winslow Homer (American, 1836–1910) · 1864')
+  assert.equal(entry.imageUrl, 'https://openaccess-cdn.clevelandart.org/1944.524/1944.524_web.jpg')
+  assert.equal(entry.href, 'https://clevelandart.org/art/1944.524')
+  assert.match(entry.attribution.author, /public domain/)
+  assert.equal(entry.rights.copy.code, 'CC0')
+})
+
+test('a rights-reserved Cleveland record keeps its card and loses its photograph', () => {
+  const entry = clevelandEntryFrom({
+    data: {
+      title: 'A modern work',
+      share_license_status: 'Copyrighted',
+      url: 'https://clevelandart.org/art/x',
+      images: { web: { url: 'https://openaccess-cdn.clevelandart.org/x_web.jpg' } },
+    },
+  })
+  assert.equal(entry.imageUrl, null)
+  assert.equal(entry.rights, undefined)
+  assert.match(entry.attribution.author, /rights reserved/)
+})
+
+test('a Cleveland response with no record or no title makes no entry', () => {
+  assert.equal(clevelandEntryFrom(null), null)
+  assert.equal(clevelandEntryFrom({}), null)
+  assert.equal(clevelandEntryFrom({ data: { share_license_status: 'CC0' } }), null)
+})
+
+test('a CC0 Getty page carries its rewritten IIIF image, its mark, and the property', () => {
+  // gettyEntryFrom runs on every ordinary article whose anchors carry P2582.
+  // Fields trimmed from the live Irises JSON-LD (read 2026-08-17); the page
+  // states its license with the http:// spelling, which must parse the same.
+  const entry = gettyEntryFrom({
+    name: 'Irises',
+    license: 'http://creativecommons.org/publicdomain/zero/1.0/',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/8c255d80/full/!300,300/0/default.jpg',
+    url: 'https://www.getty.edu/art/collection/object/103JNH',
+    creator: [{ name: 'Vincent van Gogh' }],
+    temporal: '1889',
+  })
+  assert.equal(entry.source, 'getty')
+  assert.equal(entry._via, 'P2582')
+  assert.equal(entry.title, 'Irises')
+  assert.equal(entry.description, 'Vincent van Gogh · 1889')
+  assert.equal(entry.imageUrl, 'https://media.getty.edu/iiif/image/8c255d80/full/!800,800/0/default.jpg')
+  assert.equal(entry.href, 'https://www.getty.edu/art/collection/object/103JNH')
+  assert.match(entry.attribution.author, /public domain/)
+  assert.equal(entry.rights.copy.code, 'CC0')
+})
+
+test('a Getty page stating no CC0 keeps its card and loses its photograph', () => {
+  const entry = gettyEntryFrom({
+    name: 'A modern work',
+    url: 'https://www.getty.edu/art/collection/object/XXXXXX',
+    thumbnailUrl: 'https://media.getty.edu/iiif/image/x/full/!300,300/0/default.jpg',
+  })
+  assert.equal(entry.imageUrl, null)
+  assert.equal(entry.rights, undefined)
+  assert.match(entry.attribution.author, /rights reserved/)
+})
+
+test('an array-valued creator name contributes nothing, never a comma-joined string', () => {
+  // These documents carry array-valued names elsewhere (locationCreated.name),
+  // and this is the ordinary-article path — a shape drift must not put
+  // "Vincent,van Gogh" on a public card.
+  const entry = gettyEntryFrom({ name: 'A work', creator: [{ name: ['Vincent', 'van Gogh'] }], temporal: '1889' })
+  assert.equal(entry.description, '1889')
+})
+
+test('a Getty page with no record or no title makes no entry', () => {
+  assert.equal(gettyEntryFrom(null), null)
+  assert.equal(gettyEntryFrom({}), null)
+  assert.equal(gettyEntryFrom({ license: 'http://creativecommons.org/publicdomain/zero/1.0/' }), null)
 })
 
 test('Wikipedia-free-licensed photos are preferred; NC/ND is a fallback, not excluded', () => {

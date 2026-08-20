@@ -5,6 +5,7 @@ import { tmpdir } from 'node:os'
 import { basename, join } from 'node:path'
 
 import {
+  buildId,
   chooseStalePages,
   pagePath,
   purgeStalePages,
@@ -41,6 +42,19 @@ test('two files trading contents is a different build', () => {
   const a = [{ name: 'src/a.js', bytes: 'xxx' }, { name: 'src/b.js', bytes: 'yyy' }]
   const b = [{ name: 'src/a.js', bytes: 'yyy' }, { name: 'src/b.js', bytes: 'xxx' }]
   assert.notEqual(sourceFingerprint(a), sourceFingerprint(b))
+})
+
+test('the experiment flag changes the build id when set vs unset', () => {
+  const before = process.env.HOLDER_PAGE
+  try {
+    process.env.HOLDER_PAGE = '1'
+    const withFlag = buildId()
+    delete process.env.HOLDER_PAGE
+    assert.notEqual(withFlag, buildId())
+  } finally {
+    if (before === undefined) delete process.env.HOLDER_PAGE
+    else process.env.HOLDER_PAGE = before
+  }
 })
 
 // ---- what a stored page is keyed by ---------------------------------------

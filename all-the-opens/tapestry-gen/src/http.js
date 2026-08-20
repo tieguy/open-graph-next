@@ -12,7 +12,6 @@ import { fileURLToPath } from 'node:url'
 import { MAX_COOLOFF_MS, coolingFor, noteRateLimited } from './cooloff.js'
 import { enqueue } from './mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
-import { PARTNERS } from './partners.js'
 
 const HERE = fileURLToPath(new URL('.', import.meta.url))
 export const CACHE = join(HERE, '..', '.cache')
@@ -32,8 +31,10 @@ const UA = () => (_ua ??= userAgent('tapestry-gen'))
  * archive.org connection hung an entire run indefinitely. A source that goes
  * quiet must cost one slot, not the whole page.
  */
-export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0 } = {}) {
-  const key = createHash('sha1').update(url).digest('hex').slice(0, 16)
+export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 0, as = 'json' } = {}) {
+  // Text-mode responses key separately: sha1(url) alone would let a URL
+  // fetched both ways serve one mode's cached body to the other.
+  const key = createHash('sha1').update(as === 'text' ? `text:${url}` : url).digest('hex').slice(0, 16)
   const path = join(CACHE, `spike-${key}.json`)
   try {
     return JSON.parse(await readFile(path, 'utf8'))
@@ -86,7 +87,7 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
           if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
           throw new Error(`${res.status} ${res.statusText}`)
         }
-        return await res.json()
+        return as === 'text' ? await res.text() : await res.json()
       } catch (e) {
         lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
         if (e.permanent) break
@@ -99,6 +100,16 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
   await mkdir(CACHE, { recursive: true })
   await writeFile(path, JSON.stringify(body))
   return body
+}
+
+/**
+ * getJson's machinery — cache, per-host queue, cool-off, retries — for a
+ * source whose record surface is a PAGE rather than a JSON API (the Getty's
+ * embedded JSON-LD). The cache entry is the JSON-encoded string, so replayed
+ * runs read it back through the same JSON.parse path as everything else.
+ */
+export async function getText(url, opts = {}) {
+  return getJson(url, { ...opts, as: 'text' })
 }
 
 /**
@@ -234,25 +245,29 @@ export async function writeFacts(kind, entries) {
  * two renderers kept two copies of the same regex and a reason added to one
  * was a reason silently missing from the other.
  *
- * Three reasons, each earning its line: OpenLibrary covers resolve through
- * an archive.org redirect, so a live dependency blanks the rail whenever IA
- * is down; OSM tiles must never be hotlinked from readers' browsers (OSMF
- * tile policy); and DPLA's and DigitalNZ's thumbnails point at hundreds of
- * PROVIDER hosts — ContentDM instances, Calisphere, NLNZ delivery — that
- * rot and hotlink-block (found 2026-08-09: Museum of Flight answered the
- * browser nothing and every DPLA letter card rendered as text). For the
- * aggregators the SOURCE decides, whatever the host: the long tail is the
- * point. A museum's own CDN (the Met, ids.si.edu, archive.org itself)
- * serves its own images fine, and hotlinking stays the cheap path.
+ * The answer is EVERY partner image (the operator's decision, 2026-08-17,
+ * resolving the tension recorded against VALUES.md's 2026-08-16 entry: the
+ * reader's browser talks to us, not to the partners). Two reasons, both
+ * structural. Partner hosts bot-block and hotlink-block unpredictably —
+ * DPLA's provider long tail proved it first (2026-08-09: Museum of Flight
+ * answered the browser nothing and every card rendered as text), and the
+ * IIIF-lane diagnosis of 2026-08-17 found the same pattern across hosts.
+ * And hotlinking does not scale to the adoption this project aims at: a
+ * page read at Wikipedia scale would aim every reader's browser at a
+ * museum's image server, where our own fetch is one cached request, ever,
+ * bounded by the per-host queues.
+ *
+ * upload.wikimedia.org is exempt as a defensive guard: today no ENTRY
+ * carries such an imageUrl — the article's own infobox images bypass the
+ * card path entirely and hotlink from there — but any future
+ * Wikimedia-hosted entry must keep hotlinking, because that is Wikipedia's
+ * household content on infrastructure built for the load, and Commons is
+ * deliberately not a partner (all-the-opens/CLAUDE.md).
  */
 export function hotlinkUnsafe(entry) {
   if (!entry?.imageUrl) return false
-  // The aggregators are flagged in the partner manifest, because which
-  // partners have the long-tail-of-provider-hosts problem is a fact about
-  // the partner; the two host regexes below are about specific URLs, not
-  // sources, and stay here.
-  if (PARTNERS[entry.source]?.hotlinkUnsafe) return true
-  return /covers\.openlibrary\.org|tile\.openstreetmap\.org/.test(entry.imageUrl)
+  if (entry.imageUrl.startsWith('data:')) return false
+  return !/^https:\/\/upload\.wikimedia\.org\//.test(entry.imageUrl)
 }
 
 /**
@@ -280,8 +295,55 @@ export const imgKey = (url) => createHash('sha1').update(url).digest('hex').slic
  * future render until someone deleted the cache. A cache may make a page
  * faster, never different.
  */
-export async function coverDataUri(url, { minBytes = 1024 } = {}) {
-  const key = createHash('sha1').update(`datauri:${url}`).digest('hex').slice(0, 16)
+/**
+ * Below this many bytes the answer is a placeholder, not the thing. A fact
+ * about ONE host: OpenLibrary answers a coverless ISBN with a stub a few
+ * bytes long, so covers need 1 KB. Every other URL keeps only a
+ * refuse-empty-bodies floor — under the never-hotlink rule the cover path
+ * fetches every partner image, and a page-wide 1 KB floor voided
+ * legitimately tiny images and cached the void (caught in review,
+ * 2026-08-17). Exported so the derivation is a test, not a comment.
+ */
+export const placeholderFloor = (url) => (/covers\.openlibrary\.org/.test(url) ? 1024 : 32)
+
+/**
+ * Whether a content type may travel as a card image or leave /img/. One
+ * definition for both layers, exported so the gate is a test rather than
+ * two literals that can drift. Parameters are stripped before the check
+ * ("image/jpeg; charset=UTF-8" is an image), and image/svg+xml is refused
+ * even though it is an image type: an SVG is a document that runs script
+ * on top-level navigation, and a partner document must never render from
+ * our origin (caught in review, 2026-08-17 — a planted scripted SVG served
+ * 200 same-origin). Our own SVG glyphs are unaffected: the CC sprite is
+ * inlined into page markup and never rides this path.
+ */
+export const isImageType = (type) =>
+  // Anchored subtype: the split is load-bearing (a parameterized type must
+  // still pass), and svg is refused with or without its +xml suffix — the
+  // open question of whether any renderer treats bare image/svg as SVG is
+  // closed by not finding out. The guarantee is that whatever PASSES is a
+  // single well-formed media type — and that exact split value is what
+  // gets stored and served. A bare comma-joined duplicate header
+  // ("image/png, text/html") is not one and is refused; a parameterized
+  // join ("image/png; charset=x, text/html") passes because the split
+  // already reduced it to its one safe leading type.
+  /^image\/(?!svg(?:\+xml)?$)[a-z0-9!#$&^_.+-]+$/i.test((type ?? '').split(';')[0].trim())
+
+/**
+ * The /img/ decision as a pure seam: a decoded cache entry leaves the
+ * origin only when it is a servable image. serve.js consults this rather
+ * than inlining the gate, so the layer's decision is testable offline.
+ */
+export const servableImage = (decoded) => (decoded && isImageType(decoded.type) ? decoded : null)
+
+export async function coverDataUri(url, { minBytes = null } = {}) {
+  minBytes ??= placeholderFloor(url)
+  // The effective floor is part of the cache key: one URL fetched at two
+  // floors must not share a verdict, or whichever ran first decides for
+  // both — the mechanism that made the wide-floor bug permanent. (This
+  // re-keys every cached data URI once; the refetch also retires verdicts
+  // the pre-2026-08-17 gates cached wrongly.)
+  const key = createHash('sha1').update(`datauri:${minBytes}:${url}`).digest('hex').slice(0, 16)
   const path = join(CACHE, `datauri-${key}.txt`)
   try {
     const cached = await readFile(path, 'utf8')
@@ -293,10 +355,20 @@ export async function coverDataUri(url, { minBytes = 1024 } = {}) {
     try {
       const res = await fetch(url, { headers: { 'User-Agent': UA() }, signal: AbortSignal.timeout(15000) })
       if (!res.ok) return ''
+      // Size is not enough to know a picture arrived — the icon tools
+      // learned it first (openalex.org answered 200 with an HTML error page)
+      // and the DPLA long tail repeated it at page scale: a thumbnail URL
+      // answering HTML or a PDF is a non-answer, cached as one, and the
+      // card degrades to text. Without this, /img/ would serve a partner's
+      // document from OUR origin (caught in review, 2026-08-17).
+      const media = (res.headers.get('content-type') ?? '').split(';')[0].trim().toLowerCase()
+      if (!isImageType(media)) return ''
       const bytes = Buffer.from(await res.arrayBuffer())
-      // Below the floor it is a placeholder, not the thing. Covers use 1 KB; a
-      // favicon is legitimately smaller, so callers can lower it.
-      return bytes.length < minBytes ? '' : `data:${res.headers.get('content-type') ?? 'image/jpeg'};base64,${bytes.toString('base64')}`
+      // Below the floor it is a placeholder, not the thing (placeholderFloor
+      // above; explicit callers may still override in either direction).
+      // The data URI carries the bare media type: header parameters are not
+      // RFC 2397 URI material, and the gate already ran on the same value.
+      return bytes.length < minBytes ? '' : `data:${media};base64,${bytes.toString('base64')}`
     } catch {
       return null
     }

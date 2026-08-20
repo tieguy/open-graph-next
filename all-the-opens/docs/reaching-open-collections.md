@@ -424,6 +424,378 @@ exists (0 hits in the property namespace for "Corpus Vitrearum", checked
 re-scraped them. A DOI-registered, CC BY, 28,000-image national corpus is —
 for machine purposes — orphaned by its own migration.
 
+## 11. Cleveland Museum of Art: keyless, CC0, every contract field on one record `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P11110 values from WDQS (compliant UA): `1932.313`, `1972.29`,
+`1943.178`, `2003.6.1`, `1943.389`.
+
+```
+curl -s https://openaccess-api.clevelandart.org/api/artworks/1932.313
+# → 200: title "The Four Horsemen, from The Apocalypse", creators[].description
+#   "Albrecht Dürer (German, 1471–1528)", creation_date "c. 1498", technique
+#   "woodcut", measurements, accession_number "1932.313", creditline,
+#   share_license_status "CC0", images.web.url (openaccess-cdn.clevelandart.org),
+#   url "https://clevelandart.org/art/1932.313"
+curl -s https://openaccess-api.clevelandart.org/api/artworks/9999.999
+# → 404: {"detail": "Artwork not found"} — the control passes.
+```
+
+Image HEAD: 200, `image/jpeg`, range support, no anti-hotlink posture seen.
+License, the museum's own words (clevelandart.org/open-access, read
+2026-08-17): "The CMA makes images and metadata available under Creative
+Commons Zero (CC0) … all without fees or restriction." No NC anywhere. No
+published rate policy (API docs and robots.txt silent) — `hostLimit()`
+stays 1. Keyless, verified by an unauthenticated 200.
+
+**IN.** The cleanest surface of the five probed.
+
+## 12. Getty: the Linked Art endpoint answers real and bogus alike; the object page carries the record `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P2582 values from WDQS: `1078D0`, `108NVJ`, `103R3F`, `103R8V`, `108P5B`.
+
+```
+curl -s https://data.getty.edu/museum/collection/object/1078D0 -H 'Accept: application/ld+json'
+curl -s https://data.getty.edu/museum/collection/object/000000X -H 'Accept: application/ld+json'
+# → both 404 {"errors":[{"status":404,"title":"Record Not Found"}]}, byte-identical —
+#   the control rule says this endpoint is refusing to talk, not reporting broken ids.
+curl -s https://www.getty.edu/art/collection/object/1078D0
+# → 200, JSON-LD embedded in the page: title, creator "Washington George Smith
+#   (American, 1828 - 1893)", date 1865–1875, medium "Albumen silver print",
+#   accession "84.XC.873.7796", license CC0 URI, IIIF image URL
+#   (media.getty.edu, level 2, CORS *), own page URL. Bogus id → 200 with
+#   null indexedId and a generic page — distinguishable.
+```
+
+`size` (the dimensions string, in the Met/AIC shape) is present on 3 of 4
+objects sampled 2026-08-17 — `103JNH` "Unframed: 74.3 × 94.3 cm …", `108NVJ`,
+`103R3F`; absent on `1078D0`, the object the first pass of this probe ran
+against, which is how the absence briefly got recorded as a property of the
+surface. A credit line is genuinely absent: `creditText` is the CC0/CC BY
+license boilerplate, not an object credit. License, the Getty's own words
+(getty.edu/projects/open-content-program, read 2026-08-17): "Images … are
+available under CC0 through Getty's Open Content Program." No NC. No
+published rate policy — stays 1. Keyless.
+
+**IN, qualified:** the record surface is the object page's embedded
+JSON-LD, not a JSON API — implementable, but bot mitigation on www.getty.edu
+could bite a server-side fetcher; the live render is the test.
+
+## 13. Paris Musées: CC0 images behind a free token the API refuses to talk without `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+Real P6246 values from WDQS: `111480`, `151559`, `151788`, `152006`, `152133`.
+
+```
+curl -s https://apicollections.parismusees.paris.fr/graphql -X POST   -H 'Content-Type: application/json' -d '{"query":"query { … }"}'
+# → 200 with an HTML "Accès refusé" page, identical for real and bogus ids —
+#   uniform auth refusal, not bot mitigation: the docs say an account-issued
+#   auth token is required (parismuseescollections.paris.fr/en/node/777951).
+```
+
+License: images CC0 since 2020-01-08, the institution's own words
+(parismuseescollections.paris.fr/fr/les-images-sous-droits, read
+2026-08-17): high-definition downloads "without limitation", commercial
+use included. No NC on images or API terms found. No published rate
+policy. Key: free account → token (env var would be
+`PARIS_MUSEES_API_TOKEN`).
+
+**IN, pending an operator-created token.** The contract fields are
+documented but unverifiable keyless; account creation is the operator's
+action, and the record-by-ID control cannot run until then.
+
+## 14. National Gallery of Art: CC0 everywhere, and no door that answers by id `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe).*
+
+```
+curl -sI https://www.nga.gov/artworks/10038-strolling-musicians
+curl -sI https://www.nga.gov/artworks/999999999
+# → both 403, cf-mitigated: challenge — real and bogus indistinguishable, the
+#   control rule's refusing-to-talk shape.
+curl -sI https://images.nga.gov/en/search
+# → 301 into the same Cloudflare-gated site.
+```
+
+What exists instead: the GitHub bulk CSV (`NationalGalleryOfArt/opendata`,
+130k+ records, all contract fields, CC0 waiver in the museum's own words —
+read 2026-08-17) and a `dataServices` repo that is source code, not a
+running endpoint. License is exemplary; the shape is wrong: bulk-only, no
+record-by-ID surface.
+
+**OUT: no confirmed record-by-ID surface.** The data would qualify the
+moment one exists.
+
+## 15. Nationalmuseum Sweden: P2538 names artists, and there is no object property to probe `[ours]`
+
+*Observed 2026-08-17 (Phase 6 holder probe; the plan predicted a likely fail).*
+
+P2538's formatter (P1630) is `collection.nationalmuseum.se/sv/artists/artist/$1/`
+— an ARTIST page. Real id 10038 → 200 (an artist profile), bogus → 404: the
+host distinguishes cleanly, and what it serves is people, not objects.
+
+```
+curl -sI https://collection.nationalmuseum.se/api/object/10038      # 404
+curl -sI https://collection.nationalmuseum.se/oai-pmh               # 404
+curl -sI http://nationalmuseumse.iiifhosting.com/iiif/10038/manifest.json  # 404
+# K-samsök/SOCH probing at kulturarvsdata.se found no NM object surface either.
+```
+
+License (nationalmuseum.se, read 2026-08-17): photographer-copyright images
+CC BY-SA 4.0, PD images marked public domain — no NC. Not a licensing
+problem and not bot mitigation: a genuine capability gap. The museum has no
+object-level Wikidata property at all, so the holder pipeline — which
+detects by the subject's own object identifier — has nothing to detect by.
+
+**OUT: no object identifier property and no object API.** Revisit if either
+appears.
+
+## 16. Musée d'Orsay: 184 live manifests behind one missing intermediate certificate `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed these
+`no-record`).*
+
+`iiif.musee-orsay.fr` (a CNAME to the museum's DAM vendor,
+`iiif.fr.ephoto-dam.com`) serves ONLY its leaf certificate — a valid,
+current `*.musee-orsay.fr` cert (Thawte TLS RSA CA G1 / DigiCert, NotAfter
+2026-09-19) with no intermediate:
+
+```
+echo | openssl s_client -connect iiif.musee-orsay.fr:443 -servername iiif.musee-orsay.fr
+# → Certificate chain: entry 0 only; Verify return code: 21
+#   (unable to verify the first certificate)
+curl -s https://iiif.musee-orsay.fr/Manifester/IIIF/3/objects!805/manifest.json
+# → TLS failure (curl 60), for real and bogus ids alike — the failure is
+#   below HTTP, so the real/bogus control cannot run at all
+curl -s --insecure …objects!805/manifest.json   # one-shot diagnosis only
+# → valid IIIF Presentation 3 JSON: Monet, "La Charrette. Route sous la
+#   neige à Honfleur", French labels — the content is alive and well
+```
+
+Strict TLS clients (curl, Node fetch — our pipeline) fail; Chrome-family
+browsers typically load it anyway (AIA chasing fetches the missing
+intermediate), Firefox typically does not. Confirmed in the operator's own
+browser 2026-08-17: the manifest loads, flagged as a broken certificate.
+184 of the census's 686 P6108 rows — 27% of the IIIF lane — sit behind
+this one misconfiguration.
+
+**The fix is the museum's (or its vendor's): serve the intermediate.** One
+report to Orsay/ephoto could open the second-largest block of the lane —
+the operator sent that report on 2026-08-17.
+Bundling the Thawte intermediate into our own trust path would also work
+and is deliberately not done — per-vendor CA patching in the fetch stack is
+fragile, and the upstream fix repairs it for every strict client, not just
+us.
+
+## 17. NGA's manifests sit behind the same challenge as its object pages `[ours]`
+
+*Observed 2026-08-17; extends note 14, which recorded the object pages.*
+
+```
+curl -sI "https://www.nga.gov/api/v1/iiif/presentation/manifest.json?cultObj:id=12197"
+# → 403, cf-mitigated: challenge (an interactive Cloudflare challenge a
+#   browser can pass and a server cannot)
+curl -sI "…manifest.json?cultObj:id=999999999"
+# → 302 to api.nga.gov (query dropped) — and api.nga.gov 404s the path for
+#   real and bogus alike: that host does not serve manifests at all
+```
+
+Same day, from the operator's browser and the open-data repo, the fuller
+picture — the endpoint is RETIRED, not gated:
+
+- The real-id URL, pasted in the operator's browser 2026-08-17, redirects
+  to `api.nga.gov` (query dropped) and 404s — same for everyone, challenge
+  or no challenge.
+- `published_images.csv` in `NationalGalleryOfArt/opendata` (rows modified
+  2026-04) names the CURRENT infrastructure: a IIIF **Image** API at
+  `api.nga.gov/iiif/<uuid>` — and it answers our plain server UA keylessly:
+
+  ```
+  curl -sI "https://api.nga.gov/iiif/00007f61-4922-417b-8f27-893ea328206c/full/!200,200/0/default.jpg"
+  # → 200 image/jpeg, no challenge; info.json answers likewise
+  ```
+
+So the 214 P6108 rows pointing at `www.nga.gov` — 31% of the IIIF lane —
+likely name a retired Presentation endpoint: graph rot, not hostility.
+NGA's images and bulk data (uuid↔object mappings, `openaccess` flags,
+reconciled Wikidata Q-ids) are open to servers today. A future NGA lane
+would be the playbook's "neither shape" case — record-by-id answered from
+the published CSV plus the live Image API — not an IIIF-door lane, and
+not a challenge workaround, which would be fingerprint spoofing and is
+not this project's move.
+
+## 18. Yale Center for British Art: the manifest service is dead behind a cert that expired in January 2024 `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed it
+`no-record`).*
+
+```
+curl -sv https://manifests.britishart.yale.edu/manifest/4986
+# → SSL certificate verify result: certificate has expired (10)
+#   (GlobalSign OV cert, NotAfter 2024-01-10; served via CloudFront)
+curl -si --insecure https://manifests.britishart.yale.edu/manifest/4986   # one-shot diagnosis
+# → 403 AccessDenied from the S3 origin — the bucket behind the CDN is
+#   gone or private; real and bogus ids fail identically at TLS, so the
+#   control cannot run at the HTTP level
+```
+
+Not a chain problem like Orsay's — the certificate is EXPIRED, browsers
+hard-block it, and behind it the origin denies everything: the service is
+decommissioned, and the cert was never renewed because nothing lives
+there. 53 of the lane's 686 P6108 rows point at it. YCBA's collections
+have since moved platforms (LUX / collection.britishart.yale.edu), so
+these are stale graph values in the LUI-125 decay class — per the
+surface-first value, recorded here rather than mass-edited.
+
+## 19. Nationalmuseum Sweden's manifests are reachable, anonymous shells `[ours]`
+
+*Observed 2026-08-17; extends note 15 (no object property to probe).*
+
+No access problem at all: `nationalmuseumse.iiifhosting.com` — a
+third-party IIIF hosting service, and the census URLs are plain
+`http://` — answers instantly. The failure is the content:
+
+```
+curl -s http://nationalmuseumse.iiifhosting.com/iiif/d3522…f8a6/manifest.json
+# → Presentation v2; attribution: null; provider: null (v2 has no such
+#   field); label: the file hash itself. No institution is named anywhere
+#   in the manifest, not even as prose.
+```
+
+The gate's `no-institution` verdict is exact: these are auto-generated
+shells that name nobody, so no two-party page can ever credit a holder
+from them. 49 rows. The fix is the museum publishing manifests that say
+who they are — nothing on the reading side can conjure an attribution
+that is not there.
+
+## 20. KMSKA: a live, free-licensed, honest v2 host the gate structurally cannot credit `[ours]`
+
+*Observed 2026-08-17 (IIIF-lane diagnosis; the QA window had classed it
+`no-institution`).*
+
+The best-behaved host in the lane:
+
+```
+curl -s https://iiif.kmska.be/iiif/2/34343/manifest.json
+# → clean Presentation v2: real bilingual labels (en/nl), metadata,
+#   license: https://creativecommons.org/publicdomain/mark/1.0/  (PDM —
+#   the rights leg would PASS), and an attribution string that names the
+#   museum in prose: "CC0, CC0, Public domain, Koninklijk Museum voor
+#   Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap, …"
+curl -sI https://iiif.kmska.be/iiif/2/99999999/manifest.json
+# → 404 — the real/bogus control PASSES; plain Apache, no CDN games
+```
+
+What blocks its 54 rows is Presentation v2's shape, twice over: v2 has no
+`provider` field, so the institution exists only inside a free-text
+attribution string that also carries license noise — and parsing a name
+out of prose is the fuzzy matching the design forbids (the masthead needs
+the museum's own clean statement of itself). And the manifest states no
+`related`/homepage, so even past the institution leg it would fail
+`no-object-page`. Nothing is broken and nobody is refusing: the museum
+publishes openly in a 2014-era format the two-party gate cannot read
+without guessing. The fix is theirs and small — v3 manifests with
+`provider` and `homepage` — and KMSKA sits in the Flemish digital-heritage
+world (meemoo is two entries up this lane), where that upgrade is an
+ordinary ask.
+
+## 21. The IIIF lane's tail, swept: every remaining host, one diagnosis each `[ours]`
+
+*Observed 2026-08-17 — one representative manifest per host, fetched with
+the pipeline's own stack and run through the real `gateFailure`; bogus-id
+controls where the host answered. Completes the lane census begun in
+entries 16–20; every one of the lane's 686 P6108 rows now has a named
+root cause.*
+
+| rows | host | verdict |
+|---|---|---|
+| 20 | iiif.harvardartmuseums.org | v2, named only in prose ("Harvard Art Museums"), no license stated |
+| 12 | sammlung.belvedere.at | v2 shell — attribution null, nobody named |
+| 10 | art.nelson-atkins.org | 404, real and bogus alike — path retired or ids reshaped |
+| 8 | imagehub.mskgent.be | v3, PDM, but no `provider` and no `homepage` — near-miss |
+| 7 | munch.emuseum.com | DNS gone (ENOTFOUND) — dead hostname |
+| 6 | catalogo.museivaticani.va | v2, "Copyright Musei Vaticani" — a correct refusal in any version |
+| 5 | objektkatalog.gnm.de | v2, WissKI boilerplate attribution, nobody named |
+| 5 | damsssl.llgc.org.uk | v2, PDM/CC0-licensed, NLW named only in prose — KMSKA class |
+| 4 | dams.antwerpen.be | v2, no attribution at all |
+| 3 | data.artmuseum.princeton.edu | v3, well-formed, named — rights genuinely reserved (gate correct) |
+| 2 | api.artic.edu (manifests) | v2, courtesy-line prose; these items ride the direct P4610 lane anyway |
+| 2 | gn.biblhertz.it | v3, named — a rights-restricted photo archive, correctly refused |
+| 2 | manifests.collections.yale.edu | **v3, CC0, real homepage — `provider` is the ONLY missing field.** YCBA's new (LUX) service, where entry 18's 53 dead rows should point |
+| 2 | collections.hammer.ucla.edu | 429 on first request — respected, not retried; unknown |
+| 1 | apicollections.parismusees.paris.fr | v2 shell, nobody named |
+| 1 | iiif-manifest.library.vanderbilt.edu | v2, prose credit only |
+| 1 | iiif.lib.harvard.edu | 200 but non-JSON body |
+| 1 | gallerycollections.courtauld.ac.uk | v3, named, homepage — rights reserved, correctly refused |
+| 1 | www.beethoven.de | v3, named only in prose spans, no provider, no license |
+| 1 | ids.si.edu | Image-API-shaped response, prose credit |
+
+The whole lane, classed (686 rows): **dead or retired infrastructure 285**
+(NGA 214, old Yale 53, Nelson-Atkins 10, Munch 7, Harvard lib 1);
+**one transport misconfiguration 184** (Orsay's chain, reported
+2026-08-17); **prose-named v2, the upgrade-ask class 83** (KMSKA 54,
+Harvard Art Museums 20, NLW 5, AIC 2, Vanderbilt 1, ids.si 1 — two of
+them, KMSKA and NLW, already free-licensed); **anonymous shells 72**
+(Nationalmuseum 49, Belvedere 12, GNM 5, Antwerp 4, Paris Musées 1,
+Beethoven-Haus 1); **v3 near-misses 48** (SMK 38 homepage-only, MSK Gent
+8, new-Yale 2 provider-only); **correct rights refusals 6** (Princeton,
+Hertziana, Courtauld); **unknown 2** (UCLA 429); **Vatican 6**, named and
+explicitly copyright, a correct refusal at any version.
+
+Not one host in the lane refuses open access as policy. The 0% gate rate
+decomposes entirely into dead links, one certificate, a decade-old
+manifest format, and museums that never wrote their own name down — each
+fixable by a specific, nameable party, several by a one-field edit.
+
+## 22. The manuscript lane's library manifests hit the same v2 wall `[ours]`
+
+*Observed 2026-08-20, the day the manuscript family joined `WORK_CLASSES`.*
+
+The 2026-08-20 census counts 221 manuscript-family items with enwiki
+articles and holder identifiers. 17 carry museum ids, and **all 17
+were rendered flag-on the same day: all 17 pass the gate** — eleven
+Met (the Cloisters books of hours, Chinese calligraphy, Mughal and
+Ottoman works, an Armenian gospel, the Cloisters Hebrew Bible), five
+Getty (the Spinola Hours renders with a six-work Horenbout shelf), one
+AIC (a Book of the Dead). The other 204 items are manifest-only,
+carrying 238 manifest rows across 16 hosts (34 of the items state two
+manifests each; none states more), 176 rows at `gallica.bnf.fr`. One
+probe per major host — four full flag-on renders, two
+record-fetch-plus-gate calls, the code block labels which — covers six
+of the sixteen hosts and 225 of the 238 rows. The unprobed tail is ten
+hosts holding 13 rows: `api.digitale-sammlungen.de` and `lib.is` and
+`www.wdl.org` (2 each), and one row apiece at the GNM, the Chester
+Beatty, Trinity College Dublin, Durham, e-codices, the NLS and the
+University of Chicago:
+
+```
+HOLDER_PAGE=1 node spike.js "Book of hours of Frederick of Aragon"  # Gallica (176)
+HOLDER_PAGE=1 node spike.js "Codex Laudianus"                       # Bodleian (18)
+HOLDER_PAGE=1 node spike.js "Codex Assemanius"                      # digi.vatlib.it (2)
+HOLDER_PAGE=1 node spike.js "Taylor-Schechter 12.182"               # Cambridge CUDL (3)
+# → all four: holder record fails gate (no-institution)
+# and via fetchHolderRecord directly, same day:
+#   NLW "Peniarth 20" (damsssl.llgc.org.uk, 15)      → no-institution, pd=true
+#   ISOS "Book of Lismore" (www.isos.dias.ie, 11)    → no-institution
+```
+
+All six are reachable, parseable Presentation v2 manifests, measured:
+each host's probed manifest had its `@context` read directly on
+2026-08-20 — all six state `presentation/2/context.json` and none
+carries a `provider` field (the gate's `no-institution` verdict alone
+could not have said which; a v3 manifest without a provider fails the
+same way). With no `provider` to name the library — the prose
+attributions do it instead, NLW naming itself and ISOS stating
+"© UCC" — the gate cannot credit any of the six: the entry-18/20
+pattern with library names on it (NLW here is the same host entry 21
+classed KMSKA-style in the art lane: free-licensed, prose-named). The
+six probed hosts publish in the format's first edition; the door opens
+for them exactly as for KMSKA: v3 with `provider` and `homepage`.
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:

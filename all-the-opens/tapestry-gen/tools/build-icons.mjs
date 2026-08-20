@@ -34,8 +34,9 @@ const OUT = fileURLToPath(new URL('../src/icons.js', import.meta.url))
 const entries = []
 let missing = 0
 for (const url of iconUrls()) {
-  // 64 bytes, not the cover default of 1 KB: a favicon is legitimately tiny.
-  const uri = await coverDataUri(url, { minBytes: 64 })
+  // The shared default floor (placeholderFloor in src/http.js) fits
+  // favicons: only OpenLibrary covers carry the 1 KB placeholder floor.
+  const uri = await coverDataUri(url)
   // Size is not enough to know a picture arrived. `openalex.org/favicon.ico`
   // answers **200** with a 2.8 KB HTML error page, which cleared the byte floor
   // and was shipped as OpenAlex's icon — a guaranteed broken image on every

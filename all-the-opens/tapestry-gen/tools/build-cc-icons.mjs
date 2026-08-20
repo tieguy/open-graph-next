@@ -120,8 +120,7 @@ function normalize(svg, id) {
 const symbols = []
 let missing = 0
 for (const [id, [url, title]] of Object.entries(GLYPHS)) {
-  // 64 bytes: these are legitimately tiny — Cc-nd.svg is 204 bytes whole.
-  const uri = await coverDataUri(url, { minBytes: 64 })
+  const uri = await coverDataUri(url)
   const decoded = uri ? fromDataUri(uri) : null
   const svg = decoded?.body?.toString('utf8') ?? ''
   // Same lesson as the favicons: a 200 is not a picture. An HTML error page

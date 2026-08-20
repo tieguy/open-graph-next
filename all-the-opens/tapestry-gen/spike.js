@@ -34,21 +34,23 @@ async function main() {
   // Everything below names the article discovery actually read, not argv:
   // `node spike.js "Coral_Gables"` renders Coral Gables, Florida, and the
   // file, the <h1> and the footer must all say so.
-  const { title, bands, stats, dropped, opinion, reach } = await discover(page)
+  const { title, bands, stats, dropped, opinion, reach, holder } = await discover(page)
   const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
   const out = join(HERE, 'demo', `spike-${slug}.html`)
 
   // Images that must travel with the page — the shared predicate in
   // src/http.js says why each class is fetched by us rather than hotlinked.
   const inline = new Map()
-  for (const b of bands) {
-    for (const e of b.entries ?? []) {
-      if (!hotlinkUnsafe(e)) continue
-      if (inline.has(e.imageUrl)) continue
-      const uri = await coverDataUri(e.imageUrl)
-      if (uri) inline.set(e.imageUrl, uri)
-    }
-  }
+  // Distinct URLs first, one concurrent pass second: coverDataUri rides the
+  // per-host serial queue internally, so awaiting one image at a time here
+  // bought no politeness — it only stopped different hosts from running at
+  // once, which is where the whole page's image time lives now that every
+  // partner image travels with the page.
+  const wanted = [...new Set(bands.flatMap((b) => (b.entries ?? []).filter(hotlinkUnsafe).map((e) => e.imageUrl)))]
+  const uris = await Promise.all(wanted.map((url) => coverDataUri(url)))
+  wanted.forEach((url, i) => {
+    if (uris[i]) inline.set(url, uris[i])
+  })
 
   // Source icons travel too, and for a sharper reason than the covers: several
   // of these sites refuse cross-origin hotlinks outright (CourtListener answers
@@ -80,6 +82,7 @@ async function main() {
       `Discovered live from the English Wikipedia article ` +
       `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
       `${escapeHtml(title)}</a> — no curated dataset.`,
+    holder,
   })
   await mkdir(dirname(out), { recursive: true })
   await writeFile(out, html)

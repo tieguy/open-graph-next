@@ -449,9 +449,11 @@ function cleanImageUrl(raw) {
  * attribution trail) go absolute to en.wikipedia.org instead, because relink
  * would otherwise point them at pages this server does not have.
  *
- * `images` reports every cleaned image URL in document order, deduplicated,
- * so batch can inline them and streaming can register them — the same two
- * paths every other picture on the page already rides.
+ * `images` reports every cleaned image URL in document order, deduplicated.
+ * They are upload.wikimedia.org URLs and STAY hotlinked — the article's own
+ * content on Wikimedia's own infrastructure, the one host the
+ * never-hotlink-a-partner rule exempts — so unlike every other picture on
+ * the page they never enter the inline map.
  */
 export function extractInfobox(html) {
   const source = html ?? ''
@@ -631,7 +633,7 @@ export function footnotesFor(blocks, notes, notePrefix) {
   return out
 }
 
-function decodeEntities(value) {
+export function decodeEntities(value) {
   return value
     .replace(/&#(\d+);/g, (_, d) => String.fromCharCode(Number(d)))
     .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))

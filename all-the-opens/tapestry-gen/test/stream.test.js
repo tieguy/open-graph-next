@@ -585,3 +585,98 @@ test('a one-card source is a thumb, not a gallery of one', () => {
   // A single never wears the gallery head, wherever it renders.
   assert.doesNotMatch(deck + rail, /<div class="carousel-head">/)
 })
+
+// Holder-page streaming pins. The fixture is the real shape discover()
+// resolves (`partner`, not `source`), and a manifest-held work whose provider
+// differs from the PARTNERS literal — Rijksmuseum cannot detect a dead
+// override because its two names coincide.
+const STREAM_HOLDER = {
+  medium: 'painting',
+  partner: 'iiif',
+  property: 'P6108',
+  id: 'https://api.example.org/iiif/manifest/1',
+  subjectQid: 'Q999',
+  record: {
+    institution: 'Statens Museum for Kunst',
+    title: 'A Painting',
+    date: '1888',
+    imageUrl: 'https://example.org/iiif/full/800,/0/default.jpg',
+    href: 'https://collection.example.org/object/1',
+    rights: { publicDomain: true, label: 'public domain' },
+    requiredStatement: null,
+  },
+}
+
+const streamHolderEntry = () => ({
+  source: 'iiif',
+  title: 'A Painting',
+  imageUrl: 'https://example.org/iiif/full/800,/0/default.jpg',
+  href: 'https://collection.example.org/object/1',
+  standing: 'holder-work',
+})
+
+test('streamHeroExtras with a holder fills the credit line and names the provider in the legend', () => {
+  const bands = [
+    { index: '0', id: 'slede', title: 'Lede', blocks: [{ kind: 'text', text: 'Stub.' }], entries: [streamHolderEntry()] },
+  ]
+  const extras = streamHeroExtras(bands, { holder: STREAM_HOLDER })
+  assert.match(
+    extras,
+    /<template id="tpl-credit">This page: Wikipedia \+ Statens Museum for Kunst<\/template><script>__fill\("tpl-credit","\.credit-line"\)<\/script>/,
+  )
+  const legend = extras.match(/<template id="tpl-legend">([\s\S]*?)<\/template>/)[1]
+  assert.match(legend, /Statens Museum for Kunst/)
+  assert.doesNotMatch(legend, /IIIF collections/)
+})
+
+test('streamHeroExtras without a holder emits no credit fill and no institution name', () => {
+  const bands = [
+    { index: '0', id: 'slede', title: 'Lede', blocks: [{ kind: 'text', text: 'Stub.' }], entries: [{ source: 'met', title: 'Work', href: 'https://example.com' }] },
+  ]
+  const extras = streamHeroExtras(bands)
+  assert.doesNotMatch(extras, /tpl-credit/)
+  assert.doesNotMatch(extras, /Statens Museum for Kunst/)
+  const legend = extras.match(/<template id="tpl-legend">([\s\S]*?)<\/template>/)[1]
+  assert.match(legend, /The Met/)
+})
+
+test('a streamed lede band carries the zoom link and the renamed source bar off its own holder field', () => {
+  const band = {
+    id: 'slede',
+    title: 'Lede',
+    blocks: [{ kind: 'text', text: 'Stub.' }],
+    entries: [streamHolderEntry()],
+    holder: STREAM_HOLDER,
+  }
+  const fragment = streamBand(band)
+  assert.match(fragment, /High resolution at Statens Museum for Kunst →/)
+  const srcBar = fragment.match(/<div class="hero-src">([\s\S]*?)<\/div>/)[1]
+  assert.match(srcBar, /Statens Museum for Kunst/)
+  assert.doesNotMatch(srcBar, /IIIF collections/)
+})
+
+test('the same band without a holder field streams no zoom link', () => {
+  const band = {
+    id: 'slede',
+    title: 'Lede',
+    blocks: [{ kind: 'text', text: 'Stub.' }],
+    entries: [streamHolderEntry()],
+  }
+  const fragment = streamBand(band)
+  assert.doesNotMatch(fragment, /class="zoom"/)
+})
+
+test('a holder-work hero floats over a stub lede where an ordinary hero demotes', () => {
+  const shortProse = [{ kind: 'text', text: 'Ten chars.' }]
+  const holderBand = { id: 'slede', title: 'Lede', blocks: shortProse, entries: [streamHolderEntry()] }
+  const { rail } = bandParts(holderBand)
+  assert.match(rail, /hero-card/)
+  const ordinary = {
+    id: 'slede',
+    title: 'Lede',
+    blocks: shortProse,
+    entries: [{ ...streamHolderEntry(), standing: undefined }],
+  }
+  const demoted = bandParts(ordinary)
+  assert.doesNotMatch(demoted.rail, /hero-card/)
+})

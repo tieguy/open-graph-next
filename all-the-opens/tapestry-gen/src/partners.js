@@ -27,8 +27,6 @@
 //                  those terms — only where the page has actually been
 //                  read), optional `name` where the list's prose style
 //                  differs from the display name
-//   hotlinkUnsafe  true for aggregators whose thumbnails point at many
-//                  provider hosts (see `hotlinkUnsafe` in src/http.js)
 //   hostLimits     host → concurrent-request limit, ONLY with the partner's
 //                  published policy quoted beside it (see `hostLimit` in
 //                  src/mw.js — the default everywhere else is 1)
@@ -212,9 +210,45 @@ export const PARTNERS = {
       cite: 'https://www.rijksmuseum.nl/en/press/press-releases/rijksmuseum-launches-collection-online',
     },
   },
+  cleveland: {
+    name: 'Cleveland Museum of Art',
+    // The museum's own favicon serves 200 to non-browser clients (checked
+    // 2026-08-17), so no Commons stand-in is needed.
+    icon: 'https://www.clevelandart.org/favicon.ico',
+    hosts: ['clevelandart.org'],
+    friend: {
+      gives:
+        'The museum’s own record of a work — title, date, and a photograph — discovered through a Wikidata statement naming it.',
+      terms:
+        'Works out of copyright are released CC0 — data and images both; the per-object share_license_status flag is the museum’s own word.',
+      // The museum's Open Access page: CC0 on both images and data for
+      // public-domain works, announced January 2019 (read 2026-08-17).
+      cite: 'https://www.clevelandart.org/open-access',
+    },
+  },
+  getty: {
+    name: 'J. Paul Getty Museum',
+    // The museum's own favicon serves image/vnd.microsoft.icon to
+    // non-browser clients (checked 2026-08-17).
+    icon: 'https://www.getty.edu/favicon.ico',
+    hosts: ['getty.edu'],
+    friend: {
+      gives:
+        'The museum’s own record of a work — title, date, and a photograph over IIIF — discovered through a Wikidata statement naming it.',
+      terms:
+        'Open Content Program images are CC0; each object page states its own license, and the page’s catalog text is CC BY 4.0.',
+      // The program's own words: "Images … are available under CC0 through
+      // Getty's Open Content Program" (read 2026-08-17). No NC anywhere.
+      cite: 'https://www.getty.edu/projects/open-content-program/',
+    },
+  },
   iiif: {
     // Not one institution but a door many institutions share: P6108 manifests
     // arrive from whichever library or museum holds the object.
+    // Reader-facing copy about a specific object therefore takes the
+    // institution from the object's own record (the manifest's provider),
+    // never from this display name.
+    institutionFromRecord: true,
     name: 'IIIF collections',
     icon: 'https://iiif.io/favicon.ico',
     // No fixed host on purpose: a IIIF manifest is served by whichever
@@ -244,7 +278,6 @@ export const PARTNERS = {
       // candidate: even its Wayback captures are the 202 challenge page.
       cite: 'https://dp.la/about/terms-conditions',
     },
-    hotlinkUnsafe: true,
     hostLimits: {
       // DPLA's developer policy (pro.dp.la/developers/policies): "Consistent
       // with its philosophical presumption of openness, in general, the DPLA
@@ -300,6 +333,5 @@ export const PARTNERS = {
       // not the NZ collections themselves.
       cite: 'https://digitalnz.org/about/terms-of-use/developer-api-terms-of-use',
     },
-    hotlinkUnsafe: true,
   },
 }

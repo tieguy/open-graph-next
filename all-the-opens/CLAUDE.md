@@ -1,6 +1,6 @@
 # Jenifesto - the article, enriched
 
-Last verified: 2026-08-10
+Last verified: 2026-08-20
 
 ## Purpose
 
@@ -37,6 +37,12 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 - `cd tapestry-gen && npm run deploy:staging` — Fly deploy to **staging**
   (staging.friendsof.wiki), no warming. Review here first; prod is a separate,
   deliberate `npm run deploy`. Details in `tapestry-gen/CLAUDE.md`.
+- `HOLDER_PAGE=1` in front of any of the above turns on the
+  single-institution work-page experiment: an article about a held
+  painting, sculpture, or manuscript renders as Wikipedia plus that one
+  institution, every other partner sitting out. Off by default, and
+  flag-off renders are unchanged. The rules, the gate and the measured
+  population are in `tapestry-gen/CLAUDE.md`.
 
 ## Project Structure
 
@@ -49,6 +55,12 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
   stale `.tapestry` artifacts. Nothing emits them any more — the emitter
   retired to the attic 2026-08-04 with the generator that drove it.
 - `docs/design-plans/`, `docs/implementation-plans/` — design documentation.
+- `docs/data/` — dated measurement files a tool regenerates and a human reads:
+  today the holder census and the QA sample drawn from it
+  (`<date>-holder-census.json`, `<date>-holder-qa-sample.json`). They are
+  checked in so a measurement can be re-run against the same population, and
+  **nothing in the live tree reads them at request time** — see the Data
+  Contracts section below.
 - **Two running logs, appended to as things are found.** Both date every claim
   and show the command that produced it, because these findings decay — an
   undated "partner X blocks us" is worthless within months.
@@ -68,6 +80,12 @@ from the article title. The curated Apollo 11 dataset and the node/connection
 shapes it used retired to
 `../attic/all-the-opens/tapestry-gen-curated/data-apollo-11/` on 2026-08-04,
 where that README still documents them.
+
+The checked-in populations of the holder experiment (`docs/data/`, and
+`tapestry-gen/tools/holder-flagships.mjs`) are not an exception: they are
+measurement inputs and a warming list, read by tools, never by a render. A
+page that consulted a checked-in file to decide what to show would be the
+curated generator again.
 
 ## Key Decisions
 

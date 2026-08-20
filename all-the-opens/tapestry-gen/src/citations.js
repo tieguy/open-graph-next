@@ -361,7 +361,7 @@ export function applyAccess(candidates, volumes) {
   }
 }
 
-export function citationCoverage(candidates, volumes, unchecked = new Set()) {
+export function citationCoverage(candidates, volumes, unchecked = new Set(), { searched = true } = {}) {
   applyAccess(candidates, volumes)
   const isUnchecked = (c) => c.isbn && !c.access && unchecked.has(c.isbn)
   const open = candidates.filter(
@@ -377,6 +377,11 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
     cataloged,
     linked,
     unchecked: candidates.filter(isUnchecked).length,
+    // Whether any access lookup ran for this band at all. Carried as a fact
+    // rather than inferred from counts, because most citations carry no ISBN
+    // and a count comparison cannot tell "asked and found nothing" from
+    // "never asked" (a single-institution page's lookups sit out entirely).
+    searched,
   }
 }
 
@@ -401,12 +406,14 @@ export function citationCoverage(candidates, volumes, unchecked = new Set()) {
 export function pageCitations(bands) {
   const sum = { total: 0, open: 0, cataloged: 0, linked: 0, unchecked: 0 }
   const papers = { total: 0, open: 0 }
+  let searched = false
   for (const b of bands ?? []) {
     for (const k of Object.keys(sum)) sum[k] += b.citations?.[k] ?? 0
     papers.total += b.papers?.total ?? 0
     papers.open += b.papers?.open ?? 0
+    if (b.citations?.searched === true) searched = true
   }
-  return { ...sum, papers }
+  return { ...sum, papers, searched }
 }
 
 const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten',
@@ -418,7 +425,7 @@ const spell = (n) => WORDS[n] ?? n.toLocaleString()
  * two. The same finding as the visibility tiers, measured on citations rather
  * than institutions, which is why it belongs in the same panel.
  */
-export function citationHeadline({ total, open, cataloged, unchecked = 0, papers } = {}) {
+export function citationHeadline({ total, open, cataloged, unchecked = 0, papers, searched = true } = {}) {
   if (!total) return null
   // What a reader can actually open: the OpenLibrary verdicts AND the open
   // papers. `open` alone is books, and counting only books rendered a flat
@@ -431,12 +438,18 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
   const out = [
     `The original Wikipedia article cites ${total.toLocaleString()} work${total === 1 ? '' : 's'}.`,
   ]
-  out.push(
-    readable
-      ? `${cap(spell(readable))} of them you can read or borrow right now.`
+  // "We could not find" claims a search happened. On a single-institution
+  // page the access lookups sit out entirely, so no search did — the
+  // negative must not stand ("we could not look" must never render as
+  // "there is no copy"), and the could-not-check line below speaks for the
+  // whole citation list rather than only the ISBN-carrying part of it.
+  const accessLine = readable
+    ? `${cap(spell(readable))} of them you can read or borrow right now.`
+    : !searched && total > 0
+      ? null
       : // Never "no free copy exists" — we searched, we did not survey the world.
-        `We could not find a free copy of any of them.`,
-  )
+        `We could not find a free copy of any of them.`
+  if (accessLine) out.push(accessLine)
   // "More" only reads if something came before it. With nothing readable, the
   // cataloged ones are not "more" — they are the whole of what was found.
   if (cataloged)
@@ -447,9 +460,13 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
           `${cataloged === 1 ? 'it' : 'them'}.`,
     )
   // "We could not look" must never be left to read as "there is nothing there".
-  if (unchecked)
+  if (!searched && total > 0)
+    out.push(`${cap(spell(total))} we could not check this time.`)
+  else if (unchecked)
     out.push(`${cap(spell(unchecked))} we could not check this time.`)
-  if (papers?.total)
+  // The papers clause claims a search too. When none ran, the could-not-check
+  // line above already speaks for every cited work, papers included.
+  if (papers?.total && searched)
     out.push(
       `Of the ${papers.total.toLocaleString()} research paper${papers.total === 1 ? '' : 's'} among them, ` +
         `${papers.open ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read` : 'we found none free to read'}.`,

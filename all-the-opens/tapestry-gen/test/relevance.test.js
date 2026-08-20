@@ -96,6 +96,18 @@ test('an Internet Archive embed counts as something to look at', () => {
   assert.equal(pickHero([embed]).hero.title, 'A film')
 })
 
+test('the holder’s record of the work outranks every other standing, even a subject document', () => {
+  const holder = { standing: 'holder-work', imageUrl: 'x' }
+  const doc = { standing: 'subject-document' }
+  assert.ok(heroRank(holder) < heroRank(doc))
+  assert.equal(pickHero([doc, holder]).hero, holder)
+})
+
+test('a holder record without an image does not take the float', () => {
+  const bare = { standing: 'holder-work' }
+  assert.equal(pickHero([bare]).hero, null)
+})
+
 // --- anchors too broad to sample --------------------------------------------
 
 test('the denominator separates every showcase shelf worth keeping from every one worth dropping', () => {

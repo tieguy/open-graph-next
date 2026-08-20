@@ -29,6 +29,7 @@ import {
   coverDataUri,
   fromDataUri,
   hotlinkUnsafe,
+  servableImage,
   imgKey,
   readFacts,
   writeFacts,
@@ -240,8 +241,19 @@ const server = createServer(async (req, res) => {
         res.end('no image\n')
         return
       }
+      // Belt and braces over coverDataUri's own type gate: whatever is on
+      // the volume, this origin serves only non-document images from /img/ —
+      // partner HTML must never render same-origin, and neither may SVG,
+      // the one image type that runs script on navigation (servableImage
+      // wraps the single shared definition, and is the tested seam).
+      if (!servableImage(decoded)) {
+        res.writeHead(404, { 'Content-Type': 'text/plain' })
+        res.end('no image\n')
+        return
+      }
       res.writeHead(200, {
         'Content-Type': decoded.type,
+        'X-Content-Type-Options': 'nosniff',
         'Content-Length': decoded.body.length,
         // The path is a hash of the URL, and these files do not change under
         // theirs. A week is long enough to cache across a reading session and
@@ -335,7 +347,7 @@ const server = createServer(async (req, res) => {
   // reader's request; `title` is what the page may truthfully call itself.
   let title = page
   try {
-    const { bands, stats, reach } = await discover(page, {
+    const { bands, stats, reach, holder } = await discover(page, {
       async emit(type, data) {
         if (type === 'spine') {
           title = data.page
@@ -369,7 +381,7 @@ const server = createServer(async (req, res) => {
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
-    write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/' }))
+    write(streamHeroExtras(bands, { inline, reach, home: process.env.SITE_HOME ?? '/', holder }))
     // One snapshot answers two questions: whether this render carries the thin
     // marker, and whether it is stored thin below. Taken before streamClose so
     // the marker lands before `__tapdone` — only complete pages can say they

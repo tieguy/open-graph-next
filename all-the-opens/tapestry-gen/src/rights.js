@@ -358,6 +358,52 @@ export async function entityRights(qids) {
  * American term project is adding jurisdiction items — and the shorthand is
  * generated to a fixed form.
  */
+/**
+ * The graph's work-level answer, WHOLE, or null — the gate and the words
+ * for the holder-refusal disclosure, taken from one place so the page can
+ * never gate on one branch of the record and quote another. Only work-level
+ * statements count: a creator-level ruling may not stand alone (the rule on
+ * `rightsView`), and a stated license is a promise about a copy, not a
+ * status of the work — either alone yields null, the same withholding
+ * stance the unknown branch takes. A record with no free statement yields
+ * null too: a refusal everyone agrees with needs no disclosure.
+ *
+ * A MIXED record keeps its bound clause — `rightsView`'s rule that the free
+ * clause is never emitted alone holds here too, with the same wording — and
+ * is flagged `mixed`, because where the graph itself records "still in
+ * copyright" somewhere, a museum's flag may simply agree with that
+ * somewhere, and the caller must not assert a disagreement.
+ */
+export function workFreeStatus(rec) {
+  const work = (rec?.work ?? []).filter((w) => w.status.known !== false)
+  const free = work.filter((w) => w.status.free)
+  if (!free.length) return null
+  const bound = work.filter((w) => !w.status.free)
+  const where = (ws) =>
+    sentenceList(
+      [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
+        (a, b) => a.length - b.length || a.localeCompare(b),
+      ),
+    )
+  const lead = [...free].sort((a, b) => a.status.rank - b.status.rank)[0]
+  let line
+  if (bound.length) {
+    const freeWhere = where(free)
+    const boundWhere = where(bound)
+    line =
+      `${lead.status.label}${freeWhere ? ` in ${freeWhere}` : ''}` +
+      ` · still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+  } else if (lead.jurisdiction) {
+    line = `${lead.status.label} in ${where(free)}`
+  } else {
+    // rightsView's guard, mirrored: an unqualified lead status is worldwide
+    // and there is nothing to narrow — a qualified sibling must not shrink
+    // it to its own jurisdictions.
+    line = lead.status.label
+  }
+  return { line, mixed: bound.length > 0 }
+}
+
 export function jurisdictionPhrase(label) {
   if (!label) return null
   const m = /^countries with (\d+) years pma( or shorter)?$/i.exec(label.trim())
