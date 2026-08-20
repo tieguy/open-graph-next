@@ -788,8 +788,10 @@ each host's probed manifest had its `@context` read directly on
 2026-08-20 — all six state `presentation/2/context.json` and none
 carries a `provider` field (the gate's `no-institution` verdict alone
 could not have said which; a v3 manifest without a provider fails the
-same way). NLW's prose attribution names itself; ISOS states "© UCC". No `provider` field exists to name the library, so the gate
-cannot credit them — the entry-18/20 pattern with library names on it
+same way). With no `provider` to name the library — the prose
+attributions do it instead, NLW naming itself and ISOS stating
+"© UCC" — the gate cannot credit any of the six: the entry-18/20
+pattern with library names on it
 (NLW here is the same host entry 21 classed KMSKA-style in the art
 lane: free-licensed, prose-named). The six probed hosts publish in the
 format's first edition; the door opens for them exactly as for KMSKA:
