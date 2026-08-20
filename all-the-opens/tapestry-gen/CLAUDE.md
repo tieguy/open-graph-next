@@ -579,19 +579,19 @@ nothing" from "never asked".
 `imageCount`, the museum's own count of images it states — Met primary +
 `additionalImages`, AIC `image_id` + `alt_image_ids` (field name
 live-verified 2026-08-20: artwork 805 answers an image_id plus one alt),
-Cleveland web + `alternate_images`, IIIF canvases. It is null where no
-count is in hand, for two different reasons: the Getty page's JSON-LD
-states none — the leaf-by-leaf records are real but hydrate client-side,
-where no fetch of ours can count them — and the Rijksmuseum count is not
-yet extracted from the Linked Art hops. A **manuscript** page whose record
-states more than one image reads "High resolution **and more pages** at
-<institution> →"; everything else keeps the plain phrase, so the promise
-never outruns what the record itself states (measured 2026-08-20, one Met
-manuscript states exactly one image). It is an *images* count: on the IIIF
-lane the manifest's own canvas count, the closest thing a manifest states
-to a page count, and on the museum lanes the nearest machine-readable
-proxy for pages, where extra images can be detail views. Getty manuscripts (the Spinola Hours included) therefore stay
-plain. The Hours of Jeanne d'Evreux (210 stated images) is the warm
+Cleveland web + `alternate_images`, IIIF canvases. It is null where no count
+is in hand, for two different reasons: the Getty page's JSON-LD states none —
+the leaf-by-leaf records are real but hydrate client-side, where no fetch of
+ours can count them — and the Rijksmuseum count is not yet extracted from the
+Linked Art hops. A **manuscript** page whose record states more than one
+image reads "High resolution **and more pages** at <institution> →";
+everything else keeps the plain phrase, so the promise never outruns what the
+record itself states (measured 2026-08-20, one Met manuscript states exactly
+one image). It is an *images* count: on the IIIF lane the manifest's own
+canvas count, the closest thing a manifest states to a page count, and on the
+museum lanes the nearest machine-readable proxy for pages, where extra images
+can be detail views. Getty manuscripts (the Spinola Hours included) therefore
+stay plain. The Hours of Jeanne d'Evreux (210 stated images) is the warm
 list's manuscript more-pages exemplar.
 
 **The hero and the merged panel render together — the merge is the point, not
