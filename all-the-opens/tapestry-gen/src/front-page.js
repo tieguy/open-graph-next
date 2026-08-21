@@ -60,7 +60,9 @@ const readyCount = () =>
 
 const SHOWCASE = [
   {
-    domain: 'Aviation',
+    // The 3D cards name their format: the scans arrive as glTF (the Voyager
+    // packages resolve to it — see the Smithsonian entry in CLAUDE.md).
+    domain: 'Aviation · glTF',
     title: 'Wright Flyer',
     group: 'History and the public record',
     adds: '3D models from the Smithsonian',
@@ -99,7 +101,7 @@ const SHOWCASE = [
     friends: ['arxiv', 'internet_archive'],
   },
   {
-    domain: 'Natural history',
+    domain: 'Natural history · glTF',
     title: 'Common seadragon',
     group: 'Science and the living world',
     adds: 'a 3D scan of the museum’s own specimen from the Smithsonian',
@@ -122,16 +124,19 @@ const HOLDER_SHOWCASE = [
   {
     title: 'The Night Watch',
     holder: 'rijks',
+    via: 'Linked Art + IIIF',
     adds: 'the Rijksmuseum’s record of the painting, merged row by row with the Wikipedia article’s facts',
   },
   {
     title: "Hours of Jeanne d'Evreux",
     holder: 'met',
+    via: 'Open Access API',
     adds: 'the Met’s record of the manuscript, and the door to its 210 images',
   },
   {
     title: 'Spinola Hours',
     holder: 'getty',
+    via: 'IIIF + JSON-LD',
     adds: 'the Getty’s record of the book of hours, and six more works by its illuminator',
   },
 ]
@@ -247,17 +252,23 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 
 /**
  * The held-work cards. Same card grammar as the showcase, with the two
- * differences a two-party page earns: the small-caps line echoes the page's
- * own masthead ("Wikipedia + <institution>"), and the foot row names ONE
- * friend, because having exactly one is the point. `show held` rather than
- * `show`, so the counts that pin the showcase grid stay exact. The echo
- * reads PARTNERS[..].name — the same source the masthead prints through
- * the holder record — so the card and the page it opens cannot disagree.
+ * differences a two-party page earns: the small-caps line names the
+ * institution and the open standard its record travels by ("Wikipedia +"
+ * would say nothing — every page on this site is Wikipedia plus someone;
+ * the operator's call, 2026-08-20). `via` is HAND-WRITTEN per card and
+ * must name the pipe the lane actually reads — the record surfaces are
+ * documented per partner in CLAUDE.md's Key Files — because a standard a
+ * partner does not speak is exactly the false claim this site exists not
+ * to make. The foot row names ONE friend, because having exactly one is
+ * the point. `show held` rather than `show`, so the counts that pin the
+ * showcase grid stay exact. The institution name reads PARTNERS[..].name —
+ * the same source the masthead prints through the holder record — so the
+ * card and the page it opens cannot disagree.
  */
 const holderCards = (held = HOLDER_SHOWCASE) =>
   held.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
-  <span class="dom">Wikipedia + ${escapeHtml(PARTNERS[c.holder].name)}</span>
+  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)} · ${escapeHtml(c.via)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>

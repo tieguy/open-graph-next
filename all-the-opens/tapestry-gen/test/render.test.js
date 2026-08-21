@@ -627,7 +627,13 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   // Every showcase card names a group in GROUP_ORDER — a card outside the
   // list would silently fall out of the grid.
   assert.deepEqual(ungroupedShowcaseTitles(), [])
-  assert.match(html, /Wikipedia \+ Rijksmuseum/)
+  // The small-caps line names the institution and its pipe — "Wikipedia +"
+  // said nothing, since every page here is Wikipedia plus someone.
+  assert.match(html, /Rijksmuseum · Linked Art \+ IIIF/)
+  assert.match(html, /The Met · Open Access API/)
+  assert.match(html, /J\. Paul Getty Museum · IIIF \+ JSON-LD/)
+  assert.doesNotMatch(html, /Wikipedia \+ /)
+  assert.match(html, /Natural history · glTF/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []
   for (const card of heldCards) {
