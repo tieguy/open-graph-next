@@ -254,8 +254,8 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
  * reads PARTNERS[..].name — the same source the masthead prints through
  * the holder record — so the card and the page it opens cannot disagree.
  */
-const holderCards = () =>
-  HOLDER_SHOWCASE.map(
+const holderCards = (held = HOLDER_SHOWCASE) =>
+  held.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
   <span class="dom">Wikipedia + ${escapeHtml(PARTNERS[c.holder].name)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
@@ -275,20 +275,26 @@ export const ungroupedShowcaseTitles = () =>
 // Group rows are <p>, not headings: they are reading aids inside the hero,
 // and a heading here would sit at no level — the page's outline runs h1
 // (the masthead) straight to the FAQ's h2. A group no card claims renders
-// nothing, heading included.
-const groupedShowcase = () =>
-  GROUP_ORDER.map((g) => {
-    const cards = SHOWCASE.filter((c) => c.group === g)
-    if (!cards.length) return ''
-    return `<p class="show-cat">${escapeHtml(g)}</p>\n` + cards.map(showcaseCard).join('\n')
-  })
+// nothing, heading included — the Art group too, note and all. The list
+// parameters exist for the test that pins exactly that; the page always
+// renders the real lists.
+export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
+  [
+    ...GROUP_ORDER.map((g) => {
+      const cards = showcase.filter((c) => c.group === g)
+      if (!cards.length) return ''
+      return `<p class="show-cat">${escapeHtml(g)}</p>\n` + cards.map(showcaseCard).join('\n')
+    }),
+    held.length
+      ? `<p class="show-cat">Art</p>\n` +
+        `<p class="show-note">Each of these articles is about a work an institution holds, so the\n` +
+        `  page becomes a two-party act: the Wikipedia article and the institution’s own record\n` +
+        `  of the work, merged.</p>\n` +
+        holderCards(held)
+      : '',
+  ]
     .filter(Boolean)
-    .join('\n') +
-  `\n<p class="show-cat">Art</p>\n` +
-  `<p class="show-note">Each of these articles is about a work an institution holds, so the\n` +
-  `  page becomes a two-party act: the Wikipedia article and the institution’s own record\n` +
-  `  of the work, merged.</p>\n` +
-  holderCards()
+    .join('\n')
 
 /** The grid those cards sit in, shared for the same reason they are. */
 const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}

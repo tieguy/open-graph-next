@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
-import { frontPage, GROUP_ORDER, holderShowcaseTitles, showcaseTitles, ungroupedShowcaseTitles } from '../src/front-page.js'
+import { frontPage, GROUP_ORDER, groupedShowcase, holderShowcaseTitles, showcaseTitles, ungroupedShowcaseTitles } from '../src/front-page.js'
 import { bootWarmTitles } from '../src/warming.js'
 
 // What the shipped renderer and its article extraction promise. The curated
@@ -633,4 +633,16 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   for (const card of heldCards) {
     assert.equal((card.match(/class="fav fav-/g) ?? []).length, 1, 'one logo per held card')
   }
+})
+
+test('a group no card claims renders nothing — heading, note and all', () => {
+  // The Art group's absence must take its note with it: a sentence claiming
+  // "each of these articles" over zero cards would be the orphan the guard
+  // exists to prevent.
+  const none = groupedShowcase([], [])
+  assert.equal(none, '')
+  const artless = groupedShowcase(undefined, [])
+  assert.doesNotMatch(artless, /<p class="show-cat">Art<\/p>/)
+  assert.doesNotMatch(artless, /show-note/)
+  assert.match(artless, /<p class="show-cat">History and the public record<\/p>/)
 })
