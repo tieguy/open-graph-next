@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
-import { frontPage, holderShowcaseTitles, showcaseTitles } from '../src/front-page.js'
+import { frontPage, GROUP_ORDER, holderShowcaseTitles, showcaseTitles, ungroupedShowcaseTitles } from '../src/front-page.js'
 import { bootWarmTitles } from '../src/warming.js'
 
 // What the shipped renderer and its article extraction promise. The curated
@@ -609,15 +609,21 @@ test('the held-works row shows the two-party pages, one friend each — and the 
     assert.ok(html.includes(escapeHtml(title)), `front page shows ${title}`)
   }
   assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
-  assert.match(html, /when one friend holds the work itself/)
-  // One chip, one meaning: the readiness claim covers both grids and counts
-  // all ten, and the held row's label is a category line, never a chip.
-  assert.match(html, /Ten articles are already rendered and cached/)
+  // The chip retired with its second label; the readiness sentence is the
+  // whole claim, covers the whole grid, and counts all nine.
+  assert.match(html, /Nine articles are already rendered and cached/)
   // …and the count is always a word: a digit here means COUNT_WORDS ran out.
   assert.doesNotMatch(html, /\d+ articles are already rendered/)
-  assert.equal((html.match(/<span class="chip">/g) ?? []).length, 1)
-  assert.match(html, /<p class="cat">Three of\s+the ten are two-party pages/)
-  assert.match(html, /two-party pages: <b>when one friend holds the work itself<\/b>/)
+  assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
+  // Three group rows, reading aids like the friends list's — and the
+  // two-party fact is the Art group's own note.
+  for (const g of [...GROUP_ORDER, 'Art']) {
+    assert.ok(html.includes(`<h3 class="show-cat">${g}</h3>`), `group row: ${g}`)
+  }
+  assert.match(html, /<p class="show-note">Each of these articles is a work an institution holds/)
+  // Every showcase card names a group in GROUP_ORDER — a card outside the
+  // list would silently fall out of the grid.
+  assert.deepEqual(ungroupedShowcaseTitles(), [])
   assert.match(html, /Wikipedia \+ Rijksmuseum/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []

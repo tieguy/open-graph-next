@@ -37,7 +37,8 @@ const OG_DESCRIPTION =
 // `adds` — "other friends" means the ones the headline did not already say.
 // The counts, spelled, for the sentences that promise pages are ready —
 // showcaseCount for the busy page (whose grid is the showcase's),
-// readyCount for the front page (whose promise covers both grids). Written
+// readyCount for the front page (whose promise covers the whole grid,
+// showcase groups and Art group alike). Written
 // out rather than counted by hand, the number went stale the moment a card
 // was added — and it is a promise about how many pages open at once, which
 // is exactly the kind of claim this page must not get wrong.
@@ -49,9 +50,9 @@ const OG_DESCRIPTION =
 // update those in the same edit.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
-// The ready-now promise covers BOTH grids — the showcase and the held
-// works ride one warm walk and one reserve (bootWarmTitles, which composes
-// these same two lists) — so the count the chip vouches for is their sum.
+// The ready-now promise covers the whole grid — the showcase groups and the
+// held works ride one warm walk and one reserve (bootWarmTitles, which
+// composes these same two lists) — so the ready line's count is their sum.
 const readyCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
   String(SHOWCASE.length + HOLDER_SHOWCASE.length)
@@ -61,24 +62,28 @@ const SHOWCASE = [
   {
     domain: 'Aviation',
     title: 'Wright Flyer',
+    group: 'History and the public record',
     adds: '3D models from the Smithsonian',
     friends: ['dpla', 'europeana', 'digitalnz', 'openstreetmap'],
   },
   {
     domain: 'Law',
     title: 'Brown v. Board of Education',
+    group: 'History and the public record',
     adds: 'case text from Free Law Project',
     friends: ['internet_archive', 'openlibrary', 'dpla', 'openstreetmap'],
   },
   {
     domain: 'A writer’s life',
     title: 'José Rizal',
+    group: 'History and the public record',
     adds: 'books from Open Library',
     friends: ['internet_archive', 'dpla'],
   },
   {
     domain: 'Ecology',
     title: 'Monarch butterfly',
+    group: 'Science and the living world',
     adds:
       'photographs from iNaturalist and observation maps from Global Biodiversity ' +
       'Information Facility',
@@ -87,33 +92,29 @@ const SHOWCASE = [
     friends: ['dpla'],
   },
   {
-    domain: 'Art',
-    title: 'Rembrandt',
-    adds: 'paintings from the Met, the Rijksmuseum and the Art Institute',
-    friends: ['iiif', 'openlibrary', 'internet_archive'],
-  },
-  {
     domain: 'Open science',
     title: 'CRISPR gene editing',
+    group: 'Science and the living world',
     adds: 'open copies of cited papers from OpenAlex',
     friends: ['arxiv', 'internet_archive'],
   },
   {
     domain: 'Natural history',
     title: 'Common seadragon',
+    group: 'Science and the living world',
     adds: 'a 3D scan of the museum’s own specimen from the Smithsonian',
     // Read off the rendered page 2026-08-20, per the hand-written rule above.
     friends: ['inaturalist', 'gbif', 'dpla', 'internet_archive'],
   },
 ]
 
-// When one friend holds the work itself (the operator's front-page call,
-// 2026-08-20): articles that ARE a museum-held work render as a two-party
-// page, and the showcase above cannot show that — none of its subjects is a
-// held work. These three are, one per lane worth meeting first. `holder` is
-// the partner slug, for the icon and the small-caps masthead echo; the
-// `adds` lines follow the no-pitch register rule above. These cards make
-// the same ready-now promise the grid above makes, and the same three
+// The Art group (the operator's front-page call, 2026-08-20; regrouped the
+// same day): articles that ARE a held work render as two-party pages, and
+// these three — one per museum worth meeting first — are that group,
+// standing beside the other groups as peers rather than as an appendix.
+// `holder` is the partner slug, for the icon and the small-caps masthead
+// echo; the `adds` lines follow the no-pitch register rule above. These
+// cards make the same ready-now promise the whole grid makes, and the same
 // mechanisms back it: the titles ride the boot warm walk and warm.js's
 // default walk (bootWarmTitles in src/warming.js) and the admission
 // reserve's title set (src/admission.js).
@@ -235,15 +236,14 @@ export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
  * one place a reader meets that promise while the demo is refusing everything
  * else.
  */
-const showcaseCards = () =>
-  SHOWCASE.map(
-    (c) => `<a class="show" href="${wikiHref(c.title)}">
+const showcaseCard = (c) => `<a class="show" href="${wikiHref(c.title)}">
   <span class="dom">${escapeHtml(c.domain)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>Other friends:</b>${friendIcons(c.friends)}</span>
-</a>`,
-  ).join('\n')
+</a>`
+
+const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 
 /**
  * The held-work cards. Same card grammar as the showcase, with the two
@@ -264,13 +264,31 @@ const holderCards = () =>
 </a>`,
   ).join('\n')
 
+// The grid's reading order: two showcase groups, then the Art group — the
+// held works. Group rows are reading aids exactly like the friends list's
+// below; the two-party fact is the Art group's own note, because that is
+// the group it is true of. A test asserts every SHOWCASE entry names a
+// group in this list, so a card cannot silently fall out of the grid.
+export const GROUP_ORDER = ['History and the public record', 'Science and the living world']
+export const ungroupedShowcaseTitles = () =>
+  SHOWCASE.filter((c) => !GROUP_ORDER.includes(c.group)).map((c) => c.title)
+const groupedShowcase = () =>
+  GROUP_ORDER.map(
+    (g) =>
+      `<h3 class="show-cat">${escapeHtml(g)}</h3>\n` +
+      SHOWCASE.filter((c) => c.group === g)
+        .map(showcaseCard)
+        .join('\n'),
+  ).join('\n') +
+  `\n<h3 class="show-cat">Art</h3>\n` +
+  `<p class="show-note">Each of these articles is a work an institution holds, so the page\n` +
+  `  becomes a two-party act: the Wikipedia article and the institution’s own record of the\n` +
+  `  work, merged.</p>\n` +
+  holderCards()
+
 /** The grid those cards sit in, shared for the same reason they are. */
 const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
-/* A category line, not a status chip: it says what KIND of page the grid
-   below holds, while the manila chip above vouches for readiness — two
-   different claims, two different looks. */
-.cat{font-size:.8rem;color:var(--muted);margin:18px 0 10px}
-.cat b{font-weight:600;color:#3a3f45}
+
 .ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
   border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
@@ -303,7 +321,6 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 
 export function frontPage({ inline = new Map(), siteOrigin = '' } = {}) {
   const legend = sourceLegend(inline)
-  const cards = showcaseCards()
   const friendCard = ([slug, name, gift, lic, licHref]) => `<div class="friend">
   <p class="who"><span class="fav fav-${slug}"></span>${escapeHtml(name)}</p>
   <p class="gift">${escapeHtml(gift)}</p>
@@ -384,18 +401,25 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .section{padding:6px 0 22px}
 .section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
   color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
-/* The ready line: the warm pages, named as such. On the front page the chip
-   vouches for both grids — the showcase and the held works, ten pages, one
-   warm list; on the busy page it vouches for the showcase alone, whose cards
-   are the only ones that page shows. A manila chip because a statement about
-   availability is the friends' voice, not the article's. Shared with the
-   busy page — see CARD_STYLE. */
+/* The ready line: the warm pages, named as such — nine pages, one warm
+   list, and the sentence is the whole claim. The manila chip retired from
+   this page when it became the only one of its kind (the operator's call,
+   2026-08-20); the busy page still wears one over its own six-card grid,
+   and CARD_STYLE keeps the rule for it. */
 ${CARD_STYLE}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
 .friends-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:34px 0 6px}
 .friends-cat:first-child{margin-top:0}
+/* The showcase grid's group rows: the friends list's reading-aid pattern,
+   tighter, because these sit inside the header rather than a section. The
+   note row is the Art group's own sentence — a fact about that group, in
+   prose, never a status chip. */
+.show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 0 0}
+.show-cat:first-child{margin-top:0}
+.show-note{grid-column:1/-1;font-size:.75rem;line-height:1.5;color:var(--muted);margin:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
 .friend .who{display:flex;align-items:center;gap:10px;font-weight:700;
   font-size:.92rem;color:var(--head);margin:0 0 6px}
@@ -474,16 +498,10 @@ ${legend.style}
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
-  <p class="ready"><span class="chip">ready now</span>${readyCount()
+  <p class="ready">${readyCount()
     .replace(/^./, (c) => c.toUpperCase())} articles are already rendered and cached — they open at once:</p>
   <div class="grid">
-${cards}
-  </div>
-  <p class="cat">${holderCount().replace(/^./, (c) => c.toUpperCase())} of
-    the ${readyCount()} are two-party pages: <b>when one friend holds the work itself</b>, the page
-    becomes the Wikipedia article and the institution’s own record of the work, merged:</p>
-  <div class="grid">
-${holderCards()}
+${groupedShowcase()}
   </div>
 </div></header>
 <main>

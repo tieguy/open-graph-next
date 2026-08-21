@@ -81,5 +81,5 @@ test('every held-works title rides the reserve', () => {
 
 test('the busy page’s own readiness sentence counts the grid it shows', () => {
   const html = busyPage()
-  assert.match(html, /These seven are already rendered and stored/)
+  assert.match(html, /These six are already rendered and stored/)
 })

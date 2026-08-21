@@ -182,15 +182,15 @@ presents as the demo mysteriously being slow again.
 **Deploy with `npm run deploy`** from this directory — just `flyctl deploy
 --remote-only` since 2026-08-10. **The server warms the front page's ready-now
 pages**: after `listen()`, when `WARM_ON_START` is set (prod's `fly.toml` sets
-it; staging and local dev deliberately do not), it walks the ten pages of
-`bootWarmTitles` — the seven showcase articles plus the three held works, one
+it; staging and local dev deliberately do not), it walks the nine pages of
+`bootWarmTitles` — the six showcase articles plus the three held works, one
 list in `src/warming.js` — through its own front door, **serially**, as
 ordinary traffic with no exemption from the per-host queues or the admission
 gate. Before this the walk was `node warm.js` appended to the deploy script,
 which meant every deploy ended attached to the operator's shell and a fresh
 volume stayed cold until someone remembered. Now the machine that boots over an
 empty page cache is the one that fills it, and a restart on a warm volume pays
-ten local replays. Titles come from `bootWarmTitles()` — `showcaseTitles()`
+nine local replays. Titles come from `bootWarmTitles()` — `showcaseTitles()`
 plus `holderShowcaseTitles()`, the two lists the front page renders its own
 cards from; a test per row asserts the walk and the cards agree, because drift
 would show up as a slow demo link rather than an error. `npm run warm [url]` is
@@ -252,14 +252,14 @@ Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 
 **The ready-now pages have a reserve past that cap** (`src/admission.js`,
 2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
-alike, which broke the promise the front page prints — its ready-now chip says
-all ten articles, both grids, are "already rendered and cached" — and a reader
-arriving while four cold discoveries were in flight got the busy page for a
-page that would have been served entirely off disk. `SHOWCASE_RESERVE` (default
-2) is slots only the ten ready-now titles may take — the showcase grid and the
-held-works row alike — admitted on the reader's own requested title (a redirect
-*to* one of them is not known to be one until the parse call answers, so it
-rides the general lane).
+alike, which broke the promise the front page prints — its ready line says all
+nine articles are "already rendered and cached" — and a reader arriving while
+four cold discoveries were in flight got the busy page for a page that would
+have been served entirely off disk. `SHOWCASE_RESERVE` (default 2) is slots
+only the nine ready-now titles may take — every card in the grid, showcase
+groups and Art group alike — admitted on the reader's own requested title (a
+redirect *to* one of them is not known to be one until the parse call answers,
+so it rides the general lane).
 **It widens nothing anyone else sees** — `hostLimit()` bounds upstream
 concurrency globally and knows nothing about in-flight discoveries; the worst
 case, a cold volume, is two more discoveries waiting on those same per-host
@@ -276,10 +276,11 @@ be.
 of system-ui on a blank page — a dead end offered by a site with finished
 pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
 startup (the moment it is needed is the moment there is no capacity to build
-anything), sharing the showcase cards, their CSS and the ready-now chip with
-the front page. The two pages promise different counts — the front page's ten
-covers both grids, the busy page's seven covers the showcase grid it alone
-shows — and each count is true of its own page. A busy page linking to pages
+anything), sharing the showcase cards and their CSS with the front page; the
+busy page alone still wears the ready-now chip. The two pages promise
+different counts — the front page's nine covers its whole grid, the busy
+page's six covers the showcase cards it alone shows — and each count is true
+of its own page. A busy page linking to pages
 that would themselves answer 503 would be worse than the dead end it replaced,
 which is why the two must not be separated.
 **It therefore needs the icon bytes too** (2026-08-13): a showcase card carries
@@ -391,8 +392,10 @@ open ecosystem can show you.
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 
-**Rembrandt replaced American Gothic as the art showcase on 2026-08-06**, and
-the swap is what drove the artworks lookup: the Met and the Rijksmuseum were
+**The front page's Art group is the three held works as of 2026-08-20**, and
+Rembrandt — the art showcase from 2026-08-06 until then — is no longer a
+front-page card, though the page itself renders as before. The Rembrandt swap
+is what drove the artworks lookup: the Met and the Rijksmuseum were
 both landmark open-access releases, and an artist article shows them together
 where a single painting shows one museum. An article ABOUT a painting gets
 nothing from `src/artworks.js` — The Night Watch fired the lookup zero times,

@@ -4,8 +4,8 @@
 // capped where it arrives (`MAX_CONCURRENT` in serve.js) and anything past the
 // cap is answered with a 503 that says so in the site's own voice. That cap was
 // applied to every `/wiki/` request alike, which quietly broke the promise the
-// front page makes in print: its ready-now chip says all ten articles, both
-// grids, are "already rendered and cached — they open at once", and a reader
+// front page makes in print: its ready line says all nine articles are
+// "already rendered and cached — they open at once", and a reader
 // who arrived while four cold discoveries were in flight got the busy page for
 // a page that would have been served entirely off the disk cache.
 //
