@@ -203,7 +203,7 @@ export function osmFeature(statements) {
  * rather than a confidently wrong map of the Atlantic.
  */
 export function parseEarthPoint(wkt) {
-  if (!wkt || /^</.test(wkt.trim())) return null
+  if (!wkt || wkt.trim().startsWith('<')) return null
   const m = /Point\(([-\d.eE]+) ([-\d.eE]+)\)/.exec(wkt)
   return m ? { lon: Number(m[1]), lat: Number(m[2]) } : null
 }
@@ -311,6 +311,25 @@ export function applyVerdicts(itemMap, verdicts, itemClasses, itemsWithEnded = n
  *
  * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, lc?, eu?, iiif?}>}
  */
+/**
+ * Fold one WDQS row into the statement record for its item.
+ *
+ * `si` is the inventory number ONLY when the collection holding it is a
+ * Smithsonian one, collapsed here so everything downstream can treat it as an
+ * ordinary item-level identifier. Read separately, `siinv` is no such thing —
+ * the Rijksmuseum states P217 on its objects too, and a bare accession number
+ * belongs to whichever museum assigned it. Both come from this one row, so
+ * the pair cannot be crossed between two rows of the same item (one museum's
+ * collection with another's number).
+ */
+function foldStatementRow(cur, row) {
+  for (const v of VARS) if (row[v] && cur[v] == null) cur[v] = row[v].value
+  if (cur.si == null && row.sicoll && row.siinv && isSmithsonianCollection(row.sicoll.value)) {
+    cur.si = row.siinv.value
+    cur.siName = siCollectionName(row.sicoll.value)
+  }
+}
+
 export async function partnerStatements(qids) {
   const map = new Map()
   for (const group of chunk([...new Set(qids)].filter(Boolean), 100)) {
@@ -325,22 +344,83 @@ export async function partnerStatements(qids) {
       const qid = row.item?.value?.split('/').pop()
       if (!qid) continue
       const cur = map.get(qid) ?? {}
-      for (const v of VARS) if (row[v] && cur[v] == null) cur[v] = row[v].value
-      // `si` is the inventory number ONLY when the collection holding it is a
-      // Smithsonian one, collapsed here so everything downstream can treat it
-      // as an ordinary item-level identifier. Read separately, `siinv` is no
-      // such thing — the Rijksmuseum states P217 on its objects too, and a bare
-      // accession number belongs to whichever museum assigned it. Taken from
-      // this row, so the pair cannot be crossed between two rows of the same
-      // item (one museum's collection with another's number).
-      if (cur.si == null && row.sicoll && row.siinv && isSmithsonianCollection(row.sicoll.value)) {
-        cur.si = row.siinv.value
-        cur.siName = siCollectionName(row.sicoll.value)
-      }
+      foldStatementRow(cur, row)
       map.set(qid, cur)
     }
   }
   return map
+}
+
+/**
+ * The P31 classes and P576 end dates of a set of items (phase 2a).
+ *
+ * Every P31 is kept: an item is a place if ANY of its classes is one. Keeping a
+ * single value would let SPARQL's unspecified row order pick the answer — the
+ * EFEO is both a research institute and a publisher.
+ *
+ * @returns {Promise<{itemClasses: Map<string, Set<string>>, itemsWithEnded: Set<string>}>}
+ */
+async function fetchItemClasses(qids) {
+  const itemClasses = new Map() // QID → Set of its P31 class QIDs
+  const itemsWithEnded = new Set() // QIDs that have P576 bindings
+  for (const group of chunk(qids, 100)) {
+    let rows = []
+    try {
+      rows = (await getJson(itemClassesUrl(group))).results?.bindings ?? []
+    } catch (e) {
+      console.error(`  wdqs item classes query failed (${group.length} entities): ${e.message}`)
+      continue
+    }
+    for (const row of rows) {
+      const qid = row.item?.value?.split('/').pop()
+      if (!qid) continue
+      if (row.class) {
+        if (!itemClasses.has(qid)) itemClasses.set(qid, new Set())
+        itemClasses.get(qid).add(row.class.value.split('/').pop())
+      }
+      if (row.ended) itemsWithEnded.add(qid)
+    }
+  }
+  return { itemClasses, itemsWithEnded }
+}
+
+/**
+ * Each class resolved against the place/defunct hierarchies (phase 2b) — but
+ * only the ones no earlier page has already resolved.
+ *
+ * Wikidata's class hierarchy is a small, near-static vocabulary and articles
+ * draw on the same corner of it: measured across seven articles, 25–72% of a
+ * page's classes had already been answered for an earlier one. None of that
+ * was reused, because `getJson` keys on the URL and `classesUrl` embeds the
+ * whole set, so one new class re-queried all forty. Keyed per class, a warm
+ * machine skips the query entirely — worth ~0.43s of the 0.63s mappability
+ * costs, on the lede's critical path.
+ *
+ * Only the verdict is stored, not the rows: the walk returns 237KB for twenty
+ * classes and all that survives is two booleans each.
+ */
+async function resolveClassVerdicts(distinctClasses) {
+  const verdicts = await readFacts('class', distinctClasses)
+  const unknown = distinctClasses.filter((c) => !verdicts.has(c))
+  if (!unknown.length) return verdicts
+
+  const learned = new Map()
+  for (const group of chunk(unknown, 100)) {
+    let rows = []
+    try {
+      rows = (await getJson(classesUrl(group))).results?.bindings ?? []
+    } catch (e) {
+      console.error(`  wdqs class hierarchy query failed (${group.length} classes): ${e.message}`)
+      continue
+    }
+    const answered = classVerdicts(rows)
+    // A class the walk returned no row for reaches nothing, which is a real
+    // answer and must be cached as one — otherwise it is re-asked forever.
+    for (const c of group) learned.set(c, answered.get(c) ?? { place: false, defunct: false })
+  }
+  for (const [c, v] of learned) verdicts.set(c, v)
+  await writeFacts('class', learned)
+  return verdicts
 }
 
 /**
@@ -378,69 +458,9 @@ export async function resolveMappability(map, only) {
     if (needsPlaceDefunctQuery(s) && s.place === undefined) pending.set(qid, s)
   }
   const needsPlaceDefunct = [...pending.keys()]
-  const itemClasses = new Map() // QID → Set of its P31 class QIDs
-  const itemsWithEnded = new Set() // QIDs that have P576 bindings
-
-  for (const group of chunk(needsPlaceDefunct, 100)) {
-    let rows = []
-    try {
-      rows = (await getJson(itemClassesUrl(group))).results?.bindings ?? []
-    } catch (e) {
-      console.error(`  wdqs item classes query failed (${group.length} entities): ${e.message}`)
-      continue
-    }
-    for (const row of rows) {
-      const qid = row.item?.value?.split('/').pop()
-      if (!qid) continue
-      if (row.class) {
-        const classQid = row.class.value.split('/').pop()
-        // Every P31 is kept: an item is a place if ANY of its classes is one.
-        // Keeping a single value would let SPARQL's unspecified row order pick
-        // the answer — the EFEO is both a research institute and a publisher.
-        if (!itemClasses.has(qid)) itemClasses.set(qid, new Set())
-        itemClasses.get(qid).add(classQid)
-      }
-      if (row.ended) {
-        itemsWithEnded.add(qid)
-      }
-    }
-  }
-
-  // Third query (phase 2b): resolve the distinct classes against place/defunct
-  // hierarchies — but only the ones no earlier page has already resolved.
-  //
-  // Wikidata's class hierarchy is a small, near-static vocabulary and articles
-  // draw on the same corner of it: measured across seven articles, 25–72% of a
-  // page's classes had already been answered for an earlier one. None of that
-  // was reused, because `getJson` keys on the URL and `classesUrl` embeds the
-  // whole set, so one new class re-queried all forty. Keyed per class, a warm
-  // machine skips the query entirely — worth ~0.43s of the 0.63s mappability
-  // costs, on the lede's critical path.
-  //
-  // Only the verdict is stored, not the rows: the walk returns 237KB for
-  // twenty classes and all that survives is two booleans each.
+  const { itemClasses, itemsWithEnded } = await fetchItemClasses(needsPlaceDefunct)
   const distinctClasses = [...new Set([...itemClasses.values()].flatMap((s) => [...s]))]
-  const verdicts = await readFacts('class', distinctClasses)
-  const unknown = distinctClasses.filter((c) => !verdicts.has(c))
-
-  if (unknown.length > 0) {
-    const learned = new Map()
-    for (const group of chunk(unknown, 100)) {
-      let rows = []
-      try {
-        rows = (await getJson(classesUrl(group))).results?.bindings ?? []
-      } catch (e) {
-        console.error(`  wdqs class hierarchy query failed (${group.length} classes): ${e.message}`)
-        continue
-      }
-      const answered = classVerdicts(rows)
-      // A class the walk returned no row for reaches nothing, which is a real
-      // answer and must be cached as one — otherwise it is re-asked forever.
-      for (const c of group) learned.set(c, answered.get(c) ?? { place: false, defunct: false })
-    }
-    for (const [c, v] of learned) verdicts.set(c, v)
-    await writeFacts('class', learned)
-  }
+  const verdicts = await resolveClassVerdicts(distinctClasses)
 
   // Merge class hierarchy results into item statements once, with all data
   // collected. `pending`, never `subset` and never `map`: mergePlaceDefunct
@@ -767,7 +787,11 @@ export const MUSEUM_LOOKUPS = [
   { var: 'gbif', property: 'P846', fetch: (v) => gbifEntry(v) },
 ]
 
-export async function statementEntries(qid, statements, { label, withMap, subject = false }) {
+/**
+ * Every museum lookup this item's statements pay for, run and gathered. A
+ * lookup that throws costs its own card and nothing else.
+ */
+async function museumEntries(qid, statements, label) {
   const out = []
   const jobs = [
     ...MUSEUM_LOOKUPS.map((p) => statements[p.var] && p.fetch(statements[p.var], label)),
@@ -788,15 +812,34 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
       console.error(`  statement lookup failed (${qid}): ${e.message}`)
     }
   }
+  return out
+}
+
+/**
+ * The exact chain, card by card: the statement that produced this record, and
+ * the statement's own anchor on Wikidata — which is also where a reader who
+ * spots wrong metadata goes to fix it.
+ */
+function attachTrace(entries, qid, label) {
+  for (const e of entries) {
+    const prop = /^P\d+$/.exec(e._via)?.[0]
+    if (!prop) continue
+    e.trace =
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records ${PROP_NAME[prop] ?? prop} ` +
+      `on its entry for ${label ?? qid}. We asked for that record, and this is what came back.`
+    e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${prop}`, label: 'Check or fix it on Wikidata' }
+  }
+}
+
+export async function statementEntries(qid, statements, { label, withMap, subject = false }) {
+  const out = await museumEntries(qid, statements, label)
   // Each card names the anchor whose Wikidata entry stated the connection —
   // a Met painting beside a section is a non sequitur until the card says
   // which linked thing it is the museum's record of.
   for (const e of out) {
-    e.why = label
-      ? subject
-        ? `This is ${label}’s own record of it`
-        : `About ${label}, which this section links to`
-      : 'Connected to something this section links to'
+    if (!label) e.why = 'Connected to something this section links to'
+    else if (subject) e.why = `This is ${label}’s own record of it`
+    else e.why = `About ${label}, which this section links to`
     // The renderer splits one source's carousel by topic, so two anchors'
     // objects from the same museum never share an unlabeled box.
     e.topic = label ?? null
@@ -808,17 +851,7 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   const coord = withMap && mappable(statements) ? parseEarthPoint(statements.coord) : null
   // The map card's title already names its place; a why line would repeat it.
   if (coord) out.push(mapEntry(coord, label, osmFeature(statements)))
-  // The exact chain, card by card: the statement that produced this record,
-  // and the statement's own anchor on Wikidata — which is also where a reader
-  // who spots wrong metadata goes to fix it.
-  for (const e of out) {
-    const prop = /^P\d+$/.exec(e._via)?.[0]
-    if (!prop) continue
-    e.trace =
-      `Wikidata — the shared database behind Wikipedia’s infoboxes — records ${PROP_NAME[prop] ?? prop} ` +
-      `on its entry for ${label ?? qid}. We asked for that record, and this is what came back.`
-    e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${prop}`, label: 'Check or fix it on Wikidata' }
-  }
+  attachTrace(out, qid, label)
   return out
 }
 

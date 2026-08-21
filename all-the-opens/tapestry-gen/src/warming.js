@@ -19,7 +19,7 @@ import { holderShowcaseTitles, showcaseTitles } from './front-page.js'
 // reserve (src/admission.js) is capacity kept for READERS of warm pages, and
 // warming happens to travel in the same lane.
 
-const path = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
+const path = (title) => `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`
 const secs = (ms) => `${(ms / 1000).toFixed(1)}s`
 
 /**
@@ -75,6 +75,28 @@ export async function warmPage(base, title, { timeoutMs = 300_000 } = {}) {
 }
 
 /**
+ * How one warmed page went: which tally it belongs to, and the line that
+ * says so.
+ */
+function warmOutcome(title, r) {
+  const size = `${secs(r.ms)}, ${(r.bytes / 1024).toFixed(0)}KB`
+  if (r.ok && r.thin.length) {
+    const which = r.thin.join(', ')
+    return {
+      kind: 'thin',
+      line: `  ◐ ${title} — ${size} — thin, ${which} refusing; re-renders when it answers`,
+    }
+  }
+  if (r.ok) return { kind: 'ok', line: `  ✓ ${title} — ${size}` }
+  // 503 is the server saying it is already busy discovering, which is a
+  // real answer and not a broken deploy — name it rather than lumping it in.
+  let why = `HTTP ${r.status}`
+  if (r.status === 503) why = 'busy (503)'
+  else if (!r.complete) why = 'stream cut short'
+  return { kind: 'failed', line: `  ✗ ${title} — ${why} after ${secs(r.ms)}` }
+}
+
+/**
  * Warm every title, serially, and say how it went — line by line through `log`
  * so the CLI and the in-process caller report identically.
  *
@@ -91,32 +113,21 @@ export async function warmAll(base, titles, { timeoutMs = 300_000, log = console
   let failed = 0
   let thin = 0
   for (const title of titles) {
+    let outcome
     try {
-      const r = await warmPage(base, title, { timeoutMs })
-      if (r.ok && r.thin.length) {
-        thin++
-        log(`  ◐ ${title} — ${secs(r.ms)}, ${(r.bytes / 1024).toFixed(0)}KB — thin, ${r.thin.join(', ')} refusing; re-renders when it answers`)
-      } else if (r.ok) {
-        log(`  ✓ ${title} — ${secs(r.ms)}, ${(r.bytes / 1024).toFixed(0)}KB`)
-      } else {
-        failed++
-        // 503 is the server saying it is already busy discovering, which is a
-        // real answer and not a broken deploy — name it rather than lumping it in.
-        const why = r.status === 503 ? 'busy (503)' : !r.complete ? 'stream cut short' : `HTTP ${r.status}`
-        log(`  ✗ ${title} — ${why} after ${secs(r.ms)}`)
-      }
+      outcome = warmOutcome(title, await warmPage(base, title, { timeoutMs }))
     } catch (e) {
-      failed++
-      log(`  ✗ ${title} — ${e.name === 'TimeoutError' ? `no answer in ${secs(timeoutMs)}` : e.message}`)
+      const why = e.name === 'TimeoutError' ? `no answer in ${secs(timeoutMs)}` : e.message
+      outcome = { kind: 'failed', line: `  ✗ ${title} — ${why}` }
     }
+    if (outcome.kind === 'failed') failed++
+    else if (outcome.kind === 'thin') thin++
+    log(outcome.line)
   }
-  log(
-    failed
-      ? `${failed} of ${titles.length} did not warm`
-      : thin
-        ? `all warm — ${thin} thin, refreshing when their sources answer`
-        : 'all warm',
-  )
+  let tally = 'all warm'
+  if (failed) tally = `${failed} of ${titles.length} did not warm`
+  else if (thin) tally = `all warm — ${thin} thin, refreshing when their sources answer`
+  log(tally)
   return { failed, thin }
 }
 

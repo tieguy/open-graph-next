@@ -7,12 +7,13 @@
 
 import { getJson } from './http.js'
 import { ccFromUri, licenseView } from './rights.js'
+import { stripTags } from './html.js'
 
 /** The first human-readable string in any of IIIF's label shapes:
  * "x", ["x"], {"@value":"x"}, {en:["x"]}, {none:["x"]}. */
 export function iiifString(value) {
   if (value == null) return null
-  if (typeof value === 'string') return value.replace(/<[^>]+>/g, '').trim() || null
+  if (typeof value === 'string') return stripTags(value).trim() || null
   if (Array.isArray(value)) return iiifString(value[0])
   if (typeof value === 'object') {
     if (value['@value'] != null) return iiifString(value['@value'])

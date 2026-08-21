@@ -235,7 +235,7 @@ export function gettyRecordFrom(ld) {
     partner: 'getty',
     // The page URL ends with the P2582 value the fetch was addressed by —
     // the round-trip rule the other transforms keep.
-    id: href ? href.replace(/\/+$/, '').split('/').pop() : null,
+    id: href ? href.replace(/(?<!\/)\/+$/, '').split('/').pop() : null,
     title: nullIfEmpty(typeof ld.name === 'string' ? ld.name : null),
     creator: nullIfEmpty(typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null),
     date: nullIfEmpty(typeof ld.temporal === 'string' ? ld.temporal : null),
@@ -370,7 +370,8 @@ export function iiifRecordFrom(manifest, manifestUrl) {
   // Gate: rights must be CC0 or PDM
   const v3rights = Array.isArray(manifest?.rights) ? manifest.rights[0] : manifest?.rights
   const v2license = Array.isArray(manifest?.license) ? manifest.license[0] : manifest?.license
-  const rightsUri = typeof v3rights === 'string' ? v3rights : typeof v2license === 'string' ? v2license : null
+  const stated = [v3rights, v2license].find((v) => typeof v === 'string')
+  const rightsUri = stated ?? null
   const rights = ccFromUri(rightsUri)
   const isPublicDomain = rights?.code === 'CC0' || rights?.code === 'PDM'
 
@@ -386,7 +387,9 @@ export function iiifRecordFrom(manifest, manifestUrl) {
 
   // Gate: institution (v3 provider with exactly one entry, v2 fails)
   // Track provider count for gateFailure to distinguish no-institution vs several-institutions
-  const providers = Array.isArray(manifest?.provider) ? manifest.provider : manifest?.provider ? [manifest.provider] : []
+  const providers = Array.isArray(manifest?.provider)
+    ? manifest.provider
+    : [manifest?.provider].filter(Boolean)
   const institution = iiifInstitution(manifest.provider)
 
   // The manifest states its own canvas count — the closest thing a
@@ -394,11 +397,10 @@ export function iiifRecordFrom(manifest, manifestUrl) {
   // arm is defensive only (a v2 manifest fails the institution gate above,
   // so its count never reaches a render). Null where neither array
   // exists — unknown, not zero.
-  const canvases = Array.isArray(manifest.items)
-    ? manifest.items.length
-    : Array.isArray(manifest.sequences?.[0]?.canvases)
-      ? manifest.sequences[0].canvases.length
-      : null
+  const canvasList = [manifest.items, manifest.sequences?.[0]?.canvases].find((a) =>
+    Array.isArray(a),
+  )
+  const canvases = canvasList ? canvasList.length : null
 
   return {
     partner: 'iiif',

@@ -1,7 +1,7 @@
 import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
 import { heroRank, pickHero } from './hero.js'
-import { escapeHtml } from './html.js'
+import { escapeHtml, stripTags } from './html.js'
 import { hotlinkUnsafe } from './http.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 import { PARTNERS } from './partners.js'
@@ -23,7 +23,7 @@ export function ogMeta({ title, description, path = '/', siteOrigin = '' }) {
   // A trailing slash on the origin would emit `https://host//wiki/…`, which
   // the server's route regex 404s — and the sibling SITE_HOME default DOES
   // end in a slash, so the copy mistake is one an operator will make.
-  siteOrigin = siteOrigin.replace(/\/+$/, '')
+  siteOrigin = siteOrigin.replace(/(?<!\/)\/+$/, '')
   // `path: null` is the busy page's case: it stands in for MANY urls, so a
   // canonical og:url would misdirect the share to the front page — it gets
   // the title, description and image, and no canonical claim.
@@ -109,7 +109,7 @@ function faviconStyle(slugs, inline) {
 }
 
 function sourceTag(source, inline = new Map(), nameFor = null) {
-  const name = nameFor ? nameFor(source) : (SOURCE[source]?.name ?? source.replace(/_/g, ' '))
+  const name = nameFor ? nameFor(source) : (SOURCE[source]?.name ?? source.replaceAll(/_/g, ' '))
   return `<span class="src">${favicon(source, inline)}${escapeHtml(name)}</span>`
 }
 
@@ -124,7 +124,7 @@ function buildNameFor(holder) {
   const institutionName = holder.record.institution
   return (source) => {
     if (source === holderPartner) return institutionName
-    return SOURCE[source]?.name ?? source.replace(/_/g, ' ')
+    return SOURCE[source]?.name ?? source.replaceAll(/_/g, ' ')
   }
 }
 
@@ -181,6 +181,33 @@ const TIER_LABEL = {
 // earlier and names the thing on Wikipedia without a second clause.
 const THE_ARTICLE = 'the original Wikipedia article'
 
+/**
+ * The clause for each tier that has anything in it. Verbs, not capability —
+ * "credits", "links to", "does not surface" — because the premise is that
+ * Wikipedia could do more and does not. "The rest" only reads after a clause
+ * it can be the rest OF, and "more" likewise, so a first clause never uses
+ * either.
+ */
+function gapClauses({ shown, link, invisible }) {
+  const parts = []
+  if (shown) parts.push(`credits ${spell(shown)} of them`)
+  if (link) {
+    parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
+  }
+  if (invisible) {
+    const which = invisible === 1 ? 'it' : 'any of them'
+    parts.push(parts.length ? 'does not surface the rest' : `does not surface ${which}`)
+  }
+  return parts
+}
+
+/** "None of them reaches", said so that the count reads as a result. */
+function reachesNothing(total) {
+  if (total === 1) return 'It does not reach'
+  if (total === 2) return 'Neither reaches'
+  return 'None of them reaches'
+}
+
 function gapLead({ total, shown, link, invisible }) {
   // Not "everything here was published openly": the Met answers with
   // rights-reserved objects as well as CC0 ones, the Internet Archive lends
@@ -194,31 +221,18 @@ function gapLead({ total, shown, link, invisible }) {
   // With nothing shown AND nothing linked there is no contrast to draw, so the
   // blunt sentence beats the clause list.
   if (!shown && !link) {
-    const none =
-      total === 1 ? 'It does not reach' : total === 2 ? 'Neither reaches' : 'None of them reaches'
+    const none = reachesNothing(total)
     out.push(`${none} ${THE_ARTICLE} at all — not a picture, not a link, not a mention.`)
     return out.join(' ')
   }
   // All three tiers in one sentence. They were dropped from the lead once as
   // duplicating the table, and put back when the panel folded shut: opening it
   // now, this is the first line, and it should carry the whole finding before
-  // the reader starts on rows. Verbs, not capability — "credits", "links to",
-  // "does not surface" — because the premise is that Wikipedia could do more
-  // and does not. "The rest" only reads after a clause it can be the rest OF,
-  // and "more" likewise, so a first clause never uses either.
-  const parts = []
-  if (shown) parts.push(`credits ${spell(shown)} of them`)
-  if (link)
-    parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
-  if (invisible)
-    parts.push(
-      parts.length
-        ? 'does not surface the rest'
-        : `does not surface ${invisible === 1 ? 'it' : 'any of them'}`,
-    )
+  // the reader starts on rows.
+  const parts = gapClauses({ shown, link, invisible })
   const list =
     parts.length > 2
-      ? `${parts.slice(0, -1).join(', ')}, and ${parts[parts.length - 1]}`
+      ? `${parts.slice(0, -1).join(', ')}, and ${parts.at(-1)}`
       : parts.join(' and ')
   out.push(`${Cap(THE_ARTICLE)} ${list}.`)
   return out.join(' ')
@@ -253,7 +267,7 @@ export function gapPanel(bands, reach, inline = new Map(), nameFor = null) {
   // column headings carry the distinction so the cells do not have to.
   const rows = report
     .map((r) => {
-      const name = nameFor ? nameFor(r.slug) : (SOURCE[r.slug]?.name ?? r.slug.replace(/_/g, ' '))
+      const name = nameFor ? nameFor(r.slug) : (SOURCE[r.slug]?.name ?? r.slug.replaceAll(/_/g, ' '))
       // Two countable things, never added together — a reader looking at six
       // cards must not be told there are thirteen. Each number names what it
       // counts, so both can be checked against the page.
@@ -622,8 +636,8 @@ function rightsDetail(entry) {
   // card the only detail IS the visible line ("Franz Kafka: copyrights on works
   // have expired"), so without this the panel opened by repeating, word for
   // word, the sentence sitting two lines above it.
-  const said = (work?.line ?? '').replace(/[.\s]+$/, '')
-  const detail = (work?.detail ?? []).filter((d) => d.replace(/[.\s]+$/, '') !== said)
+  const said = (work?.line ?? '').replace(/(?<![.\s])[.\s]+$/, '')
+  const detail = (work?.detail ?? []).filter((d) => d.replace(/(?<![.\s])[.\s]+$/, '') !== said)
   if (detail.length) {
     parts.push(
       `<p class="rd-work">${detail.map((d) => escapeHtml(d)).join(' ')} ` +
@@ -801,13 +815,16 @@ function broadNotes(notes, inline) {
       // heading, Europeana's is only the openly licensed items — the API asks
       // for `reusability=open` and the browse link carries that filter, so
       // dropping the word here would misdescribe the number and the link both.
-      const what =
-        n.source === 'europeana'
-          ? `the ${total} openly licensed items Europeana’s partners link to ` +
-            `“${n.label ?? 'this'}”`
-          : n.heading
-            ? `the ${total} items ${name}’s partners catalog under “${n.heading}”`
-            : `the ${total} items ${name} holds under “${n.label ?? 'this'}”`
+      let what
+      if (n.source === 'europeana') {
+        what =
+          `the ${total} openly licensed items Europeana’s partners link to ` +
+          `“${n.label ?? 'this'}”`
+      } else if (n.heading) {
+        what = `the ${total} items ${name}’s partners catalog under “${n.heading}”`
+      } else {
+        what = `the ${total} items ${name} holds under “${n.label ?? 'this'}”`
+      }
       return (
         `<p class="broad">${favicon(n.source, inline)}` +
         `<span class="broad-text"><b>Not shown here:</b> ${escapeHtml(what)} — a heading ` +
@@ -862,17 +879,24 @@ function broadNotes(notes, inline) {
  * marker-plus-`*-text` shape holds `.broad` and `.fn` together for the same
  * reason.
  */
+/** The fields the corroborated cards on this page were actually matched on. */
+function corroboratedFields(bands) {
+  const fields = new Set()
+  for (const b of bands ?? []) {
+    for (const e of b.entries ?? []) {
+      if (e.evidence !== 'corroborated') continue
+      for (const s of e.corroboratedBy ?? []) if (s?.field) fields.add(s.field)
+    }
+  }
+  return [...fields]
+}
+
 export function evidenceKey(bands) {
-  const fields = []
-  for (const b of bands ?? [])
-    for (const e of b.entries ?? [])
-      if (e.evidence === 'corroborated')
-        for (const s of e.corroboratedBy ?? [])
-          if (s?.field && !fields.includes(s.field)) fields.push(s.field)
+  const fields = corroboratedFields(bands)
   if (!fields.length) return ''
   const named = fields.map((f) => `the ${f}`)
   const list =
-    named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0]
+    named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named.at(-1)}` : named[0]
   return (
     `<p class="evidence-key"><span class="swatch"></span><span class="evidence-text">` +
     `A dashed card is a <b>corroborated</b> match. ` +
@@ -929,11 +953,9 @@ function carousel(source, items, inline, topic = null, sample = null) {
   // silently dropped, which is the whole point of disclosing at all.
   //
   // "1" alone in the corner is noise, but "1 of 83" is the finding.
-  const count = sample
-    ? sampleBadge(sample, items.length)
-    : items.length > 1
-      ? `<span class="count">${items.length}</span>`
-      : ''
+  let count = ''
+  if (sample) count = sampleBadge(sample, items.length)
+  else if (items.length > 1) count = `<span class="count">${items.length}</span>`
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
   // A strip whose cards all share one why line says it once, under the head —
   // four cards each repeating "Depicts X" is noise.
@@ -1033,6 +1055,163 @@ function footnoteList(fns, wikiBase) {
 const FLOAT_MIN_PROSE = 700
 
 /**
+ * A float needs text beside it, or it is not a float — it is an ornament
+ * stuck to a heading, with the whole left column blank beneath it until the
+ * deck clears. Apollo 11's "Multimedia" section is the case that forced this
+ * (2026-08-07): ten characters of prose against a floated thumbnail, 365px of
+ * dead column, and no width tweak can fix a section that has no text.
+ *
+ * The arithmetic: beside a 220px thumb the text column runs about 96
+ * characters a line, so 700 characters is roughly seven lines — about the
+ * height of a thumbnail with its caption. Below that the hole is bigger than
+ * the picture.
+ *
+ * This is the same rule pickHero already applies for a different reason (a
+ * find with no picture and no standing gets no float), and it is deliberately
+ * implemented the same way: the hero goes back into `rest` and is shelved as
+ * an ordinary card, so there is no third rendering to maintain. It leads its
+ * shelf because it was the section's best find and still is.
+ *
+ * A heuristic, fitted to one article's distribution, and safely so: the cost
+ * either way is bounded — a float becomes a card, or a short section keeps a
+ * small hole. Real Wikipedia sections do keep small holes, and the residual
+ * ones here are that, not a defect.
+ *
+ * A holder-work entry must float even if the lede is short — the page exists
+ * to show the holder's record of the subject, and a stub wrapping under its
+ * hero is what a real stub with an infobox looks like (see the infobox
+ * precedent in `resolveBoxAndHero`).
+ */
+function demoteHeroInShortSection(b, hero, rest) {
+  if (hero && proseLength(b) < FLOAT_MIN_PROSE && hero.standing !== 'holder-work') {
+    return { hero: null, rest: [hero, ...rest] }
+  }
+  return { hero, rest }
+}
+
+/**
+ * What takes the rail's box seat, and whether the hero keeps its float.
+ *
+ * The lede's fallback: the Wikipedia article's own infobox, standing in when
+ * no find with subject standing earned the slot (design:
+ * docs/design-plans/2026-08-08-infobox-retention.md). Only the lede band
+ * carries `infobox`, so no other section can trip this. A find ABOUT the
+ * subject (heroRank <= 3: the subject as a document, a partner's record of it,
+ * something it made) beats the box; anything weaker — a map, a picture of
+ * something merely linked — yields and leads its shelf instead, the same
+ * demotion the prose rule uses. The box is deliberately NOT exempt from losing
+ * to a subject find, and deliberately IS exempt from FLOAT_MIN_PROSE: a stub's
+ * short prose wrapping beneath its infobox is exactly what a real stub looks
+ * like.
+ *
+ * On a holder page the hero and the panel are NOT alternatives: the hero float
+ * is the work, the merged panel (Wikipedia infobox facts + holder record, each
+ * row attributed) takes the infobox's seat BELOW it, and both render — the
+ * merge is the point, not a fallback. A panel with nothing to say renders
+ * nothing: the slot behaves exactly as before the panel existed.
+ */
+function resolveBoxAndHero(b, holder, hero, rest) {
+  let infobox = b.infobox ?? null
+  let holderPanelHtml = null
+  let workCell = null
+  if (holder) {
+    // On a holder page: build the merged panel from the infobox (if any) and the record
+    workCell = workRightsCell(b)
+    const panel = mergedPanel(infoboxRows(infobox?.html), holder.record, workCell)
+    if (panel) {
+      holderPanelHtml = panel
+      infobox = null // The merged panel takes the box's seat
+    }
+    // A panel with nothing to say falls through to the ordinary suppression
+    // below — the holder hero (rank -1) suppresses the plain box exactly as
+    // it did before the panel existed. (Unreachable today: every gate-passed
+    // record carries a rights label, so the panel always has at least the
+    // Copyright block's image row — and the work clause can add a second
+    // row on top. Kept honest for the partner that changes it.)
+  }
+  if (!holderPanelHtml && infobox && hero) {
+    // The normal rank-based suppression
+    if (heroRank(hero) <= 3) infobox = null
+    else return { hero: null, rest: [hero, ...rest], infobox, holderPanelHtml, workCell }
+  }
+  return { hero, rest, infobox, holderPanelHtml, workCell }
+}
+
+/**
+ * Group the band's media by source, in first-appearance order — then, within
+ * a source, by topic (the anchor that asked for each item). A source whose
+ * items all share one topic keeps a single plain carousel; one that mixes
+ * topics gets one labeled carousel per topic, so "suspension bridge" media
+ * never shares an undifferentiated box with "Golden Gate" media.
+ */
+function groupBySourceAndTopic(rest) {
+  const bySource = new Map()
+  for (const e of rest) {
+    if (!bySource.has(e.source)) bySource.set(e.source, new Map())
+    const byTopic = bySource.get(e.source)
+    const topic = e.topic ?? null
+    if (!byTopic.has(topic)) byTopic.set(topic, [])
+    byTopic.get(topic).push(e)
+  }
+  return bySource
+}
+
+/**
+ * The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
+ * float right beneath the hero, the way thumbs run down a real article's
+ * margin; GALLERIES go in the deck below the section. A per-700-characters
+ * float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
+ * revision sent "Carrying the Fire" — one of Prime crew's two cited
+ * books — to the deck as a lone card beside blank space while its twin
+ * floated: an arbitrary-looking difference, because it was one. The
+ * budget had been fitted against the phantom prose of the
+ * section-duplication bug (parent bands carrying their whole subtree);
+ * with real bands a section holds a few image-bearing singles at most,
+ * and the operator chose the simple rule over the arithmetic, knowing the
+ * cost: a stack can trail somewhat below a short section's last line,
+ * which real articles' margins also do.
+ *
+ * What stays gated, stays for its own measured reason. A section under
+ * FLOAT_MIN_PROSE floats nothing — the Multimedia hole named on
+ * `demoteHeroInShortSection`; ten
+ * characters of prose cannot wrap anything. A text-only single stays
+ * shelved: the margin is for things to LOOK at, the same rule pickHero
+ * applies to the hero slot. And the LEDE takes no gutter (2026-08-09,
+ * from a hole on Apollo 11): its rail is 330px against the sections'
+ * 220px — a wider float is a TALLER card and a narrower text column at
+ * once — and the longest lede this site draws (3,264 characters,
+ * measured) could not wrap a portrait hero plus one map thumb. The lede's
+ * margin has exactly one slot, and the hero or the infobox already owns
+ * it.
+ *
+ * Group order is article order, so the earliest singles float first, and
+ * a floated shelf's sample claim rides its caption — the disclosure moves
+ * WITH the card, never dropped.
+ *
+ * Takes what it floats OUT of `bySource`, so the deck below never shows it
+ * twice.
+ */
+function takeGutter(b, bySource, { inline, sampleFor, unused, shelfKey }) {
+  const gutter = []
+  if (b.id !== 'slede' && proseLength(b) >= FLOAT_MIN_PROSE) {
+    for (const [source, byTopic] of bySource) {
+      const split = byTopic.size > 1
+      for (const [topic, items] of byTopic) {
+        if (items.length !== 1) continue
+        // `media3d` is a visual too — see the comment on `visual` in hero.js.
+        if (!(items[0].imageUrl || items[0].media || items[0].media3d)) continue
+        const key = shelfKey(source, topic)
+        gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
+        unused.delete(key)
+        byTopic.delete(topic)
+      }
+      if (!byTopic.size) bySource.delete(source)
+    }
+  }
+  return gutter
+}
+
+/**
  * The section's prose as plain text length — tags stripped, because a paragraph
  * that is mostly wikilink markup has far fewer characters on the page than in
  * the source. Headings count: they occupy a line beside the float too.
@@ -1040,7 +1219,7 @@ const FLOAT_MIN_PROSE = 700
 function proseLength(b) {
   if (!b.blocks) return (b.text ?? '').length
   return b.blocks.reduce(
-    (n, x) => n + (x.html ? x.html.replace(/<[^>]*>/g, '').length : (x.text ?? '').length),
+    (n, x) => n + (x.html ? stripTags(x.html).length : (x.text ?? '').length),
     0,
   )
 }
@@ -1062,93 +1241,10 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // both hoisted and carded. A section whose only find becomes its hero has no
   // deck at all, which is the right rendering of one good thing.
   let { hero, rest } = pickHero(b.entries)
-  // A float needs text beside it, or it is not a float — it is an ornament
-  // stuck to a heading, with the whole left column blank beneath it until the
-  // deck clears. Apollo 11's "Multimedia" section is the case that forced this
-  // (2026-08-07): ten characters of prose against a floated thumbnail, 365px of
-  // dead column, and no width tweak can fix a section that has no text.
-  //
-  // The arithmetic: beside a 220px thumb the text column runs about 96
-  // characters a line, so 700 characters is roughly seven lines — about the
-  // height of a thumbnail with its caption. Below that the hole is bigger than
-  // the picture.
-  //
-  // This is the same rule pickHero already applies for a different reason (a
-  // find with no picture and no standing gets no float), and it is deliberately
-  // implemented the same way: the hero goes back into `rest` and is shelved as
-  // an ordinary card, so there is no third rendering to maintain. It leads its
-  // shelf because it was the section's best find and still is.
-  //
-  // A heuristic, fitted to one article's distribution, and safely so: the cost
-  // either way is bounded — a float becomes a card, or a short section keeps a
-  // small hole. Real Wikipedia sections do keep small holes, and the residual
-  // ones here are that, not a defect.
-  // A holder-work entry must float even if the lede is short — the page exists
-  // to show the holder's record of the subject, and a stub wrapping under its
-  // hero is what a real stub with an infobox looks like (see the infobox
-  // precedent nearby).
-  if (hero && proseLength(b) < FLOAT_MIN_PROSE && hero.standing !== 'holder-work') {
-    rest = [hero, ...rest]
-    hero = null
-  }
-  // The lede's fallback: the Wikipedia article's own infobox, standing in
-  // when no find with subject standing earned the slot (design:
-  // docs/design-plans/2026-08-08-infobox-retention.md). Only the lede band
-  // carries `infobox`, so no other section can trip this. A find ABOUT the
-  // subject (heroRank <= 3: the subject as a document, a partner's record of
-  // it, something it made) beats the box; anything weaker — a map, a picture
-  // of something merely linked — yields and leads its shelf instead, the same
-  // demotion the prose rule above uses. The box is deliberately NOT exempt
-  // from losing to a subject find, and deliberately IS exempt from
-  // FLOAT_MIN_PROSE: a stub's short prose wrapping beneath its infobox is
-  // exactly what a real stub looks like.
-  //
-  // On a holder page the hero and the panel are NOT alternatives: the hero
-  // float is the work, the merged panel (Wikipedia infobox facts + holder
-  // record, each row attributed) takes the infobox's seat BELOW it, and both
-  // render — the merge is the point, not a fallback. A panel with nothing to
-  // say renders nothing: the slot behaves exactly as before the panel existed.
-  let infobox = b.infobox ?? null
-  let holderPanelHtml = null
-  let workCell = null
-  if (holder) {
-    // On a holder page: build the merged panel from the infobox (if any) and the record
-    const rows = infoboxRows(infobox?.html)
-    workCell = workRightsCell(b)
-    const panel = mergedPanel(rows, holder.record, workCell)
-    if (panel) {
-      holderPanelHtml = panel
-      infobox = null // The merged panel takes the box's seat
-    }
-    // A panel with nothing to say falls through to the ordinary suppression
-    // below — the holder hero (rank -1) suppresses the plain box exactly as
-    // it did before the panel existed. (Unreachable today: every gate-passed
-    // record carries a rights label, so the panel always has at least the
-    // Copyright block's image row — and the work clause can add a second
-    // row on top. Kept honest for the partner that changes it.)
-  }
-  if (!holderPanelHtml && infobox && hero) {
-    // The normal rank-based suppression
-    if (heroRank(hero) <= 3) {
-      infobox = null
-    } else {
-      rest = [hero, ...rest]
-      hero = null
-    }
-  }
-  // Group the band's media by source, in first-appearance order — then, within
-  // a source, by topic (the anchor that asked for each item). A source whose
-  // items all share one topic keeps a single plain carousel; one that mixes
-  // topics gets one labeled carousel per topic, so "suspension bridge" media
-  // never shares an undifferentiated box with "Golden Gate" media.
-  const bySource = new Map()
-  for (const e of rest) {
-    if (!bySource.has(e.source)) bySource.set(e.source, new Map())
-    const byTopic = bySource.get(e.source)
-    const topic = e.topic ?? null
-    if (!byTopic.has(topic)) byTopic.set(topic, [])
-    byTopic.get(topic).push(e)
-  }
+  ;({ hero, rest } = demoteHeroInShortSection(b, hero, rest))
+  let infobox, holderPanelHtml, workCell
+  ;({ hero, rest, infobox, holderPanelHtml, workCell } = resolveBoxAndHero(b, holder, hero, rest))
+  const bySource = groupBySourceAndTopic(rest)
   // Each sample claim, keyed the way shelves are keyed. `unused` is what did
   // not find a shelf — a partner whose entries were all capped away, or
   // hoisted into the hero, leaves a claim with nothing to sit on, and that
@@ -1156,51 +1252,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const shelfKey = (source, topic) => `${source}::${topic ?? ''}`
   const sampleFor = new Map((b.samples ?? []).map((s) => [shelfKey(s.source, s.topic), s]))
   const unused = new Set(sampleFor.keys())
-  // The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
-  // float right beneath the hero, the way thumbs run down a real article's
-  // margin; GALLERIES go in the deck below the section. A per-700-characters
-  // float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
-  // revision sent "Carrying the Fire" — one of Prime crew's two cited
-  // books — to the deck as a lone card beside blank space while its twin
-  // floated: an arbitrary-looking difference, because it was one. The
-  // budget had been fitted against the phantom prose of the
-  // section-duplication bug (parent bands carrying their whole subtree);
-  // with real bands a section holds a few image-bearing singles at most,
-  // and the operator chose the simple rule over the arithmetic, knowing the
-  // cost: a stack can trail somewhat below a short section's last line,
-  // which real articles' margins also do.
-  //
-  // What stays gated, stays for its own measured reason. A section under
-  // FLOAT_MIN_PROSE floats nothing — the Multimedia hole above; ten
-  // characters of prose cannot wrap anything. A text-only single stays
-  // shelved: the margin is for things to LOOK at, the same rule pickHero
-  // applies to the hero slot. And the LEDE takes no gutter (2026-08-09,
-  // from a hole on Apollo 11): its rail is 330px against the sections'
-  // 220px — a wider float is a TALLER card and a narrower text column at
-  // once — and the longest lede this site draws (3,264 characters,
-  // measured) could not wrap a portrait hero plus one map thumb. The lede's
-  // margin has exactly one slot, and the hero or the infobox already owns
-  // it.
-  //
-  // Group order is article order, so the earliest singles float first, and
-  // a floated shelf's sample claim rides its caption — the disclosure moves
-  // WITH the card, never dropped.
-  const gutter = []
-  if (b.id !== 'slede' && proseLength(b) >= FLOAT_MIN_PROSE) {
-    for (const [source, byTopic] of bySource) {
-      const split = byTopic.size > 1
-      for (const [topic, items] of byTopic) {
-        if (items.length !== 1) continue
-        // `media3d` is a visual too — see the comment on `visual` in hero.js.
-        if (!(items[0].imageUrl || items[0].media || items[0].media3d)) continue
-        const key = shelfKey(source, topic)
-        gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
-        unused.delete(key)
-        byTopic.delete(topic)
-      }
-      if (!byTopic.size) bySource.delete(source)
-    }
-  }
+  const gutter = takeGutter(b, bySource, { inline, sampleFor, unused, shelfKey })
   const media = [...bySource]
     .flatMap(([source, byTopic]) => {
       const split = byTopic.size > 1
@@ -1255,11 +1307,9 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const heroAside = hero
     ? `<aside class="rail">${heroCard(hero, inline, heroSample, holder, nameFor)}</aside>`
     : ''
-  const boxAside = holderPanelHtml
-    ? mergedPanelAside(holderPanelHtml, wikiBase)
-    : infobox
-      ? infoboxAside(infobox, wikiBase)
-      : ''
+  let boxAside = ''
+  if (holderPanelHtml) boxAside = mergedPanelAside(holderPanelHtml, wikiBase)
+  else if (infobox) boxAside = infoboxAside(infobox, wikiBase)
   const float = heroAside + boxAside
   const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
   return {
@@ -1559,7 +1609,7 @@ export function buildHtml({
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
-${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(used, inline)}
 </style>
@@ -1664,7 +1714,7 @@ export function streamOpen({ title, units, inline = new Map(), home = '/', siteO
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
-${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
 </style>
@@ -1763,7 +1813,7 @@ export function streamClose({ provenance = '' } = {}) {
    and the masthead still says whose experiment this is in the first line. A
    page that looked like Wikipedia AND claimed to be it would be a forgery, and
    the whole project depends on being trusted about what it found. */
-const STYLE = `
+const STYLE = String.raw`
 :root{
   --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#000000; --muted:#54595d;
   /* MediaWiki's two border weights, and they are used for different jobs:
@@ -1852,7 +1902,7 @@ main{max-width:1000px;margin:0 auto;padding:4px 32px 0;background:var(--paper);
    convention, no sprite to ship. */
 .prose a{color:var(--link)}
 .prose a:visited{color:var(--link-visited)}
-.prose a.ext::after{content:"\\2197";font-size:.75em;margin-left:1px;color:#3366cc}
+.prose a.ext::after{content:"\2197";font-size:.75em;margin-left:1px;color:#3366cc}
 sup.ref{font-size:.8em;line-height:1}
 sup.ref a{color:var(--link)}
 

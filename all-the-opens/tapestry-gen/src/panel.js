@@ -11,7 +11,7 @@
 // an infobox-less page still shows the museum's description, not only its
 // bookkeeping.
 
-import { escapeHtml } from './html.js'
+import { escapeHtml, stripTags } from './html.js'
 import { decodeEntities } from './wikipedia.js'
 
 /**
@@ -46,50 +46,42 @@ function normalizeText(text) {
  * open/close tokens. Hidden elements of other kinds (single-quoted styles,
  * non-span tags, unclosed spans) are out of scope and pass through.
  */
-function stripDisplayNone(html) {
-  let result = html
-  let changed = true
-
-  // The token counter below handles nesting; this loop handles SIBLING
-  // hidden spans — each pass removes one subtree.
-  while (changed) {
-    changed = false
-    // Match <span with style containing "display:none" (tolerant of semicolons/spacing)
-    const regex = /<span[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>/gi
-    let match
-
-    if ((match = regex.exec(result))) {
-      const startPos = match.index
-      let pos = match.index + match[0].length
-      let spanCount = 1
-
-      // Walk forward, counting span opens and closes
-      while (pos < result.length && spanCount > 0) {
-        const spanOpen = result.indexOf('<span', pos)
-        const spanClose = result.indexOf('</span>', pos)
-
-        if (spanClose === -1) break // No more closes
-
-        if (spanOpen !== -1 && spanOpen < spanClose) {
-          // Found another open span before the close
-          spanCount++
-          pos = spanOpen + 5
-        } else {
-          // Found a close
-          spanCount--
-          pos = spanClose + 7
-        }
-      }
-
-      if (spanCount === 0) {
-        // Found the matching close at pos
-        result = result.slice(0, startPos) + result.slice(pos)
-        changed = true
-      }
+/**
+ * The index just past the `</span>` closing a span whose body starts at
+ * `from`, counting nested opens on the way, or null when it never closes.
+ */
+function spanSubtreeEnd(html, from) {
+  let pos = from
+  let depth = 1
+  while (pos < html.length && depth > 0) {
+    const open = html.indexOf('<span', pos)
+    const close = html.indexOf('</span>', pos)
+    if (close === -1) return null // No more closes
+    if (open !== -1 && open < close) {
+      depth++
+      pos = open + 5
+    } else {
+      depth--
+      pos = close + 7
     }
   }
+  return depth === 0 ? pos : null
+}
 
-  return result
+// Match <span with style containing "display:none" (tolerant of semicolons/spacing)
+const HIDDEN_SPAN = /<span[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>/i
+
+function stripDisplayNone(html) {
+  let result = html
+  // `spanSubtreeEnd` handles nesting; this loop handles SIBLING hidden spans —
+  // each pass removes one subtree, and an unclosed one ends the pass.
+  for (;;) {
+    const match = HIDDEN_SPAN.exec(result)
+    if (!match) return result
+    const end = spanSubtreeEnd(result, match.index + match[0].length)
+    if (end === null) return result
+    result = result.slice(0, match.index) + result.slice(end)
+  }
 }
 
 /**
@@ -101,7 +93,7 @@ function htmlToText(html) {
   let cleaned = stripDisplayNone(html)
 
   // Strip all HTML tags
-  cleaned = cleaned.replace(/<[^>]+>/g, '')
+  cleaned = stripTags(cleaned)
 
   // Decode entities (numeric, hex, and named)
   cleaned = decodeEntities(cleaned)
@@ -159,7 +151,7 @@ export function infoboxRows(html) {
     const tdHtml = tdMatch[1]
 
     // Extract label text (preserve original case, for display) and entity-decode
-    const labelText = decodeEntities(thHtml.replace(/<[^>]+>/g, '').trim())
+    const labelText = decodeEntities(stripTags(thHtml).trim())
 
     // Skip empty td
     if (!tdHtml.trim()) continue
@@ -182,27 +174,29 @@ export function infoboxRows(html) {
  * Emit a single Wikipedia-only row with the given label and content.
  */
 function emitWikipediaOnlyRow(html, label, valueHtml) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(valueHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
-  html.push('</td></tr>')
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    valueHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+    '</td></tr>',
+  )
 }
 
 /**
  * Emit a dual-attributed row (Wikipedia and institution agree).
  */
 function emitMatchRow(html, label, valueHtml, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(valueHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    valueHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
 }
@@ -211,19 +205,18 @@ function emitMatchRow(html, label, valueHtml, institution) {
  * Emit a conflict pair: first row with Wikipedia value, second with holder value.
  */
 function emitConflictRows(html, label, wikiHtml, holderValue, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data infobox-conflict">')
-  html.push(wikiHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
-  html.push('</td></tr>')
-
-  html.push('<tr><th scope="row" class="infobox-label"></th><td class="infobox-data infobox-conflict">')
-  html.push(escapeHtml(holderValue))
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data infobox-conflict">',
+    wikiHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+    '</td></tr>',
+    '<tr><th scope="row" class="infobox-label"></th><td class="infobox-data infobox-conflict">',
+    escapeHtml(holderValue),
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
 }
@@ -232,16 +225,47 @@ function emitConflictRows(html, label, wikiHtml, holderValue, institution) {
  * Emit a holder-only row (typically accession, credit, or rights).
  */
 function emitHolderRow(html, label, value, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(escapeHtml(value))
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    escapeHtml(value),
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
+}
+
+/**
+ * Which field of the holder's record an infobox row speaks to, or undefined
+ * when it speaks to none and should pass through as Wikipedia's alone.
+ *
+ * `type` maps to medium only where the infobox has no Medium row to do it.
+ */
+function holderFieldFor(label, hasMediumRow) {
+  const normalized = normalizeText(label)
+  if (normalized === 'type' && hasMediumRow) return undefined
+  return FIELD_LABELS.get(normalized)
+}
+
+/**
+ * One infobox row, attributed: Wikipedia alone where the record says nothing
+ * about the field, both names where the two agree, and a conflict pair where
+ * they do not.
+ */
+function emitInfoboxRow(html, row, record, mappedField) {
+  const recordValue = mappedField ? record[mappedField] : undefined
+  if (!recordValue) {
+    emitWikipediaOnlyRow(html, row.label, row.valueHtml)
+    return
+  }
+  // Normalize both texts for comparison (lowercase, whitespace-collapsed)
+  if (normalizeText(row.valueText) === normalizeText(String(recordValue))) {
+    emitMatchRow(html, row.label, row.valueHtml, record.institution)
+    return
+  }
+  emitConflictRows(html, row.label, row.valueHtml, recordValue, record.institution)
 }
 
 /**
@@ -271,22 +295,11 @@ export function mergedPanel(rows, record, workRights = null) {
   const consumedFields = new Set() // Track which holder fields were consumed by infobox rows
 
   // Check if there's a Medium row in the infobox
-  const hasMediumRow = rows.some(row => normalizeText(row.label) === 'medium')
+  const hasMediumRow = rows.some((row) => normalizeText(row.label) === 'medium')
 
   // Process infobox rows
   for (const row of rows) {
-    // Normalize label for lookup
-    const normalizedLabel = normalizeText(row.label)
-    let mappedField = FIELD_LABELS.get(normalizedLabel)
-
-    // Special case: type→medium only if no Medium row exists
-    if (normalizedLabel === 'type' && hasMediumRow) {
-      mappedField = undefined // Force pass-through
-    }
-
-    // Get record value for this field (if any)
-    const recordValue = mappedField ? record[mappedField] : undefined
-
+    const mappedField = holderFieldFor(row.label, hasMediumRow)
     // A record field is spent the first time a row maps to it: a second row
     // mapping to the same field passes through Wikipedia-only, so the
     // holder’s single value never prints twice.
@@ -294,27 +307,7 @@ export function mergedPanel(rows, record, workRights = null) {
     if (mappedField) {
       consumedFields.add(mappedField)
     }
-
-    // If no mapping, no record value, or the field is spent: Wikipedia-only row
-    if (!mappedField || !recordValue || alreadyConsumed) {
-      emitWikipediaOnlyRow(html, row.label, row.valueHtml)
-      hasContent = true
-      continue
-    }
-
-    // Normalize both texts for comparison (lowercase, whitespace-collapsed)
-    const wikiText = normalizeText(row.valueText)
-    const recordText = normalizeText(String(recordValue))
-
-    // If texts match: dual-attributed row
-    if (wikiText === recordText) {
-      emitMatchRow(html, row.label, row.valueHtml, record.institution)
-      hasContent = true
-      continue
-    }
-
-    // Conflict: show both values as adjacent rows
-    emitConflictRows(html, row.label, row.valueHtml, recordValue, record.institution)
+    emitInfoboxRow(html, row, record, alreadyConsumed ? undefined : mappedField)
     hasContent = true
   }
 
@@ -358,16 +351,18 @@ export function mergedPanel(rows, record, workRights = null) {
     hasContent = true
   }
   if (workRights?.line) {
-    html.push('<tr><th scope="row" class="infobox-label">')
-    // The label prints once for the block, visibly: on the image row when
-    // the record states one, else here. A screen reader still hears this
-    // row labeled — an empty header would leave the second claim nameless.
-    html.push(imageClause ? '<span class="vh">Copyright</span>' : 'Copyright')
-    html.push('</th><td class="infobox-data">')
-    html.push(workRights.line)
-    html.push(' <span class="infobox-chip">Wikidata</span>')
-    html.push(workRights.fold ?? '')
-    html.push('</td></tr>')
+    html.push(
+      '<tr><th scope="row" class="infobox-label">',
+      // The label prints once for the block, visibly: on the image row when
+      // the record states one, else here. A screen reader still hears this
+      // row labeled — an empty header would leave the second claim nameless.
+      imageClause ? '<span class="vh">Copyright</span>' : 'Copyright',
+      '</th><td class="infobox-data">',
+      workRights.line,
+      ' <span class="infobox-chip">Wikidata</span>',
+      workRights.fold ?? '',
+      '</td></tr>',
+    )
     hasContent = true
   }
 

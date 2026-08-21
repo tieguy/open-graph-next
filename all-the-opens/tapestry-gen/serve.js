@@ -187,101 +187,98 @@ let inFlight = 0
 const BUILD = buildId()
 
 /**
- * The day a render was discovered, for the line at the foot of the page.
+ * One proxied partner image, by the key the page minted for its URL.
  *
- * A stored page carries the date it was made, which is the disclosure this
- * site owed its readers before the page cache existed and did not make: the
- * request cache has never expired, so a "warm" page has always been showing
- * the ecosystem as it stood when someone first asked for it. Now the page
- * says so. UTC and long-form American English, per the subtree's invariant.
+ * Every refusal here is a 404 rather than an error: a missing thumbnail lets
+ * the card drop it, which is what a broken image would have to do anyway.
  */
-const discoveredOn = () =>
-  new Intl.DateTimeFormat('en-US', {
-    timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric',
-  }).format(new Date())
-
-const server = createServer(async (req, res) => {
-  const url = new URL(req.url, 'http://localhost')
-  if (url.pathname === '/' || url.pathname === '/index.html') {
-    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
-    res.end(INDEX)
+async function serveProxiedImage(res, key) {
+  const target = await proxiedUrl(key)
+  // A key nothing ever minted — or one whose registry entry has been swept.
+  // The image is missing; the page is not broken.
+  if (!target) {
+    res.writeHead(404, { 'Content-Type': 'text/plain' })
+    res.end('unknown image\n')
     return
   }
-  if (url.pathname === '/og-cover.png') {
-    res.writeHead(200, {
-      'Content-Type': 'image/png',
-      'Content-Length': OG_COVER.length,
-      // Committed bytes that only change when this file is redeployed — same
-      // week-long cache as the proxied partner images.
-      'Cache-Control': 'public, max-age=604800',
-    })
-    res.end(OG_COVER)
-    return
-  }
-  const img = /^\/img\/([0-9a-f]{16})$/.exec(url.pathname)
-  if (img) {
-    const target = await proxiedUrl(img[1])
-    // A key nothing ever minted — or one whose registry entry has been swept.
-    // The image is missing; the page is not broken.
-    if (!target) {
+  try {
+    // Icons are already bytes; everything else rides the same disk cache and
+    // per-host queue as the rest of this project's traffic.
+    const uri = ICONS.get(target) ?? (await coverDataUri(target))
+    const decoded = uri && fromDataUri(uri)
+    // `!decoded`: OpenLibrary answers a coverless ISBN with a placeholder,
+    // which `coverDataUri` reports as nothing.
+    //
+    // `!servableImage`: belt and braces over coverDataUri's own type gate.
+    // Whatever is on the volume, this origin serves only non-document images
+    // from /img/ — partner HTML must never render same-origin, and neither may
+    // SVG, the one image type that runs script on navigation (servableImage
+    // wraps the single shared definition, and is the tested seam).
+    if (!decoded || !servableImage(decoded)) {
       res.writeHead(404, { 'Content-Type': 'text/plain' })
-      res.end('unknown image\n')
+      res.end('no image\n')
       return
     }
-    try {
-      // Icons are already bytes; everything else rides the same disk cache and
-      // per-host queue as the rest of this project's traffic.
-      const uri = ICONS.get(target) ?? (await coverDataUri(target))
-      const decoded = uri && fromDataUri(uri)
-      if (!decoded) {
-        // OpenLibrary answers a coverless ISBN with a placeholder, which
-        // `coverDataUri` reports as nothing. A 404 lets the card drop its
-        // thumbnail, which is what a broken image would have to do anyway.
-        res.writeHead(404, { 'Content-Type': 'text/plain' })
-        res.end('no image\n')
-        return
-      }
-      // Belt and braces over coverDataUri's own type gate: whatever is on
-      // the volume, this origin serves only non-document images from /img/ —
-      // partner HTML must never render same-origin, and neither may SVG,
-      // the one image type that runs script on navigation (servableImage
-      // wraps the single shared definition, and is the tested seam).
-      if (!servableImage(decoded)) {
-        res.writeHead(404, { 'Content-Type': 'text/plain' })
-        res.end('no image\n')
-        return
-      }
-      res.writeHead(200, {
-        'Content-Type': decoded.type,
-        'X-Content-Type-Options': 'nosniff',
-        'Content-Length': decoded.body.length,
-        // The path is a hash of the URL, and these files do not change under
-        // theirs. A week is long enough to cache across a reading session and
-        // short enough that a replaced cover is not permanent.
-        'Cache-Control': 'public, max-age=604800',
-      })
-      res.end(decoded.body)
-    } catch (e) {
-      console.error(`  image ${target}: ${e.message}`)
-      res.writeHead(502, { 'Content-Type': 'text/plain' })
-      res.end('upstream image failed\n')
-    }
+    res.writeHead(200, {
+      'Content-Type': decoded.type,
+      'X-Content-Type-Options': 'nosniff',
+      'Content-Length': decoded.body.length,
+      // The path is a hash of the URL, and these files do not change under
+      // theirs. A week is long enough to cache across a reading session and
+      // short enough that a replaced cover is not permanent.
+      'Cache-Control': 'public, max-age=604800',
+    })
+    res.end(decoded.body)
+  } catch (e) {
+    console.error(`  image ${target}: ${e.message}`)
+    res.writeHead(502, { 'Content-Type': 'text/plain' })
+    res.end('upstream image failed\n')
+  }
+}
+
+/** A stored page, replayed whole. A file read, not a discovery. */
+function replayStored(res, stored, page, started) {
+  res.writeHead(200, {
+    'Content-Type': 'text/html; charset=utf-8',
+    'Content-Length': Buffer.byteLength(stored.html),
+    // Still no-store, deliberately: the volume is the cache now, and letting
+    // browsers hold their own copies is a separate decision with its own
+    // invalidation problem (a build id they never see).
+    'Cache-Control': 'no-store',
+  })
+  res.end(stored.html)
+  console.error(`${page}: replayed in ${Date.now() - started}ms${stored.degraded ? ' (thin)' : ''}`)
+}
+
+/**
+ * Say what went wrong, where the reader can see it. Once the spine is on the
+ * wire there is no status code left to send, so the answer is a paragraph in
+ * the page itself.
+ */
+function endWithFailure(res, e, page, streaming) {
+  if (streaming) {
+    res.write(
+      `<p class="disclosure">Discovery stopped early: ${escapeHtml(e.message)}</p>` + streamClose({}),
+    )
+    res.end()
     return
   }
-  if (url.pathname === '/robots.txt') {
-    // The policy and its reasoning are in src/robots.js: everything is closed to
-    // crawlers except the front page, which costs nothing to serve. It used to
-    // disallow /wiki/ alone, which left every other path open by default.
-    res.writeHead(200, { 'Content-Type': 'text/plain' })
-    res.end(ROBOTS)
-    return
-  }
-  const m = /^\/wiki\/(.+)$/.exec(url.pathname)
-  if (!m) {
-    res.writeHead(404, { 'Content-Type': 'text/plain' })
-    res.end('not found\n')
-    return
-  }
+  const missing = /missingtitle|invalidtitle/.test(e.message)
+  res.writeHead(missing ? 404 : 500, { 'Content-Type': 'text/html; charset=utf-8' })
+  res.end(
+    `<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">` +
+      (missing
+        ? `No English Wikipedia article called “${escapeHtml(page)}”.`
+        : `Discovery failed: ${escapeHtml(e.message)}`) +
+      ` <a href="/">Try another</a>.</p>\n`,
+  )
+}
+
+/**
+ * The article route: replay what this build already rendered, else take a
+ * discovery slot and stream a fresh render into the page cache.
+ */
+async function serveArticle(res, encodedTitle) {
   const started = Date.now()
   // Decoded before the gate, because both what may be replayed and which lane
   // this request may use depend on which article it asks for. A malformed
@@ -289,7 +286,7 @@ const server = createServer(async (req, res) => {
   // itself: it is a bad request, and it must not take a slot on the way out.
   let page
   try {
-    page = decodeURIComponent(m[1]).replace(/_/g, ' ')
+    page = decodeURIComponent(encodedTitle).replaceAll(/_/g, ' ')
   } catch {
     res.writeHead(400, { 'Content-Type': 'text/plain' })
     res.end('bad title encoding\n')
@@ -309,16 +306,7 @@ const server = createServer(async (req, res) => {
   // page stops being the answer: fall through to a fresh discovery, whose
   // writePage retires it.
   if (stored && (!stored.degraded || coolingHosts(Date.now()).length)) {
-    res.writeHead(200, {
-      'Content-Type': 'text/html; charset=utf-8',
-      'Content-Length': Buffer.byteLength(stored.html),
-      // Still no-store, deliberately: the volume is the cache now, and letting
-      // browsers hold their own copies is a separate decision with its own
-      // invalidation problem (a build id they never see).
-      'Cache-Control': 'no-store',
-    })
-    res.end(stored.html)
-    console.error(`${page}: replayed in ${Date.now() - started}ms${stored.degraded ? ' (thin)' : ''}`)
+    replayStored(res, stored, page, started)
     return
   }
   if (!admits({
@@ -398,7 +386,7 @@ const server = createServer(async (req, res) => {
         // was found" quietly implied otherwise.
         provenance:
           `Discovered live from the English Wikipedia article ` +
-          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
+          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}">` +
           `${escapeHtml(title)}</a> on ${discoveredOn()} — no curated dataset. ` +
           `Later visits are served this same render, so what you see is the open ` +
           `ecosystem as it was that day.`,
@@ -427,27 +415,64 @@ const server = createServer(async (req, res) => {
     await writePage(CACHE, BUILD, page, sent.join(''), refused.length > 0)
   } catch (e) {
     console.error(`${page}: ${e.message}`)
-    if (!streaming) {
-      const missing = /missingtitle|invalidtitle/.test(e.message)
-      res.writeHead(missing ? 404 : 500, { 'Content-Type': 'text/html; charset=utf-8' })
-      res.end(
-        `<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">` +
-          (missing
-            ? `No English Wikipedia article called “${escapeHtml(page)}”.`
-            : `Discovery failed: ${escapeHtml(e.message)}`) +
-          ` <a href="/">Try another</a>.</p>\n`,
-      )
-    } else {
-      // The spine is already on the wire; say what happened where the reader is.
-      res.write(
-        `<p class="disclosure">Discovery stopped early: ${escapeHtml(e.message)}</p>` +
-          streamClose({}),
-      )
-      res.end()
-    }
+    endWithFailure(res, e, page, streaming)
   } finally {
     inFlight--
   }
+}
+
+/**
+ * The day a render was discovered, for the line at the foot of the page.
+ *
+ * A stored page carries the date it was made, which is the disclosure this
+ * site owed its readers before the page cache existed and did not make: the
+ * request cache has never expired, so a "warm" page has always been showing
+ * the ecosystem as it stood when someone first asked for it. Now the page
+ * says so. UTC and long-form American English, per the subtree's invariant.
+ */
+const discoveredOn = () =>
+  new Intl.DateTimeFormat('en-US', {
+    timeZone: 'UTC', year: 'numeric', month: 'long', day: 'numeric',
+  }).format(new Date())
+
+const server = createServer(async (req, res) => {
+  const url = new URL(req.url, 'http://localhost')
+  if (url.pathname === '/' || url.pathname === '/index.html') {
+    res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' })
+    res.end(INDEX)
+    return
+  }
+  if (url.pathname === '/og-cover.png') {
+    res.writeHead(200, {
+      'Content-Type': 'image/png',
+      'Content-Length': OG_COVER.length,
+      // Committed bytes that only change when this file is redeployed — same
+      // week-long cache as the proxied partner images.
+      'Cache-Control': 'public, max-age=604800',
+    })
+    res.end(OG_COVER)
+    return
+  }
+  const img = /^\/img\/([0-9a-f]{16})$/.exec(url.pathname)
+  if (img) {
+    await serveProxiedImage(res, img[1])
+    return
+  }
+  if (url.pathname === '/robots.txt') {
+    // The policy and its reasoning are in src/robots.js: everything is closed to
+    // crawlers except the front page, which costs nothing to serve. It used to
+    // disallow /wiki/ alone, which left every other path open by default.
+    res.writeHead(200, { 'Content-Type': 'text/plain' })
+    res.end(ROBOTS)
+    return
+  }
+  const m = /^\/wiki\/(.+)$/.exec(url.pathname)
+  if (!m) {
+    res.writeHead(404, { 'Content-Type': 'text/plain' })
+    res.end('not found\n')
+    return
+  }
+  await serveArticle(res, m[1])
 })
 
 server.listen(PORT, '0.0.0.0', () => {

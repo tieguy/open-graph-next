@@ -79,7 +79,10 @@ test('the browse link lands on the page that makes the badge’s claim', () => {
   assert.doesNotMatch(url, /\/authors\//)
   // Same filter and same order as the request whose total it is explaining.
   const api = authorWorksUrl('OL33146A', 40)
-  for (const part of ['author_key=OL33146A', 'sort=editions']) assert.ok(api.includes(part) && url.includes(part))
+  for (const part of ['author_key=OL33146A', 'sort=editions']) {
+    assert.ok(api.includes(part), `the API URL is missing ${part}`)
+    assert.ok(url.includes(part), `the browse URL is missing ${part}`)
+  }
 })
 
 test('the query asks for the access field the rights code depends on', () => {

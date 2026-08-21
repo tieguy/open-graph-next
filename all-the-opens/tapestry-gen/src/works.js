@@ -162,7 +162,7 @@ const scanTitle = (meta) => {
   return t
     .split(/[;:/]/)[0]
     .replace(/\s+/g, ' ')
-    .replace(/[,\s]*\b\d{4}\b$/, '')
+    .replace(/(?<![,\s])[,\s]*\b\d{4}\b$/, '')
     .trim()
 }
 

@@ -119,7 +119,8 @@ test('the denominator separates every showcase shelf worth keeping from every on
   for (const n of [54, 83, 126, 190]) assert.equal(tooBroad(n), false, `${n} should be kept`)
   for (const n of [465, 652, 831, 1409, 3016, 6123]) assert.equal(tooBroad(n), true, `${n} should be dropped`)
   // The threshold sits in the gap between the two, and the gap is wide.
-  assert.ok(BROAD_ABOVE > 190 && BROAD_ABOVE < 465)
+  assert.ok(BROAD_ABOVE > 190, 'threshold must sit above the largest kept heading')
+  assert.ok(BROAD_ABOVE < 465, 'threshold must sit below the smallest dropped heading')
 })
 
 test('the subject’s own heading is exempt at any size', () => {

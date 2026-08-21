@@ -5,7 +5,6 @@ import { tmpdir } from 'node:os'
 import { basename, join } from 'node:path'
 
 import {
-  buildId,
   chooseStalePages,
   pagePath,
   purgeStalePages,

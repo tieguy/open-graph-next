@@ -28,7 +28,8 @@ const tokens = (s) =>
  * multi-valued, one row can satisfy several queried ISBNs.
  */
 export function iaSearchUrl(isbns, { rowsPer = 8 } = {}) {
-  const q = `(${isbns.map((i) => `isbn:${i}`).join(' OR ')}) AND mediatype:texts`
+  const isbnClause = isbns.map((i) => `isbn:${i}`).join(' OR ')
+  const q = `(${isbnClause}) AND mediatype:texts`
   return (
     'https://archive.org/advancedsearch.php?q=' +
     encodeURIComponent(q) +
@@ -49,7 +50,7 @@ export function iaSearchUrl(isbns, { rowsPer = 8 } = {}) {
 export function matchIaDoc(cite, docs) {
   const wanted = tokens(cite.title)
   const shared = (doc) => {
-    const held = Array.isArray(doc.isbn) ? doc.isbn : doc.isbn ? [doc.isbn] : []
+    const held = Array.isArray(doc.isbn) ? doc.isbn : [doc.isbn].filter(Boolean)
     return held.includes(cite.isbn)
   }
   return (

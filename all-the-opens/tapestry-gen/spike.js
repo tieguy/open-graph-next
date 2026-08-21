@@ -35,7 +35,7 @@ async function main() {
   // `node spike.js "Coral_Gables"` renders Coral Gables, Florida, and the
   // file, the <h1> and the footer must all say so.
   const { title, bands, stats, dropped, opinion, reach, holder } = await discover(page)
-  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
+  const slug = title.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-').replaceAll(/^-|-$/g, '')
   const out = join(HERE, 'demo', `spike-${slug}.html`)
 
   // Images that must travel with the page — the shared predicate in
@@ -80,7 +80,7 @@ async function main() {
     siteOrigin: process.env.SITE_ORIGIN,
     provenance:
       `Discovered live from the English Wikipedia article ` +
-      `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
+      `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}">` +
       `${escapeHtml(title)}</a> — no curated dataset.`,
     holder,
   })

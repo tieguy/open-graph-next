@@ -27,7 +27,7 @@ import { bootWarmTitles, warmAll } from './src/warming.js'
 import { HOLDER_FLAGSHIPS } from './tools/holder-flagships.mjs'
 
 const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki')
-  .replace(/\/+$/, '')
+  .replace(/(?<!\/)\/+$/, '')
 // A genuinely cold page can take a minute; the timeout only has to be longer
 // than the slowest honest run, not tight.
 const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)

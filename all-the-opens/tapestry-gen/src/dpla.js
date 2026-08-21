@@ -60,7 +60,8 @@ export function dplaUrl(heading, key) {
  * sentence in src/breadth.js would have to be softened to match.
  */
 export function dplaBrowseUrl(heading) {
-  return `https://dp.la/search?subject=${encodeURIComponent(`"${heading}"`)}`
+  const phrase = `"${heading}"`
+  return `https://dp.la/search?subject=${encodeURIComponent(phrase)}`
 }
 
 const first = (v) => (Array.isArray(v) ? v[0] : v)
