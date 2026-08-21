@@ -855,6 +855,12 @@ function broadNotes(notes, inline) {
  * arrived, an orangutan page explained its dashed cards by describing an author
  * and an institution that appear nowhere on it. The disclosure is the one piece
  * of prose here that must never be approximately true.
+ *
+ * The sentence rides in one `<span>` because the row is a flex container, and
+ * a flex container blockifies every inline CHILD ELEMENT into a column of its
+ * own — bare text runs merge, but a `<b>` does not merge with them. The same
+ * marker-plus-`*-text` shape holds `.broad` and `.fn` together for the same
+ * reason.
  */
 export function evidenceKey(bands) {
   const fields = []
@@ -868,11 +874,12 @@ export function evidenceKey(bands) {
   const list =
     named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0]
   return (
-    `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
+    `<p class="evidence-key"><span class="swatch"></span><span class="evidence-text">` +
+    `A dashed card is a <b>corroborated</b> match. ` +
     `No identifier is shared by the two records — none exists on either side — so it was matched on ` +
     `what both of them state: ${escapeHtml(list)}. The agreeing values are printed on the card, ` +
     `because a description that agrees is a weaker claim than an identifier that matches, and must ` +
-    `not be read as one.</p>`
+    `not be read as one.</span></p>`
   )
 }
 
@@ -2225,6 +2232,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 @media(max-width:640px){.gap-gave{white-space:normal}}
 .evidence-key{display:flex;align-items:baseline;gap:9px;font-family:var(--sans);font-size:.72rem;line-height:1.55;color:var(--muted);max-width:62ch;margin:14px 0 0}
 .evidence-key .swatch{flex:none;width:22px;height:14px;border:1px dashed #c9a227;border-radius:3px;background:#fffdf5;transform:translateY(2px)}
+.evidence-text{min-width:0}
 /* Corroborated edges read differently on purpose: a dashed rule and a stated
    reason, so a described-object match is never mistaken for a shared identifier. */
 .card.corroborated{border:1px dashed #c9a227;border-radius:4px;padding:6px;background:#fffdf5}

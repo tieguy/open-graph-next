@@ -319,6 +319,21 @@ test('the dashed-card key names the fields THIS page matched on', () => {
   assert.equal(evidenceKey([]), '')
 })
 
+test('the key keeps its sentence in one flex item', () => {
+  // The row is a flex container, and a flex container gives every inline CHILD
+  // ELEMENT a column of its own — text runs merge, a loose <b> does not. Left
+  // bare, the sentence renders as stripes. So nothing but the swatch may sit
+  // outside .evidence-text.
+  const key = evidenceKey([
+    { entries: [{ evidence: 'corroborated', corroboratedBy: [{ field: 'scientific name' }] }] },
+  ])
+  assert.match(key, /<b>corroborated<\/b>/)
+  const loose = key
+    .replace('<p class="evidence-key"><span class="swatch"></span>', '')
+    .replace(/<span class="evidence-text">[\s\S]*<\/span><\/p>$/, '')
+  assert.equal(loose, '', `outside the text wrapper: ${loose}`)
+})
+
 // --- zoom link for holder pages ----------------------------------------------
 
 test('zoomLink emits a link for a holder-work entry with an href', () => {
@@ -554,10 +569,11 @@ test('a non-holder render is byte-stable', async () => {
   const out = buildHtml({ title: 'Fixture', bands })
   const digest = createHash('sha256').update(out).digest('hex')
   // The pinned output includes the stylesheet: the .holder-panel, .infobox-chip, .infobox-conflict and .rail-panel rules are part of it.
-  // Re-pinned 2026-08-17: STYLE gained the .sr-conflict rule (the museum-flag
-  // disagreement line) — a deliberate stylesheet change riding every page,
-  // the same exception shape as the holder panel's rules.
-  assert.equal(digest, '3966bdb8b82ee1440793dbd06e8e291a458d5304a14138b9eccec547e33edae4')
+  // Re-pinned 2026-08-20: STYLE gained the .evidence-text rule, which lets the
+  // corroborated key's sentence stay one flex item instead of striping into a
+  // column per inline element — a deliberate stylesheet change riding every
+  // page, the same exception shape as the holder panel's rules.
+  assert.equal(digest, 'b1af5b6c9731ced94ee98070bfe0add9bb5b4dd7636835f26a48354f37c8d96f')
 })
 
 test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {
