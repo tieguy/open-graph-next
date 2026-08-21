@@ -191,9 +191,10 @@ was `node warm.js` appended to the deploy script, which meant every deploy
 ended attached to the operator's shell and a fresh volume stayed cold until
 someone remembered. Now the machine that boots over an empty page cache is the
 one that fills it, and a restart on a warm volume pays ten local replays.
-Titles come from `showcaseTitles()`, the list the front page renders its own
-cards from; a test asserts the two agree, because drift would show up as a slow
-demo link rather than an error. `npm run warm [url]` is the same walk by hand —
+Titles come from `bootWarmTitles()` — `showcaseTitles()` plus
+`holderShowcaseTitles()`, the two lists the front page renders its own cards
+from; a test per row asserts the walk and the cards agree, because drift
+would show up as a slow demo link rather than an error. `npm run warm [url]` is the same walk by hand —
 refill after an eviction sweep, warm a staging volume once, or verify a deploy
 serves pages. It exits non-zero if a page did not finish (`window.__tapdone`,
 the flag `streamClose` writes last — the site is slow, not broken), and reports
@@ -251,8 +252,9 @@ Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 
 **The ready-now pages have a reserve past that cap** (`src/admission.js`,
 2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
-alike, which broke the promise the front page prints — its cards say the
-pages are "already rendered and cached", and a reader arriving while four
+alike, which broke the promise the front page prints — its showcase chip
+says those articles are "already rendered and cached", the held-works row is
+warmed on the same walk, and a reader arriving while four
 cold discoveries were in flight got the busy page for a page that would have
 been served entirely off disk. `SHOWCASE_RESERVE` (default 2) is slots only
 the ten ready-now titles may take — the showcase grid and the held-works row

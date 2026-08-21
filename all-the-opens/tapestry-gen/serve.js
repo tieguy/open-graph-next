@@ -464,17 +464,16 @@ server.listen(PORT, '0.0.0.0', () => {
   // The server warms the front page's ready-now pages — the showcase and the
   // held-works row, one list in bootWarmTitles. WARM_ON_START gates it: prod's
   // fly.toml sets it; staging deliberately does not, and neither does local
-  // dev. This used
-  // to be the deploy script's last step, `node warm.js` on the operator's
-  // machine — meaning every deploy ended attached to somebody's shell, and a
-  // fresh volume stayed cold until someone remembered. The machine that just
-  // booted over an empty page cache is the one that knows it needs warming.
-  // Through its own front door, after listen(), serially: warming is ordinary
-  // traffic (src/warming.js), and a visitor arriving mid-warm outranks it at
-  // the admission gate exactly as they outrank any other discovery in flight.
-  // Idempotent by construction — a stored page replays in milliseconds — so a
-  // restart with a warm volume pays one local read per warmed page and
-  // touches nobody.
+  // dev. This used to be the deploy script's last step, `node warm.js` on the
+  // operator's machine — meaning every deploy ended attached to somebody's
+  // shell, and a fresh volume stayed cold until someone remembered. The
+  // machine that just booted over an empty page cache is the one that knows it
+  // needs warming. Through its own front door, after listen(), serially:
+  // warming is ordinary traffic (src/warming.js), and a visitor arriving
+  // mid-warm outranks it at the admission gate exactly as they outrank any
+  // other discovery in flight. Idempotent by construction — a stored page
+  // replays in milliseconds — so a restart with a warm volume pays one local
+  // read per warmed page and touches nobody.
   if (process.env.WARM_ON_START) {
     warmAll(`http://127.0.0.1:${PORT}`, bootWarmTitles()).catch((e) =>
       console.error(`startup warming failed: ${e.message}`),

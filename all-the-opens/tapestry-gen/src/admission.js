@@ -4,21 +4,23 @@
 // capped where it arrives (`MAX_CONCURRENT` in serve.js) and anything past the
 // cap is answered with a 503 that says so in the site's own voice. That cap was
 // applied to every `/wiki/` request alike, which quietly broke the promise the
-// front page makes in print: the showcase articles are "already rendered
-// and cached — they open at once", and a reader who arrived while four cold
+// front page makes in print: its showcase chip says those articles are
+// "already rendered and cached — they open at once", the held-works row is
+// warmed on the same walk, and a reader who arrived while four cold
 // discoveries were in flight got the busy page for a page that would have been
 // served entirely off the disk cache.
 //
-// So the showcase gets a small reserve of slots that general traffic cannot
-// take. The argument for it is what warm means: `warm.js` walks exactly this
-// list after every deploy, and a warm page's discovery is 100% offline — it
-// makes no upstream request at all, which is the thing `MAX_CONCURRENT` exists
-// to bound. **The reserve does not widen what this server does to anyone
-// else's API**: the per-host queues in `src/mw.js` bound upstream concurrency
-// globally and know nothing about how many discoveries are in flight here. The
-// worst case — a cold volume, where the showcase is not warm after all — is a
-// couple more discoveries waiting on those same per-host queues, which is
-// bounded, small, and self-correcting the moment the cache fills.
+// So the ready-now pages — the showcase grid and the held-works row alike — get
+// a small reserve of slots that general traffic cannot take. The argument for
+// it is what warm means: `warm.js` walks exactly this list, and a warm page's
+// discovery is 100% offline — it makes no upstream request at all, which is the
+// thing `MAX_CONCURRENT` exists to bound. **The reserve does not widen what
+// this server does to anyone else's API**: the per-host queues in `src/mw.js`
+// bound upstream concurrency globally and know nothing about how many
+// discoveries are in flight here. The worst case — a cold volume, where those
+// pages are not warm after all — is a couple more discoveries waiting on those
+// same per-host queues, which is bounded, small, and self-correcting the moment
+// the cache fills.
 //
 // The reserve is finite on purpose. A showcase page is refused too, once even
 // the reserve is full: the busy page is an honest answer, and a lane with no
