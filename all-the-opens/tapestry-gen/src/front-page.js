@@ -40,9 +40,13 @@ const OG_DESCRIPTION =
 // whose grid is the showcase's. The front page's grid line names no number
 // and makes no cache claim (the operator's call, 2026-08-20: the promise is
 // good — the warm walk and the admission reserve are unchanged — it just
-// does not need stating there). Written out rather than counted by hand,
-// and the number is also spelled in tapestry-gen CLAUDE.md's warming and
-// reserve sections — update those in the same edit as a card change.
+// does not need stating there). Extend this table when a card joins a
+// list: past its end the count degrades to digits, and the one guard left
+// is the busy-page test pinning the literal "These six". The number is
+// also hand-spelled where no test derives it — the .ready CSS comment
+// below ("six-card grid"), CLAUDE.md's busy-page paragraph (the printed
+// sentence itself) and its warming and reserve sections (the walk's nine,
+// six plus three) — update all of them in the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
 
@@ -225,10 +229,10 @@ const friendIcons = (slugs) => {
 export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
 
 /**
- * The showcase as cards. Written once because two pages make the same promise:
- * the front page's "ready now" grid and the busy page's (below), which is the
- * one place a reader meets that promise while the demo is refusing everything
- * else.
+ * The showcase as cards. Written once because two pages show the same grid:
+ * the front page and the busy page (below). Only the busy page prints a
+ * cache promise over them — so an edit to a card's wording reaches both
+ * pages, deliberately.
  */
 const showcaseCard = (c) => `<a class="show" href="${wikiHref(c.title)}">
   <span class="dom">${escapeHtml(c.domain)}</span>

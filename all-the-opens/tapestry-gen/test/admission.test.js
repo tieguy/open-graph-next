@@ -8,10 +8,10 @@ const CAP = { max: 4, reserve: 2 }
 const ordinary = (inFlight) => admits({ inFlight, showcase: false, ...CAP })
 const showcase = (inFlight) => admits({ inFlight, showcase: true, ...CAP })
 
-// The whole point of the reserve: the front page prints "already rendered and
-// cached — they open at once", and before this a reader who arrived while four
-// cold discoveries were in flight got the busy page for a page that would have
-// been served entirely off disk.
+// The whole point of the reserve: every card on the front page's grid is
+// warmed at boot and stored — the busy page says so in print — and before
+// this a reader who arrived while four cold discoveries were in flight got
+// the busy page for a page that would have been served entirely off disk.
 test('a showcase page opens where ordinary traffic is already turned away', () => {
   assert.equal(ordinary(3), true)
   assert.equal(ordinary(4), false)

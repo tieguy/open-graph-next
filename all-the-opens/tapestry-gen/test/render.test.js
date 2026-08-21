@@ -611,8 +611,8 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
   // The grid line introduces the variety and makes no cache claim — the
   // promise lives on the busy page; the warm walk and reserve still back it.
-  assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,/)
-  assert.doesNotMatch(html, /already rendered and cached/)
+  assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,\s+and some of my favorites:/)
+  assert.doesNotMatch(html, /already rendered and (cached|stored)/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
   // Three group rows, reading aids like the friends list's — and the
   // two-party fact is the Art group's own note.
