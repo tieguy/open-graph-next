@@ -180,15 +180,17 @@ valuable). A full volume fails cache *writes* while reads keep working, which
 presents as the demo mysteriously being slow again.
 
 **Deploy with `npm run deploy`** from this directory — just `flyctl deploy
---remote-only` since 2026-08-10. **The server warms its own showcase**: after
-`listen()`, when `WARM_ON_START` is set (prod's `fly.toml` sets it; staging and
-local dev deliberately do not), it walks the six showcase pages through its own
-front door (`src/warming.js`) — **serially**, as ordinary traffic with no
-exemption from the per-host queues or the admission gate. Before this the walk
+--remote-only` since 2026-08-10. **The server warms the front page's
+ready-now pages**: after `listen()`, when `WARM_ON_START` is set (prod's
+`fly.toml` sets it; staging and local dev deliberately do not), it walks the
+ten pages of `bootWarmTitles` — the seven showcase articles plus the three
+held works, one list in `src/warming.js` — through its own front door,
+**serially**, as ordinary traffic with no exemption from the per-host queues
+or the admission gate. Before this the walk
 was `node warm.js` appended to the deploy script, which meant every deploy
 ended attached to the operator's shell and a fresh volume stayed cold until
 someone remembered. Now the machine that boots over an empty page cache is the
-one that fills it, and a restart on a warm volume pays six local replays.
+one that fills it, and a restart on a warm volume pays ten local replays.
 Titles come from `showcaseTitles()`, the list the front page renders its own
 cards from; a test asserts the two agree, because drift would show up as a slow
 demo link rather than an error. `npm run warm [url]` is the same walk by hand —
@@ -247,14 +249,16 @@ holds the copy, and a browser's copy could not be retired by a deploy.
 Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 ~4 MB of request cache per page, and these files ride the same LRU sweep.
 
-**The showcase has a reserve past that cap** (`src/admission.js`, 2026-08-10).
-`MAX_CONCURRENT` used to be applied to every `/wiki/` request alike, which broke
-the promise the front page prints — the six showcase articles are "already
-rendered and cached", and a reader arriving while four cold discoveries were in
-flight got the busy page for a page that would have been served entirely off
-disk. `SHOWCASE_RESERVE` (default 2) is slots only those six may take, admitted
-on the reader's own requested title (a redirect *to* a showcase article is not
-known to be one until the parse call answers, so it rides the general lane).
+**The ready-now pages have a reserve past that cap** (`src/admission.js`,
+2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
+alike, which broke the promise the front page prints — its cards say the
+pages are "already rendered and cached", and a reader arriving while four
+cold discoveries were in flight got the busy page for a page that would have
+been served entirely off disk. `SHOWCASE_RESERVE` (default 2) is slots only
+the ten ready-now titles may take — the showcase grid and the held-works row
+alike — admitted on the reader's own requested title (a redirect *to* one of
+them is not known to be one until the parse call answers, so it rides the
+general lane).
 **It widens nothing anyone else sees** — `hostLimit()` bounds upstream
 concurrency globally and knows nothing about in-flight discoveries; the worst
 case, a cold volume, is two more discoveries waiting on those same per-host
@@ -268,7 +272,7 @@ the startup warm refills, an eviction sweep. Deleting it would make the busy pag
 offer false in exactly those windows, which is the one thing that page must not
 be.
 **The busy page and the reserve are one change.** The 503 was a single sentence
-of system-ui on a blank page — a dead end offered by a site with six finished
+of system-ui on a blank page — a dead end offered by a site with finished
 pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
 startup (the moment it is needed is the moment there is no capacity to build
 anything), sharing the showcase cards and their CSS with the front page so the
@@ -293,8 +297,8 @@ the reader had not opened yet.
 
 **The `friends` slugs in `SHOWCASE` are hand-written and unverifiable from the
 code.** The front page is built once at startup, before any of those pages has
-been discovered, so deriving the row would mean six discoveries' worth of
-partner requests at boot to draw logos. A live page is the authority; re-eyeball
+been discovered, so deriving the row would mean the showcase's worth of
+discoveries at boot just to draw logos. A live page is the authority; re-eyeball
 the rows whenever the showcase changes or a partner stops answering. A test
 asserts only that each slug names a friend the page lists — it catches a rename,
 never drift.
