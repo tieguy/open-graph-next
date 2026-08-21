@@ -1048,6 +1048,163 @@ function footnoteList(fns, wikiBase) {
 const FLOAT_MIN_PROSE = 700
 
 /**
+ * A float needs text beside it, or it is not a float — it is an ornament
+ * stuck to a heading, with the whole left column blank beneath it until the
+ * deck clears. Apollo 11's "Multimedia" section is the case that forced this
+ * (2026-08-07): ten characters of prose against a floated thumbnail, 365px of
+ * dead column, and no width tweak can fix a section that has no text.
+ *
+ * The arithmetic: beside a 220px thumb the text column runs about 96
+ * characters a line, so 700 characters is roughly seven lines — about the
+ * height of a thumbnail with its caption. Below that the hole is bigger than
+ * the picture.
+ *
+ * This is the same rule pickHero already applies for a different reason (a
+ * find with no picture and no standing gets no float), and it is deliberately
+ * implemented the same way: the hero goes back into `rest` and is shelved as
+ * an ordinary card, so there is no third rendering to maintain. It leads its
+ * shelf because it was the section's best find and still is.
+ *
+ * A heuristic, fitted to one article's distribution, and safely so: the cost
+ * either way is bounded — a float becomes a card, or a short section keeps a
+ * small hole. Real Wikipedia sections do keep small holes, and the residual
+ * ones here are that, not a defect.
+ *
+ * A holder-work entry must float even if the lede is short — the page exists
+ * to show the holder's record of the subject, and a stub wrapping under its
+ * hero is what a real stub with an infobox looks like (see the infobox
+ * precedent in `resolveBoxAndHero`).
+ */
+function demoteHeroInShortSection(b, hero, rest) {
+  if (hero && proseLength(b) < FLOAT_MIN_PROSE && hero.standing !== 'holder-work') {
+    return { hero: null, rest: [hero, ...rest] }
+  }
+  return { hero, rest }
+}
+
+/**
+ * What takes the rail's box seat, and whether the hero keeps its float.
+ *
+ * The lede's fallback: the Wikipedia article's own infobox, standing in when
+ * no find with subject standing earned the slot (design:
+ * docs/design-plans/2026-08-08-infobox-retention.md). Only the lede band
+ * carries `infobox`, so no other section can trip this. A find ABOUT the
+ * subject (heroRank <= 3: the subject as a document, a partner's record of it,
+ * something it made) beats the box; anything weaker — a map, a picture of
+ * something merely linked — yields and leads its shelf instead, the same
+ * demotion the prose rule uses. The box is deliberately NOT exempt from losing
+ * to a subject find, and deliberately IS exempt from FLOAT_MIN_PROSE: a stub's
+ * short prose wrapping beneath its infobox is exactly what a real stub looks
+ * like.
+ *
+ * On a holder page the hero and the panel are NOT alternatives: the hero float
+ * is the work, the merged panel (Wikipedia infobox facts + holder record, each
+ * row attributed) takes the infobox's seat BELOW it, and both render — the
+ * merge is the point, not a fallback. A panel with nothing to say renders
+ * nothing: the slot behaves exactly as before the panel existed.
+ */
+function resolveBoxAndHero(b, holder, hero, rest) {
+  let infobox = b.infobox ?? null
+  let holderPanelHtml = null
+  let workCell = null
+  if (holder) {
+    // On a holder page: build the merged panel from the infobox (if any) and the record
+    workCell = workRightsCell(b)
+    const panel = mergedPanel(infoboxRows(infobox?.html), holder.record, workCell)
+    if (panel) {
+      holderPanelHtml = panel
+      infobox = null // The merged panel takes the box's seat
+    }
+    // A panel with nothing to say falls through to the ordinary suppression
+    // below — the holder hero (rank -1) suppresses the plain box exactly as
+    // it did before the panel existed. (Unreachable today: every gate-passed
+    // record carries a rights label, so the panel always has at least the
+    // Copyright block's image row — and the work clause can add a second
+    // row on top. Kept honest for the partner that changes it.)
+  }
+  if (!holderPanelHtml && infobox && hero) {
+    // The normal rank-based suppression
+    if (heroRank(hero) <= 3) infobox = null
+    else return { hero: null, rest: [hero, ...rest], infobox, holderPanelHtml, workCell }
+  }
+  return { hero, rest, infobox, holderPanelHtml, workCell }
+}
+
+/**
+ * Group the band's media by source, in first-appearance order — then, within
+ * a source, by topic (the anchor that asked for each item). A source whose
+ * items all share one topic keeps a single plain carousel; one that mixes
+ * topics gets one labeled carousel per topic, so "suspension bridge" media
+ * never shares an undifferentiated box with "Golden Gate" media.
+ */
+function groupBySourceAndTopic(rest) {
+  const bySource = new Map()
+  for (const e of rest) {
+    if (!bySource.has(e.source)) bySource.set(e.source, new Map())
+    const byTopic = bySource.get(e.source)
+    const topic = e.topic ?? null
+    if (!byTopic.has(topic)) byTopic.set(topic, [])
+    byTopic.get(topic).push(e)
+  }
+  return bySource
+}
+
+/**
+ * The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
+ * float right beneath the hero, the way thumbs run down a real article's
+ * margin; GALLERIES go in the deck below the section. A per-700-characters
+ * float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
+ * revision sent "Carrying the Fire" — one of Prime crew's two cited
+ * books — to the deck as a lone card beside blank space while its twin
+ * floated: an arbitrary-looking difference, because it was one. The
+ * budget had been fitted against the phantom prose of the
+ * section-duplication bug (parent bands carrying their whole subtree);
+ * with real bands a section holds a few image-bearing singles at most,
+ * and the operator chose the simple rule over the arithmetic, knowing the
+ * cost: a stack can trail somewhat below a short section's last line,
+ * which real articles' margins also do.
+ *
+ * What stays gated, stays for its own measured reason. A section under
+ * FLOAT_MIN_PROSE floats nothing — the Multimedia hole named on
+ * `demoteHeroInShortSection`; ten
+ * characters of prose cannot wrap anything. A text-only single stays
+ * shelved: the margin is for things to LOOK at, the same rule pickHero
+ * applies to the hero slot. And the LEDE takes no gutter (2026-08-09,
+ * from a hole on Apollo 11): its rail is 330px against the sections'
+ * 220px — a wider float is a TALLER card and a narrower text column at
+ * once — and the longest lede this site draws (3,264 characters,
+ * measured) could not wrap a portrait hero plus one map thumb. The lede's
+ * margin has exactly one slot, and the hero or the infobox already owns
+ * it.
+ *
+ * Group order is article order, so the earliest singles float first, and
+ * a floated shelf's sample claim rides its caption — the disclosure moves
+ * WITH the card, never dropped.
+ *
+ * Takes what it floats OUT of `bySource`, so the deck below never shows it
+ * twice.
+ */
+function takeGutter(b, bySource, { inline, sampleFor, unused, shelfKey }) {
+  const gutter = []
+  if (b.id !== 'slede' && proseLength(b) >= FLOAT_MIN_PROSE) {
+    for (const [source, byTopic] of bySource) {
+      const split = byTopic.size > 1
+      for (const [topic, items] of byTopic) {
+        if (items.length !== 1) continue
+        // `media3d` is a visual too — see the comment on `visual` in hero.js.
+        if (!(items[0].imageUrl || items[0].media || items[0].media3d)) continue
+        const key = shelfKey(source, topic)
+        gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
+        unused.delete(key)
+        byTopic.delete(topic)
+      }
+      if (!byTopic.size) bySource.delete(source)
+    }
+  }
+  return gutter
+}
+
+/**
  * The section's prose as plain text length — tags stripped, because a paragraph
  * that is mostly wikilink markup has far fewer characters on the page than in
  * the source. Headings count: they occupy a line beside the float too.
@@ -1077,93 +1234,10 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // both hoisted and carded. A section whose only find becomes its hero has no
   // deck at all, which is the right rendering of one good thing.
   let { hero, rest } = pickHero(b.entries)
-  // A float needs text beside it, or it is not a float — it is an ornament
-  // stuck to a heading, with the whole left column blank beneath it until the
-  // deck clears. Apollo 11's "Multimedia" section is the case that forced this
-  // (2026-08-07): ten characters of prose against a floated thumbnail, 365px of
-  // dead column, and no width tweak can fix a section that has no text.
-  //
-  // The arithmetic: beside a 220px thumb the text column runs about 96
-  // characters a line, so 700 characters is roughly seven lines — about the
-  // height of a thumbnail with its caption. Below that the hole is bigger than
-  // the picture.
-  //
-  // This is the same rule pickHero already applies for a different reason (a
-  // find with no picture and no standing gets no float), and it is deliberately
-  // implemented the same way: the hero goes back into `rest` and is shelved as
-  // an ordinary card, so there is no third rendering to maintain. It leads its
-  // shelf because it was the section's best find and still is.
-  //
-  // A heuristic, fitted to one article's distribution, and safely so: the cost
-  // either way is bounded — a float becomes a card, or a short section keeps a
-  // small hole. Real Wikipedia sections do keep small holes, and the residual
-  // ones here are that, not a defect.
-  // A holder-work entry must float even if the lede is short — the page exists
-  // to show the holder's record of the subject, and a stub wrapping under its
-  // hero is what a real stub with an infobox looks like (see the infobox
-  // precedent nearby).
-  if (hero && proseLength(b) < FLOAT_MIN_PROSE && hero.standing !== 'holder-work') {
-    rest = [hero, ...rest]
-    hero = null
-  }
-  // The lede's fallback: the Wikipedia article's own infobox, standing in
-  // when no find with subject standing earned the slot (design:
-  // docs/design-plans/2026-08-08-infobox-retention.md). Only the lede band
-  // carries `infobox`, so no other section can trip this. A find ABOUT the
-  // subject (heroRank <= 3: the subject as a document, a partner's record of
-  // it, something it made) beats the box; anything weaker — a map, a picture
-  // of something merely linked — yields and leads its shelf instead, the same
-  // demotion the prose rule above uses. The box is deliberately NOT exempt
-  // from losing to a subject find, and deliberately IS exempt from
-  // FLOAT_MIN_PROSE: a stub's short prose wrapping beneath its infobox is
-  // exactly what a real stub looks like.
-  //
-  // On a holder page the hero and the panel are NOT alternatives: the hero
-  // float is the work, the merged panel (Wikipedia infobox facts + holder
-  // record, each row attributed) takes the infobox's seat BELOW it, and both
-  // render — the merge is the point, not a fallback. A panel with nothing to
-  // say renders nothing: the slot behaves exactly as before the panel existed.
-  let infobox = b.infobox ?? null
-  let holderPanelHtml = null
-  let workCell = null
-  if (holder) {
-    // On a holder page: build the merged panel from the infobox (if any) and the record
-    const rows = infoboxRows(infobox?.html)
-    workCell = workRightsCell(b)
-    const panel = mergedPanel(rows, holder.record, workCell)
-    if (panel) {
-      holderPanelHtml = panel
-      infobox = null // The merged panel takes the box's seat
-    }
-    // A panel with nothing to say falls through to the ordinary suppression
-    // below — the holder hero (rank -1) suppresses the plain box exactly as
-    // it did before the panel existed. (Unreachable today: every gate-passed
-    // record carries a rights label, so the panel always has at least the
-    // Copyright block's image row — and the work clause can add a second
-    // row on top. Kept honest for the partner that changes it.)
-  }
-  if (!holderPanelHtml && infobox && hero) {
-    // The normal rank-based suppression
-    if (heroRank(hero) <= 3) {
-      infobox = null
-    } else {
-      rest = [hero, ...rest]
-      hero = null
-    }
-  }
-  // Group the band's media by source, in first-appearance order — then, within
-  // a source, by topic (the anchor that asked for each item). A source whose
-  // items all share one topic keeps a single plain carousel; one that mixes
-  // topics gets one labeled carousel per topic, so "suspension bridge" media
-  // never shares an undifferentiated box with "Golden Gate" media.
-  const bySource = new Map()
-  for (const e of rest) {
-    if (!bySource.has(e.source)) bySource.set(e.source, new Map())
-    const byTopic = bySource.get(e.source)
-    const topic = e.topic ?? null
-    if (!byTopic.has(topic)) byTopic.set(topic, [])
-    byTopic.get(topic).push(e)
-  }
+  ;({ hero, rest } = demoteHeroInShortSection(b, hero, rest))
+  let infobox, holderPanelHtml, workCell
+  ;({ hero, rest, infobox, holderPanelHtml, workCell } = resolveBoxAndHero(b, holder, hero, rest))
+  const bySource = groupBySourceAndTopic(rest)
   // Each sample claim, keyed the way shelves are keyed. `unused` is what did
   // not find a shelf — a partner whose entries were all capped away, or
   // hoisted into the hero, leaves a claim with nothing to sit on, and that
@@ -1171,51 +1245,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const shelfKey = (source, topic) => `${source}::${topic ?? ''}`
   const sampleFor = new Map((b.samples ?? []).map((s) => [shelfKey(s.source, s.topic), s]))
   const unused = new Set(sampleFor.keys())
-  // The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
-  // float right beneath the hero, the way thumbs run down a real article's
-  // margin; GALLERIES go in the deck below the section. A per-700-characters
-  // float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
-  // revision sent "Carrying the Fire" — one of Prime crew's two cited
-  // books — to the deck as a lone card beside blank space while its twin
-  // floated: an arbitrary-looking difference, because it was one. The
-  // budget had been fitted against the phantom prose of the
-  // section-duplication bug (parent bands carrying their whole subtree);
-  // with real bands a section holds a few image-bearing singles at most,
-  // and the operator chose the simple rule over the arithmetic, knowing the
-  // cost: a stack can trail somewhat below a short section's last line,
-  // which real articles' margins also do.
-  //
-  // What stays gated, stays for its own measured reason. A section under
-  // FLOAT_MIN_PROSE floats nothing — the Multimedia hole above; ten
-  // characters of prose cannot wrap anything. A text-only single stays
-  // shelved: the margin is for things to LOOK at, the same rule pickHero
-  // applies to the hero slot. And the LEDE takes no gutter (2026-08-09,
-  // from a hole on Apollo 11): its rail is 330px against the sections'
-  // 220px — a wider float is a TALLER card and a narrower text column at
-  // once — and the longest lede this site draws (3,264 characters,
-  // measured) could not wrap a portrait hero plus one map thumb. The lede's
-  // margin has exactly one slot, and the hero or the infobox already owns
-  // it.
-  //
-  // Group order is article order, so the earliest singles float first, and
-  // a floated shelf's sample claim rides its caption — the disclosure moves
-  // WITH the card, never dropped.
-  const gutter = []
-  if (b.id !== 'slede' && proseLength(b) >= FLOAT_MIN_PROSE) {
-    for (const [source, byTopic] of bySource) {
-      const split = byTopic.size > 1
-      for (const [topic, items] of byTopic) {
-        if (items.length !== 1) continue
-        // `media3d` is a visual too — see the comment on `visual` in hero.js.
-        if (!(items[0].imageUrl || items[0].media || items[0].media3d)) continue
-        const key = shelfKey(source, topic)
-        gutter.push(singleThumb(source, items[0], inline, split ? topic : null, sampleFor.get(key) ?? null))
-        unused.delete(key)
-        byTopic.delete(topic)
-      }
-      if (!byTopic.size) bySource.delete(source)
-    }
-  }
+  const gutter = takeGutter(b, bySource, { inline, sampleFor, unused, shelfKey })
   const media = [...bySource]
     .flatMap(([source, byTopic]) => {
       const split = byTopic.size > 1
