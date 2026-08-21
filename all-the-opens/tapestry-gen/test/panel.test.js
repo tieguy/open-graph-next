@@ -217,22 +217,30 @@ test('the Copyright block carries the graph’s work clause as a second voice, c
   const html = mergedPanel([], {
     institution: 'J. Paul Getty Museum', partner: 'getty',
     rights: { label: 'CC0' },
-  }, 'Gerard Horenbout: copyrights on works have expired<details class="sr-why"><summary>Why</summary>x</details>')
+  }, {
+    line: 'Gerard Horenbout: copyrights on works have expired',
+    fold: '<details class="sr-why"><summary>Why</summary>x</details>',
+  })
   assert.match(html, />Copyright</)
   assert.match(html, /This image: CC0/)
   assert.match(html, /copyrights on works have expired/)
   assert.match(html, /<span class="infobox-chip">Wikidata<\/span>/)
+  // The chip touches the claim it attributes: line, chip, THEN the fold —
+  // an opened fold must never push the attribution away from its words.
+  assert.match(html, /expired <span class="infobox-chip">Wikidata<\/span><details/)
   // Two claims about two different objects are not a disagreement
   assert.doesNotMatch(html, /infobox-conflict/)
-  // The label prints once for the block
-  assert.equal((html.match(/>Copyright</g) ?? []).length, 1)
+  // The visible label prints once; the work row still carries one a screen
+  // reader hears.
+  assert.equal((html.match(/infobox-label">Copyright</g) ?? []).length, 1)
+  assert.match(html, /<span class="vh">Copyright<\/span>/)
 })
 
 test('a work clause without an image clause still gets the Copyright label', () => {
   const html = mergedPanel([], {
     institution: 'Example', partner: 'iiif',
     rights: { label: null },
-  }, 'public domain in the United States')
+  }, { line: 'public domain in the United States', fold: '' })
   assert.match(html, />Copyright</)
   assert.match(html, /public domain in the United States/)
   assert.doesNotMatch(html, /This image:/)

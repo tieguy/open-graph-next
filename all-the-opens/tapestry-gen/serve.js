@@ -23,7 +23,7 @@ import { fileURLToPath } from 'node:url'
 import { admits, isShowcase } from './src/admission.js'
 import { coolingHosts } from './src/cooloff.js'
 import { discover } from './src/discover.js'
-import { busyPage, frontPage, holderShowcaseTitles, showcaseTitles } from './src/front-page.js'
+import { busyPage, frontPage } from './src/front-page.js'
 import {
   CACHE,
   coverDataUri,
@@ -36,7 +36,7 @@ import {
 } from './src/http.js'
 import { buildId, purgeStalePages, readPage, writePage } from './src/page-cache.js'
 import { robotsTxt } from './src/robots.js'
-import { thinMarker, warmAll } from './src/warming.js'
+import { bootWarmTitles, thinMarker, warmAll } from './src/warming.js'
 import { startSweeping } from './src/sweep.js'
 import { userAgent } from './src/wmf.js'
 import {
@@ -474,9 +474,7 @@ server.listen(PORT, '0.0.0.0', () => {
   // restart with a warm volume pays one local read per showcase page and
   // touches nobody.
   if (process.env.WARM_ON_START) {
-    // Showcase first — the six the front page leads with — then the held
-    // works, whose cards make the same ready-now promise.
-    warmAll(`http://127.0.0.1:${PORT}`, [...showcaseTitles(), ...holderShowcaseTitles()]).catch((e) =>
+    warmAll(`http://127.0.0.1:${PORT}`, bootWarmTitles()).catch((e) =>
       console.error(`startup warming failed: ${e.message}`),
     )
   }

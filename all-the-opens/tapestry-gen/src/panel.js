@@ -253,13 +253,15 @@ function emitHolderRow(html, label, value, institution) {
  * Accession and credit line may merge with infobox rows or append as
  * holder-only fields if no infobox row mapped to that field.
  *
- * `workRightsHtml` is the graph's copyright answer about the WORK, prebuilt
- * by the renderer (the same trusted-HTML contract as the sanitized infobox
- * valueHtml): the panel places it, it never builds or judges it, so every
- * copy rule about rights lives in one place. When present it renders as the
- * Copyright block's second voice, chipped Wikidata.
+ * `workRights` is the graph's copyright answer about the WORK, prebuilt by
+ * the renderer as `{ line, fold }` (the same trusted-HTML contract as the
+ * sanitized infobox valueHtml): the panel places the parts, it never builds
+ * or judges them, so every copy rule about rights lives in one place. It
+ * renders as the Copyright block's second voice — line, then the Wikidata
+ * chip touching the claim it attributes, then the fold, so the attribution
+ * never drifts below an opened fold.
  */
-export function mergedPanel(rows, record, workRightsHtml = null) {
+export function mergedPanel(rows, record, workRights = null) {
   if (!record || typeof record !== 'object') {
     return ''
   }
@@ -355,14 +357,16 @@ export function mergedPanel(rows, record, workRightsHtml = null) {
     emitHolderRow(html, 'Copyright', imageClause, record.institution)
     hasContent = true
   }
-  if (workRightsHtml) {
+  if (workRights?.line) {
     html.push('<tr><th scope="row" class="infobox-label">')
-    // The label prints once for the block: on the image row when the record
-    // states one, else on this row.
-    html.push(imageClause ? '' : 'Copyright')
+    // The label prints once for the block, visibly: on the image row when
+    // the record states one, else here. A screen reader still hears this
+    // row labeled — an empty header would leave the second claim nameless.
+    html.push(imageClause ? '<span class="vh">Copyright</span>' : 'Copyright')
     html.push('</th><td class="infobox-data">')
-    html.push(workRightsHtml)
+    html.push(workRights.line)
     html.push(' <span class="infobox-chip">Wikidata</span>')
+    html.push(workRights.fold ?? '')
     html.push('</td></tr>')
     hasContent = true
   }

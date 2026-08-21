@@ -1,3 +1,5 @@
+import { holderShowcaseTitles, showcaseTitles } from './front-page.js'
+
 // Walking the showcase through the server's own front door.
 //
 // This lived in warm.js — a script on the OPERATOR'S machine, run by `npm run
@@ -85,7 +87,7 @@ export async function warmPage(base, title, { timeoutMs = 300_000 } = {}) {
  * @returns {Promise<{failed: number, thin: number}>}
  */
 export async function warmAll(base, titles, { timeoutMs = 300_000, log = console.error } = {}) {
-  log(`warming ${titles.length} showcase pages at ${base}`)
+  log(`warming ${titles.length} pages at ${base}`)
   let failed = 0
   let thin = 0
   for (const title of titles) {
@@ -117,3 +119,11 @@ export async function warmAll(base, titles, { timeoutMs = 300_000, log = console
   )
   return { failed, thin }
 }
+
+/**
+ * The boot walk: the showcase, then the held works — every card on the
+ * front page that makes the ready-now promise. One list, so serve.js's
+ * startup warm, warm.js's default walk, and the admission reserve cannot
+ * drift from the cards; a test pins the composition.
+ */
+export const bootWarmTitles = () => [...showcaseTitles(), ...holderShowcaseTitles()]

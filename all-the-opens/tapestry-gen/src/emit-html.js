@@ -1103,10 +1103,12 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   // say renders nothing: the slot behaves exactly as before the panel existed.
   let infobox = b.infobox ?? null
   let holderPanelHtml = null
+  let workCell = null
   if (holder) {
     // On a holder page: build the merged panel from the infobox (if any) and the record
     const rows = infoboxRows(infobox?.html)
-    const panel = mergedPanel(rows, holder.record, workRightsCell(b))
+    workCell = workRightsCell(b)
+    const panel = mergedPanel(rows, holder.record, workCell)
     if (panel) {
       holderPanelHtml = panel
       infobox = null // The merged panel takes the box's seat
@@ -1114,8 +1116,9 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
     // A panel with nothing to say falls through to the ordinary suppression
     // below — the holder hero (rank -1) suppresses the plain box exactly as
     // it did before the panel existed. (Unreachable today: every gate-passed
-    // record carries a rights label, so the panel always has at least that
-    // row. Kept honest for the partner that changes it.)
+    // record carries a rights label, so the panel always has at least the
+    // Copyright block's image row — and the work clause can add a second
+    // row on top. Kept honest for the partner that changes it.)
   }
   if (!holderPanelHtml && infobox && hero) {
     // The normal rank-based suppression
@@ -1255,12 +1258,13 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   return {
     // Both go before the prose, the status first: it is about the whole
     // article, while the hero is about one find inside it.
-    // When the merged panel exists it carries the work's copyright answer as
-    // its Copyright block (workRightsCell reads the same b.subjectRights), so
-    // the slab above the prose would be the page saying it twice — the exact
-    // duplicate the says-it-once rule exists to delete. A refusal page never
-    // has a panel, so the sr-conflict line always keeps its slab.
-    rail: (holderPanelHtml && b.subjectRights ? '' : subjectRights(b)) + float + more,
+    // When the merged panel carries the work's copyright answer as its
+    // Copyright block, the slab above the prose would be the page saying it
+    // twice — the exact duplicate the says-it-once rule exists to delete.
+    // The guard is the CELL, not b.subjectRights: a view with nothing to
+    // show builds no panel row, and then the slab keeps its seat. A refusal
+    // page never has a panel, so the sr-conflict line always keeps its slab.
+    rail: (holderPanelHtml && workCell ? '' : subjectRights(b)) + float + more,
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
     refs: sources,
   }
@@ -1330,23 +1334,6 @@ function mergedPanelAside(panelHtml, wikiBase) {
 }
 
 /**
- * The article's OWN copyright status, for the case where no card can carry it.
- *
- * A page about The Great Gatsby has the richest rights data on the site —
- * public domain in the United States, still in copyright where terms run 70
- * years from the author's death — and, before this, nowhere to put it. The
- * cards that carry a work-level status are records OF a work: the Met's object,
- * a taxon, an author's own shelves. A novel has no such partner record here, so
- * the best data on the page rendered as nothing at all.
- *
- * It goes at the head of the lede, above the article's first paragraph, because
- * that is the one place a statement about "this article's subject" is not
- * free-floating — the subject is named directly above it and its prose begins
- * directly below. `discover.js` sets it ONLY when no card on the lede already
- * carries the same claim, so an article whose subject a museum does hold (where
- * the hero card already says it) never says it twice.
- */
-/**
  * The graph's copyright answer about the work, as one panel cell — the
  * Copyright block's Wikidata voice (the operator's direction, 2026-08-20:
  * the panel is the page's one piece of furniture built to show two voices
@@ -1367,9 +1354,26 @@ function workRightsCell(b) {
   const fold = detail
     ? `<details class="sr-why"><summary>Why, and what it means where you are</summary>${detail}</details>`
     : ''
-  return `${marks}${marks ? ' ' : ''}${escapeHtml(words ?? '')}${fold}`
+  return { line: `${marks}${marks ? ' ' : ''}${escapeHtml(words ?? '')}`, fold }
 }
 
+/**
+ * The article's OWN copyright status, for the case where no card can carry it.
+ *
+ * A page about The Great Gatsby has the richest rights data on the site —
+ * public domain in the United States, still in copyright where terms run 70
+ * years from the author's death — and, before this, nowhere to put it. The
+ * cards that carry a work-level status are records OF a work: the Met's object,
+ * a taxon, an author's own shelves. A novel has no such partner record here, so
+ * the best data on the page rendered as nothing at all.
+ *
+ * It goes at the head of the lede, above the article's first paragraph, because
+ * that is the one place a statement about "this article's subject" is not
+ * free-floating — the subject is named directly above it and its prose begins
+ * directly below. `discover.js` sets it ONLY when no card on the lede already
+ * carries the same claim, so an article whose subject a museum does hold (where
+ * the hero card already says it) never says it twice.
+ */
 function subjectRights(b) {
   const r = b.subjectRights
   const conflict = holderConflict(b)

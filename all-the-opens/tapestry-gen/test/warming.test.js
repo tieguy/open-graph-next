@@ -72,7 +72,7 @@ test('warmAll walks every title and tallies failures and thinness', async (t) =>
   // warm.js's holder-flagship walk rewrites this exact phrase in its log
   // wrapper; rewording it here must break that test, not silently regress
   // the walk's announcement.
-  assert.match(lines[0], / showcase pages /)
+  assert.match(lines[0], /warming \d+ pages at /)
   assert.equal(out.failed, 2)
   assert.equal(out.thin, 1)
   assert.ok(lines.some((l) => l.includes('Thin') && l.includes('api.openalex.org')))

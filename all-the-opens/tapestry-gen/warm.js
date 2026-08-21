@@ -12,9 +12,10 @@
  * after an eviction sweep, to warm staging's volume once, or to verify that a
  * deploy actually serves pages.
  *
- * The titles come from `showcaseTitles()`, the same list the front page renders
- * its cards from — for the showcase there is deliberately no second copy to
- * keep in step. With HOLDER_FLAGSHIPS=1 the walk covers the holder
+ * The titles come from `bootWarmTitles()` — the showcase plus the held-works
+ * row, the same lists the front page renders its cards from, with
+ * deliberately no second copy to keep in step. With
+ * HOLDER_FLAGSHIPS=1 the walk covers the holder
  * flagship articles instead (tools/holder-flagships.mjs), one per wired
  * museum holder plus the role-carrying exemplars.
  *
@@ -22,8 +23,7 @@
  * page reported "thin" is warm but provisional: it was rendered while a source
  * was refusing us, and the server re-renders it once that source answers.
  */
-import { showcaseTitles } from './src/front-page.js'
-import { warmAll } from './src/warming.js'
+import { bootWarmTitles, warmAll } from './src/warming.js'
 import { HOLDER_FLAGSHIPS } from './tools/holder-flagships.mjs'
 
 const BASE = (process.argv[2] ?? process.env.SITE_URL ?? 'https://friendsof.wiki')
@@ -35,14 +35,10 @@ const TIMEOUT_MS = Number(process.env.WARM_TIMEOUT_MS ?? 300_000)
 // HOLDER_FLAGSHIPS=1 walks the holder flagships instead of the showcase —
 // an env var, not a flag argument, because argv[2] IS the base URL.
 const holderWalk = process.env.HOLDER_FLAGSHIPS === '1'
-const titles = holderWalk ? HOLDER_FLAGSHIPS.map((f) => f.title) : showcaseTitles()
-
-// The walk's own announcement says "showcase"; correct it here rather than
-// parameterizing src/warming.js — a src/ edit re-keys the production page
-// cache (buildId fingerprints src/*.js), too high a price for a log word.
-const log = holderWalk
-  ? (line) => console.error(line.replace(' showcase pages ', ' holder-flagship pages '))
-  : console.error
+// The default walk is bootWarmTitles — the same list the server warms at
+// startup: every front-page card that makes the ready-now promise.
+const titles = holderWalk ? HOLDER_FLAGSHIPS.map((f) => f.title) : bootWarmTitles()
+const log = console.error
 
 const { failed } = await warmAll(BASE, titles, { timeoutMs: TIMEOUT_MS, log })
 process.exit(failed ? 1 : 0)

@@ -97,10 +97,11 @@ const SHOWCASE = [
 // page, and the showcase above cannot show that — none of its subjects is a
 // held work. These three are, one per lane worth meeting first. `holder` is
 // the partner slug, for the icon and the small-caps masthead echo; the
-// `adds` lines follow the no-pitch register rule above. The titles join the
-// boot-time warm walk (serve.js warms holderShowcaseTitles after the
-// showcase), so these cards make the same ready-now promise the grid above
-// makes.
+// `adds` lines follow the no-pitch register rule above. These cards make
+// the same ready-now promise the grid above makes, and the same three
+// mechanisms back it: the titles ride the boot warm walk and warm.js's
+// default walk (bootWarmTitles in src/warming.js) and the admission
+// reserve's title set (src/admission.js).
 const HOLDER_SHOWCASE = [
   {
     title: 'The Night Watch',
@@ -234,12 +235,14 @@ const showcaseCards = () =>
  * differences a two-party page earns: the small-caps line echoes the page's
  * own masthead ("Wikipedia + <institution>"), and the foot row names ONE
  * friend, because having exactly one is the point. `show held` rather than
- * `show`, so the counts that pin the showcase grid stay exact.
+ * `show`, so the counts that pin the showcase grid stay exact. The echo
+ * reads PARTNERS[..].name — the same source the masthead prints through
+ * the holder record — so the card and the page it opens cannot disagree.
  */
 const holderCards = () =>
   HOLDER_SHOWCASE.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
-  <span class="dom">Wikipedia + ${escapeHtml(FRIEND_NAMES.get(c.holder) ?? c.holder)}</span>
+  <span class="dom">Wikipedia + ${escapeHtml(PARTNERS[c.holder].name)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>

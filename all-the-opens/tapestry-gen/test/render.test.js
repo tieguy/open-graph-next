@@ -5,6 +5,7 @@ import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
 import { frontPage, holderShowcaseTitles, showcaseTitles } from '../src/front-page.js'
+import { bootWarmTitles } from '../src/warming.js'
 
 // What the shipped renderer and its article extraction promise. The curated
 // generator's own tests — placement, Tapestry geometry, zip — retired with it
@@ -184,9 +185,11 @@ test('a source reached only through footnote links still makes the legend', () =
 })
 
 test('the warmer and the front page read the same showcase list', () => {
-  // warm.js re-warms exactly the pages the front page links to. A second,
-  // hand-kept copy of the titles would drift the first time one changed, and
-  // the symptom would be a slow demo link rather than an error.
+  // The boot walk covers exactly the pages the front page's cards promise
+  // are ready — this test pins the showcase half, its held-works twin below
+  // pins the other. A second, hand-kept copy of the titles would drift the
+  // first time one changed, and the symptom would be a slow demo link
+  // rather than an error.
   const html = frontPage({})
   for (const title of showcaseTitles()) {
     const href = `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
@@ -594,8 +597,13 @@ test('a holder page carries the work’s copyright in the panel, not the slab �
 })
 
 
-test('the held-works row shows the two-party pages, one friend each, warmed like the showcase', () => {
+test('the held-works row shows the two-party pages, one friend each — and the boot walk backs their promise', () => {
   const html = frontPage()
+  // The ready-now promise is real: every held title is in the same boot
+  // walk (and, via the same list, warm.js's default walk) as the showcase.
+  for (const title of holderShowcaseTitles()) {
+    assert.ok(bootWarmTitles().includes(title), `${title} rides the boot warm walk`)
+  }
   for (const title of holderShowcaseTitles()) {
     assert.ok(html.includes(escapeHtml(title)), `front page shows ${title}`)
   }
