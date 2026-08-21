@@ -267,7 +267,7 @@ export async function writeFacts(kind, entries) {
 export function hotlinkUnsafe(entry) {
   if (!entry?.imageUrl) return false
   if (entry.imageUrl.startsWith('data:')) return false
-  return !/^https:\/\/upload\.wikimedia\.org\//.test(entry.imageUrl)
+  return !entry.imageUrl.startsWith('https://upload.wikimedia.org/')
 }
 
 /**

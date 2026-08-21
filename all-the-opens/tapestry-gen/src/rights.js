@@ -359,6 +359,24 @@ export async function entityRights(qids) {
  * generated to a fixed form.
  */
 /**
+ * The jurisdictions a set of work-level statements names, as one phrase.
+ *
+ * Named places before rule-shaped clauses, which is purely about reading:
+ * "in countries where copyright lasts 80 years after the author's death or
+ * less and the United States" is a real sentence this produced, and the tail
+ * reads as part of the clause before it. Put the short name first — "in the
+ * United States and countries where copyright lasts…" — and the seam is
+ * obvious. Sorted by length, so the order is deterministic and a re-render
+ * off the same cache is byte-identical.
+ */
+const where = (ws) =>
+  sentenceList(
+    [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
+      (a, b) => a.length - b.length || a.localeCompare(b),
+    ),
+  )
+
+/**
  * The graph's work-level answer, WHOLE, or null — the gate and the words
  * for the holder-refusal disclosure, taken from one place so the page can
  * never gate on one branch of the record and quote another. Only work-level
@@ -379,12 +397,6 @@ export function workFreeStatus(rec) {
   const free = work.filter((w) => w.status.free)
   if (!free.length) return null
   const bound = work.filter((w) => !w.status.free)
-  const where = (ws) =>
-    sentenceList(
-      [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
-        (a, b) => a.length - b.length || a.localeCompare(b),
-      ),
-    )
   const lead = [...free].sort((a, b) => a.status.rank - b.status.rank)[0]
   let line
   if (bound.length) {
@@ -605,19 +617,6 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   let line = null
   const free = ranked.filter((w) => w.status.free)
   const bound = ranked.filter((w) => !w.status.free)
-  // Named places before rule-shaped clauses, which is purely about reading:
-  // "in countries where copyright lasts 80 years after the author's death or
-  // less and the United States" is a real sentence this produced, and the tail
-  // reads as part of the clause before it. Put the short name first — "in the
-  // United States and countries where copyright lasts…" — and the seam is
-  // obvious. Sorted by length, so the order is deterministic and a re-render
-  // off the same cache is byte-identical.
-  const where = (ws) =>
-    sentenceList(
-      [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
-        (a, b) => a.length - b.length || a.localeCompare(b),
-      ),
-    )
   if (free.length && bound.length) {
     const freeWhere = where(free)
     const boundWhere = where(bound)

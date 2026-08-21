@@ -99,7 +99,10 @@ export function hostLimit(host) {
  */
 export function enqueue(host, task) {
   let q = queues.get(host)
-  if (!q) queues.set(host, (q = { active: 0, waiting: [] }))
+  if (!q) {
+    q = { active: 0, waiting: [] }
+    queues.set(host, q)
+  }
   return new Promise((resolve, reject) => {
     q.waiting.push({ task, resolve, reject })
     pump(host, q)

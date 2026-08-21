@@ -105,7 +105,8 @@ export function censusRows(bindings) {
 export function claimsFromRows(item) {
   const claims = {}
   for (const { property, id } of item.pairs.values()) {
-    ;(claims[property] ??= []).push({ mainsnak: { datavalue: { value: id } }, rank: 'normal' })
+    claims[property] ??= []
+    claims[property].push({ mainsnak: { datavalue: { value: id } }, rank: 'normal' })
   }
   claims.P195 = [...item.collections].map((qid) => ({
     mainsnak: { datavalue: { value: { id: qid } } },
@@ -123,7 +124,7 @@ async function main() {
   const articles = []
   const perHolder = {}
   for (const [qid, item] of [...byItem.entries()].sort((a, b) => (a[0] < b[0] ? -1 : 1))) {
-    const collections = [...item.collections].sort()
+    const collections = [...item.collections].sort((a, b) => a.localeCompare(b))
     for (const { property, id } of item.pairs.values()) {
       articles.push({ title: item.title, qid, property, id, collections })
     }

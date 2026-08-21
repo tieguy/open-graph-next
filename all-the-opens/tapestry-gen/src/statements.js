@@ -203,7 +203,7 @@ export function osmFeature(statements) {
  * rather than a confidently wrong map of the Atlantic.
  */
 export function parseEarthPoint(wkt) {
-  if (!wkt || /^</.test(wkt.trim())) return null
+  if (!wkt || wkt.trim().startsWith('<')) return null
   const m = /Point\(([-\d.eE]+) ([-\d.eE]+)\)/.exec(wkt)
   return m ? { lon: Number(m[1]), lat: Number(m[2]) } : null
 }

@@ -23,8 +23,10 @@ test('every partner descriptor is complete', () => {
     if (p.friend.cite !== undefined)
       assert.match(p.friend.cite, /^https:\/\//, `${slug}: friend.cite must be a URL`)
     if (p.hostLimits !== undefined)
-      for (const [host, limit] of Object.entries(p.hostLimits))
-        assert.ok(Number.isInteger(limit) && limit > 1, `${slug}: hostLimits.${host}`)
+      for (const [host, limit] of Object.entries(p.hostLimits)) {
+        assert.ok(Number.isInteger(limit), `${slug}: hostLimits.${host} must be an integer`)
+        assert.ok(limit > 1, `${slug}: hostLimits.${host} must be above 1`)
+      }
   }
 })
 

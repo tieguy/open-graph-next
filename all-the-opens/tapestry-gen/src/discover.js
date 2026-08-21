@@ -49,7 +49,7 @@ import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './
 import { dplaBrowseUrl, dplaEntries } from './dpla.js'
 import { europeanaBrowseUrl, europeanaEntries } from './europeana.js'
 import { digitalnzBrowseUrl, digitalnzEntries } from './digitalnz.js'
-import { corroborate, describedThesisArchiveId, preferredLabel } from './corroborate.js'
+import { describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
@@ -111,7 +111,7 @@ const STATEMENTS_PER_SECTION = Number(process.env.STATEMENTS_PER_SECTION ?? 4)
 // their own paths. A gated lookup is indistinguishable from an absent key
 // downstream — except the citation tally, which must say "not checked"
 // rather than let a negative stand (see the volumes gates).
-const sitsOut = (holder) => Boolean(holder)
+const sitsOut = Boolean
 // OpenAlex's `mailto` politeness parameter carries the same operator contact
 // as the Wikimedia User-Agent: whoever runs this answers for its traffic.
 const CONTACT = () => process.env.WIKIMEDIA_UA_CONTACT

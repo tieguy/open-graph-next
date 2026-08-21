@@ -56,9 +56,9 @@ function stripDisplayNone(html) {
     changed = false
     // Match <span with style containing "display:none" (tolerant of semicolons/spacing)
     const regex = /<span[^>]*style="[^"]*display\s*:\s*none[^"]*"[^>]*>/gi
-    let match
+    const match = regex.exec(result)
 
-    if ((match = regex.exec(result))) {
+    if (match) {
       const startPos = match.index
       let pos = match.index + match[0].length
       let spanCount = 1
