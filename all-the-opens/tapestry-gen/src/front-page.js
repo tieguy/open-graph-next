@@ -43,7 +43,9 @@ const OG_DESCRIPTION =
 // is exactly the kind of claim this page must not get wrong.
 // Extend this table when a card joins either list — readyCount's index is
 // their sum, and a sum past the table's end falls back to digits, which the
-// word-not-digits test refuses.
+// word-not-digits test refuses. The number is also spelled in prose that no
+// test derives: the ready-line CSS comment below, and tapestry-gen
+// CLAUDE.md's warming and reserve sections — update those in the same edit.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
 // The ready-now promise covers BOTH grids — the showcase and the held
@@ -52,6 +54,7 @@ const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.leng
 const readyCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
   String(SHOWCASE.length + HOLDER_SHOWCASE.length)
+const holderCount = () => COUNT_WORDS[HOLDER_SHOWCASE.length] ?? String(HOLDER_SHOWCASE.length)
 
 const SHOWCASE = [
   {
@@ -475,9 +478,9 @@ ${legend.style}
   <div class="grid">
 ${cards}
   </div>
-  <p class="cat">${COUNT_WORDS[HOLDER_SHOWCASE.length].replace(/^./, (c) => c.toUpperCase())} of
-    them are two-party pages: <b>when one friend holds the work itself</b>, the page becomes the
-    Wikipedia article and the institution’s own record of the work, merged:</p>
+  <p class="cat">${holderCount().replace(/^./, (c) => c.toUpperCase())} of
+    the ${readyCount()} are two-party pages: <b>when one friend holds the work itself</b>, the page
+    becomes the Wikipedia article and the institution’s own record of the work, merged:</p>
   <div class="grid">
 ${holderCards()}
   </div>

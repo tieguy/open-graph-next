@@ -616,7 +616,7 @@ test('the held-works row shows the two-party pages, one friend each — and the 
   // …and the count is always a word: a digit here means COUNT_WORDS ran out.
   assert.doesNotMatch(html, /\d+ articles are already rendered/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 1)
-  assert.match(html, /<p class="cat">Three of/)
+  assert.match(html, /<p class="cat">Three of\s+the ten are two-party pages/)
   assert.match(html, /two-party pages: <b>when one friend holds the work itself<\/b>/)
   assert.match(html, /Wikipedia \+ Rijksmuseum/)
   // The foot row names exactly one friend per held card

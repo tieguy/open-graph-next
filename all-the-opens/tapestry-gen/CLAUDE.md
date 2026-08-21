@@ -252,14 +252,14 @@ Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 
 **The ready-now pages have a reserve past that cap** (`src/admission.js`,
 2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
-alike, which broke the promise the front page prints — its ready-now chip
-says all ten articles, both grids, are "already rendered and cached" — and a
-reader arriving while four cold discoveries were in
-flight got the busy page for a page that would have been served entirely off
-disk. `SHOWCASE_RESERVE` (default 2) is slots only the ten ready-now titles may
-take — the showcase grid and the held-works row alike — admitted on the
-reader's own requested title (a redirect *to* one of them is not known to be
-one until the parse call answers, so it rides the general lane).
+alike, which broke the promise the front page prints — its ready-now chip says
+all ten articles, both grids, are "already rendered and cached" — and a reader
+arriving while four cold discoveries were in flight got the busy page for a
+page that would have been served entirely off disk. `SHOWCASE_RESERVE` (default
+2) is slots only the ten ready-now titles may take — the showcase grid and the
+held-works row alike — admitted on the reader's own requested title (a redirect
+*to* one of them is not known to be one until the parse call answers, so it
+rides the general lane).
 **It widens nothing anyone else sees** — `hostLimit()` bounds upstream
 concurrency globally and knows nothing about in-flight discoveries; the worst
 case, a cold volume, is two more discoveries waiting on those same per-host
