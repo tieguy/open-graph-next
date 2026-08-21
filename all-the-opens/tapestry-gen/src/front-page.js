@@ -37,7 +37,7 @@ const OG_DESCRIPTION =
 // `adds` — "other friends" means the ones the headline did not already say.
 // The count, spelled, for the one sentence that still prints a cache
 // promise: the busy page's ("These nine are already rendered and stored"),
-// over the same nine cards the front page shows. The front page's grid line
+// over the same cards the front page shows. The front page's grid line
 // names no number and makes no cache claim (the operator's call,
 // 2026-08-20: the promise is good — the warm walk and the admission
 // reserve are unchanged — it just does not need stating there). Extend
@@ -50,7 +50,10 @@ const OG_DESCRIPTION =
 // front page"), and CLAUDE.md's busy-page paragraph (the printed sentence
 // itself), warming section ("walks the nine pages", "nine local replays")
 // and reserve section ("the nine ready-now titles") — update every one in
-// the same edit as a card change.
+// the same edit as a card change. The component counts (six showcase,
+// three held) are spelled beside the nine in CLAUDE.md's warming section
+// and Art-group paragraph and in the HOLDER_SHOWCASE comment below —
+// sweep those in the same edit; this list's own subject is the nine.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const storedCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
