@@ -6,7 +6,7 @@
 
 import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { createHash } from 'node:crypto'
-import { join } from 'node:path'
+import { join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 import { MAX_COOLOFF_MS, coolingFor, noteRateLimited } from './cooloff.js'
@@ -14,7 +14,15 @@ import { enqueue } from './mw.js'
 import { isRetryable, retryAfterMs, userAgent, withMaxlag } from './wmf.js'
 
 const HERE = fileURLToPath(new URL('.', import.meta.url))
-export const CACHE = join(HERE, '..', '.cache')
+// Every disk-cached thing in the tree resolves through this one constant — the
+// request cache, the class facts, the cover bytes, the stored pages, the sweep
+// — so pointing it elsewhere points all of them at once. `TAPESTRY_CACHE` is
+// how the offline render test replays a recorded article without a network,
+// and how a throwaway run keeps out of the real cache. Unset in production,
+// where the Fly volume is mounted at the default path.
+export const CACHE = process.env.TAPESTRY_CACHE
+  ? resolve(process.env.TAPESTRY_CACHE)
+  : join(HERE, '..', '.cache')
 
 // Defined once for the whole repo, and refuses to build without a contact —
 // see src/wmf.js. Set WIKIMEDIA_UA_CONTACT to your own address. Lazy so that

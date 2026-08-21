@@ -1,0 +1,8 @@
+{
+  "page": "Ludwig Prandtl",
+  "recorded": "2026-08-20",
+  "contact": "luis@lu.is",
+  "requests": 127,
+  "why": "OpenAlex takes the operator contact as its politeness `mailto`, in the query string, so the contact is part of that request's cache key. Replaying the recording needs the value it was recorded with. Re-recording under a placeholder address is not an option: the same variable sets the User-Agent, and the WMF policy requires a contact that reaches the operator.",
+  "howToRerecord": "rm -rf /tmp/rec && mkdir /tmp/rec && TAPESTRY_CACHE=/tmp/rec WIKIMEDIA_UA_CONTACT=<operator> npm run serve, request /wiki/Ludwig_Prandtl once, then tar czf test/fixtures/ludwig-prandtl-cache.tar.gz the directory, dropping any page-* file."
+}
