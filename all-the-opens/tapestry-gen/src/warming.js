@@ -102,21 +102,21 @@ export async function warmAll(base, titles, { timeoutMs = 300_000, log = console
         failed++
         // 503 is the server saying it is already busy discovering, which is a
         // real answer and not a broken deploy — name it rather than lumping it in.
-        const why = r.status === 503 ? 'busy (503)' : !r.complete ? 'stream cut short' : `HTTP ${r.status}`
+        let why = `HTTP ${r.status}`
+        if (r.status === 503) why = 'busy (503)'
+        else if (!r.complete) why = 'stream cut short'
         log(`  ✗ ${title} — ${why} after ${secs(r.ms)}`)
       }
     } catch (e) {
       failed++
-      log(`  ✗ ${title} — ${e.name === 'TimeoutError' ? `no answer in ${secs(timeoutMs)}` : e.message}`)
+      const why = e.name === 'TimeoutError' ? `no answer in ${secs(timeoutMs)}` : e.message
+      log(`  ✗ ${title} — ${why}`)
     }
   }
-  log(
-    failed
-      ? `${failed} of ${titles.length} did not warm`
-      : thin
-        ? `all warm — ${thin} thin, refreshing when their sources answer`
-        : 'all warm',
-  )
+  let tally = 'all warm'
+  if (failed) tally = `${failed} of ${titles.length} did not warm`
+  else if (thin) tally = `all warm — ${thin} thin, refreshing when their sources answer`
+  log(tally)
   return { failed, thin }
 }
 

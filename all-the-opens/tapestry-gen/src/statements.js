@@ -792,11 +792,9 @@ export async function statementEntries(qid, statements, { label, withMap, subjec
   // a Met painting beside a section is a non sequitur until the card says
   // which linked thing it is the museum's record of.
   for (const e of out) {
-    e.why = label
-      ? subject
-        ? `This is ${label}’s own record of it`
-        : `About ${label}, which this section links to`
-      : 'Connected to something this section links to'
+    if (!label) e.why = 'Connected to something this section links to'
+    else if (subject) e.why = `This is ${label}’s own record of it`
+    else e.why = `About ${label}, which this section links to`
     // The renderer splits one source's carousel by topic, so two anchors'
     // objects from the same museum never share an unlabeled box.
     e.topic = label ?? null

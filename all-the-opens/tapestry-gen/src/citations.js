@@ -116,10 +116,16 @@ function validIsbn(value) {
 export function citationAuthors(p) {
   const names = []
   for (let i = 1; i <= 4; i++) {
-    const last = stripMarkup(p.get(`last${i}`) ?? (i === 1 ? p.get('last') : null))
-    const author = stripMarkup(p.get(`author${i}`) ?? (i === 1 ? p.get('author') : null))
+    // The first author may be written either numbered or bare: `last1` and
+    // `last` are the same field, and only for i === 1.
+    const field = (name) => {
+      const bare = i === 1 ? p.get(name) : null
+      return stripMarkup(p.get(`${name}${i}`) ?? bare)
+    }
+    const last = field('last')
+    const author = field('author')
     if (!last && !author) break
-    const first = last ? stripMarkup(p.get(`first${i}`) ?? (i === 1 ? p.get('first') : null)) : null
+    const first = last ? field('first') : null
     names.push(author ?? (first ? `${first} ${last}` : last))
   }
   if (!names.length) return null
@@ -443,22 +449,27 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
   // negative must not stand ("we could not look" must never render as
   // "there is no copy"), and the could-not-check line below speaks for the
   // whole citation list rather than only the ISBN-carrying part of it.
-  const accessLine = readable
-    ? `${cap(spell(readable))} of them you can read or borrow right now.`
-    : !searched && total > 0
-      ? null
-      : // Never "no free copy exists" — we searched, we did not survey the world.
-        `We could not find a free copy of any of them.`
+  let accessLine
+  if (readable) {
+    accessLine = `${cap(spell(readable))} of them you can read or borrow right now.`
+  } else if (!searched && total > 0) {
+    accessLine = null
+  } else {
+    // Never "no free copy exists" — we searched, we did not survey the world.
+    accessLine = `We could not find a free copy of any of them.`
+  }
   if (accessLine) out.push(accessLine)
   // "More" only reads if something came before it. With nothing readable, the
   // cataloged ones are not "more" — they are the whole of what was found.
-  if (cataloged)
+  if (cataloged) {
+    const them = cataloged === 1 ? 'it' : 'them'
     out.push(
       readable
         ? `Open Library has cataloged ${spell(cataloged)} more that nobody has scanned.`
         : `Open Library has cataloged ${spell(cataloged)} of them, but nobody has scanned ` +
-          `${cataloged === 1 ? 'it' : 'them'}.`,
+          `${them}.`,
     )
+  }
   // "We could not look" must never be left to read as "there is nothing there".
   if (!searched && total > 0)
     out.push(`${cap(spell(total))} we could not check this time.`)
@@ -466,11 +477,15 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
     out.push(`${cap(spell(unchecked))} we could not check this time.`)
   // The papers clause claims a search too. When none ran, the could-not-check
   // line above already speaks for every cited work, papers included.
-  if (papers?.total && searched)
+  if (papers?.total && searched) {
+    const paperWord = papers.total === 1 ? 'paper' : 'papers'
+    const openClause = papers.open
+      ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read`
+      : 'we found none free to read'
     out.push(
-      `Of the ${papers.total.toLocaleString()} research paper${papers.total === 1 ? '' : 's'} among them, ` +
-        `${papers.open ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read` : 'we found none free to read'}.`,
+      `Of the ${papers.total.toLocaleString()} research ${paperWord} among them, ` + `${openClause}.`,
     )
+  }
   return out.join(' ')
 }
 

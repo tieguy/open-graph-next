@@ -70,7 +70,8 @@ export function digitalnzUrl(forms, key) {
  * where one that under-shows would not be.
  */
 export function digitalnzBrowseUrl(heading) {
-  return `https://digitalnz.org/records?text=${encodeURIComponent(`"${heading}"`)}`
+  const phrase = `"${heading}"`
+  return `https://digitalnz.org/records?text=${encodeURIComponent(phrase)}`
 }
 
 const first = (v) => (Array.isArray(v) ? v[0] : v)

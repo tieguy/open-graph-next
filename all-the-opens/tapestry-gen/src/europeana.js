@@ -20,10 +20,11 @@ export function europeanaUrl(entityId, key) {
   // enrichment URIs in Europeana's own index dropped it. With the segment
   // left in, every entity quietly matches nothing.
   const canonical = entityId.replace(/^(agent|concept|place|timespan)\/base\//, '$1/')
+  const entityPhrase = `"http://data.europeana.eu/${canonical}"`
   return (
     'https://api.europeana.eu/record/v2/search.json' +
     `?wskey=${key}` +
-    `&query=${encodeURIComponent(`"http://data.europeana.eu/${canonical}"`)}` +
+    `&query=${encodeURIComponent(entityPhrase)}` +
     '&reusability=open' +
     `&rows=${EUROPEANA_PER_ANCHOR}` +
     '&profile=minimal'
@@ -41,9 +42,10 @@ export function europeanaUrl(entityId, key) {
  */
 export function europeanaBrowseUrl(entityId) {
   const canonical = entityId.replace(/^(agent|concept|place|timespan)\/base\//, '$1/')
+  const entityPhrase = `"http://data.europeana.eu/${canonical}"`
   return (
     'https://www.europeana.eu/en/search?query=' +
-    encodeURIComponent(`"http://data.europeana.eu/${canonical}"`) +
+    encodeURIComponent(entityPhrase) +
     '&reusability=open'
   )
 }

@@ -194,8 +194,9 @@ function gapLead({ total, shown, link, invisible }) {
   // With nothing shown AND nothing linked there is no contrast to draw, so the
   // blunt sentence beats the clause list.
   if (!shown && !link) {
-    const none =
-      total === 1 ? 'It does not reach' : total === 2 ? 'Neither reaches' : 'None of them reaches'
+    let none = 'None of them reaches'
+    if (total === 1) none = 'It does not reach'
+    else if (total === 2) none = 'Neither reaches'
     out.push(`${none} ${THE_ARTICLE} at all — not a picture, not a link, not a mention.`)
     return out.join(' ')
   }
@@ -210,12 +211,10 @@ function gapLead({ total, shown, link, invisible }) {
   if (shown) parts.push(`credits ${spell(shown)} of them`)
   if (link)
     parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
-  if (invisible)
-    parts.push(
-      parts.length
-        ? 'does not surface the rest'
-        : `does not surface ${invisible === 1 ? 'it' : 'any of them'}`,
-    )
+  if (invisible) {
+    const which = invisible === 1 ? 'it' : 'any of them'
+    parts.push(parts.length ? 'does not surface the rest' : `does not surface ${which}`)
+  }
   const list =
     parts.length > 2
       ? `${parts.slice(0, -1).join(', ')}, and ${parts.at(-1)}`
@@ -801,13 +800,16 @@ function broadNotes(notes, inline) {
       // heading, Europeana's is only the openly licensed items — the API asks
       // for `reusability=open` and the browse link carries that filter, so
       // dropping the word here would misdescribe the number and the link both.
-      const what =
-        n.source === 'europeana'
-          ? `the ${total} openly licensed items Europeana’s partners link to ` +
-            `“${n.label ?? 'this'}”`
-          : n.heading
-            ? `the ${total} items ${name}’s partners catalog under “${n.heading}”`
-            : `the ${total} items ${name} holds under “${n.label ?? 'this'}”`
+      let what
+      if (n.source === 'europeana') {
+        what =
+          `the ${total} openly licensed items Europeana’s partners link to ` +
+          `“${n.label ?? 'this'}”`
+      } else if (n.heading) {
+        what = `the ${total} items ${name}’s partners catalog under “${n.heading}”`
+      } else {
+        what = `the ${total} items ${name} holds under “${n.label ?? 'this'}”`
+      }
       return (
         `<p class="broad">${favicon(n.source, inline)}` +
         `<span class="broad-text"><b>Not shown here:</b> ${escapeHtml(what)} — a heading ` +
@@ -922,11 +924,9 @@ function carousel(source, items, inline, topic = null, sample = null) {
   // silently dropped, which is the whole point of disclosing at all.
   //
   // "1" alone in the corner is noise, but "1 of 83" is the finding.
-  const count = sample
-    ? sampleBadge(sample, items.length)
-    : items.length > 1
-      ? `<span class="count">${items.length}</span>`
-      : ''
+  let count = ''
+  if (sample) count = sampleBadge(sample, items.length)
+  else if (items.length > 1) count = `<span class="count">${items.length}</span>`
   const topicTag = topic ? `<span class="topic">${escapeHtml(topic)}</span>` : ''
   // A strip whose cards all share one why line says it once, under the head —
   // four cards each repeating "Depicts X" is noise.
@@ -1248,11 +1248,9 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const heroAside = hero
     ? `<aside class="rail">${heroCard(hero, inline, heroSample, holder, nameFor)}</aside>`
     : ''
-  const boxAside = holderPanelHtml
-    ? mergedPanelAside(holderPanelHtml, wikiBase)
-    : infobox
-      ? infoboxAside(infobox, wikiBase)
-      : ''
+  let boxAside = ''
+  if (holderPanelHtml) boxAside = mergedPanelAside(holderPanelHtml, wikiBase)
+  else if (infobox) boxAside = infoboxAside(infobox, wikiBase)
   const float = heroAside + boxAside
   const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
   return {

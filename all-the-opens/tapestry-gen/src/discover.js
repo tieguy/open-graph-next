@@ -1176,10 +1176,11 @@ export async function discover(page, { emit = async () => {} } = {}) {
     'openlibrary volumes',
     async () => {
       const holder = await holderPromise
-      return (!sitsOut(holder))
-        ? openLibraryVolumes(lede ? isbnsOf([lede]) : [])
-        : // Not asked, not "not found": the tally must say "could not check".
-          { volumes: new Map(), unchecked: new Set(lede ? isbnsOf([lede]) : []) }
+      const ledeIsbns = lede ? isbnsOf([lede]) : []
+      // Not asked, not "not found": the tally must say "could not check".
+      return sitsOut(holder)
+        ? { volumes: new Map(), unchecked: new Set(ledeIsbns) }
+        : openLibraryVolumes(ledeIsbns)
     },
     async () => {
       const holder = await holderPromise
@@ -1510,12 +1511,12 @@ export async function discover(page, { emit = async () => {} } = {}) {
     if (scans.entries.length)
       console.error(
         `smithsonian scans by taxon: ${scans.entries.length} of ` +
-          `${scans.truncated ? `${scans.total}+` : scans.total} for ${taxonName}`,
+          `${scans.truncated ? scans.total + '+' : scans.total} for ${taxonName}`,
       )
     if (artworks.entries.length)
       console.error(
         `artworks by subject: ${artworks.entries.length} of ` +
-          `${artworks.truncated ? `${artworks.total}+` : artworks.total} ` +
+          `${artworks.truncated ? artworks.total + '+' : artworks.total} ` +
           `(${Object.entries(artworks.totals)
             .filter(([k, n]) => k !== 'works' && n)
             .map(([k, n]) => `${k} ${n}`)
@@ -1626,17 +1627,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // labels are one batched request for the whole page and cheap.
     const first = unit === lede
     const picked = first ? await ledePickedPromise : (await pickedPromise).get(unit)
+    const forBand = (ledeLookup, restLookup) => (first ? ledeLookup : restLookup)
     const [iaPicks, ol, labels, scholarHits, statements, rights] = await Promise.all([
-      unit.identified.length ? (first ? ledeIaPicksPromise : iaPickedPromise) : new Map(),
+      unit.identified.length ? forBand(ledeIaPicksPromise, iaPickedPromise) : new Map(),
       unit.railCandidates.some((c) => c.isbn)
-        ? first
-          ? ledeVolumesPromise
-          : volumesPromise
+        ? forBand(ledeVolumesPromise, volumesPromise)
         : { volumes: new Map(), unchecked: new Set() },
-      picked.length ? (first ? ledeLabelsPromise : labelsPromise) : new Map(),
+      picked.length ? forBand(ledeLabelsPromise, labelsPromise) : new Map(),
       unit.scholarly.length ? scholarPickedPromise : new Map(),
-      picked.length || first ? (first ? ledeStatementsPromise : statementsPromise) : new Map(),
-      picked.length || first ? (first ? ledeRightsPromise : rightsPromise) : new Map(),
+      picked.length || first ? forBand(ledeStatementsPromise, statementsPromise) : new Map(),
+      picked.length || first ? forBand(ledeRightsPromise, rightsPromise) : new Map(),
     ])
     const extras = unit.index === '0' ? await ledeExtrasPromise : null
 

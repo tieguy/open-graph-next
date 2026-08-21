@@ -369,6 +369,9 @@ export async function entityRights(qids) {
  * obvious. Sorted by length, so the order is deterministic and a re-render
  * off the same cache is byte-identical.
  */
+/** ` in <places>`, or nothing at all when no place is named. */
+const inPlaces = (phrase) => (phrase ? ` in ${phrase}` : '')
+
 const where = (ws) =>
   sentenceList(
     [...new Set(ws.map((w) => jurisdictionPhrase(w.jurisdiction)).filter(Boolean))].sort(
@@ -403,8 +406,8 @@ export function workFreeStatus(rec) {
     const freeWhere = where(free)
     const boundWhere = where(bound)
     line =
-      `${lead.status.label}${freeWhere ? ` in ${freeWhere}` : ''}` +
-      ` · still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+      `${lead.status.label}${inPlaces(freeWhere)}` +
+      ` · still in copyright${boundWhere ? inPlaces(boundWhere) : ' elsewhere'}`
   } else if (lead.jurisdiction) {
     line = `${lead.status.label} in ${where(free)}`
   } else {
@@ -585,11 +588,11 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   // `line` names whose status it is, so the mark is never read as a separate
   // finding about this particular book.
   const aboutThisThing = leadLicense || lead
-  const marks = !aboutThisThing
-    ? (creator?.status.marks ?? [])
-    : leadLicense && (!lead || leadLicense.rank <= lead.status.rank)
-      ? leadLicense.marks
-      : lead.status.marks
+  const licenseWins = leadLicense && (!lead || leadLicense.rank <= lead.status.rank)
+  let marks
+  if (!aboutThisThing) marks = creator?.status.marks ?? []
+  else if (licenseWins) marks = leadLicense.marks
+  else marks = lead.status.marks
 
   // For a creator-derived mark the label names whose ruling it is, because it
   // is now the only place a reader meets that attribution without clicking:
@@ -621,8 +624,8 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
     const freeWhere = where(free)
     const boundWhere = where(bound)
     line =
-      `${free[0].status.label}${freeWhere ? ` in ${freeWhere}` : ''} · ` +
-      `still in copyright${boundWhere ? ` in ${boundWhere}` : ' elsewhere'}`
+      `${free[0].status.label}${inPlaces(freeWhere)} · ` +
+      `still in copyright${boundWhere ? inPlaces(boundWhere) : ' elsewhere'}`
   } else if (lead?.jurisdiction) {
     const leadWhere = where(lead.status.free ? free : bound)
     line = `${lead.status.label} in ${leadWhere}`
@@ -643,7 +646,7 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
     if (!w.how) continue
     const wherePhrase = jurisdictionPhrase(w.jurisdiction)
     detail.push(
-      `${w.status.label}${wherePhrase ? ` in ${wherePhrase}` : ''} — determined by: ${w.how}.`,
+      `${w.status.label}${inPlaces(wherePhrase)} — determined by: ${w.how}.`,
     )
   }
   if (creator) {

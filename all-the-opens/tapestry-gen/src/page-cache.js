@@ -59,7 +59,7 @@ const sha = (s) => createHash('sha1').update(s).digest('hex').slice(0, 16)
  */
 export function sourceFingerprint(files) {
   const parts = [...files]
-    .sort((a, b) => (a.name < b.name ? -1 : a.name > b.name ? 1 : 0))
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((f) => `${f.name}:${f.bytes.length}:${sha(f.bytes)}`)
   return sha(parts.join('\n'))
 }
