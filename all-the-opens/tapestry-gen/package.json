@@ -9,9 +9,16 @@
     "warm": "node --env-file-if-exists=.env warm.js",
     "deploy": "flyctl deploy --remote-only",
     "deploy:staging": "flyctl deploy --config fly.staging.toml --remote-only",
-    "test": "node --test 'test/*.test.js'"
+    "test": "node --test 'test/*.test.js'",
+    "lint": "eslint .",
+    "pretest": "eslint ."
   },
   "dependencies": {
     "m3api": "^1.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "eslint": "^10.8.1",
+    "globals": "^17.11.0"
   }
 }
