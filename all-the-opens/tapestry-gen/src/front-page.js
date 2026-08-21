@@ -46,8 +46,9 @@ const OG_DESCRIPTION =
 // their sum, and a sum past the table's end falls back to digits, which the
 // word-not-digits test refuses. The number is also spelled in prose that no
 // test derives: the ready-line CSS comment below, src/admission.js's reserve
-// preamble, and tapestry-gen CLAUDE.md's warming and reserve sections —
-// update those in the same edit.
+// preamble, and tapestry-gen CLAUDE.md in three places — the warming
+// paragraph under Deployed demo, the reserve paragraph, and the busy-page
+// paragraph under The page cache — update all of them in the same edit.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
 // The ready-now promise covers the whole grid — the showcase groups and the
@@ -56,7 +57,6 @@ const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.leng
 const readyCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
   String(SHOWCASE.length + HOLDER_SHOWCASE.length)
-const holderCount = () => COUNT_WORDS[HOLDER_SHOWCASE.length] ?? String(HOLDER_SHOWCASE.length)
 
 const SHOWCASE = [
   {
@@ -272,18 +272,22 @@ const holderCards = () =>
 export const GROUP_ORDER = ['History and the public record', 'Science and the living world']
 export const ungroupedShowcaseTitles = () =>
   SHOWCASE.filter((c) => !GROUP_ORDER.includes(c.group)).map((c) => c.title)
+// Group rows are <p>, not headings: they are reading aids inside the hero,
+// and a heading here would sit at no level — the page's outline runs h1
+// (the masthead) straight to the FAQ's h2. A group no card claims renders
+// nothing, heading included.
 const groupedShowcase = () =>
-  GROUP_ORDER.map(
-    (g) =>
-      `<h3 class="show-cat">${escapeHtml(g)}</h3>\n` +
-      SHOWCASE.filter((c) => c.group === g)
-        .map(showcaseCard)
-        .join('\n'),
-  ).join('\n') +
-  `\n<h3 class="show-cat">Art</h3>\n` +
-  `<p class="show-note">Each of these articles is a work an institution holds, so the page\n` +
-  `  becomes a two-party act: the Wikipedia article and the institution’s own record of the\n` +
-  `  work, merged.</p>\n` +
+  GROUP_ORDER.map((g) => {
+    const cards = SHOWCASE.filter((c) => c.group === g)
+    if (!cards.length) return ''
+    return `<p class="show-cat">${escapeHtml(g)}</p>\n` + cards.map(showcaseCard).join('\n')
+  })
+    .filter(Boolean)
+    .join('\n') +
+  `\n<p class="show-cat">Art</p>\n` +
+  `<p class="show-note">Each of these articles is about a work an institution holds, so the\n` +
+  `  page becomes a two-party act: the Wikipedia article and the institution’s own record\n` +
+  `  of the work, merged.</p>\n` +
   holderCards()
 
 /** The grid those cards sit in, shared for the same reason they are. */

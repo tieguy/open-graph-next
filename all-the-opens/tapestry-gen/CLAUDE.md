@@ -392,10 +392,10 @@ open ecosystem can show you.
 Fixtures are Apollo 11 (event, `{{sfn}}` citation style), Brown v. Board (legal,
 inline `{{cite}}`), Ludwig Prandtl (person, thesis reachable only by description).
 
-**The front page's Art group is the three held works as of 2026-08-20**, and
-Rembrandt — the art showcase from 2026-08-06 until then — is no longer a
-front-page card, though the page itself renders as before. The Rembrandt swap
-is what drove the artworks lookup: the Met and the Rijksmuseum were
+**The front page's Art group is the three held works** (2026-08-20), and
+Rembrandt is not a front-page card — the page itself renders exactly as any
+other article. The 2026-08-06 Rembrandt-for-American-Gothic swap is what
+drove the artworks lookup: the Met and the Rijksmuseum were
 both landmark open-access releases, and an artist article shows them together
 where a single painting shows one museum. An article ABOUT a painting gets
 nothing from `src/artworks.js` — The Night Watch fired the lookup zero times,

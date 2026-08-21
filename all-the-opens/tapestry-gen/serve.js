@@ -461,8 +461,8 @@ server.listen(PORT, '0.0.0.0', () => {
   // it grows without bound (~4 MB a page) and needs a ceiling — but a visitor
   // must never wait on housekeeping. Default 2 GB against a 3 GB volume.
   startSweeping(CACHE, { capBytes: Number(process.env.CACHE_MAX_MB ?? 2048) * 1024 * 1024 })
-  // The server warms the front page's ready-now pages — the showcase and the
-  // held-works row, one list in bootWarmTitles. WARM_ON_START gates it: prod's
+  // The server warms the front page's ready-now pages — the showcase groups
+  // and the Art group, one list in bootWarmTitles. WARM_ON_START gates it: prod's
   // fly.toml sets it; staging deliberately does not, and neither does local
   // dev. This used to be the deploy script's last step, `node warm.js` on the
   // operator's machine — meaning every deploy ended attached to somebody's

@@ -9,7 +9,7 @@
 // who arrived while four cold discoveries were in flight got the busy page for
 // a page that would have been served entirely off the disk cache.
 //
-// So the ready-now pages — the showcase grid and the held-works row alike — get
+// So the ready-now pages — the showcase groups and the Art group alike — get
 // a small reserve of slots that general traffic cannot take. The argument for
 // it is what warm means: the server walks exactly this list at boot
 // (`bootWarmTitles`, under WARM_ON_START), `warm.js` is the same walk by hand,
@@ -42,8 +42,8 @@ export function titleKey(title) {
   return t.charAt(0).toUpperCase() + t.slice(1)
 }
 
-// Every title the front page presents as ready — the showcase grid and the
-// held-works row alike. Imported from the boot walk's own list rather than
+// Every title the front page presents as ready — the showcase groups and
+// the Art group alike. Imported from the boot walk's own list rather than
 // composed again, so the reserve backs the promise wherever it is made and
 // cannot drift from the walk: a title added to bootWarmTitles is reserved
 // here with no edit.

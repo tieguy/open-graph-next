@@ -186,7 +186,7 @@ test('a source reached only through footnote links still makes the legend', () =
 
 test('the warmer and the front page read the same showcase list', () => {
   // The boot walk covers exactly the pages the front page's cards promise
-  // are ready — this test pins the showcase half, its held-works twin below
+  // are ready — this test pins the showcase half, its Art-group twin below
   // pins the other. A second, hand-kept copy of the titles would drift the
   // first time one changed, and the symptom would be a slow demo link
   // rather than an error.
@@ -598,7 +598,7 @@ test('a holder page carries the work’s copyright in the panel, not the slab �
 })
 
 
-test('the held-works row shows the two-party pages, one friend each — and the boot walk backs their promise', () => {
+test('the Art group shows the two-party pages, one friend each — and the boot walk backs their promise', () => {
   const html = frontPage()
   // The ready-now promise is real: every held title is in the same boot
   // walk (and, via the same list, warm.js's default walk) as the showcase.
@@ -617,10 +617,13 @@ test('the held-works row shows the two-party pages, one friend each — and the 
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
   // Three group rows, reading aids like the friends list's — and the
   // two-party fact is the Art group's own note.
+  // Group rows are <p>, never headings: the hero's outline runs h1 straight
+  // to the FAQ's h2, and a heading here would sit at no level.
   for (const g of [...GROUP_ORDER, 'Art']) {
-    assert.ok(html.includes(`<h3 class="show-cat">${g}</h3>`), `group row: ${g}`)
+    assert.ok(html.includes(`<p class="show-cat">${g}</p>`), `group row: ${g}`)
   }
-  assert.match(html, /<p class="show-note">Each of these articles is a work an institution holds/)
+  assert.doesNotMatch(html, /<h3 class="show-cat">/)
+  assert.match(html, /<p class="show-note">Each of these articles is about a work an institution holds/)
   // Every showcase card names a group in GROUP_ORDER — a card outside the
   // list would silently fall out of the grid.
   assert.deepEqual(ungroupedShowcaseTitles(), [])
