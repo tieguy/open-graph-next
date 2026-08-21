@@ -109,6 +109,53 @@ export function iiifThumbnail(manifest) {
   return null
 }
 
+/** `iiifString` without the tag stripping, for callers that must read the
+ * markup itself rather than the words inside it. */
+function iiifRaw(value) {
+  if (value == null) return null
+  if (typeof value === 'string') return value
+  if (Array.isArray(value)) return iiifRaw(value[0])
+  if (typeof value === 'object') {
+    if (value['@value'] != null) return iiifRaw(value['@value'])
+    const lang = value.en ?? value.none ?? Object.values(value)[0]
+    return iiifRaw(lang)
+  }
+  return null
+}
+
+const ANCHOR = /<a\b[^>]*href=["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi
+/** Hosts that serve licence badges and deeds, never an institution's name. */
+const LICENCE_HOST = /creativecommons\.org|rightsstatements\.org|licensebuttons\.net/i
+/** Anchor text that is a URL or an address rather than a name. */
+const NOT_A_NAME_TEXT = /^https?:\/\/|@|^[\w.-]+\.[a-z]{2,}(\/|$)/i
+
+/**
+ * The institution's own name out of an HTML attribution.
+ *
+ * Presentation 2 gave publishers no `provider` field, so a museum that wants
+ * to be named links itself inside the free-text `attribution` — and vendor
+ * software puts a machine-generated run of licence codes and repeated
+ * collection strings in front of that link. KMSKA Antwerp's manifest for
+ * object 34343 opens "CC0, CC0, Public domain," and repeats its Dutch
+ * collection name four times before linking "Royal Museum of Fine Arts
+ * Antwerp - Flemish Community" (fetched 2026-08-21). Reading the words alone
+ * credits a card to that whole blob.
+ *
+ * The first anchor that is neither a licence badge nor a bare URL is the
+ * museum naming itself. An attribution with no link at all yields null, so a
+ * plain rights notice still reads exactly as the publisher wrote it.
+ */
+export function creditFromHtml(html) {
+  if (typeof html !== 'string' || !html.includes('<a')) return null
+  for (const [, href, inner] of html.matchAll(ANCHOR)) {
+    if (LICENCE_HOST.test(href)) continue
+    const text = stripTags(inner).trim()
+    if (!text || NOT_A_NAME_TEXT.test(text)) continue
+    return text
+  }
+  return null
+}
+
 /** Free text that credits nobody: a rights notice, not an institution's name. */
 const RIGHTS_NOTICE = /[\u00a9\u00ae]|\ball rights\b|reserved|copyright|https?:\/\//i
 
@@ -134,6 +181,7 @@ export function iiifCredit(manifest) {
   const stated =
     iiifString(manifest.requiredStatement?.value) ??
     iiifString(manifest.provider?.[0]?.label) ??
+    creditFromHtml(iiifRaw(manifest.attribution)) ??
     iiifString(manifest.attribution) ??
     null
   const holder = metaValue(iiifMetadata(manifest), HOLDER_LABELS)
