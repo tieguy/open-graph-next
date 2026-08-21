@@ -1,0 +1,292 @@
+import { extractText as extractPdfText, getDocumentProxy } from "unpdf";
+
+// ===== Rate limit settings =====
+const RATE_LIMIT = 20;        // requests
+const WINDOW_MS = 60_000;    // per minute
+
+// Best-effort per-IP buckets (free, in-memory)
+const ipBuckets = new Map();
+
+// ===== Neon SQL-over-HTTP helper =====
+// Parses a postgres:// connection string and calls Neon's HTTP endpoint.
+// No npm packages needed — just fetch().
+// Set DATABASE_URL as a Cloudflare secret, e.g.:
+//   postgres://user:pass@ep-cool-123.us-east-2.aws.neon.tech/dbname?sslmode=require
+async function queryNeon(databaseUrl, sql, params = []) {
+  const host = new URL(databaseUrl).hostname;
+
+  const resp = await fetch(`https://${host}/sql`, {
+    method: "POST",
+    headers: {
+      "Neon-Connection-String": databaseUrl,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ query: sql, params }),
+  });
+
+  if (!resp.ok) {
+    const text = await resp.text();
+    throw new Error(`Neon HTTP error ${resp.status}: ${text}`);
+  }
+  return resp.json();
+}
+
+export default {
+  async fetch(request, env, ctx) {
+    const origin = request.headers.get("Origin") || "";
+
+    const allowedOrigins = [
+      "https://en.wikipedia.org",
+      "https://www.wikipedia.org",
+      "https://commons.wikimedia.org"
+    ];
+
+    const cors = {
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers":
+        request.headers.get("Access-Control-Request-Headers") || "Content-Type",
+      "Vary": "Origin"
+    };
+
+    if (allowedOrigins.includes(origin)) {
+      cors["Access-Control-Allow-Origin"] = origin;
+    }
+
+    const url = new URL(request.url);
+
+    // Preflight — /log needs open CORS since it's called from Wikipedia
+    if (request.method === "OPTIONS") {
+      if (url.pathname === '/log') {
+        return new Response(null, {
+          status: 204,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'POST',
+            'Access-Control-Allow-Headers': 'Content-Type',
+          }
+        });
+      }
+      return new Response(null, { status: 204, headers: cors });
+    }
+    const corsHeaders = {
+      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+    };
+
+    // DEBUG: Reachability check — visit ?ping in your browser or from Wikipedia console:
+    // fetch('https://<your-worker>.workers.dev/?ping').then(r=>r.json()).then(console.log)
+    if (request.method === 'GET' && url.searchParams.has('ping')) {
+      return new Response(JSON.stringify({
+        ok: true,
+        timestamp: new Date().toISOString(),
+        origin: origin || '(none)',
+        ip: request.headers.get('CF-Connecting-IP') || '(unknown)',
+        corsAllowed: allowedOrigins.includes(origin),
+      }, null, 2), {
+        headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+      });
+    }
+
+    // DEBUG: Test Neon connection — visit ?neon=test in your browser
+    // Remove this block once logging is confirmed working
+    if (request.method === 'GET' && url.searchParams.get('neon') === 'test') {
+      if (!env.DATABASE_URL) {
+        return new Response(JSON.stringify({ error: "DATABASE_URL secret is not set" }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+      try {
+        const result = await queryNeon(
+          env.DATABASE_URL,
+          "SELECT NOW() AS server_time, current_database() AS db"
+        );
+        return new Response(JSON.stringify({ ok: true, result }), {
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      } catch (e) {
+        return new Response(JSON.stringify({ ok: false, error: e.message }), {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+        });
+      }
+    }
+
+    // ===== /log endpoint — write verification results to Neon =====
+    if (url.pathname === '/log' && request.method === 'POST') {
+      const body = await request.json();
+      ctx.waitUntil(
+        queryNeon(
+          env.DATABASE_URL,
+          `INSERT INTO verification_logs
+            (article_url, article_title, citation_number, source_url, provider, verdict, confidence)
+           VALUES ($1, $2, $3, $4, $5, $6, $7)`,
+          [body.article_url, body.article_title, body.citation_number,
+           body.source_url, body.provider, body.verdict, body.confidence]
+        ).catch(err => console.error('Log write failed:', err.message))
+      );
+      return new Response('ok', {
+        headers: { 'Access-Control-Allow-Origin': '*' }
+      });
+    }
+
+    // NEW: Handle URL fetch requests
+    if (request.method === 'GET' && url.searchParams.has('fetch')) {
+      const targetUrl = url.searchParams.get('fetch');
+      const pageParam = url.searchParams.get('page'); // optional: specific page number (1-indexed)
+
+      // Basic validation
+      if (!targetUrl || !targetUrl.startsWith('http')) {
+          return new Response(JSON.stringify({ error: 'Invalid URL' }), {
+              status: 400,
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          });
+      }
+
+      try {
+          const controller = new AbortController();
+          const timeout = setTimeout(() => controller.abort(), 10000);
+
+          const response = await fetch(targetUrl, {
+              signal: controller.signal,
+              headers: {
+                  'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+                  'Accept': 'text/html,application/xhtml+xml,application/pdf,*/*',
+              }
+          });
+          clearTimeout(timeout);
+
+          if (!response.ok) {
+              return new Response(JSON.stringify({ error: `Source returned ${response.status}` }), {
+                  headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+              });
+          }
+
+          const contentType = (response.headers.get('Content-Type') || '').toLowerCase();
+          const isPdf = contentType.includes('application/pdf') || targetUrl.endsWith('.pdf');
+
+          if (isPdf) {
+              const buf = await response.arrayBuffer();
+              // 10 MB guard — skip oversized PDFs
+              if (buf.byteLength > 10 * 1024 * 1024) {
+                  return new Response(JSON.stringify({ error: 'PDF too large (>10 MB)' }), {
+                      headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+                  });
+              }
+
+              const pdf = await getDocumentProxy(new Uint8Array(buf));
+
+              let pages;
+              if (pageParam) {
+                  const pageNum = parseInt(pageParam, 10);
+                  if (isNaN(pageNum) || pageNum < 1 || pageNum > pdf.numPages) {
+                      return new Response(JSON.stringify({
+                          error: `Invalid page number. PDF has ${pdf.numPages} pages.`
+                      }), {
+                          status: 400,
+                          headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+                      });
+                  }
+                  pages = [pageNum];
+              }
+
+              const { text } = await extractPdfText(pdf, { mergePages: true, pages });
+              const content = text.replace(/\s+/g, ' ').trim().substring(0, 12000);
+
+              return new Response(JSON.stringify({
+                  content,
+                  pdf: true,
+                  totalPages: pdf.numPages,
+                  ...(pageParam ? { page: parseInt(pageParam, 10) } : {}),
+              }), {
+                  headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+              });
+          }
+
+          const html = await response.text();
+          const content = extractText(html);
+
+          return new Response(JSON.stringify({ content }), {
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          });
+
+      } catch (e) {
+          console.error('fetch handler error:', e.name, e.message, 'target:', targetUrl);
+          return new Response(JSON.stringify({
+              error: e.name === 'AbortError' ? 'Request timeout' : e.message,
+              errorType: e.name,
+          }), {
+              headers: { ...corsHeaders, 'Content-Type': 'application/json' }
+          });
+      }
+  }
+
+    if (request.method !== "POST") {
+      return new Response("Method not allowed", {
+        status: 405,
+        headers: cors
+      });
+    }
+
+    // ===== RATE LIMITING =====
+    const ip = request.headers.get("CF-Connecting-IP") || "unknown";
+    const now = Date.now();
+
+    let bucket = ipBuckets.get(ip);
+    if (!bucket || now - bucket.start > WINDOW_MS) {
+      bucket = { count: 0, start: now };
+    }
+
+    bucket.count++;
+    ipBuckets.set(ip, bucket);
+
+    if (bucket.count > RATE_LIMIT) {
+      return new Response("Too many requests", {
+        status: 429,
+        headers: cors
+      });
+    }
+    // =========================
+
+    // Forward to PublicAI
+    const upstream = await fetch(
+      "https://api.publicai.co/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          // IMPORTANT: matches your secret name
+          "Authorization": `Bearer ${env.publicai}`
+        },
+        body: request.body
+      }
+    );
+
+    const headers = new Headers(cors);
+    const ct = upstream.headers.get("content-type");
+    if (ct) headers.set("content-type", ct);
+
+    return new Response(upstream.body, {
+      status: upstream.status,
+      headers
+    });
+  }
+};
+
+function extractText(html) {
+  return html
+    .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '')
+    .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+    .replace(/<nav[^>]*>[\s\S]*?<\/nav>/gi, '')
+    .replace(/<header[^>]*>[\s\S]*?<\/header>/gi, '')
+    .replace(/<footer[^>]*>[\s\S]*?<\/footer>/gi, '')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/&nbsp;/g, ' ')
+    .replace(/&amp;/g, '&')
+    .replace(/&lt;/g, '<')
+    .replace(/&gt;/g, '>')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .substring(0, 12000);
+}
