@@ -12,15 +12,16 @@
 //
 // So the ready-now pages — the showcase grid and the held-works row alike — get
 // a small reserve of slots that general traffic cannot take. The argument for
-// it is what warm means: `warm.js` walks exactly this list, and a warm page's
-// discovery is 100% offline — it makes no upstream request at all, which is the
-// thing `MAX_CONCURRENT` exists to bound. **The reserve does not widen what
-// this server does to anyone else's API**: the per-host queues in `src/mw.js`
-// bound upstream concurrency globally and know nothing about how many
-// discoveries are in flight here. The worst case — a cold volume, where those
-// pages are not warm after all — is a couple more discoveries waiting on those
-// same per-host queues, which is bounded, small, and self-correcting the moment
-// the cache fills.
+// it is what warm means: the server walks exactly this list at boot
+// (`bootWarmTitles`, under WARM_ON_START), `warm.js` is the same walk by hand,
+// and a warm page's discovery is 100% offline — it makes no upstream request at
+// all, which is the thing `MAX_CONCURRENT` exists to bound. **The reserve does
+// not widen what this server does to anyone else's API**: the per-host queues
+// in `src/mw.js` bound upstream concurrency globally and know nothing about how
+// many discoveries are in flight here. The worst case — a cold volume, where
+// those pages are not warm after all — is a couple more discoveries waiting on
+// those same per-host queues, which is bounded, small, and self-correcting the
+// moment the cache fills.
 //
 // The reserve is finite on purpose. A showcase page is refused too, once even
 // the reserve is full: the busy page is an honest answer, and a lane with no
