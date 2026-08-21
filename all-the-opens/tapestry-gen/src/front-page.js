@@ -124,19 +124,18 @@ const HOLDER_SHOWCASE = [
   {
     title: 'The Night Watch',
     holder: 'rijks',
-    via: 'Linked Art + IIIF',
+    via: 'IIIF',
     adds: 'the Rijksmuseum’s record of the painting, merged row by row with the Wikipedia article’s facts',
   },
   {
     title: "Hours of Jeanne d'Evreux",
     holder: 'met',
-    via: 'Open Access API',
     adds: 'the Met’s record of the manuscript, and the door to its 210 images',
   },
   {
     title: 'Spinola Hours',
     holder: 'getty',
-    via: 'IIIF + JSON-LD',
+    via: 'IIIF',
     adds: 'the Getty’s record of the book of hours, and six more works by its illuminator',
   },
 ]
@@ -255,9 +254,12 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
  * differences a two-party page earns: the small-caps line names the
  * institution and the open standard its record travels by ("Wikipedia +"
  * would say nothing — every page on this site is Wikipedia plus someone;
- * the operator's call, 2026-08-20). `via` is HAND-WRITTEN per card and
- * must name the pipe the lane actually reads — the record surfaces are
- * documented per partner in CLAUDE.md's Key Files — because a standard a
+ * the operator's call, 2026-08-20). `via` is OPTIONAL and hand-written:
+ * it names only an open standard this site wants to demonstrate — IIIF
+ * and glTF today — and only where the lane actually speaks it (the record
+ * surfaces are documented per partner in CLAUDE.md's Key Files). A lane
+ * with no such standard shows the institution alone: the Met's own API is
+ * a fine pipe, but naming it would promote nothing, and a standard a
  * partner does not speak is exactly the false claim this site exists not
  * to make. The foot row names ONE friend, because having exactly one is
  * the point. `show held` rather than `show`, so the counts that pin the
@@ -268,7 +270,7 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 const holderCards = (held = HOLDER_SHOWCASE) =>
   held.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
-  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)} · ${escapeHtml(c.via)}</span>
+  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)}${c.via ? ` · ${escapeHtml(c.via)}` : ''}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>

@@ -629,10 +629,14 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   assert.deepEqual(ungroupedShowcaseTitles(), [])
   // The small-caps line names the institution and its pipe — "Wikipedia +"
   // said nothing, since every page here is Wikipedia plus someone.
-  assert.match(html, /Rijksmuseum · Linked Art \+ IIIF/)
-  assert.match(html, /The Met · Open Access API/)
-  assert.match(html, /J\. Paul Getty Museum · IIIF \+ JSON-LD/)
+  // via names only a standard the site wants to demonstrate (IIIF, glTF)
+  // and only where the lane speaks it — the Met's line is the institution
+  // alone, because its own API is not that.
+  assert.match(html, /Rijksmuseum · IIIF/)
+  assert.match(html, /<span class="dom">The Met<\/span>/)
+  assert.match(html, /J\. Paul Getty Museum · IIIF/)
   assert.doesNotMatch(html, /Wikipedia \+ /)
+  assert.doesNotMatch(html, /Linked Art|JSON-LD|Open Access API/)
   assert.match(html, /Natural history · glTF/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []
