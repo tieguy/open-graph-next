@@ -735,8 +735,9 @@ ${sourceLegend(inline).style}
 <div class="page"><div class="wrap">
   <p class="kicker"><a href="/">Help From Our Friends</a> · an experiment in visualizing open knowledge</p>
   <h1>Busy discovering, just now.</h1>
-  <p class="lede">The demo is busy discovering other pages right now — it fetches politely, a few at a
-    time. Try again in a moment.</p>
+  <p class="lede">The demo is busy responding to other users right now — being polite to our friends
+    means fetching only a few pages at a time. Try again in a moment, or try one of the
+    pre-rendered examples below.</p>
   <p class="ready"><span class="chip">ready now</span>These ${storedCount()} are already rendered and stored, so
     they are served from disk without waiting for the demo to be free:</p>
   <div class="grid">

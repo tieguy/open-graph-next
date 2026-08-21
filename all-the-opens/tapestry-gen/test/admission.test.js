@@ -65,7 +65,7 @@ test('the busy page links every page the reserve keeps room for', () => {
 
 test('the busy page still says why it is busy, and offers a way out', () => {
   const html = busyPage()
-  assert.match(html, /busy discovering other pages right now/)
+  assert.match(html, /busy responding to other users right now/)
   assert.match(html, /fetches politely, a few at a/)
   assert.ok(html.includes('href="/"'), 'the front page is one click away')
 })
@@ -83,6 +83,7 @@ test('every held-works title rides the reserve', () => {
 test('the busy page’s own readiness sentence counts the grid it shows', () => {
   const html = busyPage()
   assert.match(html, /These nine are already rendered and stored/)
+  assert.match(html, /being polite to our friends\s+means fetching only a few pages at a time/)
   // The group-row styles are front-page furniture; the busy page — built for
   // the moment there is no capacity to build anything — ships no unused rule.
   assert.doesNotMatch(html, /\.show-cat\{/)
