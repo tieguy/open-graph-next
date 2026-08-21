@@ -195,14 +195,15 @@ plus `holderShowcaseTitles()`, the two lists the front page renders its own
 cards from; a test per row asserts the walk and the cards agree, because drift
 would show up as a slow demo link rather than an error. `npm run warm [url]` is
 the same walk by hand — refill after an eviction sweep, warm a staging volume
-once, or verify a deploy serves pages. It exits non-zero if a page did not finish (`window.__tapdone`,
-the flag `streamClose` writes last — the site is slow, not broken), and reports
-**thin** pages separately: warm but provisional, rendered while a source was
-refusing us (next section). `WIKIMEDIA_UA_CONTACT` is a **Fly secret** (set to
-the operator), never in `fly.toml` — a fork must set its own. Guards for public
-exposure: `MAX_CONCURRENT` discoveries (default 4, then 503), `robots.txt`
-offering crawlers nothing but the front page (`src/robots.js`), and the
-per-host queues already bounding upstream traffic globally.
+once, or verify a deploy serves pages. It exits non-zero if a page did not
+finish (`window.__tapdone`, the flag `streamClose` writes last — the site is
+slow, not broken), and reports **thin** pages separately: warm but provisional,
+rendered while a source was refusing us (next section). `WIKIMEDIA_UA_CONTACT`
+is a **Fly secret** (set to the operator), never in `fly.toml` — a fork must
+set its own. Guards for public exposure: `MAX_CONCURRENT` discoveries (default
+4, then 503), `robots.txt` offering crawlers nothing but the front page
+(`src/robots.js`), and the per-host queues already bounding upstream traffic
+globally.
 
 ### The page cache (2026-08-10)
 
