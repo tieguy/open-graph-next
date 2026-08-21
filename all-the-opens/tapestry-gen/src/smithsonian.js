@@ -413,7 +413,7 @@ export function siSpecimenNumber(row) {
       /\bnumber$/i.test(i.label.trim()) &&
       !/^(accession|other)\b/i.test(i.label.trim()),
   )
-  return found ? `${found.label.trim().replace(/\s*number$/i, '')} ${found.content.trim()}` : null
+  return found ? `${found.label.trim().replace(/(?<!\s)\s*number$/i, '')} ${found.content.trim()}` : null
 }
 
 export function siScanEntryFrom(row, taxon) {

@@ -168,7 +168,7 @@ export async function fetchArticle(cacheDir, page) {
 export function sliceSectionWikitext(wikitext, sections, index, { stopAt } = {}) {
   if (String(index) === '0') {
     const end = sections.find((s) => s.byteoffset != null)?.byteoffset ?? wikitext.length
-    return wikitext.slice(0, end).replace(/\s+$/, '')
+    return wikitext.slice(0, end).trimEnd()
   }
   const at = sections.findIndex((s) => String(s.index) === String(index))
   const own = sections[at]
@@ -179,7 +179,7 @@ export function sliceSectionWikitext(wikitext, sections, index, { stopAt } = {})
     .find((s) => s.byteoffset != null && s.toclevel <= boundary)
   // parse&section=N returns the section without its trailing blank lines;
   // matching that exactly is what lets the slicer claim equivalence.
-  return wikitext.slice(own.byteoffset, next?.byteoffset ?? wikitext.length).replace(/\s+$/, '')
+  return wikitext.slice(own.byteoffset, next?.byteoffset ?? wikitext.length).trimEnd()
 }
 
 /**
@@ -422,7 +422,7 @@ const INFOBOX_STRIP = [
   /<sup[^>]*class="[^"]*\breference\b[^"]*"[\s\S]*?<\/sup>/gi,
   /<style[\s\S]*?<\/style>/gi,
   /<link[^>]*\/?>/gi,
-  /\s+srcset="[^"]*"/gi,
+  /(?<!\s)\s+srcset="[^"]*"/gi,
 ]
 
 /** An image URL as this page will serve it: scheme'd, no tracking params. */

@@ -10,7 +10,10 @@
 FROM node:22-slim
 WORKDIR /app
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+# --ignore-scripts: nothing in the tree needs a lifecycle script (the one
+# runtime dependency, m3api, is plain JS), so refusing to run them closes a
+# supply-chain path for free.
+RUN npm ci --omit=dev --ignore-scripts
 COPY src ./src
 COPY serve.js ./
 # The mount point must exist in the image; Fly mounts the volume over it.

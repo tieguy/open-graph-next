@@ -235,7 +235,7 @@ export function gettyRecordFrom(ld) {
     partner: 'getty',
     // The page URL ends with the P2582 value the fetch was addressed by —
     // the round-trip rule the other transforms keep.
-    id: href ? href.replace(/\/+$/, '').split('/').pop() : null,
+    id: href ? href.replace(/(?<!\/)\/+$/, '').split('/').pop() : null,
     title: nullIfEmpty(typeof ld.name === 'string' ? ld.name : null),
     creator: nullIfEmpty(typeof ld.creator?.[0]?.name === 'string' ? ld.creator[0].name : null),
     date: nullIfEmpty(typeof ld.temporal === 'string' ? ld.temporal : null),

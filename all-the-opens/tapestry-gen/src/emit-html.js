@@ -23,7 +23,7 @@ export function ogMeta({ title, description, path = '/', siteOrigin = '' }) {
   // A trailing slash on the origin would emit `https://host//wiki/…`, which
   // the server's route regex 404s — and the sibling SITE_HOME default DOES
   // end in a slash, so the copy mistake is one an operator will make.
-  siteOrigin = siteOrigin.replace(/\/+$/, '')
+  siteOrigin = siteOrigin.replace(/(?<!\/)\/+$/, '')
   // `path: null` is the busy page's case: it stands in for MANY urls, so a
   // canonical og:url would misdirect the share to the front page — it gets
   // the title, description and image, and no canonical claim.
@@ -622,8 +622,8 @@ function rightsDetail(entry) {
   // card the only detail IS the visible line ("Franz Kafka: copyrights on works
   // have expired"), so without this the panel opened by repeating, word for
   // word, the sentence sitting two lines above it.
-  const said = (work?.line ?? '').replace(/[.\s]+$/, '')
-  const detail = (work?.detail ?? []).filter((d) => d.replace(/[.\s]+$/, '') !== said)
+  const said = (work?.line ?? '').replace(/(?<![.\s])[.\s]+$/, '')
+  const detail = (work?.detail ?? []).filter((d) => d.replace(/(?<![.\s])[.\s]+$/, '') !== said)
   if (detail.length) {
     parts.push(
       `<p class="rd-work">${detail.map((d) => escapeHtml(d)).join(' ')} ` +
