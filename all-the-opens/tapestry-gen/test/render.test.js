@@ -194,6 +194,7 @@ test('the warmer and the front page read the same showcase list', () => {
   for (const title of showcaseTitles()) {
     const href = `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
     assert.ok(html.includes(`href="${href}"`), `front page links ${title}`)
+    assert.ok(bootWarmTitles().includes(title), `${title} rides the boot warm walk`)
   }
   assert.equal(showcaseTitles().length, (html.match(/<a class="show"/g) ?? []).length)
 })

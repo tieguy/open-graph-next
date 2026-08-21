@@ -69,9 +69,8 @@ test('warmAll walks every title and tallies failures and thinness', async (t) =>
   t.after(() => srv.close())
   const lines = []
   const out = await warmAll(base, ['Whole', 'Thin', 'Busy', 'Cut'], { log: (l) => lines.push(l) })
-  // warm.js's holder-flagship walk rewrites this exact phrase in its log
-  // wrapper; rewording it here must break that test, not silently regress
-  // the walk's announcement.
+  // The walk announces its size before walking — the operator's first
+  // signal that the right number of pages is about to be paid for.
   assert.match(lines[0], /warming \d+ pages at /)
   assert.equal(out.failed, 2)
   assert.equal(out.thin, 1)

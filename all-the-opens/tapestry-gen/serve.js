@@ -461,7 +461,8 @@ server.listen(PORT, '0.0.0.0', () => {
   // it grows without bound (~4 MB a page) and needs a ceiling — but a visitor
   // must never wait on housekeeping. Default 2 GB against a 3 GB volume.
   startSweeping(CACHE, { capBytes: Number(process.env.CACHE_MAX_MB ?? 2048) * 1024 * 1024 })
-  // The server warms its own showcase (WARM_ON_START — prod's fly.toml sets
+  // The server warms the front page's ready-now pages — the showcase and
+  // the held-works row, one list in bootWarmTitles (WARM_ON_START — prod's fly.toml sets
   // it; staging deliberately does not, and neither does local dev). This used
   // to be the deploy script's last step, `node warm.js` on the operator's
   // machine — meaning every deploy ended attached to somebody's shell, and a
@@ -471,7 +472,7 @@ server.listen(PORT, '0.0.0.0', () => {
   // traffic (src/warming.js), and a visitor arriving mid-warm outranks it at
   // the admission gate exactly as they outrank any other discovery in flight.
   // Idempotent by construction — a stored page replays in milliseconds — so a
-  // restart with a warm volume pays one local read per showcase page and
+  // restart with a warm volume pays one local read per warmed page and
   // touches nobody.
   if (process.env.WARM_ON_START) {
     warmAll(`http://127.0.0.1:${PORT}`, bootWarmTitles()).catch((e) =>
