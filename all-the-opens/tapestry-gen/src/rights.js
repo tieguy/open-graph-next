@@ -271,59 +271,71 @@ const qidOf = (b) => b?.value?.split('/').pop() ?? null
  *
  * @returns {Map<string, {work: Array, licenses: Array, creator: object|null, self: object|null}>}
  */
+/**
+ * Fold a row's work-level copyright status into the record. `seen` is keyed by
+ * (item, status, jurisdiction) so a status carrying two determination methods
+ * stays one statement: WDQS returns a row per qualifier combination, and
+ * counting rows would print the same jurisdiction on the card twice.
+ */
+function foldWorkStatus(rec, row, qid, seen) {
+  const cs = statusFromQid(qidOf(row.cs))
+  if (!cs) return false
+  const jurisdiction = row.jurisLabel?.value ?? null
+  const key = `${qid}|${cs.code}|${jurisdiction ?? ''}`
+  const prior = seen.get(key)
+  if (prior) {
+    // A second row for a statement we already have carries only a further
+    // determination method. Keep the first — the card shows one reason,
+    // and the fold is not a place to argue with ourselves.
+    if (!prior.how && row.howLabel?.value) prior.how = row.howLabel.value
+    return true
+  }
+  const stmt = { status: cs, jurisdiction, how: row.howLabel?.value ?? null }
+  seen.set(key, stmt)
+  rec.work.push(stmt)
+  return true
+}
+
+/** Fold a row's stated license, creator ruling and self-declared status. */
+function foldOtherClaims(rec, row) {
+  let touched = false
+
+  const lic = ccFromLabel(row.licLabel?.value)
+  if (lic && !rec.licenses.some((l) => l.code === lic.code)) {
+    rec.licenses.push(lic)
+    touched = true
+  }
+
+  const ccs = statusFromQid(qidOf(row.ccs))
+  if (ccs && !rec.creator) {
+    rec.creator = { status: ccs, qid: qidOf(row.creator), label: row.creatorLabel?.value ?? null }
+    touched = true
+  }
+
+  const self = statusFromQid(qidOf(row.self))
+  if (self && !rec.self) {
+    rec.self = { status: self }
+    touched = true
+  }
+
+  return touched
+}
+
 export function parseRightsRows(rows) {
   const out = new Map()
-  // Keyed by (status, jurisdiction) so a status carrying two determination
-  // methods stays one statement. WDQS returns a row per qualifier combination,
-  // and counting rows would print the same jurisdiction on the card twice.
   const seen = new Map()
 
   for (const row of rows) {
     const qid = qidOf(row.item)
     if (!qid) continue
     const rec = out.get(qid) ?? { work: [], licenses: [], creator: null, self: null }
-    let touched = false
-
-    const cs = statusFromQid(qidOf(row.cs))
-    if (cs) {
-      const jurisdiction = row.jurisLabel?.value ?? null
-      const key = `${qid}|${cs.code}|${jurisdiction ?? ''}`
-      const prior = seen.get(key)
-      if (prior) {
-        // A second row for a statement we already have carries only a further
-        // determination method. Keep the first — the card shows one reason,
-        // and the fold is not a place to argue with ourselves.
-        if (!prior.how && row.howLabel?.value) prior.how = row.howLabel.value
-      } else {
-        const stmt = { status: cs, jurisdiction, how: row.howLabel?.value ?? null }
-        seen.set(key, stmt)
-        rec.work.push(stmt)
-      }
-      touched = true
-    }
-
-    const lic = ccFromLabel(row.licLabel?.value)
-    if (lic && !rec.licenses.some((l) => l.code === lic.code)) {
-      rec.licenses.push(lic)
-      touched = true
-    }
-
-    const ccs = statusFromQid(qidOf(row.ccs))
-    if (ccs && !rec.creator) {
-      rec.creator = { status: ccs, qid: qidOf(row.creator), label: row.creatorLabel?.value ?? null }
-      touched = true
-    }
-
-    const self = statusFromQid(qidOf(row.self))
-    if (self && !rec.self) {
-      rec.self = { status: self }
-      touched = true
-    }
-
+    // Both folds run: `||` would skip the second where the first matched.
+    const work = foldWorkStatus(rec, row, qid, seen)
+    const other = foldOtherClaims(rec, row)
     // An item that matched no branch is not a record. Writing an empty one
     // would make "we asked and Wikidata said nothing" indistinguishable from
     // "this work is in copyright", which is the worst error available here.
-    if (touched) out.set(qid, rec)
+    if (work || other) out.set(qid, rec)
   }
   return out
 }
@@ -527,6 +539,112 @@ const sentenceList = (parts) =>
     : parts.join(' and ')
 
 /**
+ * The view for a record whose only recorded fact is that the question is open.
+ *
+ * "Not yet determined" is something somebody RECORDED, and it surfaces as the
+ * ? mark rather than as nothing (see STATUS). Only where it stands alone: the
+ * moment any real answer exists, the open question stays out of its way — an
+ * unknown beside an answer reads as doubt.
+ */
+function openQuestionView(qid, kind) {
+  const paulinaHref = paulinaUrl(qid, kind)
+  return {
+    marks: ['unknown'],
+    label: 'copyright not yet determined',
+    line: null,
+    detail: [
+      'Wikidata records this work’s copyright status as not yet determined — ' +
+        'someone looked, and wrote down that the question is open. ' +
+        'That is not a permission and not a restriction.',
+    ],
+    paulina: paulinaHref
+      ? { url: paulinaHref, label: 'Is it free where you are? — Paulina' }
+      : null,
+  }
+}
+
+/**
+ * Which glyphs. A stated license outranks a derived status when both exist and
+ * the license is at least as free: the license is a promise somebody made, the
+ * status is an inference about the law.
+ *
+ * **A creator-level status does get a mark**, and that is a deliberate call
+ * rather than an oversight. CopyClear's "copyrights on works have expired" is a
+ * ruling on a body of work, reached by people who do this on purpose and
+ * recorded in the graph for anyone to check — so a card showing one of that
+ * author's works may carry the mark. What it may not do is let the mark stand
+ * alone: whenever the answer came from the creator rather than from the work,
+ * `line` names whose status it is, so the mark is never read as a separate
+ * finding about this particular book.
+ */
+function marksFor({ lead, leadLicense, creator }) {
+  if (!leadLicense && !lead) return creator?.status.marks ?? []
+  if (leadLicense && (!lead || leadLicense.rank <= lead.status.rank)) return leadLicense.marks
+  return lead.status.marks
+}
+
+/**
+ * The visible line, or null. Two cases earn one, and both are cases where the
+ * glyph alone would say more than the graph does.
+ *
+ *  1. **The answers disagree** — public domain in one country, in copyright
+ *     in another. This is the finding the feature exists for.
+ *  2. **The only answer is free, but it names a jurisdiction.** This one was
+ *     added after looking at a real card. American Gothic is public domain in
+ *     countries whose terms run 70 years or less from the author's death, and
+ *     nowhere does Wikidata record the contrary US status — so the disagree
+ *     test found no conflict and the card rendered a bare public-domain mark
+ *     beside the Art Institute's name. Whoever read that would take it for a
+ *     worldwide answer. A status that came qualified must be shown qualified.
+ *
+ * A status with no jurisdiction at all is genuinely unqualified and gets no
+ * line: there is nothing to narrow.
+ *
+ * A creator-only answer gets NO visible line either. It used to get one, and on
+ * a card whose mark already says "public domain" a line reading "José Rizal:
+ * copyrights on works have expired" is the same fact in a second container —
+ * which is exactly how it read. The sentence still exists, in `detail`, one
+ * click away, where it keeps attributing the claim to the person it is actually
+ * about. A line survives only when it says something the mark cannot: which
+ * countries, or that a copy is lent rather than given.
+ */
+function jurisdictionLine(ranked, lead) {
+  const free = ranked.filter((w) => w.status.free)
+  const bound = ranked.filter((w) => !w.status.free)
+  if (free.length && bound.length) {
+    const boundWhere = where(bound)
+    return (
+      `${free[0].status.label}${inPlaces(where(free))} · ` +
+      `still in copyright${boundWhere ? inPlaces(boundWhere) : ' elsewhere'}`
+    )
+  }
+  if (lead?.jurisdiction) return `${lead.status.label} in ${where(lead.status.free ? free : bound)}`
+  return null
+}
+
+/**
+ * The fold: why anybody thinks so, and what is known about the author. This is
+ * the part a reader who wants to check the reasoning opens, and it is the part
+ * CopyClear's bots actually produced.
+ */
+function rightsDetail({ ranked, creator, leadLicense, work, label }) {
+  const detail = []
+  for (const w of ranked) {
+    if (!w.how) continue
+    const wherePhrase = jurisdictionPhrase(w.jurisdiction)
+    detail.push(`${w.status.label}${inPlaces(wherePhrase)} — determined by: ${w.how}.`)
+  }
+  if (creator) {
+    const who = creator.label ?? label ?? 'The author'
+    detail.push(`${who}: ${creator.status.label}.`)
+  }
+  if (leadLicense && !work.length) {
+    detail.push(`Wikidata records this work as released under ${leadLicense.label}.`)
+  }
+  return detail
+}
+
+/**
  * A record as the card renders it.
  *
  * The ordering contract: **the freest answer leads.** Where a work is public
@@ -547,26 +665,9 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   const licenses = rec.licenses ?? []
   const creator = rec.creator ?? rec.self ?? null
   if (!work.length && !licenses.length && !creator) {
-    // Nothing anybody KNOWS — but "not yet determined" is something somebody
-    // RECORDED, and since 2026-08-08 that surfaces as the ? mark instead of
-    // rendering as nothing (see STATUS). Only here, where it is the sole
-    // recorded fact: the moment any real answer exists, the open question
-    // stays out of its way — an unknown beside an answer reads as doubt.
-    if (!open.length) return null
-    const paulinaHref = paulinaUrl(qid, kind)
-    return {
-      marks: ['unknown'],
-      label: 'copyright not yet determined',
-      line: null,
-      detail: [
-        'Wikidata records this work’s copyright status as not yet determined — ' +
-          'someone looked, and wrote down that the question is open. ' +
-          'That is not a permission and not a restriction.',
-      ],
-      paulina: paulinaHref
-        ? { url: paulinaHref, label: 'Is it free where you are? — Paulina' }
-        : null,
-    }
+    // Nothing anybody KNOWS. An open question is still a record; nothing at
+    // all is not.
+    return open.length ? openQuestionView(qid, kind) : null
   }
 
   // Freest first, and stable within a rank so two runs of the same data render
@@ -575,24 +676,7 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
   const lead = ranked[0] ?? null
   const leadLicense = [...licenses].sort((a, b) => a.rank - b.rank)[0] ?? null
 
-  // Which glyphs. A stated license outranks a derived status when both exist
-  // and the license is at least as free: the license is a promise somebody
-  // made, the status is an inference about the law.
-  //
-  // **A creator-level status does get a mark**, and that is a deliberate call
-  // rather than an oversight. CopyClear's "copyrights on works have expired"
-  // is a ruling on a body of work, reached by people who do this on purpose and
-  // recorded in the graph for anyone to check — so a card showing one of that
-  // author's works may carry the mark. What it may not do is let the mark stand
-  // alone: whenever the answer came from the creator rather than from the work,
-  // `line` names whose status it is, so the mark is never read as a separate
-  // finding about this particular book.
-  const aboutThisThing = leadLicense || lead
-  const licenseWins = leadLicense && (!lead || leadLicense.rank <= lead.status.rank)
-  let marks
-  if (!aboutThisThing) marks = creator?.status.marks ?? []
-  else if (licenseWins) marks = leadLicense.marks
-  else marks = lead.status.marks
+  const marks = marksFor({ lead, leadLicense, creator })
 
   // For a creator-derived mark the label names whose ruling it is, because it
   // is now the only place a reader meets that attribution without clicking:
@@ -602,72 +686,16 @@ export function rightsView(rec, { qid, kind = 'work', label = null } = {}) {
     : null
   const shortLabel = leadLicense?.label ?? lead?.status.label ?? creatorLabel
 
-  // The line. Two cases earn it, and both are cases where the glyph alone
-  // would say more than the graph does.
-  //
-  //  1. **The answers disagree** — public domain in one country, in copyright
-  //     in another. This is the finding the feature exists for.
-  //  2. **The only answer is free, but it names a jurisdiction.** This one was
-  //     added after looking at a real card. American Gothic is public domain in
-  //     countries whose terms run 70 years or less from the author's death, and
-  //     nowhere does Wikidata record the contrary US status — so the disagree
-  //     test found no conflict and the card rendered a bare public-domain mark
-  //     beside the Art Institute's name. Whoever read that would take it for a
-  //     worldwide answer. A status that came qualified must be shown qualified.
-  //
-  // A status with no jurisdiction at all is genuinely unqualified and gets no
-  // line: there is nothing to narrow.
-  let line = null
-  const free = ranked.filter((w) => w.status.free)
-  const bound = ranked.filter((w) => !w.status.free)
-  if (free.length && bound.length) {
-    const freeWhere = where(free)
-    const boundWhere = where(bound)
-    line =
-      `${free[0].status.label}${inPlaces(freeWhere)} · ` +
-      `still in copyright${boundWhere ? inPlaces(boundWhere) : ' elsewhere'}`
-  } else if (lead?.jurisdiction) {
-    const leadWhere = where(lead.status.free ? free : bound)
-    line = `${lead.status.label} in ${leadWhere}`
-  }
-  // A creator-only answer gets NO visible line. It used to get one, and on a
-  // card whose mark already says "public domain" a line reading "José Rizal:
-  // copyrights on works have expired" is the same fact in a second container —
-  // which is exactly how it read. The sentence still exists, in `detail`, one
-  // click away, where it keeps attributing the claim to the person it is
-  // actually about. A line survives only when it says something the mark
-  // cannot: which countries, or that a copy is lent rather than given.
-
-  // The fold: why anybody thinks so, and what is known about the author. This
-  // is the part a reader who wants to check the reasoning opens, and it is the
-  // part CopyClear's bots actually produced.
-  const detail = []
-  for (const w of ranked) {
-    if (!w.how) continue
-    const wherePhrase = jurisdictionPhrase(w.jurisdiction)
-    detail.push(
-      `${w.status.label}${inPlaces(wherePhrase)} — determined by: ${w.how}.`,
-    )
-  }
-  if (creator) {
-    const who = creator.label ?? label ?? 'The author'
-    detail.push(`${who}: ${creator.status.label}.`)
-  }
-  if (leadLicense && !work.length) {
-    detail.push(`Wikidata records this work as released under ${leadLicense.label}.`)
-  }
-
   const paulinaHref = paulinaUrl(qid, kind)
+  const paulinaLabel =
+    kind === 'author'
+      ? 'Copyright status by country — Paulina'
+      : 'Is it free where you are? — Paulina'
   return {
     marks,
     label: shortLabel,
-    line,
-    detail,
-    paulina: paulinaHref
-      ? {
-          url: paulinaHref,
-          label: kind === 'author' ? 'Copyright status by country — Paulina' : 'Is it free where you are? — Paulina',
-        }
-      : null,
+    line: jurisdictionLine(ranked, lead),
+    detail: rightsDetail({ ranked, creator, leadLicense, work, label }),
+    paulina: paulinaHref ? { url: paulinaHref, label: paulinaLabel } : null,
   }
 }

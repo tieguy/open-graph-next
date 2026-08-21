@@ -311,6 +311,25 @@ export function applyVerdicts(itemMap, verdicts, itemClasses, itemsWithEnded = n
  *
  * @returns {Map<string, {met?, aic?, gbif?, inat?, coord?, lc?, eu?, iiif?}>}
  */
+/**
+ * Fold one WDQS row into the statement record for its item.
+ *
+ * `si` is the inventory number ONLY when the collection holding it is a
+ * Smithsonian one, collapsed here so everything downstream can treat it as an
+ * ordinary item-level identifier. Read separately, `siinv` is no such thing —
+ * the Rijksmuseum states P217 on its objects too, and a bare accession number
+ * belongs to whichever museum assigned it. Both come from this one row, so
+ * the pair cannot be crossed between two rows of the same item (one museum's
+ * collection with another's number).
+ */
+function foldStatementRow(cur, row) {
+  for (const v of VARS) if (row[v] && cur[v] == null) cur[v] = row[v].value
+  if (cur.si == null && row.sicoll && row.siinv && isSmithsonianCollection(row.sicoll.value)) {
+    cur.si = row.siinv.value
+    cur.siName = siCollectionName(row.sicoll.value)
+  }
+}
+
 export async function partnerStatements(qids) {
   const map = new Map()
   for (const group of chunk([...new Set(qids)].filter(Boolean), 100)) {
@@ -325,18 +344,7 @@ export async function partnerStatements(qids) {
       const qid = row.item?.value?.split('/').pop()
       if (!qid) continue
       const cur = map.get(qid) ?? {}
-      for (const v of VARS) if (row[v] && cur[v] == null) cur[v] = row[v].value
-      // `si` is the inventory number ONLY when the collection holding it is a
-      // Smithsonian one, collapsed here so everything downstream can treat it
-      // as an ordinary item-level identifier. Read separately, `siinv` is no
-      // such thing — the Rijksmuseum states P217 on its objects too, and a bare
-      // accession number belongs to whichever museum assigned it. Taken from
-      // this row, so the pair cannot be crossed between two rows of the same
-      // item (one museum's collection with another's number).
-      if (cur.si == null && row.sicoll && row.siinv && isSmithsonianCollection(row.sicoll.value)) {
-        cur.si = row.siinv.value
-        cur.siName = siCollectionName(row.sicoll.value)
-      }
+      foldStatementRow(cur, row)
       map.set(qid, cur)
     }
   }

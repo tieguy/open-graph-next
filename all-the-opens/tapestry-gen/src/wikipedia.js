@@ -542,6 +542,26 @@ export function articleBlocks(html, { notePrefix = null } = {}) {
  * target this page cannot honor — namespace links, `#CITEREF` biblio jumps —
  * are unwrapped rather than left to 404.
  */
+/** Tags kept as themselves, opening and closing. */
+const KEPT_INLINE = new Set(['b', 'i', 'cite', 'sub'])
+
+/**
+ * An opening `<a>` rewritten to the one form this page allows, or '' when the
+ * link goes somewhere the fragment will not carry. Returns null in that case
+ * too, so the caller knows whether the matching `</a>` should survive.
+ */
+function keptAnchor(tag, notePrefix) {
+  const href = /\shref="([^"]*)"/i.exec(tag)?.[1] ?? ''
+  const wiki = /^\/wiki\/([^"#]+)/.exec(href)
+  if (wiki && !decodeEntities(wiki[1]).includes(':')) return `<a class="wl" href="${href}">`
+  const note = notePrefix && /^#cite_note-(.+)$/.exec(href)
+  if (note) return `<a href="#${notePrefix}-note-${note[1]}">`
+  if (/^https?:\/\//.test(href)) {
+    return `<a class="ext" href="${href}" target="_blank" rel="noopener">`
+  }
+  return null
+}
+
 export function sanitizeFragment(html, { notePrefix = null } = {}) {
   let aKept = false
   // Elements whose CONTENT must go too: MediaWiki injects the CS1 stylesheet
@@ -557,30 +577,15 @@ export function sanitizeFragment(html, { notePrefix = null } = {}) {
         aKept = false
         return kept ? '</a>' : ''
       }
-      const href = /\shref="([^"]*)"/i.exec(tag)?.[1] ?? ''
-      const wiki = /^\/wiki\/([^"#]+)/.exec(href)
-      if (wiki && !decodeEntities(wiki[1]).includes(':')) {
-        aKept = true
-        return `<a class="wl" href="${href}">`
-      }
-      const note = notePrefix && /^#cite_note-(.+)$/.exec(href)
-      if (note) {
-        aKept = true
-        return `<a href="#${notePrefix}-note-${note[1]}">`
-      }
-      if (/^https?:\/\//.test(href)) {
-        aKept = true
-        return `<a class="ext" href="${href}" target="_blank" rel="noopener">`
-      }
-      aKept = false
-      return ''
+      const opened = keptAnchor(tag, notePrefix)
+      aKept = opened !== null
+      return opened ?? ''
     }
     if (name === 'sup') {
       if (closing) return '</sup>'
       return /class="[^"]*\breference\b/.test(tag) ? '<sup class="ref">' : '<sup>'
     }
-    if (name === 'b' || name === 'i' || name === 'cite' || name === 'sub')
-      return closing ? `</${name}>` : `<${name}>`
+    if (KEPT_INLINE.has(name)) return closing ? `</${name}>` : `<${name}>`
     return ''
   })
 }
