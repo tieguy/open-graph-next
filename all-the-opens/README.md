@@ -14,14 +14,17 @@ Open `tapestry-gen/demo/apollo-11.html` (self-contained) in a browser, or genera
 
 ```
 cd tapestry-gen
-WIKIMEDIA_UA_CONTACT=you@example.com node spike.js "Any Article Title"
+cp .env.example .env      # your own WIKIMEDIA_UA_CONTACT, plus any partner API keys
+npm run spike -- "Any Article Title"
 ```
 
 Or watch it happen live — the article streams in first, the ecosystem follows as each source answers:
 
 ```
-WIKIMEDIA_UA_CONTACT=you@example.com npm run serve   # then /wiki/Any_Article_Title
+npm run serve   # then /wiki/Any_Article_Title
 ```
+
+`.env` is gitignored and the npm scripts load it. A clone without one still runs: the keyed lookups skip, and those cards are missing. `WIKIMEDIA_UA_CONTACT` has no default — it identifies whoever runs the code to the Wikimedia Foundation, so it must be your own address.
 
 ## Inspiration
 

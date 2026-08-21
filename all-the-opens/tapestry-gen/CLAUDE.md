@@ -348,7 +348,7 @@ withheld. It differs from production exactly where staging should: its own
 start), no self-warming (`WARM_ON_START` is deliberately absent from
 `fly.staging.toml` — nobody to keep warm for, and warming per review round's
 deploy would spend partner API capacity to save no reader any time; warm by
-hand ONCE on a fresh volume with `node warm.js https://staging.friendsof.wiki`
+hand ONCE on a fresh volume with `npm run warm https://staging.friendsof.wiki`
 and the volume keeps it), and `ROBOTS_DISALLOW_ALL=1`, which flips
 `robots.txt` to `Disallow: /` so no staging render is ever indexed.
 `WIKIMEDIA_UA_CONTACT` is a separate secret on the staging app, same
@@ -362,6 +362,27 @@ printenv` — piping into `fly secrets set` on staging, and verifying by
 digest match in `fly secrets list` (the digest hashes the value). Deploying
 to staging never touches production; promoting is the ordinary
 `npm run deploy`, a separate decision.
+
+### Secrets: the same names locally and on Fly
+
+**A working copy keeps its identity and its partner keys in `.env`.** The three
+npm scripts that run this code — `spike`, `serve`, `warm` — invoke `node
+--env-file-if-exists=.env`, so a clone with no `.env` still runs and the keyed
+lookups skip, exactly as they do when a key is absent from the environment.
+`.env.example` is the committed template and names what a working copy has
+to supply: `WIKIMEDIA_UA_CONTACT` (no default, ever — see Wikimedia compliance) plus
+`SMITHSONIAN_API_KEY`, `DPLA_API_KEY` and `EUROPEANA_API_KEY`. Production and
+staging carry **the same names** as Fly secrets, which is what makes a local run
+and a deployed one comparable: a page that renders sparser locally is a missing
+key, not a code difference. Start with `cp .env.example .env`.
+
+**`.env` is listed in the repo-root `.gitignore` and in this directory's
+`.dockerignore`, and the second is not redundant.** The Dockerfile copies only
+`package*.json`, `src/` and `serve.js`, so `.env` cannot reach the image —
+but `flyctl deploy` uploads the whole build context to the remote builder, so an
+unlisted `.env` leaves this machine even though nothing would have run it. The
+image gets its values from Fly secrets at runtime; the build context has no
+business carrying them.
 
 **Nothing may touch the network before `server.listen()`.** The source icons
 used to be fetched at startup — fifteen hosts, serial, at module top level — on
@@ -907,7 +928,7 @@ the ones already wired. What each one actually offers, and what we now do:
 | GBIF | per-record `license`, but mixed | words only, corrected (see below) |
 | OpenStreetMap | ODbL | words only — not a CC license, no glyph exists |
 | arXiv | **nothing** | genuine dead end, see below |
-| Smithsonian | n/a | no lookup builds cards; visibility panel only |
+| Smithsonian | `usage.access` on each media record — `CC0`, or nothing | read (`siRights`): CC0 only, and any other value gets no mark |
 | DigitalNZ | `usage` array (plain-English capability words, not a URI/slug) | `All rights reserved` read via `ccFromUri`'s existing InC branch; `Unknown` gets the ? mark (honest-unknowns rule above); the fully-open combination words only, same stance as GBIF/OSM below — LUI-145, verified against live responses 2026-08-08, see `src/digitalnz.js` |
 
 The Rijksmuseum trap is the one to remember, because the record hands you the
@@ -1779,7 +1800,8 @@ per-host queues.
 - **`WIKIMEDIA_UA_CONTACT` must be set** or `userAgent()` throws at startup. There
   is no default on purpose: anyone can clone this, and a baked-in address would
   attribute their traffic to someone who never ran it. Set it to *your own*
-  address.
+  address — locally in `.env` (see Secrets: the same names locally and on Fly),
+  and as a Fly secret on each deployed app.
 - `maxlag=5` rides every Action API request (an m3api default param in
   `src/mw.js`) — nothing here is a human waiting on a response, so this batch
   traffic yields to interactive users. `withMaxlag()` remains for the

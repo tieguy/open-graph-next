@@ -14,20 +14,29 @@ every Wikimedia request (see `src/mw.js`). Node 22+ (uses built-in `fetch` for
 the non-MediaWiki sources).
 
 ```
-WIKIMEDIA_UA_CONTACT=you@example.com npm run serve   # the website, localhost:8787/wiki/<Article>
-WIKIMEDIA_UA_CONTACT=you@example.com npm run spike "Angkor Wat"   # one self-contained HTML file
-npm test                                             # no network
-npm run deploy                                       # fly deploy, then re-warm the showcase pages
+cp .env.example .env                  # then fill it in — see below
+npm run serve                         # the website, localhost:8787/wiki/<Article>
+npm run spike -- "Angkor Wat"         # one self-contained HTML file
+npm test                              # no network
+npm run deploy                        # fly deploy
 ```
 
-`deploy` is two steps on purpose: a deploy replaces the machine and takes its
-cache with it, so `warm.js` walks the front page's six showcase links once
-(serially) before anyone else has to. `npm run warm [url]` re-runs that alone.
+`.env` holds this working copy's identity and its partner API keys. It is
+gitignored, and `serve`, `spike` and `warm` load it with `node
+--env-file-if-exists=.env`, so a clone without one still runs — the keyed
+lookups simply skip and those cards are missing. `.env.example` names what a
+working copy has to supply; the deployed apps carry the same names as Fly
+secrets.
 
 `WIKIMEDIA_UA_CONTACT` has no default on purpose: anyone can clone this, and a
 baked-in address would attribute their traffic to someone who never ran it.
 Set it to your own. See `CLAUDE.md` for the full Wikimedia compliance rules —
 they are not optional.
+
+`deploy` is one step: the server warms the front page's ready-now pages itself,
+after it starts listening, walking them through its own front door as ordinary
+traffic. `npm run warm [url]` is that same walk by hand — to refill after a
+cache eviction, or to check that a deploy serves pages.
 
 ## The two entry points
 

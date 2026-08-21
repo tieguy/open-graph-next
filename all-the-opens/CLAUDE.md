@@ -26,10 +26,15 @@ Node 22+, one npm dependency (m3api, for MediaWiki requests — see
 
 ## Commands
 
-- `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com npm run spike "Article Title"` —
+- `cd tapestry-gen && cp .env.example .env` — first run only. `.env` holds this
+  working copy's `WIKIMEDIA_UA_CONTACT` and partner API keys; it is gitignored,
+  and the `spike`/`serve`/`warm` scripts load it with
+  `node --env-file-if-exists=.env`. Without it a clone still runs and the keyed
+  lookups skip. The deployed apps carry the same names as Fly secrets.
+- `cd tapestry-gen && npm run spike -- "Article Title"` —
   build a self-contained render for any article.
 - `cd tapestry-gen && npm test` — the test suite (pure functions; no network).
-- `cd tapestry-gen && WIKIMEDIA_UA_CONTACT=you@example.com npm run serve` —
+- `cd tapestry-gen && npm run serve` —
   streaming server: `http://localhost:8787/wiki/<Article_Title>` renders the
   spine in ~1s and streams enrichment in behind it.
 - `cd tapestry-gen && npm run deploy` — Fly deploy to **production**

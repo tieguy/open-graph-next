@@ -84,7 +84,12 @@ it.
    (and `keyOptional: true` only if the API *verifiably* answers keyless) in
    the §2b spec; other shapes read `process.env` where the fetch is made. If
    a key is required, the lookup skips silently without one — say so in
-   CLAUDE.md's notes on the partner.
+   CLAUDE.md's notes on the partner. A keyed partner also adds its variable to
+   `tapestry-gen/.env.example`, commented, with the URL that issues the key:
+   that file is the only list of what a working copy has to supply, and the
+   deployed apps carry the same names as Fly secrets. Never commit the key
+   itself — `.env` is gitignored and dockerignored (see CLAUDE.md's secrets
+   section for why both).
    > Why: keyless-skip is graceful degradation, never a policy against free
    > keys — DPLA, Europeana, Smithsonian and DigitalNZ all run keyed in
    > production.
