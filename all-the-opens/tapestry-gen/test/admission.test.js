@@ -54,12 +54,13 @@ test('only the first letter is case-folded, as on enwiki', () => {
 // the bare sentence it replaced.
 test('the busy page links every page the reserve keeps room for', () => {
   const html = busyPage()
-  for (const title of showcaseTitles()) {
+  for (const title of [...showcaseTitles(), ...holderShowcaseTitles()]) {
     assert.ok(isShowcase(title), `${title} rides the reserve`)
     const href = `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
     assert.ok(html.includes(`href="${href}"`), `busy page links ${title}`)
   }
   assert.equal(showcaseTitles().length, (html.match(/<a class="show"/g) ?? []).length)
+  assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
 })
 
 test('the busy page still says why it is busy, and offers a way out', () => {
@@ -81,7 +82,7 @@ test('every held-works title rides the reserve', () => {
 
 test('the busy page’s own readiness sentence counts the grid it shows', () => {
   const html = busyPage()
-  assert.match(html, /These six are already rendered and stored/)
+  assert.match(html, /These nine are already rendered and stored/)
   // The group-row styles are front-page furniture; the busy page — built for
   // the moment there is no capacity to build anything — ships no unused rule.
   assert.doesNotMatch(html, /\.show-cat\{/)

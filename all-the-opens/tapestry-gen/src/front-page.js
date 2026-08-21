@@ -36,19 +36,21 @@ const OG_DESCRIPTION =
 // cannot catch drift. Each row deliberately OMITS the partner named in
 // `adds` — "other friends" means the ones the headline did not already say.
 // The count, spelled, for the one sentence that still prints a cache
-// promise: the busy page's ("These six are already rendered and stored"),
-// whose grid is the showcase's. The front page's grid line names no number
-// and makes no cache claim (the operator's call, 2026-08-20: the promise is
-// good — the warm walk and the admission reserve are unchanged — it just
-// does not need stating there). Extend this table when a card joins a
-// list: past its end the count degrades to digits, and the one guard left
-// is the busy-page test pinning the literal "These six". The number is
-// also hand-spelled where no test derives it — the .ready CSS comment
-// below ("six-card grid"), CLAUDE.md's busy-page paragraph (the printed
-// sentence itself) and its warming and reserve sections (the walk's nine,
-// six plus three) — update all of them in the same edit as a card change.
+// promise: the busy page's ("These nine are already rendered and stored"),
+// over the same nine cards the front page shows. The front page's grid line
+// names no number and makes no cache claim (the operator's call,
+// 2026-08-20: the promise is good — the warm walk and the admission
+// reserve are unchanged — it just does not need stating there). Extend
+// this table when a card joins a list: past its end the count degrades to
+// digits, and the one guard left is the busy-page test pinning the literal
+// "These nine". The number is also hand-spelled where no test derives it —
+// CLAUDE.md's busy-page paragraph (the printed sentence itself) and its
+// warming and reserve sections (the walk's nine, six plus three) — update
+// them in the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
-const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
+const storedCount = () =>
+  COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
+  String(SHOWCASE.length + HOLDER_SHOWCASE.length)
 
 const SHOWCASE = [
   {
@@ -409,7 +411,7 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
    variety and claims nothing about caching (the operator's call,
    2026-08-20 — the promise is real, the warm walk and reserve back it,
    the sentence just does not state it); on the busy page it still wears
-   the manila chip and prints the cache promise over the six-card grid,
+   the manila chip and prints the cache promise over its nine-card grid,
    and CARD_STYLE keeps the chip rule for exactly that. */
 ${CARD_STYLE}
 
@@ -654,11 +656,14 @@ ${friends}
  *
  * It used to be one sentence of system-ui on a blank page — true, and a dead
  * end: a reader who wanted to see what this demo does was told to come back
- * later by a site that had a showcase of finished pages sitting warm on disk.
- * It now shows the same cards as the front page, under a "ready now" offer
- * only this page prints — and that offer is not decoration: a stored render is replayed from disk
- * before the concurrency gate is consulted at all (`src/page-cache.js`), so
- * these links do not queue behind the discoveries that caused this page. For
+ * later by a site that had a showcase of finished pages sitting warm on
+ * disk. It now shows the same nine cards as the front page — the operator's
+ * line edit, 2026-08-21, widened its grid from the showcase six so the
+ * sentence "These nine" counts what it points at — under a "ready now" offer
+ * only this page prints. That offer is not decoration: a stored render is
+ * replayed from disk before the concurrency gate is consulted at all
+ * (`src/page-cache.js`), so these links do not queue behind the discoveries
+ * that caused this page. For
  * the windows where the showcase is genuinely cold — a fresh volume, the
  * minutes after a deploy — `src/admission.js` keeps a reserve of slots for
  * exactly these pages, so the offer holds there too. A busy page linking to
@@ -732,10 +737,11 @@ ${sourceLegend(inline).style}
   <h1>Busy discovering, just now.</h1>
   <p class="lede">The demo is busy discovering other pages right now — it fetches politely, a few at a
     time. Try again in a moment.</p>
-  <p class="ready"><span class="chip">ready now</span>These ${showcaseCount()} are already rendered and stored, so
+  <p class="ready"><span class="chip">ready now</span>These ${storedCount()} are already rendered and stored, so
     they are served from disk without waiting for the demo to be free:</p>
   <div class="grid">
 ${showcaseCards()}
+${holderCards()}
   </div>
   <p class="after">Everything else — who the friends are, what each one gives, and how any of this
     works — is on <a href="/">the front page</a>, which needs no discovery at all.</p>
