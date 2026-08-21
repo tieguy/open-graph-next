@@ -44,9 +44,10 @@ const OG_DESCRIPTION =
 // this table when a card joins a list: past its end the count degrades to
 // digits, and the one guard left is the busy-page test pinning the literal
 // "These nine". The number is also hand-spelled where no test derives it —
-// CLAUDE.md's busy-page paragraph (the printed sentence itself) and its
-// warming and reserve sections (the walk's nine, six plus three) — update
-// them in the same edit as a card change.
+// the .ready CSS comment below ("nine-card grid"), the busyPage docblock
+// ("the same nine cards"), CLAUDE.md's busy-page paragraph (the printed
+// sentence itself) and its warming and reserve sections (the walk's nine,
+// six plus three) — update all of them in the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const storedCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
@@ -229,10 +230,10 @@ const friendIcons = (slugs) => {
 export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
 
 /**
- * The showcase as cards. Written once because two pages show the same grid:
- * the front page and the busy page (below). Only the busy page prints a
- * cache promise over them — so an edit to a card's wording reaches both
- * pages, deliberately.
+ * The showcase as cards. Written once because two pages show the same nine
+ * cards: the front page (in its grouped grid) and the busy page (flat).
+ * Only the busy page prints a cache promise over them — so an edit to a
+ * card's wording reaches both pages, deliberately.
  */
 const showcaseCard = (c) => `<a class="show" href="${wikiHref(c.title)}">
   <span class="dom">${escapeHtml(c.domain)}</span>
@@ -658,17 +659,16 @@ ${friends}
  * end: a reader who wanted to see what this demo does was told to come back
  * later by a site that had a showcase of finished pages sitting warm on
  * disk. It now shows the same nine cards as the front page — the operator's
- * line edit, 2026-08-21, widened its grid from the showcase six so the
+ * line edit, 2026-08-20, widened its grid from the showcase six so the
  * sentence "These nine" counts what it points at — under a "ready now" offer
  * only this page prints. That offer is not decoration: a stored render is
  * replayed from disk before the concurrency gate is consulted at all
  * (`src/page-cache.js`), so these links do not queue behind the discoveries
- * that caused this page. For
- * the windows where the showcase is genuinely cold — a fresh volume, the
- * minutes after a deploy — `src/admission.js` keeps a reserve of slots for
- * exactly these pages, so the offer holds there too. A busy page linking to
- * pages that would also answer 503 would be worse than the dead end it
- * replaced.
+ * that caused this page. For the windows where the showcase is genuinely
+ * cold — a fresh volume, the minutes after a deploy — `src/admission.js`
+ * keeps a reserve of slots for exactly these pages, so the offer holds there
+ * too. A busy page linking to pages that would also answer 503 would be
+ * worse than the dead end it replaced.
  *
  * Rendered once at startup, like the front page: the moment this page is
  * needed is the moment the server has no capacity to build anything.

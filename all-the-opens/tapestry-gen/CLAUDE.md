@@ -279,7 +279,7 @@ startup (the moment it is needed is the moment there is no capacity to build
 anything), sharing all nine cards and their CSS with the front page; the busy
 page alone wears the ready-now chip, and it is the one place a cache promise is
 printed — "These nine are already rendered and stored", over the same nine
-cards the front page shows (the operator's line edit, 2026-08-21, widened this
+cards the front page shows (the operator's line edit, 2026-08-20, widened this
 grid from the showcase six so the count points at what it counts). The front
 page's grid line names no number and makes no cache claim (the operator's call,
 2026-08-20: the promise is good, it just does not need stating there). A busy

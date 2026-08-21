@@ -70,10 +70,10 @@ test('the busy page still says why it is busy, and offers a way out', () => {
   assert.ok(html.includes('href="/"'), 'the front page is one click away')
 })
 
-// The held-works cards make the same ready-now promise, so they ride the
-// same reserve — asserted per row, mirroring the boot-walk pins in
-// render.test.js. They are deliberately NOT on the busy page, whose grid is
-// the showcase's; only the reserve claim is theirs to pass here.
+// The held works ride the reserve and appear on the busy page like every
+// other card (the linking test above walks all nine); this test isolates
+// the reserve claim per row, mirroring the boot-walk pins in
+// render.test.js.
 test('every held-works title rides the reserve', () => {
   for (const title of holderShowcaseTitles()) {
     assert.ok(isShowcase(title), `${title} rides the reserve`)
