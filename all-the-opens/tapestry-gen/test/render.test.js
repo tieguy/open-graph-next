@@ -614,8 +614,7 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,\s+and the open institutions and technologies they build on:/)
   assert.doesNotMatch(html, /already rendered and (cached|stored)/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
-  // Three group rows, reading aids like the friends list's — and the
-  // two-party fact is the Art group's own note.
+  // Three group rows, reading aids like the friends list's.
   // Group rows are <p>, never headings: the hero's outline runs h1 straight
   // to the FAQ's h2, and a heading here would sit at no level.
   for (const g of [...GROUP_ORDER, 'Art']) {
@@ -628,8 +627,6 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   // Every showcase card names a group in GROUP_ORDER — a card outside the
   // list would silently fall out of the grid.
   assert.deepEqual(ungroupedShowcaseTitles(), [])
-  // The small-caps line names the institution and its pipe — "Wikipedia +"
-  // said nothing, since every page here is Wikipedia plus someone.
   // The small-caps line is the institution alone; the standards the site
   // demonstrates (IIIF, glTF) live in the adds prose, per the operator's
   // line edits — and only where the lane speaks them (the Met's line names
@@ -656,10 +653,9 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   }
 })
 
-test('a group no card claims renders nothing — heading, note and all', () => {
-  // The Art group's absence must take its note with it: a sentence claiming
-  // "each of these articles" over zero cards would be the orphan the guard
-  // exists to prevent.
+test('a group no card claims renders nothing, heading included', () => {
+  // The guard keeps an empty group from leaving a bare heading behind —
+  // and if a note ever returns to a group, it must ride the same guard.
   const none = groupedShowcase([], [])
   assert.equal(none, '')
   const artless = groupedShowcase(undefined, [])

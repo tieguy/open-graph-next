@@ -85,5 +85,4 @@ test('the busy page’s own readiness sentence counts the grid it shows', () => 
   // The group-row styles are front-page furniture; the busy page — built for
   // the moment there is no capacity to build anything — ships no unused rule.
   assert.doesNotMatch(html, /\.show-cat\{/)
-  assert.doesNotMatch(html, /\.show-note\{/)
 })

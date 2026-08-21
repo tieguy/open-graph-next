@@ -267,18 +267,17 @@ const holderCards = (held = HOLDER_SHOWCASE) =>
 
 // The grid's reading order: two showcase groups, then the Art group — the
 // held works. Group rows are reading aids exactly like the friends list's
-// below; the two-party fact is the Art group's own note, because that is
-// the group it is true of. A test asserts every SHOWCASE entry names a
-// group in this list, so a card cannot silently fall out of the grid.
+// below. A test asserts every SHOWCASE entry names a group in this list,
+// so a card cannot silently fall out of the grid.
 export const GROUP_ORDER = ['History and the public record', 'Science and the living world']
 export const ungroupedShowcaseTitles = () =>
   SHOWCASE.filter((c) => !GROUP_ORDER.includes(c.group)).map((c) => c.title)
 // Group rows are <p>, not headings: they are reading aids inside the hero,
 // and a heading here would sit at no level — the page's outline runs h1
 // (the masthead) straight to the FAQ's h2. A group no card claims renders
-// nothing, heading included — the Art group too. The list
-// parameters exist for the test that pins exactly that; the page always
-// renders the real lists.
+// nothing, heading included — the Art group too. The list parameters exist
+// for the test that pins exactly that; the page always renders the real
+// lists.
 export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
   [
     ...GROUP_ORDER.map((g) => {
@@ -655,9 +654,9 @@ ${friends}
  *
  * It used to be one sentence of system-ui on a blank page — true, and a dead
  * end: a reader who wanted to see what this demo does was told to come back
- * later by a site that had a showcase of finished pages sitting warm on disk. It now
- * makes the same "ready now" offer the front page makes, with the same cards,
- * and that offer is not decoration: a stored render is replayed from disk
+ * later by a site that had a showcase of finished pages sitting warm on disk.
+ * It now shows the same cards as the front page, under a "ready now" offer
+ * only this page prints — and that offer is not decoration: a stored render is replayed from disk
  * before the concurrency gate is consulted at all (`src/page-cache.js`), so
  * these links do not queue behind the discoveries that caused this page. For
  * the windows where the showcase is genuinely cold — a fresh volume, the
