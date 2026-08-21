@@ -71,7 +71,7 @@ test('the busy page still says why it is busy, and offers a way out', () => {
 })
 
 // The held works ride the reserve and appear on the busy page like every
-// other card (the linking test above walks all nine); this test isolates
+// other card (the linking test above walks every card); this test isolates
 // the reserve claim per row, mirroring the boot-walk pins in
 // render.test.js.
 test('every held-works title rides the reserve', () => {

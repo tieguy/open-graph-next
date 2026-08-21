@@ -43,13 +43,14 @@ const OG_DESCRIPTION =
 // reserve are unchanged — it just does not need stating there). Extend
 // this table when a card joins a list: past its end the count degrades to
 // digits, and the one guard left is the busy-page test pinning the literal
-// "These nine". The number is also hand-spelled where no test derives it —
-// twice in this very comment, in the .ready CSS comment below ("nine-card
-// grid"), in the showcaseCard docblock ("two pages show the same nine
-// cards"), in the busyPage docblock ("shows the same nine cards as the
-// front page"), and in CLAUDE.md's busy-page paragraph (the printed
-// sentence itself) and its warming and reserve sections (the walk's nine,
-// six plus three) — update all of them in the same edit as a card change.
+// "These nine". The number is also hand-spelled in prose no test derives —
+// in this comment's own quotations, the .ready CSS comment below
+// ("nine-card grid"), the showcaseCard docblock ("two pages show the same
+// nine cards"), the busyPage docblock ("shows the same nine cards as the
+// front page"), and CLAUDE.md's busy-page paragraph (the printed sentence
+// itself), warming section ("walks the nine pages", "nine local replays")
+// and reserve section ("the nine ready-now titles") — update every one in
+// the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const storedCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
