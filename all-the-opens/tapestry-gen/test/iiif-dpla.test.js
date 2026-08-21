@@ -174,6 +174,43 @@ test('the object page comes from metadata rather than looping back to the manife
   assert.equal(iiifHomepage(accession), null)
 })
 
+// KMSKA Antwerp's v2 attribution, verbatim from the live manifest for object
+// 34343, fetched 2026-08-21. Presentation 2 has no `provider` field, so the
+// museum links its own name inside the prose instead — and in front of that
+// name sits a machine-generated run of licence codes and repeated collection
+// strings, which is what a reader saw before the anchor was read.
+const KMSKA_ATTRIBUTION = "CC0, CC0, Public domain, Koninklijk Museum voor Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap, Koninklijk Museum voor Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap, Koninklijk Museum voor Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap, Koninklijk Museum voor Schone Kunsten Antwerpen - Collectie Vlaamse Gemeenschap<p><a href=\"http://creativecommons.org/publicdomain/mark/1.0/\"><img src=\"https://licensebuttons.net/p/mark/1.0/88x31.png\"/></a></p><a href=\"https://kmska.be/en\">Royal Museum of Fine Arts Antwerp - Flemish Community</a><br>The jpg files of public domain artworks are downloadable in high resolution through the KMSKA website. Requesting images can be done through the contact form at <a href=\"https://kmska.be/en/contact\">kmska.be/en/contact</a>.</p>"
+
+test('a museum that links its own name in HTML is credited by that name', () => {
+  const m = { '@context': 'http://iiif.io/api/presentation/2/context.json', attribution: [{ '@language': 'en', '@value': KMSKA_ATTRIBUTION }] }
+  assert.equal(iiifCredit(m), 'Royal Museum of Fine Arts Antwerp - Flemish Community')
+})
+
+test('a licence badge and a bare domain are never mistaken for the institution', () => {
+  // The Creative Commons badge is the first anchor in the blob above and the
+  // museum's contact URL the last; the name between them is the credit.
+  const between = {
+    attribution:
+      '<a href="http://creativecommons.org/publicdomain/mark/1.0/"><img src="x"/></a>' +
+      '<a href="https://example.org/en">Example Museum of Fine Arts</a>' +
+      '<a href="https://example.org/contact">example.org/contact</a>',
+  }
+  assert.equal(iiifCredit(between), 'Example Museum of Fine Arts')
+  // A badge alone names nobody, and there is no prose behind it to fall back to.
+  const badgeOnly = { attribution: '<p><a href="http://creativecommons.org/publicdomain/mark/1.0/"><img src="x"/></a></p>' }
+  assert.equal(iiifCredit(badgeOnly), null)
+  // No anchor names an institution, so the publisher's own text stands rather
+  // than being thrown away — the same contract as an attribution with no link.
+  const domainOnly = { attribution: '<a href="https://example.org/contact">example.org/contact</a>' }
+  assert.equal(iiifCredit(domainOnly), 'example.org/contact')
+})
+
+test('an attribution with no link is credited exactly as it reads', () => {
+  // The v2 fixture above is this shape, and must not change.
+  const notice = { attribution: '<span>\u00a9 The Library of Trinity College Dublin</span>' }
+  assert.equal(iiifCredit(notice), '\u00a9 The Library of Trinity College Dublin')
+})
+
 test('the blanket Smithsonian terms URL is not read as an open licence', () => {
   assert.equal(iiifEntryFrom(SHARED_CANVAS, SHARED_CANVAS['@id'], null).rights.copy, null)
 })
