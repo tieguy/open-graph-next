@@ -257,9 +257,10 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 /**
  * The held-work cards. Same card grammar as the showcase, with the two
  * differences a two-party page earns: the small-caps line names the
- * institution and the open standard its record travels by ("Wikipedia +"
- * would say nothing — every page on this site is Wikipedia plus someone;
- * the operator's call, 2026-08-20). `via` is OPTIONAL and hand-written:
+ * institution and, where the lane speaks an open standard this site wants
+ * to demonstrate, that standard ("Wikipedia +" would say nothing — every
+ * page on this site is Wikipedia plus someone; the operator's call,
+ * 2026-08-20). `via` is OPTIONAL and hand-written:
  * it names only an open standard this site wants to demonstrate — IIIF
  * and glTF today — and only where the lane actually speaks it (the record
  * surfaces are documented per partner in CLAUDE.md's Key Files). A lane
