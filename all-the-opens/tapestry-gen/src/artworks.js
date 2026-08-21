@@ -182,23 +182,34 @@ function propertyBindingName(property) {
  * A work reachable through two partners keeps both, so `pickDiverse` can hand
  * it to whichever one still needs a slot.
  */
+/** The QID a `?work` binding names, or null when it names nothing usable. */
+function workQid(row) {
+  const uri = row.work?.value
+  const qid = typeof uri === 'string' ? uri.split('/').pop() : null
+  return qid && /^Q\d+$/.test(qid) ? qid : null
+}
+
+/** Fold one binding into the record for its work. */
+function foldArtworkRow(rec, row, qid) {
+  // `workLabel` falls back to the bare QID when an item has no English
+  // label; a card titled "Q123456" is worse than no card, so it is refused
+  // here rather than rendered.
+  const label = row.workLabel?.value
+  if (typeof label === 'string' && label && label !== qid) rec.label = label
+  if (row.sitelink?.value) rec.sitelink = true
+  for (const [key] of PARTNERS) {
+    const v = row[key]?.value
+    if (typeof v === 'string' && v) rec.ids[key] = v
+  }
+}
+
 export function artworkRows(body) {
   const out = new Map()
   for (const row of body?.results?.bindings ?? []) {
-    const uri = row.work?.value
-    const qid = typeof uri === 'string' ? uri.split('/').pop() : null
-    if (!qid || !/^Q\d+$/.test(qid)) continue
+    const qid = workQid(row)
+    if (!qid) continue
     const rec = out.get(qid) ?? { qid, label: null, ids: {}, sitelink: false }
-    // `workLabel` falls back to the bare QID when an item has no English
-    // label; a card titled "Q123456" is worse than no card, so it is refused
-    // here rather than rendered.
-    const label = row.workLabel?.value
-    if (typeof label === 'string' && label && label !== qid) rec.label = label
-    if (row.sitelink?.value) rec.sitelink = true
-    for (const [key] of PARTNERS) {
-      const v = row[key]?.value
-      if (typeof v === 'string' && v) rec.ids[key] = v
-    }
+    foldArtworkRow(rec, row, qid)
     out.set(qid, rec)
   }
   return [...out.values()].filter((r) => r.label)

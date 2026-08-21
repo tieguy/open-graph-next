@@ -116,7 +116,8 @@ function validIsbn(value) {
  * stated, `A, B & C et al.` past three — a rail card is a byline, not a
  * bibliography record.
  */
-export function citationAuthors(p) {
+/** The people a citation template names, numbered pair by numbered pair. */
+function citationNames(p) {
   const names = []
   for (let i = 1; i <= 4; i++) {
     // The first author may be written either numbered or bare: `last1` and
@@ -131,12 +132,14 @@ export function citationAuthors(p) {
     const first = last ? field('first') : null
     names.push(author ?? (first ? `${first} ${last}` : last))
   }
+  return names
+}
+
+export function citationAuthors(p) {
+  const names = citationNames(p)
   if (!names.length) return null
-  if (names.length <= 3) {
-    return names.length === 1
-      ? names[0]
-      : `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`
-  }
+  if (names.length === 1) return names[0]
+  if (names.length <= 3) return `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`
   return `${names.slice(0, 3).join(', ')} et al.`
 }
 
@@ -231,6 +234,45 @@ export function shortCitePointers(wikitext) {
  *
  * @returns {Map<string, {title: string|null, isbn: string|null, oclc: string|null, lccn: string|null}>}
  */
+/**
+ * The year a bibliography entry states, from `year` or from the first
+ * four-digit run in `date`, or undefined when it states neither.
+ */
+function statedYear(p) {
+  const stated = p.get('year')?.trim()
+  if (stated && YEAR.test(stated)) return stated
+  return /\b(\d{4})\b/.exec(p.get('date') ?? '')?.[1]
+}
+
+/**
+ * A bibliography entry's identifiers and byline, or null when it carries no
+ * identifier a lookup could use.
+ */
+function bibliographyEntry(p, year) {
+  const entry = {
+    title: stripMarkup(p.get('title')),
+    publisher: stripMarkup(p.get('publisher') ?? p.get('work')),
+    isbn: validIsbn(p.get('isbn')),
+    oclc: p.get('oclc')?.trim() || null,
+    lccn: p.get('lccn')?.trim() || null,
+    author: citationAuthors(p),
+    date: year,
+  }
+  if (!entry.isbn && !entry.oclc && !entry.lccn) return null
+  return entry
+}
+
+/**
+ * The key an explicit {{sfnref|Name|Year}} claims, or null. It exists
+ * precisely where it disagrees with the surname the entry states.
+ */
+function sfnrefKey(p) {
+  const custom = /\{\{\s*sfnref\s*\|([^{}]*)\}\}/i.exec(p.get('ref') ?? '')
+  if (!custom) return null
+  const args = positionalArgs(`{{x|${custom[1]}}}`)
+  return args.length >= 2 ? harvardKey(args[0], args.at(-1)) : null
+}
+
 export function bibliographyIdentifiers(wikitext) {
   const bib = new Map()
   // Footnote bodies are not bibliography entries; a Notes section can hold both.
@@ -242,29 +284,17 @@ export function bibliographyIdentifiers(wikitext) {
     if (!tpl) continue
     const p = templateParams(tpl)
 
-    const surname = stripMarkup(p.get('last') ?? p.get('last1') ?? p.get('author') ?? p.get('author1'))
-    const stated = p.get('year')?.trim()
-    const year = stated && YEAR.test(stated) ? stated : /\b(\d{4})\b/.exec(p.get('date') ?? '')?.[1]
+    const surname = stripMarkup(
+      p.get('last') ?? p.get('last1') ?? p.get('author') ?? p.get('author1'),
+    )
+    const year = statedYear(p)
     if (!surname || !year) continue
 
-    const entry = {
-      title: stripMarkup(p.get('title')),
-      publisher: stripMarkup(p.get('publisher') ?? p.get('work')),
-      isbn: validIsbn(p.get('isbn')),
-      oclc: p.get('oclc')?.trim() || null,
-      lccn: p.get('lccn')?.trim() || null,
-      author: citationAuthors(p),
-      date: year,
-    }
-    if (!entry.isbn && !entry.oclc && !entry.lccn) continue
+    const entry = bibliographyEntry(p, year)
+    if (!entry) continue
 
-    // An explicit {{sfnref|Name|Year}} overrides the surname the entry states —
-    // it exists precisely because the two disagree.
-    const custom = /\{\{\s*sfnref\s*\|([^{}]*)\}\}/i.exec(p.get('ref') ?? '')
-    if (custom) {
-      const args = positionalArgs(`{{x|${custom[1]}}}`)
-      if (args.length >= 2) bib.set(harvardKey(args[0], args.at(-1)), entry)
-    }
+    const custom = sfnrefKey(p)
+    if (custom) bib.set(custom, entry)
     const key = harvardKey(surname, year)
     if (!bib.has(key)) bib.set(key, entry) // first entry wins, as the article lists it
   }
@@ -434,6 +464,53 @@ const spell = (n) => WORDS[n] ?? n.toLocaleString()
  * two. The same finding as the visibility tiers, measured on citations rather
  * than institutions, which is why it belongs in the same panel.
  */
+/**
+ * "We could not find" claims a search happened. On a single-institution page
+ * the access lookups sit out entirely, so no search did — the negative must
+ * not stand ("we could not look" must never render as "there is no copy"),
+ * and the could-not-check clause speaks for the whole citation list rather
+ * than only the ISBN-carrying part of it.
+ */
+function accessClause(readable, searched, total) {
+  if (readable) return `${cap(spell(readable))} of them you can read or borrow right now.`
+  if (!searched && total > 0) return null
+  // Never "no free copy exists" — we searched, we did not survey the world.
+  return `We could not find a free copy of any of them.`
+}
+
+/**
+ * "More" only reads if something came before it. With nothing readable, the
+ * cataloged ones are not "more" — they are the whole of what was found.
+ */
+function catalogClause(cataloged, readable) {
+  if (!cataloged) return null
+  if (readable) return `Open Library has cataloged ${spell(cataloged)} more that nobody has scanned.`
+  const them = cataloged === 1 ? 'it' : 'them'
+  return (
+    `Open Library has cataloged ${spell(cataloged)} of them, but nobody has scanned ` + `${them}.`
+  )
+}
+
+/** "We could not look" must never be left to read as "there is nothing there". */
+function uncheckedClause(searched, total, unchecked) {
+  if (!searched && total > 0) return `${cap(spell(total))} we could not check this time.`
+  if (unchecked) return `${cap(spell(unchecked))} we could not check this time.`
+  return null
+}
+
+/**
+ * The papers clause claims a search too. When none ran, the could-not-check
+ * clause already speaks for every cited work, papers included.
+ */
+function papersClause(papers, searched) {
+  if (!papers?.total || !searched) return null
+  const paperWord = papers.total === 1 ? 'paper' : 'papers'
+  const openClause = papers.open
+    ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read`
+    : 'we found none free to read'
+  return `Of the ${papers.total.toLocaleString()} research ${paperWord} among them, ${openClause}.`
+}
+
 export function citationHeadline({ total, open, cataloged, unchecked = 0, papers, searched = true } = {}) {
   if (!total) return null
   // What a reader can actually open: the OpenLibrary verdicts AND the open
@@ -447,49 +524,13 @@ export function citationHeadline({ total, open, cataloged, unchecked = 0, papers
   const out = [
     `The original Wikipedia article cites ${total.toLocaleString()} work${total === 1 ? '' : 's'}.`,
   ]
-  // "We could not find" claims a search happened. On a single-institution
-  // page the access lookups sit out entirely, so no search did — the
-  // negative must not stand ("we could not look" must never render as
-  // "there is no copy"), and the could-not-check line below speaks for the
-  // whole citation list rather than only the ISBN-carrying part of it.
-  let accessLine
-  if (readable) {
-    accessLine = `${cap(spell(readable))} of them you can read or borrow right now.`
-  } else if (!searched && total > 0) {
-    accessLine = null
-  } else {
-    // Never "no free copy exists" — we searched, we did not survey the world.
-    accessLine = `We could not find a free copy of any of them.`
-  }
-  if (accessLine) out.push(accessLine)
-  // "More" only reads if something came before it. With nothing readable, the
-  // cataloged ones are not "more" — they are the whole of what was found.
-  if (cataloged) {
-    const them = cataloged === 1 ? 'it' : 'them'
-    out.push(
-      readable
-        ? `Open Library has cataloged ${spell(cataloged)} more that nobody has scanned.`
-        : `Open Library has cataloged ${spell(cataloged)} of them, but nobody has scanned ` +
-          `${them}.`,
-    )
-  }
-  // "We could not look" must never be left to read as "there is nothing there".
-  if (!searched && total > 0)
-    out.push(`${cap(spell(total))} we could not check this time.`)
-  else if (unchecked)
-    out.push(`${cap(spell(unchecked))} we could not check this time.`)
-  // The papers clause claims a search too. When none ran, the could-not-check
-  // line above already speaks for every cited work, papers included.
-  if (papers?.total && searched) {
-    const paperWord = papers.total === 1 ? 'paper' : 'papers'
-    const openClause = papers.open
-      ? `${spell(papers.open)} ${papers.open === 1 ? 'is' : 'are'} free to read`
-      : 'we found none free to read'
-    out.push(
-      `Of the ${papers.total.toLocaleString()} research ${paperWord} among them, ` + `${openClause}.`,
-    )
-  }
-  return out.join(' ')
+  out.push(
+    accessClause(readable, searched, total),
+    catalogClause(cataloged, readable),
+    uncheckedClause(searched, total, unchecked),
+    papersClause(papers, searched),
+  )
+  return out.filter(Boolean).join(' ')
 }
 
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1)
