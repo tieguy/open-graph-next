@@ -58,10 +58,10 @@ does not help generate the website, it belongs in the attic.
   cache. Writes `demo/spike-<slug>.html`, slugged from the **resolved** title,
   not argv — `npm run spike -- "Coral_Gables"` writes
   `demo/spike-coral-gables-florida.html`. Thin wrapper over `src/discover.js`.
-  **It is also the only test of the discovery path**: no test imports
-  `discover()`, so the acceptance checks in `docs/` are spike renders plus
-  greps, and the byte-reproducibility of a warm re-render is how a regression
-  is detected. `serve.js` cannot play that role — it emits bands in COMPLETION
+  **It is where a rendering regression shows up**: the byte-reproducibility of
+  a warm re-render is the check, and the acceptance checks in `docs/` are spike
+  renders plus greps. Structure is checked separately and offline — see
+  Checks. `serve.js` cannot play that role — it emits bands in COMPLETION
   order, which is deliberately nondeterministic.
   Design: `../docs/design-plans/2026-07-25-live-discovery-pipeline.md`;
   state and plan: `../docs/implementation-plans/2026-07-28-live-discovery-next-steps.md`.
@@ -143,6 +143,42 @@ remaining floor is the WDQS mappability chain, not its citations.
 
 The property that matters is that the first band arrives far ahead of
 completion, not the absolute seconds — see the warning under Request shape.
+
+## Checks
+
+`npm test` runs the linter first, as `pretest`, then the suite. There is no CI
+and no git hook here, so the command people already run is where the gate has
+to live.
+
+- **`eslint.config.mjs`** is a correctness config, not a style one: the
+  recommended rules, `no-unused-vars` tolerating the rest-sibling omit idiom
+  (`const { _collection, ...picked } = h` in `holder.js` names a field
+  precisely so the rest does not carry it), and `no-useless-assignment` off.
+  There is no formatter in this tree and this is not the file that introduces
+  one. It earns its place because `node --check` reads syntax and not scope: a
+  name that resolves to nothing is otherwise found only by rendering a page.
+- **`test/offline-render.test.js`** is the one test that runs `discover()` end
+  to end. `getJson` reads its disk cache before it fetches, so an article whose
+  upstream answers are on disk replays with no network:
+  `test/fixtures/ludwig-prandtl-cache.tar.gz` is 127 recorded requests, 169 KB
+  compressed, and `TAPESTRY_CACHE` points the cache at it. That variable moves
+  the request cache, the class facts, the cover bytes, the stored pages and the
+  sweep together, because all of them resolve through `CACHE` in `src/http.js`.
+  Unset in production, where the Fly volume is mounted at the default path.
+
+  The test counts the fixture directory before and after and fails if anything
+  was fetched — a cache miss writes a file, so that is a check rather than a
+  claim. Ludwig Prandtl is the article because Wikidata states a thesis (P724)
+  and an Open Library author id (P648) for him, so the lede extras produce a
+  subject-document card and a shelf of his books; that path has no other
+  coverage, and a helper that returns nothing leaves it empty without an error.
+
+  `test/fixtures/ludwig-prandtl-cache.json` records the date, the operator
+  contact the recording was made with, and how to remake it. The contact is
+  load-bearing: OpenAlex takes it as its politeness `mailto` in the query
+  string, so it is part of that request's cache key and a different address is
+  a live request. Re-recording under a placeholder address is not an option —
+  the same variable sets the User-Agent, which must reach the operator.
 
 ## Deployed demo
 
