@@ -26,7 +26,7 @@
 // the reserve is full: the busy page is an honest answer, and a lane with no
 // end is how a demo becomes someone else's traffic problem.
 
-import { holderShowcaseTitles, showcaseTitles } from './front-page.js'
+import { bootWarmTitles } from './warming.js'
 
 /**
  * A requested path segment as MediaWiki would normalize it, so that the same
@@ -43,8 +43,11 @@ export function titleKey(title) {
 }
 
 // Every title the front page presents as ready — the showcase grid and the
-// held-works row alike. The reserve backs the promise wherever it is made.
-const SHOWCASE = new Set([...showcaseTitles(), ...holderShowcaseTitles()].map(titleKey))
+// held-works row alike. Imported from the boot walk's own list rather than
+// composed again, so the reserve backs the promise wherever it is made and
+// cannot drift from the walk: a title added to bootWarmTitles is reserved
+// here with no edit.
+const SHOWCASE = new Set(bootWarmTitles().map(titleKey))
 
 /**
  * Is this one of the pages the front page promises are ready?

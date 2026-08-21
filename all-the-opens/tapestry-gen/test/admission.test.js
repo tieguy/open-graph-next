@@ -2,7 +2,7 @@ import test from 'node:test'
 import assert from 'node:assert/strict'
 
 import { admits, isShowcase, titleKey } from '../src/admission.js'
-import { busyPage, showcaseTitles } from '../src/front-page.js'
+import { busyPage, holderShowcaseTitles, showcaseTitles } from '../src/front-page.js'
 
 const CAP = { max: 4, reserve: 2 }
 const ordinary = (inFlight) => admits({ inFlight, showcase: false, ...CAP })
@@ -67,4 +67,14 @@ test('the busy page still says why it is busy, and offers a way out', () => {
   assert.match(html, /busy discovering other pages right now/)
   assert.match(html, /fetches politely, a few at a/)
   assert.ok(html.includes('href="/"'), 'the front page is one click away')
+})
+
+// The held-works cards make the same ready-now promise, so they ride the
+// same reserve — asserted per row, mirroring the boot-walk pins in
+// render.test.js. They are deliberately NOT on the busy page, whose grid is
+// the showcase's; only the reserve claim is theirs to pass here.
+test('every held-works title rides the reserve', () => {
+  for (const title of holderShowcaseTitles()) {
+    assert.ok(isShowcase(title), `${title} rides the reserve`)
+  }
 })
