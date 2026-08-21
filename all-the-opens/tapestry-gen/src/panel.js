@@ -182,27 +182,29 @@ export function infoboxRows(html) {
  * Emit a single Wikipedia-only row with the given label and content.
  */
 function emitWikipediaOnlyRow(html, label, valueHtml) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(valueHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
-  html.push('</td></tr>')
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    valueHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+    '</td></tr>',
+  )
 }
 
 /**
  * Emit a dual-attributed row (Wikipedia and institution agree).
  */
 function emitMatchRow(html, label, valueHtml, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(valueHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    valueHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
 }
@@ -211,19 +213,18 @@ function emitMatchRow(html, label, valueHtml, institution) {
  * Emit a conflict pair: first row with Wikipedia value, second with holder value.
  */
 function emitConflictRows(html, label, wikiHtml, holderValue, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data infobox-conflict">')
-  html.push(wikiHtml)
-  html.push(' <span class="infobox-chip">Wikipedia</span>')
-  html.push('</td></tr>')
-
-  html.push('<tr><th scope="row" class="infobox-label"></th><td class="infobox-data infobox-conflict">')
-  html.push(escapeHtml(holderValue))
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data infobox-conflict">',
+    wikiHtml,
+    ' <span class="infobox-chip">Wikipedia</span>',
+    '</td></tr>',
+    '<tr><th scope="row" class="infobox-label"></th><td class="infobox-data infobox-conflict">',
+    escapeHtml(holderValue),
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
 }
@@ -232,14 +233,14 @@ function emitConflictRows(html, label, wikiHtml, holderValue, institution) {
  * Emit a holder-only row (typically accession, credit, or rights).
  */
 function emitHolderRow(html, label, value, institution) {
-  html.push('<tr><th scope="row" class="infobox-label">')
-  html.push(escapeHtml(label))
-  html.push('</th><td class="infobox-data">')
-  html.push(escapeHtml(value))
+  html.push(
+    '<tr><th scope="row" class="infobox-label">',
+    escapeHtml(label),
+    '</th><td class="infobox-data">',
+    escapeHtml(value),
+  )
   if (institution) {
-    html.push(' <span class="infobox-chip">')
-    html.push(escapeHtml(institution))
-    html.push('</span>')
+    html.push(' <span class="infobox-chip">', escapeHtml(institution), '</span>')
   }
   html.push('</td></tr>')
 }
@@ -358,16 +359,18 @@ export function mergedPanel(rows, record, workRights = null) {
     hasContent = true
   }
   if (workRights?.line) {
-    html.push('<tr><th scope="row" class="infobox-label">')
-    // The label prints once for the block, visibly: on the image row when
-    // the record states one, else here. A screen reader still hears this
-    // row labeled — an empty header would leave the second claim nameless.
-    html.push(imageClause ? '<span class="vh">Copyright</span>' : 'Copyright')
-    html.push('</th><td class="infobox-data">')
-    html.push(workRights.line)
-    html.push(' <span class="infobox-chip">Wikidata</span>')
-    html.push(workRights.fold ?? '')
-    html.push('</td></tr>')
+    html.push(
+      '<tr><th scope="row" class="infobox-label">',
+      // The label prints once for the block, visibly: on the image row when
+      // the record states one, else here. A screen reader still hears this
+      // row labeled — an empty header would leave the second claim nameless.
+      imageClause ? '<span class="vh">Copyright</span>' : 'Copyright',
+      '</th><td class="infobox-data">',
+      workRights.line,
+      ' <span class="infobox-chip">Wikidata</span>',
+      workRights.fold ?? '',
+      '</td></tr>',
+    )
     hasContent = true
   }
 

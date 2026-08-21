@@ -56,7 +56,7 @@ export function sectionOutline(sections) {
       index: s.index,
       level: s.toclevel,
       number: s.number,
-      title: s.line.replace(/<[^>]+>/g, '').trim(),
+      title: s.line.replaceAll(/<[^>]+>/g, '').trim(),
     }))
 }
 
@@ -172,7 +172,7 @@ export function sliceSectionWikitext(wikitext, sections, index, { stopAt } = {})
   }
   const at = sections.findIndex((s) => String(s.index) === String(index))
   const own = sections[at]
-  if (!own || own.byteoffset == null) return null
+  if (own?.byteoffset == null) return null
   const boundary = Math.max(stopAt ?? own.toclevel, own.toclevel)
   const next = sections
     .slice(at + 1)
@@ -253,7 +253,7 @@ export function commonsFileTitle(url) {
   )
   // Underscores are normalized to spaces because that is how the API returns
   // titles; keying on the raw URL form silently misses every lookup.
-  return match ? `File:${decodeURIComponent(match[1]).replace(/_/g, ' ')}` : null
+  return match ? `File:${decodeURIComponent(match[1]).replaceAll(/_/g, ' ')}` : null
 }
 
 /**
@@ -307,7 +307,7 @@ export function imageCredit(extmetadata) {
   if (!extmetadata) return null
   const license = extmetadata.LicenseShortName?.value ?? null
   const rawAuthor = extmetadata.Artist?.value ?? null
-  const author = rawAuthor ? decodeEntities(rawAuthor.replace(/<[^>]+>/g, '')).trim() || null : null
+  const author = rawAuthor ? decodeEntities(rawAuthor.replaceAll(/<[^>]+>/g, '')).trim() || null : null
   if (!license && !author) return null
   return { license, author }
 }
@@ -340,7 +340,7 @@ export async function fetchPageImages(cacheDir, titles, size = 1280) {
           source: thumb.source,
           width: thumb.width,
           height: thumb.height,
-          fileTitle: page.pageimage ? `File:${page.pageimage.replace(/_/g, ' ')}` : null,
+          fileTitle: page.pageimage ? `File:${page.pageimage.replaceAll(/_/g, ' ')}` : null,
         })
       }
     }
@@ -396,9 +396,9 @@ export function infoboxLinks(html) {
   while ((a = link.exec(block))) {
     let title
     try {
-      title = decodeURIComponent(a[1]).replace(/_/g, ' ')
+      title = decodeURIComponent(a[1]).replaceAll(/_/g, ' ')
     } catch {
-      title = a[1].replace(/_/g, ' ')
+      title = a[1].replaceAll(/_/g, ' ')
     }
     if (title.includes(':')) continue // File:, Category:, Help:, and other namespaces
     if (seen.has(title)) continue
@@ -463,13 +463,13 @@ export function extractInfobox(html) {
   for (const pattern of INFOBOX_STRIP) block = block.replace(pattern, '')
 
   const images = []
-  block = block.replace(/(<img\b[^>]*\ssrc=")([^"]+)(")/gi, (_, pre, raw, post) => {
-    const url = cleanImageUrl(raw.replace(/&amp;/g, '&'))
+  block = block.replaceAll(/(<img\b[^>]*\ssrc=")([^"]+)(")/gi, (_, pre, raw, post) => {
+    const url = cleanImageUrl(raw.replaceAll(/&amp;/g, '&'))
     if (!images.includes(url)) images.push(url)
     return `${pre}${url}${post}`
   })
 
-  block = block.replace(/href="\/wiki\/([^"]+)"/gi, (whole, target) => {
+  block = block.replaceAll(/href="\/wiki\/([^"]+)"/gi, (whole, target) => {
     let decoded
     try {
       decoded = decodeURIComponent(target)
@@ -518,14 +518,14 @@ export function articleBlocks(html, { notePrefix = null } = {}) {
   const pattern = /<(p|h3|h4)\b[^>]*>([\s\S]*?)<\/\1>/gi
   let match
   while ((match = pattern.exec(cleaned))) {
-    const text = decodeEntities(match[2].replace(/<[^>]+>/g, '')).replace(/\s+/g, ' ').trim()
+    const text = decodeEntities(match[2].replaceAll(/<[^>]+>/g, '')).replaceAll(/\s+/g, ' ').trim()
     if (text.length < 2) continue
     const block = { kind: match[1].toLowerCase() === 'p' ? 'p' : 'h', text }
     if (notePrefix)
       block.html = sanitizeFragment(match[2], { notePrefix })
-        .replace(/&#91;/g, '[')
-        .replace(/&#93;/g, ']')
-        .replace(/\s+/g, ' ')
+        .replaceAll(/&#91;/g, '[')
+        .replaceAll(/&#93;/g, ']')
+        .replaceAll(/\s+/g, ' ')
         .trim()
     blocks.push(block)
   }
@@ -546,8 +546,8 @@ export function sanitizeFragment(html, { notePrefix = null } = {}) {
   // Elements whose CONTENT must go too: MediaWiki injects the CS1 stylesheet
   // inline into the first styled citation on a page, and stripping only the
   // tags would print the stylesheet as prose.
-  const cleaned = html.replace(/<(style|script)[\s\S]*?<\/\1>/gi, '')
-  return cleaned.replace(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (tag, rawName) => {
+  const cleaned = html.replaceAll(/<(style|script)[\s\S]*?<\/\1>/gi, '')
+  return cleaned.replaceAll(/<\/?([a-z][a-z0-9]*)\b[^>]*>/gi, (tag, rawName) => {
     const name = rawName.toLowerCase()
     const closing = tag.startsWith('</')
     if (name === 'a') {
@@ -612,7 +612,7 @@ export function referenceNotes(html) {
 export function footnotesFor(blocks, notes, notePrefix) {
   const out = []
   const seen = new Set()
-  const marker = new RegExp(`<a href="#${notePrefix}-note-([^"]+)">\\[([^\\]<]+)\\]`, 'g')
+  const marker = new RegExp(String.raw`<a href="#${notePrefix}-note-([^"]+)">\[([^\]<]+)\]`, 'g')
   for (const b of blocks) {
     let m
     while ((m = marker.exec(b.html ?? ''))) {
@@ -621,7 +621,7 @@ export function footnotesFor(blocks, notes, notePrefix) {
       seen.add(name)
       const body = notes.get(decodeEntities(name))
       if (body == null) continue
-      const rawIsbn = /Special:BookSources\/([0-9Xx-]+)/.exec(body)?.[1]?.replace(/[^0-9Xx]/g, '')
+      const rawIsbn = /Special:BookSources\/([0-9Xx-]+)/.exec(body)?.[1]?.replaceAll(/[^0-9Xx]/g, '')
       out.push({
         id: `${notePrefix}-note-${name}`,
         num: m[2],
@@ -635,14 +635,14 @@ export function footnotesFor(blocks, notes, notePrefix) {
 
 export function decodeEntities(value) {
   return value
-    .replace(/&#(\d+);/g, (_, d) => String.fromCharCode(Number(d)))
-    .replace(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCharCode(parseInt(h, 16)))
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/\[\d+\]/g, '')
+    .replaceAll(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replaceAll(/&#x([0-9a-f]+);/gi, (_, h) => String.fromCodePoint(Number.parseInt(h, 16)))
+    .replaceAll(/&nbsp;/g, ' ')
+    .replaceAll(/&amp;/g, '&')
+    .replaceAll(/&quot;/g, '"')
+    .replaceAll(/&lt;/g, '<')
+    .replaceAll(/&gt;/g, '>')
+    .replaceAll(/\[\d+\]/g, '')
 }
 
 const BLOCK_TAGS = /<(table|figure|style|sup|div class="hatnote"|ref)[\s\S]*?<\/\1>/gi
@@ -654,18 +654,18 @@ const BLOCK_TAGS = /<(table|figure|style|sup|div class="hatnote"|ref)[\s\S]*?<\/
 export function firstSentences(html, count = 2) {
   const text = html
     .replace(BLOCK_TAGS, ' ')
-    .replace(/<sup[\s\S]*?<\/sup>/gi, '') // footnote markers
-    .replace(/<style[\s\S]*?<\/style>/gi, ' ')
-    .replace(/<table[\s\S]*?<\/table>/gi, ' ')
-    .replace(/<[^>]+>/g, '') // remaining tags
-    .replace(/&#(\d+);/g, (_, d) => String.fromCharCode(Number(d)))
-    .replace(/&nbsp;/g, ' ')
-    .replace(/&amp;/g, '&')
-    .replace(/&quot;/g, '"')
-    .replace(/&lt;/g, '<')
-    .replace(/&gt;/g, '>')
-    .replace(/\[\d+\]/g, '') // leftover citation brackets
-    .replace(/\s+/g, ' ')
+    .replaceAll(/<sup[\s\S]*?<\/sup>/gi, '') // footnote markers
+    .replaceAll(/<style[\s\S]*?<\/style>/gi, ' ')
+    .replaceAll(/<table[\s\S]*?<\/table>/gi, ' ')
+    .replaceAll(/<[^>]+>/g, '') // remaining tags
+    .replaceAll(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
+    .replaceAll(/&nbsp;/g, ' ')
+    .replaceAll(/&amp;/g, '&')
+    .replaceAll(/&quot;/g, '"')
+    .replaceAll(/&lt;/g, '<')
+    .replaceAll(/&gt;/g, '>')
+    .replaceAll(/\[\d+\]/g, '') // leftover citation brackets
+    .replaceAll(/\s+/g, ' ')
     .trim()
 
   // Split on sentence-final punctuation, avoiding common abbreviations and initials.

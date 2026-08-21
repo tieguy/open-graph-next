@@ -19,7 +19,7 @@ import { holderShowcaseTitles, showcaseTitles } from './front-page.js'
 // reserve (src/admission.js) is capacity kept for READERS of warm pages, and
 // warming happens to travel in the same lane.
 
-const path = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
+const path = (title) => `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`
 const secs = (ms) => `${(ms / 1000).toFixed(1)}s`
 
 /**

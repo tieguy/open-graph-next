@@ -122,7 +122,7 @@ export function fromDataUri(uri) {
   const m = /^data:([^,]*),([\s\S]*)$/.exec(uri ?? '')
   if (!m) return null
   const params = m[1].split(';')
-  const base64 = params[params.length - 1].trim().toLowerCase() === 'base64'
+  const base64 = params.at(-1).trim().toLowerCase() === 'base64'
   if (base64) params.pop()
   return {
     type: params.join(';').trim() || 'text/plain;charset=US-ASCII',

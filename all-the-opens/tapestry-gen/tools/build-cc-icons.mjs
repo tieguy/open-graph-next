@@ -52,7 +52,7 @@ function viewBoxOf(svg) {
   const vb = /<svg\b[^>]*\bviewBox="([^"]+)"/i.exec(svg)
   if (vb) return vb[1].trim()
   const open = /<svg\b[^>]*>/i.exec(svg)?.[0] ?? ''
-  const num = (attr) => Number(new RegExp(`\\b${attr}="([\\d.]+)`, 'i').exec(open)?.[1])
+  const num = (attr) => Number(new RegExp(String.raw`\b${attr}="([\d.]+)`, 'i').exec(open)?.[1])
   const w = num('width')
   const h = num('height')
   return Number.isFinite(w) && Number.isFinite(h) ? `0 0 ${w} ${h}` : null

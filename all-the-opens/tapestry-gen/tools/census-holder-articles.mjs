@@ -133,7 +133,7 @@ async function main() {
   }
 
   const controlBody = await getJson(wdqs(control), { timeoutMs: 60000 })
-  const subclassControl = Number(controlBody?.results?.bindings?.[0]?.n?.value ?? NaN)
+  const subclassControl = Number(controlBody?.results?.bindings?.[0]?.n?.value ?? Number.NaN)
 
   const queried = new Date().toISOString().slice(0, 10)
   const out = {

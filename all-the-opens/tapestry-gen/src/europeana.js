@@ -54,7 +54,7 @@ export function rightsName(uri) {
   if (/publicdomain\/mark/.test(uri)) return 'Public Domain'
   if (/publicdomain\/zero/.test(uri)) return 'CC0'
   const cc = /creativecommons\.org\/licenses\/([a-z-]+)/.exec(uri)
-  if (cc) return `CC ${cc[1].toUpperCase().replace(/-/g, ' ')}`
+  if (cc) return `CC ${cc[1].toUpperCase().replaceAll(/-/g, ' ')}`
   return null
 }
 

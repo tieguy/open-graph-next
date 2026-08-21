@@ -143,9 +143,9 @@ function citationIdentifiers(wikitext) {
     const tpl = /\{\{\s*(?:cite[ _][a-z]+|citation)\b[\s\S]*?\}\}/i.exec(m[1])
     if (!tpl) continue
     const p = templateParams(tpl[0])
-    const isbn = p.get('isbn')?.replace(/[^0-9Xx]/g, '')
+    const isbn = p.get('isbn')?.replaceAll(/[^0-9Xx]/g, '')
     const entry = {
-      title: (p.get('title') ?? '').replace(/<[^>]+>|\[\[|\]\]/g, '').trim(),
+      title: (p.get('title') ?? '').replaceAll(/<[^>]+>|\[\[|\]\]/g, '').trim(),
       isbn: isbn && (isbn.length === 10 || isbn.length === 13) ? isbn : null,
       oclc: p.get('oclc')?.trim() || null,
       lccn: p.get('lccn')?.trim() || null,
@@ -538,15 +538,15 @@ const APPARATUS =
  */
 export function proseLinks(html) {
   const body = html
-    .replace(/<div[^>]*class="[^"]*hatnote[^"]*"[\s\S]*?<\/div>/gi, ' ')
-    .replace(/<ol class="references"[\s\S]*?<\/ol>/gi, ' ')
-    .replace(/<sup[\s\S]*?<\/sup>/gi, ' ')
-    .replace(/<table[\s\S]*?<\/table>/gi, ' ')
+    .replaceAll(/<div[^>]*class="[^"]*hatnote[^"]*"[\s\S]*?<\/div>/gi, ' ')
+    .replaceAll(/<ol class="references"[\s\S]*?<\/ol>/gi, ' ')
+    .replaceAll(/<sup[\s\S]*?<\/sup>/gi, ' ')
+    .replaceAll(/<table[\s\S]*?<\/table>/gi, ' ')
   const titles = []
   const re = /<a[^>]+href="\/wiki\/([^"#:?]+)"[^>]*>/gi
   let m
   while ((m = re.exec(body))) {
-    const title = decodeURIComponent(m[1]).replace(/_/g, ' ')
+    const title = decodeURIComponent(m[1]).replaceAll(/_/g, ' ')
     if (APPARATUS.test(title) || titles.includes(title)) continue
     titles.push(title)
   }
@@ -567,7 +567,7 @@ export function proseLinks(html) {
 export function canonicalTitle(title) {
   if (typeof title !== 'string') return ''
   return title
-    .replace(/_/g, ' ')    // Underscores to spaces
+    .replaceAll(/_/g, ' ')    // Underscores to spaces
     // `/^./u` and not `/^\w/`: \w is [A-Za-z0-9_], so an accented initial —
     // "émile durkheim", "île-de-france" — would pass through uncapitalized and
     // miss the QID map entirely, silently costing the page its whole lede.
@@ -1568,7 +1568,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     if (!shelf?.entries.length) return null
     // One placement decision, made once: the band owning the creator’s
     // anchor, else the lede (or the first band, on a page without one).
-    let owner = units.find((u) => u.index === '0') ? '0' : (units[0]?.index ?? '0')
+    let owner = units.some((u) => u.index === '0') ? '0' : (units[0]?.index ?? '0')
     let ownerFound = false
     for (const [unit, qids] of pickedMap) {
       if ((qids ?? []).includes(creatorQid)) {

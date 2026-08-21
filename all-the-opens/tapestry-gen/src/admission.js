@@ -38,7 +38,7 @@ import { bootWarmTitles } from './warming.js'
  * here either.
  */
 export function titleKey(title) {
-  const t = title.replace(/_/g, ' ').replace(/\s+/g, ' ').trim()
+  const t = title.replaceAll(/_/g, ' ').replaceAll(/\s+/g, ' ').trim()
   return t.charAt(0).toUpperCase() + t.slice(1)
 }
 

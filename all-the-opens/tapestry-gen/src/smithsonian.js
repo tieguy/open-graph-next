@@ -387,7 +387,7 @@ const HEAD_PARTS = /\b(cranium|skull|mandible|jaw|teeth|tooth|dentition)\b/i
 /** 0 for a whole specimen, 1 for its head, 2 for anything else. */
 export function siScanRank(row) {
   const name = siScanSubject(row)
-  if (!name || !name.includes(':')) return 0
+  if (!name?.includes(':')) return 0
   return HEAD_PARTS.test(name.split(':', 2)[1]) ? 1 : 2
 }
 
@@ -418,7 +418,7 @@ export function siSpecimenNumber(row) {
 
 export function siScanEntryFrom(row, taxon) {
   const entry = siEntryFrom(row)
-  if (!entry || !entry.media3d) return null
+  if (!entry?.media3d) return null
   const specimen = siSpecimenNumber(row)
   const subject = siScanSubject(row)
   const holding = siScientificNames(row).find((n) => foldTaxon(n) === foldTaxon(taxon)) ?? taxon

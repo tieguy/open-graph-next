@@ -38,7 +38,7 @@ export function scholarlyIdentifiers(wikitext) {
       ? rawDoi.replace(/^10\.48550\/arxiv\./i, '')
       : null
     const entry = {
-      title: (p.get('title') ?? '').replace(/<[^>]+>|\[\[|\]\]/g, '').trim() || null,
+      title: (p.get('title') ?? '').replaceAll(/<[^>]+>|\[\[|\]\]/g, '').trim() || null,
       doi: arxivFromDoi ? null : rawDoi,
       pmid: p.get('pmid')?.trim() || null,
       arxiv: p.get('arxiv')?.trim() || p.get('eprint')?.trim() || arxivFromDoi,
@@ -171,7 +171,7 @@ const licenseName = (slug) => {
   if (!slug) return null
   if (slug === 'other-oa') return 'terms not stated'
   if (slug === 'public-domain') return 'public domain'
-  return slug.toUpperCase().replace(/^CC-/, 'CC ').replace(/-/g, ' ')
+  return slug.toUpperCase().replace(/^CC-/, 'CC ').replaceAll(/-/g, ' ')
 }
 
 /** The retraction working, for the fold a retracted card's why line opens.

@@ -49,7 +49,7 @@ function positionalArgs(text) {
   const inner = text.replace(/^\s*\{\{/, '').replace(/\}\}\s*$/, '')
   return splitTopLevel(inner, '|')
     .slice(1) // the template name
-    .filter((part) => part.indexOf('=') < 0)
+    .filter((part) => !part.includes('='))
     .map((part) => part.trim())
     .filter(Boolean)
 }
@@ -126,7 +126,7 @@ export function citationAuthors(p) {
   if (names.length <= 3) {
     return names.length === 1
       ? names[0]
-      : `${names.slice(0, -1).join(', ')} & ${names[names.length - 1]}`
+      : `${names.slice(0, -1).join(', ')} & ${names.at(-1)}`
   }
   return `${names.slice(0, 3).join(', ')} et al.`
 }
@@ -254,7 +254,7 @@ export function bibliographyIdentifiers(wikitext) {
     const custom = /\{\{\s*sfnref\s*\|([^{}]*)\}\}/i.exec(p.get('ref') ?? '')
     if (custom) {
       const args = positionalArgs(`{{x|${custom[1]}}}`)
-      if (args.length >= 2) bib.set(harvardKey(args[0], args[args.length - 1]), entry)
+      if (args.length >= 2) bib.set(harvardKey(args[0], args.at(-1)), entry)
     }
     const key = harvardKey(surname, year)
     if (!bib.has(key)) bib.set(key, entry) // first entry wins, as the article lists it

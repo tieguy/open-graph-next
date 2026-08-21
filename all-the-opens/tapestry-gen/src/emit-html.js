@@ -109,7 +109,7 @@ function faviconStyle(slugs, inline) {
 }
 
 function sourceTag(source, inline = new Map(), nameFor = null) {
-  const name = nameFor ? nameFor(source) : (SOURCE[source]?.name ?? source.replace(/_/g, ' '))
+  const name = nameFor ? nameFor(source) : (SOURCE[source]?.name ?? source.replaceAll(/_/g, ' '))
   return `<span class="src">${favicon(source, inline)}${escapeHtml(name)}</span>`
 }
 
@@ -124,7 +124,7 @@ function buildNameFor(holder) {
   const institutionName = holder.record.institution
   return (source) => {
     if (source === holderPartner) return institutionName
-    return SOURCE[source]?.name ?? source.replace(/_/g, ' ')
+    return SOURCE[source]?.name ?? source.replaceAll(/_/g, ' ')
   }
 }
 
@@ -218,7 +218,7 @@ function gapLead({ total, shown, link, invisible }) {
     )
   const list =
     parts.length > 2
-      ? `${parts.slice(0, -1).join(', ')}, and ${parts[parts.length - 1]}`
+      ? `${parts.slice(0, -1).join(', ')}, and ${parts.at(-1)}`
       : parts.join(' and ')
   out.push(`${Cap(THE_ARTICLE)} ${list}.`)
   return out.join(' ')
@@ -253,7 +253,7 @@ export function gapPanel(bands, reach, inline = new Map(), nameFor = null) {
   // column headings carry the distinction so the cells do not have to.
   const rows = report
     .map((r) => {
-      const name = nameFor ? nameFor(r.slug) : (SOURCE[r.slug]?.name ?? r.slug.replace(/_/g, ' '))
+      const name = nameFor ? nameFor(r.slug) : (SOURCE[r.slug]?.name ?? r.slug.replaceAll(/_/g, ' '))
       // Two countable things, never added together — a reader looking at six
       // cards must not be told there are thirteen. Each number names what it
       // counts, so both can be checked against the page.
@@ -866,7 +866,7 @@ export function evidenceKey(bands) {
   if (!fields.length) return ''
   const named = fields.map((f) => `the ${f}`)
   const list =
-    named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named[named.length - 1]}` : named[0]
+    named.length > 1 ? `${named.slice(0, -1).join(', ')} and ${named.at(-1)}` : named[0]
   return (
     `<p class="evidence-key"><span class="swatch"></span>A dashed card is a <b>corroborated</b> match. ` +
     `No identifier is shared by the two records — none exists on either side — so it was matched on ` +
@@ -1033,7 +1033,7 @@ const FLOAT_MIN_PROSE = 700
 function proseLength(b) {
   if (!b.blocks) return (b.text ?? '').length
   return b.blocks.reduce(
-    (n, x) => n + (x.html ? x.html.replace(/<[^>]*>/g, '').length : (x.text ?? '').length),
+    (n, x) => n + (x.html ? x.html.replaceAll(/<[^>]*>/g, '').length : (x.text ?? '').length),
     0,
   )
 }
@@ -1552,7 +1552,7 @@ export function buildHtml({
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
-${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(used, inline)}
 </style>
@@ -1657,7 +1657,7 @@ export function streamOpen({ title, units, inline = new Map(), home = '/', siteO
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${escapeHtml(title)}</title>
-${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`, siteOrigin })}
+${ogMeta({ title, description: ogArticleDescription(title), path: `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`, siteOrigin })}
 <style>
 ${STYLE}${faviconStyle(Object.keys(SOURCE), inline)}
 </style>
@@ -1756,7 +1756,7 @@ export function streamClose({ provenance = '' } = {}) {
    and the masthead still says whose experiment this is in the first line. A
    page that looked like Wikipedia AND claimed to be it would be a forgery, and
    the whole project depends on being trusted about what it found. */
-const STYLE = `
+const STYLE = String.raw`
 :root{
   --bg:#f8f9fa; --paper:#ffffff; --ink:#202122; --head:#000000; --muted:#54595d;
   /* MediaWiki's two border weights, and they are used for different jobs:
@@ -1845,7 +1845,7 @@ main{max-width:1000px;margin:0 auto;padding:4px 32px 0;background:var(--paper);
    convention, no sprite to ship. */
 .prose a{color:var(--link)}
 .prose a:visited{color:var(--link-visited)}
-.prose a.ext::after{content:"\\2197";font-size:.75em;margin-left:1px;color:#3366cc}
+.prose a.ext::after{content:"\2197";font-size:.75em;margin-left:1px;color:#3366cc}
 sup.ref{font-size:.8em;line-height:1}
 sup.ref a{color:var(--link)}
 

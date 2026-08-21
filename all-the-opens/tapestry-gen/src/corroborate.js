@@ -109,7 +109,7 @@ export function matchesName(creator, personName) {
   if (person[person.length - 1] !== surname) return false
   // The first given name must appear; extra names on either side are allowed
   // ("Antonius Monacensis" fails on Antonius, not on the epithet).
-  return person.slice(0, -1).some((p) => p === given[0])
+  return person.slice(0, -1).includes(given[0])
 }
 
 /**

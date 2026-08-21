@@ -190,7 +190,7 @@ const FRIENDS = FRIEND_GROUPS.map(({ group, slugs }) => ({
 // appears on an article page only where it truthfully belongs — named in the
 // visibility panel as the door. See LUI-122 and src/gap.js.
 
-const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}`
+const wikiHref = (title) => `/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}`
 
 /**
  * Slug → the name this page calls that friend, read off FRIENDS rather than
@@ -484,7 +484,7 @@ ${legend.style}
     museums that publish their own collections, scientists who post their papers openly, mappers and
     naturalists who chart the planet for free. This experiment invites them in.
     <b>Pick an article, and see who else is out there.</b></p>
-  <form class="ask" role="search" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replace(/ /g,'_'));return false">
+  <form class="ask" role="search" onsubmit="location.href='/wiki/'+encodeURIComponent(this.q.value.trim().replaceAll(/ /g,'_'));return false">
     <!-- type=search and role=search are the standards-based half of telling a
          password manager this is not a login: a lone untyped input in a form,
          with autofocus, is exactly the shape they read as a username box. The

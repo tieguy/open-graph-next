@@ -289,7 +289,7 @@ const server = createServer(async (req, res) => {
   // itself: it is a bad request, and it must not take a slot on the way out.
   let page
   try {
-    page = decodeURIComponent(m[1]).replace(/_/g, ' ')
+    page = decodeURIComponent(m[1]).replaceAll(/_/g, ' ')
   } catch {
     res.writeHead(400, { 'Content-Type': 'text/plain' })
     res.end('bad title encoding\n')
@@ -398,7 +398,7 @@ const server = createServer(async (req, res) => {
         // was found" quietly implied otherwise.
         provenance:
           `Discovered live from the English Wikipedia article ` +
-          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replace(/ /g, '_'))}">` +
+          `<a href="https://en.wikipedia.org/wiki/${encodeURIComponent(title.replaceAll(/ /g, '_'))}">` +
           `${escapeHtml(title)}</a> on ${discoveredOn()} — no curated dataset. ` +
           `Later visits are served this same render, so what you see is the open ` +
           `ecosystem as it was that day.`,

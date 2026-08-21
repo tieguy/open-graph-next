@@ -26,7 +26,7 @@ const PROJECT = 'https://github.com/tieguy/open-graph-next'
  * @param {{contact?: string}} [options]  defaults to WIKIMEDIA_UA_CONTACT
  */
 export function userAgent(component, { contact = process.env.WIKIMEDIA_UA_CONTACT } = {}) {
-  if (!contact || !contact.trim()) {
+  if (!contact?.trim()) {
     throw new Error(
       'WIKIMEDIA_UA_CONTACT is not set. Wikimedia requires a User-Agent naming a ' +
         'contact who can be reached about this traffic — an email, or a URL you ' +
