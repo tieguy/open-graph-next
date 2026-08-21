@@ -609,11 +609,10 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
     assert.ok(html.includes(escapeHtml(title)), `front page shows ${title}`)
   }
   assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
-  // The chip retired with its second label; the readiness sentence is the
-  // whole claim, covers the whole grid, and counts all nine.
-  assert.match(html, /Nine articles are already rendered and cached/)
-  // …and the count is always a word: a digit here means COUNT_WORDS ran out.
-  assert.doesNotMatch(html, /\d+ articles are already rendered/)
+  // The grid line introduces the variety and makes no cache claim — the
+  // promise lives on the busy page; the warm walk and reserve still back it.
+  assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,/)
+  assert.doesNotMatch(html, /already rendered and cached/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
   // Three group rows, reading aids like the friends list's — and the
   // two-party fact is the Art group's own note.
@@ -637,10 +636,13 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   assert.match(html, /J\. Paul Getty Museum · <span class="fmt">IIIF<\/span>/)
   assert.doesNotMatch(html, /Wikipedia \+ /)
   assert.doesNotMatch(html, /Linked Art|JSON-LD|Open Access API/)
-  // Both 3D cards, and the format span keeps glTF's own casing against the
-  // .dom uppercase transform.
-  assert.match(html, /Aviation · <span class="fmt">glTF<\/span>/)
-  assert.match(html, /Natural history · <span class="fmt">glTF<\/span>/)
+  // glTF lives in the descriptions (the operator's line edit) — .adds keeps
+  // its casing natively — and never in the uppercased small-caps bar.
+  assert.match(html, /3D models from the Smithsonian, using glTF/)
+  assert.match(html, /a 3D scan of the Smithsonian’s specimen, using glTF/)
+  assert.match(html, /<span class="dom">Aviation<\/span>/)
+  assert.doesNotMatch(html, /<span class="fmt">glTF<\/span>/)
+  // The via spans (IIIF) still ride the casing exemption.
   assert.match(html, /\.dom \.fmt\{text-transform:none/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []

@@ -35,41 +35,27 @@ const OG_DESCRIPTION =
 // that every slug names a friend this page lists, which catches a rename but
 // cannot catch drift. Each row deliberately OMITS the partner named in
 // `adds` — "other friends" means the ones the headline did not already say.
-// The counts, spelled, for the sentences that promise pages are ready —
-// showcaseCount for the busy page (whose grid is the showcase's),
-// readyCount for the front page (whose promise covers the whole grid,
-// showcase groups and Art group alike). Written
-// out rather than counted by hand, the number went stale the moment a card
-// was added — and it is a promise about how many pages open at once, which
-// is exactly the kind of claim this page must not get wrong.
-// Extend this table when a card joins either list — readyCount's index is
-// their sum, and a sum past the table's end falls back to digits, which the
-// word-not-digits test refuses. The number is also spelled in prose that no
-// test derives: the ready-line CSS comment below, src/admission.js's reserve
-// preamble, and tapestry-gen CLAUDE.md in three places — the warming
-// paragraph under Deployed demo, the reserve paragraph, and the busy-page
-// paragraph under The page cache — update all of them in the same edit.
+// The count, spelled, for the one sentence that still prints a cache
+// promise: the busy page's ("These six are already rendered and stored"),
+// whose grid is the showcase's. The front page's grid line names no number
+// and makes no cache claim (the operator's call, 2026-08-20: the promise is
+// good — the warm walk and the admission reserve are unchanged — it just
+// does not need stating there). Written out rather than counted by hand,
+// and the number is also spelled in tapestry-gen CLAUDE.md's warming and
+// reserve sections — update those in the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
-// The ready-now promise covers the whole grid — the showcase groups and the
-// held works ride one warm walk and one reserve (bootWarmTitles, which
-// composes these same two lists) — so the ready line's count is their sum.
-const readyCount = () =>
-  COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
-  String(SHOWCASE.length + HOLDER_SHOWCASE.length)
 
 const SHOWCASE = [
   {
-    // The 3D cards name their format: glTF is Voyager's package format —
-    // every 3d_voyager scan ships it (see the Smithsonian entry in
-    // CLAUDE.md). Its own field, not part of `domain`, because .dom
-    // uppercases and glTF's name is cased — the card exempts the format
-    // span from the transform.
+    // The 3D cards name their format in the description, not the small-caps
+    // bar (the operator's line edit, 2026-08-20): glTF is Voyager's package
+    // format — every 3d_voyager scan ships it (see the Smithsonian entry in
+    // CLAUDE.md) — and .adds keeps its casing without any exemption.
     domain: 'Aviation',
-    format: 'glTF',
     title: 'Wright Flyer',
     group: 'History and the public record',
-    adds: '3D models from the Smithsonian',
+    adds: '3D models from the Smithsonian, using glTF',
     friends: ['dpla', 'europeana', 'digitalnz', 'openstreetmap'],
   },
   {
@@ -106,10 +92,9 @@ const SHOWCASE = [
   },
   {
     domain: 'Natural history',
-    format: 'glTF',
     title: 'Common seadragon',
     group: 'Science and the living world',
-    adds: 'a 3D scan of the museum’s own specimen from the Smithsonian',
+    adds: 'a 3D scan of the Smithsonian’s specimen, using glTF',
     // Read off the rendered page 2026-08-20, per the hand-written rule above.
     friends: ['inaturalist', 'gbif', 'dpla', 'internet_archive'],
   },
@@ -246,7 +231,7 @@ export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
  * else.
  */
 const showcaseCard = (c) => `<a class="show" href="${wikiHref(c.title)}">
-  <span class="dom">${escapeHtml(c.domain)}${c.format ? ` · <span class="fmt">${escapeHtml(c.format)}</span>` : ''}</span>
+  <span class="dom">${escapeHtml(c.domain)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>Other friends:</b>${friendIcons(c.friends)}</span>
@@ -433,11 +418,12 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .section{padding:6px 0 22px}
 .section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
   color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
-/* The ready line: the warm pages, named as such — nine pages, one warm
-   list, and the sentence is the whole claim. The manila chip retired from
-   this page when it became the only one of its kind (the operator's call,
-   2026-08-20); the busy page still wears one over its own six-card grid,
-   and CARD_STYLE keeps the rule for it. */
+/* .ready is the grid's intro line. On the front page it introduces the
+   variety and claims nothing about caching (the operator's call,
+   2026-08-20 — the promise is real, the warm walk and reserve back it,
+   the sentence just does not state it); on the busy page it still wears
+   the manila chip and prints the cache promise over the six-card grid,
+   and CARD_STYLE keeps the chip rule for exactly that. */
 ${CARD_STYLE}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
@@ -530,8 +516,8 @@ ${legend.style}
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
-  <p class="ready">${readyCount()
-    .replace(/^./, (c) => c.toUpperCase())} articles are already rendered and cached — they open at once:</p>
+  <p class="ready">A variety of articles, chosen to show off both the cool stuff they bring in,
+    and some of my favorites:</p>
   <div class="grid">
 ${groupedShowcase()}
   </div>
