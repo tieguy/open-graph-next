@@ -35,12 +35,20 @@ const OG_DESCRIPTION =
 // that every slug names a friend this page lists, which catches a rename but
 // cannot catch drift. Each row deliberately OMITS the partner named in
 // `adds` — "other friends" means the ones the headline did not already say.
-// The showcase's own size, spelled, for the two sentences that promise these
-// pages are ready. Written out rather than counted, the number went stale the
-// moment a card was added — and it is a promise about how many pages open at
-// once, which is exactly the kind of claim this page must not get wrong.
-const SHOWCASE_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine']
-const showcaseCount = () => SHOWCASE_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
+// The counts, spelled, for the sentences that promise pages are ready —
+// showcaseCount for the busy page (whose grid is the showcase's),
+// readyCount for the front page (whose promise covers both grids). Written
+// out rather than counted by hand, the number went stale the moment a card
+// was added — and it is a promise about how many pages open at once, which
+// is exactly the kind of claim this page must not get wrong.
+const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
+// The ready-now promise covers BOTH grids — the showcase and the held
+// works ride one warm walk and one reserve (bootWarmTitles, which composes
+// these same two lists) — so the count the chip vouches for is their sum.
+const readyCount = () =>
+  COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
+  String(SHOWCASE.length + HOLDER_SHOWCASE.length)
 
 const SHOWCASE = [
   {
@@ -251,6 +259,11 @@ const holderCards = () =>
 
 /** The grid those cards sit in, shared for the same reason they are. */
 const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
+/* A category line, not a status chip: it says what KIND of page the grid
+   below holds, while the manila chip above vouches for readiness — two
+   different claims, two different looks. */
+.cat{font-size:.8rem;color:var(--muted);margin:18px 0 10px}
+.cat b{font-weight:600;color:#3a3f45}
 .ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
   border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
@@ -451,14 +464,13 @@ ${legend.style}
       aria-label="English Wikipedia article title">
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
-  <p class="ready"><span class="chip">ready now</span>${showcaseCount()
+  <p class="ready"><span class="chip">ready now</span>${readyCount()
     .replace(/^./, (c) => c.toUpperCase())} articles are already rendered and cached — they open at once:</p>
   <div class="grid">
 ${cards}
   </div>
-  <p class="ready"><span class="chip">held works</span>When one friend holds the work itself, the
-    page becomes a two-party act — the Wikipedia article and the institution’s own record of the
-    work, merged:</p>
+  <p class="cat"><b>When one friend holds the work itself</b>, the page becomes a two-party
+    act — the Wikipedia article and the institution’s own record of the work, merged:</p>
   <div class="grid">
 ${holderCards()}
   </div>
