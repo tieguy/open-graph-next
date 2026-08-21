@@ -51,9 +51,9 @@ const OG_DESCRIPTION =
 // itself), warming section ("walks the nine pages", "nine local replays")
 // and reserve section ("the nine ready-now titles") — update every one in
 // the same edit as a card change. The component counts (six showcase,
-// three held) are spelled beside the nine in CLAUDE.md's warming section
+// three held) are spelled beside that count in CLAUDE.md's warming section
 // and Art-group paragraph and in the HOLDER_SHOWCASE comment below —
-// sweep those in the same edit; this list's own subject is the nine.
+// sweep those in the same edit; this list's own subject is the total.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const storedCount = () =>
   COUNT_WORDS[SHOWCASE.length + HOLDER_SHOWCASE.length] ??
