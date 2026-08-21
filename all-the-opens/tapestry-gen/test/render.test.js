@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
-import { frontPage, showcaseTitles } from '../src/front-page.js'
+import { frontPage, holderShowcaseTitles, showcaseTitles } from '../src/front-page.js'
 
 // What the shipped renderer and its article extraction promise. The curated
 // generator's own tests — placement, Tapestry geometry, zip — retired with it
@@ -570,4 +570,41 @@ test('zoomLink adds "and more pages" only for a manuscript whose record states m
   // a painting with many detail shots is not "more pages"
   const painting = zoomLink(entry, 'The Met', { medium: 'painting', imageCount: 12 })
   assert.doesNotMatch(painting, /more pages/)
+})
+
+test('a holder page carries the work’s copyright in the panel, not the slab — and says it once', () => {
+  const bands = holderBands()
+  bands[0].holder = SMK_HOLDER
+  bands[0].subjectRights = {
+    marks: [],
+    label: 'public domain',
+    line: 'Gerard Horenbout: copyrights on works have expired',
+    detail: [],
+    paulina: { url: 'https://paulina.toolforge.org/work/Q999', label: 'What this means where you are' },
+  }
+  const result = buildHtml({ title: 'Test', bands, holder: SMK_HOLDER })
+  // The slab is gone — the panel is the one place the claim lives now
+  assert.doesNotMatch(result, /class="subject-rights"/)
+  assert.equal((result.match(/copyrights on works have expired/g) ?? []).length, 1)
+  const panel = result.match(/<table class="infobox holder-panel">[\s\S]*?<\/table>/)[0]
+  assert.match(panel, /copyrights on works have expired/)
+  assert.match(panel, /<span class="infobox-chip">Wikidata<\/span>/)
+  assert.match(panel, /Why, and what it means where you are/)
+  assert.match(panel, /paulina\.toolforge\.org/)
+})
+
+
+test('the held-works row shows the two-party pages, one friend each, warmed like the showcase', () => {
+  const html = frontPage()
+  for (const title of holderShowcaseTitles()) {
+    assert.ok(html.includes(escapeHtml(title)), `front page shows ${title}`)
+  }
+  assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
+  assert.match(html, /When one friend holds the work itself/)
+  assert.match(html, /Wikipedia \+ Rijksmuseum/)
+  // The foot row names exactly one friend per held card
+  const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []
+  for (const card of heldCards) {
+    assert.equal((card.match(/class="fav fav-/g) ?? []).length, 1, 'one logo per held card')
+  }
 })

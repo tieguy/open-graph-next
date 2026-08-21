@@ -1106,7 +1106,7 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   if (holder) {
     // On a holder page: build the merged panel from the infobox (if any) and the record
     const rows = infoboxRows(infobox?.html)
-    const panel = mergedPanel(rows, holder.record)
+    const panel = mergedPanel(rows, holder.record, workRightsCell(b))
     if (panel) {
       holderPanelHtml = panel
       infobox = null // The merged panel takes the box's seat
@@ -1255,7 +1255,12 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   return {
     // Both go before the prose, the status first: it is about the whole
     // article, while the hero is about one find inside it.
-    rail: subjectRights(b) + float + more,
+    // When the merged panel exists it carries the work's copyright answer as
+    // its Copyright block (workRightsCell reads the same b.subjectRights), so
+    // the slab above the prose would be the page saying it twice — the exact
+    // duplicate the says-it-once rule exists to delete. A refusal page never
+    // has a panel, so the sr-conflict line always keeps its slab.
+    rail: (holderPanelHtml && b.subjectRights ? '' : subjectRights(b)) + float + more,
     deck: deckBody ? `<div class="deck">${deckBody}</div>` : '',
     refs: sources,
   }
@@ -1341,6 +1346,30 @@ function mergedPanelAside(panelHtml, wikiBase) {
  * carries the same claim, so an article whose subject a museum does hold (where
  * the hero card already says it) never says it twice.
  */
+/**
+ * The graph's copyright answer about the work, as one panel cell — the
+ * Copyright block's Wikidata voice (the operator's direction, 2026-08-20:
+ * the panel is the page's one piece of furniture built to show two voices
+ * side by side, so the work's status belongs there, not in a slab above
+ * the prose). Built from the SAME view the lede status line renders on
+ * non-holder pages, so every copy rule — freest leads, creator lines name
+ * their author, a mark is never a guess — is inherited, not restated. The
+ * fold keeps the Paulina door ("what it means where you are"). Null when
+ * the view has nothing to show; the panel then keeps its one-voice block.
+ */
+function workRightsCell(b) {
+  const r = b.subjectRights
+  if (!r) return null
+  const marks = rightsMarks(r.marks, r.label)
+  const words = r.line ?? r.label
+  if (!marks && !words) return null
+  const detail = rightsDetail({ rights: { work: r } })
+  const fold = detail
+    ? `<details class="sr-why"><summary>Why, and what it means where you are</summary>${detail}</details>`
+    : ''
+  return `${marks}${marks ? ' ' : ''}${escapeHtml(words ?? '')}${fold}`
+}
+
 function subjectRights(b) {
   const r = b.subjectRights
   const conflict = holderConflict(b)

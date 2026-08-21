@@ -92,6 +92,35 @@ const SHOWCASE = [
   },
 ]
 
+// When one friend holds the work itself (the operator's front-page call,
+// 2026-08-20): articles that ARE a museum-held work render as a two-party
+// page, and the showcase above cannot show that — none of its subjects is a
+// held work. These three are, one per lane worth meeting first. `holder` is
+// the partner slug, for the icon and the small-caps masthead echo; the
+// `adds` lines follow the no-pitch register rule above. The titles join the
+// boot-time warm walk (serve.js warms holderShowcaseTitles after the
+// showcase), so these cards make the same ready-now promise the grid above
+// makes.
+const HOLDER_SHOWCASE = [
+  {
+    title: 'The Night Watch',
+    holder: 'rijks',
+    adds: 'the Rijksmuseum’s record of the painting, merged row by row with the Wikipedia article’s facts',
+  },
+  {
+    title: "Hours of Jeanne d'Evreux",
+    holder: 'met',
+    adds: 'the Met’s record of the manuscript, and the door to its 210 images',
+  },
+  {
+    title: 'Spinola Hours',
+    holder: 'getty',
+    adds: 'the Getty’s record of the book of hours, and six more works by its illuminator',
+  },
+]
+
+export const holderShowcaseTitles = () => HOLDER_SHOWCASE.map((c) => c.title)
+
 // The friends, each with its gift — the page's actual subject. Order is
 // roughly a reader's journey: books, papers, museums, nature, place, law,
 // media; the hosts close the list. The license line states the terms of the
@@ -197,6 +226,23 @@ const showcaseCards = () =>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>Other friends:</b>${friendIcons(c.friends)}</span>
+</a>`,
+  ).join('\n')
+
+/**
+ * The held-work cards. Same card grammar as the showcase, with the two
+ * differences a two-party page earns: the small-caps line echoes the page's
+ * own masthead ("Wikipedia + <institution>"), and the foot row names ONE
+ * friend, because having exactly one is the point. `show held` rather than
+ * `show`, so the counts that pin the showcase grid stay exact.
+ */
+const holderCards = () =>
+  HOLDER_SHOWCASE.map(
+    (c) => `<a class="show held" href="${wikiHref(c.title)}">
+  <span class="dom">Wikipedia + ${escapeHtml(FRIEND_NAMES.get(c.holder) ?? c.holder)}</span>
+  <span class="art">${escapeHtml(c.title)}</span>
+  <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
+  <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>
 </a>`,
   ).join('\n')
 
@@ -406,6 +452,12 @@ ${legend.style}
     .replace(/^./, (c) => c.toUpperCase())} articles are already rendered and cached — they open at once:</p>
   <div class="grid">
 ${cards}
+  </div>
+  <p class="ready"><span class="chip">held works</span>When one friend holds the work itself, the
+    page becomes a two-party act — the Wikipedia article and the institution’s own record of the
+    work, merged:</p>
+  <div class="grid">
+${holderCards()}
   </div>
 </div></header>
 <main>

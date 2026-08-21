@@ -252,8 +252,14 @@ function emitHolderRow(html, label, value, institution) {
  * A <tr> contains both a <th> (label) and a <td> (value).
  * Accession and credit line may merge with infobox rows or append as
  * holder-only fields if no infobox row mapped to that field.
+ *
+ * `workRightsHtml` is the graph's copyright answer about the WORK, prebuilt
+ * by the renderer (the same trusted-HTML contract as the sanitized infobox
+ * valueHtml): the panel places it, it never builds or judges it, so every
+ * copy rule about rights lives in one place. When present it renders as the
+ * Copyright block's second voice, chipped Wikidata.
  */
-export function mergedPanel(rows, record) {
+export function mergedPanel(rows, record, workRightsHtml = null) {
   if (!record || typeof record !== 'object') {
     return ''
   }
@@ -336,9 +342,28 @@ export function mergedPanel(rows, record) {
     }
   }
 
-  // Append rights label if present
-  if (record.rights && record.rights.label) {
-    emitHolderRow(html, 'Rights', record.rights.label, record.institution)
+  // The Copyright block closes the panel, two-voiced by design. The
+  // institution's clause is about the image its record releases — what the
+  // gate read — and says so; the graph's clause is about the work or its
+  // creator and names its own subject (the renderer builds it from the
+  // same view the lede status line renders elsewhere). Different objects,
+  // so the rows are deliberately NOT a conflict pair: neither claim
+  // contradicts the other, and styling them as a disagreement would
+  // misstate the copy/work split this project keeps.
+  const imageClause = record.rights?.label ? `This image: ${record.rights.label}` : null
+  if (imageClause) {
+    emitHolderRow(html, 'Copyright', imageClause, record.institution)
+    hasContent = true
+  }
+  if (workRightsHtml) {
+    html.push('<tr><th scope="row" class="infobox-label">')
+    // The label prints once for the block: on the image row when the record
+    // states one, else on this row.
+    html.push(imageClause ? '' : 'Copyright')
+    html.push('</th><td class="infobox-data">')
+    html.push(workRightsHtml)
+    html.push(' <span class="infobox-chip">Wikidata</span>')
+    html.push('</td></tr>')
     hasContent = true
   }
 

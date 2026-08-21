@@ -203,13 +203,39 @@ test('holder-only fields (accession, credit, rights) append at end', () => {
     credit: 'Gift of the Dutch State, 1808',
     rights: { label: 'Public domain' }
   })
-  // Should contain accession, credit, and rights labels
+  // Should contain accession, credit, and the copyright block
   assert.match(html, />Accession</)
   assert.match(html, />Credit line</)
-  assert.match(html, />Rights</)
+  assert.match(html, />Copyright</)
   assert.match(html, /SK-C-5/)
   assert.match(html, /Gift of the Dutch State/)
-  assert.match(html, /Public domain/)
+  // The institution's clause names its object: the image, not the work
+  assert.match(html, /This image: Public domain/)
+})
+
+test('the Copyright block carries the graph’s work clause as a second voice, chipped Wikidata', () => {
+  const html = mergedPanel([], {
+    institution: 'J. Paul Getty Museum', partner: 'getty',
+    rights: { label: 'CC0' },
+  }, 'Gerard Horenbout: copyrights on works have expired<details class="sr-why"><summary>Why</summary>x</details>')
+  assert.match(html, />Copyright</)
+  assert.match(html, /This image: CC0/)
+  assert.match(html, /copyrights on works have expired/)
+  assert.match(html, /<span class="infobox-chip">Wikidata<\/span>/)
+  // Two claims about two different objects are not a disagreement
+  assert.doesNotMatch(html, /infobox-conflict/)
+  // The label prints once for the block
+  assert.equal((html.match(/>Copyright</g) ?? []).length, 1)
+})
+
+test('a work clause without an image clause still gets the Copyright label', () => {
+  const html = mergedPanel([], {
+    institution: 'Example', partner: 'iiif',
+    rights: { label: null },
+  }, 'public domain in the United States')
+  assert.match(html, />Copyright</)
+  assert.match(html, /public domain in the United States/)
+  assert.doesNotMatch(html, /This image:/)
 })
 
 test('returns empty string when no rows are emitted', () => {
