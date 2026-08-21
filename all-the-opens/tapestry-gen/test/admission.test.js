@@ -66,7 +66,7 @@ test('the busy page links every page the reserve keeps room for', () => {
 test('the busy page still says why it is busy, and offers a way out', () => {
   const html = busyPage()
   assert.match(html, /busy responding to other users right now/)
-  assert.match(html, /fetches politely, a few at a/)
+  assert.match(html, /fetching only a few pages at a time/)
   assert.ok(html.includes('href="/"'), 'the front page is one click away')
 })
 
