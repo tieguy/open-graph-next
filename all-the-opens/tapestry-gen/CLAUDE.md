@@ -252,14 +252,14 @@ Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 
 **The ready-now pages have a reserve past that cap** (`src/admission.js`,
 2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
-alike, which broke the promise the front page prints — its ready line says all
-nine articles are "already rendered and cached" — and a reader arriving while
-four cold discoveries were in flight got the busy page for a page that would
-have been served entirely off disk. `SHOWCASE_RESERVE` (default 2) is slots
-only the nine ready-now titles may take — every card in the grid, showcase
-groups and Art group alike — admitted on the reader's own requested title (a
-redirect *to* one of them is not known to be one until the parse call answers,
-so it rides the general lane).
+alike, which broke what the front page's grid offers — every card on it is
+warmed at boot and stored, and the busy page says so in print — and a reader
+arriving while four cold discoveries were in flight got the busy page for a
+page that would have been served entirely off disk. `SHOWCASE_RESERVE` (default
+2) is slots only the nine ready-now titles may take — every card in the grid,
+showcase groups and Art group alike — admitted on the reader's own requested
+title (a redirect *to* one of them is not known to be one until the parse call
+answers, so it rides the general lane).
 **It widens nothing anyone else sees** — `hostLimit()` bounds upstream
 concurrency globally and knows nothing about in-flight discoveries; the worst
 case, a cold volume, is two more discoveries waiting on those same per-host
@@ -277,10 +277,11 @@ of system-ui on a blank page — a dead end offered by a site with finished
 pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
 startup (the moment it is needed is the moment there is no capacity to build
 anything), sharing the showcase cards and their CSS with the front page; the
-busy page alone still wears the ready-now chip. The two pages promise
-different counts — the front page's nine covers its whole grid, the busy
-page's six covers the showcase cards it alone shows — and each count is true
-of its own page. A busy page linking to pages
+busy page alone still wears the ready-now chip. The busy page alone prints a
+cache promise now — "These six are already rendered and stored", over the
+showcase cards it alone shows; the front page's grid line names no number and
+makes no cache claim (the operator's call, 2026-08-20: the promise is good, it
+just does not need stating there). A busy page linking to pages
 that would themselves answer 503 would be worse than the dead end it replaced,
 which is why the two must not be separated.
 **It therefore needs the icon bytes too** (2026-08-13): a showcase card carries
