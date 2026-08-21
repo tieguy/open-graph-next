@@ -1,7 +1,7 @@
 import { citationHeadline, pageCitations } from './citations.js'
 import { gapCounts, partnerTally, visibilityReport } from './gap.js'
 import { heroRank, pickHero } from './hero.js'
-import { escapeHtml } from './html.js'
+import { escapeHtml, stripTags } from './html.js'
 import { hotlinkUnsafe } from './http.js'
 import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 import { PARTNERS } from './partners.js'
@@ -1033,7 +1033,7 @@ const FLOAT_MIN_PROSE = 700
 function proseLength(b) {
   if (!b.blocks) return (b.text ?? '').length
   return b.blocks.reduce(
-    (n, x) => n + (x.html ? x.html.replaceAll(/<[^>]*>/g, '').length : (x.text ?? '').length),
+    (n, x) => n + (x.html ? stripTags(x.html).length : (x.text ?? '').length),
     0,
   )
 }

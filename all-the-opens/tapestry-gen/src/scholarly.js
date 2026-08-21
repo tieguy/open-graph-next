@@ -16,6 +16,7 @@ import { templateParams } from './citations.js'
 import { chunk } from './batch.js'
 import { getJson } from './http.js'
 import { ccFromSlug, licenseView } from './rights.js'
+import { stripTags } from './html.js'
 
 /**
  * Scholarly identifiers a section's citations state: one record per cited
@@ -38,7 +39,10 @@ export function scholarlyIdentifiers(wikitext) {
       ? rawDoi.replace(/^10\.48550\/arxiv\./i, '')
       : null
     const entry = {
-      title: (p.get('title') ?? '').replaceAll(/<[^>]+>|\[\[|\]\]/g, '').trim() || null,
+      title:
+      stripTags(p.get('title') ?? '')
+        .replaceAll(/\[\[|\]\]/g, '')
+        .trim() || null,
       doi: arxivFromDoi ? null : rawDoi,
       pmid: p.get('pmid')?.trim() || null,
       arxiv: p.get('arxiv')?.trim() || p.get('eprint')?.trim() || arxivFromDoi,

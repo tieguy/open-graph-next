@@ -46,6 +46,7 @@ import {
   templateParams,
 } from './citations.js'
 import { chunk, dedupedIaEntries, iaSearchUrl, matchIaDoc, olBooksUrl } from './batch.js'
+import { stripTags } from './html.js'
 import { dplaBrowseUrl, dplaEntries } from './dpla.js'
 import { europeanaBrowseUrl, europeanaEntries } from './europeana.js'
 import { digitalnzBrowseUrl, digitalnzEntries } from './digitalnz.js'
@@ -145,7 +146,9 @@ function citationIdentifiers(wikitext) {
     const p = templateParams(tpl[0])
     const isbn = p.get('isbn')?.replaceAll(/[^0-9Xx]/g, '')
     const entry = {
-      title: (p.get('title') ?? '').replaceAll(/<[^>]+>|\[\[|\]\]/g, '').trim(),
+      title: stripTags(p.get('title') ?? '')
+        .replaceAll(/\[\[|\]\]/g, '')
+        .trim(),
       isbn: isbn && (isbn.length === 10 || isbn.length === 13) ? isbn : null,
       oclc: p.get('oclc')?.trim() || null,
       lccn: p.get('lccn')?.trim() || null,

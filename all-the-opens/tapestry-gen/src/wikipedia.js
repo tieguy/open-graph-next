@@ -1,4 +1,5 @@
 import { cachedRequest } from './mw.js'
+import { stripTags } from './html.js'
 
 /**
  * Every English-Wikipedia call goes through the shared m3api transport: disk
@@ -56,7 +57,7 @@ export function sectionOutline(sections) {
       index: s.index,
       level: s.toclevel,
       number: s.number,
-      title: s.line.replaceAll(/<[^>]+>/g, '').trim(),
+      title: stripTags(s.line).trim(),
     }))
 }
 
@@ -307,7 +308,7 @@ export function imageCredit(extmetadata) {
   if (!extmetadata) return null
   const license = extmetadata.LicenseShortName?.value ?? null
   const rawAuthor = extmetadata.Artist?.value ?? null
-  const author = rawAuthor ? decodeEntities(rawAuthor.replaceAll(/<[^>]+>/g, '')).trim() || null : null
+  const author = rawAuthor ? decodeEntities(stripTags(rawAuthor)).trim() || null : null
   if (!license && !author) return null
   return { license, author }
 }
@@ -518,7 +519,7 @@ export function articleBlocks(html, { notePrefix = null } = {}) {
   const pattern = /<(p|h3|h4)\b[^>]*>([\s\S]*?)<\/\1>/gi
   let match
   while ((match = pattern.exec(cleaned))) {
-    const text = decodeEntities(match[2].replaceAll(/<[^>]+>/g, '')).replaceAll(/\s+/g, ' ').trim()
+    const text = decodeEntities(stripTags(match[2])).replaceAll(/\s+/g, ' ').trim()
     if (text.length < 2) continue
     const block = { kind: match[1].toLowerCase() === 'p' ? 'p' : 'h', text }
     if (notePrefix)
@@ -652,12 +653,12 @@ const BLOCK_TAGS = /<(table|figure|style|sup|div class="hatnote"|ref)[\s\S]*?<\/
  * infoboxes, footnote markers, and hatnotes that would be noise on a canvas.
  */
 export function firstSentences(html, count = 2) {
-  const text = html
+  const blocksRemoved = html
     .replace(BLOCK_TAGS, ' ')
     .replaceAll(/<sup[\s\S]*?<\/sup>/gi, '') // footnote markers
     .replaceAll(/<style[\s\S]*?<\/style>/gi, ' ')
     .replaceAll(/<table[\s\S]*?<\/table>/gi, ' ')
-    .replaceAll(/<[^>]+>/g, '') // remaining tags
+  const text = stripTags(blocksRemoved) // remaining tags
     .replaceAll(/&#(\d+);/g, (_, d) => String.fromCodePoint(Number(d)))
     .replaceAll(/&nbsp;/g, ' ')
     .replaceAll(/&amp;/g, '&')

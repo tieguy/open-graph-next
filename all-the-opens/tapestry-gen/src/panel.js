@@ -11,7 +11,7 @@
 // an infobox-less page still shows the museum's description, not only its
 // bookkeeping.
 
-import { escapeHtml } from './html.js'
+import { escapeHtml, stripTags } from './html.js'
 import { decodeEntities } from './wikipedia.js'
 
 /**
@@ -101,7 +101,7 @@ function htmlToText(html) {
   let cleaned = stripDisplayNone(html)
 
   // Strip all HTML tags
-  cleaned = cleaned.replace(/<[^>]+>/g, '')
+  cleaned = stripTags(cleaned)
 
   // Decode entities (numeric, hex, and named)
   cleaned = decodeEntities(cleaned)
@@ -159,7 +159,7 @@ export function infoboxRows(html) {
     const tdHtml = tdMatch[1]
 
     // Extract label text (preserve original case, for display) and entity-decode
-    const labelText = decodeEntities(thHtml.replace(/<[^>]+>/g, '').trim())
+    const labelText = decodeEntities(stripTags(thHtml).trim())
 
     // Skip empty td
     if (!tdHtml.trim()) continue

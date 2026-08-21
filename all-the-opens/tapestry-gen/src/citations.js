@@ -4,7 +4,10 @@
 // (ISBN, DOI, URL) without a second lookup. This module turns that wikitext
 // into structured citations; resolving them to media is a separate step.
 
+import { stripTags } from './html.js'
+
 /** Split a template's interior on top-level `|`, ignoring pipes nested in `{{}}`/`[[]]`. */
+
 function splitTopLevel(str, sep) {
   const parts = []
   let depth = 0
@@ -81,11 +84,11 @@ function extractTemplate(text) {
 /** Reduce wiki markup in a short field (title, publisher) to plain text. */
 function stripMarkup(value) {
   if (!value) return null
-  const text = value
+  const linksResolved = value
     .replace(/\[\[[^\]|]*\|([^\]]*)\]\]/g, '$1') // [[target|label]] → label
     .replace(/\[\[([^\]]*)\]\]/g, '$1') // [[label]] → label
     .replace(/'''?/g, '') // bold/italic
-    .replace(/<[^>]+>/g, '') // stray tags
+  const text = stripTags(linksResolved) // stray tags, and commented-out ones
     .replace(/\s+/g, ' ')
     .trim()
   return text || null
