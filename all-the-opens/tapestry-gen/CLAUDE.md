@@ -276,15 +276,15 @@ be.
 of system-ui on a blank page — a dead end offered by a site with finished pages
 warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
 startup (the moment it is needed is the moment there is no capacity to build
-anything), sharing all nine cards and their CSS with the front page; the busy
+anything), sharing all its cards and their CSS with the front page; the busy
 page alone wears the ready-now chip, and it is the one place a cache promise is
-printed — "These nine are already rendered and stored", over the same nine
-cards the front page shows (the operator's line edit, 2026-08-20, widened this
-grid from the showcase six so the count points at what it counts). The front
-page's grid line names no number and makes no cache claim (the operator's call,
-2026-08-20: the promise is good, it just does not need stating there). A busy
-page linking to pages that would themselves answer 503 would be worse than the
-dead end it replaced, which is why the two must not be separated.
+printed — "These nine are already rendered and stored", over the same cards the
+front page shows (the operator's line edit, 2026-08-20, widened this grid from
+the showcase six so the count points at what it counts). The front page's grid
+line names no number and makes no cache claim (the operator's call, 2026-08-20:
+the promise is good, it just does not need stating there). A busy page linking
+to pages that would themselves answer 503 would be worse than the dead end it
+replaced, which is why the two must not be separated.
 **It therefore needs the icon bytes too** (2026-08-13): a showcase card carries
 its page's other friends as logos, and those bytes live in the stylesheet
 (`faviconStyle`), so `busyPage({inline: icons})` — not `busyPage({})` — is what
