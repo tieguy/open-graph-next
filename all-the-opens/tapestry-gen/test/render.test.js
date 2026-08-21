@@ -609,12 +609,15 @@ test('the held-works row shows the two-party pages, one friend each — and the 
     assert.ok(html.includes(escapeHtml(title)), `front page shows ${title}`)
   }
   assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
-  assert.match(html, /When one friend holds the work itself/)
+  assert.match(html, /when one friend holds the work itself/)
   // One chip, one meaning: the readiness claim covers both grids and counts
   // all ten, and the held row's label is a category line, never a chip.
   assert.match(html, /Ten articles are already rendered and cached/)
+  // …and the count is always a word: a digit here means COUNT_WORDS ran out.
+  assert.doesNotMatch(html, /\d+ articles are already rendered/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 1)
-  assert.match(html, /<p class="cat"><b>When one friend holds the work itself<\/b>/)
+  assert.match(html, /<p class="cat">Three of/)
+  assert.match(html, /two-party pages: <b>when one friend holds the work itself<\/b>/)
   assert.match(html, /Wikipedia \+ Rijksmuseum/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []

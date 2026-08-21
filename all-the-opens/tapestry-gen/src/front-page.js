@@ -41,6 +41,9 @@ const OG_DESCRIPTION =
 // out rather than counted by hand, the number went stale the moment a card
 // was added — and it is a promise about how many pages open at once, which
 // is exactly the kind of claim this page must not get wrong.
+// Extend this table when a card joins either list — readyCount's index is
+// their sum, and a sum past the table's end falls back to digits, which the
+// word-not-digits test refuses.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
 // The ready-now promise covers BOTH grids — the showcase and the held
@@ -377,9 +380,12 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .section{padding:6px 0 22px}
 .section h2{font-family:var(--serif);font-size:1.5rem;line-height:1.3;font-weight:400;
   color:var(--head);margin:1em 0 16px;padding-bottom:.17em;border-bottom:1px solid var(--rule)}
-/* The ready line: the warm showcase pages, named as such. A manila chip because a
-   statement about availability is the friends' voice, not the article's.
-   Shared with the busy page — see CARD_STYLE. */
+/* The ready line: the warm pages, named as such. On the front page the chip
+   vouches for both grids — the showcase and the held works, ten pages, one
+   warm list; on the busy page it vouches for the showcase alone, whose cards
+   are the only ones that page shows. A manila chip because a statement about
+   availability is the friends' voice, not the article's. Shared with the
+   busy page — see CARD_STYLE. */
 ${CARD_STYLE}
 
 .friends{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0 44px}
@@ -469,8 +475,9 @@ ${legend.style}
   <div class="grid">
 ${cards}
   </div>
-  <p class="cat"><b>When one friend holds the work itself</b>, the page becomes a two-party
-    act — the Wikipedia article and the institution’s own record of the work, merged:</p>
+  <p class="cat">${COUNT_WORDS[HOLDER_SHOWCASE.length].replace(/^./, (c) => c.toUpperCase())} of
+    them are two-party pages: <b>when one friend holds the work itself</b>, the page becomes the
+    Wikipedia article and the institution’s own record of the work, merged:</p>
   <div class="grid">
 ${holderCards()}
   </div>

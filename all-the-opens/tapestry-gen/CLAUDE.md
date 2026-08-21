@@ -252,9 +252,9 @@ Storage is cheap next to what it replaces: a streamed article is ~62 KB against
 
 **The ready-now pages have a reserve past that cap** (`src/admission.js`,
 2026-08-10). `MAX_CONCURRENT` used to be applied to every `/wiki/` request
-alike, which broke the promise the front page prints — its showcase chip says
-those articles are "already rendered and cached", the held-works row is warmed
-on the same walk, and a reader arriving while four cold discoveries were in
+alike, which broke the promise the front page prints — its ready-now chip
+says all ten articles, both grids, are "already rendered and cached" — and a
+reader arriving while four cold discoveries were in
 flight got the busy page for a page that would have been served entirely off
 disk. `SHOWCASE_RESERVE` (default 2) is slots only the ten ready-now titles may
 take — the showcase grid and the held-works row alike — admitted on the
@@ -276,8 +276,10 @@ be.
 of system-ui on a blank page — a dead end offered by a site with finished
 pages warm on disk. It is `busyPage()` in `src/front-page.js` now, built once at
 startup (the moment it is needed is the moment there is no capacity to build
-anything), sharing the showcase cards and their CSS with the front page so the
-"ready now" promise reads the same in both places. A busy page linking to pages
+anything), sharing the showcase cards, their CSS and the ready-now chip with
+the front page. The two pages promise different counts — the front page's ten
+covers both grids, the busy page's seven covers the showcase grid it alone
+shows — and each count is true of its own page. A busy page linking to pages
 that would themselves answer 503 would be worse than the dead end it replaced,
 which is why the two must not be separated.
 **It therefore needs the icon bytes too** (2026-08-13): a showcase card carries
