@@ -118,19 +118,17 @@ const HOLDER_SHOWCASE = [
   {
     title: 'The Night Watch',
     holder: 'rijks',
-    via: 'IIIF',
-    adds: 'the Rijksmuseum’s record of the painting, merged row by row with the Wikipedia article’s facts',
+    adds: 'the Rijksmuseum’s record of the painting, merged into the infobox via IIIF',
   },
   {
     title: "Hours of Jeanne d'Evreux",
     holder: 'met',
-    adds: 'the Met’s record of the manuscript, and the door to its 210 images',
+    adds: 'the Met’s record of the manuscript, and a link to its 210 beautiful pages, merged into the infobox',
   },
   {
     title: 'Spinola Hours',
     holder: 'getty',
-    via: 'IIIF',
-    adds: 'the Getty’s record of the book of hours, and six more works by its illuminator',
+    adds: 'the Getty’s record of the book of hours (via IIIF) merged into the infobox, and six more works by its illuminator',
   },
 ]
 
@@ -246,26 +244,21 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 /**
  * The held-work cards. Same card grammar as the showcase, with the two
  * differences a two-party page earns: the small-caps line names the
- * institution and, where the lane speaks an open standard this site wants
- * to demonstrate, that standard ("Wikipedia +" would say nothing — every
- * page on this site is Wikipedia plus someone; the operator's call,
- * 2026-08-20). `via` is OPTIONAL and hand-written:
- * it names only an open standard this site wants to demonstrate — IIIF
- * and glTF today — and only where the lane actually speaks it (the record
- * surfaces are documented per partner in CLAUDE.md's Key Files). A lane
- * with no such standard shows the institution alone: the Met's own API is
- * a fine pipe, but naming it would promote nothing, and a standard a
- * partner does not speak is exactly the false claim this site exists not
- * to make. The foot row names ONE friend, because having exactly one is
- * the point. `show held` rather than `show`, so the counts that pin the
- * showcase grid stay exact. The institution name reads PARTNERS[..].name —
- * the same source the masthead prints through the holder record — so the
+ * institution alone ("Wikipedia +" would say nothing — every page on this
+ * site is Wikipedia plus someone — and the open standards this site wants
+ * to demonstrate, IIIF and glTF, live in the `adds` prose where the
+ * operator's line edits put them, 2026-08-20; a standard named there must
+ * still be one the lane actually speaks, per CLAUDE.md's Key Files). The
+ * foot row names ONE friend, because having exactly one is the point.
+ * `show held` rather than `show`, so the counts that pin the showcase
+ * grid stay exact. The institution name reads PARTNERS[..].name — the
+ * same source the masthead prints through the holder record — so the
  * card and the page it opens cannot disagree.
  */
 const holderCards = (held = HOLDER_SHOWCASE) =>
   held.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
-  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)}${c.via ? ` · <span class="fmt">${escapeHtml(c.via)}</span>` : ''}</span>
+  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>
@@ -283,7 +276,7 @@ export const ungroupedShowcaseTitles = () =>
 // Group rows are <p>, not headings: they are reading aids inside the hero,
 // and a heading here would sit at no level — the page's outline runs h1
 // (the masthead) straight to the FAQ's h2. A group no card claims renders
-// nothing, heading included — the Art group too, note and all. The list
+// nothing, heading included — the Art group too. The list
 // parameters exist for the test that pins exactly that; the page always
 // renders the real lists.
 export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
@@ -293,13 +286,7 @@ export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
       if (!cards.length) return ''
       return `<p class="show-cat">${escapeHtml(g)}</p>\n` + cards.map(showcaseCard).join('\n')
     }),
-    held.length
-      ? `<p class="show-cat">Art</p>\n` +
-        `<p class="show-note">Each of these articles is about a work an institution holds, so the\n` +
-        `  page becomes a two-party act: the Wikipedia article and the institution’s own record\n` +
-        `  of the work, merged.</p>\n` +
-        holderCards(held)
-      : '',
+    held.length ? `<p class="show-cat">Art</p>\n` + holderCards(held) : '',
   ]
     .filter(Boolean)
     .join('\n')
@@ -322,9 +309,6 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 .show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .dom{display:block;font-size:.62rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);margin-bottom:3px}
-/* A standard's name keeps its own casing — .dom uppercases, and "GLTF" is
-   not glTF's name. */
-.dom .fmt{text-transform:none;letter-spacing:.06em}
 .art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
   margin-bottom:5px}
 .art::after{content:" →";color:var(--rule)}
@@ -435,13 +419,10 @@ ${CARD_STYLE}
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:34px 0 6px}
 .friends-cat:first-child{margin-top:0}
 /* The showcase grid's group rows: the friends list's reading-aid pattern,
-   tighter, because these sit inside the header rather than a section. The
-   note row is the Art group's own sentence — a fact about that group, in
-   prose, never a status chip. */
+   tighter, because these sit inside the header rather than a section. */
 .show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 0 0}
 .show-cat:first-child{margin-top:0}
-.show-note{grid-column:1/-1;font-size:.75rem;line-height:1.5;color:var(--muted);margin:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
 .friend .who{display:flex;align-items:center;gap:10px;font-weight:700;
   font-size:.92rem;color:var(--head);margin:0 0 6px}
@@ -521,7 +502,7 @@ ${legend.style}
     <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
   </form>
   <p class="ready">A variety of articles, chosen to show off both the cool stuff they bring in,
-    and some of my favorites:</p>
+    and the open institutions and technologies they build on:</p>
   <div class="grid">
 ${groupedShowcase()}
   </div>

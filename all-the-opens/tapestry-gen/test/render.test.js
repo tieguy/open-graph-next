@@ -611,7 +611,7 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   assert.equal(holderShowcaseTitles().length, (html.match(/<a class="show held"/g) ?? []).length)
   // The grid line introduces the variety and makes no cache claim — the
   // promise lives on the busy page; the warm walk and reserve still back it.
-  assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,\s+and some of my favorites:/)
+  assert.match(html, /A variety of articles, chosen to show off both the cool stuff they bring in,\s+and the open institutions and technologies they build on:/)
   assert.doesNotMatch(html, /already rendered and (cached|stored)/)
   assert.equal((html.match(/<span class="chip">/g) ?? []).length, 0)
   // Three group rows, reading aids like the friends list's — and the
@@ -622,28 +622,33 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
     assert.ok(html.includes(`<p class="show-cat">${g}</p>`), `group row: ${g}`)
   }
   assert.doesNotMatch(html, /<h3 class="show-cat">/)
-  assert.match(html, /<p class="show-note">Each of these articles is about a work an institution holds/)
+  // The Art group carries no note — the operator deleted it: the heading
+  // and the cards say it all.
+  assert.doesNotMatch(html, /show-note/)
   // Every showcase card names a group in GROUP_ORDER — a card outside the
   // list would silently fall out of the grid.
   assert.deepEqual(ungroupedShowcaseTitles(), [])
   // The small-caps line names the institution and its pipe — "Wikipedia +"
   // said nothing, since every page here is Wikipedia plus someone.
-  // via names only a standard the site wants to demonstrate (IIIF, glTF)
-  // and only where the lane speaks it — the Met's line is the institution
-  // alone, because its own API is not that.
-  assert.match(html, /Rijksmuseum · <span class="fmt">IIIF<\/span>/)
+  // The small-caps line is the institution alone; the standards the site
+  // demonstrates (IIIF, glTF) live in the adds prose, per the operator's
+  // line edits — and only where the lane speaks them (the Met's line names
+  // none, because its own API is not that).
+  assert.match(html, /<span class="dom">Rijksmuseum<\/span>/)
   assert.match(html, /<span class="dom">The Met<\/span>/)
-  assert.match(html, /J\. Paul Getty Museum · <span class="fmt">IIIF<\/span>/)
+  assert.match(html, /<span class="dom">J\. Paul Getty Museum<\/span>/)
+  assert.match(html, /merged into the infobox via IIIF/)
+  assert.match(html, /a link to its 210 beautiful pages, merged into the infobox/)
+  assert.match(html, /\(via IIIF\) merged into the infobox/)
   assert.doesNotMatch(html, /Wikipedia \+ /)
   assert.doesNotMatch(html, /Linked Art|JSON-LD|Open Access API/)
   // glTF lives in the descriptions (the operator's line edit) — .adds keeps
-  // its casing natively — and never in the uppercased small-caps bar.
+  // its casing natively — and no fmt span or casing exemption remains.
   assert.match(html, /3D models from the Smithsonian, using glTF/)
   assert.match(html, /a 3D scan of the Smithsonian’s specimen, using glTF/)
   assert.match(html, /<span class="dom">Aviation<\/span>/)
-  assert.doesNotMatch(html, /<span class="fmt">glTF<\/span>/)
-  // The via spans (IIIF) still ride the casing exemption.
-  assert.match(html, /\.dom \.fmt\{text-transform:none/)
+  assert.doesNotMatch(html, /class="fmt"/)
+  assert.doesNotMatch(html, /\.dom \.fmt\{/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []
   for (const card of heldCards) {
