@@ -60,9 +60,13 @@ const readyCount = () =>
 
 const SHOWCASE = [
   {
-    // The 3D cards name their format: the scans arrive as glTF (the Voyager
-    // packages resolve to it — see the Smithsonian entry in CLAUDE.md).
-    domain: 'Aviation · glTF',
+    // The 3D cards name their format: glTF is Voyager's package format —
+    // every 3d_voyager scan ships it (see the Smithsonian entry in
+    // CLAUDE.md). Its own field, not part of `domain`, because .dom
+    // uppercases and glTF's name is cased — the card exempts the format
+    // span from the transform.
+    domain: 'Aviation',
+    format: 'glTF',
     title: 'Wright Flyer',
     group: 'History and the public record',
     adds: '3D models from the Smithsonian',
@@ -101,7 +105,8 @@ const SHOWCASE = [
     friends: ['arxiv', 'internet_archive'],
   },
   {
-    domain: 'Natural history · glTF',
+    domain: 'Natural history',
+    format: 'glTF',
     title: 'Common seadragon',
     group: 'Science and the living world',
     adds: 'a 3D scan of the museum’s own specimen from the Smithsonian',
@@ -241,7 +246,7 @@ export const showcaseTitles = () => SHOWCASE.map((c) => c.title)
  * else.
  */
 const showcaseCard = (c) => `<a class="show" href="${wikiHref(c.title)}">
-  <span class="dom">${escapeHtml(c.domain)}</span>
+  <span class="dom">${escapeHtml(c.domain)}${c.format ? ` · <span class="fmt">${escapeHtml(c.format)}</span>` : ''}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>Other friends:</b>${friendIcons(c.friends)}</span>
@@ -270,7 +275,7 @@ const showcaseCards = () => SHOWCASE.map(showcaseCard).join('\n')
 const holderCards = (held = HOLDER_SHOWCASE) =>
   held.map(
     (c) => `<a class="show held" href="${wikiHref(c.title)}">
-  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)}${c.via ? ` · ${escapeHtml(c.via)}` : ''}</span>
+  <span class="dom">${escapeHtml(PARTNERS[c.holder].name)}${c.via ? ` · <span class="fmt">${escapeHtml(c.via)}</span>` : ''}</span>
   <span class="art">${escapeHtml(c.title)}</span>
   <span class="adds"><b>Adds:</b> ${escapeHtml(c.adds)}</span>
   <span class="also"><b>The friend:</b>${friendIcons([c.holder])}</span>
@@ -327,6 +332,9 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 .show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
 .dom{display:block;font-size:.62rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);margin-bottom:3px}
+/* A standard's name keeps its own casing — .dom uppercases, and "GLTF" is
+   not glTF's name. */
+.dom .fmt{text-transform:none;letter-spacing:.06em}
 .art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
   margin-bottom:5px}
 .art::after{content:" →";color:var(--rule)}

@@ -632,12 +632,16 @@ test('the Art group shows the two-party pages, one friend each — and the boot 
   // via names only a standard the site wants to demonstrate (IIIF, glTF)
   // and only where the lane speaks it — the Met's line is the institution
   // alone, because its own API is not that.
-  assert.match(html, /Rijksmuseum · IIIF/)
+  assert.match(html, /Rijksmuseum · <span class="fmt">IIIF<\/span>/)
   assert.match(html, /<span class="dom">The Met<\/span>/)
-  assert.match(html, /J\. Paul Getty Museum · IIIF/)
+  assert.match(html, /J\. Paul Getty Museum · <span class="fmt">IIIF<\/span>/)
   assert.doesNotMatch(html, /Wikipedia \+ /)
   assert.doesNotMatch(html, /Linked Art|JSON-LD|Open Access API/)
-  assert.match(html, /Natural history · glTF/)
+  // Both 3D cards, and the format span keeps glTF's own casing against the
+  // .dom uppercase transform.
+  assert.match(html, /Aviation · <span class="fmt">glTF<\/span>/)
+  assert.match(html, /Natural history · <span class="fmt">glTF<\/span>/)
+  assert.match(html, /\.dom \.fmt\{text-transform:none/)
   // The foot row names exactly one friend per held card
   const heldCards = html.match(/<a class="show held"[\s\S]*?<\/a>/g) ?? []
   for (const card of heldCards) {
