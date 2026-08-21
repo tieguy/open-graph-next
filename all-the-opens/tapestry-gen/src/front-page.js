@@ -44,8 +44,9 @@ const OG_DESCRIPTION =
 // Extend this table when a card joins either list — readyCount's index is
 // their sum, and a sum past the table's end falls back to digits, which the
 // word-not-digits test refuses. The number is also spelled in prose that no
-// test derives: the ready-line CSS comment below, and tapestry-gen
-// CLAUDE.md's warming and reserve sections — update those in the same edit.
+// test derives: the ready-line CSS comment below, src/admission.js's reserve
+// preamble, and tapestry-gen CLAUDE.md's warming and reserve sections —
+// update those in the same edit.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
 const showcaseCount = () => COUNT_WORDS[SHOWCASE.length] ?? String(SHOWCASE.length)
 // The ready-now promise covers BOTH grids — the showcase and the held

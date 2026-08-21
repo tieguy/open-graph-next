@@ -6,9 +6,8 @@
 // applied to every `/wiki/` request alike, which quietly broke the promise the
 // front page makes in print: its ready-now chip says all ten articles, both
 // grids, are "already rendered and cached — they open at once", and a reader
-// who arrived while four cold
-// discoveries were in flight got the busy page for a page that would have been
-// served entirely off the disk cache.
+// who arrived while four cold discoveries were in flight got the busy page for
+// a page that would have been served entirely off the disk cache.
 //
 // So the ready-now pages — the showcase grid and the held-works row alike — get
 // a small reserve of slots that general traffic cannot take. The argument for
