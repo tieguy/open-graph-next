@@ -282,38 +282,47 @@ const first = (v) => (Array.isArray(v) ? v[0] : v)
  * @returns {{volumes: Map<string, object>, unchecked: Set<string>}} isbn →
  * `{records}` value, and ISBNs whose batch failed
  */
-async function openLibraryVolumes(isbns) {
-  const volumes = new Map()
-  const unchecked = new Set()
+/**
+ * One pass over the ISBN groups. Groups worth another try come back in
+ * `retry`; ISBNs nobody will ever answer for go into `unchecked`.
+ *
+ * `again` only changes what is said and what is retried: a group that failed
+ * twice is truthfully unchecked, whatever the status was.
+ */
+async function openLibraryPass(groups, volumes, unchecked, { again = false } = {}) {
+  const retry = []
   const fill = (group, body) => {
     for (const isbn of group) {
       const data = body[`ISBN:${isbn}`]
       if (data) volumes.set(isbn, { records: { [`ISBN:${isbn}`]: { data } } })
     }
   }
-  const failed = []
-  for (const group of chunk([...new Set(isbns)], 40)) {
+  for (const group of groups) {
     try {
       fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
     } catch (e) {
-      console.error(`  openlibrary books failed (${group.length} isbns): ${e.message}`)
+      const twice = again ? ' again' : ''
+      console.error(`  openlibrary books failed${twice} (${group.length} isbns): ${e.message}`)
       // A permanent status (a 4xx that is our bad request, not OpenLibrary's
       // bad day) will fail identically in two seconds. Retrying it spends a
       // request to learn nothing; those ISBNs go straight to unchecked.
-      if (e.permanent) for (const isbn of group) unchecked.add(isbn)
-      else failed.push(group)
+      if (again || e.permanent) for (const isbn of group) unchecked.add(isbn)
+      else retry.push(group)
     }
   }
+  return retry
+}
+
+async function openLibraryVolumes(isbns) {
+  const volumes = new Map()
+  const unchecked = new Set()
+  const groups = chunk([...new Set(isbns)], 40)
+  const failed = await openLibraryPass(groups, volumes, unchecked)
   // One more chance after a beat — OpenLibrary's stumbles are usually
   // moments, not outages. Whatever still fails is truthfully unchecked.
-  if (failed.length) await new Promise((r) => setTimeout(r, 2000))
-  for (const group of failed) {
-    try {
-      fill(group, await getJson(olBooksUrl(group), { throttleMs: 1100 }))
-    } catch (e) {
-      console.error(`  openlibrary books failed again (${group.length} isbns): ${e.message}`)
-      for (const isbn of group) unchecked.add(isbn)
-    }
+  if (failed.length) {
+    await new Promise((r) => setTimeout(r, 2000))
+    await openLibraryPass(failed, volumes, unchecked, { again: true })
   }
   return { volumes, unchecked }
 }
@@ -365,10 +374,9 @@ const IA_ISBN_BATCH = 15
  * rare LCCN/OCLC-only citations. Returns a Map from the citation object to its
  * matched entry; citations the Archive does not hold are simply absent.
  */
-async function iaLookups(cites) {
-  const hits = new Map()
-  const byIsbn = cites.filter((c) => c.isbn)
-  for (const group of chunk(byIsbn, IA_ISBN_BATCH)) {
+/** ISBN-bearing citations, searched in batches. A failed batch costs its own cards. */
+async function iaIsbnLookups(cites, hits) {
+  for (const group of chunk(cites, IA_ISBN_BATCH)) {
     let docs = []
     try {
       docs = (await getJson(iaSearchUrl(group.map((c) => c.isbn)))).response?.docs ?? []
@@ -381,22 +389,35 @@ async function iaLookups(cites) {
       if (doc) hits.set(cite, iaEntry(doc, cite, 'isbn'))
     }
   }
+}
+
+/**
+ * A citation carrying an LCCN or OCLC but no ISBN, searched on its own. These
+ * cannot batch: the archive indexes each identifier under its own field.
+ */
+async function iaIdentifierLookup(cite, hits) {
+  const key = cite.lccn
+    ? `lccn:${cite.lccn}`
+    : `external-identifier:"urn:oclc:record:${cite.oclc}"`
+  const url =
+    'https://archive.org/advancedsearch.php?q=' +
+    encodeURIComponent(`${key} AND mediatype:texts`) +
+    '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn' +
+    '&rows=8&output=json'
+  try {
+    const docs = (await getJson(url)).response?.docs ?? []
+    const doc = matchIaDoc({ ...cite, isbn: null }, docs) ?? docs[0] ?? null
+    if (doc) hits.set(cite, iaEntry(doc, cite, cite.lccn ? 'lccn' : 'oclc'))
+  } catch (e) {
+    console.error(`  ia lookup failed (${cite.oclc ?? cite.lccn}): ${e.message}`)
+  }
+}
+
+async function iaLookups(cites) {
+  const hits = new Map()
+  await iaIsbnLookups(cites.filter((c) => c.isbn), hits)
   for (const cite of cites.filter((c) => !c.isbn && (c.oclc || c.lccn))) {
-    const key = cite.lccn
-      ? `lccn:${cite.lccn}`
-      : `external-identifier:"urn:oclc:record:${cite.oclc}"`
-    const url =
-      'https://archive.org/advancedsearch.php?q=' +
-      encodeURIComponent(`${key} AND mediatype:texts`) +
-      '&fl%5B%5D=identifier&fl%5B%5D=title&fl%5B%5D=creator&fl%5B%5D=year&fl%5B%5D=isbn' +
-      '&rows=8&output=json'
-    try {
-      const docs = (await getJson(url)).response?.docs ?? []
-      const doc = matchIaDoc({ ...cite, isbn: null }, docs) ?? docs[0] ?? null
-      if (doc) hits.set(cite, iaEntry(doc, cite, cite.lccn ? 'lccn' : 'oclc'))
-    } catch (e) {
-      console.error(`  ia lookup failed (${cite.oclc ?? cite.lccn}): ${e.message}`)
-    }
+    await iaIdentifierLookup(cite, hits)
   }
   return hits
 }
@@ -622,38 +643,55 @@ async function bandPropertyLookup(
         ownQid: qid,
         isSubject,
       })
-      if (!hit) continue
-      if (tooBroad(hit.total, { isSubject })) {
-        broad.push(
-          broadNote({ source: spec.source, label, total: hit.total, url: spec.browseUrl(hit, id), ...spec.broadExtra?.(hit) }),
-        )
-        continue
-      }
-      if (!hit.entries.length) continue
-      for (const e of hit.entries) {
-        // Reviewed and kept 2026-08-08: a search hit filed under the
-        // subject's own heading keeps full subject-record standing, even
-        // though it is not the partner's record OF the subject (the
-        // distinction the rights rules draw). A photo of the Apollo 11
-        // launch is the best non-document answer the lede can get, whatever
-        // catalog relationship produced it — so the Atlanta History Center
-        // shot outranks the article's own infobox, deliberately.
-        if (isSubject) e.standing = 'subject-record'
-        e.trace = spec.trace(label, qid, hit)
-        e.fix = { url: `https://www.wikidata.org/wiki/${qid}#${spec.property}`, label: 'Check or fix it on Wikidata' }
-      }
-      entries.push(...hit.entries)
-      stats[spec.statsKey] += hit.entries.length
-      // The browse URL comes from `spec.browseUrl`, the same builder the broad
-      // note uses, rather than from `spec.sample` — the two make the same offer
-      // ("the rest of this shelf is over there") and a second copy of the URL
-      // logic could drift so that a folded shelf and a sampled one sent readers
-      // to different pages.
-      if (hit.total > hit.entries.length)
-        samples.push({ ...spec.sample(hit, label, id), url: spec.browseUrl(hit, id) })
+      if (hit) takeHit(hit, { spec, id, label, qid, isSubject, entries, stats, samples, broad })
     } catch (e) {
       console.error(`  ${spec.source} lookup failed (${id}): ${e.message}`)
     }
+  }
+}
+
+/**
+ * One partner's answer for one anchor: shelved as cards, folded into a
+ * too-broad note, or dropped when it found nothing.
+ */
+function takeHit(hit, { spec, id, label, qid, isSubject, entries, stats, samples, broad }) {
+  if (tooBroad(hit.total, { isSubject })) {
+    broad.push(
+      broadNote({
+        source: spec.source,
+        label,
+        total: hit.total,
+        url: spec.browseUrl(hit, id),
+        ...spec.broadExtra?.(hit),
+      }),
+    )
+    return
+  }
+  if (!hit.entries.length) return
+  for (const e of hit.entries) {
+    // Reviewed and kept 2026-08-08: a search hit filed under the
+    // subject's own heading keeps full subject-record standing, even
+    // though it is not the partner's record OF the subject (the
+    // distinction the rights rules draw). A photo of the Apollo 11
+    // launch is the best non-document answer the lede can get, whatever
+    // catalog relationship produced it — so the Atlanta History Center
+    // shot outranks the article's own infobox, deliberately.
+    if (isSubject) e.standing = 'subject-record'
+    e.trace = spec.trace(label, qid, hit)
+    e.fix = {
+      url: `https://www.wikidata.org/wiki/${qid}#${spec.property}`,
+      label: 'Check or fix it on Wikidata',
+    }
+  }
+  entries.push(...hit.entries)
+  stats[spec.statsKey] += hit.entries.length
+  // The browse URL comes from `spec.browseUrl`, the same builder the broad
+  // note uses, rather than from `spec.sample` — the two make the same offer
+  // ("the rest of this shelf is over there") and a second copy of the URL
+  // logic could drift so that a folded shelf and a sampled one sent readers
+  // to different pages.
+  if (hit.total > hit.entries.length) {
+    samples.push({ ...spec.sample(hit, label, id), url: spec.browseUrl(hit, id) })
   }
 }
 
@@ -749,6 +787,390 @@ const DIGITALNZ_LOOKUP = {
       `A sample: ${hit.entries.length} of the ${hit.total.toLocaleString()} items DigitalNZ’s ` +
       `partner institutions catalog under the heading “${hit.heading}”`,
   }),
+}
+
+/**
+ * The holder's own record of the work, as the lede's first card — the page's
+ * reason for existing on a holder page.
+ */
+function holderWorkEntry(holder) {
+  const holderCopy = holder.record.rights?.uri
+    ? licenseView(ccFromUri(holder.record.rights.uri))
+    : null
+  const descParts = [holder.record.creator, holder.record.date].filter(Boolean)
+  return {
+    source: holder.partner,
+    title: holder.record.title,
+    description: descParts.length ? descParts.join(' · ') : null,
+    imageUrl: holder.record.imageUrl,
+    href: holder.record.href,
+    standing: 'holder-work',
+    attribution: {
+      author: holderCopy
+        ? `${holder.record.institution} · ${holderCopy.label}`
+        : holder.record.institution,
+      license: null,
+    },
+    rights: { copy: holderCopy },
+    why: `${holder.record.institution}’s own record of this ${holder.medium} — Wikidata names it directly.`,
+    trace: `Wikidata — the shared database behind Wikipedia’s infoboxes — records this ${holder.medium}’s ${PROP_NAME[holder.property] ?? holder.property}, and this is the record it points to.`,
+    fix: {
+      url: `https://www.wikidata.org/wiki/${holder.subjectQid}#${holder.property}`,
+      label: 'Check or fix it on Wikidata',
+    },
+  }
+}
+
+/**
+ * The creator's status, written onto the subject's own output — books Open
+ * Library files under them, papers their ORCID vouches for, their thesis,
+ * their paintings. Here the article's subject is the AUTHOR, so what applies
+ * is their creator-level status: CopyClear's bots rule on a body of work, and
+ * that ruling covers these shelves. The view is built with `kind: 'author'`,
+ * so it states whose status it is and links to Paulina's author page rather
+ * than a work page, and the claim stays attached to the person it is about.
+ *
+ * The artworks belong here for the reason CLAUDE.md gives for the shelf class:
+ * these are works the subject MADE, so the creator's status is a status of the
+ * right thing. This is the case the Kafka anthology was not — a 1991
+ * compilation filed under a long-dead author is a new work, whereas a painting
+ * with P170 pointing at the subject is that subject's own. The museum's own
+ * `copy` statement is untouched; the two answer different questions and both
+ * ride the card.
+ *
+ * The opinion is deliberately absent: a court's own words are public domain
+ * because nobody may own the law, which is a stronger and different reason
+ * than anything an author's status could supply.
+ */
+function applyCreatorRights(extras, rights, label) {
+  const authorRights = rightsView(rights.get(extras.subjectQid), {
+    qid: extras.subjectQid,
+    kind: 'author',
+    label,
+  })
+  const own = [
+    extras.thesis,
+    ...extras.works.entries,
+    ...extras.scholarship.entries,
+    ...extras.artworks.entries,
+  ]
+  for (const e of own) {
+    if (!e) continue
+    // Open Library's lending status, where there is one, is about THIS
+    // EDITION and therefore beats a ruling about the author's whole body of
+    // work. A lent book gets the lending statement and no creator claim at
+    // all: the two would contradict each other on the same card, and the
+    // one describing the actual object wins. See accessRights.
+    const access = e.access
+    if (access?.copy) {
+      e.rights = { ...e.rights, copy: access.copy }
+      continue
+    }
+    if (authorRights && access?.trustsCreator !== false) {
+      e.rights = { ...e.rights, work: authorRights }
+    }
+  }
+}
+
+/**
+ * One anchor's cards from its partner statements: museum objects, taxa,
+ * occurrence maps, place maps.
+ *
+ * Budgets are per band. One map per section, or every place-heavy section
+ * becomes wallpaper; statement cards are capped like every other budget here.
+ */
+async function cardsForAnchor(qid, { unit, extras, statements, labels, rights, holder, budget }) {
+  const stmts = statements.get(qid)
+  if (!stmts) return []
+  const isSubject = unit.index === '0' && qid === extras?.subjectQid
+  const label = isSubject ? unit.title : (labels.get(qid) ?? null)
+  // On a holder page the statement dispatch itself is filtered — a museum
+  // holder keeps only its own property's lookup (an anchor carrying the
+  // holder's id still cards), a manifest holder keeps none — so no
+  // request goes to a third institution's host, not merely no card.
+  let found = await statementEntries(qid, holderStatements(stmts, holder), {
+    label,
+    withMap: budget.mapsLeft > 0,
+    subject: isSubject,
+  })
+  // The holder's record IS the subject's own card for this property, and
+  // the hero already carries it — the subject's duplicate is dropped;
+  // anchors carrying the property are untouched.
+  if (isSubject && holder?.property) found = found.filter((e) => e._via !== holder.property)
+  found = found.slice(0, budget.statementsLeft)
+  // A partner's own record of what this article is about — the Art
+  // Institute's American Gothic, iNaturalist's monarch. The hero picker
+  // ranks these above any record of something merely linked here.
+  if (isSubject) for (const e of found) e.standing = 'subject-record'
+  // Wikidata's copyright status for THIS entity, on the cards that are a
+  // record of it. Sound because every entry `statementEntries` returns is
+  // the partner's own record of `qid` — the Met's object, the taxon, the
+  // manifest — so the status of `qid` is the status of the thing on the
+  // card. It is emphatically not sound one shelf over, where DPLA and
+  // Europeana return items merely filed *under* an anchor; those carry
+  // only the license their host states for the copy.
+  const workRights = rightsView(rights.get(qid), { qid, kind: 'work', label })
+  if (workRights) for (const e of found) e.rights = { ...e.rights, work: workRights }
+  if (found.some((e) => e.source === 'openstreetmap')) budget.mapsLeft--
+  budget.statementsLeft -= found.length
+  return found
+}
+
+/**
+ * Every anchor's statement cards for one band, in anchor order, within the
+ * band's map and statement budgets. The subject's own statements belong to the
+ * lede, which is why the subject QID is only ever first in `qids` there.
+ */
+async function anchorStatementCards(qids, ctx) {
+  const budget = { mapsLeft: 1, statementsLeft: STATEMENTS_PER_SECTION }
+  const out = []
+  for (const qid of qids) {
+    if (budget.statementsLeft <= 0) break
+    out.push(...(await cardsForAnchor(qid, { ...ctx, budget })))
+  }
+  return out
+}
+
+/**
+ * The article's subject's own copyright status, for the slab above the prose,
+ * and the museum's side of a rights disagreement.
+ *
+ * A view with neither marks nor a sentence is nothing to show. That happens
+ * when the only statement is "not yet determined", which is a real answer about
+ * the state of the graph and not an answer about the work — see the status
+ * vocabulary in src/rights.js. The `some` guard is the says-it-twice rule: a
+ * lede card that IS the subject already carries this claim, and a box above the
+ * prose repeating it would be the duplicate disclosure this page keeps
+ * deleting.
+ *
+ * The refusal travels only where the graph states a free answer ABOUT THE WORK
+ * — gate and words from the same work-level statements (workFreeStatus), so
+ * the page can never quote a creator ruling or a copy's license as the work's
+ * status. A refusal everyone agrees with (a Picasso) stays a plain refusal, and
+ * a creator-only or license-only free answer is withheld the way the unknown
+ * branch withholds: a one-sided or mis-attributed line is worse than silence.
+ */
+function subjectRightsFor(rec, { qid, label, entries, holderRefusal }) {
+  // Which route Paulina should take is decided by what the graph holds:
+  // P6216 is a property of works, P7763 of the people who make them.
+  const kind = rec?.work?.length ? 'work' : 'author'
+  const view = rightsView(rec, { qid, kind, label })
+  const shows = view && (view.marks.length || view.line)
+  const workFree = holderRefusal ? workFreeStatus(rec) : null
+  return {
+    subjectRights: shows && !entries.some((e) => e.rights?.work) ? view : null,
+    refusalShown: workFree
+      ? { ...holderRefusal, statusLine: workFree.line, mixed: workFree.mixed }
+      : null,
+  }
+}
+
+/**
+ * The sample claims for the lede's own shelves — the subject's books, papers,
+ * artworks and scans. Empty for every other band, which has no `extras`.
+ *
+ * Each claim rides the shelf it describes: the renderer groups shelves by
+ * (source, topic), so a claim counting a Met shelf must not sit on a
+ * Rijksmuseum one, and one counting all of them would be the free-floating
+ * claim this page keeps deleting.
+ */
+function ledeExtrasSamples(extras, title, page) {
+  const samples = []
+  if (extras?.works.entries.length)
+    samples.push({
+      source: 'openlibrary',
+      topic: `By ${page}`,
+      shown: extras.works.entries.length,
+      total: extras.works.total,
+      url: extras.works.browse ?? null,
+      text:
+        `A sample: ${extras.works.entries.length} of ${extras.works.total} ` +
+        `book${extras.works.total === 1 ? '' : 's'} Open Library files under ${title}`,
+    })
+  // No `url` here, and the omission is a decision (2026-08-10). The badge's
+  // number is a claim, so its link has to land on a page that makes the SAME
+  // claim — that is the whole test `authorBrowseUrl` was written against.
+  // OpenAlex's own site is a React app whose filter URLs this project has
+  // not verified answer to a plain reader, and this denominator is the
+  // subtler one anyway: it counts papers filed under an ORCID, of which the
+  // shelf shows only the open ones. A link that quietly shows all of them
+  // would sell the paywalled ones as part of the find.
+  if (extras?.scholarship.entries.length)
+    samples.push({
+      source: 'openalex',
+      topic: `By ${page}`,
+      shown: extras.scholarship.entries.length,
+      total: extras.scholarship.total,
+      text:
+        `${extras.scholarship.entries.length} free to read, of the ${extras.scholarship.total} ` +
+        `papers OpenAlex files under ${title}’s ORCID record`,
+    })
+  // One note per MUSEUM, not one for the whole artworks lookup: the renderer
+  // groups shelves by (source, topic), so these cards arrive as a Met shelf
+  // beside a Rijksmuseum shelf, and a single note counting all of them would
+  // be the free-floating claim this page keeps deleting. Each museum's note
+  // counts that museum's own holdings.
+  //
+  // No `url` on these either, for a harder reason than OpenAlex's: this total
+  // is WIKIDATA's count of works by the subject that the graph records this
+  // museum as holding, and no museum publishes a browse for that question.
+  // Its own collection search would answer a different one and return a
+  // different number — the Rijksmuseum-404 rule (a href is verified, never
+  // constructed) applied to a count rather than an id. A WDQS permalink is
+  // technically available and is not a browse a reader wants.
+  for (const [key, count] of Object.entries(extras?.artworks.totals ?? {})) {
+    if (key === 'works' || !count) continue
+    const source = key === 'aic' ? 'artic' : key
+    const shown = extras.artworks.entries.filter((e) => e.source === source).length
+    if (!shown) continue
+    const museumName = MUSEUM_NAME[source] ?? 'this collection'
+    samples.push({
+      source,
+      topic: `By ${page}`,
+      shown,
+      total: count,
+      text:
+        `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${title} ` +
+        `that Wikidata records ${museumName} as holding`,
+    })
+  }
+
+  // The scan shelf's own count, on the shelf head where the cards are. `total`
+  // is what the request actually confirmed as this species AND scanned, so
+  // the number is one that was checked rather than one the API asserted; when
+  // the search window was full it reads "at least", because the rest was
+  // never seen. No `url`, for the artworks reason above — the Smithsonian
+  // publishes no browse that answers this question with this number.
+  if (extras?.scans.entries.length) {
+    const total = extras.scans.total
+    samples.push({
+      source: 'smithsonian',
+      topic: 'Scanned in 3D',
+      shown: extras.scans.entries.length,
+      total,
+      text:
+        `A sample: ${extras.scans.entries.length} of ${extras.scans.truncated ? 'at least ' : ''}` +
+        `${total} specimen${total === 1 ? '' : 's'} of ${title} the Smithsonian has ` +
+        `scanned in 3D and released as CC0`,
+    })
+  }
+  return samples
+}
+
+/**
+ * The lede's own shelves, told what they are.
+ *
+ * The subject's own output is its own reason class: in the lede an ORCID
+ * paper or the thesis must not share a strip with works merely cited there.
+ * `standing` is the same fact stated for the hero picker (src/hero.js):
+ * where the article is ABOUT a document, that document leads the section,
+ * ahead of any illustrated record of it. Each card says whose output it is
+ * and which identifier vouches for that — the band's disclosure states the
+ * counts, the card states the claim.
+ */
+function stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, scans }, { page, subjectQid }) {
+  // The shelves of the subject's own output say whose output and which
+  // identifier vouches for that — the band's disclosure states the counts,
+  // the card states the claim.
+  // The subject's own output is its own reason class: in the lede an ORCID
+  // paper or the thesis must not share a strip with works merely cited there.
+  // `standing` is the same fact stated for the hero picker (src/hero.js):
+  // where the article is ABOUT a document, that document leads the section,
+  // ahead of any illustrated record of it.
+  if (thesis) {
+    thesis.topic = `By ${page}`
+    thesis.standing = 'subject-document'
+  }
+  if (opinion) opinion.standing = 'subject-document'
+  const fixOn = (prop) => ({
+    url: `https://www.wikidata.org/wiki/${subjectQid}#${prop}`,
+    label: 'Check or fix it on Wikidata',
+  })
+  for (const e of works.entries) {
+    e.why = `Written by ${page}`
+    e.topic = `By ${page}`
+    e.standing = 'subject-work'
+    e.trace =
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records an Open Library ` +
+      `author ID (P648) for ${page}. These are the books Open Library files under that author.`
+    e.fix = fixOn('P648')
+  }
+  for (const e of scholarship.entries) {
+    e.why = e.retracted
+      ? `A paper by ${page} — later retracted, still free to read`
+      : `A paper by ${page}, free to read`
+    e.topic = `By ${page}`
+    e.standing = 'subject-work'
+    e.trace =
+      `Wikidata records an ORCID iD (P496) for ${page} — the number researchers use to keep ` +
+      `their own name attached to their work. OpenAlex lists this paper under it.` +
+      (e.retracted
+        ? ` OpenAlex also marks the paper as retracted, and Crossref — the DOI registry, ` +
+          `where the Retraction Watch database files retraction notices — confirms it.`
+        : ``)
+    e.fix = fixOn('P496')
+  }
+  for (const e of artworks.entries) {
+    const holder = MUSEUM_NAME[e.source] ?? 'a partner museum'
+    e.why = `Made by ${page}, held by ${holder}`
+    e.topic = `By ${page}`
+    e.standing = 'subject-work'
+    e.trace =
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${page} ` +
+      `created this work (P170), and that ${holder} holds it. ` +
+      `We asked the museum for its own record of it, and this is what came back.`
+    // The work's own Wikidata entry, not the subject's: that is where both
+    // halves of this claim — who made it and who holds it — are stated, and
+    // so where a reader who spots either being wrong would fix it.
+    e.fix = e._qid
+      ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
+      : fixOn('P170')
+  }
+  for (const e of scans.entries) {
+    e.why = `A Smithsonian specimen of ${page}, scanned in 3D`
+    e.topic = 'Scanned in 3D'
+    // A record OF the subject, not a work BY it: the specimen is one of these
+    // animals, and the museum made the scan. That is `subject-record`, and it
+    // is deliberately kept out of the creator-status loop below — nothing
+    // about who authored what applies to a gorilla.
+    e.standing = 'subject-record'
+    e.trace =
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records the scientific ` +
+      `name (P225) for ${page}. The Smithsonian’s Open Access catalog states that same name ` +
+      `on this specimen’s own record, and publishes a 3D scan of it. The two are joined by ` +
+      `the name: no identifier is shared, which is why the card says so.`
+    e.fix = fixOn('P225')
+  }
+}
+
+/** What the lede's own lookups found, for the run log. */
+function logSubjectExtras({ thesis, works, scholarship, artworks, scans }, taxonName) {
+  if (thesis)
+    console.error(
+      `thesis: ${thesis.title} (` +
+        (thesis.corroboratedBy
+          ? `${thesis.corroboratedBy.length} signals agree`
+          : 'identified by the P724 Wikidata states') +
+        ')',
+    )
+  if (works.entries.length)
+    console.error(`works by subject: ${works.entries.length} of ${works.total}`)
+  if (scholarship.entries.length)
+    console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
+  if (scans.entries.length)
+    console.error(
+      `smithsonian scans by taxon: ${scans.entries.length} of ` +
+        `${scans.truncated ? scans.total + '+' : scans.total} for ${taxonName}`,
+    )
+  if (artworks.entries.length)
+    console.error(
+      `artworks by subject: ${artworks.entries.length} of ` +
+        `${artworks.truncated ? artworks.total + '+' : artworks.total} ` +
+        `(${Object.entries(artworks.totals)
+          .filter(([k, n]) => k !== 'works' && n)
+          .map(([k, n]) => `${k} ${n}`)
+          .join(', ')})`,
+    )
 }
 
 /**
@@ -1427,104 +1849,8 @@ export async function discover(page, { emit = async () => {} } = {}) {
           })
         : Promise.resolve({ entries: [], total: 0, truncated: false }),
     ])
-    // The shelves of the subject's own output say whose output and which
-    // identifier vouches for that — the band's disclosure states the counts,
-    // the card states the claim.
-    // The subject's own output is its own reason class: in the lede an ORCID
-    // paper or the thesis must not share a strip with works merely cited there.
-    // `standing` is the same fact stated for the hero picker (src/hero.js):
-    // where the article is ABOUT a document, that document leads the section,
-    // ahead of any illustrated record of it.
-    if (thesis) {
-      thesis.topic = `By ${page}`
-      thesis.standing = 'subject-document'
-    }
-    if (opinion) opinion.standing = 'subject-document'
-    const fixOn = (prop) => ({
-      url: `https://www.wikidata.org/wiki/${subjectQid}#${prop}`,
-      label: 'Check or fix it on Wikidata',
-    })
-    for (const e of works.entries) {
-      e.why = `Written by ${page}`
-      e.topic = `By ${page}`
-      e.standing = 'subject-work'
-      e.trace =
-        `Wikidata — the shared database behind Wikipedia’s infoboxes — records an Open Library ` +
-        `author ID (P648) for ${page}. These are the books Open Library files under that author.`
-      e.fix = fixOn('P648')
-    }
-    for (const e of scholarship.entries) {
-      e.why = e.retracted
-        ? `A paper by ${page} — later retracted, still free to read`
-        : `A paper by ${page}, free to read`
-      e.topic = `By ${page}`
-      e.standing = 'subject-work'
-      e.trace =
-        `Wikidata records an ORCID iD (P496) for ${page} — the number researchers use to keep ` +
-        `their own name attached to their work. OpenAlex lists this paper under it.` +
-        (e.retracted
-          ? ` OpenAlex also marks the paper as retracted, and Crossref — the DOI registry, ` +
-            `where the Retraction Watch database files retraction notices — confirms it.`
-          : ``)
-      e.fix = fixOn('P496')
-    }
-    for (const e of artworks.entries) {
-      const holder = MUSEUM_NAME[e.source] ?? 'a partner museum'
-      e.why = `Made by ${page}, held by ${holder}`
-      e.topic = `By ${page}`
-      e.standing = 'subject-work'
-      e.trace =
-        `Wikidata — the shared database behind Wikipedia’s infoboxes — records that ${page} ` +
-        `created this work (P170), and that ${holder} holds it. ` +
-        `We asked the museum for its own record of it, and this is what came back.`
-      // The work's own Wikidata entry, not the subject's: that is where both
-      // halves of this claim — who made it and who holds it — are stated, and
-      // so where a reader who spots either being wrong would fix it.
-      e.fix = e._qid
-        ? { url: `https://www.wikidata.org/wiki/${e._qid}#P170`, label: 'Check or fix it on Wikidata' }
-        : fixOn('P170')
-    }
-    for (const e of scans.entries) {
-      e.why = `A Smithsonian specimen of ${page}, scanned in 3D`
-      e.topic = 'Scanned in 3D'
-      // A record OF the subject, not a work BY it: the specimen is one of these
-      // animals, and the museum made the scan. That is `subject-record`, and it
-      // is deliberately kept out of the creator-status loop below — nothing
-      // about who authored what applies to a gorilla.
-      e.standing = 'subject-record'
-      e.trace =
-        `Wikidata — the shared database behind Wikipedia’s infoboxes — records the scientific ` +
-        `name (P225) for ${page}. The Smithsonian’s Open Access catalog states that same name ` +
-        `on this specimen’s own record, and publishes a 3D scan of it. The two are joined by ` +
-        `the name: no identifier is shared, which is why the card says so.`
-      e.fix = fixOn('P225')
-    }
-    if (thesis)
-      console.error(
-        `thesis: ${thesis.title} (` +
-          (thesis.corroboratedBy
-            ? `${thesis.corroboratedBy.length} signals agree`
-            : 'identified by the P724 Wikidata states') +
-          ')',
-      )
-    if (works.entries.length)
-      console.error(`works by subject: ${works.entries.length} of ${works.total}`)
-    if (scholarship.entries.length)
-      console.error(`scholarship by subject: ${scholarship.entries.length} of ${scholarship.total}`)
-    if (scans.entries.length)
-      console.error(
-        `smithsonian scans by taxon: ${scans.entries.length} of ` +
-          `${scans.truncated ? scans.total + '+' : scans.total} for ${taxonName}`,
-      )
-    if (artworks.entries.length)
-      console.error(
-        `artworks by subject: ${artworks.entries.length} of ` +
-          `${artworks.truncated ? artworks.total + '+' : artworks.total} ` +
-          `(${Object.entries(artworks.totals)
-            .filter(([k, n]) => k !== 'works' && n)
-            .map(([k, n]) => `${k} ${n}`)
-            .join(', ')})`,
-      )
+    stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, scans }, { page, subjectQid })
+    logSubjectExtras({ thesis, works, scholarship, artworks, scans }, taxonName)
     return { opinion, thesis, works, scholarship, artworks, scans, subjectQid }
   })
 
@@ -1672,31 +1998,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The holder's record of the work comes first on a holder page — the page's reason for existing.
     // Holder is available to all bands for dispatch-site gating (not just the lede card).
     const holder = pageHolder
-    if (holder && unit.index === '0') {
-      const holderCopy = holder.record.rights?.uri ? licenseView(ccFromUri(holder.record.rights.uri)) : null
-      const descParts = [holder.record.creator, holder.record.date]
-        .filter(Boolean)
-      const holderEntry = {
-        source: holder.partner,
-        title: holder.record.title,
-        description: descParts.length ? descParts.join(' · ') : null,
-        imageUrl: holder.record.imageUrl,
-        href: holder.record.href,
-        standing: 'holder-work',
-        attribution: {
-          author: holderCopy ? `${holder.record.institution} · ${holderCopy.label}` : holder.record.institution,
-          license: null,
-        },
-        rights: { copy: holderCopy },
-        why: `${holder.record.institution}’s own record of this ${holder.medium} — Wikidata names it directly.`,
-        trace: `Wikidata — the shared database behind Wikipedia’s infoboxes — records this ${holder.medium}’s ${PROP_NAME[holder.property] ?? holder.property}, and this is the record it points to.`,
-        fix: {
-          url: `https://www.wikidata.org/wiki/${holder.subjectQid}#${holder.property}`,
-          label: 'Check or fix it on Wikidata',
-        },
-      }
-      entries.push(holderEntry)
-    }
+    if (holder && unit.index === '0') entries.push(holderWorkEntry(holder))
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
@@ -1712,51 +2014,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
     if (holderShelf && unit.index === holderShelf.owner) {
       entries.push(...holderShelf.entries)
     }
-    // The subject's own output — books Open Library files under them, papers
-    // their ORCID vouches for, their thesis. Here the article's subject is the
-    // AUTHOR, so what applies is their creator-level status: CopyClear's bots
-    // rule on a body of work, and that ruling covers these shelves. The view
-    // built with `kind: 'author'` states whose status it is and links to
-    // Paulina's author page rather than a work page, so the claim on the card
-    // stays attached to the person it is actually about.
-    if (extras?.subjectQid) {
-      const authorRights = rightsView(rights.get(extras.subjectQid), {
-        qid: extras.subjectQid,
-        kind: 'author',
-        label: unit.title,
-      })
-      // The artworks belong in this loop for the reason CLAUDE.md gives for
-      // the shelf class: these are works the subject MADE, so the creator's
-      // status is a status of the right thing. This is the case the Kafka
-      // anthology was not — a 1991 compilation filed under a long-dead author
-      // is a new work, whereas a painting with P170 pointing at the subject is
-      // that subject's own. The museum's own `copy` statement is untouched;
-      // the two answer different questions and both ride the card.
-      for (const e of [
-        extras.thesis,
-        ...extras.works.entries,
-        ...extras.scholarship.entries,
-        ...extras.artworks.entries,
-      ]) {
-        // The opinion is deliberately absent: a court's own words are public
-        // domain because nobody may own the law, which is a stronger and
-        // different reason than anything an author's status could supply.
-        if (!e) continue
-        // Open Library's lending status, where there is one, is about THIS
-        // EDITION and therefore beats a ruling about the author's whole body of
-        // work. A lent book gets the lending statement and no creator claim at
-        // all: the two would contradict each other on the same card, and the
-        // one describing the actual object wins. See accessRights.
-        const access = e.access
-        if (access?.copy) {
-          e.rights = { ...e.rights, copy: access.copy }
-          continue
-        }
-        if (authorRights && access?.trustsCreator !== false) {
-          e.rights = { ...e.rights, work: authorRights }
-        }
-      }
-    }
+    // The subject's own output carries the creator's status; see
+    // applyCreatorRights for which shelves and why.
+    if (extras?.subjectQid) applyCreatorRights(extras, rights, unit.title)
 
     // Citation anchors -> Internet Archive. The gutter's footnotes are text;
     // a cover card is the complementary visual, so cards no longer yield to
@@ -1783,44 +2043,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // lede; one map per section, or every place-heavy section becomes
     // wallpaper. Statement entries are capped like every other budget here.
     const statementQids = unit.index === '0' && extras?.subjectQid ? [extras.subjectQid, ...picked] : picked
-    let mapsLeft = 1
-    let statementsLeft = STATEMENTS_PER_SECTION
-    for (const qid of statementQids) {
-      if (statementsLeft <= 0) break
-      const stmts = statements.get(qid)
-      if (!stmts) continue
-      const isSubject = unit.index === '0' && qid === extras?.subjectQid
-      const label = isSubject ? unit.title : (labels.get(qid) ?? null)
-      // On a holder page the statement dispatch itself is filtered — a museum
-      // holder keeps only its own property's lookup (an anchor carrying the
-      // holder's id still cards), a manifest holder keeps none — so no
-      // request goes to a third institution's host, not merely no card.
-      let found = await statementEntries(qid, holderStatements(stmts, holder), { label, withMap: mapsLeft > 0, subject: isSubject })
-      // The holder's record IS the subject's own card for this property, and
-      // the hero already carries it — the subject's duplicate is dropped;
-      // anchors carrying the property are untouched.
-      if (isSubject && holder?.property) {
-        found = found.filter((e) => e._via !== holder.property)
-      }
-      found = found.slice(0, statementsLeft)
-      // A partner's own record of what this article is about — the Art
-      // Institute's American Gothic, iNaturalist's monarch. The hero picker
-      // ranks these above any record of something merely linked here.
-      if (isSubject) for (const e of found) e.standing = 'subject-record'
-      // Wikidata's copyright status for THIS entity, on the cards that are a
-      // record of it. Sound because every entry `statementEntries` returns is
-      // the partner's own record of `qid` — the Met's object, the taxon, the
-      // manifest — so the status of `qid` is the status of the thing on the
-      // card. It is emphatically not sound one shelf over, where DPLA and
-      // Europeana return items merely filed *under* an anchor; those carry
-      // only the license their host states for the copy.
-      const workRights = rightsView(rights.get(qid), { qid, kind: 'work', label })
-      if (workRights) for (const e of found) e.rights = { ...e.rights, work: workRights }
-      if (found.some((e) => e.source === 'openstreetmap')) mapsLeft--
-      statementsLeft -= found.length
-      entries.push(...found)
-      stats.statements += found.length
-    }
+    const found = await anchorStatementCards(statementQids, {
+      unit,
+      extras,
+      statements,
+      labels,
+      rights,
+      holder,
+    })
+    entries.push(...found)
+    stats.statements += found.length
 
     // What each shelf is a sample OF, keyed to the shelf it describes.
     //
@@ -1881,114 +2113,16 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // subject, that card already carries the same view, and a box above the
     // prose repeating it would be the duplicate disclosure this page keeps
     // deleting.
-    let subjectRights = null
-    let refusalShown = null
-    if (extras?.subjectQid) {
-      const rec = rights.get(extras.subjectQid)
-      // Which route Paulina should take is decided by what the graph holds:
-      // P6216 is a property of works, P7763 of the people who make them.
-      const kind = rec?.work?.length ? 'work' : 'author'
-      const view = rightsView(rec, { qid: extras.subjectQid, kind, label: unit.title })
-      // A view with neither marks nor a sentence is nothing to show. That
-      // happens when the only statement is "not yet determined", which is a
-      // real answer about the state of the graph and not an answer about the
-      // work — see the status vocabulary in src/rights.js. The some() guard
-      // is the says-it-twice rule: a lede card that IS the subject already
-      // carries this claim.
-      if (view && (view.marks.length || view.line) && !entries.some((e) => e.rights?.work))
-        subjectRights = view
-      // The museum's side of a rights disagreement travels only where the
-      // graph states a free answer ABOUT THE WORK — gate and words from the
-      // same work-level statements (workFreeStatus), so the page can never
-      // quote a creator ruling or a copy's license as the work's status. A
-      // refusal everyone agrees with (a Picasso) stays a plain refusal, and
-      // a creator-only or license-only free answer is withheld the way the
-      // unknown branch withholds: a one-sided or mis-attributed line is
-      // worse than silence.
-      const workFree = holderRefusal ? workFreeStatus(rec) : null
-      if (workFree)
-        refusalShown = { ...holderRefusal, statusLine: workFree.line, mixed: workFree.mixed }
-    }
+    const { subjectRights, refusalShown } = extras?.subjectQid
+      ? subjectRightsFor(rights.get(extras.subjectQid), {
+          qid: extras.subjectQid,
+          label: unit.title,
+          entries,
+          holderRefusal,
+        })
+      : { subjectRights: null, refusalShown: null }
 
-    if (extras?.works.entries.length)
-      samples.push({
-        source: 'openlibrary',
-        topic: `By ${page}`,
-        shown: extras.works.entries.length,
-        total: extras.works.total,
-        url: extras.works.browse ?? null,
-        text:
-          `A sample: ${extras.works.entries.length} of ${extras.works.total} ` +
-          `book${extras.works.total === 1 ? '' : 's'} Open Library files under ${unit.title}`,
-      })
-    // No `url` here, and the omission is a decision (2026-08-10). The badge's
-    // number is a claim, so its link has to land on a page that makes the SAME
-    // claim — that is the whole test `authorBrowseUrl` was written against.
-    // OpenAlex's own site is a React app whose filter URLs this project has
-    // not verified answer to a plain reader, and this denominator is the
-    // subtler one anyway: it counts papers filed under an ORCID, of which the
-    // shelf shows only the open ones. A link that quietly shows all of them
-    // would sell the paywalled ones as part of the find.
-    if (extras?.scholarship.entries.length)
-      samples.push({
-        source: 'openalex',
-        topic: `By ${page}`,
-        shown: extras.scholarship.entries.length,
-        total: extras.scholarship.total,
-        text:
-          `${extras.scholarship.entries.length} free to read, of the ${extras.scholarship.total} ` +
-          `papers OpenAlex files under ${unit.title}’s ORCID record`,
-      })
-    // One note per MUSEUM, not one for the whole artworks lookup: the renderer
-    // groups shelves by (source, topic), so these cards arrive as a Met shelf
-    // beside a Rijksmuseum shelf, and a single note counting all of them would
-    // be the free-floating claim this page keeps deleting. Each museum's note
-    // counts that museum's own holdings.
-    //
-    // No `url` on these either, for a harder reason than OpenAlex's: this total
-    // is WIKIDATA's count of works by the subject that the graph records this
-    // museum as holding, and no museum publishes a browse for that question.
-    // Its own collection search would answer a different one and return a
-    // different number — the Rijksmuseum-404 rule (a href is verified, never
-    // constructed) applied to a count rather than an id. A WDQS permalink is
-    // technically available and is not a browse a reader wants.
-    for (const [key, count] of Object.entries(extras?.artworks.totals ?? {})) {
-      if (key === 'works' || !count) continue
-      const source = key === 'aic' ? 'artic' : key
-      const shown = extras.artworks.entries.filter((e) => e.source === source).length
-      if (!shown) continue
-      const museumName = MUSEUM_NAME[source] ?? 'this collection'
-      samples.push({
-        source,
-        topic: `By ${page}`,
-        shown,
-        total: count,
-        text:
-          `A sample: ${shown} of ${count} work${count === 1 ? '' : 's'} by ${unit.title} ` +
-          `that Wikidata records ${museumName} as holding`,
-      })
-    }
-
-    // The scan shelf's own count, on the shelf head where the cards are. `total`
-    // is what the request actually confirmed as this species AND scanned, so
-    // the number is one that was checked rather than one the API asserted; when
-    // the search window was full it reads "at least", because the rest was
-    // never seen. No `url`, for the artworks reason above — the Smithsonian
-    // publishes no browse that answers this question with this number.
-    if (extras?.scans.entries.length) {
-      const total = extras.scans.total
-      samples.push({
-        source: 'smithsonian',
-        topic: 'Scanned in 3D',
-        shown: extras.scans.entries.length,
-        total,
-        text:
-          `A sample: ${extras.scans.entries.length} of ${extras.scans.truncated ? 'at least ' : ''}` +
-          `${total} specimen${total === 1 ? '' : 's'} of ${unit.title} the Smithsonian has ` +
-          `scanned in 3D and released as CC0`,
-      })
-    }
-
+    samples.push(...ledeExtrasSamples(extras, unit.title, page))
     const band = {
       id: unit.index === '0' ? 'slede' : `s${unit.index}`,
       title: unit.title,
