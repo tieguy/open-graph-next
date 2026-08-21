@@ -23,6 +23,57 @@ let _ua
 const UA = () => (_ua ??= userAgent('tapestry-gen'))
 
 /**
+ * One attempt at one URL, with a deadline. Throws on a failed status, so the
+ * caller's retry loop sees every failure the same way.
+ */
+async function fetchOnce(url, { timeoutMs, as, host, attempt, tries }) {
+  const control = new AbortController()
+  const timer = setTimeout(() => control.abort(), timeoutMs)
+  try {
+    const res = await fetch(withMaxlag(url), {
+      headers: { 'User-Agent': UA(), 'Accept-Encoding': 'gzip' },
+      signal: control.signal,
+    })
+    if (!res.ok) await raiseForStatus(res, { host, attempt, tries })
+    return as === 'text' ? await res.text() : await res.json()
+  } finally {
+    clearTimeout(timer)
+  }
+}
+
+/**
+ * Turn a failed response into the error the retry loop should see. Always
+ * throws. A `permanent` error means another attempt would only ask the same
+ * question again.
+ */
+async function raiseForStatus(res, { host, attempt, tries }) {
+  // A 404 is our bad identifier, not the server's bad day: retrying it
+  // spends someone else's capacity to get the same answer twice.
+  if (!isRetryable(res.status)) {
+    throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
+  }
+  // 429 is about US — this client is asking for more than this host will
+  // give. Sleeping and retrying inside a reader's request answers it
+  // once and re-earns it on the next chunk; arming a cool-off answers it
+  // for the page (src/cooloff.js). 503 keeps the wait below: that is
+  // "busy, come back shortly", the shape maxlag uses, and waiting is the
+  // right answer to it.
+  if (res.status === 429) {
+    const until = noteRateLimited(host, retryAfterMs(res.headers, MAX_COOLOFF_MS), Date.now())
+    throw Object.assign(
+      new Error(
+        `429 Too Many Requests — not asking ${host} again for ` +
+          `${Math.ceil((until - Date.now()) / 1000)}s`,
+      ),
+      { permanent: true },
+    )
+  }
+  const wait = retryAfterMs(res.headers)
+  if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
+  throw new Error(`${res.status} ${res.statusText}`)
+}
+
+/**
  * Every non-MediaWiki network call is disk-cached, so reruns are offline and
  * reproducible, and rides the same per-host queue as everything else — serial
  * at each API, concurrent across them.
@@ -56,43 +107,11 @@ export async function getJson(url, { timeoutMs = 15000, tries = 2, throttleMs = 
     for (let attempt = 1; attempt <= tries; attempt++) {
       // Only ever paid on a cache miss, and only by sources that ask for it.
       if (throttleMs) await new Promise((r) => setTimeout(r, throttleMs))
-      const control = new AbortController()
-      const timer = setTimeout(() => control.abort(), timeoutMs)
       try {
-        const res = await fetch(withMaxlag(url), {
-          headers: { 'User-Agent': UA(), 'Accept-Encoding': 'gzip' },
-          signal: control.signal,
-        })
-        if (!res.ok) {
-          // A 404 is our bad identifier, not the server's bad day: retrying it
-          // spends someone else's capacity to get the same answer twice.
-          if (!isRetryable(res.status)) throw Object.assign(new Error(`${res.status} ${res.statusText}`), { permanent: true })
-          // 429 is about US — this client is asking for more than this host will
-          // give. Sleeping and retrying inside a reader's request answers it
-          // once and re-earns it on the next chunk; arming a cool-off answers it
-          // for the page (src/cooloff.js). 503 keeps the wait below: that is
-          // "busy, come back shortly", the shape maxlag uses, and waiting is the
-          // right answer to it.
-          if (res.status === 429) {
-            const until = noteRateLimited(host, retryAfterMs(res.headers, MAX_COOLOFF_MS), Date.now())
-            throw Object.assign(
-              new Error(
-                `429 Too Many Requests — not asking ${host} again for ` +
-                  `${Math.ceil((until - Date.now()) / 1000)}s`,
-              ),
-              { permanent: true },
-            )
-          }
-          const wait = retryAfterMs(res.headers)
-          if (wait !== null && attempt < tries) await new Promise((r) => setTimeout(r, wait))
-          throw new Error(`${res.status} ${res.statusText}`)
-        }
-        return as === 'text' ? await res.text() : await res.json()
+        return await fetchOnce(url, { timeoutMs, as, host, attempt, tries })
       } catch (e) {
         lastError = e.name === 'AbortError' ? new Error(`timeout after ${timeoutMs}ms`) : e
         if (e.permanent) break
-      } finally {
-        clearTimeout(timer)
       }
     }
     throw lastError

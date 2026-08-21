@@ -181,6 +181,33 @@ const TIER_LABEL = {
 // earlier and names the thing on Wikipedia without a second clause.
 const THE_ARTICLE = 'the original Wikipedia article'
 
+/**
+ * The clause for each tier that has anything in it. Verbs, not capability —
+ * "credits", "links to", "does not surface" — because the premise is that
+ * Wikipedia could do more and does not. "The rest" only reads after a clause
+ * it can be the rest OF, and "more" likewise, so a first clause never uses
+ * either.
+ */
+function gapClauses({ shown, link, invisible }) {
+  const parts = []
+  if (shown) parts.push(`credits ${spell(shown)} of them`)
+  if (link) {
+    parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
+  }
+  if (invisible) {
+    const which = invisible === 1 ? 'it' : 'any of them'
+    parts.push(parts.length ? 'does not surface the rest' : `does not surface ${which}`)
+  }
+  return parts
+}
+
+/** "None of them reaches", said so that the count reads as a result. */
+function reachesNothing(total) {
+  if (total === 1) return 'It does not reach'
+  if (total === 2) return 'Neither reaches'
+  return 'None of them reaches'
+}
+
 function gapLead({ total, shown, link, invisible }) {
   // Not "everything here was published openly": the Met answers with
   // rights-reserved objects as well as CC0 ones, the Internet Archive lends
@@ -194,27 +221,15 @@ function gapLead({ total, shown, link, invisible }) {
   // With nothing shown AND nothing linked there is no contrast to draw, so the
   // blunt sentence beats the clause list.
   if (!shown && !link) {
-    let none = 'None of them reaches'
-    if (total === 1) none = 'It does not reach'
-    else if (total === 2) none = 'Neither reaches'
+    const none = reachesNothing(total)
     out.push(`${none} ${THE_ARTICLE} at all — not a picture, not a link, not a mention.`)
     return out.join(' ')
   }
   // All three tiers in one sentence. They were dropped from the lead once as
   // duplicating the table, and put back when the panel folded shut: opening it
   // now, this is the first line, and it should carry the whole finding before
-  // the reader starts on rows. Verbs, not capability — "credits", "links to",
-  // "does not surface" — because the premise is that Wikipedia could do more
-  // and does not. "The rest" only reads after a clause it can be the rest OF,
-  // and "more" likewise, so a first clause never uses either.
-  const parts = []
-  if (shown) parts.push(`credits ${spell(shown)} of them`)
-  if (link)
-    parts.push(parts.length ? `links to ${spell(link)} more` : `links to ${spell(link)} of them`)
-  if (invisible) {
-    const which = invisible === 1 ? 'it' : 'any of them'
-    parts.push(parts.length ? 'does not surface the rest' : `does not surface ${which}`)
-  }
+  // the reader starts on rows.
+  const parts = gapClauses({ shown, link, invisible })
   const list =
     parts.length > 2
       ? `${parts.slice(0, -1).join(', ')}, and ${parts.at(-1)}`
@@ -858,13 +873,20 @@ function broadNotes(notes, inline) {
  * and an institution that appear nowhere on it. The disclosure is the one piece
  * of prose here that must never be approximately true.
  */
+/** The fields the corroborated cards on this page were actually matched on. */
+function corroboratedFields(bands) {
+  const fields = new Set()
+  for (const b of bands ?? []) {
+    for (const e of b.entries ?? []) {
+      if (e.evidence !== 'corroborated') continue
+      for (const s of e.corroboratedBy ?? []) if (s?.field) fields.add(s.field)
+    }
+  }
+  return [...fields]
+}
+
 export function evidenceKey(bands) {
-  const fields = []
-  for (const b of bands ?? [])
-    for (const e of b.entries ?? [])
-      if (e.evidence === 'corroborated')
-        for (const s of e.corroboratedBy ?? [])
-          if (s?.field && !fields.includes(s.field)) fields.push(s.field)
+  const fields = corroboratedFields(bands)
   if (!fields.length) return ''
   const named = fields.map((f) => `the ${f}`)
   const list =
