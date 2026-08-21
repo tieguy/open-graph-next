@@ -44,8 +44,10 @@ const OG_DESCRIPTION =
 // this table when a card joins a list: past its end the count degrades to
 // digits, and the one guard left is the busy-page test pinning the literal
 // "These nine". The number is also hand-spelled where no test derives it —
-// the .ready CSS comment below ("nine-card grid"), the busyPage docblock
-// ("the same nine cards"), CLAUDE.md's busy-page paragraph (the printed
+// twice in this very comment, in the .ready CSS comment below ("nine-card
+// grid"), in the showcaseCard docblock ("two pages show the same nine
+// cards"), in the busyPage docblock ("shows the same nine cards as the
+// front page"), and in CLAUDE.md's busy-page paragraph (the printed
 // sentence itself) and its warming and reserve sections (the walk's nine,
 // six plus three) — update all of them in the same edit as a card change.
 const COUNT_WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
