@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { iiifCredit, iiifEntryFrom, iiifString, iiifThumbnail } from '../src/iiif.js'
+import { iiifCredit, iiifEntryFrom, iiifHomepage, iiifMetadata, iiifString, iiifThumbnail } from '../src/iiif.js'
 import { dplaEntryFrom, dplaUrl } from '../src/dpla.js'
 // Shared across every search-shape partner, so it lives in relevance.js beside
 // the corroboration gate rather than in one partner's module (moved 2026-08-10).
@@ -81,6 +81,101 @@ test('a v3 manifest becomes a card: requiredStatement wins the credit, homepage 
   assert.equal(e.imageUrl, 'https://hl.org/iiif/el1/full/400,/0/default.jpg')
   assert.equal(e.href, 'https://hdl.huntington.org/ellesmere')
   assert.equal(e.attribution.author, 'Huntington Library')
+})
+
+// Presentation 1.0 (Shared Canvas, 2013) as ids.si.edu serves it. Every field
+// below is copied from the live manifest for FS-F1950.19_Stitched, fetched
+// 2026-08-21: the label repeats the manifest's own id, the umbrella body signs
+// the attribution while `metadata` names the museum that actually holds the
+// scroll, and the object page arrives as an already-resolved ARK URL. Measured
+// across all 120 live Smithsonian manifests on 2026-08-18 (LUI-181), the label
+// repeats the id in 117, the holder is in "Data Source" in 118, an ARK is in
+// "Guid" in 117.
+const SHARED_CANVAS = {
+  '@context': 'http://www.shared-canvas.org/ns/context.json',
+  '@id': 'https://ids.si.edu/ids/manifest/FS-F1950.19_Stitched',
+  '@type': 'sc:Manifest',
+  label: 'FS-F1950.19_Stitched',
+  attribution: 'Smithsonian Institution',
+  license: 'https://www.si.edu/termsofuse',
+  metadata: [
+    { label: 'Title', value: 'Dwelling in the Fuchun Mountains, after Huang Gongwang' },
+    { label: 'Guid', value: 'http://n2t.net/ark:/65665/ye3be50b12d-37cb-4c2b-884c-1ddadd7d692e' },
+    { label: 'Data Source', value: 'National Museum of Asian Art' },
+    { label: 'Credit Line', value: 'Purchase — Charles Lang Freer Endowment' },
+  ],
+  sequences: [
+    {
+      canvases: [
+        {
+          images: [
+            {
+              resource: {
+                '@id': 'https://ids.si.edu/ids/full.jpg',
+                service: { '@id': 'https://ids.si.edu/iiif/FS-F1950.19' },
+              },
+            },
+          ],
+        },
+      ],
+    },
+  ],
+}
+
+test('iiifMetadata reads the metadata pairs of every Presentation version', () => {
+  assert.equal(iiifMetadata(SHARED_CANVAS).get('Data Source'), 'National Museum of Asian Art')
+  // v3 wraps both halves in language maps.
+  const v3 = { metadata: [{ label: { en: ['Title'] }, value: { en: ['Nighthawks'] } }] }
+  assert.equal(iiifMetadata(v3).get('Title'), 'Nighthawks')
+  // A repeated label keeps the first value stated, and a bare manifest an empty map.
+  const twice = { metadata: [{ label: 'Artist', value: 'Wang Hui' }, { label: 'Artist', value: 'Huang Gongwang' }] }
+  assert.equal(iiifMetadata(twice).get('Artist'), 'Wang Hui')
+  assert.equal(iiifMetadata({}).size, 0)
+})
+
+test('a label that only repeats the manifest id yields to the stated Title', () => {
+  const entry = iiifEntryFrom(SHARED_CANVAS, SHARED_CANVAS['@id'], 'Fallback')
+  assert.equal(entry.title, 'Dwelling in the Fuchun Mountains, after Huang Gongwang')
+})
+
+test('a real label is never displaced by metadata', () => {
+  const named = { ...SHARED_CANVAS, label: 'Dwelling in the Fuchun Mountains, scroll 2' }
+  assert.equal(iiifEntryFrom(named, named['@id'], null).title, 'Dwelling in the Fuchun Mountains, scroll 2')
+})
+
+test('the holding museum leads the credit and the signing body follows it', () => {
+  // Both stated: the museum that holds the scroll, then the body that signs the manifest.
+  assert.equal(iiifCredit(SHARED_CANVAS), 'National Museum of Asian Art (Smithsonian Institution)')
+  // Only metadata names anyone: the museum stands alone.
+  assert.equal(iiifCredit({ ...SHARED_CANVAS, attribution: undefined }), 'National Museum of Asian Art')
+  // Only the top-level field names anyone: unchanged from before metadata was read.
+  assert.equal(iiifCredit({ ...SHARED_CANVAS, metadata: [] }), 'Smithsonian Institution')
+})
+
+test('a rights notice is never composed into a credit line', () => {
+  // v2 attribution is free text, and plenty of it is a rights notice rather than
+  // a name. Composing those reads as nonsense, so the stated text stands alone.
+  const notice = { ...SHARED_CANVAS, attribution: '© The Library of Trinity College Dublin. All rights reserved.' }
+  assert.equal(iiifCredit(notice), '© The Library of Trinity College Dublin. All rights reserved.')
+  // Nor is a name repeated when one field already contains the other.
+  const nested = { ...SHARED_CANVAS, attribution: 'National Museum of Asian Art, Smithsonian' }
+  assert.equal(iiifCredit(nested), 'National Museum of Asian Art, Smithsonian')
+})
+
+test('the object page comes from metadata rather than looping back to the manifest', () => {
+  // The Smithsonian states its ARK already resolved, so it is served as stated.
+  const entry = iiifEntryFrom(SHARED_CANVAS, SHARED_CANVAS['@id'], null)
+  assert.equal(entry.href, 'http://n2t.net/ark:/65665/ye3be50b12d-37cb-4c2b-884c-1ddadd7d692e')
+  // A bare ARK is resolved through Name-to-Thing, which is what an ARK is for.
+  const bare = { ...SHARED_CANVAS, metadata: [{ label: 'Guid', value: 'ark:/65665/300123' }] }
+  assert.equal(iiifHomepage(bare), 'https://n2t.net/ark:/65665/300123')
+  // An accession number is not a URL and must never become one.
+  const accession = { ...SHARED_CANVAS, metadata: [{ label: 'Identifier', value: 'F1950.19' }] }
+  assert.equal(iiifHomepage(accession), null)
+})
+
+test('the blanket Smithsonian terms URL is not read as an open licence', () => {
+  assert.equal(iiifEntryFrom(SHARED_CANVAS, SHARED_CANVAS['@id'], null).rights.copy, null)
 })
 
 test('a stated thumbnail beats canvas digging; a bare manifest still links itself', () => {

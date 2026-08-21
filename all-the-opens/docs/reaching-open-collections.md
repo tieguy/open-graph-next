@@ -231,7 +231,7 @@ it is the reason this project renders a typographic plate instead (`5a86407`).
 
 ---
 
-## 7. One museum, six objects, four different reasons you cannot see them `[ours]`
+## 7. One museum, seven objects, five different reasons you cannot see them `[ours]`
 
 *Observed 2026-08-06. The most useful entry here, because nothing in it is a
 blocked request — every failure is a gap in a chain, and each one is fixed by a
@@ -280,6 +280,15 @@ the object.
    nothing, because the object record has not been released. **Fix: the
    Smithsonian.**
 4. **Everything present** (Columbia, Flyer I) — which is what it takes.
+5. **The chain is complete, through a property this pivot does not read** (the
+   Lunar Roving Vehicle, Q275816, measured 2026-08-18). It has an English
+   Wikipedia article and a working IIIF manifest, and it carries neither P195
+   nor P217 — so it sits outside the query above and the pair cannot reach it.
+   Its manifest states the blanket si.edu terms URL, which reserves all rights,
+   so reading P6108 here would surface a reserved-rights object rather than an
+   open one. **Fix: two parties** — a `P217` statement in Wikidata, and a
+   licence value in the manifest that says what the Smithsonian's own catalogue
+   already says. LUI-181 sizes both.
 
 **Why this entry matters more than the blocked-request ones.** Entries 1–4 are
 about servers refusing to answer. This is about a chain of three independent
@@ -732,24 +741,30 @@ root cause.*
 | 1 | iiif.lib.harvard.edu | 200 but non-JSON body |
 | 1 | gallerycollections.courtauld.ac.uk | v3, named, homepage — rights reserved, correctly refused |
 | 1 | www.beethoven.de | v3, named only in prose spans, no provider, no license |
-| 1 | ids.si.edu | Image-API-shaped response, prose credit |
+| 1 | ids.si.edu | Presentation 1.0 (Shared Canvas, 2013) — median 47 `metadata` pairs, holder named in `metadata["Data Source"]`, and a blanket terms URL reserving all rights |
 
 The whole lane, classed (686 rows): **dead or retired infrastructure 285**
 (NGA 214, old Yale 53, Nelson-Atkins 10, Munch 7, Harvard lib 1);
 **one transport misconfiguration 184** (Orsay's chain, reported
-2026-08-17); **prose-named v2, the upgrade-ask class 83** (KMSKA 54,
-Harvard Art Museums 20, NLW 5, AIC 2, Vanderbilt 1, ids.si 1 — two of
-them, KMSKA and NLW, already free-licensed); **anonymous shells 72**
+2026-08-17); **prose-named v2, the upgrade-ask class 82** (KMSKA 54,
+Harvard Art Museums 20, NLW 5, AIC 2, Vanderbilt 1 — two of
+them, KMSKA and NLW, already free-licensed); **blanket terms URL 1**
+(ids.si.edu, whose manifests carry rich metadata under a site-wide terms
+URL that reserves all rights over a corpus ~90% public domain by age);
+**anonymous shells 72**
 (Nationalmuseum 49, Belvedere 12, GNM 5, Antwerp 4, Paris Musées 1,
 Beethoven-Haus 1); **v3 near-misses 48** (SMK 38 homepage-only, MSK Gent
 8, new-Yale 2 provider-only); **correct rights refusals 6** (Princeton,
 Hertziana, Courtauld); **unknown 2** (UCLA 429); **Vatican 6**, named and
 explicitly copyright, a correct refusal at any version.
 
-Not one host in the lane refuses open access as policy. The 0% gate rate
-decomposes entirely into dead links, one certificate, a decade-old
-manifest format, and museums that never wrote their own name down — each
-fixable by a specific, nameable party, several by a one-field edit.
+Twelve rows are institutions refusing rights they genuinely hold, and one
+host states reserved terms over a corpus that is overwhelmingly public
+domain by age (ids.si.edu). Every other host in the lane refuses nothing:
+the remaining 673 rows decompose into dead links, one certificate, a
+decade-old manifest format, and museums that never wrote their own name
+down — each fixable by a specific, nameable party, several by a one-field
+edit.
 
 ## 22. The manuscript lane's library manifests hit the same v2 wall `[ours]`
 

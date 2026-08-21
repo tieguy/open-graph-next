@@ -1158,7 +1158,11 @@ Beyond IA/OpenLibrary, two lookup families (both budgeted per section):
   and bogus ids with the same 404)**,
   iNaturalist taxa (P3151), GBIF occurrence maps (P846), **IIIF manifests
   (P6108, `src/iiif.js`, added 2026-08-03)** — any IIIF-publishing institution
-  with no per-partner code; Presentation v2 and v3 both parsed; best coverage
+  with no per-partner code; Presentation v2 and v3 both parsed, and Shared
+  Canvas (v1) read through its `metadata` block, which is where a publisher
+  older than the `provider` field states the holder, the title and the object
+  page; a credit names the holding museum first and the signing body after it
+  (`National Museum of Asian Art (Smithsonian Institution)`); best coverage
   today is SMK Denmark and BnF Gallica, and stale manifest URLs (e.g. Trinity
   College Dublin's platform move) degrade to no card — and P625 coordinates.
   (2) `resolveMappability` — place/defunct, asked only of location-bearing
@@ -2086,10 +2090,14 @@ the politeness claim is checkable after a run rather than merely asserted here.
   is populated where `first_publish_date` mostly was not.
 - `src/smithsonian.js` — the Smithsonian (P195 + P217), added 2026-08-06. The
   only partner here found by a PAIR of properties rather than an external id,
-  because the Smithsonian states none on its objects: Columbia (Q85753536), the
+  because the objects it reaches state none: Columbia (Q85753536), the
   Apollo 11 command module, carries no P3634/P4610/P13234/P6108. It carries
   which museum holds it and that museum's accession number, and Open Access
-  indexes the accession number. `SI_COLLECTIONS` lists the 21 collection QIDs
+  indexes the accession number. Institution-wide, 124 items do carry P6108
+  pointing at `ids.si.edu` (measured 2026-08-18), and every one of those
+  manifests states the blanket si.edu terms URL, which reserves all rights
+  outside the CC0-marked bucket — so none of them yields a card. LUI-181
+  holds the sweep. `SI_COLLECTIONS` lists the 21 collection QIDs
   (41,202 items) — an explicit map rather than a SPARQL property path, because
   the path costs every page a graph walk to learn something that changes once a
   decade, and the map doubles as the credit line. The pair is collapsed to `si`

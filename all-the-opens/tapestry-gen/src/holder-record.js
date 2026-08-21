@@ -383,6 +383,8 @@ export function iiifRecordFrom(manifest, manifestUrl) {
 
   // Gate: homepage/related (must be explicitly stated, no manifest URL fallback)
   // Never pass manifestUrl to iiifHomepage — its fallback would defeat the no-object-page gate.
+  // A `metadata` link or ARK does pass this gate: the publisher stated where the
+  // object lives, in the only block Presentation 1.0 gave them for it (LUI-181).
   const href = iiifHomepage(manifest)
 
   // Gate: institution (v3 provider with exactly one entry, v2 fails)
