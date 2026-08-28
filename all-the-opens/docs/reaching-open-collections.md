@@ -811,6 +811,157 @@ classed KMSKA-style in the art lane: free-licensed, prose-named). The
 six probed hosts publish in the format's first edition; the door opens
 for them exactly as for KMSKA: v3 with `provider` and `homepage`.
 
+## 23. NARA: DPLA's largest provider, and 97% of it has no subject to search on `[ours]`
+
+*Observed 2026-08-21, prompted by the Wright Flyer page showing neither of the
+two federal archives that hold the article's primary sources.*
+
+The National Archives is already inside a partner this site queries every day.
+It is the **largest** provider in DPLA — 18,937,307 items against the
+Smithsonian's 7,845,472 — and the Wright brothers' patent case files are among
+them:
+
+```
+GET api.dp.la/v2/items?provider.name="National Archives and Records Administration"
+    &q=Wright flying machine patent
+→ count 13, including
+  "Patent Case File No. 1,122,348, Flying Machine, Inventor(s): Orville Wright
+   and Wilbur Wright"  (catalog.archives.gov/id/55295451)
+  "Patent Case File No. 987,662, Flying Machine, Inventors Orville and Wilbur
+   Wright"              (catalog.archives.gov/id/117724995)
+  → every one of them: sourceResource.subject.name = None
+```
+
+The DPLA lookup here keys on one field, `sourceResource.subject.name`, matched
+as an exact phrase against the LC authorized heading (`src/dpla.js`). NARA's
+records mostly do not carry that field at all:
+
+```
+GET api.dp.la/v2/items?provider.name="National Archives..."
+    &facets=sourceResource.subject.name&facet_size=2000
+→ 18,937,307 records; the 2,000 commonest subject values account for
+  592,295 subject assignments in total — about 3% of the records, and that
+  is an upper bound, since one record may carry several.
+
+GET api.dp.la/v2/items?sourceResource.subject.name="Wright, Orville, 1871-1948"
+→ 962 items from 19 providers (Ohio Digital Network 739, North Carolina
+  Digital Heritage Center 144, HathiTrust 24, …). NARA: absent.
+```
+
+Where NARA does assign subjects they are broad topical terms — "World War,
+1914-1918" (66,320), "War of 1812" (58,430), "Lighthouses" (9,620) — not name
+authorities. This is a description practice, not a defect: archives describe
+hierarchically, record group to series to file unit, and item-level topical
+subject cataloging is a library convention.
+
+**The direct door is shut.** Wikidata already states the identifier — P1225
+(NARA identifier) on Flyer I (10666262), Orville Wright (10580603) and Wilbur
+Wright (10580802), and on 645,196 items graph-wide (QLever, 2026-08-21) — so
+this is textbook direct-id shape with the anchor already in place. The host
+refuses:
+
+```
+curl https://catalog.archives.gov/robots.txt
+→ User-agent: * / Disallow: /            (every path, every agent)
+
+curl "https://catalog.archives.gov/api/v2/records/search?naId=10580603"   # real
+curl "https://catalog.archives.gov/api/v2/records/search?naId=99999999999" # bogus
+→ both 200 text/html, 5,454 bytes, byte-identical: the SPA shell.
+  The control rule's refusing-to-talk shape.
+```
+
+NARA's own API terms (archives.gov/research/catalog/help/api, read 2026-08-21
+via the Wayback Machine — the live page answers 503 to non-browser clients)
+document the real route: "Anyone may request an API key", read-only by default,
+**10,000 queries per month per key**, and a required notice — "This product uses
+the National Archives Catalog API but is not endorsed or certified by the
+National Archives and Records Administration."
+
+**NOT OUT, and not yet built.** A free key is not a blocker here (keyed
+partners are used, not skipped). What has to be decided first is whether a
+10,000-query monthly ceiling suits live per-reader discovery, and what
+`Disallow: /` on the catalog host means for a service that would resolve one
+record by identifier rather than crawl.
+
+## 24. The Library of Congress does not index its collections under Library of Congress headings `[ours]`
+
+*Observed 2026-08-21, same prompt as entry 23.*
+
+Access is the easy half, and it passes everything:
+
+```
+GET www.loc.gov/collections/wilbur-and-orville-wright-papers/?fo=json  → 200, JSON
+GET www.loc.gov/collections/wilbur-and-orville-wright-papers-zzzq/?fo=json → 404
+  (real and bogus distinguished — the control rule satisfied)
+www.loc.gov/robots.txt → Crawl-Delay: 5; /search, /pictures/search, /fedsearch
+  disallowed; /collections/ and /item/ are not.
+loc.gov/apis/json-and-yaml/working-within-limits/ (read 2026-08-21): "accessible
+  to the public with no API key or authentication required", 20 requests per
+  minute for the JSON API, 150 for image services, one hour blocked if exceeded.
+```
+
+The Wilbur and Orville Wright Papers is 1,179 items, every one digitized, 1,178
+with images served over IIIF from `tile.loc.gov/image-services/iiif/`.
+
+**There is no anchor.** Three routes were checked and all three are absent:
+
+1. The collection has no Wikidata item (`wbsearchentities` for "Wilbur and
+   Orville Wright Papers" returns nothing).
+2. Neither Flyer I, Orville Wright nor Wilbur Wright carries P485 (archives at).
+3. The subject key this project already derives — P244 through `id.loc.gov` to
+   the authorized heading, the key DPLA and DigitalNZ both use — is not the
+   spelling loc.gov's own search accepts:
+
+```
+loc.gov/photos/?fa=subject:wright,+orville,+1871-1948       → 0 hits
+loc.gov/manuscripts/?fa=subject:wright,+orville,+1871-1948  → 0 hits
+loc.gov/photos/?fa=subject:wright,+orville                  → 323 hits
+loc.gov/manuscripts/?fa=subject:wright,+orville             → 12 hits
+```
+
+**The dates are the whole variable, and case is not** (control run 2026-08-21,
+because "lower-cased, dates dropped" names two changes and only one of them can
+be the cause):
+
+```
+fa=subject:Wright, Orville, 1871-1948  → 0     fa=subject:Wright, Orville  → 323
+fa=subject:wright, orville, 1871-1948  → 0     fa=subject:wright, orville  → 323
+```
+
+The facet is case-insensitive. `id.loc.gov` returns `Wright, Orville, 1871-1948`
+from the `x-preflabel-encoded` header — the exact string `lcHeading` reads,
+verified the same day — and loc.gov's own facet value is the undated
+`wright, orville`. So the Library publishes the dated form as the authority and
+indexes its digital collections under an undated one. Reaching it from P244 would
+mean dropping the dates, which is transforming an authority string into a
+name-shaped guess. That is a heuristic and not an identifier. The dated form
+disambiguates one Orville Wright from another, and the short form does not.
+
+Subject search would not reach this collection under any spelling in any case.
+Its own subject facets are genre terms — clippings (565), correspondence (371),
+miscellaneous documents (121) — and the short-name facet reaches 6 of its 1,179
+items. The route to the Papers is the collection, which is an editorial pointer
+rather than a discovered one.
+
+**DPLA is not a way around this.** The Library of Congress contributes 4,463
+items to DPLA, of which 4,406 come from the Geography and Map Division and
+exactly one from the Manuscript Division. `q="Wilbur and Orville Wright Papers"`
+returns 0.
+
+**Rights are mixed and stated in prose, not a URI** (collection rights statement,
+read 2026-08-21). The Wrights' and Octave Chanute's unpublished writings are
+"dedicated to the public". Items whose rightsholders could not be identified are
+online "as an exercise of fair use for strictly non-commercial educational
+uses". Dozens more are reproduced under named permissions from the rightsholders.
+`ccFromUri` yields null on all of it, so no card here could carry a license mark.
+The non-commercial framing is a blocker to name, never a condition to accept.
+
+**Not yet built, and blocked on anchoring rather than on access.** The door is
+open, publishes its limits, and answers honestly. What is missing is a statement
+in the graph that connects an article's anchor to a Library of Congress
+collection.
+
+
 ## Already recorded elsewhere in this repo
 
 Same family, logged where they were found rather than duplicated here:

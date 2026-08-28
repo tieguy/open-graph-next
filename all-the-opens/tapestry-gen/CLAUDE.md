@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-20
+Last verified: 2026-08-27
 
 ## Purpose
 
@@ -477,6 +477,25 @@ running them together; shut by default because a reader who has not yet
 wondered whether Wikipedia shows any of this should meet a line, not a table.
 Built by `src/gap.js` (pure) from two extra `prop=` fields on the parse call the
 spine already makes (`templates|externallinks`), so it costs **zero** requests.
+
+**The panel asks only about partners, and `reach` deliberately holds more than
+that.** `articleReach` puts EVERY external host the article links into
+`reach.hosts` — only `web.archive.org` is dropped, because a Wayback link is a
+rescued citation rather than the Archive's own collection appearing in the
+article. `visibilityReport` then walks the partners that gave THIS page a card
+or a footnote and asks whether each one is in that set. A host in reach that
+belongs to no partner is never a row, at any tier, `invisible` included. That
+is the panel's scope rather than an oversight: its claim is "of what we found,
+this much is what Wikipedia shows". The inverse question — which
+collection-shaped hosts does the Wikipedia article reach that this page cannot?
+— is measured in LUI-182, and it surfaces the National Archives and the Library
+of Congress on the Wright Flyer without either being a partner.
+
+**The identifier bar itself never reaches the render.** `{{Authority control}}`
+and `{{Taxonbar}}` emit a `div.navbox` wrapping a table, and `STRIP_BLOCKS` in
+`src/wikipedia.js` removes both shapes. `gap.js` reads the template names
+(`reach.identifierBar`) only to word one sentence for the three partners that
+ride in that bar — Open Library, iNaturalist and GBIF.
 Only Kartographer reaches the `shown` tier; detection is `mw-kartographer` in
 the rendered HTML, not a template name, because a dozen infoboxes embed a map.
 
