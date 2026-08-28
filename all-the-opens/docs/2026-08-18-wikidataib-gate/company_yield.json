@@ -1,0 +1,94 @@
+{
+ "pair_totals": {
+  "blocked_yield": 325,
+  "local_filled": 2326,
+  "renders_today": 60,
+  "empty_no_data": 4089
+ },
+ "per_prop": {
+  "P946": {
+   "blocked_yield": 22,
+   "blocked_wm_or_fail": 11,
+   "blocked_unref": 11,
+   "renders_today": 2
+  },
+  "P112": {
+   "renders_today": 3,
+   "blocked_yield": 13,
+   "blocked_wm_or_fail": 3,
+   "blocked_unref": 10
+  },
+  "P856": {
+   "blocked_yield": 13,
+   "blocked_wm_or_fail": 9,
+   "blocked_unref": 4,
+   "renders_today": 2
+  },
+  "P159": {
+   "blocked_yield": 122,
+   "blocked_wm_or_fail": 84,
+   "blocked_unref": 38,
+   "renders_today": 15
+  },
+  "P749": {
+   "blocked_yield": 13,
+   "blocked_unref": 8,
+   "blocked_wm_or_fail": 5,
+   "renders_today": 1
+  },
+  "P17": {
+   "blocked_yield": 103,
+   "blocked_unref": 74,
+   "blocked_wm_or_fail": 29,
+   "renders_today": 22
+  },
+  "P1128": {
+   "blocked_yield": 5,
+   "blocked_wm_or_fail": 4,
+   "renders_today": 4,
+   "blocked_unref": 1
+  },
+  "P452": {
+   "blocked_yield": 12,
+   "blocked_unref": 9,
+   "renders_today": 2,
+   "blocked_wm_or_fail": 3
+  },
+  "P571": {
+   "blocked_yield": 10,
+   "blocked_unref": 2,
+   "blocked_wm_or_fail": 8,
+   "renders_today": 1
+  },
+  "P576": {
+   "blocked_yield": 8,
+   "blocked_unref": 2,
+   "blocked_wm_or_fail": 6,
+   "renders_today": 0
+  },
+  "P2139": {
+   "renders_today": 4,
+   "blocked_yield": 1,
+   "blocked_unref": 1,
+   "blocked_wm_or_fail": 0
+  },
+  "P2295": {
+   "renders_today": 3,
+   "blocked_yield": 0,
+   "blocked_unref": 0,
+   "blocked_wm_or_fail": 0
+  },
+  "P3362": {
+   "renders_today": 1,
+   "blocked_yield": 0,
+   "blocked_unref": 0,
+   "blocked_wm_or_fail": 0
+  },
+  "P155": {
+   "blocked_yield": 3,
+   "blocked_unref": 3,
+   "renders_today": 0,
+   "blocked_wm_or_fail": 0
+  }
+ }
+}

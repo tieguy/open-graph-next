@@ -27,7 +27,7 @@ the page found the Wikipedia article itself shows.
 **Adding one source touches six code files, one generated file, and two
 docs.** We recommend partnering with an LLM on the work.
 
-*Housekeeping: last verified 2026-08-20. This file is canonical.
+*Housekeeping: last verified 2026-08-27. This file is canonical.
 `tapestry-gen/CLAUDE.md` keeps a pointer plus the two rules that cost the most
 when they are skipped. A PR that adds a source updates this file in the same
 commit.*
@@ -99,6 +99,22 @@ it.
    > Why: an open license does not mean an open crawl — HathiTrust serves
    > public-domain scans keylessly and disallows `/cgi/` to everyone but
    > Twitterbot.
+
+7. **If the partner is searched by a heading rather than by an identifier,
+   which spelling does it actually index by?** Take one authority the partner
+   certainly holds something for, ask `id.loc.gov` for the authorized form,
+   and search the partner for that exact string. Then try the plausible
+   variants. Change one thing at a time: case and content are separate
+   variables, and a comparison that moves both proves nothing.
+   > Why: the heading this pipeline derives is not always the string the
+   > target searches by, and that has now cost two integrations for different
+   > reasons. DigitalNZ's contributors catalog under NACO forms that LC stores
+   > as *variants*, so the authorized form matches nothing there. The Library
+   > of Congress publishes `Wright, Orville, 1871-1948` as the authority and
+   > indexes its own digital collections under the undated `wright, orville`
+   > — 0 photographs against 323, measured 2026-08-21, with the facet
+   > case-insensitive so the dates are the whole difference. See entry 24 in
+   > `reaching-open-collections.md`.
 
 ---
 
@@ -246,6 +262,19 @@ differ in cost. Pick deliberately:
 > Why the split exists: LC is the longest serial chain on a cold page (27
 > requests on Angkor Wat) under `Crawl-delay: 3`, so the common case had to be
 > a HEAD, not a GET.
+
+**Measure the providers' subject coverage before you commit to this shape.** A
+search-shape lookup reaches exactly what a partner's members cataloged under
+the field you query, and item-level subject cataloging is a library practice
+rather than an archival one. The National Archives is DPLA's largest
+contributor — 18,937,307 records against the Smithsonian's 7,845,472 — and is
+unreachable through the subject field: across those records the 2,000
+commonest subject values account for 592,295 assignments in total, and its
+Wright patent case files carry no subject at all (measured 2026-08-21; entry 23
+in `reaching-open-collections.md`). Facet the field over the providers you
+actually want and compare that total against their record count before writing
+a fetcher, because a partner can be fully aggregated and still hold nothing
+your key can match.
 
 **Reuse how an existing spec turns the anchor into a search key before you
 add a new way.** `DIGITALNZ_LOOKUP` shares DPLA's `field: 'lc'` / P244,

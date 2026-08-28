@@ -14,3 +14,7 @@ node_modules/
 .env
 .env.*
 !.env.example
+
+# Per-developer Claude Code config: permissions, env, sandbox settings.
+# The shared half (settings.json and the hooks it wires up) is committed.
+.claude/settings.local.json
