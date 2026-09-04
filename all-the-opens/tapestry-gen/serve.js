@@ -23,6 +23,7 @@ import { fileURLToPath } from 'node:url'
 import { admits, isShowcase } from './src/admission.js'
 import { coolingHosts } from './src/cooloff.js'
 import { discover } from './src/discover.js'
+import { fetchNearMatch } from './src/wikipedia.js'
 import { busyPage, frontPage } from './src/front-page.js'
 import {
   CACHE,
@@ -255,7 +256,7 @@ function replayStored(res, stored, page, started) {
  * wire there is no status code left to send, so the answer is a paragraph in
  * the page itself.
  */
-function endWithFailure(res, e, page, streaming) {
+async function endWithFailure(res, e, page, streaming) {
   if (streaming) {
     res.write(
       `<p class="disclosure">Discovery stopped early: ${escapeHtml(e.message)}</p>` + streamClose({}),
@@ -264,6 +265,22 @@ function endWithFailure(res, e, page, streaming) {
     return
   }
   const missing = /missingtitle|invalidtitle/.test(e.message)
+  // MediaWiki folds only a title's first letter, so `luis villa` is not "Luis
+  // Villa" there. Before saying no such article exists, ask enwiki's own
+  // near-match search — the case-insensitive lookup its Go box does — and send
+  // the reader to the canonical title. A redirect rather than a render, so the
+  // page cache and the showcase reserve keep keying on the one real name.
+  if (missing) {
+    const target = await fetchNearMatch(CACHE, page).catch((err) => {
+      console.error(`${page}: near-match lookup failed — ${err.message}`)
+      return null
+    })
+    if (target) {
+      res.writeHead(302, { Location: `/wiki/${encodeURIComponent(target.replaceAll(/ /g, '_'))}` })
+      res.end()
+      return
+    }
+  }
   res.writeHead(missing ? 404 : 500, { 'Content-Type': 'text/html; charset=utf-8' })
   res.end(
     `<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">` +
@@ -415,7 +432,7 @@ async function serveArticle(res, encodedTitle) {
     await writePage(CACHE, BUILD, page, sent.join(''), refused.length > 0)
   } catch (e) {
     console.error(`${page}: ${e.message}`)
-    endWithFailure(res, e, page, streaming)
+    await endWithFailure(res, e, page, streaming)
   } finally {
     inFlight--
   }

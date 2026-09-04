@@ -42,6 +42,35 @@ export async function fetchSections(cacheDir, page) {
 }
 
 /**
+ * The article enwiki's own Go box would open for `page`, when the parse API
+ * has already said there is no page by that exact name. MediaWiki folds only
+ * the first letter of a title, so `luis villa` misses; CirrusSearch's
+ * near-match mode folds the whole thing (live-verified 2026-09-03: "luis villa"
+ * and "REMBRANDT" both return one hit). Only what the reader typed is sent, so
+ * this costs one call and only on a request that would otherwise 404.
+ *
+ * Returns the canonical title, or null when there is nothing to send the
+ * reader to. The same title back is null too: the parse already failed on it,
+ * and a redirect there would loop.
+ */
+export function nearMatchTitle(body, page) {
+  const hit = body.query?.search?.[0]
+  if (!hit || hit.ns !== 0 || hit.title === page) return null
+  return hit.title
+}
+
+export async function fetchNearMatch(cacheDir, page) {
+  const body = await cachedGet(cacheDir, {
+    action: 'query',
+    list: 'search',
+    srwhat: 'nearmatch',
+    srlimit: '1',
+    srsearch: page,
+  })
+  return nearMatchTitle(body, page)
+}
+
+/**
  * How deep the outline goes: h2 and h3 become bands, anything deeper stays
  * inside its parent's prose. Also the `stopAt` a unit's slice must use — a
  * band at this depth holds only its OWN text, because its children are bands
