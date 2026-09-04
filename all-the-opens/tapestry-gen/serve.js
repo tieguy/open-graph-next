@@ -484,8 +484,13 @@ server.listen(PORT, '0.0.0.0', () => {
   purgeStalePages(CACHE, BUILD)
   // Only after the port is open: the cache lives on a durable volume now, so
   // it grows without bound (~4 MB a page) and needs a ceiling — but a visitor
-  // must never wait on housekeeping. Default 2 GB against a 3 GB volume.
-  startSweeping(CACHE, { capBytes: Number(process.env.CACHE_MAX_MB ?? 2048) * 1024 * 1024 })
+  // must never wait on housekeeping. Default 2 GB against a 3 GB volume, and
+  // 130k files against that volume's ~196k inodes: most entries are tiny, and
+  // the inodes ran out before the bytes did (2026-09-04).
+  startSweeping(CACHE, {
+    capBytes: Number(process.env.CACHE_MAX_MB ?? 2048) * 1024 * 1024,
+    capFiles: Number(process.env.CACHE_MAX_FILES ?? 130_000),
+  })
   // The server warms the front page's ready-now pages — the showcase groups
   // and the Art group, one list in bootWarmTitles. WARM_ON_START gates it: prod's
   // fly.toml sets it; staging deliberately does not, and neither does local

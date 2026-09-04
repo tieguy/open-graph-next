@@ -68,9 +68,11 @@ kill_timeout = "45s"
 #
 # Created with:
 #   fly volumes create tapestry_cache --region sjc --size 3 --yes
-# serve.js caps it at CACHE_MAX_MB (default 2048) and evicts least-recently-read
-# files above that — see src/sweep.js. A full volume would fail cache WRITES
-# while reads kept working, which looks exactly like the demo being slow again.
+# serve.js caps it at CACHE_MAX_MB (default 2048) of allocated blocks and
+# CACHE_MAX_FILES (default 130000, against the volume's ~196k inodes) and evicts
+# least-recently-read files above either — see src/sweep.js. A full volume fails
+# cache WRITES while reads keep working, which looks exactly like the demo being
+# slow again. `df -i` is the check: the inodes fill before the bytes do.
 [[mounts]]
   source = "tapestry_cache"
   destination = "/app/.cache"

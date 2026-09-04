@@ -209,11 +209,14 @@ visitor and `warm.js` was warming something that evaporated on the next idle
 timeout. The earlier claim here that deploys wiping the cache was "the accepted
 trade" was an argument about deploys that never checked what idling did.
 `[[mounts]]` in `fly.toml` now maps `tapestry_cache` to `/app/.cache`; the
-volume is 3 GB, `serve.js` caps usage at `CACHE_MAX_MB` (default 2048) and
-evicts least-recently-**read** files above that (`src/sweep.js` — read time, not
-write time, because the oldest entries here are the most shared and so the most
-valuable). A full volume fails cache *writes* while reads keep working, which
-presents as the demo mysteriously being slow again.
+volume is 3 GB, `serve.js` caps usage at `CACHE_MAX_MB` (default 2048, counted
+as allocated blocks) and `CACHE_MAX_FILES` (default 130000, against the volume's
+~196k inodes) and evicts least-recently-**read** files above either
+(`src/sweep.js` — read time, not write time, because the oldest entries here are
+the most shared and so the most valuable). A full volume fails cache *writes*
+while reads keep working, which presents as the demo mysteriously being slow
+again; check `df -i` as well as `df -h`, because most entries are tiny and the
+inodes fill first (measured 2026-09-04: 195,840/195,840 inodes at 2,012 MB).
 
 **Deploy with `npm run deploy`** from this directory — just `flyctl deploy
 --remote-only` since 2026-08-10. **The server warms the front page's ready-now
