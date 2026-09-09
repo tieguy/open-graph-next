@@ -34,9 +34,23 @@ import { PARTNERS } from './partners.js'
 class ProxyFriendlySession extends Session {
   getFetchOptions(fetchOptions) {
     const { dispatcher, ...rest } = super.getFetchOptions(fetchOptions)
-    return process.env.NODE_USE_ENV_PROXY ? rest : { dispatcher, ...rest }
+    // m3api sends no abort signal, and a fetch that never settles is the stall
+    // described at QUEUE_DEADLINE_MS. Attached here, on every request, the way
+    // every partner fetch in src/http.js already is. m3api retries on maxlag /
+    // Retry-After by calling this again, so each attempt gets a fresh clock.
+    const signal = AbortSignal.timeout(MW_FETCH_TIMEOUT_MS)
+    const opts = process.env.NODE_USE_ENV_PROXY ? rest : { dispatcher, ...rest }
+    return { ...opts, signal }
   }
 }
+
+/**
+ * How long one MediaWiki request may take before it is abandoned. Shorter than
+ * QUEUE_DEADLINE_MS on purpose, so a stalled request fails as a timeout that
+ * names itself rather than as the queue taking the slot back. A big parse on a
+ * lagging wiki can take tens of seconds; a minute is past that.
+ */
+export const MW_FETCH_TIMEOUT_MS = Number(process.env.MW_FETCH_TIMEOUT_MS ?? 60_000)
 
 const queues = new Map()
 
@@ -88,6 +102,33 @@ export function hostLimit(host) {
 }
 
 /**
+ * The longest a task may hold a host's slot before the queue takes it back.
+ *
+ * Measured on production, 2026-09-04 → 2026-09-08: one task on a Wikimedia
+ * host's queue never settled — the process held no socket and no open file,
+ * just a promise that stayed pending — and because every discovery needs that
+ * host, every later discovery queued behind it, the four admission slots in
+ * serve.js filled with renders that could never finish, and every cold page
+ * answered 503 for four and a half days until a restart. undici's own header
+ * and body timeouts (~5 minutes) are not a substitute — they did not fire in
+ * four days. So the queue owns its own end: past this, the waiter is rejected
+ * with `stalled: true`, the slot is freed, and the host moves on. The orphaned
+ * task, should it ever settle, is logged and dropped.
+ *
+ * Long on purpose: Wikimedia hosts can legitimately take a minute on a big
+ * parse plus a maxlag wait, and m3api's own retry budget is 65s. Two minutes
+ * is well past both and still short enough that a stuck host costs a reader a
+ * failed page, not the site four days.
+ */
+export const QUEUE_DEADLINE_MS = Number(process.env.QUEUE_DEADLINE_MS ?? 120_000)
+
+/**
+ * How long a task may run before the stall watchdog names it in the log, so
+ * that a slow host shows up while it is slow, not only after it is cut off.
+ */
+export const QUEUE_STALL_WARN_MS = Number(process.env.QUEUE_STALL_WARN_MS ?? 30_000)
+
+/**
  * Run `task` on `host`'s queue, which admits `hostLimit(host)` at a time and
  * starts them in the order they were enqueued. At the default limit of one this
  * is exactly the old strict chain — including the property the lede-first
@@ -95,16 +136,22 @@ export function hostLimit(host) {
  * first (see the `ledeFirst` comment in src/discover.js).
  *
  * Rejections propagate to the caller but do not poison the queue: a failed task
- * frees its slot like any other.
+ * frees its slot like any other. So does a task that never settles: after
+ * `deadlineMs` the caller is rejected with `stalled: true` and the slot is
+ * freed regardless (QUEUE_DEADLINE_MS above).
+ *
+ * @param {string} host
+ * @param {() => Promise<any>} task
+ * @param {{deadlineMs?: number}} [o]
  */
-export function enqueue(host, task) {
+export function enqueue(host, task, { deadlineMs = QUEUE_DEADLINE_MS } = {}) {
   let q = queues.get(host)
   if (!q) {
-    q = { active: 0, waiting: [] }
+    q = { active: 0, waiting: [], running: new Set() }
     queues.set(host, q)
   }
   return new Promise((resolve, reject) => {
-    q.waiting.push({ task, resolve, reject })
+    q.waiting.push({ task, resolve, reject, deadlineMs, queuedAt: Date.now() })
     pump(host, q)
   })
 }
@@ -112,18 +159,83 @@ export function enqueue(host, task) {
 function pump(host, q) {
   const limit = hostLimit(host)
   while (q.active < limit && q.waiting.length) {
-    const { task, resolve, reject } = q.waiting.shift()
+    const { task, resolve, reject, deadlineMs, queuedAt } = q.waiting.shift()
     q.active++
+    const run = { startedAt: Date.now(), waitedMs: Date.now() - queuedAt }
+    q.running.add(run)
     requestTally.set(host, (requestTally.get(host) ?? 0) + 1)
     peakConcurrency.set(host, Math.max(peakConcurrency.get(host) ?? 0, q.active))
+    let settled = false
+    const release = () => {
+      if (settled) return
+      settled = true
+      clearTimeout(timer)
+      q.active--
+      q.running.delete(run)
+      pump(host, q)
+    }
+    const timer = setTimeout(() => {
+      if (settled) return
+      const held = Date.now() - run.startedAt
+      console.error(
+        `${host}: task held its slot for ${held}ms (deadline ${deadlineMs}ms) and never settled — ` +
+          `releasing it; ${q.waiting.length} waiting behind it`,
+      )
+      reject(Object.assign(
+        new Error(`${host}: request did not settle within ${deadlineMs}ms`),
+        { stalled: true },
+      ))
+      release()
+    }, deadlineMs)
     Promise.resolve()
       .then(task)
-      .then(resolve, reject)
-      .finally(() => {
-        q.active--
-        pump(host, q)
-      })
+      .then(
+        (v) => {
+          if (settled) {
+            console.error(`${host}: a task cut off at its deadline settled after all, ${Date.now() - run.startedAt}ms in — dropped`)
+            return
+          }
+          resolve(v)
+          release()
+        },
+        (e) => {
+          if (settled) {
+            console.error(`${host}: a task cut off at its deadline failed after all, ${Date.now() - run.startedAt}ms in — ${e?.message ?? e}`)
+            return
+          }
+          reject(e)
+          release()
+        },
+      )
   }
+}
+
+/**
+ * Every host with work in hand or in line, and how long its oldest task has
+ * run — the view of the queues that the outage above had no way to give.
+ * Idle hosts are omitted. serve.js prints this when it turns a reader away and
+ * from its stall watchdog, so a stuck host is named in the log while it is
+ * stuck.
+ *
+ * @param {number} now epoch ms
+ * @returns {{host: string, active: number, waiting: number, oldestActiveMs: number}[]}
+ */
+export function queueSnapshot(now = Date.now()) {
+  const rows = []
+  for (const [host, q] of queues) {
+    if (!q.active && !q.waiting.length) continue
+    let oldestActiveMs = 0
+    for (const run of q.running) oldestActiveMs = Math.max(oldestActiveMs, now - run.startedAt)
+    rows.push({ host, active: q.active, waiting: q.waiting.length, oldestActiveMs })
+  }
+  return rows.sort((a, b) => b.oldestActiveMs - a.oldestActiveMs)
+}
+
+/** One line of the snapshot, for the log. Empty when every host is idle. */
+export function describeQueues(now = Date.now()) {
+  return queueSnapshot(now)
+    .map((r) => `${r.host} active=${r.active} waiting=${r.waiting} oldest=${(r.oldestActiveMs / 1000).toFixed(1)}s`)
+    .join('; ')
 }
 
 const sessions = new Map()
@@ -156,9 +268,10 @@ export function mwSession(host) {
  * in the same insertion order call sites always used. `prefix` namespaces the
  * spike's files the way its own cache always did.
  *
- * m3api offers no request timeout; a stalled connection is eventually failed
- * by undici's own header/body timeouts (~5 min). The one observed hang was
- * archive.org, which does not travel this path.
+ * m3api offers no request timeout of its own, so the session adds one
+ * (MW_FETCH_TIMEOUT_MS, in mwSession) and the queue bounds the task around it
+ * (QUEUE_DEADLINE_MS). Both exist because of the 2026-09-04 stall described at
+ * QUEUE_DEADLINE_MS: a MediaWiki request that never settled held the site.
  */
 export async function cachedRequest(cacheDir, host, params, { prefix = '' } = {}) {
   const url = `https://${host}/w/api.php?${new URLSearchParams({ ...params, format: 'json', formatversion: '2' })}`
