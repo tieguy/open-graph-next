@@ -22,6 +22,8 @@ import { fileURLToPath } from 'node:url'
 
 import { admits, isShowcase } from './src/admission.js'
 import { coolingHosts } from './src/cooloff.js'
+import { describeQueues, QUEUE_STALL_WARN_MS } from './src/mw.js'
+import { Ledger, withDeadline } from './src/slots.js'
 import { discover } from './src/discover.js'
 import { fetchNearMatch } from './src/wikipedia.js'
 import { busyPage, frontPage } from './src/front-page.js'
@@ -181,7 +183,32 @@ const MAX_CONCURRENT = Number(process.env.MAX_CONCURRENT ?? 4)
 // windows too. The argument, and why it widens nothing anyone else sees, is in
 // src/admission.js.
 const SHOWCASE_RESERVE = Number(process.env.SHOWCASE_RESERVE ?? 2)
-let inFlight = 0
+// Every discovery in flight, by name and age (src/slots.js). A bare count
+// could say "four in flight" and nothing else, which is what the log said —
+// nothing — while four stuck renders held the site for four days
+// (2026-09-04 → 09-08; see QUEUE_DEADLINE_MS in src/mw.js).
+const inFlight = new Ledger()
+// The longest a discovery may hold its slot, whatever is stuck beneath it.
+// The per-host queue has its own deadline (QUEUE_DEADLINE_MS, two minutes per
+// request); this one bounds the whole render, which is dozens of those in
+// sequence. A cold page is measured at 30–70s; ten minutes is far past that
+// and still turns a wedged site into one failed page.
+const DISCOVERY_DEADLINE_MS = Number(process.env.DISCOVERY_DEADLINE_MS ?? 600_000)
+// How often to look at the ledger and name anything that has run suspiciously
+// long — so a stall is in the log while it is happening, not only after the
+// deadline has cut it off.
+const STALL_WATCHDOG_MS = Number(process.env.STALL_WATCHDOG_MS ?? 60_000)
+setInterval(() => {
+  const now = Date.now()
+  const slow = inFlight.snapshot(now).filter((r) => r.ageMs > QUEUE_STALL_WARN_MS)
+  if (!slow.length) return
+  console.error(
+    `watchdog: ${slow.length} of ${inFlight.size} in-flight ${slow.length === 1 ? 'discovery' : 'discoveries'} ` +
+      `older than ${QUEUE_STALL_WARN_MS / 1000}s — ` +
+      slow.map((r) => `${r.page} (${(r.ageMs / 1000).toFixed(0)}s of ${r.deadlineMs / 1000}s)`).join(', ') +
+      `; queues: ${describeQueues(now) || 'all idle'}`,
+  )
+}, STALL_WATCHDOG_MS).unref()
 
 // Which rendering this process does. Stored pages are keyed by it, so a deploy
 // retires every one of them rather than serving last build's markup forever.
@@ -327,16 +354,22 @@ async function serveArticle(res, encodedTitle) {
     return
   }
   if (!admits({
-    inFlight,
+    inFlight: inFlight.size,
     showcase: isShowcase(page),
     max: MAX_CONCURRENT,
     reserve: SHOWCASE_RESERVE,
   })) {
+    // Said in the log, with who is holding the slots and for how long: a
+    // refusal used to be silent, which is how a wedged site looked idle.
+    console.error(
+      `${page}: busy — ${inFlight.size} in flight (${inFlight.describe()}); ` +
+        `queues: ${describeQueues() || 'all idle'}`,
+    )
     res.writeHead(503, { 'Content-Type': 'text/html; charset=utf-8', 'Retry-After': '15' })
     res.end(BUSY)
     return
   }
-  inFlight++
+  const slot = inFlight.take(page, DISCOVERY_DEADLINE_MS)
   let streaming = false
   // Every byte this response sends, kept so the finished page can be stored and
   // replayed. The bytes SENT are the artifact — bands stream in completion
@@ -344,6 +377,12 @@ async function serveArticle(res, encodedTitle) {
   // concatenation is the same standalone document `warm.js` reads today.
   const sent = []
   const write = (chunk) => {
+    // A discovery cut off by its deadline (withDeadline below) keeps running
+    // underneath, since nothing in it takes a signal yet. Its bands must not
+    // reach a response that has already been closed: a write after end is an
+    // unhandled stream error in Node, and a crash is a worse outage than the
+    // stall it was recovering from.
+    if (res.writableEnded) return
     sent.push(chunk)
     res.write(chunk)
   }
@@ -352,10 +391,11 @@ async function serveArticle(res, encodedTitle) {
   // reader's request; `title` is what the page may truthfully call itself.
   let title = page
   try {
-    const { bands, stats, reach, holder } = await discover(page, {
+    const { bands, stats, reach, holder } = await withDeadline(discover(page, {
       async emit(type, data) {
         if (type === 'spine') {
           title = data.page
+          if (res.writableEnded) return
           res.writeHead(200, {
             'Content-Type': 'text/html; charset=utf-8',
             // The volume holds the copy, not the reader's browser: this render
@@ -382,7 +422,7 @@ async function serveArticle(res, encodedTitle) {
           if (fragment) write(fragment)
         }
       },
-    })
+    }), DISCOVERY_DEADLINE_MS, page)
     const inline = new Map(icons)
     for (const b of bands) for (const [k, v] of bandInline(b)) inline.set(k, v)
     // The front page IS the home now; the hero's main-page link points there.
@@ -431,10 +471,20 @@ async function serveArticle(res, encodedTitle) {
     }
     await writePage(CACHE, BUILD, page, sent.join(''), refused.length > 0)
   } catch (e) {
-    console.error(`${page}: ${e.message}`)
+    if (e.stalled) {
+      // The slot is coming back whatever was stuck; say what the queues looked
+      // like at the moment it was taken, since that is the evidence a stall
+      // leaves nowhere else.
+      console.error(
+        `${e.message} — releasing its slot after ${((Date.now() - started) / 1000).toFixed(0)}s; ` +
+          `streaming=${streaming}; queues: ${describeQueues() || 'all idle'}`,
+      )
+    } else {
+      console.error(`${page}: ${e.message}`)
+    }
     await endWithFailure(res, e, page, streaming)
   } finally {
-    inFlight--
+    inFlight.release(slot)
   }
 }
 
@@ -537,7 +587,7 @@ for (const sig of ['SIGINT', 'SIGTERM']) {
   process.on(sig, () => {
     if (draining) process.exit(1)
     draining = true
-    console.error(`${sig}: draining ${inFlight} in-flight ${inFlight === 1 ? 'discovery' : 'discoveries'}`)
+    console.error(`${sig}: draining ${inFlight.size} in-flight ${inFlight.size === 1 ? 'discovery' : 'discoveries'}${inFlight.size ? ` (${inFlight.describe()})` : ''}`)
     server.close(() => process.exit(0))
     server.closeIdleConnections()
     setTimeout(() => process.exit(0), 40_000).unref()

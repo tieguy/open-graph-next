@@ -1,6 +1,6 @@
 # tapestry-gen
 
-Last verified: 2026-08-27
+Last verified: 2026-09-08
 
 ## Purpose
 
@@ -243,6 +243,42 @@ set its own. Guards for public exposure: `MAX_CONCURRENT` discoveries (default
 4, then 503), `robots.txt` offering crawlers nothing but the front page
 (`src/robots.js`), and the per-host queues already bounding upstream traffic
 globally.
+
+### Every slot has an end (2026-09-08)
+
+Measured on production, 2026-09-04 → 2026-09-08: one MediaWiki request never
+settled — the process held no socket and no open file, just a pending promise
+— and because every discovery needs that host, every discovery queued behind
+it on the serial per-host queue, all four admission slots filled with renders
+that could never finish, and every cold page answered 503 for four and a half
+days until a restart. The log showed nothing but replays. undici's ~5 minute
+fallback timeouts did not fire. Three deadlines now stand, innermost first:
+
+- `MW_FETCH_TIMEOUT_MS` (60s): an abort signal on every m3api fetch
+  (`src/mw.js`, `ProxyFriendlySession`), matching what every partner fetch in
+  `src/http.js` already carries.
+- `QUEUE_DEADLINE_MS` (120s): `enqueue()` rejects the waiter with
+  `stalled: true` and frees the host slot whether or not the task ever
+  settles; a task that settles after being cut off is logged and dropped.
+- `DISCOVERY_DEADLINE_MS` (600s): `serve.js` wraps the whole render
+  (`withDeadline`, `src/slots.js`) so the admission slot returns whatever is
+  stuck beneath it. The orphaned render keeps running but can no longer write
+  to the closed response, and its page is not stored.
+
+The log now says who holds the slots: in-flight discoveries are a `Ledger`
+(`src/slots.js`) of names and ages rather than a count. A 503 prints them with
+`describeQueues()` (per host: active, waiting, oldest task age); a watchdog
+(`STALL_WATCHDOG_MS`, 60s) prints any render older than `QUEUE_STALL_WARN_MS`
+(30s) with the same snapshot; drain prints them too. `fly logs` keeps under a
+day, so the first sign of a recurrence is a `busy —` line naming the same pages
+for minutes on end.
+
+Not established: why that one fetch never settled without holding a socket.
+Candidates are undici pool state after a socket error, or the version split
+between Node's built-in fetch and the separate undici copy behind m3api's
+cookie agent (`http-cookie-agent`). If it recurs, the deadline lines name the
+host; a heap snapshot of the process before restarting it is the evidence that
+would settle it.
 
 ### The page cache (2026-08-10)
 

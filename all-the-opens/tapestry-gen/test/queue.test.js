@@ -1,7 +1,7 @@
 import test from 'node:test'
 import assert from 'node:assert/strict'
 
-import { enqueue, hostLimit, peakConcurrency, requestTally } from '../src/mw.js'
+import { enqueue, hostLimit, peakConcurrency, queueSnapshot, requestTally } from '../src/mw.js'
 
 // The per-host queue is where this project's politeness lives, so its shape is
 // worth asserting rather than trusting: serial by default, wider only where a
@@ -89,4 +89,50 @@ test('every request is counted, and the widest it ever ran is recorded', async (
   // Peak concurrency is what makes the politeness claim checkable after the
   // fact rather than merely asserted in a comment.
   assert.equal(peakConcurrency.get(host), 1)
+})
+
+// Measured on production, 2026-09-04 → 2026-09-08: one task in a Wikimedia
+// host's queue never settled — no socket, no timer, just a promise that stayed
+// pending — and because every discovery needs that host, every discovery
+// queued behind it, all four admission slots filled with renders that could
+// never finish, and every cold page answered 503 for four and a half days
+// until a restart. A queue slot must have an end that does not depend on the
+// task keeping its promise.
+test('a task that never settles is cut off at its deadline and the host moves on', async () => {
+  const host = 'stuck.test'
+  const never = () => new Promise(() => {})
+  await assert.rejects(enqueue(host, never, { deadlineMs: 30 }), (e) => {
+    assert.match(e.message, /stuck\.test/)
+    assert.match(e.message, /30ms/)
+    assert.equal(e.stalled, true)
+    return true
+  })
+  // The slot is free again: the next task on the same serial host actually runs.
+  const t = tracker()
+  const out = await enqueue(host, t.make('after'), { deadlineMs: 1000 })
+  assert.equal(out, 'after')
+})
+
+test('a task that settles in time is unaffected by its deadline', async () => {
+  const t = tracker()
+  const out = await enqueue('prompt.test', t.make('quick', 5), { deadlineMs: 1000 })
+  assert.equal(out, 'quick')
+})
+
+test('the snapshot names each host, what it is running, and for how long', async () => {
+  const host = 'snap.test'
+  let release
+  const p = enqueue(host, () => new Promise((r) => { release = r }))
+  const q = enqueue(host, async () => 'second')
+  await new Promise((r) => setTimeout(r, 20))
+  const snap = queueSnapshot(Date.now())
+  const row = snap.find((s) => s.host === host)
+  assert.ok(row, 'the busy host is listed')
+  assert.equal(row.active, 1)
+  assert.equal(row.waiting, 1)
+  assert.ok(row.oldestActiveMs >= 15, `oldest task has aged: ${row.oldestActiveMs}`)
+  release('first')
+  assert.deepEqual(await Promise.all([p, q]), ['first', 'second'])
+  // An idle host leaves the snapshot rather than padding it.
+  assert.equal(queueSnapshot(Date.now()).find((s) => s.host === host), undefined)
 })
