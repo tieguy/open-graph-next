@@ -2,7 +2,7 @@
 
 Using LLMs to improve the open, human-readable knowledge graph.
 
-Last verified: 2026-08-07
+Last verified: 2026-08-21
 
 ## Values
 
@@ -32,3 +32,20 @@ default.
   `attic/README.md`.
 - wikidata-SIFT split out to its own repo (`../wikidata-SIFT`) on 2026-08-03;
   its full prior history remains in this repo.
+
+## This repo does not write to Wikidata
+
+Enriching Wikidata so that Wikipedia infoboxes render more — adding references
+to statements, and eventually statements themselves — belongs to
+**`../infobox-enhancement-project`** (Linear project `infobox-enhancement`).
+Its plan is `docs/design-plans/2026-08-21-infobox-enhancement-goals.md` there.
+
+The boundary is deliberate, and VALUES.md (2026-08-17) states the reason: this
+repo builds the tool that *shows* a defect in the graph, because an edit erases
+the live exemplar the tool exists to surface. Send graph-repair work to the
+other repo rather than doing it here.
+
+Two research documents in this repo are that project's inputs and stay here:
+`all-the-opens/docs/2026-08-18-wikidataib-gate/` (what `Module:WikidataIB`'s
+reference gate blocks, and where) and `all-the-opens/docs/wikidata-quality-research.md`
+(the quality landscape and prior-art survey).
