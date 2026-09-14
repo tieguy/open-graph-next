@@ -1584,6 +1584,38 @@ nothing; `holder-record` is where that half's network lives.
 
 ## Key Decisions
 
+- **P648 names two different things, and both are used** (2026-09-13,
+  `isAuthorOlid`/`isWorkOlid` in `src/works.js`). Open Library files authors
+  (`OL…A`), works (`OL…W`) and editions (`OL…M`) under one Wikidata property.
+  The author form yields the shelf of what the subject wrote; the work form
+  means the article is ABOUT a book, and yields one record — the subject's
+  own, with the edition count and the read-or-borrow verdict the Wikipedia
+  article has no way to state. It takes `subject-document` standing beside a
+  thesis or a court opinion, not a slot on a shelf: the document the article
+  is about leads its section. The two forms are told apart by shape at the
+  source, because `author_key=OL1155988W` is not an error — it is a
+  well-formed request that returns `numFound: 0`, so an empty answer cannot
+  distinguish "wrong question" from "nothing there". Measured on *The Black
+  Jacobins* (Q7718352, P648 `OL1155988W`): 25 editions, three IA scans, and
+  a lending verdict, none of it reachable before. Creator status deliberately
+  does NOT ride this card — a ruling about the person who wrote the book is
+  not a ruling about this article's subject.
+- **A hand-written ref that states an ISBN is a citation of that book**
+  (2026-09-13, `bareIsbn` in `src/citations.js`). The citation readers
+  assumed every ref carries a `{{cite …}}` template, so a ref written as
+  prose — "James, C. L. R., *The Black Jacobins*, London: Allison & Busby,
+  1980 ({{ISBN|978-0850313352}}), Foreword, p. vi" — was dropped whole,
+  identifier included. MediaWiki already links both the `{{ISBN}}` template
+  and the older bare `ISBN 0-85031-335-2` magic link to
+  `Special:BookSources`, which is how `footnotesFor` knows the number on the
+  RENDERED side; this reads the same fact off the wikitext side, so the
+  identifier reaches the lookups instead of only the printed note. Nothing
+  else is recovered from the prose: a hand-written ref states its title and
+  byline in whatever order it likes, and guessing would put invented metadata
+  on a card — the catalog the ISBN resolves to states both. On *The Black
+  Jacobins* this was the article's ONLY ISBN, so the page went from no Open
+  Library footnote link at all to one, and the cited-works tally from 6 to 7.
+
 - **The page wears MediaWiki's design language, hand-written** (2026-08-07/08,
   the wiki-skin branch; the long argument is the comment block above `STYLE`
   in `src/emit-html.js`). The render's claim — "here is the article, and here

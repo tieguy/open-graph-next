@@ -38,6 +38,7 @@ import {
 } from './wikipedia.js'
 import {
   applyAccess,
+  bareIsbn,
   bibliographyIdentifiers,
   citationCoverage,
   citationKey,
@@ -54,7 +55,17 @@ import { describedThesisArchiveId, preferredLabel } from './corroborate.js'
 import { cachedRequest } from './mw.js'
 import { CACHE, getJson } from './http.js'
 import { articleReach } from './gap.js'
-import { authorBrowseUrl, authorWorkEntries, authorWorksUrl, iaMetadataUrl, scanIdsToVerify } from './works.js'
+import {
+  authorBrowseUrl,
+  authorWorkEntries,
+  authorWorksUrl,
+  iaMetadataUrl,
+  isAuthorOlid,
+  isWorkOlid,
+  scanIdsToVerify,
+  subjectWorkEntry,
+  workRecordUrl,
+} from './works.js'
 import { MUSEUM_NAME, needsArtworksQuery, subjectArtworks } from './artworks.js'
 import { smithsonianScansForTaxon } from './smithsonian.js'
 import { PARTNERS } from './partners.js'
@@ -142,7 +153,14 @@ function citationIdentifiers(wikitext) {
   let m
   while ((m = re.exec(wikitext ?? ''))) {
     const tpl = /\{\{\s*(?:cite[ _][a-z]+|citation)\b[\s\S]*?\}\}/i.exec(m[1])
-    if (!tpl) continue
+    if (!tpl) {
+      // A hand-written ref with no template still cites a book when it states
+      // an ISBN. It reaches the lookups on that number alone; the catalog
+      // supplies the title the prose never put in a field. See `bareIsbn`.
+      const isbn = bareIsbn(m[1])
+      if (isbn) out.push({ title: '', isbn, oclc: null, lccn: null })
+      continue
+    }
     const p = templateParams(tpl[0])
     const isbn = p.get('isbn')?.replaceAll(/[^0-9Xx]/g, '')
     const entry = {
@@ -497,7 +515,7 @@ const artworkFetcher = (via, id, label) => {
 /** The subject's own works, via the OpenLibrary author identifier P648. */
 async function subjectAuthorWorks(subjectClaims) {
   const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
-  if (typeof olid !== 'string' || !/^OL\d+A$/.test(olid)) return { entries: [], total: 0 }
+  if (!isAuthorOlid(olid)) return { entries: [], total: 0 }
   const body = await getJson(authorWorksUrl(olid, 40), { throttleMs: 1100 })
   // Ask the archive about each scan the shelf is about to show — one cached
   // request per scan, serial on the archive.org queue — because Open Library's
@@ -518,6 +536,34 @@ async function subjectAuthorWorks(subjectClaims) {
   // creator-level status covers what the subject wrote, not what somebody
   // wrote with them. See `soleAuthor`.
   return { ...authorWorkEntries(body, { cap: WORKS_BY_SUBJECT, olid, iaMeta }), browse: authorBrowseUrl(olid) }
+}
+
+/**
+ * The subject as Open Library holds it, when P648 names the work rather than
+ * an author — an article ABOUT a book. One record, not a shelf: the article's
+ * own subject, with the edition count and the read-or-borrow verdict that the
+ * Wikipedia article has no way to state. See the header comment in
+ * src/works.js for why the two forms of P648 are told apart at the source.
+ */
+async function subjectOwnWork(subjectClaims) {
+  const olid = subjectClaims.P648?.[0]?.mainsnak?.datavalue?.value
+  if (!isWorkOlid(olid)) return null
+  const body = await getJson(workRecordUrl(olid), { throttleMs: 1100 })
+  // The same check the shelf makes, for the same reason: Open Library's
+  // edition→scan link is sometimes somebody else's book, and the
+  // cover-from-the-scan rule amplifies that into the whole card. One record,
+  // so at most one metadata read. See `scanMatchesWork` in src/works.js.
+  const iaMeta = {}
+  for (const id of scanIdsToVerify(body, { cap: 1 })) {
+    try {
+      iaMeta[id] = (await getJson(iaMetadataUrl(id)))?.result ?? null
+    } catch (e) {
+      // Unfetched is not disproven: the scan stays, exactly as it would have
+      // had this check never run.
+      console.error(`  scan check failed for ${id}: ${e.message}`)
+    }
+  }
+  return subjectWorkEntry(body, { olid, iaMeta })
 }
 
 /** Labels of the entities we anchored on, batched at the API's 50-id limit. */
@@ -1068,7 +1114,7 @@ function ledeExtrasSamples(extras, title, page) {
  * and which identifier vouches for that — the band's disclosure states the
  * counts, the card states the claim.
  */
-function stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, scans }, { page, subjectQid }) {
+function stampSubjectOutput({ thesis, opinion, ownWork, works, scholarship, artworks, scans }, { page, subjectQid }) {
   // The shelves of the subject's own output say whose output and which
   // identifier vouches for that — the band's disclosure states the counts,
   // the card states the claim.
@@ -1086,6 +1132,22 @@ function stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, sca
     url: `https://www.wikidata.org/wiki/${subjectQid}#${prop}`,
     label: 'Check or fix it on Wikidata',
   })
+  // The subject IS this book, so it takes the same standing as a thesis or an
+  // opinion: the document the article is about leads the section, ahead of any
+  // book about it. Its rights come from the catalog's own verdict about this
+  // record and nowhere else — a creator-level ruling is about the person who
+  // wrote it, who is not this article's subject.
+  if (ownWork) {
+    ownWork.why = `${page}, in Open Library’s catalog`
+    ownWork.topic = null
+    ownWork.standing = 'subject-document'
+    ownWork.trace =
+      `Wikidata — the shared database behind Wikipedia’s infoboxes — records an Open Library ` +
+      `ID (P648) for ${page} itself. This is Open Library’s record of the book: every edition ` +
+      `it knows of, and whether any of them can be read or borrowed.`
+    ownWork.fix = fixOn('P648')
+    if (ownWork.access?.copy) ownWork.rights = { ...ownWork.rights, copy: ownWork.access.copy }
+  }
   for (const e of works.entries) {
     e.why = `Written by ${page}`
     e.topic = `By ${page}`
@@ -1144,7 +1206,12 @@ function stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, sca
 }
 
 /** What the lede's own lookups found, for the run log. */
-function logSubjectExtras({ thesis, works, scholarship, artworks, scans }, taxonName) {
+function logSubjectExtras({ thesis, ownWork, works, scholarship, artworks, scans }, taxonName) {
+  if (ownWork)
+    console.error(
+      `subject's own Open Library record: ${ownWork.title} — ${ownWork.description}` +
+        (ownWork.access?.url ? ` (${ownWork.access.label})` : ''),
+    )
   if (thesis)
     console.error(
       `thesis: ${thesis.title} (` +
@@ -1785,7 +1852,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
       : null
     const orcid = subjectClaims.P496?.[0]?.mainsnak?.datavalue?.value
     const taxonName = subjectClaims.P225?.[0]?.mainsnak?.datavalue?.value
-    const [thesis, works, scholarship, artworks, scans] = await Promise.all([
+    const [thesis, ownWork, works, scholarship, artworks, scans] = await Promise.all([
       // No longer waits for the page-wide identifier batch. That gate was
       // written when this lookup could spend eight serial archive.org requests
       // searching for a thesis by description — a cost worth deferring behind
@@ -1797,6 +1864,15 @@ export async function discover(page, { emit = async () => {} } = {}) {
       (!sitsOut(holder))
         ? collectionByDescribedThesis(subjectClaims, normalizedPage).catch((e) => {
             console.error(`  thesis lookup failed: ${e.message}`)
+            return null
+          })
+        : Promise.resolve(null),
+      // The subject's own Open Library record, on an article about a book.
+      // Gated on the shape of P648, so an author article never spends the
+      // request and a book article never asks the shelf's question.
+      (!sitsOut(holder))
+        ? subjectOwnWork(subjectClaims).catch((e) => {
+            console.error(`  subject work record failed: ${e.message}`)
             return null
           })
         : Promise.resolve(null),
@@ -1849,9 +1925,9 @@ export async function discover(page, { emit = async () => {} } = {}) {
           })
         : Promise.resolve({ entries: [], total: 0, truncated: false }),
     ])
-    stampSubjectOutput({ thesis, opinion, works, scholarship, artworks, scans }, { page, subjectQid })
-    logSubjectExtras({ thesis, works, scholarship, artworks, scans }, taxonName)
-    return { opinion, thesis, works, scholarship, artworks, scans, subjectQid }
+    stampSubjectOutput({ thesis, opinion, ownWork, works, scholarship, artworks, scans }, { page, subjectQid })
+    logSubjectExtras({ thesis, ownWork, works, scholarship, artworks, scans }, taxonName)
+    return { opinion, thesis, ownWork, works, scholarship, artworks, scans, subjectQid }
   })
 
   // The holder-scoped shelf: on a museum-holder page whose subject states a
@@ -2002,6 +2078,7 @@ export async function discover(page, { emit = async () => {} } = {}) {
     // The primary source first, where the subject IS a document — or wrote one.
     if (extras?.opinion) entries.push(extras.opinion)
     if (extras?.thesis) entries.push(extras.thesis)
+    if (extras?.ownWork) entries.push(extras.ownWork)
     if (extras)
       entries.push(
         ...extras.works.entries,
