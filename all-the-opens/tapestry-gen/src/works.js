@@ -66,6 +66,61 @@ export function authorBrowseUrl(olid) {
   return `https://openlibrary.org/search?author_key=${encodeURIComponent(olid)}&sort=editions`
 }
 
+// --- the subject as a work --------------------------------------------------
+//
+// P648 is "Open Library ID", and Open Library files three kinds of thing under
+// it: authors (`OL…A`), works (`OL…W`) and editions (`OL…M`). The shelf above
+// wants the author form. An article ABOUT a book carries the work form instead
+// — The Black Jacobins is Q7718352, P648 `OL1155988W` — and asking
+// `author_key=OL1155988W` returns nothing at all, so the two must be told
+// apart at the source rather than sorted out by an empty answer.
+//
+// What the work form is worth is different in kind, not degree. An author's id
+// yields a shelf of what they wrote; the work's own id yields the one record
+// the article is actually about, with the thing the article cannot say on it:
+// how many editions exist, and whether any of them can be read or borrowed
+// right now. That is a subject-level document, so it takes the same standing a
+// thesis or a court opinion takes (see `heroRank` in src/hero.js), not a slot
+// on a shelf of related books.
+
+/** Is this P648 value Open Library's identifier for an author? */
+export const isAuthorOlid = (v) => typeof v === 'string' && /^OL\d+A$/.test(v)
+
+/** Is this P648 value Open Library's identifier for a work? */
+export const isWorkOlid = (v) => typeof v === 'string' && /^OL\d+W$/.test(v)
+
+/**
+ * One request: the work's own record, in the same shape and with the same
+ * fields the author shelf reads, so one entry builder serves both. `key:` is
+ * an exact-identifier lookup, not a search — no title matching, no ranking to
+ * distrust.
+ */
+export function workRecordUrl(olid) {
+  return (
+    'https://openlibrary.org/search.json?q=' +
+    encodeURIComponent(`key:/works/${olid}`) +
+    '&fields=key,title,ebook_access,first_publish_year,cover_i,ia,author_key,edition_count'
+  )
+}
+
+/**
+ * The article's subject as Open Library holds it, or null when the catalog
+ * answers with nothing — or with something else. The key is checked against
+ * the identifier that was asked for: a `q=key:` search is an exact lookup, and
+ * a row that is not the row requested has no business wearing the subject's
+ * card.
+ *
+ * `authorOlid` is deliberately not passed to `workEntry`. Creator status is a
+ * ruling about a person's body of work, and here the subject is the book — the
+ * person who wrote it is not this article's subject and their status is not
+ * this card's to claim.
+ */
+export function subjectWorkEntry(response, { olid, iaMeta = {} } = {}) {
+  const want = `/works/${olid}`
+  const w = (response?.docs ?? []).find((d) => d?.key === want && d?.title)
+  return w ? workEntry(w, { iaMeta, editions: true }) : null
+}
+
 /**
  * Whether the article's subject is this work's ONLY author.
  *
@@ -295,45 +350,60 @@ export const scanIdsToVerify = (response, { cap }) => [
  * @returns {{entries: Array<object>, total: number}} `total` is everything held,
  *   not everything shown, so the page can disclose the difference.
  */
+/**
+ * One Open Library work record as a renderable card.
+ *
+ * `authorOlid` is the author identifier the record was FOUND by, and is given
+ * only when that is what happened: it decides whether the subject's
+ * creator-level status may ride the card (see `soleAuthor`), a question that
+ * exists for a shelf of an author's books and not for a record reached any
+ * other way. `editions` prints the record's edition count, which earns its
+ * place on a card standing for the work itself and would be noise repeated
+ * down a shelf.
+ */
+function workEntry(w, { iaMeta = {}, authorOlid = null, editions = false } = {}) {
+  const ia = scanId(w)
+  const meta = ia ? iaMeta[ia] : undefined
+  const disowned = meta !== undefined && scanMatchesWork(meta, w) === false
+  // A caption is for a DIFFERENT title — a translation the reader would
+  // otherwise take for a wrong image — not for the work's own title
+  // wearing cataloging residue (series statements, date ranges, MARC
+  // shouting). Containment either way means same title: no caption.
+  const scanned = scanTitle(meta)
+  const alien = (() => {
+    if (disowned || !meta || !scanned) return false
+    const s = normTitle(scanned)
+    const t = normTitle(w.title)
+    return Boolean(s && t) && !s.includes(t) && !t.includes(s)
+  })()
+  const caption = alien ? `scanned as “${scanned}”` : null
+  const count = editions && w.edition_count > 1 ? `${w.edition_count} editions` : null
+  return {
+    source: 'openlibrary',
+    title: w.title,
+    description: ['Book', w.first_publish_year, count, caption].filter(Boolean).join(' · '),
+    imageUrl: disowned ? olCover(w) : coverUrl(w),
+    // OpenLibrary's own page for the work, so the card is a door rather than
+    // a mention — the same argument the Internet Archive cards settled.
+    href: typeof w.key === 'string' ? `https://openlibrary.org${w.key}` : null,
+    attribution: { author: 'Open Library', license: null },
+    // Two independent reasons to withhold the subject's creator status, and
+    // either one is enough: the edition is lent rather than free, or somebody
+    // else helped write it. `copy` is untouched — a lent co-authored book
+    // still says it is lent, because that describes the object on the card.
+    access: (() => {
+      const access = accessRights(disowned ? 'no_ebook' : w.ebook_access)
+      if (!authorOlid) return access
+      return soleAuthor(w, authorOlid) ? access : { ...access, trustsCreator: false }
+    })(),
+    _via: 'P648',
+  }
+}
+
 export function authorWorkEntries(response, { cap, olid, iaMeta = {} }) {
   const all = (response?.docs ?? []).filter((w) => w?.title)
   const entries = selectDocs(response, cap)
-    .map(({ w }) => {
-      const ia = scanId(w)
-      const meta = ia ? iaMeta[ia] : undefined
-      const disowned = meta !== undefined && scanMatchesWork(meta, w) === false
-      // A caption is for a DIFFERENT title — a translation the reader would
-      // otherwise take for a wrong image — not for the work's own title
-      // wearing cataloging residue (series statements, date ranges, MARC
-      // shouting). Containment either way means same title: no caption.
-      const scanned = scanTitle(meta)
-      const alien = (() => {
-        if (disowned || !meta || !scanned) return false
-        const s = normTitle(scanned)
-        const t = normTitle(w.title)
-        return Boolean(s && t) && !s.includes(t) && !t.includes(s)
-      })()
-      const caption = alien ? `scanned as “${scanned}”` : null
-      return {
-        source: 'openlibrary',
-        title: w.title,
-        description: ['Book', w.first_publish_year, caption].filter(Boolean).join(' · '),
-        imageUrl: disowned ? olCover(w) : coverUrl(w),
-        // OpenLibrary's own page for the work, so the card is a door rather than
-        // a mention — the same argument the Internet Archive cards settled.
-        href: typeof w.key === 'string' ? `https://openlibrary.org${w.key}` : null,
-        attribution: { author: 'Open Library', license: null },
-        // Two independent reasons to withhold the subject's creator status, and
-        // either one is enough: the edition is lent rather than free, or somebody
-        // else helped write it. `copy` is untouched — a lent co-authored book
-        // still says it is lent, because that describes the object on the card.
-        access: (() => {
-          const access = accessRights(disowned ? 'no_ebook' : w.ebook_access)
-          return soleAuthor(w, olid) ? access : { ...access, trustsCreator: false }
-        })(),
-        _via: 'P648',
-      }
-    })
+    .map(({ w }) => workEntry(w, { iaMeta, authorOlid: olid }))
     // A disowned scan can null an image after the shelf order was decided, so
     // "covered works lead" is re-established here. The slot itself is not
     // re-auctioned — a work beyond the cap stays beyond it — which errs on the
