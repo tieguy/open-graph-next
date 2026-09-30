@@ -7,8 +7,8 @@
     "spike": "node --env-file-if-exists=.env spike.js",
     "serve": "node --env-file-if-exists=.env serve.js",
     "warm": "node --env-file-if-exists=.env warm.js",
-    "deploy": "flyctl deploy --remote-only",
-    "deploy:staging": "flyctl deploy --config fly.staging.toml --remote-only",
+    "deploy": "FLY_API_TOKEN=\"${FLY_DEPLOY_TOKEN_FRIENDSOF:-$FLY_API_TOKEN}\" flyctl deploy --remote-only",
+    "deploy:staging": "FLY_API_TOKEN=\"${FLY_DEPLOY_TOKEN_FRIENDSOF_STAGING:-$FLY_API_TOKEN}\" flyctl deploy --config fly.staging.toml --remote-only",
     "test": "node --test 'test/*.test.js'",
     "lint": "eslint .",
     "pretest": "eslint ."
