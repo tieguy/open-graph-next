@@ -6,8 +6,12 @@ import {
   authorWorkEntries,
   authorWorksUrl,
   iaMetadataUrl,
+  isAuthorOlid,
+  isWorkOlid,
   scanIdsToVerify,
   soleAuthor,
+  subjectWorkEntry,
+  workRecordUrl,
 } from '../src/works.js'
 
 // The live card that exposed this, verbatim from search.json on 2026-08-06:
@@ -395,4 +399,91 @@ test('a translation whose spelling drifts still earns its caption', () => {
   }
   const [entry] = authorWorkEntries({ docs: [meta] }, { cap: 4, olid: 'OL33146A', iaMeta }).entries
   assert.match(entry.description, /scanned as “La Métamorphose”/)
+})
+
+// --- the subject as a work --------------------------------------------------
+//
+// The Black Jacobins, verbatim from search.json on 2026-09-13: the record
+// Q7718352's P648 names, which is a WORK id and not an author's.
+const blackJacobins = {
+  key: '/works/OL1155988W',
+  title: 'The Black Jacobins',
+  ebook_access: 'printdisabled',
+  first_publish_year: 1938,
+  cover_i: 14349219,
+  edition_count: 25,
+  ia: ['blackjacobinstou0000jame', 'blackjacobins00clrj', 'blackjacobinstou00jame'],
+}
+
+test('the two forms of P648 are told apart, because they answer different questions', () => {
+  assert.equal(isAuthorOlid('OL117245A'), true)
+  assert.equal(isAuthorOlid('OL1155988W'), false)
+  assert.equal(isWorkOlid('OL1155988W'), true)
+  assert.equal(isWorkOlid('OL117245A'), false)
+  // An edition id is neither: nothing here knows what to do with it yet.
+  assert.equal(isWorkOlid('OL7353617M'), false)
+  assert.equal(isAuthorOlid('OL7353617M'), false)
+  for (const v of [null, undefined, '', 'OLW', 'works/OL1W']) {
+    assert.equal(isAuthorOlid(v), false)
+    assert.equal(isWorkOlid(v), false)
+  }
+})
+
+test('the work lookup asks by identifier, not by title', () => {
+  const url = workRecordUrl('OL1155988W')
+  assert.match(url, /q=key%3A%2Fworks%2FOL1155988W/)
+  // The same fields the shelf reads, so one entry builder serves both.
+  assert.match(url, /ebook_access/)
+  assert.match(url, /edition_count/)
+})
+
+test('the subject book becomes one card carrying its edition count', () => {
+  const e = subjectWorkEntry({ docs: [blackJacobins] }, { olid: 'OL1155988W' })
+  assert.equal(e.title, 'The Black Jacobins')
+  assert.equal(e.source, 'openlibrary')
+  assert.equal(e.href, 'https://openlibrary.org/works/OL1155988W')
+  assert.equal(e.description, 'Book · 1938 · 25 editions')
+})
+
+test('the subject card makes no claim about the author’s copyright status', () => {
+  // A shelf card withholds creator status when somebody else helped write the
+  // book. Here the question does not arise: the article is about the book, and
+  // the person who wrote it is not this article's subject.
+  const e = subjectWorkEntry(
+    { docs: [{ ...blackJacobins, ebook_access: 'public', author_key: ['OL117245A', 'OL936431A'] }] },
+    { olid: 'OL1155988W' },
+  )
+  assert.equal(e.access.trustsCreator, true)
+  // The verdict Open Library did state still rides the card, co-authors or not.
+  const lent = subjectWorkEntry({ docs: [blackJacobins] }, { olid: 'OL1155988W' })
+  assert.equal(lent.access.copy.code, 'LENT')
+})
+
+test('a single edition says nothing about editions', () => {
+  const e = subjectWorkEntry({ docs: [{ ...blackJacobins, edition_count: 1 }] }, { olid: 'OL1155988W' })
+  assert.equal(e.description, 'Book · 1938')
+})
+
+test('a row that is not the row asked for never wears the subject’s card', () => {
+  assert.equal(subjectWorkEntry({ docs: [] }, { olid: 'OL1155988W' }), null)
+  assert.equal(subjectWorkEntry({}, { olid: 'OL1155988W' }), null)
+  // An exact-key lookup that answers with something else is a bug somewhere,
+  // and the card must not paper over it.
+  assert.equal(subjectWorkEntry({ docs: [blackJacobins] }, { olid: 'OL999W' }), null)
+  // A record with no title has nothing to put on a card.
+  assert.equal(subjectWorkEntry({ docs: [{ key: '/works/OL1155988W' }] }, { olid: 'OL1155988W' }), null)
+})
+
+test('a scan disowned by the archive costs the subject card its verdict, not its card', () => {
+  // The Macbeth rule, on the single-record path: the cover reverts to Open
+  // Library's representative one and no edition-level claim is made.
+  const e = subjectWorkEntry(
+    { docs: [{ ...blackJacobins, ebook_access: 'public' }] },
+    {
+      olid: 'OL1155988W',
+      iaMeta: { blackjacobinstou0000jame: { title: 'A review showing why', openlibrary_work: 'OL99W' } },
+    },
+  )
+  assert.equal(e.imageUrl, 'https://covers.openlibrary.org/b/id/14349219-M.jpg')
+  assert.equal(e.access.copy, null)
 })

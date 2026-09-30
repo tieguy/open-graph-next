@@ -144,16 +144,62 @@ export function citationAuthors(p) {
 }
 
 /**
- * A single citation template → a structured citation, or null when the ref holds
- * no `{{cite …}}`/`{{citation}}` template (a bare explanatory note, say).
- * Everything the rail can show travels along: byline, stated date, and the
- * archived copy with the date it was taken.
+ * The ISBN a ref states without a citation template, or null.
+ *
+ * Plenty of refs are written by hand — "James, C. L. R., ''The Black
+ * Jacobins'', London: Allison & Busby, 1980 ({{ISBN|978-0850313352}}),
+ * Foreword, p. vi" — and carry a perfectly good identifier that the template
+ * reader above never sees, because the first `{{…}}` in the ref is the ISBN
+ * template rather than a `{{cite …}}`. MediaWiki already links these: both
+ * the `{{ISBN}}` template and the older bare `ISBN 0-85031-335-2` magic link
+ * render as `Special:BookSources`, which is how `footnotesFor` in
+ * src/wikipedia.js knows the number on the rendered side. This is the same
+ * fact read off the wikitext side, so the identifier reaches the lookups
+ * instead of only the printed note.
+ *
+ * Nothing else is recovered from the prose. A hand-written ref states its
+ * title and byline in whatever order it likes, and guessing at them would put
+ * invented metadata on a card; the catalog the ISBN resolves to states both.
+ */
+export function bareIsbn(refInner) {
+  const text = refInner ?? ''
+  // `{{ISBN|978-…}}`, and the magic link `ISBN 978-…`. The magic form requires
+  // whitespace after the word, so an `isbn=` parameter inside some other
+  // template cannot match here.
+  const stated =
+    /\{\{\s*ISBNT?\s*\|\s*([0-9Xx][0-9Xx\s-]*)/i.exec(text)?.[1] ??
+    /\bISBN\s+([0-9][0-9Xx\s-]*)/i.exec(text)?.[1]
+  return validIsbn(stated)
+}
+
+/**
+ * A single citation template → a structured citation, or null when the ref
+ * holds neither a `{{cite …}}`/`{{citation}}` template nor a bare ISBN (a
+ * bare explanatory note, say). Everything the rail can show travels along:
+ * byline, stated date, and the archived copy with the date it was taken.
  */
 export function parseCitation(refInner) {
   const tpl = extractTemplate(refInner)
-  if (!tpl) return null
-  const name = /^\{\{\s*(?:cite[ _]([a-z]+)|(citation))\b/i.exec(tpl)
-  if (!name) return null
+  const name = tpl ? /^\{\{\s*(?:cite[ _]([a-z]+)|(citation))\b/i.exec(tpl) : null
+  // A hand-written ref that names a book by its number is a citation of that
+  // book. It carries the one field a lookup needs and no others — see
+  // `bareIsbn`.
+  if (!name) {
+    const isbn = bareIsbn(refInner)
+    if (!isbn) return null
+    return {
+      kind: 'book',
+      url: null,
+      archiveUrl: null,
+      archiveDate: null,
+      title: null,
+      isbn,
+      doi: null,
+      publisher: null,
+      author: null,
+      date: null,
+    }
+  }
 
   const p = templateParams(tpl)
   return {
@@ -172,8 +218,8 @@ export function parseCitation(refInner) {
 
 /**
  * The citations in a section's wikitext, in order of appearance. Reused named
- * refs (`<ref name="x" />`) carry no payload and are skipped; a ref with no
- * citation template is skipped too.
+ * refs (`<ref name="x" />`) carry no payload and are skipped; so is a ref that
+ * states neither a citation template nor an ISBN.
  */
 export function sectionCitations(wikitext) {
   const cites = []

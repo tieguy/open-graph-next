@@ -8,6 +8,7 @@ import {
   citationHeadline,
   pageCitations,
   openLibraryAccess,
+  bareIsbn,
   parseCitation,
   sectionCitations,
   templateParams,
@@ -82,6 +83,46 @@ test('a reused named ref with no body is not counted as a second citation', () =
   const cites = sectionCitations(wt)
   assert.equal(cites.length, 1)
   assert.equal(cites[0].url, 'https://b.test')
+})
+
+test('a hand-written ref states its ISBN through the ISBN template', () => {
+  // The Black Jacobins, footnote 12: no cite template anywhere in the ref.
+  const c = parseCitation(
+    "James, C. L. R., ''The Black Jacobins'', London: Allison & Busby, 1980 " +
+      '({{ISBN|978-0850313352}}), Foreword, p. vi.',
+  )
+  assert.equal(c.kind, 'book')
+  assert.equal(c.isbn, '9780850313352')
+  // Nothing is guessed out of the prose — the catalog states the title.
+  assert.equal(c.title, null)
+  assert.equal(c.author, null)
+})
+
+test('the older bare ISBN magic link is read too', () => {
+  const c = parseCitation('Smith, A History, 1974. ISBN 0-85031-335-2, p. 4.')
+  assert.equal(c.isbn, '0850313352')
+})
+
+test('a bare ISBN is only read when the ref has no citation template', () => {
+  // The template is the better record; the stray number must not shadow it.
+  const c = parseCitation('{{cite book|title=Real Title|isbn=9780262033848}} See also ISBN 0-85031-335-2.')
+  assert.equal(c.title, 'Real Title')
+  assert.equal(c.isbn, '9780262033848')
+})
+
+test('bareIsbn refuses a number that is not an ISBN', () => {
+  assert.equal(bareIsbn('ISBN 12345'), null)
+  assert.equal(bareIsbn('published in 1938, pp. 1234567890'), null)
+  assert.equal(bareIsbn('a note with no number at all'), null)
+})
+
+test('a hand-written ISBN ref is picked up as a section citation', () => {
+  const cites = sectionCitations(
+    '<ref name="James vi">James, The Black Jacobins 1980 ({{ISBN|978-0850313352}}), p. vi.</ref>' +
+      '<ref>Just an explanatory note.</ref>',
+  )
+  assert.equal(cites.length, 1)
+  assert.equal(cites[0].isbn, '9780850313352')
 })
 
 test('a ref that is not a citation template is skipped', () => {
