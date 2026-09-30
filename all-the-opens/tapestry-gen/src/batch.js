@@ -96,10 +96,20 @@ export function dedupedIaEntries(identified, iaHits, railCites) {
  * (`|`-separated) but answers them serially server-side — 25 keys took 27s
  * against the Books API's 2s. `jscmd=data` carries exactly what access
  * resolution reads: the catalog `url` and the `ebooks` availability list.
+ *
+ * **The `.json` extension is load-bearing** (measured 2026-09-30). Open
+ * Library answers `/api/books.json?…` and 404s `/api/books?…` with an empty
+ * body — every bibkey, so a control ISBN fails exactly like a rare one, and
+ * `/api/volumes/brief/json/…` and `/api/volumes/full/json/…` 404 the same way
+ * while `search.json` stays healthy. The extensionless form worked until at
+ * least 2026-09-14, so this is a change on their side and not a URL that was
+ * always wrong. The cost of getting it wrong is quiet: the request fails,
+ * every ISBN lands in `unchecked`, and each page truthfully says it could not
+ * check rather than claiming no free copy exists.
  */
 export function olBooksUrl(isbns) {
   return (
-    'https://openlibrary.org/api/books?bibkeys=' +
+    'https://openlibrary.org/api/books.json?bibkeys=' +
     isbns.map((i) => `ISBN:${i}`).join(',') +
     '&format=json&jscmd=data'
   )

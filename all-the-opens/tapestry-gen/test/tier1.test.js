@@ -197,7 +197,15 @@ test('matchIaDoc requires a shared isbn AND title overlap', () => {
 
 test('olBooksUrl asks the fast batch endpoint for exactly the access fields', () => {
   const url = olBooksUrl(['111', '222'])
-  assert.equal(url, 'https://openlibrary.org/api/books?bibkeys=ISBN:111,ISBN:222&format=json&jscmd=data')
+  assert.equal(url, 'https://openlibrary.org/api/books.json?bibkeys=ISBN:111,ISBN:222&format=json&jscmd=data')
+})
+
+test('the .json extension is asserted, because losing it is silent', () => {
+  // Open Library 404s `/api/books?…` with an empty body and answers
+  // `/api/books.json?…` (measured 2026-09-30). A 404 here does not break a
+  // render — every ISBN goes to `unchecked` and the page says it could not
+  // check — so nothing shouts when the path is wrong. This is the alarm.
+  assert.match(olBooksUrl(['111']), /\/api\/books\.json\?/)
 })
 
 test('an IA card yields when the rail already shows the same work', () => {
