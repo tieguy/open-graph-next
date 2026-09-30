@@ -218,8 +218,9 @@ while reads keep working, which presents as the demo mysteriously being slow
 again; check `df -i` as well as `df -h`, because most entries are tiny and the
 inodes fill first (measured 2026-09-04: 195,840/195,840 inodes at 2,012 MB).
 
-**Deploy with `npm run deploy`** from this directory — just `flyctl deploy
---remote-only` since 2026-08-10. **The server warms the front page's ready-now
+**Deploy with `npm run deploy`** from this directory — `flyctl deploy
+--remote-only`, carrying the production deploy token (see Secrets).
+**The server warms the front page's ready-now
 pages**: after `listen()`, when `WARM_ON_START` is set (prod's `fly.toml` sets
 it; staging and local dev deliberately do not), it walks the nine pages of
 `bootWarmTitles` — the six showcase articles plus the three held works, one
@@ -460,6 +461,21 @@ but `flyctl deploy` uploads the whole build context to the remote builder, so an
 unlisted `.env` leaves this machine even though nothing would have run it. The
 image gets its values from Fly secrets at runtime; the build context has no
 business carrying them.
+
+**Deploying authenticates with an app-scoped token, one per app.**
+`FLY_DEPLOY_TOKEN_FRIENDSOF` deploys production and
+`FLY_DEPLOY_TOKEN_FRIENDSOF_STAGING` deploys staging; each is valid for its
+own app alone, so one of them cannot reach the other app — `flyctl status -a`
+answers for its own app and reports `Could not find App` for the other, which
+is how to check one. They are credentials for deploying rather than values the
+server reads, so they live in Bitwarden Secrets Manager (project `luis-dev`)
+and reach the shell through `.envrc`'s `bws_env` line, never in `.env` and
+never as Fly secrets. Each deploy script sets `FLY_API_TOKEN` from its own
+variable and falls back to whatever `FLY_API_TOKEN` already holds, so a clone
+with neither deploys under the operator's own `flyctl auth login`. Mint a
+replacement with `flyctl tokens create deploy -a <app>`, which prints the
+value once — a token whose value was not captured is unusable and should be
+revoked (`flyctl tokens list -a <app>`, then `flyctl tokens revoke <id>`).
 
 **Nothing may touch the network before `server.listen()`.** The source icons
 used to be fetched at startup — fifteen hosts, serial, at module top level — on
