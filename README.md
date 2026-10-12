@@ -15,7 +15,7 @@ This repo is a working space for exploring what that adaptation might look like.
 - **all-the-opens/tapestry-gen/** — the active project: **[Help From Our Friends](https://friendsof.wiki/)**, a live site that renders any English Wikipedia article *enriched* — the open ecosystem's media and cited sources placed beside the prose, every item found by an identifier the article itself states. Each page also measures how much of what it found the original Wikipedia article actually surfaces: shown and credited, a link only, or invisible. LLMs are used to help write this code, but not at any point in the data-processing pipeline.
 - **attic/** — retired experiments, kept for the record: the accords orientation documents, the D3.js Rabbit Hole Browser (web-demo), a Firefox extension, the Netlify site build, tapestry-gen's original hand-curated dataset and generator, and early legal-graph notes. See `attic/README.md`.
 
-wikidata-SIFT — LLM-assisted Wikidata patrol/enrichment — now lives in its own repo (`../wikidata-SIFT`); its history through 2026-08-03 is preserved here.
+wikidata-SIFT — LLM-assisted Wikidata patrol/enrichment — now lives in its own repo (`../attic/wikidata-SIFT`, archived); its history through 2026-08-03 is preserved here.
 
 ## Values
 

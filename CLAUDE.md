@@ -30,7 +30,7 @@ default.
   curated-dataset half: `generate.js`, the Apollo 11 dataset and the Internet
   Archive Tapestry emitter). Kept browsable, not maintained; see
   `attic/README.md`.
-- wikidata-SIFT split out to its own repo (`../wikidata-SIFT`) on 2026-08-03;
+- wikidata-SIFT split out to its own repo (`../attic/wikidata-SIFT`, archived) on 2026-08-03;
   its full prior history remains in this repo.
 
 ## This repo does not write to Wikidata
