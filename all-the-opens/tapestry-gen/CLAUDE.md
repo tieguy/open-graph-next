@@ -1955,6 +1955,14 @@ nothing; `holder-record` is where that half's network lives.
   - **The streaming page announces its end** through `#tap-status`
     (`role="status"`, visually hidden), filled by `__say` from
     `streamHeroExtras` or from the interrupted-stream handler.
+  - **A sentence the reader needs is never only in a `title`.** A `title`
+    opens for a mouse and never for a keyboard. The sample badge carries
+    its sentence as a `.tip` element (shown on hover and focus, closed by
+    Esc), and a clamped card title shows whole under `.card:focus-within`.
+    A `title` may still repeat text that is visible elsewhere.
+  - **A visible link with `target="_blank"` carries `NEW_TAB`**
+    (`aria-describedby="newtab"`), which points at the hidden "Opens in a
+    new tab" note in `hero()`.
 
 ## Wikimedia compliance (required)
 
