@@ -4,7 +4,7 @@ import assert from 'node:assert/strict'
 import { commonsFileTitle, firstSentences, imageCredit, infoboxLinks } from '../src/wikipedia.js'
 import { escapeHtml } from '../src/html.js'
 import { buildHtml, evidenceKey, sourcesUsed, zoomLink } from '../src/emit-html.js'
-import { frontPage, GROUP_ORDER, groupedShowcase, holderShowcaseTitles, showcaseTitles, ungroupedShowcaseTitles } from '../src/front-page.js'
+import { busyPage, frontPage, GROUP_ORDER, groupedShowcase, holderShowcaseTitles, showcaseTitles, ungroupedShowcaseTitles } from '../src/front-page.js'
 import { bootWarmTitles } from '../src/warming.js'
 
 // What the shipped renderer and its article extraction promise. The curated
@@ -454,7 +454,7 @@ test('the hero card carries the zoom link with the provider name and the record 
   const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
   assert.match(
     result,
-    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener">High resolution at Statens Museum for Kunst →<\/a>/,
+    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener" aria-describedby="newtab">High resolution at Statens Museum for Kunst →<\/a>/,
   )
 })
 
@@ -578,7 +578,15 @@ test('a non-holder render is byte-stable', async () => {
   // links in grey text, 24px hit areas, and the image link taken out of the
   // tab order. The page lays out as before; an opened license note sits 8px
   // lower.
-  assert.equal(digest, '0e236f9d0fe13198612c627e2141a9b5e8c7c867997286e9245e120b2b36ca7e')
+  // Re-pinned 2026-10-26 for the accessibility follow-ups: one hidden
+  // "Opens in a new tab" note that new-tab links point at, the sample badge's
+  // sentence as a focusable tooltip instead of a title, a clipped card title
+  // shown whole while its card has focus, and the Esc handler that closes the
+  // tooltip. At rest the page lays out as before.
+  // Re-pinned 2026-10-26 again: no text below 0.72rem (cards about one line
+  // taller), and the keep-place script with its `.keep body` rule that holds
+  // the reader's line still while the stream lands above it.
+  assert.equal(digest, 'dd97e342cebe2a307549e82d5ce656148c028928c457e9fdbbffcdbf6e108c9e')
 })
 
 test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {
@@ -683,4 +691,19 @@ test('a group no card claims renders nothing, heading included', () => {
   assert.doesNotMatch(artless, /<p class="show-cat">Art<\/p>/)
   assert.doesNotMatch(artless, /show-note/)
   assert.match(artless, /<p class="show-cat">History and the public record<\/p>/)
+})
+
+test('no stylesheet sets text below 0.72rem', () => {
+  // 0.72rem (11.5px) is the floor for anything a reader is meant to read:
+  // credits, badges, the visibility panel's labels. Sizes in em scale with
+  // their surroundings (footnote markers) and are not checked here.
+  const pages = {
+    article: buildHtml({ title: 'Test', bands: [] }),
+    front: frontPage({}),
+    busy: busyPage({}),
+  }
+  for (const [name, html] of Object.entries(pages)) {
+    const small = [...html.matchAll(/font-size:\s*(\d*\.?\d+)rem/g)].map((m) => +m[1]).filter((v) => v < 0.72)
+    assert.deepEqual(small, [], `${name} sets text below 0.72rem`)
+  }
 })

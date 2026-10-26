@@ -7,6 +7,12 @@ import { CC_MARKS, CC_SPRITE, CC_TITLES } from './cc-icons.js'
 import { PARTNERS } from './partners.js'
 import { infoboxRows, mergedPanel } from './panel.js'
 
+// Every visible link that opens a new tab points at one hidden note in the
+// masthead (hero), so a screen reader says "opens in a new tab" after the
+// link's name rather than inside it. New tabs stay: a streamed page is slow
+// to rebuild if a reader navigates away from it.
+const NEW_TAB = ' aria-describedby="newtab"'
+
 /**
  * Open Graph / Twitter Card tags, shared by the front page and every article
  * page. One image for the whole site — the sheet-music cover of "With a
@@ -398,7 +404,7 @@ export function zoomLink(entry, institutionName, { medium, imageCount } = {}) {
   const words = morePages ? 'High resolution and more pages at' : 'High resolution at'
   // New tab like every other outbound link here: the door to the museum must
   // not discard the enriched render the reader is standing on.
-  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${words} ${escapeHtml(institutionName)} →</a>`
+  return `<a class="zoom" href="${escapeHtml(entry.href)}" target="_blank" rel="noopener"${NEW_TAB}>${words} ${escapeHtml(institutionName)} →</a>`
 }
 
 /**
@@ -625,13 +631,13 @@ function rightsDetail(entry) {
   if (copy?.marks?.includes('unknown')) {
     const said = UNKNOWN_COPY[copy.code] ?? UNKNOWN_COPY.UNKNOWN
     const link = copy.url
-      ? ` <a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener">${escapeHtml(copy.label)} ↗</a>`
+      ? ` <a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener"${NEW_TAB}>${escapeHtml(copy.label)} ↗</a>`
       : ''
     parts.push(`<p class="rd-lic">${escapeHtml(said)}${link}</p>`)
   } else if (copy?.url) {
     parts.push(
       `<p class="rd-lic">This copy is offered under ` +
-        `<a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener">${escapeHtml(copy.label)}</a>` +
+        `<a href="${escapeHtml(copy.url)}" target="_blank" rel="noopener"${NEW_TAB}>${escapeHtml(copy.label)}</a>` +
         `, stated by whoever is serving it.</p>`,
     )
   }
@@ -645,8 +651,8 @@ function rightsDetail(entry) {
     parts.push(
       `<p class="rd-work">${detail.map((d) => escapeHtml(d)).join(' ')} ` +
         `<span class="rd-src">Copyright status from Wikidata, where it is maintained by ` +
-        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener">CopyClear</a>` +
-        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener">Dominio Público en América Latina</a> project.</span></p>`,
+        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener"${NEW_TAB}>CopyClear</a>` +
+        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener"${NEW_TAB}>Dominio Público en América Latina</a> project.</span></p>`,
     )
   }
   // The maintainers are credited wherever their data is used, including on a
@@ -654,13 +660,13 @@ function rightsDetail(entry) {
   if (work && !detail.length && work.line) {
     parts.push(
       `<p class="rd-work"><span class="rd-src">Copyright status from Wikidata, where it is maintained by ` +
-        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener">CopyClear</a>` +
-        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener">Dominio Público en América Latina</a> project.</span></p>`,
+        `<a href="https://www.wikidata.org/wiki/Wikidata:CopyClear" target="_blank" rel="noopener"${NEW_TAB}>CopyClear</a>` +
+        ` and the <a href="https://www.wikidata.org/wiki/Wikidata:WikiProject_Dominio_P%C3%BAblico_en_Am%C3%A9rica_Latina" target="_blank" rel="noopener"${NEW_TAB}>Dominio Público en América Latina</a> project.</span></p>`,
     )
   }
   if (work?.paulina) {
     parts.push(
-      `<p class="rd-ask"><a class="fixlink" href="${escapeHtml(work.paulina.url)}" target="_blank" rel="noopener">` +
+      `<p class="rd-ask"><a class="fixlink" href="${escapeHtml(work.paulina.url)}" target="_blank" rel="noopener"${NEW_TAB}>` +
         `${escapeHtml(work.paulina.label)} ↗</a></p>`,
     )
   }
@@ -695,7 +701,7 @@ function titleRow(entry, tag = 'h3') {
   const attr = tag === 'h3' && entry.title ? ` title="${escapeHtml(entry.title)}"` : ''
   const rlens = LENS('rinfo')
   const name = entry.href
-    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a>`
+    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener"${NEW_TAB}>${escapeHtml(entry.title)}</a>`
     : escapeHtml(entry.title)
   const marks = itemMarks(entry)
   const working = rightsDetail(entry)
@@ -716,7 +722,7 @@ function provenance(entry) {
   const why = entry.why ? escapeHtml(entry.why) : ''
   if (!entry.trace) return why ? `<p class="why">${why}</p>` : ''
   const fix = entry.fix
-    ? ` <a class="fixlink" href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener">${escapeHtml(entry.fix.label)} ↗</a>`
+    ? ` <a class="fixlink" href="${escapeHtml(entry.fix.url)}" target="_blank" rel="noopener"${NEW_TAB}>${escapeHtml(entry.fix.label)} ↗</a>`
     : ''
   const body = `<p>${escapeHtml(entry.trace)}${fix}</p>`
   // "How we know" named the act and not the subject — it never said WHAT is
@@ -832,7 +838,7 @@ function broadNotes(notes, inline) {
         `<p class="broad">${favicon(n.source, inline)}` +
         `<span class="broad-text"><b>Not shown here:</b> ${escapeHtml(what)} — a heading ` +
         `too broad for this page to choose four that would belong. ` +
-        `<a href="${escapeHtml(n.url)}" target="_blank" rel="noopener">Browse them at ${escapeHtml(name)} ↗</a>` +
+        `<a href="${escapeHtml(n.url)}" target="_blank" rel="noopener"${NEW_TAB}>Browse them at ${escapeHtml(name)} ↗</a>` +
         `</span></p>`
       )
     })
@@ -910,14 +916,18 @@ export function evidenceKey(bands) {
   )
 }
 
+// The sentence rides inside the badge as a tooltip element, not a `title`: a
+// `title` shows only to a mouse, while `.tip` also opens on keyboard focus,
+// stays open while the pointer is over it, closes on Esc (FOLD_JS), and is
+// part of the link's accessible name.
 function sampleBadge(sample, shown) {
   if (!sample) return ''
   const text = `${shown} of ${sample.total.toLocaleString()}`
-  const title = escapeHtml(sample.text)
-  if (!sample.url) return `<span class="count" title="${title}">${text}</span>`
+  const tip = escapeHtml(sample.text)
+  if (!sample.url) return `<span class="count" tabindex="0">${text}<span class="tip"> ${tip}</span></span>`
   return (
-    `<a class="count" href="${escapeHtml(sample.url)}" target="_blank" rel="noopener" ` +
-    `title="${title} — see the rest">${text} ↗</a>`
+    `<a class="count" href="${escapeHtml(sample.url)}" target="_blank" rel="noopener"${NEW_TAB}>` +
+    `${text} ↗<span class="tip"> ${tip} — see the rest</span></a>`
   )
 }
 
@@ -1018,7 +1028,7 @@ const relink = (html, wikiBase) =>
  */
 function footnote(fn, wikiBase) {
   const access = fn.access
-    ? ` <a class="fn-access" href="${escapeHtml(fn.access.url)}" target="_blank" rel="noopener">${escapeHtml(fn.access.label)} ↗</a>`
+    ? ` <a class="fn-access" href="${escapeHtml(fn.access.url)}" target="_blank" rel="noopener"${NEW_TAB}>${escapeHtml(fn.access.label)} ↗</a>`
     : ''
   return (
     `<li class="fn" id="${escapeHtml(fn.id)}"><span class="fn-num">${escapeHtml(fn.num)}.</span>` +
@@ -1476,7 +1486,7 @@ function holderConflict(b) {
   if (b.id !== 'slede' || !b.holderRefusal) return ''
   const { phrase, href, statusLine, mixed } = b.holderRefusal
   const door = href
-    ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener">See the institution’s record →</a>`
+    ? ` <a class="ext" href="${escapeHtml(href)}" target="_blank" rel="noopener"${NEW_TAB}>See the institution’s record →</a>`
     : ''
   // Each clause stays at its own level — the copy/work rule ("neither is
   // ever printed as the other"): what the gate read is the record's flag
@@ -1573,7 +1583,8 @@ function hero({ title, home, legend, panel = '', extras = '', holder = null, liv
     alongside — found while you waited, by following the article’s own links and footnotes
     out to the collections that published it. <span class="credit-line">${creditLine}</span></p>
   <div class="legend">${legend}</div>
-  <div class="gap-slot">${panel}</div>${live ? '\n  <p class="vh" role="status" id="tap-status"></p>' : ''}
+  <div class="gap-slot">${panel}</div>
+  <p id="newtab" hidden>Opens in a new tab</p>${live ? '\n  <p class="vh" role="status" id="tap-status"></p>' : ''}
   ${note}
   ${extras}
 </header>`
@@ -1657,6 +1668,9 @@ function __open(){var e=location.hash&&document.getElementById(location.hash.sli
 var d=e&&e.closest("details");while(d){d.open=true;d=d.parentElement&&d.parentElement.closest("details")}
 if(e)e.scrollIntoView()}
 window.addEventListener("hashchange",__open);
+document.addEventListener("keydown",function(e){if(e.key==="Escape")document.documentElement.classList.add("tip-x")});
+document.addEventListener("pointerover",function(e){if(!e.target.closest(".count"))document.documentElement.classList.remove("tip-x")});
+document.addEventListener("focusin",function(){document.documentElement.classList.remove("tip-x")});
 window.addEventListener("load",function(){if(location.hash)__open()})
 </script>`
 
@@ -1672,6 +1686,27 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 // blank margin while spike output put the same thumb beside the text. The
 // two renderers must place these identically or neither can vouch for the
 // other.
+//
+// The anonymous function keeps the reader's place while the stream runs. A
+// browser's own scroll anchoring locks onto the first element at the TOP of
+// the screen, and a reader reads lower down: a band's rail lands between its
+// heading and its prose, a deck lands under the band above, and a card image
+// with no declared size grows from 0 when it loads, all of it between the
+// top of the screen and the line being read. Measured 2026-10-26 on a
+// 400 kbit/s connection, the word a third of the way down the screen moved
+// 450–900px on desktop and 1,400–2,600px on a phone. So the page tracks the
+// character a third of the way down the screen in `main` (an element only
+// where no text is there) and scrolls by however far it moved in the
+// document — a character, not its paragraph, because a rail floating in
+// beside the prose rewraps the line the reader is on. It waits for the reader's first scroll (at
+// the top of the page the article should visibly assemble), re-picks after
+// every scroll the reader makes but not after its own (a scroll event arrives
+// a frame late, when more may have landed, and re-picking then locks onto
+// the wrong element), and stops three seconds after the stream and the page load
+// have both finished. Safari has no scroll anchoring, so there this is all
+// of it. The browser's own anchoring is off while this runs (`.keep`; Chrome
+// reads `overflow-anchor` for the page from body, not html): both would
+// correct the same growth, and the text would jump the other way.
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
@@ -1683,6 +1718,23 @@ if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
 function __say(m){var s=document.getElementById("tap-status");if(s)s.textContent=m}
 function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
+(function(){var ref=null,at=0,t0=0,mine=-1,h=document.documentElement;h.classList.add("keep");
+function ch(x,y){var c,r,n,o;if(document.caretPositionFromPoint){c=document.caretPositionFromPoint(x,y);if(c){n=c.offsetNode;o=c.offset}}
+else if(document.caretRangeFromPoint){c=document.caretRangeFromPoint(x,y);if(c){n=c.startContainer;o=c.startOffset}}
+if(!n||n.nodeType!==3||!n.length)return null;o=Math.min(o,n.length-1);r=document.createRange();r.setStart(n,o);r.setEnd(n,o+1);
+c=r.getBoundingClientRect();return c.height&&c.top<=y+8&&c.bottom>=y-8?r:null}
+function pick(){var m=document.querySelector("main"),b,y,i,r,e;ref=null;if(!m||scrollY<=0)return;
+b=m.getBoundingClientRect();y=innerHeight/3;
+for(i=1;i<6&&!ref;i++){r=ch(b.left+b.width*i/6,y);if(r&&m.contains(r.startContainer))ref=r}
+if(!ref){e=document.elementFromPoint(b.left+b.width/2,y);if(e&&m.contains(e))ref=e}
+if(ref)at=ref.getBoundingClientRect().top+scrollY}
+function onscroll(){if(Math.abs(scrollY-mine)<1){mine=-1;return}pick()}
+addEventListener("scroll",onscroll,{passive:true});
+function tick(){if(ref&&!(ref.startContainer||ref).isConnected)pick();
+if(ref){var p=ref.getBoundingClientRect().top+scrollY;if(Math.abs(p-at)>=1){scrollBy(0,p-at);mine=scrollY}at=p}
+if(window.__tapdone&&document.readyState==="complete"){t0=t0||Date.now();if(Date.now()-t0>3000){h.classList.remove("keep");return removeEventListener("scroll",onscroll)}}
+requestAnimationFrame(tick)}
+requestAnimationFrame(tick)})();
 window.addEventListener("load",function(){if(!window.__tapdone){
 var f=document.querySelector(".finding");if(f)f.textContent="Stopped before the search finished.";
 __say("Stopped before the search finished.");
@@ -1999,14 +2051,14 @@ sup.ref a{color:var(--link)}
 .ib-why summary{list-style:none;cursor:pointer;display:inline-block}
 .ib-why summary::-webkit-details-marker{display:none}
 .ib-why[open] .rinfo{opacity:.55}
-.ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
+.ib-why p{text-align:left;font-size:.72rem;line-height:1.5;color:var(--muted);
   background:var(--warm);border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:4px 0 2px}
 
 /* Holder panel with merged infobox and record rows, each attributed to its source. */
 .infobox.holder-panel{margin:0 0 12px}
 .rail-panel{clear:right}
 /* Chips on rows: institution and Wikipedia source attribution, small muted labels. */
-.infobox-chip{display:inline-block;font-size:.65rem;font-weight:600;color:var(--manila-ink);
+.infobox-chip{display:inline-block;font-size:.72rem;font-weight:600;color:var(--manila-ink);
   background:var(--manila);border:1px solid var(--manila-rule);border-radius:4px;
   padding:1px 6px;margin-left:4px;white-space:nowrap}
 /* A conflict is two stacked rows; the second row's label cell is empty. */
@@ -2059,19 +2111,19 @@ a.zoom:hover{text-decoration:underline}
 /* "4" is decoration; "4 of 54" is the disclosure — that a shelf is a sample of
    something larger, said on the shelf rather than in a paragraph above the
    deck. So it is darker than the old bare count, and it does not wrap. */
-.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.66rem;font-weight:600;
+.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.72rem;font-weight:600;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:1px 8px;white-space:nowrap;flex:none}
-.carousel-head .count[title]{cursor:help}
+.carousel-head span.count{cursor:help}
 /* A single thumb's caption head: the same source tag and manila claim the
    gallery head carries, at caption scale, inside the frame. */
 .single-head{display:flex;align-items:center;gap:7px;margin:1px 1px 6px;min-width:0}
 .single-head .topic{font-size:.72rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.single-head .count,.hero-src .count{margin-left:auto;font-family:var(--sans);font-size:.62rem;font-weight:600;
+.single-head .count,.hero-src .count{margin-left:auto;font-family:var(--sans);font-size:.72rem;font-weight:600;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;white-space:nowrap;flex:none}
-.single-head .count[title],.hero-src .count[title]{cursor:help}
+.single-head span.count,.hero-src span.count{cursor:help}
 /* The badge as the door (2026-08-10). It keeps the manila slug exactly — the
    number is still the claim, and a blue underlined "4 of 54" would read as one
    more link in a page already dense with them — and earns its affordance from
@@ -2081,13 +2133,26 @@ a.zoom:hover{text-decoration:underline}
 a.count{text-decoration:none;cursor:pointer;transition:background-color .12s,border-color .12s}
 a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila-rule);
   border-color:var(--manila-ink)}
+/* The badge's sentence. Hidden the way .vh hides, so a screen reader still
+   reads it as part of the badge; shown under the badge on hover or keyboard
+   focus. It hangs from the badge's right edge because the badge sits at the
+   right end of its head, and it touches the badge with no gap, so the pointer
+   can move onto it without closing it. Esc closes it (.tip-x, FOLD_JS). */
+.count{position:relative}
+.count .tip{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap}
+.count:hover .tip,.count:focus-visible .tip{z-index:5;top:100%;right:0;width:max-content;max-width:min(20rem,80vw);
+  height:auto;overflow:visible;clip-path:none;white-space:normal;padding:6px 9px;
+  font-size:.72rem;font-weight:400;line-height:1.4;color:var(--ink);text-align:left;
+  background:var(--paper);border:1px solid var(--manila-ink);border-radius:6px;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.tip-x .count .tip{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%);white-space:nowrap;
+  padding:0;border:0;box-shadow:none}
 /* Both heads sit above the visual now, outside the figcaption's padding, so
    they carry their own: the friend's name opens every box (2026-08-09). */
 .card > .single-head,.card > .hero-src{margin:3px 4px 7px}
 .carousel.single .card{width:100%;flex:none}
 .carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}
+.carousel-why{font-family:var(--sans);font-size:.72rem;color:var(--muted);margin:-6px 0 8px}
 /* A wrapping grid of framed boxes, which IS MediaWiki's gallery — ul.gallery
    with li.gallerybox, each box a thumb frame. It replaced a horizontally
    scrolling strip on 2026-08-07: MediaWiki has no scrolling-strip idiom and no
@@ -2119,7 +2184,7 @@ a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila
    fitted two, wrapped the third onto a row of its own, and left the ragged
    holes that made a wide page look mostly empty. */
 .card{flex:0 0 178px;margin:0;border:1px solid var(--rule);background:var(--bg);padding:3px}
-.src{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;letter-spacing:.08em;
+.src{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.08em;
   text-transform:uppercase;font-weight:700;color:var(--muted)}
 .frame{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
 .frame.audio{aspect-ratio:auto;height:52px;background:#1d1d20}
@@ -2178,6 +2243,10 @@ a:hover > .plate .plate-mark{color:var(--link)}
    leaves. The hero is excluded — it has its own no-clamp rule, and this
    selector would out-rank it. */
 .card:not(.hero-card):not(:has(.shot,.frame)) h3{-webkit-line-clamp:6}
+/* A keyboard reader cannot see the tooltip that holds a clipped title, so
+   the whole title shows while anything in the card has focus. The card grows
+   only then; at rest the layout is the clamped one. */
+.card:focus-within h3,.card:not(.hero-card):not(:has(.shot,.frame)):focus-within h3{-webkit-line-clamp:unset}
 /* A thumbcaption's link is an ordinary blue wikilink — the underlined-on-hover
    kind — not a bordered title treatment. */
 .card h3 a{color:var(--link)}
@@ -2186,7 +2255,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* Some credits are whole paragraphs of reuse instructions; the card shows two
    lines and keeps the rest in the DOM (and on the linked page). */
-.card .credit{font-size:.68rem;color:var(--quiet);margin:0 0 4px;
+.card .credit{font-size:.72rem;color:var(--quiet);margin:0 0 4px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* License marks. They ride INSIDE the credit line rather than above it, so the
@@ -2236,13 +2305,15 @@ a:hover > .plate .plate-mark{color:var(--link)}
    link is an 18px line, and WCAG 2.5.8 wants 24px around its center free of
    other targets. */
 .rwhy[open]>summary{margin-top:3px}
-.rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--warm);
+.rwhy p{font-size:.72rem;line-height:1.5;color:var(--muted);background:var(--warm);
   border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:6px 0 0}
 .rwhy a{font-weight:600}
 .rwhy .rd-src{color:var(--quiet)}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
    words. Clipped rather than display:none, which would take it out of the
    accessibility tree along with the visual. */
+/* The keep-place script in RELOCATE_JS does the anchoring while a page streams. */
+.keep body{overflow-anchor:none}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
@@ -2253,7 +2324,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    domain in the United States" with the second clause cut off is worse than
    not saying it. The left rule marks it as a different kind of claim from the
    credit above without adding a heading nobody asked for. */
-.card .rights-line{font-size:.68rem;color:#5d6469;margin:0 0 4px;
+.card .rights-line{font-size:.72rem;color:#5d6469;margin:0 0 4px;
   padding-left:6px;border-left:2px solid #d8dcdf;line-height:1.35}
 .hero-card .rights-line{font-size:.72rem}
 
@@ -2294,7 +2365,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* A wikitable: hairline grid, grey header band. */
 .gap-list{width:100%;border-collapse:collapse;margin:0 0 10px;background:var(--paper);
   border:1px solid var(--rule-strong)}
-.gap-list thead th{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+.gap-list thead th{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
   font-weight:700;text-align:left;padding:5px 8px 5px 10px;background:var(--faint);
   border-bottom:1px solid var(--rule-strong)}
 .gap-list tbody tr{border-left:3px solid var(--rule)}
@@ -2303,9 +2374,9 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .gap-who{font-size:.72rem;font-weight:700;color:var(--head);line-height:1.35}
 /* The icon rides inline with the name so a wrapped name keeps its hanging edge. */
 .gap-who .fav{width:14px;height:14px;margin-right:5px;vertical-align:-2px}
-.gap-gave{color:var(--muted);font-size:.66rem;line-height:1.45;white-space:nowrap}
-.gap-seen{font-size:.66rem;line-height:1.4}
-.gap-tier{display:block;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+.gap-gave{color:var(--muted);font-size:.72rem;line-height:1.45;white-space:nowrap}
+.gap-seen{font-size:.72rem;line-height:1.4}
+.gap-tier{display:block;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
 .gap-where{display:block;color:var(--muted);margin-top:2px}
 .gap-shown{border-left-color:#2a7d4f}.gap-shown .gap-tier{color:#2a7d4f}
 .gap-link{border-left-color:#9aa0a6}.gap-link .gap-tier{color:#6e7378}
@@ -2319,17 +2390,17 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* Corroborated edges read differently on purpose: a dashed rule and a stated
    reason, so a described-object match is never mistaken for a shared identifier. */
 .card.corroborated{border:1px dashed #c9a227;border-radius:4px;padding:6px;background:#fffdf5}
-.card .evidence{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
-.card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.66rem;line-height:1.45;color:#6b6f75}
+.card .evidence{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
+.card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.72rem;line-height:1.45;color:#6b6f75}
 .card .signals li{display:block;margin-bottom:3px}
-.card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
+.card .sig-field{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
 .card .sig-pair{color:#4a4f55}
 .card .sig-vs{color:var(--quiet);margin:0 4px}
 /* Why this item is here — and, where there is a chain behind it, the control
    that opens the chain. One line doing both jobs: the ⓘ used to sit under this
    line as its own 12px target and was the least visible thing on the card
    despite opening the most useful. */
-.card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
+.card .why{font-size:.72rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
 .card .prov{margin:0}
 .card .prov summary.why{list-style:none;cursor:pointer;display:block;margin:0}
 .card .prov summary::-webkit-details-marker{display:none}
@@ -2339,13 +2410,13 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .card .prov .info{color:var(--accent);margin-left:5px;vertical-align:-1px}
 .card .prov summary.bare .info{margin:0 4px 0 0}
 .card .prov[open] .info{opacity:.55}
-.card .prov p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
+.card .prov p{font-size:.72rem;line-height:1.5;color:var(--muted);background:var(--faint);
   border:1px solid var(--rule);padding:6px 8px;margin:5px 0 0}
 .card .prov a{font-weight:600}
 /* The one link on the card a reader can act on, rather than merely follow. */
 .card .prov .fixlink{display:inline-block;margin-top:3px}
 .hero-card .why,.hero-card .prov summary.why{font-size:.72rem}
-.hero-card .prov p{font-size:.68rem}
+.hero-card .prov p{font-size:.72rem}
 
 /* An anchor too broad to sample: the count, and the door. Deliberately NOT a
    filled slab like .disclosure — that one describes shelves the reader can
@@ -2353,7 +2424,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    alike made them read as contradicting each other. A hairline above and open
    air behind it: a note about an absence, closing the deck. */
 .broad{display:flex;gap:9px;align-items:baseline;flex:1 1 100%;font-family:var(--sans);
-  font-size:.7rem;line-height:1.5;color:var(--muted);margin:4px 0 0;padding:9px 0 0;
+  font-size:.72rem;line-height:1.5;color:var(--muted);margin:4px 0 0;padding:9px 0 0;
   border-top:1px dotted var(--rule)}
 .broad+.broad{margin-top:0}
 .broad b{color:var(--ink);font-weight:700}
@@ -2391,7 +2462,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* A book you can actually borrow or read gets a quiet but firm call. */
 .fn-access{white-space:nowrap;font-weight:600}
 /* Closed by default: one line where the wall of citations used to be. */
-.fn-fold summary{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+.fn-fold summary{font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);cursor:pointer}
 .fn-fold summary:hover{color:var(--link)}
 .fn-fold[open] summary{margin:0 0 12px}

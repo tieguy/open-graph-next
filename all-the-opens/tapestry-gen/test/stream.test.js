@@ -175,7 +175,7 @@ test('a shared why hoists to the head even on a shelf with no topic label', () =
     ],
     samples: [MET_SAMPLE],
   })
-  assert.match(deck, /<span class="count"[^>]*>2 of 9<\/span><\/div><p class="carousel-why">About Santiago Calatrava, which this section links to<\/p>/)
+  assert.match(deck, /<span class="count"[^>]*>2 of 9<span class="tip">[^<]*<\/span><\/span><\/div><p class="carousel-why">About Santiago Calatrava, which this section links to<\/p>/)
   assert.doesNotMatch(deck, /<span class="topic">/)
   // Said once under the head, not again on the card below it.
   assert.doesNotMatch(deck, /<p class="why">About Santiago Calatrava/)
@@ -190,7 +190,7 @@ test('a sample claim rides on the head of the shelf it is a sample of', () => {
   // disclosure moves with the card, never dropped.
   assert.match(
     rail,
-    /<div class="single-head"><span class="src">The Met<\/span><span class="count" title="A sample: 1 of the 9 objects the Met holds">1 of 9<\/span><\/div>/,
+    /<div class="single-head"><span class="src">The Met<\/span><span class="count" tabindex="0">1 of 9<span class="tip"> A sample: 1 of the 9 objects the Met holds<\/span><\/span><\/div>/,
   )
   // The floating paragraph is gone entirely when every claim found its shelf.
   assert.doesNotMatch(deck, /class="disclosure"/)
@@ -214,7 +214,7 @@ test('a hoisted hero carries its own shelf’s claim, and never says it twice', 
   const sample = { source: 'dpla', topic: 'Apollo 15', shown: 1, total: 17, text: 'A sample: 1 of the 17 items' }
   const only = { source: 'dpla', topic: 'Apollo 15', title: 'Koslow', imageUrl: 'https://example.test/k.jpg' }
   const { rail, deck } = bandParts({ ...BAND, entries: [only], samples: [sample] })
-  assert.match(rail, /<div class="hero-src">.*<span class="count" title="A sample: 1 of the 17 items">1 of 17<\/span><\/div>/)
+  assert.match(rail, /<div class="hero-src">.*<span class="count" tabindex="0">1 of 17<span class="tip"> A sample: 1 of the 17 items<\/span><\/span><\/div>/)
   assert.doesNotMatch(deck, /class="disclosure"/)
 
   // A hero hoisted off a shelf whose other cards DID render leaves the claim
@@ -225,7 +225,7 @@ test('a hoisted hero carries its own shelf’s claim, and never says it twice', 
     samples: [sample],
   })
   assert.doesNotMatch(withShelf.rail, /class="count"/)
-  assert.match(withShelf.deck, /<span class="count" title="A sample: 1 of the 17 items">2 of 17<\/span>/)
+  assert.match(withShelf.deck, /<span class="count" tabindex="0">2 of 17<span class="tip"> A sample: 1 of the 17 items<\/span><\/span>/)
 })
 
 test('the badge is the door when the partner has one, and stays a plain slug when it does not', () => {
@@ -236,11 +236,11 @@ test('the badge is the door when the partner has one, and stays a plain slug whe
   const { deck } = bandParts({ ...BAND, samples: [linked] })
   assert.match(
     deck + bandParts({ ...BAND, samples: [linked] }).rail,
-    /<a class="count" href="https:\/\/dp\.la\/search\?subject=%22Apollo%22" target="_blank" rel="noopener" title="A sample: 1 of the 9 objects the Met holds — see the rest">1 of 9 ↗<\/a>/,
+    /<a class="count" href="https:\/\/dp\.la\/search\?subject=%22Apollo%22" target="_blank" rel="noopener" aria-describedby="newtab">1 of 9 ↗<span class="tip"> A sample: 1 of the 9 objects the Met holds — see the rest<\/span><\/a>/,
   )
-  // A sample with no verifiable browse page keeps the hover-only slug: the
-  // page never invents a door (see the OpenAlex and museum notes in discover).
-  assert.match(bandParts({ ...BAND, samples: [MET_SAMPLE] }).rail, /<span class="count" title=/)
+  // A sample with no verifiable browse page keeps a plain slug: the page
+  // never invents a door (see the OpenAlex and museum notes in discover).
+  assert.match(bandParts({ ...BAND, samples: [MET_SAMPLE] }).rail, /<span class="count" tabindex="0">/)
 })
 
 test('a sample whose shelf never rendered still gets said, in the old paragraph', () => {
@@ -352,7 +352,7 @@ test('a card with a trace grows an ⓘ fold: the exact chain, and the door to th
     /<summary class="why" title="How this got here">About Santiago Calatrava, which this section links to<svg class="info"[^>]*>/,
   )
   assert.match(rail, /states its Met object ID \(P3634\)/)
-  assert.match(rail, /<a class="fixlink" href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener">Check or fix it on Wikidata ↗<\/a>/)
+  assert.match(rail, /<a class="fixlink" href="https:\/\/www\.wikidata\.org\/wiki\/Q1#P3634" target="_blank" rel="noopener" aria-describedby="newtab">Check or fix it on Wikidata ↗<\/a>/)
   // A card with no trace shows no fold — an empty ⓘ is a broken promise.
   assert.doesNotMatch(bandRail(BAND), /class="prov"/)
 })

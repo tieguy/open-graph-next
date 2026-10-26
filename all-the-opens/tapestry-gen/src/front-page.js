@@ -302,7 +302,7 @@ export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
 /** The grid those cards sit in, shared for the same reason they are. */
 const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
 
-.ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
+.ready .chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
   border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
   vertical-align:1px}
@@ -315,7 +315,7 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 .show:hover,.show:focus-visible{border-color:var(--link)}
 .show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
 .show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
-.dom{display:block;font-size:.62rem;letter-spacing:.14em;
+.dom{display:block;font-size:.72rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
   margin-bottom:5px}
@@ -407,6 +407,15 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .ask input::placeholder{color:#b6babf;font-style:italic}
 .ask input:focus{outline:none;border-bottom-color:var(--link)}
 .ask input:focus-visible{outline:2px solid var(--link);outline-offset:6px}
+/* Go is for readers with no Enter key to press — a phone without a search
+   key, a switch or voice user — and a sign that the field does something.
+   It sits on the field's rule, in the hint's sans, so the field still reads
+   as a headword with a small button beside it rather than a form. */
+.ask-row{display:flex;align-items:flex-end;gap:20px}
+.ask button{flex:none;margin-bottom:6px;font-family:var(--sans);font-size:.9rem;font-weight:600;
+  color:#fff;background:var(--link);border:0;border-radius:4px;padding:8px 16px;cursor:pointer}
+.ask button:hover{background:var(--head)}
+.ask button:focus-visible{outline:2px solid var(--link);outline-offset:3px}
 .hint{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin:10px 0 0}
 .hint kbd{font-family:var(--sans);border:1px solid var(--rule);border-bottom-width:2px;
   border-radius:4px;padding:0 5px;background:var(--paper);font-size:.72rem}
@@ -428,7 +437,7 @@ ${CARD_STYLE}
 .friends-cat:first-child{margin-top:0}
 /* The showcase grid's group rows: the friends list's reading-aid pattern,
    tighter, because these sit inside the header rather than a section. */
-.show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;
+.show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 0 0}
 .show-cat:first-child{margin-top:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
@@ -437,7 +446,7 @@ ${CARD_STYLE}
 .friend .gift{font-size:.88rem;line-height:1.55;color:#3a3f45;margin:0;max-width:36ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
-.lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+.lic-mark{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;margin-right:5px}
 /* The source of the license claim beside it. Deliberately quiet — it is
@@ -511,11 +520,12 @@ ${legend.style}
          partners holding item-level records of the thing itself. The first
          thing a visitor types decides what they think this is, so it should
          name the cases that answer best. -->
-    <input name="q" type="search" placeholder="Any article title — try a species, or an artist" autofocus
+    <div class="ask-row"><input name="q" type="search" placeholder="Any article title — try a species, or an artist" autofocus
       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
       data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other"
       aria-label="English Wikipedia article title">
-    <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
+    <button type="submit">Go</button></div>
+    <p class="hint">Press <kbd>Enter</kbd> or Go. The article arrives in a second; its friends stream in behind it.</p>
   </form>
   <p class="ready">A variety of articles, chosen to show off both the cool stuff they bring in,
     and the open institutions and technologies they build on:</p>
