@@ -573,7 +573,12 @@ test('a non-holder render is byte-stable', async () => {
   // corroborated key's sentence stay one flex item instead of striping into a
   // column per inline element — a deliberate stylesheet change riding every
   // page, the same exception shape as the holder panel's rules.
-  assert.equal(digest, 'b1af5b6c9731ced94ee98070bfe0add9bb5b4dd7636835f26a48354f37c8d96f')
+  // Re-pinned 2026-10-25 for an accessibility pass: card titles h4 → h3 under a
+  // visually hidden lede h2, the --quiet grey that clears 4.5:1, underlined
+  // links in grey text, 24px hit areas, and the image link taken out of the
+  // tab order. The page lays out as before; an opened license note sits 8px
+  // lower.
+  assert.equal(digest, '0e236f9d0fe13198612c627e2141a9b5e8c7c867997286e9245e120b2b36ca7e')
 })
 
 test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {

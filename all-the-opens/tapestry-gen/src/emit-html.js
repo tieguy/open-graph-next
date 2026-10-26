@@ -465,10 +465,11 @@ function plate(entry) {
   // the title directly beneath already opens the same door.
   if (!label) return `<div class="plate bare" aria-hidden="true"></div>`
   const body = `<div class="plate"><span class="plate-mark">${escapeHtml(label)}</span></div>`
-  // A plate that says something is worth clicking, and it has text, so the link
-  // has a name. Same door as the title and the image.
+  // A plate that says something is worth clicking. Same door as the title, so
+  // it is a mouse target only: out of the tab order and the accessibility
+  // tree, where it would be the same link announced twice.
   return entry.href
-    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${body}</a>`
+    ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">${body}</a>`
     : body
 }
 
@@ -514,9 +515,11 @@ function card(entry, inline, { head = '' } = {}) {
     const img = `<img class="shot" src="${escapeHtml(src)}" loading="lazy" onerror="this.remove()" alt="${escapeHtml(entry.title)}">`
     // The title already opens the same door (see titleRow); the image is the
     // larger target and a reader's first instinct to click, so it opens the
-    // same door rather than doing nothing.
+    // same door rather than doing nothing. For the mouse only: a keyboard or
+    // screen reader would meet the link twice, and once `onerror` removes a
+    // broken image this anchor is left with no name at all.
     visual = entry.href
-      ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${img}</a>`
+      ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">${img}</a>`
       : img
   } else {
     visual = plate(entry)
@@ -684,12 +687,12 @@ const LENS = (cls) =>
  * public domain should find the answer beside the claim, not inside a disclosure
  * about how the item reached the page. Two different questions, two controls.
  *
- * A flex row rather than markup inside the `<h4>`: `<details>` is flow content
+ * A flex row rather than markup inside the `<h3>`: `<details>` is flow content
  * and is not valid inside a heading. `.rwhy[open]` takes the full basis so the
  * panel drops below the title instead of squeezing it.
  */
-function titleRow(entry, tag = 'h4') {
-  const attr = tag === 'h4' && entry.title ? ` title="${escapeHtml(entry.title)}"` : ''
+function titleRow(entry, tag = 'h3') {
+  const attr = tag === 'h3' && entry.title ? ` title="${escapeHtml(entry.title)}"` : ''
   const rlens = LENS('rinfo')
   const name = entry.href
     ? `<a href="${escapeHtml(entry.href)}" target="_blank" rel="noopener">${escapeHtml(entry.title)}</a>`
@@ -697,12 +700,12 @@ function titleRow(entry, tag = 'h4') {
   const marks = itemMarks(entry)
   const working = rightsDetail(entry)
   // No marks and nothing to explain: the plain heading, exactly as before.
-  if (!marks && !working) return `<div class="title-row"><h4${attr}>${name}</h4></div>`
+  if (!marks && !working) return `<div class="title-row"><h3${attr}>${name}</h3></div>`
   // Marks but no working — a partner stated a licence and gave no reasoning —
   // so the marks ride the heading and there is no control to offer.
-  if (!working) return `<div class="title-row"><h4${attr}>${name}${marks}</h4></div>`
+  if (!working) return `<div class="title-row"><h3${attr}>${name}${marks}</h3></div>`
   return (
-    `<div class="title-row"><h4${attr}>${name}</h4>` +
+    `<div class="title-row"><h3${attr}>${name}</h3>` +
     `<details class="rwhy"><summary title="Where these terms come from">${marks}` +
     rlens +
     `<span class="vh">Where these terms come from</span></summary>${working}</details></div>`
@@ -1529,9 +1532,13 @@ function band(b, inline, wikiBase = '/wiki/') {
   // The lede gets no heading of its own (2026-08-08, mobile review): the
   // masthead's h1 already says the title, and on a phone the repetition
   // stacked three deep — h1, band h2, then the infobox's own title row. A
-  // real article page starts its lede directly under the firstHeading.
+  // real article page starts its lede directly under the firstHeading. A
+  // screen reader still gets an h2, visually hidden: the lede's cards title
+  // themselves at h3, and without it the outline jumps from h1 to h3.
   const head =
-    b.id === 'slede' ? '' : `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>`
+    b.id === 'slede'
+      ? '<h2 class="vh">Introduction</h2>'
+      : `<header class="band-head"><h2>${escapeHtml(b.title)}</h2></header>`
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
     head +
@@ -1546,7 +1553,7 @@ function band(b, inline, wikiBase = '/wiki/') {
  * sentence that hands the credit to the sources — then the article. The
  * verbiage about how it all works lives on the main page, not here.
  */
-function hero({ title, home, legend, panel = '', extras = '', holder = null }) {
+function hero({ title, home, legend, panel = '', extras = '', holder = null, live = false }) {
   const name = 'Help From Our Friends · an experiment in visualizing open knowledge, by'
   const byline = `<a href="https://lu.is">Luis Villa</a>`
   const kicker = home ? `<a href="${escapeHtml(home)}">${name}</a> ${byline}` : `${name} ${byline}`
@@ -1566,7 +1573,7 @@ function hero({ title, home, legend, panel = '', extras = '', holder = null }) {
     alongside — found while you waited, by following the article’s own links and footnotes
     out to the collections that published it. <span class="credit-line">${creditLine}</span></p>
   <div class="legend">${legend}</div>
-  <div class="gap-slot">${panel}</div>
+  <div class="gap-slot">${panel}</div>${live ? '\n  <p class="vh" role="status" id="tap-status"></p>' : ''}
   ${note}
   ${extras}
 </header>`
@@ -1673,10 +1680,12 @@ function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q
 if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
 function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
+function __say(m){var s=document.getElementById("tap-status");if(s)s.textContent=m}
 function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
 window.addEventListener("load",function(){if(!window.__tapdone){
 var f=document.querySelector(".finding");if(f)f.textContent="Stopped before the search finished.";
+__say("Stopped before the search finished.");
 document.body.insertAdjacentHTML("beforeend",'<div class="stream-cut">The stream was interrupted before every section finished — what you see is real but incomplete. <a href="javascript:location.reload()">Reload</a> to run it again.</div>')}})
 </script>`
 
@@ -1723,7 +1732,7 @@ ${RELOCATE_JS}
 </head>
 <body>
 ${CC_SPRITE}
-${hero({ title, home, legend: FINDING })}
+${hero({ title, home, legend: FINDING, live: true })}
 <main>
 ${spine}
 `
@@ -1748,9 +1757,15 @@ export function streamBand(b, inline = new Map()) {
 export function streamHeroExtras(bands, { inline = new Map(), home = '', reach = null, holder = null } = {}) {
   const nameFor = buildNameFor(holder)
   const used = sourcesUsed(bands)
+  const names = used.map((s) => (nameFor ? nameFor(s) : SOURCE[s].name))
   const legend = used
-    .map((s) => `<span class="key">${favicon(s, inline)}${escapeHtml(nameFor ? nameFor(s) : SOURCE[s].name)}</span>`)
+    .map((s, i) => `<span class="key">${favicon(s, inline)}${escapeHtml(names[i])}</span>`)
     .join('')
+  // Cards mount silently while a screen-reader user reads the spine, so the
+  // end of the search is said out loud in the masthead's status line.
+  const done = names.length
+    ? `Finished searching. Help came from: ${names.join(', ')}.`
+    : 'Finished searching.'
   const evidenceKeyHtml = evidenceKey(bands)
   // The visibility panel can only be built once every band has landed: it is a
   // statement about the whole page, and a partial one would undercount who is
@@ -1761,6 +1776,7 @@ export function streamHeroExtras(bands, { inline = new Map(), home = '', reach =
   const panel = gapPanel(bands, reach, inline, nameFor)
   return (
     `<template id="tpl-legend">${legend}</template><script>__fill("tpl-legend",".legend")</script>\n` +
+    `<script>__say(${JSON.stringify(done).replaceAll('<', '\\u003c')})</script>\n` +
     // The two-party credit, late-filled into the span the masthead rendered
     // before the holder record could resolve — the streamed twin of the line
     // `hero()` prints directly on the batch path.
@@ -1831,6 +1847,10 @@ const STYLE = String.raw`
   --warm:#faf9f6; --accent:#33684b; --accent-ink:#4d5a51;
   --manila:#f2e8d5; --manila-rule:#d8c9a4; --manila-ink:#5c5233;
   --warm-rule:#cfcac0;
+  /* The quietest TEXT grey: credits, marks, source notes. It is the lightest
+     value that still clears WCAG AA's 4.5:1 on every ground a card sits on
+     (4.95:1 on --bg and --warm, 5.22:1 on white). */
+  --quiet:#686d73;
   --serif:"Linux Libertine","Georgia","Times New Roman",Times,serif;
   --sans:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
@@ -1871,6 +1891,11 @@ img{max-width:100%;display:block}
 .legend{display:flex;flex-wrap:wrap;gap:8px 20px;font-family:var(--sans);font-size:.75rem;color:var(--accent-ink);
   min-height:16px;margin:0 0 12px}
 .hero-note{font-family:var(--sans);font-size:.78rem;line-height:1.55;color:var(--muted);margin:0}
+/* A link set in grey running text is told apart by its underline, not its
+   color: #36c against --muted is 1.3:1, and WCAG 1.4.1 wants 3:1 or a
+   non-color cue. The article's own wikilinks sit in --ink, where #36c clears
+   3:1 and Vector's no-underline look stays. */
+.hero-note a,.foot a,.rd-src a{text-decoration:underline}
 .key{display:inline-flex;align-items:center;gap:8px}
 /* The legend's stand-in while the lookups answer. A slow pulse, not a spinner:
    the work is a polite serial crawl of other people's APIs, and it should look
@@ -2004,17 +2029,19 @@ sup.ref a{color:var(--link)}
 .hero-src{display:flex;align-items:center;gap:7px;margin:0 0 6px;min-width:0}
 /* No line clamp here: the hero has the room, and a hero whose title is cut off
    mid-word is a worse advertisement for the find than a title on three lines. */
-.hero-card h4{font-size:1rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
+.hero-card h3{font-size:1rem;line-height:1.3;margin:0 0 5px;display:block;-webkit-line-clamp:none}
 .hero-card .desc{font-size:.78rem;-webkit-line-clamp:2}
 .hero-card .credit{font-size:.72rem;-webkit-line-clamp:2}
 /* The lede's hero is the infobox and keeps the roomier caption; a section's is
    a 220px thumb, where a three-line description and a three-line credit are
    most of the card's height and all of the dead column beside it. */
-.band:first-child .hero-card h4{font-size:1.08rem}
+.band:first-child .hero-card h3{font-size:1.08rem}
 .band:first-child .hero-card .desc{font-size:.8rem;-webkit-line-clamp:3}
 .band:first-child .hero-card .credit{-webkit-line-clamp:3}
 .zoom-link{margin:6px 0 0}
-a.zoom{color:var(--link);display:inline;font-size:.78rem}
+/* Padded out to a 24px-tall hit area (WCAG 2.5.8) and pulled back by the same
+   amount, so the line it sits on does not move. */
+a.zoom{color:var(--link);display:inline-block;font-size:.78rem;padding:4px 0;margin:-4px 0}
 a.zoom:visited{color:var(--link-visited)}
 a.zoom:hover{text-decoration:underline}
 .req-statement{font-size:.72rem;color:#5d6469;margin:2px 0 0}
@@ -2137,7 +2164,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    throat-clearing ("Tentative statement of philosophy for the…"), and the
    deck has the vertical room the old narrow rail did not. The full title
    rides on the tooltip. */
-.card h4{font-size:.92rem;line-height:1.3;margin:0 0 4px;color:var(--head);font-weight:400;
+.card h3{font-size:.92rem;line-height:1.3;margin:0 0 4px;color:var(--head);font-weight:400;
   display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
 /* A card with no picture gets six title lines, not three (2026-08-09). The
    three-line clamp is fitted to cards where an image takes most of the
@@ -2150,16 +2177,16 @@ a:hover > .plate .plate-mark{color:var(--link)}
    the room. :has() is live, so the clamp loosens the moment the broken image
    leaves. The hero is excluded — it has its own no-clamp rule, and this
    selector would out-rank it. */
-.card:not(.hero-card):not(:has(.shot,.frame)) h4{-webkit-line-clamp:6}
+.card:not(.hero-card):not(:has(.shot,.frame)) h3{-webkit-line-clamp:6}
 /* A thumbcaption's link is an ordinary blue wikilink — the underlined-on-hover
    kind — not a bordered title treatment. */
-.card h4 a{color:var(--link)}
-.card h4 a:visited{color:var(--link-visited)}
+.card h3 a{color:var(--link)}
+.card h3 a:visited{color:var(--link-visited)}
 .card .desc{font-size:.76rem;line-height:1.4;color:var(--muted);margin:0 0 5px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* Some credits are whole paragraphs of reuse instructions; the card shows two
    lines and keeps the rest in the DOM (and on the linked page). */
-.card .credit{font-size:.68rem;color:#7a7f85;margin:0 0 4px;
+.card .credit{font-size:.68rem;color:var(--quiet);margin:0 0 4px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* License marks. They ride INSIDE the credit line rather than above it, so the
@@ -2177,8 +2204,8 @@ a:hover > .plate .plate-mark{color:var(--link)}
    first look, and the title is what a reader came for. Both badges TRAIL their
    text, so the margin is on the left — a leading glyph put a column of icons
    down the card's left edge with no obvious place to start reading. */
-.card h4 .ccrow{color:#7a7f85;vertical-align:-2px;margin:0 0 0 6px}
-.card h4 .ccmark{width:.9em;height:.9em}
+.card h3 .ccrow{color:var(--quiet);vertical-align:-2px;margin:0 0 0 6px}
+.card h3 .ccmark{width:.9em;height:.9em}
 .card .credit .fav{width:13px;height:13px;vertical-align:-2px;margin-left:5px}
 
 /* Title, mark and the mark's own control on one line. A flex row because
@@ -2186,10 +2213,12 @@ a:hover > .plate .plate-mark{color:var(--link)}
    claims the full basis so the panel drops BELOW the title rather than
    squeezing it into a column. */
 .title-row{display:flex;flex-wrap:wrap;align-items:baseline;column-gap:6px}
-.title-row>h4{margin:0}
+.title-row>h3{margin:0}
 .rwhy{min-width:0}
+/* The glyphs are 15px tall; the padding makes the control a 24px target
+   (WCAG 2.5.8) and the negative margin keeps the row the height it was. */
 .rwhy>summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;
-  gap:3px;color:#7a7f85}
+  gap:3px;color:var(--quiet);padding:5px 3px;margin:-5px -3px}
 .rwhy>summary::-webkit-details-marker{display:none}
 .rwhy>summary:hover,.rwhy[open]>summary{color:var(--accent)}
 .rwhy>summary .ccrow{margin:0}
@@ -2203,10 +2232,14 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .rinfo{color:var(--accent);vertical-align:-1px}
 .rwhy[open] .rinfo{opacity:.55}
 .rwhy[open]{flex:1 1 100%}
+/* Open, the control wraps under the title, and sits clear of it: the title
+   link is an 18px line, and WCAG 2.5.8 wants 24px around its center free of
+   other targets. */
+.rwhy[open]>summary{margin-top:3px}
 .rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--warm);
   border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:6px 0 0}
 .rwhy a{font-weight:600}
-.rwhy .rd-src{color:#8b9096}
+.rwhy .rd-src{color:var(--quiet)}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
    words. Clipped rather than display:none, which would take it out of the
    accessibility tree along with the visual. */
@@ -2241,7 +2274,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 
 /* The rights working, inside the lens fold. */
 .prov .rd-lic,.prov .rd-work,.prov .rd-ask{margin:6px 0 0}
-.prov .rd-src{color:#8b9096}
+.prov .rd-src{color:var(--quiet)}
 /* The visibility panel, shut by default: one quiet line under the credit bar,
    opening into the measurement. A reader who has not yet wondered whether
    Wikipedia can show any of this should not be handed a table about it, and a
@@ -2289,9 +2322,9 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .card .evidence{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
 .card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.66rem;line-height:1.45;color:#6b6f75}
 .card .signals li{display:block;margin-bottom:3px}
-.card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:#a0a4a9}
+.card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
 .card .sig-pair{color:#4a4f55}
-.card .sig-vs{color:#a0a4a9;margin:0 4px}
+.card .sig-vs{color:var(--quiet);margin:0 4px}
 /* Why this item is here — and, where there is a chain behind it, the control
    that opens the chain. One line doing both jobs: the ⓘ used to sit under this
    line as its own 12px target and was the least visible thing on the card

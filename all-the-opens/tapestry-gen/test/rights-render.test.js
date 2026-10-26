@@ -78,15 +78,15 @@ test('the marks sit on the item, never in front of its source', () => {
   )
   // On the title line, after the name — the first thing read on a card is what
   // the thing IS, and the licence qualifies that name rather than introducing it.
-  assert.match(html, /<\/h4><details class="rwhy"><summary[^>]*><span class="ccrow"/)
+  assert.match(html, /<\/h3><details class="rwhy"><summary[^>]*><span class="ccrow"/)
   assert.match(html, /href="#cc-zero"/)
   assert.doesNotMatch(html, /class="credit">[^<]*<span class="ccrow"/, 'and never the credit')
   // Outside the anchor: they describe the item, they are not part of its name,
   // and they must not become click target.
   assert.doesNotMatch(html, /<a [^>]*>[^<]*<span class="ccrow"/)
   // <details> is flow content and is not valid inside a heading — scoped to a
-  // single h4, or the check would trip on any details anywhere after one.
-  assert.doesNotMatch(html, /<h4[^>]*>(?:(?!<\/h4>)[\s\S])*<details/)
+  // single h3, or the check would trip on any details anywhere after one.
+  assert.doesNotMatch(html, /<h3[^>]*>(?:(?!<\/h3>)[\s\S])*<details/)
   // The words stay.
   assert.match(html, /Art Institute of Chicago/)
 })

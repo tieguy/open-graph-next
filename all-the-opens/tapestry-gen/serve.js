@@ -309,12 +309,18 @@ async function endWithFailure(res, e, page, streaming) {
     }
   }
   res.writeHead(missing ? 404 : 500, { 'Content-Type': 'text/html; charset=utf-8' })
+  // Bare, but a whole document: a language, a title a screen reader can
+  // announce, and the message as the page's one heading inside its <main>.
   res.end(
-    `<!doctype html><meta charset="utf-8"><p style="font-family:system-ui;margin:15vh auto;max-width:40rem">` +
+    `<!doctype html><html lang="en"><meta charset="utf-8">` +
+      `<meta name="viewport" content="width=device-width, initial-scale=1">` +
+      `<title>${missing ? 'Not found' : 'Discovery failed'} — Help From Our Friends</title>` +
+      `<main style="font-family:system-ui;margin:15vh auto;max-width:40rem;padding:0 16px">` +
+      `<h1 style="font:inherit;margin:0">` +
       (missing
         ? `No English Wikipedia article called “${escapeHtml(page)}”.`
         : `Discovery failed: ${escapeHtml(e.message)}`) +
-      ` <a href="/">Try another</a>.</p>\n`,
+      ` <a href="/">Try another</a>.</h1></main>\n`,
   )
 }
 
