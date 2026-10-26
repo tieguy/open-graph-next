@@ -302,7 +302,7 @@ export const groupedShowcase = (showcase = SHOWCASE, held = HOLDER_SHOWCASE) =>
 /** The grid those cards sit in, shared for the same reason they are. */
 const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px}
 
-.ready .chip{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.1em;
+.ready .chip{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;color:var(--manila-ink);background:var(--manila);
   border:1px solid var(--manila-rule);border-radius:8px;padding:0 8px;margin-right:7px;
   vertical-align:1px}
@@ -315,7 +315,7 @@ const CARD_STYLE = `.ready{font-size:.8rem;color:var(--muted);margin:22px 0 10px
 .show:hover,.show:focus-visible{border-color:var(--link)}
 .show:hover .art,.show:focus-visible .art{color:var(--link);text-decoration:underline}
 .show:focus-visible{outline:2px solid var(--link);outline-offset:2px}
-.dom{display:block;font-size:.62rem;letter-spacing:.14em;
+.dom{display:block;font-size:.72rem;letter-spacing:.14em;
   text-transform:uppercase;color:var(--muted);margin-bottom:3px}
 .art{display:block;font-family:var(--serif);font-size:1.15rem;line-height:1.2;color:var(--head);
   margin-bottom:5px}
@@ -437,7 +437,7 @@ ${CARD_STYLE}
 .friends-cat:first-child{margin-top:0}
 /* The showcase grid's group rows: the friends list's reading-aid pattern,
    tighter, because these sit inside the header rather than a section. */
-.show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.68rem;letter-spacing:.16em;
+.show-cat{grid-column:1/-1;font-family:var(--sans);font-size:.72rem;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted);font-weight:700;margin:14px 0 0}
 .show-cat:first-child{margin-top:0}
 .friend{border-top:1px solid var(--rule);padding:18px 0 22px;min-width:0}
@@ -446,7 +446,7 @@ ${CARD_STYLE}
 .friend .gift{font-size:.88rem;line-height:1.55;color:#3a3f45;margin:0;max-width:36ch}
 .friend .lic{font-family:var(--sans);font-size:.72rem;line-height:1.5;color:var(--muted);
   margin:7px 0 0;max-width:40ch}
-.lic-mark{display:inline-block;font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;
+.lic-mark{display:inline-block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;margin-right:5px}
 /* The source of the license claim beside it. Deliberately quiet — it is

@@ -1686,6 +1686,27 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 // blank margin while spike output put the same thumb beside the text. The
 // two renderers must place these identically or neither can vouch for the
 // other.
+//
+// The anonymous function keeps the reader's place while the stream runs. A
+// browser's own scroll anchoring locks onto the first element at the TOP of
+// the screen, and a reader reads lower down: a band's rail lands between its
+// heading and its prose, a deck lands under the band above, and a card image
+// with no declared size grows from 0 when it loads, all of it between the
+// top of the screen and the line being read. Measured 2026-10-26 on a
+// 400 kbit/s connection, the word a third of the way down the screen moved
+// 450–900px on desktop and 1,400–2,600px on a phone. So the page tracks the
+// character a third of the way down the screen in `main` (an element only
+// where no text is there) and scrolls by however far it moved in the
+// document — a character, not its paragraph, because a rail floating in
+// beside the prose rewraps the line the reader is on. It waits for the reader's first scroll (at
+// the top of the page the article should visibly assemble), re-picks after
+// every scroll the reader makes but not after its own (a scroll event arrives
+// a frame late, when more may have landed, and re-picking then locks onto
+// the wrong element), and stops three seconds after the stream and the page load
+// have both finished. Safari has no scroll anchoring, so there this is all
+// of it. The browser's own anchoring is off while this runs (`.keep`; Chrome
+// reads `overflow-anchor` for the page from body, not html): both would
+// correct the same growth, and the text would jump the other way.
 const RELOCATE_JS = `<script>
 function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
@@ -1697,6 +1718,23 @@ if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
 function __say(m){var s=document.getElementById("tap-status");if(s)s.textContent=m}
 function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
 if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
+(function(){var ref=null,at=0,t0=0,mine=-1,h=document.documentElement;h.classList.add("keep");
+function ch(x,y){var c,r,n,o;if(document.caretPositionFromPoint){c=document.caretPositionFromPoint(x,y);if(c){n=c.offsetNode;o=c.offset}}
+else if(document.caretRangeFromPoint){c=document.caretRangeFromPoint(x,y);if(c){n=c.startContainer;o=c.startOffset}}
+if(!n||n.nodeType!==3||!n.length)return null;o=Math.min(o,n.length-1);r=document.createRange();r.setStart(n,o);r.setEnd(n,o+1);
+c=r.getBoundingClientRect();return c.height&&c.top<=y+8&&c.bottom>=y-8?r:null}
+function pick(){var m=document.querySelector("main"),b,y,i,r,e;ref=null;if(!m||scrollY<=0)return;
+b=m.getBoundingClientRect();y=innerHeight/3;
+for(i=1;i<6&&!ref;i++){r=ch(b.left+b.width*i/6,y);if(r&&m.contains(r.startContainer))ref=r}
+if(!ref){e=document.elementFromPoint(b.left+b.width/2,y);if(e&&m.contains(e))ref=e}
+if(ref)at=ref.getBoundingClientRect().top+scrollY}
+function onscroll(){if(Math.abs(scrollY-mine)<1){mine=-1;return}pick()}
+addEventListener("scroll",onscroll,{passive:true});
+function tick(){if(ref&&!(ref.startContainer||ref).isConnected)pick();
+if(ref){var p=ref.getBoundingClientRect().top+scrollY;if(Math.abs(p-at)>=1){scrollBy(0,p-at);mine=scrollY}at=p}
+if(window.__tapdone&&document.readyState==="complete"){t0=t0||Date.now();if(Date.now()-t0>3000){h.classList.remove("keep");return removeEventListener("scroll",onscroll)}}
+requestAnimationFrame(tick)}
+requestAnimationFrame(tick)})();
 window.addEventListener("load",function(){if(!window.__tapdone){
 var f=document.querySelector(".finding");if(f)f.textContent="Stopped before the search finished.";
 __say("Stopped before the search finished.");
@@ -2013,14 +2051,14 @@ sup.ref a{color:var(--link)}
 .ib-why summary{list-style:none;cursor:pointer;display:inline-block}
 .ib-why summary::-webkit-details-marker{display:none}
 .ib-why[open] .rinfo{opacity:.55}
-.ib-why p{text-align:left;font-size:.7rem;line-height:1.5;color:var(--muted);
+.ib-why p{text-align:left;font-size:.72rem;line-height:1.5;color:var(--muted);
   background:var(--warm);border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:4px 0 2px}
 
 /* Holder panel with merged infobox and record rows, each attributed to its source. */
 .infobox.holder-panel{margin:0 0 12px}
 .rail-panel{clear:right}
 /* Chips on rows: institution and Wikipedia source attribution, small muted labels. */
-.infobox-chip{display:inline-block;font-size:.65rem;font-weight:600;color:var(--manila-ink);
+.infobox-chip{display:inline-block;font-size:.72rem;font-weight:600;color:var(--manila-ink);
   background:var(--manila);border:1px solid var(--manila-rule);border-radius:4px;
   padding:1px 6px;margin-left:4px;white-space:nowrap}
 /* A conflict is two stacked rows; the second row's label cell is empty. */
@@ -2073,7 +2111,7 @@ a.zoom:hover{text-decoration:underline}
 /* "4" is decoration; "4 of 54" is the disclosure — that a shelf is a sample of
    something larger, said on the shelf rather than in a paragraph above the
    deck. So it is darker than the old bare count, and it does not wrap. */
-.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.66rem;font-weight:600;
+.carousel-head .count{margin-left:auto;font-family:var(--sans);font-size:.72rem;font-weight:600;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:1px 8px;white-space:nowrap;flex:none}
 .carousel-head span.count{cursor:help}
@@ -2082,7 +2120,7 @@ a.zoom:hover{text-decoration:underline}
 .single-head{display:flex;align-items:center;gap:7px;margin:1px 1px 6px;min-width:0}
 .single-head .topic{font-size:.72rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.single-head .count,.hero-src .count{margin-left:auto;font-family:var(--sans);font-size:.62rem;font-weight:600;
+.single-head .count,.hero-src .count{margin-left:auto;font-family:var(--sans);font-size:.72rem;font-weight:600;
   color:var(--manila-ink);background:var(--manila);border:1px solid var(--manila-rule);
   border-radius:8px;padding:0 7px;white-space:nowrap;flex:none}
 .single-head span.count,.hero-src span.count{cursor:help}
@@ -2114,7 +2152,7 @@ a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila
 .carousel.single .card{width:100%;flex:none}
 .carousel-head .topic{font-size:.8rem;font-weight:600;color:var(--head);
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.carousel-why{font-family:var(--sans);font-size:.67rem;color:var(--muted);margin:-6px 0 8px}
+.carousel-why{font-family:var(--sans);font-size:.72rem;color:var(--muted);margin:-6px 0 8px}
 /* A wrapping grid of framed boxes, which IS MediaWiki's gallery — ul.gallery
    with li.gallerybox, each box a thumb frame. It replaced a horizontally
    scrolling strip on 2026-08-07: MediaWiki has no scrolling-strip idiom and no
@@ -2146,7 +2184,7 @@ a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila
    fitted two, wrapped the third onto a row of its own, and left the ragged
    holes that made a wide page look mostly empty. */
 .card{flex:0 0 178px;margin:0;border:1px solid var(--rule);background:var(--bg);padding:3px}
-.src{display:inline-flex;align-items:center;gap:7px;font-size:.68rem;letter-spacing:.08em;
+.src{display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.08em;
   text-transform:uppercase;font-weight:700;color:var(--muted)}
 .frame{position:relative;aspect-ratio:16/9;background:#111;overflow:hidden}
 .frame.audio{aspect-ratio:auto;height:52px;background:#1d1d20}
@@ -2217,7 +2255,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 /* Some credits are whole paragraphs of reuse instructions; the card shows two
    lines and keeps the rest in the DOM (and on the linked page). */
-.card .credit{font-size:.68rem;color:var(--quiet);margin:0 0 4px;
+.card .credit{font-size:.72rem;color:var(--quiet);margin:0 0 4px;
   display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
 
 /* License marks. They ride INSIDE the credit line rather than above it, so the
@@ -2267,13 +2305,15 @@ a:hover > .plate .plate-mark{color:var(--link)}
    link is an 18px line, and WCAG 2.5.8 wants 24px around its center free of
    other targets. */
 .rwhy[open]>summary{margin-top:3px}
-.rwhy p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--warm);
+.rwhy p{font-size:.72rem;line-height:1.5;color:var(--muted);background:var(--warm);
   border:1px solid var(--warm-rule);border-radius:4px;padding:6px 8px;margin:6px 0 0}
 .rwhy a{font-weight:600}
 .rwhy .rd-src{color:var(--quiet)}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
    words. Clipped rather than display:none, which would take it out of the
    accessibility tree along with the visual. */
+/* The keep-place script in RELOCATE_JS does the anchoring while a page streams. */
+.keep body{overflow-anchor:none}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
@@ -2284,7 +2324,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    domain in the United States" with the second clause cut off is worse than
    not saying it. The left rule marks it as a different kind of claim from the
    credit above without adding a heading nobody asked for. */
-.card .rights-line{font-size:.68rem;color:#5d6469;margin:0 0 4px;
+.card .rights-line{font-size:.72rem;color:#5d6469;margin:0 0 4px;
   padding-left:6px;border-left:2px solid #d8dcdf;line-height:1.35}
 .hero-card .rights-line{font-size:.72rem}
 
@@ -2325,7 +2365,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* A wikitable: hairline grid, grey header band. */
 .gap-list{width:100%;border-collapse:collapse;margin:0 0 10px;background:var(--paper);
   border:1px solid var(--rule-strong)}
-.gap-list thead th{font-size:.62rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
+.gap-list thead th{font-size:.72rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);
   font-weight:700;text-align:left;padding:5px 8px 5px 10px;background:var(--faint);
   border-bottom:1px solid var(--rule-strong)}
 .gap-list tbody tr{border-left:3px solid var(--rule)}
@@ -2334,9 +2374,9 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .gap-who{font-size:.72rem;font-weight:700;color:var(--head);line-height:1.35}
 /* The icon rides inline with the name so a wrapped name keeps its hanging edge. */
 .gap-who .fav{width:14px;height:14px;margin-right:5px;vertical-align:-2px}
-.gap-gave{color:var(--muted);font-size:.66rem;line-height:1.45;white-space:nowrap}
-.gap-seen{font-size:.66rem;line-height:1.4}
-.gap-tier{display:block;font-size:.58rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
+.gap-gave{color:var(--muted);font-size:.72rem;line-height:1.45;white-space:nowrap}
+.gap-seen{font-size:.72rem;line-height:1.4}
+.gap-tier{display:block;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;font-weight:700}
 .gap-where{display:block;color:var(--muted);margin-top:2px}
 .gap-shown{border-left-color:#2a7d4f}.gap-shown .gap-tier{color:#2a7d4f}
 .gap-link{border-left-color:#9aa0a6}.gap-link .gap-tier{color:#6e7378}
@@ -2350,17 +2390,17 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* Corroborated edges read differently on purpose: a dashed rule and a stated
    reason, so a described-object match is never mistaken for a shared identifier. */
 .card.corroborated{border:1px dashed #c9a227;border-radius:4px;padding:6px;background:#fffdf5}
-.card .evidence{font-size:.62rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
-.card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.66rem;line-height:1.45;color:#6b6f75}
+.card .evidence{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:#8a6d1f;margin:0 0 5px;font-weight:600}
+.card .signals{list-style:none;margin:0 0 6px;padding:0;font-size:.72rem;line-height:1.45;color:#6b6f75}
 .card .signals li{display:block;margin-bottom:3px}
-.card .sig-field{display:block;font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
+.card .sig-field{display:block;font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--quiet)}
 .card .sig-pair{color:#4a4f55}
 .card .sig-vs{color:var(--quiet);margin:0 4px}
 /* Why this item is here — and, where there is a chain behind it, the control
    that opens the chain. One line doing both jobs: the ⓘ used to sit under this
    line as its own 12px target and was the least visible thing on the card
    despite opening the most useful. */
-.card .why{font-size:.67rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
+.card .why{font-size:.72rem;color:var(--muted);margin:0;padding-top:6px;border-top:1px dotted var(--rule)}
 .card .prov{margin:0}
 .card .prov summary.why{list-style:none;cursor:pointer;display:block;margin:0}
 .card .prov summary::-webkit-details-marker{display:none}
@@ -2370,13 +2410,13 @@ a:hover > .plate .plate-mark{color:var(--link)}
 .card .prov .info{color:var(--accent);margin-left:5px;vertical-align:-1px}
 .card .prov summary.bare .info{margin:0 4px 0 0}
 .card .prov[open] .info{opacity:.55}
-.card .prov p{font-size:.7rem;line-height:1.5;color:var(--muted);background:var(--faint);
+.card .prov p{font-size:.72rem;line-height:1.5;color:var(--muted);background:var(--faint);
   border:1px solid var(--rule);padding:6px 8px;margin:5px 0 0}
 .card .prov a{font-weight:600}
 /* The one link on the card a reader can act on, rather than merely follow. */
 .card .prov .fixlink{display:inline-block;margin-top:3px}
 .hero-card .why,.hero-card .prov summary.why{font-size:.72rem}
-.hero-card .prov p{font-size:.68rem}
+.hero-card .prov p{font-size:.72rem}
 
 /* An anchor too broad to sample: the count, and the door. Deliberately NOT a
    filled slab like .disclosure — that one describes shelves the reader can
@@ -2384,7 +2424,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
    alike made them read as contradicting each other. A hairline above and open
    air behind it: a note about an absence, closing the deck. */
 .broad{display:flex;gap:9px;align-items:baseline;flex:1 1 100%;font-family:var(--sans);
-  font-size:.7rem;line-height:1.5;color:var(--muted);margin:4px 0 0;padding:9px 0 0;
+  font-size:.72rem;line-height:1.5;color:var(--muted);margin:4px 0 0;padding:9px 0 0;
   border-top:1px dotted var(--rule)}
 .broad+.broad{margin-top:0}
 .broad b{color:var(--ink);font-weight:700}
@@ -2422,7 +2462,7 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* A book you can actually borrow or read gets a quiet but firm call. */
 .fn-access{white-space:nowrap;font-weight:600}
 /* Closed by default: one line where the wall of citations used to be. */
-.fn-fold summary{font-family:var(--sans);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+.fn-fold summary{font-family:var(--sans);font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--muted);cursor:pointer}
 .fn-fold summary:hover{color:var(--link)}
 .fn-fold[open] summary{margin:0 0 12px}
