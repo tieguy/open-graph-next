@@ -339,7 +339,7 @@ export function frontPage({ inline = new Map(), siteOrigin = '' } = {}) {
   <p class="gift">${escapeHtml(gift)}</p>
   <p class="lic"><span class="lic-mark">openness?</span> ${escapeHtml(lic)}${
     licHref
-      ? ` <a class="lic-src" href="${escapeHtml(licHref)}">in their words</a>`
+      ? ` <a class="lic-src" href="${escapeHtml(licHref)}">in their words<span class="vh">: ${escapeHtml(name)}’s terms</span></a>`
       : ''
   }</p>
 </div>`
@@ -443,6 +443,10 @@ ${CARD_STYLE}
 /* The source of the license claim beside it. Deliberately quiet — it is
    evidence for a line the reader may not have doubted, not a call to action. */
 .lic-src{white-space:nowrap}
+/* Fourteen links all read "in their words"; a screen reader's link list gets
+   whose words, in text clipped rather than hidden from the accessibility tree. */
+.vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
+  clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .friend.host{grid-column:1/-1}
 .friend.host .gift{max-width:none;font-style:italic;color:var(--muted)}
 ${legend.style}
@@ -483,6 +487,10 @@ ${legend.style}
 </head>
 <body>
 <div class="page">
+<!-- <main> opens above the masthead: the search box and the showcase are the
+     page's content, and inside a top-level <header> they sat in the banner
+     landmark, where "skip to main" stepped over both. -->
+<main>
 <header class="hero"><div class="wrap">
   <p class="kicker">Help From Our Friends · an experiment in visualizing open knowledge, by <a href="https://lu.is">Luis Villa</a></p>
   <h1>Wikipedia is not alone.</h1>
@@ -515,7 +523,6 @@ ${legend.style}
 ${groupedShowcase()}
   </div>
 </div></header>
-<main>
   <section class="section faq"><div class="wrap">
     <h2>Frequently asked questions</h2>
     <ul class="qindex">
@@ -738,7 +745,7 @@ ${sourceLegend(inline).style}
 </style>
 </head>
 <body>
-<div class="page"><div class="wrap">
+<div class="page"><main class="wrap">
   <p class="kicker"><a href="/">Help From Our Friends</a> · an experiment in visualizing open knowledge</p>
   <h1>Busy discovering, just now.</h1>
   <p class="lede">The demo is busy responding to other users right now — being polite to our friends
@@ -752,7 +759,7 @@ ${holderCards()}
   </div>
   <p class="after">Everything else — who the friends are, what each one gives, and how any of this
     works — is on <a href="/">the front page</a>, which needs no discovery at all.</p>
-</div></div>
+</main></div>
 </body>
 </html>
 `

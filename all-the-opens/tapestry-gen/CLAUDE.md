@@ -1934,6 +1934,27 @@ nothing; `holder-record` is where that half's network lives.
   page contradict its own opening claim. Whatever goes there must be true of the
   run that produced the file, and must not include a timestamp — reruns off the
   same cache are byte-identical, and that is how a regeneration is verified.
+- **Pages meet WCAG 2.2 AA as axe-core measures it** (checked 2026-10-25 on
+  six articles, the front page and the busy page, with every `<details>`
+  both shut and open). What holds it there:
+  - **Heading outline**: h1 article title, h2 band (the lede's is visually
+    hidden), h3 card title and prose subsection. A new heading inside a card
+    must not skip a level.
+  - **Grey text uses `--quiet` (`#686d73`) or darker**, never a lighter
+    literal: it is the lightest grey that clears 4.5:1 on `--bg`, `--warm`
+    and white.
+  - **A link in grey (`--muted`) text is underlined.** `#36c` clears 3:1 only
+    against `--ink`, so Vector's no-underline look is safe only in the
+    article's own prose.
+  - **A second link to the same place as a card title** (the image, a plate)
+    carries `tabindex="-1" aria-hidden="true"`. `onerror` removes a broken
+    image, and a focusable link around nothing has no name.
+  - **Small controls get a 24px hit area by padding plus an equal negative
+    margin** (`.rwhy>summary`, `a.zoom`), so the target grows and the layout
+    does not.
+  - **The streaming page announces its end** through `#tap-status`
+    (`role="status"`, visually hidden), filled by `__say` from
+    `streamHeroExtras` or from the interrupted-stream handler.
 
 ## Wikimedia compliance (required)
 
