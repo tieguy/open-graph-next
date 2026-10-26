@@ -407,6 +407,15 @@ h1{font-family:var(--serif);font-size:clamp(2rem,4vw,2.7rem);line-height:1.1;
 .ask input::placeholder{color:#b6babf;font-style:italic}
 .ask input:focus{outline:none;border-bottom-color:var(--link)}
 .ask input:focus-visible{outline:2px solid var(--link);outline-offset:6px}
+/* Go is for readers with no Enter key to press — a phone without a search
+   key, a switch or voice user — and a sign that the field does something.
+   It sits on the field's rule, in the hint's sans, so the field still reads
+   as a headword with a small button beside it rather than a form. */
+.ask-row{display:flex;align-items:flex-end;gap:20px}
+.ask button{flex:none;margin-bottom:6px;font-family:var(--sans);font-size:.9rem;font-weight:600;
+  color:#fff;background:var(--link);border:0;border-radius:4px;padding:8px 16px;cursor:pointer}
+.ask button:hover{background:var(--head)}
+.ask button:focus-visible{outline:2px solid var(--link);outline-offset:3px}
 .hint{font-family:var(--sans);font-size:.78rem;color:var(--muted);margin:10px 0 0}
 .hint kbd{font-family:var(--sans);border:1px solid var(--rule);border-bottom-width:2px;
   border-radius:4px;padding:0 5px;background:var(--paper);font-size:.72rem}
@@ -511,11 +520,12 @@ ${legend.style}
          partners holding item-level records of the thing itself. The first
          thing a visitor types decides what they think this is, so it should
          name the cases that answer best. -->
-    <input name="q" type="search" placeholder="Any article title — try a species, or an artist" autofocus
+    <div class="ask-row"><input name="q" type="search" placeholder="Any article title — try a species, or an artist" autofocus
       autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"
       data-1p-ignore data-lpignore="true" data-bwignore data-form-type="other"
       aria-label="English Wikipedia article title">
-    <p class="hint">Press <kbd>Enter</kbd>. The article arrives in a second; its friends stream in behind it.</p>
+    <button type="submit">Go</button></div>
+    <p class="hint">Press <kbd>Enter</kbd> or Go. The article arrives in a second; its friends stream in behind it.</p>
   </form>
   <p class="ready">A variety of articles, chosen to show off both the cool stuff they bring in,
     and the open institutions and technologies they build on:</p>

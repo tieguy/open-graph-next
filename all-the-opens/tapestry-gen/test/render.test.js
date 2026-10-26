@@ -454,7 +454,7 @@ test('the hero card carries the zoom link with the provider name and the record 
   const result = buildHtml({ title: 'Test', bands: holderBands(), holder: SMK_HOLDER })
   assert.match(
     result,
-    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener">High resolution at Statens Museum for Kunst →<\/a>/,
+    /<a class="zoom" href="https:\/\/collection\.example\.org\/object\/1" target="_blank" rel="noopener" aria-describedby="newtab">High resolution at Statens Museum for Kunst →<\/a>/,
   )
 })
 
@@ -578,7 +578,12 @@ test('a non-holder render is byte-stable', async () => {
   // links in grey text, 24px hit areas, and the image link taken out of the
   // tab order. The page lays out as before; an opened license note sits 8px
   // lower.
-  assert.equal(digest, '0e236f9d0fe13198612c627e2141a9b5e8c7c867997286e9245e120b2b36ca7e')
+  // Re-pinned 2026-10-26 for the accessibility follow-ups: one hidden
+  // "Opens in a new tab" note that new-tab links point at, the sample badge's
+  // sentence as a focusable tooltip instead of a title, a clipped card title
+  // shown whole while its card has focus, and the Esc handler that closes the
+  // tooltip. At rest the page lays out as before.
+  assert.equal(digest, '6bc246f526b1350f91292902e31913ea4166d7153490c361a23254e5579bd054')
 })
 
 test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {
