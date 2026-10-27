@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import {
   bandParts,
   bandRail,
+  buildHtml,
   streamBand,
   streamClose,
   streamHeroExtras,
@@ -99,16 +100,17 @@ test('streamOpen carries the whole spine with band ids, no numbering, and no rai
   assert.doesNotMatch(open, /<\/html>/)
 })
 
-test('the mount script floats the gutter before the prose, as batch does', () => {
-  // A right float anchored after the prose can only sit below its last line.
-  // __thb's before-prose list missed rail-more until 2026-08-09, so streamed
-  // pages stacked every gutter thumb under the section while batch renders
-  // put the same thumb beside the text — and every measurement made on spike
-  // output silently vouched for a layout the deployed site was not showing.
+test('the mount script puts only the lede rail before the prose, as batch does', () => {
+  // A section's finds stream in after its prose is on screen, so anything
+  // mounted above the prose pushes the line the reader is on. Only the lede
+  // keeps its infobox (or hero) and rights box beside the text, and batch
+  // renders must place them the same way or neither renderer vouches for the
+  // other.
   const open = streamOpen({ title: 'T', units: UNITS, home: '/' })
-  for (const cls of ['"rail"', '"rail-more"', '"subject-rights"']) {
-    assert.ok(open.includes(`e.classList.contains(${cls})`), `${cls} mounts before the prose`)
-  }
+  assert.match(open, /if\(b==="slede"&&\(e\.classList\.contains\("rail"\)\|\|e\.classList\.contains\("subject-rights"\)\)\)bb\.insertBefore/)
+  assert.doesNotMatch(open, /contains\("rail-more"\)/)
+  const html = buildHtml({ title: 'T', bands: [BAND] })
+  assert.ok(html.indexOf('class="prose"') < html.indexOf('<aside class="rail">'), 'a section rail follows its prose')
 })
 
 test('streamClose marks the stream as complete on purpose', () => {

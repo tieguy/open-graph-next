@@ -584,9 +584,12 @@ test('a non-holder render is byte-stable', async () => {
   // shown whole while its card has focus, and the Esc handler that closes the
   // tooltip. At rest the page lays out as before.
   // Re-pinned 2026-10-26 again: no text below 0.72rem (cards about one line
-  // taller), and the keep-place script with its `.keep body` rule that holds
-  // the reader's line still while the stream lands above it.
-  assert.equal(digest, 'dd97e342cebe2a307549e82d5ce656148c028928c457e9fdbbffcdbf6e108c9e')
+  // taller).
+  // Re-pinned 2026-10-26 a third time: a section's hero and single thumbs
+  // render after its prose in one row with the deck (the lede keeps its
+  // float), hero and thumb images get a fixed 4:3 box, and streamed mounts go
+  // through `__hold`, which keeps the line being read still.
+  assert.equal(digest, '298a62261c720ae45a39133717d8049b0ca3fc37e38e21c99beb305e3da9f61f')
 })
 
 test('zoomLink adds "and more pages" only for a manuscript whose record states more than one image', () => {

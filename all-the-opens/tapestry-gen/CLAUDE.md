@@ -1963,14 +1963,14 @@ nothing; `holder-record` is where that half's network lives.
   - **No text is set below 0.72rem (11.5px).** A test reads every
     stylesheet for it. Sizes in em, such as footnote markers, scale with
     their text and are exempt.
-  - **A streaming page keeps the reader's place itself.** The keep-place
-    function in `RELOCATE_JS` tracks the character a third of the way down
-    the screen and scrolls by however far it moves, with the browser's own
-    anchoring off (`.keep body{overflow-anchor:none}`; Chrome reads the
-    property from body, not html). A new way of adding content needs no
-    work of its own here. Any other script that scrolls the page during the
-    stream counts as the reader scrolling, and the tracked character is
-    picked again from the new position.
+  - **A streaming page never moves the line being read.** A section's
+    finds (hero, single thumbs, deck) render after its prose, and only the
+    lede's infobox or hero sits beside its text. Every card image has a
+    fixed box (`height` or `aspect-ratio` with `object-fit:contain`), so
+    nothing grows when an image loads. Every streamed mount goes through
+    `__hold` in `RELOCATE_JS`, which keeps the element a third of the way
+    down the screen where it was. A new kind of streamed insertion uses
+    the same helpers.
   - **A visible link with `target="_blank"` carries `NEW_TAB`**
     (`aria-describedby="newtab"`), which points at the hidden "Opens in a
     new tab" note in `hero()`.

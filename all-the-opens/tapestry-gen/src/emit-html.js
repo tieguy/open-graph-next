@@ -1171,8 +1171,8 @@ function groupBySourceAndTopic(rest) {
 
 /**
  * The gutter rule, whole (2026-08-09, Prime crew review): SINGLE finds
- * float right beneath the hero, the way thumbs run down a real article's
- * margin; GALLERIES go in the deck below the section. A per-700-characters
+ * sit as thumbs beside the hero, in the row after the section's prose (see
+ * the rail CSS); GALLERIES go in the deck. A per-700-characters
  * float budget briefly lived here (2026-08-08 to 2026-08-09) and its last
  * revision sent "Carrying the Fire" — one of Prime crew's two cited
  * books — to the deck as a lone card beside blank space while its twin
@@ -1326,8 +1326,9 @@ export function bandParts(b, inline = new Map(), wikiBase = '/wiki/') {
   const float = heroAside + boxAside
   const more = gutter.length ? `<aside class="rail-more">${gutter.join('')}</aside>` : ''
   return {
-    // Both go before the prose, the status first: it is about the whole
-    // article, while the hero is about one find inside it.
+    // The status comes first: it is about the whole article, while the hero
+    // is about one find inside it. In the lede both sit before the prose;
+    // everywhere else the rail follows it (see `band`).
     // When the merged panel carries the work's copyright answer as its
     // Copyright block, the slab above the prose would be the page saying it
     // twice — the exact duplicate the says-it-once rule exists to delete.
@@ -1534,10 +1535,13 @@ function band(b, inline, wikiBase = '/wiki/') {
         })
         .join('')
     : `<p class="note-lead">${escapeHtml(b.text ?? '')}</p>`
-  // The hero floats right and the prose wraps it. The media deck comes after,
-  // full-width: shelves pack side by side and wrap, instead of stacking into a
-  // tall narrow column beside blank page. The references close the section.
+  // In the lede the rail (infobox or hero) floats right and the prose wraps
+  // it, as on Wikipedia. Every other section puts its rail AFTER the prose,
+  // in one row with the deck: a streamed page shows the prose first, and
+  // anything mounted above it pushes the line the reader is on. The
+  // references close the section.
   const { rail, deck, refs } = bandParts(b, inline, wikiBase)
+  const lede = b.id === 'slede'
   const id = b.id ? ` id="${escapeHtml(b.id)}"` : ''
   // The lede gets no heading of its own (2026-08-08, mobile review): the
   // masthead's h1 already says the title, and on a phone the repetition
@@ -1552,7 +1556,7 @@ function band(b, inline, wikiBase = '/wiki/') {
   return (
     `<section class="band ${b.blocks ? 'section' : 'note'}"${id}>` +
     head +
-    `<div class="band-body">${rail}<div class="prose">${prose}</div>${deck}${refs}</div>` +
+    `<div class="band-body">${lede ? rail : ''}<div class="prose">${prose}</div>${lede ? '' : rail}${deck}${refs}</div>` +
     `</section>`
   )
 }
@@ -1675,66 +1679,35 @@ window.addEventListener("load",function(){if(location.hash)__open()})
 </script>`
 
 // The relocation helpers, inlined into the head so they exist before the
-// first fragment arrives. `__thb` mounts a band's enrichment — every float
-// (the rail's hero, the rail-more gutter thumbs, the subject-rights box)
-// goes BEFORE the prose, everything else (deck, then references) appends in
-// template order, which is why the fragment's own order is the rendered
-// order. rail-more was missing from the before-prose list until 2026-08-09,
-// and the miss was invisible in every batch render: a right float anchored
-// AFTER the prose can only sit below its last line, so on streamed pages —
-// the deployed site — every gutter thumb stacked under the section beside
-// blank margin while spike output put the same thumb beside the text. The
-// two renderers must place these identically or neither can vouch for the
-// other.
+// first fragment arrives. `__thb` mounts a band's enrichment. In the lede the
+// rail parts (the infobox or hero, the subject-rights box) go BEFORE the
+// prose; everywhere else, and for everything else (deck, then references),
+// the fragment appends in template order, so the fragment's own order is the
+// rendered order. The batch renderer (`band`) places these the same way: the
+// two renderers must agree or neither can vouch for the other.
 //
-// The anonymous function keeps the reader's place while the stream runs. A
-// browser's own scroll anchoring locks onto the first element at the TOP of
-// the screen, and a reader reads lower down: a band's rail lands between its
-// heading and its prose, a deck lands under the band above, and a card image
-// with no declared size grows from 0 when it loads, all of it between the
-// top of the screen and the line being read. Measured 2026-10-26 on a
-// 400 kbit/s connection, the word a third of the way down the screen moved
-// 450–900px on desktop and 1,400–2,600px on a phone. So the page tracks the
-// character a third of the way down the screen in `main` (an element only
-// where no text is there) and scrolls by however far it moved in the
-// document — a character, not its paragraph, because a rail floating in
-// beside the prose rewraps the line the reader is on. It waits for the reader's first scroll (at
-// the top of the page the article should visibly assemble), re-picks after
-// every scroll the reader makes but not after its own (a scroll event arrives
-// a frame late, when more may have landed, and re-picking then locks onto
-// the wrong element), and stops three seconds after the stream and the page load
-// have both finished. Safari has no scroll anchoring, so there this is all
-// of it. The browser's own anchoring is off while this runs (`.keep`; Chrome
-// reads `overflow-anchor` for the page from body, not html): both would
-// correct the same growth, and the text would jump the other way.
+// Nothing a section streams lands above that section's prose, and every card
+// image has a fixed box. That leaves one way to push the line being read: a
+// section's finds land after its prose while the end of that section is on
+// screen above the reader. The browser's scroll anchoring cannot correct it,
+// because it anchors on the top of the screen, which is above the insertion.
+// So every mount goes through `__hold`, the usual pattern for a page that
+// inserts its own content: note the element a third of the way down the
+// screen, insert, scroll by however far that element moved. It runs only at
+// an insertion, so it never acts on the reader's own scrolling.
 const RELOCATE_JS = `<script>
-function __thb(t,b){var p=document.getElementById(t),s=document.getElementById(b);
+function __hold(f){var y=innerHeight/3,e=scrollY>0&&document.elementFromPoint(innerWidth/2,y),m=document.querySelector("main"),t;
+if(e&&m&&m.contains(e)&&e!==m)t=e.getBoundingClientRect().top;else e=null;f();if(e&&e.isConnected)scrollBy(0,e.getBoundingClientRect().top-t)}
+function __thb(t,b){__hold(function(){var p=document.getElementById(t),s=document.getElementById(b);
 if(p&&s){var bb=s.querySelector(".band-body"),pr=s.querySelector(".prose"),e;
-while((e=p.content.firstElementChild)){if(e.classList.contains("rail")||e.classList.contains("rail-more")||e.classList.contains("subject-rights"))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}}
-function __fill(t,q){var p=document.getElementById(t),e=document.querySelector(q);
-if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}}
-function __append(t,q){var p=document.getElementById(t),e=document.querySelector(q);
-if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}}
+while((e=p.content.firstElementChild)){if(b==="slede"&&(e.classList.contains("rail")||e.classList.contains("subject-rights")))bb.insertBefore(e,pr);else bb.appendChild(e)}p.remove()}})}
+function __fill(t,q){__hold(function(){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.replaceChildren(p.content.cloneNode(true));p.remove()}})}
+function __append(t,q){__hold(function(){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.appendChild(p.content.cloneNode(true));p.remove()}})}
 function __say(m){var s=document.getElementById("tap-status");if(s)s.textContent=m}
-function __before(t,q){var p=document.getElementById(t),e=document.querySelector(q);
-if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}}
-(function(){var ref=null,at=0,t0=0,mine=-1,h=document.documentElement;h.classList.add("keep");
-function ch(x,y){var c,r,n,o;if(document.caretPositionFromPoint){c=document.caretPositionFromPoint(x,y);if(c){n=c.offsetNode;o=c.offset}}
-else if(document.caretRangeFromPoint){c=document.caretRangeFromPoint(x,y);if(c){n=c.startContainer;o=c.startOffset}}
-if(!n||n.nodeType!==3||!n.length)return null;o=Math.min(o,n.length-1);r=document.createRange();r.setStart(n,o);r.setEnd(n,o+1);
-c=r.getBoundingClientRect();return c.height&&c.top<=y+8&&c.bottom>=y-8?r:null}
-function pick(){var m=document.querySelector("main"),b,y,i,r,e;ref=null;if(!m||scrollY<=0)return;
-b=m.getBoundingClientRect();y=innerHeight/3;
-for(i=1;i<6&&!ref;i++){r=ch(b.left+b.width*i/6,y);if(r&&m.contains(r.startContainer))ref=r}
-if(!ref){e=document.elementFromPoint(b.left+b.width/2,y);if(e&&m.contains(e))ref=e}
-if(ref)at=ref.getBoundingClientRect().top+scrollY}
-function onscroll(){if(Math.abs(scrollY-mine)<1){mine=-1;return}pick()}
-addEventListener("scroll",onscroll,{passive:true});
-function tick(){if(ref&&!(ref.startContainer||ref).isConnected)pick();
-if(ref){var p=ref.getBoundingClientRect().top+scrollY;if(Math.abs(p-at)>=1){scrollBy(0,p-at);mine=scrollY}at=p}
-if(window.__tapdone&&document.readyState==="complete"){t0=t0||Date.now();if(Date.now()-t0>3000){h.classList.remove("keep");return removeEventListener("scroll",onscroll)}}
-requestAnimationFrame(tick)}
-requestAnimationFrame(tick)})();
+function __before(t,q){__hold(function(){var p=document.getElementById(t),e=document.querySelector(q);
+if(p&&e){e.parentNode.insertBefore(p.content.cloneNode(true),e);p.remove()}})}
 window.addEventListener("load",function(){if(!window.__tapdone){
 var f=document.querySelector(".finding");if(f)f.textContent="Stopped before the search finished.";
 __say("Stopped before the search finished.");
@@ -1997,30 +1970,32 @@ sup.ref a{color:var(--link)}
 .prose h3{font-size:1.13rem;font-weight:700;color:var(--head);margin:1em 0 .3em}
 .note-lead{font-style:italic;color:#3a3f45}
 
-/* The rail (the section's best find) narrows in steps so the two-column layout
-   survives well below a full desktop width — a hi-DPI laptop at default scaling
-   reports a narrow CSS width, and it should still read as article + margin. */
-/* Two widths, because MediaWiki has two things here and we had been rendering
-   both as the wider one (fixed 2026-08-07, after Apollo 11 measured 365px of
-   dead column in one section).
-
-   220px is MediaWiki's DEFAULT THUMBNAIL, which is what a picture in a section
-   is. 330px is 22em, the INFOBOX, and an article gets one of those, at the top.
-   Every section rail was wearing infobox width, which cost twice: the card was
-   taller, and the prose beside it was 110px narrower and so ran out sooner. A
-   float taller than the text it displaces leaves the whole left column blank
-   until the deck clears it, and on a 36-section article that adds up to the
-   page reading as mostly margin.
-
+/* The lede's rail (the infobox, or the hero) floats right beside the lede,
+   as an infobox does on Wikipedia, and narrows in steps so article + margin
+   survives below a full desktop width. 330px is 22em, MediaWiki's infobox.
    Margins are the thumb's: 0.5em top, 1.4em against the text it displaces. */
 .rail,.rail-more{float:right;width:220px;margin:.5em 0 1.3em 1.4em}
-/* The gutter clears the rail so it stacks beneath the hero, one column of
-   thumbs down the right margin — a real article's arrangement. */
 .rail-more{clear:right;margin-top:.2em;display:flex;flex-direction:column;gap:14px}
 .rail-more .card{width:100%;flex:none}
 .band:first-child .rail,.band:first-child .rail-more{width:330px}
 @media(max-width:1040px){.band:first-child .rail,.band:first-child .rail-more{width:300px}}
 @media(max-width:860px){.band:first-child .rail,.band:first-child .rail-more{width:260px}}
+/* Every other section shows its finds AFTER its prose, in one wrapping row:
+   the hero at 220px (MediaWiki's default thumbnail), the single thumbs, then
+   the deck's shelves. A streamed section's finds arrive after its prose is on
+   screen, and a find mounted beside or above the prose would push the line
+   the reader is on. Asides keep their own box (display:contents can drop a
+   landmark from the accessibility tree); the deck is a plain div and opens
+   into the row. The phone layout stacks these in its own block below. */
+@media(min-width:641px){
+  .band:not(#slede) .band-body{display:flex;flex-wrap:wrap;align-items:flex-start;gap:20px 44px}
+  .band:not(#slede) .band-body>.prose,.band:not(#slede) .band-body>.refs,
+  .band:not(#slede) .band-body>.subject-rights{flex:1 1 100%;min-width:0}
+  .band:not(#slede) .rail,.band:not(#slede) .rail-more{float:none;flex:0 1 auto;margin:0}
+  .band:not(#slede) .rail-more{width:auto;flex:1 1 0;min-width:220px;flex-direction:row;flex-wrap:wrap;gap:20px 44px}
+  .band:not(#slede) .rail-more .card{width:220px}
+  .band:not(#slede) .deck{display:contents}
+}
 
 /* The Wikipedia article's own infobox, standing in the lede rail when no
    friend's record of the subject earned the slot (design:
@@ -2193,10 +2168,12 @@ a.count:hover,a.count:focus-visible{text-decoration:none;background:var(--manila
 .shot{width:100%;background:var(--faint)}
 /* Gallery images share one height, letterboxed, never cropped or squashed —
    MediaWiki's own gallery normalizes exactly this way (2026-08-08). Mixed
-   portrait covers were growing rows to the tallest scan on the shelf. The
-   hero and the gutter thumbs keep natural aspect: they are thumbs, and a
-   thumb's shape IS its content's shape. */
+   portrait covers were growing rows to the tallest scan on the shelf. */
 .carousel:not(.single) .card .shot{height:150px;object-fit:contain}
+/* The hero, the single thumbs and one-card shelves get a 4:3 box, letterboxed
+   the same way. An image with no declared size is 0px tall until it loads
+   and then grows, and on a streamed page that pushes the text being read. */
+.hero-card .shot,.rail-more .shot,.carousel.single .card .shot{aspect-ratio:4/3;height:auto;object-fit:contain}
 a:has(> .shot){display:block}
 /* Where a card has no picture. Deliberately NOT image-shaped: a 4/3 grey box is
    exactly what a failed thumbnail looks like. This is shorter, ruled at the
@@ -2312,8 +2289,6 @@ a:hover > .plate .plate-mark{color:var(--link)}
 /* The glyphs are a summary of the words beside them; a screen reader gets the
    words. Clipped rather than display:none, which would take it out of the
    accessibility tree along with the visual. */
-/* The keep-place script in RELOCATE_JS does the anchoring while a page streams. */
-.keep body{overflow-anchor:none}
 .vh{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;
   clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
@@ -2488,16 +2463,18 @@ a:hover > .plate .plate-mark{color:var(--link)}
   .hero{padding:0 14px 12px}
   .kicker{margin:0 -14px 16px;padding:8px 14px}
   .foot{padding:14px 14px 22px}
-  /* Stacked order: the section's best find, the article, the rest of the
-     media, then the references. The DOM order already says this, but the
-     float has to be undone and the flex order stated so a future DOM change
-     cannot silently reshuffle a one-column page. */
+  /* Stacked order: the article, then the section's best find, the rest of
+     the media and the references; the lede puts its infobox or hero first.
+     The DOM order already says this, but the float has to be undone and the
+     flex order stated so a future DOM change cannot silently reshuffle a
+     one-column page. */
   .band-body{display:flex;flex-direction:column}
   /* The first-child override must be restated: a media query adds no
      specificity, so without this the lede rail (infobox or hero) stays a
      fixed 330px inside the one-column stack — masked at 390px, a growing
      dead right margin anywhere between ~420 and 640px. */
   .rail,.band:first-child .rail{float:none;width:auto;margin:0 0 22px;order:1}
+  .band:not(#slede) .rail{order:3}
   .prose{order:2}
   /* Gutter thumbs stack AFTER the prose on a phone — a column of images
      before any text is not an article. */
